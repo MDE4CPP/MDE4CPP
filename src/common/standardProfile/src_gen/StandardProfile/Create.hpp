@@ -59,7 +59,9 @@ namespace StandardProfile
 			//*********************************
 			// Members
 			//*********************************
-			std::weak_ptr<uml::BehavioralFeature> m_base_BehavioralFeature;std::weak_ptr<uml::Usage> m_base_Usage;
+			std::weak_ptr<uml::BehavioralFeature> m_base_BehavioralFeature;
+			std::weak_ptr<uml::Usage> m_base_Usage;
+			
 			
 	};
 }

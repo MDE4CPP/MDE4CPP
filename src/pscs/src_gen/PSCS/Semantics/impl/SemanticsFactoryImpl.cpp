@@ -4,7 +4,6 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EClass.hpp"
-#include "PSCS/Semantics/SemanticsPackage.hpp"
 
 
 

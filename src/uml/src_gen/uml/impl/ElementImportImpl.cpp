@@ -58,24 +58,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 ElementImportImpl::ElementImportImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	
-
-	//Init references
-	
-
-	
+{	
 }
 
 ElementImportImpl::~ElementImportImpl()
@@ -85,23 +68,20 @@ ElementImportImpl::~ElementImportImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+ElementImportImpl::ElementImportImpl(std::weak_ptr<uml::Namespace > par_importingNamespace)
+:ElementImportImpl()
+{
+	m_importingNamespace = par_importingNamespace;
+	m_owner = par_importingNamespace;
+}
 
 //Additional constructor for the containments back reference
-			ElementImportImpl::ElementImportImpl(std::weak_ptr<uml::Namespace > par_importingNamespace)
-			:ElementImportImpl()
-			{
-			    m_importingNamespace = par_importingNamespace;
-				m_owner = par_importingNamespace;
-			}
-
-
-//Additional constructor for the containments back reference
-			ElementImportImpl::ElementImportImpl(std::weak_ptr<uml::Element > par_owner)
-			:ElementImportImpl()
-			{
-			    m_owner = par_owner;
-			}
-
+ElementImportImpl::ElementImportImpl(std::weak_ptr<uml::Element > par_owner)
+:ElementImportImpl()
+{
+	m_owner = par_owner;
+}
 
 
 ElementImportImpl::ElementImportImpl(const ElementImportImpl & obj):ElementImportImpl()
@@ -158,14 +138,27 @@ std::shared_ptr<ecore::EClass> ElementImportImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute alias
+*/
+std::string ElementImportImpl::getAlias() const 
+{
+	return m_alias;
+}
+
 void ElementImportImpl::setAlias(std::string _alias)
 {
 	m_alias = _alias;
 } 
 
-std::string ElementImportImpl::getAlias() const 
+
+
+/*
+Getter & Setter for attribute visibility
+*/
+uml::VisibilityKind ElementImportImpl::getVisibility() const 
 {
-	return m_alias;
+	return m_visibility;
 }
 
 void ElementImportImpl::setVisibility(uml::VisibilityKind _visibility)
@@ -173,10 +166,7 @@ void ElementImportImpl::setVisibility(uml::VisibilityKind _visibility)
 	m_visibility = _visibility;
 } 
 
-uml::VisibilityKind ElementImportImpl::getVisibility() const 
-{
-	return m_visibility;
-}
+
 
 //*********************************
 // Operations
@@ -202,49 +192,117 @@ bool ElementImportImpl::visibility_public_or_private(Any diagnostics,std::map < 
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference importedElement
+*/
 std::shared_ptr<uml::PackageableElement > ElementImportImpl::getImportedElement() const
 {
 //assert(m_importedElement);
     return m_importedElement;
 }
+
 void ElementImportImpl::setImportedElement(std::shared_ptr<uml::PackageableElement> _importedElement)
 {
     m_importedElement = _importedElement;
 }
 
+
+
+/*
+Getter & Setter for reference importingNamespace
+*/
 std::weak_ptr<uml::Namespace > ElementImportImpl::getImportingNamespace() const
 {
 //assert(m_importingNamespace);
     return m_importingNamespace;
 }
+
 void ElementImportImpl::setImportingNamespace(std::shared_ptr<uml::Namespace> _importingNamespace)
 {
     m_importingNamespace = _importingNamespace;
 }
+
+
 
 //*********************************
 // Union Getter
 //*********************************
 std::shared_ptr<Union<uml::Element>> ElementImportImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > ElementImportImpl::getOwner() const
 {
 	return m_owner;
 }
+
 std::shared_ptr<Union<uml::Element>> ElementImportImpl::getRelatedElement() const
 {
+	if(m_relatedElement == nullptr)
+	{
+		/*Union*/
+		m_relatedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_relatedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_relatedElement;
 }
+
 std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> ElementImportImpl::getSource() const
 {
+	if(m_source == nullptr)
+	{
+		/*SubsetUnion*/
+		m_source.reset(new SubsetUnion<uml::Element, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_source - SubsetUnion<uml::Element, uml::Element >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_source->initSubsetUnion(getRelatedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_source - SubsetUnion<uml::Element, uml::Element >(getRelatedElement())" << std::endl;
+		#endif
+		
+	}
 	return m_source;
 }
+
 std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> ElementImportImpl::getTarget() const
 {
+	if(m_target == nullptr)
+	{
+		/*SubsetUnion*/
+		m_target.reset(new SubsetUnion<uml::Element, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_target - SubsetUnion<uml::Element, uml::Element >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_target->initSubsetUnion(getRelatedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_target - SubsetUnion<uml::Element, uml::Element >(getRelatedElement())" << std::endl;
+		#endif
+		
+	}
 	return m_target;
 }
+
+
 
 
 std::shared_ptr<ElementImport> ElementImportImpl::getThisElementImportPtr() const

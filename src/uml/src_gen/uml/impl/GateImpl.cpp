@@ -66,17 +66,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 GateImpl::GateImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 GateImpl::~GateImpl()
@@ -86,23 +76,20 @@ GateImpl::~GateImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+GateImpl::GateImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:GateImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			GateImpl::GateImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:GateImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
-
-//Additional constructor for the containments back reference
-			GateImpl::GateImpl(std::weak_ptr<uml::Element > par_owner)
-			:GateImpl()
-			{
-			    m_owner = par_owner;
-			}
-
+GateImpl::GateImpl(std::weak_ptr<uml::Element > par_owner)
+:GateImpl()
+{
+	m_owner = par_owner;
+}
 
 
 GateImpl::GateImpl(const GateImpl & obj):GateImpl()
@@ -259,12 +246,25 @@ bool GateImpl::outside_cf_matched(Any diagnostics,std::map <   Any, Any >  conte
 //*********************************
 std::shared_ptr<Union<uml::Element>> GateImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > GateImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<Gate> GateImpl::getThisGatePtr() const

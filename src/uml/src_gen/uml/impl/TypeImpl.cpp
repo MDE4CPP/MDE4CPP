@@ -67,19 +67,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 TypeImpl::TypeImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	//Init references
-	
+{	
 }
 
 TypeImpl::~TypeImpl()
@@ -89,23 +77,20 @@ TypeImpl::~TypeImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+TypeImpl::TypeImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:TypeImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			TypeImpl::TypeImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:TypeImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
-
-//Additional constructor for the containments back reference
-			TypeImpl::TypeImpl(std::weak_ptr<uml::Element > par_owner)
-			:TypeImpl()
-			{
-			    m_owner = par_owner;
-			}
-
+TypeImpl::TypeImpl(std::weak_ptr<uml::Element > par_owner)
+:TypeImpl()
+{
+	m_owner = par_owner;
+}
 
 //Additional constructor for the containments back reference
 TypeImpl::TypeImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id)
@@ -127,17 +112,13 @@ TypeImpl::TypeImpl(std::weak_ptr<uml::Package > par_Package, const int reference
    
 }
 
-
 //Additional constructor for the containments back reference
-			TypeImpl::TypeImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
-			:TypeImpl()
-			{
-			    m_owningTemplateParameter = par_owningTemplateParameter;
-				m_owner = par_owningTemplateParameter;
-			}
-
-
-//Additional constructor for the containments back reference
+TypeImpl::TypeImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+:TypeImpl()
+{
+	m_owningTemplateParameter = par_owningTemplateParameter;
+	m_owner = par_owningTemplateParameter;
+}
 
 
 
@@ -229,15 +210,21 @@ std::shared_ptr<Bag<uml::Association> > TypeImpl::getAssociations()
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference package
+*/
 std::weak_ptr<uml::Package > TypeImpl::getPackage() const
 {
 
     return m_package;
 }
+
 void TypeImpl::setPackage(std::shared_ptr<uml::Package> _package)
 {
     m_package = _package;
 }
+
+
 
 //*********************************
 // Union Getter
@@ -246,14 +233,28 @@ std::weak_ptr<uml::Namespace > TypeImpl::getNamespace() const
 {
 	return m_namespace;
 }
+
 std::shared_ptr<Union<uml::Element>> TypeImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > TypeImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<Type> TypeImpl::getThisTypePtr() const

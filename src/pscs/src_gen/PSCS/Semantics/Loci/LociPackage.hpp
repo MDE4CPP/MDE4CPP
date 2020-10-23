@@ -34,8 +34,7 @@ namespace PSCS::Semantics::Loci
 	The Metamodel Package for the Loci metamodel. This package is used to enable the reflection of model elements. It contains all model elements
 	which were described in an ecore file.
 	*/
-	/*!
-	 */
+	
 	class LociPackage : virtual public ecore::EPackage 
 	{
 		private:    
@@ -53,15 +52,15 @@ namespace PSCS::Semantics::Loci
 
 			// Begin Class CS_ExecutionFactory
 			//Class and Feature IDs 
-			static const unsigned int CS_EXECUTIONFACTORY_CLASS = 14;
+			static const unsigned long CS_EXECUTIONFACTORY_CLASS = 1845389668;
 			static const unsigned int CS_EXECUTIONFACTORY_CLASS_FEATURE_COUNT = 5;
-			static const unsigned int CS_EXECUTIONFACTORY_CLASS_OPERATION_COUNT = 13;
+			static const unsigned int CS_EXECUTIONFACTORY_CLASS_OPERATION_COUNT = 14;
 			
 			static const int CS_EXECUTIONFACTORY_ATTRIBUTE_APPLIEDPROFILES = 1404;
 			
-			static const int CS_EXECUTIONFACTORY_OPERATION_GETSTEREOTYPEAPPLICATION_CLASS_ELEMENT = 1417;
-			static const int CS_EXECUTIONFACTORY_OPERATION_GETSTEREOTYPECLASS_ESTRING_ESTRING = 1416;
-			static const int CS_EXECUTIONFACTORY_OPERATION_INSTANTIATEVISITOR_ELEMENT = 1415;
+			static const int CS_EXECUTIONFACTORY_OPERATION_GETSTEREOTYPEAPPLICATION_CLASS_ELEMENT = 1418;
+			static const int CS_EXECUTIONFACTORY_OPERATION_GETSTEREOTYPECLASS_ESTRING_ESTRING = 1417;
+			static const int CS_EXECUTIONFACTORY_OPERATION_INSTANTIATEVISITOR_ELEMENT = 1416;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getCS_ExecutionFactory_Class() const = 0;
@@ -78,7 +77,7 @@ namespace PSCS::Semantics::Loci
 
 			// Begin Class CS_Executor
 			//Class and Feature IDs 
-			static const unsigned int CS_EXECUTOR_CLASS = 15;
+			static const unsigned long CS_EXECUTOR_CLASS = 1795074587;
 			static const unsigned int CS_EXECUTOR_CLASS_FEATURE_COUNT = 1;
 			static const unsigned int CS_EXECUTOR_CLASS_OPERATION_COUNT = 4;
 			
@@ -97,7 +96,7 @@ namespace PSCS::Semantics::Loci
 
 			// Begin Class CS_Locus
 			//Class and Feature IDs 
-			static const unsigned int CS_LOCUS_CLASS = 20;
+			static const unsigned long CS_LOCUS_CLASS = 264779363;
 			static const unsigned int CS_LOCUS_CLASS_FEATURE_COUNT = 3;
 			static const unsigned int CS_LOCUS_CLASS_OPERATION_COUNT = 8;
 			

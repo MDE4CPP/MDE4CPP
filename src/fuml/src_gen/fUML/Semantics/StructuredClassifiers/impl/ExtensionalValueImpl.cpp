@@ -38,6 +38,8 @@
 
 #include "fUML/Semantics/Loci/Locus.hpp"
 
+#include "fUML/Semantics/Values/Value.hpp"
+
 //Factories an Package includes
 #include "fUML/Semantics/StructuredClassifiers/impl/StructuredClassifiersFactoryImpl.hpp"
 #include "fUML/Semantics/StructuredClassifiers/impl/StructuredClassifiersPackageImpl.hpp"
@@ -56,19 +58,7 @@ using namespace fUML::Semantics::StructuredClassifiers;
 // Constructor / Destructor
 //*********************************
 ExtensionalValueImpl::ExtensionalValueImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	//Init references
-	
+{	
 }
 
 ExtensionalValueImpl::~ExtensionalValueImpl()
@@ -77,7 +67,6 @@ ExtensionalValueImpl::~ExtensionalValueImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ExtensionalValue "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -125,6 +114,23 @@ std::shared_ptr<ecore::EClass> ExtensionalValueImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
+std::shared_ptr<fUML::Semantics::Values::Value> ExtensionalValueImpl::_copy()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Create a new extensional value with the same feature values at the same locus as this one.
+
+std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> newValue = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::ExtensionalValue>(fUML::Semantics::SimpleClassifiers::CompoundValueImpl::_copy());
+
+if(this->getLocus() != nullptr)
+{
+	newValue->setLocus(this->getLocus());
+}
+
+return newValue;
+	//end of body
+}
+
 void ExtensionalValueImpl::destroy()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
@@ -139,19 +145,26 @@ void ExtensionalValueImpl::destroy()
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference locus
+*/
 std::shared_ptr<fUML::Semantics::Loci::Locus > ExtensionalValueImpl::getLocus() const
 {
 
     return m_locus;
 }
+
 void ExtensionalValueImpl::setLocus(std::shared_ptr<fUML::Semantics::Loci::Locus> _locus)
 {
     m_locus = _locus;
 }
 
+
+
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<ExtensionalValue> ExtensionalValueImpl::getThisExtensionalValuePtr() const

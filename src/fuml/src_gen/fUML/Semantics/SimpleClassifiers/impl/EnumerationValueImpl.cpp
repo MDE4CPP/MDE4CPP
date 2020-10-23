@@ -65,23 +65,7 @@ using namespace fUML::Semantics::SimpleClassifiers;
 // Constructor / Destructor
 //*********************************
 EnumerationValueImpl::EnumerationValueImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	
-
-	//Init references
-	
-
-	
+{	
 }
 
 EnumerationValueImpl::~EnumerationValueImpl()
@@ -90,7 +74,6 @@ EnumerationValueImpl::~EnumerationValueImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete EnumerationValue "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -132,6 +115,19 @@ std::shared_ptr<ecore::EClass> EnumerationValueImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
+std::shared_ptr<fUML::Semantics::Values::Value> EnumerationValueImpl::_copy()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Create a new enumeration value with the same literal as this enumeration value.
+
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::EnumerationValue> newValue(new fUML::Semantics::SimpleClassifiers::EnumerationValueImpl());
+newValue->setType(this->getType());
+newValue->setLiteral(this->getLiteral());
+return newValue;
+	//end of body
+}
+
 bool EnumerationValueImpl::equals(std::shared_ptr<fUML::Semantics::Values::Value>  otherValue)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
@@ -190,29 +186,42 @@ std::string EnumerationValueImpl::toString()
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference literal
+*/
 std::shared_ptr<uml::EnumerationLiteral > EnumerationValueImpl::getLiteral() const
 {
 //assert(m_literal);
     return m_literal;
 }
+
 void EnumerationValueImpl::setLiteral(std::shared_ptr<uml::EnumerationLiteral> _literal)
 {
     m_literal = _literal;
 }
 
+
+
+/*
+Getter & Setter for reference type
+*/
 std::shared_ptr<uml::Enumeration > EnumerationValueImpl::getType() const
 {
 //assert(m_type);
     return m_type;
 }
+
 void EnumerationValueImpl::setType(std::shared_ptr<uml::Enumeration> _type)
 {
     m_type = _type;
 }
 
+
+
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<EnumerationValue> EnumerationValueImpl::getThisEnumerationValuePtr() const

@@ -11,6 +11,7 @@
 #include <memory>
 
 #include "ecore/EFactory.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 
 namespace fUML::Semantics::Actions 
 {

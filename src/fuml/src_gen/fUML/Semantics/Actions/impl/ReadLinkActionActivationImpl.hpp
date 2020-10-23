@@ -19,7 +19,7 @@
 //*********************************
 namespace fUML::Semantics::Actions 
 {
-	class ReadLinkActionActivationImpl :virtual public LinkActionActivationImpl, virtual public ReadLinkActionActivation 
+	class ReadLinkActionActivationImpl : virtual public LinkActionActivationImpl, virtual public ReadLinkActionActivation 
 	{
 		public: 
 			ReadLinkActionActivationImpl(const ReadLinkActionActivationImpl & obj);
@@ -62,8 +62,7 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> getPinActivation() const ; 
 			 
 			//*********************************

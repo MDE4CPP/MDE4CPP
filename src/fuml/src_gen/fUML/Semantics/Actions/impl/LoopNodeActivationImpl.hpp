@@ -19,7 +19,7 @@
 //*********************************
 namespace fUML::Semantics::Actions 
 {
-	class LoopNodeActivationImpl :virtual public StructuredActivityNodeActivationImpl, virtual public LoopNodeActivation 
+	class LoopNodeActivationImpl : virtual public StructuredActivityNodeActivationImpl, virtual public LoopNodeActivation 
 	{
 		public: 
 			LoopNodeActivationImpl(const LoopNodeActivationImpl & obj);
@@ -47,20 +47,16 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<uml::ActivityNode> makeLoopVariableList() ;
 			
-			/*!
-			 */ 
+			 
 			virtual void runBody() ;
 			
-			/*!
-			 */ 
+			 
 			virtual void runLoopVariables() ;
 			
-			/*!
-			 */ 
+			 
 			virtual bool runTest() ;
 			
 			
@@ -73,17 +69,16 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Bag<fUML::Semantics::Actions::Values>> getBodyOutputLists() const ;
+			
 			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> getPinActivation() const ; 
 			 
 			//*********************************

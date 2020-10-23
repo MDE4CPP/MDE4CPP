@@ -53,6 +53,7 @@ namespace StandardProfile
 			//*********************************
 			std::weak_ptr<uml::Artifact> m_base_Artifact;
 			
+			
 	};
 }
 #endif /* end of include guard: STANDARDPROFILE_EXECUTABLE__HPP */

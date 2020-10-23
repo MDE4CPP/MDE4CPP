@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class InteractionConstraintImpl :virtual public ConstraintImpl, virtual public InteractionConstraint 
+	class InteractionConstraintImpl : virtual public ConstraintImpl, virtual public InteractionConstraint 
 	{
 		public: 
 			InteractionConstraintImpl(const InteractionConstraintImpl & obj);
@@ -62,37 +62,49 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 The dynamic variables that take part in the constraint must be owned by the ConnectableElement corresponding to the covered Lifeline. */ 
+			The dynamic variables that take part in the constraint must be owned by the ConnectableElement corresponding to the covered Lifeline.
+			*/
+			 
 			virtual bool dynamic_variables(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
-			 The constraint may contain references to global data or write-once data. */ 
+			The constraint may contain references to global data or write-once data.
+			*/
+			 
 			virtual bool global_data(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
-			 If maxint is specified, then minint must be specified and the evaluation of maxint must be >= the evaluation of minint.
+			If maxint is specified, then minint must be specified and the evaluation of maxint must be >= the evaluation of minint.
 			maxint->notEmpty() implies (minint->notEmpty() and 
 			maxint->asSequence()->first().integerValue() >=
-			minint->asSequence()->first().integerValue() ) */ 
+			minint->asSequence()->first().integerValue() )
+			*/
+			 
 			virtual bool maxint_greater_equal_minint(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
-			 If maxint is specified, then the expression must evaluate to a positive integer.
+			If maxint is specified, then the expression must evaluate to a positive integer.
 			maxint->notEmpty() implies 
-			maxint->asSequence()->first().integerValue() > 0 */ 
+			maxint->asSequence()->first().integerValue() > 0
+			*/
+			 
 			virtual bool maxint_positive(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
-			 Minint/maxint can only be present if the InteractionConstraint is associated with the operand of a loop CombinedFragment.
+			Minint/maxint can only be present if the InteractionConstraint is associated with the operand of a loop CombinedFragment.
 			maxint->notEmpty() or minint->notEmpty() implies
 			interactionOperand.combinedFragment.interactionOperator =
-			InteractionOperatorKind::loop */ 
+			InteractionOperatorKind::loop
+			*/
+			 
 			virtual bool minint_maxint(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
-			 If minint is specified, then the expression must evaluate to a non-negative integer.
+			If minint is specified, then the expression must evaluate to a non-negative integer.
 			minint->notEmpty() implies 
-			minint->asSequence()->first().integerValue() >= 0 */ 
+			minint->asSequence()->first().integerValue() >= 0
+			*/
+			 
 			virtual bool minint_non_negative(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
@@ -106,37 +118,53 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 The maximum number of iterations of a loop
-			<p>From package UML::Interactions.</p> */
+			The maximum number of iterations of a loop
+			<p>From package UML::Interactions.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::ValueSpecification > getMaxint() const ;
 			
 			/*!
-			 The maximum number of iterations of a loop
-			<p>From package UML::Interactions.</p> */
-			virtual void setMaxint(std::shared_ptr<uml::ValueSpecification> _maxint_maxint) ;
+			The maximum number of iterations of a loop
+			<p>From package UML::Interactions.</p>
+			*/
+			
+			virtual void setMaxint(std::shared_ptr<uml::ValueSpecification> _maxint) ;
+			
 			/*!
-			 The minimum number of iterations of a loop
-			<p>From package UML::Interactions.</p> */
+			The minimum number of iterations of a loop
+			<p>From package UML::Interactions.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::ValueSpecification > getMinint() const ;
 			
 			/*!
-			 The minimum number of iterations of a loop
-			<p>From package UML::Interactions.</p> */
-			virtual void setMinint(std::shared_ptr<uml::ValueSpecification> _minint_minint) ;
+			The minimum number of iterations of a loop
+			<p>From package UML::Interactions.</p>
+			*/
+			
+			virtual void setMinint(std::shared_ptr<uml::ValueSpecification> _minint) ;
+			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************

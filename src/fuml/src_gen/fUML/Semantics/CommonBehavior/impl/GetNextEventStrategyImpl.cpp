@@ -54,17 +54,7 @@ using namespace fUML::Semantics::CommonBehavior;
 // Constructor / Destructor
 //*********************************
 GetNextEventStrategyImpl::GetNextEventStrategyImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 GetNextEventStrategyImpl::~GetNextEventStrategyImpl()
@@ -73,7 +63,6 @@ GetNextEventStrategyImpl::~GetNextEventStrategyImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete GetNextEventStrategy "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -133,6 +122,7 @@ std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> GetNextEvent
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<GetNextEventStrategy> GetNextEventStrategyImpl::getThisGetNextEventStrategyPtr() const

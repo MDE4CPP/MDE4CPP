@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class TriggerImpl :virtual public NamedElementImpl, virtual public Trigger 
+	class TriggerImpl : virtual public NamedElementImpl, virtual public Trigger 
 	{
 		public: 
 			TriggerImpl(const TriggerImpl & obj);
@@ -51,8 +51,10 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 If a Trigger specifies one or more ports, the event of the Trigger must be a MessageEvent.
-			port->notEmpty() implies event.oclIsKindOf(MessageEvent) */ 
+			If a Trigger specifies one or more ports, the event of the Trigger must be a MessageEvent.
+			port->notEmpty() implies event.oclIsKindOf(MessageEvent)
+			*/
+			 
 			virtual bool trigger_with_ports(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
@@ -66,18 +68,26 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 The Event that detected by the Trigger.
-			<p>From package UML::CommonBehavior.</p> */
+			The Event that detected by the Trigger.
+			<p>From package UML::CommonBehavior.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::Event > getEvent() const ;
 			
 			/*!
-			 The Event that detected by the Trigger.
-			<p>From package UML::CommonBehavior.</p> */
-			virtual void setEvent(std::shared_ptr<uml::Event> _event_event) ;
+			The Event that detected by the Trigger.
+			<p>From package UML::CommonBehavior.</p>
+			*/
+			
+			virtual void setEvent(std::shared_ptr<uml::Event> _event) ;
+			
 			/*!
-			 A optional Port of through which the given effect is detected.
-			<p>From package UML::CommonBehavior.</p> */
+			A optional Port of through which the given effect is detected.
+			<p>From package UML::CommonBehavior.</p>
+			*/
+			
 			virtual std::shared_ptr<Bag<uml::Port>> getPort() const ;
+			
 			
 							
 			
@@ -85,11 +95,15 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************

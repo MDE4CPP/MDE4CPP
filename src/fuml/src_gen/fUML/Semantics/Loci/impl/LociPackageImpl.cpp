@@ -136,6 +136,10 @@ std::shared_ptr<ecore::EOperation> LociPackageImpl::getExecutionFactory_Operatio
 {
 	return m_executionFactory_Operation_instantiateOpaqueBehaviorExecution_OpaqueBehavior;
 }
+std::shared_ptr<ecore::EOperation> LociPackageImpl::getExecutionFactory_Operation_instantiateOpaqueBehaviorExecution_Behavior() const
+{
+	return m_executionFactory_Operation_instantiateOpaqueBehaviorExecution_Behavior;
+}
 std::shared_ptr<ecore::EOperation> LociPackageImpl::getExecutionFactory_Operation_instantiateVisitor_Element() const
 {
 	return m_executionFactory_Operation_instantiateVisitor_Element;

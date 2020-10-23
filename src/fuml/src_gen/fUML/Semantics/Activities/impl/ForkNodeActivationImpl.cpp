@@ -62,17 +62,7 @@ using namespace fUML::Semantics::Activities;
 // Constructor / Destructor
 //*********************************
 ForkNodeActivationImpl::ForkNodeActivationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 ForkNodeActivationImpl::~ForkNodeActivationImpl()
@@ -82,14 +72,12 @@ ForkNodeActivationImpl::~ForkNodeActivationImpl()
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			ForkNodeActivationImpl::ForkNodeActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
-			:ForkNodeActivationImpl()
-			{
-			    m_group = par_group;
-			}
-
+ForkNodeActivationImpl::ForkNodeActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
+:ForkNodeActivationImpl()
+{
+	m_group = par_group;
+}
 
 
 ForkNodeActivationImpl::ForkNodeActivationImpl(const ForkNodeActivationImpl & obj):ForkNodeActivationImpl()
@@ -151,11 +139,15 @@ void ForkNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Semantics::Activitie
 	//generated from body annotation
 	if (this->getNode() == nullptr) 
 	{
-        DEBUG_MESSAGE(std::cout<<"[fire] Anonymous fork node."<<std::endl;)
+        	DEBUG_MESSAGE(std::cout<<"[fire] Anonymous fork node."<<std::endl;
+		//NEWDEBUG
+		std::cout<<"-- printing from Anonymous fork : #incomingTokens = "<<incomingTokens->size()<<std::endl;)
     } 
 	else 
 	{
-        DEBUG_MESSAGE(std::cout<<"[fire] Fork node " << this->getNode()->getName() << "..."<<std::endl;)
+       		DEBUG_MESSAGE(std::cout<<"[fire] Fork node " << this->getNode()->getName() << "..."<<std::endl;
+		//NEWDEBUG
+		std::cout<<"-- printing from "<<this->getNode()->getName()<<" : #incomingTokens = "<<incomingTokens->size()<<std::endl;)
     }
 
 	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance> > outgoingEdges = this->getOutgoingEdges();
@@ -170,6 +162,17 @@ void ForkNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Semantics::Activitie
         forkedToken->setRemainingOffersCount(outgoingEdgeCount);
         forkedToken->setBaseTokenIsWithdrawn(false);
         forkedTokens->push_back(forkedToken);
+    }
+
+
+	if (this->getNode() == nullptr) 
+	{
+		//NEWDEBUG
+        DEBUG_MESSAGE(std::cout<<"-- printing from Anonymous fork : #forkedTokens = "<<forkedTokens->size()<<std::endl;)
+    	} 
+	else 
+	{	//NEWDEBUG
+		DEBUG_MESSAGE(std::cout<<"-- printing from "<<this->getNode()->getName()<<" : #forkedTokens = "<<forkedTokens->size()<<std::endl;)
     }
 
     this->addTokens(forkedTokens);
@@ -193,6 +196,7 @@ void ForkNodeActivationImpl::terminate()
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<ForkNodeActivation> ForkNodeActivationImpl::getThisForkNodeActivationPtr() const

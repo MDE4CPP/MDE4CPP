@@ -34,6 +34,8 @@
 
 #include "fUML/Semantics/Actions/AcceptEventActionEventAccepter.hpp"
 
+#include "uml/Action.hpp"
+
 #include "fUML/Semantics/Actions/ActionActivation.hpp"
 
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
@@ -70,19 +72,7 @@ using namespace fUML::Semantics::Actions;
 // Constructor / Destructor
 //*********************************
 AcceptEventActionActivationImpl::AcceptEventActionActivationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	//Init references
-	
+{	
 }
 
 AcceptEventActionActivationImpl::~AcceptEventActionActivationImpl()
@@ -92,14 +82,12 @@ AcceptEventActionActivationImpl::~AcceptEventActionActivationImpl()
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			AcceptEventActionActivationImpl::AcceptEventActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
-			:AcceptEventActionActivationImpl()
-			{
-			    m_group = par_group;
-			}
-
+AcceptEventActionActivationImpl::AcceptEventActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
+:AcceptEventActionActivationImpl()
+{
+	m_group = par_group;
+}
 
 
 AcceptEventActionActivationImpl::AcceptEventActionActivationImpl(const AcceptEventActionActivationImpl & obj):AcceptEventActionActivationImpl()
@@ -114,6 +102,8 @@ AcceptEventActionActivationImpl::AcceptEventActionActivationImpl(const AcceptEve
 
 	//copy references with no containment (soft copy)
 	
+	m_action  = obj.getAction();
+
 	m_eventAccepter  = obj.getEventAccepter();
 
 	m_group  = obj.getGroup();
@@ -174,15 +164,20 @@ std::shared_ptr<ecore::EClass> AcceptEventActionActivationImpl::eStaticClass() c
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute waiting
+*/
+bool AcceptEventActionActivationImpl::isWaiting() const 
+{
+	return m_waiting;
+}
+
 void AcceptEventActionActivationImpl::setWaiting(bool _waiting)
 {
 	m_waiting = _waiting;
 } 
 
-bool AcceptEventActionActivationImpl::isWaiting() const 
-{
-	return m_waiting;
-}
+
 
 //*********************************
 // Operations
@@ -238,23 +233,41 @@ void AcceptEventActionActivationImpl::terminate()
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference eventAccepter
+*/
 std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionEventAccepter > AcceptEventActionActivationImpl::getEventAccepter() const
 {
 
     return m_eventAccepter;
 }
+
 void AcceptEventActionActivationImpl::setEventAccepter(std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionEventAccepter> _eventAccepter)
 {
     m_eventAccepter = _eventAccepter;
 }
+
+
 
 //*********************************
 // Union Getter
 //*********************************
 std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> AcceptEventActionActivationImpl::getPinActivation() const
 {
+	if(m_pinActivation == nullptr)
+	{
+		/*Union*/
+		m_pinActivation.reset(new Union<fUML::Semantics::Actions::PinActivation>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_pinActivation - Union<fUML::Semantics::Actions::PinActivation>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_pinActivation;
 }
+
+
 
 
 std::shared_ptr<AcceptEventActionActivation> AcceptEventActionActivationImpl::getThisAcceptEventActionActivationPtr() const
@@ -283,9 +296,9 @@ Any AcceptEventActionActivationImpl::eGet(int featureID, bool resolve, bool core
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::ACCEPTEVENTACTIONACTIVATION_ATTRIBUTE_EVENTACCEPTER:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEventAccepter())); //310
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEventAccepter())); //311
 		case fUML::Semantics::Actions::ActionsPackage::ACCEPTEVENTACTIONACTIVATION_ATTRIBUTE_WAITING:
-			return eAny(isWaiting()); //311
+			return eAny(isWaiting()); //312
 	}
 	return ActionActivationImpl::eGet(featureID, resolve, coreType);
 }
@@ -294,9 +307,9 @@ bool AcceptEventActionActivationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::ACCEPTEVENTACTIONACTIVATION_ATTRIBUTE_EVENTACCEPTER:
-			return getEventAccepter() != nullptr; //310
+			return getEventAccepter() != nullptr; //311
 		case fUML::Semantics::Actions::ActionsPackage::ACCEPTEVENTACTIONACTIVATION_ATTRIBUTE_WAITING:
-			return isWaiting() != false; //311
+			return isWaiting() != false; //312
 	}
 	return ActionActivationImpl::internalEIsSet(featureID);
 }
@@ -309,14 +322,14 @@ bool AcceptEventActionActivationImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionEventAccepter> _eventAccepter = std::dynamic_pointer_cast<fUML::Semantics::Actions::AcceptEventActionEventAccepter>(_temp);
-			setEventAccepter(_eventAccepter); //310
+			setEventAccepter(_eventAccepter); //311
 			return true;
 		}
 		case fUML::Semantics::Actions::ActionsPackage::ACCEPTEVENTACTIONACTIVATION_ATTRIBUTE_WAITING:
 		{
 			// BOOST CAST
 			bool _waiting = newValue->get<bool>();
-			setWaiting(_waiting); //311
+			setWaiting(_waiting); //312
 			return true;
 		}
 	}

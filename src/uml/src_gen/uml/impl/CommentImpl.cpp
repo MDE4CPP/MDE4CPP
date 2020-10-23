@@ -50,22 +50,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 CommentImpl::CommentImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		m_annotatedElement.reset(new Bag<uml::Element>());
-	
-	
-
-	//Init references
-	
-	
+{	
 }
 
 CommentImpl::~CommentImpl()
@@ -75,14 +60,12 @@ CommentImpl::~CommentImpl()
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			CommentImpl::CommentImpl(std::weak_ptr<uml::Element > par_owner)
-			:CommentImpl()
-			{
-			    m_owner = par_owner;
-			}
-
+CommentImpl::CommentImpl(std::weak_ptr<uml::Element > par_owner)
+:CommentImpl()
+{
+	m_owner = par_owner;
+}
 
 
 CommentImpl::CommentImpl(const CommentImpl & obj):CommentImpl()
@@ -129,15 +112,20 @@ std::shared_ptr<ecore::EClass> CommentImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute body
+*/
+std::string CommentImpl::getBody() const 
+{
+	return m_body;
+}
+
 void CommentImpl::setBody(std::string _body)
 {
 	m_body = _body;
 } 
 
-std::string CommentImpl::getBody() const 
-{
-	return m_body;
-}
+
 
 //*********************************
 // Operations
@@ -146,11 +134,23 @@ std::string CommentImpl::getBody() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference annotatedElement
+*/
 std::shared_ptr<Bag<uml::Element>> CommentImpl::getAnnotatedElement() const
 {
+	if(m_annotatedElement == nullptr)
+	{
+		m_annotatedElement.reset(new Bag<uml::Element>());
+		
+		
+	}
 
     return m_annotatedElement;
 }
+
+
+
 
 
 //*********************************
@@ -158,8 +158,20 @@ std::shared_ptr<Bag<uml::Element>> CommentImpl::getAnnotatedElement() const
 //*********************************
 std::shared_ptr<Union<uml::Element>> CommentImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
+
 
 
 std::shared_ptr<Comment> CommentImpl::getThisCommentPtr() const

@@ -49,17 +49,7 @@ using namespace fUML::Semantics::Actions;
 // Constructor / Destructor
 //*********************************
 AcceptCallActionActivationsImpl::AcceptCallActionActivationsImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 AcceptCallActionActivationsImpl::~AcceptCallActionActivationsImpl()
@@ -68,7 +58,6 @@ AcceptCallActionActivationsImpl::~AcceptCallActionActivationsImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete AcceptCallActionActivations "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -114,6 +103,7 @@ std::shared_ptr<ecore::EClass> AcceptCallActionActivationsImpl::eStaticClass() c
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<AcceptCallActionActivations> AcceptCallActionActivationsImpl::getThisAcceptCallActionActivationsPtr() const

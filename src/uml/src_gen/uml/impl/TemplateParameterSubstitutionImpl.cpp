@@ -57,31 +57,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 TemplateParameterSubstitutionImpl::TemplateParameterSubstitutionImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	
-
-	
-
-	
-
-	//Init references
-	
-
-	
-
-	
-
-	
+{	
 }
 
 TemplateParameterSubstitutionImpl::~TemplateParameterSubstitutionImpl()
@@ -91,23 +67,20 @@ TemplateParameterSubstitutionImpl::~TemplateParameterSubstitutionImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+TemplateParameterSubstitutionImpl::TemplateParameterSubstitutionImpl(std::weak_ptr<uml::Element > par_owner)
+:TemplateParameterSubstitutionImpl()
+{
+	m_owner = par_owner;
+}
 
 //Additional constructor for the containments back reference
-			TemplateParameterSubstitutionImpl::TemplateParameterSubstitutionImpl(std::weak_ptr<uml::Element > par_owner)
-			:TemplateParameterSubstitutionImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-//Additional constructor for the containments back reference
-			TemplateParameterSubstitutionImpl::TemplateParameterSubstitutionImpl(std::weak_ptr<uml::TemplateBinding > par_templateBinding)
-			:TemplateParameterSubstitutionImpl()
-			{
-			    m_templateBinding = par_templateBinding;
-				m_owner = par_templateBinding;
-			}
-
+TemplateParameterSubstitutionImpl::TemplateParameterSubstitutionImpl(std::weak_ptr<uml::TemplateBinding > par_templateBinding)
+:TemplateParameterSubstitutionImpl()
+{
+	m_templateBinding = par_templateBinding;
+	m_owner = par_templateBinding;
+}
 
 
 TemplateParameterSubstitutionImpl::TemplateParameterSubstitutionImpl(const TemplateParameterSubstitutionImpl & obj):TemplateParameterSubstitutionImpl()
@@ -177,57 +150,94 @@ bool TemplateParameterSubstitutionImpl::must_be_compatible(Any diagnostics,std::
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference actual
+*/
 std::shared_ptr<uml::ParameterableElement > TemplateParameterSubstitutionImpl::getActual() const
 {
 //assert(m_actual);
     return m_actual;
 }
+
 void TemplateParameterSubstitutionImpl::setActual(std::shared_ptr<uml::ParameterableElement> _actual)
 {
     m_actual = _actual;
 }
 
+
+
+/*
+Getter & Setter for reference formal
+*/
 std::shared_ptr<uml::TemplateParameter > TemplateParameterSubstitutionImpl::getFormal() const
 {
 //assert(m_formal);
     return m_formal;
 }
+
 void TemplateParameterSubstitutionImpl::setFormal(std::shared_ptr<uml::TemplateParameter> _formal)
 {
     m_formal = _formal;
 }
 
+
+
+/*
+Getter & Setter for reference ownedActual
+*/
 std::shared_ptr<uml::ParameterableElement > TemplateParameterSubstitutionImpl::getOwnedActual() const
 {
 
     return m_ownedActual;
 }
+
 void TemplateParameterSubstitutionImpl::setOwnedActual(std::shared_ptr<uml::ParameterableElement> _ownedActual)
 {
     m_ownedActual = _ownedActual;
 }
 
+
+
+/*
+Getter & Setter for reference templateBinding
+*/
 std::weak_ptr<uml::TemplateBinding > TemplateParameterSubstitutionImpl::getTemplateBinding() const
 {
 //assert(m_templateBinding);
     return m_templateBinding;
 }
+
 void TemplateParameterSubstitutionImpl::setTemplateBinding(std::shared_ptr<uml::TemplateBinding> _templateBinding)
 {
     m_templateBinding = _templateBinding;
 }
+
+
 
 //*********************************
 // Union Getter
 //*********************************
 std::shared_ptr<Union<uml::Element>> TemplateParameterSubstitutionImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > TemplateParameterSubstitutionImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<TemplateParameterSubstitution> TemplateParameterSubstitutionImpl::getThisTemplateParameterSubstitutionPtr() const

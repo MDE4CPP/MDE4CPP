@@ -71,17 +71,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 DurationIntervalImpl::DurationIntervalImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 DurationIntervalImpl::~DurationIntervalImpl()
@@ -91,59 +81,52 @@ DurationIntervalImpl::~DurationIntervalImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+DurationIntervalImpl::DurationIntervalImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:DurationIntervalImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			DurationIntervalImpl::DurationIntervalImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:DurationIntervalImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
+DurationIntervalImpl::DurationIntervalImpl(std::weak_ptr<uml::Element > par_owner)
+:DurationIntervalImpl()
+{
+	m_owner = par_owner;
+}
 
 //Additional constructor for the containments back reference
-			DurationIntervalImpl::DurationIntervalImpl(std::weak_ptr<uml::Element > par_owner)
-			:DurationIntervalImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-//Additional constructor for the containments back reference
-			DurationIntervalImpl::DurationIntervalImpl(std::weak_ptr<uml::Package > par_owningPackage)
-			:DurationIntervalImpl()
-			{
-			    m_owningPackage = par_owningPackage;
-				m_namespace = par_owningPackage;
-			}
-
+DurationIntervalImpl::DurationIntervalImpl(std::weak_ptr<uml::Package > par_owningPackage)
+:DurationIntervalImpl()
+{
+	m_owningPackage = par_owningPackage;
+	m_namespace = par_owningPackage;
+}
 
 //Additional constructor for the containments back reference
-			DurationIntervalImpl::DurationIntervalImpl(std::weak_ptr<uml::Slot > par_owningSlot)
-			:DurationIntervalImpl()
-			{
-			    m_owningSlot = par_owningSlot;
-				m_owner = par_owningSlot;
-			}
-
-
-//Additional constructor for the containments back reference
-			DurationIntervalImpl::DurationIntervalImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
-			:DurationIntervalImpl()
-			{
-			    m_owningTemplateParameter = par_owningTemplateParameter;
-				m_owner = par_owningTemplateParameter;
-			}
-
+DurationIntervalImpl::DurationIntervalImpl(std::weak_ptr<uml::Slot > par_owningSlot)
+:DurationIntervalImpl()
+{
+	m_owningSlot = par_owningSlot;
+	m_owner = par_owningSlot;
+}
 
 //Additional constructor for the containments back reference
-			DurationIntervalImpl::DurationIntervalImpl(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction)
-			:DurationIntervalImpl()
-			{
-			    m_valueSpecificationAction = par_valueSpecificationAction;
-				m_owner = par_valueSpecificationAction;
-			}
+DurationIntervalImpl::DurationIntervalImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+:DurationIntervalImpl()
+{
+	m_owningTemplateParameter = par_owningTemplateParameter;
+	m_owner = par_owningTemplateParameter;
+}
 
+//Additional constructor for the containments back reference
+DurationIntervalImpl::DurationIntervalImpl(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction)
+:DurationIntervalImpl()
+{
+	m_valueSpecificationAction = par_valueSpecificationAction;
+	m_owner = par_valueSpecificationAction;
+}
 
 
 DurationIntervalImpl::DurationIntervalImpl(const DurationIntervalImpl & obj):DurationIntervalImpl()
@@ -233,14 +216,28 @@ std::weak_ptr<uml::Namespace > DurationIntervalImpl::getNamespace() const
 {
 	return m_namespace;
 }
+
 std::shared_ptr<Union<uml::Element>> DurationIntervalImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > DurationIntervalImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<DurationInterval> DurationIntervalImpl::getThisDurationIntervalPtr() const

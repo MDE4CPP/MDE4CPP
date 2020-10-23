@@ -59,19 +59,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 LinkEndDestructionDataImpl::LinkEndDestructionDataImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	//Init references
-	
+{	
 }
 
 LinkEndDestructionDataImpl::~LinkEndDestructionDataImpl()
@@ -81,14 +69,12 @@ LinkEndDestructionDataImpl::~LinkEndDestructionDataImpl()
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			LinkEndDestructionDataImpl::LinkEndDestructionDataImpl(std::weak_ptr<uml::Element > par_owner)
-			:LinkEndDestructionDataImpl()
-			{
-			    m_owner = par_owner;
-			}
-
+LinkEndDestructionDataImpl::LinkEndDestructionDataImpl(std::weak_ptr<uml::Element > par_owner)
+:LinkEndDestructionDataImpl()
+{
+	m_owner = par_owner;
+}
 
 
 LinkEndDestructionDataImpl::LinkEndDestructionDataImpl(const LinkEndDestructionDataImpl & obj):LinkEndDestructionDataImpl()
@@ -146,15 +132,20 @@ std::shared_ptr<ecore::EClass> LinkEndDestructionDataImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute isDestroyDuplicates
+*/
+bool LinkEndDestructionDataImpl::getIsDestroyDuplicates() const 
+{
+	return m_isDestroyDuplicates;
+}
+
 void LinkEndDestructionDataImpl::setIsDestroyDuplicates(bool _isDestroyDuplicates)
 {
 	m_isDestroyDuplicates = _isDestroyDuplicates;
 } 
 
-bool LinkEndDestructionDataImpl::getIsDestroyDuplicates() const 
-{
-	return m_isDestroyDuplicates;
-}
+
 
 //*********************************
 // Operations
@@ -168,23 +159,41 @@ bool LinkEndDestructionDataImpl::destroyAt_pin(Any diagnostics,std::map <   Any,
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference destroyAt
+*/
 std::shared_ptr<uml::InputPin > LinkEndDestructionDataImpl::getDestroyAt() const
 {
 
     return m_destroyAt;
 }
+
 void LinkEndDestructionDataImpl::setDestroyAt(std::shared_ptr<uml::InputPin> _destroyAt)
 {
     m_destroyAt = _destroyAt;
 }
+
+
 
 //*********************************
 // Union Getter
 //*********************************
 std::shared_ptr<Union<uml::Element>> LinkEndDestructionDataImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
+
 
 
 std::shared_ptr<LinkEndDestructionData> LinkEndDestructionDataImpl::getThisLinkEndDestructionDataPtr() const

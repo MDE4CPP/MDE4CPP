@@ -91,91 +91,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 PropertyImpl::PropertyImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	
-	
-	
-	
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-		/*Subset*/
-		m_qualifier.reset(new Subset<uml::Property, uml::Element >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_qualifier - Subset<uml::Property, uml::Element >()" << std::endl;
-		#endif
-	
-	
-
-		/*SubsetUnion*/
-		m_redefinedProperty.reset(new SubsetUnion<uml::Property, uml::RedefinableElement >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_redefinedProperty - SubsetUnion<uml::Property, uml::RedefinableElement >()" << std::endl;
-		#endif
-	
-	
-
-		m_subsettedProperty.reset(new Bag<uml::Property>());
-	
-	
-
-	//Init references
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-		/*Subset*/
-		m_qualifier->initSubset(m_ownedElement);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_qualifier - Subset<uml::Property, uml::Element >(m_ownedElement)" << std::endl;
-		#endif
-	
-	
-
-		/*SubsetUnion*/
-		m_redefinedProperty->initSubsetUnion(m_redefinedElement);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_redefinedProperty - SubsetUnion<uml::Property, uml::RedefinableElement >(m_redefinedElement)" << std::endl;
-		#endif
-	
-	
-
-	
-	
+{	
 }
 
 PropertyImpl::~PropertyImpl()
@@ -185,77 +101,68 @@ PropertyImpl::~PropertyImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+PropertyImpl::PropertyImpl(std::weak_ptr<uml::Property > par_associationEnd)
+:PropertyImpl()
+{
+	m_associationEnd = par_associationEnd;
+	m_owner = par_associationEnd;
+}
 
 //Additional constructor for the containments back reference
-			PropertyImpl::PropertyImpl(std::weak_ptr<uml::Property > par_associationEnd)
-			:PropertyImpl()
-			{
-			    m_associationEnd = par_associationEnd;
-				m_owner = par_associationEnd;
-			}
-
-
-//Additional constructor for the containments back reference
-			PropertyImpl::PropertyImpl(std::weak_ptr<uml::Class > par_class)
-			:PropertyImpl()
-			{
-			    m_class = par_class;
-				m_namespace = par_class;
-			}
-
+PropertyImpl::PropertyImpl(std::weak_ptr<uml::Class > par_class)
+:PropertyImpl()
+{
+	m_class = par_class;
+	m_namespace = par_class;
+}
 
 //Additional constructor for the containments back reference
-			PropertyImpl::PropertyImpl(std::weak_ptr<uml::DataType > par_datatype)
-			:PropertyImpl()
-			{
-			    m_datatype = par_datatype;
-				m_namespace = par_datatype;
-			}
-
-
-//Additional constructor for the containments back reference
-			PropertyImpl::PropertyImpl(std::weak_ptr<uml::Interface > par_interface)
-			:PropertyImpl()
-			{
-			    m_interface = par_interface;
-				m_namespace = par_interface;
-			}
-
+PropertyImpl::PropertyImpl(std::weak_ptr<uml::DataType > par_datatype)
+:PropertyImpl()
+{
+	m_datatype = par_datatype;
+	m_namespace = par_datatype;
+}
 
 //Additional constructor for the containments back reference
-			PropertyImpl::PropertyImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:PropertyImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
-
-//Additional constructor for the containments back reference
-			PropertyImpl::PropertyImpl(std::weak_ptr<uml::Element > par_owner)
-			:PropertyImpl()
-			{
-			    m_owner = par_owner;
-			}
-
+PropertyImpl::PropertyImpl(std::weak_ptr<uml::Interface > par_interface)
+:PropertyImpl()
+{
+	m_interface = par_interface;
+	m_namespace = par_interface;
+}
 
 //Additional constructor for the containments back reference
-			PropertyImpl::PropertyImpl(std::weak_ptr<uml::Association > par_owningAssociation)
-			:PropertyImpl()
-			{
-			    m_owningAssociation = par_owningAssociation;
-				m_namespace = par_owningAssociation;
-			}
-
+PropertyImpl::PropertyImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:PropertyImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			PropertyImpl::PropertyImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
-			:PropertyImpl()
-			{
-			    m_owningTemplateParameter = par_owningTemplateParameter;
-				m_owner = par_owningTemplateParameter;
-			}
+PropertyImpl::PropertyImpl(std::weak_ptr<uml::Element > par_owner)
+:PropertyImpl()
+{
+	m_owner = par_owner;
+}
 
+//Additional constructor for the containments back reference
+PropertyImpl::PropertyImpl(std::weak_ptr<uml::Association > par_owningAssociation)
+:PropertyImpl()
+{
+	m_owningAssociation = par_owningAssociation;
+	m_namespace = par_owningAssociation;
+}
+
+//Additional constructor for the containments back reference
+PropertyImpl::PropertyImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+:PropertyImpl()
+{
+	m_owningTemplateParameter = par_owningTemplateParameter;
+	m_owner = par_owningTemplateParameter;
+}
 
 
 PropertyImpl::PropertyImpl(const PropertyImpl & obj):PropertyImpl()
@@ -394,12 +301,11 @@ PropertyImpl::PropertyImpl(const PropertyImpl & obj):PropertyImpl()
 
 	
 
-		/*Subset*/
-		m_qualifier->initSubset(m_ownedElement);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_qualifier - Subset<uml::Property, uml::Element >(m_ownedElement)" << std::endl;
-		#endif
-	
+	/*Subset*/
+	m_qualifier->initSubset(getOwnedElement());
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Initialising value Subset: " << "m_qualifier - Subset<uml::Property, uml::Element >(getOwnedElement())" << std::endl;
+	#endif
 	
 }
 
@@ -418,14 +324,27 @@ std::shared_ptr<ecore::EClass> PropertyImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute aggregation
+*/
+uml::AggregationKind PropertyImpl::getAggregation() const 
+{
+	return m_aggregation;
+}
+
 void PropertyImpl::setAggregation(uml::AggregationKind _aggregation)
 {
 	m_aggregation = _aggregation;
 } 
 
-uml::AggregationKind PropertyImpl::getAggregation() const 
+
+
+/*
+Getter & Setter for attribute default
+*/
+std::string PropertyImpl::getDefault() const 
 {
-	return m_aggregation;
+	return m_default;
 }
 
 void PropertyImpl::setDefault(std::string _default)
@@ -433,9 +352,14 @@ void PropertyImpl::setDefault(std::string _default)
 	m_default = _default;
 } 
 
-std::string PropertyImpl::getDefault() const 
+
+
+/*
+Getter & Setter for attribute isComposite
+*/
+bool PropertyImpl::getIsComposite() const 
 {
-	return m_default;
+	return m_isComposite;
 }
 
 void PropertyImpl::setIsComposite(bool _isComposite)
@@ -443,9 +367,14 @@ void PropertyImpl::setIsComposite(bool _isComposite)
 	m_isComposite = _isComposite;
 } 
 
-bool PropertyImpl::getIsComposite() const 
+
+
+/*
+Getter & Setter for attribute isDerived
+*/
+bool PropertyImpl::getIsDerived() const 
 {
-	return m_isComposite;
+	return m_isDerived;
 }
 
 void PropertyImpl::setIsDerived(bool _isDerived)
@@ -453,9 +382,14 @@ void PropertyImpl::setIsDerived(bool _isDerived)
 	m_isDerived = _isDerived;
 } 
 
-bool PropertyImpl::getIsDerived() const 
+
+
+/*
+Getter & Setter for attribute isDerivedUnion
+*/
+bool PropertyImpl::getIsDerivedUnion() const 
 {
-	return m_isDerived;
+	return m_isDerivedUnion;
 }
 
 void PropertyImpl::setIsDerivedUnion(bool _isDerivedUnion)
@@ -463,9 +397,14 @@ void PropertyImpl::setIsDerivedUnion(bool _isDerivedUnion)
 	m_isDerivedUnion = _isDerivedUnion;
 } 
 
-bool PropertyImpl::getIsDerivedUnion() const 
+
+
+/*
+Getter & Setter for attribute isID
+*/
+bool PropertyImpl::getIsID() const 
 {
-	return m_isDerivedUnion;
+	return m_isID;
 }
 
 void PropertyImpl::setIsID(bool _isID)
@@ -473,10 +412,7 @@ void PropertyImpl::setIsID(bool _isID)
 	m_isID = _isID;
 } 
 
-bool PropertyImpl::getIsID() const 
-{
-	return m_isID;
-}
+
 
 //*********************************
 // Operations
@@ -638,105 +574,207 @@ void PropertyImpl::unsetDefault()
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference association
+*/
 std::shared_ptr<uml::Association > PropertyImpl::getAssociation() const
 {
 
     return m_association;
 }
+
 void PropertyImpl::setAssociation(std::shared_ptr<uml::Association> _association)
 {
     m_association = _association;
 }
 
+
+
+/*
+Getter & Setter for reference associationEnd
+*/
 std::weak_ptr<uml::Property > PropertyImpl::getAssociationEnd() const
 {
 
     return m_associationEnd;
 }
+
 void PropertyImpl::setAssociationEnd(std::shared_ptr<uml::Property> _associationEnd)
 {
     m_associationEnd = _associationEnd;
 }
 
+
+
+/*
+Getter & Setter for reference class
+*/
 std::weak_ptr<uml::Class > PropertyImpl::getClass() const
 {
 
     return m_class;
 }
+
 void PropertyImpl::setClass(std::shared_ptr<uml::Class> _class)
 {
     m_class = _class;
 }
 
+
+
+/*
+Getter & Setter for reference datatype
+*/
 std::weak_ptr<uml::DataType > PropertyImpl::getDatatype() const
 {
 
     return m_datatype;
 }
+
 void PropertyImpl::setDatatype(std::shared_ptr<uml::DataType> _datatype)
 {
     m_datatype = _datatype;
 }
 
+
+
+/*
+Getter & Setter for reference defaultValue
+*/
 std::shared_ptr<uml::ValueSpecification > PropertyImpl::getDefaultValue() const
 {
 
     return m_defaultValue;
 }
+
 void PropertyImpl::setDefaultValue(std::shared_ptr<uml::ValueSpecification> _defaultValue)
 {
     m_defaultValue = _defaultValue;
 }
 
+
+
+/*
+Getter & Setter for reference interface
+*/
 std::weak_ptr<uml::Interface > PropertyImpl::getInterface() const
 {
 
     return m_interface;
 }
+
 void PropertyImpl::setInterface(std::shared_ptr<uml::Interface> _interface)
 {
     m_interface = _interface;
 }
 
+
+
+/*
+Getter & Setter for reference opposite
+*/
 std::shared_ptr<uml::Property > PropertyImpl::getOpposite() const
 {
 
     return m_opposite;
 }
+
 void PropertyImpl::setOpposite(std::shared_ptr<uml::Property> _opposite)
 {
     m_opposite = _opposite;
 }
 
+
+
+/*
+Getter & Setter for reference owningAssociation
+*/
 std::weak_ptr<uml::Association > PropertyImpl::getOwningAssociation() const
 {
 
     return m_owningAssociation;
 }
+
 void PropertyImpl::setOwningAssociation(std::shared_ptr<uml::Association> _owningAssociation)
 {
     m_owningAssociation = _owningAssociation;
 }
 
+
+
+/*
+Getter & Setter for reference qualifier
+*/
 std::shared_ptr<Subset<uml::Property, uml::Element>> PropertyImpl::getQualifier() const
 {
+	if(m_qualifier == nullptr)
+	{
+		/*Subset*/
+		m_qualifier.reset(new Subset<uml::Property, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_qualifier - Subset<uml::Property, uml::Element >()" << std::endl;
+		#endif
+		
+		/*Subset*/
+		m_qualifier->initSubset(getOwnedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_qualifier - Subset<uml::Property, uml::Element >(getOwnedElement())" << std::endl;
+		#endif
+		
+	}
 
     return m_qualifier;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference redefinedProperty
+*/
 std::shared_ptr<SubsetUnion<uml::Property, uml::RedefinableElement>> PropertyImpl::getRedefinedProperty() const
 {
+	if(m_redefinedProperty == nullptr)
+	{
+		/*SubsetUnion*/
+		m_redefinedProperty.reset(new SubsetUnion<uml::Property, uml::RedefinableElement >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_redefinedProperty - SubsetUnion<uml::Property, uml::RedefinableElement >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_redefinedProperty->initSubsetUnion(getRedefinedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_redefinedProperty - SubsetUnion<uml::Property, uml::RedefinableElement >(getRedefinedElement())" << std::endl;
+		#endif
+		
+	}
 
     return m_redefinedProperty;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference subsettedProperty
+*/
 std::shared_ptr<Bag<uml::Property>> PropertyImpl::getSubsettedProperty() const
 {
+	if(m_subsettedProperty == nullptr)
+	{
+		m_subsettedProperty.reset(new Bag<uml::Property>());
+		
+		
+	}
 
     return m_subsettedProperty;
 }
+
+
+
 
 
 //*********************************
@@ -744,28 +782,75 @@ std::shared_ptr<Bag<uml::Property>> PropertyImpl::getSubsettedProperty() const
 //*********************************
 std::shared_ptr<Union<uml::Classifier>> PropertyImpl::getFeaturingClassifier() const
 {
+	if(m_featuringClassifier == nullptr)
+	{
+		/*Union*/
+		m_featuringClassifier.reset(new Union<uml::Classifier>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_featuringClassifier - Union<uml::Classifier>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_featuringClassifier;
 }
+
 std::weak_ptr<uml::Namespace > PropertyImpl::getNamespace() const
 {
 	return m_namespace;
 }
+
 std::shared_ptr<Union<uml::Element>> PropertyImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > PropertyImpl::getOwner() const
 {
 	return m_owner;
 }
+
 std::shared_ptr<Union<uml::RedefinableElement>> PropertyImpl::getRedefinedElement() const
 {
+	if(m_redefinedElement == nullptr)
+	{
+		/*Union*/
+		m_redefinedElement.reset(new Union<uml::RedefinableElement>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_redefinedElement - Union<uml::RedefinableElement>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_redefinedElement;
 }
+
 std::shared_ptr<Union<uml::Classifier>> PropertyImpl::getRedefinitionContext() const
 {
+	if(m_redefinitionContext == nullptr)
+	{
+		/*Union*/
+		m_redefinitionContext.reset(new Union<uml::Classifier>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_redefinitionContext - Union<uml::Classifier>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_redefinitionContext;
 }
+
+
 
 
 std::shared_ptr<Property> PropertyImpl::getThisPropertyPtr() const

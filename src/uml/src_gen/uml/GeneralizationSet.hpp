@@ -101,8 +101,10 @@ namespace uml
 namespace uml 
 {
 	/*!
-	 A GeneralizationSet is a PackageableElement whose instances represent sets of Generalization relationships.
-	<p>From package UML::Classification.</p> */
+	A GeneralizationSet is a PackageableElement whose instances represent sets of Generalization relationships.
+	<p>From package UML::Classification.</p>
+	*/
+	
 	class GeneralizationSet:virtual public PackageableElement
 	{
 		public:
@@ -123,15 +125,19 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 Every Generalization associated with a particular GeneralizationSet must have the same general Classifier.
-			generalization->collect(general)->asSet()->size() <= 1 */ 
+			Every Generalization associated with a particular GeneralizationSet must have the same general Classifier.
+			generalization->collect(general)->asSet()->size() <= 1
+			*/
+			 
 			virtual bool generalization_same_classifier(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
-			 The Classifier that maps to a GeneralizationSet may neither be a specific nor a general Classifier in any of the Generalization relationships defined for that GeneralizationSet. In other words, a power type may not be an instance of itself nor may its instances be its subclasses.
+			The Classifier that maps to a GeneralizationSet may neither be a specific nor a general Classifier in any of the Generalization relationships defined for that GeneralizationSet. In other words, a power type may not be an instance of itself nor may its instances be its subclasses.
 			powertype <> null implies generalization->forAll( gen | 
 			    not (gen.general = powertype) and not gen.general.allParents()->includes(powertype) and not (gen.specific = powertype) and not powertype.allParents()->includes(gen.specific)
-			  ) */ 
+			  )
+			*/
+			 
 			virtual bool maps_to_generalization_set(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
@@ -139,43 +145,57 @@ namespace uml
 			// Attributes Getter Setter
 			//*********************************
 			/*!
-			 Indicates (via the associated Generalizations) whether or not the set of specific Classifiers are covering for a particular general classifier. When isCovering is true, every instance of a particular general Classifier is also an instance of at least one of its specific Classifiers for the GeneralizationSet. When isCovering is false, there are one or more instances of the particular general Classifier that are not instances of at least one of its specific Classifiers defined for the GeneralizationSet.
-			<p>From package UML::Classification.</p> */ 
+			Indicates (via the associated Generalizations) whether or not the set of specific Classifiers are covering for a particular general classifier. When isCovering is true, every instance of a particular general Classifier is also an instance of at least one of its specific Classifiers for the GeneralizationSet. When isCovering is false, there are one or more instances of the particular general Classifier that are not instances of at least one of its specific Classifiers defined for the GeneralizationSet.
+			<p>From package UML::Classification.</p>
+			*/
+			 
 			virtual bool getIsCovering() const = 0;
 			
 			/*!
-			 Indicates (via the associated Generalizations) whether or not the set of specific Classifiers are covering for a particular general classifier. When isCovering is true, every instance of a particular general Classifier is also an instance of at least one of its specific Classifiers for the GeneralizationSet. When isCovering is false, there are one or more instances of the particular general Classifier that are not instances of at least one of its specific Classifiers defined for the GeneralizationSet.
-			<p>From package UML::Classification.</p> */ 
+			Indicates (via the associated Generalizations) whether or not the set of specific Classifiers are covering for a particular general classifier. When isCovering is true, every instance of a particular general Classifier is also an instance of at least one of its specific Classifiers for the GeneralizationSet. When isCovering is false, there are one or more instances of the particular general Classifier that are not instances of at least one of its specific Classifiers defined for the GeneralizationSet.
+			<p>From package UML::Classification.</p>
+			*/
+			 
 			virtual void setIsCovering (bool _isCovering)= 0; 
-			
 			/*!
-			 Indicates whether or not the set of specific Classifiers in a Generalization relationship have instance in common. If isDisjoint is true, the specific Classifiers for a particular GeneralizationSet have no members in common; that is, their intersection is empty. If isDisjoint is false, the specific Classifiers in a particular GeneralizationSet have one or more members in common; that is, their intersection is not empty.
-			<p>From package UML::Classification.</p> */ 
+			Indicates whether or not the set of specific Classifiers in a Generalization relationship have instance in common. If isDisjoint is true, the specific Classifiers for a particular GeneralizationSet have no members in common; that is, their intersection is empty. If isDisjoint is false, the specific Classifiers in a particular GeneralizationSet have one or more members in common; that is, their intersection is not empty.
+			<p>From package UML::Classification.</p>
+			*/
+			 
 			virtual bool getIsDisjoint() const = 0;
 			
 			/*!
-			 Indicates whether or not the set of specific Classifiers in a Generalization relationship have instance in common. If isDisjoint is true, the specific Classifiers for a particular GeneralizationSet have no members in common; that is, their intersection is empty. If isDisjoint is false, the specific Classifiers in a particular GeneralizationSet have one or more members in common; that is, their intersection is not empty.
-			<p>From package UML::Classification.</p> */ 
+			Indicates whether or not the set of specific Classifiers in a Generalization relationship have instance in common. If isDisjoint is true, the specific Classifiers for a particular GeneralizationSet have no members in common; that is, their intersection is empty. If isDisjoint is false, the specific Classifiers in a particular GeneralizationSet have one or more members in common; that is, their intersection is not empty.
+			<p>From package UML::Classification.</p>
+			*/
+			 
 			virtual void setIsDisjoint (bool _isDisjoint)= 0; 
-			
 			
 			//*********************************
 			// Reference
 			//*********************************
 			/*!
-			 Designates the instances of Generalization that are members of this GeneralizationSet.
-			<p>From package UML::Classification.</p> */
+			Designates the instances of Generalization that are members of this GeneralizationSet.
+			<p>From package UML::Classification.</p>
+			*/
+			
 			virtual std::shared_ptr<Bag<uml::Generalization>> getGeneralization() const = 0;
 			
+			
 			/*!
-			 Designates the Classifier that is defined as the power type for the associated GeneralizationSet, if there is one.
-			<p>From package UML::Classification.</p> */
+			Designates the Classifier that is defined as the power type for the associated GeneralizationSet, if there is one.
+			<p>From package UML::Classification.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::Classifier > getPowertype() const = 0;
 			
 			/*!
-			 Designates the Classifier that is defined as the power type for the associated GeneralizationSet, if there is one.
-			<p>From package UML::Classification.</p> */
-			virtual void setPowertype(std::shared_ptr<uml::Classifier> _powertype_powertype) = 0;
+			Designates the Classifier that is defined as the power type for the associated GeneralizationSet, if there is one.
+			<p>From package UML::Classification.</p>
+			*/
+			
+			virtual void setPowertype(std::shared_ptr<uml::Classifier> _powertype) = 0;
+			
 			
 
 		protected:
@@ -183,12 +203,16 @@ namespace uml
 			// Attribute Members
 			//*********************************
 			/*!
-			 Indicates (via the associated Generalizations) whether or not the set of specific Classifiers are covering for a particular general classifier. When isCovering is true, every instance of a particular general Classifier is also an instance of at least one of its specific Classifiers for the GeneralizationSet. When isCovering is false, there are one or more instances of the particular general Classifier that are not instances of at least one of its specific Classifiers defined for the GeneralizationSet.
-			<p>From package UML::Classification.</p> */ 
+			Indicates (via the associated Generalizations) whether or not the set of specific Classifiers are covering for a particular general classifier. When isCovering is true, every instance of a particular general Classifier is also an instance of at least one of its specific Classifiers for the GeneralizationSet. When isCovering is false, there are one or more instances of the particular general Classifier that are not instances of at least one of its specific Classifiers defined for the GeneralizationSet.
+			<p>From package UML::Classification.</p>
+			*/
+			 
 			bool m_isCovering = false;
 			/*!
-			 Indicates whether or not the set of specific Classifiers in a Generalization relationship have instance in common. If isDisjoint is true, the specific Classifiers for a particular GeneralizationSet have no members in common; that is, their intersection is empty. If isDisjoint is false, the specific Classifiers in a particular GeneralizationSet have one or more members in common; that is, their intersection is not empty.
-			<p>From package UML::Classification.</p> */ 
+			Indicates whether or not the set of specific Classifiers in a Generalization relationship have instance in common. If isDisjoint is true, the specific Classifiers for a particular GeneralizationSet have no members in common; that is, their intersection is empty. If isDisjoint is false, the specific Classifiers in a particular GeneralizationSet have one or more members in common; that is, their intersection is not empty.
+			<p>From package UML::Classification.</p>
+			*/
+			 
 			bool m_isDisjoint = false;
 			
 			
@@ -196,28 +220,36 @@ namespace uml
 			// Reference Members
 			//*********************************
 			/*!
-			 Designates the instances of Generalization that are members of this GeneralizationSet.
-			<p>From package UML::Classification.</p> */
-			std::shared_ptr<Bag<uml::Generalization>> m_generalization;
-			/*!
-			 Designates the Classifier that is defined as the power type for the associated GeneralizationSet, if there is one.
-			<p>From package UML::Classification.</p> */
-			std::shared_ptr<uml::Classifier > m_powertype;
+			Designates the instances of Generalization that are members of this GeneralizationSet.
+			<p>From package UML::Classification.</p>
+			*/
 			
+			mutable std::shared_ptr<Bag<uml::Generalization>> m_generalization;/*!
+			Designates the Classifier that is defined as the power type for the associated GeneralizationSet, if there is one.
+			<p>From package UML::Classification.</p>
+			*/
+			
+			std::shared_ptr<uml::Classifier > m_powertype;
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

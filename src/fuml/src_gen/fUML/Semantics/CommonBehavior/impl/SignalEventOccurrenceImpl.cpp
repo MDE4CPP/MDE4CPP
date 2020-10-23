@@ -59,19 +59,7 @@ using namespace fUML::Semantics::CommonBehavior;
 // Constructor / Destructor
 //*********************************
 SignalEventOccurrenceImpl::SignalEventOccurrenceImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	//Init references
-	
+{	
 }
 
 SignalEventOccurrenceImpl::~SignalEventOccurrenceImpl()
@@ -80,7 +68,6 @@ SignalEventOccurrenceImpl::~SignalEventOccurrenceImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete SignalEventOccurrence "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -137,19 +124,26 @@ bool SignalEventOccurrenceImpl::match(std::shared_ptr<uml::Trigger>  trigger)
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference signalInstance
+*/
 std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance > SignalEventOccurrenceImpl::getSignalInstance() const
 {
 //assert(m_signalInstance);
     return m_signalInstance;
 }
+
 void SignalEventOccurrenceImpl::setSignalInstance(std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> _signalInstance)
 {
     m_signalInstance = _signalInstance;
 }
 
+
+
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<SignalEventOccurrence> SignalEventOccurrenceImpl::getThisSignalEventOccurrencePtr() const

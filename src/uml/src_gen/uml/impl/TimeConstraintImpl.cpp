@@ -66,17 +66,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 TimeConstraintImpl::TimeConstraintImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 TimeConstraintImpl::~TimeConstraintImpl()
@@ -85,7 +75,6 @@ TimeConstraintImpl::~TimeConstraintImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete TimeConstraint "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 //Additional constructor for the containments back reference
 TimeConstraintImpl::TimeConstraintImpl(std::weak_ptr<uml::Namespace > par_Namespace, const int reference_id)
@@ -109,33 +98,27 @@ TimeConstraintImpl::TimeConstraintImpl(std::weak_ptr<uml::Namespace > par_Namesp
 
 
 //Additional constructor for the containments back reference
-
-
-//Additional constructor for the containments back reference
-			TimeConstraintImpl::TimeConstraintImpl(std::weak_ptr<uml::Element > par_owner)
-			:TimeConstraintImpl()
-			{
-			    m_owner = par_owner;
-			}
-
+TimeConstraintImpl::TimeConstraintImpl(std::weak_ptr<uml::Element > par_owner)
+:TimeConstraintImpl()
+{
+	m_owner = par_owner;
+}
 
 //Additional constructor for the containments back reference
-			TimeConstraintImpl::TimeConstraintImpl(std::weak_ptr<uml::Package > par_owningPackage)
-			:TimeConstraintImpl()
-			{
-			    m_owningPackage = par_owningPackage;
-				m_namespace = par_owningPackage;
-			}
-
+TimeConstraintImpl::TimeConstraintImpl(std::weak_ptr<uml::Package > par_owningPackage)
+:TimeConstraintImpl()
+{
+	m_owningPackage = par_owningPackage;
+	m_namespace = par_owningPackage;
+}
 
 //Additional constructor for the containments back reference
-			TimeConstraintImpl::TimeConstraintImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
-			:TimeConstraintImpl()
-			{
-			    m_owningTemplateParameter = par_owningTemplateParameter;
-				m_owner = par_owningTemplateParameter;
-			}
-
+TimeConstraintImpl::TimeConstraintImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+:TimeConstraintImpl()
+{
+	m_owningTemplateParameter = par_owningTemplateParameter;
+	m_owner = par_owningTemplateParameter;
+}
 
 
 TimeConstraintImpl::TimeConstraintImpl(const TimeConstraintImpl & obj):TimeConstraintImpl()
@@ -212,15 +195,20 @@ std::shared_ptr<ecore::EClass> TimeConstraintImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute firstEvent
+*/
+bool TimeConstraintImpl::getFirstEvent() const 
+{
+	return m_firstEvent;
+}
+
 void TimeConstraintImpl::setFirstEvent(bool _firstEvent)
 {
 	m_firstEvent = _firstEvent;
 } 
 
-bool TimeConstraintImpl::getFirstEvent() const 
-{
-	return m_firstEvent;
-}
+
 
 //*********************************
 // Operations
@@ -242,14 +230,28 @@ std::weak_ptr<uml::Namespace > TimeConstraintImpl::getNamespace() const
 {
 	return m_namespace;
 }
+
 std::shared_ptr<Union<uml::Element>> TimeConstraintImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > TimeConstraintImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<TimeConstraint> TimeConstraintImpl::getThisTimeConstraintPtr() const

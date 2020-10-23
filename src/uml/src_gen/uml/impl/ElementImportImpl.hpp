@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class ElementImportImpl :virtual public DirectedRelationshipImpl, virtual public ElementImport 
+	class ElementImportImpl : virtual public DirectedRelationshipImpl, virtual public ElementImport 
 	{
 		public: 
 			ElementImportImpl(const ElementImportImpl & obj);
@@ -51,23 +51,29 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 The query getName() returns the name under which the imported PackageableElement will be known in the importing namespace.
+			The query getName() returns the name under which the imported PackageableElement will be known in the importing namespace.
 			result = (if alias->notEmpty() then
 			  alias
 			else
 			  importedElement.name
 			endif)
-			<p>From package UML::CommonStructure.</p> */ 
+			<p>From package UML::CommonStructure.</p>
+			*/
+			 
 			virtual std::string getName() ;
 			
 			/*!
-			 An importedElement has either public visibility or no visibility at all.
-			importedElement.visibility <> null implies importedElement.visibility = VisibilityKind::public */ 
+			An importedElement has either public visibility or no visibility at all.
+			importedElement.visibility <> null implies importedElement.visibility = VisibilityKind::public
+			*/
+			 
 			virtual bool imported_element_is_public(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
-			 The visibility of an ElementImport is either public or private.
-			visibility = VisibilityKind::public or visibility = VisibilityKind::private */ 
+			The visibility of an ElementImport is either public or private.
+			visibility = VisibilityKind::public or visibility = VisibilityKind::private
+			*/
+			 
 			virtual bool visibility_public_or_private(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
@@ -76,68 +82,94 @@ namespace uml
 			// Attributes Getter Setter
 			//*********************************
 			/*!
-			 Specifies the name that should be added to the importing Namespace in lieu of the name of the imported PackagableElement. The alias must not clash with any other member in the importing Namespace. By default, no alias is used.
-			<p>From package UML::CommonStructure.</p> */ 
+			Specifies the name that should be added to the importing Namespace in lieu of the name of the imported PackagableElement. The alias must not clash with any other member in the importing Namespace. By default, no alias is used.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			 
 			virtual std::string getAlias() const ;
 			
 			/*!
-			 Specifies the name that should be added to the importing Namespace in lieu of the name of the imported PackagableElement. The alias must not clash with any other member in the importing Namespace. By default, no alias is used.
-			<p>From package UML::CommonStructure.</p> */ 
+			Specifies the name that should be added to the importing Namespace in lieu of the name of the imported PackagableElement. The alias must not clash with any other member in the importing Namespace. By default, no alias is used.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			 
 			virtual void setAlias (std::string _alias); 
-			
 			/*!
-			 Specifies the visibility of the imported PackageableElement within the importingNamespace, i.e., whether the  importedElement will in turn be visible to other Namespaces. If the ElementImport is public, the importedElement will be visible outside the importingNamespace while, if the ElementImport is private, it will not.
-			<p>From package UML::CommonStructure.</p> */ 
+			Specifies the visibility of the imported PackageableElement within the importingNamespace, i.e., whether the  importedElement will in turn be visible to other Namespaces. If the ElementImport is public, the importedElement will be visible outside the importingNamespace while, if the ElementImport is private, it will not.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			 
 			virtual uml::VisibilityKind getVisibility() const ;
 			
 			/*!
-			 Specifies the visibility of the imported PackageableElement within the importingNamespace, i.e., whether the  importedElement will in turn be visible to other Namespaces. If the ElementImport is public, the importedElement will be visible outside the importingNamespace while, if the ElementImport is private, it will not.
-			<p>From package UML::CommonStructure.</p> */ 
+			Specifies the visibility of the imported PackageableElement within the importingNamespace, i.e., whether the  importedElement will in turn be visible to other Namespaces. If the ElementImport is public, the importedElement will be visible outside the importingNamespace while, if the ElementImport is private, it will not.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			 
 			virtual void setVisibility (uml::VisibilityKind _visibility); 
-			
 			
 			
 			//*********************************
 			// Reference
 			//*********************************
 			/*!
-			 Specifies the PackageableElement whose name is to be added to a Namespace.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the PackageableElement whose name is to be added to a Namespace.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::PackageableElement > getImportedElement() const ;
 			
 			/*!
-			 Specifies the PackageableElement whose name is to be added to a Namespace.
-			<p>From package UML::CommonStructure.</p> */
-			virtual void setImportedElement(std::shared_ptr<uml::PackageableElement> _importedElement_importedElement) ;
+			Specifies the PackageableElement whose name is to be added to a Namespace.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
+			virtual void setImportedElement(std::shared_ptr<uml::PackageableElement> _importedElement) ;
+			
 			/*!
-			 Specifies the Namespace that imports a PackageableElement from another Namespace.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the Namespace that imports a PackageableElement from another Namespace.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Namespace > getImportingNamespace() const ;
 			
 			/*!
-			 Specifies the Namespace that imports a PackageableElement from another Namespace.
-			<p>From package UML::CommonStructure.</p> */
-			virtual void setImportingNamespace(std::shared_ptr<uml::Namespace> _importingNamespace_importingNamespace) ;
+			Specifies the Namespace that imports a PackageableElement from another Namespace.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
+			virtual void setImportingNamespace(std::shared_ptr<uml::Namespace> _importingNamespace) ;
+			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
-			 Specifies the elements related by the Relationship.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the elements related by the Relationship.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getRelatedElement() const ;/*!
-			 Specifies the source Element(s) of the DirectedRelationship.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the source Element(s) of the DirectedRelationship.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> getSource() const ;/*!
-			 Specifies the target Element(s) of the DirectedRelationship.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the target Element(s) of the DirectedRelationship.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> getTarget() const ; 
 			 
 			//*********************************

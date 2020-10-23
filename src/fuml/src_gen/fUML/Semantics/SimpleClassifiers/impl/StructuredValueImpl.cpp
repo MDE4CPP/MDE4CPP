@@ -68,17 +68,7 @@ using namespace fUML::Semantics::SimpleClassifiers;
 // Constructor / Destructor
 //*********************************
 StructuredValueImpl::StructuredValueImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 StructuredValueImpl::~StructuredValueImpl()
@@ -87,7 +77,6 @@ StructuredValueImpl::~StructuredValueImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete StructuredValue "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -240,6 +229,7 @@ std::shared_ptr<uml::ValueSpecification> StructuredValueImpl::specify()
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<StructuredValue> StructuredValueImpl::getThisStructuredValuePtr() const

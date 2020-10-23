@@ -54,10 +54,10 @@
 #include "PSCS/Semantics/StructuredClassifiers/impl/StructuredClassifiersFactoryImpl.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/impl/StructuredClassifiersPackageImpl.hpp"
 
-#include "PSCS/PSCSFactory.hpp"
-#include "PSCS/PSCSPackage.hpp"
 #include "PSCS/Semantics/SemanticsFactory.hpp"
 #include "PSCS/Semantics/SemanticsPackage.hpp"
+#include "PSCS/PSCSFactory.hpp"
+#include "PSCS/PSCSPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -68,19 +68,7 @@ using namespace PSCS::Semantics::StructuredClassifiers;
 // Constructor / Destructor
 //*********************************
 CS_ReferenceImpl::CS_ReferenceImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	//Init references
-	
+{	
 }
 
 CS_ReferenceImpl::~CS_ReferenceImpl()
@@ -89,7 +77,6 @@ CS_ReferenceImpl::~CS_ReferenceImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete CS_Reference "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -131,6 +118,21 @@ std::shared_ptr<ecore::EClass> CS_ReferenceImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
+std::shared_ptr<fUML::Semantics::Values::Value> CS_ReferenceImpl::_copy()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Create a new reference with the same referent and composite referent
+// as this reference.
+
+std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> newValue = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
+newValue->setReferent(this->getReferent());
+newValue->setCompositeReferent(this->getCompositeReferent());
+
+return newValue;
+	//end of body
+}
+
 
 
 std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> CS_ReferenceImpl::dispatchIn(std::shared_ptr<uml::Operation>  operation,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>  interactionPoint)
@@ -210,19 +212,26 @@ void CS_ReferenceImpl::sendOut(std::shared_ptr<fUML::Semantics::CommonBehavior::
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference compositeReferent
+*/
 std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object > CS_ReferenceImpl::getCompositeReferent() const
 {
 //assert(m_compositeReferent);
     return m_compositeReferent;
 }
+
 void CS_ReferenceImpl::setCompositeReferent(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> _compositeReferent)
 {
     m_compositeReferent = _compositeReferent;
 }
 
+
+
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<CS_Reference> CS_ReferenceImpl::getThisCS_ReferencePtr() const

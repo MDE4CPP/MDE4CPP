@@ -77,31 +77,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 ExecutableNodeImpl::ExecutableNodeImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		/*Subset*/
-		m_handler.reset(new Subset<uml::ExceptionHandler, uml::Element >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_handler - Subset<uml::ExceptionHandler, uml::Element >()" << std::endl;
-		#endif
-	
-	
-
-	//Init references
-		/*Subset*/
-		m_handler->initSubset(m_ownedElement);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_handler - Subset<uml::ExceptionHandler, uml::Element >(m_ownedElement)" << std::endl;
-		#endif
-	
-	
+{	
 }
 
 ExecutableNodeImpl::~ExecutableNodeImpl()
@@ -111,41 +87,36 @@ ExecutableNodeImpl::~ExecutableNodeImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+ExecutableNodeImpl::ExecutableNodeImpl(std::weak_ptr<uml::Activity > par_activity)
+:ExecutableNodeImpl()
+{
+	m_activity = par_activity;
+	m_owner = par_activity;
+}
 
 //Additional constructor for the containments back reference
-			ExecutableNodeImpl::ExecutableNodeImpl(std::weak_ptr<uml::Activity > par_activity)
-			:ExecutableNodeImpl()
-			{
-			    m_activity = par_activity;
-				m_owner = par_activity;
-			}
-
-
-//Additional constructor for the containments back reference
-			ExecutableNodeImpl::ExecutableNodeImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
-			:ExecutableNodeImpl()
-			{
-			    m_inStructuredNode = par_inStructuredNode;
-				m_owner = par_inStructuredNode;
-			}
-
+ExecutableNodeImpl::ExecutableNodeImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
+:ExecutableNodeImpl()
+{
+	m_inStructuredNode = par_inStructuredNode;
+	m_owner = par_inStructuredNode;
+}
 
 //Additional constructor for the containments back reference
-			ExecutableNodeImpl::ExecutableNodeImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:ExecutableNodeImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
+ExecutableNodeImpl::ExecutableNodeImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:ExecutableNodeImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			ExecutableNodeImpl::ExecutableNodeImpl(std::weak_ptr<uml::Element > par_owner)
-			:ExecutableNodeImpl()
-			{
-			    m_owner = par_owner;
-			}
-
+ExecutableNodeImpl::ExecutableNodeImpl(std::weak_ptr<uml::Element > par_owner)
+:ExecutableNodeImpl()
+{
+	m_owner = par_owner;
+}
 
 
 ExecutableNodeImpl::ExecutableNodeImpl(const ExecutableNodeImpl & obj):ExecutableNodeImpl()
@@ -238,12 +209,11 @@ ExecutableNodeImpl::ExecutableNodeImpl(const ExecutableNodeImpl & obj):Executabl
 		std::cout << "Copying the Subset: " << "m_redefinedNode" << std::endl;
 	#endif
 
-		/*Subset*/
-		m_handler->initSubset(m_ownedElement);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_handler - Subset<uml::ExceptionHandler, uml::Element >(m_ownedElement)" << std::endl;
-		#endif
-	
+	/*Subset*/
+	m_handler->initSubset(getOwnedElement());
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Initialising value Subset: " << "m_handler - Subset<uml::ExceptionHandler, uml::Element >(getOwnedElement())" << std::endl;
+	#endif
 	
 }
 
@@ -270,11 +240,32 @@ std::shared_ptr<ecore::EClass> ExecutableNodeImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference handler
+*/
 std::shared_ptr<Subset<uml::ExceptionHandler, uml::Element>> ExecutableNodeImpl::getHandler() const
 {
+	if(m_handler == nullptr)
+	{
+		/*Subset*/
+		m_handler.reset(new Subset<uml::ExceptionHandler, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_handler - Subset<uml::ExceptionHandler, uml::Element >()" << std::endl;
+		#endif
+		
+		/*Subset*/
+		m_handler->initSubset(getOwnedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_handler - Subset<uml::ExceptionHandler, uml::Element >(getOwnedElement())" << std::endl;
+		#endif
+		
+	}
 
     return m_handler;
 }
+
+
+
 
 
 //*********************************
@@ -282,20 +273,55 @@ std::shared_ptr<Subset<uml::ExceptionHandler, uml::Element>> ExecutableNodeImpl:
 //*********************************
 std::shared_ptr<Union<uml::ActivityGroup>> ExecutableNodeImpl::getInGroup() const
 {
+	if(m_inGroup == nullptr)
+	{
+		/*Union*/
+		m_inGroup.reset(new Union<uml::ActivityGroup>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_inGroup - Union<uml::ActivityGroup>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_inGroup;
 }
+
 std::shared_ptr<Union<uml::Element>> ExecutableNodeImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > ExecutableNodeImpl::getOwner() const
 {
 	return m_owner;
 }
+
 std::shared_ptr<Union<uml::RedefinableElement>> ExecutableNodeImpl::getRedefinedElement() const
 {
+	if(m_redefinedElement == nullptr)
+	{
+		/*Union*/
+		m_redefinedElement.reset(new Union<uml::RedefinableElement>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_redefinedElement - Union<uml::RedefinableElement>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_redefinedElement;
 }
+
+
 
 
 std::shared_ptr<ExecutableNode> ExecutableNodeImpl::getThisExecutableNodePtr() const

@@ -19,7 +19,7 @@
 //*********************************
 namespace PSCS::Semantics::Classification 
 {
-	class CS_InstanceValueEvaluationImpl :virtual public fUML::Semantics::Classification::InstanceValueEvaluationImpl, virtual public CS_InstanceValueEvaluation 
+	class CS_InstanceValueEvaluationImpl : virtual public fUML::Semantics::Classification::InstanceValueEvaluationImpl, virtual public CS_InstanceValueEvaluation 
 	{
 		public: 
 			CS_InstanceValueEvaluationImpl(const CS_InstanceValueEvaluationImpl & obj);
@@ -43,8 +43,7 @@ namespace PSCS::Semantics::Classification
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> evaluate() ;
 			
 			

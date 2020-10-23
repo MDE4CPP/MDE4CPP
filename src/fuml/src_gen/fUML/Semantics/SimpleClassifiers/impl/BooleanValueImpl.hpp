@@ -19,7 +19,7 @@
 //*********************************
 namespace fUML::Semantics::SimpleClassifiers 
 {
-	class BooleanValueImpl :virtual public PrimitiveValueImpl, virtual public BooleanValue 
+	class BooleanValueImpl : virtual public PrimitiveValueImpl, virtual public BooleanValue 
 	{
 		public: 
 			BooleanValueImpl(const BooleanValueImpl & obj);
@@ -43,16 +43,16 @@ namespace fUML::Semantics::SimpleClassifiers
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() ;
+			
+			 
 			virtual bool equals(std::shared_ptr<fUML::Semantics::Values::Value>  otherValue) ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<uml::ValueSpecification> specify() ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::string toString() ;
 			
 			
@@ -60,14 +60,11 @@ namespace fUML::Semantics::SimpleClassifiers
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual bool isValue() const ;
 			
-			/*!
-			 */ 
+			 
 			virtual void setValue (bool _value); 
-			
 			
 			
 			//*********************************

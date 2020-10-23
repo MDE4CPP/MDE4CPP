@@ -91,8 +91,7 @@ namespace fUML::Semantics::Values
 //*********************************
 namespace fUML::Semantics::CommonBehavior 
 {
-	/*!
-	 */
+	
 	class Execution:virtual public fUML::Semantics::StructuredClassifiers::Object
 	{
 		public:
@@ -112,32 +111,27 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() = 0;
+			
+			 
 			virtual void execute() = 0;
 			
-			/*!
-			 */ 
-			virtual std::shared_ptr<uml::Behavior> getBehavior() = 0;
 			
-			/*!
-			 */ 
+			
+			 
 			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > getOutputParameterValues() = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> getParameterValue(std::shared_ptr<uml::Parameter>  parameter) = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> new_() = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual void setParameterValue(std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue>  parameterValue) = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual void terminate() = 0;
 			
 			
@@ -148,16 +142,21 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
+			virtual std::shared_ptr<uml::Behavior > getBehavior() const = 0;
+			
+			
+			virtual void setBehavior(std::shared_ptr<uml::Behavior> _behavior) = 0;
+			
+			
 			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object > getContext() const = 0;
 			
-			/*!
-			 */
-			virtual void setContext(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> _context_context) = 0;
-			/*!
-			 */
+			
+			virtual void setContext(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> _context) = 0;
+			
+			
 			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> getParameterValues() const = 0;
+			
 			
 			
 
@@ -170,13 +169,10 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			// Reference Members
 			//*********************************
-			/*!
-			 */
-			std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object > m_context;
-			/*!
-			 */
-			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> m_parameterValues;
 			
+			mutable std::shared_ptr<uml::Behavior > m_behavior;
+			std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object > m_context;
+			mutable std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> m_parameterValues;
 
 		public:
 			//*********************************

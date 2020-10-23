@@ -72,26 +72,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 TimeExpressionImpl::TimeExpressionImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-		m_observation.reset(new Bag<uml::Observation>());
-	
-	
-
-	//Init references
-	
-
-	
-	
+{	
 }
 
 TimeExpressionImpl::~TimeExpressionImpl()
@@ -101,59 +82,52 @@ TimeExpressionImpl::~TimeExpressionImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+TimeExpressionImpl::TimeExpressionImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:TimeExpressionImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			TimeExpressionImpl::TimeExpressionImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:TimeExpressionImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
+TimeExpressionImpl::TimeExpressionImpl(std::weak_ptr<uml::Element > par_owner)
+:TimeExpressionImpl()
+{
+	m_owner = par_owner;
+}
 
 //Additional constructor for the containments back reference
-			TimeExpressionImpl::TimeExpressionImpl(std::weak_ptr<uml::Element > par_owner)
-			:TimeExpressionImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-//Additional constructor for the containments back reference
-			TimeExpressionImpl::TimeExpressionImpl(std::weak_ptr<uml::Package > par_owningPackage)
-			:TimeExpressionImpl()
-			{
-			    m_owningPackage = par_owningPackage;
-				m_namespace = par_owningPackage;
-			}
-
+TimeExpressionImpl::TimeExpressionImpl(std::weak_ptr<uml::Package > par_owningPackage)
+:TimeExpressionImpl()
+{
+	m_owningPackage = par_owningPackage;
+	m_namespace = par_owningPackage;
+}
 
 //Additional constructor for the containments back reference
-			TimeExpressionImpl::TimeExpressionImpl(std::weak_ptr<uml::Slot > par_owningSlot)
-			:TimeExpressionImpl()
-			{
-			    m_owningSlot = par_owningSlot;
-				m_owner = par_owningSlot;
-			}
-
-
-//Additional constructor for the containments back reference
-			TimeExpressionImpl::TimeExpressionImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
-			:TimeExpressionImpl()
-			{
-			    m_owningTemplateParameter = par_owningTemplateParameter;
-				m_owner = par_owningTemplateParameter;
-			}
-
+TimeExpressionImpl::TimeExpressionImpl(std::weak_ptr<uml::Slot > par_owningSlot)
+:TimeExpressionImpl()
+{
+	m_owningSlot = par_owningSlot;
+	m_owner = par_owningSlot;
+}
 
 //Additional constructor for the containments back reference
-			TimeExpressionImpl::TimeExpressionImpl(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction)
-			:TimeExpressionImpl()
-			{
-			    m_valueSpecificationAction = par_valueSpecificationAction;
-				m_owner = par_valueSpecificationAction;
-			}
+TimeExpressionImpl::TimeExpressionImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+:TimeExpressionImpl()
+{
+	m_owningTemplateParameter = par_owningTemplateParameter;
+	m_owner = par_owningTemplateParameter;
+}
 
+//Additional constructor for the containments back reference
+TimeExpressionImpl::TimeExpressionImpl(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction)
+:TimeExpressionImpl()
+{
+	m_valueSpecificationAction = par_valueSpecificationAction;
+	m_owner = par_valueSpecificationAction;
+}
 
 
 TimeExpressionImpl::TimeExpressionImpl(const TimeExpressionImpl & obj):TimeExpressionImpl()
@@ -247,21 +221,39 @@ bool TimeExpressionImpl::no_expr_requires_observation(Any diagnostics,std::map <
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference expr
+*/
 std::shared_ptr<uml::ValueSpecification > TimeExpressionImpl::getExpr() const
 {
 
     return m_expr;
 }
+
 void TimeExpressionImpl::setExpr(std::shared_ptr<uml::ValueSpecification> _expr)
 {
     m_expr = _expr;
 }
 
+
+
+/*
+Getter & Setter for reference observation
+*/
 std::shared_ptr<Bag<uml::Observation>> TimeExpressionImpl::getObservation() const
 {
+	if(m_observation == nullptr)
+	{
+		m_observation.reset(new Bag<uml::Observation>());
+		
+		
+	}
 
     return m_observation;
 }
+
+
+
 
 
 //*********************************
@@ -271,14 +263,28 @@ std::weak_ptr<uml::Namespace > TimeExpressionImpl::getNamespace() const
 {
 	return m_namespace;
 }
+
 std::shared_ptr<Union<uml::Element>> TimeExpressionImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > TimeExpressionImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<TimeExpression> TimeExpressionImpl::getThisTimeExpressionPtr() const

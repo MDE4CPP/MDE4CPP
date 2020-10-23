@@ -19,7 +19,7 @@
 //*********************************
 namespace fUML::Semantics::Actions 
 {
-	class ValueSpecificationActionActivationImpl :virtual public ActionActivationImpl, virtual public ValueSpecificationActionActivation 
+	class ValueSpecificationActionActivationImpl : virtual public ActionActivationImpl, virtual public ValueSpecificationActionActivation 
 	{
 		public: 
 			ValueSpecificationActionActivationImpl(const ValueSpecificationActionActivationImpl & obj);
@@ -47,8 +47,7 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual void doAction() ;
 			
 			
@@ -66,8 +65,7 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> getPinActivation() const ; 
 			 
 			//*********************************

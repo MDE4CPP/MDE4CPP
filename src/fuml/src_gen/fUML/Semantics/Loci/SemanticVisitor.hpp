@@ -41,14 +41,13 @@ namespace fUML
 
 // enum includes
 
-#include "ecore/EObject.hpp"
+#include "ecore/EModelElement.hpp"
 
 //*********************************
 namespace fUML::Semantics::Loci 
 {
-	/*!
-	 */
-	class SemanticVisitor : virtual public ecore::EObject 
+	
+	class SemanticVisitor : virtual public ecore::EModelElement
 
 	{
 		public:
@@ -68,12 +67,10 @@ namespace fUML::Semantics::Loci
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual void _beginIsolation() = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual void _endIsolation() = 0;
 			
 			

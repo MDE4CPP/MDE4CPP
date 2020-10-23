@@ -4,7 +4,6 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EClass.hpp"
-#include "PSCS/Semantics/Actions/ActionsPackage.hpp"
 #include "PSCS/Semantics/Actions/impl/CS_AcceptCallActionActivationImpl.hpp"
 #include "PSCS/Semantics/Actions/impl/CS_AcceptEventActionActivationImpl.hpp"
 #include "PSCS/Semantics/Actions/impl/CS_AddStructuralFeatureValueActionActivationImpl.hpp"

@@ -19,7 +19,7 @@
 //*********************************
 namespace fUML::Semantics::Loci 
 {
-	class ChoiceStrategyImpl :virtual public SemanticStrategyImpl, virtual public ChoiceStrategy 
+	class ChoiceStrategyImpl : virtual public SemanticStrategyImpl, virtual public ChoiceStrategy 
 	{
 		public: 
 			ChoiceStrategyImpl(const ChoiceStrategyImpl & obj);
@@ -43,12 +43,10 @@ namespace fUML::Semantics::Loci
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual int choose(int size) ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::string getName() ;
 			
 			

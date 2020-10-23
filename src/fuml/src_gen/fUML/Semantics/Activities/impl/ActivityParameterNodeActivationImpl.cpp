@@ -66,17 +66,7 @@ using namespace fUML::Semantics::Activities;
 // Constructor / Destructor
 //*********************************
 ActivityParameterNodeActivationImpl::ActivityParameterNodeActivationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 ActivityParameterNodeActivationImpl::~ActivityParameterNodeActivationImpl()
@@ -86,14 +76,12 @@ ActivityParameterNodeActivationImpl::~ActivityParameterNodeActivationImpl()
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			ActivityParameterNodeActivationImpl::ActivityParameterNodeActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
-			:ActivityParameterNodeActivationImpl()
-			{
-			    m_group = par_group;
-			}
-
+ActivityParameterNodeActivationImpl::ActivityParameterNodeActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
+:ActivityParameterNodeActivationImpl()
+{
+	m_group = par_group;
+}
 
 
 ActivityParameterNodeActivationImpl::ActivityParameterNodeActivationImpl(const ActivityParameterNodeActivationImpl & obj):ActivityParameterNodeActivationImpl()
@@ -193,10 +181,9 @@ void ActivityParameterNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Semanti
 		DEBUG_MESSAGE(std::cout<< "[fire] Output activity parameter node "
 				<< this->getNode()->getName() + "..."<<std::endl;)
 		this->addTokens(incomingTokens);
-		std::shared_ptr<fUML::Semantics::Activities::ForkedToken> forkToken = std::dynamic_pointer_cast<fUML::Semantics::Activities::ForkedToken>((*incomingTokens)[0]);
-		if (forkToken != nullptr) 
+		if (incomingTokens->at(0)->getMetaElementID() == fUML::Semantics::Activities::ActivitiesPackage::FORKEDTOKEN_CLASS) 
 		{
-			forkToken->getBaseToken()->setHolder(getThisActivityParameterNodeActivationPtr());
+			std::dynamic_pointer_cast<fUML::Semantics::Activities::ForkedToken>(incomingTokens->at(0))->getBaseToken()->setHolder(getThisActivityParameterNodeActivationPtr());
 		}
 	}
 	//end of body
@@ -209,6 +196,7 @@ void ActivityParameterNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Semanti
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<ActivityParameterNodeActivation> ActivityParameterNodeActivationImpl::getThisActivityParameterNodeActivationPtr() const

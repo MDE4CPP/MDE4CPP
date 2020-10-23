@@ -15,12 +15,12 @@
 
 #include "fUML/Semantics/Loci/impl/LociFactoryImpl.hpp"
 
-#include "ecore/impl/EObjectImpl.hpp"
+#include "ecore/impl/EModelElementImpl.hpp"
 
 //*********************************
 namespace fUML::Semantics::Loci 
 {
-	class ExecutionFactoryImpl :virtual public ecore::EObjectImpl,
+	class ExecutionFactoryImpl : virtual public ecore::EModelElementImpl,
 virtual public ExecutionFactory 
 	{
 		public: 
@@ -49,44 +49,36 @@ virtual public ExecutionFactory
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual void addBuiltInType(std::shared_ptr<uml::PrimitiveType>  type) ;
 			
-			/*!
-			 */ 
+			 
 			virtual void addPrimitiveBehaviorPrototype(std::shared_ptr<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution>  execution) ;
 			
-			/*!
-			 */ 
+			 
 			virtual void assignStrategy(std::shared_ptr<fUML::Semantics::Loci::SemanticStrategy>  strategy) ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<fUML::Semantics::Values::Evaluation> createEvaluation(std::shared_ptr<uml::ValueSpecification>  specification) ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> createExecution(std::shared_ptr<uml::Behavior>  behavior,std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object>  context) ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<uml::PrimitiveType> getBuiltInType(std::string name) ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<fUML::Semantics::Loci::SemanticStrategy> getStrategy(std::string name) ;
 			
-			/*!
-			 */ 
+			 
 			virtual int getStrategyIndex(std::string name) ;
 			
-			/*!
-			 */ 
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution> instantiateOpaqueBehaviorExecution(std::shared_ptr<uml::OpaqueBehavior>  behavior) ;
 			
-			/*!
-			 */ 
+			
+			 
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution> instantiateOpaqueBehaviorExecution(std::shared_ptr<uml::Behavior>  behavior) ;
+			
+			 
 			virtual std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> instantiateVisitor(std::shared_ptr<uml::Element>  element) ;
 			
 			
@@ -99,24 +91,23 @@ virtual public ExecutionFactory
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Bag<uml::PrimitiveType>> getBuiltInTypes() const ;
 			
-			/*!
-			 */
+			
+			
 			virtual std::weak_ptr<fUML::Semantics::Loci::Locus > getLocus() const ;
 			
-			/*!
-			 */
-			virtual void setLocus(std::shared_ptr<fUML::Semantics::Loci::Locus> _locus_locus) ;
-			/*!
-			 */
+			
+			virtual void setLocus(std::shared_ptr<fUML::Semantics::Loci::Locus> _locus) ;
+			
+			
 			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution>> getPrimitiveBehaviorPrototypes() const ;
 			
-			/*!
-			 */
+			
+			
 			virtual std::shared_ptr<Bag<fUML::Semantics::Loci::SemanticStrategy>> getStrategies() const ;
+			
 			
 							
 			

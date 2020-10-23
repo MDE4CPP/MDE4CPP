@@ -76,42 +76,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 InstanceSpecificationImpl::InstanceSpecificationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		m_classifier.reset(new Bag<uml::Classifier>());
-	
-	
-
-		/*Subset*/
-		m_slot.reset(new Subset<uml::Slot, uml::Element >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_slot - Subset<uml::Slot, uml::Element >()" << std::endl;
-		#endif
-	
-	
-
-	
-
-	//Init references
-	
-	
-
-		/*Subset*/
-		m_slot->initSubset(m_ownedElement);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_slot - Subset<uml::Slot, uml::Element >(m_ownedElement)" << std::endl;
-		#endif
-	
-	
-
-	
+{	
 }
 
 InstanceSpecificationImpl::~InstanceSpecificationImpl()
@@ -121,41 +86,36 @@ InstanceSpecificationImpl::~InstanceSpecificationImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+InstanceSpecificationImpl::InstanceSpecificationImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:InstanceSpecificationImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			InstanceSpecificationImpl::InstanceSpecificationImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:InstanceSpecificationImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
+InstanceSpecificationImpl::InstanceSpecificationImpl(std::weak_ptr<uml::Element > par_owner)
+:InstanceSpecificationImpl()
+{
+	m_owner = par_owner;
+}
 
 //Additional constructor for the containments back reference
-			InstanceSpecificationImpl::InstanceSpecificationImpl(std::weak_ptr<uml::Element > par_owner)
-			:InstanceSpecificationImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-//Additional constructor for the containments back reference
-			InstanceSpecificationImpl::InstanceSpecificationImpl(std::weak_ptr<uml::Package > par_owningPackage)
-			:InstanceSpecificationImpl()
-			{
-			    m_owningPackage = par_owningPackage;
-				m_namespace = par_owningPackage;
-			}
-
+InstanceSpecificationImpl::InstanceSpecificationImpl(std::weak_ptr<uml::Package > par_owningPackage)
+:InstanceSpecificationImpl()
+{
+	m_owningPackage = par_owningPackage;
+	m_namespace = par_owningPackage;
+}
 
 //Additional constructor for the containments back reference
-			InstanceSpecificationImpl::InstanceSpecificationImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
-			:InstanceSpecificationImpl()
-			{
-			    m_owningTemplateParameter = par_owningTemplateParameter;
-				m_owner = par_owningTemplateParameter;
-			}
-
+InstanceSpecificationImpl::InstanceSpecificationImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+:InstanceSpecificationImpl()
+{
+	m_owningTemplateParameter = par_owningTemplateParameter;
+	m_owner = par_owningTemplateParameter;
+}
 
 
 InstanceSpecificationImpl::InstanceSpecificationImpl(const InstanceSpecificationImpl & obj):InstanceSpecificationImpl()
@@ -231,12 +191,11 @@ InstanceSpecificationImpl::InstanceSpecificationImpl(const InstanceSpecification
 		std::cout << "Copying the Subset: " << "m_specification" << std::endl;
 	#endif
 
-		/*Subset*/
-		m_slot->initSubset(m_ownedElement);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_slot - Subset<uml::Slot, uml::Element >(m_ownedElement)" << std::endl;
-		#endif
-	
+	/*Subset*/
+	m_slot->initSubset(getOwnedElement());
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Initialising value Subset: " << "m_slot - Subset<uml::Slot, uml::Element >(getOwnedElement())" << std::endl;
+	#endif
 	
 
 	
@@ -288,29 +247,68 @@ bool InstanceSpecificationImpl::structural_feature(Any diagnostics,std::map <   
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference classifier
+*/
 std::shared_ptr<Bag<uml::Classifier>> InstanceSpecificationImpl::getClassifier() const
 {
+	if(m_classifier == nullptr)
+	{
+		m_classifier.reset(new Bag<uml::Classifier>());
+		
+		
+	}
 
     return m_classifier;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference slot
+*/
 std::shared_ptr<Subset<uml::Slot, uml::Element>> InstanceSpecificationImpl::getSlot() const
 {
+	if(m_slot == nullptr)
+	{
+		/*Subset*/
+		m_slot.reset(new Subset<uml::Slot, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_slot - Subset<uml::Slot, uml::Element >()" << std::endl;
+		#endif
+		
+		/*Subset*/
+		m_slot->initSubset(getOwnedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_slot - Subset<uml::Slot, uml::Element >(getOwnedElement())" << std::endl;
+		#endif
+		
+	}
 
     return m_slot;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference specification
+*/
 std::shared_ptr<uml::ValueSpecification > InstanceSpecificationImpl::getSpecification() const
 {
 
     return m_specification;
 }
+
 void InstanceSpecificationImpl::setSpecification(std::shared_ptr<uml::ValueSpecification> _specification)
 {
     m_specification = _specification;
 }
+
+
 
 //*********************************
 // Union Getter
@@ -319,14 +317,28 @@ std::weak_ptr<uml::Namespace > InstanceSpecificationImpl::getNamespace() const
 {
 	return m_namespace;
 }
+
 std::shared_ptr<Union<uml::Element>> InstanceSpecificationImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > InstanceSpecificationImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<InstanceSpecification> InstanceSpecificationImpl::getThisInstanceSpecificationPtr() const

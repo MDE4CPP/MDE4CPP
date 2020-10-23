@@ -92,6 +92,10 @@ std::shared_ptr<ecore::EReference> StructuredClassifiersPackageImpl::getExtensio
 	return m_extensionalValue_Attribute_locus;
 }
 
+std::shared_ptr<ecore::EOperation> StructuredClassifiersPackageImpl::getExtensionalValue_Operation__copy() const
+{
+	return m_extensionalValue_Operation__copy;
+}
 std::shared_ptr<ecore::EOperation> StructuredClassifiersPackageImpl::getExtensionalValue_Operation_destroy() const
 {
 	return m_extensionalValue_Operation_destroy;
@@ -142,6 +146,10 @@ std::shared_ptr<ecore::EReference> StructuredClassifiersPackageImpl::getLink_Att
 	return m_link_Attribute_type;
 }
 
+std::shared_ptr<ecore::EOperation> StructuredClassifiersPackageImpl::getLink_Operation__copy() const
+{
+	return m_link_Operation__copy;
+}
 std::shared_ptr<ecore::EOperation> StructuredClassifiersPackageImpl::getLink_Operation_addTo_Locus() const
 {
 	return m_link_Operation_addTo_Locus;
@@ -177,6 +185,10 @@ std::shared_ptr<ecore::EReference> StructuredClassifiersPackageImpl::getObject_A
 	return m_object_Attribute_types;
 }
 
+std::shared_ptr<ecore::EOperation> StructuredClassifiersPackageImpl::getObject_Operation__copy() const
+{
+	return m_object_Operation__copy;
+}
 std::shared_ptr<ecore::EOperation> StructuredClassifiersPackageImpl::getObject_Operation__register_EventAccepter() const
 {
 	return m_object_Operation__register_EventAccepter;
@@ -243,6 +255,10 @@ std::shared_ptr<ecore::EReference> StructuredClassifiersPackageImpl::getReferenc
 	return m_reference_Attribute_referent;
 }
 
+std::shared_ptr<ecore::EOperation> StructuredClassifiersPackageImpl::getReference_Operation__copy() const
+{
+	return m_reference_Operation__copy;
+}
 std::shared_ptr<ecore::EOperation> StructuredClassifiersPackageImpl::getReference_Operation_assignFeatureValue_StructuralFeature_EInt() const
 {
 	return m_reference_Operation_assignFeatureValue_StructuralFeature_EInt;

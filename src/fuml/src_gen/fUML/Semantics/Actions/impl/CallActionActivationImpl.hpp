@@ -19,7 +19,7 @@
 //*********************************
 namespace fUML::Semantics::Actions 
 {
-	class CallActionActivationImpl :virtual public InvocationActionActivationImpl, virtual public CallActionActivation 
+	class CallActionActivationImpl : virtual public InvocationActionActivationImpl, virtual public CallActionActivation 
 	{
 		public: 
 			CallActionActivationImpl(const CallActionActivationImpl & obj);
@@ -47,20 +47,16 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual void doAction() ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> getCallExecution() ;
 			
-			/*!
-			 */ 
+			 
 			virtual void removeCallExecution(std::shared_ptr<fUML::Semantics::CommonBehavior::Execution>  execution) ;
 			
-			/*!
-			 */ 
+			 
 			virtual void terminate() ;
 			
 			
@@ -73,17 +69,30 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
+			virtual std::shared_ptr<uml::CallAction > getCallAction() const ;
+			
+			
+			virtual void setCallAction(std::shared_ptr<uml::CallAction> _callAction) ;
+			
+			/*Additional Setter for 'ActionActivation::action' redefined by reference 'callAction'*/
+			
+			virtual void setAction(std::shared_ptr<uml::Action> _action) ;
+			
+			/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'callAction'*/
+			
+			virtual void setNode(std::shared_ptr<uml::ActivityNode> _node) ;
+			
+			
 			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::Execution>> getCallExecutions() const ;
+			
 			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> getPinActivation() const ; 
 			 
 			//*********************************

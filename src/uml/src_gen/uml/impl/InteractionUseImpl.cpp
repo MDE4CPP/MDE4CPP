@@ -74,59 +74,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 InteractionUseImpl::InteractionUseImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		/*Subset*/
-		m_actualGate.reset(new Subset<uml::Gate, uml::Element >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_actualGate - Subset<uml::Gate, uml::Element >()" << std::endl;
-		#endif
-	
-	
-
-		/*Subset*/
-		m_argument.reset(new Subset<uml::ValueSpecification, uml::Element >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_argument - Subset<uml::ValueSpecification, uml::Element >()" << std::endl;
-		#endif
-	
-	
-
-	
-
-	
-
-	
-
-	//Init references
-		/*Subset*/
-		m_actualGate->initSubset(m_ownedElement);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_actualGate - Subset<uml::Gate, uml::Element >(m_ownedElement)" << std::endl;
-		#endif
-	
-	
-
-		/*Subset*/
-		m_argument->initSubset(m_ownedElement);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_argument - Subset<uml::ValueSpecification, uml::Element >(m_ownedElement)" << std::endl;
-		#endif
-	
-	
-
-	
-
-	
-
-	
+{	
 }
 
 InteractionUseImpl::~InteractionUseImpl()
@@ -136,41 +84,36 @@ InteractionUseImpl::~InteractionUseImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+InteractionUseImpl::InteractionUseImpl(std::weak_ptr<uml::Interaction > par_enclosingInteraction)
+:InteractionUseImpl()
+{
+	m_enclosingInteraction = par_enclosingInteraction;
+	m_namespace = par_enclosingInteraction;
+}
 
 //Additional constructor for the containments back reference
-			InteractionUseImpl::InteractionUseImpl(std::weak_ptr<uml::Interaction > par_enclosingInteraction)
-			:InteractionUseImpl()
-			{
-			    m_enclosingInteraction = par_enclosingInteraction;
-				m_namespace = par_enclosingInteraction;
-			}
-
-
-//Additional constructor for the containments back reference
-			InteractionUseImpl::InteractionUseImpl(std::weak_ptr<uml::InteractionOperand > par_enclosingOperand)
-			:InteractionUseImpl()
-			{
-			    m_enclosingOperand = par_enclosingOperand;
-				m_namespace = par_enclosingOperand;
-			}
-
+InteractionUseImpl::InteractionUseImpl(std::weak_ptr<uml::InteractionOperand > par_enclosingOperand)
+:InteractionUseImpl()
+{
+	m_enclosingOperand = par_enclosingOperand;
+	m_namespace = par_enclosingOperand;
+}
 
 //Additional constructor for the containments back reference
-			InteractionUseImpl::InteractionUseImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:InteractionUseImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
+InteractionUseImpl::InteractionUseImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:InteractionUseImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			InteractionUseImpl::InteractionUseImpl(std::weak_ptr<uml::Element > par_owner)
-			:InteractionUseImpl()
-			{
-			    m_owner = par_owner;
-			}
-
+InteractionUseImpl::InteractionUseImpl(std::weak_ptr<uml::Element > par_owner)
+:InteractionUseImpl()
+{
+	m_owner = par_owner;
+}
 
 
 InteractionUseImpl::InteractionUseImpl(const InteractionUseImpl & obj):InteractionUseImpl()
@@ -253,20 +196,18 @@ InteractionUseImpl::InteractionUseImpl(const InteractionUseImpl & obj):Interacti
 		std::cout << "Copying the Subset: " << "m_returnValue" << std::endl;
 	#endif
 
-		/*Subset*/
-		m_actualGate->initSubset(m_ownedElement);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_actualGate - Subset<uml::Gate, uml::Element >(m_ownedElement)" << std::endl;
-		#endif
-	
+	/*Subset*/
+	m_actualGate->initSubset(getOwnedElement());
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Initialising value Subset: " << "m_actualGate - Subset<uml::Gate, uml::Element >(getOwnedElement())" << std::endl;
+	#endif
 	
 
-		/*Subset*/
-		m_argument->initSubset(m_ownedElement);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_argument - Subset<uml::ValueSpecification, uml::Element >(m_ownedElement)" << std::endl;
-		#endif
-	
+	/*Subset*/
+	m_argument->initSubset(getOwnedElement());
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Initialising value Subset: " << "m_argument - Subset<uml::ValueSpecification, uml::Element >(getOwnedElement())" << std::endl;
+	#endif
 	
 
 	
@@ -330,49 +271,109 @@ bool InteractionUseImpl::returnValue_type_recipient_correspondence(Any diagnosti
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference actualGate
+*/
 std::shared_ptr<Subset<uml::Gate, uml::Element>> InteractionUseImpl::getActualGate() const
 {
+	if(m_actualGate == nullptr)
+	{
+		/*Subset*/
+		m_actualGate.reset(new Subset<uml::Gate, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_actualGate - Subset<uml::Gate, uml::Element >()" << std::endl;
+		#endif
+		
+		/*Subset*/
+		m_actualGate->initSubset(getOwnedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_actualGate - Subset<uml::Gate, uml::Element >(getOwnedElement())" << std::endl;
+		#endif
+		
+	}
 
     return m_actualGate;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference argument
+*/
 std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>> InteractionUseImpl::getArgument() const
 {
+	if(m_argument == nullptr)
+	{
+		/*Subset*/
+		m_argument.reset(new Subset<uml::ValueSpecification, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_argument - Subset<uml::ValueSpecification, uml::Element >()" << std::endl;
+		#endif
+		
+		/*Subset*/
+		m_argument->initSubset(getOwnedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_argument - Subset<uml::ValueSpecification, uml::Element >(getOwnedElement())" << std::endl;
+		#endif
+		
+	}
 
     return m_argument;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference refersTo
+*/
 std::shared_ptr<uml::Interaction > InteractionUseImpl::getRefersTo() const
 {
 //assert(m_refersTo);
     return m_refersTo;
 }
+
 void InteractionUseImpl::setRefersTo(std::shared_ptr<uml::Interaction> _refersTo)
 {
     m_refersTo = _refersTo;
 }
 
+
+
+/*
+Getter & Setter for reference returnValue
+*/
 std::shared_ptr<uml::ValueSpecification > InteractionUseImpl::getReturnValue() const
 {
 
     return m_returnValue;
 }
+
 void InteractionUseImpl::setReturnValue(std::shared_ptr<uml::ValueSpecification> _returnValue)
 {
     m_returnValue = _returnValue;
 }
 
+
+
+/*
+Getter & Setter for reference returnValueRecipient
+*/
 std::shared_ptr<uml::Property > InteractionUseImpl::getReturnValueRecipient() const
 {
 
     return m_returnValueRecipient;
 }
+
 void InteractionUseImpl::setReturnValueRecipient(std::shared_ptr<uml::Property> _returnValueRecipient)
 {
     m_returnValueRecipient = _returnValueRecipient;
 }
+
+
 
 //*********************************
 // Union Getter
@@ -381,14 +382,28 @@ std::weak_ptr<uml::Namespace > InteractionUseImpl::getNamespace() const
 {
 	return m_namespace;
 }
+
 std::shared_ptr<Union<uml::Element>> InteractionUseImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > InteractionUseImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<InteractionUse> InteractionUseImpl::getThisInteractionUsePtr() const

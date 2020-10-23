@@ -41,6 +41,8 @@
 
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
 
+#include "uml/Pin.hpp"
+
 #include "fUML/Semantics/Actions/PinActivation.hpp"
 
 #include "fUML/Semantics/Activities/Token.hpp"
@@ -63,17 +65,7 @@ using namespace fUML::Semantics::Actions;
 // Constructor / Destructor
 //*********************************
 InputPinActivationImpl::InputPinActivationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 InputPinActivationImpl::~InputPinActivationImpl()
@@ -83,14 +75,12 @@ InputPinActivationImpl::~InputPinActivationImpl()
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			InputPinActivationImpl::InputPinActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
-			:InputPinActivationImpl()
-			{
-			    m_group = par_group;
-			}
-
+InputPinActivationImpl::InputPinActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
+:InputPinActivationImpl()
+{
+	m_group = par_group;
+}
 
 
 InputPinActivationImpl::InputPinActivationImpl(const InputPinActivationImpl & obj):InputPinActivationImpl()
@@ -115,6 +105,8 @@ InputPinActivationImpl::InputPinActivationImpl(const InputPinActivationImpl & ob
 
 	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> _outgoingEdges = obj.getOutgoingEdges();
 	m_outgoingEdges.reset(new Bag<fUML::Semantics::Activities::ActivityEdgeInstance>(*(obj.getOutgoingEdges().get())));
+
+	m_pin  = obj.getPin();
 
 
 	//Clone references with containment (deep copy)
@@ -161,7 +153,7 @@ bool InputPinActivationImpl::isReady()
 	if (ready) 
 	{
 		int totalValueCount = this->countUnofferedTokens() + this->countOfferedValues();
-		int minimum = std::dynamic_pointer_cast<uml::Pin>(this->getNode())->getLower();
+		int minimum = getPin()->getLower();
 		ready = (totalValueCount >= minimum);	
 	}
 	return ready;
@@ -183,6 +175,7 @@ void InputPinActivationImpl::receiveOffer()
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<InputPinActivation> InputPinActivationImpl::getThisInputPinActivationPtr() const

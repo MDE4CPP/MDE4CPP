@@ -63,17 +63,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 ObservationImpl::ObservationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 ObservationImpl::~ObservationImpl()
@@ -83,41 +73,36 @@ ObservationImpl::~ObservationImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+ObservationImpl::ObservationImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:ObservationImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			ObservationImpl::ObservationImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:ObservationImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
+ObservationImpl::ObservationImpl(std::weak_ptr<uml::Element > par_owner)
+:ObservationImpl()
+{
+	m_owner = par_owner;
+}
 
 //Additional constructor for the containments back reference
-			ObservationImpl::ObservationImpl(std::weak_ptr<uml::Element > par_owner)
-			:ObservationImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-//Additional constructor for the containments back reference
-			ObservationImpl::ObservationImpl(std::weak_ptr<uml::Package > par_owningPackage)
-			:ObservationImpl()
-			{
-			    m_owningPackage = par_owningPackage;
-				m_namespace = par_owningPackage;
-			}
-
+ObservationImpl::ObservationImpl(std::weak_ptr<uml::Package > par_owningPackage)
+:ObservationImpl()
+{
+	m_owningPackage = par_owningPackage;
+	m_namespace = par_owningPackage;
+}
 
 //Additional constructor for the containments back reference
-			ObservationImpl::ObservationImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
-			:ObservationImpl()
-			{
-			    m_owningTemplateParameter = par_owningTemplateParameter;
-				m_owner = par_owningTemplateParameter;
-			}
-
+ObservationImpl::ObservationImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+:ObservationImpl()
+{
+	m_owningTemplateParameter = par_owningTemplateParameter;
+	m_owner = par_owningTemplateParameter;
+}
 
 
 ObservationImpl::ObservationImpl(const ObservationImpl & obj):ObservationImpl()
@@ -197,14 +182,28 @@ std::weak_ptr<uml::Namespace > ObservationImpl::getNamespace() const
 {
 	return m_namespace;
 }
+
 std::shared_ptr<Union<uml::Element>> ObservationImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > ObservationImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<Observation> ObservationImpl::getThisObservationPtr() const

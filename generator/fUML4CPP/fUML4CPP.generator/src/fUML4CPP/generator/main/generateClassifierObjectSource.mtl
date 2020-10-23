@@ -22,6 +22,7 @@
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 [import UML4CPP::generator::main::components::generateClass /]
+[import UML4CPP::generator::main::components::generateConnector/]
 
 [query public supportedTypes(type : Type) : Boolean = (type.name = 'Integer') or (type.name = 'Boolean') /]
 [query public getStructuralFeaturesFromRSTA(aPackage : Package, aClassifier : Classifier) : OrderedSet(StructuralFeature) = aPackage.allOwnedElements()->filter(ReadStructuralFeatureAction)->select(object.type=aClassifier).structuralFeature->addAll(getStructuralFeaturesFromASTVA(aClassifier))->addAll(getStructuralFeaturesFromRSTVA(aClassifier))->asOrderedSet()->sortedBy(name)/]
@@ -41,20 +42,22 @@
 [file (aPackage.getPackageName().concat('Exec/').concat(className).concat('.cpp'), false, 'UTF-8')]
 #include "[aPackage.getPackageName()/]Exec/[className/].hpp"
 
+//General Includes
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "[aClassifier.getNearestPackage().myNamespaceName()/]/[aClassifier.name.toUpperFirst()/].hpp"
 #include "[aClassifier.getNearestPackage().getPackageName()/]/[aClassifier.getNearestPackage().name/]Package.hpp"
-[if (aClassifier.oclIsKindOf(Class))]
-[for (includedClass : Class | aClassifier.oclAsType(Class).collectCompositeStructureIncludes())]
-#include "[aPackage.getPackageName()/]/[includedClass.name.toUpperFirst()/].hpp"
-#include "[aPackage.getPackageName()/]Exec/[includedClass.objectClassName()/].hpp"
-[/for]
-[/if]
 #include "fUML/Semantics/Loci/Locus.hpp"
 #include "uml/Class.hpp"
-[if (aClassifier.oclIsKindOf(Interface))]
+[if (aClassifier.oclIsKindOf(Class))]
+//Includes From Composite Structures
+[for (includedClass : Class | aClassifier.oclAsType(Class).collectCompositeStructureIncludes())]
+#include "[includedClass.getNearestPackage().myNamespaceName()/]/[includedClass.name.toUpperFirst()/].hpp"
+#include "[includedClass.getNearestPackage().getPackageName()/]Exec/[includedClass.objectClassName()/].hpp"
+[/for]
+[elseif (aClassifier.oclIsKindOf(Interface))]
 #include "uml/Interface.hpp"
 [/if]
+//Execution Engine Includes
 [let attributes : OrderedSet(Property) = aClassifier.getAllAttributes().oclAsType(Property)->flatten()->asOrderedSet()->sortedBy(qualifiedName) ]
 [if (attributes->size() > 0)]
 #include "abstractDataTypes/Any.hpp"
@@ -69,17 +72,20 @@
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "fUML/Semantics/Loci/ExecutionFactory.hpp"
 #include "fUML/Semantics/Loci/ChoiceStrategy.hpp"
+//UML Includes
+#include "uml/UmlPackage.hpp"
 #include "uml/Association.hpp"
 #include "uml/Connector.hpp"
 #include "uml/ConnectorEnd.hpp"
 #include "uml/Operation.hpp"
 #include "uml/Property.hpp"
 #include "uml/Port.hpp"
+//Property Includes
 [for (property : Property | attributes->sortedBy(qualifiedName))]
-[property.type.generateTypeInclude(aPackage)/]
+[property.type.generateTypeInclude(property.type.getNearestPackage(), aPackage)/]
 [/for]
-
-[for (aPack : Package | attributes.getNearestPackage()->asSet()->flatten()->sortedBy(name))]
+//Property Packages Includes
+[for (aPack : Package | attributes.type.getNearestPackage()->reject(p : Package | p = aPackage)->asSet()->flatten()->sortedBy(name))]
 #include "[aPack.getPackageName()/]/[aPack.name/]Package.hpp"
 [/for]
 [/if]
@@ -90,15 +96,15 @@
 [/for]
 
 
-using namespace [aPackage.name/];
+using namespace [aClassifier.getNearestPackage().name/];
 
 [className/]::[className/](std::shared_ptr<[pointerName/]> _element):
 
 	[aClassifier.UMLValueName()/](_element)
 {		
-	[if(not aClassifier.oclIsTypeOf(Interface))]
-	this->getTypes()->add([aClassifier.getModelPackage()/][aClassifier.generatePackageGetterCall(aClassifier)/]);
-	[/if]
+	[comment] [if(not aClassifier.oclIsTypeOf(Interface))] [/comment]
+	this->getTypes()->insert(this->getTypes()->begin(), [aClassifier.getModelPackage()/][aClassifier.generatePackageGetterCall(aClassifier)/]);
+	[comment] [/if] [/comment]
 }
 
 [className/]::[className/]([className/] &obj):
@@ -108,9 +114,9 @@ using namespace [aPackage.name/];
 
 [className/]::[className/]()
 {	
-	[if(not aClassifier.oclIsTypeOf(Interface))]
-	this->getTypes()->add([aClassifier.getModelPackage()/][aClassifier.generatePackageGetterCall(aClassifier)/]);
-	[/if]
+	[comment] [if(not aClassifier.oclIsTypeOf(Interface))] [/comment]
+	this->getTypes()->insert(this->getTypes()->begin(), [aClassifier.getModelPackage()/][aClassifier.generatePackageGetterCall(aClassifier)/]);
+	[comment] [/if] [/comment]
 }
 
 [className/]::~[className/]()
@@ -125,7 +131,7 @@ std::shared_ptr<ecore::EObject> [className/]::copy()
 }
 
 void [className/]::destroy()
-{
+{	
 	if([aClassifier.UMLValueName()/])
 	{
 		[aClassifier.UMLValueName()/]->destroy();
@@ -148,12 +154,18 @@ std::shared_ptr<[pointerName/]> [className/]::[aClassifier.UMLValueGetterName()/
 
 void [className/]::setUmlValue(std::shared_ptr<uml::Element> _element)
 {
-	[aClassifier.UMLValueName()/] = std::dynamic_pointer_cast<[pointerName/]>(_element);
+	[aClassifier.UMLValueSetterName()/](std::dynamic_pointer_cast<[pointerName/]>(_element));
 }
 
 void [className/]::[aClassifier.UMLValueSetterName()/](std::shared_ptr<[pointerName/]> _[aClassifier.name.toUpperFirst()/]Element)
 {
 	[aClassifier.UMLValueName()/] = _[aClassifier.name.toUpperFirst()/]Element;
+	[if(not (aClassifier.collectInheritedTypes()->isEmpty()))]
+	//set super type values
+	[for (inheritedType : Classifier | aClassifier.collectInheritedTypes())]
+	[inheritedType.getNearestPackage().name/]::[inheritedType.getValueClass()/]::[inheritedType.UMLValueSetterName()/](_[aClassifier.name.toUpperFirst()/]Element);
+	[/for]
+	[/if]
 }
 
 void [className/]::setThis[className/]Ptr(std::weak_ptr<[className/]> thisObjectPtr)
@@ -196,7 +208,7 @@ std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Object>> [classNa
 	[if (not aClassifier.oclIsKindOf(Interface))]
 	[for (ownerClass : Class | aClassifier.oclAsType(Class).getCompositeOwners())]
 	//owner class [ownerClass.name.toUpperFirst()/]
-	{	std::shared_ptr<[aPackage.name/]::[ownerClass.name.toUpperFirst()/]> ownerUmlValue = [aClassifier.UMLValueName()/]->get[ownerClass.name.toUpperFirst()/]().lock();
+	{	std::shared_ptr<[ownerClass.getNearestPackage().myNamespaceName()/]::[ownerClass.name.toUpperFirst()/]> ownerUmlValue = [aClassifier.UMLValueName()/]->get[ownerClass.name.toUpperFirst()/]().lock();
 		if(ownerUmlValue != nullptr)
 		{
 			std::shared_ptr<[aPackage.name/]::[ownerClass.objectClassName()/]> container[ownerClass.objectClassName()/] = std::dynamic_pointer_cast<[aPackage.name/]::[ownerClass.objectClassName()/]>(this->getLocus()->instantiate([ownerClass.getModelPackage()/][ownerClass.generatePackageGetterCall(ownerClass)/]));
@@ -222,7 +234,8 @@ std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Link>> [className
 	std::shared_ptr<uml::Port> definingPort = interactionPoint->getDefiningPort();
 	
 	//Filter model elements for connectors that are connected to interactionPoints' definingPort
-	for(unsigned int i = 0; i < modelMembers->size(); i++)
+	unsigned int membersSize = modelMembers->size();
+	for(unsigned int i = 0; i < membersSize; i++)
 	{
 		std::shared_ptr<uml::Connector> elementAsConnector = std::dynamic_pointer_cast<uml::Connector>(modelMembers->at(i));
 		if(elementAsConnector != nullptr)
@@ -242,8 +255,8 @@ std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Link>> [className
 	//- retrieve FeatureValue of otherEnd
 	//-	create Link and add both interactionPoint as well as retrieved FeatureValue of otherEnd to the links' featureValues property
 	//- add Link to allLinks
-	
-	for(unsigned int i = 0; i < connectors->size(); i++)
+	unsigned int connectorsSize = connectors->size();
+	for(unsigned int i = 0; i < connectorsSize; i++)
 	{
 		std::shared_ptr<uml::Connector> currentConnector = connectors->at(i);
 		unsigned int definingEndIndex = 0, otherEndIndex = 1;
@@ -286,13 +299,11 @@ std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Link>> [className
 
 std::shared_ptr<Bag<fUML::Semantics::Values::Value>> [className/]::retrieveEndValueAsInteractionPoint(std::shared_ptr<fUML::Semantics::Values::Value> endValue, std::shared_ptr<uml::ConnectorEnd> end)
 {
-[let ends : OrderedSet(ConnectorEnd) = aPackage.collectConnectorEndsConnectedToClass(aClassifier.oclAsType(Class))]
+[let ends : OrderedSet(ConnectorEnd) = aPackage.collectOppositeConnectorEndsOfType(aClassifier)]
 [if (ends->size() > 0) ]
 	std::shared_ptr<uml::Class> type = std::dynamic_pointer_cast<uml::Property>(end->getRole())->getClass().lock();
 	std::shared_ptr<uml::Class> portType = std::dynamic_pointer_cast<uml::Class>(end->getRole()->getType());
 	std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> featureValue = nullptr;
-
-[comment] type can only be a class that plays partWithPort of a connector end where aClassifier is type of opposite partWithPort [/comment]
 
 [for (end : ConnectorEnd | ends)]
 /*DefiningEnd: [end.definingEnd.association.name/]::[end.definingEnd.name/] */
@@ -301,8 +312,8 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> [className/]::retrieveEndVa
 [let definingEndType : Classifier = end.definingEnd.type]
 	if(type == [ownerOfRoleType.getModelPackage()/][ownerOfRoleType.generatePackageGetterCall(ownerOfRoleType)/] && portType == [roleType.getModelPackage()/][roleType.generatePackageGetterCall(roleType)/])
 	{
-		std::shared_ptr<[aPackage.name/]::[ownerOfRoleType.objectClassName()/]> ownerObject = std::dynamic_pointer_cast<[aPackage.name/]::[ownerOfRoleType.objectClassName()/]>(this->getLocus()->instantiate(type));
-		std::shared_ptr<[aPackage.name/]::[definingEndType.objectClassName()/]> portObject = std::dynamic_pointer_cast<[aPackage.name/]::[definingEndType.objectClassName()/]>(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(endValue)->getReferent());
+		std::shared_ptr<[ownerOfRoleType.getNearestPackage().name/]::[ownerOfRoleType.objectClassName()/]> ownerObject = std::dynamic_pointer_cast<[ownerOfRoleType.getNearestPackage().name/]::[ownerOfRoleType.objectClassName()/]>(this->getLocus()->instantiate(type));
+		std::shared_ptr<[definingEndType.getNearestPackage().name/]::[definingEndType.objectClassName()/]> portObject = std::dynamic_pointer_cast<[definingEndType.getNearestPackage().name/]::[definingEndType.objectClassName()/]>(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(endValue)->getReferent());
 		std::shared_ptr<[ownerOfRoleType.generateCppType(true)/]> ownerUmlValue = [if(roleType <> definingEndType)]std::dynamic_pointer_cast<[roleType.generateCppType(true)/]>(portObject->[definingEndType.UMLValueGetterName()/]())[else]portObject->[definingEndType.UMLValueGetterName()/]()[/if]->get[ownerOfRoleType.name.toUpperFirst()/]().lock();
 		ownerObject->[ownerOfRoleType.UMLValueSetterName()/](ownerUmlValue);
 		featureValue = ownerObject->retrieveFeatureValue(std::dynamic_pointer_cast<uml::StructuralFeature>(end->getRole()));
@@ -317,8 +328,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> [className/]::retrieveEndVa
 
 void [className/]::removeValue(std::shared_ptr<uml::StructuralFeature> feature, std::shared_ptr<fUML::Semantics::Values::Value> value)
 {
-	std::shared_ptr<uml::Property> property = std::dynamic_pointer_cast<uml::Property>(feature);
-	if (property == nullptr)
+	if (feature->getMetaElementID() != uml::UmlPackage::PROPERTY_CLASS && feature->getMetaElementID() != uml::UmlPackage::PORT_CLASS && feature->getMetaElementID() != uml::UmlPackage::EXTENSIONEND_CLASS)
 	{
 		std::cerr << __PRETTY_FUNCTION__ << ": feature is null or not kind of uml::Property" << std::endl;
 		throw "feature is null or not kind of uml::Property";
@@ -326,15 +336,15 @@ void [className/]::removeValue(std::shared_ptr<uml::StructuralFeature> feature, 
 
 	if ([aClassifier.UMLValueName()/] == nullptr)
 	{
-		std::cerr << __PRETTY_FUNCTION__ << ": no value stored inside [className/] (property: " << property->getName() << ")" << std::endl;
+		std::cerr << __PRETTY_FUNCTION__ << ": no value stored inside [className/] (property: " << feature->getName() << ")" << std::endl;
 		throw "NullPointerException";	
 	}
 
-[for (aProperty : Property | aClassifier.getAllAttributes().oclAsType(Property))]
-	if (property == [aProperty.getModelPackage()/][aProperty.generatePackageGetterCall(aProperty)/])
+[for (aProperty : Property | aClassifier.getAllAttributes().oclAsType(Property)) ? (not aProperty.isReadOnly)]
+	if (feature == [aProperty.getModelPackage()/][aProperty.generatePackageGetterCall(aProperty)/])
 	{
 [if (aProperty.upper = 1)]
-[if (aProperty.isPrimitiveTypedProperty())]
+[if (aProperty.isPrimitiveTypedProperty() or aProperty.isEnumerationProperty())]
 [if (aProperty.default->notEmpty())]
 				[aClassifier.UMLValueName()/]->[aProperty.setterName()/]([aProperty.genDefault()/]);
 [else]
@@ -360,7 +370,7 @@ void [className/]::removeValue(std::shared_ptr<uml::StructuralFeature> feature, 
 		}
 		else
 		{
-[if (aProperty.isPrimitiveTypedProperty())]
+[if (aProperty.isPrimitiveTypedProperty() or aProperty.isEnumerationProperty())]
 			std::shared_ptr<[aProperty.type.getValueClass()/]> inputValue = std::dynamic_pointer_cast<[aProperty.type.getValueClass()/]>(value);
 			if (inputValue != nullptr)
 			{
@@ -382,7 +392,7 @@ void [className/]::removeValue(std::shared_ptr<uml::StructuralFeature> feature, 
 			/* Should use PSCS::CS_Reference but dynamic_pointer_cast fails --> using fUML::Reference instead
 			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(value); */
 			std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> reference = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Reference>(value);
-			std::shared_ptr<[aProperty.type.getValueClass()/]> inputValue = std::dynamic_pointer_cast<[aProperty.type.getValueClass()/]>(reference->getReferent());
+			std::shared_ptr<[aProperty.type.getNearestPackage().name/]::[aProperty.type.getValueClass()/]> inputValue = std::dynamic_pointer_cast<[aProperty.type.getNearestPackage().name/]::[aProperty.type.getValueClass()/]>(reference->getReferent());
 			if (inputValue != nullptr)
 			{
 				[if (aProperty.isComposite)]
@@ -400,8 +410,7 @@ void [className/]::removeValue(std::shared_ptr<uml::StructuralFeature> feature, 
 
 std::shared_ptr<Bag<fUML::Semantics::Values::Value>> [className/]::getValues(std::shared_ptr<uml::StructuralFeature> feature, std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> featureValues)
 {
-	std::shared_ptr<uml::Property> property = std::dynamic_pointer_cast<uml::Property>(feature);
-	if (property == nullptr)
+	if (feature->getMetaElementID() != uml::UmlPackage::PROPERTY_CLASS && feature->getMetaElementID() != uml::UmlPackage::PORT_CLASS && feature->getMetaElementID() != uml::UmlPackage::EXTENSIONEND_CLASS)
 	{
 		std::cerr << __PRETTY_FUNCTION__ << ": feature is null or not kind of uml::Property" << std::endl;
 		throw "feature is null or not kind of uml::Property";
@@ -409,19 +418,19 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> [className/]::getValues(std
 
 	if ([aClassifier.UMLValueName()/] == nullptr)
 	{
-		std::cerr << __PRETTY_FUNCTION__ << ": no value stored inside [className/] (property: " << property->getName() << ")" << std::endl;
+		std::cerr << __PRETTY_FUNCTION__ << ": no value stored inside [className/] (property: " << feature->getName() << ")" << std::endl;
 		throw "NullPointerException";	
 	}
 
 	std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values(new Bag<fUML::Semantics::Values::Value>());
 [for (aProperty : Property | aClassifier.getAllAttributes().oclAsType(Property))]
-	if (property == [aProperty.getModelPackage()/][aProperty.generatePackageGetterCall(aProperty)/])
+	if (feature == [aProperty.getModelPackage()/][aProperty.generatePackageGetterCall(aProperty)/])
 	{
 [if (aProperty.type.oclIsKindOf(Enumeration))]
 		[aProperty.type.generateCppType(false)/] [aProperty.name/] = [aClassifier.UMLValueName()/]->[aProperty.getterName()/]();
 		std::shared_ptr<fUML::Semantics::SimpleClassifiers::EnumerationValue> value = [getFUMLSimpleClassifierFactory()/]->createEnumerationValue();
 [for (literal : EnumerationLiteral | aProperty.type.oclAsType(Enumeration).ownedLiteral)]
-		if ([aProperty.name/] == [literal.enumeration.namespace.name/]::[literal.enumeration.name/]::[literal.name.toUpperCase()/])
+		if ([aProperty.name/] == [literal.enumeration.namespace.myNamespaceName()/]::[literal.enumeration.name/]::[literal.name.toUpperCase()/])
 		{
 			value->setLiteral([literal.generatePackageGetterCall()/]);
 		}
@@ -446,7 +455,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> [className/]::getValues(std
 [/if]
 [else]
 [if (aProperty.upper = 1)]
-		std::shared_ptr<[aPackage.name/]::[aProperty.type.getValueClass()/]> value(new [aPackage.name/]::[aProperty.type.oclAsType(Classifier).objectClassName()/]());
+		std::shared_ptr<[aProperty.type.getNearestPackage().name/]::[aProperty.type.getValueClass()/]> value(new [aProperty.type.getNearestPackage().name/]::[aProperty.type.oclAsType(Classifier).objectClassName()/]());
 		value->setThis[aProperty.type.oclAsType(Classifier).objectClassName()/]Ptr(value);
 		value->setLocus(this->getLocus());
 		value->[aProperty.type.oclAsType(Classifier).UMLValueSetterName()/]([aClassifier.UMLValueName()/]->[aProperty.getterName()/]()[if(aProperty.isBackReference())].lock()[/if]);
@@ -475,7 +484,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> [className/]::getValues(std
 		Bag<[aProperty.type.generateCppType(true)/]>::iterator end = [aProperty.name.toLowerFirst()/]List->end();
 		while (iter != end)
 		{
-			std::shared_ptr<[aPackage.name/]::[aProperty.type.getValueClass()/]> value(new [aPackage.name/]::[aProperty.type.oclAsType(Classifier).objectClassName()/]());
+			std::shared_ptr<[aProperty.type.getNearestPackage().name/]::[aProperty.type.getValueClass()/]> value(new [aProperty.type.getNearestPackage().name/]::[aProperty.type.oclAsType(Classifier).objectClassName()/]());
 			value->setThis[aProperty.type.oclAsType(Classifier).objectClassName()/]Ptr(value);
 			value->setLocus(this->getLocus());
 			value->[aProperty.type.oclAsType(Classifier).UMLValueSetterName()/](*iter);
@@ -515,7 +524,8 @@ std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> [className/]::
 	std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> featureValues(new Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>());
 	std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values = this->getValues(feature, featureValues);
 	
-	for(unsigned int i = 0; i < values->size(); i++)
+	unsigned int valuesSize = values->size();
+	for(unsigned int i = 0; i < valuesSize; i++)
 	{
 		featureValue->getValues()->add(values->at(i));
 	}
@@ -526,8 +536,7 @@ std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> [className/]::
 
 void [className/]::setFeatureValue(std::shared_ptr<uml::StructuralFeature> feature, std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values, int position)
 {
-	std::shared_ptr<uml::Property> property = std::dynamic_pointer_cast<uml::Property>(feature);
-	if (property == nullptr)
+	if (feature->getMetaElementID() != uml::UmlPackage::PROPERTY_CLASS && feature->getMetaElementID() != uml::UmlPackage::PORT_CLASS && feature->getMetaElementID() != uml::UmlPackage::EXTENSIONEND_CLASS)
 	{
 		std::cerr << __PRETTY_FUNCTION__ << ": feature is null or not kind of uml::Property" << std::endl;
 		throw "feature is null or not kind of uml::Property";
@@ -535,7 +544,7 @@ void [className/]::setFeatureValue(std::shared_ptr<uml::StructuralFeature> featu
 
 	if ([aClassifier.UMLValueName()/] == nullptr)
 	{
-		std::cerr << __PRETTY_FUNCTION__ << ": no value stored inside [className/] (property: " << property->getName() << ")" << std::endl;
+		std::cerr << __PRETTY_FUNCTION__ << ": no value stored inside [className/] (property: " << feature->getName() << ")" << std::endl;
 		throw "NullPointerException";	
 	}
 
@@ -544,25 +553,24 @@ void [className/]::setFeatureValue(std::shared_ptr<uml::StructuralFeature> featu
 		std::cout << __PRETTY_FUNCTION__ << ": no input value given" << std::endl;
 		return;
 	}
-[for (action : AddStructuralFeatureValueAction | aPackage.getASTVA(aClassifier))]
-[let aProperty : Property = action.structuralFeature.oclAsType(Property)]
-	if (property == [action.structuralFeature.getModelPackage()/][aProperty.generatePackageGetterCall(aProperty)/])
+[for (aProperty : Property | aClassifier.getAllAttributes().oclAsType(Property)) ? (not aProperty.isReadOnly)]
+	if (feature == [aProperty.getModelPackage()/][aProperty.generatePackageGetterCall(aProperty)/])
 	{
 [if (aProperty.upper = 1)]
-		std::shared_ptr<Value> inputValue = values->at(0);
-		[aProperty.generateSetFeatureValue(action.value, aClassifier)/]
+		std::shared_ptr<fUML::Semantics::Values::Value> inputValue = values->at(0);
+		[aProperty.generateSetFeatureValue(aClassifier)/]
 [else]
 		Bag<fUML::Semantics::Values::Value>::iterator iter = values->begin();
 		Bag<fUML::Semantics::Values::Value>::iterator end = values->end();
+		[aClassifier.UMLValueName()/]->[aProperty.getterName()/]()->clear();
 		while (iter != end)
 		{
-			std::shared_ptr<Value> inputValue = *iter;
-			[aProperty.generateSetFeatureValue(action.value, aClassifier)/]
+			std::shared_ptr<fUML::Semantics::Values::Value> inputValue = *iter;
+			[aProperty.generateSetFeatureValue(aClassifier)/]
 			iter++;
 		}
 [/if]
 	}
-[/let]
 [/for]
 }
 
@@ -577,12 +585,14 @@ std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> [classNam
 	std::shared_ptr<Bag<uml::Property>> allAttributes = type->getAllAttributes();
 	std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> featureValues(new Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>());
 	
-	for(unsigned int i = 0; i < allAttributes->size(); i++)
+	unsigned int allAttributesSize = allAttributes->size();
+
+	for(unsigned int i = 0; i < allAttributesSize; i++)
 	{
 		std::shared_ptr<uml::Property> property = allAttributes->at(i);
 		[for (aProperty : Property | aClassifier.getAllAttributes().oclAsType(Property))]
 		[if (not aProperty.isPrimitiveTypedProperty() and not aProperty.isEnumerationProperty())]
-		if (property == [aProperty.getModelPackage()/][aProperty.generatePackageGetterCall(aProperty)/] && [aClassifier.UMLValueName()/]->[aProperty.getterName()/]() != nullptr)
+		if (property == [aProperty.getModelPackage()/][aProperty.generatePackageGetterCall(aProperty)/] && [aClassifier.UMLValueName()/]->[aProperty.getterName()/]()[if(aProperty.isBackReference())].lock()[/if] != nullptr)
 		{
 			featureValues->add(this->retrieveFeatureValue(property));
 		}
@@ -598,7 +608,7 @@ std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> [classNam
 [/file]
 [/template]
 
-[template private generateSetFeatureValue(aProperty : Property, valuePin : InputPin, aClassifier : Classifier)]
+[template private generateSetFeatureValue(aProperty : Property, aClassifier : Classifier)]
 [if (aProperty.type.oclIsKindOf(Enumeration))]
 std::shared_ptr<fUML::Semantics::SimpleClassifiers::EnumerationValue> enumValue = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::EnumerationValue>(inputValue);
 std::shared_ptr<uml::EnumerationLiteral> literal = enumValue->getLiteral();
@@ -621,13 +631,13 @@ if (valueObject != nullptr)
 }
 [else]
 std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(inputValue);
-std::shared_ptr<[valuePin.type.getValueClass()/]> value = std::dynamic_pointer_cast<[valuePin.type.getValueClass()/]>(reference->getReferent());
+std::shared_ptr<[aProperty.type.getNearestPackage().name/]::[aProperty.type.getValueClass()/]> value = std::dynamic_pointer_cast<[aProperty.type.getNearestPackage().name/]::[aProperty.type.getValueClass()/]>(reference->getReferent());
 if (value != nullptr)
 {
 [if (aProperty.upper = 1)]
-	[aClassifier.UMLValueName()/]->[aProperty.setterName()/](value->[valuePin.type.oclAsType(Classifier).UMLValueGetterName()/]());
+	[aClassifier.UMLValueName()/]->[aProperty.setterName()/](value->[aProperty.type.oclAsType(Classifier).UMLValueGetterName()/]());
 [else]
-	[aClassifier.UMLValueName()/]->[aProperty.getterName()/]()->push_back(value->[valuePin.type.oclAsType(Classifier).UMLValueGetterName()/]());
+	[aClassifier.UMLValueName()/]->[aProperty.getterName()/]()->push_back(value->[aProperty.type.oclAsType(Classifier).UMLValueGetterName()/]());
 [/if]
 }
 [/if]

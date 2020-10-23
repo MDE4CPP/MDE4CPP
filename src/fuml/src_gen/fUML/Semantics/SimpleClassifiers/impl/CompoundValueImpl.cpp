@@ -65,22 +65,7 @@ using namespace fUML::Semantics::SimpleClassifiers;
 // Constructor / Destructor
 //*********************************
 CompoundValueImpl::CompoundValueImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		m_featureValues.reset(new Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>());
-	
-	
-
-	//Init references
-	
-	
+{	
 }
 
 CompoundValueImpl::~CompoundValueImpl()
@@ -89,7 +74,6 @@ CompoundValueImpl::~CompoundValueImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete CompoundValue "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -115,7 +99,6 @@ CompoundValueImpl::CompoundValueImpl(const CompoundValueImpl & obj):CompoundValu
 	#endif
 
 	
-	
 }
 
 std::shared_ptr<ecore::EObject>  CompoundValueImpl::copy() const
@@ -137,6 +120,28 @@ std::shared_ptr<ecore::EClass> CompoundValueImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
+std::shared_ptr<fUML::Semantics::Values::Value> CompoundValueImpl::_copy()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Create a new data value with the same featureValues as this data value.
+
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::CompoundValue> newValue(new fUML::Semantics::SimpleClassifiers::CompoundValueImpl());
+
+std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> featureValues = this->retrieveFeatureValues();
+unsigned int featureValuesSize = featureValues->size();
+
+for(unsigned int i = 0; i < featureValuesSize; i++)
+{
+	std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> featureValue = featureValues->at(i);
+	newValue->getFeatureValues()->add(featureValue);
+}
+
+return newValue;
+
+	//end of body
+}
+
 void CompoundValueImpl::assignFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<Bag<fUML::Semantics::Values::Value> >  values,int position)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
@@ -270,16 +275,29 @@ std::string CompoundValueImpl::toString()
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference featureValues
+*/
 std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> CompoundValueImpl::getFeatureValues() const
 {
+	if(m_featureValues == nullptr)
+	{
+		m_featureValues.reset(new Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>());
+		
+		
+	}
 
     return m_featureValues;
 }
 
 
+
+
+
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<CompoundValue> CompoundValueImpl::getThisCompoundValuePtr() const

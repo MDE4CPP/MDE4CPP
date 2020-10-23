@@ -61,31 +61,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 ConnectorEndImpl::ConnectorEndImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	
-
-	
-
-	
-
-	//Init references
-	
-
-	
-
-	
-
-	
+{	
 }
 
 ConnectorEndImpl::~ConnectorEndImpl()
@@ -95,22 +71,19 @@ ConnectorEndImpl::~ConnectorEndImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+ConnectorEndImpl::ConnectorEndImpl(std::weak_ptr<uml::Connector > par_connector)
+:ConnectorEndImpl()
+{
+	m_connector = par_connector;
+}
 
 //Additional constructor for the containments back reference
-			ConnectorEndImpl::ConnectorEndImpl(std::weak_ptr<uml::Connector > par_connector)
-			:ConnectorEndImpl()
-			{
-			    m_connector = par_connector;
-			}
-
-
-//Additional constructor for the containments back reference
-			ConnectorEndImpl::ConnectorEndImpl(std::weak_ptr<uml::Element > par_owner)
-			:ConnectorEndImpl()
-			{
-			    m_owner = par_owner;
-			}
-
+ConnectorEndImpl::ConnectorEndImpl(std::weak_ptr<uml::Element > par_owner)
+:ConnectorEndImpl()
+{
+	m_owner = par_owner;
+}
 
 
 ConnectorEndImpl::ConnectorEndImpl(const ConnectorEndImpl & obj):ConnectorEndImpl()
@@ -212,16 +185,25 @@ bool ConnectorEndImpl::self_part_with_port(Any diagnostics,std::map <   Any, Any
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference connector
+*/
 std::weak_ptr<uml::Connector > ConnectorEndImpl::getConnector() const
 {
 //assert(m_connector);
     return m_connector;
 }
+
 void ConnectorEndImpl::setConnector(std::shared_ptr<uml::Connector> _connector)
 {
     m_connector = _connector;
 }
 
+
+
+/*
+Getter & Setter for reference definingEnd
+*/
 std::shared_ptr<uml::Property > ConnectorEndImpl::getDefiningEnd() const
 {
 
@@ -229,33 +211,60 @@ std::shared_ptr<uml::Property > ConnectorEndImpl::getDefiningEnd() const
 }
 
 
+
+
+
+/*
+Getter & Setter for reference partWithPort
+*/
 std::shared_ptr<uml::Property > ConnectorEndImpl::getPartWithPort() const
 {
 
     return m_partWithPort;
 }
+
 void ConnectorEndImpl::setPartWithPort(std::shared_ptr<uml::Property> _partWithPort)
 {
     m_partWithPort = _partWithPort;
 }
 
+
+
+/*
+Getter & Setter for reference role
+*/
 std::shared_ptr<uml::ConnectableElement > ConnectorEndImpl::getRole() const
 {
 //assert(m_role);
     return m_role;
 }
+
 void ConnectorEndImpl::setRole(std::shared_ptr<uml::ConnectableElement> _role)
 {
     m_role = _role;
 }
+
+
 
 //*********************************
 // Union Getter
 //*********************************
 std::shared_ptr<Union<uml::Element>> ConnectorEndImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
+
 
 
 std::shared_ptr<ConnectorEnd> ConnectorEndImpl::getThisConnectorEndPtr() const

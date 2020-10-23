@@ -27,6 +27,11 @@
 #include <memory>
 
 #include "ecore/EFactory.hpp"
+[if (not (anEPackage = anEPackage.getRootPackage()))]
+#include "[anEPackage.getRootPackage().name/]/[anEPackage.getNamespacePathWithoutRoot()/][anEPackage.name.toUpperFirst()/]Package.hpp"
+[else]
+#include "[anEPackage.getRootPackage().name/]/[anEPackage.getRootPackage().name.toUpperFirst()/]Package.hpp"
+[/if]
 
 [comment  Generate Includes for the Factory/]
 [anEPackage.generateForwardDeclarations()/]

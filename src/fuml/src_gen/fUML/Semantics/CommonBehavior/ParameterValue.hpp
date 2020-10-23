@@ -42,6 +42,11 @@ namespace uml
 	class Parameter;
 }
 
+namespace fUML::Semantics::CommonBehavior 
+{
+	class ParameterValue;
+}
+
 namespace fUML::Semantics::Values 
 {
 	class Value;
@@ -51,14 +56,13 @@ namespace fUML::Semantics::Values
 
 // enum includes
 
-#include "ecore/EObject.hpp"
+#include "ecore/EModelElement.hpp"
 
 //*********************************
 namespace fUML::Semantics::CommonBehavior 
 {
-	/*!
-	 */
-	class ParameterValue : virtual public ecore::EObject 
+	
+	class ParameterValue : virtual public ecore::EModelElement
 
 	{
 		public:
@@ -78,6 +82,9 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			// Operations
 			//*********************************
+			 
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> _copy() = 0;
+			
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -86,16 +93,15 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<uml::Parameter > getParameter() const = 0;
 			
-			/*!
-			 */
-			virtual void setParameter(std::shared_ptr<uml::Parameter> _parameter_parameter) = 0;
-			/*!
-			 */
+			
+			virtual void setParameter(std::shared_ptr<uml::Parameter> _parameter) = 0;
+			
+			
 			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value>> getValues() const = 0;
+			
 			
 			
 
@@ -108,13 +114,9 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			// Reference Members
 			//*********************************
-			/*!
-			 */
-			std::shared_ptr<uml::Parameter > m_parameter;
-			/*!
-			 */
-			std::shared_ptr<Bag<fUML::Semantics::Values::Value>> m_values;
 			
+			std::shared_ptr<uml::Parameter > m_parameter;
+			mutable std::shared_ptr<Bag<fUML::Semantics::Values::Value>> m_values;
 
 		public:
 			//*********************************

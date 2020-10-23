@@ -123,8 +123,10 @@ namespace uml
 namespace uml 
 {
 	/*!
-	 An ExecutableNode is an abstract class for ActivityNodes whose execution may be controlled using ControlFlows and to which ExceptionHandlers may be attached.
-	<p>From package UML::Activities.</p> */
+	An ExecutableNode is an abstract class for ActivityNodes whose execution may be controlled using ControlFlows and to which ExceptionHandlers may be attached.
+	<p>From package UML::Activities.</p>
+	*/
+	
 	class ExecutableNode:virtual public ActivityNode
 	{
 		public:
@@ -153,9 +155,12 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 A set of ExceptionHandlers that are examined if an exception propagates out of the ExceptionNode.
-			<p>From package UML::Activities.</p> */
+			A set of ExceptionHandlers that are examined if an exception propagates out of the ExceptionNode.
+			<p>From package UML::Activities.</p>
+			*/
+			
 			virtual std::shared_ptr<Subset<uml::ExceptionHandler, uml::Element>> getHandler() const = 0;
+			
 			
 			
 
@@ -169,27 +174,36 @@ namespace uml
 			// Reference Members
 			//*********************************
 			/*!
-			 A set of ExceptionHandlers that are examined if an exception propagates out of the ExceptionNode.
-			<p>From package UML::Activities.</p> */
-			std::shared_ptr<Subset<uml::ExceptionHandler, uml::Element>> m_handler;
+			A set of ExceptionHandlers that are examined if an exception propagates out of the ExceptionNode.
+			<p>From package UML::Activities.</p>
+			*/
 			
+			mutable std::shared_ptr<Subset<uml::ExceptionHandler, uml::Element>> m_handler;
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
+			ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::ActivityGroup>> getInGroup() const = 0;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
+			The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

@@ -15,12 +15,12 @@
 
 #include "fUML/Semantics/CommonBehavior/impl/CommonBehaviorFactoryImpl.hpp"
 
-#include "ecore/impl/EObjectImpl.hpp"
+#include "ecore/impl/EModelElementImpl.hpp"
 
 //*********************************
 namespace fUML::Semantics::CommonBehavior 
 {
-	class EventAccepterImpl :virtual public ecore::EObjectImpl,
+	class EventAccepterImpl : virtual public ecore::EModelElementImpl,
 virtual public EventAccepter 
 	{
 		public: 
@@ -45,12 +45,10 @@ virtual public EventAccepter
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual void accept(std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance>  signalInstance) ;
 			
-			/*!
-			 */ 
+			 
 			virtual bool match(std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance>  signalInstance) ;
 			
 			

@@ -19,7 +19,7 @@
 //*********************************
 namespace fUML::Semantics::Actions 
 {
-	class ClearStructuralFeatureActionActivationImpl :virtual public StructuralFeatureActionActivationImpl, virtual public ClearStructuralFeatureActionActivation 
+	class ClearStructuralFeatureActionActivationImpl : virtual public StructuralFeatureActionActivationImpl, virtual public ClearStructuralFeatureActionActivation 
 	{
 		public: 
 			ClearStructuralFeatureActionActivationImpl(const ClearStructuralFeatureActionActivationImpl & obj);
@@ -47,8 +47,7 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual void doAction() ;
 			
 			
@@ -66,8 +65,7 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> getPinActivation() const ; 
 			 
 			//*********************************

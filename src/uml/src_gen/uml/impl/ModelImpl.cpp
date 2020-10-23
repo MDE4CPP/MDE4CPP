@@ -83,17 +83,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 ModelImpl::ModelImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 ModelImpl::~ModelImpl()
@@ -103,15 +93,13 @@ ModelImpl::~ModelImpl()
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			ModelImpl::ModelImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:ModelImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
+ModelImpl::ModelImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:ModelImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
 ModelImpl::ModelImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id)
@@ -133,26 +121,21 @@ ModelImpl::ModelImpl(std::weak_ptr<uml::Package > par_Package, const int referen
    
 }
 
-
 //Additional constructor for the containments back reference
-			ModelImpl::ModelImpl(std::weak_ptr<uml::Element > par_owner)
-			:ModelImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-//Additional constructor for the containments back reference
+ModelImpl::ModelImpl(std::weak_ptr<uml::Element > par_owner)
+:ModelImpl()
+{
+	m_owner = par_owner;
+}
 
 
 //Additional constructor for the containments back reference
-			ModelImpl::ModelImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
-			:ModelImpl()
-			{
-			    m_owningTemplateParameter = par_owningTemplateParameter;
-				m_owner = par_owningTemplateParameter;
-			}
-
+ModelImpl::ModelImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+:ModelImpl()
+{
+	m_owningTemplateParameter = par_owningTemplateParameter;
+	m_owner = par_owningTemplateParameter;
+}
 
 
 ModelImpl::ModelImpl(const ModelImpl & obj):ModelImpl()
@@ -318,15 +301,20 @@ std::shared_ptr<ecore::EClass> ModelImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute viewpoint
+*/
+std::string ModelImpl::getViewpoint() const 
+{
+	return m_viewpoint;
+}
+
 void ModelImpl::setViewpoint(std::string _viewpoint)
 {
 	m_viewpoint = _viewpoint;
 } 
 
-std::string ModelImpl::getViewpoint() const 
-{
-	return m_viewpoint;
-}
+
 
 //*********************************
 // Operations
@@ -346,24 +334,65 @@ bool ModelImpl::isMetamodel()
 //*********************************
 std::shared_ptr<Union<uml::NamedElement>> ModelImpl::getMember() const
 {
+	if(m_member == nullptr)
+	{
+		/*Union*/
+		m_member.reset(new Union<uml::NamedElement>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_member - Union<uml::NamedElement>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_member;
 }
+
 std::weak_ptr<uml::Namespace > ModelImpl::getNamespace() const
 {
 	return m_namespace;
 }
+
 std::shared_ptr<Union<uml::Element>> ModelImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> ModelImpl::getOwnedMember() const
 {
+	if(m_ownedMember == nullptr)
+	{
+		/*SubsetUnion*/
+		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_ownedMember->initSubsetUnion(getOwnedElement(),getMember());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >(getOwnedElement(),getMember())" << std::endl;
+		#endif
+		
+	}
 	return m_ownedMember;
 }
+
 std::weak_ptr<uml::Element > ModelImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<Model> ModelImpl::getThisModelPtr() const

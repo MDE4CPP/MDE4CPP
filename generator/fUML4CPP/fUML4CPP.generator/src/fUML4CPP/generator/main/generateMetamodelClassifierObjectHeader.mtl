@@ -1,0 +1,97 @@
+[comment encoding = UTF-8 /]
+[**
+ * Copyright (c) 2017 TU Ilmenau, Systems and Software Engineering Group
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), 
+ * to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+ * and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
+ * WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */]
+[module generateMetamodelClassifierObjectHeader('http://www.eclipse.org/uml2/5.0.0/UML')]
+
+[import fUML4CPP::generator::main::parameterHelper /]
+[import fUML4CPP::generator::main::fUMLCollectionHelper /]
+[import UML4CPP::generator::main::components::generateType /]
+[import UML4CPP::generator::main::helpers::generalHelper /]
+[import UML4CPP::generator::main::helpers::nameHelper /]
+
+[template public generateMetamodelClassifierObjectHeader(aClassifier : Classifier, aPackage :Package) {
+	className : String = objectClassName();
+	pointerName : String = pointerName(aPackage);
+}]
+[file (aPackage.getPackageName().concat('Exec/').concat(className).concat('.hpp'), false, 'UTF-8')]
+[startGuard(aClassifier,'Execution')/]
+
+#include "PSCS/Semantics/StructuredClassifiers/impl/CS_ObjectImpl.hpp"
+[for (inheritedType : Classifier | aClassifier.collectInheritedTypes())]
+#include "[aPackage.getPackageName()/]Exec/[inheritedType.objectClassName()/].hpp"
+[/for]
+
+template <class T> 
+class Bag;
+
+namespace [aClassifier.getNearestPackage().myNamespaceName()/]
+{
+	class [aClassifier.name.toUpperFirst()/];
+}
+
+namespace ecore
+{
+	class EObject;
+}
+
+namespace uml
+{
+	class ConnectorEnd;
+}
+
+namespace [aClassifier.getNearestPackage().name/] 
+{
+	class [className/] : [if (aClassifier.collectInheritedTypes()->isEmpty())]virtual public PSCS::Semantics::StructuredClassifiers::CS_ObjectImpl[else][for(inheritedType : Classifier | aClassifier.collectInheritedTypes()) separator (' , ')]virtual public [inheritedType.getNearestPackage().name/]::[inheritedType.objectClassName()/][/for][/if]
+	{
+		public:
+		    //constructors
+		    [className/]([className/] &obj);
+		    [className/](std::shared_ptr<[pointerName/]>);
+		 	[className/]();
+		    //destructor
+		    virtual ~[className/]();
+		
+		    virtual std::shared_ptr<ecore::EObject> copy();
+
+			virtual void destroy();
+			
+			virtual std::shared_ptr<[pointerName/]> [aClassifier.UMLValueGetterName()/]() const;
+			virtual std::shared_ptr<ecore::EObject> getUmlValue() const;
+			virtual void setUmlValue(std::shared_ptr<ecore::EObject>);
+			virtual void [aClassifier.UMLValueSetterName()/](std::shared_ptr<[pointerName/]>);
+			virtual void setThis[className/]Ptr(std::weak_ptr<[className/]> thisObjectPtr);
+			virtual bool equals(std::shared_ptr<fUML::Semantics::Values::Value> otherValue);
+			virtual std::string toString();
+			virtual std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Object>> getDirectContainers();
+[let attributes : OrderedSet(Property) = aClassifier.getAllAttributes().oclAsType(Property)->flatten()->asOrderedSet()->sortedBy(qualifiedName) ]
+[if (attributes->size() > 0)]
+			virtual void removeValue(std::shared_ptr<uml::StructuralFeature> feature, std::shared_ptr<fUML::Semantics::Values::Value> values);
+			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value>> getValues(std::shared_ptr<uml::StructuralFeature> feature, std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> featureValues);
+			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> retrieveFeatureValue(std::shared_ptr<uml::StructuralFeature> feature);
+			virtual void setFeatureValue(std::shared_ptr<uml::StructuralFeature> feature, std::shared_ptr<Bag<fUML::Semantics::Values::Value>> value, int position);
+			virtual void assignFeatureValue(std::shared_ptr<uml::StructuralFeature> feature, std::shared_ptr<Bag<fUML::Semantics::Values::Value>> value, int position);
+			virtual std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> retrieveFeatureValues();
+
+			virtual std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Link>> getLinks(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> interactionPoint);
+			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value>> retrieveEndValueAsInteractionPoint(std::shared_ptr<fUML::Semantics::Values::Value> endValue, std::shared_ptr<uml::ConnectorEnd> end);
+[/if]
+[/let]
+
+		protected:
+			std::shared_ptr<[pointerName/]> [aClassifier.UMLValueName()/] = nullptr;
+	};
+}
+[endGuard(aClassifier,'Object')/]
+[/file]
+[/template]

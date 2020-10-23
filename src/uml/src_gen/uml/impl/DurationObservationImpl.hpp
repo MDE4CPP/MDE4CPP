@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class DurationObservationImpl :virtual public ObservationImpl, virtual public DurationObservation 
+	class DurationObservationImpl : virtual public ObservationImpl, virtual public DurationObservation 
 	{
 		public: 
 			DurationObservationImpl(const DurationObservationImpl & obj);
@@ -59,10 +59,12 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 The multiplicity of firstEvent must be 2 if the multiplicity of event is 2. Otherwise the multiplicity of firstEvent is 0.
+			The multiplicity of firstEvent must be 2 if the multiplicity of event is 2. Otherwise the multiplicity of firstEvent is 0.
 			if (event->size() = 2)
 			  then (firstEvent->size() = 2) else (firstEvent->size() = 0)
-			endif */ 
+			endif
+			*/
+			 
 			virtual bool first_event_multiplicity(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
@@ -71,9 +73,12 @@ namespace uml
 			// Attributes Getter Setter
 			//*********************************
 			/*!
-			 The value of firstEvent[i] is related to event[i] (where i is 1 or 2). If firstEvent[i] is true, then the corresponding observation event is the first time instant the execution enters event[i]. If firstEvent[i] is false, then the corresponding observation event is the time instant the execution exits event[i].
-			<p>From package UML::Values.</p> */ 
+			The value of firstEvent[i] is related to event[i] (where i is 1 or 2). If firstEvent[i] is true, then the corresponding observation event is the first time instant the execution enters event[i]. If firstEvent[i] is false, then the corresponding observation event is the time instant the execution exits event[i].
+			<p>From package UML::Values.</p>
+			*/
+			 
 			virtual std::shared_ptr<Bag<bool> > getFirstEvent() const ;
+			
 			
 			
 			
@@ -81,9 +86,12 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 The DurationObservation is determined as the duration between the entering or exiting of a single event Element during execution, or the entering/exiting of one event Element and the entering/exiting of a second.
-			<p>From package UML::Values.</p> */
+			The DurationObservation is determined as the duration between the entering or exiting of a single event Element during execution, or the entering/exiting of one event Element and the entering/exiting of a second.
+			<p>From package UML::Values.</p>
+			*/
+			
 			virtual std::shared_ptr<Bag<uml::NamedElement>> getEvent() const ;
+			
 			
 							
 			
@@ -91,14 +99,20 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************

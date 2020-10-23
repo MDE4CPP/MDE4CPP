@@ -15,12 +15,12 @@
 
 #include "fUML/Semantics/CommonBehavior/impl/CommonBehaviorFactoryImpl.hpp"
 
-#include "ecore/impl/EObjectImpl.hpp"
+#include "ecore/impl/EModelElementImpl.hpp"
 
 //*********************************
 namespace fUML::Semantics::CommonBehavior 
 {
-	class ParameterValueImpl :virtual public ecore::EObjectImpl,
+	class ParameterValueImpl : virtual public ecore::EModelElementImpl,
 virtual public ParameterValue 
 	{
 		public: 
@@ -45,6 +45,9 @@ virtual public ParameterValue
 			//*********************************
 			// Operations
 			//*********************************
+			 
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> _copy() ;
+			
 			
 			
 			//*********************************
@@ -55,16 +58,15 @@ virtual public ParameterValue
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<uml::Parameter > getParameter() const ;
 			
-			/*!
-			 */
-			virtual void setParameter(std::shared_ptr<uml::Parameter> _parameter_parameter) ;
-			/*!
-			 */
+			
+			virtual void setParameter(std::shared_ptr<uml::Parameter> _parameter) ;
+			
+			
 			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value>> getValues() const ;
+			
 			
 							
 			

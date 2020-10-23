@@ -19,7 +19,7 @@
 //*********************************
 namespace fUML::Semantics::Actions 
 {
-	class SendSignalActionActivationImpl :virtual public InvocationActionActivationImpl, virtual public SendSignalActionActivation 
+	class SendSignalActionActivationImpl : virtual public InvocationActionActivationImpl, virtual public SendSignalActionActivation 
 	{
 		public: 
 			SendSignalActionActivationImpl(const SendSignalActionActivationImpl & obj);
@@ -47,8 +47,7 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual void doAction() ;
 			
 			
@@ -66,8 +65,7 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> getPinActivation() const ; 
 			 
 			//*********************************

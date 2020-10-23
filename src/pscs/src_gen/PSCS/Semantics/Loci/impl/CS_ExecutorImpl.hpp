@@ -19,7 +19,7 @@
 //*********************************
 namespace PSCS::Semantics::Loci 
 {
-	class CS_ExecutorImpl :virtual public fUML::Semantics::Loci::ExecutorImpl, virtual public CS_Executor 
+	class CS_ExecutorImpl : virtual public fUML::Semantics::Loci::ExecutorImpl, virtual public CS_Executor 
 	{
 		public: 
 			CS_ExecutorImpl(const CS_ExecutorImpl & obj);
@@ -47,8 +47,7 @@ namespace PSCS::Semantics::Loci
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> start(std::shared_ptr<uml::Class>  type,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> >  inputs) ;
 			
 			

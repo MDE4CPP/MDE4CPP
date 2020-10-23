@@ -18,7 +18,7 @@
 //*********************************
 namespace ecore 
 {
-	class EEnumLiteralImpl :virtual public ENamedElementImpl, virtual public EEnumLiteral 
+	class EEnumLiteralImpl : virtual public ENamedElementImpl, virtual public EEnumLiteral 
 	{
 		public: 
 			EEnumLiteralImpl(const EEnumLiteralImpl & obj);
@@ -55,46 +55,36 @@ namespace ecore
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual Any getInstance() const ;
 			
-			/*!
-			 */ 
+			 
 			virtual void setInstance (Any _instance); 
-			
-			/*!
-			 */ 
+			 
 			virtual std::string getLiteral() const ;
 			
-			/*!
-			 */ 
+			 
 			virtual void setLiteral (std::string _literal); 
-			
-			/*!
-			 */ 
+			 
 			virtual int getValue() const ;
 			
-			/*!
-			 */ 
+			 
 			virtual void setValue (int _value); 
-			
 			
 			
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::weak_ptr<ecore::EEnum > getEEnum() const ;
+			
 			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const ; 
 			 
 			//*********************************

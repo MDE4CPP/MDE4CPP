@@ -19,7 +19,7 @@
 //*********************************
 namespace fUML::Semantics::Actions 
 {
-	class OutputPinActivationImpl :virtual public PinActivationImpl, virtual public OutputPinActivation 
+	class OutputPinActivationImpl : virtual public PinActivationImpl, virtual public OutputPinActivation 
 	{
 		public: 
 			OutputPinActivationImpl(const OutputPinActivationImpl & obj);

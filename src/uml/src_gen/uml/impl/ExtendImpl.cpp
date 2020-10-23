@@ -68,34 +68,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 ExtendImpl::ExtendImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	
-
-	
-
-		m_extensionLocation.reset(new Bag<uml::ExtensionPoint>());
-	
-	
-
-	//Init references
-	
-
-	
-
-	
-
-	
-	
+{	
 }
 
 ExtendImpl::~ExtendImpl()
@@ -105,32 +78,28 @@ ExtendImpl::~ExtendImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+ExtendImpl::ExtendImpl(std::weak_ptr<uml::UseCase > par_extension)
+:ExtendImpl()
+{
+	m_extension = par_extension;
+	m_namespace = par_extension;
+}
 
 //Additional constructor for the containments back reference
-			ExtendImpl::ExtendImpl(std::weak_ptr<uml::UseCase > par_extension)
-			:ExtendImpl()
-			{
-			    m_extension = par_extension;
-				m_namespace = par_extension;
-			}
-
-
-//Additional constructor for the containments back reference
-			ExtendImpl::ExtendImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:ExtendImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
+ExtendImpl::ExtendImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:ExtendImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			ExtendImpl::ExtendImpl(std::weak_ptr<uml::Element > par_owner)
-			:ExtendImpl()
-			{
-			    m_owner = par_owner;
-			}
-
+ExtendImpl::ExtendImpl(std::weak_ptr<uml::Element > par_owner)
+:ExtendImpl()
+{
+	m_owner = par_owner;
+}
 
 
 ExtendImpl::ExtendImpl(const ExtendImpl & obj):ExtendImpl()
@@ -224,41 +193,71 @@ bool ExtendImpl::extension_points(Any diagnostics,std::map <   Any, Any >  conte
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference condition
+*/
 std::shared_ptr<uml::Constraint > ExtendImpl::getCondition() const
 {
 
     return m_condition;
 }
+
 void ExtendImpl::setCondition(std::shared_ptr<uml::Constraint> _condition)
 {
     m_condition = _condition;
 }
 
+
+
+/*
+Getter & Setter for reference extendedCase
+*/
 std::shared_ptr<uml::UseCase > ExtendImpl::getExtendedCase() const
 {
 //assert(m_extendedCase);
     return m_extendedCase;
 }
+
 void ExtendImpl::setExtendedCase(std::shared_ptr<uml::UseCase> _extendedCase)
 {
     m_extendedCase = _extendedCase;
 }
 
+
+
+/*
+Getter & Setter for reference extension
+*/
 std::weak_ptr<uml::UseCase > ExtendImpl::getExtension() const
 {
 //assert(m_extension);
     return m_extension;
 }
+
 void ExtendImpl::setExtension(std::shared_ptr<uml::UseCase> _extension)
 {
     m_extension = _extension;
 }
 
+
+
+/*
+Getter & Setter for reference extensionLocation
+*/
 std::shared_ptr<Bag<uml::ExtensionPoint>> ExtendImpl::getExtensionLocation() const
 {
+	if(m_extensionLocation == nullptr)
+	{
+		m_extensionLocation.reset(new Bag<uml::ExtensionPoint>());
+		
+		
+	}
 //assert(m_extensionLocation);
     return m_extensionLocation;
 }
+
+
+
 
 
 //*********************************
@@ -268,26 +267,83 @@ std::weak_ptr<uml::Namespace > ExtendImpl::getNamespace() const
 {
 	return m_namespace;
 }
+
 std::shared_ptr<Union<uml::Element>> ExtendImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > ExtendImpl::getOwner() const
 {
 	return m_owner;
 }
+
 std::shared_ptr<Union<uml::Element>> ExtendImpl::getRelatedElement() const
 {
+	if(m_relatedElement == nullptr)
+	{
+		/*Union*/
+		m_relatedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_relatedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_relatedElement;
 }
+
 std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> ExtendImpl::getSource() const
 {
+	if(m_source == nullptr)
+	{
+		/*SubsetUnion*/
+		m_source.reset(new SubsetUnion<uml::Element, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_source - SubsetUnion<uml::Element, uml::Element >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_source->initSubsetUnion(getRelatedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_source - SubsetUnion<uml::Element, uml::Element >(getRelatedElement())" << std::endl;
+		#endif
+		
+	}
 	return m_source;
 }
+
 std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> ExtendImpl::getTarget() const
 {
+	if(m_target == nullptr)
+	{
+		/*SubsetUnion*/
+		m_target.reset(new SubsetUnion<uml::Element, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_target - SubsetUnion<uml::Element, uml::Element >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_target->initSubsetUnion(getRelatedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_target - SubsetUnion<uml::Element, uml::Element >(getRelatedElement())" << std::endl;
+		#endif
+		
+	}
 	return m_target;
 }
+
+
 
 
 std::shared_ptr<Extend> ExtendImpl::getThisExtendPtr() const

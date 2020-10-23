@@ -19,7 +19,7 @@
 //*********************************
 namespace PSCS::Semantics::StructuredClassifiers 
 {
-	class CS_StructuralFeatureOfInterfaceAccessStrategyImpl :virtual public fUML::Semantics::Loci::SemanticStrategyImpl, virtual public CS_StructuralFeatureOfInterfaceAccessStrategy 
+	class CS_StructuralFeatureOfInterfaceAccessStrategyImpl : virtual public fUML::Semantics::Loci::SemanticStrategyImpl, virtual public CS_StructuralFeatureOfInterfaceAccessStrategy 
 	{
 		public: 
 			CS_StructuralFeatureOfInterfaceAccessStrategyImpl(const CS_StructuralFeatureOfInterfaceAccessStrategyImpl & obj);
@@ -43,16 +43,13 @@ namespace PSCS::Semantics::StructuredClassifiers
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::string getName() ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> read(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object>  cs_Object,std::shared_ptr<uml::StructuralFeature>  feature) ;
 			
-			/*!
-			 */ 
+			 
 			virtual void write(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object>  cs_Object,std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<Bag<fUML::Semantics::Values::Value> >  values,int position) ;
 			
 			

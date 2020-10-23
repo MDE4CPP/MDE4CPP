@@ -64,17 +64,7 @@ using namespace fUML::Semantics::SimpleClassifiers;
 // Constructor / Destructor
 //*********************************
 UnlimitedNaturalValueImpl::UnlimitedNaturalValueImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 UnlimitedNaturalValueImpl::~UnlimitedNaturalValueImpl()
@@ -83,7 +73,6 @@ UnlimitedNaturalValueImpl::~UnlimitedNaturalValueImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete UnlimitedNaturalValue "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -120,19 +109,37 @@ std::shared_ptr<ecore::EClass> UnlimitedNaturalValueImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
-void UnlimitedNaturalValueImpl::setValue(int _value)
-{
-	m_value = _value;
-} 
-
+/*
+Getter & Setter for attribute value
+*/
 int UnlimitedNaturalValueImpl::getValue() const 
 {
 	return m_value;
 }
 
+void UnlimitedNaturalValueImpl::setValue(int _value)
+{
+	m_value = _value;
+} 
+
+
+
 //*********************************
 // Operations
 //*********************************
+std::shared_ptr<fUML::Semantics::Values::Value> UnlimitedNaturalValueImpl::_copy()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Create a new unlimited natural value with the same value as this unlimited natural value.
+
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue> newValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createUnlimitedNaturalValue();
+newValue->setType(this->getType()); //Duplicated from _copy()-method of super class in order to avoid having to call _copy()-method of super class and having to cast afterwards
+newValue->setValue(this->getValue());
+return newValue;
+	//end of body
+}
+
 bool UnlimitedNaturalValueImpl::equals(std::shared_ptr<fUML::Semantics::Values::Value>  otherValue)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
@@ -185,6 +192,7 @@ std::string UnlimitedNaturalValueImpl::toString()
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<UnlimitedNaturalValue> UnlimitedNaturalValueImpl::getThisUnlimitedNaturalValuePtr() const

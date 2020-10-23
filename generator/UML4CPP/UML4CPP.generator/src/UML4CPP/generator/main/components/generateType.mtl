@@ -28,6 +28,8 @@
 */]
 [query public isPrimitive(type : Type) : Boolean = (type.name = 'Integer') or (type.name = 'Boolean') or (type.name = 'String') or (type.name = 'Real') or (type.name = 'EInt') or (type.name = 'EBoolean') or (type.name = 'EString') or (type.name = 'EDouble')  or (type.name = 'EFloat') or (type.name = 'UnlimitedNatural')/]
 
+[query public supportedTypes(type : Type) : Boolean = (name = 'Integer') or (name = 'Boolean') or (name = 'String') or (name = 'Real') or (name = 'UnlimitedNatural') /]
+
 [**
  * check if a property is back reference of composition 
 */]

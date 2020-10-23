@@ -279,6 +279,14 @@ void ValuesPackageImpl::initializeValueContent()
 	
 	
 	
+	m_value_Operation__copy->setEType(getValue_Class());
+	m_value_Operation__copy->setName("_copy");
+	m_value_Operation__copy->setLowerBound(1);
+	m_value_Operation__copy->setUpperBound(1);
+	m_value_Operation__copy->setUnique(true);
+	m_value_Operation__copy->setOrdered(true);
+	
+	
 	m_value_Operation_checkAllParents_Classifier_Classifier->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
 	m_value_Operation_checkAllParents_Classifier_Classifier->setName("checkAllParents");
 	m_value_Operation_checkAllParents_Classifier_Classifier->setLowerBound(1);

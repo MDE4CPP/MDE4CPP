@@ -69,17 +69,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 LiteralBooleanImpl::LiteralBooleanImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 LiteralBooleanImpl::~LiteralBooleanImpl()
@@ -89,59 +79,52 @@ LiteralBooleanImpl::~LiteralBooleanImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+LiteralBooleanImpl::LiteralBooleanImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:LiteralBooleanImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			LiteralBooleanImpl::LiteralBooleanImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:LiteralBooleanImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
+LiteralBooleanImpl::LiteralBooleanImpl(std::weak_ptr<uml::Element > par_owner)
+:LiteralBooleanImpl()
+{
+	m_owner = par_owner;
+}
 
 //Additional constructor for the containments back reference
-			LiteralBooleanImpl::LiteralBooleanImpl(std::weak_ptr<uml::Element > par_owner)
-			:LiteralBooleanImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-//Additional constructor for the containments back reference
-			LiteralBooleanImpl::LiteralBooleanImpl(std::weak_ptr<uml::Package > par_owningPackage)
-			:LiteralBooleanImpl()
-			{
-			    m_owningPackage = par_owningPackage;
-				m_namespace = par_owningPackage;
-			}
-
+LiteralBooleanImpl::LiteralBooleanImpl(std::weak_ptr<uml::Package > par_owningPackage)
+:LiteralBooleanImpl()
+{
+	m_owningPackage = par_owningPackage;
+	m_namespace = par_owningPackage;
+}
 
 //Additional constructor for the containments back reference
-			LiteralBooleanImpl::LiteralBooleanImpl(std::weak_ptr<uml::Slot > par_owningSlot)
-			:LiteralBooleanImpl()
-			{
-			    m_owningSlot = par_owningSlot;
-				m_owner = par_owningSlot;
-			}
-
-
-//Additional constructor for the containments back reference
-			LiteralBooleanImpl::LiteralBooleanImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
-			:LiteralBooleanImpl()
-			{
-			    m_owningTemplateParameter = par_owningTemplateParameter;
-				m_owner = par_owningTemplateParameter;
-			}
-
+LiteralBooleanImpl::LiteralBooleanImpl(std::weak_ptr<uml::Slot > par_owningSlot)
+:LiteralBooleanImpl()
+{
+	m_owningSlot = par_owningSlot;
+	m_owner = par_owningSlot;
+}
 
 //Additional constructor for the containments back reference
-			LiteralBooleanImpl::LiteralBooleanImpl(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction)
-			:LiteralBooleanImpl()
-			{
-			    m_valueSpecificationAction = par_valueSpecificationAction;
-				m_owner = par_valueSpecificationAction;
-			}
+LiteralBooleanImpl::LiteralBooleanImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+:LiteralBooleanImpl()
+{
+	m_owningTemplateParameter = par_owningTemplateParameter;
+	m_owner = par_owningTemplateParameter;
+}
 
+//Additional constructor for the containments back reference
+LiteralBooleanImpl::LiteralBooleanImpl(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction)
+:LiteralBooleanImpl()
+{
+	m_valueSpecificationAction = par_valueSpecificationAction;
+	m_owner = par_valueSpecificationAction;
+}
 
 
 LiteralBooleanImpl::LiteralBooleanImpl(const LiteralBooleanImpl & obj):LiteralBooleanImpl()
@@ -212,19 +195,39 @@ std::shared_ptr<ecore::EClass> LiteralBooleanImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
-void LiteralBooleanImpl::setValue(bool _value)
-{
-	m_value = _value;
-} 
-
+/*
+Getter & Setter for attribute value
+*/
 bool LiteralBooleanImpl::getValue() const 
 {
 	return m_value;
 }
 
+void LiteralBooleanImpl::setValue(bool _value)
+{
+	m_value = _value;
+} 
+
+
+
 //*********************************
 // Operations
 //*********************************
+bool LiteralBooleanImpl::booleanValue()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	return m_value;
+	//end of body
+}
+
+bool LiteralBooleanImpl::isComputable()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	return true;
+	//end of body
+}
 
 //*********************************
 // References
@@ -237,14 +240,28 @@ std::weak_ptr<uml::Namespace > LiteralBooleanImpl::getNamespace() const
 {
 	return m_namespace;
 }
+
 std::shared_ptr<Union<uml::Element>> LiteralBooleanImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > LiteralBooleanImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<LiteralBoolean> LiteralBooleanImpl::getThisLiteralBooleanPtr() const

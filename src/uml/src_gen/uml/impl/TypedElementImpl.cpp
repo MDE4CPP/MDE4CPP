@@ -61,19 +61,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 TypedElementImpl::TypedElementImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	//Init references
-	
+{	
 }
 
 TypedElementImpl::~TypedElementImpl()
@@ -83,23 +71,20 @@ TypedElementImpl::~TypedElementImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+TypedElementImpl::TypedElementImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:TypedElementImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			TypedElementImpl::TypedElementImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:TypedElementImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
-
-//Additional constructor for the containments back reference
-			TypedElementImpl::TypedElementImpl(std::weak_ptr<uml::Element > par_owner)
-			:TypedElementImpl()
-			{
-			    m_owner = par_owner;
-			}
-
+TypedElementImpl::TypedElementImpl(std::weak_ptr<uml::Element > par_owner)
+:TypedElementImpl()
+{
+	m_owner = par_owner;
+}
 
 
 TypedElementImpl::TypedElementImpl(const TypedElementImpl & obj):TypedElementImpl()
@@ -167,27 +152,46 @@ std::shared_ptr<ecore::EClass> TypedElementImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference type
+*/
 std::shared_ptr<uml::Type > TypedElementImpl::getType() const
 {
 
     return m_type;
 }
+
 void TypedElementImpl::setType(std::shared_ptr<uml::Type> _type)
 {
     m_type = _type;
 }
+
+
 
 //*********************************
 // Union Getter
 //*********************************
 std::shared_ptr<Union<uml::Element>> TypedElementImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > TypedElementImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<TypedElement> TypedElementImpl::getThisTypedElementPtr() const

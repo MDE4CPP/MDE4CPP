@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class InvocationActionImpl :virtual public ActionImpl, virtual public InvocationAction 
+	class InvocationActionImpl : virtual public ActionImpl, virtual public InvocationAction 
 	{
 		public: 
 			InvocationActionImpl(const InvocationActionImpl & obj);
@@ -69,39 +69,57 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 The InputPins that provide the argument values passed in the invocation request.
-			<p>From package UML::Actions.</p> */
-			virtual std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> getArgument() const ;
+			The InputPins that provide the argument values passed in the invocation request.
+			<p>From package UML::Actions.</p>
+			*/
+			
+			virtual std::shared_ptr<SubsetUnion<uml::InputPin, uml::InputPin>> getArgument() const ;
+			
 			
 			/*!
-			 For CallOperationActions, SendSignalActions, and SendObjectActions, an optional Port of the target object through which the invocation request is sent.
-			<p>From package UML::Actions.</p> */
+			For CallOperationActions, SendSignalActions, and SendObjectActions, an optional Port of the target object through which the invocation request is sent.
+			<p>From package UML::Actions.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::Port > getOnPort() const ;
 			
 			/*!
-			 For CallOperationActions, SendSignalActions, and SendObjectActions, an optional Port of the target object through which the invocation request is sent.
-			<p>From package UML::Actions.</p> */
-			virtual void setOnPort(std::shared_ptr<uml::Port> _onPort_onPort) ;
+			For CallOperationActions, SendSignalActions, and SendObjectActions, an optional Port of the target object through which the invocation request is sent.
+			<p>From package UML::Actions.</p>
+			*/
+			
+			virtual void setOnPort(std::shared_ptr<uml::Port> _onPort) ;
+			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
+			ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::ActivityGroup>> getInGroup() const ;/*!
-			 The ordered set of InputPins representing the inputs to the Action.
-			<p>From package UML::Actions.</p> */
+			The ordered set of InputPins representing the inputs to the Action.
+			<p>From package UML::Actions.</p>
+			*/
+			
 			virtual std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> getInput() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
+			The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const ; 
 			 
 			//*********************************

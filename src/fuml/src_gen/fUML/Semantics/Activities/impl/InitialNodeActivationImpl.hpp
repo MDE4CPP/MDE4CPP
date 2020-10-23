@@ -19,7 +19,7 @@
 //*********************************
 namespace fUML::Semantics::Activities 
 {
-	class InitialNodeActivationImpl :virtual public ControlNodeActivationImpl, virtual public InitialNodeActivation 
+	class InitialNodeActivationImpl : virtual public ControlNodeActivationImpl, virtual public InitialNodeActivation 
 	{
 		public: 
 			InitialNodeActivationImpl(const InitialNodeActivationImpl & obj);
@@ -47,8 +47,7 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual void fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token> >  incomingTokens) ;
 			
 			

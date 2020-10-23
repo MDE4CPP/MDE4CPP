@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class InterruptibleActivityRegionImpl :virtual public ActivityGroupImpl, virtual public InterruptibleActivityRegion 
+	class InterruptibleActivityRegionImpl : virtual public ActivityGroupImpl, virtual public InterruptibleActivityRegion 
 	{
 		public: 
 			InterruptibleActivityRegionImpl(const InterruptibleActivityRegionImpl & obj);
@@ -59,9 +59,11 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 The interruptingEdges of an InterruptibleActivityRegion must have their source in the region and their target outside the region, but within the same Activity containing the region.
+			The interruptingEdges of an InterruptibleActivityRegion must have their source in the region and their target outside the region, but within the same Activity containing the region.
 			interruptingEdge->forAll(edge | 
-			  node->includes(edge.source) and node->excludes(edge.target) and edge.target.containingActivity() = inActivity) */ 
+			  node->includes(edge.source) and node->excludes(edge.target) and edge.target.containingActivity() = inActivity)
+			*/
+			 
 			virtual bool interrupting_edges(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
@@ -75,14 +77,20 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 The ActivityEdges leaving the InterruptibleActivityRegion on which a traversing token will result in the termination of other tokens flowing in the InterruptibleActivityRegion.
-			<p>From package UML::Activities.</p> */
+			The ActivityEdges leaving the InterruptibleActivityRegion on which a traversing token will result in the termination of other tokens flowing in the InterruptibleActivityRegion.
+			<p>From package UML::Activities.</p>
+			*/
+			
 			virtual std::shared_ptr<Bag<uml::ActivityEdge>> getInterruptingEdge() const ;
 			
+			
 			/*!
-			 ActivityNodes immediately contained in the InterruptibleActivityRegion.
-			<p>From package UML::Activities.</p> */
+			ActivityNodes immediately contained in the InterruptibleActivityRegion.
+			<p>From package UML::Activities.</p>
+			*/
+			
 			virtual std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode>> getNode() const ;
+			
 			
 							
 			
@@ -90,14 +98,20 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 ActivityNodes immediately contained in the ActivityGroup.
-			<p>From package UML::Activities.</p> */
+			ActivityNodes immediately contained in the ActivityGroup.
+			<p>From package UML::Activities.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::ActivityNode>> getContainedNode() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************

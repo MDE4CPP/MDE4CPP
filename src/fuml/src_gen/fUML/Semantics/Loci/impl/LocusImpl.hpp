@@ -15,12 +15,12 @@
 
 #include "fUML/Semantics/Loci/impl/LociFactoryImpl.hpp"
 
-#include "ecore/impl/EObjectImpl.hpp"
+#include "ecore/impl/EModelElementImpl.hpp"
 
 //*********************************
 namespace fUML::Semantics::Loci 
 {
-	class LocusImpl :virtual public ecore::EObjectImpl,
+	class LocusImpl : virtual public ecore::EModelElementImpl,
 virtual public Locus 
 	{
 		public: 
@@ -45,32 +45,25 @@ virtual public Locus
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual void add(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue>  value) ;
 			
-			/*!
-			 */ 
+			 
 			virtual void assignExecutor(std::shared_ptr<fUML::Semantics::Loci::Executor>  executor) ;
 			
-			/*!
-			 */ 
+			 
 			virtual void assignFactory(std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory>  factory) ;
 			
-			/*!
-			 */ 
+			 
 			virtual bool conforms(std::shared_ptr<uml::Classifier>  type,std::shared_ptr<uml::Classifier>  classifier) ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> instantiate(std::shared_ptr<uml::Class>  type) ;
 			
-			/*!
-			 */ 
+			 
 			virtual void remove(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue>  value) ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue> > retrieveExtent(std::shared_ptr<uml::Classifier>  classifier) ;
 			
 			
@@ -83,24 +76,22 @@ virtual public Locus
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<fUML::Semantics::Loci::Executor > getExecutor() const ;
 			
-			/*!
-			 */
-			virtual void setExecutor(std::shared_ptr<fUML::Semantics::Loci::Executor> _executor_executor) ;
-			/*!
-			 */
+			
+			virtual void setExecutor(std::shared_ptr<fUML::Semantics::Loci::Executor> _executor) ;
+			
+			
 			virtual std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>> getExtensionalValues() const ;
 			
-			/*!
-			 */
+			
+			
 			virtual std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory > getFactory() const ;
 			
-			/*!
-			 */
-			virtual void setFactory(std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory> _factory_factory) ;
+			
+			virtual void setFactory(std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory> _factory) ;
+			
 							
 			
 			//*********************************

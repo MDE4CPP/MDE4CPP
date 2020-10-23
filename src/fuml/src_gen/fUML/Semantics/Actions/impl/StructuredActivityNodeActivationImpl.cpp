@@ -40,6 +40,8 @@
 
 #include <exception> // used in Persistence
 
+#include "uml/Action.hpp"
+
 #include "fUML/Semantics/Actions/ActionActivation.hpp"
 
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
@@ -82,19 +84,7 @@ using namespace fUML::Semantics::Actions;
 // Constructor / Destructor
 //*********************************
 StructuredActivityNodeActivationImpl::StructuredActivityNodeActivationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	//Init references
-	
+{	
 }
 
 StructuredActivityNodeActivationImpl::~StructuredActivityNodeActivationImpl()
@@ -104,14 +94,12 @@ StructuredActivityNodeActivationImpl::~StructuredActivityNodeActivationImpl()
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			StructuredActivityNodeActivationImpl::StructuredActivityNodeActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
-			:StructuredActivityNodeActivationImpl()
-			{
-			    m_group = par_group;
-			}
-
+StructuredActivityNodeActivationImpl::StructuredActivityNodeActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
+:StructuredActivityNodeActivationImpl()
+{
+	m_group = par_group;
+}
 
 
 StructuredActivityNodeActivationImpl::StructuredActivityNodeActivationImpl(const StructuredActivityNodeActivationImpl & obj):StructuredActivityNodeActivationImpl()
@@ -125,6 +113,8 @@ StructuredActivityNodeActivationImpl::StructuredActivityNodeActivationImpl(const
 
 	//copy references with no containment (soft copy)
 	
+	m_action  = obj.getAction();
+
 	m_group  = obj.getGroup();
 
 	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> _incomingEdges = obj.getIncomingEdges();
@@ -297,14 +287,14 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value> > StructuredActivityNodeActi
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<fUML::Semantics::Actions::PinActivation> pinActivation = std::dynamic_pointer_cast<fUML::Semantics::Actions::PinActivation>(this->getActivationGroup()->getNodeActivation(std::dynamic_pointer_cast<uml::ActivityNode>(pin)));
+	std::shared_ptr<fUML::Semantics::Actions::PinActivation> pinActivation = std::dynamic_pointer_cast<fUML::Semantics::Actions::PinActivation>(this->getActivationGroup()->getNodeActivation(pin));
 	std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > tokens = pinActivation->getTokens();
 
 	std::shared_ptr<Bag<fUML::Semantics::Values::Value> > values(new Bag<fUML::Semantics::Values::Value>());
     for (unsigned int i = 0; i < tokens->size(); i++) 
     {
     	std::shared_ptr<fUML::Semantics::Activities::Token> token = tokens->at(i);
-    	std::shared_ptr<fUML::Semantics::Values::Value> value = (std::dynamic_pointer_cast<fUML::Semantics::Activities::ObjectToken> (token))->getValue();
+    	std::shared_ptr<fUML::Semantics::Values::Value> value = token->getValue();
         if (value != nullptr) 
         {
             values->push_back(value);
@@ -420,23 +410,41 @@ void StructuredActivityNodeActivationImpl::terminateAll()
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference activationGroup
+*/
 std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > StructuredActivityNodeActivationImpl::getActivationGroup() const
 {
 //assert(m_activationGroup);
     return m_activationGroup;
 }
+
 void StructuredActivityNodeActivationImpl::setActivationGroup(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> _activationGroup)
 {
     m_activationGroup = _activationGroup;
 }
+
+
 
 //*********************************
 // Union Getter
 //*********************************
 std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> StructuredActivityNodeActivationImpl::getPinActivation() const
 {
+	if(m_pinActivation == nullptr)
+	{
+		/*Union*/
+		m_pinActivation.reset(new Union<fUML::Semantics::Actions::PinActivation>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_pinActivation - Union<fUML::Semantics::Actions::PinActivation>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_pinActivation;
 }
+
+
 
 
 std::shared_ptr<StructuredActivityNodeActivation> StructuredActivityNodeActivationImpl::getThisStructuredActivityNodeActivationPtr() const
@@ -465,7 +473,7 @@ Any StructuredActivityNodeActivationImpl::eGet(int featureID, bool resolve, bool
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::STRUCTUREDACTIVITYNODEACTIVATION_ATTRIBUTE_ACTIVATIONGROUP:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getActivationGroup())); //11210
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getActivationGroup())); //11211
 	}
 	return ActionActivationImpl::eGet(featureID, resolve, coreType);
 }
@@ -474,7 +482,7 @@ bool StructuredActivityNodeActivationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::STRUCTUREDACTIVITYNODEACTIVATION_ATTRIBUTE_ACTIVATIONGROUP:
-			return getActivationGroup() != nullptr; //11210
+			return getActivationGroup() != nullptr; //11211
 	}
 	return ActionActivationImpl::internalEIsSet(featureID);
 }
@@ -487,7 +495,7 @@ bool StructuredActivityNodeActivationImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> _activationGroup = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityNodeActivationGroup>(_temp);
-			setActivationGroup(_activationGroup); //11210
+			setActivationGroup(_activationGroup); //11211
 			return true;
 		}
 	}

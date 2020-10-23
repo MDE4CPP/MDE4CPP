@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class ImageImpl :virtual public ElementImpl, virtual public Image 
+	class ImageImpl : virtual public ElementImpl, virtual public Image 
 	{
 		public: 
 			ImageImpl(const ImageImpl & obj);
@@ -52,35 +52,44 @@ namespace uml
 			// Attributes Getter Setter
 			//*********************************
 			/*!
-			 This contains the serialization of the image according to the format. The value could represent a bitmap, image such as a GIF file, or drawing 'instructions' using a standard such as Scalable Vector Graphic (SVG) (which is XML based).
-			<p>From package UML::Packages.</p> */ 
+			This contains the serialization of the image according to the format. The value could represent a bitmap, image such as a GIF file, or drawing 'instructions' using a standard such as Scalable Vector Graphic (SVG) (which is XML based).
+			<p>From package UML::Packages.</p>
+			*/
+			 
 			virtual std::string getContent() const ;
 			
 			/*!
-			 This contains the serialization of the image according to the format. The value could represent a bitmap, image such as a GIF file, or drawing 'instructions' using a standard such as Scalable Vector Graphic (SVG) (which is XML based).
-			<p>From package UML::Packages.</p> */ 
+			This contains the serialization of the image according to the format. The value could represent a bitmap, image such as a GIF file, or drawing 'instructions' using a standard such as Scalable Vector Graphic (SVG) (which is XML based).
+			<p>From package UML::Packages.</p>
+			*/
+			 
 			virtual void setContent (std::string _content); 
-			
 			/*!
-			 This indicates the format of the content, which is how the string content should be interpreted. The following values are reserved: SVG, GIF, PNG, JPG, WMF, EMF, BMP. In addition the prefix 'MIME: ' is also reserved. This option can be used as an alternative to express the reserved values above, for example "SVG" could instead be expressed as "MIME: image/svg+xml".
-			<p>From package UML::Packages.</p> */ 
+			This indicates the format of the content, which is how the string content should be interpreted. The following values are reserved: SVG, GIF, PNG, JPG, WMF, EMF, BMP. In addition the prefix 'MIME: ' is also reserved. This option can be used as an alternative to express the reserved values above, for example "SVG" could instead be expressed as "MIME: image/svg+xml".
+			<p>From package UML::Packages.</p>
+			*/
+			 
 			virtual std::string getFormat() const ;
 			
 			/*!
-			 This indicates the format of the content, which is how the string content should be interpreted. The following values are reserved: SVG, GIF, PNG, JPG, WMF, EMF, BMP. In addition the prefix 'MIME: ' is also reserved. This option can be used as an alternative to express the reserved values above, for example "SVG" could instead be expressed as "MIME: image/svg+xml".
-			<p>From package UML::Packages.</p> */ 
+			This indicates the format of the content, which is how the string content should be interpreted. The following values are reserved: SVG, GIF, PNG, JPG, WMF, EMF, BMP. In addition the prefix 'MIME: ' is also reserved. This option can be used as an alternative to express the reserved values above, for example "SVG" could instead be expressed as "MIME: image/svg+xml".
+			<p>From package UML::Packages.</p>
+			*/
+			 
 			virtual void setFormat (std::string _format); 
-			
 			/*!
-			 This contains a location that can be used by a tool to locate the image as an alternative to embedding it in the stereotype.
-			<p>From package UML::Packages.</p> */ 
+			This contains a location that can be used by a tool to locate the image as an alternative to embedding it in the stereotype.
+			<p>From package UML::Packages.</p>
+			*/
+			 
 			virtual std::string getLocation() const ;
 			
 			/*!
-			 This contains a location that can be used by a tool to locate the image as an alternative to embedding it in the stereotype.
-			<p>From package UML::Packages.</p> */ 
+			This contains a location that can be used by a tool to locate the image as an alternative to embedding it in the stereotype.
+			<p>From package UML::Packages.</p>
+			*/
+			 
 			virtual void setLocation (std::string _location); 
-			
 			
 			
 			//*********************************
@@ -92,8 +101,10 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ; 
 			 
 			//*********************************

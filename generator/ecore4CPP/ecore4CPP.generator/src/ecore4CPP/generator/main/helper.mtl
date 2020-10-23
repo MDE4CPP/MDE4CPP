@@ -58,6 +58,7 @@
 */]
 [query public hasKey(aModelElement : EModelElement, aKey:String) : Boolean = if aModelElement.hasSourceGen() then aModelElement.SourceGen().details->select(key = aKey)->notEmpty() else false endif /]
 [query public valueKey(aModelElement : EModelElement, aKey:String) : String = aModelElement.SourceGen().details->select(key = aKey)->first().value /]
+[query public valueKeys(aModelElement : EModelElement, aKey:String) : Set(String) = Set{aModelElement.SourceGen().details->select(key = aKey).value} /]
 
 [query public containsContainerAttribute(aClass : EClass) : Boolean =  getContainsContainerAttribute()->notEmpty() /]
 [query public getContainsContainerAttribute(aClass : EClass) : OrderedSet(EReference) =  aClass.eReferences->select(isContainerAttribute())->sortedBy(name) /]
@@ -177,11 +178,41 @@
  * Add the doxygen documentation for .
  * @param aElement 
  */]
-[template public generateDokumentation(aElement : EModelElement)]
+[template public generateDocumentation(aElement : EModelElement)]
+[if (aElement.hasDocKey())]
 /*!
- [if (aElement.hasDocKey())][aElement.docDescription()/] [/if]
+[aElement.docDescription()/]
 */
+[/if]
 [/template]
+
+[**
+ * Check if element redefines another element
+*/]
+[query private hasRedefinitionAnnotation(aModelElement : EModelElement) : Boolean = eAnnotations->select(source = sourceNameRedefines())->notEmpty() /]
+[query public getDirectlyRedefinedElements(aModelElement : EModelElement) : OrderedSet(EObject) = 
+	if(aModelElement.hasRedefinitionAnnotation()) then 
+		eAnnotations->select(source = sourceNameRedefines())->first().references 
+	else OrderedSet{} 
+	endif /]
+[query public getAllRedefinedElements(aModelElement : EModelElement) : OrderedSet(EObject) = 
+	if(aModelElement.hasRedefinitionAnnotation()) then 
+		aModelElement.getDirectlyRedefinedElements()->addAll(aModelElement.getDirectlyRedefinedElements()->filter(EModelElement).getAllRedefinedElements())->flatten()->asOrderedSet() 
+	else OrderedSet{} 
+	endif/]
+[query private redefinesDirectly(anEModelElement : EModelElement, otherElement: EObject) : Boolean = 
+	not anEModelElement.getDirectlyRedefinedElements()->select(m : EObject | m = otherElement)->isEmpty()/]
+[query public redefines(anElement : EObject, otherElement: EObject) : Boolean = 
+	if(anElement.oclIsKindOf(EModelElement)) then 
+		if(anElement.oclAsType(EModelElement).hasRedefinitionAnnotation()) then 
+			if(anElement.oclAsType(EModelElement).redefinesDirectly(otherElement)) then true 
+			else not (anElement.oclAsType(EModelElement).getDirectlyRedefinedElements()->select(redefines(otherElement))->isEmpty())
+			endif 
+		else false 
+		endif 
+	else false 
+	endif/]
+
 
 [query public ignore(aModelElement : EModelElement) : Boolean = eAnnotations->select(source = sourceNameIgnore())->notEmpty()  /]
 

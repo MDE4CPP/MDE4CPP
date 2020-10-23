@@ -41,16 +41,16 @@
 #include "[aEClass.generateNamespacePath()/]/impl/[aEClass.name.toUpperFirst()/]Impl.hpp"[/for]
 
 [if (not(aClass.name='EObject') and (aClass.eSuperTypes->isEmpty()))]
-#include "ecore/impl/EObjectImpl.hpp"
+#include "ecore/impl/EModelElementImpl.hpp"
 [/if]
 
 //*********************************
 [comment namespace /]
 namespace [aClass.generateNamespaceDefinition()/] 
 {
-	class [className/] :[for (sClass : EClass | aClass.eSuperTypes->asOrderedSet()->sortedBy(name)) separator (', ') after (', ')]
+	class [className/] : [for (sClass : EClass | aClass.eSuperTypes->asOrderedSet()->sortedBy(name)) separator (', ') after (', ')]
 virtual public [ClassWithNamespace(aClass, sClass)/]Impl[/for][if (aClass.eSuperTypes->isEmpty())]
-[if (not(aClass.name='EObject'))]virtual public ecore::EObjectImpl,[/if]
+[if (not(aClass.name='EObject'))]virtual public ecore::EModelElementImpl,[/if]
 [/if]virtual public [aClass.name.toUpperFirst()/] 
 	{
 		public: 

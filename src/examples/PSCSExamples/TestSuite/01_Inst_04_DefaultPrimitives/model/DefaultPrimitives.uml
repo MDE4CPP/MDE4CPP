@@ -41,7 +41,7 @@
       </defaultValue>
     </ownedAttribute>
     <ownedAttribute xmi:id="_pJaLkFlAEeqCEpOYlPRuRQ" name="pEnum" type="_U-TkMFlAEeqCEpOYlPRuRQ">
-      <defaultValue xmi:type="uml:LiteralString" xmi:id="_eJ0cEFlBEeqCEpOYlPRuRQ" name="pEnumDefault" type="_U-TkMFlAEeqCEpOYlPRuRQ" value="e2"/>
+      <defaultValue xmi:type="uml:InstanceValue" xmi:id="_RQFGoAyEEeuSELmyjf9iew" name="pEnumDefault" type="_U-TkMFlAEeqCEpOYlPRuRQ" instance="_aDZ1wFlAEeqCEpOYlPRuRQ"/>
     </ownedAttribute>
   </packagedElement>
   <packagedElement xmi:type="uml:Enumeration" xmi:id="_U-TkMFlAEeqCEpOYlPRuRQ" name="E">

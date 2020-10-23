@@ -18,7 +18,7 @@
 //*********************************
 namespace ecore 
 {
-	class ENamedElementImpl :virtual public EModelElementImpl, virtual public ENamedElement 
+	class ENamedElementImpl : virtual public EModelElementImpl, virtual public ENamedElement 
 	{
 		public: 
 			ENamedElementImpl(const ENamedElementImpl & obj);
@@ -51,14 +51,11 @@ namespace ecore
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::string getName() const ;
 			
-			/*!
-			 */ 
+			 
 			virtual void setName (std::string _name); 
-			
 			
 			
 			//*********************************
@@ -69,8 +66,7 @@ namespace ecore
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const ; 
 			 
 			//*********************************

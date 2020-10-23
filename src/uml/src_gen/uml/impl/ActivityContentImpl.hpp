@@ -14,12 +14,12 @@
 #include "../ActivityContent.hpp"
 
 
-#include "ecore/impl/EObjectImpl.hpp"
+#include "ecore/impl/EModelElementImpl.hpp"
 
 //*********************************
 namespace uml 
 {
-	class ActivityContentImpl :virtual public ecore::EObjectImpl,
+	class ActivityContentImpl : virtual public ecore::EModelElementImpl,
 virtual public ActivityContent 
 	{
 		public: 
@@ -44,8 +44,7 @@ virtual public ActivityContent
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<uml::Activity> containingActivity() ;
 			
 			

@@ -19,7 +19,7 @@
 //*********************************
 namespace fUML::Semantics::StructuredClassifiers 
 {
-	class DispatchStrategyImpl :virtual public fUML::Semantics::Loci::SemanticStrategyImpl, virtual public DispatchStrategy 
+	class DispatchStrategyImpl : virtual public fUML::Semantics::Loci::SemanticStrategyImpl, virtual public DispatchStrategy 
 	{
 		public: 
 			DispatchStrategyImpl(const DispatchStrategyImpl & obj);
@@ -43,16 +43,13 @@ namespace fUML::Semantics::StructuredClassifiers
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> dispatch(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object>  object,std::shared_ptr<uml::Operation>  operation) ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::string getName() ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<uml::Behavior> retrieveMethod(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object>  object,std::shared_ptr<uml::Operation>  operation) ;
 			
 			

@@ -86,31 +86,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 ObjectNodeImpl::ObjectNodeImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		m_inState.reset(new Bag<uml::State>());
-	
-	
-
-	
-
-	
-
-	//Init references
-	
-	
-
-	
-
-	
+{	
 }
 
 ObjectNodeImpl::~ObjectNodeImpl()
@@ -120,41 +96,36 @@ ObjectNodeImpl::~ObjectNodeImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+ObjectNodeImpl::ObjectNodeImpl(std::weak_ptr<uml::Activity > par_activity)
+:ObjectNodeImpl()
+{
+	m_activity = par_activity;
+	m_owner = par_activity;
+}
 
 //Additional constructor for the containments back reference
-			ObjectNodeImpl::ObjectNodeImpl(std::weak_ptr<uml::Activity > par_activity)
-			:ObjectNodeImpl()
-			{
-			    m_activity = par_activity;
-				m_owner = par_activity;
-			}
-
-
-//Additional constructor for the containments back reference
-			ObjectNodeImpl::ObjectNodeImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
-			:ObjectNodeImpl()
-			{
-			    m_inStructuredNode = par_inStructuredNode;
-				m_owner = par_inStructuredNode;
-			}
-
+ObjectNodeImpl::ObjectNodeImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
+:ObjectNodeImpl()
+{
+	m_inStructuredNode = par_inStructuredNode;
+	m_owner = par_inStructuredNode;
+}
 
 //Additional constructor for the containments back reference
-			ObjectNodeImpl::ObjectNodeImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:ObjectNodeImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
+ObjectNodeImpl::ObjectNodeImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:ObjectNodeImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			ObjectNodeImpl::ObjectNodeImpl(std::weak_ptr<uml::Element > par_owner)
-			:ObjectNodeImpl()
-			{
-			    m_owner = par_owner;
-			}
-
+ObjectNodeImpl::ObjectNodeImpl(std::weak_ptr<uml::Element > par_owner)
+:ObjectNodeImpl()
+{
+	m_owner = par_owner;
+}
 
 
 ObjectNodeImpl::ObjectNodeImpl(const ObjectNodeImpl & obj):ObjectNodeImpl()
@@ -273,14 +244,27 @@ std::shared_ptr<ecore::EClass> ObjectNodeImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute isControlType
+*/
+bool ObjectNodeImpl::getIsControlType() const 
+{
+	return m_isControlType;
+}
+
 void ObjectNodeImpl::setIsControlType(bool _isControlType)
 {
 	m_isControlType = _isControlType;
 } 
 
-bool ObjectNodeImpl::getIsControlType() const 
+
+
+/*
+Getter & Setter for attribute ordering
+*/
+uml::ObjectNodeOrderingKind ObjectNodeImpl::getOrdering() const 
 {
-	return m_isControlType;
+	return m_ordering;
 }
 
 void ObjectNodeImpl::setOrdering(uml::ObjectNodeOrderingKind _ordering)
@@ -288,10 +272,7 @@ void ObjectNodeImpl::setOrdering(uml::ObjectNodeOrderingKind _ordering)
 	m_ordering = _ordering;
 } 
 
-uml::ObjectNodeOrderingKind ObjectNodeImpl::getOrdering() const 
-{
-	return m_ordering;
-}
+
 
 //*********************************
 // Operations
@@ -317,52 +298,111 @@ bool ObjectNodeImpl::selection_behavior(Any diagnostics,std::map <   Any, Any > 
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference inState
+*/
 std::shared_ptr<Bag<uml::State>> ObjectNodeImpl::getInState() const
 {
+	if(m_inState == nullptr)
+	{
+		m_inState.reset(new Bag<uml::State>());
+		
+		
+	}
 
     return m_inState;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference selection
+*/
 std::shared_ptr<uml::Behavior > ObjectNodeImpl::getSelection() const
 {
 
     return m_selection;
 }
+
 void ObjectNodeImpl::setSelection(std::shared_ptr<uml::Behavior> _selection)
 {
     m_selection = _selection;
 }
 
+
+
+/*
+Getter & Setter for reference upperBound
+*/
 std::shared_ptr<uml::ValueSpecification > ObjectNodeImpl::getUpperBound() const
 {
 
     return m_upperBound;
 }
+
 void ObjectNodeImpl::setUpperBound(std::shared_ptr<uml::ValueSpecification> _upperBound)
 {
     m_upperBound = _upperBound;
 }
+
+
 
 //*********************************
 // Union Getter
 //*********************************
 std::shared_ptr<Union<uml::ActivityGroup>> ObjectNodeImpl::getInGroup() const
 {
+	if(m_inGroup == nullptr)
+	{
+		/*Union*/
+		m_inGroup.reset(new Union<uml::ActivityGroup>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_inGroup - Union<uml::ActivityGroup>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_inGroup;
 }
+
 std::shared_ptr<Union<uml::Element>> ObjectNodeImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > ObjectNodeImpl::getOwner() const
 {
 	return m_owner;
 }
+
 std::shared_ptr<Union<uml::RedefinableElement>> ObjectNodeImpl::getRedefinedElement() const
 {
+	if(m_redefinedElement == nullptr)
+	{
+		/*Union*/
+		m_redefinedElement.reset(new Union<uml::RedefinableElement>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_redefinedElement - Union<uml::RedefinableElement>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_redefinedElement;
 }
+
+
 
 
 std::shared_ptr<ObjectNode> ObjectNodeImpl::getThisObjectNodePtr() const

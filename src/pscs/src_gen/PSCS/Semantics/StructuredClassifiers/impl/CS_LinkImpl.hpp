@@ -19,7 +19,7 @@
 //*********************************
 namespace PSCS::Semantics::StructuredClassifiers 
 {
-	class CS_LinkImpl :virtual public fUML::Semantics::StructuredClassifiers::LinkImpl, virtual public CS_Link 
+	class CS_LinkImpl : virtual public fUML::Semantics::StructuredClassifiers::LinkImpl, virtual public CS_Link 
 	{
 		public: 
 			CS_LinkImpl(const CS_LinkImpl & obj);
@@ -43,12 +43,10 @@ namespace PSCS::Semantics::StructuredClassifiers
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<uml::StructuralFeature> getFeature(std::shared_ptr<fUML::Semantics::Values::Value>  value) ;
 			
-			/*!
-			 */ 
+			 
 			virtual bool hasValueForAFeature(std::shared_ptr<fUML::Semantics::Values::Value>  value) ;
 			
 			

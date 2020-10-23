@@ -65,8 +65,7 @@ namespace uml
 //*********************************
 namespace PSCS::Semantics::Values 
 {
-	/*!
-	 */
+	
 	class CS_OpaqueExpressionEvaluation:virtual public fUML::Semantics::Values::Evaluation
 	{
 		public:
@@ -86,12 +85,10 @@ namespace PSCS::Semantics::Values
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> evaluate() = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value> > executeExpressionBehavior() = 0;
 			
 			

@@ -76,38 +76,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 ParameterImpl::ParameterImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	
-	
-	
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	
-
-	
-
-		m_parameterSet.reset(new Bag<uml::ParameterSet>());
-	
-	
-
-	//Init references
-	
-
-	
-
-	
-
-	
-	
+{	
 }
 
 ParameterImpl::~ParameterImpl()
@@ -117,50 +86,44 @@ ParameterImpl::~ParameterImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+ParameterImpl::ParameterImpl(std::weak_ptr<uml::Behavior > par_behavior)
+:ParameterImpl()
+{
+	m_behavior = par_behavior;
+	m_namespace = par_behavior;
+}
 
 //Additional constructor for the containments back reference
-			ParameterImpl::ParameterImpl(std::weak_ptr<uml::Behavior > par_behavior)
-			:ParameterImpl()
-			{
-			    m_behavior = par_behavior;
-				m_namespace = par_behavior;
-			}
-
-
-//Additional constructor for the containments back reference
-			ParameterImpl::ParameterImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:ParameterImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
+ParameterImpl::ParameterImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:ParameterImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			ParameterImpl::ParameterImpl(std::weak_ptr<uml::Operation > par_operation)
-			:ParameterImpl()
-			{
-			    m_operation = par_operation;
-				m_namespace = par_operation;
-			}
-
-
-//Additional constructor for the containments back reference
-			ParameterImpl::ParameterImpl(std::weak_ptr<uml::Element > par_owner)
-			:ParameterImpl()
-			{
-			    m_owner = par_owner;
-			}
-
+ParameterImpl::ParameterImpl(std::weak_ptr<uml::Operation > par_operation)
+:ParameterImpl()
+{
+	m_operation = par_operation;
+	m_namespace = par_operation;
+}
 
 //Additional constructor for the containments back reference
-			ParameterImpl::ParameterImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
-			:ParameterImpl()
-			{
-			    m_owningTemplateParameter = par_owningTemplateParameter;
-				m_owner = par_owningTemplateParameter;
-			}
+ParameterImpl::ParameterImpl(std::weak_ptr<uml::Element > par_owner)
+:ParameterImpl()
+{
+	m_owner = par_owner;
+}
 
+//Additional constructor for the containments back reference
+ParameterImpl::ParameterImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+:ParameterImpl()
+{
+	m_owningTemplateParameter = par_owningTemplateParameter;
+	m_owner = par_owningTemplateParameter;
+}
 
 
 ParameterImpl::ParameterImpl(const ParameterImpl & obj):ParameterImpl()
@@ -265,14 +228,27 @@ std::shared_ptr<ecore::EClass> ParameterImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute default
+*/
+std::string ParameterImpl::getDefault() const 
+{
+	return m_default;
+}
+
 void ParameterImpl::setDefault(std::string _default)
 {
 	m_default = _default;
 } 
 
-std::string ParameterImpl::getDefault() const 
+
+
+/*
+Getter & Setter for attribute direction
+*/
+uml::ParameterDirectionKind ParameterImpl::getDirection() const 
 {
-	return m_default;
+	return m_direction;
 }
 
 void ParameterImpl::setDirection(uml::ParameterDirectionKind _direction)
@@ -280,9 +256,14 @@ void ParameterImpl::setDirection(uml::ParameterDirectionKind _direction)
 	m_direction = _direction;
 } 
 
-uml::ParameterDirectionKind ParameterImpl::getDirection() const 
+
+
+/*
+Getter & Setter for attribute effect
+*/
+uml::ParameterEffectKind ParameterImpl::getEffect() const 
 {
-	return m_direction;
+	return m_effect;
 }
 
 void ParameterImpl::setEffect(uml::ParameterEffectKind _effect)
@@ -290,9 +271,14 @@ void ParameterImpl::setEffect(uml::ParameterEffectKind _effect)
 	m_effect = _effect;
 } 
 
-uml::ParameterEffectKind ParameterImpl::getEffect() const 
+
+
+/*
+Getter & Setter for attribute isException
+*/
+bool ParameterImpl::getIsException() const 
 {
-	return m_effect;
+	return m_isException;
 }
 
 void ParameterImpl::setIsException(bool _isException)
@@ -300,9 +286,14 @@ void ParameterImpl::setIsException(bool _isException)
 	m_isException = _isException;
 } 
 
-bool ParameterImpl::getIsException() const 
+
+
+/*
+Getter & Setter for attribute isStream
+*/
+bool ParameterImpl::getIsStream() const 
 {
-	return m_isException;
+	return m_isStream;
 }
 
 void ParameterImpl::setIsStream(bool _isStream)
@@ -310,10 +301,7 @@ void ParameterImpl::setIsStream(bool _isStream)
 	m_isStream = _isStream;
 } 
 
-bool ParameterImpl::getIsStream() const 
-{
-	return m_isStream;
-}
+
 
 //*********************************
 // Operations
@@ -405,26 +393,41 @@ void ParameterImpl::unsetDefault()
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference behavior
+*/
 std::weak_ptr<uml::Behavior > ParameterImpl::getBehavior() const
 {
 
     return m_behavior;
 }
+
 void ParameterImpl::setBehavior(std::shared_ptr<uml::Behavior> _behavior)
 {
     m_behavior = _behavior;
 }
 
+
+
+/*
+Getter & Setter for reference defaultValue
+*/
 std::shared_ptr<uml::ValueSpecification > ParameterImpl::getDefaultValue() const
 {
 
     return m_defaultValue;
 }
+
 void ParameterImpl::setDefaultValue(std::shared_ptr<uml::ValueSpecification> _defaultValue)
 {
     m_defaultValue = _defaultValue;
 }
 
+
+
+/*
+Getter & Setter for reference operation
+*/
 std::weak_ptr<uml::Operation > ParameterImpl::getOperation() const
 {
 
@@ -432,11 +435,26 @@ std::weak_ptr<uml::Operation > ParameterImpl::getOperation() const
 }
 
 
+
+
+
+/*
+Getter & Setter for reference parameterSet
+*/
 std::shared_ptr<Bag<uml::ParameterSet>> ParameterImpl::getParameterSet() const
 {
+	if(m_parameterSet == nullptr)
+	{
+		m_parameterSet.reset(new Bag<uml::ParameterSet>());
+		
+		
+	}
 
     return m_parameterSet;
 }
+
+
+
 
 
 //*********************************
@@ -446,14 +464,28 @@ std::weak_ptr<uml::Namespace > ParameterImpl::getNamespace() const
 {
 	return m_namespace;
 }
+
 std::shared_ptr<Union<uml::Element>> ParameterImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > ParameterImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<Parameter> ParameterImpl::getThisParameterPtr() const

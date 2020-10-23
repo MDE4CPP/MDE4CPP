@@ -34,6 +34,7 @@
 #include "fUML/Semantics/Loci/Locus.hpp"
 #include "fUML/Semantics/Actions/PinActivation.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
+#include "uml/UmlPackage.hpp"
 #include "uml/Action.hpp"
 #include "uml/ActivityEdge.hpp"
 #include "uml/ActivityNode.hpp"
@@ -79,44 +80,7 @@ using namespace fUML::Semantics::Activities;
 // Constructor / Destructor
 //*********************************
 ActivityNodeActivationGroupImpl::ActivityNodeActivationGroupImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	
-
-		m_edgeInstances.reset(new Bag<fUML::Semantics::Activities::ActivityEdgeInstance>());
-	
-	
-
-		m_nodeActivations.reset(new Bag<fUML::Semantics::Activities::ActivityNodeActivation>());
-	
-	
-
-		m_suspendedActivations.reset(new Bag<fUML::Semantics::Activities::ActivityNodeActivation>());
-	
-	
-
-	//Init references
-	
-
-	
-
-	
-	
-
-	
-	
-
-	
-	
+{	
 }
 
 ActivityNodeActivationGroupImpl::~ActivityNodeActivationGroupImpl()
@@ -126,22 +90,19 @@ ActivityNodeActivationGroupImpl::~ActivityNodeActivationGroupImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+ActivityNodeActivationGroupImpl::ActivityNodeActivationGroupImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityExecution > par_activityExecution)
+:ActivityNodeActivationGroupImpl()
+{
+	m_activityExecution = par_activityExecution;
+}
 
 //Additional constructor for the containments back reference
-			ActivityNodeActivationGroupImpl::ActivityNodeActivationGroupImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityExecution > par_activityExecution)
-			:ActivityNodeActivationGroupImpl()
-			{
-			    m_activityExecution = par_activityExecution;
-			}
-
-
-//Additional constructor for the containments back reference
-			ActivityNodeActivationGroupImpl::ActivityNodeActivationGroupImpl(std::weak_ptr<fUML::Semantics::Actions::StructuredActivityNodeActivation > par_containingNodeActivation)
-			:ActivityNodeActivationGroupImpl()
-			{
-			    m_containingNodeActivation = par_containingNodeActivation;
-			}
-
+ActivityNodeActivationGroupImpl::ActivityNodeActivationGroupImpl(std::weak_ptr<fUML::Semantics::Actions::StructuredActivityNodeActivation > par_containingNodeActivation)
+:ActivityNodeActivationGroupImpl()
+{
+	m_containingNodeActivation = par_containingNodeActivation;
+}
 
 
 ActivityNodeActivationGroupImpl::ActivityNodeActivationGroupImpl(const ActivityNodeActivationGroupImpl & obj):ActivityNodeActivationGroupImpl()
@@ -181,9 +142,7 @@ ActivityNodeActivationGroupImpl::ActivityNodeActivationGroupImpl(const ActivityN
 	#endif
 
 	
-	
 
-	
 	
 }
 
@@ -337,12 +296,19 @@ std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> ActivityNod
 	//generated from body annotation
 	std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> activation = nullptr;
 
-	std::shared_ptr<uml::Pin> pin = std::dynamic_pointer_cast<uml::Pin> (node);
-	auto containingNodeActivation=this->getContainingNodeActivation().lock();
-    if ((containingNodeActivation) && (pin))
-    {
-        activation = containingNodeActivation->retrievePinActivation(pin);
-    }
+    int nodeMetaElementID = node->getMetaElementID();
+    if ((nodeMetaElementID == uml::UmlPackage::PIN_CLASS) || 
+		(nodeMetaElementID == uml::UmlPackage::INPUTPIN_CLASS) ||
+		(nodeMetaElementID == uml::UmlPackage::OUTPUTPIN_CLASS) ||
+		(nodeMetaElementID == uml::UmlPackage::ACTIONINPUTPIN_CLASS) ||
+		(nodeMetaElementID == uml::UmlPackage::VALUEPIN_CLASS))
+	{
+			auto containingNodeActivation=this->getContainingNodeActivation().lock();
+			if(containingNodeActivation)
+			{
+				activation = containingNodeActivation->retrievePinActivation(std::dynamic_pointer_cast<uml::Pin>(node));
+			}
+  	  }
 
     if (activation == nullptr) 
     {
@@ -616,50 +582,99 @@ void ActivityNodeActivationGroupImpl::terminateAll()
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference activityExecution
+*/
 std::weak_ptr<fUML::Semantics::Activities::ActivityExecution > ActivityNodeActivationGroupImpl::getActivityExecution() const
 {
 
     return m_activityExecution;
 }
+
 void ActivityNodeActivationGroupImpl::setActivityExecution(std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> _activityExecution)
 {
     m_activityExecution = _activityExecution;
 }
 
+
+
+/*
+Getter & Setter for reference containingNodeActivation
+*/
 std::weak_ptr<fUML::Semantics::Actions::StructuredActivityNodeActivation > ActivityNodeActivationGroupImpl::getContainingNodeActivation() const
 {
 
     return m_containingNodeActivation;
 }
+
 void ActivityNodeActivationGroupImpl::setContainingNodeActivation(std::shared_ptr<fUML::Semantics::Actions::StructuredActivityNodeActivation> _containingNodeActivation)
 {
     m_containingNodeActivation = _containingNodeActivation;
 }
 
+
+
+/*
+Getter & Setter for reference edgeInstances
+*/
 std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> ActivityNodeActivationGroupImpl::getEdgeInstances() const
 {
+	if(m_edgeInstances == nullptr)
+	{
+		m_edgeInstances.reset(new Bag<fUML::Semantics::Activities::ActivityEdgeInstance>());
+		
+		
+	}
 
     return m_edgeInstances;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference nodeActivations
+*/
 std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>> ActivityNodeActivationGroupImpl::getNodeActivations() const
 {
+	if(m_nodeActivations == nullptr)
+	{
+		m_nodeActivations.reset(new Bag<fUML::Semantics::Activities::ActivityNodeActivation>());
+		
+		
+	}
 
     return m_nodeActivations;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference suspendedActivations
+*/
 std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>> ActivityNodeActivationGroupImpl::getSuspendedActivations() const
 {
+	if(m_suspendedActivations == nullptr)
+	{
+		m_suspendedActivations.reset(new Bag<fUML::Semantics::Activities::ActivityNodeActivation>());
+		
+		
+	}
 
     return m_suspendedActivations;
 }
 
 
+
+
+
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<ActivityNodeActivationGroup> ActivityNodeActivationGroupImpl::getThisActivityNodeActivationGroupPtr() const

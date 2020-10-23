@@ -37,6 +37,11 @@ namespace fUML
 }
 
 //Forward Declaration for used types
+namespace uml 
+{
+	class Action;
+}
+
 namespace fUML::Semantics::Activities 
 {
 	class ActivityEdgeInstance;
@@ -96,8 +101,7 @@ namespace fUML::Semantics::Activities
 //*********************************
 namespace fUML::Semantics::Actions 
 {
-	/*!
-	 */
+	
 	class ConditionalNodeActivation:virtual public StructuredActivityNodeActivation
 	{
 		public:
@@ -117,16 +121,13 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<fUML::Semantics::Actions::ClauseActivation> getClauseActivation(std::shared_ptr<uml::Clause>  clause) = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual void runTest(std::shared_ptr<uml::Clause>  clause) = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual void selectBody(std::shared_ptr<uml::Clause>  clause) = 0;
 			
 			
@@ -137,13 +138,13 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Bag<fUML::Semantics::Actions::ClauseActivation>> getClauseActivations() const = 0;
 			
-			/*!
-			 */
+			
+			
 			virtual std::shared_ptr<Bag<uml::Clause>> getSelectedClauses() const = 0;
+			
 			
 			
 
@@ -156,20 +157,15 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Reference Members
 			//*********************************
-			/*!
-			 */
-			std::shared_ptr<Bag<fUML::Semantics::Actions::ClauseActivation>> m_clauseActivations;
-			/*!
-			 */
-			std::shared_ptr<Bag<uml::Clause>> m_selectedClauses;
 			
+			mutable std::shared_ptr<Bag<fUML::Semantics::Actions::ClauseActivation>> m_clauseActivations;
+			mutable std::shared_ptr<Bag<uml::Clause>> m_selectedClauses;
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> getPinActivation() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

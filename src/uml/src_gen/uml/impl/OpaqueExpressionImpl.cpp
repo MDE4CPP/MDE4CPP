@@ -74,24 +74,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 OpaqueExpressionImpl::OpaqueExpressionImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	m_body.reset(new Bag<std::string>());
-	m_language.reset(new Bag<std::string>());
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	
-
-	//Init references
-	
-
-	
+{	
 }
 
 OpaqueExpressionImpl::~OpaqueExpressionImpl()
@@ -101,59 +84,52 @@ OpaqueExpressionImpl::~OpaqueExpressionImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+OpaqueExpressionImpl::OpaqueExpressionImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:OpaqueExpressionImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			OpaqueExpressionImpl::OpaqueExpressionImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:OpaqueExpressionImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
+OpaqueExpressionImpl::OpaqueExpressionImpl(std::weak_ptr<uml::Element > par_owner)
+:OpaqueExpressionImpl()
+{
+	m_owner = par_owner;
+}
 
 //Additional constructor for the containments back reference
-			OpaqueExpressionImpl::OpaqueExpressionImpl(std::weak_ptr<uml::Element > par_owner)
-			:OpaqueExpressionImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-//Additional constructor for the containments back reference
-			OpaqueExpressionImpl::OpaqueExpressionImpl(std::weak_ptr<uml::Package > par_owningPackage)
-			:OpaqueExpressionImpl()
-			{
-			    m_owningPackage = par_owningPackage;
-				m_namespace = par_owningPackage;
-			}
-
+OpaqueExpressionImpl::OpaqueExpressionImpl(std::weak_ptr<uml::Package > par_owningPackage)
+:OpaqueExpressionImpl()
+{
+	m_owningPackage = par_owningPackage;
+	m_namespace = par_owningPackage;
+}
 
 //Additional constructor for the containments back reference
-			OpaqueExpressionImpl::OpaqueExpressionImpl(std::weak_ptr<uml::Slot > par_owningSlot)
-			:OpaqueExpressionImpl()
-			{
-			    m_owningSlot = par_owningSlot;
-				m_owner = par_owningSlot;
-			}
-
-
-//Additional constructor for the containments back reference
-			OpaqueExpressionImpl::OpaqueExpressionImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
-			:OpaqueExpressionImpl()
-			{
-			    m_owningTemplateParameter = par_owningTemplateParameter;
-				m_owner = par_owningTemplateParameter;
-			}
-
+OpaqueExpressionImpl::OpaqueExpressionImpl(std::weak_ptr<uml::Slot > par_owningSlot)
+:OpaqueExpressionImpl()
+{
+	m_owningSlot = par_owningSlot;
+	m_owner = par_owningSlot;
+}
 
 //Additional constructor for the containments back reference
-			OpaqueExpressionImpl::OpaqueExpressionImpl(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction)
-			:OpaqueExpressionImpl()
-			{
-			    m_valueSpecificationAction = par_valueSpecificationAction;
-				m_owner = par_valueSpecificationAction;
-			}
+OpaqueExpressionImpl::OpaqueExpressionImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+:OpaqueExpressionImpl()
+{
+	m_owningTemplateParameter = par_owningTemplateParameter;
+	m_owner = par_owningTemplateParameter;
+}
 
+//Additional constructor for the containments back reference
+OpaqueExpressionImpl::OpaqueExpressionImpl(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction)
+:OpaqueExpressionImpl()
+{
+	m_valueSpecificationAction = par_valueSpecificationAction;
+	m_owner = par_valueSpecificationAction;
+}
 
 
 OpaqueExpressionImpl::OpaqueExpressionImpl(const OpaqueExpressionImpl & obj):OpaqueExpressionImpl()
@@ -229,19 +205,37 @@ std::shared_ptr<ecore::EClass> OpaqueExpressionImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
-
-
+/*
+Getter & Setter for attribute body
+*/
 std::shared_ptr<Bag<std::string> > OpaqueExpressionImpl::getBody() const 
 {
+	if(m_body == nullptr)
+	{
+		m_body.reset(new Bag<std::string>());
+	}
 	return m_body;
 }
 
 
 
+
+
+/*
+Getter & Setter for attribute language
+*/
 std::shared_ptr<Bag<std::string> > OpaqueExpressionImpl::getLanguage() const 
 {
+	if(m_language == nullptr)
+	{
+		m_language.reset(new Bag<std::string>());
+	}
 	return m_language;
 }
+
+
+
+
 
 //*********************************
 // Operations
@@ -293,21 +287,33 @@ int OpaqueExpressionImpl::value()
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference behavior
+*/
 std::shared_ptr<uml::Behavior > OpaqueExpressionImpl::getBehavior() const
 {
 
     return m_behavior;
 }
+
 void OpaqueExpressionImpl::setBehavior(std::shared_ptr<uml::Behavior> _behavior)
 {
     m_behavior = _behavior;
 }
 
+
+
+/*
+Getter & Setter for reference result
+*/
 std::shared_ptr<uml::Parameter > OpaqueExpressionImpl::getResult() const
 {
 
     return m_result;
 }
+
+
+
 
 
 //*********************************
@@ -317,14 +323,28 @@ std::weak_ptr<uml::Namespace > OpaqueExpressionImpl::getNamespace() const
 {
 	return m_namespace;
 }
+
 std::shared_ptr<Union<uml::Element>> OpaqueExpressionImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > OpaqueExpressionImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<OpaqueExpression> OpaqueExpressionImpl::getThisOpaqueExpressionPtr() const

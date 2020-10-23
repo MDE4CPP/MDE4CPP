@@ -74,62 +74,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 ConnectorImpl::ConnectorImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		m_contract.reset(new Bag<uml::Behavior>());
-	
-	
-
-		/*Subset*/
-		m_end.reset(new Subset<uml::ConnectorEnd, uml::Element >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_end - Subset<uml::ConnectorEnd, uml::Element >()" << std::endl;
-		#endif
-	
-	
-
-		/*Subset*/
-		m_redefinedConnector.reset(new Subset<uml::Connector, uml::RedefinableElement >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_redefinedConnector - Subset<uml::Connector, uml::RedefinableElement >()" << std::endl;
-		#endif
-	
-	
-
-	
-
-	
-
-	//Init references
-	
-	
-
-		/*Subset*/
-		m_end->initSubset(m_ownedElement);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_end - Subset<uml::ConnectorEnd, uml::Element >(m_ownedElement)" << std::endl;
-		#endif
-	
-	
-
-		/*Subset*/
-		m_redefinedConnector->initSubset(m_redefinedElement);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_redefinedConnector - Subset<uml::Connector, uml::RedefinableElement >(m_redefinedElement)" << std::endl;
-		#endif
-	
-	
-
-	
-
-	
+{	
 }
 
 ConnectorImpl::~ConnectorImpl()
@@ -139,32 +84,28 @@ ConnectorImpl::~ConnectorImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+ConnectorImpl::ConnectorImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:ConnectorImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			ConnectorImpl::ConnectorImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:ConnectorImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
+ConnectorImpl::ConnectorImpl(std::weak_ptr<uml::Element > par_owner)
+:ConnectorImpl()
+{
+	m_owner = par_owner;
+}
 
 //Additional constructor for the containments back reference
-			ConnectorImpl::ConnectorImpl(std::weak_ptr<uml::Element > par_owner)
-			:ConnectorImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-//Additional constructor for the containments back reference
-			ConnectorImpl::ConnectorImpl(std::weak_ptr<uml::StructuredClassifier > par_structuredClassifier)
-			:ConnectorImpl()
-			{
-			    m_structuredClassifier = par_structuredClassifier;
-				m_namespace = par_structuredClassifier;
-			}
-
+ConnectorImpl::ConnectorImpl(std::weak_ptr<uml::StructuredClassifier > par_structuredClassifier)
+:ConnectorImpl()
+{
+	m_structuredClassifier = par_structuredClassifier;
+	m_namespace = par_structuredClassifier;
+}
 
 
 ConnectorImpl::ConnectorImpl(const ConnectorImpl & obj):ConnectorImpl()
@@ -240,12 +181,11 @@ ConnectorImpl::ConnectorImpl(const ConnectorImpl & obj):ConnectorImpl()
 		std::cout << "Copying the Subset: " << "m_redefinedConnector" << std::endl;
 	#endif
 
-		/*Subset*/
-		m_end->initSubset(m_ownedElement);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_end - Subset<uml::ConnectorEnd, uml::Element >(m_ownedElement)" << std::endl;
-		#endif
-	
+	/*Subset*/
+	m_end->initSubset(getOwnedElement());
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Initialising value Subset: " << "m_end - Subset<uml::ConnectorEnd, uml::Element >(getOwnedElement())" << std::endl;
+	#endif
 	
 }
 
@@ -264,12 +204,17 @@ std::shared_ptr<ecore::EClass> ConnectorImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
-
-
+/*
+Getter & Setter for attribute kind
+*/
 uml::ConnectorKind ConnectorImpl::getKind() const 
 {
 	return m_kind;
 }
+
+
+
+
 
 //*********************************
 // Operations
@@ -295,74 +240,187 @@ bool ConnectorImpl::types(Any diagnostics,std::map <   Any, Any >  context)
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference contract
+*/
 std::shared_ptr<Bag<uml::Behavior>> ConnectorImpl::getContract() const
 {
+	if(m_contract == nullptr)
+	{
+		m_contract.reset(new Bag<uml::Behavior>());
+		
+		
+	}
 
     return m_contract;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference end
+*/
 std::shared_ptr<Subset<uml::ConnectorEnd, uml::Element>> ConnectorImpl::getEnd() const
 {
+	if(m_end == nullptr)
+	{
+		/*Subset*/
+		m_end.reset(new Subset<uml::ConnectorEnd, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_end - Subset<uml::ConnectorEnd, uml::Element >()" << std::endl;
+		#endif
+		
+		/*Subset*/
+		m_end->initSubset(getOwnedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_end - Subset<uml::ConnectorEnd, uml::Element >(getOwnedElement())" << std::endl;
+		#endif
+		
+	}
 //assert(m_end);
     return m_end;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference redefinedConnector
+*/
 std::shared_ptr<Subset<uml::Connector, uml::RedefinableElement>> ConnectorImpl::getRedefinedConnector() const
 {
+	if(m_redefinedConnector == nullptr)
+	{
+		/*Subset*/
+		m_redefinedConnector.reset(new Subset<uml::Connector, uml::RedefinableElement >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_redefinedConnector - Subset<uml::Connector, uml::RedefinableElement >()" << std::endl;
+		#endif
+		
+		/*Subset*/
+		m_redefinedConnector->initSubset(getRedefinedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_redefinedConnector - Subset<uml::Connector, uml::RedefinableElement >(getRedefinedElement())" << std::endl;
+		#endif
+		
+	}
 
     return m_redefinedConnector;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference structuredClassifier
+*/
 std::weak_ptr<uml::StructuredClassifier > ConnectorImpl::getStructuredClassifier() const
 {
 
     return m_structuredClassifier;
 }
+
 void ConnectorImpl::setStructuredClassifier(std::shared_ptr<uml::StructuredClassifier> _structuredClassifier)
 {
     m_structuredClassifier = _structuredClassifier;
 }
 
+
+
+/*
+Getter & Setter for reference type
+*/
 std::shared_ptr<uml::Association > ConnectorImpl::getType() const
 {
 
     return m_type;
 }
+
 void ConnectorImpl::setType(std::shared_ptr<uml::Association> _type)
 {
     m_type = _type;
 }
+
+
 
 //*********************************
 // Union Getter
 //*********************************
 std::shared_ptr<Union<uml::Classifier>> ConnectorImpl::getFeaturingClassifier() const
 {
+	if(m_featuringClassifier == nullptr)
+	{
+		/*Union*/
+		m_featuringClassifier.reset(new Union<uml::Classifier>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_featuringClassifier - Union<uml::Classifier>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_featuringClassifier;
 }
+
 std::weak_ptr<uml::Namespace > ConnectorImpl::getNamespace() const
 {
 	return m_namespace;
 }
+
 std::shared_ptr<Union<uml::Element>> ConnectorImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > ConnectorImpl::getOwner() const
 {
 	return m_owner;
 }
+
 std::shared_ptr<Union<uml::RedefinableElement>> ConnectorImpl::getRedefinedElement() const
 {
+	if(m_redefinedElement == nullptr)
+	{
+		/*Union*/
+		m_redefinedElement.reset(new Union<uml::RedefinableElement>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_redefinedElement - Union<uml::RedefinableElement>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_redefinedElement;
 }
+
 std::shared_ptr<Union<uml::Classifier>> ConnectorImpl::getRedefinitionContext() const
 {
+	if(m_redefinitionContext == nullptr)
+	{
+		/*Union*/
+		m_redefinitionContext.reset(new Union<uml::Classifier>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_redefinitionContext - Union<uml::Classifier>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_redefinitionContext;
 }
+
+
 
 
 std::shared_ptr<Connector> ConnectorImpl::getThisConnectorPtr() const

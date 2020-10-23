@@ -16,16 +16,17 @@
 
 [import ecore4CPP::generator::main::generateType /]
 [import ecore4CPP::generator::main::helper /]
+[import ecore4CPP::generator::main::helpers::IDHelper /]
 
 [**
  * Operation to generate create operation in model factory
 */]
 [template public generateClassCreate(aEClass : EClass,impl : Boolean) ? (aEClass.abstract=false)]
-virtual std::shared_ptr<[aEClass.generateTypeClass()/]> create[aEClass.name/](const int metaElementID=-1)[if (not generateObjectMonitoring())] const[/if] [abstractSufix(impl)/];
+virtual std::shared_ptr<[aEClass.generateTypeClass()/]> create[aEClass.name/](const int metaElementID = [aEClass.ePackage.name.toUpperFirst()/]Package::[aEClass.getStaticAttributeIDName()/])[if (not generateObjectMonitoring())] const[/if] [abstractSufix(impl)/];
 [let ref:OrderedSet(EReference) = aEClass.getAllContainers()]
 [for(aReference:EReference | ref->sortedBy(name))]
 //Add containing object
-virtual std::shared_ptr<[aEClass.generateTypeClass()/]> create[aEClass.name/]_in_[aReference.name.toUpperFirst()/]([aReference.generateReferenceType(true)/] par_[aReference.name/], const int metaElementID=-1)[if (not generateObjectMonitoring())] const[/if] [abstractSufix(impl)/];
+virtual std::shared_ptr<[aEClass.generateTypeClass()/]> create[aEClass.name/]_in_[aReference.name.toUpperFirst()/]([aReference.generateReferenceType(true)/] par_[aReference.name/], const int metaElementID = [aEClass.ePackage.name.toUpperFirst()/]Package::[aEClass.getStaticAttributeIDName()/])[if (not generateObjectMonitoring())] const[/if] [abstractSufix(impl)/];
 [/for]
 
 [/let]
@@ -100,7 +101,10 @@ void [aClass.name.toUpperFirst()/]Impl::[generateGetThisPtrPropertySetterName()/
 [/template]
 
 [template public generateStaticClassID(aEClass : EClass)]
+[comment] OLD class IDs
 static const unsigned int [aEClass.getStaticAttributeIDName()/] = [aEClass.getMyClassifierID()/];
+[/comment]
+static const unsigned long [aEClass.getStaticAttributeIDName()/] = [aEClass.transformType().generateID()/];
 static const unsigned int [aEClass.getStaticAttributeIDName()/]_FEATURE_COUNT = [aEClass.getFeatureCount()/];
 static const unsigned int [aEClass.getStaticAttributeIDName()/]_OPERATION_COUNT = [aEClass.getOperationCount()/];
 [/template]

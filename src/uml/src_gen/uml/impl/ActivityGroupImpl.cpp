@@ -70,61 +70,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 ActivityGroupImpl::ActivityGroupImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		/*Union*/
-		m_containedEdge.reset(new Union<uml::ActivityEdge>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_containedEdge - Union<uml::ActivityEdge>()" << std::endl;
-		#endif
-	
-	
-
-		/*Union*/
-		m_containedNode.reset(new Union<uml::ActivityNode>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_containedNode - Union<uml::ActivityNode>()" << std::endl;
-		#endif
-	
-	
-
-	
-
-		/*SubsetUnion*/
-		m_subgroup.reset(new SubsetUnion<uml::ActivityGroup, uml::Element >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_subgroup - SubsetUnion<uml::ActivityGroup, uml::Element >()" << std::endl;
-		#endif
-	
-	
-
-	
-
-	//Init references
-	
-	
-
-	
-	
-
-	
-
-		/*SubsetUnion*/
-		m_subgroup->initSubsetUnion(m_ownedElement);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_subgroup - SubsetUnion<uml::ActivityGroup, uml::Element >(m_ownedElement)" << std::endl;
-		#endif
-	
-	
-
-	
+{	
 }
 
 ActivityGroupImpl::~ActivityGroupImpl()
@@ -134,41 +80,36 @@ ActivityGroupImpl::~ActivityGroupImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+ActivityGroupImpl::ActivityGroupImpl(std::weak_ptr<uml::Activity > par_inActivity)
+:ActivityGroupImpl()
+{
+	m_inActivity = par_inActivity;
+	m_owner = par_inActivity;
+}
 
 //Additional constructor for the containments back reference
-			ActivityGroupImpl::ActivityGroupImpl(std::weak_ptr<uml::Activity > par_inActivity)
-			:ActivityGroupImpl()
-			{
-			    m_inActivity = par_inActivity;
-				m_owner = par_inActivity;
-			}
-
-
-//Additional constructor for the containments back reference
-			ActivityGroupImpl::ActivityGroupImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:ActivityGroupImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
+ActivityGroupImpl::ActivityGroupImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:ActivityGroupImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			ActivityGroupImpl::ActivityGroupImpl(std::weak_ptr<uml::Element > par_owner)
-			:ActivityGroupImpl()
-			{
-			    m_owner = par_owner;
-			}
-
+ActivityGroupImpl::ActivityGroupImpl(std::weak_ptr<uml::Element > par_owner)
+:ActivityGroupImpl()
+{
+	m_owner = par_owner;
+}
 
 //Additional constructor for the containments back reference
-			ActivityGroupImpl::ActivityGroupImpl(std::weak_ptr<uml::ActivityGroup > par_superGroup)
-			:ActivityGroupImpl()
-			{
-			    m_superGroup = par_superGroup;
-				m_owner = par_superGroup;
-			}
-
+ActivityGroupImpl::ActivityGroupImpl(std::weak_ptr<uml::ActivityGroup > par_superGroup)
+:ActivityGroupImpl()
+{
+	m_superGroup = par_superGroup;
+	m_owner = par_superGroup;
+}
 
 
 ActivityGroupImpl::ActivityGroupImpl(const ActivityGroupImpl & obj):ActivityGroupImpl()
@@ -255,22 +196,52 @@ bool ActivityGroupImpl::not_contained(Any diagnostics,std::map <   Any, Any >  c
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference containedEdge
+*/
 
 
 
 
 
 
+/*
+Getter & Setter for reference containedNode
+*/
+
+
+
+
+
+
+/*
+Getter & Setter for reference inActivity
+*/
 std::weak_ptr<uml::Activity > ActivityGroupImpl::getInActivity() const
 {
 
     return m_inActivity;
 }
+
 void ActivityGroupImpl::setInActivity(std::shared_ptr<uml::Activity> _inActivity)
 {
     m_inActivity = _inActivity;
 }
 
+
+
+/*
+Getter & Setter for reference subgroup
+*/
+
+
+
+
+
+
+/*
+Getter & Setter for reference superGroup
+*/
 
 
 
@@ -282,28 +253,80 @@ void ActivityGroupImpl::setInActivity(std::shared_ptr<uml::Activity> _inActivity
 //*********************************
 std::shared_ptr<Union<uml::ActivityEdge>> ActivityGroupImpl::getContainedEdge() const
 {
+	if(m_containedEdge == nullptr)
+	{
+		/*Union*/
+		m_containedEdge.reset(new Union<uml::ActivityEdge>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_containedEdge - Union<uml::ActivityEdge>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_containedEdge;
 }
+
 std::shared_ptr<Union<uml::ActivityNode>> ActivityGroupImpl::getContainedNode() const
 {
+	if(m_containedNode == nullptr)
+	{
+		/*Union*/
+		m_containedNode.reset(new Union<uml::ActivityNode>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_containedNode - Union<uml::ActivityNode>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_containedNode;
 }
+
 std::shared_ptr<Union<uml::Element>> ActivityGroupImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > ActivityGroupImpl::getOwner() const
 {
 	return m_owner;
 }
+
 std::shared_ptr<SubsetUnion<uml::ActivityGroup, uml::Element>> ActivityGroupImpl::getSubgroup() const
 {
+	if(m_subgroup == nullptr)
+	{
+		/*SubsetUnion*/
+		m_subgroup.reset(new SubsetUnion<uml::ActivityGroup, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_subgroup - SubsetUnion<uml::ActivityGroup, uml::Element >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_subgroup->initSubsetUnion(getOwnedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_subgroup - SubsetUnion<uml::ActivityGroup, uml::Element >(getOwnedElement())" << std::endl;
+		#endif
+		
+	}
 	return m_subgroup;
 }
+
 std::weak_ptr<uml::ActivityGroup > ActivityGroupImpl::getSuperGroup() const
 {
 	return m_superGroup;
 }
+
+
 
 
 std::shared_ptr<ActivityGroup> ActivityGroupImpl::getThisActivityGroupPtr() const

@@ -11,6 +11,7 @@
 #include <memory>
 
 #include "ecore/EFactory.hpp"
+#include "fUML/FUMLPackage.hpp"
 
 namespace fUML 
 {

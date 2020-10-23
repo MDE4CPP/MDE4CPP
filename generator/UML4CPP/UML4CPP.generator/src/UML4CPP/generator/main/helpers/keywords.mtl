@@ -48,6 +48,8 @@
 [query public sourceNamePrepareApplication(any : OclAny) : String = 'prepareApplication' /]	[** special source for generating class with main function /]
 [query public keyMainIncludes(any : OclAny) : String = 'sourceCodeIncludes'/]	[**	specifiy header to be included for main function /] 
 [query public keyMainSourceCode(any : OclAny) : String = 'sourceCodeMain'/]	[**	specifiy source code of main function /] 
+[query public keyIsMainActivity(any : OclAny) : String = 'activityMain' /] [** specifiy that an activity execution should be generated in main function instead of main source code /] 
+
 
 [**
  * keywords for source name and keys of include annoation

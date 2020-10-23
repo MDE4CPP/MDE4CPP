@@ -71,19 +71,7 @@ using namespace fUML::Semantics::Loci;
 // Constructor / Destructor
 //*********************************
 ExecutorImpl::ExecutorImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	//Init references
-	
+{	
 }
 
 ExecutorImpl::~ExecutorImpl()
@@ -93,14 +81,12 @@ ExecutorImpl::~ExecutorImpl()
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			ExecutorImpl::ExecutorImpl(std::weak_ptr<fUML::Semantics::Loci::Locus > par_locus)
-			:ExecutorImpl()
-			{
-			    m_locus = par_locus;
-			}
-
+ExecutorImpl::ExecutorImpl(std::weak_ptr<fUML::Semantics::Loci::Locus > par_locus)
+:ExecutorImpl()
+{
+	m_locus = par_locus;
+}
 
 
 ExecutorImpl::ExecutorImpl(const ExecutorImpl & obj):ExecutorImpl()
@@ -210,19 +196,26 @@ std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> ExecutorImpl:
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference locus
+*/
 std::weak_ptr<fUML::Semantics::Loci::Locus > ExecutorImpl::getLocus() const
 {
 
     return m_locus;
 }
+
 void ExecutorImpl::setLocus(std::shared_ptr<fUML::Semantics::Loci::Locus> _locus)
 {
     m_locus = _locus;
 }
 
+
+
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<Executor> ExecutorImpl::getThisExecutorPtr() const

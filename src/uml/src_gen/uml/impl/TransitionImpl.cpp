@@ -84,55 +84,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 TransitionImpl::TransitionImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-		/*Subset*/
-		m_trigger.reset(new Subset<uml::Trigger, uml::Element >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_trigger - Subset<uml::Trigger, uml::Element >()" << std::endl;
-		#endif
-	
-	
-
-	//Init references
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-		/*Subset*/
-		m_trigger->initSubset(m_ownedElement);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_trigger - Subset<uml::Trigger, uml::Element >(m_ownedElement)" << std::endl;
-		#endif
-	
-	
+{	
 }
 
 TransitionImpl::~TransitionImpl()
@@ -142,32 +94,28 @@ TransitionImpl::~TransitionImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+TransitionImpl::TransitionImpl(std::weak_ptr<uml::Region > par_container)
+:TransitionImpl()
+{
+	m_container = par_container;
+	m_namespace = par_container;
+}
 
 //Additional constructor for the containments back reference
-			TransitionImpl::TransitionImpl(std::weak_ptr<uml::Region > par_container)
-			:TransitionImpl()
-			{
-			    m_container = par_container;
-				m_namespace = par_container;
-			}
-
-
-//Additional constructor for the containments back reference
-			TransitionImpl::TransitionImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:TransitionImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
+TransitionImpl::TransitionImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:TransitionImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			TransitionImpl::TransitionImpl(std::weak_ptr<uml::Element > par_owner)
-			:TransitionImpl()
-			{
-			    m_owner = par_owner;
-			}
-
+TransitionImpl::TransitionImpl(std::weak_ptr<uml::Element > par_owner)
+:TransitionImpl()
+{
+	m_owner = par_owner;
+}
 
 
 TransitionImpl::TransitionImpl(const TransitionImpl & obj):TransitionImpl()
@@ -288,12 +236,11 @@ TransitionImpl::TransitionImpl(const TransitionImpl & obj):TransitionImpl()
 
 	
 
-		/*Subset*/
-		m_trigger->initSubset(m_ownedElement);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_trigger - Subset<uml::Trigger, uml::Element >(m_ownedElement)" << std::endl;
-		#endif
-	
+	/*Subset*/
+	m_trigger->initSubset(getOwnedElement());
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Initialising value Subset: " << "m_trigger - Subset<uml::Trigger, uml::Element >(getOwnedElement())" << std::endl;
+	#endif
 	
 }
 
@@ -312,15 +259,20 @@ std::shared_ptr<ecore::EClass> TransitionImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute kind
+*/
+uml::TransitionKind TransitionImpl::getKind() const 
+{
+	return m_kind;
+}
+
 void TransitionImpl::setKind(uml::TransitionKind _kind)
 {
 	m_kind = _kind;
 } 
 
-uml::TransitionKind TransitionImpl::getKind() const 
-{
-	return m_kind;
-}
+
 
 //*********************************
 // Operations
@@ -394,71 +346,128 @@ bool TransitionImpl::state_is_local(Any diagnostics,std::map <   Any, Any >  con
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference container
+*/
 std::weak_ptr<uml::Region > TransitionImpl::getContainer() const
 {
 //assert(m_container);
     return m_container;
 }
+
 void TransitionImpl::setContainer(std::shared_ptr<uml::Region> _container)
 {
     m_container = _container;
 }
 
+
+
+/*
+Getter & Setter for reference effect
+*/
 std::shared_ptr<uml::Behavior > TransitionImpl::getEffect() const
 {
 
     return m_effect;
 }
+
 void TransitionImpl::setEffect(std::shared_ptr<uml::Behavior> _effect)
 {
     m_effect = _effect;
 }
 
+
+
+/*
+Getter & Setter for reference guard
+*/
 std::shared_ptr<uml::Constraint > TransitionImpl::getGuard() const
 {
 
     return m_guard;
 }
+
 void TransitionImpl::setGuard(std::shared_ptr<uml::Constraint> _guard)
 {
     m_guard = _guard;
 }
 
+
+
+/*
+Getter & Setter for reference redefinedTransition
+*/
 std::shared_ptr<uml::Transition > TransitionImpl::getRedefinedTransition() const
 {
 
     return m_redefinedTransition;
 }
+
 void TransitionImpl::setRedefinedTransition(std::shared_ptr<uml::Transition> _redefinedTransition)
 {
     m_redefinedTransition = _redefinedTransition;
 }
 
+
+
+/*
+Getter & Setter for reference source
+*/
 std::shared_ptr<uml::Vertex > TransitionImpl::getSource() const
 {
 //assert(m_source);
     return m_source;
 }
+
 void TransitionImpl::setSource(std::shared_ptr<uml::Vertex> _source)
 {
     m_source = _source;
 }
 
+
+
+/*
+Getter & Setter for reference target
+*/
 std::shared_ptr<uml::Vertex > TransitionImpl::getTarget() const
 {
 //assert(m_target);
     return m_target;
 }
+
 void TransitionImpl::setTarget(std::shared_ptr<uml::Vertex> _target)
 {
     m_target = _target;
 }
 
+
+
+/*
+Getter & Setter for reference trigger
+*/
 std::shared_ptr<Subset<uml::Trigger, uml::Element>> TransitionImpl::getTrigger() const
 {
+	if(m_trigger == nullptr)
+	{
+		/*Subset*/
+		m_trigger.reset(new Subset<uml::Trigger, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_trigger - Subset<uml::Trigger, uml::Element >()" << std::endl;
+		#endif
+		
+		/*Subset*/
+		m_trigger->initSubset(getOwnedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_trigger - Subset<uml::Trigger, uml::Element >(getOwnedElement())" << std::endl;
+		#endif
+		
+	}
 
     return m_trigger;
 }
+
+
+
 
 
 //*********************************
@@ -466,28 +475,80 @@ std::shared_ptr<Subset<uml::Trigger, uml::Element>> TransitionImpl::getTrigger()
 //*********************************
 std::shared_ptr<Union<uml::NamedElement>> TransitionImpl::getMember() const
 {
+	if(m_member == nullptr)
+	{
+		/*Union*/
+		m_member.reset(new Union<uml::NamedElement>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_member - Union<uml::NamedElement>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_member;
 }
+
 std::weak_ptr<uml::Namespace > TransitionImpl::getNamespace() const
 {
 	return m_namespace;
 }
+
 std::shared_ptr<Union<uml::Element>> TransitionImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> TransitionImpl::getOwnedMember() const
 {
+	if(m_ownedMember == nullptr)
+	{
+		/*SubsetUnion*/
+		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_ownedMember->initSubsetUnion(getOwnedElement(),getMember());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >(getOwnedElement(),getMember())" << std::endl;
+		#endif
+		
+	}
 	return m_ownedMember;
 }
+
 std::weak_ptr<uml::Element > TransitionImpl::getOwner() const
 {
 	return m_owner;
 }
+
 std::shared_ptr<Union<uml::RedefinableElement>> TransitionImpl::getRedefinedElement() const
 {
+	if(m_redefinedElement == nullptr)
+	{
+		/*Union*/
+		m_redefinedElement.reset(new Union<uml::RedefinableElement>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_redefinedElement - Union<uml::RedefinableElement>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_redefinedElement;
 }
+
+
 
 
 std::shared_ptr<Transition> TransitionImpl::getThisTransitionPtr() const

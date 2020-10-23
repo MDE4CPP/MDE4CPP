@@ -57,54 +57,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 ClauseImpl::ClauseImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		m_body.reset(new Bag<uml::ExecutableNode>());
-	
-	
-
-		m_bodyOutput.reset(new Bag<uml::OutputPin>());
-	
-	
-
-	
-
-		m_predecessorClause.reset(new Bag<uml::Clause>());
-	
-	
-
-		m_successorClause.reset(new Bag<uml::Clause>());
-	
-	
-
-		m_test.reset(new Bag<uml::ExecutableNode>());
-	
-	
-
-	//Init references
-	
-	
-
-	
-	
-
-	
-
-	
-	
-
-	
-	
-
-	
-	
+{	
 }
 
 ClauseImpl::~ClauseImpl()
@@ -114,14 +67,12 @@ ClauseImpl::~ClauseImpl()
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			ClauseImpl::ClauseImpl(std::weak_ptr<uml::Element > par_owner)
-			:ClauseImpl()
-			{
-			    m_owner = par_owner;
-			}
-
+ClauseImpl::ClauseImpl(std::weak_ptr<uml::Element > par_owner)
+:ClauseImpl()
+{
+	m_owner = par_owner;
+}
 
 
 ClauseImpl::ClauseImpl(const ClauseImpl & obj):ClauseImpl()
@@ -206,49 +157,115 @@ bool ClauseImpl::test_and_body(Any diagnostics,std::map <   Any, Any >  context)
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference body
+*/
 std::shared_ptr<Bag<uml::ExecutableNode>> ClauseImpl::getBody() const
 {
+	if(m_body == nullptr)
+	{
+		m_body.reset(new Bag<uml::ExecutableNode>());
+		
+		
+	}
 
     return m_body;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference bodyOutput
+*/
 std::shared_ptr<Bag<uml::OutputPin>> ClauseImpl::getBodyOutput() const
 {
+	if(m_bodyOutput == nullptr)
+	{
+		m_bodyOutput.reset(new Bag<uml::OutputPin>());
+		
+		
+	}
 
     return m_bodyOutput;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference decider
+*/
 std::shared_ptr<uml::OutputPin > ClauseImpl::getDecider() const
 {
 //assert(m_decider);
     return m_decider;
 }
+
 void ClauseImpl::setDecider(std::shared_ptr<uml::OutputPin> _decider)
 {
     m_decider = _decider;
 }
 
+
+
+/*
+Getter & Setter for reference predecessorClause
+*/
 std::shared_ptr<Bag<uml::Clause>> ClauseImpl::getPredecessorClause() const
 {
+	if(m_predecessorClause == nullptr)
+	{
+		m_predecessorClause.reset(new Bag<uml::Clause>());
+		
+		
+	}
 
     return m_predecessorClause;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference successorClause
+*/
 std::shared_ptr<Bag<uml::Clause>> ClauseImpl::getSuccessorClause() const
 {
+	if(m_successorClause == nullptr)
+	{
+		m_successorClause.reset(new Bag<uml::Clause>());
+		
+		
+	}
 
     return m_successorClause;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference test
+*/
 std::shared_ptr<Bag<uml::ExecutableNode>> ClauseImpl::getTest() const
 {
+	if(m_test == nullptr)
+	{
+		m_test.reset(new Bag<uml::ExecutableNode>());
+		
+		
+	}
 //assert(m_test);
     return m_test;
 }
+
+
+
 
 
 //*********************************
@@ -256,8 +273,20 @@ std::shared_ptr<Bag<uml::ExecutableNode>> ClauseImpl::getTest() const
 //*********************************
 std::shared_ptr<Union<uml::Element>> ClauseImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
+
 
 
 std::shared_ptr<Clause> ClauseImpl::getThisClausePtr() const

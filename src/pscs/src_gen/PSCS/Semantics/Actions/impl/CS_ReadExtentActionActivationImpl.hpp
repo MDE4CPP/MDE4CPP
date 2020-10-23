@@ -19,7 +19,7 @@
 //*********************************
 namespace PSCS::Semantics::Actions 
 {
-	class CS_ReadExtentActionActivationImpl :virtual public fUML::Semantics::Actions::ReadExtentActionActivationImpl, virtual public CS_ReadExtentActionActivation 
+	class CS_ReadExtentActionActivationImpl : virtual public fUML::Semantics::Actions::ReadExtentActionActivationImpl, virtual public CS_ReadExtentActionActivation 
 	{
 		public: 
 			CS_ReadExtentActionActivationImpl(const CS_ReadExtentActionActivationImpl & obj);
@@ -47,8 +47,7 @@ namespace PSCS::Semantics::Actions
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual void doAction() ;
 			
 			
@@ -66,8 +65,7 @@ namespace PSCS::Semantics::Actions
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> getPinActivation() const ; 
 			 
 			//*********************************

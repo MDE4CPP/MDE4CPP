@@ -18,7 +18,7 @@
 //*********************************
 namespace ecore 
 {
-	class EFactoryImpl :virtual public EModelElementImpl, virtual public EFactory 
+	class EFactoryImpl : virtual public EModelElementImpl, virtual public EFactory 
 	{
 		public: 
 			EFactoryImpl(const EFactoryImpl & obj);
@@ -46,16 +46,13 @@ namespace ecore
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::string convertToString(std::shared_ptr<ecore::EDataType>  eDataType,Any instanceValue) const ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<ecore::EObject> create(std::shared_ptr<ecore::EClass>  eClass) const ;
 			
-			/*!
-			 */ 
+			 
 			virtual Any createFromString(std::shared_ptr<ecore::EDataType>  eDataType,std::string literalValue) const ;
 			
 			
@@ -68,20 +65,18 @@ namespace ecore
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<ecore::EPackage > getEPackage() const ;
 			
-			/*!
-			 */
-			virtual void setEPackage(std::shared_ptr<ecore::EPackage> _ePackage_ePackage) ;
+			
+			virtual void setEPackage(std::shared_ptr<ecore::EPackage> _ePackage) ;
+			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const ; 
 			 
 			//*********************************

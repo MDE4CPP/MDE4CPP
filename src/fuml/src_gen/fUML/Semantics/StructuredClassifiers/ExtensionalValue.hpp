@@ -51,6 +51,11 @@ namespace fUML::Semantics::Loci
 	class Locus;
 }
 
+namespace fUML::Semantics::Values 
+{
+	class Value;
+}
+
 // base class includes
 #include "fUML/Semantics/SimpleClassifiers/CompoundValue.hpp"
 
@@ -60,8 +65,7 @@ namespace fUML::Semantics::Loci
 //*********************************
 namespace fUML::Semantics::StructuredClassifiers 
 {
-	/*!
-	 */
+	
 	class ExtensionalValue:virtual public fUML::Semantics::SimpleClassifiers::CompoundValue
 	{
 		public:
@@ -81,8 +85,10 @@ namespace fUML::Semantics::StructuredClassifiers
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() = 0;
+			
+			 
 			virtual void destroy() = 0;
 			
 			
@@ -93,13 +99,12 @@ namespace fUML::Semantics::StructuredClassifiers
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<fUML::Semantics::Loci::Locus > getLocus() const = 0;
 			
-			/*!
-			 */
-			virtual void setLocus(std::shared_ptr<fUML::Semantics::Loci::Locus> _locus_locus) = 0;
+			
+			virtual void setLocus(std::shared_ptr<fUML::Semantics::Loci::Locus> _locus) = 0;
+			
 			
 
 		protected:
@@ -111,10 +116,8 @@ namespace fUML::Semantics::StructuredClassifiers
 			//*********************************
 			// Reference Members
 			//*********************************
-			/*!
-			 */
-			std::shared_ptr<fUML::Semantics::Loci::Locus > m_locus;
 			
+			std::shared_ptr<fUML::Semantics::Loci::Locus > m_locus;
 
 		public:
 			//*********************************

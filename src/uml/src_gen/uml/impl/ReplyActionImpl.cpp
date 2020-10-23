@@ -88,39 +88,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 ReplyActionImpl::ReplyActionImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-		/*Subset*/
-		m_replyValue.reset(new Subset<uml::InputPin, uml::InputPin >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_replyValue - Subset<uml::InputPin, uml::InputPin >()" << std::endl;
-		#endif
-	
-	
-
-	
-
-	//Init references
-	
-
-		/*Subset*/
-		m_replyValue->initSubset(m_input);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_replyValue - Subset<uml::InputPin, uml::InputPin >(m_input)" << std::endl;
-		#endif
-	
-	
-
-	
+{	
 }
 
 ReplyActionImpl::~ReplyActionImpl()
@@ -130,41 +98,36 @@ ReplyActionImpl::~ReplyActionImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+ReplyActionImpl::ReplyActionImpl(std::weak_ptr<uml::Activity > par_activity)
+:ReplyActionImpl()
+{
+	m_activity = par_activity;
+	m_owner = par_activity;
+}
 
 //Additional constructor for the containments back reference
-			ReplyActionImpl::ReplyActionImpl(std::weak_ptr<uml::Activity > par_activity)
-			:ReplyActionImpl()
-			{
-			    m_activity = par_activity;
-				m_owner = par_activity;
-			}
-
-
-//Additional constructor for the containments back reference
-			ReplyActionImpl::ReplyActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
-			:ReplyActionImpl()
-			{
-			    m_inStructuredNode = par_inStructuredNode;
-				m_owner = par_inStructuredNode;
-			}
-
+ReplyActionImpl::ReplyActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
+:ReplyActionImpl()
+{
+	m_inStructuredNode = par_inStructuredNode;
+	m_owner = par_inStructuredNode;
+}
 
 //Additional constructor for the containments back reference
-			ReplyActionImpl::ReplyActionImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:ReplyActionImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
+ReplyActionImpl::ReplyActionImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:ReplyActionImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			ReplyActionImpl::ReplyActionImpl(std::weak_ptr<uml::Element > par_owner)
-			:ReplyActionImpl()
-			{
-			    m_owner = par_owner;
-			}
-
+ReplyActionImpl::ReplyActionImpl(std::weak_ptr<uml::Element > par_owner)
+:ReplyActionImpl()
+{
+	m_owner = par_owner;
+}
 
 
 ReplyActionImpl::ReplyActionImpl(const ReplyActionImpl & obj):ReplyActionImpl()
@@ -293,12 +256,11 @@ ReplyActionImpl::ReplyActionImpl(const ReplyActionImpl & obj):ReplyActionImpl()
 		std::cout << "Copying the Subset: " << "m_returnInformation" << std::endl;
 	#endif
 
-		/*Subset*/
-		m_replyValue->initSubset(m_input);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_replyValue - Subset<uml::InputPin, uml::InputPin >(m_input)" << std::endl;
-		#endif
-	
+	/*Subset*/
+	m_replyValue->initSubset(getInput());
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Initialising value Subset: " << "m_replyValue - Subset<uml::InputPin, uml::InputPin >(getInput())" << std::endl;
+	#endif
 	
 
 	
@@ -338,56 +300,140 @@ bool ReplyActionImpl::pins_match_parameter(Any diagnostics,std::map <   Any, Any
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference replyToCall
+*/
 std::shared_ptr<uml::Trigger > ReplyActionImpl::getReplyToCall() const
 {
 //assert(m_replyToCall);
     return m_replyToCall;
 }
+
 void ReplyActionImpl::setReplyToCall(std::shared_ptr<uml::Trigger> _replyToCall)
 {
     m_replyToCall = _replyToCall;
 }
 
+
+
+/*
+Getter & Setter for reference replyValue
+*/
 std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> ReplyActionImpl::getReplyValue() const
 {
+	if(m_replyValue == nullptr)
+	{
+		/*Subset*/
+		m_replyValue.reset(new Subset<uml::InputPin, uml::InputPin >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_replyValue - Subset<uml::InputPin, uml::InputPin >()" << std::endl;
+		#endif
+		
+		/*Subset*/
+		m_replyValue->initSubset(getInput());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_replyValue - Subset<uml::InputPin, uml::InputPin >(getInput())" << std::endl;
+		#endif
+		
+	}
 
     return m_replyValue;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference returnInformation
+*/
 std::shared_ptr<uml::InputPin > ReplyActionImpl::getReturnInformation() const
 {
 //assert(m_returnInformation);
     return m_returnInformation;
 }
+
 void ReplyActionImpl::setReturnInformation(std::shared_ptr<uml::InputPin> _returnInformation)
 {
     m_returnInformation = _returnInformation;
 }
+
+
 
 //*********************************
 // Union Getter
 //*********************************
 std::shared_ptr<Union<uml::ActivityGroup>> ReplyActionImpl::getInGroup() const
 {
+	if(m_inGroup == nullptr)
+	{
+		/*Union*/
+		m_inGroup.reset(new Union<uml::ActivityGroup>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_inGroup - Union<uml::ActivityGroup>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_inGroup;
 }
+
 std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> ReplyActionImpl::getInput() const
 {
+	if(m_input == nullptr)
+	{
+		/*SubsetUnion*/
+		m_input.reset(new SubsetUnion<uml::InputPin, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_input - SubsetUnion<uml::InputPin, uml::Element >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_input->initSubsetUnion(getOwnedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_input - SubsetUnion<uml::InputPin, uml::Element >(getOwnedElement())" << std::endl;
+		#endif
+		
+	}
 	return m_input;
 }
+
 std::shared_ptr<Union<uml::Element>> ReplyActionImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > ReplyActionImpl::getOwner() const
 {
 	return m_owner;
 }
+
 std::shared_ptr<Union<uml::RedefinableElement>> ReplyActionImpl::getRedefinedElement() const
 {
+	if(m_redefinedElement == nullptr)
+	{
+		/*Union*/
+		m_redefinedElement.reset(new Union<uml::RedefinableElement>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_redefinedElement - Union<uml::RedefinableElement>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_redefinedElement;
 }
+
+
 
 
 std::shared_ptr<ReplyAction> ReplyActionImpl::getThisReplyActionPtr() const

@@ -43,6 +43,8 @@
 
 #include "fUML/Semantics/Activities/ObjectNodeActivation.hpp"
 
+#include "uml/Pin.hpp"
+
 #include "fUML/Semantics/Activities/Token.hpp"
 
 //Factories an Package includes
@@ -63,19 +65,7 @@ using namespace fUML::Semantics::Actions;
 // Constructor / Destructor
 //*********************************
 PinActivationImpl::PinActivationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	//Init references
-	
+{	
 }
 
 PinActivationImpl::~PinActivationImpl()
@@ -85,14 +75,12 @@ PinActivationImpl::~PinActivationImpl()
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			PinActivationImpl::PinActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
-			:PinActivationImpl()
-			{
-			    m_group = par_group;
-			}
-
+PinActivationImpl::PinActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
+:PinActivationImpl()
+{
+	m_group = par_group;
+}
 
 
 PinActivationImpl::PinActivationImpl(const PinActivationImpl & obj):PinActivationImpl()
@@ -117,6 +105,8 @@ PinActivationImpl::PinActivationImpl(const PinActivationImpl & obj):PinActivatio
 
 	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> _outgoingEdges = obj.getOutgoingEdges();
 	m_outgoingEdges.reset(new Bag<fUML::Semantics::Activities::ActivityEdgeInstance>(*(obj.getOutgoingEdges().get())));
+
+	m_pin  = obj.getPin();
 
 
 	//Clone references with containment (deep copy)
@@ -169,20 +159,20 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > PinActivationImpl::tak
 	int upper = -1;
 
 	//Note: A pin activation used in an expansion activation group will have this.node == null
-	if (this->getNode() != nullptr) 
-	{
-		std::shared_ptr<uml::Pin> pin = std::dynamic_pointer_cast<uml::Pin>(this->getNode());
-		if (pin != nullptr)
-		{
-			upper = pin->getUpper();
-		}
-	}
+	upper = getPin()->getUpper();
 
 	std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > tokens(new Bag<fUML::Semantics::Activities::Token>());
+
+	//NEWDEBUG
+	DEBUG_MESSAGE(std::cout<<"-- printing from PinActivation::"<<__FUNCTION__<<" '"<<(this->getNode() == nullptr ? "..." : ("node = " + this->getNode()->getName()))<<"' : count = "<<count<<std::endl;)
 
 	if (upper < 0 || count < upper) 
 	{
 		std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance> > incomingEdges = this->getIncomingEdges();
+
+		//NEWDEBUG
+		DEBUG_MESSAGE(std::cout<<"-- printing from PinActivation::"<<__FUNCTION__<<" '"<<(this->getNode() == nullptr ? "..." : ("node = " + this->getNode()->getName()))<<"' : #incomingEdges = "<<incomingEdges->size()<<std::endl;)
+
 		for (unsigned int i = 0; i < incomingEdges->size(); i++) 
 		{
 			std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> edge = incomingEdges->at(i);
@@ -205,7 +195,10 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > PinActivationImpl::tak
 			}
 		}
 	}
+	
+	//NEWDEBUG
 
+	DEBUG_MESSAGE(std::cout<<"-- printing from PinActivation::"<<__FUNCTION__<<" '"<<(this->getNode() == nullptr ? "..." : ("pin = " + this->getNode()->getName()))<<"' : #offeredTokens = "<<tokens->size()<<std::endl;)
 	return tokens;
 	//end of body
 }
@@ -213,19 +206,60 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > PinActivationImpl::tak
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference actionActivation
+*/
 std::weak_ptr<fUML::Semantics::Actions::ActionActivation > PinActivationImpl::getActionActivation() const
 {
 
     return m_actionActivation;
 }
+
 void PinActivationImpl::setActionActivation(std::shared_ptr<fUML::Semantics::Actions::ActionActivation> _actionActivation)
 {
     m_actionActivation = _actionActivation;
 }
 
+
+
+/*
+Getter & Setter for reference pin
+*/
+std::shared_ptr<uml::Pin > PinActivationImpl::getPin() const
+{
+//assert(m_pin);
+    return m_pin;
+}
+
+void PinActivationImpl::setPin(std::shared_ptr<uml::Pin> _pin)
+{
+    m_pin = _pin;
+	//additional setter call for redefined reference ActivityNodeActivation::node
+	fUML::Semantics::Activities::ActivityNodeActivationImpl::setNode(_pin);
+}
+
+/*Additional Setter for redefined reference 'ActivityNodeActivation::node'*/
+void PinActivationImpl::setNode(std::shared_ptr<uml::ActivityNode> _node)
+{
+	std::shared_ptr<uml::Pin> _pin = std::dynamic_pointer_cast<uml::Pin>(_node);
+	if(_pin)
+	{
+		m_pin = _pin;
+
+		//additional setter call for redefined reference ActivityNodeActivation::node
+		fUML::Semantics::Activities::ActivityNodeActivationImpl::setNode(_node);
+	}
+	else
+	{
+		std::cerr<<"[PinActivation::setNode] : Could not set node because provided node was not of type 'uml::Pin'"<<std::endl;
+	}
+}
+
+
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<PinActivation> PinActivationImpl::getThisPinActivationPtr() const
@@ -255,6 +289,8 @@ Any PinActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case fUML::Semantics::Actions::ActionsPackage::PINACTIVATION_ATTRIBUTE_ACTIONACTIVATION:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getActionActivation().lock())); //887
+		case fUML::Semantics::Actions::ActionsPackage::PINACTIVATION_ATTRIBUTE_PIN:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getPin())); //888
 	}
 	return fUML::Semantics::Activities::ObjectNodeActivationImpl::eGet(featureID, resolve, coreType);
 }
@@ -264,6 +300,8 @@ bool PinActivationImpl::internalEIsSet(int featureID) const
 	{
 		case fUML::Semantics::Actions::ActionsPackage::PINACTIVATION_ATTRIBUTE_ACTIONACTIVATION:
 			return getActionActivation().lock() != nullptr; //887
+		case fUML::Semantics::Actions::ActionsPackage::PINACTIVATION_ATTRIBUTE_PIN:
+			return getPin() != nullptr; //888
 	}
 	return fUML::Semantics::Activities::ObjectNodeActivationImpl::internalEIsSet(featureID);
 }
@@ -277,6 +315,14 @@ bool PinActivationImpl::eSet(int featureID, Any newValue)
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<fUML::Semantics::Actions::ActionActivation> _actionActivation = std::dynamic_pointer_cast<fUML::Semantics::Actions::ActionActivation>(_temp);
 			setActionActivation(_actionActivation); //887
+			return true;
+		}
+		case fUML::Semantics::Actions::ActionsPackage::PINACTIVATION_ATTRIBUTE_PIN:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Pin> _pin = std::dynamic_pointer_cast<uml::Pin>(_temp);
+			setPin(_pin); //888
 			return true;
 		}
 	}
@@ -305,6 +351,25 @@ void PinActivationImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandl
 
 void PinActivationImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("pin");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("pin")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
 
 	fUML::Semantics::Activities::ObjectNodeActivationImpl::loadAttributes(loadHandler, attr_list);
 }
@@ -328,6 +393,18 @@ void PinActivationImpl::resolveReferences(const int featureID, std::list<std::sh
 				// Cast object to correct type
 				std::shared_ptr<fUML::Semantics::Actions::ActionActivation> _actionActivation = std::dynamic_pointer_cast<fUML::Semantics::Actions::ActionActivation>( references.front() );
 				setActionActivation(_actionActivation);
+			}
+			
+			return;
+		}
+
+		case fUML::Semantics::Actions::ActionsPackage::PINACTIVATION_ATTRIBUTE_PIN:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::Pin> _pin = std::dynamic_pointer_cast<uml::Pin>( references.front() );
+				setPin(_pin);
 			}
 			
 			return;
@@ -359,6 +436,9 @@ void PinActivationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 		std::shared_ptr<fUML::Semantics::Actions::ActionsPackage> package = fUML::Semantics::Actions::ActionsPackage::eInstance();
 
 	
+
+		// Add references
+		saveHandler->addReference("pin", this->getPin());
 
 	}
 	catch (std::exception& e)

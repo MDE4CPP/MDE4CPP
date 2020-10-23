@@ -168,6 +168,14 @@ void StructuredClassifiersPackageImpl::initializeExtensionalValueContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
+	m_extensionalValue_Operation__copy->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
+	m_extensionalValue_Operation__copy->setName("_copy");
+	m_extensionalValue_Operation__copy->setLowerBound(1);
+	m_extensionalValue_Operation__copy->setUpperBound(1);
+	m_extensionalValue_Operation__copy->setUnique(true);
+	m_extensionalValue_Operation__copy->setOrdered(true);
+	
+	
 	m_extensionalValue_Operation_destroy->setEType(nullptr);
 	m_extensionalValue_Operation_destroy->setName("destroy");
 	m_extensionalValue_Operation_destroy->setLowerBound(1);
@@ -316,6 +324,14 @@ void StructuredClassifiersPackageImpl::initializeLinkContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
+	m_link_Operation__copy->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
+	m_link_Operation__copy->setName("_copy");
+	m_link_Operation__copy->setLowerBound(1);
+	m_link_Operation__copy->setUpperBound(1);
+	m_link_Operation__copy->setUnique(true);
+	m_link_Operation__copy->setOrdered(true);
+	
+	
 	m_link_Operation_addTo_Locus->setEType(nullptr);
 	m_link_Operation_addTo_Locus->setName("addTo");
 	m_link_Operation_addTo_Locus->setLowerBound(0);
@@ -449,6 +465,14 @@ void StructuredClassifiersPackageImpl::initializeObjectContent()
 			//undefined otherEnd
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
+	
+	m_object_Operation__copy->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
+	m_object_Operation__copy->setName("_copy");
+	m_object_Operation__copy->setLowerBound(1);
+	m_object_Operation__copy->setUpperBound(1);
+	m_object_Operation__copy->setUnique(true);
+	m_object_Operation__copy->setOrdered(true);
+	
 	
 	m_object_Operation__register_EventAccepter->setEType(nullptr);
 	m_object_Operation__register_EventAccepter->setName("_register");
@@ -675,6 +699,14 @@ void StructuredClassifiersPackageImpl::initializeReferenceContent()
 			//undefined otherEnd
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
+	
+	m_reference_Operation__copy->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
+	m_reference_Operation__copy->setName("_copy");
+	m_reference_Operation__copy->setLowerBound(1);
+	m_reference_Operation__copy->setUpperBound(1);
+	m_reference_Operation__copy->setUnique(true);
+	m_reference_Operation__copy->setOrdered(true);
+	
 	
 	m_reference_Operation_assignFeatureValue_StructuralFeature_EInt->setEType(nullptr);
 	m_reference_Operation_assignFeatureValue_StructuralFeature_EInt->setName("assignFeatureValue");

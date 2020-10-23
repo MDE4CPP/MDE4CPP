@@ -78,86 +78,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 ActivityEdgeImpl::ActivityEdgeImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	
-
-		/*Union*/
-		m_inGroup.reset(new Union<uml::ActivityGroup>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_inGroup - Union<uml::ActivityGroup>()" << std::endl;
-		#endif
-	
-	
-
-		/*Subset*/
-		m_inPartition.reset(new Subset<uml::ActivityPartition, uml::ActivityGroup >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_inPartition - Subset<uml::ActivityPartition, uml::ActivityGroup >()" << std::endl;
-		#endif
-	
-	
-
-	
-
-	
-
-		/*Subset*/
-		m_redefinedEdge.reset(new Subset<uml::ActivityEdge, uml::RedefinableElement >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_redefinedEdge - Subset<uml::ActivityEdge, uml::RedefinableElement >()" << std::endl;
-		#endif
-	
-	
-
-	
-
-	
-
-	
-
-	//Init references
-	
-
-	
-
-	
-	
-
-		/*Subset*/
-		m_inPartition->initSubset(m_inGroup);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_inPartition - Subset<uml::ActivityPartition, uml::ActivityGroup >(m_inGroup)" << std::endl;
-		#endif
-	
-	
-
-	
-
-	
-
-		/*Subset*/
-		m_redefinedEdge->initSubset(m_redefinedElement);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_redefinedEdge - Subset<uml::ActivityEdge, uml::RedefinableElement >(m_redefinedElement)" << std::endl;
-		#endif
-	
-	
-
-	
-
-	
-
-	
+{	
 }
 
 ActivityEdgeImpl::~ActivityEdgeImpl()
@@ -167,41 +88,36 @@ ActivityEdgeImpl::~ActivityEdgeImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+ActivityEdgeImpl::ActivityEdgeImpl(std::weak_ptr<uml::Activity > par_activity)
+:ActivityEdgeImpl()
+{
+	m_activity = par_activity;
+	m_owner = par_activity;
+}
 
 //Additional constructor for the containments back reference
-			ActivityEdgeImpl::ActivityEdgeImpl(std::weak_ptr<uml::Activity > par_activity)
-			:ActivityEdgeImpl()
-			{
-			    m_activity = par_activity;
-				m_owner = par_activity;
-			}
-
-
-//Additional constructor for the containments back reference
-			ActivityEdgeImpl::ActivityEdgeImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
-			:ActivityEdgeImpl()
-			{
-			    m_inStructuredNode = par_inStructuredNode;
-				m_owner = par_inStructuredNode;
-			}
-
+ActivityEdgeImpl::ActivityEdgeImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
+:ActivityEdgeImpl()
+{
+	m_inStructuredNode = par_inStructuredNode;
+	m_owner = par_inStructuredNode;
+}
 
 //Additional constructor for the containments back reference
-			ActivityEdgeImpl::ActivityEdgeImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:ActivityEdgeImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
+ActivityEdgeImpl::ActivityEdgeImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:ActivityEdgeImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			ActivityEdgeImpl::ActivityEdgeImpl(std::weak_ptr<uml::Element > par_owner)
-			:ActivityEdgeImpl()
-			{
-			    m_owner = par_owner;
-			}
-
+ActivityEdgeImpl::ActivityEdgeImpl(std::weak_ptr<uml::Element > par_owner)
+:ActivityEdgeImpl()
+{
+	m_owner = par_owner;
+}
 
 
 ActivityEdgeImpl::ActivityEdgeImpl(const ActivityEdgeImpl & obj):ActivityEdgeImpl()
@@ -325,21 +241,31 @@ bool ActivityEdgeImpl::source_and_target(Any diagnostics,std::map <   Any, Any >
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference activity
+*/
 std::weak_ptr<uml::Activity > ActivityEdgeImpl::getActivity() const
 {
 
     return m_activity;
 }
+
 void ActivityEdgeImpl::setActivity(std::shared_ptr<uml::Activity> _activity)
 {
     m_activity = _activity;
 }
 
+
+
+/*
+Getter & Setter for reference guard
+*/
 std::shared_ptr<uml::ValueSpecification > ActivityEdgeImpl::getGuard() const
 {
 
     return m_guard;
 }
+
 void ActivityEdgeImpl::setGuard(std::shared_ptr<uml::ValueSpecification> _guard)
 {
     m_guard = _guard;
@@ -347,90 +273,205 @@ void ActivityEdgeImpl::setGuard(std::shared_ptr<uml::ValueSpecification> _guard)
 
 
 
+/*
+Getter & Setter for reference inGroup
+*/
 
+
+
+
+
+
+/*
+Getter & Setter for reference inPartition
+*/
 std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup>> ActivityEdgeImpl::getInPartition() const
 {
+	if(m_inPartition == nullptr)
+	{
+		/*Subset*/
+		m_inPartition.reset(new Subset<uml::ActivityPartition, uml::ActivityGroup >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_inPartition - Subset<uml::ActivityPartition, uml::ActivityGroup >()" << std::endl;
+		#endif
+		
+		/*Subset*/
+		m_inPartition->initSubset(getInGroup());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_inPartition - Subset<uml::ActivityPartition, uml::ActivityGroup >(getInGroup())" << std::endl;
+		#endif
+		
+	}
 
     return m_inPartition;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference inStructuredNode
+*/
 std::weak_ptr<uml::StructuredActivityNode > ActivityEdgeImpl::getInStructuredNode() const
 {
 
     return m_inStructuredNode;
 }
+
 void ActivityEdgeImpl::setInStructuredNode(std::shared_ptr<uml::StructuredActivityNode> _inStructuredNode)
 {
     m_inStructuredNode = _inStructuredNode;
 }
 
+
+
+/*
+Getter & Setter for reference interrupts
+*/
 std::shared_ptr<uml::InterruptibleActivityRegion > ActivityEdgeImpl::getInterrupts() const
 {
 
     return m_interrupts;
 }
+
 void ActivityEdgeImpl::setInterrupts(std::shared_ptr<uml::InterruptibleActivityRegion> _interrupts)
 {
     m_interrupts = _interrupts;
 }
 
+
+
+/*
+Getter & Setter for reference redefinedEdge
+*/
 std::shared_ptr<Subset<uml::ActivityEdge, uml::RedefinableElement>> ActivityEdgeImpl::getRedefinedEdge() const
 {
+	if(m_redefinedEdge == nullptr)
+	{
+		/*Subset*/
+		m_redefinedEdge.reset(new Subset<uml::ActivityEdge, uml::RedefinableElement >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_redefinedEdge - Subset<uml::ActivityEdge, uml::RedefinableElement >()" << std::endl;
+		#endif
+		
+		/*Subset*/
+		m_redefinedEdge->initSubset(getRedefinedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_redefinedEdge - Subset<uml::ActivityEdge, uml::RedefinableElement >(getRedefinedElement())" << std::endl;
+		#endif
+		
+	}
 
     return m_redefinedEdge;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference source
+*/
 std::shared_ptr<uml::ActivityNode > ActivityEdgeImpl::getSource() const
 {
 //assert(m_source);
     return m_source;
 }
+
 void ActivityEdgeImpl::setSource(std::shared_ptr<uml::ActivityNode> _source)
 {
     m_source = _source;
 }
 
+
+
+/*
+Getter & Setter for reference target
+*/
 std::shared_ptr<uml::ActivityNode > ActivityEdgeImpl::getTarget() const
 {
 //assert(m_target);
     return m_target;
 }
+
 void ActivityEdgeImpl::setTarget(std::shared_ptr<uml::ActivityNode> _target)
 {
     m_target = _target;
 }
 
+
+
+/*
+Getter & Setter for reference weight
+*/
 std::shared_ptr<uml::ValueSpecification > ActivityEdgeImpl::getWeight() const
 {
 
     return m_weight;
 }
+
 void ActivityEdgeImpl::setWeight(std::shared_ptr<uml::ValueSpecification> _weight)
 {
     m_weight = _weight;
 }
+
+
 
 //*********************************
 // Union Getter
 //*********************************
 std::shared_ptr<Union<uml::ActivityGroup>> ActivityEdgeImpl::getInGroup() const
 {
+	if(m_inGroup == nullptr)
+	{
+		/*Union*/
+		m_inGroup.reset(new Union<uml::ActivityGroup>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_inGroup - Union<uml::ActivityGroup>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_inGroup;
 }
+
 std::shared_ptr<Union<uml::Element>> ActivityEdgeImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > ActivityEdgeImpl::getOwner() const
 {
 	return m_owner;
 }
+
 std::shared_ptr<Union<uml::RedefinableElement>> ActivityEdgeImpl::getRedefinedElement() const
 {
+	if(m_redefinedElement == nullptr)
+	{
+		/*Union*/
+		m_redefinedElement.reset(new Union<uml::RedefinableElement>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_redefinedElement - Union<uml::RedefinableElement>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_redefinedElement;
 }
+
+
 
 
 std::shared_ptr<ActivityEdge> ActivityEdgeImpl::getThisActivityEdgePtr() const

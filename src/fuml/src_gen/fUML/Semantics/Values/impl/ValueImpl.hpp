@@ -19,7 +19,7 @@
 //*********************************
 namespace fUML::Semantics::Values 
 {
-	class ValueImpl :virtual public fUML::Semantics::Loci::SemanticVisitorImpl, virtual public Value 
+	class ValueImpl : virtual public fUML::Semantics::Loci::SemanticVisitorImpl, virtual public Value 
 	{
 		public: 
 			ValueImpl(const ValueImpl & obj);
@@ -43,32 +43,28 @@ namespace fUML::Semantics::Values
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() ;
+			
+			 
 			virtual bool checkAllParents(std::shared_ptr<uml::Classifier>  type,std::shared_ptr<uml::Classifier>  classifier) ;
 			
-			/*!
-			 */ 
+			 
 			virtual bool equals(std::shared_ptr<fUML::Semantics::Values::Value>  otherValue) ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<Bag<uml::Classifier> > getTypes() const ;
 			
-			/*!
-			 */ 
+			 
 			virtual bool hasTypes(std::shared_ptr<uml::Classifier>  type) ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::string objectId() ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<uml::ValueSpecification> specify() ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::string toString() ;
 			
 			

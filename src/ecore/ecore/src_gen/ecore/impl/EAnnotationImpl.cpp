@@ -54,49 +54,7 @@ using namespace ecore;
 // Constructor / Destructor
 //*********************************
 EAnnotationImpl::EAnnotationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		/*Subset*/
-		m_contents.reset(new Subset<ecore::EObject, ecore::EObject >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_contents - Subset<ecore::EObject, ecore::EObject >()" << std::endl;
-		#endif
-	
-	
-
-		m_details.reset(new Bag<ecore::EStringToStringMapEntry>());
-	
-	
-
-	
-
-		m_references.reset(new Bag<ecore::EObject>());
-	
-	
-
-	//Init references
-		/*Subset*/
-		m_contents->initSubset(m_eContens);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_contents - Subset<ecore::EObject, ecore::EObject >(m_eContens)" << std::endl;
-		#endif
-	
-	
-
-	
-	
-
-	
-
-	
-	
+{	
 }
 
 EAnnotationImpl::~EAnnotationImpl()
@@ -106,22 +64,19 @@ EAnnotationImpl::~EAnnotationImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+EAnnotationImpl::EAnnotationImpl(std::weak_ptr<ecore::EObject > par_eContainer)
+:EAnnotationImpl()
+{
+	m_eContainer = par_eContainer;
+}
 
 //Additional constructor for the containments back reference
-			EAnnotationImpl::EAnnotationImpl(std::weak_ptr<ecore::EObject > par_eContainer)
-			:EAnnotationImpl()
-			{
-			    m_eContainer = par_eContainer;
-			}
-
-
-//Additional constructor for the containments back reference
-			EAnnotationImpl::EAnnotationImpl(std::weak_ptr<ecore::EModelElement > par_eModelElement)
-			:EAnnotationImpl()
-			{
-			    m_eModelElement = par_eModelElement;
-			}
-
+EAnnotationImpl::EAnnotationImpl(std::weak_ptr<ecore::EModelElement > par_eModelElement)
+:EAnnotationImpl()
+{
+	m_eModelElement = par_eModelElement;
+}
 
 
 EAnnotationImpl::EAnnotationImpl(const EAnnotationImpl & obj):EAnnotationImpl()
@@ -170,15 +125,13 @@ EAnnotationImpl::EAnnotationImpl(const EAnnotationImpl & obj):EAnnotationImpl()
 		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
 	#endif
 
-		/*Subset*/
-		m_contents->initSubset(m_eContens);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_contents - Subset<ecore::EObject, ecore::EObject >(m_eContens)" << std::endl;
-		#endif
-	
+	/*Subset*/
+	m_contents->initSubset(getEContens());
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Initialising value Subset: " << "m_contents - Subset<ecore::EObject, ecore::EObject >(getEContens())" << std::endl;
+	#endif
 	
 
-	
 	
 }
 
@@ -197,15 +150,20 @@ std::shared_ptr<EClass> EAnnotationImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute source
+*/
+std::string EAnnotationImpl::getSource() const 
+{
+	return m_source;
+}
+
 void EAnnotationImpl::setSource(std::string _source)
 {
 	m_source = _source;
 } 
 
-std::string EAnnotationImpl::getSource() const 
-{
-	return m_source;
-}
+
 
 //*********************************
 // Operations
@@ -214,35 +172,86 @@ std::string EAnnotationImpl::getSource() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference contents
+*/
 std::shared_ptr<Subset<ecore::EObject, ecore::EObject>> EAnnotationImpl::getContents() const
 {
+	if(m_contents == nullptr)
+	{
+		/*Subset*/
+		m_contents.reset(new Subset<ecore::EObject, ecore::EObject >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_contents - Subset<ecore::EObject, ecore::EObject >()" << std::endl;
+		#endif
+		
+		/*Subset*/
+		m_contents->initSubset(getEContens());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_contents - Subset<ecore::EObject, ecore::EObject >(getEContens())" << std::endl;
+		#endif
+		
+	}
 
     return m_contents;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference details
+*/
 std::shared_ptr<Bag<ecore::EStringToStringMapEntry>> EAnnotationImpl::getDetails() const
 {
+	if(m_details == nullptr)
+	{
+		m_details.reset(new Bag<ecore::EStringToStringMapEntry>());
+		
+		
+	}
 
     return m_details;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference eModelElement
+*/
 std::weak_ptr<ecore::EModelElement > EAnnotationImpl::getEModelElement() const
 {
 
     return m_eModelElement;
 }
+
 void EAnnotationImpl::setEModelElement(std::shared_ptr<ecore::EModelElement> _eModelElement)
 {
     m_eModelElement = _eModelElement;
 }
 
+
+
+/*
+Getter & Setter for reference references
+*/
 std::shared_ptr<Bag<ecore::EObject>> EAnnotationImpl::getReferences() const
 {
+	if(m_references == nullptr)
+	{
+		m_references.reset(new Bag<ecore::EObject>());
+		
+		
+	}
 
     return m_references;
 }
+
+
+
 
 
 //*********************************
@@ -250,8 +259,20 @@ std::shared_ptr<Bag<ecore::EObject>> EAnnotationImpl::getReferences() const
 //*********************************
 std::shared_ptr<Union<ecore::EObject>> EAnnotationImpl::getEContens() const
 {
+	if(m_eContens == nullptr)
+	{
+		/*Union*/
+		m_eContens.reset(new Union<ecore::EObject>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_eContens - Union<ecore::EObject>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_eContens;
 }
+
+
 
 
 std::shared_ptr<EAnnotation> EAnnotationImpl::getThisEAnnotationPtr() const

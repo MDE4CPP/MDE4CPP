@@ -66,17 +66,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 DurationConstraintImpl::DurationConstraintImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	m_firstEvent.reset(new Bag<bool>());
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 DurationConstraintImpl::~DurationConstraintImpl()
@@ -85,7 +75,6 @@ DurationConstraintImpl::~DurationConstraintImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete DurationConstraint "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 //Additional constructor for the containments back reference
 DurationConstraintImpl::DurationConstraintImpl(std::weak_ptr<uml::Namespace > par_Namespace, const int reference_id)
@@ -109,33 +98,27 @@ DurationConstraintImpl::DurationConstraintImpl(std::weak_ptr<uml::Namespace > pa
 
 
 //Additional constructor for the containments back reference
-
-
-//Additional constructor for the containments back reference
-			DurationConstraintImpl::DurationConstraintImpl(std::weak_ptr<uml::Element > par_owner)
-			:DurationConstraintImpl()
-			{
-			    m_owner = par_owner;
-			}
-
+DurationConstraintImpl::DurationConstraintImpl(std::weak_ptr<uml::Element > par_owner)
+:DurationConstraintImpl()
+{
+	m_owner = par_owner;
+}
 
 //Additional constructor for the containments back reference
-			DurationConstraintImpl::DurationConstraintImpl(std::weak_ptr<uml::Package > par_owningPackage)
-			:DurationConstraintImpl()
-			{
-			    m_owningPackage = par_owningPackage;
-				m_namespace = par_owningPackage;
-			}
-
+DurationConstraintImpl::DurationConstraintImpl(std::weak_ptr<uml::Package > par_owningPackage)
+:DurationConstraintImpl()
+{
+	m_owningPackage = par_owningPackage;
+	m_namespace = par_owningPackage;
+}
 
 //Additional constructor for the containments back reference
-			DurationConstraintImpl::DurationConstraintImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
-			:DurationConstraintImpl()
-			{
-			    m_owningTemplateParameter = par_owningTemplateParameter;
-				m_owner = par_owningTemplateParameter;
-			}
-
+DurationConstraintImpl::DurationConstraintImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+:DurationConstraintImpl()
+{
+	m_owningTemplateParameter = par_owningTemplateParameter;
+	m_owner = par_owningTemplateParameter;
+}
 
 
 DurationConstraintImpl::DurationConstraintImpl(const DurationConstraintImpl & obj):DurationConstraintImpl()
@@ -212,12 +195,21 @@ std::shared_ptr<ecore::EClass> DurationConstraintImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
-
-
+/*
+Getter & Setter for attribute firstEvent
+*/
 std::shared_ptr<Bag<bool> > DurationConstraintImpl::getFirstEvent() const 
 {
+	if(m_firstEvent == nullptr)
+	{
+		m_firstEvent.reset(new Bag<bool>());
+	}
 	return m_firstEvent;
 }
+
+
+
+
 
 //*********************************
 // Operations
@@ -245,14 +237,28 @@ std::weak_ptr<uml::Namespace > DurationConstraintImpl::getNamespace() const
 {
 	return m_namespace;
 }
+
 std::shared_ptr<Union<uml::Element>> DurationConstraintImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > DurationConstraintImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<DurationConstraint> DurationConstraintImpl::getThisDurationConstraintPtr() const

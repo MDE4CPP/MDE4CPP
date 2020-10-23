@@ -19,7 +19,7 @@
 //*********************************
 namespace fUML::Semantics::Activities 
 {
-	class CentralBufferNodeActivationImpl :virtual public ObjectNodeActivationImpl, virtual public CentralBufferNodeActivation 
+	class CentralBufferNodeActivationImpl : virtual public ObjectNodeActivationImpl, virtual public CentralBufferNodeActivation 
 	{
 		public: 
 			CentralBufferNodeActivationImpl(const CentralBufferNodeActivationImpl & obj);
@@ -47,8 +47,7 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual void fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token> >  incomingTokens) ;
 			
 			

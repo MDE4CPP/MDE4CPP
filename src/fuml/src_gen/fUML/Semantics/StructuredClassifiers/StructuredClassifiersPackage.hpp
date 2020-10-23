@@ -38,8 +38,7 @@ namespace fUML::Semantics::StructuredClassifiers
 	The Metamodel Package for the StructuredClassifiers metamodel. This package is used to enable the reflection of model elements. It contains all model elements
 	which were described in an ecore file.
 	*/
-	/*!
-	 */
+	
 	class StructuredClassifiersPackage : virtual public ecore::EPackage 
 	{
 		private:    
@@ -57,7 +56,7 @@ namespace fUML::Semantics::StructuredClassifiers
 
 			// Begin Class DispatchStrategy
 			//Class and Feature IDs 
-			static const unsigned int DISPATCHSTRATEGY_CLASS = 40;
+			static const unsigned long DISPATCHSTRATEGY_CLASS = 1413517210;
 			static const unsigned int DISPATCHSTRATEGY_CLASS_FEATURE_COUNT = 0;
 			static const unsigned int DISPATCHSTRATEGY_CLASS_OPERATION_COUNT = 4;
 			
@@ -80,13 +79,14 @@ namespace fUML::Semantics::StructuredClassifiers
 
 			// Begin Class ExtensionalValue
 			//Class and Feature IDs 
-			static const unsigned int EXTENSIONALVALUE_CLASS = 52;
+			static const unsigned long EXTENSIONALVALUE_CLASS = 1972653315;
 			static const unsigned int EXTENSIONALVALUE_CLASS_FEATURE_COUNT = 2;
-			static const unsigned int EXTENSIONALVALUE_CLASS_OPERATION_COUNT = 24;
+			static const unsigned int EXTENSIONALVALUE_CLASS_OPERATION_COUNT = 27;
 			
 			static const int EXTENSIONALVALUE_ATTRIBUTE_LOCUS = 5201;
 			
-			static const int EXTENSIONALVALUE_OPERATION_DESTROY = 5225;
+			static const int EXTENSIONALVALUE_OPERATION__COPY = 5228;
+			static const int EXTENSIONALVALUE_OPERATION_DESTROY = 5227;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getExtensionalValue_Class() const = 0;
@@ -94,6 +94,7 @@ namespace fUML::Semantics::StructuredClassifiers
 			
 			virtual std::shared_ptr<ecore::EReference> getExtensionalValue_Attribute_locus() const = 0;
 			
+			virtual std::shared_ptr<ecore::EOperation> getExtensionalValue_Operation__copy() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getExtensionalValue_Operation_destroy() const = 0;
 			
 			// End Class ExtensionalValue
@@ -101,16 +102,16 @@ namespace fUML::Semantics::StructuredClassifiers
 
 			// Begin Class ExtensionalValueList
 			//Class and Feature IDs 
-			static const unsigned int EXTENSIONALVALUELIST_CLASS = 53;
+			static const unsigned long EXTENSIONALVALUELIST_CLASS = 823739257;
 			static const unsigned int EXTENSIONALVALUELIST_CLASS_FEATURE_COUNT = 2;
-			static const unsigned int EXTENSIONALVALUELIST_CLASS_OPERATION_COUNT = 29;
+			static const unsigned int EXTENSIONALVALUELIST_CLASS_OPERATION_COUNT = 32;
 			
 			
-			static const int EXTENSIONALVALUELIST_OPERATION_ADDVALUE_EXTENSIONALVALUE = 5327;
-			static const int EXTENSIONALVALUELIST_OPERATION_ADDVALUE_EXTENSIONALVALUE_EINT = 5328;
-			static const int EXTENSIONALVALUELIST_OPERATION_GETVALUE = 5326;
-			static const int EXTENSIONALVALUELIST_OPERATION_REMOVEVALUE_EINT = 5330;
-			static const int EXTENSIONALVALUELIST_OPERATION_SETVALUE_EXTENSIONALVALUE_EINT = 5329;
+			static const int EXTENSIONALVALUELIST_OPERATION_ADDVALUE_EXTENSIONALVALUE = 5330;
+			static const int EXTENSIONALVALUELIST_OPERATION_ADDVALUE_EXTENSIONALVALUE_EINT = 5331;
+			static const int EXTENSIONALVALUELIST_OPERATION_GETVALUE = 5329;
+			static const int EXTENSIONALVALUELIST_OPERATION_REMOVEVALUE_EINT = 5333;
+			static const int EXTENSIONALVALUELIST_OPERATION_SETVALUE_EXTENSIONALVALUE_EINT = 5332;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getExtensionalValueList_Class() const = 0;
@@ -128,16 +129,17 @@ namespace fUML::Semantics::StructuredClassifiers
 
 			// Begin Class Link
 			//Class and Feature IDs 
-			static const unsigned int LINK_CLASS = 68;
+			static const unsigned long LINK_CLASS = 1823394283;
 			static const unsigned int LINK_CLASS_FEATURE_COUNT = 3;
-			static const unsigned int LINK_CLASS_OPERATION_COUNT = 28;
+			static const unsigned int LINK_CLASS_OPERATION_COUNT = 32;
 			
 			static const int LINK_ATTRIBUTE_TYPE = 6802;
 			
-			static const int LINK_OPERATION_ADDTO_LOCUS = 6829;
-			static const int LINK_OPERATION_GETOTHERFEATUREVALUES_EXTENSIONALVALUE_PROPERTY = 6830;
-			static const int LINK_OPERATION_GETTYPES = 6827;
-			static const int LINK_OPERATION_ISMATCHINGLINK_EXTENSIONALVALUE_PROPERTY = 6828;
+			static const int LINK_OPERATION__COPY = 6834;
+			static const int LINK_OPERATION_ADDTO_LOCUS = 6832;
+			static const int LINK_OPERATION_GETOTHERFEATUREVALUES_EXTENSIONALVALUE_PROPERTY = 6833;
+			static const int LINK_OPERATION_GETTYPES = 6830;
+			static const int LINK_OPERATION_ISMATCHINGLINK_EXTENSIONALVALUE_PROPERTY = 6831;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getLink_Class() const = 0;
@@ -145,6 +147,7 @@ namespace fUML::Semantics::StructuredClassifiers
 			
 			virtual std::shared_ptr<ecore::EReference> getLink_Attribute_type() const = 0;
 			
+			virtual std::shared_ptr<ecore::EOperation> getLink_Operation__copy() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getLink_Operation_addTo_Locus() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getLink_Operation_getOtherFeatureValues_ExtensionalValue_Property() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getLink_Operation_getTypes() const = 0;
@@ -155,21 +158,22 @@ namespace fUML::Semantics::StructuredClassifiers
 
 			// Begin Class Object
 			//Class and Feature IDs 
-			static const unsigned int OBJECT_CLASS = 80;
+			static const unsigned long OBJECT_CLASS = 208025094;
 			static const unsigned int OBJECT_CLASS_FEATURE_COUNT = 4;
-			static const unsigned int OBJECT_CLASS_OPERATION_COUNT = 32;
+			static const unsigned int OBJECT_CLASS_OPERATION_COUNT = 36;
 			
 			static const int OBJECT_ATTRIBUTE_OBJECTACTIVATION = 8003;
 			static const int OBJECT_ATTRIBUTE_TYPES = 8002;
 			
-			static const int OBJECT_OPERATION__REGISTER_EVENTACCEPTER = 8031;
-			static const int OBJECT_OPERATION_DESTROY = 8034;
-			static const int OBJECT_OPERATION_DISPATCH_OPERATION = 8029;
-			static const int OBJECT_OPERATION_NEW_ = 8033;
-			static const int OBJECT_OPERATION_SEND_SIGNALINSTANCE = 8030;
-			static const int OBJECT_OPERATION_SEND_EVENTOCCURRENCE = 8035;
-			static const int OBJECT_OPERATION_STARTBEHAVIOR_CLASS_PARAMETERVALUE = 8028;
-			static const int OBJECT_OPERATION_UNREGISTER_EVENTACCEPTER = 8032;
+			static const int OBJECT_OPERATION__COPY = 8039;
+			static const int OBJECT_OPERATION__REGISTER_EVENTACCEPTER = 8034;
+			static const int OBJECT_OPERATION_DESTROY = 8037;
+			static const int OBJECT_OPERATION_DISPATCH_OPERATION = 8032;
+			static const int OBJECT_OPERATION_NEW_ = 8036;
+			static const int OBJECT_OPERATION_SEND_SIGNALINSTANCE = 8033;
+			static const int OBJECT_OPERATION_SEND_EVENTOCCURRENCE = 8038;
+			static const int OBJECT_OPERATION_STARTBEHAVIOR_CLASS_PARAMETERVALUE = 8031;
+			static const int OBJECT_OPERATION_UNREGISTER_EVENTACCEPTER = 8035;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getObject_Class() const = 0;
@@ -178,6 +182,7 @@ namespace fUML::Semantics::StructuredClassifiers
 			virtual std::shared_ptr<ecore::EReference> getObject_Attribute_objectActivation() const = 0;
 			virtual std::shared_ptr<ecore::EReference> getObject_Attribute_types() const = 0;
 			
+			virtual std::shared_ptr<ecore::EOperation> getObject_Operation__copy() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getObject_Operation__register_EventAccepter() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getObject_Operation_destroy() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getObject_Operation_dispatch_Operation() const = 0;
@@ -192,7 +197,7 @@ namespace fUML::Semantics::StructuredClassifiers
 
 			// Begin Class RedefinitionBasedDispatchStrategy
 			//Class and Feature IDs 
-			static const unsigned int REDEFINITIONBASEDDISPATCHSTRATEGY_CLASS = 97;
+			static const unsigned long REDEFINITIONBASEDDISPATCHSTRATEGY_CLASS = 784625732;
 			static const unsigned int REDEFINITIONBASEDDISPATCHSTRATEGY_CLASS_FEATURE_COUNT = 0;
 			static const unsigned int REDEFINITIONBASEDDISPATCHSTRATEGY_CLASS_OPERATION_COUNT = 6;
 			
@@ -213,27 +218,28 @@ namespace fUML::Semantics::StructuredClassifiers
 
 			// Begin Class Reference
 			//Class and Feature IDs 
-			static const unsigned int REFERENCE_CLASS = 99;
+			static const unsigned long REFERENCE_CLASS = 408530163;
 			static const unsigned int REFERENCE_CLASS_FEATURE_COUNT = 1;
-			static const unsigned int REFERENCE_CLASS_OPERATION_COUNT = 32;
+			static const unsigned int REFERENCE_CLASS_OPERATION_COUNT = 34;
 			
 			static const int REFERENCE_ATTRIBUTE_REFERENT = 9900;
 			
-			static const int REFERENCE_OPERATION_ASSIGNFEATUREVALUE_STRUCTURALFEATURE_EINT = 9926;
-			static const int REFERENCE_OPERATION_DESTROY = 9921;
-			static const int REFERENCE_OPERATION_DISPATCH_OPERATION = 9919;
-			static const int REFERENCE_OPERATION_EQUALS_VALUE = 9922;
-			static const int REFERENCE_OPERATION_GETTYPES = 9924;
-			static const int REFERENCE_OPERATION_GETVALUES_STRUCTURALFEATURE_FEATUREVALUE = 9931;
-			static const int REFERENCE_OPERATION_NEW_ = 9923;
-			static const int REFERENCE_OPERATION_REMOVEVALUE_STRUCTURALFEATURE_VALUE = 9932;
-			static const int REFERENCE_OPERATION_RETRIEVEFEATUREVALUE_STRUCTURALFEATURE = 9925;
-			static const int REFERENCE_OPERATION_RETRIEVEFEATUREVALUES = 9927;
-			static const int REFERENCE_OPERATION_SEND_SIGNALINSTANCE = 9920;
-			static const int REFERENCE_OPERATION_SEND_EVENTOCCURRENCE = 9929;
-			static const int REFERENCE_OPERATION_SETFEATUREVALUE_STRUCTURALFEATURE_EINT = 9930;
-			static const int REFERENCE_OPERATION_STARTBEHAVIOR_CLASS_PARAMETERVALUE = 9918;
-			static const int REFERENCE_OPERATION_TOSTRING = 9928;
+			static const int REFERENCE_OPERATION__COPY = 9934;
+			static const int REFERENCE_OPERATION_ASSIGNFEATUREVALUE_STRUCTURALFEATURE_EINT = 9927;
+			static const int REFERENCE_OPERATION_DESTROY = 9922;
+			static const int REFERENCE_OPERATION_DISPATCH_OPERATION = 9920;
+			static const int REFERENCE_OPERATION_EQUALS_VALUE = 9923;
+			static const int REFERENCE_OPERATION_GETTYPES = 9925;
+			static const int REFERENCE_OPERATION_GETVALUES_STRUCTURALFEATURE_FEATUREVALUE = 9932;
+			static const int REFERENCE_OPERATION_NEW_ = 9924;
+			static const int REFERENCE_OPERATION_REMOVEVALUE_STRUCTURALFEATURE_VALUE = 9933;
+			static const int REFERENCE_OPERATION_RETRIEVEFEATUREVALUE_STRUCTURALFEATURE = 9926;
+			static const int REFERENCE_OPERATION_RETRIEVEFEATUREVALUES = 9928;
+			static const int REFERENCE_OPERATION_SEND_SIGNALINSTANCE = 9921;
+			static const int REFERENCE_OPERATION_SEND_EVENTOCCURRENCE = 9930;
+			static const int REFERENCE_OPERATION_SETFEATUREVALUE_STRUCTURALFEATURE_EINT = 9931;
+			static const int REFERENCE_OPERATION_STARTBEHAVIOR_CLASS_PARAMETERVALUE = 9919;
+			static const int REFERENCE_OPERATION_TOSTRING = 9929;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getReference_Class() const = 0;
@@ -241,6 +247,7 @@ namespace fUML::Semantics::StructuredClassifiers
 			
 			virtual std::shared_ptr<ecore::EReference> getReference_Attribute_referent() const = 0;
 			
+			virtual std::shared_ptr<ecore::EOperation> getReference_Operation__copy() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getReference_Operation_assignFeatureValue_StructuralFeature_EInt() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getReference_Operation_destroy() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getReference_Operation_dispatch_Operation() const = 0;

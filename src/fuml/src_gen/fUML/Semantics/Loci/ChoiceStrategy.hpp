@@ -50,8 +50,7 @@ namespace fUML::Semantics::Loci
 //*********************************
 namespace fUML::Semantics::Loci 
 {
-	/*!
-	 */
+	
 	class ChoiceStrategy:virtual public SemanticStrategy
 	{
 		public:
@@ -71,12 +70,10 @@ namespace fUML::Semantics::Loci
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual int choose(int size) = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual std::string getName() = 0;
 			
 			

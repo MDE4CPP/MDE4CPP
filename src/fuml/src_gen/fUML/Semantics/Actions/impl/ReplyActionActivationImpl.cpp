@@ -38,6 +38,8 @@
 
 #include <exception> // used in Persistence
 
+#include "uml/Action.hpp"
+
 #include "fUML/Semantics/Actions/ActionActivation.hpp"
 
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
@@ -72,17 +74,7 @@ using namespace fUML::Semantics::Actions;
 // Constructor / Destructor
 //*********************************
 ReplyActionActivationImpl::ReplyActionActivationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 ReplyActionActivationImpl::~ReplyActionActivationImpl()
@@ -92,14 +84,12 @@ ReplyActionActivationImpl::~ReplyActionActivationImpl()
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			ReplyActionActivationImpl::ReplyActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
-			:ReplyActionActivationImpl()
-			{
-			    m_group = par_group;
-			}
-
+ReplyActionActivationImpl::ReplyActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
+:ReplyActionActivationImpl()
+{
+	m_group = par_group;
+}
 
 
 ReplyActionActivationImpl::ReplyActionActivationImpl(const ReplyActionActivationImpl & obj):ReplyActionActivationImpl()
@@ -113,6 +103,8 @@ ReplyActionActivationImpl::ReplyActionActivationImpl(const ReplyActionActivation
 
 	//copy references with no containment (soft copy)
 	
+	m_action  = obj.getAction();
+
 	m_group  = obj.getGroup();
 
 	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> _incomingEdges = obj.getIncomingEdges();
@@ -221,8 +213,20 @@ if((std::dynamic_pointer_cast<uml::CallEvent>(replyToCall->getEvent()) != nullpt
 //*********************************
 std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> ReplyActionActivationImpl::getPinActivation() const
 {
+	if(m_pinActivation == nullptr)
+	{
+		/*Union*/
+		m_pinActivation.reset(new Union<fUML::Semantics::Actions::PinActivation>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_pinActivation - Union<fUML::Semantics::Actions::PinActivation>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_pinActivation;
 }
+
+
 
 
 std::shared_ptr<ReplyActionActivation> ReplyActionActivationImpl::getThisReplyActionActivationPtr() const

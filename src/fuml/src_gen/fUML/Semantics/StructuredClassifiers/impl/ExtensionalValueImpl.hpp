@@ -19,7 +19,7 @@
 //*********************************
 namespace fUML::Semantics::StructuredClassifiers 
 {
-	class ExtensionalValueImpl :virtual public fUML::Semantics::SimpleClassifiers::CompoundValueImpl, virtual public ExtensionalValue 
+	class ExtensionalValueImpl : virtual public fUML::Semantics::SimpleClassifiers::CompoundValueImpl, virtual public ExtensionalValue 
 	{
 		public: 
 			ExtensionalValueImpl(const ExtensionalValueImpl & obj);
@@ -43,8 +43,10 @@ namespace fUML::Semantics::StructuredClassifiers
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() ;
+			
+			 
 			virtual void destroy() ;
 			
 			
@@ -57,13 +59,12 @@ namespace fUML::Semantics::StructuredClassifiers
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<fUML::Semantics::Loci::Locus > getLocus() const ;
 			
-			/*!
-			 */
-			virtual void setLocus(std::shared_ptr<fUML::Semantics::Loci::Locus> _locus_locus) ;
+			
+			virtual void setLocus(std::shared_ptr<fUML::Semantics::Loci::Locus> _locus) ;
+			
 							
 			
 			//*********************************

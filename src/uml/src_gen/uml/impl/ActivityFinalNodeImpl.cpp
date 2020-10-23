@@ -77,17 +77,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 ActivityFinalNodeImpl::ActivityFinalNodeImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 ActivityFinalNodeImpl::~ActivityFinalNodeImpl()
@@ -97,41 +87,36 @@ ActivityFinalNodeImpl::~ActivityFinalNodeImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+ActivityFinalNodeImpl::ActivityFinalNodeImpl(std::weak_ptr<uml::Activity > par_activity)
+:ActivityFinalNodeImpl()
+{
+	m_activity = par_activity;
+	m_owner = par_activity;
+}
 
 //Additional constructor for the containments back reference
-			ActivityFinalNodeImpl::ActivityFinalNodeImpl(std::weak_ptr<uml::Activity > par_activity)
-			:ActivityFinalNodeImpl()
-			{
-			    m_activity = par_activity;
-				m_owner = par_activity;
-			}
-
-
-//Additional constructor for the containments back reference
-			ActivityFinalNodeImpl::ActivityFinalNodeImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
-			:ActivityFinalNodeImpl()
-			{
-			    m_inStructuredNode = par_inStructuredNode;
-				m_owner = par_inStructuredNode;
-			}
-
+ActivityFinalNodeImpl::ActivityFinalNodeImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
+:ActivityFinalNodeImpl()
+{
+	m_inStructuredNode = par_inStructuredNode;
+	m_owner = par_inStructuredNode;
+}
 
 //Additional constructor for the containments back reference
-			ActivityFinalNodeImpl::ActivityFinalNodeImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:ActivityFinalNodeImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
+ActivityFinalNodeImpl::ActivityFinalNodeImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:ActivityFinalNodeImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			ActivityFinalNodeImpl::ActivityFinalNodeImpl(std::weak_ptr<uml::Element > par_owner)
-			:ActivityFinalNodeImpl()
-			{
-			    m_owner = par_owner;
-			}
-
+ActivityFinalNodeImpl::ActivityFinalNodeImpl(std::weak_ptr<uml::Element > par_owner)
+:ActivityFinalNodeImpl()
+{
+	m_owner = par_owner;
+}
 
 
 ActivityFinalNodeImpl::ActivityFinalNodeImpl(const ActivityFinalNodeImpl & obj):ActivityFinalNodeImpl()
@@ -247,20 +232,55 @@ std::shared_ptr<ecore::EClass> ActivityFinalNodeImpl::eStaticClass() const
 //*********************************
 std::shared_ptr<Union<uml::ActivityGroup>> ActivityFinalNodeImpl::getInGroup() const
 {
+	if(m_inGroup == nullptr)
+	{
+		/*Union*/
+		m_inGroup.reset(new Union<uml::ActivityGroup>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_inGroup - Union<uml::ActivityGroup>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_inGroup;
 }
+
 std::shared_ptr<Union<uml::Element>> ActivityFinalNodeImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > ActivityFinalNodeImpl::getOwner() const
 {
 	return m_owner;
 }
+
 std::shared_ptr<Union<uml::RedefinableElement>> ActivityFinalNodeImpl::getRedefinedElement() const
 {
+	if(m_redefinedElement == nullptr)
+	{
+		/*Union*/
+		m_redefinedElement.reset(new Union<uml::RedefinableElement>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_redefinedElement - Union<uml::RedefinableElement>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_redefinedElement;
 }
+
+
 
 
 std::shared_ptr<ActivityFinalNode> ActivityFinalNodeImpl::getThisActivityFinalNodePtr() const

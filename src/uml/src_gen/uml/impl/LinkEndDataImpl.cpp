@@ -57,39 +57,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 LinkEndDataImpl::LinkEndDataImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-		/*Subset*/
-		m_qualifier.reset(new Subset<uml::QualifierValue, uml::Element >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_qualifier - Subset<uml::QualifierValue, uml::Element >()" << std::endl;
-		#endif
-	
-	
-
-	
-
-	//Init references
-	
-
-		/*Subset*/
-		m_qualifier->initSubset(m_ownedElement);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_qualifier - Subset<uml::QualifierValue, uml::Element >(m_ownedElement)" << std::endl;
-		#endif
-	
-	
-
-	
+{	
 }
 
 LinkEndDataImpl::~LinkEndDataImpl()
@@ -99,14 +67,12 @@ LinkEndDataImpl::~LinkEndDataImpl()
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			LinkEndDataImpl::LinkEndDataImpl(std::weak_ptr<uml::Element > par_owner)
-			:LinkEndDataImpl()
-			{
-			    m_owner = par_owner;
-			}
-
+LinkEndDataImpl::LinkEndDataImpl(std::weak_ptr<uml::Element > par_owner)
+:LinkEndDataImpl()
+{
+	m_owner = par_owner;
+}
 
 
 LinkEndDataImpl::LinkEndDataImpl(const LinkEndDataImpl & obj):LinkEndDataImpl()
@@ -144,12 +110,11 @@ LinkEndDataImpl::LinkEndDataImpl(const LinkEndDataImpl & obj):LinkEndDataImpl()
 		std::cout << "Copying the Subset: " << "m_qualifier" << std::endl;
 	#endif
 
-		/*Subset*/
-		m_qualifier->initSubset(m_ownedElement);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_qualifier - Subset<uml::QualifierValue, uml::Element >(m_ownedElement)" << std::endl;
-		#endif
-	
+	/*Subset*/
+	m_qualifier->initSubset(getOwnedElement());
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Initialising value Subset: " << "m_qualifier - Subset<uml::QualifierValue, uml::Element >(getOwnedElement())" << std::endl;
+	#endif
 	
 }
 
@@ -211,40 +176,85 @@ bool LinkEndDataImpl::same_type(Any diagnostics,std::map <   Any, Any >  context
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference end
+*/
 std::shared_ptr<uml::Property > LinkEndDataImpl::getEnd() const
 {
 //assert(m_end);
     return m_end;
 }
+
 void LinkEndDataImpl::setEnd(std::shared_ptr<uml::Property> _end)
 {
     m_end = _end;
 }
 
+
+
+/*
+Getter & Setter for reference qualifier
+*/
 std::shared_ptr<Subset<uml::QualifierValue, uml::Element>> LinkEndDataImpl::getQualifier() const
 {
+	if(m_qualifier == nullptr)
+	{
+		/*Subset*/
+		m_qualifier.reset(new Subset<uml::QualifierValue, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_qualifier - Subset<uml::QualifierValue, uml::Element >()" << std::endl;
+		#endif
+		
+		/*Subset*/
+		m_qualifier->initSubset(getOwnedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_qualifier - Subset<uml::QualifierValue, uml::Element >(getOwnedElement())" << std::endl;
+		#endif
+		
+	}
 
     return m_qualifier;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference value
+*/
 std::shared_ptr<uml::InputPin > LinkEndDataImpl::getValue() const
 {
 
     return m_value;
 }
+
 void LinkEndDataImpl::setValue(std::shared_ptr<uml::InputPin> _value)
 {
     m_value = _value;
 }
+
+
 
 //*********************************
 // Union Getter
 //*********************************
 std::shared_ptr<Union<uml::Element>> LinkEndDataImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
+
 
 
 std::shared_ptr<LinkEndData> LinkEndDataImpl::getThisLinkEndDataPtr() const

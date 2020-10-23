@@ -65,19 +65,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 SignalEventImpl::SignalEventImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	//Init references
-	
+{	
 }
 
 SignalEventImpl::~SignalEventImpl()
@@ -87,41 +75,36 @@ SignalEventImpl::~SignalEventImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+SignalEventImpl::SignalEventImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:SignalEventImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			SignalEventImpl::SignalEventImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:SignalEventImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
+SignalEventImpl::SignalEventImpl(std::weak_ptr<uml::Element > par_owner)
+:SignalEventImpl()
+{
+	m_owner = par_owner;
+}
 
 //Additional constructor for the containments back reference
-			SignalEventImpl::SignalEventImpl(std::weak_ptr<uml::Element > par_owner)
-			:SignalEventImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-//Additional constructor for the containments back reference
-			SignalEventImpl::SignalEventImpl(std::weak_ptr<uml::Package > par_owningPackage)
-			:SignalEventImpl()
-			{
-			    m_owningPackage = par_owningPackage;
-				m_namespace = par_owningPackage;
-			}
-
+SignalEventImpl::SignalEventImpl(std::weak_ptr<uml::Package > par_owningPackage)
+:SignalEventImpl()
+{
+	m_owningPackage = par_owningPackage;
+	m_namespace = par_owningPackage;
+}
 
 //Additional constructor for the containments back reference
-			SignalEventImpl::SignalEventImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
-			:SignalEventImpl()
-			{
-			    m_owningTemplateParameter = par_owningTemplateParameter;
-				m_owner = par_owningTemplateParameter;
-			}
-
+SignalEventImpl::SignalEventImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+:SignalEventImpl()
+{
+	m_owningTemplateParameter = par_owningTemplateParameter;
+	m_owner = par_owningTemplateParameter;
+}
 
 
 SignalEventImpl::SignalEventImpl(const SignalEventImpl & obj):SignalEventImpl()
@@ -195,15 +178,21 @@ std::shared_ptr<ecore::EClass> SignalEventImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference signal
+*/
 std::shared_ptr<uml::Signal > SignalEventImpl::getSignal() const
 {
 //assert(m_signal);
     return m_signal;
 }
+
 void SignalEventImpl::setSignal(std::shared_ptr<uml::Signal> _signal)
 {
     m_signal = _signal;
 }
+
+
 
 //*********************************
 // Union Getter
@@ -212,14 +201,28 @@ std::weak_ptr<uml::Namespace > SignalEventImpl::getNamespace() const
 {
 	return m_namespace;
 }
+
 std::shared_ptr<Union<uml::Element>> SignalEventImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > SignalEventImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<SignalEvent> SignalEventImpl::getThisSignalEventPtr() const

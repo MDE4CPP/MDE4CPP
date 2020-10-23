@@ -15,6 +15,7 @@
 [module generateBuildFile('http://www.eclipse.org/emf/2002/Ecore')]
 
 [import ecore4CPP::generator::main::helper /]
+[import ecore4CPP::generator::main::helpers::keywords /]
 
 [query public metaModelLibraries(anEPackage : EPackage) : Set(EPackage) = OrderedSet{anEPackage.eAllContents().eClass().getRootPackage(),anEPackage.eAllContents(EClass).eAllSuperTypes.getRootPackage(),anEPackage.eAllContents(EStructuralFeature).eType.getRootPackage(),anEPackage.eAllContents(EParameter).eType.getRootPackage()}->flatten()->sortedBy(name) /]
 
@@ -235,12 +236,22 @@ ENDIF()
 [for (pack : EPackage | aPackage.metaModelLibraries()) ? (not(pack.name = aPackage.name))]
 FIND_LIBRARY([pack.name.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/] [pack.name/][libraryNameSuffix(debugMode)/][ending/] ${MDE4CPP_HOME}/application/[folderName/])
 [/for]
+[for (libName : String | aPackage.eAllContents()->filter(EClass)->select(c : EClass | c.hasKey(keyLibrary())).valueKeys(keyLibrary())->asOrderedSet())]
+[if (not (libName.oclIsUndefined() or libName = ''))]
+FIND_LIBRARY([libName.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/] [libName/][libraryNameSuffix(debugMode)/][ending/] ${MDE4CPP_HOME}/application/[folderName/])
+[/if]
+[/for]
 [/template]
 
 [template private generateLibraryLinking(aPackage : EPackage, debugMode : Boolean)]
 TARGET_LINK_LIBRARIES(${PROJECT_NAME}
 [for (pack : EPackage | aPackage.metaModelLibraries()) ? (not(pack.name = aPackage.name))]
 	[buildModeCMakeProperty(debugMode)/] ${[pack.name.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/]}
+[/for]
+[for (libName : String | aPackage.eAllContents()->filter(EClass)->select(c : EClass | c.hasKey(keyLibrary())).valueKeys(keyLibrary())->asOrderedSet())]
+[if (not (libName.oclIsUndefined() or libName = ''))]
+	[buildModeCMakeProperty(debugMode)/] ${[libName.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/]}
+[/if]
 [/for]
 )
 [/template]

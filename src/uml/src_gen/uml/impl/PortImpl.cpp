@@ -88,51 +88,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 PortImpl::PortImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-		m_provided.reset(new Bag<uml::Interface>());
-	
-	
-
-		/*Subset*/
-		m_redefinedPort.reset(new Subset<uml::Port, uml::Property /*Subset does not reference a union*/ >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_redefinedPort - Subset<uml::Port, uml::Property /*Subset does not reference a union*/ >()" << std::endl;
-		#endif
-	
-	
-
-		m_required.reset(new Bag<uml::Interface>());
-	
-	
-
-	//Init references
-	
-
-	
-	
-
-		/*Subset*/
-		m_redefinedPort->initSubset(m_redefinedProperty);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_redefinedPort - Subset<uml::Port, uml::Property /*Subset does not reference a union*/ >(m_redefinedProperty)" << std::endl;
-		#endif
-	
-	
-
-	
-	
+{	
 }
 
 PortImpl::~PortImpl()
@@ -142,77 +98,68 @@ PortImpl::~PortImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+PortImpl::PortImpl(std::weak_ptr<uml::Property > par_associationEnd)
+:PortImpl()
+{
+	m_associationEnd = par_associationEnd;
+	m_owner = par_associationEnd;
+}
 
 //Additional constructor for the containments back reference
-			PortImpl::PortImpl(std::weak_ptr<uml::Property > par_associationEnd)
-			:PortImpl()
-			{
-			    m_associationEnd = par_associationEnd;
-				m_owner = par_associationEnd;
-			}
-
-
-//Additional constructor for the containments back reference
-			PortImpl::PortImpl(std::weak_ptr<uml::Class > par_class)
-			:PortImpl()
-			{
-			    m_class = par_class;
-				m_namespace = par_class;
-			}
-
+PortImpl::PortImpl(std::weak_ptr<uml::Class > par_class)
+:PortImpl()
+{
+	m_class = par_class;
+	m_namespace = par_class;
+}
 
 //Additional constructor for the containments back reference
-			PortImpl::PortImpl(std::weak_ptr<uml::DataType > par_datatype)
-			:PortImpl()
-			{
-			    m_datatype = par_datatype;
-				m_namespace = par_datatype;
-			}
-
-
-//Additional constructor for the containments back reference
-			PortImpl::PortImpl(std::weak_ptr<uml::Interface > par_interface)
-			:PortImpl()
-			{
-			    m_interface = par_interface;
-				m_namespace = par_interface;
-			}
-
+PortImpl::PortImpl(std::weak_ptr<uml::DataType > par_datatype)
+:PortImpl()
+{
+	m_datatype = par_datatype;
+	m_namespace = par_datatype;
+}
 
 //Additional constructor for the containments back reference
-			PortImpl::PortImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:PortImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
-
-//Additional constructor for the containments back reference
-			PortImpl::PortImpl(std::weak_ptr<uml::Element > par_owner)
-			:PortImpl()
-			{
-			    m_owner = par_owner;
-			}
-
+PortImpl::PortImpl(std::weak_ptr<uml::Interface > par_interface)
+:PortImpl()
+{
+	m_interface = par_interface;
+	m_namespace = par_interface;
+}
 
 //Additional constructor for the containments back reference
-			PortImpl::PortImpl(std::weak_ptr<uml::Association > par_owningAssociation)
-			:PortImpl()
-			{
-			    m_owningAssociation = par_owningAssociation;
-				m_namespace = par_owningAssociation;
-			}
-
+PortImpl::PortImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:PortImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			PortImpl::PortImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
-			:PortImpl()
-			{
-			    m_owningTemplateParameter = par_owningTemplateParameter;
-				m_owner = par_owningTemplateParameter;
-			}
+PortImpl::PortImpl(std::weak_ptr<uml::Element > par_owner)
+:PortImpl()
+{
+	m_owner = par_owner;
+}
 
+//Additional constructor for the containments back reference
+PortImpl::PortImpl(std::weak_ptr<uml::Association > par_owningAssociation)
+:PortImpl()
+{
+	m_owningAssociation = par_owningAssociation;
+	m_namespace = par_owningAssociation;
+}
+
+//Additional constructor for the containments back reference
+PortImpl::PortImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+:PortImpl()
+{
+	m_owningTemplateParameter = par_owningTemplateParameter;
+	m_owner = par_owningTemplateParameter;
+}
 
 
 PortImpl::PortImpl(const PortImpl & obj):PortImpl()
@@ -385,14 +332,27 @@ std::shared_ptr<ecore::EClass> PortImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute isBehavior
+*/
+bool PortImpl::getIsBehavior() const 
+{
+	return m_isBehavior;
+}
+
 void PortImpl::setIsBehavior(bool _isBehavior)
 {
 	m_isBehavior = _isBehavior;
 } 
 
-bool PortImpl::getIsBehavior() const 
+
+
+/*
+Getter & Setter for attribute isConjugated
+*/
+bool PortImpl::getIsConjugated() const 
 {
-	return m_isBehavior;
+	return m_isConjugated;
 }
 
 void PortImpl::setIsConjugated(bool _isConjugated)
@@ -400,9 +360,14 @@ void PortImpl::setIsConjugated(bool _isConjugated)
 	m_isConjugated = _isConjugated;
 } 
 
-bool PortImpl::getIsConjugated() const 
+
+
+/*
+Getter & Setter for attribute isService
+*/
+bool PortImpl::getIsService() const 
 {
-	return m_isConjugated;
+	return m_isService;
 }
 
 void PortImpl::setIsService(bool _isService)
@@ -410,10 +375,7 @@ void PortImpl::setIsService(bool _isService)
 	m_isService = _isService;
 } 
 
-bool PortImpl::getIsService() const 
-{
-	return m_isService;
-}
+
 
 //*********************************
 // Operations
@@ -491,35 +453,86 @@ bool PortImpl::port_aggregation(Any diagnostics,std::map <   Any, Any >  context
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference protocol
+*/
 std::shared_ptr<uml::ProtocolStateMachine > PortImpl::getProtocol() const
 {
 
     return m_protocol;
 }
+
 void PortImpl::setProtocol(std::shared_ptr<uml::ProtocolStateMachine> _protocol)
 {
     m_protocol = _protocol;
 }
 
+
+
+/*
+Getter & Setter for reference provided
+*/
 std::shared_ptr<Bag<uml::Interface>> PortImpl::getProvided() const
 {
+	if(m_provided == nullptr)
+	{
+		m_provided.reset(new Bag<uml::Interface>());
+		
+		
+	}
 
     return m_provided;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference redefinedPort
+*/
 std::shared_ptr<Subset<uml::Port, uml::Property /*Subset does not reference a union*/>> PortImpl::getRedefinedPort() const
 {
+	if(m_redefinedPort == nullptr)
+	{
+		/*Subset*/
+		m_redefinedPort.reset(new Subset<uml::Port, uml::Property /*Subset does not reference a union*/ >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_redefinedPort - Subset<uml::Port, uml::Property /*Subset does not reference a union*/ >()" << std::endl;
+		#endif
+		
+		/*Subset*/
+		m_redefinedPort->initSubset(getRedefinedProperty());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_redefinedPort - Subset<uml::Port, uml::Property /*Subset does not reference a union*/ >(getRedefinedProperty())" << std::endl;
+		#endif
+		
+	}
 
     return m_redefinedPort;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference required
+*/
 std::shared_ptr<Bag<uml::Interface>> PortImpl::getRequired() const
 {
+	if(m_required == nullptr)
+	{
+		m_required.reset(new Bag<uml::Interface>());
+		
+		
+	}
 
     return m_required;
 }
+
+
+
 
 
 //*********************************
@@ -527,28 +540,75 @@ std::shared_ptr<Bag<uml::Interface>> PortImpl::getRequired() const
 //*********************************
 std::shared_ptr<Union<uml::Classifier>> PortImpl::getFeaturingClassifier() const
 {
+	if(m_featuringClassifier == nullptr)
+	{
+		/*Union*/
+		m_featuringClassifier.reset(new Union<uml::Classifier>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_featuringClassifier - Union<uml::Classifier>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_featuringClassifier;
 }
+
 std::weak_ptr<uml::Namespace > PortImpl::getNamespace() const
 {
 	return m_namespace;
 }
+
 std::shared_ptr<Union<uml::Element>> PortImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > PortImpl::getOwner() const
 {
 	return m_owner;
 }
+
 std::shared_ptr<Union<uml::RedefinableElement>> PortImpl::getRedefinedElement() const
 {
+	if(m_redefinedElement == nullptr)
+	{
+		/*Union*/
+		m_redefinedElement.reset(new Union<uml::RedefinableElement>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_redefinedElement - Union<uml::RedefinableElement>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_redefinedElement;
 }
+
 std::shared_ptr<Union<uml::Classifier>> PortImpl::getRedefinitionContext() const
 {
+	if(m_redefinitionContext == nullptr)
+	{
+		/*Union*/
+		m_redefinitionContext.reset(new Union<uml::Classifier>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_redefinitionContext - Union<uml::Classifier>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_redefinitionContext;
 }
+
+
 
 
 std::shared_ptr<Port> PortImpl::getThisPortPtr() const

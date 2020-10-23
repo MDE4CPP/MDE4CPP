@@ -66,19 +66,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 TimeEventImpl::TimeEventImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	//Init references
-	
+{	
 }
 
 TimeEventImpl::~TimeEventImpl()
@@ -88,41 +76,36 @@ TimeEventImpl::~TimeEventImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+TimeEventImpl::TimeEventImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:TimeEventImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			TimeEventImpl::TimeEventImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:TimeEventImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
+TimeEventImpl::TimeEventImpl(std::weak_ptr<uml::Element > par_owner)
+:TimeEventImpl()
+{
+	m_owner = par_owner;
+}
 
 //Additional constructor for the containments back reference
-			TimeEventImpl::TimeEventImpl(std::weak_ptr<uml::Element > par_owner)
-			:TimeEventImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-//Additional constructor for the containments back reference
-			TimeEventImpl::TimeEventImpl(std::weak_ptr<uml::Package > par_owningPackage)
-			:TimeEventImpl()
-			{
-			    m_owningPackage = par_owningPackage;
-				m_namespace = par_owningPackage;
-			}
-
+TimeEventImpl::TimeEventImpl(std::weak_ptr<uml::Package > par_owningPackage)
+:TimeEventImpl()
+{
+	m_owningPackage = par_owningPackage;
+	m_namespace = par_owningPackage;
+}
 
 //Additional constructor for the containments back reference
-			TimeEventImpl::TimeEventImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
-			:TimeEventImpl()
-			{
-			    m_owningTemplateParameter = par_owningTemplateParameter;
-				m_owner = par_owningTemplateParameter;
-			}
-
+TimeEventImpl::TimeEventImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+:TimeEventImpl()
+{
+	m_owningTemplateParameter = par_owningTemplateParameter;
+	m_owner = par_owningTemplateParameter;
+}
 
 
 TimeEventImpl::TimeEventImpl(const TimeEventImpl & obj):TimeEventImpl()
@@ -195,15 +178,20 @@ std::shared_ptr<ecore::EClass> TimeEventImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute isRelative
+*/
+bool TimeEventImpl::getIsRelative() const 
+{
+	return m_isRelative;
+}
+
 void TimeEventImpl::setIsRelative(bool _isRelative)
 {
 	m_isRelative = _isRelative;
 } 
 
-bool TimeEventImpl::getIsRelative() const 
-{
-	return m_isRelative;
-}
+
 
 //*********************************
 // Operations
@@ -217,15 +205,21 @@ bool TimeEventImpl::when_non_negative(Any diagnostics,std::map <   Any, Any >  c
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference when
+*/
 std::shared_ptr<uml::TimeExpression > TimeEventImpl::getWhen() const
 {
 //assert(m_when);
     return m_when;
 }
+
 void TimeEventImpl::setWhen(std::shared_ptr<uml::TimeExpression> _when)
 {
     m_when = _when;
 }
+
+
 
 //*********************************
 // Union Getter
@@ -234,14 +228,28 @@ std::weak_ptr<uml::Namespace > TimeEventImpl::getNamespace() const
 {
 	return m_namespace;
 }
+
 std::shared_ptr<Union<uml::Element>> TimeEventImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > TimeEventImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<TimeEvent> TimeEventImpl::getThisTimeEventPtr() const

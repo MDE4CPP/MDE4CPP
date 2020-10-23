@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class StructuralFeatureActionImpl :virtual public ActionImpl, virtual public StructuralFeatureAction 
+	class StructuralFeatureActionImpl : virtual public ActionImpl, virtual public StructuralFeatureAction 
 	{
 		public: 
 			StructuralFeatureActionImpl(const StructuralFeatureActionImpl & obj);
@@ -59,32 +59,42 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 The multiplicity of the object InputPin must be 1..1.
-			object.is(1,1) */ 
+			The multiplicity of the object InputPin must be 1..1.
+			object.is(1,1)
+			*/
+			 
 			virtual bool multiplicity(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
-			 The structuralFeature must not be static.
-			not structuralFeature.isStatic */ 
+			The structuralFeature must not be static.
+			not structuralFeature.isStatic
+			*/
+			 
 			virtual bool not_static(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
-			 The structuralFeature must either be an owned or inherited feature of the type of the object InputPin, or it must be an owned end of a binary Association whose opposite end had as a type to which the type of the object InputPin conforms.
+			The structuralFeature must either be an owned or inherited feature of the type of the object InputPin, or it must be an owned end of a binary Association whose opposite end had as a type to which the type of the object InputPin conforms.
 			object.type.oclAsType(Classifier).allFeatures()->includes(structuralFeature) or
-				object.type.conformsTo(structuralFeature.oclAsType(Property).opposite.type) */ 
+				object.type.conformsTo(structuralFeature.oclAsType(Property).opposite.type)
+			*/
+			 
 			virtual bool object_type(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
-			 The structuralFeature must have exactly one featuringClassifier.
-			structuralFeature.featuringClassifier->size() = 1 */ 
+			The structuralFeature must have exactly one featuringClassifier.
+			structuralFeature.featuringClassifier->size() = 1
+			*/
+			 
 			virtual bool one_featuring_classifier(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
-			 The visibility of the structuralFeature must allow access from the object performing the ReadStructuralFeatureAction.
+			The visibility of the structuralFeature must allow access from the object performing the ReadStructuralFeatureAction.
 			structuralFeature.visibility = VisibilityKind::public or
 			_'context'.allFeatures()->includes(structuralFeature) or
 			structuralFeature.visibility=VisibilityKind::protected and
-			_'context'.conformsTo(structuralFeature.oclAsType(Property).opposite.type.oclAsType(Classifier)) */ 
+			_'context'.conformsTo(structuralFeature.oclAsType(Property).opposite.type.oclAsType(Classifier))
+			*/
+			 
 			virtual bool visibility(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
@@ -98,43 +108,63 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 The InputPin from which the object whose StructuralFeature is to be read or written is obtained.
-			<p>From package UML::Actions.</p> */
+			The InputPin from which the object whose StructuralFeature is to be read or written is obtained.
+			<p>From package UML::Actions.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::InputPin > getObject() const ;
 			
 			/*!
-			 The InputPin from which the object whose StructuralFeature is to be read or written is obtained.
-			<p>From package UML::Actions.</p> */
-			virtual void setObject(std::shared_ptr<uml::InputPin> _object_object) ;
+			The InputPin from which the object whose StructuralFeature is to be read or written is obtained.
+			<p>From package UML::Actions.</p>
+			*/
+			
+			virtual void setObject(std::shared_ptr<uml::InputPin> _object) ;
+			
 			/*!
-			 The StructuralFeature to be read or written.
-			<p>From package UML::Actions.</p> */
+			The StructuralFeature to be read or written.
+			<p>From package UML::Actions.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::StructuralFeature > getStructuralFeature() const ;
 			
 			/*!
-			 The StructuralFeature to be read or written.
-			<p>From package UML::Actions.</p> */
-			virtual void setStructuralFeature(std::shared_ptr<uml::StructuralFeature> _structuralFeature_structuralFeature) ;
+			The StructuralFeature to be read or written.
+			<p>From package UML::Actions.</p>
+			*/
+			
+			virtual void setStructuralFeature(std::shared_ptr<uml::StructuralFeature> _structuralFeature) ;
+			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
+			ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::ActivityGroup>> getInGroup() const ;/*!
-			 The ordered set of InputPins representing the inputs to the Action.
-			<p>From package UML::Actions.</p> */
+			The ordered set of InputPins representing the inputs to the Action.
+			<p>From package UML::Actions.</p>
+			*/
+			
 			virtual std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> getInput() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
+			The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const ; 
 			 
 			//*********************************

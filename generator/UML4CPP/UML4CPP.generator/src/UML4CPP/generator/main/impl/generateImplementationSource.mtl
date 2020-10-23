@@ -208,17 +208,17 @@ std::shared_ptr<uml::Class> [className/]::getMetaClass()
 
 void [className/]::instantiate()
 {	[comment Init properties without default value/]
-	[for (aProperty : Property | aClass.ownedAttribute->sortedBy(myQualifiedName()))]
-	[if (aProperty.default->isEmpty())][aProperty.generateAttributeInstantiation()/][/if]
+	[for (aProperty : Property | aClass.ownedAttribute->sortedBy(myQualifiedName())->select(p : Property | p.default->isEmpty()))]
+	[aProperty.generateAttributeInstantiation()/]
 	[/for]
 	[comment Init properties with default value/]
-	[for (aProperty : Property | aClass.ownedAttribute->sortedBy(myQualifiedName()))]
-	[if ((not aProperty.defaultValue.oclIsUndefined()) and (aProperty.defaultValue.oclIsTypeOf(InstanceValue)))]
+	[for (aProperty : Property | aClass.ownedAttribute->sortedBy(myQualifiedName())->select(p : Property | (not p.default->isEmpty())))]
+	[if ((aProperty.defaultValue.oclIsTypeOf(InstanceValue)))]
 	[if (aProperty.defaultValue.type.oclIsUndefined() or aProperty.defaultValue.name.oclIsUndefined())]
-	// undefined type of InstanceValue [aProperty.defaultValue.qualifiedName/] ([aProperty.defaultValue.type.toString()/]) ['class '.concat(aClass.name).concat(': undefined type of InstanceValue ').concat(aProperty.defaultValue.qualifiedName).concat(' (').concat(aProperty.defaultValue.type.toString()).registerError()/]
-	[else]
+    ['class '.concat(aClass.name).concat(': undefined type of InstanceValue ').concat(aProperty.qualifiedName).registerError()/]
+	[else][if (not aProperty.defaultValue.type.oclIsTypeOf(Enumeration))]
 	[aProperty.generateAttributeDefaultInstantiation()/]
-	[/if][/if]
+	[/if][/if][/if]
 	[/for]
 	[comment Init connector patterns/]
 	[for (aConnector : Connector | aClass.ownedConnector->sortedBy(myQualifiedName()))]
@@ -231,9 +231,11 @@ void [className/]::instantiate()
 void [className/]::destroy()
 {	[comment Destroy corresponding links if existing/]
 	[for (aProperty : Property | aClass.ownedAttribute->sortedBy(myQualifiedName()))]
-	[comment  property must belong to an association AND be owned by a class (i.e. not owned by an association) AND be typed AND neither be of primitive nor enumeration type AND not be a back reference/]
-	[if (not aProperty.association.oclIsUndefined() and aProperty.owner.oclIsTypeOf(Class) and (not aProperty.type.oclIsUndefined()) and (not (aProperty.type.isPrimitive() or aProperty.type.oclIsKindOf(Enumeration))) and (not aProperty.isBackReference()))]
+	[comment  property must belong to an association AND this association must be binary AND property must be owned by a class (i.e. not owned by an association) AND be typed AND neither be of primitive nor enumeration type AND not be a back reference/]
+	[if (not aProperty.association.oclIsUndefined() and aProperty.association.memberEnd->size() = 2 and aProperty.owner.oclIsTypeOf(Class) and (not aProperty.type.oclIsUndefined()) and (not (aProperty.type.isPrimitive() or aProperty.type.oclIsKindOf(Enumeration))) and (not aProperty.isBackReference()))]
 	[for (anotherProperty : Property | aProperty.association.memberEnd->reject(p : Property | p = aProperty))]
+	[comment anotherProperty must be owned by a class (i.e. not by its association) /]
+	[if(anotherProperty.owner.oclIsTypeOf(Class))]
 	//Destroying links for opposite property [aProperty.name/]
 	[if (aProperty.upper <> 1)]
 	for(unsigned int i = 0; i < m_[aProperty.name/]->size(); i++)
@@ -245,6 +247,7 @@ void [className/]::destroy()
 	m_[aProperty.name/]->[anotherProperty.getterName()/]()->erase([aClass.generateGetThisPtrPropertyGetterName()/]());
 	[else]
 	if(m_[aProperty.name/]->[anotherProperty.getterName()/]() == [aClass.generateGetThisPtrPropertyGetterName()/]()) { m_[aProperty.name/]->[anotherProperty.getterName()/]().reset(); }
+	[/if]
 	[/if]
 	[/if]
 	[/for]

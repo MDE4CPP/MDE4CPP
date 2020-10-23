@@ -63,17 +63,7 @@ using namespace fUML::Semantics::SimpleClassifiers;
 // Constructor / Destructor
 //*********************************
 IntegerValueImpl::IntegerValueImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 IntegerValueImpl::~IntegerValueImpl()
@@ -82,7 +72,6 @@ IntegerValueImpl::~IntegerValueImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete IntegerValue "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -119,19 +108,37 @@ std::shared_ptr<ecore::EClass> IntegerValueImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
-void IntegerValueImpl::setValue(int _value)
-{
-	m_value = _value;
-} 
-
+/*
+Getter & Setter for attribute value
+*/
 int IntegerValueImpl::getValue() const 
 {
 	return m_value;
 }
 
+void IntegerValueImpl::setValue(int _value)
+{
+	m_value = _value;
+} 
+
+
+
 //*********************************
 // Operations
 //*********************************
+std::shared_ptr<fUML::Semantics::Values::Value> IntegerValueImpl::_copy()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Create a new integer value with the same value as this integer value.
+
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::IntegerValue> newValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createIntegerValue();
+newValue->setType(this->getType()); //Duplicated from _copy()-method of super class in order to avoid having to call _copy()-method of super class and having to cast afterwards
+newValue->setValue(this->getValue());
+return newValue;
+	//end of body
+}
+
 bool IntegerValueImpl::equals(std::shared_ptr<fUML::Semantics::Values::Value>  otherValue)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
@@ -179,6 +186,7 @@ std::string IntegerValueImpl::toString()
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<IntegerValue> IntegerValueImpl::getThisIntegerValuePtr() const

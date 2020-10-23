@@ -46,17 +46,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 ActivityContentImpl::ActivityContentImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 ActivityContentImpl::~ActivityContentImpl()
@@ -65,7 +55,6 @@ ActivityContentImpl::~ActivityContentImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ActivityContent "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -116,6 +105,7 @@ std::shared_ptr<uml::Activity> ActivityContentImpl::containingActivity()
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<ActivityContent> ActivityContentImpl::getThisActivityContentPtr() const

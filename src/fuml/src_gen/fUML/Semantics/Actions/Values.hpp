@@ -46,14 +46,13 @@ namespace fUML::Semantics::Values
 
 // enum includes
 
-#include "ecore/EObject.hpp"
+#include "ecore/EModelElement.hpp"
 
 //*********************************
 namespace fUML::Semantics::Actions 
 {
-	/*!
-	 */
-	class Values : virtual public ecore::EObject 
+	
+	class Values : virtual public ecore::EModelElement
 
 	{
 		public:
@@ -81,9 +80,9 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value>> getValues() const = 0;
+			
 			
 			
 
@@ -96,10 +95,8 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Reference Members
 			//*********************************
-			/*!
-			 */
-			std::shared_ptr<Bag<fUML::Semantics::Values::Value>> m_values;
 			
+			mutable std::shared_ptr<Bag<fUML::Semantics::Values::Value>> m_values;
 
 		public:
 			//*********************************

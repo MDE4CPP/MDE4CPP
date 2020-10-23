@@ -120,61 +120,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 ComponentImpl::ComponentImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		/*Subset*/
-		m_packagedElement.reset(new Subset<uml::PackageableElement, uml::NamedElement >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_packagedElement - Subset<uml::PackageableElement, uml::NamedElement >()" << std::endl;
-		#endif
-	
-	
-
-		m_provided.reset(new Bag<uml::Interface>());
-	
-	
-
-		/*Subset*/
-		m_realization.reset(new Subset<uml::ComponentRealization, uml::Element >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_realization - Subset<uml::ComponentRealization, uml::Element >()" << std::endl;
-		#endif
-	
-	
-
-		m_required.reset(new Bag<uml::Interface>());
-	
-	
-
-	//Init references
-		/*Subset*/
-		m_packagedElement->initSubset(m_ownedMember);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_packagedElement - Subset<uml::PackageableElement, uml::NamedElement >(m_ownedMember)" << std::endl;
-		#endif
-	
-	
-
-	
-	
-
-		/*Subset*/
-		m_realization->initSubset(m_ownedElement);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_realization - Subset<uml::ComponentRealization, uml::Element >(m_ownedElement)" << std::endl;
-		#endif
-	
-	
-
-	
-	
+{	
 }
 
 ComponentImpl::~ComponentImpl()
@@ -184,23 +130,20 @@ ComponentImpl::~ComponentImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+ComponentImpl::ComponentImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:ComponentImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			ComponentImpl::ComponentImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:ComponentImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
-
-//Additional constructor for the containments back reference
-			ComponentImpl::ComponentImpl(std::weak_ptr<uml::Element > par_owner)
-			:ComponentImpl()
-			{
-			    m_owner = par_owner;
-			}
-
+ComponentImpl::ComponentImpl(std::weak_ptr<uml::Element > par_owner)
+:ComponentImpl()
+{
+	m_owner = par_owner;
+}
 
 //Additional constructor for the containments back reference
 ComponentImpl::ComponentImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id)
@@ -222,17 +165,13 @@ ComponentImpl::ComponentImpl(std::weak_ptr<uml::Package > par_Package, const int
    
 }
 
-
 //Additional constructor for the containments back reference
-			ComponentImpl::ComponentImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
-			:ComponentImpl()
-			{
-			    m_owningTemplateParameter = par_owningTemplateParameter;
-				m_owner = par_owningTemplateParameter;
-			}
-
-
-//Additional constructor for the containments back reference
+ComponentImpl::ComponentImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+:ComponentImpl()
+{
+	m_owningTemplateParameter = par_owningTemplateParameter;
+	m_owner = par_owningTemplateParameter;
+}
 
 
 
@@ -509,20 +448,18 @@ ComponentImpl::ComponentImpl(const ComponentImpl & obj):ComponentImpl()
 		std::cout << "Copying the Subset: " << "m_templateBinding" << std::endl;
 	#endif
 
-		/*Subset*/
-		m_packagedElement->initSubset(m_ownedMember);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_packagedElement - Subset<uml::PackageableElement, uml::NamedElement >(m_ownedMember)" << std::endl;
-		#endif
-	
+	/*Subset*/
+	m_packagedElement->initSubset(getOwnedMember());
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Initialising value Subset: " << "m_packagedElement - Subset<uml::PackageableElement, uml::NamedElement >(getOwnedMember())" << std::endl;
+	#endif
 	
 
-		/*Subset*/
-		m_realization->initSubset(m_ownedElement);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_realization - Subset<uml::ComponentRealization, uml::Element >(m_ownedElement)" << std::endl;
-		#endif
-	
+	/*Subset*/
+	m_realization->initSubset(getOwnedElement());
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Initialising value Subset: " << "m_realization - Subset<uml::ComponentRealization, uml::Element >(getOwnedElement())" << std::endl;
+	#endif
 	
 }
 
@@ -541,15 +478,20 @@ std::shared_ptr<ecore::EClass> ComponentImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute isIndirectlyInstantiated
+*/
+bool ComponentImpl::getIsIndirectlyInstantiated() const 
+{
+	return m_isIndirectlyInstantiated;
+}
+
 void ComponentImpl::setIsIndirectlyInstantiated(bool _isIndirectlyInstantiated)
 {
 	m_isIndirectlyInstantiated = _isIndirectlyInstantiated;
 } 
 
-bool ComponentImpl::getIsIndirectlyInstantiated() const 
-{
-	return m_isIndirectlyInstantiated;
-}
+
 
 //*********************************
 // Operations
@@ -605,32 +547,98 @@ bool ComponentImpl::no_packaged_elements(Any diagnostics,std::map <   Any, Any >
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference packagedElement
+*/
 std::shared_ptr<Subset<uml::PackageableElement, uml::NamedElement>> ComponentImpl::getPackagedElement() const
 {
+	if(m_packagedElement == nullptr)
+	{
+		/*Subset*/
+		m_packagedElement.reset(new Subset<uml::PackageableElement, uml::NamedElement >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_packagedElement - Subset<uml::PackageableElement, uml::NamedElement >()" << std::endl;
+		#endif
+		
+		/*Subset*/
+		m_packagedElement->initSubset(getOwnedMember());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_packagedElement - Subset<uml::PackageableElement, uml::NamedElement >(getOwnedMember())" << std::endl;
+		#endif
+		
+	}
 
     return m_packagedElement;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference provided
+*/
 std::shared_ptr<Bag<uml::Interface>> ComponentImpl::getProvided() const
 {
+	if(m_provided == nullptr)
+	{
+		m_provided.reset(new Bag<uml::Interface>());
+		
+		
+	}
 
     return m_provided;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference realization
+*/
 std::shared_ptr<Subset<uml::ComponentRealization, uml::Element>> ComponentImpl::getRealization() const
 {
+	if(m_realization == nullptr)
+	{
+		/*Subset*/
+		m_realization.reset(new Subset<uml::ComponentRealization, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_realization - Subset<uml::ComponentRealization, uml::Element >()" << std::endl;
+		#endif
+		
+		/*Subset*/
+		m_realization->initSubset(getOwnedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_realization - Subset<uml::ComponentRealization, uml::Element >(getOwnedElement())" << std::endl;
+		#endif
+		
+	}
 
     return m_realization;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference required
+*/
 std::shared_ptr<Bag<uml::Interface>> ComponentImpl::getRequired() const
 {
+	if(m_required == nullptr)
+	{
+		m_required.reset(new Bag<uml::Interface>());
+		
+		
+	}
 
     return m_required;
 }
+
+
+
 
 
 //*********************************
@@ -638,40 +646,140 @@ std::shared_ptr<Bag<uml::Interface>> ComponentImpl::getRequired() const
 //*********************************
 std::shared_ptr<SubsetUnion<uml::Property, uml::Feature>> ComponentImpl::getAttribute() const
 {
+	if(m_attribute == nullptr)
+	{
+		/*SubsetUnion*/
+		m_attribute.reset(new SubsetUnion<uml::Property, uml::Feature >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_attribute - SubsetUnion<uml::Property, uml::Feature >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_attribute->initSubsetUnion(getFeature());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_attribute - SubsetUnion<uml::Property, uml::Feature >(getFeature())" << std::endl;
+		#endif
+		
+	}
 	return m_attribute;
 }
+
 std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement>> ComponentImpl::getFeature() const
 {
+	if(m_feature == nullptr)
+	{
+		/*SubsetUnion*/
+		m_feature.reset(new SubsetUnion<uml::Feature, uml::NamedElement >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_feature - SubsetUnion<uml::Feature, uml::NamedElement >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_feature->initSubsetUnion(getMember());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_feature - SubsetUnion<uml::Feature, uml::NamedElement >(getMember())" << std::endl;
+		#endif
+		
+	}
 	return m_feature;
 }
+
 std::shared_ptr<Union<uml::NamedElement>> ComponentImpl::getMember() const
 {
+	if(m_member == nullptr)
+	{
+		/*Union*/
+		m_member.reset(new Union<uml::NamedElement>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_member - Union<uml::NamedElement>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_member;
 }
+
 std::weak_ptr<uml::Namespace > ComponentImpl::getNamespace() const
 {
 	return m_namespace;
 }
+
 std::shared_ptr<Union<uml::Element>> ComponentImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> ComponentImpl::getOwnedMember() const
 {
+	if(m_ownedMember == nullptr)
+	{
+		/*SubsetUnion*/
+		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_ownedMember->initSubsetUnion(getOwnedElement(),getMember());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >(getOwnedElement(),getMember())" << std::endl;
+		#endif
+		
+	}
 	return m_ownedMember;
 }
+
 std::weak_ptr<uml::Element > ComponentImpl::getOwner() const
 {
 	return m_owner;
 }
+
 std::shared_ptr<Union<uml::RedefinableElement>> ComponentImpl::getRedefinedElement() const
 {
+	if(m_redefinedElement == nullptr)
+	{
+		/*Union*/
+		m_redefinedElement.reset(new Union<uml::RedefinableElement>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_redefinedElement - Union<uml::RedefinableElement>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_redefinedElement;
 }
+
 std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement>> ComponentImpl::getRole() const
 {
+	if(m_role == nullptr)
+	{
+		/*SubsetUnion*/
+		m_role.reset(new SubsetUnion<uml::ConnectableElement, uml::NamedElement >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_role - SubsetUnion<uml::ConnectableElement, uml::NamedElement >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_role->initSubsetUnion(getMember());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_role - SubsetUnion<uml::ConnectableElement, uml::NamedElement >(getMember())" << std::endl;
+		#endif
+		
+	}
 	return m_role;
 }
+
+
 
 
 std::shared_ptr<Component> ComponentImpl::getThisComponentPtr() const

@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_A6xBABJWEeuI2oJVG-zT2A" name="TestModelImport">
-  <eAnnotations xmi:id="_cCPxYBJmEeuI2oJVG-zT2A" source="BuildMode">
-    <details xmi:id="_cCPxYRJmEeuI2oJVG-zT2A" key="type" value="library"/>
-  </eAnnotations>
   <packagedElement xmi:type="uml:Class" xmi:id="_D-jiIBJWEeuI2oJVG-zT2A" name="B">
     <ownedBehavior xmi:type="uml:Activity" xmi:id="_5eZ1wBJYEeuI2oJVG-zT2A" name="activity for execute operation" specification="_APyU4BJXEeuI2oJVG-zT2A" node="_J9uu8BJZEeuI2oJVG-zT2A _XdoCkBJZEeuI2oJVG-zT2A _mrbMABJlEeuI2oJVG-zT2A _z5sHoBJmEeuI2oJVG-zT2A _BM_JsBJnEeuI2oJVG-zT2A _kq3-oBJnEeuI2oJVG-zT2A _6qROIBJnEeuI2oJVG-zT2A">
       <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_8vM6UBJnEeuI2oJVG-zT2A" name="obPrintModelName">

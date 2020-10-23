@@ -18,7 +18,7 @@
 //*********************************
 namespace ecore 
 {
-	class EAnnotationImpl :virtual public EModelElementImpl, virtual public EAnnotation 
+	class EAnnotationImpl : virtual public EModelElementImpl, virtual public EAnnotation 
 	{
 		public: 
 			EAnnotationImpl(const EAnnotationImpl & obj);
@@ -55,45 +55,40 @@ namespace ecore
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::string getSource() const ;
 			
-			/*!
-			 */ 
+			 
 			virtual void setSource (std::string _source); 
-			
 			
 			
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Subset<ecore::EObject, ecore::EObject>> getContents() const ;
 			
-			/*!
-			 */
+			
+			
 			virtual std::shared_ptr<Bag<ecore::EStringToStringMapEntry>> getDetails() const ;
 			
-			/*!
-			 */
+			
+			
 			virtual std::weak_ptr<ecore::EModelElement > getEModelElement() const ;
 			
-			/*!
-			 */
-			virtual void setEModelElement(std::shared_ptr<ecore::EModelElement> _eModelElement_eModelElement) ;
-			/*!
-			 */
+			
+			virtual void setEModelElement(std::shared_ptr<ecore::EModelElement> _eModelElement) ;
+			
+			
 			virtual std::shared_ptr<Bag<ecore::EObject>> getReferences() const ;
+			
 			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const ; 
 			 
 			//*********************************

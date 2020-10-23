@@ -19,6 +19,7 @@
  */]
 [module generateParameter('http://www.eclipse.org/uml2/5.0.0/UML')]
 
+[import UML4CPP::generator::main::components::generateType /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
@@ -70,4 +71,14 @@
 */]
 [template public genDefault(aParameter : Parameter) ? (aParameter.type.oclIsKindOf(Enumeration))]
 [aParameter.type.qualifiedName/]::[if (aParameter.default.oclIsUndefined())][aParameter.type.oclAsType(Enumeration).ownedLiteral->first().toString().toUpper()/][else][aParameter.default.toUpper()/][/if]
+[/template]
+
+[template public generateParameterInstances(anActivity : Activity, aPackage : Package)]
+[for (par : Parameter | anActivity.ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in)))]
+[if(par.type.supportedTypes())]
+[par.generateCppType(true)/] [par.name.toLowerFirst()/] = [par.default/];
+[else]
+[par.generateCppType(true)/] [par.name.toLowerFirst()/]([aPackage.getPackageName()/]::[aPackage.getPackageName().toUpperFirst()/]Factory::eInstance()->create[par.type.name.toUpperFirst()/]());
+[/if]
+[/for]
 [/template]

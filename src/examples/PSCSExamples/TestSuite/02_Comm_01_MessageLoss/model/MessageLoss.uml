@@ -3,9 +3,6 @@
   <eAnnotations xmi:id="_xjG30IrMEeqOgdz40dwV8A" source="prepareApplication">
     <details xmi:id="_2tFCUIrMEeqOgdz40dwV8A" key="sourceCodeMain" value="std::cout&lt;&lt;&quot;-- Test model : Loss of Messages - Operation&quot;&lt;&lt;std::endl;&#xA;&#xA;std::shared_ptr&lt;MessageLoss::Tester> tester = factory->createTester();&#xA;std::shared_ptr&lt;MessageLoss::A> a = factory->createA();&#xA;int v = 4;&#xA;bool successful = false;&#xA;&#xA;std::cout&lt;&lt;&quot;-- Running test case: Loss of Operation call on non-behavior ports with no delegation connector --&quot;&lt;&lt;std::endl;&#xA;std::cout&lt;&lt;std::endl;&#xA;&#xA;a = tester->testCallDelegation(v);&#xA;successful = (a->getP() != v);&#xA;&#xA;std::cout&lt;&lt;&quot;a->p = &quot;&lt;&lt;a->getP()&lt;&lt;std::endl;&#xA;std::cout&lt;&lt;&quot;Operation call was not forwarded : &quot;&lt;&lt;std::boolalpha&lt;&lt;successful&lt;&lt;std::endl;&#xA;std::cout&lt;&lt;&quot;Test case successful : &quot;&lt;&lt;std::boolalpha&lt;&lt;successful&lt;&lt;std::endl;&#xA;std::cout&lt;&lt;std::endl;&#xA;std::cout&lt;&lt;&quot;-- End of test case --&quot;&lt;&lt;std::endl;"/>
   </eAnnotations>
-  <eAnnotations xmi:id="_6FZB8IrMEeqOgdz40dwV8A" source="BuildMode">
-    <details xmi:id="_7Juz0IrMEeqOgdz40dwV8A" key="type" value="library"/>
-  </eAnnotations>
   <ownedComment xmi:id="_2zLtgKDJEeq8Z9IqI9dZbA">
     <body>This test case addresses loss of an operation call on non-behavior port with no delegation connector.
 If the operation call is not forwarded, a::b::p must be equal to 0.</body>

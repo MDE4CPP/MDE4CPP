@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class ReadLinkActionImpl :virtual public LinkActionImpl, virtual public ReadLinkAction 
+	class ReadLinkActionImpl : virtual public LinkActionImpl, virtual public ReadLinkAction 
 	{
 		public: 
 			ReadLinkActionImpl(const ReadLinkActionImpl & obj);
@@ -59,40 +59,52 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 The multiplicity of the open Association end must be compatible with the multiplicity of the result OutputPin.
-			self.openEnd()->first().compatibleWith(result) */ 
+			The multiplicity of the open Association end must be compatible with the multiplicity of the result OutputPin.
+			self.openEnd()->first().compatibleWith(result)
+			*/
+			 
 			virtual bool compatible_multiplicity(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
-			 The open end must be navigable.
-			self.openEnd()->first().isNavigable() */ 
+			The open end must be navigable.
+			self.openEnd()->first().isNavigable()
+			*/
+			 
 			virtual bool navigable_open_end(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
-			 Exactly one linkEndData specification (corresponding to the "open" end) must not have an value InputPin.
-			self.openEnd()->size() = 1 */ 
+			Exactly one linkEndData specification (corresponding to the "open" end) must not have an value InputPin.
+			self.openEnd()->size() = 1
+			*/
+			 
 			virtual bool one_open_end(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
-			 Returns the ends corresponding to endData with no value InputPin. (A well-formed ReadLinkAction is constrained to have only one of these.)
+			Returns the ends corresponding to endData with no value InputPin. (A well-formed ReadLinkAction is constrained to have only one of these.)
 			result = (endData->select(value=null).end->asOrderedSet())
-			<p>From package UML::Actions.</p> */ 
+			<p>From package UML::Actions.</p>
+			*/
+			 
 			virtual std::shared_ptr<Bag<uml::Property> > openEnd() ;
 			
 			/*!
-			 The type and ordering of the result OutputPin are same as the type and ordering of the open Association end.
-			self.openEnd()->forAll(type=result.type and isOrdered=result.isOrdered) */ 
+			The type and ordering of the result OutputPin are same as the type and ordering of the open Association end.
+			self.openEnd()->forAll(type=result.type and isOrdered=result.isOrdered)
+			*/
+			 
 			virtual bool type_and_ordering(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
-			 Visibility of the open end must allow access from the object performing the action.
+			Visibility of the open end must allow access from the object performing the action.
 			let openEnd : Property = self.openEnd()->first() in
 			  openEnd.visibility = VisibilityKind::public or 
 			  endData->exists(oed | 
 			    oed.end<>openEnd and 
 			    (_'context' = oed.end.type or 
 			      (openEnd.visibility = VisibilityKind::protected and 
-			        _'context'.conformsTo(oed.end.type.oclAsType(Classifier))))) */ 
+			        _'context'.conformsTo(oed.end.type.oclAsType(Classifier)))))
+			*/
+			 
 			virtual bool visibility(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
@@ -106,37 +118,54 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 The OutputPin on which the objects retrieved from the "open" end of those links whose values on other ends are given by the endData.
-			<p>From package UML::Actions.</p> */
+			The OutputPin on which the objects retrieved from the "open" end of those links whose values on other ends are given by the endData.
+			<p>From package UML::Actions.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::OutputPin > getResult() const ;
 			
 			/*!
-			 The OutputPin on which the objects retrieved from the "open" end of those links whose values on other ends are given by the endData.
-			<p>From package UML::Actions.</p> */
-			virtual void setResult(std::shared_ptr<uml::OutputPin> _result_result) ;
+			The OutputPin on which the objects retrieved from the "open" end of those links whose values on other ends are given by the endData.
+			<p>From package UML::Actions.</p>
+			*/
+			
+			virtual void setResult(std::shared_ptr<uml::OutputPin> _result) ;
+			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
+			ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::ActivityGroup>> getInGroup() const ;/*!
-			 The ordered set of InputPins representing the inputs to the Action.
-			<p>From package UML::Actions.</p> */
+			The ordered set of InputPins representing the inputs to the Action.
+			<p>From package UML::Actions.</p>
+			*/
+			
 			virtual std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> getInput() const ;/*!
-			 The ordered set of OutputPins representing outputs from the Action.
-			<p>From package UML::Actions.</p> */
+			The ordered set of OutputPins representing outputs from the Action.
+			<p>From package UML::Actions.</p>
+			*/
+			
 			virtual std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element>> getOutput() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
+			The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const ; 
 			 
 			//*********************************

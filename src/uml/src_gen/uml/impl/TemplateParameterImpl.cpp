@@ -55,35 +55,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 TemplateParameterImpl::TemplateParameterImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	
-
-	
-
-	
-
-	
-
-	//Init references
-	
-
-	
-
-	
-
-	
-
-	
+{	
 }
 
 TemplateParameterImpl::~TemplateParameterImpl()
@@ -93,23 +65,20 @@ TemplateParameterImpl::~TemplateParameterImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+TemplateParameterImpl::TemplateParameterImpl(std::weak_ptr<uml::Element > par_owner)
+:TemplateParameterImpl()
+{
+	m_owner = par_owner;
+}
 
 //Additional constructor for the containments back reference
-			TemplateParameterImpl::TemplateParameterImpl(std::weak_ptr<uml::Element > par_owner)
-			:TemplateParameterImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-//Additional constructor for the containments back reference
-			TemplateParameterImpl::TemplateParameterImpl(std::weak_ptr<uml::TemplateSignature > par_signature)
-			:TemplateParameterImpl()
-			{
-			    m_signature = par_signature;
-				m_owner = par_signature;
-			}
-
+TemplateParameterImpl::TemplateParameterImpl(std::weak_ptr<uml::TemplateSignature > par_signature)
+:TemplateParameterImpl()
+{
+	m_signature = par_signature;
+	m_owner = par_signature;
+}
 
 
 TemplateParameterImpl::TemplateParameterImpl(const TemplateParameterImpl & obj):TemplateParameterImpl()
@@ -188,67 +157,110 @@ bool TemplateParameterImpl::must_be_compatible(Any diagnostics,std::map <   Any,
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference default
+*/
 std::shared_ptr<uml::ParameterableElement > TemplateParameterImpl::getDefault() const
 {
 
     return m_default;
 }
+
 void TemplateParameterImpl::setDefault(std::shared_ptr<uml::ParameterableElement> _default)
 {
     m_default = _default;
 }
 
+
+
+/*
+Getter & Setter for reference ownedDefault
+*/
 std::shared_ptr<uml::ParameterableElement > TemplateParameterImpl::getOwnedDefault() const
 {
 
     return m_ownedDefault;
 }
+
 void TemplateParameterImpl::setOwnedDefault(std::shared_ptr<uml::ParameterableElement> _ownedDefault)
 {
     m_ownedDefault = _ownedDefault;
 }
 
+
+
+/*
+Getter & Setter for reference ownedParameteredElement
+*/
 std::shared_ptr<uml::ParameterableElement > TemplateParameterImpl::getOwnedParameteredElement() const
 {
 
     return m_ownedParameteredElement;
 }
+
 void TemplateParameterImpl::setOwnedParameteredElement(std::shared_ptr<uml::ParameterableElement> _ownedParameteredElement)
 {
     m_ownedParameteredElement = _ownedParameteredElement;
 }
 
+
+
+/*
+Getter & Setter for reference parameteredElement
+*/
 std::shared_ptr<uml::ParameterableElement > TemplateParameterImpl::getParameteredElement() const
 {
 //assert(m_parameteredElement);
     return m_parameteredElement;
 }
+
 void TemplateParameterImpl::setParameteredElement(std::shared_ptr<uml::ParameterableElement> _parameteredElement)
 {
     m_parameteredElement = _parameteredElement;
 }
 
+
+
+/*
+Getter & Setter for reference signature
+*/
 std::weak_ptr<uml::TemplateSignature > TemplateParameterImpl::getSignature() const
 {
 //assert(m_signature);
     return m_signature;
 }
+
 void TemplateParameterImpl::setSignature(std::shared_ptr<uml::TemplateSignature> _signature)
 {
     m_signature = _signature;
 }
+
+
 
 //*********************************
 // Union Getter
 //*********************************
 std::shared_ptr<Union<uml::Element>> TemplateParameterImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > TemplateParameterImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<TemplateParameter> TemplateParameterImpl::getThisTemplateParameterPtr() const

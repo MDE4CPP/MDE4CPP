@@ -36,6 +36,11 @@ namespace fUML
 }
 
 //Forward Declaration for used types
+namespace uml 
+{
+	class Action;
+}
+
 namespace fUML::Semantics::Actions 
 {
 	class ActionActivation;
@@ -85,8 +90,7 @@ namespace fUML::Semantics::Activities
 //*********************************
 namespace fUML::Semantics::Actions 
 {
-	/*!
-	 */
+	
 	class ClearAssociationActionActivation:virtual public ActionActivation
 	{
 		public:
@@ -131,8 +135,7 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> getPinActivation() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

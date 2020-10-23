@@ -62,35 +62,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 CollaborationUseImpl::CollaborationUseImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		/*Subset*/
-		m_roleBinding.reset(new Subset<uml::Dependency, uml::Element >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_roleBinding - Subset<uml::Dependency, uml::Element >()" << std::endl;
-		#endif
-	
-	
-
-	
-
-	//Init references
-		/*Subset*/
-		m_roleBinding->initSubset(m_ownedElement);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_roleBinding - Subset<uml::Dependency, uml::Element >(m_ownedElement)" << std::endl;
-		#endif
-	
-	
-
-	
+{	
 }
 
 CollaborationUseImpl::~CollaborationUseImpl()
@@ -100,23 +72,20 @@ CollaborationUseImpl::~CollaborationUseImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+CollaborationUseImpl::CollaborationUseImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:CollaborationUseImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			CollaborationUseImpl::CollaborationUseImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:CollaborationUseImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
-
-//Additional constructor for the containments back reference
-			CollaborationUseImpl::CollaborationUseImpl(std::weak_ptr<uml::Element > par_owner)
-			:CollaborationUseImpl()
-			{
-			    m_owner = par_owner;
-			}
-
+CollaborationUseImpl::CollaborationUseImpl(std::weak_ptr<uml::Element > par_owner)
+:CollaborationUseImpl()
+{
+	m_owner = par_owner;
+}
 
 
 CollaborationUseImpl::CollaborationUseImpl(const CollaborationUseImpl & obj):CollaborationUseImpl()
@@ -167,12 +136,11 @@ CollaborationUseImpl::CollaborationUseImpl(const CollaborationUseImpl & obj):Col
 		std::cout << "Copying the Subset: " << "m_roleBinding" << std::endl;
 	#endif
 
-		/*Subset*/
-		m_roleBinding->initSubset(m_ownedElement);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_roleBinding - Subset<uml::Dependency, uml::Element >(m_ownedElement)" << std::endl;
-		#endif
-	
+	/*Subset*/
+	m_roleBinding->initSubset(getOwnedElement());
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Initialising value Subset: " << "m_roleBinding - Subset<uml::Dependency, uml::Element >(getOwnedElement())" << std::endl;
+	#endif
 	
 }
 
@@ -216,34 +184,74 @@ bool CollaborationUseImpl::every_role(Any diagnostics,std::map <   Any, Any >  c
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference roleBinding
+*/
 std::shared_ptr<Subset<uml::Dependency, uml::Element>> CollaborationUseImpl::getRoleBinding() const
 {
+	if(m_roleBinding == nullptr)
+	{
+		/*Subset*/
+		m_roleBinding.reset(new Subset<uml::Dependency, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_roleBinding - Subset<uml::Dependency, uml::Element >()" << std::endl;
+		#endif
+		
+		/*Subset*/
+		m_roleBinding->initSubset(getOwnedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_roleBinding - Subset<uml::Dependency, uml::Element >(getOwnedElement())" << std::endl;
+		#endif
+		
+	}
 
     return m_roleBinding;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference type
+*/
 std::shared_ptr<uml::Collaboration > CollaborationUseImpl::getType() const
 {
 //assert(m_type);
     return m_type;
 }
+
 void CollaborationUseImpl::setType(std::shared_ptr<uml::Collaboration> _type)
 {
     m_type = _type;
 }
+
+
 
 //*********************************
 // Union Getter
 //*********************************
 std::shared_ptr<Union<uml::Element>> CollaborationUseImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > CollaborationUseImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<CollaborationUse> CollaborationUseImpl::getThisCollaborationUsePtr() const

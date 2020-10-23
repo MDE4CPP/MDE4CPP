@@ -146,8 +146,10 @@ namespace uml
 namespace uml 
 {
 	/*!
-	 A StartClassifierBehaviorAction is an Action that starts the classifierBehavior of the input object.
-	<p>From package UML::Actions.</p> */
+	A StartClassifierBehaviorAction is an Action that starts the classifierBehavior of the input object.
+	<p>From package UML::Actions.</p>
+	*/
+	
 	class StartClassifierBehaviorAction:virtual public Action
 	{
 		public:
@@ -168,14 +170,18 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 The multiplicity of the object InputPin is 1..1
-			object.is(1,1) */ 
+			The multiplicity of the object InputPin is 1..1
+			object.is(1,1)
+			*/
+			 
 			virtual bool multiplicity(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
-			 If the InputPin has a type, then the type or one of its ancestors must have a classifierBehavior.
+			If the InputPin has a type, then the type or one of its ancestors must have a classifierBehavior.
 			object.type->notEmpty() implies 
-			   (object.type.oclIsKindOf(BehavioredClassifier) and object.type.oclAsType(BehavioredClassifier).classifierBehavior<>null) */ 
+			   (object.type.oclIsKindOf(BehavioredClassifier) and object.type.oclAsType(BehavioredClassifier).classifierBehavior<>null)
+			*/
+			 
 			virtual bool type_has_classifier(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
@@ -187,14 +193,19 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 The InputPin that holds the object whose classifierBehavior is to be started.
-			<p>From package UML::Actions.</p> */
+			The InputPin that holds the object whose classifierBehavior is to be started.
+			<p>From package UML::Actions.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::InputPin > getObject() const = 0;
 			
 			/*!
-			 The InputPin that holds the object whose classifierBehavior is to be started.
-			<p>From package UML::Actions.</p> */
-			virtual void setObject(std::shared_ptr<uml::InputPin> _object_object) = 0;
+			The InputPin that holds the object whose classifierBehavior is to be started.
+			<p>From package UML::Actions.</p>
+			*/
+			
+			virtual void setObject(std::shared_ptr<uml::InputPin> _object) = 0;
+			
 			
 
 		protected:
@@ -207,30 +218,41 @@ namespace uml
 			// Reference Members
 			//*********************************
 			/*!
-			 The InputPin that holds the object whose classifierBehavior is to be started.
-			<p>From package UML::Actions.</p> */
-			std::shared_ptr<uml::InputPin > m_object;
+			The InputPin that holds the object whose classifierBehavior is to be started.
+			<p>From package UML::Actions.</p>
+			*/
 			
+			std::shared_ptr<uml::InputPin > m_object;
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
+			ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::ActivityGroup>> getInGroup() const = 0;/*!
-			 The ordered set of InputPins representing the inputs to the Action.
-			<p>From package UML::Actions.</p> */
+			The ordered set of InputPins representing the inputs to the Action.
+			<p>From package UML::Actions.</p>
+			*/
+			
 			virtual std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> getInput() const = 0;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
+			The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

@@ -18,7 +18,7 @@
 //*********************************
 namespace ecore 
 {
-	class ETypedElementImpl :virtual public ENamedElementImpl, virtual public ETypedElement 
+	class ETypedElementImpl : virtual public ENamedElementImpl, virtual public ETypedElement 
 	{
 		public: 
 			ETypedElementImpl(const ETypedElementImpl & obj);
@@ -51,76 +51,58 @@ namespace ecore
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual int getLowerBound() const ;
 			
-			/*!
-			 */ 
+			 
 			virtual void setLowerBound (int _lowerBound); 
-			
-			/*!
-			 */ 
+			 
 			virtual bool isMany() const ;
 			
-			/*!
-			 */ 
+			
+			 
 			virtual bool isOrdered() const ;
 			
-			/*!
-			 */ 
+			 
 			virtual void setOrdered (bool _ordered); 
-			
-			/*!
-			 */ 
+			 
 			virtual bool isRequired() const ;
 			
-			/*!
-			 */ 
+			 
 			virtual void setRequired (bool _required); 
-			
-			/*!
-			 */ 
+			 
 			virtual bool isUnique() const ;
 			
-			/*!
-			 */ 
+			 
 			virtual void setUnique (bool _unique); 
-			
-			/*!
-			 */ 
+			 
 			virtual int getUpperBound() const ;
 			
-			/*!
-			 */ 
+			 
 			virtual void setUpperBound (int _upperBound); 
-			
 			
 			
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<ecore::EGenericType > getEGenericType() const ;
 			
-			/*!
-			 */
-			virtual void setEGenericType(std::shared_ptr<ecore::EGenericType> _eGenericType_eGenericType) ;
-			/*!
-			 */
+			
+			virtual void setEGenericType(std::shared_ptr<ecore::EGenericType> _eGenericType) ;
+			
+			
 			virtual std::shared_ptr<ecore::EClassifier > getEType() const ;
 			
-			/*!
-			 */
-			virtual void setEType(std::shared_ptr<ecore::EClassifier> _eType_eType) ;
+			
+			virtual void setEType(std::shared_ptr<ecore::EClassifier> _eType) ;
+			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const ; 
 			 
 			//*********************************

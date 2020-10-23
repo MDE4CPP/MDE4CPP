@@ -55,46 +55,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 TemplateSignatureImpl::TemplateSignatureImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		/*Subset*/
-		m_ownedParameter.reset(new Subset<uml::TemplateParameter, uml::Element,uml::TemplateParameter >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_ownedParameter - Subset<uml::TemplateParameter, uml::Element,uml::TemplateParameter >()" << std::endl;
-		#endif
-	
-	
-
-		/*Union*/
-		m_parameter.reset(new Union<uml::TemplateParameter>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_parameter - Union<uml::TemplateParameter>()" << std::endl;
-		#endif
-	
-	
-
-	
-
-	//Init references
-		/*Subset*/
-		m_ownedParameter->initSubset(m_ownedElement,m_parameter);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_ownedParameter - Subset<uml::TemplateParameter, uml::Element,uml::TemplateParameter >(m_ownedElement,m_parameter)" << std::endl;
-		#endif
-	
-	
-
-	
-	
-
-	
+{	
 }
 
 TemplateSignatureImpl::~TemplateSignatureImpl()
@@ -104,23 +65,20 @@ TemplateSignatureImpl::~TemplateSignatureImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+TemplateSignatureImpl::TemplateSignatureImpl(std::weak_ptr<uml::Element > par_owner)
+:TemplateSignatureImpl()
+{
+	m_owner = par_owner;
+}
 
 //Additional constructor for the containments back reference
-			TemplateSignatureImpl::TemplateSignatureImpl(std::weak_ptr<uml::Element > par_owner)
-			:TemplateSignatureImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-//Additional constructor for the containments back reference
-			TemplateSignatureImpl::TemplateSignatureImpl(std::weak_ptr<uml::TemplateableElement > par_template)
-			:TemplateSignatureImpl()
-			{
-			    m_template = par_template;
-				m_owner = par_template;
-			}
-
+TemplateSignatureImpl::TemplateSignatureImpl(std::weak_ptr<uml::TemplateableElement > par_template)
+:TemplateSignatureImpl()
+{
+	m_template = par_template;
+	m_owner = par_template;
+}
 
 
 TemplateSignatureImpl::TemplateSignatureImpl(const TemplateSignatureImpl & obj):TemplateSignatureImpl()
@@ -159,12 +117,11 @@ TemplateSignatureImpl::TemplateSignatureImpl(const TemplateSignatureImpl & obj):
 		std::cout << "Copying the Subset: " << "m_ownedParameter" << std::endl;
 	#endif
 
-		/*Subset*/
-		m_ownedParameter->initSubset(m_ownedElement,m_parameter);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_ownedParameter - Subset<uml::TemplateParameter, uml::Element,uml::TemplateParameter >(m_ownedElement,m_parameter)" << std::endl;
-		#endif
-	
+	/*Subset*/
+	m_ownedParameter->initSubset(getOwnedElement(),getParameter());
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Initialising value Subset: " << "m_ownedParameter - Subset<uml::TemplateParameter, uml::Element,uml::TemplateParameter >(getOwnedElement(),getParameter())" << std::endl;
+	#endif
 	
 }
 
@@ -202,8 +159,26 @@ bool TemplateSignatureImpl::unique_parameters(Any diagnostics,std::map <   Any, 
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference ownedParameter
+*/
 std::shared_ptr<Subset<uml::TemplateParameter, uml::Element,uml::TemplateParameter>> TemplateSignatureImpl::getOwnedParameter() const
 {
+	if(m_ownedParameter == nullptr)
+	{
+		/*Subset*/
+		m_ownedParameter.reset(new Subset<uml::TemplateParameter, uml::Element,uml::TemplateParameter >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_ownedParameter - Subset<uml::TemplateParameter, uml::Element,uml::TemplateParameter >()" << std::endl;
+		#endif
+		
+		/*Subset*/
+		m_ownedParameter->initSubset(getOwnedElement(),getParameter());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_ownedParameter - Subset<uml::TemplateParameter, uml::Element,uml::TemplateParameter >(getOwnedElement(),getParameter())" << std::endl;
+		#endif
+		
+	}
 
     return m_ownedParameter;
 }
@@ -212,31 +187,70 @@ std::shared_ptr<Subset<uml::TemplateParameter, uml::Element,uml::TemplateParamet
 
 
 
+/*
+Getter & Setter for reference parameter
+*/
+
+
+
+
+
+
+/*
+Getter & Setter for reference template
+*/
 std::weak_ptr<uml::TemplateableElement > TemplateSignatureImpl::getTemplate() const
 {
 //assert(m_template);
     return m_template;
 }
+
 void TemplateSignatureImpl::setTemplate(std::shared_ptr<uml::TemplateableElement> _template)
 {
     m_template = _template;
 }
+
+
 
 //*********************************
 // Union Getter
 //*********************************
 std::shared_ptr<Union<uml::Element>> TemplateSignatureImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > TemplateSignatureImpl::getOwner() const
 {
 	return m_owner;
 }
+
 std::shared_ptr<Union<uml::TemplateParameter>> TemplateSignatureImpl::getParameter() const
 {
+	if(m_parameter == nullptr)
+	{
+		/*Union*/
+		m_parameter.reset(new Union<uml::TemplateParameter>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_parameter - Union<uml::TemplateParameter>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_parameter;
 }
+
+
 
 
 std::shared_ptr<TemplateSignature> TemplateSignatureImpl::getThisTemplateSignaturePtr() const

@@ -106,70 +106,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 UseCaseImpl::UseCaseImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		/*Subset*/
-		m_extend.reset(new Subset<uml::Extend, uml::NamedElement >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_extend - Subset<uml::Extend, uml::NamedElement >()" << std::endl;
-		#endif
-	
-	
-
-		/*Subset*/
-		m_extensionPoint.reset(new Subset<uml::ExtensionPoint, uml::NamedElement >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_extensionPoint - Subset<uml::ExtensionPoint, uml::NamedElement >()" << std::endl;
-		#endif
-	
-	
-
-		/*Subset*/
-		m_include.reset(new Subset<uml::Include, uml::NamedElement >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_include - Subset<uml::Include, uml::NamedElement >()" << std::endl;
-		#endif
-	
-	
-
-		m_subject.reset(new Bag<uml::Classifier>());
-	
-	
-
-	//Init references
-		/*Subset*/
-		m_extend->initSubset(m_ownedMember);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_extend - Subset<uml::Extend, uml::NamedElement >(m_ownedMember)" << std::endl;
-		#endif
-	
-	
-
-		/*Subset*/
-		m_extensionPoint->initSubset(m_ownedMember);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_extensionPoint - Subset<uml::ExtensionPoint, uml::NamedElement >(m_ownedMember)" << std::endl;
-		#endif
-	
-	
-
-		/*Subset*/
-		m_include->initSubset(m_ownedMember);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_include - Subset<uml::Include, uml::NamedElement >(m_ownedMember)" << std::endl;
-		#endif
-	
-	
-
-	
-	
+{	
 }
 
 UseCaseImpl::~UseCaseImpl()
@@ -179,23 +116,20 @@ UseCaseImpl::~UseCaseImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+UseCaseImpl::UseCaseImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:UseCaseImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			UseCaseImpl::UseCaseImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:UseCaseImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
-
-//Additional constructor for the containments back reference
-			UseCaseImpl::UseCaseImpl(std::weak_ptr<uml::Element > par_owner)
-			:UseCaseImpl()
-			{
-			    m_owner = par_owner;
-			}
-
+UseCaseImpl::UseCaseImpl(std::weak_ptr<uml::Element > par_owner)
+:UseCaseImpl()
+{
+	m_owner = par_owner;
+}
 
 //Additional constructor for the containments back reference
 UseCaseImpl::UseCaseImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id)
@@ -217,17 +151,13 @@ UseCaseImpl::UseCaseImpl(std::weak_ptr<uml::Package > par_Package, const int ref
    
 }
 
-
 //Additional constructor for the containments back reference
-			UseCaseImpl::UseCaseImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
-			:UseCaseImpl()
-			{
-			    m_owningTemplateParameter = par_owningTemplateParameter;
-				m_owner = par_owningTemplateParameter;
-			}
-
-
-//Additional constructor for the containments back reference
+UseCaseImpl::UseCaseImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+:UseCaseImpl()
+{
+	m_owningTemplateParameter = par_owningTemplateParameter;
+	m_owner = par_owningTemplateParameter;
+}
 
 
 
@@ -450,28 +380,25 @@ UseCaseImpl::UseCaseImpl(const UseCaseImpl & obj):UseCaseImpl()
 		std::cout << "Copying the Subset: " << "m_templateBinding" << std::endl;
 	#endif
 
-		/*Subset*/
-		m_extend->initSubset(m_ownedMember);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_extend - Subset<uml::Extend, uml::NamedElement >(m_ownedMember)" << std::endl;
-		#endif
-	
-	
-
-		/*Subset*/
-		m_extensionPoint->initSubset(m_ownedMember);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_extensionPoint - Subset<uml::ExtensionPoint, uml::NamedElement >(m_ownedMember)" << std::endl;
-		#endif
-	
+	/*Subset*/
+	m_extend->initSubset(getOwnedMember());
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Initialising value Subset: " << "m_extend - Subset<uml::Extend, uml::NamedElement >(getOwnedMember())" << std::endl;
+	#endif
 	
 
-		/*Subset*/
-		m_include->initSubset(m_ownedMember);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_include - Subset<uml::Include, uml::NamedElement >(m_ownedMember)" << std::endl;
-		#endif
+	/*Subset*/
+	m_extensionPoint->initSubset(getOwnedMember());
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Initialising value Subset: " << "m_extensionPoint - Subset<uml::ExtensionPoint, uml::NamedElement >(getOwnedMember())" << std::endl;
+	#endif
 	
+
+	/*Subset*/
+	m_include->initSubset(getOwnedMember());
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Initialising value Subset: " << "m_include - Subset<uml::Include, uml::NamedElement >(getOwnedMember())" << std::endl;
+	#endif
 	
 }
 
@@ -527,32 +454,107 @@ bool UseCaseImpl::no_association_to_use_case(Any diagnostics,std::map <   Any, A
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference extend
+*/
 std::shared_ptr<Subset<uml::Extend, uml::NamedElement>> UseCaseImpl::getExtend() const
 {
+	if(m_extend == nullptr)
+	{
+		/*Subset*/
+		m_extend.reset(new Subset<uml::Extend, uml::NamedElement >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_extend - Subset<uml::Extend, uml::NamedElement >()" << std::endl;
+		#endif
+		
+		/*Subset*/
+		m_extend->initSubset(getOwnedMember());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_extend - Subset<uml::Extend, uml::NamedElement >(getOwnedMember())" << std::endl;
+		#endif
+		
+	}
 
     return m_extend;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference extensionPoint
+*/
 std::shared_ptr<Subset<uml::ExtensionPoint, uml::NamedElement>> UseCaseImpl::getExtensionPoint() const
 {
+	if(m_extensionPoint == nullptr)
+	{
+		/*Subset*/
+		m_extensionPoint.reset(new Subset<uml::ExtensionPoint, uml::NamedElement >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_extensionPoint - Subset<uml::ExtensionPoint, uml::NamedElement >()" << std::endl;
+		#endif
+		
+		/*Subset*/
+		m_extensionPoint->initSubset(getOwnedMember());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_extensionPoint - Subset<uml::ExtensionPoint, uml::NamedElement >(getOwnedMember())" << std::endl;
+		#endif
+		
+	}
 
     return m_extensionPoint;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference include
+*/
 std::shared_ptr<Subset<uml::Include, uml::NamedElement>> UseCaseImpl::getInclude() const
 {
+	if(m_include == nullptr)
+	{
+		/*Subset*/
+		m_include.reset(new Subset<uml::Include, uml::NamedElement >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_include - Subset<uml::Include, uml::NamedElement >()" << std::endl;
+		#endif
+		
+		/*Subset*/
+		m_include->initSubset(getOwnedMember());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_include - Subset<uml::Include, uml::NamedElement >(getOwnedMember())" << std::endl;
+		#endif
+		
+	}
 
     return m_include;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference subject
+*/
 std::shared_ptr<Bag<uml::Classifier>> UseCaseImpl::getSubject() const
 {
+	if(m_subject == nullptr)
+	{
+		m_subject.reset(new Bag<uml::Classifier>());
+		
+		
+	}
 
     return m_subject;
 }
+
+
+
 
 
 //*********************************
@@ -560,32 +562,100 @@ std::shared_ptr<Bag<uml::Classifier>> UseCaseImpl::getSubject() const
 //*********************************
 std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement>> UseCaseImpl::getFeature() const
 {
+	if(m_feature == nullptr)
+	{
+		/*SubsetUnion*/
+		m_feature.reset(new SubsetUnion<uml::Feature, uml::NamedElement >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_feature - SubsetUnion<uml::Feature, uml::NamedElement >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_feature->initSubsetUnion(getMember());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_feature - SubsetUnion<uml::Feature, uml::NamedElement >(getMember())" << std::endl;
+		#endif
+		
+	}
 	return m_feature;
 }
+
 std::shared_ptr<Union<uml::NamedElement>> UseCaseImpl::getMember() const
 {
+	if(m_member == nullptr)
+	{
+		/*Union*/
+		m_member.reset(new Union<uml::NamedElement>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_member - Union<uml::NamedElement>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_member;
 }
+
 std::weak_ptr<uml::Namespace > UseCaseImpl::getNamespace() const
 {
 	return m_namespace;
 }
+
 std::shared_ptr<Union<uml::Element>> UseCaseImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> UseCaseImpl::getOwnedMember() const
 {
+	if(m_ownedMember == nullptr)
+	{
+		/*SubsetUnion*/
+		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_ownedMember->initSubsetUnion(getOwnedElement(),getMember());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >(getOwnedElement(),getMember())" << std::endl;
+		#endif
+		
+	}
 	return m_ownedMember;
 }
+
 std::weak_ptr<uml::Element > UseCaseImpl::getOwner() const
 {
 	return m_owner;
 }
+
 std::shared_ptr<Union<uml::RedefinableElement>> UseCaseImpl::getRedefinedElement() const
 {
+	if(m_redefinedElement == nullptr)
+	{
+		/*Union*/
+		m_redefinedElement.reset(new Union<uml::RedefinableElement>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_redefinedElement - Union<uml::RedefinableElement>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_redefinedElement;
 }
+
+
 
 
 std::shared_ptr<UseCase> UseCaseImpl::getThisUseCasePtr() const

@@ -56,39 +56,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 SlotImpl::SlotImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	
-
-		/*Subset*/
-		m_value.reset(new Subset<uml::ValueSpecification, uml::Element >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_value - Subset<uml::ValueSpecification, uml::Element >()" << std::endl;
-		#endif
-	
-	
-
-	//Init references
-	
-
-	
-
-		/*Subset*/
-		m_value->initSubset(m_ownedElement);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_value - Subset<uml::ValueSpecification, uml::Element >(m_ownedElement)" << std::endl;
-		#endif
-	
-	
+{	
 }
 
 SlotImpl::~SlotImpl()
@@ -98,23 +66,20 @@ SlotImpl::~SlotImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+SlotImpl::SlotImpl(std::weak_ptr<uml::Element > par_owner)
+:SlotImpl()
+{
+	m_owner = par_owner;
+}
 
 //Additional constructor for the containments back reference
-			SlotImpl::SlotImpl(std::weak_ptr<uml::Element > par_owner)
-			:SlotImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-//Additional constructor for the containments back reference
-			SlotImpl::SlotImpl(std::weak_ptr<uml::InstanceSpecification > par_owningInstance)
-			:SlotImpl()
-			{
-			    m_owningInstance = par_owningInstance;
-				m_owner = par_owningInstance;
-			}
-
+SlotImpl::SlotImpl(std::weak_ptr<uml::InstanceSpecification > par_owningInstance)
+:SlotImpl()
+{
+	m_owningInstance = par_owningInstance;
+	m_owner = par_owningInstance;
+}
 
 
 SlotImpl::SlotImpl(const SlotImpl & obj):SlotImpl()
@@ -152,12 +117,11 @@ SlotImpl::SlotImpl(const SlotImpl & obj):SlotImpl()
 		std::cout << "Copying the Subset: " << "m_value" << std::endl;
 	#endif
 
-		/*Subset*/
-		m_value->initSubset(m_ownedElement);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_value - Subset<uml::ValueSpecification, uml::Element >(m_ownedElement)" << std::endl;
-		#endif
-	
+	/*Subset*/
+	m_value->initSubset(getOwnedElement());
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Initialising value Subset: " << "m_value - Subset<uml::ValueSpecification, uml::Element >(getOwnedElement())" << std::endl;
+	#endif
 	
 }
 
@@ -184,31 +148,64 @@ std::shared_ptr<ecore::EClass> SlotImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference definingFeature
+*/
 std::shared_ptr<uml::StructuralFeature > SlotImpl::getDefiningFeature() const
 {
 //assert(m_definingFeature);
     return m_definingFeature;
 }
+
 void SlotImpl::setDefiningFeature(std::shared_ptr<uml::StructuralFeature> _definingFeature)
 {
     m_definingFeature = _definingFeature;
 }
 
+
+
+/*
+Getter & Setter for reference owningInstance
+*/
 std::weak_ptr<uml::InstanceSpecification > SlotImpl::getOwningInstance() const
 {
 //assert(m_owningInstance);
     return m_owningInstance;
 }
+
 void SlotImpl::setOwningInstance(std::shared_ptr<uml::InstanceSpecification> _owningInstance)
 {
     m_owningInstance = _owningInstance;
 }
 
+
+
+/*
+Getter & Setter for reference value
+*/
 std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>> SlotImpl::getValue() const
 {
+	if(m_value == nullptr)
+	{
+		/*Subset*/
+		m_value.reset(new Subset<uml::ValueSpecification, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_value - Subset<uml::ValueSpecification, uml::Element >()" << std::endl;
+		#endif
+		
+		/*Subset*/
+		m_value->initSubset(getOwnedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_value - Subset<uml::ValueSpecification, uml::Element >(getOwnedElement())" << std::endl;
+		#endif
+		
+	}
 
     return m_value;
 }
+
+
+
 
 
 //*********************************
@@ -216,12 +213,25 @@ std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>> SlotImpl::getValu
 //*********************************
 std::shared_ptr<Union<uml::Element>> SlotImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > SlotImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<Slot> SlotImpl::getThisSlotPtr() const

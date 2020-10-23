@@ -19,7 +19,7 @@
 //*********************************
 namespace fUML::Semantics::Activities 
 {
-	class ObjectTokenImpl :virtual public TokenImpl, virtual public ObjectToken 
+	class ObjectTokenImpl : virtual public TokenImpl, virtual public ObjectToken 
 	{
 		public: 
 			ObjectTokenImpl(const ObjectTokenImpl & obj);
@@ -43,12 +43,13 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
+			virtual std::shared_ptr<fUML::Semantics::Activities::Token> _copy() ;
+			
+			 
 			virtual bool equals(std::shared_ptr<fUML::Semantics::Activities::Token>  other) ;
 			
-			/*!
-			 */ 
+			 
 			virtual bool isControl() ;
 			
 			
@@ -61,13 +62,12 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<fUML::Semantics::Values::Value > getValue() const ;
 			
-			/*!
-			 */
-			virtual void setValue(std::shared_ptr<fUML::Semantics::Values::Value> _value_value) ;
+			
+			virtual void setValue(std::shared_ptr<fUML::Semantics::Values::Value> _value) ;
+			
 							
 			
 			//*********************************

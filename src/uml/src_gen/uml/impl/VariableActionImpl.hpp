@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class VariableActionImpl :virtual public ActionImpl, virtual public VariableAction 
+	class VariableActionImpl : virtual public ActionImpl, virtual public VariableAction 
 	{
 		public: 
 			VariableActionImpl(const VariableActionImpl & obj);
@@ -59,8 +59,10 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 The VariableAction must be in the scope of the variable.
-			variable.isAccessibleBy(self) */ 
+			The VariableAction must be in the scope of the variable.
+			variable.isAccessibleBy(self)
+			*/
+			 
 			virtual bool scope_of_variable(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
@@ -74,31 +76,44 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 The Variable to be read or written.
-			<p>From package UML::Actions.</p> */
+			The Variable to be read or written.
+			<p>From package UML::Actions.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::Variable > getVariable() const ;
 			
 			/*!
-			 The Variable to be read or written.
-			<p>From package UML::Actions.</p> */
-			virtual void setVariable(std::shared_ptr<uml::Variable> _variable_variable) ;
+			The Variable to be read or written.
+			<p>From package UML::Actions.</p>
+			*/
+			
+			virtual void setVariable(std::shared_ptr<uml::Variable> _variable) ;
+			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
+			ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::ActivityGroup>> getInGroup() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
+			The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const ; 
 			 
 			//*********************************

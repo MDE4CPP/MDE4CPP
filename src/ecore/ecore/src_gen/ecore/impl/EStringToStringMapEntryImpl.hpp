@@ -14,12 +14,12 @@
 #include "../EStringToStringMapEntry.hpp"
 
 
-#include "ecore/impl/EObjectImpl.hpp"
+#include "ecore/impl/EModelElementImpl.hpp"
 
 //*********************************
 namespace ecore 
 {
-	class EStringToStringMapEntryImpl :virtual public ecore::EObjectImpl,
+	class EStringToStringMapEntryImpl : virtual public ecore::EModelElementImpl,
 virtual public EStringToStringMapEntry 
 	{
 		public: 
@@ -49,22 +49,16 @@ virtual public EStringToStringMapEntry
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::string getKey() const ;
 			
-			/*!
-			 */ 
+			 
 			virtual void setKey (std::string _key); 
-			
-			/*!
-			 */ 
+			 
 			virtual std::string getValue() const ;
 			
-			/*!
-			 */ 
+			 
 			virtual void setValue (std::string _value); 
-			
 			
 			
 			//*********************************

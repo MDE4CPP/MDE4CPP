@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class CallEventImpl :virtual public MessageEventImpl, virtual public CallEvent 
+	class CallEventImpl : virtual public MessageEventImpl, virtual public CallEvent 
 	{
 		public: 
 			CallEventImpl(const CallEventImpl & obj);
@@ -69,28 +69,39 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 Designates the Operation whose invocation raised the CalEvent.
-			<p>From package UML::CommonBehavior.</p> */
+			Designates the Operation whose invocation raised the CalEvent.
+			<p>From package UML::CommonBehavior.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::Operation > getOperation() const ;
 			
 			/*!
-			 Designates the Operation whose invocation raised the CalEvent.
-			<p>From package UML::CommonBehavior.</p> */
-			virtual void setOperation(std::shared_ptr<uml::Operation> _operation_operation) ;
+			Designates the Operation whose invocation raised the CalEvent.
+			<p>From package UML::CommonBehavior.</p>
+			*/
+			
+			virtual void setOperation(std::shared_ptr<uml::Operation> _operation) ;
+			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************

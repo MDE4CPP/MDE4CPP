@@ -19,7 +19,7 @@
 //*********************************
 namespace fUML::Semantics::Activities 
 {
-	class ActivityParameterNodeActivationImpl :virtual public ObjectNodeActivationImpl, virtual public ActivityParameterNodeActivation 
+	class ActivityParameterNodeActivationImpl : virtual public ObjectNodeActivationImpl, virtual public ActivityParameterNodeActivation 
 	{
 		public: 
 			ActivityParameterNodeActivationImpl(const ActivityParameterNodeActivationImpl & obj);
@@ -47,12 +47,10 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual void clearTokens() ;
 			
-			/*!
-			 */ 
+			 
 			virtual void fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token> >  incomingTokens) ;
 			
 			

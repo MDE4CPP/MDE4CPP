@@ -112,8 +112,10 @@ namespace uml
 namespace uml 
 {
 	/*!
-	 A Duration is a ValueSpecification that specifies the temporal distance between two time instants.
-	<p>From package UML::Values.</p> */
+	A Duration is a ValueSpecification that specifies the temporal distance between two time instants.
+	<p>From package UML::Values.</p>
+	*/
+	
 	class Duration:virtual public ValueSpecification
 	{
 		public:
@@ -134,8 +136,10 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 If a Duration has no expr, then it must have a single observation that is a DurationObservation.
-			expr = null implies (observation->size() = 1 and observation->forAll(oclIsKindOf(DurationObservation))) */ 
+			If a Duration has no expr, then it must have a single observation that is a DurationObservation.
+			expr = null implies (observation->size() = 1 and observation->forAll(oclIsKindOf(DurationObservation)))
+			*/
+			 
 			virtual bool no_expr_requires_observation(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
@@ -147,18 +151,26 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 A ValueSpecification that evaluates to the value of the Duration.
-			<p>From package UML::Values.</p> */
+			A ValueSpecification that evaluates to the value of the Duration.
+			<p>From package UML::Values.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::ValueSpecification > getExpr() const = 0;
 			
 			/*!
-			 A ValueSpecification that evaluates to the value of the Duration.
-			<p>From package UML::Values.</p> */
-			virtual void setExpr(std::shared_ptr<uml::ValueSpecification> _expr_expr) = 0;
+			A ValueSpecification that evaluates to the value of the Duration.
+			<p>From package UML::Values.</p>
+			*/
+			
+			virtual void setExpr(std::shared_ptr<uml::ValueSpecification> _expr) = 0;
+			
 			/*!
-			 Refers to the Observations that are involved in the computation of the Duration value
-			<p>From package UML::Values.</p> */
+			Refers to the Observations that are involved in the computation of the Duration value
+			<p>From package UML::Values.</p>
+			*/
+			
 			virtual std::shared_ptr<Bag<uml::Observation>> getObservation() const = 0;
+			
 			
 			
 
@@ -172,28 +184,36 @@ namespace uml
 			// Reference Members
 			//*********************************
 			/*!
-			 A ValueSpecification that evaluates to the value of the Duration.
-			<p>From package UML::Values.</p> */
-			std::shared_ptr<uml::ValueSpecification > m_expr;
-			/*!
-			 Refers to the Observations that are involved in the computation of the Duration value
-			<p>From package UML::Values.</p> */
-			std::shared_ptr<Bag<uml::Observation>> m_observation;
+			A ValueSpecification that evaluates to the value of the Duration.
+			<p>From package UML::Values.</p>
+			*/
 			
+			std::shared_ptr<uml::ValueSpecification > m_expr;/*!
+			Refers to the Observations that are involved in the computation of the Duration value
+			<p>From package UML::Values.</p>
+			*/
+			
+			mutable std::shared_ptr<Bag<uml::Observation>> m_observation;
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

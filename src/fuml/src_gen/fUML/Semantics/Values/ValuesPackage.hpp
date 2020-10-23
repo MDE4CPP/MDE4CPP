@@ -40,8 +40,7 @@ namespace fUML::Semantics::Values
 	The Metamodel Package for the Values metamodel. This package is used to enable the reflection of model elements. It contains all model elements
 	which were described in an ecore file.
 	*/
-	/*!
-	 */
+	
 	class ValuesPackage : virtual public ecore::EPackage 
 	{
 		private:    
@@ -59,7 +58,7 @@ namespace fUML::Semantics::Values
 
 			// Begin Class Evaluation
 			//Class and Feature IDs 
-			static const unsigned int EVALUATION_CLASS = 42;
+			static const unsigned long EVALUATION_CLASS = 1937172657;
 			static const unsigned int EVALUATION_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int EVALUATION_CLASS_OPERATION_COUNT = 3;
 			
@@ -82,7 +81,7 @@ namespace fUML::Semantics::Values
 
 			// Begin Class LiteralBooleanEvaluation
 			//Class and Feature IDs 
-			static const unsigned int LITERALBOOLEANEVALUATION_CLASS = 70;
+			static const unsigned long LITERALBOOLEANEVALUATION_CLASS = 1405002712;
 			static const unsigned int LITERALBOOLEANEVALUATION_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int LITERALBOOLEANEVALUATION_CLASS_OPERATION_COUNT = 5;
 			
@@ -101,7 +100,7 @@ namespace fUML::Semantics::Values
 
 			// Begin Class LiteralEvaluation
 			//Class and Feature IDs 
-			static const unsigned int LITERALEVALUATION_CLASS = 71;
+			static const unsigned long LITERALEVALUATION_CLASS = 396602993;
 			static const unsigned int LITERALEVALUATION_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int LITERALEVALUATION_CLASS_OPERATION_COUNT = 4;
 			
@@ -120,7 +119,7 @@ namespace fUML::Semantics::Values
 
 			// Begin Class LiteralIntegerEvaluation
 			//Class and Feature IDs 
-			static const unsigned int LITERALINTEGEREVALUATION_CLASS = 72;
+			static const unsigned long LITERALINTEGEREVALUATION_CLASS = 49428087;
 			static const unsigned int LITERALINTEGEREVALUATION_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int LITERALINTEGEREVALUATION_CLASS_OPERATION_COUNT = 5;
 			
@@ -139,7 +138,7 @@ namespace fUML::Semantics::Values
 
 			// Begin Class LiteralNullEvaluation
 			//Class and Feature IDs 
-			static const unsigned int LITERALNULLEVALUATION_CLASS = 73;
+			static const unsigned long LITERALNULLEVALUATION_CLASS = 372444390;
 			static const unsigned int LITERALNULLEVALUATION_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int LITERALNULLEVALUATION_CLASS_OPERATION_COUNT = 5;
 			
@@ -158,7 +157,7 @@ namespace fUML::Semantics::Values
 
 			// Begin Class LiteralRealEvaluation
 			//Class and Feature IDs 
-			static const unsigned int LITERALREALEVALUATION_CLASS = 74;
+			static const unsigned long LITERALREALEVALUATION_CLASS = 1312489840;
 			static const unsigned int LITERALREALEVALUATION_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int LITERALREALEVALUATION_CLASS_OPERATION_COUNT = 5;
 			
@@ -177,7 +176,7 @@ namespace fUML::Semantics::Values
 
 			// Begin Class LiteralStringEvaluation
 			//Class and Feature IDs 
-			static const unsigned int LITERALSTRINGEVALUATION_CLASS = 75;
+			static const unsigned long LITERALSTRINGEVALUATION_CLASS = 1041297075;
 			static const unsigned int LITERALSTRINGEVALUATION_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int LITERALSTRINGEVALUATION_CLASS_OPERATION_COUNT = 5;
 			
@@ -196,7 +195,7 @@ namespace fUML::Semantics::Values
 
 			// Begin Class LiteralUnlimitedNaturalEvaluation
 			//Class and Feature IDs 
-			static const unsigned int LITERALUNLIMITEDNATURALEVALUATION_CLASS = 76;
+			static const unsigned long LITERALUNLIMITEDNATURALEVALUATION_CLASS = 1271688193;
 			static const unsigned int LITERALUNLIMITEDNATURALEVALUATION_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int LITERALUNLIMITEDNATURALEVALUATION_CLASS_OPERATION_COUNT = 5;
 			
@@ -215,11 +214,12 @@ namespace fUML::Semantics::Values
 
 			// Begin Class Value
 			//Class and Feature IDs 
-			static const unsigned int VALUE_CLASS = 118;
+			static const unsigned long VALUE_CLASS = 856918907;
 			static const unsigned int VALUE_CLASS_FEATURE_COUNT = 0;
-			static const unsigned int VALUE_CLASS_OPERATION_COUNT = 9;
+			static const unsigned int VALUE_CLASS_OPERATION_COUNT = 10;
 			
 			
+			static const int VALUE_OPERATION__COPY = 11809;
 			static const int VALUE_OPERATION_CHECKALLPARENTS_CLASSIFIER_CLASSIFIER = 11808;
 			static const int VALUE_OPERATION_EQUALS_VALUE = 11803;
 			static const int VALUE_OPERATION_GETTYPES = 11804;
@@ -233,6 +233,7 @@ namespace fUML::Semantics::Values
 			
 			
 			
+			virtual std::shared_ptr<ecore::EOperation> getValue_Operation__copy() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getValue_Operation_checkAllParents_Classifier_Classifier() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getValue_Operation_equals_Value() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getValue_Operation_getTypes() const = 0;

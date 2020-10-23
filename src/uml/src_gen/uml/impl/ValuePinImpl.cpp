@@ -102,19 +102,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 ValuePinImpl::ValuePinImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	//Init references
-	
+{	
 }
 
 ValuePinImpl::~ValuePinImpl()
@@ -124,106 +112,93 @@ ValuePinImpl::~ValuePinImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+ValuePinImpl::ValuePinImpl(std::weak_ptr<uml::Action > par_action)
+:ValuePinImpl()
+{
+	m_action = par_action;
+	m_owner = par_action;
+}
 
 //Additional constructor for the containments back reference
-			ValuePinImpl::ValuePinImpl(std::weak_ptr<uml::Action > par_action)
-			:ValuePinImpl()
-			{
-			    m_action = par_action;
-				m_owner = par_action;
-			}
-
-
-//Additional constructor for the containments back reference
-			ValuePinImpl::ValuePinImpl(std::weak_ptr<uml::Activity > par_activity)
-			:ValuePinImpl()
-			{
-			    m_activity = par_activity;
-				m_owner = par_activity;
-			}
-
+ValuePinImpl::ValuePinImpl(std::weak_ptr<uml::Activity > par_activity)
+:ValuePinImpl()
+{
+	m_activity = par_activity;
+	m_owner = par_activity;
+}
 
 //Additional constructor for the containments back reference
-			ValuePinImpl::ValuePinImpl(std::weak_ptr<uml::AddStructuralFeatureValueAction > par_addStructuralFeatureValueAction)
-			:ValuePinImpl()
-			{
-			    m_addStructuralFeatureValueAction = par_addStructuralFeatureValueAction;
-			}
-
-
-//Additional constructor for the containments back reference
-			ValuePinImpl::ValuePinImpl(std::weak_ptr<uml::CallOperationAction > par_callOperationAction)
-			:ValuePinImpl()
-			{
-			    m_callOperationAction = par_callOperationAction;
-			}
-
+ValuePinImpl::ValuePinImpl(std::weak_ptr<uml::AddStructuralFeatureValueAction > par_addStructuralFeatureValueAction)
+:ValuePinImpl()
+{
+	m_addStructuralFeatureValueAction = par_addStructuralFeatureValueAction;
+}
 
 //Additional constructor for the containments back reference
-			ValuePinImpl::ValuePinImpl(std::weak_ptr<uml::DestroyObjectAction > par_destroyObjectAction)
-			:ValuePinImpl()
-			{
-			    m_destroyObjectAction = par_destroyObjectAction;
-			}
-
-
-//Additional constructor for the containments back reference
-			ValuePinImpl::ValuePinImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
-			:ValuePinImpl()
-			{
-			    m_inStructuredNode = par_inStructuredNode;
-				m_owner = par_inStructuredNode;
-			}
-
+ValuePinImpl::ValuePinImpl(std::weak_ptr<uml::CallOperationAction > par_callOperationAction)
+:ValuePinImpl()
+{
+	m_callOperationAction = par_callOperationAction;
+}
 
 //Additional constructor for the containments back reference
-			ValuePinImpl::ValuePinImpl(std::weak_ptr<uml::InvocationAction > par_invocationAction)
-			:ValuePinImpl()
-			{
-			    m_invocationAction = par_invocationAction;
-			}
-
-
-//Additional constructor for the containments back reference
-			ValuePinImpl::ValuePinImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:ValuePinImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
+ValuePinImpl::ValuePinImpl(std::weak_ptr<uml::DestroyObjectAction > par_destroyObjectAction)
+:ValuePinImpl()
+{
+	m_destroyObjectAction = par_destroyObjectAction;
+}
 
 //Additional constructor for the containments back reference
-			ValuePinImpl::ValuePinImpl(std::weak_ptr<uml::Element > par_owner)
-			:ValuePinImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-//Additional constructor for the containments back reference
-			ValuePinImpl::ValuePinImpl(std::weak_ptr<uml::RemoveStructuralFeatureValueAction > par_removeStructuralFeatureValueAction)
-			:ValuePinImpl()
-			{
-			    m_removeStructuralFeatureValueAction = par_removeStructuralFeatureValueAction;
-			}
-
+ValuePinImpl::ValuePinImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
+:ValuePinImpl()
+{
+	m_inStructuredNode = par_inStructuredNode;
+	m_owner = par_inStructuredNode;
+}
 
 //Additional constructor for the containments back reference
-			ValuePinImpl::ValuePinImpl(std::weak_ptr<uml::StructuralFeatureAction > par_structuralFeatureAction)
-			:ValuePinImpl()
-			{
-			    m_structuralFeatureAction = par_structuralFeatureAction;
-			}
-
+ValuePinImpl::ValuePinImpl(std::weak_ptr<uml::InvocationAction > par_invocationAction)
+:ValuePinImpl()
+{
+	m_invocationAction = par_invocationAction;
+}
 
 //Additional constructor for the containments back reference
-			ValuePinImpl::ValuePinImpl(std::weak_ptr<uml::WriteStructuralFeatureAction > par_writeStructuralFeatureAction)
-			:ValuePinImpl()
-			{
-			    m_writeStructuralFeatureAction = par_writeStructuralFeatureAction;
-			}
+ValuePinImpl::ValuePinImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:ValuePinImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
+//Additional constructor for the containments back reference
+ValuePinImpl::ValuePinImpl(std::weak_ptr<uml::Element > par_owner)
+:ValuePinImpl()
+{
+	m_owner = par_owner;
+}
+
+//Additional constructor for the containments back reference
+ValuePinImpl::ValuePinImpl(std::weak_ptr<uml::RemoveStructuralFeatureValueAction > par_removeStructuralFeatureValueAction)
+:ValuePinImpl()
+{
+	m_removeStructuralFeatureValueAction = par_removeStructuralFeatureValueAction;
+}
+
+//Additional constructor for the containments back reference
+ValuePinImpl::ValuePinImpl(std::weak_ptr<uml::StructuralFeatureAction > par_structuralFeatureAction)
+:ValuePinImpl()
+{
+	m_structuralFeatureAction = par_structuralFeatureAction;
+}
+
+//Additional constructor for the containments back reference
+ValuePinImpl::ValuePinImpl(std::weak_ptr<uml::WriteStructuralFeatureAction > par_writeStructuralFeatureAction)
+:ValuePinImpl()
+{
+	m_writeStructuralFeatureAction = par_writeStructuralFeatureAction;
+}
 
 
 ValuePinImpl::ValuePinImpl(const ValuePinImpl & obj):ValuePinImpl()
@@ -403,35 +378,76 @@ bool ValuePinImpl::no_incoming_edges(Any diagnostics,std::map <   Any, Any >  co
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference value
+*/
 std::shared_ptr<uml::ValueSpecification > ValuePinImpl::getValue() const
 {
 //assert(m_value);
     return m_value;
 }
+
 void ValuePinImpl::setValue(std::shared_ptr<uml::ValueSpecification> _value)
 {
     m_value = _value;
 }
+
+
 
 //*********************************
 // Union Getter
 //*********************************
 std::shared_ptr<Union<uml::ActivityGroup>> ValuePinImpl::getInGroup() const
 {
+	if(m_inGroup == nullptr)
+	{
+		/*Union*/
+		m_inGroup.reset(new Union<uml::ActivityGroup>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_inGroup - Union<uml::ActivityGroup>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_inGroup;
 }
+
 std::shared_ptr<Union<uml::Element>> ValuePinImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > ValuePinImpl::getOwner() const
 {
 	return m_owner;
 }
+
 std::shared_ptr<Union<uml::RedefinableElement>> ValuePinImpl::getRedefinedElement() const
 {
+	if(m_redefinedElement == nullptr)
+	{
+		/*Union*/
+		m_redefinedElement.reset(new Union<uml::RedefinableElement>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_redefinedElement - Union<uml::RedefinableElement>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_redefinedElement;
 }
+
+
 
 
 std::shared_ptr<ValuePin> ValuePinImpl::getThisValuePinPtr() const

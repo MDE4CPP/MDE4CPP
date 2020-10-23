@@ -60,17 +60,7 @@ using namespace fUML::Semantics::Activities;
 // Constructor / Destructor
 //*********************************
 DataStoreNodeActivationImpl::DataStoreNodeActivationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 DataStoreNodeActivationImpl::~DataStoreNodeActivationImpl()
@@ -80,14 +70,12 @@ DataStoreNodeActivationImpl::~DataStoreNodeActivationImpl()
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			DataStoreNodeActivationImpl::DataStoreNodeActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
-			:DataStoreNodeActivationImpl()
-			{
-			    m_group = par_group;
-			}
-
+DataStoreNodeActivationImpl::DataStoreNodeActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
+:DataStoreNodeActivationImpl()
+{
+	m_group = par_group;
+}
 
 
 DataStoreNodeActivationImpl::DataStoreNodeActivationImpl(const DataStoreNodeActivationImpl & obj):DataStoreNodeActivationImpl()
@@ -173,7 +161,7 @@ int DataStoreNodeActivationImpl::removeToken(std::shared_ptr<fUML::Semantics::Ac
 	int i = fUML::Semantics::Activities::ObjectNodeActivationImpl::removeToken(token);
 		
 		if (this->isRunning()) {
-			std::shared_ptr<fUML::Semantics::Activities::Token> copied_token = std::dynamic_pointer_cast<fUML::Semantics::Activities::Token>(token->copy());
+			std::shared_ptr<fUML::Semantics::Activities::Token> copied_token = std::dynamic_pointer_cast<fUML::Semantics::Activities::Token>(token->_copy());
 			fUML::Semantics::Activities::ObjectNodeActivationImpl::addToken(copied_token);
 			this->sendUnofferedTokens();
 		}
@@ -188,6 +176,7 @@ int DataStoreNodeActivationImpl::removeToken(std::shared_ptr<fUML::Semantics::Ac
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<DataStoreNodeActivation> DataStoreNodeActivationImpl::getThisDataStoreNodeActivationPtr() const

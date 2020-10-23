@@ -65,19 +65,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 MessageEndImpl::MessageEndImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	//Init references
-	
+{	
 }
 
 MessageEndImpl::~MessageEndImpl()
@@ -87,23 +75,20 @@ MessageEndImpl::~MessageEndImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+MessageEndImpl::MessageEndImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:MessageEndImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			MessageEndImpl::MessageEndImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:MessageEndImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
-
-//Additional constructor for the containments back reference
-			MessageEndImpl::MessageEndImpl(std::weak_ptr<uml::Element > par_owner)
-			:MessageEndImpl()
-			{
-			    m_owner = par_owner;
-			}
-
+MessageEndImpl::MessageEndImpl(std::weak_ptr<uml::Element > par_owner)
+:MessageEndImpl()
+{
+	m_owner = par_owner;
+}
 
 
 MessageEndImpl::MessageEndImpl(const MessageEndImpl & obj):MessageEndImpl()
@@ -194,27 +179,46 @@ std::shared_ptr<Bag<uml::MessageEnd> > MessageEndImpl::oppositeEnd()
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference message
+*/
 std::shared_ptr<uml::Message > MessageEndImpl::getMessage() const
 {
 
     return m_message;
 }
+
 void MessageEndImpl::setMessage(std::shared_ptr<uml::Message> _message)
 {
     m_message = _message;
 }
+
+
 
 //*********************************
 // Union Getter
 //*********************************
 std::shared_ptr<Union<uml::Element>> MessageEndImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > MessageEndImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<MessageEnd> MessageEndImpl::getThisMessageEndPtr() const

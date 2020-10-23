@@ -56,17 +56,7 @@ using namespace fUML::Semantics::Values;
 // Constructor / Destructor
 //*********************************
 LiteralNullEvaluationImpl::LiteralNullEvaluationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 LiteralNullEvaluationImpl::~LiteralNullEvaluationImpl()
@@ -75,7 +65,6 @@ LiteralNullEvaluationImpl::~LiteralNullEvaluationImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete LiteralNullEvaluation "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -132,6 +121,7 @@ std::shared_ptr<fUML::Semantics::Values::Value> LiteralNullEvaluationImpl::evalu
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<LiteralNullEvaluation> LiteralNullEvaluationImpl::getThisLiteralNullEvaluationPtr() const

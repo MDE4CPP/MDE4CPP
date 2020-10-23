@@ -31,6 +31,7 @@
 [startGuard(aPackage,'Factory')/]
 
 #include "uml/Factory.hpp"
+#include "[aPackage.getPackageName()/]/[aPackage.name.toUpperFirst().concat('Package')/].hpp"
 
 [comment  Generate Includes for the Factory/]
 [if (not aPackage.ignoreNamespace())]namespace [aPackage.name/] 

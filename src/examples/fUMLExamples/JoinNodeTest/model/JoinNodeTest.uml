@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_TYIyUEw0Eeqt1NEMZ6cUVA" name="JoinNodeTest">
+  <eAnnotations xmi:id="_EDn-AAGwEeuJAuxe-SDWBA" source="prepareApplication">
+    <details xmi:id="_VIXRYAGwEeuJAuxe-SDWBA" key="activityMain" value="true"/>
+  </eAnnotations>
   <packagedElement xmi:type="uml:Class" xmi:id="_rbalIEw0Eeqt1NEMZ6cUVA" name="A">
     <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_vUqHkEw0Eeqt1NEMZ6cUVA" name="fbPrint" specification="_tK1UUEw0Eeqt1NEMZ6cUVA">
       <language>CPP</language>
       <body>	std::cout &lt;&lt; &quot;SUCCESS&quot; &lt;&lt; std::endl;</body>
     </ownedBehavior>
     <ownedBehavior xmi:type="uml:Activity" xmi:id="_uVEdYEw1Eeqt1NEMZ6cUVA" name="JNTest" node="_9CPccEw1Eeqt1NEMZ6cUVA _-44N8Ew1Eeqt1NEMZ6cUVA _DCGtIEw2Eeqt1NEMZ6cUVA _FPubQEw2Eeqt1NEMZ6cUVA _TQdLEEw2Eeqt1NEMZ6cUVA _9i880Ew1Eeqt1NEMZ6cUVA">
+      <eAnnotations xmi:id="_ya27EAGwEeuJAuxe-SDWBA" source="http://sse.tu-ilmenau.de/codegen">
+        <details xmi:id="_AqMHkAGxEeuJAuxe-SDWBA" key="mainActivity" value="1"/>
+      </eAnnotations>
       <edge xmi:type="uml:ObjectFlow" xmi:id="_LANzMEw2Eeqt1NEMZ6cUVA" target="_DCGtIEw2Eeqt1NEMZ6cUVA" source="_-44N8Uw1Eeqt1NEMZ6cUVA"/>
       <edge xmi:type="uml:ObjectFlow" xmi:id="_LhOOgEw2Eeqt1NEMZ6cUVA" target="_FPubQUw2Eeqt1NEMZ6cUVA" source="_DCGtIEw2Eeqt1NEMZ6cUVA"/>
       <edge xmi:type="uml:ControlFlow" xmi:id="_Mlyp4Ew2Eeqt1NEMZ6cUVA" target="_-44N8Ew1Eeqt1NEMZ6cUVA" source="_9CPccEw1Eeqt1NEMZ6cUVA">

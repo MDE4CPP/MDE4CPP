@@ -54,81 +54,81 @@ namespace ecore
 			virtual std::shared_ptr<EObject> create(std::shared_ptr<EClass> _class, std::shared_ptr<EObject> _container=nullptr, const int referenceID = -1) const;
 
 			//Creator functions
-			 virtual std::shared_ptr<EAnnotation> createEAnnotation(const int metaElementID=-1) const ;
+			 virtual std::shared_ptr<EAnnotation> createEAnnotation(const int metaElementID = EcorePackage::EANNOTATION_CLASS) const ;
 			 //Add containing object
-			 virtual std::shared_ptr<EAnnotation> createEAnnotation_in_EContainer(std::weak_ptr<ecore::EObject > par_eContainer, const int metaElementID=-1) const ;
+			 virtual std::shared_ptr<EAnnotation> createEAnnotation_in_EContainer(std::weak_ptr<ecore::EObject > par_eContainer, const int metaElementID = EcorePackage::EANNOTATION_CLASS) const ;
 			 //Add containing object
-			 virtual std::shared_ptr<EAnnotation> createEAnnotation_in_EModelElement(std::weak_ptr<ecore::EModelElement > par_eModelElement, const int metaElementID=-1) const ;
+			 virtual std::shared_ptr<EAnnotation> createEAnnotation_in_EModelElement(std::weak_ptr<ecore::EModelElement > par_eModelElement, const int metaElementID = EcorePackage::EANNOTATION_CLASS) const ;
 			 
-			 virtual std::shared_ptr<EAttribute> createEAttribute(const int metaElementID=-1) const ;
+			 virtual std::shared_ptr<EAttribute> createEAttribute(const int metaElementID = EcorePackage::EATTRIBUTE_CLASS) const ;
 			 //Add containing object
-			 virtual std::shared_ptr<EAttribute> createEAttribute_in_EContainer(std::weak_ptr<ecore::EObject > par_eContainer, const int metaElementID=-1) const ;
+			 virtual std::shared_ptr<EAttribute> createEAttribute_in_EContainer(std::weak_ptr<ecore::EObject > par_eContainer, const int metaElementID = EcorePackage::EATTRIBUTE_CLASS) const ;
 			 //Add containing object
-			 virtual std::shared_ptr<EAttribute> createEAttribute_in_EContainingClass(std::weak_ptr<ecore::EClass > par_eContainingClass, const int metaElementID=-1) const ;
+			 virtual std::shared_ptr<EAttribute> createEAttribute_in_EContainingClass(std::weak_ptr<ecore::EClass > par_eContainingClass, const int metaElementID = EcorePackage::EATTRIBUTE_CLASS) const ;
 			 
-			 virtual std::shared_ptr<EClass> createEClass(const int metaElementID=-1) const ;
+			 virtual std::shared_ptr<EClass> createEClass(const int metaElementID = EcorePackage::ECLASS_CLASS) const ;
 			 //Add containing object
-			 virtual std::shared_ptr<EClass> createEClass_in_EContainer(std::weak_ptr<ecore::EObject > par_eContainer, const int metaElementID=-1) const ;
+			 virtual std::shared_ptr<EClass> createEClass_in_EContainer(std::weak_ptr<ecore::EObject > par_eContainer, const int metaElementID = EcorePackage::ECLASS_CLASS) const ;
 			 //Add containing object
-			 virtual std::shared_ptr<EClass> createEClass_in_EPackage(std::weak_ptr<ecore::EPackage > par_ePackage, const int metaElementID=-1) const ;
+			 virtual std::shared_ptr<EClass> createEClass_in_EPackage(std::weak_ptr<ecore::EPackage > par_ePackage, const int metaElementID = EcorePackage::ECLASS_CLASS) const ;
 			 
-			 virtual std::shared_ptr<EDataType> createEDataType(const int metaElementID=-1) const ;
+			 virtual std::shared_ptr<EDataType> createEDataType(const int metaElementID = EcorePackage::EDATATYPE_CLASS) const ;
 			 //Add containing object
-			 virtual std::shared_ptr<EDataType> createEDataType_in_EContainer(std::weak_ptr<ecore::EObject > par_eContainer, const int metaElementID=-1) const ;
+			 virtual std::shared_ptr<EDataType> createEDataType_in_EContainer(std::weak_ptr<ecore::EObject > par_eContainer, const int metaElementID = EcorePackage::EDATATYPE_CLASS) const ;
 			 //Add containing object
-			 virtual std::shared_ptr<EDataType> createEDataType_in_EPackage(std::weak_ptr<ecore::EPackage > par_ePackage, const int metaElementID=-1) const ;
+			 virtual std::shared_ptr<EDataType> createEDataType_in_EPackage(std::weak_ptr<ecore::EPackage > par_ePackage, const int metaElementID = EcorePackage::EDATATYPE_CLASS) const ;
 			 
-			 virtual std::shared_ptr<EEnum> createEEnum(const int metaElementID=-1) const ;
+			 virtual std::shared_ptr<EEnum> createEEnum(const int metaElementID = EcorePackage::EENUM_CLASS) const ;
 			 //Add containing object
-			 virtual std::shared_ptr<EEnum> createEEnum_in_EContainer(std::weak_ptr<ecore::EObject > par_eContainer, const int metaElementID=-1) const ;
+			 virtual std::shared_ptr<EEnum> createEEnum_in_EContainer(std::weak_ptr<ecore::EObject > par_eContainer, const int metaElementID = EcorePackage::EENUM_CLASS) const ;
 			 //Add containing object
-			 virtual std::shared_ptr<EEnum> createEEnum_in_EPackage(std::weak_ptr<ecore::EPackage > par_ePackage, const int metaElementID=-1) const ;
+			 virtual std::shared_ptr<EEnum> createEEnum_in_EPackage(std::weak_ptr<ecore::EPackage > par_ePackage, const int metaElementID = EcorePackage::EENUM_CLASS) const ;
 			 
-			 virtual std::shared_ptr<EEnumLiteral> createEEnumLiteral(const int metaElementID=-1) const ;
+			 virtual std::shared_ptr<EEnumLiteral> createEEnumLiteral(const int metaElementID = EcorePackage::EENUMLITERAL_CLASS) const ;
 			 //Add containing object
-			 virtual std::shared_ptr<EEnumLiteral> createEEnumLiteral_in_EContainer(std::weak_ptr<ecore::EObject > par_eContainer, const int metaElementID=-1) const ;
+			 virtual std::shared_ptr<EEnumLiteral> createEEnumLiteral_in_EContainer(std::weak_ptr<ecore::EObject > par_eContainer, const int metaElementID = EcorePackage::EENUMLITERAL_CLASS) const ;
 			 //Add containing object
-			 virtual std::shared_ptr<EEnumLiteral> createEEnumLiteral_in_EEnum(std::weak_ptr<ecore::EEnum > par_eEnum, const int metaElementID=-1) const ;
+			 virtual std::shared_ptr<EEnumLiteral> createEEnumLiteral_in_EEnum(std::weak_ptr<ecore::EEnum > par_eEnum, const int metaElementID = EcorePackage::EENUMLITERAL_CLASS) const ;
 			 
-			 virtual std::shared_ptr<EFactory> createEFactory(const int metaElementID=-1) const ;
+			 virtual std::shared_ptr<EFactory> createEFactory(const int metaElementID = EcorePackage::EFACTORY_CLASS) const ;
 			 //Add containing object
-			 virtual std::shared_ptr<EFactory> createEFactory_in_EContainer(std::weak_ptr<ecore::EObject > par_eContainer, const int metaElementID=-1) const ;
+			 virtual std::shared_ptr<EFactory> createEFactory_in_EContainer(std::weak_ptr<ecore::EObject > par_eContainer, const int metaElementID = EcorePackage::EFACTORY_CLASS) const ;
 			 
-			 virtual std::shared_ptr<EGenericType> createEGenericType(const int metaElementID=-1) const ;
+			 virtual std::shared_ptr<EGenericType> createEGenericType(const int metaElementID = EcorePackage::EGENERICTYPE_CLASS) const ;
 			 
-			 virtual std::shared_ptr<EObject> createEObject(const int metaElementID=-1) const ;
+			 virtual std::shared_ptr<EObject> createEObject(const int metaElementID = EcorePackage::EOBJECT_CLASS) const ;
 			 //Add containing object
-			 virtual std::shared_ptr<EObject> createEObject_in_EContainer(std::weak_ptr<ecore::EObject > par_eContainer, const int metaElementID=-1) const ;
+			 virtual std::shared_ptr<EObject> createEObject_in_EContainer(std::weak_ptr<ecore::EObject > par_eContainer, const int metaElementID = EcorePackage::EOBJECT_CLASS) const ;
 			 
-			 virtual std::shared_ptr<EOperation> createEOperation(const int metaElementID=-1) const ;
+			 virtual std::shared_ptr<EOperation> createEOperation(const int metaElementID = EcorePackage::EOPERATION_CLASS) const ;
 			 //Add containing object
-			 virtual std::shared_ptr<EOperation> createEOperation_in_EContainer(std::weak_ptr<ecore::EObject > par_eContainer, const int metaElementID=-1) const ;
+			 virtual std::shared_ptr<EOperation> createEOperation_in_EContainer(std::weak_ptr<ecore::EObject > par_eContainer, const int metaElementID = EcorePackage::EOPERATION_CLASS) const ;
 			 //Add containing object
-			 virtual std::shared_ptr<EOperation> createEOperation_in_EContainingClass(std::weak_ptr<ecore::EClass > par_eContainingClass, const int metaElementID=-1) const ;
+			 virtual std::shared_ptr<EOperation> createEOperation_in_EContainingClass(std::weak_ptr<ecore::EClass > par_eContainingClass, const int metaElementID = EcorePackage::EOPERATION_CLASS) const ;
 			 
-			 virtual std::shared_ptr<EPackage> createEPackage(const int metaElementID=-1) const ;
+			 virtual std::shared_ptr<EPackage> createEPackage(const int metaElementID = EcorePackage::EPACKAGE_CLASS) const ;
 			 //Add containing object
-			 virtual std::shared_ptr<EPackage> createEPackage_in_EContainer(std::weak_ptr<ecore::EObject > par_eContainer, const int metaElementID=-1) const ;
+			 virtual std::shared_ptr<EPackage> createEPackage_in_EContainer(std::weak_ptr<ecore::EObject > par_eContainer, const int metaElementID = EcorePackage::EPACKAGE_CLASS) const ;
 			 //Add containing object
-			 virtual std::shared_ptr<EPackage> createEPackage_in_ESuperPackage(std::weak_ptr<ecore::EPackage > par_eSuperPackage, const int metaElementID=-1) const ;
+			 virtual std::shared_ptr<EPackage> createEPackage_in_ESuperPackage(std::weak_ptr<ecore::EPackage > par_eSuperPackage, const int metaElementID = EcorePackage::EPACKAGE_CLASS) const ;
 			 
-			 virtual std::shared_ptr<EParameter> createEParameter(const int metaElementID=-1) const ;
+			 virtual std::shared_ptr<EParameter> createEParameter(const int metaElementID = EcorePackage::EPARAMETER_CLASS) const ;
 			 //Add containing object
-			 virtual std::shared_ptr<EParameter> createEParameter_in_EContainer(std::weak_ptr<ecore::EObject > par_eContainer, const int metaElementID=-1) const ;
+			 virtual std::shared_ptr<EParameter> createEParameter_in_EContainer(std::weak_ptr<ecore::EObject > par_eContainer, const int metaElementID = EcorePackage::EPARAMETER_CLASS) const ;
 			 //Add containing object
-			 virtual std::shared_ptr<EParameter> createEParameter_in_EOperation(std::weak_ptr<ecore::EOperation > par_eOperation, const int metaElementID=-1) const ;
+			 virtual std::shared_ptr<EParameter> createEParameter_in_EOperation(std::weak_ptr<ecore::EOperation > par_eOperation, const int metaElementID = EcorePackage::EPARAMETER_CLASS) const ;
 			 
-			 virtual std::shared_ptr<EReference> createEReference(const int metaElementID=-1) const ;
+			 virtual std::shared_ptr<EReference> createEReference(const int metaElementID = EcorePackage::EREFERENCE_CLASS) const ;
 			 //Add containing object
-			 virtual std::shared_ptr<EReference> createEReference_in_EContainer(std::weak_ptr<ecore::EObject > par_eContainer, const int metaElementID=-1) const ;
+			 virtual std::shared_ptr<EReference> createEReference_in_EContainer(std::weak_ptr<ecore::EObject > par_eContainer, const int metaElementID = EcorePackage::EREFERENCE_CLASS) const ;
 			 //Add containing object
-			 virtual std::shared_ptr<EReference> createEReference_in_EContainingClass(std::weak_ptr<ecore::EClass > par_eContainingClass, const int metaElementID=-1) const ;
+			 virtual std::shared_ptr<EReference> createEReference_in_EContainingClass(std::weak_ptr<ecore::EClass > par_eContainingClass, const int metaElementID = EcorePackage::EREFERENCE_CLASS) const ;
 			 
-			 virtual std::shared_ptr<EStringToStringMapEntry> createEStringToStringMapEntry(const int metaElementID=-1) const ;
+			 virtual std::shared_ptr<EStringToStringMapEntry> createEStringToStringMapEntry(const int metaElementID = EcorePackage::ESTRINGTOSTRINGMAPENTRY_CLASS) const ;
 			 
-			 virtual std::shared_ptr<ETypeParameter> createETypeParameter(const int metaElementID=-1) const ;
+			 virtual std::shared_ptr<ETypeParameter> createETypeParameter(const int metaElementID = EcorePackage::ETYPEPARAMETER_CLASS) const ;
 			 //Add containing object
-			 virtual std::shared_ptr<ETypeParameter> createETypeParameter_in_EContainer(std::weak_ptr<ecore::EObject > par_eContainer, const int metaElementID=-1) const ;
+			 virtual std::shared_ptr<ETypeParameter> createETypeParameter_in_EContainer(std::weak_ptr<ecore::EObject > par_eContainer, const int metaElementID = EcorePackage::ETYPEPARAMETER_CLASS) const ;
 			 
 			 
 

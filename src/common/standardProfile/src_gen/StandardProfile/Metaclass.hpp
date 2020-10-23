@@ -54,6 +54,7 @@ namespace StandardProfile
 			//*********************************
 			std::weak_ptr<uml::Class> m_base_Class;
 			
+			
 	};
 }
 #endif /* end of include guard: STANDARDPROFILE_METACLASS__HPP */

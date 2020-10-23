@@ -174,8 +174,10 @@ namespace uml
 namespace uml 
 {
 	/*!
-	 A DataType is a type whose instances are identified only by their value.
-	<p>From package UML::SimpleClassifiers.</p> */
+	A DataType is a type whose instances are identified only by their value.
+	<p>From package UML::SimpleClassifiers.</p>
+	*/
+	
 	class DataType:virtual public Classifier
 	{
 		public:
@@ -196,11 +198,15 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 Creates a property with the specified name, type, lower bound, and upper bound as an owned attribute of this data type. */ 
+			Creates a property with the specified name, type, lower bound, and upper bound as an owned attribute of this data type.
+			*/
+			 
 			virtual std::shared_ptr<uml::Property> createOwnedAttribute(std::string name,std::shared_ptr<uml::Type>  type,int lower,int upper) = 0;
 			
 			/*!
-			 Creates an operation with the specified name, parameter names, parameter types, and return type (or null) as an owned operation of this data type. */ 
+			Creates an operation with the specified name, parameter names, parameter types, and return type (or null) as an owned operation of this data type.
+			*/
+			 
 			virtual std::shared_ptr<uml::Operation> createOwnedOperation(std::string name,std::shared_ptr<Bag<std::string> >  parameterNames,std::shared_ptr<Bag<uml::Type> >  parameterTypes,std::shared_ptr<uml::Type>  returnType) = 0;
 			
 			
@@ -212,14 +218,20 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 The attributes owned by the DataType.
-			<p>From package UML::SimpleClassifiers.</p> */
+			The attributes owned by the DataType.
+			<p>From package UML::SimpleClassifiers.</p>
+			*/
+			
 			virtual std::shared_ptr<Subset<uml::Property, uml::Property,uml::NamedElement>> getOwnedAttribute() const = 0;
 			
+			
 			/*!
-			 The Operations owned by the DataType.
-			<p>From package UML::SimpleClassifiers.</p> */
+			The Operations owned by the DataType.
+			<p>From package UML::SimpleClassifiers.</p>
+			*/
+			
 			virtual std::shared_ptr<Subset<uml::Operation, uml::Feature,uml::NamedElement>> getOwnedOperation() const = 0;
+			
 			
 			
 
@@ -233,43 +245,61 @@ namespace uml
 			// Reference Members
 			//*********************************
 			/*!
-			 The attributes owned by the DataType.
-			<p>From package UML::SimpleClassifiers.</p> */
-			std::shared_ptr<Subset<uml::Property, uml::Property,uml::NamedElement>> m_ownedAttribute;
-			/*!
-			 The Operations owned by the DataType.
-			<p>From package UML::SimpleClassifiers.</p> */
-			std::shared_ptr<Subset<uml::Operation, uml::Feature,uml::NamedElement>> m_ownedOperation;
+			The attributes owned by the DataType.
+			<p>From package UML::SimpleClassifiers.</p>
+			*/
 			
+			mutable std::shared_ptr<Subset<uml::Property, uml::Property,uml::NamedElement>> m_ownedAttribute;/*!
+			The Operations owned by the DataType.
+			<p>From package UML::SimpleClassifiers.</p>
+			*/
+			
+			mutable std::shared_ptr<Subset<uml::Operation, uml::Feature,uml::NamedElement>> m_ownedOperation;
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 All of the Properties that are direct (i.e., not inherited or imported) attributes of the Classifier.
-			<p>From package UML::Classification.</p> */
+			All of the Properties that are direct (i.e., not inherited or imported) attributes of the Classifier.
+			<p>From package UML::Classification.</p>
+			*/
+			
 			virtual std::shared_ptr<SubsetUnion<uml::Property, uml::Feature>> getAttribute() const = 0;/*!
-			 Specifies each Feature directly defined in the classifier. Note that there may be members of the Classifier that are of the type Feature but are not included, e.g., inherited features.
-			<p>From package UML::Classification.</p> */
+			Specifies each Feature directly defined in the classifier. Note that there may be members of the Classifier that are of the type Feature but are not included, e.g., inherited features.
+			<p>From package UML::Classification.</p>
+			*/
+			
 			virtual std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement>> getFeature() const = 0;/*!
-			 A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
-			<p>From package UML::CommonStructure.</p> */
+			A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::NamedElement>> getMember() const = 0;/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;/*!
-			 A collection of NamedElements owned by the Namespace.
-			<p>From package UML::CommonStructure.</p> */
+			A collection of NamedElements owned by the Namespace.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> getOwnedMember() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
+			The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

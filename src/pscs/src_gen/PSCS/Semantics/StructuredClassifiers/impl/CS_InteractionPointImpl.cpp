@@ -57,10 +57,10 @@
 #include "PSCS/Semantics/StructuredClassifiers/impl/StructuredClassifiersFactoryImpl.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/impl/StructuredClassifiersPackageImpl.hpp"
 
-#include "PSCS/PSCSFactory.hpp"
-#include "PSCS/PSCSPackage.hpp"
 #include "PSCS/Semantics/SemanticsFactory.hpp"
 #include "PSCS/Semantics/SemanticsPackage.hpp"
+#include "PSCS/PSCSFactory.hpp"
+#include "PSCS/PSCSPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -71,23 +71,7 @@ using namespace PSCS::Semantics::StructuredClassifiers;
 // Constructor / Destructor
 //*********************************
 CS_InteractionPointImpl::CS_InteractionPointImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	
-
-	//Init references
-	
-
-	
+{	
 }
 
 CS_InteractionPointImpl::~CS_InteractionPointImpl()
@@ -96,7 +80,6 @@ CS_InteractionPointImpl::~CS_InteractionPointImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete CS_InteractionPoint "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -190,29 +173,42 @@ void CS_InteractionPointImpl::startBehavior(std::shared_ptr<uml::Class>  classif
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference definingPort
+*/
 std::shared_ptr<uml::Port > CS_InteractionPointImpl::getDefiningPort() const
 {
 //assert(m_definingPort);
     return m_definingPort;
 }
+
 void CS_InteractionPointImpl::setDefiningPort(std::shared_ptr<uml::Port> _definingPort)
 {
     m_definingPort = _definingPort;
 }
 
+
+
+/*
+Getter & Setter for reference owner
+*/
 std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference > CS_InteractionPointImpl::getOwner() const
 {
 //assert(m_owner);
     return m_owner;
 }
+
 void CS_InteractionPointImpl::setOwner(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> _owner)
 {
     m_owner = _owner;
 }
 
+
+
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<CS_InteractionPoint> CS_InteractionPointImpl::getThisCS_InteractionPointPtr() const

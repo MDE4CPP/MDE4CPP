@@ -102,47 +102,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 OutputPinImpl::OutputPinImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	//Init references
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
-
-	
+{	
 }
 
 OutputPinImpl::~OutputPinImpl()
@@ -152,106 +112,93 @@ OutputPinImpl::~OutputPinImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+OutputPinImpl::OutputPinImpl(std::weak_ptr<uml::Action > par_action)
+:OutputPinImpl()
+{
+	m_action = par_action;
+	m_owner = par_action;
+}
 
 //Additional constructor for the containments back reference
-			OutputPinImpl::OutputPinImpl(std::weak_ptr<uml::Action > par_action)
-			:OutputPinImpl()
-			{
-			    m_action = par_action;
-				m_owner = par_action;
-			}
-
-
-//Additional constructor for the containments back reference
-			OutputPinImpl::OutputPinImpl(std::weak_ptr<uml::Activity > par_activity)
-			:OutputPinImpl()
-			{
-			    m_activity = par_activity;
-				m_owner = par_activity;
-			}
-
+OutputPinImpl::OutputPinImpl(std::weak_ptr<uml::Activity > par_activity)
+:OutputPinImpl()
+{
+	m_activity = par_activity;
+	m_owner = par_activity;
+}
 
 //Additional constructor for the containments back reference
-			OutputPinImpl::OutputPinImpl(std::weak_ptr<uml::CallAction > par_callAction)
-			:OutputPinImpl()
-			{
-			    m_callAction = par_callAction;
-			}
-
-
-//Additional constructor for the containments back reference
-			OutputPinImpl::OutputPinImpl(std::weak_ptr<uml::ClearStructuralFeatureAction > par_clearStructuralFeatureAction)
-			:OutputPinImpl()
-			{
-			    m_clearStructuralFeatureAction = par_clearStructuralFeatureAction;
-			}
-
+OutputPinImpl::OutputPinImpl(std::weak_ptr<uml::CallAction > par_callAction)
+:OutputPinImpl()
+{
+	m_callAction = par_callAction;
+}
 
 //Additional constructor for the containments back reference
-			OutputPinImpl::OutputPinImpl(std::weak_ptr<uml::CreateObjectAction > par_createObjectAction)
-			:OutputPinImpl()
-			{
-			    m_createObjectAction = par_createObjectAction;
-			}
-
-
-//Additional constructor for the containments back reference
-			OutputPinImpl::OutputPinImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
-			:OutputPinImpl()
-			{
-			    m_inStructuredNode = par_inStructuredNode;
-				m_owner = par_inStructuredNode;
-			}
-
+OutputPinImpl::OutputPinImpl(std::weak_ptr<uml::ClearStructuralFeatureAction > par_clearStructuralFeatureAction)
+:OutputPinImpl()
+{
+	m_clearStructuralFeatureAction = par_clearStructuralFeatureAction;
+}
 
 //Additional constructor for the containments back reference
-			OutputPinImpl::OutputPinImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:OutputPinImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
+OutputPinImpl::OutputPinImpl(std::weak_ptr<uml::CreateObjectAction > par_createObjectAction)
+:OutputPinImpl()
+{
+	m_createObjectAction = par_createObjectAction;
+}
 
 //Additional constructor for the containments back reference
-			OutputPinImpl::OutputPinImpl(std::weak_ptr<uml::Element > par_owner)
-			:OutputPinImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-//Additional constructor for the containments back reference
-			OutputPinImpl::OutputPinImpl(std::weak_ptr<uml::ReadSelfAction > par_readSelfAction)
-			:OutputPinImpl()
-			{
-			    m_readSelfAction = par_readSelfAction;
-			}
-
+OutputPinImpl::OutputPinImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
+:OutputPinImpl()
+{
+	m_inStructuredNode = par_inStructuredNode;
+	m_owner = par_inStructuredNode;
+}
 
 //Additional constructor for the containments back reference
-			OutputPinImpl::OutputPinImpl(std::weak_ptr<uml::ReadStructuralFeatureAction > par_readStructuralFeatureAction)
-			:OutputPinImpl()
-			{
-			    m_readStructuralFeatureAction = par_readStructuralFeatureAction;
-			}
-
-
-//Additional constructor for the containments back reference
-			OutputPinImpl::OutputPinImpl(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction)
-			:OutputPinImpl()
-			{
-			    m_valueSpecificationAction = par_valueSpecificationAction;
-			}
-
+OutputPinImpl::OutputPinImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:OutputPinImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			OutputPinImpl::OutputPinImpl(std::weak_ptr<uml::WriteStructuralFeatureAction > par_writeStructuralFeatureAction)
-			:OutputPinImpl()
-			{
-			    m_writeStructuralFeatureAction = par_writeStructuralFeatureAction;
-			}
+OutputPinImpl::OutputPinImpl(std::weak_ptr<uml::Element > par_owner)
+:OutputPinImpl()
+{
+	m_owner = par_owner;
+}
 
+//Additional constructor for the containments back reference
+OutputPinImpl::OutputPinImpl(std::weak_ptr<uml::ReadSelfAction > par_readSelfAction)
+:OutputPinImpl()
+{
+	m_readSelfAction = par_readSelfAction;
+}
+
+//Additional constructor for the containments back reference
+OutputPinImpl::OutputPinImpl(std::weak_ptr<uml::ReadStructuralFeatureAction > par_readStructuralFeatureAction)
+:OutputPinImpl()
+{
+	m_readStructuralFeatureAction = par_readStructuralFeatureAction;
+}
+
+//Additional constructor for the containments back reference
+OutputPinImpl::OutputPinImpl(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction)
+:OutputPinImpl()
+{
+	m_valueSpecificationAction = par_valueSpecificationAction;
+}
+
+//Additional constructor for the containments back reference
+OutputPinImpl::OutputPinImpl(std::weak_ptr<uml::WriteStructuralFeatureAction > par_writeStructuralFeatureAction)
+:OutputPinImpl()
+{
+	m_writeStructuralFeatureAction = par_writeStructuralFeatureAction;
+}
 
 
 OutputPinImpl::OutputPinImpl(const OutputPinImpl & obj):OutputPinImpl()
@@ -417,6 +364,9 @@ bool OutputPinImpl::incoming_edges_structured_only(Any diagnostics,std::map <   
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference action
+*/
 std::weak_ptr<uml::Action > OutputPinImpl::getAction() const
 {
 
@@ -424,95 +374,175 @@ std::weak_ptr<uml::Action > OutputPinImpl::getAction() const
 }
 
 
+
+
+
+/*
+Getter & Setter for reference callAction
+*/
 std::weak_ptr<uml::CallAction > OutputPinImpl::getCallAction() const
 {
 
     return m_callAction;
 }
+
 void OutputPinImpl::setCallAction(std::shared_ptr<uml::CallAction> _callAction)
 {
     m_callAction = _callAction;
 }
 
+
+
+/*
+Getter & Setter for reference clearStructuralFeatureAction
+*/
 std::weak_ptr<uml::ClearStructuralFeatureAction > OutputPinImpl::getClearStructuralFeatureAction() const
 {
 
     return m_clearStructuralFeatureAction;
 }
+
 void OutputPinImpl::setClearStructuralFeatureAction(std::shared_ptr<uml::ClearStructuralFeatureAction> _clearStructuralFeatureAction)
 {
     m_clearStructuralFeatureAction = _clearStructuralFeatureAction;
 }
 
+
+
+/*
+Getter & Setter for reference createObjectAction
+*/
 std::weak_ptr<uml::CreateObjectAction > OutputPinImpl::getCreateObjectAction() const
 {
 
     return m_createObjectAction;
 }
+
 void OutputPinImpl::setCreateObjectAction(std::shared_ptr<uml::CreateObjectAction> _createObjectAction)
 {
     m_createObjectAction = _createObjectAction;
 }
 
+
+
+/*
+Getter & Setter for reference readSelfAction
+*/
 std::weak_ptr<uml::ReadSelfAction > OutputPinImpl::getReadSelfAction() const
 {
 
     return m_readSelfAction;
 }
+
 void OutputPinImpl::setReadSelfAction(std::shared_ptr<uml::ReadSelfAction> _readSelfAction)
 {
     m_readSelfAction = _readSelfAction;
 }
 
+
+
+/*
+Getter & Setter for reference readStructuralFeatureAction
+*/
 std::weak_ptr<uml::ReadStructuralFeatureAction > OutputPinImpl::getReadStructuralFeatureAction() const
 {
 
     return m_readStructuralFeatureAction;
 }
+
 void OutputPinImpl::setReadStructuralFeatureAction(std::shared_ptr<uml::ReadStructuralFeatureAction> _readStructuralFeatureAction)
 {
     m_readStructuralFeatureAction = _readStructuralFeatureAction;
 }
 
+
+
+/*
+Getter & Setter for reference valueSpecificationAction
+*/
 std::weak_ptr<uml::ValueSpecificationAction > OutputPinImpl::getValueSpecificationAction() const
 {
 
     return m_valueSpecificationAction;
 }
+
 void OutputPinImpl::setValueSpecificationAction(std::shared_ptr<uml::ValueSpecificationAction> _valueSpecificationAction)
 {
     m_valueSpecificationAction = _valueSpecificationAction;
 }
 
+
+
+/*
+Getter & Setter for reference writeStructuralFeatureAction
+*/
 std::weak_ptr<uml::WriteStructuralFeatureAction > OutputPinImpl::getWriteStructuralFeatureAction() const
 {
 
     return m_writeStructuralFeatureAction;
 }
+
 void OutputPinImpl::setWriteStructuralFeatureAction(std::shared_ptr<uml::WriteStructuralFeatureAction> _writeStructuralFeatureAction)
 {
     m_writeStructuralFeatureAction = _writeStructuralFeatureAction;
 }
+
+
 
 //*********************************
 // Union Getter
 //*********************************
 std::shared_ptr<Union<uml::ActivityGroup>> OutputPinImpl::getInGroup() const
 {
+	if(m_inGroup == nullptr)
+	{
+		/*Union*/
+		m_inGroup.reset(new Union<uml::ActivityGroup>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_inGroup - Union<uml::ActivityGroup>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_inGroup;
 }
+
 std::shared_ptr<Union<uml::Element>> OutputPinImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > OutputPinImpl::getOwner() const
 {
 	return m_owner;
 }
+
 std::shared_ptr<Union<uml::RedefinableElement>> OutputPinImpl::getRedefinedElement() const
 {
+	if(m_redefinedElement == nullptr)
+	{
+		/*Union*/
+		m_redefinedElement.reset(new Union<uml::RedefinableElement>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_redefinedElement - Union<uml::RedefinableElement>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_redefinedElement;
 }
+
+
 
 
 std::shared_ptr<OutputPin> OutputPinImpl::getThisOutputPinPtr() const

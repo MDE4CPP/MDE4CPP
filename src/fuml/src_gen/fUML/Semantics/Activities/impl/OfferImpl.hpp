@@ -15,12 +15,12 @@
 
 #include "fUML/Semantics/Activities/impl/ActivitiesFactoryImpl.hpp"
 
-#include "ecore/impl/EObjectImpl.hpp"
+#include "ecore/impl/EModelElementImpl.hpp"
 
 //*********************************
 namespace fUML::Semantics::Activities 
 {
-	class OfferImpl :virtual public ecore::EObjectImpl,
+	class OfferImpl : virtual public ecore::EModelElementImpl,
 virtual public Offer 
 	{
 		public: 
@@ -45,24 +45,19 @@ virtual public Offer
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual int countOfferedVales() ;
 			
-			/*!
-			 */ 
+			 
 			virtual bool hasTokens() ;
 			
-			/*!
-			 */ 
+			 
 			virtual void removeOfferedValues(int count) ;
 			
-			/*!
-			 */ 
+			 
 			virtual void removeWithdrawnTokens() ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > retrieveOfferedTokens() ;
 			
 			
@@ -75,9 +70,9 @@ virtual public Offer
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> getOfferedTokens() const ;
+			
 			
 							
 			

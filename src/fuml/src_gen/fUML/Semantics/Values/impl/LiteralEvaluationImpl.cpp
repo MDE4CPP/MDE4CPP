@@ -60,17 +60,7 @@ using namespace fUML::Semantics::Values;
 // Constructor / Destructor
 //*********************************
 LiteralEvaluationImpl::LiteralEvaluationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 LiteralEvaluationImpl::~LiteralEvaluationImpl()
@@ -79,7 +69,6 @@ LiteralEvaluationImpl::~LiteralEvaluationImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete LiteralEvaluation "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -143,6 +132,7 @@ std::shared_ptr<uml::PrimitiveType> LiteralEvaluationImpl::getType(std::string b
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<LiteralEvaluation> LiteralEvaluationImpl::getThisLiteralEvaluationPtr() const

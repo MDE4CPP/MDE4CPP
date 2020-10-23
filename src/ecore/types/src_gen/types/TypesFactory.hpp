@@ -11,6 +11,7 @@
 #include <memory>
 
 #include "ecore/EFactory.hpp"
+#include "types/TypesPackage.hpp"
 
 namespace types 
 {

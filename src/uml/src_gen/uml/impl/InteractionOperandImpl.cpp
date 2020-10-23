@@ -80,35 +80,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 InteractionOperandImpl::InteractionOperandImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		/*Subset*/
-		m_fragment.reset(new Subset<uml::InteractionFragment, uml::NamedElement >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_fragment - Subset<uml::InteractionFragment, uml::NamedElement >()" << std::endl;
-		#endif
-	
-	
-
-	
-
-	//Init references
-		/*Subset*/
-		m_fragment->initSubset(m_ownedMember);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_fragment - Subset<uml::InteractionFragment, uml::NamedElement >(m_ownedMember)" << std::endl;
-		#endif
-	
-	
-
-	
+{	
 }
 
 InteractionOperandImpl::~InteractionOperandImpl()
@@ -118,41 +90,36 @@ InteractionOperandImpl::~InteractionOperandImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+InteractionOperandImpl::InteractionOperandImpl(std::weak_ptr<uml::Interaction > par_enclosingInteraction)
+:InteractionOperandImpl()
+{
+	m_enclosingInteraction = par_enclosingInteraction;
+	m_namespace = par_enclosingInteraction;
+}
 
 //Additional constructor for the containments back reference
-			InteractionOperandImpl::InteractionOperandImpl(std::weak_ptr<uml::Interaction > par_enclosingInteraction)
-			:InteractionOperandImpl()
-			{
-			    m_enclosingInteraction = par_enclosingInteraction;
-				m_namespace = par_enclosingInteraction;
-			}
-
-
-//Additional constructor for the containments back reference
-			InteractionOperandImpl::InteractionOperandImpl(std::weak_ptr<uml::InteractionOperand > par_enclosingOperand)
-			:InteractionOperandImpl()
-			{
-			    m_enclosingOperand = par_enclosingOperand;
-				m_namespace = par_enclosingOperand;
-			}
-
+InteractionOperandImpl::InteractionOperandImpl(std::weak_ptr<uml::InteractionOperand > par_enclosingOperand)
+:InteractionOperandImpl()
+{
+	m_enclosingOperand = par_enclosingOperand;
+	m_namespace = par_enclosingOperand;
+}
 
 //Additional constructor for the containments back reference
-			InteractionOperandImpl::InteractionOperandImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:InteractionOperandImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
+InteractionOperandImpl::InteractionOperandImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:InteractionOperandImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			InteractionOperandImpl::InteractionOperandImpl(std::weak_ptr<uml::Element > par_owner)
-			:InteractionOperandImpl()
-			{
-			    m_owner = par_owner;
-			}
-
+InteractionOperandImpl::InteractionOperandImpl(std::weak_ptr<uml::Element > par_owner)
+:InteractionOperandImpl()
+{
+	m_owner = par_owner;
+}
 
 
 InteractionOperandImpl::InteractionOperandImpl(const InteractionOperandImpl & obj):InteractionOperandImpl()
@@ -258,12 +225,11 @@ InteractionOperandImpl::InteractionOperandImpl(const InteractionOperandImpl & ob
 		std::cout << "Copying the Subset: " << "m_packageImport" << std::endl;
 	#endif
 
-		/*Subset*/
-		m_fragment->initSubset(m_ownedMember);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_fragment - Subset<uml::InteractionFragment, uml::NamedElement >(m_ownedMember)" << std::endl;
-		#endif
-	
+	/*Subset*/
+	m_fragment->initSubset(getOwnedMember());
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Initialising value Subset: " << "m_fragment - Subset<uml::InteractionFragment, uml::NamedElement >(getOwnedMember())" << std::endl;
+	#endif
 	
 
 	
@@ -303,46 +269,114 @@ bool InteractionOperandImpl::guard_directly_prior(Any diagnostics,std::map <   A
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference fragment
+*/
 std::shared_ptr<Subset<uml::InteractionFragment, uml::NamedElement>> InteractionOperandImpl::getFragment() const
 {
+	if(m_fragment == nullptr)
+	{
+		/*Subset*/
+		m_fragment.reset(new Subset<uml::InteractionFragment, uml::NamedElement >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_fragment - Subset<uml::InteractionFragment, uml::NamedElement >()" << std::endl;
+		#endif
+		
+		/*Subset*/
+		m_fragment->initSubset(getOwnedMember());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_fragment - Subset<uml::InteractionFragment, uml::NamedElement >(getOwnedMember())" << std::endl;
+		#endif
+		
+	}
 
     return m_fragment;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference guard
+*/
 std::shared_ptr<uml::InteractionConstraint > InteractionOperandImpl::getGuard() const
 {
 
     return m_guard;
 }
+
 void InteractionOperandImpl::setGuard(std::shared_ptr<uml::InteractionConstraint> _guard)
 {
     m_guard = _guard;
 }
+
+
 
 //*********************************
 // Union Getter
 //*********************************
 std::shared_ptr<Union<uml::NamedElement>> InteractionOperandImpl::getMember() const
 {
+	if(m_member == nullptr)
+	{
+		/*Union*/
+		m_member.reset(new Union<uml::NamedElement>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_member - Union<uml::NamedElement>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_member;
 }
+
 std::weak_ptr<uml::Namespace > InteractionOperandImpl::getNamespace() const
 {
 	return m_namespace;
 }
+
 std::shared_ptr<Union<uml::Element>> InteractionOperandImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> InteractionOperandImpl::getOwnedMember() const
 {
+	if(m_ownedMember == nullptr)
+	{
+		/*SubsetUnion*/
+		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_ownedMember->initSubsetUnion(getOwnedElement(),getMember());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >(getOwnedElement(),getMember())" << std::endl;
+		#endif
+		
+	}
 	return m_ownedMember;
 }
+
 std::weak_ptr<uml::Element > InteractionOperandImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<InteractionOperand> InteractionOperandImpl::getThisInteractionOperandPtr() const

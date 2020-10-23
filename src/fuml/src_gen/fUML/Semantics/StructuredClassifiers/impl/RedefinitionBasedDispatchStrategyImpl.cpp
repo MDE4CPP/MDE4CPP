@@ -24,6 +24,7 @@
 
 //Includes from codegen annotation
 #include "abstractDataTypes/Subset.hpp"
+#include "uml/UmlPackage.hpp"
 #include "uml/NamedElement.hpp"
 #include "uml/Class.hpp"
 #include "uml/Operation.hpp"
@@ -60,17 +61,7 @@ using namespace fUML::Semantics::StructuredClassifiers;
 // Constructor / Destructor
 //*********************************
 RedefinitionBasedDispatchStrategyImpl::RedefinitionBasedDispatchStrategyImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 RedefinitionBasedDispatchStrategyImpl::~RedefinitionBasedDispatchStrategyImpl()
@@ -79,7 +70,6 @@ RedefinitionBasedDispatchStrategyImpl::~RedefinitionBasedDispatchStrategyImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete RedefinitionBasedDispatchStrategy "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -147,13 +137,21 @@ std::shared_ptr<uml::Behavior> RedefinitionBasedDispatchStrategyImpl::retrieveMe
 	unsigned int i = 0;
 	while(method == nullptr && (i < object->getTypes()->size()))
 	{
-		std::shared_ptr<uml::Class> type = std::dynamic_pointer_cast<uml::Class>(object->getTypes()->at(i));
-		std::shared_ptr<Bag<uml::NamedElement> > members = type->getMember();
-		unsigned int j = 0;
-		while(method == nullptr && (j < members->size()))
+		std::shared_ptr<uml::Classifier> type = object->getTypes()->at(i);
+		/*
+		MDE4CPP specific implementation:
+		Normalley. only classes would be taken into account. 
+		In MDE4CPP object classes for interfaces also exist. Those are typed by interfaces as well.
+		Because of that, interfaces are also taken into account here.
+		*/
+		unsigned long metaElementID = type->eClass()->getMetaElementID();
+		if(metaElementID == uml::UmlPackage::CLASS_CLASS || metaElementID == uml::UmlPackage::INTERFACE_CLASS)
 		{
-			std::shared_ptr<uml::NamedElement> member = members->at(j);
-			std::shared_ptr<uml::Operation> memberOperation = std::dynamic_pointer_cast<uml::Operation>(member);
+		std::shared_ptr<Bag<uml::Operation> > memberOperations = type->getAllOperations();
+		unsigned int j = 0;
+		while(method == nullptr && (j < memberOperations->size()))
+		{
+			std::shared_ptr<uml::Operation> memberOperation = memberOperations->at(j);
 			if(memberOperation != nullptr)
 			{	
 				if(this->operationsMatch(memberOperation, operation))
@@ -162,6 +160,7 @@ std::shared_ptr<uml::Behavior> RedefinitionBasedDispatchStrategyImpl::retrieveMe
 				}
 			}
 			j = j + 1;
+		}
 		}
 		i = i + 1;
 	}
@@ -177,6 +176,7 @@ std::shared_ptr<uml::Behavior> RedefinitionBasedDispatchStrategyImpl::retrieveMe
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<RedefinitionBasedDispatchStrategy> RedefinitionBasedDispatchStrategyImpl::getThisRedefinitionBasedDispatchStrategyPtr() const

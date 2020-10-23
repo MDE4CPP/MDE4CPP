@@ -15,12 +15,12 @@
 
 #include "fUML/Semantics/Activities/impl/ActivitiesFactoryImpl.hpp"
 
-#include "ecore/impl/EObjectImpl.hpp"
+#include "ecore/impl/EModelElementImpl.hpp"
 
 //*********************************
 namespace fUML::Semantics::Activities 
 {
-	class TokenSetImpl :virtual public ecore::EObjectImpl,
+	class TokenSetImpl : virtual public ecore::EModelElementImpl,
 virtual public TokenSet 
 	{
 		public: 
@@ -55,9 +55,9 @@ virtual public TokenSet
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> getTokens() const ;
+			
 			
 							
 			

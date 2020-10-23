@@ -68,17 +68,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 ContinuationImpl::ContinuationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 ContinuationImpl::~ContinuationImpl()
@@ -88,41 +78,36 @@ ContinuationImpl::~ContinuationImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+ContinuationImpl::ContinuationImpl(std::weak_ptr<uml::Interaction > par_enclosingInteraction)
+:ContinuationImpl()
+{
+	m_enclosingInteraction = par_enclosingInteraction;
+	m_namespace = par_enclosingInteraction;
+}
 
 //Additional constructor for the containments back reference
-			ContinuationImpl::ContinuationImpl(std::weak_ptr<uml::Interaction > par_enclosingInteraction)
-			:ContinuationImpl()
-			{
-			    m_enclosingInteraction = par_enclosingInteraction;
-				m_namespace = par_enclosingInteraction;
-			}
-
-
-//Additional constructor for the containments back reference
-			ContinuationImpl::ContinuationImpl(std::weak_ptr<uml::InteractionOperand > par_enclosingOperand)
-			:ContinuationImpl()
-			{
-			    m_enclosingOperand = par_enclosingOperand;
-				m_namespace = par_enclosingOperand;
-			}
-
+ContinuationImpl::ContinuationImpl(std::weak_ptr<uml::InteractionOperand > par_enclosingOperand)
+:ContinuationImpl()
+{
+	m_enclosingOperand = par_enclosingOperand;
+	m_namespace = par_enclosingOperand;
+}
 
 //Additional constructor for the containments back reference
-			ContinuationImpl::ContinuationImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:ContinuationImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
+ContinuationImpl::ContinuationImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:ContinuationImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			ContinuationImpl::ContinuationImpl(std::weak_ptr<uml::Element > par_owner)
-			:ContinuationImpl()
-			{
-			    m_owner = par_owner;
-			}
-
+ContinuationImpl::ContinuationImpl(std::weak_ptr<uml::Element > par_owner)
+:ContinuationImpl()
+{
+	m_owner = par_owner;
+}
 
 
 ContinuationImpl::ContinuationImpl(const ContinuationImpl & obj):ContinuationImpl()
@@ -196,15 +181,20 @@ std::shared_ptr<ecore::EClass> ContinuationImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute setting
+*/
+bool ContinuationImpl::getSetting() const 
+{
+	return m_setting;
+}
+
 void ContinuationImpl::setSetting(bool _setting)
 {
 	m_setting = _setting;
 } 
 
-bool ContinuationImpl::getSetting() const 
-{
-	return m_setting;
-}
+
 
 //*********************************
 // Operations
@@ -238,14 +228,28 @@ std::weak_ptr<uml::Namespace > ContinuationImpl::getNamespace() const
 {
 	return m_namespace;
 }
+
 std::shared_ptr<Union<uml::Element>> ContinuationImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > ContinuationImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<Continuation> ContinuationImpl::getThisContinuationPtr() const

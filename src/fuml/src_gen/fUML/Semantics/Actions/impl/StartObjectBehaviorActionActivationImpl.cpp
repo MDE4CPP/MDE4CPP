@@ -41,6 +41,8 @@
 
 #include <exception> // used in Persistence
 
+#include "uml/Action.hpp"
+
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 
 #include "uml/ActivityNode.hpp"
@@ -75,17 +77,7 @@ using namespace fUML::Semantics::Actions;
 // Constructor / Destructor
 //*********************************
 StartObjectBehaviorActionActivationImpl::StartObjectBehaviorActionActivationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 StartObjectBehaviorActionActivationImpl::~StartObjectBehaviorActionActivationImpl()
@@ -95,14 +87,12 @@ StartObjectBehaviorActionActivationImpl::~StartObjectBehaviorActionActivationImp
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			StartObjectBehaviorActionActivationImpl::StartObjectBehaviorActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
-			:StartObjectBehaviorActionActivationImpl()
-			{
-			    m_group = par_group;
-			}
-
+StartObjectBehaviorActionActivationImpl::StartObjectBehaviorActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
+:StartObjectBehaviorActionActivationImpl()
+{
+	m_group = par_group;
+}
 
 
 StartObjectBehaviorActionActivationImpl::StartObjectBehaviorActionActivationImpl(const StartObjectBehaviorActionActivationImpl & obj):StartObjectBehaviorActionActivationImpl()
@@ -116,6 +106,8 @@ StartObjectBehaviorActionActivationImpl::StartObjectBehaviorActionActivationImpl
 
 	//copy references with no containment (soft copy)
 	
+	m_action  = obj.getAction();
+
 	m_group  = obj.getGroup();
 
 	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> _incomingEdges = obj.getIncomingEdges();
@@ -252,8 +244,20 @@ void StartObjectBehaviorActionActivationImpl::doAction()
 //*********************************
 std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> StartObjectBehaviorActionActivationImpl::getPinActivation() const
 {
+	if(m_pinActivation == nullptr)
+	{
+		/*Union*/
+		m_pinActivation.reset(new Union<fUML::Semantics::Actions::PinActivation>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_pinActivation - Union<fUML::Semantics::Actions::PinActivation>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_pinActivation;
 }
+
+
 
 
 std::shared_ptr<StartObjectBehaviorActionActivation> StartObjectBehaviorActionActivationImpl::getThisStartObjectBehaviorActionActivationPtr() const

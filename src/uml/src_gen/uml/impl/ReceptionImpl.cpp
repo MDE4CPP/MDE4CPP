@@ -84,19 +84,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 ReceptionImpl::ReceptionImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	//Init references
-	
+{	
 }
 
 ReceptionImpl::~ReceptionImpl()
@@ -106,23 +94,20 @@ ReceptionImpl::~ReceptionImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+ReceptionImpl::ReceptionImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:ReceptionImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			ReceptionImpl::ReceptionImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:ReceptionImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
-
-//Additional constructor for the containments back reference
-			ReceptionImpl::ReceptionImpl(std::weak_ptr<uml::Element > par_owner)
-			:ReceptionImpl()
-			{
-			    m_owner = par_owner;
-			}
-
+ReceptionImpl::ReceptionImpl(std::weak_ptr<uml::Element > par_owner)
+:ReceptionImpl()
+{
+	m_owner = par_owner;
+}
 
 
 ReceptionImpl::ReceptionImpl(const ReceptionImpl & obj):ReceptionImpl()
@@ -271,35 +256,81 @@ bool ReceptionImpl::same_structure_as_signal(Any diagnostics,std::map <   Any, A
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference signal
+*/
 std::shared_ptr<uml::Signal > ReceptionImpl::getSignal() const
 {
 //assert(m_signal);
     return m_signal;
 }
+
 void ReceptionImpl::setSignal(std::shared_ptr<uml::Signal> _signal)
 {
     m_signal = _signal;
 }
+
+
 
 //*********************************
 // Union Getter
 //*********************************
 std::shared_ptr<Union<uml::NamedElement>> ReceptionImpl::getMember() const
 {
+	if(m_member == nullptr)
+	{
+		/*Union*/
+		m_member.reset(new Union<uml::NamedElement>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_member - Union<uml::NamedElement>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_member;
 }
+
 std::shared_ptr<Union<uml::Element>> ReceptionImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> ReceptionImpl::getOwnedMember() const
 {
+	if(m_ownedMember == nullptr)
+	{
+		/*SubsetUnion*/
+		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_ownedMember->initSubsetUnion(getOwnedElement(),getMember());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >(getOwnedElement(),getMember())" << std::endl;
+		#endif
+		
+	}
 	return m_ownedMember;
 }
+
 std::weak_ptr<uml::Element > ReceptionImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<Reception> ReceptionImpl::getThisReceptionPtr() const

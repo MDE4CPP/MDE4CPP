@@ -19,7 +19,7 @@
 //*********************************
 namespace fUML::Semantics::Actions 
 {
-	class ReadExtentActionActivationImpl :virtual public ActionActivationImpl, virtual public ReadExtentActionActivation 
+	class ReadExtentActionActivationImpl : virtual public ActionActivationImpl, virtual public ReadExtentActionActivation 
 	{
 		public: 
 			ReadExtentActionActivationImpl(const ReadExtentActionActivationImpl & obj);
@@ -62,8 +62,7 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> getPinActivation() const ; 
 			 
 			//*********************************

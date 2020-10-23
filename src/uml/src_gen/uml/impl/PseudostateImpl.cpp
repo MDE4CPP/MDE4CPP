@@ -68,23 +68,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 PseudostateImpl::PseudostateImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	
-
-	//Init references
-	
-
-	
+{	
 }
 
 PseudostateImpl::~PseudostateImpl()
@@ -94,50 +78,44 @@ PseudostateImpl::~PseudostateImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+PseudostateImpl::PseudostateImpl(std::weak_ptr<uml::Region > par_container)
+:PseudostateImpl()
+{
+	m_container = par_container;
+	m_namespace = par_container;
+}
 
 //Additional constructor for the containments back reference
-			PseudostateImpl::PseudostateImpl(std::weak_ptr<uml::Region > par_container)
-			:PseudostateImpl()
-			{
-			    m_container = par_container;
-				m_namespace = par_container;
-			}
-
-
-//Additional constructor for the containments back reference
-			PseudostateImpl::PseudostateImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:PseudostateImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
+PseudostateImpl::PseudostateImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:PseudostateImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			PseudostateImpl::PseudostateImpl(std::weak_ptr<uml::Element > par_owner)
-			:PseudostateImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-//Additional constructor for the containments back reference
-			PseudostateImpl::PseudostateImpl(std::weak_ptr<uml::State > par_state)
-			:PseudostateImpl()
-			{
-			    m_state = par_state;
-				m_namespace = par_state;
-			}
-
+PseudostateImpl::PseudostateImpl(std::weak_ptr<uml::Element > par_owner)
+:PseudostateImpl()
+{
+	m_owner = par_owner;
+}
 
 //Additional constructor for the containments back reference
-			PseudostateImpl::PseudostateImpl(std::weak_ptr<uml::StateMachine > par_stateMachine)
-			:PseudostateImpl()
-			{
-			    m_stateMachine = par_stateMachine;
-				m_namespace = par_stateMachine;
-			}
+PseudostateImpl::PseudostateImpl(std::weak_ptr<uml::State > par_state)
+:PseudostateImpl()
+{
+	m_state = par_state;
+	m_namespace = par_state;
+}
 
+//Additional constructor for the containments back reference
+PseudostateImpl::PseudostateImpl(std::weak_ptr<uml::StateMachine > par_stateMachine)
+:PseudostateImpl()
+{
+	m_stateMachine = par_stateMachine;
+	m_namespace = par_stateMachine;
+}
 
 
 PseudostateImpl::PseudostateImpl(const PseudostateImpl & obj):PseudostateImpl()
@@ -208,15 +186,20 @@ std::shared_ptr<ecore::EClass> PseudostateImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute kind
+*/
+uml::PseudostateKind PseudostateImpl::getKind() const 
+{
+	return m_kind;
+}
+
 void PseudostateImpl::setKind(uml::PseudostateKind _kind)
 {
 	m_kind = _kind;
 } 
 
-uml::PseudostateKind PseudostateImpl::getKind() const 
-{
-	return m_kind;
-}
+
 
 //*********************************
 // Operations
@@ -278,25 +261,37 @@ bool PseudostateImpl::transitions_outgoing(Any diagnostics,std::map <   Any, Any
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference state
+*/
 std::weak_ptr<uml::State > PseudostateImpl::getState() const
 {
 
     return m_state;
 }
+
 void PseudostateImpl::setState(std::shared_ptr<uml::State> _state)
 {
     m_state = _state;
 }
 
+
+
+/*
+Getter & Setter for reference stateMachine
+*/
 std::weak_ptr<uml::StateMachine > PseudostateImpl::getStateMachine() const
 {
 
     return m_stateMachine;
 }
+
 void PseudostateImpl::setStateMachine(std::shared_ptr<uml::StateMachine> _stateMachine)
 {
     m_stateMachine = _stateMachine;
 }
+
+
 
 //*********************************
 // Union Getter
@@ -305,14 +300,28 @@ std::weak_ptr<uml::Namespace > PseudostateImpl::getNamespace() const
 {
 	return m_namespace;
 }
+
 std::shared_ptr<Union<uml::Element>> PseudostateImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > PseudostateImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<Pseudostate> PseudostateImpl::getThisPseudostatePtr() const

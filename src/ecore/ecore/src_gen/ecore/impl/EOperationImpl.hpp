@@ -18,7 +18,7 @@
 //*********************************
 namespace ecore 
 {
-	class EOperationImpl :virtual public ETypedElementImpl, virtual public EOperation 
+	class EOperationImpl : virtual public ETypedElementImpl, virtual public EOperation 
 	{
 		public: 
 			EOperationImpl(const EOperationImpl & obj);
@@ -52,8 +52,7 @@ namespace ecore
 			//*********************************
 			
 			
-			/*!
-			 */ 
+			 
 			virtual bool isOverrideOf(std::shared_ptr<ecore::EOperation>  someOperation) const ;
 			
 			
@@ -61,46 +60,42 @@ namespace ecore
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual int getOperationID() const ;
 			
-			/*!
-			 */ 
+			 
 			virtual void setOperationID (int _operationID); 
-			
 			
 			
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::weak_ptr<ecore::EClass > getEContainingClass() const ;
 			
-			/*!
-			 */
+			
+			
 			virtual std::shared_ptr<Bag<ecore::EClassifier>> getEExceptions() const ;
 			
-			/*!
-			 */
+			
+			
 			virtual std::shared_ptr<Bag<ecore::EGenericType>> getEGenericExceptions() const ;
 			
-			/*!
-			 */
+			
+			
 			virtual std::shared_ptr<Subset<ecore::EParameter, ecore::EObject>> getEParameters() const ;
 			
-			/*!
-			 */
+			
+			
 			virtual std::shared_ptr<Bag<ecore::ETypeParameter>> getETypeParameters() const ;
+			
 			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const ; 
 			 
 			//*********************************

@@ -32,6 +32,8 @@
 
 #include <exception> // used in Persistence
 
+#include "uml/Action.hpp"
+
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 
 #include "uml/ActivityNode.hpp"
@@ -68,22 +70,7 @@ using namespace fUML::Semantics::Actions;
 // Constructor / Destructor
 //*********************************
 LoopNodeActivationImpl::LoopNodeActivationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		m_bodyOutputLists.reset(new Bag<fUML::Semantics::Actions::Values>());
-	
-	
-
-	//Init references
-	
-	
+{	
 }
 
 LoopNodeActivationImpl::~LoopNodeActivationImpl()
@@ -93,14 +80,12 @@ LoopNodeActivationImpl::~LoopNodeActivationImpl()
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			LoopNodeActivationImpl::LoopNodeActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
-			:LoopNodeActivationImpl()
-			{
-			    m_group = par_group;
-			}
-
+LoopNodeActivationImpl::LoopNodeActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
+:LoopNodeActivationImpl()
+{
+	m_group = par_group;
+}
 
 
 LoopNodeActivationImpl::LoopNodeActivationImpl(const LoopNodeActivationImpl & obj):LoopNodeActivationImpl()
@@ -114,6 +99,8 @@ LoopNodeActivationImpl::LoopNodeActivationImpl(const LoopNodeActivationImpl & ob
 
 	//copy references with no containment (soft copy)
 	
+	m_action  = obj.getAction();
+
 	m_group  = obj.getGroup();
 
 	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> _incomingEdges = obj.getIncomingEdges();
@@ -171,7 +158,6 @@ LoopNodeActivationImpl::LoopNodeActivationImpl(const LoopNodeActivationImpl & ob
 	#endif
 
 	
-	
 }
 
 std::shared_ptr<ecore::EObject>  LoopNodeActivationImpl::copy() const
@@ -220,11 +206,23 @@ bool LoopNodeActivationImpl::runTest()
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference bodyOutputLists
+*/
 std::shared_ptr<Bag<fUML::Semantics::Actions::Values>> LoopNodeActivationImpl::getBodyOutputLists() const
 {
+	if(m_bodyOutputLists == nullptr)
+	{
+		m_bodyOutputLists.reset(new Bag<fUML::Semantics::Actions::Values>());
+		
+		
+	}
 
     return m_bodyOutputLists;
 }
+
+
+
 
 
 //*********************************
@@ -232,8 +230,20 @@ std::shared_ptr<Bag<fUML::Semantics::Actions::Values>> LoopNodeActivationImpl::g
 //*********************************
 std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> LoopNodeActivationImpl::getPinActivation() const
 {
+	if(m_pinActivation == nullptr)
+	{
+		/*Union*/
+		m_pinActivation.reset(new Union<fUML::Semantics::Actions::PinActivation>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_pinActivation - Union<fUML::Semantics::Actions::PinActivation>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_pinActivation;
 }
+
+
 
 
 std::shared_ptr<LoopNodeActivation> LoopNodeActivationImpl::getThisLoopNodeActivationPtr() const
@@ -271,7 +281,7 @@ Any LoopNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType) con
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //7811
+			return eAny(tempList); //7812
 		}
 	}
 	return StructuredActivityNodeActivationImpl::eGet(featureID, resolve, coreType);
@@ -281,7 +291,7 @@ bool LoopNodeActivationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::LOOPNODEACTIVATION_ATTRIBUTE_BODYOUTPUTLISTS:
-			return getBodyOutputLists() != nullptr; //7811
+			return getBodyOutputLists() != nullptr; //7812
 	}
 	return StructuredActivityNodeActivationImpl::internalEIsSet(featureID);
 }

@@ -1,0 +1,7 @@
+[comment encoding = Cp1252 /]
+[module IDHelper('http://www.eclipse.org/uml2/5.0.0/UML')/]
+
+[query public generateID(arg0 : String) : String
+	= invoke('UML4CPP.generator.main.helpers.IDGeneratorService', 'generateID(java.lang.String)', Sequence{arg0})
+/]
+

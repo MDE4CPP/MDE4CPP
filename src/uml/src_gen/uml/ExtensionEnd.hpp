@@ -142,9 +142,11 @@ namespace uml
 namespace uml 
 {
 	/*!
-	 An extension end is used to tie an extension to a stereotype when extending a metaclass.
+	An extension end is used to tie an extension to a stereotype when extending a metaclass.
 	The default multiplicity of an extension end is 0..1.
-	<p>From package UML::Packages.</p> */
+	<p>From package UML::Packages.</p>
+	*/
+	
 	class ExtensionEnd:virtual public Property
 	{
 		public:
@@ -165,13 +167,17 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 The aggregation of an ExtensionEnd is composite.
-			self.aggregation = AggregationKind::composite */ 
+			The aggregation of an ExtensionEnd is composite.
+			self.aggregation = AggregationKind::composite
+			*/
+			 
 			virtual bool aggregation(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
-			 The multiplicity of ExtensionEnd is 0..1 or 1.
-			(lowerBound() = 0 or lowerBound() = 1) and upperBound() = 1 */ 
+			The multiplicity of ExtensionEnd is 0..1 or 1.
+			(lowerBound() = 0 or lowerBound() = 1) and upperBound() = 1
+			*/
+			 
 			virtual bool multiplicity(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
@@ -200,23 +206,35 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Classifiers that have this Feature as a feature.
-			<p>From package UML::Classification.</p> */
+			The Classifiers that have this Feature as a feature.
+			<p>From package UML::Classification.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Classifier>> getFeaturingClassifier() const = 0;/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
+			The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const = 0;/*!
-			 The contexts that this element may be redefined from.
-			<p>From package UML::Classification.</p> */
+			The contexts that this element may be redefined from.
+			<p>From package UML::Classification.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Classifier>> getRedefinitionContext() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

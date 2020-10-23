@@ -58,6 +58,7 @@ void SimpleClassifiersPackageImpl::createBooleanValueContent(std::shared_ptr<eco
 	m_booleanValue_Attribute_value = factory->createEAttribute_in_EContainingClass(m_booleanValue_Class, BOOLEANVALUE_ATTRIBUTE_VALUE);
 	
 	
+	m_booleanValue_Operation__copy = factory->createEOperation_in_EContainingClass(m_booleanValue_Class, BOOLEANVALUE_OPERATION__COPY);
 	m_booleanValue_Operation_equals_Value = factory->createEOperation_in_EContainingClass(m_booleanValue_Class, BOOLEANVALUE_OPERATION_EQUALS_VALUE);
 	m_booleanValue_Operation_specify = factory->createEOperation_in_EContainingClass(m_booleanValue_Class, BOOLEANVALUE_OPERATION_SPECIFY);
 	m_booleanValue_Operation_toString = factory->createEOperation_in_EContainingClass(m_booleanValue_Class, BOOLEANVALUE_OPERATION_TOSTRING);
@@ -70,6 +71,7 @@ void SimpleClassifiersPackageImpl::createCompoundValueContent(std::shared_ptr<ec
 	
 	m_compoundValue_Attribute_featureValues = factory->createEReference_in_EContainingClass(m_compoundValue_Class, COMPOUNDVALUE_ATTRIBUTE_FEATUREVALUES);
 	
+	m_compoundValue_Operation__copy = factory->createEOperation_in_EContainingClass(m_compoundValue_Class, COMPOUNDVALUE_OPERATION__COPY);
 	m_compoundValue_Operation_assignFeatureValue_StructuralFeature_EInt = factory->createEOperation_in_EContainingClass(m_compoundValue_Class, COMPOUNDVALUE_OPERATION_ASSIGNFEATUREVALUE_STRUCTURALFEATURE_EINT);
 	m_compoundValue_Operation_equals_Value = factory->createEOperation_in_EContainingClass(m_compoundValue_Class, COMPOUNDVALUE_OPERATION_EQUALS_VALUE);
 	m_compoundValue_Operation_removeFeatureValues_Classifier = factory->createEOperation_in_EContainingClass(m_compoundValue_Class, COMPOUNDVALUE_OPERATION_REMOVEFEATUREVALUES_CLASSIFIER);
@@ -85,6 +87,7 @@ void SimpleClassifiersPackageImpl::createDataValueContent(std::shared_ptr<ecore:
 	
 	m_dataValue_Attribute_type = factory->createEReference_in_EContainingClass(m_dataValue_Class, DATAVALUE_ATTRIBUTE_TYPE);
 	
+	m_dataValue_Operation__copy = factory->createEOperation_in_EContainingClass(m_dataValue_Class, DATAVALUE_OPERATION__COPY);
 	m_dataValue_Operation_getTypes = factory->createEOperation_in_EContainingClass(m_dataValue_Class, DATAVALUE_OPERATION_GETTYPES);
 	m_dataValue_Operation_new_ = factory->createEOperation_in_EContainingClass(m_dataValue_Class, DATAVALUE_OPERATION_NEW_);
 	
@@ -97,6 +100,7 @@ void SimpleClassifiersPackageImpl::createEnumerationValueContent(std::shared_ptr
 	m_enumerationValue_Attribute_literal = factory->createEReference_in_EContainingClass(m_enumerationValue_Class, ENUMERATIONVALUE_ATTRIBUTE_LITERAL);
 	m_enumerationValue_Attribute_type = factory->createEReference_in_EContainingClass(m_enumerationValue_Class, ENUMERATIONVALUE_ATTRIBUTE_TYPE);
 	
+	m_enumerationValue_Operation__copy = factory->createEOperation_in_EContainingClass(m_enumerationValue_Class, ENUMERATIONVALUE_OPERATION__COPY);
 	m_enumerationValue_Operation_equals_Value = factory->createEOperation_in_EContainingClass(m_enumerationValue_Class, ENUMERATIONVALUE_OPERATION_EQUALS_VALUE);
 	m_enumerationValue_Operation_getTypes = factory->createEOperation_in_EContainingClass(m_enumerationValue_Class, ENUMERATIONVALUE_OPERATION_GETTYPES);
 	m_enumerationValue_Operation_new_ = factory->createEOperation_in_EContainingClass(m_enumerationValue_Class, ENUMERATIONVALUE_OPERATION_NEW_);
@@ -113,6 +117,7 @@ void SimpleClassifiersPackageImpl::createFeatureValueContent(std::shared_ptr<eco
 	m_featureValue_Attribute_feature = factory->createEReference_in_EContainingClass(m_featureValue_Class, FEATUREVALUE_ATTRIBUTE_FEATURE);
 	m_featureValue_Attribute_values = factory->createEReference_in_EContainingClass(m_featureValue_Class, FEATUREVALUE_ATTRIBUTE_VALUES);
 	
+	m_featureValue_Operation__copy = factory->createEOperation_in_EContainingClass(m_featureValue_Class, FEATUREVALUE_OPERATION__COPY);
 	m_featureValue_Operation_hasEqualValues_FeatureValue = factory->createEOperation_in_EContainingClass(m_featureValue_Class, FEATUREVALUE_OPERATION_HASEQUALVALUES_FEATUREVALUE);
 	
 }
@@ -123,6 +128,7 @@ void SimpleClassifiersPackageImpl::createIntegerValueContent(std::shared_ptr<eco
 	m_integerValue_Attribute_value = factory->createEAttribute_in_EContainingClass(m_integerValue_Class, INTEGERVALUE_ATTRIBUTE_VALUE);
 	
 	
+	m_integerValue_Operation__copy = factory->createEOperation_in_EContainingClass(m_integerValue_Class, INTEGERVALUE_OPERATION__COPY);
 	m_integerValue_Operation_equals_Value = factory->createEOperation_in_EContainingClass(m_integerValue_Class, INTEGERVALUE_OPERATION_EQUALS_VALUE);
 	m_integerValue_Operation_specify = factory->createEOperation_in_EContainingClass(m_integerValue_Class, INTEGERVALUE_OPERATION_SPECIFY);
 	m_integerValue_Operation_toString = factory->createEOperation_in_EContainingClass(m_integerValue_Class, INTEGERVALUE_OPERATION_TOSTRING);
@@ -135,6 +141,7 @@ void SimpleClassifiersPackageImpl::createPrimitiveValueContent(std::shared_ptr<e
 	
 	m_primitiveValue_Attribute_type = factory->createEReference_in_EContainingClass(m_primitiveValue_Class, PRIMITIVEVALUE_ATTRIBUTE_TYPE);
 	
+	m_primitiveValue_Operation__copy = factory->createEOperation_in_EContainingClass(m_primitiveValue_Class, PRIMITIVEVALUE_OPERATION__COPY);
 	m_primitiveValue_Operation_getTypes = factory->createEOperation_in_EContainingClass(m_primitiveValue_Class, PRIMITIVEVALUE_OPERATION_GETTYPES);
 	
 }
@@ -145,6 +152,7 @@ void SimpleClassifiersPackageImpl::createRealValueContent(std::shared_ptr<ecore:
 	m_realValue_Attribute_value = factory->createEAttribute_in_EContainingClass(m_realValue_Class, REALVALUE_ATTRIBUTE_VALUE);
 	
 	
+	m_realValue_Operation__copy = factory->createEOperation_in_EContainingClass(m_realValue_Class, REALVALUE_OPERATION__COPY);
 	m_realValue_Operation_equals_Value = factory->createEOperation_in_EContainingClass(m_realValue_Class, REALVALUE_OPERATION_EQUALS_VALUE);
 	m_realValue_Operation_specify = factory->createEOperation_in_EContainingClass(m_realValue_Class, REALVALUE_OPERATION_SPECIFY);
 	m_realValue_Operation_toString = factory->createEOperation_in_EContainingClass(m_realValue_Class, REALVALUE_OPERATION_TOSTRING);
@@ -157,6 +165,7 @@ void SimpleClassifiersPackageImpl::createSignalInstanceContent(std::shared_ptr<e
 	
 	m_signalInstance_Attribute_type = factory->createEReference_in_EContainingClass(m_signalInstance_Class, SIGNALINSTANCE_ATTRIBUTE_TYPE);
 	
+	m_signalInstance_Operation__copy = factory->createEOperation_in_EContainingClass(m_signalInstance_Class, SIGNALINSTANCE_OPERATION__COPY);
 	
 }
 
@@ -166,6 +175,7 @@ void SimpleClassifiersPackageImpl::createStringValueContent(std::shared_ptr<ecor
 	m_stringValue_Attribute_value = factory->createEAttribute_in_EContainingClass(m_stringValue_Class, STRINGVALUE_ATTRIBUTE_VALUE);
 	
 	
+	m_stringValue_Operation__copy = factory->createEOperation_in_EContainingClass(m_stringValue_Class, STRINGVALUE_OPERATION__COPY);
 	m_stringValue_Operation_equals_Value = factory->createEOperation_in_EContainingClass(m_stringValue_Class, STRINGVALUE_OPERATION_EQUALS_VALUE);
 	m_stringValue_Operation_specify = factory->createEOperation_in_EContainingClass(m_stringValue_Class, STRINGVALUE_OPERATION_SPECIFY);
 	m_stringValue_Operation_toString = factory->createEOperation_in_EContainingClass(m_stringValue_Class, STRINGVALUE_OPERATION_TOSTRING);
@@ -194,6 +204,7 @@ void SimpleClassifiersPackageImpl::createUnlimitedNaturalValueContent(std::share
 	m_unlimitedNaturalValue_Attribute_value = factory->createEAttribute_in_EContainingClass(m_unlimitedNaturalValue_Class, UNLIMITEDNATURALVALUE_ATTRIBUTE_VALUE);
 	
 	
+	m_unlimitedNaturalValue_Operation__copy = factory->createEOperation_in_EContainingClass(m_unlimitedNaturalValue_Class, UNLIMITEDNATURALVALUE_OPERATION__COPY);
 	m_unlimitedNaturalValue_Operation_equals_Value = factory->createEOperation_in_EContainingClass(m_unlimitedNaturalValue_Class, UNLIMITEDNATURALVALUE_OPERATION_EQUALS_VALUE);
 	m_unlimitedNaturalValue_Operation_specify = factory->createEOperation_in_EContainingClass(m_unlimitedNaturalValue_Class, UNLIMITEDNATURALVALUE_OPERATION_SPECIFY);
 	m_unlimitedNaturalValue_Operation_toString = factory->createEOperation_in_EContainingClass(m_unlimitedNaturalValue_Class, UNLIMITEDNATURALVALUE_OPERATION_TOSTRING);

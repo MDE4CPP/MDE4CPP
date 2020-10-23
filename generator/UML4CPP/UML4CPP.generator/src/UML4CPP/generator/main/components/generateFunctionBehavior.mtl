@@ -31,7 +31,7 @@
 */]
 [template public generateOpaqueBehaviorCreation(aOpaqueBehavior : OpaqueBehavior)]
 [if (aOpaqueBehavior.owner = aOpaqueBehavior._package)]
-[aOpaqueBehavior.memberName()/] = factory->createOpaqueBehavior();
+[aOpaqueBehavior.memberName()/] = factory->createOpaqueBehavior_in_Package([aOpaqueBehavior._package.memberName()/]);
 [else]
 [aOpaqueBehavior.memberName()/] = factory->createOpaqueBehavior_in_BehavioredClassifier([aOpaqueBehavior.owner.oclAsType(NamedElement).memberName()/]);
 [/if]

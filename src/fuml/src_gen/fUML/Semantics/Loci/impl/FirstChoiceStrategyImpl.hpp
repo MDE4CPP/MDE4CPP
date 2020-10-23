@@ -19,7 +19,7 @@
 //*********************************
 namespace fUML::Semantics::Loci 
 {
-	class FirstChoiceStrategyImpl :virtual public ChoiceStrategyImpl, virtual public FirstChoiceStrategy 
+	class FirstChoiceStrategyImpl : virtual public ChoiceStrategyImpl, virtual public FirstChoiceStrategy 
 	{
 		public: 
 			FirstChoiceStrategyImpl(const FirstChoiceStrategyImpl & obj);
@@ -43,8 +43,7 @@ namespace fUML::Semantics::Loci
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual int choose(int size) ;
 			
 			

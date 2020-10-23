@@ -154,8 +154,10 @@ namespace uml
 namespace uml 
 {
 	/*!
-	 A Pin is an ObjectNode and MultiplicityElement that provides input values to an Action or accepts output values from an Action.
-	<p>From package UML::Actions.</p> */
+	A Pin is an ObjectNode and MultiplicityElement that provides input values to an Action or accepts output values from an Action.
+	<p>From package UML::Actions.</p>
+	*/
+	
 	class Pin:virtual public MultiplicityElement,virtual public ObjectNode
 	{
 		public:
@@ -176,13 +178,17 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 A control Pin has a control type.
-			isControl implies isControlType */ 
+			A control Pin has a control type.
+			isControl implies isControlType
+			*/
+			 
 			virtual bool control_pins(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
-			 Pin multiplicity is not unique.
-			not isUnique */ 
+			Pin multiplicity is not unique.
+			not isUnique
+			*/
+			 
 			virtual bool not_unique(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
@@ -190,15 +196,18 @@ namespace uml
 			// Attributes Getter Setter
 			//*********************************
 			/*!
-			 Indicates whether the Pin provides data to the Action or just controls how the Action executes.
-			<p>From package UML::Actions.</p> */ 
+			Indicates whether the Pin provides data to the Action or just controls how the Action executes.
+			<p>From package UML::Actions.</p>
+			*/
+			 
 			virtual bool getIsControl() const = 0;
 			
 			/*!
-			 Indicates whether the Pin provides data to the Action or just controls how the Action executes.
-			<p>From package UML::Actions.</p> */ 
+			Indicates whether the Pin provides data to the Action or just controls how the Action executes.
+			<p>From package UML::Actions.</p>
+			*/
+			 
 			virtual void setIsControl (bool _isControl)= 0; 
-			
 			
 			//*********************************
 			// Reference
@@ -210,8 +219,10 @@ namespace uml
 			// Attribute Members
 			//*********************************
 			/*!
-			 Indicates whether the Pin provides data to the Action or just controls how the Action executes.
-			<p>From package UML::Actions.</p> */ 
+			Indicates whether the Pin provides data to the Action or just controls how the Action executes.
+			<p>From package UML::Actions.</p>
+			*/
+			 
 			bool m_isControl = false;
 			
 			
@@ -225,17 +236,25 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
+			ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::ActivityGroup>> getInGroup() const = 0;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
+			The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

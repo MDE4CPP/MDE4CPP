@@ -65,17 +65,7 @@ using namespace fUML::Semantics::Activities;
 // Constructor / Destructor
 //*********************************
 ActivityFinalNodeActivationImpl::ActivityFinalNodeActivationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 ActivityFinalNodeActivationImpl::~ActivityFinalNodeActivationImpl()
@@ -85,14 +75,12 @@ ActivityFinalNodeActivationImpl::~ActivityFinalNodeActivationImpl()
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			ActivityFinalNodeActivationImpl::ActivityFinalNodeActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
-			:ActivityFinalNodeActivationImpl()
-			{
-			    m_group = par_group;
-			}
-
+ActivityFinalNodeActivationImpl::ActivityFinalNodeActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
+:ActivityFinalNodeActivationImpl()
+{
+	m_group = par_group;
+}
 
 
 ActivityFinalNodeActivationImpl::ActivityFinalNodeActivationImpl(const ActivityFinalNodeActivationImpl & obj):ActivityFinalNodeActivationImpl()
@@ -174,12 +162,10 @@ void ActivityFinalNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Semantics::
 			}
 			else
 			{
-				std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup> group = std::dynamic_pointer_cast<fUML::Semantics::Activities::ExpansionActivationGroup>(this_group);
-				if (group != nullptr)
+				if (this_group->getMetaElementID() == fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONACTIVATIONGROUP_CLASS)
 				{
-					group->getRegionActivation()->terminate();
+					std::dynamic_pointer_cast<fUML::Semantics::Activities::ExpansionActivationGroup>(this_group)->getRegionActivation()->terminate();
 				}
-
 			}
 		}
     }
@@ -195,6 +181,7 @@ void ActivityFinalNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Semantics::
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<ActivityFinalNodeActivation> ActivityFinalNodeActivationImpl::getThisActivityFinalNodeActivationPtr() const

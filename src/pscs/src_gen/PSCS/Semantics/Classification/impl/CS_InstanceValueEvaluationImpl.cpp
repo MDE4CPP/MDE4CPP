@@ -62,10 +62,10 @@
 #include "PSCS/Semantics/Classification/impl/ClassificationFactoryImpl.hpp"
 #include "PSCS/Semantics/Classification/impl/ClassificationPackageImpl.hpp"
 
-#include "PSCS/PSCSFactory.hpp"
-#include "PSCS/PSCSPackage.hpp"
 #include "PSCS/Semantics/SemanticsFactory.hpp"
 #include "PSCS/Semantics/SemanticsPackage.hpp"
+#include "PSCS/PSCSFactory.hpp"
+#include "PSCS/PSCSPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -76,17 +76,7 @@ using namespace PSCS::Semantics::Classification;
 // Constructor / Destructor
 //*********************************
 CS_InstanceValueEvaluationImpl::CS_InstanceValueEvaluationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 CS_InstanceValueEvaluationImpl::~CS_InstanceValueEvaluationImpl()
@@ -95,7 +85,6 @@ CS_InstanceValueEvaluationImpl::~CS_InstanceValueEvaluationImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete CS_InstanceValueEvaluation "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -248,6 +237,7 @@ return value;
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<CS_InstanceValueEvaluation> CS_InstanceValueEvaluationImpl::getThisCS_InstanceValueEvaluationPtr() const

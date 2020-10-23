@@ -62,19 +62,7 @@ using namespace fUML::Semantics::Actions;
 // Constructor / Destructor
 //*********************************
 ReturnInformationImpl::ReturnInformationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	//Init references
-	
+{	
 }
 
 ReturnInformationImpl::~ReturnInformationImpl()
@@ -83,7 +71,6 @@ ReturnInformationImpl::~ReturnInformationImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ReturnInformation "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -123,7 +110,18 @@ std::shared_ptr<ecore::EClass> ReturnInformationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
+std::shared_ptr<fUML::Semantics::Values::Value> ReturnInformationImpl::_copy()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Create a new return information value that is a copy of this value, with
+// the same call event occurrence.
 
+std::shared_ptr<fUML::Semantics::Actions::ReturnInformation> newValue = fUML::Semantics::Actions::ActionsFactory::eInstance()->createReturnInformation();
+newValue->setCallEventOccurrence(this->getCallEventOccurrence());
+return newValue;
+	//end of body
+}
 
 bool ReturnInformationImpl::equals(std::shared_ptr<fUML::Semantics::Values::Value>  otherValue)
 {
@@ -214,19 +212,26 @@ std::string ReturnInformationImpl::toString()
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference callEventOccurrence
+*/
 std::shared_ptr<fUML::Semantics::CommonBehavior::CallEventOccurrence > ReturnInformationImpl::getCallEventOccurrence() const
 {
 //assert(m_callEventOccurrence);
     return m_callEventOccurrence;
 }
+
 void ReturnInformationImpl::setCallEventOccurrence(std::shared_ptr<fUML::Semantics::CommonBehavior::CallEventOccurrence> _callEventOccurrence)
 {
     m_callEventOccurrence = _callEventOccurrence;
 }
 
+
+
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<ReturnInformation> ReturnInformationImpl::getThisReturnInformationPtr() const

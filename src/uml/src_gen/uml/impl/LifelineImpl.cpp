@@ -70,38 +70,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 LifelineImpl::LifelineImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		m_coveredBy.reset(new Bag<uml::InteractionFragment>());
-	
-	
-
-	
-
-	
-
-	
-
-	
-
-	//Init references
-	
-	
-
-	
-
-	
-
-	
-
-	
+{	
 }
 
 LifelineImpl::~LifelineImpl()
@@ -111,32 +80,28 @@ LifelineImpl::~LifelineImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+LifelineImpl::LifelineImpl(std::weak_ptr<uml::Interaction > par_interaction)
+:LifelineImpl()
+{
+	m_interaction = par_interaction;
+	m_namespace = par_interaction;
+}
 
 //Additional constructor for the containments back reference
-			LifelineImpl::LifelineImpl(std::weak_ptr<uml::Interaction > par_interaction)
-			:LifelineImpl()
-			{
-			    m_interaction = par_interaction;
-				m_namespace = par_interaction;
-			}
-
-
-//Additional constructor for the containments back reference
-			LifelineImpl::LifelineImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:LifelineImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
+LifelineImpl::LifelineImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:LifelineImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			LifelineImpl::LifelineImpl(std::weak_ptr<uml::Element > par_owner)
-			:LifelineImpl()
-			{
-			    m_owner = par_owner;
-			}
-
+LifelineImpl::LifelineImpl(std::weak_ptr<uml::Element > par_owner)
+:LifelineImpl()
+{
+	m_owner = par_owner;
+}
 
 
 LifelineImpl::LifelineImpl(const LifelineImpl & obj):LifelineImpl()
@@ -242,52 +207,88 @@ bool LifelineImpl::selector_specified(Any diagnostics,std::map <   Any, Any >  c
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference coveredBy
+*/
 std::shared_ptr<Bag<uml::InteractionFragment>> LifelineImpl::getCoveredBy() const
 {
+	if(m_coveredBy == nullptr)
+	{
+		m_coveredBy.reset(new Bag<uml::InteractionFragment>());
+		
+		
+	}
 
     return m_coveredBy;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference decomposedAs
+*/
 std::shared_ptr<uml::PartDecomposition > LifelineImpl::getDecomposedAs() const
 {
 
     return m_decomposedAs;
 }
+
 void LifelineImpl::setDecomposedAs(std::shared_ptr<uml::PartDecomposition> _decomposedAs)
 {
     m_decomposedAs = _decomposedAs;
 }
 
+
+
+/*
+Getter & Setter for reference interaction
+*/
 std::weak_ptr<uml::Interaction > LifelineImpl::getInteraction() const
 {
 //assert(m_interaction);
     return m_interaction;
 }
+
 void LifelineImpl::setInteraction(std::shared_ptr<uml::Interaction> _interaction)
 {
     m_interaction = _interaction;
 }
 
+
+
+/*
+Getter & Setter for reference represents
+*/
 std::shared_ptr<uml::ConnectableElement > LifelineImpl::getRepresents() const
 {
 
     return m_represents;
 }
+
 void LifelineImpl::setRepresents(std::shared_ptr<uml::ConnectableElement> _represents)
 {
     m_represents = _represents;
 }
 
+
+
+/*
+Getter & Setter for reference selector
+*/
 std::shared_ptr<uml::ValueSpecification > LifelineImpl::getSelector() const
 {
 
     return m_selector;
 }
+
 void LifelineImpl::setSelector(std::shared_ptr<uml::ValueSpecification> _selector)
 {
     m_selector = _selector;
 }
+
+
 
 //*********************************
 // Union Getter
@@ -296,14 +297,28 @@ std::weak_ptr<uml::Namespace > LifelineImpl::getNamespace() const
 {
 	return m_namespace;
 }
+
 std::shared_ptr<Union<uml::Element>> LifelineImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > LifelineImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<Lifeline> LifelineImpl::getThisLifelinePtr() const

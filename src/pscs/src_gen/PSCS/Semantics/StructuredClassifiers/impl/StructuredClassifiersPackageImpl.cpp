@@ -279,6 +279,10 @@ std::shared_ptr<ecore::EReference> StructuredClassifiersPackageImpl::getCS_Refer
 	return m_cS_Reference_Attribute_compositeReferent;
 }
 
+std::shared_ptr<ecore::EOperation> StructuredClassifiersPackageImpl::getCS_Reference_Operation__copy() const
+{
+	return m_cS_Reference_Operation__copy;
+}
 std::shared_ptr<ecore::EOperation> StructuredClassifiersPackageImpl::getCS_Reference_Operation_copy() const
 {
 	return m_cS_Reference_Operation_copy;

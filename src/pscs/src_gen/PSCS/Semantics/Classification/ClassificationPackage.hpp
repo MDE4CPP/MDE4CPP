@@ -29,8 +29,7 @@ namespace PSCS::Semantics::Classification
 	The Metamodel Package for the Classification metamodel. This package is used to enable the reflection of model elements. It contains all model elements
 	which were described in an ecore file.
 	*/
-	/*!
-	 */
+	
 	class ClassificationPackage : virtual public ecore::EPackage 
 	{
 		private:    
@@ -48,7 +47,7 @@ namespace PSCS::Semantics::Classification
 
 			// Begin Class CS_InstanceValueEvaluation
 			//Class and Feature IDs 
-			static const unsigned int CS_INSTANCEVALUEEVALUATION_CLASS = 16;
+			static const unsigned long CS_INSTANCEVALUEEVALUATION_CLASS = 1742446590;
 			static const unsigned int CS_INSTANCEVALUEEVALUATION_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int CS_INSTANCEVALUEEVALUATION_CLASS_OPERATION_COUNT = 5;
 			

@@ -65,19 +65,7 @@ using namespace fUML::Semantics::SimpleClassifiers;
 // Constructor / Destructor
 //*********************************
 DataValueImpl::DataValueImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	//Init references
-	
+{	
 }
 
 DataValueImpl::~DataValueImpl()
@@ -86,7 +74,6 @@ DataValueImpl::~DataValueImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete DataValue "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -134,6 +121,18 @@ std::shared_ptr<ecore::EClass> DataValueImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
+std::shared_ptr<fUML::Semantics::Values::Value> DataValueImpl::_copy()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Create a new data value with the same type and feature values as this data value.
+
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::DataValue> newValue = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::DataValue>(fUML::Semantics::SimpleClassifiers::CompoundValueImpl::_copy());
+newValue->setType(this->getType());
+return newValue;
+	//end of body
+}
+
 std::shared_ptr<Bag<uml::Classifier> > DataValueImpl::getTypes()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
@@ -155,19 +154,26 @@ std::shared_ptr<fUML::Semantics::Values::Value> DataValueImpl::new_()
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference type
+*/
 std::shared_ptr<uml::DataType > DataValueImpl::getType() const
 {
 //assert(m_type);
     return m_type;
 }
+
 void DataValueImpl::setType(std::shared_ptr<uml::DataType> _type)
 {
     m_type = _type;
 }
 
+
+
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<DataValue> DataValueImpl::getThisDataValuePtr() const

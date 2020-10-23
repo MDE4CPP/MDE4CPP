@@ -15,12 +15,12 @@
 
 #include "fUML/Semantics/CommonBehavior/impl/CommonBehaviorFactoryImpl.hpp"
 
-#include "ecore/impl/EObjectImpl.hpp"
+#include "ecore/impl/EModelElementImpl.hpp"
 
 //*********************************
 namespace fUML::Semantics::CommonBehavior 
 {
-	class EventOccurrenceImpl :virtual public ecore::EObjectImpl,
+	class EventOccurrenceImpl : virtual public ecore::EModelElementImpl,
 virtual public EventOccurrence 
 	{
 		public: 
@@ -45,24 +45,19 @@ virtual public EventOccurrence
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual void doSend() ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > getParameterValues() ;
 			
-			/*!
-			 */ 
+			 
 			virtual bool match(std::shared_ptr<uml::Trigger>  trigger) ;
 			
-			/*!
-			 */ 
+			 
 			virtual bool matchAny(std::shared_ptr<Bag<uml::Trigger> >  triggers) ;
 			
-			/*!
-			 */ 
+			 
 			virtual void sendTo(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference>  target) ;
 			
 			
@@ -75,13 +70,12 @@ virtual public EventOccurrence
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference > getTarget() const ;
 			
-			/*!
-			 */
-			virtual void setTarget(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> _target_target) ;
+			
+			virtual void setTarget(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> _target) ;
+			
 							
 			
 			//*********************************

@@ -63,32 +63,7 @@ using namespace ecore;
 // Constructor / Destructor
 //*********************************
 EReferenceImpl::EReferenceImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		m_eKeys.reset(new Bag<ecore::EAttribute>());
-	
-	
-
-	
-
-	
-
-	//Init references
-	
-	
-
-	
-
-	
+{	
 }
 
 EReferenceImpl::~EReferenceImpl()
@@ -98,22 +73,19 @@ EReferenceImpl::~EReferenceImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+EReferenceImpl::EReferenceImpl(std::weak_ptr<ecore::EObject > par_eContainer)
+:EReferenceImpl()
+{
+	m_eContainer = par_eContainer;
+}
 
 //Additional constructor for the containments back reference
-			EReferenceImpl::EReferenceImpl(std::weak_ptr<ecore::EObject > par_eContainer)
-			:EReferenceImpl()
-			{
-			    m_eContainer = par_eContainer;
-			}
-
-
-//Additional constructor for the containments back reference
-			EReferenceImpl::EReferenceImpl(std::weak_ptr<ecore::EClass > par_eContainingClass)
-			:EReferenceImpl()
-			{
-			    m_eContainingClass = par_eContainingClass;
-			}
-
+EReferenceImpl::EReferenceImpl(std::weak_ptr<ecore::EClass > par_eContainingClass)
+:EReferenceImpl()
+{
+	m_eContainingClass = par_eContainingClass;
+}
 
 
 EReferenceImpl::EReferenceImpl(const EReferenceImpl & obj):EReferenceImpl()
@@ -193,11 +165,24 @@ std::shared_ptr<EClass> EReferenceImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
-
-
+/*
+Getter & Setter for attribute container
+*/
 bool EReferenceImpl::isContainer() const 
 {
 	return m_container;
+}
+
+
+
+
+
+/*
+Getter & Setter for attribute containment
+*/
+bool EReferenceImpl::isContainment() const 
+{
+	return m_containment;
 }
 
 void EReferenceImpl::setContainment(bool _containment)
@@ -205,9 +190,14 @@ void EReferenceImpl::setContainment(bool _containment)
 	m_containment = _containment;
 } 
 
-bool EReferenceImpl::isContainment() const 
+
+
+/*
+Getter & Setter for attribute resolveProxies
+*/
+bool EReferenceImpl::isResolveProxies() const 
 {
-	return m_containment;
+	return m_resolveProxies;
 }
 
 void EReferenceImpl::setResolveProxies(bool _resolveProxies)
@@ -215,10 +205,7 @@ void EReferenceImpl::setResolveProxies(bool _resolveProxies)
 	m_resolveProxies = _resolveProxies;
 } 
 
-bool EReferenceImpl::isResolveProxies() const 
-{
-	return m_resolveProxies;
-}
+
 
 //*********************************
 // Operations
@@ -227,40 +214,76 @@ bool EReferenceImpl::isResolveProxies() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference eKeys
+*/
 std::shared_ptr<Bag<ecore::EAttribute>> EReferenceImpl::getEKeys() const
 {
+	if(m_eKeys == nullptr)
+	{
+		m_eKeys.reset(new Bag<ecore::EAttribute>());
+		
+		
+	}
 
     return m_eKeys;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference eOpposite
+*/
 std::shared_ptr<ecore::EReference > EReferenceImpl::getEOpposite() const
 {
 
     return m_eOpposite;
 }
+
 void EReferenceImpl::setEOpposite(std::shared_ptr<ecore::EReference> _eOpposite)
 {
     m_eOpposite = _eOpposite;
 }
 
+
+
+/*
+Getter & Setter for reference eReferenceType
+*/
 std::shared_ptr<ecore::EClass > EReferenceImpl::getEReferenceType() const
 {
 //assert(m_eReferenceType);
     return m_eReferenceType;
 }
+
 void EReferenceImpl::setEReferenceType(std::shared_ptr<ecore::EClass> _eReferenceType)
 {
     m_eReferenceType = _eReferenceType;
 }
+
+
 
 //*********************************
 // Union Getter
 //*********************************
 std::shared_ptr<Union<ecore::EObject>> EReferenceImpl::getEContens() const
 {
+	if(m_eContens == nullptr)
+	{
+		/*Union*/
+		m_eContens.reset(new Union<ecore::EObject>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_eContens - Union<ecore::EObject>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_eContens;
 }
+
+
 
 
 std::shared_ptr<EReference> EReferenceImpl::getThisEReferencePtr() const

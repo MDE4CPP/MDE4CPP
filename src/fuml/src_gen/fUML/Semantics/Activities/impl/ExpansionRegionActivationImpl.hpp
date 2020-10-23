@@ -19,7 +19,7 @@
 //*********************************
 namespace fUML::Semantics::Activities 
 {
-	class ExpansionRegionActivationImpl :virtual public fUML::Semantics::Actions::ActionActivationImpl, virtual public ExpansionRegionActivation 
+	class ExpansionRegionActivationImpl : virtual public fUML::Semantics::Actions::ActionActivationImpl, virtual public ExpansionRegionActivation 
 	{
 		public: 
 			ExpansionRegionActivationImpl(const ExpansionRegionActivationImpl & obj);
@@ -47,60 +47,46 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual void doAction() ;
 			
-			/*!
-			 */ 
+			 
 			virtual void doOutput() ;
 			
-			/*!
-			 */ 
+			 
 			virtual void doStructuredActivity() ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<fUML::Semantics::Activities::ExpansionNodeActivation> getExpansionNodeActivation(std::shared_ptr<uml::ExpansionNode>  node) ;
 			
-			/*!
-			 */ 
+			 
 			virtual bool isSuspended() ;
 			
-			/*!
-			 */ 
+			 
 			virtual int numberOfValues() ;
 			
-			/*!
-			 */ 
+			 
 			virtual void resume(std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup>  activationGroup) ;
 			
-			/*!
-			 */ 
+			 
 			virtual void runGroup(std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup>  activationGroup) ;
 			
-			/*!
-			 */ 
+			 
 			virtual void runIterative() ;
 			
-			/*!
-			 */ 
+			 
 			virtual void runParallel() ;
 			
-			/*!
-			 */ 
+			 
 			virtual void sendOffers() ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > takeOfferedTokens() ;
 			
-			/*!
-			 */ 
+			 
 			virtual void terminate() ;
 			
-			/*!
-			 */ 
+			 
 			virtual void terminateGroup(std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup>  activationGroup) ;
 			
 			
@@ -108,38 +94,34 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual int getNext() const ;
 			
-			/*!
-			 */ 
+			 
 			virtual void setNext (int _next); 
-			
 			
 			
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::ExpansionActivationGroup>> getActivationGroups() const ;
 			
-			/*!
-			 */
+			
+			
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::TokenSet>> getInputExpansionTokens() const ;
 			
-			/*!
-			 */
+			
+			
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::TokenSet>> getInputTokens() const ;
+			
 			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> getPinActivation() const ; 
 			 
 			//*********************************

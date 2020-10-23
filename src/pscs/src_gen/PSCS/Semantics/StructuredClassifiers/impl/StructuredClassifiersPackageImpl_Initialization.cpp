@@ -1076,6 +1076,14 @@ void StructuredClassifiersPackageImpl::initializeCS_ReferenceContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
+	m_cS_Reference_Operation__copy->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
+	m_cS_Reference_Operation__copy->setName("_copy");
+	m_cS_Reference_Operation__copy->setLowerBound(1);
+	m_cS_Reference_Operation__copy->setUpperBound(1);
+	m_cS_Reference_Operation__copy->setUnique(true);
+	m_cS_Reference_Operation__copy->setOrdered(true);
+	
+	
 	m_cS_Reference_Operation_copy->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
 	m_cS_Reference_Operation_copy->setName("copy");
 	m_cS_Reference_Operation_copy->setLowerBound(1);

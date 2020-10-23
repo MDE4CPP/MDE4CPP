@@ -19,7 +19,7 @@
 //*********************************
 namespace PSCS::Semantics::Actions 
 {
-	class CS_SendSignalActionActivationImpl :virtual public fUML::Semantics::Actions::SendSignalActionActivationImpl, virtual public CS_SendSignalActionActivation 
+	class CS_SendSignalActionActivationImpl : virtual public fUML::Semantics::Actions::SendSignalActionActivationImpl, virtual public CS_SendSignalActionActivation 
 	{
 		public: 
 			CS_SendSignalActionActivationImpl(const CS_SendSignalActionActivationImpl & obj);
@@ -47,8 +47,7 @@ namespace PSCS::Semantics::Actions
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual void doAction() ;
 			
 			
@@ -66,8 +65,7 @@ namespace PSCS::Semantics::Actions
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> getPinActivation() const ; 
 			 
 			//*********************************

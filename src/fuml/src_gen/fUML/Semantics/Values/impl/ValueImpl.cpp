@@ -58,17 +58,7 @@ using namespace fUML::Semantics::Values;
 // Constructor / Destructor
 //*********************************
 ValueImpl::ValueImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 ValueImpl::~ValueImpl()
@@ -77,7 +67,6 @@ ValueImpl::~ValueImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Value "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -115,6 +104,19 @@ std::shared_ptr<ecore::EClass> ValueImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
+std::shared_ptr<fUML::Semantics::Values::Value> ValueImpl::_copy()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Create a new value that is equal to this value.
+// By default, this operation simply creates a new value with empty properties.
+// It must be overridden in each Value subclass to do the superclass copy and then appropriately set properties defined in the subclass.
+
+std::shared_ptr<fUML::Semantics::Values::Value> newValue(new fUML::Semantics::Values::ValueImpl());
+return newValue;
+	//end of body
+}
+
 bool ValueImpl::checkAllParents(std::shared_ptr<uml::Classifier>  type,std::shared_ptr<uml::Classifier>  classifier)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
@@ -209,6 +211,7 @@ std::string ValueImpl::toString()
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<Value> ValueImpl::getThisValuePtr() const

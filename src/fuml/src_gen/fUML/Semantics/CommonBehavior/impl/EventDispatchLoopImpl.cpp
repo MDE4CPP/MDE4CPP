@@ -49,17 +49,7 @@ using namespace fUML::Semantics::CommonBehavior;
 // Constructor / Destructor
 //*********************************
 EventDispatchLoopImpl::EventDispatchLoopImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 EventDispatchLoopImpl::~EventDispatchLoopImpl()
@@ -68,7 +58,6 @@ EventDispatchLoopImpl::~EventDispatchLoopImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete EventDispatchLoop "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -114,6 +103,7 @@ std::shared_ptr<ecore::EClass> EventDispatchLoopImpl::eStaticClass() const
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<EventDispatchLoop> EventDispatchLoopImpl::getThisEventDispatchLoopPtr() const

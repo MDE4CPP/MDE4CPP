@@ -50,17 +50,7 @@ using namespace fUML::Semantics::Loci;
 // Constructor / Destructor
 //*********************************
 FirstChoiceStrategyImpl::FirstChoiceStrategyImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 FirstChoiceStrategyImpl::~FirstChoiceStrategyImpl()
@@ -69,7 +59,6 @@ FirstChoiceStrategyImpl::~FirstChoiceStrategyImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete FirstChoiceStrategy "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -122,6 +111,7 @@ int FirstChoiceStrategyImpl::choose(int size)
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<FirstChoiceStrategy> FirstChoiceStrategyImpl::getThisFirstChoiceStrategyPtr() const

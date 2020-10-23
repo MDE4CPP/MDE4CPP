@@ -45,14 +45,13 @@ namespace uml
 
 // enum includes
 
-#include "ecore/EObject.hpp"
+#include "ecore/EModelElement.hpp"
 
 //*********************************
 namespace fUML::Semantics::CommonBehavior 
 {
-	/*!
-	 */
-	class CallEventBehavior : virtual public ecore::EObject 
+	
+	class CallEventBehavior : virtual public ecore::EModelElement
 
 	{
 		public:
@@ -82,13 +81,12 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<uml::Operation > getOperation() const = 0;
 			
-			/*!
-			 */
-			virtual void setOperation(std::shared_ptr<uml::Operation> _operation_operation) = 0;
+			
+			virtual void setOperation(std::shared_ptr<uml::Operation> _operation) = 0;
+			
 			
 
 		protected:
@@ -100,10 +98,8 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			// Reference Members
 			//*********************************
-			/*!
-			 */
-			std::shared_ptr<uml::Operation > m_operation;
 			
+			std::shared_ptr<uml::Operation > m_operation;
 
 		public:
 			//*********************************

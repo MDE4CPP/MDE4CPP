@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class ChangeEventImpl :virtual public EventImpl, virtual public ChangeEvent 
+	class ChangeEventImpl : virtual public EventImpl, virtual public ChangeEvent 
 	{
 		public: 
 			ChangeEventImpl(const ChangeEventImpl & obj);
@@ -69,28 +69,39 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 A Boolean-valued ValueSpecification that will result in a ChangeEvent whenever its value changes from false to true.
-			<p>From package UML::CommonBehavior.</p> */
+			A Boolean-valued ValueSpecification that will result in a ChangeEvent whenever its value changes from false to true.
+			<p>From package UML::CommonBehavior.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::ValueSpecification > getChangeExpression() const ;
 			
 			/*!
-			 A Boolean-valued ValueSpecification that will result in a ChangeEvent whenever its value changes from false to true.
-			<p>From package UML::CommonBehavior.</p> */
-			virtual void setChangeExpression(std::shared_ptr<uml::ValueSpecification> _changeExpression_changeExpression) ;
+			A Boolean-valued ValueSpecification that will result in a ChangeEvent whenever its value changes from false to true.
+			<p>From package UML::CommonBehavior.</p>
+			*/
+			
+			virtual void setChangeExpression(std::shared_ptr<uml::ValueSpecification> _changeExpression) ;
+			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************

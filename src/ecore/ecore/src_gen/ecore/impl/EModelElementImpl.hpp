@@ -18,7 +18,7 @@
 //*********************************
 namespace ecore 
 {
-	class EModelElementImpl :virtual public EObjectImpl, virtual public EModelElement 
+	class EModelElementImpl : virtual public EObjectImpl, virtual public EModelElement 
 	{
 		public: 
 			EModelElementImpl(const EModelElementImpl & obj);
@@ -46,8 +46,7 @@ namespace ecore
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<ecore::EAnnotation> getEAnnotation(std::string source) ;
 			
 			
@@ -60,17 +59,16 @@ namespace ecore
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Subset<ecore::EAnnotation, ecore::EObject>> getEAnnotations() const ;
+			
 			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const ; 
 			 
 			//*********************************

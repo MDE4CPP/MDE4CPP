@@ -19,7 +19,7 @@
 //*********************************
 namespace fUML::Semantics::Activities 
 {
-	class DataStoreNodeActivationImpl :virtual public CentralBufferNodeActivationImpl, virtual public DataStoreNodeActivation 
+	class DataStoreNodeActivationImpl : virtual public CentralBufferNodeActivationImpl, virtual public DataStoreNodeActivation 
 	{
 		public: 
 			DataStoreNodeActivationImpl(const DataStoreNodeActivationImpl & obj);
@@ -47,12 +47,10 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual void addToken(std::shared_ptr<fUML::Semantics::Activities::Token>  token) ;
 			
-			/*!
-			 */ 
+			 
 			virtual int removeToken(std::shared_ptr<fUML::Semantics::Activities::Token>  token) ;
 			
 			

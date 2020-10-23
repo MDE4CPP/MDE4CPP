@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class BehaviorExecutionSpecificationImpl :virtual public ExecutionSpecificationImpl, virtual public BehaviorExecutionSpecification 
+	class BehaviorExecutionSpecificationImpl : virtual public ExecutionSpecificationImpl, virtual public BehaviorExecutionSpecification 
 	{
 		public: 
 			BehaviorExecutionSpecificationImpl(const BehaviorExecutionSpecificationImpl & obj);
@@ -69,28 +69,39 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 Behavior whose execution is occurring.
-			<p>From package UML::Interactions.</p> */
+			Behavior whose execution is occurring.
+			<p>From package UML::Interactions.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::Behavior > getBehavior() const ;
 			
 			/*!
-			 Behavior whose execution is occurring.
-			<p>From package UML::Interactions.</p> */
-			virtual void setBehavior(std::shared_ptr<uml::Behavior> _behavior_behavior) ;
+			Behavior whose execution is occurring.
+			<p>From package UML::Interactions.</p>
+			*/
+			
+			virtual void setBehavior(std::shared_ptr<uml::Behavior> _behavior) ;
+			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************

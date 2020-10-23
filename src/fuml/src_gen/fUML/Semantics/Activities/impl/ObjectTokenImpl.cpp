@@ -55,19 +55,7 @@ using namespace fUML::Semantics::Activities;
 // Constructor / Destructor
 //*********************************
 ObjectTokenImpl::ObjectTokenImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	//Init references
-	
+{	
 }
 
 ObjectTokenImpl::~ObjectTokenImpl()
@@ -76,7 +64,6 @@ ObjectTokenImpl::~ObjectTokenImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ObjectToken "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -125,6 +112,20 @@ std::shared_ptr<ecore::EClass> ObjectTokenImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
+std::shared_ptr<fUML::Semantics::Activities::Token> ObjectTokenImpl::_copy()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Return a new object token with the same value as this token.
+// [Note: the holder of the copy is not set.]
+
+std::shared_ptr<fUML::Semantics::Activities::ObjectToken> copy = fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createObjectToken();
+copy->setValue(this->getValue());
+
+return copy;
+	//end of body
+}
+
 bool ObjectTokenImpl::equals(std::shared_ptr<fUML::Semantics::Activities::Token>  other)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
@@ -144,19 +145,26 @@ bool ObjectTokenImpl::isControl()
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference value
+*/
 std::shared_ptr<fUML::Semantics::Values::Value > ObjectTokenImpl::getValue() const
 {
 
     return m_value;
 }
+
 void ObjectTokenImpl::setValue(std::shared_ptr<fUML::Semantics::Values::Value> _value)
 {
     m_value = _value;
 }
 
+
+
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<ObjectToken> ObjectTokenImpl::getThisObjectTokenPtr() const

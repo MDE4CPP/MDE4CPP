@@ -35,8 +35,6 @@
 
 #include "fUML/Semantics/Activities/Token.hpp"
 
-#include "fUML/Semantics/Values/Value.hpp"
-
 //Factories an Package includes
 #include "fUML/Semantics/Activities/impl/ActivitiesFactoryImpl.hpp"
 #include "fUML/Semantics/Activities/impl/ActivitiesPackageImpl.hpp"
@@ -55,17 +53,7 @@ using namespace fUML::Semantics::Activities;
 // Constructor / Destructor
 //*********************************
 ControlTokenImpl::ControlTokenImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 ControlTokenImpl::~ControlTokenImpl()
@@ -74,7 +62,6 @@ ControlTokenImpl::~ControlTokenImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ControlToken "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -115,19 +102,21 @@ std::shared_ptr<ecore::EClass> ControlTokenImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
+std::shared_ptr<fUML::Semantics::Activities::Token> ControlTokenImpl::_copy()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Return a new control token.
+
+return fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createControlToken();
+	//end of body
+}
+
 bool ControlTokenImpl::equals(std::shared_ptr<fUML::Semantics::Activities::Token>  other)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	return (std::dynamic_pointer_cast<fUML::Semantics::Activities::ControlToken>(other) != nullptr);
-	//end of body
-}
-
-std::shared_ptr<fUML::Semantics::Values::Value> ControlTokenImpl::getValue() const
-{
-	//ADD_COUNT(__PRETTY_FUNCTION__)
-	//generated from body annotation
-	return nullptr;
+	return (other->getMetaElementID() == fUML::Semantics::Activities::ActivitiesPackage::CONTROLTOKEN_CLASS);
 	//end of body
 }
 
@@ -146,6 +135,7 @@ bool ControlTokenImpl::isControl()
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<ControlToken> ControlTokenImpl::getThisControlTokenPtr() const

@@ -59,17 +59,7 @@ using namespace fUML::Semantics::Activities;
 // Constructor / Destructor
 //*********************************
 CentralBufferNodeActivationImpl::CentralBufferNodeActivationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 CentralBufferNodeActivationImpl::~CentralBufferNodeActivationImpl()
@@ -79,14 +69,12 @@ CentralBufferNodeActivationImpl::~CentralBufferNodeActivationImpl()
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			CentralBufferNodeActivationImpl::CentralBufferNodeActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
-			:CentralBufferNodeActivationImpl()
-			{
-			    m_group = par_group;
-			}
-
+CentralBufferNodeActivationImpl::CentralBufferNodeActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
+:CentralBufferNodeActivationImpl()
+{
+	m_group = par_group;
+}
 
 
 CentralBufferNodeActivationImpl::CentralBufferNodeActivationImpl(const CentralBufferNodeActivationImpl & obj):CentralBufferNodeActivationImpl()
@@ -163,6 +151,7 @@ void CentralBufferNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Semantics::
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<CentralBufferNodeActivation> CentralBufferNodeActivationImpl::getThisCentralBufferNodeActivationPtr() const

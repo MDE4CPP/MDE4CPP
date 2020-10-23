@@ -102,8 +102,10 @@ namespace uml
 namespace uml 
 {
 	/*!
-	 An Interval defines the range between two ValueSpecifications.
-	<p>From package UML::Values.</p> */
+	An Interval defines the range between two ValueSpecifications.
+	<p>From package UML::Values.</p>
+	*/
+	
 	class Interval:virtual public ValueSpecification
 	{
 		public:
@@ -132,23 +134,33 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 Refers to the ValueSpecification denoting the maximum value of the range.
-			<p>From package UML::Values.</p> */
+			Refers to the ValueSpecification denoting the maximum value of the range.
+			<p>From package UML::Values.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::ValueSpecification > getMax() const = 0;
 			
 			/*!
-			 Refers to the ValueSpecification denoting the maximum value of the range.
-			<p>From package UML::Values.</p> */
-			virtual void setMax(std::shared_ptr<uml::ValueSpecification> _max_max) = 0;
+			Refers to the ValueSpecification denoting the maximum value of the range.
+			<p>From package UML::Values.</p>
+			*/
+			
+			virtual void setMax(std::shared_ptr<uml::ValueSpecification> _max) = 0;
+			
 			/*!
-			 Refers to the ValueSpecification denoting the minimum value of the range.
-			<p>From package UML::Values.</p> */
+			Refers to the ValueSpecification denoting the minimum value of the range.
+			<p>From package UML::Values.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::ValueSpecification > getMin() const = 0;
 			
 			/*!
-			 Refers to the ValueSpecification denoting the minimum value of the range.
-			<p>From package UML::Values.</p> */
-			virtual void setMin(std::shared_ptr<uml::ValueSpecification> _min_min) = 0;
+			Refers to the ValueSpecification denoting the minimum value of the range.
+			<p>From package UML::Values.</p>
+			*/
+			
+			virtual void setMin(std::shared_ptr<uml::ValueSpecification> _min) = 0;
+			
 			
 
 		protected:
@@ -161,28 +173,36 @@ namespace uml
 			// Reference Members
 			//*********************************
 			/*!
-			 Refers to the ValueSpecification denoting the maximum value of the range.
-			<p>From package UML::Values.</p> */
-			std::shared_ptr<uml::ValueSpecification > m_max;
-			/*!
-			 Refers to the ValueSpecification denoting the minimum value of the range.
-			<p>From package UML::Values.</p> */
-			std::shared_ptr<uml::ValueSpecification > m_min;
+			Refers to the ValueSpecification denoting the maximum value of the range.
+			<p>From package UML::Values.</p>
+			*/
 			
+			std::shared_ptr<uml::ValueSpecification > m_max;/*!
+			Refers to the ValueSpecification denoting the minimum value of the range.
+			<p>From package UML::Values.</p>
+			*/
+			
+			std::shared_ptr<uml::ValueSpecification > m_min;
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

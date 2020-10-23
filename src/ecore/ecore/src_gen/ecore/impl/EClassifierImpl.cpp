@@ -56,29 +56,7 @@ using namespace ecore;
 // Constructor / Destructor
 //*********************************
 EClassifierImpl::EClassifierImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	
-	
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-		m_eTypeParameters.reset(new Bag<ecore::ETypeParameter>());
-	
-	
-
-	//Init references
-	
-
-	
-	
+{	
 }
 
 EClassifierImpl::~EClassifierImpl()
@@ -88,22 +66,19 @@ EClassifierImpl::~EClassifierImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+EClassifierImpl::EClassifierImpl(std::weak_ptr<ecore::EObject > par_eContainer)
+:EClassifierImpl()
+{
+	m_eContainer = par_eContainer;
+}
 
 //Additional constructor for the containments back reference
-			EClassifierImpl::EClassifierImpl(std::weak_ptr<ecore::EObject > par_eContainer)
-			:EClassifierImpl()
-			{
-			    m_eContainer = par_eContainer;
-			}
-
-
-//Additional constructor for the containments back reference
-			EClassifierImpl::EClassifierImpl(std::weak_ptr<ecore::EPackage > par_ePackage)
-			:EClassifierImpl()
-			{
-			    m_ePackage = par_ePackage;
-			}
-
+EClassifierImpl::EClassifierImpl(std::weak_ptr<ecore::EPackage > par_ePackage)
+:EClassifierImpl()
+{
+	m_ePackage = par_ePackage;
+}
 
 
 EClassifierImpl::EClassifierImpl(const EClassifierImpl & obj):EClassifierImpl()
@@ -146,7 +121,6 @@ EClassifierImpl::EClassifierImpl(const EClassifierImpl & obj):EClassifierImpl()
 	#endif
 
 	
-	
 }
 
 std::shared_ptr<ecore::EObject>  EClassifierImpl::copy() const
@@ -164,21 +138,39 @@ std::shared_ptr<EClass> EClassifierImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
-void EClassifierImpl::setDefaultValue(Any _defaultValue)
-{
-	m_defaultValue = _defaultValue;
-} 
-
+/*
+Getter & Setter for attribute defaultValue
+*/
 Any EClassifierImpl::getDefaultValue() const 
 {
 	return m_defaultValue;
 }
 
+void EClassifierImpl::setDefaultValue(Any _defaultValue)
+{
+	m_defaultValue = _defaultValue;
+} 
 
 
+
+/*
+Getter & Setter for attribute instanceClass
+*/
 void *  EClassifierImpl::getInstanceClass() const 
 {
 	return m_instanceClass;
+}
+
+
+
+
+
+/*
+Getter & Setter for attribute instanceClassName
+*/
+std::string EClassifierImpl::getInstanceClassName() const 
+{
+	return m_instanceClassName;
 }
 
 void EClassifierImpl::setInstanceClassName(std::string _instanceClassName)
@@ -186,9 +178,14 @@ void EClassifierImpl::setInstanceClassName(std::string _instanceClassName)
 	m_instanceClassName = _instanceClassName;
 } 
 
-std::string EClassifierImpl::getInstanceClassName() const 
+
+
+/*
+Getter & Setter for attribute instanceTypeName
+*/
+std::string EClassifierImpl::getInstanceTypeName() const 
 {
-	return m_instanceClassName;
+	return m_instanceTypeName;
 }
 
 void EClassifierImpl::setInstanceTypeName(std::string _instanceTypeName)
@@ -196,10 +193,7 @@ void EClassifierImpl::setInstanceTypeName(std::string _instanceTypeName)
 	m_instanceTypeName = _instanceTypeName;
 } 
 
-std::string EClassifierImpl::getInstanceTypeName() const 
-{
-	return m_instanceTypeName;
-}
+
 
 //*********************************
 // Operations
@@ -221,6 +215,9 @@ bool EClassifierImpl::isInstance(Any object) const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference ePackage
+*/
 std::weak_ptr<ecore::EPackage > EClassifierImpl::getEPackage() const
 {
 
@@ -228,11 +225,26 @@ std::weak_ptr<ecore::EPackage > EClassifierImpl::getEPackage() const
 }
 
 
+
+
+
+/*
+Getter & Setter for reference eTypeParameters
+*/
 std::shared_ptr<Bag<ecore::ETypeParameter>> EClassifierImpl::getETypeParameters() const
 {
+	if(m_eTypeParameters == nullptr)
+	{
+		m_eTypeParameters.reset(new Bag<ecore::ETypeParameter>());
+		
+		
+	}
 
     return m_eTypeParameters;
 }
+
+
+
 
 
 //*********************************
@@ -240,8 +252,20 @@ std::shared_ptr<Bag<ecore::ETypeParameter>> EClassifierImpl::getETypeParameters(
 //*********************************
 std::shared_ptr<Union<ecore::EObject>> EClassifierImpl::getEContens() const
 {
+	if(m_eContens == nullptr)
+	{
+		/*Union*/
+		m_eContens.reset(new Union<ecore::EObject>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_eContens - Union<ecore::EObject>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_eContens;
 }
+
+
 
 
 std::shared_ptr<EClassifier> EClassifierImpl::getThisEClassifierPtr() const

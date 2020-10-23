@@ -19,7 +19,7 @@
 //*********************************
 namespace fUML::Semantics::Values 
 {
-	class LiteralUnlimitedNaturalEvaluationImpl :virtual public LiteralEvaluationImpl, virtual public LiteralUnlimitedNaturalEvaluation 
+	class LiteralUnlimitedNaturalEvaluationImpl : virtual public LiteralEvaluationImpl, virtual public LiteralUnlimitedNaturalEvaluation 
 	{
 		public: 
 			LiteralUnlimitedNaturalEvaluationImpl(const LiteralUnlimitedNaturalEvaluationImpl & obj);
@@ -43,8 +43,7 @@ namespace fUML::Semantics::Values
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> evaluate() ;
 			
 			

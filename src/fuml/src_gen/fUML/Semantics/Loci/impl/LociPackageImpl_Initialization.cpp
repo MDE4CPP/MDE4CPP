@@ -357,6 +357,23 @@ void LociPackageImpl::initializeExecutionFactoryContent()
 		parameter->setOrdered(true);
 	}
 	
+	m_executionFactory_Operation_instantiateOpaqueBehaviorExecution_Behavior->setEType(fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getOpaqueBehaviorExecution_Class());
+	m_executionFactory_Operation_instantiateOpaqueBehaviorExecution_Behavior->setName("instantiateOpaqueBehaviorExecution");
+	m_executionFactory_Operation_instantiateOpaqueBehaviorExecution_Behavior->setLowerBound(1);
+	m_executionFactory_Operation_instantiateOpaqueBehaviorExecution_Behavior->setUpperBound(1);
+	m_executionFactory_Operation_instantiateOpaqueBehaviorExecution_Behavior->setUnique(true);
+	m_executionFactory_Operation_instantiateOpaqueBehaviorExecution_Behavior->setOrdered(false);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_executionFactory_Operation_instantiateOpaqueBehaviorExecution_Behavior);
+		parameter->setName("behavior");
+		parameter->setEType(uml::UmlPackage::eInstance()->getBehavior_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
 	m_executionFactory_Operation_instantiateVisitor_Element->setEType(getSemanticVisitor_Class());
 	m_executionFactory_Operation_instantiateVisitor_Element->setName("instantiateVisitor");
 	m_executionFactory_Operation_instantiateVisitor_Element->setLowerBound(1);

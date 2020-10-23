@@ -49,10 +49,10 @@
 #include "PSCS/Semantics/Values/impl/ValuesFactoryImpl.hpp"
 #include "PSCS/Semantics/Values/impl/ValuesPackageImpl.hpp"
 
-#include "PSCS/PSCSFactory.hpp"
-#include "PSCS/PSCSPackage.hpp"
 #include "PSCS/Semantics/SemanticsFactory.hpp"
 #include "PSCS/Semantics/SemanticsPackage.hpp"
+#include "PSCS/PSCSFactory.hpp"
+#include "PSCS/PSCSPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -63,17 +63,7 @@ using namespace PSCS::Semantics::Values;
 // Constructor / Destructor
 //*********************************
 CS_OpaqueExpressionEvaluationImpl::CS_OpaqueExpressionEvaluationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 CS_OpaqueExpressionEvaluationImpl::~CS_OpaqueExpressionEvaluationImpl()
@@ -82,7 +72,6 @@ CS_OpaqueExpressionEvaluationImpl::~CS_OpaqueExpressionEvaluationImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete CS_OpaqueExpressionEvaluation "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -186,6 +175,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value> > CS_OpaqueExpressionEvaluat
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<CS_OpaqueExpressionEvaluation> CS_OpaqueExpressionEvaluationImpl::getThisCS_OpaqueExpressionEvaluationPtr() const

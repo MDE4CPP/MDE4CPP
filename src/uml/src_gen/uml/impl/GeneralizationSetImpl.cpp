@@ -68,27 +68,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 GeneralizationSetImpl::GeneralizationSetImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		m_generalization.reset(new Bag<uml::Generalization>());
-	
-	
-
-	
-
-	//Init references
-	
-	
-
-	
+{	
 }
 
 GeneralizationSetImpl::~GeneralizationSetImpl()
@@ -98,41 +78,36 @@ GeneralizationSetImpl::~GeneralizationSetImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+GeneralizationSetImpl::GeneralizationSetImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:GeneralizationSetImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			GeneralizationSetImpl::GeneralizationSetImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:GeneralizationSetImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
+GeneralizationSetImpl::GeneralizationSetImpl(std::weak_ptr<uml::Element > par_owner)
+:GeneralizationSetImpl()
+{
+	m_owner = par_owner;
+}
 
 //Additional constructor for the containments back reference
-			GeneralizationSetImpl::GeneralizationSetImpl(std::weak_ptr<uml::Element > par_owner)
-			:GeneralizationSetImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-//Additional constructor for the containments back reference
-			GeneralizationSetImpl::GeneralizationSetImpl(std::weak_ptr<uml::Package > par_owningPackage)
-			:GeneralizationSetImpl()
-			{
-			    m_owningPackage = par_owningPackage;
-				m_namespace = par_owningPackage;
-			}
-
+GeneralizationSetImpl::GeneralizationSetImpl(std::weak_ptr<uml::Package > par_owningPackage)
+:GeneralizationSetImpl()
+{
+	m_owningPackage = par_owningPackage;
+	m_namespace = par_owningPackage;
+}
 
 //Additional constructor for the containments back reference
-			GeneralizationSetImpl::GeneralizationSetImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
-			:GeneralizationSetImpl()
-			{
-			    m_owningTemplateParameter = par_owningTemplateParameter;
-				m_owner = par_owningTemplateParameter;
-			}
-
+GeneralizationSetImpl::GeneralizationSetImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+:GeneralizationSetImpl()
+{
+	m_owningTemplateParameter = par_owningTemplateParameter;
+	m_owner = par_owningTemplateParameter;
+}
 
 
 GeneralizationSetImpl::GeneralizationSetImpl(const GeneralizationSetImpl & obj):GeneralizationSetImpl()
@@ -203,14 +178,27 @@ std::shared_ptr<ecore::EClass> GeneralizationSetImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute isCovering
+*/
+bool GeneralizationSetImpl::getIsCovering() const 
+{
+	return m_isCovering;
+}
+
 void GeneralizationSetImpl::setIsCovering(bool _isCovering)
 {
 	m_isCovering = _isCovering;
 } 
 
-bool GeneralizationSetImpl::getIsCovering() const 
+
+
+/*
+Getter & Setter for attribute isDisjoint
+*/
+bool GeneralizationSetImpl::getIsDisjoint() const 
 {
-	return m_isCovering;
+	return m_isDisjoint;
 }
 
 void GeneralizationSetImpl::setIsDisjoint(bool _isDisjoint)
@@ -218,10 +206,7 @@ void GeneralizationSetImpl::setIsDisjoint(bool _isDisjoint)
 	m_isDisjoint = _isDisjoint;
 } 
 
-bool GeneralizationSetImpl::getIsDisjoint() const 
-{
-	return m_isDisjoint;
-}
+
 
 //*********************************
 // Operations
@@ -241,22 +226,40 @@ bool GeneralizationSetImpl::maps_to_generalization_set(Any diagnostics,std::map 
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference generalization
+*/
 std::shared_ptr<Bag<uml::Generalization>> GeneralizationSetImpl::getGeneralization() const
 {
+	if(m_generalization == nullptr)
+	{
+		m_generalization.reset(new Bag<uml::Generalization>());
+		
+		
+	}
 
     return m_generalization;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference powertype
+*/
 std::shared_ptr<uml::Classifier > GeneralizationSetImpl::getPowertype() const
 {
 
     return m_powertype;
 }
+
 void GeneralizationSetImpl::setPowertype(std::shared_ptr<uml::Classifier> _powertype)
 {
     m_powertype = _powertype;
 }
+
+
 
 //*********************************
 // Union Getter
@@ -265,14 +268,28 @@ std::weak_ptr<uml::Namespace > GeneralizationSetImpl::getNamespace() const
 {
 	return m_namespace;
 }
+
 std::shared_ptr<Union<uml::Element>> GeneralizationSetImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > GeneralizationSetImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<GeneralizationSet> GeneralizationSetImpl::getThisGeneralizationSetPtr() const

@@ -34,8 +34,7 @@ namespace PSCS::Semantics::CommonBehavior
 	The Metamodel Package for the CommonBehavior metamodel. This package is used to enable the reflection of model elements. It contains all model elements
 	which were described in an ecore file.
 	*/
-	/*!
-	 */
+	
 	class CommonBehaviorPackage : virtual public ecore::EPackage 
 	{
 		private:    
@@ -53,15 +52,15 @@ namespace PSCS::Semantics::CommonBehavior
 
 			// Begin Class CS_CallEventExecution
 			//Class and Feature IDs 
-			static const unsigned int CS_CALLEVENTEXECUTION_CLASS = 4;
-			static const unsigned int CS_CALLEVENTEXECUTION_CLASS_FEATURE_COUNT = 8;
-			static const unsigned int CS_CALLEVENTEXECUTION_CLASS_OPERATION_COUNT = 54;
+			static const unsigned long CS_CALLEVENTEXECUTION_CLASS = 329007207;
+			static const unsigned int CS_CALLEVENTEXECUTION_CLASS_FEATURE_COUNT = 9;
+			static const unsigned int CS_CALLEVENTEXECUTION_CLASS_OPERATION_COUNT = 59;
 			
-			static const int CS_CALLEVENTEXECUTION_ATTRIBUTE_INTERACTIONPOINT = 407;
+			static const int CS_CALLEVENTEXECUTION_ATTRIBUTE_INTERACTIONPOINT = 408;
 			
-			static const int CS_CALLEVENTEXECUTION_OPERATION_COPY = 459;
-			static const int CS_CALLEVENTEXECUTION_OPERATION_CREATEEVENTOCCURRENCE = 460;
-			static const int CS_CALLEVENTEXECUTION_OPERATION_NEW_ = 461;
+			static const int CS_CALLEVENTEXECUTION_OPERATION__COPY = 467;
+			static const int CS_CALLEVENTEXECUTION_OPERATION_CREATEEVENTOCCURRENCE = 465;
+			static const int CS_CALLEVENTEXECUTION_OPERATION_NEW_ = 466;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getCS_CallEventExecution_Class() const = 0;
@@ -69,7 +68,7 @@ namespace PSCS::Semantics::CommonBehavior
 			
 			virtual std::shared_ptr<ecore::EReference> getCS_CallEventExecution_Attribute_interactionPoint() const = 0;
 			
-			virtual std::shared_ptr<ecore::EOperation> getCS_CallEventExecution_Operation_copy() const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getCS_CallEventExecution_Operation__copy() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getCS_CallEventExecution_Operation_createEventOccurrence() const = 0;
 			virtual std::shared_ptr<ecore::EOperation> getCS_CallEventExecution_Operation_new_() const = 0;
 			
@@ -78,7 +77,7 @@ namespace PSCS::Semantics::CommonBehavior
 
 			// Begin Class CS_EventOccurrence
 			//Class and Feature IDs 
-			static const unsigned int CS_EVENTOCCURRENCE_CLASS = 13;
+			static const unsigned long CS_EVENTOCCURRENCE_CLASS = 619124533;
 			static const unsigned int CS_EVENTOCCURRENCE_CLASS_FEATURE_COUNT = 5;
 			static const unsigned int CS_EVENTOCCURRENCE_CLASS_OPERATION_COUNT = 10;
 			static const int CS_EVENTOCCURRENCE_ATTRIBUTE_PROPAGATIONINWARD = 1303;

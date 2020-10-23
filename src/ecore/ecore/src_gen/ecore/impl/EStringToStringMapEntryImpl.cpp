@@ -45,18 +45,7 @@ using namespace ecore;
 // Constructor / Destructor
 //*********************************
 EStringToStringMapEntryImpl::EStringToStringMapEntryImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 EStringToStringMapEntryImpl::~EStringToStringMapEntryImpl()
@@ -65,7 +54,6 @@ EStringToStringMapEntryImpl::~EStringToStringMapEntryImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete EStringToStringMapEntry "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -101,14 +89,27 @@ std::shared_ptr<EClass> EStringToStringMapEntryImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute key
+*/
+std::string EStringToStringMapEntryImpl::getKey() const 
+{
+	return m_key;
+}
+
 void EStringToStringMapEntryImpl::setKey(std::string _key)
 {
 	m_key = _key;
 } 
 
-std::string EStringToStringMapEntryImpl::getKey() const 
+
+
+/*
+Getter & Setter for attribute value
+*/
+std::string EStringToStringMapEntryImpl::getValue() const 
 {
-	return m_key;
+	return m_value;
 }
 
 void EStringToStringMapEntryImpl::setValue(std::string _value)
@@ -116,10 +117,7 @@ void EStringToStringMapEntryImpl::setValue(std::string _value)
 	m_value = _value;
 } 
 
-std::string EStringToStringMapEntryImpl::getValue() const 
-{
-	return m_value;
-}
+
 
 //*********************************
 // Operations
@@ -132,6 +130,7 @@ std::string EStringToStringMapEntryImpl::getValue() const
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<EStringToStringMapEntry> EStringToStringMapEntryImpl::getThisEStringToStringMapEntryPtr() const

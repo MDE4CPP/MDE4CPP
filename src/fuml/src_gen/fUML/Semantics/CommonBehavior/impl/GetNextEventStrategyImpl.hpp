@@ -19,7 +19,7 @@
 //*********************************
 namespace fUML::Semantics::CommonBehavior 
 {
-	class GetNextEventStrategyImpl :virtual public fUML::Semantics::Loci::SemanticStrategyImpl, virtual public GetNextEventStrategy 
+	class GetNextEventStrategyImpl : virtual public fUML::Semantics::Loci::SemanticStrategyImpl, virtual public GetNextEventStrategy 
 	{
 		public: 
 			GetNextEventStrategyImpl(const GetNextEventStrategyImpl & obj);
@@ -43,12 +43,10 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::string getName() ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> retrieveNextEvent(std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation>  objectActivation) ;
 			
 			

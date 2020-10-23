@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class ReadVariableActionImpl :virtual public VariableActionImpl, virtual public ReadVariableAction 
+	class ReadVariableActionImpl : virtual public VariableActionImpl, virtual public ReadVariableAction 
 	{
 		public: 
 			ReadVariableActionImpl(const ReadVariableActionImpl & obj);
@@ -59,14 +59,18 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 The multiplicity of the variable must be compatible with the multiplicity of the output pin.
-			variable.compatibleWith(result) */ 
+			The multiplicity of the variable must be compatible with the multiplicity of the output pin.
+			variable.compatibleWith(result)
+			*/
+			 
 			virtual bool compatible_multiplicity(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
-			 The type and ordering of the result OutputPin are the same as the type and ordering of the variable.
+			The type and ordering of the result OutputPin are the same as the type and ordering of the variable.
 			result.type =variable.type and 
-			result.isOrdered = variable.isOrdered */ 
+			result.isOrdered = variable.isOrdered
+			*/
+			 
 			virtual bool type_and_ordering(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
@@ -80,34 +84,49 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 The OutputPin on which the result values are placed.
-			<p>From package UML::Actions.</p> */
+			The OutputPin on which the result values are placed.
+			<p>From package UML::Actions.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::OutputPin > getResult() const ;
 			
 			/*!
-			 The OutputPin on which the result values are placed.
-			<p>From package UML::Actions.</p> */
-			virtual void setResult(std::shared_ptr<uml::OutputPin> _result_result) ;
+			The OutputPin on which the result values are placed.
+			<p>From package UML::Actions.</p>
+			*/
+			
+			virtual void setResult(std::shared_ptr<uml::OutputPin> _result) ;
+			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
+			ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::ActivityGroup>> getInGroup() const ;/*!
-			 The ordered set of OutputPins representing outputs from the Action.
-			<p>From package UML::Actions.</p> */
+			The ordered set of OutputPins representing outputs from the Action.
+			<p>From package UML::Actions.</p>
+			*/
+			
 			virtual std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element>> getOutput() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
+			The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const ; 
 			 
 			//*********************************

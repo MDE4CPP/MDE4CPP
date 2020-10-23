@@ -77,8 +77,7 @@ namespace ecore
 //*********************************
 namespace ecore 
 {
-	/*!
-	 */
+	
 	class EFactory:virtual public EModelElement
 	{
 		public:
@@ -98,16 +97,13 @@ namespace ecore
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::string convertToString(std::shared_ptr<ecore::EDataType>  eDataType,Any instanceValue) const = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<ecore::EObject> create(std::shared_ptr<ecore::EClass>  eClass) const = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual Any createFromString(std::shared_ptr<ecore::EDataType>  eDataType,std::string literalValue) const = 0;
 			
 			
@@ -118,13 +114,12 @@ namespace ecore
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<ecore::EPackage > getEPackage() const = 0;
 			
-			/*!
-			 */
-			virtual void setEPackage(std::shared_ptr<ecore::EPackage> _ePackage_ePackage) = 0;
+			
+			virtual void setEPackage(std::shared_ptr<ecore::EPackage> _ePackage) = 0;
+			
 			
 
 		protected:
@@ -136,17 +131,14 @@ namespace ecore
 			//*********************************
 			// Reference Members
 			//*********************************
-			/*!
-			 */
-			std::shared_ptr<ecore::EPackage > m_ePackage;
 			
+			std::shared_ptr<ecore::EPackage > m_ePackage;
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

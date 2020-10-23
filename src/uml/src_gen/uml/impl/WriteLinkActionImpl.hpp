@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class WriteLinkActionImpl :virtual public LinkActionImpl, virtual public WriteLinkAction 
+	class WriteLinkActionImpl : virtual public LinkActionImpl, virtual public WriteLinkAction 
 	{
 		public: 
 			WriteLinkActionImpl(const WriteLinkActionImpl & obj);
@@ -59,13 +59,15 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 The visibility of at least one end must allow access from the context Classifier of the WriteLinkAction.
+			The visibility of at least one end must allow access from the context Classifier of the WriteLinkAction.
 			endData.end->exists(end |
 			  end.type=_'context' or
 			  end.visibility=VisibilityKind::public or 
 			  end.visibility=VisibilityKind::protected and
 			  endData.end->exists(other | 
-			    other<>end and _'context'.conformsTo(other.type.oclAsType(Classifier)))) */ 
+			    other<>end and _'context'.conformsTo(other.type.oclAsType(Classifier))))
+			*/
+			 
 			virtual bool allow_access(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
@@ -84,20 +86,30 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
+			ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::ActivityGroup>> getInGroup() const ;/*!
-			 The ordered set of InputPins representing the inputs to the Action.
-			<p>From package UML::Actions.</p> */
+			The ordered set of InputPins representing the inputs to the Action.
+			<p>From package UML::Actions.</p>
+			*/
+			
 			virtual std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> getInput() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
+			The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const ; 
 			 
 			//*********************************

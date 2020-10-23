@@ -56,23 +56,7 @@ using namespace fUML::Semantics::Actions;
 // Constructor / Destructor
 //*********************************
 ClauseActivationImpl::ClauseActivationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	
-
-	//Init references
-	
-
-	
+{	
 }
 
 ClauseActivationImpl::~ClauseActivationImpl()
@@ -81,7 +65,6 @@ ClauseActivationImpl::~ClauseActivationImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ClauseActivation "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -168,29 +151,42 @@ void ClauseActivationImpl::selectBody()
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference clause
+*/
 std::shared_ptr<uml::Clause > ClauseActivationImpl::getClause() const
 {
 //assert(m_clause);
     return m_clause;
 }
+
 void ClauseActivationImpl::setClause(std::shared_ptr<uml::Clause> _clause)
 {
     m_clause = _clause;
 }
 
+
+
+/*
+Getter & Setter for reference conditionalNodeActivation
+*/
 std::shared_ptr<fUML::Semantics::Actions::ConditionalNodeActivation > ClauseActivationImpl::getConditionalNodeActivation() const
 {
 //assert(m_conditionalNodeActivation);
     return m_conditionalNodeActivation;
 }
+
 void ClauseActivationImpl::setConditionalNodeActivation(std::shared_ptr<fUML::Semantics::Actions::ConditionalNodeActivation> _conditionalNodeActivation)
 {
     m_conditionalNodeActivation = _conditionalNodeActivation;
 }
 
+
+
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<ClauseActivation> ClauseActivationImpl::getThisClauseActivationPtr() const

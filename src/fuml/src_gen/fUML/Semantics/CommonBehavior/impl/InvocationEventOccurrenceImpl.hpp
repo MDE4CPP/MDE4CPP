@@ -19,7 +19,7 @@
 //*********************************
 namespace fUML::Semantics::CommonBehavior 
 {
-	class InvocationEventOccurrenceImpl :virtual public EventOccurrenceImpl, virtual public InvocationEventOccurrence 
+	class InvocationEventOccurrenceImpl : virtual public EventOccurrenceImpl, virtual public InvocationEventOccurrence 
 	{
 		public: 
 			InvocationEventOccurrenceImpl(const InvocationEventOccurrenceImpl & obj);
@@ -43,12 +43,10 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > getParameterValues() ;
 			
-			/*!
-			 */ 
+			 
 			virtual bool match(std::shared_ptr<uml::Trigger>  trigger) ;
 			
 			
@@ -61,13 +59,12 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution > getExecution() const ;
 			
-			/*!
-			 */
-			virtual void setExecution(std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> _execution_execution) ;
+			
+			virtual void setExecution(std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> _execution) ;
+			
 							
 			
 			//*********************************

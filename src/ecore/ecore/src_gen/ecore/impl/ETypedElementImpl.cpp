@@ -56,28 +56,7 @@ using namespace ecore;
 // Constructor / Destructor
 //*********************************
 ETypedElementImpl::ETypedElementImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	
-	
-	
-	
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	
-
-	//Init references
-	
-
-	
+{	
 }
 
 ETypedElementImpl::~ETypedElementImpl()
@@ -87,14 +66,12 @@ ETypedElementImpl::~ETypedElementImpl()
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			ETypedElementImpl::ETypedElementImpl(std::weak_ptr<ecore::EObject > par_eContainer)
-			:ETypedElementImpl()
-			{
-			    m_eContainer = par_eContainer;
-			}
-
+ETypedElementImpl::ETypedElementImpl(std::weak_ptr<ecore::EObject > par_eContainer)
+:ETypedElementImpl()
+{
+	m_eContainer = par_eContainer;
+}
 
 
 ETypedElementImpl::ETypedElementImpl(const ETypedElementImpl & obj):ETypedElementImpl()
@@ -155,21 +132,39 @@ std::shared_ptr<EClass> ETypedElementImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
-void ETypedElementImpl::setLowerBound(int _lowerBound)
-{
-	m_lowerBound = _lowerBound;
-} 
-
+/*
+Getter & Setter for attribute lowerBound
+*/
 int ETypedElementImpl::getLowerBound() const 
 {
 	return m_lowerBound;
 }
 
+void ETypedElementImpl::setLowerBound(int _lowerBound)
+{
+	m_lowerBound = _lowerBound;
+} 
 
 
+
+/*
+Getter & Setter for attribute many
+*/
 bool ETypedElementImpl::isMany() const 
 {
 	return m_many;
+}
+
+
+
+
+
+/*
+Getter & Setter for attribute ordered
+*/
+bool ETypedElementImpl::isOrdered() const 
+{
+	return m_ordered;
 }
 
 void ETypedElementImpl::setOrdered(bool _ordered)
@@ -177,9 +172,14 @@ void ETypedElementImpl::setOrdered(bool _ordered)
 	m_ordered = _ordered;
 } 
 
-bool ETypedElementImpl::isOrdered() const 
+
+
+/*
+Getter & Setter for attribute required
+*/
+bool ETypedElementImpl::isRequired() const 
 {
-	return m_ordered;
+	return m_required;
 }
 
 void ETypedElementImpl::setRequired(bool _required)
@@ -187,9 +187,14 @@ void ETypedElementImpl::setRequired(bool _required)
 	m_required = _required;
 } 
 
-bool ETypedElementImpl::isRequired() const 
+
+
+/*
+Getter & Setter for attribute unique
+*/
+bool ETypedElementImpl::isUnique() const 
 {
-	return m_required;
+	return m_unique;
 }
 
 void ETypedElementImpl::setUnique(bool _unique)
@@ -197,9 +202,14 @@ void ETypedElementImpl::setUnique(bool _unique)
 	m_unique = _unique;
 } 
 
-bool ETypedElementImpl::isUnique() const 
+
+
+/*
+Getter & Setter for attribute upperBound
+*/
+int ETypedElementImpl::getUpperBound() const 
 {
-	return m_unique;
+	return m_upperBound;
 }
 
 void ETypedElementImpl::setUpperBound(int _upperBound)
@@ -207,10 +217,7 @@ void ETypedElementImpl::setUpperBound(int _upperBound)
 	m_upperBound = _upperBound;
 } 
 
-int ETypedElementImpl::getUpperBound() const 
-{
-	return m_upperBound;
-}
+
 
 //*********************************
 // Operations
@@ -219,33 +226,57 @@ int ETypedElementImpl::getUpperBound() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference eGenericType
+*/
 std::shared_ptr<ecore::EGenericType > ETypedElementImpl::getEGenericType() const
 {
 
     return m_eGenericType;
 }
+
 void ETypedElementImpl::setEGenericType(std::shared_ptr<ecore::EGenericType> _eGenericType)
 {
     m_eGenericType = _eGenericType;
 }
 
+
+
+/*
+Getter & Setter for reference eType
+*/
 std::shared_ptr<ecore::EClassifier > ETypedElementImpl::getEType() const
 {
 
     return m_eType;
 }
+
 void ETypedElementImpl::setEType(std::shared_ptr<ecore::EClassifier> _eType)
 {
     m_eType = _eType;
 }
+
+
 
 //*********************************
 // Union Getter
 //*********************************
 std::shared_ptr<Union<ecore::EObject>> ETypedElementImpl::getEContens() const
 {
+	if(m_eContens == nullptr)
+	{
+		/*Union*/
+		m_eContens.reset(new Union<ecore::EObject>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_eContens - Union<ecore::EObject>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_eContens;
 }
+
+
 
 
 std::shared_ptr<ETypedElement> ETypedElementImpl::getThisETypedElementPtr() const

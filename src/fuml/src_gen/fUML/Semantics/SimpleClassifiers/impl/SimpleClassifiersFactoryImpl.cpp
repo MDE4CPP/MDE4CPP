@@ -4,7 +4,6 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EClass.hpp"
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
 #include "fUML/Semantics/SimpleClassifiers/impl/BooleanValueImpl.hpp"
 #include "fUML/Semantics/SimpleClassifiers/impl/CompoundValueImpl.hpp"
 #include "fUML/Semantics/SimpleClassifiers/impl/DataValueImpl.hpp"

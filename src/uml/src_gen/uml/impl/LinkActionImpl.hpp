@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class LinkActionImpl :virtual public ActionImpl, virtual public LinkAction 
+	class LinkActionImpl : virtual public ActionImpl, virtual public LinkAction 
 	{
 		public: 
 			LinkActionImpl(const LinkActionImpl & obj);
@@ -59,24 +59,32 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 Returns the Association acted on by this LinkAction.
+			Returns the Association acted on by this LinkAction.
 			result = (endData->asSequence()->first().end.association)
-			<p>From package UML::Actions.</p> */ 
+			<p>From package UML::Actions.</p>
+			*/
+			 
 			virtual std::shared_ptr<uml::Association> association() ;
 			
 			/*!
-			 The ends of the endData must not be static.
-			endData->forAll(not end.isStatic) */ 
+			The ends of the endData must not be static.
+			endData->forAll(not end.isStatic)
+			*/
+			 
 			virtual bool not_static(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
-			 The ends of the endData must all be from the same Association and include all and only the memberEnds of that association.
-			endData.end = self.association().memberEnd->asBag() */ 
+			The ends of the endData must all be from the same Association and include all and only the memberEnds of that association.
+			endData.end = self.association().memberEnd->asBag()
+			*/
+			 
 			virtual bool same_association(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
-			 The inputValue InputPins is the same as the union of all the InputPins referenced by the endData.
-			inputValue->asBag()=endData.allPins() */ 
+			The inputValue InputPins is the same as the union of all the InputPins referenced by the endData.
+			inputValue->asBag()=endData.allPins()
+			*/
+			 
 			virtual bool same_pins(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
@@ -90,14 +98,20 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 The LinkEndData identifying the values on the ends of the links acting on by this LinkAction.
-			<p>From package UML::Actions.</p> */
+			The LinkEndData identifying the values on the ends of the links acting on by this LinkAction.
+			<p>From package UML::Actions.</p>
+			*/
+			
 			virtual std::shared_ptr<Subset<uml::LinkEndData, uml::Element>> getEndData() const ;
 			
+			
 			/*!
-			 InputPins used by the LinkEndData of the LinkAction.
-			<p>From package UML::Actions.</p> */
+			InputPins used by the LinkEndData of the LinkAction.
+			<p>From package UML::Actions.</p>
+			*/
+			
 			virtual std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> getInputValue() const ;
+			
 			
 							
 			
@@ -105,20 +119,30 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
+			ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::ActivityGroup>> getInGroup() const ;/*!
-			 The ordered set of InputPins representing the inputs to the Action.
-			<p>From package UML::Actions.</p> */
+			The ordered set of InputPins representing the inputs to the Action.
+			<p>From package UML::Actions.</p>
+			*/
+			
 			virtual std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> getInput() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
+			The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const ; 
 			 
 			//*********************************

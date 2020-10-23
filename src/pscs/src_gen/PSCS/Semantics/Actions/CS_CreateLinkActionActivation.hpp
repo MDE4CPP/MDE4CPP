@@ -36,6 +36,11 @@ namespace PSCS
 }
 
 //Forward Declaration for used types
+namespace uml 
+{
+	class Action;
+}
+
 namespace fUML::Semantics::Activities 
 {
 	class ActivityEdgeInstance;
@@ -85,8 +90,7 @@ namespace fUML::Semantics::Activities
 //*********************************
 namespace PSCS::Semantics::Actions 
 {
-	/*!
-	 */
+	
 	class CS_CreateLinkActionActivation:virtual public fUML::Semantics::Actions::CreateLinkActionActivation
 	{
 		public:
@@ -106,8 +110,7 @@ namespace PSCS::Semantics::Actions
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual void doAction() = 0;
 			
 			
@@ -135,8 +138,7 @@ namespace PSCS::Semantics::Actions
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> getPinActivation() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

@@ -61,38 +61,7 @@ using namespace fUML::Semantics::Activities;
 // Constructor / Destructor
 //*********************************
 ActivityEdgeInstanceImpl::ActivityEdgeInstanceImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	
-
-		m_offers.reset(new Bag<fUML::Semantics::Activities::Offer>());
-	
-	
-
-	
-
-	
-
-	//Init references
-	
-
-	
-
-	
-	
-
-	
-
-	
+{	
 }
 
 ActivityEdgeInstanceImpl::~ActivityEdgeInstanceImpl()
@@ -102,14 +71,12 @@ ActivityEdgeInstanceImpl::~ActivityEdgeInstanceImpl()
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			ActivityEdgeInstanceImpl::ActivityEdgeInstanceImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
-			:ActivityEdgeInstanceImpl()
-			{
-			    m_group = par_group;
-			}
-
+ActivityEdgeInstanceImpl::ActivityEdgeInstanceImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
+:ActivityEdgeInstanceImpl()
+{
+	m_group = par_group;
+}
 
 
 ActivityEdgeInstanceImpl::ActivityEdgeInstanceImpl(const ActivityEdgeInstanceImpl & obj):ActivityEdgeInstanceImpl()
@@ -213,9 +180,15 @@ void ActivityEdgeInstanceImpl::sendOffer(std::shared_ptr<Bag<fUML::Semantics::Ac
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 		std::shared_ptr<fUML::Semantics::Activities::Offer> offer(fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createOffer());
+	//NEWDEBUG
+	DEBUG_MESSAGE(std::cout<<"-- printing from ActivityEdgeInstance::"<<__FUNCTION__<<" '"<<(this->getEdge() == nullptr ? "..." : ("edge = " + this->getEdge()->getName()))<<"' : created new offer with "<<tokens->size()<<" tokens"<<std::endl;)
     offer->getOfferedTokens()->insert(offer->getOfferedTokens()->end(), tokens->begin(), tokens->end());
     this->getOffers()->push_back(offer);
     auto target = this->getTarget().lock();
+
+	//NEWDEBUG
+	DEBUG_MESSAGE(std::cout<<"-- printing from ActivityEdgeInstance::"<<__FUNCTION__<<" '"<<(this->getEdge() == nullptr ? "..." : ("edge = " + this->getEdge()->getName()))<<"' : #offers before receive = "<<this->getOffers()->size()<<std::endl;)
+
     if(nullptr == target )
     {
         std::cout << "[sendOffer] The edge does not have a target" << std::endl;
@@ -224,6 +197,9 @@ void ActivityEdgeInstanceImpl::sendOffer(std::shared_ptr<Bag<fUML::Semantics::Ac
     {
     	target->receiveOffer();
     }
+
+	//NEWDEBUG
+	DEBUG_MESSAGE(std::cout<<"-- printing from ActivityEdgeInstance::"<<__FUNCTION__<<" '"<<(this->getEdge() == nullptr ? "..." : ("edge = " + this->getEdge()->getName()))<<"' : current #offers after receive = "<<this->getOffers()->size()<<std::endl;)
 	//end of body
 }
 
@@ -234,9 +210,13 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > ActivityEdgeInstanceIm
 	std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > tokens(new Bag<fUML::Semantics::Activities::Token>());
 
 	std::shared_ptr<Bag<fUML::Semantics::Activities::Offer> > offerList = this->getOffers();
+	//NEWDEBUG
+	DEBUG_MESSAGE(std::cout<<"-- printing from ActivityEdgeInstance::"<<__FUNCTION__<<" '"<<(this->getEdge() == nullptr ? "..." : ("edge = " + this->getEdge()->getName()))<<"' : #offers = "<<this->getOffers()->size()<<std::endl;)
 	    for(std::shared_ptr<fUML::Semantics::Activities::Offer> offer : *offerList)
     {
     	auto vec = offer->retrieveOfferedTokens();
+	//NEWDEBUG
+	DEBUG_MESSAGE(std::cout<<"-- printing from ActivityEdgeInstance::"<<__FUNCTION__<<" '"<<(this->getEdge() == nullptr ? "..." : ("edge = " + this->getEdge()->getName()))<<"' : retrieved "<<vec->size()<<" tokens from offer"<<std::endl;)
         tokens->insert(tokens->end(), vec->begin(), vec->end());
     }
     this->getOffers()->clear();
@@ -281,56 +261,93 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > ActivityEdgeInstanceIm
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference edge
+*/
 std::shared_ptr<uml::ActivityEdge > ActivityEdgeInstanceImpl::getEdge() const
 {
 
     return m_edge;
 }
+
 void ActivityEdgeInstanceImpl::setEdge(std::shared_ptr<uml::ActivityEdge> _edge)
 {
     m_edge = _edge;
 }
 
+
+
+/*
+Getter & Setter for reference group
+*/
 std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > ActivityEdgeInstanceImpl::getGroup() const
 {
 //assert(m_group);
     return m_group;
 }
+
 void ActivityEdgeInstanceImpl::setGroup(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> _group)
 {
     m_group = _group;
 }
 
+
+
+/*
+Getter & Setter for reference offers
+*/
 std::shared_ptr<Bag<fUML::Semantics::Activities::Offer>> ActivityEdgeInstanceImpl::getOffers() const
 {
+	if(m_offers == nullptr)
+	{
+		m_offers.reset(new Bag<fUML::Semantics::Activities::Offer>());
+		
+		
+	}
 
     return m_offers;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference source
+*/
 std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivation > ActivityEdgeInstanceImpl::getSource() const
 {
 //assert(m_source);
     return m_source;
 }
+
 void ActivityEdgeInstanceImpl::setSource(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> _source)
 {
     m_source = _source;
 }
 
+
+
+/*
+Getter & Setter for reference target
+*/
 std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivation > ActivityEdgeInstanceImpl::getTarget() const
 {
 //assert(m_target);
     return m_target;
 }
+
 void ActivityEdgeInstanceImpl::setTarget(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> _target)
 {
     m_target = _target;
 }
 
+
+
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<ActivityEdgeInstance> ActivityEdgeInstanceImpl::getThisActivityEdgeInstancePtr() const

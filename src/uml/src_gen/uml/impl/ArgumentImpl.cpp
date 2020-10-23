@@ -46,19 +46,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 ArgumentImpl::ArgumentImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	//Init references
-	
+{	
 }
 
 ArgumentImpl::~ArgumentImpl()
@@ -67,7 +55,6 @@ ArgumentImpl::~ArgumentImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Argument "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -104,15 +91,20 @@ std::shared_ptr<ecore::EClass> ArgumentImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute name
+*/
+std::string ArgumentImpl::getName() const 
+{
+	return m_name;
+}
+
 void ArgumentImpl::setName(std::string _name)
 {
 	m_name = _name;
 } 
 
-std::string ArgumentImpl::getName() const 
-{
-	return m_name;
-}
+
 
 //*********************************
 // Operations
@@ -121,19 +113,26 @@ std::string ArgumentImpl::getName() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference value
+*/
 std::shared_ptr<uml::Object > ArgumentImpl::getValue() const
 {
 
     return m_value;
 }
+
 void ArgumentImpl::setValue(std::shared_ptr<uml::Object> _value)
 {
     m_value = _value;
 }
 
+
+
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<Argument> ArgumentImpl::getThisArgumentPtr() const

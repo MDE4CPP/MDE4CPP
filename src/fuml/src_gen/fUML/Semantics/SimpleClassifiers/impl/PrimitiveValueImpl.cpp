@@ -58,19 +58,7 @@ using namespace fUML::Semantics::SimpleClassifiers;
 // Constructor / Destructor
 //*********************************
 PrimitiveValueImpl::PrimitiveValueImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	//Init references
-	
+{	
 }
 
 PrimitiveValueImpl::~PrimitiveValueImpl()
@@ -79,7 +67,6 @@ PrimitiveValueImpl::~PrimitiveValueImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete PrimitiveValue "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -119,6 +106,18 @@ std::shared_ptr<ecore::EClass> PrimitiveValueImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
+std::shared_ptr<fUML::Semantics::Values::Value> PrimitiveValueImpl::_copy()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Create a new value that is equal to this primitive value.
+
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::PrimitiveValue> newValue(new fUML::Semantics::SimpleClassifiers::PrimitiveValueImpl());
+newValue->setType(this->getType());
+return newValue;
+	//end of body
+}
+
 std::shared_ptr<Bag<uml::Classifier> > PrimitiveValueImpl::getTypes()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
@@ -136,19 +135,26 @@ std::shared_ptr<Bag<uml::Classifier> > PrimitiveValueImpl::getTypes()
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference type
+*/
 std::shared_ptr<uml::PrimitiveType > PrimitiveValueImpl::getType() const
 {
 //assert(m_type);
     return m_type;
 }
+
 void PrimitiveValueImpl::setType(std::shared_ptr<uml::PrimitiveType> _type)
 {
     m_type = _type;
 }
 
+
+
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<PrimitiveValue> PrimitiveValueImpl::getThisPrimitiveValuePtr() const

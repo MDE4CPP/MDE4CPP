@@ -57,26 +57,7 @@ using namespace fUML::Semantics::SimpleClassifiers;
 // Constructor / Destructor
 //*********************************
 FeatureValueImpl::FeatureValueImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-		m_values.reset(new Bag<fUML::Semantics::Values::Value>());
-	
-	
-
-	//Init references
-	
-
-	
-	
+{	
 }
 
 FeatureValueImpl::~FeatureValueImpl()
@@ -85,7 +66,6 @@ FeatureValueImpl::~FeatureValueImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete FeatureValue "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -114,7 +94,6 @@ FeatureValueImpl::FeatureValueImpl(const FeatureValueImpl & obj):FeatureValueImp
 	#endif
 
 	
-	
 }
 
 std::shared_ptr<ecore::EObject>  FeatureValueImpl::copy() const
@@ -132,19 +111,47 @@ std::shared_ptr<ecore::EClass> FeatureValueImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
-void FeatureValueImpl::setPosition(int _position)
-{
-	m_position = _position;
-} 
-
+/*
+Getter & Setter for attribute position
+*/
 int FeatureValueImpl::getPosition() const 
 {
 	return m_position;
 }
 
+void FeatureValueImpl::setPosition(int _position)
+{
+	m_position = _position;
+} 
+
+
+
 //*********************************
 // Operations
 //*********************************
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> FeatureValueImpl::_copy()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Create a copy of this feature value.
+
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> newValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createFeatureValue();
+newValue->setFeature(this->getFeature());
+newValue->setPosition(this->getPosition());
+
+std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values = this->getValues();
+unsigned int valuesSize = values->size();
+
+for(unsigned int i = 0; i < valuesSize; i++)
+{
+	std::shared_ptr<fUML::Semantics::Values::Value> value = values->at(i);
+	newValue->getValues()->add(value->_copy());
+}
+
+return newValue;
+	//end of body
+}
+
 bool FeatureValueImpl::hasEqualValues(std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue>  other)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
@@ -207,26 +214,45 @@ bool FeatureValueImpl::hasEqualValues(std::shared_ptr<fUML::Semantics::SimpleCla
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference feature
+*/
 std::shared_ptr<uml::StructuralFeature > FeatureValueImpl::getFeature() const
 {
 //assert(m_feature);
     return m_feature;
 }
+
 void FeatureValueImpl::setFeature(std::shared_ptr<uml::StructuralFeature> _feature)
 {
     m_feature = _feature;
 }
 
+
+
+/*
+Getter & Setter for reference values
+*/
 std::shared_ptr<Bag<fUML::Semantics::Values::Value>> FeatureValueImpl::getValues() const
 {
+	if(m_values == nullptr)
+	{
+		m_values.reset(new Bag<fUML::Semantics::Values::Value>());
+		
+		
+	}
 
     return m_values;
 }
 
 
+
+
+
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<FeatureValue> FeatureValueImpl::getThisFeatureValuePtr() const

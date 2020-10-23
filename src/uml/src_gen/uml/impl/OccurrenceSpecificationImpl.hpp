@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class OccurrenceSpecificationImpl :virtual public InteractionFragmentImpl, virtual public OccurrenceSpecification 
+	class OccurrenceSpecificationImpl : virtual public InteractionFragmentImpl, virtual public OccurrenceSpecification 
 	{
 		public: 
 			OccurrenceSpecificationImpl(const OccurrenceSpecificationImpl & obj);
@@ -61,7 +61,9 @@ namespace uml
 			
 			
 			/*!
-			 Sets the Lifeline on which the OccurrenceSpecification appears. */ 
+			Sets the Lifeline on which the OccurrenceSpecification appears.
+			*/
+			 
 			virtual void setCovered(std::shared_ptr<uml::Lifeline>  value) ;
 			
 			
@@ -75,14 +77,20 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 References the GeneralOrderings that specify EventOcurrences that must occur after this OccurrenceSpecification.
-			<p>From package UML::Interactions.</p> */
+			References the GeneralOrderings that specify EventOcurrences that must occur after this OccurrenceSpecification.
+			<p>From package UML::Interactions.</p>
+			*/
+			
 			virtual std::shared_ptr<Bag<uml::GeneralOrdering>> getToAfter() const ;
 			
+			
 			/*!
-			 References the GeneralOrderings that specify EventOcurrences that must occur before this OccurrenceSpecification.
-			<p>From package UML::Interactions.</p> */
+			References the GeneralOrderings that specify EventOcurrences that must occur before this OccurrenceSpecification.
+			<p>From package UML::Interactions.</p>
+			*/
+			
 			virtual std::shared_ptr<Bag<uml::GeneralOrdering>> getToBefore() const ;
+			
 			
 							
 			
@@ -90,14 +98,20 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************

@@ -54,21 +54,7 @@ using namespace ecore;
 // Constructor / Destructor
 //*********************************
 EEnumLiteralImpl::EEnumLiteralImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	//Init references
-	
+{	
 }
 
 EEnumLiteralImpl::~EEnumLiteralImpl()
@@ -78,22 +64,19 @@ EEnumLiteralImpl::~EEnumLiteralImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+EEnumLiteralImpl::EEnumLiteralImpl(std::weak_ptr<ecore::EObject > par_eContainer)
+:EEnumLiteralImpl()
+{
+	m_eContainer = par_eContainer;
+}
 
 //Additional constructor for the containments back reference
-			EEnumLiteralImpl::EEnumLiteralImpl(std::weak_ptr<ecore::EObject > par_eContainer)
-			:EEnumLiteralImpl()
-			{
-			    m_eContainer = par_eContainer;
-			}
-
-
-//Additional constructor for the containments back reference
-			EEnumLiteralImpl::EEnumLiteralImpl(std::weak_ptr<ecore::EEnum > par_eEnum)
-			:EEnumLiteralImpl()
-			{
-			    m_eEnum = par_eEnum;
-			}
-
+EEnumLiteralImpl::EEnumLiteralImpl(std::weak_ptr<ecore::EEnum > par_eEnum)
+:EEnumLiteralImpl()
+{
+	m_eEnum = par_eEnum;
+}
 
 
 EEnumLiteralImpl::EEnumLiteralImpl(const EEnumLiteralImpl & obj):EEnumLiteralImpl()
@@ -143,14 +126,27 @@ std::shared_ptr<EClass> EEnumLiteralImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute instance
+*/
+Any EEnumLiteralImpl::getInstance() const 
+{
+	return m_instance;
+}
+
 void EEnumLiteralImpl::setInstance(Any _instance)
 {
 	m_instance = _instance;
 } 
 
-Any EEnumLiteralImpl::getInstance() const 
+
+
+/*
+Getter & Setter for attribute literal
+*/
+std::string EEnumLiteralImpl::getLiteral() const 
 {
-	return m_instance;
+	return m_literal;
 }
 
 void EEnumLiteralImpl::setLiteral(std::string _literal)
@@ -158,9 +154,14 @@ void EEnumLiteralImpl::setLiteral(std::string _literal)
 	m_literal = _literal;
 } 
 
-std::string EEnumLiteralImpl::getLiteral() const 
+
+
+/*
+Getter & Setter for attribute value
+*/
+int EEnumLiteralImpl::getValue() const 
 {
-	return m_literal;
+	return m_value;
 }
 
 void EEnumLiteralImpl::setValue(int _value)
@@ -168,10 +169,7 @@ void EEnumLiteralImpl::setValue(int _value)
 	m_value = _value;
 } 
 
-int EEnumLiteralImpl::getValue() const 
-{
-	return m_value;
-}
+
 
 //*********************************
 // Operations
@@ -180,6 +178,9 @@ int EEnumLiteralImpl::getValue() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference eEnum
+*/
 std::weak_ptr<ecore::EEnum > EEnumLiteralImpl::getEEnum() const
 {
 
@@ -187,13 +188,28 @@ std::weak_ptr<ecore::EEnum > EEnumLiteralImpl::getEEnum() const
 }
 
 
+
+
+
 //*********************************
 // Union Getter
 //*********************************
 std::shared_ptr<Union<ecore::EObject>> EEnumLiteralImpl::getEContens() const
 {
+	if(m_eContens == nullptr)
+	{
+		/*Union*/
+		m_eContens.reset(new Union<ecore::EObject>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_eContens - Union<ecore::EObject>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_eContens;
 }
+
+
 
 
 std::shared_ptr<EEnumLiteral> EEnumLiteralImpl::getThisEEnumLiteralPtr() const

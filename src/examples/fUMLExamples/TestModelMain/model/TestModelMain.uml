@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_iMJXkBJVEeuI2oJVG-zT2A" name="TestModelMain">
+  <eAnnotations xmi:id="_vTgJoBRpEeuYZdZtYeB71A" source="prepareApplication">
+    <details xmi:id="_0-ZP4BRpEeuYZdZtYeB71A" key="activityMain" value="true"/>
+  </eAnnotations>
   <packagedElement xmi:type="uml:Class" xmi:id="_tizGwBJVEeuI2oJVG-zT2A" name="A">
     <ownedAttribute xmi:id="_OXYXIBJWEeuI2oJVG-zT2A" name="text">
       <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>

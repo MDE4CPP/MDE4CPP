@@ -72,8 +72,7 @@ namespace ecore
 //*********************************
 namespace ecore 
 {
-	/*!
-	 */
+	
 	class EClassifier:virtual public ENamedElement
 	{
 		public:
@@ -101,57 +100,46 @@ namespace ecore
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual int getClassifierID() = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual bool isInstance(Any object) const = 0;
 			
 			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual Any getDefaultValue() const = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual void setDefaultValue (Any _defaultValue)= 0; 
-			
-			/*!
-			 */ 
+			 
 			virtual void *  getInstanceClass() const = 0;
 			
-			/*!
-			 */ 
+			
+			 
 			virtual std::string getInstanceClassName() const = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual void setInstanceClassName (std::string _instanceClassName)= 0; 
-			
-			/*!
-			 */ 
+			 
 			virtual std::string getInstanceTypeName() const = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual void setInstanceTypeName (std::string _instanceTypeName)= 0; 
-			
 			
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::weak_ptr<ecore::EPackage > getEPackage() const = 0;
 			
-			/*!
-			 */
+			
+			
 			virtual std::shared_ptr<Bag<ecore::ETypeParameter>> getETypeParameters() const = 0;
+			
 			
 			
 
@@ -159,37 +147,28 @@ namespace ecore
 			//*********************************
 			// Attribute Members
 			//*********************************
-			/*!
-			 */ 
+			 
 			Any m_defaultValue = nullptr;
-			/*!
-			 */ 
+			 
 			void *  m_instanceClass = nullptr;
-			/*!
-			 */ 
+			 
 			std::string m_instanceClassName = "";
-			/*!
-			 */ 
+			 
 			std::string m_instanceTypeName = "";
 			
 			
 			//*********************************
 			// Reference Members
 			//*********************************
-			/*!
-			 */
-			std::weak_ptr<ecore::EPackage > m_ePackage;
-			/*!
-			 */
-			std::shared_ptr<Bag<ecore::ETypeParameter>> m_eTypeParameters;
 			
+			std::weak_ptr<ecore::EPackage > m_ePackage;
+			mutable std::shared_ptr<Bag<ecore::ETypeParameter>> m_eTypeParameters;
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

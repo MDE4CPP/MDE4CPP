@@ -111,8 +111,7 @@ namespace fUML::Semantics::Values
 //*********************************
 namespace fUML::Semantics::StructuredClassifiers 
 {
-	/*!
-	 */
+	
 	class Object:virtual public ExtensionalValue
 	{
 		public:
@@ -132,36 +131,31 @@ namespace fUML::Semantics::StructuredClassifiers
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() = 0;
+			
+			 
 			virtual void _register(std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter>  accepter) = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual void destroy() = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> dispatch(std::shared_ptr<uml::Operation>  operation) = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> new_() = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual void send(std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance>  signalInstance) = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual void send(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>  eventOccurrence) = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual void startBehavior(std::shared_ptr<uml::Class>  classifier,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> >  inputs) = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual void unregister(std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter>  accepter) = 0;
 			
 			
@@ -172,16 +166,15 @@ namespace fUML::Semantics::StructuredClassifiers
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation > getObjectActivation() const = 0;
 			
-			/*!
-			 */
-			virtual void setObjectActivation(std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> _objectActivation_objectActivation) = 0;
-			/*!
-			 */
+			
+			virtual void setObjectActivation(std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> _objectActivation) = 0;
+			
+			
 			virtual std::shared_ptr<Bag<uml::Classifier>> getTypes() const = 0;
+			
 			
 			
 
@@ -194,13 +187,9 @@ namespace fUML::Semantics::StructuredClassifiers
 			//*********************************
 			// Reference Members
 			//*********************************
-			/*!
-			 */
-			std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation > m_objectActivation;
-			/*!
-			 */
-			std::shared_ptr<Bag<uml::Classifier>> m_types;
 			
+			std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation > m_objectActivation;
+			mutable std::shared_ptr<Bag<uml::Classifier>> m_types;
 
 		public:
 			//*********************************

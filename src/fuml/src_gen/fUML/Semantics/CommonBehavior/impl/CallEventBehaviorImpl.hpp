@@ -15,12 +15,12 @@
 
 #include "fUML/Semantics/CommonBehavior/impl/CommonBehaviorFactoryImpl.hpp"
 
-#include "ecore/impl/EObjectImpl.hpp"
+#include "ecore/impl/EModelElementImpl.hpp"
 
 //*********************************
 namespace fUML::Semantics::CommonBehavior 
 {
-	class CallEventBehaviorImpl :virtual public ecore::EObjectImpl,
+	class CallEventBehaviorImpl : virtual public ecore::EModelElementImpl,
 virtual public CallEventBehavior 
 	{
 		public: 
@@ -57,13 +57,12 @@ virtual public CallEventBehavior
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<uml::Operation > getOperation() const ;
 			
-			/*!
-			 */
-			virtual void setOperation(std::shared_ptr<uml::Operation> _operation_operation) ;
+			
+			virtual void setOperation(std::shared_ptr<uml::Operation> _operation) ;
+			
 							
 			
 			//*********************************

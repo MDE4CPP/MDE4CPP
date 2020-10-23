@@ -62,6 +62,11 @@ namespace fUML::Semantics::Activities
 	class ObjectNodeActivation;
 }
 
+namespace uml 
+{
+	class Pin;
+}
+
 namespace fUML::Semantics::Activities 
 {
 	class Token;
@@ -76,8 +81,7 @@ namespace fUML::Semantics::Activities
 //*********************************
 namespace fUML::Semantics::Actions 
 {
-	/*!
-	 */
+	
 	class PinActivation:virtual public fUML::Semantics::Activities::ObjectNodeActivation
 	{
 		public:
@@ -97,12 +101,10 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual void fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token> >  incomingTokens) = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > takeOfferedTokens() = 0;
 			
 			
@@ -113,13 +115,22 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::weak_ptr<fUML::Semantics::Actions::ActionActivation > getActionActivation() const = 0;
 			
-			/*!
-			 */
-			virtual void setActionActivation(std::shared_ptr<fUML::Semantics::Actions::ActionActivation> _actionActivation_actionActivation) = 0;
+			
+			virtual void setActionActivation(std::shared_ptr<fUML::Semantics::Actions::ActionActivation> _actionActivation) = 0;
+			
+			
+			virtual std::shared_ptr<uml::Pin > getPin() const = 0;
+			
+			
+			virtual void setPin(std::shared_ptr<uml::Pin> _pin) = 0;
+			
+			/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'pin'*/
+			
+			virtual void setNode(std::shared_ptr<uml::ActivityNode> _node) = 0;
+			
 			
 
 		protected:
@@ -131,10 +142,9 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Reference Members
 			//*********************************
-			/*!
-			 */
-			std::weak_ptr<fUML::Semantics::Actions::ActionActivation > m_actionActivation;
 			
+			std::weak_ptr<fUML::Semantics::Actions::ActionActivation > m_actionActivation;
+			std::shared_ptr<uml::Pin > m_pin;
 
 		public:
 			//*********************************

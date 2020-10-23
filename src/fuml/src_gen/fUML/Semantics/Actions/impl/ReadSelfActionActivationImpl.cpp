@@ -35,6 +35,8 @@
 
 #include <exception> // used in Persistence
 
+#include "uml/Action.hpp"
+
 #include "fUML/Semantics/Actions/ActionActivation.hpp"
 
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
@@ -48,6 +50,8 @@
 #include "fUML/Semantics/Actions/OutputPinActivation.hpp"
 
 #include "fUML/Semantics/Actions/PinActivation.hpp"
+
+#include "uml/ReadSelfAction.hpp"
 
 #include "fUML/Semantics/Activities/Token.hpp"
 
@@ -69,17 +73,7 @@ using namespace fUML::Semantics::Actions;
 // Constructor / Destructor
 //*********************************
 ReadSelfActionActivationImpl::ReadSelfActionActivationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 ReadSelfActionActivationImpl::~ReadSelfActionActivationImpl()
@@ -89,14 +83,12 @@ ReadSelfActionActivationImpl::~ReadSelfActionActivationImpl()
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			ReadSelfActionActivationImpl::ReadSelfActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
-			:ReadSelfActionActivationImpl()
-			{
-			    m_group = par_group;
-			}
-
+ReadSelfActionActivationImpl::ReadSelfActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
+:ReadSelfActionActivationImpl()
+{
+	m_group = par_group;
+}
 
 
 ReadSelfActionActivationImpl::ReadSelfActionActivationImpl(const ReadSelfActionActivationImpl & obj):ReadSelfActionActivationImpl()
@@ -110,6 +102,8 @@ ReadSelfActionActivationImpl::ReadSelfActionActivationImpl(const ReadSelfActionA
 
 	//copy references with no containment (soft copy)
 	
+	m_action  = obj.getAction();
+
 	m_group  = obj.getGroup();
 
 	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> _incomingEdges = obj.getIncomingEdges();
@@ -122,6 +116,8 @@ ReadSelfActionActivationImpl::ReadSelfActionActivationImpl(const ReadSelfActionA
 
 	std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> _pinActivation = obj.getPinActivation();
 	m_pinActivation.reset(new Union<fUML::Semantics::Actions::PinActivation>(*(obj.getPinActivation().get())));
+
+	m_readSelfAction  = obj.getReadSelfAction();
 
 
 	//Clone references with containment (deep copy)
@@ -178,7 +174,7 @@ void ReadSelfActionActivationImpl::doAction()
 	//generated from body annotation
 	// Get the context object of the activity execution containing this action activation and place a reference to it on the result output pin.
 
-	std::shared_ptr<uml::ReadSelfAction> action = std::dynamic_pointer_cast<uml::ReadSelfAction>(this->m_node);
+	std::shared_ptr<uml::ReadSelfAction> action = this->getReadSelfAction();
 	if(action)
 	{
 
@@ -213,14 +209,75 @@ void ReadSelfActionActivationImpl::doAction()
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference readSelfAction
+*/
+std::shared_ptr<uml::ReadSelfAction > ReadSelfActionActivationImpl::getReadSelfAction() const
+{
+//assert(m_readSelfAction);
+    return m_readSelfAction;
+}
+
+void ReadSelfActionActivationImpl::setReadSelfAction(std::shared_ptr<uml::ReadSelfAction> _readSelfAction)
+{
+    m_readSelfAction = _readSelfAction;
+	//additional setter call for redefined reference ActionActivation::action
+	fUML::Semantics::Actions::ActionActivationImpl::setAction(_readSelfAction);
+}
+
+/*Additional Setter for redefined reference 'ActionActivation::action'*/
+void ReadSelfActionActivationImpl::setAction(std::shared_ptr<uml::Action> _action)
+{
+	std::shared_ptr<uml::ReadSelfAction> _readSelfAction = std::dynamic_pointer_cast<uml::ReadSelfAction>(_action);
+	if(_readSelfAction)
+	{
+		m_readSelfAction = _readSelfAction;
+
+		//additional setter call for redefined reference ActionActivation::action
+		fUML::Semantics::Actions::ActionActivationImpl::setAction(_action);
+	}
+	else
+	{
+		std::cerr<<"[ReadSelfActionActivation::setAction] : Could not set action because provided action was not of type 'uml::ReadSelfAction'"<<std::endl;
+	}
+}
+/*Additional Setter for redefined reference 'ActivityNodeActivation::node'*/
+void ReadSelfActionActivationImpl::setNode(std::shared_ptr<uml::ActivityNode> _node)
+{
+	std::shared_ptr<uml::ReadSelfAction> _readSelfAction = std::dynamic_pointer_cast<uml::ReadSelfAction>(_node);
+	if(_readSelfAction)
+	{
+		m_readSelfAction = _readSelfAction;
+
+		//additional setter call for redefined reference ActionActivation::action
+		fUML::Semantics::Actions::ActionActivationImpl::setNode(_node);
+	}
+	else
+	{
+		std::cerr<<"[ReadSelfActionActivation::setNode] : Could not set node because provided node was not of type 'uml::ReadSelfAction'"<<std::endl;
+	}
+}
+
 
 //*********************************
 // Union Getter
 //*********************************
 std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> ReadSelfActionActivationImpl::getPinActivation() const
 {
+	if(m_pinActivation == nullptr)
+	{
+		/*Union*/
+		m_pinActivation.reset(new Union<fUML::Semantics::Actions::PinActivation>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_pinActivation - Union<fUML::Semantics::Actions::PinActivation>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_pinActivation;
 }
+
+
 
 
 std::shared_ptr<ReadSelfActionActivation> ReadSelfActionActivationImpl::getThisReadSelfActionActivationPtr() const
@@ -248,6 +305,8 @@ Any ReadSelfActionActivationImpl::eGet(int featureID, bool resolve, bool coreTyp
 {
 	switch(featureID)
 	{
+		case fUML::Semantics::Actions::ActionsPackage::READSELFACTIONACTIVATION_ATTRIBUTE_READSELFACTION:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getReadSelfAction())); //9311
 	}
 	return ActionActivationImpl::eGet(featureID, resolve, coreType);
 }
@@ -255,6 +314,8 @@ bool ReadSelfActionActivationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
+		case fUML::Semantics::Actions::ActionsPackage::READSELFACTIONACTIVATION_ATTRIBUTE_READSELFACTION:
+			return getReadSelfAction() != nullptr; //9311
 	}
 	return ActionActivationImpl::internalEIsSet(featureID);
 }
@@ -262,6 +323,14 @@ bool ReadSelfActionActivationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
+		case fUML::Semantics::Actions::ActionsPackage::READSELFACTIONACTIVATION_ATTRIBUTE_READSELFACTION:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::ReadSelfAction> _readSelfAction = std::dynamic_pointer_cast<uml::ReadSelfAction>(_temp);
+			setReadSelfAction(_readSelfAction); //9311
+			return true;
+		}
 	}
 
 	return ActionActivationImpl::eSet(featureID, newValue);
@@ -288,6 +357,25 @@ void ReadSelfActionActivationImpl::load(std::shared_ptr<persistence::interfaces:
 
 void ReadSelfActionActivationImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("readSelfAction");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("readSelfAction")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
 
 	ActionActivationImpl::loadAttributes(loadHandler, attr_list);
 }
@@ -302,6 +390,20 @@ void ReadSelfActionActivationImpl::loadNode(std::string nodeName, std::shared_pt
 
 void ReadSelfActionActivationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
+	switch(featureID)
+	{
+		case fUML::Semantics::Actions::ActionsPackage::READSELFACTIONACTIVATION_ATTRIBUTE_READSELFACTION:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::ReadSelfAction> _readSelfAction = std::dynamic_pointer_cast<uml::ReadSelfAction>( references.front() );
+				setReadSelfAction(_readSelfAction);
+			}
+			
+			return;
+		}
+	}
 	ActionActivationImpl::resolveReferences(featureID, references);
 }
 
@@ -328,6 +430,9 @@ void ReadSelfActionActivationImpl::saveContent(std::shared_ptr<persistence::inte
 		std::shared_ptr<fUML::Semantics::Actions::ActionsPackage> package = fUML::Semantics::Actions::ActionsPackage::eInstance();
 
 	
+
+		// Add references
+		saveHandler->addReference("readSelfAction", this->getReadSelfAction());
 
 	}
 	catch (std::exception& e)

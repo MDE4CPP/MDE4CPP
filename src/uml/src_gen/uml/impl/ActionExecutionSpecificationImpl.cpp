@@ -72,19 +72,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 ActionExecutionSpecificationImpl::ActionExecutionSpecificationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	//Init references
-	
+{	
 }
 
 ActionExecutionSpecificationImpl::~ActionExecutionSpecificationImpl()
@@ -94,41 +82,36 @@ ActionExecutionSpecificationImpl::~ActionExecutionSpecificationImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+ActionExecutionSpecificationImpl::ActionExecutionSpecificationImpl(std::weak_ptr<uml::Interaction > par_enclosingInteraction)
+:ActionExecutionSpecificationImpl()
+{
+	m_enclosingInteraction = par_enclosingInteraction;
+	m_namespace = par_enclosingInteraction;
+}
 
 //Additional constructor for the containments back reference
-			ActionExecutionSpecificationImpl::ActionExecutionSpecificationImpl(std::weak_ptr<uml::Interaction > par_enclosingInteraction)
-			:ActionExecutionSpecificationImpl()
-			{
-			    m_enclosingInteraction = par_enclosingInteraction;
-				m_namespace = par_enclosingInteraction;
-			}
-
-
-//Additional constructor for the containments back reference
-			ActionExecutionSpecificationImpl::ActionExecutionSpecificationImpl(std::weak_ptr<uml::InteractionOperand > par_enclosingOperand)
-			:ActionExecutionSpecificationImpl()
-			{
-			    m_enclosingOperand = par_enclosingOperand;
-				m_namespace = par_enclosingOperand;
-			}
-
+ActionExecutionSpecificationImpl::ActionExecutionSpecificationImpl(std::weak_ptr<uml::InteractionOperand > par_enclosingOperand)
+:ActionExecutionSpecificationImpl()
+{
+	m_enclosingOperand = par_enclosingOperand;
+	m_namespace = par_enclosingOperand;
+}
 
 //Additional constructor for the containments back reference
-			ActionExecutionSpecificationImpl::ActionExecutionSpecificationImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:ActionExecutionSpecificationImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
+ActionExecutionSpecificationImpl::ActionExecutionSpecificationImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:ActionExecutionSpecificationImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			ActionExecutionSpecificationImpl::ActionExecutionSpecificationImpl(std::weak_ptr<uml::Element > par_owner)
-			:ActionExecutionSpecificationImpl()
-			{
-			    m_owner = par_owner;
-			}
-
+ActionExecutionSpecificationImpl::ActionExecutionSpecificationImpl(std::weak_ptr<uml::Element > par_owner)
+:ActionExecutionSpecificationImpl()
+{
+	m_owner = par_owner;
+}
 
 
 ActionExecutionSpecificationImpl::ActionExecutionSpecificationImpl(const ActionExecutionSpecificationImpl & obj):ActionExecutionSpecificationImpl()
@@ -220,15 +203,21 @@ bool ActionExecutionSpecificationImpl::action_referenced(Any diagnostics,std::ma
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference action
+*/
 std::shared_ptr<uml::Action > ActionExecutionSpecificationImpl::getAction() const
 {
 //assert(m_action);
     return m_action;
 }
+
 void ActionExecutionSpecificationImpl::setAction(std::shared_ptr<uml::Action> _action)
 {
     m_action = _action;
 }
+
+
 
 //*********************************
 // Union Getter
@@ -237,14 +226,28 @@ std::weak_ptr<uml::Namespace > ActionExecutionSpecificationImpl::getNamespace() 
 {
 	return m_namespace;
 }
+
 std::shared_ptr<Union<uml::Element>> ActionExecutionSpecificationImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > ActionExecutionSpecificationImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<ActionExecutionSpecification> ActionExecutionSpecificationImpl::getThisActionExecutionSpecificationPtr() const

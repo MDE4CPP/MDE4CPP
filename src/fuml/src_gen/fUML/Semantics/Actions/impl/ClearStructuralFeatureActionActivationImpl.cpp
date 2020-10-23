@@ -28,6 +28,10 @@
 #include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
 #include "fUML/Semantics/SimpleClassifiers/StructuredValue.hpp"
 #include "fUML/Semantics/Values/Value.hpp"
+#include "fUML/Semantics/Activities/ActivityExecution.hpp"
+#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
+#include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
+#include "uml/InputPin.hpp"
 #include "uml/ClearStructuralFeatureAction.hpp"
 #include "uml/StructuralFeature.hpp"
 
@@ -36,6 +40,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+
+#include "uml/Action.hpp"
 
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 
@@ -71,17 +77,7 @@ using namespace fUML::Semantics::Actions;
 // Constructor / Destructor
 //*********************************
 ClearStructuralFeatureActionActivationImpl::ClearStructuralFeatureActionActivationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 ClearStructuralFeatureActionActivationImpl::~ClearStructuralFeatureActionActivationImpl()
@@ -91,14 +87,12 @@ ClearStructuralFeatureActionActivationImpl::~ClearStructuralFeatureActionActivat
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			ClearStructuralFeatureActionActivationImpl::ClearStructuralFeatureActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
-			:ClearStructuralFeatureActionActivationImpl()
-			{
-			    m_group = par_group;
-			}
-
+ClearStructuralFeatureActionActivationImpl::ClearStructuralFeatureActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
+:ClearStructuralFeatureActionActivationImpl()
+{
+	m_group = par_group;
+}
 
 
 ClearStructuralFeatureActionActivationImpl::ClearStructuralFeatureActionActivationImpl(const ClearStructuralFeatureActionActivationImpl & obj):ClearStructuralFeatureActionActivationImpl()
@@ -112,6 +106,8 @@ ClearStructuralFeatureActionActivationImpl::ClearStructuralFeatureActionActivati
 
 	//copy references with no containment (soft copy)
 	
+	m_action  = obj.getAction();
+
 	m_group  = obj.getGroup();
 
 	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> _incomingEdges = obj.getIncomingEdges();
@@ -181,7 +177,23 @@ void ClearStructuralFeatureActionActivationImpl::doAction()
 	std::shared_ptr<uml::ClearStructuralFeatureAction> action = std::dynamic_pointer_cast<uml::ClearStructuralFeatureAction>(m_node);
 	std::shared_ptr<uml::StructuralFeature> feature = action->getStructuralFeature();
 
-	std::shared_ptr<fUML::Semantics::Values::Value> objectValue = takeTokens(action->getObject())->at(0);
+	std::shared_ptr<fUML::Semantics::Values::Value> objectValue = nullptr;
+	
+	/* MDE4CPP specific implementation for handling "self"-Pin */
+	std::string objectPinName = action->getObject()->getName();
+	if((objectPinName.empty()) || (objectPinName.find("self") == 0)){
+		//objectValue is set to the context of the current activity execution
+		std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> contextReference = fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createReference();
+		std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> context = this->getActivityExecution()->getContext();
+		contextReference->setReferent(context);
+			
+		objectValue = contextReference;
+	}
+	else{
+		objectValue = this->takeTokens(action->getObject())->at(0);
+	}
+	/*--------------------------------------------------------*/
+
 	std::shared_ptr<fUML::Semantics::SimpleClassifiers::StructuredValue> structuredValue = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::StructuredValue>(objectValue);
 	if (structuredValue)
 	{
@@ -204,8 +216,20 @@ void ClearStructuralFeatureActionActivationImpl::doAction()
 //*********************************
 std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> ClearStructuralFeatureActionActivationImpl::getPinActivation() const
 {
+	if(m_pinActivation == nullptr)
+	{
+		/*Union*/
+		m_pinActivation.reset(new Union<fUML::Semantics::Actions::PinActivation>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_pinActivation - Union<fUML::Semantics::Actions::PinActivation>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_pinActivation;
 }
+
+
 
 
 std::shared_ptr<ClearStructuralFeatureActionActivation> ClearStructuralFeatureActionActivationImpl::getThisClearStructuralFeatureActionActivationPtr() const

@@ -71,19 +71,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 BehaviorExecutionSpecificationImpl::BehaviorExecutionSpecificationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	//Init references
-	
+{	
 }
 
 BehaviorExecutionSpecificationImpl::~BehaviorExecutionSpecificationImpl()
@@ -93,41 +81,36 @@ BehaviorExecutionSpecificationImpl::~BehaviorExecutionSpecificationImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+BehaviorExecutionSpecificationImpl::BehaviorExecutionSpecificationImpl(std::weak_ptr<uml::Interaction > par_enclosingInteraction)
+:BehaviorExecutionSpecificationImpl()
+{
+	m_enclosingInteraction = par_enclosingInteraction;
+	m_namespace = par_enclosingInteraction;
+}
 
 //Additional constructor for the containments back reference
-			BehaviorExecutionSpecificationImpl::BehaviorExecutionSpecificationImpl(std::weak_ptr<uml::Interaction > par_enclosingInteraction)
-			:BehaviorExecutionSpecificationImpl()
-			{
-			    m_enclosingInteraction = par_enclosingInteraction;
-				m_namespace = par_enclosingInteraction;
-			}
-
-
-//Additional constructor for the containments back reference
-			BehaviorExecutionSpecificationImpl::BehaviorExecutionSpecificationImpl(std::weak_ptr<uml::InteractionOperand > par_enclosingOperand)
-			:BehaviorExecutionSpecificationImpl()
-			{
-			    m_enclosingOperand = par_enclosingOperand;
-				m_namespace = par_enclosingOperand;
-			}
-
+BehaviorExecutionSpecificationImpl::BehaviorExecutionSpecificationImpl(std::weak_ptr<uml::InteractionOperand > par_enclosingOperand)
+:BehaviorExecutionSpecificationImpl()
+{
+	m_enclosingOperand = par_enclosingOperand;
+	m_namespace = par_enclosingOperand;
+}
 
 //Additional constructor for the containments back reference
-			BehaviorExecutionSpecificationImpl::BehaviorExecutionSpecificationImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:BehaviorExecutionSpecificationImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
+BehaviorExecutionSpecificationImpl::BehaviorExecutionSpecificationImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:BehaviorExecutionSpecificationImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			BehaviorExecutionSpecificationImpl::BehaviorExecutionSpecificationImpl(std::weak_ptr<uml::Element > par_owner)
-			:BehaviorExecutionSpecificationImpl()
-			{
-			    m_owner = par_owner;
-			}
-
+BehaviorExecutionSpecificationImpl::BehaviorExecutionSpecificationImpl(std::weak_ptr<uml::Element > par_owner)
+:BehaviorExecutionSpecificationImpl()
+{
+	m_owner = par_owner;
+}
 
 
 BehaviorExecutionSpecificationImpl::BehaviorExecutionSpecificationImpl(const BehaviorExecutionSpecificationImpl & obj):BehaviorExecutionSpecificationImpl()
@@ -214,15 +197,21 @@ std::shared_ptr<ecore::EClass> BehaviorExecutionSpecificationImpl::eStaticClass(
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference behavior
+*/
 std::shared_ptr<uml::Behavior > BehaviorExecutionSpecificationImpl::getBehavior() const
 {
 
     return m_behavior;
 }
+
 void BehaviorExecutionSpecificationImpl::setBehavior(std::shared_ptr<uml::Behavior> _behavior)
 {
     m_behavior = _behavior;
 }
+
+
 
 //*********************************
 // Union Getter
@@ -231,14 +220,28 @@ std::weak_ptr<uml::Namespace > BehaviorExecutionSpecificationImpl::getNamespace(
 {
 	return m_namespace;
 }
+
 std::shared_ptr<Union<uml::Element>> BehaviorExecutionSpecificationImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > BehaviorExecutionSpecificationImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<BehaviorExecutionSpecification> BehaviorExecutionSpecificationImpl::getThisBehaviorExecutionSpecificationPtr() const

@@ -84,30 +84,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 ProtocolTransitionImpl::ProtocolTransitionImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	
-
-		m_referred.reset(new Bag<uml::Operation>());
-	
-	
-
-	//Init references
-	
-
-	
-
-	
-	
+{	
 }
 
 ProtocolTransitionImpl::~ProtocolTransitionImpl()
@@ -117,32 +94,28 @@ ProtocolTransitionImpl::~ProtocolTransitionImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+ProtocolTransitionImpl::ProtocolTransitionImpl(std::weak_ptr<uml::Region > par_container)
+:ProtocolTransitionImpl()
+{
+	m_container = par_container;
+	m_namespace = par_container;
+}
 
 //Additional constructor for the containments back reference
-			ProtocolTransitionImpl::ProtocolTransitionImpl(std::weak_ptr<uml::Region > par_container)
-			:ProtocolTransitionImpl()
-			{
-			    m_container = par_container;
-				m_namespace = par_container;
-			}
-
-
-//Additional constructor for the containments back reference
-			ProtocolTransitionImpl::ProtocolTransitionImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:ProtocolTransitionImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
+ProtocolTransitionImpl::ProtocolTransitionImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:ProtocolTransitionImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			ProtocolTransitionImpl::ProtocolTransitionImpl(std::weak_ptr<uml::Element > par_owner)
-			:ProtocolTransitionImpl()
-			{
-			    m_owner = par_owner;
-			}
-
+ProtocolTransitionImpl::ProtocolTransitionImpl(std::weak_ptr<uml::Element > par_owner)
+:ProtocolTransitionImpl()
+{
+	m_owner = par_owner;
+}
 
 
 ProtocolTransitionImpl::ProtocolTransitionImpl(const ProtocolTransitionImpl & obj):ProtocolTransitionImpl()
@@ -326,31 +299,55 @@ bool ProtocolTransitionImpl::refers_to_operation(Any diagnostics,std::map <   An
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference postCondition
+*/
 std::shared_ptr<uml::Constraint > ProtocolTransitionImpl::getPostCondition() const
 {
 
     return m_postCondition;
 }
+
 void ProtocolTransitionImpl::setPostCondition(std::shared_ptr<uml::Constraint> _postCondition)
 {
     m_postCondition = _postCondition;
 }
 
+
+
+/*
+Getter & Setter for reference preCondition
+*/
 std::shared_ptr<uml::Constraint > ProtocolTransitionImpl::getPreCondition() const
 {
 
     return m_preCondition;
 }
+
 void ProtocolTransitionImpl::setPreCondition(std::shared_ptr<uml::Constraint> _preCondition)
 {
     m_preCondition = _preCondition;
 }
 
+
+
+/*
+Getter & Setter for reference referred
+*/
 std::shared_ptr<Bag<uml::Operation>> ProtocolTransitionImpl::getReferred() const
 {
+	if(m_referred == nullptr)
+	{
+		m_referred.reset(new Bag<uml::Operation>());
+		
+		
+	}
 
     return m_referred;
 }
+
+
+
 
 
 //*********************************
@@ -358,28 +355,80 @@ std::shared_ptr<Bag<uml::Operation>> ProtocolTransitionImpl::getReferred() const
 //*********************************
 std::shared_ptr<Union<uml::NamedElement>> ProtocolTransitionImpl::getMember() const
 {
+	if(m_member == nullptr)
+	{
+		/*Union*/
+		m_member.reset(new Union<uml::NamedElement>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_member - Union<uml::NamedElement>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_member;
 }
+
 std::weak_ptr<uml::Namespace > ProtocolTransitionImpl::getNamespace() const
 {
 	return m_namespace;
 }
+
 std::shared_ptr<Union<uml::Element>> ProtocolTransitionImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> ProtocolTransitionImpl::getOwnedMember() const
 {
+	if(m_ownedMember == nullptr)
+	{
+		/*SubsetUnion*/
+		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_ownedMember->initSubsetUnion(getOwnedElement(),getMember());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >(getOwnedElement(),getMember())" << std::endl;
+		#endif
+		
+	}
 	return m_ownedMember;
 }
+
 std::weak_ptr<uml::Element > ProtocolTransitionImpl::getOwner() const
 {
 	return m_owner;
 }
+
 std::shared_ptr<Union<uml::RedefinableElement>> ProtocolTransitionImpl::getRedefinedElement() const
 {
+	if(m_redefinedElement == nullptr)
+	{
+		/*Union*/
+		m_redefinedElement.reset(new Union<uml::RedefinableElement>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_redefinedElement - Union<uml::RedefinableElement>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_redefinedElement;
 }
+
+
 
 
 std::shared_ptr<ProtocolTransition> ProtocolTransitionImpl::getThisProtocolTransitionPtr() const

@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class SlotImpl :virtual public ElementImpl, virtual public Slot 
+	class SlotImpl : virtual public ElementImpl, virtual public Slot 
 	{
 		public: 
 			SlotImpl(const SlotImpl & obj);
@@ -61,27 +61,40 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 The StructuralFeature that specifies the values that may be held by the Slot.
-			<p>From package UML::Classification.</p> */
+			The StructuralFeature that specifies the values that may be held by the Slot.
+			<p>From package UML::Classification.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::StructuralFeature > getDefiningFeature() const ;
 			
 			/*!
-			 The StructuralFeature that specifies the values that may be held by the Slot.
-			<p>From package UML::Classification.</p> */
-			virtual void setDefiningFeature(std::shared_ptr<uml::StructuralFeature> _definingFeature_definingFeature) ;
+			The StructuralFeature that specifies the values that may be held by the Slot.
+			<p>From package UML::Classification.</p>
+			*/
+			
+			virtual void setDefiningFeature(std::shared_ptr<uml::StructuralFeature> _definingFeature) ;
+			
 			/*!
-			 The InstanceSpecification that owns this Slot.
-			<p>From package UML::Classification.</p> */
+			The InstanceSpecification that owns this Slot.
+			<p>From package UML::Classification.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::InstanceSpecification > getOwningInstance() const ;
 			
 			/*!
-			 The InstanceSpecification that owns this Slot.
-			<p>From package UML::Classification.</p> */
-			virtual void setOwningInstance(std::shared_ptr<uml::InstanceSpecification> _owningInstance_owningInstance) ;
+			The InstanceSpecification that owns this Slot.
+			<p>From package UML::Classification.</p>
+			*/
+			
+			virtual void setOwningInstance(std::shared_ptr<uml::InstanceSpecification> _owningInstance) ;
+			
 			/*!
-			 The value or values held by the Slot.
-			<p>From package UML::Classification.</p> */
+			The value or values held by the Slot.
+			<p>From package UML::Classification.</p>
+			*/
+			
 			virtual std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>> getValue() const ;
+			
 			
 							
 			
@@ -89,11 +102,15 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************

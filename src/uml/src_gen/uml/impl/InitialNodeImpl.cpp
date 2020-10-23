@@ -78,17 +78,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 InitialNodeImpl::InitialNodeImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 InitialNodeImpl::~InitialNodeImpl()
@@ -98,41 +88,36 @@ InitialNodeImpl::~InitialNodeImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+InitialNodeImpl::InitialNodeImpl(std::weak_ptr<uml::Activity > par_activity)
+:InitialNodeImpl()
+{
+	m_activity = par_activity;
+	m_owner = par_activity;
+}
 
 //Additional constructor for the containments back reference
-			InitialNodeImpl::InitialNodeImpl(std::weak_ptr<uml::Activity > par_activity)
-			:InitialNodeImpl()
-			{
-			    m_activity = par_activity;
-				m_owner = par_activity;
-			}
-
-
-//Additional constructor for the containments back reference
-			InitialNodeImpl::InitialNodeImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
-			:InitialNodeImpl()
-			{
-			    m_inStructuredNode = par_inStructuredNode;
-				m_owner = par_inStructuredNode;
-			}
-
+InitialNodeImpl::InitialNodeImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
+:InitialNodeImpl()
+{
+	m_inStructuredNode = par_inStructuredNode;
+	m_owner = par_inStructuredNode;
+}
 
 //Additional constructor for the containments back reference
-			InitialNodeImpl::InitialNodeImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:InitialNodeImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
+InitialNodeImpl::InitialNodeImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:InitialNodeImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			InitialNodeImpl::InitialNodeImpl(std::weak_ptr<uml::Element > par_owner)
-			:InitialNodeImpl()
-			{
-			    m_owner = par_owner;
-			}
-
+InitialNodeImpl::InitialNodeImpl(std::weak_ptr<uml::Element > par_owner)
+:InitialNodeImpl()
+{
+	m_owner = par_owner;
+}
 
 
 InitialNodeImpl::InitialNodeImpl(const InitialNodeImpl & obj):InitialNodeImpl()
@@ -259,20 +244,55 @@ bool InitialNodeImpl::no_incoming_edges(Any diagnostics,std::map <   Any, Any > 
 //*********************************
 std::shared_ptr<Union<uml::ActivityGroup>> InitialNodeImpl::getInGroup() const
 {
+	if(m_inGroup == nullptr)
+	{
+		/*Union*/
+		m_inGroup.reset(new Union<uml::ActivityGroup>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_inGroup - Union<uml::ActivityGroup>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_inGroup;
 }
+
 std::shared_ptr<Union<uml::Element>> InitialNodeImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > InitialNodeImpl::getOwner() const
 {
 	return m_owner;
 }
+
 std::shared_ptr<Union<uml::RedefinableElement>> InitialNodeImpl::getRedefinedElement() const
 {
+	if(m_redefinedElement == nullptr)
+	{
+		/*Union*/
+		m_redefinedElement.reset(new Union<uml::RedefinableElement>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_redefinedElement - Union<uml::RedefinableElement>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_redefinedElement;
 }
+
+
 
 
 std::shared_ptr<InitialNode> InitialNodeImpl::getThisInitialNodePtr() const

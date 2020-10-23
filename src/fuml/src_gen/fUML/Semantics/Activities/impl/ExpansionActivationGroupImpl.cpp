@@ -66,40 +66,7 @@ using namespace fUML::Semantics::Activities;
 // Constructor / Destructor
 //*********************************
 ExpansionActivationGroupImpl::ExpansionActivationGroupImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		m_groupInputs.reset(new Bag<fUML::Semantics::Actions::OutputPinActivation>());
-	
-	
-
-		m_groupOutputs.reset(new Bag<fUML::Semantics::Actions::OutputPinActivation>());
-	
-	
-
-	
-
-		m_regionInputs.reset(new Bag<fUML::Semantics::Actions::OutputPinActivation>());
-	
-	
-
-	//Init references
-	
-	
-
-	
-	
-
-	
-
-	
-	
+{	
 }
 
 ExpansionActivationGroupImpl::~ExpansionActivationGroupImpl()
@@ -109,22 +76,19 @@ ExpansionActivationGroupImpl::~ExpansionActivationGroupImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+ExpansionActivationGroupImpl::ExpansionActivationGroupImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityExecution > par_activityExecution)
+:ExpansionActivationGroupImpl()
+{
+	m_activityExecution = par_activityExecution;
+}
 
 //Additional constructor for the containments back reference
-			ExpansionActivationGroupImpl::ExpansionActivationGroupImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityExecution > par_activityExecution)
-			:ExpansionActivationGroupImpl()
-			{
-			    m_activityExecution = par_activityExecution;
-			}
-
-
-//Additional constructor for the containments back reference
-			ExpansionActivationGroupImpl::ExpansionActivationGroupImpl(std::weak_ptr<fUML::Semantics::Actions::StructuredActivityNodeActivation > par_containingNodeActivation)
-			:ExpansionActivationGroupImpl()
-			{
-			    m_containingNodeActivation = par_containingNodeActivation;
-			}
-
+ExpansionActivationGroupImpl::ExpansionActivationGroupImpl(std::weak_ptr<fUML::Semantics::Actions::StructuredActivityNodeActivation > par_containingNodeActivation)
+:ExpansionActivationGroupImpl()
+{
+	m_containingNodeActivation = par_containingNodeActivation;
+}
 
 
 ExpansionActivationGroupImpl::ExpansionActivationGroupImpl(const ExpansionActivationGroupImpl & obj):ExpansionActivationGroupImpl()
@@ -192,15 +156,20 @@ std::shared_ptr<ecore::EClass> ExpansionActivationGroupImpl::eStaticClass() cons
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute index
+*/
+int ExpansionActivationGroupImpl::getIndex() const 
+{
+	return m_index;
+}
+
 void ExpansionActivationGroupImpl::setIndex(int _index)
 {
 	m_index = _index;
 } 
 
-int ExpansionActivationGroupImpl::getIndex() const 
-{
-	return m_index;
-}
+
 
 //*********************************
 // Operations
@@ -278,40 +247,83 @@ void ExpansionActivationGroupImpl::suspend(std::shared_ptr<fUML::Semantics::Acti
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference groupInputs
+*/
 std::shared_ptr<Bag<fUML::Semantics::Actions::OutputPinActivation>> ExpansionActivationGroupImpl::getGroupInputs() const
 {
+	if(m_groupInputs == nullptr)
+	{
+		m_groupInputs.reset(new Bag<fUML::Semantics::Actions::OutputPinActivation>());
+		
+		
+	}
 
     return m_groupInputs;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference groupOutputs
+*/
 std::shared_ptr<Bag<fUML::Semantics::Actions::OutputPinActivation>> ExpansionActivationGroupImpl::getGroupOutputs() const
 {
+	if(m_groupOutputs == nullptr)
+	{
+		m_groupOutputs.reset(new Bag<fUML::Semantics::Actions::OutputPinActivation>());
+		
+		
+	}
 
     return m_groupOutputs;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference regionActivation
+*/
 std::shared_ptr<fUML::Semantics::Activities::ExpansionRegionActivation > ExpansionActivationGroupImpl::getRegionActivation() const
 {
 //assert(m_regionActivation);
     return m_regionActivation;
 }
+
 void ExpansionActivationGroupImpl::setRegionActivation(std::shared_ptr<fUML::Semantics::Activities::ExpansionRegionActivation> _regionActivation)
 {
     m_regionActivation = _regionActivation;
 }
 
+
+
+/*
+Getter & Setter for reference regionInputs
+*/
 std::shared_ptr<Bag<fUML::Semantics::Actions::OutputPinActivation>> ExpansionActivationGroupImpl::getRegionInputs() const
 {
+	if(m_regionInputs == nullptr)
+	{
+		m_regionInputs.reset(new Bag<fUML::Semantics::Actions::OutputPinActivation>());
+		
+		
+	}
 
     return m_regionInputs;
 }
 
 
+
+
+
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<ExpansionActivationGroup> ExpansionActivationGroupImpl::getThisExpansionActivationGroupPtr() const

@@ -28,6 +28,10 @@
 #include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
 #include "fUML/Semantics/SimpleClassifiers/StructuredValue.hpp"
 #include "fUML/Semantics/Values/Value.hpp"
+#include "fUML/Semantics/Activities/ActivityExecution.hpp"
+#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
+#include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
+#include "uml/InputPin.hpp"
 #include "uml/RemoveStructuralFeatureValueAction.hpp"
 #include "uml/StructuralFeature.hpp"
 
@@ -36,6 +40,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+
+#include "uml/Action.hpp"
 
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 
@@ -48,6 +54,8 @@
 #include "fUML/Semantics/Actions/OutputPinActivation.hpp"
 
 #include "fUML/Semantics/Actions/PinActivation.hpp"
+
+#include "uml/RemoveStructuralFeatureValueAction.hpp"
 
 #include "fUML/Semantics/Activities/Token.hpp"
 
@@ -71,17 +79,7 @@ using namespace fUML::Semantics::Actions;
 // Constructor / Destructor
 //*********************************
 RemoveStructuralFeatureValueActivationImpl::RemoveStructuralFeatureValueActivationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 RemoveStructuralFeatureValueActivationImpl::~RemoveStructuralFeatureValueActivationImpl()
@@ -91,14 +89,12 @@ RemoveStructuralFeatureValueActivationImpl::~RemoveStructuralFeatureValueActivat
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			RemoveStructuralFeatureValueActivationImpl::RemoveStructuralFeatureValueActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
-			:RemoveStructuralFeatureValueActivationImpl()
-			{
-			    m_group = par_group;
-			}
-
+RemoveStructuralFeatureValueActivationImpl::RemoveStructuralFeatureValueActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
+:RemoveStructuralFeatureValueActivationImpl()
+{
+	m_group = par_group;
+}
 
 
 RemoveStructuralFeatureValueActivationImpl::RemoveStructuralFeatureValueActivationImpl(const RemoveStructuralFeatureValueActivationImpl & obj):RemoveStructuralFeatureValueActivationImpl()
@@ -112,6 +108,8 @@ RemoveStructuralFeatureValueActivationImpl::RemoveStructuralFeatureValueActivati
 
 	//copy references with no containment (soft copy)
 	
+	m_action  = obj.getAction();
+
 	m_group  = obj.getGroup();
 
 	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> _incomingEdges = obj.getIncomingEdges();
@@ -124,6 +122,8 @@ RemoveStructuralFeatureValueActivationImpl::RemoveStructuralFeatureValueActivati
 
 	std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> _pinActivation = obj.getPinActivation();
 	m_pinActivation.reset(new Union<fUML::Semantics::Actions::PinActivation>(*(obj.getPinActivation().get())));
+
+	m_removeStructuralFeatureValueAction  = obj.getRemoveStructuralFeatureValueAction();
 
 
 	//Clone references with containment (deep copy)
@@ -178,10 +178,26 @@ void RemoveStructuralFeatureValueActivationImpl::doAction()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<uml::RemoveStructuralFeatureValueAction> action = std::dynamic_pointer_cast<uml::RemoveStructuralFeatureValueAction>(m_node);
+	std::shared_ptr<uml::RemoveStructuralFeatureValueAction> action = this->getRemoveStructuralFeatureValueAction();
 	std::shared_ptr<uml::StructuralFeature> feature = action->getStructuralFeature();
 
-	std::shared_ptr<fUML::Semantics::Values::Value> objectValue = takeTokens(action->getObject())->at(0);
+	std::shared_ptr<fUML::Semantics::Values::Value> objectValue = nullptr;
+	
+	/* MDE4CPP specific implementation for handling "self"-Pin */
+	std::string objectPinName = action->getObject()->getName();
+	if((objectPinName.empty()) || (objectPinName.find("self") == 0)){
+		//objectValue is set to the context of the current activity execution
+		std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> contextReference = fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createReference();
+		std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> context = this->getActivityExecution()->getContext();
+		contextReference->setReferent(context);
+			
+		objectValue = contextReference;
+	}
+	else{
+		objectValue = this->takeTokens(action->getObject())->at(0);
+	}
+	/*--------------------------------------------------------*/
+
 	std::shared_ptr<fUML::Semantics::Values::Value> inputValue = takeTokens(action->getValue())->at(0);
 	std::shared_ptr<fUML::Semantics::SimpleClassifiers::StructuredValue> structuredValue = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::StructuredValue>(objectValue);
 	if (structuredValue)
@@ -199,14 +215,75 @@ void RemoveStructuralFeatureValueActivationImpl::doAction()
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference removeStructuralFeatureValueAction
+*/
+std::shared_ptr<uml::RemoveStructuralFeatureValueAction > RemoveStructuralFeatureValueActivationImpl::getRemoveStructuralFeatureValueAction() const
+{
+//assert(m_removeStructuralFeatureValueAction);
+    return m_removeStructuralFeatureValueAction;
+}
+
+void RemoveStructuralFeatureValueActivationImpl::setRemoveStructuralFeatureValueAction(std::shared_ptr<uml::RemoveStructuralFeatureValueAction> _removeStructuralFeatureValueAction)
+{
+    m_removeStructuralFeatureValueAction = _removeStructuralFeatureValueAction;
+	//additional setter call for redefined reference ActionActivation::action
+	fUML::Semantics::Actions::ActionActivationImpl::setAction(_removeStructuralFeatureValueAction);
+}
+
+/*Additional Setter for redefined reference 'ActionActivation::action'*/
+void RemoveStructuralFeatureValueActivationImpl::setAction(std::shared_ptr<uml::Action> _action)
+{
+	std::shared_ptr<uml::RemoveStructuralFeatureValueAction> _removeStructuralFeatureValueAction = std::dynamic_pointer_cast<uml::RemoveStructuralFeatureValueAction>(_action);
+	if(_removeStructuralFeatureValueAction)
+	{
+		m_removeStructuralFeatureValueAction = _removeStructuralFeatureValueAction;
+
+		//additional setter call for redefined reference ActionActivation::action
+		fUML::Semantics::Actions::ActionActivationImpl::setAction(_action);
+	}
+	else
+	{
+		std::cerr<<"[RemoveStructuralFeatureValueActivation::setAction] : Could not set action because provided action was not of type 'uml::RemoveStructuralFeatureValueAction'"<<std::endl;
+	}
+}
+/*Additional Setter for redefined reference 'ActivityNodeActivation::node'*/
+void RemoveStructuralFeatureValueActivationImpl::setNode(std::shared_ptr<uml::ActivityNode> _node)
+{
+	std::shared_ptr<uml::RemoveStructuralFeatureValueAction> _removeStructuralFeatureValueAction = std::dynamic_pointer_cast<uml::RemoveStructuralFeatureValueAction>(_node);
+	if(_removeStructuralFeatureValueAction)
+	{
+		m_removeStructuralFeatureValueAction = _removeStructuralFeatureValueAction;
+
+		//additional setter call for redefined reference ActionActivation::action
+		fUML::Semantics::Actions::ActionActivationImpl::setNode(_node);
+	}
+	else
+	{
+		std::cerr<<"[RemoveStructuralFeatureValueActivation::setNode] : Could not set node because provided node was not of type 'uml::RemoveStructuralFeatureValueAction'"<<std::endl;
+	}
+}
+
 
 //*********************************
 // Union Getter
 //*********************************
 std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> RemoveStructuralFeatureValueActivationImpl::getPinActivation() const
 {
+	if(m_pinActivation == nullptr)
+	{
+		/*Union*/
+		m_pinActivation.reset(new Union<fUML::Semantics::Actions::PinActivation>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_pinActivation - Union<fUML::Semantics::Actions::PinActivation>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_pinActivation;
 }
+
+
 
 
 std::shared_ptr<RemoveStructuralFeatureValueActivation> RemoveStructuralFeatureValueActivationImpl::getThisRemoveStructuralFeatureValueActivationPtr() const
@@ -234,6 +311,8 @@ Any RemoveStructuralFeatureValueActivationImpl::eGet(int featureID, bool resolve
 {
 	switch(featureID)
 	{
+		case fUML::Semantics::Actions::ActionsPackage::REMOVESTRUCTURALFEATUREVALUEACTIVATION_ATTRIBUTE_REMOVESTRUCTURALFEATUREVALUEACTION:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getRemoveStructuralFeatureValueAction())); //10011
 	}
 	return WriteStructuralFeatureActionActivationImpl::eGet(featureID, resolve, coreType);
 }
@@ -241,6 +320,8 @@ bool RemoveStructuralFeatureValueActivationImpl::internalEIsSet(int featureID) c
 {
 	switch(featureID)
 	{
+		case fUML::Semantics::Actions::ActionsPackage::REMOVESTRUCTURALFEATUREVALUEACTIVATION_ATTRIBUTE_REMOVESTRUCTURALFEATUREVALUEACTION:
+			return getRemoveStructuralFeatureValueAction() != nullptr; //10011
 	}
 	return WriteStructuralFeatureActionActivationImpl::internalEIsSet(featureID);
 }
@@ -248,6 +329,14 @@ bool RemoveStructuralFeatureValueActivationImpl::eSet(int featureID, Any newValu
 {
 	switch(featureID)
 	{
+		case fUML::Semantics::Actions::ActionsPackage::REMOVESTRUCTURALFEATUREVALUEACTIVATION_ATTRIBUTE_REMOVESTRUCTURALFEATUREVALUEACTION:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::RemoveStructuralFeatureValueAction> _removeStructuralFeatureValueAction = std::dynamic_pointer_cast<uml::RemoveStructuralFeatureValueAction>(_temp);
+			setRemoveStructuralFeatureValueAction(_removeStructuralFeatureValueAction); //10011
+			return true;
+		}
 	}
 
 	return WriteStructuralFeatureActionActivationImpl::eSet(featureID, newValue);
@@ -274,6 +363,25 @@ void RemoveStructuralFeatureValueActivationImpl::load(std::shared_ptr<persistenc
 
 void RemoveStructuralFeatureValueActivationImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("removeStructuralFeatureValueAction");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("removeStructuralFeatureValueAction")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
 
 	WriteStructuralFeatureActionActivationImpl::loadAttributes(loadHandler, attr_list);
 }
@@ -288,6 +396,20 @@ void RemoveStructuralFeatureValueActivationImpl::loadNode(std::string nodeName, 
 
 void RemoveStructuralFeatureValueActivationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
+	switch(featureID)
+	{
+		case fUML::Semantics::Actions::ActionsPackage::REMOVESTRUCTURALFEATUREVALUEACTIVATION_ATTRIBUTE_REMOVESTRUCTURALFEATUREVALUEACTION:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::RemoveStructuralFeatureValueAction> _removeStructuralFeatureValueAction = std::dynamic_pointer_cast<uml::RemoveStructuralFeatureValueAction>( references.front() );
+				setRemoveStructuralFeatureValueAction(_removeStructuralFeatureValueAction);
+			}
+			
+			return;
+		}
+	}
 	WriteStructuralFeatureActionActivationImpl::resolveReferences(featureID, references);
 }
 
@@ -320,6 +442,9 @@ void RemoveStructuralFeatureValueActivationImpl::saveContent(std::shared_ptr<per
 		std::shared_ptr<fUML::Semantics::Actions::ActionsPackage> package = fUML::Semantics::Actions::ActionsPackage::eInstance();
 
 	
+
+		// Add references
+		saveHandler->addReference("removeStructuralFeatureValueAction", this->getRemoveStructuralFeatureValueAction());
 
 	}
 	catch (std::exception& e)

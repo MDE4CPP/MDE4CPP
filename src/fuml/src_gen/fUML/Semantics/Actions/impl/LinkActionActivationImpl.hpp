@@ -19,7 +19,7 @@
 //*********************************
 namespace fUML::Semantics::Actions 
 {
-	class LinkActionActivationImpl :virtual public ActionActivationImpl, virtual public LinkActionActivation 
+	class LinkActionActivationImpl : virtual public ActionActivationImpl, virtual public LinkActionActivation 
 	{
 		public: 
 			LinkActionActivationImpl(const LinkActionActivationImpl & obj);
@@ -47,16 +47,13 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual bool endMatchesEndData(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link>  link,std::shared_ptr<uml::LinkEndData>  endData) ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<uml::Association> getAssociation() ;
 			
-			/*!
-			 */ 
+			 
 			virtual bool linkMatchesEndData(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link>  link,std::shared_ptr<Bag<uml::LinkEndData> >  endDataList) ;
 			
 			
@@ -74,8 +71,7 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> getPinActivation() const ; 
 			 
 			//*********************************

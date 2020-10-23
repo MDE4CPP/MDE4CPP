@@ -97,8 +97,10 @@ namespace uml
 namespace uml 
 {
 	/*!
-	 An InterruptibleActivityRegion is an ActivityGroup that supports the termination of tokens flowing in the portions of an activity within it.
-	<p>From package UML::Activities.</p> */
+	An InterruptibleActivityRegion is an ActivityGroup that supports the termination of tokens flowing in the portions of an activity within it.
+	<p>From package UML::Activities.</p>
+	*/
+	
 	class InterruptibleActivityRegion:virtual public ActivityGroup
 	{
 		public:
@@ -119,9 +121,11 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 The interruptingEdges of an InterruptibleActivityRegion must have their source in the region and their target outside the region, but within the same Activity containing the region.
+			The interruptingEdges of an InterruptibleActivityRegion must have their source in the region and their target outside the region, but within the same Activity containing the region.
 			interruptingEdge->forAll(edge | 
-			  node->includes(edge.source) and node->excludes(edge.target) and edge.target.containingActivity() = inActivity) */ 
+			  node->includes(edge.source) and node->excludes(edge.target) and edge.target.containingActivity() = inActivity)
+			*/
+			 
 			virtual bool interrupting_edges(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
@@ -133,14 +137,20 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 The ActivityEdges leaving the InterruptibleActivityRegion on which a traversing token will result in the termination of other tokens flowing in the InterruptibleActivityRegion.
-			<p>From package UML::Activities.</p> */
+			The ActivityEdges leaving the InterruptibleActivityRegion on which a traversing token will result in the termination of other tokens flowing in the InterruptibleActivityRegion.
+			<p>From package UML::Activities.</p>
+			*/
+			
 			virtual std::shared_ptr<Bag<uml::ActivityEdge>> getInterruptingEdge() const = 0;
 			
+			
 			/*!
-			 ActivityNodes immediately contained in the InterruptibleActivityRegion.
-			<p>From package UML::Activities.</p> */
+			ActivityNodes immediately contained in the InterruptibleActivityRegion.
+			<p>From package UML::Activities.</p>
+			*/
+			
 			virtual std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode>> getNode() const = 0;
+			
 			
 			
 
@@ -154,28 +164,36 @@ namespace uml
 			// Reference Members
 			//*********************************
 			/*!
-			 The ActivityEdges leaving the InterruptibleActivityRegion on which a traversing token will result in the termination of other tokens flowing in the InterruptibleActivityRegion.
-			<p>From package UML::Activities.</p> */
-			std::shared_ptr<Bag<uml::ActivityEdge>> m_interruptingEdge;
-			/*!
-			 ActivityNodes immediately contained in the InterruptibleActivityRegion.
-			<p>From package UML::Activities.</p> */
-			std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode>> m_node;
+			The ActivityEdges leaving the InterruptibleActivityRegion on which a traversing token will result in the termination of other tokens flowing in the InterruptibleActivityRegion.
+			<p>From package UML::Activities.</p>
+			*/
 			
+			mutable std::shared_ptr<Bag<uml::ActivityEdge>> m_interruptingEdge;/*!
+			ActivityNodes immediately contained in the InterruptibleActivityRegion.
+			<p>From package UML::Activities.</p>
+			*/
+			
+			mutable std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode>> m_node;
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 ActivityNodes immediately contained in the ActivityGroup.
-			<p>From package UML::Activities.</p> */
+			ActivityNodes immediately contained in the ActivityGroup.
+			<p>From package UML::Activities.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::ActivityNode>> getContainedNode() const = 0;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

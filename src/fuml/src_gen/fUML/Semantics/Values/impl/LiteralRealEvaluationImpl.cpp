@@ -26,6 +26,7 @@
 #include "fUML/Semantics/SimpleClassifiers/RealValue.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "uml/LiteralReal.hpp"
+#include "primitivetypesReflection/PrimitiveTypesPackage.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -59,17 +60,7 @@ using namespace fUML::Semantics::Values;
 // Constructor / Destructor
 //*********************************
 LiteralRealEvaluationImpl::LiteralRealEvaluationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 LiteralRealEvaluationImpl::~LiteralRealEvaluationImpl()
@@ -78,7 +69,6 @@ LiteralRealEvaluationImpl::~LiteralRealEvaluationImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete LiteralRealEvaluation "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -124,11 +114,10 @@ std::shared_ptr<fUML::Semantics::Values::Value> LiteralRealEvaluationImpl::evalu
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<uml::LiteralReal> literal = std::dynamic_pointer_cast<uml::LiteralReal>(this->getSpecification());
 	std::shared_ptr<fUML::Semantics::SimpleClassifiers::RealValue> realValue(fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createRealValue());
-	realValue->setType(this->getType("Real"));
-	realValue->setValue(literal->getValue());
-	return realValue;
+realValue->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
+realValue->setValue(getSpecification()->realValue());
+return realValue;
 	//end of body
 }
 
@@ -139,6 +128,7 @@ std::shared_ptr<fUML::Semantics::Values::Value> LiteralRealEvaluationImpl::evalu
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<LiteralRealEvaluation> LiteralRealEvaluationImpl::getThisLiteralRealEvaluationPtr() const

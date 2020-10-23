@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class LiteralRealImpl :virtual public LiteralSpecificationImpl, virtual public LiteralReal 
+	class LiteralRealImpl : virtual public LiteralSpecificationImpl, virtual public LiteralReal 
 	{
 		public: 
 			LiteralRealImpl(const LiteralRealImpl & obj);
@@ -66,21 +66,40 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
+			/*!
+			The query isComputable() is redefined to be true.
+			result = (true)
+			<p>From package UML::Values.</p>
+			*/
+			 
+			virtual bool isComputable() ;
+			
+			/*!
+			The query realValue() gives the value.
+			result = (value)
+			<p>From package UML::Values.</p>
+			*/
+			 
+			virtual double realValue() ;
+			
 			
 			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
 			/*!
-			 The specified Real value.
-			<p>From package UML::Values.</p> */ 
+			The specified Real value.
+			<p>From package UML::Values.</p>
+			*/
+			 
 			virtual double getValue() const ;
 			
 			/*!
-			 The specified Real value.
-			<p>From package UML::Values.</p> */ 
+			The specified Real value.
+			<p>From package UML::Values.</p>
+			*/
+			 
 			virtual void setValue (double _value); 
-			
 			
 			
 			//*********************************
@@ -92,14 +111,20 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************

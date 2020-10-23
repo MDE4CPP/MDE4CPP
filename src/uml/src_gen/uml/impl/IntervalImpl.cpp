@@ -69,23 +69,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 IntervalImpl::IntervalImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	
-
-	//Init references
-	
-
-	
+{	
 }
 
 IntervalImpl::~IntervalImpl()
@@ -95,59 +79,52 @@ IntervalImpl::~IntervalImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+IntervalImpl::IntervalImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:IntervalImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			IntervalImpl::IntervalImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:IntervalImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
+IntervalImpl::IntervalImpl(std::weak_ptr<uml::Element > par_owner)
+:IntervalImpl()
+{
+	m_owner = par_owner;
+}
 
 //Additional constructor for the containments back reference
-			IntervalImpl::IntervalImpl(std::weak_ptr<uml::Element > par_owner)
-			:IntervalImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-//Additional constructor for the containments back reference
-			IntervalImpl::IntervalImpl(std::weak_ptr<uml::Package > par_owningPackage)
-			:IntervalImpl()
-			{
-			    m_owningPackage = par_owningPackage;
-				m_namespace = par_owningPackage;
-			}
-
+IntervalImpl::IntervalImpl(std::weak_ptr<uml::Package > par_owningPackage)
+:IntervalImpl()
+{
+	m_owningPackage = par_owningPackage;
+	m_namespace = par_owningPackage;
+}
 
 //Additional constructor for the containments back reference
-			IntervalImpl::IntervalImpl(std::weak_ptr<uml::Slot > par_owningSlot)
-			:IntervalImpl()
-			{
-			    m_owningSlot = par_owningSlot;
-				m_owner = par_owningSlot;
-			}
-
-
-//Additional constructor for the containments back reference
-			IntervalImpl::IntervalImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
-			:IntervalImpl()
-			{
-			    m_owningTemplateParameter = par_owningTemplateParameter;
-				m_owner = par_owningTemplateParameter;
-			}
-
+IntervalImpl::IntervalImpl(std::weak_ptr<uml::Slot > par_owningSlot)
+:IntervalImpl()
+{
+	m_owningSlot = par_owningSlot;
+	m_owner = par_owningSlot;
+}
 
 //Additional constructor for the containments back reference
-			IntervalImpl::IntervalImpl(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction)
-			:IntervalImpl()
-			{
-			    m_valueSpecificationAction = par_valueSpecificationAction;
-				m_owner = par_valueSpecificationAction;
-			}
+IntervalImpl::IntervalImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+:IntervalImpl()
+{
+	m_owningTemplateParameter = par_owningTemplateParameter;
+	m_owner = par_owningTemplateParameter;
+}
 
+//Additional constructor for the containments back reference
+IntervalImpl::IntervalImpl(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction)
+:IntervalImpl()
+{
+	m_valueSpecificationAction = par_valueSpecificationAction;
+	m_owner = par_valueSpecificationAction;
+}
 
 
 IntervalImpl::IntervalImpl(const IntervalImpl & obj):IntervalImpl()
@@ -229,25 +206,37 @@ std::shared_ptr<ecore::EClass> IntervalImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference max
+*/
 std::shared_ptr<uml::ValueSpecification > IntervalImpl::getMax() const
 {
 //assert(m_max);
     return m_max;
 }
+
 void IntervalImpl::setMax(std::shared_ptr<uml::ValueSpecification> _max)
 {
     m_max = _max;
 }
 
+
+
+/*
+Getter & Setter for reference min
+*/
 std::shared_ptr<uml::ValueSpecification > IntervalImpl::getMin() const
 {
 //assert(m_min);
     return m_min;
 }
+
 void IntervalImpl::setMin(std::shared_ptr<uml::ValueSpecification> _min)
 {
     m_min = _min;
 }
+
+
 
 //*********************************
 // Union Getter
@@ -256,14 +245,28 @@ std::weak_ptr<uml::Namespace > IntervalImpl::getNamespace() const
 {
 	return m_namespace;
 }
+
 std::shared_ptr<Union<uml::Element>> IntervalImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > IntervalImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<Interval> IntervalImpl::getThisIntervalPtr() const

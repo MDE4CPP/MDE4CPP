@@ -42,6 +42,11 @@ namespace fUML::Semantics::Actions
 	class AcceptEventActionEventAccepter;
 }
 
+namespace uml 
+{
+	class Action;
+}
+
 namespace fUML::Semantics::Actions 
 {
 	class ActionActivation;
@@ -96,8 +101,7 @@ namespace fUML::Semantics::Activities
 //*********************************
 namespace fUML::Semantics::Actions 
 {
-	/*!
-	 */
+	
 	class AcceptEventActionActivation:virtual public ActionActivation
 	{
 		public:
@@ -117,86 +121,70 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual void accept(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>  eventOccurrence) = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual void doAction() = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual void fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token> >  incomingTokens) = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual void initialize(std::shared_ptr<uml::ActivityNode>  node,std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup>  group) = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual bool isReady() = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual bool match(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>  eventOccurrence) = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual void run() = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual void terminate() = 0;
 			
 			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual bool isWaiting() const = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual void setWaiting (bool _waiting)= 0; 
-			
 			
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionEventAccepter > getEventAccepter() const = 0;
 			
-			/*!
-			 */
-			virtual void setEventAccepter(std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionEventAccepter> _eventAccepter_eventAccepter) = 0;
+			
+			virtual void setEventAccepter(std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionEventAccepter> _eventAccepter) = 0;
+			
 			
 
 		protected:
 			//*********************************
 			// Attribute Members
 			//*********************************
-			/*!
-			 */ 
+			 
 			bool m_waiting = false;
 			
 			
 			//*********************************
 			// Reference Members
 			//*********************************
-			/*!
-			 */
-			std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionEventAccepter > m_eventAccepter;
 			
+			std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionEventAccepter > m_eventAccepter;
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> getPinActivation() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

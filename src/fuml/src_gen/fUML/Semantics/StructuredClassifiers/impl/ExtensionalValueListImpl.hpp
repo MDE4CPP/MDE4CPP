@@ -19,7 +19,7 @@
 //*********************************
 namespace fUML::Semantics::StructuredClassifiers 
 {
-	class ExtensionalValueListImpl :virtual public ExtensionalValueImpl, virtual public ExtensionalValueList 
+	class ExtensionalValueListImpl : virtual public ExtensionalValueImpl, virtual public ExtensionalValueList 
 	{
 		public: 
 			ExtensionalValueListImpl(const ExtensionalValueListImpl & obj);
@@ -43,24 +43,19 @@ namespace fUML::Semantics::StructuredClassifiers
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual bool addValue(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue>  value) ;
 			
-			/*!
-			 */ 
+			 
 			virtual void addValue(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue>  value,int i) ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> getValue() ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::string removeValue(int i) ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> setValue(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue>  value,int i) ;
 			
 			

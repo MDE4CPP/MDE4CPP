@@ -65,19 +65,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 TimeObservationImpl::TimeObservationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	//Init references
-	
+{	
 }
 
 TimeObservationImpl::~TimeObservationImpl()
@@ -87,41 +75,36 @@ TimeObservationImpl::~TimeObservationImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+TimeObservationImpl::TimeObservationImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:TimeObservationImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			TimeObservationImpl::TimeObservationImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:TimeObservationImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
+TimeObservationImpl::TimeObservationImpl(std::weak_ptr<uml::Element > par_owner)
+:TimeObservationImpl()
+{
+	m_owner = par_owner;
+}
 
 //Additional constructor for the containments back reference
-			TimeObservationImpl::TimeObservationImpl(std::weak_ptr<uml::Element > par_owner)
-			:TimeObservationImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-//Additional constructor for the containments back reference
-			TimeObservationImpl::TimeObservationImpl(std::weak_ptr<uml::Package > par_owningPackage)
-			:TimeObservationImpl()
-			{
-			    m_owningPackage = par_owningPackage;
-				m_namespace = par_owningPackage;
-			}
-
+TimeObservationImpl::TimeObservationImpl(std::weak_ptr<uml::Package > par_owningPackage)
+:TimeObservationImpl()
+{
+	m_owningPackage = par_owningPackage;
+	m_namespace = par_owningPackage;
+}
 
 //Additional constructor for the containments back reference
-			TimeObservationImpl::TimeObservationImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
-			:TimeObservationImpl()
-			{
-			    m_owningTemplateParameter = par_owningTemplateParameter;
-				m_owner = par_owningTemplateParameter;
-			}
-
+TimeObservationImpl::TimeObservationImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+:TimeObservationImpl()
+{
+	m_owningTemplateParameter = par_owningTemplateParameter;
+	m_owner = par_owningTemplateParameter;
+}
 
 
 TimeObservationImpl::TimeObservationImpl(const TimeObservationImpl & obj):TimeObservationImpl()
@@ -188,15 +171,20 @@ std::shared_ptr<ecore::EClass> TimeObservationImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute firstEvent
+*/
+bool TimeObservationImpl::getFirstEvent() const 
+{
+	return m_firstEvent;
+}
+
 void TimeObservationImpl::setFirstEvent(bool _firstEvent)
 {
 	m_firstEvent = _firstEvent;
 } 
 
-bool TimeObservationImpl::getFirstEvent() const 
-{
-	return m_firstEvent;
-}
+
 
 //*********************************
 // Operations
@@ -205,15 +193,21 @@ bool TimeObservationImpl::getFirstEvent() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference event
+*/
 std::shared_ptr<uml::NamedElement > TimeObservationImpl::getEvent() const
 {
 //assert(m_event);
     return m_event;
 }
+
 void TimeObservationImpl::setEvent(std::shared_ptr<uml::NamedElement> _event)
 {
     m_event = _event;
 }
+
+
 
 //*********************************
 // Union Getter
@@ -222,14 +216,28 @@ std::weak_ptr<uml::Namespace > TimeObservationImpl::getNamespace() const
 {
 	return m_namespace;
 }
+
 std::shared_ptr<Union<uml::Element>> TimeObservationImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > TimeObservationImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<TimeObservation> TimeObservationImpl::getThisTimeObservationPtr() const

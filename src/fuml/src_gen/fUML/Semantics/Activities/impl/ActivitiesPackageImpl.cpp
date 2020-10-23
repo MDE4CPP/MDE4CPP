@@ -125,7 +125,15 @@ std::shared_ptr<ecore::EReference> ActivitiesPackageImpl::getActivityExecution_A
 {
 	return m_activityExecution_Attribute_activationGroup;
 }
+std::shared_ptr<ecore::EReference> ActivitiesPackageImpl::getActivityExecution_Attribute_activity() const
+{
+	return m_activityExecution_Attribute_activity;
+}
 
+std::shared_ptr<ecore::EOperation> ActivitiesPackageImpl::getActivityExecution_Operation__copy() const
+{
+	return m_activityExecution_Operation__copy;
+}
 std::shared_ptr<ecore::EOperation> ActivitiesPackageImpl::getActivityExecution_Operation_execute() const
 {
 	return m_activityExecution_Operation_execute;
@@ -469,13 +477,13 @@ std::shared_ptr<ecore::EClass> ActivitiesPackageImpl::getControlToken_Class() co
 
 
 
+std::shared_ptr<ecore::EOperation> ActivitiesPackageImpl::getControlToken_Operation__copy() const
+{
+	return m_controlToken_Operation__copy;
+}
 std::shared_ptr<ecore::EOperation> ActivitiesPackageImpl::getControlToken_Operation_equals_Token() const
 {
 	return m_controlToken_Operation_equals_Token;
-}
-std::shared_ptr<ecore::EOperation> ActivitiesPackageImpl::getControlToken_Operation_getValue() const
-{
-	return m_controlToken_Operation_getValue;
 }
 std::shared_ptr<ecore::EOperation> ActivitiesPackageImpl::getControlToken_Operation_isControl() const
 {
@@ -513,6 +521,10 @@ std::shared_ptr<ecore::EClass> ActivitiesPackageImpl::getDecisionNodeActivation_
 std::shared_ptr<ecore::EReference> ActivitiesPackageImpl::getDecisionNodeActivation_Attribute_decisionInputExecution() const
 {
 	return m_decisionNodeActivation_Attribute_decisionInputExecution;
+}
+std::shared_ptr<ecore::EReference> ActivitiesPackageImpl::getDecisionNodeActivation_Attribute_decisionNode() const
+{
+	return m_decisionNodeActivation_Attribute_decisionNode;
 }
 
 std::shared_ptr<ecore::EOperation> ActivitiesPackageImpl::getDecisionNodeActivation_Operation_executeDecisionInputBehavior_Value_Value() const
@@ -769,6 +781,10 @@ std::shared_ptr<ecore::EReference> ActivitiesPackageImpl::getForkedToken_Attribu
 	return m_forkedToken_Attribute_baseToken;
 }
 
+std::shared_ptr<ecore::EOperation> ActivitiesPackageImpl::getForkedToken_Operation__copy() const
+{
+	return m_forkedToken_Operation__copy;
+}
 std::shared_ptr<ecore::EOperation> ActivitiesPackageImpl::getForkedToken_Operation_equals_Token() const
 {
 	return m_forkedToken_Operation_equals_Token;
@@ -904,6 +920,10 @@ std::shared_ptr<ecore::EReference> ActivitiesPackageImpl::getObjectToken_Attribu
 	return m_objectToken_Attribute_value;
 }
 
+std::shared_ptr<ecore::EOperation> ActivitiesPackageImpl::getObjectToken_Operation__copy() const
+{
+	return m_objectToken_Operation__copy;
+}
 std::shared_ptr<ecore::EOperation> ActivitiesPackageImpl::getObjectToken_Operation_equals_Token() const
 {
 	return m_objectToken_Operation_equals_Token;
@@ -966,6 +986,10 @@ std::shared_ptr<ecore::EReference> ActivitiesPackageImpl::getToken_Attribute_hol
 	return m_token_Attribute_holder;
 }
 
+std::shared_ptr<ecore::EOperation> ActivitiesPackageImpl::getToken_Operation__copy() const
+{
+	return m_token_Operation__copy;
+}
 std::shared_ptr<ecore::EOperation> ActivitiesPackageImpl::getToken_Operation_equals_Token() const
 {
 	return m_token_Operation_equals_Token;

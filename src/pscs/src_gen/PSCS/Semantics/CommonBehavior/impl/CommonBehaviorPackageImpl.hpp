@@ -44,7 +44,7 @@ namespace PSCS::Semantics::CommonBehavior
 			
 			virtual std::shared_ptr<ecore::EReference> getCS_CallEventExecution_Attribute_interactionPoint() const ;
 			
-			virtual std::shared_ptr<ecore::EOperation> getCS_CallEventExecution_Operation_copy() const ;
+			virtual std::shared_ptr<ecore::EOperation> getCS_CallEventExecution_Operation__copy() const ;
 			virtual std::shared_ptr<ecore::EOperation> getCS_CallEventExecution_Operation_createEventOccurrence() const ;
 			virtual std::shared_ptr<ecore::EOperation> getCS_CallEventExecution_Operation_new_() const ;
 			
@@ -77,7 +77,7 @@ namespace PSCS::Semantics::CommonBehavior
 			
 			std::shared_ptr<ecore::EAttribute> m_cS_EventOccurrence_Attribute_propagationInward = nullptr;
 			std::shared_ptr<ecore::EReference> m_cS_CallEventExecution_Attribute_interactionPoint = nullptr;std::shared_ptr<ecore::EReference> m_cS_EventOccurrence_Attribute_interactionPoint = nullptr;std::shared_ptr<ecore::EReference> m_cS_EventOccurrence_Attribute_onPort = nullptr;std::shared_ptr<ecore::EReference> m_cS_EventOccurrence_Attribute_wrappedEventOccurrence = nullptr;
-			std::shared_ptr<ecore::EOperation> m_cS_CallEventExecution_Operation_copy = nullptr;std::shared_ptr<ecore::EOperation> m_cS_CallEventExecution_Operation_createEventOccurrence = nullptr;std::shared_ptr<ecore::EOperation> m_cS_EventOccurrence_Operation_doSend = nullptr;std::shared_ptr<ecore::EOperation> m_cS_EventOccurrence_Operation_getParameterValues = nullptr;std::shared_ptr<ecore::EOperation> m_cS_EventOccurrence_Operation_match_Trigger = nullptr;std::shared_ptr<ecore::EOperation> m_cS_CallEventExecution_Operation_new_ = nullptr;std::shared_ptr<ecore::EOperation> m_cS_EventOccurrence_Operation_sendInTo_CS_Reference_Port = nullptr;std::shared_ptr<ecore::EOperation> m_cS_EventOccurrence_Operation_sendOutTo_CS_Reference_Port = nullptr;
+			std::shared_ptr<ecore::EOperation> m_cS_CallEventExecution_Operation__copy = nullptr;std::shared_ptr<ecore::EOperation> m_cS_CallEventExecution_Operation_createEventOccurrence = nullptr;std::shared_ptr<ecore::EOperation> m_cS_EventOccurrence_Operation_doSend = nullptr;std::shared_ptr<ecore::EOperation> m_cS_EventOccurrence_Operation_getParameterValues = nullptr;std::shared_ptr<ecore::EOperation> m_cS_EventOccurrence_Operation_match_Trigger = nullptr;std::shared_ptr<ecore::EOperation> m_cS_CallEventExecution_Operation_new_ = nullptr;std::shared_ptr<ecore::EOperation> m_cS_EventOccurrence_Operation_sendInTo_CS_Reference_Port = nullptr;std::shared_ptr<ecore::EOperation> m_cS_EventOccurrence_Operation_sendOutTo_CS_Reference_Port = nullptr;
 
 			friend class CommonBehaviorPackage;
 

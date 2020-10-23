@@ -102,20 +102,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 DeploymentSpecificationImpl::DeploymentSpecificationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	//Init references
-	
+{	
 }
 
 DeploymentSpecificationImpl::~DeploymentSpecificationImpl()
@@ -125,32 +112,28 @@ DeploymentSpecificationImpl::~DeploymentSpecificationImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+DeploymentSpecificationImpl::DeploymentSpecificationImpl(std::weak_ptr<uml::Deployment > par_deployment)
+:DeploymentSpecificationImpl()
+{
+	m_deployment = par_deployment;
+	m_owner = par_deployment;
+}
 
 //Additional constructor for the containments back reference
-			DeploymentSpecificationImpl::DeploymentSpecificationImpl(std::weak_ptr<uml::Deployment > par_deployment)
-			:DeploymentSpecificationImpl()
-			{
-			    m_deployment = par_deployment;
-				m_owner = par_deployment;
-			}
-
-
-//Additional constructor for the containments back reference
-			DeploymentSpecificationImpl::DeploymentSpecificationImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:DeploymentSpecificationImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
+DeploymentSpecificationImpl::DeploymentSpecificationImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:DeploymentSpecificationImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			DeploymentSpecificationImpl::DeploymentSpecificationImpl(std::weak_ptr<uml::Element > par_owner)
-			:DeploymentSpecificationImpl()
-			{
-			    m_owner = par_owner;
-			}
-
+DeploymentSpecificationImpl::DeploymentSpecificationImpl(std::weak_ptr<uml::Element > par_owner)
+:DeploymentSpecificationImpl()
+{
+	m_owner = par_owner;
+}
 
 //Additional constructor for the containments back reference
 DeploymentSpecificationImpl::DeploymentSpecificationImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id)
@@ -172,17 +155,13 @@ DeploymentSpecificationImpl::DeploymentSpecificationImpl(std::weak_ptr<uml::Pack
    
 }
 
-
 //Additional constructor for the containments back reference
-			DeploymentSpecificationImpl::DeploymentSpecificationImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
-			:DeploymentSpecificationImpl()
-			{
-			    m_owningTemplateParameter = par_owningTemplateParameter;
-				m_owner = par_owningTemplateParameter;
-			}
-
-
-//Additional constructor for the containments back reference
+DeploymentSpecificationImpl::DeploymentSpecificationImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+:DeploymentSpecificationImpl()
+{
+	m_owningTemplateParameter = par_owningTemplateParameter;
+	m_owner = par_owningTemplateParameter;
+}
 
 
 
@@ -409,14 +388,27 @@ std::shared_ptr<ecore::EClass> DeploymentSpecificationImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute deploymentLocation
+*/
+std::string DeploymentSpecificationImpl::getDeploymentLocation() const 
+{
+	return m_deploymentLocation;
+}
+
 void DeploymentSpecificationImpl::setDeploymentLocation(std::string _deploymentLocation)
 {
 	m_deploymentLocation = _deploymentLocation;
 } 
 
-std::string DeploymentSpecificationImpl::getDeploymentLocation() const 
+
+
+/*
+Getter & Setter for attribute executionLocation
+*/
+std::string DeploymentSpecificationImpl::getExecutionLocation() const 
 {
-	return m_deploymentLocation;
+	return m_executionLocation;
 }
 
 void DeploymentSpecificationImpl::setExecutionLocation(std::string _executionLocation)
@@ -424,10 +416,7 @@ void DeploymentSpecificationImpl::setExecutionLocation(std::string _executionLoc
 	m_executionLocation = _executionLocation;
 } 
 
-std::string DeploymentSpecificationImpl::getExecutionLocation() const 
-{
-	return m_executionLocation;
-}
+
 
 //*********************************
 // Operations
@@ -447,51 +436,141 @@ bool DeploymentSpecificationImpl::deployment_target(Any diagnostics,std::map <  
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference deployment
+*/
 std::weak_ptr<uml::Deployment > DeploymentSpecificationImpl::getDeployment() const
 {
 
     return m_deployment;
 }
+
 void DeploymentSpecificationImpl::setDeployment(std::shared_ptr<uml::Deployment> _deployment)
 {
     m_deployment = _deployment;
 }
+
+
 
 //*********************************
 // Union Getter
 //*********************************
 std::shared_ptr<SubsetUnion<uml::Property, uml::Feature>> DeploymentSpecificationImpl::getAttribute() const
 {
+	if(m_attribute == nullptr)
+	{
+		/*SubsetUnion*/
+		m_attribute.reset(new SubsetUnion<uml::Property, uml::Feature >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_attribute - SubsetUnion<uml::Property, uml::Feature >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_attribute->initSubsetUnion(getFeature());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_attribute - SubsetUnion<uml::Property, uml::Feature >(getFeature())" << std::endl;
+		#endif
+		
+	}
 	return m_attribute;
 }
+
 std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement>> DeploymentSpecificationImpl::getFeature() const
 {
+	if(m_feature == nullptr)
+	{
+		/*SubsetUnion*/
+		m_feature.reset(new SubsetUnion<uml::Feature, uml::NamedElement >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_feature - SubsetUnion<uml::Feature, uml::NamedElement >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_feature->initSubsetUnion(getMember());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_feature - SubsetUnion<uml::Feature, uml::NamedElement >(getMember())" << std::endl;
+		#endif
+		
+	}
 	return m_feature;
 }
+
 std::shared_ptr<Union<uml::NamedElement>> DeploymentSpecificationImpl::getMember() const
 {
+	if(m_member == nullptr)
+	{
+		/*Union*/
+		m_member.reset(new Union<uml::NamedElement>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_member - Union<uml::NamedElement>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_member;
 }
+
 std::weak_ptr<uml::Namespace > DeploymentSpecificationImpl::getNamespace() const
 {
 	return m_namespace;
 }
+
 std::shared_ptr<Union<uml::Element>> DeploymentSpecificationImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> DeploymentSpecificationImpl::getOwnedMember() const
 {
+	if(m_ownedMember == nullptr)
+	{
+		/*SubsetUnion*/
+		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_ownedMember->initSubsetUnion(getOwnedElement(),getMember());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >(getOwnedElement(),getMember())" << std::endl;
+		#endif
+		
+	}
 	return m_ownedMember;
 }
+
 std::weak_ptr<uml::Element > DeploymentSpecificationImpl::getOwner() const
 {
 	return m_owner;
 }
+
 std::shared_ptr<Union<uml::RedefinableElement>> DeploymentSpecificationImpl::getRedefinedElement() const
 {
+	if(m_redefinedElement == nullptr)
+	{
+		/*Union*/
+		m_redefinedElement.reset(new Union<uml::RedefinableElement>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_redefinedElement - Union<uml::RedefinableElement>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_redefinedElement;
 }
+
+
 
 
 std::shared_ptr<DeploymentSpecification> DeploymentSpecificationImpl::getThisDeploymentSpecificationPtr() const

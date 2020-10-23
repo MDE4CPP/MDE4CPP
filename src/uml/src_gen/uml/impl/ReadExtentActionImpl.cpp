@@ -86,23 +86,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 ReadExtentActionImpl::ReadExtentActionImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	
-
-	//Init references
-	
-
-	
+{	
 }
 
 ReadExtentActionImpl::~ReadExtentActionImpl()
@@ -112,41 +96,36 @@ ReadExtentActionImpl::~ReadExtentActionImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+ReadExtentActionImpl::ReadExtentActionImpl(std::weak_ptr<uml::Activity > par_activity)
+:ReadExtentActionImpl()
+{
+	m_activity = par_activity;
+	m_owner = par_activity;
+}
 
 //Additional constructor for the containments back reference
-			ReadExtentActionImpl::ReadExtentActionImpl(std::weak_ptr<uml::Activity > par_activity)
-			:ReadExtentActionImpl()
-			{
-			    m_activity = par_activity;
-				m_owner = par_activity;
-			}
-
-
-//Additional constructor for the containments back reference
-			ReadExtentActionImpl::ReadExtentActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
-			:ReadExtentActionImpl()
-			{
-			    m_inStructuredNode = par_inStructuredNode;
-				m_owner = par_inStructuredNode;
-			}
-
+ReadExtentActionImpl::ReadExtentActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
+:ReadExtentActionImpl()
+{
+	m_inStructuredNode = par_inStructuredNode;
+	m_owner = par_inStructuredNode;
+}
 
 //Additional constructor for the containments back reference
-			ReadExtentActionImpl::ReadExtentActionImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:ReadExtentActionImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
+ReadExtentActionImpl::ReadExtentActionImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:ReadExtentActionImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			ReadExtentActionImpl::ReadExtentActionImpl(std::weak_ptr<uml::Element > par_owner)
-			:ReadExtentActionImpl()
-			{
-			    m_owner = par_owner;
-			}
-
+ReadExtentActionImpl::ReadExtentActionImpl(std::weak_ptr<uml::Element > par_owner)
+:ReadExtentActionImpl()
+{
+	m_owner = par_owner;
+}
 
 
 ReadExtentActionImpl::ReadExtentActionImpl(const ReadExtentActionImpl & obj):ReadExtentActionImpl()
@@ -304,49 +283,112 @@ bool ReadExtentActionImpl::type_is_classifier(Any diagnostics,std::map <   Any, 
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference classifier
+*/
 std::shared_ptr<uml::Classifier > ReadExtentActionImpl::getClassifier() const
 {
 //assert(m_classifier);
     return m_classifier;
 }
+
 void ReadExtentActionImpl::setClassifier(std::shared_ptr<uml::Classifier> _classifier)
 {
     m_classifier = _classifier;
 }
 
+
+
+/*
+Getter & Setter for reference result
+*/
 std::shared_ptr<uml::OutputPin > ReadExtentActionImpl::getResult() const
 {
 //assert(m_result);
     return m_result;
 }
+
 void ReadExtentActionImpl::setResult(std::shared_ptr<uml::OutputPin> _result)
 {
     m_result = _result;
 }
+
+
 
 //*********************************
 // Union Getter
 //*********************************
 std::shared_ptr<Union<uml::ActivityGroup>> ReadExtentActionImpl::getInGroup() const
 {
+	if(m_inGroup == nullptr)
+	{
+		/*Union*/
+		m_inGroup.reset(new Union<uml::ActivityGroup>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_inGroup - Union<uml::ActivityGroup>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_inGroup;
 }
+
 std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element>> ReadExtentActionImpl::getOutput() const
 {
+	if(m_output == nullptr)
+	{
+		/*SubsetUnion*/
+		m_output.reset(new SubsetUnion<uml::OutputPin, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_output - SubsetUnion<uml::OutputPin, uml::Element >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_output->initSubsetUnion(getOwnedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_output - SubsetUnion<uml::OutputPin, uml::Element >(getOwnedElement())" << std::endl;
+		#endif
+		
+	}
 	return m_output;
 }
+
 std::shared_ptr<Union<uml::Element>> ReadExtentActionImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > ReadExtentActionImpl::getOwner() const
 {
 	return m_owner;
 }
+
 std::shared_ptr<Union<uml::RedefinableElement>> ReadExtentActionImpl::getRedefinedElement() const
 {
+	if(m_redefinedElement == nullptr)
+	{
+		/*Union*/
+		m_redefinedElement.reset(new Union<uml::RedefinableElement>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_redefinedElement - Union<uml::RedefinableElement>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_redefinedElement;
 }
+
+
 
 
 std::shared_ptr<ReadExtentAction> ReadExtentActionImpl::getThisReadExtentActionPtr() const

@@ -82,26 +82,7 @@ using namespace fUML::Semantics::StructuredClassifiers;
 // Constructor / Destructor
 //*********************************
 ObjectImpl::ObjectImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-		m_types.reset(new Bag<uml::Classifier>());
-	
-	
-
-	//Init references
-	
-
-	
-	
+{	
 }
 
 ObjectImpl::~ObjectImpl()
@@ -110,7 +91,6 @@ ObjectImpl::~ObjectImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Object "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -169,6 +149,28 @@ std::shared_ptr<ecore::EClass> ObjectImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
+std::shared_ptr<fUML::Semantics::Values::Value> ObjectImpl::_copy()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Create a new object that is a copy of this object at the same locus as this object.
+// However, the new object will NOT have any object activation (i.e, its classifier behaviors will not be started).
+
+std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> newObject = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Object>(fUML::Semantics::StructuredClassifiers::ExtensionalValueImpl::_copy());
+
+std::shared_ptr<Bag<uml::Classifier>> types = this->getTypes();
+unsigned int typesSize = types->size();
+
+for(unsigned int i = 0; i < typesSize; i++)
+{
+	std::shared_ptr<uml::Classifier> type = types->at(i);
+	newObject->getTypes()->add(type);
+}
+
+return newObject;
+	//end of body
+}
+
 void ObjectImpl::_register(std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter>  accepter)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
@@ -259,26 +261,45 @@ void ObjectImpl::unregister(std::shared_ptr<fUML::Semantics::CommonBehavior::Eve
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference objectActivation
+*/
 std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation > ObjectImpl::getObjectActivation() const
 {
 
     return m_objectActivation;
 }
+
 void ObjectImpl::setObjectActivation(std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> _objectActivation)
 {
     m_objectActivation = _objectActivation;
 }
 
+
+
+/*
+Getter & Setter for reference types
+*/
 std::shared_ptr<Bag<uml::Classifier>> ObjectImpl::getTypes() const
 {
+	if(m_types == nullptr)
+	{
+		m_types.reset(new Bag<uml::Classifier>());
+		
+		
+	}
 
     return m_types;
 }
 
 
+
+
+
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<Object> ObjectImpl::getThisObjectPtr() const

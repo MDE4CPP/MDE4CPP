@@ -57,34 +57,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 ExceptionHandlerImpl::ExceptionHandlerImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-		m_exceptionType.reset(new Bag<uml::Classifier>());
-	
-	
-
-	
-
-	
-
-	//Init references
-	
-
-	
-	
-
-	
-
-	
+{	
 }
 
 ExceptionHandlerImpl::~ExceptionHandlerImpl()
@@ -94,23 +67,20 @@ ExceptionHandlerImpl::~ExceptionHandlerImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+ExceptionHandlerImpl::ExceptionHandlerImpl(std::weak_ptr<uml::Element > par_owner)
+:ExceptionHandlerImpl()
+{
+	m_owner = par_owner;
+}
 
 //Additional constructor for the containments back reference
-			ExceptionHandlerImpl::ExceptionHandlerImpl(std::weak_ptr<uml::Element > par_owner)
-			:ExceptionHandlerImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-//Additional constructor for the containments back reference
-			ExceptionHandlerImpl::ExceptionHandlerImpl(std::weak_ptr<uml::ExecutableNode > par_protectedNode)
-			:ExceptionHandlerImpl()
-			{
-			    m_protectedNode = par_protectedNode;
-				m_owner = par_protectedNode;
-			}
-
+ExceptionHandlerImpl::ExceptionHandlerImpl(std::weak_ptr<uml::ExecutableNode > par_protectedNode)
+:ExceptionHandlerImpl()
+{
+	m_protectedNode = par_protectedNode;
+	m_owner = par_protectedNode;
+}
 
 
 ExceptionHandlerImpl::ExceptionHandlerImpl(const ExceptionHandlerImpl & obj):ExceptionHandlerImpl()
@@ -205,54 +175,97 @@ bool ExceptionHandlerImpl::output_pins(Any diagnostics,std::map <   Any, Any >  
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference exceptionInput
+*/
 std::shared_ptr<uml::ObjectNode > ExceptionHandlerImpl::getExceptionInput() const
 {
 //assert(m_exceptionInput);
     return m_exceptionInput;
 }
+
 void ExceptionHandlerImpl::setExceptionInput(std::shared_ptr<uml::ObjectNode> _exceptionInput)
 {
     m_exceptionInput = _exceptionInput;
 }
 
+
+
+/*
+Getter & Setter for reference exceptionType
+*/
 std::shared_ptr<Bag<uml::Classifier>> ExceptionHandlerImpl::getExceptionType() const
 {
+	if(m_exceptionType == nullptr)
+	{
+		m_exceptionType.reset(new Bag<uml::Classifier>());
+		
+		
+	}
 //assert(m_exceptionType);
     return m_exceptionType;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference handlerBody
+*/
 std::shared_ptr<uml::ExecutableNode > ExceptionHandlerImpl::getHandlerBody() const
 {
 //assert(m_handlerBody);
     return m_handlerBody;
 }
+
 void ExceptionHandlerImpl::setHandlerBody(std::shared_ptr<uml::ExecutableNode> _handlerBody)
 {
     m_handlerBody = _handlerBody;
 }
 
+
+
+/*
+Getter & Setter for reference protectedNode
+*/
 std::weak_ptr<uml::ExecutableNode > ExceptionHandlerImpl::getProtectedNode() const
 {
 //assert(m_protectedNode);
     return m_protectedNode;
 }
+
 void ExceptionHandlerImpl::setProtectedNode(std::shared_ptr<uml::ExecutableNode> _protectedNode)
 {
     m_protectedNode = _protectedNode;
 }
+
+
 
 //*********************************
 // Union Getter
 //*********************************
 std::shared_ptr<Union<uml::Element>> ExceptionHandlerImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > ExceptionHandlerImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<ExceptionHandler> ExceptionHandlerImpl::getThisExceptionHandlerPtr() const

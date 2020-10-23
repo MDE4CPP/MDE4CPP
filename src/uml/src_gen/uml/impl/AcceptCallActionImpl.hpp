@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class AcceptCallActionImpl :virtual public AcceptEventActionImpl, virtual public AcceptCallAction 
+	class AcceptCallActionImpl : virtual public AcceptEventActionImpl, virtual public AcceptCallAction 
 	{
 		public: 
 			AcceptCallActionImpl(const AcceptCallActionImpl & obj);
@@ -59,24 +59,30 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 The number of result OutputPins must be the same as the number of input (in and inout) ownedParameters of the Operation specified by the trigger Event. The type, ordering and multiplicity of each result OutputPin must be consistent with the corresponding input Parameter.
+			The number of result OutputPins must be the same as the number of input (in and inout) ownedParameters of the Operation specified by the trigger Event. The type, ordering and multiplicity of each result OutputPin must be consistent with the corresponding input Parameter.
 			let parameter: OrderedSet(Parameter) = trigger.event->asSequence()->first().oclAsType(CallEvent).operation.inputParameters() in
 			result->size() = parameter->size() and
 			Sequence{1..result->size()}->forAll(i | 
 				parameter->at(i).type.conformsTo(result->at(i).type) and 
 				parameter->at(i).isOrdered = result->at(i).isOrdered and
-				parameter->at(i).compatibleWith(result->at(i))) */ 
+				parameter->at(i).compatibleWith(result->at(i)))
+			*/
+			 
 			virtual bool result_pins(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
-			 The action must have exactly one trigger, which must be for a CallEvent.
+			The action must have exactly one trigger, which must be for a CallEvent.
 			trigger->size()=1 and
-			trigger->asSequence()->first().event.oclIsKindOf(CallEvent) */ 
+			trigger->asSequence()->first().event.oclIsKindOf(CallEvent)
+			*/
+			 
 			virtual bool trigger_call_event(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
-			 isUnmrashall must be true for an AcceptCallAction.
-			isUnmarshall = true */ 
+			isUnmrashall must be true for an AcceptCallAction.
+			isUnmarshall = true
+			*/
+			 
 			virtual bool unmarshall(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
@@ -90,34 +96,49 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 An OutputPin where a value is placed containing sufficient information to perform a subsequent ReplyAction and return control to the caller. The contents of this value are opaque. It can be passed and copied but it cannot be manipulated by the model.
-			<p>From package UML::Actions.</p> */
+			An OutputPin where a value is placed containing sufficient information to perform a subsequent ReplyAction and return control to the caller. The contents of this value are opaque. It can be passed and copied but it cannot be manipulated by the model.
+			<p>From package UML::Actions.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::OutputPin > getReturnInformation() const ;
 			
 			/*!
-			 An OutputPin where a value is placed containing sufficient information to perform a subsequent ReplyAction and return control to the caller. The contents of this value are opaque. It can be passed and copied but it cannot be manipulated by the model.
-			<p>From package UML::Actions.</p> */
-			virtual void setReturnInformation(std::shared_ptr<uml::OutputPin> _returnInformation_returnInformation) ;
+			An OutputPin where a value is placed containing sufficient information to perform a subsequent ReplyAction and return control to the caller. The contents of this value are opaque. It can be passed and copied but it cannot be manipulated by the model.
+			<p>From package UML::Actions.</p>
+			*/
+			
+			virtual void setReturnInformation(std::shared_ptr<uml::OutputPin> _returnInformation) ;
+			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
+			ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::ActivityGroup>> getInGroup() const ;/*!
-			 The ordered set of OutputPins representing outputs from the Action.
-			<p>From package UML::Actions.</p> */
+			The ordered set of OutputPins representing outputs from the Action.
+			<p>From package UML::Actions.</p>
+			*/
+			
 			virtual std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element>> getOutput() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
+			The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const ; 
 			 
 			//*********************************

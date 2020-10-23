@@ -38,6 +38,8 @@
 
 #include <exception> // used in Persistence
 
+#include "uml/Action.hpp"
+
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 
 #include "uml/ActivityNode.hpp"
@@ -50,6 +52,8 @@
 
 #include "fUML/Semantics/Actions/PinActivation.hpp"
 
+#include "uml/ReadSelfAction.hpp"
+
 #include "fUML/Semantics/Actions/ReadSelfActionActivation.hpp"
 
 #include "fUML/Semantics/Activities/Token.hpp"
@@ -58,10 +62,10 @@
 #include "PSCS/Semantics/Actions/impl/ActionsFactoryImpl.hpp"
 #include "PSCS/Semantics/Actions/impl/ActionsPackageImpl.hpp"
 
-#include "PSCS/PSCSFactory.hpp"
-#include "PSCS/PSCSPackage.hpp"
 #include "PSCS/Semantics/SemanticsFactory.hpp"
 #include "PSCS/Semantics/SemanticsPackage.hpp"
+#include "PSCS/PSCSFactory.hpp"
+#include "PSCS/PSCSPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -72,17 +76,7 @@ using namespace PSCS::Semantics::Actions;
 // Constructor / Destructor
 //*********************************
 CS_ReadSelfActionActivationImpl::CS_ReadSelfActionActivationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 CS_ReadSelfActionActivationImpl::~CS_ReadSelfActionActivationImpl()
@@ -92,14 +86,12 @@ CS_ReadSelfActionActivationImpl::~CS_ReadSelfActionActivationImpl()
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			CS_ReadSelfActionActivationImpl::CS_ReadSelfActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
-			:CS_ReadSelfActionActivationImpl()
-			{
-			    m_group = par_group;
-			}
-
+CS_ReadSelfActionActivationImpl::CS_ReadSelfActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
+:CS_ReadSelfActionActivationImpl()
+{
+	m_group = par_group;
+}
 
 
 CS_ReadSelfActionActivationImpl::CS_ReadSelfActionActivationImpl(const CS_ReadSelfActionActivationImpl & obj):CS_ReadSelfActionActivationImpl()
@@ -113,6 +105,8 @@ CS_ReadSelfActionActivationImpl::CS_ReadSelfActionActivationImpl(const CS_ReadSe
 
 	//copy references with no containment (soft copy)
 	
+	m_action  = obj.getAction();
+
 	m_group  = obj.getGroup();
 
 	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> _incomingEdges = obj.getIncomingEdges();
@@ -125,6 +119,8 @@ CS_ReadSelfActionActivationImpl::CS_ReadSelfActionActivationImpl(const CS_ReadSe
 
 	std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> _pinActivation = obj.getPinActivation();
 	m_pinActivation.reset(new Union<fUML::Semantics::Actions::PinActivation>(*(obj.getPinActivation().get())));
+
+	m_readSelfAction  = obj.getReadSelfAction();
 
 
 	//Clone references with containment (deep copy)
@@ -196,7 +192,7 @@ void CS_ReadSelfActionActivationImpl::doAction()
 	
 	//DEBUG_MESSAGE(std::cout << "[ReadSelfActionActivation] context object = " << context->getReferent()->toString() << std::endl;)
 	
-	std::shared_ptr<uml::OutputPin> resultPin = (std::dynamic_pointer_cast<uml::ReadSelfAction>(this->getNode()))->getResult();
+	std::shared_ptr<uml::OutputPin> resultPin = this->getReadSelfAction()->getResult();
 	this->putToken(resultPin, context);
 	//end of body
 }
@@ -210,8 +206,20 @@ void CS_ReadSelfActionActivationImpl::doAction()
 //*********************************
 std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> CS_ReadSelfActionActivationImpl::getPinActivation() const
 {
+	if(m_pinActivation == nullptr)
+	{
+		/*Union*/
+		m_pinActivation.reset(new Union<fUML::Semantics::Actions::PinActivation>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_pinActivation - Union<fUML::Semantics::Actions::PinActivation>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_pinActivation;
 }
+
+
 
 
 std::shared_ptr<CS_ReadSelfActionActivation> CS_ReadSelfActionActivationImpl::getThisCS_ReadSelfActionActivationPtr() const

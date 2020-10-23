@@ -70,8 +70,7 @@ namespace fUML::Semantics::Activities
 //*********************************
 namespace fUML::Semantics::Activities 
 {
-	/*!
-	 */
+	
 	class DataStoreNodeActivation:virtual public CentralBufferNodeActivation
 	{
 		public:
@@ -91,12 +90,10 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual void addToken(std::shared_ptr<fUML::Semantics::Activities::Token>  token) = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual int removeToken(std::shared_ptr<fUML::Semantics::Activities::Token>  token) = 0;
 			
 			

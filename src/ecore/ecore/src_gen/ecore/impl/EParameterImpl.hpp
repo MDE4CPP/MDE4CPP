@@ -18,7 +18,7 @@
 //*********************************
 namespace ecore 
 {
-	class EParameterImpl :virtual public ETypedElementImpl, virtual public EParameter 
+	class EParameterImpl : virtual public ETypedElementImpl, virtual public EParameter 
 	{
 		public: 
 			EParameterImpl(const EParameterImpl & obj);
@@ -60,17 +60,16 @@ namespace ecore
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::weak_ptr<ecore::EOperation > getEOperation() const ;
+			
 			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const ; 
 			 
 			//*********************************

@@ -39,6 +39,8 @@
 
 #include "fUML/Semantics/Actions/AcceptEventActionEventAccepter.hpp"
 
+#include "uml/Action.hpp"
+
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 
 #include "uml/ActivityNode.hpp"
@@ -59,10 +61,10 @@
 #include "PSCS/Semantics/Actions/impl/ActionsFactoryImpl.hpp"
 #include "PSCS/Semantics/Actions/impl/ActionsPackageImpl.hpp"
 
-#include "PSCS/PSCSFactory.hpp"
-#include "PSCS/PSCSPackage.hpp"
 #include "PSCS/Semantics/SemanticsFactory.hpp"
 #include "PSCS/Semantics/SemanticsPackage.hpp"
+#include "PSCS/PSCSFactory.hpp"
+#include "PSCS/PSCSPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -73,17 +75,7 @@ using namespace PSCS::Semantics::Actions;
 // Constructor / Destructor
 //*********************************
 CS_AcceptCallActionActivationImpl::CS_AcceptCallActionActivationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 CS_AcceptCallActionActivationImpl::~CS_AcceptCallActionActivationImpl()
@@ -93,14 +85,12 @@ CS_AcceptCallActionActivationImpl::~CS_AcceptCallActionActivationImpl()
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			CS_AcceptCallActionActivationImpl::CS_AcceptCallActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
-			:CS_AcceptCallActionActivationImpl()
-			{
-			    m_group = par_group;
-			}
-
+CS_AcceptCallActionActivationImpl::CS_AcceptCallActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
+:CS_AcceptCallActionActivationImpl()
+{
+	m_group = par_group;
+}
 
 
 CS_AcceptCallActionActivationImpl::CS_AcceptCallActionActivationImpl(const CS_AcceptCallActionActivationImpl & obj):CS_AcceptCallActionActivationImpl()
@@ -115,6 +105,8 @@ CS_AcceptCallActionActivationImpl::CS_AcceptCallActionActivationImpl(const CS_Ac
 
 	//copy references with no containment (soft copy)
 	
+	m_action  = obj.getAction();
+
 	m_eventAccepter  = obj.getEventAccepter();
 
 	m_group  = obj.getGroup();
@@ -204,8 +196,20 @@ void CS_AcceptCallActionActivationImpl::accept(std::shared_ptr<fUML::Semantics::
 //*********************************
 std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> CS_AcceptCallActionActivationImpl::getPinActivation() const
 {
+	if(m_pinActivation == nullptr)
+	{
+		/*Union*/
+		m_pinActivation.reset(new Union<fUML::Semantics::Actions::PinActivation>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_pinActivation - Union<fUML::Semantics::Actions::PinActivation>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_pinActivation;
 }
+
+
 
 
 std::shared_ptr<CS_AcceptCallActionActivation> CS_AcceptCallActionActivationImpl::getThisCS_AcceptCallActionActivationPtr() const

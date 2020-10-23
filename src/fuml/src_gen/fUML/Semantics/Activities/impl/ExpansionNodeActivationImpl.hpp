@@ -19,7 +19,7 @@
 //*********************************
 namespace fUML::Semantics::Activities 
 {
-	class ExpansionNodeActivationImpl :virtual public ObjectNodeActivationImpl, virtual public ExpansionNodeActivation 
+	class ExpansionNodeActivationImpl : virtual public ObjectNodeActivationImpl, virtual public ExpansionNodeActivation 
 	{
 		public: 
 			ExpansionNodeActivationImpl(const ExpansionNodeActivationImpl & obj);
@@ -47,20 +47,16 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual void fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token> >  incomingTokens) ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<fUML::Semantics::Activities::ExpansionRegionActivation> getExpansionRegionActivation() ;
 			
-			/*!
-			 */ 
+			 
 			virtual bool isReady() ;
 			
-			/*!
-			 */ 
+			 
 			virtual void receiveOffer() ;
 			
 			

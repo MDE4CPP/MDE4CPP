@@ -46,10 +46,10 @@
 #include "PSCS/Semantics/StructuredClassifiers/impl/StructuredClassifiersFactoryImpl.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/impl/StructuredClassifiersPackageImpl.hpp"
 
-#include "PSCS/PSCSFactory.hpp"
-#include "PSCS/PSCSPackage.hpp"
 #include "PSCS/Semantics/SemanticsFactory.hpp"
 #include "PSCS/Semantics/SemanticsPackage.hpp"
+#include "PSCS/PSCSFactory.hpp"
+#include "PSCS/PSCSPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -60,17 +60,7 @@ using namespace PSCS::Semantics::StructuredClassifiers;
 // Constructor / Destructor
 //*********************************
 CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl::CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl::~CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl()
@@ -79,7 +69,6 @@ CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl::~CS_NameBased_Struc
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete CS_NameBased_StructuralFeatureOfInterfaceAccessStrategy "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -173,6 +162,7 @@ void CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl::write(std::sha
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<CS_NameBased_StructuralFeatureOfInterfaceAccessStrategy> CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl::getThisCS_NameBased_StructuralFeatureOfInterfaceAccessStrategyPtr() const

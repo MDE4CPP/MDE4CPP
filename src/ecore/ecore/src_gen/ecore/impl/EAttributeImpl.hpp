@@ -18,7 +18,7 @@
 //*********************************
 namespace ecore 
 {
-	class EAttributeImpl :virtual public EStructuralFeatureImpl, virtual public EAttribute 
+	class EAttributeImpl : virtual public EStructuralFeatureImpl, virtual public EAttribute 
 	{
 		public: 
 			EAttributeImpl(const EAttributeImpl & obj);
@@ -55,30 +55,26 @@ namespace ecore
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual bool isID() const ;
 			
-			/*!
-			 */ 
+			 
 			virtual void setID (bool _iD); 
-			
 			
 			
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<ecore::EDataType > getEAttributeType() const ;
+			
 			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const ; 
 			 
 			//*********************************

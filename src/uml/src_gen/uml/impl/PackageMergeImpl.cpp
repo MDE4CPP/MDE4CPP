@@ -55,23 +55,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 PackageMergeImpl::PackageMergeImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	
-
-	//Init references
-	
-
-	
+{	
 }
 
 PackageMergeImpl::~PackageMergeImpl()
@@ -81,23 +65,20 @@ PackageMergeImpl::~PackageMergeImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+PackageMergeImpl::PackageMergeImpl(std::weak_ptr<uml::Element > par_owner)
+:PackageMergeImpl()
+{
+	m_owner = par_owner;
+}
 
 //Additional constructor for the containments back reference
-			PackageMergeImpl::PackageMergeImpl(std::weak_ptr<uml::Element > par_owner)
-			:PackageMergeImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-//Additional constructor for the containments back reference
-			PackageMergeImpl::PackageMergeImpl(std::weak_ptr<uml::Package > par_receivingPackage)
-			:PackageMergeImpl()
-			{
-			    m_receivingPackage = par_receivingPackage;
-				m_owner = par_receivingPackage;
-			}
-
+PackageMergeImpl::PackageMergeImpl(std::weak_ptr<uml::Package > par_receivingPackage)
+:PackageMergeImpl()
+{
+	m_receivingPackage = par_receivingPackage;
+	m_owner = par_receivingPackage;
+}
 
 
 PackageMergeImpl::PackageMergeImpl(const PackageMergeImpl & obj):PackageMergeImpl()
@@ -160,49 +141,117 @@ std::shared_ptr<ecore::EClass> PackageMergeImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference mergedPackage
+*/
 std::shared_ptr<uml::Package > PackageMergeImpl::getMergedPackage() const
 {
 //assert(m_mergedPackage);
     return m_mergedPackage;
 }
+
 void PackageMergeImpl::setMergedPackage(std::shared_ptr<uml::Package> _mergedPackage)
 {
     m_mergedPackage = _mergedPackage;
 }
 
+
+
+/*
+Getter & Setter for reference receivingPackage
+*/
 std::weak_ptr<uml::Package > PackageMergeImpl::getReceivingPackage() const
 {
 //assert(m_receivingPackage);
     return m_receivingPackage;
 }
+
 void PackageMergeImpl::setReceivingPackage(std::shared_ptr<uml::Package> _receivingPackage)
 {
     m_receivingPackage = _receivingPackage;
 }
+
+
 
 //*********************************
 // Union Getter
 //*********************************
 std::shared_ptr<Union<uml::Element>> PackageMergeImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > PackageMergeImpl::getOwner() const
 {
 	return m_owner;
 }
+
 std::shared_ptr<Union<uml::Element>> PackageMergeImpl::getRelatedElement() const
 {
+	if(m_relatedElement == nullptr)
+	{
+		/*Union*/
+		m_relatedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_relatedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_relatedElement;
 }
+
 std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> PackageMergeImpl::getSource() const
 {
+	if(m_source == nullptr)
+	{
+		/*SubsetUnion*/
+		m_source.reset(new SubsetUnion<uml::Element, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_source - SubsetUnion<uml::Element, uml::Element >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_source->initSubsetUnion(getRelatedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_source - SubsetUnion<uml::Element, uml::Element >(getRelatedElement())" << std::endl;
+		#endif
+		
+	}
 	return m_source;
 }
+
 std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> PackageMergeImpl::getTarget() const
 {
+	if(m_target == nullptr)
+	{
+		/*SubsetUnion*/
+		m_target.reset(new SubsetUnion<uml::Element, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_target - SubsetUnion<uml::Element, uml::Element >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_target->initSubsetUnion(getRelatedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_target - SubsetUnion<uml::Element, uml::Element >(getRelatedElement())" << std::endl;
+		#endif
+		
+	}
 	return m_target;
 }
+
+
 
 
 std::shared_ptr<PackageMerge> PackageMergeImpl::getThisPackageMergePtr() const

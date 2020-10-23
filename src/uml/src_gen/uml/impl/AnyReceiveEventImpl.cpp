@@ -63,17 +63,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 AnyReceiveEventImpl::AnyReceiveEventImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 AnyReceiveEventImpl::~AnyReceiveEventImpl()
@@ -83,41 +73,36 @@ AnyReceiveEventImpl::~AnyReceiveEventImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+AnyReceiveEventImpl::AnyReceiveEventImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:AnyReceiveEventImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			AnyReceiveEventImpl::AnyReceiveEventImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:AnyReceiveEventImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
+AnyReceiveEventImpl::AnyReceiveEventImpl(std::weak_ptr<uml::Element > par_owner)
+:AnyReceiveEventImpl()
+{
+	m_owner = par_owner;
+}
 
 //Additional constructor for the containments back reference
-			AnyReceiveEventImpl::AnyReceiveEventImpl(std::weak_ptr<uml::Element > par_owner)
-			:AnyReceiveEventImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-//Additional constructor for the containments back reference
-			AnyReceiveEventImpl::AnyReceiveEventImpl(std::weak_ptr<uml::Package > par_owningPackage)
-			:AnyReceiveEventImpl()
-			{
-			    m_owningPackage = par_owningPackage;
-				m_namespace = par_owningPackage;
-			}
-
+AnyReceiveEventImpl::AnyReceiveEventImpl(std::weak_ptr<uml::Package > par_owningPackage)
+:AnyReceiveEventImpl()
+{
+	m_owningPackage = par_owningPackage;
+	m_namespace = par_owningPackage;
+}
 
 //Additional constructor for the containments back reference
-			AnyReceiveEventImpl::AnyReceiveEventImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
-			:AnyReceiveEventImpl()
-			{
-			    m_owningTemplateParameter = par_owningTemplateParameter;
-				m_owner = par_owningTemplateParameter;
-			}
-
+AnyReceiveEventImpl::AnyReceiveEventImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+:AnyReceiveEventImpl()
+{
+	m_owningTemplateParameter = par_owningTemplateParameter;
+	m_owner = par_owningTemplateParameter;
+}
 
 
 AnyReceiveEventImpl::AnyReceiveEventImpl(const AnyReceiveEventImpl & obj):AnyReceiveEventImpl()
@@ -197,14 +182,28 @@ std::weak_ptr<uml::Namespace > AnyReceiveEventImpl::getNamespace() const
 {
 	return m_namespace;
 }
+
 std::shared_ptr<Union<uml::Element>> AnyReceiveEventImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > AnyReceiveEventImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<AnyReceiveEvent> AnyReceiveEventImpl::getThisAnyReceiveEventPtr() const

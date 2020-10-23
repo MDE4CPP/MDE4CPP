@@ -15,54 +15,57 @@
 [module fUMLCollectionHelper('http://www.eclipse.org/uml2/5.0.0/UML')]
 
 [import UML4CPP::generator::main::helpers::nameHelper /]
+[import UML4CPP::generator::main::components::generateConnector /]
+[import fUML4CPP::generator::main::parameterHelper /]
+[import fUML4CPP::generator::main::generateOpaqueBehaviorExecution /]
 
 [comment]COLLECT REALIZING CLASSES FOR CERTAIN INTERFACE --------------- [/comment]
 [query public collectRealizingClasses(anInterface : Interface) : OrderedSet(Class) = 
 	anInterface._package.allOwnedElements()->filter(InterfaceRealization)->select(ir : InterfaceRealization | ir.contract = anInterface).owner.oclAsType(Class)->asOrderedSet()->sortedBy(myQualifiedName())/]
 
-[comment]COLLECT CORRESPONDING CONNECTOR END FOR CERTAIN TYPE --------------- [/comment]
-[comment EXTERNAL CONNECTORS /]
-[comment checks if 'aConnector' has two valid connector ends -> 2x end AND role is defined for both ends /]
-[query private isValidConnector(aConnector : Connector) : Boolean = 
-	aConnector.end->size() = 2 and aConnector.end->asSet()->reject(end : ConnectorEnd | end.role.oclIsUndefined())->size() = 2 /]
-[comment collects all valid connectors of 'aPackage' /]
-[query private getAllValidConnectors(aPackage : Package) : Set(Connector) = 
-	aPackage.allOwnedElements()->selectByKind(Connector)->select(isValidConnector()) /] 
-[comment checks if 'anEnd' is typed by 'aClass', i.e. if 'partWithPort' is defined, it must be typed by 'aClass' ; if only 'partWithPort' is undefined, 'role' must be typed by 'aClass' /]
-[query private isConnectorEndTypeEqualTo(anEnd : ConnectorEnd, aClass : Class) : Boolean = 
-	if (anEnd.oclIsUndefined() or anEnd.role.oclIsUndefined()) then false else if (not anEnd.partWithPort.oclIsUndefined()) then anEnd.partWithPort.type = aClass else anEnd.role.type = aClass endif endif /]
-[comment checks if connector has at least one end that is typed by 'aClass'/]
-[query private containsEndWithSpecificClass(aConnector : Connector, aClass : Class) : Boolean = 
-	aConnector.end.isConnectorEndTypeEqualTo(aClass)->reject(value : Boolean | value = false)->size() > 0 /] 
-[comment collects all valid connectors that have at least one end typed by 'aClass' /]
-[query private getAllConnectorsWithType(aPackage : Package, aClass : Class) : Set(Connector) = 
-	aPackage.getAllValidConnectors()->select(containsEndWithSpecificClass(aClass)) /]
-[comment collects all external connectors of (i.e. not owned by) 'aClass' /]
-[query private collectEndsofExternalConnectors(aPackage : Package, aClass : Class) : OrderedSet(ConnectorEnd) = 
-	(aPackage.getAllConnectorsWithType(aClass).end->flatten())->asOrderedSet()->sortedBy(name)/]
+[comment]COLLECT ALL OPERATIONS THAT COULD BE CALLED WITH RESPECT TO PSCS COMMUNICATION SEMANTICS --------------- [/comment]
+[comment collects all operations with the sme name as 'anOperation' in provided package/]
+[query private collectOperationsWithSameNameAs(anOperation : Operation, aPackage : Package) : OrderedSet(Operation) =
+	aPackage.getPackageOperations()->select(op : Operation | op.name = anOperation.name)->asOrderedSet()/]
+[comment collects all operations with the same names as operations that are being called by CallOperationActions in the provided package /]
+[query public collectAllPossiblyCalledOperations(aPackage : Package) : Set(Operation) =
+	OrderedSet{aPackage.getCallOperationActions().operation->reject(oclIsUndefined()).collectOperationsWithSameNameAs(aPackage)}->flatten()/]
 
-[comment INTERNAL CONNECTORS /]
-[comment collect ConnectorEnds of internal (=delegation) connectors for 'aClass'/]
-[query private getAllConnectorsOfClass(aClass : Class) : Set(Connector) = 
-	aClass.ownedConnector->select(isValidConnector())/]
-[comment checks if 'role' of 'anEnd' is an owned port of 'aClass' /]
-[query private isConnectorEndRoleOwnedPortOfClass(anEnd : ConnectorEnd, aClass : Class) : Boolean = 
-	if (anEnd.role.oclIsUndefined()) then false else (anEnd.role.owner = aClass and anEnd.role.oclIsTypeOf(Port)) endif /]
-[comment since only delegation connectors of 'aClass' should be obtained, 'role' of one end of aConnector must be a child of 'aClass' and a port (the corresponding delegation port)/]
-[query private isDelegationConnectorOfClass(aConnector : Connector, aClass : Class) : Boolean = 
-	aConnector.end.isConnectorEndRoleOwnedPortOfClass(aClass)->reject(value : Boolean | value = false)->size() > 0/]
-[comment collects ConnectorEnds of delegation (i.e. internal) connectors of 'aClass' ; reject ConnectorEnd if its role is an owned port of 'aClass' /]
-[query private collectEndsofInternalConnectors(aClass : Class) : OrderedSet(ConnectorEnd) = 
-	(aClass.getAllConnectorsOfClass()->select(isDelegationConnectorOfClass(aClass)).end->reject(isConnectorEndRoleOwnedPortOfClass(aClass)))->select(end : ConnectorEnd | (not end.role.oclIsUndefined()) and (not end.partWithPort.oclIsUndefined()))->asOrderedSet() /]
 
-[comment collects all ConnectorEnds that are typed by a property of type 'aClass' connected by a connector AND all connectorEnds for delegation connectors of 'aClass' /]
-[comment external connectors are connectors that are not owned by 'aClass' ; internal connectors are connectors that are owned by 'aClass' (= delegation connectors for 'aClass') /]
-[comment both 'role' and 'partWithPort' must be defined for a valid ConnectorEnd/]
-[query public collectConnectorEndsConnectedToClass(aPackage : Package, aClass : Class) : OrderedSet(ConnectorEnd) = 
-	aPackage.collectEndsofExternalConnectors(aClass)->addAll(aClass.collectEndsofInternalConnectors())->asOrderedSet() /]
+
+[comment]COLLECT OTHER ENDS FOR CONNECTOR ENDS OF CERTAIN TYPE --------------- [/comment]
+[comment checks if 'anEnd' is typed by 'aType', i.e. if 'partWithPort' is defined, it must be typed by 'aType' ; if only 'partWithPort' is undefined, 'role' must be typed by 'aType' /]
+[query private isConnectorEndTypeEqualTo(anEnd : ConnectorEnd, aType : Classifier) : Boolean = 
+	if (anEnd.oclIsUndefined() or anEnd.role.oclIsUndefined()) then false else if (not anEnd.partWithPort.oclIsUndefined()) then anEnd.partWithPort.type = aType else anEnd.role.type = aType endif endif /]
+[comment collects all ConnectorEnds that are typed by aType /]
+[query private collectConnectorEndsOfType(aPackage : Package, aType : Classifier) : OrderedSet(ConnectorEnd) = 
+	aPackage.allOwnedElements()->filter(ConnectorEnd)->select(isConnectorEndTypeEqualTo(aType))->asOrderedSet()/]
+[comment collects valid other ends for all ConnectorEnds that are typed by aType (for external connectors)/]
+[query private collectExternalOppositeConnectorEndsForType(aPackage : Package, aType : Classifier) : OrderedSet(ConnectorEnd) = 
+	aPackage.collectConnectorEndsOfType(aType).getOtherConnectorEnd()->select(e : ConnectorEnd | (not e.role.oclIsUndefined()) and (e.role.oclIsKindOf(Port)))->asOrderedSet() /]
+[comment collects valid other ends for all ConnectorEnds that are owned by aType (for internal connectors)/]
+[query private collectInternalOppositeConnectorEndsOfType(aPackage : Package, aType : Classifier) : OrderedSet(ConnectorEnd) =
+	 aPackage.allOwnedElements()->filter(ConnectorEnd)->select(aType.attribute->includes(role) and role.oclIsTypeOf(Port)).getOtherConnectorEnd()
+	->select(e : ConnectorEnd | ((not e.partWithPort.oclIsUndefined()) and (not e.role.oclIsUndefined()) and aType.attribute->includes(e.partWithPort)))->asOrderedSet()/]
+
+[query public collectOppositeConnectorEndsOfType(aPackage : Package, aType : Classifier) : OrderedSet(ConnectorEnd) =
+	OrderedSet{aPackage.collectExternalOppositeConnectorEndsForType(aType), aPackage.collectInternalOppositeConnectorEndsOfType(aType)}->flatten()->asOrderedSet() /]
+
+
+
+[comment]COLLECT ALL OPAQUEBEHAVIORS OF THE MODEL THAT ARE EXECUTED EITHER BY CALLBEHAVIORACTION OR DECISIONNODE --------------- [/comment]
+[comment collect all CallBehaviorActions in the model that have a defined Opaque behavior /]
+[query private collectOpaqueBehaviorsCalledByCBA(aPackage : Package) : Set(OpaqueBehavior) = 
+	aPackage.allOwnedElements()->filter(CallBehaviorAction)->select((not behavior.oclIsUndefined()) and (behavior.oclIsKindOf(OpaqueBehavior))).behavior->asSet() /]
+[comment collect all DecisionNodes that have an OpaqueBehavior defined as their decision input /]
+[query private collectOpaqueBehaviorsCalledByDN(aPackage : Package) : Set(OpaqueBehavior) = 
+	aPackage.allOwnedElements()->filter(DecisionNode)->select((not decisionInput.oclIsUndefined()) and (decisionInput.oclIsKindOf(OpaqueBehavior))).decisionInput->asSet() /]
+[comment collect all OpaqueBehaviors that are executed in the model either by CallBehaviorAction or by DecisionNode /]
+[query public collectAllExecutedOpaqueBehaviors(aPackage : Package) : OrderedSet(OpaqueBehavior) = aPackage.collectOpaqueBehaviorsCalledByCBA()->addAll(aPackage.collectOpaqueBehaviorsCalledByDN())->asOrderedSet() /]
+
 
 [comment]COLLECT BASE CLASSES AND REALIZED INTERFACES FOR CERTAIN CLASS --------------- [/comment]
 [query public collectInheritedTypes(aClassifier : Classifier) : OrderedSet(Classifier) = OrderedSet{aClassifier.collectSuperClasses(), aClassifier.collectRealizedInterfaces()}->flatten()->reject(oclIsUndefined() or name.oclIsUndefined())->sortedBy(myQualifiedName())/]
-[query private collectSuperClasses(aClassifier : Classifier) : OrderedSet(Classifier) = if(aClassifier.oclIsTypeOf(Class)) then aClassifier.oclAsType(Class).superClass->sortedBy(name) else OrderedSet{} endif/]
-[query private collectRealizedInterfaces(aClassifier : Classifier) : OrderedSet(Classifier) = if(aClassifier.oclIsTypeOf(Class)) then aClassifier.oclAsType(Class).interfaceRealization.supplier.oclAsType(Classifier)->asOrderedSet()->sortedBy(name) else OrderedSet{} endif/]
+[query private collectSuperClasses(aClassifier : Classifier) : OrderedSet(Classifier) = aClassifier.parents()->sortedBy(name)/]
+[query private collectRealizedInterfaces(aClassifier : Classifier) : OrderedSet(Classifier) = aClassifier.directlyRealizedInterfaces()->sortedBy(name)/]
 [query private collectRedefinedInterfaces(aClassifier : Classifier) : OrderedSet(Classifier) = if(aClassifier.oclIsTypeOf(Interface)) then aClassifier.oclAsType(Interface).redefinedInterface->sortedBy(name) else OrderedSet{} endif/]

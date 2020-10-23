@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class ReclassifyObjectActionImpl :virtual public ActionImpl, virtual public ReclassifyObjectAction 
+	class ReclassifyObjectActionImpl : virtual public ActionImpl, virtual public ReclassifyObjectAction 
 	{
 		public: 
 			ReclassifyObjectActionImpl(const ReclassifyObjectActionImpl & obj);
@@ -59,18 +59,24 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 None of the newClassifiers may be abstract.
-			not newClassifier->exists(isAbstract) */ 
+			None of the newClassifiers may be abstract.
+			not newClassifier->exists(isAbstract)
+			*/
+			 
 			virtual bool classifier_not_abstract(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
-			 The object InputPin has no type.
-			object.type = null */ 
+			The object InputPin has no type.
+			object.type = null
+			*/
+			 
 			virtual bool input_pin(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
-			 The multiplicity of the object InputPin is 1..1.
-			object.is(1,1) */ 
+			The multiplicity of the object InputPin is 1..1.
+			object.is(1,1)
+			*/
+			 
 			virtual bool multiplicity(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
@@ -79,38 +85,52 @@ namespace uml
 			// Attributes Getter Setter
 			//*********************************
 			/*!
-			 Specifies whether existing Classifiers should be removed before adding the new Classifiers.
-			<p>From package UML::Actions.</p> */ 
+			Specifies whether existing Classifiers should be removed before adding the new Classifiers.
+			<p>From package UML::Actions.</p>
+			*/
+			 
 			virtual bool getIsReplaceAll() const ;
 			
 			/*!
-			 Specifies whether existing Classifiers should be removed before adding the new Classifiers.
-			<p>From package UML::Actions.</p> */ 
+			Specifies whether existing Classifiers should be removed before adding the new Classifiers.
+			<p>From package UML::Actions.</p>
+			*/
+			 
 			virtual void setIsReplaceAll (bool _isReplaceAll); 
-			
 			
 			
 			//*********************************
 			// Reference
 			//*********************************
 			/*!
-			 A set of Classifiers to be added to the Classifiers of the given object.
-			<p>From package UML::Actions.</p> */
+			A set of Classifiers to be added to the Classifiers of the given object.
+			<p>From package UML::Actions.</p>
+			*/
+			
 			virtual std::shared_ptr<Bag<uml::Classifier>> getNewClassifier() const ;
 			
+			
 			/*!
-			 The InputPin that holds the object to be reclassified.
-			<p>From package UML::Actions.</p> */
+			The InputPin that holds the object to be reclassified.
+			<p>From package UML::Actions.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::InputPin > getObject() const ;
 			
 			/*!
-			 The InputPin that holds the object to be reclassified.
-			<p>From package UML::Actions.</p> */
-			virtual void setObject(std::shared_ptr<uml::InputPin> _object_object) ;
+			The InputPin that holds the object to be reclassified.
+			<p>From package UML::Actions.</p>
+			*/
+			
+			virtual void setObject(std::shared_ptr<uml::InputPin> _object) ;
+			
 			/*!
-			 A set of Classifiers to be removed from the Classifiers of the given object.
-			<p>From package UML::Actions.</p> */
+			A set of Classifiers to be removed from the Classifiers of the given object.
+			<p>From package UML::Actions.</p>
+			*/
+			
 			virtual std::shared_ptr<Bag<uml::Classifier>> getOldClassifier() const ;
+			
 			
 							
 			
@@ -118,20 +138,30 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
+			ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::ActivityGroup>> getInGroup() const ;/*!
-			 The ordered set of InputPins representing the inputs to the Action.
-			<p>From package UML::Actions.</p> */
+			The ordered set of InputPins representing the inputs to the Action.
+			<p>From package UML::Actions.</p>
+			*/
+			
 			virtual std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> getInput() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
+			The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const ; 
 			 
 			//*********************************

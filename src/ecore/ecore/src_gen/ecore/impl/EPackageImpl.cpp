@@ -58,47 +58,7 @@ using namespace ecore;
 // Constructor / Destructor
 //*********************************
 EPackageImpl::EPackageImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		/*Subset*/
-		m_eClassifiers.reset(new Subset<ecore::EClassifier, ecore::EObject >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_eClassifiers - Subset<ecore::EClassifier, ecore::EObject >()" << std::endl;
-		#endif
-	
-	
-
-	
-
-		m_eSubpackages.reset(new Bag<ecore::EPackage>());
-	
-	
-
-	
-
-	//Init references
-		/*Subset*/
-		m_eClassifiers->initSubset(m_eContens);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_eClassifiers - Subset<ecore::EClassifier, ecore::EObject >(m_eContens)" << std::endl;
-		#endif
-	
-	
-
-	
-
-	
-	
-
-	
+{	
 }
 
 EPackageImpl::~EPackageImpl()
@@ -108,22 +68,19 @@ EPackageImpl::~EPackageImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+EPackageImpl::EPackageImpl(std::weak_ptr<ecore::EObject > par_eContainer)
+:EPackageImpl()
+{
+	m_eContainer = par_eContainer;
+}
 
 //Additional constructor for the containments back reference
-			EPackageImpl::EPackageImpl(std::weak_ptr<ecore::EObject > par_eContainer)
-			:EPackageImpl()
-			{
-			    m_eContainer = par_eContainer;
-			}
-
-
-//Additional constructor for the containments back reference
-			EPackageImpl::EPackageImpl(std::weak_ptr<ecore::EPackage > par_eSuperPackage)
-			:EPackageImpl()
-			{
-			    m_eSuperPackage = par_eSuperPackage;
-			}
-
+EPackageImpl::EPackageImpl(std::weak_ptr<ecore::EPackage > par_eSuperPackage)
+:EPackageImpl()
+{
+	m_eSuperPackage = par_eSuperPackage;
+}
 
 
 EPackageImpl::EPackageImpl(const EPackageImpl & obj):EPackageImpl()
@@ -173,15 +130,13 @@ EPackageImpl::EPackageImpl(const EPackageImpl & obj):EPackageImpl()
 		std::cout << "Copying the Subset: " << "m_eSubpackages" << std::endl;
 	#endif
 
-		/*Subset*/
-		m_eClassifiers->initSubset(m_eContens);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_eClassifiers - Subset<ecore::EClassifier, ecore::EObject >(m_eContens)" << std::endl;
-		#endif
-	
+	/*Subset*/
+	m_eClassifiers->initSubset(getEContens());
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Initialising value Subset: " << "m_eClassifiers - Subset<ecore::EClassifier, ecore::EObject >(getEContens())" << std::endl;
+	#endif
 	
 
-	
 	
 }
 
@@ -200,14 +155,27 @@ std::shared_ptr<EClass> EPackageImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute nsPrefix
+*/
+std::string EPackageImpl::getNsPrefix() const 
+{
+	return m_nsPrefix;
+}
+
 void EPackageImpl::setNsPrefix(std::string _nsPrefix)
 {
 	m_nsPrefix = _nsPrefix;
 } 
 
-std::string EPackageImpl::getNsPrefix() const 
+
+
+/*
+Getter & Setter for attribute nsURI
+*/
+std::string EPackageImpl::getNsURI() const 
 {
-	return m_nsPrefix;
+	return m_nsURI;
 }
 
 void EPackageImpl::setNsURI(std::string _nsURI)
@@ -215,10 +183,7 @@ void EPackageImpl::setNsURI(std::string _nsURI)
 	m_nsURI = _nsURI;
 } 
 
-std::string EPackageImpl::getNsURI() const 
-{
-	return m_nsURI;
-}
+
 
 //*********************************
 // Operations
@@ -242,30 +207,72 @@ std::shared_ptr<ecore::EClassifier> EPackageImpl::getEClassifier(std::string nam
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference eClassifiers
+*/
 std::shared_ptr<Subset<ecore::EClassifier, ecore::EObject>> EPackageImpl::getEClassifiers() const
 {
+	if(m_eClassifiers == nullptr)
+	{
+		/*Subset*/
+		m_eClassifiers.reset(new Subset<ecore::EClassifier, ecore::EObject >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_eClassifiers - Subset<ecore::EClassifier, ecore::EObject >()" << std::endl;
+		#endif
+		
+		/*Subset*/
+		m_eClassifiers->initSubset(getEContens());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_eClassifiers - Subset<ecore::EClassifier, ecore::EObject >(getEContens())" << std::endl;
+		#endif
+		
+	}
 
     return m_eClassifiers;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference eFactoryInstance
+*/
 std::shared_ptr<ecore::EFactory > EPackageImpl::getEFactoryInstance() const
 {
 //assert(m_eFactoryInstance);
     return m_eFactoryInstance;
 }
+
 void EPackageImpl::setEFactoryInstance(std::shared_ptr<ecore::EFactory> _eFactoryInstance)
 {
     m_eFactoryInstance = _eFactoryInstance;
 }
 
+
+
+/*
+Getter & Setter for reference eSubpackages
+*/
 std::shared_ptr<Bag<ecore::EPackage>> EPackageImpl::getESubpackages() const
 {
+	if(m_eSubpackages == nullptr)
+	{
+		m_eSubpackages.reset(new Bag<ecore::EPackage>());
+		
+		
+	}
 
     return m_eSubpackages;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference eSuperPackage
+*/
 std::weak_ptr<ecore::EPackage > EPackageImpl::getESuperPackage() const
 {
 
@@ -273,13 +280,28 @@ std::weak_ptr<ecore::EPackage > EPackageImpl::getESuperPackage() const
 }
 
 
+
+
+
 //*********************************
 // Union Getter
 //*********************************
 std::shared_ptr<Union<ecore::EObject>> EPackageImpl::getEContens() const
 {
+	if(m_eContens == nullptr)
+	{
+		/*Union*/
+		m_eContens.reset(new Union<ecore::EObject>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_eContens - Union<ecore::EObject>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_eContens;
 }
+
+
 
 
 std::shared_ptr<EPackage> EPackageImpl::getThisEPackagePtr() const

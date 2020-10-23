@@ -74,46 +74,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 ElementImpl::ElementImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		/*Subset*/
-		m_ownedComment.reset(new Subset<uml::Comment, uml::Element >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_ownedComment - Subset<uml::Comment, uml::Element >()" << std::endl;
-		#endif
-	
-	
-
-		/*Union*/
-		m_ownedElement.reset(new Union<uml::Element>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
-		#endif
-	
-	
-
-	
-
-	//Init references
-		/*Subset*/
-		m_ownedComment->initSubset(m_ownedElement);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_ownedComment - Subset<uml::Comment, uml::Element >(m_ownedElement)" << std::endl;
-		#endif
-	
-	
-
-	
-	
-
-	
+{	
 }
 
 ElementImpl::~ElementImpl()
@@ -123,14 +84,12 @@ ElementImpl::~ElementImpl()
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			ElementImpl::ElementImpl(std::weak_ptr<uml::Element > par_owner)
-			:ElementImpl()
-			{
-			    m_owner = par_owner;
-			}
-
+ElementImpl::ElementImpl(std::weak_ptr<uml::Element > par_owner)
+:ElementImpl()
+{
+	m_owner = par_owner;
+}
 
 
 ElementImpl::ElementImpl(const ElementImpl & obj):ElementImpl()
@@ -156,12 +115,11 @@ ElementImpl::ElementImpl(const ElementImpl & obj):ElementImpl()
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 
-		/*Subset*/
-		m_ownedComment->initSubset(m_ownedElement);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_ownedComment - Subset<uml::Comment, uml::Element >(m_ownedElement)" << std::endl;
-		#endif
-	
+	/*Subset*/
+	m_ownedComment->initSubset(getOwnedElement());
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Initialising value Subset: " << "m_ownedComment - Subset<uml::Comment, uml::Element >(getOwnedElement())" << std::endl;
+	#endif
 	
 }
 
@@ -195,16 +153,17 @@ std::shared_ptr<Bag<uml::Element> > ElementImpl::allOwnedElements()
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 		std::shared_ptr<Bag<uml::Element>> list(new Bag<uml::Element>());
-	list->insert(list->begin(), m_ownedElement->begin(), m_ownedElement->end());
+	list->insert(list->begin(), this->getOwnedElement()->begin(), this->getOwnedElement()->end());
 
-	Bag<uml::Element>::iterator iter = m_ownedElement->begin();
-	Bag<uml::Element>::iterator end = m_ownedElement->end();
-
+	Bag<uml::Element>::iterator iter = this->getOwnedElement()->begin();
+	Bag<uml::Element>::iterator end = this->getOwnedElement()->end();
+	int i = 0;
 	while(iter != end)
 	{
 		std::shared_ptr<Bag<uml::Element>> elementList = (*iter)->allOwnedElements();
 		list->insert(list->end(), elementList->begin(), elementList->end());
 		iter++;
+		i++;
 	}
 
 	return list;
@@ -463,13 +422,46 @@ std::shared_ptr<ecore::EObject> ElementImpl::unapplyStereotype(std::shared_ptr<u
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference ownedComment
+*/
 std::shared_ptr<Subset<uml::Comment, uml::Element>> ElementImpl::getOwnedComment() const
 {
+	if(m_ownedComment == nullptr)
+	{
+		/*Subset*/
+		m_ownedComment.reset(new Subset<uml::Comment, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_ownedComment - Subset<uml::Comment, uml::Element >()" << std::endl;
+		#endif
+		
+		/*Subset*/
+		m_ownedComment->initSubset(getOwnedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_ownedComment - Subset<uml::Comment, uml::Element >(getOwnedElement())" << std::endl;
+		#endif
+		
+	}
 
     return m_ownedComment;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference ownedElement
+*/
+
+
+
+
+
+
+/*
+Getter & Setter for reference owner
+*/
 
 
 
@@ -481,12 +473,25 @@ std::shared_ptr<Subset<uml::Comment, uml::Element>> ElementImpl::getOwnedComment
 //*********************************
 std::shared_ptr<Union<uml::Element>> ElementImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > ElementImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<Element> ElementImpl::getThisElementPtr() const

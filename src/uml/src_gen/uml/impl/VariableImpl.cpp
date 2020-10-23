@@ -75,23 +75,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 VariableImpl::VariableImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	
-
-	//Init references
-	
-
-	
+{	
 }
 
 VariableImpl::~VariableImpl()
@@ -101,50 +85,44 @@ VariableImpl::~VariableImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+VariableImpl::VariableImpl(std::weak_ptr<uml::Activity > par_activityScope)
+:VariableImpl()
+{
+	m_activityScope = par_activityScope;
+	m_namespace = par_activityScope;
+}
 
 //Additional constructor for the containments back reference
-			VariableImpl::VariableImpl(std::weak_ptr<uml::Activity > par_activityScope)
-			:VariableImpl()
-			{
-			    m_activityScope = par_activityScope;
-				m_namespace = par_activityScope;
-			}
-
-
-//Additional constructor for the containments back reference
-			VariableImpl::VariableImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:VariableImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
+VariableImpl::VariableImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:VariableImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			VariableImpl::VariableImpl(std::weak_ptr<uml::Element > par_owner)
-			:VariableImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-//Additional constructor for the containments back reference
-			VariableImpl::VariableImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
-			:VariableImpl()
-			{
-			    m_owningTemplateParameter = par_owningTemplateParameter;
-				m_owner = par_owningTemplateParameter;
-			}
-
+VariableImpl::VariableImpl(std::weak_ptr<uml::Element > par_owner)
+:VariableImpl()
+{
+	m_owner = par_owner;
+}
 
 //Additional constructor for the containments back reference
-			VariableImpl::VariableImpl(std::weak_ptr<uml::StructuredActivityNode > par_scope)
-			:VariableImpl()
-			{
-			    m_scope = par_scope;
-				m_namespace = par_scope;
-			}
+VariableImpl::VariableImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+:VariableImpl()
+{
+	m_owningTemplateParameter = par_owningTemplateParameter;
+	m_owner = par_owningTemplateParameter;
+}
 
+//Additional constructor for the containments back reference
+VariableImpl::VariableImpl(std::weak_ptr<uml::StructuredActivityNode > par_scope)
+:VariableImpl()
+{
+	m_scope = par_scope;
+	m_namespace = par_scope;
+}
 
 
 VariableImpl::VariableImpl(const VariableImpl & obj):VariableImpl()
@@ -246,25 +224,37 @@ bool VariableImpl::isAccessibleBy(std::shared_ptr<uml::Action>  a)
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference activityScope
+*/
 std::weak_ptr<uml::Activity > VariableImpl::getActivityScope() const
 {
 
     return m_activityScope;
 }
+
 void VariableImpl::setActivityScope(std::shared_ptr<uml::Activity> _activityScope)
 {
     m_activityScope = _activityScope;
 }
 
+
+
+/*
+Getter & Setter for reference scope
+*/
 std::weak_ptr<uml::StructuredActivityNode > VariableImpl::getScope() const
 {
 
     return m_scope;
 }
+
 void VariableImpl::setScope(std::shared_ptr<uml::StructuredActivityNode> _scope)
 {
     m_scope = _scope;
 }
+
+
 
 //*********************************
 // Union Getter
@@ -273,14 +263,28 @@ std::weak_ptr<uml::Namespace > VariableImpl::getNamespace() const
 {
 	return m_namespace;
 }
+
 std::shared_ptr<Union<uml::Element>> VariableImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > VariableImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<Variable> VariableImpl::getThisVariablePtr() const

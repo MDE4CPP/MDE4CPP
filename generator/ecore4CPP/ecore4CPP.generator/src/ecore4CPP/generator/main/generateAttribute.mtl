@@ -17,6 +17,7 @@
 [import ecore4CPP::generator::main::generateClass /]
 [import ecore4CPP::generator::main::generateType /]
 [import ecore4CPP::generator::main::helper /]
+[import ecore4CPP::generator::main::helpers::keywords /]
 
 [query public hasSetter(anEAttribute : EAttribute) : Boolean = anEAttribute.changeable and (anEAttribute.upperBound = 1)/]
 [query public hasGetter(anEAttribute : EAttribute) : EBoolean = not hasKey('getterbody') /]
@@ -42,13 +43,22 @@
 [template public generateAttributeAccessorsDecl(anEAttribute : EAttribute, impl : Boolean)]
 [anEAttribute.generateAttributeGetterDecleration(impl)/]
 [anEAttribute.generateAttributeSetterDecleration(impl)/]
+[for (redefinedElement : EObject | anEAttribute.getAllRedefinedElements())]
+[if (redefinedElement.oclIsKindOf(EAttribute))]
+[let redefinedEAttribute : EAttribute = redefinedElement.oclAsType(EAttribute)]
+/*Additional Setter for '[redefinedEAttribute.eContainingClass.name/]::[redefinedEAttribute.name/]' redefined by attribute '[anEAttribute.name/]'*/
+[redefinedEAttribute.generateAttributeSetterDecleration(impl)/]
+[/let]
+[/if]
+[/for]
 [/template]
 
 [template public generateAttributeProtectedMember(anEAttribute : EAttribute)]
-[anEAttribute.generateDokumentation()/] 
+[anEAttribute.generateDocumentation()/] 
 [if (not(anEAttribute.upperBound = 1))]
-[anEAttribute.generateAttributeType()/] m_[anEAttribute.name/]; [else]
-[anEAttribute.generateAttributeType()/] m_[anEAttribute.name/] [generateDefaultValue()/];
+[if(hasKey(keyQualify()))][valueKey(keyQualify())/] [/if]mutable [anEAttribute.generateAttributeType()/] m_[anEAttribute.name/]; 
+[else]
+[if(hasKey(keyQualify()))][valueKey(keyQualify())/] [/if][anEAttribute.generateAttributeType()/] m_[anEAttribute.name/] [generateDefaultValue()/];
 [/if]
 [/template]
 
@@ -57,7 +67,7 @@ m_[anEAttribute.name/].reset(new Bag<[anEAttribute.eGenericType.generateCppType(
 [/template]
 
 [template public generateAttributeGetterDecleration(anEAttribute : EAttribute, impl : Boolean) ? (hasGetter())]
-[anEAttribute.generateDokumentation()/] 
+[anEAttribute.generateDocumentation()/] 
 virtual [if (anEAttribute.eType.oclIsKindOf(EDataType))]
 [anEAttribute.generateAttributeType()/] [else]
 std::shared_ptr<[anEAttribute.generateAttributeType()/]> [/if]
@@ -66,27 +76,87 @@ std::shared_ptr<[anEAttribute.generateAttributeType()/]> [/if]
 [/template]
 
 [template public generateAttributeSetterDecleration(anEAttribute : EAttribute, impl : Boolean) ? ((hasSetter() or(impl and hasImplSetterOnly())) )]
-[anEAttribute.generateDokumentation()/] 
+[anEAttribute.generateDocumentation()/] 
 virtual void [anEAttribute.SetterName()/] ([anEAttribute.generateAttributeType()/] _[anEAttribute.name/])[abstractSufix(impl)/]; 
-
-
 [/template]
 
 [***
  * Section for the Attribute cpp implementation
 */]
-[template public generateAttributeGetterImplementationCpp(anEAttribute : EAttribute)? (hasGetter())]
+
+[template public generateAttributeCpp(anEAttribute : EAttribute)]
+/*
+Getter & Setter for attribute [anEAttribute.name/]
+*/
+[anEAttribute.generateAttributeGetterImplementationCpp()/]
+
+[anEAttribute.generateAttributeSetterImplementationCpp()/]
+
+[for (redefinedElement : EObject | anEAttribute.getAllRedefinedElements())]
+[if (redefinedElement.oclIsKindOf(EAttribute))]
+[let redefinedEAttribute : EAttribute = redefinedElement.oclAsType(EAttribute)]
+/*Additional Setter for redefined attribute '[redefinedEAttribute.eContainingClass.name/]::[redefinedEAttribute.name/]'*/
+[redefinedEAttribute.generateRedefinedAttributeSetterImplementationCpp(anEAttribute)/]
+[/let]
+[/if]
+[/for]
+[/template]
+
+[template private generateAttributeGetterImplementationCpp(anEAttribute : EAttribute)? (hasGetter())]
 [anEAttribute.generateAttributeType()/] [anEAttribute.eContainingClass.name.toUpperFirst()/]Impl::[anEAttribute.GetterName()/]() const 
 {
+	[if (not (anEAttribute.upperBound = 1))]
+	if(m_[anEAttribute.name/] == nullptr)
+	{
+		[anEAttribute.generateAttributeInit()/]
+	}
+	[/if]
 	return m_[anEAttribute.name/];
 }
 [/template]
 
-[template public generateAttributeSetterImplementationCpp(anEAttribute : EAttribute, impl : Boolean) ? (( hasSetter() or(impl and hasImplSetterOnly())) )]
+[template private generateAttributeSetterImplementationCpp(anEAttribute : EAttribute) ? (( hasSetter() or(hasImplSetterOnly())) )]
 void [anEAttribute.eContainingClass.name.toUpperFirst()/]Impl::[anEAttribute.SetterName()/]([anEAttribute.generateAttributeType()/] _[anEAttribute.name/])
 {
 	m_[anEAttribute.name/] = _[anEAttribute.name/];
+	[for (redefinedElement : EObject | anEAttribute.getDirectlyRedefinedElements())]
+	[if (redefinedElement.oclIsKindOf(EAttribute))]
+	[let redefinedEAttribute : EAttribute = redefinedElement.oclAsType(EAttribute)]
+	//additional setter call for redefined attribute [redefinedEAttribute.eContainingClass.name/]::[redefinedEAttribute.name/]
+	[redefinedEAttribute.eContainingClass.transformType()/]Impl::set[redefinedEAttribute.name.toUpperFirst()/](_[anEAttribute.name/]);
+	[/let]
+	[/if]
+	[/for]
 } 
+[/template]
+
+[template private generateRedefinedAttributeSetterImplementationCpp(redefinedEAttribute : EAttribute, anEAttribute : EAttribute) ? (( hasSetter() or(hasImplSetterOnly())) )]
+void [anEAttribute.eContainingClass.name.toUpperFirst()/]Impl::[redefinedEAttribute.SetterName()/]([anEAttribute.generateAttributeType()/] _[anEAttribute.name/])
+{
+	std::shared_ptr<[anEAttribute.eGenericType.generateCppType()/]> _[anEAttribute.name/] = std::dynamic_pointer_cast<[anEAttribute.eGenericType.generateCppType()/]>(_[redefinedEAttribute.name/]);
+	if(_[anEAttribute.name/])
+	{
+		m_[anEAttribute.name/] = _[anEAttribute.name/];
+
+		[if (not anEAttribute.getDirectlyRedefinedElements()->select(redefines(redefinedEAttribute.oclAsType(EObject)))->isEmpty())]
+			[for (directlyRedefinedElement : EObject | anEAttribute.getDirectlyRedefinedElements())]
+				[if (directlyRedefinedElement.oclIsKindOf(EReference) and directlyRedefinedElement.redefines(redefinedEAttribute.oclAsType(EObject)))]
+				[let directlyRedefinedEAttribute : EReference = directlyRedefinedElement.oclAsType(EReference)]
+		//additional setter call for redefined reference [directlyRedefinedEAttribute.eContainingClass.name/]::[directlyRedefinedEAttribute.name/]
+		[directlyRedefinedEAttribute.eContainingClass.transformType()/]Impl::set[redefinedEAttribute.name.toUpperFirst()/](_[redefinedEAttribute.name/]);
+				[/let]
+				[/if]
+			[/for]
+		[else]
+		//additional setter call for redefined reference [redefinedEAttribute.eContainingClass.name/]::[redefinedEAttribute.name/]
+		[redefinedEAttribute.eContainingClass.transformType()/]Impl::set[redefinedEAttribute.name.toUpperFirst()/](_[redefinedEAttribute.name/]);
+		[/if]
+	}
+	else
+	{
+		std::cerr<<"['['/][anEAttribute.eContainingClass.name.toUpperFirst()/]::[redefinedEAttribute.SetterName()/][']'/] : Could not set node because provided node was not of type '[anEAttribute.eGenericType.generateCppType()/]'"<<std::endl;
+	}
+}
 [/template]
 
 

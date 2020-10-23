@@ -26,6 +26,7 @@
 #include "fUML/Semantics/SimpleClassifiers/IntegerValue.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "uml/LiteralInteger.hpp"
+#include "primitivetypesReflection/PrimitiveTypesPackage.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -59,17 +60,7 @@ using namespace fUML::Semantics::Values;
 // Constructor / Destructor
 //*********************************
 LiteralIntegerEvaluationImpl::LiteralIntegerEvaluationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 LiteralIntegerEvaluationImpl::~LiteralIntegerEvaluationImpl()
@@ -78,7 +69,6 @@ LiteralIntegerEvaluationImpl::~LiteralIntegerEvaluationImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete LiteralIntegerEvaluation "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -124,10 +114,9 @@ std::shared_ptr<fUML::Semantics::Values::Value> LiteralIntegerEvaluationImpl::ev
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<uml::LiteralInteger> literal = std::dynamic_pointer_cast<uml::LiteralInteger>(getSpecification());
-	std::shared_ptr<fUML::Semantics::SimpleClassifiers::IntegerValue> integerValue(fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createIntegerValue());
-    integerValue ->setType(this->getType("Integer"));
-    integerValue ->setValue(literal->getValue());
+		std::shared_ptr<fUML::Semantics::SimpleClassifiers::IntegerValue> integerValue(fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createIntegerValue());
+    integerValue ->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
+    integerValue ->setValue(getSpecification()->integerValue());
 
     return integerValue ;
 	//end of body
@@ -140,6 +129,7 @@ std::shared_ptr<fUML::Semantics::Values::Value> LiteralIntegerEvaluationImpl::ev
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<LiteralIntegerEvaluation> LiteralIntegerEvaluationImpl::getThisLiteralIntegerEvaluationPtr() const

@@ -50,19 +50,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 ImageImpl::ImageImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 ImageImpl::~ImageImpl()
@@ -72,14 +60,12 @@ ImageImpl::~ImageImpl()
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			ImageImpl::ImageImpl(std::weak_ptr<uml::Element > par_owner)
-			:ImageImpl()
-			{
-			    m_owner = par_owner;
-			}
-
+ImageImpl::ImageImpl(std::weak_ptr<uml::Element > par_owner)
+:ImageImpl()
+{
+	m_owner = par_owner;
+}
 
 
 ImageImpl::ImageImpl(const ImageImpl & obj):ImageImpl()
@@ -125,14 +111,27 @@ std::shared_ptr<ecore::EClass> ImageImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute content
+*/
+std::string ImageImpl::getContent() const 
+{
+	return m_content;
+}
+
 void ImageImpl::setContent(std::string _content)
 {
 	m_content = _content;
 } 
 
-std::string ImageImpl::getContent() const 
+
+
+/*
+Getter & Setter for attribute format
+*/
+std::string ImageImpl::getFormat() const 
 {
-	return m_content;
+	return m_format;
 }
 
 void ImageImpl::setFormat(std::string _format)
@@ -140,9 +139,14 @@ void ImageImpl::setFormat(std::string _format)
 	m_format = _format;
 } 
 
-std::string ImageImpl::getFormat() const 
+
+
+/*
+Getter & Setter for attribute location
+*/
+std::string ImageImpl::getLocation() const 
 {
-	return m_format;
+	return m_location;
 }
 
 void ImageImpl::setLocation(std::string _location)
@@ -150,10 +154,7 @@ void ImageImpl::setLocation(std::string _location)
 	m_location = _location;
 } 
 
-std::string ImageImpl::getLocation() const 
-{
-	return m_location;
-}
+
 
 //*********************************
 // Operations
@@ -168,8 +169,20 @@ std::string ImageImpl::getLocation() const
 //*********************************
 std::shared_ptr<Union<uml::Element>> ImageImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
+
 
 
 std::shared_ptr<Image> ImageImpl::getThisImagePtr() const

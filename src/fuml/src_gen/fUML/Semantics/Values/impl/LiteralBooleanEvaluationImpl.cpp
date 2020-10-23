@@ -26,6 +26,7 @@
 #include "fUML/Semantics/SimpleClassifiers/BooleanValue.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "uml/LiteralBoolean.hpp"
+#include "primitivetypesReflection/PrimitiveTypesPackage.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -59,17 +60,7 @@ using namespace fUML::Semantics::Values;
 // Constructor / Destructor
 //*********************************
 LiteralBooleanEvaluationImpl::LiteralBooleanEvaluationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 LiteralBooleanEvaluationImpl::~LiteralBooleanEvaluationImpl()
@@ -78,7 +69,6 @@ LiteralBooleanEvaluationImpl::~LiteralBooleanEvaluationImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete LiteralBooleanEvaluation "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -124,11 +114,10 @@ std::shared_ptr<fUML::Semantics::Values::Value> LiteralBooleanEvaluationImpl::ev
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<uml::LiteralBoolean> literal = std::dynamic_pointer_cast<uml::LiteralBoolean>(getSpecification());
 	std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> booleanValue(fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createBooleanValue());
-    booleanValue->setType(this->getType("Boolean"));
-    booleanValue->setValue(literal->getValue());
-    return booleanValue;
+booleanValue->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
+booleanValue->setValue(getSpecification()->booleanValue());
+return booleanValue;
 	//end of body
 }
 
@@ -139,6 +128,7 @@ std::shared_ptr<fUML::Semantics::Values::Value> LiteralBooleanEvaluationImpl::ev
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<LiteralBooleanEvaluation> LiteralBooleanEvaluationImpl::getThisLiteralBooleanEvaluationPtr() const

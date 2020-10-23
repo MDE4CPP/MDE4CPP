@@ -19,7 +19,7 @@
 //*********************************
 namespace PSCS::Semantics::StructuredClassifiers 
 {
-	class CS_DefaultRequestPropagationStrategyImpl :virtual public CS_RequestPropagationStrategyImpl, virtual public CS_DefaultRequestPropagationStrategy 
+	class CS_DefaultRequestPropagationStrategyImpl : virtual public CS_RequestPropagationStrategyImpl, virtual public CS_DefaultRequestPropagationStrategy 
 	{
 		public: 
 			CS_DefaultRequestPropagationStrategyImpl(const CS_DefaultRequestPropagationStrategyImpl & obj);
@@ -43,8 +43,7 @@ namespace PSCS::Semantics::StructuredClassifiers
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference> > select(std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference> >  potentialTargets,std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>  context) ;
 			
 			

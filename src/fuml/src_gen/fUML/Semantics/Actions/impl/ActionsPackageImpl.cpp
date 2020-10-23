@@ -161,6 +161,10 @@ std::shared_ptr<ecore::EAttribute> ActionsPackageImpl::getActionActivation_Attri
 	return m_actionActivation_Attribute_firing;
 }
 
+std::shared_ptr<ecore::EReference> ActionsPackageImpl::getActionActivation_Attribute_action() const
+{
+	return m_actionActivation_Attribute_action;
+}
 std::shared_ptr<ecore::EReference> ActionsPackageImpl::getActionActivation_Attribute_inputPinActivation() const
 {
 	return m_actionActivation_Attribute_inputPinActivation;
@@ -264,6 +268,10 @@ std::shared_ptr<ecore::EClass> ActionsPackageImpl::getAddStructuralFeatureValueA
 }
 
 
+std::shared_ptr<ecore::EReference> ActionsPackageImpl::getAddStructuralFeatureValueActionActivation_Attribute_addStructuralFeatureValueAction() const
+{
+	return m_addStructuralFeatureValueActionActivation_Attribute_addStructuralFeatureValueAction;
+}
 
 std::shared_ptr<ecore::EOperation> ActionsPackageImpl::getAddStructuralFeatureValueActionActivation_Operation_doAction() const
 {
@@ -279,6 +287,10 @@ std::shared_ptr<ecore::EClass> ActionsPackageImpl::getCallActionActivation_Class
 }
 
 
+std::shared_ptr<ecore::EReference> ActionsPackageImpl::getCallActionActivation_Attribute_callAction() const
+{
+	return m_callActionActivation_Attribute_callAction;
+}
 std::shared_ptr<ecore::EReference> ActionsPackageImpl::getCallActionActivation_Attribute_callExecutions() const
 {
 	return m_callActionActivation_Attribute_callExecutions;
@@ -310,6 +322,10 @@ std::shared_ptr<ecore::EClass> ActionsPackageImpl::getCallBehaviorActionActivati
 }
 
 
+std::shared_ptr<ecore::EReference> ActionsPackageImpl::getCallBehaviorActionActivation_Attribute_callBehaviorAction() const
+{
+	return m_callBehaviorActionActivation_Attribute_callBehaviorAction;
+}
 
 std::shared_ptr<ecore::EOperation> ActionsPackageImpl::getCallBehaviorActionActivation_Operation_getCallExecution() const
 {
@@ -325,6 +341,10 @@ std::shared_ptr<ecore::EClass> ActionsPackageImpl::getCallOperationActionActivat
 }
 
 
+std::shared_ptr<ecore::EReference> ActionsPackageImpl::getCallOperationActionActivation_Attribute_callOperationAction() const
+{
+	return m_callOperationActionActivation_Attribute_callOperationAction;
+}
 
 std::shared_ptr<ecore::EOperation> ActionsPackageImpl::getCallOperationActionActivation_Operation_getCallExecution() const
 {
@@ -455,6 +475,10 @@ std::shared_ptr<ecore::EClass> ActionsPackageImpl::getCreateObjectActionActivati
 }
 
 
+std::shared_ptr<ecore::EReference> ActionsPackageImpl::getCreateObjectActionActivation_Attribute_createObjectAction() const
+{
+	return m_createObjectActionActivation_Attribute_createObjectAction;
+}
 
 std::shared_ptr<ecore::EOperation> ActionsPackageImpl::getCreateObjectActionActivation_Operation_doAction() const
 {
@@ -481,6 +505,10 @@ std::shared_ptr<ecore::EClass> ActionsPackageImpl::getDestroyObjectActionActivat
 }
 
 
+std::shared_ptr<ecore::EReference> ActionsPackageImpl::getDestroyObjectActionActivation_Attribute_destroyObjectAction() const
+{
+	return m_destroyObjectActionActivation_Attribute_destroyObjectAction;
+}
 
 std::shared_ptr<ecore::EOperation> ActionsPackageImpl::getDestroyObjectActionActivation_Operation_destroyObject_Value_EBoolean() const
 {
@@ -603,6 +631,10 @@ std::shared_ptr<ecore::EReference> ActionsPackageImpl::getPinActivation_Attribut
 {
 	return m_pinActivation_Attribute_actionActivation;
 }
+std::shared_ptr<ecore::EReference> ActionsPackageImpl::getPinActivation_Attribute_pin() const
+{
+	return m_pinActivation_Attribute_pin;
+}
 
 std::shared_ptr<ecore::EOperation> ActionsPackageImpl::getPinActivation_Operation_fire_Token() const
 {
@@ -659,6 +691,10 @@ std::shared_ptr<ecore::EClass> ActionsPackageImpl::getReadSelfActionActivation_C
 }
 
 
+std::shared_ptr<ecore::EReference> ActionsPackageImpl::getReadSelfActionActivation_Attribute_readSelfAction() const
+{
+	return m_readSelfActionActivation_Attribute_readSelfAction;
+}
 
 std::shared_ptr<ecore::EOperation> ActionsPackageImpl::getReadSelfActionActivation_Operation_doAction() const
 {
@@ -674,6 +710,10 @@ std::shared_ptr<ecore::EClass> ActionsPackageImpl::getReadStructuralFeatureActio
 }
 
 
+std::shared_ptr<ecore::EReference> ActionsPackageImpl::getReadStructuralFeatureActionActivation_Attribute_readStructuralFeatureAction() const
+{
+	return m_readStructuralFeatureActionActivation_Attribute_readStructuralFeatureAction;
+}
 
 std::shared_ptr<ecore::EOperation> ActionsPackageImpl::getReadStructuralFeatureActionActivation_Operation_doAction() const
 {
@@ -715,6 +755,10 @@ std::shared_ptr<ecore::EClass> ActionsPackageImpl::getRemoveStructuralFeatureVal
 }
 
 
+std::shared_ptr<ecore::EReference> ActionsPackageImpl::getRemoveStructuralFeatureValueActivation_Attribute_removeStructuralFeatureValueAction() const
+{
+	return m_removeStructuralFeatureValueActivation_Attribute_removeStructuralFeatureValueAction;
+}
 
 std::shared_ptr<ecore::EOperation> ActionsPackageImpl::getRemoveStructuralFeatureValueActivation_Operation_doAction() const
 {
@@ -750,9 +794,9 @@ std::shared_ptr<ecore::EReference> ActionsPackageImpl::getReturnInformation_Attr
 	return m_returnInformation_Attribute_callEventOccurrence;
 }
 
-std::shared_ptr<ecore::EOperation> ActionsPackageImpl::getReturnInformation_Operation_copy() const
+std::shared_ptr<ecore::EOperation> ActionsPackageImpl::getReturnInformation_Operation__copy() const
 {
-	return m_returnInformation_Operation_copy;
+	return m_returnInformation_Operation__copy;
 }
 std::shared_ptr<ecore::EOperation> ActionsPackageImpl::getReturnInformation_Operation_equals_Value() const
 {

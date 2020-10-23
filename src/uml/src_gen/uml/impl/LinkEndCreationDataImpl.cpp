@@ -59,19 +59,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 LinkEndCreationDataImpl::LinkEndCreationDataImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	//Init references
-	
+{	
 }
 
 LinkEndCreationDataImpl::~LinkEndCreationDataImpl()
@@ -81,14 +69,12 @@ LinkEndCreationDataImpl::~LinkEndCreationDataImpl()
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			LinkEndCreationDataImpl::LinkEndCreationDataImpl(std::weak_ptr<uml::Element > par_owner)
-			:LinkEndCreationDataImpl()
-			{
-			    m_owner = par_owner;
-			}
-
+LinkEndCreationDataImpl::LinkEndCreationDataImpl(std::weak_ptr<uml::Element > par_owner)
+:LinkEndCreationDataImpl()
+{
+	m_owner = par_owner;
+}
 
 
 LinkEndCreationDataImpl::LinkEndCreationDataImpl(const LinkEndCreationDataImpl & obj):LinkEndCreationDataImpl()
@@ -146,15 +132,20 @@ std::shared_ptr<ecore::EClass> LinkEndCreationDataImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute isReplaceAll
+*/
+bool LinkEndCreationDataImpl::getIsReplaceAll() const 
+{
+	return m_isReplaceAll;
+}
+
 void LinkEndCreationDataImpl::setIsReplaceAll(bool _isReplaceAll)
 {
 	m_isReplaceAll = _isReplaceAll;
 } 
 
-bool LinkEndCreationDataImpl::getIsReplaceAll() const 
-{
-	return m_isReplaceAll;
-}
+
 
 //*********************************
 // Operations
@@ -168,23 +159,41 @@ bool LinkEndCreationDataImpl::insertAt_pin(Any diagnostics,std::map <   Any, Any
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference insertAt
+*/
 std::shared_ptr<uml::InputPin > LinkEndCreationDataImpl::getInsertAt() const
 {
 
     return m_insertAt;
 }
+
 void LinkEndCreationDataImpl::setInsertAt(std::shared_ptr<uml::InputPin> _insertAt)
 {
     m_insertAt = _insertAt;
 }
+
+
 
 //*********************************
 // Union Getter
 //*********************************
 std::shared_ptr<Union<uml::Element>> LinkEndCreationDataImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
+
 
 
 std::shared_ptr<LinkEndCreationData> LinkEndCreationDataImpl::getThisLinkEndCreationDataPtr() const

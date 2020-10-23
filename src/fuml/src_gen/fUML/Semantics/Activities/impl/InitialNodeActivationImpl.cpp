@@ -61,17 +61,7 @@ using namespace fUML::Semantics::Activities;
 // Constructor / Destructor
 //*********************************
 InitialNodeActivationImpl::InitialNodeActivationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 InitialNodeActivationImpl::~InitialNodeActivationImpl()
@@ -81,14 +71,12 @@ InitialNodeActivationImpl::~InitialNodeActivationImpl()
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			InitialNodeActivationImpl::InitialNodeActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
-			:InitialNodeActivationImpl()
-			{
-			    m_group = par_group;
-			}
-
+InitialNodeActivationImpl::InitialNodeActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
+:InitialNodeActivationImpl()
+{
+	m_group = par_group;
+}
 
 
 InitialNodeActivationImpl::InitialNodeActivationImpl(const InitialNodeActivationImpl & obj):InitialNodeActivationImpl()
@@ -164,6 +152,7 @@ void InitialNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Semantics::Activi
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<InitialNodeActivation> InitialNodeActivationImpl::getThisInitialNodeActivationPtr() const

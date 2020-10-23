@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class RemoveVariableValueActionImpl :virtual public WriteVariableActionImpl, virtual public RemoveVariableValueAction 
+	class RemoveVariableValueActionImpl : virtual public WriteVariableActionImpl, virtual public RemoveVariableValueAction 
 	{
 		public: 
 			RemoveVariableValueActionImpl(const RemoveVariableValueActionImpl & obj);
@@ -59,7 +59,7 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 ReadVariableActions removing a value from ordered, non-unique Variables must have a single removeAt InputPin and no value InputPin, if isRemoveDuplicates is false. The removeAt InputPin must be of type Unlimited Natural with multiplicity 1..1. Otherwise, the Action has a value InputPin and no removeAt InputPin.
+			ReadVariableActions removing a value from ordered, non-unique Variables must have a single removeAt InputPin and no value InputPin, if isRemoveDuplicates is false. The removeAt InputPin must be of type Unlimited Natural with multiplicity 1..1. Otherwise, the Action has a value InputPin and no removeAt InputPin.
 			if  variable.isOrdered and not variable.isUnique and not isRemoveDuplicates then 
 			  value = null and
 			  removeAt <> null and
@@ -67,7 +67,9 @@ namespace uml
 			  removeAt.is(1,1)
 			else
 			  removeAt = null and value <> null
-			endif */ 
+			endif
+			*/
+			 
 			virtual bool removeAt_and_value(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
@@ -76,49 +78,67 @@ namespace uml
 			// Attributes Getter Setter
 			//*********************************
 			/*!
-			 Specifies whether to remove duplicates of the value in nonunique Variables.
-			<p>From package UML::Actions.</p> */ 
+			Specifies whether to remove duplicates of the value in nonunique Variables.
+			<p>From package UML::Actions.</p>
+			*/
+			 
 			virtual bool getIsRemoveDuplicates() const ;
 			
 			/*!
-			 Specifies whether to remove duplicates of the value in nonunique Variables.
-			<p>From package UML::Actions.</p> */ 
+			Specifies whether to remove duplicates of the value in nonunique Variables.
+			<p>From package UML::Actions.</p>
+			*/
+			 
 			virtual void setIsRemoveDuplicates (bool _isRemoveDuplicates); 
-			
 			
 			
 			//*********************************
 			// Reference
 			//*********************************
 			/*!
-			 An InputPin that provides the position of an existing value to remove in ordered, nonunique Variables. The type of the removeAt InputPin is UnlimitedNatural, but the value cannot be zero or unlimited.
-			<p>From package UML::Actions.</p> */
+			An InputPin that provides the position of an existing value to remove in ordered, nonunique Variables. The type of the removeAt InputPin is UnlimitedNatural, but the value cannot be zero or unlimited.
+			<p>From package UML::Actions.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::InputPin > getRemoveAt() const ;
 			
 			/*!
-			 An InputPin that provides the position of an existing value to remove in ordered, nonunique Variables. The type of the removeAt InputPin is UnlimitedNatural, but the value cannot be zero or unlimited.
-			<p>From package UML::Actions.</p> */
-			virtual void setRemoveAt(std::shared_ptr<uml::InputPin> _removeAt_removeAt) ;
+			An InputPin that provides the position of an existing value to remove in ordered, nonunique Variables. The type of the removeAt InputPin is UnlimitedNatural, but the value cannot be zero or unlimited.
+			<p>From package UML::Actions.</p>
+			*/
+			
+			virtual void setRemoveAt(std::shared_ptr<uml::InputPin> _removeAt) ;
+			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
+			ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::ActivityGroup>> getInGroup() const ;/*!
-			 The ordered set of InputPins representing the inputs to the Action.
-			<p>From package UML::Actions.</p> */
+			The ordered set of InputPins representing the inputs to the Action.
+			<p>From package UML::Actions.</p>
+			*/
+			
 			virtual std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> getInput() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
+			The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const ; 
 			 
 			//*********************************

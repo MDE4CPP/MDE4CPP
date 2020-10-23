@@ -71,8 +71,7 @@ namespace fUML::Semantics::Activities
 //*********************************
 namespace fUML::Semantics::Activities 
 {
-	/*!
-	 */
+	
 	class ControlNodeActivation:virtual public ActivityNodeActivation
 	{
 		public:
@@ -92,8 +91,7 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual void fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token> >  incomingTokens) = 0;
 			
 			

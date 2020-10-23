@@ -52,10 +52,6 @@ throw "error";
 [/if]
 [/template]
 
-[template public generateOperationClearing(anOperation : Operation)]
-[anOperation.generatePackageGetterCall()/]->getMethod()->erase([anOperation.getFBPackageElement()/]);
-[/template]
-
 [template public generateInclude(anOperation : Operation)]
 [if (not anOperation.oclIsUndefined())]
 [if (not anOperation.name.oclIsUndefined())]

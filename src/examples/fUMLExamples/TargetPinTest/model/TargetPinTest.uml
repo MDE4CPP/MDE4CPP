@@ -3,9 +3,6 @@
   <eAnnotations xmi:id="_kcDSAF0ZEeq5aMbnrvR8VA" source="prepareApplication">
     <details xmi:id="_kcDSAV0ZEeq5aMbnrvR8VA" key="sourceCodeMain" value="&#x9;std::shared_ptr&lt;Controller> controller = factory->createController();&#xA;&#x9;std::shared_ptr&lt;Bag&lt;XModule>> modules = controller->getModules();&#xA;&#x9;modules->push_back(factory->createClassA());&#xA;&#x9;modules->push_back(factory->createClassB());&#xA;&#x9;modules->push_back(factory->createClassC());&#xA;&#xA;&#x9;std::cout &lt;&lt; &quot;DO MANUALLY&quot; &lt;&lt; std::endl;&#xA;&#xA;&#x9;int size = (int) modules->size();&#xA;&#x9;for (int i=0; i&lt;size; i++)&#xA;&#x9;{&#xA;&#x9;&#x9;std::shared_ptr&lt;XModule> m = modules->at(i);&#xA;&#x9;&#x9;m->print();&#xA;&#x9;}&#xA;&#xA;&#x9;std::cout &lt;&lt; &quot;DONE\r\n#######################################\r\nDO ACTIVITY&quot; &lt;&lt; std::endl;&#xA;&#xA;&#x9;controller->run();&#xA;&#xA;&#x9;std::cout &lt;&lt; &quot;DONE\r\n#######################################&quot; &lt;&lt; std::endl;"/>
   </eAnnotations>
-  <eAnnotations xmi:id="_lRWQYF0bEeq5aMbnrvR8VA" source="BuildMode">
-    <details xmi:id="_lRWQYV0bEeq5aMbnrvR8VA" key="type" value="library"/>
-  </eAnnotations>
   <packagedElement xmi:type="uml:Class" xmi:id="_b8fzIF0WEeq5aMbnrvR8VA" name="Controller" visibility="public">
     <ownedAttribute xmi:id="_ql-lAl0WEeq5aMbnrvR8VA" name="modules" type="_eCnyIF0WEeq5aMbnrvR8VA" aggregation="composite" association="_ql00AF0WEeq5aMbnrvR8VA">
       <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_ql-lA10WEeq5aMbnrvR8VA"/>

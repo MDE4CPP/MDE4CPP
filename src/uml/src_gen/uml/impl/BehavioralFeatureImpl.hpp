@@ -19,7 +19,7 @@
 //*********************************
 namespace uml 
 {
-	class BehavioralFeatureImpl :virtual public FeatureImpl, virtual public NamespaceImpl, virtual public BehavioralFeature 
+	class BehavioralFeatureImpl : virtual public FeatureImpl, virtual public NamespaceImpl, virtual public BehavioralFeature 
 	{
 		public: 
 			BehavioralFeatureImpl(const BehavioralFeatureImpl & obj);
@@ -52,24 +52,32 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 When isAbstract is true there are no methods.
-			isAbstract implies method->isEmpty() */ 
+			When isAbstract is true there are no methods.
+			isAbstract implies method->isEmpty()
+			*/
+			 
 			virtual bool abstract_no_method(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
-			 Creates a return result parameter with the specified name and type. */ 
+			Creates a return result parameter with the specified name and type.
+			*/
+			 
 			virtual std::shared_ptr<uml::Parameter> createReturnResult(std::string name,std::shared_ptr<uml::Type>  type) ;
 			
 			/*!
-			 The ownedParameters with direction in and inout.
+			The ownedParameters with direction in and inout.
 			result = (ownedParameter->select(direction=ParameterDirectionKind::_'in' or direction=ParameterDirectionKind::inout))
-			<p>From package UML::Classification.</p> */ 
+			<p>From package UML::Classification.</p>
+			*/
+			 
 			virtual std::shared_ptr<Bag<uml::Parameter> > inputParameters() ;
 			
 			/*!
-			 The ownedParameters with direction out, inout, or return.
+			The ownedParameters with direction out, inout, or return.
 			result = (ownedParameter->select(direction=ParameterDirectionKind::out or direction=ParameterDirectionKind::inout or direction=ParameterDirectionKind::return))
-			<p>From package UML::Classification.</p> */ 
+			<p>From package UML::Classification.</p>
+			*/
+			 
 			virtual std::shared_ptr<Bag<uml::Parameter> > outputParameters() ;
 			
 			
@@ -78,49 +86,67 @@ namespace uml
 			// Attributes Getter Setter
 			//*********************************
 			/*!
-			 Specifies the semantics of concurrent calls to the same passive instance (i.e., an instance originating from a Class with isActive being false). Active instances control access to their own BehavioralFeatures.
-			<p>From package UML::Classification.</p> */ 
+			Specifies the semantics of concurrent calls to the same passive instance (i.e., an instance originating from a Class with isActive being false). Active instances control access to their own BehavioralFeatures.
+			<p>From package UML::Classification.</p>
+			*/
+			 
 			virtual uml::CallConcurrencyKind getConcurrency() const ;
 			
 			/*!
-			 Specifies the semantics of concurrent calls to the same passive instance (i.e., an instance originating from a Class with isActive being false). Active instances control access to their own BehavioralFeatures.
-			<p>From package UML::Classification.</p> */ 
+			Specifies the semantics of concurrent calls to the same passive instance (i.e., an instance originating from a Class with isActive being false). Active instances control access to their own BehavioralFeatures.
+			<p>From package UML::Classification.</p>
+			*/
+			 
 			virtual void setConcurrency (uml::CallConcurrencyKind _concurrency); 
-			
 			/*!
-			 If true, then the BehavioralFeature does not have an implementation, and one must be supplied by a more specific Classifier. If false, the BehavioralFeature must have an implementation in the Classifier or one must be inherited.
-			<p>From package UML::Classification.</p> */ 
+			If true, then the BehavioralFeature does not have an implementation, and one must be supplied by a more specific Classifier. If false, the BehavioralFeature must have an implementation in the Classifier or one must be inherited.
+			<p>From package UML::Classification.</p>
+			*/
+			 
 			virtual bool getIsAbstract() const ;
 			
 			/*!
-			 If true, then the BehavioralFeature does not have an implementation, and one must be supplied by a more specific Classifier. If false, the BehavioralFeature must have an implementation in the Classifier or one must be inherited.
-			<p>From package UML::Classification.</p> */ 
+			If true, then the BehavioralFeature does not have an implementation, and one must be supplied by a more specific Classifier. If false, the BehavioralFeature must have an implementation in the Classifier or one must be inherited.
+			<p>From package UML::Classification.</p>
+			*/
+			 
 			virtual void setIsAbstract (bool _isAbstract); 
-			
 			
 			
 			//*********************************
 			// Reference
 			//*********************************
 			/*!
-			 A Behavior that implements the BehavioralFeature. There may be at most one Behavior for a particular pairing of a Classifier (as owner of the Behavior) and a BehavioralFeature (as specification of the Behavior).
-			<p>From package UML::Classification.</p> */
+			A Behavior that implements the BehavioralFeature. There may be at most one Behavior for a particular pairing of a Classifier (as owner of the Behavior) and a BehavioralFeature (as specification of the Behavior).
+			<p>From package UML::Classification.</p>
+			*/
+			
 			virtual std::shared_ptr<Bag<uml::Behavior>> getMethod() const ;
 			
+			
 			/*!
-			 The ordered set of formal Parameters of this BehavioralFeature.
-			<p>From package UML::Classification.</p> */
+			The ordered set of formal Parameters of this BehavioralFeature.
+			<p>From package UML::Classification.</p>
+			*/
+			
 			virtual std::shared_ptr<Subset<uml::Parameter, uml::NamedElement>> getOwnedParameter() const ;
 			
-			/*!
-			 The ParameterSets owned by this BehavioralFeature.
-			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<Subset<uml::ParameterSet, uml::NamedElement>> getOwnedParameterSet() const ;
 			
 			/*!
-			 The Types representing exceptions that may be raised during an invocation of this BehavioralFeature.
-			<p>From package UML::Classification.</p> */
+			The ParameterSets owned by this BehavioralFeature.
+			<p>From package UML::Classification.</p>
+			*/
+			
+			virtual std::shared_ptr<Subset<uml::ParameterSet, uml::NamedElement>> getOwnedParameterSet() const ;
+			
+			
+			/*!
+			The Types representing exceptions that may be raised during an invocation of this BehavioralFeature.
+			<p>From package UML::Classification.</p>
+			*/
+			
 			virtual std::shared_ptr<Bag<uml::Type>> getRaisedException() const ;
+			
 			
 							
 			
@@ -128,17 +154,25 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
-			<p>From package UML::CommonStructure.</p> */
+			A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::NamedElement>> getMember() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
-			 A collection of NamedElements owned by the Namespace.
-			<p>From package UML::CommonStructure.</p> */
+			A collection of NamedElements owned by the Namespace.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> getOwnedMember() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************

@@ -79,10 +79,12 @@ using namespace [aClass.generateNamespaceDefinition()/];
 // Constructor / Destructor
 //*********************************
 [className/]::[className/]()
-{
+{	
+	[comment]
 	//*********************************
 	// Attribute Members
 	//*********************************
+	
 	[for (aAttribute : EAttribute | aClass.eAttributes->asOrderedSet()->sortedBy(name)) separator ('\n')]
 	[aAttribute.generateAttributeInit()/][/for]
 
@@ -104,6 +106,7 @@ using namespace [aClass.generateNamespaceDefinition()/];
 	[for (aReference : EReference | aClass.eReferences->asOrderedSet()->sortedBy(name)) separator ('\n')]
 	[aReference.InitReferences()/]
 	[/for]
+	[/comment]
 }
 
 [className/]::~[className/]()
@@ -113,12 +116,11 @@ using namespace [aClass.generateNamespaceDefinition()/];
 #endif
 }
 
-
 [let ref:OrderedSet(EReference) = aClass.getAllContainers()]
 [for(aReference:EReference | ref->sortedBy(name)) separator('\n')]
-//Additional constructor for the containments back reference
 [if(ref->select(eType.name = aReference.eType.name)->size()>1 )]
-	[if(ref->select(eType.name = aReference.eType.name)->asOrderedSet()->sortedBy(name)->first() = aReference)]
+[if(ref->select(eType.name = aReference.eType.name)->asOrderedSet()->sortedBy(name)->first() = aReference)]
+//Additional constructor for the containments back reference
 [className/]::[className/]([aReference.generateReferenceType(true)/] par_[aReference.eType.name/], const int reference_id)
 :[className/]()
 {
@@ -138,19 +140,19 @@ using namespace [aClass.generateNamespaceDefinition()/];
 	}
    
 }
-	[/if]
-	[else]
-			[className/]::[className/]([aReference.generateReferenceType(true)/] par_[aReference.name/])
-			:[className/]()
-			{
-			    m_[aReference.name/] = par_[aReference.name/];
-				[if (aReference.hasSubset() and aReference.upperBound = 1)]
-					[for (m : EReference | aReference.oclAsType(EReference).Subset()->selectByKind(EReference).oclAsType(EReference)->select(isBackReference())->asOrderedSet())]
-				m_[m.name/] = par_[aReference.name/];
-				[/for][/if]
-			}
-	[/if]
-
+[/if]
+[else]
+//Additional constructor for the containments back reference
+[className/]::[className/]([aReference.generateReferenceType(true)/] par_[aReference.name/])
+:[className/]()
+{
+	m_[aReference.name/] = par_[aReference.name/];
+	[if (aReference.hasSubset() and aReference.upperBound = 1)]
+	[for (m : EReference | aReference.oclAsType(EReference).Subset()->selectByKind(EReference).oclAsType(EReference)->select(isBackReference())->asOrderedSet())]
+	m_[m.name/] = par_[aReference.name/];
+	[/for][/if]
+}
+[/if]
 [/for]
 [/let]
 
@@ -231,9 +233,7 @@ std::shared_ptr<[needNamespace(aClass.ePackage, 'EClass')/]> [className/]::eStat
 // Attribute Setter Getter
 //*********************************
 [for (aAttribute : EAttribute | aClass.eAttributes->asOrderedSet()->sortedBy(name)) separator ('\n')]
-[aAttribute.generateAttributeSetterImplementationCpp(true)/]
-
-[aAttribute.generateAttributeGetterImplementationCpp()/]
+[aAttribute.generateAttributeCpp()/]
 [/for]
 
 //*********************************

@@ -19,7 +19,7 @@
 //*********************************
 namespace PSCS::Semantics::Loci 
 {
-	class CS_ExecutionFactoryImpl :virtual public fUML::Semantics::Loci::ExecutionFactoryImpl, virtual public CS_ExecutionFactory 
+	class CS_ExecutionFactoryImpl : virtual public fUML::Semantics::Loci::ExecutionFactoryImpl, virtual public CS_ExecutionFactory 
 	{
 		public: 
 			CS_ExecutionFactoryImpl(const CS_ExecutionFactoryImpl & obj);
@@ -47,16 +47,13 @@ namespace PSCS::Semantics::Loci
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> getStereotypeApplication(std::shared_ptr<uml::Class>  stereotype,std::shared_ptr<uml::Element>  element) ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<uml::Classifier> getStereotypeClass(std::string profileName,std::string stereotypeName) ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> instantiateVisitor(std::shared_ptr<uml::Element>  element) ;
 			
 			
@@ -69,9 +66,9 @@ namespace PSCS::Semantics::Loci
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Bag<uml::Package>> getAppliedProfiles() const ;
+			
 			
 							
 			

@@ -4,7 +4,6 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EClass.hpp"
-#include "PSCS/Semantics/Values/ValuesPackage.hpp"
 #include "PSCS/Semantics/Values/impl/CS_OpaqueExpressionEvaluationImpl.hpp"
 
 

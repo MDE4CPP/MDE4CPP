@@ -56,17 +56,7 @@ using namespace ecore;
 // Constructor / Destructor
 //*********************************
 EDataTypeImpl::EDataTypeImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 EDataTypeImpl::~EDataTypeImpl()
@@ -76,22 +66,19 @@ EDataTypeImpl::~EDataTypeImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+EDataTypeImpl::EDataTypeImpl(std::weak_ptr<ecore::EObject > par_eContainer)
+:EDataTypeImpl()
+{
+	m_eContainer = par_eContainer;
+}
 
 //Additional constructor for the containments back reference
-			EDataTypeImpl::EDataTypeImpl(std::weak_ptr<ecore::EObject > par_eContainer)
-			:EDataTypeImpl()
-			{
-			    m_eContainer = par_eContainer;
-			}
-
-
-//Additional constructor for the containments back reference
-			EDataTypeImpl::EDataTypeImpl(std::weak_ptr<ecore::EPackage > par_ePackage)
-			:EDataTypeImpl()
-			{
-			    m_ePackage = par_ePackage;
-			}
-
+EDataTypeImpl::EDataTypeImpl(std::weak_ptr<ecore::EPackage > par_ePackage)
+:EDataTypeImpl()
+{
+	m_ePackage = par_ePackage;
+}
 
 
 EDataTypeImpl::EDataTypeImpl(const EDataTypeImpl & obj):EDataTypeImpl()
@@ -151,15 +138,20 @@ std::shared_ptr<EClass> EDataTypeImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute serializable
+*/
+bool EDataTypeImpl::isSerializable() const 
+{
+	return m_serializable;
+}
+
 void EDataTypeImpl::setSerializable(bool _serializable)
 {
 	m_serializable = _serializable;
 } 
 
-bool EDataTypeImpl::isSerializable() const 
-{
-	return m_serializable;
-}
+
 
 //*********************************
 // Operations
@@ -174,8 +166,20 @@ bool EDataTypeImpl::isSerializable() const
 //*********************************
 std::shared_ptr<Union<ecore::EObject>> EDataTypeImpl::getEContens() const
 {
+	if(m_eContens == nullptr)
+	{
+		/*Union*/
+		m_eContens.reset(new Union<ecore::EObject>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_eContens - Union<ecore::EObject>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_eContens;
 }
+
+
 
 
 std::shared_ptr<EDataType> EDataTypeImpl::getThisEDataTypePtr() const

@@ -19,7 +19,7 @@
 //*********************************
 namespace fUML::Semantics::CommonBehavior 
 {
-	class CallEventExecutionImpl :virtual public ExecutionImpl, virtual public CallEventExecution 
+	class CallEventExecutionImpl : virtual public ExecutionImpl, virtual public CallEventExecution 
 	{
 		public: 
 			CallEventExecutionImpl(const CallEventExecutionImpl & obj);
@@ -43,50 +43,40 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			// Operations
 			//*********************************
+			 
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() ;
 			
-			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> createEventOccurrence() ;
 			
-			/*!
-			 */ 
+			 
 			virtual void execute() ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > getInputParameterValues() ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<uml::Operation> getOperation() ;
 			
-			/*!
-			 */ 
+			 
 			virtual bool isCallerSuspended() ;
 			
-			/*!
-			 */ 
+			 
 			virtual void makeCall() ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> new_() ;
 			
-			/*!
-			 */ 
+			 
 			virtual void releaseCaller() ;
 			
-			/*!
-			 */ 
+			 
 			virtual void setOutputParameterValues(std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> >  parameterValues) ;
 			
-			/*!
-			 */ 
+			 
 			virtual void suspendCaller() ;
 			
-			/*!
-			 */ 
+			 
 			virtual void wait_() ;
 			
 			
@@ -94,14 +84,11 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual bool getCallerSuspended() const ;
 			
-			/*!
-			 */ 
+			 
 			virtual void setCallerSuspended (bool _callerSuspended); 
-			
 			
 			
 			//*********************************

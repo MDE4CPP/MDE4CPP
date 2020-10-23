@@ -29,8 +29,7 @@ namespace PSCS::Semantics::Values
 	The Metamodel Package for the Values metamodel. This package is used to enable the reflection of model elements. It contains all model elements
 	which were described in an ecore file.
 	*/
-	/*!
-	 */
+	
 	class ValuesPackage : virtual public ecore::EPackage 
 	{
 		private:    
@@ -48,7 +47,7 @@ namespace PSCS::Semantics::Values
 
 			// Begin Class CS_OpaqueExpressionEvaluation
 			//Class and Feature IDs 
-			static const unsigned int CS_OPAQUEEXPRESSIONEVALUATION_CLASS = 23;
+			static const unsigned long CS_OPAQUEEXPRESSIONEVALUATION_CLASS = 2119672650;
 			static const unsigned int CS_OPAQUEEXPRESSIONEVALUATION_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int CS_OPAQUEEXPRESSIONEVALUATION_CLASS_OPERATION_COUNT = 5;
 			

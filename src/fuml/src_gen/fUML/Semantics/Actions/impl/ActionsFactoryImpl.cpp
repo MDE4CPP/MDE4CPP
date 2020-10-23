@@ -4,7 +4,6 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EClass.hpp"
-#include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Actions/impl/AcceptCallActionActivationImpl.hpp"
 #include "fUML/Semantics/Actions/impl/AcceptCallActionActivationsImpl.hpp"
 #include "fUML/Semantics/Actions/impl/AcceptEventActionActivationImpl.hpp"

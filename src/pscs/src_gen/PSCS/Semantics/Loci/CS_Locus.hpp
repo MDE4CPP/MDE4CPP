@@ -75,8 +75,7 @@ namespace fUML::Semantics::StructuredClassifiers
 //*********************************
 namespace PSCS::Semantics::Loci 
 {
-	/*!
-	 */
+	
 	class CS_Locus:virtual public fUML::Semantics::Loci::Locus
 	{
 		public:
@@ -96,8 +95,7 @@ namespace PSCS::Semantics::Loci
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> instantiate(std::shared_ptr<uml::Class>  type) = 0;
 			
 			

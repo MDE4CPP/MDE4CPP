@@ -39,6 +39,8 @@
 
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
 
+#include "uml/Pin.hpp"
+
 #include "fUML/Semantics/Actions/PinActivation.hpp"
 
 #include "fUML/Semantics/Activities/Token.hpp"
@@ -61,17 +63,7 @@ using namespace fUML::Semantics::Actions;
 // Constructor / Destructor
 //*********************************
 OutputPinActivationImpl::OutputPinActivationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 OutputPinActivationImpl::~OutputPinActivationImpl()
@@ -81,14 +73,12 @@ OutputPinActivationImpl::~OutputPinActivationImpl()
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			OutputPinActivationImpl::OutputPinActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
-			:OutputPinActivationImpl()
-			{
-			    m_group = par_group;
-			}
-
+OutputPinActivationImpl::OutputPinActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
+:OutputPinActivationImpl()
+{
+	m_group = par_group;
+}
 
 
 OutputPinActivationImpl::OutputPinActivationImpl(const OutputPinActivationImpl & obj):OutputPinActivationImpl()
@@ -113,6 +103,8 @@ OutputPinActivationImpl::OutputPinActivationImpl(const OutputPinActivationImpl &
 
 	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> _outgoingEdges = obj.getOutgoingEdges();
 	m_outgoingEdges.reset(new Bag<fUML::Semantics::Activities::ActivityEdgeInstance>(*(obj.getOutgoingEdges().get())));
+
+	m_pin  = obj.getPin();
 
 
 	//Clone references with containment (deep copy)
@@ -155,6 +147,7 @@ std::shared_ptr<ecore::EClass> OutputPinActivationImpl::eStaticClass() const
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<OutputPinActivation> OutputPinActivationImpl::getThisOutputPinActivationPtr() const

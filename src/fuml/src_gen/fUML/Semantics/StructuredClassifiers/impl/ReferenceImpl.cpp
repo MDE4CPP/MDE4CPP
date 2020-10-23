@@ -76,19 +76,7 @@ using namespace fUML::Semantics::StructuredClassifiers;
 // Constructor / Destructor
 //*********************************
 ReferenceImpl::ReferenceImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	//Init references
-	
+{	
 }
 
 ReferenceImpl::~ReferenceImpl()
@@ -97,7 +85,6 @@ ReferenceImpl::~ReferenceImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Reference "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -137,6 +124,20 @@ std::shared_ptr<ecore::EClass> ReferenceImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
+std::shared_ptr<fUML::Semantics::Values::Value> ReferenceImpl::_copy()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// // Create a new reference with the same referent as this reference.
+
+std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> newValue = fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createReference();
+
+newValue->setReferent(this->getReferent());
+
+return newValue;
+	//end of body
+}
+
 void ReferenceImpl::assignFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<Bag<fUML::Semantics::Values::Value> >  values,int position)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
@@ -269,19 +270,26 @@ std::string ReferenceImpl::toString()
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference referent
+*/
 std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object > ReferenceImpl::getReferent() const
 {
 //assert(m_referent);
     return m_referent;
 }
+
 void ReferenceImpl::setReferent(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> _referent)
 {
     m_referent = _referent;
 }
 
+
+
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<Reference> ReferenceImpl::getThisReferencePtr() const

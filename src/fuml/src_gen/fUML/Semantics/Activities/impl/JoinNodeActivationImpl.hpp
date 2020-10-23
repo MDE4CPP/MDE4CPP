@@ -19,7 +19,7 @@
 //*********************************
 namespace fUML::Semantics::Activities 
 {
-	class JoinNodeActivationImpl :virtual public ControlNodeActivationImpl, virtual public JoinNodeActivation 
+	class JoinNodeActivationImpl : virtual public ControlNodeActivationImpl, virtual public JoinNodeActivation 
 	{
 		public: 
 			JoinNodeActivationImpl(const JoinNodeActivationImpl & obj);
@@ -47,12 +47,10 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual void fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token> >  incomingTokens) ;
 			
-			/*!
-			 */ 
+			 
 			virtual bool isReady() ;
 			
 			

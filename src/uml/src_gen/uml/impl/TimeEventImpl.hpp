@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class TimeEventImpl :virtual public EventImpl, virtual public TimeEvent 
+	class TimeEventImpl : virtual public EventImpl, virtual public TimeEvent 
 	{
 		public: 
 			TimeEventImpl(const TimeEventImpl & obj);
@@ -59,8 +59,10 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 The ValueSpecification when must return a non-negative Integer.
-			when.integerValue() >= 0 */ 
+			The ValueSpecification when must return a non-negative Integer.
+			when.integerValue() >= 0
+			*/
+			 
 			virtual bool when_non_negative(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
@@ -69,43 +71,57 @@ namespace uml
 			// Attributes Getter Setter
 			//*********************************
 			/*!
-			 Specifies whether the TimeEvent is specified as an absolute or relative time.
-			<p>From package UML::CommonBehavior.</p> */ 
+			Specifies whether the TimeEvent is specified as an absolute or relative time.
+			<p>From package UML::CommonBehavior.</p>
+			*/
+			 
 			virtual bool getIsRelative() const ;
 			
 			/*!
-			 Specifies whether the TimeEvent is specified as an absolute or relative time.
-			<p>From package UML::CommonBehavior.</p> */ 
+			Specifies whether the TimeEvent is specified as an absolute or relative time.
+			<p>From package UML::CommonBehavior.</p>
+			*/
+			 
 			virtual void setIsRelative (bool _isRelative); 
-			
 			
 			
 			//*********************************
 			// Reference
 			//*********************************
 			/*!
-			 Specifies the time of the TimeEvent.
-			<p>From package UML::CommonBehavior.</p> */
+			Specifies the time of the TimeEvent.
+			<p>From package UML::CommonBehavior.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::TimeExpression > getWhen() const ;
 			
 			/*!
-			 Specifies the time of the TimeEvent.
-			<p>From package UML::CommonBehavior.</p> */
-			virtual void setWhen(std::shared_ptr<uml::TimeExpression> _when_when) ;
+			Specifies the time of the TimeEvent.
+			<p>From package UML::CommonBehavior.</p>
+			*/
+			
+			virtual void setWhen(std::shared_ptr<uml::TimeExpression> _when) ;
+			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************

@@ -19,7 +19,7 @@
 //*********************************
 namespace fUML::Semantics::CommonBehavior 
 {
-	class OpaqueBehaviorExecutionImpl :virtual public ExecutionImpl, virtual public OpaqueBehaviorExecution 
+	class OpaqueBehaviorExecutionImpl : virtual public ExecutionImpl, virtual public OpaqueBehaviorExecution 
 	{
 		public: 
 			OpaqueBehaviorExecutionImpl(const OpaqueBehaviorExecutionImpl & obj);
@@ -43,12 +43,10 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual void doBody(std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> >  inputParameters,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> >  outputParameters) ;
 			
-			/*!
-			 */ 
+			 
 			virtual void execute() ;
 			
 			

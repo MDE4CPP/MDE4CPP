@@ -19,7 +19,7 @@
 //*********************************
 namespace fUML::Semantics::SimpleClassifiers 
 {
-	class SignalInstanceImpl :virtual public CompoundValueImpl, virtual public SignalInstance 
+	class SignalInstanceImpl : virtual public CompoundValueImpl, virtual public SignalInstance 
 	{
 		public: 
 			SignalInstanceImpl(const SignalInstanceImpl & obj);
@@ -43,6 +43,9 @@ namespace fUML::Semantics::SimpleClassifiers
 			//*********************************
 			// Operations
 			//*********************************
+			 
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() ;
+			
 			
 			
 			//*********************************
@@ -53,13 +56,12 @@ namespace fUML::Semantics::SimpleClassifiers
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<uml::Signal > getType() const ;
 			
-			/*!
-			 */
-			virtual void setType(std::shared_ptr<uml::Signal> _type_type) ;
+			
+			virtual void setType(std::shared_ptr<uml::Signal> _type) ;
+			
 							
 			
 			//*********************************

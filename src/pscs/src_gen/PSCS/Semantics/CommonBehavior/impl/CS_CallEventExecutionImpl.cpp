@@ -33,6 +33,8 @@
 
 #include <exception> // used in Persistence
 
+#include "uml/Behavior.hpp"
+
 #include "PSCS/Semantics/StructuredClassifiers/CS_InteractionPoint.hpp"
 
 #include "fUML/Semantics/CommonBehavior/CallEventExecution.hpp"
@@ -57,10 +59,10 @@
 #include "PSCS/Semantics/CommonBehavior/impl/CommonBehaviorFactoryImpl.hpp"
 #include "PSCS/Semantics/CommonBehavior/impl/CommonBehaviorPackageImpl.hpp"
 
-#include "PSCS/PSCSFactory.hpp"
-#include "PSCS/PSCSPackage.hpp"
 #include "PSCS/Semantics/SemanticsFactory.hpp"
 #include "PSCS/Semantics/SemanticsPackage.hpp"
+#include "PSCS/PSCSFactory.hpp"
+#include "PSCS/PSCSPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -71,19 +73,7 @@ using namespace PSCS::Semantics::CommonBehavior;
 // Constructor / Destructor
 //*********************************
 CS_CallEventExecutionImpl::CS_CallEventExecutionImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	//Init references
-	
+{	
 }
 
 CS_CallEventExecutionImpl::~CS_CallEventExecutionImpl()
@@ -92,7 +82,6 @@ CS_CallEventExecutionImpl::~CS_CallEventExecutionImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete CS_CallEventExecution "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -106,6 +95,8 @@ CS_CallEventExecutionImpl::CS_CallEventExecutionImpl(const CS_CallEventExecution
 
 	//copy references with no containment (soft copy)
 	
+	m_behavior  = obj.getBehavior();
+
 	m_context  = obj.getContext();
 
 	m_interactionPoint  = obj.getInteractionPoint();
@@ -163,7 +154,18 @@ std::shared_ptr<ecore::EClass> CS_CallEventExecutionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
+std::shared_ptr<fUML::Semantics::Values::Value> CS_CallEventExecutionImpl::_copy()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Create a new call event execution that is a copy of this execution
+// with no referenced interaction point.
 
+std::shared_ptr<PSCS::Semantics::CommonBehavior::CS_CallEventExecution> newValue = std::dynamic_pointer_cast<PSCS::Semantics::CommonBehavior::CS_CallEventExecution>(fUML::Semantics::CommonBehavior::CallEventExecutionImpl::_copy());
+newValue->setInteractionPoint(nullptr);
+return newValue;
+	//end of body
+}
 
 std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> CS_CallEventExecutionImpl::createEventOccurrence()
 {
@@ -191,19 +193,26 @@ return PSCS::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->crea
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference interactionPoint
+*/
 std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint > CS_CallEventExecutionImpl::getInteractionPoint() const
 {
 
     return m_interactionPoint;
 }
+
 void CS_CallEventExecutionImpl::setInteractionPoint(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> _interactionPoint)
 {
     m_interactionPoint = _interactionPoint;
 }
 
+
+
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<CS_CallEventExecution> CS_CallEventExecutionImpl::getThisCS_CallEventExecutionPtr() const
@@ -228,7 +237,7 @@ Any CS_CallEventExecutionImpl::eGet(int featureID, bool resolve, bool coreType) 
 	switch(featureID)
 	{
 		case PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::CS_CALLEVENTEXECUTION_ATTRIBUTE_INTERACTIONPOINT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getInteractionPoint())); //47
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getInteractionPoint())); //48
 	}
 	return fUML::Semantics::CommonBehavior::CallEventExecutionImpl::eGet(featureID, resolve, coreType);
 }
@@ -237,7 +246,7 @@ bool CS_CallEventExecutionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::CS_CALLEVENTEXECUTION_ATTRIBUTE_INTERACTIONPOINT:
-			return getInteractionPoint() != nullptr; //47
+			return getInteractionPoint() != nullptr; //48
 	}
 	return fUML::Semantics::CommonBehavior::CallEventExecutionImpl::internalEIsSet(featureID);
 }
@@ -250,7 +259,7 @@ bool CS_CallEventExecutionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> _interactionPoint = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>(_temp);
-			setInteractionPoint(_interactionPoint); //47
+			setInteractionPoint(_interactionPoint); //48
 			return true;
 		}
 	}

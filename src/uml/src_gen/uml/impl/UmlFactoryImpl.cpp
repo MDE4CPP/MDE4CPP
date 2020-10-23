@@ -5,7 +5,6 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EClass.hpp"
 #include "uml/impl/ElementImpl.hpp"
-#include "uml/UmlPackage.hpp"
 #include "uml/impl/AbstractionImpl.hpp"
 #include "uml/impl/AcceptCallActionImpl.hpp"
 #include "uml/impl/AcceptEventActionImpl.hpp"

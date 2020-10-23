@@ -37,12 +37,17 @@
 #include "fUML/Semantics/Loci/Locus.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/CS_InteractionPoint.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/CS_Object.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
+#include "fUML/Semantics/Activities/ActivityExecution.hpp"
+#include "uml/InputPin.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+
+#include "uml/Action.hpp"
 
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 
@@ -74,10 +79,10 @@
 #include "PSCS/Semantics/Actions/impl/ActionsFactoryImpl.hpp"
 #include "PSCS/Semantics/Actions/impl/ActionsPackageImpl.hpp"
 
-#include "PSCS/PSCSFactory.hpp"
-#include "PSCS/PSCSPackage.hpp"
 #include "PSCS/Semantics/SemanticsFactory.hpp"
 #include "PSCS/Semantics/SemanticsPackage.hpp"
+#include "PSCS/PSCSFactory.hpp"
+#include "PSCS/PSCSPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -88,17 +93,7 @@ using namespace PSCS::Semantics::Actions;
 // Constructor / Destructor
 //*********************************
 CS_ClearStructuralFeatureActionActivationImpl::CS_ClearStructuralFeatureActionActivationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 CS_ClearStructuralFeatureActionActivationImpl::~CS_ClearStructuralFeatureActionActivationImpl()
@@ -108,14 +103,12 @@ CS_ClearStructuralFeatureActionActivationImpl::~CS_ClearStructuralFeatureActionA
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			CS_ClearStructuralFeatureActionActivationImpl::CS_ClearStructuralFeatureActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
-			:CS_ClearStructuralFeatureActionActivationImpl()
-			{
-			    m_group = par_group;
-			}
-
+CS_ClearStructuralFeatureActionActivationImpl::CS_ClearStructuralFeatureActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
+:CS_ClearStructuralFeatureActionActivationImpl()
+{
+	m_group = par_group;
+}
 
 
 CS_ClearStructuralFeatureActionActivationImpl::CS_ClearStructuralFeatureActionActivationImpl(const CS_ClearStructuralFeatureActionActivationImpl & obj):CS_ClearStructuralFeatureActionActivationImpl()
@@ -129,6 +122,8 @@ CS_ClearStructuralFeatureActionActivationImpl::CS_ClearStructuralFeatureActionAc
 
 	//copy references with no containment (soft copy)
 	
+	m_action  = obj.getAction();
+
 	m_group  = obj.getGroup();
 
 	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> _incomingEdges = obj.getIncomingEdges();
@@ -204,7 +199,24 @@ void CS_ClearStructuralFeatureActionActivationImpl::doAction()
 	std::shared_ptr<uml::ClearStructuralFeatureAction> action = std::dynamic_pointer_cast<uml::ClearStructuralFeatureAction>(this->getNode());
 	std::shared_ptr<uml::StructuralFeature> feature = action->getStructuralFeature();
 	std::shared_ptr<uml::Association> association = this->getAssociation(feature);
-	std::shared_ptr<fUML::Semantics::Values::Value> value = this->takeTokens(action->getObject())->at(0);
+	std::shared_ptr<fUML::Semantics::Values::Value> value = nullptr;		
+
+	/* MDE4CPP specific implementation for handling "self"-Pin */
+	std::string targetPinName = action->getObject()->getName();
+	if((targetPinName.empty()) || (targetPinName.find("self") == 0)){
+		//target is set to the context of the current activity execution
+		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> contextReference = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
+		std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> context = this->getActivityExecution()->getContext();
+		contextReference->setReferent(context);
+		contextReference->setCompositeReferent(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Object>(context));
+			
+		value = contextReference;
+	}
+	else{
+		value = this->takeTokens(action->getObject())->at(0);
+	}
+	/*--------------------------------------------------------*/
+
 	if(association != nullptr) {
 		std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Link>> links = this->getMatchingLinks(association, feature, value);
 		for(unsigned int i = 0; i < links->size(); i++) {
@@ -361,8 +373,20 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value> > CS_ClearStructuralFeatureA
 //*********************************
 std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> CS_ClearStructuralFeatureActionActivationImpl::getPinActivation() const
 {
+	if(m_pinActivation == nullptr)
+	{
+		/*Union*/
+		m_pinActivation.reset(new Union<fUML::Semantics::Actions::PinActivation>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_pinActivation - Union<fUML::Semantics::Actions::PinActivation>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_pinActivation;
 }
+
+
 
 
 std::shared_ptr<CS_ClearStructuralFeatureActionActivation> CS_ClearStructuralFeatureActionActivationImpl::getThisCS_ClearStructuralFeatureActionActivationPtr() const

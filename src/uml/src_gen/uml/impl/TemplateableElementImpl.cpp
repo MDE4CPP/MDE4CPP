@@ -56,35 +56,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 TemplateableElementImpl::TemplateableElementImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-		/*Subset*/
-		m_templateBinding.reset(new Subset<uml::TemplateBinding, uml::Element >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_templateBinding - Subset<uml::TemplateBinding, uml::Element >()" << std::endl;
-		#endif
-	
-	
-
-	//Init references
-	
-
-		/*Subset*/
-		m_templateBinding->initSubset(m_ownedElement);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_templateBinding - Subset<uml::TemplateBinding, uml::Element >(m_ownedElement)" << std::endl;
-		#endif
-	
-	
+{	
 }
 
 TemplateableElementImpl::~TemplateableElementImpl()
@@ -94,14 +66,12 @@ TemplateableElementImpl::~TemplateableElementImpl()
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			TemplateableElementImpl::TemplateableElementImpl(std::weak_ptr<uml::Element > par_owner)
-			:TemplateableElementImpl()
-			{
-			    m_owner = par_owner;
-			}
-
+TemplateableElementImpl::TemplateableElementImpl(std::weak_ptr<uml::Element > par_owner)
+:TemplateableElementImpl()
+{
+	m_owner = par_owner;
+}
 
 
 TemplateableElementImpl::TemplateableElementImpl(const TemplateableElementImpl & obj):TemplateableElementImpl()
@@ -144,12 +114,11 @@ TemplateableElementImpl::TemplateableElementImpl(const TemplateableElementImpl &
 
 	
 
-		/*Subset*/
-		m_templateBinding->initSubset(m_ownedElement);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_templateBinding - Subset<uml::TemplateBinding, uml::Element >(m_ownedElement)" << std::endl;
-		#endif
-	
+	/*Subset*/
+	m_templateBinding->initSubset(getOwnedElement());
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Initialising value Subset: " << "m_templateBinding - Subset<uml::TemplateBinding, uml::Element >(getOwnedElement())" << std::endl;
+	#endif
 	
 }
 
@@ -187,21 +156,48 @@ std::shared_ptr<Bag<uml::ParameterableElement> > TemplateableElementImpl::parame
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference ownedTemplateSignature
+*/
 std::shared_ptr<uml::TemplateSignature > TemplateableElementImpl::getOwnedTemplateSignature() const
 {
 
     return m_ownedTemplateSignature;
 }
+
 void TemplateableElementImpl::setOwnedTemplateSignature(std::shared_ptr<uml::TemplateSignature> _ownedTemplateSignature)
 {
     m_ownedTemplateSignature = _ownedTemplateSignature;
 }
 
+
+
+/*
+Getter & Setter for reference templateBinding
+*/
 std::shared_ptr<Subset<uml::TemplateBinding, uml::Element>> TemplateableElementImpl::getTemplateBinding() const
 {
+	if(m_templateBinding == nullptr)
+	{
+		/*Subset*/
+		m_templateBinding.reset(new Subset<uml::TemplateBinding, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_templateBinding - Subset<uml::TemplateBinding, uml::Element >()" << std::endl;
+		#endif
+		
+		/*Subset*/
+		m_templateBinding->initSubset(getOwnedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_templateBinding - Subset<uml::TemplateBinding, uml::Element >(getOwnedElement())" << std::endl;
+		#endif
+		
+	}
 
     return m_templateBinding;
 }
+
+
+
 
 
 //*********************************
@@ -209,8 +205,20 @@ std::shared_ptr<Subset<uml::TemplateBinding, uml::Element>> TemplateableElementI
 //*********************************
 std::shared_ptr<Union<uml::Element>> TemplateableElementImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
+
 
 
 std::shared_ptr<TemplateableElement> TemplateableElementImpl::getThisTemplateableElementPtr() const

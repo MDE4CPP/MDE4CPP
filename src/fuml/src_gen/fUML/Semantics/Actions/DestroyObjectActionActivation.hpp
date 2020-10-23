@@ -36,6 +36,11 @@ namespace fUML
 }
 
 //Forward Declaration for used types
+namespace uml 
+{
+	class Action;
+}
+
 namespace fUML::Semantics::Actions 
 {
 	class ActionActivation;
@@ -54,6 +59,11 @@ namespace uml
 namespace fUML::Semantics::Activities 
 {
 	class ActivityNodeActivationGroup;
+}
+
+namespace uml 
+{
+	class DestroyObjectAction;
 }
 
 namespace fUML::Semantics::Actions 
@@ -100,8 +110,7 @@ namespace fUML::Semantics::Values
 //*********************************
 namespace fUML::Semantics::Actions 
 {
-	/*!
-	 */
+	
 	class DestroyObjectActionActivation:virtual public ActionActivation
 	{
 		public:
@@ -121,16 +130,13 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual void destroyObject(std::shared_ptr<fUML::Semantics::Values::Value>  value,bool isDestroyLinks,bool isDestroyOwnedObjects) = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual void doAction() = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual bool objectIsComposite(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference>  reference,std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link>  link) = 0;
 			
 			
@@ -141,6 +147,20 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Reference
 			//*********************************
+			
+			virtual std::shared_ptr<uml::DestroyObjectAction > getDestroyObjectAction() const = 0;
+			
+			
+			virtual void setDestroyObjectAction(std::shared_ptr<uml::DestroyObjectAction> _destroyObjectAction) = 0;
+			
+			/*Additional Setter for 'ActionActivation::action' redefined by reference 'destroyObjectAction'*/
+			
+			virtual void setAction(std::shared_ptr<uml::Action> _action) = 0;
+			
+			/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'destroyObjectAction'*/
+			
+			virtual void setNode(std::shared_ptr<uml::ActivityNode> _node) = 0;
+			
 			
 
 		protected:
@@ -153,13 +173,13 @@ namespace fUML::Semantics::Actions
 			// Reference Members
 			//*********************************
 			
+			std::shared_ptr<uml::DestroyObjectAction > m_destroyObjectAction;
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> getPinActivation() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

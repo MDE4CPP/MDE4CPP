@@ -52,19 +52,7 @@ using namespace fUML::Semantics::CommonBehavior;
 // Constructor / Destructor
 //*********************************
 CallEventBehaviorImpl::CallEventBehaviorImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	//Init references
-	
+{	
 }
 
 CallEventBehaviorImpl::~CallEventBehaviorImpl()
@@ -73,7 +61,6 @@ CallEventBehaviorImpl::~CallEventBehaviorImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete CallEventBehavior "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -118,19 +105,26 @@ std::shared_ptr<ecore::EClass> CallEventBehaviorImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference operation
+*/
 std::shared_ptr<uml::Operation > CallEventBehaviorImpl::getOperation() const
 {
 //assert(m_operation);
     return m_operation;
 }
+
 void CallEventBehaviorImpl::setOperation(std::shared_ptr<uml::Operation> _operation)
 {
     m_operation = _operation;
 }
 
+
+
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<CallEventBehavior> CallEventBehaviorImpl::getThisCallEventBehaviorPtr() const

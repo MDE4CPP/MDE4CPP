@@ -72,7 +72,7 @@ virtual [aOperation.generateCppType()/] [aOperation.name/]([for (sParameter : Pa
 			parameterList->push_back(eAny([par.name/]));
 [/for]
 [let anActivity : Activity = aOperation.method->filter(Activity)->asOrderedSet()->first()]
-			Any activityResult = executionPlugin->executeActivity([anActivity.getNearestPackage().myQualifiedTypeNamePackage()/]eInstance()->[anActivity.generatePackageGetterCall()/], parameterList, getThis[aOperation.class.name.toUpperFirst()/]Ptr());
+			Any activityResult = executionPlugin->executeActivity([anActivity.generatePackageGetterCall()/], parameterList, getThis[aOperation.class.name.toUpperFirst()/]Ptr());
 [/let]
 
 [if (aOperation.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->notEmpty())]
@@ -134,6 +134,9 @@ virtual [aOperation.generateCppType()/] [aOperation.name/]([for (sParameter : Pa
 */]
 [template public initalizeOperation(aOperation : Operation)]
 [memberName(aOperation)/]->setName("[aOperation.name/]");
+[if(not aOperation.type.oclIsUndefined())]
+[memberName(aOperation)/]->setType([aOperation.type.generatePackageGetterCall(aOperation)/]);
+[/if]
 [for (beh : Behavior | aOperation.method) separator ('\n')]
 [memberName(aOperation)/]->getMethod()->push_back([memberName(beh)/]);[/for]
 
@@ -143,3 +146,18 @@ virtual [aOperation.generateCppType()/] [aOperation.name/]([for (sParameter : Pa
 
 [aOperation.generateStereotypeApplication()/]
 [/template]
+
+[**
+ * checks if 'matchingOperation' matches 'baseOperation'
+ * 
+ * operations match if:
+ * - they have the sme name
+ * - they have the same number of input parameters
+ * - the input parameter lists have the same types in the same order
+*/]
+[query public matches(baseOperation : Operation, matchingOperation : Operation) : Boolean = 
+	if(baseOperation.name <> matchingOperation.name) then false
+		else 	(baseOperation.ownedParameter->select(direction = ParameterDirectionKind::_in or direction = ParameterDirectionKind::_inout).type 
+				= matchingOperation.ownedParameter->select(direction = ParameterDirectionKind::_in or direction = ParameterDirectionKind::_inout).type)
+		endif
+/]

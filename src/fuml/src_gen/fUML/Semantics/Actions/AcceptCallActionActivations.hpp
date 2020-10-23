@@ -41,14 +41,13 @@ namespace fUML
 
 // enum includes
 
-#include "ecore/EObject.hpp"
+#include "ecore/EModelElement.hpp"
 
 //*********************************
 namespace fUML::Semantics::Actions 
 {
-	/*!
-	 */
-	class AcceptCallActionActivations : virtual public ecore::EObject 
+	
+	class AcceptCallActionActivations : virtual public ecore::EModelElement
 
 	{
 		public:

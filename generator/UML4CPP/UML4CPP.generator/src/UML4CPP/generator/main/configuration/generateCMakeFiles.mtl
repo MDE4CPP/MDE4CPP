@@ -166,7 +166,7 @@ TARGET_LINK_LIBRARIES(${PROJECT_NAME}
 [/if][/let][/if][/if][/for]
 [if(aPackage.eAllContents()->select(oclIsKindOf(Operation)).oclAsType(Operation).method->filter(Activity)->asSet()->notEmpty())]
 	[buildModeCMakeProperty(debugMode)/] ${PLUGINFRAMEWORK_[libraryVariableNameSuffix(debugMode)/]}
-	${CMAKE_DL_LIBS}[/if]          
+	${CMAKE_DL_LIBS}[/if]        
 )
 [/template]
 

@@ -64,19 +64,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 ExtensionPointImpl::ExtensionPointImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	//Init references
-	
+{	
 }
 
 ExtensionPointImpl::~ExtensionPointImpl()
@@ -86,32 +74,28 @@ ExtensionPointImpl::~ExtensionPointImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+ExtensionPointImpl::ExtensionPointImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:ExtensionPointImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			ExtensionPointImpl::ExtensionPointImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:ExtensionPointImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
+ExtensionPointImpl::ExtensionPointImpl(std::weak_ptr<uml::Element > par_owner)
+:ExtensionPointImpl()
+{
+	m_owner = par_owner;
+}
 
 //Additional constructor for the containments back reference
-			ExtensionPointImpl::ExtensionPointImpl(std::weak_ptr<uml::Element > par_owner)
-			:ExtensionPointImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-//Additional constructor for the containments back reference
-			ExtensionPointImpl::ExtensionPointImpl(std::weak_ptr<uml::UseCase > par_useCase)
-			:ExtensionPointImpl()
-			{
-			    m_useCase = par_useCase;
-				m_namespace = par_useCase;
-			}
-
+ExtensionPointImpl::ExtensionPointImpl(std::weak_ptr<uml::UseCase > par_useCase)
+:ExtensionPointImpl()
+{
+	m_useCase = par_useCase;
+	m_namespace = par_useCase;
+}
 
 
 ExtensionPointImpl::ExtensionPointImpl(const ExtensionPointImpl & obj):ExtensionPointImpl()
@@ -191,15 +175,21 @@ bool ExtensionPointImpl::must_have_name(Any diagnostics,std::map <   Any, Any > 
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference useCase
+*/
 std::weak_ptr<uml::UseCase > ExtensionPointImpl::getUseCase() const
 {
 //assert(m_useCase);
     return m_useCase;
 }
+
 void ExtensionPointImpl::setUseCase(std::shared_ptr<uml::UseCase> _useCase)
 {
     m_useCase = _useCase;
 }
+
+
 
 //*********************************
 // Union Getter
@@ -208,14 +198,28 @@ std::weak_ptr<uml::Namespace > ExtensionPointImpl::getNamespace() const
 {
 	return m_namespace;
 }
+
 std::shared_ptr<Union<uml::Element>> ExtensionPointImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > ExtensionPointImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<ExtensionPoint> ExtensionPointImpl::getThisExtensionPointPtr() const

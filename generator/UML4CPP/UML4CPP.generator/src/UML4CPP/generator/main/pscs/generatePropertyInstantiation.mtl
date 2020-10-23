@@ -126,7 +126,8 @@ for(unsigned int i_[recursionDepth/] = 0; i_[recursionDepth/] < [feature.lower/]
 [elseif (slotType = 'UnlimitedNatural')][recursiveString/]->set[aSlot.definingFeature.name.toUpperFirst()/]([aSlot.value->first().oclAsType(LiteralUnlimitedNatural).value/]);
 [elseif (slotType = 'Integer' or slotType = 'EInt')][recursiveString/]->set[aSlot.definingFeature.name.toUpperFirst()/]([aSlot.value->first().oclAsType(LiteralInteger).value/]);
 [elseif (slotType = 'Real' or slotType = 'EDouble' or slotType = 'EFloat')][recursiveString/]->set[aSlot.definingFeature.name.toUpperFirst()/]([aSlot.value->first().oclAsType(LiteralReal).value/]);
-[elseif (aSlot.definingFeature.type.oclIsKindOf(PrimitiveType) and slotType = 'String' or slotType = 'EString')][recursiveString/]->set[aSlot.definingFeature.name.toUpperFirst()/]("[aSlot.value->first().oclAsType(LiteralString).value/]");
+[elseif (slotType = 'String' or slotType = 'EString')][recursiveString/]->set[aSlot.definingFeature.name.toUpperFirst()/]("[aSlot.value->first().oclAsType(LiteralString).value/]");
+[elseif (aSlot.definingFeature.type.oclIsKindOf(Enumeration))][recursiveString/]->set[aSlot.definingFeature.name.toUpperFirst()/]([aSlot.definingFeature.type.qualifiedName/]::[aSlot.value.oclAsType(InstanceValue).instance.name.toUpper()/]);
 [/if]
 [/let]
 [/template]
@@ -141,7 +142,8 @@ for(unsigned int i_[recursionDepth/] = 0; i_[recursionDepth/] < [feature.lower/]
 [elseif (slotType = 'UnlimitedNatural')][recursiveString/]->get[aSlot.definingFeature.name.toUpperFirst()/]()->add([aValueSpecification.oclAsType(LiteralUnlimitedNatural).value/]);
 [elseif (slotType = 'Integer' or slotType = 'EInt')][recursiveString/]->get[aSlot.definingFeature.name.toUpperFirst()/]()->add([ aValueSpecification.oclAsType(LiteralInteger).value/]);
 [elseif (slotType = 'Real' or slotType = 'EDouble' or slotType = 'EFloat')][recursiveString/]->get[aSlot.definingFeature.name.toUpperFirst()/]()->add([aValueSpecification.oclAsType(LiteralReal).value/]);
-[elseif (aSlot.definingFeature.type.oclIsKindOf(PrimitiveType) and slotType = 'String' or slotType = 'EString')][recursiveString/]->get[aSlot.definingFeature.name.toUpperFirst()/]()->add("[aValueSpecification.oclAsType(LiteralString).value/]");
+[elseif (slotType = 'String' or slotType = 'EString')][recursiveString/]->get[aSlot.definingFeature.name.toUpperFirst()/]()->add("[aValueSpecification.oclAsType(LiteralString).value/]");
+[elseif (aSlot.definingFeature.type.oclIsKindOf(Enumeration))][recursiveString/]->get[aSlot.definingFeature.name.toUpperFirst()/]()->add([aSlot.definingFeature.type.qualifiedName/]::[aValueSpecification.oclAsType(InstanceValue).instance.name.toUpper()/]);
 [/if]
 [/for]
 [/let]

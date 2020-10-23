@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class RedefinableElementImpl :virtual public NamedElementImpl, virtual public RedefinableElement 
+	class RedefinableElementImpl : virtual public NamedElementImpl, virtual public RedefinableElement 
 	{
 		public: 
 			RedefinableElementImpl(const RedefinableElementImpl & obj);
@@ -51,31 +51,41 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 The query isConsistentWith() specifies, for any two RedefinableElements in a context in which redefinition is possible, whether redefinition would be logically consistent. By default, this is false; this operation must be overridden for subclasses of RedefinableElement to define the consistency conditions.
+			The query isConsistentWith() specifies, for any two RedefinableElements in a context in which redefinition is possible, whether redefinition would be logically consistent. By default, this is false; this operation must be overridden for subclasses of RedefinableElement to define the consistency conditions.
 			result = (false)
 			redefiningElement.isRedefinitionContextValid(self)
-			<p>From package UML::Classification.</p> */ 
+			<p>From package UML::Classification.</p>
+			*/
+			 
 			virtual bool isConsistentWith(std::shared_ptr<uml::RedefinableElement>  redefiningElement) ;
 			
 			/*!
-			 The query isRedefinitionContextValid() specifies whether the redefinition contexts of this RedefinableElement are properly related to the redefinition contexts of the specified RedefinableElement to allow this element to redefine the other. By default at least one of the redefinition contexts of this element must be a specialization of at least one of the redefinition contexts of the specified element.
+			The query isRedefinitionContextValid() specifies whether the redefinition contexts of this RedefinableElement are properly related to the redefinition contexts of the specified RedefinableElement to allow this element to redefine the other. By default at least one of the redefinition contexts of this element must be a specialization of at least one of the redefinition contexts of the specified element.
 			result = (redefinitionContext->exists(c | c.allParents()->includesAll(redefinedElement.redefinitionContext)))
-			<p>From package UML::Classification.</p> */ 
+			<p>From package UML::Classification.</p>
+			*/
+			 
 			virtual bool isRedefinitionContextValid(std::shared_ptr<uml::RedefinableElement>  redefinedElement) ;
 			
 			/*!
-			 A RedefinableElement can only redefine non-leaf RedefinableElements.
-			redefinedElement->forAll(re | not re.isLeaf) */ 
+			A RedefinableElement can only redefine non-leaf RedefinableElements.
+			redefinedElement->forAll(re | not re.isLeaf)
+			*/
+			 
 			virtual bool non_leaf_redefinition(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
-			 A redefining element must be consistent with each redefined element.
-			redefinedElement->forAll(re | re.isConsistentWith(self)) */ 
+			A redefining element must be consistent with each redefined element.
+			redefinedElement->forAll(re | re.isConsistentWith(self))
+			*/
+			 
 			virtual bool redefinition_consistent(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
-			 At least one of the redefinition contexts of the redefining element must be a specialization of at least one of the redefinition contexts for each redefined element.
-			redefinedElement->forAll(re | self.isRedefinitionContextValid(re)) */ 
+			At least one of the redefinition contexts of the redefining element must be a specialization of at least one of the redefinition contexts for each redefined element.
+			redefinedElement->forAll(re | self.isRedefinitionContextValid(re))
+			*/
+			 
 			virtual bool redefinition_context_valid(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
@@ -84,20 +94,25 @@ namespace uml
 			// Attributes Getter Setter
 			//*********************************
 			/*!
-			 Indicates whether it is possible to further redefine a RedefinableElement. If the value is true, then it is not possible to further redefine the RedefinableElement.
-			<p>From package UML::Classification.</p> */ 
+			Indicates whether it is possible to further redefine a RedefinableElement. If the value is true, then it is not possible to further redefine the RedefinableElement.
+			<p>From package UML::Classification.</p>
+			*/
+			 
 			virtual bool getIsLeaf() const ;
 			
 			/*!
-			 Indicates whether it is possible to further redefine a RedefinableElement. If the value is true, then it is not possible to further redefine the RedefinableElement.
-			<p>From package UML::Classification.</p> */ 
+			Indicates whether it is possible to further redefine a RedefinableElement. If the value is true, then it is not possible to further redefine the RedefinableElement.
+			<p>From package UML::Classification.</p>
+			*/
+			 
 			virtual void setIsLeaf (bool _isLeaf); 
-			
 			
 			
 			//*********************************
 			// Reference
 			//*********************************
+			
+			
 			
 			
 							
@@ -106,17 +121,25 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
+			The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const ;/*!
-			 The contexts that this element may be redefined from.
-			<p>From package UML::Classification.</p> */
+			The contexts that this element may be redefined from.
+			<p>From package UML::Classification.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Classifier>> getRedefinitionContext() const ; 
 			 
 			//*********************************

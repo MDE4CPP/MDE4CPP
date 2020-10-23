@@ -75,8 +75,7 @@ namespace ecore
 //*********************************
 namespace ecore 
 {
-	/*!
-	 */
+	
 	class EParameter:virtual public ETypedElement
 	{
 		public:
@@ -112,9 +111,9 @@ namespace ecore
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::weak_ptr<ecore::EOperation > getEOperation() const = 0;
+			
 			
 			
 
@@ -127,17 +126,14 @@ namespace ecore
 			//*********************************
 			// Reference Members
 			//*********************************
-			/*!
-			 */
-			std::weak_ptr<ecore::EOperation > m_eOperation;
 			
+			std::weak_ptr<ecore::EOperation > m_eOperation;
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

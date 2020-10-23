@@ -14,12 +14,12 @@
 #include "../Argument.hpp"
 
 
-#include "ecore/impl/EObjectImpl.hpp"
+#include "ecore/impl/EModelElementImpl.hpp"
 
 //*********************************
 namespace uml 
 {
-	class ArgumentImpl :virtual public ecore::EObjectImpl,
+	class ArgumentImpl : virtual public ecore::EModelElementImpl,
 virtual public Argument 
 	{
 		public: 
@@ -49,26 +49,22 @@ virtual public Argument
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::string getName() const ;
 			
-			/*!
-			 */ 
+			 
 			virtual void setName (std::string _name); 
-			
 			
 			
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<uml::Object > getValue() const ;
 			
-			/*!
-			 */
-			virtual void setValue(std::shared_ptr<uml::Object> _value_value) ;
+			
+			virtual void setValue(std::shared_ptr<uml::Object> _value) ;
+			
 							
 			
 			//*********************************

@@ -51,10 +51,10 @@
 #include "PSCS/Semantics/Loci/impl/LociFactoryImpl.hpp"
 #include "PSCS/Semantics/Loci/impl/LociPackageImpl.hpp"
 
-#include "PSCS/PSCSFactory.hpp"
-#include "PSCS/PSCSPackage.hpp"
 #include "PSCS/Semantics/SemanticsFactory.hpp"
 #include "PSCS/Semantics/SemanticsPackage.hpp"
+#include "PSCS/PSCSFactory.hpp"
+#include "PSCS/PSCSPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -65,17 +65,7 @@ using namespace PSCS::Semantics::Loci;
 // Constructor / Destructor
 //*********************************
 CS_ExecutorImpl::CS_ExecutorImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 CS_ExecutorImpl::~CS_ExecutorImpl()
@@ -85,14 +75,12 @@ CS_ExecutorImpl::~CS_ExecutorImpl()
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			CS_ExecutorImpl::CS_ExecutorImpl(std::weak_ptr<fUML::Semantics::Loci::Locus > par_locus)
-			:CS_ExecutorImpl()
-			{
-			    m_locus = par_locus;
-			}
-
+CS_ExecutorImpl::CS_ExecutorImpl(std::weak_ptr<fUML::Semantics::Loci::Locus > par_locus)
+:CS_ExecutorImpl()
+{
+	m_locus = par_locus;
+}
 
 
 CS_ExecutorImpl::CS_ExecutorImpl(const CS_ExecutorImpl & obj):CS_ExecutorImpl()
@@ -170,6 +158,7 @@ std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> CS_ExecutorIm
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<CS_Executor> CS_ExecutorImpl::getThisCS_ExecutorPtr() const

@@ -71,17 +71,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 StructuralFeatureImpl::StructuralFeatureImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 StructuralFeatureImpl::~StructuralFeatureImpl()
@@ -91,23 +81,20 @@ StructuralFeatureImpl::~StructuralFeatureImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+StructuralFeatureImpl::StructuralFeatureImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:StructuralFeatureImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			StructuralFeatureImpl::StructuralFeatureImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:StructuralFeatureImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
-
-//Additional constructor for the containments back reference
-			StructuralFeatureImpl::StructuralFeatureImpl(std::weak_ptr<uml::Element > par_owner)
-			:StructuralFeatureImpl()
-			{
-			    m_owner = par_owner;
-			}
-
+StructuralFeatureImpl::StructuralFeatureImpl(std::weak_ptr<uml::Element > par_owner)
+:StructuralFeatureImpl()
+{
+	m_owner = par_owner;
+}
 
 
 StructuralFeatureImpl::StructuralFeatureImpl(const StructuralFeatureImpl & obj):StructuralFeatureImpl()
@@ -197,15 +184,20 @@ std::shared_ptr<ecore::EClass> StructuralFeatureImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute isReadOnly
+*/
+bool StructuralFeatureImpl::getIsReadOnly() const 
+{
+	return m_isReadOnly;
+}
+
 void StructuralFeatureImpl::setIsReadOnly(bool _isReadOnly)
 {
 	m_isReadOnly = _isReadOnly;
 } 
 
-bool StructuralFeatureImpl::getIsReadOnly() const 
-{
-	return m_isReadOnly;
-}
+
 
 //*********************************
 // Operations
@@ -220,12 +212,25 @@ bool StructuralFeatureImpl::getIsReadOnly() const
 //*********************************
 std::shared_ptr<Union<uml::Element>> StructuralFeatureImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > StructuralFeatureImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<StructuralFeature> StructuralFeatureImpl::getThisStructuralFeaturePtr() const

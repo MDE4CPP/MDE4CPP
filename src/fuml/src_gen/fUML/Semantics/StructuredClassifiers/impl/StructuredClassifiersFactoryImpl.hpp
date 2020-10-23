@@ -41,17 +41,17 @@ namespace fUML::Semantics::StructuredClassifiers
 			virtual std::shared_ptr<ecore::EObject> create(std::shared_ptr<ecore::EClass> _class, std::shared_ptr<EObject> _container=nullptr, const int referenceID = -1) const;
 
 			//Creator functions
-			 virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::DispatchStrategy> createDispatchStrategy(const int metaElementID=-1) const ;
+			 virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::DispatchStrategy> createDispatchStrategy(const int metaElementID = StructuredClassifiersPackage::DISPATCHSTRATEGY_CLASS) const ;
 			 
-			 virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValueList> createExtensionalValueList(const int metaElementID=-1) const ;
+			 virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValueList> createExtensionalValueList(const int metaElementID = StructuredClassifiersPackage::EXTENSIONALVALUELIST_CLASS) const ;
 			 
-			 virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> createLink(const int metaElementID=-1) const ;
+			 virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> createLink(const int metaElementID = StructuredClassifiersPackage::LINK_CLASS) const ;
 			 
-			 virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> createObject(const int metaElementID=-1) const ;
+			 virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> createObject(const int metaElementID = StructuredClassifiersPackage::OBJECT_CLASS) const ;
 			 
-			 virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::RedefinitionBasedDispatchStrategy> createRedefinitionBasedDispatchStrategy(const int metaElementID=-1) const ;
+			 virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::RedefinitionBasedDispatchStrategy> createRedefinitionBasedDispatchStrategy(const int metaElementID = StructuredClassifiersPackage::REDEFINITIONBASEDDISPATCHSTRATEGY_CLASS) const ;
 			 
-			 virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> createReference(const int metaElementID=-1) const ;
+			 virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> createReference(const int metaElementID = StructuredClassifiersPackage::REFERENCE_CLASS) const ;
 			 
 			 
 

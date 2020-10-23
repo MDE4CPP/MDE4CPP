@@ -15,12 +15,12 @@
 
 #include "fUML/Semantics/Actions/impl/ActionsFactoryImpl.hpp"
 
-#include "ecore/impl/EObjectImpl.hpp"
+#include "ecore/impl/EModelElementImpl.hpp"
 
 //*********************************
 namespace fUML::Semantics::Actions 
 {
-	class ValuesImpl :virtual public ecore::EObjectImpl,
+	class ValuesImpl : virtual public ecore::EModelElementImpl,
 virtual public Values 
 	{
 		public: 
@@ -55,9 +55,9 @@ virtual public Values
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value>> getValues() const ;
+			
 			
 							
 			

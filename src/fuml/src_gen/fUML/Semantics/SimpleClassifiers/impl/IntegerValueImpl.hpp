@@ -19,7 +19,7 @@
 //*********************************
 namespace fUML::Semantics::SimpleClassifiers 
 {
-	class IntegerValueImpl :virtual public PrimitiveValueImpl, virtual public IntegerValue 
+	class IntegerValueImpl : virtual public PrimitiveValueImpl, virtual public IntegerValue 
 	{
 		public: 
 			IntegerValueImpl(const IntegerValueImpl & obj);
@@ -43,16 +43,16 @@ namespace fUML::Semantics::SimpleClassifiers
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() ;
+			
+			 
 			virtual bool equals(std::shared_ptr<fUML::Semantics::Values::Value>  otherValue) ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<uml::ValueSpecification> specify() ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::string toString() ;
 			
 			
@@ -60,14 +60,11 @@ namespace fUML::Semantics::SimpleClassifiers
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual int getValue() const ;
 			
-			/*!
-			 */ 
+			 
 			virtual void setValue (int _value); 
-			
 			
 			
 			//*********************************

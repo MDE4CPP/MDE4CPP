@@ -19,7 +19,7 @@
 //*********************************
 namespace fUML::Semantics::Actions 
 {
-	class AcceptEventActionEventAccepterImpl :virtual public fUML::Semantics::CommonBehavior::EventAccepterImpl, virtual public AcceptEventActionEventAccepter 
+	class AcceptEventActionEventAccepterImpl : virtual public fUML::Semantics::CommonBehavior::EventAccepterImpl, virtual public AcceptEventActionEventAccepter 
 	{
 		public: 
 			AcceptEventActionEventAccepterImpl(const AcceptEventActionEventAccepterImpl & obj);
@@ -53,13 +53,12 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionActivation > getActionActivation() const ;
 			
-			/*!
-			 */
-			virtual void setActionActivation(std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionActivation> _actionActivation_actionActivation) ;
+			
+			virtual void setActionActivation(std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionActivation> _actionActivation) ;
+			
 							
 			
 			//*********************************

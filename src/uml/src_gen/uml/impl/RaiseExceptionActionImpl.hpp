@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class RaiseExceptionActionImpl :virtual public ActionImpl, virtual public RaiseExceptionAction 
+	class RaiseExceptionActionImpl : virtual public ActionImpl, virtual public RaiseExceptionAction 
 	{
 		public: 
 			RaiseExceptionActionImpl(const RaiseExceptionActionImpl & obj);
@@ -69,34 +69,49 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 An InputPin whose value becomes the exception object.
-			<p>From package UML::Actions.</p> */
+			An InputPin whose value becomes the exception object.
+			<p>From package UML::Actions.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::InputPin > getException() const ;
 			
 			/*!
-			 An InputPin whose value becomes the exception object.
-			<p>From package UML::Actions.</p> */
-			virtual void setException(std::shared_ptr<uml::InputPin> _exception_exception) ;
+			An InputPin whose value becomes the exception object.
+			<p>From package UML::Actions.</p>
+			*/
+			
+			virtual void setException(std::shared_ptr<uml::InputPin> _exception) ;
+			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
+			ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::ActivityGroup>> getInGroup() const ;/*!
-			 The ordered set of InputPins representing the inputs to the Action.
-			<p>From package UML::Actions.</p> */
+			The ordered set of InputPins representing the inputs to the Action.
+			<p>From package UML::Actions.</p>
+			*/
+			
 			virtual std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> getInput() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
+			The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const ; 
 			 
 			//*********************************

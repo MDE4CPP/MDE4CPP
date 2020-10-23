@@ -52,17 +52,7 @@ using namespace ecore;
 // Constructor / Destructor
 //*********************************
 ENamedElementImpl::ENamedElementImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 ENamedElementImpl::~ENamedElementImpl()
@@ -72,14 +62,12 @@ ENamedElementImpl::~ENamedElementImpl()
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			ENamedElementImpl::ENamedElementImpl(std::weak_ptr<ecore::EObject > par_eContainer)
-			:ENamedElementImpl()
-			{
-			    m_eContainer = par_eContainer;
-			}
-
+ENamedElementImpl::ENamedElementImpl(std::weak_ptr<ecore::EObject > par_eContainer)
+:ENamedElementImpl()
+{
+	m_eContainer = par_eContainer;
+}
 
 
 ENamedElementImpl::ENamedElementImpl(const ENamedElementImpl & obj):ENamedElementImpl()
@@ -124,15 +112,20 @@ std::shared_ptr<EClass> ENamedElementImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute name
+*/
+std::string ENamedElementImpl::getName() const 
+{
+	return m_name;
+}
+
 void ENamedElementImpl::setName(std::string _name)
 {
 	m_name = _name;
 } 
 
-std::string ENamedElementImpl::getName() const 
-{
-	return m_name;
-}
+
 
 //*********************************
 // Operations
@@ -147,8 +140,20 @@ std::string ENamedElementImpl::getName() const
 //*********************************
 std::shared_ptr<Union<ecore::EObject>> ENamedElementImpl::getEContens() const
 {
+	if(m_eContens == nullptr)
+	{
+		/*Union*/
+		m_eContens.reset(new Union<ecore::EObject>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_eContens - Union<ecore::EObject>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_eContens;
 }
+
+
 
 
 std::shared_ptr<ENamedElement> ENamedElementImpl::getThisENamedElementPtr() const

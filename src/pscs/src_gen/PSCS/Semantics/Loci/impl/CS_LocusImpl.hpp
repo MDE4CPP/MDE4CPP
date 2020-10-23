@@ -19,7 +19,7 @@
 //*********************************
 namespace PSCS::Semantics::Loci 
 {
-	class CS_LocusImpl :virtual public fUML::Semantics::Loci::LocusImpl, virtual public CS_Locus 
+	class CS_LocusImpl : virtual public fUML::Semantics::Loci::LocusImpl, virtual public CS_Locus 
 	{
 		public: 
 			CS_LocusImpl(const CS_LocusImpl & obj);
@@ -43,8 +43,7 @@ namespace PSCS::Semantics::Loci
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> instantiate(std::shared_ptr<uml::Class>  type) ;
 			
 			

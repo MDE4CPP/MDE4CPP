@@ -54,6 +54,7 @@ namespace StandardProfile
 			//*********************************
 			std::weak_ptr<uml::BehavioralFeature> m_base_BehavioralFeature;
 			
+			
 	};
 }
 #endif /* end of include guard: STANDARDPROFILE_DESTROY__HPP */

@@ -19,7 +19,7 @@
 //*********************************
 namespace uml 
 {
-	class ValueSpecificationImpl :virtual public PackageableElementImpl, virtual public TypedElementImpl, virtual public ValueSpecification 
+	class ValueSpecificationImpl : virtual public PackageableElementImpl, virtual public TypedElementImpl, virtual public ValueSpecification 
 	{
 		public: 
 			ValueSpecificationImpl(const ValueSpecificationImpl & obj);
@@ -68,45 +68,59 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 The query booleanValue() gives a single Boolean value when one can be computed.
+			The query booleanValue() gives a single Boolean value when one can be computed.
 			result = (null)
-			<p>From package UML::Values.</p> */ 
+			<p>From package UML::Values.</p>
+			*/
+			 
 			virtual bool booleanValue() ;
 			
 			/*!
-			 The query integerValue() gives a single Integer value when one can be computed.
+			The query integerValue() gives a single Integer value when one can be computed.
 			result = (null)
-			<p>From package UML::Values.</p> */ 
+			<p>From package UML::Values.</p>
+			*/
+			 
 			virtual int integerValue() ;
 			
 			/*!
-			 The query isComputable() determines whether a value specification can be computed in a model. This operation cannot be fully defined in OCL. A conforming implementation is expected to deliver true for this operation for all ValueSpecifications that it can compute, and to compute all of those for which the operation is true. A conforming implementation is expected to be able to compute at least the value of all LiteralSpecifications.
+			The query isComputable() determines whether a value specification can be computed in a model. This operation cannot be fully defined in OCL. A conforming implementation is expected to deliver true for this operation for all ValueSpecifications that it can compute, and to compute all of those for which the operation is true. A conforming implementation is expected to be able to compute at least the value of all LiteralSpecifications.
 			result = (false)
-			<p>From package UML::Values.</p> */ 
+			<p>From package UML::Values.</p>
+			*/
+			 
 			virtual bool isComputable() ;
 			
 			/*!
-			 The query isNull() returns true when it can be computed that the value is null.
+			The query isNull() returns true when it can be computed that the value is null.
 			result = (false)
-			<p>From package UML::Values.</p> */ 
+			<p>From package UML::Values.</p>
+			*/
+			 
 			virtual bool isNull() ;
 			
 			/*!
-			 The query realValue() gives a single Real value when one can be computed.
+			The query realValue() gives a single Real value when one can be computed.
 			result = (null)
-			<p>From package UML::Values.</p> */ 
+			<p>From package UML::Values.</p>
+			*/
+			 
 			virtual double realValue() ;
 			
 			/*!
-			 The query stringValue() gives a single String value when one can be computed.
+			The query stringValue() gives a single String value when one can be computed.
 			result = (null)
-			<p>From package UML::Values.</p> */ 
+			<p>From package UML::Values.</p>
+			*/
+			 
 			virtual std::string stringValue() ;
 			
 			/*!
-			 The query unlimitedValue() gives a single UnlimitedNatural value when one can be computed.
+			The query unlimitedValue() gives a single UnlimitedNatural value when one can be computed.
 			result = (null)
-			<p>From package UML::Values.</p> */ 
+			<p>From package UML::Values.</p>
+			*/
+			 
 			virtual int unlimitedValue() ;
 			
 			
@@ -119,34 +133,38 @@ namespace uml
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::weak_ptr<uml::Slot > getOwningSlot() const ;
 			
-			/*!
-			 */
-			virtual void setOwningSlot(std::shared_ptr<uml::Slot> _owningSlot_owningSlot) ;
-			/*!
-			 */
+			
+			virtual void setOwningSlot(std::shared_ptr<uml::Slot> _owningSlot) ;
+			
+			
 			virtual std::weak_ptr<uml::ValueSpecificationAction > getValueSpecificationAction() const ;
 			
-			/*!
-			 */
-			virtual void setValueSpecificationAction(std::shared_ptr<uml::ValueSpecificationAction> _valueSpecificationAction_valueSpecificationAction) ;
+			
+			virtual void setValueSpecificationAction(std::shared_ptr<uml::ValueSpecificationAction> _valueSpecificationAction) ;
+			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************

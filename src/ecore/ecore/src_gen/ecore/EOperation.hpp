@@ -92,8 +92,7 @@ namespace ecore
 //*********************************
 namespace ecore 
 {
-	/*!
-	 */
+	
 	class EOperation:virtual public ETypedElement
 	{
 		public:
@@ -123,41 +122,40 @@ namespace ecore
 			//*********************************
 			
 			
-			/*!
-			 */ 
+			 
 			virtual bool isOverrideOf(std::shared_ptr<ecore::EOperation>  someOperation) const = 0;
 			
 			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual int getOperationID() const = 0;
+			
 			
 			
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::weak_ptr<ecore::EClass > getEContainingClass() const = 0;
 			
-			/*!
-			 */
+			
+			
 			virtual std::shared_ptr<Bag<ecore::EClassifier>> getEExceptions() const = 0;
 			
-			/*!
-			 */
+			
+			
 			virtual std::shared_ptr<Bag<ecore::EGenericType>> getEGenericExceptions() const = 0;
 			
-			/*!
-			 */
+			
+			
 			virtual std::shared_ptr<Subset<ecore::EParameter, ecore::EObject>> getEParameters() const = 0;
 			
-			/*!
-			 */
+			
+			
 			virtual std::shared_ptr<Bag<ecore::ETypeParameter>> getETypeParameters() const = 0;
+			
 			
 			
 
@@ -165,37 +163,25 @@ namespace ecore
 			//*********************************
 			// Attribute Members
 			//*********************************
-			/*!
-			 */ 
+			 
 			int m_operationID = -1;
 			
 			
 			//*********************************
 			// Reference Members
 			//*********************************
-			/*!
-			 */
-			std::weak_ptr<ecore::EClass > m_eContainingClass;
-			/*!
-			 */
-			std::shared_ptr<Bag<ecore::EClassifier>> m_eExceptions;
-			/*!
-			 */
-			std::shared_ptr<Bag<ecore::EGenericType>> m_eGenericExceptions;
-			/*!
-			 */
-			std::shared_ptr<Subset<ecore::EParameter, ecore::EObject>> m_eParameters;
-			/*!
-			 */
-			std::shared_ptr<Bag<ecore::ETypeParameter>> m_eTypeParameters;
 			
+			std::weak_ptr<ecore::EClass > m_eContainingClass;
+			mutable std::shared_ptr<Bag<ecore::EClassifier>> m_eExceptions;
+			mutable std::shared_ptr<Bag<ecore::EGenericType>> m_eGenericExceptions;
+			mutable std::shared_ptr<Subset<ecore::EParameter, ecore::EObject>> m_eParameters;
+			mutable std::shared_ptr<Bag<ecore::ETypeParameter>> m_eTypeParameters;
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

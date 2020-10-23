@@ -66,22 +66,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 DurationObservationImpl::DurationObservationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	m_firstEvent.reset(new Bag<bool>());
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		m_event.reset(new Bag<uml::NamedElement>());
-	
-	
-
-	//Init references
-	
-	
+{	
 }
 
 DurationObservationImpl::~DurationObservationImpl()
@@ -91,41 +76,36 @@ DurationObservationImpl::~DurationObservationImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+DurationObservationImpl::DurationObservationImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:DurationObservationImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			DurationObservationImpl::DurationObservationImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:DurationObservationImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
+DurationObservationImpl::DurationObservationImpl(std::weak_ptr<uml::Element > par_owner)
+:DurationObservationImpl()
+{
+	m_owner = par_owner;
+}
 
 //Additional constructor for the containments back reference
-			DurationObservationImpl::DurationObservationImpl(std::weak_ptr<uml::Element > par_owner)
-			:DurationObservationImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-//Additional constructor for the containments back reference
-			DurationObservationImpl::DurationObservationImpl(std::weak_ptr<uml::Package > par_owningPackage)
-			:DurationObservationImpl()
-			{
-			    m_owningPackage = par_owningPackage;
-				m_namespace = par_owningPackage;
-			}
-
+DurationObservationImpl::DurationObservationImpl(std::weak_ptr<uml::Package > par_owningPackage)
+:DurationObservationImpl()
+{
+	m_owningPackage = par_owningPackage;
+	m_namespace = par_owningPackage;
+}
 
 //Additional constructor for the containments back reference
-			DurationObservationImpl::DurationObservationImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
-			:DurationObservationImpl()
-			{
-			    m_owningTemplateParameter = par_owningTemplateParameter;
-				m_owner = par_owningTemplateParameter;
-			}
-
+DurationObservationImpl::DurationObservationImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+:DurationObservationImpl()
+{
+	m_owningTemplateParameter = par_owningTemplateParameter;
+	m_owner = par_owningTemplateParameter;
+}
 
 
 DurationObservationImpl::DurationObservationImpl(const DurationObservationImpl & obj):DurationObservationImpl()
@@ -193,12 +173,21 @@ std::shared_ptr<ecore::EClass> DurationObservationImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
-
-
+/*
+Getter & Setter for attribute firstEvent
+*/
 std::shared_ptr<Bag<bool> > DurationObservationImpl::getFirstEvent() const 
 {
+	if(m_firstEvent == nullptr)
+	{
+		m_firstEvent.reset(new Bag<bool>());
+	}
 	return m_firstEvent;
 }
+
+
+
+
 
 //*********************************
 // Operations
@@ -212,11 +201,23 @@ bool DurationObservationImpl::first_event_multiplicity(Any diagnostics,std::map 
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference event
+*/
 std::shared_ptr<Bag<uml::NamedElement>> DurationObservationImpl::getEvent() const
 {
+	if(m_event == nullptr)
+	{
+		m_event.reset(new Bag<uml::NamedElement>());
+		
+		
+	}
 //assert(m_event);
     return m_event;
 }
+
+
+
 
 
 //*********************************
@@ -226,14 +227,28 @@ std::weak_ptr<uml::Namespace > DurationObservationImpl::getNamespace() const
 {
 	return m_namespace;
 }
+
 std::shared_ptr<Union<uml::Element>> DurationObservationImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > DurationObservationImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<DurationObservation> DurationObservationImpl::getThisDurationObservationPtr() const

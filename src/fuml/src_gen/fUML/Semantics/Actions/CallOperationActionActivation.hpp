@@ -36,6 +36,11 @@ namespace fUML
 }
 
 //Forward Declaration for used types
+namespace uml 
+{
+	class Action;
+}
+
 namespace fUML::Semantics::Activities 
 {
 	class ActivityEdgeInstance;
@@ -51,9 +56,19 @@ namespace fUML::Semantics::Activities
 	class ActivityNodeActivationGroup;
 }
 
+namespace uml 
+{
+	class CallAction;
+}
+
 namespace fUML::Semantics::Actions 
 {
 	class CallActionActivation;
+}
+
+namespace uml 
+{
+	class CallOperationAction;
 }
 
 namespace fUML::Semantics::CommonBehavior 
@@ -90,8 +105,7 @@ namespace fUML::Semantics::Activities
 //*********************************
 namespace fUML::Semantics::Actions 
 {
-	/*!
-	 */
+	
 	class CallOperationActionActivation:virtual public CallActionActivation
 	{
 		public:
@@ -111,8 +125,7 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> getCallExecution() = 0;
 			
 			
@@ -123,6 +136,24 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Reference
 			//*********************************
+			
+			virtual std::shared_ptr<uml::CallOperationAction > getCallOperationAction() const = 0;
+			
+			
+			virtual void setCallOperationAction(std::shared_ptr<uml::CallOperationAction> _callOperationAction) = 0;
+			
+			/*Additional Setter for 'CallActionActivation::callAction' redefined by reference 'callOperationAction'*/
+			
+			virtual void setCallAction(std::shared_ptr<uml::CallAction> _callAction) = 0;
+			
+			/*Additional Setter for 'ActionActivation::action' redefined by reference 'callOperationAction'*/
+			
+			virtual void setAction(std::shared_ptr<uml::Action> _action) = 0;
+			
+			/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'callOperationAction'*/
+			
+			virtual void setNode(std::shared_ptr<uml::ActivityNode> _node) = 0;
+			
 			
 
 		protected:
@@ -135,13 +166,13 @@ namespace fUML::Semantics::Actions
 			// Reference Members
 			//*********************************
 			
+			std::shared_ptr<uml::CallOperationAction > m_callOperationAction;
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> getPinActivation() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

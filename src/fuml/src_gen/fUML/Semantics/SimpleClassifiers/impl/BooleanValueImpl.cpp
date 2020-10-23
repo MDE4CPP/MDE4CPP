@@ -62,17 +62,7 @@ using namespace fUML::Semantics::SimpleClassifiers;
 // Constructor / Destructor
 //*********************************
 BooleanValueImpl::BooleanValueImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 BooleanValueImpl::~BooleanValueImpl()
@@ -81,7 +71,6 @@ BooleanValueImpl::~BooleanValueImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete BooleanValue "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -118,19 +107,37 @@ std::shared_ptr<ecore::EClass> BooleanValueImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
-void BooleanValueImpl::setValue(bool _value)
-{
-	m_value = _value;
-} 
-
+/*
+Getter & Setter for attribute value
+*/
 bool BooleanValueImpl::isValue() const 
 {
 	return m_value;
 }
 
+void BooleanValueImpl::setValue(bool _value)
+{
+	m_value = _value;
+} 
+
+
+
 //*********************************
 // Operations
 //*********************************
+std::shared_ptr<fUML::Semantics::Values::Value> BooleanValueImpl::_copy()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Create a new boolean value with the same value as this boolean value.
+
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> newValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createBooleanValue();
+newValue->setType(this->getType()); //Duplicated from _copy()-method of super class in order to avoid having to call _copy()-method of super class and having to cast afterwards
+newValue->setValue(this->isValue());
+return newValue;
+	//end of body
+}
+
 bool BooleanValueImpl::equals(std::shared_ptr<fUML::Semantics::Values::Value>  otherValue)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
@@ -180,6 +187,7 @@ std::string BooleanValueImpl::toString()
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<BooleanValue> BooleanValueImpl::getThisBooleanValuePtr() const

@@ -100,87 +100,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 OperationImpl::OperationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	
-	
-	
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	
-
-	
-
-	
-
-		/*Subset*/
-		m_postcondition.reset(new Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/ >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_postcondition - Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/ >()" << std::endl;
-		#endif
-	
-	
-
-		/*Subset*/
-		m_precondition.reset(new Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/ >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_precondition - Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/ >()" << std::endl;
-		#endif
-	
-	
-
-		/*Subset*/
-		m_redefinedOperation.reset(new Subset<uml::Operation, uml::RedefinableElement >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_redefinedOperation - Subset<uml::Operation, uml::RedefinableElement >()" << std::endl;
-		#endif
-	
-	
-
-	
-
-	//Init references
-	
-
-	
-
-	
-
-	
-
-		/*Subset*/
-		m_postcondition->initSubset(m_ownedRule);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_postcondition - Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/ >(m_ownedRule)" << std::endl;
-		#endif
-	
-	
-
-		/*Subset*/
-		m_precondition->initSubset(m_ownedRule);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_precondition - Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/ >(m_ownedRule)" << std::endl;
-		#endif
-	
-	
-
-		/*Subset*/
-		m_redefinedOperation->initSubset(m_redefinedElement);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_redefinedOperation - Subset<uml::Operation, uml::RedefinableElement >(m_redefinedElement)" << std::endl;
-		#endif
-	
-	
-
-	
+{	
 }
 
 OperationImpl::~OperationImpl()
@@ -190,59 +110,52 @@ OperationImpl::~OperationImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+OperationImpl::OperationImpl(std::weak_ptr<uml::Class > par_class)
+:OperationImpl()
+{
+	m_class = par_class;
+	m_namespace = par_class;
+}
 
 //Additional constructor for the containments back reference
-			OperationImpl::OperationImpl(std::weak_ptr<uml::Class > par_class)
-			:OperationImpl()
-			{
-			    m_class = par_class;
-				m_namespace = par_class;
-			}
-
-
-//Additional constructor for the containments back reference
-			OperationImpl::OperationImpl(std::weak_ptr<uml::DataType > par_datatype)
-			:OperationImpl()
-			{
-			    m_datatype = par_datatype;
-				m_namespace = par_datatype;
-			}
-
+OperationImpl::OperationImpl(std::weak_ptr<uml::DataType > par_datatype)
+:OperationImpl()
+{
+	m_datatype = par_datatype;
+	m_namespace = par_datatype;
+}
 
 //Additional constructor for the containments back reference
-			OperationImpl::OperationImpl(std::weak_ptr<uml::Interface > par_interface)
-			:OperationImpl()
-			{
-			    m_interface = par_interface;
-				m_namespace = par_interface;
-			}
-
-
-//Additional constructor for the containments back reference
-			OperationImpl::OperationImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:OperationImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
+OperationImpl::OperationImpl(std::weak_ptr<uml::Interface > par_interface)
+:OperationImpl()
+{
+	m_interface = par_interface;
+	m_namespace = par_interface;
+}
 
 //Additional constructor for the containments back reference
-			OperationImpl::OperationImpl(std::weak_ptr<uml::Element > par_owner)
-			:OperationImpl()
-			{
-			    m_owner = par_owner;
-			}
-
+OperationImpl::OperationImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:OperationImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			OperationImpl::OperationImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
-			:OperationImpl()
-			{
-			    m_owningTemplateParameter = par_owningTemplateParameter;
-				m_owner = par_owningTemplateParameter;
-			}
+OperationImpl::OperationImpl(std::weak_ptr<uml::Element > par_owner)
+:OperationImpl()
+{
+	m_owner = par_owner;
+}
 
+//Additional constructor for the containments back reference
+OperationImpl::OperationImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+:OperationImpl()
+{
+	m_owningTemplateParameter = par_owningTemplateParameter;
+	m_owner = par_owningTemplateParameter;
+}
 
 
 OperationImpl::OperationImpl(const OperationImpl & obj):OperationImpl()
@@ -433,11 +346,24 @@ std::shared_ptr<ecore::EClass> OperationImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
-
-
+/*
+Getter & Setter for attribute isOrdered
+*/
 bool OperationImpl::getIsOrdered() const 
 {
 	return m_isOrdered;
+}
+
+
+
+
+
+/*
+Getter & Setter for attribute isQuery
+*/
+bool OperationImpl::getIsQuery() const 
+{
+	return m_isQuery;
 }
 
 void OperationImpl::setIsQuery(bool _isQuery)
@@ -445,13 +371,11 @@ void OperationImpl::setIsQuery(bool _isQuery)
 	m_isQuery = _isQuery;
 } 
 
-bool OperationImpl::getIsQuery() const 
-{
-	return m_isQuery;
-}
 
 
-
+/*
+Getter & Setter for attribute isUnique
+*/
 bool OperationImpl::getIsUnique() const 
 {
 	return m_isUnique;
@@ -459,6 +383,11 @@ bool OperationImpl::getIsUnique() const
 
 
 
+
+
+/*
+Getter & Setter for attribute lower
+*/
 int OperationImpl::getLower() const 
 {
 	return m_lower;
@@ -466,10 +395,19 @@ int OperationImpl::getLower() const
 
 
 
+
+
+/*
+Getter & Setter for attribute upper
+*/
 int OperationImpl::getUpper() const 
 {
 	return m_upper;
 }
+
+
+
+
 
 //*********************************
 // Operations
@@ -488,8 +426,10 @@ int OperationImpl::getLower()
 
 std::shared_ptr<uml::Parameter> OperationImpl::getReturnResult()
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	this->returnResult();
+	//end of body
 }
 
 
@@ -546,104 +486,218 @@ bool OperationImpl::only_body_for_query(Any diagnostics,std::map <   Any, Any > 
 
 std::shared_ptr<Bag<uml::Parameter> > OperationImpl::returnResult()
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+		std::shared_ptr<Bag<uml::Parameter>> ownedParameters = this->getOwnedParameter();
+	std::shared_ptr<Bag<uml::Parameter>> returnResult(new Bag<uml::Parameter>);
+
+	for(std::shared_ptr<uml::Parameter> p : *ownedParameters)
+	{
+		if(p->getDirection() == uml::ParameterDirectionKind::RETURN)
+		{
+				returnResult->add(p);
+				break;
+		}
+	}
+	
+	return returnResult;
+	//end of body
 }
 
 void OperationImpl::setIsOrdered(bool newIsOrdered)
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	m_isOrdered = newIsOrdered;
+	//end of body
 }
 
 void OperationImpl::setIsUnique(bool newIsUnique)
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	m_isUnique = newIsUnique;
+	//end of body
 }
 
 void OperationImpl::setLower(int newLower)
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	m_lower = newLower;
+	//end of body
 }
 
 void OperationImpl::setType(std::shared_ptr<uml::Type>  newType)
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	m_type = newType;
+	//end of body
 }
 
 void OperationImpl::setUpper(int newUpper)
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	m_upper = newUpper;
+	//end of body
 }
 
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference bodyCondition
+*/
 std::shared_ptr<uml::Constraint > OperationImpl::getBodyCondition() const
 {
 
     return m_bodyCondition;
 }
+
 void OperationImpl::setBodyCondition(std::shared_ptr<uml::Constraint> _bodyCondition)
 {
     m_bodyCondition = _bodyCondition;
 }
 
+
+
+/*
+Getter & Setter for reference class
+*/
 std::weak_ptr<uml::Class > OperationImpl::getClass() const
 {
 
     return m_class;
 }
+
 void OperationImpl::setClass(std::shared_ptr<uml::Class> _class)
 {
     m_class = _class;
 }
 
+
+
+/*
+Getter & Setter for reference datatype
+*/
 std::weak_ptr<uml::DataType > OperationImpl::getDatatype() const
 {
 
     return m_datatype;
 }
+
 void OperationImpl::setDatatype(std::shared_ptr<uml::DataType> _datatype)
 {
     m_datatype = _datatype;
 }
 
+
+
+/*
+Getter & Setter for reference interface
+*/
 std::weak_ptr<uml::Interface > OperationImpl::getInterface() const
 {
 
     return m_interface;
 }
+
 void OperationImpl::setInterface(std::shared_ptr<uml::Interface> _interface)
 {
     m_interface = _interface;
 }
 
+
+
+/*
+Getter & Setter for reference postcondition
+*/
 std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>> OperationImpl::getPostcondition() const
 {
+	if(m_postcondition == nullptr)
+	{
+		/*Subset*/
+		m_postcondition.reset(new Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/ >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_postcondition - Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/ >()" << std::endl;
+		#endif
+		
+		/*Subset*/
+		m_postcondition->initSubset(getOwnedRule());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_postcondition - Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/ >(getOwnedRule())" << std::endl;
+		#endif
+		
+	}
 
     return m_postcondition;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference precondition
+*/
 std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>> OperationImpl::getPrecondition() const
 {
+	if(m_precondition == nullptr)
+	{
+		/*Subset*/
+		m_precondition.reset(new Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/ >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_precondition - Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/ >()" << std::endl;
+		#endif
+		
+		/*Subset*/
+		m_precondition->initSubset(getOwnedRule());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_precondition - Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/ >(getOwnedRule())" << std::endl;
+		#endif
+		
+	}
 
     return m_precondition;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference redefinedOperation
+*/
 std::shared_ptr<Subset<uml::Operation, uml::RedefinableElement>> OperationImpl::getRedefinedOperation() const
 {
+	if(m_redefinedOperation == nullptr)
+	{
+		/*Subset*/
+		m_redefinedOperation.reset(new Subset<uml::Operation, uml::RedefinableElement >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_redefinedOperation - Subset<uml::Operation, uml::RedefinableElement >()" << std::endl;
+		#endif
+		
+		/*Subset*/
+		m_redefinedOperation->initSubset(getRedefinedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_redefinedOperation - Subset<uml::Operation, uml::RedefinableElement >(getRedefinedElement())" << std::endl;
+		#endif
+		
+	}
 
     return m_redefinedOperation;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference type
+*/
 std::shared_ptr<uml::Type > OperationImpl::getType() const
 {
 
@@ -651,41 +705,118 @@ std::shared_ptr<uml::Type > OperationImpl::getType() const
 }
 
 
+
+
+
 //*********************************
 // Union Getter
 //*********************************
 std::shared_ptr<Union<uml::Classifier>> OperationImpl::getFeaturingClassifier() const
 {
+	if(m_featuringClassifier == nullptr)
+	{
+		/*Union*/
+		m_featuringClassifier.reset(new Union<uml::Classifier>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_featuringClassifier - Union<uml::Classifier>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_featuringClassifier;
 }
+
 std::shared_ptr<Union<uml::NamedElement>> OperationImpl::getMember() const
 {
+	if(m_member == nullptr)
+	{
+		/*Union*/
+		m_member.reset(new Union<uml::NamedElement>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_member - Union<uml::NamedElement>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_member;
 }
+
 std::weak_ptr<uml::Namespace > OperationImpl::getNamespace() const
 {
 	return m_namespace;
 }
+
 std::shared_ptr<Union<uml::Element>> OperationImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> OperationImpl::getOwnedMember() const
 {
+	if(m_ownedMember == nullptr)
+	{
+		/*SubsetUnion*/
+		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_ownedMember->initSubsetUnion(getOwnedElement(),getMember());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >(getOwnedElement(),getMember())" << std::endl;
+		#endif
+		
+	}
 	return m_ownedMember;
 }
+
 std::weak_ptr<uml::Element > OperationImpl::getOwner() const
 {
 	return m_owner;
 }
+
 std::shared_ptr<Union<uml::RedefinableElement>> OperationImpl::getRedefinedElement() const
 {
+	if(m_redefinedElement == nullptr)
+	{
+		/*Union*/
+		m_redefinedElement.reset(new Union<uml::RedefinableElement>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_redefinedElement - Union<uml::RedefinableElement>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_redefinedElement;
 }
+
 std::shared_ptr<Union<uml::Classifier>> OperationImpl::getRedefinitionContext() const
 {
+	if(m_redefinitionContext == nullptr)
+	{
+		/*Union*/
+		m_redefinitionContext.reset(new Union<uml::Classifier>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_redefinitionContext - Union<uml::Classifier>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_redefinitionContext;
 }
+
+
 
 
 std::shared_ptr<Operation> OperationImpl::getThisOperationPtr() const

@@ -18,7 +18,7 @@
 //*********************************
 namespace ecore 
 {
-	class EReferenceImpl :virtual public EStructuralFeatureImpl, virtual public EReference 
+	class EReferenceImpl : virtual public EStructuralFeatureImpl, virtual public EReference 
 	{
 		public: 
 			EReferenceImpl(const EReferenceImpl & obj);
@@ -55,56 +55,47 @@ namespace ecore
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual bool isContainer() const ;
 			
-			/*!
-			 */ 
+			
+			 
 			virtual bool isContainment() const ;
 			
-			/*!
-			 */ 
+			 
 			virtual void setContainment (bool _containment); 
-			
-			/*!
-			 */ 
+			 
 			virtual bool isResolveProxies() const ;
 			
-			/*!
-			 */ 
+			 
 			virtual void setResolveProxies (bool _resolveProxies); 
-			
 			
 			
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Bag<ecore::EAttribute>> getEKeys() const ;
 			
-			/*!
-			 */
+			
+			
 			virtual std::shared_ptr<ecore::EReference > getEOpposite() const ;
 			
-			/*!
-			 */
-			virtual void setEOpposite(std::shared_ptr<ecore::EReference> _eOpposite_eOpposite) ;
-			/*!
-			 */
+			
+			virtual void setEOpposite(std::shared_ptr<ecore::EReference> _eOpposite) ;
+			
+			
 			virtual std::shared_ptr<ecore::EClass > getEReferenceType() const ;
 			
-			/*!
-			 */
-			virtual void setEReferenceType(std::shared_ptr<ecore::EClass> _eReferenceType_eReferenceType) ;
+			
+			virtual void setEReferenceType(std::shared_ptr<ecore::EClass> _eReferenceType) ;
+			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const ; 
 			 
 			//*********************************

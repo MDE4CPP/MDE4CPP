@@ -2,10 +2,6 @@
 <uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_xA5IYHkBEeqxbc6fisuwTg" name="Op_ProvInterface">
   <eAnnotations xmi:id="_QMmu8IViEeq7y-U79yHWlQ" source="prepareApplication">
     <details xmi:id="_SKv2oIViEeq7y-U79yHWlQ" key="sourceCodeMain" value="std::cout&lt;&lt;&quot;Test model : Feature on Provided Interface&quot;&lt;&lt;std::endl;&#xA;&#xA;std::shared_ptr&lt;Op_ProvInterface::Tester> tester = factory->createTester();&#xA;std::shared_ptr&lt;Op_ProvInterface::A> a = factory->createA();&#xA;int v = 4;&#xA;bool successful = false;&#xA;&#xA;std::cout&lt;&lt;&quot;-- Running test case: Feature on Provided Interface --&quot;&lt;&lt;std::endl;&#xA;std::cout&lt;&lt;std::endl;&#xA;&#xA;a = tester->testCallDelegation(v);&#xA;successful = (a->getB()->getP() == v);&#xA;&#xA;std::cout&lt;&lt;&quot;a->b->p = &quot;&lt;&lt;a->getB()->getP()&lt;&lt;std::endl;&#xA;std::cout&lt;&lt;&quot;Operation call was forwarded into a through a::q to a::b : &quot;&lt;&lt;std::boolalpha&lt;&lt;successful&lt;&lt;std::endl;&#xA;std::cout&lt;&lt;&quot;Test case successful : &quot;&lt;&lt;std::boolalpha&lt;&lt;successful&lt;&lt;std::endl;&#xA;std::cout&lt;&lt;std::endl;&#xA;std::cout&lt;&lt;&quot;-- End of test case --&quot;&lt;&lt;std::endl;"/>
-    <details xmi:id="_oOnckIYJEeqd18W_zXZ5kw" key="sourceCodeIncludes" value=""/>
-  </eAnnotations>
-  <eAnnotations xmi:id="_SFMBYIWHEeq7y-U79yHWlQ" source="BuildMode">
-    <details xmi:id="_btG94IWHEeq7y-U79yHWlQ" key="type" value="library"/>
   </eAnnotations>
   <ownedComment xmi:id="_esbxIKDjEeq8Z9IqI9dZbA">
     <body>This test case addresses invocation of an Operation on a provided interface of a Port using the &quot;onPort&quot; property of uml::CallOperationAction. 

@@ -61,19 +61,7 @@ using namespace ecore;
 // Constructor / Destructor
 //*********************************
 EAttributeImpl::EAttributeImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	//Init references
-	
+{	
 }
 
 EAttributeImpl::~EAttributeImpl()
@@ -83,22 +71,19 @@ EAttributeImpl::~EAttributeImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+EAttributeImpl::EAttributeImpl(std::weak_ptr<ecore::EObject > par_eContainer)
+:EAttributeImpl()
+{
+	m_eContainer = par_eContainer;
+}
 
 //Additional constructor for the containments back reference
-			EAttributeImpl::EAttributeImpl(std::weak_ptr<ecore::EObject > par_eContainer)
-			:EAttributeImpl()
-			{
-			    m_eContainer = par_eContainer;
-			}
-
-
-//Additional constructor for the containments back reference
-			EAttributeImpl::EAttributeImpl(std::weak_ptr<ecore::EClass > par_eContainingClass)
-			:EAttributeImpl()
-			{
-			    m_eContainingClass = par_eContainingClass;
-			}
-
+EAttributeImpl::EAttributeImpl(std::weak_ptr<ecore::EClass > par_eContainingClass)
+:EAttributeImpl()
+{
+	m_eContainingClass = par_eContainingClass;
+}
 
 
 EAttributeImpl::EAttributeImpl(const EAttributeImpl & obj):EAttributeImpl()
@@ -171,15 +156,20 @@ std::shared_ptr<EClass> EAttributeImpl::eStaticClass() const
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute iD
+*/
+bool EAttributeImpl::isID() const 
+{
+	return m_iD;
+}
+
 void EAttributeImpl::setID(bool _iD)
 {
 	m_iD = _iD;
 } 
 
-bool EAttributeImpl::isID() const 
-{
-	return m_iD;
-}
+
 
 //*********************************
 // Operations
@@ -188,6 +178,9 @@ bool EAttributeImpl::isID() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference eAttributeType
+*/
 std::shared_ptr<ecore::EDataType > EAttributeImpl::getEAttributeType() const
 {
 //assert(m_eAttributeType);
@@ -195,13 +188,28 @@ std::shared_ptr<ecore::EDataType > EAttributeImpl::getEAttributeType() const
 }
 
 
+
+
+
 //*********************************
 // Union Getter
 //*********************************
 std::shared_ptr<Union<ecore::EObject>> EAttributeImpl::getEContens() const
 {
+	if(m_eContens == nullptr)
+	{
+		/*Union*/
+		m_eContens.reset(new Union<ecore::EObject>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_eContens - Union<ecore::EObject>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_eContens;
 }
+
+
 
 
 std::shared_ptr<EAttribute> EAttributeImpl::getThisEAttributePtr() const

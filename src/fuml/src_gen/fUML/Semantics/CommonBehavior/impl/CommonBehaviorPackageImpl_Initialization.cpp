@@ -156,12 +156,12 @@ void CommonBehaviorPackageImpl::initializeCallEventExecutionContent()
 	}
 	
 	
-	m_callEventExecution_Operation_copy->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
-	m_callEventExecution_Operation_copy->setName("copy");
-	m_callEventExecution_Operation_copy->setLowerBound(1);
-	m_callEventExecution_Operation_copy->setUpperBound(1);
-	m_callEventExecution_Operation_copy->setUnique(true);
-	m_callEventExecution_Operation_copy->setOrdered(true);
+	m_callEventExecution_Operation__copy->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
+	m_callEventExecution_Operation__copy->setName("_copy");
+	m_callEventExecution_Operation__copy->setLowerBound(1);
+	m_callEventExecution_Operation__copy->setUpperBound(1);
+	m_callEventExecution_Operation__copy->setUnique(true);
+	m_callEventExecution_Operation__copy->setOrdered(true);
 	
 	
 	m_callEventExecution_Operation_createEventOccurrence->setEType(getEventOccurrence_Class());
@@ -784,6 +784,28 @@ void CommonBehaviorPackageImpl::initializeExecutionContent()
 	m_execution_Class->setInterface(false);
 	
 	
+	m_execution_Attribute_behavior->setName("behavior");
+	m_execution_Attribute_behavior->setEType(uml::UmlPackage::eInstance()->getBehavior_Class());
+	m_execution_Attribute_behavior->setLowerBound(1);
+	m_execution_Attribute_behavior->setUpperBound(1);
+	m_execution_Attribute_behavior->setTransient(false);
+	m_execution_Attribute_behavior->setVolatile(false);
+	m_execution_Attribute_behavior->setChangeable(true);
+	m_execution_Attribute_behavior->setUnsettable(false);
+	m_execution_Attribute_behavior->setUnique(true);
+	m_execution_Attribute_behavior->setDerived(false);
+	m_execution_Attribute_behavior->setOrdered(true);
+	m_execution_Attribute_behavior->setContainment(false);
+	m_execution_Attribute_behavior->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			m_execution_Attribute_behavior->setDefaultValueLiteral(defaultValue);
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
+	}
 	m_execution_Attribute_context->setName("context");
 	m_execution_Attribute_context->setEType(fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getObject_Class());
 	m_execution_Attribute_context->setLowerBound(1);
@@ -828,6 +850,14 @@ void CommonBehaviorPackageImpl::initializeExecutionContent()
 			//undefined otherEnd
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
+	
+	m_execution_Operation__copy->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
+	m_execution_Operation__copy->setName("_copy");
+	m_execution_Operation__copy->setLowerBound(1);
+	m_execution_Operation__copy->setUpperBound(1);
+	m_execution_Operation__copy->setUnique(true);
+	m_execution_Operation__copy->setOrdered(true);
+	
 	
 	m_execution_Operation_execute->setEType(nullptr);
 	m_execution_Operation_execute->setName("execute");
@@ -1334,6 +1364,14 @@ void CommonBehaviorPackageImpl::initializeParameterValueContent()
 			//undefined otherEnd
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
+	
+	m_parameterValue_Operation__copy->setEType(getParameterValue_Class());
+	m_parameterValue_Operation__copy->setName("_copy");
+	m_parameterValue_Operation__copy->setLowerBound(1);
+	m_parameterValue_Operation__copy->setUpperBound(1);
+	m_parameterValue_Operation__copy->setUnique(true);
+	m_parameterValue_Operation__copy->setOrdered(true);
+	
 	
 	
 }

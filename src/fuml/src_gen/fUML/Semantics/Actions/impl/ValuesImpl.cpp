@@ -51,22 +51,7 @@ using namespace fUML::Semantics::Actions;
 // Constructor / Destructor
 //*********************************
 ValuesImpl::ValuesImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		m_values.reset(new Bag<fUML::Semantics::Values::Value>());
-	
-	
-
-	//Init references
-	
-	
+{	
 }
 
 ValuesImpl::~ValuesImpl()
@@ -75,7 +60,6 @@ ValuesImpl::~ValuesImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Values "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -120,16 +104,29 @@ std::shared_ptr<ecore::EClass> ValuesImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference values
+*/
 std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ValuesImpl::getValues() const
 {
+	if(m_values == nullptr)
+	{
+		m_values.reset(new Bag<fUML::Semantics::Values::Value>());
+		
+		
+	}
 
     return m_values;
 }
 
 
+
+
+
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<Values> ValuesImpl::getThisValuesPtr() const

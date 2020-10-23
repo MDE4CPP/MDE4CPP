@@ -19,7 +19,7 @@
 //*********************************
 namespace PSCS::Semantics::Actions 
 {
-	class CS_AcceptEventActionActivationImpl :virtual public fUML::Semantics::Actions::AcceptEventActionActivationImpl, virtual public CS_AcceptEventActionActivation 
+	class CS_AcceptEventActionActivationImpl : virtual public fUML::Semantics::Actions::AcceptEventActionActivationImpl, virtual public CS_AcceptEventActionActivation 
 	{
 		public: 
 			CS_AcceptEventActionActivationImpl(const CS_AcceptEventActionActivationImpl & obj);
@@ -47,8 +47,7 @@ namespace PSCS::Semantics::Actions
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual void accept(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>  eventOccurrence) ;
 			
 			
@@ -66,8 +65,7 @@ namespace PSCS::Semantics::Actions
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> getPinActivation() const ; 
 			 
 			//*********************************

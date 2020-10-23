@@ -61,6 +61,7 @@ namespace PrimitiveTypes
 		private:
 			void createPackageActivities(std::shared_ptr<uml::Package> primitiveTypes, std::shared_ptr<uml::UmlFactory> factory);
 			void createPackageClasses(std::shared_ptr<uml::Package> primitiveTypes, std::shared_ptr<uml::UmlFactory> factory);
+			void createPackageAssociations(std::shared_ptr<uml::Package> primitiveTypes, std::shared_ptr<uml::UmlFactory> factory);
 			void createPackageDependencies(std::shared_ptr<uml::Package> primitiveTypes, std::shared_ptr<uml::UmlFactory> factory);
 			void createPackageEnumerationLiterals(std::shared_ptr<uml::Package> primitiveTypes, std::shared_ptr<uml::UmlFactory> factory);
 			void createPackageInstanceSpecifications(std::shared_ptr<uml::Package> primitiveTypes, std::shared_ptr<uml::UmlFactory> factory);
@@ -72,6 +73,7 @@ namespace PrimitiveTypes
 
 			void initializePackageActivities();
 			void initializePackageClasses();
+			void initializePackageAssociations();
 			void initializePackageDependencies();
 			void initializePackageInstanceSpecifications();
 			void initializePackageInterfaceRealizations();

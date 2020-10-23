@@ -54,6 +54,7 @@ namespace StandardProfile
 			//*********************************
 			std::weak_ptr<uml::Abstraction> m_base_Abstraction;
 			
+			
 	};
 }
 #endif /* end of include guard: STANDARDPROFILE_DERIVE__HPP */

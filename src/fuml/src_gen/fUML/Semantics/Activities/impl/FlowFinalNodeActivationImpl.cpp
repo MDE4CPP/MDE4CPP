@@ -59,17 +59,7 @@ using namespace fUML::Semantics::Activities;
 // Constructor / Destructor
 //*********************************
 FlowFinalNodeActivationImpl::FlowFinalNodeActivationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 FlowFinalNodeActivationImpl::~FlowFinalNodeActivationImpl()
@@ -79,14 +69,12 @@ FlowFinalNodeActivationImpl::~FlowFinalNodeActivationImpl()
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			FlowFinalNodeActivationImpl::FlowFinalNodeActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
-			:FlowFinalNodeActivationImpl()
-			{
-			    m_group = par_group;
-			}
-
+FlowFinalNodeActivationImpl::FlowFinalNodeActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
+:FlowFinalNodeActivationImpl()
+{
+	m_group = par_group;
+}
 
 
 FlowFinalNodeActivationImpl::FlowFinalNodeActivationImpl(const FlowFinalNodeActivationImpl & obj):FlowFinalNodeActivationImpl()
@@ -150,6 +138,7 @@ std::shared_ptr<ecore::EClass> FlowFinalNodeActivationImpl::eStaticClass() const
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<FlowFinalNodeActivation> FlowFinalNodeActivationImpl::getThisFlowFinalNodeActivationPtr() const

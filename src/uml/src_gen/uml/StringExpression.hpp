@@ -128,8 +128,10 @@ namespace uml
 namespace uml 
 {
 	/*!
-	 A StringExpression is an Expression that specifies a String value that is derived by concatenating a sequence of operands with String values or a sequence of subExpressions, some of which might be template parameters.
-	<p>From package UML::Values.</p> */
+	A StringExpression is an Expression that specifies a String value that is derived by concatenating a sequence of operands with String values or a sequence of subExpressions, some of which might be template parameters.
+	<p>From package UML::Values.</p>
+	*/
+	
 	class StringExpression:virtual public Expression,virtual public TemplateableElement
 	{
 		public:
@@ -178,13 +180,17 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 All the operands of a StringExpression must be LiteralStrings
-			operand->forAll (oclIsKindOf (LiteralString)) */ 
+			All the operands of a StringExpression must be LiteralStrings
+			operand->forAll (oclIsKindOf (LiteralString))
+			*/
+			 
 			virtual bool operands(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
-			 If a StringExpression has sub-expressions, it cannot have operands and vice versa (this avoids the problem of having to define a collating sequence between operands and subexpressions).
-			if subExpression->notEmpty() then operand->isEmpty() else operand->notEmpty() endif */ 
+			If a StringExpression has sub-expressions, it cannot have operands and vice versa (this avoids the problem of having to define a collating sequence between operands and subexpressions).
+			if subExpression->notEmpty() then operand->isEmpty() else operand->notEmpty() endif
+			*/
+			 
 			virtual bool subexpressions(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
@@ -196,18 +202,26 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 The StringExpression of which this StringExpression is a subExpression.
-			<p>From package UML::Values.</p> */
+			The StringExpression of which this StringExpression is a subExpression.
+			<p>From package UML::Values.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::StringExpression > getOwningExpression() const = 0;
 			
 			/*!
-			 The StringExpression of which this StringExpression is a subExpression.
-			<p>From package UML::Values.</p> */
-			virtual void setOwningExpression(std::shared_ptr<uml::StringExpression> _owningExpression_owningExpression) = 0;
+			The StringExpression of which this StringExpression is a subExpression.
+			<p>From package UML::Values.</p>
+			*/
+			
+			virtual void setOwningExpression(std::shared_ptr<uml::StringExpression> _owningExpression) = 0;
+			
 			/*!
-			 The StringExpressions that constitute this StringExpression.
-			<p>From package UML::Values.</p> */
+			The StringExpressions that constitute this StringExpression.
+			<p>From package UML::Values.</p>
+			*/
+			
 			virtual std::shared_ptr<Subset<uml::StringExpression, uml::Element>> getSubExpression() const = 0;
+			
 			
 			
 
@@ -221,28 +235,36 @@ namespace uml
 			// Reference Members
 			//*********************************
 			/*!
-			 The StringExpression of which this StringExpression is a subExpression.
-			<p>From package UML::Values.</p> */
-			std::weak_ptr<uml::StringExpression > m_owningExpression;
-			/*!
-			 The StringExpressions that constitute this StringExpression.
-			<p>From package UML::Values.</p> */
-			std::shared_ptr<Subset<uml::StringExpression, uml::Element>> m_subExpression;
+			The StringExpression of which this StringExpression is a subExpression.
+			<p>From package UML::Values.</p>
+			*/
 			
+			std::weak_ptr<uml::StringExpression > m_owningExpression;/*!
+			The StringExpressions that constitute this StringExpression.
+			<p>From package UML::Values.</p>
+			*/
+			
+			mutable std::shared_ptr<Subset<uml::StringExpression, uml::Element>> m_subExpression;
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

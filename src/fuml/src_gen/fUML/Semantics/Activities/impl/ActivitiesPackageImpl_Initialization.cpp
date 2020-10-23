@@ -329,6 +329,36 @@ void ActivitiesPackageImpl::initializeActivityExecutionContent()
 	   		m_activityExecution_Attribute_activationGroup->setEOpposite(otherEnd);
 	    }
 	}
+	m_activityExecution_Attribute_activity->setName("activity");
+	m_activityExecution_Attribute_activity->setEType(uml::UmlPackage::eInstance()->getActivity_Class());
+	m_activityExecution_Attribute_activity->setLowerBound(1);
+	m_activityExecution_Attribute_activity->setUpperBound(1);
+	m_activityExecution_Attribute_activity->setTransient(false);
+	m_activityExecution_Attribute_activity->setVolatile(false);
+	m_activityExecution_Attribute_activity->setChangeable(true);
+	m_activityExecution_Attribute_activity->setUnsettable(false);
+	m_activityExecution_Attribute_activity->setUnique(true);
+	m_activityExecution_Attribute_activity->setDerived(false);
+	m_activityExecution_Attribute_activity->setOrdered(true);
+	m_activityExecution_Attribute_activity->setContainment(false);
+	m_activityExecution_Attribute_activity->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			m_activityExecution_Attribute_activity->setDefaultValueLiteral(defaultValue);
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
+	}
+	
+	m_activityExecution_Operation__copy->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
+	m_activityExecution_Operation__copy->setName("_copy");
+	m_activityExecution_Operation__copy->setLowerBound(1);
+	m_activityExecution_Operation__copy->setUpperBound(1);
+	m_activityExecution_Operation__copy->setUnique(true);
+	m_activityExecution_Operation__copy->setOrdered(true);
+	
 	
 	m_activityExecution_Operation_execute->setEType(nullptr);
 	m_activityExecution_Operation_execute->setName("execute");
@@ -1347,6 +1377,14 @@ void ActivitiesPackageImpl::initializeControlTokenContent()
 	
 	
 	
+	m_controlToken_Operation__copy->setEType(getToken_Class());
+	m_controlToken_Operation__copy->setName("_copy");
+	m_controlToken_Operation__copy->setLowerBound(1);
+	m_controlToken_Operation__copy->setUpperBound(1);
+	m_controlToken_Operation__copy->setUnique(true);
+	m_controlToken_Operation__copy->setOrdered(true);
+	
+	
 	m_controlToken_Operation_equals_Token->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
 	m_controlToken_Operation_equals_Token->setName("equals");
 	m_controlToken_Operation_equals_Token->setLowerBound(1);
@@ -1363,14 +1401,6 @@ void ActivitiesPackageImpl::initializeControlTokenContent()
 		parameter->setUnique(true);
 		parameter->setOrdered(true);
 	}
-	
-	m_controlToken_Operation_getValue->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
-	m_controlToken_Operation_getValue->setName("getValue");
-	m_controlToken_Operation_getValue->setLowerBound(0);
-	m_controlToken_Operation_getValue->setUpperBound(1);
-	m_controlToken_Operation_getValue->setUnique(true);
-	m_controlToken_Operation_getValue->setOrdered(false);
-	
 	
 	m_controlToken_Operation_isControl->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
 	m_controlToken_Operation_isControl->setName("isControl");
@@ -1453,6 +1483,28 @@ void ActivitiesPackageImpl::initializeDecisionNodeActivationContent()
 		if (!defaultValue.empty())
 		{
 			m_decisionNodeActivation_Attribute_decisionInputExecution->setDefaultValueLiteral(defaultValue);
+		}				
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
+	}
+	m_decisionNodeActivation_Attribute_decisionNode->setName("decisionNode");
+	m_decisionNodeActivation_Attribute_decisionNode->setEType(uml::UmlPackage::eInstance()->getDecisionNode_Class());
+	m_decisionNodeActivation_Attribute_decisionNode->setLowerBound(1);
+	m_decisionNodeActivation_Attribute_decisionNode->setUpperBound(1);
+	m_decisionNodeActivation_Attribute_decisionNode->setTransient(false);
+	m_decisionNodeActivation_Attribute_decisionNode->setVolatile(false);
+	m_decisionNodeActivation_Attribute_decisionNode->setChangeable(true);
+	m_decisionNodeActivation_Attribute_decisionNode->setUnsettable(false);
+	m_decisionNodeActivation_Attribute_decisionNode->setUnique(true);
+	m_decisionNodeActivation_Attribute_decisionNode->setDerived(false);
+	m_decisionNodeActivation_Attribute_decisionNode->setOrdered(true);
+	m_decisionNodeActivation_Attribute_decisionNode->setContainment(false);
+	m_decisionNodeActivation_Attribute_decisionNode->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			m_decisionNodeActivation_Attribute_decisionNode->setDefaultValueLiteral(defaultValue);
 		}				
 			//undefined otherEnd
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
@@ -2206,6 +2258,14 @@ void ActivitiesPackageImpl::initializeForkedTokenContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
+	m_forkedToken_Operation__copy->setEType(getToken_Class());
+	m_forkedToken_Operation__copy->setName("_copy");
+	m_forkedToken_Operation__copy->setLowerBound(1);
+	m_forkedToken_Operation__copy->setUpperBound(1);
+	m_forkedToken_Operation__copy->setUnique(true);
+	m_forkedToken_Operation__copy->setOrdered(true);
+	
+	
 	m_forkedToken_Operation_equals_Token->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
 	m_forkedToken_Operation_equals_Token->setName("equals");
 	m_forkedToken_Operation_equals_Token->setLowerBound(1);
@@ -2501,6 +2561,14 @@ void ActivitiesPackageImpl::initializeObjectTokenContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
+	m_objectToken_Operation__copy->setEType(getToken_Class());
+	m_objectToken_Operation__copy->setName("_copy");
+	m_objectToken_Operation__copy->setLowerBound(1);
+	m_objectToken_Operation__copy->setUpperBound(1);
+	m_objectToken_Operation__copy->setUnique(true);
+	m_objectToken_Operation__copy->setOrdered(true);
+	
+	
 	m_objectToken_Operation_equals_Token->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
 	m_objectToken_Operation_equals_Token->setName("equals");
 	m_objectToken_Operation_equals_Token->setLowerBound(1);
@@ -2664,6 +2732,14 @@ void ActivitiesPackageImpl::initializeTokenContent()
 	    }
 	}
 	
+	m_token_Operation__copy->setEType(getToken_Class());
+	m_token_Operation__copy->setName("_copy");
+	m_token_Operation__copy->setLowerBound(1);
+	m_token_Operation__copy->setUpperBound(1);
+	m_token_Operation__copy->setUnique(true);
+	m_token_Operation__copy->setOrdered(true);
+	
+	
 	m_token_Operation_equals_Token->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
 	m_token_Operation_equals_Token->setName("equals");
 	m_token_Operation_equals_Token->setLowerBound(1);
@@ -2683,10 +2759,10 @@ void ActivitiesPackageImpl::initializeTokenContent()
 	
 	m_token_Operation_getValue->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
 	m_token_Operation_getValue->setName("getValue");
-	m_token_Operation_getValue->setLowerBound(0);
+	m_token_Operation_getValue->setLowerBound(1);
 	m_token_Operation_getValue->setUpperBound(1);
 	m_token_Operation_getValue->setUnique(true);
-	m_token_Operation_getValue->setOrdered(false);
+	m_token_Operation_getValue->setOrdered(true);
 	
 	
 	m_token_Operation_isControl->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());

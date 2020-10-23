@@ -54,23 +54,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 ParameterableElementImpl::ParameterableElementImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	
-
-	//Init references
-	
-
-	
+{	
 }
 
 ParameterableElementImpl::~ParameterableElementImpl()
@@ -80,23 +64,20 @@ ParameterableElementImpl::~ParameterableElementImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+ParameterableElementImpl::ParameterableElementImpl(std::weak_ptr<uml::Element > par_owner)
+:ParameterableElementImpl()
+{
+	m_owner = par_owner;
+}
 
 //Additional constructor for the containments back reference
-			ParameterableElementImpl::ParameterableElementImpl(std::weak_ptr<uml::Element > par_owner)
-			:ParameterableElementImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-//Additional constructor for the containments back reference
-			ParameterableElementImpl::ParameterableElementImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
-			:ParameterableElementImpl()
-			{
-			    m_owningTemplateParameter = par_owningTemplateParameter;
-				m_owner = par_owningTemplateParameter;
-			}
-
+ParameterableElementImpl::ParameterableElementImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+:ParameterableElementImpl()
+{
+	m_owningTemplateParameter = par_owningTemplateParameter;
+	m_owner = par_owningTemplateParameter;
+}
 
 
 ParameterableElementImpl::ParameterableElementImpl(const ParameterableElementImpl & obj):ParameterableElementImpl()
@@ -162,37 +143,62 @@ bool ParameterableElementImpl::isTemplateParameter()
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference owningTemplateParameter
+*/
 std::weak_ptr<uml::TemplateParameter > ParameterableElementImpl::getOwningTemplateParameter() const
 {
 
     return m_owningTemplateParameter;
 }
+
 void ParameterableElementImpl::setOwningTemplateParameter(std::shared_ptr<uml::TemplateParameter> _owningTemplateParameter)
 {
     m_owningTemplateParameter = _owningTemplateParameter;
 }
 
+
+
+/*
+Getter & Setter for reference templateParameter
+*/
 std::shared_ptr<uml::TemplateParameter > ParameterableElementImpl::getTemplateParameter() const
 {
 
     return m_templateParameter;
 }
+
 void ParameterableElementImpl::setTemplateParameter(std::shared_ptr<uml::TemplateParameter> _templateParameter)
 {
     m_templateParameter = _templateParameter;
 }
+
+
 
 //*********************************
 // Union Getter
 //*********************************
 std::shared_ptr<Union<uml::Element>> ParameterableElementImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > ParameterableElementImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<ParameterableElement> ParameterableElementImpl::getThisParameterableElementPtr() const

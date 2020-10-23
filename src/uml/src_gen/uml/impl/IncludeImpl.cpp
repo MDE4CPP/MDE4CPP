@@ -63,23 +63,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 IncludeImpl::IncludeImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	
-
-	//Init references
-	
-
-	
+{	
 }
 
 IncludeImpl::~IncludeImpl()
@@ -89,32 +73,28 @@ IncludeImpl::~IncludeImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+IncludeImpl::IncludeImpl(std::weak_ptr<uml::UseCase > par_includingCase)
+:IncludeImpl()
+{
+	m_includingCase = par_includingCase;
+	m_namespace = par_includingCase;
+}
 
 //Additional constructor for the containments back reference
-			IncludeImpl::IncludeImpl(std::weak_ptr<uml::UseCase > par_includingCase)
-			:IncludeImpl()
-			{
-			    m_includingCase = par_includingCase;
-				m_namespace = par_includingCase;
-			}
-
-
-//Additional constructor for the containments back reference
-			IncludeImpl::IncludeImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:IncludeImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
+IncludeImpl::IncludeImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:IncludeImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			IncludeImpl::IncludeImpl(std::weak_ptr<uml::Element > par_owner)
-			:IncludeImpl()
-			{
-			    m_owner = par_owner;
-			}
-
+IncludeImpl::IncludeImpl(std::weak_ptr<uml::Element > par_owner)
+:IncludeImpl()
+{
+	m_owner = par_owner;
+}
 
 
 IncludeImpl::IncludeImpl(const IncludeImpl & obj):IncludeImpl()
@@ -192,25 +172,37 @@ std::shared_ptr<ecore::EClass> IncludeImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference addition
+*/
 std::shared_ptr<uml::UseCase > IncludeImpl::getAddition() const
 {
 //assert(m_addition);
     return m_addition;
 }
+
 void IncludeImpl::setAddition(std::shared_ptr<uml::UseCase> _addition)
 {
     m_addition = _addition;
 }
 
+
+
+/*
+Getter & Setter for reference includingCase
+*/
 std::weak_ptr<uml::UseCase > IncludeImpl::getIncludingCase() const
 {
 //assert(m_includingCase);
     return m_includingCase;
 }
+
 void IncludeImpl::setIncludingCase(std::shared_ptr<uml::UseCase> _includingCase)
 {
     m_includingCase = _includingCase;
 }
+
+
 
 //*********************************
 // Union Getter
@@ -219,26 +211,83 @@ std::weak_ptr<uml::Namespace > IncludeImpl::getNamespace() const
 {
 	return m_namespace;
 }
+
 std::shared_ptr<Union<uml::Element>> IncludeImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > IncludeImpl::getOwner() const
 {
 	return m_owner;
 }
+
 std::shared_ptr<Union<uml::Element>> IncludeImpl::getRelatedElement() const
 {
+	if(m_relatedElement == nullptr)
+	{
+		/*Union*/
+		m_relatedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_relatedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_relatedElement;
 }
+
 std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> IncludeImpl::getSource() const
 {
+	if(m_source == nullptr)
+	{
+		/*SubsetUnion*/
+		m_source.reset(new SubsetUnion<uml::Element, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_source - SubsetUnion<uml::Element, uml::Element >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_source->initSubsetUnion(getRelatedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_source - SubsetUnion<uml::Element, uml::Element >(getRelatedElement())" << std::endl;
+		#endif
+		
+	}
 	return m_source;
 }
+
 std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> IncludeImpl::getTarget() const
 {
+	if(m_target == nullptr)
+	{
+		/*SubsetUnion*/
+		m_target.reset(new SubsetUnion<uml::Element, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_target - SubsetUnion<uml::Element, uml::Element >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_target->initSubsetUnion(getRelatedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_target - SubsetUnion<uml::Element, uml::Element >(getRelatedElement())" << std::endl;
+		#endif
+		
+	}
 	return m_target;
 }
+
+
 
 
 std::shared_ptr<Include> IncludeImpl::getThisIncludePtr() const

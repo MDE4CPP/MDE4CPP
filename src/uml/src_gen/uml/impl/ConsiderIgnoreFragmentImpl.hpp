@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class ConsiderIgnoreFragmentImpl :virtual public CombinedFragmentImpl, virtual public ConsiderIgnoreFragment 
+	class ConsiderIgnoreFragmentImpl : virtual public CombinedFragmentImpl, virtual public ConsiderIgnoreFragment 
 	{
 		public: 
 			ConsiderIgnoreFragmentImpl(const ConsiderIgnoreFragmentImpl & obj);
@@ -59,13 +59,17 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 The interaction operator of a ConsiderIgnoreFragment must be either 'consider' or 'ignore'.
-			(interactionOperator =  InteractionOperatorKind::consider) or (interactionOperator =  InteractionOperatorKind::ignore) */ 
+			The interaction operator of a ConsiderIgnoreFragment must be either 'consider' or 'ignore'.
+			(interactionOperator =  InteractionOperatorKind::consider) or (interactionOperator =  InteractionOperatorKind::ignore)
+			*/
+			 
 			virtual bool consider_or_ignore(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
-			 The NamedElements must be of a type of element that can be a signature for a message (i.e.., an Operation, or a Signal).
-			message->forAll(m | m.oclIsKindOf(Operation) or m.oclIsKindOf(Signal)) */ 
+			The NamedElements must be of a type of element that can be a signature for a message (i.e.., an Operation, or a Signal).
+			message->forAll(m | m.oclIsKindOf(Operation) or m.oclIsKindOf(Signal))
+			*/
+			 
 			virtual bool type(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
@@ -79,9 +83,12 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 The set of messages that apply to this fragment.
-			<p>From package UML::Interactions.</p> */
+			The set of messages that apply to this fragment.
+			<p>From package UML::Interactions.</p>
+			*/
+			
 			virtual std::shared_ptr<Bag<uml::NamedElement>> getMessage() const ;
+			
 			
 							
 			
@@ -89,14 +96,20 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
