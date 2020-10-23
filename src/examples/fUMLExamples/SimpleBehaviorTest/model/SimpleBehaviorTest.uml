@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_LxMdcGtIEemYYKBTSp1HPQ" name="simpleBehaviorTest">
+  <eAnnotations xmi:id="_Av-OMBUzEeu4rbshyHztaA" source="prepareApplication">
+    <details xmi:id="_B_3IwBUzEeu4rbshyHztaA" key="activityMain" value="true"/>
+  </eAnnotations>
   <packagedElement xmi:type="uml:Class" xmi:id="_d5HFEGtIEemYYKBTSp1HPQ" name="K1" visibility="public">
     <ownedAttribute xmi:id="_7j-ZNGtNEemwibfv1iZmFQ" name="k3s" type="_27yGEGtNEemwibfv1iZmFQ" aggregation="composite" association="_7j-ZMGtNEemwibfv1iZmFQ">
       <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_7j-ZNWtNEemwibfv1iZmFQ"/>
       <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_7j-ZNmtNEemwibfv1iZmFQ" value="*"/>
     </ownedAttribute>
     <ownedBehavior xmi:type="uml:Activity" xmi:id="_vkZUwGztEemZetaN1L-LFw" name="testPrimitiveBehavior" node="_2P15EGztEemZetaN1L-LFw _XAMwwGzuEemZetaN1L-LFw _jAyNwGzuEemZetaN1L-LFw _nxYO8GzuEemZetaN1L-LFw _wN2sAGzuEemZetaN1L-LFw _3Omx8GzuEemZetaN1L-LFw __mC-AGzuEemZetaN1L-LFw _ULfYAGzvEemZetaN1L-LFw _aHgqgGzvEemZetaN1L-LFw _pNVooIhjEem3IorExfyDcw _yzdmoIhpEem3IorExfyDcw">
+      <eAnnotations xmi:id="_D0UwABUzEeu4rbshyHztaA" source="http://sse.tu-ilmenau.de/codegen">
+        <details xmi:id="_LmedsBUzEeu4rbshyHztaA" key="mainActivity" value="1"/>
+      </eAnnotations>
       <edge xmi:type="uml:ControlFlow" xmi:id="_or7LoGzuEemZetaN1L-LFw" target="_nxYO8GzuEemZetaN1L-LFw" source="_2P15EGztEemZetaN1L-LFw">
         <guard xmi:type="uml:LiteralBoolean" xmi:id="_or7LoWzuEemZetaN1L-LFw" name="Initial1_To_Fork1_guard" value="true"/>
         <weight xmi:type="uml:LiteralInteger" xmi:id="_or7ysGzuEemZetaN1L-LFw" name="Initial1_To_Fork1_weight"/>
