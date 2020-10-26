@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_A6xBABJWEeuI2oJVG-zT2A" name="TestModelImport">
   <packagedElement xmi:type="uml:Class" xmi:id="_D-jiIBJWEeuI2oJVG-zT2A" name="B">
+    <ownedAttribute xmi:id="_f7_ckBdoEeu6nLgfxtyxzQ" name="testEnum" visibility="public" type="_HxH0ABdoEeu6nLgfxtyxzQ">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_f8AqsBdoEeu6nLgfxtyxzQ"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_f8AqsRdoEeu6nLgfxtyxzQ" value="1"/>
+      <defaultValue xmi:type="uml:InstanceValue" xmi:id="_vOJ_EBdoEeu6nLgfxtyxzQ" instance="_LkkQcBdoEeu6nLgfxtyxzQ"/>
+    </ownedAttribute>
     <ownedBehavior xmi:type="uml:Activity" xmi:id="_5eZ1wBJYEeuI2oJVG-zT2A" name="activity for execute operation" specification="_APyU4BJXEeuI2oJVG-zT2A" node="_J9uu8BJZEeuI2oJVG-zT2A _XdoCkBJZEeuI2oJVG-zT2A _mrbMABJlEeuI2oJVG-zT2A _z5sHoBJmEeuI2oJVG-zT2A _BM_JsBJnEeuI2oJVG-zT2A _kq3-oBJnEeuI2oJVG-zT2A _6qROIBJnEeuI2oJVG-zT2A">
       <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_8vM6UBJnEeuI2oJVG-zT2A" name="obPrintModelName">
         <ownedParameter xmi:id="_NFvD4BJoEeuI2oJVG-zT2A" name="model">
@@ -74,5 +79,16 @@
   </packagedElement>
   <packagedElement xmi:type="uml:Interface" xmi:id="_GDyJQBJWEeuI2oJVG-zT2A" name="X">
     <ownedOperation xmi:id="_KD2FYBJWEeuI2oJVG-zT2A" name="publish"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Enumeration" xmi:id="_HxH0ABdoEeu6nLgfxtyxzQ" name="TestEnum" visibility="public">
+    <ownedLiteral xmi:id="_KRF2YBdoEeu6nLgfxtyxzQ" name="TestA">
+      <specification xmi:type="uml:LiteralInteger" xmi:id="_KRF2YRdoEeu6nLgfxtyxzQ"/>
+    </ownedLiteral>
+    <ownedLiteral xmi:id="_LkkQcBdoEeu6nLgfxtyxzQ" name="TestB">
+      <specification xmi:type="uml:LiteralInteger" xmi:id="_LkkQcRdoEeu6nLgfxtyxzQ" value="1"/>
+    </ownedLiteral>
+    <ownedLiteral xmi:id="_MoytkBdoEeu6nLgfxtyxzQ" name="TestC">
+      <specification xmi:type="uml:LiteralInteger" xmi:id="_MoytkRdoEeu6nLgfxtyxzQ" value="2"/>
+    </ownedLiteral>
   </packagedElement>
 </uml:Model>
