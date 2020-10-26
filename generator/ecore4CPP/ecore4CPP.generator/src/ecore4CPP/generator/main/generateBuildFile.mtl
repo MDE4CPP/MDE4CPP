@@ -136,6 +136,11 @@ task build[packageName.toUpperFirst()/]() {
 [for (pack : EPackage | aPackage.metaModelLibraries()) before ('\n') ? (not(pack.name = aPackage.name))]
 	dependsOn getRootProject().getTasksByName('build[pack.name.toUpperFirst()/]', true)
 [/for]
+[for (libName : String | aPackage.eAllContents()->filter(EClass)->select(c : EClass | c.hasKey(keyLibrary())).valueKeys(keyLibrary())->asOrderedSet())]
+[if (not (libName.oclIsUndefined() or libName = ''))]
+	dependsOn getRootProject().getTasksByName('build[libName.toUpperFirst()/]', true)
+[/if]
+[/for]
 }
 
 tasks.getByPath('src_gen:compile[packageName.toUpperFirst()/]').mustRunAfter tasks.getByPath('model:generate[packageName.toUpperFirst()/]')
@@ -195,6 +200,15 @@ task compile[packageName.toUpperFirst()/](type: tui.sse.mde4cpp.MDE4CPPCompile) 
 	def [pack.name/] = getRootProject().getTasksByName('compile[pack.name.toUpperFirst()/]', true)
 	dependsOn [pack.name/]
 	inputs.files([pack.name/].outputs)
+[/for]
+[for (libName : String | aPackage.eAllContents()->filter(EClass)->select(c : EClass | c.hasKey(keyLibrary())).valueKeys(keyLibrary())->asOrderedSet())]
+[if (not (libName.oclIsUndefined() or libName = ''))]
+
+	// dependency to model '[libName/]'
+	def [libName/] = getRootProject().getTasksByName('compile[libName.toUpperFirst()/]', true)
+	dependsOn [libName/]
+	inputs.files([libName/].outputs)
+[/if]
 [/for]
 }
 

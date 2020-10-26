@@ -67,7 +67,7 @@ for(unsigned int i = 1; i <= [aProperty.getLower()/]; i++)
 */]
 [template public generateAttributeDefaultInstantiation(aProperty : Property){instVal : InstanceValue = aProperty.defaultValue.oclAsType(InstanceValue);}]
 [let specification : InstanceSpecification = instVal.instance]
-//instantiate property '[aProperty.name/]' with default value [if (not specification.name.oclIsUndefined())]'[specification.name/]'[/if]
+//instantiate property '[aProperty.name/]' with specification [if (not specification.name.oclIsUndefined())]'[specification.name/]'[else]anonymous instance specification[/if]
 [if (aProperty.upper <> 1)] [comment *-multiplicity /]
 for(unsigned int i = 0; i < [aProperty.lower/]; i++)
 {

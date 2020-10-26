@@ -4,7 +4,7 @@
     <ownedAttribute xmi:id="_f7_ckBdoEeu6nLgfxtyxzQ" name="testEnum" visibility="public" type="_HxH0ABdoEeu6nLgfxtyxzQ">
       <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_f8AqsBdoEeu6nLgfxtyxzQ"/>
       <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_f8AqsRdoEeu6nLgfxtyxzQ" value="1"/>
-      <defaultValue xmi:type="uml:InstanceValue" xmi:id="_vOJ_EBdoEeu6nLgfxtyxzQ" instance="_LkkQcBdoEeu6nLgfxtyxzQ"/>
+      <defaultValue xmi:type="uml:InstanceValue" xmi:id="_vOJ_EBdoEeu6nLgfxtyxzQ" type="_HxH0ABdoEeu6nLgfxtyxzQ" instance="_LkkQcBdoEeu6nLgfxtyxzQ"/>
     </ownedAttribute>
     <ownedBehavior xmi:type="uml:Activity" xmi:id="_5eZ1wBJYEeuI2oJVG-zT2A" name="activity for execute operation" specification="_APyU4BJXEeuI2oJVG-zT2A" node="_J9uu8BJZEeuI2oJVG-zT2A _XdoCkBJZEeuI2oJVG-zT2A _mrbMABJlEeuI2oJVG-zT2A _z5sHoBJmEeuI2oJVG-zT2A _BM_JsBJnEeuI2oJVG-zT2A _kq3-oBJnEeuI2oJVG-zT2A _6qROIBJnEeuI2oJVG-zT2A">
       <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_8vM6UBJnEeuI2oJVG-zT2A" name="obPrintModelName">
