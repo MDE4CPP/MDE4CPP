@@ -69,7 +69,10 @@
 
 [query public getPackageInterfaces(aPackage : Package) : Set(Classifier) = aPackage.allOwnedElements()->filter(Interface)->sortedBy(name) /]
 
-[query public getPackageClassifiers(aPackage : Package) : Set(Classifier) = OrderedSet{getPackageClasses(), getPackageInterfaces()}->flatten()->sortedBy(name) /]
+[query public getPackageStereotypes(aPackage : Package) : Set(Class) = 
+	aPackage.allOwnedElements()->filter(Stereotype)->flatten()->sortedBy(name)/]
+
+[query public getPackageClassifiers(aPackage : Package) : Set(Classifier) = OrderedSet{getPackageClasses(), getPackageInterfaces(), getPackageStereotypes()}->flatten()->sortedBy(name) /]
 
 [query public getClassifiersForObjectClasses(aPackage : Package) : Set(Classifier) =
 				getPackageClassifiers()->flatten()->sortedBy(name)/]
