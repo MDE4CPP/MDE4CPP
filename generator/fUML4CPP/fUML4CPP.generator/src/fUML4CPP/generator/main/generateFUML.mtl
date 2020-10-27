@@ -41,9 +41,7 @@
 	['package has no name '.registerError()/]
 [else]
 	[aPackage.generateUML()/]
-[if (aPackage.allOwnedElements()->filter(Activity)->size() > 0)]
 	[aPackage.generateFUMLModel()/]
-[/if]
 [/if]
 
 [if (aPackage.errorExisting())]
