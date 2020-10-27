@@ -136,9 +136,9 @@ std::shared_ptr<[par.type.getNearestPackage().name/]::[par.type.name.toUpperFirs
 [template public generateTypeInclude(type : Type, aPackage : Package, thisPackage : Package) ? ((not type.supportedTypes()) and (not type.oclIsKindOf(Enumeration)))]
 #include "[aPackage.myNamespaceName()/]/[type.name/].hpp"
 [if (aPackage.isReflectionModel())]
-#include "[thisPackage.getPackageName()/]Exec/[type.name/]Object.hpp"
+#include "[thisPackage.getPackageName()/]Exec/[type.name.toUpperFirst()/]Object.hpp"
 [else]
-#include "[aPackage.getPackageName()/]Exec/[type.name/]Object.hpp"
+#include "[aPackage.getPackageName()/]Exec/[type.name.toUpperFirst()/]Object.hpp"
 [/if]
 [/template]
 
