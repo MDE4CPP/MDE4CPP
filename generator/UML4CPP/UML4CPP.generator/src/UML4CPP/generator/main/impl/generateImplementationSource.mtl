@@ -246,7 +246,7 @@ void [className/]::destroy()
 	[if (anotherProperty.upper <> 1)]
 	m_[aProperty.name/]->[anotherProperty.getterName()/]()->erase([aClass.generateGetThisPtrPropertyGetterName()/]());
 	[else]
-	if(m_[aProperty.name/]->[anotherProperty.getterName()/]() == [aClass.generateGetThisPtrPropertyGetterName()/]()) { m_[aProperty.name/]->[anotherProperty.getterName()/]().reset(); }
+	if(m_[aProperty.name/]->[anotherProperty.getterName()/]()[if (anotherProperty.isBackReference())].lock()[/if] == [aClass.generateGetThisPtrPropertyGetterName()/]()) { m_[aProperty.name/]->[anotherProperty.getterName()/]().reset(); }
 	[/if]
 	[/if]
 	[/if]
