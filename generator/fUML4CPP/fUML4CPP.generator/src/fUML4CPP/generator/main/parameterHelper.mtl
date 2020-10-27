@@ -51,6 +51,7 @@
 				aPackage.allOwnedElements()->filter(Action).output.type,
 				aPackage.getPackageClasses().attribute.type,
 				aPackage.getPackageClasses().getAllOperations().ownedParameter.type,
+				aPackage.getPackageInterfaces().getAllOperations().ownedParameter.type,
 				aPackage.getPackageClasses().attribute.getAppliedStereotypes(),
 				aPackage.getPackageClasses().interfaceRealization.supplier.oclAsType(Classifier),
 				aPackage.getPackageClasses().generalization.general 
