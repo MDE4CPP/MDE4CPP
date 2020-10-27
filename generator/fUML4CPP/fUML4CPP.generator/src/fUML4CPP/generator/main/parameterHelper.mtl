@@ -50,6 +50,7 @@
 				aPackage.allOwnedElements()->filter(Action).input.type,
 				aPackage.allOwnedElements()->filter(Action).output.type,
 				aPackage.getPackageClasses().attribute.type,
+				aPackage.getPackageStereotypes().attribute.type,
 				aPackage.getPackageClasses().getAllOperations().ownedParameter.type,
 				aPackage.getPackageInterfaces().getAllOperations().ownedParameter.type,
 				aPackage.getPackageClasses().attribute.getAppliedStereotypes(),
