@@ -352,9 +352,9 @@ void [className/]::removeValue(std::shared_ptr<uml::StructuralFeature> feature, 
 [/if]
 [else]
 				[if (aProperty.isComposite)]
-				[aClassifier.UMLValueName()/]->[aProperty.getterName()/]()->destroy();
+				[aClassifier.UMLValueName()/]->[aProperty.getterName()/]()[if (aProperty.isBackReference())].lock()[/if]->destroy();
 				[/if]
-				[aClassifier.UMLValueName()/]->[aProperty.setterName()/](nullptr);
+				[aClassifier.UMLValueName()/]->[aProperty.getterName()/]().reset();
 [/if]
 
 [else]
