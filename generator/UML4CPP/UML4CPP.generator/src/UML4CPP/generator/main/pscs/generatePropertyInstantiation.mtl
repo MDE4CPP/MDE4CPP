@@ -30,8 +30,8 @@
 [if (aProperty.upper = 1)]
 [if (aProperty.canInstantiate() and (not aProperty.type.oclIsTypeOf(Interface)))]
 //instantiate property '[aProperty.name/]'
-[if (aProperty.isComposite())]
-m_[aProperty.name/] = [aProperty.type._package.getPackageName()/]::[aProperty.type._package.getPackageName().toUpperFirst()/]Factory::eInstance()->create[aProperty.type.name.toUpperFirst()/]_as_[aProperty.name/]_in_[aProperty.class.name.toUpperFirst()/](m_this[aProperty.class.name.toUpperFirst()/]Ptr);
+[if (aProperty.isComposite() and aProperty.isBackReference())]
+m_[aProperty.name/] = [aProperty.type._package.getPackageName()/]::[aProperty.type._package.getPackageName().toUpperFirst()/]Factory::eInstance()->create[aProperty.type.name.toUpperFirst()/]_as_[aProperty.name/]_in_[aProperty.class.name.toUpperFirst()/]([if (aProperty.isBackReference())]m_this[aProperty.class.name.toUpperFirst()/]Ptr[else]getThis[aProperty.class.name.toUpperFirst()/]Ptr()[/if]);
 [else]
 m_[aProperty.name/] = [aProperty.type._package.getPackageName()/]::[aProperty.type._package.getPackageName().toUpperFirst()/]Factory::eInstance()->create[aProperty.type.name.toUpperFirst()/]();
 [/if]
