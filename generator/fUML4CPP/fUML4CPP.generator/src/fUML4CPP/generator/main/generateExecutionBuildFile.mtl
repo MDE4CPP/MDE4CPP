@@ -265,7 +265,8 @@ TARGET_LINK_LIBRARIES(${PROJECT_NAME}
 																			aPackage.member->filter(Class).attribute.getAppliedStereotypes().getNearestPackage(), 
 																			aPackage.member->filter(Class).interfaceRealization.supplier.getNearestPackage(), 
 																			aPackage.member->filter(Class).generalization.general.getNearestPackage(), 
-																			aPackage.getCallOperationActions().operation.method->reject(oclIsUndefined()).ownedParameter.type->reject(oclIsUndefined()).getNearestPackage()
+																			aPackage.getCallOperationActions().operation.method->reject(oclIsUndefined()).ownedParameter.type->reject(oclIsUndefined()).getNearestPackage(),
+																			aPackage.packageImport.importedPackage
 																		}->flatten() /]
 [query public isReflectionModel(aPackage : Package) : Boolean = if ((aPackage.name='UML') or (aPackage.name='Ecore')or (aPackage.name='PrimitiveTypes') or (aPackage.eAllContents()->filter(ecore::EAnnotation)->select(source = 'SDK')->notEmpty())) then true else false endif /]
 [query public metaModelIncludesWithoutReflection(aPackage : Package) : Set(Package) = aPackage.metaModelIncludes()->reject((name = aPackage.name) or (name = 'PrimitiveTypes') or (name = 'UML')or (name = 'Ecore'))/]
