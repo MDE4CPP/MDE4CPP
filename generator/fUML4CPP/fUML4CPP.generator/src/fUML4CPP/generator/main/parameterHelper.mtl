@@ -50,7 +50,6 @@
 				aPackage.allOwnedElements()->filter(Action).input.type,
 				aPackage.allOwnedElements()->filter(Action).output.type,
 				aPackage.getPackageClasses().attribute.type,
-				aPackage.getPackageStereotypes().attribute.type,
 				aPackage.getPackageClasses().getAllOperations().ownedParameter.type,
 				aPackage.getPackageInterfaces().getAllOperations().ownedParameter.type,
 				aPackage.getPackageClasses().attribute.getAppliedStereotypes(),
@@ -60,10 +59,22 @@
 
 [query private getReflectionClassesForObjectClasses(aPackage : Package) : Set(Classifier) = 
 	getDirectlyUsedReflectionPackageClasses()
-	->addAll(getDirectlyUsedReflectionPackageClasses().getNearestPackage()->reject(p : Package | p = aPackage).getReflectionClassesForObjectClasses())
+	->addAll(getDirectlyUsedReflectionPackageClasses().getNearestPackage()->asSet()->flatten()->reject(p : Package | p = aPackage).getReflectionClassesForObjectClasses()->asSet()->flatten())
 	->flatten()->asOrderedSet()->sortedBy(name)/]
 
 [query private getDirectlyUsedReflectionPackageClasses(aPackage : Package) : Set(Classifier) = getClassiferExecutions()->select(c : Classifier | c.getNearestPackage().isReflectionModel()) /]
+
+[query private getStereotypeClassifierExecutions(aPackage : Package) : Set(Classifier) = OrderedSet{
+				aPackage.getPackageStereotypes().attribute.type,
+				aPackage.getPackageClasses().generalization.general 
+			}->flatten()->reject(oclIsUndefined())->reject(oclIsKindOf(Activity))->reject(supportedTypes())->reject(oclIsKindOf(PrimitiveType))->reject(oclIsKindOf(Enumeration))->sortedBy(name)/]
+
+[query private getStereotypeReflectionClassesForObjectClasses(aPackage : Package) : Set(Classifier) = 
+	getDirectlyUsedStereotypeReflectionPackageClasses()
+	->addAll(getDirectlyUsedStereotypeReflectionPackageClasses().getNearestPackage()->asSet()->flatten()->reject(p : Package | p = aPackage).getStereotypeReflectionClassesForObjectClasses()->asSet()->flatten())
+	->flatten()->asOrderedSet()->sortedBy(name)/]
+
+[query private getDirectlyUsedStereotypeReflectionPackageClasses(aPackage : Package) : Set(Classifier) = getStereotypeClassifierExecutions()->select(c : Classifier | c.getNearestPackage().isReflectionModel()) /]
 
 [query public getPackageClasses(aPackage : Package) : Set(Class) = 
 	aPackage.allOwnedElements()->filter(Class)->flatten()->reject(oclIsKindOf(AssociationClass))->reject(oclIsKindOf(Component))->reject(oclIsKindOf(Behavior))->reject(oclIsKindOf(Stereotype))->reject(oclIsKindOf(Node))->sortedBy(name)/]
@@ -78,7 +89,8 @@
 [query public getClassifiersForObjectClasses(aPackage : Package) : Set(Classifier) =
 				getPackageClassifiers()->flatten()->sortedBy(name)/]
 
-[query public getMetamodelClassifiersForObjectClasses(aPackage: Package) : Set(Classifier) = aPackage.getReflectionClassesForObjectClasses()->addAll(aPackage.getClassiferExecutions().getNearestPackage()->select(isReflectionModel()).getPackageClassifiers())->flatten()->asOrderedSet()->sortedBy(name)/]
+[query private getMetamodelStereotypeClassifiersForObjectClasses(aPackage: Package) : Set(Classifier) = aPackage.getStereotypeReflectionClassesForObjectClasses()->addAll(aPackage.getStereotypeClassifierExecutions().getNearestPackage()->select(isReflectionModel()).getPackageClassifiers())->flatten()->asOrderedSet()->sortedBy(name)/]
+[query public getMetamodelClassifiersForObjectClasses(aPackage: Package) : Set(Classifier) = aPackage.getReflectionClassesForObjectClasses()->addAll(aPackage.getClassiferExecutions().getNearestPackage()->select(isReflectionModel()).getPackageClassifiers())->addAll(aPackage.getMetamodelStereotypeClassifiersForObjectClasses())->flatten()->asOrderedSet()->sortedBy(name)/]
 
 [comment]Get all Operations in Package[/comment]
 [query public getPackageOperations(aPackage : Package) : Set(Operation) = OrderedSet{
