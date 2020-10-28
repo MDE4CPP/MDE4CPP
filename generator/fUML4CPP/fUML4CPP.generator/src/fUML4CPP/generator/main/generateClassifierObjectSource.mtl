@@ -380,7 +380,7 @@ void [className/]::removeValue(std::shared_ptr<uml::StructuralFeature> feature, 
 				Bag<int>::iterator end = valueList->end();
 				while (iter != end)
 				{
-					if (specificValue == *iter)
+					if (specificValue == *(*iter))
 					{
 						valueList->erase(iter);
 						break;
@@ -399,8 +399,8 @@ void [className/]::removeValue(std::shared_ptr<uml::StructuralFeature> feature, 
 				inputValue->[aProperty.type.oclAsType(Classifier).UMLValueGetterName()/]()->destroy();
 				[/if]
 				[aClassifier.UMLValueName()/]->[aProperty.getterName()/]()->erase(inputValue->[aProperty.type.oclAsType(Classifier).UMLValueGetterName()/]());
-[/if]
 			}
+[/if]
 		}
 [/if]
 	}
