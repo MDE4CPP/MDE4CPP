@@ -148,7 +148,7 @@ if (literal[aParameter.name.toUpperFirst()/] == [literal.generatePackageGetterCa
 [/for]
 [elseif (not aParameter.type.supportedTypes())]
 std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> [aParameter.name/]Value = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>([aParameter.name/]ValueList->front());
-[aParameter.name/] = std::dynamic_pointer_cast<[aParameter.type.getNearestPackage().name/]::[aParameter.type.name/]Object>([aParameter.name/]Value->getReferent())->[aParameter.type.oclAsType(Classifier).UMLValueGetterName()/]();
+[aParameter.name/] = std::dynamic_pointer_cast<[aParameter.type.getNearestPackage().name/]::[aParameter.type.name.toUpperFirst()/]Object>([aParameter.name/]Value->getReferent())->[aParameter.type.oclAsType(Classifier).UMLValueGetterName()/]();
 if([aParameter.name/] == nullptr)
 {
 	DEBUG_MESSAGE(std::cout << "received instance of type [aParameter.type.generateCppType(true)/] is null" << std::endl;);
@@ -164,7 +164,7 @@ while ([aParameter.name.toLowerFirst()/]Iter != [aParameter.name.toLowerFirst()/
 {
 	[if (not aParameter.type.supportedTypes())]
 	std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> [aParameter.name/]Value = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(*[aParameter.name.toLowerFirst()/]Iter);
-	[aParameter.type.generateCppType(false)/] [aParameter.name/]Temp = std::dynamic_pointer_cast<[aParameter.type.getNearestPackage().name/]::[aParameter.type.name/]Object>([aParameter.name/]Value->getReferent())->[aParameter.type.oclAsType(Classifier).UMLValueGetterName()/]();
+	[aParameter.type.generateCppType(false)/] [aParameter.name/]Temp = std::dynamic_pointer_cast<[aParameter.type.getNearestPackage().name/]::[aParameter.type.name.toUpperFirst()/]Object>([aParameter.name/]Value->getReferent())->[aParameter.type.oclAsType(Classifier).UMLValueGetterName()/]();
 	if([aParameter.name/]Temp == nullptr)
 	{
 		DEBUG_MESSAGE(std::cout << "received instance of type [aParameter.type.generateCppType(true)/] is null" << std::endl;);

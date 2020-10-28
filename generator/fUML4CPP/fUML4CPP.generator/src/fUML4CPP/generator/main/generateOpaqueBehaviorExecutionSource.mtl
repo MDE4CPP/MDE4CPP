@@ -299,7 +299,7 @@ if (literal[aPin.name.toUpperFirst()/] == [literal.generatePackageGetterCall()/]
 [/for]
 [elseif (not aPin.type.supportedTypes())]
 std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> [aPin.name/]Value = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>([aPin.name/]ValueList->front());
-[aPin.name/] = std::dynamic_pointer_cast<[aPin.type.getNearestPackage().name/]::[aPin.type.name/]Object>([aPin.name/]Value->getReferent())->[aPin.type.oclAsType(Classifier).UMLValueGetterName()/]();
+[aPin.name/] = std::dynamic_pointer_cast<[aPin.type.getNearestPackage().name/]::[aPin.type.name.toUpperFirst()/]Object>([aPin.name/]Value->getReferent())->[aPin.type.oclAsType(Classifier).UMLValueGetterName()/]();
 if([aPin.name/] == nullptr)
 {
 	DEBUG_MESSAGE(std::cout << "received instance of type [aPin.type.generateCppType(true)/] is null" << std::endl;);
@@ -315,7 +315,7 @@ while ([aPin.name.toLowerFirst()/]Iter != [aPin.name.toLowerFirst()/]End)
 {
 	[if (not aPin.type.supportedTypes())]
 	std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> [aPin.name/]Value = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(*[aPin.name.toLowerFirst()/]Iter);
-	[aPin.type.generateCppType(false)/] [aPin.name/]Temp = std::dynamic_pointer_cast<[aPin.type.getNearestPackage().name/]::[aPin.type.name/]Object>([aPin.name/]Value->getReferent())->[aPin.type.oclAsType(Classifier).UMLValueGetterName()/]();
+	[aPin.type.generateCppType(false)/] [aPin.name/]Temp = std::dynamic_pointer_cast<[aPin.type.getNearestPackage().name/]::[aPin.type.name.toUpperFirst()/]Object>([aPin.name/]Value->getReferent())->[aPin.type.oclAsType(Classifier).UMLValueGetterName()/]();
 	if([aPin.name/]Temp == nullptr)
 	{
 		DEBUG_MESSAGE(std::cout << "received instance of type [aPin.type.generateCppType(true)/] is null" << std::endl;);
@@ -360,7 +360,7 @@ if (literal[par.name.toUpperFirst()/] == [literal.generatePackageGetterCall()/])
 [/for]
 [elseif (not par.type.supportedTypes())]
 std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> [par.name/]Value = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>([par.name/]ValueList->front());
-[par.name/] = std::dynamic_pointer_cast<[par.type.getNearestPackage().name/]::[par.type.name/]Object>([par.name/]Value->getReferent())->[par.type.oclAsType(Classifier).UMLValueGetterName()/]();
+[par.name/] = std::dynamic_pointer_cast<[par.type.getNearestPackage().name/]::[par.type.name.toUpperFirst()/]Object>([par.name/]Value->getReferent())->[par.type.oclAsType(Classifier).UMLValueGetterName()/]();
 if([par.name/] == nullptr)
 {
 	DEBUG_MESSAGE(std::cout << "received instance of type [par.type.generateCppType(true)/] is null" << std::endl;);
@@ -376,7 +376,7 @@ while ([par.name.toLowerFirst()/]ValueIter != [par.name.toLowerFirst()/]ValueEnd
 {
 	[if (not par.type.supportedTypes())]
 	std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> [par.name/]Value = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(*[par.name.toLowerFirst()/]ValueIter);
-	[par.type.generateCppType(false)/] [par.name/]Temp = std::dynamic_pointer_cast<[par.type.getNearestPackage().name/]::[par.type.name/]Object>([par.name/]Value->getReferent())->[par.type.oclAsType(Classifier).UMLValueGetterName()/]();
+	[par.type.generateCppType(false)/] [par.name/]Temp = std::dynamic_pointer_cast<[par.type.getNearestPackage().name/]::[par.type.name.toUpperFirst()/]Object>([par.name/]Value->getReferent())->[par.type.oclAsType(Classifier).UMLValueGetterName()/]();
 	if([par.name/]Temp == nullptr)
 	{
 		DEBUG_MESSAGE(std::cout << "received instance of type [par.type.generateCppType(true)/] is null" << std::endl;);
@@ -460,7 +460,7 @@ context->[pin.getSelfAttribute(action).getterName()/]();
 [/template]
 
 [template private generateArgumentGetter(pin : Pin, action : Action) ? (not (pin.name.contains('self') and pin.type.supportedTypes()))]
-std::dynamic_pointer_cast<[pin.type.getNearestPackage().name/]::[pin.type.name/]Object>([pin.name/]Value->getReferent())->[pin.type.oclAsType(Classifier).UMLValueGetterName()/][if(not (pin.upper = 1))]s[/if]();
+std::dynamic_pointer_cast<[pin.type.getNearestPackage().name/]::[pin.type.name.toUpperFirst()/]Object>([pin.name/]Value->getReferent())->[pin.type.oclAsType(Classifier).UMLValueGetterName()/][if(not (pin.upper = 1))]s[/if]();
 assert([pin.name/] != nullptr);
 [/template]
 
