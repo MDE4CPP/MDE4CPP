@@ -325,7 +325,7 @@ while ([aPin.name.toLowerFirst()/]Iter != [aPin.name.toLowerFirst()/]End)
 		[aPin.name/]->push_back([aPin.name/]Temp);
 	}
 	[else]
-	std::shared_ptr<[aPin.type.getNearestPackage().name/]::[aPin.type.getValueClass()/]> valueObject = std::dynamic_pointer_cast<[aPin.type.getNearestPackage().name/]::[aPin.type.getValueClass()/]>(*[aPin.name/]Iter);
+	std::shared_ptr<[aPin.type.getValueClass()/]> valueObject = std::dynamic_pointer_cast<[aPin.type.getValueClass()/]>(*[aPin.name/]Iter);
 	std::shared_ptr<[aPin.type.generateCppType(true)/]> value(new [aPin.type.generateCppType(true)/](valueObject->getValue()));
 	[aPin.name/]->push_back(value);
 	[/if]
@@ -386,7 +386,7 @@ while ([par.name.toLowerFirst()/]ValueIter != [par.name.toLowerFirst()/]ValueEnd
 		[par.name/]->push_back([par.name/]Temp);
 	}
 	[else]
-	std::shared_ptr<[par.type.getNearestPackage().name/]::[par.type.getValueClass()/]> valueObject = std::dynamic_pointer_cast<[par.type.getNearestPackage().name/]::[par.type.getValueClass()/]>(*[par.name/]ValueIter);
+	std::shared_ptr<[par.type.getValueClass()/]> valueObject = std::dynamic_pointer_cast<[par.type.getValueClass()/]>(*[par.name/]ValueIter);
 	std::shared_ptr<[par.type.generateCppType(true)/]> value(new [par.type.generateCppType(true)/](valueObject->getValue()));
 	[par.name/]->push_back(value);
 	[/if]
