@@ -615,7 +615,7 @@ std::shared_ptr<uml::EnumerationLiteral> literal = enumValue->getLiteral();
 [for (literal : EnumerationLiteral | aProperty.type.oclAsType(Enumeration).ownedLiteral)]
 if (literal == [literal.generatePackageGetterCall()/])
 {
-	m_umlValue->setMode([literal.enumeration.namespace.name/]::[literal.enumeration.name/]::[literal.name.toUpperCase()/]);
+	[aClassifier.UMLValueName()/]->[aProperty.setterName()/]([literal.enumeration.namespace.name/]::[literal.enumeration.name/]::[literal.name.toUpperCase()/]);
 }
 [/for]
 [elseif (aProperty.isPrimitiveTypedProperty())]
