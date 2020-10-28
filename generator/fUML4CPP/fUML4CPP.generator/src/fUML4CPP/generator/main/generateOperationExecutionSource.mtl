@@ -84,6 +84,9 @@ void [behaviorName/]::setThisExecutionPtr(std::weak_ptr<[behaviorName/]> thisExe
 [template private generateIncludes(anOperation : Operation, aPackage : Package)]
 #include "[anOperation.owner.getNearestPackage().myNamespaceName()/]/[anOperation.owner.oclAsType(NamedElement).name.toUpperFirst()/].hpp"
 #include "[aPackage.getPackageName()/]Exec/[anOperation.owner.oclAsType(NamedElement).name.toUpperFirst()/]Object.hpp"
+[for (typePackage : Package | anOperation.ownedParameter.type->asSet()->reject(supportedTypes())._package->asSet()->reject(isReflectionModel())->sortedBy(qualifiedName))]
+#include "[typePackage.getPackageName()/]/[typePackage.getPackageName().toUpperFirst()/]Package.hpp"
+[/for]
 [for (type : Type | anOperation.ownedParameter.type->asOrderedSet())]
 [type.generateTypeInclude(type.getNearestPackage(), aPackage)/]
 [/for]

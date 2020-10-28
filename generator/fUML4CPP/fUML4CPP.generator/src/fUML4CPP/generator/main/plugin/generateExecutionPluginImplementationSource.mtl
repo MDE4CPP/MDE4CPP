@@ -38,11 +38,6 @@
 [if (aPackage.getUsedActivities()->size() > 0)]
 [generateMainIncludes()/]
 [/if]
-[for (act : Activity | aPackage.getUsedActivities()->select(owner.oclIsKindOf(Class)))]
-[generateActivityRelatedIncludes(act, aPackage)/]
-#include "[act.owner.oclAsType(Classifier).namespace.myNamespaceName()/]Exec/[act.owner.oclAsType(Classifier).name.toUpperFirst()/]Object.hpp"
-#include "[act.owner.oclAsType(Classifier).namespace.myNamespaceName()/]/[act.owner.oclAsType(Classifier).name.toUpperFirst()/].hpp"
-[/for]
 
 using namespace [aPackage.name/];
 
@@ -139,6 +134,7 @@ Any [packageName/]::executeActivity(std::shared_ptr<uml::Activity> activity, std
 #include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/CS_DispatchOperationOfInterfaceStrategy.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/CS_NameBased_StructuralFeatureOfInterfaceAccessStrategy.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/CS_Reference.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/CS_DefaultRequestPropagationStrategy.hpp"
 #include "PSCS/Semantics/Actions/ActionsFactory.hpp"
 #include "PSCS/Semantics/Actions/CS_DefaultConstructStrategy.hpp"
@@ -165,6 +161,14 @@ Any [packageName/]::executeActivity(std::shared_ptr<uml::Activity> activity, std
 #include "[aPackage.getPackageName()/]Exec/impl/[aPackage.getPackageName().toUpperFirst()/]LocusImpl.hpp"
 #include "[aPackage.getPackageName()/]/[aPackage.getPackageName().toUpperFirst().concat('Package')/].hpp"
 
+#include "[aPackage.getPackageName()/]/[aPackage.getPackageName().toUpperFirst()/]Factory.hpp"
+#include "[aPackage.getPackageName()/]/[aPackage.getPackageName().toUpperFirst()/]Package.hpp"
+
+[for (act : Activity | aPackage.getUsedActivities()->select(owner.oclIsKindOf(Class)))]
+#include "[act.owner.oclAsType(Classifier).namespace.myNamespaceName()/]Exec/[act.owner.oclAsType(Classifier).name.toUpperFirst()/]Object.hpp"
+#include "[act.owner.oclAsType(Classifier).namespace.myNamespaceName()/]/[act.owner.oclAsType(Classifier).name.toUpperFirst()/].hpp"
+[/for]
+
 [for (anotherPackage : Package | aPackage.findPackagesForOpaqueBehaviorExecutions())]
 #include "[anotherPackage.getPackageName()/]/[anotherPackage.getPackageName().toUpperFirst().concat('Package')/].hpp" 
 [/for] 
@@ -178,14 +182,12 @@ Any [packageName/]::executeActivity(std::shared_ptr<uml::Activity> activity, std
 [aPackage.getCallBehaviorActionsWithOB().generateInclude()/]
 [aPackage.getDecisionNodesWithOB().generateInclude()/]
 [aPackage.getOperationExecutions().generateInclude()/]
-[/template]
 
-[template public generateActivityRelatedIncludes(anActivity : Activity, aPackage : Package)]
-#include "PSCS/Semantics/StructuredClassifiers/CS_Reference.hpp"
-#include "[aPackage.getPackageName()/]/[aPackage.getPackageName().toUpperFirst()/]Factory.hpp"
-#include "[aPackage.getPackageName()/]/[aPackage.getPackageName().toUpperFirst()/]Package.hpp"
+[for (typePackage : Package | aPackage.getOperationExecutions().ownedParameter.type->asSet()->reject(supportedTypes())._package->asSet()->reject(isReflectionModel())->sortedBy(qualifiedName))]
+#include "[typePackage.getPackageName()/]/[typePackage.getPackageName().toUpperFirst()/]Package.hpp"
+[/for]
 
-[for ( type : Type | anActivity->asOrderedSet()->first().ownedParameter.type->asOrderedSet())]
+[for ( type : Type | aPackage.getOperationExecutions().ownedParameter.type->asSet()->sortedBy(qualifiedName))]
 [type.generateTypeInclude(type.getNearestPackage(), aPackage)/]
 [/for]
 [/template]

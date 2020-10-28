@@ -107,6 +107,10 @@ void [behaviorName/]::setThisExecutionPtr(std::weak_ptr<[behaviorName/]> thisExe
 #include "[aPackage.getPackageName()/]Exec/[aCallOperationAction.target.type.name.toUpperFirst()/]Object.hpp"
 [/if]
 
+[for (typePackage : Package | aCallOperationAction.input.type->addAll(aCallOperationAction.output.type)->asSet()->reject(supportedTypes())._package->asSet()->reject(isReflectionModel())->sortedBy(qualifiedName))]
+#include "[typePackage.getPackageName()/]/[typePackage.getPackageName().toUpperFirst()/]Package.hpp"
+[/for]
+
 [for (type : Type | aCallOperationAction.input.type->asOrderedSet())]
 [type.generateTypeInclude(type.getNearestPackage(), aPackage)/]
 [/for]
@@ -127,6 +131,10 @@ void [behaviorName/]::setThisExecutionPtr(std::weak_ptr<[behaviorName/]> thisExe
 //Included from function behavior "[anOpaqueBehavior.name/]"
 [anOpaqueBehavior._body->at(index)/]
 [/if][/let][/if]
+
+[for (typePackage : Package | anOpaqueBehavior.ownedParameter.type->asSet()->reject(supportedTypes())._package->asSet()->reject(isReflectionModel())->sortedBy(qualifiedName))]
+#include "[typePackage.getPackageName()/]/[typePackage.getPackageName().toUpperFirst()/]Package.hpp"
+[/for]
 
 [for (type : Type | anOpaqueBehavior.ownedParameter.type->asOrderedSet())]
 [type.generateTypeInclude(type.getNearestPackage(), aPackage)/]

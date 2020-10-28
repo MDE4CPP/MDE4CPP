@@ -161,7 +161,6 @@ std::shared_ptr<[par.type.getNearestPackage().name/]::[par.type.name.toUpperFirs
 [template public generateTypeInclude(type : Type, aPackage : Package, thisPackage : Package) ? (not type.supportedTypes() and type.oclIsKindOf(Enumeration))]
 #include "fUML/Semantics/SimpleClassifiers/EnumerationValue.hpp"
 #include "[aPackage.myNamespaceName()/]/[type.name/].hpp"
-#include "[aPackage.myNamespaceName()/]/[aPackage.myNamespaceName()/]Package.hpp"
 [/template]
 
 [template public generateTypeInclude(type : Type, aPackage : Package, thisPackage : Package) ? (supportedTypes())]
