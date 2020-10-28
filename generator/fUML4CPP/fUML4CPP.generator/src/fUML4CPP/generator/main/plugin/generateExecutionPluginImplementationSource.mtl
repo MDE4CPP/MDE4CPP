@@ -226,26 +226,26 @@ m_factory->assignStrategy(PSCS::Semantics::StructuredClassifiers::StructuredClas
 [template public generateOpaqueBehaviorForOperationExecution(anOperation : Operation)]
 [if (not anOperation.name.oclIsUndefined())]
 {	/*creating opaque behavior for operation [anOperation.owner.oclAsType(NamedElement).name/]::[anOperation.name/]*/
-	m_[anOperation.getFBNameForOperation()/] = uml::UmlFactory::eInstance()->createOpaqueBehavior();
-	m_[anOperation.getFBNameForOperation()/]->setName("[anOperation.getFBNameForOperation()/]");
-	[anOperation.generatePackageGetterCall()/]->getMethod()->insert([anOperation.generatePackageGetterCall()/]->getMethod()->begin(), m_[anOperation.getFBNameForOperation()/]);
+	m_[anOperation.getFBPackageElement()/] = uml::UmlFactory::eInstance()->createOpaqueBehavior();
+	m_[anOperation.getFBPackageElement()/]->setName("[anOperation.getFBPackageElement()/]");
+	[anOperation.generatePackageGetterCall()/]->getMethod()->insert([anOperation.generatePackageGetterCall()/]->getMethod()->begin(), m_[anOperation.getFBPackageElement()/]);
 
 	[for (aParameter : Parameter | anOperation.ownedParameter)]
 	{	/*creating parameter [aParameter.name/]*/
-		std::shared_ptr<uml::Parameter> [memberName(aParameter)/](uml::UmlFactory::eInstance()->createParameter_in_Behavior(m_[anOperation.getFBNameForOperation()/]));
+		std::shared_ptr<uml::Parameter> [memberName(aParameter)/](uml::UmlFactory::eInstance()->createParameter_in_Behavior(m_[anOperation.getFBPackageElement()/]));
 		[memberName(aParameter)/]->setName("[aParameter.name/]");
 		[memberName(aParameter)/]->setType([if(aParameter.type.getNearestPackage() = aParameter.getNearestPackage())][aParameter.getNearestPackage().myNamespaceName().concat('::').concat(aParameter.getNearestPackage().name.toUpperFirst()).concat('Package').concat('::eInstance()->')/][/if][aParameter.type.generatePackageGetterCall(aParameter)/]);
 		[memberName(aParameter)/]->setLower([aParameter.lower/]);
 		[memberName(aParameter)/]->setUpper([aParameter.upper/]);
 		[memberName(aParameter)/]->setDirection(uml::ParameterDirectionKind::[direction.toString().toUpper()/]);
-		//m_[anOperation.getFBNameForOperation()/]->getOwnedParameter()->push_back([memberName(aParameter)/]);
+		//m_[anOperation.getFBPackageElement()/]->getOwnedParameter()->push_back([memberName(aParameter)/]);
 	}
 	[/for]
 
 	/*creating execution*/
 	std::shared_ptr<[anOperation.getNearestPackage().myNamespaceName()/]::[anOperation.getOperationExecutionName()/]> [memberName(anOperation)/]Execution(new [anOperation.getNearestPackage().myNamespaceName()/]::[anOperation.getOperationExecutionName()/]());
 	[memberName(anOperation)/]Execution->setThisExecutionPtr([memberName(anOperation)/]Execution);
-	[memberName(anOperation)/]Execution->getTypes()->push_back(m_[anOperation.getFBNameForOperation()/]);
+	[memberName(anOperation)/]Execution->getTypes()->push_back(m_[anOperation.getFBPackageElement()/]);
 	[memberName(anOperation)/]Execution->setLocus(m_locus);
 	m_factory->addPrimitiveBehaviorPrototype([memberName(anOperation)/]Execution);
 }
@@ -408,9 +408,6 @@ m_locus->setFactory(nullptr);
 [query private getOperationExecutionName(anOperation : Operation) : String = 
 	anOperation.owner.oclAsType(NamedElement).name.concat('_').concat(anOperation.name.sanitize()).concat(('Execution')) /]
 
-[query private getFBNameForOperation(anOperation : Operation) : String = 
-	'ob_'.concat(anOperation.owner.oclAsType(NamedElement).name.replaceAll(' ', '')).concat('_').concat(anOperation.myName().sanitize())/]
-
 [query private getActivitiesUsedByCallBehaviorAction(aPackage : Package) : Set(Activity) = 
 	aPackage.allOwnedElements()->filter(CallBehaviorAction).behavior->reject(oclIsUndefined())->reject(not oclIsKindOf(Activity))->asSet()/]
 
@@ -427,4 +424,4 @@ m_locus->setFactory(nullptr);
 	anActivity.ownedParameter->select((direction = ParameterDirectionKind::_out) or (direction = ParameterDirectionKind::_in))->indexOf(aParameter)-1 /]
 
 [query public getOperationExecutions(aPackage : Package) : OrderedSet(Operation) = 
-	getPackageOperations()->addAll(aPackage.allOwnedElements()->filter(CallOperationAction).operation)->sortedBy(name) /]
+	getPackageOperations()->addAll(aPackage.allOwnedElements()->filter(CallOperationAction).operation)->sortedBy(qualifiedName) /]

@@ -60,4 +60,4 @@ throw "error";
 [/if]
 [/template]
 
-[query public getFBPackageElement(anOperation : Operation) : String = 'ob_'.concat(anOperation.owner.oclAsType(NamedElement).name.replaceAll(' ', '')).concat('_').concat(anOperation.myName().sanitize())/]
+[query public getFBPackageElement(anOperation : Operation) : String = 'ob_'.concat(anOperation.owner.oclAsType(NamedElement).name.replaceAll(' ', '')).concat('_').concat(anOperation.myQualifiedName()).sanitize()/]
