@@ -376,8 +376,8 @@ void [className/]::removeValue(std::shared_ptr<uml::StructuralFeature> feature, 
 			{
 				[aProperty.type.generateCppType(true)/] specificValue = inputValue->getValue();
 				std::shared_ptr<Bag<[aProperty.type.generateCppType(true)/]>> valueList = [aClassifier.UMLValueName()/]->[aProperty.getterName()/]();
-				Bag<int>::iterator iter = valueList->begin();
-				Bag<int>::iterator end = valueList->end();
+				Bag<[aProperty.type.generateCppType(true)/]>::iterator iter = valueList->begin();
+				Bag<[aProperty.type.generateCppType(true)/]>::iterator end = valueList->end();
 				while (iter != end)
 				{
 					if (specificValue == *(*iter))
