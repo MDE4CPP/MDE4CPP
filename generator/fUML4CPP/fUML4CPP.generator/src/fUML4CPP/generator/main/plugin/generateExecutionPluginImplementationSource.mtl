@@ -402,7 +402,7 @@ m_locus->setFactory(nullptr);
 [query private findPackagesForOpaqueBehaviorExecutions(aPackage : Package) : OrderedSet(Package) = 
 	OrderedSet(Package){
 		aPackage.getCallBehaviorActionsWithOB().behavior.getNearestPackage(),
-		aPackage.getCallOperationActions().operation.getNearestPackage(),
+		aPackage.getOperationExecutions().getNearestPackage(),
 		aPackage.getDecisionNodesWithOB().decisionInput.getNearestPackage()
 	}->flatten()->sortedBy(name) /]
 
