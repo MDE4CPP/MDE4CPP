@@ -92,8 +92,12 @@ void [packageName/]::initialize()
 	[generateExecutionPluginInitialization()/]
 
 	[comment create opaque behavior executions for operations /]
-	[for (anOperation : Operation | aPackage.getOperationExecutions())]
-	[anOperation.generateOpaqueBehaviorForOperationExecution()/]
+	[for (anOperation : Operation | aPackage.getOperationExecutionsPackage())]
+	[anOperation.generateOpaqueBehaviorForOperationExecution(true)/]
+	[/for]
+
+	[for (anOperation : Operation | aPackage.getOperationExecutionsCOA())]
+	[anOperation.generateOpaqueBehaviorForOperationExecution(false)/]
 	[/for]
 
 	[comment create opaque behavior executions for opaque behaviors in the model that are executed either by a call behavior action or by a desicion node/]
@@ -181,13 +185,13 @@ Any [packageName/]::executeActivity(std::shared_ptr<uml::Activity> activity, std
 //OpaqueBehaviourExecutions
 [aPackage.getCallBehaviorActionsWithOB().generateInclude()/]
 [aPackage.getDecisionNodesWithOB().generateInclude()/]
-[aPackage.getOperationExecutions().generateInclude()/]
+[aPackage.getOperationExecutionsAll().generateInclude()/]
 
-[for (typePackage : Package | aPackage.getOperationExecutions().ownedParameter.type->asSet()->reject(supportedTypes())._package->asSet()->reject(isReflectionModel())->sortedBy(qualifiedName))]
+[for (typePackage : Package | aPackage.getOperationExecutionsAll().ownedParameter.type->asSet()->reject(supportedTypes())._package->asSet()->reject(isReflectionModel())->sortedBy(qualifiedName))]
 #include "[typePackage.getPackageName()/]/[typePackage.getPackageName().toUpperFirst()/]Package.hpp"
 [/for]
 
-[for ( type : Type | aPackage.getOperationExecutions().ownedParameter.type->asSet()->sortedBy(qualifiedName))]
+[for ( type : Type | aPackage.getOperationExecutionsAll().ownedParameter.type->asSet()->sortedBy(qualifiedName))]
 [type.generateTypeInclude(type.getNearestPackage(), aPackage)/]
 [/for]
 [/template]
@@ -225,12 +229,12 @@ m_factory->assignStrategy(PSCS::Semantics::StructuredClassifiers::StructuredClas
 m_factory->assignStrategy(PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_DefaultRequestPropagationStrategy());
 [/template]
 
-[template public generateOpaqueBehaviorForOperationExecution(anOperation : Operation)]
+[template public generateOpaqueBehaviorForOperationExecution(anOperation : Operation, addToOperation : Boolean)]
 [if (not anOperation.name.oclIsUndefined())]
 {	/*creating opaque behavior for operation [anOperation.owner.oclAsType(NamedElement).name/]::[anOperation.name/]*/
 	m_[anOperation.getFBPackageElement()/] = uml::UmlFactory::eInstance()->createOpaqueBehavior();
 	m_[anOperation.getFBPackageElement()/]->setName("[anOperation.getFBPackageElement()/]");
-	[anOperation.generatePackageGetterCall()/]->getMethod()->insert([anOperation.generatePackageGetterCall()/]->getMethod()->begin(), m_[anOperation.getFBPackageElement()/]);
+	[if (not addToOperation)]// [/if][anOperation.generatePackageGetterCall()/]->getMethod()->insert([anOperation.generatePackageGetterCall()/]->getMethod()->begin(), m_[anOperation.getFBPackageElement()/]);
 
 	[for (aParameter : Parameter | anOperation.ownedParameter)]
 	{	/*creating parameter [aParameter.name/]*/
@@ -274,6 +278,11 @@ m_factory->assignStrategy(PSCS::Semantics::StructuredClassifiers::StructuredClas
 [/template]
 
 [template public generateActivityExecution(anActivity : Activity)]
+[for (anOperation : Operation | anActivity.allOwnedElements()->filter(CallOperationAction).operation->sortedBy(qualifiedName))]
+[anOperation.generatePackageGetterCall()/]->getMethod()->insert([anOperation.generatePackageGetterCall()/]->getMethod()->begin(), m_[anOperation.getFBPackageElement()/]);
+[/for]
+
+
 std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > pList(new Bag<fUML::Semantics::CommonBehavior::ParameterValue>());
 [for (par : Parameter | anActivity.ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in))->sortedBy(name))]
 //creating input parameter [anActivity.name/]::[par.name/] 
@@ -302,6 +311,10 @@ object->setLocus(m_locus);
 [/if]
 //executing activity [anActivity.name/]
 std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> resultPList = m_locus->getExecutor()->execute([anActivity.generatePackageGetterCall()/], [if (anActivity.owner.oclIsKindOf(Class))]object[else]nullptr[/if], pList);
+
+[for (anOperation : Operation | anActivity.allOwnedElements()->filter(CallOperationAction).operation->sortedBy(qualifiedName))]
+[anOperation.generatePackageGetterCall()/]->getMethod()->erase(m_[anOperation.getFBPackageElement()/]);
+[/for]
 [/template]
 
 [template private generateValue(aParameter : Parameter)]
@@ -383,7 +396,7 @@ return nullptr;
 
 [template public generateExecutionPluginDeinitialization(aPackage : Package)]
 /*clearing opaque behaviors from operations*/
-[for (anOperation : Operation | aPackage.getOperationExecutions())]
+[for (anOperation : Operation | aPackage.getOperationExecutionsPackage())]
 [anOperation.generatePackageGetterCall()/]->getMethod()->erase(m_[anOperation.getFBPackageElement()/]);
 [/for]
 
@@ -402,7 +415,7 @@ m_locus->setFactory(nullptr);
 [query private findPackagesForOpaqueBehaviorExecutions(aPackage : Package) : OrderedSet(Package) = 
 	OrderedSet(Package){
 		aPackage.getCallBehaviorActionsWithOB().behavior.getNearestPackage(),
-		aPackage.getOperationExecutions().getNearestPackage(),
+		aPackage.getOperationExecutionsAll().getNearestPackage(),
 		aPackage.getDecisionNodesWithOB().decisionInput.getNearestPackage()
 	}->flatten()->sortedBy(name) /]
 
@@ -425,5 +438,9 @@ m_locus->setFactory(nullptr);
 [query public listNumber(aParameter : Parameter, anActivity : Activity) : Integer =  
 	anActivity.ownedParameter->select((direction = ParameterDirectionKind::_out) or (direction = ParameterDirectionKind::_in))->indexOf(aParameter)-1 /]
 
-[query public getOperationExecutions(aPackage : Package) : OrderedSet(Operation) = 
-	getPackageOperations()->addAll(aPackage.allOwnedElements()->filter(CallOperationAction).operation)->sortedBy(qualifiedName) /]
+[query public getOperationExecutionsAll(aPackage : Package) : OrderedSet(Operation) = 
+	getOperationExecutionsPackage()->addAll(getOperationExecutionsCOA())->asSet()->sortedBy(qualifiedName) /]
+[query public getOperationExecutionsPackage(aPackage : Package) : OrderedSet(Operation) = 
+	getPackageOperations()->sortedBy(qualifiedName) /]
+[query public getOperationExecutionsCOA(aPackage : Package) : OrderedSet(Operation) = 
+	aPackage.allOwnedElements()->filter(CallOperationAction).operation->asOrderedSet()->sortedBy(qualifiedName) /]
