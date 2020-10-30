@@ -65,7 +65,11 @@
 
 
 [comment]COLLECT BASE CLASSES AND REALIZED INTERFACES FOR CERTAIN CLASS --------------- [/comment]
-[query public collectInheritedTypes(aClassifier : Classifier) : OrderedSet(Classifier) = OrderedSet{aClassifier.collectSuperClasses(), aClassifier.collectRealizedInterfaces()}->flatten()->reject(oclIsUndefined() or name.oclIsUndefined())->sortedBy(myQualifiedName())/]
+[query public collectInheritedTypes(aClassifier : Classifier) : OrderedSet(Classifier) = OrderedSet{aClassifier.collectSuperClasses(), aClassifier.collectRealizedInterfaces()}->flatten()->reject(
+																																												oclIsUndefined() or 
+																																												name.oclIsUndefined() or 
+																																												_package.name = 'Ecore'  or 
+																																												_package.name = 'ecore' )->sortedBy(myQualifiedName())/]
 [query private collectSuperClasses(aClassifier : Classifier) : OrderedSet(Classifier) = aClassifier.parents()->sortedBy(name)/]
 [query private collectRealizedInterfaces(aClassifier : Classifier) : OrderedSet(Classifier) = aClassifier.directlyRealizedInterfaces()->sortedBy(name)/]
 [query private collectRedefinedInterfaces(aClassifier : Classifier) : OrderedSet(Classifier) = if(aClassifier.oclIsTypeOf(Interface)) then aClassifier.oclAsType(Interface).redefinedInterface->sortedBy(name) else OrderedSet{} endif/]
