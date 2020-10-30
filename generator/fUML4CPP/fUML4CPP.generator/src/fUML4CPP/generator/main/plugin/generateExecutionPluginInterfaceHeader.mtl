@@ -68,6 +68,7 @@ namespace [aPackage.name/]
 
 		protected:
 			//Execution Environment
+[if (not aPackage.isReflectionModel())]
 			std::shared_ptr<[aPackage.getPackageName().sanitize().toUpperFirst() + 'Locus'/]> m_locus;
 			std::shared_ptr<PSCS::Semantics::Loci::CS_Executor> m_executor;
 			std::shared_ptr<PSCS::Semantics::Loci::CS_ExecutionFactory> m_factory;
@@ -77,6 +78,7 @@ namespace [aPackage.name/]
 			std::shared_ptr<uml::OpaqueBehavior> m_[anOperation.getFBPackageElement()/];
 			[/if]
 			[/for]
+[/if]
 			
 	};
 }
