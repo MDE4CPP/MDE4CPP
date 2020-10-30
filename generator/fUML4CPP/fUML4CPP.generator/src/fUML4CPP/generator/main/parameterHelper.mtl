@@ -37,6 +37,8 @@
 
 [query public supportedTypes(type : Type) : Boolean = (name = 'Integer') or (name = 'Boolean') or (name = 'String') or (name = 'Real') or (name = 'UnlimitedNatural') /]
 
+[query public isUMLElement(type : Type) : Boolean = type.oclIsKindOf(uml::Element) and (not (type._package.name = 'Ecore')) /]
+
 [query public getClassiferExecutions(aPackage : Package) : Set(Classifier) = OrderedSet{
 				aPackage.allOwnedElements()->filter(Activity)._context->reject(oclIsUndefined()),
 				aPackage.allOwnedElements()->filter(CallOperationAction).target.type,
@@ -88,6 +90,8 @@
 
 [query public getClassifiersForObjectClasses(aPackage : Package) : Set(Classifier) =
 				getPackageClassifiers()->flatten()->sortedBy(name)/]
+
+[query public getClassifiersForPackageOnly(aPackage : Package) : Set(Classifier) = aPackage.getClassifiersForObjectClasses()->reject(parents()->isEmpty()) /]
 
 [query private getMetamodelStereotypeClassifiersForObjectClasses(aPackage: Package) : Set(Classifier) = aPackage.getStereotypeReflectionClassesForObjectClasses()->addAll(aPackage.getStereotypeClassifierExecutions().getNearestPackage()->select(isReflectionModel()).getPackageClassifiers())->flatten()->asOrderedSet()->sortedBy(name)/]
 [query public getMetamodelClassifiersForObjectClasses(aPackage: Package) : Set(Classifier) = aPackage.getReflectionClassesForObjectClasses()->addAll(aPackage.getClassiferExecutions().getNearestPackage()->select(isReflectionModel()).getPackageClassifiers())->addAll(aPackage.getMetamodelStereotypeClassifiersForObjectClasses())->flatten()->asOrderedSet()->sortedBy(name)/]
