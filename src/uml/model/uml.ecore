@@ -17270,7 +17270,7 @@
       </eParameters>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="firstEvent" ordered="false"
-        upperBound="2" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Boolean">
+        upperBound="2" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The value of firstEvent[i] is related to constrainedElement[i] (where i is 1 or 2). If firstEvent[i] is true, then the corresponding observation event is the first time instant the execution enters constrainedElement[i]. If firstEvent[i] is false, then the corresponding observation event is the last time instant the execution is within constrainedElement[i].&#xA;&lt;p>From package UML::Values.&lt;/p>"/>
       </eAnnotations>
@@ -17367,7 +17367,7 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="firstEvent" ordered="false"
-        upperBound="2" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Boolean">
+        upperBound="2" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The value of firstEvent[i] is related to event[i] (where i is 1 or 2). If firstEvent[i] is true, then the corresponding observation event is the first time instant the execution enters event[i]. If firstEvent[i] is false, then the corresponding observation event is the time instant the execution exits event[i].&#xA;&lt;p>From package UML::Values.&lt;/p>"/>
       </eAnnotations>
