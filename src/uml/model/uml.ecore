@@ -8271,6 +8271,9 @@
       </eAnnotations>
       <eAnnotations source="redefines" references="#//TemplateSignature/template"/>
       <eAnnotations source="subsets" references="#//RedefinableElement/redefinitionContext"/>
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="AggregationKind" value="shared"/>
+      </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="UseCase" eSuperTypes="#//BehavioredClassifier">
