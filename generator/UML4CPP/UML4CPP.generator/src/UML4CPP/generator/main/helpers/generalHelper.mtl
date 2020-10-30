@@ -168,3 +168,11 @@ nullptr['cannot terminate package of element '.concat(failureElement.toString())
 [template private handlePackageGetterError(failureElement : ConnectorEnd, name : String)]
 nullptr['cannot terminate package of element '.concat(failureElement.toString()).concat(' used by ').concat(name).registerError()/]
 [/template]
+
+[query private hasMultiplicityConflict(firstProperty : Property, secondProperty : Property) : Boolean = not (firstProperty.upper = secondProperty.upper) /]
+[query public hasMultiplicityConflictToRedefinedProperty(aProperty : Property) : Boolean = if(aProperty.redefinedProperty->size() = 0) then false else aProperty.hasMultiplicityConflict(aProperty.redefinedProperty->asOrderedSet()->first()) endif  /]
+
+[query private hasTypeConflict(firstProperty : Property, secondProperty : Property) : Boolean = firstProperty.name = secondProperty.name and not (firstProperty.type = secondProperty.type) /]
+[query private hasTypeConflictToRedefinedProperty(aProperty : Property) : Boolean = if(aProperty.redefinedProperty->size() = 0) then false else aProperty.hasTypeConflict(aProperty.redefinedProperty->asOrderedSet()->first()) endif  /]
+[query public castRequired(aProperty : Property) : Boolean = if(aProperty.hasTypeConflictToRedefinedProperty()) then not (aProperty.type = aProperty.redefinedProperty->asOrderedSet()->first().type) else false endif /]
+[query public getRedefinedProperty(aProperty : Property) : Property = if (aProperty.hasTypeConflictToRedefinedProperty()) then aProperty.redefinedProperty->asOrderedSet()->first() else aProperty endif /]
