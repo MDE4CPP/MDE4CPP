@@ -27,7 +27,7 @@
 [/template]
 
 [template private generateCMakeLists(aPackage : Package) { packageName : String = getPackageName(); execPackageName : String = getPackageName().concat('Exec'); }]
-[file (aPackage.name.concat('Exec/').concat('CMakeLists.txt'), false, 'UTF-8')]
+[file (aPackage.getPackageName().concat('Exec/').concat('CMakeLists.txt'), false, 'UTF-8')]
 #############################################################################
 #																			#
 #		 			CMakeList created by fUML4CPP Generator					# 
@@ -68,8 +68,8 @@ SET(SOURCE_FILES
 	[aClassifier.name.toUpperFirst()/]Object.cpp
 [/for]
 	impl/[aPackage.name.toUpperFirst()/]LocusImpl.cpp
-	[packageName.concat('ExecPlugin.cpp')/]
-	['impl/'.concat(packageName).concat('ExecPluginImpl.cpp')/]
+	[aPackage.name.concat('ExecPlugin.cpp')/]
+	['impl/'.concat(aPackage.name).concat('ExecPluginImpl.cpp')/]
 )
 
 INCLUDE_DIRECTORIES(
@@ -272,7 +272,7 @@ TARGET_LINK_LIBRARIES(${PROJECT_NAME}
 [query public metaModelIncludesWithoutReflection(aPackage : Package) : Set(Package) = aPackage.metaModelIncludes()->reject((name = aPackage.name) or (name = 'PrimitiveTypes') or (name = 'UML')or (name = 'Ecore'))/]
 [query public metaModelIncludesReflection(aPackage : Package) : Set(Package) = aPackage.metaModelIncludes()->select((not (name = aPackage.name) or (name = 'PrimitiveTypes') or (name = 'UML')or (name = 'Ecore')))/]
 [query public metaModelLibrariesNamesForNonReflectionModels(aPackage : Package) : Set(String) = if(metaModelIncludesWithoutReflection()->size() = 0) then OrderedSet{'ecore', 'uml', 'fUML', 'PSCS', 'ecoreReflection', 'primitivetypesReflection', 'umlReflection', aPackage.name} else OrderedSet{'ecore', 'uml', 'fUML', 'PSCS', 'ecoreReflection', 'primitivetypesReflection', 'umlReflection', aPackage.name}->addAll(metaModelIncludesWithoutReflection()->sortedBy(name).name)->flatten() endif/]
-[query public metaModelLibrariesNamesForReflectionModels(aPackage : Package) : Set(String) = if ((aPackage.name='UML') or (aPackage.eAllContents()->filter(ecore::EAnnotation)->select(source = 'SDK')->notEmpty())) then OrderedSet{'ecore', 'uml', 'ecoreReflection', 'primitivetypesReflection'} else OrderedSet{'ecore', 'uml'} endif/]
+[query public metaModelLibrariesNamesForReflectionModels(aPackage : Package) : Set(String) = if ((aPackage.name='UML') or (aPackage.eAllContents()->filter(ecore::EAnnotation)->select(source = 'SDK')->notEmpty())) then OrderedSet{'ecore', 'uml', 'ecoreReflection', 'primitivetypesReflection', 'fUML', 'PSCS', 'umlReflection'} else OrderedSet{'ecore', 'uml'} endif/]
 [query public metaModelLibrariesNames(aPackage : Package) : Set(String) = if (aPackage.isReflectionModel()) then metaModelLibrariesNamesForReflectionModels() else metaModelLibrariesNamesForNonReflectionModels() endif/]
 [query public getBinaryTypeName(buildLibrary : Boolean) : String = if (buildLibrary) then 'SharedLibrary' else 'Executable' endif/]
 [query public getBinaryTypeExtension(buildLibrary : Boolean) : String = if (buildLibrary) then 'dll' else 'exe' endif/]
