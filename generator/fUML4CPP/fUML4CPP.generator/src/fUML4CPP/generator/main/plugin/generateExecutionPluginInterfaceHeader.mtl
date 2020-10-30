@@ -21,7 +21,7 @@
 [import fUML4CPP::generator::main::plugin::generateExecutionPluginImplementationSource /]
 
 [template public generateExecutionPluginInterfaceHeader(aPackage : Package){packageName : String = aPackage.name.toUpperFirst().concat('ExecPlugin');}]
-[file (aPackage.name.concat('Exec/').concat(packageName).concat('.hpp'), false, 'UTF-8')]
+[file (aPackage.getPackageName().concat('Exec/').concat(packageName).concat('.hpp'), false, 'UTF-8')]
 [startGuard(aPackage,'Plugin')/]
 
 #include "pluginFramework/UMLExecutionModelPlugin.hpp"
