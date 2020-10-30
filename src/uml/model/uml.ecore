@@ -7,9 +7,6 @@
   <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
     <details key="eclipseURI" value="pathmap://UML_METAMODELS/UML.metamodel.uml"/>
   </eAnnotations>
-  <eClassifiers xsi:type="ecore:EClass" name="ActivityContent" abstract="true" interface="true">
-    <eOperations name="containingActivity" ordered="false" eType="#//Activity"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Activity" eSuperTypes="#//Behavior">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="An Activity is the specification of parameterized Behavior as the coordinated sequencing of subordinate units.&#xA;&lt;p>From package UML::Activities.&lt;/p>"/>
@@ -8700,18 +8697,9 @@
       <eAnnotations source="subsets" references="#//StructuredClassifier/ownedAttribute"/>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ActivityGroup" abstract="true" eSuperTypes="#//NamedElement #//ActivityContent">
+  <eClassifiers xsi:type="ecore:EClass" name="ActivityGroup" abstract="true" eSuperTypes="#//NamedElement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="ActivityGroup is an abstract class for defining sets of ActivityNodes and ActivityEdges in an Activity.&#xA;&lt;p>From package UML::Activities.&lt;/p>"/>
-    </eAnnotations>
-    <eAnnotations source="duplicates">
-      <contents xsi:type="ecore:EOperation" name="containingActivity" ordered="false"
-          eType="#//Activity">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="The Activity that directly or indirectly contains this ActivityGroup.&#xA;result = (if superGroup&lt;>null then superGroup.containingActivity()&#xD;&#xA;else inActivity&#xD;&#xA;endif)&#xA;&lt;p>From package UML::Activities.&lt;/p>"/>
-        </eAnnotations>
-        <eAnnotations source="redefines" references="#//ActivityContent/containingActivity"/>
-      </contents>
     </eAnnotations>
     <eOperations name="nodes_and_edges" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -8750,6 +8738,11 @@
           <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
         </eGenericType>
       </eParameters>
+    </eOperations>
+    <eOperations name="containingActivity" ordered="false" eType="#//Activity">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The Activity that directly or indirectly contains this ActivityGroup.&#xA;result = (if superGroup&lt;>null then superGroup.containingActivity()&#xD;&#xA;else inActivity&#xD;&#xA;endif)&#xA;&lt;p>From package UML::Activities.&lt;/p>"/>
+      </eAnnotations>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="containedEdge" ordered="false"
         upperBound="-1" eType="#//ActivityEdge" changeable="false" volatile="true"
@@ -9024,18 +9017,11 @@
       <eAnnotations source="subsets" references="#//ActivityGroup/containedEdge"/>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ActivityNode" abstract="true" eSuperTypes="#//RedefinableElement #//ActivityContent">
+  <eClassifiers xsi:type="ecore:EClass" name="ActivityNode" abstract="true" eSuperTypes="#//RedefinableElement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="ActivityNode is an abstract class for points in the flow of an Activity connected by ActivityEdges.&#xA;&lt;p>From package UML::Activities.&lt;/p>"/>
     </eAnnotations>
     <eAnnotations source="duplicates">
-      <contents xsi:type="ecore:EOperation" name="containingActivity" ordered="false"
-          eType="#//Activity">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="The Activity that directly or indirectly contains this ActivityNode.&#xA;result = (if inStructuredNode&lt;>null then inStructuredNode.containingActivity()&#xD;&#xA;else activity&#xD;&#xA;endif)&#xA;&lt;p>From package UML::Activities.&lt;/p>"/>
-        </eAnnotations>
-        <eAnnotations source="redefines" references="#//ActivityContent/containingActivity"/>
-      </contents>
       <contents xsi:type="ecore:EOperation" name="isConsistentWith" ordered="false"
           lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Boolean">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -9045,6 +9031,11 @@
         <eParameters name="redefiningElement" ordered="false" lowerBound="1" eType="#//RedefinableElement"/>
       </contents>
     </eAnnotations>
+    <eOperations name="containingActivity" ordered="false" eType="#//Activity">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The Activity that directly or indirectly contains this ActivityNode.&#xA;result = (if inStructuredNode&lt;>null then inStructuredNode.containingActivity()&#xD;&#xA;else activity&#xD;&#xA;endif)&#xA;&lt;p>From package UML::Activities.&lt;/p>"/>
+      </eAnnotations>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="activity" ordered="false"
         eType="#//Activity" volatile="true" transient="true" derived="true" eOpposite="#//Activity/node">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -9162,7 +9153,7 @@
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
           <details key="documentation" value="The Activity that directly or indirectly contains this StructuredActivityNode (considered as an Action).&#xA;result = (self.Action::containingActivity())&#xA;&lt;p>From package UML::Actions.&lt;/p>"/>
         </eAnnotations>
-        <eAnnotations source="redefines" references="#//ActivityContent/containingActivity"/>
+        <eAnnotations source="redefines" references="#//ActivityGroup/containingActivity"/>
       </contents>
       <contents xsi:type="ecore:EReference" name="activity" ordered="false" eType="#//Activity"
           volatile="true" transient="true" derived="true">
