@@ -21,12 +21,12 @@
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
 
-[template public generateExecutionBuildFiles(aPackage : Package)]
-[generateCMakeLists(aPackage)/]
+[template public generateExecutionBuildFiles(aPackage : Package, packageOnly : Boolean)]
+[generateCMakeLists(aPackage, packageOnly)/]
 [generateGradleFiles(aPackage)/]
 [/template]
 
-[template private generateCMakeLists(aPackage : Package) { packageName : String = getPackageName(); execPackageName : String = getPackageName().concat('Exec'); }]
+[template private generateCMakeLists(aPackage : Package, packageOnly : Boolean) { packageName : String = getPackageName(); execPackageName : String = getPackageName().concat('Exec'); }]
 [file (aPackage.getPackageName().concat('Exec/').concat('CMakeLists.txt'), false, 'UTF-8')]
 #############################################################################
 #																			#
@@ -54,6 +54,15 @@ SET(CMAKE_CXX_FLAGS_RELEASE " -O3 -DNDEBUG")
 
 string(REPLACE "\\" "/" MDE4CPP_HOME $ENV{MDE4CPP_HOME})
 
+[if (packageOnly)]
+SET(SOURCE_FILES
+[for (aClassifier : Classifier | getClassifiersForPackageOnly()->sortedBy(name))]
+	[aClassifier.name.toUpperFirst()/]Object.cpp
+[/for]
+	[aPackage.name.concat('ExecPlugin.cpp')/]
+	['impl/'.concat(aPackage.name).concat('ExecPluginImpl.cpp')/]
+)
+[else]
 SET(SOURCE_FILES
 [for (aDecisionNode : DecisionNode | aPackage.getDecisionNodesWithOB())]
 	[aDecisionNode.generateOpaqueBehaviorExecutionName()/].cpp
@@ -71,6 +80,7 @@ SET(SOURCE_FILES
 	[aPackage.name.concat('ExecPlugin.cpp')/]
 	['impl/'.concat(aPackage.name).concat('ExecPluginImpl.cpp')/]
 )
+[/if]
 
 INCLUDE_DIRECTORIES(
     ../

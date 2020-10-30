@@ -41,7 +41,11 @@
 	['package has no name '.registerError()/]
 [else]
 	[aPackage.generateUML()/]
-	[aPackage.generateFUMLModel()/]
+	[if (aPackage.eAllContents()->filter(ecore::EAnnotation)->select(source = 'PackageOnly')->notEmpty())]
+		[aPackage.generateFUMLModelForPackageOnly()/]
+	[else]
+		[aPackage.generateFUMLModel()/]
+	[/if]
 [/if]
 
 [if (aPackage.errorExisting())]
@@ -71,14 +75,12 @@
 [aPackage.getPackageOperations().generateOperationExecutionHeader(aPackage)/]
 [aPackage.getPackageOperations().generateOperationExecutionSource(aPackage)/]
 
-
 //generate execution classifier
 [aPackage.getClassifiersForObjectClasses().generateClassifierObjectHeader(aPackage)/]
 [aPackage.getClassifiersForObjectClasses().generateClassifierObjectSource(aPackage)/]
 [comment metamodel classifiers are handled seperately for now... /]
 [aPackage.getMetamodelClassifiersForObjectClasses().generateMetamodelClassifierObjectHeader(aPackage)/]
 [aPackage.getMetamodelClassifiersForObjectClasses().generateMetamodelClassifierObjectSource(aPackage)/]
-
 
 //generate execution plugin
 [aPackage.generateExecutionPlugin()/]
@@ -89,5 +91,19 @@
 
 
 //generate project files
-[aPackage.generateExecutionBuildFiles()/]
+[aPackage.generateExecutionBuildFiles(false)/]
+[/template]
+
+
+
+[template public generateFUMLModelForPackageOnly(aPackage : Package)]
+//generate execution classifier
+[aPackage.getClassifiersForPackageOnly().generateClassifierObjectHeader(aPackage)/]
+[aPackage.getClassifiersForPackageOnly().generateClassifierObjectSource(aPackage)/]
+
+//generate execution plugin
+[aPackage.generateExecutionPlugin()/]
+
+//generate project files
+[aPackage.generateExecutionBuildFiles(true)/]
 [/template]
