@@ -62,11 +62,6 @@ task compileUmlReflection(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	def PSCS = getRootProject().getTasksByName('compilePSCS', true)
 	dependsOn PSCS
 	inputs.files(PSCS.outputs)
-
-	// dependency to model 'umlReflection'
-	def umlReflection = getRootProject().getTasksByName('compileUmlReflection', true)
-	dependsOn umlReflection
-	inputs.files(umlReflection.outputs)
 }
 
 task clean {

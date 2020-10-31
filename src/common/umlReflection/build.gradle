@@ -12,7 +12,6 @@ task buildUmlReflection() {
 	dependsOn getRootProject().getTasksByName('buildPrimitivetypesReflection', true)
 	dependsOn getRootProject().getTasksByName('buildFUML', true)
 	dependsOn getRootProject().getTasksByName('buildPSCS', true)
-	dependsOn getRootProject().getTasksByName('buildUmlReflection', true)
 }
 
 tasks.getByPath('src_gen:compileUmlReflection').mustRunAfter tasks.getByPath('model:generateUmlReflection')

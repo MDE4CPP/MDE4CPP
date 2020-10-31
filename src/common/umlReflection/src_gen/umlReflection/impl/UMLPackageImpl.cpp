@@ -9,7 +9,6 @@
 #include "uml/EnumerationLiteral.hpp"
 #include "uml/Generalization.hpp"
 #include "uml/InstanceValue.hpp"
-#include "uml/Interface.hpp"
 #include "uml/LiteralBoolean.hpp"
 #include "uml/LiteralInteger.hpp"
 #include "uml/LiteralUnlimitedNatural.hpp"
@@ -12191,8 +12190,6 @@ void UMLPackageImpl::createPackageValueSpecifications(std::shared_ptr<uml::Packa
 	uML_Action_output_lowerValue_LiteralInteger_UML_Action_output = factory->createLiteralInteger_in_Owner(uML_Action_output);
 	
 	uML_Action_output_upperValue_LiteralUnlimitedNatural_UML_Action_output = factory->createLiteralUnlimitedNatural_in_Owner(uML_Action_output);
-	
-	uML_ActivityContent_containingActivity_containingActivity_lowerValue_LiteralInteger_UML_ActivityContent_containingActivity_containingActivity = factory->createLiteralInteger_in_Owner(uML_ActivityContent_containingActivity_containingActivity);
 	
 	uML_ActivityEdge_activity_lowerValue_LiteralInteger_UML_ActivityEdge_activity = factory->createLiteralInteger_in_Owner(uML_ActivityEdge_activity);
 	
@@ -35078,8 +35075,6 @@ void UMLPackageImpl::initializePackageValueSpecifications()
 
 	uML_Action_output_upperValue_LiteralUnlimitedNatural_UML_Action_output->setValue(-1);
 
-	uML_ActivityContent_containingActivity_containingActivity_lowerValue_LiteralInteger_UML_ActivityContent_containingActivity_containingActivity->setValue(0);
-
 	uML_ActivityEdge_activity_lowerValue_LiteralInteger_UML_ActivityEdge_activity->setValue(0);
 
 	uML_ActivityEdge_guard_lowerValue_LiteralInteger_UML_ActivityEdge_guard->setValue(0);
@@ -41705,18 +41700,6 @@ std::shared_ptr<uml::Property> UMLPackageImpl::get_UML_Action_output()
 std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_Activity()
 {
 	return uML_Activity;
-}
-std::shared_ptr<uml::Interface> UMLPackageImpl::get_UML_ActivityContent()
-{
-	return uML_ActivityContent;
-}
-std::shared_ptr<uml::Operation> UMLPackageImpl::get_UML_ActivityContent_containingActivity__()
-{
-	return uML_ActivityContent_containingActivity__;
-}
-std::shared_ptr<uml::Parameter> UMLPackageImpl::get_UML_ActivityContent_containingActivity_containingActivity()
-{
-	return uML_ActivityContent_containingActivity_containingActivity;
 }
 std::shared_ptr<uml::Class> UMLPackageImpl::get_UML_ActivityEdge()
 {
