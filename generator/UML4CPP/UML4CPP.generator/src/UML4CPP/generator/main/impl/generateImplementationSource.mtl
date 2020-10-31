@@ -207,7 +207,11 @@ std::shared_ptr<uml::Class> [className/]::getMetaClass()
 }
 
 void [className/]::instantiate()
-{	[comment Init properties without default value/]
+{   [comment call instantiate of superclasses/]
+	[for (aSuperClass : Class | aClass.superClass)]
+	[aSuperClass.name.toUpperFirst()/]Impl::instantiate();
+	[/for]
+	[comment Init properties without default value/]
 	[for (aProperty : Property | aClass.ownedAttribute->sortedBy(myQualifiedName())->select(p : Property | p.default->isEmpty()))]
 	[aProperty.generateAttributeInstantiation()/]
 	[/for]
