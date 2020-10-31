@@ -142,7 +142,7 @@ task build[packageName.toUpperFirst()/]() {
 [if(aPackage.prepareApplication())]
 	dependsOn 'application:compileApplicationFor[packageName.toUpperFirst()/]'
 [/if]
-[for (packName : String | aPackage.metaModelLibrariesNames()) ? (not(packName = aPackage.name))]
+[for (packName : String | aPackage.metaModelLibrariesNames()) ? (not(packName = aPackage.getPackageName()))]
 	dependsOn getRootProject().getTasksByName('build[packName.toUpperFirst()/]', true)
 [/for]
 }
@@ -205,7 +205,7 @@ task compile[packageName.toUpperFirst()/](type: tui.sse.mde4cpp.MDE4CPPCompile) 
 	outputs.dir file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'include' + File.separator + 'persistence' + File.separator + 'interfaces')
 	outputs.dir file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'include' + File.separator + 'pluginFramework')
 	outputs.dir file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'include' + File.separator + 'util')
-[for (packName : String | aPackage.metaModelLibrariesNames()) ? (not(packName = aPackage.name))]
+[for (packName : String | aPackage.metaModelLibrariesNames()) ? (not(packName = aPackage.getPackageName()))]
 
 	// dependency to model '[packName/]'
 	def [packName/] = getRootProject().getTasksByName('compile[packName.toUpperFirst()/]', true)
@@ -243,7 +243,7 @@ ENDIF()
 [template private generateCMakeFindLibraryCommand(aPackage : Package, ending : String, folderName : String, debugMode : Boolean)]
 [for (packName : String | aPackage.metaModelLibrariesNames())]
 FIND_LIBRARY([packName.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/] [packName/][libraryNameSuffix(debugMode)/][ending/] ${MDE4CPP_HOME}/application/[folderName/])
-[if (OrderedSet{'ecore', 'uml', 'fUML', 'PSCS', 'ecoreReflection', 'primitivetypesReflection', aPackage.name}->excludes(packName))]
+[if (OrderedSet{'ecore', 'uml', 'fUML', 'PSCS', 'ecoreReflection', 'primitivetypesReflection', aPackage.getPackageName()}->excludes(packName))]
 FIND_LIBRARY([packName.toUpperCase()/]EXEC_[libraryVariableNameSuffix(debugMode)/] [packName/]Exec[libraryNameSuffix(debugMode)/][ending/] ${MDE4CPP_HOME}/application/[folderName/])
 [/if]
 [/for]
@@ -253,7 +253,7 @@ FIND_LIBRARY([packName.toUpperCase()/]EXEC_[libraryVariableNameSuffix(debugMode)
 TARGET_LINK_LIBRARIES(${PROJECT_NAME}
 [for (packName : String | aPackage.metaModelLibrariesNames())]
 	[buildModeCMakeProperty(debugMode)/] ${[packName.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/]}
-	[if (OrderedSet{'ecore', 'uml', 'fUML', 'PSCS', 'ecoreReflection', 'primitivetypesReflection', aPackage.name}->excludes(packName))]
+	[if (OrderedSet{'ecore', 'uml', 'fUML', 'PSCS', 'ecoreReflection', 'primitivetypesReflection', aPackage.getPackageName()}->excludes(packName))]
 	[buildModeCMakeProperty(debugMode)/] ${[packName.toUpperCase()/]EXEC_[libraryVariableNameSuffix(debugMode)/]}
 	[/if]
 [/for]
@@ -261,7 +261,7 @@ TARGET_LINK_LIBRARIES(${PROJECT_NAME}
 [/template]
 
 [template private generateRelatedModelNameList(aPackage : Package) post (trim())]
-[for (packName : String | aPackage.metaModelLibrariesNames()) separator (', ') ? (not(packName = aPackage.name))]
+[for (packName : String | aPackage.metaModelLibrariesNames()) separator (', ') ? (not(packName = aPackage.getPackageName()))]
 '[packName/]'[/for]
 [/template]
 
