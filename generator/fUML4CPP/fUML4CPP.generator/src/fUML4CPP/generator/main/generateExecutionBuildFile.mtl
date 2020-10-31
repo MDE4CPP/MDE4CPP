@@ -73,7 +73,7 @@ SET(SOURCE_FILES
 [for (anOperation : Operation | aPackage.getPackageOperations()->sortedBy(name))]
 	[anOperation.generateOperationExecutionName()/].cpp
 [/for]
-[for (aClassifier : Classifier | getClassifiersForObjectClasses()->addAll(getMetamodelClassifiersForObjectClasses())->sortedBy(name))]
+[for (aClassifier : Classifier | getClassifiersForObjectClasses()->sortedBy(name))]
 	[aClassifier.name.toUpperFirst()/]Object.cpp
 [/for]
 	impl/[aPackage.name.toUpperFirst()/]LocusImpl.cpp
@@ -243,7 +243,7 @@ ENDIF()
 [template private generateCMakeFindLibraryCommand(aPackage : Package, ending : String, folderName : String, debugMode : Boolean)]
 [for (packName : String | aPackage.metaModelLibrariesNames())]
 FIND_LIBRARY([packName.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/] [packName/][libraryNameSuffix(debugMode)/][ending/] ${MDE4CPP_HOME}/application/[folderName/])
-[if (OrderedSet{'ecore', 'uml', 'fUML', 'PSCS', 'ecoreReflection', 'primitivetypesReflection', 'umlReflection', aPackage.name}->excludes(packName))]
+[if (OrderedSet{'ecore', 'uml', 'fUML', 'PSCS', 'ecoreReflection', 'primitivetypesReflection', aPackage.name}->excludes(packName))]
 FIND_LIBRARY([packName.toUpperCase()/]EXEC_[libraryVariableNameSuffix(debugMode)/] [packName/]Exec[libraryNameSuffix(debugMode)/][ending/] ${MDE4CPP_HOME}/application/[folderName/])
 [/if]
 [/for]
@@ -253,7 +253,7 @@ FIND_LIBRARY([packName.toUpperCase()/]EXEC_[libraryVariableNameSuffix(debugMode)
 TARGET_LINK_LIBRARIES(${PROJECT_NAME}
 [for (packName : String | aPackage.metaModelLibrariesNames())]
 	[buildModeCMakeProperty(debugMode)/] ${[packName.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/]}
-	[if (OrderedSet{'ecore', 'uml', 'fUML', 'PSCS', 'ecoreReflection', 'primitivetypesReflection', 'umlReflection', aPackage.name}->excludes(packName))]
+	[if (OrderedSet{'ecore', 'uml', 'fUML', 'PSCS', 'ecoreReflection', 'primitivetypesReflection', aPackage.name}->excludes(packName))]
 	[buildModeCMakeProperty(debugMode)/] ${[packName.toUpperCase()/]EXEC_[libraryVariableNameSuffix(debugMode)/]}
 	[/if]
 [/for]

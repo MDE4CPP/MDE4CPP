@@ -78,9 +78,6 @@
 //generate execution classifier
 [aPackage.getClassifiersForObjectClasses().generateClassifierObjectHeader(aPackage)/]
 [aPackage.getClassifiersForObjectClasses().generateClassifierObjectSource(aPackage)/]
-[comment metamodel classifiers are handled seperately for now... /]
-[aPackage.getMetamodelClassifiersForObjectClasses().generateMetamodelClassifierObjectHeader(aPackage)/]
-[aPackage.getMetamodelClassifiersForObjectClasses().generateMetamodelClassifierObjectSource(aPackage)/]
 
 //generate execution plugin
 [aPackage.generateExecutionPlugin()/]

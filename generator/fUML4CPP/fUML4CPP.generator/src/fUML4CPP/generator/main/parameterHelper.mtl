@@ -94,7 +94,6 @@
 [query public getClassifiersForPackageOnly(aPackage : Package) : Set(Classifier) = aPackage.getClassifiersForObjectClasses()->reject(parents()->isEmpty()) /]
 
 [query private getMetamodelStereotypeClassifiersForObjectClasses(aPackage: Package) : Set(Classifier) = aPackage.getStereotypeReflectionClassesForObjectClasses()->addAll(aPackage.getStereotypeClassifierExecutions().getNearestPackage()->select(isReflectionModel()).getPackageClassifiers())->flatten()->asOrderedSet()->sortedBy(name)/]
-[query public getMetamodelClassifiersForObjectClasses(aPackage: Package) : Set(Classifier) = aPackage.getReflectionClassesForObjectClasses()->addAll(aPackage.getClassiferExecutions().getNearestPackage()->select(isReflectionModel()).getPackageClassifiers())->addAll(aPackage.getMetamodelStereotypeClassifiersForObjectClasses())->flatten()->asOrderedSet()->sortedBy(name)/]
 
 [comment]Get all Operations in Package[/comment]
 [query public getPackageOperations(aPackage : Package) : Set(Operation) = OrderedSet{
@@ -155,11 +154,7 @@ std::shared_ptr<[par.type.getNearestPackage().name/]::[par.type.name.toUpperFirs
 [comment]INCLUDE SWITCH----------------------------------------------------------[/comment]
 [template public generateTypeInclude(type : Type, aPackage : Package, thisPackage : Package) ? ((not type.supportedTypes()) and (not type.oclIsKindOf(Enumeration)))]
 #include "[aPackage.myNamespaceName()/]/[type.name/].hpp"
-[if (aPackage.isReflectionModel())]
-#include "[thisPackage.getPackageName()/]Exec/[type.name.toUpperFirst()/]Object.hpp"
-[else]
 #include "[aPackage.getPackageName()/]Exec/[type.name.toUpperFirst()/]Object.hpp"
-[/if]
 [/template]
 
 [template public generateTypeInclude(type : Type, aPackage : Package, thisPackage : Package) ? (not type.supportedTypes() and type.oclIsKindOf(Enumeration))]
