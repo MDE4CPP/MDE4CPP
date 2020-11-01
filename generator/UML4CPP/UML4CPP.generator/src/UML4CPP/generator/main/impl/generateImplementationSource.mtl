@@ -160,6 +160,7 @@
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy [aClass.name.toUpperFirst()/] "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	instantiate();
 [for (att : Property | aClass.getAllAttributes()->reject(isBackReference())->sortedBy(name))]
 [if (att.upper = 1)]
 [if (not (att.type.isPrimitive() or att.type.oclIsKindOf(Enumeration)))]
