@@ -49,10 +49,7 @@ using namespace [aPackage.name/];
 }
 
 [packageName/]::~[packageName/]()
-{	[comment uninitialization of execution locus, factory, executer as well as clearance of opaque behaviors from operations/]
-	[if (aPackage.allOwnedElements()->filter(Activity)->size() > 0)]
-	[aPackage.generateExecutionPluginDeinitialization()/]
-	[/if]
+{
 }
 
 std::string [packageName/]::eclipseURI()
@@ -92,12 +89,8 @@ void [packageName/]::initialize()
 	[generateExecutionPluginInitialization()/]
 
 	[comment create opaque behavior executions for operations /]
-	[for (anOperation : Operation | aPackage.getOperationExecutionsPackage())]
-	[anOperation.generateOpaqueBehaviorForOperationExecution(true)/]
-	[/for]
-
-	[for (anOperation : Operation | aPackage.getOperationExecutionsCOA())]
-	[anOperation.generateOpaqueBehaviorForOperationExecution(false)/]
+	[for (anOperation : Operation | aPackage.getOperationExecutionsAll())]
+	[anOperation.generateOpaqueBehaviorForOperationExecution()/]
 	[/for]
 
 	[comment create opaque behavior executions for opaque behaviors in the model that are executed either by a call behavior action or by a desicion node/]
@@ -229,12 +222,11 @@ m_factory->assignStrategy(PSCS::Semantics::StructuredClassifiers::StructuredClas
 m_factory->assignStrategy(PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_DefaultRequestPropagationStrategy());
 [/template]
 
-[template public generateOpaqueBehaviorForOperationExecution(anOperation : Operation, addToOperation : Boolean)]
+[template public generateOpaqueBehaviorForOperationExecution(anOperation : Operation)]
 [if (not anOperation.name.oclIsUndefined())]
 {	/*creating opaque behavior for operation [anOperation.owner.oclAsType(NamedElement).name/]::[anOperation.name/]*/
 	m_[anOperation.getFBPackageElement()/] = uml::UmlFactory::eInstance()->createOpaqueBehavior();
 	m_[anOperation.getFBPackageElement()/]->setName("[anOperation.getFBPackageElement()/]");
-	[if (not addToOperation)]// [/if][anOperation.generatePackageGetterCall()/]->getMethod()->insert([anOperation.generatePackageGetterCall()/]->getMethod()->begin(), m_[anOperation.getFBPackageElement()/]);
 
 	[for (aParameter : Parameter | anOperation.ownedParameter)]
 	{	/*creating parameter [aParameter.name/]*/
