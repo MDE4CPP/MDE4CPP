@@ -34,7 +34,8 @@
 [query private collectClassesToIncludeFromPartsWithPortsProperties(aClass : Class) : Set(Class) = Set(Class){aClass.ownedConnector.end->reject(anEnd : ConnectorEnd | anEnd.partWithPort.oclIsUndefined()).role.type}->flatten()->asOrderedSet()->sortedBy(myQualifiedName()) /]
 [query private collectCompositeStructureIncludes(aClass : Class) : Set(Class) = Set(Class){aClass.collectClassesToIncludeFromPartsWithPortsProperties(), aClass.collectConnectedClassesToInclude(), aClass.getCompositeOwners()}->flatten()->asOrderedSet()->sortedBy(myQualifiedName()) /]
 
-[query private getMyAttributes(aClassifier : Classifier) : OrderedSet(Property) = aClassifier.getAllAttributes().oclAsType(Property)->select(type.isUMLElement())->flatten()->asOrderedSet()->sortedBy(qualifiedName) /]
+[query private getInterfaceAttributes(aClassifier : Classifier) : OrderedSet(Property) = if (aClassifier.oclIsKindOf(Class)) then aClassifier.oclAsType(Class).superClass->addAll(Set{aClassifier.oclAsType(Class)}).interfaceRealization.contract.getAllAttributes()->asOrderedSet()->sortedBy(qualifiedName) else OrderedSet{} endif /]
+[query public getMyAttributes(aClassifier : Classifier) : OrderedSet(Property) = aClassifier.getAllAttributes()->addAll(aClassifier.getInterfaceAttributes())->select(type.isUMLElement())->flatten()->asOrderedSet()->sortedBy(qualifiedName) /]
 
 [template public generateClassifierObjectSource(aClassifier : Classifier, aPackage:Package) {
 	className : String = objectClassName();
@@ -86,7 +87,7 @@
 [property.type.generateTypeInclude(property.type.getNearestPackage(), aPackage)/]
 [/for]
 //Property Packages Includes
-[for (aPack : Package | attributes.type.getNearestPackage()->reject(p : Package | p = aPackage)->asSet()->flatten()->sortedBy(name))]
+[for (aPack : Package | attributes.type.getNearestPackage()->addAll(attributes.getNearestPackage())->reject(p : Package | p = aPackage)->asSet()->flatten()->sortedBy(name))]
 #include "[aPack.getPackageName()/]/[aPack.name/]Package.hpp"
 [/for]
 [/if]
