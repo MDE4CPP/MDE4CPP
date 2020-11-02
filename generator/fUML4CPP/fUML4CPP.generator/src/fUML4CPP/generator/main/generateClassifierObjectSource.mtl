@@ -211,7 +211,14 @@ std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Object>> [classNa
 	[for (ownerClass : Class | aClassifier.oclAsType(Class).getCompositeOwners())]
 	//owner class [ownerClass.name.toUpperFirst()/]
 	{	
-		std::shared_ptr<[ownerClass.getNearestPackage().myNamespaceName()/]::[ownerClass.name.toUpperFirst()/]> ownerUmlValue = [aClassifier.UMLValueName()/]->[aClassifier.getOwnerProperty(ownerClass).getterName()/]().lock();
+[if (aClassifier.hasOwnerProperty(ownerClass))]
+[if (aClassifier.getOwnerProperties(ownerClass)->size() > 1)]
+		std::cerr << __PRETTY_FUNCTION__ << ": classifier '[aClassifier.name/]' has multiply attributes to owner class '[ownerClass.name/]'. Please check for compilications." << std::endl;
+[/if]
+		std::shared_ptr<[ownerClass.getNearestPackage().myNamespaceName()/]::[ownerClass.name.toUpperFirst()/]> ownerUmlValue = [aClassifier.UMLValueName()/]->[aClassifier.getOwnerProperties(ownerClass)->first().getterName()/]().lock();
+[else]
+		std::shared_ptr<[ownerClass.getNearestPackage().myNamespaceName()/]::[ownerClass.name.toUpperFirst()/]> ownerUmlValue = [aClassifier.UMLValueName()/]->get[ownerClass.name.toUpperFirst()/]().lock();
+[/if]
 		if(ownerUmlValue != nullptr)
 		{
 			std::shared_ptr<[aPackage.name/]::[ownerClass.objectClassName()/]> container[ownerClass.objectClassName()/] = std::dynamic_pointer_cast<[aPackage.name/]::[ownerClass.objectClassName()/]>(this->getLocus()->instantiate([ownerClass.getModelPackage()/][ownerClass.generatePackageGetterCall(ownerClass)/]));

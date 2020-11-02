@@ -32,7 +32,8 @@
 [query public getCompositePropertiesOfType(owningClass : Class, compositeType : Class) : Set(Property) = owningClass.getAllAttributes()->select(type = compositeType and isComposite and association.oclIsUndefined())->asOrderedSet()->sortedBy(myQualifiedName()) /]
 [query private hasCompositePropertiesOfType(owningClass : Class, compositeType : Class) : Boolean = getCompositePropertiesOfType(compositeType)->size() > 0 /]
 [query public getCompositeOwners(aClass : Class) : Set(Class) = aClass.getNearestPackage().ownedElement->filter(Class)->select(hasCompositePropertiesOfType(aClass))->asOrderedSet()->sortedBy(myQualifiedName())/]
-[query public getOwnerProperty(aClass : Classifier, ownerClass : Class) : Property = aClass.attribute->select(type = ownerClass)->first() /]
+[query public hasOwnerProperty(aClass : Classifier, ownerClass : Class) : Boolean = (aClass.attribute->select(type = ownerClass)->size() > 0) /]
+[query public getOwnerProperties(aClass : Classifier, ownerClass : Class) : OrderedSet(Property) = aClass.attribute->select(type = ownerClass)->sortedBy(qualifiedName)/]
 
 [** 
  * get all associations where aClass is memberType
