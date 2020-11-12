@@ -1694,7 +1694,7 @@ void ActivitiesPackageImpl::initializeExpansionActivationGroupContent()
 	}
 	
 	m_expansionActivationGroup_Attribute_groupInputs->setName("groupInputs");
-	m_expansionActivationGroup_Attribute_groupInputs->setEType(fUML::Semantics::Actions::ActionsPackage::eInstance()->getOutputPinActivation_Class());
+	m_expansionActivationGroup_Attribute_groupInputs->setEType(getExpansionNodeActivation_Class());
 	m_expansionActivationGroup_Attribute_groupInputs->setLowerBound(0);
 	m_expansionActivationGroup_Attribute_groupInputs->setUpperBound(-1);
 	m_expansionActivationGroup_Attribute_groupInputs->setTransient(false);
@@ -1716,7 +1716,7 @@ void ActivitiesPackageImpl::initializeExpansionActivationGroupContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_expansionActivationGroup_Attribute_groupOutputs->setName("groupOutputs");
-	m_expansionActivationGroup_Attribute_groupOutputs->setEType(fUML::Semantics::Actions::ActionsPackage::eInstance()->getOutputPinActivation_Class());
+	m_expansionActivationGroup_Attribute_groupOutputs->setEType(getExpansionNodeActivation_Class());
 	m_expansionActivationGroup_Attribute_groupOutputs->setLowerBound(0);
 	m_expansionActivationGroup_Attribute_groupOutputs->setUpperBound(-1);
 	m_expansionActivationGroup_Attribute_groupOutputs->setTransient(false);

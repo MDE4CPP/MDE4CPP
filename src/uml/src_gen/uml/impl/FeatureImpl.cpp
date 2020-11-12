@@ -265,10 +265,10 @@ Any FeatureImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //10212
+			return eAny(tempList); //10112
 		}
 		case uml::UmlPackage::FEATURE_ATTRIBUTE_ISSTATIC:
-			return eAny(getIsStatic()); //10213
+			return eAny(getIsStatic()); //10113
 	}
 	return RedefinableElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -277,9 +277,9 @@ bool FeatureImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::FEATURE_ATTRIBUTE_FEATURINGCLASSIFIER:
-			return getFeaturingClassifier() != nullptr; //10212
+			return getFeaturingClassifier() != nullptr; //10112
 		case uml::UmlPackage::FEATURE_ATTRIBUTE_ISSTATIC:
-			return getIsStatic() != false; //10213
+			return getIsStatic() != false; //10113
 	}
 	return RedefinableElementImpl::internalEIsSet(featureID);
 }
@@ -291,7 +291,7 @@ bool FeatureImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _isStatic = newValue->get<bool>();
-			setIsStatic(_isStatic); //10213
+			setIsStatic(_isStatic); //10113
 			return true;
 		}
 	}

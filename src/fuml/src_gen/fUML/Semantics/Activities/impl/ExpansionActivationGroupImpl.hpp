@@ -79,11 +79,11 @@ namespace fUML::Semantics::Activities
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<Bag<fUML::Semantics::Actions::OutputPinActivation>> getGroupInputs() const ;
+			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::ExpansionNodeActivation>> getGroupInputs() const ;
 			
 			
 			
-			virtual std::shared_ptr<Bag<fUML::Semantics::Actions::OutputPinActivation>> getGroupOutputs() const ;
+			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::ExpansionNodeActivation>> getGroupOutputs() const ;
 			
 			
 			

@@ -434,9 +434,9 @@ Any RemoveVariableValueActionImpl::eGet(int featureID, bool resolve, bool coreTy
 	switch(featureID)
 	{
 		case uml::UmlPackage::REMOVEVARIABLEVALUEACTION_ATTRIBUTE_ISREMOVEDUPLICATES:
-			return eAny(getIsRemoveDuplicates()); //21129
+			return eAny(getIsRemoveDuplicates()); //21029
 		case uml::UmlPackage::REMOVEVARIABLEVALUEACTION_ATTRIBUTE_REMOVEAT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getRemoveAt())); //21130
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getRemoveAt())); //21030
 	}
 	return WriteVariableActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -445,9 +445,9 @@ bool RemoveVariableValueActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::REMOVEVARIABLEVALUEACTION_ATTRIBUTE_ISREMOVEDUPLICATES:
-			return getIsRemoveDuplicates() != false; //21129
+			return getIsRemoveDuplicates() != false; //21029
 		case uml::UmlPackage::REMOVEVARIABLEVALUEACTION_ATTRIBUTE_REMOVEAT:
-			return getRemoveAt() != nullptr; //21130
+			return getRemoveAt() != nullptr; //21030
 	}
 	return WriteVariableActionImpl::internalEIsSet(featureID);
 }
@@ -459,7 +459,7 @@ bool RemoveVariableValueActionImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _isRemoveDuplicates = newValue->get<bool>();
-			setIsRemoveDuplicates(_isRemoveDuplicates); //21129
+			setIsRemoveDuplicates(_isRemoveDuplicates); //21029
 			return true;
 		}
 		case uml::UmlPackage::REMOVEVARIABLEVALUEACTION_ATTRIBUTE_REMOVEAT:
@@ -467,7 +467,7 @@ bool RemoveVariableValueActionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::InputPin> _removeAt = std::dynamic_pointer_cast<uml::InputPin>(_temp);
-			setRemoveAt(_removeAt); //21130
+			setRemoveAt(_removeAt); //21030
 			return true;
 		}
 	}
@@ -574,7 +574,6 @@ void RemoveVariableValueActionImpl::save(std::shared_ptr<persistence::interfaces
 	
 	ActivityNodeImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);

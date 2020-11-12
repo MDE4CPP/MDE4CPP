@@ -728,10 +728,10 @@ Any AssociationImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //2239
+			return eAny(tempList); //2139
 		}
 		case uml::UmlPackage::ASSOCIATION_ATTRIBUTE_ISDERIVED:
-			return eAny(getIsDerived()); //2240
+			return eAny(getIsDerived()); //2140
 		case uml::UmlPackage::ASSOCIATION_ATTRIBUTE_MEMBEREND:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -742,7 +742,7 @@ Any AssociationImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //2241
+			return eAny(tempList); //2141
 		}
 		case uml::UmlPackage::ASSOCIATION_ATTRIBUTE_NAVIGABLEOWNEDEND:
 		{
@@ -754,7 +754,7 @@ Any AssociationImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //2243
+			return eAny(tempList); //2143
 		}
 		case uml::UmlPackage::ASSOCIATION_ATTRIBUTE_OWNEDEND:
 		{
@@ -766,7 +766,7 @@ Any AssociationImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //2242
+			return eAny(tempList); //2142
 		}
 	}
 	Any result;
@@ -783,15 +783,15 @@ bool AssociationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::ASSOCIATION_ATTRIBUTE_ENDTYPE:
-			return getEndType() != nullptr; //2239
+			return getEndType() != nullptr; //2139
 		case uml::UmlPackage::ASSOCIATION_ATTRIBUTE_ISDERIVED:
-			return getIsDerived() != false; //2240
+			return getIsDerived() != false; //2140
 		case uml::UmlPackage::ASSOCIATION_ATTRIBUTE_MEMBEREND:
-			return getMemberEnd() != nullptr; //2241
+			return getMemberEnd() != nullptr; //2141
 		case uml::UmlPackage::ASSOCIATION_ATTRIBUTE_NAVIGABLEOWNEDEND:
-			return getNavigableOwnedEnd() != nullptr; //2243
+			return getNavigableOwnedEnd() != nullptr; //2143
 		case uml::UmlPackage::ASSOCIATION_ATTRIBUTE_OWNEDEND:
-			return getOwnedEnd() != nullptr; //2242
+			return getOwnedEnd() != nullptr; //2142
 	}
 	bool result = false;
 	result = ClassifierImpl::internalEIsSet(featureID);
@@ -810,7 +810,7 @@ bool AssociationImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _isDerived = newValue->get<bool>();
-			setIsDerived(_isDerived); //2240
+			setIsDerived(_isDerived); //2140
 			return true;
 		}
 		case uml::UmlPackage::ASSOCIATION_ATTRIBUTE_MEMBEREND:

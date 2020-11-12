@@ -199,7 +199,7 @@ Any RelationshipImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //2093
+			return eAny(tempList); //2083
 		}
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
@@ -209,7 +209,7 @@ bool RelationshipImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::RELATIONSHIP_ATTRIBUTE_RELATEDELEMENT:
-			return getRelatedElement() != nullptr; //2093
+			return getRelatedElement() != nullptr; //2083
 	}
 	return ElementImpl::internalEIsSet(featureID);
 }

@@ -613,9 +613,9 @@ Any ExtensionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::EXTENSION_ATTRIBUTE_ISREQUIRED:
-			return eAny(getIsRequired()); //9844
+			return eAny(getIsRequired()); //9744
 		case uml::UmlPackage::EXTENSION_ATTRIBUTE_METACLASS:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getMetaclass())); //9845
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getMetaclass())); //9745
 	}
 	return AssociationImpl::eGet(featureID, resolve, coreType);
 }
@@ -624,9 +624,9 @@ bool ExtensionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::EXTENSION_ATTRIBUTE_ISREQUIRED:
-			return getIsRequired() != false; //9844
+			return getIsRequired() != false; //9744
 		case uml::UmlPackage::EXTENSION_ATTRIBUTE_METACLASS:
-			return getMetaclass() != nullptr; //9845
+			return getMetaclass() != nullptr; //9745
 	}
 	return AssociationImpl::internalEIsSet(featureID);
 }

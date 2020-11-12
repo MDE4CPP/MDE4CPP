@@ -390,7 +390,6 @@ void FlowFinalNodeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandl
 	
 	ActivityNodeImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);

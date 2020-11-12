@@ -522,7 +522,7 @@ Any OpaqueActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::OPAQUEACTION_ATTRIBUTE_BODY:
-			return eAny(getBody()); //16527
+			return eAny(getBody()); //16427
 		case uml::UmlPackage::OPAQUEACTION_ATTRIBUTE_INPUTVALUE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -533,10 +533,10 @@ Any OpaqueActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //16528
+			return eAny(tempList); //16428
 		}
 		case uml::UmlPackage::OPAQUEACTION_ATTRIBUTE_LANGUAGE:
-			return eAny(getLanguage()); //16529
+			return eAny(getLanguage()); //16429
 		case uml::UmlPackage::OPAQUEACTION_ATTRIBUTE_OUTPUTVALUE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -547,7 +547,7 @@ Any OpaqueActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //16530
+			return eAny(tempList); //16430
 		}
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
@@ -557,13 +557,13 @@ bool OpaqueActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::OPAQUEACTION_ATTRIBUTE_BODY:
-			return !getBody()->empty(); //16527
+			return !getBody()->empty(); //16427
 		case uml::UmlPackage::OPAQUEACTION_ATTRIBUTE_INPUTVALUE:
-			return getInputValue() != nullptr; //16528
+			return getInputValue() != nullptr; //16428
 		case uml::UmlPackage::OPAQUEACTION_ATTRIBUTE_LANGUAGE:
-			return !getLanguage()->empty(); //16529
+			return !getLanguage()->empty(); //16429
 		case uml::UmlPackage::OPAQUEACTION_ATTRIBUTE_OUTPUTVALUE:
-			return getOutputValue() != nullptr; //16530
+			return getOutputValue() != nullptr; //16430
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
@@ -778,7 +778,6 @@ void OpaqueActionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandle
 	
 	ActivityNodeImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);

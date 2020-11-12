@@ -63,6 +63,7 @@ DeriveImpl::DeriveImpl(const DeriveImpl & obj):DeriveImpl()
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Derive "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	instantiate();
 }
 
 std::shared_ptr<ecore::EObject>  DeriveImpl::copy() const
@@ -79,7 +80,7 @@ std::shared_ptr<uml::Class> DeriveImpl::getMetaClass()
 }
 
 void DeriveImpl::instantiate()
-{	
+{   
 	
 }
 

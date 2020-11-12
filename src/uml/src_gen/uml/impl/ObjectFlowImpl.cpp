@@ -446,13 +446,13 @@ Any ObjectFlowImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::OBJECTFLOW_ATTRIBUTE_ISMULTICAST:
-			return eAny(getIsMulticast()); //16022
+			return eAny(getIsMulticast()); //15922
 		case uml::UmlPackage::OBJECTFLOW_ATTRIBUTE_ISMULTIRECEIVE:
-			return eAny(getIsMultireceive()); //16023
+			return eAny(getIsMultireceive()); //15923
 		case uml::UmlPackage::OBJECTFLOW_ATTRIBUTE_SELECTION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSelection())); //16024
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSelection())); //15924
 		case uml::UmlPackage::OBJECTFLOW_ATTRIBUTE_TRANSFORMATION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getTransformation())); //16025
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getTransformation())); //15925
 	}
 	return ActivityEdgeImpl::eGet(featureID, resolve, coreType);
 }
@@ -461,13 +461,13 @@ bool ObjectFlowImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::OBJECTFLOW_ATTRIBUTE_ISMULTICAST:
-			return getIsMulticast() != false; //16022
+			return getIsMulticast() != false; //15922
 		case uml::UmlPackage::OBJECTFLOW_ATTRIBUTE_ISMULTIRECEIVE:
-			return getIsMultireceive() != false; //16023
+			return getIsMultireceive() != false; //15923
 		case uml::UmlPackage::OBJECTFLOW_ATTRIBUTE_SELECTION:
-			return getSelection() != nullptr; //16024
+			return getSelection() != nullptr; //15924
 		case uml::UmlPackage::OBJECTFLOW_ATTRIBUTE_TRANSFORMATION:
-			return getTransformation() != nullptr; //16025
+			return getTransformation() != nullptr; //15925
 	}
 	return ActivityEdgeImpl::internalEIsSet(featureID);
 }
@@ -479,14 +479,14 @@ bool ObjectFlowImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _isMulticast = newValue->get<bool>();
-			setIsMulticast(_isMulticast); //16022
+			setIsMulticast(_isMulticast); //15922
 			return true;
 		}
 		case uml::UmlPackage::OBJECTFLOW_ATTRIBUTE_ISMULTIRECEIVE:
 		{
 			// BOOST CAST
 			bool _isMultireceive = newValue->get<bool>();
-			setIsMultireceive(_isMultireceive); //16023
+			setIsMultireceive(_isMultireceive); //15923
 			return true;
 		}
 		case uml::UmlPackage::OBJECTFLOW_ATTRIBUTE_SELECTION:
@@ -494,7 +494,7 @@ bool ObjectFlowImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Behavior> _selection = std::dynamic_pointer_cast<uml::Behavior>(_temp);
-			setSelection(_selection); //16024
+			setSelection(_selection); //15924
 			return true;
 		}
 		case uml::UmlPackage::OBJECTFLOW_ATTRIBUTE_TRANSFORMATION:
@@ -502,7 +502,7 @@ bool ObjectFlowImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Behavior> _transformation = std::dynamic_pointer_cast<uml::Behavior>(_temp);
-			setTransformation(_transformation); //16025
+			setTransformation(_transformation); //15925
 			return true;
 		}
 	}

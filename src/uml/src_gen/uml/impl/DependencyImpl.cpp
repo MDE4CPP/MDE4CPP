@@ -390,7 +390,7 @@ Any DependencyImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //6815
+			return eAny(tempList); //6715
 		}
 		case uml::UmlPackage::DEPENDENCY_ATTRIBUTE_SUPPLIER:
 		{
@@ -402,7 +402,7 @@ Any DependencyImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //6816
+			return eAny(tempList); //6716
 		}
 	}
 	Any result;
@@ -419,9 +419,9 @@ bool DependencyImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::DEPENDENCY_ATTRIBUTE_CLIENT:
-			return getClient() != nullptr; //6815
+			return getClient() != nullptr; //6715
 		case uml::UmlPackage::DEPENDENCY_ATTRIBUTE_SUPPLIER:
-			return getSupplier() != nullptr; //6816
+			return getSupplier() != nullptr; //6716
 	}
 	bool result = false;
 	result = DirectedRelationshipImpl::internalEIsSet(featureID);

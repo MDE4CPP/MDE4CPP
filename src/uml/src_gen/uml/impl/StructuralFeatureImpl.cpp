@@ -266,7 +266,7 @@ Any StructuralFeatureImpl::eGet(int featureID, bool resolve, bool coreType) cons
 	switch(featureID)
 	{
 		case uml::UmlPackage::STRUCTURALFEATURE_ATTRIBUTE_ISREADONLY:
-			return eAny(getIsReadOnly()); //22621
+			return eAny(getIsReadOnly()); //22521
 	}
 	Any result;
 	result = FeatureImpl::eGet(featureID, resolve, coreType);
@@ -287,7 +287,7 @@ bool StructuralFeatureImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::STRUCTURALFEATURE_ATTRIBUTE_ISREADONLY:
-			return getIsReadOnly() != false; //22621
+			return getIsReadOnly() != false; //22521
 	}
 	bool result = false;
 	result = FeatureImpl::internalEIsSet(featureID);
@@ -311,7 +311,7 @@ bool StructuralFeatureImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _isReadOnly = newValue->get<bool>();
-			setIsReadOnly(_isReadOnly); //22621
+			setIsReadOnly(_isReadOnly); //22521
 			return true;
 		}
 	}

@@ -63,6 +63,7 @@ RefineImpl::RefineImpl(const RefineImpl & obj):RefineImpl()
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Refine "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	instantiate();
 }
 
 std::shared_ptr<ecore::EObject>  RefineImpl::copy() const
@@ -79,7 +80,7 @@ std::shared_ptr<uml::Class> RefineImpl::getMetaClass()
 }
 
 void RefineImpl::instantiate()
-{	
+{   
 	
 }
 

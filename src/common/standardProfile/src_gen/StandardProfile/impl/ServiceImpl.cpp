@@ -63,6 +63,7 @@ ServiceImpl::ServiceImpl(const ServiceImpl & obj):ServiceImpl()
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Service "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	instantiate();
 }
 
 std::shared_ptr<ecore::EObject>  ServiceImpl::copy() const
@@ -79,7 +80,7 @@ std::shared_ptr<uml::Class> ServiceImpl::getMetaClass()
 }
 
 void ServiceImpl::instantiate()
-{	
+{   
 	
 }
 

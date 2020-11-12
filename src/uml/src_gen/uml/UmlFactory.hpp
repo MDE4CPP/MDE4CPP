@@ -22,7 +22,6 @@ namespace uml
 	class ActionExecutionSpecification;
 	class ActionInputPin;
 	class Activity;
-	class ActivityContent;
 	class ActivityEdge;
 	class ActivityFinalNode;
 	class ActivityGroup;

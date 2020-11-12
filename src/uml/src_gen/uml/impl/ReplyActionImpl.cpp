@@ -477,7 +477,7 @@ Any ReplyActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::REPLYACTION_ATTRIBUTE_REPLYTOCALL:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getReplyToCall())); //21227
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getReplyToCall())); //21127
 		case uml::UmlPackage::REPLYACTION_ATTRIBUTE_REPLYVALUE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -488,10 +488,10 @@ Any ReplyActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //21228
+			return eAny(tempList); //21128
 		}
 		case uml::UmlPackage::REPLYACTION_ATTRIBUTE_RETURNINFORMATION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getReturnInformation())); //21229
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getReturnInformation())); //21129
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -500,11 +500,11 @@ bool ReplyActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::REPLYACTION_ATTRIBUTE_REPLYTOCALL:
-			return getReplyToCall() != nullptr; //21227
+			return getReplyToCall() != nullptr; //21127
 		case uml::UmlPackage::REPLYACTION_ATTRIBUTE_REPLYVALUE:
-			return getReplyValue() != nullptr; //21228
+			return getReplyValue() != nullptr; //21128
 		case uml::UmlPackage::REPLYACTION_ATTRIBUTE_RETURNINFORMATION:
-			return getReturnInformation() != nullptr; //21229
+			return getReturnInformation() != nullptr; //21129
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
@@ -517,7 +517,7 @@ bool ReplyActionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Trigger> _replyToCall = std::dynamic_pointer_cast<uml::Trigger>(_temp);
-			setReplyToCall(_replyToCall); //21227
+			setReplyToCall(_replyToCall); //21127
 			return true;
 		}
 		case uml::UmlPackage::REPLYACTION_ATTRIBUTE_REPLYVALUE:
@@ -561,7 +561,7 @@ bool ReplyActionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::InputPin> _returnInformation = std::dynamic_pointer_cast<uml::InputPin>(_temp);
-			setReturnInformation(_returnInformation); //21229
+			setReturnInformation(_returnInformation); //21129
 			return true;
 		}
 	}
@@ -693,7 +693,6 @@ void ReplyActionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler
 	
 	ActivityNodeImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);

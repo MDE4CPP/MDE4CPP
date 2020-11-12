@@ -335,7 +335,7 @@ Any ConnectionPointReferenceImpl::eGet(int featureID, bool resolve, bool coreTyp
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //5312
+			return eAny(tempList); //5212
 		}
 		case uml::UmlPackage::CONNECTIONPOINTREFERENCE_ATTRIBUTE_EXIT:
 		{
@@ -347,10 +347,10 @@ Any ConnectionPointReferenceImpl::eGet(int featureID, bool resolve, bool coreTyp
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //5313
+			return eAny(tempList); //5213
 		}
 		case uml::UmlPackage::CONNECTIONPOINTREFERENCE_ATTRIBUTE_STATE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getState().lock())); //5314
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getState().lock())); //5214
 	}
 	return VertexImpl::eGet(featureID, resolve, coreType);
 }
@@ -359,11 +359,11 @@ bool ConnectionPointReferenceImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::CONNECTIONPOINTREFERENCE_ATTRIBUTE_ENTRY:
-			return getEntry() != nullptr; //5312
+			return getEntry() != nullptr; //5212
 		case uml::UmlPackage::CONNECTIONPOINTREFERENCE_ATTRIBUTE_EXIT:
-			return getExit() != nullptr; //5313
+			return getExit() != nullptr; //5213
 		case uml::UmlPackage::CONNECTIONPOINTREFERENCE_ATTRIBUTE_STATE:
-			return getState().lock() != nullptr; //5314
+			return getState().lock() != nullptr; //5214
 	}
 	return VertexImpl::internalEIsSet(featureID);
 }
@@ -448,7 +448,7 @@ bool ConnectionPointReferenceImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::State> _state = std::dynamic_pointer_cast<uml::State>(_temp);
-			setState(_state); //5314
+			setState(_state); //5214
 			return true;
 		}
 	}

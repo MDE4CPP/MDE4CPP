@@ -817,7 +817,7 @@ Any ProtocolStateMachineImpl::eGet(int featureID, bool resolve, bool coreType) c
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //18865
+			return eAny(tempList); //18765
 		}
 	}
 	return StateMachineImpl::eGet(featureID, resolve, coreType);
@@ -827,7 +827,7 @@ bool ProtocolStateMachineImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::PROTOCOLSTATEMACHINE_ATTRIBUTE_CONFORMANCE:
-			return getConformance() != nullptr; //18865
+			return getConformance() != nullptr; //18765
 	}
 	return StateMachineImpl::internalEIsSet(featureID);
 }

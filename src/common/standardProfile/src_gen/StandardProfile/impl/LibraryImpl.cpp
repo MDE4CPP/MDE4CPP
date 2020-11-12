@@ -63,6 +63,7 @@ LibraryImpl::LibraryImpl(const LibraryImpl & obj):LibraryImpl()
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Library "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	instantiate();
 }
 
 std::shared_ptr<ecore::EObject>  LibraryImpl::copy() const
@@ -79,7 +80,8 @@ std::shared_ptr<uml::Class> LibraryImpl::getMetaClass()
 }
 
 void LibraryImpl::instantiate()
-{	
+{   
+	FileImpl::instantiate();
 	
 }
 

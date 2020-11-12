@@ -63,6 +63,7 @@ SourceImpl::SourceImpl(const SourceImpl & obj):SourceImpl()
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Source "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	instantiate();
 }
 
 std::shared_ptr<ecore::EObject>  SourceImpl::copy() const
@@ -79,7 +80,8 @@ std::shared_ptr<uml::Class> SourceImpl::getMetaClass()
 }
 
 void SourceImpl::instantiate()
-{	
+{   
+	FileImpl::instantiate();
 	
 }
 

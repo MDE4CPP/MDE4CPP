@@ -13,13 +13,12 @@
 //Model includes
 #include "../ActivityGroup.hpp"
 
-#include "uml/impl/ActivityContentImpl.hpp"
 #include "uml/impl/NamedElementImpl.hpp"
 
 //*********************************
 namespace uml 
 {
-	class ActivityGroupImpl : virtual public ActivityContentImpl, virtual public NamedElementImpl, virtual public ActivityGroup 
+	class ActivityGroupImpl : virtual public NamedElementImpl, virtual public ActivityGroup 
 	{
 		public: 
 			ActivityGroupImpl(const ActivityGroupImpl & obj);
@@ -59,6 +58,16 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
+			/*!
+			The Activity that directly or indirectly contains this ActivityGroup.
+			result = (if superGroup<>null then superGroup.containingActivity()
+			else inActivity
+			endif)
+			<p>From package UML::Activities.</p>
+			*/
+			 
+			virtual std::shared_ptr<uml::Activity> containingActivity() ;
+			
 			/*!
 			All containedNodes and containeEdges of an ActivityGroup must be in the same Activity as the group.
 			containedNode->forAll(activity = self.containingActivity()) and 

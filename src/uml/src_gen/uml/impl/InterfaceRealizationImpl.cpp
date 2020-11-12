@@ -389,9 +389,9 @@ Any InterfaceRealizationImpl::eGet(int featureID, bool resolve, bool coreType) c
 	switch(featureID)
 	{
 		case uml::UmlPackage::INTERFACEREALIZATION_ATTRIBUTE_CONTRACT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getContract())); //12718
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getContract())); //12618
 		case uml::UmlPackage::INTERFACEREALIZATION_ATTRIBUTE_IMPLEMENTINGCLASSIFIER:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getImplementingClassifier().lock())); //12719
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getImplementingClassifier().lock())); //12619
 	}
 	return RealizationImpl::eGet(featureID, resolve, coreType);
 }
@@ -400,9 +400,9 @@ bool InterfaceRealizationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::INTERFACEREALIZATION_ATTRIBUTE_CONTRACT:
-			return getContract() != nullptr; //12718
+			return getContract() != nullptr; //12618
 		case uml::UmlPackage::INTERFACEREALIZATION_ATTRIBUTE_IMPLEMENTINGCLASSIFIER:
-			return getImplementingClassifier().lock() != nullptr; //12719
+			return getImplementingClassifier().lock() != nullptr; //12619
 	}
 	return RealizationImpl::internalEIsSet(featureID);
 }
@@ -415,7 +415,7 @@ bool InterfaceRealizationImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Interface> _contract = std::dynamic_pointer_cast<uml::Interface>(_temp);
-			setContract(_contract); //12718
+			setContract(_contract); //12618
 			return true;
 		}
 		case uml::UmlPackage::INTERFACEREALIZATION_ATTRIBUTE_IMPLEMENTINGCLASSIFIER:
@@ -423,7 +423,7 @@ bool InterfaceRealizationImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::BehavioredClassifier> _implementingClassifier = std::dynamic_pointer_cast<uml::BehavioredClassifier>(_temp);
-			setImplementingClassifier(_implementingClassifier); //12719
+			setImplementingClassifier(_implementingClassifier); //12619
 			return true;
 		}
 	}

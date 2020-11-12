@@ -285,9 +285,9 @@ Any ProtocolConformanceImpl::eGet(int featureID, bool resolve, bool coreType) co
 	switch(featureID)
 	{
 		case uml::UmlPackage::PROTOCOLCONFORMANCE_ATTRIBUTE_GENERALMACHINE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getGeneralMachine())); //1876
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getGeneralMachine())); //1866
 		case uml::UmlPackage::PROTOCOLCONFORMANCE_ATTRIBUTE_SPECIFICMACHINE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSpecificMachine().lock())); //1877
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSpecificMachine().lock())); //1867
 	}
 	return DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
 }
@@ -296,9 +296,9 @@ bool ProtocolConformanceImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::PROTOCOLCONFORMANCE_ATTRIBUTE_GENERALMACHINE:
-			return getGeneralMachine() != nullptr; //1876
+			return getGeneralMachine() != nullptr; //1866
 		case uml::UmlPackage::PROTOCOLCONFORMANCE_ATTRIBUTE_SPECIFICMACHINE:
-			return getSpecificMachine().lock() != nullptr; //1877
+			return getSpecificMachine().lock() != nullptr; //1867
 	}
 	return DirectedRelationshipImpl::internalEIsSet(featureID);
 }
@@ -311,7 +311,7 @@ bool ProtocolConformanceImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ProtocolStateMachine> _generalMachine = std::dynamic_pointer_cast<uml::ProtocolStateMachine>(_temp);
-			setGeneralMachine(_generalMachine); //1876
+			setGeneralMachine(_generalMachine); //1866
 			return true;
 		}
 		case uml::UmlPackage::PROTOCOLCONFORMANCE_ATTRIBUTE_SPECIFICMACHINE:
@@ -319,7 +319,7 @@ bool ProtocolConformanceImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ProtocolStateMachine> _specificMachine = std::dynamic_pointer_cast<uml::ProtocolStateMachine>(_temp);
-			setSpecificMachine(_specificMachine); //1877
+			setSpecificMachine(_specificMachine); //1867
 			return true;
 		}
 	}

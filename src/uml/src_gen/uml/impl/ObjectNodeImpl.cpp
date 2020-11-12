@@ -456,16 +456,16 @@ Any ObjectNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //16121
+			return eAny(tempList); //16021
 		}
 		case uml::UmlPackage::OBJECTNODE_ATTRIBUTE_ISCONTROLTYPE:
-			return eAny(getIsControlType()); //16122
+			return eAny(getIsControlType()); //16022
 		case uml::UmlPackage::OBJECTNODE_ATTRIBUTE_ORDERING:
-			return eAny(getOrdering()); //16123
+			return eAny(getOrdering()); //16023
 		case uml::UmlPackage::OBJECTNODE_ATTRIBUTE_SELECTION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSelection())); //16124
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSelection())); //16024
 		case uml::UmlPackage::OBJECTNODE_ATTRIBUTE_UPPERBOUND:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getUpperBound())); //16125
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getUpperBound())); //16025
 	}
 	Any result;
 	result = ActivityNodeImpl::eGet(featureID, resolve, coreType);
@@ -481,15 +481,15 @@ bool ObjectNodeImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::OBJECTNODE_ATTRIBUTE_INSTATE:
-			return getInState() != nullptr; //16121
+			return getInState() != nullptr; //16021
 		case uml::UmlPackage::OBJECTNODE_ATTRIBUTE_ISCONTROLTYPE:
-			return getIsControlType() != false; //16122
+			return getIsControlType() != false; //16022
 		case uml::UmlPackage::OBJECTNODE_ATTRIBUTE_ORDERING:
-			return m_ordering != ObjectNodeOrderingKind::FIFO;; //16123
+			return m_ordering != ObjectNodeOrderingKind::FIFO;; //16023
 		case uml::UmlPackage::OBJECTNODE_ATTRIBUTE_SELECTION:
-			return getSelection() != nullptr; //16124
+			return getSelection() != nullptr; //16024
 		case uml::UmlPackage::OBJECTNODE_ATTRIBUTE_UPPERBOUND:
-			return getUpperBound() != nullptr; //16125
+			return getUpperBound() != nullptr; //16025
 	}
 	bool result = false;
 	result = ActivityNodeImpl::internalEIsSet(featureID);
@@ -544,14 +544,14 @@ bool ObjectNodeImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _isControlType = newValue->get<bool>();
-			setIsControlType(_isControlType); //16122
+			setIsControlType(_isControlType); //16022
 			return true;
 		}
 		case uml::UmlPackage::OBJECTNODE_ATTRIBUTE_ORDERING:
 		{
 			// BOOST CAST
 			uml::ObjectNodeOrderingKind _ordering = newValue->get<uml::ObjectNodeOrderingKind>();
-			setOrdering(_ordering); //16123
+			setOrdering(_ordering); //16023
 			return true;
 		}
 		case uml::UmlPackage::OBJECTNODE_ATTRIBUTE_SELECTION:
@@ -559,7 +559,7 @@ bool ObjectNodeImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Behavior> _selection = std::dynamic_pointer_cast<uml::Behavior>(_temp);
-			setSelection(_selection); //16124
+			setSelection(_selection); //16024
 			return true;
 		}
 		case uml::UmlPackage::OBJECTNODE_ATTRIBUTE_UPPERBOUND:
@@ -567,7 +567,7 @@ bool ObjectNodeImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ValueSpecification> _upperBound = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
-			setUpperBound(_upperBound); //16125
+			setUpperBound(_upperBound); //16025
 			return true;
 		}
 	}
@@ -744,7 +744,6 @@ void ObjectNodeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler>
 	ActivityNodeImpl::saveContent(saveHandler);
 	TypedElementImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);

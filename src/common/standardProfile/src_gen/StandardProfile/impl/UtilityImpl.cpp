@@ -63,6 +63,7 @@ UtilityImpl::UtilityImpl(const UtilityImpl & obj):UtilityImpl()
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Utility "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	instantiate();
 }
 
 std::shared_ptr<ecore::EObject>  UtilityImpl::copy() const
@@ -79,7 +80,7 @@ std::shared_ptr<uml::Class> UtilityImpl::getMetaClass()
 }
 
 void UtilityImpl::instantiate()
-{	
+{   
 	
 }
 

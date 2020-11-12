@@ -444,7 +444,7 @@ Any DeploymentImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //7017
+			return eAny(tempList); //6917
 		}
 		case uml::UmlPackage::DEPLOYMENT_ATTRIBUTE_DEPLOYEDARTIFACT:
 		{
@@ -456,10 +456,10 @@ Any DeploymentImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //7018
+			return eAny(tempList); //6918
 		}
 		case uml::UmlPackage::DEPLOYMENT_ATTRIBUTE_LOCATION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getLocation().lock())); //7019
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getLocation().lock())); //6919
 	}
 	return DependencyImpl::eGet(featureID, resolve, coreType);
 }
@@ -468,11 +468,11 @@ bool DeploymentImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::DEPLOYMENT_ATTRIBUTE_CONFIGURATION:
-			return getConfiguration() != nullptr; //7017
+			return getConfiguration() != nullptr; //6917
 		case uml::UmlPackage::DEPLOYMENT_ATTRIBUTE_DEPLOYEDARTIFACT:
-			return getDeployedArtifact() != nullptr; //7018
+			return getDeployedArtifact() != nullptr; //6918
 		case uml::UmlPackage::DEPLOYMENT_ATTRIBUTE_LOCATION:
-			return getLocation().lock() != nullptr; //7019
+			return getLocation().lock() != nullptr; //6919
 	}
 	return DependencyImpl::internalEIsSet(featureID);
 }
@@ -557,7 +557,7 @@ bool DeploymentImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::DeploymentTarget> _location = std::dynamic_pointer_cast<uml::DeploymentTarget>(_temp);
-			setLocation(_location); //7019
+			setLocation(_location); //6919
 			return true;
 		}
 	}

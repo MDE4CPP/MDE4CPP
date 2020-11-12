@@ -133,7 +133,7 @@ std::shared_ptr<uml::Behavior> RedefinitionBasedDispatchStrategyImpl::retrieveMe
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		std::shared_ptr<uml::Behavior> method = nullptr;
+		std::shared_ptr<uml::Behavior> method = DispatchStrategyImpl::retrieveMethod(object, operation);
 	unsigned int i = 0;
 	while(method == nullptr && (i < object->getTypes()->size()))
 	{

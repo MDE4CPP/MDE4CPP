@@ -750,9 +750,9 @@ Any OpaqueBehaviorImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::OPAQUEBEHAVIOR_ATTRIBUTE_BODY:
-			return eAny(getBody()); //16661
+			return eAny(getBody()); //16561
 		case uml::UmlPackage::OPAQUEBEHAVIOR_ATTRIBUTE_LANGUAGE:
-			return eAny(getLanguage()); //16662
+			return eAny(getLanguage()); //16562
 	}
 	return BehaviorImpl::eGet(featureID, resolve, coreType);
 }
@@ -761,9 +761,9 @@ bool OpaqueBehaviorImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::OPAQUEBEHAVIOR_ATTRIBUTE_BODY:
-			return !getBody()->empty(); //16661
+			return !getBody()->empty(); //16561
 		case uml::UmlPackage::OPAQUEBEHAVIOR_ATTRIBUTE_LANGUAGE:
-			return !getLanguage()->empty(); //16662
+			return !getLanguage()->empty(); //16562
 	}
 	return BehaviorImpl::internalEIsSet(featureID);
 }

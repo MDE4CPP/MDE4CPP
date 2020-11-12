@@ -63,6 +63,7 @@ ExecutableImpl::ExecutableImpl(const ExecutableImpl & obj):ExecutableImpl()
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Executable "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	instantiate();
 }
 
 std::shared_ptr<ecore::EObject>  ExecutableImpl::copy() const
@@ -79,7 +80,8 @@ std::shared_ptr<uml::Class> ExecutableImpl::getMetaClass()
 }
 
 void ExecutableImpl::instantiate()
-{	
+{   
+	FileImpl::instantiate();
 	
 }
 

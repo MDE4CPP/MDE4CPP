@@ -458,7 +458,7 @@ Any CreateLinkObjectActionImpl::eGet(int featureID, bool resolve, bool coreType)
 	switch(featureID)
 	{
 		case uml::UmlPackage::CREATELINKOBJECTACTION_ATTRIBUTE_RESULT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //6329
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //6229
 	}
 	return CreateLinkActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -467,7 +467,7 @@ bool CreateLinkObjectActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::CREATELINKOBJECTACTION_ATTRIBUTE_RESULT:
-			return getResult() != nullptr; //6329
+			return getResult() != nullptr; //6229
 	}
 	return CreateLinkActionImpl::internalEIsSet(featureID);
 }
@@ -480,7 +480,7 @@ bool CreateLinkObjectActionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::OutputPin> _result = std::dynamic_pointer_cast<uml::OutputPin>(_temp);
-			setResult(_result); //6329
+			setResult(_result); //6229
 			return true;
 		}
 	}
@@ -568,7 +568,6 @@ void CreateLinkObjectActionImpl::save(std::shared_ptr<persistence::interfaces::X
 	
 	ActivityNodeImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);

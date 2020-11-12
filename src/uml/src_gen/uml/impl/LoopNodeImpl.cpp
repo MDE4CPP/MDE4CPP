@@ -878,7 +878,7 @@ Any LoopNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //14544
+			return eAny(tempList); //14444
 		}
 		case uml::UmlPackage::LOOPNODE_ATTRIBUTE_BODYPART:
 		{
@@ -890,12 +890,12 @@ Any LoopNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //14545
+			return eAny(tempList); //14445
 		}
 		case uml::UmlPackage::LOOPNODE_ATTRIBUTE_DECIDER:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDecider())); //14546
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDecider())); //14446
 		case uml::UmlPackage::LOOPNODE_ATTRIBUTE_ISTESTEDFIRST:
-			return eAny(getIsTestedFirst()); //14547
+			return eAny(getIsTestedFirst()); //14447
 		case uml::UmlPackage::LOOPNODE_ATTRIBUTE_LOOPVARIABLE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -906,7 +906,7 @@ Any LoopNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //14548
+			return eAny(tempList); //14448
 		}
 		case uml::UmlPackage::LOOPNODE_ATTRIBUTE_LOOPVARIABLEINPUT:
 		{
@@ -918,7 +918,7 @@ Any LoopNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //14549
+			return eAny(tempList); //14449
 		}
 		case uml::UmlPackage::LOOPNODE_ATTRIBUTE_RESULT:
 		{
@@ -930,7 +930,7 @@ Any LoopNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //14550
+			return eAny(tempList); //14450
 		}
 		case uml::UmlPackage::LOOPNODE_ATTRIBUTE_SETUPPART:
 		{
@@ -942,7 +942,7 @@ Any LoopNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //14551
+			return eAny(tempList); //14451
 		}
 		case uml::UmlPackage::LOOPNODE_ATTRIBUTE_TEST:
 		{
@@ -954,7 +954,7 @@ Any LoopNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //14552
+			return eAny(tempList); //14452
 		}
 	}
 	return StructuredActivityNodeImpl::eGet(featureID, resolve, coreType);
@@ -964,23 +964,23 @@ bool LoopNodeImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::LOOPNODE_ATTRIBUTE_BODYOUTPUT:
-			return getBodyOutput() != nullptr; //14544
+			return getBodyOutput() != nullptr; //14444
 		case uml::UmlPackage::LOOPNODE_ATTRIBUTE_BODYPART:
-			return getBodyPart() != nullptr; //14545
+			return getBodyPart() != nullptr; //14445
 		case uml::UmlPackage::LOOPNODE_ATTRIBUTE_DECIDER:
-			return getDecider() != nullptr; //14546
+			return getDecider() != nullptr; //14446
 		case uml::UmlPackage::LOOPNODE_ATTRIBUTE_ISTESTEDFIRST:
-			return getIsTestedFirst() != false; //14547
+			return getIsTestedFirst() != false; //14447
 		case uml::UmlPackage::LOOPNODE_ATTRIBUTE_LOOPVARIABLE:
-			return getLoopVariable() != nullptr; //14548
+			return getLoopVariable() != nullptr; //14448
 		case uml::UmlPackage::LOOPNODE_ATTRIBUTE_LOOPVARIABLEINPUT:
-			return getLoopVariableInput() != nullptr; //14549
+			return getLoopVariableInput() != nullptr; //14449
 		case uml::UmlPackage::LOOPNODE_ATTRIBUTE_RESULT:
-			return getResult() != nullptr; //14550
+			return getResult() != nullptr; //14450
 		case uml::UmlPackage::LOOPNODE_ATTRIBUTE_SETUPPART:
-			return getSetupPart() != nullptr; //14551
+			return getSetupPart() != nullptr; //14451
 		case uml::UmlPackage::LOOPNODE_ATTRIBUTE_TEST:
-			return getTest() != nullptr; //14552
+			return getTest() != nullptr; //14452
 	}
 	return StructuredActivityNodeImpl::internalEIsSet(featureID);
 }
@@ -1065,14 +1065,14 @@ bool LoopNodeImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::OutputPin> _decider = std::dynamic_pointer_cast<uml::OutputPin>(_temp);
-			setDecider(_decider); //14546
+			setDecider(_decider); //14446
 			return true;
 		}
 		case uml::UmlPackage::LOOPNODE_ATTRIBUTE_ISTESTEDFIRST:
 		{
 			// BOOST CAST
 			bool _isTestedFirst = newValue->get<bool>();
-			setIsTestedFirst(_isTestedFirst); //14547
+			setIsTestedFirst(_isTestedFirst); //14447
 			return true;
 		}
 		case uml::UmlPackage::LOOPNODE_ATTRIBUTE_LOOPVARIABLE:
@@ -1499,7 +1499,6 @@ void LoopNodeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> s
 	
 	ActivityNodeImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);

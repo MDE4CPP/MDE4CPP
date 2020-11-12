@@ -12,7 +12,6 @@
 #include "uml/impl/ActionExecutionSpecificationImpl.hpp"
 #include "uml/impl/ActionInputPinImpl.hpp"
 #include "uml/impl/ActivityImpl.hpp"
-#include "uml/impl/ActivityContentImpl.hpp"
 #include "uml/impl/ActivityEdgeImpl.hpp"
 #include "uml/impl/ActivityFinalNodeImpl.hpp"
 #include "uml/impl/ActivityGroupImpl.hpp"

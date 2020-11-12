@@ -529,7 +529,7 @@ Any ElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //820
+			return eAny(tempList); //810
 		}
 		case uml::UmlPackage::ELEMENT_ATTRIBUTE_OWNEDELEMENT:
 		{
@@ -541,10 +541,10 @@ Any ElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //821
+			return eAny(tempList); //811
 		}
 		case uml::UmlPackage::ELEMENT_ATTRIBUTE_OWNER:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOwner().lock())); //822
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOwner().lock())); //812
 	}
 	return ObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -553,11 +553,11 @@ bool ElementImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::ELEMENT_ATTRIBUTE_OWNEDCOMMENT:
-			return getOwnedComment() != nullptr; //820
+			return getOwnedComment() != nullptr; //810
 		case uml::UmlPackage::ELEMENT_ATTRIBUTE_OWNEDELEMENT:
-			return getOwnedElement() != nullptr; //821
+			return getOwnedElement() != nullptr; //811
 		case uml::UmlPackage::ELEMENT_ATTRIBUTE_OWNER:
-			return getOwner().lock() != nullptr; //822
+			return getOwner().lock() != nullptr; //812
 	}
 	return ObjectImpl::internalEIsSet(featureID);
 }

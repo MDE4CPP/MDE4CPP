@@ -63,6 +63,7 @@ SpecificationImpl::SpecificationImpl(const SpecificationImpl & obj):Specificatio
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Specification "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	instantiate();
 }
 
 std::shared_ptr<ecore::EObject>  SpecificationImpl::copy() const
@@ -79,7 +80,7 @@ std::shared_ptr<uml::Class> SpecificationImpl::getMetaClass()
 }
 
 void SpecificationImpl::instantiate()
-{	
+{   
 	
 }
 

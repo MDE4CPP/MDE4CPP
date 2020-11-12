@@ -431,7 +431,6 @@ void ClearVariableActionImpl::save(std::shared_ptr<persistence::interfaces::XSav
 	
 	ActivityNodeImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);

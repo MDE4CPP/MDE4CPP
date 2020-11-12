@@ -452,9 +452,9 @@ Any SendSignalActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::SENDSIGNALACTION_ATTRIBUTE_SIGNAL:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSignal())); //21429
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSignal())); //21329
 		case uml::UmlPackage::SENDSIGNALACTION_ATTRIBUTE_TARGET:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getTarget())); //21430
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getTarget())); //21330
 	}
 	return InvocationActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -463,9 +463,9 @@ bool SendSignalActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::SENDSIGNALACTION_ATTRIBUTE_SIGNAL:
-			return getSignal() != nullptr; //21429
+			return getSignal() != nullptr; //21329
 		case uml::UmlPackage::SENDSIGNALACTION_ATTRIBUTE_TARGET:
-			return getTarget() != nullptr; //21430
+			return getTarget() != nullptr; //21330
 	}
 	return InvocationActionImpl::internalEIsSet(featureID);
 }
@@ -478,7 +478,7 @@ bool SendSignalActionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Signal> _signal = std::dynamic_pointer_cast<uml::Signal>(_temp);
-			setSignal(_signal); //21429
+			setSignal(_signal); //21329
 			return true;
 		}
 		case uml::UmlPackage::SENDSIGNALACTION_ATTRIBUTE_TARGET:
@@ -486,7 +486,7 @@ bool SendSignalActionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::InputPin> _target = std::dynamic_pointer_cast<uml::InputPin>(_temp);
-			setTarget(_target); //21430
+			setTarget(_target); //21330
 			return true;
 		}
 	}
@@ -603,7 +603,6 @@ void SendSignalActionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHa
 	
 	ActivityNodeImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);

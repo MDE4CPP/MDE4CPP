@@ -393,7 +393,7 @@ Any InstanceSpecificationImpl::eGet(int featureID, bool resolve, bool coreType) 
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //11814
+			return eAny(tempList); //11714
 		}
 		case uml::UmlPackage::INSTANCESPECIFICATION_ATTRIBUTE_SLOT:
 		{
@@ -405,10 +405,10 @@ Any InstanceSpecificationImpl::eGet(int featureID, bool resolve, bool coreType) 
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //11815
+			return eAny(tempList); //11715
 		}
 		case uml::UmlPackage::INSTANCESPECIFICATION_ATTRIBUTE_SPECIFICATION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSpecification())); //11816
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSpecification())); //11716
 	}
 	Any result;
 	result = DeployedArtifactImpl::eGet(featureID, resolve, coreType);
@@ -429,11 +429,11 @@ bool InstanceSpecificationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::INSTANCESPECIFICATION_ATTRIBUTE_CLASSIFIER:
-			return getClassifier() != nullptr; //11814
+			return getClassifier() != nullptr; //11714
 		case uml::UmlPackage::INSTANCESPECIFICATION_ATTRIBUTE_SLOT:
-			return getSlot() != nullptr; //11815
+			return getSlot() != nullptr; //11715
 		case uml::UmlPackage::INSTANCESPECIFICATION_ATTRIBUTE_SPECIFICATION:
-			return getSpecification() != nullptr; //11816
+			return getSpecification() != nullptr; //11716
 	}
 	bool result = false;
 	result = DeployedArtifactImpl::internalEIsSet(featureID);
@@ -530,7 +530,7 @@ bool InstanceSpecificationImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ValueSpecification> _specification = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
-			setSpecification(_specification); //11816
+			setSpecification(_specification); //11716
 			return true;
 		}
 	}

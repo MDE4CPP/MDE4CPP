@@ -440,9 +440,9 @@ Any AddVariableValueActionImpl::eGet(int featureID, bool resolve, bool coreType)
 	switch(featureID)
 	{
 		case uml::UmlPackage::ADDVARIABLEVALUEACTION_ATTRIBUTE_INSERTAT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getInsertAt())); //1729
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getInsertAt())); //1629
 		case uml::UmlPackage::ADDVARIABLEVALUEACTION_ATTRIBUTE_ISREPLACEALL:
-			return eAny(getIsReplaceAll()); //1730
+			return eAny(getIsReplaceAll()); //1630
 	}
 	return WriteVariableActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -451,9 +451,9 @@ bool AddVariableValueActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::ADDVARIABLEVALUEACTION_ATTRIBUTE_INSERTAT:
-			return getInsertAt() != nullptr; //1729
+			return getInsertAt() != nullptr; //1629
 		case uml::UmlPackage::ADDVARIABLEVALUEACTION_ATTRIBUTE_ISREPLACEALL:
-			return getIsReplaceAll() != false; //1730
+			return getIsReplaceAll() != false; //1630
 	}
 	return WriteVariableActionImpl::internalEIsSet(featureID);
 }
@@ -466,14 +466,14 @@ bool AddVariableValueActionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::InputPin> _insertAt = std::dynamic_pointer_cast<uml::InputPin>(_temp);
-			setInsertAt(_insertAt); //1729
+			setInsertAt(_insertAt); //1629
 			return true;
 		}
 		case uml::UmlPackage::ADDVARIABLEVALUEACTION_ATTRIBUTE_ISREPLACEALL:
 		{
 			// BOOST CAST
 			bool _isReplaceAll = newValue->get<bool>();
-			setIsReplaceAll(_isReplaceAll); //1730
+			setIsReplaceAll(_isReplaceAll); //1630
 			return true;
 		}
 	}
@@ -580,7 +580,6 @@ void AddVariableValueActionImpl::save(std::shared_ptr<persistence::interfaces::X
 	
 	ActivityNodeImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);

@@ -49,10 +49,10 @@
 #include "PSCS/Semantics/Values/impl/ValuesFactoryImpl.hpp"
 #include "PSCS/Semantics/Values/impl/ValuesPackageImpl.hpp"
 
-#include "PSCS/Semantics/SemanticsFactory.hpp"
-#include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "PSCS/PSCSFactory.hpp"
 #include "PSCS/PSCSPackage.hpp"
+#include "PSCS/Semantics/SemanticsFactory.hpp"
+#include "PSCS/Semantics/SemanticsPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"

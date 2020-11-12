@@ -300,21 +300,6 @@ std::shared_ptr<ecore::EOperation> UmlPackageImpl::getActivity_Operation_maximum
 
 // End Class Activity
 
-// Begin Class ActivityContent
-std::shared_ptr<ecore::EClass> UmlPackageImpl::getActivityContent_Class() const
-{
-	return m_activityContent_Class;
-}
-
-
-
-std::shared_ptr<ecore::EOperation> UmlPackageImpl::getActivityContent_Operation_containingActivity() const
-{
-	return m_activityContent_Operation_containingActivity;
-}
-
-// End Class ActivityContent
-
 // Begin Class ActivityEdge
 std::shared_ptr<ecore::EClass> UmlPackageImpl::getActivityEdge_Class() const
 {
@@ -409,6 +394,10 @@ std::shared_ptr<ecore::EReference> UmlPackageImpl::getActivityGroup_Attribute_su
 	return m_activityGroup_Attribute_superGroup;
 }
 
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getActivityGroup_Operation_containingActivity() const
+{
+	return m_activityGroup_Operation_containingActivity;
+}
 std::shared_ptr<ecore::EOperation> UmlPackageImpl::getActivityGroup_Operation_nodes_and_edges_EDiagnosticChain_EMap() const
 {
 	return m_activityGroup_Operation_nodes_and_edges_EDiagnosticChain_EMap;
@@ -460,6 +449,10 @@ std::shared_ptr<ecore::EReference> UmlPackageImpl::getActivityNode_Attribute_red
 	return m_activityNode_Attribute_redefinedNode;
 }
 
+std::shared_ptr<ecore::EOperation> UmlPackageImpl::getActivityNode_Operation_containingActivity() const
+{
+	return m_activityNode_Operation_containingActivity;
+}
 
 // End Class ActivityNode
 

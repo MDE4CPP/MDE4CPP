@@ -739,12 +739,12 @@ Any ConditionalNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //5044
+			return eAny(tempList); //4944
 		}
 		case uml::UmlPackage::CONDITIONALNODE_ATTRIBUTE_ISASSURED:
-			return eAny(getIsAssured()); //5045
+			return eAny(getIsAssured()); //4945
 		case uml::UmlPackage::CONDITIONALNODE_ATTRIBUTE_ISDETERMINATE:
-			return eAny(getIsDeterminate()); //5046
+			return eAny(getIsDeterminate()); //4946
 		case uml::UmlPackage::CONDITIONALNODE_ATTRIBUTE_RESULT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -755,7 +755,7 @@ Any ConditionalNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //5047
+			return eAny(tempList); //4947
 		}
 	}
 	return StructuredActivityNodeImpl::eGet(featureID, resolve, coreType);
@@ -765,13 +765,13 @@ bool ConditionalNodeImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::CONDITIONALNODE_ATTRIBUTE_CLAUSE:
-			return getClause() != nullptr; //5044
+			return getClause() != nullptr; //4944
 		case uml::UmlPackage::CONDITIONALNODE_ATTRIBUTE_ISASSURED:
-			return getIsAssured() != false; //5045
+			return getIsAssured() != false; //4945
 		case uml::UmlPackage::CONDITIONALNODE_ATTRIBUTE_ISDETERMINATE:
-			return getIsDeterminate() != false; //5046
+			return getIsDeterminate() != false; //4946
 		case uml::UmlPackage::CONDITIONALNODE_ATTRIBUTE_RESULT:
-			return getResult() != nullptr; //5047
+			return getResult() != nullptr; //4947
 	}
 	return StructuredActivityNodeImpl::internalEIsSet(featureID);
 }
@@ -819,14 +819,14 @@ bool ConditionalNodeImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _isAssured = newValue->get<bool>();
-			setIsAssured(_isAssured); //5045
+			setIsAssured(_isAssured); //4945
 			return true;
 		}
 		case uml::UmlPackage::CONDITIONALNODE_ATTRIBUTE_ISDETERMINATE:
 		{
 			// BOOST CAST
 			bool _isDeterminate = newValue->get<bool>();
-			setIsDeterminate(_isDeterminate); //5046
+			setIsDeterminate(_isDeterminate); //4946
 			return true;
 		}
 		case uml::UmlPackage::CONDITIONALNODE_ATTRIBUTE_RESULT:
@@ -996,7 +996,6 @@ void ConditionalNodeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHan
 	
 	ActivityNodeImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);

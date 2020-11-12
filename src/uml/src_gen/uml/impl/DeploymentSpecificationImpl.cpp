@@ -624,11 +624,11 @@ Any DeploymentSpecificationImpl::eGet(int featureID, bool resolve, bool coreType
 	switch(featureID)
 	{
 		case uml::UmlPackage::DEPLOYMENTSPECIFICATION_ATTRIBUTE_DEPLOYMENT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDeployment().lock())); //7145
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDeployment().lock())); //7045
 		case uml::UmlPackage::DEPLOYMENTSPECIFICATION_ATTRIBUTE_DEPLOYMENTLOCATION:
-			return eAny(getDeploymentLocation()); //7143
+			return eAny(getDeploymentLocation()); //7043
 		case uml::UmlPackage::DEPLOYMENTSPECIFICATION_ATTRIBUTE_EXECUTIONLOCATION:
-			return eAny(getExecutionLocation()); //7144
+			return eAny(getExecutionLocation()); //7044
 	}
 	return ArtifactImpl::eGet(featureID, resolve, coreType);
 }
@@ -637,11 +637,11 @@ bool DeploymentSpecificationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::DEPLOYMENTSPECIFICATION_ATTRIBUTE_DEPLOYMENT:
-			return getDeployment().lock() != nullptr; //7145
+			return getDeployment().lock() != nullptr; //7045
 		case uml::UmlPackage::DEPLOYMENTSPECIFICATION_ATTRIBUTE_DEPLOYMENTLOCATION:
-			return getDeploymentLocation() != ""; //7143
+			return getDeploymentLocation() != ""; //7043
 		case uml::UmlPackage::DEPLOYMENTSPECIFICATION_ATTRIBUTE_EXECUTIONLOCATION:
-			return getExecutionLocation() != ""; //7144
+			return getExecutionLocation() != ""; //7044
 	}
 	return ArtifactImpl::internalEIsSet(featureID);
 }
@@ -654,21 +654,21 @@ bool DeploymentSpecificationImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Deployment> _deployment = std::dynamic_pointer_cast<uml::Deployment>(_temp);
-			setDeployment(_deployment); //7145
+			setDeployment(_deployment); //7045
 			return true;
 		}
 		case uml::UmlPackage::DEPLOYMENTSPECIFICATION_ATTRIBUTE_DEPLOYMENTLOCATION:
 		{
 			// BOOST CAST
 			std::string _deploymentLocation = newValue->get<std::string>();
-			setDeploymentLocation(_deploymentLocation); //7143
+			setDeploymentLocation(_deploymentLocation); //7043
 			return true;
 		}
 		case uml::UmlPackage::DEPLOYMENTSPECIFICATION_ATTRIBUTE_EXECUTIONLOCATION:
 		{
 			// BOOST CAST
 			std::string _executionLocation = newValue->get<std::string>();
-			setExecutionLocation(_executionLocation); //7144
+			setExecutionLocation(_executionLocation); //7044
 			return true;
 		}
 	}

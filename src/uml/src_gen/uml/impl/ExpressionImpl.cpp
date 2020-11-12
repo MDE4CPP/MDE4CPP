@@ -350,10 +350,10 @@ Any ExpressionImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //9615
+			return eAny(tempList); //9515
 		}
 		case uml::UmlPackage::EXPRESSION_ATTRIBUTE_SYMBOL:
-			return eAny(getSymbol()); //9616
+			return eAny(getSymbol()); //9516
 	}
 	return ValueSpecificationImpl::eGet(featureID, resolve, coreType);
 }
@@ -362,9 +362,9 @@ bool ExpressionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::EXPRESSION_ATTRIBUTE_OPERAND:
-			return getOperand() != nullptr; //9615
+			return getOperand() != nullptr; //9515
 		case uml::UmlPackage::EXPRESSION_ATTRIBUTE_SYMBOL:
-			return getSymbol() != ""; //9616
+			return getSymbol() != ""; //9516
 	}
 	return ValueSpecificationImpl::internalEIsSet(featureID);
 }
@@ -412,7 +412,7 @@ bool ExpressionImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::string _symbol = newValue->get<std::string>();
-			setSymbol(_symbol); //9616
+			setSymbol(_symbol); //9516
 			return true;
 		}
 	}

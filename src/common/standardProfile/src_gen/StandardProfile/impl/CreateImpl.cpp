@@ -67,6 +67,7 @@ CreateImpl::CreateImpl(const CreateImpl & obj):CreateImpl()
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Create "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	instantiate();
 }
 
 std::shared_ptr<ecore::EObject>  CreateImpl::copy() const
@@ -83,7 +84,7 @@ std::shared_ptr<uml::Class> CreateImpl::getMetaClass()
 }
 
 void CreateImpl::instantiate()
-{	
+{   
 	
 	
 }

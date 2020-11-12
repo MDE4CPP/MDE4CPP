@@ -441,9 +441,9 @@ Any ValueSpecificationActionImpl::eGet(int featureID, bool resolve, bool coreTyp
 	switch(featureID)
 	{
 		case uml::UmlPackage::VALUESPECIFICATIONACTION_ATTRIBUTE_RESULT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //25227
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //25127
 		case uml::UmlPackage::VALUESPECIFICATIONACTION_ATTRIBUTE_VALUE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getValue())); //25228
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getValue())); //25128
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -452,9 +452,9 @@ bool ValueSpecificationActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::VALUESPECIFICATIONACTION_ATTRIBUTE_RESULT:
-			return getResult() != nullptr; //25227
+			return getResult() != nullptr; //25127
 		case uml::UmlPackage::VALUESPECIFICATIONACTION_ATTRIBUTE_VALUE:
-			return getValue() != nullptr; //25228
+			return getValue() != nullptr; //25128
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
@@ -467,7 +467,7 @@ bool ValueSpecificationActionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::OutputPin> _result = std::dynamic_pointer_cast<uml::OutputPin>(_temp);
-			setResult(_result); //25227
+			setResult(_result); //25127
 			return true;
 		}
 		case uml::UmlPackage::VALUESPECIFICATIONACTION_ATTRIBUTE_VALUE:
@@ -475,7 +475,7 @@ bool ValueSpecificationActionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ValueSpecification> _value = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
-			setValue(_value); //25228
+			setValue(_value); //25128
 			return true;
 		}
 	}
@@ -572,7 +572,6 @@ void ValueSpecificationActionImpl::save(std::shared_ptr<persistence::interfaces:
 	
 	ActivityNodeImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);

@@ -156,9 +156,9 @@ Any ArgumentImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::ARGUMENT_ATTRIBUTE_NAME:
-			return eAny(getName()); //200
+			return eAny(getName()); //190
 		case uml::UmlPackage::ARGUMENT_ATTRIBUTE_VALUE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getValue())); //201
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getValue())); //191
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -167,9 +167,9 @@ bool ArgumentImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::ARGUMENT_ATTRIBUTE_NAME:
-			return getName() != ""; //200
+			return getName() != ""; //190
 		case uml::UmlPackage::ARGUMENT_ATTRIBUTE_VALUE:
-			return getValue() != nullptr; //201
+			return getValue() != nullptr; //191
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
@@ -181,7 +181,7 @@ bool ArgumentImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::string _name = newValue->get<std::string>();
-			setName(_name); //200
+			setName(_name); //190
 			return true;
 		}
 		case uml::UmlPackage::ARGUMENT_ATTRIBUTE_VALUE:
@@ -189,7 +189,7 @@ bool ArgumentImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Object> _value = std::dynamic_pointer_cast<uml::Object>(_temp);
-			setValue(_value); //201
+			setValue(_value); //191
 			return true;
 		}
 	}

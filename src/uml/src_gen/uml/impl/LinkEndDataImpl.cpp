@@ -283,7 +283,7 @@ Any LinkEndDataImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::LINKENDDATA_ATTRIBUTE_END:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEnd())); //1363
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEnd())); //1353
 		case uml::UmlPackage::LINKENDDATA_ATTRIBUTE_QUALIFIER:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -294,10 +294,10 @@ Any LinkEndDataImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //1364
+			return eAny(tempList); //1354
 		}
 		case uml::UmlPackage::LINKENDDATA_ATTRIBUTE_VALUE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getValue())); //1365
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getValue())); //1355
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -306,11 +306,11 @@ bool LinkEndDataImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::LINKENDDATA_ATTRIBUTE_END:
-			return getEnd() != nullptr; //1363
+			return getEnd() != nullptr; //1353
 		case uml::UmlPackage::LINKENDDATA_ATTRIBUTE_QUALIFIER:
-			return getQualifier() != nullptr; //1364
+			return getQualifier() != nullptr; //1354
 		case uml::UmlPackage::LINKENDDATA_ATTRIBUTE_VALUE:
-			return getValue() != nullptr; //1365
+			return getValue() != nullptr; //1355
 	}
 	return ElementImpl::internalEIsSet(featureID);
 }
@@ -323,7 +323,7 @@ bool LinkEndDataImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Property> _end = std::dynamic_pointer_cast<uml::Property>(_temp);
-			setEnd(_end); //1363
+			setEnd(_end); //1353
 			return true;
 		}
 		case uml::UmlPackage::LINKENDDATA_ATTRIBUTE_QUALIFIER:
@@ -367,7 +367,7 @@ bool LinkEndDataImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::InputPin> _value = std::dynamic_pointer_cast<uml::InputPin>(_temp);
-			setValue(_value); //1365
+			setValue(_value); //1355
 			return true;
 		}
 	}

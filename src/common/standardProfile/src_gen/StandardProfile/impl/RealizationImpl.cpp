@@ -63,6 +63,7 @@ RealizationImpl::RealizationImpl(const RealizationImpl & obj):RealizationImpl()
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Realization "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	instantiate();
 }
 
 std::shared_ptr<ecore::EObject>  RealizationImpl::copy() const
@@ -79,7 +80,7 @@ std::shared_ptr<uml::Class> RealizationImpl::getMetaClass()
 }
 
 void RealizationImpl::instantiate()
-{	
+{   
 	
 }
 

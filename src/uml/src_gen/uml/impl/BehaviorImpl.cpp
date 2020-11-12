@@ -969,11 +969,11 @@ Any BehaviorImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::BEHAVIOR_ATTRIBUTE_BEHAVIOREDCLASSIFIER:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getBehavioredClassifier().lock())); //2460
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getBehavioredClassifier().lock())); //2360
 		case uml::UmlPackage::BEHAVIOR_ATTRIBUTE_CONTEXT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getContext())); //2453
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getContext())); //2353
 		case uml::UmlPackage::BEHAVIOR_ATTRIBUTE_ISREENTRANT:
-			return eAny(getIsReentrant()); //2454
+			return eAny(getIsReentrant()); //2354
 		case uml::UmlPackage::BEHAVIOR_ATTRIBUTE_OWNEDPARAMETER:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -984,7 +984,7 @@ Any BehaviorImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //2455
+			return eAny(tempList); //2355
 		}
 		case uml::UmlPackage::BEHAVIOR_ATTRIBUTE_OWNEDPARAMETERSET:
 		{
@@ -996,7 +996,7 @@ Any BehaviorImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //2456
+			return eAny(tempList); //2356
 		}
 		case uml::UmlPackage::BEHAVIOR_ATTRIBUTE_POSTCONDITION:
 		{
@@ -1008,7 +1008,7 @@ Any BehaviorImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //2457
+			return eAny(tempList); //2357
 		}
 		case uml::UmlPackage::BEHAVIOR_ATTRIBUTE_PRECONDITION:
 		{
@@ -1020,7 +1020,7 @@ Any BehaviorImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //2458
+			return eAny(tempList); //2358
 		}
 		case uml::UmlPackage::BEHAVIOR_ATTRIBUTE_REDEFINEDBEHAVIOR:
 		{
@@ -1032,10 +1032,10 @@ Any BehaviorImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //2459
+			return eAny(tempList); //2359
 		}
 		case uml::UmlPackage::BEHAVIOR_ATTRIBUTE_SPECIFICATION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSpecification())); //2452
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSpecification())); //2352
 	}
 	return ClassImpl::eGet(featureID, resolve, coreType);
 }
@@ -1044,23 +1044,23 @@ bool BehaviorImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::BEHAVIOR_ATTRIBUTE_BEHAVIOREDCLASSIFIER:
-			return getBehavioredClassifier().lock() != nullptr; //2460
+			return getBehavioredClassifier().lock() != nullptr; //2360
 		case uml::UmlPackage::BEHAVIOR_ATTRIBUTE_CONTEXT:
-			return getContext() != nullptr; //2453
+			return getContext() != nullptr; //2353
 		case uml::UmlPackage::BEHAVIOR_ATTRIBUTE_ISREENTRANT:
-			return getIsReentrant() != true; //2454
+			return getIsReentrant() != true; //2354
 		case uml::UmlPackage::BEHAVIOR_ATTRIBUTE_OWNEDPARAMETER:
-			return getOwnedParameter() != nullptr; //2455
+			return getOwnedParameter() != nullptr; //2355
 		case uml::UmlPackage::BEHAVIOR_ATTRIBUTE_OWNEDPARAMETERSET:
-			return getOwnedParameterSet() != nullptr; //2456
+			return getOwnedParameterSet() != nullptr; //2356
 		case uml::UmlPackage::BEHAVIOR_ATTRIBUTE_POSTCONDITION:
-			return getPostcondition() != nullptr; //2457
+			return getPostcondition() != nullptr; //2357
 		case uml::UmlPackage::BEHAVIOR_ATTRIBUTE_PRECONDITION:
-			return getPrecondition() != nullptr; //2458
+			return getPrecondition() != nullptr; //2358
 		case uml::UmlPackage::BEHAVIOR_ATTRIBUTE_REDEFINEDBEHAVIOR:
-			return getRedefinedBehavior() != nullptr; //2459
+			return getRedefinedBehavior() != nullptr; //2359
 		case uml::UmlPackage::BEHAVIOR_ATTRIBUTE_SPECIFICATION:
-			return getSpecification() != nullptr; //2452
+			return getSpecification() != nullptr; //2352
 	}
 	return ClassImpl::internalEIsSet(featureID);
 }
@@ -1073,7 +1073,7 @@ bool BehaviorImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::BehavioredClassifier> _behavioredClassifier = std::dynamic_pointer_cast<uml::BehavioredClassifier>(_temp);
-			setBehavioredClassifier(_behavioredClassifier); //2460
+			setBehavioredClassifier(_behavioredClassifier); //2360
 			return true;
 		}
 		case uml::UmlPackage::BEHAVIOR_ATTRIBUTE_CONTEXT:
@@ -1081,14 +1081,14 @@ bool BehaviorImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::BehavioredClassifier> _context = std::dynamic_pointer_cast<uml::BehavioredClassifier>(_temp);
-			setContext(_context); //2453
+			setContext(_context); //2353
 			return true;
 		}
 		case uml::UmlPackage::BEHAVIOR_ATTRIBUTE_ISREENTRANT:
 		{
 			// BOOST CAST
 			bool _isReentrant = newValue->get<bool>();
-			setIsReentrant(_isReentrant); //2454
+			setIsReentrant(_isReentrant); //2354
 			return true;
 		}
 		case uml::UmlPackage::BEHAVIOR_ATTRIBUTE_OWNEDPARAMETER:
@@ -1276,7 +1276,7 @@ bool BehaviorImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::BehavioralFeature> _specification = std::dynamic_pointer_cast<uml::BehavioralFeature>(_temp);
-			setSpecification(_specification); //2452
+			setSpecification(_specification); //2352
 			return true;
 		}
 	}

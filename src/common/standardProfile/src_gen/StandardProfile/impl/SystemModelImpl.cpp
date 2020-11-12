@@ -63,6 +63,7 @@ SystemModelImpl::SystemModelImpl(const SystemModelImpl & obj):SystemModelImpl()
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy SystemModel "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	instantiate();
 }
 
 std::shared_ptr<ecore::EObject>  SystemModelImpl::copy() const
@@ -79,7 +80,7 @@ std::shared_ptr<uml::Class> SystemModelImpl::getMetaClass()
 }
 
 void SystemModelImpl::instantiate()
-{	
+{   
 	
 }
 

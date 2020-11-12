@@ -445,11 +445,11 @@ Any DestroyObjectActionImpl::eGet(int featureID, bool resolve, bool coreType) co
 	switch(featureID)
 	{
 		case uml::UmlPackage::DESTROYOBJECTACTION_ATTRIBUTE_ISDESTROYLINKS:
-			return eAny(getIsDestroyLinks()); //7427
+			return eAny(getIsDestroyLinks()); //7327
 		case uml::UmlPackage::DESTROYOBJECTACTION_ATTRIBUTE_ISDESTROYOWNEDOBJECTS:
-			return eAny(getIsDestroyOwnedObjects()); //7428
+			return eAny(getIsDestroyOwnedObjects()); //7328
 		case uml::UmlPackage::DESTROYOBJECTACTION_ATTRIBUTE_TARGET:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getTarget())); //7429
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getTarget())); //7329
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -458,11 +458,11 @@ bool DestroyObjectActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::DESTROYOBJECTACTION_ATTRIBUTE_ISDESTROYLINKS:
-			return getIsDestroyLinks() != false; //7427
+			return getIsDestroyLinks() != false; //7327
 		case uml::UmlPackage::DESTROYOBJECTACTION_ATTRIBUTE_ISDESTROYOWNEDOBJECTS:
-			return getIsDestroyOwnedObjects() != false; //7428
+			return getIsDestroyOwnedObjects() != false; //7328
 		case uml::UmlPackage::DESTROYOBJECTACTION_ATTRIBUTE_TARGET:
-			return getTarget() != nullptr; //7429
+			return getTarget() != nullptr; //7329
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
@@ -474,14 +474,14 @@ bool DestroyObjectActionImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _isDestroyLinks = newValue->get<bool>();
-			setIsDestroyLinks(_isDestroyLinks); //7427
+			setIsDestroyLinks(_isDestroyLinks); //7327
 			return true;
 		}
 		case uml::UmlPackage::DESTROYOBJECTACTION_ATTRIBUTE_ISDESTROYOWNEDOBJECTS:
 		{
 			// BOOST CAST
 			bool _isDestroyOwnedObjects = newValue->get<bool>();
-			setIsDestroyOwnedObjects(_isDestroyOwnedObjects); //7428
+			setIsDestroyOwnedObjects(_isDestroyOwnedObjects); //7328
 			return true;
 		}
 		case uml::UmlPackage::DESTROYOBJECTACTION_ATTRIBUTE_TARGET:
@@ -489,7 +489,7 @@ bool DestroyObjectActionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::InputPin> _target = std::dynamic_pointer_cast<uml::InputPin>(_temp);
-			setTarget(_target); //7429
+			setTarget(_target); //7329
 			return true;
 		}
 	}
@@ -600,7 +600,6 @@ void DestroyObjectActionImpl::save(std::shared_ptr<persistence::interfaces::XSav
 	
 	ActivityNodeImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);

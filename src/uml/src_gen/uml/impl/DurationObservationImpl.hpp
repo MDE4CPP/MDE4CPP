@@ -77,7 +77,7 @@ namespace uml
 			<p>From package UML::Values.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<bool> > getFirstEvent() const ;
+			virtual std::shared_ptr<Bag<bool> > isFirstEvent() const ;
 			
 			
 			

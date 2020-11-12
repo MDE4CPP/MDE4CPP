@@ -531,12 +531,12 @@ Any ActivityPartitionImpl::eGet(int featureID, bool resolve, bool coreType) cons
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //1420
+			return eAny(tempList); //1320
 		}
 		case uml::UmlPackage::ACTIVITYPARTITION_ATTRIBUTE_ISDIMENSION:
-			return eAny(getIsDimension()); //1414
+			return eAny(getIsDimension()); //1314
 		case uml::UmlPackage::ACTIVITYPARTITION_ATTRIBUTE_ISEXTERNAL:
-			return eAny(getIsExternal()); //1415
+			return eAny(getIsExternal()); //1315
 		case uml::UmlPackage::ACTIVITYPARTITION_ATTRIBUTE_NODE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -547,10 +547,10 @@ Any ActivityPartitionImpl::eGet(int featureID, bool resolve, bool coreType) cons
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //1416
+			return eAny(tempList); //1316
 		}
 		case uml::UmlPackage::ACTIVITYPARTITION_ATTRIBUTE_REPRESENTS:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getRepresents())); //1417
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getRepresents())); //1317
 		case uml::UmlPackage::ACTIVITYPARTITION_ATTRIBUTE_SUBPARTITION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -561,10 +561,10 @@ Any ActivityPartitionImpl::eGet(int featureID, bool resolve, bool coreType) cons
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //1418
+			return eAny(tempList); //1318
 		}
 		case uml::UmlPackage::ACTIVITYPARTITION_ATTRIBUTE_SUPERPARTITION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSuperPartition().lock())); //1419
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSuperPartition().lock())); //1319
 	}
 	return ActivityGroupImpl::eGet(featureID, resolve, coreType);
 }
@@ -573,19 +573,19 @@ bool ActivityPartitionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::ACTIVITYPARTITION_ATTRIBUTE_EDGE:
-			return getEdge() != nullptr; //1420
+			return getEdge() != nullptr; //1320
 		case uml::UmlPackage::ACTIVITYPARTITION_ATTRIBUTE_ISDIMENSION:
-			return getIsDimension() != false; //1414
+			return getIsDimension() != false; //1314
 		case uml::UmlPackage::ACTIVITYPARTITION_ATTRIBUTE_ISEXTERNAL:
-			return getIsExternal() != false; //1415
+			return getIsExternal() != false; //1315
 		case uml::UmlPackage::ACTIVITYPARTITION_ATTRIBUTE_NODE:
-			return getNode() != nullptr; //1416
+			return getNode() != nullptr; //1316
 		case uml::UmlPackage::ACTIVITYPARTITION_ATTRIBUTE_REPRESENTS:
-			return getRepresents() != nullptr; //1417
+			return getRepresents() != nullptr; //1317
 		case uml::UmlPackage::ACTIVITYPARTITION_ATTRIBUTE_SUBPARTITION:
-			return getSubpartition() != nullptr; //1418
+			return getSubpartition() != nullptr; //1318
 		case uml::UmlPackage::ACTIVITYPARTITION_ATTRIBUTE_SUPERPARTITION:
-			return getSuperPartition().lock() != nullptr; //1419
+			return getSuperPartition().lock() != nullptr; //1319
 	}
 	return ActivityGroupImpl::internalEIsSet(featureID);
 }
@@ -633,14 +633,14 @@ bool ActivityPartitionImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _isDimension = newValue->get<bool>();
-			setIsDimension(_isDimension); //1414
+			setIsDimension(_isDimension); //1314
 			return true;
 		}
 		case uml::UmlPackage::ACTIVITYPARTITION_ATTRIBUTE_ISEXTERNAL:
 		{
 			// BOOST CAST
 			bool _isExternal = newValue->get<bool>();
-			setIsExternal(_isExternal); //1415
+			setIsExternal(_isExternal); //1315
 			return true;
 		}
 		case uml::UmlPackage::ACTIVITYPARTITION_ATTRIBUTE_NODE:
@@ -684,7 +684,7 @@ bool ActivityPartitionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Element> _represents = std::dynamic_pointer_cast<uml::Element>(_temp);
-			setRepresents(_represents); //1417
+			setRepresents(_represents); //1317
 			return true;
 		}
 		case uml::UmlPackage::ACTIVITYPARTITION_ATTRIBUTE_SUBPARTITION:
@@ -728,7 +728,7 @@ bool ActivityPartitionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ActivityPartition> _superPartition = std::dynamic_pointer_cast<uml::ActivityPartition>(_temp);
-			setSuperPartition(_superPartition); //1419
+			setSuperPartition(_superPartition); //1319
 			return true;
 		}
 	}
@@ -910,7 +910,6 @@ void ActivityPartitionImpl::save(std::shared_ptr<persistence::interfaces::XSaveH
 
 	ActivityGroupImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	NamedElementImpl::saveContent(saveHandler);
 	
 	ElementImpl::saveContent(saveHandler);

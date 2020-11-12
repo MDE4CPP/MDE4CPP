@@ -531,7 +531,7 @@ Any ValuePinImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::VALUEPIN_ATTRIBUTE_VALUE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getValue())); //25041
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getValue())); //24941
 	}
 	return InputPinImpl::eGet(featureID, resolve, coreType);
 }
@@ -540,7 +540,7 @@ bool ValuePinImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::VALUEPIN_ATTRIBUTE_VALUE:
-			return getValue() != nullptr; //25041
+			return getValue() != nullptr; //24941
 	}
 	return InputPinImpl::internalEIsSet(featureID);
 }
@@ -553,7 +553,7 @@ bool ValuePinImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ValueSpecification> _value = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
-			setValue(_value); //25041
+			setValue(_value); //24941
 			return true;
 		}
 	}
@@ -640,7 +640,6 @@ void ValuePinImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> s
 	ActivityNodeImpl::saveContent(saveHandler);
 	TypedElementImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);

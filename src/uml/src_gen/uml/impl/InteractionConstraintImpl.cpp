@@ -363,9 +363,9 @@ Any InteractionConstraintImpl::eGet(int featureID, bool resolve, bool coreType) 
 	switch(featureID)
 	{
 		case uml::UmlPackage::INTERACTIONCONSTRAINT_ATTRIBUTE_MAXINT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getMaxint())); //12115
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getMaxint())); //12015
 		case uml::UmlPackage::INTERACTIONCONSTRAINT_ATTRIBUTE_MININT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getMinint())); //12116
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getMinint())); //12016
 	}
 	return ConstraintImpl::eGet(featureID, resolve, coreType);
 }
@@ -374,9 +374,9 @@ bool InteractionConstraintImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::INTERACTIONCONSTRAINT_ATTRIBUTE_MAXINT:
-			return getMaxint() != nullptr; //12115
+			return getMaxint() != nullptr; //12015
 		case uml::UmlPackage::INTERACTIONCONSTRAINT_ATTRIBUTE_MININT:
-			return getMinint() != nullptr; //12116
+			return getMinint() != nullptr; //12016
 	}
 	return ConstraintImpl::internalEIsSet(featureID);
 }
@@ -389,7 +389,7 @@ bool InteractionConstraintImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ValueSpecification> _maxint = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
-			setMaxint(_maxint); //12115
+			setMaxint(_maxint); //12015
 			return true;
 		}
 		case uml::UmlPackage::INTERACTIONCONSTRAINT_ATTRIBUTE_MININT:
@@ -397,7 +397,7 @@ bool InteractionConstraintImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ValueSpecification> _minint = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
-			setMinint(_minint); //12116
+			setMinint(_minint); //12016
 			return true;
 		}
 	}

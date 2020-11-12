@@ -428,7 +428,7 @@ Any BroadcastSignalActionImpl::eGet(int featureID, bool resolve, bool coreType) 
 	switch(featureID)
 	{
 		case uml::UmlPackage::BROADCASTSIGNALACTION_ATTRIBUTE_SIGNAL:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSignal())); //2829
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSignal())); //2729
 	}
 	return InvocationActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -437,7 +437,7 @@ bool BroadcastSignalActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::BROADCASTSIGNALACTION_ATTRIBUTE_SIGNAL:
-			return getSignal() != nullptr; //2829
+			return getSignal() != nullptr; //2729
 	}
 	return InvocationActionImpl::internalEIsSet(featureID);
 }
@@ -450,7 +450,7 @@ bool BroadcastSignalActionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Signal> _signal = std::dynamic_pointer_cast<uml::Signal>(_temp);
-			setSignal(_signal); //2829
+			setSignal(_signal); //2729
 			return true;
 		}
 	}
@@ -541,7 +541,6 @@ void BroadcastSignalActionImpl::save(std::shared_ptr<persistence::interfaces::XS
 	
 	ActivityNodeImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);

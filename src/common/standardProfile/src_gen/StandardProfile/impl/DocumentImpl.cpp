@@ -63,6 +63,7 @@ DocumentImpl::DocumentImpl(const DocumentImpl & obj):DocumentImpl()
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Document "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	instantiate();
 }
 
 std::shared_ptr<ecore::EObject>  DocumentImpl::copy() const
@@ -79,7 +80,8 @@ std::shared_ptr<uml::Class> DocumentImpl::getMetaClass()
 }
 
 void DocumentImpl::instantiate()
-{	
+{   
+	FileImpl::instantiate();
 	
 }
 

@@ -335,7 +335,7 @@ Any InterruptibleActivityRegionImpl::eGet(int featureID, bool resolve, bool core
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //12814
+			return eAny(tempList); //12714
 		}
 		case uml::UmlPackage::INTERRUPTIBLEACTIVITYREGION_ATTRIBUTE_NODE:
 		{
@@ -347,7 +347,7 @@ Any InterruptibleActivityRegionImpl::eGet(int featureID, bool resolve, bool core
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //12815
+			return eAny(tempList); //12715
 		}
 	}
 	return ActivityGroupImpl::eGet(featureID, resolve, coreType);
@@ -357,9 +357,9 @@ bool InterruptibleActivityRegionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::INTERRUPTIBLEACTIVITYREGION_ATTRIBUTE_INTERRUPTINGEDGE:
-			return getInterruptingEdge() != nullptr; //12814
+			return getInterruptingEdge() != nullptr; //12714
 		case uml::UmlPackage::INTERRUPTIBLEACTIVITYREGION_ATTRIBUTE_NODE:
-			return getNode() != nullptr; //12815
+			return getNode() != nullptr; //12715
 	}
 	return ActivityGroupImpl::internalEIsSet(featureID);
 }
@@ -544,7 +544,6 @@ void InterruptibleActivityRegionImpl::save(std::shared_ptr<persistence::interfac
 
 	ActivityGroupImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	NamedElementImpl::saveContent(saveHandler);
 	
 	ElementImpl::saveContent(saveHandler);

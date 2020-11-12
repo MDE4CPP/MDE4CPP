@@ -499,7 +499,7 @@ Any CallActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::CALLACTION_ATTRIBUTE_ISSYNCHRONOUS:
-			return eAny(getIsSynchronous()); //2929
+			return eAny(getIsSynchronous()); //2829
 		case uml::UmlPackage::CALLACTION_ATTRIBUTE_RESULT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -510,7 +510,7 @@ Any CallActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //2930
+			return eAny(tempList); //2830
 		}
 	}
 	return InvocationActionImpl::eGet(featureID, resolve, coreType);
@@ -520,9 +520,9 @@ bool CallActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::CALLACTION_ATTRIBUTE_ISSYNCHRONOUS:
-			return getIsSynchronous() != true; //2929
+			return getIsSynchronous() != true; //2829
 		case uml::UmlPackage::CALLACTION_ATTRIBUTE_RESULT:
-			return getResult() != nullptr; //2930
+			return getResult() != nullptr; //2830
 	}
 	return InvocationActionImpl::internalEIsSet(featureID);
 }
@@ -534,7 +534,7 @@ bool CallActionImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _isSynchronous = newValue->get<bool>();
-			setIsSynchronous(_isSynchronous); //2929
+			setIsSynchronous(_isSynchronous); //2829
 			return true;
 		}
 		case uml::UmlPackage::CALLACTION_ATTRIBUTE_RESULT:
@@ -674,7 +674,6 @@ void CallActionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler>
 	
 	ActivityNodeImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);

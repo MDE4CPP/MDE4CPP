@@ -411,9 +411,9 @@ Any DecisionNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::DECISIONNODE_ATTRIBUTE_DECISIONINPUT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDecisionInput())); //6720
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDecisionInput())); //6620
 		case uml::UmlPackage::DECISIONNODE_ATTRIBUTE_DECISIONINPUTFLOW:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDecisionInputFlow())); //6721
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDecisionInputFlow())); //6621
 	}
 	return ControlNodeImpl::eGet(featureID, resolve, coreType);
 }
@@ -422,9 +422,9 @@ bool DecisionNodeImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::DECISIONNODE_ATTRIBUTE_DECISIONINPUT:
-			return getDecisionInput() != nullptr; //6720
+			return getDecisionInput() != nullptr; //6620
 		case uml::UmlPackage::DECISIONNODE_ATTRIBUTE_DECISIONINPUTFLOW:
-			return getDecisionInputFlow() != nullptr; //6721
+			return getDecisionInputFlow() != nullptr; //6621
 	}
 	return ControlNodeImpl::internalEIsSet(featureID);
 }
@@ -437,7 +437,7 @@ bool DecisionNodeImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Behavior> _decisionInput = std::dynamic_pointer_cast<uml::Behavior>(_temp);
-			setDecisionInput(_decisionInput); //6720
+			setDecisionInput(_decisionInput); //6620
 			return true;
 		}
 		case uml::UmlPackage::DECISIONNODE_ATTRIBUTE_DECISIONINPUTFLOW:
@@ -445,7 +445,7 @@ bool DecisionNodeImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ObjectFlow> _decisionInputFlow = std::dynamic_pointer_cast<uml::ObjectFlow>(_temp);
-			setDecisionInputFlow(_decisionInputFlow); //6721
+			setDecisionInputFlow(_decisionInputFlow); //6621
 			return true;
 		}
 	}
@@ -551,7 +551,6 @@ void DecisionNodeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandle
 	
 	ActivityNodeImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);

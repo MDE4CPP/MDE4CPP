@@ -232,9 +232,9 @@ Any ParameterableElementImpl::eGet(int featureID, bool resolve, bool coreType) c
 	switch(featureID)
 	{
 		case uml::UmlPackage::PARAMETERABLEELEMENT_ATTRIBUTE_OWNINGTEMPLATEPARAMETER:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOwningTemplateParameter().lock())); //1793
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOwningTemplateParameter().lock())); //1783
 		case uml::UmlPackage::PARAMETERABLEELEMENT_ATTRIBUTE_TEMPLATEPARAMETER:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getTemplateParameter())); //1794
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getTemplateParameter())); //1784
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -243,9 +243,9 @@ bool ParameterableElementImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::PARAMETERABLEELEMENT_ATTRIBUTE_OWNINGTEMPLATEPARAMETER:
-			return getOwningTemplateParameter().lock() != nullptr; //1793
+			return getOwningTemplateParameter().lock() != nullptr; //1783
 		case uml::UmlPackage::PARAMETERABLEELEMENT_ATTRIBUTE_TEMPLATEPARAMETER:
-			return getTemplateParameter() != nullptr; //1794
+			return getTemplateParameter() != nullptr; //1784
 	}
 	return ElementImpl::internalEIsSet(featureID);
 }
@@ -258,7 +258,7 @@ bool ParameterableElementImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::TemplateParameter> _owningTemplateParameter = std::dynamic_pointer_cast<uml::TemplateParameter>(_temp);
-			setOwningTemplateParameter(_owningTemplateParameter); //1793
+			setOwningTemplateParameter(_owningTemplateParameter); //1783
 			return true;
 		}
 		case uml::UmlPackage::PARAMETERABLEELEMENT_ATTRIBUTE_TEMPLATEPARAMETER:
@@ -266,7 +266,7 @@ bool ParameterableElementImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::TemplateParameter> _templateParameter = std::dynamic_pointer_cast<uml::TemplateParameter>(_temp);
-			setTemplateParameter(_templateParameter); //1794
+			setTemplateParameter(_templateParameter); //1784
 			return true;
 		}
 	}

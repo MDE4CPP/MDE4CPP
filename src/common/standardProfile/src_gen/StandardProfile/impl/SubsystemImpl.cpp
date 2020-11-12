@@ -63,6 +63,7 @@ SubsystemImpl::SubsystemImpl(const SubsystemImpl & obj):SubsystemImpl()
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Subsystem "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	instantiate();
 }
 
 std::shared_ptr<ecore::EObject>  SubsystemImpl::copy() const
@@ -79,7 +80,7 @@ std::shared_ptr<uml::Class> SubsystemImpl::getMetaClass()
 }
 
 void SubsystemImpl::instantiate()
-{	
+{   
 	
 }
 

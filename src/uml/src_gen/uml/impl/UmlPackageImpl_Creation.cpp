@@ -43,7 +43,6 @@ void UmlPackageImpl::createPackageContents(std::shared_ptr<ecore::EPackage> pack
 	createActionExecutionSpecificationContent(package, factory);
 	createActionInputPinContent(package, factory);
 	createActivityContent(package, factory);
-	createActivityContentContent(package, factory);
 	createActivityEdgeContent(package, factory);
 	createActivityFinalNodeContent(package, factory);
 	createActivityGroupContent(package, factory);
@@ -384,15 +383,6 @@ void UmlPackageImpl::createActivityContent(std::shared_ptr<ecore::EPackage> pack
 	
 }
 
-void UmlPackageImpl::createActivityContentContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
-{
-	m_activityContent_Class = factory->createEClass_in_EPackage(package, ACTIVITYCONTENT_CLASS);
-	
-	
-	m_activityContent_Operation_containingActivity = factory->createEOperation_in_EContainingClass(m_activityContent_Class, ACTIVITYCONTENT_OPERATION_CONTAININGACTIVITY);
-	
-}
-
 void UmlPackageImpl::createActivityEdgeContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
 {
 	m_activityEdge_Class = factory->createEClass_in_EPackage(package, ACTIVITYEDGE_CLASS);
@@ -430,6 +420,7 @@ void UmlPackageImpl::createActivityGroupContent(std::shared_ptr<ecore::EPackage>
 	m_activityGroup_Attribute_subgroup = factory->createEReference_in_EContainingClass(m_activityGroup_Class, ACTIVITYGROUP_ATTRIBUTE_SUBGROUP);
 	m_activityGroup_Attribute_superGroup = factory->createEReference_in_EContainingClass(m_activityGroup_Class, ACTIVITYGROUP_ATTRIBUTE_SUPERGROUP);
 	
+	m_activityGroup_Operation_containingActivity = factory->createEOperation_in_EContainingClass(m_activityGroup_Class, ACTIVITYGROUP_OPERATION_CONTAININGACTIVITY);
 	m_activityGroup_Operation_nodes_and_edges_EDiagnosticChain_EMap = factory->createEOperation_in_EContainingClass(m_activityGroup_Class, ACTIVITYGROUP_OPERATION_NODES_AND_EDGES_EDIAGNOSTICCHAIN_EMAP);
 	m_activityGroup_Operation_not_contained_EDiagnosticChain_EMap = factory->createEOperation_in_EContainingClass(m_activityGroup_Class, ACTIVITYGROUP_OPERATION_NOT_CONTAINED_EDIAGNOSTICCHAIN_EMAP);
 	
@@ -448,6 +439,7 @@ void UmlPackageImpl::createActivityNodeContent(std::shared_ptr<ecore::EPackage> 
 	m_activityNode_Attribute_outgoing = factory->createEReference_in_EContainingClass(m_activityNode_Class, ACTIVITYNODE_ATTRIBUTE_OUTGOING);
 	m_activityNode_Attribute_redefinedNode = factory->createEReference_in_EContainingClass(m_activityNode_Class, ACTIVITYNODE_ATTRIBUTE_REDEFINEDNODE);
 	
+	m_activityNode_Operation_containingActivity = factory->createEOperation_in_EContainingClass(m_activityNode_Class, ACTIVITYNODE_OPERATION_CONTAININGACTIVITY);
 	
 }
 

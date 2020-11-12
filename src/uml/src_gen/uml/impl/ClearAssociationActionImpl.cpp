@@ -434,9 +434,9 @@ Any ClearAssociationActionImpl::eGet(int featureID, bool resolve, bool coreType)
 	switch(featureID)
 	{
 		case uml::UmlPackage::CLEARASSOCIATIONACTION_ATTRIBUTE_ASSOCIATION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getAssociation())); //4027
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getAssociation())); //3927
 		case uml::UmlPackage::CLEARASSOCIATIONACTION_ATTRIBUTE_OBJECT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getObject())); //4028
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getObject())); //3928
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -445,9 +445,9 @@ bool ClearAssociationActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::CLEARASSOCIATIONACTION_ATTRIBUTE_ASSOCIATION:
-			return getAssociation() != nullptr; //4027
+			return getAssociation() != nullptr; //3927
 		case uml::UmlPackage::CLEARASSOCIATIONACTION_ATTRIBUTE_OBJECT:
-			return getObject() != nullptr; //4028
+			return getObject() != nullptr; //3928
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
@@ -460,7 +460,7 @@ bool ClearAssociationActionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Association> _association = std::dynamic_pointer_cast<uml::Association>(_temp);
-			setAssociation(_association); //4027
+			setAssociation(_association); //3927
 			return true;
 		}
 		case uml::UmlPackage::CLEARASSOCIATIONACTION_ATTRIBUTE_OBJECT:
@@ -468,7 +468,7 @@ bool ClearAssociationActionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::InputPin> _object = std::dynamic_pointer_cast<uml::InputPin>(_temp);
-			setObject(_object); //4028
+			setObject(_object); //3928
 			return true;
 		}
 	}
@@ -583,7 +583,6 @@ void ClearAssociationActionImpl::save(std::shared_ptr<persistence::interfaces::X
 	
 	ActivityNodeImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);

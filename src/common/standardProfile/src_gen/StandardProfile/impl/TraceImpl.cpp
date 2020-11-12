@@ -63,6 +63,7 @@ TraceImpl::TraceImpl(const TraceImpl & obj):TraceImpl()
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Trace "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	instantiate();
 }
 
 std::shared_ptr<ecore::EObject>  TraceImpl::copy() const
@@ -79,7 +80,7 @@ std::shared_ptr<uml::Class> TraceImpl::getMetaClass()
 }
 
 void TraceImpl::instantiate()
-{	
+{   
 	
 }
 

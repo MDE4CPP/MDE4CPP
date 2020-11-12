@@ -159,7 +159,7 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Classifier > getClassifier() const = 0;
+			virtual std::weak_ptr<uml::Classifier > getClassifier() const = 0;
 			
 			/*!
 			The Classifier that owns this RedefinableTemplateSignature.
@@ -208,7 +208,7 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			
-			std::shared_ptr<uml::Classifier > m_classifier;/*!
+			std::weak_ptr<uml::Classifier > m_classifier;/*!
 			The signatures extended by this RedefinableTemplateSignature.
 			<p>From package UML::Classification.</p>
 			*/

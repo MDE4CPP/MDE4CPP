@@ -293,7 +293,7 @@ Any TemplateSignatureImpl::eGet(int featureID, bool resolve, bool coreType) cons
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //2345
+			return eAny(tempList); //2335
 		}
 		case uml::UmlPackage::TEMPLATESIGNATURE_ATTRIBUTE_PARAMETER:
 		{
@@ -305,10 +305,10 @@ Any TemplateSignatureImpl::eGet(int featureID, bool resolve, bool coreType) cons
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //2343
+			return eAny(tempList); //2333
 		}
 		case uml::UmlPackage::TEMPLATESIGNATURE_ATTRIBUTE_TEMPLATE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getTemplate().lock())); //2344
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getTemplate().lock())); //2334
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -317,11 +317,11 @@ bool TemplateSignatureImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::TEMPLATESIGNATURE_ATTRIBUTE_OWNEDPARAMETER:
-			return getOwnedParameter() != nullptr; //2345
+			return getOwnedParameter() != nullptr; //2335
 		case uml::UmlPackage::TEMPLATESIGNATURE_ATTRIBUTE_PARAMETER:
-			return getParameter() != nullptr; //2343
+			return getParameter() != nullptr; //2333
 		case uml::UmlPackage::TEMPLATESIGNATURE_ATTRIBUTE_TEMPLATE:
-			return getTemplate().lock() != nullptr; //2344
+			return getTemplate().lock() != nullptr; //2334
 	}
 	return ElementImpl::internalEIsSet(featureID);
 }
@@ -406,7 +406,7 @@ bool TemplateSignatureImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::TemplateableElement> _template = std::dynamic_pointer_cast<uml::TemplateableElement>(_temp);
-			setTemplate(_template); //2344
+			setTemplate(_template); //2334
 			return true;
 		}
 	}

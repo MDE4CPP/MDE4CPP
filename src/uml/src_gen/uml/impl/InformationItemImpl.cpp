@@ -538,7 +538,7 @@ Any InformationItemImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //11538
+			return eAny(tempList); //11438
 		}
 	}
 	return ClassifierImpl::eGet(featureID, resolve, coreType);
@@ -548,7 +548,7 @@ bool InformationItemImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::INFORMATIONITEM_ATTRIBUTE_REPRESENTED:
-			return getRepresented() != nullptr; //11538
+			return getRepresented() != nullptr; //11438
 	}
 	return ClassifierImpl::internalEIsSet(featureID);
 }

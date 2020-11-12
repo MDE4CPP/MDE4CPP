@@ -445,7 +445,7 @@ Any ClearStructuralFeatureActionImpl::eGet(int featureID, bool resolve, bool cor
 	switch(featureID)
 	{
 		case uml::UmlPackage::CLEARSTRUCTURALFEATUREACTION_ATTRIBUTE_RESULT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //4129
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //4029
 	}
 	return StructuralFeatureActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -454,7 +454,7 @@ bool ClearStructuralFeatureActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::CLEARSTRUCTURALFEATUREACTION_ATTRIBUTE_RESULT:
-			return getResult() != nullptr; //4129
+			return getResult() != nullptr; //4029
 	}
 	return StructuralFeatureActionImpl::internalEIsSet(featureID);
 }
@@ -467,7 +467,7 @@ bool ClearStructuralFeatureActionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::OutputPin> _result = std::dynamic_pointer_cast<uml::OutputPin>(_temp);
-			setResult(_result); //4129
+			setResult(_result); //4029
 			return true;
 		}
 	}
@@ -550,7 +550,6 @@ void ClearStructuralFeatureActionImpl::save(std::shared_ptr<persistence::interfa
 	
 	ActivityNodeImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);

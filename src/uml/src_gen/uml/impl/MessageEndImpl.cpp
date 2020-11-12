@@ -252,7 +252,7 @@ Any MessageEndImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::MESSAGEEND_ATTRIBUTE_MESSAGE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getMessage())); //1499
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getMessage())); //1489
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -261,7 +261,7 @@ bool MessageEndImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::MESSAGEEND_ATTRIBUTE_MESSAGE:
-			return getMessage() != nullptr; //1499
+			return getMessage() != nullptr; //1489
 	}
 	return NamedElementImpl::internalEIsSet(featureID);
 }
@@ -274,7 +274,7 @@ bool MessageEndImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Message> _message = std::dynamic_pointer_cast<uml::Message>(_temp);
-			setMessage(_message); //1499
+			setMessage(_message); //1489
 			return true;
 		}
 	}

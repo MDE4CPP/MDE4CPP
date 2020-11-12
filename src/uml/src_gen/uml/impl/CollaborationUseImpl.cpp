@@ -294,10 +294,10 @@ Any CollaborationUseImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //449
+			return eAny(tempList); //439
 		}
 		case uml::UmlPackage::COLLABORATIONUSE_ATTRIBUTE_TYPE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getType())); //4410
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getType())); //4310
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -306,9 +306,9 @@ bool CollaborationUseImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::COLLABORATIONUSE_ATTRIBUTE_ROLEBINDING:
-			return getRoleBinding() != nullptr; //449
+			return getRoleBinding() != nullptr; //439
 		case uml::UmlPackage::COLLABORATIONUSE_ATTRIBUTE_TYPE:
-			return getType() != nullptr; //4410
+			return getType() != nullptr; //4310
 	}
 	return NamedElementImpl::internalEIsSet(featureID);
 }
@@ -357,7 +357,7 @@ bool CollaborationUseImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Collaboration> _type = std::dynamic_pointer_cast<uml::Collaboration>(_temp);
-			setType(_type); //4410
+			setType(_type); //4310
 			return true;
 		}
 	}

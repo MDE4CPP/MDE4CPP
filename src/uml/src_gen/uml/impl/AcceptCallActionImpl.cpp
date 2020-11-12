@@ -545,7 +545,6 @@ void AcceptCallActionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHa
 	
 	ActivityNodeImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);

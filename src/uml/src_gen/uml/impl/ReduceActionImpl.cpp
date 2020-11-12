@@ -500,13 +500,13 @@ Any ReduceActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::REDUCEACTION_ATTRIBUTE_COLLECTION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getCollection())); //20727
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getCollection())); //20627
 		case uml::UmlPackage::REDUCEACTION_ATTRIBUTE_ISORDERED:
-			return eAny(getIsOrdered()); //20728
+			return eAny(getIsOrdered()); //20628
 		case uml::UmlPackage::REDUCEACTION_ATTRIBUTE_REDUCER:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getReducer())); //20729
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getReducer())); //20629
 		case uml::UmlPackage::REDUCEACTION_ATTRIBUTE_RESULT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //20730
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //20630
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -515,13 +515,13 @@ bool ReduceActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::REDUCEACTION_ATTRIBUTE_COLLECTION:
-			return getCollection() != nullptr; //20727
+			return getCollection() != nullptr; //20627
 		case uml::UmlPackage::REDUCEACTION_ATTRIBUTE_ISORDERED:
-			return getIsOrdered() != false; //20728
+			return getIsOrdered() != false; //20628
 		case uml::UmlPackage::REDUCEACTION_ATTRIBUTE_REDUCER:
-			return getReducer() != nullptr; //20729
+			return getReducer() != nullptr; //20629
 		case uml::UmlPackage::REDUCEACTION_ATTRIBUTE_RESULT:
-			return getResult() != nullptr; //20730
+			return getResult() != nullptr; //20630
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
@@ -534,14 +534,14 @@ bool ReduceActionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::InputPin> _collection = std::dynamic_pointer_cast<uml::InputPin>(_temp);
-			setCollection(_collection); //20727
+			setCollection(_collection); //20627
 			return true;
 		}
 		case uml::UmlPackage::REDUCEACTION_ATTRIBUTE_ISORDERED:
 		{
 			// BOOST CAST
 			bool _isOrdered = newValue->get<bool>();
-			setIsOrdered(_isOrdered); //20728
+			setIsOrdered(_isOrdered); //20628
 			return true;
 		}
 		case uml::UmlPackage::REDUCEACTION_ATTRIBUTE_REDUCER:
@@ -549,7 +549,7 @@ bool ReduceActionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Behavior> _reducer = std::dynamic_pointer_cast<uml::Behavior>(_temp);
-			setReducer(_reducer); //20729
+			setReducer(_reducer); //20629
 			return true;
 		}
 		case uml::UmlPackage::REDUCEACTION_ATTRIBUTE_RESULT:
@@ -557,7 +557,7 @@ bool ReduceActionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::OutputPin> _result = std::dynamic_pointer_cast<uml::OutputPin>(_temp);
-			setResult(_result); //20730
+			setResult(_result); //20630
 			return true;
 		}
 	}
@@ -697,7 +697,6 @@ void ReduceActionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandle
 	
 	ActivityNodeImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);

@@ -63,6 +63,7 @@ ImplementImpl::ImplementImpl(const ImplementImpl & obj):ImplementImpl()
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Implement "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	instantiate();
 }
 
 std::shared_ptr<ecore::EObject>  ImplementImpl::copy() const
@@ -79,7 +80,7 @@ std::shared_ptr<uml::Class> ImplementImpl::getMetaClass()
 }
 
 void ImplementImpl::instantiate()
-{	
+{   
 	
 }
 

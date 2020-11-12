@@ -629,7 +629,7 @@ Any SequenceNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //21544
+			return eAny(tempList); //21444
 		}
 	}
 	return StructuredActivityNodeImpl::eGet(featureID, resolve, coreType);
@@ -639,7 +639,7 @@ bool SequenceNodeImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::SEQUENCENODE_ATTRIBUTE_EXECUTABLENODE:
-			return getExecutableNode() != nullptr; //21544
+			return getExecutableNode() != nullptr; //21444
 	}
 	return StructuredActivityNodeImpl::internalEIsSet(featureID);
 }
@@ -768,7 +768,6 @@ void SequenceNodeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandle
 	
 	ActivityNodeImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);

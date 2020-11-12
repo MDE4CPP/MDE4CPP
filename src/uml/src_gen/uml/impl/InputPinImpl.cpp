@@ -626,21 +626,21 @@ Any InputPinImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::INPUTPIN_ATTRIBUTE_ACTION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getAction().lock())); //11736
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getAction().lock())); //11636
 		case uml::UmlPackage::INPUTPIN_ATTRIBUTE_ADDSTRUCTURALFEATUREVALUEACTION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getAddStructuralFeatureValueAction().lock())); //11738
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getAddStructuralFeatureValueAction().lock())); //11638
 		case uml::UmlPackage::INPUTPIN_ATTRIBUTE_CALLOPERATIONACTION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getCallOperationAction().lock())); //11734
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getCallOperationAction().lock())); //11634
 		case uml::UmlPackage::INPUTPIN_ATTRIBUTE_DESTROYOBJECTACTION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDestroyObjectAction().lock())); //11739
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDestroyObjectAction().lock())); //11639
 		case uml::UmlPackage::INPUTPIN_ATTRIBUTE_INVOCATIONACTION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getInvocationAction().lock())); //11735
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getInvocationAction().lock())); //11635
 		case uml::UmlPackage::INPUTPIN_ATTRIBUTE_REMOVESTRUCTURALFEATUREVALUEACTION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getRemoveStructuralFeatureValueAction().lock())); //11740
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getRemoveStructuralFeatureValueAction().lock())); //11640
 		case uml::UmlPackage::INPUTPIN_ATTRIBUTE_STRUCTURALFEATUREACTION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getStructuralFeatureAction().lock())); //11733
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getStructuralFeatureAction().lock())); //11633
 		case uml::UmlPackage::INPUTPIN_ATTRIBUTE_WRITESTRUCTURALFEATUREACTION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getWriteStructuralFeatureAction().lock())); //11737
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getWriteStructuralFeatureAction().lock())); //11637
 	}
 	return PinImpl::eGet(featureID, resolve, coreType);
 }
@@ -649,21 +649,21 @@ bool InputPinImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::INPUTPIN_ATTRIBUTE_ACTION:
-			return getAction().lock() != nullptr; //11736
+			return getAction().lock() != nullptr; //11636
 		case uml::UmlPackage::INPUTPIN_ATTRIBUTE_ADDSTRUCTURALFEATUREVALUEACTION:
-			return getAddStructuralFeatureValueAction().lock() != nullptr; //11738
+			return getAddStructuralFeatureValueAction().lock() != nullptr; //11638
 		case uml::UmlPackage::INPUTPIN_ATTRIBUTE_CALLOPERATIONACTION:
-			return getCallOperationAction().lock() != nullptr; //11734
+			return getCallOperationAction().lock() != nullptr; //11634
 		case uml::UmlPackage::INPUTPIN_ATTRIBUTE_DESTROYOBJECTACTION:
-			return getDestroyObjectAction().lock() != nullptr; //11739
+			return getDestroyObjectAction().lock() != nullptr; //11639
 		case uml::UmlPackage::INPUTPIN_ATTRIBUTE_INVOCATIONACTION:
-			return getInvocationAction().lock() != nullptr; //11735
+			return getInvocationAction().lock() != nullptr; //11635
 		case uml::UmlPackage::INPUTPIN_ATTRIBUTE_REMOVESTRUCTURALFEATUREVALUEACTION:
-			return getRemoveStructuralFeatureValueAction().lock() != nullptr; //11740
+			return getRemoveStructuralFeatureValueAction().lock() != nullptr; //11640
 		case uml::UmlPackage::INPUTPIN_ATTRIBUTE_STRUCTURALFEATUREACTION:
-			return getStructuralFeatureAction().lock() != nullptr; //11733
+			return getStructuralFeatureAction().lock() != nullptr; //11633
 		case uml::UmlPackage::INPUTPIN_ATTRIBUTE_WRITESTRUCTURALFEATUREACTION:
-			return getWriteStructuralFeatureAction().lock() != nullptr; //11737
+			return getWriteStructuralFeatureAction().lock() != nullptr; //11637
 	}
 	return PinImpl::internalEIsSet(featureID);
 }
@@ -676,7 +676,7 @@ bool InputPinImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::AddStructuralFeatureValueAction> _addStructuralFeatureValueAction = std::dynamic_pointer_cast<uml::AddStructuralFeatureValueAction>(_temp);
-			setAddStructuralFeatureValueAction(_addStructuralFeatureValueAction); //11738
+			setAddStructuralFeatureValueAction(_addStructuralFeatureValueAction); //11638
 			return true;
 		}
 		case uml::UmlPackage::INPUTPIN_ATTRIBUTE_CALLOPERATIONACTION:
@@ -684,7 +684,7 @@ bool InputPinImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::CallOperationAction> _callOperationAction = std::dynamic_pointer_cast<uml::CallOperationAction>(_temp);
-			setCallOperationAction(_callOperationAction); //11734
+			setCallOperationAction(_callOperationAction); //11634
 			return true;
 		}
 		case uml::UmlPackage::INPUTPIN_ATTRIBUTE_DESTROYOBJECTACTION:
@@ -692,7 +692,7 @@ bool InputPinImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::DestroyObjectAction> _destroyObjectAction = std::dynamic_pointer_cast<uml::DestroyObjectAction>(_temp);
-			setDestroyObjectAction(_destroyObjectAction); //11739
+			setDestroyObjectAction(_destroyObjectAction); //11639
 			return true;
 		}
 		case uml::UmlPackage::INPUTPIN_ATTRIBUTE_INVOCATIONACTION:
@@ -700,7 +700,7 @@ bool InputPinImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::InvocationAction> _invocationAction = std::dynamic_pointer_cast<uml::InvocationAction>(_temp);
-			setInvocationAction(_invocationAction); //11735
+			setInvocationAction(_invocationAction); //11635
 			return true;
 		}
 		case uml::UmlPackage::INPUTPIN_ATTRIBUTE_REMOVESTRUCTURALFEATUREVALUEACTION:
@@ -708,7 +708,7 @@ bool InputPinImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::RemoveStructuralFeatureValueAction> _removeStructuralFeatureValueAction = std::dynamic_pointer_cast<uml::RemoveStructuralFeatureValueAction>(_temp);
-			setRemoveStructuralFeatureValueAction(_removeStructuralFeatureValueAction); //11740
+			setRemoveStructuralFeatureValueAction(_removeStructuralFeatureValueAction); //11640
 			return true;
 		}
 		case uml::UmlPackage::INPUTPIN_ATTRIBUTE_STRUCTURALFEATUREACTION:
@@ -716,7 +716,7 @@ bool InputPinImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::StructuralFeatureAction> _structuralFeatureAction = std::dynamic_pointer_cast<uml::StructuralFeatureAction>(_temp);
-			setStructuralFeatureAction(_structuralFeatureAction); //11733
+			setStructuralFeatureAction(_structuralFeatureAction); //11633
 			return true;
 		}
 		case uml::UmlPackage::INPUTPIN_ATTRIBUTE_WRITESTRUCTURALFEATUREACTION:
@@ -724,7 +724,7 @@ bool InputPinImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::WriteStructuralFeatureAction> _writeStructuralFeatureAction = std::dynamic_pointer_cast<uml::WriteStructuralFeatureAction>(_temp);
-			setWriteStructuralFeatureAction(_writeStructuralFeatureAction); //11737
+			setWriteStructuralFeatureAction(_writeStructuralFeatureAction); //11637
 			return true;
 		}
 	}
@@ -868,7 +868,6 @@ void InputPinImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> s
 	ActivityNodeImpl::saveContent(saveHandler);
 	TypedElementImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);

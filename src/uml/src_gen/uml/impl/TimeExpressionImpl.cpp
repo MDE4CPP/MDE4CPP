@@ -338,7 +338,7 @@ Any TimeExpressionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::TIMEEXPRESSION_ATTRIBUTE_EXPR:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getExpr())); //23915
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getExpr())); //23815
 		case uml::UmlPackage::TIMEEXPRESSION_ATTRIBUTE_OBSERVATION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -349,7 +349,7 @@ Any TimeExpressionImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //23916
+			return eAny(tempList); //23816
 		}
 	}
 	return ValueSpecificationImpl::eGet(featureID, resolve, coreType);
@@ -359,9 +359,9 @@ bool TimeExpressionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::TIMEEXPRESSION_ATTRIBUTE_EXPR:
-			return getExpr() != nullptr; //23915
+			return getExpr() != nullptr; //23815
 		case uml::UmlPackage::TIMEEXPRESSION_ATTRIBUTE_OBSERVATION:
-			return getObservation() != nullptr; //23916
+			return getObservation() != nullptr; //23816
 	}
 	return ValueSpecificationImpl::internalEIsSet(featureID);
 }
@@ -374,7 +374,7 @@ bool TimeExpressionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ValueSpecification> _expr = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
-			setExpr(_expr); //23915
+			setExpr(_expr); //23815
 			return true;
 		}
 		case uml::UmlPackage::TIMEEXPRESSION_ATTRIBUTE_OBSERVATION:

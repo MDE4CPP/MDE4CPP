@@ -338,7 +338,7 @@ Any DurationImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::DURATION_ATTRIBUTE_EXPR:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getExpr())); //7815
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getExpr())); //7715
 		case uml::UmlPackage::DURATION_ATTRIBUTE_OBSERVATION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -349,7 +349,7 @@ Any DurationImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //7816
+			return eAny(tempList); //7716
 		}
 	}
 	return ValueSpecificationImpl::eGet(featureID, resolve, coreType);
@@ -359,9 +359,9 @@ bool DurationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::DURATION_ATTRIBUTE_EXPR:
-			return getExpr() != nullptr; //7815
+			return getExpr() != nullptr; //7715
 		case uml::UmlPackage::DURATION_ATTRIBUTE_OBSERVATION:
-			return getObservation() != nullptr; //7816
+			return getObservation() != nullptr; //7716
 	}
 	return ValueSpecificationImpl::internalEIsSet(featureID);
 }
@@ -374,7 +374,7 @@ bool DurationImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ValueSpecification> _expr = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
-			setExpr(_expr); //7815
+			setExpr(_expr); //7715
 			return true;
 		}
 		case uml::UmlPackage::DURATION_ATTRIBUTE_OBSERVATION:

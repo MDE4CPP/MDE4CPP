@@ -537,11 +537,11 @@ Any RegionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::REGION_ATTRIBUTE_EXTENDEDREGION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getExtendedRegion())); //20818
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getExtendedRegion())); //20718
 		case uml::UmlPackage::REGION_ATTRIBUTE_STATE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getState().lock())); //20819
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getState().lock())); //20719
 		case uml::UmlPackage::REGION_ATTRIBUTE_STATEMACHINE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getStateMachine().lock())); //20820
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getStateMachine().lock())); //20720
 		case uml::UmlPackage::REGION_ATTRIBUTE_SUBVERTEX:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -552,7 +552,7 @@ Any RegionImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //20822
+			return eAny(tempList); //20722
 		}
 		case uml::UmlPackage::REGION_ATTRIBUTE_TRANSITION:
 		{
@@ -564,7 +564,7 @@ Any RegionImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //20821
+			return eAny(tempList); //20721
 		}
 	}
 	Any result;
@@ -581,15 +581,15 @@ bool RegionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::REGION_ATTRIBUTE_EXTENDEDREGION:
-			return getExtendedRegion() != nullptr; //20818
+			return getExtendedRegion() != nullptr; //20718
 		case uml::UmlPackage::REGION_ATTRIBUTE_STATE:
-			return getState().lock() != nullptr; //20819
+			return getState().lock() != nullptr; //20719
 		case uml::UmlPackage::REGION_ATTRIBUTE_STATEMACHINE:
-			return getStateMachine().lock() != nullptr; //20820
+			return getStateMachine().lock() != nullptr; //20720
 		case uml::UmlPackage::REGION_ATTRIBUTE_SUBVERTEX:
-			return getSubvertex() != nullptr; //20822
+			return getSubvertex() != nullptr; //20722
 		case uml::UmlPackage::REGION_ATTRIBUTE_TRANSITION:
-			return getTransition() != nullptr; //20821
+			return getTransition() != nullptr; //20721
 	}
 	bool result = false;
 	result = NamespaceImpl::internalEIsSet(featureID);
@@ -609,7 +609,7 @@ bool RegionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Region> _extendedRegion = std::dynamic_pointer_cast<uml::Region>(_temp);
-			setExtendedRegion(_extendedRegion); //20818
+			setExtendedRegion(_extendedRegion); //20718
 			return true;
 		}
 		case uml::UmlPackage::REGION_ATTRIBUTE_STATE:
@@ -617,7 +617,7 @@ bool RegionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::State> _state = std::dynamic_pointer_cast<uml::State>(_temp);
-			setState(_state); //20819
+			setState(_state); //20719
 			return true;
 		}
 		case uml::UmlPackage::REGION_ATTRIBUTE_STATEMACHINE:
@@ -625,7 +625,7 @@ bool RegionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::StateMachine> _stateMachine = std::dynamic_pointer_cast<uml::StateMachine>(_temp);
-			setStateMachine(_stateMachine); //20820
+			setStateMachine(_stateMachine); //20720
 			return true;
 		}
 		case uml::UmlPackage::REGION_ATTRIBUTE_SUBVERTEX:

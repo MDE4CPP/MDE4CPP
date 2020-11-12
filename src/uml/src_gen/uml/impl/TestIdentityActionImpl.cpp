@@ -490,11 +490,11 @@ Any TestIdentityActionImpl::eGet(int featureID, bool resolve, bool coreType) con
 	switch(featureID)
 	{
 		case uml::UmlPackage::TESTIDENTITYACTION_ATTRIBUTE_FIRST:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getFirst())); //23627
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getFirst())); //23527
 		case uml::UmlPackage::TESTIDENTITYACTION_ATTRIBUTE_RESULT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //23628
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //23528
 		case uml::UmlPackage::TESTIDENTITYACTION_ATTRIBUTE_SECOND:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSecond())); //23629
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSecond())); //23529
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -503,11 +503,11 @@ bool TestIdentityActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::TESTIDENTITYACTION_ATTRIBUTE_FIRST:
-			return getFirst() != nullptr; //23627
+			return getFirst() != nullptr; //23527
 		case uml::UmlPackage::TESTIDENTITYACTION_ATTRIBUTE_RESULT:
-			return getResult() != nullptr; //23628
+			return getResult() != nullptr; //23528
 		case uml::UmlPackage::TESTIDENTITYACTION_ATTRIBUTE_SECOND:
-			return getSecond() != nullptr; //23629
+			return getSecond() != nullptr; //23529
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
@@ -520,7 +520,7 @@ bool TestIdentityActionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::InputPin> _first = std::dynamic_pointer_cast<uml::InputPin>(_temp);
-			setFirst(_first); //23627
+			setFirst(_first); //23527
 			return true;
 		}
 		case uml::UmlPackage::TESTIDENTITYACTION_ATTRIBUTE_RESULT:
@@ -528,7 +528,7 @@ bool TestIdentityActionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::OutputPin> _result = std::dynamic_pointer_cast<uml::OutputPin>(_temp);
-			setResult(_result); //23628
+			setResult(_result); //23528
 			return true;
 		}
 		case uml::UmlPackage::TESTIDENTITYACTION_ATTRIBUTE_SECOND:
@@ -536,7 +536,7 @@ bool TestIdentityActionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::InputPin> _second = std::dynamic_pointer_cast<uml::InputPin>(_temp);
-			setSecond(_second); //23629
+			setSecond(_second); //23529
 			return true;
 		}
 	}
@@ -650,7 +650,6 @@ void TestIdentityActionImpl::save(std::shared_ptr<persistence::interfaces::XSave
 	
 	ActivityNodeImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);

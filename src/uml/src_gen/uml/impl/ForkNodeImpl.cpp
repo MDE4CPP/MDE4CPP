@@ -400,7 +400,6 @@ void ForkNodeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> s
 	
 	ActivityNodeImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);

@@ -452,9 +452,9 @@ Any StructuralFeatureActionImpl::eGet(int featureID, bool resolve, bool coreType
 	switch(featureID)
 	{
 		case uml::UmlPackage::STRUCTURALFEATUREACTION_ATTRIBUTE_OBJECT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getObject())); //22727
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getObject())); //22627
 		case uml::UmlPackage::STRUCTURALFEATUREACTION_ATTRIBUTE_STRUCTURALFEATURE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getStructuralFeature())); //22728
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getStructuralFeature())); //22628
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -463,9 +463,9 @@ bool StructuralFeatureActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::STRUCTURALFEATUREACTION_ATTRIBUTE_OBJECT:
-			return getObject() != nullptr; //22727
+			return getObject() != nullptr; //22627
 		case uml::UmlPackage::STRUCTURALFEATUREACTION_ATTRIBUTE_STRUCTURALFEATURE:
-			return getStructuralFeature() != nullptr; //22728
+			return getStructuralFeature() != nullptr; //22628
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
@@ -478,7 +478,7 @@ bool StructuralFeatureActionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::InputPin> _object = std::dynamic_pointer_cast<uml::InputPin>(_temp);
-			setObject(_object); //22727
+			setObject(_object); //22627
 			return true;
 		}
 		case uml::UmlPackage::STRUCTURALFEATUREACTION_ATTRIBUTE_STRUCTURALFEATURE:
@@ -486,7 +486,7 @@ bool StructuralFeatureActionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::StructuralFeature> _structuralFeature = std::dynamic_pointer_cast<uml::StructuralFeature>(_temp);
-			setStructuralFeature(_structuralFeature); //22728
+			setStructuralFeature(_structuralFeature); //22628
 			return true;
 		}
 	}
@@ -600,7 +600,6 @@ void StructuralFeatureActionImpl::save(std::shared_ptr<persistence::interfaces::
 	
 	ActivityNodeImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);

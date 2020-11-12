@@ -211,11 +211,11 @@ Any ImageImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::IMAGE_ATTRIBUTE_CONTENT:
-			return eAny(getContent()); //1123
+			return eAny(getContent()); //1113
 		case uml::UmlPackage::IMAGE_ATTRIBUTE_FORMAT:
-			return eAny(getFormat()); //1124
+			return eAny(getFormat()); //1114
 		case uml::UmlPackage::IMAGE_ATTRIBUTE_LOCATION:
-			return eAny(getLocation()); //1125
+			return eAny(getLocation()); //1115
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -224,11 +224,11 @@ bool ImageImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::IMAGE_ATTRIBUTE_CONTENT:
-			return getContent() != ""; //1123
+			return getContent() != ""; //1113
 		case uml::UmlPackage::IMAGE_ATTRIBUTE_FORMAT:
-			return getFormat() != ""; //1124
+			return getFormat() != ""; //1114
 		case uml::UmlPackage::IMAGE_ATTRIBUTE_LOCATION:
-			return getLocation() != ""; //1125
+			return getLocation() != ""; //1115
 	}
 	return ElementImpl::internalEIsSet(featureID);
 }
@@ -240,21 +240,21 @@ bool ImageImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::string _content = newValue->get<std::string>();
-			setContent(_content); //1123
+			setContent(_content); //1113
 			return true;
 		}
 		case uml::UmlPackage::IMAGE_ATTRIBUTE_FORMAT:
 		{
 			// BOOST CAST
 			std::string _format = newValue->get<std::string>();
-			setFormat(_format); //1124
+			setFormat(_format); //1114
 			return true;
 		}
 		case uml::UmlPackage::IMAGE_ATTRIBUTE_LOCATION:
 		{
 			// BOOST CAST
 			std::string _location = newValue->get<std::string>();
-			setLocation(_location); //1125
+			setLocation(_location); //1115
 			return true;
 		}
 	}

@@ -468,7 +468,7 @@ Any ConnectorImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //5414
+			return eAny(tempList); //5314
 		}
 		case uml::UmlPackage::CONNECTOR_ATTRIBUTE_END:
 		{
@@ -480,10 +480,10 @@ Any ConnectorImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //5415
+			return eAny(tempList); //5315
 		}
 		case uml::UmlPackage::CONNECTOR_ATTRIBUTE_KIND:
-			return eAny(getKind()); //5416
+			return eAny(getKind()); //5316
 		case uml::UmlPackage::CONNECTOR_ATTRIBUTE_REDEFINEDCONNECTOR:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -494,12 +494,12 @@ Any ConnectorImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //5417
+			return eAny(tempList); //5317
 		}
 		case uml::UmlPackage::CONNECTOR_ATTRIBUTE_STRUCTUREDCLASSIFIER:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getStructuredClassifier().lock())); //5419
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getStructuredClassifier().lock())); //5319
 		case uml::UmlPackage::CONNECTOR_ATTRIBUTE_TYPE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getType())); //5418
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getType())); //5318
 	}
 	return FeatureImpl::eGet(featureID, resolve, coreType);
 }
@@ -508,17 +508,17 @@ bool ConnectorImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::CONNECTOR_ATTRIBUTE_CONTRACT:
-			return getContract() != nullptr; //5414
+			return getContract() != nullptr; //5314
 		case uml::UmlPackage::CONNECTOR_ATTRIBUTE_END:
-			return getEnd() != nullptr; //5415
+			return getEnd() != nullptr; //5315
 		case uml::UmlPackage::CONNECTOR_ATTRIBUTE_KIND:
-			return m_kind != ConnectorKind::ASSEMBLY;; //5416
+			return m_kind != ConnectorKind::ASSEMBLY;; //5316
 		case uml::UmlPackage::CONNECTOR_ATTRIBUTE_REDEFINEDCONNECTOR:
-			return getRedefinedConnector() != nullptr; //5417
+			return getRedefinedConnector() != nullptr; //5317
 		case uml::UmlPackage::CONNECTOR_ATTRIBUTE_STRUCTUREDCLASSIFIER:
-			return getStructuredClassifier().lock() != nullptr; //5419
+			return getStructuredClassifier().lock() != nullptr; //5319
 		case uml::UmlPackage::CONNECTOR_ATTRIBUTE_TYPE:
-			return getType() != nullptr; //5418
+			return getType() != nullptr; //5318
 	}
 	return FeatureImpl::internalEIsSet(featureID);
 }
@@ -639,7 +639,7 @@ bool ConnectorImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::StructuredClassifier> _structuredClassifier = std::dynamic_pointer_cast<uml::StructuredClassifier>(_temp);
-			setStructuredClassifier(_structuredClassifier); //5419
+			setStructuredClassifier(_structuredClassifier); //5319
 			return true;
 		}
 		case uml::UmlPackage::CONNECTOR_ATTRIBUTE_TYPE:
@@ -647,7 +647,7 @@ bool ConnectorImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Association> _type = std::dynamic_pointer_cast<uml::Association>(_temp);
-			setType(_type); //5418
+			setType(_type); //5318
 			return true;
 		}
 	}

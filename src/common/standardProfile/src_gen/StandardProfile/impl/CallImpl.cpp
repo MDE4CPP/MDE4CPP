@@ -63,6 +63,7 @@ CallImpl::CallImpl(const CallImpl & obj):CallImpl()
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Call "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	instantiate();
 }
 
 std::shared_ptr<ecore::EObject>  CallImpl::copy() const
@@ -79,7 +80,7 @@ std::shared_ptr<uml::Class> CallImpl::getMetaClass()
 }
 
 void CallImpl::instantiate()
-{	
+{   
 	
 }
 

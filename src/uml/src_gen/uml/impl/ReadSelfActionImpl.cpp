@@ -426,7 +426,7 @@ Any ReadSelfActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::READSELFACTION_ATTRIBUTE_RESULT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //19927
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //19827
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -435,7 +435,7 @@ bool ReadSelfActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::READSELFACTION_ATTRIBUTE_RESULT:
-			return getResult() != nullptr; //19927
+			return getResult() != nullptr; //19827
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
@@ -448,7 +448,7 @@ bool ReadSelfActionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::OutputPin> _result = std::dynamic_pointer_cast<uml::OutputPin>(_temp);
-			setResult(_result); //19927
+			setResult(_result); //19827
 			return true;
 		}
 	}
@@ -529,7 +529,6 @@ void ReadSelfActionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHand
 	
 	ActivityNodeImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);

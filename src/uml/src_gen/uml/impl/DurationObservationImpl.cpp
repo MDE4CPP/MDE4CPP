@@ -114,7 +114,7 @@ DurationObservationImpl::DurationObservationImpl(const DurationObservationImpl &
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy DurationObservation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
-	m_firstEvent = obj.getFirstEvent();
+	m_firstEvent = obj.isFirstEvent();
 	m_name = obj.getName();
 	m_qualifiedName = obj.getQualifiedName();
 	m_visibility = obj.getVisibility();
@@ -176,7 +176,7 @@ std::shared_ptr<ecore::EClass> DurationObservationImpl::eStaticClass() const
 /*
 Getter & Setter for attribute firstEvent
 */
-std::shared_ptr<Bag<bool> > DurationObservationImpl::getFirstEvent() const 
+std::shared_ptr<Bag<bool> > DurationObservationImpl::isFirstEvent() const 
 {
 	if(m_firstEvent == nullptr)
 	{
@@ -301,10 +301,10 @@ Any DurationObservationImpl::eGet(int featureID, bool resolve, bool coreType) co
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //8112
+			return eAny(tempList); //8012
 		}
 		case uml::UmlPackage::DURATIONOBSERVATION_ATTRIBUTE_FIRSTEVENT:
-			return eAny(getFirstEvent()); //8113
+			return eAny(isFirstEvent()); //8013
 	}
 	return ObservationImpl::eGet(featureID, resolve, coreType);
 }
@@ -313,9 +313,9 @@ bool DurationObservationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::DURATIONOBSERVATION_ATTRIBUTE_EVENT:
-			return getEvent() != nullptr; //8112
+			return getEvent() != nullptr; //8012
 		case uml::UmlPackage::DURATIONOBSERVATION_ATTRIBUTE_FIRSTEVENT:
-			return !getFirstEvent()->empty(); //8113
+			return !isFirstEvent()->empty(); //8013
 	}
 	return ObservationImpl::internalEIsSet(featureID);
 }

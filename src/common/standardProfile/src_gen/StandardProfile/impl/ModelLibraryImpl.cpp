@@ -63,6 +63,7 @@ ModelLibraryImpl::ModelLibraryImpl(const ModelLibraryImpl & obj):ModelLibraryImp
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ModelLibrary "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	instantiate();
 }
 
 std::shared_ptr<ecore::EObject>  ModelLibraryImpl::copy() const
@@ -79,7 +80,7 @@ std::shared_ptr<uml::Class> ModelLibraryImpl::getMetaClass()
 }
 
 void ModelLibraryImpl::instantiate()
-{	
+{   
 	
 }
 

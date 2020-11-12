@@ -325,7 +325,7 @@ Any EnumerationLiteralImpl::eGet(int featureID, bool resolve, bool coreType) con
 	switch(featureID)
 	{
 		case uml::UmlPackage::ENUMERATIONLITERAL_ATTRIBUTE_ENUMERATION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEnumeration().lock())); //8617
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEnumeration().lock())); //8517
 	}
 	return InstanceSpecificationImpl::eGet(featureID, resolve, coreType);
 }
@@ -334,7 +334,7 @@ bool EnumerationLiteralImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::ENUMERATIONLITERAL_ATTRIBUTE_ENUMERATION:
-			return getEnumeration().lock() != nullptr; //8617
+			return getEnumeration().lock() != nullptr; //8517
 	}
 	return InstanceSpecificationImpl::internalEIsSet(featureID);
 }
@@ -347,7 +347,7 @@ bool EnumerationLiteralImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Enumeration> _enumeration = std::dynamic_pointer_cast<uml::Enumeration>(_temp);
-			setEnumeration(_enumeration); //8617
+			setEnumeration(_enumeration); //8517
 			return true;
 		}
 	}

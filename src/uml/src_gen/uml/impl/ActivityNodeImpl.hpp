@@ -13,13 +13,12 @@
 //Model includes
 #include "../ActivityNode.hpp"
 
-#include "uml/impl/ActivityContentImpl.hpp"
 #include "uml/impl/RedefinableElementImpl.hpp"
 
 //*********************************
 namespace uml 
 {
-	class ActivityNodeImpl : virtual public ActivityContentImpl, virtual public RedefinableElementImpl, virtual public ActivityNode 
+	class ActivityNodeImpl : virtual public RedefinableElementImpl, virtual public ActivityNode 
 	{
 		public: 
 			ActivityNodeImpl(const ActivityNodeImpl & obj);
@@ -59,6 +58,16 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
+			/*!
+			The Activity that directly or indirectly contains this ActivityNode.
+			result = (if inStructuredNode<>null then inStructuredNode.containingActivity()
+			else activity
+			endif)
+			<p>From package UML::Activities.</p>
+			*/
+			 
+			virtual std::shared_ptr<uml::Activity> containingActivity() ;
+			
 			
 			
 			//*********************************

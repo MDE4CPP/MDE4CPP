@@ -300,7 +300,7 @@ Any ParameterSetImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //1789
+			return eAny(tempList); //1779
 		}
 		case uml::UmlPackage::PARAMETERSET_ATTRIBUTE_PARAMETER:
 		{
@@ -312,7 +312,7 @@ Any ParameterSetImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //17810
+			return eAny(tempList); //17710
 		}
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
@@ -322,9 +322,9 @@ bool ParameterSetImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::PARAMETERSET_ATTRIBUTE_CONDITION:
-			return getCondition() != nullptr; //1789
+			return getCondition() != nullptr; //1779
 		case uml::UmlPackage::PARAMETERSET_ATTRIBUTE_PARAMETER:
-			return getParameter() != nullptr; //17810
+			return getParameter() != nullptr; //17710
 	}
 	return NamedElementImpl::internalEIsSet(featureID);
 }

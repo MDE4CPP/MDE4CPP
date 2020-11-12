@@ -315,7 +315,7 @@ Any LiteralStringImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::LITERALSTRING_ATTRIBUTE_VALUE:
-			return eAny(getValue()); //14315
+			return eAny(getValue()); //14215
 	}
 	return LiteralSpecificationImpl::eGet(featureID, resolve, coreType);
 }
@@ -324,7 +324,7 @@ bool LiteralStringImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::LITERALSTRING_ATTRIBUTE_VALUE:
-			return getValue() != ""; //14315
+			return getValue() != ""; //14215
 	}
 	return LiteralSpecificationImpl::internalEIsSet(featureID);
 }
@@ -336,7 +336,7 @@ bool LiteralStringImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::string _value = newValue->get<std::string>();
-			setValue(_value); //14315
+			setValue(_value); //14215
 			return true;
 		}
 	}

@@ -351,17 +351,17 @@ Any MultiplicityElementImpl::eGet(int featureID, bool resolve, bool coreType) co
 	switch(featureID)
 	{
 		case uml::UmlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_ISORDERED:
-			return eAny(getIsOrdered()); //1553
+			return eAny(getIsOrdered()); //1543
 		case uml::UmlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_ISUNIQUE:
-			return eAny(getIsUnique()); //1554
+			return eAny(getIsUnique()); //1544
 		case uml::UmlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_LOWER:
-			return eAny(getLower()); //1555
+			return eAny(getLower()); //1545
 		case uml::UmlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_LOWERVALUE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getLowerValue())); //1556
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getLowerValue())); //1546
 		case uml::UmlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_UPPER:
-			return eAny(getUpper()); //1557
+			return eAny(getUpper()); //1547
 		case uml::UmlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_UPPERVALUE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getUpperValue())); //1558
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getUpperValue())); //1548
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -370,17 +370,17 @@ bool MultiplicityElementImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_ISORDERED:
-			return getIsOrdered() != false; //1553
+			return getIsOrdered() != false; //1543
 		case uml::UmlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_ISUNIQUE:
-			return getIsUnique() != true; //1554
+			return getIsUnique() != true; //1544
 		case uml::UmlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_LOWER:
-			return getLower() != 1; //1555
+			return getLower() != 1; //1545
 		case uml::UmlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_LOWERVALUE:
-			return getLowerValue() != nullptr; //1556
+			return getLowerValue() != nullptr; //1546
 		case uml::UmlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_UPPER:
-			return getUpper() != 1; //1557
+			return getUpper() != 1; //1547
 		case uml::UmlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_UPPERVALUE:
-			return getUpperValue() != nullptr; //1558
+			return getUpperValue() != nullptr; //1548
 	}
 	return ElementImpl::internalEIsSet(featureID);
 }
@@ -392,21 +392,21 @@ bool MultiplicityElementImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _isOrdered = newValue->get<bool>();
-			setIsOrdered(_isOrdered); //1553
+			setIsOrdered(_isOrdered); //1543
 			return true;
 		}
 		case uml::UmlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_ISUNIQUE:
 		{
 			// BOOST CAST
 			bool _isUnique = newValue->get<bool>();
-			setIsUnique(_isUnique); //1554
+			setIsUnique(_isUnique); //1544
 			return true;
 		}
 		case uml::UmlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_LOWER:
 		{
 			// BOOST CAST
 			int _lower = newValue->get<int>();
-			setLower(_lower); //1555
+			setLower(_lower); //1545
 			return true;
 		}
 		case uml::UmlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_LOWERVALUE:
@@ -414,14 +414,14 @@ bool MultiplicityElementImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ValueSpecification> _lowerValue = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
-			setLowerValue(_lowerValue); //1556
+			setLowerValue(_lowerValue); //1546
 			return true;
 		}
 		case uml::UmlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_UPPER:
 		{
 			// BOOST CAST
 			int _upper = newValue->get<int>();
-			setUpper(_upper); //1557
+			setUpper(_upper); //1547
 			return true;
 		}
 		case uml::UmlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_UPPERVALUE:
@@ -429,7 +429,7 @@ bool MultiplicityElementImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ValueSpecification> _upperValue = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
-			setUpperValue(_upperValue); //1558
+			setUpperValue(_upperValue); //1548
 			return true;
 		}
 	}

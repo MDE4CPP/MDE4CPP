@@ -251,7 +251,7 @@ Any DirectedRelationshipImpl::eGet(int featureID, bool resolve, bool coreType) c
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //774
+			return eAny(tempList); //764
 		}
 		case uml::UmlPackage::DIRECTEDRELATIONSHIP_ATTRIBUTE_TARGET:
 		{
@@ -263,7 +263,7 @@ Any DirectedRelationshipImpl::eGet(int featureID, bool resolve, bool coreType) c
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //775
+			return eAny(tempList); //765
 		}
 	}
 	return RelationshipImpl::eGet(featureID, resolve, coreType);
@@ -273,9 +273,9 @@ bool DirectedRelationshipImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::DIRECTEDRELATIONSHIP_ATTRIBUTE_SOURCE:
-			return getSource() != nullptr; //774
+			return getSource() != nullptr; //764
 		case uml::UmlPackage::DIRECTEDRELATIONSHIP_ATTRIBUTE_TARGET:
-			return getTarget() != nullptr; //775
+			return getTarget() != nullptr; //765
 	}
 	return RelationshipImpl::internalEIsSet(featureID);
 }

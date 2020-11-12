@@ -63,6 +63,7 @@ AuxiliaryImpl::AuxiliaryImpl(const AuxiliaryImpl & obj):AuxiliaryImpl()
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Auxiliary "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	instantiate();
 }
 
 std::shared_ptr<ecore::EObject>  AuxiliaryImpl::copy() const
@@ -79,7 +80,7 @@ std::shared_ptr<uml::Class> AuxiliaryImpl::getMetaClass()
 }
 
 void AuxiliaryImpl::instantiate()
-{	
+{   
 	
 }
 

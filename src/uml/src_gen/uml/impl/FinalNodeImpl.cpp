@@ -394,7 +394,6 @@ void FinalNodeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> 
 	
 	ActivityNodeImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);

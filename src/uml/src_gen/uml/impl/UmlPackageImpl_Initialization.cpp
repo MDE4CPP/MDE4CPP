@@ -50,9 +50,7 @@ void UmlPackageImpl::initializePackageContents()
 	m_activity_Class->getESuperTypes()->push_back(getBehavior_Class());
 	m_activityEdge_Class->getESuperTypes()->push_back(getRedefinableElement_Class());
 	m_activityFinalNode_Class->getESuperTypes()->push_back(getFinalNode_Class());
-	m_activityGroup_Class->getESuperTypes()->push_back(getActivityContent_Class());
 	m_activityGroup_Class->getESuperTypes()->push_back(getNamedElement_Class());
-	m_activityNode_Class->getESuperTypes()->push_back(getActivityContent_Class());
 	m_activityNode_Class->getESuperTypes()->push_back(getRedefinableElement_Class());
 	m_activityParameterNode_Class->getESuperTypes()->push_back(getObjectNode_Class());
 	m_activityPartition_Class->getESuperTypes()->push_back(getActivityGroup_Class());
@@ -338,7 +336,6 @@ void UmlPackageImpl::initializePackageContents()
 	initializeActionExecutionSpecificationContent();
 	initializeActionInputPinContent();
 	initializeActivityContent();
-	initializeActivityContentContent();
 	initializeActivityEdgeContent();
 	initializeActivityFinalNodeContent();
 	initializeActivityGroupContent();
@@ -1585,25 +1582,6 @@ void UmlPackageImpl::initializeActivityContent()
 	
 }
 
-void UmlPackageImpl::initializeActivityContentContent()
-{
-	m_activityContent_Class->setName("ActivityContent");
-	m_activityContent_Class->setAbstract(true);
-	m_activityContent_Class->setInterface(true);
-	
-	
-	
-	m_activityContent_Operation_containingActivity->setEType(getActivity_Class());
-	m_activityContent_Operation_containingActivity->setName("containingActivity");
-	m_activityContent_Operation_containingActivity->setLowerBound(0);
-	m_activityContent_Operation_containingActivity->setUpperBound(1);
-	m_activityContent_Operation_containingActivity->setUnique(true);
-	m_activityContent_Operation_containingActivity->setOrdered(false);
-	
-	
-	
-}
-
 void UmlPackageImpl::initializeActivityEdgeContent()
 {
 	m_activityEdge_Class->setName("ActivityEdge");
@@ -2027,6 +2005,14 @@ void UmlPackageImpl::initializeActivityGroupContent()
 	    }
 	}
 	
+	m_activityGroup_Operation_containingActivity->setEType(getActivity_Class());
+	m_activityGroup_Operation_containingActivity->setName("containingActivity");
+	m_activityGroup_Operation_containingActivity->setLowerBound(0);
+	m_activityGroup_Operation_containingActivity->setUpperBound(1);
+	m_activityGroup_Operation_containingActivity->setUnique(true);
+	m_activityGroup_Operation_containingActivity->setOrdered(false);
+	
+	
 	m_activityGroup_Operation_nodes_and_edges_EDiagnosticChain_EMap->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
 	m_activityGroup_Operation_nodes_and_edges_EDiagnosticChain_EMap->setName("nodes_and_edges");
 	m_activityGroup_Operation_nodes_and_edges_EDiagnosticChain_EMap->setLowerBound(0);
@@ -2288,6 +2274,14 @@ void UmlPackageImpl::initializeActivityNodeContent()
 			//undefined otherEnd
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
+	
+	m_activityNode_Operation_containingActivity->setEType(getActivity_Class());
+	m_activityNode_Operation_containingActivity->setName("containingActivity");
+	m_activityNode_Operation_containingActivity->setLowerBound(0);
+	m_activityNode_Operation_containingActivity->setUpperBound(1);
+	m_activityNode_Operation_containingActivity->setUnique(true);
+	m_activityNode_Operation_containingActivity->setOrdered(false);
+	
 	
 	
 }
@@ -9916,7 +9910,7 @@ void UmlPackageImpl::initializeDurationConstraintContent()
 	
 	m_durationConstraint_Attribute_firstEvent = getDurationConstraint_Attribute_firstEvent();
 	m_durationConstraint_Attribute_firstEvent->setName("firstEvent");
-	m_durationConstraint_Attribute_firstEvent->setEType(types::TypesPackage::eInstance()->getBoolean_Class());
+	m_durationConstraint_Attribute_firstEvent->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
 	m_durationConstraint_Attribute_firstEvent->setLowerBound(0);
 	m_durationConstraint_Attribute_firstEvent->setUpperBound(2);
 	m_durationConstraint_Attribute_firstEvent->setTransient(false);
@@ -10012,7 +10006,7 @@ void UmlPackageImpl::initializeDurationObservationContent()
 	
 	m_durationObservation_Attribute_firstEvent = getDurationObservation_Attribute_firstEvent();
 	m_durationObservation_Attribute_firstEvent->setName("firstEvent");
-	m_durationObservation_Attribute_firstEvent->setEType(types::TypesPackage::eInstance()->getBoolean_Class());
+	m_durationObservation_Attribute_firstEvent->setEType(ecore::EcorePackage::eInstance()->getEBoolean_Class());
 	m_durationObservation_Attribute_firstEvent->setLowerBound(0);
 	m_durationObservation_Attribute_firstEvent->setUpperBound(2);
 	m_durationObservation_Attribute_firstEvent->setTransient(false);

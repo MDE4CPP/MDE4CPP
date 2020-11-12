@@ -383,11 +383,11 @@ Any ExtendImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::EXTEND_ATTRIBUTE_CONDITION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getCondition())); //9712
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getCondition())); //9612
 		case uml::UmlPackage::EXTEND_ATTRIBUTE_EXTENDEDCASE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getExtendedCase())); //9713
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getExtendedCase())); //9613
 		case uml::UmlPackage::EXTEND_ATTRIBUTE_EXTENSION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getExtension().lock())); //9715
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getExtension().lock())); //9615
 		case uml::UmlPackage::EXTEND_ATTRIBUTE_EXTENSIONLOCATION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -398,7 +398,7 @@ Any ExtendImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //9714
+			return eAny(tempList); //9614
 		}
 	}
 	Any result;
@@ -415,13 +415,13 @@ bool ExtendImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::EXTEND_ATTRIBUTE_CONDITION:
-			return getCondition() != nullptr; //9712
+			return getCondition() != nullptr; //9612
 		case uml::UmlPackage::EXTEND_ATTRIBUTE_EXTENDEDCASE:
-			return getExtendedCase() != nullptr; //9713
+			return getExtendedCase() != nullptr; //9613
 		case uml::UmlPackage::EXTEND_ATTRIBUTE_EXTENSION:
-			return getExtension().lock() != nullptr; //9715
+			return getExtension().lock() != nullptr; //9615
 		case uml::UmlPackage::EXTEND_ATTRIBUTE_EXTENSIONLOCATION:
-			return getExtensionLocation() != nullptr; //9714
+			return getExtensionLocation() != nullptr; //9614
 	}
 	bool result = false;
 	result = DirectedRelationshipImpl::internalEIsSet(featureID);
@@ -441,7 +441,7 @@ bool ExtendImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Constraint> _condition = std::dynamic_pointer_cast<uml::Constraint>(_temp);
-			setCondition(_condition); //9712
+			setCondition(_condition); //9612
 			return true;
 		}
 		case uml::UmlPackage::EXTEND_ATTRIBUTE_EXTENDEDCASE:
@@ -449,7 +449,7 @@ bool ExtendImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::UseCase> _extendedCase = std::dynamic_pointer_cast<uml::UseCase>(_temp);
-			setExtendedCase(_extendedCase); //9713
+			setExtendedCase(_extendedCase); //9613
 			return true;
 		}
 		case uml::UmlPackage::EXTEND_ATTRIBUTE_EXTENSION:
@@ -457,7 +457,7 @@ bool ExtendImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::UseCase> _extension = std::dynamic_pointer_cast<uml::UseCase>(_temp);
-			setExtension(_extension); //9715
+			setExtension(_extension); //9615
 			return true;
 		}
 		case uml::UmlPackage::EXTEND_ATTRIBUTE_EXTENSIONLOCATION:

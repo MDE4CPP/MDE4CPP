@@ -500,7 +500,7 @@ Any LinkActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //13427
+			return eAny(tempList); //13327
 		}
 		case uml::UmlPackage::LINKACTION_ATTRIBUTE_INPUTVALUE:
 		{
@@ -512,7 +512,7 @@ Any LinkActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //13428
+			return eAny(tempList); //13328
 		}
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
@@ -522,9 +522,9 @@ bool LinkActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::LINKACTION_ATTRIBUTE_ENDDATA:
-			return getEndData() != nullptr; //13427
+			return getEndData() != nullptr; //13327
 		case uml::UmlPackage::LINKACTION_ATTRIBUTE_INPUTVALUE:
-			return getInputValue() != nullptr; //13428
+			return getInputValue() != nullptr; //13328
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
@@ -701,7 +701,6 @@ void LinkActionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler>
 	
 	ActivityNodeImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);

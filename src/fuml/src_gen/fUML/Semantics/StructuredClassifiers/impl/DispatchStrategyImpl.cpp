@@ -127,7 +127,14 @@ std::shared_ptr<uml::Behavior> DispatchStrategyImpl::retrieveMethod(std::shared_
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	    return operation->getMethod()->front();
+	if (operation->getMethod()->size() > 0)
+	{
+		return operation->getMethod()->front();
+	}
+	else
+	{
+		return nullptr;
+	}
 	//end of body
 }
 

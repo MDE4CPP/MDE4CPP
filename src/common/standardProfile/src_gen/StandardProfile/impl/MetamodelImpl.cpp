@@ -63,6 +63,7 @@ MetamodelImpl::MetamodelImpl(const MetamodelImpl & obj):MetamodelImpl()
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Metamodel "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	instantiate();
 }
 
 std::shared_ptr<ecore::EObject>  MetamodelImpl::copy() const
@@ -79,7 +80,7 @@ std::shared_ptr<uml::Class> MetamodelImpl::getMetaClass()
 }
 
 void MetamodelImpl::instantiate()
-{	
+{   
 	
 }
 

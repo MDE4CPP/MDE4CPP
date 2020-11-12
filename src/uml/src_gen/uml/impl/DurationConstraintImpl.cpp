@@ -127,7 +127,7 @@ DurationConstraintImpl::DurationConstraintImpl(const DurationConstraintImpl & ob
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy DurationConstraint "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
-	m_firstEvent = obj.getFirstEvent();
+	m_firstEvent = obj.isFirstEvent();
 	m_name = obj.getName();
 	m_qualifiedName = obj.getQualifiedName();
 	m_visibility = obj.getVisibility();
@@ -198,7 +198,7 @@ std::shared_ptr<ecore::EClass> DurationConstraintImpl::eStaticClass() const
 /*
 Getter & Setter for attribute firstEvent
 */
-std::shared_ptr<Bag<bool> > DurationConstraintImpl::getFirstEvent() const 
+std::shared_ptr<Bag<bool> > DurationConstraintImpl::isFirstEvent() const 
 {
 	if(m_firstEvent == nullptr)
 	{
@@ -307,7 +307,7 @@ Any DurationConstraintImpl::eGet(int featureID, bool resolve, bool coreType) con
 	switch(featureID)
 	{
 		case uml::UmlPackage::DURATIONCONSTRAINT_ATTRIBUTE_FIRSTEVENT:
-			return eAny(getFirstEvent()); //7915
+			return eAny(isFirstEvent()); //7815
 	}
 	return IntervalConstraintImpl::eGet(featureID, resolve, coreType);
 }
@@ -316,7 +316,7 @@ bool DurationConstraintImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::DURATIONCONSTRAINT_ATTRIBUTE_FIRSTEVENT:
-			return !getFirstEvent()->empty(); //7915
+			return !isFirstEvent()->empty(); //7815
 	}
 	return IntervalConstraintImpl::internalEIsSet(featureID);
 }

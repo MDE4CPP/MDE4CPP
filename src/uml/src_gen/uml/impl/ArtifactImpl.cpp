@@ -717,7 +717,7 @@ Any ArtifactImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::ARTIFACT_ATTRIBUTE_FILENAME:
-			return eAny(getFileName()); //2138
+			return eAny(getFileName()); //2038
 		case uml::UmlPackage::ARTIFACT_ATTRIBUTE_MANIFESTATION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -728,7 +728,7 @@ Any ArtifactImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //2139
+			return eAny(tempList); //2039
 		}
 		case uml::UmlPackage::ARTIFACT_ATTRIBUTE_NESTEDARTIFACT:
 		{
@@ -740,7 +740,7 @@ Any ArtifactImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //2140
+			return eAny(tempList); //2040
 		}
 		case uml::UmlPackage::ARTIFACT_ATTRIBUTE_OWNEDATTRIBUTE:
 		{
@@ -752,7 +752,7 @@ Any ArtifactImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //2141
+			return eAny(tempList); //2041
 		}
 		case uml::UmlPackage::ARTIFACT_ATTRIBUTE_OWNEDOPERATION:
 		{
@@ -764,7 +764,7 @@ Any ArtifactImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //2142
+			return eAny(tempList); //2042
 		}
 	}
 	Any result;
@@ -781,15 +781,15 @@ bool ArtifactImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::ARTIFACT_ATTRIBUTE_FILENAME:
-			return getFileName() != ""; //2138
+			return getFileName() != ""; //2038
 		case uml::UmlPackage::ARTIFACT_ATTRIBUTE_MANIFESTATION:
-			return getManifestation() != nullptr; //2139
+			return getManifestation() != nullptr; //2039
 		case uml::UmlPackage::ARTIFACT_ATTRIBUTE_NESTEDARTIFACT:
-			return getNestedArtifact() != nullptr; //2140
+			return getNestedArtifact() != nullptr; //2040
 		case uml::UmlPackage::ARTIFACT_ATTRIBUTE_OWNEDATTRIBUTE:
-			return getOwnedAttribute() != nullptr; //2141
+			return getOwnedAttribute() != nullptr; //2041
 		case uml::UmlPackage::ARTIFACT_ATTRIBUTE_OWNEDOPERATION:
-			return getOwnedOperation() != nullptr; //2142
+			return getOwnedOperation() != nullptr; //2042
 	}
 	bool result = false;
 	result = ClassifierImpl::internalEIsSet(featureID);
@@ -808,7 +808,7 @@ bool ArtifactImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::string _fileName = newValue->get<std::string>();
-			setFileName(_fileName); //2138
+			setFileName(_fileName); //2038
 			return true;
 		}
 		case uml::UmlPackage::ARTIFACT_ATTRIBUTE_MANIFESTATION:

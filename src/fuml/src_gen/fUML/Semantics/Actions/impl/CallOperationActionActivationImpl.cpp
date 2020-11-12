@@ -29,6 +29,7 @@
 #include "fUML/Semantics/CommonBehavior/Execution.hpp"
 #include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
 #include "uml/CallOperationAction.hpp"
+#include "uml/Classifier.hpp"
 #include "uml/InputPin.hpp"
 #include "uml/Property.hpp"
 
@@ -189,7 +190,7 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> CallOperationActionA
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> execution = nullptr;
+	std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> execution = nullptr;
 	std::shared_ptr<uml::CallOperationAction> action = this->getCallOperationAction();
 	if(action != nullptr)
 	{
@@ -203,39 +204,65 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> CallOperationActionA
 		if(name.empty() || name.find("self") == 0)
 		{
 			std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> context = this->getActivityExecution()->getContext();
+			if(name.find("self.") == 0)
+			{
+				attributeName = name.substr (5, std::string::npos);
+				DEBUG_MESSAGE(std::cout << "change context to " << attributeName << std::endl;)
+
+				std::shared_ptr<uml::Property> attribute = nullptr;
+				std::shared_ptr<Bag<uml::Classifier>> contextTypes = context->getTypes();
+				Bag<uml::Classifier>::iterator contextTypesIter = contextTypes->begin();
+				Bag<uml::Classifier>::iterator contextTypesEnd = contextTypes->end();
+
+				while (attribute == nullptr || contextTypesIter < contextTypesEnd)
+				{
+					std::shared_ptr<uml::Classifier> classifier = *contextTypesIter;
+					contextTypesIter++;
+
+					std::shared_ptr<Bag<uml::Property>> attributes = classifier->getAllAttributes();
+					Bag<uml::Property>::iterator attributeIter = attributes->begin();
+					Bag<uml::Property>::iterator attributeEnd = attributes->end();
+					while (attribute == nullptr || attributeIter < attributeEnd)
+					{
+						if ((*attributeIter)->getName() == attributeName)
+						{
+							attribute = *attributeIter;
+						}
+						attributeIter++;
+					}
+				}
+
+				if(nullptr == attribute)
+				{
+					std::cerr << "Could not find the attribute in the current context for the target pin " << attributeName << std::endl;
+					exit(EXIT_FAILURE);
+				}
+
+				DEBUG_MESSAGE(std::cout << "Self attribute found for target pin" <<std::endl;)
+
+				if (context != nullptr)
+				{
+					std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> featureValues(new Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>());
+					std::shared_ptr<Bag<fUML::Semantics::Values::Value>> attributeValues = context->getValues(attribute, featureValues);
+					if (attributeValues->size() > 0)
+					{
+						context = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Reference>(attributeValues->front())->getReferent();
+						DEBUG_MESSAGE(
+							if (context != nullptr)
+							{
+								std::cout << "found object for " << context->getTypes()->front()->getName() << std::endl;
+							}
+						)
+					}
+				}
+			}
+
+
 			if(nullptr != context)
 			{
 				execution = context->dispatch(action->getOperation());
 			}
 		}
-//		else if(name.find("self") == 0)
-//		{
-//			std::cout << "starts with" << std::endl;
-//			attributeName = name.substr (5, std::string::npos);
-//
-//			std::shared_ptr<uml::Classifier> context = action->getContext();
-//			std::shared_ptr<Bag<uml::Property> > attributes = context->getAllAttributes();
-//			std::shared_ptr<uml::Property> attribute = nullptr;
-//
-//			for(unsigned int i=0; i<attributes->size(); i++)
-//			{
-//				if((*attributes)[i]->getName() == attributeName)
-//				{
-//					attribute = (*attributes)[i];
-//					break;
-//				}
-//			}
-//
-//			if(nullptr == attribute)
-//			{
-//				std::cerr << "Could not find the attribute in the current context for the target pin " << attributeName << std::endl;
-//				exit(EXIT_FAILURE);
-//			}
-//			else
-//			{
-//				DEBUG_MESSAGE(std::cout << "Self attribute found for the target pin" <<std::endl;)
-//			}
-//		}
 		else
 		{
 			std::shared_ptr<uml::InputPin> t = action->getTarget();

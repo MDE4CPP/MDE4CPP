@@ -304,7 +304,7 @@ Any InstanceValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::INSTANCEVALUE_ATTRIBUTE_INSTANCE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getInstance())); //11915
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getInstance())); //11815
 	}
 	return ValueSpecificationImpl::eGet(featureID, resolve, coreType);
 }
@@ -313,7 +313,7 @@ bool InstanceValueImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::INSTANCEVALUE_ATTRIBUTE_INSTANCE:
-			return getInstance() != nullptr; //11915
+			return getInstance() != nullptr; //11815
 	}
 	return ValueSpecificationImpl::internalEIsSet(featureID);
 }
@@ -326,7 +326,7 @@ bool InstanceValueImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::InstanceSpecification> _instance = std::dynamic_pointer_cast<uml::InstanceSpecification>(_temp);
-			setInstance(_instance); //11915
+			setInstance(_instance); //11815
 			return true;
 		}
 	}

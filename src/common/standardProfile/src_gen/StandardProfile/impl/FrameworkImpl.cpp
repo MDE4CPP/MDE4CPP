@@ -63,6 +63,7 @@ FrameworkImpl::FrameworkImpl(const FrameworkImpl & obj):FrameworkImpl()
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Framework "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	instantiate();
 }
 
 std::shared_ptr<ecore::EObject>  FrameworkImpl::copy() const
@@ -79,7 +80,7 @@ std::shared_ptr<uml::Class> FrameworkImpl::getMetaClass()
 }
 
 void FrameworkImpl::instantiate()
-{	
+{   
 	
 }
 

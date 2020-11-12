@@ -606,7 +606,7 @@ Any EncapsulatedClassifierImpl::eGet(int featureID, bool resolve, bool coreType)
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //8442
+			return eAny(tempList); //8342
 		}
 	}
 	return StructuredClassifierImpl::eGet(featureID, resolve, coreType);
@@ -616,7 +616,7 @@ bool EncapsulatedClassifierImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::ENCAPSULATEDCLASSIFIER_ATTRIBUTE_OWNEDPORT:
-			return getOwnedPort() != nullptr; //8442
+			return getOwnedPort() != nullptr; //8342
 	}
 	return StructuredClassifierImpl::internalEIsSet(featureID);
 }

@@ -535,21 +535,21 @@ Any ParameterImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::PARAMETER_ATTRIBUTE_BEHAVIOR:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getBehavior().lock())); //17527
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getBehavior().lock())); //17427
 		case uml::UmlPackage::PARAMETER_ATTRIBUTE_DEFAULT:
-			return eAny(getDefault()); //17519
+			return eAny(getDefault()); //17419
 		case uml::UmlPackage::PARAMETER_ATTRIBUTE_DEFAULTVALUE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDefaultValue())); //17520
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDefaultValue())); //17420
 		case uml::UmlPackage::PARAMETER_ATTRIBUTE_DIRECTION:
-			return eAny(getDirection()); //17521
+			return eAny(getDirection()); //17421
 		case uml::UmlPackage::PARAMETER_ATTRIBUTE_EFFECT:
-			return eAny(getEffect()); //17522
+			return eAny(getEffect()); //17422
 		case uml::UmlPackage::PARAMETER_ATTRIBUTE_ISEXCEPTION:
-			return eAny(getIsException()); //17523
+			return eAny(getIsException()); //17423
 		case uml::UmlPackage::PARAMETER_ATTRIBUTE_ISSTREAM:
-			return eAny(getIsStream()); //17524
+			return eAny(getIsStream()); //17424
 		case uml::UmlPackage::PARAMETER_ATTRIBUTE_OPERATION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOperation().lock())); //17525
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOperation().lock())); //17425
 		case uml::UmlPackage::PARAMETER_ATTRIBUTE_PARAMETERSET:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -560,7 +560,7 @@ Any ParameterImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //17526
+			return eAny(tempList); //17426
 		}
 	}
 	Any result;
@@ -577,23 +577,23 @@ bool ParameterImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::PARAMETER_ATTRIBUTE_BEHAVIOR:
-			return getBehavior().lock() != nullptr; //17527
+			return getBehavior().lock() != nullptr; //17427
 		case uml::UmlPackage::PARAMETER_ATTRIBUTE_DEFAULT:
-			return getDefault() != ""; //17519
+			return getDefault() != ""; //17419
 		case uml::UmlPackage::PARAMETER_ATTRIBUTE_DEFAULTVALUE:
-			return getDefaultValue() != nullptr; //17520
+			return getDefaultValue() != nullptr; //17420
 		case uml::UmlPackage::PARAMETER_ATTRIBUTE_DIRECTION:
-			return m_direction != ParameterDirectionKind::IN;; //17521
+			return m_direction != ParameterDirectionKind::IN;; //17421
 		case uml::UmlPackage::PARAMETER_ATTRIBUTE_EFFECT:
-			return m_effect != ParameterEffectKind::CREATE;; //17522
+			return m_effect != ParameterEffectKind::CREATE;; //17422
 		case uml::UmlPackage::PARAMETER_ATTRIBUTE_ISEXCEPTION:
-			return getIsException() != false; //17523
+			return getIsException() != false; //17423
 		case uml::UmlPackage::PARAMETER_ATTRIBUTE_ISSTREAM:
-			return getIsStream() != false; //17524
+			return getIsStream() != false; //17424
 		case uml::UmlPackage::PARAMETER_ATTRIBUTE_OPERATION:
-			return getOperation().lock() != nullptr; //17525
+			return getOperation().lock() != nullptr; //17425
 		case uml::UmlPackage::PARAMETER_ATTRIBUTE_PARAMETERSET:
-			return getParameterSet() != nullptr; //17526
+			return getParameterSet() != nullptr; //17426
 	}
 	bool result = false;
 	result = ConnectableElementImpl::internalEIsSet(featureID);
@@ -613,14 +613,14 @@ bool ParameterImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Behavior> _behavior = std::dynamic_pointer_cast<uml::Behavior>(_temp);
-			setBehavior(_behavior); //17527
+			setBehavior(_behavior); //17427
 			return true;
 		}
 		case uml::UmlPackage::PARAMETER_ATTRIBUTE_DEFAULT:
 		{
 			// BOOST CAST
 			std::string _default = newValue->get<std::string>();
-			setDefault(_default); //17519
+			setDefault(_default); //17419
 			return true;
 		}
 		case uml::UmlPackage::PARAMETER_ATTRIBUTE_DEFAULTVALUE:
@@ -628,35 +628,35 @@ bool ParameterImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ValueSpecification> _defaultValue = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
-			setDefaultValue(_defaultValue); //17520
+			setDefaultValue(_defaultValue); //17420
 			return true;
 		}
 		case uml::UmlPackage::PARAMETER_ATTRIBUTE_DIRECTION:
 		{
 			// BOOST CAST
 			uml::ParameterDirectionKind _direction = newValue->get<uml::ParameterDirectionKind>();
-			setDirection(_direction); //17521
+			setDirection(_direction); //17421
 			return true;
 		}
 		case uml::UmlPackage::PARAMETER_ATTRIBUTE_EFFECT:
 		{
 			// BOOST CAST
 			uml::ParameterEffectKind _effect = newValue->get<uml::ParameterEffectKind>();
-			setEffect(_effect); //17522
+			setEffect(_effect); //17422
 			return true;
 		}
 		case uml::UmlPackage::PARAMETER_ATTRIBUTE_ISEXCEPTION:
 		{
 			// BOOST CAST
 			bool _isException = newValue->get<bool>();
-			setIsException(_isException); //17523
+			setIsException(_isException); //17423
 			return true;
 		}
 		case uml::UmlPackage::PARAMETER_ATTRIBUTE_ISSTREAM:
 		{
 			// BOOST CAST
 			bool _isStream = newValue->get<bool>();
-			setIsStream(_isStream); //17524
+			setIsStream(_isStream); //17424
 			return true;
 		}
 		case uml::UmlPackage::PARAMETER_ATTRIBUTE_PARAMETERSET:

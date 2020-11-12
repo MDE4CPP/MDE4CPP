@@ -293,7 +293,7 @@ Any ContinuationImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::CONTINUATION_ATTRIBUTE_SETTING:
-			return eAny(getSetting()); //5913
+			return eAny(getSetting()); //5813
 	}
 	return InteractionFragmentImpl::eGet(featureID, resolve, coreType);
 }
@@ -302,7 +302,7 @@ bool ContinuationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::CONTINUATION_ATTRIBUTE_SETTING:
-			return getSetting() != true; //5913
+			return getSetting() != true; //5813
 	}
 	return InteractionFragmentImpl::internalEIsSet(featureID);
 }
@@ -314,7 +314,7 @@ bool ContinuationImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _setting = newValue->get<bool>();
-			setSetting(_setting); //5913
+			setSetting(_setting); //5813
 			return true;
 		}
 	}

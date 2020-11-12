@@ -798,10 +798,10 @@ Any StereotypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //22452
+			return eAny(tempList); //22352
 		}
 		case uml::UmlPackage::STEREOTYPE_ATTRIBUTE_PROFILE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getProfile())); //22453
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getProfile())); //22353
 	}
 	return ClassImpl::eGet(featureID, resolve, coreType);
 }
@@ -810,9 +810,9 @@ bool StereotypeImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::STEREOTYPE_ATTRIBUTE_ICON:
-			return getIcon() != nullptr; //22452
+			return getIcon() != nullptr; //22352
 		case uml::UmlPackage::STEREOTYPE_ATTRIBUTE_PROFILE:
-			return getProfile() != nullptr; //22453
+			return getProfile() != nullptr; //22353
 	}
 	return ClassImpl::internalEIsSet(featureID);
 }

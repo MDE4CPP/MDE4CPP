@@ -209,10 +209,10 @@ Any CommentImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //463
+			return eAny(tempList); //453
 		}
 		case uml::UmlPackage::COMMENT_ATTRIBUTE_BODY:
-			return eAny(getBody()); //464
+			return eAny(getBody()); //454
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -221,9 +221,9 @@ bool CommentImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::COMMENT_ATTRIBUTE_ANNOTATEDELEMENT:
-			return getAnnotatedElement() != nullptr; //463
+			return getAnnotatedElement() != nullptr; //453
 		case uml::UmlPackage::COMMENT_ATTRIBUTE_BODY:
-			return getBody() != ""; //464
+			return getBody() != ""; //454
 	}
 	return ElementImpl::internalEIsSet(featureID);
 }
@@ -271,7 +271,7 @@ bool CommentImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::string _body = newValue->get<std::string>();
-			setBody(_body); //464
+			setBody(_body); //454
 			return true;
 		}
 	}

@@ -24,7 +24,7 @@ UMLExecPluginImpl::UMLExecPluginImpl()
 }
 
 UMLExecPluginImpl::~UMLExecPluginImpl()
-{	
+{
 }
 
 std::string UMLExecPluginImpl::eclipseURI()

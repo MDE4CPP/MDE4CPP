@@ -285,9 +285,9 @@ Any PackageMergeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::PACKAGEMERGE_ATTRIBUTE_MERGEDPACKAGE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getMergedPackage())); //1736
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getMergedPackage())); //1726
 		case uml::UmlPackage::PACKAGEMERGE_ATTRIBUTE_RECEIVINGPACKAGE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getReceivingPackage().lock())); //1737
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getReceivingPackage().lock())); //1727
 	}
 	return DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
 }
@@ -296,9 +296,9 @@ bool PackageMergeImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::PACKAGEMERGE_ATTRIBUTE_MERGEDPACKAGE:
-			return getMergedPackage() != nullptr; //1736
+			return getMergedPackage() != nullptr; //1726
 		case uml::UmlPackage::PACKAGEMERGE_ATTRIBUTE_RECEIVINGPACKAGE:
-			return getReceivingPackage().lock() != nullptr; //1737
+			return getReceivingPackage().lock() != nullptr; //1727
 	}
 	return DirectedRelationshipImpl::internalEIsSet(featureID);
 }
@@ -311,7 +311,7 @@ bool PackageMergeImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Package> _mergedPackage = std::dynamic_pointer_cast<uml::Package>(_temp);
-			setMergedPackage(_mergedPackage); //1736
+			setMergedPackage(_mergedPackage); //1726
 			return true;
 		}
 		case uml::UmlPackage::PACKAGEMERGE_ATTRIBUTE_RECEIVINGPACKAGE:
@@ -319,7 +319,7 @@ bool PackageMergeImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Package> _receivingPackage = std::dynamic_pointer_cast<uml::Package>(_temp);
-			setReceivingPackage(_receivingPackage); //1737
+			setReceivingPackage(_receivingPackage); //1727
 			return true;
 		}
 	}

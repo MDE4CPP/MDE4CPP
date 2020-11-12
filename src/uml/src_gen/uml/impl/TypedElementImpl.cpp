@@ -225,7 +225,7 @@ Any TypedElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::TYPEDELEMENT_ATTRIBUTE_TYPE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getType())); //2469
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getType())); //2459
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -234,7 +234,7 @@ bool TypedElementImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::TYPEDELEMENT_ATTRIBUTE_TYPE:
-			return getType() != nullptr; //2469
+			return getType() != nullptr; //2459
 	}
 	return NamedElementImpl::internalEIsSet(featureID);
 }
@@ -247,7 +247,7 @@ bool TypedElementImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Type> _type = std::dynamic_pointer_cast<uml::Type>(_temp);
-			setType(_type); //2469
+			setType(_type); //2459
 			return true;
 		}
 	}

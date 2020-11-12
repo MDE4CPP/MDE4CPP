@@ -63,6 +63,7 @@ BuildComponentImpl::BuildComponentImpl(const BuildComponentImpl & obj):BuildComp
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy BuildComponent "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	instantiate();
 }
 
 std::shared_ptr<ecore::EObject>  BuildComponentImpl::copy() const
@@ -79,7 +80,7 @@ std::shared_ptr<uml::Class> BuildComponentImpl::getMetaClass()
 }
 
 void BuildComponentImpl::instantiate()
-{	
+{   
 	
 }
 

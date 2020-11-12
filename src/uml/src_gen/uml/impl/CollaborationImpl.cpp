@@ -629,7 +629,7 @@ Any CollaborationImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //4345
+			return eAny(tempList); //4245
 		}
 	}
 	Any result;
@@ -646,7 +646,7 @@ bool CollaborationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::COLLABORATION_ATTRIBUTE_COLLABORATIONROLE:
-			return getCollaborationRole() != nullptr; //4345
+			return getCollaborationRole() != nullptr; //4245
 	}
 	bool result = false;
 	result = BehavioredClassifierImpl::internalEIsSet(featureID);

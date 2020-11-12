@@ -319,11 +319,11 @@ Any ProfileApplicationImpl::eGet(int featureID, bool resolve, bool coreType) con
 	switch(featureID)
 	{
 		case uml::UmlPackage::PROFILEAPPLICATION_ATTRIBUTE_APPLIEDPROFILE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getAppliedProfile())); //1856
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getAppliedProfile())); //1846
 		case uml::UmlPackage::PROFILEAPPLICATION_ATTRIBUTE_APPLYINGPACKAGE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getApplyingPackage().lock())); //1858
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getApplyingPackage().lock())); //1848
 		case uml::UmlPackage::PROFILEAPPLICATION_ATTRIBUTE_ISSTRICT:
-			return eAny(getIsStrict()); //1857
+			return eAny(getIsStrict()); //1847
 	}
 	return DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
 }
@@ -332,11 +332,11 @@ bool ProfileApplicationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::PROFILEAPPLICATION_ATTRIBUTE_APPLIEDPROFILE:
-			return getAppliedProfile() != nullptr; //1856
+			return getAppliedProfile() != nullptr; //1846
 		case uml::UmlPackage::PROFILEAPPLICATION_ATTRIBUTE_APPLYINGPACKAGE:
-			return getApplyingPackage().lock() != nullptr; //1858
+			return getApplyingPackage().lock() != nullptr; //1848
 		case uml::UmlPackage::PROFILEAPPLICATION_ATTRIBUTE_ISSTRICT:
-			return getIsStrict() != false; //1857
+			return getIsStrict() != false; //1847
 	}
 	return DirectedRelationshipImpl::internalEIsSet(featureID);
 }
@@ -349,7 +349,7 @@ bool ProfileApplicationImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Profile> _appliedProfile = std::dynamic_pointer_cast<uml::Profile>(_temp);
-			setAppliedProfile(_appliedProfile); //1856
+			setAppliedProfile(_appliedProfile); //1846
 			return true;
 		}
 		case uml::UmlPackage::PROFILEAPPLICATION_ATTRIBUTE_APPLYINGPACKAGE:
@@ -357,14 +357,14 @@ bool ProfileApplicationImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Package> _applyingPackage = std::dynamic_pointer_cast<uml::Package>(_temp);
-			setApplyingPackage(_applyingPackage); //1858
+			setApplyingPackage(_applyingPackage); //1848
 			return true;
 		}
 		case uml::UmlPackage::PROFILEAPPLICATION_ATTRIBUTE_ISSTRICT:
 		{
 			// BOOST CAST
 			bool _isStrict = newValue->get<bool>();
-			setIsStrict(_isStrict); //1857
+			setIsStrict(_isStrict); //1847
 			return true;
 		}
 	}

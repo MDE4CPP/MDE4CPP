@@ -425,18 +425,18 @@ Any NamedElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //1563
+			return eAny(tempList); //1553
 		}
 		case uml::UmlPackage::NAMEDELEMENT_ATTRIBUTE_NAME:
-			return eAny(getName()); //1564
+			return eAny(getName()); //1554
 		case uml::UmlPackage::NAMEDELEMENT_ATTRIBUTE_NAMEEXPRESSION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getNameExpression())); //1565
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getNameExpression())); //1555
 		case uml::UmlPackage::NAMEDELEMENT_ATTRIBUTE_NAMESPACE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getNamespace().lock())); //1566
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getNamespace().lock())); //1556
 		case uml::UmlPackage::NAMEDELEMENT_ATTRIBUTE_QUALIFIEDNAME:
-			return eAny(getQualifiedName()); //1567
+			return eAny(getQualifiedName()); //1557
 		case uml::UmlPackage::NAMEDELEMENT_ATTRIBUTE_VISIBILITY:
-			return eAny(getVisibility()); //1568
+			return eAny(getVisibility()); //1558
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -445,17 +445,17 @@ bool NamedElementImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::NAMEDELEMENT_ATTRIBUTE_CLIENTDEPENDENCY:
-			return getClientDependency() != nullptr; //1563
+			return getClientDependency() != nullptr; //1553
 		case uml::UmlPackage::NAMEDELEMENT_ATTRIBUTE_NAME:
-			return getName() != ""; //1564
+			return getName() != ""; //1554
 		case uml::UmlPackage::NAMEDELEMENT_ATTRIBUTE_NAMEEXPRESSION:
-			return getNameExpression() != nullptr; //1565
+			return getNameExpression() != nullptr; //1555
 		case uml::UmlPackage::NAMEDELEMENT_ATTRIBUTE_NAMESPACE:
-			return getNamespace().lock() != nullptr; //1566
+			return getNamespace().lock() != nullptr; //1556
 		case uml::UmlPackage::NAMEDELEMENT_ATTRIBUTE_QUALIFIEDNAME:
-			return getQualifiedName() != ""; //1567
+			return getQualifiedName() != ""; //1557
 		case uml::UmlPackage::NAMEDELEMENT_ATTRIBUTE_VISIBILITY:
-			return m_visibility != VisibilityKind::PUBLIC;; //1568
+			return m_visibility != VisibilityKind::PUBLIC;; //1558
 	}
 	return ElementImpl::internalEIsSet(featureID);
 }
@@ -467,7 +467,7 @@ bool NamedElementImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::string _name = newValue->get<std::string>();
-			setName(_name); //1564
+			setName(_name); //1554
 			return true;
 		}
 		case uml::UmlPackage::NAMEDELEMENT_ATTRIBUTE_NAMEEXPRESSION:
@@ -475,14 +475,14 @@ bool NamedElementImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::StringExpression> _nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(_temp);
-			setNameExpression(_nameExpression); //1565
+			setNameExpression(_nameExpression); //1555
 			return true;
 		}
 		case uml::UmlPackage::NAMEDELEMENT_ATTRIBUTE_VISIBILITY:
 		{
 			// BOOST CAST
 			uml::VisibilityKind _visibility = newValue->get<uml::VisibilityKind>();
-			setVisibility(_visibility); //1568
+			setVisibility(_visibility); //1558
 			return true;
 		}
 	}

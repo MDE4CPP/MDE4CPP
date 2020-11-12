@@ -474,9 +474,9 @@ Any AddStructuralFeatureValueActionImpl::eGet(int featureID, bool resolve, bool 
 	switch(featureID)
 	{
 		case uml::UmlPackage::ADDSTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_INSERTAT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getInsertAt())); //1631
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getInsertAt())); //1531
 		case uml::UmlPackage::ADDSTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_ISREPLACEALL:
-			return eAny(getIsReplaceAll()); //1632
+			return eAny(getIsReplaceAll()); //1532
 	}
 	return WriteStructuralFeatureActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -485,9 +485,9 @@ bool AddStructuralFeatureValueActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::ADDSTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_INSERTAT:
-			return getInsertAt() != nullptr; //1631
+			return getInsertAt() != nullptr; //1531
 		case uml::UmlPackage::ADDSTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_ISREPLACEALL:
-			return getIsReplaceAll() != false; //1632
+			return getIsReplaceAll() != false; //1532
 	}
 	return WriteStructuralFeatureActionImpl::internalEIsSet(featureID);
 }
@@ -500,14 +500,14 @@ bool AddStructuralFeatureValueActionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::InputPin> _insertAt = std::dynamic_pointer_cast<uml::InputPin>(_temp);
-			setInsertAt(_insertAt); //1631
+			setInsertAt(_insertAt); //1531
 			return true;
 		}
 		case uml::UmlPackage::ADDSTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_ISREPLACEALL:
 		{
 			// BOOST CAST
 			bool _isReplaceAll = newValue->get<bool>();
-			setIsReplaceAll(_isReplaceAll); //1632
+			setIsReplaceAll(_isReplaceAll); //1532
 			return true;
 		}
 	}
@@ -613,7 +613,6 @@ void AddStructuralFeatureValueActionImpl::save(std::shared_ptr<persistence::inte
 	
 	ActivityNodeImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);

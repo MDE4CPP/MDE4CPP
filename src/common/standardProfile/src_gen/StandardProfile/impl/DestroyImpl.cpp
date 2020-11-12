@@ -63,6 +63,7 @@ DestroyImpl::DestroyImpl(const DestroyImpl & obj):DestroyImpl()
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Destroy "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	instantiate();
 }
 
 std::shared_ptr<ecore::EObject>  DestroyImpl::copy() const
@@ -79,7 +80,7 @@ std::shared_ptr<uml::Class> DestroyImpl::getMetaClass()
 }
 
 void DestroyImpl::instantiate()
-{	
+{   
 	
 }
 

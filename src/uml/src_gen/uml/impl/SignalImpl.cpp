@@ -567,7 +567,7 @@ Any SignalImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //21638
+			return eAny(tempList); //21538
 		}
 	}
 	return ClassifierImpl::eGet(featureID, resolve, coreType);
@@ -577,7 +577,7 @@ bool SignalImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::SIGNAL_ATTRIBUTE_OWNEDATTRIBUTE:
-			return getOwnedAttribute() != nullptr; //21638
+			return getOwnedAttribute() != nullptr; //21538
 	}
 	return ClassifierImpl::internalEIsSet(featureID);
 }

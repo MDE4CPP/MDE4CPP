@@ -471,7 +471,6 @@ void WriteLinkActionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHan
 	
 	ActivityNodeImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);

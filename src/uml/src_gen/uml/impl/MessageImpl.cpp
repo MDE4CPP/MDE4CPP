@@ -454,22 +454,22 @@ Any MessageImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //1489
+			return eAny(tempList); //1479
 		}
 		case uml::UmlPackage::MESSAGE_ATTRIBUTE_CONNECTOR:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getConnector())); //14810
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getConnector())); //14710
 		case uml::UmlPackage::MESSAGE_ATTRIBUTE_INTERACTION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getInteraction().lock())); //14811
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getInteraction().lock())); //14711
 		case uml::UmlPackage::MESSAGE_ATTRIBUTE_MESSAGEKIND:
-			return eAny(getMessageKind()); //14812
+			return eAny(getMessageKind()); //14712
 		case uml::UmlPackage::MESSAGE_ATTRIBUTE_MESSAGESORT:
-			return eAny(getMessageSort()); //14813
+			return eAny(getMessageSort()); //14713
 		case uml::UmlPackage::MESSAGE_ATTRIBUTE_RECEIVEEVENT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getReceiveEvent())); //14814
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getReceiveEvent())); //14714
 		case uml::UmlPackage::MESSAGE_ATTRIBUTE_SENDEVENT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSendEvent())); //14815
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSendEvent())); //14715
 		case uml::UmlPackage::MESSAGE_ATTRIBUTE_SIGNATURE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSignature())); //14816
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSignature())); //14716
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -478,21 +478,21 @@ bool MessageImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::MESSAGE_ATTRIBUTE_ARGUMENT:
-			return getArgument() != nullptr; //1489
+			return getArgument() != nullptr; //1479
 		case uml::UmlPackage::MESSAGE_ATTRIBUTE_CONNECTOR:
-			return getConnector() != nullptr; //14810
+			return getConnector() != nullptr; //14710
 		case uml::UmlPackage::MESSAGE_ATTRIBUTE_INTERACTION:
-			return getInteraction().lock() != nullptr; //14811
+			return getInteraction().lock() != nullptr; //14711
 		case uml::UmlPackage::MESSAGE_ATTRIBUTE_MESSAGEKIND:
-			return m_messageKind != MessageKind::UNKNOWN;; //14812
+			return m_messageKind != MessageKind::UNKNOWN;; //14712
 		case uml::UmlPackage::MESSAGE_ATTRIBUTE_MESSAGESORT:
-			return m_messageSort != MessageSort::SYNCHCALL;; //14813
+			return m_messageSort != MessageSort::SYNCHCALL;; //14713
 		case uml::UmlPackage::MESSAGE_ATTRIBUTE_RECEIVEEVENT:
-			return getReceiveEvent() != nullptr; //14814
+			return getReceiveEvent() != nullptr; //14714
 		case uml::UmlPackage::MESSAGE_ATTRIBUTE_SENDEVENT:
-			return getSendEvent() != nullptr; //14815
+			return getSendEvent() != nullptr; //14715
 		case uml::UmlPackage::MESSAGE_ATTRIBUTE_SIGNATURE:
-			return getSignature() != nullptr; //14816
+			return getSignature() != nullptr; //14716
 	}
 	return NamedElementImpl::internalEIsSet(featureID);
 }
@@ -541,7 +541,7 @@ bool MessageImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Connector> _connector = std::dynamic_pointer_cast<uml::Connector>(_temp);
-			setConnector(_connector); //14810
+			setConnector(_connector); //14710
 			return true;
 		}
 		case uml::UmlPackage::MESSAGE_ATTRIBUTE_INTERACTION:
@@ -549,14 +549,14 @@ bool MessageImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Interaction> _interaction = std::dynamic_pointer_cast<uml::Interaction>(_temp);
-			setInteraction(_interaction); //14811
+			setInteraction(_interaction); //14711
 			return true;
 		}
 		case uml::UmlPackage::MESSAGE_ATTRIBUTE_MESSAGESORT:
 		{
 			// BOOST CAST
 			uml::MessageSort _messageSort = newValue->get<uml::MessageSort>();
-			setMessageSort(_messageSort); //14813
+			setMessageSort(_messageSort); //14713
 			return true;
 		}
 		case uml::UmlPackage::MESSAGE_ATTRIBUTE_RECEIVEEVENT:
@@ -564,7 +564,7 @@ bool MessageImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::MessageEnd> _receiveEvent = std::dynamic_pointer_cast<uml::MessageEnd>(_temp);
-			setReceiveEvent(_receiveEvent); //14814
+			setReceiveEvent(_receiveEvent); //14714
 			return true;
 		}
 		case uml::UmlPackage::MESSAGE_ATTRIBUTE_SENDEVENT:
@@ -572,7 +572,7 @@ bool MessageImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::MessageEnd> _sendEvent = std::dynamic_pointer_cast<uml::MessageEnd>(_temp);
-			setSendEvent(_sendEvent); //14815
+			setSendEvent(_sendEvent); //14715
 			return true;
 		}
 		case uml::UmlPackage::MESSAGE_ATTRIBUTE_SIGNATURE:
@@ -580,7 +580,7 @@ bool MessageImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::NamedElement> _signature = std::dynamic_pointer_cast<uml::NamedElement>(_temp);
-			setSignature(_signature); //14816
+			setSignature(_signature); //14716
 			return true;
 		}
 	}

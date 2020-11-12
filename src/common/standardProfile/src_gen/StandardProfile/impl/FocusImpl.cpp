@@ -63,6 +63,7 @@ FocusImpl::FocusImpl(const FocusImpl & obj):FocusImpl()
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Focus "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	instantiate();
 }
 
 std::shared_ptr<ecore::EObject>  FocusImpl::copy() const
@@ -79,7 +80,7 @@ std::shared_ptr<uml::Class> FocusImpl::getMetaClass()
 }
 
 void FocusImpl::instantiate()
-{	
+{   
 	
 }
 

@@ -334,9 +334,9 @@ Any VariableImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::VARIABLE_ATTRIBUTE_ACTIVITYSCOPE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getActivityScope().lock())); //25319
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getActivityScope().lock())); //25219
 		case uml::UmlPackage::VARIABLE_ATTRIBUTE_SCOPE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getScope().lock())); //25320
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getScope().lock())); //25220
 	}
 	Any result;
 	result = ConnectableElementImpl::eGet(featureID, resolve, coreType);
@@ -352,9 +352,9 @@ bool VariableImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::VARIABLE_ATTRIBUTE_ACTIVITYSCOPE:
-			return getActivityScope().lock() != nullptr; //25319
+			return getActivityScope().lock() != nullptr; //25219
 		case uml::UmlPackage::VARIABLE_ATTRIBUTE_SCOPE:
-			return getScope().lock() != nullptr; //25320
+			return getScope().lock() != nullptr; //25220
 	}
 	bool result = false;
 	result = ConnectableElementImpl::internalEIsSet(featureID);
@@ -374,7 +374,7 @@ bool VariableImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Activity> _activityScope = std::dynamic_pointer_cast<uml::Activity>(_temp);
-			setActivityScope(_activityScope); //25319
+			setActivityScope(_activityScope); //25219
 			return true;
 		}
 		case uml::UmlPackage::VARIABLE_ATTRIBUTE_SCOPE:
@@ -382,7 +382,7 @@ bool VariableImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::StructuredActivityNode> _scope = std::dynamic_pointer_cast<uml::StructuredActivityNode>(_temp);
-			setScope(_scope); //25320
+			setScope(_scope); //25220
 			return true;
 		}
 	}

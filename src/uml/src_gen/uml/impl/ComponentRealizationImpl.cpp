@@ -402,7 +402,7 @@ Any ComponentRealizationImpl::eGet(int featureID, bool resolve, bool coreType) c
 	switch(featureID)
 	{
 		case uml::UmlPackage::COMPONENTREALIZATION_ATTRIBUTE_ABSTRACTION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getAbstraction().lock())); //4919
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getAbstraction().lock())); //4819
 		case uml::UmlPackage::COMPONENTREALIZATION_ATTRIBUTE_REALIZINGCLASSIFIER:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -413,7 +413,7 @@ Any ComponentRealizationImpl::eGet(int featureID, bool resolve, bool coreType) c
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //4918
+			return eAny(tempList); //4818
 		}
 	}
 	return RealizationImpl::eGet(featureID, resolve, coreType);
@@ -423,9 +423,9 @@ bool ComponentRealizationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::COMPONENTREALIZATION_ATTRIBUTE_ABSTRACTION:
-			return getAbstraction().lock() != nullptr; //4919
+			return getAbstraction().lock() != nullptr; //4819
 		case uml::UmlPackage::COMPONENTREALIZATION_ATTRIBUTE_REALIZINGCLASSIFIER:
-			return getRealizingClassifier() != nullptr; //4918
+			return getRealizingClassifier() != nullptr; //4818
 	}
 	return RealizationImpl::internalEIsSet(featureID);
 }
@@ -438,7 +438,7 @@ bool ComponentRealizationImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Component> _abstraction = std::dynamic_pointer_cast<uml::Component>(_temp);
-			setAbstraction(_abstraction); //4919
+			setAbstraction(_abstraction); //4819
 			return true;
 		}
 		case uml::UmlPackage::COMPONENTREALIZATION_ATTRIBUTE_REALIZINGCLASSIFIER:

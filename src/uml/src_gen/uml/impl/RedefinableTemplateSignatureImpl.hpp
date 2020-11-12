@@ -85,7 +85,7 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Classifier > getClassifier() const ;
+			virtual std::weak_ptr<uml::Classifier > getClassifier() const ;
 			
 			/*!
 			The Classifier that owns this RedefinableTemplateSignature.

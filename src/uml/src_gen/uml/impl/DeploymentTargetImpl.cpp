@@ -287,7 +287,7 @@ Any DeploymentTargetImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //729
+			return eAny(tempList); //719
 		}
 		case uml::UmlPackage::DEPLOYMENTTARGET_ATTRIBUTE_DEPLOYMENT:
 		{
@@ -299,7 +299,7 @@ Any DeploymentTargetImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //7210
+			return eAny(tempList); //7110
 		}
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
@@ -309,9 +309,9 @@ bool DeploymentTargetImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::DEPLOYMENTTARGET_ATTRIBUTE_DEPLOYEDELEMENT:
-			return getDeployedElement() != nullptr; //729
+			return getDeployedElement() != nullptr; //719
 		case uml::UmlPackage::DEPLOYMENTTARGET_ATTRIBUTE_DEPLOYMENT:
-			return getDeployment() != nullptr; //7210
+			return getDeployment() != nullptr; //7110
 	}
 	return NamedElementImpl::internalEIsSet(featureID);
 }

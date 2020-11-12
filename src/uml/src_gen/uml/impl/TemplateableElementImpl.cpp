@@ -247,7 +247,7 @@ Any TemplateableElementImpl::eGet(int featureID, bool resolve, bool coreType) co
 	switch(featureID)
 	{
 		case uml::UmlPackage::TEMPLATEABLEELEMENT_ATTRIBUTE_OWNEDTEMPLATESIGNATURE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOwnedTemplateSignature())); //2354
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOwnedTemplateSignature())); //2344
 		case uml::UmlPackage::TEMPLATEABLEELEMENT_ATTRIBUTE_TEMPLATEBINDING:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -258,7 +258,7 @@ Any TemplateableElementImpl::eGet(int featureID, bool resolve, bool coreType) co
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //2353
+			return eAny(tempList); //2343
 		}
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
@@ -268,9 +268,9 @@ bool TemplateableElementImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::TEMPLATEABLEELEMENT_ATTRIBUTE_OWNEDTEMPLATESIGNATURE:
-			return getOwnedTemplateSignature() != nullptr; //2354
+			return getOwnedTemplateSignature() != nullptr; //2344
 		case uml::UmlPackage::TEMPLATEABLEELEMENT_ATTRIBUTE_TEMPLATEBINDING:
-			return getTemplateBinding() != nullptr; //2353
+			return getTemplateBinding() != nullptr; //2343
 	}
 	return ElementImpl::internalEIsSet(featureID);
 }
@@ -283,7 +283,7 @@ bool TemplateableElementImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::TemplateSignature> _ownedTemplateSignature = std::dynamic_pointer_cast<uml::TemplateSignature>(_temp);
-			setOwnedTemplateSignature(_ownedTemplateSignature); //2354
+			setOwnedTemplateSignature(_ownedTemplateSignature); //2344
 			return true;
 		}
 		case uml::UmlPackage::TEMPLATEABLEELEMENT_ATTRIBUTE_TEMPLATEBINDING:

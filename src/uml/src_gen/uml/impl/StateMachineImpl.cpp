@@ -908,7 +908,7 @@ Any StateMachineImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //22361
+			return eAny(tempList); //22261
 		}
 		case uml::UmlPackage::STATEMACHINE_ATTRIBUTE_EXTENDEDSTATEMACHINE:
 		{
@@ -920,7 +920,7 @@ Any StateMachineImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //22364
+			return eAny(tempList); //22264
 		}
 		case uml::UmlPackage::STATEMACHINE_ATTRIBUTE_REGION:
 		{
@@ -932,7 +932,7 @@ Any StateMachineImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //22363
+			return eAny(tempList); //22263
 		}
 		case uml::UmlPackage::STATEMACHINE_ATTRIBUTE_SUBMACHINESTATE:
 		{
@@ -944,7 +944,7 @@ Any StateMachineImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //22362
+			return eAny(tempList); //22262
 		}
 	}
 	return BehaviorImpl::eGet(featureID, resolve, coreType);
@@ -954,13 +954,13 @@ bool StateMachineImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::STATEMACHINE_ATTRIBUTE_CONNECTIONPOINT:
-			return getConnectionPoint() != nullptr; //22361
+			return getConnectionPoint() != nullptr; //22261
 		case uml::UmlPackage::STATEMACHINE_ATTRIBUTE_EXTENDEDSTATEMACHINE:
-			return getExtendedStateMachine() != nullptr; //22364
+			return getExtendedStateMachine() != nullptr; //22264
 		case uml::UmlPackage::STATEMACHINE_ATTRIBUTE_REGION:
-			return getRegion() != nullptr; //22363
+			return getRegion() != nullptr; //22263
 		case uml::UmlPackage::STATEMACHINE_ATTRIBUTE_SUBMACHINESTATE:
-			return getSubmachineState() != nullptr; //22362
+			return getSubmachineState() != nullptr; //22262
 	}
 	return BehaviorImpl::internalEIsSet(featureID);
 }

@@ -468,9 +468,9 @@ Any RemoveStructuralFeatureValueActionImpl::eGet(int featureID, bool resolve, bo
 	switch(featureID)
 	{
 		case uml::UmlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_ISREMOVEDUPLICATES:
-			return eAny(getIsRemoveDuplicates()); //21031
+			return eAny(getIsRemoveDuplicates()); //20931
 		case uml::UmlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_REMOVEAT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getRemoveAt())); //21032
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getRemoveAt())); //20932
 	}
 	return WriteStructuralFeatureActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -479,9 +479,9 @@ bool RemoveStructuralFeatureValueActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_ISREMOVEDUPLICATES:
-			return getIsRemoveDuplicates() != false; //21031
+			return getIsRemoveDuplicates() != false; //20931
 		case uml::UmlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_REMOVEAT:
-			return getRemoveAt() != nullptr; //21032
+			return getRemoveAt() != nullptr; //20932
 	}
 	return WriteStructuralFeatureActionImpl::internalEIsSet(featureID);
 }
@@ -493,7 +493,7 @@ bool RemoveStructuralFeatureValueActionImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _isRemoveDuplicates = newValue->get<bool>();
-			setIsRemoveDuplicates(_isRemoveDuplicates); //21031
+			setIsRemoveDuplicates(_isRemoveDuplicates); //20931
 			return true;
 		}
 		case uml::UmlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_REMOVEAT:
@@ -501,7 +501,7 @@ bool RemoveStructuralFeatureValueActionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::InputPin> _removeAt = std::dynamic_pointer_cast<uml::InputPin>(_temp);
-			setRemoveAt(_removeAt); //21032
+			setRemoveAt(_removeAt); //20932
 			return true;
 		}
 	}
@@ -607,7 +607,6 @@ void RemoveStructuralFeatureValueActionImpl::save(std::shared_ptr<persistence::i
 	
 	ActivityNodeImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);

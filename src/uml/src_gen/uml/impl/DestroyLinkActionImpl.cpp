@@ -467,7 +467,6 @@ void DestroyLinkActionImpl::save(std::shared_ptr<persistence::interfaces::XSaveH
 	
 	ActivityNodeImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);

@@ -376,9 +376,9 @@ Any JoinNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::JOINNODE_ATTRIBUTE_ISCOMBINEDUPLICATE:
-			return eAny(getIsCombineDuplicate()); //13220
+			return eAny(getIsCombineDuplicate()); //13120
 		case uml::UmlPackage::JOINNODE_ATTRIBUTE_JOINSPEC:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getJoinSpec())); //13221
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getJoinSpec())); //13121
 	}
 	return ControlNodeImpl::eGet(featureID, resolve, coreType);
 }
@@ -387,9 +387,9 @@ bool JoinNodeImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::JOINNODE_ATTRIBUTE_ISCOMBINEDUPLICATE:
-			return getIsCombineDuplicate() != true; //13220
+			return getIsCombineDuplicate() != true; //13120
 		case uml::UmlPackage::JOINNODE_ATTRIBUTE_JOINSPEC:
-			return getJoinSpec() != nullptr; //13221
+			return getJoinSpec() != nullptr; //13121
 	}
 	return ControlNodeImpl::internalEIsSet(featureID);
 }
@@ -401,7 +401,7 @@ bool JoinNodeImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _isCombineDuplicate = newValue->get<bool>();
-			setIsCombineDuplicate(_isCombineDuplicate); //13220
+			setIsCombineDuplicate(_isCombineDuplicate); //13120
 			return true;
 		}
 		case uml::UmlPackage::JOINNODE_ATTRIBUTE_JOINSPEC:
@@ -409,7 +409,7 @@ bool JoinNodeImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ValueSpecification> _joinSpec = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
-			setJoinSpec(_joinSpec); //13221
+			setJoinSpec(_joinSpec); //13121
 			return true;
 		}
 	}
@@ -511,7 +511,6 @@ void JoinNodeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> s
 	
 	ActivityNodeImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);

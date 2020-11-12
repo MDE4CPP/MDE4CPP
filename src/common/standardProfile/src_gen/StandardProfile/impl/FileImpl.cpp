@@ -63,6 +63,7 @@ FileImpl::FileImpl(const FileImpl & obj):FileImpl()
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy File "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	instantiate();
 }
 
 std::shared_ptr<ecore::EObject>  FileImpl::copy() const
@@ -79,7 +80,7 @@ std::shared_ptr<uml::Class> FileImpl::getMetaClass()
 }
 
 void FileImpl::instantiate()
-{	
+{   
 	
 }
 

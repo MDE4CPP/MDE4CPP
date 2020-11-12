@@ -398,13 +398,13 @@ Any OpaqueExpressionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::OPAQUEEXPRESSION_ATTRIBUTE_BEHAVIOR:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getBehavior())); //16715
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getBehavior())); //16615
 		case uml::UmlPackage::OPAQUEEXPRESSION_ATTRIBUTE_BODY:
-			return eAny(getBody()); //16716
+			return eAny(getBody()); //16616
 		case uml::UmlPackage::OPAQUEEXPRESSION_ATTRIBUTE_LANGUAGE:
-			return eAny(getLanguage()); //16717
+			return eAny(getLanguage()); //16617
 		case uml::UmlPackage::OPAQUEEXPRESSION_ATTRIBUTE_RESULT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //16718
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //16618
 	}
 	return ValueSpecificationImpl::eGet(featureID, resolve, coreType);
 }
@@ -413,13 +413,13 @@ bool OpaqueExpressionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::OPAQUEEXPRESSION_ATTRIBUTE_BEHAVIOR:
-			return getBehavior() != nullptr; //16715
+			return getBehavior() != nullptr; //16615
 		case uml::UmlPackage::OPAQUEEXPRESSION_ATTRIBUTE_BODY:
-			return !getBody()->empty(); //16716
+			return !getBody()->empty(); //16616
 		case uml::UmlPackage::OPAQUEEXPRESSION_ATTRIBUTE_LANGUAGE:
-			return !getLanguage()->empty(); //16717
+			return !getLanguage()->empty(); //16617
 		case uml::UmlPackage::OPAQUEEXPRESSION_ATTRIBUTE_RESULT:
-			return getResult() != nullptr; //16718
+			return getResult() != nullptr; //16618
 	}
 	return ValueSpecificationImpl::internalEIsSet(featureID);
 }
@@ -432,7 +432,7 @@ bool OpaqueExpressionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Behavior> _behavior = std::dynamic_pointer_cast<uml::Behavior>(_temp);
-			setBehavior(_behavior); //16715
+			setBehavior(_behavior); //16615
 			return true;
 		}
 		case uml::UmlPackage::OPAQUEEXPRESSION_ATTRIBUTE_BODY:

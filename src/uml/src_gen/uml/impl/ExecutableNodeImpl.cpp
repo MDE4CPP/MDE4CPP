@@ -374,7 +374,7 @@ Any ExecutableNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //8920
+			return eAny(tempList); //8820
 		}
 	}
 	return ActivityNodeImpl::eGet(featureID, resolve, coreType);
@@ -384,7 +384,7 @@ bool ExecutableNodeImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::EXECUTABLENODE_ATTRIBUTE_HANDLER:
-			return getHandler() != nullptr; //8920
+			return getHandler() != nullptr; //8820
 	}
 	return ActivityNodeImpl::internalEIsSet(featureID);
 }
@@ -502,7 +502,6 @@ void ExecutableNodeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHand
 
 	ActivityNodeImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);

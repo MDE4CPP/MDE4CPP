@@ -63,6 +63,7 @@ ResponsibilityImpl::ResponsibilityImpl(const ResponsibilityImpl & obj):Responsib
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Responsibility "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	instantiate();
 }
 
 std::shared_ptr<ecore::EObject>  ResponsibilityImpl::copy() const
@@ -79,7 +80,7 @@ std::shared_ptr<uml::Class> ResponsibilityImpl::getMetaClass()
 }
 
 void ResponsibilityImpl::instantiate()
-{	
+{   
 	
 }
 

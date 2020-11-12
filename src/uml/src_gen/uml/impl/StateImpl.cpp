@@ -785,7 +785,7 @@ Any StateImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //22121
+			return eAny(tempList); //22021
 		}
 		case uml::UmlPackage::STATE_ATTRIBUTE_CONNECTIONPOINT:
 		{
@@ -797,7 +797,7 @@ Any StateImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //22122
+			return eAny(tempList); //22022
 		}
 		case uml::UmlPackage::STATE_ATTRIBUTE_DEFERRABLETRIGGER:
 		{
@@ -809,24 +809,24 @@ Any StateImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //22123
+			return eAny(tempList); //22023
 		}
 		case uml::UmlPackage::STATE_ATTRIBUTE_DOACTIVITY:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDoActivity())); //22124
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDoActivity())); //22024
 		case uml::UmlPackage::STATE_ATTRIBUTE_ENTRY:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEntry())); //22125
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEntry())); //22025
 		case uml::UmlPackage::STATE_ATTRIBUTE_EXIT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getExit())); //22126
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getExit())); //22026
 		case uml::UmlPackage::STATE_ATTRIBUTE_ISCOMPOSITE:
-			return eAny(getIsComposite()); //22127
+			return eAny(getIsComposite()); //22027
 		case uml::UmlPackage::STATE_ATTRIBUTE_ISORTHOGONAL:
-			return eAny(getIsOrthogonal()); //22128
+			return eAny(getIsOrthogonal()); //22028
 		case uml::UmlPackage::STATE_ATTRIBUTE_ISSIMPLE:
-			return eAny(getIsSimple()); //22129
+			return eAny(getIsSimple()); //22029
 		case uml::UmlPackage::STATE_ATTRIBUTE_ISSUBMACHINESTATE:
-			return eAny(getIsSubmachineState()); //22130
+			return eAny(getIsSubmachineState()); //22030
 		case uml::UmlPackage::STATE_ATTRIBUTE_REDEFINEDSTATE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getRedefinedState())); //22131
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getRedefinedState())); //22031
 		case uml::UmlPackage::STATE_ATTRIBUTE_REGION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -837,12 +837,12 @@ Any StateImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //22134
+			return eAny(tempList); //22034
 		}
 		case uml::UmlPackage::STATE_ATTRIBUTE_STATEINVARIANT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getStateInvariant())); //22132
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getStateInvariant())); //22032
 		case uml::UmlPackage::STATE_ATTRIBUTE_SUBMACHINE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSubmachine())); //22133
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSubmachine())); //22033
 	}
 	Any result;
 	result = NamespaceImpl::eGet(featureID, resolve, coreType);
@@ -863,33 +863,33 @@ bool StateImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::STATE_ATTRIBUTE_CONNECTION:
-			return getConnection() != nullptr; //22121
+			return getConnection() != nullptr; //22021
 		case uml::UmlPackage::STATE_ATTRIBUTE_CONNECTIONPOINT:
-			return getConnectionPoint() != nullptr; //22122
+			return getConnectionPoint() != nullptr; //22022
 		case uml::UmlPackage::STATE_ATTRIBUTE_DEFERRABLETRIGGER:
-			return getDeferrableTrigger() != nullptr; //22123
+			return getDeferrableTrigger() != nullptr; //22023
 		case uml::UmlPackage::STATE_ATTRIBUTE_DOACTIVITY:
-			return getDoActivity() != nullptr; //22124
+			return getDoActivity() != nullptr; //22024
 		case uml::UmlPackage::STATE_ATTRIBUTE_ENTRY:
-			return getEntry() != nullptr; //22125
+			return getEntry() != nullptr; //22025
 		case uml::UmlPackage::STATE_ATTRIBUTE_EXIT:
-			return getExit() != nullptr; //22126
+			return getExit() != nullptr; //22026
 		case uml::UmlPackage::STATE_ATTRIBUTE_ISCOMPOSITE:
-			return getIsComposite() != false; //22127
+			return getIsComposite() != false; //22027
 		case uml::UmlPackage::STATE_ATTRIBUTE_ISORTHOGONAL:
-			return getIsOrthogonal() != false; //22128
+			return getIsOrthogonal() != false; //22028
 		case uml::UmlPackage::STATE_ATTRIBUTE_ISSIMPLE:
-			return getIsSimple() != true; //22129
+			return getIsSimple() != true; //22029
 		case uml::UmlPackage::STATE_ATTRIBUTE_ISSUBMACHINESTATE:
-			return getIsSubmachineState() != false; //22130
+			return getIsSubmachineState() != false; //22030
 		case uml::UmlPackage::STATE_ATTRIBUTE_REDEFINEDSTATE:
-			return getRedefinedState() != nullptr; //22131
+			return getRedefinedState() != nullptr; //22031
 		case uml::UmlPackage::STATE_ATTRIBUTE_REGION:
-			return getRegion() != nullptr; //22134
+			return getRegion() != nullptr; //22034
 		case uml::UmlPackage::STATE_ATTRIBUTE_STATEINVARIANT:
-			return getStateInvariant() != nullptr; //22132
+			return getStateInvariant() != nullptr; //22032
 		case uml::UmlPackage::STATE_ATTRIBUTE_SUBMACHINE:
-			return getSubmachine() != nullptr; //22133
+			return getSubmachine() != nullptr; //22033
 	}
 	bool result = false;
 	result = NamespaceImpl::internalEIsSet(featureID);
@@ -1022,7 +1022,7 @@ bool StateImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Behavior> _doActivity = std::dynamic_pointer_cast<uml::Behavior>(_temp);
-			setDoActivity(_doActivity); //22124
+			setDoActivity(_doActivity); //22024
 			return true;
 		}
 		case uml::UmlPackage::STATE_ATTRIBUTE_ENTRY:
@@ -1030,7 +1030,7 @@ bool StateImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Behavior> _entry = std::dynamic_pointer_cast<uml::Behavior>(_temp);
-			setEntry(_entry); //22125
+			setEntry(_entry); //22025
 			return true;
 		}
 		case uml::UmlPackage::STATE_ATTRIBUTE_EXIT:
@@ -1038,7 +1038,7 @@ bool StateImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Behavior> _exit = std::dynamic_pointer_cast<uml::Behavior>(_temp);
-			setExit(_exit); //22126
+			setExit(_exit); //22026
 			return true;
 		}
 		case uml::UmlPackage::STATE_ATTRIBUTE_REDEFINEDSTATE:
@@ -1046,7 +1046,7 @@ bool StateImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::State> _redefinedState = std::dynamic_pointer_cast<uml::State>(_temp);
-			setRedefinedState(_redefinedState); //22131
+			setRedefinedState(_redefinedState); //22031
 			return true;
 		}
 		case uml::UmlPackage::STATE_ATTRIBUTE_REGION:
@@ -1090,7 +1090,7 @@ bool StateImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Constraint> _stateInvariant = std::dynamic_pointer_cast<uml::Constraint>(_temp);
-			setStateInvariant(_stateInvariant); //22132
+			setStateInvariant(_stateInvariant); //22032
 			return true;
 		}
 		case uml::UmlPackage::STATE_ATTRIBUTE_SUBMACHINE:
@@ -1098,7 +1098,7 @@ bool StateImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::StateMachine> _submachine = std::dynamic_pointer_cast<uml::StateMachine>(_temp);
-			setSubmachine(_submachine); //22133
+			setSubmachine(_submachine); //22033
 			return true;
 		}
 	}

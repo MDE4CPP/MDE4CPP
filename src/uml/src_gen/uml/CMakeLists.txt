@@ -52,7 +52,6 @@ SET(SOURCE_FILES
 	impl/ActionExecutionSpecificationImpl.cpp
 	impl/ActionInputPinImpl.cpp
 	impl/ActivityImpl.cpp
-	impl/ActivityContentImpl.cpp
 	impl/ActivityEdgeImpl.cpp
 	impl/ActivityFinalNodeImpl.cpp
 	impl/ActivityGroupImpl.cpp

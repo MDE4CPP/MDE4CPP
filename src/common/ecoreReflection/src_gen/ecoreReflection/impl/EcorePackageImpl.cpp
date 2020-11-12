@@ -1303,7 +1303,7 @@ void EcorePackageImpl::initializePackageClasses()
 
     // EClass operations
 	ecore_EClass_getEStructuralFeature_EInt_EInt->setName("getEStructuralFeature");
-	ecore_EClass_getEStructuralFeature_EInt_EInt->setType(ecore_EStructuralFeature);
+	ecore_EClass_getEStructuralFeature_EInt_EInt->setType(get_Ecore_EStructuralFeature());
 	
 	// parameter 
 	ecore_EClass_getEStructuralFeature_EInt_EIntreturn->setName("");
@@ -1327,7 +1327,7 @@ void EcorePackageImpl::initializePackageClasses()
 	
 
 	ecore_EClass_getEStructuralFeature_EString_EString->setName("getEStructuralFeature");
-	ecore_EClass_getEStructuralFeature_EString_EString->setType(ecore_EStructuralFeature);
+	ecore_EClass_getEStructuralFeature_EString_EString->setType(get_Ecore_EStructuralFeature());
 	
 	// parameter 
 	ecore_EClass_getEStructuralFeature_EString_EStringreturn->setName("");
@@ -1351,7 +1351,7 @@ void EcorePackageImpl::initializePackageClasses()
 	
 
 	ecore_EClass_getFeatureCount__->setName("getFeatureCount");
-	ecore_EClass_getFeatureCount__->setType(ecore_EInt);
+	ecore_EClass_getFeatureCount__->setType(get_Ecore_EInt());
 	
 	// parameter 
 	ecore_EClass_getFeatureCount__return->setName("");
@@ -1363,7 +1363,7 @@ void EcorePackageImpl::initializePackageClasses()
 	
 
 	ecore_EClass_getFeatureID_EStructuralFeature_EStructuralFeature->setName("getFeatureID");
-	ecore_EClass_getFeatureID_EStructuralFeature_EStructuralFeature->setType(ecore_EInt);
+	ecore_EClass_getFeatureID_EStructuralFeature_EStructuralFeature->setType(get_Ecore_EInt());
 	
 	// parameter 
 	ecore_EClass_getFeatureID_EStructuralFeature_EStructuralFeaturereturn->setName("");
@@ -1387,7 +1387,7 @@ void EcorePackageImpl::initializePackageClasses()
 	
 
 	ecore_EClass_isSuperTypeOf_EClass_EClass->setName("isSuperTypeOf");
-	ecore_EClass_isSuperTypeOf_EClass_EClass->setType(ecore_EBoolean);
+	ecore_EClass_isSuperTypeOf_EClass_EClass->setType(get_Ecore_EBoolean());
 	
 	// parameter 
 	ecore_EClass_isSuperTypeOf_EClass_EClassreturn->setName("");
@@ -1483,7 +1483,7 @@ void EcorePackageImpl::initializePackageClasses()
 
     // EClassifier operations
 	ecore_EClassifier_getClassifierID__->setName("getClassifierID");
-	ecore_EClassifier_getClassifierID__->setType(ecore_EInt);
+	ecore_EClassifier_getClassifierID__->setType(get_Ecore_EInt());
 	
 	// parameter 
 	ecore_EClassifier_getClassifierID__return->setName("");
@@ -1495,7 +1495,7 @@ void EcorePackageImpl::initializePackageClasses()
 	
 
 	ecore_EClassifier_isInstance_EJavaObject_EJavaObject->setName("isInstance");
-	ecore_EClassifier_isInstance_EJavaObject_EJavaObject->setType(ecore_EBoolean);
+	ecore_EClassifier_isInstance_EJavaObject_EJavaObject->setType(get_Ecore_EBoolean());
 	
 	// parameter 
 	ecore_EClassifier_isInstance_EJavaObject_EJavaObjectreturn->setName("");
@@ -1562,7 +1562,7 @@ void EcorePackageImpl::initializePackageClasses()
 
     // EEnum operations
 	ecore_EEnum_getEEnumLiteral_EString_EString->setName("getEEnumLiteral");
-	ecore_EEnum_getEEnumLiteral_EString_EString->setType(ecore_EEnumLiteral);
+	ecore_EEnum_getEEnumLiteral_EString_EString->setType(get_Ecore_EEnumLiteral());
 	
 	// parameter 
 	ecore_EEnum_getEEnumLiteral_EString_EStringreturn->setName("");
@@ -1586,7 +1586,7 @@ void EcorePackageImpl::initializePackageClasses()
 	
 
 	ecore_EEnum_getEEnumLiteral_EInt_EInt->setName("getEEnumLiteral");
-	ecore_EEnum_getEEnumLiteral_EInt_EInt->setType(ecore_EEnumLiteral);
+	ecore_EEnum_getEEnumLiteral_EInt_EInt->setType(get_Ecore_EEnumLiteral());
 	
 	// parameter 
 	ecore_EEnum_getEEnumLiteral_EInt_EIntreturn->setName("");
@@ -1610,7 +1610,7 @@ void EcorePackageImpl::initializePackageClasses()
 	
 
 	ecore_EEnum_getEEnumLiteralByLiteral_EString_EString->setName("getEEnumLiteralByLiteral");
-	ecore_EEnum_getEEnumLiteralByLiteral_EString_EString->setType(ecore_EEnumLiteral);
+	ecore_EEnum_getEEnumLiteralByLiteral_EString_EString->setType(get_Ecore_EEnumLiteral());
 	
 	// parameter 
 	ecore_EEnum_getEEnumLiteralByLiteral_EString_EStringreturn->setName("");
@@ -1707,7 +1707,7 @@ void EcorePackageImpl::initializePackageClasses()
 
     // EFactory operations
 	ecore_EFactory_convertToString_EDataType_EJavaObject_EDataType_EJavaObject->setName("convertToString");
-	ecore_EFactory_convertToString_EDataType_EJavaObject_EDataType_EJavaObject->setType(ecore_EString);
+	ecore_EFactory_convertToString_EDataType_EJavaObject_EDataType_EJavaObject->setType(get_Ecore_EString());
 	
 	// parameter 
 	ecore_EFactory_convertToString_EDataType_EJavaObject_EDataType_EJavaObjectreturn->setName("");
@@ -1743,7 +1743,7 @@ void EcorePackageImpl::initializePackageClasses()
 	
 
 	ecore_EFactory_create_EClass_EClass->setName("create");
-	ecore_EFactory_create_EClass_EClass->setType(ecore_EObject);
+	ecore_EFactory_create_EClass_EClass->setType(get_Ecore_EObject());
 	
 	// parameter 
 	ecore_EFactory_create_EClass_EClassreturn->setName("");
@@ -1767,7 +1767,7 @@ void EcorePackageImpl::initializePackageClasses()
 	
 
 	ecore_EFactory_createFromString_EDataType_EString_EDataType_EString->setName("createFromString");
-	ecore_EFactory_createFromString_EDataType_EString_EDataType_EString->setType(ecore_EJavaObject);
+	ecore_EFactory_createFromString_EDataType_EString_EDataType_EString->setType(get_Ecore_EJavaObject());
 	
 	// parameter 
 	ecore_EFactory_createFromString_EDataType_EString_EDataType_EStringreturn->setName("");
@@ -1896,7 +1896,7 @@ void EcorePackageImpl::initializePackageClasses()
 
     // EModelElement operations
 	ecore_EModelElement_getEAnnotation_EString_EString->setName("getEAnnotation");
-	ecore_EModelElement_getEAnnotation_EString_EString->setType(ecore_EAnnotation);
+	ecore_EModelElement_getEAnnotation_EString_EString->setType(get_Ecore_EAnnotation());
 	
 	// parameter 
 	ecore_EModelElement_getEAnnotation_EString_EStringreturn->setName("");
@@ -1948,7 +1948,7 @@ void EcorePackageImpl::initializePackageClasses()
 	
     // EObject operations
 	ecore_EObject_eAllContents__->setName("eAllContents");
-	ecore_EObject_eAllContents__->setType(ecore_EObject_ETreeIterator_EObject);
+	ecore_EObject_eAllContents__->setType(get_Ecore_EObject_ETreeIterator_EObject());
 	
 	// parameter 
 	ecore_EObject_eAllContents__return->setName("");
@@ -1960,7 +1960,7 @@ void EcorePackageImpl::initializePackageClasses()
 	
 
 	ecore_EObject_eClass__->setName("eClass");
-	ecore_EObject_eClass__->setType(ecore_EClass);
+	ecore_EObject_eClass__->setType(get_Ecore_EClass());
 	
 	// parameter 
 	ecore_EObject_eClass__return->setName("");
@@ -1972,7 +1972,7 @@ void EcorePackageImpl::initializePackageClasses()
 	
 
 	ecore_EObject_eContainer__->setName("eContainer");
-	ecore_EObject_eContainer__->setType(ecore_EObject);
+	ecore_EObject_eContainer__->setType(get_Ecore_EObject());
 	
 	// parameter 
 	ecore_EObject_eContainer__return->setName("");
@@ -1984,7 +1984,7 @@ void EcorePackageImpl::initializePackageClasses()
 	
 
 	ecore_EObject_eContainingFeature__->setName("eContainingFeature");
-	ecore_EObject_eContainingFeature__->setType(ecore_EStructuralFeature);
+	ecore_EObject_eContainingFeature__->setType(get_Ecore_EStructuralFeature());
 	
 	// parameter 
 	ecore_EObject_eContainingFeature__return->setName("");
@@ -1996,7 +1996,7 @@ void EcorePackageImpl::initializePackageClasses()
 	
 
 	ecore_EObject_eContainmentFeature__->setName("eContainmentFeature");
-	ecore_EObject_eContainmentFeature__->setType(ecore_EReference);
+	ecore_EObject_eContainmentFeature__->setType(get_Ecore_EReference());
 	
 	// parameter 
 	ecore_EObject_eContainmentFeature__return->setName("");
@@ -2008,7 +2008,7 @@ void EcorePackageImpl::initializePackageClasses()
 	
 
 	ecore_EObject_eContents__->setName("eContents");
-	ecore_EObject_eContents__->setType(ecore_EObject_EEList_EObject);
+	ecore_EObject_eContents__->setType(get_Ecore_EObject_EEList_EObject());
 	
 	// parameter 
 	ecore_EObject_eContents__return->setName("");
@@ -2020,7 +2020,7 @@ void EcorePackageImpl::initializePackageClasses()
 	
 
 	ecore_EObject_eCrossReferences__->setName("eCrossReferences");
-	ecore_EObject_eCrossReferences__->setType(ecore_EObject_EEList_EObject);
+	ecore_EObject_eCrossReferences__->setType(get_Ecore_EObject_EEList_EObject());
 	
 	// parameter 
 	ecore_EObject_eCrossReferences__return->setName("");
@@ -2032,7 +2032,7 @@ void EcorePackageImpl::initializePackageClasses()
 	
 
 	ecore_EObject_eGet_EStructuralFeature_EStructuralFeature->setName("eGet");
-	ecore_EObject_eGet_EStructuralFeature_EStructuralFeature->setType(ecore_EJavaObject);
+	ecore_EObject_eGet_EStructuralFeature_EStructuralFeature->setType(get_Ecore_EJavaObject());
 	
 	// parameter 
 	ecore_EObject_eGet_EStructuralFeature_EStructuralFeaturereturn->setName("");
@@ -2056,7 +2056,7 @@ void EcorePackageImpl::initializePackageClasses()
 	
 
 	ecore_EObject_eGet_EStructuralFeature_EBoolean_EStructuralFeature_EBoolean->setName("eGet");
-	ecore_EObject_eGet_EStructuralFeature_EBoolean_EStructuralFeature_EBoolean->setType(ecore_EJavaObject);
+	ecore_EObject_eGet_EStructuralFeature_EBoolean_EStructuralFeature_EBoolean->setType(get_Ecore_EJavaObject());
 	
 	// parameter 
 	ecore_EObject_eGet_EStructuralFeature_EBoolean_EStructuralFeature_EBooleanreturn->setName("");
@@ -2092,7 +2092,7 @@ void EcorePackageImpl::initializePackageClasses()
 	
 
 	ecore_EObject_eIsProxy__->setName("eIsProxy");
-	ecore_EObject_eIsProxy__->setType(ecore_EBoolean);
+	ecore_EObject_eIsProxy__->setType(get_Ecore_EBoolean());
 	
 	// parameter 
 	ecore_EObject_eIsProxy__return->setName("");
@@ -2104,7 +2104,7 @@ void EcorePackageImpl::initializePackageClasses()
 	
 
 	ecore_EObject_eIsSet_EStructuralFeature_EStructuralFeature->setName("eIsSet");
-	ecore_EObject_eIsSet_EStructuralFeature_EStructuralFeature->setType(ecore_EBoolean);
+	ecore_EObject_eIsSet_EStructuralFeature_EStructuralFeature->setType(get_Ecore_EBoolean());
 	
 	// parameter 
 	ecore_EObject_eIsSet_EStructuralFeature_EStructuralFeaturereturn->setName("");
@@ -2128,7 +2128,7 @@ void EcorePackageImpl::initializePackageClasses()
 	
 
 	ecore_EObject_eResource__->setName("eResource");
-	ecore_EObject_eResource__->setType(ecore_EResource);
+	ecore_EObject_eResource__->setType(get_Ecore_EResource());
 	
 	// parameter 
 	ecore_EObject_eResource__return->setName("");
@@ -2331,7 +2331,7 @@ void EcorePackageImpl::initializePackageClasses()
 
     // EPackage operations
 	ecore_EPackage_getEClassifier_EString_EString->setName("getEClassifier");
-	ecore_EPackage_getEClassifier_EString_EString->setType(ecore_EClassifier);
+	ecore_EPackage_getEClassifier_EString_EString->setType(get_Ecore_EClassifier());
 	
 	// parameter 
 	ecore_EPackage_getEClassifier_EString_EStringreturn->setName("");
@@ -2567,7 +2567,7 @@ void EcorePackageImpl::initializePackageClasses()
 
     // EStructuralFeature operations
 	ecore_EStructuralFeature_getContainerClass__->setName("getContainerClass");
-	ecore_EStructuralFeature_getContainerClass__->setType(ecore_EStructuralFeature_EJavaClass_Wildcard);
+	ecore_EStructuralFeature_getContainerClass__->setType(get_Ecore_EStructuralFeature_EJavaClass_Wildcard());
 	
 	// parameter 
 	ecore_EStructuralFeature_getContainerClass__return->setName("");
@@ -2579,7 +2579,7 @@ void EcorePackageImpl::initializePackageClasses()
 	
 
 	ecore_EStructuralFeature_getFeatureID__->setName("getFeatureID");
-	ecore_EStructuralFeature_getFeatureID__->setType(ecore_EInt);
+	ecore_EStructuralFeature_getFeatureID__->setType(get_Ecore_EInt());
 	
 	// parameter 
 	ecore_EStructuralFeature_getFeatureID__return->setName("");

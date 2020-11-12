@@ -528,7 +528,7 @@ Any InformationFlowImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //11415
+			return eAny(tempList); //11315
 		}
 		case uml::UmlPackage::INFORMATIONFLOW_ATTRIBUTE_INFORMATIONSOURCE:
 		{
@@ -540,7 +540,7 @@ Any InformationFlowImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //11416
+			return eAny(tempList); //11316
 		}
 		case uml::UmlPackage::INFORMATIONFLOW_ATTRIBUTE_INFORMATIONTARGET:
 		{
@@ -552,7 +552,7 @@ Any InformationFlowImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //11417
+			return eAny(tempList); //11317
 		}
 		case uml::UmlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZATION:
 		{
@@ -564,7 +564,7 @@ Any InformationFlowImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //11418
+			return eAny(tempList); //11318
 		}
 		case uml::UmlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZINGACTIVITYEDGE:
 		{
@@ -576,7 +576,7 @@ Any InformationFlowImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //11419
+			return eAny(tempList); //11319
 		}
 		case uml::UmlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZINGCONNECTOR:
 		{
@@ -588,7 +588,7 @@ Any InformationFlowImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //11420
+			return eAny(tempList); //11320
 		}
 		case uml::UmlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZINGMESSAGE:
 		{
@@ -600,7 +600,7 @@ Any InformationFlowImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //11421
+			return eAny(tempList); //11321
 		}
 	}
 	Any result;
@@ -617,19 +617,19 @@ bool InformationFlowImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::INFORMATIONFLOW_ATTRIBUTE_CONVEYED:
-			return getConveyed() != nullptr; //11415
+			return getConveyed() != nullptr; //11315
 		case uml::UmlPackage::INFORMATIONFLOW_ATTRIBUTE_INFORMATIONSOURCE:
-			return getInformationSource() != nullptr; //11416
+			return getInformationSource() != nullptr; //11316
 		case uml::UmlPackage::INFORMATIONFLOW_ATTRIBUTE_INFORMATIONTARGET:
-			return getInformationTarget() != nullptr; //11417
+			return getInformationTarget() != nullptr; //11317
 		case uml::UmlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZATION:
-			return getRealization() != nullptr; //11418
+			return getRealization() != nullptr; //11318
 		case uml::UmlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZINGACTIVITYEDGE:
-			return getRealizingActivityEdge() != nullptr; //11419
+			return getRealizingActivityEdge() != nullptr; //11319
 		case uml::UmlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZINGCONNECTOR:
-			return getRealizingConnector() != nullptr; //11420
+			return getRealizingConnector() != nullptr; //11320
 		case uml::UmlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZINGMESSAGE:
-			return getRealizingMessage() != nullptr; //11421
+			return getRealizingMessage() != nullptr; //11321
 	}
 	bool result = false;
 	result = DirectedRelationshipImpl::internalEIsSet(featureID);

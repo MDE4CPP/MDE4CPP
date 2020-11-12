@@ -319,7 +319,7 @@ Any OccurrenceSpecificationImpl::eGet(int featureID, bool resolve, bool coreType
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //16413
+			return eAny(tempList); //16313
 		}
 		case uml::UmlPackage::OCCURRENCESPECIFICATION_ATTRIBUTE_TOBEFORE:
 		{
@@ -331,7 +331,7 @@ Any OccurrenceSpecificationImpl::eGet(int featureID, bool resolve, bool coreType
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //16414
+			return eAny(tempList); //16314
 		}
 	}
 	return InteractionFragmentImpl::eGet(featureID, resolve, coreType);
@@ -341,9 +341,9 @@ bool OccurrenceSpecificationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::OCCURRENCESPECIFICATION_ATTRIBUTE_TOAFTER:
-			return getToAfter() != nullptr; //16413
+			return getToAfter() != nullptr; //16313
 		case uml::UmlPackage::OCCURRENCESPECIFICATION_ATTRIBUTE_TOBEFORE:
-			return getToBefore() != nullptr; //16414
+			return getToBefore() != nullptr; //16314
 	}
 	return InteractionFragmentImpl::internalEIsSet(featureID);
 }

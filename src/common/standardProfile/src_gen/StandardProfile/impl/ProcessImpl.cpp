@@ -63,6 +63,7 @@ ProcessImpl::ProcessImpl(const ProcessImpl & obj):ProcessImpl()
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Process "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	instantiate();
 }
 
 std::shared_ptr<ecore::EObject>  ProcessImpl::copy() const
@@ -79,7 +80,7 @@ std::shared_ptr<uml::Class> ProcessImpl::getMetaClass()
 }
 
 void ProcessImpl::instantiate()
-{	
+{   
 	
 }
 

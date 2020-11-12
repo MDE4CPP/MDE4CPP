@@ -63,6 +63,7 @@ SendImpl::SendImpl(const SendImpl & obj):SendImpl()
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Send "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	instantiate();
 }
 
 std::shared_ptr<ecore::EObject>  SendImpl::copy() const
@@ -79,7 +80,7 @@ std::shared_ptr<uml::Class> SendImpl::getMetaClass()
 }
 
 void SendImpl::instantiate()
-{	
+{   
 	
 }
 

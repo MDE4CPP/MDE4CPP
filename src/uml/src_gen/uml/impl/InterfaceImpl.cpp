@@ -778,7 +778,7 @@ Any InterfaceImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //12638
+			return eAny(tempList); //12538
 		}
 		case uml::UmlPackage::INTERFACE_ATTRIBUTE_OWNEDATTRIBUTE:
 		{
@@ -790,7 +790,7 @@ Any InterfaceImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //12639
+			return eAny(tempList); //12539
 		}
 		case uml::UmlPackage::INTERFACE_ATTRIBUTE_OWNEDOPERATION:
 		{
@@ -802,7 +802,7 @@ Any InterfaceImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //12643
+			return eAny(tempList); //12543
 		}
 		case uml::UmlPackage::INTERFACE_ATTRIBUTE_OWNEDRECEPTION:
 		{
@@ -814,10 +814,10 @@ Any InterfaceImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //12640
+			return eAny(tempList); //12540
 		}
 		case uml::UmlPackage::INTERFACE_ATTRIBUTE_PROTOCOL:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getProtocol())); //12641
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getProtocol())); //12541
 		case uml::UmlPackage::INTERFACE_ATTRIBUTE_REDEFINEDINTERFACE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -828,7 +828,7 @@ Any InterfaceImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //12642
+			return eAny(tempList); //12542
 		}
 	}
 	return ClassifierImpl::eGet(featureID, resolve, coreType);
@@ -838,17 +838,17 @@ bool InterfaceImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::INTERFACE_ATTRIBUTE_NESTEDCLASSIFIER:
-			return getNestedClassifier() != nullptr; //12638
+			return getNestedClassifier() != nullptr; //12538
 		case uml::UmlPackage::INTERFACE_ATTRIBUTE_OWNEDATTRIBUTE:
-			return getOwnedAttribute() != nullptr; //12639
+			return getOwnedAttribute() != nullptr; //12539
 		case uml::UmlPackage::INTERFACE_ATTRIBUTE_OWNEDOPERATION:
-			return getOwnedOperation() != nullptr; //12643
+			return getOwnedOperation() != nullptr; //12543
 		case uml::UmlPackage::INTERFACE_ATTRIBUTE_OWNEDRECEPTION:
-			return getOwnedReception() != nullptr; //12640
+			return getOwnedReception() != nullptr; //12540
 		case uml::UmlPackage::INTERFACE_ATTRIBUTE_PROTOCOL:
-			return getProtocol() != nullptr; //12641
+			return getProtocol() != nullptr; //12541
 		case uml::UmlPackage::INTERFACE_ATTRIBUTE_REDEFINEDINTERFACE:
-			return getRedefinedInterface() != nullptr; //12642
+			return getRedefinedInterface() != nullptr; //12542
 	}
 	return ClassifierImpl::internalEIsSet(featureID);
 }
@@ -1005,7 +1005,7 @@ bool InterfaceImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ProtocolStateMachine> _protocol = std::dynamic_pointer_cast<uml::ProtocolStateMachine>(_temp);
-			setProtocol(_protocol); //12641
+			setProtocol(_protocol); //12541
 			return true;
 		}
 		case uml::UmlPackage::INTERFACE_ATTRIBUTE_REDEFINEDINTERFACE:

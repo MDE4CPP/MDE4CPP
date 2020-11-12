@@ -222,9 +222,9 @@ Any LinkEndDestructionDataImpl::eGet(int featureID, bool resolve, bool coreType)
 	switch(featureID)
 	{
 		case uml::UmlPackage::LINKENDDESTRUCTIONDATA_ATTRIBUTE_DESTROYAT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDestroyAt())); //1376
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDestroyAt())); //1366
 		case uml::UmlPackage::LINKENDDESTRUCTIONDATA_ATTRIBUTE_ISDESTROYDUPLICATES:
-			return eAny(getIsDestroyDuplicates()); //1377
+			return eAny(getIsDestroyDuplicates()); //1367
 	}
 	return LinkEndDataImpl::eGet(featureID, resolve, coreType);
 }
@@ -233,9 +233,9 @@ bool LinkEndDestructionDataImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::LINKENDDESTRUCTIONDATA_ATTRIBUTE_DESTROYAT:
-			return getDestroyAt() != nullptr; //1376
+			return getDestroyAt() != nullptr; //1366
 		case uml::UmlPackage::LINKENDDESTRUCTIONDATA_ATTRIBUTE_ISDESTROYDUPLICATES:
-			return getIsDestroyDuplicates() != false; //1377
+			return getIsDestroyDuplicates() != false; //1367
 	}
 	return LinkEndDataImpl::internalEIsSet(featureID);
 }
@@ -248,14 +248,14 @@ bool LinkEndDestructionDataImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::InputPin> _destroyAt = std::dynamic_pointer_cast<uml::InputPin>(_temp);
-			setDestroyAt(_destroyAt); //1376
+			setDestroyAt(_destroyAt); //1366
 			return true;
 		}
 		case uml::UmlPackage::LINKENDDESTRUCTIONDATA_ATTRIBUTE_ISDESTROYDUPLICATES:
 		{
 			// BOOST CAST
 			bool _isDestroyDuplicates = newValue->get<bool>();
-			setIsDestroyDuplicates(_isDestroyDuplicates); //1377
+			setIsDestroyDuplicates(_isDestroyDuplicates); //1367
 			return true;
 		}
 	}

@@ -515,11 +515,11 @@ Any ReadLinkObjectEndQualifierActionImpl::eGet(int featureID, bool resolve, bool
 	switch(featureID)
 	{
 		case uml::UmlPackage::READLINKOBJECTENDQUALIFIERACTION_ATTRIBUTE_OBJECT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getObject())); //19827
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getObject())); //19727
 		case uml::UmlPackage::READLINKOBJECTENDQUALIFIERACTION_ATTRIBUTE_QUALIFIER:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getQualifier())); //19828
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getQualifier())); //19728
 		case uml::UmlPackage::READLINKOBJECTENDQUALIFIERACTION_ATTRIBUTE_RESULT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //19829
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //19729
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -528,11 +528,11 @@ bool ReadLinkObjectEndQualifierActionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::READLINKOBJECTENDQUALIFIERACTION_ATTRIBUTE_OBJECT:
-			return getObject() != nullptr; //19827
+			return getObject() != nullptr; //19727
 		case uml::UmlPackage::READLINKOBJECTENDQUALIFIERACTION_ATTRIBUTE_QUALIFIER:
-			return getQualifier() != nullptr; //19828
+			return getQualifier() != nullptr; //19728
 		case uml::UmlPackage::READLINKOBJECTENDQUALIFIERACTION_ATTRIBUTE_RESULT:
-			return getResult() != nullptr; //19829
+			return getResult() != nullptr; //19729
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
@@ -545,7 +545,7 @@ bool ReadLinkObjectEndQualifierActionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::InputPin> _object = std::dynamic_pointer_cast<uml::InputPin>(_temp);
-			setObject(_object); //19827
+			setObject(_object); //19727
 			return true;
 		}
 		case uml::UmlPackage::READLINKOBJECTENDQUALIFIERACTION_ATTRIBUTE_QUALIFIER:
@@ -553,7 +553,7 @@ bool ReadLinkObjectEndQualifierActionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Property> _qualifier = std::dynamic_pointer_cast<uml::Property>(_temp);
-			setQualifier(_qualifier); //19828
+			setQualifier(_qualifier); //19728
 			return true;
 		}
 		case uml::UmlPackage::READLINKOBJECTENDQUALIFIERACTION_ATTRIBUTE_RESULT:
@@ -561,7 +561,7 @@ bool ReadLinkObjectEndQualifierActionImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::OutputPin> _result = std::dynamic_pointer_cast<uml::OutputPin>(_temp);
-			setResult(_result); //19829
+			setResult(_result); //19729
 			return true;
 		}
 	}
@@ -692,7 +692,6 @@ void ReadLinkObjectEndQualifierActionImpl::save(std::shared_ptr<persistence::int
 	
 	ActivityNodeImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);

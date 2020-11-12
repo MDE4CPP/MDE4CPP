@@ -360,9 +360,9 @@ Any ValueSpecificationImpl::eGet(int featureID, bool resolve, bool coreType) con
 	switch(featureID)
 	{
 		case uml::UmlPackage::VALUESPECIFICATION_ATTRIBUTE_OWNINGSLOT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOwningSlot().lock())); //25113
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOwningSlot().lock())); //25013
 		case uml::UmlPackage::VALUESPECIFICATION_ATTRIBUTE_VALUESPECIFICATIONACTION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getValueSpecificationAction().lock())); //25114
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getValueSpecificationAction().lock())); //25014
 	}
 	Any result;
 	result = PackageableElementImpl::eGet(featureID, resolve, coreType);
@@ -378,9 +378,9 @@ bool ValueSpecificationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::UmlPackage::VALUESPECIFICATION_ATTRIBUTE_OWNINGSLOT:
-			return getOwningSlot().lock() != nullptr; //25113
+			return getOwningSlot().lock() != nullptr; //25013
 		case uml::UmlPackage::VALUESPECIFICATION_ATTRIBUTE_VALUESPECIFICATIONACTION:
-			return getValueSpecificationAction().lock() != nullptr; //25114
+			return getValueSpecificationAction().lock() != nullptr; //25014
 	}
 	bool result = false;
 	result = PackageableElementImpl::internalEIsSet(featureID);
@@ -400,7 +400,7 @@ bool ValueSpecificationImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Slot> _owningSlot = std::dynamic_pointer_cast<uml::Slot>(_temp);
-			setOwningSlot(_owningSlot); //25113
+			setOwningSlot(_owningSlot); //25013
 			return true;
 		}
 		case uml::UmlPackage::VALUESPECIFICATION_ATTRIBUTE_VALUESPECIFICATIONACTION:
@@ -408,7 +408,7 @@ bool ValueSpecificationImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ValueSpecificationAction> _valueSpecificationAction = std::dynamic_pointer_cast<uml::ValueSpecificationAction>(_temp);
-			setValueSpecificationAction(_valueSpecificationAction); //25114
+			setValueSpecificationAction(_valueSpecificationAction); //25014
 			return true;
 		}
 	}

@@ -63,6 +63,7 @@ ScriptImpl::ScriptImpl(const ScriptImpl & obj):ScriptImpl()
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Script "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	instantiate();
 }
 
 std::shared_ptr<ecore::EObject>  ScriptImpl::copy() const
@@ -79,7 +80,8 @@ std::shared_ptr<uml::Class> ScriptImpl::getMetaClass()
 }
 
 void ScriptImpl::instantiate()
-{	
+{   
+	FileImpl::instantiate();
 	
 }
 

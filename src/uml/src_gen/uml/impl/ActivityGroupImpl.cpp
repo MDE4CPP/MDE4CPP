@@ -36,8 +36,6 @@
 
 #include "uml/Activity.hpp"
 
-#include "uml/ActivityContent.hpp"
-
 #include "uml/ActivityEdge.hpp"
 
 #include "uml/ActivityGroup.hpp"
@@ -181,6 +179,12 @@ std::shared_ptr<ecore::EClass> ActivityGroupImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
+std::shared_ptr<uml::Activity> ActivityGroupImpl::containingActivity()
+{
+	std::cout << __PRETTY_FUNCTION__  << std::endl;
+	throw "UnsupportedOperationException";
+}
+
 bool ActivityGroupImpl::nodes_and_edges(Any diagnostics,std::map <   Any, Any >  context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
@@ -336,7 +340,6 @@ std::shared_ptr<ActivityGroup> ActivityGroupImpl::getThisActivityGroupPtr() cons
 void ActivityGroupImpl::setThisActivityGroupPtr(std::weak_ptr<ActivityGroup> thisActivityGroupPtr)
 {
 	m_thisActivityGroupPtr = thisActivityGroupPtr;
-	setThisActivityContentPtr(thisActivityGroupPtr);
 	setThisNamedElementPtr(thisActivityGroupPtr);
 }
 std::shared_ptr<ecore::EObject> ActivityGroupImpl::eContainer() const
@@ -380,7 +383,7 @@ Any ActivityGroupImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //119
+			return eAny(tempList); //109
 		}
 		case uml::UmlPackage::ACTIVITYGROUP_ATTRIBUTE_CONTAINEDNODE:
 		{
@@ -392,10 +395,10 @@ Any ActivityGroupImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //1110
+			return eAny(tempList); //1010
 		}
 		case uml::UmlPackage::ACTIVITYGROUP_ATTRIBUTE_INACTIVITY:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getInActivity().lock())); //1111
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getInActivity().lock())); //1011
 		case uml::UmlPackage::ACTIVITYGROUP_ATTRIBUTE_SUBGROUP:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -406,43 +409,29 @@ Any ActivityGroupImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //1112
+			return eAny(tempList); //1012
 		}
 		case uml::UmlPackage::ACTIVITYGROUP_ATTRIBUTE_SUPERGROUP:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSuperGroup().lock())); //1113
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSuperGroup().lock())); //1013
 	}
-	Any result;
-	result = ActivityContentImpl::eGet(featureID, resolve, coreType);
-	if (!result->isEmpty())
-	{
-		return result;
-	}
-	result = NamedElementImpl::eGet(featureID, resolve, coreType);
-	return result;
+	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
 bool ActivityGroupImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
 		case uml::UmlPackage::ACTIVITYGROUP_ATTRIBUTE_CONTAINEDEDGE:
-			return getContainedEdge() != nullptr; //119
+			return getContainedEdge() != nullptr; //109
 		case uml::UmlPackage::ACTIVITYGROUP_ATTRIBUTE_CONTAINEDNODE:
-			return getContainedNode() != nullptr; //1110
+			return getContainedNode() != nullptr; //1010
 		case uml::UmlPackage::ACTIVITYGROUP_ATTRIBUTE_INACTIVITY:
-			return getInActivity().lock() != nullptr; //1111
+			return getInActivity().lock() != nullptr; //1011
 		case uml::UmlPackage::ACTIVITYGROUP_ATTRIBUTE_SUBGROUP:
-			return getSubgroup() != nullptr; //1112
+			return getSubgroup() != nullptr; //1012
 		case uml::UmlPackage::ACTIVITYGROUP_ATTRIBUTE_SUPERGROUP:
-			return getSuperGroup().lock() != nullptr; //1113
+			return getSuperGroup().lock() != nullptr; //1013
 	}
-	bool result = false;
-	result = ActivityContentImpl::internalEIsSet(featureID);
-	if (result)
-	{
-		return result;
-	}
-	result = NamedElementImpl::internalEIsSet(featureID);
-	return result;
+	return NamedElementImpl::internalEIsSet(featureID);
 }
 bool ActivityGroupImpl::eSet(int featureID, Any newValue)
 {
@@ -453,19 +442,12 @@ bool ActivityGroupImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Activity> _inActivity = std::dynamic_pointer_cast<uml::Activity>(_temp);
-			setInActivity(_inActivity); //1111
+			setInActivity(_inActivity); //1011
 			return true;
 		}
 	}
 
-	bool result = false;
-	result = ActivityContentImpl::eSet(featureID, newValue);
-	if (result)
-	{
-		return result;
-	}
-	result = NamedElementImpl::eSet(featureID, newValue);
-	return result;
+	return NamedElementImpl::eSet(featureID, newValue);
 }
 
 //*********************************
@@ -490,7 +472,6 @@ void ActivityGroupImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandl
 void ActivityGroupImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
 
-	ActivityContentImpl::loadAttributes(loadHandler, attr_list);
 	NamedElementImpl::loadAttributes(loadHandler, attr_list);
 }
 
@@ -525,7 +506,6 @@ void ActivityGroupImpl::loadNode(std::string nodeName, std::shared_ptr<persisten
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
 	//load BasePackage Nodes
-	ActivityContentImpl::loadNode(nodeName, loadHandler);
 	NamedElementImpl::loadNode(nodeName, loadHandler);
 }
 
@@ -545,7 +525,6 @@ void ActivityGroupImpl::resolveReferences(const int featureID, std::list<std::sh
 			return;
 		}
 	}
-	ActivityContentImpl::resolveReferences(featureID, references);
 	NamedElementImpl::resolveReferences(featureID, references);
 }
 
@@ -553,7 +532,6 @@ void ActivityGroupImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandl
 {
 	saveContent(saveHandler);
 
-	ActivityContentImpl::saveContent(saveHandler);
 	NamedElementImpl::saveContent(saveHandler);
 	
 	ElementImpl::saveContent(saveHandler);
