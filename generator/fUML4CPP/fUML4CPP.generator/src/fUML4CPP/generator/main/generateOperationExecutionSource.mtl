@@ -147,7 +147,7 @@ if (literal[aParameter.name.toUpperFirst()/] == [literal.generatePackageGetterCa
 }
 [/for]
 [elseif (not aParameter.type.supportedTypes())]
-std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> [aParameter.name/]Value = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>([aParameter.name/]ValueList->front());
+std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> [aParameter.name/]Value = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Reference>([aParameter.name/]ValueList->front());
 [aParameter.name/] = std::dynamic_pointer_cast<[aParameter.type.getNearestPackage().name/]::[aParameter.type.name.toUpperFirst()/]Object>([aParameter.name/]Value->getReferent())->[aParameter.type.oclAsType(Classifier).UMLValueGetterName()/]();
 if([aParameter.name/] == nullptr)
 {

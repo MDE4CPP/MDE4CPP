@@ -298,7 +298,7 @@ if (literal[aPin.name.toUpperFirst()/] == [literal.generatePackageGetterCall()/]
 }
 [/for]
 [elseif (not aPin.type.supportedTypes())]
-std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> [aPin.name/]Value = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>([aPin.name/]ValueList->front());
+std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> [aPin.name/]Value = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Reference>([aPin.name/]ValueList->front());
 [aPin.name/] = std::dynamic_pointer_cast<[aPin.type.getNearestPackage().name/]::[aPin.type.name.toUpperFirst()/]Object>([aPin.name/]Value->getReferent())->[aPin.type.oclAsType(Classifier).UMLValueGetterName()/]();
 if([aPin.name/] == nullptr)
 {
@@ -359,7 +359,7 @@ if (literal[par.name.toUpperFirst()/] == [literal.generatePackageGetterCall()/])
 }
 [/for]
 [elseif (not par.type.supportedTypes())]
-std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> [par.name/]Value = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>([par.name/]ValueList->front());
+std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> [par.name/]Value = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Reference>([par.name/]ValueList->front());
 [par.name/] = std::dynamic_pointer_cast<[par.type.getNearestPackage().name/]::[par.type.name.toUpperFirst()/]Object>([par.name/]Value->getReferent())->[par.type.oclAsType(Classifier).UMLValueGetterName()/]();
 if([par.name/] == nullptr)
 {
