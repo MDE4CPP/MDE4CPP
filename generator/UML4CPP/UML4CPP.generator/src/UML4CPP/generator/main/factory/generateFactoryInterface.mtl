@@ -27,7 +27,7 @@
 [import UML4CPP::generator::main::helpers::singletonHelper /]
 
 [template public generateFactoryInterface(aPackage : Package){packageName : String = aPackage.name.toUpperFirst().concat('Factory');}]
-[file (aPackage.name.concat('/').concat(packageName).concat('.hpp'), false, 'UTF-8')]
+[file (aPackage.generateNamespacePath().concat('/').concat(packageName).concat('.hpp'), false, 'UTF-8')]
 [startGuard(aPackage,'Factory')/]
 
 #include "uml/Factory.hpp"

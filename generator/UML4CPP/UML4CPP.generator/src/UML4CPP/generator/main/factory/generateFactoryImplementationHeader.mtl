@@ -26,7 +26,7 @@
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
 [template public generateFactoryImplHeader(aPackage : Package)]
-[file (aPackage.getPackageName().concat('/impl/').concat(aPackage.name.toUpperFirst()).concat('FactoryImpl.hpp'), false, 'UTF-8')]
+[file (aPackage.generateNamespacePath().concat('/impl/').concat(aPackage.name.toUpperFirst()).concat('FactoryImpl.hpp'), false, 'UTF-8')]
 [startGuard(aPackage,'FactoryImpl')/]
 
 #include <functional>

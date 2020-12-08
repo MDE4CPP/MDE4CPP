@@ -30,7 +30,7 @@
 [import UML4CPP::generator::main::validation::validateModel /]
 
 [template public generateImplementationHeader(aClass : Class) {className : String = aClass.name.toUpperFirst().concat('Impl'); aPackage : Package = aClass.ancestors()->filter(Package)->first()}]
-[file (aPackage.getPackageName().concat('/impl/').concat(className).concat('.hpp'), false, 'UTF-8')]
+[file (aPackage.generateNamespacePath().concat('/impl/').concat(className).concat('.hpp'), false, 'UTF-8')]
 [startGuard(className)/]
 
 #include <functional>

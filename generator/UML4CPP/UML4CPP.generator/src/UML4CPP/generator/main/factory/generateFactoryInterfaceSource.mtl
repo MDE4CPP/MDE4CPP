@@ -24,7 +24,7 @@
 [import UML4CPP::generator::main::helpers::singletonHelper /]
 
 [template public generateFactoryCpp(anPackage : Package)  {packageName : String = anPackage.name.concat('Factory').toUpperFirst(); }]
-[file  (anPackage.getPackageName().concat('/').concat(packageName).concat('.cpp'), false, 'UTF-8')]
+[file  (anPackage.generateNamespacePath().concat('/').concat(packageName).concat('.cpp'), false, 'UTF-8')]
 
 #include "[anPackage.getPackageName()/]/[packageName/].hpp"
 #include "[anPackage.getPackageName()/]/impl/[packageName.concat('Impl')/].hpp"

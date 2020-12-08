@@ -53,7 +53,7 @@
 [**
  * generate package namespaces
 */]
-[query private getSuperPackage(aPackage : Package) : Package = if((not owner.oclIsUndefined()) and (owner.oclIsKindOf(Package))) then owner else null endif /]
+[query public getSuperPackage(aPackage : Package) : Package = if((not owner.oclIsUndefined()) and (owner.oclIsKindOf(Package))) then owner else null endif /]
 [query private getRootPackageName(aPackage : Package, ignoreRoot : Boolean) : String = if (ignoreRoot) then '' else aPackage.name endif /]
 [query private getNamespace(aPackage : Package, separator : String, ignoreRoot : Boolean) : String = if(aPackage.getSuperPackage().oclIsUndefined()) then getRootPackageName(ignoreRoot) else aPackage.getSuperPackage().getNamespace(separator, ignoreRoot).concat(separator).concat(aPackage.name) endif/]
 [query public generateNamespacePath(aPackage : Package) : String = getNamespace('/', false) /]

@@ -29,7 +29,7 @@
  * generate interface model file
 */]
 [template public generateInterfaceHeaderFile(aInterface : Interface) {aPackage:Package = aInterface.ancestors()->filter(Package)->first();}]
-[file (aPackage.getPackageName().concat('/').concat(aInterface.name).concat('.hpp'), false, 'UTF-8')]
+[file (aPackage.generateNamespacePath().concat('/').concat(aInterface.name).concat('.hpp'), false, 'UTF-8')]
 [startGuard(aInterface)/]
 
 #include <memory>

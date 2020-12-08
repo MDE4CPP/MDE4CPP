@@ -71,7 +71,7 @@
 							}->flatten()->sortedBy(name)/]
 
 [template public generatePackageImplSource(aPackage : Package) {packageName : String = aPackage.name.concat('PackageImpl').toUpperFirst();}]
-[file (aPackage.getPackageName().concat('/impl/').concat(packageName).concat('.cpp'), false, 'UTF-8')]
+[file (aPackage.generateNamespacePath().concat('/impl/').concat(packageName).concat('.cpp'), false, 'UTF-8')]
 #include "[aPackage.getPackageName()/]/impl/[packageName.toUpperFirst()/].hpp"
 
 //meta meta model classes

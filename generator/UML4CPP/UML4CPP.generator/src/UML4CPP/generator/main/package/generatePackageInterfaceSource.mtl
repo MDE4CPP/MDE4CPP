@@ -24,7 +24,7 @@
 [import UML4CPP::generator::main::helpers::singletonHelper /]
 
 [template public generatePackageInterfaceSource(aPackage : Package) {packageName : String = aPackage.name.concat('Package').toUpperFirst(); }]
-[file (aPackage.getPackageName().concat('/').concat(packageName).concat('.cpp'), false, 'UTF-8')]
+[file (aPackage.generateNamespacePath().concat('/').concat(packageName).concat('.cpp'), false, 'UTF-8')]
 #include "[aPackage.getPackageName()/]/[packageName/].hpp"
 #include "[aPackage.getPackageName()/]/impl/[packageName.concat('Impl')/].hpp"
 

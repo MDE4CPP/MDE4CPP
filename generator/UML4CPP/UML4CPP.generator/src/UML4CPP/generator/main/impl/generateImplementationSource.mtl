@@ -40,7 +40,7 @@
 [query private getAllAttributes(aClass : Class) : Set(Property) = OrderedSet{aClass.ownedAttribute, aClass.generalization.general->selectByType(Class).getAllAttributes(), aClass.interfaceRealization.contract.getAllAttributes()}->flatten() /]
 
 [template public generateImplementationSource(aClass : Class) { className : String = aClass.name.toUpperFirst().concat('Impl'); aPackage : Package = aClass.ancestors()->filter(Package)->first(); }]
-[file (aPackage.getPackageName().concat('/impl/').concat(className).concat('.cpp'), false, 'UTF-8')]
+[file (aPackage.generateNamespacePath().concat('/impl/').concat(className).concat('.cpp'), false, 'UTF-8')]
 #include "[aPackage.getPackageName()/]/impl/[className.concat('.hpp')/]"
 
 [defineDebugMacro()/]
