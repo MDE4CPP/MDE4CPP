@@ -41,8 +41,8 @@
 	className : String = objectClassName();
 	pointerName : String = pointerName(aPackage);
 }]
-[file (aPackage.getPackageName().concat('Exec/').concat(className).concat('.cpp'), false, 'UTF-8')]
-#include "[aPackage.getPackageName()/]Exec/[className/].hpp"
+[file (aPackage.generateNamespacePath().concat('Exec/').concat(className).concat('.cpp'), false, 'UTF-8')]
+#include "[aPackage.generateNamespacePath()/]Exec/[className/].hpp"
 
 //General Includes
 #include "abstractDataTypes/SubsetUnion.hpp"

@@ -28,7 +28,7 @@
 [template public generateModelLocusSource(aPackage : Package) 
 {
 upperName : String = aPackage.getPackageName().sanitize().toUpperFirst(); 
-originalName : String = aPackage.getPackageName();
+originalName : String = aPackage.generateNamespacePath();
 }]
 
 [file (originalName.concat('Exec/impl/') + upperName.concat('LocusImpl.cpp'), false, 'UTF-8')]

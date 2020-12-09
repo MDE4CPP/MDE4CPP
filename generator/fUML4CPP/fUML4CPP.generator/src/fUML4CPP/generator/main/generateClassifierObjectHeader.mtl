@@ -25,7 +25,7 @@
 	className : String = objectClassName();
 	pointerName : String = pointerName(aPackage);
 }]
-[file (aPackage.getPackageName().concat('Exec/').concat(className).concat('.hpp'), false, 'UTF-8')]
+[file (aPackage.generateNamespacePath().concat('Exec/').concat(className).concat('.hpp'), false, 'UTF-8')]
 [startGuard(aClassifier,'Execution')/]
 
 #include "PSCS/Semantics/StructuredClassifiers/impl/CS_ObjectImpl.hpp"

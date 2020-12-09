@@ -27,7 +27,7 @@
 [/template]
 
 [template private generateCMakeLists(aPackage : Package, packageOnly : Boolean) { packageName : String = getPackageName(); execPackageName : String = getPackageName().concat('Exec'); }]
-[file (aPackage.getPackageName().concat('Exec/').concat('CMakeLists.txt'), false, 'UTF-8')]
+[file (aPackage.generateNamespacePath().concat('Exec/').concat('CMakeLists.txt'), false, 'UTF-8')]
 #############################################################################
 #																			#
 #		 			CMakeList created by fUML4CPP Generator					# 

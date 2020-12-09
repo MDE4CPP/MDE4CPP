@@ -19,7 +19,7 @@
 
 
 [template public generateModelLocusHeader(aPackage : Package) {
-upperName : String = aPackage.getPackageName().sanitize().toUpperFirst(); originalName : String = aPackage.getPackageName();}]
+upperName : String = aPackage.getPackageName().sanitize().toUpperFirst(); originalName : String = aPackage.generateNamespacePath();}]
 [file (originalName.concat('Exec/') + upperName.concat('Locus.hpp'), false, 'UTF-8')]
 [startGuard(aPackage,'LocusExecution')/]
 

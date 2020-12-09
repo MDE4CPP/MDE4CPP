@@ -35,8 +35,8 @@
 	behaviorName : String = aNamedElement.generateOpaqueBehaviorExecutionName(); 
 }]
 
-[file (aPackage.getPackageName().concat('Exec/').concat(behaviorName).concat('.cpp'), false, 'UTF-8')]
-#include "[aPackage.getPackageName()/]Exec/[behaviorName/].hpp"
+[file (aPackage.generateNamespacePath().concat('Exec/').concat(behaviorName).concat('.cpp'), false, 'UTF-8')]
+#include "[aPackage.generateNamespacePath()/]Exec/[behaviorName/].hpp"
 
 [defineDebugMacro()/]
 
@@ -51,7 +51,7 @@
 
 [aNamedElement.generateIncludes(aPackage)/]
 
-using namespace [aPackage.name/];
+using namespace [aPackage.generateNamespace()/];
 
 [behaviorName/]::[behaviorName/]()
 {
@@ -98,17 +98,17 @@ void [behaviorName/]::setThisExecutionPtr(std::weak_ptr<[behaviorName/]> thisExe
 [let aCallOperationAction : CallOperationAction = aNamedElement.oclAsType(CallOperationAction)]
 [if (aCallOperationAction.target.name.startsWith('self'))]
 [if (aCallOperationAction.target.name.startsWith('self.'))]
-#include "[aCallOperationAction.target.type.getNearestPackage().myNamespaceName()/]/[aCallOperationAction.target.type.name/].hpp"
+#include "[aCallOperationAction.target.type.getNearestPackage().generateNamespacePath()/]/[aCallOperationAction.target.type.name/].hpp"
 [/if]
-#include "[aCallOperationAction.getActivity().owner.oclAsType(Classifier).getNearestPackage().myNamespaceName()/]/[aCallOperationAction.getActivity().owner.oclAsType(Classifier).name.toUpperFirst()/].hpp"
-#include "[aPackage.getPackageName()/]Exec/[aCallOperationAction.getActivity().owner.oclAsType(Classifier).name.toUpperFirst()/]Object.hpp"
+#include "[aCallOperationAction.getActivity().owner.oclAsType(Classifier).getNearestPackage().generateNamespacePath()/]/[aCallOperationAction.getActivity().owner.oclAsType(Classifier).name.toUpperFirst()/].hpp"
+#include "[aPackage.generateNamespacePath()/]Exec/[aCallOperationAction.getActivity().owner.oclAsType(Classifier).name.toUpperFirst()/]Object.hpp"
 [else]
-#include "[aCallOperationAction.target.type.getNearestPackage().myNamespaceName()/]/[aCallOperationAction.target.type.name.toUpperFirst()/].hpp"
-#include "[aPackage.getPackageName()/]Exec/[aCallOperationAction.target.type.name.toUpperFirst()/]Object.hpp"
+#include "[aCallOperationAction.target.type.getNearestPackage().generateNamespacePath()/]/[aCallOperationAction.target.type.name.toUpperFirst()/].hpp"
+#include "[aPackage.generateNamespacePath()/]Exec/[aCallOperationAction.target.type.name.toUpperFirst()/]Object.hpp"
 [/if]
 
 [for (typePackage : Package | aCallOperationAction.input.type->addAll(aCallOperationAction.output.type)->asSet()->reject(supportedTypes())._package->asSet()->reject(isReflectionModel())->sortedBy(qualifiedName))]
-#include "[typePackage.getPackageName()/]/[typePackage.getPackageName().toUpperFirst()/]Package.hpp"
+#include "[typePackage.generateNamespacePath()/]/[typePackage.getPackageName().toUpperFirst()/]Package.hpp"
 [/for]
 
 [for (type : Type | aCallOperationAction.input.type->asOrderedSet())]
@@ -133,7 +133,7 @@ void [behaviorName/]::setThisExecutionPtr(std::weak_ptr<[behaviorName/]> thisExe
 [/if][/let][/if]
 
 [for (typePackage : Package | anOpaqueBehavior.ownedParameter.type->asSet()->reject(supportedTypes())._package->asSet()->reject(isReflectionModel())->sortedBy(qualifiedName))]
-#include "[typePackage.getPackageName()/]/[typePackage.getPackageName().toUpperFirst()/]Package.hpp"
+#include "[typePackage.generateNamespacePath()/]/[typePackage.getPackageName().toUpperFirst()/]Package.hpp"
 [/for]
 
 [for (type : Type | anOpaqueBehavior.ownedParameter.type->asOrderedSet())]
@@ -141,8 +141,8 @@ void [behaviorName/]::setThisExecutionPtr(std::weak_ptr<[behaviorName/]> thisExe
 [/for]
 [if (anOpaqueBehavior.hasGenerateContextVariable() or requiresContext)]
 
-#include "[anOpaqueBehavior.owner.oclAsType(Classifier).getNearestPackage().myNamespaceName()/]/[anOpaqueBehavior._context.oclAsType(Classifier).name.toUpperFirst()/].hpp"
-#include "[aPackage.getPackageName()/]Exec/[anOpaqueBehavior._context.oclAsType(Classifier).name.toUpperFirst()/]Object.hpp"
+#include "[anOpaqueBehavior.owner.oclAsType(Classifier).getNearestPackage().generateNamespacePath()/]/[anOpaqueBehavior._context.oclAsType(Classifier).name.toUpperFirst()/].hpp"
+#include "[aPackage.generateNamespacePath()/]Exec/[anOpaqueBehavior._context.oclAsType(Classifier).name.toUpperFirst()/]Object.hpp"
 [/if]
 [/template]
 
@@ -150,7 +150,7 @@ void [behaviorName/]::setThisExecutionPtr(std::weak_ptr<[behaviorName/]> thisExe
 [let aCallBehaviorAction : CallBehaviorAction = aNamedElement.oclAsType(CallBehaviorAction)]
 [let anOpaqueBehavior : OpaqueBehavior = aCallBehaviorAction.behavior.oclAsType(OpaqueBehavior)]
 [if (anOpaqueBehavior.hasGenerateContextVariable() or aCallBehaviorAction.argument->select(isSelf() or isSelfAttribute())->size() > 0)]
-std::shared_ptr<[anOpaqueBehavior.getContext().namespace.myNamespaceName()/]::[anOpaqueBehavior.getContext().name.toUpperFirst()/]> context = std::dynamic_pointer_cast<[anOpaqueBehavior.getContext().getNearestPackage().name/]::[anOpaqueBehavior.getContext().name.toUpperFirst()/]Object>(this->getContext())->[anOpaqueBehavior.getContext().UMLValueGetterName()/]();
+std::shared_ptr<[anOpaqueBehavior.getContext().getNearestPackage().generateNamespace()/]::[anOpaqueBehavior.getContext().name.toUpperFirst()/]> context = std::dynamic_pointer_cast<[anOpaqueBehavior.getContext().getNearestPackage().generateNamespace()/]::[anOpaqueBehavior.getContext().name.toUpperFirst()/]Object>(this->getContext())->[anOpaqueBehavior.getContext().UMLValueGetterName()/]();
 DEBUG_MESSAGE(
 	if (context == nullptr)
 	{
@@ -200,7 +200,7 @@ throw "UnsupportedBehaviorException";
 [let aCallOperationAction : CallOperationAction = aNamedElement.oclAsType(CallOperationAction)]
 [let aOperation : Operation = aCallOperationAction.operation]
 [let type : Classifier = aCallOperationAction.getOwnerOrTargetType()]
-std::shared_ptr<[type.namespace.myNamespaceName()/]::[type.name.toUpperFirst()/]> context = std::dynamic_pointer_cast<[type.name.toUpperFirst()/]Object>(this->getContext())->[type.UMLValueGetterName()/]();
+std::shared_ptr<[type.getNearestPackage().generateNamespace()/]::[type.name.toUpperFirst()/]> context = std::dynamic_pointer_cast<[type.name.toUpperFirst()/]Object>(this->getContext())->[type.UMLValueGetterName()/]();
 DEBUG_MESSAGE(
 	if (context == nullptr)
 	{
@@ -209,7 +209,7 @@ DEBUG_MESSAGE(
 	}
 )
 [let targetPin : Pin = aCallOperationAction.target]
-std::shared_ptr<[targetPin.getPinType(aCallOperationAction).namespace.myNamespaceName()/]::[targetPin.getPinType(aCallOperationAction).name.toUpperFirst()/]> target = context[if (targetPin.isSelfAttribute())]->[targetPin.getSelfAttribute(aCallOperationAction).getterName()/]()[/if];
+std::shared_ptr<[targetPin.getPinType(aCallOperationAction).getNearestPackage().generateNamespace()/]::[targetPin.getPinType(aCallOperationAction).name.toUpperFirst()/]> target = context[if (targetPin.isSelfAttribute())]->[targetPin.getSelfAttribute(aCallOperationAction).getterName()/]()[/if];
 [/let]
 [/let]
 DEBUG_MESSAGE(
@@ -257,7 +257,7 @@ DEBUG_MESSAGE(
 //Body of the Opaquebehavior
 //Start ---------------------------
 [if (anOpaqueBehavior.hasGenerateContextVariable())]
-std::shared_ptr<[anOpaqueBehavior.getContext().namespace.myNamespaceName()/]::[anOpaqueBehavior.getContext().name.toUpperFirst()/]> context = std::dynamic_pointer_cast<[anOpaqueBehavior.getContext().name.toUpperFirst()/]Object>(this->getContext())->[anOpaqueBehavior.getContext().UMLValueGetterName()/]();
+std::shared_ptr<[anOpaqueBehavior.getContext().getNearestPackage().generateNamespace()/]::[anOpaqueBehavior.getContext().name.toUpperFirst()/]> context = std::dynamic_pointer_cast<[anOpaqueBehavior.getContext().name.toUpperFirst()/]Object>(this->getContext())->[anOpaqueBehavior.getContext().UMLValueGetterName()/]();
 DEBUG_MESSAGE(
 	if (context == nullptr)
 	{
@@ -294,12 +294,12 @@ std::shared_ptr<uml::EnumerationLiteral> literal[aPin.name.toUpperFirst()/] = st
 [for (literal : EnumerationLiteral | aPin.type.oclAsType(Enumeration).ownedLiteral)]
 if (literal[aPin.name.toUpperFirst()/] == [literal.generatePackageGetterCall()/])
 {
-	[aPin.name/] = [literal.enumeration.namespace.name/]::[literal.enumeration.name/]::[literal.name.toUpperCase()/];
+	[aPin.name/] = [literal.enumeration.getNearestPackage().generateNamespace()/]::[literal.enumeration.name/]::[literal.name.toUpperCase()/];
 }
 [/for]
 [elseif (not aPin.type.supportedTypes())]
 std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> [aPin.name/]Value = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>([aPin.name/]ValueList->front());
-[aPin.name/] = std::dynamic_pointer_cast<[aPin.type.getNearestPackage().name/]::[aPin.type.name.toUpperFirst()/]Object>([aPin.name/]Value->getReferent())->[aPin.type.oclAsType(Classifier).UMLValueGetterName()/]();
+[aPin.name/] = std::dynamic_pointer_cast<[aPin.type.getNearestPackage().generateNamespace()/]::[aPin.type.name.toUpperFirst()/]Object>([aPin.name/]Value->getReferent())->[aPin.type.oclAsType(Classifier).UMLValueGetterName()/]();
 if([aPin.name/] == nullptr)
 {
 	DEBUG_MESSAGE(std::cout << "received instance of type [aPin.type.generateCppType(true)/] is null" << std::endl;);
@@ -315,7 +315,7 @@ while ([aPin.name.toLowerFirst()/]Iter != [aPin.name.toLowerFirst()/]End)
 {
 	[if (not aPin.type.supportedTypes())]
 	std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> [aPin.name/]Value = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(*[aPin.name.toLowerFirst()/]Iter);
-	[aPin.type.generateCppType(false)/] [aPin.name/]Temp = std::dynamic_pointer_cast<[aPin.type.getNearestPackage().name/]::[aPin.type.name.toUpperFirst()/]Object>([aPin.name/]Value->getReferent())->[aPin.type.oclAsType(Classifier).UMLValueGetterName()/]();
+	[aPin.type.generateCppType(false)/] [aPin.name/]Temp = std::dynamic_pointer_cast<[aPin.type.getNearestPackage().generateNamespace()/]::[aPin.type.name.toUpperFirst()/]Object>([aPin.name/]Value->getReferent())->[aPin.type.oclAsType(Classifier).UMLValueGetterName()/]();
 	if([aPin.name/]Temp == nullptr)
 	{
 		DEBUG_MESSAGE(std::cout << "received instance of type [aPin.type.generateCppType(true)/] is null" << std::endl;);
@@ -355,12 +355,12 @@ std::shared_ptr<uml::EnumerationLiteral> literal[par.name.toUpperFirst()/] = std
 [for (literal : EnumerationLiteral | par.type.oclAsType(Enumeration).ownedLiteral)]
 if (literal[par.name.toUpperFirst()/] == [literal.generatePackageGetterCall()/])
 {
-	[par.name/] = [literal.enumeration.namespace.name/]::[literal.enumeration.name/]::[literal.name.toUpperCase()/];
+	[par.name/] = [literal.enumeration.getNearestPackage().generateNamespace()/]::[literal.enumeration.name/]::[literal.name.toUpperCase()/];
 }
 [/for]
 [elseif (not par.type.supportedTypes())]
 std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> [par.name/]Value = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>([par.name/]ValueList->front());
-[par.name/] = std::dynamic_pointer_cast<[par.type.getNearestPackage().name/]::[par.type.name.toUpperFirst()/]Object>([par.name/]Value->getReferent())->[par.type.oclAsType(Classifier).UMLValueGetterName()/]();
+[par.name/] = std::dynamic_pointer_cast<[par.type.getNearestPackage().generateNamespace()/]::[par.type.name.toUpperFirst()/]Object>([par.name/]Value->getReferent())->[par.type.oclAsType(Classifier).UMLValueGetterName()/]();
 if([par.name/] == nullptr)
 {
 	DEBUG_MESSAGE(std::cout << "received instance of type [par.type.generateCppType(true)/] is null" << std::endl;);
@@ -376,7 +376,7 @@ while ([par.name.toLowerFirst()/]ValueIter != [par.name.toLowerFirst()/]ValueEnd
 {
 	[if (not par.type.supportedTypes())]
 	std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> [par.name/]Value = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(*[par.name.toLowerFirst()/]ValueIter);
-	[par.type.generateCppType(false)/] [par.name/]Temp = std::dynamic_pointer_cast<[par.type.getNearestPackage().name/]::[par.type.name.toUpperFirst()/]Object>([par.name/]Value->getReferent())->[par.type.oclAsType(Classifier).UMLValueGetterName()/]();
+	[par.type.generateCppType(false)/] [par.name/]Temp = std::dynamic_pointer_cast<[par.type.getNearestPackage().generateNamespace()/]::[par.type.name.toUpperFirst()/]Object>([par.name/]Value->getReferent())->[par.type.oclAsType(Classifier).UMLValueGetterName()/]();
 	if([par.name/]Temp == nullptr)
 	{
 		DEBUG_MESSAGE(std::cout << "received instance of type [par.type.generateCppType(true)/] is null" << std::endl;);
@@ -437,7 +437,7 @@ while ([par.name.toLowerFirst()/]OutIter != [par.name.toLowerFirst()/]OutEnd)
 [aParameter.generateOutputParameter()/]
 [if (aParameter.type.oclIsKindOf(Enumeration))]
 [for (literal : EnumerationLiteral | aParameter.type.oclAsType(Enumeration).ownedLiteral)]
-if ([aParameter.name/] == [literal.enumeration.namespace.name/]::[literal.enumeration.name/]::[literal.name.toUpperCase()/])
+if ([aParameter.name/] == [literal.enumeration.getNearestPackage().generateNamespace()/]::[literal.enumeration.name/]::[literal.name.toUpperCase()/])
 {
 	[aParameter.name/]OutValue->setLiteral([literal.generatePackageGetterCall()/]);
 }
@@ -460,7 +460,7 @@ context->[pin.getSelfAttribute(action).getterName()/]();
 [/template]
 
 [template private generateArgumentGetter(pin : Pin, action : Action) ? (not (pin.name.contains('self') and pin.type.supportedTypes()))]
-std::dynamic_pointer_cast<[pin.type.getNearestPackage().name/]::[pin.type.name.toUpperFirst()/]Object>([pin.name/]Value->getReferent())->[pin.type.oclAsType(Classifier).UMLValueGetterName()/][if(not (pin.upper = 1))]s[/if]();
+std::dynamic_pointer_cast<[pin.type.getNearestPackage().generateNamespace()/]::[pin.type.name.toUpperFirst()/]Object>([pin.name/]Value->getReferent())->[pin.type.oclAsType(Classifier).UMLValueGetterName()/][if(not (pin.upper = 1))]s[/if]();
 assert([pin.name/] != nullptr);
 [/template]
 

@@ -33,6 +33,7 @@
 [import UML4CPP::generator::main::generate /]
 [import UML4CPP::generator::main::configuration::generateGradleFiles /]
 [import UML4CPP::generator::main::validation::validateModel /]
+[import UML4CPP::generator::main::helpers::nameHelper /]
 
 [template public generateFUML(aPackage : uml::Package)]
 [comment @main/]
@@ -79,6 +80,8 @@
 [aPackage.getClassifiersForObjectClasses().generateClassifierObjectHeader(aPackage)/]
 [aPackage.getClassifiersForObjectClasses().generateClassifierObjectSource(aPackage)/]
 
+[comment Generate execution plugin, model locus, CMakeLists and Gradle-Files only for root package /]
+[if (aPackage.getSuperPackage().oclIsUndefined())]
 //generate execution plugin
 [aPackage.generateExecutionPlugin()/]
 
@@ -86,9 +89,9 @@
 [aPackage.generateModelLocusHeader()/]
 [aPackage.generateModelLocusSource()/]
 
-
 //generate project files
 [aPackage.generateExecutionBuildFiles(false)/]
+[/if]
 [/template]
 
 
@@ -98,9 +101,12 @@
 [aPackage.getClassifiersForPackageOnly().generateClassifierObjectHeader(aPackage)/]
 [aPackage.getClassifiersForPackageOnly().generateClassifierObjectSource(aPackage)/]
 
+[comment Generate execution plugin, CMakeLists and Gradle-Files only for root package /]
+[if (aPackage.getSuperPackage().oclIsUndefined())]
 //generate execution plugin
 [aPackage.generateExecutionPlugin()/]
 
 //generate project files
 [aPackage.generateExecutionBuildFiles(true)/]
+[/if]
 [/template]

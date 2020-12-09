@@ -22,12 +22,12 @@
 [template public generateOpaqueBehaviorExecutionHeader(namedElement : NamedElement, aPackage :Package) {
 	behaviorName : String = namedElement.generateOpaqueBehaviorExecutionName();
 }]
-[file (aPackage.getPackageName().concat('Exec/').concat(behaviorName).concat('.hpp'), false, 'UTF-8')]
+[file (aPackage.generateNamespacePath().concat('Exec/').concat(behaviorName).concat('.hpp'), false, 'UTF-8')]
 [startGuard(namedElement.owner.oclAsType(NamedElement), behaviorName)/]
 
 #include "fUML/Semantics/CommonBehavior/impl/OpaqueBehaviorExecutionImpl.hpp"
 
-namespace [aPackage.name/] 
+namespace [aPackage.generateNamespace()/] 
 {
 	class [behaviorName/]: virtual public fUML::Semantics::CommonBehavior::OpaqueBehaviorExecutionImpl 
 	{
