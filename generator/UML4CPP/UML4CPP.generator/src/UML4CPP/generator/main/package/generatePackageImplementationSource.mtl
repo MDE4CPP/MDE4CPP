@@ -45,29 +45,29 @@
 
 
 [query public getAllAppliedStereotypes(aPackage : Package) : Set(Stereotype) = OrderedSet{
-								aPackage.allOwnedElements().getAppliedStereotypes(),
+								aPackage.ownedElement.getAppliedStereotypes(),
 								aPackage.getAppliedStereotypes()
 							}->flatten() /]
 [query public metaModelIncludes(aPackage : Package) : Set(Package) = OrderedSet{
-								aPackage.allOwnedElements()->filter(TypedElement)->select(not type.oclIsUndefined()).type.getNearestPackage(),
-								aPackage.allOwnedElements()->filter(CallBehaviorAction).behavior.getNearestPackage(),
-								aPackage.allOwnedElements()->filter(Element).getAppliedStereotypes().getProfile(), 
-								aPackage.allOwnedElements()->filter(InstanceValue).instance.getNearestPackage(), 
-								aPackage.member->filter(Element).allOwnedElements()->filter(InterfaceRealization).contract.getNearestPackage(),
-								aPackage.member->filter(Element).allOwnedElements()->filter(Generalization).general.getNearestPackage()
+								aPackage.ownedElement->filter(TypedElement)->select(not type.oclIsUndefined()).type.getNearestPackage(),
+								aPackage.ownedElement->filter(CallBehaviorAction).behavior.getNearestPackage(),
+								aPackage.ownedElement->filter(Element).getAppliedStereotypes().getProfile(), 
+								aPackage.ownedElement->filter(InstanceValue).instance.getNearestPackage(), 
+								aPackage.member->filter(Element).ownedElement->filter(InterfaceRealization).contract.getNearestPackage(),
+								aPackage.member->filter(Element).ownedElement->filter(Generalization).general.getNearestPackage()
 							}->flatten() /]
 [query private getMetaMetaModelIncludes(aPackage : Package) : Set(EClass) = OrderedSet{
-								aPackage.allOwnedElements().eClass(), 
-								aPackage.allOwnedElements()->selectByKind(Interface).ownedOperation.ownedParameter->select(not type.oclIsUndefined()).type.eClass(), 
-								aPackage.allOwnedElements()->selectByKind(Interface).ownedAttribute->select(not type.oclIsUndefined()).type.eClass(), 
-								aPackage.allOwnedElements()->selectByKind(Class).ownedOperation.ownedParameter->select(not type.oclIsUndefined()).type.eClass(),
-								aPackage.allOwnedElements()->selectByKind(Class).ownedAttribute->select(not type.oclIsUndefined()).type.eClass(),
-								aPackage.allOwnedElements()->selectByKind(Class).ownedBehavior->filter(OpaqueBehavior).ownedParameter->select(not type.oclIsUndefined()).type.eClass(),
-								aPackage.allOwnedElements()->selectByKind(Class).ownedElement->filter(InterfaceRealization).supplier.oclAsType(Interface).ownedAttribute.eClass(),
-								aPackage.allOwnedElements()->selectByKind(Class).ownedElement->filter(InterfaceRealization).contract.eClass(),
-								aPackage.allOwnedElements()->selectByKind(StructuralFeatureAction).structuralFeature.eClass(),
-								aPackage.allOwnedElements()->filter(OpaqueBehavior).ownedParameter->select(not type.oclIsUndefined()).type.eClass(),
-								aPackage.allOwnedElements()->filter(InstanceValue).instance.eClass()
+								aPackage.ownedElement.eClass(), 
+								aPackage.ownedElement->selectByKind(Interface).ownedOperation.ownedParameter->select(not type.oclIsUndefined()).type.eClass(), 
+								aPackage.ownedElement->selectByKind(Interface).ownedAttribute->select(not type.oclIsUndefined()).type.eClass(), 
+								aPackage.ownedElement->selectByKind(Class).ownedOperation.ownedParameter->select(not type.oclIsUndefined()).type.eClass(),
+								aPackage.ownedElement->selectByKind(Class).ownedAttribute->select(not type.oclIsUndefined()).type.eClass(),
+								aPackage.ownedElement->selectByKind(Class).ownedBehavior->filter(OpaqueBehavior).ownedParameter->select(not type.oclIsUndefined()).type.eClass(),
+								aPackage.ownedElement->selectByKind(Class).ownedElement->filter(InterfaceRealization).supplier.oclAsType(Interface).ownedAttribute.eClass(),
+								aPackage.ownedElement->selectByKind(Class).ownedElement->filter(InterfaceRealization).contract.eClass(),
+								aPackage.ownedElement->selectByKind(StructuralFeatureAction).structuralFeature.eClass(),
+								aPackage.ownedElement->filter(OpaqueBehavior).ownedParameter->select(not type.oclIsUndefined()).type.eClass(),
+								aPackage.ownedElement->filter(InstanceValue).instance.eClass()
 							}->flatten()->sortedBy(name)/]
 
 [template public generatePackageImplSource(aPackage : Package) {packageName : String = aPackage.name.concat('PackageImpl').toUpperFirst();}]
@@ -178,12 +178,12 @@ void [packageName/]::createPackageContents(std::shared_ptr<uml::Package> [aPacka
 
 void [packageName/]::createPackageActivities(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::UmlFactory> factory)
 {
-[for (anActivity : Activity | (aPackage.allOwnedElements()->filter(Activity)->sortedBy(myQualifiedName())))]
+[for (anActivity : Activity | (aPackage.ownedElement->filter(Activity)->sortedBy(myQualifiedName())))]
 	createActivity_[anActivity.memberName()/]([aPackage.memberName()/], factory);
 [/for]
 }
 
-[for (anActivity : Activity | (aPackage.allOwnedElements()->filter(Activity)->sortedBy(myQualifiedName())))]
+[for (anActivity : Activity | (aPackage.ownedElement->filter(Activity)->sortedBy(myQualifiedName())))]
 void [packageName/]::createActivity_[anActivity.memberName()/](std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::UmlFactory> factory)
 {
 	[anActivity.generateActivityCreation()/]
@@ -216,7 +216,7 @@ void [packageName/]::createPackageClasses(std::shared_ptr<uml::Package> [aPackag
 	[for (anOperation : Operation | aClass.ownedOperation->sortedBy(name)) before ('    // '.concat(aClass.name).concat(' operations\n')) separator('\n')]
 	[anOperation.generateOperationCreation()/]
 	[/for] 
-	[for (aOpaqueBehavior : OpaqueBehavior | aClass.allOwnedElements()->filter(OpaqueBehavior)->sortedBy(myQualifiedName())) before ('    // '.concat(aClass.name).concat(' opaque behaviors\n'))  separator('\n')]
+	[for (aOpaqueBehavior : OpaqueBehavior | aClass.ownedElement->filter(OpaqueBehavior)->sortedBy(myQualifiedName())) before ('    // '.concat(aClass.name).concat(' opaque behaviors\n'))  separator('\n')]
 	[if (aOpaqueBehavior.oclIsKindOf(FunctionBehavior))]
 	[aOpaqueBehavior.oclAsType(FunctionBehavior).generateFunctionBehaviorCreation()/]
 	[else]
@@ -246,7 +246,7 @@ void [packageName/]::createPackageAssociations(std::shared_ptr<uml::Package> [aP
 [comment]Only Dependency[/comment]
 void [packageName/]::createPackageDependencies(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::UmlFactory> factory)
 {
-[for (aDependency : Dependency | (aPackage.allOwnedElements()->filter(Dependency)->reject(oclIsTypeOf(InterfaceRealization)))->sortedBy(myQualifiedName())) separator('\n')]
+[for (aDependency : Dependency | (aPackage.ownedElement->filter(Dependency)->reject(oclIsTypeOf(InterfaceRealization)))->sortedBy(myQualifiedName())) separator('\n')]
 	[aDependency.generateDependencyCreation()/]
 [/for]
 }
@@ -267,7 +267,7 @@ void [packageName/]::createPackageInstanceSpecifications(std::shared_ptr<uml::Pa
 
 void [packageName/]::createPackageInterfaceRealizations(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::UmlFactory> factory)
 {
-[for (anInterfaceRealization : InterfaceRealization | aPackage.allOwnedElements()->filter(InterfaceRealization)->sortedBy(myQualifiedName())) separator ('\n')]
+[for (anInterfaceRealization : InterfaceRealization | aPackage.ownedElement->filter(InterfaceRealization)->sortedBy(myQualifiedName())) separator ('\n')]
 	[anInterfaceRealization.generateInterfaceRealizationCreation()/]
 [/for]
 }
@@ -302,7 +302,7 @@ void [packageName/]::createPackageStereotypes(std::shared_ptr<uml::Package> [aPa
 
 void [packageName/]::createPackageValueSpecifications(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::UmlFactory> factory)
 {
-[for (aValueSpecification : ValueSpecification | aPackage.allOwnedElements()->filter(ValueSpecification)->reject(owner.oclIsKindOf(Slot))->sortedBy(myQualifiedName()))]
+[for (aValueSpecification : ValueSpecification | aPackage.ownedElement->filter(ValueSpecification)->reject(owner.oclIsKindOf(Slot))->sortedBy(myQualifiedName()))]
 	[aValueSpecification.generateValueSpecificationCreation()/]
 [/for]
 }
@@ -335,12 +335,12 @@ void [packageName/]::initializePackageContents(std::shared_ptr<uml::Package> [aP
 //ActivityNodes and Edges
 void [packageName/]::initializePackageActivities()
 {
-[for (anActivity : Activity | (aPackage.allOwnedElements()->filter(Activity)->sortedBy(myQualifiedName())))]
+[for (anActivity : Activity | (aPackage.ownedElement->filter(Activity)->sortedBy(myQualifiedName())))]
 	initializeActivity_[anActivity.memberName()/]();
 [/for]
 }
 
-[for (anActivity : Activity | (aPackage.allOwnedElements()->filter(Activity)->sortedBy(myQualifiedName())))]
+[for (anActivity : Activity | (aPackage.ownedElement->filter(Activity)->sortedBy(myQualifiedName())))]
 void [packageName/]::initializeActivity_[anActivity.memberName()/]()
 {
 	[anActivity.generateActivityInitialization()/]
@@ -367,7 +367,7 @@ void [packageName/]::initializePackageClasses()
 	[for (anOperation : Operation | aClass.ownedOperation->sortedBy(name)) before ('    // '.concat(aClass.name).concat(' operations\n')) separator('\n') after ('\n')]
 	[anOperation.initalizeOperation()/]
 	[/for]
-	[for (aOpaqueBehavior : OpaqueBehavior | aClass.allOwnedElements()->filter(OpaqueBehavior)->sortedBy(myQualifiedName())) before ('    // '.concat(aClass.name).concat(' opaque behaviors\n'))  separator('\n') after ('\n')]
+	[for (aOpaqueBehavior : OpaqueBehavior | aClass.ownedElement->filter(OpaqueBehavior)->sortedBy(myQualifiedName())) before ('    // '.concat(aClass.name).concat(' opaque behaviors\n'))  separator('\n') after ('\n')]
 	[if (aOpaqueBehavior.oclIsKindOf(FunctionBehavior))]
 	[aOpaqueBehavior.oclAsType(FunctionBehavior).generateFunctionBehaviorInitialization()/]
 	[else]
@@ -400,7 +400,7 @@ void [packageName/]::initializePackageAssociations()
 [comment]Only Dependency[/comment]
 void [packageName/]::initializePackageDependencies()
 {
-[for (aDependency : Dependency | (aPackage.allOwnedElements()->filter(Dependency)->reject(oclIsTypeOf(InterfaceRealization)))->sortedBy(myQualifiedName())) separator('\n')]
+[for (aDependency : Dependency | (aPackage.ownedElement->filter(Dependency)->reject(oclIsTypeOf(InterfaceRealization)))->sortedBy(myQualifiedName())) separator('\n')]
 	[aDependency.generateDependencyInitialization()/]
 	[aDependency.ownedElement->sortedBy(name).generateStereotypeApplication()/]
 [/for]
@@ -416,7 +416,7 @@ void [packageName/]::initializePackageInstanceSpecifications()
 
 void [packageName/]::initializePackageInterfaceRealizations()
 {
-[for (anInterfaceRealization : InterfaceRealization | aPackage.allOwnedElements()->filter(InterfaceRealization)->sortedBy(myQualifiedName())) separator ('\n')]
+[for (anInterfaceRealization : InterfaceRealization | aPackage.ownedElement->filter(InterfaceRealization)->sortedBy(myQualifiedName())) separator ('\n')]
 	[anInterfaceRealization.generateInterfaceRealizationInitialization()/]
 [/for]
 }
@@ -443,7 +443,7 @@ void [packageName/]::initializePackageStereotypes()
 
 void [packageName/]::initializePackageValueSpecifications()
 {
-[for (aValueSpecification : ValueSpecification | aPackage.allOwnedElements()->filter(ValueSpecification)->reject(owner.oclIsKindOf(Slot))->sortedBy(myQualifiedName())) separator ('\n')]
+[for (aValueSpecification : ValueSpecification | aPackage.ownedElement->filter(ValueSpecification)->reject(owner.oclIsKindOf(Slot))->sortedBy(myQualifiedName())) separator ('\n')]
 	[aValueSpecification.generateValueSpecificationInitialization()/]
 [/for]
 }

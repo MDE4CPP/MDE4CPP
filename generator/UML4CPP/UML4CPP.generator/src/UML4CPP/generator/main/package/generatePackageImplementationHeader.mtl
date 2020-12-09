@@ -70,8 +70,8 @@ namespace [subPackage.generateNamespace()/]
 		private:
 			//private variables for ownedMember of the metamodel package
 			[comment [(aPackage.allOwnedElements()->filter(NamedElement))->reject(owner.oclIsKindOf(Slot))->sortedBy(myQualifiedName()).generatePackageMember()/]
-			[(aPackage.allOwnedElements()->filter(NamedElement))->reject(owner.oclIsKindOf(Slot))->sortedBy(myQualifiedName()).generatePackageMember()/]
-			[(aPackage.allOwnedElements()->filter(ConnectorEnd))->reject(owner.oclIsKindOf(Slot))->sortedBy(myQualifiedName()).generatePackageMember()/]
+			[(aPackage.ownedElement->filter(NamedElement))->reject(owner.oclIsKindOf(Slot))->sortedBy(myQualifiedName())->reject(oclIsTypeOf(Package)).generatePackageMember()/]
+			[(aPackage.ownedElement->filter(ConnectorEnd))->reject(owner.oclIsKindOf(Slot))->sortedBy(myQualifiedName()).generatePackageMember()/]
 
 			static [aPackage.name.concat('Package').toUpperFirst()/]* create();
 			static bool isInited;
