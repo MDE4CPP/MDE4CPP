@@ -31,10 +31,10 @@
 [startGuard(aPackage,'Factory')/]
 
 #include "uml/Factory.hpp"
-#include "[aPackage.getPackageName()/]/[aPackage.name.toUpperFirst().concat('Package')/].hpp"
+#include "[aPackage.generateNamespacePath()/]/[aPackage.name.toUpperFirst().concat('Package')/].hpp"
 
 [comment  Generate Includes for the Factory/]
-[if (not aPackage.ignoreNamespace())]namespace [aPackage.name/] 
+[if (not aPackage.ignoreNamespace())]namespace [aPackage.generateNamespace()/] 
 {
 [/if]
 [for (elements : Class| aPackage.collectModelClassesForFactoryDeclaration()) separator ('\n')]

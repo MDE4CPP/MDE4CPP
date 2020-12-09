@@ -41,7 +41,7 @@
 
 [template public generateImplementationSource(aClass : Class) { className : String = aClass.name.toUpperFirst().concat('Impl'); aPackage : Package = aClass.ancestors()->filter(Package)->first(); }]
 [file (aPackage.generateNamespacePath().concat('/impl/').concat(className).concat('.cpp'), false, 'UTF-8')]
-#include "[aPackage.getPackageName()/]/impl/[className.concat('.hpp')/]"
+#include "[aPackage.generateNamespacePath()/]/impl/[className.concat('.hpp')/]"
 
 [defineDebugMacro()/]
 
@@ -50,8 +50,8 @@
 [generateAbstractDataTypesIncludes()/]
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "[aPackage.getPackageName()/]/[aPackage.name.toUpperFirst().concat('Factory')/].hpp"
-#include "[aPackage.getPackageName()/]/impl/[aPackage.name.toUpperFirst().concat('PackageImpl')/].hpp"
+#include "[aPackage.generateNamespacePath()/]/[aPackage.name.toUpperFirst().concat('Factory')/].hpp"
+#include "[aPackage.generateNamespacePath()/]/impl/[aPackage.name.toUpperFirst().concat('PackageImpl')/].hpp"
 #include "[aClass.eClass().ePackage.name/]/[aClass.eClass().name/].hpp"
 [for (cl : Type | aClass.includes()->sortedBy(myQualifiedName())) ? ( oclIsKindOf(Class) or oclIsKindOf(Interface) or oclIsKindOf(Enumeration))]
 [if (cl.oclIsUndefined() or cl.name.oclIsUndefined())]
@@ -59,11 +59,11 @@
 [elseif (cl.getNearestPackage().hasIncludePath())]
 #include "[cl.getNearestPackage().getIncludePath()/]"
 [else]
-#include "[cl.getNearestPackage().myNamespaceName()/]/[cl.name.toUpperFirst()/].hpp"
+#include "[cl.getNearestPackage().generateNamespacePath()/]/[cl.name.toUpperFirst()/].hpp"
 [/if]
 [/for]
 [for (aPackage : Package | aClass.ownedAttribute->select(type.oclIsKindOf(Enumeration)).type._package->flatten()->reject(pack : Package | pack = aPackage)->sortedBy(name))]
-#include "[aPackage.getPackageName()/]/[aPackage.getPackageName()/]Package.hpp"
+#include "[aPackage.generateNamespacePath()/]/[aPackage.getPackageName()/]Package.hpp"
 [/for]
 
 [if (aClass.ownedOperation.method->notEmpty())][if(ownedOperation.method->filter(Activity)->notEmpty())]
@@ -88,8 +88,8 @@
 [if (instVal.type.oclIsUndefined() or instVal.type.name.oclIsUndefined())]
 // undefined type of InstanceValue [instVal.qualifiedName/] ([instVal.type.toString()/]) ['class '.concat(aClass.name).concat(': undefined type of InstanceValue ').concat(instVal.qualifiedName).concat(' (').concat(instVal.type.toString()).registerError()/]
 [else]
-#include "[instVal.type._package.getPackageName()/]/[instVal.type._package.getPackageName().toUpperFirst()/]Factory.hpp"
-#include "[instVal.type._package.getPackageName()/]/[instVal.type.name.toUpperFirst()/].hpp"
+#include "[instVal.type._package.generateNamespacePath()/]/[instVal.type._package.getPackageName().toUpperFirst()/]Factory.hpp"
+#include "[instVal.type._package.generateNamespacePath()/]/[instVal.type.name.toUpperFirst()/].hpp"
 [/if]
 [/for]
 
@@ -98,7 +98,7 @@
 [if (aPort.type.oclIsTypeOf(Interface))]
 [for (anInterfaceRealization : InterfaceRealization | aPackage.getInterfaceRealizations(aPort.type.oclAsType(Interface)))]
 [let realizingClass : Class = anInterfaceRealization.owner.oclAsType(Class)]
-#include "[realizingClass._package.getPackageName()/]/[realizingClass.name.toUpperFirst()/].hpp"
+#include "[realizingClass._package.generateNamespacePath()/]/[realizingClass.name.toUpperFirst()/].hpp"
 [/let]
 [/for]
 [/if]
@@ -106,10 +106,10 @@
 
 //Included from roles of ConnectorEnds
 [for (aConnector : Connector | aClass.ownedConnector)][for (anEnd : ConnectorEnd | aConnector.end)]
-#include "[anEnd.role.type._package.getPackageName()/]/[anEnd.role.type.name.toUpperFirst()/].hpp"
+#include "[anEnd.role.type._package.generateNamespacePath()/]/[anEnd.role.type.name.toUpperFirst()/].hpp"
 [/for][/for]
 
-[if (not aPackage.ignoreNamespace())]using namespace [aPackage.name/];[/if]
+[if (not aPackage.ignoreNamespace())]using namespace [aPackage.generateNamespace()/];[/if]
 
 //*********************************
 // Constructor / Destructor
@@ -305,7 +305,7 @@ void [className/]::destroy()
 
 [template public generateImplementationSource(aInterface : Interface) { interfaceName : String = aInterface.name.toUpperFirst().concat('Impl'); aPackage : Package = aInterface.ancestors()->filter(Package)->first(); }]
 [file (aPackage.getPackageName().concat('/impl/').concat(interfaceName).concat('.cpp'), false, 'UTF-8')]
-#include "[aPackage.getPackageName()/]/impl/[interfaceName.concat('.hpp')/]"
+#include "[aPackage.generateNamespacePath()/]/impl/[interfaceName.concat('.hpp')/]"
 
 [defineDebugMacro()/]
 
@@ -314,13 +314,13 @@ void [className/]::destroy()
 [generateAbstractDataTypesIncludes()/]
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "[aPackage.getPackageName()/]/impl/[aPackage.name.toUpperFirst().concat('PackageImpl')/].hpp"
+#include "[aPackage.generateNamespacePath()/]/impl/[aPackage.name.toUpperFirst().concat('PackageImpl')/].hpp"
 #include "[aInterface.eClass().ePackage.name/]/[aInterface.eClass().name/].hpp"
 [for (cl : Type | aInterface.includes()->sortedBy(myQualifiedName())) ? ( oclIsKindOf(Class) or oclIsKindOf(Interface))]
 [if (cl.oclIsUndefined() or cl.name.oclIsUndefined())]
 // undefined  [cl.eClass().name/] ([cl.toString()/]) ['class '.concat(aInterface.name).concat(': header include failed for undefined ').concat(cl.eClass().name).concat(' ').concat(cl.toString()).registerError()/]
 [else]
-#include "[cl.getNearestPackage().myNamespaceName()/]/[cl.name.toUpperFirst()/].hpp"
+#include "[cl.getNearestPackage().generateNamespacePath()/]/[cl.name.toUpperFirst()/].hpp"
 [/if]
 [/for]
 
@@ -346,12 +346,12 @@ void [className/]::destroy()
 [if (instVal.type.oclIsUndefined() or instVal.type.name.oclIsUndefined())]
 // undefined type of InstanceValue [instVal.qualifiedName/] ([instVal.type.toString()/]) ['class '.concat(aInterface.name).concat(': undefined type of InstanceValue ').concat(instVal.qualifiedName).concat(' (').concat(instVal.type.toString()).registerError()/]
 [else]
-#include "[instVal.type._package.getPackageName()/]/[instVal.type._package.getPackageName()/]Factory.hpp"
-#include "[instVal.type._package.getPackageName()/]/[instVal.type.name.toUpperFirst()/].hpp"
+#include "[instVal.type._package.generateNamespacePath()/]/[instVal.type._package.getPackageName()/]Factory.hpp"
+#include "[instVal.type._package.generateNamespacePath()/]/[instVal.type.name.toUpperFirst()/].hpp"
 [/if]
 [/for]
 
-[if (not aPackage.ignoreNamespace())]using namespace [aPackage.name/];[/if]
+[if (not aPackage.ignoreNamespace())]using namespace [aPackage.generateNamespace()/];[/if]
 
 //*********************************
 // Constructor / Destructor

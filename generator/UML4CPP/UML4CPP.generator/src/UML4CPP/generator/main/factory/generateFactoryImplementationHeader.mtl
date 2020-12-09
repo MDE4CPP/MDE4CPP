@@ -33,9 +33,9 @@
 #include <map>
 
 #include "uml/impl/FactoryImpl.hpp"
-#include "[aPackage.getPackageName()/]/[aPackage.name.toUpperFirst().concat('Factory')/].hpp"
+#include "[aPackage.generateNamespacePath()/]/[aPackage.name.toUpperFirst().concat('Factory')/].hpp"
 
-[if (not aPackage.ignoreNamespace())]namespace [aPackage.name/] 
+[if (not aPackage.ignoreNamespace())]namespace [aPackage.generateNamespace()/] 
 {
 [/if]
 	class [aPackage.name.toUpperFirst().concat('FactoryImpl')/] : virtual public uml::FactoryImpl , virtual public [aPackage.name.toUpperFirst().concat('Factory')/] 

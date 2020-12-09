@@ -53,12 +53,14 @@
 [**
  * generate package namespaces
 */]
-[query public getSuperPackage(aPackage : Package) : Package = if((not owner.oclIsUndefined()) and (owner.oclIsKindOf(Package))) then owner else null endif /]
-[query private getRootPackageName(aPackage : Package, ignoreRoot : Boolean) : String = if (ignoreRoot) then '' else aPackage.name endif /]
+[query public getSuperPackage(aPackage : Package) : Package = if((not owner.oclIsUndefined()) and (owner.oclIsKindOf(Package))) then owner.oclAsType(Package) else null endif /]
+[query private getRootPackageName(aPackage : Package, ignoreRoot : Boolean) : String = if (ignoreRoot) then '' else aPackage.getPackageName() endif /]
 [query private getNamespace(aPackage : Package, separator : String, ignoreRoot : Boolean) : String = if(aPackage.getSuperPackage().oclIsUndefined()) then getRootPackageName(ignoreRoot) else aPackage.getSuperPackage().getNamespace(separator, ignoreRoot).concat(separator).concat(aPackage.name) endif/]
 [query public generateNamespacePath(aPackage : Package) : String = getNamespace('/', false) /]
+[query public generateNamespacePathWithoutRoot(aPackage : Package) : String = aPackage.getNamespace('/', true).substring(2)/] [comment first char is '/', which should be removed, index starts at 1 /] 
 [query public generateNamespace(aPackage : Package) : String = getNamespace('::', false) /]
-
+[query public generateNamespace(aClass : Class) : String = aClass.owner.oclAsType(Package).getNamespace('::', false) /]
+[query public generateNamespaceName(aClass : Class) : String = generateNamespace().concat('::').concat(aClass.name.toUpperFirst())/]
 [**
  *  queries to determinate name of NamedElement elements
 */]
@@ -95,7 +97,7 @@
  * if namespaces are equal, namespace is not necessary and is not generated
  * if flag 'ignoreNamespace' is true, namespace is also not generated 
 */]
-[query public getClassifierName(aClassifier : Classifier, base: Classifier, ignoreNamespace : Boolean) : String = if (aClassifier.namespace.myNamespaceName() = base.namespace.myNamespaceName() or ignoreNamespace) then aClassifier.name.toUpperFirst() else aClassifier.namespace.myNamespaceName().concat('::').concat(aClassifier.name.toUpperFirst()) endif/]
+[query public getClassifierName(aClassifier : Classifier, base: Classifier, ignoreNamespace : Boolean) : String = if (aClassifier.namespace.myNamespaceName() = base.namespace.myNamespaceName() or ignoreNamespace) then aClassifier.name.toUpperFirst() else aClassifier.owner.oclAsType(Package).generateNamespace().concat('::').concat(aClassifier.name.toUpperFirst()) endif/]
 
 [**
  *  generate substring of a qualified name, name is made up of parameter type names

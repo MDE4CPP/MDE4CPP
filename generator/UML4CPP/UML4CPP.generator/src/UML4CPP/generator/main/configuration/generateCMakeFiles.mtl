@@ -58,25 +58,10 @@ SET(CMAKE_CXX_FLAGS_RELEASE " -O3 -DNDEBUG")
 string(REPLACE "\\" "/" MDE4CPP_HOME $ENV{MDE4CPP_HOME})
 
 SET(SOURCE_FILES
-	impl/[aPackage.name.toUpperFirst()/]PackageImpl.cpp
-	[aPackage.name.toUpperFirst()/]Package.cpp
+	# Model plugin
 	impl/[aPackage.name.toUpperFirst()/]PluginImpl.cpp
 	[aPackage.name.toUpperFirst()/]Plugin.cpp
-[if (not packOnly)]
-	impl/[aPackage.name.toUpperFirst()/]FactoryImpl.cpp
-	[aPackage.name.toUpperFirst()/]Factory.cpp
-[for (aClass : Class | aPackage.allOwnedElements()->filter(Class)->select(e|not (e.oclIsKindOf(FunctionBehavior) or e.oclIsKindOf(OpaqueBehavior) or e.oclIsKindOf(Activity)))->sortedBy(myQualifiedName()))]
-	impl/[aClass.name.toUpperFirst()/]Impl.cpp
-[if (aClass.isSingleton())]
-	[aClass.name.toUpperFirst()/].cpp
-[/if]
-[/for]
-[comment] DISABLE INTERFACE IMPLEMENTATION
-[for (anInterface : Interface | aPackage.allOwnedElements()->filter(Interface)->sortedBy(myQualifiedName()))]
-	impl/[anInterface.name.toUpperFirst()/]Impl.cpp
-[/for]
-[/comment]
-[/if]
+	[aPackage.generatePackageSourceFiles(packOnly, true)/]
 )
 
 INCLUDE_DIRECTORIES(
@@ -168,6 +153,36 @@ TARGET_LINK_LIBRARIES(${PROJECT_NAME}
 	[buildModeCMakeProperty(debugMode)/] ${PLUGINFRAMEWORK_[libraryVariableNameSuffix(debugMode)/]}
 	${CMAKE_DL_LIBS}[/if]        
 )
+[/template]
+
+[template private generatePackageSourceFiles(aPackage : Package, packOnly : Boolean, isRoot : Boolean)]
+# Package of [aPackage.generateNamespace()/]
+[if(not isRoot)][aPackage.generateNamespacePathWithoutRoot()/]/[/if]impl/[aPackage.name.toUpperFirst()/]PackageImpl.cpp
+[if(not isRoot)][aPackage.generateNamespacePathWithoutRoot()/]/[/if][aPackage.name.toUpperFirst()/]Package.cpp
+[if (not packOnly)]
+# Factory of [aPackage.generateNamespace()/]
+[if(not isRoot)][aPackage.generateNamespacePathWithoutRoot()/]/[/if]impl/[aPackage.name.toUpperFirst()/]FactoryImpl.cpp
+[if(not isRoot)][aPackage.generateNamespacePathWithoutRoot()/]/[/if][aPackage.name.toUpperFirst()/]Factory.cpp
+# Contents of [aPackage.generateNamespace()/]
+[aPackage.generatePackageContents(isRoot)/]
+[/if]
+[for (subPackage : Package | aPackage.ownedElement->filter(Package))]
+[subPackage.generatePackageSourceFiles(packOnly, false)/]
+[/for]
+[/template]
+
+[template private generatePackageContents(aPackage : Package, isRoot : Boolean)]
+[for (aClass : Class | aPackage.ownedElement->filter(Class)->select(e|not (e.oclIsKindOf(FunctionBehavior) or e.oclIsKindOf(OpaqueBehavior) or e.oclIsKindOf(Activity)))->sortedBy(myQualifiedName()))]
+[if(not isRoot)][aPackage.generateNamespacePathWithoutRoot()/]/[/if]impl/[aClass.name.toUpperFirst()/]Impl.cpp
+[if (aClass.isSingleton())]
+[if(not isRoot)][aPackage.generateNamespacePathWithoutRoot()/]/[/if][aClass.name.toUpperFirst()/].cpp
+[/if]
+[/for]
+[comment] DISABLE INTERFACE IMPLEMENTATION
+[for (anInterface : Interface | aPackage.allOwnedElements()->filter(Interface)->sortedBy(myQualifiedName()))]
+[if(not isRoot)][aPackage.generateNamespacePath()/]/[/if]impl/[anInterface.name.toUpperFirst()/]Impl.cpp
+[/for]
+[/comment]
 [/template]
 
 [query private buildModeCMakeProperty(debugMode : Boolean) : String = if (debugMode) then 'debug' else 'optimized' endif/]

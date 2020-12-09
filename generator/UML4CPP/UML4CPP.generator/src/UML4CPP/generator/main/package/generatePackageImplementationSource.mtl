@@ -72,7 +72,7 @@
 
 [template public generatePackageImplSource(aPackage : Package) {packageName : String = aPackage.name.concat('PackageImpl').toUpperFirst();}]
 [file (aPackage.generateNamespacePath().concat('/impl/').concat(packageName).concat('.cpp'), false, 'UTF-8')]
-#include "[aPackage.getPackageName()/]/impl/[packageName.toUpperFirst()/].hpp"
+#include "[aPackage.generateNamespacePath()/]/impl/[packageName.toUpperFirst()/].hpp"
 
 //meta meta model classes
 [for (nE : EClass | aPackage.getMetaMetaModelIncludes())]
@@ -89,7 +89,7 @@
 
 [if (aPackage.eAllContents()->filter(ecore::EAnnotation)->select(source = 'PackageOnly')->isEmpty())]
 //metamodel factory
-#include "[aPackage.getPackageName()/]/[aPackage.name.toUpperFirst().concat('Factory')/].hpp"
+#include "[aPackage.generateNamespacePath()/]/[aPackage.name.toUpperFirst().concat('Factory')/].hpp"
 [/if]
 
 //depending model packages
@@ -100,19 +100,22 @@
 [elseif (pack.oclIsKindOf(Profile) and not pack.name.endsWith('Profile'))]
 #include "[pack.getPackageName()/]/[pack.name.concat('ProfilePackage').toUpperFirst()/].hpp"
 [else]
-#include "[pack.getPackageName()/]/[pack.name.concat('Package').toUpperFirst()/].hpp"
+#include "[pack.generateNamespacePath()/]/[pack.name.concat('Package').toUpperFirst()/].hpp"
 [/if]
 [/if]
 [if (not((pack.name = keyUML()) or (pack.name='Ecore') or (pack.name='PrimitiveTypes')))]
-#include "[pack.getPackageName()/]/[pack.name.concat('Factory').toUpperFirst()/].hpp"
+#include "[pack.generateNamespacePath()/]/[pack.name.concat('Factory').toUpperFirst()/].hpp"
 [/if]
+[/for]
+[for (subPackage : Package| aPackage.ownedElement->filter(Package)->sortedBy(name)) separator ('\n')]
+#include "[subPackage.generateNamespacePath()/]/impl/[subPackage.name.toUpperFirst().concat('PackageImpl')/].hpp"
 [/for]
 
 [for (stereo : Stereotype | aPackage.getAllAppliedStereotypes()->asOrderedSet()->sortedBy(myQualifiedName()))]
-#include "[stereo._package.myNamespaceName()/]/[stereo.name/].hpp"
+#include "[stereo._package.generateNamespacePath()/]/[stereo.name/].hpp"
 [/for]
 
-[if (not aPackage.ignoreNamespace())]using namespace [aPackage.name/];[/if]
+[if (not aPackage.ignoreNamespace())]using namespace [aPackage.generateNamespace()/];[/if]
 
 [packageName/]::[packageName/]()
 {
@@ -445,8 +448,12 @@ void [packageName/]::initializePackageValueSpecifications()
 [/for]
 }
 
-[(aPackage.allOwnedElements()->filter(NamedElement)-aPackage.allOwnedElements()->filter(ValueSpecification))->sortedBy(myQualifiedName()).generatePackageMemberGetterImpl()/]
-[(aPackage.allOwnedElements()->filter(ConnectorEnd)-aPackage.allOwnedElements()->filter(ValueSpecification))->sortedBy(myQualifiedName()).generatePackageMemberGetterImpl()/]
+[(aPackage.ownedElement->filter(NamedElement)-aPackage.ownedElement->filter(ValueSpecification))->sortedBy(myQualifiedName())->reject(oclIsTypeOf(Package)).generatePackageMemberGetterImpl()/]
+[(aPackage.ownedElement->filter(ConnectorEnd)-aPackage.ownedElement->filter(ValueSpecification))->sortedBy(myQualifiedName()).generatePackageMemberGetterImpl()/]
+
+[for (subPackage : Package | aPackage.ownedElement->filter(Package)->sortedBy(name))]
+[subPackage.generateSubPackageGetterImpl(aPackage)/]
+[/for]
 
 [/file]
 [/template]

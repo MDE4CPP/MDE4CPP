@@ -27,7 +27,7 @@
 [file (aPackage.generateNamespacePath().concat('/impl/').concat(aPackage.name.toUpperFirst()).concat('PackageImpl.hpp'), false, 'UTF-8')]
 [startGuard(aPackage,'MetaModelPackageImpl')/]
 
-#include "[aPackage.getPackageName()/]/[aPackage.name.concat('Package').toUpperFirst()/].hpp"
+#include "[aPackage.generateNamespacePath()/]/[aPackage.name.concat('Package').toUpperFirst()/].hpp"
 #include "uml/impl/[aPackage.eClass().name /]Impl.hpp"
 
 namespace uml
@@ -38,7 +38,14 @@ namespace uml
 	class UmlFactory;
 }
 
-[if (not aPackage.ignoreNamespace())]namespace [aPackage.name/]
+[for (subPackage : Package| aPackage.ownedElement->filter(Package)->sortedBy(name)) separator ('\n')]
+namespace [subPackage.generateNamespace()/] 
+{
+	class [subPackage.name/]Package;
+}
+[/for]
+
+[if (not aPackage.ignoreNamespace())]namespace [aPackage.generateNamespace()/]
 {
 [/if]
 	class [packageName/] : virtual public uml::[aPackage.eClass().name /]Impl, virtual public [aPackage.name.toUpperFirst().concat('Package')/]
@@ -52,8 +59,13 @@ namespace uml
 			virtual ~[packageName/]();
 
 			//getter for the ownedMember
-			[(aPackage.allOwnedElements()->filter(NamedElement)-aPackage.allOwnedElements()->filter(ValueSpecification))->sortedBy(myQualifiedName()).generatePackageMemberGetter(true)/]
-			[(aPackage.allOwnedElements()->filter(ConnectorEnd))->sortedBy(myQualifiedName()).generatePackageMemberGetter(true)/]
+			[(aPackage.ownedElement->filter(NamedElement)-aPackage.ownedElement->filter(ValueSpecification))->sortedBy(myQualifiedName())->reject(oclIsTypeOf(Package)).generatePackageMemberGetter(true)/]
+			[(aPackage.ownedElement->filter(ConnectorEnd))->sortedBy(myQualifiedName()).generatePackageMemberGetter(true)/]
+
+			//getter for subPackages
+			[for (subPackage : Package | aPackage.ownedElement->filter(Package))]
+			[subPackage.generateSubPackageGetter(true)/]
+			[/for]
 
 		private:
 			//private variables for ownedMember of the metamodel package

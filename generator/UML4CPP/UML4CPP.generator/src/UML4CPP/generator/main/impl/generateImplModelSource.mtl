@@ -26,10 +26,10 @@
 [template public generateClassCpp(aClass : Class)  {className : String = aClass.name.toUpperFirst(); }]
 [file  (aClass._package.generateNamespacePath().concat('/').concat(className).concat('.cpp'), false, 'UTF-8')]
 
-#include "[aClass._package.getPackageName()/]/[className/].hpp"
-#include "[aClass._package.getPackageName()/]/impl/[className.concat('Impl')/].hpp"
+#include "[aClass._package.generateNamespacePath()/]/[className/].hpp"
+#include "[aClass._package.generateNamespacePath()/]/impl/[className.concat('Impl')/].hpp"
 
-[if (not aClass._package.ignoreNamespace())]using namespace [aClass._package.name/];[/if]
+[if (not aClass._package.ignoreNamespace())]using namespace [aClass._package.generateNamespace()/];[/if]
 
 //static initialisation
 [generateSingletonImpl(className, false)/]

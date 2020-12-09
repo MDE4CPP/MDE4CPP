@@ -84,7 +84,7 @@ static const unsigned int [aClass.getMemberName().toUpperCase()/]_OPERATION_COUN
  * - operation count
 */]
 [template public generateStaticPackageID(aPackage : Package)]
-[for (c : Class | aPackage.allOwnedElements()->selectByType(Class)->sortedBy(name)->reject(name.oclIsInvalid() or name = ''))]
+[for (c : Class | aPackage.ownedElement->selectByType(Class)->sortedBy(name)->reject(name.oclIsInvalid() or name = ''))]
 	[generateStaticClassID(c)/]
 	[for (anAssociation : Association | c.getCompositionsToClass())]
 	[let containerProperty : Property = anAssociation.memberEnd->select(type = c)->asOrderedSet()->first()]
@@ -112,7 +112,7 @@ static const unsigned int [aClass.getMemberName().toUpperCase()/]_OPERATION_COUN
  * - creation of class constraints
 */]
 [template public generateClassCreation(aClass : Class)]
-[aClass.memberName()/] = factory->createClass_in_Package([aClass.ancestors(Package)->first().memberName()/][aClass.getStaticClassID_Name()/]);
+[aClass.memberName()/] = factory->createClass_in_Package([aClass.ancestors(Package)->first().memberName()/], [aClass._package.name/]Package::[aClass.getMemberName().toUpperCase()/]);
 [if (aClass.ownedRule->size() > 0)]
 //constraints
 [for (aConstraint : Constraint | aClass.ownedRule->sortedBy(name)) separator('\n')]
@@ -173,3 +173,9 @@ void [aClass.name.toUpperFirst()/]Impl::[generateGetThisPtrPropertySetterName()/
 [query public generateGetThisPtrPropertyName(aClass : Class) : String = 'this'.concat(aClass.name.toUpperFirst()).concat('Ptr')/]
 [query public generateGetThisPtrPropertySetterName(aClass : Class) : String = 'set'.concat(generateGetThisPtrPropertyName().toUpperFirst())/]
 [query public generateGetThisPtrPropertyGetterName(aClass : Class) : String = 'get'.concat(generateGetThisPtrPropertyName().toUpperFirst())/]
+
+[**
+ * queries for retireving the Package of a Class
+*/]
+[query public getPackage(aPackagedElement : PackageableElement) : Package = aPackagedElement.owner.oclAsType(Package) /]
+[query public getRootPackage(aPackagedElement : PackageableElement) : Package = if(aPackagedElement.getPackage().getSuperPackage().oclIsUndefined()) then aPackagedElement.getPackage() else aPackagedElement.getPackage().getRootPackage() endif /]

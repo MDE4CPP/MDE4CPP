@@ -29,7 +29,7 @@
 [file (anEnum._package.generateNamespacePath().concat('/').concat(anEnum.name).concat('.hpp'), false, 'UTF-8')]
 [anEnum.startGuard()/]
 
-[if (not anEnum.getNearestPackage().ignoreNamespace())]namespace [anEnum._package.name/] 
+[if (not anEnum.getNearestPackage().ignoreNamespace())]namespace [anEnum._package.generateNamespace()/] 
 {
 [/if]
 	enum class [anEnum.name/] 

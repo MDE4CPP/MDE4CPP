@@ -39,6 +39,17 @@ virtual std::shared_ptr<[anElement.getMetaClassName()/]> [anElement.oclAsType(Co
 [/if]
 [/template]
 
+[template public generateSubPackageGetter(aPackage : Package, impl : Boolean)]			
+virtual std::shared_ptr<[aPackage.name.toUpperFirst()/]::[aPackage.name.toUpperFirst()/]Package> get[aPackage.name.toUpperFirst()/]_Package() const [abstractSuffix(impl)/];
+[/template]
+
+[template public generateSubPackageGetterImpl(subPackage: Package, aPackage: Package)]
+std::shared_ptr<[subPackage.name.toUpperFirst()/]::[subPackage.name.toUpperFirst()/]Package> [aPackage.name.toUpperFirst()/]PackageImpl::get[subPackage.name/]_Package() const
+{
+	return [subPackage.name/]::[subPackage.name/]Package::eInstance();
+} 
+[/template]
+
 
 [**
  generate getter function implementation for meta model element

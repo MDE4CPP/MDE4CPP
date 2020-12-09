@@ -39,8 +39,15 @@ namespace uml
 	class ConnectorEnd;
 }
 
+[for (subPackage : Package| aPackage.ownedElement->filter(Package)->sortedBy(name)) separator ('\n')]
+namespace [subPackage.generateNamespace()/] 
+{
+	class [subPackage.name/]Package;
+}
+[/for]
+
 [comment namespace /]
-[if (not aPackage.ignoreNamespace())]namespace [aPackage.name/] 
+[if (not aPackage.ignoreNamespace())]namespace [aPackage.generateNamespace()/] 
 {
 [/if]
 	/*!
@@ -60,8 +67,13 @@ namespace uml
 			static const std::string eNS_PREFIX;
 
 			//getter for the ownedMember
-			[(aPackage.allOwnedElements()->filter(NamedElement)-aPackage.allOwnedElements()->filter(ValueSpecification))->asOrderedSet()->sortedBy(myQualifiedName()).generatePackageMemberGetter(false)/]
-			[(aPackage.allOwnedElements()->filter(ConnectorEnd))->asOrderedSet()->sortedBy(myQualifiedName()).generatePackageMemberGetter(false)/]
+			[(aPackage.ownedElement->filter(NamedElement)-aPackage.ownedElement->filter(ValueSpecification))->asOrderedSet()->sortedBy(myQualifiedName())->reject(oclIsTypeOf(Package)).generatePackageMemberGetter(false)/]
+			[(aPackage.ownedElement->filter(ConnectorEnd))->asOrderedSet()->sortedBy(myQualifiedName()).generatePackageMemberGetter(false)/]
+
+			//getter for subPackages
+			[for (subPackage : Package | aPackage.ownedElement->filter(Package))]
+			[subPackage.generateSubPackageGetter(false)/]
+			[/for]
 
 			//Singleton Instance and Getter
 			[generateSingletonDecl(packageName)/]
