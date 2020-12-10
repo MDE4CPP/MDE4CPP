@@ -41,19 +41,19 @@ originalName : String = aPackage.generateNamespacePath();
 #include "uml/Class.hpp"
 
 [for (classPackage : Package | aPackage.getClassPackagesOfCreateObjectAction())]
-#include "[classPackage.myNamespaceName()/]/[classPackage.name.toUpperFirst()/]Factory.hpp"
-#include "[classPackage.myNamespaceName()/]/[classPackage.name.toUpperFirst()/]Package.hpp"
+#include "[classPackage.generateNamespacePath()/]/[classPackage.name.toUpperFirst()/]Factory.hpp"
+#include "[classPackage.generateNamespacePath()/]/[classPackage.name.toUpperFirst()/]Package.hpp"
 [if (classPackage.isReflectionModel())]
-#include "[classPackage.getPackageName()/]/[classPackage.name.toUpperFirst()/]Package.hpp"
+#include "[classPackage.generateNamespacePath()/]/[classPackage.name.toUpperFirst()/]Package.hpp"
 [/if]
 [for (aClass : Class | classPackage.ownedElement->filter(Class)->reject(c : Class | c.oclIsKindOf(Behavior) or c.isAbstract)->sortedBy(myQualifiedName()))]
-#include "[aClass.getNearestPackage().myNamespaceName()/]/[aClass.name.toUpperFirst()/].hpp"
-#include "[if (classPackage.isReflectionModel())][originalName/][else][classPackage.getPackageName()/][/if]Exec/[aClass.name.toUpperFirst()/]Object.hpp"
+#include "[aClass.getNearestPackage().generateNamespacePath()/]/[aClass.name.toUpperFirst()/].hpp"
+#include "[if (classPackage.isReflectionModel())][aPackage.generateNamespacePath()/][else][classPackage.generateNamespacePath()/][/if]Exec/[aClass.name.toUpperFirst()/]Object.hpp"
 [/for]
 [/for]
 
 
-using namespace [originalName/];
+using namespace [aPackage.generateNamespace()/];
 
 //*********************************
 // Constructor / Destructor
@@ -74,8 +74,8 @@ std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> [upperName/]Locu
 [if (packageList->size() > 0)]
 	std::shared_ptr<uml::Package> typePackage = type->getPackage().lock();
 [for (classPackage : Package | packageList)]
-[let packageName : String = classPackage.myNamespaceName()]
-	if (typePackage == [classPackage.name/]::[classPackage.name.toUpperFirst()/]Package::eInstance())
+[let packageName : String = classPackage.generateNamespace()]
+	if (typePackage == [classPackage.generateNamespace()/]::[classPackage.name.toUpperFirst()/]Package::eInstance())
 	{		
 		switch(type->getMetaElementID())
 		{
@@ -83,7 +83,7 @@ std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> [upperName/]Locu
 [let className : String = aClass.name.toUpperFirst()]
 			case [packageName/]::[packageName.toUpperFirst()/]Package::[aClass.getMemberName().toUpperCase()/]:
 			{
-				std::shared_ptr<[aClass.getNearestPackage().name/]::[className/]Object> object(new [aClass.getNearestPackage().name/]::[className/]Object());
+				std::shared_ptr<[aClass.getNearestPackage().generateNamespace()/]::[className/]Object> object(new [aClass.getNearestPackage().generateNamespace()/]::[className/]Object());
 				object->setThis[className/]ObjectPtr(object);
 				object->setUmlValue([packageName/]::[packageName.toUpperFirst()/]Factory::eInstance()->create[aClass.name.toUpperFirst()/]());
 				object->setLocus(this->getThisLocusPtr());

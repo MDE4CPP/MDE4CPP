@@ -27,7 +27,7 @@ upperName : String = aPackage.getPackageName().sanitize().toUpperFirst(); origin
 
 #include "ecore/impl/EObjectImpl.hpp"
 
-namespace [originalName/] 
+namespace [aPackage.generateNamespace()/] 
 {
 	class [upperName/]Locus: virtual public PSCS::Semantics::Loci::CS_Locus
 	{
@@ -54,7 +54,7 @@ namespace [originalName/]
 
 #include "ecore/impl/EObjectImpl.hpp"
 
-namespace [originalName/] 
+namespace [aPackage.generateNamespace()/] 
 {
 	class [upperName/]LocusImpl :virtual public PSCS::Semantics::Loci::CS_LocusImpl, virtual public [upperName/]Locus
 	{

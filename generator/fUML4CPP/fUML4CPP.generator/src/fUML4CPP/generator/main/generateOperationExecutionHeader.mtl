@@ -27,7 +27,7 @@
 
 #include "fUML/Semantics/CommonBehavior/impl/OpaqueBehaviorExecutionImpl.hpp"
 
-namespace [aPackage.name/] 
+namespace [aPackage.generateNamespace()/] 
 {
 	class [behaviorName/]: virtual public fUML::Semantics::CommonBehavior::OpaqueBehaviorExecutionImpl 
 	{
