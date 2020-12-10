@@ -24,6 +24,7 @@
 [import UML4CPP::generator::main::helpers::nameHelper /]
 [import UML4CPP::generator::main::helpers::singletonHelper /]
 [import UML4CPP::generator::main::components::generateClass /]
+[import UML4CPP::generator::main::helpers::collectionHelper /]
 
 
 [template public generatePackageInterface(aPackage : Package) {packageName : String = aPackage.name.toUpperFirst().concat('Package');}]
@@ -33,7 +34,7 @@
 
 namespace uml 
 {
-[for (nE : EClass | OrderedSet{(aPackage.allOwnedElements()->filter(NamedElement)-aPackage.allOwnedElements()->filter(ValueSpecification)).eClass()}->flatten()->sortedBy(name))]
+[for (nE : EClass | OrderedSet{(aPackage.getElementsBelongingToPackage()->filter(NamedElement)-aPackage.getElementsBelongingToPackage()->filter(ValueSpecification)).eClass()}->flatten()->sortedBy(name))]
 	class [nE.name/];
 [/for]
 	class ConnectorEnd;
@@ -67,8 +68,8 @@ namespace [subPackage.generateNamespace()/]
 			static const std::string eNS_PREFIX;
 
 			//getter for the ownedMember
-			[(aPackage.ownedElement->filter(NamedElement)-aPackage.ownedElement->filter(ValueSpecification))->asOrderedSet()->sortedBy(myQualifiedName())->reject(oclIsTypeOf(Package)).generatePackageMemberGetter(false)/]
-			[(aPackage.ownedElement->filter(ConnectorEnd))->asOrderedSet()->sortedBy(myQualifiedName()).generatePackageMemberGetter(false)/]
+			[(aPackage.getElementsBelongingToPackage()->filter(NamedElement)-aPackage.getElementsBelongingToPackage()->filter(ValueSpecification))->asOrderedSet()->sortedBy(myQualifiedName()).generatePackageMemberGetter(false)/]
+			[(aPackage.getElementsBelongingToPackage()->filter(ConnectorEnd))->asOrderedSet()->sortedBy(myQualifiedName()).generatePackageMemberGetter(false)/]
 
 			//getter for subPackages
 			[for (subPackage : Package | aPackage.ownedElement->filter(Package))]

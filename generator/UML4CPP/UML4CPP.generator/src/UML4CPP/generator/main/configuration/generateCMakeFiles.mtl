@@ -61,7 +61,7 @@ SET(SOURCE_FILES
 	# Model plugin
 	impl/[aPackage.name.toUpperFirst()/]PluginImpl.cpp
 	[aPackage.name.toUpperFirst()/]Plugin.cpp
-	[aPackage.generatePackageSourceFiles(packOnly, true)/]
+	[aPackage.generatePackageSourceFilesToCompile(packOnly, true)/]
 )
 
 INCLUDE_DIRECTORIES(
@@ -155,7 +155,7 @@ TARGET_LINK_LIBRARIES(${PROJECT_NAME}
 )
 [/template]
 
-[template private generatePackageSourceFiles(aPackage : Package, packOnly : Boolean, isRoot : Boolean)]
+[template private generatePackageSourceFilesToCompile(aPackage : Package, packOnly : Boolean, isRoot : Boolean)]
 # Package of [aPackage.generateNamespace()/]
 [if(not isRoot)][aPackage.generateNamespacePathWithoutRoot()/]/[/if]impl/[aPackage.name.toUpperFirst()/]PackageImpl.cpp
 [if(not isRoot)][aPackage.generateNamespacePathWithoutRoot()/]/[/if][aPackage.name.toUpperFirst()/]Package.cpp
@@ -167,7 +167,7 @@ TARGET_LINK_LIBRARIES(${PROJECT_NAME}
 [aPackage.generatePackageContents(isRoot)/]
 [/if]
 [for (subPackage : Package | aPackage.ownedElement->filter(Package))]
-[subPackage.generatePackageSourceFiles(packOnly, false)/]
+[subPackage.generatePackageSourceFilesToCompile(packOnly, false)/]
 [/for]
 [/template]
 

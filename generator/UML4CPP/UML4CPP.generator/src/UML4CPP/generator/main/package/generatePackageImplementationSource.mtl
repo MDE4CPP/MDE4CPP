@@ -45,29 +45,30 @@
 
 
 [query public getAllAppliedStereotypes(aPackage : Package) : Set(Stereotype) = OrderedSet{
-								aPackage.ownedElement.getAppliedStereotypes(),
+								aPackage.getElementsBelongingToPackage().getAppliedStereotypes(),
 								aPackage.getAppliedStereotypes()
 							}->flatten() /]
 [query public metaModelIncludes(aPackage : Package) : Set(Package) = OrderedSet{
-								aPackage.ownedElement->filter(TypedElement)->select(not type.oclIsUndefined()).type.getNearestPackage(),
-								aPackage.ownedElement->filter(CallBehaviorAction).behavior.getNearestPackage(),
-								aPackage.ownedElement->filter(Element).getAppliedStereotypes().getProfile(), 
-								aPackage.ownedElement->filter(InstanceValue).instance.getNearestPackage(), 
+								aPackage.getElementsBelongingToPackage()->filter(TypedElement)->select(not type.oclIsUndefined()).type.getNearestPackage(),
+								aPackage.getElementsBelongingToPackage()->filter(CallBehaviorAction).behavior.getNearestPackage(),
+								aPackage.getElementsBelongingToPackage()->filter(Element).getAppliedStereotypes().getProfile(), 
+								aPackage.getElementsBelongingToPackage()->filter(InstanceValue).instance.getNearestPackage(), 
 								aPackage.member->filter(Element).ownedElement->filter(InterfaceRealization).contract.getNearestPackage(),
 								aPackage.member->filter(Element).ownedElement->filter(Generalization).general.getNearestPackage()
 							}->flatten() /]
 [query private getMetaMetaModelIncludes(aPackage : Package) : Set(EClass) = OrderedSet{
-								aPackage.ownedElement.eClass(), 
-								aPackage.ownedElement->selectByKind(Interface).ownedOperation.ownedParameter->select(not type.oclIsUndefined()).type.eClass(), 
-								aPackage.ownedElement->selectByKind(Interface).ownedAttribute->select(not type.oclIsUndefined()).type.eClass(), 
-								aPackage.ownedElement->selectByKind(Class).ownedOperation.ownedParameter->select(not type.oclIsUndefined()).type.eClass(),
-								aPackage.ownedElement->selectByKind(Class).ownedAttribute->select(not type.oclIsUndefined()).type.eClass(),
-								aPackage.ownedElement->selectByKind(Class).ownedBehavior->filter(OpaqueBehavior).ownedParameter->select(not type.oclIsUndefined()).type.eClass(),
-								aPackage.ownedElement->selectByKind(Class).ownedElement->filter(InterfaceRealization).supplier.oclAsType(Interface).ownedAttribute.eClass(),
-								aPackage.ownedElement->selectByKind(Class).ownedElement->filter(InterfaceRealization).contract.eClass(),
-								aPackage.ownedElement->selectByKind(StructuralFeatureAction).structuralFeature.eClass(),
-								aPackage.ownedElement->filter(OpaqueBehavior).ownedParameter->select(not type.oclIsUndefined()).type.eClass(),
-								aPackage.ownedElement->filter(InstanceValue).instance.eClass()
+								aPackage.getElementsBelongingToPackage().eClass(), 
+								aPackage.getElementsBelongingToPackage()->selectByKind(Interface).ownedOperation.ownedParameter->select(not type.oclIsUndefined()).type.eClass(), 
+								aPackage.getElementsBelongingToPackage()->selectByKind(Interface).ownedAttribute->select(not type.oclIsUndefined()).type.eClass(), 
+								aPackage.getElementsBelongingToPackage()->selectByKind(Class).ownedOperation.ownedParameter->select(not type.oclIsUndefined()).type.eClass(),
+								aPackage.getElementsBelongingToPackage()->selectByKind(Class).ownedAttribute->select(not type.oclIsUndefined()).type.eClass(),
+								aPackage.getElementsBelongingToPackage()->selectByKind(Class).ownedBehavior->filter(OpaqueBehavior).ownedParameter->select(not type.oclIsUndefined()).type.eClass(),
+								aPackage.getElementsBelongingToPackage()->selectByKind(Class).ownedElement->filter(InterfaceRealization).supplier.oclAsType(Interface).ownedAttribute.eClass(),
+								aPackage.getElementsBelongingToPackage()->selectByKind(Class).ownedElement->filter(InterfaceRealization).contract.eClass(),
+								aPackage.getElementsBelongingToPackage()->selectByKind(Class).generalization.eClass(),
+								aPackage.getElementsBelongingToPackage()->selectByKind(StructuralFeatureAction).structuralFeature.eClass(),
+								aPackage.getElementsBelongingToPackage()->filter(OpaqueBehavior).ownedParameter->select(not type.oclIsUndefined()).type.eClass(),
+								aPackage.getElementsBelongingToPackage()->filter(InstanceValue).instance.eClass()
 							}->flatten()->sortedBy(name)/]
 
 [template public generatePackageImplSource(aPackage : Package) {packageName : String = aPackage.name.concat('PackageImpl').toUpperFirst();}]
@@ -448,8 +449,9 @@ void [packageName/]::initializePackageValueSpecifications()
 [/for]
 }
 
-[(aPackage.ownedElement->filter(NamedElement)-aPackage.ownedElement->filter(ValueSpecification))->sortedBy(myQualifiedName())->reject(oclIsTypeOf(Package)).generatePackageMemberGetterImpl()/]
-[(aPackage.ownedElement->filter(ConnectorEnd)-aPackage.ownedElement->filter(ValueSpecification))->sortedBy(myQualifiedName()).generatePackageMemberGetterImpl()/]
+[comment Getter for ownedMember /]
+[(aPackage.getElementsBelongingToPackage()->filter(NamedElement)-aPackage.getElementsBelongingToPackage()->filter(ValueSpecification))->asOrderedSet()->sortedBy(myQualifiedName()).generatePackageMemberGetterImpl()/]
+[(aPackage.getElementsBelongingToPackage()->filter(ConnectorEnd))->asOrderedSet()->sortedBy(myQualifiedName()).generatePackageMemberGetterImpl()/]
 
 [for (subPackage : Package | aPackage.ownedElement->filter(Package)->sortedBy(name))]
 [subPackage.generateSubPackageGetterImpl(aPackage)/]

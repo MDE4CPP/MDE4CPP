@@ -90,3 +90,10 @@
 [query private collectModelStereotypesForFactory(aPackage : Package) : Set(Class) = aPackage.ownedMember->selectByType(Stereotype) /]
 [query private collectModelClassesForFactoryInternal(aPackage : Package) : Set(Class) = aPackage.ownedMember->selectByType(Class) /]
 [query public collectModelInterfacesForFactory(aPackage : Package) : OrderedSet(Interface) = aPackage.ownedMember->selectByType(Interface)->reject(isSingleton() or isAbstract = true)->sortedBy(myQualifiedName()) /]
+
+
+[**
+ * query to collect all elements that belong to a package (i.e. all elements that (element.getNearestPackage() = aPackage) evaluates as true)
+*/]
+[query public getElementsBelongingToPackage(aPackage : Package) : Set(Element) = aPackage.allOwnedElements()->select(element : Element | element.getNearestPackage() = aPackage) /]
+
