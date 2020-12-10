@@ -74,18 +74,18 @@ std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> [upperName/]Locu
 [if (packageList->size() > 0)]
 	std::shared_ptr<uml::Package> typePackage = type->getPackage().lock();
 [for (classPackage : Package | packageList)]
-[let packageName : String = classPackage.generateNamespace()]
-	if (typePackage == [classPackage.generateNamespace()/]::[classPackage.name.toUpperFirst()/]Package::eInstance())
+[let packageNamespace : String = classPackage.generateNamespace()]
+	if (typePackage == [packageNamespace/]::[classPackage.name.toUpperFirst()/]Package::eInstance())
 	{		
 		switch(type->getMetaElementID())
 		{
 [for (aClass : Class | classPackage.ownedElement->filter(Class)->reject(c : Class | c.oclIsKindOf(Behavior) or c.isAbstract)->sortedBy(myQualifiedName())) separator('\n')]
 [let className : String = aClass.name.toUpperFirst()]
-			case [packageName/]::[packageName.toUpperFirst()/]Package::[aClass.getMemberName().toUpperCase()/]:
+			case [packageNamespace/]::[classPackage.name.toUpperFirst()/]Package::[aClass.getMemberName().toUpperCase()/]:
 			{
 				std::shared_ptr<[aClass.getNearestPackage().generateNamespace()/]::[className/]Object> object(new [aClass.getNearestPackage().generateNamespace()/]::[className/]Object());
 				object->setThis[className/]ObjectPtr(object);
-				object->setUmlValue([packageName/]::[packageName.toUpperFirst()/]Factory::eInstance()->create[aClass.name.toUpperFirst()/]());
+				object->setUmlValue([packageNamespace/]::[classPackage.name.toUpperFirst()/]Factory::eInstance()->create[aClass.name.toUpperFirst()/]());
 				object->setLocus(this->getThisLocusPtr());
 				return object;
 			}

@@ -77,7 +77,7 @@
 [template public generateInclude(aCallBehaviorAction : CallBehaviorAction)]
 [if (not aCallBehaviorAction.behavior.oclIsUndefined())]
 [if (not aCallBehaviorAction.behavior.name.oclIsUndefined())]
-#include "[aCallBehaviorAction.getNearestPackage().getPackageName()/]Exec/[aCallBehaviorAction.generateOpaqueBehaviorExecutionName()/].hpp"
+#include "[aCallBehaviorAction.getNearestPackage().generateNamespacePath()/]Exec/[aCallBehaviorAction.generateOpaqueBehaviorExecutionName()/].hpp"
 [/if]
 [/if]
 [/template]
@@ -85,7 +85,7 @@
 [template public generateInclude(aCallOperationAction : CallOperationAction)]
 [if (not aCallOperationAction.oclIsUndefined())]
 [if (not aCallOperationAction.name.oclIsUndefined())]
-#include "[aCallOperationAction.getNearestPackage().getPackageName()/]Exec/[aCallOperationAction.generateOpaqueBehaviorExecutionName()/].hpp"
+#include "[aCallOperationAction.getNearestPackage().generateNamespacePath()/]Exec/[aCallOperationAction.generateOpaqueBehaviorExecutionName()/].hpp"
 [/if]
 [/if]
 [/template]
@@ -93,13 +93,13 @@
 [template public generateInclude(aDecisionNode : DecisionNode)]
 [if (not aDecisionNode.decisionInput.oclIsUndefined())]
 [if (not aDecisionNode.decisionInput.name.oclIsUndefined())]
-#include "[aDecisionNode.getNearestPackage().getPackageName()/]Exec/[aDecisionNode.generateOpaqueBehaviorExecutionName()/].hpp"
+#include "[aDecisionNode.getNearestPackage().generateNamespacePath()/]Exec/[aDecisionNode.generateOpaqueBehaviorExecutionName()/].hpp"
 [/if]
 [/if]
 [/template]
 
 [template public generateInclude(anActivity : Activity)]
 [if (not anActivity.name.oclIsUndefined())]
-#include "[anActivity.getNearestPackage().getPackageName()/]Exec/[anActivity.name.toUpperFirst()/]Execution.hpp"
+#include "[anActivity.getNearestPackage().generateNamespacePath()/]Exec/[anActivity.name.toUpperFirst()/]Execution.hpp"
 [/if]
 [/template]

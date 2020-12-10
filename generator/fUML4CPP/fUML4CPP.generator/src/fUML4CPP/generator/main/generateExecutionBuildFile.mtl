@@ -54,33 +54,16 @@ SET(CMAKE_CXX_FLAGS_RELEASE " -O3 -DNDEBUG")
 
 string(REPLACE "\\" "/" MDE4CPP_HOME $ENV{MDE4CPP_HOME})
 
-[if (packageOnly)]
 SET(SOURCE_FILES
-[for (aClassifier : Classifier | getClassifiersForPackageOnly()->sortedBy(name))]
-	[aClassifier.name.toUpperFirst()/]Object.cpp
-[/for]
+	#Model Execution Plugin
 	[aPackage.name.concat('ExecPlugin.cpp')/]
 	['impl/'.concat(aPackage.name).concat('ExecPluginImpl.cpp')/]
-)
-[else]
-SET(SOURCE_FILES
-[for (aDecisionNode : DecisionNode | aPackage.getDecisionNodesWithOB())]
-	[aDecisionNode.generateOpaqueBehaviorExecutionName()/].cpp
-[/for]
-[for (aCBA : CallBehaviorAction | aPackage.getCallBehaviorActionsWithOB())]
-	[aCBA.generateOpaqueBehaviorExecutionName()/].cpp
-[/for]
-[for (anOperation : Operation | aPackage.getPackageOperations()->sortedBy(name))]
-	[anOperation.generateOperationExecutionName()/].cpp
-[/for]
-[for (aClassifier : Classifier | getClassifiersForObjectClasses()->sortedBy(name))]
-	[aClassifier.name.toUpperFirst()/]Object.cpp
-[/for]
+	[if (not packageOnly)]
+	# Model Execution Locus
 	impl/[aPackage.name.toUpperFirst()/]LocusImpl.cpp
-	[aPackage.name.concat('ExecPlugin.cpp')/]
-	['impl/'.concat(aPackage.name).concat('ExecPluginImpl.cpp')/]
+	[/if]
+	[aPackage.generatePackageSourceFilesToCompile(packageOnly, true)/]
 )
-[/if]
 
 INCLUDE_DIRECTORIES(
     ../
@@ -230,6 +213,28 @@ task clean {
 	}
 }
 [/file]
+[/template]
+
+[template private generatePackageSourceFilesToCompile(aPackage : Package, packOnly : Boolean, isRoot : Boolean)]
+#ClassifierObject classes for Package [aPackage.generateNamespace()/]
+[for (aClassifier : Classifier | getClassifiersForObjectClasses()->sortedBy(name))]
+[if(not isRoot)]../[aPackage.generateNamespacePath()/]Exec/[/if][aClassifier.name.toUpperFirst()/]Object.cpp
+[/for]
+[if (not packOnly)]
+#OpaqueBehaviorExecution classes for Package [aPackage.generateNamespace()/]
+[for (aDecisionNode : DecisionNode | aPackage.getDecisionNodesWithOB())]
+[if(not isRoot)]../[aPackage.generateNamespacePath()/]Exec/[/if][aDecisionNode.generateOpaqueBehaviorExecutionName()/].cpp
+[/for]
+[for (aCBA : CallBehaviorAction | aPackage.getCallBehaviorActionsWithOB())]
+[if(not isRoot)]../[aPackage.generateNamespacePath()/]Exec/[/if][aCBA.generateOpaqueBehaviorExecutionName()/].cpp
+[/for]
+[for (anOperation : Operation | aPackage.getPackageOperations()->sortedBy(name))]
+[if(not isRoot)]../[aPackage.generateNamespacePath()/]Exec/[/if][anOperation.generateOperationExecutionName()/].cpp
+[/for]
+[/if]
+[for (subPackage : Package | aPackage.ownedElement->filter(Package))]
+[subPackage.generatePackageSourceFilesToCompile(packOnly, false)/]
+[/for]
 [/template]
 
 [template private generateCMakeFindLibraryCommands(aPackage : Package, ending : String, folderName : String)]

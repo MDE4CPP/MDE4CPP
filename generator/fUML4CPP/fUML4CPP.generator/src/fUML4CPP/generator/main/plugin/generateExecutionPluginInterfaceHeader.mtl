@@ -37,13 +37,13 @@ namespace PSCS::Semantics::Loci
 	class CS_ExecutionFactory;
 }
 
-namespace [aPackage.getPackageName().sanitize()/]
+namespace [aPackage.generateNamespace().sanitize()/]
 {
-	class [aPackage.getPackageName().sanitize().toUpperFirst() + 'Locus'/];
+	class [aPackage.generateNamespace().sanitize().toUpperFirst() + 'Locus'/];
 }
 
 
-namespace [aPackage.name/]
+namespace [aPackage.generateNamespace()/]
 {
 	class [packageName/] : virtual public UMLExecutionModelPlugin
 	{
@@ -69,7 +69,7 @@ namespace [aPackage.name/]
 		protected:
 			//Execution Environment
 [if (not aPackage.isReflectionModel())]
-			std::shared_ptr<[aPackage.getPackageName().sanitize().toUpperFirst() + 'Locus'/]> m_locus;
+			std::shared_ptr<[aPackage.generateNamespace().sanitize().toUpperFirst() + 'Locus'/]> m_locus;
 			std::shared_ptr<PSCS::Semantics::Loci::CS_Executor> m_executor;
 			std::shared_ptr<PSCS::Semantics::Loci::CS_ExecutionFactory> m_factory;
 			//OpaqueBehaviors for primitive prototypes for activity executions
