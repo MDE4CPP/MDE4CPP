@@ -17,6 +17,7 @@
 [import UML4CPP::generator::main::components::generateType /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
+[import UML4CPP::generator::main::helpers::collectionHelper /]
 
 
 [template public generateOpaqueBehaviorExecutionName(aNamedElement : NamedElement) ? (aNamedElement.oclIsKindOf(DecisionNode))]
@@ -27,12 +28,16 @@
 [aNamedElement.oclAsType(CallBehaviorAction).behavior.name.sanitize().toUpperFirst().concat('Execution')/]
 [/template]
 
+[template public generateOpaqueBehaviorExecutionName(opaqueBehavior : OpaqueBehavior)]
+[opaqueBehavior.name.sanitize().toUpperFirst().concat('Execution')/]
+[/template]
+
 [template public generateOpaqueBehaviorExecutionName(aNamedElement : NamedElement) ? (aNamedElement.oclIsKindOf(CallOperationAction))]
 [aNamedElement.oclAsType(CallOperationAction).name.sanitize().toUpperFirst().concat('Execution')/]
 [/template] 
 
 [query public getDecisionNodesWithOB(aPackage : Package) : OrderedSet(DecisionNode) = OrderedSet{
-		aPackage.ownedElement->filter(Activity).getDecisionNodesWithOB()
+		aPackage.getElementsBelongingToPackage()->filter(Activity).getDecisionNodesWithOB()
 	}->flatten()->reject(decisionInput.oclIsUndefined())->select(decisionInput.oclIsKindOf(OpaqueBehavior))->sortedBy(name)
  /]
 
@@ -43,9 +48,9 @@
 /]
 
 [query public getCallBehaviorActionsWithOB(aPackage : Package) : OrderedSet(CallBehaviorAction) = OrderedSet{
-		aPackage.ownedElement->selectByKind(Activity).getCallBehaviorActionsWithOB(),
-		aPackage.ownedElement->selectByKind(Activity).allOwnedElements()->selectByKind(ExpansionRegion).node->filter(CallBehaviorAction),
-		aPackage.ownedElement->selectByKind(Activity).allOwnedElements()->filter(CallBehaviorAction).behavior->selectByKind(Activity)->reject(oclIsUndefined()).getCallBehaviorActionsWithOB()
+		aPackage.getElementsBelongingToPackage()->selectByKind(Activity).getCallBehaviorActionsWithOB(),
+		aPackage.getElementsBelongingToPackage()->selectByKind(Activity).allOwnedElements()->selectByKind(ExpansionRegion).node->filter(CallBehaviorAction),
+		aPackage.getElementsBelongingToPackage()->selectByKind(Activity).allOwnedElements()->filter(CallBehaviorAction).behavior->selectByKind(Activity)->reject(oclIsUndefined()).getCallBehaviorActionsWithOB()
 	}->flatten()->reject(behavior.oclIsUndefined())->select(behavior.oclIsKindOf(OpaqueBehavior))->sortedBy(name)
 /]
 
@@ -54,6 +59,8 @@
 		anActivity.allOwnedElements()->filter(CallBehaviorAction).behavior->selectByKind(Activity)->reject(oclIsUndefined()).getCallBehaviorActionsWithOB()
 	}->flatten()->reject(behavior.oclIsUndefined())->select(behavior.oclIsKindOf(OpaqueBehavior))->sortedBy(name)
 /]
+
+[query public getPackageOpaqueBehaviors(aPackage : Package) : OrderedSet(OpaqueBehavior) = aPackage.getElementsBelongingToPackage()->filter(OpaqueBehavior)->sortedBy(name)/]
 
 [query public getCallOperationActions(aPackage : Package) : OrderedSet(CallOperationAction) = OrderedSet{
 		aPackage.allOwnedElements()->selectByKind(Activity).ownedNode->filter(CallOperationAction),

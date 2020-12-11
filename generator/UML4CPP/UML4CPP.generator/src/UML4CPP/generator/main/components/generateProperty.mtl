@@ -174,7 +174,7 @@ void [aClass.name.toUpperFirst()/]Impl::set[compositeOwnerClass.name.toUpperFirs
 [aProperty.memberName()/]->setIsConjugated([aProperty.oclAsType(Port).isConjugated/]);
 [/if]
 [aProperty.memberName()/]->setVisibility(uml::VisibilityKind::[aProperty.visibility.toString().toUpperCase()/]);
-[if (not aProperty.association.oclIsUndefined())][aProperty.memberName()/]->setAssociation([memberName(aProperty.association)/]);[/if]
+[if (not aProperty.association.oclIsUndefined())][aProperty.memberName()/]->setAssociation([aProperty.association.generatePackageGetterCall(aProperty)/]);[/if]
 [if (not aProperty.defaultValue.oclIsUndefined())][aProperty.memberName()/]->setDefaultValue([memberName(aProperty.defaultValue)/]);[/if]
 [aProperty.generateStereotypeApplication()/]
 [/template]

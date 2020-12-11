@@ -79,12 +79,12 @@
 [query private getDirectlyUsedStereotypeReflectionPackageClasses(aPackage : Package) : Set(Classifier) = getStereotypeClassifierExecutions()->select(c : Classifier | c.getNearestPackage().isReflectionModel()) /]
 
 [query public getPackageClasses(aPackage : Package) : Set(Class) = 
-	aPackage.ownedElement->filter(Class)->flatten()->reject(oclIsKindOf(AssociationClass))->reject(oclIsKindOf(Component))->reject(oclIsKindOf(Behavior))->reject(oclIsKindOf(Stereotype))->reject(oclIsKindOf(Node))->sortedBy(name)/]
+	aPackage.getElementsBelongingToPackage()->filter(Class)->flatten()->reject(oclIsKindOf(AssociationClass))->reject(oclIsKindOf(Component))->reject(oclIsKindOf(Behavior))->reject(oclIsKindOf(Stereotype))->reject(oclIsKindOf(Node))->sortedBy(name)/]
 
-[query public getPackageInterfaces(aPackage : Package) : Set(Classifier) = aPackage.ownedElement->filter(Interface)->sortedBy(name) /]
+[query public getPackageInterfaces(aPackage : Package) : Set(Classifier) = aPackage.getElementsBelongingToPackage()->filter(Interface)->sortedBy(name) /]
 
 [query public getPackageStereotypes(aPackage : Package) : Set(Class) = 
-	aPackage.ownedElement->filter(Stereotype)->flatten()->sortedBy(name)/]
+	aPackage.getElementsBelongingToPackage()->filter(Stereotype)->flatten()->sortedBy(name)/]
 
 [query public getPackageClassifiers(aPackage : Package) : Set(Classifier) = OrderedSet{getPackageClasses(), getPackageInterfaces(), getPackageStereotypes()}->flatten()->sortedBy(name) /]
 
@@ -97,7 +97,7 @@
 
 [comment]Get all Operations in Package[/comment]
 [query public getPackageOperations(aPackage : Package) : Set(Operation) = OrderedSet{
-				aPackage.ownedElement->filter(Classifier).getAllOperations()
+				aPackage.getElementsBelongingToPackage()->filter(Classifier).getAllOperations()
 				}->flatten()->sortedBy(name)
 /]
 

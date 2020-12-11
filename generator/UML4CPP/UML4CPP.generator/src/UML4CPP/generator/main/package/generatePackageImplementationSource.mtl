@@ -53,6 +53,7 @@
 								aPackage.getElementsBelongingToPackage()->filter(CallBehaviorAction).behavior.getNearestPackage(),
 								aPackage.getElementsBelongingToPackage()->filter(Element).getAppliedStereotypes().getProfile(), 
 								aPackage.getElementsBelongingToPackage()->filter(InstanceValue).instance.getNearestPackage(), 
+								aPackage.getElementsBelongingToPackage()->filter(Property).association->reject(oclIsUndefined()).getNearestPackage(),
 								aPackage.member->filter(Element).ownedElement->filter(InterfaceRealization).contract.getNearestPackage(),
 								aPackage.member->filter(Element).ownedElement->filter(Generalization).general.getNearestPackage()
 							}->flatten() /]
