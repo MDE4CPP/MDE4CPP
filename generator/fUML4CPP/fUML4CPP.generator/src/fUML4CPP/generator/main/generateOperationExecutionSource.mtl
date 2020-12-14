@@ -27,7 +27,7 @@
 }]
 
 [file (aPackage.generateNamespacePath().concat('Exec/').concat(behaviorName).concat('.cpp'), false, 'UTF-8')]
-#include "[aPackage.getPackageName()/]Exec/[behaviorName/].hpp"
+#include "[aPackage.generateNamespacePath()/]Exec/[behaviorName/].hpp"
 
 [defineDebugMacro()/]
 

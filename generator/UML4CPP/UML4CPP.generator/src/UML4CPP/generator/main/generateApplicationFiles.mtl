@@ -50,17 +50,17 @@
 #include <iostream>
 
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "[aPackage.getPackageName()/]/[packageName/]Factory.hpp"
-#include "[aPackage.getPackageName()/]/[packageName/]Package.hpp"
+#include "[aPackage.generateNamespacePath()/]/[packageName/]Factory.hpp"
+#include "[aPackage.generateNamespacePath()/]/[packageName/]Package.hpp"
 
 [for (aClass : Class | aPackage.allOwnedElements()->select(e|e.oclIsKindOf(uml::Class))->select(e|not (e.oclIsKindOf(FunctionBehavior) or e.oclIsKindOf(OpaqueBehavior) or e.oclIsKindOf(Activity))).oclAsType(uml::Class)->sortedBy(name))]
-#include "[aPackage.getPackageName()/]/[aClass.name.toUpperFirst()/].hpp"
+#include "[aClass.getNearestPackage().generateNamespacePath()/]/[aClass.name.toUpperFirst()/].hpp"
 [/for]
 [for (anInterface : Interface | aPackage.allOwnedElements()->select(e|e.oclIsKindOf(uml::Interface)).oclAsType(uml::Interface)->sortedBy(name))]
-#include "[aPackage.getPackageName()/]/[anInterface.name.toUpperFirst()/].hpp"
+#include "[anInterface.getNearestPackage().generateNamespacePath()/]/[anInterface.name.toUpperFirst()/].hpp"
 [/for]
 [for (anEnumeration : Enumeration | aPackage.ownedMember->filter(Enumeration))]
-#include "[aPackage.getPackageName()/]/[anEnumeration.name/].hpp"
+#include "[anEnumeration.getNearestPackage().generateNamespacePath()/]/[anEnumeration.name/].hpp"
 [/for]
 
 [if (hasMainIncludes())]
@@ -72,7 +72,7 @@
 
 // [/protected]
 
-[if (not aPackage.ignoreNamespace())]using namespace [getPackageName()/];[/if]
+[if (not aPackage.ignoreNamespace())]using namespace [aPackage.generateNamespace()/];[/if]
 
 // [protected ('functions')] 
 // You may manually edit additional functions, won't be overwritten upon generation.
@@ -139,7 +139,7 @@ int main()
 	std::shared_ptr<[if (mainActivity.owner.oclIsKindOf(Classifier))][mainActivity.owner.oclAsType(Classifier).name.toUpperFirst()/][else]uml::Element[/if]> element = [if (mainActivity.owner.oclIsKindOf(Classifier))][mainActivity.owner.oclAsType(Classifier).namespace.myNamespaceName()/]::[mainActivity.owner.oclAsType(Classifier).namespace.myNamespaceName().toUpperFirst()/]Factory::eInstance()->create[mainActivity.owner.oclAsType(Classifier).name.toUpperFirst()/]()[else]nullptr[/if];
 
 	std::shared_ptr<PluginFramework> pluginFramework = PluginFramework::eInstance();
-	std::string pluginName = "[mainActivity.getNearestPackage().getPackageName()/]Exec";
+	std::string pluginName = "[mainActivity.getRootPackage().getPackageName()/]Exec";
 	std::shared_ptr<MDE4CPPPlugin> plugin = pluginFramework->findPluginByName(pluginName);
 	if (plugin)
 	{

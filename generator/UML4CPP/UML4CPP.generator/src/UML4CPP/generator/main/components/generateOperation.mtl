@@ -56,7 +56,7 @@ virtual [aOperation.generateCppType()/] [aOperation.name/]([for (sParameter : Pa
 [if (aOperation.method->notEmpty())]
 [if(aOperation.method->filter(Activity)->notEmpty())]
 	std::shared_ptr<PluginFramework> pluginFramework = PluginFramework::eInstance();
-	std::string pluginName = "[aOperation.getNearestPackage().getPackageName()/]Exec";
+	std::string pluginName = "[aOperation.getRootPackage().getPackageName()/]Exec";
 	std::shared_ptr<MDE4CPPPlugin> plugin = pluginFramework->findPluginByName(pluginName);
 	if (plugin)
 	{

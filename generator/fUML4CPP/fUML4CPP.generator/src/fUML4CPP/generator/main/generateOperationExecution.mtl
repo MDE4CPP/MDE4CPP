@@ -55,7 +55,7 @@ throw "error";
 [template public generateInclude(anOperation : Operation)]
 [if (not anOperation.oclIsUndefined())]
 [if (not anOperation.name.oclIsUndefined())]
-#include "[anOperation.getNearestPackage().getPackageName()/]Exec/[anOperation.generateOperationExecutionName()/].hpp"
+#include "[anOperation.getNearestPackage().generateNamespacePath()/]Exec/[anOperation.generateOperationExecutionName()/].hpp"
 [/if]
 [/if]
 [/template]

@@ -296,9 +296,9 @@ pList->push_back([par.name/]P);
 
 [/for]
 [if (anActivity.owner.oclIsKindOf(Class))]
-std::shared_ptr<[anActivity.owner.oclAsType(Classifier).name.toUpperFirst()/]Object> object(new [anActivity.owner.oclAsType(Classifier).name.toUpperFirst()/]Object());
+std::shared_ptr<[anActivity.owner.oclAsType(Classifier).generateNamespaceName()/]Object> object(new [anActivity.owner.oclAsType(Classifier).generateNamespaceName()/]Object());
 object->setThis[anActivity.owner.oclAsType(Classifier).name.toUpperFirst()/]ObjectPtr(object);
-object->setUmlValue(std::dynamic_pointer_cast<[anActivity.owner.oclAsType(Classifier).getNearestPackage().generateNamespace()/]::[anActivity.owner.oclAsType(Classifier).name.toUpperFirst()/]>(element));
+object->setUmlValue(std::dynamic_pointer_cast<[anActivity.owner.oclAsType(Classifier).generateNamespaceName()/]>(element));
 object->setLocus(m_locus);
 [/if]
 //executing activity [anActivity.name/]
