@@ -162,10 +162,23 @@ void CS_DefaultConstructStrategyImpl::addStructuralFeatureValue(std::shared_ptr<
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-			std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> featureValue = context->retrieveFeatureValue(feature);
+	std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> featureValue = context->retrieveFeatureValue(feature);
 	if(featureValue != nullptr) {
 		std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values = featureValue->getValues();
-		if(std::dynamic_pointer_cast<uml::Port>(feature) != nullptr) {
+
+		/*
+		 * MDE4CPP-specific implementation: Since specialized references (i.e. CS_References vs. CS_InteractionPoints) are handled on a lower level,
+		 * it is sufficient to just insert a CS_Reference at this point.
+		 */
+		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
+		reference->setCompositeReferent(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Object>(value));
+		reference->setReferent(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Object>(value));
+		values->add(reference);
+		context->assignFeatureValue(feature, values, -1);
+
+		/*ORIGINAL IMPLEMENTATION
+		if(std::dynamic_pointer_cast<uml::Port>(feature) != nullptr)
+		{
 			// insert an interaction point
 			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> interactionPoint = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_InteractionPoint();
 			interactionPoint->setDefiningPort(std::dynamic_pointer_cast<uml::Port>(feature));
@@ -173,16 +186,19 @@ void CS_DefaultConstructStrategyImpl::addStructuralFeatureValue(std::shared_ptr<
 			interactionPoint->setOwner(context);
 			values->add(interactionPoint);
 		}
-		else if (std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Object>(value) != nullptr) {
+		else if (std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Object>(value) != nullptr)
+		{
 			// insert a reference
 			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
 			reference->setCompositeReferent(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Object>(value));
 			reference->setReferent(std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Object>(value));
 			values->add(reference);
 		}
-		else {
+		else
+		{
 			values->add(value);
 		}
+		*/
 	}
 	//end of body
 }
@@ -278,6 +294,26 @@ std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> CS_DefaultConstr
 		i += 1;
 	}
 	// Instantiate connectors
+
+	/*
+	 * MDE4CPP-specific implementation: We can directly access the types owned connectors rather than iterating over all members and
+	 * searching for owned connectors.
+	 */
+	std::shared_ptr<Bag<uml::Connector>> allConnectors = type->getOwnedConnector();
+	i = 1;
+	unsigned int numberOfConnectors = allConnectors->size();
+	while(i <= numberOfConnectors) {
+		std::shared_ptr<uml::Connector> connector = allConnectors->at(i-1);
+			if(this->isArrayPattern(connector)) {
+				this->generateArrayPattern(referenceToContext, connector);
+			}
+			else if(this->isStarPattern(connector)) {
+				this->generateStarPattern(referenceToContext, connector);
+			}
+		i += 1;
+	}
+
+	/*ORIGINAL IMPLEMENTATION
 	std::shared_ptr<Bag<uml::NamedElement>> allMembers = type->getMember();
 	i = 1;
 	while(i <= allMembers->size()) {
@@ -293,6 +329,7 @@ std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> CS_DefaultConstr
 		}
 		i += 1;
 	}
+	 */
 	return referenceToContext->getReferent();
 	//end of body
 }
@@ -303,22 +340,28 @@ void CS_DefaultConstructStrategyImpl::generateArrayPattern(std::shared_ptr<PSCS:
 	//generated from body annotation
 		std::shared_ptr<uml::ConnectorEnd> end1 = connector->getEnd()->at(0);
 	std::shared_ptr<uml::ConnectorEnd> end2 = connector->getEnd()->at(1);
-	std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference>> end1Values = std::dynamic_pointer_cast<Bag<fUML::Semantics::StructuredClassifiers::Reference>>(this->getValuesFromConnectorEnd(context, end1));
-	std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference>> end2Values = std::dynamic_pointer_cast<Bag<fUML::Semantics::StructuredClassifiers::Reference>>(this->getValuesFromConnectorEnd(context, end2));
-	for(unsigned int i = 0; i < end1Values->size(); i++) {
-		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Link> link = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Link();
-		if(connector->getType() == nullptr) {
+	std::shared_ptr<Bag<fUML::Semantics::Values::Value>> end1Values =
+			this->getValuesFromConnectorEnd(context, end1);
+	std::shared_ptr<Bag<fUML::Semantics::Values::Value>> end2Values =
+			this->getValuesFromConnectorEnd(context, end2);
+	for (unsigned int i = 0; i < end1Values->size(); i++) {
+		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Link> link =
+				PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Link();
+		if (connector->getType() == nullptr) {
 			link->setType(this->getDefaultAssociation());
-		}
-		else {
+		} else {
 			link->setType(connector->getType());
 		}
-		std::shared_ptr<Bag<fUML::Semantics::Values::Value>> valuesForEnd1(new Bag<fUML::Semantics::Values::Value>());
+		std::shared_ptr<Bag<fUML::Semantics::Values::Value>> valuesForEnd1(
+				new Bag<fUML::Semantics::Values::Value>());
 		valuesForEnd1->add(end1Values->at(i));
-		std::shared_ptr<Bag<fUML::Semantics::Values::Value>> valuesForEnd2(new Bag<fUML::Semantics::Values::Value>());
+		std::shared_ptr<Bag<fUML::Semantics::Values::Value>> valuesForEnd2(
+				new Bag<fUML::Semantics::Values::Value>());
 		valuesForEnd2->add(end2Values->at(i));
-		link->assignFeatureValue(link->getType()->getOwnedEnd()->at(0), valuesForEnd1, -1);
-		link->assignFeatureValue(link->getType()->getOwnedEnd()->at(1), valuesForEnd2, -1);
+		link->assignFeatureValue(link->getType()->getMemberEnd()->at(0),
+				valuesForEnd1, -1);
+		link->assignFeatureValue(link->getType()->getMemberEnd()->at(1),
+				valuesForEnd2, -1);
 		link->addTo(context->getReferent()->getLocus());
 	}
 	//end of body
@@ -344,25 +387,31 @@ void CS_DefaultConstructStrategyImpl::generateStarPattern(std::shared_ptr<PSCS::
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-			std::shared_ptr<uml::ConnectorEnd> end1 = connector->getEnd()->at(0);
+	std::shared_ptr<uml::ConnectorEnd> end1 = connector->getEnd()->at(0);
 	std::shared_ptr<uml::ConnectorEnd> end2 = connector->getEnd()->at(1);
-	std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference>> end1Values = std::dynamic_pointer_cast<Bag<fUML::Semantics::StructuredClassifiers::Reference>>(this->getValuesFromConnectorEnd(context, end1));
-	std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference>> end2Values = std::dynamic_pointer_cast<Bag<fUML::Semantics::StructuredClassifiers::Reference>>(this->getValuesFromConnectorEnd(context, end2));
-	for(unsigned int i = 0; i < end1Values->size(); i++) {
-		for(unsigned int j = 0; j < end2Values->size(); j++) {
-			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Link> link = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Link();
-			if(connector->getType() == nullptr) {
+	std::shared_ptr<Bag<fUML::Semantics::Values::Value>> end1Values =
+			this->getValuesFromConnectorEnd(context, end1);
+	std::shared_ptr<Bag<fUML::Semantics::Values::Value>> end2Values =
+			this->getValuesFromConnectorEnd(context, end2);
+	for (unsigned int i = 0; i < end1Values->size(); i++) {
+		for (unsigned int j = 0; j < end2Values->size(); j++) {
+			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Link> link =
+					PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Link();
+			if (connector->getType() == nullptr) {
 				link->setType(this->getDefaultAssociation());
-			}
-			else {
+			} else {
 				link->setType(connector->getType());
 			}
-			std::shared_ptr<Bag<fUML::Semantics::Values::Value>> valuesForEnd1(new Bag<fUML::Semantics::Values::Value>());
+			std::shared_ptr<Bag<fUML::Semantics::Values::Value>> valuesForEnd1(
+					new Bag<fUML::Semantics::Values::Value>());
 			valuesForEnd1->add(end1Values->at(i));
-			std::shared_ptr<Bag<fUML::Semantics::Values::Value>> valuesForEnd2(new Bag<fUML::Semantics::Values::Value>());
+			std::shared_ptr<Bag<fUML::Semantics::Values::Value>> valuesForEnd2(
+					new Bag<fUML::Semantics::Values::Value>());
 			valuesForEnd2->add(end2Values->at(j));
-			link->assignFeatureValue(link->getType()->getOwnedEnd()->at(0), valuesForEnd1, -1);
-			link->assignFeatureValue(link->getType()->getOwnedEnd()->at(1), valuesForEnd2, -1);
+			link->assignFeatureValue(link->getType()->getMemberEnd()->at(0),
+					valuesForEnd1, -1);
+			link->assignFeatureValue(link->getType()->getMemberEnd()->at(1),
+					valuesForEnd2, -1);
 			link->addTo(context->getReferent()->getLocus());
 		}
 	}
@@ -454,7 +503,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value> > CS_DefaultConstructStrateg
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-			std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference>> endValues(new Bag<fUML::Semantics::StructuredClassifiers::Reference>());
+				std::shared_ptr<Bag<fUML::Semantics::Values::Value>> endValues(new Bag<fUML::Semantics::Values::Value>());
 	if(end->getPartWithPort() != nullptr) {
 		std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> valueForPart = context->retrieveFeatureValue(end->getPartWithPort());
 		if(valueForPart != nullptr) {
@@ -463,7 +512,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value> > CS_DefaultConstructStrateg
 				std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> valueForPort = reference->retrieveFeatureValue(std::dynamic_pointer_cast<uml::Port>(end->getRole()));
 				if(valueForPort != nullptr) {
 					for(unsigned int j = 0; j < valueForPort->getValues()->size(); j++) {
-						endValues->add(std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Reference>(valueForPort->getValues()->at(j)));
+						endValues->add(valueForPort->getValues()->at(j));
 					}
 				}
 			}
@@ -473,11 +522,11 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value> > CS_DefaultConstructStrateg
 		std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> valueForRole = context->retrieveFeatureValue(std::dynamic_pointer_cast<uml::Property>(end->getRole()));
 		if(valueForRole != nullptr) {
 			for (unsigned int i = 0; i < valueForRole->getValues()->size(); i++) {
-				endValues->add(std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Reference>(valueForRole->getValues()->at(i)));
+				endValues->add(valueForRole->getValues()->at(i));
 			}
 		}
 	}
-	return std::dynamic_pointer_cast<Bag<fUML::Semantics::Values::Value>>(endValues);
+	return endValues;
 	//end of body
 }
 
@@ -495,36 +544,47 @@ bool CS_DefaultConstructStrategyImpl::isArrayPattern(std::shared_ptr<uml::Connec
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-			// This is an array pattern if:
+		// This is an array pattern if:
 	// - c is binary
 	// - lower bound of the two connector ends is 1
 	// - Cardinality of ends are equals
-	
-	if(c->getEnd()->size() == 2) {
-		if(std::dynamic_pointer_cast<uml::MultiplicityElement>(c->getEnd()->at(0)->getRole()) != nullptr){
-			if((std::dynamic_pointer_cast<uml::MultiplicityElement>(c->getEnd()->at(0)->getRole()))->getLower() == 1) {
-				if(std::dynamic_pointer_cast<uml::MultiplicityElement>(c->getEnd()->at(1)->getRole()) != nullptr){
-					if((std::dynamic_pointer_cast<uml::MultiplicityElement>(c->getEnd()->at(1)->getRole()))->getLower() == 1) {
-						if((this->canInstantiate(std::dynamic_pointer_cast<uml::Property>(c->getEnd()->at(0)->getRole()))) && (this->canInstantiate(std::dynamic_pointer_cast<uml::Property>(c->getEnd()->at(1)->getRole())))) {
-							int cardinality1 = this->getCardinality(c->getEnd()->at(0));
-							int cardinality2 = this->getCardinality(c->getEnd()->at(1));
+
+	if (c->getEnd()->size() == 2) {
+		if (std::dynamic_pointer_cast<uml::MultiplicityElement>(
+				c->getEnd()->at(0)->getRole()) != nullptr) {
+			if (c->getEnd()->at(0)->getLower() == 1) {
+				if (std::dynamic_pointer_cast<uml::MultiplicityElement>(
+						c->getEnd()->at(1)->getRole()) != nullptr) {
+					if (c->getEnd()->at(1)->getLower() == 1) {
+						if ((this->canInstantiate(
+								std::dynamic_pointer_cast<uml::Property>(
+										c->getEnd()->at(0)->getRole())))
+								&& (this->canInstantiate(
+										std::dynamic_pointer_cast<uml::Property>(
+												c->getEnd()->at(1)->getRole())))) {
+							int cardinality1 = this->getCardinality(
+									c->getEnd()->at(0));
+							int cardinality2 = this->getCardinality(
+									c->getEnd()->at(1));
 							return (cardinality1 == cardinality2);
-							}
 						}
 					}
-				else {
-					std::string errorMessage = "UnexpectedTypeException in PSCS::Semantics::Actions::CS_DefaultConstructStrategyImpl::isArrayPattern(): unexpected type '"
-					+ c->getEnd()->at(1)->getRole()->eClass()->getName() + "' is not an instance of uml::MultiplicityElement\n";
-		
+				} else {
+					std::string errorMessage =
+							"UnexpectedTypeException in PSCS::Semantics::Actions::CS_DefaultConstructStrategyImpl::isArrayPattern(): unexpected type '"
+									+ c->getEnd()->at(1)->getRole()->eClass()->getName()
+									+ "' is not an instance of uml::MultiplicityElement\n";
+
 					throw std::runtime_error(errorMessage);
-					}
-				}		
-		else {
-			std::string errorMessage = "UnexpectedTypeException in PSCS::Semantics::Actions::CS_DefaultConstructStrategyImpl::isArrayPattern(): unexpected type '"
-			+ c->getEnd()->at(0)->getRole()->eClass()->getName() + "' is not an instance of uml::MultiplicityElement\n";
-		
+				}
+			}
+		} else {
+			std::string errorMessage =
+					"UnexpectedTypeException in PSCS::Semantics::Actions::CS_DefaultConstructStrategyImpl::isArrayPattern(): unexpected type '"
+							+ c->getEnd()->at(0)->getRole()->eClass()->getName()
+							+ "' is not an instance of uml::MultiplicityElement\n";
+
 			throw std::runtime_error(errorMessage);
-			}	
 		}
 	}
 	return false;

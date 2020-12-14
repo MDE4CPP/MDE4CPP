@@ -140,17 +140,73 @@ return newValue;
 
 void LinkImpl::addTo(std::shared_ptr<fUML::Semantics::Loci::Locus>  locus)
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+		// Add this link to the extent of its association at the given locus,
+	// Shift the positions of ends of other links, as appropriate, for ends
+	// that are ordered.
+
+	std::shared_ptr<Bag<uml::Property>> ends = this->getType()->getMemberEnd();
+	std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>> extent = locus->retrieveExtent(this->getType());
+
+	unsigned int endsSize = ends->size();
+	for (unsigned int i = 0; i < endsSize; i++) {
+		std::shared_ptr<uml::Property> end = ends->at(i);
+		if (end->getIsOrdered()) {
+			std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> featureValue =
+					this->retrieveFeatureValue(end);
+			std::shared_ptr<
+					Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> otherFeatureValues =
+					this->getOtherFeatureValues(extent, end);
+			int n = otherFeatureValues->size();
+			if (featureValue->getPosition() < 0
+					|| featureValue->getPosition() > n) {
+				featureValue->setPosition(n + 1);
+			} else {
+				if (featureValue->getPosition() == 0) {
+					featureValue->setPosition(-1);
+				}
+				for (int j = 0; j < n; j++) {
+					std::shared_ptr<
+							fUML::Semantics::SimpleClassifiers::FeatureValue> otherFeatureValue =
+							otherFeatureValues->at(j);
+					if (featureValue->getPosition()
+							<= otherFeatureValue->getPosition()) {
+						otherFeatureValue->setPosition(
+								otherFeatureValue->getPosition() + 1);
+					}
+				}
+			}
+		}
+	}
+	locus->add(getThisLinkPtr());
+	//end of body
 }
 
 std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue> > LinkImpl::getOtherFeatureValues(std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue> >  extent,std::shared_ptr<uml::Property>  end)
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+		// Return all feature values for the given end of links in the given
+	// extent whose other ends match this link.
+	std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> featureValues(new Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>());
+	unsigned int extentSize = extent->size();
+	for(unsigned int i = 0; i < extentSize; i++)
+	{
+		std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> link = extent->at(i);
+		if(link != getThisLinkPtr())
+		{
+			if(isMatchingLink(link, end))
+			{
+				featureValues->add(link->retrieveFeatureValue(end));
+			}
+		}
+	}
+	return featureValues;
+	//end of body
 }
 
-std::shared_ptr<Bag<uml::Classifier> > LinkImpl::getTypes()
+std::shared_ptr<Bag<uml::Classifier> > LinkImpl::getTypes() const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation

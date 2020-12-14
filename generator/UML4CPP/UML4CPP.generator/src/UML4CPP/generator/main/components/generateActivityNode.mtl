@@ -387,6 +387,7 @@
 [template private initializeActivityNodeSpecial(anActivityNode : ActivityNode) ? (oclIsKindOf(DestroyObjectAction))]
 [let action : DestroyObjectAction = self.oclAsType(DestroyObjectAction)]
 [action.memberName()/]->setIsDestroyOwnedObjects([action.isDestroyOwnedObjects/]);
+[action.memberName()/]->setIsDestroyLinks([action.isDestroyLinks/]);
 [action.output.initializePin()/]
 [/let]
 [/template]

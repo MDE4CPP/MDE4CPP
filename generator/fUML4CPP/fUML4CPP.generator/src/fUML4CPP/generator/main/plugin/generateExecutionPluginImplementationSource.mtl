@@ -227,7 +227,7 @@ m_factory->assignStrategy(PSCS::Semantics::StructuredClassifiers::StructuredClas
 {	/*creating opaque behavior for operation [anOperation.owner.oclAsType(NamedElement).name/]::[anOperation.name/]*/
 	m_[anOperation.getFBPackageElement()/] = uml::UmlFactory::eInstance()->createOpaqueBehavior();
 	m_[anOperation.getFBPackageElement()/]->setName("[anOperation.getFBPackageElement()/]");
-
+	[anOperation.generatePackageGetterCall()/]->getMethod()->insert([anOperation.generatePackageGetterCall()/]->getMethod()->begin(), m_[anOperation.getFBPackageElement()/]);
 	[for (aParameter : Parameter | anOperation.ownedParameter)]
 	{	/*creating parameter [aParameter.name/]*/
 		std::shared_ptr<uml::Parameter> [memberName(aParameter)/](uml::UmlFactory::eInstance()->createParameter_in_Behavior(m_[anOperation.getFBPackageElement()/]));
@@ -270,10 +270,11 @@ m_factory->assignStrategy(PSCS::Semantics::StructuredClassifiers::StructuredClas
 [/template]
 
 [template public generateActivityExecution(anActivity : Activity)]
+[comment]
 [for (anOperation : Operation | anActivity.getCallOperationActions().operation->sortedBy(qualifiedName))]
 [anOperation.generatePackageGetterCall()/]->getMethod()->insert([anOperation.generatePackageGetterCall()/]->getMethod()->begin(), m_[anOperation.getFBPackageElement()/]);
 [/for]
-
+[/comment]
 
 std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > pList(new Bag<fUML::Semantics::CommonBehavior::ParameterValue>());
 [for (par : Parameter | anActivity.ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in))->sortedBy(name))]
