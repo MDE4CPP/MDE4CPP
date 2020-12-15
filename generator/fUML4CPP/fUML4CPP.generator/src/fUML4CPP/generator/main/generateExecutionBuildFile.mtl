@@ -222,12 +222,10 @@ task clean {
 [/for]
 [if (not packOnly)]
 #OpaqueBehaviorExecution classes for Package [aPackage.generateNamespace()/]
-[for (aDecisionNode : DecisionNode | aPackage.getDecisionNodesWithOB())]
-[if(not isRoot)]../[aPackage.generateNamespacePath()/]Exec/[/if][aDecisionNode.generateOpaqueBehaviorExecutionName()/].cpp
+[for (anOpaqueBehavior : OpaqueBehavior | aPackage.getPackageOpaqueBehaviors())]
+[if(not isRoot)]../[aPackage.generateNamespacePath()/]Exec/[/if][anOpaqueBehavior.generateOpaqueBehaviorExecutionName()/].cpp
 [/for]
-[for (aCBA : CallBehaviorAction | aPackage.getCallBehaviorActionsWithOB())]
-[if(not isRoot)]../[aPackage.generateNamespacePath()/]Exec/[/if][aCBA.generateOpaqueBehaviorExecutionName()/].cpp
-[/for]
+#OperationExecution classes for Package [aPackage.generateNamespace()/]
 [for (anOperation : Operation | aPackage.getPackageOperations()->sortedBy(name))]
 [if(not isRoot)]../[aPackage.generateNamespacePath()/]Exec/[/if][anOperation.generateOperationExecutionName()/].cpp
 [/for]

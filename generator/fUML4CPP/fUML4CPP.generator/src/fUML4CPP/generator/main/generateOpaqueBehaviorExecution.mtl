@@ -19,22 +19,51 @@
 [import UML4CPP::generator::main::helpers::nameHelper /]
 [import UML4CPP::generator::main::helpers::collectionHelper /]
 
-
-[template public generateOpaqueBehaviorExecutionName(aNamedElement : NamedElement) ? (aNamedElement.oclIsKindOf(DecisionNode))]
-[aNamedElement.oclAsType(DecisionNode).decisionInput.name.sanitize().toUpperFirst().concat('Execution')/]
-[/template]
-
-[template public generateOpaqueBehaviorExecutionName(aNamedElement : NamedElement) ? (aNamedElement.oclIsKindOf(CallBehaviorAction))]
-[aNamedElement.oclAsType(CallBehaviorAction).behavior.name.sanitize().toUpperFirst().concat('Execution')/]
-[/template]
-
 [template public generateOpaqueBehaviorExecutionName(opaqueBehavior : OpaqueBehavior)]
 [opaqueBehavior.name.sanitize().toUpperFirst().concat('Execution')/]
 [/template]
 
-[template public generateOpaqueBehaviorExecutionName(aNamedElement : NamedElement) ? (aNamedElement.oclIsKindOf(CallOperationAction))]
+[template public generateCallOperationActionClearing(aCallOperationAction : CallOperationAction)]
+[aCallOperationAction.operation->asOrderedSet()->first().generatePackageGetterCall()/]->getMethod()->erase([aCallOperationAction.getFBPackageElement()/]);
+[/template]
+
+[template public generateInclude(anActivity : Activity)]
+[if (not anActivity.name.oclIsUndefined())]
+#include "[anActivity.getNearestPackage().generateNamespacePath()/]Exec/[anActivity.name.toUpperFirst()/]Execution.hpp"
+[/if]
+[/template]
+
+[template public generateInclude(aCallBehaviorAction : CallBehaviorAction)]
+[if (not aCallBehaviorAction.behavior.oclIsUndefined())]
+[if (not aCallBehaviorAction.behavior.name.oclIsUndefined())]
+#include "[aCallBehaviorAction.behavior.getNearestPackage().generateNamespacePath()/]Exec/[aCallBehaviorAction.behavior.oclAsType(OpaqueBehavior).generateOpaqueBehaviorExecutionName()/].hpp"
+[/if]
+[/if]
+[/template]
+
+[template public generateInclude(aCallOperationAction : CallOperationAction)]
+[if (not aCallOperationAction.oclIsUndefined())]
+[if (not aCallOperationAction.name.oclIsUndefined())]
+#include "[aCallOperationAction.operation.getNearestPackage().generateNamespacePath()/]Exec/[aCallOperationAction.generateOperationExecutionName()/].hpp"
+[/if]
+[/if]
+[/template]
+
+[template public generateOperationExecutionName(aNamedElement : NamedElement) ? (aNamedElement.oclIsKindOf(CallOperationAction))]
 [aNamedElement.oclAsType(CallOperationAction).name.sanitize().toUpperFirst().concat('Execution')/]
 [/template] 
+
+[template public generateInclude(aDecisionNode : DecisionNode)]
+[if (not aDecisionNode.decisionInput.oclIsUndefined())]
+[if (not aDecisionNode.decisionInput.name.oclIsUndefined())]
+#include "[aDecisionNode.decisionInput.getNearestPackage().generateNamespacePath()/]Exec/[aDecisionNode.decisionInput.oclAsType(OpaqueBehavior).generateOpaqueBehaviorExecutionName()/].hpp"
+[/if]
+[/if]
+[/template]
+
+[query public getPackageOpaqueBehaviors(aPackage : Package) : OrderedSet(OpaqueBehavior) = aPackage.getElementsBelongingToPackage()->filter(OpaqueBehavior)->sortedBy(name)/]
+
+[query public getFBPackageElement(aCOA : CallOperationAction) : String = 'ob_'.concat(aCOA.owner.oclAsType(NamedElement).name.replaceAll(' ', '')).concat('_').concat(aCOA.myName().sanitize())/]
 
 [query public getDecisionNodesWithOB(aPackage : Package) : OrderedSet(DecisionNode) = OrderedSet{
 		aPackage.getElementsBelongingToPackage()->filter(Activity).getDecisionNodesWithOB()
@@ -60,8 +89,6 @@
 	}->flatten()->reject(behavior.oclIsUndefined())->select(behavior.oclIsKindOf(OpaqueBehavior))->sortedBy(name)
 /]
 
-[query public getPackageOpaqueBehaviors(aPackage : Package) : OrderedSet(OpaqueBehavior) = aPackage.getElementsBelongingToPackage()->filter(OpaqueBehavior)->sortedBy(name)/]
-
 [query public getCallOperationActions(aPackage : Package) : OrderedSet(CallOperationAction) = OrderedSet{
 		aPackage.allOwnedElements()->selectByKind(Activity).ownedNode->filter(CallOperationAction),
 		aPackage.allOwnedElements()->selectByKind(ExpansionRegion).node->filter(CallOperationAction),
@@ -74,39 +101,3 @@
 		anActivity.allOwnedElements()->filter(CallBehaviorAction).behavior->selectByKind(Activity)->reject(oclIsUndefined()).getCallOperationActions()
 	}->flatten()->sortedBy(name)
 /]
-
-[query public getFBPackageElement(aCOA : CallOperationAction) : String = 'ob_'.concat(aCOA.owner.oclAsType(NamedElement).name.replaceAll(' ', '')).concat('_').concat(aCOA.myName().sanitize())/]
-
-[template public generateCallOperationActionClearing(aCallOperationAction : CallOperationAction)]
-[aCallOperationAction.operation->asOrderedSet()->first().generatePackageGetterCall()/]->getMethod()->erase([aCallOperationAction.getFBPackageElement()/]);
-[/template]
-
-[template public generateInclude(aCallBehaviorAction : CallBehaviorAction)]
-[if (not aCallBehaviorAction.behavior.oclIsUndefined())]
-[if (not aCallBehaviorAction.behavior.name.oclIsUndefined())]
-#include "[aCallBehaviorAction.getNearestPackage().generateNamespacePath()/]Exec/[aCallBehaviorAction.generateOpaqueBehaviorExecutionName()/].hpp"
-[/if]
-[/if]
-[/template]
-
-[template public generateInclude(aCallOperationAction : CallOperationAction)]
-[if (not aCallOperationAction.oclIsUndefined())]
-[if (not aCallOperationAction.name.oclIsUndefined())]
-#include "[aCallOperationAction.getNearestPackage().generateNamespacePath()/]Exec/[aCallOperationAction.generateOpaqueBehaviorExecutionName()/].hpp"
-[/if]
-[/if]
-[/template]
-
-[template public generateInclude(aDecisionNode : DecisionNode)]
-[if (not aDecisionNode.decisionInput.oclIsUndefined())]
-[if (not aDecisionNode.decisionInput.name.oclIsUndefined())]
-#include "[aDecisionNode.getNearestPackage().generateNamespacePath()/]Exec/[aDecisionNode.generateOpaqueBehaviorExecutionName()/].hpp"
-[/if]
-[/if]
-[/template]
-
-[template public generateInclude(anActivity : Activity)]
-[if (not anActivity.name.oclIsUndefined())]
-#include "[anActivity.getNearestPackage().generateNamespacePath()/]Exec/[anActivity.name.toUpperFirst()/]Execution.hpp"
-[/if]
-[/template]

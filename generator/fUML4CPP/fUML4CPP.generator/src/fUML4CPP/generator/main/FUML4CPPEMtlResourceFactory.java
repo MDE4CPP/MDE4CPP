@@ -33,6 +33,7 @@ public class FUML4CPPEMtlResourceFactory extends UML4CPPEMtlResourceFactory {
 								"generateMetamodelClassifierObjectSource",
 								"generateExpansionRegionActiviationHeader",
 								"generateExpansionRegionActiviationSource",
+								"generateExecution",
 								"generateExecutionBuildFile",
 								"generateExecutionProjectFiles",
 								"generateModelExecutionFactoryHeader",

@@ -56,19 +56,13 @@
 [/template]
 
 [template public generateFUMLModel(aPackage : Package)]
-//generate executions for DecisionNode behavior
-[for (aDecisionNode : DecisionNode | aPackage.getDecisionNodesWithOB())]
-[aDecisionNode.generateOpaqueBehaviorExecutionHeader(aPackage)/]
-[aDecisionNode.generateOpaqueBehaviorExecutionSource(aPackage)/]
+//generate execution for OpaqueBehaviors
+[for (anOpaqueBehavior : OpaqueBehavior | aPackage.getPackageOpaqueBehaviors())]
+[anOpaqueBehavior.generateOpaqueBehaviorExecutionHeader(aPackage)/]
+[anOpaqueBehavior.generateOpaqueBehaviorExecutionSource(aPackage)/]
 [/for]
 
-//generate execution for CallBehaviorAction
-[for (aCBA : CallBehaviorAction | aPackage.getCallBehaviorActionsWithOB())]
-[aCBA.generateOpaqueBehaviorExecutionHeader(aPackage)/]
-[aCBA.generateOpaqueBehaviorExecutionSource(aPackage)/]
-[/for]
-
-//generate execution for CallOperationAction
+//generate execution for Operations
 [comment]
 [aPackage.collectAllPossiblyCalledOperations().generateOperationExecutionHeader(aPackage)/]
 [aPackage.collectAllPossiblyCalledOperations().generateOperationExecutionSource(aPackage)/]

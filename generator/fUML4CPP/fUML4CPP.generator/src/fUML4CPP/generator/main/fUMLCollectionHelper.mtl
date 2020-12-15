@@ -28,9 +28,10 @@
 [query private collectOperationsWithSameNameAs(anOperation : Operation, aPackage : Package) : OrderedSet(Operation) =
 	aPackage.getPackageOperations()->select(op : Operation | op.name = anOperation.name)->asOrderedSet()/]
 [comment collects all operations with the same names as operations that are being called by CallOperationActions in the provided package /]
+[comment]
 [query public collectAllPossiblyCalledOperations(aPackage : Package) : Set(Operation) =
-	OrderedSet{aPackage.getCallOperationActions().operation->reject(oclIsUndefined()).collectOperationsWithSameNameAs(aPackage)}->flatten()/]
-
+OrderedSet{aPackage.getCallOperationActions().operation->reject(oclIsUndefined()).collectOperationsWithSameNameAs(aPackage)}->flatten()/]
+[/comment]
 
 
 [comment]COLLECT OTHER ENDS FOR CONNECTOR ENDS OF CERTAIN TYPE --------------- [/comment]
