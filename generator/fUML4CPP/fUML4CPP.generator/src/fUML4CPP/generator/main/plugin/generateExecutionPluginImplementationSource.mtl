@@ -89,7 +89,7 @@ void [packageName/]::initialize()
 	[generateExecutionPluginInitialization()/]
 
 	[comment create opaque behavior executions for operations /]
-	[for (anOperation : Operation | aPackage.getOperationExecutionsAll())]
+	[for (anOperation : Operation | aPackage.allOwnedElements()->filter(Operation))]
 	[anOperation.generateOpaqueBehaviorForOperationExecution()/]
 	[/for]
 
@@ -123,6 +123,7 @@ Any [packageName/]::executeActivity(std::shared_ptr<uml::Activity> activity, std
 [/template]
 
 [template public generateMainIncludes(aPackage : Package)]
+//Metamodel includes
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "PSCS/Semantics/Loci/LociFactory.hpp"
 #include "PSCS/Semantics/Loci/CS_Locus.hpp"
@@ -153,38 +154,46 @@ Any [packageName/]::executeActivity(std::shared_ptr<uml::Activity> activity, std
 #include "uml/UmlFactory.hpp"
 
 
-//include Model locus and package
+//Includes of Model locus, package and factory
 #include "[aPackage.generateNamespacePath()/]Exec/[aPackage.getPackageName().toUpperFirst()/]Locus.hpp"
 #include "[aPackage.generateNamespacePath()/]Exec/impl/[aPackage.getPackageName().toUpperFirst()/]LocusImpl.hpp"
-#include "[aPackage.generateNamespacePath()/]/[aPackage.getPackageName().toUpperFirst().concat('Package')/].hpp"
-
 #include "[aPackage.generateNamespacePath()/]/[aPackage.getPackageName().toUpperFirst()/]Factory.hpp"
 #include "[aPackage.generateNamespacePath()/]/[aPackage.getPackageName().toUpperFirst()/]Package.hpp"
 
+//Includes from owner Classes of executed Activities
 [for (act : Activity | aPackage.getUsedActivities()->select(owner.oclIsKindOf(Class)))]
 #include "[act.owner.oclAsType(Classifier).getNearestPackage().generateNamespacePath()/]Exec/[act.owner.oclAsType(Classifier).name.toUpperFirst()/]Object.hpp"
 #include "[act.owner.oclAsType(Classifier).getNearestPackage().generateNamespacePath()/]/[act.owner.oclAsType(Classifier).name.toUpperFirst()/].hpp"
 [/for]
 
+//Includes for packages of executed OpaqueBehaviors
 [for (anotherPackage : Package | aPackage.findPackagesForOpaqueBehaviorExecutions())]
 #include "[anotherPackage.generateNamespacePath()/]/[anotherPackage.getPackageName().toUpperFirst().concat('Package')/].hpp" 
 [/for] 
-[for (pack : Package | aPackage.getCallOperationActions().operation.ownedParameter.type.getNearestPackage()->asSet()->addAll(aPackage.allOwnedElements()->filter(Activity).ownedParameter.type.getNearestPackage()->asSet())->sortedBy(name))]
+
+//Includes for packages of executed Operations
+[for (anotherPackage : Package | aPackage.allOwnedElements()->filter(Operation).getNearestPackage()->asSet())]
+#include "[anotherPackage.generateNamespacePath()/]/[anotherPackage.getPackageName().toUpperFirst().concat('Package')/].hpp" 
+[/for] 
+
+//Includes of packages from parameter types of executed Operations and Activities
+[for (pack : Package | aPackage.allOwnedElements()->filter(Operation).ownedParameter.type.getNearestPackage()->asSet()->addAll(aPackage.allOwnedElements()->filter(Activity).ownedParameter.type.getNearestPackage()->asSet())->sortedBy(name))]
 [if (not (pack.name='StandardProfile'))]
 #include "[pack.generateNamespacePath()/]/[pack.name.concat('Package').toUpperFirst()/].hpp"
 [/if]
 [/for]
-
-//OpaqueBehaviourExecutions
-[aPackage.getCallBehaviorActionsWithOB().generateInclude()/]
-[aPackage.getDecisionNodesWithOB().generateInclude()/]
-[aPackage.getOperationExecutionsAll().generateInclude()/]
-
-[for (typePackage : Package | aPackage.getOperationExecutionsAll().ownedParameter.type->asSet()->reject(supportedTypes())._package->asSet()->reject(isReflectionModel())->sortedBy(qualifiedName))]
+[for (typePackage : Package | aPackage.allOwnedElements()->filter(Operation).ownedParameter.type->asSet()->reject(supportedTypes())._package->asSet()->reject(isReflectionModel())->sortedBy(qualifiedName))]
 #include "[typePackage.generateNamespacePath()/]/[typePackage.getPackageName().toUpperFirst()/]Package.hpp"
 [/for]
 
-[for ( type : Type | aPackage.getOperationExecutionsAll().ownedParameter.type->asSet()->sortedBy(qualifiedName))]
+//Includes of OpaqueBehaviourExecutions
+[aPackage.allOwnedElements()->filter(CallBehaviorAction).behavior->filter(OpaqueBehavior)
+->addAll(aPackage.allOwnedElements()->filter(DecisionNode).decisionInput->filter(OpaqueBehavior))->asOrderedSet().generateInclude()/]
+//Includes of OperationExecutions
+[aPackage.allOwnedElements()->filter(Operation).generateInclude()/]
+
+//Includes from parameter types of executed Operations
+[for ( type : Type | aPackage.allOwnedElements()->filter(Operation).ownedParameter.type->asSet()->sortedBy(qualifiedName))]
 [type.generateTypeInclude(type.getNearestPackage(), aPackage)/]
 [/for]
 [/template]
@@ -227,7 +236,8 @@ m_factory->assignStrategy(PSCS::Semantics::StructuredClassifiers::StructuredClas
 {	/*creating opaque behavior for operation [anOperation.owner.oclAsType(NamedElement).name/]::[anOperation.name/]*/
 	m_[anOperation.getFBPackageElement()/] = uml::UmlFactory::eInstance()->createOpaqueBehavior();
 	m_[anOperation.getFBPackageElement()/]->setName("[anOperation.getFBPackageElement()/]");
-	[anOperation.generatePackageGetterCall()/]->getMethod()->insert([anOperation.generatePackageGetterCall()/]->getMethod()->begin(), m_[anOperation.getFBPackageElement()/]);
+	[comment TODO: Is this the best solution?/]
+	[if (anOperation.method->isEmpty())]//[/if][anOperation.generatePackageGetterCall()/]->getMethod()->insert([anOperation.generatePackageGetterCall()/]->getMethod()->begin(), m_[anOperation.getFBPackageElement()/]);
 	[for (aParameter : Parameter | anOperation.ownedParameter)]
 	{	/*creating parameter [aParameter.name/]*/
 		std::shared_ptr<uml::Parameter> [memberName(aParameter)/](uml::UmlFactory::eInstance()->createParameter_in_Behavior(m_[anOperation.getFBPackageElement()/]));
@@ -430,10 +440,12 @@ m_locus->setFactory(nullptr);
 
 [query public listNumber(aParameter : Parameter, anActivity : Activity) : Integer =  
 	anActivity.ownedParameter->select((direction = ParameterDirectionKind::_out) or (direction = ParameterDirectionKind::_in))->indexOf(aParameter)-1 /]
-
+	
 [query public getOperationExecutionsAll(aPackage : Package) : OrderedSet(Operation) = 
 	getOperationExecutionsPackage()->addAll(getOperationExecutionsCOA())->asSet()->sortedBy(qualifiedName) /]
+
 [query public getOperationExecutionsPackage(aPackage : Package) : OrderedSet(Operation) = 
 	getPackageOperations()->sortedBy(qualifiedName) /]
+
 [query public getOperationExecutionsCOA(aPackage : Package) : OrderedSet(Operation) = 
 	aPackage.allOwnedElements()->filter(CallOperationAction).operation->asOrderedSet()->sortedBy(qualifiedName) /]

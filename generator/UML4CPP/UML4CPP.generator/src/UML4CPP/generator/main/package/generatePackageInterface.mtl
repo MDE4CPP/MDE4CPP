@@ -72,7 +72,7 @@ namespace [subPackage.generateNamespace()/]
 			[(aPackage.getElementsBelongingToPackage()->filter(ConnectorEnd))->asOrderedSet()->sortedBy(myQualifiedName()).generatePackageMemberGetter(false)/]
 
 			//getter for subPackages
-			[for (subPackage : Package | aPackage.ownedElement->filter(Package))]
+			[for (subPackage : Package | aPackage.nestedPackage->sortedBy(name))]
 			[subPackage.generateSubPackageGetter(false)/]
 			[/for]
 

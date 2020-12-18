@@ -53,6 +53,11 @@
 #include "[aPackage.generateNamespacePath()/]/[aPackage.name.toUpperFirst().concat('Factory')/].hpp"
 #include "[aPackage.generateNamespacePath()/]/impl/[aPackage.name.toUpperFirst().concat('PackageImpl')/].hpp"
 #include "[aClass.eClass().ePackage.name/]/[aClass.eClass().name/].hpp"
+[if (aClass.ownedAttribute->select(hasSetter())->select(type.oclIsKindOf(Enumeration))->size() > 0)]
+#include "uml/EnumerationLiteral.hpp"
+[/if]
+
+//Types included from attributes, operation parameters, imports and composite owner classes
 [for (cl : Type | aClass.includes()->sortedBy(myQualifiedName())) ? ( oclIsKindOf(Class) or oclIsKindOf(Interface) or oclIsKindOf(Enumeration))]
 [if (cl.oclIsUndefined() or cl.name.oclIsUndefined())]
 // undefined  [cl.eClass().name/] ([cl.toString()/]) ['class '.concat(aClass.name).concat(': header include failed for undefined ').concat(cl.eClass().name).concat(' ').concat(cl.toString()).registerError()/]
@@ -62,15 +67,25 @@
 #include "[cl.getNearestPackage().generateNamespacePath()/]/[cl.name.toUpperFirst()/].hpp"
 [/if]
 [/for]
+
+//Packges and Factories included from types of attributes, operation parameters, imports and composite owner classes
+[for (typePackage : Package | aClass.includes()->filter(Class).getNearestPackage()->reject(pack : Package | pack = aPackage)->asSet()->sortedBy(myQualifiedName()))]
+#include "[typePackage.generateNamespacePath()/]/[typePackage.name.toUpperFirst().concat('Factory')/].hpp"
+#include "[typePackage.generateNamespacePath()/]/impl/[typePackage.name.toUpperFirst().concat('PackageImpl')/].hpp"
+[/for]
+
+//Packages of included Enumerations
 [for (aPackage : Package | aClass.ownedAttribute->select(type.oclIsKindOf(Enumeration)).type._package->flatten()->reject(pack : Package | pack = aPackage)->sortedBy(name))]
 #include "[aPackage.generateNamespacePath()/]/[aPackage.getPackageName()/]Package.hpp"
 [/for]
 
+//Includes of PluginFramework (if required)
 [if (aClass.ownedOperation.method->notEmpty())][if(ownedOperation.method->filter(Activity)->notEmpty())]
 #include "pluginFramework/PluginFramework.hpp"
 #include "pluginFramework/UMLExecutionModelPlugin.hpp"
 [/if][/if]
 
+//Includes of OpaqueBevaiors (if required)
 [for (aOperation : Operation | aClass.ownedOperation->asOrderedSet()->sortedBy(myQualifiedName()))]
 [if (aOperation.method->notEmpty())]
 [if (aOperation.method->asOrderedSet()->first().oclIsKindOf(OpaqueBehavior))]
@@ -81,9 +96,7 @@
 [aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior)._body->asOrderedSet()->at(index)/]
 [/if][/let][/if][/if][/if][/for]
 
-[if (aClass.ownedAttribute->select(hasSetter())->select(type.oclIsKindOf(Enumeration))->size() > 0)]
-#include "uml/EnumerationLiteral.hpp"
-[/if]
+//Includes from InstanceValues (if required)
 [for (instVal : InstanceValue | aClass.ownedAttribute.defaultValue->reject(oclIsUndefined())->selectByType(InstanceValue)->reject(type.oclIsUndefined() or type.oclIsKindOf(Enumeration))->sortedBy(myQualifiedName()))]
 [if (instVal.type.oclIsUndefined() or instVal.type.name.oclIsUndefined())]
 // undefined type of InstanceValue [instVal.qualifiedName/] ([instVal.type.toString()/]) ['class '.concat(aClass.name).concat(': undefined type of InstanceValue ').concat(instVal.qualifiedName).concat(' (').concat(instVal.type.toString()).registerError()/]
@@ -93,7 +106,7 @@
 [/if]
 [/for]
 
-//Included from Ports typed by interface
+//Includes from Ports typed by interfaces (if required)
 [for (aPort : Port | aClass.ownedAttribute->filter(Port))]
 [if (aPort.type.oclIsTypeOf(Interface))]
 [for (anInterfaceRealization : InterfaceRealization | aPackage.getInterfaceRealizations(aPort.type.oclAsType(Interface)))]
@@ -104,7 +117,7 @@
 [/if]
 [/for]
 
-//Included from roles of ConnectorEnds
+//Includes from roles of ConnectorEnds (if required)
 [for (aConnector : Connector | aClass.ownedConnector)][for (anEnd : ConnectorEnd | aConnector.end)]
 #include "[anEnd.role.type._package.generateNamespacePath()/]/[anEnd.role.type.name.toUpperFirst()/].hpp"
 [/for][/for]

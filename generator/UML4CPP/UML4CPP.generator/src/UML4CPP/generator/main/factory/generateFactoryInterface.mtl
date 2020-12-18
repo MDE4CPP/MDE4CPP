@@ -34,12 +34,18 @@
 #include "[aPackage.generateNamespacePath()/]/[aPackage.name.toUpperFirst().concat('Package')/].hpp"
 
 [comment  Generate Includes for the Factory/]
+[for (forwardDeclPackages : Package| aPackage.collectModelClassesForFactoryDeclaration()._package->asSet()) separator ('\n')]
+namespace [forwardDeclPackages.generateNamespace()/]
+{
+	[for (aClass : Class | aPackage.collectModelClassesForFactoryDeclaration()->select(_package = forwardDeclPackages))]
+	class [aClass.name.toUpperFirst()/];
+	[/for]
+}
+[/for]
+
 [if (not aPackage.ignoreNamespace())]namespace [aPackage.generateNamespace()/] 
 {
 [/if]
-[for (elements : Class| aPackage.collectModelClassesForFactoryDeclaration()) separator ('\n')]
-	class [elements.name.toUpperFirst()/];[/for]
-
 	class [aPackage.name.toUpperFirst().concat('Package')/];
 	class [packageName/];
 

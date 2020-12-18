@@ -67,9 +67,13 @@
 								aPackage.getElementsBelongingToPackage()->selectByKind(Class).ownedElement->filter(InterfaceRealization).supplier.oclAsType(Interface).ownedAttribute.eClass(),
 								aPackage.getElementsBelongingToPackage()->selectByKind(Class).ownedElement->filter(InterfaceRealization).contract.eClass(),
 								aPackage.getElementsBelongingToPackage()->selectByKind(Class).generalization.eClass(),
+								aPackage.getElementsBelongingToPackage()->selectByKind(ConnectorEnd).role->reject(oclIsUndefined()).eClass(),
 								aPackage.getElementsBelongingToPackage()->selectByKind(StructuralFeatureAction).structuralFeature.eClass(),
 								aPackage.getElementsBelongingToPackage()->filter(OpaqueBehavior).ownedParameter->select(not type.oclIsUndefined()).type.eClass(),
-								aPackage.getElementsBelongingToPackage()->filter(InstanceValue).instance.eClass()
+								aPackage.getElementsBelongingToPackage()->filter(InstanceValue).instance.eClass(),
+								aPackage.getElementsBelongingToPackage()->filter(CallOperationAction)->reject(operation.oclIsUndefined()).operation.eClass(),
+								aPackage.getElementsBelongingToPackage()->filter(CallBehaviorAction)->reject(behavior.oclIsUndefined()).behavior.eClass(),
+								aPackage.getElementsBelongingToPackage()->filter(DecisionNode)->reject(decisionInput.oclIsUndefined()).decisionInput.eClass()
 							}->flatten()->sortedBy(name)/]
 
 [template public generatePackageImplSource(aPackage : Package) {packageName : String = aPackage.name.concat('PackageImpl').toUpperFirst();}]
@@ -180,12 +184,12 @@ void [packageName/]::createPackageContents(std::shared_ptr<uml::Package> [aPacka
 
 void [packageName/]::createPackageActivities(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::UmlFactory> factory)
 {
-[for (anActivity : Activity | (aPackage.ownedElement->filter(Activity)->sortedBy(myQualifiedName())))]
+[for (anActivity : Activity | (aPackage.getElementsBelongingToPackage()->filter(Activity)->sortedBy(myQualifiedName())))]
 	createActivity_[anActivity.memberName()/]([aPackage.memberName()/], factory);
 [/for]
 }
 
-[for (anActivity : Activity | (aPackage.ownedElement->filter(Activity)->sortedBy(myQualifiedName())))]
+[for (anActivity : Activity | (aPackage.getElementsBelongingToPackage()->filter(Activity)->sortedBy(myQualifiedName())))]
 void [packageName/]::createActivity_[anActivity.memberName()/](std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::UmlFactory> factory)
 {
 	[anActivity.generateActivityCreation()/]
@@ -262,14 +266,14 @@ void [packageName/]::createPackageEnumerationLiterals(std::shared_ptr<uml::Packa
 
 void [packageName/]::createPackageInstanceSpecifications(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::UmlFactory> factory)
 {
-[for (anInstSpec : InstanceSpecification | aPackage.ownedMember->filter(InstanceSpecification)->sortedBy(myQualifiedName())) separator ('\n')]
+[for (anInstSpec : InstanceSpecification | aPackage.getElementsBelongingToPackage()->filter(InstanceSpecification)->sortedBy(myQualifiedName())) separator ('\n')]
 	[anInstSpec.generateInstanceSpecificationCreation()/]
 [/for]
 }
 
 void [packageName/]::createPackageInterfaceRealizations(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::UmlFactory> factory)
 {
-[for (anInterfaceRealization : InterfaceRealization | aPackage.ownedElement->filter(InterfaceRealization)->sortedBy(myQualifiedName())) separator ('\n')]
+[for (anInterfaceRealization : InterfaceRealization | aPackage.getElementsBelongingToPackage()->filter(InterfaceRealization)->sortedBy(myQualifiedName())) separator ('\n')]
 	[anInterfaceRealization.generateInterfaceRealizationCreation()/]
 [/for]
 }
@@ -304,7 +308,7 @@ void [packageName/]::createPackageStereotypes(std::shared_ptr<uml::Package> [aPa
 
 void [packageName/]::createPackageValueSpecifications(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::UmlFactory> factory)
 {
-[for (aValueSpecification : ValueSpecification | aPackage.ownedElement->filter(ValueSpecification)->reject(owner.oclIsKindOf(Slot))->sortedBy(myQualifiedName()))]
+[for (aValueSpecification : ValueSpecification | aPackage.getElementsBelongingToPackage()->filter(ValueSpecification)->reject(owner.oclIsKindOf(Slot))->sortedBy(myQualifiedName()))]
 	[aValueSpecification.generateValueSpecificationCreation()/]
 [/for]
 }
@@ -328,6 +332,7 @@ void [packageName/]::initializePackageContents(std::shared_ptr<uml::Package> [aP
 	initializePackageInstanceSpecifications();
 	initializePackageInterfaceRealizations();
 	initializePackageInterfaces();
+	initializePackageNestedPackages();
 	initializePackageStereotypes();
 	initializePackageValueSpecifications();
 
@@ -337,12 +342,12 @@ void [packageName/]::initializePackageContents(std::shared_ptr<uml::Package> [aP
 //ActivityNodes and Edges
 void [packageName/]::initializePackageActivities()
 {
-[for (anActivity : Activity | (aPackage.ownedElement->filter(Activity)->sortedBy(myQualifiedName())))]
+[for (anActivity : Activity | (aPackage.getElementsBelongingToPackage()->filter(Activity)->sortedBy(myQualifiedName())))]
 	initializeActivity_[anActivity.memberName()/]();
 [/for]
 }
 
-[for (anActivity : Activity | (aPackage.ownedElement->filter(Activity)->sortedBy(myQualifiedName())))]
+[for (anActivity : Activity | (aPackage.getElementsBelongingToPackage()->filter(Activity)->sortedBy(myQualifiedName())))]
 void [packageName/]::initializeActivity_[anActivity.memberName()/]()
 {
 	[anActivity.generateActivityInitialization()/]
@@ -410,7 +415,7 @@ void [packageName/]::initializePackageDependencies()
 
 void [packageName/]::initializePackageInstanceSpecifications()
 {
-[for (anInstSpec : InstanceSpecification | aPackage.ownedMember->filter(InstanceSpecification)->sortedBy(myQualifiedName()))]
+[for (anInstSpec : InstanceSpecification | aPackage.getElementsBelongingToPackage()->filter(InstanceSpecification)->sortedBy(myQualifiedName()))]
 	[anInstSpec.generateInstanceSpecificationInitialization()/]
 [/for]
 }
@@ -418,7 +423,7 @@ void [packageName/]::initializePackageInstanceSpecifications()
 
 void [packageName/]::initializePackageInterfaceRealizations()
 {
-[for (anInterfaceRealization : InterfaceRealization | aPackage.ownedElement->filter(InterfaceRealization)->sortedBy(myQualifiedName())) separator ('\n')]
+[for (anInterfaceRealization : InterfaceRealization | aPackage.getElementsBelongingToPackage()->filter(InterfaceRealization)->sortedBy(myQualifiedName())) separator ('\n')]
 	[anInterfaceRealization.generateInterfaceRealizationInitialization()/]
 [/for]
 }
@@ -434,10 +439,17 @@ void [packageName/]::initializePackageInterfaces()
 [/if]
 }
 
+void [packageName/]::initializePackageNestedPackages()
+{
+[for (nestedPackage : Package | aPackage.nestedPackage->sortedBy(name))]
+	this->getNestedPackage()->add(get[nestedPackage.name/]_Package());
+[/for]
+}
+
 [comment]Only Stereotypes[/comment]
 void [packageName/]::initializePackageStereotypes()
 {
-[for (aStereotype : Stereotype | aPackage.ownedMember->filter(Stereotype)->sortedBy(myQualifiedName())) separator ('\n')]
+[for (aStereotype : Stereotype | aPackage.ownedElement->filter(Stereotype)->sortedBy(myQualifiedName())) separator ('\n')]
 	[aStereotype.ownedAttribute->sortedBy(myQualifiedName()).generateAttributeInitialization()/]
 	[aStereotype.ownedOperation->sortedBy(myQualifiedName()).generateOperationImplementation()/]
 [/for]
@@ -445,7 +457,7 @@ void [packageName/]::initializePackageStereotypes()
 
 void [packageName/]::initializePackageValueSpecifications()
 {
-[for (aValueSpecification : ValueSpecification | aPackage.ownedElement->filter(ValueSpecification)->reject(owner.oclIsKindOf(Slot))->sortedBy(myQualifiedName())) separator ('\n')]
+[for (aValueSpecification : ValueSpecification | aPackage.getElementsBelongingToPackage()->filter(ValueSpecification)->reject(owner.oclIsKindOf(Slot))->sortedBy(myQualifiedName())) separator ('\n')]
 	[aValueSpecification.generateValueSpecificationInitialization()/]
 [/for]
 }
@@ -454,7 +466,7 @@ void [packageName/]::initializePackageValueSpecifications()
 [(aPackage.getElementsBelongingToPackage()->filter(NamedElement)-aPackage.getElementsBelongingToPackage()->filter(ValueSpecification))->asOrderedSet()->sortedBy(myQualifiedName()).generatePackageMemberGetterImpl()/]
 [(aPackage.getElementsBelongingToPackage()->filter(ConnectorEnd))->asOrderedSet()->sortedBy(myQualifiedName()).generatePackageMemberGetterImpl()/]
 
-[for (subPackage : Package | aPackage.ownedElement->filter(Package)->sortedBy(name))]
+[for (subPackage : Package | aPackage.nestedPackage->sortedBy(name))]
 [subPackage.generateSubPackageGetterImpl(aPackage)/]
 [/for]
 

@@ -37,7 +37,7 @@
 
 [comment  Generate Includes for the Factory/]
 [for (aClass : Class | aPackage.collectModelClassesForFactoryDeclaration())]
-#include "[aPackage.generateNamespacePath()/]/impl/[aClass.name.toUpperFirst().concat('Impl.hpp')/]"
+#include "[aClass.getNearestPackage().generateNamespacePath()/]/impl/[aClass.name.toUpperFirst().concat('Impl.hpp')/]"
 [/for]
 
 [comment] DISABLE INTERFACE IMPLEMENTATION

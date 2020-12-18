@@ -56,6 +56,9 @@
 #include "[includedClass.getNearestPackage().generateNamespacePath()/]/[includedClass.name.toUpperFirst()/].hpp"
 #include "[includedClass.getNearestPackage().generateNamespacePath()/]Exec/[includedClass.objectClassName()/].hpp"
 [/for]
+[for (includedClassPackage : Package | aClassifier.oclAsType(Class).collectCompositeStructureIncludes().getNearestPackage()->reject(pack: Package | pack = aPackage)->asSet())]
+#include "[includedClassPackage.generateNamespacePath()/]/[includedClassPackage.name/]Package.hpp"
+[/for]
 [elseif (aClassifier.oclIsKindOf(Interface))]
 #include "uml/Interface.hpp"
 [/if]
@@ -82,6 +85,8 @@
 #include "uml/Operation.hpp"
 #include "uml/Property.hpp"
 #include "uml/Port.hpp"
+//Root package include
+#include "[aClassifier.getRootPackage().generateNamespacePath()/]/[aClassifier.getRootPackage().name/]Package.hpp"
 //Property Includes
 [for (property : Property | attributes->sortedBy(qualifiedName))]
 [property.type.generateTypeInclude(property.type.getNearestPackage(), aPackage)/]
@@ -221,7 +226,7 @@ std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Object>> [classNa
 [/if]
 		if(ownerUmlValue != nullptr)
 		{
-			std::shared_ptr<[aPackage.generateNamespace()/]::[ownerClass.objectClassName()/]> container[ownerClass.objectClassName()/] = std::dynamic_pointer_cast<[aPackage.generateNamespace()/]::[ownerClass.objectClassName()/]>(this->getLocus()->instantiate([ownerClass.getModelPackage()/][ownerClass.generatePackageGetterCall(ownerClass)/]));
+			std::shared_ptr<[ownerClass.getNearestPackage().generateNamespace()/]::[ownerClass.objectClassName()/]> container[ownerClass.objectClassName()/] = std::dynamic_pointer_cast<[ownerClass.getNearestPackage().generateNamespace()/]::[ownerClass.objectClassName()/]>(this->getLocus()->instantiate([ownerClass.getModelPackage()/][ownerClass.generatePackageGetterCall(ownerClass)/]));
 			container[ownerClass.objectClassName()/]->[ownerClass.UMLValueSetterName()/](ownerUmlValue);
 			directContainers->add(container[ownerClass.objectClassName()/]);
 		}
@@ -239,7 +244,7 @@ std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Link>> [className
 	std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Link>> allLinks(new Bag<PSCS::Semantics::StructuredClassifiers::CS_Link>());
 	
 	//Retrieve all metamodel elements
-	std::shared_ptr<Bag<uml::Element>> modelMembers = [aClassifier.getModelPackage()/]allOwnedElements();
+	std::shared_ptr<Bag<uml::Element>> modelMembers = [aClassifier.getRootPackage().getModelPackage()/]allOwnedElements();
 	std::shared_ptr<Bag<uml::Connector>> connectors(new Bag<uml::Connector>());
 	std::shared_ptr<uml::Port> definingPort = interactionPoint->getDefiningPort();
 	
@@ -309,7 +314,7 @@ std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Link>> [className
 
 std::shared_ptr<Bag<fUML::Semantics::Values::Value>> [className/]::retrieveEndValueAsInteractionPoint(std::shared_ptr<fUML::Semantics::Values::Value> endValue, std::shared_ptr<uml::ConnectorEnd> end)
 {
-[let ends : OrderedSet(ConnectorEnd) = aPackage.collectOppositeConnectorEndsOfType(aClassifier)]
+[let ends : OrderedSet(ConnectorEnd) = aClassifier.getRootPackage().collectOppositeConnectorEndsOfType(aClassifier)]
 [if (ends->size() > 0) ]
 	std::shared_ptr<uml::Class> type = std::dynamic_pointer_cast<uml::Property>(end->getRole())->getClass().lock();
 	std::shared_ptr<uml::Class> portType = std::dynamic_pointer_cast<uml::Class>(end->getRole()->getType());

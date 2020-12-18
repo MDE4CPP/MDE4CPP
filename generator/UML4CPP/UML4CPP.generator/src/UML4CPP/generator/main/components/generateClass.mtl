@@ -31,7 +31,7 @@
 */]
 [query public getCompositePropertiesOfType(owningClass : Class, compositeType : Class) : Set(Property) = owningClass.getAllAttributes()->select(type = compositeType and isComposite and association.oclIsUndefined())->asOrderedSet()->sortedBy(myQualifiedName()) /]
 [query private hasCompositePropertiesOfType(owningClass : Class, compositeType : Class) : Boolean = getCompositePropertiesOfType(compositeType)->size() > 0 /]
-[query public getCompositeOwners(aClass : Class) : Set(Class) = aClass.getNearestPackage().ownedElement->filter(Class)->select(hasCompositePropertiesOfType(aClass))->asOrderedSet()->sortedBy(myQualifiedName())/]
+[query public getCompositeOwners(aClass : Class) : Set(Class) = aClass.getRootPackage().allOwnedElements()->filter(Class)->select(hasCompositePropertiesOfType(aClass))->asOrderedSet()->sortedBy(myQualifiedName())/]
 [query public hasOwnerProperty(aClass : Classifier, ownerClass : Class) : Boolean = (aClass.attribute->select(type = ownerClass)->size() > 0) /]
 [query public getOwnerProperties(aClass : Classifier, ownerClass : Class) : OrderedSet(Property) = aClass.attribute->select(type = ownerClass)->sortedBy(qualifiedName)/]
 
@@ -112,7 +112,7 @@ static const unsigned int [aClass.getMemberName().toUpperCase()/]_OPERATION_COUN
  * - creation of class constraints
 */]
 [template public generateClassCreation(aClass : Class)]
-[aClass.memberName()/] = factory->createClass_in_Package([aClass.ancestors(Package)->first().memberName()/], [aClass._package.name/]Package::[aClass.getMemberName().toUpperCase()/]);
+[aClass.memberName()/] = factory->createClass_in_Package([aClass.ancestors(Package)->first().memberName()/], [aClass._package.generateNamespace()/]::[aClass._package.name/]Package::[aClass.getMemberName().toUpperCase()/]);
 [if (aClass.ownedRule->size() > 0)]
 //constraints
 [for (aConstraint : Constraint | aClass.ownedRule->sortedBy(name)) separator('\n')]

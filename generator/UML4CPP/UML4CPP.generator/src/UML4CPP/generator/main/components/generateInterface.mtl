@@ -37,7 +37,7 @@
  * generate creation of meta model instance for an Interface element
 */]
 [template public generateInterfaceCreation(anInterface : Interface)]
-[anInterface.memberName()/] = factory->createInterface_in_Package([anInterface.ancestors(Package)->first().memberName()/][anInterface.oclAsType(NamedElement).getStaticClassID_Name()/]);
+[anInterface.memberName()/] = factory->createInterface_in_Package([anInterface.ancestors(Package)->first().memberName()/], [anInterface.getNearestPackage().generateNamespace()/]::[anInterface.getNearestPackage().getPackageName()/]Package::[anInterface.getMemberName().toUpperCase()/]);
 
 [/template]
 

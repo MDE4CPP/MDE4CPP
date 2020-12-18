@@ -61,6 +61,14 @@
 [/if]
 [/template]
 
+[template public generateInclude(anOpaqueBehavior : OpaqueBehavior)]
+[if (not anOpaqueBehavior.oclIsUndefined())]
+[if (not anOpaqueBehavior.name.oclIsUndefined())]
+#include "[anOpaqueBehavior.getNearestPackage().generateNamespacePath()/]Exec/[anOpaqueBehavior.generateOpaqueBehaviorExecutionName()/].hpp"
+[/if]
+[/if]
+[/template]
+
 [query public getPackageOpaqueBehaviors(aPackage : Package) : OrderedSet(OpaqueBehavior) = aPackage.getElementsBelongingToPackage()->filter(OpaqueBehavior)->sortedBy(name)/]
 
 [query public getFBPackageElement(aCOA : CallOperationAction) : String = 'ob_'.concat(aCOA.owner.oclAsType(NamedElement).name.replaceAll(' ', '')).concat('_').concat(aCOA.myName().sanitize())/]

@@ -64,7 +64,7 @@ namespace [subPackage.generateNamespace()/]
 			[(aPackage.getElementsBelongingToPackage()->filter(ConnectorEnd))->asOrderedSet()->sortedBy(myQualifiedName()).generatePackageMemberGetter(true)/]
 
 			//getter for subPackages
-			[for (subPackage : Package | aPackage.ownedElement->filter(Package))]
+			[for (subPackage : Package | aPackage.nestedPackage->sortedBy(name))]
 			[subPackage.generateSubPackageGetter(true)/]
 			[/for]
 
@@ -111,6 +111,7 @@ namespace [subPackage.generateNamespace()/]
 			void initializePackageInstanceSpecifications();
 			void initializePackageInterfaceRealizations();
 			void initializePackageInterfaces();
+			void initializePackageNestedPackages();
 			void initializePackageStereotypes();
 			void initializePackageValueSpecifications();
 	};
