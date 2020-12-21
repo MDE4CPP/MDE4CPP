@@ -30,10 +30,10 @@
 [** 
  * queries to read out annotaion values, default source is the annotation 'codeGen' 
 */]
-[query private hasSourceGen(aElement : Element, aSource : String) : Boolean = eAnnotations->select(source = aSource)->notEmpty()/]
-[query private getSourceGen(aElement : Element, aSource : String) : EAnnotation = eAnnotations->select(source = aSource)->first()/]
-[query private hasKey(aElement : Element, aSource : String, aKey:String) : Boolean = if aElement.hasSourceGen(aSource) then aElement.getSourceGen(aSource).details->select(key = aKey)->notEmpty() else false endif /]
-[query public valueKey(aElement : Element, aSource : String, aKey:String) : String = if (hasKey(aSource, aKey)) then aElement.getSourceGen(aSource).details->select(key = aKey)->first().value else '' endif/]
+[query public hasEAnnotation(aElement : Element, aSource : String) : Boolean = eAnnotations->select(source = aSource)->notEmpty()/]
+[query public getEAnnotation(aElement : Element, aSource : String) : EAnnotation = eAnnotations->select(source = aSource)->first()/]
+[query private hasKey(aElement : Element, aSource : String, aKey:String) : Boolean = if aElement.hasEAnnotation(aSource) then aElement.getEAnnotation(aSource).details->select(key = aKey)->notEmpty() else false endif /]
+[query public valueKey(aElement : Element, aSource : String, aKey:String) : String = if (hasKey(aSource, aKey)) then aElement.getEAnnotation(aSource).details->select(key = aKey)->first().value else '' endif/]
 [query public valueKey(aElement : Element, aKey:String) : String = aElement.valueKey(sourceNameCodeGen(), aKey) /]
 
 [**
@@ -53,7 +53,7 @@
 [**
  * queries to check values of prepareApplication annotation keys
 */]
-[query public prepareApplication(aPackage : Package) : Boolean = hasSourceGen(sourceNamePrepareApplication()) /]
+[query public prepareApplication(aPackage : Package) : Boolean = hasEAnnotation(sourceNamePrepareApplication()) /]
 [query public hasMainActivity(aPackage : Package) : Boolean = hasKey(sourceNamePrepareApplication(), keyIsMainActivity()) /]
 [query public getHasMainActivity(aPackage : Package) : String = valueKey(sourceNamePrepareApplication(), keyIsMainActivity()) /]
 [query public isActivityWithMainKeyExisting(aPackage : Package) : Boolean = aPackage.allOwnedElements()->filter(Activity)->select(act : Activity | act.isMainActivity())->size() > 0 /]
