@@ -64,8 +64,8 @@ while ([aParameter.name.toLowerFirst()/]Iter != [aParameter.name.toLowerFirst()/
 [/template]
 
 [template public generateOutgoingParameters(aParameterList : OrderedSet(Parameter))]
-//set return / out parameters
 [for ( par : Parameter | aParameterList->select((direction = ParameterDirectionKind::_out) or (direction = ParameterDirectionKind::return))->sortedBy(name))]
+//Set return/output parameter '[par.name/]'
 [if (par.upper = 1)]
 [par.generateValue(aParameterList, par.name)/]
 [else]
@@ -80,8 +80,8 @@ while ([par.name.toLowerFirst()/]Iter != [par.name.toLowerFirst()/]End)
 [/if]
 [/for]
 
-//set InOut parameters
 [for ( par : Parameter | aParameterList->select(direction = ParameterDirectionKind::inout))]
+//Set InOut parameter '[par.name/]'
 [if (par.upper = 1)]
 [par.generateValue(aParameterList, par.name)/]
 [else]

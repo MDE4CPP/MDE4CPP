@@ -74,7 +74,7 @@
 [query public getFBPackageElement(aCOA : CallOperationAction) : String = 'ob_'.concat(aCOA.owner.oclAsType(NamedElement).name.replaceAll(' ', '')).concat('_').concat(aCOA.myName().sanitize())/]
 
 [query public getDecisionNodesWithOB(aPackage : Package) : OrderedSet(DecisionNode) = OrderedSet{
-		aPackage.getElementsBelongingToPackage()->filter(Activity).getDecisionNodesWithOB()
+		aPackage.allOwnedElements()->filter(Activity).getDecisionNodesWithOB()
 	}->flatten()->reject(decisionInput.oclIsUndefined())->select(decisionInput.oclIsKindOf(OpaqueBehavior))->sortedBy(name)
  /]
 
@@ -85,9 +85,9 @@
 /]
 
 [query public getCallBehaviorActionsWithOB(aPackage : Package) : OrderedSet(CallBehaviorAction) = OrderedSet{
-		aPackage.getElementsBelongingToPackage()->selectByKind(Activity).getCallBehaviorActionsWithOB(),
-		aPackage.getElementsBelongingToPackage()->selectByKind(Activity).allOwnedElements()->selectByKind(ExpansionRegion).node->filter(CallBehaviorAction),
-		aPackage.getElementsBelongingToPackage()->selectByKind(Activity).allOwnedElements()->filter(CallBehaviorAction).behavior->selectByKind(Activity)->reject(oclIsUndefined()).getCallBehaviorActionsWithOB()
+		aPackage.allOwnedElements()->selectByKind(Activity).getCallBehaviorActionsWithOB(),
+		aPackage.allOwnedElements()->selectByKind(Activity).allOwnedElements()->selectByKind(ExpansionRegion).node->filter(CallBehaviorAction),
+		aPackage.allOwnedElements()->selectByKind(Activity).allOwnedElements()->filter(CallBehaviorAction).behavior->selectByKind(Activity)->reject(oclIsUndefined()).getCallBehaviorActionsWithOB()
 	}->flatten()->reject(behavior.oclIsUndefined())->select(behavior.oclIsKindOf(OpaqueBehavior))->sortedBy(name)
 /]
 

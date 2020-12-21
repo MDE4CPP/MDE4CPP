@@ -110,14 +110,14 @@ int main ()
 #include "abstractDataTypes/SubsetUnion.hpp"
 [let mainActivity : Activity = aPackage.getMainActivity()]
 [if (mainActivity.owner.oclIsKindOf(Classifier))]
-#include "[mainActivity.owner.oclAsType(Classifier).namespace.myNamespaceName()/]/[mainActivity.owner.oclAsType(Classifier).name.toUpperFirst()/].hpp"
-#include "[mainActivity.owner.oclAsType(Classifier).namespace.myNamespaceName()/]/[mainActivity.owner.oclAsType(Classifier).namespace.myNamespaceName().toUpperFirst()/]Package.hpp"
-#include "[mainActivity.owner.oclAsType(Classifier).namespace.myNamespaceName()/]/[mainActivity.owner.oclAsType(Classifier).namespace.myNamespaceName().toUpperFirst()/]Factory.hpp"
+#include "[mainActivity.owner.oclAsType(Classifier).getNearestPackage().generateNamespacePath()/]/[mainActivity.owner.oclAsType(Classifier).name.toUpperFirst()/].hpp"
+#include "[mainActivity.owner.oclAsType(Classifier).getNearestPackage().generateNamespacePath()/]/[mainActivity.owner.oclAsType(Classifier).getNearestPackage().getPackageName().toUpperFirst()/]Package.hpp"
+#include "[mainActivity.owner.oclAsType(Classifier).getNearestPackage().generateNamespacePath()/]/[mainActivity.owner.oclAsType(Classifier).getNearestPackage().getPackageName().toUpperFirst()/]Factory.hpp"
 [else]
-#include "[mainActivity.namespace.myNamespaceName()/]/[mainActivity.namespace.myNamespaceName().toUpperFirst()/]Package.hpp"
+#include "[mainActivity.getNearestPackage().generateNamespacePath()/]/[mainActivity.getNearestPackage().getPackageName().toUpperFirst()/]Package.hpp"
 [/if]
 [for ( type : Type | mainActivity.ownedParameter.type->asOrderedSet())]
-#include "[type.getNearestPackage().myNamespaceName()/]/[type.name/].hpp"
+#include "[type.getNearestPackage().generateNamespacePath()/]/[type.name/].hpp"
 [/for]
 #include "pluginFramework/PluginFramework.hpp"
 #include "pluginFramework/UMLExecutionModelPlugin.hpp"
@@ -134,7 +134,7 @@ int main()
     //executing main activity
 	[let mainActivity : Activity = aPackage.getMainActivity()]
 	[mainActivity.generateParameterInstances(aPackage)/]
-	std::shared_ptr<[if (mainActivity.owner.oclIsKindOf(Classifier))][mainActivity.owner.oclAsType(Classifier).name.toUpperFirst()/][else]uml::Element[/if]> element = [if (mainActivity.owner.oclIsKindOf(Classifier))][mainActivity.owner.oclAsType(Classifier).namespace.myNamespaceName()/]::[mainActivity.owner.oclAsType(Classifier).namespace.myNamespaceName().toUpperFirst()/]Factory::eInstance()->create[mainActivity.owner.oclAsType(Classifier).name.toUpperFirst()/]()[else]nullptr[/if];
+	std::shared_ptr<[if (mainActivity.owner.oclIsKindOf(Classifier))][mainActivity.owner.oclAsType(Classifier).generateNamespaceName()/][else]uml::Element[/if]> element = [if (mainActivity.owner.oclIsKindOf(Classifier))][mainActivity.owner.oclAsType(Classifier).generateNamespace()/]::[mainActivity.owner.oclAsType(Classifier).getNearestPackage().getPackageName().toUpperFirst()/]Factory::eInstance()->create[mainActivity.owner.oclAsType(Classifier).name.toUpperFirst()/]()[else]nullptr[/if];
 
 	std::shared_ptr<PluginFramework> pluginFramework = PluginFramework::eInstance();
 	std::string pluginName = "[mainActivity.getRootPackage().getPackageName()/]Exec";

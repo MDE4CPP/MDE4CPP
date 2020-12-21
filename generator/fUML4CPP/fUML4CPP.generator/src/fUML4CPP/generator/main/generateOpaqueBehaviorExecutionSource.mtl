@@ -86,7 +86,7 @@ void [behaviorName/]::setThisExecutionPtr(std::weak_ptr<[behaviorName/]> thisExe
 [if (anOpaqueBehavior.language->includes(keyInclude()))]
 [let index : Integer = anOpaqueBehavior.language->indexOf(keyInclude())]
 [if (0 < index and index <= anOpaqueBehavior._body->size())]
-//Included from function behavior "[anOpaqueBehavior.name/]"
+//Included from opaque behavior "[anOpaqueBehavior.name/]"
 [anOpaqueBehavior._body->at(index)/]
 [/if][/let][/if]
 
@@ -118,11 +118,13 @@ DEBUG_MESSAGE(
 
 [let parameterList : OrderedSet(Parameter) = anOpaqueBehavior.ownedParameter->select(direction = ParameterDirectionKind::_in or direction = ParameterDirectionKind::inout)]
 [for (inPar : Parameter | parameterList)]
+//Retrieve input parameter '[inPar.name/]'
 [inPar.generateIncomingParameter(parameterList->indexOf(inPar)-1)/]
 [/for]
 [/let]
 
 [for (outPar : Parameter | anOpaqueBehavior.ownedParameter->select(p :Parameter | (p.direction = ParameterDirectionKind::out or p.direction = ParameterDirectionKind::return)))]
+//Create output parameter '[outPar.name/]'
 [outPar.generateCppType(false)/] [outPar.name/][if (outPar.upper <> 1)](new Bag<[outPar.type.generateCppType(true)/]>())[/if];
 [/for]	
 

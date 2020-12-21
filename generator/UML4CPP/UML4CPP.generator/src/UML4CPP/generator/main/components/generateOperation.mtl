@@ -138,7 +138,7 @@ virtual [aOperation.generateCppType()/] [aOperation.name/]([for (sParameter : Pa
 [memberName(aOperation)/]->setType([aOperation.type.generatePackageGetterCall(aOperation)/]);
 [/if]
 [for (beh : Behavior | aOperation.method) separator ('\n')]
-[memberName(aOperation)/]->getMethod()->push_back([memberName(beh)/]);[/for]
+[memberName(aOperation)/]->getMethod()->push_back([beh.generatePackageGetterCall(aOperation)/]);[/for]
 
 [for (anOwnedParameter : Parameter | aOperation.ownedParameter) separator ('\n')]
 [anOwnedParameter.generateParameterInitialization()/]

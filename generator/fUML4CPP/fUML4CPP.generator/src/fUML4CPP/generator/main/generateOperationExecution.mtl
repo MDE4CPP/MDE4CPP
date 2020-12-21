@@ -40,7 +40,7 @@ std::shared_ptr<uml::OpaqueBehavior> [anOperation.getFBPackageElement()/](uml::U
 }
 [/for]
 {
-	std::shared_ptr<[anOperation.getNearestPackage().myNamespaceName()/]::[anOperation.generateOperationExecutionName()/]> [memberName(anOperation)/]Execution(new [anOperation.getNearestPackage().myNamespaceName()/]::[anOperation.generateOperationExecutionName()/]());
+	std::shared_ptr<[anOperation.getNearestPackage().generateNamespace()/]::[anOperation.generateOperationExecutionName()/]> [memberName(anOperation)/]Execution(new [anOperation.getNearestPackage().generateNamespace()/]::[anOperation.generateOperationExecutionName()/]());
 	[memberName(anOperation)/]Execution->setThisExecutionPtr([memberName(anOperation)/]Execution);
 	[memberName(anOperation)/]Execution->getTypes()->push_back([anOperation.getFBPackageElement()/]);
 	[memberName(anOperation)/]Execution->setLocus(locus);

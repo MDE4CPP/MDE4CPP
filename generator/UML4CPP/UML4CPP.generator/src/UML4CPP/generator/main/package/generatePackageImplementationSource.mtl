@@ -54,6 +54,8 @@
 								aPackage.getElementsBelongingToPackage()->filter(Element).getAppliedStereotypes().getProfile(), 
 								aPackage.getElementsBelongingToPackage()->filter(InstanceValue).instance.getNearestPackage(), 
 								aPackage.getElementsBelongingToPackage()->filter(Property).association->reject(oclIsUndefined()).getNearestPackage(),
+								aPackage.getElementsBelongingToPackage()->filter(Operation).method->reject(oclIsUndefined()).getNearestPackage(),
+								aPackage.getElementsBelongingToPackage()->filter(Association).memberEnd->reject(oclIsUndefined()).getNearestPackage(),
 								aPackage.member->filter(Element).ownedElement->filter(InterfaceRealization).contract.getNearestPackage(),
 								aPackage.member->filter(Element).ownedElement->filter(Generalization).general.getNearestPackage()
 							}->flatten() /]
@@ -63,10 +65,12 @@
 								aPackage.getElementsBelongingToPackage()->selectByKind(Interface).ownedAttribute->select(not type.oclIsUndefined()).type.eClass(), 
 								aPackage.getElementsBelongingToPackage()->selectByKind(Class).ownedOperation.ownedParameter->select(not type.oclIsUndefined()).type.eClass(),
 								aPackage.getElementsBelongingToPackage()->selectByKind(Class).ownedAttribute->select(not type.oclIsUndefined()).type.eClass(),
+								aPackage.getElementsBelongingToPackage()->selectByKind(Class).ownedOperation.method->reject(oclIsUndefined()).eClass(),
 								aPackage.getElementsBelongingToPackage()->selectByKind(Class).ownedBehavior->filter(OpaqueBehavior).ownedParameter->select(not type.oclIsUndefined()).type.eClass(),
 								aPackage.getElementsBelongingToPackage()->selectByKind(Class).ownedElement->filter(InterfaceRealization).supplier.oclAsType(Interface).ownedAttribute.eClass(),
 								aPackage.getElementsBelongingToPackage()->selectByKind(Class).ownedElement->filter(InterfaceRealization).contract.eClass(),
 								aPackage.getElementsBelongingToPackage()->selectByKind(Class).generalization.eClass(),
+								aPackage.getElementsBelongingToPackage()->selectByKind(Association).memberEnd.eClass(),
 								aPackage.getElementsBelongingToPackage()->selectByKind(ConnectorEnd).role->reject(oclIsUndefined()).eClass(),
 								aPackage.getElementsBelongingToPackage()->selectByKind(StructuralFeatureAction).structuralFeature.eClass(),
 								aPackage.getElementsBelongingToPackage()->filter(OpaqueBehavior).ownedParameter->select(not type.oclIsUndefined()).type.eClass(),
@@ -223,11 +227,7 @@ void [packageName/]::createPackageClasses(std::shared_ptr<uml::Package> [aPackag
 	[anOperation.generateOperationCreation()/]
 	[/for] 
 	[for (aOpaqueBehavior : OpaqueBehavior | aClass.ownedElement->filter(OpaqueBehavior)->sortedBy(myQualifiedName())) before ('    // '.concat(aClass.name).concat(' opaque behaviors\n'))  separator('\n')]
-	[if (aOpaqueBehavior.oclIsKindOf(FunctionBehavior))]
-	[aOpaqueBehavior.oclAsType(FunctionBehavior).generateFunctionBehaviorCreation()/]
-	[else]
 	[aOpaqueBehavior.generateOpaqueBehaviorCreation()/]
-	[/if]
 	[/for]
 [/for]
 

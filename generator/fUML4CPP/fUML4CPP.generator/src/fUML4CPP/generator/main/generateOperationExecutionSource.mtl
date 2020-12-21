@@ -115,11 +115,13 @@ DEBUG_MESSAGE(
 
 [let parameterList : OrderedSet(Parameter) = anOperation.ownedParameter->select(direction = ParameterDirectionKind::_in or direction = ParameterDirectionKind::inout)]
 [for (inPar : Parameter | parameterList)]
+//Retrieve input parameter '[inPar.name/]'
 [inPar.generateIncomingParameter(parameterList->indexOf(inPar)-1)/]
 [/for]
 [/let]
 
 [for (outPar : Parameter | anOperation.ownedParameter->select(p :Parameter | (p.direction = ParameterDirectionKind::out)))]
+//Create output parameter '[outPar.name/]'
 [outPar.generateCppType(false)/] [outPar.name/][if (outPar.upper <> 1)](new Bag<[outPar.type.generateCppType(true)/]>())[/if];
 [/for]	
 
