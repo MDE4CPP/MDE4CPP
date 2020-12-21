@@ -15,6 +15,7 @@
 [module generateModelLocusSource('http://www.eclipse.org/uml2/5.0.0/UML')]
  
 [import fUML4CPP::generator::main::parameterHelper /]
+[import fUML4CPP::generator::main::fUMLKeywords /]
 [import UML4CPP::generator::main::components::generateType /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
@@ -46,7 +47,7 @@ originalName : String = aPackage.generateNamespacePath();
 [if (classPackage.isReflectionModel())]
 #include "[classPackage.generateNamespacePath()/]/[classPackage.name.toUpperFirst()/]Package.hpp"
 [/if]
-[for (aClass : Class | classPackage.ownedElement->filter(Class)->reject(c : Class | c.oclIsKindOf(Behavior) or c.isAbstract)->sortedBy(myQualifiedName()))]
+[for (aClass : Class | classPackage.ownedElement->filter(Class)->reject(c : Class | c.oclIsKindOf(Behavior) or c.isAbstract)->reject(hasEAnnotation(sourceNoExecution()))->sortedBy(myQualifiedName()))]
 #include "[aClass.getNearestPackage().generateNamespacePath()/]/[aClass.name.toUpperFirst()/].hpp"
 #include "[if (classPackage.isReflectionModel())][aPackage.generateNamespacePath()/][else][classPackage.generateNamespacePath()/][/if]Exec/[aClass.name.toUpperFirst()/]Object.hpp"
 [/for]
@@ -79,7 +80,7 @@ std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> [upperName/]Locu
 	{		
 		switch(type->getMetaElementID())
 		{
-[for (aClass : Class | classPackage.ownedElement->filter(Class)->reject(c : Class | c.oclIsKindOf(Behavior) or c.isAbstract)->sortedBy(myQualifiedName())) separator('\n')]
+[for (aClass : Class | classPackage.ownedElement->filter(Class)->reject(c : Class | c.oclIsKindOf(Behavior) or c.isAbstract)->reject(hasEAnnotation(sourceNoExecution()))->sortedBy(myQualifiedName())) separator('\n')]
 [let className : String = aClass.name.toUpperFirst()]
 			case [packageNamespace/]::[classPackage.name.toUpperFirst()/]Package::[aClass.getMemberName().toUpperCase()/]:
 			{

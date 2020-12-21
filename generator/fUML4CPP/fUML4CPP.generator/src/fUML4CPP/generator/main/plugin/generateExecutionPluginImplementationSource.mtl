@@ -18,6 +18,7 @@
 [import fUML4CPP::generator::main::generateOperationExecution /]
 [import fUML4CPP::generator::main::parameterHelper /]
 [import fUML4CPP::generator::main::fUMLCollectionHelper /]
+[import fUML4CPP::generator::main::fUMLKeywords /]
 [import UML4CPP::generator::main::components::generateType /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
@@ -89,12 +90,12 @@ void [packageName/]::initialize()
 	[generateExecutionPluginInitialization()/]
 
 	[comment create opaque behavior executions for operations /]
-	[for (anOperation : Operation | aPackage.allOwnedElements()->filter(Operation))]
+	[for (anOperation : Operation | aPackage.allOwnedElements()->filter(Operation)->reject(hasEAnnotation(sourceNoExecution())))]
 	[anOperation.generateOpaqueBehaviorForOperationExecution()/]
 	[/for]
 
 	[comment create opaque behavior executions for opaque behaviors in the model that are executed either by a call behavior action or by a desicion node/]
-	[for (anOpaqueBehavior : OpaqueBehavior | aPackage.collectAllExecutedOpaqueBehaviors())]
+	[for (anOpaqueBehavior : OpaqueBehavior | aPackage.collectAllExecutedOpaqueBehaviors()->reject(hasEAnnotation(sourceNoExecution())))]
 	[anOpaqueBehavior.generateOpaqueBehaviorExecution()/]
 	[/for]
 	[/if]
@@ -188,9 +189,9 @@ Any [packageName/]::executeActivity(std::shared_ptr<uml::Activity> activity, std
 
 //Includes of OpaqueBehaviourExecutions
 [aPackage.allOwnedElements()->filter(CallBehaviorAction).behavior->filter(OpaqueBehavior)
-->addAll(aPackage.allOwnedElements()->filter(DecisionNode).decisionInput->filter(OpaqueBehavior))->asOrderedSet().generateInclude()/]
+->addAll(aPackage.allOwnedElements()->filter(DecisionNode).decisionInput->filter(OpaqueBehavior))->reject(hasEAnnotation(sourceNoExecution()))->asOrderedSet().generateInclude()/]
 //Includes of OperationExecutions
-[aPackage.allOwnedElements()->filter(Operation).generateInclude()/]
+[aPackage.allOwnedElements()->filter(Operation)->reject(hasEAnnotation(sourceNoExecution())).generateInclude()/]
 
 //Includes from parameter types of executed Operations
 [for ( type : Type | aPackage.allOwnedElements()->filter(Operation).ownedParameter.type->asSet()->sortedBy(qualifiedName))]

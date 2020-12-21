@@ -17,6 +17,7 @@
 [import fUML4CPP::generator::main::generateOpaqueBehaviorExecution /]
 [import fUML4CPP::generator::main::generateOperationExecution /]
 [import fUML4CPP::generator::main::parameterHelper /]
+[import fUML4CPP::generator::main::fUMLKeywords /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
@@ -217,17 +218,17 @@ task clean {
 
 [template private generatePackageSourceFilesToCompile(aPackage : Package, packOnly : Boolean, isRoot : Boolean)]
 #ClassifierObject classes for Package [aPackage.generateNamespace()/]
-[for (aClassifier : Classifier | getClassifiersForObjectClasses()->sortedBy(name))]
+[for (aClassifier : Classifier | getClassifiersForObjectClasses()->reject(hasEAnnotation(sourceNoExecution()))->sortedBy(name))]
 [if(not isRoot)]../[aPackage.generateNamespacePath()/]Exec/[/if][aClassifier.name.toUpperFirst()/]Object.cpp
 [/for]
 [if (not packOnly)]
 #OpaqueBehaviorExecution classes for Package [aPackage.generateNamespace()/]
-[for (anOpaqueBehavior : OpaqueBehavior | aPackage.getPackageOpaqueBehaviors())]
+[for (anOpaqueBehavior : OpaqueBehavior | aPackage.getPackageOpaqueBehaviors()->reject(hasEAnnotation(sourceNoExecution()))->sortedBy(name))]
 [if(not isRoot)]../[aPackage.generateNamespacePath()/]Exec/[/if][anOpaqueBehavior.generateOpaqueBehaviorExecutionName()/].cpp
 [/for]
 #OperationExecution classes for Package [aPackage.generateNamespace()/]
 [for (anOperation : Operation | aPackage.getPackageOperations()->sortedBy(name))]
-[if(not isRoot)]../[aPackage.generateNamespacePath()/]Exec/[/if][anOperation.generateOperationExecutionName()/].cpp
+[if(not isRoot)]../[aPackage.generateNamespacePath()/]Exec/[/if][anOperation.generateOperationExecutionName()->reject(hasEAnnotation(sourceNoExecution()))->sortedBy(name)/].cpp
 [/for]
 [/if]
 [for (subPackage : Package | aPackage.ownedElement->filter(Package))]

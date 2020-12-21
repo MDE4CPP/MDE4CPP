@@ -30,10 +30,12 @@
 [import fUML4CPP::generator::main::parameterHelper /]
 [import fUML4CPP::generator::main::plugin::generateExecutionPlugin /]
 [import fUML4CPP::generator::main::fUMLCollectionHelper /]
+[import fUML4CPP::generator::main::fUMLKeywords /]
 [import UML4CPP::generator::main::generate /]
 [import UML4CPP::generator::main::configuration::generateGradleFiles /]
 [import UML4CPP::generator::main::validation::validateModel /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
+[import UML4CPP::generator::main::helpers::generalHelper /]
 
 [template public generateFUML(aPackage : uml::Package)]
 [comment @main/]
@@ -57,7 +59,7 @@
 
 [template public generateFUMLModel(aPackage : Package)]
 //generate execution for OpaqueBehaviors
-[for (anOpaqueBehavior : OpaqueBehavior | aPackage.getPackageOpaqueBehaviors())]
+[for (anOpaqueBehavior : OpaqueBehavior | aPackage.getPackageOpaqueBehaviors()->reject(hasEAnnotation(sourceNoExecution())))]
 [anOpaqueBehavior.generateOpaqueBehaviorExecutionHeader(aPackage)/]
 [anOpaqueBehavior.generateOpaqueBehaviorExecutionSource(aPackage)/]
 [/for]
@@ -67,12 +69,16 @@
 [aPackage.collectAllPossiblyCalledOperations().generateOperationExecutionHeader(aPackage)/]
 [aPackage.collectAllPossiblyCalledOperations().generateOperationExecutionSource(aPackage)/]
 [/comment]
-[aPackage.getPackageOperations().generateOperationExecutionHeader(aPackage)/]
-[aPackage.getPackageOperations().generateOperationExecutionSource(aPackage)/]
+[for (anOperation : Operation | aPackage.getPackageOperations()->reject(hasEAnnotation(sourceNoExecution())))]
+[anOperation.generateOperationExecutionHeader(aPackage)/]
+[anOperation.generateOperationExecutionSource(aPackage)/]
+[/for]
 
 //generate execution classifier
-[aPackage.getClassifiersForObjectClasses().generateClassifierObjectHeader(aPackage)/]
-[aPackage.getClassifiersForObjectClasses().generateClassifierObjectSource(aPackage)/]
+[for (aClassifier : Classifier | aPackage.getClassifiersForObjectClasses()->reject(hasEAnnotation(sourceNoExecution())))]
+[aClassifier.generateClassifierObjectHeader(aPackage)/]
+[aClassifier.generateClassifierObjectSource(aPackage)/]
+[/for]
 
 [comment Generate execution plugin, model locus, CMakeLists and Gradle-Files only for root package /]
 [if (aPackage.getSuperPackage().oclIsUndefined())]
