@@ -130,6 +130,7 @@ lower bound of connected parts</body>
   <packagedElement xmi:type="uml:Association" xmi:id="_kQiBsO9AEemWP7t7cfH8xA" name="R" memberEnd="_H2VW4FPmEeqC--0EaeaESg _zmRnkFiGEeq745ruafyE3Q"/>
   <packagedElement xmi:type="uml:Class" xmi:id="_AX6AEFgQEeqZPe2oHCHy2Q" name="Tester">
     <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_6vTt8FgREeqZPe2oHCHy2Q" name="fbTestAEmptyPattern" specification="_N16ycFgSEeqZPe2oHCHy2Q">
+      <ownedParameter xmi:id="_l0sBgERbEeupAptt1hjWPg" name="aEmptyPattern" type="_z6HwQO9BEemWP7t7cfH8xA"/>
       <language>CPP</language>
       <language>INCLUDE</language>
       <body>std::cout&lt;&lt;&quot;-- Instantiation of A_Empty_Pattern --&quot;&lt;&lt;std::endl;&#xD;
@@ -169,7 +170,9 @@ getchar();</body>
 #include &quot;AssemblyConnectors_PWP_P/IImplementation.hpp&quot;</body>
     </ownedBehavior>
     <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_-aF9oFgREeqZPe2oHCHy2Q" name="fbTestAUnconnectedPattern" specification="_1_Kt0FgTEeqZPe2oHCHy2Q">
+      <ownedParameter xmi:id="_mV4DAERbEeupAptt1hjWPg" name="aUnconnectedPattern" type="_bfcP8FIvEeq4WpdDJnu9kg"/>
       <language>CPP</language>
+      <language>INCLUDE</language>
       <body>std::string compareString = &quot;\tpartB[0]->p[0]   partC[0]\n\tpartB[0]->p[0]   partC[1]\n\tpartB[0]->p[0]   partC[2]\n\n\tpartB[0]->p[1]   partC[0]\n\tpartB[0]->p[1]   partC[1]\n\tpartB[0]->p[1]   partC[2]\n\n\tpartB[1]->p[0]   partC[0]\n\tpartB[1]->p[0]   partC[1]\n\tpartB[1]->p[0]   partC[2]\n\n\tpartB[1]->p[1]   partC[0]\n\tpartB[1]->p[1]   partC[1]\n\tpartB[1]->p[1]   partC[2]\n\n&quot;;&#xD;
 &#xD;
 std::cout&lt;&lt;&quot;-- Instantiation of A_Unconnected_Pattern --&quot;&lt;&lt;std::endl;&#xD;
@@ -253,9 +256,14 @@ std::cout&lt;&lt;&quot;Instantiation was successful : &quot;&lt;&lt;std::boolalp
 std::cout&lt;&lt;&quot;-- Instantiation of A_Unconnected_Pattern --&quot;&lt;&lt;std::endl;&#xD;
 std::cout&lt;&lt;&quot;Press Enter for next pattern...&quot;;&#xD;
 getchar();</body>
+      <body>#include &quot;AssemblyConnectors_PWP_P/B.hpp&quot;&#xD;
+#include &quot;AssemblyConnectors_PWP_P/C.hpp&quot;&#xD;
+#include &quot;AssemblyConnectors_PWP_P/IImplementation.hpp&quot;</body>
     </ownedBehavior>
     <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_CeMFMFgSEeqZPe2oHCHy2Q" name="fbTestAArrayPattern" specification="_-PQ7wFgTEeqZPe2oHCHy2Q">
+      <ownedParameter xmi:id="_m8kPkERbEeupAptt1hjWPg" name="aArrayPattern" type="_rZJ6oFIvEeq4WpdDJnu9kg"/>
       <language>CPP</language>
+      <language>INCLUDE</language>
       <body>std::string compareString = &quot;\tpartB[0]->p[0]&lt;->partC[0]\n\tpartB[0]->p[0]   partC[1]\n\tpartB[0]->p[0]   partC[2]\n\tpartB[0]->p[0]   partC[3]\n\n\tpartB[0]->p[1]   partC[0]\n\tpartB[0]->p[1]&lt;->partC[1]\n\tpartB[0]->p[1]   partC[2]\n\tpartB[0]->p[1]   partC[3]\n\n\tpartB[1]->p[0]   partC[0]\n\tpartB[1]->p[0]   partC[1]\n\tpartB[1]->p[0]&lt;->partC[2]\n\tpartB[1]->p[0]   partC[3]\n\n\tpartB[1]->p[1]   partC[0]\n\tpartB[1]->p[1]   partC[1]\n\tpartB[1]->p[1]   partC[2]\n\tpartB[1]->p[1]&lt;->partC[3]\n\n&quot;;&#xD;
 &#xD;
 std::cout&lt;&lt;&quot;-- Instantiation of A_Array_Pattern --&quot;&lt;&lt;std::endl;&#xD;
@@ -339,9 +347,14 @@ std::cout&lt;&lt;&quot;Instantiation was successful : &quot;&lt;&lt;std::boolalp
 std::cout&lt;&lt;&quot;-- Instantiation of A_Array_Pattern --&quot;&lt;&lt;std::endl;&#xD;
 std::cout&lt;&lt;&quot;Press Enter for next pattern...&quot;;&#xD;
 getchar();</body>
+      <body>#include &quot;AssemblyConnectors_PWP_P/B.hpp&quot;&#xD;
+#include &quot;AssemblyConnectors_PWP_P/C.hpp&quot;&#xD;
+#include &quot;AssemblyConnectors_PWP_P/IImplementation.hpp&quot;</body>
     </ownedBehavior>
     <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_EXuZsFgSEeqZPe2oHCHy2Q" name="fbTestAStarPattern" specification="_HVXkoFgUEeqZPe2oHCHy2Q">
+      <ownedParameter xmi:id="_nitCgERbEeupAptt1hjWPg" name="aStarPattern" type="__fogsFIvEeq4WpdDJnu9kg"/>
       <language>CPP</language>
+      <language>INCLUDE</language>
       <body>std::string compareString = &quot;\tpartB[0]->p[0]&lt;->partC[0]\n\tpartB[0]->p[0]&lt;->partC[1]\n\tpartB[0]->p[0]&lt;->partC[2]\n\tpartB[0]->p[0]&lt;->partC[3]\n\tpartB[0]->p[0]&lt;->partC[4]\n\n\tpartB[0]->p[1]&lt;->partC[0]\n\tpartB[0]->p[1]&lt;->partC[1]\n\tpartB[0]->p[1]&lt;->partC[2]\n\tpartB[0]->p[1]&lt;->partC[3]\n\tpartB[0]->p[1]&lt;->partC[4]\n\n\tpartB[1]->p[0]&lt;->partC[0]\n\tpartB[1]->p[0]&lt;->partC[1]\n\tpartB[1]->p[0]&lt;->partC[2]\n\tpartB[1]->p[0]&lt;->partC[3]\n\tpartB[1]->p[0]&lt;->partC[4]\n\n\tpartB[1]->p[1]&lt;->partC[0]\n\tpartB[1]->p[1]&lt;->partC[1]\n\tpartB[1]->p[1]&lt;->partC[2]\n\tpartB[1]->p[1]&lt;->partC[3]\n\tpartB[1]->p[1]&lt;->partC[4]\n\n&quot;;&#xD;
 &#xD;
 std::cout&lt;&lt;&quot;-- Instantiation of A_Star_Pattern --&quot;&lt;&lt;std::endl;&#xD;
@@ -425,6 +438,9 @@ std::cout&lt;&lt;&quot;Instantiation was successful : &quot;&lt;&lt;std::boolalp
 std::cout&lt;&lt;&quot;-- Instantiation of A_Star_Pattern --&quot;&lt;&lt;std::endl;&#xD;
 std::cout&lt;&lt;&quot;Press Enter for next pattern...&quot;;&#xD;
 getchar();</body>
+      <body>#include &quot;AssemblyConnectors_PWP_P/B.hpp&quot;&#xD;
+#include &quot;AssemblyConnectors_PWP_P/C.hpp&quot;&#xD;
+#include &quot;AssemblyConnectors_PWP_P/IImplementation.hpp&quot;</body>
     </ownedBehavior>
     <ownedBehavior xmi:type="uml:Activity" xmi:id="_ZquKsI4fEeqm_eVeNYUZww" name="actRunTestCase" specification="_XhX4kI4fEeqm_eVeNYUZww" node="_AipBEI4hEeqm_eVeNYUZww _BxW28I4hEeqm_eVeNYUZww _Ho8VYI4hEeqm_eVeNYUZww _QiH8kI4hEeqm_eVeNYUZww _YneTEI4hEeqm_eVeNYUZww _gWsokI4hEeqm_eVeNYUZww _mqIVgI4hEeqm_eVeNYUZww _wQOtEI4hEeqm_eVeNYUZww _7w6iAI4hEeqm_eVeNYUZww _EzlcYI4iEeqm_eVeNYUZww">
       <edge xmi:type="uml:ControlFlow" xmi:id="_F98MII4hEeqm_eVeNYUZww" target="_BxW28I4hEeqm_eVeNYUZww" source="_AipBEI4hEeqm_eVeNYUZww">

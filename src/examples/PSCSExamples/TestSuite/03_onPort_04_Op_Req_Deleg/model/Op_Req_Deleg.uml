@@ -75,6 +75,7 @@ If the operation call is forwarded outside of the port's owner following appropr
     <ownedAttribute xmi:id="_igG84HlsEeqsJ5V89htlww" name="iImpl" type="_iTKigHlrEeqsJ5V89htlww" association="_U4ZxEHlsEeqsJ5V89htlww"/>
     <interfaceRealization xmi:id="_znkCgHlrEeqsJ5V89htlww" name="I_Realization" client="_yXXl8HlrEeqsJ5V89htlww" supplier="_MV1IgHlrEeqsJ5V89htlww" contract="_MV1IgHlrEeqsJ5V89htlww"/>
     <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_H4HxoHlsEeqsJ5V89htlww" name="fbAssignP" specification="_7WrqUHlrEeqsJ5V89htlww">
+      <eAnnotations xmi:id="_mEiCEERgEeupAptt1hjWPg" source="noExecution"/>
       <ownedParameter xmi:id="_KDMiEHlsEeqsJ5V89htlww" name="_p">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
       </ownedParameter>

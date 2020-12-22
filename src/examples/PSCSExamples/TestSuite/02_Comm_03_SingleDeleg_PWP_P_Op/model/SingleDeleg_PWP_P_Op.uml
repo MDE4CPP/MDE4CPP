@@ -25,6 +25,7 @@ If the operation call is forwarded, c::a::b::p must be equal to 4.</body>
     <ownedAttribute xmi:id="_WcGU8HN4EeqRednEYw10kw" name="y" type="_GnAWcHN2EeqRednEYw10kw" association="_kQiBsO9AEemWP7t7cfH8xA"/>
     <interfaceRealization xmi:id="_q--1EHN2EeqRednEYw10kw" name="IRealization" client="_cIY0QHN2EeqRednEYw10kw" supplier="_1v85wHN1EeqRednEYw10kw" contract="_1v85wHN1EeqRednEYw10kw"/>
     <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_EYNHIHN3EeqRednEYw10kw" name="assignP" specification="_xvii4HN2EeqRednEYw10kw">
+      <eAnnotations xmi:id="_3wGzUERdEeupAptt1hjWPg" source="noExecution"/>
       <ownedParameter xmi:id="_MJ13cHN3EeqRednEYw10kw" name="v">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
       </ownedParameter>
@@ -32,6 +33,7 @@ If the operation call is forwarded, c::a::b::p must be equal to 4.</body>
       <body>this->setP(v);</body>
     </ownedBehavior>
     <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_aqhD4HN9EeqRednEYw10kw" name="printP" specification="_vgBTIHN9EeqRednEYw10kw">
+      <eAnnotations xmi:id="_6abrkERdEeupAptt1hjWPg" source="noExecution"/>
       <language>CPP</language>
       <body>std::cout&lt;&lt;&quot;Operation call delegated: &quot;&lt;&lt;(getP() ==  4)&lt;&lt;std::endl;</body>
     </ownedBehavior>

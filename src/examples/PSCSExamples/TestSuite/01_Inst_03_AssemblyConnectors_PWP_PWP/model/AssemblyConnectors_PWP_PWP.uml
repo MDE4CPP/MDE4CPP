@@ -134,6 +134,7 @@ lower bound of connected parts</body>
   <packagedElement xmi:type="uml:Association" xmi:id="_kQiBsO9AEemWP7t7cfH8xA" name="R" memberEnd="_1rdqEFiUEeq745ruafyE3Q _7Bt9EFiUEeq745ruafyE3Q"/>
   <packagedElement xmi:type="uml:Class" xmi:id="_AX6AEFgQEeqZPe2oHCHy2Q" name="Tester">
     <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_6vTt8FgREeqZPe2oHCHy2Q" name="fbTestAEmptyPattern" specification="_N16ycFgSEeqZPe2oHCHy2Q">
+      <ownedParameter xmi:id="_sRiF8ERXEeupAptt1hjWPg" name="aEmptyPattern" type="_z6HwQO9BEemWP7t7cfH8xA"/>
       <language>CPP</language>
       <language>INCLUDE</language>
       <body>std::cout&lt;&lt;&quot;-- Instantiation of A_Empty_Pattern --&quot;&lt;&lt;std::endl;&#xD;
@@ -179,7 +180,9 @@ getchar();</body>
 #include &quot;AssemblyConnectors_PWP_PWP/IImplementation.hpp&quot;</body>
     </ownedBehavior>
     <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_-aF9oFgREeqZPe2oHCHy2Q" name="fbTestAUnconnectedPattern" specification="_1_Kt0FgTEeqZPe2oHCHy2Q">
+      <ownedParameter xmi:id="_tA8wsERXEeupAptt1hjWPg" name="aUnconnectedPattern" type="_bfcP8FIvEeq4WpdDJnu9kg"/>
       <language>CPP</language>
+      <language>INCLUDE</language>
       <body>std::string compareString = &quot;\tpartB[0]->p[0]   partC[0]->q[0]\n\tpartB[0]->p[0]   partC[1]->q[0]\n\tpartB[0]->p[0]   partC[2]->q[0]\n\n\tpartB[0]->p[1]   partC[0]->q[0]\n\tpartB[0]->p[1]   partC[1]->q[0]\n\tpartB[0]->p[1]   partC[2]->q[0]\n\n\n\tpartB[1]->p[0]   partC[0]->q[0]\n\tpartB[1]->p[0]   partC[1]->q[0]\n\tpartB[1]->p[0]   partC[2]->q[0]\n\n\tpartB[1]->p[1]   partC[0]->q[0]\n\tpartB[1]->p[1]   partC[1]->q[0]\n\tpartB[1]->p[1]   partC[2]->q[0]\n\n\n&quot;;&#xD;
 &#xD;
 std::cout&lt;&lt;&quot;-- Instantiation of A_Unconnected_Pattern --&quot;&lt;&lt;std::endl;&#xD;
@@ -273,9 +276,14 @@ std::cout&lt;&lt;&quot;Instantiation was successful : &quot;&lt;&lt;std::boolalp
 std::cout&lt;&lt;&quot;-- Instantiation of A_Unconnected_Pattern --&quot;&lt;&lt;std::endl;&#xD;
 std::cout&lt;&lt;&quot;Press Enter for next pattern...&quot;;&#xD;
 getchar();</body>
+      <body>#include &quot;AssemblyConnectors_PWP_PWP/B.hpp&quot;&#xD;
+#include &quot;AssemblyConnectors_PWP_PWP/C.hpp&quot;&#xD;
+#include &quot;AssemblyConnectors_PWP_PWP/IImplementation.hpp&quot;</body>
     </ownedBehavior>
     <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_CeMFMFgSEeqZPe2oHCHy2Q" name="fbTestAArrayPattern" specification="_-PQ7wFgTEeqZPe2oHCHy2Q">
+      <ownedParameter xmi:id="_t0NZoERXEeupAptt1hjWPg" name="aArrayPattern" type="_rZJ6oFIvEeq4WpdDJnu9kg"/>
       <language>CPP</language>
+      <language>INCLUDE</language>
       <body>std::string compareString = &quot;\tpartB[0]->p[0]&lt;->partC[0]->q[0]\n\tpartB[0]->p[0]   partC[1]->q[0]\n\tpartB[0]->p[0]   partC[2]->q[0]\n\tpartB[0]->p[0]   partC[3]->q[0]\n\n\tpartB[0]->p[1]   partC[0]->q[0]\n\tpartB[0]->p[1]&lt;->partC[1]->q[0]\n\tpartB[0]->p[1]   partC[2]->q[0]\n\tpartB[0]->p[1]   partC[3]->q[0]\n\n\n\tpartB[1]->p[0]   partC[0]->q[0]\n\tpartB[1]->p[0]   partC[1]->q[0]\n\tpartB[1]->p[0]&lt;->partC[2]->q[0]\n\tpartB[1]->p[0]   partC[3]->q[0]\n\n\tpartB[1]->p[1]   partC[0]->q[0]\n\tpartB[1]->p[1]   partC[1]->q[0]\n\tpartB[1]->p[1]   partC[2]->q[0]\n\tpartB[1]->p[1]&lt;->partC[3]->q[0]\n\n&quot;;&#xD;
 &#xD;
 std::cout&lt;&lt;&quot;-- Instantiation of A_Array_Pattern --&quot;&lt;&lt;std::endl;&#xD;
@@ -369,9 +377,14 @@ std::cout&lt;&lt;&quot;Instantiation was successful : &quot;&lt;&lt;std::boolalp
 std::cout&lt;&lt;&quot;-- Instantiation of A_Array_Pattern --&quot;&lt;&lt;std::endl;&#xD;
 std::cout&lt;&lt;&quot;Press Enter for next pattern...&quot;;&#xD;
 getchar();</body>
+      <body>#include &quot;AssemblyConnectors_PWP_PWP/B.hpp&quot;&#xD;
+#include &quot;AssemblyConnectors_PWP_PWP/C.hpp&quot;&#xD;
+#include &quot;AssemblyConnectors_PWP_PWP/IImplementation.hpp&quot;</body>
     </ownedBehavior>
     <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_EXuZsFgSEeqZPe2oHCHy2Q" name="fbTestAStarPattern" specification="_HVXkoFgUEeqZPe2oHCHy2Q">
+      <ownedParameter xmi:id="_uduQsERXEeupAptt1hjWPg" name="aStarPattern" type="__fogsFIvEeq4WpdDJnu9kg"/>
       <language>CPP</language>
+      <language>INCLUDE</language>
       <body>std::string compareString = &quot;\tpartB[0]->p[0]&lt;->partC[0]->q[0]\n\tpartB[0]->p[0]&lt;->partC[1]->q[0]\n\tpartB[0]->p[0]&lt;->partC[2]->q[0]\n\tpartB[0]->p[0]&lt;->partC[3]->q[0]\n\tpartB[0]->p[0]&lt;->partC[4]->q[0]\n\n\tpartB[0]->p[1]&lt;->partC[0]->q[0]\n\tpartB[0]->p[1]&lt;->partC[1]->q[0]\n\tpartB[0]->p[1]&lt;->partC[2]->q[0]\n\tpartB[0]->p[1]&lt;->partC[3]->q[0]\n\tpartB[0]->p[1]&lt;->partC[4]->q[0]\n\n\n\tpartB[1]->p[0]&lt;->partC[0]->q[0]\n\tpartB[1]->p[0]&lt;->partC[1]->q[0]\n\tpartB[1]->p[0]&lt;->partC[2]->q[0]\n\tpartB[1]->p[0]&lt;->partC[3]->q[0]\n\tpartB[1]->p[0]&lt;->partC[4]->q[0]\n\n\tpartB[1]->p[1]&lt;->partC[0]->q[0]\n\tpartB[1]->p[1]&lt;->partC[1]->q[0]\n\tpartB[1]->p[1]&lt;->partC[2]->q[0]\n\tpartB[1]->p[1]&lt;->partC[3]->q[0]\n\tpartB[1]->p[1]&lt;->partC[4]->q[0]\n\n&quot;;&#xD;
 &#xD;
 std::cout&lt;&lt;&quot;-- Instantiation of A_Star_Pattern --&quot;&lt;&lt;std::endl;&#xD;
@@ -465,6 +478,9 @@ std::cout&lt;&lt;&quot;Instantiation was successful : &quot;&lt;&lt;std::boolalp
 std::cout&lt;&lt;&quot;-- Instantiation of A_Star_Pattern --&quot;&lt;&lt;std::endl;&#xD;
 std::cout&lt;&lt;&quot;Press Enter for next pattern...&quot;;&#xD;
 getchar();</body>
+      <body>#include &quot;AssemblyConnectors_PWP_PWP/B.hpp&quot;&#xD;
+#include &quot;AssemblyConnectors_PWP_PWP/C.hpp&quot;&#xD;
+#include &quot;AssemblyConnectors_PWP_PWP/IImplementation.hpp&quot;</body>
     </ownedBehavior>
     <ownedBehavior xmi:type="uml:Activity" xmi:id="_UUUpkI4mEeqm_eVeNYUZww" name="actRunTestCase" specification="_SmTokI4mEeqm_eVeNYUZww" node="_MWHncI4nEeqm_eVeNYUZww _Nx0JYI4nEeqm_eVeNYUZww _S8h6wI4nEeqm_eVeNYUZww _YZLJoI4nEeqm_eVeNYUZww _e4SiII4nEeqm_eVeNYUZww _nYEK0I4nEeqm_eVeNYUZww _sVJI0I4nEeqm_eVeNYUZww _101WYI4nEeqm_eVeNYUZww _9Yi_cI4nEeqm_eVeNYUZww _FayXkI4oEeqm_eVeNYUZww">
       <edge xmi:type="uml:ControlFlow" xmi:id="_QQhAcI4nEeqm_eVeNYUZww" target="_Nx0JYI4nEeqm_eVeNYUZww" source="_MWHncI4nEeqm_eVeNYUZww">
