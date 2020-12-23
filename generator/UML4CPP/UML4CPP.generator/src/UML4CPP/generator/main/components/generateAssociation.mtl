@@ -38,6 +38,6 @@
 [/for]
 [/comment]
 [for (memberEnd : Property | anAssociation.memberEnd)]
-[anAssociation.memberName()/]->getMemberEnd()->add([memberEnd.memberName()/]);
+[anAssociation.memberName()/]->getMemberEnd()->add([memberEnd.generatePackageGetterCall(anAssociation)/]);
 [/for]
 [/template]

@@ -17,12 +17,12 @@
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
 [template public generateExecutionPluginInterfaceSource(anPackage : Package) {packageName : String = anPackage.name.concat('ExecPlugin').toUpperFirst(); }]
-[file  (anPackage.getPackageName().concat('Exec/').concat(packageName).concat('.cpp'), false, 'UTF-8')]
+[file  (anPackage.generateNamespacePath().concat('Exec/').concat(packageName).concat('.cpp'), false, 'UTF-8')]
 
-#include "[anPackage.getPackageName()/]Exec/[packageName/].hpp"
-#include "[anPackage.getPackageName()/]Exec/impl/[packageName.concat('Impl')/].hpp"
+#include "[anPackage.generateNamespacePath()/]Exec/[packageName/].hpp"
+#include "[anPackage.generateNamespacePath()/]Exec/impl/[packageName.concat('Impl')/].hpp"
 
-using namespace [anPackage.name/];
+using namespace [anPackage.generateNamespace()/];
 
 //static initialisation
 std::shared_ptr<MDE4CPPPlugin> [packageName/]::instance;

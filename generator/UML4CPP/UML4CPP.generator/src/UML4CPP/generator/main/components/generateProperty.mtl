@@ -174,7 +174,7 @@ void [aClass.name.toUpperFirst()/]Impl::set[compositeOwnerClass.name.toUpperFirs
 [aProperty.memberName()/]->setIsConjugated([aProperty.oclAsType(Port).isConjugated/]);
 [/if]
 [aProperty.memberName()/]->setVisibility(uml::VisibilityKind::[aProperty.visibility.toString().toUpperCase()/]);
-[if (not aProperty.association.oclIsUndefined())][aProperty.memberName()/]->setAssociation([memberName(aProperty.association)/]);[/if]
+[if (not aProperty.association.oclIsUndefined())][aProperty.memberName()/]->setAssociation([aProperty.association.generatePackageGetterCall(aProperty)/]);[/if]
 [if (not aProperty.defaultValue.oclIsUndefined())][aProperty.memberName()/]->setDefaultValue([memberName(aProperty.defaultValue)/]);[/if]
 [aProperty.generateStereotypeApplication()/]
 [/template]
@@ -202,5 +202,5 @@ void [aClass.name.toUpperFirst()/]Impl::set[compositeOwnerClass.name.toUpperFirs
 [/template]
 
 [template public genDefault(aProperty : Property) ? (aProperty.type.oclIsKindOf(Enumeration))]
-[aProperty.type.getNearestPackage().myNamespaceName()/]::[aProperty.type.name/]::[aProperty.default.toUpper()/] /*defined default value*/
+[aProperty.type.getNearestPackage().generateNamespace()/]::[aProperty.type.name/]::[aProperty.default.toUpper()/] /*defined default value*/
 [/template]

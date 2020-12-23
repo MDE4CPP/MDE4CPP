@@ -17,6 +17,7 @@
 [import fUML4CPP::generator::main::generateOpaqueBehaviorExecution /]
 [import fUML4CPP::generator::main::generateOperationExecution /]
 [import fUML4CPP::generator::main::parameterHelper /]
+[import fUML4CPP::generator::main::fUMLKeywords /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
@@ -27,7 +28,7 @@
 [/template]
 
 [template private generateCMakeLists(aPackage : Package, packageOnly : Boolean) { packageName : String = getPackageName(); execPackageName : String = getPackageName().concat('Exec'); }]
-[file (aPackage.getPackageName().concat('Exec/').concat('CMakeLists.txt'), false, 'UTF-8')]
+[file (aPackage.generateNamespacePath().concat('Exec/').concat('CMakeLists.txt'), false, 'UTF-8')]
 #############################################################################
 #																			#
 #		 			CMakeList created by fUML4CPP Generator					# 
@@ -54,33 +55,16 @@ SET(CMAKE_CXX_FLAGS_RELEASE " -O3 -DNDEBUG")
 
 string(REPLACE "\\" "/" MDE4CPP_HOME $ENV{MDE4CPP_HOME})
 
-[if (packageOnly)]
 SET(SOURCE_FILES
-[for (aClassifier : Classifier | getClassifiersForPackageOnly()->sortedBy(name))]
-	[aClassifier.name.toUpperFirst()/]Object.cpp
-[/for]
+	#Model Execution Plugin
 	[aPackage.name.concat('ExecPlugin.cpp')/]
 	['impl/'.concat(aPackage.name).concat('ExecPluginImpl.cpp')/]
-)
-[else]
-SET(SOURCE_FILES
-[for (aDecisionNode : DecisionNode | aPackage.getDecisionNodesWithOB())]
-	[aDecisionNode.generateOpaqueBehaviorExecutionName()/].cpp
-[/for]
-[for (aCBA : CallBehaviorAction | aPackage.getCallBehaviorActionsWithOB())]
-	[aCBA.generateOpaqueBehaviorExecutionName()/].cpp
-[/for]
-[for (anOperation : Operation | aPackage.getPackageOperations()->sortedBy(name))]
-	[anOperation.generateOperationExecutionName()/].cpp
-[/for]
-[for (aClassifier : Classifier | getClassifiersForObjectClasses()->sortedBy(name))]
-	[aClassifier.name.toUpperFirst()/]Object.cpp
-[/for]
+	[if (not packageOnly)]
+	# Model Execution Locus
 	impl/[aPackage.name.toUpperFirst()/]LocusImpl.cpp
-	[aPackage.name.concat('ExecPlugin.cpp')/]
-	['impl/'.concat(aPackage.name).concat('ExecPluginImpl.cpp')/]
+	[/if]
+	[aPackage.generatePackageSourceFilesToCompile(packageOnly, true)/]
 )
-[/if]
 
 INCLUDE_DIRECTORIES(
     ../
@@ -232,6 +216,26 @@ task clean {
 [/file]
 [/template]
 
+[template private generatePackageSourceFilesToCompile(aPackage : Package, packOnly : Boolean, isRoot : Boolean)]
+#ClassifierObject classes for Package [aPackage.generateNamespace()/]
+[for (aClassifier : Classifier | getClassifiersForObjectClasses()->reject(hasEAnnotation(sourceNoExecution()))->sortedBy(name))]
+[if(not isRoot)]../[aPackage.generateNamespacePath()/]Exec/[/if][aClassifier.name.toUpperFirst()/]Object.cpp
+[/for]
+[if (not packOnly)]
+#OpaqueBehaviorExecution classes for Package [aPackage.generateNamespace()/]
+[for (anOpaqueBehavior : OpaqueBehavior | aPackage.getPackageOpaqueBehaviors()->reject(hasEAnnotation(sourceNoExecution()))->sortedBy(name))]
+[if(not isRoot)]../[aPackage.generateNamespacePath()/]Exec/[/if][anOpaqueBehavior.generateOpaqueBehaviorExecutionName()/].cpp
+[/for]
+#OperationExecution classes for Package [aPackage.generateNamespace()/]
+[for (anOperation : Operation | aPackage.getPackageOperations()->sortedBy(name))]
+[if(not isRoot)]../[aPackage.generateNamespacePath()/]Exec/[/if][anOperation.generateOperationExecutionName()->reject(hasEAnnotation(sourceNoExecution()))->sortedBy(name)/].cpp
+[/for]
+[/if]
+[for (subPackage : Package | aPackage.ownedElement->filter(Package))]
+[subPackage.generatePackageSourceFilesToCompile(packOnly, false)/]
+[/for]
+[/template]
+
 [template private generateCMakeFindLibraryCommands(aPackage : Package, ending : String, folderName : String)]
 IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
 	[generateCMakeFindLibraryCommand(aPackage, ending, folderName, true)/]
@@ -241,7 +245,7 @@ ENDIF()
 [/template]
 
 [template private generateCMakeFindLibraryCommand(aPackage : Package, ending : String, folderName : String, debugMode : Boolean)]
-[for (packName : String | aPackage.metaModelLibrariesNames())]
+[for (packName : String | aPackage.metaModelLibrariesNames()->reject(name : String | aPackage.getAllSubPackageNames()->includes(name)))]
 FIND_LIBRARY([packName.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/] [packName/][libraryNameSuffix(debugMode)/][ending/] ${MDE4CPP_HOME}/application/[folderName/])
 [if (OrderedSet{'ecore', 'uml', 'fUML', 'PSCS', 'ecoreReflection', 'primitivetypesReflection', aPackage.getPackageName()}->excludes(packName))]
 FIND_LIBRARY([packName.toUpperCase()/]EXEC_[libraryVariableNameSuffix(debugMode)/] [packName/]Exec[libraryNameSuffix(debugMode)/][ending/] ${MDE4CPP_HOME}/application/[folderName/])
@@ -251,7 +255,7 @@ FIND_LIBRARY([packName.toUpperCase()/]EXEC_[libraryVariableNameSuffix(debugMode)
 
 [template private generateLibraryLinking(aPackage : Package, debugMode : Boolean)]
 TARGET_LINK_LIBRARIES(${PROJECT_NAME}
-[for (packName : String | aPackage.metaModelLibrariesNames())]
+[for (packName : String | aPackage.metaModelLibrariesNames()->reject(name : String | aPackage.getAllSubPackageNames()->includes(name)))]
 	[buildModeCMakeProperty(debugMode)/] ${[packName.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/]}
 	[if (OrderedSet{'ecore', 'uml', 'fUML', 'PSCS', 'ecoreReflection', 'primitivetypesReflection', aPackage.getPackageName()}->excludes(packName))]
 	[buildModeCMakeProperty(debugMode)/] ${[packName.toUpperCase()/]EXEC_[libraryVariableNameSuffix(debugMode)/]}

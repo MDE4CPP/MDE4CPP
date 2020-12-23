@@ -22,12 +22,13 @@
 [import UML4CPP::generator::main::components::generateNamedElement /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
+[import UML4CPP::generator::main::helpers::collectionHelper /]
 
 [template public generatePackageImplHeader(aPackage : Package) {packageName : String = aPackage.name.concat('PackageImpl').toUpperFirst();}]
-[file (aPackage.getPackageName().concat('/impl/').concat(aPackage.name.toUpperFirst()).concat('PackageImpl.hpp'), false, 'UTF-8')]
+[file (aPackage.generateNamespacePath().concat('/impl/').concat(aPackage.name.toUpperFirst()).concat('PackageImpl.hpp'), false, 'UTF-8')]
 [startGuard(aPackage,'MetaModelPackageImpl')/]
 
-#include "[aPackage.getPackageName()/]/[aPackage.name.concat('Package').toUpperFirst()/].hpp"
+#include "[aPackage.generateNamespacePath()/]/[aPackage.name.concat('Package').toUpperFirst()/].hpp"
 #include "uml/impl/[aPackage.eClass().name /]Impl.hpp"
 
 namespace uml
@@ -38,7 +39,14 @@ namespace uml
 	class UmlFactory;
 }
 
-[if (not aPackage.ignoreNamespace())]namespace [aPackage.name/]
+[for (subPackage : Package| aPackage.ownedElement->filter(Package)->sortedBy(name)) separator ('\n')]
+namespace [subPackage.generateNamespace()/] 
+{
+	class [subPackage.name/]Package;
+}
+[/for]
+
+[if (not aPackage.ignoreNamespace())]namespace [aPackage.generateNamespace()/]
 {
 [/if]
 	class [packageName/] : virtual public uml::[aPackage.eClass().name /]Impl, virtual public [aPackage.name.toUpperFirst().concat('Package')/]
@@ -52,14 +60,18 @@ namespace uml
 			virtual ~[packageName/]();
 
 			//getter for the ownedMember
-			[(aPackage.allOwnedElements()->filter(NamedElement)-aPackage.allOwnedElements()->filter(ValueSpecification))->sortedBy(myQualifiedName()).generatePackageMemberGetter(true)/]
-			[(aPackage.allOwnedElements()->filter(ConnectorEnd))->sortedBy(myQualifiedName()).generatePackageMemberGetter(true)/]
+			[(aPackage.getElementsBelongingToPackage()->filter(NamedElement)-aPackage.getElementsBelongingToPackage()->filter(ValueSpecification))->asOrderedSet()->sortedBy(myQualifiedName()).generatePackageMemberGetter(true)/]
+			[(aPackage.getElementsBelongingToPackage()->filter(ConnectorEnd))->asOrderedSet()->sortedBy(myQualifiedName()).generatePackageMemberGetter(true)/]
+
+			//getter for subPackages
+			[for (subPackage : Package | aPackage.nestedPackage->sortedBy(name))]
+			[subPackage.generateSubPackageGetter(true)/]
+			[/for]
 
 		private:
 			//private variables for ownedMember of the metamodel package
-			[comment [(aPackage.allOwnedElements()->filter(NamedElement))->reject(owner.oclIsKindOf(Slot))->sortedBy(myQualifiedName()).generatePackageMember()/]
-			[(aPackage.allOwnedElements()->filter(NamedElement))->reject(owner.oclIsKindOf(Slot))->sortedBy(myQualifiedName()).generatePackageMember()/]
-			[(aPackage.allOwnedElements()->filter(ConnectorEnd))->reject(owner.oclIsKindOf(Slot))->sortedBy(myQualifiedName()).generatePackageMember()/]
+			[(aPackage.getElementsBelongingToPackage()->filter(NamedElement))->reject(owner.oclIsKindOf(Slot))->sortedBy(myQualifiedName()).generatePackageMember()/]
+			[(aPackage.getElementsBelongingToPackage()->filter(ConnectorEnd))->sortedBy(myQualifiedName()).generatePackageMember()/]
 
 			static [aPackage.name.concat('Package').toUpperFirst()/]* create();
 			static bool isInited;
@@ -99,6 +111,7 @@ namespace uml
 			void initializePackageInstanceSpecifications();
 			void initializePackageInterfaceRealizations();
 			void initializePackageInterfaces();
+			void initializePackageNestedPackages();
 			void initializePackageStereotypes();
 			void initializePackageValueSpecifications();
 	};

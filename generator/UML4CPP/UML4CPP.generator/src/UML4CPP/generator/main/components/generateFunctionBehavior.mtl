@@ -31,18 +31,11 @@
 */]
 [template public generateOpaqueBehaviorCreation(aOpaqueBehavior : OpaqueBehavior)]
 [if (aOpaqueBehavior.owner = aOpaqueBehavior._package)]
-[aOpaqueBehavior.memberName()/] = factory->createOpaqueBehavior_in_Package([aOpaqueBehavior._package.memberName()/]);
+[aOpaqueBehavior.memberName()/] = factory->create[if(aOpaqueBehavior.oclIsKindOf(FunctionBehavior))]FunctionBehavior[else]OpaqueBehavior[/if]_in_Package([aOpaqueBehavior._package.memberName()/]);
 [else]
-[aOpaqueBehavior.memberName()/] = factory->createOpaqueBehavior_in_BehavioredClassifier([aOpaqueBehavior.owner.oclAsType(NamedElement).memberName()/]);
+[aOpaqueBehavior.memberName()/] = factory->create[if(aOpaqueBehavior.oclIsKindOf(FunctionBehavior))]FunctionBehavior[else]OpaqueBehavior[/if]_in_BehavioredClassifier([aOpaqueBehavior.owner.oclAsType(NamedElement).memberName()/]);
 [/if]
 [for (aParameter : Parameter | aOpaqueBehavior.ownedParameter) separator ('\n')]
-[aParameter.generateParameterCreation()/]
-[/for]
-[/template]
-
-[template public generateFunctionBehaviorCreation(aFunctionBehavior : FunctionBehavior)]
-[aFunctionBehavior.memberName()/] = factory->createFunctionBehavior_in_BehavioredClassifier([aFunctionBehavior.owner.oclAsType(NamedElement).memberName()/]);
-[for (aParameter : Parameter | aFunctionBehavior.ownedParameter) separator ('\n')]
 [aParameter.generateParameterCreation()/]
 [/for]
 [/template]

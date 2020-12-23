@@ -30,7 +30,7 @@
 [import UML4CPP::generator::main::validation::validateModel /]
 
 [template public generateImplementationHeader(aClass : Class) {className : String = aClass.name.toUpperFirst().concat('Impl'); aPackage : Package = aClass.ancestors()->filter(Package)->first()}]
-[file (aPackage.getPackageName().concat('/impl/').concat(className).concat('.hpp'), false, 'UTF-8')]
+[file (aPackage.generateNamespacePath().concat('/impl/').concat(className).concat('.hpp'), false, 'UTF-8')]
 [startGuard(className)/]
 
 #include <functional>
@@ -41,7 +41,7 @@
 [if (sClass.oclIsUndefined() or sClass.name.oclIsUndefined())]
 // undefined superclass [sClass.toString()/]['class: '.concat(aClass.name).concat('Impl: undefined superclass: ').concat(sClass.toString()).registerError()/]
 [else]
-#include "[sClass.getNearestPackage().getPackageName()/]/impl/[sClass.name.toUpperFirst()/]Impl.hpp"
+#include "[sClass.getNearestPackage().generateNamespacePath()/]/impl/[sClass.name.toUpperFirst()/]Impl.hpp"
 [/if]
 [/for]
 [if (aClass.superClass->isEmpty())]
@@ -61,7 +61,7 @@ namespace uml
 }
 
 //*********************************
-[if (not aPackage.ignoreNamespace())]namespace [aPackage.name/]
+[if (not aPackage.ignoreNamespace())]namespace [aPackage.generateNamespace()/]
 {
 [/if]
 	class [className/] [for (sClass : Class | aClass.superClass->reject(oclIsUndefined() and name.oclIsUndefined())) before (':') separator (',')]
@@ -155,7 +155,7 @@ virtual public [sClass.getClassifierName(aClass, ignoreNamespace(sClass))/]Impl[
 [if (sClassifier.oclIsUndefined() or sClassifier.name.oclIsUndefined())]
 // undefined superclass [sClassifier.toString()/]['class: '.concat(aInterface.name).concat('Impl: undefined superclass: ').concat(sClassifier.toString()).registerError()/]
 [else]
-#include "[sClassifier.getNearestPackage().getPackageName()/]/impl/[sClassifier.name.toUpperFirst()/]Impl.hpp"
+#include "[sClassifier.getNearestPackage().generateNamespacePath()/]/impl/[sClassifier.name.toUpperFirst()/]Impl.hpp"
 [/if]
 [/for]
 [if (aInterface.generalization->isEmpty())]
@@ -175,7 +175,7 @@ namespace uml
 }
 
 //*********************************
-[if (not aPackage.ignoreNamespace())]namespace [aPackage.name/]
+[if (not aPackage.ignoreNamespace())]namespace [aPackage.generateNamespace()/]
 {
 [/if]
 	class [interfaceName/] [for (sClassifier : Classifier | aInterface.generalization.general->reject(oclIsUndefined() and name.oclIsUndefined())) before (':') separator (',')]

@@ -24,11 +24,11 @@
 [import UML4CPP::generator::main::helpers::singletonHelper /]
 
 [template public generatePackageInterfaceSource(aPackage : Package) {packageName : String = aPackage.name.concat('Package').toUpperFirst(); }]
-[file (aPackage.getPackageName().concat('/').concat(packageName).concat('.cpp'), false, 'UTF-8')]
-#include "[aPackage.getPackageName()/]/[packageName/].hpp"
-#include "[aPackage.getPackageName()/]/impl/[packageName.concat('Impl')/].hpp"
+[file (aPackage.generateNamespacePath().concat('/').concat(packageName).concat('.cpp'), false, 'UTF-8')]
+#include "[aPackage.generateNamespacePath()/]/[packageName/].hpp"
+#include "[aPackage.generateNamespacePath()/]/impl/[packageName.concat('Impl')/].hpp"
 
-[if (not aPackage.ignoreNamespace())]using namespace [aPackage.name/];[/if]
+[if (not aPackage.ignoreNamespace())]using namespace [aPackage.generateNamespace()/];[/if]
 
 //static initialisation
 const std::string [packageName/]::eNAME ="[aPackage.name/]";

@@ -50,14 +50,29 @@
 [query private myGeneralName(anElement : NamedElement) : String = if (oclIsUndefined()) then handleUndefinedElement() else if (anElement.qualifiedName.oclIsUndefined() or anElement.qualifiedName='' ) then owner.myOwnerName().concat('_').concat(anElement.eClass().name).concat(anElement.owner.allOwnedElements()->asOrderedSet()->indexOf(anElement).toString()) else anElement.qualifiedName endif endif /]
 [query public myQualifiedName (aConnectorEnd : ConnectorEnd) : String = if oclIsUndefined() then handleUndefinedElement() else (aConnectorEnd.owner.oclAsType(NamedElement).qualifiedName.concat('_ConnectorEnd_').concat(aConnectorEnd.definingEnd.memberName())).sanitize() endif /]
 
+
+[query public getSuperPackage(aPackage : Package) : Package = if((not owner.oclIsUndefined()) and (owner.oclIsKindOf(Package))) then owner.oclAsType(Package) else null endif /]
+[query public getAllSubPackageNames(aPackage : Package) : OrderedSet(String) = aPackage.allOwnedElements()->selectByKind(Package).name->asOrderedSet()/]
+[query public getRootPackage(aPackage : Package) : Package = if aPackage.getSuperPackage().oclIsUndefined() then aPackage else aPackage.getSuperPackage().getRootPackage() endif /]
+[query public getRootPackage(anElement : Element) : Package = anElement.getNearestPackage().getRootPackage() /]
+
 [**
- * generate package namespaces
+ * generate package namespace names
 */]
-[query private getSuperPackage(aPackage : Package) : Package = if((not owner.oclIsUndefined()) and (owner.oclIsKindOf(Package))) then owner else null endif /]
-[query private getRootPackageName(aPackage : Package, ignoreRoot : Boolean) : String = if (ignoreRoot) then '' else aPackage.name endif /]
-[query private getNamespace(aPackage : Package, separator : String, ignoreRoot : Boolean) : String = if(aPackage.getSuperPackage().oclIsUndefined()) then getRootPackageName(ignoreRoot) else aPackage.getSuperPackage().getNamespace(separator, ignoreRoot).concat(separator).concat(aPackage.name) endif/]
-[query public generateNamespacePath(aPackage : Package) : String = getNamespace('/', false) /]
-[query public generateNamespace(aPackage : Package) : String = getNamespace('::', false) /]
+[query public generateNamespace(aPackage : Package) : String = getNamespace(false) /]
+[query public generateNamespace(aClassifier : Classifier) : String = aClassifier.getNearestPackage().getNamespace(false) /]
+[query public generateNamespaceName(aClassifier : Classifier) : String = generateNamespace().concat('::').concat(aClassifier.name.toUpperFirst())/]
+[query private getNamespace(aPackage : Package, ignoreRoot : Boolean) : String = if(aPackage.getSuperPackage().oclIsUndefined()) then getRootPackageNamespaceName(ignoreRoot) else aPackage.getSuperPackage().getNamespace(ignoreRoot).concat('::').concat(aPackage.name) endif/]
+[query private getRootPackageNamespaceName(aPackage : Package, ignoreRoot : Boolean) : String = if (ignoreRoot) then '' else aPackage.name endif /]
+
+[**
+ * generate package namespace paths
+*/]
+[query private getRootPackageName(aPackage : Package, ignoreRoot : Boolean) : String = if (ignoreRoot) then '' else aPackage.getPackageName() endif /]
+[query private getNamespacePath(aPackage : Package, ignoreRoot : Boolean) : String = if(aPackage.getSuperPackage().oclIsUndefined()) then getRootPackageName(ignoreRoot) else aPackage.getSuperPackage().getNamespacePath(ignoreRoot).concat('/').concat(aPackage.name) endif/]
+[query public generateNamespacePath(aPackage : Package) : String = getNamespacePath(false) /]
+[query public generateNamespacePathWithoutRoot(aPackage : Package) : String = aPackage.getNamespacePath(true).substring(2)/] [comment first char is '/', which should be removed, index starts at 1 /] 
+
 
 [**
  *  queries to determinate name of NamedElement elements
@@ -95,7 +110,7 @@
  * if namespaces are equal, namespace is not necessary and is not generated
  * if flag 'ignoreNamespace' is true, namespace is also not generated 
 */]
-[query public getClassifierName(aClassifier : Classifier, base: Classifier, ignoreNamespace : Boolean) : String = if (aClassifier.namespace.myNamespaceName() = base.namespace.myNamespaceName() or ignoreNamespace) then aClassifier.name.toUpperFirst() else aClassifier.namespace.myNamespaceName().concat('::').concat(aClassifier.name.toUpperFirst()) endif/]
+[query public getClassifierName(aClassifier : Classifier, base: Classifier, ignoreNamespace : Boolean) : String = if (aClassifier.namespace.myNamespaceName() = base.namespace.myNamespaceName() or ignoreNamespace) then aClassifier.name.toUpperFirst() else aClassifier.owner.oclAsType(Package).generateNamespace().concat('::').concat(aClassifier.name.toUpperFirst()) endif/]
 
 [**
  *  generate substring of a qualified name, name is made up of parameter type names

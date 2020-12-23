@@ -15,6 +15,7 @@
 [module generateModelLocusSource('http://www.eclipse.org/uml2/5.0.0/UML')]
  
 [import fUML4CPP::generator::main::parameterHelper /]
+[import fUML4CPP::generator::main::fUMLKeywords /]
 [import UML4CPP::generator::main::components::generateType /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
@@ -28,7 +29,7 @@
 [template public generateModelLocusSource(aPackage : Package) 
 {
 upperName : String = aPackage.getPackageName().sanitize().toUpperFirst(); 
-originalName : String = aPackage.getPackageName();
+originalName : String = aPackage.generateNamespacePath();
 }]
 
 [file (originalName.concat('Exec/impl/') + upperName.concat('LocusImpl.cpp'), false, 'UTF-8')]
@@ -41,19 +42,19 @@ originalName : String = aPackage.getPackageName();
 #include "uml/Class.hpp"
 
 [for (classPackage : Package | aPackage.getClassPackagesOfCreateObjectAction())]
-#include "[classPackage.myNamespaceName()/]/[classPackage.name.toUpperFirst()/]Factory.hpp"
-#include "[classPackage.myNamespaceName()/]/[classPackage.name.toUpperFirst()/]Package.hpp"
+#include "[classPackage.generateNamespacePath()/]/[classPackage.name.toUpperFirst()/]Factory.hpp"
+#include "[classPackage.generateNamespacePath()/]/[classPackage.name.toUpperFirst()/]Package.hpp"
 [if (classPackage.isReflectionModel())]
-#include "[classPackage.getPackageName()/]/[classPackage.name.toUpperFirst()/]Package.hpp"
+#include "[classPackage.generateNamespacePath()/]/[classPackage.name.toUpperFirst()/]Package.hpp"
 [/if]
-[for (aClass : Class | classPackage.ownedElement->filter(Class)->reject(c : Class | c.oclIsKindOf(Behavior) or c.isAbstract)->sortedBy(myQualifiedName()))]
-#include "[aClass.getNearestPackage().myNamespaceName()/]/[aClass.name.toUpperFirst()/].hpp"
-#include "[if (classPackage.isReflectionModel())][originalName/][else][classPackage.getPackageName()/][/if]Exec/[aClass.name.toUpperFirst()/]Object.hpp"
+[for (aClass : Class | classPackage.ownedElement->filter(Class)->reject(c : Class | c.oclIsKindOf(Behavior) or c.isAbstract)->reject(hasEAnnotation(sourceNoExecution()))->sortedBy(myQualifiedName()))]
+#include "[aClass.getNearestPackage().generateNamespacePath()/]/[aClass.name.toUpperFirst()/].hpp"
+#include "[if (classPackage.isReflectionModel())][aPackage.generateNamespacePath()/][else][classPackage.generateNamespacePath()/][/if]Exec/[aClass.name.toUpperFirst()/]Object.hpp"
 [/for]
 [/for]
 
 
-using namespace [originalName/];
+using namespace [aPackage.generateNamespace()/];
 
 //*********************************
 // Constructor / Destructor
@@ -74,18 +75,18 @@ std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> [upperName/]Locu
 [if (packageList->size() > 0)]
 	std::shared_ptr<uml::Package> typePackage = type->getPackage().lock();
 [for (classPackage : Package | packageList)]
-[let packageName : String = classPackage.myNamespaceName()]
-	if (typePackage == [classPackage.name/]::[classPackage.name.toUpperFirst()/]Package::eInstance())
+[let packageNamespace : String = classPackage.generateNamespace()]
+	if (typePackage == [packageNamespace/]::[classPackage.name.toUpperFirst()/]Package::eInstance())
 	{		
 		switch(type->getMetaElementID())
 		{
-[for (aClass : Class | classPackage.ownedElement->filter(Class)->reject(c : Class | c.oclIsKindOf(Behavior) or c.isAbstract)->sortedBy(myQualifiedName())) separator('\n')]
+[for (aClass : Class | classPackage.ownedElement->filter(Class)->reject(c : Class | c.oclIsKindOf(Behavior) or c.isAbstract)->reject(hasEAnnotation(sourceNoExecution()))->sortedBy(myQualifiedName())) separator('\n')]
 [let className : String = aClass.name.toUpperFirst()]
-			case [packageName/]::[packageName.toUpperFirst()/]Package::[aClass.getMemberName().toUpperCase()/]:
+			case [packageNamespace/]::[classPackage.name.toUpperFirst()/]Package::[aClass.getMemberName().toUpperCase()/]:
 			{
-				std::shared_ptr<[aClass.getNearestPackage().name/]::[className/]Object> object(new [aClass.getNearestPackage().name/]::[className/]Object());
+				std::shared_ptr<[aClass.getNearestPackage().generateNamespace()/]::[className/]Object> object(new [aClass.getNearestPackage().generateNamespace()/]::[className/]Object());
 				object->setThis[className/]ObjectPtr(object);
-				object->setUmlValue([packageName/]::[packageName.toUpperFirst()/]Factory::eInstance()->create[aClass.name.toUpperFirst()/]());
+				object->setUmlValue([packageNamespace/]::[classPackage.name.toUpperFirst()/]Factory::eInstance()->create[aClass.name.toUpperFirst()/]());
 				object->setLocus(this->getThisLocusPtr());
 				return object;
 			}

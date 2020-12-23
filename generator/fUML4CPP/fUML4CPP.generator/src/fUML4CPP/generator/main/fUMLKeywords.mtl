@@ -1,0 +1,12 @@
+[comment encoding = UTF-8 /]
+[**
+ * The documentation of the module fUMLKeywords.
+ */]
+[module fUMLKeywords('http://www.eclipse.org/uml2/5.0.0/UML')]
+
+
+[**
+ * keywords for indication if an execution class (i.e. OpaqueBehaviorExecution, OperationExecution or ClassifierObject) 
+ * should be generated for an Element.
+ */]
+[query public sourceNoExecution (anOclAny : OclAny) : String = 'noExecution'/]

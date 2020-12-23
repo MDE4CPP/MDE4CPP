@@ -78,7 +78,7 @@
 [if(par.type.supportedTypes())]
 [par.generateCppType(true)/] [par.name/] = [par.default/];
 [else]
-[par.generateCppType(true)/] [par.name/]([aPackage.getPackageName()/]::[aPackage.getPackageName().toUpperFirst()/]Factory::eInstance()->create[par.type.name.toUpperFirst()/]());
+[par.generateCppType(true)/] [par.name/]([par.type.getNearestPackage().generateNamespace()/]::[par.type.getNearestPackage().getPackageName().toUpperFirst()/]Factory::eInstance()->create[par.type.name.toUpperFirst()/]());
 [/if]
 [/for]
 [/template]

@@ -28,8 +28,8 @@
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
 [template public generateFactoryImplSource(aPackage : Package) { className : String = aPackage.name.toUpperFirst().concat('FactoryImpl'); }]
-[file (aPackage.getPackageName().concat('/impl/').concat(className).concat('.cpp'), false, 'UTF-8')]
-#include "[aPackage.getPackageName()/]/impl/[className/].hpp"
+[file (aPackage.generateNamespacePath().concat('/impl/').concat(className).concat('.cpp'), false, 'UTF-8')]
+#include "[aPackage.generateNamespacePath()/]/impl/[className/].hpp"
 
 #include "abstractDataTypes/Bag.hpp"
 #include "uml/Class.hpp"
@@ -37,7 +37,7 @@
 
 [comment  Generate Includes for the Factory/]
 [for (aClass : Class | aPackage.collectModelClassesForFactoryDeclaration())]
-#include "[aPackage.getPackageName()/]/impl/[aClass.name.toUpperFirst().concat('Impl.hpp')/]"
+#include "[aClass.getNearestPackage().generateNamespacePath()/]/impl/[aClass.name.toUpperFirst().concat('Impl.hpp')/]"
 [/for]
 
 [comment] DISABLE INTERFACE IMPLEMENTATION
@@ -46,7 +46,7 @@
 [/for]
 [/comment]
 
-[if (not aPackage.ignoreNamespace())]using namespace [aPackage.name/];[/if]
+[if (not aPackage.ignoreNamespace())]using namespace [aPackage.generateNamespace()/];[/if]
 //*********************************
 // Constructor / Destructor
 //*********************************

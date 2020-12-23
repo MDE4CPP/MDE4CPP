@@ -9,6 +9,7 @@
       <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_89updvArEemD6KgsJJSfgA" value="*"/>
     </ownedAttribute>
     <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_HYWt4PAvEemD6KgsJJSfgA" name="fbPrint" specification="_wGmmAPArEemD6KgsJJSfgA">
+      <eAnnotations xmi:id="_vD_CgENyEeuWpawb503BRA" source="noExecution"/>
       <language>CPP</language>
       <body>std::cout &lt;&lt; &quot;content of A:&quot; &lt;&lt; std::endl;&#xD;
 int size = m_b->size();&#xD;

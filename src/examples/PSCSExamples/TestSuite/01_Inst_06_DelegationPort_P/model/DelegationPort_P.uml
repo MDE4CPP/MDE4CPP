@@ -125,6 +125,7 @@ bound of connected elements</body>
   <packagedElement xmi:type="uml:Association" xmi:id="_kQiBsO9AEemWP7t7cfH8xA" name="R" memberEnd="_0bnz8FlyEeqCEpOYlPRuRQ _CZ2pYFlzEeqCEpOYlPRuRQ"/>
   <packagedElement xmi:type="uml:Class" xmi:id="_AX6AEFgQEeqZPe2oHCHy2Q" name="Tester">
     <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_6vTt8FgREeqZPe2oHCHy2Q" name="fbTestAEmptyPattern" specification="_N16ycFgSEeqZPe2oHCHy2Q">
+      <ownedParameter xmi:id="_709awERbEeupAptt1hjWPg" name="aEmptyPattern" type="_z6HwQO9BEemWP7t7cfH8xA"/>
       <language>CPP</language>
       <language>INCLUDE</language>
       <body>std::cout&lt;&lt;&quot;-- Instantiation of A_Empty_Pattern --&quot;&lt;&lt;std::endl;&#xD;
@@ -159,7 +160,9 @@ getchar();</body>
 #include &quot;DelegationPort_P/IImplementation.hpp&quot;</body>
     </ownedBehavior>
     <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_-aF9oFgREeqZPe2oHCHy2Q" name="fbTestAUnconnectedPattern" specification="_1_Kt0FgTEeqZPe2oHCHy2Q">
+      <ownedParameter xmi:id="_8Y-t0ERbEeupAptt1hjWPg" name="aUnconnectedPattern" type="_bfcP8FIvEeq4WpdDJnu9kg"/>
       <language>CPP</language>
+      <language>INCLUDE</language>
       <body>std::string compareString = &quot;\tp[0]     partB[0]\n\tp[0]     partB[1]\n\n\tp[1]     partB[0]\n\tp[1]     partB[1]\n\n\tp[2]     partB[0]\n\tp[2]     partB[1]\n\n&quot;;&#xD;
 &#xD;
 std::cout&lt;&lt;&quot;-- Instantiation of A_Unconnected_Pattern --&quot;&lt;&lt;std::endl;&#xD;
@@ -233,9 +236,13 @@ std::cout&lt;&lt;&quot;-- Instantiation of A_Unconnected_Pattern --&quot;&lt;&lt
 std::cout&lt;&lt;&quot;Press Enter for next pattern...&quot;;&#xD;
 getchar();&#xD;
 </body>
+      <body>#include &quot;DelegationPort_P/B.hpp&quot;&#xD;
+#include &quot;DelegationPort_P/IImplementation.hpp&quot;</body>
     </ownedBehavior>
     <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_CeMFMFgSEeqZPe2oHCHy2Q" name="fbTestAArrayPattern" specification="_-PQ7wFgTEeqZPe2oHCHy2Q">
+      <ownedParameter xmi:id="_89IjwERbEeupAptt1hjWPg" name="aArrayPattern" type="_rZJ6oFIvEeq4WpdDJnu9kg"/>
       <language>CPP</language>
+      <language>INCLUDE</language>
       <body>std::string compareString = &quot;\tp[0] &lt;-> partB[0]\n\tp[0]     partB[1]\n\tp[0]     partB[2]\n\tp[0]     partB[3]\n\n\tp[1]     partB[0]\n\tp[1] &lt;-> partB[1]\n\tp[1]     partB[2]\n\tp[1]     partB[3]\n\n\tp[2]     partB[0]\n\tp[2]     partB[1]\n\tp[2] &lt;-> partB[2]\n\tp[2]     partB[3]\n\n\tp[3]     partB[0]\n\tp[3]     partB[1]\n\tp[3]     partB[2]\n\tp[3] &lt;-> partB[3]\n\n&quot;;&#xD;
 &#xD;
 std::cout&lt;&lt;&quot;-- Instantiation of A_Array_Pattern --&quot;&lt;&lt;std::endl;&#xD;
@@ -308,9 +315,13 @@ std::cout&lt;&lt;&quot;Instantiation was successful : &quot;&lt;&lt;std::boolalp
 std::cout&lt;&lt;&quot;-- Instantiation of A_Array_Pattern --&quot;&lt;&lt;std::endl;&#xD;
 std::cout&lt;&lt;&quot;Press Enter for next pattern...&quot;;&#xD;
 getchar();</body>
+      <body>#include &quot;DelegationPort_P/B.hpp&quot;&#xD;
+#include &quot;DelegationPort_P/IImplementation.hpp&quot;</body>
     </ownedBehavior>
     <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_EXuZsFgSEeqZPe2oHCHy2Q" name="fbTestAStarPattern" specification="_HVXkoFgUEeqZPe2oHCHy2Q">
+      <ownedParameter xmi:id="_9qwewERbEeupAptt1hjWPg" name="aStarPattern" type="__fogsFIvEeq4WpdDJnu9kg"/>
       <language>CPP</language>
+      <language>INCLUDE</language>
       <body>std::string compareString = &quot;\tp[0] &lt;-> partB[0]\n\tp[0] &lt;-> partB[1]\n\tp[0] &lt;-> partB[2]\n\tp[0] &lt;-> partB[3]\n\n\tp[1] &lt;-> partB[0]\n\tp[1] &lt;-> partB[1]\n\tp[1] &lt;-> partB[2]\n\tp[1] &lt;-> partB[3]\n\n\tp[2] &lt;-> partB[0]\n\tp[2] &lt;-> partB[1]\n\tp[2] &lt;-> partB[2]\n\tp[2] &lt;-> partB[3]\n\n&quot;;&#xD;
 &#xD;
 std::cout&lt;&lt;&quot;-- Instantiation of A_Star_Pattern --&quot;&lt;&lt;std::endl;&#xD;
@@ -384,6 +395,8 @@ std::cout&lt;&lt;&quot;-- Instantiation of A_Star_Pattern --&quot;&lt;&lt;std::e
 std::cout&lt;&lt;&quot;Press Enter for next pattern...&quot;;&#xD;
 getchar();&#xD;
 </body>
+      <body>#include &quot;DelegationPort_P/B.hpp&quot;&#xD;
+#include &quot;DelegationPort_P/IImplementation.hpp&quot;</body>
     </ownedBehavior>
     <ownedBehavior xmi:type="uml:Activity" xmi:id="_GTs4YI4vEeqm_eVeNYUZww" name="actRunTestCase" specification="_EpNFcI4vEeqm_eVeNYUZww" node="_Qn2owI4vEeqm_eVeNYUZww _SH1NwI4vEeqm_eVeNYUZww _Wi5D0I4vEeqm_eVeNYUZww _b4B8gI4vEeqm_eVeNYUZww _hjcnMI4vEeqm_eVeNYUZww _lj9PQI4vEeqm_eVeNYUZww _piBnUI4vEeqm_eVeNYUZww _xPgQYI4vEeqm_eVeNYUZww _3nlz0I4vEeqm_eVeNYUZww _9jntYI4vEeqm_eVeNYUZww">
       <edge xmi:type="uml:ControlFlow" xmi:id="_VUU-8I4vEeqm_eVeNYUZww" target="_SH1NwI4vEeqm_eVeNYUZww" source="_Qn2owI4vEeqm_eVeNYUZww">

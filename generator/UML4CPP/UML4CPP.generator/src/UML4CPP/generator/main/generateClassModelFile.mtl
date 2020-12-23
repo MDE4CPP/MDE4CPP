@@ -32,17 +32,17 @@
 [query private includes(aClass : Class) : Set(Type) = Set(Type){aClass.ownedAttribute.type, aClass.ownedOperation.ownedParameter.type, aClass.getCompositeOwners()}->flatten() /]
 
 [template public generateModel(aClass : Class) {aPackage:Package = aClass.ancestors()->filter(Package)->first();}]
-[file (aPackage.getPackageName().concat('/').concat(aClass.name.toUpperFirst()).concat('.hpp'), false, 'UTF-8')]
+[file (aPackage.generateNamespacePath().concat('/').concat(aClass.name.toUpperFirst()).concat('.hpp'), false, 'UTF-8')]
 [startGuard(aClass)/]
 
 [generateAbstractDataTypesForwardDeclaration()/]
 
-[if (not aClass.owner.ownedElement->filter(Usage)->isEmpty())]
+[if (not aClass.getRootPackage().allOwnedElements()->filter(Usage)->isEmpty())]
 //********************
 // usage
-[for (usages : Usage| aClass.owner.ownedElement->filter(Usage)->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n')]
+[for (usages : Usage| aClass.getRootPackage().allOwnedElements()->filter(Usage)->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n')]
 [if (not (usages.supplier.name->asOrderedSet()->first() = aClass.name.toString()))]
-   #include "[usages.getNearestPackage().getPackageName()/]/[usages.supplier.name/].hpp"
+   #include "[usages.getNearestPackage().generateNamespacePath()/]/[usages.supplier.name/].hpp"
 [/if]
 [/for]
 [/if]
@@ -53,7 +53,7 @@
 [if (element.oclIsUndefined() or element.name.oclIsUndefined())]
 // undefined  [element.eClass().name/] ([element.toString()/]) ['class '.concat(aClass.name).concat(': header include failed for undefined ').concat(element.eClass().name).concat(' ').concat(element.toString()).registerError()/]
 [else]
-[if (not element.getNearestPackage().ignoreNamespace())]namespace [element.namespace.myNamespaceName()/] 
+[if (not element.getNearestPackage().ignoreNamespace())]namespace [element.getPackage().generateNamespace()/] 
 {
 [/if]
 	class [element.name.toUpperFirst()/];
@@ -70,7 +70,7 @@
 [if (elements.oclIsUndefined() or elements.name.oclIsUndefined())]
 // undefined superclass [elements.toString()/]['class: '.concat(aClass.name).concat(': undefined superclass: ').concat(elements.toString()).registerError()/]
 [else]
-#include "[elements.getNearestPackage().getPackageName()/]/[elements.name.toUpperFirst().concat('.hpp')/]"
+#include "[elements.getNearestPackage().generateNamespacePath()/]/[elements.name.toUpperFirst().concat('.hpp')/]"
 [/if]
 [/for]
 [/if]
@@ -82,7 +82,7 @@
 // undefined interface realization supplier [aNamedElement.toString()/]['class: '.concat(aClass.name).concat(': undefined interface realization supplier: ').concat(aNamedElement.toString()).registerError()/]
 [/for]
 [for (aNamedElement : NamedElement | anInterfaceRealization.supplier->select(not oclIsUndefined() and not name.oclIsUndefined()))]
-#include "[aNamedElement.getNearestPackage().myNamespaceName()/]/[aNamedElement.name.toUpperFirst()/].hpp"
+#include "[aNamedElement.getNearestPackage().generateNamespacePath()/]/[aNamedElement.name.toUpperFirst()/].hpp"
 [/for]
 [/for]
 [/if]
@@ -90,11 +90,11 @@
 [if (aClass.includes()->selectByKind(Enumeration)->size() > 0)]
 // enum includes
 [for (elements : Enumeration | aClass.includes()->selectByKind(Enumeration)->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n')]
-#include "[elements.getNearestPackage().getPackageName()/]/[elements.name.toUpperFirst().concat('.hpp')/]"[/for]
+#include "[elements.getNearestPackage().generateNamespacePath()/]/[elements.name.toUpperFirst().concat('.hpp')/]"[/for]
 [/if]
 
 [if (not aClass.getNearestPackage().ignoreNamespace())]
-namespace [aPackage.name/]
+namespace [aPackage.generateNamespace()/]
 {
 [/if]
 	class [aClass.name.toUpperFirst()/] [if (aClass.superClass->isEmpty())] : virtual public uml::[aClass.getGeneralSuperClassName()/] [aClass.generateInterfaceExtensions()/]

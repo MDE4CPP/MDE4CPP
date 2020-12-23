@@ -18,12 +18,12 @@
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
 [template public generateExecutionPluginImplHeader(aPackage : Package)]
-[file (aPackage.getPackageName().concat('Exec/impl/').concat(aPackage.name.toUpperFirst()).concat('ExecPluginImpl.hpp'), false, 'UTF-8')]
+[file (aPackage.generateNamespacePath().concat('Exec/impl/').concat(aPackage.name.toUpperFirst()).concat('ExecPluginImpl.hpp'), false, 'UTF-8')]
 [startGuard(aPackage,'ExecPluginImpl')/]
 
-#include "[aPackage.getPackageName()/]Exec/[aPackage.name.toUpperFirst()/]ExecPlugin.hpp"
+#include "[aPackage.generateNamespacePath()/]Exec/[aPackage.name.toUpperFirst()/]ExecPlugin.hpp"
 
-namespace [aPackage.name/] 
+namespace [aPackage.generateNamespace()/] 
 {
 	class [aPackage.name.toUpperFirst().concat('ExecPluginImpl')/] : virtual public [aPackage.name.toUpperFirst().concat('ExecPlugin')/] 
 	{

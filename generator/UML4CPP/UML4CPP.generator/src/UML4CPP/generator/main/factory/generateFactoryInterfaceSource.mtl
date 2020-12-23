@@ -24,12 +24,12 @@
 [import UML4CPP::generator::main::helpers::singletonHelper /]
 
 [template public generateFactoryCpp(anPackage : Package)  {packageName : String = anPackage.name.concat('Factory').toUpperFirst(); }]
-[file  (anPackage.getPackageName().concat('/').concat(packageName).concat('.cpp'), false, 'UTF-8')]
+[file  (anPackage.generateNamespacePath().concat('/').concat(packageName).concat('.cpp'), false, 'UTF-8')]
 
-#include "[anPackage.getPackageName()/]/[packageName/].hpp"
-#include "[anPackage.getPackageName()/]/impl/[packageName.concat('Impl')/].hpp"
+#include "[anPackage.generateNamespacePath()/]/[packageName/].hpp"
+#include "[anPackage.generateNamespacePath()/]/impl/[packageName.concat('Impl')/].hpp"
 
-[if (not anPackage.ignoreNamespace())]using namespace [anPackage.name/];[/if]
+[if (not anPackage.ignoreNamespace())]using namespace [anPackage.generateNamespace()/];[/if]
 
 //static initialisation
 [generateSingletonImpl(packageName, false)/]
