@@ -21,11 +21,11 @@
 					<folderInfo id="0.1." name="/" resourcePath="">
 						<toolChain id="org.eclipse.cdt.build.core.prefbase.toolchain.61366185" name="No ToolChain" resourceTypeBasedDiscovery="false" superClass="org.eclipse.cdt.build.core.prefbase.toolchain">
 							<targetPlatform binaryParser="org.eclipse.cdt.core.PE" id="org.eclipse.cdt.build.core.prefbase.toolchain.61366185.1934256561" name=""/>
-							<builder arguments="" buildPath="${ProjDirPath}" command="gradlew.bat" id="org.eclipse.cdt.build.core.settings.default.builder.1448805183" incrementalBuildTarget="compileprimitivetypesReflection -PDEBUG" keepEnvironmentInBuildfile="false" managedBuildOn="false" name="Gnu Make Builder" superClass="org.eclipse.cdt.build.core.settings.default.builder"/>
+							<builder arguments="" buildPath="${ProjDirPath}" command="gradlew.bat" id="org.eclipse.cdt.build.core.settings.default.builder.1448805183" incrementalBuildTarget="compilePrimitivetypesReflection -PDEBUG" keepEnvironmentInBuildfile="false" managedBuildOn="false" name="Gnu Make Builder" superClass="org.eclipse.cdt.build.core.settings.default.builder"/>
 							<tool id="org.eclipse.cdt.build.core.settings.holder.libs.2132956685" name="holder for library settings" superClass="org.eclipse.cdt.build.core.settings.holder.libs"/>
 							<tool id="org.eclipse.cdt.build.core.settings.holder.859100136" name="GNU C++" superClass="org.eclipse.cdt.build.core.settings.holder">
 								<option id="org.eclipse.cdt.build.core.settings.holder.incpaths.1289626169" name="Include Paths" superClass="org.eclipse.cdt.build.core.settings.holder.incpaths" valueType="includePath">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/primitivetypesReflection_src_gen/src_gen}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PrimitivetypesReflection_src_gen/src_gen}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${ProjDirPath}/src_gen&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${COMPILER_HOME}/include&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${COMPILER_HOME}/lib/gcc/${COMPILER_DELIVERY_NAME}/${COMPILER_VERSION}/include/c++&quot;"/>
@@ -67,7 +67,7 @@
 							<tool id="org.eclipse.cdt.build.core.settings.holder.libs.640181682" name="holder for library settings" superClass="org.eclipse.cdt.build.core.settings.holder.libs"/>
 							<tool id="org.eclipse.cdt.build.core.settings.holder.985992690" name="GNU C++" superClass="org.eclipse.cdt.build.core.settings.holder">
 								<option id="org.eclipse.cdt.build.core.settings.holder.incpaths.2054879882" name="Include Paths" superClass="org.eclipse.cdt.build.core.settings.holder.incpaths" valueType="includePath">
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/primitivetypesReflection_src_gen/src_gen}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/PrimitivetypesReflection_src_gen/src_gen}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${COMPILER_HOME}/include&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${COMPILER_HOME}/lib/gcc/${COMPILER_DELIVERY_NAME}/${COMPILER_VERSION}/include/c++&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${COMPILER_HOME}/lib/gcc/${COMPILER_DELIVERY_NAME}/${COMPILER_VERSION}/include/c++/backward&quot;"/>
