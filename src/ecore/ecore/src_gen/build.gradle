@@ -1,0 +1,39 @@
+plugins {
+	id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.5"
+}
+
+description 'Compile task for project: ecore'
+
+task compileEcore(type: tui.sse.mde4cpp.MDE4CPPCompile) {
+	group 'ecore'
+	description 'compile ecore'
+
+	projectFolder = file('.' + File.separator + 'ecore')
+
+	inputs.files(fileTree('.') {
+        exclude 'ecore/.cmake/**'
+    })
+	if(!file('.' + File.separator + 'ecore' + File.separator + '.cmake' + File.separator).exists()) {
+		outputs.upToDateWhen { false }
+	}
+	outputs.file file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'bin' + File.separator + 'ecore.dll')
+	outputs.file file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'bin' + File.separator + 'ecored.dll')
+	outputs.dir file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'include' + File.separator + 'ecore')
+
+	// dependency to basic interfaces
+	dependsOn getRootProject().getTasksByName('deliverBasicInterfaces', true) 
+	outputs.dir file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'include' + File.separator + 'abstractDataTypes')
+	outputs.dir file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'include' + File.separator + 'persistence' + File.separator + 'interfaces')
+	outputs.dir file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'include' + File.separator + 'pluginFramework')
+	outputs.dir file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'include' + File.separator + 'util')
+}
+
+task clean {
+	doFirst {
+		def cmakeFolder = file('.' + File.separator + 'ecore' + File.separator + '.cmake' + File.separator)
+		if(cmakeFolder.exists()) {
+    		delete cmakeFolder.absolutePath
+   			println 'deleting folder ' + cmakeFolder.absolutePath
+		}
+	}
+}
