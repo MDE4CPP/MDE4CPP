@@ -24,10 +24,13 @@ SET(CMAKE_CXX_FLAGS_RELEASE " -O3 -DNDEBUG")
 string(REPLACE "\\" "/" MDE4CPP_HOME $ENV{MDE4CPP_HOME})
 
 SET(SOURCE_FILES
-	impl/EcorePackageImpl.cpp
-	EcorePackage.cpp
+	# Model plugin
 	impl/EcorePluginImpl.cpp
 	EcorePlugin.cpp
+	# Package of Ecore
+	impl/EcorePackageImpl.cpp
+	EcorePackage.cpp
+	
 )
 
 INCLUDE_DIRECTORIES(
