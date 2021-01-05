@@ -37,7 +37,7 @@
 #include <sstream>
 [comment] root factory notwendig? 
 [if (generateObjectMonitoring())]
-#include "[getRootPackage().name/]/[aClass.getRootPackage().name.toUpperFirst()/]Factory.hpp"
+#include "[getRootPackage().name/]/[aClass.getRootPackage().name/]Factory.hpp"
 [/if]
 [/comment]
 [generateAbstractDataTypesIncludes()/]
@@ -61,12 +61,12 @@
 [/for]
 
 //Factories an Package includes
-#include "[aClass.ePackage.getRootPackage().name/]/[aClass.ePackage.getNamespacePathWithoutRoot()/]impl/[aClass.ePackage.name.toUpperFirst()/]FactoryImpl.hpp"
-#include "[aClass.ePackage.getRootPackage().name/]/[aClass.ePackage.getNamespacePathWithoutRoot()/]impl/[aClass.ePackage.name.toUpperFirst()/]PackageImpl.hpp"
+#include "[aClass.ePackage.getRootPackage().name/]/[aClass.ePackage.getNamespacePathWithoutRoot()/]impl/[aClass.ePackage.name/]FactoryImpl.hpp"
+#include "[aClass.ePackage.getRootPackage().name/]/[aClass.ePackage.getNamespacePathWithoutRoot()/]impl/[aClass.ePackage.name/]PackageImpl.hpp"
 
 [for (anEPackage: EPackage| aClass.ePackage->closure(p|p.eSuperPackage)->asSet() )]
-#include "[anEPackage.getRootPackage().name/]/[anEPackage.getNamespacePathWithoutRoot()/][anEPackage.name.toUpperFirst()/]Factory.hpp"
-#include "[anEPackage.getRootPackage().name/]/[anEPackage.getNamespacePathWithoutRoot()/][anEPackage.name.toUpperFirst()/]Package.hpp"
+#include "[anEPackage.getRootPackage().name/]/[anEPackage.getNamespacePathWithoutRoot()/][anEPackage.name/]Factory.hpp"
+#include "[anEPackage.getRootPackage().name/]/[anEPackage.getNamespacePathWithoutRoot()/][anEPackage.name/]Package.hpp"
 [/for]
 
 #include "ecore/EAttribute.hpp"
@@ -127,7 +127,7 @@ using namespace [aClass.generateNamespaceDefinition()/];
 	switch(reference_id)
 	{	
 	[for(multipleRef : EReference | ref->select(eType.name = aReference.eType.name)->sortedBy(name))]
-	case [aClass.getRootPackage().name.toUpperFirst()/]Package::[multipleRef.getStaticAttributeIDName()/]:
+	case [aClass.getRootPackage().name/]Package::[multipleRef.getStaticAttributeIDName()/]:
 		m_[multipleRef.name/] = par_[aReference.eType.name/];
 		[if (multipleRef.hasSubset() and multipleRef.upperBound = 1)]
 		[for (m : EReference | multipleRef.oclAsType(EReference).Subset()->selectByKind(EReference).oclAsType(EReference)->select(isBackReference())->asOrderedSet())]
@@ -219,14 +219,14 @@ std::shared_ptr<ecore::EObject>  [className/]::copy() const
 	std::shared_ptr<[className/]> element(new [className/](*this));
 	element->[generateGetThisPtrPropertySetterName()/](element);
 [if (generateObjectMonitoring())]
-	[aClass.getRootPackage().name.toUpperFirst()/]Factory::eInstance()->add(element);
+	[aClass.getRootPackage().name/]Factory::eInstance()->add(element);
 [/if]
 	return element;
 }
 
 std::shared_ptr<[needNamespace(aClass.ePackage, 'EClass')/]> [className/]::eStaticClass() const
 {
-	return [aClass.getRootPackage().name/][getPackageAccess(aClass, true)/]::[aClass.ePackage.name.toUpperFirst()/]Package::eInstance()->get[aClass.getMemberNameUpperFirst()/]();
+	return [aClass.getRootPackage().name/][getPackageAccess(aClass, true)/]::[aClass.ePackage.name/]Package::eInstance()->get[aClass.getMemberNameUpperFirst()/]();
 }
 
 //*********************************

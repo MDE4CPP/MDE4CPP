@@ -61,8 +61,8 @@ SET(SOURCE_FILES
 # Factories and packages
 	[aPackage.generatePackageAndFactory()/]
 # Package plugin
-	impl/[packageName.toUpperFirst()/]PluginImpl.cpp
-	[packageName.toUpperFirst()/]Plugin.cpp
+	impl/[packageName/]PluginImpl.cpp
+	[packageName/]Plugin.cpp
 # Package content
 [for (aClass : EClass | aPackage.eAllContents(EClass)->asOrderedSet()->sortedBy(name))]
 	[aClass.getNamespacePathWithoutRoot()/]impl/[aClass.name.toUpperFirst()/]Impl.cpp
@@ -224,7 +224,7 @@ task clean {
 [/file]
 [/template]
 
-[template private generatePackageAndFactory(aPackage : EPackage) { packageName : String = aPackage.name.toUpperFirst(); }]	
+[template private generatePackageAndFactory(aPackage : EPackage) { packageName : String = aPackage.name; }]	
 [aPackage.getNamespacePathWithoutRoot()/][packageName/]Factory.cpp
 [aPackage.getNamespacePathWithoutRoot()/]impl/[packageName/]FactoryImpl.cpp
 [aPackage.getNamespacePathWithoutRoot()/][packageName/]Package.cpp

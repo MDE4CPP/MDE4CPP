@@ -19,7 +19,7 @@
 [import ecore4CPP::generator::main::generateType /]
 [import ecore4CPP::generator::main::helper /]
  
-[template public generateFactoryInterface(anEPackage : EPackage) {packageName : String = anEPackage.name.toUpperFirst().concat('Factory');}]
+[template public generateFactoryInterface(anEPackage : EPackage) {packageName : String = anEPackage.name.concat('Factory');}]
 [file (anEPackage.generateNamespacePath().concat('/').concat(packageName).concat('.hpp'), false, 'UTF-8')]
 [startGuard(anEPackage,'Factory')/]
 
@@ -28,9 +28,9 @@
 
 #include "ecore/EFactory.hpp"
 [if (not (anEPackage = anEPackage.getRootPackage()))]
-#include "[anEPackage.getRootPackage().name/]/[anEPackage.getNamespacePathWithoutRoot()/][anEPackage.name.toUpperFirst()/]Package.hpp"
+#include "[anEPackage.getRootPackage().name/]/[anEPackage.getNamespacePathWithoutRoot()/][anEPackage.name/]Package.hpp"
 [else]
-#include "[anEPackage.getRootPackage().name/]/[anEPackage.getRootPackage().name.toUpperFirst()/]Package.hpp"
+#include "[anEPackage.getRootPackage().name/]/[anEPackage.getRootPackage().name/]Package.hpp"
 [/if]
 
 [comment  Generate Includes for the Factory/]
@@ -58,7 +58,7 @@ namespace [anEPackage.generateNamespaceDefinition()/]
 			[anEPackage.eClassifiers->selectByKind(EClass)->sortedBy(name).generateClassCreate(false)/]
 [comment] Package in Factory notwendig???
 			//Package
-			virtual std::shared_ptr<[anEPackage.name.toUpperFirst().concat('Package')/]> get[anEPackage.name.toUpperFirst().concat('Package')/]() const = 0;
+			virtual std::shared_ptr<[anEPackage.name.concat('Package')/]> get[anEPackage.name.concat('Package')/]() const = 0;
 [/comment]
 [if (generateObjectMonitoring())]
 			virtual void print() = 0;
@@ -78,7 +78,7 @@ namespace [anEPackage.generateNamespaceDefinition()/]
 	class [elements.name/];
 [/for]
 [if (anEPackage.eSuperPackage.oclIsUndefined())]
-	class [anEPackage.name.toUpperFirst().concat('Package')/];
+	class [anEPackage.name.concat('Package')/];
 [/if]
 }
 [/if]

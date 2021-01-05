@@ -18,7 +18,7 @@
 [import ecore4CPP::generator::main::helper /]
 
 [template public generateFactoryImplHeader(anEPackage : EPackage)]
-[file (anEPackage.generateNamespacePath().concat('/impl/').concat(anEPackage.name.toUpperFirst()).concat('FactoryImpl.hpp'), false, 'UTF-8')]
+[file (anEPackage.generateNamespacePath().concat('/impl/').concat(anEPackage.name).concat('FactoryImpl.hpp'), false, 'UTF-8')]
 [startGuard(anEPackage,'FactoryImpl')/]
 
 #include "ecore/impl/EFactoryImpl.hpp"
@@ -28,9 +28,9 @@
 #include "abstractDataTypes/Bag.hpp"
 [/if]
 [if (not (anEPackage = anEPackage.getRootPackage()))]
-#include "[anEPackage.getRootPackage().name/]/[anEPackage.getNamespacePathWithoutRoot()/][anEPackage.name.toUpperFirst()/]Factory.hpp"
+#include "[anEPackage.getRootPackage().name/]/[anEPackage.getNamespacePathWithoutRoot()/][anEPackage.name/]Factory.hpp"
 [else]
-#include "[anEPackage.getRootPackage().name/]/[anEPackage.name.toUpperFirst()/]Factory.hpp"
+#include "[anEPackage.getRootPackage().name/]/[anEPackage.name/]Factory.hpp"
 [/if]
 
 namespace [anEPackage.name/] 
@@ -42,19 +42,19 @@ namespace [anEPackage.name/]
 [comment namespace /]
 namespace [anEPackage.generateNamespaceDefinition()/] 
 {
-	class [anEPackage.name.toUpperFirst().concat('FactoryImpl')/] : virtual public [needNamespace(anEPackage, 'EFactoryImpl')/] , virtual public [anEPackage.name.toUpperFirst().concat('Factory')/] 
+	class [anEPackage.name.concat('FactoryImpl')/] : virtual public [needNamespace(anEPackage, 'EFactoryImpl')/] , virtual public [anEPackage.name.concat('Factory')/] 
 	{
 		private:    
-			[anEPackage.name.toUpperFirst().concat('FactoryImpl')/]([anEPackage.name.toUpperFirst().concat('FactoryImpl')/] const&) = delete;
-			[anEPackage.name.toUpperFirst().concat('FactoryImpl')/]& operator=([anEPackage.name.toUpperFirst().concat('FactoryImpl')/] const&) = delete;
+			[anEPackage.name.concat('FactoryImpl')/]([anEPackage.name.concat('FactoryImpl')/] const&) = delete;
+			[anEPackage.name.concat('FactoryImpl')/]& operator=([anEPackage.name.concat('FactoryImpl')/] const&) = delete;
 
 		protected:
-			friend class [anEPackage.name.toUpperFirst().concat('Factory')/];
+			friend class [anEPackage.name.concat('Factory')/];
 			// Constructor
-			[anEPackage.name.toUpperFirst().concat('FactoryImpl')/]();
+			[anEPackage.name.concat('FactoryImpl')/]();
 
 		public:
-			virtual ~[anEPackage.name.toUpperFirst().concat('FactoryImpl')/]();
+			virtual ~[anEPackage.name.concat('FactoryImpl')/]();
 			virtual std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> create(std::string _className,  std::shared_ptr<ecore::EObject> container=nullptr, const int referenceID = -1)[if (not generateObjectMonitoring())] const[/if];
 			virtual std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> create(const int classID,  std::shared_ptr<ecore::EObject> container = nullptr, const int referenceID = -1)[if (not generateObjectMonitoring())] const[/if];
 			virtual std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> create(std::shared_ptr<[needNamespace(anEPackage, 'EClass')/]> _class, std::shared_ptr<EObject> _container=nullptr, const int referenceID = -1)[if (not generateObjectMonitoring())] const[/if];
@@ -63,7 +63,7 @@ namespace [anEPackage.generateNamespaceDefinition()/]
 			 [anEPackage.eClassifiers->selectByKind(EClass)->sortedBy(name).generateClassCreate(true)/]
 [comment] Package in Factory notwendig???
 			//Package
-			virtual std::shared_ptr<[anEPackage.name.toUpperFirst()/]Package> get[anEPackage.name.toUpperFirst()/]Package() const;
+			virtual std::shared_ptr<[anEPackage.name/]Package> get[anEPackage.name/]Package() const;
 [/comment]
 [if (generateObjectMonitoring())]
 			virtual void print();
@@ -71,7 +71,7 @@ namespace [anEPackage.generateNamespaceDefinition()/]
 [/if]
 
 		private:
-			static [anEPackage.name.toUpperFirst().concat('Factory')/]* create();
+			static [anEPackage.name.concat('Factory')/]* create();
             std::map<std::string,int> m_idMap;
 [if (generateObjectMonitoring())]
 			std::shared_ptr<Bag<ecore::EObject>> m_createdElements;
