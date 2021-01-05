@@ -43,8 +43,8 @@
 #include "ecore/EStructuralFeature.hpp"
 
 //Factories an Package includes
-#include "ecore/impl/EcoreFactoryImpl.hpp"
-#include "ecore/impl/EcorePackageImpl.hpp"
+#include "ecore/impl/ecoreFactoryImpl.hpp"
+#include "ecore/impl/ecorePackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -101,7 +101,7 @@ std::shared_ptr<ecore::EObject>  EObjectImpl::copy() const
 
 std::shared_ptr<EClass> EObjectImpl::eStaticClass() const
 {
-	return ecore::EcorePackage::eInstance()->getEObject_Class();
+	return ecore::ecorePackage::eInstance()->getEObject_Class();
 }
 
 //*********************************
@@ -294,9 +294,9 @@ Any EObjectImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case ecore::EcorePackage::EOBJECT_ATTRIBUTE_ECONTAINER:
+		case ecore::ecorePackage::EOBJECT_ATTRIBUTE_ECONTAINER:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEContainer().lock())); //391
-		case ecore::EcorePackage::EOBJECT_ATTRIBUTE_ECONTENS:
+		case ecore::ecorePackage::EOBJECT_ATTRIBUTE_ECONTENS:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<ecore::EObject>::iterator iter = m_eContens->begin();
@@ -308,7 +308,7 @@ Any EObjectImpl::eGet(int featureID, bool resolve, bool coreType) const
 			}
 			return eAny(tempList); //390
 		}
-		case ecore::EcorePackage::EOBJECT_ATTRIBUTE_METAELEMENTID:
+		case ecore::ecorePackage::EOBJECT_ATTRIBUTE_METAELEMENTID:
 			return eAny(getMetaElementID()); //392
 	}
 	Any result;
@@ -318,11 +318,11 @@ bool EObjectImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case ecore::EcorePackage::EOBJECT_ATTRIBUTE_ECONTAINER:
+		case ecore::ecorePackage::EOBJECT_ATTRIBUTE_ECONTAINER:
 			return getEContainer().lock() != nullptr; //391
-		case ecore::EcorePackage::EOBJECT_ATTRIBUTE_ECONTENS:
+		case ecore::ecorePackage::EOBJECT_ATTRIBUTE_ECONTENS:
 			return getEContens() != nullptr; //390
-		case ecore::EcorePackage::EOBJECT_ATTRIBUTE_METAELEMENTID:
+		case ecore::ecorePackage::EOBJECT_ATTRIBUTE_METAELEMENTID:
 			return getMetaElementID() != 0; //392
 	}
 	bool result = false;
@@ -332,7 +332,7 @@ bool EObjectImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case ecore::EcorePackage::EOBJECT_ATTRIBUTE_ECONTAINER:
+		case ecore::ecorePackage::EOBJECT_ATTRIBUTE_ECONTAINER:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -340,7 +340,7 @@ bool EObjectImpl::eSet(int featureID, Any newValue)
 			setEContainer(_eContainer); //391
 			return true;
 		}
-		case ecore::EcorePackage::EOBJECT_ATTRIBUTE_ECONTENS:
+		case ecore::ecorePackage::EOBJECT_ATTRIBUTE_ECONTENS:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -376,7 +376,7 @@ bool EObjectImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case ecore::EcorePackage::EOBJECT_ATTRIBUTE_METAELEMENTID:
+		case ecore::ecorePackage::EOBJECT_ATTRIBUTE_METAELEMENTID:
 		{
 			// BOOST CAST
 			int _metaElementID = newValue->get<int>();
@@ -400,7 +400,7 @@ void EObjectImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> lo
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get EcoreFactory
+	// get ecoreFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -436,7 +436,7 @@ void EObjectImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadH
 
 void EObjectImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<ecore::EcoreFactory> modelFactory=ecore::EcoreFactory::eInstance();
+	std::shared_ptr<ecore::ecoreFactory> modelFactory=ecore::ecoreFactory::eInstance();
 
 	try
 	{
@@ -447,7 +447,7 @@ void EObjectImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::in
 			{
 				typeName = "EObject";
 			}
-			std::shared_ptr<ecore::EObject> eContens = modelFactory->create(typeName, loadHandler->getCurrentObject(), ecore::EcorePackage::EOBJECT_ATTRIBUTE_ECONTAINER);
+			std::shared_ptr<ecore::EObject> eContens = modelFactory->create(typeName, loadHandler->getCurrentObject(), ecore::ecorePackage::EOBJECT_ATTRIBUTE_ECONTAINER);
 			if (eContens != nullptr)
 			{
 				loadHandler->handleChild(eContens);
@@ -470,7 +470,7 @@ void EObjectImpl::resolveReferences(const int featureID, std::list<std::shared_p
 {
 	switch(featureID)
 	{
-		case ecore::EcorePackage::EOBJECT_ATTRIBUTE_ECONTAINER:
+		case ecore::ecorePackage::EOBJECT_ATTRIBUTE_ECONTAINER:
 		{
 			if (references.size() == 1)
 			{
@@ -497,7 +497,7 @@ void EObjectImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 {
 	try
 	{
-		std::shared_ptr<ecore::EcorePackage> package = ecore::EcorePackage::eInstance();
+		std::shared_ptr<ecore::ecorePackage> package = ecore::ecorePackage::eInstance();
 
 	
 		// Add attributes
@@ -515,7 +515,7 @@ void EObjectImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 		std::shared_ptr<Union<ecore::EObject>> list_eContens = this->getEContens();
 		for (std::shared_ptr<ecore::EObject> eContens : *list_eContens) 
 		{
-			saveHandler->addReference(eContens, "eContens", eContens->eClass() !=ecore::EcorePackage::eInstance()->getEObject_Class());
+			saveHandler->addReference(eContens, "eContens", eContens->eClass() !=ecore::ecorePackage::eInstance()->getEObject_Class());
 		}
 	}
 	catch (std::exception& e)

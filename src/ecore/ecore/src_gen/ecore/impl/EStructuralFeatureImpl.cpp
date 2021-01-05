@@ -46,8 +46,8 @@
 #include "ecore/ETypedElement.hpp"
 
 //Factories an Package includes
-#include "ecore/impl/EcoreFactoryImpl.hpp"
-#include "ecore/impl/EcorePackageImpl.hpp"
+#include "ecore/impl/ecoreFactoryImpl.hpp"
+#include "ecore/impl/ecorePackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -145,7 +145,7 @@ std::shared_ptr<ecore::EObject>  EStructuralFeatureImpl::copy() const
 
 std::shared_ptr<EClass> EStructuralFeatureImpl::eStaticClass() const
 {
-	return ecore::EcorePackage::eInstance()->getEStructuralFeature_Class();
+	return ecore::ecorePackage::eInstance()->getEStructuralFeature_Class();
 }
 
 //*********************************
@@ -349,23 +349,23 @@ Any EStructuralFeatureImpl::eGet(int featureID, bool resolve, bool coreType) con
 {
 	switch(featureID)
 	{
-		case ecore::EcorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_CHANGEABLE:
+		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_CHANGEABLE:
 			return eAny(isChangeable()); //5013
-		case ecore::EcorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_DEFAULTVALUE:
+		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_DEFAULTVALUE:
 			return eAny(getDefaultValue()); //5017
-		case ecore::EcorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_DEFAULTVALUELITERAL:
+		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_DEFAULTVALUELITERAL:
 			return eAny(getDefaultValueLiteral()); //5016
-		case ecore::EcorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_DERIVED:
+		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_DERIVED:
 			return eAny(isDerived()); //5019
-		case ecore::EcorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_ECONTAININGCLASS:
+		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_ECONTAININGCLASS:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEContainingClass().lock())); //5021
-		case ecore::EcorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_FEATUREID:
+		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_FEATUREID:
 			return eAny(getFeatureID()); //5020
-		case ecore::EcorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_TRANSIENT:
+		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_TRANSIENT:
 			return eAny(isTransient()); //5015
-		case ecore::EcorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_UNSETTABLE:
+		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_UNSETTABLE:
 			return eAny(isUnsettable()); //5018
-		case ecore::EcorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_VOLATILE:
+		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_VOLATILE:
 			return eAny(isVolatile()); //5014
 	}
 	return ETypedElementImpl::eGet(featureID, resolve, coreType);
@@ -374,23 +374,23 @@ bool EStructuralFeatureImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case ecore::EcorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_CHANGEABLE:
+		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_CHANGEABLE:
 			return isChangeable() != true; //5013
-		case ecore::EcorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_DEFAULTVALUE:
+		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_DEFAULTVALUE:
 			return getDefaultValue() != nullptr; //5017
-		case ecore::EcorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_DEFAULTVALUELITERAL:
+		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_DEFAULTVALUELITERAL:
 			return getDefaultValueLiteral() != ""; //5016
-		case ecore::EcorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_DERIVED:
+		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_DERIVED:
 			return isDerived() != false; //5019
-		case ecore::EcorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_ECONTAININGCLASS:
+		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_ECONTAININGCLASS:
 			return getEContainingClass().lock() != nullptr; //5021
-		case ecore::EcorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_FEATUREID:
+		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_FEATUREID:
 			return getFeatureID() != -1; //5020
-		case ecore::EcorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_TRANSIENT:
+		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_TRANSIENT:
 			return isTransient() != false; //5015
-		case ecore::EcorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_UNSETTABLE:
+		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_UNSETTABLE:
 			return isUnsettable() != false; //5018
-		case ecore::EcorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_VOLATILE:
+		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_VOLATILE:
 			return isVolatile() != false; //5014
 	}
 	return ETypedElementImpl::internalEIsSet(featureID);
@@ -399,49 +399,49 @@ bool EStructuralFeatureImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case ecore::EcorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_CHANGEABLE:
+		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_CHANGEABLE:
 		{
 			// BOOST CAST
 			bool _changeable = newValue->get<bool>();
 			setChangeable(_changeable); //5013
 			return true;
 		}
-		case ecore::EcorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_DEFAULTVALUE:
+		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_DEFAULTVALUE:
 		{
 			// BOOST CAST
 			Any _defaultValue = newValue->get<Any>();
 			setDefaultValue(_defaultValue); //5017
 			return true;
 		}
-		case ecore::EcorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_DEFAULTVALUELITERAL:
+		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_DEFAULTVALUELITERAL:
 		{
 			// BOOST CAST
 			std::string _defaultValueLiteral = newValue->get<std::string>();
 			setDefaultValueLiteral(_defaultValueLiteral); //5016
 			return true;
 		}
-		case ecore::EcorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_DERIVED:
+		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_DERIVED:
 		{
 			// BOOST CAST
 			bool _derived = newValue->get<bool>();
 			setDerived(_derived); //5019
 			return true;
 		}
-		case ecore::EcorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_TRANSIENT:
+		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_TRANSIENT:
 		{
 			// BOOST CAST
 			bool _transient = newValue->get<bool>();
 			setTransient(_transient); //5015
 			return true;
 		}
-		case ecore::EcorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_UNSETTABLE:
+		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_UNSETTABLE:
 		{
 			// BOOST CAST
 			bool _unsettable = newValue->get<bool>();
 			setUnsettable(_unsettable); //5018
 			return true;
 		}
-		case ecore::EcorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_VOLATILE:
+		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_VOLATILE:
 		{
 			// BOOST CAST
 			bool _volatile = newValue->get<bool>();
@@ -464,7 +464,7 @@ void EStructuralFeatureImpl::load(std::shared_ptr<persistence::interfaces::XLoad
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get EcoreFactory
+	// get ecoreFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -555,7 +555,7 @@ void EStructuralFeatureImpl::loadAttributes(std::shared_ptr<persistence::interfa
 
 void EStructuralFeatureImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<ecore::EcoreFactory> modelFactory=ecore::EcoreFactory::eInstance();
+	std::shared_ptr<ecore::ecoreFactory> modelFactory=ecore::ecoreFactory::eInstance();
 
 	//load BasePackage Nodes
 	ETypedElementImpl::loadNode(nodeName, loadHandler);
@@ -589,7 +589,7 @@ void EStructuralFeatureImpl::saveContent(std::shared_ptr<persistence::interfaces
 {
 	try
 	{
-		std::shared_ptr<ecore::EcorePackage> package = ecore::EcorePackage::eInstance();
+		std::shared_ptr<ecore::ecorePackage> package = ecore::ecorePackage::eInstance();
 
 	
 		// Add attributes

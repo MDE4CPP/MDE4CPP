@@ -28,7 +28,7 @@ namespace ecore
 			EOperationImpl& operator=(EOperationImpl const&) = delete;
 
 		protected:
-			friend class EcoreFactoryImpl;
+			friend class ecoreFactoryImpl;
 			EOperationImpl();
 			virtual std::shared_ptr<EOperation> getThisEOperationPtr() const;
 			virtual void setThisEOperationPtr(std::weak_ptr<EOperation> thisEOperationPtr);

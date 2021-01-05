@@ -30,7 +30,7 @@ virtual public EStringToStringMapEntry
 			EStringToStringMapEntryImpl& operator=(EStringToStringMapEntryImpl const&) = delete;
 
 		protected:
-			friend class EcoreFactoryImpl;
+			friend class ecoreFactoryImpl;
 			EStringToStringMapEntryImpl();
 			virtual std::shared_ptr<EStringToStringMapEntry> getThisEStringToStringMapEntryPtr() const;
 			virtual void setThisEStringToStringMapEntryPtr(std::weak_ptr<EStringToStringMapEntry> thisEStringToStringMapEntryPtr);

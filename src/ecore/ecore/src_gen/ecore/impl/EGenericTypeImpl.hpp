@@ -30,7 +30,7 @@ virtual public EGenericType
 			EGenericTypeImpl& operator=(EGenericTypeImpl const&) = delete;
 
 		protected:
-			friend class EcoreFactoryImpl;
+			friend class ecoreFactoryImpl;
 			EGenericTypeImpl();
 			virtual std::shared_ptr<EGenericType> getThisEGenericTypePtr() const;
 			virtual void setThisEGenericTypePtr(std::weak_ptr<EGenericType> thisEGenericTypePtr);

@@ -1,23 +1,23 @@
 
-#include "ecore/EcorePlugin.hpp"
-#include "ecore/impl/EcorePluginImpl.hpp"
+#include "ecore/ecorePlugin.hpp"
+#include "ecore/impl/ecorePluginImpl.hpp"
 
 using namespace ecore;
 
 //static initialisation
-std::shared_ptr<MDE4CPPPlugin> EcorePlugin::instance;
+std::shared_ptr<MDE4CPPPlugin> ecorePlugin::instance;
 
-std::shared_ptr<MDE4CPPPlugin> EcorePlugin::eInstance()
+std::shared_ptr<MDE4CPPPlugin> ecorePlugin::eInstance()
 {
 	if(instance==nullptr)
 	{
 		//create a new Singelton Instance
-		instance.reset(new EcorePluginImpl());
+		instance.reset(new ecorePluginImpl());
 	}
 	return instance;
 }
 
 std::shared_ptr<MDE4CPPPlugin> start()
 {
-	return EcorePlugin::eInstance();
+	return ecorePlugin::eInstance();
 }

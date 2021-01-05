@@ -7,15 +7,15 @@
 #ifndef ECOREPLUGINIMPL_HPP
 #define ECOREPLUGINIMPL_HPP
 
-#include "ecore/EcorePlugin.hpp"
+#include "ecore/ecorePlugin.hpp"
 
 namespace ecore 
 {
-	class EcorePluginImpl : virtual public EcorePlugin 
+	class ecorePluginImpl : virtual public ecorePlugin 
 	{
 		public:
-			EcorePluginImpl();
-			virtual ~EcorePluginImpl();
+			ecorePluginImpl();
+			virtual ~ecorePluginImpl();
 		
 			virtual std::string eclipseURI();
 			virtual std::string eNAME();

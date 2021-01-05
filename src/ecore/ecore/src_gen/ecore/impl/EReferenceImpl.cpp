@@ -50,8 +50,8 @@
 #include "ecore/EStructuralFeature.hpp"
 
 //Factories an Package includes
-#include "ecore/impl/EcoreFactoryImpl.hpp"
-#include "ecore/impl/EcorePackageImpl.hpp"
+#include "ecore/impl/ecoreFactoryImpl.hpp"
+#include "ecore/impl/ecorePackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -159,7 +159,7 @@ std::shared_ptr<ecore::EObject>  EReferenceImpl::copy() const
 
 std::shared_ptr<EClass> EReferenceImpl::eStaticClass() const
 {
-	return ecore::EcorePackage::eInstance()->getEReference_Class();
+	return ecore::ecorePackage::eInstance()->getEReference_Class();
 }
 
 //*********************************
@@ -316,11 +316,11 @@ Any EReferenceImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case ecore::EcorePackage::EREFERENCE_ATTRIBUTE_CONTAINER:
+		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_CONTAINER:
 			return eAny(isContainer()); //4323
-		case ecore::EcorePackage::EREFERENCE_ATTRIBUTE_CONTAINMENT:
+		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_CONTAINMENT:
 			return eAny(isContainment()); //4322
-		case ecore::EcorePackage::EREFERENCE_ATTRIBUTE_EKEYS:
+		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_EKEYS:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<ecore::EAttribute>::iterator iter = m_eKeys->begin();
@@ -332,11 +332,11 @@ Any EReferenceImpl::eGet(int featureID, bool resolve, bool coreType) const
 			}
 			return eAny(tempList); //4327
 		}
-		case ecore::EcorePackage::EREFERENCE_ATTRIBUTE_EOPPOSITE:
+		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_EOPPOSITE:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEOpposite())); //4325
-		case ecore::EcorePackage::EREFERENCE_ATTRIBUTE_EREFERENCETYPE:
+		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_EREFERENCETYPE:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEReferenceType())); //4326
-		case ecore::EcorePackage::EREFERENCE_ATTRIBUTE_RESOLVEPROXIES:
+		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_RESOLVEPROXIES:
 			return eAny(isResolveProxies()); //4324
 	}
 	return EStructuralFeatureImpl::eGet(featureID, resolve, coreType);
@@ -345,17 +345,17 @@ bool EReferenceImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case ecore::EcorePackage::EREFERENCE_ATTRIBUTE_CONTAINER:
+		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_CONTAINER:
 			return isContainer() != false; //4323
-		case ecore::EcorePackage::EREFERENCE_ATTRIBUTE_CONTAINMENT:
+		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_CONTAINMENT:
 			return isContainment() != false; //4322
-		case ecore::EcorePackage::EREFERENCE_ATTRIBUTE_EKEYS:
+		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_EKEYS:
 			return getEKeys() != nullptr; //4327
-		case ecore::EcorePackage::EREFERENCE_ATTRIBUTE_EOPPOSITE:
+		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_EOPPOSITE:
 			return getEOpposite() != nullptr; //4325
-		case ecore::EcorePackage::EREFERENCE_ATTRIBUTE_EREFERENCETYPE:
+		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_EREFERENCETYPE:
 			return getEReferenceType() != nullptr; //4326
-		case ecore::EcorePackage::EREFERENCE_ATTRIBUTE_RESOLVEPROXIES:
+		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_RESOLVEPROXIES:
 			return isResolveProxies() != true; //4324
 	}
 	return EStructuralFeatureImpl::internalEIsSet(featureID);
@@ -364,14 +364,14 @@ bool EReferenceImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case ecore::EcorePackage::EREFERENCE_ATTRIBUTE_CONTAINMENT:
+		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_CONTAINMENT:
 		{
 			// BOOST CAST
 			bool _containment = newValue->get<bool>();
 			setContainment(_containment); //4322
 			return true;
 		}
-		case ecore::EcorePackage::EREFERENCE_ATTRIBUTE_EKEYS:
+		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_EKEYS:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -407,7 +407,7 @@ bool EReferenceImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case ecore::EcorePackage::EREFERENCE_ATTRIBUTE_EOPPOSITE:
+		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_EOPPOSITE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -415,7 +415,7 @@ bool EReferenceImpl::eSet(int featureID, Any newValue)
 			setEOpposite(_eOpposite); //4325
 			return true;
 		}
-		case ecore::EcorePackage::EREFERENCE_ATTRIBUTE_EREFERENCETYPE:
+		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_EREFERENCETYPE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -423,7 +423,7 @@ bool EReferenceImpl::eSet(int featureID, Any newValue)
 			setEReferenceType(_eReferenceType); //4326
 			return true;
 		}
-		case ecore::EcorePackage::EREFERENCE_ATTRIBUTE_RESOLVEPROXIES:
+		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_RESOLVEPROXIES:
 		{
 			// BOOST CAST
 			bool _resolveProxies = newValue->get<bool>();
@@ -446,7 +446,7 @@ void EReferenceImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler>
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get EcoreFactory
+	// get ecoreFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -513,7 +513,7 @@ void EReferenceImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLo
 
 void EReferenceImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<ecore::EcoreFactory> modelFactory=ecore::EcoreFactory::eInstance();
+	std::shared_ptr<ecore::ecoreFactory> modelFactory=ecore::ecoreFactory::eInstance();
 
 	//load BasePackage Nodes
 	EStructuralFeatureImpl::loadNode(nodeName, loadHandler);
@@ -523,7 +523,7 @@ void EReferenceImpl::resolveReferences(const int featureID, std::list<std::share
 {
 	switch(featureID)
 	{
-		case ecore::EcorePackage::EREFERENCE_ATTRIBUTE_EKEYS:
+		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_EKEYS:
 		{
 			std::shared_ptr<Bag<ecore::EAttribute>> _eKeys = getEKeys();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -537,7 +537,7 @@ void EReferenceImpl::resolveReferences(const int featureID, std::list<std::share
 			return;
 		}
 
-		case ecore::EcorePackage::EREFERENCE_ATTRIBUTE_EOPPOSITE:
+		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_EOPPOSITE:
 		{
 			if (references.size() == 1)
 			{
@@ -549,7 +549,7 @@ void EReferenceImpl::resolveReferences(const int featureID, std::list<std::share
 			return;
 		}
 
-		case ecore::EcorePackage::EREFERENCE_ATTRIBUTE_EREFERENCETYPE:
+		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_EREFERENCETYPE:
 		{
 			if (references.size() == 1)
 			{
@@ -590,7 +590,7 @@ void EReferenceImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 {
 	try
 	{
-		std::shared_ptr<ecore::EcorePackage> package = ecore::EcorePackage::eInstance();
+		std::shared_ptr<ecore::ecorePackage> package = ecore::ecorePackage::eInstance();
 
 	
 		// Add attributes

@@ -41,8 +41,8 @@
 #include "ecore/EObject.hpp"
 
 //Factories an Package includes
-#include "ecore/impl/EcoreFactoryImpl.hpp"
-#include "ecore/impl/EcorePackageImpl.hpp"
+#include "ecore/impl/ecoreFactoryImpl.hpp"
+#include "ecore/impl/ecorePackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -117,7 +117,7 @@ std::shared_ptr<ecore::EObject>  ETypeParameterImpl::copy() const
 
 std::shared_ptr<EClass> ETypeParameterImpl::eStaticClass() const
 {
-	return ecore::EcorePackage::eInstance()->getETypeParameter_Class();
+	return ecore::ecorePackage::eInstance()->getETypeParameter_Class();
 }
 
 //*********************************
@@ -196,7 +196,7 @@ Any ETypeParameterImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case ecore::EcorePackage::ETYPEPARAMETER_ATTRIBUTE_EBOUNDS:
+		case ecore::ecorePackage::ETYPEPARAMETER_ATTRIBUTE_EBOUNDS:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<ecore::EGenericType>::iterator iter = m_eBounds->begin();
@@ -215,7 +215,7 @@ bool ETypeParameterImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case ecore::EcorePackage::ETYPEPARAMETER_ATTRIBUTE_EBOUNDS:
+		case ecore::ecorePackage::ETYPEPARAMETER_ATTRIBUTE_EBOUNDS:
 			return getEBounds() != nullptr; //525
 	}
 	return ENamedElementImpl::internalEIsSet(featureID);
@@ -224,7 +224,7 @@ bool ETypeParameterImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case ecore::EcorePackage::ETYPEPARAMETER_ATTRIBUTE_EBOUNDS:
+		case ecore::ecorePackage::ETYPEPARAMETER_ATTRIBUTE_EBOUNDS:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -276,7 +276,7 @@ void ETypeParameterImpl::load(std::shared_ptr<persistence::interfaces::XLoadHand
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get EcoreFactory
+	// get ecoreFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -292,7 +292,7 @@ void ETypeParameterImpl::loadAttributes(std::shared_ptr<persistence::interfaces:
 
 void ETypeParameterImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<ecore::EcoreFactory> modelFactory=ecore::EcoreFactory::eInstance();
+	std::shared_ptr<ecore::ecoreFactory> modelFactory=ecore::ecoreFactory::eInstance();
 
 	try
 	{
@@ -350,7 +350,7 @@ void ETypeParameterImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 {
 	try
 	{
-		std::shared_ptr<ecore::EcorePackage> package = ecore::EcorePackage::eInstance();
+		std::shared_ptr<ecore::ecorePackage> package = ecore::ecorePackage::eInstance();
 
 	
 
@@ -363,7 +363,7 @@ void ETypeParameterImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 		std::shared_ptr<Bag<ecore::EGenericType>> list_eBounds = this->getEBounds();
 		for (std::shared_ptr<ecore::EGenericType> eBounds : *list_eBounds) 
 		{
-			saveHandler->addReference(eBounds, "eBounds", eBounds->eClass() !=ecore::EcorePackage::eInstance()->getEGenericType_Class());
+			saveHandler->addReference(eBounds, "eBounds", eBounds->eClass() !=ecore::ecorePackage::eInstance()->getEGenericType_Class());
 		}
 	}
 	catch (std::exception& e)

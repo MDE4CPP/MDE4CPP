@@ -28,7 +28,7 @@ namespace ecore
 			EAnnotationImpl& operator=(EAnnotationImpl const&) = delete;
 
 		protected:
-			friend class EcoreFactoryImpl;
+			friend class ecoreFactoryImpl;
 			EAnnotationImpl();
 			virtual std::shared_ptr<EAnnotation> getThisEAnnotationPtr() const;
 			virtual void setThisEAnnotationPtr(std::weak_ptr<EAnnotation> thisEAnnotationPtr);

@@ -1,58 +1,58 @@
-#include "ecore/impl/EcorePluginImpl.hpp"
+#include "ecore/impl/ecorePluginImpl.hpp"
 
-#include "ecore/EcoreFactory.hpp"
-#include "ecore/EcorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
+#include "ecore/ecorePackage.hpp"
 
 using namespace ecore;
 
 //*********************************
 // Constructor / Destructor
 //*********************************
-EcorePluginImpl::EcorePluginImpl()
+ecorePluginImpl::ecorePluginImpl()
 {
 }
 
-EcorePluginImpl::~EcorePluginImpl()
+ecorePluginImpl::~ecorePluginImpl()
 {
 }
 
 
-std::shared_ptr<ecore::EObject> EcorePluginImpl::create(const std::string& name) const
+std::shared_ptr<ecore::EObject> ecorePluginImpl::create(const std::string& name) const
 {
-	return EcoreFactory::eInstance()->create(name);
+	return ecoreFactory::eInstance()->create(name);
 }
 
-std::shared_ptr<ecore::EObject> EcorePluginImpl::create(const std::string& name, std::shared_ptr<ecore::EObject> container, const unsigned int referenceID) const
+std::shared_ptr<ecore::EObject> ecorePluginImpl::create(const std::string& name, std::shared_ptr<ecore::EObject> container, const unsigned int referenceID) const
 {
-	return EcoreFactory::eInstance()->create(name, container, referenceID);
+	return ecoreFactory::eInstance()->create(name, container, referenceID);
 }
 
-std::shared_ptr<ecore::EFactory> EcorePluginImpl::getEFactory()
+std::shared_ptr<ecore::EFactory> ecorePluginImpl::getEFactory()
 {
-	return EcoreFactory::eInstance();
+	return ecoreFactory::eInstance();
 }
 
-std::shared_ptr<ecore::EPackage> EcorePluginImpl::getEPackage()
+std::shared_ptr<ecore::EPackage> ecorePluginImpl::getEPackage()
 {
-	return EcorePackage::eInstance();
+	return ecorePackage::eInstance();
 }
 
-std::string EcorePluginImpl::eclipseURI()
+std::string ecorePluginImpl::eclipseURI()
 {
 	return "";
 }
 
-std::string EcorePluginImpl::eNAME()
+std::string ecorePluginImpl::eNAME()
 {
 	return "ecore";
 }
 
-std::string EcorePluginImpl::eNS_URI()
+std::string ecorePluginImpl::eNS_URI()
 {
 	return "http://www.eclipse.org/emf/2002/Ecore";
 }
 
-std::string EcorePluginImpl::eNS_PREFIX()
+std::string ecorePluginImpl::eNS_PREFIX()
 {
 	return "ecore";
 }

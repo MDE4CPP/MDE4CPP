@@ -1,17 +1,17 @@
-#include "ecore/EcoreFactory.hpp"
-#include "ecore/impl/EcoreFactoryImpl.hpp"
+#include "ecore/ecoreFactory.hpp"
+#include "ecore/impl/ecoreFactoryImpl.hpp"
 
 using namespace ecore;
 				 
 //static initialisation
-std::shared_ptr<EcoreFactory> EcoreFactory::instance;
+std::shared_ptr<ecoreFactory> ecoreFactory::instance;
 
-std::shared_ptr<EcoreFactory> EcoreFactory::eInstance()
+std::shared_ptr<ecoreFactory> ecoreFactory::eInstance()
 {
 	if(!instance)
 	{
 		//create a new Factoryimplementation
-		instance.reset(EcoreFactoryImpl::create());
+		instance.reset(ecoreFactoryImpl::create());
 	}	
 	return instance;
 }

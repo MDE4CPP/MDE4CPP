@@ -7,7 +7,7 @@
 #ifndef ECOREPACKAGEIMPL_HPP
 #define ECOREPACKAGEIMPL_HPP
 
-#include "ecore/EcorePackage.hpp"
+#include "ecore/ecorePackage.hpp"
 #include "ecore/impl/EPackageImpl.hpp"
 
 
@@ -37,22 +37,22 @@ namespace ecore
 
 namespace ecore
 {
-	class EcoreFactory;
+	class ecoreFactory;
 }
 
 namespace ecore
 {
-	class EcorePackageImpl : public EPackageImpl ,virtual public EcorePackage
+	class ecorePackageImpl : public EPackageImpl ,virtual public ecorePackage
 	{
 		private:    
-			EcorePackageImpl(EcorePackageImpl const&) = delete;
-			EcorePackageImpl& operator=(EcorePackageImpl const&) = delete;
+			ecorePackageImpl(ecorePackageImpl const&) = delete;
+			ecorePackageImpl& operator=(ecorePackageImpl const&) = delete;
 
 		protected:
-			EcorePackageImpl();
+			ecorePackageImpl();
 
 		public:
-			virtual ~EcorePackageImpl();
+			virtual ~ecorePackageImpl();
 
 			// Begin Class EAnnotation
 			//Class and Feature Getter
@@ -404,10 +404,10 @@ namespace ecore
 			std::shared_ptr<ecore::EReference> m_eAnnotation_Attribute_contents = nullptr;std::shared_ptr<ecore::EReference> m_eAnnotation_Attribute_details = nullptr;std::shared_ptr<ecore::EReference> m_eClass_Attribute_eAllAttributes = nullptr;std::shared_ptr<ecore::EReference> m_eClass_Attribute_eAllContainments = nullptr;std::shared_ptr<ecore::EReference> m_eClass_Attribute_eAllGenericSuperTypes = nullptr;std::shared_ptr<ecore::EReference> m_eClass_Attribute_eAllOperations = nullptr;std::shared_ptr<ecore::EReference> m_eClass_Attribute_eAllReferences = nullptr;std::shared_ptr<ecore::EReference> m_eClass_Attribute_eAllStructuralFeatures = nullptr;std::shared_ptr<ecore::EReference> m_eClass_Attribute_eAllSuperTypes = nullptr;std::shared_ptr<ecore::EReference> m_eModelElement_Attribute_eAnnotations = nullptr;std::shared_ptr<ecore::EReference> m_eAttribute_Attribute_eAttributeType = nullptr;std::shared_ptr<ecore::EReference> m_eClass_Attribute_eAttributes = nullptr;std::shared_ptr<ecore::EReference> m_eTypeParameter_Attribute_eBounds = nullptr;std::shared_ptr<ecore::EReference> m_eGenericType_Attribute_eClassifier = nullptr;std::shared_ptr<ecore::EReference> m_ePackage_Attribute_eClassifiers = nullptr;std::shared_ptr<ecore::EReference> m_eObject_Attribute_eContainer = nullptr;std::shared_ptr<ecore::EReference> m_eOperation_Attribute_eContainingClass = nullptr;std::shared_ptr<ecore::EReference> m_eStructuralFeature_Attribute_eContainingClass = nullptr;std::shared_ptr<ecore::EReference> m_eObject_Attribute_eContens = nullptr;std::shared_ptr<ecore::EReference> m_eEnumLiteral_Attribute_eEnum = nullptr;std::shared_ptr<ecore::EReference> m_eOperation_Attribute_eExceptions = nullptr;std::shared_ptr<ecore::EReference> m_ePackage_Attribute_eFactoryInstance = nullptr;std::shared_ptr<ecore::EReference> m_eOperation_Attribute_eGenericExceptions = nullptr;std::shared_ptr<ecore::EReference> m_eClass_Attribute_eGenericSuperTypes = nullptr;std::shared_ptr<ecore::EReference> m_eTypedElement_Attribute_eGenericType = nullptr;std::shared_ptr<ecore::EReference> m_eClass_Attribute_eIDAttribute = nullptr;std::shared_ptr<ecore::EReference> m_eReference_Attribute_eKeys = nullptr;std::shared_ptr<ecore::EReference> m_eEnum_Attribute_eLiterals = nullptr;std::shared_ptr<ecore::EReference> m_eGenericType_Attribute_eLowerBound = nullptr;std::shared_ptr<ecore::EReference> m_eAnnotation_Attribute_eModelElement = nullptr;std::shared_ptr<ecore::EReference> m_eParameter_Attribute_eOperation = nullptr;std::shared_ptr<ecore::EReference> m_eClass_Attribute_eOperations = nullptr;std::shared_ptr<ecore::EReference> m_eReference_Attribute_eOpposite = nullptr;std::shared_ptr<ecore::EReference> m_eClassifier_Attribute_ePackage = nullptr;std::shared_ptr<ecore::EReference> m_eFactory_Attribute_ePackage = nullptr;std::shared_ptr<ecore::EReference> m_eOperation_Attribute_eParameters = nullptr;std::shared_ptr<ecore::EReference> m_eGenericType_Attribute_eRawType = nullptr;std::shared_ptr<ecore::EReference> m_eReference_Attribute_eReferenceType = nullptr;std::shared_ptr<ecore::EReference> m_eClass_Attribute_eReferences = nullptr;std::shared_ptr<ecore::EReference> m_eClass_Attribute_eStructuralFeatures = nullptr;std::shared_ptr<ecore::EReference> m_ePackage_Attribute_eSubpackages = nullptr;std::shared_ptr<ecore::EReference> m_ePackage_Attribute_eSuperPackage = nullptr;std::shared_ptr<ecore::EReference> m_eClass_Attribute_eSuperTypes = nullptr;std::shared_ptr<ecore::EReference> m_eTypedElement_Attribute_eType = nullptr;std::shared_ptr<ecore::EReference> m_eGenericType_Attribute_eTypeArguments = nullptr;std::shared_ptr<ecore::EReference> m_eGenericType_Attribute_eTypeParameter = nullptr;std::shared_ptr<ecore::EReference> m_eClassifier_Attribute_eTypeParameters = nullptr;std::shared_ptr<ecore::EReference> m_eOperation_Attribute_eTypeParameters = nullptr;std::shared_ptr<ecore::EReference> m_eGenericType_Attribute_eUpperBound = nullptr;std::shared_ptr<ecore::EReference> m_eAnnotation_Attribute_references = nullptr;
 			std::shared_ptr<ecore::EOperation> m_eFactory_Operation_convertToString_EDataType_EJavaObject = nullptr;std::shared_ptr<ecore::EOperation> m_eFactory_Operation_create_EClass = nullptr;std::shared_ptr<ecore::EOperation> m_eFactory_Operation_createFromString_EDataType_EString = nullptr;std::shared_ptr<ecore::EOperation> m_eObject_Operation_eAllContents = nullptr;std::shared_ptr<ecore::EOperation> m_eObject_Operation_eClass = nullptr;std::shared_ptr<ecore::EOperation> m_eObject_Operation_eContainer = nullptr;std::shared_ptr<ecore::EOperation> m_eObject_Operation_eContainingFeature = nullptr;std::shared_ptr<ecore::EOperation> m_eObject_Operation_eContainmentFeature = nullptr;std::shared_ptr<ecore::EOperation> m_eObject_Operation_eContents = nullptr;std::shared_ptr<ecore::EOperation> m_eObject_Operation_eCrossReferences = nullptr;std::shared_ptr<ecore::EOperation> m_eObject_Operation_eGet_EStructuralFeature = nullptr;std::shared_ptr<ecore::EOperation> m_eObject_Operation_eGet_EStructuralFeature_EBoolean = nullptr;std::shared_ptr<ecore::EOperation> m_eObject_Operation_eInvoke_EOperation_EEList = nullptr;std::shared_ptr<ecore::EOperation> m_eObject_Operation_eIsProxy = nullptr;std::shared_ptr<ecore::EOperation> m_eObject_Operation_eIsSet_EStructuralFeature = nullptr;std::shared_ptr<ecore::EOperation> m_eObject_Operation_eResource = nullptr;std::shared_ptr<ecore::EOperation> m_eObject_Operation_eSet_EStructuralFeature_EJavaObject = nullptr;std::shared_ptr<ecore::EOperation> m_eObject_Operation_eUnset_EStructuralFeature = nullptr;std::shared_ptr<ecore::EOperation> m_eClassifier_Operation_getClassifierID = nullptr;std::shared_ptr<ecore::EOperation> m_eStructuralFeature_Operation_getContainerClass = nullptr;std::shared_ptr<ecore::EOperation> m_eModelElement_Operation_getEAnnotation_EString = nullptr;std::shared_ptr<ecore::EOperation> m_ePackage_Operation_getEClassifier_EString = nullptr;std::shared_ptr<ecore::EOperation> m_eEnum_Operation_getEEnumLiteral_EString = nullptr;std::shared_ptr<ecore::EOperation> m_eEnum_Operation_getEEnumLiteral_EInt = nullptr;std::shared_ptr<ecore::EOperation> m_eEnum_Operation_getEEnumLiteralByLiteral_EString = nullptr;std::shared_ptr<ecore::EOperation> m_eClass_Operation_getEOperation_EInt = nullptr;std::shared_ptr<ecore::EOperation> m_eClass_Operation_getEStructuralFeature_EInt = nullptr;std::shared_ptr<ecore::EOperation> m_eClass_Operation_getEStructuralFeature_EString = nullptr;std::shared_ptr<ecore::EOperation> m_eClass_Operation_getFeatureCount = nullptr;std::shared_ptr<ecore::EOperation> m_eClass_Operation_getFeatureID_EStructuralFeature = nullptr;std::shared_ptr<ecore::EOperation> m_eStructuralFeature_Operation_getFeatureID = nullptr;std::shared_ptr<ecore::EOperation> m_eClass_Operation_getFeatureType_EStructuralFeature = nullptr;std::shared_ptr<ecore::EOperation> m_eClass_Operation_getOperationCount = nullptr;std::shared_ptr<ecore::EOperation> m_eClass_Operation_getOperationID_EOperation = nullptr;std::shared_ptr<ecore::EOperation> m_eOperation_Operation_getOperationID = nullptr;std::shared_ptr<ecore::EOperation> m_eClass_Operation_getOverride_EOperation = nullptr;std::shared_ptr<ecore::EOperation> m_eClassifier_Operation_isInstance_EJavaObject = nullptr;std::shared_ptr<ecore::EOperation> m_eGenericType_Operation_isInstance_EJavaObject = nullptr;std::shared_ptr<ecore::EOperation> m_eOperation_Operation_isOverrideOf_EOperation = nullptr;std::shared_ptr<ecore::EOperation> m_eClass_Operation_isSuperTypeOf_EClass = nullptr;
 
-			friend class EcorePackage;
+			friend class ecorePackage;
 
 			static bool isInited;
-			static EcorePackage* create();
+			static ecorePackage* create();
 			bool isInitialized = false;
  			bool isCreated = false;
 
@@ -418,27 +418,27 @@ namespace ecore
 			void initializePackageContents();
 
 		private:
-			void createEAnnotationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
-			void createEAttributeContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
-			void createEClassContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
-			void createEClassifierContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
-			void createEDataTypeContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
-			void createEEnumContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
-			void createEEnumLiteralContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
-			void createEFactoryContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
-			void createEGenericTypeContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
-			void createEModelElementContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
-			void createENamedElementContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
-			void createEObjectContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
-			void createEOperationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
-			void createEPackageContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
-			void createEParameterContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
-			void createEReferenceContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
-			void createEStringToStringMapEntryContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
-			void createEStructuralFeatureContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
-			void createETypeParameterContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
-			void createETypedElementContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
-			void createPackageEDataTypes(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
+			void createEAnnotationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
+			void createEAttributeContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
+			void createEClassContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
+			void createEClassifierContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
+			void createEDataTypeContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
+			void createEEnumContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
+			void createEEnumLiteralContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
+			void createEFactoryContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
+			void createEGenericTypeContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
+			void createEModelElementContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
+			void createENamedElementContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
+			void createEObjectContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
+			void createEOperationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
+			void createEPackageContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
+			void createEParameterContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
+			void createEReferenceContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
+			void createEStringToStringMapEntryContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
+			void createEStructuralFeatureContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
+			void createETypeParameterContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
+			void createETypedElementContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
+			void createPackageEDataTypes(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 
 			void initializeEAnnotationContent();
 			void initializeEAttributeContent();

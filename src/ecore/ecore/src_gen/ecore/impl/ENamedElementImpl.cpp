@@ -39,8 +39,8 @@
 #include "ecore/EObject.hpp"
 
 //Factories an Package includes
-#include "ecore/impl/EcoreFactoryImpl.hpp"
-#include "ecore/impl/EcorePackageImpl.hpp"
+#include "ecore/impl/ecoreFactoryImpl.hpp"
+#include "ecore/impl/ecorePackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -106,7 +106,7 @@ std::shared_ptr<ecore::EObject>  ENamedElementImpl::copy() const
 
 std::shared_ptr<EClass> ENamedElementImpl::eStaticClass() const
 {
-	return ecore::EcorePackage::eInstance()->getENamedElement_Class();
+	return ecore::ecorePackage::eInstance()->getENamedElement_Class();
 }
 
 //*********************************
@@ -181,7 +181,7 @@ Any ENamedElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case ecore::EcorePackage::ENAMEDELEMENT_ATTRIBUTE_NAME:
+		case ecore::ecorePackage::ENAMEDELEMENT_ATTRIBUTE_NAME:
 			return eAny(getName()); //384
 	}
 	return EModelElementImpl::eGet(featureID, resolve, coreType);
@@ -190,7 +190,7 @@ bool ENamedElementImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case ecore::EcorePackage::ENAMEDELEMENT_ATTRIBUTE_NAME:
+		case ecore::ecorePackage::ENAMEDELEMENT_ATTRIBUTE_NAME:
 			return getName() != ""; //384
 	}
 	return EModelElementImpl::internalEIsSet(featureID);
@@ -199,7 +199,7 @@ bool ENamedElementImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case ecore::EcorePackage::ENAMEDELEMENT_ATTRIBUTE_NAME:
+		case ecore::ecorePackage::ENAMEDELEMENT_ATTRIBUTE_NAME:
 		{
 			// BOOST CAST
 			std::string _name = newValue->get<std::string>();
@@ -222,7 +222,7 @@ void ENamedElementImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandl
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get EcoreFactory
+	// get ecoreFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -259,7 +259,7 @@ void ENamedElementImpl::loadAttributes(std::shared_ptr<persistence::interfaces::
 
 void ENamedElementImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<ecore::EcoreFactory> modelFactory=ecore::EcoreFactory::eInstance();
+	std::shared_ptr<ecore::ecoreFactory> modelFactory=ecore::ecoreFactory::eInstance();
 
 	//load BasePackage Nodes
 	EModelElementImpl::loadNode(nodeName, loadHandler);
@@ -287,7 +287,7 @@ void ENamedElementImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 {
 	try
 	{
-		std::shared_ptr<ecore::EcorePackage> package = ecore::EcorePackage::eInstance();
+		std::shared_ptr<ecore::ecorePackage> package = ecore::ecorePackage::eInstance();
 
 	
 		// Add attributes

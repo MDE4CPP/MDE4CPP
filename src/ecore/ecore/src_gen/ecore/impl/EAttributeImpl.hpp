@@ -28,7 +28,7 @@ namespace ecore
 			EAttributeImpl& operator=(EAttributeImpl const&) = delete;
 
 		protected:
-			friend class EcoreFactoryImpl;
+			friend class ecoreFactoryImpl;
 			EAttributeImpl();
 			virtual std::shared_ptr<EAttribute> getThisEAttributePtr() const;
 			virtual void setThisEAttributePtr(std::weak_ptr<EAttribute> thisEAttributePtr);

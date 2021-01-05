@@ -1,4 +1,4 @@
-#include "ecore/impl/EcorePackageImpl.hpp"
+#include "ecore/impl/ecorePackageImpl.hpp"
 
 #include <cassert>
 
@@ -16,7 +16,7 @@
 #include "ecore/ETypeParameter.hpp"
 
 // metametamodel factory
-#include "ecore/EcoreFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 
 //depending model packages
 
@@ -24,7 +24,7 @@
 
 using namespace ecore;
 
-void EcorePackageImpl::initializePackageContents()
+void ecorePackageImpl::initializePackageContents()
 {
 	if (isInitialized)
 	{
@@ -83,7 +83,7 @@ void EcorePackageImpl::initializePackageContents()
 
 }
 
-void EcorePackageImpl::initializeEAnnotationContent()
+void ecorePackageImpl::initializeEAnnotationContent()
 {
 	m_eAnnotation_Class->setName("EAnnotation");
 	m_eAnnotation_Class->setAbstract(false);
@@ -173,7 +173,7 @@ void EcorePackageImpl::initializeEAnnotationContent()
 		{
 			m_eAnnotation_Attribute_eModelElement->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = ecore::EcorePackage::eInstance()->getEModelElement_Attribute_eAnnotations();
+		std::shared_ptr<ecore::EReference>  otherEnd = ecore::ecorePackage::eInstance()->getEModelElement_Attribute_eAnnotations();
 		if (otherEnd != nullptr)
 	    {
 	   		m_eAnnotation_Attribute_eModelElement->setEOpposite(otherEnd);
@@ -205,7 +205,7 @@ void EcorePackageImpl::initializeEAnnotationContent()
 	
 }
 
-void EcorePackageImpl::initializeEAttributeContent()
+void ecorePackageImpl::initializeEAttributeContent()
 {
 	m_eAttribute_Class->setName("EAttribute");
 	m_eAttribute_Class->setAbstract(false);
@@ -258,7 +258,7 @@ void EcorePackageImpl::initializeEAttributeContent()
 	
 }
 
-void EcorePackageImpl::initializeEClassContent()
+void ecorePackageImpl::initializeEClassContent()
 {
 	m_eClass_Class->setName("EClass");
 	m_eClass_Class->setAbstract(false);
@@ -544,7 +544,7 @@ void EcorePackageImpl::initializeEClassContent()
 		{
 			m_eClass_Attribute_eOperations->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = ecore::EcorePackage::eInstance()->getEOperation_Attribute_eContainingClass();
+		std::shared_ptr<ecore::EReference>  otherEnd = ecore::ecorePackage::eInstance()->getEOperation_Attribute_eContainingClass();
 		if (otherEnd != nullptr)
 	    {
 	   		m_eClass_Attribute_eOperations->setEOpposite(otherEnd);
@@ -591,7 +591,7 @@ void EcorePackageImpl::initializeEClassContent()
 		{
 			m_eClass_Attribute_eStructuralFeatures->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = ecore::EcorePackage::eInstance()->getEStructuralFeature_Attribute_eContainingClass();
+		std::shared_ptr<ecore::EReference>  otherEnd = ecore::ecorePackage::eInstance()->getEStructuralFeature_Attribute_eContainingClass();
 		if (otherEnd != nullptr)
 	    {
 	   		m_eClass_Attribute_eStructuralFeatures->setEOpposite(otherEnd);
@@ -628,7 +628,7 @@ void EcorePackageImpl::initializeEClassContent()
 	m_eClass_Operation_getEOperation_EInt->setOrdered(true);
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_eClass_Operation_getEOperation_EInt);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_eClass_Operation_getEOperation_EInt);
 		parameter->setName("operationID");
 		parameter->setEType(getEInt_Class());
 		parameter->setLowerBound(0);
@@ -645,7 +645,7 @@ void EcorePackageImpl::initializeEClassContent()
 	m_eClass_Operation_getEStructuralFeature_EInt->setOrdered(true);
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_eClass_Operation_getEStructuralFeature_EInt);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_eClass_Operation_getEStructuralFeature_EInt);
 		parameter->setName("featureID");
 		parameter->setEType(getEInt_Class());
 		parameter->setLowerBound(0);
@@ -662,7 +662,7 @@ void EcorePackageImpl::initializeEClassContent()
 	m_eClass_Operation_getEStructuralFeature_EString->setOrdered(true);
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_eClass_Operation_getEStructuralFeature_EString);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_eClass_Operation_getEStructuralFeature_EString);
 		parameter->setName("featureName");
 		parameter->setEType(getEString_Class());
 		parameter->setLowerBound(0);
@@ -687,7 +687,7 @@ void EcorePackageImpl::initializeEClassContent()
 	m_eClass_Operation_getFeatureID_EStructuralFeature->setOrdered(true);
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_eClass_Operation_getFeatureID_EStructuralFeature);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_eClass_Operation_getFeatureID_EStructuralFeature);
 		parameter->setName("feature");
 		parameter->setEType(getEStructuralFeature_Class());
 		parameter->setLowerBound(0);
@@ -704,7 +704,7 @@ void EcorePackageImpl::initializeEClassContent()
 	m_eClass_Operation_getFeatureType_EStructuralFeature->setOrdered(true);
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_eClass_Operation_getFeatureType_EStructuralFeature);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_eClass_Operation_getFeatureType_EStructuralFeature);
 		parameter->setName("feature");
 		parameter->setEType(getEStructuralFeature_Class());
 		parameter->setLowerBound(0);
@@ -729,7 +729,7 @@ void EcorePackageImpl::initializeEClassContent()
 	m_eClass_Operation_getOperationID_EOperation->setOrdered(true);
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_eClass_Operation_getOperationID_EOperation);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_eClass_Operation_getOperationID_EOperation);
 		parameter->setName("operation");
 		parameter->setEType(getEOperation_Class());
 		parameter->setLowerBound(0);
@@ -746,7 +746,7 @@ void EcorePackageImpl::initializeEClassContent()
 	m_eClass_Operation_getOverride_EOperation->setOrdered(true);
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_eClass_Operation_getOverride_EOperation);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_eClass_Operation_getOverride_EOperation);
 		parameter->setName("operation");
 		parameter->setEType(getEOperation_Class());
 		parameter->setLowerBound(0);
@@ -763,7 +763,7 @@ void EcorePackageImpl::initializeEClassContent()
 	m_eClass_Operation_isSuperTypeOf_EClass->setOrdered(true);
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_eClass_Operation_isSuperTypeOf_EClass);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_eClass_Operation_isSuperTypeOf_EClass);
 		parameter->setName("someClass");
 		parameter->setEType(getEClass_Class());
 		parameter->setLowerBound(0);
@@ -775,7 +775,7 @@ void EcorePackageImpl::initializeEClassContent()
 	
 }
 
-void EcorePackageImpl::initializeEClassifierContent()
+void ecorePackageImpl::initializeEClassifierContent()
 {
 	m_eClassifier_Class->setName("EClassifier");
 	m_eClassifier_Class->setAbstract(true);
@@ -881,7 +881,7 @@ void EcorePackageImpl::initializeEClassifierContent()
 		{
 			m_eClassifier_Attribute_ePackage->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = ecore::EcorePackage::eInstance()->getEPackage_Attribute_eClassifiers();
+		std::shared_ptr<ecore::EReference>  otherEnd = ecore::ecorePackage::eInstance()->getEPackage_Attribute_eClassifiers();
 		if (otherEnd != nullptr)
 	    {
 	   		m_eClassifier_Attribute_ePackage->setEOpposite(otherEnd);
@@ -926,7 +926,7 @@ void EcorePackageImpl::initializeEClassifierContent()
 	m_eClassifier_Operation_isInstance_EJavaObject->setOrdered(true);
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_eClassifier_Operation_isInstance_EJavaObject);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_eClassifier_Operation_isInstance_EJavaObject);
 		parameter->setName("object");
 		parameter->setEType(getEJavaObject_Class());
 		parameter->setLowerBound(0);
@@ -938,7 +938,7 @@ void EcorePackageImpl::initializeEClassifierContent()
 	
 }
 
-void EcorePackageImpl::initializeEDataTypeContent()
+void ecorePackageImpl::initializeEDataTypeContent()
 {
 	m_eDataType_Class->setName("EDataType");
 	m_eDataType_Class->setAbstract(false);
@@ -969,7 +969,7 @@ void EcorePackageImpl::initializeEDataTypeContent()
 	
 }
 
-void EcorePackageImpl::initializeEEnumContent()
+void ecorePackageImpl::initializeEEnumContent()
 {
 	m_eEnum_Class->setName("EEnum");
 	m_eEnum_Class->setAbstract(false);
@@ -995,7 +995,7 @@ void EcorePackageImpl::initializeEEnumContent()
 		{
 			m_eEnum_Attribute_eLiterals->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = ecore::EcorePackage::eInstance()->getEEnumLiteral_Attribute_eEnum();
+		std::shared_ptr<ecore::EReference>  otherEnd = ecore::ecorePackage::eInstance()->getEEnumLiteral_Attribute_eEnum();
 		if (otherEnd != nullptr)
 	    {
 	   		m_eEnum_Attribute_eLiterals->setEOpposite(otherEnd);
@@ -1010,7 +1010,7 @@ void EcorePackageImpl::initializeEEnumContent()
 	m_eEnum_Operation_getEEnumLiteral_EString->setOrdered(true);
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_eEnum_Operation_getEEnumLiteral_EString);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_eEnum_Operation_getEEnumLiteral_EString);
 		parameter->setName("name");
 		parameter->setEType(getEString_Class());
 		parameter->setLowerBound(0);
@@ -1027,7 +1027,7 @@ void EcorePackageImpl::initializeEEnumContent()
 	m_eEnum_Operation_getEEnumLiteral_EInt->setOrdered(true);
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_eEnum_Operation_getEEnumLiteral_EInt);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_eEnum_Operation_getEEnumLiteral_EInt);
 		parameter->setName("value");
 		parameter->setEType(getEInt_Class());
 		parameter->setLowerBound(0);
@@ -1044,7 +1044,7 @@ void EcorePackageImpl::initializeEEnumContent()
 	m_eEnum_Operation_getEEnumLiteralByLiteral_EString->setOrdered(true);
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_eEnum_Operation_getEEnumLiteralByLiteral_EString);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_eEnum_Operation_getEEnumLiteralByLiteral_EString);
 		parameter->setName("literal");
 		parameter->setEType(getEString_Class());
 		parameter->setLowerBound(0);
@@ -1056,7 +1056,7 @@ void EcorePackageImpl::initializeEEnumContent()
 	
 }
 
-void EcorePackageImpl::initializeEEnumLiteralContent()
+void ecorePackageImpl::initializeEEnumLiteralContent()
 {
 	m_eEnumLiteral_Class->setName("EEnumLiteral");
 	m_eEnumLiteral_Class->setAbstract(false);
@@ -1142,7 +1142,7 @@ void EcorePackageImpl::initializeEEnumLiteralContent()
 		{
 			m_eEnumLiteral_Attribute_eEnum->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = ecore::EcorePackage::eInstance()->getEEnum_Attribute_eLiterals();
+		std::shared_ptr<ecore::EReference>  otherEnd = ecore::ecorePackage::eInstance()->getEEnum_Attribute_eLiterals();
 		if (otherEnd != nullptr)
 	    {
 	   		m_eEnumLiteral_Attribute_eEnum->setEOpposite(otherEnd);
@@ -1152,7 +1152,7 @@ void EcorePackageImpl::initializeEEnumLiteralContent()
 	
 }
 
-void EcorePackageImpl::initializeEFactoryContent()
+void ecorePackageImpl::initializeEFactoryContent()
 {
 	m_eFactory_Class->setName("EFactory");
 	m_eFactory_Class->setAbstract(false);
@@ -1178,7 +1178,7 @@ void EcorePackageImpl::initializeEFactoryContent()
 		{
 			m_eFactory_Attribute_ePackage->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = ecore::EcorePackage::eInstance()->getEPackage_Attribute_eFactoryInstance();
+		std::shared_ptr<ecore::EReference>  otherEnd = ecore::ecorePackage::eInstance()->getEPackage_Attribute_eFactoryInstance();
 		if (otherEnd != nullptr)
 	    {
 	   		m_eFactory_Attribute_ePackage->setEOpposite(otherEnd);
@@ -1193,7 +1193,7 @@ void EcorePackageImpl::initializeEFactoryContent()
 	m_eFactory_Operation_convertToString_EDataType_EJavaObject->setOrdered(true);
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_eFactory_Operation_convertToString_EDataType_EJavaObject);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_eFactory_Operation_convertToString_EDataType_EJavaObject);
 		parameter->setName("eDataType");
 		parameter->setEType(getEDataType_Class());
 		parameter->setLowerBound(0);
@@ -1203,7 +1203,7 @@ void EcorePackageImpl::initializeEFactoryContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_eFactory_Operation_convertToString_EDataType_EJavaObject);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_eFactory_Operation_convertToString_EDataType_EJavaObject);
 		parameter->setName("instanceValue");
 		parameter->setEType(getEJavaObject_Class());
 		parameter->setLowerBound(0);
@@ -1220,7 +1220,7 @@ void EcorePackageImpl::initializeEFactoryContent()
 	m_eFactory_Operation_create_EClass->setOrdered(true);
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_eFactory_Operation_create_EClass);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_eFactory_Operation_create_EClass);
 		parameter->setName("eClass");
 		parameter->setEType(getEClass_Class());
 		parameter->setLowerBound(0);
@@ -1237,7 +1237,7 @@ void EcorePackageImpl::initializeEFactoryContent()
 	m_eFactory_Operation_createFromString_EDataType_EString->setOrdered(true);
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_eFactory_Operation_createFromString_EDataType_EString);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_eFactory_Operation_createFromString_EDataType_EString);
 		parameter->setName("eDataType");
 		parameter->setEType(getEDataType_Class());
 		parameter->setLowerBound(0);
@@ -1247,7 +1247,7 @@ void EcorePackageImpl::initializeEFactoryContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_eFactory_Operation_createFromString_EDataType_EString);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_eFactory_Operation_createFromString_EDataType_EString);
 		parameter->setName("literalValue");
 		parameter->setEType(getEString_Class());
 		parameter->setLowerBound(0);
@@ -1259,7 +1259,7 @@ void EcorePackageImpl::initializeEFactoryContent()
 	
 }
 
-void EcorePackageImpl::initializeEGenericTypeContent()
+void ecorePackageImpl::initializeEGenericTypeContent()
 {
 	m_eGenericType_Class->setName("EGenericType");
 	m_eGenericType_Class->setAbstract(false);
@@ -1407,7 +1407,7 @@ void EcorePackageImpl::initializeEGenericTypeContent()
 	m_eGenericType_Operation_isInstance_EJavaObject->setOrdered(true);
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_eGenericType_Operation_isInstance_EJavaObject);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_eGenericType_Operation_isInstance_EJavaObject);
 		parameter->setName("object");
 		parameter->setEType(getEJavaObject_Class());
 		parameter->setLowerBound(0);
@@ -1419,7 +1419,7 @@ void EcorePackageImpl::initializeEGenericTypeContent()
 	
 }
 
-void EcorePackageImpl::initializeEModelElementContent()
+void ecorePackageImpl::initializeEModelElementContent()
 {
 	m_eModelElement_Class->setName("EModelElement");
 	m_eModelElement_Class->setAbstract(true);
@@ -1445,7 +1445,7 @@ void EcorePackageImpl::initializeEModelElementContent()
 		{
 			m_eModelElement_Attribute_eAnnotations->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = ecore::EcorePackage::eInstance()->getEAnnotation_Attribute_eModelElement();
+		std::shared_ptr<ecore::EReference>  otherEnd = ecore::ecorePackage::eInstance()->getEAnnotation_Attribute_eModelElement();
 		if (otherEnd != nullptr)
 	    {
 	   		m_eModelElement_Attribute_eAnnotations->setEOpposite(otherEnd);
@@ -1460,7 +1460,7 @@ void EcorePackageImpl::initializeEModelElementContent()
 	m_eModelElement_Operation_getEAnnotation_EString->setOrdered(true);
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_eModelElement_Operation_getEAnnotation_EString);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_eModelElement_Operation_getEAnnotation_EString);
 		parameter->setName("source");
 		parameter->setEType(getEString_Class());
 		parameter->setLowerBound(0);
@@ -1472,7 +1472,7 @@ void EcorePackageImpl::initializeEModelElementContent()
 	
 }
 
-void EcorePackageImpl::initializeENamedElementContent()
+void ecorePackageImpl::initializeENamedElementContent()
 {
 	m_eNamedElement_Class->setName("ENamedElement");
 	m_eNamedElement_Class->setAbstract(true);
@@ -1503,7 +1503,7 @@ void EcorePackageImpl::initializeENamedElementContent()
 	
 }
 
-void EcorePackageImpl::initializeEObjectContent()
+void ecorePackageImpl::initializeEObjectContent()
 {
 	m_eObject_Class->setName("EObject");
 	m_eObject_Class->setAbstract(false);
@@ -1549,7 +1549,7 @@ void EcorePackageImpl::initializeEObjectContent()
 		{
 			m_eObject_Attribute_eContainer->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = ecore::EcorePackage::eInstance()->getEObject_Attribute_eContens();
+		std::shared_ptr<ecore::EReference>  otherEnd = ecore::ecorePackage::eInstance()->getEObject_Attribute_eContens();
 		if (otherEnd != nullptr)
 	    {
 	   		m_eObject_Attribute_eContainer->setEOpposite(otherEnd);
@@ -1574,7 +1574,7 @@ void EcorePackageImpl::initializeEObjectContent()
 		{
 			m_eObject_Attribute_eContens->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = ecore::EcorePackage::eInstance()->getEObject_Attribute_eContainer();
+		std::shared_ptr<ecore::EReference>  otherEnd = ecore::ecorePackage::eInstance()->getEObject_Attribute_eContainer();
 		if (otherEnd != nullptr)
 	    {
 	   		m_eObject_Attribute_eContens->setEOpposite(otherEnd);
@@ -1645,7 +1645,7 @@ void EcorePackageImpl::initializeEObjectContent()
 	m_eObject_Operation_eGet_EStructuralFeature->setOrdered(true);
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_eObject_Operation_eGet_EStructuralFeature);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_eObject_Operation_eGet_EStructuralFeature);
 		parameter->setName("feature");
 		parameter->setEType(getEStructuralFeature_Class());
 		parameter->setLowerBound(0);
@@ -1662,7 +1662,7 @@ void EcorePackageImpl::initializeEObjectContent()
 	m_eObject_Operation_eGet_EStructuralFeature_EBoolean->setOrdered(true);
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_eObject_Operation_eGet_EStructuralFeature_EBoolean);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_eObject_Operation_eGet_EStructuralFeature_EBoolean);
 		parameter->setName("feature");
 		parameter->setEType(getEStructuralFeature_Class());
 		parameter->setLowerBound(0);
@@ -1672,7 +1672,7 @@ void EcorePackageImpl::initializeEObjectContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_eObject_Operation_eGet_EStructuralFeature_EBoolean);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_eObject_Operation_eGet_EStructuralFeature_EBoolean);
 		parameter->setName("resolve");
 		parameter->setEType(getEBoolean_Class());
 		parameter->setLowerBound(0);
@@ -1689,7 +1689,7 @@ void EcorePackageImpl::initializeEObjectContent()
 	m_eObject_Operation_eInvoke_EOperation_EEList->setOrdered(true);
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_eObject_Operation_eInvoke_EOperation_EEList);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_eObject_Operation_eInvoke_EOperation_EEList);
 		parameter->setName("operation");
 		parameter->setEType(getEOperation_Class());
 		parameter->setLowerBound(0);
@@ -1699,7 +1699,7 @@ void EcorePackageImpl::initializeEObjectContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_eObject_Operation_eInvoke_EOperation_EEList);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_eObject_Operation_eInvoke_EOperation_EEList);
 		parameter->setName("arguments");
 		parameter->setEType(getEEList_Class());
 		parameter->setLowerBound(0);
@@ -1724,7 +1724,7 @@ void EcorePackageImpl::initializeEObjectContent()
 	m_eObject_Operation_eIsSet_EStructuralFeature->setOrdered(true);
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_eObject_Operation_eIsSet_EStructuralFeature);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_eObject_Operation_eIsSet_EStructuralFeature);
 		parameter->setName("feature");
 		parameter->setEType(getEStructuralFeature_Class());
 		parameter->setLowerBound(0);
@@ -1749,7 +1749,7 @@ void EcorePackageImpl::initializeEObjectContent()
 	m_eObject_Operation_eSet_EStructuralFeature_EJavaObject->setOrdered(true);
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_eObject_Operation_eSet_EStructuralFeature_EJavaObject);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_eObject_Operation_eSet_EStructuralFeature_EJavaObject);
 		parameter->setName("feature");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
@@ -1759,7 +1759,7 @@ void EcorePackageImpl::initializeEObjectContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_eObject_Operation_eSet_EStructuralFeature_EJavaObject);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_eObject_Operation_eSet_EStructuralFeature_EJavaObject);
 		parameter->setName("newValue");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
@@ -1776,7 +1776,7 @@ void EcorePackageImpl::initializeEObjectContent()
 	m_eObject_Operation_eUnset_EStructuralFeature->setOrdered(true);
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_eObject_Operation_eUnset_EStructuralFeature);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_eObject_Operation_eUnset_EStructuralFeature);
 		parameter->setName("feature");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
@@ -1788,7 +1788,7 @@ void EcorePackageImpl::initializeEObjectContent()
 	
 }
 
-void EcorePackageImpl::initializeEOperationContent()
+void ecorePackageImpl::initializeEOperationContent()
 {
 	m_eOperation_Class->setName("EOperation");
 	m_eOperation_Class->setAbstract(false);
@@ -1834,7 +1834,7 @@ void EcorePackageImpl::initializeEOperationContent()
 		{
 			m_eOperation_Attribute_eContainingClass->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = ecore::EcorePackage::eInstance()->getEClass_Attribute_eOperations();
+		std::shared_ptr<ecore::EReference>  otherEnd = ecore::ecorePackage::eInstance()->getEClass_Attribute_eOperations();
 		if (otherEnd != nullptr)
 	    {
 	   		m_eOperation_Attribute_eContainingClass->setEOpposite(otherEnd);
@@ -1903,7 +1903,7 @@ void EcorePackageImpl::initializeEOperationContent()
 		{
 			m_eOperation_Attribute_eParameters->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = ecore::EcorePackage::eInstance()->getEParameter_Attribute_eOperation();
+		std::shared_ptr<ecore::EReference>  otherEnd = ecore::ecorePackage::eInstance()->getEParameter_Attribute_eOperation();
 		if (otherEnd != nullptr)
 	    {
 	   		m_eOperation_Attribute_eParameters->setEOpposite(otherEnd);
@@ -1948,7 +1948,7 @@ void EcorePackageImpl::initializeEOperationContent()
 	m_eOperation_Operation_isOverrideOf_EOperation->setOrdered(true);
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_eOperation_Operation_isOverrideOf_EOperation);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_eOperation_Operation_isOverrideOf_EOperation);
 		parameter->setName("someOperation");
 		parameter->setEType(getEOperation_Class());
 		parameter->setLowerBound(0);
@@ -1960,7 +1960,7 @@ void EcorePackageImpl::initializeEOperationContent()
 	
 }
 
-void EcorePackageImpl::initializeEPackageContent()
+void ecorePackageImpl::initializeEPackageContent()
 {
 	m_ePackage_Class->setName("EPackage");
 	m_ePackage_Class->setAbstract(false);
@@ -2026,7 +2026,7 @@ void EcorePackageImpl::initializeEPackageContent()
 		{
 			m_ePackage_Attribute_eClassifiers->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = ecore::EcorePackage::eInstance()->getEClassifier_Attribute_ePackage();
+		std::shared_ptr<ecore::EReference>  otherEnd = ecore::ecorePackage::eInstance()->getEClassifier_Attribute_ePackage();
 		if (otherEnd != nullptr)
 	    {
 	   		m_ePackage_Attribute_eClassifiers->setEOpposite(otherEnd);
@@ -2051,7 +2051,7 @@ void EcorePackageImpl::initializeEPackageContent()
 		{
 			m_ePackage_Attribute_eFactoryInstance->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = ecore::EcorePackage::eInstance()->getEFactory_Attribute_ePackage();
+		std::shared_ptr<ecore::EReference>  otherEnd = ecore::ecorePackage::eInstance()->getEFactory_Attribute_ePackage();
 		if (otherEnd != nullptr)
 	    {
 	   		m_ePackage_Attribute_eFactoryInstance->setEOpposite(otherEnd);
@@ -2076,7 +2076,7 @@ void EcorePackageImpl::initializeEPackageContent()
 		{
 			m_ePackage_Attribute_eSubpackages->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = ecore::EcorePackage::eInstance()->getEPackage_Attribute_eSuperPackage();
+		std::shared_ptr<ecore::EReference>  otherEnd = ecore::ecorePackage::eInstance()->getEPackage_Attribute_eSuperPackage();
 		if (otherEnd != nullptr)
 	    {
 	   		m_ePackage_Attribute_eSubpackages->setEOpposite(otherEnd);
@@ -2101,7 +2101,7 @@ void EcorePackageImpl::initializeEPackageContent()
 		{
 			m_ePackage_Attribute_eSuperPackage->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = ecore::EcorePackage::eInstance()->getEPackage_Attribute_eSubpackages();
+		std::shared_ptr<ecore::EReference>  otherEnd = ecore::ecorePackage::eInstance()->getEPackage_Attribute_eSubpackages();
 		if (otherEnd != nullptr)
 	    {
 	   		m_ePackage_Attribute_eSuperPackage->setEOpposite(otherEnd);
@@ -2116,7 +2116,7 @@ void EcorePackageImpl::initializeEPackageContent()
 	m_ePackage_Operation_getEClassifier_EString->setOrdered(true);
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation(m_ePackage_Operation_getEClassifier_EString);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_ePackage_Operation_getEClassifier_EString);
 		parameter->setName("name");
 		parameter->setEType(getEString_Class());
 		parameter->setLowerBound(0);
@@ -2128,7 +2128,7 @@ void EcorePackageImpl::initializeEPackageContent()
 	
 }
 
-void EcorePackageImpl::initializeEParameterContent()
+void ecorePackageImpl::initializeEParameterContent()
 {
 	m_eParameter_Class->setName("EParameter");
 	m_eParameter_Class->setAbstract(false);
@@ -2154,7 +2154,7 @@ void EcorePackageImpl::initializeEParameterContent()
 		{
 			m_eParameter_Attribute_eOperation->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = ecore::EcorePackage::eInstance()->getEOperation_Attribute_eParameters();
+		std::shared_ptr<ecore::EReference>  otherEnd = ecore::ecorePackage::eInstance()->getEOperation_Attribute_eParameters();
 		if (otherEnd != nullptr)
 	    {
 	   		m_eParameter_Attribute_eOperation->setEOpposite(otherEnd);
@@ -2164,7 +2164,7 @@ void EcorePackageImpl::initializeEParameterContent()
 	
 }
 
-void EcorePackageImpl::initializeEReferenceContent()
+void ecorePackageImpl::initializeEReferenceContent()
 {
 	m_eReference_Class->setName("EReference");
 	m_eReference_Class->setAbstract(false);
@@ -2301,7 +2301,7 @@ void EcorePackageImpl::initializeEReferenceContent()
 	
 }
 
-void EcorePackageImpl::initializeEStringToStringMapEntryContent()
+void ecorePackageImpl::initializeEStringToStringMapEntryContent()
 {
 	m_eStringToStringMapEntry_Class->setName("EStringToStringMapEntry");
 	m_eStringToStringMapEntry_Class->setAbstract(false);
@@ -2352,7 +2352,7 @@ void EcorePackageImpl::initializeEStringToStringMapEntryContent()
 	
 }
 
-void EcorePackageImpl::initializeEStructuralFeatureContent()
+void ecorePackageImpl::initializeEStructuralFeatureContent()
 {
 	m_eStructuralFeature_Class->setName("EStructuralFeature");
 	m_eStructuralFeature_Class->setAbstract(true);
@@ -2538,7 +2538,7 @@ void EcorePackageImpl::initializeEStructuralFeatureContent()
 		{
 			m_eStructuralFeature_Attribute_eContainingClass->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = ecore::EcorePackage::eInstance()->getEClass_Attribute_eStructuralFeatures();
+		std::shared_ptr<ecore::EReference>  otherEnd = ecore::ecorePackage::eInstance()->getEClass_Attribute_eStructuralFeatures();
 		if (otherEnd != nullptr)
 	    {
 	   		m_eStructuralFeature_Attribute_eContainingClass->setEOpposite(otherEnd);
@@ -2564,7 +2564,7 @@ void EcorePackageImpl::initializeEStructuralFeatureContent()
 	
 }
 
-void EcorePackageImpl::initializeETypeParameterContent()
+void ecorePackageImpl::initializeETypeParameterContent()
 {
 	m_eTypeParameter_Class->setName("ETypeParameter");
 	m_eTypeParameter_Class->setAbstract(false);
@@ -2597,7 +2597,7 @@ void EcorePackageImpl::initializeETypeParameterContent()
 	
 }
 
-void EcorePackageImpl::initializeETypedElementContent()
+void ecorePackageImpl::initializeETypedElementContent()
 {
 	m_eTypedElement_Class->setName("ETypedElement");
 	m_eTypedElement_Class->setAbstract(true);
@@ -2772,7 +2772,7 @@ void EcorePackageImpl::initializeETypedElementContent()
 	
 }
 
-void EcorePackageImpl::initializePackageEDataTypes()
+void ecorePackageImpl::initializePackageEDataTypes()
 {
 	m_eBigDecimal_Class->setName("EBigDecimal");
 	m_eBigDecimal_Class->setSerializable(true);

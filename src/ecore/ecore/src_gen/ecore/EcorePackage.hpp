@@ -54,14 +54,14 @@ namespace ecore
 	which were described in an ecore file.
 	*/
 	
-	class EcorePackage : virtual public EPackage 
+	class ecorePackage : virtual public EPackage 
 	{
 		private:    
-			EcorePackage(EcorePackage const&) = delete;
-			EcorePackage& operator=(EcorePackage const&) = delete;
+			ecorePackage(ecorePackage const&) = delete;
+			ecorePackage& operator=(ecorePackage const&) = delete;
 
 		protected:
-			EcorePackage(){}
+			ecorePackage(){}
 
 		public:
 			//static variables
@@ -733,9 +733,9 @@ namespace ecore
 
 			//Singleton Instance and Getter
 			private:
-				static std::shared_ptr<EcorePackage> instance;
+				static std::shared_ptr<ecorePackage> instance;
 			public:
-				static std::shared_ptr<EcorePackage> eInstance();
+				static std::shared_ptr<ecorePackage> eInstance();
 
 			//prevent from hiding functions
 			using EPackage::getEAnnotation;

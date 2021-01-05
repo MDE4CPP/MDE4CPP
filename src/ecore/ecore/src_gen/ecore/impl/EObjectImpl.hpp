@@ -29,7 +29,7 @@ virtual public EObject
 			EObjectImpl& operator=(EObjectImpl const&) = delete;
 
 		protected:
-			friend class EcoreFactoryImpl;
+			friend class ecoreFactoryImpl;
 			EObjectImpl();
 			virtual std::shared_ptr<EObject> getThisEObjectPtr() const;
 			virtual void setThisEObjectPtr(std::weak_ptr<EObject> thisEObjectPtr);

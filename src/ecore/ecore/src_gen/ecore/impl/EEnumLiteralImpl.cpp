@@ -41,8 +41,8 @@
 #include "ecore/EObject.hpp"
 
 //Factories an Package includes
-#include "ecore/impl/EcoreFactoryImpl.hpp"
-#include "ecore/impl/EcorePackageImpl.hpp"
+#include "ecore/impl/ecoreFactoryImpl.hpp"
+#include "ecore/impl/ecorePackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -120,7 +120,7 @@ std::shared_ptr<ecore::EObject>  EEnumLiteralImpl::copy() const
 
 std::shared_ptr<EClass> EEnumLiteralImpl::eStaticClass() const
 {
-	return ecore::EcorePackage::eInstance()->getEEnumLiteral_Class();
+	return ecore::ecorePackage::eInstance()->getEEnumLiteral_Class();
 }
 
 //*********************************
@@ -242,13 +242,13 @@ Any EEnumLiteralImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case ecore::EcorePackage::EENUMLITERAL_ATTRIBUTE_EENUM:
+		case ecore::ecorePackage::EENUMLITERAL_ATTRIBUTE_EENUM:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEEnum().lock())); //218
-		case ecore::EcorePackage::EENUMLITERAL_ATTRIBUTE_INSTANCE:
+		case ecore::ecorePackage::EENUMLITERAL_ATTRIBUTE_INSTANCE:
 			return eAny(getInstance()); //216
-		case ecore::EcorePackage::EENUMLITERAL_ATTRIBUTE_LITERAL:
+		case ecore::ecorePackage::EENUMLITERAL_ATTRIBUTE_LITERAL:
 			return eAny(getLiteral()); //217
-		case ecore::EcorePackage::EENUMLITERAL_ATTRIBUTE_VALUE:
+		case ecore::ecorePackage::EENUMLITERAL_ATTRIBUTE_VALUE:
 			return eAny(getValue()); //215
 	}
 	return ENamedElementImpl::eGet(featureID, resolve, coreType);
@@ -257,13 +257,13 @@ bool EEnumLiteralImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case ecore::EcorePackage::EENUMLITERAL_ATTRIBUTE_EENUM:
+		case ecore::ecorePackage::EENUMLITERAL_ATTRIBUTE_EENUM:
 			return getEEnum().lock() != nullptr; //218
-		case ecore::EcorePackage::EENUMLITERAL_ATTRIBUTE_INSTANCE:
+		case ecore::ecorePackage::EENUMLITERAL_ATTRIBUTE_INSTANCE:
 			return getInstance() != nullptr; //216
-		case ecore::EcorePackage::EENUMLITERAL_ATTRIBUTE_LITERAL:
+		case ecore::ecorePackage::EENUMLITERAL_ATTRIBUTE_LITERAL:
 			return getLiteral() != ""; //217
-		case ecore::EcorePackage::EENUMLITERAL_ATTRIBUTE_VALUE:
+		case ecore::ecorePackage::EENUMLITERAL_ATTRIBUTE_VALUE:
 			return getValue() != 0; //215
 	}
 	return ENamedElementImpl::internalEIsSet(featureID);
@@ -272,21 +272,21 @@ bool EEnumLiteralImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case ecore::EcorePackage::EENUMLITERAL_ATTRIBUTE_INSTANCE:
+		case ecore::ecorePackage::EENUMLITERAL_ATTRIBUTE_INSTANCE:
 		{
 			// BOOST CAST
 			Any _instance = newValue->get<Any>();
 			setInstance(_instance); //216
 			return true;
 		}
-		case ecore::EcorePackage::EENUMLITERAL_ATTRIBUTE_LITERAL:
+		case ecore::ecorePackage::EENUMLITERAL_ATTRIBUTE_LITERAL:
 		{
 			// BOOST CAST
 			std::string _literal = newValue->get<std::string>();
 			setLiteral(_literal); //217
 			return true;
 		}
-		case ecore::EcorePackage::EENUMLITERAL_ATTRIBUTE_VALUE:
+		case ecore::ecorePackage::EENUMLITERAL_ATTRIBUTE_VALUE:
 		{
 			// BOOST CAST
 			int _value = newValue->get<int>();
@@ -309,7 +309,7 @@ void EEnumLiteralImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandle
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get EcoreFactory
+	// get ecoreFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -355,7 +355,7 @@ void EEnumLiteralImpl::loadAttributes(std::shared_ptr<persistence::interfaces::X
 
 void EEnumLiteralImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<ecore::EcoreFactory> modelFactory=ecore::EcoreFactory::eInstance();
+	std::shared_ptr<ecore::ecoreFactory> modelFactory=ecore::ecoreFactory::eInstance();
 
 	//load BasePackage Nodes
 	ENamedElementImpl::loadNode(nodeName, loadHandler);
@@ -386,7 +386,7 @@ void EEnumLiteralImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 {
 	try
 	{
-		std::shared_ptr<ecore::EcorePackage> package = ecore::EcorePackage::eInstance();
+		std::shared_ptr<ecore::ecorePackage> package = ecore::ecorePackage::eInstance();
 
 	
 		// Add attributes

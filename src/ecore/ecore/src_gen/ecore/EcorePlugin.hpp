@@ -11,7 +11,7 @@
 
 namespace ecore
 {
-	class EcorePlugin : virtual public EcoreModelPlugin
+	class ecorePlugin : virtual public EcoreModelPlugin
 	{
 		public:
 			static std::shared_ptr<MDE4CPPPlugin> eInstance();
@@ -27,8 +27,8 @@ namespace ecore
 			virtual std::shared_ptr<ecore::EPackage> getEPackage() = 0;
 	
 		protected:
-			EcorePlugin(){};
-			virtual ~EcorePlugin(){};
+			ecorePlugin(){};
+			virtual ~ecorePlugin(){};
 	
 		private:
 			static std::shared_ptr<MDE4CPPPlugin> instance;

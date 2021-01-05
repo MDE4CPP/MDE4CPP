@@ -1,7 +1,7 @@
-#include "ecore/impl/EcorePackageImpl.hpp"
+#include "ecore/impl/ecorePackageImpl.hpp"
 
 // metametamodel factory
-#include "ecore/EcoreFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 
 #include <cassert>
 
@@ -23,7 +23,7 @@
  
 using namespace ecore;
 
-void EcorePackageImpl::createPackageContents(std::shared_ptr<ecore::EPackage> package)
+void ecorePackageImpl::createPackageContents(std::shared_ptr<ecore::EPackage> package)
 {
 	if (isCreated) 
 	{
@@ -31,7 +31,7 @@ void EcorePackageImpl::createPackageContents(std::shared_ptr<ecore::EPackage> pa
 	}
 	isCreated = true;
 
-	std::shared_ptr<ecore::EcoreFactory> factory = ecore::EcoreFactory::eInstance();
+	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
 
 	createEAnnotationContent(package, factory);
 	createEAttributeContent(package, factory);
@@ -58,7 +58,7 @@ void EcorePackageImpl::createPackageContents(std::shared_ptr<ecore::EPackage> pa
 
 }
 
-void EcorePackageImpl::createEAnnotationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ecorePackageImpl::createEAnnotationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_eAnnotation_Class = factory->createEClass_in_EPackage(package, EANNOTATION_CLASS);
 	m_eAnnotation_Attribute_source = factory->createEAttribute_in_EContainingClass(m_eAnnotation_Class, EANNOTATION_ATTRIBUTE_SOURCE);
@@ -71,7 +71,7 @@ void EcorePackageImpl::createEAnnotationContent(std::shared_ptr<ecore::EPackage>
 	
 }
 
-void EcorePackageImpl::createEAttributeContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ecorePackageImpl::createEAttributeContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_eAttribute_Class = factory->createEClass_in_EPackage(package, EATTRIBUTE_CLASS);
 	m_eAttribute_Attribute_iD = factory->createEAttribute_in_EContainingClass(m_eAttribute_Class, EATTRIBUTE_ATTRIBUTE_ID);
@@ -81,7 +81,7 @@ void EcorePackageImpl::createEAttributeContent(std::shared_ptr<ecore::EPackage> 
 	
 }
 
-void EcorePackageImpl::createEClassContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ecorePackageImpl::createEClassContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_eClass_Class = factory->createEClass_in_EPackage(package, ECLASS_CLASS);
 	m_eClass_Attribute_abstract = factory->createEAttribute_in_EContainingClass(m_eClass_Class, ECLASS_ATTRIBUTE_ABSTRACT);
@@ -115,7 +115,7 @@ void EcorePackageImpl::createEClassContent(std::shared_ptr<ecore::EPackage> pack
 	
 }
 
-void EcorePackageImpl::createEClassifierContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ecorePackageImpl::createEClassifierContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_eClassifier_Class = factory->createEClass_in_EPackage(package, ECLASSIFIER_CLASS);
 	m_eClassifier_Attribute_defaultValue = factory->createEAttribute_in_EContainingClass(m_eClassifier_Class, ECLASSIFIER_ATTRIBUTE_DEFAULTVALUE);
@@ -131,7 +131,7 @@ void EcorePackageImpl::createEClassifierContent(std::shared_ptr<ecore::EPackage>
 	
 }
 
-void EcorePackageImpl::createEDataTypeContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ecorePackageImpl::createEDataTypeContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_eDataType_Class = factory->createEClass_in_EPackage(package, EDATATYPE_CLASS);
 	m_eDataType_Attribute_serializable = factory->createEAttribute_in_EContainingClass(m_eDataType_Class, EDATATYPE_ATTRIBUTE_SERIALIZABLE);
@@ -140,7 +140,7 @@ void EcorePackageImpl::createEDataTypeContent(std::shared_ptr<ecore::EPackage> p
 	
 }
 
-void EcorePackageImpl::createEEnumContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ecorePackageImpl::createEEnumContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_eEnum_Class = factory->createEClass_in_EPackage(package, EENUM_CLASS);
 	
@@ -152,7 +152,7 @@ void EcorePackageImpl::createEEnumContent(std::shared_ptr<ecore::EPackage> packa
 	
 }
 
-void EcorePackageImpl::createEEnumLiteralContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ecorePackageImpl::createEEnumLiteralContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_eEnumLiteral_Class = factory->createEClass_in_EPackage(package, EENUMLITERAL_CLASS);
 	m_eEnumLiteral_Attribute_instance = factory->createEAttribute_in_EContainingClass(m_eEnumLiteral_Class, EENUMLITERAL_ATTRIBUTE_INSTANCE);
@@ -164,7 +164,7 @@ void EcorePackageImpl::createEEnumLiteralContent(std::shared_ptr<ecore::EPackage
 	
 }
 
-void EcorePackageImpl::createEFactoryContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ecorePackageImpl::createEFactoryContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_eFactory_Class = factory->createEClass_in_EPackage(package, EFACTORY_CLASS);
 	
@@ -176,7 +176,7 @@ void EcorePackageImpl::createEFactoryContent(std::shared_ptr<ecore::EPackage> pa
 	
 }
 
-void EcorePackageImpl::createEGenericTypeContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ecorePackageImpl::createEGenericTypeContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_eGenericType_Class = factory->createEClass_in_EPackage(package, EGENERICTYPE_CLASS);
 	
@@ -191,7 +191,7 @@ void EcorePackageImpl::createEGenericTypeContent(std::shared_ptr<ecore::EPackage
 	
 }
 
-void EcorePackageImpl::createEModelElementContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ecorePackageImpl::createEModelElementContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_eModelElement_Class = factory->createEClass_in_EPackage(package, EMODELELEMENT_CLASS);
 	
@@ -201,7 +201,7 @@ void EcorePackageImpl::createEModelElementContent(std::shared_ptr<ecore::EPackag
 	
 }
 
-void EcorePackageImpl::createENamedElementContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ecorePackageImpl::createENamedElementContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_eNamedElement_Class = factory->createEClass_in_EPackage(package, ENAMEDELEMENT_CLASS);
 	m_eNamedElement_Attribute_name = factory->createEAttribute_in_EContainingClass(m_eNamedElement_Class, ENAMEDELEMENT_ATTRIBUTE_NAME);
@@ -210,7 +210,7 @@ void EcorePackageImpl::createENamedElementContent(std::shared_ptr<ecore::EPackag
 	
 }
 
-void EcorePackageImpl::createEObjectContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ecorePackageImpl::createEObjectContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_eObject_Class = factory->createEClass_in_EPackage(package, EOBJECT_CLASS);
 	m_eObject_Attribute_metaElementID = factory->createEAttribute_in_EContainingClass(m_eObject_Class, EOBJECT_ATTRIBUTE_METAELEMENTID);
@@ -236,7 +236,7 @@ void EcorePackageImpl::createEObjectContent(std::shared_ptr<ecore::EPackage> pac
 	
 }
 
-void EcorePackageImpl::createEOperationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ecorePackageImpl::createEOperationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_eOperation_Class = factory->createEClass_in_EPackage(package, EOPERATION_CLASS);
 	m_eOperation_Attribute_operationID = factory->createEAttribute_in_EContainingClass(m_eOperation_Class, EOPERATION_ATTRIBUTE_OPERATIONID);
@@ -252,7 +252,7 @@ void EcorePackageImpl::createEOperationContent(std::shared_ptr<ecore::EPackage> 
 	
 }
 
-void EcorePackageImpl::createEPackageContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ecorePackageImpl::createEPackageContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_ePackage_Class = factory->createEClass_in_EPackage(package, EPACKAGE_CLASS);
 	m_ePackage_Attribute_nsPrefix = factory->createEAttribute_in_EContainingClass(m_ePackage_Class, EPACKAGE_ATTRIBUTE_NSPREFIX);
@@ -267,7 +267,7 @@ void EcorePackageImpl::createEPackageContent(std::shared_ptr<ecore::EPackage> pa
 	
 }
 
-void EcorePackageImpl::createEParameterContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ecorePackageImpl::createEParameterContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_eParameter_Class = factory->createEClass_in_EPackage(package, EPARAMETER_CLASS);
 	
@@ -276,7 +276,7 @@ void EcorePackageImpl::createEParameterContent(std::shared_ptr<ecore::EPackage> 
 	
 }
 
-void EcorePackageImpl::createEReferenceContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ecorePackageImpl::createEReferenceContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_eReference_Class = factory->createEClass_in_EPackage(package, EREFERENCE_CLASS);
 	m_eReference_Attribute_container = factory->createEAttribute_in_EContainingClass(m_eReference_Class, EREFERENCE_ATTRIBUTE_CONTAINER);
@@ -290,7 +290,7 @@ void EcorePackageImpl::createEReferenceContent(std::shared_ptr<ecore::EPackage> 
 	
 }
 
-void EcorePackageImpl::createEStringToStringMapEntryContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ecorePackageImpl::createEStringToStringMapEntryContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_eStringToStringMapEntry_Class = factory->createEClass_in_EPackage(package, ESTRINGTOSTRINGMAPENTRY_CLASS);
 	m_eStringToStringMapEntry_Attribute_key = factory->createEAttribute_in_EContainingClass(m_eStringToStringMapEntry_Class, ESTRINGTOSTRINGMAPENTRY_ATTRIBUTE_KEY);
@@ -300,7 +300,7 @@ void EcorePackageImpl::createEStringToStringMapEntryContent(std::shared_ptr<ecor
 	
 }
 
-void EcorePackageImpl::createEStructuralFeatureContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ecorePackageImpl::createEStructuralFeatureContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_eStructuralFeature_Class = factory->createEClass_in_EPackage(package, ESTRUCTURALFEATURE_CLASS);
 	m_eStructuralFeature_Attribute_changeable = factory->createEAttribute_in_EContainingClass(m_eStructuralFeature_Class, ESTRUCTURALFEATURE_ATTRIBUTE_CHANGEABLE);
@@ -319,7 +319,7 @@ void EcorePackageImpl::createEStructuralFeatureContent(std::shared_ptr<ecore::EP
 	
 }
 
-void EcorePackageImpl::createETypeParameterContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ecorePackageImpl::createETypeParameterContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_eTypeParameter_Class = factory->createEClass_in_EPackage(package, ETYPEPARAMETER_CLASS);
 	
@@ -328,7 +328,7 @@ void EcorePackageImpl::createETypeParameterContent(std::shared_ptr<ecore::EPacka
 	
 }
 
-void EcorePackageImpl::createETypedElementContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ecorePackageImpl::createETypedElementContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_eTypedElement_Class = factory->createEClass_in_EPackage(package, ETYPEDELEMENT_CLASS);
 	m_eTypedElement_Attribute_lowerBound = factory->createEAttribute_in_EContainingClass(m_eTypedElement_Class, ETYPEDELEMENT_ATTRIBUTE_LOWERBOUND);
@@ -344,7 +344,7 @@ void EcorePackageImpl::createETypedElementContent(std::shared_ptr<ecore::EPackag
 	
 }
 
-void EcorePackageImpl::createPackageEDataTypes(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ecorePackageImpl::createPackageEDataTypes(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_eBigDecimal_Class = factory->createEDataType_in_EPackage(package, EBIGDECIMAL_CLASS);
 	m_eBigInteger_Class = factory->createEDataType_in_EPackage(package, EBIGINTEGER_CLASS);
