@@ -20,9 +20,9 @@ namespace PSCS::Semantics::Loci
 	class CS_ExecutionFactory;
 }
 
-namespace umlReflection
+namespace UML
 {
-	class UmlReflectionLocus;
+	class UMLLocus;
 }
 
 
