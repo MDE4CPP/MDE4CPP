@@ -98,9 +98,7 @@
 	&#xD;
 	errorOccured = (rand == trigger);&#xD;
 &#xD;
-	if(errorOccured) std::cout&lt;&lt;&quot;MALFUNCTION DETECTED!\n-MonitorUnit- : Requesting 'WarningSpeakerController'...\n&quot;&lt;&lt;std::endl;&#xD;
-&#xD;
-	return errorOccured;</body>
+	if(errorOccured) std::cout&lt;&lt;&quot;MALFUNCTION DETECTED!\n-MonitorUnit- : Requesting 'WarningSpeakerController'...\n&quot;&lt;&lt;std::endl;</body>
     </ownedBehavior>
     <ownedOperation xmi:id="_hMzakMePEeqjX9fZDPwOyA" name="monitor" method="_jwF2sMePEeqjX9fZDPwOyA"/>
     <ownedOperation xmi:id="_dMUAoMePEeqjX9fZDPwOyA" name="announce">
