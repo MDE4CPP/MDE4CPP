@@ -34,7 +34,7 @@
 #include "ecore/EPackage.hpp"
 #include "ecore/EObject.hpp"
 #include "persistence/xml/XMLPersistence.hpp"
-#include "uml/UmlPackage.hpp"
+#include "uml/umlPackage.hpp"
 #include "TestModel.hpp"
 
 void performReadAndWrite(std::string loadPath, std::string savePath, std::shared_ptr<ecore::EPackage> package, bool xsiMode = true)
