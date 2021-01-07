@@ -12,6 +12,7 @@
       <contract href="../../TestModelImport/model/TestModelImport.uml#_GDyJQBJWEeuI2oJVG-zT2A"/>
     </interfaceRealization>
     <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_EBQbYBJXEeuI2oJVG-zT2A" name="obPublish" specification="_1-eyQBJYEeuI2oJVG-zT2A">
+      <eAnnotations xmi:id="_Y_s5QFAmEeukhN12il4vjA" source="noExecution"/>
       <language>CPP</language>
       <body>std::cout &lt;&lt; m_text  &lt;&lt; std::endl;</body>
     </ownedBehavior>
