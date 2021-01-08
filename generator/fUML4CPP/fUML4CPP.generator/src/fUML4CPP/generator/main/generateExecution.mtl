@@ -19,12 +19,12 @@ std::shared_ptr<uml::EnumerationLiteral> literal[aParameter.name.toUpperFirst()/
 [for (literal : EnumerationLiteral | aParameter.type.oclAsType(Enumeration).ownedLiteral)]
 if (literal[aParameter.name.toUpperFirst()/] == [literal.generatePackageGetterCall()/])
 {
-	[aParameter.name/] = [literal.enumeration.getNearestPackage().generateNamespace()/]::[literal.enumeration.name/]::[literal.name.toUpperCase()/];
+	[aParameter.name/] = [literal.enumeration.getNearestPackage().generateNamespace(false)/]::[literal.enumeration.name/]::[literal.name.toUpperCase()/];
 }
 [/for]
 [elseif (not aParameter.type.supportedTypes())]
 std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> [aParameter.name/]Value = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>([aParameter.name/]ValueList->front());
-[aParameter.name/] = std::dynamic_pointer_cast<[aParameter.type.getNearestPackage().generateNamespace()/]::[aParameter.type.name.toUpperFirst()/]Object>([aParameter.name/]Value->getReferent())->[aParameter.type.oclAsType(Classifier).UMLValueGetterName()/]();
+[aParameter.name/] = std::dynamic_pointer_cast<[aParameter.type.getNearestPackage().generateNamespace(false)/]::[aParameter.type.name.toUpperFirst()/]Object>([aParameter.name/]Value->getReferent())->[aParameter.type.oclAsType(Classifier).UMLValueGetterName()/]();
 if([aParameter.name/] == nullptr)
 {
 	DEBUG_MESSAGE(std::cout << "received instance of type [aParameter.type.generateCppType(true)/] is null" << std::endl;);
@@ -40,7 +40,7 @@ while ([aParameter.name.toLowerFirst()/]Iter != [aParameter.name.toLowerFirst()/
 {
 	[if (not aParameter.type.supportedTypes())]
 	std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> [aParameter.name/]Value = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(*[aParameter.name.toLowerFirst()/]Iter);
-	[aParameter.type.generateCppType(false)/] [aParameter.name/]Temp = std::dynamic_pointer_cast<[aParameter.type.getNearestPackage().generateNamespace()/]::[aParameter.type.name.toUpperFirst()/]Object>([aParameter.name/]Value->getReferent())->[aParameter.type.oclAsType(Classifier).UMLValueGetterName()/]();
+	[aParameter.type.generateCppType(false)/] [aParameter.name/]Temp = std::dynamic_pointer_cast<[aParameter.type.getNearestPackage().generateNamespace(false)/]::[aParameter.type.name.toUpperFirst()/]Object>([aParameter.name/]Value->getReferent())->[aParameter.type.oclAsType(Classifier).UMLValueGetterName()/]();
 	if([aParameter.name/]Temp == nullptr)
 	{
 		DEBUG_MESSAGE(std::cout << "received instance of type [aParameter.type.generateCppType(true)/] is null" << std::endl;);
@@ -101,7 +101,7 @@ while ([par.name.toLowerFirst()/]OutIter != [par.name.toLowerFirst()/]OutEnd)
 [aParameter.generateOutputParameter()/]
 [if (aParameter.type.oclIsKindOf(Enumeration))]
 [for (literal : EnumerationLiteral | aParameter.type.oclAsType(Enumeration).ownedLiteral)]
-if ([aParameter.name/] == [literal.enumeration.getNearestPackage().generateNamespace()/]::[literal.enumeration.name/]::[literal.name.toUpperCase()/])
+if ([aParameter.name/] == [literal.enumeration.getNearestPackage().generateNamespace(false)/]::[literal.enumeration.name/]::[literal.name.toUpperCase()/])
 {
 	[aParameter.name/]OutValue->setLiteral([literal.generatePackageGetterCall()/]);
 }

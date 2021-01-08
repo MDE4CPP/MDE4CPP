@@ -23,13 +23,13 @@
 [import UML4CPP::generator::main::helpers::nameHelper /]
 [import UML4CPP::generator::main::helpers::singletonHelper /]
 
-[template public generateFactoryCpp(anPackage : Package)  {packageName : String = anPackage.name.concat('Factory').toUpperFirst(); }]
-[file  (anPackage.generateNamespacePath().concat('/').concat(packageName).concat('.cpp'), false, 'UTF-8')]
+[template public generateFactoryCpp(anPackage : Package)  {packageName : String = anPackage.name.concat('Factory'); }]
+[file  (anPackage.generateNamespacePath(false).concat('/').concat(packageName).concat('.cpp'), false, 'UTF-8')]
 
-#include "[anPackage.generateNamespacePath()/]/[packageName/].hpp"
-#include "[anPackage.generateNamespacePath()/]/impl/[packageName.concat('Impl')/].hpp"
+#include "[anPackage.generateNamespacePath(false)/]/[packageName/].hpp"
+#include "[anPackage.generateNamespacePath(false)/]/impl/[packageName.concat('Impl')/].hpp"
 
-[if (not anPackage.ignoreNamespace())]using namespace [anPackage.generateNamespace()/];[/if]
+[if (not anPackage.ignoreNamespace())]using namespace [anPackage.generateNamespace(false)/];[/if]
 
 //static initialisation
 [generateSingletonImpl(packageName, false)/]

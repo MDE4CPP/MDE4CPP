@@ -31,7 +31,7 @@
 
 [query public getValueClass(aType : Type) : String = if (aType.oclIsKindOf(PrimitiveType)) then 'fUML::Semantics::SimpleClassifiers::'.concat(aType.name.toUpperFirst()).concat('Value') else aType.oclAsType(Classifier).objectClassName() endif /]
 
-[query public pointerName(aClassifier : Classifier, aPackage : Package) : String = if (aPackage.name = aClassifier.namespace.myNamespaceName()) then aClassifier.name.toUpperFirst() else aClassifier.getNearestPackage().generateNamespace().concat('::').concat(aClassifier.name.toUpperFirst()) endif /]
+[query public pointerName(aClassifier : Classifier, aPackage : Package) : String = if (aPackage.name = aClassifier.namespace.myNamespaceName()) then aClassifier.name.toUpperFirst() else aClassifier.getNearestPackage().generateNamespace(false).concat('::').concat(aClassifier.name.toUpperFirst()) endif /]
 [query public executionClassName(aClassifier : Classifier) : String = aClassifier.name.toUpperFirst().concat('Execution') /]
 [query public objectClassName(aClassifier : Classifier) : String = aClassifier.name.toUpperFirst().concat('Object') /]
 
@@ -146,20 +146,20 @@ std::shared_ptr<fUML::Semantics::SimpleClassifiers::EnumerationValue> [par.name/
 
 [template public generateOutputParameter(par : Parameter) ? ((not type.supportedTypes()) and (not type.oclIsKindOf(Enumeration)))]
 std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> [par.name/]OutValue([getPSCSStructuredClassifierFactory()/]->createCS_Reference());
-std::shared_ptr<[par.type.getNearestPackage().generateNamespace()/]::[par.type.name.toUpperFirst()/]Object> [par.name/]OutUmlLinker(new [par.type.getNearestPackage().generateNamespace()/]::[par.type.name.toUpperFirst()/]Object([par.name.toLowerFirst()/][if (par.upper <> 1)]Temp[/if]));
+std::shared_ptr<[par.type.getNearestPackage().generateNamespace(false)/]::[par.type.name.toUpperFirst()/]Object> [par.name/]OutUmlLinker(new [par.type.getNearestPackage().generateNamespace(false)/]::[par.type.name.toUpperFirst()/]Object([par.name.toLowerFirst()/][if (par.upper <> 1)]Temp[/if]));
 [par.name/]OutUmlLinker->setThis[par.type.name.toUpperFirst()/]ObjectPtr([par.name/]OutUmlLinker);
 [/template]
 
 
 [comment]INCLUDE SWITCH----------------------------------------------------------[/comment]
 [template public generateTypeInclude(type : Type, aPackage : Package, thisPackage : Package) ? ((not type.supportedTypes()) and (not type.oclIsKindOf(Enumeration)))]
-#include "[aPackage.generateNamespacePath()/]/[type.name/].hpp"
-#include "[aPackage.generateNamespacePath()/]Exec/[type.name.toUpperFirst()/]Object.hpp"
+#include "[aPackage.generateNamespacePath(true)/]/[type.name/].hpp"
+#include "[aPackage.generateNamespacePath(false)/]Exec/[type.name.toUpperFirst()/]Object.hpp"
 [/template]
 
 [template public generateTypeInclude(type : Type, aPackage : Package, thisPackage : Package) ? (not type.supportedTypes() and type.oclIsKindOf(Enumeration))]
 #include "fUML/Semantics/SimpleClassifiers/EnumerationValue.hpp"
-#include "[aPackage.generateNamespacePath()/]/[type.name/].hpp"
+#include "[aPackage.generateNamespacePath(false)/]/[type.name/].hpp"
 [/template]
 
 [template public generateTypeInclude(type : Type, aPackage : Package, thisPackage : Package) ? (supportedTypes())]

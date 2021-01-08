@@ -28,7 +28,7 @@
 [/template]
 
 [template private generateCMakeLists(aPackage : Package, packageOnly : Boolean) { packageName : String = getPackageName(); execPackageName : String = getPackageName().concat('Exec'); }]
-[file (aPackage.generateNamespacePath().concat('Exec/').concat('CMakeLists.txt'), false, 'UTF-8')]
+[file (aPackage.generateNamespacePath(false).concat('Exec/').concat('CMakeLists.txt'), false, 'UTF-8')]
 #############################################################################
 #																			#
 #		 			CMakeList created by fUML4CPP Generator					# 
@@ -61,7 +61,7 @@ SET(SOURCE_FILES
 	['impl/'.concat(aPackage.name).concat('ExecPluginImpl.cpp')/]
 	[if (not packageOnly)]
 	# Model Execution Locus
-	impl/[aPackage.name.toUpperFirst()/]LocusImpl.cpp
+	impl/[aPackage.name/]LocusImpl.cpp
 	[/if]
 	[aPackage.generatePackageSourceFilesToCompile(packageOnly, true)/]
 )
@@ -217,18 +217,18 @@ task clean {
 [/template]
 
 [template private generatePackageSourceFilesToCompile(aPackage : Package, packOnly : Boolean, isRoot : Boolean)]
-#ClassifierObject classes for Package [aPackage.generateNamespace()/]
+#ClassifierObject classes for Package [aPackage.generateNamespace(false)/]
 [for (aClassifier : Classifier | getClassifiersForObjectClasses()->reject(hasEAnnotation(sourceNoExecution()))->sortedBy(name))]
-[if(not isRoot)]../[aPackage.generateNamespacePath()/]Exec/[/if][aClassifier.name.toUpperFirst()/]Object.cpp
+[if(not isRoot)]../[aPackage.generateNamespacePath(false)/]Exec/[/if][aClassifier.name.toUpperFirst()/]Object.cpp
 [/for]
 [if (not packOnly)]
-#OpaqueBehaviorExecution classes for Package [aPackage.generateNamespace()/]
+#OpaqueBehaviorExecution classes for Package [aPackage.generateNamespace(false)/]
 [for (anOpaqueBehavior : OpaqueBehavior | aPackage.getPackageOpaqueBehaviors()->reject(hasEAnnotation(sourceNoExecution()))->sortedBy(name))]
-[if(not isRoot)]../[aPackage.generateNamespacePath()/]Exec/[/if][anOpaqueBehavior.generateOpaqueBehaviorExecutionName()/].cpp
+[if(not isRoot)]../[aPackage.generateNamespacePath(false)/]Exec/[/if][anOpaqueBehavior.generateOpaqueBehaviorExecutionName()/].cpp
 [/for]
-#OperationExecution classes for Package [aPackage.generateNamespace()/]
+#OperationExecution classes for Package [aPackage.generateNamespace(false)/]
 [for (anOperation : Operation | aPackage.getPackageOperations()->sortedBy(name))]
-[if(not isRoot)]../[aPackage.generateNamespacePath()/]Exec/[/if][anOperation.generateOperationExecutionName()->reject(hasEAnnotation(sourceNoExecution()))->sortedBy(name)/].cpp
+[if(not isRoot)]../[aPackage.generateNamespacePath(false)/]Exec/[/if][anOperation.generateOperationExecutionName()->reject(hasEAnnotation(sourceNoExecution()))->sortedBy(name)/].cpp
 [/for]
 [/if]
 [for (subPackage : Package | aPackage.ownedElement->filter(Package))]

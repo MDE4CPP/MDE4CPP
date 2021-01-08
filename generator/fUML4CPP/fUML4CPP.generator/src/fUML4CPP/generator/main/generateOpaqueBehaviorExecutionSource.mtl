@@ -27,8 +27,8 @@
 	behaviorName : String = anOpaqueBehavior.generateOpaqueBehaviorExecutionName(); 
 }]
 
-[file (aPackage.generateNamespacePath().concat('Exec/').concat(behaviorName).concat('.cpp'), false, 'UTF-8')]
-#include "[aPackage.generateNamespacePath()/]Exec/[behaviorName/].hpp"
+[file (aPackage.generateNamespacePath(false).concat('Exec/').concat(behaviorName).concat('.cpp'), false, 'UTF-8')]
+#include "[aPackage.generateNamespacePath(false)/]Exec/[behaviorName/].hpp"
 
 [defineDebugMacro()/]
 
@@ -43,7 +43,7 @@
 
 [anOpaqueBehavior.generateIncludesOpaqueBehavior(aPackage)/]
 
-using namespace [aPackage.generateNamespace()/];
+using namespace [aPackage.generateNamespace(false)/];
 
 [behaviorName/]::[behaviorName/]()
 {
@@ -91,7 +91,7 @@ void [behaviorName/]::setThisExecutionPtr(std::weak_ptr<[behaviorName/]> thisExe
 [/if][/let][/if]
 
 [for (typePackage : Package | anOpaqueBehavior.ownedParameter.type->asSet()->reject(supportedTypes())._package->asSet()->reject(isReflectionModel())->sortedBy(qualifiedName))]
-#include "[typePackage.generateNamespacePath()/]/[typePackage.getPackageName().toUpperFirst()/]Package.hpp"
+#include "[typePackage.generateNamespacePath(false)/]/[typePackage.getPackageName()/]Package.hpp"
 [/for]
 
 [for (type : Type | anOpaqueBehavior.ownedParameter.type->asOrderedSet())]
@@ -99,14 +99,14 @@ void [behaviorName/]::setThisExecutionPtr(std::weak_ptr<[behaviorName/]> thisExe
 [/for]
 
 [if (anOpaqueBehavior.hasGenerateContextVariable())]
-#include "[anOpaqueBehavior.owner.oclAsType(Classifier).getNearestPackage().generateNamespacePath()/]/[anOpaqueBehavior._context.oclAsType(Classifier).name.toUpperFirst()/].hpp"
-#include "[aPackage.generateNamespacePath()/]Exec/[anOpaqueBehavior._context.oclAsType(Classifier).name.toUpperFirst()/]Object.hpp"
+#include "[anOpaqueBehavior.owner.oclAsType(Classifier).getNearestPackage().generateNamespacePath(false)/]/[anOpaqueBehavior._context.oclAsType(Classifier).name.toUpperFirst()/].hpp"
+#include "[aPackage.generateNamespacePath(false)/]Exec/[anOpaqueBehavior._context.oclAsType(Classifier).name.toUpperFirst()/]Object.hpp"
 [/if]
 [/template]
 
 [template private generateBody(anOpaqueBehavior : OpaqueBehavior, aPackage : Package)]
 [if (anOpaqueBehavior.hasGenerateContextVariable())]
-std::shared_ptr<[anOpaqueBehavior.getContext().getNearestPackage().generateNamespace()/]::[anOpaqueBehavior.getContext().name.toUpperFirst()/]> context = std::dynamic_pointer_cast<[anOpaqueBehavior.getContext().getNearestPackage().generateNamespace()/]::[anOpaqueBehavior.getContext().name.toUpperFirst()/]Object>(this->getContext())->[anOpaqueBehavior.getContext().UMLValueGetterName()/]();
+std::shared_ptr<[anOpaqueBehavior.getContext().getNearestPackage().generateNamespace(false)/]::[anOpaqueBehavior.getContext().name.toUpperFirst()/]> context = std::dynamic_pointer_cast<[anOpaqueBehavior.getContext().getNearestPackage().generateNamespace(false)/]::[anOpaqueBehavior.getContext().name.toUpperFirst()/]Object>(this->getContext())->[anOpaqueBehavior.getContext().UMLValueGetterName()/]();
 DEBUG_MESSAGE(
 	if (context == nullptr)
 	{

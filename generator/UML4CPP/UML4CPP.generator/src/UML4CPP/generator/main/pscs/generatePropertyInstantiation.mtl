@@ -31,9 +31,9 @@
 [if (aProperty.canInstantiate() and (not aProperty.type.oclIsTypeOf(Interface)))]
 //instantiate property '[aProperty.name/]'
 [if (aProperty.isComposite() or aProperty.isBackReference())]
-m_[aProperty.name/] = [aProperty.type._package.generateNamespace()/]::[aProperty.type._package.getPackageName().toUpperFirst()/]Factory::eInstance()->create[aProperty.type.name.toUpperFirst()/]_as_[aProperty.name/]_in_[aProperty.class.name.toUpperFirst()/]([if (aProperty.isBackReference())]m_this[aProperty.class.name.toUpperFirst()/]Ptr[else]getThis[aProperty.class.name.toUpperFirst()/]Ptr()[/if]);
+m_[aProperty.name/] = [aProperty.type._package.generateNamespace(false)/]::[aProperty.type._package.getPackageName()/]Factory::eInstance()->create[aProperty.type.name.toUpperFirst()/]_as_[aProperty.name/]_in_[aProperty.class.name.toUpperFirst()/]([if (aProperty.isBackReference())]m_this[aProperty.class.name.toUpperFirst()/]Ptr[else]getThis[aProperty.class.name.toUpperFirst()/]Ptr()[/if]);
 [else]
-m_[aProperty.name/] = [aProperty.type._package.generateNamespace()/]::[aProperty.type._package.getPackageName().toUpperFirst()/]Factory::eInstance()->create[aProperty.type.name.toUpperFirst()/]();
+m_[aProperty.name/] = [aProperty.type._package.generateNamespace(false)/]::[aProperty.type._package.getPackageName()/]Factory::eInstance()->create[aProperty.type.name.toUpperFirst()/]();
 [/if]
 [/if]
 [else]
@@ -52,11 +52,11 @@ for(unsigned int i = 1; i <= [aProperty.getLower()/]; i++)
 [**
  * Template for generation of instantiation of a part
 */]
-[template private generatePartInstantiation(aProperty : Property) {aPackage : Package = aProperty.type.getNearestPackage(); factoryName : String = aPackage.name.toUpperFirst().concat('Factory');}]
+[template private generatePartInstantiation(aProperty : Property) {aPackage : Package = aProperty.type.getNearestPackage(); factoryName : String = aPackage.name.concat('Factory');}]
 	[if (aProperty.isComposite)]
-	std::shared_ptr<[aProperty.type.transformType()/]> value = [aPackage.generateNamespace()/]::[factoryName/]::eInstance()->create[aProperty.type.name.toUpperFirst()/]_as_[aProperty.name/]_in_[aProperty.class.name.toUpperFirst()/](m_this[aProperty.class.name.toUpperFirst()/]Ptr);
+	std::shared_ptr<[aProperty.type.transformType()/]> value = [aPackage.generateNamespace(false)/]::[factoryName/]::eInstance()->create[aProperty.type.name.toUpperFirst()/]_as_[aProperty.name/]_in_[aProperty.class.name.toUpperFirst()/](m_this[aProperty.class.name.toUpperFirst()/]Ptr);
 	[else]
-	std::shared_ptr<[aProperty.type.transformType()/]> value = [aPackage.generateNamespace()/]::[factoryName/]::eInstance()->create[aProperty.type.name.toUpperFirst()/]();
+	std::shared_ptr<[aProperty.type.transformType()/]> value = [aPackage.generateNamespace(false)/]::[factoryName/]::eInstance()->create[aProperty.type.name.toUpperFirst()/]();
 	m_[aProperty.name/]->add(value);
 	[/if]
 [/template]

@@ -26,16 +26,16 @@
 [import UML4CPP::generator::main::helpers::nameHelper /]
 [import UML4CPP::generator::main::helpers::singletonHelper /]
 
-[template public generateFactoryInterface(aPackage : Package){packageName : String = aPackage.name.toUpperFirst().concat('Factory');}]
-[file (aPackage.generateNamespacePath().concat('/').concat(packageName).concat('.hpp'), false, 'UTF-8')]
+[template public generateFactoryInterface(aPackage : Package){packageName : String = aPackage.name.concat('Factory');}]
+[file (aPackage.generateNamespacePath(false).concat('/').concat(packageName).concat('.hpp'), false, 'UTF-8')]
 [startGuard(aPackage,'Factory')/]
 
 #include "uml/Factory.hpp"
-#include "[aPackage.generateNamespacePath()/]/[aPackage.name.toUpperFirst().concat('Package')/].hpp"
+#include "[aPackage.generateNamespacePath(false)/]/[aPackage.name.concat('Package')/].hpp"
 
 [comment  Generate Includes for the Factory/]
 [for (forwardDeclPackages : Package| aPackage.collectModelClassesForFactoryDeclaration()._package->asSet()) separator ('\n')]
-namespace [forwardDeclPackages.generateNamespace()/]
+namespace [forwardDeclPackages.generateNamespace(false)/]
 {
 	[for (aClass : Class | aPackage.collectModelClassesForFactoryDeclaration()->select(_package = forwardDeclPackages))]
 	class [aClass.name.toUpperFirst()/];
@@ -43,10 +43,10 @@ namespace [forwardDeclPackages.generateNamespace()/]
 }
 [/for]
 
-[if (not aPackage.ignoreNamespace())]namespace [aPackage.generateNamespace()/] 
+[if (not aPackage.ignoreNamespace())]namespace [aPackage.generateNamespace(false)/] 
 {
 [/if]
-	class [aPackage.name.toUpperFirst().concat('Package')/];
+	class [aPackage.name.concat('Package')/];
 	class [packageName/];
 
 	class [packageName/] : virtual public uml::Factory 
@@ -65,7 +65,7 @@ namespace [forwardDeclPackages.generateNamespace()/]
 
 			[aPackage.collectModelClassesForFactoryFunctions().generateClassCreate(false)/]
 			//Package
-			virtual std::shared_ptr<[aPackage.name.toUpperFirst().concat('Package')/]> get[aPackage.name.toUpperFirst().concat('Package')/]() = 0;
+			virtual std::shared_ptr<[aPackage.name.concat('Package')/]> get[aPackage.name.concat('Package')/]() = 0;
 	};
 [if (not aPackage.ignoreNamespace())]}[/if]
 [endGuard(aPackage,'Factory')/]

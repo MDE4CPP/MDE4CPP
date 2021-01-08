@@ -36,6 +36,7 @@
 [import UML4CPP::generator::main::validation::validateModel /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
+[import UML4CPP::generator::main::helpers::keywords /]
 
 [template public generateFUML(aPackage : uml::Package)]
 [comment @main/]
@@ -75,10 +76,18 @@
 [/for]
 
 //generate execution classifier
+[if (aPackage.name = keyEcore() or aPackage.name = keyUML())]
+[for (aClassifier : Classifier | aPackage.getClassifiersForObjectClasses()->reject(hasEAnnotation(sourceNoExecution())))]
+[aClassifier.generateMetamodelClassifierObjectHeader(aPackage)/]
+[aClassifier.generateMetamodelClassifierObjectSource(aPackage)/]
+[/for]
+[else]
 [for (aClassifier : Classifier | aPackage.getClassifiersForObjectClasses()->reject(hasEAnnotation(sourceNoExecution())))]
 [aClassifier.generateClassifierObjectHeader(aPackage)/]
 [aClassifier.generateClassifierObjectSource(aPackage)/]
 [/for]
+[/if]
+
 
 [comment Generate execution plugin, model locus, CMakeLists and Gradle-Files only for root package /]
 [if (aPackage.getSuperPackage().oclIsUndefined())]
@@ -98,8 +107,17 @@
 
 [template public generateFUMLModelForPackageOnly(aPackage : Package)]
 //generate execution classifier
-[aPackage.getClassifiersForPackageOnly().generateClassifierObjectHeader(aPackage)/]
-[aPackage.getClassifiersForPackageOnly().generateClassifierObjectSource(aPackage)/]
+[if (aPackage.name = keyEcore() or aPackage.name = keyUML())]
+[for (aClassifier : Classifier | aPackage.getClassifiersForPackageOnly()->reject(hasEAnnotation(sourceNoExecution())))]
+[aClassifier.generateMetamodelClassifierObjectHeader(aPackage)/]
+[aClassifier.generateMetamodelClassifierObjectSource(aPackage)/]
+[/for]
+[else]
+[for (aClassifier : Classifier | aPackage.getClassifiersForPackageOnly()->reject(hasEAnnotation(sourceNoExecution())))]
+[aClassifier.generateClassifierObjectHeader(aPackage)/]
+[aClassifier.generateClassifierObjectSource(aPackage)/]
+[/for]
+[/if]
 
 [comment Generate execution plugin, CMakeLists and Gradle-Files only for root package /]
 [if (aPackage.getSuperPackage().oclIsUndefined())]

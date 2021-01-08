@@ -40,8 +40,8 @@
 [query private getAllAttributes(aClass : Class) : Set(Property) = OrderedSet{aClass.ownedAttribute, aClass.generalization.general->selectByType(Class).getAllAttributes(), aClass.interfaceRealization.contract.getAllAttributes()}->flatten() /]
 
 [template public generateImplementationSource(aClass : Class) { className : String = aClass.name.toUpperFirst().concat('Impl'); aPackage : Package = aClass.ancestors()->filter(Package)->first(); }]
-[file (aPackage.generateNamespacePath().concat('/impl/').concat(className).concat('.cpp'), false, 'UTF-8')]
-#include "[aPackage.generateNamespacePath()/]/impl/[className.concat('.hpp')/]"
+[file (aPackage.generateNamespacePath(false).concat('/impl/').concat(className).concat('.cpp'), false, 'UTF-8')]
+#include "[aPackage.generateNamespacePath(false)/]/impl/[className.concat('.hpp')/]"
 
 [defineDebugMacro()/]
 
@@ -50,8 +50,8 @@
 [generateAbstractDataTypesIncludes()/]
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "[aPackage.generateNamespacePath()/]/[aPackage.name.toUpperFirst().concat('Factory')/].hpp"
-#include "[aPackage.generateNamespacePath()/]/impl/[aPackage.name.toUpperFirst().concat('PackageImpl')/].hpp"
+#include "[aPackage.generateNamespacePath(false)/]/[aPackage.name.concat('Factory')/].hpp"
+#include "[aPackage.generateNamespacePath(false)/]/impl/[aPackage.name.concat('PackageImpl')/].hpp"
 #include "[aClass.eClass().ePackage.name/]/[aClass.eClass().name/].hpp"
 [if (aClass.ownedAttribute->select(hasSetter())->select(type.oclIsKindOf(Enumeration))->size() > 0)]
 #include "uml/EnumerationLiteral.hpp"
@@ -64,19 +64,19 @@
 [elseif (cl.getNearestPackage().hasIncludePath())]
 #include "[cl.getNearestPackage().getIncludePath()/]"
 [else]
-#include "[cl.getNearestPackage().generateNamespacePath()/]/[cl.name.toUpperFirst()/].hpp"
+#include "[cl.getNearestPackage().generateNamespacePath(true)/]/[cl.name.toUpperFirst()/].hpp"
 [/if]
 [/for]
 
 //Packges and Factories included from types of attributes, operation parameters, imports and composite owner classes
 [for (typePackage : Package | aClass.includes()->filter(Class).getNearestPackage()->reject(pack : Package | pack = aPackage)->asSet()->sortedBy(myQualifiedName()))]
-#include "[typePackage.generateNamespacePath()/]/[typePackage.name.toUpperFirst().concat('Factory')/].hpp"
-#include "[typePackage.generateNamespacePath()/]/impl/[typePackage.name.toUpperFirst().concat('PackageImpl')/].hpp"
+#include "[typePackage.generateNamespacePath(true)/]/[typePackage.myNamespaceName().concat('Factory')/].hpp"
+#include "[typePackage.generateNamespacePath(true)/]/impl/[typePackage.myNamespaceName().concat('PackageImpl')/].hpp"
 [/for]
 
 //Packages of included Enumerations
 [for (aPackage : Package | aClass.ownedAttribute->select(type.oclIsKindOf(Enumeration)).type._package->flatten()->reject(pack : Package | pack = aPackage)->sortedBy(name))]
-#include "[aPackage.generateNamespacePath()/]/[aPackage.getPackageName()/]Package.hpp"
+#include "[aPackage.generateNamespacePath(false)/]/[aPackage.getPackageName()/]Package.hpp"
 [/for]
 
 //Includes of PluginFramework (if required)
@@ -101,8 +101,8 @@
 [if (instVal.type.oclIsUndefined() or instVal.type.name.oclIsUndefined())]
 // undefined type of InstanceValue [instVal.qualifiedName/] ([instVal.type.toString()/]) ['class '.concat(aClass.name).concat(': undefined type of InstanceValue ').concat(instVal.qualifiedName).concat(' (').concat(instVal.type.toString()).registerError()/]
 [else]
-#include "[instVal.type._package.generateNamespacePath()/]/[instVal.type._package.getPackageName().toUpperFirst()/]Factory.hpp"
-#include "[instVal.type._package.generateNamespacePath()/]/[instVal.type.name.toUpperFirst()/].hpp"
+#include "[instVal.type._package.generateNamespacePath(false)/]/[instVal.type._package.getPackageName()/]Factory.hpp"
+#include "[instVal.type._package.generateNamespacePath(true)/]/[instVal.type.name/].hpp"
 [/if]
 [/for]
 
@@ -111,7 +111,7 @@
 [if (aPort.type.oclIsTypeOf(Interface))]
 [for (anInterfaceRealization : InterfaceRealization | aPackage.getInterfaceRealizations(aPort.type.oclAsType(Interface)))]
 [let realizingClass : Class = anInterfaceRealization.owner.oclAsType(Class)]
-#include "[realizingClass._package.generateNamespacePath()/]/[realizingClass.name.toUpperFirst()/].hpp"
+#include "[realizingClass._package.generateNamespacePath(true)/]/[realizingClass.name/].hpp"
 [/let]
 [/for]
 [/if]
@@ -119,10 +119,10 @@
 
 //Includes from roles of ConnectorEnds (if required)
 [for (aConnector : Connector | aClass.ownedConnector)][for (anEnd : ConnectorEnd | aConnector.end)]
-#include "[anEnd.role.type._package.generateNamespacePath()/]/[anEnd.role.type.name.toUpperFirst()/].hpp"
+#include "[anEnd.role.type._package.generateNamespacePath(true)/]/[anEnd.role.type.name.toUpperFirst()/].hpp"
 [/for][/for]
 
-[if (not aPackage.ignoreNamespace())]using namespace [aPackage.generateNamespace()/];[/if]
+[if (not aPackage.ignoreNamespace())]using namespace [aPackage.generateNamespace(false)/];[/if]
 
 //*********************************
 // Constructor / Destructor
@@ -217,7 +217,7 @@ std::shared_ptr<ecore::EObject>  [className/]::copy() const
 
 std::shared_ptr<uml::Class> [className/]::getMetaClass()
 {
-	return [aPackage.name.concat('PackageImpl').toUpperFirst()/]::eInstance()->[aClass.generatePackageGetterCall(aClass)/];
+	return [aPackage.name.concat('PackageImpl')/]::eInstance()->[aClass.generatePackageGetterCall(aClass)/];
 }
 
 void [className/]::instantiate()
@@ -230,7 +230,7 @@ void [className/]::instantiate()
 	[aProperty.generateAttributeInstantiation()/]
 	[/for]
 	[comment Init properties with default value/]
-	[for (aProperty : Property | aClass.ownedAttribute->sortedBy(myQualifiedName())->select(p : Property | (not p.default->isEmpty())))]
+	[for (aProperty : Property | aClass.ownedAttribute->sortedBy(myQualifiedName())->select(p : Property | (not p.defaultValue.oclIsUndefined())))]
 	[if ((aProperty.defaultValue.oclIsTypeOf(InstanceValue)))]
 	[if (aProperty.defaultValue.type.oclIsUndefined())]
     ['class '.concat(aClass.name).concat(': undefined type of InstanceValue for ').concat(aProperty.qualifiedName).registerError()/]
@@ -318,7 +318,7 @@ void [className/]::destroy()
 
 [template public generateImplementationSource(aInterface : Interface) { interfaceName : String = aInterface.name.toUpperFirst().concat('Impl'); aPackage : Package = aInterface.ancestors()->filter(Package)->first(); }]
 [file (aPackage.getPackageName().concat('/impl/').concat(interfaceName).concat('.cpp'), false, 'UTF-8')]
-#include "[aPackage.generateNamespacePath()/]/impl/[interfaceName.concat('.hpp')/]"
+#include "[aPackage.generateNamespacePath(false)/]/impl/[interfaceName.concat('.hpp')/]"
 
 [defineDebugMacro()/]
 
@@ -327,13 +327,13 @@ void [className/]::destroy()
 [generateAbstractDataTypesIncludes()/]
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "[aPackage.generateNamespacePath()/]/impl/[aPackage.name.toUpperFirst().concat('PackageImpl')/].hpp"
+#include "[aPackage.generateNamespacePath(false)/]/impl/[aPackage.name.concat('PackageImpl')/].hpp"
 #include "[aInterface.eClass().ePackage.name/]/[aInterface.eClass().name/].hpp"
 [for (cl : Type | aInterface.includes()->sortedBy(myQualifiedName())) ? ( oclIsKindOf(Class) or oclIsKindOf(Interface))]
 [if (cl.oclIsUndefined() or cl.name.oclIsUndefined())]
 // undefined  [cl.eClass().name/] ([cl.toString()/]) ['class '.concat(aInterface.name).concat(': header include failed for undefined ').concat(cl.eClass().name).concat(' ').concat(cl.toString()).registerError()/]
 [else]
-#include "[cl.getNearestPackage().generateNamespacePath()/]/[cl.name.toUpperFirst()/].hpp"
+#include "[cl.getNearestPackage().generateNamespacePath(false)/]/[cl.name.toUpperFirst()/].hpp"
 [/if]
 [/for]
 
@@ -359,12 +359,12 @@ void [className/]::destroy()
 [if (instVal.type.oclIsUndefined() or instVal.type.name.oclIsUndefined())]
 // undefined type of InstanceValue [instVal.qualifiedName/] ([instVal.type.toString()/]) ['class '.concat(aInterface.name).concat(': undefined type of InstanceValue ').concat(instVal.qualifiedName).concat(' (').concat(instVal.type.toString()).registerError()/]
 [else]
-#include "[instVal.type._package.generateNamespacePath()/]/[instVal.type._package.getPackageName()/]Factory.hpp"
-#include "[instVal.type._package.generateNamespacePath()/]/[instVal.type.name.toUpperFirst()/].hpp"
+#include "[instVal.type._package.generateNamespacePath(false)/]/[instVal.type._package.getPackageName()/]Factory.hpp"
+#include "[instVal.type._package.generateNamespacePath(false)/]/[instVal.type.name.toUpperFirst()/].hpp"
 [/if]
 [/for]
 
-[if (not aPackage.ignoreNamespace())]using namespace [aPackage.generateNamespace()/];[/if]
+[if (not aPackage.ignoreNamespace())]using namespace [aPackage.generateNamespace(false)/];[/if]
 
 //*********************************
 // Constructor / Destructor
@@ -413,7 +413,7 @@ void [className/]::destroy()
 
 /*std::shared_ptr<uml::Class> [interfaceName/]::getMetaClass()
 {
-	return [aPackage.name.concat('PackageImpl').toUpperFirst()/]::eInstance()->[aInterface.generatePackageGetterCall(aInterface)/];
+	return [aPackage.name.concat('PackageImpl')/]::eInstance()->[aInterface.generatePackageGetterCall(aInterface)/];
 }*/
 
 //*********************************

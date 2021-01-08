@@ -27,8 +27,8 @@
 [import UML4CPP::generator::main::helpers::collectionHelper /]
 
 
-[template public generatePackageInterface(aPackage : Package) {packageName : String = aPackage.name.toUpperFirst().concat('Package');}]
-[file (aPackage.generateNamespacePath().concat('/').concat(packageName).concat('.hpp'), false, 'UTF-8')]
+[template public generatePackageInterface(aPackage : Package) {packageName : String = aPackage.name.concat('Package');}]
+[file (aPackage.generateNamespacePath(false).concat('/').concat(packageName).concat('.hpp'), false, 'UTF-8')]
 [startGuard(aPackage,'MetaModelPackage')/]
 #include "uml/[aPackage.eClass().name/].hpp"
 
@@ -41,14 +41,14 @@ namespace uml
 }
 
 [for (subPackage : Package| aPackage.ownedElement->filter(Package)->sortedBy(name)) separator ('\n')]
-namespace [subPackage.generateNamespace()/] 
+namespace [subPackage.generateNamespace(false)/] 
 {
 	class [subPackage.name/]Package;
 }
 [/for]
 
 [comment namespace /]
-[if (not aPackage.ignoreNamespace())]namespace [aPackage.generateNamespace()/] 
+[if (not aPackage.ignoreNamespace())]namespace [aPackage.generateNamespace(false)/] 
 {
 [/if]
 	/*!

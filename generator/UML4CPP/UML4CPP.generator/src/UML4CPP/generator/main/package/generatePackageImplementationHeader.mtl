@@ -24,11 +24,11 @@
 [import UML4CPP::generator::main::helpers::nameHelper /]
 [import UML4CPP::generator::main::helpers::collectionHelper /]
 
-[template public generatePackageImplHeader(aPackage : Package) {packageName : String = aPackage.name.concat('PackageImpl').toUpperFirst();}]
-[file (aPackage.generateNamespacePath().concat('/impl/').concat(aPackage.name.toUpperFirst()).concat('PackageImpl.hpp'), false, 'UTF-8')]
+[template public generatePackageImplHeader(aPackage : Package) {packageName : String = aPackage.name.concat('PackageImpl');}]
+[file (aPackage.generateNamespacePath(false).concat('/impl/').concat(aPackage.name).concat('PackageImpl.hpp'), false, 'UTF-8')]
 [startGuard(aPackage,'MetaModelPackageImpl')/]
 
-#include "[aPackage.generateNamespacePath()/]/[aPackage.name.concat('Package').toUpperFirst()/].hpp"
+#include "[aPackage.generateNamespacePath(false)/]/[aPackage.name.concat('Package')/].hpp"
 #include "uml/impl/[aPackage.eClass().name /]Impl.hpp"
 
 namespace uml
@@ -36,22 +36,22 @@ namespace uml
 [for (nE : EClass | OrderedSet{(aPackage.allOwnedElements()->filter(ValueSpecification)-aPackage.allOwnedElements()->filter(Slot)).eClass()}->flatten()->sortedBy(name))]
 	class [nE.name/];
 [/for]
-	class UmlFactory;
+	class umlFactory;
 }
 
 [for (subPackage : Package| aPackage.ownedElement->filter(Package)->sortedBy(name)) separator ('\n')]
-namespace [subPackage.generateNamespace()/] 
+namespace [subPackage.generateNamespace(false)/] 
 {
 	class [subPackage.name/]Package;
 }
 [/for]
 
-[if (not aPackage.ignoreNamespace())]namespace [aPackage.generateNamespace()/]
+[if (not aPackage.ignoreNamespace())]namespace [aPackage.generateNamespace(false)/]
 {
 [/if]
-	class [packageName/] : virtual public uml::[aPackage.eClass().name /]Impl, virtual public [aPackage.name.toUpperFirst().concat('Package')/]
+	class [packageName/] : virtual public uml::[aPackage.eClass().name /]Impl, virtual public [aPackage.name.concat('Package')/]
 	{
-			friend class [aPackage.name.toUpperFirst().concat('Package')/];
+			friend class [aPackage.name.concat('Package')/];
 			// Constructor
 			[packageName/]();
 
@@ -73,7 +73,7 @@ namespace [subPackage.generateNamespace()/]
 			[(aPackage.getElementsBelongingToPackage()->filter(NamedElement))->reject(owner.oclIsKindOf(Slot))->sortedBy(myQualifiedName()).generatePackageMember()/]
 			[(aPackage.getElementsBelongingToPackage()->filter(ConnectorEnd))->sortedBy(myQualifiedName()).generatePackageMember()/]
 
-			static [aPackage.name.concat('Package').toUpperFirst()/]* create();
+			static [aPackage.name.concat('Package')/]* create();
 			static bool isInited;
 			bool isInitialized = false;
 			bool isCreated = false;
@@ -86,20 +86,20 @@ namespace [subPackage.generateNamespace()/]
 			void createPackageContents(std::shared_ptr<uml::Package> [aPackage.memberName()/]);
 
 		private:
-			void createPackageActivities(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::UmlFactory> factory);
+			void createPackageActivities(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::umlFactory> factory);
 [for (anActivity : Activity | (aPackage.allOwnedElements()->filter(Activity)->sortedBy(myQualifiedName())))]
-			void createActivity_[anActivity.memberName()/](std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::UmlFactory> factory);
+			void createActivity_[anActivity.memberName()/](std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::umlFactory> factory);
 [/for]
-			void createPackageClasses(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::UmlFactory> factory);
-			void createPackageAssociations(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::UmlFactory> factory);
-			void createPackageDependencies(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::UmlFactory> factory);
-			void createPackageEnumerationLiterals(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::UmlFactory> factory);
-			void createPackageInstanceSpecifications(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::UmlFactory> factory);
-			void createPackageInterfaceRealizations(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::UmlFactory> factory);
-			void createPackageInterfaces(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::UmlFactory> factory);
-			void createPackagePrimitiveTypes(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::UmlFactory> factory);
-			void createPackageStereotypes(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::UmlFactory> factory);
-			void createPackageValueSpecifications(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::UmlFactory> factory);
+			void createPackageClasses(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::umlFactory> factory);
+			void createPackageAssociations(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::umlFactory> factory);
+			void createPackageDependencies(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::umlFactory> factory);
+			void createPackageEnumerationLiterals(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::umlFactory> factory);
+			void createPackageInstanceSpecifications(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::umlFactory> factory);
+			void createPackageInterfaceRealizations(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::umlFactory> factory);
+			void createPackageInterfaces(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::umlFactory> factory);
+			void createPackagePrimitiveTypes(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::umlFactory> factory);
+			void createPackageStereotypes(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::umlFactory> factory);
+			void createPackageValueSpecifications(std::shared_ptr<uml::Package> [aPackage.memberName()/], std::shared_ptr<uml::umlFactory> factory);
 
 			void initializePackageActivities();
 [for (anActivity : Activity | (aPackage.allOwnedElements()->filter(Activity)->sortedBy(myQualifiedName())))]

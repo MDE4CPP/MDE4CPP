@@ -27,9 +27,9 @@
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
-[template public generateFactoryImplSource(aPackage : Package) { className : String = aPackage.name.toUpperFirst().concat('FactoryImpl'); }]
-[file (aPackage.generateNamespacePath().concat('/impl/').concat(className).concat('.cpp'), false, 'UTF-8')]
-#include "[aPackage.generateNamespacePath()/]/impl/[className/].hpp"
+[template public generateFactoryImplSource(aPackage : Package) { className : String = aPackage.name.concat('FactoryImpl'); }]
+[file (aPackage.generateNamespacePath(false).concat('/impl/').concat(className).concat('.cpp'), false, 'UTF-8')]
+#include "[aPackage.generateNamespacePath(false)/]/impl/[className/].hpp"
 
 #include "abstractDataTypes/Bag.hpp"
 #include "uml/Class.hpp"
@@ -37,16 +37,16 @@
 
 [comment  Generate Includes for the Factory/]
 [for (aClass : Class | aPackage.collectModelClassesForFactoryDeclaration())]
-#include "[aClass.getNearestPackage().generateNamespacePath()/]/impl/[aClass.name.toUpperFirst().concat('Impl.hpp')/]"
+#include "[aClass.getNearestPackage().generateNamespacePath(false)/]/impl/[aClass.name.toUpperFirst().concat('Impl.hpp')/]"
 [/for]
 
 [comment] DISABLE INTERFACE IMPLEMENTATION
 [for (aInterface : Interface | aPackage.collectModelInterfacesForFactory())]
-#include "[aPackage.getPackageName()/]/impl/[aInterface.name.toUpperFirst().concat('Impl.hpp')/]"
+#include "[aPackage.getPackageName()/]/impl/[aInterface.name.concat('Impl.hpp')/]"
 [/for]
 [/comment]
 
-[if (not aPackage.ignoreNamespace())]using namespace [aPackage.generateNamespace()/];[/if]
+[if (not aPackage.ignoreNamespace())]using namespace [aPackage.generateNamespace(false)/];[/if]
 //*********************************
 // Constructor / Destructor
 //*********************************
@@ -54,10 +54,10 @@
 [className/]::[className/]()
 {
 	[for (aClass : Class | aPackage.collectModelClassesForFactoryFunctions())]
-	m_idMap.insert(std::make_pair("[aClass.qualifiedName/]", [aPackage.name.toUpperFirst()/]Package::[aClass.getMemberName().toUpperCase()/]));
+	m_idMap.insert(std::make_pair("[aClass.qualifiedName/]", [aPackage.name/]Package::[aClass.getMemberName().toUpperCase()/]));
 	[/for]
 	[for (aInterface : Interface | aPackage.collectModelInterfacesForFactory())]
-	m_idMap.insert(std::make_pair("[aInterface.qualifiedName/]", [aPackage.name.toUpperFirst()/]Package::[aInterface.getMemberName().toUpperCase()/]));
+	m_idMap.insert(std::make_pair("[aInterface.qualifiedName/]", [aPackage.name/]Package::[aInterface.getMemberName().toUpperCase()/]));
 	[/for]
 }
 
@@ -65,7 +65,7 @@
 {
 }
 
-[aPackage.name.toUpperFirst().concat('Factory')/]* [className/]::create()
+[aPackage.name.concat('Factory')/]* [className/]::create()
 {
 	return new [className/]();
 }
@@ -81,7 +81,7 @@ std::shared_ptr<uml::Element> [className/]::create(const unsigned int _metaClass
 	{
 	[for (aClass : Class | aPackage.collectModelClassesForFactoryFunctions())]
 	[let ref:OrderedSet(Association) = aClass.getCompositionsToClass()]
-		case [aPackage.name.toUpperFirst()/]Package::[aClass.getMemberName().toUpperCase()/]:
+		case [aPackage.name/]Package::[aClass.getMemberName().toUpperCase()/]:
 		{
 			[if(ref->size()>0)]
 			if (nullptr == container)
@@ -99,7 +99,7 @@ std::shared_ptr<uml::Element> [className/]::create(const unsigned int _metaClass
 					[let containerProperty : Property = anAssociation.memberEnd->select(type = aClass)->asOrderedSet()->first()]
 					[let containmentProperty : Property = anAssociation.memberEnd->select(not (type = aClass))->asOrderedSet()->first()]
 					//[aClass.name/] has [anAssociation.name/] as a containment
-					case  [aPackage.name.toUpperFirst()/]Package::[containerProperty.name.toUpperCase()/]_[containmentProperty.name.toUpperCase()/]:
+					case  [aPackage.name/]Package::[containerProperty.name.toUpperCase()/]_[containmentProperty.name.toUpperCase()/]:
 					{
 						auto castedContainer = std::dynamic_pointer_cast<[if (containmentProperty.upper <> 1)]Bag<[/if][containmentProperty.type.transformType()/][if (containmentProperty.upper <> 1)]>[/if]>(container);
 						return this->create[aClass.name.toUpperFirst()/]_as_[containerProperty.name/]_in_[containmentProperty.type.name.toUpperFirst()/](castedContainer,_metaClassId);															  
@@ -128,7 +128,7 @@ std::shared_ptr<uml::Element> [className/]::create(const unsigned int _metaClass
 [comment] DISABLE INTERFACE IMPLEMENTATION
 	[for (aInterface : Interface | aPackage.collectModelInterfacesForFactory())]
 	[let ref:OrderedSet(Association) = aInterface.getCompositionsToInterface()]
-		case [aPackage.name.toUpperFirst()/]Package::[aInterface.getMemberName().toUpperCase()/]:
+		case [aPackage.name/]Package::[aInterface.getMemberName().toUpperCase()/]:
 		{
 [if(ref->size()>0)]
 			if (nullptr == container)
@@ -146,7 +146,7 @@ std::shared_ptr<uml::Element> [className/]::create(const unsigned int _metaClass
 					[let containerProperty : Property = anAssociation.memberEnd->select(type = aInterface)->asOrderedSet()->first()]
 					[let containmentProperty : Property = anAssociation.memberEnd->select(not (type = aInterface))->asOrderedSet()->first()]
 					//[aInterface.name/] has [anAssociation.name/] as a containment
-					case  [aPackage.name.toUpperFirst()/]Package::[containmentProperty.name.toUpperCase()/]:
+					case  [aPackage.name/]Package::[containmentProperty.name.toUpperCase()/]:
 					{
 						auto castedContainer = std::dynamic_pointer_cast<[if (containmentProperty.upper <> 1)]Bag<[/if][containmentProperty.type.transformType()/][if (containmentProperty.upper <> 1)]>[/if]>(container);
 						return this->create[aInterface.name/]_in_[containmentProperty.name.toUpperFirst()/](castedContainer,_metaClassId);															  
@@ -288,9 +288,9 @@ std::shared_ptr<[aInterface.generateCppType(true)/]> [className/]::create[aInter
 [/comment]
 
 
-std::shared_ptr<[aPackage.name.toUpperFirst().concat('Package')/]> [className/]::get[aPackage.name.toUpperFirst().concat('Package')/]()
+std::shared_ptr<[aPackage.name.concat('Package')/]> [className/]::get[aPackage.name.concat('Package')/]()
 {
-	return [aPackage.name.toUpperFirst().concat('Package')/]::eInstance();
+	return [aPackage.name.concat('Package')/]::eInstance();
 }
 [/file]
 [/template]

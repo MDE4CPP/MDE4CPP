@@ -59,8 +59,8 @@ string(REPLACE "\\" "/" MDE4CPP_HOME $ENV{MDE4CPP_HOME})
 
 SET(SOURCE_FILES
 	# Model plugin
-	impl/[aPackage.name.toUpperFirst()/]PluginImpl.cpp
-	[aPackage.name.toUpperFirst()/]Plugin.cpp
+	impl/[aPackage.name/]PluginImpl.cpp
+	[aPackage.name/]Plugin.cpp
 	[aPackage.generatePackageSourceFilesToCompile(packOnly, true)/]
 )
 
@@ -156,14 +156,14 @@ TARGET_LINK_LIBRARIES(${PROJECT_NAME}
 [/template]
 
 [template private generatePackageSourceFilesToCompile(aPackage : Package, packOnly : Boolean, isRoot : Boolean)]
-# Package of [aPackage.generateNamespace()/]
-[if(not isRoot)][aPackage.generateNamespacePathWithoutRoot()/]/[/if]impl/[aPackage.name.toUpperFirst()/]PackageImpl.cpp
-[if(not isRoot)][aPackage.generateNamespacePathWithoutRoot()/]/[/if][aPackage.name.toUpperFirst()/]Package.cpp
+# Package of [aPackage.generateNamespace(false)/]
+[if(not isRoot)][aPackage.generateNamespacePathWithoutRoot(false)/]/[/if]impl/[aPackage.name/]PackageImpl.cpp
+[if(not isRoot)][aPackage.generateNamespacePathWithoutRoot(false)/]/[/if][aPackage.name/]Package.cpp
 [if (not packOnly)]
-# Factory of [aPackage.generateNamespace()/]
-[if(not isRoot)][aPackage.generateNamespacePathWithoutRoot()/]/[/if]impl/[aPackage.name.toUpperFirst()/]FactoryImpl.cpp
-[if(not isRoot)][aPackage.generateNamespacePathWithoutRoot()/]/[/if][aPackage.name.toUpperFirst()/]Factory.cpp
-# Contents of [aPackage.generateNamespace()/]
+# Factory of [aPackage.generateNamespace(false)/]
+[if(not isRoot)][aPackage.generateNamespacePathWithoutRoot(false)/]/[/if]impl/[aPackage.name/]FactoryImpl.cpp
+[if(not isRoot)][aPackage.generateNamespacePathWithoutRoot(false)/]/[/if][aPackage.name/]Factory.cpp
+# Contents of [aPackage.generateNamespace(false)/]
 [aPackage.generatePackageContents(isRoot)/]
 [/if]
 [for (subPackage : Package | aPackage.ownedElement->filter(Package))]
@@ -173,14 +173,14 @@ TARGET_LINK_LIBRARIES(${PROJECT_NAME}
 
 [template private generatePackageContents(aPackage : Package, isRoot : Boolean)]
 [for (aClass : Class | aPackage.ownedElement->filter(Class)->select(e|not (e.oclIsKindOf(FunctionBehavior) or e.oclIsKindOf(OpaqueBehavior) or e.oclIsKindOf(Activity)))->sortedBy(myQualifiedName()))]
-[if(not isRoot)][aPackage.generateNamespacePathWithoutRoot()/]/[/if]impl/[aClass.name.toUpperFirst()/]Impl.cpp
+[if(not isRoot)][aPackage.generateNamespacePathWithoutRoot(false)/]/[/if]impl/[aClass.name.toUpperFirst()/]Impl.cpp
 [if (aClass.isSingleton())]
-[if(not isRoot)][aPackage.generateNamespacePathWithoutRoot()/]/[/if][aClass.name.toUpperFirst()/].cpp
+[if(not isRoot)][aPackage.generateNamespacePathWithoutRoot(false)/]/[/if][aClass.name.toUpperFirst()/].cpp
 [/if]
 [/for]
 [comment] DISABLE INTERFACE IMPLEMENTATION
 [for (anInterface : Interface | aPackage.allOwnedElements()->filter(Interface)->sortedBy(myQualifiedName()))]
-[if(not isRoot)][aPackage.generateNamespacePath()/]/[/if]impl/[anInterface.name.toUpperFirst()/]Impl.cpp
+[if(not isRoot)][aPackage.generateNamespacePath(false)/]/[/if]impl/[anInterface.name.toUpperFirst()/]Impl.cpp
 [/for]
 [/comment]
 [/template]

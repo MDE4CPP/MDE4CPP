@@ -23,9 +23,9 @@
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
-[template public generateExecutionPluginImplSource(aPackage : Package) { packageName : String = aPackage.name.toUpperFirst().concat('ExecPluginImpl'); }]
-[file (aPackage.generateNamespacePath().concat('Exec/impl/').concat(packageName).concat('.cpp'), false, 'UTF-8')]
-#include "[aPackage.generateNamespacePath()/]Exec/impl/[packageName/].hpp"
+[template public generateExecutionPluginImplSource(aPackage : Package) { packageName : String = aPackage.name.concat('ExecPluginImpl'); }]
+[file (aPackage.generateNamespacePath(false).concat('Exec/impl/').concat(packageName).concat('.cpp'), false, 'UTF-8')]
+#include "[aPackage.generateNamespacePath(false)/]Exec/impl/[packageName/].hpp"
 
 [defineDebugMacro()/]
 
@@ -40,7 +40,7 @@
 [generateMainIncludes()/]
 [/if]
 
-using namespace [aPackage.generateNamespace()/];
+using namespace [aPackage.generateNamespace(false)/];
 
 //*********************************
 // Constructor / Destructor
@@ -90,7 +90,7 @@ void [packageName/]::initialize()
 	[generateExecutionPluginInitialization()/]
 
 	[comment create opaque behavior executions for operations /]
-	[for (anOperation : Operation | aPackage.allOwnedElements()->filter(Operation)->reject(hasEAnnotation(sourceNoExecution())))]
+	[for (anOperation : Operation | aPackage.allOwnedElements()->filter(Operation)->addAll(aPackage.getOperationExecutionsCOA())->reject(hasEAnnotation(sourceNoExecution())))]
 	[anOperation.generateOpaqueBehaviorForOperationExecution()/]
 	[/for]
 
@@ -152,49 +152,50 @@ Any [packageName/]::executeActivity(std::shared_ptr<uml::Activity> activity, std
 #include "uml/Operation.hpp"
 #include "uml/Parameter.hpp"
 #include "uml/PrimitiveType.hpp"
-#include "uml/UmlFactory.hpp"
+#include "uml/umlFactory.hpp"
 
 
 //Includes of Model locus, package and factory
-#include "[aPackage.generateNamespacePath()/]Exec/[aPackage.getPackageName().toUpperFirst()/]Locus.hpp"
-#include "[aPackage.generateNamespacePath()/]Exec/impl/[aPackage.getPackageName().toUpperFirst()/]LocusImpl.hpp"
-#include "[aPackage.generateNamespacePath()/]/[aPackage.getPackageName().toUpperFirst()/]Factory.hpp"
-#include "[aPackage.generateNamespacePath()/]/[aPackage.getPackageName().toUpperFirst()/]Package.hpp"
+#include "[aPackage.generateNamespacePath(false)/]Exec/[aPackage.getPackageName()/]Locus.hpp"
+#include "[aPackage.generateNamespacePath(false)/]Exec/impl/[aPackage.getPackageName()/]LocusImpl.hpp"
+#include "[aPackage.generateNamespacePath(false)/]/[aPackage.getPackageName()/]Factory.hpp"
+#include "[aPackage.generateNamespacePath(false)/]/[aPackage.getPackageName()/]Package.hpp"
 
 //Includes from owner Classes of executed Activities
 [for (act : Activity | aPackage.getUsedActivities()->select(owner.oclIsKindOf(Class)))]
-#include "[act.owner.oclAsType(Classifier).getNearestPackage().generateNamespacePath()/]Exec/[act.owner.oclAsType(Classifier).name.toUpperFirst()/]Object.hpp"
-#include "[act.owner.oclAsType(Classifier).getNearestPackage().generateNamespacePath()/]/[act.owner.oclAsType(Classifier).name.toUpperFirst()/].hpp"
+#include "[act.owner.oclAsType(Classifier).getNearestPackage().generateNamespacePath(false)/]Exec/[act.owner.oclAsType(Classifier).name.toUpperFirst()/]Object.hpp"
+#include "[act.owner.oclAsType(Classifier).getNearestPackage().generateNamespacePath(false)/]/[act.owner.oclAsType(Classifier).name.toUpperFirst()/].hpp"
 [/for]
 
 //Includes for packages of executed OpaqueBehaviors
 [for (anotherPackage : Package | aPackage.findPackagesForOpaqueBehaviorExecutions())]
-#include "[anotherPackage.generateNamespacePath()/]/[anotherPackage.getPackageName().toUpperFirst().concat('Package')/].hpp" 
+#include "[anotherPackage.generateNamespacePath(false)/]/[anotherPackage.getPackageName().concat('Package')/].hpp" 
 [/for] 
 
 //Includes for packages of executed Operations
-[for (anotherPackage : Package | aPackage.allOwnedElements()->filter(Operation).getNearestPackage()->asSet())]
-#include "[anotherPackage.generateNamespacePath()/]/[anotherPackage.getPackageName().toUpperFirst().concat('Package')/].hpp" 
+[for (anotherPackage : Package | aPackage.allOwnedElements()->filter(Operation)->addAll(aPackage.getOperationExecutionsCOA()).getNearestPackage()->asSet())]
+#include "[anotherPackage.generateNamespacePath(false)/]/[anotherPackage.getPackageName().concat('Package')/].hpp" 
 [/for] 
 
 //Includes of packages from parameter types of executed Operations and Activities
-[for (pack : Package | aPackage.allOwnedElements()->filter(Operation).ownedParameter.type.getNearestPackage()->asSet()->addAll(aPackage.allOwnedElements()->filter(Activity).ownedParameter.type.getNearestPackage()->asSet())->sortedBy(name))]
+[for (pack : Package | aPackage.allOwnedElements()->filter(Operation)->addAll(aPackage.getOperationExecutionsCOA()).ownedParameter.type.getNearestPackage()->asSet()->addAll(aPackage.allOwnedElements()->filter(Activity).ownedParameter.type.getNearestPackage()->asSet())->sortedBy(name))]
 [if (not (pack.name='StandardProfile'))]
-#include "[pack.generateNamespacePath()/]/[pack.name.concat('Package').toUpperFirst()/].hpp"
+#include "[pack.generateNamespacePath(false)/]/[pack.name.concat('Package').toUpperFirst()/].hpp"
 [/if]
 [/for]
-[for (typePackage : Package | aPackage.allOwnedElements()->filter(Operation).ownedParameter.type->asSet()->reject(supportedTypes())._package->asSet()->reject(isReflectionModel())->sortedBy(qualifiedName))]
-#include "[typePackage.generateNamespacePath()/]/[typePackage.getPackageName().toUpperFirst()/]Package.hpp"
+[for (typePackage : Package | aPackage.allOwnedElements()->filter(Operation)->addAll(aPackage.getOperationExecutionsCOA()).ownedParameter.type->asSet()->reject(supportedTypes())._package->asSet()->reject(isReflectionModel())->sortedBy(qualifiedName))]
+#include "[typePackage.generateNamespacePath(false)/]/[typePackage.getPackageName()/]Package.hpp"
 [/for]
 
 //Includes of OpaqueBehaviourExecutions
 [aPackage.allOwnedElements()->filter(CallBehaviorAction).behavior->filter(OpaqueBehavior)
 ->addAll(aPackage.allOwnedElements()->filter(DecisionNode).decisionInput->filter(OpaqueBehavior))->reject(hasEAnnotation(sourceNoExecution()))->asOrderedSet().generateInclude()/]
 //Includes of OperationExecutions
-[aPackage.allOwnedElements()->filter(Operation)->reject(hasEAnnotation(sourceNoExecution())).generateInclude()/]
+[aPackage.allOwnedElements()->filter(Operation)->addAll(aPackage.getOperationExecutionsCOA())->reject(hasEAnnotation(sourceNoExecution())).generateInclude()/]
 
-//Includes from parameter types of executed Operations
-[for ( type : Type | aPackage.allOwnedElements()->filter(Operation).ownedParameter.type->asSet()->sortedBy(qualifiedName))]
+//Includes from parameter types of executed Operations and Activities
+[for ( type : Type | aPackage.allOwnedElements()->filter(Operation)->addAll(aPackage.getOperationExecutionsCOA()).ownedParameter.type->asSet()
+	->addAll(aPackage.allOwnedElements()->filter(Activity).ownedParameter.type->asSet())->sortedBy(qualifiedName))]
 [type.generateTypeInclude(type.getNearestPackage(), aPackage)/]
 [/for]
 [/template]
@@ -206,7 +207,7 @@ Any [packageName/]::executeActivity(std::shared_ptr<uml::Activity> activity, std
 [/for]
 [/template]
 
-[template public generateExecutionPluginInitialization(aPackage : Package) {locusName : String = aPackage.generateNamespace().sanitize().toUpperFirst() + 'Locus' ;}]
+[template public generateExecutionPluginInitialization(aPackage : Package) {locusName : String = aPackage.generateNamespace(false).sanitize() + 'Locus' ;}]
 //initialize execution locus
 std::shared_ptr<[locusName/]Impl> locusImpl(new [locusName/]Impl);
 locusImpl->setThisLocusPtr(locusImpl);
@@ -235,15 +236,18 @@ m_factory->assignStrategy(PSCS::Semantics::StructuredClassifiers::StructuredClas
 [template public generateOpaqueBehaviorForOperationExecution(anOperation : Operation)]
 [if (not anOperation.name.oclIsUndefined())]
 {	/*creating opaque behavior for operation [anOperation.owner.oclAsType(NamedElement).name/]::[anOperation.name/]*/
-	m_[anOperation.getFBPackageElement()/] = uml::UmlFactory::eInstance()->createOpaqueBehavior();
+	m_[anOperation.getFBPackageElement()/] = uml::umlFactory::eInstance()->createOpaqueBehavior();
 	m_[anOperation.getFBPackageElement()/]->setName("[anOperation.getFBPackageElement()/]");
 	[comment TODO: Is this the best solution?/]
-	[if (anOperation.method->isEmpty())]//[/if][anOperation.generatePackageGetterCall()/]->getMethod()->insert([anOperation.generatePackageGetterCall()/]->getMethod()->begin(), m_[anOperation.getFBPackageElement()/]);
+	[comment This is currently a hack. When executing an operation of an interface-typed object, the operation must have a method for correct dispatching (even if none is defined in the model) /]
+	[comment BUT PSCS semantics require that an operation for which no method is defined in the model (specifically a constructor method) must not have any method /]
+	[comment By now, the generator checks for such specific constructor methods /]
+	[if ((anOperation.hasStereotypeApplied('StandardProfile::Create')) and (anOperation.method->isEmpty()))]//[/if][anOperation.generatePackageGetterCall()/]->getMethod()->insert([anOperation.generatePackageGetterCall()/]->getMethod()->begin(), m_[anOperation.getFBPackageElement()/]);
 	[for (aParameter : Parameter | anOperation.ownedParameter)]
 	{	/*creating parameter [aParameter.name/]*/
-		std::shared_ptr<uml::Parameter> [memberName(aParameter)/](uml::UmlFactory::eInstance()->createParameter_in_Behavior(m_[anOperation.getFBPackageElement()/]));
+		std::shared_ptr<uml::Parameter> [memberName(aParameter)/](uml::umlFactory::eInstance()->createParameter_in_Behavior(m_[anOperation.getFBPackageElement()/]));
 		[memberName(aParameter)/]->setName("[aParameter.name/]");
-		[memberName(aParameter)/]->setType([if(aParameter.type.getNearestPackage() = aParameter.getNearestPackage())][aParameter.getNearestPackage().generateNamespace().concat('::').concat(aParameter.getNearestPackage().name.toUpperFirst()).concat('Package').concat('::eInstance()->')/][/if][aParameter.type.generatePackageGetterCall(aParameter)/]);
+		[memberName(aParameter)/]->setType([if(aParameter.type.getNearestPackage() = aParameter.getNearestPackage())][aParameter.getNearestPackage().generateNamespace(false).concat('::').concat(aParameter.getNearestPackage().name).concat('Package').concat('::eInstance()->')/][/if][aParameter.type.generatePackageGetterCall(aParameter)/]);
 		[memberName(aParameter)/]->setLower([aParameter.lower/]);
 		[memberName(aParameter)/]->setUpper([aParameter.upper/]);
 		[memberName(aParameter)/]->setDirection(uml::ParameterDirectionKind::[direction.toString().toUpper()/]);
@@ -252,7 +256,7 @@ m_factory->assignStrategy(PSCS::Semantics::StructuredClassifiers::StructuredClas
 	[/for]
 
 	/*creating execution*/
-	std::shared_ptr<[anOperation.getNearestPackage().generateNamespace()/]::[anOperation.getOperationExecutionName()/]> [memberName(anOperation)/]Execution(new [anOperation.getNearestPackage().generateNamespace()/]::[anOperation.getOperationExecutionName()/]());
+	std::shared_ptr<[anOperation.getNearestPackage().generateNamespace(false)/]::[anOperation.getOperationExecutionName()/]> [memberName(anOperation)/]Execution(new [anOperation.getNearestPackage().generateNamespace(false)/]::[anOperation.getOperationExecutionName()/]());
 	[memberName(anOperation)/]Execution->setThisExecutionPtr([memberName(anOperation)/]Execution);
 	[memberName(anOperation)/]Execution->getTypes()->push_back(m_[anOperation.getFBPackageElement()/]);
 	[memberName(anOperation)/]Execution->setLocus(m_locus);
@@ -270,7 +274,7 @@ m_factory->assignStrategy(PSCS::Semantics::StructuredClassifiers::StructuredClas
 [if (not anOpaqueBehavior.name.oclIsUndefined())]
 [let executionName : String = anOpaqueBehavior.name.sanitize().toUpperFirst().concat('Execution')]
 {	/*creating execution for opaque behavior [anOpaqueBehavior.owner.oclAsType(NamedElement).name/]::[anOpaqueBehavior.name/]*/
-	std::shared_ptr<[anOpaqueBehavior.getNearestPackage().generateNamespace()/]::[executionName/]> [memberName(anOpaqueBehavior)/]Execution(new [anOpaqueBehavior.getNearestPackage().generateNamespace()/]::[executionName/]());
+	std::shared_ptr<[anOpaqueBehavior.getNearestPackage().generateNamespace(false)/]::[executionName/]> [memberName(anOpaqueBehavior)/]Execution(new [anOpaqueBehavior.getNearestPackage().generateNamespace(false)/]::[executionName/]());
 	[memberName(anOpaqueBehavior)/]Execution->setThisExecutionPtr([memberName(anOpaqueBehavior)/]Execution);
 	[memberName(anOpaqueBehavior)/]Execution->getTypes()->push_back([anOpaqueBehavior.generatePackageGetterCall()/]);
 	[memberName(anOpaqueBehavior)/]Execution->setLocus(m_locus);
@@ -308,9 +312,9 @@ pList->push_back([par.name/]P);
 
 [/for]
 [if (anActivity.owner.oclIsKindOf(Class))]
-std::shared_ptr<[anActivity.owner.oclAsType(Classifier).generateNamespaceName()/]Object> object(new [anActivity.owner.oclAsType(Classifier).generateNamespaceName()/]Object());
+std::shared_ptr<[anActivity.owner.oclAsType(Classifier).generateNamespaceName(false)/]Object> object(new [anActivity.owner.oclAsType(Classifier).generateNamespaceName(false)/]Object());
 object->setThis[anActivity.owner.oclAsType(Classifier).name.toUpperFirst()/]ObjectPtr(object);
-object->setUmlValue(std::dynamic_pointer_cast<[anActivity.owner.oclAsType(Classifier).generateNamespaceName()/]>(element));
+object->setUmlValue(std::dynamic_pointer_cast<[anActivity.owner.oclAsType(Classifier).generateNamespaceName(false)/]>(element));
 object->setLocus(m_locus);
 [/if]
 //executing activity [anActivity.name/]
@@ -364,7 +368,7 @@ std::shared_ptr<uml::EnumerationLiteral> literal[par.name.toUpperFirst()/] = ret
 [for (literal : EnumerationLiteral | par.type.oclAsType(Enumeration).ownedLiteral)]
 if (literal[par.name.toUpperFirst()/] == [literal.generatePackageGetterCall()/])
 {
-	return eAny([literal.enumeration.getNearestPackage().generateNamespace()/]::[literal.enumeration.name/]::[literal.name.toUpperCase()/]);
+	return eAny([literal.enumeration.getNearestPackage().generateNamespace(false)/]::[literal.enumeration.name/]::[literal.name.toUpperCase()/]);
 }
 [/for]
 std::cerr << "unknown literal of [par.type.name/]" << std::endl;
@@ -373,7 +377,7 @@ throw "error";
 [if (par.upper =1)]
 assert(resultPList->front());
 std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> [par.name/]Value = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(resultPList->front()->getValues()->front());
-std::shared_ptr<[par.type.getNearestPackage().generateNamespace()/]::[par.type.name.toUpperFirst()/]Object> [par.name/]UmlLinker = std::dynamic_pointer_cast<[par.type.getNearestPackage().generateNamespace()/]::[par.type.name.toUpperFirst()/]Object>([par.name/]Value->getReferent());
+std::shared_ptr<[par.type.getNearestPackage().generateNamespace(false)/]::[par.type.name.toUpperFirst()/]Object> [par.name/]UmlLinker = std::dynamic_pointer_cast<[par.type.getNearestPackage().generateNamespace(false)/]::[par.type.name.toUpperFirst()/]Object>([par.name/]Value->getReferent());
 return eAny([par.name/]UmlLinker->[par.type.oclAsType(Classifier).UMLValueGetterName()/][if(not (par.upper = 1))]s[/if]());
 [else]
 std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> returnParameter = resultPList->front();
@@ -384,7 +388,7 @@ std::shared_ptr<Bag<[par.type.generateCppType(true)/]>> returnList(new Bag<[par.
 while (valueIter != valueEnd)
 {
 	std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> returnValue = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(*valueIter);
-	std::shared_ptr<[par.type.getNearestPackage().generateNamespace()/]::[par.type.name.toUpperFirst()/]Object> returnObject = std::dynamic_pointer_cast<[par.type.getNearestPackage().generateNamespace()/]::[par.type.name.toUpperFirst()/]Object>(returnValue->getReferent());
+	std::shared_ptr<[par.type.getNearestPackage().generateNamespace(false)/]::[par.type.name.toUpperFirst()/]Object> returnObject = std::dynamic_pointer_cast<[par.type.getNearestPackage().generateNamespace(false)/]::[par.type.name.toUpperFirst()/]Object>(returnValue->getReferent());
 	returnList->push_back(returnObject->[par.type.oclAsType(Classifier).UMLValueGetterName()/]());
 	valueIter++;
 }
