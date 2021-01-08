@@ -477,11 +477,7 @@ void ActivityNodeActivationGroupImpl::run(std::shared_ptr<Bag<fUML::Semantics::A
 							std::shared_ptr<uml::InputPin> inputPin = (*pinIt);
 							std::shared_ptr<fUML::Semantics::Actions::ActionActivation> actionActivation = std::dynamic_pointer_cast<fUML::Semantics::Actions::ActionActivation>(activation);
 							std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance> > inputEdges = actionActivation->retrievePinActivation(inputPin)->getIncomingEdges();
-							isEnabled = this->checkIncomingEdges(inputEdges, activations);
-							if(isEnabled)
-							{
-								break;
-							}
+							isEnabled = isEnabled && this->checkIncomingEdges(inputEdges, activations);
 						}
 					}
 				}
