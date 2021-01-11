@@ -12,12 +12,15 @@
 - gradle wrapper to 6.5.1
 - generate .cproject files for both, model source & main application
 - id now type of long int
+- Added possibility to specify libraries to be linked during compilation in a model
+
 
 ## Ecore
 ### Additional functions:
 ### Model changes:
 ### Bugfixes and minor changes:
 - generate is-Getter for boolean values
+- adapted create-methods in factory: create$Classname$ methods are now called with the classes correct metaelement id by default
 
 ## UML
 ### Additional functions:
@@ -42,6 +45,9 @@
 ### Bugfixes and minor changes:
 - generate is-Getter for boolean values
 - implement allOwnedElements()
+- use of ValueSpecification name for LiteralSpecifications
+- don't generate usual classes for Behavior, AssociationClass, ComponentStereotype and Node
+- generation of opaque behaviors which are not defined on root level or not owned by a class into package
 
 
 ## fUML
@@ -56,19 +62,25 @@
 	-- implement acrtion related to StructuralFeature handling
 	-- WriteStructuralFeautreActionActivation
 	-- RemoveStructuralFeatureValueAction
+	-- AddStructuralFeatureValueAction
 - Upgraded destruction semantics for circular dependencies
 - Annotation of main activity declaration
 - Support of inheritence of object classes in execution library
 - updated UMLValue functionality (get/set UML values)
+- performance and momory usage optimizations (avoid dynamic_casts, ...      ???  .... ______________________ )
+- realize different methods for  recursive deep copy (copy()) and fuml specific copy method (_copy())
 
 ### Model changes:
+
 ### Bugfixes and minor changes:
+- remove memory leak in anonymus fork.
 - modify behavior generation for ClassifierObject::setValue - handle derived types of defined structured feature on value pin
 - enumeration literals inside OpaqueBehavior
 - generate is-Getter for boolean values
 - upate object type handling
 - bugfix OpaqueBehavior executions for DecisionNode
-
+- missing type inludes for parameters of activities that are not referenced by an operation
+- adapted create-methods in model factory: create$Classname$ methods are now called with the classes correct metaelement id by default
 
 ## PSCS
 ### Additional functions:
