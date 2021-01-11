@@ -34,12 +34,12 @@ string(REPLACE "\\" "/" MDE4CPP_HOME $ENV{MDE4CPP_HOME})
 
 SET(SOURCE_FILES
 # Factories and packages
-	FUMLFactory.cpp
-	impl/FUMLFactoryImpl.cpp
-	FUMLPackage.cpp
-	impl/FUMLPackageImpl.cpp
-	impl/FUMLPackageImpl_Creation.cpp
-	impl/FUMLPackageImpl_Initialization.cpp
+	fUMLFactory.cpp
+	impl/fUMLFactoryImpl.cpp
+	fUMLPackage.cpp
+	impl/fUMLPackageImpl.cpp
+	impl/fUMLPackageImpl_Creation.cpp
+	impl/fUMLPackageImpl_Initialization.cpp
 	Semantics/SemanticsFactory.cpp
 	Semantics/impl/SemanticsFactoryImpl.cpp
 	Semantics/SemanticsPackage.cpp
@@ -96,8 +96,8 @@ SET(SOURCE_FILES
 	Semantics/Loci/impl/LociPackageImpl_Initialization.cpp
 	
 # Package plugin
-	impl/FUMLPluginImpl.cpp
-	FUMLPlugin.cpp
+	impl/fUMLPluginImpl.cpp
+	fUMLPlugin.cpp
 # Package content
 	Semantics/Actions/impl/AcceptCallActionActivationImpl.cpp
 	Semantics/Actions/impl/AcceptCallActionActivationsImpl.cpp

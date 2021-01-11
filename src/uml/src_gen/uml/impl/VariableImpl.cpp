@@ -62,8 +62,8 @@
 #include "uml/ValueSpecification.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -205,7 +205,7 @@ std::shared_ptr<ecore::EObject>  VariableImpl::copy() const
 
 std::shared_ptr<ecore::EClass> VariableImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getVariable_Class();
+	return uml::umlPackage::eInstance()->getVariable_Class();
 }
 
 //*********************************
@@ -333,10 +333,10 @@ Any VariableImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::VARIABLE_ATTRIBUTE_ACTIVITYSCOPE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getActivityScope().lock())); //25319
-		case uml::UmlPackage::VARIABLE_ATTRIBUTE_SCOPE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getScope().lock())); //25320
+		case uml::umlPackage::VARIABLE_ATTRIBUTE_ACTIVITYSCOPE:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getActivityScope().lock())); //25219
+		case uml::umlPackage::VARIABLE_ATTRIBUTE_SCOPE:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getScope().lock())); //25220
 	}
 	Any result;
 	result = ConnectableElementImpl::eGet(featureID, resolve, coreType);
@@ -351,10 +351,10 @@ bool VariableImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::VARIABLE_ATTRIBUTE_ACTIVITYSCOPE:
-			return getActivityScope().lock() != nullptr; //25319
-		case uml::UmlPackage::VARIABLE_ATTRIBUTE_SCOPE:
-			return getScope().lock() != nullptr; //25320
+		case uml::umlPackage::VARIABLE_ATTRIBUTE_ACTIVITYSCOPE:
+			return getActivityScope().lock() != nullptr; //25219
+		case uml::umlPackage::VARIABLE_ATTRIBUTE_SCOPE:
+			return getScope().lock() != nullptr; //25220
 	}
 	bool result = false;
 	result = ConnectableElementImpl::internalEIsSet(featureID);
@@ -369,20 +369,20 @@ bool VariableImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::VARIABLE_ATTRIBUTE_ACTIVITYSCOPE:
+		case uml::umlPackage::VARIABLE_ATTRIBUTE_ACTIVITYSCOPE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Activity> _activityScope = std::dynamic_pointer_cast<uml::Activity>(_temp);
-			setActivityScope(_activityScope); //25319
+			setActivityScope(_activityScope); //25219
 			return true;
 		}
-		case uml::UmlPackage::VARIABLE_ATTRIBUTE_SCOPE:
+		case uml::umlPackage::VARIABLE_ATTRIBUTE_SCOPE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::StructuredActivityNode> _scope = std::dynamic_pointer_cast<uml::StructuredActivityNode>(_temp);
-			setScope(_scope); //25320
+			setScope(_scope); //25220
 			return true;
 		}
 	}
@@ -408,7 +408,7 @@ void VariableImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> l
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -425,7 +425,7 @@ void VariableImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoad
 
 void VariableImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	ConnectableElementImpl::loadNode(nodeName, loadHandler);
@@ -436,7 +436,7 @@ void VariableImpl::resolveReferences(const int featureID, std::list<std::shared_
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::VARIABLE_ATTRIBUTE_ACTIVITYSCOPE:
+		case uml::umlPackage::VARIABLE_ATTRIBUTE_ACTIVITYSCOPE:
 		{
 			if (references.size() == 1)
 			{
@@ -448,7 +448,7 @@ void VariableImpl::resolveReferences(const int featureID, std::list<std::shared_
 			return;
 		}
 
-		case uml::UmlPackage::VARIABLE_ATTRIBUTE_SCOPE:
+		case uml::umlPackage::VARIABLE_ATTRIBUTE_SCOPE:
 		{
 			if (references.size() == 1)
 			{
@@ -492,7 +492,7 @@ void VariableImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 

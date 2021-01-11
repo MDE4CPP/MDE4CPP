@@ -14,7 +14,7 @@
 #include "fUML/Semantics/Classification/ClassificationFactory.hpp"
 
 //depending model packages
-#include "fUML/FUMLPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 
 using namespace fUML::Semantics::Classification;
 

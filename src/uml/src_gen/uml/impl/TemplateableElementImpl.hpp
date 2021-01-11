@@ -28,7 +28,7 @@ namespace uml
 			TemplateableElementImpl& operator=(TemplateableElementImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			TemplateableElementImpl();
 			virtual std::shared_ptr<TemplateableElement> getThisTemplateableElementPtr() const;
 			virtual void setThisTemplateableElementPtr(std::weak_ptr<TemplateableElement> thisTemplateableElementPtr);

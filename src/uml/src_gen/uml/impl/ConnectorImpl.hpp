@@ -28,7 +28,7 @@ namespace uml
 			ConnectorImpl& operator=(ConnectorImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			ConnectorImpl();
 			virtual std::shared_ptr<Connector> getThisConnectorPtr() const;
 			virtual void setThisConnectorPtr(std::weak_ptr<Connector> thisConnectorPtr);

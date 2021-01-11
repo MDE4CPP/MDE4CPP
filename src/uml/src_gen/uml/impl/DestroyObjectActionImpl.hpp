@@ -28,7 +28,7 @@ namespace uml
 			DestroyObjectActionImpl& operator=(DestroyObjectActionImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			DestroyObjectActionImpl();
 			virtual std::shared_ptr<DestroyObjectAction> getThisDestroyObjectActionPtr() const;
 			virtual void setThisDestroyObjectActionPtr(std::weak_ptr<DestroyObjectAction> thisDestroyObjectActionPtr);

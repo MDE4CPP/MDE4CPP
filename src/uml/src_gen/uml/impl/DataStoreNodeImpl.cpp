@@ -72,8 +72,8 @@
 #include "uml/ValueSpecification.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -236,7 +236,7 @@ std::shared_ptr<ecore::EObject>  DataStoreNodeImpl::copy() const
 
 std::shared_ptr<ecore::EClass> DataStoreNodeImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getDataStoreNode_Class();
+	return uml::umlPackage::eInstance()->getDataStoreNode_Class();
 }
 
 //*********************************
@@ -377,7 +377,7 @@ void DataStoreNodeImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandl
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -393,7 +393,7 @@ void DataStoreNodeImpl::loadAttributes(std::shared_ptr<persistence::interfaces::
 
 void DataStoreNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	CentralBufferNodeImpl::loadNode(nodeName, loadHandler);
@@ -415,7 +415,6 @@ void DataStoreNodeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandl
 	ActivityNodeImpl::saveContent(saveHandler);
 	TypedElementImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);
@@ -438,7 +437,7 @@ void DataStoreNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 

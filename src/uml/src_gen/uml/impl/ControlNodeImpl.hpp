@@ -28,7 +28,7 @@ namespace uml
 			ControlNodeImpl& operator=(ControlNodeImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			ControlNodeImpl();
 			virtual std::shared_ptr<ControlNode> getThisControlNodePtr() const;
 			virtual void setThisControlNodePtr(std::weak_ptr<ControlNode> thisControlNodePtr);

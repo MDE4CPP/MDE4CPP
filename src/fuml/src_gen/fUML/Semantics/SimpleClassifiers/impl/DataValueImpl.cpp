@@ -25,7 +25,7 @@
 
 //Includes from codegen annotation
 #include "fUML/Semantics/SimpleClassifiers/DataValue.hpp"
-#include "uml/UmlFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "fUML/FUMLFactory.hpp"
 #include "fUML/Semantics/SimpleClassifiers/CompoundValue.hpp"
 #include "uml/DataType.hpp"
@@ -51,8 +51,8 @@
 #include "fUML/Semantics/SimpleClassifiers/impl/SimpleClassifiersFactoryImpl.hpp"
 #include "fUML/Semantics/SimpleClassifiers/impl/SimpleClassifiersPackageImpl.hpp"
 
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
+#include "fUML/fUMLFactory.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsFactory.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
 
@@ -239,7 +239,7 @@ void DataValueImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> 
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get FUMLFactory
+	// get fUMLFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{

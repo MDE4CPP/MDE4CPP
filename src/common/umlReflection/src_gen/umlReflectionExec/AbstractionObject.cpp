@@ -7,6 +7,7 @@
 #include "fUML/Semantics/Loci/Locus.hpp"
 #include "uml/Class.hpp"
 //Includes From Composite Structures
+/*Not done for metamodel object classes*/
 //Execution Engine Includes
 #include "abstractDataTypes/Any.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
@@ -21,7 +22,7 @@
 #include "fUML/Semantics/Loci/ExecutionFactory.hpp"
 #include "fUML/Semantics/Loci/ChoiceStrategy.hpp"
 //UML Includes
-#include "uml/UmlPackage.hpp"
+#include "uml/umlPackage.hpp"
 #include "uml/Association.hpp"
 #include "uml/Connector.hpp"
 #include "uml/ConnectorEnd.hpp"
@@ -97,11 +98,6 @@ std::shared_ptr<ecore::EObject> AbstractionObject::copy()
 
 void AbstractionObject::destroy()
 {	
-	if(m_AbstractionValue)
-	{
-
-	}
-
 	m_AbstractionValue.reset();
 
 	fUML::Semantics::StructuredClassifiers::ObjectImpl::destroy();
@@ -166,91 +162,31 @@ std::string AbstractionObject::toString()
 std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Object>> AbstractionObject::getDirectContainers()
 {   
 	std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Object>> directContainers(new Bag<PSCS::Semantics::StructuredClassifiers::CS_Object>());
+
+	/*Not done for metamodel object classes*/
+
 	return directContainers;
 }
-
 
 std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Link>> AbstractionObject::getLinks(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> interactionPoint)
 {
 	std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Link>> allLinks(new Bag<PSCS::Semantics::StructuredClassifiers::CS_Link>());
-	
-	//Retrieve all metamodel elements
-	std::shared_ptr<Bag<uml::Element>> modelMembers = UML::UMLPackage::eInstance()->allOwnedElements();
-	std::shared_ptr<Bag<uml::Connector>> connectors(new Bag<uml::Connector>());
-	std::shared_ptr<uml::Port> definingPort = interactionPoint->getDefiningPort();
-	
-	//Filter model elements for connectors that are connected to interactionPoints' definingPort
-	unsigned int membersSize = modelMembers->size();
-	for(unsigned int i = 0; i < membersSize; i++)
-	{
-		std::shared_ptr<uml::Connector> elementAsConnector = std::dynamic_pointer_cast<uml::Connector>(modelMembers->at(i));
-		if(elementAsConnector != nullptr)
-		{
-			std::shared_ptr<uml::ConnectorEnd> end1 = elementAsConnector->getEnd()->at(0);
-			std::shared_ptr<uml::ConnectorEnd> end2 = elementAsConnector->getEnd()->at(1);
-			
-			if((end1->getRole() == definingPort) || (end2->getRole() == definingPort))
-			{
-				connectors->add(elementAsConnector);
-			}
-		}
-	}
 
-	
-	//For each connector that is connected to interactionPoints' definingPort:
-	//- retrieve FeatureValue of otherEnd
-	//-	create Link and add both interactionPoint as well as retrieved FeatureValue of otherEnd to the links' featureValues property
-	//- add Link to allLinks
-	unsigned int connectorsSize = connectors->size();
-	for(unsigned int i = 0; i < connectorsSize; i++)
-	{
-		std::shared_ptr<uml::Connector> currentConnector = connectors->at(i);
-		unsigned int definingEndIndex = 0, otherEndIndex = 1;
-		std::shared_ptr<uml::ConnectorEnd> definingEnd = currentConnector->getEnd()->at(0);
-		std::shared_ptr<uml::ConnectorEnd> otherEnd = currentConnector->getEnd()->at(1);
-		std::shared_ptr<Bag<fUML::Semantics::Values::Value>> otherEndValues(new Bag<fUML::Semantics::Values::Value>());
-		std::shared_ptr<Bag<fUML::Semantics::Values::Value>> definingEndValues(new Bag<fUML::Semantics::Values::Value>());
-		
-		definingEndValues->add(interactionPoint);
+	/*Not done for metamodel object classes*/
 
-		if(definingPort == otherEnd->getRole())
-		{
-			definingEndIndex = 1;
-			otherEndIndex = 0; 
-			definingEnd = currentConnector->getEnd()->at(1);; 
-			otherEnd = currentConnector->getEnd()->at(0);;
-		}
-		
-		std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> dummyBag(new Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>());
-		otherEndValues = interactionPoint->getReferent()->getValues(currentConnector->getType()->getMemberEnd()->at(otherEndIndex), dummyBag);
-			
-		//If other end of connector is a port, the corresponding FeatureValue has to be retrieved as CS_InteractionPoint from its owner
-		//instead of being retrieved from this connector end as just a CS_Reference
-		if(std::dynamic_pointer_cast<uml::Port>(otherEnd->getRole()) != nullptr)
-		{
-			//otherEndValues->at(0) is passed to retrieve the ports owner later on
-			otherEndValues = this->retrieveEndValueAsInteractionPoint(otherEndValues->at(0), otherEnd);
-		}
-			
-		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Link> newLink = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Link();
-		newLink->setType(currentConnector->getType());
-		newLink->assignFeatureValue(newLink->getType()->getMemberEnd()->at(definingEndIndex), definingEndValues, -1);
-		newLink->assignFeatureValue(newLink->getType()->getMemberEnd()->at(otherEndIndex), otherEndValues, -1);
-			
-		allLinks->add(newLink);
-	}
-	
 	return allLinks;
 }
 
 std::shared_ptr<Bag<fUML::Semantics::Values::Value>> AbstractionObject::retrieveEndValueAsInteractionPoint(std::shared_ptr<fUML::Semantics::Values::Value> endValue, std::shared_ptr<uml::ConnectorEnd> end)
 {
+	/*Not done for metamodel object classes*/
+
 	return nullptr;
 }
 
 void AbstractionObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature, std::shared_ptr<fUML::Semantics::Values::Value> value)
 {
-	if (feature->getMetaElementID() != uml::UmlPackage::PROPERTY_CLASS && feature->getMetaElementID() != uml::UmlPackage::PORT_CLASS && feature->getMetaElementID() != uml::UmlPackage::EXTENSIONEND_CLASS)
+	if (feature->getMetaElementID() != uml::umlPackage::PROPERTY_CLASS && feature->getMetaElementID() != uml::umlPackage::PORT_CLASS && feature->getMetaElementID() != uml::umlPackage::EXTENSIONEND_CLASS)
 	{
 		std::cerr << __PRETTY_FUNCTION__ << ": feature is null or not kind of uml::Property" << std::endl;
 		throw "feature is null or not kind of uml::Property";
@@ -351,7 +287,7 @@ void AbstractionObject::removeValue(std::shared_ptr<uml::StructuralFeature> feat
 
 std::shared_ptr<Bag<fUML::Semantics::Values::Value>> AbstractionObject::getValues(std::shared_ptr<uml::StructuralFeature> feature, std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> featureValues)
 {
-	if (feature->getMetaElementID() != uml::UmlPackage::PROPERTY_CLASS && feature->getMetaElementID() != uml::UmlPackage::PORT_CLASS && feature->getMetaElementID() != uml::UmlPackage::EXTENSIONEND_CLASS)
+	if (feature->getMetaElementID() != uml::umlPackage::PROPERTY_CLASS && feature->getMetaElementID() != uml::umlPackage::PORT_CLASS && feature->getMetaElementID() != uml::umlPackage::EXTENSIONEND_CLASS)
 	{
 		std::cerr << __PRETTY_FUNCTION__ << ": feature is null or not kind of uml::Property" << std::endl;
 		throw "feature is null or not kind of uml::Property";
@@ -621,7 +557,7 @@ std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> AbstractionObj
 
 void AbstractionObject::setFeatureValue(std::shared_ptr<uml::StructuralFeature> feature, std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values, int position)
 {
-	if (feature->getMetaElementID() != uml::UmlPackage::PROPERTY_CLASS && feature->getMetaElementID() != uml::UmlPackage::PORT_CLASS && feature->getMetaElementID() != uml::UmlPackage::EXTENSIONEND_CLASS)
+	if (feature->getMetaElementID() != uml::umlPackage::PROPERTY_CLASS && feature->getMetaElementID() != uml::umlPackage::PORT_CLASS && feature->getMetaElementID() != uml::umlPackage::EXTENSIONEND_CLASS)
 	{
 		std::cerr << __PRETTY_FUNCTION__ << ": feature is null or not kind of uml::Property" << std::endl;
 		throw "feature is null or not kind of uml::Property";

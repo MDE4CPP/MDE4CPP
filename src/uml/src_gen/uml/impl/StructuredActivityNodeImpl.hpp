@@ -30,7 +30,7 @@ namespace uml
 			StructuredActivityNodeImpl& operator=(StructuredActivityNodeImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			StructuredActivityNodeImpl();
 			virtual std::shared_ptr<StructuredActivityNode> getThisStructuredActivityNodePtr() const;
 			virtual void setThisStructuredActivityNodePtr(std::weak_ptr<StructuredActivityNode> thisStructuredActivityNodePtr);

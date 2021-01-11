@@ -77,8 +77,8 @@
 #include "uml/StructuredActivityNode.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -281,7 +281,7 @@ std::shared_ptr<ecore::EObject>  CallOperationActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> CallOperationActionImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getCallOperationAction_Class();
+	return uml::umlPackage::eInstance()->getCallOperationAction_Class();
 }
 
 //*********************************
@@ -468,10 +468,10 @@ Any CallOperationActionImpl::eGet(int featureID, bool resolve, bool coreType) co
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::CALLOPERATIONACTION_ATTRIBUTE_OPERATION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOperation())); //3331
-		case uml::UmlPackage::CALLOPERATIONACTION_ATTRIBUTE_TARGET:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getTarget())); //3332
+		case uml::umlPackage::CALLOPERATIONACTION_ATTRIBUTE_OPERATION:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOperation())); //3231
+		case uml::umlPackage::CALLOPERATIONACTION_ATTRIBUTE_TARGET:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getTarget())); //3232
 	}
 	return CallActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -479,10 +479,10 @@ bool CallOperationActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::CALLOPERATIONACTION_ATTRIBUTE_OPERATION:
-			return getOperation() != nullptr; //3331
-		case uml::UmlPackage::CALLOPERATIONACTION_ATTRIBUTE_TARGET:
-			return getTarget() != nullptr; //3332
+		case uml::umlPackage::CALLOPERATIONACTION_ATTRIBUTE_OPERATION:
+			return getOperation() != nullptr; //3231
+		case uml::umlPackage::CALLOPERATIONACTION_ATTRIBUTE_TARGET:
+			return getTarget() != nullptr; //3232
 	}
 	return CallActionImpl::internalEIsSet(featureID);
 }
@@ -490,20 +490,20 @@ bool CallOperationActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::CALLOPERATIONACTION_ATTRIBUTE_OPERATION:
+		case uml::umlPackage::CALLOPERATIONACTION_ATTRIBUTE_OPERATION:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Operation> _operation = std::dynamic_pointer_cast<uml::Operation>(_temp);
-			setOperation(_operation); //3331
+			setOperation(_operation); //3231
 			return true;
 		}
-		case uml::UmlPackage::CALLOPERATIONACTION_ATTRIBUTE_TARGET:
+		case uml::umlPackage::CALLOPERATIONACTION_ATTRIBUTE_TARGET:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::InputPin> _target = std::dynamic_pointer_cast<uml::InputPin>(_temp);
-			setTarget(_target); //3332
+			setTarget(_target); //3232
 			return true;
 		}
 	}
@@ -522,7 +522,7 @@ void CallOperationActionImpl::load(std::shared_ptr<persistence::interfaces::XLoa
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -557,7 +557,7 @@ void CallOperationActionImpl::loadAttributes(std::shared_ptr<persistence::interf
 
 void CallOperationActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -568,7 +568,7 @@ void CallOperationActionImpl::loadNode(std::string nodeName, std::shared_ptr<per
 			{
 				typeName = "InputPin";
 			}
-			std::shared_ptr<ecore::EObject> target = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::UmlPackage::INPUTPIN_ATTRIBUTE_CALLOPERATIONACTION);
+			std::shared_ptr<ecore::EObject> target = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::INPUTPIN_ATTRIBUTE_CALLOPERATIONACTION);
 			if (target != nullptr)
 			{
 				loadHandler->handleChild(target);
@@ -592,7 +592,7 @@ void CallOperationActionImpl::resolveReferences(const int featureID, std::list<s
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::CALLOPERATIONACTION_ATTRIBUTE_OPERATION:
+		case uml::umlPackage::CALLOPERATIONACTION_ATTRIBUTE_OPERATION:
 		{
 			if (references.size() == 1)
 			{
@@ -621,7 +621,6 @@ void CallOperationActionImpl::save(std::shared_ptr<persistence::interfaces::XSav
 	
 	ActivityNodeImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);
@@ -646,7 +645,7 @@ void CallOperationActionImpl::saveContent(std::shared_ptr<persistence::interface
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 		// Save 'target'
 		std::shared_ptr<uml::InputPin > target = this->getTarget();

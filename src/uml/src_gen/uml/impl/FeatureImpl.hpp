@@ -28,7 +28,7 @@ namespace uml
 			FeatureImpl& operator=(FeatureImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			FeatureImpl();
 			virtual std::shared_ptr<Feature> getThisFeaturePtr() const;
 			virtual void setThisFeaturePtr(std::weak_ptr<Feature> thisFeaturePtr);

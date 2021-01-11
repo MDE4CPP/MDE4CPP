@@ -28,7 +28,7 @@ namespace uml
 			DeploymentImpl& operator=(DeploymentImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			DeploymentImpl();
 			virtual std::shared_ptr<Deployment> getThisDeploymentPtr() const;
 			virtual void setThisDeploymentPtr(std::weak_ptr<Deployment> thisDeploymentPtr);

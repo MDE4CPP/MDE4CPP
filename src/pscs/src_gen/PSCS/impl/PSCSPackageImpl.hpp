@@ -7,7 +7,7 @@
 #ifndef PSCSPACKAGEIMPL_HPP
 #define PSCSPACKAGEIMPL_HPP
 
-#include "ecore/EcorePackage.hpp"
+#include "ecore/ecorePackage.hpp"
 #include "ecore/impl/EPackageImpl.hpp"
 
 #include "PSCS/PSCSPackage.hpp" 
@@ -23,7 +23,7 @@ namespace PSCS
 
 namespace ecore
 {
-	class EcoreFactory;
+	class ecoreFactory;
 }
 
 namespace PSCS
@@ -67,7 +67,7 @@ namespace PSCS
 			void initializePackageContents();
 
 		private:
-			void createPackageEDataTypes(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
+			void createPackageEDataTypes(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 
 			void initializePackageEDataTypes();
 

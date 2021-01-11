@@ -85,8 +85,8 @@
 #include "uml/Type.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -122,11 +122,11 @@ PackageImpl::PackageImpl(std::weak_ptr<uml::Package > par_Package, const int ref
 {
 	switch(reference_id)
 	{	
-	case UmlPackage::PACKAGE_ATTRIBUTE_NESTINGPACKAGE:
+	case umlPackage::PACKAGE_ATTRIBUTE_NESTINGPACKAGE:
 		m_nestingPackage = par_Package;
 		m_namespace = par_Package;
 		 return;
-	case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
+	case umlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
 		m_owningPackage = par_Package;
 		m_namespace = par_Package;
 		 return;
@@ -350,7 +350,7 @@ std::shared_ptr<ecore::EObject>  PackageImpl::copy() const
 
 std::shared_ptr<ecore::EClass> PackageImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getPackage_Class();
+	return uml::umlPackage::eInstance()->getPackage_Class();
 }
 
 //*********************************
@@ -818,9 +818,9 @@ Any PackageImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::PACKAGE_ATTRIBUTE_URI:
-			return eAny(getURI()); //17120
-		case uml::UmlPackage::PACKAGE_ATTRIBUTE_NESTEDPACKAGE:
+		case uml::umlPackage::PACKAGE_ATTRIBUTE_URI:
+			return eAny(getURI()); //17020
+		case uml::umlPackage::PACKAGE_ATTRIBUTE_NESTEDPACKAGE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Package>::iterator iter = m_nestedPackage->begin();
@@ -830,11 +830,11 @@ Any PackageImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //17121
+			return eAny(tempList); //17021
 		}
-		case uml::UmlPackage::PACKAGE_ATTRIBUTE_NESTINGPACKAGE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getNestingPackage().lock())); //17122
-		case uml::UmlPackage::PACKAGE_ATTRIBUTE_OWNEDSTEREOTYPE:
+		case uml::umlPackage::PACKAGE_ATTRIBUTE_NESTINGPACKAGE:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getNestingPackage().lock())); //17022
+		case uml::umlPackage::PACKAGE_ATTRIBUTE_OWNEDSTEREOTYPE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Stereotype>::iterator iter = m_ownedStereotype->begin();
@@ -844,9 +844,9 @@ Any PackageImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //17123
+			return eAny(tempList); //17023
 		}
-		case uml::UmlPackage::PACKAGE_ATTRIBUTE_OWNEDTYPE:
+		case uml::umlPackage::PACKAGE_ATTRIBUTE_OWNEDTYPE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Type>::iterator iter = m_ownedType->begin();
@@ -856,9 +856,9 @@ Any PackageImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //17124
+			return eAny(tempList); //17024
 		}
-		case uml::UmlPackage::PACKAGE_ATTRIBUTE_PACKAGEMERGE:
+		case uml::umlPackage::PACKAGE_ATTRIBUTE_PACKAGEMERGE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::PackageMerge>::iterator iter = m_packageMerge->begin();
@@ -868,9 +868,9 @@ Any PackageImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //17125
+			return eAny(tempList); //17025
 		}
-		case uml::UmlPackage::PACKAGE_ATTRIBUTE_PACKAGEDELEMENT:
+		case uml::umlPackage::PACKAGE_ATTRIBUTE_PACKAGEDELEMENT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::PackageableElement>::iterator iter = m_packagedElement->begin();
@@ -880,9 +880,9 @@ Any PackageImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //17126
+			return eAny(tempList); //17026
 		}
-		case uml::UmlPackage::PACKAGE_ATTRIBUTE_PROFILEAPPLICATION:
+		case uml::umlPackage::PACKAGE_ATTRIBUTE_PROFILEAPPLICATION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::ProfileApplication>::iterator iter = m_profileApplication->begin();
@@ -892,7 +892,7 @@ Any PackageImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //17127
+			return eAny(tempList); //17027
 		}
 	}
 	Any result;
@@ -913,22 +913,22 @@ bool PackageImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::PACKAGE_ATTRIBUTE_URI:
-			return getURI() != ""; //17120
-		case uml::UmlPackage::PACKAGE_ATTRIBUTE_NESTEDPACKAGE:
-			return getNestedPackage() != nullptr; //17121
-		case uml::UmlPackage::PACKAGE_ATTRIBUTE_NESTINGPACKAGE:
-			return getNestingPackage().lock() != nullptr; //17122
-		case uml::UmlPackage::PACKAGE_ATTRIBUTE_OWNEDSTEREOTYPE:
-			return getOwnedStereotype() != nullptr; //17123
-		case uml::UmlPackage::PACKAGE_ATTRIBUTE_OWNEDTYPE:
-			return getOwnedType() != nullptr; //17124
-		case uml::UmlPackage::PACKAGE_ATTRIBUTE_PACKAGEMERGE:
-			return getPackageMerge() != nullptr; //17125
-		case uml::UmlPackage::PACKAGE_ATTRIBUTE_PACKAGEDELEMENT:
-			return getPackagedElement() != nullptr; //17126
-		case uml::UmlPackage::PACKAGE_ATTRIBUTE_PROFILEAPPLICATION:
-			return getProfileApplication() != nullptr; //17127
+		case uml::umlPackage::PACKAGE_ATTRIBUTE_URI:
+			return getURI() != ""; //17020
+		case uml::umlPackage::PACKAGE_ATTRIBUTE_NESTEDPACKAGE:
+			return getNestedPackage() != nullptr; //17021
+		case uml::umlPackage::PACKAGE_ATTRIBUTE_NESTINGPACKAGE:
+			return getNestingPackage().lock() != nullptr; //17022
+		case uml::umlPackage::PACKAGE_ATTRIBUTE_OWNEDSTEREOTYPE:
+			return getOwnedStereotype() != nullptr; //17023
+		case uml::umlPackage::PACKAGE_ATTRIBUTE_OWNEDTYPE:
+			return getOwnedType() != nullptr; //17024
+		case uml::umlPackage::PACKAGE_ATTRIBUTE_PACKAGEMERGE:
+			return getPackageMerge() != nullptr; //17025
+		case uml::umlPackage::PACKAGE_ATTRIBUTE_PACKAGEDELEMENT:
+			return getPackagedElement() != nullptr; //17026
+		case uml::umlPackage::PACKAGE_ATTRIBUTE_PROFILEAPPLICATION:
+			return getProfileApplication() != nullptr; //17027
 	}
 	bool result = false;
 	result = NamespaceImpl::internalEIsSet(featureID);
@@ -948,14 +948,14 @@ bool PackageImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::PACKAGE_ATTRIBUTE_URI:
+		case uml::umlPackage::PACKAGE_ATTRIBUTE_URI:
 		{
 			// BOOST CAST
 			std::string _URI = newValue->get<std::string>();
-			setURI(_URI); //17120
+			setURI(_URI); //17020
 			return true;
 		}
-		case uml::UmlPackage::PACKAGE_ATTRIBUTE_NESTEDPACKAGE:
+		case uml::umlPackage::PACKAGE_ATTRIBUTE_NESTEDPACKAGE:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -991,15 +991,15 @@ bool PackageImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case uml::UmlPackage::PACKAGE_ATTRIBUTE_NESTINGPACKAGE:
+		case uml::umlPackage::PACKAGE_ATTRIBUTE_NESTINGPACKAGE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Package> _nestingPackage = std::dynamic_pointer_cast<uml::Package>(_temp);
-			setNestingPackage(_nestingPackage); //17122
+			setNestingPackage(_nestingPackage); //17022
 			return true;
 		}
-		case uml::UmlPackage::PACKAGE_ATTRIBUTE_OWNEDTYPE:
+		case uml::umlPackage::PACKAGE_ATTRIBUTE_OWNEDTYPE:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -1035,7 +1035,7 @@ bool PackageImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case uml::UmlPackage::PACKAGE_ATTRIBUTE_PACKAGEMERGE:
+		case uml::umlPackage::PACKAGE_ATTRIBUTE_PACKAGEMERGE:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -1071,7 +1071,7 @@ bool PackageImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case uml::UmlPackage::PACKAGE_ATTRIBUTE_PACKAGEDELEMENT:
+		case uml::umlPackage::PACKAGE_ATTRIBUTE_PACKAGEDELEMENT:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -1107,7 +1107,7 @@ bool PackageImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case uml::UmlPackage::PACKAGE_ATTRIBUTE_PROFILEAPPLICATION:
+		case uml::umlPackage::PACKAGE_ATTRIBUTE_PROFILEAPPLICATION:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -1171,7 +1171,7 @@ void PackageImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> lo
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -1210,7 +1210,7 @@ void PackageImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadH
 
 void PackageImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -1224,8 +1224,8 @@ void PackageImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::in
 			// TODO here are multiple containers of same object. Check this!
 			std::cout << "| ERROR    | " << __PRETTY_FUNCTION__ << " 'nestedPackage' has more then one back-reference Object." << std::endl;
 			std::shared_ptr<ecore::EObject> nestedPackage;
-				nestedPackage = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::UmlPackage::PACKAGE_ATTRIBUTE_NESTINGPACKAGE);
-				nestedPackage = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE);
+				nestedPackage = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::PACKAGE_ATTRIBUTE_NESTINGPACKAGE);
+				nestedPackage = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE);
 			if (nestedPackage != nullptr)
 			{
 				loadHandler->handleChild(nestedPackage);
@@ -1243,8 +1243,8 @@ void PackageImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::in
 			// TODO here are multiple containers of same object. Check this!
 			std::cout << "| ERROR    | " << __PRETTY_FUNCTION__ << " 'ownedStereotype' has more then one back-reference Object." << std::endl;
 			std::shared_ptr<ecore::EObject> ownedStereotype;
-				ownedStereotype = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE);
-				ownedStereotype = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::UmlPackage::TYPE_ATTRIBUTE_PACKAGE);
+				ownedStereotype = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE);
+				ownedStereotype = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::TYPE_ATTRIBUTE_PACKAGE);
 			if (ownedStereotype != nullptr)
 			{
 				loadHandler->handleChild(ownedStereotype);
@@ -1263,8 +1263,8 @@ void PackageImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::in
 			// TODO here are multiple containers of same object. Check this!
 			std::cout << "| ERROR    | " << __PRETTY_FUNCTION__ << " 'ownedType' has more then one back-reference Object." << std::endl;
 			std::shared_ptr<ecore::EObject> ownedType;
-				ownedType = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE);
-				ownedType = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::UmlPackage::TYPE_ATTRIBUTE_PACKAGE);
+				ownedType = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE);
+				ownedType = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::TYPE_ATTRIBUTE_PACKAGE);
 			if (ownedType != nullptr)
 			{
 				loadHandler->handleChild(ownedType);
@@ -1279,7 +1279,7 @@ void PackageImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::in
 			{
 				typeName = "PackageMerge";
 			}
-			std::shared_ptr<ecore::EObject> packageMerge = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::UmlPackage::PACKAGEMERGE_ATTRIBUTE_RECEIVINGPACKAGE);
+			std::shared_ptr<ecore::EObject> packageMerge = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::PACKAGEMERGE_ATTRIBUTE_RECEIVINGPACKAGE);
 			if (packageMerge != nullptr)
 			{
 				loadHandler->handleChild(packageMerge);
@@ -1295,7 +1295,7 @@ void PackageImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::in
 				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			std::shared_ptr<ecore::EObject> packagedElement = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE);
+			std::shared_ptr<ecore::EObject> packagedElement = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE);
 			if (packagedElement != nullptr)
 			{
 				loadHandler->handleChild(packagedElement);
@@ -1310,7 +1310,7 @@ void PackageImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::in
 			{
 				typeName = "ProfileApplication";
 			}
-			std::shared_ptr<ecore::EObject> profileApplication = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::UmlPackage::PROFILEAPPLICATION_ATTRIBUTE_APPLYINGPACKAGE);
+			std::shared_ptr<ecore::EObject> profileApplication = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::PROFILEAPPLICATION_ATTRIBUTE_APPLYINGPACKAGE);
 			if (profileApplication != nullptr)
 			{
 				loadHandler->handleChild(profileApplication);
@@ -1336,7 +1336,7 @@ void PackageImpl::resolveReferences(const int featureID, std::list<std::shared_p
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::PACKAGE_ATTRIBUTE_NESTINGPACKAGE:
+		case uml::umlPackage::PACKAGE_ATTRIBUTE_NESTINGPACKAGE:
 		{
 			if (references.size() == 1)
 			{
@@ -1379,7 +1379,7 @@ void PackageImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 		// Save 'nestedPackage'
 		for (std::shared_ptr<uml::Package> nestedPackage : *this->getNestedPackage()) 
@@ -1426,7 +1426,7 @@ void PackageImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 		std::shared_ptr<SubsetUnion<uml::PackageableElement, uml::NamedElement>> list_packagedElement = this->getPackagedElement();
 		for (std::shared_ptr<uml::PackageableElement> packagedElement : *list_packagedElement) 
 		{
-			saveHandler->addReference(packagedElement, "packagedElement", packagedElement->eClass() !=uml::UmlPackage::eInstance()->getPackageableElement_Class());
+			saveHandler->addReference(packagedElement, "packagedElement", packagedElement->eClass() !=uml::umlPackage::eInstance()->getPackageableElement_Class());
 		}
 	}
 	catch (std::exception& e)

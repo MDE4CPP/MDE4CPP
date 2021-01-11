@@ -28,7 +28,7 @@ namespace uml
 			EncapsulatedClassifierImpl& operator=(EncapsulatedClassifierImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			EncapsulatedClassifierImpl();
 			virtual std::shared_ptr<EncapsulatedClassifier> getThisEncapsulatedClassifierPtr() const;
 			virtual void setThisEncapsulatedClassifierPtr(std::weak_ptr<EncapsulatedClassifier> thisEncapsulatedClassifierPtr);

@@ -23,7 +23,7 @@
 [import ecore4CPP::generator::main::helper /]
 [import ecore4CPP::generator::main::package::generatePackageHelper /]
 
-[template public generatePackageInterface(anEPackage : EPackage) { packageName : String = anEPackage.name.toUpperFirst().concat('Package'); }]
+[template public generatePackageInterface(anEPackage : EPackage) { packageName : String = anEPackage.name.concat('Package'); }]
 [file (anEPackage.generateNamespacePath().concat('/').concat(packageName).concat('.hpp'), false, 'UTF-8')]
 [startGuard(anEPackage,'Package')/]
 

@@ -71,8 +71,8 @@
 #include "uml/Vertex.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -262,7 +262,7 @@ std::shared_ptr<ecore::EObject>  ProtocolTransitionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ProtocolTransitionImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getProtocolTransition_Class();
+	return uml::umlPackage::eInstance()->getProtocolTransition_Class();
 }
 
 //*********************************
@@ -466,11 +466,11 @@ Any ProtocolTransitionImpl::eGet(int featureID, bool resolve, bool coreType) con
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::PROTOCOLTRANSITION_ATTRIBUTE_POSTCONDITION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getPostCondition())); //18926
-		case uml::UmlPackage::PROTOCOLTRANSITION_ATTRIBUTE_PRECONDITION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getPreCondition())); //18927
-		case uml::UmlPackage::PROTOCOLTRANSITION_ATTRIBUTE_REFERRED:
+		case uml::umlPackage::PROTOCOLTRANSITION_ATTRIBUTE_POSTCONDITION:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getPostCondition())); //18826
+		case uml::umlPackage::PROTOCOLTRANSITION_ATTRIBUTE_PRECONDITION:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getPreCondition())); //18827
+		case uml::umlPackage::PROTOCOLTRANSITION_ATTRIBUTE_REFERRED:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Operation>::iterator iter = m_referred->begin();
@@ -480,7 +480,7 @@ Any ProtocolTransitionImpl::eGet(int featureID, bool resolve, bool coreType) con
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //18928
+			return eAny(tempList); //18828
 		}
 	}
 	return TransitionImpl::eGet(featureID, resolve, coreType);
@@ -489,12 +489,12 @@ bool ProtocolTransitionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::PROTOCOLTRANSITION_ATTRIBUTE_POSTCONDITION:
-			return getPostCondition() != nullptr; //18926
-		case uml::UmlPackage::PROTOCOLTRANSITION_ATTRIBUTE_PRECONDITION:
-			return getPreCondition() != nullptr; //18927
-		case uml::UmlPackage::PROTOCOLTRANSITION_ATTRIBUTE_REFERRED:
-			return getReferred() != nullptr; //18928
+		case uml::umlPackage::PROTOCOLTRANSITION_ATTRIBUTE_POSTCONDITION:
+			return getPostCondition() != nullptr; //18826
+		case uml::umlPackage::PROTOCOLTRANSITION_ATTRIBUTE_PRECONDITION:
+			return getPreCondition() != nullptr; //18827
+		case uml::umlPackage::PROTOCOLTRANSITION_ATTRIBUTE_REFERRED:
+			return getReferred() != nullptr; //18828
 	}
 	return TransitionImpl::internalEIsSet(featureID);
 }
@@ -502,20 +502,20 @@ bool ProtocolTransitionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::PROTOCOLTRANSITION_ATTRIBUTE_POSTCONDITION:
+		case uml::umlPackage::PROTOCOLTRANSITION_ATTRIBUTE_POSTCONDITION:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Constraint> _postCondition = std::dynamic_pointer_cast<uml::Constraint>(_temp);
-			setPostCondition(_postCondition); //18926
+			setPostCondition(_postCondition); //18826
 			return true;
 		}
-		case uml::UmlPackage::PROTOCOLTRANSITION_ATTRIBUTE_PRECONDITION:
+		case uml::umlPackage::PROTOCOLTRANSITION_ATTRIBUTE_PRECONDITION:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Constraint> _preCondition = std::dynamic_pointer_cast<uml::Constraint>(_temp);
-			setPreCondition(_preCondition); //18927
+			setPreCondition(_preCondition); //18827
 			return true;
 		}
 	}
@@ -534,7 +534,7 @@ void ProtocolTransitionImpl::load(std::shared_ptr<persistence::interfaces::XLoad
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -576,7 +576,7 @@ void ProtocolTransitionImpl::loadAttributes(std::shared_ptr<persistence::interfa
 
 void ProtocolTransitionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	TransitionImpl::loadNode(nodeName, loadHandler);
@@ -586,7 +586,7 @@ void ProtocolTransitionImpl::resolveReferences(const int featureID, std::list<st
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::PROTOCOLTRANSITION_ATTRIBUTE_POSTCONDITION:
+		case uml::umlPackage::PROTOCOLTRANSITION_ATTRIBUTE_POSTCONDITION:
 		{
 			if (references.size() == 1)
 			{
@@ -598,7 +598,7 @@ void ProtocolTransitionImpl::resolveReferences(const int featureID, std::list<st
 			return;
 		}
 
-		case uml::UmlPackage::PROTOCOLTRANSITION_ATTRIBUTE_PRECONDITION:
+		case uml::umlPackage::PROTOCOLTRANSITION_ATTRIBUTE_PRECONDITION:
 		{
 			if (references.size() == 1)
 			{
@@ -640,7 +640,7 @@ void ProtocolTransitionImpl::saveContent(std::shared_ptr<persistence::interfaces
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 

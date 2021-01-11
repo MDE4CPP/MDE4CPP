@@ -1,7 +1,7 @@
 #include "fUML/Semantics/Values/impl/ValuesPackageImpl.hpp"
 
 // metametamodel factory
-#include "ecore/EcoreFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 
 #include <cassert>
 
@@ -17,9 +17,9 @@
 #include "ecore/EStringToStringMapEntry.hpp"
 
 //depending model packages
-#include "ecore/EcorePackage.hpp"
-#include "fUML/FUMLPackage.hpp"
-#include "uml/UmlPackage.hpp"
+#include "ecore/ecorePackage.hpp"
+#include "fUML/fUMLPackage.hpp"
+#include "uml/umlPackage.hpp"
 //include subpackages 
  
 using namespace fUML::Semantics::Values;
@@ -32,7 +32,7 @@ void ValuesPackageImpl::createPackageContents(std::shared_ptr<ecore::EPackage> p
 	}
 	isCreated = true;
 
-	std::shared_ptr<ecore::EcoreFactory> factory = ecore::EcoreFactory::eInstance();
+	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
 
 	createEvaluationContent(package, factory);
 	createLiteralBooleanEvaluationContent(package, factory);
@@ -48,7 +48,7 @@ void ValuesPackageImpl::createPackageContents(std::shared_ptr<ecore::EPackage> p
 
 }
 
-void ValuesPackageImpl::createEvaluationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ValuesPackageImpl::createEvaluationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_evaluation_Class = factory->createEClass_in_EPackage(package, EVALUATION_CLASS);
 	
@@ -59,7 +59,7 @@ void ValuesPackageImpl::createEvaluationContent(std::shared_ptr<ecore::EPackage>
 	
 }
 
-void ValuesPackageImpl::createLiteralBooleanEvaluationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ValuesPackageImpl::createLiteralBooleanEvaluationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_literalBooleanEvaluation_Class = factory->createEClass_in_EPackage(package, LITERALBOOLEANEVALUATION_CLASS);
 	
@@ -68,7 +68,7 @@ void ValuesPackageImpl::createLiteralBooleanEvaluationContent(std::shared_ptr<ec
 	
 }
 
-void ValuesPackageImpl::createLiteralEvaluationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ValuesPackageImpl::createLiteralEvaluationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_literalEvaluation_Class = factory->createEClass_in_EPackage(package, LITERALEVALUATION_CLASS);
 	
@@ -77,7 +77,7 @@ void ValuesPackageImpl::createLiteralEvaluationContent(std::shared_ptr<ecore::EP
 	
 }
 
-void ValuesPackageImpl::createLiteralIntegerEvaluationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ValuesPackageImpl::createLiteralIntegerEvaluationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_literalIntegerEvaluation_Class = factory->createEClass_in_EPackage(package, LITERALINTEGEREVALUATION_CLASS);
 	
@@ -86,7 +86,7 @@ void ValuesPackageImpl::createLiteralIntegerEvaluationContent(std::shared_ptr<ec
 	
 }
 
-void ValuesPackageImpl::createLiteralNullEvaluationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ValuesPackageImpl::createLiteralNullEvaluationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_literalNullEvaluation_Class = factory->createEClass_in_EPackage(package, LITERALNULLEVALUATION_CLASS);
 	
@@ -95,7 +95,7 @@ void ValuesPackageImpl::createLiteralNullEvaluationContent(std::shared_ptr<ecore
 	
 }
 
-void ValuesPackageImpl::createLiteralRealEvaluationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ValuesPackageImpl::createLiteralRealEvaluationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_literalRealEvaluation_Class = factory->createEClass_in_EPackage(package, LITERALREALEVALUATION_CLASS);
 	
@@ -104,7 +104,7 @@ void ValuesPackageImpl::createLiteralRealEvaluationContent(std::shared_ptr<ecore
 	
 }
 
-void ValuesPackageImpl::createLiteralStringEvaluationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ValuesPackageImpl::createLiteralStringEvaluationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_literalStringEvaluation_Class = factory->createEClass_in_EPackage(package, LITERALSTRINGEVALUATION_CLASS);
 	
@@ -113,7 +113,7 @@ void ValuesPackageImpl::createLiteralStringEvaluationContent(std::shared_ptr<eco
 	
 }
 
-void ValuesPackageImpl::createLiteralUnlimitedNaturalEvaluationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ValuesPackageImpl::createLiteralUnlimitedNaturalEvaluationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_literalUnlimitedNaturalEvaluation_Class = factory->createEClass_in_EPackage(package, LITERALUNLIMITEDNATURALEVALUATION_CLASS);
 	
@@ -122,7 +122,7 @@ void ValuesPackageImpl::createLiteralUnlimitedNaturalEvaluationContent(std::shar
 	
 }
 
-void ValuesPackageImpl::createValueContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ValuesPackageImpl::createValueContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_value_Class = factory->createEClass_in_EPackage(package, VALUE_CLASS);
 	
@@ -138,7 +138,7 @@ void ValuesPackageImpl::createValueContent(std::shared_ptr<ecore::EPackage> pack
 	
 }
 
-void ValuesPackageImpl::createPackageEDataTypes(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ValuesPackageImpl::createPackageEDataTypes(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	
 }

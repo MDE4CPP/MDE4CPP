@@ -51,8 +51,8 @@
 #include "uml/StringExpression.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -156,7 +156,7 @@ std::shared_ptr<ecore::EObject>  ParameterSetImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ParameterSetImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getParameterSet_Class();
+	return uml::umlPackage::eInstance()->getParameterSet_Class();
 }
 
 //*********************************
@@ -290,7 +290,7 @@ Any ParameterSetImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::PARAMETERSET_ATTRIBUTE_CONDITION:
+		case uml::umlPackage::PARAMETERSET_ATTRIBUTE_CONDITION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Constraint>::iterator iter = m_condition->begin();
@@ -300,9 +300,9 @@ Any ParameterSetImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //1789
+			return eAny(tempList); //1779
 		}
-		case uml::UmlPackage::PARAMETERSET_ATTRIBUTE_PARAMETER:
+		case uml::umlPackage::PARAMETERSET_ATTRIBUTE_PARAMETER:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Parameter>::iterator iter = m_parameter->begin();
@@ -312,7 +312,7 @@ Any ParameterSetImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //17810
+			return eAny(tempList); //17710
 		}
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
@@ -321,10 +321,10 @@ bool ParameterSetImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::PARAMETERSET_ATTRIBUTE_CONDITION:
-			return getCondition() != nullptr; //1789
-		case uml::UmlPackage::PARAMETERSET_ATTRIBUTE_PARAMETER:
-			return getParameter() != nullptr; //17810
+		case uml::umlPackage::PARAMETERSET_ATTRIBUTE_CONDITION:
+			return getCondition() != nullptr; //1779
+		case uml::umlPackage::PARAMETERSET_ATTRIBUTE_PARAMETER:
+			return getParameter() != nullptr; //17710
 	}
 	return NamedElementImpl::internalEIsSet(featureID);
 }
@@ -332,7 +332,7 @@ bool ParameterSetImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::PARAMETERSET_ATTRIBUTE_CONDITION:
+		case uml::umlPackage::PARAMETERSET_ATTRIBUTE_CONDITION:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -368,7 +368,7 @@ bool ParameterSetImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case uml::UmlPackage::PARAMETERSET_ATTRIBUTE_PARAMETER:
+		case uml::umlPackage::PARAMETERSET_ATTRIBUTE_PARAMETER:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -420,7 +420,7 @@ void ParameterSetImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandle
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -455,7 +455,7 @@ void ParameterSetImpl::loadAttributes(std::shared_ptr<persistence::interfaces::X
 
 void ParameterSetImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -492,7 +492,7 @@ void ParameterSetImpl::resolveReferences(const int featureID, std::list<std::sha
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::PARAMETERSET_ATTRIBUTE_PARAMETER:
+		case uml::umlPackage::PARAMETERSET_ATTRIBUTE_PARAMETER:
 		{
 			std::shared_ptr<Bag<uml::Parameter>> _parameter = getParameter();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -529,7 +529,7 @@ void ParameterSetImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 		// Save 'condition'
 		for (std::shared_ptr<uml::Constraint> condition : *this->getCondition()) 

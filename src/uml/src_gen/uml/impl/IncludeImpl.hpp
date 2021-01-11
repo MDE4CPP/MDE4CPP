@@ -29,7 +29,7 @@ namespace uml
 			IncludeImpl& operator=(IncludeImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			IncludeImpl();
 			virtual std::shared_ptr<Include> getThisIncludePtr() const;
 			virtual void setThisIncludePtr(std::weak_ptr<Include> thisIncludePtr);

@@ -28,7 +28,7 @@ namespace ecore
 			EModelElementImpl& operator=(EModelElementImpl const&) = delete;
 
 		protected:
-			friend class EcoreFactoryImpl;
+			friend class ecoreFactoryImpl;
 			EModelElementImpl();
 			virtual std::shared_ptr<EModelElement> getThisEModelElementPtr() const;
 			virtual void setThisEModelElementPtr(std::weak_ptr<EModelElement> thisEModelElementPtr);

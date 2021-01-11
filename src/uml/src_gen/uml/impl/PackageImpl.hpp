@@ -30,7 +30,7 @@ namespace uml
 			PackageImpl& operator=(PackageImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			PackageImpl();
 			virtual std::shared_ptr<Package> getThisPackagePtr() const;
 			virtual void setThisPackagePtr(std::weak_ptr<Package> thisPackagePtr);

@@ -58,8 +58,8 @@
 #include "uml/ValueSpecificationAction.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -192,7 +192,7 @@ std::shared_ptr<ecore::EObject>  InstanceValueImpl::copy() const
 
 std::shared_ptr<ecore::EClass> InstanceValueImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getInstanceValue_Class();
+	return uml::umlPackage::eInstance()->getInstanceValue_Class();
 }
 
 //*********************************
@@ -303,8 +303,8 @@ Any InstanceValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::INSTANCEVALUE_ATTRIBUTE_INSTANCE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getInstance())); //11915
+		case uml::umlPackage::INSTANCEVALUE_ATTRIBUTE_INSTANCE:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getInstance())); //11815
 	}
 	return ValueSpecificationImpl::eGet(featureID, resolve, coreType);
 }
@@ -312,8 +312,8 @@ bool InstanceValueImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::INSTANCEVALUE_ATTRIBUTE_INSTANCE:
-			return getInstance() != nullptr; //11915
+		case uml::umlPackage::INSTANCEVALUE_ATTRIBUTE_INSTANCE:
+			return getInstance() != nullptr; //11815
 	}
 	return ValueSpecificationImpl::internalEIsSet(featureID);
 }
@@ -321,12 +321,12 @@ bool InstanceValueImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::INSTANCEVALUE_ATTRIBUTE_INSTANCE:
+		case uml::umlPackage::INSTANCEVALUE_ATTRIBUTE_INSTANCE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::InstanceSpecification> _instance = std::dynamic_pointer_cast<uml::InstanceSpecification>(_temp);
-			setInstance(_instance); //11915
+			setInstance(_instance); //11815
 			return true;
 		}
 	}
@@ -345,7 +345,7 @@ void InstanceValueImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandl
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -380,7 +380,7 @@ void InstanceValueImpl::loadAttributes(std::shared_ptr<persistence::interfaces::
 
 void InstanceValueImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	ValueSpecificationImpl::loadNode(nodeName, loadHandler);
@@ -390,7 +390,7 @@ void InstanceValueImpl::resolveReferences(const int featureID, std::list<std::sh
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::INSTANCEVALUE_ATTRIBUTE_INSTANCE:
+		case uml::umlPackage::INSTANCEVALUE_ATTRIBUTE_INSTANCE:
 		{
 			if (references.size() == 1)
 			{
@@ -433,7 +433,7 @@ void InstanceValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 

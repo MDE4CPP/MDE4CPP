@@ -45,8 +45,8 @@
 #include "ecore/ETypedElement.hpp"
 
 //Factories an Package includes
-#include "ecore/impl/EcoreFactoryImpl.hpp"
-#include "ecore/impl/EcorePackageImpl.hpp"
+#include "ecore/impl/ecoreFactoryImpl.hpp"
+#include "ecore/impl/ecorePackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -136,7 +136,7 @@ std::shared_ptr<ecore::EObject>  EParameterImpl::copy() const
 
 std::shared_ptr<EClass> EParameterImpl::eStaticClass() const
 {
-	return ecore::EcorePackage::eInstance()->getEParameter_Class();
+	return ecore::ecorePackage::eInstance()->getEParameter_Class();
 }
 
 //*********************************
@@ -214,7 +214,7 @@ Any EParameterImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case ecore::EcorePackage::EPARAMETER_ATTRIBUTE_EOPERATION:
+		case ecore::ecorePackage::EPARAMETER_ATTRIBUTE_EOPERATION:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEOperation().lock())); //4213
 	}
 	return ETypedElementImpl::eGet(featureID, resolve, coreType);
@@ -223,7 +223,7 @@ bool EParameterImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case ecore::EcorePackage::EPARAMETER_ATTRIBUTE_EOPERATION:
+		case ecore::ecorePackage::EPARAMETER_ATTRIBUTE_EOPERATION:
 			return getEOperation().lock() != nullptr; //4213
 	}
 	return ETypedElementImpl::internalEIsSet(featureID);
@@ -248,7 +248,7 @@ void EParameterImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler>
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get EcoreFactory
+	// get ecoreFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -264,7 +264,7 @@ void EParameterImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLo
 
 void EParameterImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<ecore::EcoreFactory> modelFactory=ecore::EcoreFactory::eInstance();
+	std::shared_ptr<ecore::ecoreFactory> modelFactory=ecore::ecoreFactory::eInstance();
 
 	//load BasePackage Nodes
 	ETypedElementImpl::loadNode(nodeName, loadHandler);
@@ -298,7 +298,7 @@ void EParameterImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 {
 	try
 	{
-		std::shared_ptr<ecore::EcorePackage> package = ecore::EcorePackage::eInstance();
+		std::shared_ptr<ecore::ecorePackage> package = ecore::ecorePackage::eInstance();
 
 	
 

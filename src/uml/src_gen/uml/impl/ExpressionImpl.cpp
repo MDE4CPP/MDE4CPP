@@ -56,8 +56,8 @@
 #include "uml/ValueSpecificationAction.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -203,7 +203,7 @@ std::shared_ptr<ecore::EObject>  ExpressionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ExpressionImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getExpression_Class();
+	return uml::umlPackage::eInstance()->getExpression_Class();
 }
 
 //*********************************
@@ -340,7 +340,7 @@ Any ExpressionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::EXPRESSION_ATTRIBUTE_OPERAND:
+		case uml::umlPackage::EXPRESSION_ATTRIBUTE_OPERAND:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::ValueSpecification>::iterator iter = m_operand->begin();
@@ -350,10 +350,10 @@ Any ExpressionImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //9615
+			return eAny(tempList); //9515
 		}
-		case uml::UmlPackage::EXPRESSION_ATTRIBUTE_SYMBOL:
-			return eAny(getSymbol()); //9616
+		case uml::umlPackage::EXPRESSION_ATTRIBUTE_SYMBOL:
+			return eAny(getSymbol()); //9516
 	}
 	return ValueSpecificationImpl::eGet(featureID, resolve, coreType);
 }
@@ -361,10 +361,10 @@ bool ExpressionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::EXPRESSION_ATTRIBUTE_OPERAND:
-			return getOperand() != nullptr; //9615
-		case uml::UmlPackage::EXPRESSION_ATTRIBUTE_SYMBOL:
-			return getSymbol() != ""; //9616
+		case uml::umlPackage::EXPRESSION_ATTRIBUTE_OPERAND:
+			return getOperand() != nullptr; //9515
+		case uml::umlPackage::EXPRESSION_ATTRIBUTE_SYMBOL:
+			return getSymbol() != ""; //9516
 	}
 	return ValueSpecificationImpl::internalEIsSet(featureID);
 }
@@ -372,7 +372,7 @@ bool ExpressionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::EXPRESSION_ATTRIBUTE_OPERAND:
+		case uml::umlPackage::EXPRESSION_ATTRIBUTE_OPERAND:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -408,11 +408,11 @@ bool ExpressionImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case uml::UmlPackage::EXPRESSION_ATTRIBUTE_SYMBOL:
+		case uml::umlPackage::EXPRESSION_ATTRIBUTE_SYMBOL:
 		{
 			// BOOST CAST
 			std::string _symbol = newValue->get<std::string>();
-			setSymbol(_symbol); //9616
+			setSymbol(_symbol); //9516
 			return true;
 		}
 	}
@@ -431,7 +431,7 @@ void ExpressionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler>
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -468,7 +468,7 @@ void ExpressionImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLo
 
 void ExpressionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -535,7 +535,7 @@ void ExpressionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 		// Save 'operand'
 		for (std::shared_ptr<uml::ValueSpecification> operand : *this->getOperand()) 

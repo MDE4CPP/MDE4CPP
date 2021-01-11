@@ -28,7 +28,7 @@ namespace uml
 			ModelImpl& operator=(ModelImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			ModelImpl();
 			virtual std::shared_ptr<Model> getThisModelPtr() const;
 			virtual void setThisModelPtr(std::weak_ptr<Model> thisModelPtr);

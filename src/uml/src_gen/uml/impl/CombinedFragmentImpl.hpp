@@ -28,7 +28,7 @@ namespace uml
 			CombinedFragmentImpl& operator=(CombinedFragmentImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			CombinedFragmentImpl();
 			virtual std::shared_ptr<CombinedFragment> getThisCombinedFragmentPtr() const;
 			virtual void setThisCombinedFragmentPtr(std::weak_ptr<CombinedFragment> thisCombinedFragmentPtr);

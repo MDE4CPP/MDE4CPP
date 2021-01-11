@@ -28,7 +28,7 @@ namespace uml
 			ExceptionHandlerImpl& operator=(ExceptionHandlerImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			ExceptionHandlerImpl();
 			virtual std::shared_ptr<ExceptionHandler> getThisExceptionHandlerPtr() const;
 			virtual void setThisExceptionHandlerPtr(std::weak_ptr<ExceptionHandler> thisExceptionHandlerPtr);

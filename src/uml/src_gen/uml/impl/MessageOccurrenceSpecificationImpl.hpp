@@ -29,7 +29,7 @@ namespace uml
 			MessageOccurrenceSpecificationImpl& operator=(MessageOccurrenceSpecificationImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			MessageOccurrenceSpecificationImpl();
 			virtual std::shared_ptr<MessageOccurrenceSpecification> getThisMessageOccurrenceSpecificationPtr() const;
 			virtual void setThisMessageOccurrenceSpecificationPtr(std::weak_ptr<MessageOccurrenceSpecification> thisMessageOccurrenceSpecificationPtr);

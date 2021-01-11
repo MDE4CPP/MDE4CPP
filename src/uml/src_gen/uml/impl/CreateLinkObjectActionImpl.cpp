@@ -75,8 +75,8 @@
 #include "uml/StructuredActivityNode.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -274,7 +274,7 @@ std::shared_ptr<ecore::EObject>  CreateLinkObjectActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> CreateLinkObjectActionImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getCreateLinkObjectAction_Class();
+	return uml::umlPackage::eInstance()->getCreateLinkObjectAction_Class();
 }
 
 //*********************************
@@ -457,8 +457,8 @@ Any CreateLinkObjectActionImpl::eGet(int featureID, bool resolve, bool coreType)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::CREATELINKOBJECTACTION_ATTRIBUTE_RESULT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //6329
+		case uml::umlPackage::CREATELINKOBJECTACTION_ATTRIBUTE_RESULT:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //6229
 	}
 	return CreateLinkActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -466,8 +466,8 @@ bool CreateLinkObjectActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::CREATELINKOBJECTACTION_ATTRIBUTE_RESULT:
-			return getResult() != nullptr; //6329
+		case uml::umlPackage::CREATELINKOBJECTACTION_ATTRIBUTE_RESULT:
+			return getResult() != nullptr; //6229
 	}
 	return CreateLinkActionImpl::internalEIsSet(featureID);
 }
@@ -475,12 +475,12 @@ bool CreateLinkObjectActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::CREATELINKOBJECTACTION_ATTRIBUTE_RESULT:
+		case uml::umlPackage::CREATELINKOBJECTACTION_ATTRIBUTE_RESULT:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::OutputPin> _result = std::dynamic_pointer_cast<uml::OutputPin>(_temp);
-			setResult(_result); //6329
+			setResult(_result); //6229
 			return true;
 		}
 	}
@@ -499,7 +499,7 @@ void CreateLinkObjectActionImpl::load(std::shared_ptr<persistence::interfaces::X
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -515,7 +515,7 @@ void CreateLinkObjectActionImpl::loadAttributes(std::shared_ptr<persistence::int
 
 void CreateLinkObjectActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -568,7 +568,6 @@ void CreateLinkObjectActionImpl::save(std::shared_ptr<persistence::interfaces::X
 	
 	ActivityNodeImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);
@@ -594,7 +593,7 @@ void CreateLinkObjectActionImpl::saveContent(std::shared_ptr<persistence::interf
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 		// Save 'result'
 		std::shared_ptr<uml::OutputPin > result = this->getResult();

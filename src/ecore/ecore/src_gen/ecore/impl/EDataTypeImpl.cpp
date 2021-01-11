@@ -43,8 +43,8 @@
 #include "ecore/ETypeParameter.hpp"
 
 //Factories an Package includes
-#include "ecore/impl/EcoreFactoryImpl.hpp"
-#include "ecore/impl/EcorePackageImpl.hpp"
+#include "ecore/impl/ecoreFactoryImpl.hpp"
+#include "ecore/impl/ecorePackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -132,7 +132,7 @@ std::shared_ptr<ecore::EObject>  EDataTypeImpl::copy() const
 
 std::shared_ptr<EClass> EDataTypeImpl::eStaticClass() const
 {
-	return ecore::EcorePackage::eInstance()->getEDataType_Class();
+	return ecore::ecorePackage::eInstance()->getEDataType_Class();
 }
 
 //*********************************
@@ -212,7 +212,7 @@ Any EDataTypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case ecore::EcorePackage::EDATATYPE_ATTRIBUTE_SERIALIZABLE:
+		case ecore::ecorePackage::EDATATYPE_ATTRIBUTE_SERIALIZABLE:
 			return eAny(isSerializable()); //1411
 	}
 	return EClassifierImpl::eGet(featureID, resolve, coreType);
@@ -221,7 +221,7 @@ bool EDataTypeImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case ecore::EcorePackage::EDATATYPE_ATTRIBUTE_SERIALIZABLE:
+		case ecore::ecorePackage::EDATATYPE_ATTRIBUTE_SERIALIZABLE:
 			return isSerializable() != true; //1411
 	}
 	return EClassifierImpl::internalEIsSet(featureID);
@@ -230,7 +230,7 @@ bool EDataTypeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case ecore::EcorePackage::EDATATYPE_ATTRIBUTE_SERIALIZABLE:
+		case ecore::ecorePackage::EDATATYPE_ATTRIBUTE_SERIALIZABLE:
 		{
 			// BOOST CAST
 			bool _serializable = newValue->get<bool>();
@@ -253,7 +253,7 @@ void EDataTypeImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> 
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get EcoreFactory
+	// get ecoreFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -290,7 +290,7 @@ void EDataTypeImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoa
 
 void EDataTypeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<ecore::EcoreFactory> modelFactory=ecore::EcoreFactory::eInstance();
+	std::shared_ptr<ecore::ecoreFactory> modelFactory=ecore::ecoreFactory::eInstance();
 
 	//load BasePackage Nodes
 	EClassifierImpl::loadNode(nodeName, loadHandler);
@@ -324,7 +324,7 @@ void EDataTypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 {
 	try
 	{
-		std::shared_ptr<ecore::EcorePackage> package = ecore::EcorePackage::eInstance();
+		std::shared_ptr<ecore::ecorePackage> package = ecore::ecorePackage::eInstance();
 
 	
 		// Add attributes

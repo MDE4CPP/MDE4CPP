@@ -28,7 +28,7 @@ namespace uml
 			UsageImpl& operator=(UsageImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			UsageImpl();
 			virtual std::shared_ptr<Usage> getThisUsagePtr() const;
 			virtual void setThisUsagePtr(std::weak_ptr<Usage> thisUsagePtr);

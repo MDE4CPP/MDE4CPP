@@ -28,7 +28,7 @@ namespace uml
 			IntervalImpl& operator=(IntervalImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			IntervalImpl();
 			virtual std::shared_ptr<Interval> getThisIntervalPtr() const;
 			virtual void setThisIntervalPtr(std::weak_ptr<Interval> thisIntervalPtr);

@@ -75,8 +75,8 @@
 #include "uml/StructuredActivityNode.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -260,7 +260,7 @@ std::shared_ptr<ecore::EObject>  StructuralFeatureActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> StructuralFeatureActionImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getStructuralFeatureAction_Class();
+	return uml::umlPackage::eInstance()->getStructuralFeatureAction_Class();
 }
 
 //*********************************
@@ -451,10 +451,10 @@ Any StructuralFeatureActionImpl::eGet(int featureID, bool resolve, bool coreType
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::STRUCTURALFEATUREACTION_ATTRIBUTE_OBJECT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getObject())); //22727
-		case uml::UmlPackage::STRUCTURALFEATUREACTION_ATTRIBUTE_STRUCTURALFEATURE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getStructuralFeature())); //22728
+		case uml::umlPackage::STRUCTURALFEATUREACTION_ATTRIBUTE_OBJECT:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getObject())); //22627
+		case uml::umlPackage::STRUCTURALFEATUREACTION_ATTRIBUTE_STRUCTURALFEATURE:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getStructuralFeature())); //22628
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -462,10 +462,10 @@ bool StructuralFeatureActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::STRUCTURALFEATUREACTION_ATTRIBUTE_OBJECT:
-			return getObject() != nullptr; //22727
-		case uml::UmlPackage::STRUCTURALFEATUREACTION_ATTRIBUTE_STRUCTURALFEATURE:
-			return getStructuralFeature() != nullptr; //22728
+		case uml::umlPackage::STRUCTURALFEATUREACTION_ATTRIBUTE_OBJECT:
+			return getObject() != nullptr; //22627
+		case uml::umlPackage::STRUCTURALFEATUREACTION_ATTRIBUTE_STRUCTURALFEATURE:
+			return getStructuralFeature() != nullptr; //22628
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
@@ -473,20 +473,20 @@ bool StructuralFeatureActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::STRUCTURALFEATUREACTION_ATTRIBUTE_OBJECT:
+		case uml::umlPackage::STRUCTURALFEATUREACTION_ATTRIBUTE_OBJECT:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::InputPin> _object = std::dynamic_pointer_cast<uml::InputPin>(_temp);
-			setObject(_object); //22727
+			setObject(_object); //22627
 			return true;
 		}
-		case uml::UmlPackage::STRUCTURALFEATUREACTION_ATTRIBUTE_STRUCTURALFEATURE:
+		case uml::umlPackage::STRUCTURALFEATUREACTION_ATTRIBUTE_STRUCTURALFEATURE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::StructuralFeature> _structuralFeature = std::dynamic_pointer_cast<uml::StructuralFeature>(_temp);
-			setStructuralFeature(_structuralFeature); //22728
+			setStructuralFeature(_structuralFeature); //22628
 			return true;
 		}
 	}
@@ -505,7 +505,7 @@ void StructuralFeatureActionImpl::load(std::shared_ptr<persistence::interfaces::
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -540,7 +540,7 @@ void StructuralFeatureActionImpl::loadAttributes(std::shared_ptr<persistence::in
 
 void StructuralFeatureActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -551,7 +551,7 @@ void StructuralFeatureActionImpl::loadNode(std::string nodeName, std::shared_ptr
 			{
 				typeName = "InputPin";
 			}
-			std::shared_ptr<ecore::EObject> object = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::UmlPackage::INPUTPIN_ATTRIBUTE_STRUCTURALFEATUREACTION);
+			std::shared_ptr<ecore::EObject> object = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::INPUTPIN_ATTRIBUTE_STRUCTURALFEATUREACTION);
 			if (object != nullptr)
 			{
 				loadHandler->handleChild(object);
@@ -575,7 +575,7 @@ void StructuralFeatureActionImpl::resolveReferences(const int featureID, std::li
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::STRUCTURALFEATUREACTION_ATTRIBUTE_STRUCTURALFEATURE:
+		case uml::umlPackage::STRUCTURALFEATUREACTION_ATTRIBUTE_STRUCTURALFEATURE:
 		{
 			if (references.size() == 1)
 			{
@@ -600,7 +600,6 @@ void StructuralFeatureActionImpl::save(std::shared_ptr<persistence::interfaces::
 	
 	ActivityNodeImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);
@@ -623,7 +622,7 @@ void StructuralFeatureActionImpl::saveContent(std::shared_ptr<persistence::inter
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 		// Save 'object'
 		std::shared_ptr<uml::InputPin > object = this->getObject();

@@ -63,8 +63,8 @@
 #include "uml/ValueSpecification.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -210,7 +210,7 @@ std::shared_ptr<ecore::EObject>  InstanceSpecificationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> InstanceSpecificationImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getInstanceSpecification_Class();
+	return uml::umlPackage::eInstance()->getInstanceSpecification_Class();
 }
 
 //*********************************
@@ -383,7 +383,7 @@ Any InstanceSpecificationImpl::eGet(int featureID, bool resolve, bool coreType) 
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::INSTANCESPECIFICATION_ATTRIBUTE_CLASSIFIER:
+		case uml::umlPackage::INSTANCESPECIFICATION_ATTRIBUTE_CLASSIFIER:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Classifier>::iterator iter = m_classifier->begin();
@@ -393,9 +393,9 @@ Any InstanceSpecificationImpl::eGet(int featureID, bool resolve, bool coreType) 
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //11814
+			return eAny(tempList); //11714
 		}
-		case uml::UmlPackage::INSTANCESPECIFICATION_ATTRIBUTE_SLOT:
+		case uml::umlPackage::INSTANCESPECIFICATION_ATTRIBUTE_SLOT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Slot>::iterator iter = m_slot->begin();
@@ -405,10 +405,10 @@ Any InstanceSpecificationImpl::eGet(int featureID, bool resolve, bool coreType) 
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //11815
+			return eAny(tempList); //11715
 		}
-		case uml::UmlPackage::INSTANCESPECIFICATION_ATTRIBUTE_SPECIFICATION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSpecification())); //11816
+		case uml::umlPackage::INSTANCESPECIFICATION_ATTRIBUTE_SPECIFICATION:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSpecification())); //11716
 	}
 	Any result;
 	result = DeployedArtifactImpl::eGet(featureID, resolve, coreType);
@@ -428,12 +428,12 @@ bool InstanceSpecificationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::INSTANCESPECIFICATION_ATTRIBUTE_CLASSIFIER:
-			return getClassifier() != nullptr; //11814
-		case uml::UmlPackage::INSTANCESPECIFICATION_ATTRIBUTE_SLOT:
-			return getSlot() != nullptr; //11815
-		case uml::UmlPackage::INSTANCESPECIFICATION_ATTRIBUTE_SPECIFICATION:
-			return getSpecification() != nullptr; //11816
+		case uml::umlPackage::INSTANCESPECIFICATION_ATTRIBUTE_CLASSIFIER:
+			return getClassifier() != nullptr; //11714
+		case uml::umlPackage::INSTANCESPECIFICATION_ATTRIBUTE_SLOT:
+			return getSlot() != nullptr; //11715
+		case uml::umlPackage::INSTANCESPECIFICATION_ATTRIBUTE_SPECIFICATION:
+			return getSpecification() != nullptr; //11716
 	}
 	bool result = false;
 	result = DeployedArtifactImpl::internalEIsSet(featureID);
@@ -453,7 +453,7 @@ bool InstanceSpecificationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::INSTANCESPECIFICATION_ATTRIBUTE_CLASSIFIER:
+		case uml::umlPackage::INSTANCESPECIFICATION_ATTRIBUTE_CLASSIFIER:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -489,7 +489,7 @@ bool InstanceSpecificationImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case uml::UmlPackage::INSTANCESPECIFICATION_ATTRIBUTE_SLOT:
+		case uml::umlPackage::INSTANCESPECIFICATION_ATTRIBUTE_SLOT:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -525,12 +525,12 @@ bool InstanceSpecificationImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case uml::UmlPackage::INSTANCESPECIFICATION_ATTRIBUTE_SPECIFICATION:
+		case uml::umlPackage::INSTANCESPECIFICATION_ATTRIBUTE_SPECIFICATION:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ValueSpecification> _specification = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
-			setSpecification(_specification); //11816
+			setSpecification(_specification); //11716
 			return true;
 		}
 	}
@@ -561,7 +561,7 @@ void InstanceSpecificationImpl::load(std::shared_ptr<persistence::interfaces::XL
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -598,7 +598,7 @@ void InstanceSpecificationImpl::loadAttributes(std::shared_ptr<persistence::inte
 
 void InstanceSpecificationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -609,7 +609,7 @@ void InstanceSpecificationImpl::loadNode(std::string nodeName, std::shared_ptr<p
 			{
 				typeName = "Slot";
 			}
-			std::shared_ptr<ecore::EObject> slot = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::UmlPackage::SLOT_ATTRIBUTE_OWNINGINSTANCE);
+			std::shared_ptr<ecore::EObject> slot = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::SLOT_ATTRIBUTE_OWNINGINSTANCE);
 			if (slot != nullptr)
 			{
 				loadHandler->handleChild(slot);
@@ -652,7 +652,7 @@ void InstanceSpecificationImpl::resolveReferences(const int featureID, std::list
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::INSTANCESPECIFICATION_ATTRIBUTE_CLASSIFIER:
+		case uml::umlPackage::INSTANCESPECIFICATION_ATTRIBUTE_CLASSIFIER:
 		{
 			std::shared_ptr<Bag<uml::Classifier>> _classifier = getClassifier();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -697,7 +697,7 @@ void InstanceSpecificationImpl::saveContent(std::shared_ptr<persistence::interfa
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 		// Save 'slot'
 		for (std::shared_ptr<uml::Slot> slot : *this->getSlot()) 

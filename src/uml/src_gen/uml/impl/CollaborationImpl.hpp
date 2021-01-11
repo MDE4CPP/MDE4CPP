@@ -29,7 +29,7 @@ namespace uml
 			CollaborationImpl& operator=(CollaborationImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			CollaborationImpl();
 			virtual std::shared_ptr<Collaboration> getThisCollaborationPtr() const;
 			virtual void setThisCollaborationPtr(std::weak_ptr<Collaboration> thisCollaborationPtr);

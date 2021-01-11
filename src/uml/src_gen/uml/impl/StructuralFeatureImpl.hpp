@@ -30,7 +30,7 @@ namespace uml
 			StructuralFeatureImpl& operator=(StructuralFeatureImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			StructuralFeatureImpl();
 			virtual std::shared_ptr<StructuralFeature> getThisStructuralFeaturePtr() const;
 			virtual void setThisStructuralFeaturePtr(std::weak_ptr<StructuralFeature> thisStructuralFeaturePtr);

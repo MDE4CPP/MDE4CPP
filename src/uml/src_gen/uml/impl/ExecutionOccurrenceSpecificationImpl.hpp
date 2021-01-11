@@ -28,7 +28,7 @@ namespace uml
 			ExecutionOccurrenceSpecificationImpl& operator=(ExecutionOccurrenceSpecificationImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			ExecutionOccurrenceSpecificationImpl();
 			virtual std::shared_ptr<ExecutionOccurrenceSpecification> getThisExecutionOccurrenceSpecificationPtr() const;
 			virtual void setThisExecutionOccurrenceSpecificationPtr(std::weak_ptr<ExecutionOccurrenceSpecification> thisExecutionOccurrenceSpecificationPtr);

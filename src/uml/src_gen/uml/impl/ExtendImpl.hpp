@@ -29,7 +29,7 @@ namespace uml
 			ExtendImpl& operator=(ExtendImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			ExtendImpl();
 			virtual std::shared_ptr<Extend> getThisExtendPtr() const;
 			virtual void setThisExtendPtr(std::weak_ptr<Extend> thisExtendPtr);

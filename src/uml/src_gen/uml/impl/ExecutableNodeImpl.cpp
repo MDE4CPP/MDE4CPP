@@ -64,8 +64,8 @@
 #include "uml/StructuredActivityNode.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -226,7 +226,7 @@ std::shared_ptr<ecore::EObject>  ExecutableNodeImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ExecutableNodeImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getExecutableNode_Class();
+	return uml::umlPackage::eInstance()->getExecutableNode_Class();
 }
 
 //*********************************
@@ -364,7 +364,7 @@ Any ExecutableNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::EXECUTABLENODE_ATTRIBUTE_HANDLER:
+		case uml::umlPackage::EXECUTABLENODE_ATTRIBUTE_HANDLER:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::ExceptionHandler>::iterator iter = m_handler->begin();
@@ -374,7 +374,7 @@ Any ExecutableNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //8920
+			return eAny(tempList); //8820
 		}
 	}
 	return ActivityNodeImpl::eGet(featureID, resolve, coreType);
@@ -383,8 +383,8 @@ bool ExecutableNodeImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::EXECUTABLENODE_ATTRIBUTE_HANDLER:
-			return getHandler() != nullptr; //8920
+		case uml::umlPackage::EXECUTABLENODE_ATTRIBUTE_HANDLER:
+			return getHandler() != nullptr; //8820
 	}
 	return ActivityNodeImpl::internalEIsSet(featureID);
 }
@@ -392,7 +392,7 @@ bool ExecutableNodeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::EXECUTABLENODE_ATTRIBUTE_HANDLER:
+		case uml::umlPackage::EXECUTABLENODE_ATTRIBUTE_HANDLER:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -444,7 +444,7 @@ void ExecutableNodeImpl::load(std::shared_ptr<persistence::interfaces::XLoadHand
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -460,7 +460,7 @@ void ExecutableNodeImpl::loadAttributes(std::shared_ptr<persistence::interfaces:
 
 void ExecutableNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -471,7 +471,7 @@ void ExecutableNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persiste
 			{
 				typeName = "ExceptionHandler";
 			}
-			std::shared_ptr<ecore::EObject> handler = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::UmlPackage::EXCEPTIONHANDLER_ATTRIBUTE_PROTECTEDNODE);
+			std::shared_ptr<ecore::EObject> handler = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::EXCEPTIONHANDLER_ATTRIBUTE_PROTECTEDNODE);
 			if (handler != nullptr)
 			{
 				loadHandler->handleChild(handler);
@@ -502,7 +502,6 @@ void ExecutableNodeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHand
 
 	ActivityNodeImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);
@@ -523,7 +522,7 @@ void ExecutableNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 		// Save 'handler'
 		for (std::shared_ptr<uml::ExceptionHandler> handler : *this->getHandler()) 

@@ -52,8 +52,8 @@
 #include "uml/Usage.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -141,7 +141,7 @@ std::shared_ptr<ecore::EObject>  NamedElementImpl::copy() const
 
 std::shared_ptr<ecore::EClass> NamedElementImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getNamedElement_Class();
+	return uml::umlPackage::eInstance()->getNamedElement_Class();
 }
 
 //*********************************
@@ -415,7 +415,7 @@ Any NamedElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::NAMEDELEMENT_ATTRIBUTE_CLIENTDEPENDENCY:
+		case uml::umlPackage::NAMEDELEMENT_ATTRIBUTE_CLIENTDEPENDENCY:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Dependency>::iterator iter = m_clientDependency->begin();
@@ -425,18 +425,18 @@ Any NamedElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //1563
+			return eAny(tempList); //1553
 		}
-		case uml::UmlPackage::NAMEDELEMENT_ATTRIBUTE_NAME:
-			return eAny(getName()); //1564
-		case uml::UmlPackage::NAMEDELEMENT_ATTRIBUTE_NAMEEXPRESSION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getNameExpression())); //1565
-		case uml::UmlPackage::NAMEDELEMENT_ATTRIBUTE_NAMESPACE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getNamespace().lock())); //1566
-		case uml::UmlPackage::NAMEDELEMENT_ATTRIBUTE_QUALIFIEDNAME:
-			return eAny(getQualifiedName()); //1567
-		case uml::UmlPackage::NAMEDELEMENT_ATTRIBUTE_VISIBILITY:
-			return eAny(getVisibility()); //1568
+		case uml::umlPackage::NAMEDELEMENT_ATTRIBUTE_NAME:
+			return eAny(getName()); //1554
+		case uml::umlPackage::NAMEDELEMENT_ATTRIBUTE_NAMEEXPRESSION:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getNameExpression())); //1555
+		case uml::umlPackage::NAMEDELEMENT_ATTRIBUTE_NAMESPACE:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getNamespace().lock())); //1556
+		case uml::umlPackage::NAMEDELEMENT_ATTRIBUTE_QUALIFIEDNAME:
+			return eAny(getQualifiedName()); //1557
+		case uml::umlPackage::NAMEDELEMENT_ATTRIBUTE_VISIBILITY:
+			return eAny(getVisibility()); //1558
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -444,18 +444,18 @@ bool NamedElementImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::NAMEDELEMENT_ATTRIBUTE_CLIENTDEPENDENCY:
-			return getClientDependency() != nullptr; //1563
-		case uml::UmlPackage::NAMEDELEMENT_ATTRIBUTE_NAME:
-			return getName() != ""; //1564
-		case uml::UmlPackage::NAMEDELEMENT_ATTRIBUTE_NAMEEXPRESSION:
-			return getNameExpression() != nullptr; //1565
-		case uml::UmlPackage::NAMEDELEMENT_ATTRIBUTE_NAMESPACE:
-			return getNamespace().lock() != nullptr; //1566
-		case uml::UmlPackage::NAMEDELEMENT_ATTRIBUTE_QUALIFIEDNAME:
-			return getQualifiedName() != ""; //1567
-		case uml::UmlPackage::NAMEDELEMENT_ATTRIBUTE_VISIBILITY:
-			return m_visibility != VisibilityKind::PUBLIC;; //1568
+		case uml::umlPackage::NAMEDELEMENT_ATTRIBUTE_CLIENTDEPENDENCY:
+			return getClientDependency() != nullptr; //1553
+		case uml::umlPackage::NAMEDELEMENT_ATTRIBUTE_NAME:
+			return getName() != ""; //1554
+		case uml::umlPackage::NAMEDELEMENT_ATTRIBUTE_NAMEEXPRESSION:
+			return getNameExpression() != nullptr; //1555
+		case uml::umlPackage::NAMEDELEMENT_ATTRIBUTE_NAMESPACE:
+			return getNamespace().lock() != nullptr; //1556
+		case uml::umlPackage::NAMEDELEMENT_ATTRIBUTE_QUALIFIEDNAME:
+			return getQualifiedName() != ""; //1557
+		case uml::umlPackage::NAMEDELEMENT_ATTRIBUTE_VISIBILITY:
+			return m_visibility != VisibilityKind::PUBLIC;; //1558
 	}
 	return ElementImpl::internalEIsSet(featureID);
 }
@@ -463,26 +463,26 @@ bool NamedElementImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::NAMEDELEMENT_ATTRIBUTE_NAME:
+		case uml::umlPackage::NAMEDELEMENT_ATTRIBUTE_NAME:
 		{
 			// BOOST CAST
 			std::string _name = newValue->get<std::string>();
-			setName(_name); //1564
+			setName(_name); //1554
 			return true;
 		}
-		case uml::UmlPackage::NAMEDELEMENT_ATTRIBUTE_NAMEEXPRESSION:
+		case uml::umlPackage::NAMEDELEMENT_ATTRIBUTE_NAMEEXPRESSION:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::StringExpression> _nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(_temp);
-			setNameExpression(_nameExpression); //1565
+			setNameExpression(_nameExpression); //1555
 			return true;
 		}
-		case uml::UmlPackage::NAMEDELEMENT_ATTRIBUTE_VISIBILITY:
+		case uml::umlPackage::NAMEDELEMENT_ATTRIBUTE_VISIBILITY:
 		{
 			// BOOST CAST
 			uml::VisibilityKind _visibility = newValue->get<uml::VisibilityKind>();
-			setVisibility(_visibility); //1568
+			setVisibility(_visibility); //1558
 			return true;
 		}
 	}
@@ -501,7 +501,7 @@ void NamedElementImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandle
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -562,7 +562,7 @@ void NamedElementImpl::loadAttributes(std::shared_ptr<persistence::interfaces::X
 
 void NamedElementImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -616,7 +616,7 @@ void NamedElementImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 		// Save 'nameExpression'
 		std::shared_ptr<uml::StringExpression > nameExpression = this->getNameExpression();

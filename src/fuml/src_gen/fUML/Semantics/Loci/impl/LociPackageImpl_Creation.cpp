@@ -1,7 +1,7 @@
 #include "fUML/Semantics/Loci/impl/LociPackageImpl.hpp"
 
 // metametamodel factory
-#include "ecore/EcoreFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 
 #include <cassert>
 
@@ -17,9 +17,9 @@
 #include "ecore/EStringToStringMapEntry.hpp"
 
 //depending model packages
-#include "ecore/EcorePackage.hpp"
-#include "fUML/FUMLPackage.hpp"
-#include "uml/UmlPackage.hpp"
+#include "ecore/ecorePackage.hpp"
+#include "fUML/fUMLPackage.hpp"
+#include "uml/umlPackage.hpp"
 //include subpackages 
  
 using namespace fUML::Semantics::Loci;
@@ -32,7 +32,7 @@ void LociPackageImpl::createPackageContents(std::shared_ptr<ecore::EPackage> pac
 	}
 	isCreated = true;
 
-	std::shared_ptr<ecore::EcoreFactory> factory = ecore::EcoreFactory::eInstance();
+	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
 
 	createChoiceStrategyContent(package, factory);
 	createExecutionFactoryContent(package, factory);
@@ -46,7 +46,7 @@ void LociPackageImpl::createPackageContents(std::shared_ptr<ecore::EPackage> pac
 
 }
 
-void LociPackageImpl::createChoiceStrategyContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void LociPackageImpl::createChoiceStrategyContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_choiceStrategy_Class = factory->createEClass_in_EPackage(package, CHOICESTRATEGY_CLASS);
 	
@@ -56,7 +56,7 @@ void LociPackageImpl::createChoiceStrategyContent(std::shared_ptr<ecore::EPackag
 	
 }
 
-void LociPackageImpl::createExecutionFactoryContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void LociPackageImpl::createExecutionFactoryContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_executionFactory_Class = factory->createEClass_in_EPackage(package, EXECUTIONFACTORY_CLASS);
 	
@@ -79,7 +79,7 @@ void LociPackageImpl::createExecutionFactoryContent(std::shared_ptr<ecore::EPack
 	
 }
 
-void LociPackageImpl::createExecutorContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void LociPackageImpl::createExecutorContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_executor_Class = factory->createEClass_in_EPackage(package, EXECUTOR_CLASS);
 	
@@ -91,7 +91,7 @@ void LociPackageImpl::createExecutorContent(std::shared_ptr<ecore::EPackage> pac
 	
 }
 
-void LociPackageImpl::createFirstChoiceStrategyContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void LociPackageImpl::createFirstChoiceStrategyContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_firstChoiceStrategy_Class = factory->createEClass_in_EPackage(package, FIRSTCHOICESTRATEGY_CLASS);
 	
@@ -100,7 +100,7 @@ void LociPackageImpl::createFirstChoiceStrategyContent(std::shared_ptr<ecore::EP
 	
 }
 
-void LociPackageImpl::createLocusContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void LociPackageImpl::createLocusContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_locus_Class = factory->createEClass_in_EPackage(package, LOCUS_CLASS);
 	
@@ -118,7 +118,7 @@ void LociPackageImpl::createLocusContent(std::shared_ptr<ecore::EPackage> packag
 	
 }
 
-void LociPackageImpl::createSemanticStrategyContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void LociPackageImpl::createSemanticStrategyContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_semanticStrategy_Class = factory->createEClass_in_EPackage(package, SEMANTICSTRATEGY_CLASS);
 	
@@ -127,7 +127,7 @@ void LociPackageImpl::createSemanticStrategyContent(std::shared_ptr<ecore::EPack
 	
 }
 
-void LociPackageImpl::createSemanticVisitorContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void LociPackageImpl::createSemanticVisitorContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_semanticVisitor_Class = factory->createEClass_in_EPackage(package, SEMANTICVISITOR_CLASS);
 	
@@ -137,7 +137,7 @@ void LociPackageImpl::createSemanticVisitorContent(std::shared_ptr<ecore::EPacka
 	
 }
 
-void LociPackageImpl::createPackageEDataTypes(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void LociPackageImpl::createPackageEDataTypes(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	
 }

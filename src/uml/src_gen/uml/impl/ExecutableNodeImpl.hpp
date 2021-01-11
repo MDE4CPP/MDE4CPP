@@ -28,7 +28,7 @@ namespace uml
 			ExecutableNodeImpl& operator=(ExecutableNodeImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			ExecutableNodeImpl();
 			virtual std::shared_ptr<ExecutableNode> getThisExecutableNodePtr() const;
 			virtual void setThisExecutableNodePtr(std::weak_ptr<ExecutableNode> thisExecutableNodePtr);

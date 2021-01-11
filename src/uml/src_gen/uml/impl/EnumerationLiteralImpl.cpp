@@ -62,8 +62,8 @@
 #include "uml/ValueSpecification.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -211,7 +211,7 @@ std::shared_ptr<ecore::EObject>  EnumerationLiteralImpl::copy() const
 
 std::shared_ptr<ecore::EClass> EnumerationLiteralImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getEnumerationLiteral_Class();
+	return uml::umlPackage::eInstance()->getEnumerationLiteral_Class();
 }
 
 //*********************************
@@ -324,8 +324,8 @@ Any EnumerationLiteralImpl::eGet(int featureID, bool resolve, bool coreType) con
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::ENUMERATIONLITERAL_ATTRIBUTE_ENUMERATION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEnumeration().lock())); //8617
+		case uml::umlPackage::ENUMERATIONLITERAL_ATTRIBUTE_ENUMERATION:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEnumeration().lock())); //8517
 	}
 	return InstanceSpecificationImpl::eGet(featureID, resolve, coreType);
 }
@@ -333,8 +333,8 @@ bool EnumerationLiteralImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::ENUMERATIONLITERAL_ATTRIBUTE_ENUMERATION:
-			return getEnumeration().lock() != nullptr; //8617
+		case uml::umlPackage::ENUMERATIONLITERAL_ATTRIBUTE_ENUMERATION:
+			return getEnumeration().lock() != nullptr; //8517
 	}
 	return InstanceSpecificationImpl::internalEIsSet(featureID);
 }
@@ -342,12 +342,12 @@ bool EnumerationLiteralImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::ENUMERATIONLITERAL_ATTRIBUTE_ENUMERATION:
+		case uml::umlPackage::ENUMERATIONLITERAL_ATTRIBUTE_ENUMERATION:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Enumeration> _enumeration = std::dynamic_pointer_cast<uml::Enumeration>(_temp);
-			setEnumeration(_enumeration); //8617
+			setEnumeration(_enumeration); //8517
 			return true;
 		}
 	}
@@ -366,7 +366,7 @@ void EnumerationLiteralImpl::load(std::shared_ptr<persistence::interfaces::XLoad
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -382,7 +382,7 @@ void EnumerationLiteralImpl::loadAttributes(std::shared_ptr<persistence::interfa
 
 void EnumerationLiteralImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	InstanceSpecificationImpl::loadNode(nodeName, loadHandler);
@@ -392,7 +392,7 @@ void EnumerationLiteralImpl::resolveReferences(const int featureID, std::list<st
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::ENUMERATIONLITERAL_ATTRIBUTE_ENUMERATION:
+		case uml::umlPackage::ENUMERATIONLITERAL_ATTRIBUTE_ENUMERATION:
 		{
 			if (references.size() == 1)
 			{
@@ -436,7 +436,7 @@ void EnumerationLiteralImpl::saveContent(std::shared_ptr<persistence::interfaces
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 

@@ -56,8 +56,8 @@
 #include "uml/StringExpression.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -183,7 +183,7 @@ std::shared_ptr<ecore::EObject>  ExecutionOccurrenceSpecificationImpl::copy() co
 
 std::shared_ptr<ecore::EClass> ExecutionOccurrenceSpecificationImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getExecutionOccurrenceSpecification_Class();
+	return uml::umlPackage::eInstance()->getExecutionOccurrenceSpecification_Class();
 }
 
 //*********************************
@@ -284,8 +284,8 @@ Any ExecutionOccurrenceSpecificationImpl::eGet(int featureID, bool resolve, bool
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::EXECUTIONOCCURRENCESPECIFICATION_ATTRIBUTE_EXECUTION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getExecution())); //9115
+		case uml::umlPackage::EXECUTIONOCCURRENCESPECIFICATION_ATTRIBUTE_EXECUTION:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getExecution())); //9015
 	}
 	return OccurrenceSpecificationImpl::eGet(featureID, resolve, coreType);
 }
@@ -293,8 +293,8 @@ bool ExecutionOccurrenceSpecificationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::EXECUTIONOCCURRENCESPECIFICATION_ATTRIBUTE_EXECUTION:
-			return getExecution() != nullptr; //9115
+		case uml::umlPackage::EXECUTIONOCCURRENCESPECIFICATION_ATTRIBUTE_EXECUTION:
+			return getExecution() != nullptr; //9015
 	}
 	return OccurrenceSpecificationImpl::internalEIsSet(featureID);
 }
@@ -302,12 +302,12 @@ bool ExecutionOccurrenceSpecificationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::EXECUTIONOCCURRENCESPECIFICATION_ATTRIBUTE_EXECUTION:
+		case uml::umlPackage::EXECUTIONOCCURRENCESPECIFICATION_ATTRIBUTE_EXECUTION:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ExecutionSpecification> _execution = std::dynamic_pointer_cast<uml::ExecutionSpecification>(_temp);
-			setExecution(_execution); //9115
+			setExecution(_execution); //9015
 			return true;
 		}
 	}
@@ -326,7 +326,7 @@ void ExecutionOccurrenceSpecificationImpl::load(std::shared_ptr<persistence::int
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -361,7 +361,7 @@ void ExecutionOccurrenceSpecificationImpl::loadAttributes(std::shared_ptr<persis
 
 void ExecutionOccurrenceSpecificationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	OccurrenceSpecificationImpl::loadNode(nodeName, loadHandler);
@@ -371,7 +371,7 @@ void ExecutionOccurrenceSpecificationImpl::resolveReferences(const int featureID
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::EXECUTIONOCCURRENCESPECIFICATION_ATTRIBUTE_EXECUTION:
+		case uml::umlPackage::EXECUTIONOCCURRENCESPECIFICATION_ATTRIBUTE_EXECUTION:
 		{
 			if (references.size() == 1)
 			{
@@ -412,7 +412,7 @@ void ExecutionOccurrenceSpecificationImpl::saveContent(std::shared_ptr<persisten
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 

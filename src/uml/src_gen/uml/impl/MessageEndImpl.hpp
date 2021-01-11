@@ -28,7 +28,7 @@ namespace uml
 			MessageEndImpl& operator=(MessageEndImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			MessageEndImpl();
 			virtual std::shared_ptr<MessageEnd> getThisMessageEndPtr() const;
 			virtual void setThisMessageEndPtr(std::weak_ptr<MessageEnd> thisMessageEndPtr);

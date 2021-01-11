@@ -17,6 +17,7 @@ namespace uml
 	class ConnectorEnd;
 }
 
+
 namespace StandardProfile 
 {
 	/*!
@@ -173,6 +174,8 @@ namespace StandardProfile
 			virtual std::shared_ptr<uml::Property> get_StandardProfile_Utility_base_Class() = 0;  
 			
 			
+
+			//getter for subPackages
 
 			//Singleton Instance and Getter
 			

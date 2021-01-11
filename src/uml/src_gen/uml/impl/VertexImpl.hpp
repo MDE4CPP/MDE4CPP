@@ -28,7 +28,7 @@ namespace uml
 			VertexImpl& operator=(VertexImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			VertexImpl();
 			virtual std::shared_ptr<Vertex> getThisVertexPtr() const;
 			virtual void setThisVertexPtr(std::weak_ptr<Vertex> thisVertexPtr);

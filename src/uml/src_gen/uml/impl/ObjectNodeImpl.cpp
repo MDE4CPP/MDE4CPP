@@ -73,8 +73,8 @@
 #include "uml/ValueSpecification.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -238,7 +238,7 @@ std::shared_ptr<ecore::EObject>  ObjectNodeImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ObjectNodeImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getObjectNode_Class();
+	return uml::umlPackage::eInstance()->getObjectNode_Class();
 }
 
 //*********************************
@@ -446,7 +446,7 @@ Any ObjectNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::OBJECTNODE_ATTRIBUTE_INSTATE:
+		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_INSTATE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::State>::iterator iter = m_inState->begin();
@@ -456,16 +456,16 @@ Any ObjectNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //16121
+			return eAny(tempList); //16021
 		}
-		case uml::UmlPackage::OBJECTNODE_ATTRIBUTE_ISCONTROLTYPE:
-			return eAny(getIsControlType()); //16122
-		case uml::UmlPackage::OBJECTNODE_ATTRIBUTE_ORDERING:
-			return eAny(getOrdering()); //16123
-		case uml::UmlPackage::OBJECTNODE_ATTRIBUTE_SELECTION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSelection())); //16124
-		case uml::UmlPackage::OBJECTNODE_ATTRIBUTE_UPPERBOUND:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getUpperBound())); //16125
+		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_ISCONTROLTYPE:
+			return eAny(getIsControlType()); //16022
+		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_ORDERING:
+			return eAny(getOrdering()); //16023
+		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_SELECTION:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSelection())); //16024
+		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_UPPERBOUND:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getUpperBound())); //16025
 	}
 	Any result;
 	result = ActivityNodeImpl::eGet(featureID, resolve, coreType);
@@ -480,16 +480,16 @@ bool ObjectNodeImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::OBJECTNODE_ATTRIBUTE_INSTATE:
-			return getInState() != nullptr; //16121
-		case uml::UmlPackage::OBJECTNODE_ATTRIBUTE_ISCONTROLTYPE:
-			return getIsControlType() != false; //16122
-		case uml::UmlPackage::OBJECTNODE_ATTRIBUTE_ORDERING:
-			return m_ordering != ObjectNodeOrderingKind::FIFO;; //16123
-		case uml::UmlPackage::OBJECTNODE_ATTRIBUTE_SELECTION:
-			return getSelection() != nullptr; //16124
-		case uml::UmlPackage::OBJECTNODE_ATTRIBUTE_UPPERBOUND:
-			return getUpperBound() != nullptr; //16125
+		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_INSTATE:
+			return getInState() != nullptr; //16021
+		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_ISCONTROLTYPE:
+			return getIsControlType() != false; //16022
+		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_ORDERING:
+			return m_ordering != ObjectNodeOrderingKind::FIFO;; //16023
+		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_SELECTION:
+			return getSelection() != nullptr; //16024
+		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_UPPERBOUND:
+			return getUpperBound() != nullptr; //16025
 	}
 	bool result = false;
 	result = ActivityNodeImpl::internalEIsSet(featureID);
@@ -504,7 +504,7 @@ bool ObjectNodeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::OBJECTNODE_ATTRIBUTE_INSTATE:
+		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_INSTATE:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -540,34 +540,34 @@ bool ObjectNodeImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case uml::UmlPackage::OBJECTNODE_ATTRIBUTE_ISCONTROLTYPE:
+		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_ISCONTROLTYPE:
 		{
 			// BOOST CAST
 			bool _isControlType = newValue->get<bool>();
-			setIsControlType(_isControlType); //16122
+			setIsControlType(_isControlType); //16022
 			return true;
 		}
-		case uml::UmlPackage::OBJECTNODE_ATTRIBUTE_ORDERING:
+		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_ORDERING:
 		{
 			// BOOST CAST
 			uml::ObjectNodeOrderingKind _ordering = newValue->get<uml::ObjectNodeOrderingKind>();
-			setOrdering(_ordering); //16123
+			setOrdering(_ordering); //16023
 			return true;
 		}
-		case uml::UmlPackage::OBJECTNODE_ATTRIBUTE_SELECTION:
+		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_SELECTION:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Behavior> _selection = std::dynamic_pointer_cast<uml::Behavior>(_temp);
-			setSelection(_selection); //16124
+			setSelection(_selection); //16024
 			return true;
 		}
-		case uml::UmlPackage::OBJECTNODE_ATTRIBUTE_UPPERBOUND:
+		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_UPPERBOUND:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ValueSpecification> _upperBound = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
-			setUpperBound(_upperBound); //16125
+			setUpperBound(_upperBound); //16025
 			return true;
 		}
 	}
@@ -593,7 +593,7 @@ void ObjectNodeImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler>
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -669,7 +669,7 @@ void ObjectNodeImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLo
 
 void ObjectNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -707,7 +707,7 @@ void ObjectNodeImpl::resolveReferences(const int featureID, std::list<std::share
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::OBJECTNODE_ATTRIBUTE_INSTATE:
+		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_INSTATE:
 		{
 			std::shared_ptr<Bag<uml::State>> _inState = getInState();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -721,7 +721,7 @@ void ObjectNodeImpl::resolveReferences(const int featureID, std::list<std::share
 			return;
 		}
 
-		case uml::UmlPackage::OBJECTNODE_ATTRIBUTE_SELECTION:
+		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_SELECTION:
 		{
 			if (references.size() == 1)
 			{
@@ -744,7 +744,6 @@ void ObjectNodeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler>
 	ActivityNodeImpl::saveContent(saveHandler);
 	TypedElementImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);
@@ -765,7 +764,7 @@ void ObjectNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 		// Save 'upperBound'
 		std::shared_ptr<uml::ValueSpecification > upperBound = this->getUpperBound();

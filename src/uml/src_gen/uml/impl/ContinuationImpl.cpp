@@ -55,8 +55,8 @@
 #include "uml/StringExpression.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -175,7 +175,7 @@ std::shared_ptr<ecore::EObject>  ContinuationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ContinuationImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getContinuation_Class();
+	return uml::umlPackage::eInstance()->getContinuation_Class();
 }
 
 //*********************************
@@ -292,8 +292,8 @@ Any ContinuationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::CONTINUATION_ATTRIBUTE_SETTING:
-			return eAny(getSetting()); //5913
+		case uml::umlPackage::CONTINUATION_ATTRIBUTE_SETTING:
+			return eAny(getSetting()); //5813
 	}
 	return InteractionFragmentImpl::eGet(featureID, resolve, coreType);
 }
@@ -301,8 +301,8 @@ bool ContinuationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::CONTINUATION_ATTRIBUTE_SETTING:
-			return getSetting() != true; //5913
+		case uml::umlPackage::CONTINUATION_ATTRIBUTE_SETTING:
+			return getSetting() != true; //5813
 	}
 	return InteractionFragmentImpl::internalEIsSet(featureID);
 }
@@ -310,11 +310,11 @@ bool ContinuationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::CONTINUATION_ATTRIBUTE_SETTING:
+		case uml::umlPackage::CONTINUATION_ATTRIBUTE_SETTING:
 		{
 			// BOOST CAST
 			bool _setting = newValue->get<bool>();
-			setSetting(_setting); //5913
+			setSetting(_setting); //5813
 			return true;
 		}
 	}
@@ -333,7 +333,7 @@ void ContinuationImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandle
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -370,7 +370,7 @@ void ContinuationImpl::loadAttributes(std::shared_ptr<persistence::interfaces::X
 
 void ContinuationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	InteractionFragmentImpl::loadNode(nodeName, loadHandler);
@@ -404,7 +404,7 @@ void ContinuationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 		// Add attributes

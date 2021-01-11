@@ -92,8 +92,8 @@
 #include "uml/UseCase.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -136,11 +136,11 @@ CollaborationImpl::CollaborationImpl(std::weak_ptr<uml::Package > par_Package, c
 {
 	switch(reference_id)
 	{	
-	case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
+	case umlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
 		m_owningPackage = par_Package;
 		m_namespace = par_Package;
 		 return;
-	case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
+	case umlPackage::TYPE_ATTRIBUTE_PACKAGE:
 		m_package = par_Package;
 		m_namespace = par_Package;
 		 return;
@@ -390,7 +390,7 @@ std::shared_ptr<ecore::EObject>  CollaborationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> CollaborationImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getCollaboration_Class();
+	return uml::umlPackage::eInstance()->getCollaboration_Class();
 }
 
 //*********************************
@@ -619,7 +619,7 @@ Any CollaborationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::COLLABORATION_ATTRIBUTE_COLLABORATIONROLE:
+		case uml::umlPackage::COLLABORATION_ATTRIBUTE_COLLABORATIONROLE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::ConnectableElement>::iterator iter = m_collaborationRole->begin();
@@ -629,7 +629,7 @@ Any CollaborationImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //4345
+			return eAny(tempList); //4245
 		}
 	}
 	Any result;
@@ -645,8 +645,8 @@ bool CollaborationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::COLLABORATION_ATTRIBUTE_COLLABORATIONROLE:
-			return getCollaborationRole() != nullptr; //4345
+		case uml::umlPackage::COLLABORATION_ATTRIBUTE_COLLABORATIONROLE:
+			return getCollaborationRole() != nullptr; //4245
 	}
 	bool result = false;
 	result = BehavioredClassifierImpl::internalEIsSet(featureID);
@@ -661,7 +661,7 @@ bool CollaborationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::COLLABORATION_ATTRIBUTE_COLLABORATIONROLE:
+		case uml::umlPackage::COLLABORATION_ATTRIBUTE_COLLABORATIONROLE:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -720,7 +720,7 @@ void CollaborationImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandl
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -756,7 +756,7 @@ void CollaborationImpl::loadAttributes(std::shared_ptr<persistence::interfaces::
 
 void CollaborationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	BehavioredClassifierImpl::loadNode(nodeName, loadHandler);
@@ -767,7 +767,7 @@ void CollaborationImpl::resolveReferences(const int featureID, std::list<std::sh
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::COLLABORATION_ATTRIBUTE_COLLABORATIONROLE:
+		case uml::umlPackage::COLLABORATION_ATTRIBUTE_COLLABORATIONROLE:
 		{
 			std::shared_ptr<Bag<uml::ConnectableElement>> _collaborationRole = getCollaborationRole();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -822,7 +822,7 @@ void CollaborationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 

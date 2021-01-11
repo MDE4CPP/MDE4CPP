@@ -28,7 +28,7 @@ namespace ecore
 			EParameterImpl& operator=(EParameterImpl const&) = delete;
 
 		protected:
-			friend class EcoreFactoryImpl;
+			friend class ecoreFactoryImpl;
 			EParameterImpl();
 			virtual std::shared_ptr<EParameter> getThisEParameterPtr() const;
 			virtual void setThisEParameterPtr(std::weak_ptr<EParameter> thisEParameterPtr);

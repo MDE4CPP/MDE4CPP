@@ -19,10 +19,10 @@
 #include "fUML/Semantics/SemanticsFactory.hpp"
 
 //depending model packages
-#include "ecore/EcorePackage.hpp"
-#include "fUML/FUMLPackage.hpp"
-#include "types/TypesPackage.hpp"
-#include "uml/UmlPackage.hpp"
+#include "ecore/ecorePackage.hpp"
+#include "fUML/fUMLPackage.hpp"
+#include "types/typesPackage.hpp"
+#include "uml/umlPackage.hpp"
 #include "fUML/Semantics/Actions/impl/ActionsPackageImpl.hpp"
 
 #include "fUML/Semantics/Activities/impl/ActivitiesPackageImpl.hpp"

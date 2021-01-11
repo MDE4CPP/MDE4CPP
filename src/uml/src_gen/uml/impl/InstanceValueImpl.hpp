@@ -28,7 +28,7 @@ namespace uml
 			InstanceValueImpl& operator=(InstanceValueImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			InstanceValueImpl();
 			virtual std::shared_ptr<InstanceValue> getThisInstanceValuePtr() const;
 			virtual void setThisInstanceValuePtr(std::weak_ptr<InstanceValue> thisInstanceValuePtr);

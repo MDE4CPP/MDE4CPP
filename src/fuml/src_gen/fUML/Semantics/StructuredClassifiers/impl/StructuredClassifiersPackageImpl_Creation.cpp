@@ -1,7 +1,7 @@
 #include "fUML/Semantics/StructuredClassifiers/impl/StructuredClassifiersPackageImpl.hpp"
 
 // metametamodel factory
-#include "ecore/EcoreFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 
 #include <cassert>
 
@@ -17,9 +17,9 @@
 #include "ecore/EStringToStringMapEntry.hpp"
 
 //depending model packages
-#include "ecore/EcorePackage.hpp"
-#include "fUML/FUMLPackage.hpp"
-#include "uml/UmlPackage.hpp"
+#include "ecore/ecorePackage.hpp"
+#include "fUML/fUMLPackage.hpp"
+#include "uml/umlPackage.hpp"
 //include subpackages 
  
 using namespace fUML::Semantics::StructuredClassifiers;
@@ -32,7 +32,7 @@ void StructuredClassifiersPackageImpl::createPackageContents(std::shared_ptr<eco
 	}
 	isCreated = true;
 
-	std::shared_ptr<ecore::EcoreFactory> factory = ecore::EcoreFactory::eInstance();
+	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
 
 	createDispatchStrategyContent(package, factory);
 	createExtensionalValueContent(package, factory);
@@ -46,7 +46,7 @@ void StructuredClassifiersPackageImpl::createPackageContents(std::shared_ptr<eco
 
 }
 
-void StructuredClassifiersPackageImpl::createDispatchStrategyContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void StructuredClassifiersPackageImpl::createDispatchStrategyContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_dispatchStrategy_Class = factory->createEClass_in_EPackage(package, DISPATCHSTRATEGY_CLASS);
 	
@@ -57,7 +57,7 @@ void StructuredClassifiersPackageImpl::createDispatchStrategyContent(std::shared
 	
 }
 
-void StructuredClassifiersPackageImpl::createExtensionalValueContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void StructuredClassifiersPackageImpl::createExtensionalValueContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_extensionalValue_Class = factory->createEClass_in_EPackage(package, EXTENSIONALVALUE_CLASS);
 	
@@ -68,7 +68,7 @@ void StructuredClassifiersPackageImpl::createExtensionalValueContent(std::shared
 	
 }
 
-void StructuredClassifiersPackageImpl::createExtensionalValueListContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void StructuredClassifiersPackageImpl::createExtensionalValueListContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_extensionalValueList_Class = factory->createEClass_in_EPackage(package, EXTENSIONALVALUELIST_CLASS);
 	
@@ -81,7 +81,7 @@ void StructuredClassifiersPackageImpl::createExtensionalValueListContent(std::sh
 	
 }
 
-void StructuredClassifiersPackageImpl::createLinkContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void StructuredClassifiersPackageImpl::createLinkContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_link_Class = factory->createEClass_in_EPackage(package, LINK_CLASS);
 	
@@ -95,7 +95,7 @@ void StructuredClassifiersPackageImpl::createLinkContent(std::shared_ptr<ecore::
 	
 }
 
-void StructuredClassifiersPackageImpl::createObjectContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void StructuredClassifiersPackageImpl::createObjectContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_object_Class = factory->createEClass_in_EPackage(package, OBJECT_CLASS);
 	
@@ -114,7 +114,7 @@ void StructuredClassifiersPackageImpl::createObjectContent(std::shared_ptr<ecore
 	
 }
 
-void StructuredClassifiersPackageImpl::createRedefinitionBasedDispatchStrategyContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void StructuredClassifiersPackageImpl::createRedefinitionBasedDispatchStrategyContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_redefinitionBasedDispatchStrategy_Class = factory->createEClass_in_EPackage(package, REDEFINITIONBASEDDISPATCHSTRATEGY_CLASS);
 	
@@ -124,7 +124,7 @@ void StructuredClassifiersPackageImpl::createRedefinitionBasedDispatchStrategyCo
 	
 }
 
-void StructuredClassifiersPackageImpl::createReferenceContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void StructuredClassifiersPackageImpl::createReferenceContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_reference_Class = factory->createEClass_in_EPackage(package, REFERENCE_CLASS);
 	
@@ -149,7 +149,7 @@ void StructuredClassifiersPackageImpl::createReferenceContent(std::shared_ptr<ec
 	
 }
 
-void StructuredClassifiersPackageImpl::createPackageEDataTypes(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void StructuredClassifiersPackageImpl::createPackageEDataTypes(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	
 }

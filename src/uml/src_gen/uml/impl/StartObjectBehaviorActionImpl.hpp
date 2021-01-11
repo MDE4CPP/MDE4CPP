@@ -28,7 +28,7 @@ namespace uml
 			StartObjectBehaviorActionImpl& operator=(StartObjectBehaviorActionImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			StartObjectBehaviorActionImpl();
 			virtual std::shared_ptr<StartObjectBehaviorAction> getThisStartObjectBehaviorActionPtr() const;
 			virtual void setThisStartObjectBehaviorActionPtr(std::weak_ptr<StartObjectBehaviorAction> thisStartObjectBehaviorActionPtr);

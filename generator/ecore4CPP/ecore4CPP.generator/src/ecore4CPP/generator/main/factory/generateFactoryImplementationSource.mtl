@@ -18,7 +18,7 @@
 [import ecore4CPP::generator::main::generateType /]
 [import ecore4CPP::generator::main::helper /]
 
-[template public generateFactoryImplSource(anEPackage : EPackage) {className : String = anEPackage.name.toUpperFirst().concat('FactoryImpl');}]
+[template public generateFactoryImplSource(anEPackage : EPackage) {className : String = anEPackage.name.concat('FactoryImpl');}]
 [file (anEPackage.generateNamespacePath().concat('/impl/').concat(className).concat('.cpp'), false, 'UTF-8')]
 #include "[anEPackage.generateNamespacePath()/]/impl/[className/].hpp"
 
@@ -43,7 +43,7 @@ using namespace [anEPackage.generateNamespaceDefinition()/];
 [className/]::[className/]()
 {
 	[for (aClass : EClass | anEPackage.eClassifiers->selectByKind(EClass)->asOrderedSet()->sortedBy(name)) ? (aClass.abstract=false)]
-	m_idMap.insert(std::make_pair("[aClass.generateTypeClass()/]", [anEPackage.name.toUpperFirst()/]Package::[aClass.getStaticAttributeIDName()/]));
+	m_idMap.insert(std::make_pair("[aClass.generateTypeClass()/]", [anEPackage.name/]Package::[aClass.getStaticAttributeIDName()/]));
 	[/for]
 [if (generateObjectMonitoring())]
 	m_createdElements.reset(new Bag<ecore::EObject>());
@@ -115,7 +115,7 @@ void [className/]::add(std::shared_ptr<ecore::EObject> obj)
 }
 [/if]
 
-[anEPackage.name.toUpperFirst().concat('Factory')/]* [className/]::create()
+[anEPackage.name.concat('Factory')/]* [className/]::create()
 {
 	return new [className/]();
 }
@@ -130,7 +130,7 @@ std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> [className/]::create(co
 	{
 	[for (aClass : EClass | anEPackage.eClassifiers->selectByKind(EClass)->asOrderedSet()->sortedBy(name)) ? (aClass.abstract=false)]
 	[let ref:OrderedSet(EReference) = aClass.getAllContainers()]
-		case [anEPackage.name.toUpperFirst()/]Package::[aClass.getStaticAttributeIDName()/]:
+		case [anEPackage.name/]Package::[aClass.getStaticAttributeIDName()/]:
 		{
 [if(ref->size()>0)]
 			if (nullptr == container)
@@ -146,7 +146,7 @@ std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> [className/]::create(co
 				{
 					[for(aReference:EReference | ref->sortedBy(name))]
 					//[aClass.name/] has [aReference.name/] as a containment
-					case  [anEPackage.name.toUpperFirst()/]Package::[aReference.getStaticAttributeIDName()/]:
+					case  [anEPackage.name/]Package::[aReference.getStaticAttributeIDName()/]:
 					{
 						auto castedContainer = std::dynamic_pointer_cast<[aReference.generateReferenceType(false)/]>(container);
 						return this->create[aClass.name/]_in_[aReference.name.toUpperFirst()/](castedContainer,metaElementID);
@@ -214,9 +214,9 @@ std::shared_ptr<[aClass.generateTypeClass()/]> [className/]::create[aClass.name/
 [/for]
 
 [comment] kein Paket in Fectory notwendig... ???
-std::shared_ptr<[anEPackage.name.toUpperFirst().concat('Package')/]> [className/]::get[anEPackage.name.toUpperFirst().concat('Package')/]() const
+std::shared_ptr<[anEPackage.name.concat('Package')/]> [className/]::get[anEPackage.name.concat('Package')/]() const
 {
-	return [anEPackage.name.toUpperFirst().concat('Package')/]::eInstance();
+	return [anEPackage.name.concat('Package')/]::eInstance();
 }
 [/comment]
 [/file]
@@ -224,7 +224,7 @@ std::shared_ptr<[anEPackage.name.toUpperFirst().concat('Package')/]> [className/
 
 [template public generateCreateFunctionContent(anEClass : EClass, ref : OrderedSet(EReference), aReference : EReference, anEPackage : EPackage)]
 [if(ref->select(eType = aReference.eType)->size()>1)]
-std::shared_ptr<[anEClass.generateTypeClass()/]Impl> element(new [anEClass.generateTypeClass()/]Impl(par_[aReference.name/], [anEPackage.name.toUpperFirst()/]Package::[aReference.getStaticAttributeIDName()/]));
+std::shared_ptr<[anEClass.generateTypeClass()/]Impl> element(new [anEClass.generateTypeClass()/]Impl(par_[aReference.name/], [anEPackage.name/]Package::[aReference.getStaticAttributeIDName()/]));
 [else]
 std::shared_ptr<[anEClass.generateTypeClass()/]Impl> element(new [anEClass.generateTypeClass()/]Impl(par_[aReference.name/]));
 [/if]

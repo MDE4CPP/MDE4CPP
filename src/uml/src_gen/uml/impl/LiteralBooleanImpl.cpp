@@ -56,8 +56,8 @@
 #include "uml/ValueSpecificationAction.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -189,7 +189,7 @@ std::shared_ptr<ecore::EObject>  LiteralBooleanImpl::copy() const
 
 std::shared_ptr<ecore::EClass> LiteralBooleanImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getLiteralBoolean_Class();
+	return uml::umlPackage::eInstance()->getLiteralBoolean_Class();
 }
 
 //*********************************
@@ -314,8 +314,8 @@ Any LiteralBooleanImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::LITERALBOOLEAN_ATTRIBUTE_VALUE:
-			return eAny(getValue()); //13815
+		case uml::umlPackage::LITERALBOOLEAN_ATTRIBUTE_VALUE:
+			return eAny(getValue()); //13715
 	}
 	return LiteralSpecificationImpl::eGet(featureID, resolve, coreType);
 }
@@ -323,8 +323,8 @@ bool LiteralBooleanImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::LITERALBOOLEAN_ATTRIBUTE_VALUE:
-			return getValue() != false; //13815
+		case uml::umlPackage::LITERALBOOLEAN_ATTRIBUTE_VALUE:
+			return getValue() != false; //13715
 	}
 	return LiteralSpecificationImpl::internalEIsSet(featureID);
 }
@@ -332,11 +332,11 @@ bool LiteralBooleanImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::LITERALBOOLEAN_ATTRIBUTE_VALUE:
+		case uml::umlPackage::LITERALBOOLEAN_ATTRIBUTE_VALUE:
 		{
 			// BOOST CAST
 			bool _value = newValue->get<bool>();
-			setValue(_value); //13815
+			setValue(_value); //13715
 			return true;
 		}
 	}
@@ -355,7 +355,7 @@ void LiteralBooleanImpl::load(std::shared_ptr<persistence::interfaces::XLoadHand
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -392,7 +392,7 @@ void LiteralBooleanImpl::loadAttributes(std::shared_ptr<persistence::interfaces:
 
 void LiteralBooleanImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	LiteralSpecificationImpl::loadNode(nodeName, loadHandler);
@@ -434,7 +434,7 @@ void LiteralBooleanImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 		// Add attributes

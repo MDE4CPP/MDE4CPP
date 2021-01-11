@@ -48,8 +48,8 @@
 #include "ecore/EStructuralFeature.hpp"
 
 //Factories an Package includes
-#include "ecore/impl/EcoreFactoryImpl.hpp"
-#include "ecore/impl/EcorePackageImpl.hpp"
+#include "ecore/impl/ecoreFactoryImpl.hpp"
+#include "ecore/impl/ecorePackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -150,7 +150,7 @@ std::shared_ptr<ecore::EObject>  EAttributeImpl::copy() const
 
 std::shared_ptr<EClass> EAttributeImpl::eStaticClass() const
 {
-	return ecore::EcorePackage::eInstance()->getEAttribute_Class();
+	return ecore::ecorePackage::eInstance()->getEAttribute_Class();
 }
 
 //*********************************
@@ -242,9 +242,9 @@ Any EAttributeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case ecore::EcorePackage::EATTRIBUTE_ATTRIBUTE_EATTRIBUTETYPE:
+		case ecore::ecorePackage::EATTRIBUTE_ATTRIBUTE_EATTRIBUTETYPE:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEAttributeType())); //223
-		case ecore::EcorePackage::EATTRIBUTE_ATTRIBUTE_ID:
+		case ecore::ecorePackage::EATTRIBUTE_ATTRIBUTE_ID:
 			return eAny(isID()); //222
 	}
 	return EStructuralFeatureImpl::eGet(featureID, resolve, coreType);
@@ -253,9 +253,9 @@ bool EAttributeImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case ecore::EcorePackage::EATTRIBUTE_ATTRIBUTE_EATTRIBUTETYPE:
+		case ecore::ecorePackage::EATTRIBUTE_ATTRIBUTE_EATTRIBUTETYPE:
 			return getEAttributeType() != nullptr; //223
-		case ecore::EcorePackage::EATTRIBUTE_ATTRIBUTE_ID:
+		case ecore::ecorePackage::EATTRIBUTE_ATTRIBUTE_ID:
 			return isID() != false; //222
 	}
 	return EStructuralFeatureImpl::internalEIsSet(featureID);
@@ -264,7 +264,7 @@ bool EAttributeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case ecore::EcorePackage::EATTRIBUTE_ATTRIBUTE_ID:
+		case ecore::ecorePackage::EATTRIBUTE_ATTRIBUTE_ID:
 		{
 			// BOOST CAST
 			bool _iD = newValue->get<bool>();
@@ -287,7 +287,7 @@ void EAttributeImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler>
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get EcoreFactory
+	// get ecoreFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -324,7 +324,7 @@ void EAttributeImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLo
 
 void EAttributeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<ecore::EcoreFactory> modelFactory=ecore::EcoreFactory::eInstance();
+	std::shared_ptr<ecore::ecoreFactory> modelFactory=ecore::ecoreFactory::eInstance();
 
 	//load BasePackage Nodes
 	EStructuralFeatureImpl::loadNode(nodeName, loadHandler);
@@ -361,7 +361,7 @@ void EAttributeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 {
 	try
 	{
-		std::shared_ptr<ecore::EcorePackage> package = ecore::EcorePackage::eInstance();
+		std::shared_ptr<ecore::ecorePackage> package = ecore::ecorePackage::eInstance();
 
 	
 		// Add attributes

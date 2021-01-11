@@ -73,8 +73,8 @@
 #include "uml/StructuredActivityNode.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -258,7 +258,7 @@ std::shared_ptr<ecore::EObject>  CreateObjectActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> CreateObjectActionImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getCreateObjectAction_Class();
+	return uml::umlPackage::eInstance()->getCreateObjectAction_Class();
 }
 
 //*********************************
@@ -443,10 +443,10 @@ Any CreateObjectActionImpl::eGet(int featureID, bool resolve, bool coreType) con
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::CREATEOBJECTACTION_ATTRIBUTE_CLASSIFIER:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getClassifier())); //6427
-		case uml::UmlPackage::CREATEOBJECTACTION_ATTRIBUTE_RESULT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //6428
+		case uml::umlPackage::CREATEOBJECTACTION_ATTRIBUTE_CLASSIFIER:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getClassifier())); //6327
+		case uml::umlPackage::CREATEOBJECTACTION_ATTRIBUTE_RESULT:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //6328
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -454,10 +454,10 @@ bool CreateObjectActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::CREATEOBJECTACTION_ATTRIBUTE_CLASSIFIER:
-			return getClassifier() != nullptr; //6427
-		case uml::UmlPackage::CREATEOBJECTACTION_ATTRIBUTE_RESULT:
-			return getResult() != nullptr; //6428
+		case uml::umlPackage::CREATEOBJECTACTION_ATTRIBUTE_CLASSIFIER:
+			return getClassifier() != nullptr; //6327
+		case uml::umlPackage::CREATEOBJECTACTION_ATTRIBUTE_RESULT:
+			return getResult() != nullptr; //6328
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
@@ -465,20 +465,20 @@ bool CreateObjectActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::CREATEOBJECTACTION_ATTRIBUTE_CLASSIFIER:
+		case uml::umlPackage::CREATEOBJECTACTION_ATTRIBUTE_CLASSIFIER:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Classifier> _classifier = std::dynamic_pointer_cast<uml::Classifier>(_temp);
-			setClassifier(_classifier); //6427
+			setClassifier(_classifier); //6327
 			return true;
 		}
-		case uml::UmlPackage::CREATEOBJECTACTION_ATTRIBUTE_RESULT:
+		case uml::umlPackage::CREATEOBJECTACTION_ATTRIBUTE_RESULT:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::OutputPin> _result = std::dynamic_pointer_cast<uml::OutputPin>(_temp);
-			setResult(_result); //6428
+			setResult(_result); //6328
 			return true;
 		}
 	}
@@ -497,7 +497,7 @@ void CreateObjectActionImpl::load(std::shared_ptr<persistence::interfaces::XLoad
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -532,7 +532,7 @@ void CreateObjectActionImpl::loadAttributes(std::shared_ptr<persistence::interfa
 
 void CreateObjectActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -543,7 +543,7 @@ void CreateObjectActionImpl::loadNode(std::string nodeName, std::shared_ptr<pers
 			{
 				typeName = "OutputPin";
 			}
-			std::shared_ptr<ecore::EObject> result = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::UmlPackage::OUTPUTPIN_ATTRIBUTE_CREATEOBJECTACTION);
+			std::shared_ptr<ecore::EObject> result = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::OUTPUTPIN_ATTRIBUTE_CREATEOBJECTACTION);
 			if (result != nullptr)
 			{
 				loadHandler->handleChild(result);
@@ -567,7 +567,7 @@ void CreateObjectActionImpl::resolveReferences(const int featureID, std::list<st
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::CREATEOBJECTACTION_ATTRIBUTE_CLASSIFIER:
+		case uml::umlPackage::CREATEOBJECTACTION_ATTRIBUTE_CLASSIFIER:
 		{
 			if (references.size() == 1)
 			{
@@ -592,7 +592,6 @@ void CreateObjectActionImpl::save(std::shared_ptr<persistence::interfaces::XSave
 	
 	ActivityNodeImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);
@@ -615,7 +614,7 @@ void CreateObjectActionImpl::saveContent(std::shared_ptr<persistence::interfaces
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 		// Save 'result'
 		std::shared_ptr<uml::OutputPin > result = this->getResult();

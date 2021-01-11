@@ -29,7 +29,7 @@ namespace uml
 			RegionImpl& operator=(RegionImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			RegionImpl();
 			virtual std::shared_ptr<Region> getThisRegionPtr() const;
 			virtual void setThisRegionPtr(std::weak_ptr<Region> thisRegionPtr);

@@ -19,7 +19,7 @@
 
 
 [template public generateModelLocusHeader(aPackage : Package) {
-upperName : String = aPackage.getPackageName().sanitize().toUpperFirst(); originalName : String = aPackage.getPackageName();}]
+upperName : String = aPackage.getPackageName().sanitize(); originalName : String = aPackage.generateNamespacePath(false);}]
 [file (originalName.concat('Exec/') + upperName.concat('Locus.hpp'), false, 'UTF-8')]
 [startGuard(aPackage,'LocusExecution')/]
 
@@ -27,7 +27,7 @@ upperName : String = aPackage.getPackageName().sanitize().toUpperFirst(); origin
 
 #include "ecore/impl/EObjectImpl.hpp"
 
-namespace [originalName/] 
+namespace [aPackage.generateNamespace(false)/] 
 {
 	class [upperName/]Locus: virtual public PSCS::Semantics::Loci::CS_Locus
 	{
@@ -54,7 +54,7 @@ namespace [originalName/]
 
 #include "ecore/impl/EObjectImpl.hpp"
 
-namespace [originalName/] 
+namespace [aPackage.generateNamespace(false)/] 
 {
 	class [upperName/]LocusImpl :virtual public PSCS::Semantics::Loci::CS_LocusImpl, virtual public [upperName/]Locus
 	{

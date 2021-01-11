@@ -75,8 +75,8 @@
 #include "uml/Trigger.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -275,7 +275,7 @@ std::shared_ptr<ecore::EObject>  AcceptCallActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> AcceptCallActionImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getAcceptCallAction_Class();
+	return uml::umlPackage::eInstance()->getAcceptCallAction_Class();
 }
 
 //*********************************
@@ -438,7 +438,7 @@ Any AcceptCallActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::ACCEPTCALLACTION_ATTRIBUTE_RETURNINFORMATION:
+		case uml::umlPackage::ACCEPTCALLACTION_ATTRIBUTE_RETURNINFORMATION:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getReturnInformation())); //230
 	}
 	return AcceptEventActionImpl::eGet(featureID, resolve, coreType);
@@ -447,7 +447,7 @@ bool AcceptCallActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::ACCEPTCALLACTION_ATTRIBUTE_RETURNINFORMATION:
+		case uml::umlPackage::ACCEPTCALLACTION_ATTRIBUTE_RETURNINFORMATION:
 			return getReturnInformation() != nullptr; //230
 	}
 	return AcceptEventActionImpl::internalEIsSet(featureID);
@@ -456,7 +456,7 @@ bool AcceptCallActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::ACCEPTCALLACTION_ATTRIBUTE_RETURNINFORMATION:
+		case uml::umlPackage::ACCEPTCALLACTION_ATTRIBUTE_RETURNINFORMATION:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -480,7 +480,7 @@ void AcceptCallActionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHa
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -496,7 +496,7 @@ void AcceptCallActionImpl::loadAttributes(std::shared_ptr<persistence::interface
 
 void AcceptCallActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -545,7 +545,6 @@ void AcceptCallActionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHa
 	
 	ActivityNodeImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);
@@ -569,7 +568,7 @@ void AcceptCallActionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 		// Save 'returnInformation'
 		std::shared_ptr<uml::OutputPin > returnInformation = this->getReturnInformation();

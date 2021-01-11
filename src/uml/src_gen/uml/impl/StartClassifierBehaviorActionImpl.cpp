@@ -73,8 +73,8 @@
 #include "uml/StructuredActivityNode.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -256,7 +256,7 @@ std::shared_ptr<ecore::EObject>  StartClassifierBehaviorActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> StartClassifierBehaviorActionImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getStartClassifierBehaviorAction_Class();
+	return uml::umlPackage::eInstance()->getStartClassifierBehaviorAction_Class();
 }
 
 //*********************************
@@ -413,8 +413,8 @@ Any StartClassifierBehaviorActionImpl::eGet(int featureID, bool resolve, bool co
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::STARTCLASSIFIERBEHAVIORACTION_ATTRIBUTE_OBJECT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getObject())); //21927
+		case uml::umlPackage::STARTCLASSIFIERBEHAVIORACTION_ATTRIBUTE_OBJECT:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getObject())); //21827
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -422,8 +422,8 @@ bool StartClassifierBehaviorActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::STARTCLASSIFIERBEHAVIORACTION_ATTRIBUTE_OBJECT:
-			return getObject() != nullptr; //21927
+		case uml::umlPackage::STARTCLASSIFIERBEHAVIORACTION_ATTRIBUTE_OBJECT:
+			return getObject() != nullptr; //21827
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
@@ -431,12 +431,12 @@ bool StartClassifierBehaviorActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::STARTCLASSIFIERBEHAVIORACTION_ATTRIBUTE_OBJECT:
+		case uml::umlPackage::STARTCLASSIFIERBEHAVIORACTION_ATTRIBUTE_OBJECT:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::InputPin> _object = std::dynamic_pointer_cast<uml::InputPin>(_temp);
-			setObject(_object); //21927
+			setObject(_object); //21827
 			return true;
 		}
 	}
@@ -455,7 +455,7 @@ void StartClassifierBehaviorActionImpl::load(std::shared_ptr<persistence::interf
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -471,7 +471,7 @@ void StartClassifierBehaviorActionImpl::loadAttributes(std::shared_ptr<persisten
 
 void StartClassifierBehaviorActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -518,7 +518,6 @@ void StartClassifierBehaviorActionImpl::save(std::shared_ptr<persistence::interf
 	
 	ActivityNodeImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);
@@ -541,7 +540,7 @@ void StartClassifierBehaviorActionImpl::saveContent(std::shared_ptr<persistence:
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 		// Save 'object'
 		std::shared_ptr<uml::InputPin > object = this->getObject();

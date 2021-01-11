@@ -37,8 +37,8 @@
 #include "uml/Element.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -106,7 +106,7 @@ std::shared_ptr<ecore::EObject>  CommentImpl::copy() const
 
 std::shared_ptr<ecore::EClass> CommentImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getComment_Class();
+	return uml::umlPackage::eInstance()->getComment_Class();
 }
 
 //*********************************
@@ -199,7 +199,7 @@ Any CommentImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::COMMENT_ATTRIBUTE_ANNOTATEDELEMENT:
+		case uml::umlPackage::COMMENT_ATTRIBUTE_ANNOTATEDELEMENT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Element>::iterator iter = m_annotatedElement->begin();
@@ -209,10 +209,10 @@ Any CommentImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //463
+			return eAny(tempList); //453
 		}
-		case uml::UmlPackage::COMMENT_ATTRIBUTE_BODY:
-			return eAny(getBody()); //464
+		case uml::umlPackage::COMMENT_ATTRIBUTE_BODY:
+			return eAny(getBody()); //454
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -220,10 +220,10 @@ bool CommentImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::COMMENT_ATTRIBUTE_ANNOTATEDELEMENT:
-			return getAnnotatedElement() != nullptr; //463
-		case uml::UmlPackage::COMMENT_ATTRIBUTE_BODY:
-			return getBody() != ""; //464
+		case uml::umlPackage::COMMENT_ATTRIBUTE_ANNOTATEDELEMENT:
+			return getAnnotatedElement() != nullptr; //453
+		case uml::umlPackage::COMMENT_ATTRIBUTE_BODY:
+			return getBody() != ""; //454
 	}
 	return ElementImpl::internalEIsSet(featureID);
 }
@@ -231,7 +231,7 @@ bool CommentImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::COMMENT_ATTRIBUTE_ANNOTATEDELEMENT:
+		case uml::umlPackage::COMMENT_ATTRIBUTE_ANNOTATEDELEMENT:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -267,11 +267,11 @@ bool CommentImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case uml::UmlPackage::COMMENT_ATTRIBUTE_BODY:
+		case uml::umlPackage::COMMENT_ATTRIBUTE_BODY:
 		{
 			// BOOST CAST
 			std::string _body = newValue->get<std::string>();
-			setBody(_body); //464
+			setBody(_body); //454
 			return true;
 		}
 	}
@@ -290,7 +290,7 @@ void CommentImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> lo
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -334,7 +334,7 @@ void CommentImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadH
 
 void CommentImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	ElementImpl::loadNode(nodeName, loadHandler);
@@ -344,7 +344,7 @@ void CommentImpl::resolveReferences(const int featureID, std::list<std::shared_p
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::COMMENT_ATTRIBUTE_ANNOTATEDELEMENT:
+		case uml::umlPackage::COMMENT_ATTRIBUTE_ANNOTATEDELEMENT:
 		{
 			std::shared_ptr<Bag<uml::Element>> _annotatedElement = getAnnotatedElement();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -378,7 +378,7 @@ void CommentImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 		// Add attributes

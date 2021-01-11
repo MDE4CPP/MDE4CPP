@@ -28,7 +28,7 @@ namespace uml
 			PartDecompositionImpl& operator=(PartDecompositionImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			PartDecompositionImpl();
 			virtual std::shared_ptr<PartDecomposition> getThisPartDecompositionPtr() const;
 			virtual void setThisPartDecompositionPtr(std::weak_ptr<PartDecomposition> thisPartDecompositionPtr);

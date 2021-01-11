@@ -51,8 +51,8 @@
 #include "uml/StringExpression.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -144,7 +144,7 @@ std::shared_ptr<ecore::EObject>  TriggerImpl::copy() const
 
 std::shared_ptr<ecore::EClass> TriggerImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getTrigger_Class();
+	return uml::umlPackage::eInstance()->getTrigger_Class();
 }
 
 //*********************************
@@ -254,9 +254,9 @@ Any TriggerImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::TRIGGER_ATTRIBUTE_EVENT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEvent())); //2449
-		case uml::UmlPackage::TRIGGER_ATTRIBUTE_PORT:
+		case uml::umlPackage::TRIGGER_ATTRIBUTE_EVENT:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEvent())); //2439
+		case uml::umlPackage::TRIGGER_ATTRIBUTE_PORT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Port>::iterator iter = m_port->begin();
@@ -266,7 +266,7 @@ Any TriggerImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //24410
+			return eAny(tempList); //24310
 		}
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
@@ -275,10 +275,10 @@ bool TriggerImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::TRIGGER_ATTRIBUTE_EVENT:
-			return getEvent() != nullptr; //2449
-		case uml::UmlPackage::TRIGGER_ATTRIBUTE_PORT:
-			return getPort() != nullptr; //24410
+		case uml::umlPackage::TRIGGER_ATTRIBUTE_EVENT:
+			return getEvent() != nullptr; //2439
+		case uml::umlPackage::TRIGGER_ATTRIBUTE_PORT:
+			return getPort() != nullptr; //24310
 	}
 	return NamedElementImpl::internalEIsSet(featureID);
 }
@@ -286,15 +286,15 @@ bool TriggerImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::TRIGGER_ATTRIBUTE_EVENT:
+		case uml::umlPackage::TRIGGER_ATTRIBUTE_EVENT:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Event> _event = std::dynamic_pointer_cast<uml::Event>(_temp);
-			setEvent(_event); //2449
+			setEvent(_event); //2439
 			return true;
 		}
-		case uml::UmlPackage::TRIGGER_ATTRIBUTE_PORT:
+		case uml::umlPackage::TRIGGER_ATTRIBUTE_PORT:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -346,7 +346,7 @@ void TriggerImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> lo
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -388,7 +388,7 @@ void TriggerImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadH
 
 void TriggerImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	NamedElementImpl::loadNode(nodeName, loadHandler);
@@ -398,7 +398,7 @@ void TriggerImpl::resolveReferences(const int featureID, std::list<std::shared_p
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::TRIGGER_ATTRIBUTE_EVENT:
+		case uml::umlPackage::TRIGGER_ATTRIBUTE_EVENT:
 		{
 			if (references.size() == 1)
 			{
@@ -410,7 +410,7 @@ void TriggerImpl::resolveReferences(const int featureID, std::list<std::shared_p
 			return;
 		}
 
-		case uml::UmlPackage::TRIGGER_ATTRIBUTE_PORT:
+		case uml::umlPackage::TRIGGER_ATTRIBUTE_PORT:
 		{
 			std::shared_ptr<Bag<uml::Port>> _port = getPort();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -447,7 +447,7 @@ void TriggerImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 

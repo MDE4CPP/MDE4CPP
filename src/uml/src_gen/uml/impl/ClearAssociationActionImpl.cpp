@@ -75,8 +75,8 @@
 #include "uml/StructuredActivityNode.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -260,7 +260,7 @@ std::shared_ptr<ecore::EObject>  ClearAssociationActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ClearAssociationActionImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getClearAssociationAction_Class();
+	return uml::umlPackage::eInstance()->getClearAssociationAction_Class();
 }
 
 //*********************************
@@ -433,10 +433,10 @@ Any ClearAssociationActionImpl::eGet(int featureID, bool resolve, bool coreType)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::CLEARASSOCIATIONACTION_ATTRIBUTE_ASSOCIATION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getAssociation())); //4027
-		case uml::UmlPackage::CLEARASSOCIATIONACTION_ATTRIBUTE_OBJECT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getObject())); //4028
+		case uml::umlPackage::CLEARASSOCIATIONACTION_ATTRIBUTE_ASSOCIATION:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getAssociation())); //3927
+		case uml::umlPackage::CLEARASSOCIATIONACTION_ATTRIBUTE_OBJECT:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getObject())); //3928
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -444,10 +444,10 @@ bool ClearAssociationActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::CLEARASSOCIATIONACTION_ATTRIBUTE_ASSOCIATION:
-			return getAssociation() != nullptr; //4027
-		case uml::UmlPackage::CLEARASSOCIATIONACTION_ATTRIBUTE_OBJECT:
-			return getObject() != nullptr; //4028
+		case uml::umlPackage::CLEARASSOCIATIONACTION_ATTRIBUTE_ASSOCIATION:
+			return getAssociation() != nullptr; //3927
+		case uml::umlPackage::CLEARASSOCIATIONACTION_ATTRIBUTE_OBJECT:
+			return getObject() != nullptr; //3928
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
@@ -455,20 +455,20 @@ bool ClearAssociationActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::CLEARASSOCIATIONACTION_ATTRIBUTE_ASSOCIATION:
+		case uml::umlPackage::CLEARASSOCIATIONACTION_ATTRIBUTE_ASSOCIATION:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Association> _association = std::dynamic_pointer_cast<uml::Association>(_temp);
-			setAssociation(_association); //4027
+			setAssociation(_association); //3927
 			return true;
 		}
-		case uml::UmlPackage::CLEARASSOCIATIONACTION_ATTRIBUTE_OBJECT:
+		case uml::umlPackage::CLEARASSOCIATIONACTION_ATTRIBUTE_OBJECT:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::InputPin> _object = std::dynamic_pointer_cast<uml::InputPin>(_temp);
-			setObject(_object); //4028
+			setObject(_object); //3928
 			return true;
 		}
 	}
@@ -487,7 +487,7 @@ void ClearAssociationActionImpl::load(std::shared_ptr<persistence::interfaces::X
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -522,7 +522,7 @@ void ClearAssociationActionImpl::loadAttributes(std::shared_ptr<persistence::int
 
 void ClearAssociationActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -558,7 +558,7 @@ void ClearAssociationActionImpl::resolveReferences(const int featureID, std::lis
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::CLEARASSOCIATIONACTION_ATTRIBUTE_ASSOCIATION:
+		case uml::umlPackage::CLEARASSOCIATIONACTION_ATTRIBUTE_ASSOCIATION:
 		{
 			if (references.size() == 1)
 			{
@@ -583,7 +583,6 @@ void ClearAssociationActionImpl::save(std::shared_ptr<persistence::interfaces::X
 	
 	ActivityNodeImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);
@@ -606,7 +605,7 @@ void ClearAssociationActionImpl::saveContent(std::shared_ptr<persistence::interf
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 		// Save 'object'
 		std::shared_ptr<uml::InputPin > object = this->getObject();

@@ -56,8 +56,8 @@
 #include "uml/ValueSpecificationAction.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -189,7 +189,7 @@ std::shared_ptr<ecore::EObject>  LiteralUnlimitedNaturalImpl::copy() const
 
 std::shared_ptr<ecore::EClass> LiteralUnlimitedNaturalImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getLiteralUnlimitedNatural_Class();
+	return uml::umlPackage::eInstance()->getLiteralUnlimitedNatural_Class();
 }
 
 //*********************************
@@ -314,8 +314,8 @@ Any LiteralUnlimitedNaturalImpl::eGet(int featureID, bool resolve, bool coreType
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::LITERALUNLIMITEDNATURAL_ATTRIBUTE_VALUE:
-			return eAny(getValue()); //14415
+		case uml::umlPackage::LITERALUNLIMITEDNATURAL_ATTRIBUTE_VALUE:
+			return eAny(getValue()); //14315
 	}
 	return LiteralSpecificationImpl::eGet(featureID, resolve, coreType);
 }
@@ -323,8 +323,8 @@ bool LiteralUnlimitedNaturalImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::LITERALUNLIMITEDNATURAL_ATTRIBUTE_VALUE:
-			return getValue() != 0; //14415
+		case uml::umlPackage::LITERALUNLIMITEDNATURAL_ATTRIBUTE_VALUE:
+			return getValue() != 0; //14315
 	}
 	return LiteralSpecificationImpl::internalEIsSet(featureID);
 }
@@ -332,11 +332,11 @@ bool LiteralUnlimitedNaturalImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::LITERALUNLIMITEDNATURAL_ATTRIBUTE_VALUE:
+		case uml::umlPackage::LITERALUNLIMITEDNATURAL_ATTRIBUTE_VALUE:
 		{
 			// BOOST CAST
 			int _value = newValue->get<int>();
-			setValue(_value); //14415
+			setValue(_value); //14315
 			return true;
 		}
 	}
@@ -355,7 +355,7 @@ void LiteralUnlimitedNaturalImpl::load(std::shared_ptr<persistence::interfaces::
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -392,7 +392,7 @@ void LiteralUnlimitedNaturalImpl::loadAttributes(std::shared_ptr<persistence::in
 
 void LiteralUnlimitedNaturalImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	LiteralSpecificationImpl::loadNode(nodeName, loadHandler);
@@ -434,7 +434,7 @@ void LiteralUnlimitedNaturalImpl::saveContent(std::shared_ptr<persistence::inter
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 		// Add attributes

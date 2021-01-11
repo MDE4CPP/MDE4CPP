@@ -57,8 +57,8 @@
 #include "uml/StringExpression.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -184,7 +184,7 @@ std::shared_ptr<ecore::EObject>  DestructionOccurrenceSpecificationImpl::copy() 
 
 std::shared_ptr<ecore::EClass> DestructionOccurrenceSpecificationImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getDestructionOccurrenceSpecification_Class();
+	return uml::umlPackage::eInstance()->getDestructionOccurrenceSpecification_Class();
 }
 
 //*********************************
@@ -305,7 +305,7 @@ void DestructionOccurrenceSpecificationImpl::load(std::shared_ptr<persistence::i
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -321,7 +321,7 @@ void DestructionOccurrenceSpecificationImpl::loadAttributes(std::shared_ptr<pers
 
 void DestructionOccurrenceSpecificationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	MessageOccurrenceSpecificationImpl::loadNode(nodeName, loadHandler);
@@ -362,7 +362,7 @@ void DestructionOccurrenceSpecificationImpl::saveContent(std::shared_ptr<persist
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 

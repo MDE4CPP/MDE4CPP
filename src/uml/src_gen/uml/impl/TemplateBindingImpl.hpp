@@ -28,7 +28,7 @@ namespace uml
 			TemplateBindingImpl& operator=(TemplateBindingImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			TemplateBindingImpl();
 			virtual std::shared_ptr<TemplateBinding> getThisTemplateBindingPtr() const;
 			virtual void setThisTemplateBindingPtr(std::weak_ptr<TemplateBinding> thisTemplateBindingPtr);

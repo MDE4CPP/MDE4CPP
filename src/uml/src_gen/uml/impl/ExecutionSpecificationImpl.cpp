@@ -57,8 +57,8 @@
 #include "uml/StringExpression.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -180,7 +180,7 @@ std::shared_ptr<ecore::EObject>  ExecutionSpecificationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ExecutionSpecificationImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getExecutionSpecification_Class();
+	return uml::umlPackage::eInstance()->getExecutionSpecification_Class();
 }
 
 //*********************************
@@ -302,10 +302,10 @@ Any ExecutionSpecificationImpl::eGet(int featureID, bool resolve, bool coreType)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::EXECUTIONSPECIFICATION_ATTRIBUTE_FINISH:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getFinish())); //9213
-		case uml::UmlPackage::EXECUTIONSPECIFICATION_ATTRIBUTE_START:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getStart())); //9214
+		case uml::umlPackage::EXECUTIONSPECIFICATION_ATTRIBUTE_FINISH:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getFinish())); //9113
+		case uml::umlPackage::EXECUTIONSPECIFICATION_ATTRIBUTE_START:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getStart())); //9114
 	}
 	return InteractionFragmentImpl::eGet(featureID, resolve, coreType);
 }
@@ -313,10 +313,10 @@ bool ExecutionSpecificationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::EXECUTIONSPECIFICATION_ATTRIBUTE_FINISH:
-			return getFinish() != nullptr; //9213
-		case uml::UmlPackage::EXECUTIONSPECIFICATION_ATTRIBUTE_START:
-			return getStart() != nullptr; //9214
+		case uml::umlPackage::EXECUTIONSPECIFICATION_ATTRIBUTE_FINISH:
+			return getFinish() != nullptr; //9113
+		case uml::umlPackage::EXECUTIONSPECIFICATION_ATTRIBUTE_START:
+			return getStart() != nullptr; //9114
 	}
 	return InteractionFragmentImpl::internalEIsSet(featureID);
 }
@@ -324,20 +324,20 @@ bool ExecutionSpecificationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::EXECUTIONSPECIFICATION_ATTRIBUTE_FINISH:
+		case uml::umlPackage::EXECUTIONSPECIFICATION_ATTRIBUTE_FINISH:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::OccurrenceSpecification> _finish = std::dynamic_pointer_cast<uml::OccurrenceSpecification>(_temp);
-			setFinish(_finish); //9213
+			setFinish(_finish); //9113
 			return true;
 		}
-		case uml::UmlPackage::EXECUTIONSPECIFICATION_ATTRIBUTE_START:
+		case uml::umlPackage::EXECUTIONSPECIFICATION_ATTRIBUTE_START:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::OccurrenceSpecification> _start = std::dynamic_pointer_cast<uml::OccurrenceSpecification>(_temp);
-			setStart(_start); //9214
+			setStart(_start); //9114
 			return true;
 		}
 	}
@@ -356,7 +356,7 @@ void ExecutionSpecificationImpl::load(std::shared_ptr<persistence::interfaces::X
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -398,7 +398,7 @@ void ExecutionSpecificationImpl::loadAttributes(std::shared_ptr<persistence::int
 
 void ExecutionSpecificationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	InteractionFragmentImpl::loadNode(nodeName, loadHandler);
@@ -408,7 +408,7 @@ void ExecutionSpecificationImpl::resolveReferences(const int featureID, std::lis
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::EXECUTIONSPECIFICATION_ATTRIBUTE_FINISH:
+		case uml::umlPackage::EXECUTIONSPECIFICATION_ATTRIBUTE_FINISH:
 		{
 			if (references.size() == 1)
 			{
@@ -420,7 +420,7 @@ void ExecutionSpecificationImpl::resolveReferences(const int featureID, std::lis
 			return;
 		}
 
-		case uml::UmlPackage::EXECUTIONSPECIFICATION_ATTRIBUTE_START:
+		case uml::umlPackage::EXECUTIONSPECIFICATION_ATTRIBUTE_START:
 		{
 			if (references.size() == 1)
 			{
@@ -458,7 +458,7 @@ void ExecutionSpecificationImpl::saveContent(std::shared_ptr<persistence::interf
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 

@@ -1,7 +1,7 @@
 #include "PSCS/Semantics/CommonBehavior/impl/CommonBehaviorPackageImpl.hpp"
 
 // metametamodel factory
-#include "ecore/EcoreFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 
 #include <cassert>
 
@@ -19,9 +19,9 @@
 
 //depending model packages
 #include "PSCS/PSCSPackage.hpp"
-#include "ecore/EcorePackage.hpp"
-#include "fUML/FUMLPackage.hpp"
-#include "uml/UmlPackage.hpp"
+#include "ecore/ecorePackage.hpp"
+#include "fUML/fUMLPackage.hpp"
+#include "uml/umlPackage.hpp"
 //include subpackages 
  
 using namespace PSCS::Semantics::CommonBehavior;
@@ -34,7 +34,7 @@ void CommonBehaviorPackageImpl::createPackageContents(std::shared_ptr<ecore::EPa
 	}
 	isCreated = true;
 
-	std::shared_ptr<ecore::EcoreFactory> factory = ecore::EcoreFactory::eInstance();
+	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
 
 	createCS_CallEventExecutionContent(package, factory);
 	createCS_EventOccurrenceContent(package, factory);
@@ -43,7 +43,7 @@ void CommonBehaviorPackageImpl::createPackageContents(std::shared_ptr<ecore::EPa
 
 }
 
-void CommonBehaviorPackageImpl::createCS_CallEventExecutionContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void CommonBehaviorPackageImpl::createCS_CallEventExecutionContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_cS_CallEventExecution_Class = factory->createEClass_in_EPackage(package, CS_CALLEVENTEXECUTION_CLASS);
 	
@@ -55,7 +55,7 @@ void CommonBehaviorPackageImpl::createCS_CallEventExecutionContent(std::shared_p
 	
 }
 
-void CommonBehaviorPackageImpl::createCS_EventOccurrenceContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void CommonBehaviorPackageImpl::createCS_EventOccurrenceContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_cS_EventOccurrence_Class = factory->createEClass_in_EPackage(package, CS_EVENTOCCURRENCE_CLASS);
 	m_cS_EventOccurrence_Attribute_propagationInward = factory->createEAttribute_in_EContainingClass(m_cS_EventOccurrence_Class, CS_EVENTOCCURRENCE_ATTRIBUTE_PROPAGATIONINWARD);
@@ -72,7 +72,7 @@ void CommonBehaviorPackageImpl::createCS_EventOccurrenceContent(std::shared_ptr<
 	
 }
 
-void CommonBehaviorPackageImpl::createPackageEDataTypes(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void CommonBehaviorPackageImpl::createPackageEDataTypes(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	
 }

@@ -28,7 +28,7 @@ namespace uml
 			LoopNodeImpl& operator=(LoopNodeImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			LoopNodeImpl();
 			virtual std::shared_ptr<LoopNode> getThisLoopNodePtr() const;
 			virtual void setThisLoopNodePtr(std::weak_ptr<LoopNode> thisLoopNodePtr);

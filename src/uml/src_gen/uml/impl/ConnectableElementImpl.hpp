@@ -29,7 +29,7 @@ namespace uml
 			ConnectableElementImpl& operator=(ConnectableElementImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			ConnectableElementImpl();
 			virtual std::shared_ptr<ConnectableElement> getThisConnectableElementPtr() const;
 			virtual void setThisConnectableElementPtr(std::weak_ptr<ConnectableElement> thisConnectableElementPtr);

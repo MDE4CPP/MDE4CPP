@@ -25,7 +25,7 @@
 //Includes from codegen annotation
 #include "fUML/FUMLFactory.hpp"
 
-#include "uml/UmlPackage.hpp"
+#include "uml/umlPackage.hpp"
 #include "uml/Namespace.hpp"
 #include "uml/Interface.hpp"
 #include "uml/Parameter.hpp"
@@ -44,10 +44,10 @@
 #include "PSCS/Semantics/StructuredClassifiers/impl/StructuredClassifiersFactoryImpl.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/impl/StructuredClassifiersPackageImpl.hpp"
 
-#include "PSCS/Semantics/SemanticsFactory.hpp"
-#include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "PSCS/PSCSFactory.hpp"
 #include "PSCS/PSCSPackage.hpp"
+#include "PSCS/Semantics/SemanticsFactory.hpp"
+#include "PSCS/Semantics/SemanticsPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -114,7 +114,7 @@ bool CS_DispatchOperationOfInterfaceStrategyImpl::operationsMatch(std::shared_pt
 	// Otherwise, behaves like fUML RedefinitionBasedDispatchStrategy
 
 	bool matches = true;
-	if(baseOperation->getNamespace().lock()->getMetaElementID() == uml::UmlPackage::INTERFACE_CLASS) {
+	if(baseOperation->getNamespace().lock()->getMetaElementID() == uml::umlPackage::INTERFACE_CLASS) {
 		matches = (baseOperation->getName()) == (ownedOperation->getName());
 		matches = matches && ((baseOperation->getOwnedParameter()->size()) == (ownedOperation->getOwnedParameter()->size()));
 		std::shared_ptr<Bag<uml::Parameter>> ownedOperationParameters = ownedOperation->getOwnedParameter();

@@ -28,7 +28,7 @@ namespace uml
 			TemplateSignatureImpl& operator=(TemplateSignatureImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			TemplateSignatureImpl();
 			virtual std::shared_ptr<TemplateSignature> getThisTemplateSignaturePtr() const;
 			virtual void setThisTemplateSignaturePtr(std::weak_ptr<TemplateSignature> thisTemplateSignaturePtr);

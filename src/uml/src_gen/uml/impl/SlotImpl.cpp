@@ -43,8 +43,8 @@
 #include "uml/ValueSpecification.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -134,7 +134,7 @@ std::shared_ptr<ecore::EObject>  SlotImpl::copy() const
 
 std::shared_ptr<ecore::EClass> SlotImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getSlot_Class();
+	return uml::umlPackage::eInstance()->getSlot_Class();
 }
 
 //*********************************
@@ -264,11 +264,11 @@ Any SlotImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::SLOT_ATTRIBUTE_DEFININGFEATURE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDefiningFeature())); //2183
-		case uml::UmlPackage::SLOT_ATTRIBUTE_OWNINGINSTANCE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOwningInstance().lock())); //2185
-		case uml::UmlPackage::SLOT_ATTRIBUTE_VALUE:
+		case uml::umlPackage::SLOT_ATTRIBUTE_DEFININGFEATURE:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDefiningFeature())); //2173
+		case uml::umlPackage::SLOT_ATTRIBUTE_OWNINGINSTANCE:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOwningInstance().lock())); //2175
+		case uml::umlPackage::SLOT_ATTRIBUTE_VALUE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::ValueSpecification>::iterator iter = m_value->begin();
@@ -278,7 +278,7 @@ Any SlotImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //2184
+			return eAny(tempList); //2174
 		}
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
@@ -287,12 +287,12 @@ bool SlotImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::SLOT_ATTRIBUTE_DEFININGFEATURE:
-			return getDefiningFeature() != nullptr; //2183
-		case uml::UmlPackage::SLOT_ATTRIBUTE_OWNINGINSTANCE:
-			return getOwningInstance().lock() != nullptr; //2185
-		case uml::UmlPackage::SLOT_ATTRIBUTE_VALUE:
-			return getValue() != nullptr; //2184
+		case uml::umlPackage::SLOT_ATTRIBUTE_DEFININGFEATURE:
+			return getDefiningFeature() != nullptr; //2173
+		case uml::umlPackage::SLOT_ATTRIBUTE_OWNINGINSTANCE:
+			return getOwningInstance().lock() != nullptr; //2175
+		case uml::umlPackage::SLOT_ATTRIBUTE_VALUE:
+			return getValue() != nullptr; //2174
 	}
 	return ElementImpl::internalEIsSet(featureID);
 }
@@ -300,23 +300,23 @@ bool SlotImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::SLOT_ATTRIBUTE_DEFININGFEATURE:
+		case uml::umlPackage::SLOT_ATTRIBUTE_DEFININGFEATURE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::StructuralFeature> _definingFeature = std::dynamic_pointer_cast<uml::StructuralFeature>(_temp);
-			setDefiningFeature(_definingFeature); //2183
+			setDefiningFeature(_definingFeature); //2173
 			return true;
 		}
-		case uml::UmlPackage::SLOT_ATTRIBUTE_OWNINGINSTANCE:
+		case uml::umlPackage::SLOT_ATTRIBUTE_OWNINGINSTANCE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::InstanceSpecification> _owningInstance = std::dynamic_pointer_cast<uml::InstanceSpecification>(_temp);
-			setOwningInstance(_owningInstance); //2185
+			setOwningInstance(_owningInstance); //2175
 			return true;
 		}
-		case uml::UmlPackage::SLOT_ATTRIBUTE_VALUE:
+		case uml::umlPackage::SLOT_ATTRIBUTE_VALUE:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -368,7 +368,7 @@ void SlotImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadH
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -403,7 +403,7 @@ void SlotImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHand
 
 void SlotImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -415,7 +415,7 @@ void SlotImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inter
 				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			std::shared_ptr<ecore::EObject> value = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::UmlPackage::VALUESPECIFICATION_ATTRIBUTE_OWNINGSLOT);
+			std::shared_ptr<ecore::EObject> value = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::VALUESPECIFICATION_ATTRIBUTE_OWNINGSLOT);
 			if (value != nullptr)
 			{
 				loadHandler->handleChild(value);
@@ -439,7 +439,7 @@ void SlotImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::SLOT_ATTRIBUTE_DEFININGFEATURE:
+		case uml::umlPackage::SLOT_ATTRIBUTE_DEFININGFEATURE:
 		{
 			if (references.size() == 1)
 			{
@@ -451,7 +451,7 @@ void SlotImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<
 			return;
 		}
 
-		case uml::UmlPackage::SLOT_ATTRIBUTE_OWNINGINSTANCE:
+		case uml::umlPackage::SLOT_ATTRIBUTE_OWNINGINSTANCE:
 		{
 			if (references.size() == 1)
 			{
@@ -483,7 +483,7 @@ void SlotImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 		// Save 'value'
 		for (std::shared_ptr<uml::ValueSpecification> value : *this->getValue()) 

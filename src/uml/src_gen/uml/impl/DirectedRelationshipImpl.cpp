@@ -40,8 +40,8 @@
 #include "uml/Relationship.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -108,7 +108,7 @@ std::shared_ptr<ecore::EObject>  DirectedRelationshipImpl::copy() const
 
 std::shared_ptr<ecore::EClass> DirectedRelationshipImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getDirectedRelationship_Class();
+	return uml::umlPackage::eInstance()->getDirectedRelationship_Class();
 }
 
 //*********************************
@@ -241,7 +241,7 @@ Any DirectedRelationshipImpl::eGet(int featureID, bool resolve, bool coreType) c
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::DIRECTEDRELATIONSHIP_ATTRIBUTE_SOURCE:
+		case uml::umlPackage::DIRECTEDRELATIONSHIP_ATTRIBUTE_SOURCE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Element>::iterator iter = m_source->begin();
@@ -251,9 +251,9 @@ Any DirectedRelationshipImpl::eGet(int featureID, bool resolve, bool coreType) c
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //774
+			return eAny(tempList); //764
 		}
-		case uml::UmlPackage::DIRECTEDRELATIONSHIP_ATTRIBUTE_TARGET:
+		case uml::umlPackage::DIRECTEDRELATIONSHIP_ATTRIBUTE_TARGET:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Element>::iterator iter = m_target->begin();
@@ -263,7 +263,7 @@ Any DirectedRelationshipImpl::eGet(int featureID, bool resolve, bool coreType) c
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //775
+			return eAny(tempList); //765
 		}
 	}
 	return RelationshipImpl::eGet(featureID, resolve, coreType);
@@ -272,10 +272,10 @@ bool DirectedRelationshipImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::DIRECTEDRELATIONSHIP_ATTRIBUTE_SOURCE:
-			return getSource() != nullptr; //774
-		case uml::UmlPackage::DIRECTEDRELATIONSHIP_ATTRIBUTE_TARGET:
-			return getTarget() != nullptr; //775
+		case uml::umlPackage::DIRECTEDRELATIONSHIP_ATTRIBUTE_SOURCE:
+			return getSource() != nullptr; //764
+		case uml::umlPackage::DIRECTEDRELATIONSHIP_ATTRIBUTE_TARGET:
+			return getTarget() != nullptr; //765
 	}
 	return RelationshipImpl::internalEIsSet(featureID);
 }
@@ -299,7 +299,7 @@ void DirectedRelationshipImpl::load(std::shared_ptr<persistence::interfaces::XLo
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -315,7 +315,7 @@ void DirectedRelationshipImpl::loadAttributes(std::shared_ptr<persistence::inter
 
 void DirectedRelationshipImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	RelationshipImpl::loadNode(nodeName, loadHandler);
@@ -346,7 +346,7 @@ void DirectedRelationshipImpl::saveContent(std::shared_ptr<persistence::interfac
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 

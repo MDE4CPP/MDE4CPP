@@ -1,7 +1,7 @@
 #include "fUML/Semantics/SimpleClassifiers/impl/SimpleClassifiersPackageImpl.hpp"
 
 // metametamodel factory
-#include "ecore/EcoreFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 
 #include <cassert>
 
@@ -18,9 +18,9 @@
 #include "ecore/EStringToStringMapEntry.hpp"
 
 //depending model packages
-#include "ecore/EcorePackage.hpp"
-#include "fUML/FUMLPackage.hpp"
-#include "uml/UmlPackage.hpp"
+#include "ecore/ecorePackage.hpp"
+#include "fUML/fUMLPackage.hpp"
+#include "uml/umlPackage.hpp"
 //include subpackages 
  
 using namespace fUML::Semantics::SimpleClassifiers;
@@ -33,7 +33,7 @@ void SimpleClassifiersPackageImpl::createPackageContents(std::shared_ptr<ecore::
 	}
 	isCreated = true;
 
-	std::shared_ptr<ecore::EcoreFactory> factory = ecore::EcoreFactory::eInstance();
+	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
 
 	createBooleanValueContent(package, factory);
 	createCompoundValueContent(package, factory);
@@ -52,7 +52,7 @@ void SimpleClassifiersPackageImpl::createPackageContents(std::shared_ptr<ecore::
 
 }
 
-void SimpleClassifiersPackageImpl::createBooleanValueContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void SimpleClassifiersPackageImpl::createBooleanValueContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_booleanValue_Class = factory->createEClass_in_EPackage(package, BOOLEANVALUE_CLASS);
 	m_booleanValue_Attribute_value = factory->createEAttribute_in_EContainingClass(m_booleanValue_Class, BOOLEANVALUE_ATTRIBUTE_VALUE);
@@ -65,7 +65,7 @@ void SimpleClassifiersPackageImpl::createBooleanValueContent(std::shared_ptr<eco
 	
 }
 
-void SimpleClassifiersPackageImpl::createCompoundValueContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void SimpleClassifiersPackageImpl::createCompoundValueContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_compoundValue_Class = factory->createEClass_in_EPackage(package, COMPOUNDVALUE_CLASS);
 	
@@ -81,7 +81,7 @@ void SimpleClassifiersPackageImpl::createCompoundValueContent(std::shared_ptr<ec
 	
 }
 
-void SimpleClassifiersPackageImpl::createDataValueContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void SimpleClassifiersPackageImpl::createDataValueContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_dataValue_Class = factory->createEClass_in_EPackage(package, DATAVALUE_CLASS);
 	
@@ -93,7 +93,7 @@ void SimpleClassifiersPackageImpl::createDataValueContent(std::shared_ptr<ecore:
 	
 }
 
-void SimpleClassifiersPackageImpl::createEnumerationValueContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void SimpleClassifiersPackageImpl::createEnumerationValueContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_enumerationValue_Class = factory->createEClass_in_EPackage(package, ENUMERATIONVALUE_CLASS);
 	
@@ -109,7 +109,7 @@ void SimpleClassifiersPackageImpl::createEnumerationValueContent(std::shared_ptr
 	
 }
 
-void SimpleClassifiersPackageImpl::createFeatureValueContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void SimpleClassifiersPackageImpl::createFeatureValueContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_featureValue_Class = factory->createEClass_in_EPackage(package, FEATUREVALUE_CLASS);
 	m_featureValue_Attribute_position = factory->createEAttribute_in_EContainingClass(m_featureValue_Class, FEATUREVALUE_ATTRIBUTE_POSITION);
@@ -122,7 +122,7 @@ void SimpleClassifiersPackageImpl::createFeatureValueContent(std::shared_ptr<eco
 	
 }
 
-void SimpleClassifiersPackageImpl::createIntegerValueContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void SimpleClassifiersPackageImpl::createIntegerValueContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_integerValue_Class = factory->createEClass_in_EPackage(package, INTEGERVALUE_CLASS);
 	m_integerValue_Attribute_value = factory->createEAttribute_in_EContainingClass(m_integerValue_Class, INTEGERVALUE_ATTRIBUTE_VALUE);
@@ -135,7 +135,7 @@ void SimpleClassifiersPackageImpl::createIntegerValueContent(std::shared_ptr<eco
 	
 }
 
-void SimpleClassifiersPackageImpl::createPrimitiveValueContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void SimpleClassifiersPackageImpl::createPrimitiveValueContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_primitiveValue_Class = factory->createEClass_in_EPackage(package, PRIMITIVEVALUE_CLASS);
 	
@@ -146,7 +146,7 @@ void SimpleClassifiersPackageImpl::createPrimitiveValueContent(std::shared_ptr<e
 	
 }
 
-void SimpleClassifiersPackageImpl::createRealValueContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void SimpleClassifiersPackageImpl::createRealValueContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_realValue_Class = factory->createEClass_in_EPackage(package, REALVALUE_CLASS);
 	m_realValue_Attribute_value = factory->createEAttribute_in_EContainingClass(m_realValue_Class, REALVALUE_ATTRIBUTE_VALUE);
@@ -159,7 +159,7 @@ void SimpleClassifiersPackageImpl::createRealValueContent(std::shared_ptr<ecore:
 	
 }
 
-void SimpleClassifiersPackageImpl::createSignalInstanceContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void SimpleClassifiersPackageImpl::createSignalInstanceContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_signalInstance_Class = factory->createEClass_in_EPackage(package, SIGNALINSTANCE_CLASS);
 	
@@ -169,7 +169,7 @@ void SimpleClassifiersPackageImpl::createSignalInstanceContent(std::shared_ptr<e
 	
 }
 
-void SimpleClassifiersPackageImpl::createStringValueContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void SimpleClassifiersPackageImpl::createStringValueContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_stringValue_Class = factory->createEClass_in_EPackage(package, STRINGVALUE_CLASS);
 	m_stringValue_Attribute_value = factory->createEAttribute_in_EContainingClass(m_stringValue_Class, STRINGVALUE_ATTRIBUTE_VALUE);
@@ -182,7 +182,7 @@ void SimpleClassifiersPackageImpl::createStringValueContent(std::shared_ptr<ecor
 	
 }
 
-void SimpleClassifiersPackageImpl::createStructuredValueContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void SimpleClassifiersPackageImpl::createStructuredValueContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_structuredValue_Class = factory->createEClass_in_EPackage(package, STRUCTUREDVALUE_CLASS);
 	
@@ -198,7 +198,7 @@ void SimpleClassifiersPackageImpl::createStructuredValueContent(std::shared_ptr<
 	
 }
 
-void SimpleClassifiersPackageImpl::createUnlimitedNaturalValueContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void SimpleClassifiersPackageImpl::createUnlimitedNaturalValueContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_unlimitedNaturalValue_Class = factory->createEClass_in_EPackage(package, UNLIMITEDNATURALVALUE_CLASS);
 	m_unlimitedNaturalValue_Attribute_value = factory->createEAttribute_in_EContainingClass(m_unlimitedNaturalValue_Class, UNLIMITEDNATURALVALUE_ATTRIBUTE_VALUE);
@@ -211,7 +211,7 @@ void SimpleClassifiersPackageImpl::createUnlimitedNaturalValueContent(std::share
 	
 }
 
-void SimpleClassifiersPackageImpl::createPackageEDataTypes(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void SimpleClassifiersPackageImpl::createPackageEDataTypes(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	
 }

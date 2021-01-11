@@ -18,9 +18,9 @@
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
 
 //depending model packages
-#include "ecore/EcorePackage.hpp"
-#include "fUML/FUMLPackage.hpp"
-#include "uml/UmlPackage.hpp"
+#include "ecore/ecorePackage.hpp"
+#include "fUML/fUMLPackage.hpp"
+#include "uml/umlPackage.hpp"
 
 using namespace fUML::Semantics::Actions;
 

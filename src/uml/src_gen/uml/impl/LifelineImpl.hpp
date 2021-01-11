@@ -28,7 +28,7 @@ namespace uml
 			LifelineImpl& operator=(LifelineImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			LifelineImpl();
 			virtual std::shared_ptr<Lifeline> getThisLifelinePtr() const;
 			virtual void setThisLifelinePtr(std::weak_ptr<Lifeline> thisLifelinePtr);

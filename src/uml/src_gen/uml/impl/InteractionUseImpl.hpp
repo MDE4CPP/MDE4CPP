@@ -28,7 +28,7 @@ namespace uml
 			InteractionUseImpl& operator=(InteractionUseImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			InteractionUseImpl();
 			virtual std::shared_ptr<InteractionUse> getThisInteractionUsePtr() const;
 			virtual void setThisInteractionUsePtr(std::weak_ptr<InteractionUse> thisInteractionUsePtr);

@@ -28,7 +28,7 @@ namespace uml
 			ComponentRealizationImpl& operator=(ComponentRealizationImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			ComponentRealizationImpl();
 			virtual std::shared_ptr<ComponentRealization> getThisComponentRealizationPtr() const;
 			virtual void setThisComponentRealizationPtr(std::weak_ptr<ComponentRealization> thisComponentRealizationPtr);

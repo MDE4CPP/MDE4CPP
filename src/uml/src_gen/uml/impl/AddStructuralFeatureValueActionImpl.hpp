@@ -28,7 +28,7 @@ namespace uml
 			AddStructuralFeatureValueActionImpl& operator=(AddStructuralFeatureValueActionImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			AddStructuralFeatureValueActionImpl();
 			virtual std::shared_ptr<AddStructuralFeatureValueAction> getThisAddStructuralFeatureValueActionPtr() const;
 			virtual void setThisAddStructuralFeatureValueActionPtr(std::weak_ptr<AddStructuralFeatureValueAction> thisAddStructuralFeatureValueActionPtr);

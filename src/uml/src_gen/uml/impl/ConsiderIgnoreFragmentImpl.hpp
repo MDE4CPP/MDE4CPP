@@ -28,7 +28,7 @@ namespace uml
 			ConsiderIgnoreFragmentImpl& operator=(ConsiderIgnoreFragmentImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			ConsiderIgnoreFragmentImpl();
 			virtual std::shared_ptr<ConsiderIgnoreFragment> getThisConsiderIgnoreFragmentPtr() const;
 			virtual void setThisConsiderIgnoreFragmentPtr(std::weak_ptr<ConsiderIgnoreFragment> thisConsiderIgnoreFragmentPtr);

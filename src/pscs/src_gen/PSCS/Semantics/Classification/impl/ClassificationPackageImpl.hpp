@@ -7,7 +7,7 @@
 #ifndef PSCS_SEMANTICS_CLASSIFICATIONPACKAGEIMPL_HPP
 #define PSCS_SEMANTICS_CLASSIFICATIONPACKAGEIMPL_HPP
 
-#include "ecore/EcorePackage.hpp"
+#include "ecore/ecorePackage.hpp"
 #include "ecore/impl/EPackageImpl.hpp"
 
 #include "PSCS/Semantics/Classification/ClassificationPackage.hpp" 
@@ -19,7 +19,7 @@ namespace PSCS::Semantics::Classification
 
 namespace ecore
 {
-	class EcoreFactory;
+	class ecoreFactory;
 }
 
 namespace PSCS::Semantics::Classification
@@ -71,8 +71,8 @@ namespace PSCS::Semantics::Classification
 			void initializePackageContents();
 
 		private:
-			void createCS_InstanceValueEvaluationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
-			void createPackageEDataTypes(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
+			void createCS_InstanceValueEvaluationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
+			void createPackageEDataTypes(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 
 			void initializeCS_InstanceValueEvaluationContent();
 			void initializePackageEDataTypes();

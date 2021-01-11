@@ -54,8 +54,8 @@
 #include "uml/TemplateParameter.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -183,7 +183,7 @@ std::shared_ptr<ecore::EObject>  DependencyImpl::copy() const
 
 std::shared_ptr<ecore::EClass> DependencyImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getDependency_Class();
+	return uml::umlPackage::eInstance()->getDependency_Class();
 }
 
 //*********************************
@@ -380,7 +380,7 @@ Any DependencyImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::DEPENDENCY_ATTRIBUTE_CLIENT:
+		case uml::umlPackage::DEPENDENCY_ATTRIBUTE_CLIENT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::NamedElement>::iterator iter = m_client->begin();
@@ -390,9 +390,9 @@ Any DependencyImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //6815
+			return eAny(tempList); //6715
 		}
-		case uml::UmlPackage::DEPENDENCY_ATTRIBUTE_SUPPLIER:
+		case uml::umlPackage::DEPENDENCY_ATTRIBUTE_SUPPLIER:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::NamedElement>::iterator iter = m_supplier->begin();
@@ -402,7 +402,7 @@ Any DependencyImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //6816
+			return eAny(tempList); //6716
 		}
 	}
 	Any result;
@@ -418,10 +418,10 @@ bool DependencyImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::DEPENDENCY_ATTRIBUTE_CLIENT:
-			return getClient() != nullptr; //6815
-		case uml::UmlPackage::DEPENDENCY_ATTRIBUTE_SUPPLIER:
-			return getSupplier() != nullptr; //6816
+		case uml::umlPackage::DEPENDENCY_ATTRIBUTE_CLIENT:
+			return getClient() != nullptr; //6715
+		case uml::umlPackage::DEPENDENCY_ATTRIBUTE_SUPPLIER:
+			return getSupplier() != nullptr; //6716
 	}
 	bool result = false;
 	result = DirectedRelationshipImpl::internalEIsSet(featureID);
@@ -436,7 +436,7 @@ bool DependencyImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::DEPENDENCY_ATTRIBUTE_CLIENT:
+		case uml::umlPackage::DEPENDENCY_ATTRIBUTE_CLIENT:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -472,7 +472,7 @@ bool DependencyImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case uml::UmlPackage::DEPENDENCY_ATTRIBUTE_SUPPLIER:
+		case uml::umlPackage::DEPENDENCY_ATTRIBUTE_SUPPLIER:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -531,7 +531,7 @@ void DependencyImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler>
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -574,7 +574,7 @@ void DependencyImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLo
 
 void DependencyImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	DirectedRelationshipImpl::loadNode(nodeName, loadHandler);
@@ -585,7 +585,7 @@ void DependencyImpl::resolveReferences(const int featureID, std::list<std::share
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::DEPENDENCY_ATTRIBUTE_CLIENT:
+		case uml::umlPackage::DEPENDENCY_ATTRIBUTE_CLIENT:
 		{
 			std::shared_ptr<Bag<uml::NamedElement>> _client = getClient();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -599,7 +599,7 @@ void DependencyImpl::resolveReferences(const int featureID, std::list<std::share
 			return;
 		}
 
-		case uml::UmlPackage::DEPENDENCY_ATTRIBUTE_SUPPLIER:
+		case uml::umlPackage::DEPENDENCY_ATTRIBUTE_SUPPLIER:
 		{
 			std::shared_ptr<Bag<uml::NamedElement>> _supplier = getSupplier();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -643,7 +643,7 @@ void DependencyImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 

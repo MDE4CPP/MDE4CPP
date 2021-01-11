@@ -28,7 +28,7 @@ namespace uml
 			InterfaceImpl& operator=(InterfaceImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			InterfaceImpl();
 			virtual std::shared_ptr<Interface> getThisInterfacePtr() const;
 			virtual void setThisInterfacePtr(std::weak_ptr<Interface> thisInterfacePtr);

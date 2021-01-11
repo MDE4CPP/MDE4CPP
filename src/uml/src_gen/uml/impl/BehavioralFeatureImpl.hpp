@@ -29,7 +29,7 @@ namespace uml
 			BehavioralFeatureImpl& operator=(BehavioralFeatureImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			BehavioralFeatureImpl();
 			virtual std::shared_ptr<BehavioralFeature> getThisBehavioralFeaturePtr() const;
 			virtual void setThisBehavioralFeaturePtr(std::weak_ptr<BehavioralFeature> thisBehavioralFeaturePtr);

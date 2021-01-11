@@ -28,7 +28,7 @@ namespace uml
 			BehavioredClassifierImpl& operator=(BehavioredClassifierImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			BehavioredClassifierImpl();
 			virtual std::shared_ptr<BehavioredClassifier> getThisBehavioredClassifierPtr() const;
 			virtual void setThisBehavioredClassifierPtr(std::weak_ptr<BehavioredClassifier> thisBehavioredClassifierPtr);

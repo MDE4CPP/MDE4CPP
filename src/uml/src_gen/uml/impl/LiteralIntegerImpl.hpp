@@ -28,7 +28,7 @@ namespace uml
 			LiteralIntegerImpl& operator=(LiteralIntegerImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			LiteralIntegerImpl();
 			virtual std::shared_ptr<LiteralInteger> getThisLiteralIntegerPtr() const;
 			virtual void setThisLiteralIntegerPtr(std::weak_ptr<LiteralInteger> thisLiteralIntegerPtr);

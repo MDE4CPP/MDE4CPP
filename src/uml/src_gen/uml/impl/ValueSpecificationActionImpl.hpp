@@ -28,7 +28,7 @@ namespace uml
 			ValueSpecificationActionImpl& operator=(ValueSpecificationActionImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			ValueSpecificationActionImpl();
 			virtual std::shared_ptr<ValueSpecificationAction> getThisValueSpecificationActionPtr() const;
 			virtual void setThisValueSpecificationActionPtr(std::weak_ptr<ValueSpecificationAction> thisValueSpecificationActionPtr);

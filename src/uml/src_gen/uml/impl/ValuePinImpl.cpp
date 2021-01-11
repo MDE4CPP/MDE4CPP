@@ -89,8 +89,8 @@
 #include "uml/WriteStructuralFeatureAction.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -353,7 +353,7 @@ std::shared_ptr<ecore::EObject>  ValuePinImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ValuePinImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getValuePin_Class();
+	return uml::umlPackage::eInstance()->getValuePin_Class();
 }
 
 //*********************************
@@ -530,8 +530,8 @@ Any ValuePinImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::VALUEPIN_ATTRIBUTE_VALUE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getValue())); //25041
+		case uml::umlPackage::VALUEPIN_ATTRIBUTE_VALUE:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getValue())); //24941
 	}
 	return InputPinImpl::eGet(featureID, resolve, coreType);
 }
@@ -539,8 +539,8 @@ bool ValuePinImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::VALUEPIN_ATTRIBUTE_VALUE:
-			return getValue() != nullptr; //25041
+		case uml::umlPackage::VALUEPIN_ATTRIBUTE_VALUE:
+			return getValue() != nullptr; //24941
 	}
 	return InputPinImpl::internalEIsSet(featureID);
 }
@@ -548,12 +548,12 @@ bool ValuePinImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::VALUEPIN_ATTRIBUTE_VALUE:
+		case uml::umlPackage::VALUEPIN_ATTRIBUTE_VALUE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ValueSpecification> _value = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
-			setValue(_value); //25041
+			setValue(_value); //24941
 			return true;
 		}
 	}
@@ -572,7 +572,7 @@ void ValuePinImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> l
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -588,7 +588,7 @@ void ValuePinImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoad
 
 void ValuePinImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -640,7 +640,6 @@ void ValuePinImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> s
 	ActivityNodeImpl::saveContent(saveHandler);
 	TypedElementImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);
@@ -664,7 +663,7 @@ void ValuePinImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 		// Save 'value'
 		std::shared_ptr<uml::ValueSpecification > value = this->getValue();

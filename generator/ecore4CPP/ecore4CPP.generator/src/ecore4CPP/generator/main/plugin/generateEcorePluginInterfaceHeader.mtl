@@ -16,7 +16,7 @@
 
 [import ecore4CPP::generator::main::helper /]
 
-[template public generateEcorePluginInterfaceHeader(aPackage : EPackage) {packageName : String = aPackage.name.toUpperFirst().concat('Plugin');}]
+[template public generateEcorePluginInterfaceHeader(aPackage : EPackage) {packageName : String = aPackage.name.concat('Plugin');}]
 [file (aPackage.generateNamespacePath().concat('/').concat(packageName).concat('.hpp'), false, 'UTF-8')]
 [startGuard(aPackage,'Plugin')/]
 

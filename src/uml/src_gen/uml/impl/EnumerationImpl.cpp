@@ -87,8 +87,8 @@
 #include "uml/UseCase.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -131,11 +131,11 @@ EnumerationImpl::EnumerationImpl(std::weak_ptr<uml::Package > par_Package, const
 {
 	switch(reference_id)
 	{	
-	case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
+	case umlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
 		m_owningPackage = par_Package;
 		m_namespace = par_Package;
 		 return;
-	case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
+	case umlPackage::TYPE_ATTRIBUTE_PACKAGE:
 		m_package = par_Package;
 		m_namespace = par_Package;
 		 return;
@@ -365,7 +365,7 @@ std::shared_ptr<ecore::EObject>  EnumerationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> EnumerationImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getEnumeration_Class();
+	return uml::umlPackage::eInstance()->getEnumeration_Class();
 }
 
 //*********************************
@@ -578,7 +578,7 @@ Any EnumerationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::ENUMERATION_ATTRIBUTE_OWNEDLITERAL:
+		case uml::umlPackage::ENUMERATION_ATTRIBUTE_OWNEDLITERAL:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::EnumerationLiteral>::iterator iter = m_ownedLiteral->begin();
@@ -588,7 +588,7 @@ Any EnumerationImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //8540
+			return eAny(tempList); //8440
 		}
 	}
 	return DataTypeImpl::eGet(featureID, resolve, coreType);
@@ -597,8 +597,8 @@ bool EnumerationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::ENUMERATION_ATTRIBUTE_OWNEDLITERAL:
-			return getOwnedLiteral() != nullptr; //8540
+		case uml::umlPackage::ENUMERATION_ATTRIBUTE_OWNEDLITERAL:
+			return getOwnedLiteral() != nullptr; //8440
 	}
 	return DataTypeImpl::internalEIsSet(featureID);
 }
@@ -606,7 +606,7 @@ bool EnumerationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::ENUMERATION_ATTRIBUTE_OWNEDLITERAL:
+		case uml::umlPackage::ENUMERATION_ATTRIBUTE_OWNEDLITERAL:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -658,7 +658,7 @@ void EnumerationImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -674,7 +674,7 @@ void EnumerationImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XL
 
 void EnumerationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -685,7 +685,7 @@ void EnumerationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence
 			{
 				typeName = "EnumerationLiteral";
 			}
-			std::shared_ptr<ecore::EObject> ownedLiteral = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::UmlPackage::ENUMERATIONLITERAL_ATTRIBUTE_ENUMERATION);
+			std::shared_ptr<ecore::EObject> ownedLiteral = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::ENUMERATIONLITERAL_ATTRIBUTE_ENUMERATION);
 			if (ownedLiteral != nullptr)
 			{
 				loadHandler->handleChild(ownedLiteral);
@@ -746,7 +746,7 @@ void EnumerationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 		// Save 'ownedLiteral'
 		for (std::shared_ptr<uml::EnumerationLiteral> ownedLiteral : *this->getOwnedLiteral()) 

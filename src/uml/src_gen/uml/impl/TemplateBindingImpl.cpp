@@ -47,8 +47,8 @@
 #include "uml/TemplateableElement.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -146,7 +146,7 @@ std::shared_ptr<ecore::EObject>  TemplateBindingImpl::copy() const
 
 std::shared_ptr<ecore::EClass> TemplateBindingImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getTemplateBinding_Class();
+	return uml::umlPackage::eInstance()->getTemplateBinding_Class();
 }
 
 //*********************************
@@ -342,9 +342,9 @@ Any TemplateBindingImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::TEMPLATEBINDING_ATTRIBUTE_BOUNDELEMENT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getBoundElement().lock())); //2318
-		case uml::UmlPackage::TEMPLATEBINDING_ATTRIBUTE_PARAMETERSUBSTITUTION:
+		case uml::umlPackage::TEMPLATEBINDING_ATTRIBUTE_BOUNDELEMENT:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getBoundElement().lock())); //2308
+		case uml::umlPackage::TEMPLATEBINDING_ATTRIBUTE_PARAMETERSUBSTITUTION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::TemplateParameterSubstitution>::iterator iter = m_parameterSubstitution->begin();
@@ -354,10 +354,10 @@ Any TemplateBindingImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //2316
+			return eAny(tempList); //2306
 		}
-		case uml::UmlPackage::TEMPLATEBINDING_ATTRIBUTE_SIGNATURE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSignature())); //2317
+		case uml::umlPackage::TEMPLATEBINDING_ATTRIBUTE_SIGNATURE:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSignature())); //2307
 	}
 	return DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
 }
@@ -365,12 +365,12 @@ bool TemplateBindingImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::TEMPLATEBINDING_ATTRIBUTE_BOUNDELEMENT:
-			return getBoundElement().lock() != nullptr; //2318
-		case uml::UmlPackage::TEMPLATEBINDING_ATTRIBUTE_PARAMETERSUBSTITUTION:
-			return getParameterSubstitution() != nullptr; //2316
-		case uml::UmlPackage::TEMPLATEBINDING_ATTRIBUTE_SIGNATURE:
-			return getSignature() != nullptr; //2317
+		case uml::umlPackage::TEMPLATEBINDING_ATTRIBUTE_BOUNDELEMENT:
+			return getBoundElement().lock() != nullptr; //2308
+		case uml::umlPackage::TEMPLATEBINDING_ATTRIBUTE_PARAMETERSUBSTITUTION:
+			return getParameterSubstitution() != nullptr; //2306
+		case uml::umlPackage::TEMPLATEBINDING_ATTRIBUTE_SIGNATURE:
+			return getSignature() != nullptr; //2307
 	}
 	return DirectedRelationshipImpl::internalEIsSet(featureID);
 }
@@ -378,15 +378,15 @@ bool TemplateBindingImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::TEMPLATEBINDING_ATTRIBUTE_BOUNDELEMENT:
+		case uml::umlPackage::TEMPLATEBINDING_ATTRIBUTE_BOUNDELEMENT:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::TemplateableElement> _boundElement = std::dynamic_pointer_cast<uml::TemplateableElement>(_temp);
-			setBoundElement(_boundElement); //2318
+			setBoundElement(_boundElement); //2308
 			return true;
 		}
-		case uml::UmlPackage::TEMPLATEBINDING_ATTRIBUTE_PARAMETERSUBSTITUTION:
+		case uml::umlPackage::TEMPLATEBINDING_ATTRIBUTE_PARAMETERSUBSTITUTION:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -422,12 +422,12 @@ bool TemplateBindingImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case uml::UmlPackage::TEMPLATEBINDING_ATTRIBUTE_SIGNATURE:
+		case uml::umlPackage::TEMPLATEBINDING_ATTRIBUTE_SIGNATURE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::TemplateSignature> _signature = std::dynamic_pointer_cast<uml::TemplateSignature>(_temp);
-			setSignature(_signature); //2317
+			setSignature(_signature); //2307
 			return true;
 		}
 	}
@@ -446,7 +446,7 @@ void TemplateBindingImpl::load(std::shared_ptr<persistence::interfaces::XLoadHan
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -481,7 +481,7 @@ void TemplateBindingImpl::loadAttributes(std::shared_ptr<persistence::interfaces
 
 void TemplateBindingImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -492,7 +492,7 @@ void TemplateBindingImpl::loadNode(std::string nodeName, std::shared_ptr<persist
 			{
 				typeName = "TemplateParameterSubstitution";
 			}
-			std::shared_ptr<ecore::EObject> parameterSubstitution = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::UmlPackage::TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_TEMPLATEBINDING);
+			std::shared_ptr<ecore::EObject> parameterSubstitution = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_TEMPLATEBINDING);
 			if (parameterSubstitution != nullptr)
 			{
 				loadHandler->handleChild(parameterSubstitution);
@@ -516,7 +516,7 @@ void TemplateBindingImpl::resolveReferences(const int featureID, std::list<std::
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::TEMPLATEBINDING_ATTRIBUTE_BOUNDELEMENT:
+		case uml::umlPackage::TEMPLATEBINDING_ATTRIBUTE_BOUNDELEMENT:
 		{
 			if (references.size() == 1)
 			{
@@ -528,7 +528,7 @@ void TemplateBindingImpl::resolveReferences(const int featureID, std::list<std::
 			return;
 		}
 
-		case uml::UmlPackage::TEMPLATEBINDING_ATTRIBUTE_SIGNATURE:
+		case uml::umlPackage::TEMPLATEBINDING_ATTRIBUTE_SIGNATURE:
 		{
 			if (references.size() == 1)
 			{
@@ -566,7 +566,7 @@ void TemplateBindingImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 		// Save 'parameterSubstitution'
 		for (std::shared_ptr<uml::TemplateParameterSubstitution> parameterSubstitution : *this->getParameterSubstitution()) 

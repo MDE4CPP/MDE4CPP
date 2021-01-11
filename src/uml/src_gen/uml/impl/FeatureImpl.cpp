@@ -48,8 +48,8 @@
 #include "uml/StringExpression.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -147,7 +147,7 @@ std::shared_ptr<ecore::EObject>  FeatureImpl::copy() const
 
 std::shared_ptr<ecore::EClass> FeatureImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getFeature_Class();
+	return uml::umlPackage::eInstance()->getFeature_Class();
 }
 
 //*********************************
@@ -255,7 +255,7 @@ Any FeatureImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::FEATURE_ATTRIBUTE_FEATURINGCLASSIFIER:
+		case uml::umlPackage::FEATURE_ATTRIBUTE_FEATURINGCLASSIFIER:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Classifier>::iterator iter = m_featuringClassifier->begin();
@@ -265,10 +265,10 @@ Any FeatureImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //10212
+			return eAny(tempList); //10112
 		}
-		case uml::UmlPackage::FEATURE_ATTRIBUTE_ISSTATIC:
-			return eAny(getIsStatic()); //10213
+		case uml::umlPackage::FEATURE_ATTRIBUTE_ISSTATIC:
+			return eAny(getIsStatic()); //10113
 	}
 	return RedefinableElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -276,10 +276,10 @@ bool FeatureImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::FEATURE_ATTRIBUTE_FEATURINGCLASSIFIER:
-			return getFeaturingClassifier() != nullptr; //10212
-		case uml::UmlPackage::FEATURE_ATTRIBUTE_ISSTATIC:
-			return getIsStatic() != false; //10213
+		case uml::umlPackage::FEATURE_ATTRIBUTE_FEATURINGCLASSIFIER:
+			return getFeaturingClassifier() != nullptr; //10112
+		case uml::umlPackage::FEATURE_ATTRIBUTE_ISSTATIC:
+			return getIsStatic() != false; //10113
 	}
 	return RedefinableElementImpl::internalEIsSet(featureID);
 }
@@ -287,11 +287,11 @@ bool FeatureImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::FEATURE_ATTRIBUTE_ISSTATIC:
+		case uml::umlPackage::FEATURE_ATTRIBUTE_ISSTATIC:
 		{
 			// BOOST CAST
 			bool _isStatic = newValue->get<bool>();
-			setIsStatic(_isStatic); //10213
+			setIsStatic(_isStatic); //10113
 			return true;
 		}
 	}
@@ -310,7 +310,7 @@ void FeatureImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> lo
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -347,7 +347,7 @@ void FeatureImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadH
 
 void FeatureImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	RedefinableElementImpl::loadNode(nodeName, loadHandler);
@@ -381,7 +381,7 @@ void FeatureImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 		// Add attributes

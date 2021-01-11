@@ -45,8 +45,8 @@
 #include "uml/PackageableElement.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -132,7 +132,7 @@ std::shared_ptr<ecore::EObject>  ElementImportImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ElementImportImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getElementImport_Class();
+	return uml::umlPackage::eInstance()->getElementImport_Class();
 }
 
 //*********************************
@@ -335,14 +335,14 @@ Any ElementImportImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::ELEMENTIMPORT_ATTRIBUTE_ALIAS:
-			return eAny(getAlias()); //836
-		case uml::UmlPackage::ELEMENTIMPORT_ATTRIBUTE_IMPORTEDELEMENT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getImportedElement())); //837
-		case uml::UmlPackage::ELEMENTIMPORT_ATTRIBUTE_IMPORTINGNAMESPACE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getImportingNamespace().lock())); //838
-		case uml::UmlPackage::ELEMENTIMPORT_ATTRIBUTE_VISIBILITY:
-			return eAny(getVisibility()); //839
+		case uml::umlPackage::ELEMENTIMPORT_ATTRIBUTE_ALIAS:
+			return eAny(getAlias()); //826
+		case uml::umlPackage::ELEMENTIMPORT_ATTRIBUTE_IMPORTEDELEMENT:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getImportedElement())); //827
+		case uml::umlPackage::ELEMENTIMPORT_ATTRIBUTE_IMPORTINGNAMESPACE:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getImportingNamespace().lock())); //828
+		case uml::umlPackage::ELEMENTIMPORT_ATTRIBUTE_VISIBILITY:
+			return eAny(getVisibility()); //829
 	}
 	return DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
 }
@@ -350,14 +350,14 @@ bool ElementImportImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::ELEMENTIMPORT_ATTRIBUTE_ALIAS:
-			return getAlias() != ""; //836
-		case uml::UmlPackage::ELEMENTIMPORT_ATTRIBUTE_IMPORTEDELEMENT:
-			return getImportedElement() != nullptr; //837
-		case uml::UmlPackage::ELEMENTIMPORT_ATTRIBUTE_IMPORTINGNAMESPACE:
-			return getImportingNamespace().lock() != nullptr; //838
-		case uml::UmlPackage::ELEMENTIMPORT_ATTRIBUTE_VISIBILITY:
-			return m_visibility != VisibilityKind::PUBLIC;; //839
+		case uml::umlPackage::ELEMENTIMPORT_ATTRIBUTE_ALIAS:
+			return getAlias() != ""; //826
+		case uml::umlPackage::ELEMENTIMPORT_ATTRIBUTE_IMPORTEDELEMENT:
+			return getImportedElement() != nullptr; //827
+		case uml::umlPackage::ELEMENTIMPORT_ATTRIBUTE_IMPORTINGNAMESPACE:
+			return getImportingNamespace().lock() != nullptr; //828
+		case uml::umlPackage::ELEMENTIMPORT_ATTRIBUTE_VISIBILITY:
+			return m_visibility != VisibilityKind::PUBLIC;; //829
 	}
 	return DirectedRelationshipImpl::internalEIsSet(featureID);
 }
@@ -365,34 +365,34 @@ bool ElementImportImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::ELEMENTIMPORT_ATTRIBUTE_ALIAS:
+		case uml::umlPackage::ELEMENTIMPORT_ATTRIBUTE_ALIAS:
 		{
 			// BOOST CAST
 			std::string _alias = newValue->get<std::string>();
-			setAlias(_alias); //836
+			setAlias(_alias); //826
 			return true;
 		}
-		case uml::UmlPackage::ELEMENTIMPORT_ATTRIBUTE_IMPORTEDELEMENT:
+		case uml::umlPackage::ELEMENTIMPORT_ATTRIBUTE_IMPORTEDELEMENT:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::PackageableElement> _importedElement = std::dynamic_pointer_cast<uml::PackageableElement>(_temp);
-			setImportedElement(_importedElement); //837
+			setImportedElement(_importedElement); //827
 			return true;
 		}
-		case uml::UmlPackage::ELEMENTIMPORT_ATTRIBUTE_IMPORTINGNAMESPACE:
+		case uml::umlPackage::ELEMENTIMPORT_ATTRIBUTE_IMPORTINGNAMESPACE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Namespace> _importingNamespace = std::dynamic_pointer_cast<uml::Namespace>(_temp);
-			setImportingNamespace(_importingNamespace); //838
+			setImportingNamespace(_importingNamespace); //828
 			return true;
 		}
-		case uml::UmlPackage::ELEMENTIMPORT_ATTRIBUTE_VISIBILITY:
+		case uml::umlPackage::ELEMENTIMPORT_ATTRIBUTE_VISIBILITY:
 		{
 			// BOOST CAST
 			uml::VisibilityKind _visibility = newValue->get<uml::VisibilityKind>();
-			setVisibility(_visibility); //839
+			setVisibility(_visibility); //829
 			return true;
 		}
 	}
@@ -411,7 +411,7 @@ void ElementImportImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandl
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -479,7 +479,7 @@ void ElementImportImpl::loadAttributes(std::shared_ptr<persistence::interfaces::
 
 void ElementImportImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	DirectedRelationshipImpl::loadNode(nodeName, loadHandler);
@@ -489,7 +489,7 @@ void ElementImportImpl::resolveReferences(const int featureID, std::list<std::sh
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::ELEMENTIMPORT_ATTRIBUTE_IMPORTEDELEMENT:
+		case uml::umlPackage::ELEMENTIMPORT_ATTRIBUTE_IMPORTEDELEMENT:
 		{
 			if (references.size() == 1)
 			{
@@ -501,7 +501,7 @@ void ElementImportImpl::resolveReferences(const int featureID, std::list<std::sh
 			return;
 		}
 
-		case uml::UmlPackage::ELEMENTIMPORT_ATTRIBUTE_IMPORTINGNAMESPACE:
+		case uml::umlPackage::ELEMENTIMPORT_ATTRIBUTE_IMPORTINGNAMESPACE:
 		{
 			if (references.size() == 1)
 			{
@@ -539,7 +539,7 @@ void ElementImportImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 		// Add attributes

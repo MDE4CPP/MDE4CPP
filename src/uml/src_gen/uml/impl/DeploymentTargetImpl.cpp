@@ -50,8 +50,8 @@
 #include "uml/StringExpression.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -155,7 +155,7 @@ std::shared_ptr<ecore::EObject>  DeploymentTargetImpl::copy() const
 
 std::shared_ptr<ecore::EClass> DeploymentTargetImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getDeploymentTarget_Class();
+	return uml::umlPackage::eInstance()->getDeploymentTarget_Class();
 }
 
 //*********************************
@@ -277,7 +277,7 @@ Any DeploymentTargetImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::DEPLOYMENTTARGET_ATTRIBUTE_DEPLOYEDELEMENT:
+		case uml::umlPackage::DEPLOYMENTTARGET_ATTRIBUTE_DEPLOYEDELEMENT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::PackageableElement>::iterator iter = m_deployedElement->begin();
@@ -287,9 +287,9 @@ Any DeploymentTargetImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //729
+			return eAny(tempList); //719
 		}
-		case uml::UmlPackage::DEPLOYMENTTARGET_ATTRIBUTE_DEPLOYMENT:
+		case uml::umlPackage::DEPLOYMENTTARGET_ATTRIBUTE_DEPLOYMENT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Deployment>::iterator iter = m_deployment->begin();
@@ -299,7 +299,7 @@ Any DeploymentTargetImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //7210
+			return eAny(tempList); //7110
 		}
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
@@ -308,10 +308,10 @@ bool DeploymentTargetImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::DEPLOYMENTTARGET_ATTRIBUTE_DEPLOYEDELEMENT:
-			return getDeployedElement() != nullptr; //729
-		case uml::UmlPackage::DEPLOYMENTTARGET_ATTRIBUTE_DEPLOYMENT:
-			return getDeployment() != nullptr; //7210
+		case uml::umlPackage::DEPLOYMENTTARGET_ATTRIBUTE_DEPLOYEDELEMENT:
+			return getDeployedElement() != nullptr; //719
+		case uml::umlPackage::DEPLOYMENTTARGET_ATTRIBUTE_DEPLOYMENT:
+			return getDeployment() != nullptr; //7110
 	}
 	return NamedElementImpl::internalEIsSet(featureID);
 }
@@ -319,7 +319,7 @@ bool DeploymentTargetImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::DEPLOYMENTTARGET_ATTRIBUTE_DEPLOYMENT:
+		case uml::umlPackage::DEPLOYMENTTARGET_ATTRIBUTE_DEPLOYMENT:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -371,7 +371,7 @@ void DeploymentTargetImpl::load(std::shared_ptr<persistence::interfaces::XLoadHa
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -387,7 +387,7 @@ void DeploymentTargetImpl::loadAttributes(std::shared_ptr<persistence::interface
 
 void DeploymentTargetImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -398,7 +398,7 @@ void DeploymentTargetImpl::loadNode(std::string nodeName, std::shared_ptr<persis
 			{
 				typeName = "Deployment";
 			}
-			std::shared_ptr<ecore::EObject> deployment = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::UmlPackage::DEPLOYMENT_ATTRIBUTE_LOCATION);
+			std::shared_ptr<ecore::EObject> deployment = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::DEPLOYMENT_ATTRIBUTE_LOCATION);
 			if (deployment != nullptr)
 			{
 				loadHandler->handleChild(deployment);
@@ -443,7 +443,7 @@ void DeploymentTargetImpl::saveContent(std::shared_ptr<persistence::interfaces::
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 		// Save 'deployment'
 		for (std::shared_ptr<uml::Deployment> deployment : *this->getDeployment()) 

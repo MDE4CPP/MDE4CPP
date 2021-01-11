@@ -28,7 +28,7 @@ namespace uml
 			WriteVariableActionImpl& operator=(WriteVariableActionImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			WriteVariableActionImpl();
 			virtual std::shared_ptr<WriteVariableAction> getThisWriteVariableActionPtr() const;
 			virtual void setThisWriteVariableActionPtr(std::weak_ptr<WriteVariableAction> thisWriteVariableActionPtr);

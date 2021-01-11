@@ -34,7 +34,7 @@
 #include "fUML/Semantics/Loci/Locus.hpp"
 #include "fUML/Semantics/Actions/PinActivation.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
-#include "uml/UmlPackage.hpp"
+#include "uml/umlPackage.hpp"
 #include "uml/Action.hpp"
 #include "uml/ActivityEdge.hpp"
 #include "uml/ActivityNode.hpp"
@@ -66,8 +66,8 @@
 #include "fUML/Semantics/Activities/impl/ActivitiesFactoryImpl.hpp"
 #include "fUML/Semantics/Activities/impl/ActivitiesPackageImpl.hpp"
 
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
+#include "fUML/fUMLFactory.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsFactory.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
 
@@ -297,11 +297,11 @@ std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> ActivityNod
 	std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> activation = nullptr;
 
     int nodeMetaElementID = node->getMetaElementID();
-    if ((nodeMetaElementID == uml::UmlPackage::PIN_CLASS) || 
-		(nodeMetaElementID == uml::UmlPackage::INPUTPIN_CLASS) ||
-		(nodeMetaElementID == uml::UmlPackage::OUTPUTPIN_CLASS) ||
-		(nodeMetaElementID == uml::UmlPackage::ACTIONINPUTPIN_CLASS) ||
-		(nodeMetaElementID == uml::UmlPackage::VALUEPIN_CLASS))
+    if ((nodeMetaElementID == uml::umlPackage::PIN_CLASS) || 
+		(nodeMetaElementID == uml::umlPackage::INPUTPIN_CLASS) ||
+		(nodeMetaElementID == uml::umlPackage::OUTPUTPIN_CLASS) ||
+		(nodeMetaElementID == uml::umlPackage::ACTIONINPUTPIN_CLASS) ||
+		(nodeMetaElementID == uml::umlPackage::VALUEPIN_CLASS))
 	{
 			auto containingNodeActivation=this->getContainingNodeActivation().lock();
 			if(containingNodeActivation)
@@ -477,11 +477,7 @@ void ActivityNodeActivationGroupImpl::run(std::shared_ptr<Bag<fUML::Semantics::A
 							std::shared_ptr<uml::InputPin> inputPin = (*pinIt);
 							std::shared_ptr<fUML::Semantics::Actions::ActionActivation> actionActivation = std::dynamic_pointer_cast<fUML::Semantics::Actions::ActionActivation>(activation);
 							std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance> > inputEdges = actionActivation->retrievePinActivation(inputPin)->getIncomingEdges();
-							isEnabled = this->checkIncomingEdges(inputEdges, activations);
-							if(isEnabled)
-							{
-								break;
-							}
+							isEnabled = isEnabled && this->checkIncomingEdges(inputEdges, activations);
 						}
 					}
 				}
@@ -910,7 +906,7 @@ void ActivityNodeActivationGroupImpl::load(std::shared_ptr<persistence::interfac
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get FUMLFactory
+	// get fUMLFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{

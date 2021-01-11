@@ -117,8 +117,8 @@
 #include "uml/UseCase.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -169,11 +169,11 @@ ProtocolStateMachineImpl::ProtocolStateMachineImpl(std::weak_ptr<uml::Package > 
 {
 	switch(reference_id)
 	{	
-	case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
+	case umlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
 		m_owningPackage = par_Package;
 		m_namespace = par_Package;
 		 return;
-	case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
+	case umlPackage::TYPE_ATTRIBUTE_PACKAGE:
 		m_package = par_Package;
 		m_namespace = par_Package;
 		 return;
@@ -542,7 +542,7 @@ std::shared_ptr<ecore::EObject>  ProtocolStateMachineImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ProtocolStateMachineImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getProtocolStateMachine_Class();
+	return uml::umlPackage::eInstance()->getProtocolStateMachine_Class();
 }
 
 //*********************************
@@ -807,7 +807,7 @@ Any ProtocolStateMachineImpl::eGet(int featureID, bool resolve, bool coreType) c
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::PROTOCOLSTATEMACHINE_ATTRIBUTE_CONFORMANCE:
+		case uml::umlPackage::PROTOCOLSTATEMACHINE_ATTRIBUTE_CONFORMANCE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::ProtocolConformance>::iterator iter = m_conformance->begin();
@@ -817,7 +817,7 @@ Any ProtocolStateMachineImpl::eGet(int featureID, bool resolve, bool coreType) c
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //18865
+			return eAny(tempList); //18765
 		}
 	}
 	return StateMachineImpl::eGet(featureID, resolve, coreType);
@@ -826,8 +826,8 @@ bool ProtocolStateMachineImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::PROTOCOLSTATEMACHINE_ATTRIBUTE_CONFORMANCE:
-			return getConformance() != nullptr; //18865
+		case uml::umlPackage::PROTOCOLSTATEMACHINE_ATTRIBUTE_CONFORMANCE:
+			return getConformance() != nullptr; //18765
 	}
 	return StateMachineImpl::internalEIsSet(featureID);
 }
@@ -835,7 +835,7 @@ bool ProtocolStateMachineImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::PROTOCOLSTATEMACHINE_ATTRIBUTE_CONFORMANCE:
+		case uml::umlPackage::PROTOCOLSTATEMACHINE_ATTRIBUTE_CONFORMANCE:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -887,7 +887,7 @@ void ProtocolStateMachineImpl::load(std::shared_ptr<persistence::interfaces::XLo
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -903,7 +903,7 @@ void ProtocolStateMachineImpl::loadAttributes(std::shared_ptr<persistence::inter
 
 void ProtocolStateMachineImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -914,7 +914,7 @@ void ProtocolStateMachineImpl::loadNode(std::string nodeName, std::shared_ptr<pe
 			{
 				typeName = "ProtocolConformance";
 			}
-			std::shared_ptr<ecore::EObject> conformance = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::UmlPackage::PROTOCOLCONFORMANCE_ATTRIBUTE_SPECIFICMACHINE);
+			std::shared_ptr<ecore::EObject> conformance = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::PROTOCOLCONFORMANCE_ATTRIBUTE_SPECIFICMACHINE);
 			if (conformance != nullptr)
 			{
 				loadHandler->handleChild(conformance);
@@ -988,7 +988,7 @@ void ProtocolStateMachineImpl::saveContent(std::shared_ptr<persistence::interfac
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 		// Save 'conformance'
 		for (std::shared_ptr<uml::ProtocolConformance> conformance : *this->getConformance()) 

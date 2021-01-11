@@ -28,7 +28,7 @@ namespace uml
 			TemplateParameterSubstitutionImpl& operator=(TemplateParameterSubstitutionImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			TemplateParameterSubstitutionImpl();
 			virtual std::shared_ptr<TemplateParameterSubstitution> getThisTemplateParameterSubstitutionPtr() const;
 			virtual void setThisTemplateParameterSubstitutionPtr(std::weak_ptr<TemplateParameterSubstitution> thisTemplateParameterSubstitutionPtr);

@@ -13,8 +13,9 @@
 namespace uml
 {
 	class LiteralInteger;
-	class UmlFactory;
+	class umlFactory;
 }
+
 
 namespace StandardProfile
 {
@@ -166,6 +167,8 @@ namespace StandardProfile
 			virtual std::shared_ptr<uml::Property> get_StandardProfile_Utility_base_Class();  
 			
 			
+
+			//getter for subPackages
 
 		private:
 			//private variables for ownedMember of the metamodel package
@@ -354,17 +357,17 @@ namespace StandardProfile
 			void createPackageContents(std::shared_ptr<uml::Package> standardProfile);
 
 		private:
-			void createPackageActivities(std::shared_ptr<uml::Package> standardProfile, std::shared_ptr<uml::UmlFactory> factory);
-			void createPackageClasses(std::shared_ptr<uml::Package> standardProfile, std::shared_ptr<uml::UmlFactory> factory);
-			void createPackageAssociations(std::shared_ptr<uml::Package> standardProfile, std::shared_ptr<uml::UmlFactory> factory);
-			void createPackageDependencies(std::shared_ptr<uml::Package> standardProfile, std::shared_ptr<uml::UmlFactory> factory);
-			void createPackageEnumerationLiterals(std::shared_ptr<uml::Package> standardProfile, std::shared_ptr<uml::UmlFactory> factory);
-			void createPackageInstanceSpecifications(std::shared_ptr<uml::Package> standardProfile, std::shared_ptr<uml::UmlFactory> factory);
-			void createPackageInterfaceRealizations(std::shared_ptr<uml::Package> standardProfile, std::shared_ptr<uml::UmlFactory> factory);
-			void createPackageInterfaces(std::shared_ptr<uml::Package> standardProfile, std::shared_ptr<uml::UmlFactory> factory);
-			void createPackagePrimitiveTypes(std::shared_ptr<uml::Package> standardProfile, std::shared_ptr<uml::UmlFactory> factory);
-			void createPackageStereotypes(std::shared_ptr<uml::Package> standardProfile, std::shared_ptr<uml::UmlFactory> factory);
-			void createPackageValueSpecifications(std::shared_ptr<uml::Package> standardProfile, std::shared_ptr<uml::UmlFactory> factory);
+			void createPackageActivities(std::shared_ptr<uml::Package> standardProfile, std::shared_ptr<uml::umlFactory> factory);
+			void createPackageClasses(std::shared_ptr<uml::Package> standardProfile, std::shared_ptr<uml::umlFactory> factory);
+			void createPackageAssociations(std::shared_ptr<uml::Package> standardProfile, std::shared_ptr<uml::umlFactory> factory);
+			void createPackageDependencies(std::shared_ptr<uml::Package> standardProfile, std::shared_ptr<uml::umlFactory> factory);
+			void createPackageEnumerationLiterals(std::shared_ptr<uml::Package> standardProfile, std::shared_ptr<uml::umlFactory> factory);
+			void createPackageInstanceSpecifications(std::shared_ptr<uml::Package> standardProfile, std::shared_ptr<uml::umlFactory> factory);
+			void createPackageInterfaceRealizations(std::shared_ptr<uml::Package> standardProfile, std::shared_ptr<uml::umlFactory> factory);
+			void createPackageInterfaces(std::shared_ptr<uml::Package> standardProfile, std::shared_ptr<uml::umlFactory> factory);
+			void createPackagePrimitiveTypes(std::shared_ptr<uml::Package> standardProfile, std::shared_ptr<uml::umlFactory> factory);
+			void createPackageStereotypes(std::shared_ptr<uml::Package> standardProfile, std::shared_ptr<uml::umlFactory> factory);
+			void createPackageValueSpecifications(std::shared_ptr<uml::Package> standardProfile, std::shared_ptr<uml::umlFactory> factory);
 
 			void initializePackageActivities();
 			void initializePackageClasses();
@@ -373,6 +376,7 @@ namespace StandardProfile
 			void initializePackageInstanceSpecifications();
 			void initializePackageInterfaceRealizations();
 			void initializePackageInterfaces();
+			void initializePackageNestedPackages();
 			void initializePackageStereotypes();
 			void initializePackageValueSpecifications();
 	};

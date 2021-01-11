@@ -52,8 +52,8 @@
 #include "uml/TemplateParameter.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -189,7 +189,7 @@ std::shared_ptr<ecore::EObject>  AbstractionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> AbstractionImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getAbstraction_Class();
+	return uml::umlPackage::eInstance()->getAbstraction_Class();
 }
 
 //*********************************
@@ -345,7 +345,7 @@ Any AbstractionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::ABSTRACTION_ATTRIBUTE_MAPPING:
+		case uml::umlPackage::ABSTRACTION_ATTRIBUTE_MAPPING:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getMapping())); //117
 	}
 	return DependencyImpl::eGet(featureID, resolve, coreType);
@@ -354,7 +354,7 @@ bool AbstractionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::ABSTRACTION_ATTRIBUTE_MAPPING:
+		case uml::umlPackage::ABSTRACTION_ATTRIBUTE_MAPPING:
 			return getMapping() != nullptr; //117
 	}
 	return DependencyImpl::internalEIsSet(featureID);
@@ -363,7 +363,7 @@ bool AbstractionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::ABSTRACTION_ATTRIBUTE_MAPPING:
+		case uml::umlPackage::ABSTRACTION_ATTRIBUTE_MAPPING:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -387,7 +387,7 @@ void AbstractionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -403,7 +403,7 @@ void AbstractionImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XL
 
 void AbstractionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -469,7 +469,7 @@ void AbstractionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 		// Save 'mapping'
 		std::shared_ptr<uml::OpaqueExpression > mapping = this->getMapping();

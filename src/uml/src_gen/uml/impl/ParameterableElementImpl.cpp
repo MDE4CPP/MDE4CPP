@@ -41,8 +41,8 @@
 #include "uml/TemplateParameter.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -118,7 +118,7 @@ std::shared_ptr<ecore::EObject>  ParameterableElementImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ParameterableElementImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getParameterableElement_Class();
+	return uml::umlPackage::eInstance()->getParameterableElement_Class();
 }
 
 //*********************************
@@ -231,10 +231,10 @@ Any ParameterableElementImpl::eGet(int featureID, bool resolve, bool coreType) c
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::PARAMETERABLEELEMENT_ATTRIBUTE_OWNINGTEMPLATEPARAMETER:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOwningTemplateParameter().lock())); //1793
-		case uml::UmlPackage::PARAMETERABLEELEMENT_ATTRIBUTE_TEMPLATEPARAMETER:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getTemplateParameter())); //1794
+		case uml::umlPackage::PARAMETERABLEELEMENT_ATTRIBUTE_OWNINGTEMPLATEPARAMETER:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOwningTemplateParameter().lock())); //1783
+		case uml::umlPackage::PARAMETERABLEELEMENT_ATTRIBUTE_TEMPLATEPARAMETER:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getTemplateParameter())); //1784
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -242,10 +242,10 @@ bool ParameterableElementImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::PARAMETERABLEELEMENT_ATTRIBUTE_OWNINGTEMPLATEPARAMETER:
-			return getOwningTemplateParameter().lock() != nullptr; //1793
-		case uml::UmlPackage::PARAMETERABLEELEMENT_ATTRIBUTE_TEMPLATEPARAMETER:
-			return getTemplateParameter() != nullptr; //1794
+		case uml::umlPackage::PARAMETERABLEELEMENT_ATTRIBUTE_OWNINGTEMPLATEPARAMETER:
+			return getOwningTemplateParameter().lock() != nullptr; //1783
+		case uml::umlPackage::PARAMETERABLEELEMENT_ATTRIBUTE_TEMPLATEPARAMETER:
+			return getTemplateParameter() != nullptr; //1784
 	}
 	return ElementImpl::internalEIsSet(featureID);
 }
@@ -253,20 +253,20 @@ bool ParameterableElementImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::PARAMETERABLEELEMENT_ATTRIBUTE_OWNINGTEMPLATEPARAMETER:
+		case uml::umlPackage::PARAMETERABLEELEMENT_ATTRIBUTE_OWNINGTEMPLATEPARAMETER:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::TemplateParameter> _owningTemplateParameter = std::dynamic_pointer_cast<uml::TemplateParameter>(_temp);
-			setOwningTemplateParameter(_owningTemplateParameter); //1793
+			setOwningTemplateParameter(_owningTemplateParameter); //1783
 			return true;
 		}
-		case uml::UmlPackage::PARAMETERABLEELEMENT_ATTRIBUTE_TEMPLATEPARAMETER:
+		case uml::umlPackage::PARAMETERABLEELEMENT_ATTRIBUTE_TEMPLATEPARAMETER:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::TemplateParameter> _templateParameter = std::dynamic_pointer_cast<uml::TemplateParameter>(_temp);
-			setTemplateParameter(_templateParameter); //1794
+			setTemplateParameter(_templateParameter); //1784
 			return true;
 		}
 	}
@@ -285,7 +285,7 @@ void ParameterableElementImpl::load(std::shared_ptr<persistence::interfaces::XLo
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -320,7 +320,7 @@ void ParameterableElementImpl::loadAttributes(std::shared_ptr<persistence::inter
 
 void ParameterableElementImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	ElementImpl::loadNode(nodeName, loadHandler);
@@ -330,7 +330,7 @@ void ParameterableElementImpl::resolveReferences(const int featureID, std::list<
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::PARAMETERABLEELEMENT_ATTRIBUTE_OWNINGTEMPLATEPARAMETER:
+		case uml::umlPackage::PARAMETERABLEELEMENT_ATTRIBUTE_OWNINGTEMPLATEPARAMETER:
 		{
 			if (references.size() == 1)
 			{
@@ -342,7 +342,7 @@ void ParameterableElementImpl::resolveReferences(const int featureID, std::list<
 			return;
 		}
 
-		case uml::UmlPackage::PARAMETERABLEELEMENT_ATTRIBUTE_TEMPLATEPARAMETER:
+		case uml::umlPackage::PARAMETERABLEELEMENT_ATTRIBUTE_TEMPLATEPARAMETER:
 		{
 			if (references.size() == 1)
 			{
@@ -374,7 +374,7 @@ void ParameterableElementImpl::saveContent(std::shared_ptr<persistence::interfac
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 

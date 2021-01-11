@@ -28,7 +28,7 @@ namespace uml
 			DestructionOccurrenceSpecificationImpl& operator=(DestructionOccurrenceSpecificationImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			DestructionOccurrenceSpecificationImpl();
 			virtual std::shared_ptr<DestructionOccurrenceSpecification> getThisDestructionOccurrenceSpecificationPtr() const;
 			virtual void setThisDestructionOccurrenceSpecificationPtr(std::weak_ptr<DestructionOccurrenceSpecification> thisDestructionOccurrenceSpecificationPtr);

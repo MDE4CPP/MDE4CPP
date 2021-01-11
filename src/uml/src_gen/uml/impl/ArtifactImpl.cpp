@@ -90,8 +90,8 @@
 #include "uml/UseCase.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -134,11 +134,11 @@ ArtifactImpl::ArtifactImpl(std::weak_ptr<uml::Package > par_Package, const int r
 {
 	switch(reference_id)
 	{	
-	case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
+	case umlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
 		m_owningPackage = par_Package;
 		m_namespace = par_Package;
 		 return;
-	case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
+	case umlPackage::TYPE_ATTRIBUTE_PACKAGE:
 		m_package = par_Package;
 		m_namespace = par_Package;
 		 return;
@@ -398,7 +398,7 @@ std::shared_ptr<ecore::EObject>  ArtifactImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ArtifactImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getArtifact_Class();
+	return uml::umlPackage::eInstance()->getArtifact_Class();
 }
 
 //*********************************
@@ -716,9 +716,9 @@ Any ArtifactImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::ARTIFACT_ATTRIBUTE_FILENAME:
-			return eAny(getFileName()); //2138
-		case uml::UmlPackage::ARTIFACT_ATTRIBUTE_MANIFESTATION:
+		case uml::umlPackage::ARTIFACT_ATTRIBUTE_FILENAME:
+			return eAny(getFileName()); //2038
+		case uml::umlPackage::ARTIFACT_ATTRIBUTE_MANIFESTATION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Manifestation>::iterator iter = m_manifestation->begin();
@@ -728,9 +728,9 @@ Any ArtifactImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //2139
+			return eAny(tempList); //2039
 		}
-		case uml::UmlPackage::ARTIFACT_ATTRIBUTE_NESTEDARTIFACT:
+		case uml::umlPackage::ARTIFACT_ATTRIBUTE_NESTEDARTIFACT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Artifact>::iterator iter = m_nestedArtifact->begin();
@@ -740,9 +740,9 @@ Any ArtifactImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //2140
+			return eAny(tempList); //2040
 		}
-		case uml::UmlPackage::ARTIFACT_ATTRIBUTE_OWNEDATTRIBUTE:
+		case uml::umlPackage::ARTIFACT_ATTRIBUTE_OWNEDATTRIBUTE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Property>::iterator iter = m_ownedAttribute->begin();
@@ -752,9 +752,9 @@ Any ArtifactImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //2141
+			return eAny(tempList); //2041
 		}
-		case uml::UmlPackage::ARTIFACT_ATTRIBUTE_OWNEDOPERATION:
+		case uml::umlPackage::ARTIFACT_ATTRIBUTE_OWNEDOPERATION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Operation>::iterator iter = m_ownedOperation->begin();
@@ -764,7 +764,7 @@ Any ArtifactImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //2142
+			return eAny(tempList); //2042
 		}
 	}
 	Any result;
@@ -780,16 +780,16 @@ bool ArtifactImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::ARTIFACT_ATTRIBUTE_FILENAME:
-			return getFileName() != ""; //2138
-		case uml::UmlPackage::ARTIFACT_ATTRIBUTE_MANIFESTATION:
-			return getManifestation() != nullptr; //2139
-		case uml::UmlPackage::ARTIFACT_ATTRIBUTE_NESTEDARTIFACT:
-			return getNestedArtifact() != nullptr; //2140
-		case uml::UmlPackage::ARTIFACT_ATTRIBUTE_OWNEDATTRIBUTE:
-			return getOwnedAttribute() != nullptr; //2141
-		case uml::UmlPackage::ARTIFACT_ATTRIBUTE_OWNEDOPERATION:
-			return getOwnedOperation() != nullptr; //2142
+		case uml::umlPackage::ARTIFACT_ATTRIBUTE_FILENAME:
+			return getFileName() != ""; //2038
+		case uml::umlPackage::ARTIFACT_ATTRIBUTE_MANIFESTATION:
+			return getManifestation() != nullptr; //2039
+		case uml::umlPackage::ARTIFACT_ATTRIBUTE_NESTEDARTIFACT:
+			return getNestedArtifact() != nullptr; //2040
+		case uml::umlPackage::ARTIFACT_ATTRIBUTE_OWNEDATTRIBUTE:
+			return getOwnedAttribute() != nullptr; //2041
+		case uml::umlPackage::ARTIFACT_ATTRIBUTE_OWNEDOPERATION:
+			return getOwnedOperation() != nullptr; //2042
 	}
 	bool result = false;
 	result = ClassifierImpl::internalEIsSet(featureID);
@@ -804,14 +804,14 @@ bool ArtifactImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::ARTIFACT_ATTRIBUTE_FILENAME:
+		case uml::umlPackage::ARTIFACT_ATTRIBUTE_FILENAME:
 		{
 			// BOOST CAST
 			std::string _fileName = newValue->get<std::string>();
-			setFileName(_fileName); //2138
+			setFileName(_fileName); //2038
 			return true;
 		}
-		case uml::UmlPackage::ARTIFACT_ATTRIBUTE_MANIFESTATION:
+		case uml::umlPackage::ARTIFACT_ATTRIBUTE_MANIFESTATION:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -847,7 +847,7 @@ bool ArtifactImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case uml::UmlPackage::ARTIFACT_ATTRIBUTE_NESTEDARTIFACT:
+		case uml::umlPackage::ARTIFACT_ATTRIBUTE_NESTEDARTIFACT:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -883,7 +883,7 @@ bool ArtifactImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case uml::UmlPackage::ARTIFACT_ATTRIBUTE_OWNEDATTRIBUTE:
+		case uml::umlPackage::ARTIFACT_ATTRIBUTE_OWNEDATTRIBUTE:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -919,7 +919,7 @@ bool ArtifactImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case uml::UmlPackage::ARTIFACT_ATTRIBUTE_OWNEDOPERATION:
+		case uml::umlPackage::ARTIFACT_ATTRIBUTE_OWNEDOPERATION:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -978,7 +978,7 @@ void ArtifactImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> l
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -1016,7 +1016,7 @@ void ArtifactImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoad
 
 void ArtifactImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -1141,7 +1141,7 @@ void ArtifactImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 		// Save 'manifestation'
 		for (std::shared_ptr<uml::Manifestation> manifestation : *this->getManifestation()) 

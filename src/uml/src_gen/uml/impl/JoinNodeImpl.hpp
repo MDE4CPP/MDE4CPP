@@ -28,7 +28,7 @@ namespace uml
 			JoinNodeImpl& operator=(JoinNodeImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			JoinNodeImpl();
 			virtual std::shared_ptr<JoinNode> getThisJoinNodePtr() const;
 			virtual void setThisJoinNodePtr(std::weak_ptr<JoinNode> thisJoinNodePtr);

@@ -53,8 +53,8 @@
 #include "uml/StringExpression.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -178,7 +178,7 @@ std::shared_ptr<ecore::EObject>  InterruptibleActivityRegionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> InterruptibleActivityRegionImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getInterruptibleActivityRegion_Class();
+	return uml::umlPackage::eInstance()->getInterruptibleActivityRegion_Class();
 }
 
 //*********************************
@@ -325,7 +325,7 @@ Any InterruptibleActivityRegionImpl::eGet(int featureID, bool resolve, bool core
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::INTERRUPTIBLEACTIVITYREGION_ATTRIBUTE_INTERRUPTINGEDGE:
+		case uml::umlPackage::INTERRUPTIBLEACTIVITYREGION_ATTRIBUTE_INTERRUPTINGEDGE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::ActivityEdge>::iterator iter = m_interruptingEdge->begin();
@@ -335,9 +335,9 @@ Any InterruptibleActivityRegionImpl::eGet(int featureID, bool resolve, bool core
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //12814
+			return eAny(tempList); //12714
 		}
-		case uml::UmlPackage::INTERRUPTIBLEACTIVITYREGION_ATTRIBUTE_NODE:
+		case uml::umlPackage::INTERRUPTIBLEACTIVITYREGION_ATTRIBUTE_NODE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::ActivityNode>::iterator iter = m_node->begin();
@@ -347,7 +347,7 @@ Any InterruptibleActivityRegionImpl::eGet(int featureID, bool resolve, bool core
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //12815
+			return eAny(tempList); //12715
 		}
 	}
 	return ActivityGroupImpl::eGet(featureID, resolve, coreType);
@@ -356,10 +356,10 @@ bool InterruptibleActivityRegionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::INTERRUPTIBLEACTIVITYREGION_ATTRIBUTE_INTERRUPTINGEDGE:
-			return getInterruptingEdge() != nullptr; //12814
-		case uml::UmlPackage::INTERRUPTIBLEACTIVITYREGION_ATTRIBUTE_NODE:
-			return getNode() != nullptr; //12815
+		case uml::umlPackage::INTERRUPTIBLEACTIVITYREGION_ATTRIBUTE_INTERRUPTINGEDGE:
+			return getInterruptingEdge() != nullptr; //12714
+		case uml::umlPackage::INTERRUPTIBLEACTIVITYREGION_ATTRIBUTE_NODE:
+			return getNode() != nullptr; //12715
 	}
 	return ActivityGroupImpl::internalEIsSet(featureID);
 }
@@ -367,7 +367,7 @@ bool InterruptibleActivityRegionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::INTERRUPTIBLEACTIVITYREGION_ATTRIBUTE_INTERRUPTINGEDGE:
+		case uml::umlPackage::INTERRUPTIBLEACTIVITYREGION_ATTRIBUTE_INTERRUPTINGEDGE:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -403,7 +403,7 @@ bool InterruptibleActivityRegionImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case uml::UmlPackage::INTERRUPTIBLEACTIVITYREGION_ATTRIBUTE_NODE:
+		case uml::umlPackage::INTERRUPTIBLEACTIVITYREGION_ATTRIBUTE_NODE:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -455,7 +455,7 @@ void InterruptibleActivityRegionImpl::load(std::shared_ptr<persistence::interfac
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -497,7 +497,7 @@ void InterruptibleActivityRegionImpl::loadAttributes(std::shared_ptr<persistence
 
 void InterruptibleActivityRegionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	ActivityGroupImpl::loadNode(nodeName, loadHandler);
@@ -507,7 +507,7 @@ void InterruptibleActivityRegionImpl::resolveReferences(const int featureID, std
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::INTERRUPTIBLEACTIVITYREGION_ATTRIBUTE_INTERRUPTINGEDGE:
+		case uml::umlPackage::INTERRUPTIBLEACTIVITYREGION_ATTRIBUTE_INTERRUPTINGEDGE:
 		{
 			std::shared_ptr<Bag<uml::ActivityEdge>> _interruptingEdge = getInterruptingEdge();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -521,7 +521,7 @@ void InterruptibleActivityRegionImpl::resolveReferences(const int featureID, std
 			return;
 		}
 
-		case uml::UmlPackage::INTERRUPTIBLEACTIVITYREGION_ATTRIBUTE_NODE:
+		case uml::umlPackage::INTERRUPTIBLEACTIVITYREGION_ATTRIBUTE_NODE:
 		{
 			std::shared_ptr<Bag<uml::ActivityNode>> _node = getNode();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -544,7 +544,6 @@ void InterruptibleActivityRegionImpl::save(std::shared_ptr<persistence::interfac
 
 	ActivityGroupImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	NamedElementImpl::saveContent(saveHandler);
 	
 	ElementImpl::saveContent(saveHandler);
@@ -562,7 +561,7 @@ void InterruptibleActivityRegionImpl::saveContent(std::shared_ptr<persistence::i
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 

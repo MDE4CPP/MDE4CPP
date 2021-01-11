@@ -30,7 +30,7 @@ virtual public Object
 			ObjectImpl& operator=(ObjectImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			ObjectImpl();
 			virtual std::shared_ptr<Object> getThisObjectPtr() const;
 			virtual void setThisObjectPtr(std::weak_ptr<Object> thisObjectPtr);

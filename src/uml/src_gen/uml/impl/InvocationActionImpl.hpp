@@ -28,7 +28,7 @@ namespace uml
 			InvocationActionImpl& operator=(InvocationActionImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			InvocationActionImpl();
 			virtual std::shared_ptr<InvocationAction> getThisInvocationActionPtr() const;
 			virtual void setThisInvocationActionPtr(std::weak_ptr<InvocationAction> thisInvocationActionPtr);

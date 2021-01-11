@@ -28,7 +28,7 @@ namespace uml
 			UnmarshallActionImpl& operator=(UnmarshallActionImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			UnmarshallActionImpl();
 			virtual std::shared_ptr<UnmarshallAction> getThisUnmarshallActionPtr() const;
 			virtual void setThisUnmarshallActionPtr(std::weak_ptr<UnmarshallAction> thisUnmarshallActionPtr);

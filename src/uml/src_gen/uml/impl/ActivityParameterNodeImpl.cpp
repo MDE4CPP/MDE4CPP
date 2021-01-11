@@ -75,8 +75,8 @@
 #include "uml/ValueSpecification.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -241,7 +241,7 @@ std::shared_ptr<ecore::EObject>  ActivityParameterNodeImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ActivityParameterNodeImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getActivityParameterNode_Class();
+	return uml::umlPackage::eInstance()->getActivityParameterNode_Class();
 }
 
 //*********************************
@@ -396,8 +396,8 @@ Any ActivityParameterNodeImpl::eGet(int featureID, bool resolve, bool coreType) 
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::ACTIVITYPARAMETERNODE_ATTRIBUTE_PARAMETER:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getParameter())); //1326
+		case uml::umlPackage::ACTIVITYPARAMETERNODE_ATTRIBUTE_PARAMETER:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getParameter())); //1226
 	}
 	return ObjectNodeImpl::eGet(featureID, resolve, coreType);
 }
@@ -405,8 +405,8 @@ bool ActivityParameterNodeImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::ACTIVITYPARAMETERNODE_ATTRIBUTE_PARAMETER:
-			return getParameter() != nullptr; //1326
+		case uml::umlPackage::ACTIVITYPARAMETERNODE_ATTRIBUTE_PARAMETER:
+			return getParameter() != nullptr; //1226
 	}
 	return ObjectNodeImpl::internalEIsSet(featureID);
 }
@@ -414,12 +414,12 @@ bool ActivityParameterNodeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::ACTIVITYPARAMETERNODE_ATTRIBUTE_PARAMETER:
+		case uml::umlPackage::ACTIVITYPARAMETERNODE_ATTRIBUTE_PARAMETER:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Parameter> _parameter = std::dynamic_pointer_cast<uml::Parameter>(_temp);
-			setParameter(_parameter); //1326
+			setParameter(_parameter); //1226
 			return true;
 		}
 	}
@@ -438,7 +438,7 @@ void ActivityParameterNodeImpl::load(std::shared_ptr<persistence::interfaces::XL
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -473,7 +473,7 @@ void ActivityParameterNodeImpl::loadAttributes(std::shared_ptr<persistence::inte
 
 void ActivityParameterNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	ObjectNodeImpl::loadNode(nodeName, loadHandler);
@@ -483,7 +483,7 @@ void ActivityParameterNodeImpl::resolveReferences(const int featureID, std::list
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::ACTIVITYPARAMETERNODE_ATTRIBUTE_PARAMETER:
+		case uml::umlPackage::ACTIVITYPARAMETERNODE_ATTRIBUTE_PARAMETER:
 		{
 			if (references.size() == 1)
 			{
@@ -507,7 +507,6 @@ void ActivityParameterNodeImpl::save(std::shared_ptr<persistence::interfaces::XS
 	ActivityNodeImpl::saveContent(saveHandler);
 	TypedElementImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);
@@ -529,7 +528,7 @@ void ActivityParameterNodeImpl::saveContent(std::shared_ptr<persistence::interfa
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 

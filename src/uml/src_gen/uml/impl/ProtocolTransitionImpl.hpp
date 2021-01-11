@@ -28,7 +28,7 @@ namespace uml
 			ProtocolTransitionImpl& operator=(ProtocolTransitionImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			ProtocolTransitionImpl();
 			virtual std::shared_ptr<ProtocolTransition> getThisProtocolTransitionPtr() const;
 			virtual void setThisProtocolTransitionPtr(std::weak_ptr<ProtocolTransition> thisProtocolTransitionPtr);

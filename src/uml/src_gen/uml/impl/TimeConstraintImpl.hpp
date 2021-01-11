@@ -28,7 +28,7 @@ namespace uml
 			TimeConstraintImpl& operator=(TimeConstraintImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			TimeConstraintImpl();
 			virtual std::shared_ptr<TimeConstraint> getThisTimeConstraintPtr() const;
 			virtual void setThisTimeConstraintPtr(std::weak_ptr<TimeConstraint> thisTimeConstraintPtr);

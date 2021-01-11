@@ -28,7 +28,7 @@ namespace uml
 			OpaqueActionImpl& operator=(OpaqueActionImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			OpaqueActionImpl();
 			virtual std::shared_ptr<OpaqueAction> getThisOpaqueActionPtr() const;
 			virtual void setThisOpaqueActionPtr(std::weak_ptr<OpaqueAction> thisOpaqueActionPtr);

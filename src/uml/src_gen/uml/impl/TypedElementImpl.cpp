@@ -48,8 +48,8 @@
 #include "uml/Type.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -138,7 +138,7 @@ std::shared_ptr<ecore::EObject>  TypedElementImpl::copy() const
 
 std::shared_ptr<ecore::EClass> TypedElementImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getTypedElement_Class();
+	return uml::umlPackage::eInstance()->getTypedElement_Class();
 }
 
 //*********************************
@@ -224,8 +224,8 @@ Any TypedElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::TYPEDELEMENT_ATTRIBUTE_TYPE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getType())); //2469
+		case uml::umlPackage::TYPEDELEMENT_ATTRIBUTE_TYPE:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getType())); //2459
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -233,8 +233,8 @@ bool TypedElementImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::TYPEDELEMENT_ATTRIBUTE_TYPE:
-			return getType() != nullptr; //2469
+		case uml::umlPackage::TYPEDELEMENT_ATTRIBUTE_TYPE:
+			return getType() != nullptr; //2459
 	}
 	return NamedElementImpl::internalEIsSet(featureID);
 }
@@ -242,12 +242,12 @@ bool TypedElementImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::TYPEDELEMENT_ATTRIBUTE_TYPE:
+		case uml::umlPackage::TYPEDELEMENT_ATTRIBUTE_TYPE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Type> _type = std::dynamic_pointer_cast<uml::Type>(_temp);
-			setType(_type); //2469
+			setType(_type); //2459
 			return true;
 		}
 	}
@@ -266,7 +266,7 @@ void TypedElementImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandle
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -309,7 +309,7 @@ void TypedElementImpl::loadAttributes(std::shared_ptr<persistence::interfaces::X
 
 void TypedElementImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	NamedElementImpl::loadNode(nodeName, loadHandler);
@@ -319,7 +319,7 @@ void TypedElementImpl::resolveReferences(const int featureID, std::list<std::sha
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::TYPEDELEMENT_ATTRIBUTE_TYPE:
+		case uml::umlPackage::TYPEDELEMENT_ATTRIBUTE_TYPE:
 		{
 			if (references.size() == 1)
 			{
@@ -354,7 +354,7 @@ void TypedElementImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 

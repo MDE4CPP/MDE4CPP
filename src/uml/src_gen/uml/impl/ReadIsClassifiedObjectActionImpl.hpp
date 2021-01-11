@@ -28,7 +28,7 @@ namespace uml
 			ReadIsClassifiedObjectActionImpl& operator=(ReadIsClassifiedObjectActionImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			ReadIsClassifiedObjectActionImpl();
 			virtual std::shared_ptr<ReadIsClassifiedObjectAction> getThisReadIsClassifiedObjectActionPtr() const;
 			virtual void setThisReadIsClassifiedObjectActionPtr(std::weak_ptr<ReadIsClassifiedObjectAction> thisReadIsClassifiedObjectActionPtr);

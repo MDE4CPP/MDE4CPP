@@ -29,7 +29,7 @@ namespace uml
 			AssociationClassImpl& operator=(AssociationClassImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			AssociationClassImpl();
 			virtual std::shared_ptr<AssociationClass> getThisAssociationClassPtr() const;
 			virtual void setThisAssociationClassPtr(std::weak_ptr<AssociationClass> thisAssociationClassPtr);

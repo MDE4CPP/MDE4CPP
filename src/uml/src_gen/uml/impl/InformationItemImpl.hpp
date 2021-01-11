@@ -28,7 +28,7 @@ namespace uml
 			InformationItemImpl& operator=(InformationItemImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			InformationItemImpl();
 			virtual std::shared_ptr<InformationItem> getThisInformationItemPtr() const;
 			virtual void setThisInformationItemPtr(std::weak_ptr<InformationItem> thisInformationItemPtr);

@@ -28,7 +28,7 @@ namespace uml
 			StructuredClassifierImpl& operator=(StructuredClassifierImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			StructuredClassifierImpl();
 			virtual std::shared_ptr<StructuredClassifier> getThisStructuredClassifierPtr() const;
 			virtual void setThisStructuredClassifierPtr(std::weak_ptr<StructuredClassifier> thisStructuredClassifierPtr);

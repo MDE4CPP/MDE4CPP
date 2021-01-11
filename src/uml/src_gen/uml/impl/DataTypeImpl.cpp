@@ -84,8 +84,8 @@
 #include "uml/UseCase.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -128,11 +128,11 @@ DataTypeImpl::DataTypeImpl(std::weak_ptr<uml::Package > par_Package, const int r
 {
 	switch(reference_id)
 	{	
-	case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
+	case umlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
 		m_owningPackage = par_Package;
 		m_namespace = par_Package;
 		 return;
-	case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
+	case umlPackage::TYPE_ATTRIBUTE_PACKAGE:
 		m_package = par_Package;
 		m_namespace = par_Package;
 		 return;
@@ -361,7 +361,7 @@ std::shared_ptr<ecore::EObject>  DataTypeImpl::copy() const
 
 std::shared_ptr<ecore::EClass> DataTypeImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getDataType_Class();
+	return uml::umlPackage::eInstance()->getDataType_Class();
 }
 
 //*********************************
@@ -608,7 +608,7 @@ Any DataTypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::DATATYPE_ATTRIBUTE_OWNEDATTRIBUTE:
+		case uml::umlPackage::DATATYPE_ATTRIBUTE_OWNEDATTRIBUTE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Property>::iterator iter = m_ownedAttribute->begin();
@@ -618,9 +618,9 @@ Any DataTypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //6638
+			return eAny(tempList); //6538
 		}
-		case uml::UmlPackage::DATATYPE_ATTRIBUTE_OWNEDOPERATION:
+		case uml::umlPackage::DATATYPE_ATTRIBUTE_OWNEDOPERATION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Operation>::iterator iter = m_ownedOperation->begin();
@@ -630,7 +630,7 @@ Any DataTypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //6639
+			return eAny(tempList); //6539
 		}
 	}
 	return ClassifierImpl::eGet(featureID, resolve, coreType);
@@ -639,10 +639,10 @@ bool DataTypeImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::DATATYPE_ATTRIBUTE_OWNEDATTRIBUTE:
-			return getOwnedAttribute() != nullptr; //6638
-		case uml::UmlPackage::DATATYPE_ATTRIBUTE_OWNEDOPERATION:
-			return getOwnedOperation() != nullptr; //6639
+		case uml::umlPackage::DATATYPE_ATTRIBUTE_OWNEDATTRIBUTE:
+			return getOwnedAttribute() != nullptr; //6538
+		case uml::umlPackage::DATATYPE_ATTRIBUTE_OWNEDOPERATION:
+			return getOwnedOperation() != nullptr; //6539
 	}
 	return ClassifierImpl::internalEIsSet(featureID);
 }
@@ -650,7 +650,7 @@ bool DataTypeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::DATATYPE_ATTRIBUTE_OWNEDATTRIBUTE:
+		case uml::umlPackage::DATATYPE_ATTRIBUTE_OWNEDATTRIBUTE:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -686,7 +686,7 @@ bool DataTypeImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case uml::UmlPackage::DATATYPE_ATTRIBUTE_OWNEDOPERATION:
+		case uml::umlPackage::DATATYPE_ATTRIBUTE_OWNEDOPERATION:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -738,7 +738,7 @@ void DataTypeImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> l
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -754,7 +754,7 @@ void DataTypeImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoad
 
 void DataTypeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -765,7 +765,7 @@ void DataTypeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::i
 			{
 				typeName = "Property";
 			}
-			std::shared_ptr<ecore::EObject> ownedAttribute = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::UmlPackage::PROPERTY_ATTRIBUTE_DATATYPE);
+			std::shared_ptr<ecore::EObject> ownedAttribute = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::PROPERTY_ATTRIBUTE_DATATYPE);
 			if (ownedAttribute != nullptr)
 			{
 				loadHandler->handleChild(ownedAttribute);
@@ -780,7 +780,7 @@ void DataTypeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::i
 			{
 				typeName = "Operation";
 			}
-			std::shared_ptr<ecore::EObject> ownedOperation = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::UmlPackage::OPERATION_ATTRIBUTE_DATATYPE);
+			std::shared_ptr<ecore::EObject> ownedOperation = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::OPERATION_ATTRIBUTE_DATATYPE);
 			if (ownedOperation != nullptr)
 			{
 				loadHandler->handleChild(ownedOperation);
@@ -838,7 +838,7 @@ void DataTypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 		// Save 'ownedAttribute'
 		for (std::shared_ptr<uml::Property> ownedAttribute : *this->getOwnedAttribute()) 

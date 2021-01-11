@@ -42,8 +42,8 @@
 #include "uml/ProtocolStateMachine.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -127,7 +127,7 @@ std::shared_ptr<ecore::EObject>  ProtocolConformanceImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ProtocolConformanceImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getProtocolConformance_Class();
+	return uml::umlPackage::eInstance()->getProtocolConformance_Class();
 }
 
 //*********************************
@@ -284,10 +284,10 @@ Any ProtocolConformanceImpl::eGet(int featureID, bool resolve, bool coreType) co
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::PROTOCOLCONFORMANCE_ATTRIBUTE_GENERALMACHINE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getGeneralMachine())); //1876
-		case uml::UmlPackage::PROTOCOLCONFORMANCE_ATTRIBUTE_SPECIFICMACHINE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSpecificMachine().lock())); //1877
+		case uml::umlPackage::PROTOCOLCONFORMANCE_ATTRIBUTE_GENERALMACHINE:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getGeneralMachine())); //1866
+		case uml::umlPackage::PROTOCOLCONFORMANCE_ATTRIBUTE_SPECIFICMACHINE:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSpecificMachine().lock())); //1867
 	}
 	return DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
 }
@@ -295,10 +295,10 @@ bool ProtocolConformanceImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::PROTOCOLCONFORMANCE_ATTRIBUTE_GENERALMACHINE:
-			return getGeneralMachine() != nullptr; //1876
-		case uml::UmlPackage::PROTOCOLCONFORMANCE_ATTRIBUTE_SPECIFICMACHINE:
-			return getSpecificMachine().lock() != nullptr; //1877
+		case uml::umlPackage::PROTOCOLCONFORMANCE_ATTRIBUTE_GENERALMACHINE:
+			return getGeneralMachine() != nullptr; //1866
+		case uml::umlPackage::PROTOCOLCONFORMANCE_ATTRIBUTE_SPECIFICMACHINE:
+			return getSpecificMachine().lock() != nullptr; //1867
 	}
 	return DirectedRelationshipImpl::internalEIsSet(featureID);
 }
@@ -306,20 +306,20 @@ bool ProtocolConformanceImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::PROTOCOLCONFORMANCE_ATTRIBUTE_GENERALMACHINE:
+		case uml::umlPackage::PROTOCOLCONFORMANCE_ATTRIBUTE_GENERALMACHINE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ProtocolStateMachine> _generalMachine = std::dynamic_pointer_cast<uml::ProtocolStateMachine>(_temp);
-			setGeneralMachine(_generalMachine); //1876
+			setGeneralMachine(_generalMachine); //1866
 			return true;
 		}
-		case uml::UmlPackage::PROTOCOLCONFORMANCE_ATTRIBUTE_SPECIFICMACHINE:
+		case uml::umlPackage::PROTOCOLCONFORMANCE_ATTRIBUTE_SPECIFICMACHINE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ProtocolStateMachine> _specificMachine = std::dynamic_pointer_cast<uml::ProtocolStateMachine>(_temp);
-			setSpecificMachine(_specificMachine); //1877
+			setSpecificMachine(_specificMachine); //1867
 			return true;
 		}
 	}
@@ -338,7 +338,7 @@ void ProtocolConformanceImpl::load(std::shared_ptr<persistence::interfaces::XLoa
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -373,7 +373,7 @@ void ProtocolConformanceImpl::loadAttributes(std::shared_ptr<persistence::interf
 
 void ProtocolConformanceImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	DirectedRelationshipImpl::loadNode(nodeName, loadHandler);
@@ -383,7 +383,7 @@ void ProtocolConformanceImpl::resolveReferences(const int featureID, std::list<s
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::PROTOCOLCONFORMANCE_ATTRIBUTE_GENERALMACHINE:
+		case uml::umlPackage::PROTOCOLCONFORMANCE_ATTRIBUTE_GENERALMACHINE:
 		{
 			if (references.size() == 1)
 			{
@@ -395,7 +395,7 @@ void ProtocolConformanceImpl::resolveReferences(const int featureID, std::list<s
 			return;
 		}
 
-		case uml::UmlPackage::PROTOCOLCONFORMANCE_ATTRIBUTE_SPECIFICMACHINE:
+		case uml::umlPackage::PROTOCOLCONFORMANCE_ATTRIBUTE_SPECIFICMACHINE:
 		{
 			if (references.size() == 1)
 			{
@@ -433,7 +433,7 @@ void ProtocolConformanceImpl::saveContent(std::shared_ptr<persistence::interface
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 

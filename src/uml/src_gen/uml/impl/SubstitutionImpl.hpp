@@ -28,7 +28,7 @@ namespace uml
 			SubstitutionImpl& operator=(SubstitutionImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			SubstitutionImpl();
 			virtual std::shared_ptr<Substitution> getThisSubstitutionPtr() const;
 			virtual void setThisSubstitutionPtr(std::weak_ptr<Substitution> thisSubstitutionPtr);

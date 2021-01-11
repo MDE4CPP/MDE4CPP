@@ -14,14 +14,25 @@
 #include "StandardProfile/StandardProfileFactory.hpp"
 #include "StandardProfile/impl/StandardProfilePackageImpl.hpp"
 #include "uml/Stereotype.hpp"
+
+//Types included from attributes, operation parameters, imports and composite owner classes
 #include "uml/Package.hpp"
 
+//Packges and Factories included from types of attributes, operation parameters, imports and composite owner classes
+#include "uml/umlFactory.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
+//Packages of included Enumerations
 
+//Includes of PluginFramework (if required)
 
-//Included from Ports typed by interface
+//Includes of OpaqueBevaiors (if required)
 
-//Included from roles of ConnectorEnds
+//Includes from InstanceValues (if required)
+
+//Includes from Ports typed by interfaces (if required)
+
+//Includes from roles of ConnectorEnds (if required)
 
 using namespace StandardProfile;
 
@@ -63,6 +74,7 @@ FrameworkImpl::FrameworkImpl(const FrameworkImpl & obj):FrameworkImpl()
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Framework "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	instantiate();
 }
 
 std::shared_ptr<ecore::EObject>  FrameworkImpl::copy() const
@@ -79,7 +91,7 @@ std::shared_ptr<uml::Class> FrameworkImpl::getMetaClass()
 }
 
 void FrameworkImpl::instantiate()
-{	
+{   
 	
 }
 

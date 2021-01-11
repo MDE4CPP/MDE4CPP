@@ -44,8 +44,8 @@
 #include "uml/TemplateParameter.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -131,7 +131,7 @@ std::shared_ptr<ecore::EObject>  TemplateParameterSubstitutionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> TemplateParameterSubstitutionImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getTemplateParameterSubstitution_Class();
+	return uml::umlPackage::eInstance()->getTemplateParameterSubstitution_Class();
 }
 
 //*********************************
@@ -270,14 +270,14 @@ Any TemplateParameterSubstitutionImpl::eGet(int featureID, bool resolve, bool co
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_ACTUAL:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getActual())); //2333
-		case uml::UmlPackage::TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_FORMAL:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getFormal())); //2334
-		case uml::UmlPackage::TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_OWNEDACTUAL:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOwnedActual())); //2335
-		case uml::UmlPackage::TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_TEMPLATEBINDING:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getTemplateBinding().lock())); //2336
+		case uml::umlPackage::TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_ACTUAL:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getActual())); //2323
+		case uml::umlPackage::TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_FORMAL:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getFormal())); //2324
+		case uml::umlPackage::TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_OWNEDACTUAL:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOwnedActual())); //2325
+		case uml::umlPackage::TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_TEMPLATEBINDING:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getTemplateBinding().lock())); //2326
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -285,14 +285,14 @@ bool TemplateParameterSubstitutionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_ACTUAL:
-			return getActual() != nullptr; //2333
-		case uml::UmlPackage::TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_FORMAL:
-			return getFormal() != nullptr; //2334
-		case uml::UmlPackage::TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_OWNEDACTUAL:
-			return getOwnedActual() != nullptr; //2335
-		case uml::UmlPackage::TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_TEMPLATEBINDING:
-			return getTemplateBinding().lock() != nullptr; //2336
+		case uml::umlPackage::TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_ACTUAL:
+			return getActual() != nullptr; //2323
+		case uml::umlPackage::TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_FORMAL:
+			return getFormal() != nullptr; //2324
+		case uml::umlPackage::TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_OWNEDACTUAL:
+			return getOwnedActual() != nullptr; //2325
+		case uml::umlPackage::TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_TEMPLATEBINDING:
+			return getTemplateBinding().lock() != nullptr; //2326
 	}
 	return ElementImpl::internalEIsSet(featureID);
 }
@@ -300,36 +300,36 @@ bool TemplateParameterSubstitutionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_ACTUAL:
+		case uml::umlPackage::TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_ACTUAL:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ParameterableElement> _actual = std::dynamic_pointer_cast<uml::ParameterableElement>(_temp);
-			setActual(_actual); //2333
+			setActual(_actual); //2323
 			return true;
 		}
-		case uml::UmlPackage::TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_FORMAL:
+		case uml::umlPackage::TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_FORMAL:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::TemplateParameter> _formal = std::dynamic_pointer_cast<uml::TemplateParameter>(_temp);
-			setFormal(_formal); //2334
+			setFormal(_formal); //2324
 			return true;
 		}
-		case uml::UmlPackage::TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_OWNEDACTUAL:
+		case uml::umlPackage::TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_OWNEDACTUAL:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ParameterableElement> _ownedActual = std::dynamic_pointer_cast<uml::ParameterableElement>(_temp);
-			setOwnedActual(_ownedActual); //2335
+			setOwnedActual(_ownedActual); //2325
 			return true;
 		}
-		case uml::UmlPackage::TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_TEMPLATEBINDING:
+		case uml::umlPackage::TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_TEMPLATEBINDING:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::TemplateBinding> _templateBinding = std::dynamic_pointer_cast<uml::TemplateBinding>(_temp);
-			setTemplateBinding(_templateBinding); //2336
+			setTemplateBinding(_templateBinding); //2326
 			return true;
 		}
 	}
@@ -348,7 +348,7 @@ void TemplateParameterSubstitutionImpl::load(std::shared_ptr<persistence::interf
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -390,7 +390,7 @@ void TemplateParameterSubstitutionImpl::loadAttributes(std::shared_ptr<persisten
 
 void TemplateParameterSubstitutionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -427,7 +427,7 @@ void TemplateParameterSubstitutionImpl::resolveReferences(const int featureID, s
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_ACTUAL:
+		case uml::umlPackage::TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_ACTUAL:
 		{
 			if (references.size() == 1)
 			{
@@ -439,7 +439,7 @@ void TemplateParameterSubstitutionImpl::resolveReferences(const int featureID, s
 			return;
 		}
 
-		case uml::UmlPackage::TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_FORMAL:
+		case uml::umlPackage::TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_FORMAL:
 		{
 			if (references.size() == 1)
 			{
@@ -451,7 +451,7 @@ void TemplateParameterSubstitutionImpl::resolveReferences(const int featureID, s
 			return;
 		}
 
-		case uml::UmlPackage::TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_TEMPLATEBINDING:
+		case uml::umlPackage::TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_TEMPLATEBINDING:
 		{
 			if (references.size() == 1)
 			{
@@ -483,7 +483,7 @@ void TemplateParameterSubstitutionImpl::saveContent(std::shared_ptr<persistence:
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 		// Save 'ownedActual'
 		std::shared_ptr<uml::ParameterableElement > ownedActual = this->getOwnedActual();

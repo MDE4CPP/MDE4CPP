@@ -28,7 +28,7 @@ namespace uml
 			ParameterableElementImpl& operator=(ParameterableElementImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			ParameterableElementImpl();
 			virtual std::shared_ptr<ParameterableElement> getThisParameterableElementPtr() const;
 			virtual void setThisParameterableElementPtr(std::weak_ptr<ParameterableElement> thisParameterableElementPtr);

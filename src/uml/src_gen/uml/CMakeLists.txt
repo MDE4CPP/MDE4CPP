@@ -34,16 +34,16 @@ string(REPLACE "\\" "/" MDE4CPP_HOME $ENV{MDE4CPP_HOME})
 
 SET(SOURCE_FILES
 # Factories and packages
-	UmlFactory.cpp
-	impl/UmlFactoryImpl.cpp
-	UmlPackage.cpp
-	impl/UmlPackageImpl.cpp
-	impl/UmlPackageImpl_Creation.cpp
-	impl/UmlPackageImpl_Initialization.cpp
+	umlFactory.cpp
+	impl/umlFactoryImpl.cpp
+	umlPackage.cpp
+	impl/umlPackageImpl.cpp
+	impl/umlPackageImpl_Creation.cpp
+	impl/umlPackageImpl_Initialization.cpp
 	
 # Package plugin
-	impl/UmlPluginImpl.cpp
-	UmlPlugin.cpp
+	impl/umlPluginImpl.cpp
+	umlPlugin.cpp
 # Package content
 	impl/AbstractionImpl.cpp
 	impl/AcceptCallActionImpl.cpp
@@ -52,7 +52,6 @@ SET(SOURCE_FILES
 	impl/ActionExecutionSpecificationImpl.cpp
 	impl/ActionInputPinImpl.cpp
 	impl/ActivityImpl.cpp
-	impl/ActivityContentImpl.cpp
 	impl/ActivityEdgeImpl.cpp
 	impl/ActivityFinalNodeImpl.cpp
 	impl/ActivityGroupImpl.cpp

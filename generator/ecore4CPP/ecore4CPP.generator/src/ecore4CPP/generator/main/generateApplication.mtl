@@ -26,8 +26,8 @@
 #include <iostream>
 
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "[aPackage.name/]/[packageName.toUpperFirst()/]Factory.hpp"
-#include "[aPackage.name/]/[packageName.toUpperFirst()/]Package.hpp"
+#include "[aPackage.name/]/[packageName/]Factory.hpp"
+#include "[aPackage.name/]/[packageName/]Package.hpp"
 
 [for (aEClass : EClass | aPackage.eAllContents(EClass))]
 #include "[aPackage.name/]/[aEClass.name.toUpperFirst()/].hpp"
@@ -55,8 +55,8 @@ using namespace [packageName/];
 int main ()
 {
 	//Create Model Factory and Package
-	std::shared_ptr<[packageName.toUpperFirst()/]Factory> factory = [packageName.toUpperFirst()/]Factory::eInstance();
-	std::shared_ptr<[packageName.toUpperFirst()/]Package> package = [packageName.toUpperFirst()/]Package::eInstance();
+	std::shared_ptr<[packageName/]Factory> factory = [packageName/]Factory::eInstance();
+	std::shared_ptr<[packageName/]Package> package = [packageName/]Package::eInstance();
 
 [if (hasMainSourceCode())]
 [getMainSourceCode()/]

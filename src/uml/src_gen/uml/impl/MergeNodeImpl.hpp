@@ -28,7 +28,7 @@ namespace uml
 			MergeNodeImpl& operator=(MergeNodeImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			MergeNodeImpl();
 			virtual std::shared_ptr<MergeNode> getThisMergeNodePtr() const;
 			virtual void setThisMergeNodePtr(std::weak_ptr<MergeNode> thisMergeNodePtr);

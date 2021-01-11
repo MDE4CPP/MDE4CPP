@@ -56,8 +56,8 @@
 #include "uml/ValueSpecificationAction.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -192,7 +192,7 @@ std::shared_ptr<ecore::EObject>  IntervalImpl::copy() const
 
 std::shared_ptr<ecore::EClass> IntervalImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getInterval_Class();
+	return uml::umlPackage::eInstance()->getInterval_Class();
 }
 
 //*********************************
@@ -319,10 +319,10 @@ Any IntervalImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::INTERVAL_ATTRIBUTE_MAX:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getMax())); //12915
-		case uml::UmlPackage::INTERVAL_ATTRIBUTE_MIN:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getMin())); //12916
+		case uml::umlPackage::INTERVAL_ATTRIBUTE_MAX:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getMax())); //12815
+		case uml::umlPackage::INTERVAL_ATTRIBUTE_MIN:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getMin())); //12816
 	}
 	return ValueSpecificationImpl::eGet(featureID, resolve, coreType);
 }
@@ -330,10 +330,10 @@ bool IntervalImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::INTERVAL_ATTRIBUTE_MAX:
-			return getMax() != nullptr; //12915
-		case uml::UmlPackage::INTERVAL_ATTRIBUTE_MIN:
-			return getMin() != nullptr; //12916
+		case uml::umlPackage::INTERVAL_ATTRIBUTE_MAX:
+			return getMax() != nullptr; //12815
+		case uml::umlPackage::INTERVAL_ATTRIBUTE_MIN:
+			return getMin() != nullptr; //12816
 	}
 	return ValueSpecificationImpl::internalEIsSet(featureID);
 }
@@ -341,20 +341,20 @@ bool IntervalImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::INTERVAL_ATTRIBUTE_MAX:
+		case uml::umlPackage::INTERVAL_ATTRIBUTE_MAX:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ValueSpecification> _max = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
-			setMax(_max); //12915
+			setMax(_max); //12815
 			return true;
 		}
-		case uml::UmlPackage::INTERVAL_ATTRIBUTE_MIN:
+		case uml::umlPackage::INTERVAL_ATTRIBUTE_MIN:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ValueSpecification> _min = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
-			setMin(_min); //12916
+			setMin(_min); //12816
 			return true;
 		}
 	}
@@ -373,7 +373,7 @@ void IntervalImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> l
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -415,7 +415,7 @@ void IntervalImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoad
 
 void IntervalImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	ValueSpecificationImpl::loadNode(nodeName, loadHandler);
@@ -425,7 +425,7 @@ void IntervalImpl::resolveReferences(const int featureID, std::list<std::shared_
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::INTERVAL_ATTRIBUTE_MAX:
+		case uml::umlPackage::INTERVAL_ATTRIBUTE_MAX:
 		{
 			if (references.size() == 1)
 			{
@@ -437,7 +437,7 @@ void IntervalImpl::resolveReferences(const int featureID, std::list<std::shared_
 			return;
 		}
 
-		case uml::UmlPackage::INTERVAL_ATTRIBUTE_MIN:
+		case uml::umlPackage::INTERVAL_ATTRIBUTE_MIN:
 		{
 			if (references.size() == 1)
 			{
@@ -480,7 +480,7 @@ void IntervalImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 

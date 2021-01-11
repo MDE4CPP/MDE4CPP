@@ -29,7 +29,7 @@ namespace uml
 			ParameterImpl& operator=(ParameterImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			ParameterImpl();
 			virtual std::shared_ptr<Parameter> getThisParameterPtr() const;
 			virtual void setThisParameterPtr(std::weak_ptr<Parameter> thisParameterPtr);

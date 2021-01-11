@@ -58,8 +58,8 @@
 #include "uml/ValueSpecificationAction.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -194,7 +194,7 @@ std::shared_ptr<ecore::EObject>  TimeIntervalImpl::copy() const
 
 std::shared_ptr<ecore::EClass> TimeIntervalImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getTimeInterval_Class();
+	return uml::umlPackage::eInstance()->getTimeInterval_Class();
 }
 
 //*********************************
@@ -320,7 +320,7 @@ void TimeIntervalImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandle
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -336,7 +336,7 @@ void TimeIntervalImpl::loadAttributes(std::shared_ptr<persistence::interfaces::X
 
 void TimeIntervalImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	IntervalImpl::loadNode(nodeName, loadHandler);
@@ -378,7 +378,7 @@ void TimeIntervalImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 

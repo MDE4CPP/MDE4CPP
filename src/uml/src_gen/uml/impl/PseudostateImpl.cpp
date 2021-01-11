@@ -55,8 +55,8 @@
 #include "uml/Vertex.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -180,7 +180,7 @@ std::shared_ptr<ecore::EObject>  PseudostateImpl::copy() const
 
 std::shared_ptr<ecore::EClass> PseudostateImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getPseudostate_Class();
+	return uml::umlPackage::eInstance()->getPseudostate_Class();
 }
 
 //*********************************
@@ -369,12 +369,12 @@ Any PseudostateImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::PSEUDOSTATE_ATTRIBUTE_KIND:
-			return eAny(getKind()); //19013
-		case uml::UmlPackage::PSEUDOSTATE_ATTRIBUTE_STATE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getState().lock())); //19012
-		case uml::UmlPackage::PSEUDOSTATE_ATTRIBUTE_STATEMACHINE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getStateMachine().lock())); //19014
+		case uml::umlPackage::PSEUDOSTATE_ATTRIBUTE_KIND:
+			return eAny(getKind()); //18913
+		case uml::umlPackage::PSEUDOSTATE_ATTRIBUTE_STATE:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getState().lock())); //18912
+		case uml::umlPackage::PSEUDOSTATE_ATTRIBUTE_STATEMACHINE:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getStateMachine().lock())); //18914
 	}
 	return VertexImpl::eGet(featureID, resolve, coreType);
 }
@@ -382,12 +382,12 @@ bool PseudostateImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::PSEUDOSTATE_ATTRIBUTE_KIND:
-			return m_kind != PseudostateKind::INITIAL;; //19013
-		case uml::UmlPackage::PSEUDOSTATE_ATTRIBUTE_STATE:
-			return getState().lock() != nullptr; //19012
-		case uml::UmlPackage::PSEUDOSTATE_ATTRIBUTE_STATEMACHINE:
-			return getStateMachine().lock() != nullptr; //19014
+		case uml::umlPackage::PSEUDOSTATE_ATTRIBUTE_KIND:
+			return m_kind != PseudostateKind::INITIAL;; //18913
+		case uml::umlPackage::PSEUDOSTATE_ATTRIBUTE_STATE:
+			return getState().lock() != nullptr; //18912
+		case uml::umlPackage::PSEUDOSTATE_ATTRIBUTE_STATEMACHINE:
+			return getStateMachine().lock() != nullptr; //18914
 	}
 	return VertexImpl::internalEIsSet(featureID);
 }
@@ -395,27 +395,27 @@ bool PseudostateImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::PSEUDOSTATE_ATTRIBUTE_KIND:
+		case uml::umlPackage::PSEUDOSTATE_ATTRIBUTE_KIND:
 		{
 			// BOOST CAST
 			uml::PseudostateKind _kind = newValue->get<uml::PseudostateKind>();
-			setKind(_kind); //19013
+			setKind(_kind); //18913
 			return true;
 		}
-		case uml::UmlPackage::PSEUDOSTATE_ATTRIBUTE_STATE:
+		case uml::umlPackage::PSEUDOSTATE_ATTRIBUTE_STATE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::State> _state = std::dynamic_pointer_cast<uml::State>(_temp);
-			setState(_state); //19012
+			setState(_state); //18912
 			return true;
 		}
-		case uml::UmlPackage::PSEUDOSTATE_ATTRIBUTE_STATEMACHINE:
+		case uml::umlPackage::PSEUDOSTATE_ATTRIBUTE_STATEMACHINE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::StateMachine> _stateMachine = std::dynamic_pointer_cast<uml::StateMachine>(_temp);
-			setStateMachine(_stateMachine); //19014
+			setStateMachine(_stateMachine); //18914
 			return true;
 		}
 	}
@@ -434,7 +434,7 @@ void PseudostateImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -510,7 +510,7 @@ void PseudostateImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XL
 
 void PseudostateImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	VertexImpl::loadNode(nodeName, loadHandler);
@@ -520,7 +520,7 @@ void PseudostateImpl::resolveReferences(const int featureID, std::list<std::shar
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::PSEUDOSTATE_ATTRIBUTE_STATE:
+		case uml::umlPackage::PSEUDOSTATE_ATTRIBUTE_STATE:
 		{
 			if (references.size() == 1)
 			{
@@ -532,7 +532,7 @@ void PseudostateImpl::resolveReferences(const int featureID, std::list<std::shar
 			return;
 		}
 
-		case uml::UmlPackage::PSEUDOSTATE_ATTRIBUTE_STATEMACHINE:
+		case uml::umlPackage::PSEUDOSTATE_ATTRIBUTE_STATEMACHINE:
 		{
 			if (references.size() == 1)
 			{
@@ -570,7 +570,7 @@ void PseudostateImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 		// Add attributes

@@ -28,7 +28,7 @@ namespace uml
 			QualifierValueImpl& operator=(QualifierValueImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			QualifierValueImpl();
 			virtual std::shared_ptr<QualifierValue> getThisQualifierValuePtr() const;
 			virtual void setThisQualifierValuePtr(std::weak_ptr<QualifierValue> thisQualifierValuePtr);

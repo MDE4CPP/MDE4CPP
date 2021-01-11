@@ -75,8 +75,8 @@
 #include "uml/StructuredActivityNode.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -270,7 +270,7 @@ std::shared_ptr<ecore::EObject>  ReduceActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ReduceActionImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getReduceAction_Class();
+	return uml::umlPackage::eInstance()->getReduceAction_Class();
 }
 
 //*********************************
@@ -499,14 +499,14 @@ Any ReduceActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::REDUCEACTION_ATTRIBUTE_COLLECTION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getCollection())); //20727
-		case uml::UmlPackage::REDUCEACTION_ATTRIBUTE_ISORDERED:
-			return eAny(getIsOrdered()); //20728
-		case uml::UmlPackage::REDUCEACTION_ATTRIBUTE_REDUCER:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getReducer())); //20729
-		case uml::UmlPackage::REDUCEACTION_ATTRIBUTE_RESULT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //20730
+		case uml::umlPackage::REDUCEACTION_ATTRIBUTE_COLLECTION:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getCollection())); //20627
+		case uml::umlPackage::REDUCEACTION_ATTRIBUTE_ISORDERED:
+			return eAny(getIsOrdered()); //20628
+		case uml::umlPackage::REDUCEACTION_ATTRIBUTE_REDUCER:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getReducer())); //20629
+		case uml::umlPackage::REDUCEACTION_ATTRIBUTE_RESULT:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //20630
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -514,14 +514,14 @@ bool ReduceActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::REDUCEACTION_ATTRIBUTE_COLLECTION:
-			return getCollection() != nullptr; //20727
-		case uml::UmlPackage::REDUCEACTION_ATTRIBUTE_ISORDERED:
-			return getIsOrdered() != false; //20728
-		case uml::UmlPackage::REDUCEACTION_ATTRIBUTE_REDUCER:
-			return getReducer() != nullptr; //20729
-		case uml::UmlPackage::REDUCEACTION_ATTRIBUTE_RESULT:
-			return getResult() != nullptr; //20730
+		case uml::umlPackage::REDUCEACTION_ATTRIBUTE_COLLECTION:
+			return getCollection() != nullptr; //20627
+		case uml::umlPackage::REDUCEACTION_ATTRIBUTE_ISORDERED:
+			return getIsOrdered() != false; //20628
+		case uml::umlPackage::REDUCEACTION_ATTRIBUTE_REDUCER:
+			return getReducer() != nullptr; //20629
+		case uml::umlPackage::REDUCEACTION_ATTRIBUTE_RESULT:
+			return getResult() != nullptr; //20630
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
@@ -529,35 +529,35 @@ bool ReduceActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::REDUCEACTION_ATTRIBUTE_COLLECTION:
+		case uml::umlPackage::REDUCEACTION_ATTRIBUTE_COLLECTION:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::InputPin> _collection = std::dynamic_pointer_cast<uml::InputPin>(_temp);
-			setCollection(_collection); //20727
+			setCollection(_collection); //20627
 			return true;
 		}
-		case uml::UmlPackage::REDUCEACTION_ATTRIBUTE_ISORDERED:
+		case uml::umlPackage::REDUCEACTION_ATTRIBUTE_ISORDERED:
 		{
 			// BOOST CAST
 			bool _isOrdered = newValue->get<bool>();
-			setIsOrdered(_isOrdered); //20728
+			setIsOrdered(_isOrdered); //20628
 			return true;
 		}
-		case uml::UmlPackage::REDUCEACTION_ATTRIBUTE_REDUCER:
+		case uml::umlPackage::REDUCEACTION_ATTRIBUTE_REDUCER:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Behavior> _reducer = std::dynamic_pointer_cast<uml::Behavior>(_temp);
-			setReducer(_reducer); //20729
+			setReducer(_reducer); //20629
 			return true;
 		}
-		case uml::UmlPackage::REDUCEACTION_ATTRIBUTE_RESULT:
+		case uml::umlPackage::REDUCEACTION_ATTRIBUTE_RESULT:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::OutputPin> _result = std::dynamic_pointer_cast<uml::OutputPin>(_temp);
-			setResult(_result); //20730
+			setResult(_result); //20630
 			return true;
 		}
 	}
@@ -576,7 +576,7 @@ void ReduceActionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandle
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -620,7 +620,7 @@ void ReduceActionImpl::loadAttributes(std::shared_ptr<persistence::interfaces::X
 
 void ReduceActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -672,7 +672,7 @@ void ReduceActionImpl::resolveReferences(const int featureID, std::list<std::sha
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::REDUCEACTION_ATTRIBUTE_REDUCER:
+		case uml::umlPackage::REDUCEACTION_ATTRIBUTE_REDUCER:
 		{
 			if (references.size() == 1)
 			{
@@ -697,7 +697,6 @@ void ReduceActionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandle
 	
 	ActivityNodeImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);
@@ -720,7 +719,7 @@ void ReduceActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 		// Save 'collection'
 		std::shared_ptr<uml::InputPin > collection = this->getCollection();

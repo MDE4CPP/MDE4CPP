@@ -28,7 +28,7 @@ namespace uml
 			LinkEndCreationDataImpl& operator=(LinkEndCreationDataImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			LinkEndCreationDataImpl();
 			virtual std::shared_ptr<LinkEndCreationData> getThisLinkEndCreationDataPtr() const;
 			virtual void setThisLinkEndCreationDataPtr(std::weak_ptr<LinkEndCreationData> thisLinkEndCreationDataPtr);

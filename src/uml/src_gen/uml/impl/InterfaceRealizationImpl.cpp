@@ -58,8 +58,8 @@
 #include "uml/TemplateParameter.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -211,7 +211,7 @@ std::shared_ptr<ecore::EObject>  InterfaceRealizationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> InterfaceRealizationImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getInterfaceRealization_Class();
+	return uml::umlPackage::eInstance()->getInterfaceRealization_Class();
 }
 
 //*********************************
@@ -388,10 +388,10 @@ Any InterfaceRealizationImpl::eGet(int featureID, bool resolve, bool coreType) c
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::INTERFACEREALIZATION_ATTRIBUTE_CONTRACT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getContract())); //12718
-		case uml::UmlPackage::INTERFACEREALIZATION_ATTRIBUTE_IMPLEMENTINGCLASSIFIER:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getImplementingClassifier().lock())); //12719
+		case uml::umlPackage::INTERFACEREALIZATION_ATTRIBUTE_CONTRACT:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getContract())); //12618
+		case uml::umlPackage::INTERFACEREALIZATION_ATTRIBUTE_IMPLEMENTINGCLASSIFIER:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getImplementingClassifier().lock())); //12619
 	}
 	return RealizationImpl::eGet(featureID, resolve, coreType);
 }
@@ -399,10 +399,10 @@ bool InterfaceRealizationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::INTERFACEREALIZATION_ATTRIBUTE_CONTRACT:
-			return getContract() != nullptr; //12718
-		case uml::UmlPackage::INTERFACEREALIZATION_ATTRIBUTE_IMPLEMENTINGCLASSIFIER:
-			return getImplementingClassifier().lock() != nullptr; //12719
+		case uml::umlPackage::INTERFACEREALIZATION_ATTRIBUTE_CONTRACT:
+			return getContract() != nullptr; //12618
+		case uml::umlPackage::INTERFACEREALIZATION_ATTRIBUTE_IMPLEMENTINGCLASSIFIER:
+			return getImplementingClassifier().lock() != nullptr; //12619
 	}
 	return RealizationImpl::internalEIsSet(featureID);
 }
@@ -410,20 +410,20 @@ bool InterfaceRealizationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::INTERFACEREALIZATION_ATTRIBUTE_CONTRACT:
+		case uml::umlPackage::INTERFACEREALIZATION_ATTRIBUTE_CONTRACT:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Interface> _contract = std::dynamic_pointer_cast<uml::Interface>(_temp);
-			setContract(_contract); //12718
+			setContract(_contract); //12618
 			return true;
 		}
-		case uml::UmlPackage::INTERFACEREALIZATION_ATTRIBUTE_IMPLEMENTINGCLASSIFIER:
+		case uml::umlPackage::INTERFACEREALIZATION_ATTRIBUTE_IMPLEMENTINGCLASSIFIER:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::BehavioredClassifier> _implementingClassifier = std::dynamic_pointer_cast<uml::BehavioredClassifier>(_temp);
-			setImplementingClassifier(_implementingClassifier); //12719
+			setImplementingClassifier(_implementingClassifier); //12619
 			return true;
 		}
 	}
@@ -442,7 +442,7 @@ void InterfaceRealizationImpl::load(std::shared_ptr<persistence::interfaces::XLo
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -477,7 +477,7 @@ void InterfaceRealizationImpl::loadAttributes(std::shared_ptr<persistence::inter
 
 void InterfaceRealizationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	RealizationImpl::loadNode(nodeName, loadHandler);
@@ -487,7 +487,7 @@ void InterfaceRealizationImpl::resolveReferences(const int featureID, std::list<
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::INTERFACEREALIZATION_ATTRIBUTE_CONTRACT:
+		case uml::umlPackage::INTERFACEREALIZATION_ATTRIBUTE_CONTRACT:
 		{
 			if (references.size() == 1)
 			{
@@ -499,7 +499,7 @@ void InterfaceRealizationImpl::resolveReferences(const int featureID, std::list<
 			return;
 		}
 
-		case uml::UmlPackage::INTERFACEREALIZATION_ATTRIBUTE_IMPLEMENTINGCLASSIFIER:
+		case uml::umlPackage::INTERFACEREALIZATION_ATTRIBUTE_IMPLEMENTINGCLASSIFIER:
 		{
 			if (references.size() == 1)
 			{
@@ -549,7 +549,7 @@ void InterfaceRealizationImpl::saveContent(std::shared_ptr<persistence::interfac
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 

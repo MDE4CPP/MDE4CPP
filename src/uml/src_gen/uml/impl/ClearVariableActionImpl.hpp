@@ -28,7 +28,7 @@ namespace uml
 			ClearVariableActionImpl& operator=(ClearVariableActionImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			ClearVariableActionImpl();
 			virtual std::shared_ptr<ClearVariableAction> getThisClearVariableActionPtr() const;
 			virtual void setThisClearVariableActionPtr(std::weak_ptr<ClearVariableAction> thisClearVariableActionPtr);

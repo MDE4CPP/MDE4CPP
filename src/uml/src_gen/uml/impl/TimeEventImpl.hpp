@@ -28,7 +28,7 @@ namespace uml
 			TimeEventImpl& operator=(TimeEventImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			TimeEventImpl();
 			virtual std::shared_ptr<TimeEvent> getThisTimeEventPtr() const;
 			virtual void setThisTimeEventPtr(std::weak_ptr<TimeEvent> thisTimeEventPtr);

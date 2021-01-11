@@ -28,7 +28,7 @@ namespace uml
 			CentralBufferNodeImpl& operator=(CentralBufferNodeImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			CentralBufferNodeImpl();
 			virtual std::shared_ptr<CentralBufferNode> getThisCentralBufferNodePtr() const;
 			virtual void setThisCentralBufferNodePtr(std::weak_ptr<CentralBufferNode> thisCentralBufferNodePtr);

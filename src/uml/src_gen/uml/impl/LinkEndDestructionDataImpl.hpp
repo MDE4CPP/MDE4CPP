@@ -28,7 +28,7 @@ namespace uml
 			LinkEndDestructionDataImpl& operator=(LinkEndDestructionDataImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			LinkEndDestructionDataImpl();
 			virtual std::shared_ptr<LinkEndDestructionData> getThisLinkEndDestructionDataPtr() const;
 			virtual void setThisLinkEndDestructionDataPtr(std::weak_ptr<LinkEndDestructionData> thisLinkEndDestructionDataPtr);

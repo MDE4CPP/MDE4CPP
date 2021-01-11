@@ -57,8 +57,8 @@
 #include "fUML/Semantics/CommonBehavior/impl/CommonBehaviorFactoryImpl.hpp"
 #include "fUML/Semantics/CommonBehavior/impl/CommonBehaviorPackageImpl.hpp"
 
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
+#include "fUML/fUMLFactory.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsFactory.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
 
@@ -181,9 +181,10 @@ void OpaqueBehaviorExecutionImpl::execute()
         	std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> parameterValue(fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createParameterValue());
             parameterValue->setParameter(parameter);
 
+            //Do not override ParameterValues for INOUT parameters
+            //Otherwise the input value would be lost
             if(parameter->getDirection() != uml::ParameterDirectionKind::INOUT)
             {
-                //Otherwise the input parameter is removed (memory leak).
                 this->setParameterValue(parameterValue);
             }
 
@@ -192,6 +193,17 @@ void OpaqueBehaviorExecutionImpl::execute()
     }
 
     this->doBody(inputs, outputs);
+
+    for(std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> parameterValue : *outputs)
+    {
+    	//Now override INOUT ParameterValues with their (new) output values
+    	std::shared_ptr<uml::Parameter> parameter = parameterValue->getParameter();
+    	if(parameter->getDirection() == uml::ParameterDirectionKind::INOUT)
+    	{
+    		this->setParameterValue(parameterValue);
+    	}
+    }
+
 	//end of body
 }
 
@@ -256,7 +268,7 @@ void OpaqueBehaviorExecutionImpl::load(std::shared_ptr<persistence::interfaces::
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get FUMLFactory
+	// get fUMLFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{

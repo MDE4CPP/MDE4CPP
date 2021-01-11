@@ -28,7 +28,7 @@ namespace uml
 			ReadLinkActionImpl& operator=(ReadLinkActionImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			ReadLinkActionImpl();
 			virtual std::shared_ptr<ReadLinkAction> getThisReadLinkActionPtr() const;
 			virtual void setThisReadLinkActionPtr(std::weak_ptr<ReadLinkAction> thisReadLinkActionPtr);

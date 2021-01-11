@@ -28,7 +28,7 @@ namespace uml
 			RemoveVariableValueActionImpl& operator=(RemoveVariableValueActionImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			RemoveVariableValueActionImpl();
 			virtual std::shared_ptr<RemoveVariableValueAction> getThisRemoveVariableValueActionPtr() const;
 			virtual void setThisRemoveVariableValueActionPtr(std::weak_ptr<RemoveVariableValueAction> thisRemoveVariableValueActionPtr);

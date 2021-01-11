@@ -24,12 +24,16 @@ SET(CMAKE_CXX_FLAGS_RELEASE " -O3 -DNDEBUG")
 string(REPLACE "\\" "/" MDE4CPP_HOME $ENV{MDE4CPP_HOME})
 
 SET(SOURCE_FILES
-	impl/StandardProfilePackageImpl.cpp
-	StandardProfilePackage.cpp
+	# Model plugin
 	impl/StandardProfilePluginImpl.cpp
 	StandardProfilePlugin.cpp
+	# Package of StandardProfile
+	impl/StandardProfilePackageImpl.cpp
+	StandardProfilePackage.cpp
+	# Factory of StandardProfile
 	impl/StandardProfileFactoryImpl.cpp
 	StandardProfileFactory.cpp
+	# Contents of StandardProfile
 	impl/AuxiliaryImpl.cpp
 	impl/BuildComponentImpl.cpp
 	impl/CallImpl.cpp
@@ -63,6 +67,8 @@ SET(SOURCE_FILES
 	impl/TraceImpl.cpp
 	impl/TypeImpl.cpp
 	impl/UtilityImpl.cpp
+	
+	
 )
 
 INCLUDE_DIRECTORIES(

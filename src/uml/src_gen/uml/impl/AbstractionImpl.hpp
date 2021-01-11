@@ -28,7 +28,7 @@ namespace uml
 			AbstractionImpl& operator=(AbstractionImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			AbstractionImpl();
 			virtual std::shared_ptr<Abstraction> getThisAbstractionPtr() const;
 			virtual void setThisAbstractionPtr(std::weak_ptr<Abstraction> thisAbstractionPtr);

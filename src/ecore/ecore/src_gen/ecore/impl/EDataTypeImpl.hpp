@@ -28,7 +28,7 @@ namespace ecore
 			EDataTypeImpl& operator=(EDataTypeImpl const&) = delete;
 
 		protected:
-			friend class EcoreFactoryImpl;
+			friend class ecoreFactoryImpl;
 			EDataTypeImpl();
 			virtual std::shared_ptr<EDataType> getThisEDataTypePtr() const;
 			virtual void setThisEDataTypePtr(std::weak_ptr<EDataType> thisEDataTypePtr);

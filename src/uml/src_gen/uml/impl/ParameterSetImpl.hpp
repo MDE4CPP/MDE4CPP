@@ -28,7 +28,7 @@ namespace uml
 			ParameterSetImpl& operator=(ParameterSetImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			ParameterSetImpl();
 			virtual std::shared_ptr<ParameterSet> getThisParameterSetPtr() const;
 			virtual void setThisParameterSetPtr(std::weak_ptr<ParameterSet> thisParameterSetPtr);

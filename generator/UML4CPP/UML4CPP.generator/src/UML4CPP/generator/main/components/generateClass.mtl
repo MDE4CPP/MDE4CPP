@@ -31,7 +31,7 @@
 */]
 [query public getCompositePropertiesOfType(owningClass : Class, compositeType : Class) : Set(Property) = owningClass.getAllAttributes()->select(type = compositeType and isComposite and association.oclIsUndefined())->asOrderedSet()->sortedBy(myQualifiedName()) /]
 [query private hasCompositePropertiesOfType(owningClass : Class, compositeType : Class) : Boolean = getCompositePropertiesOfType(compositeType)->size() > 0 /]
-[query public getCompositeOwners(aClass : Class) : Set(Class) = aClass.getNearestPackage().ownedElement->filter(Class)->select(hasCompositePropertiesOfType(aClass))->asOrderedSet()->sortedBy(myQualifiedName())/]
+[query public getCompositeOwners(aClass : Class) : Set(Class) = aClass.getRootPackage().allOwnedElements()->filter(Class)->select(hasCompositePropertiesOfType(aClass))->asOrderedSet()->sortedBy(myQualifiedName())/]
 [query public hasOwnerProperty(aClass : Classifier, ownerClass : Class) : Boolean = (aClass.attribute->select(type = ownerClass)->size() > 0) /]
 [query public getOwnerProperties(aClass : Classifier, ownerClass : Class) : OrderedSet(Property) = aClass.attribute->select(type = ownerClass)->sortedBy(qualifiedName)/]
 
@@ -46,17 +46,17 @@
  * template to generate create function declarations
 */]
 [template public generateClassCreate(aClass : Class,impl : Boolean)]
-virtual std::shared_ptr<[aClass.generateCppType(true)/]> create[aClass.name.toUpperFirst()/](const int metaElementID = [aClass.getNearestPackage().name.toUpperFirst()/]Package::[aClass.getMemberName().toUpperCase()/]) const [abstractSuffix(impl)/];
+virtual std::shared_ptr<[aClass.generateCppType(true)/]> create[aClass.name.toUpperFirst()/](const int metaElementID = [aClass.getNearestPackage().name/]Package::[aClass.getMemberName().toUpperCase()/]) const [abstractSuffix(impl)/];
 [for (anAssociation : Association | aClass.getCompositionsToClass())]
 [let containerProperty : Property = anAssociation.memberEnd->select(type = aClass)->asOrderedSet()->first()]
 [let containmentProperty : Property = anAssociation.memberEnd->select(not (type = aClass))->asOrderedSet()->first()]
-virtual std::shared_ptr<[aClass.generateCppType(true)/]> create[aClass.name.toUpperFirst()/]_as_[containerProperty.name/]_in_[containmentProperty.type.name.toUpperFirst()/]([containmentProperty.generateCppType()/] [containmentProperty.name.toLowerFirst()/], const int metaElementID = [aClass.getNearestPackage().name.toUpperFirst()/]Package::[aClass.getMemberName().toUpperCase()/]) const [abstractSuffix(impl)/] ; 
+virtual std::shared_ptr<[aClass.generateCppType(true)/]> create[aClass.name.toUpperFirst()/]_as_[containerProperty.name/]_in_[containmentProperty.type.name.toUpperFirst()/]([containmentProperty.generateCppType()/] [containmentProperty.name.toLowerFirst()/], const int metaElementID = [aClass.getNearestPackage().name/]Package::[aClass.getMemberName().toUpperCase()/]) const [abstractSuffix(impl)/] ; 
 [/let]
 [/let]
 [/for]
 [for (compositeOwnerClass : Class | aClass.getCompositeOwners())] [comment for each class that has composite properties of type aClass/]
 [for (compositeProperty : Property | compositeOwnerClass.getCompositePropertiesOfType(aClass))] [comment for each composite property that compositeOwnerClass has/]
-virtual std::shared_ptr<[aClass.generateCppType(true)/]> create[aClass.name.toUpperFirst()/]_as_[compositeProperty.name/]_in_[compositeOwnerClass.name.toUpperFirst()/](std::weak_ptr<[compositeOwnerClass.generateCppType(true)/]> [compositeOwnerClass.name.toLowerFirst()/], const int metaElementID = [aClass.getNearestPackage().name.toUpperFirst()/]Package::[aClass.getMemberName().toUpperCase()/]) const [abstractSuffix(impl)/] ;
+virtual std::shared_ptr<[aClass.generateCppType(true)/]> create[aClass.name.toUpperFirst()/]_as_[compositeProperty.name/]_in_[compositeOwnerClass.name.toUpperFirst()/](std::weak_ptr<[compositeOwnerClass.generateCppType(true)/]> [compositeOwnerClass.name.toLowerFirst()/], const int metaElementID = [aClass.getNearestPackage().name/]Package::[aClass.getMemberName().toUpperCase()/]) const [abstractSuffix(impl)/] ;
 [/for]
 [/for]
 
@@ -84,7 +84,7 @@ static const unsigned int [aClass.getMemberName().toUpperCase()/]_OPERATION_COUN
  * - operation count
 */]
 [template public generateStaticPackageID(aPackage : Package)]
-[for (c : Class | aPackage.allOwnedElements()->selectByType(Class)->sortedBy(name)->reject(name.oclIsInvalid() or name = ''))]
+[for (c : Class | aPackage.ownedElement->selectByType(Class)->sortedBy(name)->reject(name.oclIsInvalid() or name = ''))]
 	[generateStaticClassID(c)/]
 	[for (anAssociation : Association | c.getCompositionsToClass())]
 	[let containerProperty : Property = anAssociation.memberEnd->select(type = c)->asOrderedSet()->first()]
@@ -112,7 +112,7 @@ static const unsigned int [aClass.getMemberName().toUpperCase()/]_OPERATION_COUN
  * - creation of class constraints
 */]
 [template public generateClassCreation(aClass : Class)]
-[aClass.memberName()/] = factory->createClass_in_Package([aClass.ancestors(Package)->first().memberName()/][aClass.getStaticClassID_Name()/]);
+[aClass.memberName()/] = factory->createClass_in_Package([aClass.ancestors(Package)->first().memberName()/], [aClass._package.generateNamespace(true)/]::[aClass._package.myNamespaceName()/]Package::[aClass.getMemberName().toUpperCase()/]);
 [if (aClass.ownedRule->size() > 0)]
 //constraints
 [for (aConstraint : Constraint | aClass.ownedRule->sortedBy(name)) separator('\n')]
@@ -132,7 +132,7 @@ static const unsigned int [aClass.getMemberName().toUpperCase()/]_OPERATION_COUN
 [aClass.memberName()/]->setName("[aClass.name/]");
 [aClass.memberName()/]->setIsAbstract([aClass.isAbstract/]);
 [for (superClass : Class | aClass.superClass->asOrderedSet()->sortedBy(myQualifiedName())) before ('\n') separator ('\n')]
-gen = uml::UmlFactory::eInstance()->createGeneralization_in_Specific([aClass.generatePackageGetterCall(aClass)/]);
+gen = uml::umlFactory::eInstance()->createGeneralization_in_Specific([aClass.generatePackageGetterCall(aClass)/]);
 gen->setGeneral([superClass.generatePackageGetterCall(aClass)/]);
 [/for]
 [/template]
@@ -173,3 +173,9 @@ void [aClass.name.toUpperFirst()/]Impl::[generateGetThisPtrPropertySetterName()/
 [query public generateGetThisPtrPropertyName(aClass : Class) : String = 'this'.concat(aClass.name.toUpperFirst()).concat('Ptr')/]
 [query public generateGetThisPtrPropertySetterName(aClass : Class) : String = 'set'.concat(generateGetThisPtrPropertyName().toUpperFirst())/]
 [query public generateGetThisPtrPropertyGetterName(aClass : Class) : String = 'get'.concat(generateGetThisPtrPropertyName().toUpperFirst())/]
+
+[**
+ * queries for retireving the Package of a Class
+*/]
+[query public getPackage(aPackagedElement : PackageableElement) : Package = aPackagedElement.owner.oclAsType(Package) /]
+[query public getRootPackage(aPackagedElement : PackageableElement) : Package = if(aPackagedElement.getPackage().getSuperPackage().oclIsUndefined()) then aPackagedElement.getPackage() else aPackagedElement.getPackage().getRootPackage() endif /]

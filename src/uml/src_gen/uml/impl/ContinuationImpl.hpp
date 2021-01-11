@@ -28,7 +28,7 @@ namespace uml
 			ContinuationImpl& operator=(ContinuationImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			ContinuationImpl();
 			virtual std::shared_ptr<Continuation> getThisContinuationPtr() const;
 			virtual void setThisContinuationPtr(std::weak_ptr<Continuation> thisContinuationPtr);

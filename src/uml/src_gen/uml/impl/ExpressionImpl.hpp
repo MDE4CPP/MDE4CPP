@@ -28,7 +28,7 @@ namespace uml
 			ExpressionImpl& operator=(ExpressionImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			ExpressionImpl();
 			virtual std::shared_ptr<Expression> getThisExpressionPtr() const;
 			virtual void setThisExpressionPtr(std::weak_ptr<Expression> thisExpressionPtr);

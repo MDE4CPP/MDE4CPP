@@ -28,7 +28,7 @@ namespace uml
 			ExtensionImpl& operator=(ExtensionImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			ExtensionImpl();
 			virtual std::shared_ptr<Extension> getThisExtensionPtr() const;
 			virtual void setThisExtensionPtr(std::weak_ptr<Extension> thisExtensionPtr);

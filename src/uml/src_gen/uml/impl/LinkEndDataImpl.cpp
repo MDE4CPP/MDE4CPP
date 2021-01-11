@@ -44,8 +44,8 @@
 #include "uml/QualifierValue.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -127,7 +127,7 @@ std::shared_ptr<ecore::EObject>  LinkEndDataImpl::copy() const
 
 std::shared_ptr<ecore::EClass> LinkEndDataImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getLinkEndData_Class();
+	return uml::umlPackage::eInstance()->getLinkEndData_Class();
 }
 
 //*********************************
@@ -282,9 +282,9 @@ Any LinkEndDataImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::LINKENDDATA_ATTRIBUTE_END:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEnd())); //1363
-		case uml::UmlPackage::LINKENDDATA_ATTRIBUTE_QUALIFIER:
+		case uml::umlPackage::LINKENDDATA_ATTRIBUTE_END:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEnd())); //1353
+		case uml::umlPackage::LINKENDDATA_ATTRIBUTE_QUALIFIER:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::QualifierValue>::iterator iter = m_qualifier->begin();
@@ -294,10 +294,10 @@ Any LinkEndDataImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //1364
+			return eAny(tempList); //1354
 		}
-		case uml::UmlPackage::LINKENDDATA_ATTRIBUTE_VALUE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getValue())); //1365
+		case uml::umlPackage::LINKENDDATA_ATTRIBUTE_VALUE:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getValue())); //1355
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -305,12 +305,12 @@ bool LinkEndDataImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::LINKENDDATA_ATTRIBUTE_END:
-			return getEnd() != nullptr; //1363
-		case uml::UmlPackage::LINKENDDATA_ATTRIBUTE_QUALIFIER:
-			return getQualifier() != nullptr; //1364
-		case uml::UmlPackage::LINKENDDATA_ATTRIBUTE_VALUE:
-			return getValue() != nullptr; //1365
+		case uml::umlPackage::LINKENDDATA_ATTRIBUTE_END:
+			return getEnd() != nullptr; //1353
+		case uml::umlPackage::LINKENDDATA_ATTRIBUTE_QUALIFIER:
+			return getQualifier() != nullptr; //1354
+		case uml::umlPackage::LINKENDDATA_ATTRIBUTE_VALUE:
+			return getValue() != nullptr; //1355
 	}
 	return ElementImpl::internalEIsSet(featureID);
 }
@@ -318,15 +318,15 @@ bool LinkEndDataImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::LINKENDDATA_ATTRIBUTE_END:
+		case uml::umlPackage::LINKENDDATA_ATTRIBUTE_END:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Property> _end = std::dynamic_pointer_cast<uml::Property>(_temp);
-			setEnd(_end); //1363
+			setEnd(_end); //1353
 			return true;
 		}
-		case uml::UmlPackage::LINKENDDATA_ATTRIBUTE_QUALIFIER:
+		case uml::umlPackage::LINKENDDATA_ATTRIBUTE_QUALIFIER:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -362,12 +362,12 @@ bool LinkEndDataImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case uml::UmlPackage::LINKENDDATA_ATTRIBUTE_VALUE:
+		case uml::umlPackage::LINKENDDATA_ATTRIBUTE_VALUE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::InputPin> _value = std::dynamic_pointer_cast<uml::InputPin>(_temp);
-			setValue(_value); //1365
+			setValue(_value); //1355
 			return true;
 		}
 	}
@@ -386,7 +386,7 @@ void LinkEndDataImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -428,7 +428,7 @@ void LinkEndDataImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XL
 
 void LinkEndDataImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -465,7 +465,7 @@ void LinkEndDataImpl::resolveReferences(const int featureID, std::list<std::shar
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::LINKENDDATA_ATTRIBUTE_END:
+		case uml::umlPackage::LINKENDDATA_ATTRIBUTE_END:
 		{
 			if (references.size() == 1)
 			{
@@ -477,7 +477,7 @@ void LinkEndDataImpl::resolveReferences(const int featureID, std::list<std::shar
 			return;
 		}
 
-		case uml::UmlPackage::LINKENDDATA_ATTRIBUTE_VALUE:
+		case uml::umlPackage::LINKENDDATA_ATTRIBUTE_VALUE:
 		{
 			if (references.size() == 1)
 			{
@@ -509,7 +509,7 @@ void LinkEndDataImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 		// Save 'qualifier'
 		for (std::shared_ptr<uml::QualifierValue> qualifier : *this->getQualifier()) 

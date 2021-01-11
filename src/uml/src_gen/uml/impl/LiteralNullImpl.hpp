@@ -28,7 +28,7 @@ namespace uml
 			LiteralNullImpl& operator=(LiteralNullImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			LiteralNullImpl();
 			virtual std::shared_ptr<LiteralNull> getThisLiteralNullPtr() const;
 			virtual void setThisLiteralNullPtr(std::weak_ptr<LiteralNull> thisLiteralNullPtr);

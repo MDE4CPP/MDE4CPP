@@ -57,8 +57,8 @@
 #include "uml/ValueSpecification.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -170,7 +170,7 @@ std::shared_ptr<ecore::EObject>  LifelineImpl::copy() const
 
 std::shared_ptr<ecore::EClass> LifelineImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getLifeline_Class();
+	return uml::umlPackage::eInstance()->getLifeline_Class();
 }
 
 //*********************************
@@ -356,7 +356,7 @@ Any LifelineImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::LIFELINE_ATTRIBUTE_COVEREDBY:
+		case uml::umlPackage::LIFELINE_ATTRIBUTE_COVEREDBY:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::InteractionFragment>::iterator iter = m_coveredBy->begin();
@@ -366,16 +366,16 @@ Any LifelineImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //13313
+			return eAny(tempList); //13213
 		}
-		case uml::UmlPackage::LIFELINE_ATTRIBUTE_DECOMPOSEDAS:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDecomposedAs())); //1339
-		case uml::UmlPackage::LIFELINE_ATTRIBUTE_INTERACTION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getInteraction().lock())); //13310
-		case uml::UmlPackage::LIFELINE_ATTRIBUTE_REPRESENTS:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getRepresents())); //13311
-		case uml::UmlPackage::LIFELINE_ATTRIBUTE_SELECTOR:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSelector())); //13312
+		case uml::umlPackage::LIFELINE_ATTRIBUTE_DECOMPOSEDAS:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDecomposedAs())); //1329
+		case uml::umlPackage::LIFELINE_ATTRIBUTE_INTERACTION:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getInteraction().lock())); //13210
+		case uml::umlPackage::LIFELINE_ATTRIBUTE_REPRESENTS:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getRepresents())); //13211
+		case uml::umlPackage::LIFELINE_ATTRIBUTE_SELECTOR:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSelector())); //13212
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -383,16 +383,16 @@ bool LifelineImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::LIFELINE_ATTRIBUTE_COVEREDBY:
-			return getCoveredBy() != nullptr; //13313
-		case uml::UmlPackage::LIFELINE_ATTRIBUTE_DECOMPOSEDAS:
-			return getDecomposedAs() != nullptr; //1339
-		case uml::UmlPackage::LIFELINE_ATTRIBUTE_INTERACTION:
-			return getInteraction().lock() != nullptr; //13310
-		case uml::UmlPackage::LIFELINE_ATTRIBUTE_REPRESENTS:
-			return getRepresents() != nullptr; //13311
-		case uml::UmlPackage::LIFELINE_ATTRIBUTE_SELECTOR:
-			return getSelector() != nullptr; //13312
+		case uml::umlPackage::LIFELINE_ATTRIBUTE_COVEREDBY:
+			return getCoveredBy() != nullptr; //13213
+		case uml::umlPackage::LIFELINE_ATTRIBUTE_DECOMPOSEDAS:
+			return getDecomposedAs() != nullptr; //1329
+		case uml::umlPackage::LIFELINE_ATTRIBUTE_INTERACTION:
+			return getInteraction().lock() != nullptr; //13210
+		case uml::umlPackage::LIFELINE_ATTRIBUTE_REPRESENTS:
+			return getRepresents() != nullptr; //13211
+		case uml::umlPackage::LIFELINE_ATTRIBUTE_SELECTOR:
+			return getSelector() != nullptr; //13212
 	}
 	return NamedElementImpl::internalEIsSet(featureID);
 }
@@ -400,7 +400,7 @@ bool LifelineImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::LIFELINE_ATTRIBUTE_COVEREDBY:
+		case uml::umlPackage::LIFELINE_ATTRIBUTE_COVEREDBY:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -436,36 +436,36 @@ bool LifelineImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case uml::UmlPackage::LIFELINE_ATTRIBUTE_DECOMPOSEDAS:
+		case uml::umlPackage::LIFELINE_ATTRIBUTE_DECOMPOSEDAS:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::PartDecomposition> _decomposedAs = std::dynamic_pointer_cast<uml::PartDecomposition>(_temp);
-			setDecomposedAs(_decomposedAs); //1339
+			setDecomposedAs(_decomposedAs); //1329
 			return true;
 		}
-		case uml::UmlPackage::LIFELINE_ATTRIBUTE_INTERACTION:
+		case uml::umlPackage::LIFELINE_ATTRIBUTE_INTERACTION:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Interaction> _interaction = std::dynamic_pointer_cast<uml::Interaction>(_temp);
-			setInteraction(_interaction); //13310
+			setInteraction(_interaction); //13210
 			return true;
 		}
-		case uml::UmlPackage::LIFELINE_ATTRIBUTE_REPRESENTS:
+		case uml::umlPackage::LIFELINE_ATTRIBUTE_REPRESENTS:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ConnectableElement> _represents = std::dynamic_pointer_cast<uml::ConnectableElement>(_temp);
-			setRepresents(_represents); //13311
+			setRepresents(_represents); //13211
 			return true;
 		}
-		case uml::UmlPackage::LIFELINE_ATTRIBUTE_SELECTOR:
+		case uml::umlPackage::LIFELINE_ATTRIBUTE_SELECTOR:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ValueSpecification> _selector = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
-			setSelector(_selector); //13312
+			setSelector(_selector); //13212
 			return true;
 		}
 	}
@@ -484,7 +484,7 @@ void LifelineImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> l
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -533,7 +533,7 @@ void LifelineImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoad
 
 void LifelineImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -570,7 +570,7 @@ void LifelineImpl::resolveReferences(const int featureID, std::list<std::shared_
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::LIFELINE_ATTRIBUTE_COVEREDBY:
+		case uml::umlPackage::LIFELINE_ATTRIBUTE_COVEREDBY:
 		{
 			std::shared_ptr<Bag<uml::InteractionFragment>> _coveredBy = getCoveredBy();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -584,7 +584,7 @@ void LifelineImpl::resolveReferences(const int featureID, std::list<std::shared_
 			return;
 		}
 
-		case uml::UmlPackage::LIFELINE_ATTRIBUTE_DECOMPOSEDAS:
+		case uml::umlPackage::LIFELINE_ATTRIBUTE_DECOMPOSEDAS:
 		{
 			if (references.size() == 1)
 			{
@@ -596,7 +596,7 @@ void LifelineImpl::resolveReferences(const int featureID, std::list<std::shared_
 			return;
 		}
 
-		case uml::UmlPackage::LIFELINE_ATTRIBUTE_INTERACTION:
+		case uml::umlPackage::LIFELINE_ATTRIBUTE_INTERACTION:
 		{
 			if (references.size() == 1)
 			{
@@ -608,7 +608,7 @@ void LifelineImpl::resolveReferences(const int featureID, std::list<std::shared_
 			return;
 		}
 
-		case uml::UmlPackage::LIFELINE_ATTRIBUTE_REPRESENTS:
+		case uml::umlPackage::LIFELINE_ATTRIBUTE_REPRESENTS:
 		{
 			if (references.size() == 1)
 			{
@@ -643,7 +643,7 @@ void LifelineImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 		// Save 'selector'
 		std::shared_ptr<uml::ValueSpecification > selector = this->getSelector();

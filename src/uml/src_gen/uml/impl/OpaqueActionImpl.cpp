@@ -73,8 +73,8 @@
 #include "uml/StructuredActivityNode.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -279,7 +279,7 @@ std::shared_ptr<ecore::EObject>  OpaqueActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> OpaqueActionImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getOpaqueAction_Class();
+	return uml::umlPackage::eInstance()->getOpaqueAction_Class();
 }
 
 //*********************************
@@ -521,9 +521,9 @@ Any OpaqueActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::OPAQUEACTION_ATTRIBUTE_BODY:
-			return eAny(getBody()); //16527
-		case uml::UmlPackage::OPAQUEACTION_ATTRIBUTE_INPUTVALUE:
+		case uml::umlPackage::OPAQUEACTION_ATTRIBUTE_BODY:
+			return eAny(getBody()); //16427
+		case uml::umlPackage::OPAQUEACTION_ATTRIBUTE_INPUTVALUE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::InputPin>::iterator iter = m_inputValue->begin();
@@ -533,11 +533,11 @@ Any OpaqueActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //16528
+			return eAny(tempList); //16428
 		}
-		case uml::UmlPackage::OPAQUEACTION_ATTRIBUTE_LANGUAGE:
-			return eAny(getLanguage()); //16529
-		case uml::UmlPackage::OPAQUEACTION_ATTRIBUTE_OUTPUTVALUE:
+		case uml::umlPackage::OPAQUEACTION_ATTRIBUTE_LANGUAGE:
+			return eAny(getLanguage()); //16429
+		case uml::umlPackage::OPAQUEACTION_ATTRIBUTE_OUTPUTVALUE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::OutputPin>::iterator iter = m_outputValue->begin();
@@ -547,7 +547,7 @@ Any OpaqueActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //16530
+			return eAny(tempList); //16430
 		}
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
@@ -556,14 +556,14 @@ bool OpaqueActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::OPAQUEACTION_ATTRIBUTE_BODY:
-			return !getBody()->empty(); //16527
-		case uml::UmlPackage::OPAQUEACTION_ATTRIBUTE_INPUTVALUE:
-			return getInputValue() != nullptr; //16528
-		case uml::UmlPackage::OPAQUEACTION_ATTRIBUTE_LANGUAGE:
-			return !getLanguage()->empty(); //16529
-		case uml::UmlPackage::OPAQUEACTION_ATTRIBUTE_OUTPUTVALUE:
-			return getOutputValue() != nullptr; //16530
+		case uml::umlPackage::OPAQUEACTION_ATTRIBUTE_BODY:
+			return !getBody()->empty(); //16427
+		case uml::umlPackage::OPAQUEACTION_ATTRIBUTE_INPUTVALUE:
+			return getInputValue() != nullptr; //16428
+		case uml::umlPackage::OPAQUEACTION_ATTRIBUTE_LANGUAGE:
+			return !getLanguage()->empty(); //16429
+		case uml::umlPackage::OPAQUEACTION_ATTRIBUTE_OUTPUTVALUE:
+			return getOutputValue() != nullptr; //16430
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
@@ -571,13 +571,13 @@ bool OpaqueActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::OPAQUEACTION_ATTRIBUTE_BODY:
+		case uml::umlPackage::OPAQUEACTION_ATTRIBUTE_BODY:
 		{
 			// BOOST CAST
 			// nothing to do
 			return true;
 		}
-		case uml::UmlPackage::OPAQUEACTION_ATTRIBUTE_INPUTVALUE:
+		case uml::umlPackage::OPAQUEACTION_ATTRIBUTE_INPUTVALUE:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -613,13 +613,13 @@ bool OpaqueActionImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case uml::UmlPackage::OPAQUEACTION_ATTRIBUTE_LANGUAGE:
+		case uml::umlPackage::OPAQUEACTION_ATTRIBUTE_LANGUAGE:
 		{
 			// BOOST CAST
 			// nothing to do
 			return true;
 		}
-		case uml::UmlPackage::OPAQUEACTION_ATTRIBUTE_OUTPUTVALUE:
+		case uml::umlPackage::OPAQUEACTION_ATTRIBUTE_OUTPUTVALUE:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -671,7 +671,7 @@ void OpaqueActionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandle
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -687,7 +687,7 @@ void OpaqueActionImpl::loadAttributes(std::shared_ptr<persistence::interfaces::X
 
 void OpaqueActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 	try
 	{
 		if (nodeName.compare("body") == 0)
@@ -778,7 +778,6 @@ void OpaqueActionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandle
 	
 	ActivityNodeImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);
@@ -801,7 +800,7 @@ void OpaqueActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 		// Save 'inputValue'
 		for (std::shared_ptr<uml::InputPin> inputValue : *this->getInputValue()) 

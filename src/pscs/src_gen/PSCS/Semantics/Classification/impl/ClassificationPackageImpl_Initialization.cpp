@@ -11,13 +11,13 @@
 #include "ecore/EStringToStringMapEntry.hpp"
 
 // metametamodel factory
-#include "ecore/EcoreFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 
 //depending model packages
 
 #include "fUML/Semantics/Classification/ClassificationPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
-#include "fUML/FUMLPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 
 
 using namespace PSCS::Semantics::Classification;

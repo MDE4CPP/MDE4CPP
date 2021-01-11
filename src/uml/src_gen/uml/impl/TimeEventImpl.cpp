@@ -53,8 +53,8 @@
 #include "uml/TimeExpression.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -172,7 +172,7 @@ std::shared_ptr<ecore::EObject>  TimeEventImpl::copy() const
 
 std::shared_ptr<ecore::EClass> TimeEventImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getTimeEvent_Class();
+	return uml::umlPackage::eInstance()->getTimeEvent_Class();
 }
 
 //*********************************
@@ -292,10 +292,10 @@ Any TimeEventImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::TIMEEVENT_ATTRIBUTE_ISRELATIVE:
-			return eAny(getIsRelative()); //23812
-		case uml::UmlPackage::TIMEEVENT_ATTRIBUTE_WHEN:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getWhen())); //23813
+		case uml::umlPackage::TIMEEVENT_ATTRIBUTE_ISRELATIVE:
+			return eAny(getIsRelative()); //23712
+		case uml::umlPackage::TIMEEVENT_ATTRIBUTE_WHEN:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getWhen())); //23713
 	}
 	return EventImpl::eGet(featureID, resolve, coreType);
 }
@@ -303,10 +303,10 @@ bool TimeEventImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::TIMEEVENT_ATTRIBUTE_ISRELATIVE:
-			return getIsRelative() != false; //23812
-		case uml::UmlPackage::TIMEEVENT_ATTRIBUTE_WHEN:
-			return getWhen() != nullptr; //23813
+		case uml::umlPackage::TIMEEVENT_ATTRIBUTE_ISRELATIVE:
+			return getIsRelative() != false; //23712
+		case uml::umlPackage::TIMEEVENT_ATTRIBUTE_WHEN:
+			return getWhen() != nullptr; //23713
 	}
 	return EventImpl::internalEIsSet(featureID);
 }
@@ -314,19 +314,19 @@ bool TimeEventImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::TIMEEVENT_ATTRIBUTE_ISRELATIVE:
+		case uml::umlPackage::TIMEEVENT_ATTRIBUTE_ISRELATIVE:
 		{
 			// BOOST CAST
 			bool _isRelative = newValue->get<bool>();
-			setIsRelative(_isRelative); //23812
+			setIsRelative(_isRelative); //23712
 			return true;
 		}
-		case uml::UmlPackage::TIMEEVENT_ATTRIBUTE_WHEN:
+		case uml::umlPackage::TIMEEVENT_ATTRIBUTE_WHEN:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::TimeExpression> _when = std::dynamic_pointer_cast<uml::TimeExpression>(_temp);
-			setWhen(_when); //23813
+			setWhen(_when); //23713
 			return true;
 		}
 	}
@@ -345,7 +345,7 @@ void TimeEventImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> 
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -382,7 +382,7 @@ void TimeEventImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoa
 
 void TimeEventImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -446,7 +446,7 @@ void TimeEventImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 		// Save 'when'
 		std::shared_ptr<uml::TimeExpression > when = this->getWhen();

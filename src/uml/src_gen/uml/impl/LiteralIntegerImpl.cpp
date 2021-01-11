@@ -56,8 +56,8 @@
 #include "uml/ValueSpecificationAction.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -189,7 +189,7 @@ std::shared_ptr<ecore::EObject>  LiteralIntegerImpl::copy() const
 
 std::shared_ptr<ecore::EClass> LiteralIntegerImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getLiteralInteger_Class();
+	return uml::umlPackage::eInstance()->getLiteralInteger_Class();
 }
 
 //*********************************
@@ -314,8 +314,8 @@ Any LiteralIntegerImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::LITERALINTEGER_ATTRIBUTE_VALUE:
-			return eAny(getValue()); //13915
+		case uml::umlPackage::LITERALINTEGER_ATTRIBUTE_VALUE:
+			return eAny(getValue()); //13815
 	}
 	return LiteralSpecificationImpl::eGet(featureID, resolve, coreType);
 }
@@ -323,8 +323,8 @@ bool LiteralIntegerImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::LITERALINTEGER_ATTRIBUTE_VALUE:
-			return getValue() != 0; //13915
+		case uml::umlPackage::LITERALINTEGER_ATTRIBUTE_VALUE:
+			return getValue() != 0; //13815
 	}
 	return LiteralSpecificationImpl::internalEIsSet(featureID);
 }
@@ -332,11 +332,11 @@ bool LiteralIntegerImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::LITERALINTEGER_ATTRIBUTE_VALUE:
+		case uml::umlPackage::LITERALINTEGER_ATTRIBUTE_VALUE:
 		{
 			// BOOST CAST
 			int _value = newValue->get<int>();
-			setValue(_value); //13915
+			setValue(_value); //13815
 			return true;
 		}
 	}
@@ -355,7 +355,7 @@ void LiteralIntegerImpl::load(std::shared_ptr<persistence::interfaces::XLoadHand
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -392,7 +392,7 @@ void LiteralIntegerImpl::loadAttributes(std::shared_ptr<persistence::interfaces:
 
 void LiteralIntegerImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	LiteralSpecificationImpl::loadNode(nodeName, loadHandler);
@@ -434,7 +434,7 @@ void LiteralIntegerImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 		// Add attributes

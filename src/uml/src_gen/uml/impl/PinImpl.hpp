@@ -29,7 +29,7 @@ namespace uml
 			PinImpl& operator=(PinImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			PinImpl();
 			virtual std::shared_ptr<Pin> getThisPinPtr() const;
 			virtual void setThisPinPtr(std::weak_ptr<Pin> thisPinPtr);

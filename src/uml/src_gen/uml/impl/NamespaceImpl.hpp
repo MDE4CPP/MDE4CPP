@@ -28,7 +28,7 @@ namespace uml
 			NamespaceImpl& operator=(NamespaceImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			NamespaceImpl();
 			virtual std::shared_ptr<Namespace> getThisNamespacePtr() const;
 			virtual void setThisNamespacePtr(std::weak_ptr<Namespace> thisNamespacePtr);

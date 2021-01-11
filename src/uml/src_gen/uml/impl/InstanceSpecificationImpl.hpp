@@ -30,7 +30,7 @@ namespace uml
 			InstanceSpecificationImpl& operator=(InstanceSpecificationImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			InstanceSpecificationImpl();
 			virtual std::shared_ptr<InstanceSpecification> getThisInstanceSpecificationPtr() const;
 			virtual void setThisInstanceSpecificationPtr(std::weak_ptr<InstanceSpecification> thisInstanceSpecificationPtr);

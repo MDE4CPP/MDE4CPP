@@ -28,7 +28,7 @@ namespace uml
 			FactoryImpl& operator=(FactoryImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			FactoryImpl();
 			virtual std::shared_ptr<Factory> getThisFactoryPtr() const;
 			virtual void setThisFactoryPtr(std::weak_ptr<Factory> thisFactoryPtr);

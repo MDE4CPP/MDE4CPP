@@ -28,7 +28,7 @@ namespace uml
 			BehaviorExecutionSpecificationImpl& operator=(BehaviorExecutionSpecificationImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			BehaviorExecutionSpecificationImpl();
 			virtual std::shared_ptr<BehaviorExecutionSpecification> getThisBehaviorExecutionSpecificationPtr() const;
 			virtual void setThisBehaviorExecutionSpecificationPtr(std::weak_ptr<BehaviorExecutionSpecification> thisBehaviorExecutionSpecificationPtr);

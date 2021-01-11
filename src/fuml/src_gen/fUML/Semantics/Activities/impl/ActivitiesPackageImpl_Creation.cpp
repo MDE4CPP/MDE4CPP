@@ -1,7 +1,7 @@
 #include "fUML/Semantics/Activities/impl/ActivitiesPackageImpl.hpp"
 
 // metametamodel factory
-#include "ecore/EcoreFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 
 #include <cassert>
 
@@ -18,10 +18,10 @@
 #include "ecore/EStringToStringMapEntry.hpp"
 
 //depending model packages
-#include "ecore/EcorePackage.hpp"
-#include "fUML/FUMLPackage.hpp"
-#include "types/TypesPackage.hpp"
-#include "uml/UmlPackage.hpp"
+#include "ecore/ecorePackage.hpp"
+#include "fUML/fUMLPackage.hpp"
+#include "types/typesPackage.hpp"
+#include "uml/umlPackage.hpp"
 //include subpackages 
  
 using namespace fUML::Semantics::Activities;
@@ -34,7 +34,7 @@ void ActivitiesPackageImpl::createPackageContents(std::shared_ptr<ecore::EPackag
 	}
 	isCreated = true;
 
-	std::shared_ptr<ecore::EcoreFactory> factory = ecore::EcoreFactory::eInstance();
+	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
 
 	createActivityEdgeInstanceContent(package, factory);
 	createActivityExecutionContent(package, factory);
@@ -68,7 +68,7 @@ void ActivitiesPackageImpl::createPackageContents(std::shared_ptr<ecore::EPackag
 
 }
 
-void ActivitiesPackageImpl::createActivityEdgeInstanceContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ActivitiesPackageImpl::createActivityEdgeInstanceContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_activityEdgeInstance_Class = factory->createEClass_in_EPackage(package, ACTIVITYEDGEINSTANCE_CLASS);
 	
@@ -87,7 +87,7 @@ void ActivitiesPackageImpl::createActivityEdgeInstanceContent(std::shared_ptr<ec
 	
 }
 
-void ActivitiesPackageImpl::createActivityExecutionContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ActivitiesPackageImpl::createActivityExecutionContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_activityExecution_Class = factory->createEClass_in_EPackage(package, ACTIVITYEXECUTION_CLASS);
 	
@@ -101,7 +101,7 @@ void ActivitiesPackageImpl::createActivityExecutionContent(std::shared_ptr<ecore
 	
 }
 
-void ActivitiesPackageImpl::createActivityFinalNodeActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ActivitiesPackageImpl::createActivityFinalNodeActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_activityFinalNodeActivation_Class = factory->createEClass_in_EPackage(package, ACTIVITYFINALNODEACTIVATION_CLASS);
 	
@@ -110,7 +110,7 @@ void ActivitiesPackageImpl::createActivityFinalNodeActivationContent(std::shared
 	
 }
 
-void ActivitiesPackageImpl::createActivityNodeActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ActivitiesPackageImpl::createActivityNodeActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_activityNodeActivation_Class = factory->createEClass_in_EPackage(package, ACTIVITYNODEACTIVATION_CLASS);
 	m_activityNodeActivation_Attribute_running = factory->createEAttribute_in_EContainingClass(m_activityNodeActivation_Class, ACTIVITYNODEACTIVATION_ATTRIBUTE_RUNNING);
@@ -149,7 +149,7 @@ void ActivitiesPackageImpl::createActivityNodeActivationContent(std::shared_ptr<
 	
 }
 
-void ActivitiesPackageImpl::createActivityNodeActivationGroupContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ActivitiesPackageImpl::createActivityNodeActivationGroupContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_activityNodeActivationGroup_Class = factory->createEClass_in_EPackage(package, ACTIVITYNODEACTIVATIONGROUP_CLASS);
 	
@@ -179,7 +179,7 @@ void ActivitiesPackageImpl::createActivityNodeActivationGroupContent(std::shared
 	
 }
 
-void ActivitiesPackageImpl::createActivityParameterNodeActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ActivitiesPackageImpl::createActivityParameterNodeActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_activityParameterNodeActivation_Class = factory->createEClass_in_EPackage(package, ACTIVITYPARAMETERNODEACTIVATION_CLASS);
 	
@@ -189,7 +189,7 @@ void ActivitiesPackageImpl::createActivityParameterNodeActivationContent(std::sh
 	
 }
 
-void ActivitiesPackageImpl::createCentralBufferNodeActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ActivitiesPackageImpl::createCentralBufferNodeActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_centralBufferNodeActivation_Class = factory->createEClass_in_EPackage(package, CENTRALBUFFERNODEACTIVATION_CLASS);
 	
@@ -198,7 +198,7 @@ void ActivitiesPackageImpl::createCentralBufferNodeActivationContent(std::shared
 	
 }
 
-void ActivitiesPackageImpl::createClassifierBehaviorExecutionActivityContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ActivitiesPackageImpl::createClassifierBehaviorExecutionActivityContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_classifierBehaviorExecutionActivity_Class = factory->createEClass_in_EPackage(package, CLASSIFIERBEHAVIOREXECUTIONACTIVITY_CLASS);
 	
@@ -206,7 +206,7 @@ void ActivitiesPackageImpl::createClassifierBehaviorExecutionActivityContent(std
 	
 }
 
-void ActivitiesPackageImpl::createClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Content(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ActivitiesPackageImpl::createClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Content(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_classifierBehaviorExecutionActivity_OwnedBehaviorActivity1_Class = factory->createEClass_in_EPackage(package, CLASSIFIERBEHAVIOREXECUTIONACTIVITY_OWNEDBEHAVIORACTIVITY1_CLASS);
 	
@@ -214,7 +214,7 @@ void ActivitiesPackageImpl::createClassifierBehaviorExecutionActivity_OwnedBehav
 	
 }
 
-void ActivitiesPackageImpl::createControlNodeActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ActivitiesPackageImpl::createControlNodeActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_controlNodeActivation_Class = factory->createEClass_in_EPackage(package, CONTROLNODEACTIVATION_CLASS);
 	
@@ -223,7 +223,7 @@ void ActivitiesPackageImpl::createControlNodeActivationContent(std::shared_ptr<e
 	
 }
 
-void ActivitiesPackageImpl::createControlTokenContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ActivitiesPackageImpl::createControlTokenContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_controlToken_Class = factory->createEClass_in_EPackage(package, CONTROLTOKEN_CLASS);
 	
@@ -234,7 +234,7 @@ void ActivitiesPackageImpl::createControlTokenContent(std::shared_ptr<ecore::EPa
 	
 }
 
-void ActivitiesPackageImpl::createDataStoreNodeActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ActivitiesPackageImpl::createDataStoreNodeActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_dataStoreNodeActivation_Class = factory->createEClass_in_EPackage(package, DATASTORENODEACTIVATION_CLASS);
 	
@@ -244,7 +244,7 @@ void ActivitiesPackageImpl::createDataStoreNodeActivationContent(std::shared_ptr
 	
 }
 
-void ActivitiesPackageImpl::createDecisionNodeActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ActivitiesPackageImpl::createDecisionNodeActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_decisionNodeActivation_Class = factory->createEClass_in_EPackage(package, DECISIONNODEACTIVATION_CLASS);
 	
@@ -265,7 +265,7 @@ void ActivitiesPackageImpl::createDecisionNodeActivationContent(std::shared_ptr<
 	
 }
 
-void ActivitiesPackageImpl::createExpansionActivationGroupContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ActivitiesPackageImpl::createExpansionActivationGroupContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_expansionActivationGroup_Class = factory->createEClass_in_EPackage(package, EXPANSIONACTIVATIONGROUP_CLASS);
 	m_expansionActivationGroup_Attribute_index = factory->createEAttribute_in_EContainingClass(m_expansionActivationGroup_Class, EXPANSIONACTIVATIONGROUP_ATTRIBUTE_INDEX);
@@ -282,7 +282,7 @@ void ActivitiesPackageImpl::createExpansionActivationGroupContent(std::shared_pt
 	
 }
 
-void ActivitiesPackageImpl::createExpansionNodeActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ActivitiesPackageImpl::createExpansionNodeActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_expansionNodeActivation_Class = factory->createEClass_in_EPackage(package, EXPANSIONNODEACTIVATION_CLASS);
 	
@@ -294,7 +294,7 @@ void ActivitiesPackageImpl::createExpansionNodeActivationContent(std::shared_ptr
 	
 }
 
-void ActivitiesPackageImpl::createExpansionRegionActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ActivitiesPackageImpl::createExpansionRegionActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_expansionRegionActivation_Class = factory->createEClass_in_EPackage(package, EXPANSIONREGIONACTIVATION_CLASS);
 	m_expansionRegionActivation_Attribute_next = factory->createEAttribute_in_EContainingClass(m_expansionRegionActivation_Class, EXPANSIONREGIONACTIVATION_ATTRIBUTE_NEXT);
@@ -320,7 +320,7 @@ void ActivitiesPackageImpl::createExpansionRegionActivationContent(std::shared_p
 	
 }
 
-void ActivitiesPackageImpl::createFlowFinalNodeActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ActivitiesPackageImpl::createFlowFinalNodeActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_flowFinalNodeActivation_Class = factory->createEClass_in_EPackage(package, FLOWFINALNODEACTIVATION_CLASS);
 	
@@ -328,7 +328,7 @@ void ActivitiesPackageImpl::createFlowFinalNodeActivationContent(std::shared_ptr
 	
 }
 
-void ActivitiesPackageImpl::createForkNodeActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ActivitiesPackageImpl::createForkNodeActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_forkNodeActivation_Class = factory->createEClass_in_EPackage(package, FORKNODEACTIVATION_CLASS);
 	
@@ -338,7 +338,7 @@ void ActivitiesPackageImpl::createForkNodeActivationContent(std::shared_ptr<ecor
 	
 }
 
-void ActivitiesPackageImpl::createForkedTokenContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ActivitiesPackageImpl::createForkedTokenContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_forkedToken_Class = factory->createEClass_in_EPackage(package, FORKEDTOKEN_CLASS);
 	m_forkedToken_Attribute_baseTokenIsWithdrawn = factory->createEAttribute_in_EContainingClass(m_forkedToken_Class, FORKEDTOKEN_ATTRIBUTE_BASETOKENISWITHDRAWN);
@@ -354,7 +354,7 @@ void ActivitiesPackageImpl::createForkedTokenContent(std::shared_ptr<ecore::EPac
 	
 }
 
-void ActivitiesPackageImpl::createInitialNodeActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ActivitiesPackageImpl::createInitialNodeActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_initialNodeActivation_Class = factory->createEClass_in_EPackage(package, INITIALNODEACTIVATION_CLASS);
 	
@@ -363,7 +363,7 @@ void ActivitiesPackageImpl::createInitialNodeActivationContent(std::shared_ptr<e
 	
 }
 
-void ActivitiesPackageImpl::createJoinNodeActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ActivitiesPackageImpl::createJoinNodeActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_joinNodeActivation_Class = factory->createEClass_in_EPackage(package, JOINNODEACTIVATION_CLASS);
 	
@@ -373,7 +373,7 @@ void ActivitiesPackageImpl::createJoinNodeActivationContent(std::shared_ptr<ecor
 	
 }
 
-void ActivitiesPackageImpl::createMergeNodeActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ActivitiesPackageImpl::createMergeNodeActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_mergeNodeActivation_Class = factory->createEClass_in_EPackage(package, MERGENODEACTIVATION_CLASS);
 	
@@ -381,7 +381,7 @@ void ActivitiesPackageImpl::createMergeNodeActivationContent(std::shared_ptr<eco
 	
 }
 
-void ActivitiesPackageImpl::createObjectNodeActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ActivitiesPackageImpl::createObjectNodeActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_objectNodeActivation_Class = factory->createEClass_in_EPackage(package, OBJECTNODEACTIVATION_CLASS);
 	m_objectNodeActivation_Attribute_offeredTokenCount = factory->createEAttribute_in_EContainingClass(m_objectNodeActivation_Class, OBJECTNODEACTIVATION_ATTRIBUTE_OFFEREDTOKENCOUNT);
@@ -401,7 +401,7 @@ void ActivitiesPackageImpl::createObjectNodeActivationContent(std::shared_ptr<ec
 	
 }
 
-void ActivitiesPackageImpl::createObjectTokenContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ActivitiesPackageImpl::createObjectTokenContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_objectToken_Class = factory->createEClass_in_EPackage(package, OBJECTTOKEN_CLASS);
 	
@@ -413,7 +413,7 @@ void ActivitiesPackageImpl::createObjectTokenContent(std::shared_ptr<ecore::EPac
 	
 }
 
-void ActivitiesPackageImpl::createOfferContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ActivitiesPackageImpl::createOfferContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_offer_Class = factory->createEClass_in_EPackage(package, OFFER_CLASS);
 	
@@ -427,7 +427,7 @@ void ActivitiesPackageImpl::createOfferContent(std::shared_ptr<ecore::EPackage> 
 	
 }
 
-void ActivitiesPackageImpl::createTokenContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ActivitiesPackageImpl::createTokenContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_token_Class = factory->createEClass_in_EPackage(package, TOKEN_CLASS);
 	m_token_Attribute_withdrawn = factory->createEAttribute_in_EContainingClass(m_token_Class, TOKEN_ATTRIBUTE_WITHDRAWN);
@@ -443,7 +443,7 @@ void ActivitiesPackageImpl::createTokenContent(std::shared_ptr<ecore::EPackage> 
 	
 }
 
-void ActivitiesPackageImpl::createTokenSetContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ActivitiesPackageImpl::createTokenSetContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_tokenSet_Class = factory->createEClass_in_EPackage(package, TOKENSET_CLASS);
 	
@@ -452,7 +452,7 @@ void ActivitiesPackageImpl::createTokenSetContent(std::shared_ptr<ecore::EPackag
 	
 }
 
-void ActivitiesPackageImpl::createPackageEDataTypes(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ActivitiesPackageImpl::createPackageEDataTypes(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	
 }

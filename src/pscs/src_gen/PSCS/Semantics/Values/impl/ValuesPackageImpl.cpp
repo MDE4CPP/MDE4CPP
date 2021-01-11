@@ -14,7 +14,7 @@
 #include "PSCS/Semantics/Values/ValuesFactory.hpp"
 
 //depending model packages
-#include "fUML/FUMLPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 
 using namespace PSCS::Semantics::Values;
 

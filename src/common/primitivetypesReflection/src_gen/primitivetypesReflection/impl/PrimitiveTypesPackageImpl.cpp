@@ -8,11 +8,14 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "uml/VisibilityKind.hpp"
 //meta meta model factory
-#include "uml/UmlFactory.hpp"
+#include "uml/umlFactory.hpp"
 
 
 //depending model packages
 
+//Subpackages
+
+//Stereotypes
 #include "ecore/EDataType.hpp"
 #include "ecore/EPackage.hpp"
 
@@ -62,7 +65,7 @@ void PrimitiveTypesPackageImpl::createPackageContents(std::shared_ptr<uml::Packa
 	}
 	isCreated = true;
 
-	std::shared_ptr<uml::UmlFactory> factory = uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> factory = uml::umlFactory::eInstance();
 
 	createPackageValueSpecifications(primitiveTypes, factory);
 	createPackageInterfaces(primitiveTypes, factory);
@@ -77,12 +80,12 @@ void PrimitiveTypesPackageImpl::createPackageContents(std::shared_ptr<uml::Packa
 	createPackageInterfaceRealizations(primitiveTypes, factory);
 }
 
-void PrimitiveTypesPackageImpl::createPackageActivities(std::shared_ptr<uml::Package> primitiveTypes, std::shared_ptr<uml::UmlFactory> factory)
+void PrimitiveTypesPackageImpl::createPackageActivities(std::shared_ptr<uml::Package> primitiveTypes, std::shared_ptr<uml::umlFactory> factory)
 {
 }
 
 
-void PrimitiveTypesPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> primitiveTypes, std::shared_ptr<uml::UmlFactory> factory)
+void PrimitiveTypesPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> primitiveTypes, std::shared_ptr<uml::umlFactory> factory)
 {
 	std::shared_ptr<uml::Constraint> con = nullptr;
 	std::shared_ptr<uml::OpaqueExpression> oe = nullptr;
@@ -93,31 +96,31 @@ void PrimitiveTypesPackageImpl::createPackageClasses(std::shared_ptr<uml::Packag
 
 } 
 
-void PrimitiveTypesPackageImpl::createPackageAssociations(std::shared_ptr<uml::Package> primitiveTypes, std::shared_ptr<uml::UmlFactory> factory)
+void PrimitiveTypesPackageImpl::createPackageAssociations(std::shared_ptr<uml::Package> primitiveTypes, std::shared_ptr<uml::umlFactory> factory)
 {
 }
 
-void PrimitiveTypesPackageImpl::createPackageDependencies(std::shared_ptr<uml::Package> primitiveTypes, std::shared_ptr<uml::UmlFactory> factory)
+void PrimitiveTypesPackageImpl::createPackageDependencies(std::shared_ptr<uml::Package> primitiveTypes, std::shared_ptr<uml::umlFactory> factory)
 {
 }
 
-void PrimitiveTypesPackageImpl::createPackageEnumerationLiterals(std::shared_ptr<uml::Package> primitiveTypes, std::shared_ptr<uml::UmlFactory> factory)
+void PrimitiveTypesPackageImpl::createPackageEnumerationLiterals(std::shared_ptr<uml::Package> primitiveTypes, std::shared_ptr<uml::umlFactory> factory)
 {
 }
 
-void PrimitiveTypesPackageImpl::createPackageInstanceSpecifications(std::shared_ptr<uml::Package> primitiveTypes, std::shared_ptr<uml::UmlFactory> factory)
+void PrimitiveTypesPackageImpl::createPackageInstanceSpecifications(std::shared_ptr<uml::Package> primitiveTypes, std::shared_ptr<uml::umlFactory> factory)
 {
 }
 
-void PrimitiveTypesPackageImpl::createPackageInterfaceRealizations(std::shared_ptr<uml::Package> primitiveTypes, std::shared_ptr<uml::UmlFactory> factory)
+void PrimitiveTypesPackageImpl::createPackageInterfaceRealizations(std::shared_ptr<uml::Package> primitiveTypes, std::shared_ptr<uml::umlFactory> factory)
 {
 }
 
-void PrimitiveTypesPackageImpl::createPackageInterfaces(std::shared_ptr<uml::Package> primitiveTypes, std::shared_ptr<uml::UmlFactory> factory)
+void PrimitiveTypesPackageImpl::createPackageInterfaces(std::shared_ptr<uml::Package> primitiveTypes, std::shared_ptr<uml::umlFactory> factory)
 {
 }
 
-void PrimitiveTypesPackageImpl::createPackagePrimitiveTypes(std::shared_ptr<uml::Package> primitiveTypes, std::shared_ptr<uml::UmlFactory> factory)
+void PrimitiveTypesPackageImpl::createPackagePrimitiveTypes(std::shared_ptr<uml::Package> primitiveTypes, std::shared_ptr<uml::umlFactory> factory)
 {
 	primitiveTypes_Boolean = factory->createPrimitiveType_in_Package(primitiveTypes);
 	primitiveTypes_Boolean->setName("Boolean");
@@ -135,11 +138,11 @@ void PrimitiveTypesPackageImpl::createPackagePrimitiveTypes(std::shared_ptr<uml:
 	primitiveTypes_UnlimitedNatural->setName("UnlimitedNatural");
 }
 
-void PrimitiveTypesPackageImpl::createPackageStereotypes(std::shared_ptr<uml::Package> primitiveTypes, std::shared_ptr<uml::UmlFactory> factory)
+void PrimitiveTypesPackageImpl::createPackageStereotypes(std::shared_ptr<uml::Package> primitiveTypes, std::shared_ptr<uml::umlFactory> factory)
 {
 }
 
-void PrimitiveTypesPackageImpl::createPackageValueSpecifications(std::shared_ptr<uml::Package> primitiveTypes, std::shared_ptr<uml::UmlFactory> factory)
+void PrimitiveTypesPackageImpl::createPackageValueSpecifications(std::shared_ptr<uml::Package> primitiveTypes, std::shared_ptr<uml::umlFactory> factory)
 {
 }
 
@@ -162,6 +165,7 @@ void PrimitiveTypesPackageImpl::initializePackageContents(std::shared_ptr<uml::P
 	initializePackageInstanceSpecifications();
 	initializePackageInterfaceRealizations();
 	initializePackageInterfaces();
+	initializePackageNestedPackages();
 	initializePackageStereotypes();
 	initializePackageValueSpecifications();
 
@@ -205,6 +209,10 @@ void PrimitiveTypesPackageImpl::initializePackageInterfaces()
 {
 }
 
+void PrimitiveTypesPackageImpl::initializePackageNestedPackages()
+{
+}
+
 void PrimitiveTypesPackageImpl::initializePackageStereotypes()
 {
 }
@@ -233,6 +241,7 @@ std::shared_ptr<uml::PrimitiveType> PrimitiveTypesPackageImpl::get_PrimitiveType
 {
 	return primitiveTypes_UnlimitedNatural;
 }
+
 
 
 

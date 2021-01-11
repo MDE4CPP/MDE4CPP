@@ -7,7 +7,7 @@
 #ifndef PSCS_SEMANTICSPACKAGEIMPL_HPP
 #define PSCS_SEMANTICSPACKAGEIMPL_HPP
 
-#include "ecore/EcorePackage.hpp"
+#include "ecore/ecorePackage.hpp"
 #include "ecore/impl/EPackageImpl.hpp"
 
 #include "PSCS/Semantics/SemanticsPackage.hpp" 
@@ -48,7 +48,7 @@ namespace PSCS::Semantics
 
 namespace ecore
 {
-	class EcoreFactory;
+	class ecoreFactory;
 }
 
 namespace PSCS::Semantics
@@ -97,7 +97,7 @@ namespace PSCS::Semantics
 			void initializePackageContents();
 
 		private:
-			void createPackageEDataTypes(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
+			void createPackageEDataTypes(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 
 			void initializePackageEDataTypes();
 

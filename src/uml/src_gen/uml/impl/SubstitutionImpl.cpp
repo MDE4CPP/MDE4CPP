@@ -56,8 +56,8 @@
 #include "uml/TemplateParameter.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -209,7 +209,7 @@ std::shared_ptr<ecore::EObject>  SubstitutionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> SubstitutionImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getSubstitution_Class();
+	return uml::umlPackage::eInstance()->getSubstitution_Class();
 }
 
 //*********************************
@@ -386,10 +386,10 @@ Any SubstitutionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::SUBSTITUTION_ATTRIBUTE_CONTRACT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getContract())); //23018
-		case uml::UmlPackage::SUBSTITUTION_ATTRIBUTE_SUBSTITUTINGCLASSIFIER:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSubstitutingClassifier().lock())); //23019
+		case uml::umlPackage::SUBSTITUTION_ATTRIBUTE_CONTRACT:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getContract())); //22918
+		case uml::umlPackage::SUBSTITUTION_ATTRIBUTE_SUBSTITUTINGCLASSIFIER:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSubstitutingClassifier().lock())); //22919
 	}
 	return RealizationImpl::eGet(featureID, resolve, coreType);
 }
@@ -397,10 +397,10 @@ bool SubstitutionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::SUBSTITUTION_ATTRIBUTE_CONTRACT:
-			return getContract() != nullptr; //23018
-		case uml::UmlPackage::SUBSTITUTION_ATTRIBUTE_SUBSTITUTINGCLASSIFIER:
-			return getSubstitutingClassifier().lock() != nullptr; //23019
+		case uml::umlPackage::SUBSTITUTION_ATTRIBUTE_CONTRACT:
+			return getContract() != nullptr; //22918
+		case uml::umlPackage::SUBSTITUTION_ATTRIBUTE_SUBSTITUTINGCLASSIFIER:
+			return getSubstitutingClassifier().lock() != nullptr; //22919
 	}
 	return RealizationImpl::internalEIsSet(featureID);
 }
@@ -408,20 +408,20 @@ bool SubstitutionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::SUBSTITUTION_ATTRIBUTE_CONTRACT:
+		case uml::umlPackage::SUBSTITUTION_ATTRIBUTE_CONTRACT:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Classifier> _contract = std::dynamic_pointer_cast<uml::Classifier>(_temp);
-			setContract(_contract); //23018
+			setContract(_contract); //22918
 			return true;
 		}
-		case uml::UmlPackage::SUBSTITUTION_ATTRIBUTE_SUBSTITUTINGCLASSIFIER:
+		case uml::umlPackage::SUBSTITUTION_ATTRIBUTE_SUBSTITUTINGCLASSIFIER:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Classifier> _substitutingClassifier = std::dynamic_pointer_cast<uml::Classifier>(_temp);
-			setSubstitutingClassifier(_substitutingClassifier); //23019
+			setSubstitutingClassifier(_substitutingClassifier); //22919
 			return true;
 		}
 	}
@@ -440,7 +440,7 @@ void SubstitutionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandle
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -475,7 +475,7 @@ void SubstitutionImpl::loadAttributes(std::shared_ptr<persistence::interfaces::X
 
 void SubstitutionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	RealizationImpl::loadNode(nodeName, loadHandler);
@@ -485,7 +485,7 @@ void SubstitutionImpl::resolveReferences(const int featureID, std::list<std::sha
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::SUBSTITUTION_ATTRIBUTE_CONTRACT:
+		case uml::umlPackage::SUBSTITUTION_ATTRIBUTE_CONTRACT:
 		{
 			if (references.size() == 1)
 			{
@@ -497,7 +497,7 @@ void SubstitutionImpl::resolveReferences(const int featureID, std::list<std::sha
 			return;
 		}
 
-		case uml::UmlPackage::SUBSTITUTION_ATTRIBUTE_SUBSTITUTINGCLASSIFIER:
+		case uml::umlPackage::SUBSTITUTION_ATTRIBUTE_SUBSTITUTINGCLASSIFIER:
 		{
 			if (references.size() == 1)
 			{
@@ -547,7 +547,7 @@ void SubstitutionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 

@@ -70,8 +70,8 @@
 #include "uml/Type.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -107,11 +107,11 @@ ModelImpl::ModelImpl(std::weak_ptr<uml::Package > par_Package, const int referen
 {
 	switch(reference_id)
 	{	
-	case UmlPackage::PACKAGE_ATTRIBUTE_NESTINGPACKAGE:
+	case umlPackage::PACKAGE_ATTRIBUTE_NESTINGPACKAGE:
 		m_nestingPackage = par_Package;
 		m_namespace = par_Package;
 		 return;
-	case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
+	case umlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
 		m_owningPackage = par_Package;
 		m_namespace = par_Package;
 		 return;
@@ -295,7 +295,7 @@ std::shared_ptr<ecore::EObject>  ModelImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ModelImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getModel_Class();
+	return uml::umlPackage::eInstance()->getModel_Class();
 }
 
 //*********************************
@@ -440,8 +440,8 @@ Any ModelImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::MODEL_ATTRIBUTE_VIEWPOINT:
-			return eAny(getViewpoint()); //15428
+		case uml::umlPackage::MODEL_ATTRIBUTE_VIEWPOINT:
+			return eAny(getViewpoint()); //15328
 	}
 	return PackageImpl::eGet(featureID, resolve, coreType);
 }
@@ -449,8 +449,8 @@ bool ModelImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::MODEL_ATTRIBUTE_VIEWPOINT:
-			return getViewpoint() != ""; //15428
+		case uml::umlPackage::MODEL_ATTRIBUTE_VIEWPOINT:
+			return getViewpoint() != ""; //15328
 	}
 	return PackageImpl::internalEIsSet(featureID);
 }
@@ -458,11 +458,11 @@ bool ModelImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::MODEL_ATTRIBUTE_VIEWPOINT:
+		case uml::umlPackage::MODEL_ATTRIBUTE_VIEWPOINT:
 		{
 			// BOOST CAST
 			std::string _viewpoint = newValue->get<std::string>();
-			setViewpoint(_viewpoint); //15428
+			setViewpoint(_viewpoint); //15328
 			return true;
 		}
 	}
@@ -481,7 +481,7 @@ void ModelImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> load
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -518,7 +518,7 @@ void ModelImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHan
 
 void ModelImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	PackageImpl::loadNode(nodeName, loadHandler);
@@ -558,7 +558,7 @@ void ModelImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 		// Add attributes

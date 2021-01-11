@@ -25,17 +25,20 @@
 #include "ecore/EClass.hpp"
 
 //Includes from codegen annotation
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/Semantics/Activities/ObjectToken.hpp"
 #include "fUML/Semantics/CommonBehavior/Execution.hpp"
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
+#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
+#include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
+#include "uml/Behavior.hpp"
+#include "uml/CallAction.hpp"
 #include "uml/InputPin.hpp"
 #include "uml/OutputPin.hpp"
 #include "uml/Parameter.hpp"
-#include "uml/CallAction.hpp"
-#include "uml/Behavior.hpp"
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/Semantics/Activities/ObjectToken.hpp"
+#include "uml/Property.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -69,8 +72,8 @@
 #include "fUML/Semantics/Actions/impl/ActionsFactoryImpl.hpp"
 #include "fUML/Semantics/Actions/impl/ActionsPackageImpl.hpp"
 
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
+#include "fUML/fUMLFactory.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsFactory.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
 
@@ -198,32 +201,97 @@ void CallActionActivationImpl::doAction()
         this->getCallExecutions()->push_back(callExecution);
 
         std::shared_ptr<uml::CallAction> callAction = this->getCallAction();
-        std::shared_ptr<Bag<uml::InputPin> > argumentPins = callAction->getArgument();
+        std::shared_ptr<Bag<uml::InputPin>> argumentPins = callAction->getArgument();
         std::shared_ptr<Subset<fUML::Semantics::Actions::InputPinActivation, fUML::Semantics::Actions::PinActivation>> inputActivationList=this->getInputPinActivation();
 
         unsigned int pinNumber = 0;
         std::shared_ptr<uml::Behavior> beh = callExecution->getBehavior();
-        std::shared_ptr<Bag<uml::Parameter> > parameterList = beh->getOwnedParameter();
-        for (std::shared_ptr<uml::Parameter> parameter : *parameterList)
+        std::shared_ptr<Bag<uml::Parameter>> parameterList = beh->getOwnedParameter();
+        unsigned int size = parameterList->size();
+        for (unsigned int i=0; i<size; i++)
         {
+        	std::shared_ptr<uml::Parameter> parameter = parameterList->at(i);
         	uml::ParameterDirectionKind direction=parameter->getDirection();
             if (direction == uml::ParameterDirectionKind::IN || direction == uml::ParameterDirectionKind::INOUT)
             {
             	std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> parameterValue(fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createParameterValue());
                 parameterValue->setParameter(parameter);
-
                 std::shared_ptr<Bag<fUML::Semantics::Values::Value> > values = parameterValue->getValues();
-                std::shared_ptr<fUML::Semantics::Actions::InputPinActivation> activation =inputActivationList->at(pinNumber);
-            	std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > tokenList = activation->takeUnofferedTokens();
-            	for(std::shared_ptr<fUML::Semantics::Activities::Token> token : *tokenList)
+
+                // get corresponding pin (pin and parameter list should be synchronized)
+                std::shared_ptr<uml::InputPin> correspondingInputpin = argumentPins->at(i);
+                std::string pinName = correspondingInputpin->getName();
+
+                // if pin name starts with 'self', get values from context attribute
+                if (pinName.find("self.") == 0)
                 {
-                	std::shared_ptr<fUML::Semantics::Values::Value> value = token->getValue();
-                    if(value != nullptr)
-                    {
-                    	DEBUG_MESSAGE(std::cout<<"ActionActivation - takeTokens value"<<value->toString()<<std::endl;)
-                        values->push_back(value);
-                    }
+                	std::string attributeName = pinName.substr (5, std::string::npos);
+					DEBUG_MESSAGE(std::cout << "change context to " << attributeName << std::endl;)
+
+                	std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> context = getExecutionContext();
+
+					std::shared_ptr<uml::Property> attribute = nullptr;
+					std::shared_ptr<Bag<uml::Classifier>> contextTypes = context->getTypes();
+					Bag<uml::Classifier>::iterator contextTypesIter = contextTypes->begin();
+					Bag<uml::Classifier>::iterator contextTypesEnd = contextTypes->end();
+
+					while (attribute == nullptr || contextTypesIter < contextTypesEnd)
+					{
+						std::shared_ptr<uml::Classifier> classifier = *contextTypesIter;
+						contextTypesIter++;
+
+						std::shared_ptr<Bag<uml::Property>> attributes = classifier->getAllAttributes();
+						Bag<uml::Property>::iterator attributeIter = attributes->begin();
+						Bag<uml::Property>::iterator attributeEnd = attributes->end();
+						while (attribute == nullptr || attributeIter < attributeEnd)
+						{
+							if ((*attributeIter)->getName() == attributeName)
+							{
+								attribute = *attributeIter;
+							}
+							attributeIter++;
+						}
+					}
+
+					if(nullptr == attribute)
+					{
+						std::cerr << "Could not find the attribute in the current context for the input pin " << pinName << std::endl;
+						exit(EXIT_FAILURE);
+					}
+
+					DEBUG_MESSAGE(std::cout << "Self attribute found for target pin" <<std::endl;)
+
+					if (context != nullptr)
+					{
+						std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> featureValues(new Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>());
+						std::shared_ptr<Bag<fUML::Semantics::Values::Value>> attributeValues = context->getValues(attribute, featureValues);
+						values->insert(values->end(), attributeValues->begin(), attributeValues->end());
+					}
                 }
+                // if pin name starts with 'self', use context as value
+                else if (pinName.find("self") == 0)
+				{
+					std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> context = getExecutionContext();
+
+					std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> contextReference = fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createReference();
+					contextReference->setReferent(context);
+					values->push_back(contextReference);
+				}
+                else
+                {
+					std::shared_ptr<fUML::Semantics::Actions::InputPinActivation> activation =inputActivationList->at(pinNumber);
+					std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > tokenList = activation->takeUnofferedTokens();
+					for(std::shared_ptr<fUML::Semantics::Activities::Token> token : *tokenList)
+					{
+						std::shared_ptr<fUML::Semantics::Values::Value> value = token->getValue();
+						if(value != nullptr)
+						{
+							DEBUG_MESSAGE(std::cout<<"ActionActivation - takeTokens value"<<value->toString()<<std::endl;)
+							values->push_back(value);
+						}
+					}
+                }
+
                 callExecution->setParameterValue(parameterValue);
                 pinNumber++;
             }
@@ -519,7 +587,7 @@ void CallActionActivationImpl::load(std::shared_ptr<persistence::interfaces::XLo
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get FUMLFactory
+	// get fUMLFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{

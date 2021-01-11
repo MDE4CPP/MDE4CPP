@@ -75,8 +75,8 @@
 #include "uml/WriteStructuralFeatureAction.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -282,7 +282,7 @@ std::shared_ptr<ecore::EObject>  AddStructuralFeatureValueActionImpl::copy() con
 
 std::shared_ptr<ecore::EClass> AddStructuralFeatureValueActionImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getAddStructuralFeatureValueAction_Class();
+	return uml::umlPackage::eInstance()->getAddStructuralFeatureValueAction_Class();
 }
 
 //*********************************
@@ -473,10 +473,10 @@ Any AddStructuralFeatureValueActionImpl::eGet(int featureID, bool resolve, bool 
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::ADDSTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_INSERTAT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getInsertAt())); //1631
-		case uml::UmlPackage::ADDSTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_ISREPLACEALL:
-			return eAny(getIsReplaceAll()); //1632
+		case uml::umlPackage::ADDSTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_INSERTAT:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getInsertAt())); //1531
+		case uml::umlPackage::ADDSTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_ISREPLACEALL:
+			return eAny(getIsReplaceAll()); //1532
 	}
 	return WriteStructuralFeatureActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -484,10 +484,10 @@ bool AddStructuralFeatureValueActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::ADDSTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_INSERTAT:
-			return getInsertAt() != nullptr; //1631
-		case uml::UmlPackage::ADDSTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_ISREPLACEALL:
-			return getIsReplaceAll() != false; //1632
+		case uml::umlPackage::ADDSTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_INSERTAT:
+			return getInsertAt() != nullptr; //1531
+		case uml::umlPackage::ADDSTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_ISREPLACEALL:
+			return getIsReplaceAll() != false; //1532
 	}
 	return WriteStructuralFeatureActionImpl::internalEIsSet(featureID);
 }
@@ -495,19 +495,19 @@ bool AddStructuralFeatureValueActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::ADDSTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_INSERTAT:
+		case uml::umlPackage::ADDSTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_INSERTAT:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::InputPin> _insertAt = std::dynamic_pointer_cast<uml::InputPin>(_temp);
-			setInsertAt(_insertAt); //1631
+			setInsertAt(_insertAt); //1531
 			return true;
 		}
-		case uml::UmlPackage::ADDSTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_ISREPLACEALL:
+		case uml::umlPackage::ADDSTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_ISREPLACEALL:
 		{
 			// BOOST CAST
 			bool _isReplaceAll = newValue->get<bool>();
-			setIsReplaceAll(_isReplaceAll); //1632
+			setIsReplaceAll(_isReplaceAll); //1532
 			return true;
 		}
 	}
@@ -526,7 +526,7 @@ void AddStructuralFeatureValueActionImpl::load(std::shared_ptr<persistence::inte
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -563,7 +563,7 @@ void AddStructuralFeatureValueActionImpl::loadAttributes(std::shared_ptr<persist
 
 void AddStructuralFeatureValueActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -574,7 +574,7 @@ void AddStructuralFeatureValueActionImpl::loadNode(std::string nodeName, std::sh
 			{
 				typeName = "InputPin";
 			}
-			std::shared_ptr<ecore::EObject> insertAt = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::UmlPackage::INPUTPIN_ATTRIBUTE_ADDSTRUCTURALFEATUREVALUEACTION);
+			std::shared_ptr<ecore::EObject> insertAt = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::INPUTPIN_ATTRIBUTE_ADDSTRUCTURALFEATUREVALUEACTION);
 			if (insertAt != nullptr)
 			{
 				loadHandler->handleChild(insertAt);
@@ -613,7 +613,6 @@ void AddStructuralFeatureValueActionImpl::save(std::shared_ptr<persistence::inte
 	
 	ActivityNodeImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);
@@ -638,7 +637,7 @@ void AddStructuralFeatureValueActionImpl::saveContent(std::shared_ptr<persistenc
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 		// Save 'insertAt'
 		std::shared_ptr<uml::InputPin > insertAt = this->getInsertAt();

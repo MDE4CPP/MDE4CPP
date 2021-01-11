@@ -28,7 +28,7 @@ namespace uml
 			TestIdentityActionImpl& operator=(TestIdentityActionImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			TestIdentityActionImpl();
 			virtual std::shared_ptr<TestIdentityAction> getThisTestIdentityActionPtr() const;
 			virtual void setThisTestIdentityActionPtr(std::weak_ptr<TestIdentityAction> thisTestIdentityActionPtr);

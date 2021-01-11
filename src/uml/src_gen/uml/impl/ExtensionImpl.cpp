@@ -89,8 +89,8 @@
 #include "uml/UseCase.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -133,11 +133,11 @@ ExtensionImpl::ExtensionImpl(std::weak_ptr<uml::Package > par_Package, const int
 {
 	switch(reference_id)
 	{	
-	case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
+	case umlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
 		m_owningPackage = par_Package;
 		m_namespace = par_Package;
 		 return;
-	case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
+	case umlPackage::TYPE_ATTRIBUTE_PACKAGE:
 		m_package = par_Package;
 		m_namespace = par_Package;
 		 return;
@@ -376,7 +376,7 @@ std::shared_ptr<ecore::EObject>  ExtensionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ExtensionImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getExtension_Class();
+	return uml::umlPackage::eInstance()->getExtension_Class();
 }
 
 //*********************************
@@ -612,10 +612,10 @@ Any ExtensionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::EXTENSION_ATTRIBUTE_ISREQUIRED:
-			return eAny(getIsRequired()); //9844
-		case uml::UmlPackage::EXTENSION_ATTRIBUTE_METACLASS:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getMetaclass())); //9845
+		case uml::umlPackage::EXTENSION_ATTRIBUTE_ISREQUIRED:
+			return eAny(getIsRequired()); //9744
+		case uml::umlPackage::EXTENSION_ATTRIBUTE_METACLASS:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getMetaclass())); //9745
 	}
 	return AssociationImpl::eGet(featureID, resolve, coreType);
 }
@@ -623,10 +623,10 @@ bool ExtensionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::EXTENSION_ATTRIBUTE_ISREQUIRED:
-			return getIsRequired() != false; //9844
-		case uml::UmlPackage::EXTENSION_ATTRIBUTE_METACLASS:
-			return getMetaclass() != nullptr; //9845
+		case uml::umlPackage::EXTENSION_ATTRIBUTE_ISREQUIRED:
+			return getIsRequired() != false; //9744
+		case uml::umlPackage::EXTENSION_ATTRIBUTE_METACLASS:
+			return getMetaclass() != nullptr; //9745
 	}
 	return AssociationImpl::internalEIsSet(featureID);
 }
@@ -650,7 +650,7 @@ void ExtensionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> 
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -666,7 +666,7 @@ void ExtensionImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoa
 
 void ExtensionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	AssociationImpl::loadNode(nodeName, loadHandler);
@@ -714,7 +714,7 @@ void ExtensionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 

@@ -28,7 +28,7 @@ namespace uml
 			ActivityFinalNodeImpl& operator=(ActivityFinalNodeImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			ActivityFinalNodeImpl();
 			virtual std::shared_ptr<ActivityFinalNode> getThisActivityFinalNodePtr() const;
 			virtual void setThisActivityFinalNodePtr(std::weak_ptr<ActivityFinalNode> thisActivityFinalNodePtr);

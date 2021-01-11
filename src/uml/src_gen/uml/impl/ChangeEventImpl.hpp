@@ -28,7 +28,7 @@ namespace uml
 			ChangeEventImpl& operator=(ChangeEventImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			ChangeEventImpl();
 			virtual std::shared_ptr<ChangeEvent> getThisChangeEventPtr() const;
 			virtual void setThisChangeEventPtr(std::weak_ptr<ChangeEvent> thisChangeEventPtr);

@@ -28,7 +28,7 @@ namespace uml
 			ClauseImpl& operator=(ClauseImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			ClauseImpl();
 			virtual std::shared_ptr<Clause> getThisClausePtr() const;
 			virtual void setThisClausePtr(std::weak_ptr<Clause> thisClausePtr);

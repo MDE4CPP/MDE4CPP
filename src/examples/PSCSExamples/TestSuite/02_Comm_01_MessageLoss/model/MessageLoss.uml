@@ -17,6 +17,7 @@ If the operation call is not forwarded, a::b::p must be equal to 0.</body>
     <ownedAttribute xmi:type="uml:Port" xmi:id="_IAUnQJOKEeqa39ivxo0xjw" name="q" type="_GnAWcHN2EeqRednEYw10kw" aggregation="composite"/>
     <interfaceRealization xmi:id="_w7TzgJOJEeqa39ivxo0xjw" name="IRealization" client="_szOH8HN4EeqRednEYw10kw" supplier="_1v85wHN1EeqRednEYw10kw" contract="_1v85wHN1EeqRednEYw10kw"/>
     <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_-bW4IJOJEeqa39ivxo0xjw" name="assignP" specification="_5FoJkJOJEeqa39ivxo0xjw">
+      <eAnnotations xmi:id="_qB1FcERdEeupAptt1hjWPg" source="noExecution"/>
       <ownedParameter xmi:id="_BHtwsJOKEeqa39ivxo0xjw" name="v">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
       </ownedParameter>

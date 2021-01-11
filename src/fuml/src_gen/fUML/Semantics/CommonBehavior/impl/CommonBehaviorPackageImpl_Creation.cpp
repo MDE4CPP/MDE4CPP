@@ -1,7 +1,7 @@
 #include "fUML/Semantics/CommonBehavior/impl/CommonBehaviorPackageImpl.hpp"
 
 // metametamodel factory
-#include "ecore/EcoreFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 
 #include <cassert>
 
@@ -18,10 +18,10 @@
 #include "ecore/EStringToStringMapEntry.hpp"
 
 //depending model packages
-#include "ecore/EcorePackage.hpp"
-#include "fUML/FUMLPackage.hpp"
-#include "types/TypesPackage.hpp"
-#include "uml/UmlPackage.hpp"
+#include "ecore/ecorePackage.hpp"
+#include "fUML/fUMLPackage.hpp"
+#include "types/typesPackage.hpp"
+#include "uml/umlPackage.hpp"
 //include subpackages 
  
 using namespace fUML::Semantics::CommonBehavior;
@@ -34,7 +34,7 @@ void CommonBehaviorPackageImpl::createPackageContents(std::shared_ptr<ecore::EPa
 	}
 	isCreated = true;
 
-	std::shared_ptr<ecore::EcoreFactory> factory = ecore::EcoreFactory::eInstance();
+	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
 
 	createCallEventBehaviorContent(package, factory);
 	createCallEventExecutionContent(package, factory);
@@ -57,7 +57,7 @@ void CommonBehaviorPackageImpl::createPackageContents(std::shared_ptr<ecore::EPa
 
 }
 
-void CommonBehaviorPackageImpl::createCallEventBehaviorContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void CommonBehaviorPackageImpl::createCallEventBehaviorContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_callEventBehavior_Class = factory->createEClass_in_EPackage(package, CALLEVENTBEHAVIOR_CLASS);
 	
@@ -67,7 +67,7 @@ void CommonBehaviorPackageImpl::createCallEventBehaviorContent(std::shared_ptr<e
 	
 }
 
-void CommonBehaviorPackageImpl::createCallEventExecutionContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void CommonBehaviorPackageImpl::createCallEventExecutionContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_callEventExecution_Class = factory->createEClass_in_EPackage(package, CALLEVENTEXECUTION_CLASS);
 	m_callEventExecution_Attribute_callerSuspended = factory->createEAttribute_in_EContainingClass(m_callEventExecution_Class, CALLEVENTEXECUTION_ATTRIBUTE_CALLERSUSPENDED);
@@ -88,7 +88,7 @@ void CommonBehaviorPackageImpl::createCallEventExecutionContent(std::shared_ptr<
 	
 }
 
-void CommonBehaviorPackageImpl::createCallEventOccurrenceContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void CommonBehaviorPackageImpl::createCallEventOccurrenceContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_callEventOccurrence_Class = factory->createEClass_in_EPackage(package, CALLEVENTOCCURRENCE_CLASS);
 	
@@ -102,7 +102,7 @@ void CommonBehaviorPackageImpl::createCallEventOccurrenceContent(std::shared_ptr
 	
 }
 
-void CommonBehaviorPackageImpl::createClassifierBehaviorExecutionContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void CommonBehaviorPackageImpl::createClassifierBehaviorExecutionContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_classifierBehaviorExecution_Class = factory->createEClass_in_EPackage(package, CLASSIFIERBEHAVIOREXECUTION_CLASS);
 	
@@ -116,7 +116,7 @@ void CommonBehaviorPackageImpl::createClassifierBehaviorExecutionContent(std::sh
 	
 }
 
-void CommonBehaviorPackageImpl::createClassifierBehaviorInvocationEventAccepterContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void CommonBehaviorPackageImpl::createClassifierBehaviorInvocationEventAccepterContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_classifierBehaviorInvocationEventAccepter_Class = factory->createEClass_in_EPackage(package, CLASSIFIERBEHAVIORINVOCATIONEVENTACCEPTER_CLASS);
 	
@@ -131,7 +131,7 @@ void CommonBehaviorPackageImpl::createClassifierBehaviorInvocationEventAccepterC
 	
 }
 
-void CommonBehaviorPackageImpl::createEventAccepterContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void CommonBehaviorPackageImpl::createEventAccepterContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_eventAccepter_Class = factory->createEClass_in_EPackage(package, EVENTACCEPTER_CLASS);
 	
@@ -141,7 +141,7 @@ void CommonBehaviorPackageImpl::createEventAccepterContent(std::shared_ptr<ecore
 	
 }
 
-void CommonBehaviorPackageImpl::createEventDispatchLoopContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void CommonBehaviorPackageImpl::createEventDispatchLoopContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_eventDispatchLoop_Class = factory->createEClass_in_EPackage(package, EVENTDISPATCHLOOP_CLASS);
 	
@@ -149,7 +149,7 @@ void CommonBehaviorPackageImpl::createEventDispatchLoopContent(std::shared_ptr<e
 	
 }
 
-void CommonBehaviorPackageImpl::createEventOccurrenceContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void CommonBehaviorPackageImpl::createEventOccurrenceContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_eventOccurrence_Class = factory->createEClass_in_EPackage(package, EVENTOCCURRENCE_CLASS);
 	
@@ -163,7 +163,7 @@ void CommonBehaviorPackageImpl::createEventOccurrenceContent(std::shared_ptr<eco
 	
 }
 
-void CommonBehaviorPackageImpl::createExecutionContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void CommonBehaviorPackageImpl::createExecutionContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_execution_Class = factory->createEClass_in_EPackage(package, EXECUTION_CLASS);
 	
@@ -182,7 +182,7 @@ void CommonBehaviorPackageImpl::createExecutionContent(std::shared_ptr<ecore::EP
 	
 }
 
-void CommonBehaviorPackageImpl::createFIFOGetNextEventStrategyContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void CommonBehaviorPackageImpl::createFIFOGetNextEventStrategyContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_fIFOGetNextEventStrategy_Class = factory->createEClass_in_EPackage(package, FIFOGETNEXTEVENTSTRATEGY_CLASS);
 	
@@ -190,7 +190,7 @@ void CommonBehaviorPackageImpl::createFIFOGetNextEventStrategyContent(std::share
 	
 }
 
-void CommonBehaviorPackageImpl::createGetNextEventStrategyContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void CommonBehaviorPackageImpl::createGetNextEventStrategyContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_getNextEventStrategy_Class = factory->createEClass_in_EPackage(package, GETNEXTEVENTSTRATEGY_CLASS);
 	
@@ -200,7 +200,7 @@ void CommonBehaviorPackageImpl::createGetNextEventStrategyContent(std::shared_pt
 	
 }
 
-void CommonBehaviorPackageImpl::createInvocationEventOccurrenceContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void CommonBehaviorPackageImpl::createInvocationEventOccurrenceContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_invocationEventOccurrence_Class = factory->createEClass_in_EPackage(package, INVOCATIONEVENTOCCURRENCE_CLASS);
 	
@@ -211,7 +211,7 @@ void CommonBehaviorPackageImpl::createInvocationEventOccurrenceContent(std::shar
 	
 }
 
-void CommonBehaviorPackageImpl::createObjectActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void CommonBehaviorPackageImpl::createObjectActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_objectActivation_Class = factory->createEClass_in_EPackage(package, OBJECTACTIVATION_CLASS);
 	
@@ -232,7 +232,7 @@ void CommonBehaviorPackageImpl::createObjectActivationContent(std::shared_ptr<ec
 	
 }
 
-void CommonBehaviorPackageImpl::createOpaqueBehaviorExecutionContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void CommonBehaviorPackageImpl::createOpaqueBehaviorExecutionContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_opaqueBehaviorExecution_Class = factory->createEClass_in_EPackage(package, OPAQUEBEHAVIOREXECUTION_CLASS);
 	
@@ -242,7 +242,7 @@ void CommonBehaviorPackageImpl::createOpaqueBehaviorExecutionContent(std::shared
 	
 }
 
-void CommonBehaviorPackageImpl::createParameterValueContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void CommonBehaviorPackageImpl::createParameterValueContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_parameterValue_Class = factory->createEClass_in_EPackage(package, PARAMETERVALUE_CLASS);
 	
@@ -253,7 +253,7 @@ void CommonBehaviorPackageImpl::createParameterValueContent(std::shared_ptr<ecor
 	
 }
 
-void CommonBehaviorPackageImpl::createSignalEventOccurrenceContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void CommonBehaviorPackageImpl::createSignalEventOccurrenceContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_signalEventOccurrence_Class = factory->createEClass_in_EPackage(package, SIGNALEVENTOCCURRENCE_CLASS);
 	
@@ -264,7 +264,7 @@ void CommonBehaviorPackageImpl::createSignalEventOccurrenceContent(std::shared_p
 	
 }
 
-void CommonBehaviorPackageImpl::createPackageEDataTypes(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void CommonBehaviorPackageImpl::createPackageEDataTypes(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	
 }

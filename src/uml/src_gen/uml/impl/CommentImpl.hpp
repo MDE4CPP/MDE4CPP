@@ -28,7 +28,7 @@ namespace uml
 			CommentImpl& operator=(CommentImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			CommentImpl();
 			virtual std::shared_ptr<Comment> getThisCommentPtr() const;
 			virtual void setThisCommentPtr(std::weak_ptr<Comment> thisCommentPtr);

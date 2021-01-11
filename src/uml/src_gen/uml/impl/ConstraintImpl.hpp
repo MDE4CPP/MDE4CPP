@@ -28,7 +28,7 @@ namespace uml
 			ConstraintImpl& operator=(ConstraintImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			ConstraintImpl();
 			virtual std::shared_ptr<Constraint> getThisConstraintPtr() const;
 			virtual void setThisConstraintPtr(std::weak_ptr<Constraint> thisConstraintPtr);

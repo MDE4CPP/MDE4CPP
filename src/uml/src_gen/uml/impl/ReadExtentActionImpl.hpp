@@ -28,7 +28,7 @@ namespace uml
 			ReadExtentActionImpl& operator=(ReadExtentActionImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			ReadExtentActionImpl();
 			virtual std::shared_ptr<ReadExtentAction> getThisReadExtentActionPtr() const;
 			virtual void setThisReadExtentActionPtr(std::weak_ptr<ReadExtentAction> thisReadExtentActionPtr);

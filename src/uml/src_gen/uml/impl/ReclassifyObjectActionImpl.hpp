@@ -28,7 +28,7 @@ namespace uml
 			ReclassifyObjectActionImpl& operator=(ReclassifyObjectActionImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			ReclassifyObjectActionImpl();
 			virtual std::shared_ptr<ReclassifyObjectAction> getThisReclassifyObjectActionPtr() const;
 			virtual void setThisReclassifyObjectActionPtr(std::weak_ptr<ReclassifyObjectAction> thisReclassifyObjectActionPtr);

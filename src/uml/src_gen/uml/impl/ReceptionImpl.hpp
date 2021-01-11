@@ -28,7 +28,7 @@ namespace uml
 			ReceptionImpl& operator=(ReceptionImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			ReceptionImpl();
 			virtual std::shared_ptr<Reception> getThisReceptionPtr() const;
 			virtual void setThisReceptionPtr(std::weak_ptr<Reception> thisReceptionPtr);

@@ -28,7 +28,7 @@ namespace uml
 			FunctionBehaviorImpl& operator=(FunctionBehaviorImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			FunctionBehaviorImpl();
 			virtual std::shared_ptr<FunctionBehavior> getThisFunctionBehaviorPtr() const;
 			virtual void setThisFunctionBehaviorPtr(std::weak_ptr<FunctionBehavior> thisFunctionBehaviorPtr);

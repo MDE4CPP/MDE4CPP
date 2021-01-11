@@ -28,7 +28,7 @@ namespace uml
 			MessageImpl& operator=(MessageImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			MessageImpl();
 			virtual std::shared_ptr<Message> getThisMessagePtr() const;
 			virtual void setThisMessagePtr(std::weak_ptr<Message> thisMessagePtr);

@@ -25,18 +25,18 @@
 	className : String = objectClassName();
 	pointerName : String = pointerName(aPackage);
 }]
-[file (aPackage.getPackageName().concat('Exec/').concat(className).concat('.hpp'), false, 'UTF-8')]
+[file (aPackage.generateNamespacePath(false).concat('Exec/').concat(className).concat('.hpp'), false, 'UTF-8')]
 [startGuard(aClassifier,'Execution')/]
 
 #include "PSCS/Semantics/StructuredClassifiers/impl/CS_ObjectImpl.hpp"
 [for (inheritedType : Classifier | aClassifier.collectInheritedTypes())]
-#include "[inheritedType.getNearestPackage().getPackageName()/]Exec/[inheritedType.objectClassName()/].hpp"
+#include "[inheritedType.getNearestPackage().generateNamespacePath(false)/]Exec/[inheritedType.objectClassName()/].hpp"
 [/for]
 
 template <class T> 
 class Bag;
 
-namespace [aClassifier.getNearestPackage().myNamespaceName()/]
+namespace [aClassifier.getNearestPackage().generateNamespace(false)/]
 {
 	class [aClassifier.name.toUpperFirst()/];
 }
@@ -47,9 +47,9 @@ namespace uml
 	class ConnectorEnd;
 }
 
-namespace [aClassifier.getNearestPackage().name/] 
+namespace [aClassifier.getNearestPackage().generateNamespace(false)/] 
 {
-	class [className/] : [if (aClassifier.collectInheritedTypes()->isEmpty())]virtual public PSCS::Semantics::StructuredClassifiers::CS_ObjectImpl[else][for(inheritedType : Classifier | aClassifier.collectInheritedTypes()) separator (' , ')]virtual public [inheritedType.getNearestPackage().name/]::[inheritedType.objectClassName()/][/for][/if]
+	class [className/] : [if (aClassifier.collectInheritedTypes()->isEmpty())]virtual public PSCS::Semantics::StructuredClassifiers::CS_ObjectImpl[else][for(inheritedType : Classifier | aClassifier.collectInheritedTypes()) separator (' , ')]virtual public [inheritedType.getNearestPackage().generateNamespace(false)/]::[inheritedType.objectClassName()/][/for][/if]
 	{
 		public:
 		    //constructors

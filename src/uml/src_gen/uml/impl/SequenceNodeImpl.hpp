@@ -28,7 +28,7 @@ namespace uml
 			SequenceNodeImpl& operator=(SequenceNodeImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			SequenceNodeImpl();
 			virtual std::shared_ptr<SequenceNode> getThisSequenceNodePtr() const;
 			virtual void setThisSequenceNodePtr(std::weak_ptr<SequenceNode> thisSequenceNodePtr);

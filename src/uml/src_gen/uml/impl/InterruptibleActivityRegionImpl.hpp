@@ -28,7 +28,7 @@ namespace uml
 			InterruptibleActivityRegionImpl& operator=(InterruptibleActivityRegionImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			InterruptibleActivityRegionImpl();
 			virtual std::shared_ptr<InterruptibleActivityRegion> getThisInterruptibleActivityRegionPtr() const;
 			virtual void setThisInterruptibleActivityRegionPtr(std::weak_ptr<InterruptibleActivityRegion> thisInterruptibleActivityRegionPtr);

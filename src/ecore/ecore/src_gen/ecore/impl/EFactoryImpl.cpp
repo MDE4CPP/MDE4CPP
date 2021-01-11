@@ -46,8 +46,8 @@
 #include "ecore/EPackage.hpp"
 
 //Factories an Package includes
-#include "ecore/impl/EcoreFactoryImpl.hpp"
-#include "ecore/impl/EcorePackageImpl.hpp"
+#include "ecore/impl/ecoreFactoryImpl.hpp"
+#include "ecore/impl/ecorePackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -114,7 +114,7 @@ std::shared_ptr<ecore::EObject>  EFactoryImpl::copy() const
 
 std::shared_ptr<EClass> EFactoryImpl::eStaticClass() const
 {
-	return ecore::EcorePackage::eInstance()->getEFactory_Class();
+	return ecore::ecorePackage::eInstance()->getEFactory_Class();
 }
 
 //*********************************
@@ -207,7 +207,7 @@ Any EFactoryImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case ecore::EcorePackage::EFACTORY_ATTRIBUTE_EPACKAGE:
+		case ecore::ecorePackage::EFACTORY_ATTRIBUTE_EPACKAGE:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEPackage())); //234
 	}
 	return EModelElementImpl::eGet(featureID, resolve, coreType);
@@ -216,7 +216,7 @@ bool EFactoryImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case ecore::EcorePackage::EFACTORY_ATTRIBUTE_EPACKAGE:
+		case ecore::ecorePackage::EFACTORY_ATTRIBUTE_EPACKAGE:
 			return getEPackage() != nullptr; //234
 	}
 	return EModelElementImpl::internalEIsSet(featureID);
@@ -225,7 +225,7 @@ bool EFactoryImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case ecore::EcorePackage::EFACTORY_ATTRIBUTE_EPACKAGE:
+		case ecore::ecorePackage::EFACTORY_ATTRIBUTE_EPACKAGE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -249,7 +249,7 @@ void EFactoryImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> l
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get EcoreFactory
+	// get ecoreFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -284,7 +284,7 @@ void EFactoryImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoad
 
 void EFactoryImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<ecore::EcoreFactory> modelFactory=ecore::EcoreFactory::eInstance();
+	std::shared_ptr<ecore::ecoreFactory> modelFactory=ecore::ecoreFactory::eInstance();
 
 	//load BasePackage Nodes
 	EModelElementImpl::loadNode(nodeName, loadHandler);
@@ -294,7 +294,7 @@ void EFactoryImpl::resolveReferences(const int featureID, std::list<std::shared_
 {
 	switch(featureID)
 	{
-		case ecore::EcorePackage::EFACTORY_ATTRIBUTE_EPACKAGE:
+		case ecore::ecorePackage::EFACTORY_ATTRIBUTE_EPACKAGE:
 		{
 			if (references.size() == 1)
 			{
@@ -326,7 +326,7 @@ void EFactoryImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 {
 	try
 	{
-		std::shared_ptr<ecore::EcorePackage> package = ecore::EcorePackage::eInstance();
+		std::shared_ptr<ecore::ecorePackage> package = ecore::ecorePackage::eInstance();
 
 	
 

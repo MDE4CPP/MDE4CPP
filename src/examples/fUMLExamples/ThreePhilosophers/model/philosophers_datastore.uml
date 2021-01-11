@@ -82,8 +82,6 @@
       </edge>
       <edge xmi:type="uml:ObjectFlow" xmi:id="_H_LjEM4FEeiodM2OQof3Cg" target="_MV0eEM4DEeiodM2OQof3Cg" source="_-xdPQM4EEeiodM2OQof3Cg"/>
       <edge xmi:type="uml:ObjectFlow" xmi:id="_JMoNoM4FEeiodM2OQof3Cg" target="_Sn-YoM4DEeiodM2OQof3Cg" source="__KEjkM4EEeiodM2OQof3Cg"/>
-      <edge xmi:type="uml:ObjectFlow" xmi:id="_J16bMM4FEeiodM2OQof3Cg" target="__KEjkM4EEeiodM2OQof3Cg" source="_W3r6UM4DEeiodM2OQof3Cg"/>
-      <edge xmi:type="uml:ObjectFlow" xmi:id="_Kr2ksM4FEeiodM2OQof3Cg" target="_-xdPQM4EEeiodM2OQof3Cg" source="_TzwPQM4DEeiodM2OQof3Cg"/>
       <edge xmi:type="uml:ControlFlow" xmi:id="_1o7IAM4FEeiodM2OQof3Cg" target="_j95NgM4BEeiodM2OQof3Cg" source="_EQO3AM4DEeiodM2OQof3Cg">
         <guard xmi:type="uml:LiteralBoolean" xmi:id="_1o7vEM4FEeiodM2OQof3Cg" name="coaPhilosopher1Eats_To_Merge1_guard" value="true"/>
         <weight xmi:type="uml:LiteralInteger" xmi:id="_1o8WIM4FEeiodM2OQof3Cg" name="coaPhilosopher1Eats_To_Merge1_weight"/>
@@ -97,14 +95,10 @@
         <weight xmi:type="uml:LiteralInteger" xmi:id="_5slKsc4FEeiodM2OQof3Cg" name="coaPhilosopher3Eats_To_Merge3_weight"/>
       </edge>
       <edge xmi:type="uml:ObjectFlow" xmi:id="__HGSoM4FEeiodM2OQof3Cg" target="_pCw4xc4FEeiodM2OQof3Cg" source="_D1B-MM4CEeiodM2OQof3Cg"/>
-      <edge xmi:type="uml:ObjectFlow" xmi:id="_YlsM4M4GEei3e9DrtJbqqQ" name="" target="__nZ_0M4EEeiodM2OQof3Cg" source="_pCw4wc4FEeiodM2OQof3Cg"/>
-      <edge xmi:type="uml:ObjectFlow" xmi:id="_nuhNMM4GEei3e9DrtJbqqQ" target="__KEjkM4EEeiodM2OQof3Cg" source="_pCw4ws4FEeiodM2OQof3Cg"/>
-      <edge xmi:type="uml:ObjectFlow" xmi:id="_rRfksM4GEei3e9DrtJbqqQ" target="_pCw4xM4FEeiodM2OQof3Cg" source="__KEjkM4EEeiodM2OQof3Cg"/>
-      <edge xmi:type="uml:ObjectFlow" xmi:id="_wWfIkM4GEei3e9DrtJbqqQ" target="_pCw4w84FEeiodM2OQof3Cg" source="__nZ_0M4EEeiodM2OQof3Cg"/>
+      <edge xmi:type="uml:ObjectFlow" xmi:id="_rRfksM4GEei3e9DrtJbqqQ" target="_pCw4ws4FEeiodM2OQof3Cg" source="__KEjkM4EEeiodM2OQof3Cg"/>
+      <edge xmi:type="uml:ObjectFlow" xmi:id="_wWfIkM4GEei3e9DrtJbqqQ" target="_pCw4wc4FEeiodM2OQof3Cg" source="__nZ_0M4EEeiodM2OQof3Cg"/>
       <edge xmi:type="uml:ObjectFlow" xmi:id="_1MUPEM4GEei3e9DrtJbqqQ" target="_pkEPBc4FEeiodM2OQof3Cg" source="_EKAvsM4CEeiodM2OQof3Cg"/>
       <edge xmi:type="uml:ObjectFlow" xmi:id="_6RDUQM4GEei3e9DrtJbqqQ" target="_pkEPAc4FEeiodM2OQof3Cg" source="_-xdPQM4EEeiodM2OQof3Cg"/>
-      <edge xmi:type="uml:ObjectFlow" xmi:id="_-r-AYM4GEei3e9DrtJbqqQ" target="_-xdPQM4EEeiodM2OQof3Cg" source="_pkEPA84FEeiodM2OQof3Cg"/>
-      <edge xmi:type="uml:ObjectFlow" xmi:id="_KaJewM4HEei3e9DrtJbqqQ" target="__nZ_0M4EEeiodM2OQof3Cg" source="_pkEPBM4FEeiodM2OQof3Cg"/>
       <edge xmi:type="uml:ObjectFlow" xmi:id="_Nn_TwM4HEei3e9DrtJbqqQ" target="_pkEPAs4FEeiodM2OQof3Cg" source="__nZ_0M4EEeiodM2OQof3Cg"/>
       <edge xmi:type="uml:ObjectFlow" xmi:id="_7ldEwNBeEei3e9DrtJbqqQ" target="__nZ_0M4EEeiodM2OQof3Cg" source="_X4TPUNBfEei3e9DrtJbqqQ"/>
       <edge xmi:type="uml:ObjectFlow" xmi:id="_8RlyANBeEei3e9DrtJbqqQ" target="_-xdPQM4EEeiodM2OQof3Cg" source="_X4TPUNBfEei3e9DrtJbqqQ"/>
@@ -137,25 +131,25 @@
       <node xmi:type="uml:CallOperationAction" xmi:id="_EQO3AM4DEeiodM2OQof3Cg" name="coaPhilosopher1Eats" incoming="_xots0M4DEeiodM2OQof3Cg" outgoing="_1o7IAM4FEeiodM2OQof3Cg" operation="_DOjpgM4BEeiodM2OQof3Cg">
         <argument xmi:id="_MV0eEM4DEeiodM2OQof3Cg" name="chopstick1" incoming="_H_LjEM4FEeiodM2OQof3Cg" type="_ObDMkM4AEeiodM2OQof3Cg"/>
         <argument xmi:id="_Sn-YoM4DEeiodM2OQof3Cg" name="chopstick2" incoming="_JMoNoM4FEeiodM2OQof3Cg" type="_ObDMkM4AEeiodM2OQof3Cg"/>
-        <result xmi:id="_TzwPQM4DEeiodM2OQof3Cg" name="chopstick1" outgoing="_Kr2ksM4FEeiodM2OQof3Cg" type="_ObDMkM4AEeiodM2OQof3Cg"/>
-        <result xmi:id="_W3r6UM4DEeiodM2OQof3Cg" name="chopstick2" outgoing="_J16bMM4FEeiodM2OQof3Cg" type="_ObDMkM4AEeiodM2OQof3Cg"/>
+        <result xmi:id="_TzwPQM4DEeiodM2OQof3Cg" name="chopstick1" type="_ObDMkM4AEeiodM2OQof3Cg"/>
+        <result xmi:id="_W3r6UM4DEeiodM2OQof3Cg" name="chopstick2" type="_ObDMkM4AEeiodM2OQof3Cg"/>
         <target xmi:id="_H5JecM4DEeiodM2OQof3Cg" name="target" incoming="_oP-b0M4DEeiodM2OQof3Cg" type="_Uen4kM4AEeiodM2OQof3Cg"/>
       </node>
-      <node xmi:type="uml:DataStoreNode" xmi:id="_-xdPQM4EEeiodM2OQof3Cg" name="Chopstick1" incoming="_Kr2ksM4FEeiodM2OQof3Cg _-r-AYM4GEei3e9DrtJbqqQ _8RlyANBeEei3e9DrtJbqqQ" outgoing="_H_LjEM4FEeiodM2OQof3Cg _6RDUQM4GEei3e9DrtJbqqQ" type="_ObDMkM4AEeiodM2OQof3Cg"/>
-      <node xmi:type="uml:DataStoreNode" xmi:id="__KEjkM4EEeiodM2OQof3Cg" name="Chopstick2" incoming="_J16bMM4FEeiodM2OQof3Cg _nuhNMM4GEei3e9DrtJbqqQ _9Zbj0NBeEei3e9DrtJbqqQ" outgoing="_JMoNoM4FEeiodM2OQof3Cg _rRfksM4GEei3e9DrtJbqqQ" type="_ObDMkM4AEeiodM2OQof3Cg"/>
-      <node xmi:type="uml:DataStoreNode" xmi:id="__nZ_0M4EEeiodM2OQof3Cg" name="Chopstick3" incoming="_YlsM4M4GEei3e9DrtJbqqQ _KaJewM4HEei3e9DrtJbqqQ _7ldEwNBeEei3e9DrtJbqqQ" outgoing="_wWfIkM4GEei3e9DrtJbqqQ _Nn_TwM4HEei3e9DrtJbqqQ" type="_ObDMkM4AEeiodM2OQof3Cg"/>
+      <node xmi:type="uml:DataStoreNode" xmi:id="_-xdPQM4EEeiodM2OQof3Cg" name="Chopstick1" incoming="_8RlyANBeEei3e9DrtJbqqQ" outgoing="_H_LjEM4FEeiodM2OQof3Cg _6RDUQM4GEei3e9DrtJbqqQ" type="_ObDMkM4AEeiodM2OQof3Cg"/>
+      <node xmi:type="uml:DataStoreNode" xmi:id="__KEjkM4EEeiodM2OQof3Cg" name="Chopstick2" incoming="_9Zbj0NBeEei3e9DrtJbqqQ" outgoing="_JMoNoM4FEeiodM2OQof3Cg _rRfksM4GEei3e9DrtJbqqQ" type="_ObDMkM4AEeiodM2OQof3Cg"/>
+      <node xmi:type="uml:DataStoreNode" xmi:id="__nZ_0M4EEeiodM2OQof3Cg" name="Chopstick3" incoming="_7ldEwNBeEei3e9DrtJbqqQ" outgoing="_wWfIkM4GEei3e9DrtJbqqQ _Nn_TwM4HEei3e9DrtJbqqQ" type="_ObDMkM4AEeiodM2OQof3Cg"/>
       <node xmi:type="uml:CallOperationAction" xmi:id="_pCw4wM4FEeiodM2OQof3Cg" name="coaPhilosopher2Eats" outgoing="_4zSLMM4FEeiodM2OQof3Cg" operation="_DOjpgM4BEeiodM2OQof3Cg">
-        <argument xmi:id="_pCw4wc4FEeiodM2OQof3Cg" name="chopstick1" outgoing="_YlsM4M4GEei3e9DrtJbqqQ" type="_ObDMkM4AEeiodM2OQof3Cg"/>
-        <argument xmi:id="_pCw4ws4FEeiodM2OQof3Cg" name="chopstick2" outgoing="_nuhNMM4GEei3e9DrtJbqqQ" type="_ObDMkM4AEeiodM2OQof3Cg"/>
-        <result xmi:id="_pCw4w84FEeiodM2OQof3Cg" name="chopstick1" incoming="_wWfIkM4GEei3e9DrtJbqqQ" type="_ObDMkM4AEeiodM2OQof3Cg"/>
-        <result xmi:id="_pCw4xM4FEeiodM2OQof3Cg" name="chopstick2" incoming="_rRfksM4GEei3e9DrtJbqqQ" type="_ObDMkM4AEeiodM2OQof3Cg"/>
+        <argument xmi:id="_pCw4wc4FEeiodM2OQof3Cg" name="chopstick1" incoming="_wWfIkM4GEei3e9DrtJbqqQ" type="_ObDMkM4AEeiodM2OQof3Cg"/>
+        <argument xmi:id="_pCw4ws4FEeiodM2OQof3Cg" name="chopstick2" incoming="_rRfksM4GEei3e9DrtJbqqQ" type="_ObDMkM4AEeiodM2OQof3Cg"/>
+        <result xmi:id="_pCw4w84FEeiodM2OQof3Cg" name="chopstick1" type="_ObDMkM4AEeiodM2OQof3Cg"/>
+        <result xmi:id="_pCw4xM4FEeiodM2OQof3Cg" name="chopstick2" type="_ObDMkM4AEeiodM2OQof3Cg"/>
         <target xmi:id="_pCw4xc4FEeiodM2OQof3Cg" name="target" incoming="__HGSoM4FEeiodM2OQof3Cg" type="_Uen4kM4AEeiodM2OQof3Cg"/>
       </node>
       <node xmi:type="uml:CallOperationAction" xmi:id="_pkEPAM4FEeiodM2OQof3Cg" name="coaPhilosopher3Eats" outgoing="_5skjoM4FEeiodM2OQof3Cg" operation="_DOjpgM4BEeiodM2OQof3Cg">
         <argument xmi:id="_pkEPAc4FEeiodM2OQof3Cg" name="chopstick1" incoming="_6RDUQM4GEei3e9DrtJbqqQ" type="_ObDMkM4AEeiodM2OQof3Cg"/>
         <argument xmi:id="_pkEPAs4FEeiodM2OQof3Cg" name="chopstick2" incoming="_Nn_TwM4HEei3e9DrtJbqqQ" type="_ObDMkM4AEeiodM2OQof3Cg"/>
-        <result xmi:id="_pkEPA84FEeiodM2OQof3Cg" name="chopstick1" outgoing="_-r-AYM4GEei3e9DrtJbqqQ" type="_ObDMkM4AEeiodM2OQof3Cg"/>
-        <result xmi:id="_pkEPBM4FEeiodM2OQof3Cg" name="chopstick2" outgoing="_KaJewM4HEei3e9DrtJbqqQ" type="_ObDMkM4AEeiodM2OQof3Cg"/>
+        <result xmi:id="_pkEPA84FEeiodM2OQof3Cg" name="chopstick1" type="_ObDMkM4AEeiodM2OQof3Cg"/>
+        <result xmi:id="_pkEPBM4FEeiodM2OQof3Cg" name="chopstick2" type="_ObDMkM4AEeiodM2OQof3Cg"/>
         <target xmi:id="_pkEPBc4FEeiodM2OQof3Cg" name="target" incoming="_1MUPEM4GEei3e9DrtJbqqQ" type="_Uen4kM4AEeiodM2OQof3Cg"/>
       </node>
       <node xmi:type="uml:ActivityParameterNode" xmi:id="_v9uMoNBeEei3e9DrtJbqqQ" name="ChopstickParameter" outgoing="_eFNdgNBfEei3e9DrtJbqqQ" type="_ObDMkM4AEeiodM2OQof3Cg" parameter="_v9tlkNBeEei3e9DrtJbqqQ">

@@ -77,8 +77,8 @@
 #include "uml/StructuredActivityNode.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -277,7 +277,7 @@ std::shared_ptr<ecore::EObject>  CallActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> CallActionImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getCallAction_Class();
+	return uml::umlPackage::eInstance()->getCallAction_Class();
 }
 
 //*********************************
@@ -498,9 +498,9 @@ Any CallActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::CALLACTION_ATTRIBUTE_ISSYNCHRONOUS:
-			return eAny(getIsSynchronous()); //2929
-		case uml::UmlPackage::CALLACTION_ATTRIBUTE_RESULT:
+		case uml::umlPackage::CALLACTION_ATTRIBUTE_ISSYNCHRONOUS:
+			return eAny(getIsSynchronous()); //2829
+		case uml::umlPackage::CALLACTION_ATTRIBUTE_RESULT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::OutputPin>::iterator iter = m_result->begin();
@@ -510,7 +510,7 @@ Any CallActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //2930
+			return eAny(tempList); //2830
 		}
 	}
 	return InvocationActionImpl::eGet(featureID, resolve, coreType);
@@ -519,10 +519,10 @@ bool CallActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::CALLACTION_ATTRIBUTE_ISSYNCHRONOUS:
-			return getIsSynchronous() != true; //2929
-		case uml::UmlPackage::CALLACTION_ATTRIBUTE_RESULT:
-			return getResult() != nullptr; //2930
+		case uml::umlPackage::CALLACTION_ATTRIBUTE_ISSYNCHRONOUS:
+			return getIsSynchronous() != true; //2829
+		case uml::umlPackage::CALLACTION_ATTRIBUTE_RESULT:
+			return getResult() != nullptr; //2830
 	}
 	return InvocationActionImpl::internalEIsSet(featureID);
 }
@@ -530,14 +530,14 @@ bool CallActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::CALLACTION_ATTRIBUTE_ISSYNCHRONOUS:
+		case uml::umlPackage::CALLACTION_ATTRIBUTE_ISSYNCHRONOUS:
 		{
 			// BOOST CAST
 			bool _isSynchronous = newValue->get<bool>();
-			setIsSynchronous(_isSynchronous); //2929
+			setIsSynchronous(_isSynchronous); //2829
 			return true;
 		}
-		case uml::UmlPackage::CALLACTION_ATTRIBUTE_RESULT:
+		case uml::umlPackage::CALLACTION_ATTRIBUTE_RESULT:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -589,7 +589,7 @@ void CallActionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler>
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -626,7 +626,7 @@ void CallActionImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLo
 
 void CallActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -637,7 +637,7 @@ void CallActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence:
 			{
 				typeName = "OutputPin";
 			}
-			std::shared_ptr<ecore::EObject> result = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::UmlPackage::OUTPUTPIN_ATTRIBUTE_CALLACTION);
+			std::shared_ptr<ecore::EObject> result = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::OUTPUTPIN_ATTRIBUTE_CALLACTION);
 			if (result != nullptr)
 			{
 				loadHandler->handleChild(result);
@@ -674,7 +674,6 @@ void CallActionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler>
 	
 	ActivityNodeImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);
@@ -698,7 +697,7 @@ void CallActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 		// Save 'result'
 		for (std::shared_ptr<uml::OutputPin> result : *this->getResult()) 

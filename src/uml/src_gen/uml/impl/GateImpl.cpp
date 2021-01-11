@@ -53,8 +53,8 @@
 #include "uml/StringExpression.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -143,7 +143,7 @@ std::shared_ptr<ecore::EObject>  GateImpl::copy() const
 
 std::shared_ptr<ecore::EClass> GateImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getGate_Class();
+	return uml::umlPackage::eInstance()->getGate_Class();
 }
 
 //*********************************
@@ -327,7 +327,7 @@ void GateImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadH
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -343,7 +343,7 @@ void GateImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHand
 
 void GateImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	MessageEndImpl::loadNode(nodeName, loadHandler);
@@ -377,7 +377,7 @@ void GateImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 

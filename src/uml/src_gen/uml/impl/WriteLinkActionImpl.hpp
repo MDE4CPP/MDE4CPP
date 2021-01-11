@@ -28,7 +28,7 @@ namespace uml
 			WriteLinkActionImpl& operator=(WriteLinkActionImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			WriteLinkActionImpl();
 			virtual std::shared_ptr<WriteLinkAction> getThisWriteLinkActionPtr() const;
 			virtual void setThisWriteLinkActionPtr(std::weak_ptr<WriteLinkAction> thisWriteLinkActionPtr);

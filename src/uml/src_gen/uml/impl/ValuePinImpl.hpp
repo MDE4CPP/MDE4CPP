@@ -28,7 +28,7 @@ namespace uml
 			ValuePinImpl& operator=(ValuePinImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			ValuePinImpl();
 			virtual std::shared_ptr<ValuePin> getThisValuePinPtr() const;
 			virtual void setThisValuePinPtr(std::weak_ptr<ValuePin> thisValuePinPtr);

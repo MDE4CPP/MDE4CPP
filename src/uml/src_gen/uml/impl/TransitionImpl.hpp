@@ -29,7 +29,7 @@ namespace uml
 			TransitionImpl& operator=(TransitionImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			TransitionImpl();
 			virtual std::shared_ptr<Transition> getThisTransitionPtr() const;
 			virtual void setThisTransitionPtr(std::weak_ptr<Transition> thisTransitionPtr);

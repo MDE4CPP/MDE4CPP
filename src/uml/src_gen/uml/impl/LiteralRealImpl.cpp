@@ -56,8 +56,8 @@
 #include "uml/ValueSpecificationAction.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -189,7 +189,7 @@ std::shared_ptr<ecore::EObject>  LiteralRealImpl::copy() const
 
 std::shared_ptr<ecore::EClass> LiteralRealImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getLiteralReal_Class();
+	return uml::umlPackage::eInstance()->getLiteralReal_Class();
 }
 
 //*********************************
@@ -314,8 +314,8 @@ Any LiteralRealImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::LITERALREAL_ATTRIBUTE_VALUE:
-			return eAny(getValue()); //14115
+		case uml::umlPackage::LITERALREAL_ATTRIBUTE_VALUE:
+			return eAny(getValue()); //14015
 	}
 	return LiteralSpecificationImpl::eGet(featureID, resolve, coreType);
 }
@@ -323,8 +323,8 @@ bool LiteralRealImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::LITERALREAL_ATTRIBUTE_VALUE:
-			return getValue() != 0; //14115
+		case uml::umlPackage::LITERALREAL_ATTRIBUTE_VALUE:
+			return getValue() != 0; //14015
 	}
 	return LiteralSpecificationImpl::internalEIsSet(featureID);
 }
@@ -332,11 +332,11 @@ bool LiteralRealImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::LITERALREAL_ATTRIBUTE_VALUE:
+		case uml::umlPackage::LITERALREAL_ATTRIBUTE_VALUE:
 		{
 			// BOOST CAST
 			double _value = newValue->get<double>();
-			setValue(_value); //14115
+			setValue(_value); //14015
 			return true;
 		}
 	}
@@ -355,7 +355,7 @@ void LiteralRealImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -392,7 +392,7 @@ void LiteralRealImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XL
 
 void LiteralRealImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	LiteralSpecificationImpl::loadNode(nodeName, loadHandler);
@@ -434,7 +434,7 @@ void LiteralRealImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 		// Add attributes

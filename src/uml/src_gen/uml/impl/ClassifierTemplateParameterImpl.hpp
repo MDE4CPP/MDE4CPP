@@ -28,7 +28,7 @@ namespace uml
 			ClassifierTemplateParameterImpl& operator=(ClassifierTemplateParameterImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			ClassifierTemplateParameterImpl();
 			virtual std::shared_ptr<ClassifierTemplateParameter> getThisClassifierTemplateParameterPtr() const;
 			virtual void setThisClassifierTemplateParameterPtr(std::weak_ptr<ClassifierTemplateParameter> thisClassifierTemplateParameterPtr);

@@ -29,7 +29,7 @@ namespace uml
 			ClassImpl& operator=(ClassImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			ClassImpl();
 			virtual std::shared_ptr<Class> getThisClassPtr() const;
 			virtual void setThisClassPtr(std::weak_ptr<Class> thisClassPtr);

@@ -33,7 +33,7 @@ namespace persistence
 
 namespace fUML
 {
-	class FUMLFactory;
+	class fUMLFactory;
 }
 
 //Forward Declaration for used types
@@ -60,6 +60,11 @@ namespace fUML::Semantics::Activities
 namespace fUML::Semantics::Activities 
 {
 	class ActivityNodeActivationGroup;
+}
+
+namespace fUML::Semantics::Activities 
+{
+	class ExpansionNodeActivation;
 }
 
 namespace fUML::Semantics::Activities 
@@ -132,11 +137,11 @@ namespace fUML::Semantics::Activities
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<Bag<fUML::Semantics::Actions::OutputPinActivation>> getGroupInputs() const = 0;
+			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::ExpansionNodeActivation>> getGroupInputs() const = 0;
 			
 			
 			
-			virtual std::shared_ptr<Bag<fUML::Semantics::Actions::OutputPinActivation>> getGroupOutputs() const = 0;
+			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::ExpansionNodeActivation>> getGroupOutputs() const = 0;
 			
 			
 			
@@ -163,8 +168,8 @@ namespace fUML::Semantics::Activities
 			// Reference Members
 			//*********************************
 			
-			mutable std::shared_ptr<Bag<fUML::Semantics::Actions::OutputPinActivation>> m_groupInputs;
-			mutable std::shared_ptr<Bag<fUML::Semantics::Actions::OutputPinActivation>> m_groupOutputs;
+			mutable std::shared_ptr<Bag<fUML::Semantics::Activities::ExpansionNodeActivation>> m_groupInputs;
+			mutable std::shared_ptr<Bag<fUML::Semantics::Activities::ExpansionNodeActivation>> m_groupOutputs;
 			std::shared_ptr<fUML::Semantics::Activities::ExpansionRegionActivation > m_regionActivation;
 			mutable std::shared_ptr<Bag<fUML::Semantics::Actions::OutputPinActivation>> m_regionInputs;
 

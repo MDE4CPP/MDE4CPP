@@ -75,8 +75,8 @@
 #include "uml/StructuredActivityNode.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -277,7 +277,7 @@ std::shared_ptr<ecore::EObject>  SendObjectActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> SendObjectActionImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getSendObjectAction_Class();
+	return uml::umlPackage::eInstance()->getSendObjectAction_Class();
 }
 
 //*********************************
@@ -444,10 +444,10 @@ Any SendObjectActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::SENDOBJECTACTION_ATTRIBUTE_REQUEST:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getRequest())); //21329
-		case uml::UmlPackage::SENDOBJECTACTION_ATTRIBUTE_TARGET:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getTarget())); //21330
+		case uml::umlPackage::SENDOBJECTACTION_ATTRIBUTE_REQUEST:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getRequest())); //21229
+		case uml::umlPackage::SENDOBJECTACTION_ATTRIBUTE_TARGET:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getTarget())); //21230
 	}
 	return InvocationActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -455,10 +455,10 @@ bool SendObjectActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::SENDOBJECTACTION_ATTRIBUTE_REQUEST:
-			return getRequest() != nullptr; //21329
-		case uml::UmlPackage::SENDOBJECTACTION_ATTRIBUTE_TARGET:
-			return getTarget() != nullptr; //21330
+		case uml::umlPackage::SENDOBJECTACTION_ATTRIBUTE_REQUEST:
+			return getRequest() != nullptr; //21229
+		case uml::umlPackage::SENDOBJECTACTION_ATTRIBUTE_TARGET:
+			return getTarget() != nullptr; //21230
 	}
 	return InvocationActionImpl::internalEIsSet(featureID);
 }
@@ -466,20 +466,20 @@ bool SendObjectActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::SENDOBJECTACTION_ATTRIBUTE_REQUEST:
+		case uml::umlPackage::SENDOBJECTACTION_ATTRIBUTE_REQUEST:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::InputPin> _request = std::dynamic_pointer_cast<uml::InputPin>(_temp);
-			setRequest(_request); //21329
+			setRequest(_request); //21229
 			return true;
 		}
-		case uml::UmlPackage::SENDOBJECTACTION_ATTRIBUTE_TARGET:
+		case uml::umlPackage::SENDOBJECTACTION_ATTRIBUTE_TARGET:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::InputPin> _target = std::dynamic_pointer_cast<uml::InputPin>(_temp);
-			setTarget(_target); //21330
+			setTarget(_target); //21230
 			return true;
 		}
 	}
@@ -498,7 +498,7 @@ void SendObjectActionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHa
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -514,7 +514,7 @@ void SendObjectActionImpl::loadAttributes(std::shared_ptr<persistence::interface
 
 void SendObjectActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -579,7 +579,6 @@ void SendObjectActionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHa
 	
 	ActivityNodeImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);
@@ -603,7 +602,7 @@ void SendObjectActionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 		// Save 'request'
 		std::shared_ptr<uml::InputPin > request = this->getRequest();

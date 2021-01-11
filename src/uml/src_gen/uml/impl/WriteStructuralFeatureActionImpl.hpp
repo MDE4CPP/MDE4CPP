@@ -28,7 +28,7 @@ namespace uml
 			WriteStructuralFeatureActionImpl& operator=(WriteStructuralFeatureActionImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			WriteStructuralFeatureActionImpl();
 			virtual std::shared_ptr<WriteStructuralFeatureAction> getThisWriteStructuralFeatureActionPtr() const;
 			virtual void setThisWriteStructuralFeatureActionPtr(std::weak_ptr<WriteStructuralFeatureAction> thisWriteStructuralFeatureActionPtr);

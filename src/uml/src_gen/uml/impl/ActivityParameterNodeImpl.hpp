@@ -28,7 +28,7 @@ namespace uml
 			ActivityParameterNodeImpl& operator=(ActivityParameterNodeImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			ActivityParameterNodeImpl();
 			virtual std::shared_ptr<ActivityParameterNode> getThisActivityParameterNodePtr() const;
 			virtual void setThisActivityParameterNodePtr(std::weak_ptr<ActivityParameterNode> thisActivityParameterNodePtr);

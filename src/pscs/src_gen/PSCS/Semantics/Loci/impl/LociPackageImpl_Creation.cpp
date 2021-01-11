@@ -1,7 +1,7 @@
 #include "PSCS/Semantics/Loci/impl/LociPackageImpl.hpp"
 
 // metametamodel factory
-#include "ecore/EcoreFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 
 #include <cassert>
 
@@ -17,9 +17,9 @@
 #include "ecore/EStringToStringMapEntry.hpp"
 
 //depending model packages
-#include "ecore/EcorePackage.hpp"
-#include "fUML/FUMLPackage.hpp"
-#include "uml/UmlPackage.hpp"
+#include "ecore/ecorePackage.hpp"
+#include "fUML/fUMLPackage.hpp"
+#include "uml/umlPackage.hpp"
 //include subpackages 
  
 using namespace PSCS::Semantics::Loci;
@@ -32,7 +32,7 @@ void LociPackageImpl::createPackageContents(std::shared_ptr<ecore::EPackage> pac
 	}
 	isCreated = true;
 
-	std::shared_ptr<ecore::EcoreFactory> factory = ecore::EcoreFactory::eInstance();
+	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
 
 	createCS_ExecutionFactoryContent(package, factory);
 	createCS_ExecutorContent(package, factory);
@@ -42,7 +42,7 @@ void LociPackageImpl::createPackageContents(std::shared_ptr<ecore::EPackage> pac
 
 }
 
-void LociPackageImpl::createCS_ExecutionFactoryContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void LociPackageImpl::createCS_ExecutionFactoryContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_cS_ExecutionFactory_Class = factory->createEClass_in_EPackage(package, CS_EXECUTIONFACTORY_CLASS);
 	
@@ -54,7 +54,7 @@ void LociPackageImpl::createCS_ExecutionFactoryContent(std::shared_ptr<ecore::EP
 	
 }
 
-void LociPackageImpl::createCS_ExecutorContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void LociPackageImpl::createCS_ExecutorContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_cS_Executor_Class = factory->createEClass_in_EPackage(package, CS_EXECUTOR_CLASS);
 	
@@ -63,7 +63,7 @@ void LociPackageImpl::createCS_ExecutorContent(std::shared_ptr<ecore::EPackage> 
 	
 }
 
-void LociPackageImpl::createCS_LocusContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void LociPackageImpl::createCS_LocusContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_cS_Locus_Class = factory->createEClass_in_EPackage(package, CS_LOCUS_CLASS);
 	
@@ -72,7 +72,7 @@ void LociPackageImpl::createCS_LocusContent(std::shared_ptr<ecore::EPackage> pac
 	
 }
 
-void LociPackageImpl::createPackageEDataTypes(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void LociPackageImpl::createPackageEDataTypes(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	
 }

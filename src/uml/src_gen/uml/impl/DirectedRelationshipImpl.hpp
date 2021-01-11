@@ -28,7 +28,7 @@ namespace uml
 			DirectedRelationshipImpl& operator=(DirectedRelationshipImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			DirectedRelationshipImpl();
 			virtual std::shared_ptr<DirectedRelationship> getThisDirectedRelationshipPtr() const;
 			virtual void setThisDirectedRelationshipPtr(std::weak_ptr<DirectedRelationship> thisDirectedRelationshipPtr);

@@ -28,7 +28,7 @@ namespace uml
 			SlotImpl& operator=(SlotImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			SlotImpl();
 			virtual std::shared_ptr<Slot> getThisSlotPtr() const;
 			virtual void setThisSlotPtr(std::weak_ptr<Slot> thisSlotPtr);

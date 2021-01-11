@@ -28,7 +28,7 @@ namespace uml
 			ElementImportImpl& operator=(ElementImportImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			ElementImportImpl();
 			virtual std::shared_ptr<ElementImport> getThisElementImportPtr() const;
 			virtual void setThisElementImportPtr(std::weak_ptr<ElementImport> thisElementImportPtr);

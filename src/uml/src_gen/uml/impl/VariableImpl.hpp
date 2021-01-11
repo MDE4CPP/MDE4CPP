@@ -29,7 +29,7 @@ namespace uml
 			VariableImpl& operator=(VariableImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			VariableImpl();
 			virtual std::shared_ptr<Variable> getThisVariablePtr() const;
 			virtual void setThisVariablePtr(std::weak_ptr<Variable> thisVariablePtr);

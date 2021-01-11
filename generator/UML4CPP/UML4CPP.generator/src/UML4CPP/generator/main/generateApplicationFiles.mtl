@@ -44,23 +44,23 @@
 [/if]
 [/template]
 
-[template private generateApplicationFromSourceCode(aPackage : Package) { packageName : String = getPackageName().toUpperFirst(); }]
+[template private generateApplicationFromSourceCode(aPackage : Package) { packageName : String = getPackageName(); }]
 [file ('../application/src/main.cpp', false, 'UTF-8')]
 
 #include <iostream>
 
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "[aPackage.getPackageName()/]/[packageName/]Factory.hpp"
-#include "[aPackage.getPackageName()/]/[packageName/]Package.hpp"
+#include "[aPackage.generateNamespacePath(false)/]/[packageName/]Factory.hpp"
+#include "[aPackage.generateNamespacePath(false)/]/[packageName/]Package.hpp"
 
 [for (aClass : Class | aPackage.allOwnedElements()->select(e|e.oclIsKindOf(uml::Class))->select(e|not (e.oclIsKindOf(FunctionBehavior) or e.oclIsKindOf(OpaqueBehavior) or e.oclIsKindOf(Activity))).oclAsType(uml::Class)->sortedBy(name))]
-#include "[aPackage.getPackageName()/]/[aClass.name.toUpperFirst()/].hpp"
+#include "[aClass.getNearestPackage().generateNamespacePath(false)/]/[aClass.name.toUpperFirst()/].hpp"
 [/for]
 [for (anInterface : Interface | aPackage.allOwnedElements()->select(e|e.oclIsKindOf(uml::Interface)).oclAsType(uml::Interface)->sortedBy(name))]
-#include "[aPackage.getPackageName()/]/[anInterface.name.toUpperFirst()/].hpp"
+#include "[anInterface.getNearestPackage().generateNamespacePath(false)/]/[anInterface.name.toUpperFirst()/].hpp"
 [/for]
 [for (anEnumeration : Enumeration | aPackage.ownedMember->filter(Enumeration))]
-#include "[aPackage.getPackageName()/]/[anEnumeration.name/].hpp"
+#include "[anEnumeration.getNearestPackage().generateNamespacePath(false)/]/[anEnumeration.name/].hpp"
 [/for]
 
 [if (hasMainIncludes())]
@@ -72,7 +72,7 @@
 
 // [/protected]
 
-[if (not aPackage.ignoreNamespace())]using namespace [getPackageName()/];[/if]
+[if (not aPackage.ignoreNamespace())]using namespace [aPackage.generateNamespace(false)/];[/if]
 
 // [protected ('functions')] 
 // You may manually edit additional functions, won't be overwritten upon generation.
@@ -85,22 +85,20 @@ int main ()
 	std::shared_ptr<[packageName/]Factory> factory = [packageName/]Factory::eInstance();
 	std::shared_ptr<[packageName/]Package> package = [packageName/]Package::eInstance();
 
-[if (hasMainSourceCode())]
-[getMainSourceCode()/]
+	[if (hasMainSourceCode())]
+	[getMainSourceCode()/]
+	[/if]
+	// [protected ('main')]
+	// You may manually edit the following lines, won't be overwritten upon generation.
 
-[/if]
-// [protected ('main')]
-// You may manually edit the following lines, won't be overwritten upon generation.
-
-// [/protected]
+	// [/protected]
 
     return 0;
-
 }
 [/file]
 [/template]
 
-[template private generateApplicationFromActivity(aPackage : Package) { packageName : String = getPackageName().toUpperFirst(); }]
+[template private generateApplicationFromActivity(aPackage : Package) { packageName : String = getPackageName(); }]
 [file ('../application/src/main.cpp', false, 'UTF-8')]
 #include <iostream>
 #include <memory>
@@ -112,14 +110,14 @@ int main ()
 #include "abstractDataTypes/SubsetUnion.hpp"
 [let mainActivity : Activity = aPackage.getMainActivity()]
 [if (mainActivity.owner.oclIsKindOf(Classifier))]
-#include "[mainActivity.owner.oclAsType(Classifier).namespace.myNamespaceName()/]/[mainActivity.owner.oclAsType(Classifier).name.toUpperFirst()/].hpp"
-#include "[mainActivity.owner.oclAsType(Classifier).namespace.myNamespaceName()/]/[mainActivity.owner.oclAsType(Classifier).namespace.myNamespaceName().toUpperFirst()/]Package.hpp"
-#include "[mainActivity.owner.oclAsType(Classifier).namespace.myNamespaceName()/]/[mainActivity.owner.oclAsType(Classifier).namespace.myNamespaceName().toUpperFirst()/]Factory.hpp"
+#include "[mainActivity.owner.oclAsType(Classifier).getNearestPackage().generateNamespacePath(false)/]/[mainActivity.owner.oclAsType(Classifier).name.toUpperFirst()/].hpp"
+#include "[mainActivity.owner.oclAsType(Classifier).getNearestPackage().generateNamespacePath(false)/]/[mainActivity.owner.oclAsType(Classifier).getNearestPackage().getPackageName()/]Package.hpp"
+#include "[mainActivity.owner.oclAsType(Classifier).getNearestPackage().generateNamespacePath(false)/]/[mainActivity.owner.oclAsType(Classifier).getNearestPackage().getPackageName()/]Factory.hpp"
 [else]
-#include "[mainActivity.namespace.myNamespaceName()/]/[mainActivity.namespace.myNamespaceName().toUpperFirst()/]Package.hpp"
+#include "[mainActivity.getNearestPackage().generateNamespacePath(false)/]/[mainActivity.getNearestPackage().getPackageName()/]Package.hpp"
 [/if]
 [for ( type : Type | mainActivity.ownedParameter.type->asOrderedSet())]
-#include "[type.getNearestPackage().myNamespaceName()/]/[type.name/].hpp"
+#include "[type.getNearestPackage().generateNamespacePath(false)/]/[type.name/].hpp"
 [/for]
 #include "pluginFramework/PluginFramework.hpp"
 #include "pluginFramework/UMLExecutionModelPlugin.hpp"
@@ -136,10 +134,10 @@ int main()
     //executing main activity
 	[let mainActivity : Activity = aPackage.getMainActivity()]
 	[mainActivity.generateParameterInstances(aPackage)/]
-	std::shared_ptr<[if (mainActivity.owner.oclIsKindOf(Classifier))][mainActivity.owner.oclAsType(Classifier).name.toUpperFirst()/][else]uml::Element[/if]> element = [if (mainActivity.owner.oclIsKindOf(Classifier))][mainActivity.owner.oclAsType(Classifier).namespace.myNamespaceName()/]::[mainActivity.owner.oclAsType(Classifier).namespace.myNamespaceName().toUpperFirst()/]Factory::eInstance()->create[mainActivity.owner.oclAsType(Classifier).name.toUpperFirst()/]()[else]nullptr[/if];
+	std::shared_ptr<[if (mainActivity.owner.oclIsKindOf(Classifier))][mainActivity.owner.oclAsType(Classifier).generateNamespaceName(false)/][else]uml::Element[/if]> element = [if (mainActivity.owner.oclIsKindOf(Classifier))][mainActivity.owner.oclAsType(Classifier).generateNamespace(false)/]::[mainActivity.owner.oclAsType(Classifier).getNearestPackage().getPackageName()/]Factory::eInstance()->create[mainActivity.owner.oclAsType(Classifier).name.toUpperFirst()/]()[else]nullptr[/if];
 
 	std::shared_ptr<PluginFramework> pluginFramework = PluginFramework::eInstance();
-	std::string pluginName = "[mainActivity.getNearestPackage().getPackageName()/]Exec";
+	std::string pluginName = "[mainActivity.getRootPackage().getPackageName()/]Exec";
 	std::shared_ptr<MDE4CPPPlugin> plugin = pluginFramework->findPluginByName(pluginName);
 	if (plugin)
 	{
@@ -195,7 +193,7 @@ int main()
 [/file]
 [/template]
 
-[template private generateApplicationCMakeLists(aPackage : Package) { packageName : String = getPackageName().toUpperFirst(); }]
+[template private generateApplicationCMakeLists(aPackage : Package) { packageName : String = getPackageName(); }]
 [file ('../application/src/CMakeLists.txt', false, 'UTF-8')]
 #############################################################################
 #																			#
@@ -276,7 +274,7 @@ INSTALL(TARGETS ${PROJECT_NAME}
 [/file]
 [/template]
 
-[template private generateApplicationGradleFile(aPackage : Package) { packageName : String = getPackageName().toUpperFirst(); }]
+[template private generateApplicationGradleFile(aPackage : Package) { packageName : String = getPackageName(); }]
 [file ('../application/build.gradle', false, 'UTF-8')]
 plugins {
 	id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.5"
@@ -329,7 +327,7 @@ ENDIF()
 [for (packName : String | aPackage.collectIncludingModelNames())]
 FIND_LIBRARY([packName.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/] [packName/][libraryNameSuffix(debugMode)/][ending/] ${MDE4CPP_HOME}/application/[folderName/])
 [/for]
-FIND_LIBRARY([aPackage.getPackageName().toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/] [aPackage.getPackageName().toUpperFirst()/][libraryNameSuffix(debugMode)/][ending/] ${MDE4CPP_HOME}/application/[folderName/])
+FIND_LIBRARY([aPackage.getPackageName().toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/] [aPackage.getPackageName()/][libraryNameSuffix(debugMode)/][ending/] ${MDE4CPP_HOME}/application/[folderName/])
 [if (aPackage.isActivityWithMainKeyExisting())]
 FIND_LIBRARY(PLUGINFRAMEWORK_[libraryVariableNameSuffix(debugMode)/] pluginFramework[libraryNameSuffix(debugMode)/][ending/] ${MDE4CPP_HOME}/application/[folderName/])
 [/if]

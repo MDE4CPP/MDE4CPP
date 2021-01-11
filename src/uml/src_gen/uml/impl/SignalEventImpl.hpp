@@ -28,7 +28,7 @@ namespace uml
 			SignalEventImpl& operator=(SignalEventImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			SignalEventImpl();
 			virtual std::shared_ptr<SignalEvent> getThisSignalEventPtr() const;
 			virtual void setThisSignalEventPtr(std::weak_ptr<SignalEvent> thisSignalEventPtr);

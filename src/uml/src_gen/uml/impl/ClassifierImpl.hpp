@@ -31,7 +31,7 @@ namespace uml
 			ClassifierImpl& operator=(ClassifierImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			ClassifierImpl();
 			virtual std::shared_ptr<Classifier> getThisClassifierPtr() const;
 			virtual void setThisClassifierPtr(std::weak_ptr<Classifier> thisClassifierPtr);

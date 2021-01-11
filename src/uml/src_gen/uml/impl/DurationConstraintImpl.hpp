@@ -28,7 +28,7 @@ namespace uml
 			DurationConstraintImpl& operator=(DurationConstraintImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			DurationConstraintImpl();
 			virtual std::shared_ptr<DurationConstraint> getThisDurationConstraintPtr() const;
 			virtual void setThisDurationConstraintPtr(std::weak_ptr<DurationConstraint> thisDurationConstraintPtr);
@@ -87,7 +87,7 @@ namespace uml
 			<p>From package UML::Values.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<bool> > getFirstEvent() const ;
+			virtual std::shared_ptr<Bag<bool> > isFirstEvent() const ;
 			
 			
 			

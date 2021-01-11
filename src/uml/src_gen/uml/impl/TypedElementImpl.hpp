@@ -28,7 +28,7 @@ namespace uml
 			TypedElementImpl& operator=(TypedElementImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			TypedElementImpl();
 			virtual std::shared_ptr<TypedElement> getThisTypedElementPtr() const;
 			virtual void setThisTypedElementPtr(std::weak_ptr<TypedElement> thisTypedElementPtr);

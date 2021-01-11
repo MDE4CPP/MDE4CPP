@@ -28,7 +28,7 @@ namespace uml
 			ReadLinkObjectEndActionImpl& operator=(ReadLinkObjectEndActionImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			ReadLinkObjectEndActionImpl();
 			virtual std::shared_ptr<ReadLinkObjectEndAction> getThisReadLinkObjectEndActionPtr() const;
 			virtual void setThisReadLinkObjectEndActionPtr(std::weak_ptr<ReadLinkObjectEndAction> thisReadLinkObjectEndActionPtr);

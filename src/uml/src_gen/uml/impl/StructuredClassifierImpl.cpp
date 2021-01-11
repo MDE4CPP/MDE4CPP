@@ -86,8 +86,8 @@
 #include "uml/UseCase.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -130,11 +130,11 @@ StructuredClassifierImpl::StructuredClassifierImpl(std::weak_ptr<uml::Package > 
 {
 	switch(reference_id)
 	{	
-	case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
+	case umlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
 		m_owningPackage = par_Package;
 		m_namespace = par_Package;
 		 return;
-	case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
+	case umlPackage::TYPE_ATTRIBUTE_PACKAGE:
 		m_package = par_Package;
 		m_namespace = par_Package;
 		 return;
@@ -366,7 +366,7 @@ std::shared_ptr<ecore::EObject>  StructuredClassifierImpl::copy() const
 
 std::shared_ptr<ecore::EClass> StructuredClassifierImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getStructuredClassifier_Class();
+	return uml::umlPackage::eInstance()->getStructuredClassifier_Class();
 }
 
 //*********************************
@@ -667,7 +667,7 @@ Any StructuredClassifierImpl::eGet(int featureID, bool resolve, bool coreType) c
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::STRUCTUREDCLASSIFIER_ATTRIBUTE_OWNEDATTRIBUTE:
+		case uml::umlPackage::STRUCTUREDCLASSIFIER_ATTRIBUTE_OWNEDATTRIBUTE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Property>::iterator iter = m_ownedAttribute->begin();
@@ -677,9 +677,9 @@ Any StructuredClassifierImpl::eGet(int featureID, bool resolve, bool coreType) c
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //22938
+			return eAny(tempList); //22838
 		}
-		case uml::UmlPackage::STRUCTUREDCLASSIFIER_ATTRIBUTE_OWNEDCONNECTOR:
+		case uml::umlPackage::STRUCTUREDCLASSIFIER_ATTRIBUTE_OWNEDCONNECTOR:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Connector>::iterator iter = m_ownedConnector->begin();
@@ -689,9 +689,9 @@ Any StructuredClassifierImpl::eGet(int featureID, bool resolve, bool coreType) c
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //22939
+			return eAny(tempList); //22839
 		}
-		case uml::UmlPackage::STRUCTUREDCLASSIFIER_ATTRIBUTE_PART:
+		case uml::umlPackage::STRUCTUREDCLASSIFIER_ATTRIBUTE_PART:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Property>::iterator iter = m_part->begin();
@@ -701,9 +701,9 @@ Any StructuredClassifierImpl::eGet(int featureID, bool resolve, bool coreType) c
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //22940
+			return eAny(tempList); //22840
 		}
-		case uml::UmlPackage::STRUCTUREDCLASSIFIER_ATTRIBUTE_ROLE:
+		case uml::umlPackage::STRUCTUREDCLASSIFIER_ATTRIBUTE_ROLE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::ConnectableElement>::iterator iter = m_role->begin();
@@ -713,7 +713,7 @@ Any StructuredClassifierImpl::eGet(int featureID, bool resolve, bool coreType) c
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //22941
+			return eAny(tempList); //22841
 		}
 	}
 	return ClassifierImpl::eGet(featureID, resolve, coreType);
@@ -722,14 +722,14 @@ bool StructuredClassifierImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::STRUCTUREDCLASSIFIER_ATTRIBUTE_OWNEDATTRIBUTE:
-			return getOwnedAttribute() != nullptr; //22938
-		case uml::UmlPackage::STRUCTUREDCLASSIFIER_ATTRIBUTE_OWNEDCONNECTOR:
-			return getOwnedConnector() != nullptr; //22939
-		case uml::UmlPackage::STRUCTUREDCLASSIFIER_ATTRIBUTE_PART:
-			return getPart() != nullptr; //22940
-		case uml::UmlPackage::STRUCTUREDCLASSIFIER_ATTRIBUTE_ROLE:
-			return getRole() != nullptr; //22941
+		case uml::umlPackage::STRUCTUREDCLASSIFIER_ATTRIBUTE_OWNEDATTRIBUTE:
+			return getOwnedAttribute() != nullptr; //22838
+		case uml::umlPackage::STRUCTUREDCLASSIFIER_ATTRIBUTE_OWNEDCONNECTOR:
+			return getOwnedConnector() != nullptr; //22839
+		case uml::umlPackage::STRUCTUREDCLASSIFIER_ATTRIBUTE_PART:
+			return getPart() != nullptr; //22840
+		case uml::umlPackage::STRUCTUREDCLASSIFIER_ATTRIBUTE_ROLE:
+			return getRole() != nullptr; //22841
 	}
 	return ClassifierImpl::internalEIsSet(featureID);
 }
@@ -737,7 +737,7 @@ bool StructuredClassifierImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::STRUCTUREDCLASSIFIER_ATTRIBUTE_OWNEDATTRIBUTE:
+		case uml::umlPackage::STRUCTUREDCLASSIFIER_ATTRIBUTE_OWNEDATTRIBUTE:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -773,7 +773,7 @@ bool StructuredClassifierImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case uml::UmlPackage::STRUCTUREDCLASSIFIER_ATTRIBUTE_OWNEDCONNECTOR:
+		case uml::umlPackage::STRUCTUREDCLASSIFIER_ATTRIBUTE_OWNEDCONNECTOR:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -825,7 +825,7 @@ void StructuredClassifierImpl::load(std::shared_ptr<persistence::interfaces::XLo
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -841,7 +841,7 @@ void StructuredClassifierImpl::loadAttributes(std::shared_ptr<persistence::inter
 
 void StructuredClassifierImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -869,7 +869,7 @@ void StructuredClassifierImpl::loadNode(std::string nodeName, std::shared_ptr<pe
 			{
 				typeName = "Connector";
 			}
-			std::shared_ptr<ecore::EObject> ownedConnector = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::UmlPackage::CONNECTOR_ATTRIBUTE_STRUCTUREDCLASSIFIER);
+			std::shared_ptr<ecore::EObject> ownedConnector = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::CONNECTOR_ATTRIBUTE_STRUCTUREDCLASSIFIER);
 			if (ownedConnector != nullptr)
 			{
 				loadHandler->handleChild(ownedConnector);
@@ -927,7 +927,7 @@ void StructuredClassifierImpl::saveContent(std::shared_ptr<persistence::interfac
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 		// Save 'ownedConnector'
 		for (std::shared_ptr<uml::Connector> ownedConnector : *this->getOwnedConnector()) 
@@ -945,7 +945,7 @@ void StructuredClassifierImpl::saveContent(std::shared_ptr<persistence::interfac
 		std::shared_ptr<SubsetUnion<uml::Property, uml::Property,uml::NamedElement,uml::ConnectableElement>> list_ownedAttribute = this->getOwnedAttribute();
 		for (std::shared_ptr<uml::Property> ownedAttribute : *list_ownedAttribute) 
 		{
-			saveHandler->addReference(ownedAttribute, "ownedAttribute", ownedAttribute->eClass() !=uml::UmlPackage::eInstance()->getProperty_Class());
+			saveHandler->addReference(ownedAttribute, "ownedAttribute", ownedAttribute->eClass() !=uml::umlPackage::eInstance()->getProperty_Class());
 		}
 	}
 	catch (std::exception& e)

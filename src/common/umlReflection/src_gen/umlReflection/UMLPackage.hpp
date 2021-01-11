@@ -22,6 +22,7 @@ namespace uml
 	class ConnectorEnd;
 }
 
+
 namespace UML 
 {
 	/*!
@@ -3293,6 +3294,8 @@ namespace UML
 			virtual std::shared_ptr<uml::Constraint> get_UML_WriteVariableAction_value_type() = 0;  
 			
 			
+
+			//getter for subPackages
 
 			//Singleton Instance and Getter
 			

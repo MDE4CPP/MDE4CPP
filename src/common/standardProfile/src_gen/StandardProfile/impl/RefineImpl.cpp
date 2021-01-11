@@ -14,14 +14,25 @@
 #include "StandardProfile/StandardProfileFactory.hpp"
 #include "StandardProfile/impl/StandardProfilePackageImpl.hpp"
 #include "uml/Stereotype.hpp"
+
+//Types included from attributes, operation parameters, imports and composite owner classes
 #include "uml/Abstraction.hpp"
 
+//Packges and Factories included from types of attributes, operation parameters, imports and composite owner classes
+#include "uml/umlFactory.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
+//Packages of included Enumerations
 
+//Includes of PluginFramework (if required)
 
-//Included from Ports typed by interface
+//Includes of OpaqueBevaiors (if required)
 
-//Included from roles of ConnectorEnds
+//Includes from InstanceValues (if required)
+
+//Includes from Ports typed by interfaces (if required)
+
+//Includes from roles of ConnectorEnds (if required)
 
 using namespace StandardProfile;
 
@@ -63,6 +74,7 @@ RefineImpl::RefineImpl(const RefineImpl & obj):RefineImpl()
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Refine "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	instantiate();
 }
 
 std::shared_ptr<ecore::EObject>  RefineImpl::copy() const
@@ -79,7 +91,7 @@ std::shared_ptr<uml::Class> RefineImpl::getMetaClass()
 }
 
 void RefineImpl::instantiate()
-{	
+{   
 	
 }
 

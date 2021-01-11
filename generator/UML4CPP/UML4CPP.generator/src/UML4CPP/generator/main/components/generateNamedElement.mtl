@@ -39,6 +39,17 @@ virtual std::shared_ptr<[anElement.getMetaClassName()/]> [anElement.oclAsType(Co
 [/if]
 [/template]
 
+[template public generateSubPackageGetter(aPackage : Package, impl : Boolean)]			
+virtual std::shared_ptr<[aPackage.name/]::[aPackage.name/]Package> get[aPackage.name/]_Package() const [abstractSuffix(impl)/];
+[/template]
+
+[template public generateSubPackageGetterImpl(subPackage: Package, aPackage: Package)]
+std::shared_ptr<[subPackage.name/]::[subPackage.name/]Package> [aPackage.name/]PackageImpl::get[subPackage.name/]_Package() const
+{
+	return [subPackage.name/]::[subPackage.name/]Package::eInstance();
+} 
+[/template]
+
 
 [**
  generate getter function implementation for meta model element
@@ -46,12 +57,12 @@ virtual std::shared_ptr<[anElement.getMetaClassName()/]> [anElement.oclAsType(Co
 [template public generatePackageMemberGetterImpl(anElement : Element)]
 [if (   not anElement.oclIsUndefined() ) ]  
 [if (anElement.oclIsKindOf(NamedElement))] 
-std::shared_ptr<[anElement.getMetaClassName()/]> [anElement.getNearestPackage().name.toUpperFirst()/]PackageImpl::[anElement.oclAsType(NamedElement).generatePackageGetterCall(anElement.oclAsType(NamedElement))/]
+std::shared_ptr<[anElement.getMetaClassName()/]> [anElement.getNearestPackage().name/]PackageImpl::[anElement.oclAsType(NamedElement).generatePackageGetterCall(anElement.oclAsType(NamedElement))/]
 {
 	return [anElement.oclAsType(NamedElement).memberName()/];
 }
 [elseif (anElement.oclIsTypeOf(ConnectorEnd))]
-std::shared_ptr<[anElement.getMetaClassName()/]> [anElement.getNearestPackage().name.toUpperFirst()/]PackageImpl::[anElement.oclAsType(ConnectorEnd).generatePackageGetterCall(anElement.oclAsType(ConnectorEnd))/]
+std::shared_ptr<[anElement.getMetaClassName()/]> [anElement.getNearestPackage().name/]PackageImpl::[anElement.oclAsType(ConnectorEnd).generatePackageGetterCall(anElement.oclAsType(ConnectorEnd))/]
 {
 	return [anElement.oclAsType(ConnectorEnd).memberName()/];
 }

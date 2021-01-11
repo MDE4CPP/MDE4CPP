@@ -23,15 +23,15 @@
 [import ecore4CPP::generator::main::package::generatePackageHelper /]
 
 [template public generatePackageImplHeader(anEPackage : EPackage)]
-[file (anEPackage.generateNamespacePath().concat('/impl/').concat(anEPackage.name.toUpperFirst()).concat('PackageImpl.hpp'), false, 'UTF-8')]
+[file (anEPackage.generateNamespacePath().concat('/impl/').concat(anEPackage.name).concat('PackageImpl.hpp'), false, 'UTF-8')]
 [startGuard(anEPackage,'PackageImpl')/]
 
 [comment  Generate Includes for the Factory/]
-#include "ecore/EcorePackage.hpp"
+#include "ecore/ecorePackage.hpp"
 #include "ecore/impl/EPackageImpl.hpp"
 
 [if (not(anEPackage.name = 'ecore') )]
-#include "[anEPackage.getRootPackage().name/]/[anEPackage.getNamespacePathWithoutRoot()/][anEPackage.name.toUpperFirst().concat('Package')/].hpp" 
+#include "[anEPackage.getRootPackage().name/]/[anEPackage.getNamespacePathWithoutRoot()/][anEPackage.name.concat('Package')/].hpp" 
 [/if]
 
 
@@ -49,22 +49,22 @@ namespace [anEPackage.generateNamespaceDefinition()/]
 
 namespace ecore
 {
-	class EcoreFactory;
+	class ecoreFactory;
 }
 
 namespace [anEPackage.generateNamespaceDefinition()/]
 {
-	class [anEPackage.name.toUpperFirst().concat('PackageImpl')/] : public [anEPackage.needNamespace('EPackageImpl')/] ,virtual public [anEPackage.name.toUpperFirst().concat('Package')/]
+	class [anEPackage.name.concat('PackageImpl')/] : public [anEPackage.needNamespace('EPackageImpl')/] ,virtual public [anEPackage.name.concat('Package')/]
 	{
 		private:    
-			[anEPackage.name.toUpperFirst().concat('PackageImpl')/]([anEPackage.name.toUpperFirst().concat('PackageImpl')/] const&) = delete;
-			[anEPackage.name.toUpperFirst().concat('PackageImpl')/]& operator=([anEPackage.name.toUpperFirst().concat('PackageImpl')/] const&) = delete;
+			[anEPackage.name.concat('PackageImpl')/]([anEPackage.name.concat('PackageImpl')/] const&) = delete;
+			[anEPackage.name.concat('PackageImpl')/]& operator=([anEPackage.name.concat('PackageImpl')/] const&) = delete;
 
 		protected:
-			[anEPackage.name.toUpperFirst().concat('PackageImpl')/]();
+			[anEPackage.name.concat('PackageImpl')/]();
 
 		public:
-			virtual ~[anEPackage.name.toUpperFirst().concat('PackageImpl')/]();
+			virtual ~[anEPackage.name.concat('PackageImpl')/]();
 
 [for (aClass : EClass | anEPackage.eClassifiers->selectByKind(EClass)->asOrderedSet()->sortedBy(name)) separator ('\n')]
 			// Begin Class [aClass.name.toUpperFirst()/]
@@ -87,10 +87,10 @@ namespace [anEPackage.generateNamespaceDefinition()/]
 			[anEPackage.eClassifiers->selectByKind(EClass).eReferences->sortedBy(name).generatePrivatePackageMember(anEPackage)/]
 			[anEPackage.eClassifiers->selectByKind(EClass).eOperations->sortedBy(name).generatePrivatePackageMember(anEPackage)/]
 
-			friend class [anEPackage.name.concat('Package').toUpperFirst()/];
+			friend class [anEPackage.name.concat('Package')/];
 
 			static bool isInited;
-			static [anEPackage.name.concat('Package').toUpperFirst()/]* create();
+			static [anEPackage.name.concat('Package')/]* create();
 			bool isInitialized = false;
  			bool isCreated = false;
 
@@ -102,9 +102,9 @@ namespace [anEPackage.generateNamespaceDefinition()/]
 
 		private:
 [for (aClass : EClass | anEPackage.eClassifiers->selectByKind(EClass)->asOrderedSet()->sortedBy(name))]
-			void create[aClass.name.toUpperFirst()/]Content(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
+			void create[aClass.name.toUpperFirst()/]Content(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 [/for]
-			void createPackageEDataTypes(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
+			void createPackageEDataTypes(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 
 [for (aClass : EClass | anEPackage.eClassifiers->selectByKind(EClass)->asOrderedSet()->sortedBy(name))]
 			void initialize[aClass.name.toUpperFirst()/]Content();

@@ -28,7 +28,7 @@ namespace uml
 			FlowFinalNodeImpl& operator=(FlowFinalNodeImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			FlowFinalNodeImpl();
 			virtual std::shared_ptr<FlowFinalNode> getThisFlowFinalNodePtr() const;
 			virtual void setThisFlowFinalNodePtr(std::weak_ptr<FlowFinalNode> thisFlowFinalNodePtr);

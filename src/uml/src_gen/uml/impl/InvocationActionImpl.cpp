@@ -74,8 +74,8 @@
 #include "uml/StructuredActivityNode.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -265,7 +265,7 @@ std::shared_ptr<ecore::EObject>  InvocationActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> InvocationActionImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getInvocationAction_Class();
+	return uml::umlPackage::eInstance()->getInvocationAction_Class();
 }
 
 //*********************************
@@ -439,7 +439,7 @@ Any InvocationActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::INVOCATIONACTION_ATTRIBUTE_ARGUMENT:
+		case uml::umlPackage::INVOCATIONACTION_ATTRIBUTE_ARGUMENT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::InputPin>::iterator iter = m_argument->begin();
@@ -449,10 +449,10 @@ Any InvocationActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //13127
+			return eAny(tempList); //13027
 		}
-		case uml::UmlPackage::INVOCATIONACTION_ATTRIBUTE_ONPORT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOnPort())); //13128
+		case uml::umlPackage::INVOCATIONACTION_ATTRIBUTE_ONPORT:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOnPort())); //13028
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -460,10 +460,10 @@ bool InvocationActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::INVOCATIONACTION_ATTRIBUTE_ARGUMENT:
-			return getArgument() != nullptr; //13127
-		case uml::UmlPackage::INVOCATIONACTION_ATTRIBUTE_ONPORT:
-			return getOnPort() != nullptr; //13128
+		case uml::umlPackage::INVOCATIONACTION_ATTRIBUTE_ARGUMENT:
+			return getArgument() != nullptr; //13027
+		case uml::umlPackage::INVOCATIONACTION_ATTRIBUTE_ONPORT:
+			return getOnPort() != nullptr; //13028
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
@@ -471,7 +471,7 @@ bool InvocationActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::INVOCATIONACTION_ATTRIBUTE_ARGUMENT:
+		case uml::umlPackage::INVOCATIONACTION_ATTRIBUTE_ARGUMENT:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -507,12 +507,12 @@ bool InvocationActionImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case uml::UmlPackage::INVOCATIONACTION_ATTRIBUTE_ONPORT:
+		case uml::umlPackage::INVOCATIONACTION_ATTRIBUTE_ONPORT:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Port> _onPort = std::dynamic_pointer_cast<uml::Port>(_temp);
-			setOnPort(_onPort); //13128
+			setOnPort(_onPort); //13028
 			return true;
 		}
 	}
@@ -531,7 +531,7 @@ void InvocationActionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHa
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -566,7 +566,7 @@ void InvocationActionImpl::loadAttributes(std::shared_ptr<persistence::interface
 
 void InvocationActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -577,7 +577,7 @@ void InvocationActionImpl::loadNode(std::string nodeName, std::shared_ptr<persis
 			{
 				typeName = "InputPin";
 			}
-			std::shared_ptr<ecore::EObject> argument = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::UmlPackage::INPUTPIN_ATTRIBUTE_INVOCATIONACTION);
+			std::shared_ptr<ecore::EObject> argument = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::INPUTPIN_ATTRIBUTE_INVOCATIONACTION);
 			if (argument != nullptr)
 			{
 				loadHandler->handleChild(argument);
@@ -601,7 +601,7 @@ void InvocationActionImpl::resolveReferences(const int featureID, std::list<std:
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::INVOCATIONACTION_ATTRIBUTE_ONPORT:
+		case uml::umlPackage::INVOCATIONACTION_ATTRIBUTE_ONPORT:
 		{
 			if (references.size() == 1)
 			{
@@ -626,7 +626,6 @@ void InvocationActionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHa
 	
 	ActivityNodeImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);
@@ -649,7 +648,7 @@ void InvocationActionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 
@@ -665,7 +664,7 @@ void InvocationActionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 		std::shared_ptr<SubsetUnion<uml::InputPin, uml::InputPin>> list_argument = this->getArgument();
 		for (std::shared_ptr<uml::InputPin> argument : *list_argument) 
 		{
-			saveHandler->addReference(argument, "argument", argument->eClass() !=uml::UmlPackage::eInstance()->getInputPin_Class());
+			saveHandler->addReference(argument, "argument", argument->eClass() !=uml::umlPackage::eInstance()->getInputPin_Class());
 		}
 	}
 	catch (std::exception& e)

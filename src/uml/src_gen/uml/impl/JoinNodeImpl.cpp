@@ -67,8 +67,8 @@
 #include "uml/ValueSpecification.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -224,7 +224,7 @@ std::shared_ptr<ecore::EObject>  JoinNodeImpl::copy() const
 
 std::shared_ptr<ecore::EClass> JoinNodeImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getJoinNode_Class();
+	return uml::umlPackage::eInstance()->getJoinNode_Class();
 }
 
 //*********************************
@@ -375,10 +375,10 @@ Any JoinNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::JOINNODE_ATTRIBUTE_ISCOMBINEDUPLICATE:
-			return eAny(getIsCombineDuplicate()); //13220
-		case uml::UmlPackage::JOINNODE_ATTRIBUTE_JOINSPEC:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getJoinSpec())); //13221
+		case uml::umlPackage::JOINNODE_ATTRIBUTE_ISCOMBINEDUPLICATE:
+			return eAny(getIsCombineDuplicate()); //13120
+		case uml::umlPackage::JOINNODE_ATTRIBUTE_JOINSPEC:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getJoinSpec())); //13121
 	}
 	return ControlNodeImpl::eGet(featureID, resolve, coreType);
 }
@@ -386,10 +386,10 @@ bool JoinNodeImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::JOINNODE_ATTRIBUTE_ISCOMBINEDUPLICATE:
-			return getIsCombineDuplicate() != true; //13220
-		case uml::UmlPackage::JOINNODE_ATTRIBUTE_JOINSPEC:
-			return getJoinSpec() != nullptr; //13221
+		case uml::umlPackage::JOINNODE_ATTRIBUTE_ISCOMBINEDUPLICATE:
+			return getIsCombineDuplicate() != true; //13120
+		case uml::umlPackage::JOINNODE_ATTRIBUTE_JOINSPEC:
+			return getJoinSpec() != nullptr; //13121
 	}
 	return ControlNodeImpl::internalEIsSet(featureID);
 }
@@ -397,19 +397,19 @@ bool JoinNodeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::JOINNODE_ATTRIBUTE_ISCOMBINEDUPLICATE:
+		case uml::umlPackage::JOINNODE_ATTRIBUTE_ISCOMBINEDUPLICATE:
 		{
 			// BOOST CAST
 			bool _isCombineDuplicate = newValue->get<bool>();
-			setIsCombineDuplicate(_isCombineDuplicate); //13220
+			setIsCombineDuplicate(_isCombineDuplicate); //13120
 			return true;
 		}
-		case uml::UmlPackage::JOINNODE_ATTRIBUTE_JOINSPEC:
+		case uml::umlPackage::JOINNODE_ATTRIBUTE_JOINSPEC:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ValueSpecification> _joinSpec = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
-			setJoinSpec(_joinSpec); //13221
+			setJoinSpec(_joinSpec); //13121
 			return true;
 		}
 	}
@@ -428,7 +428,7 @@ void JoinNodeImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> l
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -465,7 +465,7 @@ void JoinNodeImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoad
 
 void JoinNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -511,7 +511,6 @@ void JoinNodeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> s
 	
 	ActivityNodeImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);
@@ -533,7 +532,7 @@ void JoinNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 		// Save 'joinSpec'
 		std::shared_ptr<uml::ValueSpecification > joinSpec = this->getJoinSpec();

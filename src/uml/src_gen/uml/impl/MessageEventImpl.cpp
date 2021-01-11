@@ -50,8 +50,8 @@
 #include "uml/TemplateParameter.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -160,7 +160,7 @@ std::shared_ptr<ecore::EObject>  MessageEventImpl::copy() const
 
 std::shared_ptr<ecore::EClass> MessageEventImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getMessageEvent_Class();
+	return uml::umlPackage::eInstance()->getMessageEvent_Class();
 }
 
 //*********************************
@@ -276,7 +276,7 @@ void MessageEventImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandle
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -292,7 +292,7 @@ void MessageEventImpl::loadAttributes(std::shared_ptr<persistence::interfaces::X
 
 void MessageEventImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	EventImpl::loadNode(nodeName, loadHandler);
@@ -330,7 +330,7 @@ void MessageEventImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 

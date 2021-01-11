@@ -28,7 +28,7 @@ namespace uml
 			ForkNodeImpl& operator=(ForkNodeImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			ForkNodeImpl();
 			virtual std::shared_ptr<ForkNode> getThisForkNodePtr() const;
 			virtual void setThisForkNodePtr(std::weak_ptr<ForkNode> thisForkNodePtr);

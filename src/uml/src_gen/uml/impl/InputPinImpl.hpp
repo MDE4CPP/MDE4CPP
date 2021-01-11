@@ -28,7 +28,7 @@ namespace uml
 			InputPinImpl& operator=(InputPinImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			InputPinImpl();
 			virtual std::shared_ptr<InputPin> getThisInputPinPtr() const;
 			virtual void setThisInputPinPtr(std::weak_ptr<InputPin> thisInputPinPtr);

@@ -29,7 +29,7 @@ namespace uml
 			PackageableElementImpl& operator=(PackageableElementImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			PackageableElementImpl();
 			virtual std::shared_ptr<PackageableElement> getThisPackageableElementPtr() const;
 			virtual void setThisPackageableElementPtr(std::weak_ptr<PackageableElement> thisPackageableElementPtr);

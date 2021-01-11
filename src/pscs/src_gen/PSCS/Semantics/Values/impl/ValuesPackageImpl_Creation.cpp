@@ -1,7 +1,7 @@
 #include "PSCS/Semantics/Values/impl/ValuesPackageImpl.hpp"
 
 // metametamodel factory
-#include "ecore/EcoreFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 
 #include <cassert>
 
@@ -14,7 +14,7 @@
 #include "ecore/EStringToStringMapEntry.hpp"
 
 //depending model packages
-#include "fUML/FUMLPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 //include subpackages 
  
 using namespace PSCS::Semantics::Values;
@@ -27,7 +27,7 @@ void ValuesPackageImpl::createPackageContents(std::shared_ptr<ecore::EPackage> p
 	}
 	isCreated = true;
 
-	std::shared_ptr<ecore::EcoreFactory> factory = ecore::EcoreFactory::eInstance();
+	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
 
 	createCS_OpaqueExpressionEvaluationContent(package, factory);
 
@@ -35,7 +35,7 @@ void ValuesPackageImpl::createPackageContents(std::shared_ptr<ecore::EPackage> p
 
 }
 
-void ValuesPackageImpl::createCS_OpaqueExpressionEvaluationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ValuesPackageImpl::createCS_OpaqueExpressionEvaluationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_cS_OpaqueExpressionEvaluation_Class = factory->createEClass_in_EPackage(package, CS_OPAQUEEXPRESSIONEVALUATION_CLASS);
 	
@@ -45,7 +45,7 @@ void ValuesPackageImpl::createCS_OpaqueExpressionEvaluationContent(std::shared_p
 	
 }
 
-void ValuesPackageImpl::createPackageEDataTypes(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ValuesPackageImpl::createPackageEDataTypes(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	
 }

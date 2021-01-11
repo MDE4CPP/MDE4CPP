@@ -28,7 +28,7 @@ namespace uml
 			GeneralizationImpl& operator=(GeneralizationImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			GeneralizationImpl();
 			virtual std::shared_ptr<Generalization> getThisGeneralizationPtr() const;
 			virtual void setThisGeneralizationPtr(std::weak_ptr<Generalization> thisGeneralizationPtr);

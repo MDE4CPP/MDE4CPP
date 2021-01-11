@@ -30,7 +30,7 @@ namespace uml
 			StateImpl& operator=(StateImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			StateImpl();
 			virtual std::shared_ptr<State> getThisStatePtr() const;
 			virtual void setThisStatePtr(std::weak_ptr<State> thisStatePtr);

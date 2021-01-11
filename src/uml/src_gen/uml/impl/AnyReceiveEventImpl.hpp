@@ -28,7 +28,7 @@ namespace uml
 			AnyReceiveEventImpl& operator=(AnyReceiveEventImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			AnyReceiveEventImpl();
 			virtual std::shared_ptr<AnyReceiveEvent> getThisAnyReceiveEventPtr() const;
 			virtual void setThisAnyReceiveEventPtr(std::weak_ptr<AnyReceiveEvent> thisAnyReceiveEventPtr);

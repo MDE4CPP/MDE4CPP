@@ -53,8 +53,8 @@
 #include "uml/ValueSpecification.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -82,11 +82,11 @@ DurationConstraintImpl::DurationConstraintImpl(std::weak_ptr<uml::Namespace > pa
 {
 	switch(reference_id)
 	{	
-	case UmlPackage::CONSTRAINT_ATTRIBUTE_CONTEXT:
+	case umlPackage::CONSTRAINT_ATTRIBUTE_CONTEXT:
 		m_context = par_Namespace;
 		m_namespace = par_Namespace;
 		 return;
-	case UmlPackage::NAMEDELEMENT_ATTRIBUTE_NAMESPACE:
+	case umlPackage::NAMEDELEMENT_ATTRIBUTE_NAMESPACE:
 		m_namespace = par_Namespace;
 		m_owner = par_Namespace;
 		 return;
@@ -127,7 +127,7 @@ DurationConstraintImpl::DurationConstraintImpl(const DurationConstraintImpl & ob
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy DurationConstraint "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
-	m_firstEvent = obj.getFirstEvent();
+	m_firstEvent = obj.isFirstEvent();
 	m_name = obj.getName();
 	m_qualifiedName = obj.getQualifiedName();
 	m_visibility = obj.getVisibility();
@@ -189,7 +189,7 @@ std::shared_ptr<ecore::EObject>  DurationConstraintImpl::copy() const
 
 std::shared_ptr<ecore::EClass> DurationConstraintImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getDurationConstraint_Class();
+	return uml::umlPackage::eInstance()->getDurationConstraint_Class();
 }
 
 //*********************************
@@ -198,7 +198,7 @@ std::shared_ptr<ecore::EClass> DurationConstraintImpl::eStaticClass() const
 /*
 Getter & Setter for attribute firstEvent
 */
-std::shared_ptr<Bag<bool> > DurationConstraintImpl::getFirstEvent() const 
+std::shared_ptr<Bag<bool> > DurationConstraintImpl::isFirstEvent() const 
 {
 	if(m_firstEvent == nullptr)
 	{
@@ -306,8 +306,8 @@ Any DurationConstraintImpl::eGet(int featureID, bool resolve, bool coreType) con
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::DURATIONCONSTRAINT_ATTRIBUTE_FIRSTEVENT:
-			return eAny(getFirstEvent()); //7915
+		case uml::umlPackage::DURATIONCONSTRAINT_ATTRIBUTE_FIRSTEVENT:
+			return eAny(isFirstEvent()); //7815
 	}
 	return IntervalConstraintImpl::eGet(featureID, resolve, coreType);
 }
@@ -315,8 +315,8 @@ bool DurationConstraintImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::DURATIONCONSTRAINT_ATTRIBUTE_FIRSTEVENT:
-			return !getFirstEvent()->empty(); //7915
+		case uml::umlPackage::DURATIONCONSTRAINT_ATTRIBUTE_FIRSTEVENT:
+			return !isFirstEvent()->empty(); //7815
 	}
 	return IntervalConstraintImpl::internalEIsSet(featureID);
 }
@@ -324,7 +324,7 @@ bool DurationConstraintImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::DURATIONCONSTRAINT_ATTRIBUTE_FIRSTEVENT:
+		case uml::umlPackage::DURATIONCONSTRAINT_ATTRIBUTE_FIRSTEVENT:
 		{
 			// BOOST CAST
 			// nothing to do
@@ -346,7 +346,7 @@ void DurationConstraintImpl::load(std::shared_ptr<persistence::interfaces::XLoad
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -362,7 +362,7 @@ void DurationConstraintImpl::loadAttributes(std::shared_ptr<persistence::interfa
 
 void DurationConstraintImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 	try
 	{
 		if (nodeName.compare("firstEvent") == 0)
@@ -419,7 +419,7 @@ void DurationConstraintImpl::saveContent(std::shared_ptr<persistence::interfaces
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 		// Add attributes

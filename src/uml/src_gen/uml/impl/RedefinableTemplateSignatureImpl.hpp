@@ -29,7 +29,7 @@ namespace uml
 			RedefinableTemplateSignatureImpl& operator=(RedefinableTemplateSignatureImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			RedefinableTemplateSignatureImpl();
 			virtual std::shared_ptr<RedefinableTemplateSignature> getThisRedefinableTemplateSignaturePtr() const;
 			virtual void setThisRedefinableTemplateSignaturePtr(std::weak_ptr<RedefinableTemplateSignature> thisRedefinableTemplateSignaturePtr);
@@ -85,7 +85,7 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Classifier > getClassifier() const ;
+			virtual std::weak_ptr<uml::Classifier > getClassifier() const ;
 			
 			/*!
 			The Classifier that owns this RedefinableTemplateSignature.

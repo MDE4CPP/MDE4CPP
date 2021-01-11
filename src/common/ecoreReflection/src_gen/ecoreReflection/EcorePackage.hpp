@@ -20,6 +20,7 @@ namespace uml
 	class ConnectorEnd;
 }
 
+
 namespace Ecore 
 {
 	/*!
@@ -346,6 +347,8 @@ namespace Ecore
 			virtual std::shared_ptr<uml::Property> get_Ecore_ETypedElement_upperBound() = 0;  
 			
 			
+
+			//getter for subPackages
 
 			//Singleton Instance and Getter
 			

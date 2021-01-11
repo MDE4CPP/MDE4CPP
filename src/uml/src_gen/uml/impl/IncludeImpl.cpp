@@ -50,8 +50,8 @@
 #include "uml/UseCase.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -158,7 +158,7 @@ std::shared_ptr<ecore::EObject>  IncludeImpl::copy() const
 
 std::shared_ptr<ecore::EClass> IncludeImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getInclude_Class();
+	return uml::umlPackage::eInstance()->getInclude_Class();
 }
 
 //*********************************
@@ -326,10 +326,10 @@ Any IncludeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::INCLUDE_ATTRIBUTE_ADDITION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getAddition())); //11312
-		case uml::UmlPackage::INCLUDE_ATTRIBUTE_INCLUDINGCASE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getIncludingCase().lock())); //11313
+		case uml::umlPackage::INCLUDE_ATTRIBUTE_ADDITION:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getAddition())); //11212
+		case uml::umlPackage::INCLUDE_ATTRIBUTE_INCLUDINGCASE:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getIncludingCase().lock())); //11213
 	}
 	Any result;
 	result = DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
@@ -344,10 +344,10 @@ bool IncludeImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::INCLUDE_ATTRIBUTE_ADDITION:
-			return getAddition() != nullptr; //11312
-		case uml::UmlPackage::INCLUDE_ATTRIBUTE_INCLUDINGCASE:
-			return getIncludingCase().lock() != nullptr; //11313
+		case uml::umlPackage::INCLUDE_ATTRIBUTE_ADDITION:
+			return getAddition() != nullptr; //11212
+		case uml::umlPackage::INCLUDE_ATTRIBUTE_INCLUDINGCASE:
+			return getIncludingCase().lock() != nullptr; //11213
 	}
 	bool result = false;
 	result = DirectedRelationshipImpl::internalEIsSet(featureID);
@@ -362,20 +362,20 @@ bool IncludeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::INCLUDE_ATTRIBUTE_ADDITION:
+		case uml::umlPackage::INCLUDE_ATTRIBUTE_ADDITION:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::UseCase> _addition = std::dynamic_pointer_cast<uml::UseCase>(_temp);
-			setAddition(_addition); //11312
+			setAddition(_addition); //11212
 			return true;
 		}
-		case uml::UmlPackage::INCLUDE_ATTRIBUTE_INCLUDINGCASE:
+		case uml::umlPackage::INCLUDE_ATTRIBUTE_INCLUDINGCASE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::UseCase> _includingCase = std::dynamic_pointer_cast<uml::UseCase>(_temp);
-			setIncludingCase(_includingCase); //11313
+			setIncludingCase(_includingCase); //11213
 			return true;
 		}
 	}
@@ -401,7 +401,7 @@ void IncludeImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> lo
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -437,7 +437,7 @@ void IncludeImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadH
 
 void IncludeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	DirectedRelationshipImpl::loadNode(nodeName, loadHandler);
@@ -448,7 +448,7 @@ void IncludeImpl::resolveReferences(const int featureID, std::list<std::shared_p
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::INCLUDE_ATTRIBUTE_ADDITION:
+		case uml::umlPackage::INCLUDE_ATTRIBUTE_ADDITION:
 		{
 			if (references.size() == 1)
 			{
@@ -460,7 +460,7 @@ void IncludeImpl::resolveReferences(const int featureID, std::list<std::shared_p
 			return;
 		}
 
-		case uml::UmlPackage::INCLUDE_ATTRIBUTE_INCLUDINGCASE:
+		case uml::umlPackage::INCLUDE_ATTRIBUTE_INCLUDINGCASE:
 		{
 			if (references.size() == 1)
 			{
@@ -500,7 +500,7 @@ void IncludeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 

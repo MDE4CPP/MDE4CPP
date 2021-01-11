@@ -28,7 +28,7 @@ namespace uml
 			TimeIntervalImpl& operator=(TimeIntervalImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			TimeIntervalImpl();
 			virtual std::shared_ptr<TimeInterval> getThisTimeIntervalPtr() const;
 			virtual void setThisTimeIntervalPtr(std::weak_ptr<TimeInterval> thisTimeIntervalPtr);

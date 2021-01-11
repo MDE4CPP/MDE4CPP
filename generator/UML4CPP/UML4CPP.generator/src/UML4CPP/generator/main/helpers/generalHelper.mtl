@@ -30,10 +30,10 @@
 [** 
  * queries to read out annotaion values, default source is the annotation 'codeGen' 
 */]
-[query private hasSourceGen(aElement : Element, aSource : String) : Boolean = eAnnotations->select(source = aSource)->notEmpty()/]
-[query private getSourceGen(aElement : Element, aSource : String) : EAnnotation = eAnnotations->select(source = aSource)->first()/]
-[query private hasKey(aElement : Element, aSource : String, aKey:String) : Boolean = if aElement.hasSourceGen(aSource) then aElement.getSourceGen(aSource).details->select(key = aKey)->notEmpty() else false endif /]
-[query public valueKey(aElement : Element, aSource : String, aKey:String) : String = if (hasKey(aSource, aKey)) then aElement.getSourceGen(aSource).details->select(key = aKey)->first().value else '' endif/]
+[query public hasEAnnotation(aElement : Element, aSource : String) : Boolean = eAnnotations->select(source = aSource)->notEmpty()/]
+[query public getEAnnotation(aElement : Element, aSource : String) : EAnnotation = eAnnotations->select(source = aSource)->first()/]
+[query private hasKey(aElement : Element, aSource : String, aKey:String) : Boolean = if aElement.hasEAnnotation(aSource) then aElement.getEAnnotation(aSource).details->select(key = aKey)->notEmpty() else false endif /]
+[query public valueKey(aElement : Element, aSource : String, aKey:String) : String = if (hasKey(aSource, aKey)) then aElement.getEAnnotation(aSource).details->select(key = aKey)->first().value else '' endif/]
 [query public valueKey(aElement : Element, aKey:String) : String = aElement.valueKey(sourceNameCodeGen(), aKey) /]
 
 [**
@@ -53,7 +53,7 @@
 [**
  * queries to check values of prepareApplication annotation keys
 */]
-[query public prepareApplication(aPackage : Package) : Boolean = hasSourceGen(sourceNamePrepareApplication()) /]
+[query public prepareApplication(aPackage : Package) : Boolean = hasEAnnotation(sourceNamePrepareApplication()) /]
 [query public hasMainActivity(aPackage : Package) : Boolean = hasKey(sourceNamePrepareApplication(), keyIsMainActivity()) /]
 [query public getHasMainActivity(aPackage : Package) : String = valueKey(sourceNamePrepareApplication(), keyIsMainActivity()) /]
 [query public isActivityWithMainKeyExisting(aPackage : Package) : Boolean = aPackage.allOwnedElements()->filter(Activity)->select(act : Activity | act.isMainActivity())->size() > 0 /]
@@ -63,6 +63,12 @@
 [query public getMainSourceCode(ePackage : Package) : String = valueKey(sourceNamePrepareApplication(), keyMainSourceCode()) /]
 [query public hasMainIncludes(ePackage : Package) : Boolean = hasKey(sourceNamePrepareApplication(), keyMainIncludes()) /]
 [query public getMainIncludes(ePackage : Package) : String = valueKey(sourceNamePrepareApplication(), keyMainIncludes()) /]
+
+[**
+ * query to check if an element has a certain stereotype applied
+*/]
+[query public hasStereotypeApplied(anElement : Element, stereotypeName : String) : Boolean = not anElement.getAppliedStereotype(stereotypeName).oclIsUndefined() /]
+
 
 [**
  * template to generate forward declaration of template class Bag for a Class element
@@ -160,7 +166,7 @@ template<class T> class Bag;
 [query private packageGetter(anElement1 : NamedElement, anElement2 : NamedElement) : String = if (anElement1.getNearestPackage().oclIsUndefined()) then anElement1.handlePackageGetterError(anElement2.name) else generatePackageInstance(anElement1, anElement2).concat('get_').concat(anElement1.myQualifiedName().substituteAll('::','_').substituteAll('.','_')).concat('()') endif /]
 [query private packageGetter(aConnectorEnd1 : ConnectorEnd, aConnectorEnd2 : ConnectorEnd) : String = if (aConnectorEnd1.getNearestPackage().oclIsUndefined()) then aConnectorEnd1.handlePackageGetterError(aConnectorEnd2.memberName()) else generatePackageInstance(aConnectorEnd1, aConnectorEnd2).concat('get_').concat(aConnectorEnd1.myQualifiedName().substituteAll('::','_').substituteAll('.','_')).concat('()') endif /]
 [query private generatePackageInstance(anElement1 : Element, anElement2 : Element ) : String = if(anElement1.getNearestPackage() = anElement2.getNearestPackage() ) then '' else getModelPackage(anElement1) endif /]
-[query public getModelPackage(anElement1 : Element) : String = anElement1.getNearestPackage().name.concat('::').concat(anElement1.getNearestPackage().name.toUpperFirst()).concat('Package').concat('::eInstance()->') /]
+[query public getModelPackage(anElement1 : Element) : String = anElement1.getNearestPackage().generateNamespace(false).concat('::').concat(anElement1.getNearestPackage().name).concat('Package').concat('::eInstance()->') /]
 
 [template private handlePackageGetterError(failureElement : NamedElement, name : String)]
 nullptr['cannot terminate package of element '.concat(failureElement.toString()).concat(' used by ').concat(name).registerError()/]

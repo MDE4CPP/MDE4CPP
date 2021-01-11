@@ -28,7 +28,7 @@ namespace uml
 			ReduceActionImpl& operator=(ReduceActionImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			ReduceActionImpl();
 			virtual std::shared_ptr<ReduceAction> getThisReduceActionPtr() const;
 			virtual void setThisReduceActionPtr(std::weak_ptr<ReduceAction> thisReduceActionPtr);

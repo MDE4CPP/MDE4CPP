@@ -28,7 +28,7 @@ namespace uml
 			ClearAssociationActionImpl& operator=(ClearAssociationActionImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			ClearAssociationActionImpl();
 			virtual std::shared_ptr<ClearAssociationAction> getThisClearAssociationActionPtr() const;
 			virtual void setThisClearAssociationActionPtr(std::weak_ptr<ClearAssociationAction> thisClearAssociationActionPtr);

@@ -46,8 +46,8 @@
 #include "uml/QualifierValue.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -126,7 +126,7 @@ std::shared_ptr<ecore::EObject>  LinkEndCreationDataImpl::copy() const
 
 std::shared_ptr<ecore::EClass> LinkEndCreationDataImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getLinkEndCreationData_Class();
+	return uml::umlPackage::eInstance()->getLinkEndCreationData_Class();
 }
 
 //*********************************
@@ -221,10 +221,10 @@ Any LinkEndCreationDataImpl::eGet(int featureID, bool resolve, bool coreType) co
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::LINKENDCREATIONDATA_ATTRIBUTE_INSERTAT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getInsertAt())); //1356
-		case uml::UmlPackage::LINKENDCREATIONDATA_ATTRIBUTE_ISREPLACEALL:
-			return eAny(getIsReplaceAll()); //1357
+		case uml::umlPackage::LINKENDCREATIONDATA_ATTRIBUTE_INSERTAT:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getInsertAt())); //1346
+		case uml::umlPackage::LINKENDCREATIONDATA_ATTRIBUTE_ISREPLACEALL:
+			return eAny(getIsReplaceAll()); //1347
 	}
 	return LinkEndDataImpl::eGet(featureID, resolve, coreType);
 }
@@ -232,10 +232,10 @@ bool LinkEndCreationDataImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::LINKENDCREATIONDATA_ATTRIBUTE_INSERTAT:
-			return getInsertAt() != nullptr; //1356
-		case uml::UmlPackage::LINKENDCREATIONDATA_ATTRIBUTE_ISREPLACEALL:
-			return getIsReplaceAll() != false; //1357
+		case uml::umlPackage::LINKENDCREATIONDATA_ATTRIBUTE_INSERTAT:
+			return getInsertAt() != nullptr; //1346
+		case uml::umlPackage::LINKENDCREATIONDATA_ATTRIBUTE_ISREPLACEALL:
+			return getIsReplaceAll() != false; //1347
 	}
 	return LinkEndDataImpl::internalEIsSet(featureID);
 }
@@ -243,19 +243,19 @@ bool LinkEndCreationDataImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::LINKENDCREATIONDATA_ATTRIBUTE_INSERTAT:
+		case uml::umlPackage::LINKENDCREATIONDATA_ATTRIBUTE_INSERTAT:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::InputPin> _insertAt = std::dynamic_pointer_cast<uml::InputPin>(_temp);
-			setInsertAt(_insertAt); //1356
+			setInsertAt(_insertAt); //1346
 			return true;
 		}
-		case uml::UmlPackage::LINKENDCREATIONDATA_ATTRIBUTE_ISREPLACEALL:
+		case uml::umlPackage::LINKENDCREATIONDATA_ATTRIBUTE_ISREPLACEALL:
 		{
 			// BOOST CAST
 			bool _isReplaceAll = newValue->get<bool>();
-			setIsReplaceAll(_isReplaceAll); //1357
+			setIsReplaceAll(_isReplaceAll); //1347
 			return true;
 		}
 	}
@@ -274,7 +274,7 @@ void LinkEndCreationDataImpl::load(std::shared_ptr<persistence::interfaces::XLoa
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -318,7 +318,7 @@ void LinkEndCreationDataImpl::loadAttributes(std::shared_ptr<persistence::interf
 
 void LinkEndCreationDataImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	LinkEndDataImpl::loadNode(nodeName, loadHandler);
@@ -328,7 +328,7 @@ void LinkEndCreationDataImpl::resolveReferences(const int featureID, std::list<s
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::LINKENDCREATIONDATA_ATTRIBUTE_INSERTAT:
+		case uml::umlPackage::LINKENDCREATIONDATA_ATTRIBUTE_INSERTAT:
 		{
 			if (references.size() == 1)
 			{
@@ -363,7 +363,7 @@ void LinkEndCreationDataImpl::saveContent(std::shared_ptr<persistence::interface
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 		// Add attributes

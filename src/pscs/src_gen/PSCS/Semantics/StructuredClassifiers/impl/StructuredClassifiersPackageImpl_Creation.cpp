@@ -1,7 +1,7 @@
 #include "PSCS/Semantics/StructuredClassifiers/impl/StructuredClassifiersPackageImpl.hpp"
 
 // metametamodel factory
-#include "ecore/EcoreFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 
 #include <cassert>
 
@@ -20,10 +20,10 @@
 
 //depending model packages
 #include "PSCS/PSCSPackage.hpp"
-#include "ecore/EcorePackage.hpp"
-#include "fUML/FUMLPackage.hpp"
-#include "types/TypesPackage.hpp"
-#include "uml/UmlPackage.hpp"
+#include "ecore/ecorePackage.hpp"
+#include "fUML/fUMLPackage.hpp"
+#include "types/typesPackage.hpp"
+#include "uml/umlPackage.hpp"
 //include subpackages 
  
 using namespace PSCS::Semantics::StructuredClassifiers;
@@ -36,7 +36,7 @@ void StructuredClassifiersPackageImpl::createPackageContents(std::shared_ptr<eco
 	}
 	isCreated = true;
 
-	std::shared_ptr<ecore::EcoreFactory> factory = ecore::EcoreFactory::eInstance();
+	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
 
 	createCS_DefaultRequestPropagationStrategyContent(package, factory);
 	createCS_DispatchOperationOfInterfaceStrategyContent(package, factory);
@@ -52,7 +52,7 @@ void StructuredClassifiersPackageImpl::createPackageContents(std::shared_ptr<eco
 
 }
 
-void StructuredClassifiersPackageImpl::createCS_DefaultRequestPropagationStrategyContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void StructuredClassifiersPackageImpl::createCS_DefaultRequestPropagationStrategyContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_cS_DefaultRequestPropagationStrategy_Class = factory->createEClass_in_EPackage(package, CS_DEFAULTREQUESTPROPAGATIONSTRATEGY_CLASS);
 	
@@ -61,7 +61,7 @@ void StructuredClassifiersPackageImpl::createCS_DefaultRequestPropagationStrateg
 	
 }
 
-void StructuredClassifiersPackageImpl::createCS_DispatchOperationOfInterfaceStrategyContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void StructuredClassifiersPackageImpl::createCS_DispatchOperationOfInterfaceStrategyContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_cS_DispatchOperationOfInterfaceStrategy_Class = factory->createEClass_in_EPackage(package, CS_DISPATCHOPERATIONOFINTERFACESTRATEGY_CLASS);
 	
@@ -70,7 +70,7 @@ void StructuredClassifiersPackageImpl::createCS_DispatchOperationOfInterfaceStra
 	
 }
 
-void StructuredClassifiersPackageImpl::createCS_InteractionPointContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void StructuredClassifiersPackageImpl::createCS_InteractionPointContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_cS_InteractionPoint_Class = factory->createEClass_in_EPackage(package, CS_INTERACTIONPOINT_CLASS);
 	
@@ -84,7 +84,7 @@ void StructuredClassifiersPackageImpl::createCS_InteractionPointContent(std::sha
 	
 }
 
-void StructuredClassifiersPackageImpl::createCS_LinkContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void StructuredClassifiersPackageImpl::createCS_LinkContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_cS_Link_Class = factory->createEClass_in_EPackage(package, CS_LINK_CLASS);
 	
@@ -94,7 +94,7 @@ void StructuredClassifiersPackageImpl::createCS_LinkContent(std::shared_ptr<ecor
 	
 }
 
-void StructuredClassifiersPackageImpl::createCS_NameBased_StructuralFeatureOfInterfaceAccessStrategyContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void StructuredClassifiersPackageImpl::createCS_NameBased_StructuralFeatureOfInterfaceAccessStrategyContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_cS_NameBased_StructuralFeatureOfInterfaceAccessStrategy_Class = factory->createEClass_in_EPackage(package, CS_NAMEBASED_STRUCTURALFEATUREOFINTERFACEACCESSSTRATEGY_CLASS);
 	
@@ -104,7 +104,7 @@ void StructuredClassifiersPackageImpl::createCS_NameBased_StructuralFeatureOfInt
 	
 }
 
-void StructuredClassifiersPackageImpl::createCS_ObjectContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void StructuredClassifiersPackageImpl::createCS_ObjectContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_cS_Object_Class = factory->createEClass_in_EPackage(package, CS_OBJECT_CLASS);
 	
@@ -135,7 +135,7 @@ void StructuredClassifiersPackageImpl::createCS_ObjectContent(std::shared_ptr<ec
 	
 }
 
-void StructuredClassifiersPackageImpl::createCS_ReferenceContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void StructuredClassifiersPackageImpl::createCS_ReferenceContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_cS_Reference_Class = factory->createEClass_in_EPackage(package, CS_REFERENCE_CLASS);
 	
@@ -154,7 +154,7 @@ void StructuredClassifiersPackageImpl::createCS_ReferenceContent(std::shared_ptr
 	
 }
 
-void StructuredClassifiersPackageImpl::createCS_RequestPropagationStrategyContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void StructuredClassifiersPackageImpl::createCS_RequestPropagationStrategyContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_cS_RequestPropagationStrategy_Class = factory->createEClass_in_EPackage(package, CS_REQUESTPROPAGATIONSTRATEGY_CLASS);
 	
@@ -164,7 +164,7 @@ void StructuredClassifiersPackageImpl::createCS_RequestPropagationStrategyConten
 	
 }
 
-void StructuredClassifiersPackageImpl::createCS_StructuralFeatureOfInterfaceAccessStrategyContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void StructuredClassifiersPackageImpl::createCS_StructuralFeatureOfInterfaceAccessStrategyContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_cS_StructuralFeatureOfInterfaceAccessStrategy_Class = factory->createEClass_in_EPackage(package, CS_STRUCTURALFEATUREOFINTERFACEACCESSSTRATEGY_CLASS);
 	
@@ -175,7 +175,7 @@ void StructuredClassifiersPackageImpl::createCS_StructuralFeatureOfInterfaceAcce
 	
 }
 
-void StructuredClassifiersPackageImpl::createPackageEDataTypes(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void StructuredClassifiersPackageImpl::createPackageEDataTypes(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_cS_LinkKind_Class = factory->createEEnum_in_EPackage(package, CS_LINKKIND_CLASS);
 	

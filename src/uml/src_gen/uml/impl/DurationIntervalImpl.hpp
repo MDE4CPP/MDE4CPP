@@ -28,7 +28,7 @@ namespace uml
 			DurationIntervalImpl& operator=(DurationIntervalImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			DurationIntervalImpl();
 			virtual std::shared_ptr<DurationInterval> getThisDurationIntervalPtr() const;
 			virtual void setThisDurationIntervalPtr(std::weak_ptr<DurationInterval> thisDurationIntervalPtr);

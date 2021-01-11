@@ -28,7 +28,7 @@ namespace uml
 			ConnectionPointReferenceImpl& operator=(ConnectionPointReferenceImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			ConnectionPointReferenceImpl();
 			virtual std::shared_ptr<ConnectionPointReference> getThisConnectionPointReferencePtr() const;
 			virtual void setThisConnectionPointReferencePtr(std::weak_ptr<ConnectionPointReference> thisConnectionPointReferencePtr);

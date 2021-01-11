@@ -28,7 +28,7 @@ namespace uml
 			NamedElementImpl& operator=(NamedElementImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			NamedElementImpl();
 			virtual std::shared_ptr<NamedElement> getThisNamedElementPtr() const;
 			virtual void setThisNamedElementPtr(std::weak_ptr<NamedElement> thisNamedElementPtr);

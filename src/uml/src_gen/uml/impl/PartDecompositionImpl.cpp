@@ -61,8 +61,8 @@
 #include "uml/ValueSpecification.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -207,7 +207,7 @@ std::shared_ptr<ecore::EObject>  PartDecompositionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> PartDecompositionImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getPartDecomposition_Class();
+	return uml::umlPackage::eInstance()->getPartDecomposition_Class();
 }
 
 //*********************************
@@ -340,7 +340,7 @@ void PartDecompositionImpl::load(std::shared_ptr<persistence::interfaces::XLoadH
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -356,7 +356,7 @@ void PartDecompositionImpl::loadAttributes(std::shared_ptr<persistence::interfac
 
 void PartDecompositionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	InteractionUseImpl::loadNode(nodeName, loadHandler);
@@ -393,7 +393,7 @@ void PartDecompositionImpl::saveContent(std::shared_ptr<persistence::interfaces:
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 

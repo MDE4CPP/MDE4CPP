@@ -7,7 +7,7 @@
 #ifndef FUML_SEMANTICS_CLASSIFICATIONPACKAGEIMPL_HPP
 #define FUML_SEMANTICS_CLASSIFICATIONPACKAGEIMPL_HPP
 
-#include "ecore/EcorePackage.hpp"
+#include "ecore/ecorePackage.hpp"
 #include "ecore/impl/EPackageImpl.hpp"
 
 #include "fUML/Semantics/Classification/ClassificationPackage.hpp" 
@@ -19,7 +19,7 @@ namespace fUML::Semantics::Classification
 
 namespace ecore
 {
-	class EcoreFactory;
+	class ecoreFactory;
 }
 
 namespace fUML::Semantics::Classification
@@ -71,8 +71,8 @@ namespace fUML::Semantics::Classification
 			void initializePackageContents();
 
 		private:
-			void createInstanceValueEvaluationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
-			void createPackageEDataTypes(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
+			void createInstanceValueEvaluationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
+			void createPackageEDataTypes(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 
 			void initializeInstanceValueEvaluationContent();
 			void initializePackageEDataTypes();

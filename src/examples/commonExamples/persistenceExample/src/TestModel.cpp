@@ -16,10 +16,10 @@
 #include "ecore/EOperation.hpp"
 #include "ecore/EReference.hpp"
 
-#include "ecore/EcoreFactory.hpp"
-#include "ecore/EcorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
+#include "ecore/ecorePackage.hpp"
 
-#include "uml/UmlPackage.hpp"
+#include "uml/umlPackage.hpp"
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 
@@ -36,14 +36,14 @@ TestModel::~TestModel()
 
 std::shared_ptr<ecore::EPackage> TestModel::getMetaMetaPackage()
 {
-	return ecore::EcorePackage::eInstance();
+	return ecore::ecorePackage::eInstance();
 }
 
 std::shared_ptr<ecore::EObject> TestModel::createEcoreTestMetaModel()
 {
 
-	std::shared_ptr<ecore::EcorePackage> package = ecore::EcorePackage::eInstance();
-	std::shared_ptr<ecore::EcoreFactory> factory = ecore::EcoreFactory::eInstance();
+	std::shared_ptr<ecore::ecorePackage> package = ecore::ecorePackage::eInstance();
+	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
 
 	// Create package 'pck_UniModel' and set some default package information
 	std::shared_ptr<ecore::EPackage> pck_UniModel = factory->createEPackage();

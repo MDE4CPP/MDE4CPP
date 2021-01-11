@@ -28,7 +28,7 @@ namespace uml
 			ProtocolStateMachineImpl& operator=(ProtocolStateMachineImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			ProtocolStateMachineImpl();
 			virtual std::shared_ptr<ProtocolStateMachine> getThisProtocolStateMachinePtr() const;
 			virtual void setThisProtocolStateMachinePtr(std::weak_ptr<ProtocolStateMachine> thisProtocolStateMachinePtr);

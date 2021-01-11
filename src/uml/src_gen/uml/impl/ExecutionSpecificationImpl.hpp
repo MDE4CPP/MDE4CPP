@@ -28,7 +28,7 @@ namespace uml
 			ExecutionSpecificationImpl& operator=(ExecutionSpecificationImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			ExecutionSpecificationImpl();
 			virtual std::shared_ptr<ExecutionSpecification> getThisExecutionSpecificationPtr() const;
 			virtual void setThisExecutionSpecificationPtr(std::weak_ptr<ExecutionSpecification> thisExecutionSpecificationPtr);

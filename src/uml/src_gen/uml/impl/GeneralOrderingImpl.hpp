@@ -28,7 +28,7 @@ namespace uml
 			GeneralOrderingImpl& operator=(GeneralOrderingImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			GeneralOrderingImpl();
 			virtual std::shared_ptr<GeneralOrdering> getThisGeneralOrderingPtr() const;
 			virtual void setThisGeneralOrderingPtr(std::weak_ptr<GeneralOrdering> thisGeneralOrderingPtr);

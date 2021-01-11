@@ -71,8 +71,8 @@
 #include "uml/Type.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -231,7 +231,7 @@ std::shared_ptr<ecore::EObject>  ReceptionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ReceptionImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getReception_Class();
+	return uml::umlPackage::eInstance()->getReception_Class();
 }
 
 //*********************************
@@ -363,8 +363,8 @@ Any ReceptionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::RECEPTION_ATTRIBUTE_SIGNAL:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSignal())); //20326
+		case uml::umlPackage::RECEPTION_ATTRIBUTE_SIGNAL:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSignal())); //20226
 	}
 	return BehavioralFeatureImpl::eGet(featureID, resolve, coreType);
 }
@@ -372,8 +372,8 @@ bool ReceptionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::RECEPTION_ATTRIBUTE_SIGNAL:
-			return getSignal() != nullptr; //20326
+		case uml::umlPackage::RECEPTION_ATTRIBUTE_SIGNAL:
+			return getSignal() != nullptr; //20226
 	}
 	return BehavioralFeatureImpl::internalEIsSet(featureID);
 }
@@ -381,12 +381,12 @@ bool ReceptionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::RECEPTION_ATTRIBUTE_SIGNAL:
+		case uml::umlPackage::RECEPTION_ATTRIBUTE_SIGNAL:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Signal> _signal = std::dynamic_pointer_cast<uml::Signal>(_temp);
-			setSignal(_signal); //20326
+			setSignal(_signal); //20226
 			return true;
 		}
 	}
@@ -405,7 +405,7 @@ void ReceptionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> 
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -440,7 +440,7 @@ void ReceptionImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoa
 
 void ReceptionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	BehavioralFeatureImpl::loadNode(nodeName, loadHandler);
@@ -450,7 +450,7 @@ void ReceptionImpl::resolveReferences(const int featureID, std::list<std::shared
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::RECEPTION_ATTRIBUTE_SIGNAL:
+		case uml::umlPackage::RECEPTION_ATTRIBUTE_SIGNAL:
 		{
 			if (references.size() == 1)
 			{
@@ -495,7 +495,7 @@ void ReceptionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 

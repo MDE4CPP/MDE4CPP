@@ -1,7 +1,7 @@
 #include "PSCS/Semantics/Classification/impl/ClassificationPackageImpl.hpp"
 
 // metametamodel factory
-#include "ecore/EcoreFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 
 #include <cassert>
 
@@ -14,7 +14,7 @@
 #include "ecore/EStringToStringMapEntry.hpp"
 
 //depending model packages
-#include "fUML/FUMLPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 //include subpackages 
  
 using namespace PSCS::Semantics::Classification;
@@ -27,7 +27,7 @@ void ClassificationPackageImpl::createPackageContents(std::shared_ptr<ecore::EPa
 	}
 	isCreated = true;
 
-	std::shared_ptr<ecore::EcoreFactory> factory = ecore::EcoreFactory::eInstance();
+	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
 
 	createCS_InstanceValueEvaluationContent(package, factory);
 
@@ -35,7 +35,7 @@ void ClassificationPackageImpl::createPackageContents(std::shared_ptr<ecore::EPa
 
 }
 
-void ClassificationPackageImpl::createCS_InstanceValueEvaluationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ClassificationPackageImpl::createCS_InstanceValueEvaluationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_cS_InstanceValueEvaluation_Class = factory->createEClass_in_EPackage(package, CS_INSTANCEVALUEEVALUATION_CLASS);
 	
@@ -44,7 +44,7 @@ void ClassificationPackageImpl::createCS_InstanceValueEvaluationContent(std::sha
 	
 }
 
-void ClassificationPackageImpl::createPackageEDataTypes(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ClassificationPackageImpl::createPackageEDataTypes(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	
 }

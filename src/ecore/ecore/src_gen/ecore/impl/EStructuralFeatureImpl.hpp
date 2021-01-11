@@ -28,7 +28,7 @@ namespace ecore
 			EStructuralFeatureImpl& operator=(EStructuralFeatureImpl const&) = delete;
 
 		protected:
-			friend class EcoreFactoryImpl;
+			friend class ecoreFactoryImpl;
 			EStructuralFeatureImpl();
 			virtual std::shared_ptr<EStructuralFeature> getThisEStructuralFeaturePtr() const;
 			virtual void setThisEStructuralFeaturePtr(std::weak_ptr<EStructuralFeature> thisEStructuralFeaturePtr);

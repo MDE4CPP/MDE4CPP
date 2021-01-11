@@ -75,8 +75,8 @@
 #include "uml/Trigger.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -280,7 +280,7 @@ std::shared_ptr<ecore::EObject>  AcceptEventActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> AcceptEventActionImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getAcceptEventAction_Class();
+	return uml::umlPackage::eInstance()->getAcceptEventAction_Class();
 }
 
 //*********************************
@@ -509,9 +509,9 @@ Any AcceptEventActionImpl::eGet(int featureID, bool resolve, bool coreType) cons
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::ACCEPTEVENTACTION_ATTRIBUTE_ISUNMARSHALL:
+		case uml::umlPackage::ACCEPTEVENTACTION_ATTRIBUTE_ISUNMARSHALL:
 			return eAny(getIsUnmarshall()); //327
-		case uml::UmlPackage::ACCEPTEVENTACTION_ATTRIBUTE_RESULT:
+		case uml::umlPackage::ACCEPTEVENTACTION_ATTRIBUTE_RESULT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::OutputPin>::iterator iter = m_result->begin();
@@ -523,7 +523,7 @@ Any AcceptEventActionImpl::eGet(int featureID, bool resolve, bool coreType) cons
 			}
 			return eAny(tempList); //328
 		}
-		case uml::UmlPackage::ACCEPTEVENTACTION_ATTRIBUTE_TRIGGER:
+		case uml::umlPackage::ACCEPTEVENTACTION_ATTRIBUTE_TRIGGER:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Trigger>::iterator iter = m_trigger->begin();
@@ -542,11 +542,11 @@ bool AcceptEventActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::ACCEPTEVENTACTION_ATTRIBUTE_ISUNMARSHALL:
+		case uml::umlPackage::ACCEPTEVENTACTION_ATTRIBUTE_ISUNMARSHALL:
 			return getIsUnmarshall() != false; //327
-		case uml::UmlPackage::ACCEPTEVENTACTION_ATTRIBUTE_RESULT:
+		case uml::umlPackage::ACCEPTEVENTACTION_ATTRIBUTE_RESULT:
 			return getResult() != nullptr; //328
-		case uml::UmlPackage::ACCEPTEVENTACTION_ATTRIBUTE_TRIGGER:
+		case uml::umlPackage::ACCEPTEVENTACTION_ATTRIBUTE_TRIGGER:
 			return getTrigger() != nullptr; //329
 	}
 	return ActionImpl::internalEIsSet(featureID);
@@ -555,14 +555,14 @@ bool AcceptEventActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::ACCEPTEVENTACTION_ATTRIBUTE_ISUNMARSHALL:
+		case uml::umlPackage::ACCEPTEVENTACTION_ATTRIBUTE_ISUNMARSHALL:
 		{
 			// BOOST CAST
 			bool _isUnmarshall = newValue->get<bool>();
 			setIsUnmarshall(_isUnmarshall); //327
 			return true;
 		}
-		case uml::UmlPackage::ACCEPTEVENTACTION_ATTRIBUTE_RESULT:
+		case uml::umlPackage::ACCEPTEVENTACTION_ATTRIBUTE_RESULT:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -598,7 +598,7 @@ bool AcceptEventActionImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case uml::UmlPackage::ACCEPTEVENTACTION_ATTRIBUTE_TRIGGER:
+		case uml::umlPackage::ACCEPTEVENTACTION_ATTRIBUTE_TRIGGER:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -650,7 +650,7 @@ void AcceptEventActionImpl::load(std::shared_ptr<persistence::interfaces::XLoadH
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -687,7 +687,7 @@ void AcceptEventActionImpl::loadAttributes(std::shared_ptr<persistence::interfac
 
 void AcceptEventActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -752,7 +752,6 @@ void AcceptEventActionImpl::save(std::shared_ptr<persistence::interfaces::XSaveH
 	
 	ActivityNodeImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);
@@ -775,7 +774,7 @@ void AcceptEventActionImpl::saveContent(std::shared_ptr<persistence::interfaces:
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 		// Save 'result'
 		for (std::shared_ptr<uml::OutputPin> result : *this->getResult()) 

@@ -30,7 +30,7 @@ virtual public Argument
 			ArgumentImpl& operator=(ArgumentImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			ArgumentImpl();
 			virtual std::shared_ptr<Argument> getThisArgumentPtr() const;
 			virtual void setThisArgumentPtr(std::weak_ptr<Argument> thisArgumentPtr);

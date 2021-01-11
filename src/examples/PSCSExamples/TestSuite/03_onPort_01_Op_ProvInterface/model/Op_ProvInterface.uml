@@ -17,14 +17,7 @@ If the operation call is forwarded into the port's owner, a::b::p must be equal 
       <end xmi:id="_JSMGcHltEeqsJ5V89htlww" role="_8d8X4HlsEeqsJ5V89htlww"/>
       <end xmi:id="_M5N3gHltEeqsJ5V89htlww" role="__XG9YHlsEeqsJ5V89htlww"/>
     </ownedConnector>
-    <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_WmZvsHmHEeqsJ5V89htlww" name="fbAssignP" specification="_gnl-QHl7EeqsJ5V89htlww">
-      <ownedParameter xmi:id="_Yf3ywHmHEeqsJ5V89htlww" name="_p">
-        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
-      </ownedParameter>
-      <language>CPP</language>
-      <body>std::cout&lt;&lt;&quot;---printing from A::assignP()\n&quot;&lt;&lt;std::endl;</body>
-    </ownedBehavior>
-    <ownedOperation xmi:id="_gnl-QHl7EeqsJ5V89htlww" name="assignP" method="_WmZvsHmHEeqsJ5V89htlww">
+    <ownedOperation xmi:id="_gnl-QHl7EeqsJ5V89htlww" name="assignP">
       <ownedParameter xmi:id="_i4UDsHl7EeqsJ5V89htlww" name="_p">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
       </ownedParameter>
@@ -37,6 +30,7 @@ If the operation call is forwarded into the port's owner, a::b::p must be equal 
     <ownedAttribute xmi:id="_igG84HlsEeqsJ5V89htlww" name="iImpl" type="_iTKigHlrEeqsJ5V89htlww" association="_U4ZxEHlsEeqsJ5V89htlww"/>
     <interfaceRealization xmi:id="_znkCgHlrEeqsJ5V89htlww" name="I_Realization" client="_yXXl8HlrEeqsJ5V89htlww" supplier="_MV1IgHlrEeqsJ5V89htlww" contract="_MV1IgHlrEeqsJ5V89htlww"/>
     <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_H4HxoHlsEeqsJ5V89htlww" name="fbAssignP" specification="_7WrqUHlrEeqsJ5V89htlww">
+      <eAnnotations xmi:id="_ZNv84ERgEeupAptt1hjWPg" source="noExecution"/>
       <ownedParameter xmi:id="_KDMiEHlsEeqsJ5V89htlww" name="_p">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
       </ownedParameter>

@@ -28,7 +28,7 @@ namespace uml
 			TimeObservationImpl& operator=(TimeObservationImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			TimeObservationImpl();
 			virtual std::shared_ptr<TimeObservation> getThisTimeObservationPtr() const;
 			virtual void setThisTimeObservationPtr(std::weak_ptr<TimeObservation> thisTimeObservationPtr);

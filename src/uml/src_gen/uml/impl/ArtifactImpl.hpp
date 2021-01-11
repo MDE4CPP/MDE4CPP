@@ -29,7 +29,7 @@ namespace uml
 			ArtifactImpl& operator=(ArtifactImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			ArtifactImpl();
 			virtual std::shared_ptr<Artifact> getThisArtifactPtr() const;
 			virtual void setThisArtifactPtr(std::weak_ptr<Artifact> thisArtifactPtr);

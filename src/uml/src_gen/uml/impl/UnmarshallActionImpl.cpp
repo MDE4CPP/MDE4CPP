@@ -73,8 +73,8 @@
 #include "uml/StructuredActivityNode.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -273,7 +273,7 @@ std::shared_ptr<ecore::EObject>  UnmarshallActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> UnmarshallActionImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getUnmarshallAction_Class();
+	return uml::umlPackage::eInstance()->getUnmarshallAction_Class();
 }
 
 //*********************************
@@ -512,9 +512,9 @@ Any UnmarshallActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::UNMARSHALLACTION_ATTRIBUTE_OBJECT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getObject())); //24727
-		case uml::UmlPackage::UNMARSHALLACTION_ATTRIBUTE_RESULT:
+		case uml::umlPackage::UNMARSHALLACTION_ATTRIBUTE_OBJECT:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getObject())); //24627
+		case uml::umlPackage::UNMARSHALLACTION_ATTRIBUTE_RESULT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::OutputPin>::iterator iter = m_result->begin();
@@ -524,10 +524,10 @@ Any UnmarshallActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //24728
+			return eAny(tempList); //24628
 		}
-		case uml::UmlPackage::UNMARSHALLACTION_ATTRIBUTE_UNMARSHALLTYPE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getUnmarshallType())); //24729
+		case uml::umlPackage::UNMARSHALLACTION_ATTRIBUTE_UNMARSHALLTYPE:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getUnmarshallType())); //24629
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -535,12 +535,12 @@ bool UnmarshallActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::UNMARSHALLACTION_ATTRIBUTE_OBJECT:
-			return getObject() != nullptr; //24727
-		case uml::UmlPackage::UNMARSHALLACTION_ATTRIBUTE_RESULT:
-			return getResult() != nullptr; //24728
-		case uml::UmlPackage::UNMARSHALLACTION_ATTRIBUTE_UNMARSHALLTYPE:
-			return getUnmarshallType() != nullptr; //24729
+		case uml::umlPackage::UNMARSHALLACTION_ATTRIBUTE_OBJECT:
+			return getObject() != nullptr; //24627
+		case uml::umlPackage::UNMARSHALLACTION_ATTRIBUTE_RESULT:
+			return getResult() != nullptr; //24628
+		case uml::umlPackage::UNMARSHALLACTION_ATTRIBUTE_UNMARSHALLTYPE:
+			return getUnmarshallType() != nullptr; //24629
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
@@ -548,15 +548,15 @@ bool UnmarshallActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::UNMARSHALLACTION_ATTRIBUTE_OBJECT:
+		case uml::umlPackage::UNMARSHALLACTION_ATTRIBUTE_OBJECT:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::InputPin> _object = std::dynamic_pointer_cast<uml::InputPin>(_temp);
-			setObject(_object); //24727
+			setObject(_object); //24627
 			return true;
 		}
-		case uml::UmlPackage::UNMARSHALLACTION_ATTRIBUTE_RESULT:
+		case uml::umlPackage::UNMARSHALLACTION_ATTRIBUTE_RESULT:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -592,12 +592,12 @@ bool UnmarshallActionImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case uml::UmlPackage::UNMARSHALLACTION_ATTRIBUTE_UNMARSHALLTYPE:
+		case uml::umlPackage::UNMARSHALLACTION_ATTRIBUTE_UNMARSHALLTYPE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Classifier> _unmarshallType = std::dynamic_pointer_cast<uml::Classifier>(_temp);
-			setUnmarshallType(_unmarshallType); //24729
+			setUnmarshallType(_unmarshallType); //24629
 			return true;
 		}
 	}
@@ -616,7 +616,7 @@ void UnmarshallActionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHa
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -651,7 +651,7 @@ void UnmarshallActionImpl::loadAttributes(std::shared_ptr<persistence::interface
 
 void UnmarshallActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -704,7 +704,7 @@ void UnmarshallActionImpl::resolveReferences(const int featureID, std::list<std:
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::UNMARSHALLACTION_ATTRIBUTE_UNMARSHALLTYPE:
+		case uml::umlPackage::UNMARSHALLACTION_ATTRIBUTE_UNMARSHALLTYPE:
 		{
 			if (references.size() == 1)
 			{
@@ -729,7 +729,6 @@ void UnmarshallActionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHa
 	
 	ActivityNodeImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);
@@ -752,7 +751,7 @@ void UnmarshallActionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 		// Save 'object'
 		std::shared_ptr<uml::InputPin > object = this->getObject();

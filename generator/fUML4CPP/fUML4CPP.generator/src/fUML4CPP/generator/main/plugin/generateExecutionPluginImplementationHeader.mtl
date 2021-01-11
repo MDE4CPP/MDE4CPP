@@ -18,18 +18,18 @@
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
 [template public generateExecutionPluginImplHeader(aPackage : Package)]
-[file (aPackage.getPackageName().concat('Exec/impl/').concat(aPackage.name.toUpperFirst()).concat('ExecPluginImpl.hpp'), false, 'UTF-8')]
+[file (aPackage.generateNamespacePath(false).concat('Exec/impl/').concat(aPackage.name).concat('ExecPluginImpl.hpp'), false, 'UTF-8')]
 [startGuard(aPackage,'ExecPluginImpl')/]
 
-#include "[aPackage.getPackageName()/]Exec/[aPackage.name.toUpperFirst()/]ExecPlugin.hpp"
+#include "[aPackage.generateNamespacePath(false)/]Exec/[aPackage.name/]ExecPlugin.hpp"
 
-namespace [aPackage.name/] 
+namespace [aPackage.generateNamespace(false)/] 
 {
-	class [aPackage.name.toUpperFirst().concat('ExecPluginImpl')/] : virtual public [aPackage.name.toUpperFirst().concat('ExecPlugin')/] 
+	class [aPackage.name.concat('ExecPluginImpl')/] : virtual public [aPackage.name.concat('ExecPlugin')/] 
 	{
 		public:
-			[aPackage.name.toUpperFirst()/]ExecPluginImpl();
-			virtual ~[aPackage.name.toUpperFirst()/]ExecPluginImpl();
+			[aPackage.name/]ExecPluginImpl();
+			virtual ~[aPackage.name/]ExecPluginImpl();
 		
 			virtual std::string eclipseURI();
 			virtual std::string eNAME();

@@ -54,8 +54,8 @@
 #include "uml/Type.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -98,11 +98,11 @@ TypeImpl::TypeImpl(std::weak_ptr<uml::Package > par_Package, const int reference
 {
 	switch(reference_id)
 	{	
-	case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
+	case umlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
 		m_owningPackage = par_Package;
 		m_namespace = par_Package;
 		 return;
-	case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
+	case umlPackage::TYPE_ATTRIBUTE_PACKAGE:
 		m_package = par_Package;
 		m_namespace = par_Package;
 		 return;
@@ -179,7 +179,7 @@ std::shared_ptr<ecore::EObject>  TypeImpl::copy() const
 
 std::shared_ptr<ecore::EClass> TypeImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getType_Class();
+	return uml::umlPackage::eInstance()->getType_Class();
 }
 
 //*********************************
@@ -302,8 +302,8 @@ Any TypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getPackage().lock())); //24512
+		case uml::umlPackage::TYPE_ATTRIBUTE_PACKAGE:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getPackage().lock())); //24412
 	}
 	return PackageableElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -311,8 +311,8 @@ bool TypeImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
-			return getPackage().lock() != nullptr; //24512
+		case uml::umlPackage::TYPE_ATTRIBUTE_PACKAGE:
+			return getPackage().lock() != nullptr; //24412
 	}
 	return PackageableElementImpl::internalEIsSet(featureID);
 }
@@ -320,12 +320,12 @@ bool TypeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
+		case uml::umlPackage::TYPE_ATTRIBUTE_PACKAGE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Package> _package = std::dynamic_pointer_cast<uml::Package>(_temp);
-			setPackage(_package); //24512
+			setPackage(_package); //24412
 			return true;
 		}
 	}
@@ -344,7 +344,7 @@ void TypeImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadH
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -360,7 +360,7 @@ void TypeImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHand
 
 void TypeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	PackageableElementImpl::loadNode(nodeName, loadHandler);
@@ -370,7 +370,7 @@ void TypeImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
+		case uml::umlPackage::TYPE_ATTRIBUTE_PACKAGE:
 		{
 			if (references.size() == 1)
 			{
@@ -409,7 +409,7 @@ void TypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 

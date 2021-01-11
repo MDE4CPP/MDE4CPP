@@ -44,8 +44,8 @@
 #include "uml/ObjectNode.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -126,7 +126,7 @@ std::shared_ptr<ecore::EObject>  ExceptionHandlerImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ExceptionHandlerImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getExceptionHandler_Class();
+	return uml::umlPackage::eInstance()->getExceptionHandler_Class();
 }
 
 //*********************************
@@ -298,9 +298,9 @@ Any ExceptionHandlerImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::EXCEPTIONHANDLER_ATTRIBUTE_EXCEPTIONINPUT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getExceptionInput())); //883
-		case uml::UmlPackage::EXCEPTIONHANDLER_ATTRIBUTE_EXCEPTIONTYPE:
+		case uml::umlPackage::EXCEPTIONHANDLER_ATTRIBUTE_EXCEPTIONINPUT:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getExceptionInput())); //873
+		case uml::umlPackage::EXCEPTIONHANDLER_ATTRIBUTE_EXCEPTIONTYPE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Classifier>::iterator iter = m_exceptionType->begin();
@@ -310,12 +310,12 @@ Any ExceptionHandlerImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //884
+			return eAny(tempList); //874
 		}
-		case uml::UmlPackage::EXCEPTIONHANDLER_ATTRIBUTE_HANDLERBODY:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getHandlerBody())); //885
-		case uml::UmlPackage::EXCEPTIONHANDLER_ATTRIBUTE_PROTECTEDNODE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getProtectedNode().lock())); //886
+		case uml::umlPackage::EXCEPTIONHANDLER_ATTRIBUTE_HANDLERBODY:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getHandlerBody())); //875
+		case uml::umlPackage::EXCEPTIONHANDLER_ATTRIBUTE_PROTECTEDNODE:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getProtectedNode().lock())); //876
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -323,14 +323,14 @@ bool ExceptionHandlerImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::EXCEPTIONHANDLER_ATTRIBUTE_EXCEPTIONINPUT:
-			return getExceptionInput() != nullptr; //883
-		case uml::UmlPackage::EXCEPTIONHANDLER_ATTRIBUTE_EXCEPTIONTYPE:
-			return getExceptionType() != nullptr; //884
-		case uml::UmlPackage::EXCEPTIONHANDLER_ATTRIBUTE_HANDLERBODY:
-			return getHandlerBody() != nullptr; //885
-		case uml::UmlPackage::EXCEPTIONHANDLER_ATTRIBUTE_PROTECTEDNODE:
-			return getProtectedNode().lock() != nullptr; //886
+		case uml::umlPackage::EXCEPTIONHANDLER_ATTRIBUTE_EXCEPTIONINPUT:
+			return getExceptionInput() != nullptr; //873
+		case uml::umlPackage::EXCEPTIONHANDLER_ATTRIBUTE_EXCEPTIONTYPE:
+			return getExceptionType() != nullptr; //874
+		case uml::umlPackage::EXCEPTIONHANDLER_ATTRIBUTE_HANDLERBODY:
+			return getHandlerBody() != nullptr; //875
+		case uml::umlPackage::EXCEPTIONHANDLER_ATTRIBUTE_PROTECTEDNODE:
+			return getProtectedNode().lock() != nullptr; //876
 	}
 	return ElementImpl::internalEIsSet(featureID);
 }
@@ -338,15 +338,15 @@ bool ExceptionHandlerImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::EXCEPTIONHANDLER_ATTRIBUTE_EXCEPTIONINPUT:
+		case uml::umlPackage::EXCEPTIONHANDLER_ATTRIBUTE_EXCEPTIONINPUT:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ObjectNode> _exceptionInput = std::dynamic_pointer_cast<uml::ObjectNode>(_temp);
-			setExceptionInput(_exceptionInput); //883
+			setExceptionInput(_exceptionInput); //873
 			return true;
 		}
-		case uml::UmlPackage::EXCEPTIONHANDLER_ATTRIBUTE_EXCEPTIONTYPE:
+		case uml::umlPackage::EXCEPTIONHANDLER_ATTRIBUTE_EXCEPTIONTYPE:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -382,20 +382,20 @@ bool ExceptionHandlerImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case uml::UmlPackage::EXCEPTIONHANDLER_ATTRIBUTE_HANDLERBODY:
+		case uml::umlPackage::EXCEPTIONHANDLER_ATTRIBUTE_HANDLERBODY:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ExecutableNode> _handlerBody = std::dynamic_pointer_cast<uml::ExecutableNode>(_temp);
-			setHandlerBody(_handlerBody); //885
+			setHandlerBody(_handlerBody); //875
 			return true;
 		}
-		case uml::UmlPackage::EXCEPTIONHANDLER_ATTRIBUTE_PROTECTEDNODE:
+		case uml::umlPackage::EXCEPTIONHANDLER_ATTRIBUTE_PROTECTEDNODE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ExecutableNode> _protectedNode = std::dynamic_pointer_cast<uml::ExecutableNode>(_temp);
-			setProtectedNode(_protectedNode); //886
+			setProtectedNode(_protectedNode); //876
 			return true;
 		}
 	}
@@ -414,7 +414,7 @@ void ExceptionHandlerImpl::load(std::shared_ptr<persistence::interfaces::XLoadHa
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -463,7 +463,7 @@ void ExceptionHandlerImpl::loadAttributes(std::shared_ptr<persistence::interface
 
 void ExceptionHandlerImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	ElementImpl::loadNode(nodeName, loadHandler);
@@ -473,7 +473,7 @@ void ExceptionHandlerImpl::resolveReferences(const int featureID, std::list<std:
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::EXCEPTIONHANDLER_ATTRIBUTE_EXCEPTIONINPUT:
+		case uml::umlPackage::EXCEPTIONHANDLER_ATTRIBUTE_EXCEPTIONINPUT:
 		{
 			if (references.size() == 1)
 			{
@@ -485,7 +485,7 @@ void ExceptionHandlerImpl::resolveReferences(const int featureID, std::list<std:
 			return;
 		}
 
-		case uml::UmlPackage::EXCEPTIONHANDLER_ATTRIBUTE_EXCEPTIONTYPE:
+		case uml::umlPackage::EXCEPTIONHANDLER_ATTRIBUTE_EXCEPTIONTYPE:
 		{
 			std::shared_ptr<Bag<uml::Classifier>> _exceptionType = getExceptionType();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -499,7 +499,7 @@ void ExceptionHandlerImpl::resolveReferences(const int featureID, std::list<std:
 			return;
 		}
 
-		case uml::UmlPackage::EXCEPTIONHANDLER_ATTRIBUTE_HANDLERBODY:
+		case uml::umlPackage::EXCEPTIONHANDLER_ATTRIBUTE_HANDLERBODY:
 		{
 			if (references.size() == 1)
 			{
@@ -511,7 +511,7 @@ void ExceptionHandlerImpl::resolveReferences(const int featureID, std::list<std:
 			return;
 		}
 
-		case uml::UmlPackage::EXCEPTIONHANDLER_ATTRIBUTE_PROTECTEDNODE:
+		case uml::umlPackage::EXCEPTIONHANDLER_ATTRIBUTE_PROTECTEDNODE:
 		{
 			if (references.size() == 1)
 			{
@@ -543,7 +543,7 @@ void ExceptionHandlerImpl::saveContent(std::shared_ptr<persistence::interfaces::
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 

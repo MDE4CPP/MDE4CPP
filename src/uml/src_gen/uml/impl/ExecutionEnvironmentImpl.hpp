@@ -28,7 +28,7 @@ namespace uml
 			ExecutionEnvironmentImpl& operator=(ExecutionEnvironmentImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			ExecutionEnvironmentImpl();
 			virtual std::shared_ptr<ExecutionEnvironment> getThisExecutionEnvironmentPtr() const;
 			virtual void setThisExecutionEnvironmentPtr(std::weak_ptr<ExecutionEnvironment> thisExecutionEnvironmentPtr);

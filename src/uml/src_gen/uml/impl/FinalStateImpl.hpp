@@ -28,7 +28,7 @@ namespace uml
 			FinalStateImpl& operator=(FinalStateImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			FinalStateImpl();
 			virtual std::shared_ptr<FinalState> getThisFinalStatePtr() const;
 			virtual void setThisFinalStatePtr(std::weak_ptr<FinalState> thisFinalStatePtr);

@@ -28,7 +28,7 @@ namespace uml
 			ActivityImpl& operator=(ActivityImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			ActivityImpl();
 			virtual std::shared_ptr<Activity> getThisActivityPtr() const;
 			virtual void setThisActivityPtr(std::weak_ptr<Activity> thisActivityPtr);

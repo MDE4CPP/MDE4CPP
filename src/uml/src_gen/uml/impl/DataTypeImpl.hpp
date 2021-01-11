@@ -28,7 +28,7 @@ namespace uml
 			DataTypeImpl& operator=(DataTypeImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			DataTypeImpl();
 			virtual std::shared_ptr<DataType> getThisDataTypePtr() const;
 			virtual void setThisDataTypePtr(std::weak_ptr<DataType> thisDataTypePtr);

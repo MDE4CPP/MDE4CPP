@@ -28,7 +28,7 @@ namespace uml
 			StateInvariantImpl& operator=(StateInvariantImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			StateInvariantImpl();
 			virtual std::shared_ptr<StateInvariant> getThisStateInvariantPtr() const;
 			virtual void setThisStateInvariantPtr(std::weak_ptr<StateInvariant> thisStateInvariantPtr);

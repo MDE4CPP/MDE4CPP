@@ -28,7 +28,7 @@ namespace uml
 			PackageMergeImpl& operator=(PackageMergeImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			PackageMergeImpl();
 			virtual std::shared_ptr<PackageMerge> getThisPackageMergePtr() const;
 			virtual void setThisPackageMergePtr(std::weak_ptr<PackageMerge> thisPackageMergePtr);

@@ -28,7 +28,7 @@ namespace uml
 			ManifestationImpl& operator=(ManifestationImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			ManifestationImpl();
 			virtual std::shared_ptr<Manifestation> getThisManifestationPtr() const;
 			virtual void setThisManifestationPtr(std::weak_ptr<Manifestation> thisManifestationPtr);

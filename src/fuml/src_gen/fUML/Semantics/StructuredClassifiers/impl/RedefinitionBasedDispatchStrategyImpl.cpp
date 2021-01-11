@@ -24,7 +24,7 @@
 
 //Includes from codegen annotation
 #include "abstractDataTypes/Subset.hpp"
-#include "uml/UmlPackage.hpp"
+#include "uml/umlPackage.hpp"
 #include "uml/NamedElement.hpp"
 #include "uml/Class.hpp"
 #include "uml/Operation.hpp"
@@ -47,8 +47,8 @@
 #include "fUML/Semantics/StructuredClassifiers/impl/StructuredClassifiersFactoryImpl.hpp"
 #include "fUML/Semantics/StructuredClassifiers/impl/StructuredClassifiersPackageImpl.hpp"
 
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
+#include "fUML/fUMLFactory.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsFactory.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
 
@@ -133,7 +133,7 @@ std::shared_ptr<uml::Behavior> RedefinitionBasedDispatchStrategyImpl::retrieveMe
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		std::shared_ptr<uml::Behavior> method = nullptr;
+		std::shared_ptr<uml::Behavior> method = DispatchStrategyImpl::retrieveMethod(object, operation);
 	unsigned int i = 0;
 	while(method == nullptr && (i < object->getTypes()->size()))
 	{
@@ -145,7 +145,7 @@ std::shared_ptr<uml::Behavior> RedefinitionBasedDispatchStrategyImpl::retrieveMe
 		Because of that, interfaces are also taken into account here.
 		*/
 		unsigned long metaElementID = type->eClass()->getMetaElementID();
-		if(metaElementID == uml::UmlPackage::CLASS_CLASS || metaElementID == uml::UmlPackage::INTERFACE_CLASS)
+		if(metaElementID == uml::umlPackage::CLASS_CLASS || metaElementID == uml::umlPackage::INTERFACE_CLASS)
 		{
 		std::shared_ptr<Bag<uml::Operation> > memberOperations = type->getAllOperations();
 		unsigned int j = 0;
@@ -230,7 +230,7 @@ void RedefinitionBasedDispatchStrategyImpl::load(std::shared_ptr<persistence::in
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get FUMLFactory
+	// get fUMLFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{

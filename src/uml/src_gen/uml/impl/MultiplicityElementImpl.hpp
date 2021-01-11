@@ -28,7 +28,7 @@ namespace uml
 			MultiplicityElementImpl& operator=(MultiplicityElementImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			MultiplicityElementImpl();
 			virtual std::shared_ptr<MultiplicityElement> getThisMultiplicityElementPtr() const;
 			virtual void setThisMultiplicityElementPtr(std::weak_ptr<MultiplicityElement> thisMultiplicityElementPtr);

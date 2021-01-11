@@ -29,7 +29,7 @@ namespace uml
 			ValueSpecificationImpl& operator=(ValueSpecificationImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			ValueSpecificationImpl();
 			virtual std::shared_ptr<ValueSpecification> getThisValueSpecificationPtr() const;
 			virtual void setThisValueSpecificationPtr(std::weak_ptr<ValueSpecification> thisValueSpecificationPtr);

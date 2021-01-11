@@ -28,7 +28,7 @@ namespace uml
 			PrimitiveTypeImpl& operator=(PrimitiveTypeImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			PrimitiveTypeImpl();
 			virtual std::shared_ptr<PrimitiveType> getThisPrimitiveTypePtr() const;
 			virtual void setThisPrimitiveTypePtr(std::weak_ptr<PrimitiveType> thisPrimitiveTypePtr);

@@ -49,8 +49,8 @@
 #include "uml/StringExpression.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -153,7 +153,7 @@ std::shared_ptr<ecore::EObject>  CollaborationUseImpl::copy() const
 
 std::shared_ptr<ecore::EClass> CollaborationUseImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getCollaborationUse_Class();
+	return uml::umlPackage::eInstance()->getCollaborationUse_Class();
 }
 
 //*********************************
@@ -284,7 +284,7 @@ Any CollaborationUseImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::COLLABORATIONUSE_ATTRIBUTE_ROLEBINDING:
+		case uml::umlPackage::COLLABORATIONUSE_ATTRIBUTE_ROLEBINDING:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Dependency>::iterator iter = m_roleBinding->begin();
@@ -294,10 +294,10 @@ Any CollaborationUseImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //449
+			return eAny(tempList); //439
 		}
-		case uml::UmlPackage::COLLABORATIONUSE_ATTRIBUTE_TYPE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getType())); //4410
+		case uml::umlPackage::COLLABORATIONUSE_ATTRIBUTE_TYPE:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getType())); //4310
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -305,10 +305,10 @@ bool CollaborationUseImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::COLLABORATIONUSE_ATTRIBUTE_ROLEBINDING:
-			return getRoleBinding() != nullptr; //449
-		case uml::UmlPackage::COLLABORATIONUSE_ATTRIBUTE_TYPE:
-			return getType() != nullptr; //4410
+		case uml::umlPackage::COLLABORATIONUSE_ATTRIBUTE_ROLEBINDING:
+			return getRoleBinding() != nullptr; //439
+		case uml::umlPackage::COLLABORATIONUSE_ATTRIBUTE_TYPE:
+			return getType() != nullptr; //4310
 	}
 	return NamedElementImpl::internalEIsSet(featureID);
 }
@@ -316,7 +316,7 @@ bool CollaborationUseImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::COLLABORATIONUSE_ATTRIBUTE_ROLEBINDING:
+		case uml::umlPackage::COLLABORATIONUSE_ATTRIBUTE_ROLEBINDING:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -352,12 +352,12 @@ bool CollaborationUseImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case uml::UmlPackage::COLLABORATIONUSE_ATTRIBUTE_TYPE:
+		case uml::umlPackage::COLLABORATIONUSE_ATTRIBUTE_TYPE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Collaboration> _type = std::dynamic_pointer_cast<uml::Collaboration>(_temp);
-			setType(_type); //4410
+			setType(_type); //4310
 			return true;
 		}
 	}
@@ -376,7 +376,7 @@ void CollaborationUseImpl::load(std::shared_ptr<persistence::interfaces::XLoadHa
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -411,7 +411,7 @@ void CollaborationUseImpl::loadAttributes(std::shared_ptr<persistence::interface
 
 void CollaborationUseImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -448,7 +448,7 @@ void CollaborationUseImpl::resolveReferences(const int featureID, std::list<std:
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::COLLABORATIONUSE_ATTRIBUTE_TYPE:
+		case uml::umlPackage::COLLABORATIONUSE_ATTRIBUTE_TYPE:
 		{
 			if (references.size() == 1)
 			{
@@ -483,7 +483,7 @@ void CollaborationUseImpl::saveContent(std::shared_ptr<persistence::interfaces::
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 		// Save 'roleBinding'
 		for (std::shared_ptr<uml::Dependency> roleBinding : *this->getRoleBinding()) 

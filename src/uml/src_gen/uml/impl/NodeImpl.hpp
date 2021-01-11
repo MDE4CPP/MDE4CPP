@@ -29,7 +29,7 @@ namespace uml
 			NodeImpl& operator=(NodeImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			NodeImpl();
 			virtual std::shared_ptr<Node> getThisNodePtr() const;
 			virtual void setThisNodePtr(std::weak_ptr<Node> thisNodePtr);

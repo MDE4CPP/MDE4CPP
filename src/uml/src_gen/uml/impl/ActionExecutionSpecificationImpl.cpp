@@ -59,8 +59,8 @@
 #include "uml/StringExpression.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -184,7 +184,7 @@ std::shared_ptr<ecore::EObject>  ActionExecutionSpecificationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ActionExecutionSpecificationImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getActionExecutionSpecification_Class();
+	return uml::umlPackage::eInstance()->getActionExecutionSpecification_Class();
 }
 
 //*********************************
@@ -290,7 +290,7 @@ Any ActionExecutionSpecificationImpl::eGet(int featureID, bool resolve, bool cor
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::ACTIONEXECUTIONSPECIFICATION_ATTRIBUTE_ACTION:
+		case uml::umlPackage::ACTIONEXECUTIONSPECIFICATION_ATTRIBUTE_ACTION:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getAction())); //515
 	}
 	return ExecutionSpecificationImpl::eGet(featureID, resolve, coreType);
@@ -299,7 +299,7 @@ bool ActionExecutionSpecificationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::ACTIONEXECUTIONSPECIFICATION_ATTRIBUTE_ACTION:
+		case uml::umlPackage::ACTIONEXECUTIONSPECIFICATION_ATTRIBUTE_ACTION:
 			return getAction() != nullptr; //515
 	}
 	return ExecutionSpecificationImpl::internalEIsSet(featureID);
@@ -308,7 +308,7 @@ bool ActionExecutionSpecificationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::ACTIONEXECUTIONSPECIFICATION_ATTRIBUTE_ACTION:
+		case uml::umlPackage::ACTIONEXECUTIONSPECIFICATION_ATTRIBUTE_ACTION:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -332,7 +332,7 @@ void ActionExecutionSpecificationImpl::load(std::shared_ptr<persistence::interfa
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -367,7 +367,7 @@ void ActionExecutionSpecificationImpl::loadAttributes(std::shared_ptr<persistenc
 
 void ActionExecutionSpecificationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	ExecutionSpecificationImpl::loadNode(nodeName, loadHandler);
@@ -377,7 +377,7 @@ void ActionExecutionSpecificationImpl::resolveReferences(const int featureID, st
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::ACTIONEXECUTIONSPECIFICATION_ATTRIBUTE_ACTION:
+		case uml::umlPackage::ACTIONEXECUTIONSPECIFICATION_ATTRIBUTE_ACTION:
 		{
 			if (references.size() == 1)
 			{
@@ -418,7 +418,7 @@ void ActionExecutionSpecificationImpl::saveContent(std::shared_ptr<persistence::
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 

@@ -84,8 +84,8 @@
 #include "uml/UseCase.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -128,11 +128,11 @@ PrimitiveTypeImpl::PrimitiveTypeImpl(std::weak_ptr<uml::Package > par_Package, c
 {
 	switch(reference_id)
 	{	
-	case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
+	case umlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
 		m_owningPackage = par_Package;
 		m_namespace = par_Package;
 		 return;
-	case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
+	case umlPackage::TYPE_ATTRIBUTE_PACKAGE:
 		m_package = par_Package;
 		m_namespace = par_Package;
 		 return;
@@ -348,7 +348,7 @@ std::shared_ptr<ecore::EObject>  PrimitiveTypeImpl::copy() const
 
 std::shared_ptr<ecore::EClass> PrimitiveTypeImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getPrimitiveType_Class();
+	return uml::umlPackage::eInstance()->getPrimitiveType_Class();
 }
 
 //*********************************
@@ -559,7 +559,7 @@ void PrimitiveTypeImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandl
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -575,7 +575,7 @@ void PrimitiveTypeImpl::loadAttributes(std::shared_ptr<persistence::interfaces::
 
 void PrimitiveTypeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	DataTypeImpl::loadNode(nodeName, loadHandler);
@@ -622,7 +622,7 @@ void PrimitiveTypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 

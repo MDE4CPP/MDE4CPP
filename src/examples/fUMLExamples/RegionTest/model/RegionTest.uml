@@ -1,28 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_0MvC0BmJEeqOHbkWkfH76A" name="RegionTest">
   <eAnnotations xmi:id="_lOoioBnHEeqOHbkWkfH76A" source="prepareApplication">
-    <details xmi:id="_H9r7oBnIEeqOHbkWkfH76A" key="sourceCodeMain" value="std::shared_ptr&lt;A> a = factory->createA();&#xA;&#x9;auto b = a->createB();&#xA;&#x9;a->doB(b);&#xA;&#x9;std::cout &lt;&lt; &quot;END&quot; &lt;&lt; std::endl;"/>
+    <details xmi:id="_H9r7oBnIEeqOHbkWkfH76A" key="sourceCodeMain" value="std::shared_ptr&lt;A> a = factory->createA();&#xA;auto b = a->createB();&#xA;a->doB(b);&#xA;std::cout &lt;&lt; &quot;END&quot; &lt;&lt; std::endl;"/>
   </eAnnotations>
   <packagedElement xmi:type="uml:Class" xmi:id="_5uuEsBmJEeqOHbkWkfH76A" name="A">
     <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_WTRN0BmLEeqOHbkWkfH76A" name="fbCreateB" specification="_Yu_e0BmKEeqOHbkWkfH76A">
-      <ownedParameter xmi:id="_YojDIBmLEeqOHbkWkfH76A" name="b" type="_7Vcx8BmJEeqOHbkWkfH76A" direction="return">
+      <ownedParameter xmi:id="_YojDIBmLEeqOHbkWkfH76A" name="bArray" type="_7Vcx8BmJEeqOHbkWkfH76A" direction="return">
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_YojDIRmLEeqOHbkWkfH76A"/>
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_YojDIhmLEeqOHbkWkfH76A" value="*"/>
       </ownedParameter>
       <language>CPP</language>
       <language>INCLUDE</language>
-      <body>std::shared_ptr&lt;Bag&lt;B>> bag(new Bag&lt;B>());&#xD;
-	for (int i=0; i&lt;10; i++)&#xD;
-	{&#xD;
-		std::shared_ptr&lt;B> b = RegionTestFactory::eInstance()->createB();&#xD;
-		b->setX(i);&#xD;
-		bag->push_back(b);&#xD;
-	}&#xD;
-	return bag;</body>
+      <body>for (int i=0; i&lt;10; i++)&#xD;
+{&#xD;
+	std::shared_ptr&lt;B> b = RegionTestFactory::eInstance()->createB();&#xD;
+	b->setX(i);&#xD;
+	bArray->push_back(b);&#xD;
+}</body>
       <body>#include &quot;RegionTest/RegionTestFactory.hpp&quot;</body>
     </ownedBehavior>
     <ownedBehavior xmi:type="uml:Activity" xmi:id="__OsQMBmQEeqOHbkWkfH76A" name="ActDoB" specification="_bVXrMBmKEeqOHbkWkfH76A" node="_SS5g8BmREeqOHbkWkfH76A _eXPckBmREeqOHbkWkfH76A _gb404BmREeqOHbkWkfH76A" group="_eXPckBmREeqOHbkWkfH76A">
-      <ownedParameter xmi:id="_SS2doBmREeqOHbkWkfH76A" name="b" type="_7Vcx8BmJEeqOHbkWkfH76A">
+      <ownedParameter xmi:id="_SS2doBmREeqOHbkWkfH76A" name="bArray" type="_7Vcx8BmJEeqOHbkWkfH76A">
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_T51CgBmREeqOHbkWkfH76A"/>
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_UQB8ABmREeqOHbkWkfH76A" value="*"/>
       </ownedParameter>
@@ -39,13 +37,13 @@
       <node xmi:type="uml:ExpansionNode" xmi:id="_gb404BmREeqOHbkWkfH76A" name="ExpansionNodeB" incoming="_qnFdkBmREeqOHbkWkfH76A" outgoing="_u_LfMBmREeqOHbkWkfH76A" type="_7Vcx8BmJEeqOHbkWkfH76A" regionAsInput="_eXPckBmREeqOHbkWkfH76A"/>
     </ownedBehavior>
     <ownedOperation xmi:id="_Yu_e0BmKEeqOHbkWkfH76A" name="createB" method="_WTRN0BmLEeqOHbkWkfH76A">
-      <ownedParameter xmi:id="_wXsOcBmKEeqOHbkWkfH76A" name="b" type="_7Vcx8BmJEeqOHbkWkfH76A" direction="return">
+      <ownedParameter xmi:id="_wXsOcBmKEeqOHbkWkfH76A" name="bArray" type="_7Vcx8BmJEeqOHbkWkfH76A" direction="return">
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_5WDhgBmTEeqOHbkWkfH76A"/>
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_528BABmTEeqOHbkWkfH76A" value="*"/>
       </ownedParameter>
     </ownedOperation>
     <ownedOperation xmi:id="_bVXrMBmKEeqOHbkWkfH76A" name="doB" method="__OsQMBmQEeqOHbkWkfH76A">
-      <ownedParameter xmi:id="_zf-1EBmKEeqOHbkWkfH76A" name="b" type="_7Vcx8BmJEeqOHbkWkfH76A">
+      <ownedParameter xmi:id="_zf-1EBmKEeqOHbkWkfH76A" name="bArray" type="_7Vcx8BmJEeqOHbkWkfH76A">
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_kdWIQBnKEeqOHbkWkfH76A"/>
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_kmO-gBnKEeqOHbkWkfH76A" value="*"/>
       </ownedParameter>
@@ -58,6 +56,7 @@
       <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_FfQTghmKEeqOHbkWkfH76A" value="1"/>
     </ownedAttribute>
     <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_T4b_kBmKEeqOHbkWkfH76A" name="fbPrint" specification="_QhIskBmKEeqOHbkWkfH76A">
+      <eAnnotations xmi:id="_cZJCoFAYEeukhN12il4vjA" source="noExecution"/>
       <language>CPP</language>
       <body>std::cout &lt;&lt; &quot;printing content of class B object: x=&quot; &lt;&lt; m_x &lt;&lt; std::endl;</body>
     </ownedBehavior>

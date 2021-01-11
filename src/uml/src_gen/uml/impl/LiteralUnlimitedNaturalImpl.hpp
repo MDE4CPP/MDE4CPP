@@ -28,7 +28,7 @@ namespace uml
 			LiteralUnlimitedNaturalImpl& operator=(LiteralUnlimitedNaturalImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			LiteralUnlimitedNaturalImpl();
 			virtual std::shared_ptr<LiteralUnlimitedNatural> getThisLiteralUnlimitedNaturalPtr() const;
 			virtual void setThisLiteralUnlimitedNaturalPtr(std::weak_ptr<LiteralUnlimitedNatural> thisLiteralUnlimitedNaturalPtr);

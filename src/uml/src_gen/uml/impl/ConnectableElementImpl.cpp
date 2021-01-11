@@ -54,8 +54,8 @@
 #include "uml/TypedElement.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -159,7 +159,7 @@ std::shared_ptr<ecore::EObject>  ConnectableElementImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ConnectableElementImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getConnectableElement_Class();
+	return uml::umlPackage::eInstance()->getConnectableElement_Class();
 }
 
 //*********************************
@@ -259,7 +259,7 @@ Any ConnectableElementImpl::eGet(int featureID, bool resolve, bool coreType) con
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::CONNECTABLEELEMENT_ATTRIBUTE_END:
+		case uml::umlPackage::CONNECTABLEELEMENT_ATTRIBUTE_END:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::ConnectorEnd>::iterator iter = m_end->begin();
@@ -269,7 +269,7 @@ Any ConnectableElementImpl::eGet(int featureID, bool resolve, bool coreType) con
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //5112
+			return eAny(tempList); //5012
 		}
 	}
 	Any result;
@@ -285,8 +285,8 @@ bool ConnectableElementImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::CONNECTABLEELEMENT_ATTRIBUTE_END:
-			return getEnd() != nullptr; //5112
+		case uml::umlPackage::CONNECTABLEELEMENT_ATTRIBUTE_END:
+			return getEnd() != nullptr; //5012
 	}
 	bool result = false;
 	result = ParameterableElementImpl::internalEIsSet(featureID);
@@ -324,7 +324,7 @@ void ConnectableElementImpl::load(std::shared_ptr<persistence::interfaces::XLoad
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -341,7 +341,7 @@ void ConnectableElementImpl::loadAttributes(std::shared_ptr<persistence::interfa
 
 void ConnectableElementImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	ParameterableElementImpl::loadNode(nodeName, loadHandler);
@@ -378,7 +378,7 @@ void ConnectableElementImpl::saveContent(std::shared_ptr<persistence::interfaces
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 

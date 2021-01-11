@@ -69,8 +69,8 @@
 #include "fUML/Semantics/Activities/impl/ActivitiesFactoryImpl.hpp"
 #include "fUML/Semantics/Activities/impl/ActivitiesPackageImpl.hpp"
 
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
+#include "fUML/fUMLFactory.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsFactory.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
 
@@ -230,11 +230,11 @@ void ExpansionRegionActivationImpl::doOutput()
 		for (unsigned int i=0; i<activationGroupsSize; i++)
 		{
 			std::shared_ptr<ExpansionActivationGroup> activationGroup = m_activationGroups->at(i);
-			std::shared_ptr<Bag<fUML::Semantics::Actions::OutputPinActivation>> groupOutputs = activationGroup->getGroupOutputs();
+			std::shared_ptr<Bag<fUML::Semantics::Activities::ExpansionNodeActivation>> groupOutputs = activationGroup->getGroupOutputs();
 			unsigned int groupOutputsSize = groupOutputs->size();
 			for (unsigned j=0; j<groupOutputsSize; j++)
 			{
-				std::shared_ptr<fUML::Semantics::Actions::OutputPinActivation> groupOutput = groupOutputs->at(j);
+				std::shared_ptr<fUML::Semantics::Activities::ExpansionNodeActivation> groupOutput = groupOutputs->at(j);
 				std::shared_ptr<uml::ExpansionNode> outputElement = outputElements->at(j);
 				std::shared_ptr<fUML::Semantics::Activities::ExpansionNodeActivation> activation = getExpansionNodeActivation(outputElement);
 				if (activation == nullptr)
@@ -259,8 +259,9 @@ void ExpansionRegionActivationImpl::doStructuredActivity()
 	std::shared_ptr<Bag<uml::ExpansionNode>> outputElements = region->getOutputElement();
 	std::shared_ptr<fUML::Semantics::Activities::ActivitiesFactory> activitiesFactory = fUML::Semantics::Activities::ActivitiesFactory::eInstance();
 	std::shared_ptr<fUML::Semantics::Actions::ActionsFactory> actionsFactory = fUML::Semantics::Actions::ActionsFactory::eInstance();
+	std::shared_ptr<fUML::Semantics::Activities::ActivitiesFactory> activityFactory = fUML::Semantics::Activities::ActivitiesFactory::eInstance();
 
-	m_activationGroups->clear();
+	getActivationGroups()->clear();
 
 	int n = m_inputExpansionTokens->at(0)->getTokens()->size();
 	int k = 0;
@@ -271,8 +272,8 @@ void ExpansionRegionActivationImpl::doStructuredActivity()
 		activationGroup->setIndex(k);
 
 		std::shared_ptr<Bag<fUML::Semantics::Actions::OutputPinActivation>> regionInputList = activationGroup->getRegionInputs();
-		std::shared_ptr<Bag<fUML::Semantics::Actions::OutputPinActivation>> groupInputsList = activationGroup->getGroupInputs();
-		std::shared_ptr<Bag<fUML::Semantics::Actions::OutputPinActivation>> groupOutputsList = activationGroup->getGroupOutputs();
+		std::shared_ptr<Bag<fUML::Semantics::Activities::ExpansionNodeActivation>> groupInputsList = activationGroup->getGroupInputs();
+		std::shared_ptr<Bag<fUML::Semantics::Activities::ExpansionNodeActivation>> groupOutputsList = activationGroup->getGroupOutputs();
 
 		Bag<uml::InputPin>::iterator inputPinsIter = inputPins->begin();
 		Bag<uml::InputPin>::iterator inputPinsEnd = inputPins->end();
@@ -289,8 +290,9 @@ void ExpansionRegionActivationImpl::doStructuredActivity()
 		Bag<uml::ExpansionNode>::iterator intputElementsEnd = inputElements->end();
 		while (inputElementsIter != intputElementsEnd)
 		{
-			std::shared_ptr<fUML::Semantics::Actions::OutputPinActivation> groupInput = actionsFactory->createOutputPinActivation();
+			std::shared_ptr<fUML::Semantics::Activities::ExpansionNodeActivation> groupInput = activityFactory->createExpansionNodeActivation();
 			groupInput->setNode(*inputElementsIter);
+			groupInput->setGroup(activationGroup);
 			groupInput->run();
 			groupInputsList->push_back(groupInput);
 			inputElementsIter++;
@@ -300,8 +302,9 @@ void ExpansionRegionActivationImpl::doStructuredActivity()
 		Bag<uml::ExpansionNode>::iterator outputElementsEnd = outputElements->end();
 		while (outputElementsIter != outputElementsEnd)
 		{
-			std::shared_ptr<fUML::Semantics::Actions::OutputPinActivation> groupOutput = actionsFactory->createOutputPinActivation();
+			std::shared_ptr<fUML::Semantics::Activities::ExpansionNodeActivation> groupOutput = activityFactory->createExpansionNodeActivation();
 			groupOutput->setNode(*outputElementsIter);
+			groupOutput->setGroup(getGroup().lock());
 			groupOutput->run();
 			groupOutputsList->push_back(groupOutput);
 			outputElementsIter++;
@@ -424,7 +427,7 @@ void ExpansionRegionActivationImpl::runGroup(std::shared_ptr<fUML::Semantics::Ac
 		for (unsigned int i=0; i<size; i++)
 		{
 			std::shared_ptr<TokenSet> tokenSet = m_inputExpansionTokens->at(i);
-			std::shared_ptr<fUML::Semantics::Actions::OutputPinActivation> groupInput = activationGroup->getGroupInputs()->at(i);
+			std::shared_ptr<fUML::Semantics::Activities::ExpansionNodeActivation> groupInput = activationGroup->getGroupInputs()->at(i);
 			groupInput->clearTokens();
 			unsigned int index = activationGroup->getIndex();
 			if (tokenSet->getTokens()->size() > index)
@@ -505,8 +508,8 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > ExpansionRegionActivat
 	std::shared_ptr<Bag<uml::InputPin>> inputPinList = region->getInput();
 	std::shared_ptr<Bag<uml::ExpansionNode>> inputElementList = region->getInputElement();
 
-	m_inputTokens->clear();
-	m_inputExpansionTokens->clear();
+	getInputTokens()->clear();
+	getInputExpansionTokens()->clear();
 
 	Bag<uml::InputPin>::iterator inputPinIter = inputPinList->begin();
 	Bag<uml::InputPin>::iterator inputPinEnd = inputPinList->end();
@@ -564,20 +567,20 @@ void ExpansionRegionActivationImpl::terminate()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	Bag<ExpansionActivationGroup>::iterator iter = m_activationGroups->begin();
-	Bag<ExpansionActivationGroup>::iterator end = m_activationGroups->end();
+	Bag<ExpansionActivationGroup>::iterator iter = getActivationGroups()->begin();
+	Bag<ExpansionActivationGroup>::iterator end = getActivationGroups()->end();
 
 	while (iter != end)
 	{
 		std::shared_ptr<ExpansionActivationGroup> activationGroup = *iter;
-		std::shared_ptr<Bag<fUML::Semantics::Actions::OutputPinActivation>> groupOutputs = activationGroup->getGroupOutputs();
+		std::shared_ptr<Bag<fUML::Semantics::Activities::ExpansionNodeActivation>> groupOutputs = activationGroup->getGroupOutputs();
 		_beginIsolation();
 
-		Bag<fUML::Semantics::Actions::OutputPinActivation>::iterator outputIter = groupOutputs->begin();
-		Bag<fUML::Semantics::Actions::OutputPinActivation>::iterator outputEnd = groupOutputs->end();
+		Bag<fUML::Semantics::Activities::ExpansionNodeActivation>::iterator outputIter = groupOutputs->begin();
+		Bag<fUML::Semantics::Activities::ExpansionNodeActivation>::iterator outputEnd = groupOutputs->end();
 		while(outputIter != outputEnd)
 		{
-			std::shared_ptr<fUML::Semantics::Actions::OutputPinActivation> output = *outputIter;
+			std::shared_ptr<fUML::Semantics::Activities::ExpansionNodeActivation> output = *outputIter;
 			output->fire(output->takeOfferedTokens());
 			outputIter++;
 		}
@@ -597,12 +600,12 @@ void ExpansionRegionActivationImpl::terminateGroup(std::shared_ptr<fUML::Semanti
 	//generated from body annotation
 	if (isRunning() and !isSuspended())
 	{
-		std::shared_ptr<Bag<fUML::Semantics::Actions::OutputPinActivation>> groupOutputs = activationGroup->getGroupOutputs();
-		Bag<fUML::Semantics::Actions::OutputPinActivation>::iterator outputIter = groupOutputs->begin();
-		Bag<fUML::Semantics::Actions::OutputPinActivation>::iterator outputEnd = groupOutputs->end();
+		std::shared_ptr<Bag<fUML::Semantics::Activities::ExpansionNodeActivation>> groupOutputs = activationGroup->getGroupOutputs();
+		Bag<fUML::Semantics::Activities::ExpansionNodeActivation>::iterator outputIter = groupOutputs->begin();
+		Bag<fUML::Semantics::Activities::ExpansionNodeActivation>::iterator outputEnd = groupOutputs->end();
 		while(outputIter != outputEnd)
 		{
-			std::shared_ptr<fUML::Semantics::Actions::OutputPinActivation> output = *outputIter;
+			std::shared_ptr<fUML::Semantics::Activities::ExpansionNodeActivation> output = *outputIter;
 			output->fire(output->takeOfferedTokens());
 			outputIter++;
 		}
@@ -909,7 +912,7 @@ void ExpansionRegionActivationImpl::load(std::shared_ptr<persistence::interfaces
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get FUMLFactory
+	// get fUMLFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{

@@ -28,7 +28,7 @@ namespace uml
 			CommunicationPathImpl& operator=(CommunicationPathImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			CommunicationPathImpl();
 			virtual std::shared_ptr<CommunicationPath> getThisCommunicationPathPtr() const;
 			virtual void setThisCommunicationPathPtr(std::weak_ptr<CommunicationPath> thisCommunicationPathPtr);

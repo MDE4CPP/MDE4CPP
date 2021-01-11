@@ -28,7 +28,7 @@ namespace uml
 			ControlFlowImpl& operator=(ControlFlowImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			ControlFlowImpl();
 			virtual std::shared_ptr<ControlFlow> getThisControlFlowPtr() const;
 			virtual void setThisControlFlowPtr(std::weak_ptr<ControlFlow> thisControlFlowPtr);

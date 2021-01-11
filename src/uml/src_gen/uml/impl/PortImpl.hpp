@@ -28,7 +28,7 @@ namespace uml
 			PortImpl& operator=(PortImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			PortImpl();
 			virtual std::shared_ptr<Port> getThisPortPtr() const;
 			virtual void setThisPortPtr(std::weak_ptr<Port> thisPortPtr);

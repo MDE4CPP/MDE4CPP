@@ -28,7 +28,7 @@ namespace uml
 			CallBehaviorActionImpl& operator=(CallBehaviorActionImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			CallBehaviorActionImpl();
 			virtual std::shared_ptr<CallBehaviorAction> getThisCallBehaviorActionPtr() const;
 			virtual void setThisCallBehaviorActionPtr(std::weak_ptr<CallBehaviorAction> thisCallBehaviorActionPtr);

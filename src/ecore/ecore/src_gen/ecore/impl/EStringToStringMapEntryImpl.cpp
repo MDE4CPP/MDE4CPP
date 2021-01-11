@@ -32,8 +32,8 @@
 
 
 //Factories an Package includes
-#include "ecore/impl/EcoreFactoryImpl.hpp"
-#include "ecore/impl/EcorePackageImpl.hpp"
+#include "ecore/impl/ecoreFactoryImpl.hpp"
+#include "ecore/impl/ecorePackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -83,7 +83,7 @@ std::shared_ptr<ecore::EObject>  EStringToStringMapEntryImpl::copy() const
 
 std::shared_ptr<EClass> EStringToStringMapEntryImpl::eStaticClass() const
 {
-	return ecore::EcorePackage::eInstance()->getEStringToStringMapEntry_Class();
+	return ecore::ecorePackage::eInstance()->getEStringToStringMapEntry_Class();
 }
 
 //*********************************
@@ -153,9 +153,9 @@ Any EStringToStringMapEntryImpl::eGet(int featureID, bool resolve, bool coreType
 {
 	switch(featureID)
 	{
-		case ecore::EcorePackage::ESTRINGTOSTRINGMAPENTRY_ATTRIBUTE_KEY:
+		case ecore::ecorePackage::ESTRINGTOSTRINGMAPENTRY_ATTRIBUTE_KEY:
 			return eAny(getKey()); //490
-		case ecore::EcorePackage::ESTRINGTOSTRINGMAPENTRY_ATTRIBUTE_VALUE:
+		case ecore::ecorePackage::ESTRINGTOSTRINGMAPENTRY_ATTRIBUTE_VALUE:
 			return eAny(getValue()); //491
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
@@ -164,9 +164,9 @@ bool EStringToStringMapEntryImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case ecore::EcorePackage::ESTRINGTOSTRINGMAPENTRY_ATTRIBUTE_KEY:
+		case ecore::ecorePackage::ESTRINGTOSTRINGMAPENTRY_ATTRIBUTE_KEY:
 			return getKey() != ""; //490
-		case ecore::EcorePackage::ESTRINGTOSTRINGMAPENTRY_ATTRIBUTE_VALUE:
+		case ecore::ecorePackage::ESTRINGTOSTRINGMAPENTRY_ATTRIBUTE_VALUE:
 			return getValue() != ""; //491
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
@@ -175,14 +175,14 @@ bool EStringToStringMapEntryImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case ecore::EcorePackage::ESTRINGTOSTRINGMAPENTRY_ATTRIBUTE_KEY:
+		case ecore::ecorePackage::ESTRINGTOSTRINGMAPENTRY_ATTRIBUTE_KEY:
 		{
 			// BOOST CAST
 			std::string _key = newValue->get<std::string>();
 			setKey(_key); //490
 			return true;
 		}
-		case ecore::EcorePackage::ESTRINGTOSTRINGMAPENTRY_ATTRIBUTE_VALUE:
+		case ecore::ecorePackage::ESTRINGTOSTRINGMAPENTRY_ATTRIBUTE_VALUE:
 		{
 			// BOOST CAST
 			std::string _value = newValue->get<std::string>();
@@ -205,7 +205,7 @@ void EStringToStringMapEntryImpl::load(std::shared_ptr<persistence::interfaces::
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get EcoreFactory
+	// get ecoreFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -251,7 +251,7 @@ void EStringToStringMapEntryImpl::loadAttributes(std::shared_ptr<persistence::in
 
 void EStringToStringMapEntryImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<ecore::EcoreFactory> modelFactory=ecore::EcoreFactory::eInstance();
+	std::shared_ptr<ecore::ecoreFactory> modelFactory=ecore::ecoreFactory::eInstance();
 
 	//load BasePackage Nodes
 }
@@ -274,7 +274,7 @@ void EStringToStringMapEntryImpl::saveContent(std::shared_ptr<persistence::inter
 {
 	try
 	{
-		std::shared_ptr<ecore::EcorePackage> package = ecore::EcorePackage::eInstance();
+		std::shared_ptr<ecore::ecorePackage> package = ecore::ecorePackage::eInstance();
 
 	
 		// Add attributes

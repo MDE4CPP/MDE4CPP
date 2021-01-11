@@ -52,8 +52,8 @@
 #include "uml/ValueSpecification.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -81,11 +81,11 @@ IntervalConstraintImpl::IntervalConstraintImpl(std::weak_ptr<uml::Namespace > pa
 {
 	switch(reference_id)
 	{	
-	case UmlPackage::CONSTRAINT_ATTRIBUTE_CONTEXT:
+	case umlPackage::CONSTRAINT_ATTRIBUTE_CONTEXT:
 		m_context = par_Namespace;
 		m_namespace = par_Namespace;
 		 return;
-	case UmlPackage::NAMEDELEMENT_ATTRIBUTE_NAMESPACE:
+	case umlPackage::NAMEDELEMENT_ATTRIBUTE_NAMESPACE:
 		m_namespace = par_Namespace;
 		m_owner = par_Namespace;
 		 return;
@@ -187,7 +187,7 @@ std::shared_ptr<ecore::EObject>  IntervalConstraintImpl::copy() const
 
 std::shared_ptr<ecore::EClass> IntervalConstraintImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getIntervalConstraint_Class();
+	return uml::umlPackage::eInstance()->getIntervalConstraint_Class();
 }
 
 //*********************************
@@ -308,7 +308,7 @@ void IntervalConstraintImpl::load(std::shared_ptr<persistence::interfaces::XLoad
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -324,7 +324,7 @@ void IntervalConstraintImpl::loadAttributes(std::shared_ptr<persistence::interfa
 
 void IntervalConstraintImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	ConstraintImpl::loadNode(nodeName, loadHandler);
@@ -362,7 +362,7 @@ void IntervalConstraintImpl::saveContent(std::shared_ptr<persistence::interfaces
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 

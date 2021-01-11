@@ -28,7 +28,7 @@ namespace uml
 			ReadVariableActionImpl& operator=(ReadVariableActionImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			ReadVariableActionImpl();
 			virtual std::shared_ptr<ReadVariableAction> getThisReadVariableActionPtr() const;
 			virtual void setThisReadVariableActionPtr(std::weak_ptr<ReadVariableAction> thisReadVariableActionPtr);

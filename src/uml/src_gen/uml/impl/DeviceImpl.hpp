@@ -28,7 +28,7 @@ namespace uml
 			DeviceImpl& operator=(DeviceImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			DeviceImpl();
 			virtual std::shared_ptr<Device> getThisDevicePtr() const;
 			virtual void setThisDevicePtr(std::weak_ptr<Device> thisDevicePtr);

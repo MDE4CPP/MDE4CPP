@@ -28,7 +28,7 @@ namespace uml
 			InteractionConstraintImpl& operator=(InteractionConstraintImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			InteractionConstraintImpl();
 			virtual std::shared_ptr<InteractionConstraint> getThisInteractionConstraintPtr() const;
 			virtual void setThisInteractionConstraintPtr(std::weak_ptr<InteractionConstraint> thisInteractionConstraintPtr);

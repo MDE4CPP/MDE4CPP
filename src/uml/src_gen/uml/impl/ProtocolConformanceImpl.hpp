@@ -28,7 +28,7 @@ namespace uml
 			ProtocolConformanceImpl& operator=(ProtocolConformanceImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			ProtocolConformanceImpl();
 			virtual std::shared_ptr<ProtocolConformance> getThisProtocolConformancePtr() const;
 			virtual void setThisProtocolConformancePtr(std::weak_ptr<ProtocolConformance> thisProtocolConformancePtr);

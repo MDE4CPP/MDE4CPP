@@ -56,8 +56,8 @@
 #include "uml/TemplateParameter.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -199,7 +199,7 @@ std::shared_ptr<ecore::EObject>  ManifestationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ManifestationImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getManifestation_Class();
+	return uml::umlPackage::eInstance()->getManifestation_Class();
 }
 
 //*********************************
@@ -355,8 +355,8 @@ Any ManifestationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::MANIFESTATION_ATTRIBUTE_UTILIZEDELEMENT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getUtilizedElement())); //14618
+		case uml::umlPackage::MANIFESTATION_ATTRIBUTE_UTILIZEDELEMENT:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getUtilizedElement())); //14518
 	}
 	return AbstractionImpl::eGet(featureID, resolve, coreType);
 }
@@ -364,8 +364,8 @@ bool ManifestationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::MANIFESTATION_ATTRIBUTE_UTILIZEDELEMENT:
-			return getUtilizedElement() != nullptr; //14618
+		case uml::umlPackage::MANIFESTATION_ATTRIBUTE_UTILIZEDELEMENT:
+			return getUtilizedElement() != nullptr; //14518
 	}
 	return AbstractionImpl::internalEIsSet(featureID);
 }
@@ -373,12 +373,12 @@ bool ManifestationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::MANIFESTATION_ATTRIBUTE_UTILIZEDELEMENT:
+		case uml::umlPackage::MANIFESTATION_ATTRIBUTE_UTILIZEDELEMENT:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::PackageableElement> _utilizedElement = std::dynamic_pointer_cast<uml::PackageableElement>(_temp);
-			setUtilizedElement(_utilizedElement); //14618
+			setUtilizedElement(_utilizedElement); //14518
 			return true;
 		}
 	}
@@ -397,7 +397,7 @@ void ManifestationImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandl
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -432,7 +432,7 @@ void ManifestationImpl::loadAttributes(std::shared_ptr<persistence::interfaces::
 
 void ManifestationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	AbstractionImpl::loadNode(nodeName, loadHandler);
@@ -442,7 +442,7 @@ void ManifestationImpl::resolveReferences(const int featureID, std::list<std::sh
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::MANIFESTATION_ATTRIBUTE_UTILIZEDELEMENT:
+		case uml::umlPackage::MANIFESTATION_ATTRIBUTE_UTILIZEDELEMENT:
 		{
 			if (references.size() == 1)
 			{
@@ -489,7 +489,7 @@ void ManifestationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 

@@ -28,7 +28,7 @@ namespace uml
 			RemoveStructuralFeatureValueActionImpl& operator=(RemoveStructuralFeatureValueActionImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			RemoveStructuralFeatureValueActionImpl();
 			virtual std::shared_ptr<RemoveStructuralFeatureValueAction> getThisRemoveStructuralFeatureValueActionPtr() const;
 			virtual void setThisRemoveStructuralFeatureValueActionPtr(std::weak_ptr<RemoveStructuralFeatureValueAction> thisRemoveStructuralFeatureValueActionPtr);

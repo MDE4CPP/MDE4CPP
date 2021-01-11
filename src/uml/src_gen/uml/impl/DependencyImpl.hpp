@@ -29,7 +29,7 @@ namespace uml
 			DependencyImpl& operator=(DependencyImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			DependencyImpl();
 			virtual std::shared_ptr<Dependency> getThisDependencyPtr() const;
 			virtual void setThisDependencyPtr(std::weak_ptr<Dependency> thisDependencyPtr);

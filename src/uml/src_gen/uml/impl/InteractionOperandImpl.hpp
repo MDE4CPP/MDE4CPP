@@ -29,7 +29,7 @@ namespace uml
 			InteractionOperandImpl& operator=(InteractionOperandImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			InteractionOperandImpl();
 			virtual std::shared_ptr<InteractionOperand> getThisInteractionOperandPtr() const;
 			virtual void setThisInteractionOperandPtr(std::weak_ptr<InteractionOperand> thisInteractionOperandPtr);

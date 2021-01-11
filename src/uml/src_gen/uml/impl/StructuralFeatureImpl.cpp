@@ -58,8 +58,8 @@
 #include "uml/ValueSpecification.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -178,7 +178,7 @@ std::shared_ptr<ecore::EObject>  StructuralFeatureImpl::copy() const
 
 std::shared_ptr<ecore::EClass> StructuralFeatureImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getStructuralFeature_Class();
+	return uml::umlPackage::eInstance()->getStructuralFeature_Class();
 }
 
 //*********************************
@@ -265,8 +265,8 @@ Any StructuralFeatureImpl::eGet(int featureID, bool resolve, bool coreType) cons
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::STRUCTURALFEATURE_ATTRIBUTE_ISREADONLY:
-			return eAny(getIsReadOnly()); //22621
+		case uml::umlPackage::STRUCTURALFEATURE_ATTRIBUTE_ISREADONLY:
+			return eAny(getIsReadOnly()); //22521
 	}
 	Any result;
 	result = FeatureImpl::eGet(featureID, resolve, coreType);
@@ -286,8 +286,8 @@ bool StructuralFeatureImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::STRUCTURALFEATURE_ATTRIBUTE_ISREADONLY:
-			return getIsReadOnly() != false; //22621
+		case uml::umlPackage::STRUCTURALFEATURE_ATTRIBUTE_ISREADONLY:
+			return getIsReadOnly() != false; //22521
 	}
 	bool result = false;
 	result = FeatureImpl::internalEIsSet(featureID);
@@ -307,11 +307,11 @@ bool StructuralFeatureImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::STRUCTURALFEATURE_ATTRIBUTE_ISREADONLY:
+		case uml::umlPackage::STRUCTURALFEATURE_ATTRIBUTE_ISREADONLY:
 		{
 			// BOOST CAST
 			bool _isReadOnly = newValue->get<bool>();
-			setIsReadOnly(_isReadOnly); //22621
+			setIsReadOnly(_isReadOnly); //22521
 			return true;
 		}
 	}
@@ -342,7 +342,7 @@ void StructuralFeatureImpl::load(std::shared_ptr<persistence::interfaces::XLoadH
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -381,7 +381,7 @@ void StructuralFeatureImpl::loadAttributes(std::shared_ptr<persistence::interfac
 
 void StructuralFeatureImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	FeatureImpl::loadNode(nodeName, loadHandler);
@@ -424,7 +424,7 @@ void StructuralFeatureImpl::saveContent(std::shared_ptr<persistence::interfaces:
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 		// Add attributes

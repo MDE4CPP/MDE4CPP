@@ -28,7 +28,7 @@ namespace ecore
 			EPackageImpl& operator=(EPackageImpl const&) = delete;
 
 		protected:
-			friend class EcoreFactoryImpl;
+			friend class ecoreFactoryImpl;
 			EPackageImpl();
 			virtual std::shared_ptr<EPackage> getThisEPackagePtr() const;
 			virtual void setThisEPackagePtr(std::weak_ptr<EPackage> thisEPackagePtr);

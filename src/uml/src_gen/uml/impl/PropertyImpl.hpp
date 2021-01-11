@@ -30,7 +30,7 @@ namespace uml
 			PropertyImpl& operator=(PropertyImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			PropertyImpl();
 			virtual std::shared_ptr<Property> getThisPropertyPtr() const;
 			virtual void setThisPropertyPtr(std::weak_ptr<Property> thisPropertyPtr);

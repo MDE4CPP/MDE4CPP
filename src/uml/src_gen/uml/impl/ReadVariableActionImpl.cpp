@@ -75,8 +75,8 @@
 #include "uml/VariableAction.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -260,7 +260,7 @@ std::shared_ptr<ecore::EObject>  ReadVariableActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ReadVariableActionImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getReadVariableAction_Class();
+	return uml::umlPackage::eInstance()->getReadVariableAction_Class();
 }
 
 //*********************************
@@ -417,8 +417,8 @@ Any ReadVariableActionImpl::eGet(int featureID, bool resolve, bool coreType) con
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::READVARIABLEACTION_ATTRIBUTE_RESULT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //20128
+		case uml::umlPackage::READVARIABLEACTION_ATTRIBUTE_RESULT:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //20028
 	}
 	return VariableActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -426,8 +426,8 @@ bool ReadVariableActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::READVARIABLEACTION_ATTRIBUTE_RESULT:
-			return getResult() != nullptr; //20128
+		case uml::umlPackage::READVARIABLEACTION_ATTRIBUTE_RESULT:
+			return getResult() != nullptr; //20028
 	}
 	return VariableActionImpl::internalEIsSet(featureID);
 }
@@ -435,12 +435,12 @@ bool ReadVariableActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::READVARIABLEACTION_ATTRIBUTE_RESULT:
+		case uml::umlPackage::READVARIABLEACTION_ATTRIBUTE_RESULT:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::OutputPin> _result = std::dynamic_pointer_cast<uml::OutputPin>(_temp);
-			setResult(_result); //20128
+			setResult(_result); //20028
 			return true;
 		}
 	}
@@ -459,7 +459,7 @@ void ReadVariableActionImpl::load(std::shared_ptr<persistence::interfaces::XLoad
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -475,7 +475,7 @@ void ReadVariableActionImpl::loadAttributes(std::shared_ptr<persistence::interfa
 
 void ReadVariableActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -524,7 +524,6 @@ void ReadVariableActionImpl::save(std::shared_ptr<persistence::interfaces::XSave
 	
 	ActivityNodeImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);
@@ -548,7 +547,7 @@ void ReadVariableActionImpl::saveContent(std::shared_ptr<persistence::interfaces
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 		// Save 'result'
 		std::shared_ptr<uml::OutputPin > result = this->getResult();

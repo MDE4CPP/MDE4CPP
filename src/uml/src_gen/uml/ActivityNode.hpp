@@ -34,18 +34,13 @@ namespace persistence
 
 namespace uml
 {
-	class UmlFactory;
+	class umlFactory;
 }
 
 //Forward Declaration for used types
 namespace uml 
 {
 	class Activity;
-}
-
-namespace uml 
-{
-	class ActivityContent;
 }
 
 namespace uml 
@@ -114,8 +109,6 @@ namespace uml
 }
 
 // base class includes
-#include "uml/ActivityContent.hpp"
-
 #include "uml/RedefinableElement.hpp"
 
 // enum includes
@@ -130,7 +123,7 @@ namespace uml
 	<p>From package UML::Activities.</p>
 	*/
 	
-	class ActivityNode:virtual public ActivityContent,virtual public RedefinableElement
+	class ActivityNode:virtual public RedefinableElement
 	{
 		public:
  			ActivityNode(const ActivityNode &) {}
@@ -165,6 +158,16 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
+			/*!
+			The Activity that directly or indirectly contains this ActivityNode.
+			result = (if inStructuredNode<>null then inStructuredNode.containingActivity()
+			else activity
+			endif)
+			<p>From package UML::Activities.</p>
+			*/
+			 
+			virtual std::shared_ptr<uml::Activity> containingActivity() = 0;
+			
 			
 			//*********************************
 			// Attributes Getter Setter

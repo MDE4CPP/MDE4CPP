@@ -7,7 +7,7 @@
 #ifndef PSCS_SEMANTICS_VALUESPACKAGEIMPL_HPP
 #define PSCS_SEMANTICS_VALUESPACKAGEIMPL_HPP
 
-#include "ecore/EcorePackage.hpp"
+#include "ecore/ecorePackage.hpp"
 #include "ecore/impl/EPackageImpl.hpp"
 
 #include "PSCS/Semantics/Values/ValuesPackage.hpp" 
@@ -19,7 +19,7 @@ namespace PSCS::Semantics::Values
 
 namespace ecore
 {
-	class EcoreFactory;
+	class ecoreFactory;
 }
 
 namespace PSCS::Semantics::Values
@@ -72,8 +72,8 @@ namespace PSCS::Semantics::Values
 			void initializePackageContents();
 
 		private:
-			void createCS_OpaqueExpressionEvaluationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
-			void createPackageEDataTypes(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
+			void createCS_OpaqueExpressionEvaluationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
+			void createPackageEDataTypes(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 
 			void initializeCS_OpaqueExpressionEvaluationContent();
 			void initializePackageEDataTypes();

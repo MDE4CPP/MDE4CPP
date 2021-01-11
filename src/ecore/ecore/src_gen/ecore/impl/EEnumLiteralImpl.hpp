@@ -28,7 +28,7 @@ namespace ecore
 			EEnumLiteralImpl& operator=(EEnumLiteralImpl const&) = delete;
 
 		protected:
-			friend class EcoreFactoryImpl;
+			friend class ecoreFactoryImpl;
 			EEnumLiteralImpl();
 			virtual std::shared_ptr<EEnumLiteral> getThisEEnumLiteralPtr() const;
 			virtual void setThisEEnumLiteralPtr(std::weak_ptr<EEnumLiteral> thisEEnumLiteralPtr);

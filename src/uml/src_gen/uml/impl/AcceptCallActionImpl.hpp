@@ -28,7 +28,7 @@ namespace uml
 			AcceptCallActionImpl& operator=(AcceptCallActionImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			AcceptCallActionImpl();
 			virtual std::shared_ptr<AcceptCallAction> getThisAcceptCallActionPtr() const;
 			virtual void setThisAcceptCallActionPtr(std::weak_ptr<AcceptCallAction> thisAcceptCallActionPtr);

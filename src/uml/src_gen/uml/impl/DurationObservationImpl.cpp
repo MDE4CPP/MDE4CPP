@@ -53,8 +53,8 @@
 #include "uml/TemplateParameter.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -114,7 +114,7 @@ DurationObservationImpl::DurationObservationImpl(const DurationObservationImpl &
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy DurationObservation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
-	m_firstEvent = obj.getFirstEvent();
+	m_firstEvent = obj.isFirstEvent();
 	m_name = obj.getName();
 	m_qualifiedName = obj.getQualifiedName();
 	m_visibility = obj.getVisibility();
@@ -167,7 +167,7 @@ std::shared_ptr<ecore::EObject>  DurationObservationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> DurationObservationImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getDurationObservation_Class();
+	return uml::umlPackage::eInstance()->getDurationObservation_Class();
 }
 
 //*********************************
@@ -176,7 +176,7 @@ std::shared_ptr<ecore::EClass> DurationObservationImpl::eStaticClass() const
 /*
 Getter & Setter for attribute firstEvent
 */
-std::shared_ptr<Bag<bool> > DurationObservationImpl::getFirstEvent() const 
+std::shared_ptr<Bag<bool> > DurationObservationImpl::isFirstEvent() const 
 {
 	if(m_firstEvent == nullptr)
 	{
@@ -291,7 +291,7 @@ Any DurationObservationImpl::eGet(int featureID, bool resolve, bool coreType) co
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::DURATIONOBSERVATION_ATTRIBUTE_EVENT:
+		case uml::umlPackage::DURATIONOBSERVATION_ATTRIBUTE_EVENT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::NamedElement>::iterator iter = m_event->begin();
@@ -301,10 +301,10 @@ Any DurationObservationImpl::eGet(int featureID, bool resolve, bool coreType) co
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //8112
+			return eAny(tempList); //8012
 		}
-		case uml::UmlPackage::DURATIONOBSERVATION_ATTRIBUTE_FIRSTEVENT:
-			return eAny(getFirstEvent()); //8113
+		case uml::umlPackage::DURATIONOBSERVATION_ATTRIBUTE_FIRSTEVENT:
+			return eAny(isFirstEvent()); //8013
 	}
 	return ObservationImpl::eGet(featureID, resolve, coreType);
 }
@@ -312,10 +312,10 @@ bool DurationObservationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::DURATIONOBSERVATION_ATTRIBUTE_EVENT:
-			return getEvent() != nullptr; //8112
-		case uml::UmlPackage::DURATIONOBSERVATION_ATTRIBUTE_FIRSTEVENT:
-			return !getFirstEvent()->empty(); //8113
+		case uml::umlPackage::DURATIONOBSERVATION_ATTRIBUTE_EVENT:
+			return getEvent() != nullptr; //8012
+		case uml::umlPackage::DURATIONOBSERVATION_ATTRIBUTE_FIRSTEVENT:
+			return !isFirstEvent()->empty(); //8013
 	}
 	return ObservationImpl::internalEIsSet(featureID);
 }
@@ -323,7 +323,7 @@ bool DurationObservationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::DURATIONOBSERVATION_ATTRIBUTE_EVENT:
+		case uml::umlPackage::DURATIONOBSERVATION_ATTRIBUTE_EVENT:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -359,7 +359,7 @@ bool DurationObservationImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case uml::UmlPackage::DURATIONOBSERVATION_ATTRIBUTE_FIRSTEVENT:
+		case uml::umlPackage::DURATIONOBSERVATION_ATTRIBUTE_FIRSTEVENT:
 		{
 			// BOOST CAST
 			// nothing to do
@@ -381,7 +381,7 @@ void DurationObservationImpl::load(std::shared_ptr<persistence::interfaces::XLoa
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -416,7 +416,7 @@ void DurationObservationImpl::loadAttributes(std::shared_ptr<persistence::interf
 
 void DurationObservationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 	try
 	{
 		if (nodeName.compare("firstEvent") == 0)
@@ -442,7 +442,7 @@ void DurationObservationImpl::resolveReferences(const int featureID, std::list<s
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::DURATIONOBSERVATION_ATTRIBUTE_EVENT:
+		case uml::umlPackage::DURATIONOBSERVATION_ATTRIBUTE_EVENT:
 		{
 			std::shared_ptr<Bag<uml::NamedElement>> _event = getEvent();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -486,7 +486,7 @@ void DurationObservationImpl::saveContent(std::shared_ptr<persistence::interface
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 		// Add attributes

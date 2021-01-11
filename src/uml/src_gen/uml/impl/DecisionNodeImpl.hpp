@@ -28,7 +28,7 @@ namespace uml
 			DecisionNodeImpl& operator=(DecisionNodeImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			DecisionNodeImpl();
 			virtual std::shared_ptr<DecisionNode> getThisDecisionNodePtr() const;
 			virtual void setThisDecisionNodePtr(std::weak_ptr<DecisionNode> thisDecisionNodePtr);

@@ -19,15 +19,15 @@
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
-[template public generateOpaqueBehaviorExecutionHeader(namedElement : NamedElement, aPackage :Package) {
-	behaviorName : String = namedElement.generateOpaqueBehaviorExecutionName();
+[template public generateOpaqueBehaviorExecutionHeader(anOpaqueBehavior : OpaqueBehavior, aPackage :Package) {
+	behaviorName : String = anOpaqueBehavior.generateOpaqueBehaviorExecutionName();
 }]
-[file (aPackage.getPackageName().concat('Exec/').concat(behaviorName).concat('.hpp'), false, 'UTF-8')]
-[startGuard(namedElement.owner.oclAsType(NamedElement), behaviorName)/]
+[file (aPackage.generateNamespacePath(false).concat('Exec/').concat(behaviorName).concat('.hpp'), false, 'UTF-8')]
+[startGuard(anOpaqueBehavior.owner.oclAsType(NamedElement), behaviorName)/]
 
 #include "fUML/Semantics/CommonBehavior/impl/OpaqueBehaviorExecutionImpl.hpp"
 
-namespace [aPackage.name/] 
+namespace [aPackage.generateNamespace(false)/] 
 {
 	class [behaviorName/]: virtual public fUML::Semantics::CommonBehavior::OpaqueBehaviorExecutionImpl 
 	{
@@ -43,6 +43,6 @@ namespace [aPackage.name/]
 			virtual void setThisExecutionPtr(std::weak_ptr<[behaviorName/]> thisExecutionPtr);
 	};
 }
-[endGuard(namedElement.owner.oclAsType(NamedElement), behaviorName)/]
+[endGuard(anOpaqueBehavior.owner.oclAsType(NamedElement), behaviorName)/]
 [/file]
 [/template]

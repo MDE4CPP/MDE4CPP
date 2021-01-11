@@ -29,7 +29,7 @@ namespace uml
 			StringExpressionImpl& operator=(StringExpressionImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			StringExpressionImpl();
 			virtual std::shared_ptr<StringExpression> getThisStringExpressionPtr() const;
 			virtual void setThisStringExpressionPtr(std::weak_ptr<StringExpression> thisStringExpressionPtr);

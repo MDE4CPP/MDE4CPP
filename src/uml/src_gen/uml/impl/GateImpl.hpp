@@ -28,7 +28,7 @@ namespace uml
 			GateImpl& operator=(GateImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			GateImpl();
 			virtual std::shared_ptr<Gate> getThisGatePtr() const;
 			virtual void setThisGatePtr(std::weak_ptr<Gate> thisGatePtr);

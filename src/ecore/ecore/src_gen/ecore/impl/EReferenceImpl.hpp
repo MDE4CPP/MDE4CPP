@@ -28,7 +28,7 @@ namespace ecore
 			EReferenceImpl& operator=(EReferenceImpl const&) = delete;
 
 		protected:
-			friend class EcoreFactoryImpl;
+			friend class ecoreFactoryImpl;
 			EReferenceImpl();
 			virtual std::shared_ptr<EReference> getThisEReferencePtr() const;
 			virtual void setThisEReferencePtr(std::weak_ptr<EReference> thisEReferencePtr);

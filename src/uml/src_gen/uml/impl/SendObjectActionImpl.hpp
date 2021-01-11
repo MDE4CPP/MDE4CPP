@@ -28,7 +28,7 @@ namespace uml
 			SendObjectActionImpl& operator=(SendObjectActionImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			SendObjectActionImpl();
 			virtual std::shared_ptr<SendObjectAction> getThisSendObjectActionPtr() const;
 			virtual void setThisSendObjectActionPtr(std::weak_ptr<SendObjectAction> thisSendObjectActionPtr);

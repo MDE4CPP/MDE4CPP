@@ -28,7 +28,7 @@ namespace uml
 			StereotypeImpl& operator=(StereotypeImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			StereotypeImpl();
 			virtual std::shared_ptr<Stereotype> getThisStereotypePtr() const;
 			virtual void setThisStereotypePtr(std::weak_ptr<Stereotype> thisStereotypePtr);

@@ -28,7 +28,7 @@ namespace uml
 			RelationshipImpl& operator=(RelationshipImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			RelationshipImpl();
 			virtual std::shared_ptr<Relationship> getThisRelationshipPtr() const;
 			virtual void setThisRelationshipPtr(std::weak_ptr<Relationship> thisRelationshipPtr);

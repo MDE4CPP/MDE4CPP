@@ -28,7 +28,7 @@ namespace uml
 			AcceptEventActionImpl& operator=(AcceptEventActionImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			AcceptEventActionImpl();
 			virtual std::shared_ptr<AcceptEventAction> getThisAcceptEventActionPtr() const;
 			virtual void setThisAcceptEventActionPtr(std::weak_ptr<AcceptEventAction> thisAcceptEventActionPtr);

@@ -28,7 +28,7 @@ namespace uml
 			ReadSelfActionImpl& operator=(ReadSelfActionImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			ReadSelfActionImpl();
 			virtual std::shared_ptr<ReadSelfAction> getThisReadSelfActionPtr() const;
 			virtual void setThisReadSelfActionPtr(std::weak_ptr<ReadSelfAction> thisReadSelfActionPtr);

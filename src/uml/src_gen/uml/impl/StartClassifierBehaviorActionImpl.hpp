@@ -28,7 +28,7 @@ namespace uml
 			StartClassifierBehaviorActionImpl& operator=(StartClassifierBehaviorActionImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			StartClassifierBehaviorActionImpl();
 			virtual std::shared_ptr<StartClassifierBehaviorAction> getThisStartClassifierBehaviorActionPtr() const;
 			virtual void setThisStartClassifierBehaviorActionPtr(std::weak_ptr<StartClassifierBehaviorAction> thisStartClassifierBehaviorActionPtr);

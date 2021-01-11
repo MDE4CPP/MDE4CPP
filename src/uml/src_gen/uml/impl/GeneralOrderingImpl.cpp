@@ -49,8 +49,8 @@
 #include "uml/StringExpression.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -141,7 +141,7 @@ std::shared_ptr<ecore::EObject>  GeneralOrderingImpl::copy() const
 
 std::shared_ptr<ecore::EClass> GeneralOrderingImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getGeneralOrdering_Class();
+	return uml::umlPackage::eInstance()->getGeneralOrdering_Class();
 }
 
 //*********************************
@@ -248,10 +248,10 @@ Any GeneralOrderingImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::GENERALORDERING_ATTRIBUTE_AFTER:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getAfter())); //1099
-		case uml::UmlPackage::GENERALORDERING_ATTRIBUTE_BEFORE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getBefore())); //10910
+		case uml::umlPackage::GENERALORDERING_ATTRIBUTE_AFTER:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getAfter())); //1089
+		case uml::umlPackage::GENERALORDERING_ATTRIBUTE_BEFORE:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getBefore())); //10810
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -259,10 +259,10 @@ bool GeneralOrderingImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::GENERALORDERING_ATTRIBUTE_AFTER:
-			return getAfter() != nullptr; //1099
-		case uml::UmlPackage::GENERALORDERING_ATTRIBUTE_BEFORE:
-			return getBefore() != nullptr; //10910
+		case uml::umlPackage::GENERALORDERING_ATTRIBUTE_AFTER:
+			return getAfter() != nullptr; //1089
+		case uml::umlPackage::GENERALORDERING_ATTRIBUTE_BEFORE:
+			return getBefore() != nullptr; //10810
 	}
 	return NamedElementImpl::internalEIsSet(featureID);
 }
@@ -270,20 +270,20 @@ bool GeneralOrderingImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::GENERALORDERING_ATTRIBUTE_AFTER:
+		case uml::umlPackage::GENERALORDERING_ATTRIBUTE_AFTER:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::OccurrenceSpecification> _after = std::dynamic_pointer_cast<uml::OccurrenceSpecification>(_temp);
-			setAfter(_after); //1099
+			setAfter(_after); //1089
 			return true;
 		}
-		case uml::UmlPackage::GENERALORDERING_ATTRIBUTE_BEFORE:
+		case uml::umlPackage::GENERALORDERING_ATTRIBUTE_BEFORE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::OccurrenceSpecification> _before = std::dynamic_pointer_cast<uml::OccurrenceSpecification>(_temp);
-			setBefore(_before); //10910
+			setBefore(_before); //10810
 			return true;
 		}
 	}
@@ -302,7 +302,7 @@ void GeneralOrderingImpl::load(std::shared_ptr<persistence::interfaces::XLoadHan
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -344,7 +344,7 @@ void GeneralOrderingImpl::loadAttributes(std::shared_ptr<persistence::interfaces
 
 void GeneralOrderingImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	NamedElementImpl::loadNode(nodeName, loadHandler);
@@ -354,7 +354,7 @@ void GeneralOrderingImpl::resolveReferences(const int featureID, std::list<std::
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::GENERALORDERING_ATTRIBUTE_AFTER:
+		case uml::umlPackage::GENERALORDERING_ATTRIBUTE_AFTER:
 		{
 			if (references.size() == 1)
 			{
@@ -366,7 +366,7 @@ void GeneralOrderingImpl::resolveReferences(const int featureID, std::list<std::
 			return;
 		}
 
-		case uml::UmlPackage::GENERALORDERING_ATTRIBUTE_BEFORE:
+		case uml::umlPackage::GENERALORDERING_ATTRIBUTE_BEFORE:
 		{
 			if (references.size() == 1)
 			{
@@ -401,7 +401,7 @@ void GeneralOrderingImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 

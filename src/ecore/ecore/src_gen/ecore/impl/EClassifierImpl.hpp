@@ -28,7 +28,7 @@ namespace ecore
 			EClassifierImpl& operator=(EClassifierImpl const&) = delete;
 
 		protected:
-			friend class EcoreFactoryImpl;
+			friend class ecoreFactoryImpl;
 			EClassifierImpl();
 			virtual std::shared_ptr<EClassifier> getThisEClassifierPtr() const;
 			virtual void setThisEClassifierPtr(std::weak_ptr<EClassifier> thisEClassifierPtr);

@@ -28,7 +28,7 @@ namespace uml
 			ObjectFlowImpl& operator=(ObjectFlowImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			ObjectFlowImpl();
 			virtual std::shared_ptr<ObjectFlow> getThisObjectFlowPtr() const;
 			virtual void setThisObjectFlowPtr(std::weak_ptr<ObjectFlow> thisObjectFlowPtr);

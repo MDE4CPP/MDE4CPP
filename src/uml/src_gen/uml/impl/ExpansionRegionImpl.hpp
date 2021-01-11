@@ -28,7 +28,7 @@ namespace uml
 			ExpansionRegionImpl& operator=(ExpansionRegionImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			ExpansionRegionImpl();
 			virtual std::shared_ptr<ExpansionRegion> getThisExpansionRegionPtr() const;
 			virtual void setThisExpansionRegionPtr(std::weak_ptr<ExpansionRegion> thisExpansionRegionPtr);

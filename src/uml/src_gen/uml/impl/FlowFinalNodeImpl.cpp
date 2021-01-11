@@ -64,8 +64,8 @@
 #include "uml/StructuredActivityNode.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -212,7 +212,7 @@ std::shared_ptr<ecore::EObject>  FlowFinalNodeImpl::copy() const
 
 std::shared_ptr<ecore::EClass> FlowFinalNodeImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getFlowFinalNode_Class();
+	return uml::umlPackage::eInstance()->getFlowFinalNode_Class();
 }
 
 //*********************************
@@ -353,7 +353,7 @@ void FlowFinalNodeImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandl
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -369,7 +369,7 @@ void FlowFinalNodeImpl::loadAttributes(std::shared_ptr<persistence::interfaces::
 
 void FlowFinalNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	FinalNodeImpl::loadNode(nodeName, loadHandler);
@@ -390,7 +390,6 @@ void FlowFinalNodeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandl
 	
 	ActivityNodeImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);
@@ -413,7 +412,7 @@ void FlowFinalNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 

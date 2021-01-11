@@ -28,7 +28,7 @@ namespace uml
 			StateMachineImpl& operator=(StateMachineImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			StateMachineImpl();
 			virtual std::shared_ptr<StateMachine> getThisStateMachinePtr() const;
 			virtual void setThisStateMachinePtr(std::weak_ptr<StateMachine> thisStateMachinePtr);

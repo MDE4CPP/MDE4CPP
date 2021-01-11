@@ -61,8 +61,8 @@
 #include "uml/ValueSpecification.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -222,7 +222,7 @@ std::shared_ptr<ecore::EObject>  InteractionUseImpl::copy() const
 
 std::shared_ptr<ecore::EClass> InteractionUseImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getInteractionUse_Class();
+	return uml::umlPackage::eInstance()->getInteractionUse_Class();
 }
 
 //*********************************
@@ -446,7 +446,7 @@ Any InteractionUseImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::INTERACTIONUSE_ATTRIBUTE_ACTUALGATE:
+		case uml::umlPackage::INTERACTIONUSE_ATTRIBUTE_ACTUALGATE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Gate>::iterator iter = m_actualGate->begin();
@@ -456,9 +456,9 @@ Any InteractionUseImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //12513
+			return eAny(tempList); //12413
 		}
-		case uml::UmlPackage::INTERACTIONUSE_ATTRIBUTE_ARGUMENT:
+		case uml::umlPackage::INTERACTIONUSE_ATTRIBUTE_ARGUMENT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::ValueSpecification>::iterator iter = m_argument->begin();
@@ -468,14 +468,14 @@ Any InteractionUseImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //12514
+			return eAny(tempList); //12414
 		}
-		case uml::UmlPackage::INTERACTIONUSE_ATTRIBUTE_REFERSTO:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getRefersTo())); //12515
-		case uml::UmlPackage::INTERACTIONUSE_ATTRIBUTE_RETURNVALUE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getReturnValue())); //12516
-		case uml::UmlPackage::INTERACTIONUSE_ATTRIBUTE_RETURNVALUERECIPIENT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getReturnValueRecipient())); //12517
+		case uml::umlPackage::INTERACTIONUSE_ATTRIBUTE_REFERSTO:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getRefersTo())); //12415
+		case uml::umlPackage::INTERACTIONUSE_ATTRIBUTE_RETURNVALUE:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getReturnValue())); //12416
+		case uml::umlPackage::INTERACTIONUSE_ATTRIBUTE_RETURNVALUERECIPIENT:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getReturnValueRecipient())); //12417
 	}
 	return InteractionFragmentImpl::eGet(featureID, resolve, coreType);
 }
@@ -483,16 +483,16 @@ bool InteractionUseImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::INTERACTIONUSE_ATTRIBUTE_ACTUALGATE:
-			return getActualGate() != nullptr; //12513
-		case uml::UmlPackage::INTERACTIONUSE_ATTRIBUTE_ARGUMENT:
-			return getArgument() != nullptr; //12514
-		case uml::UmlPackage::INTERACTIONUSE_ATTRIBUTE_REFERSTO:
-			return getRefersTo() != nullptr; //12515
-		case uml::UmlPackage::INTERACTIONUSE_ATTRIBUTE_RETURNVALUE:
-			return getReturnValue() != nullptr; //12516
-		case uml::UmlPackage::INTERACTIONUSE_ATTRIBUTE_RETURNVALUERECIPIENT:
-			return getReturnValueRecipient() != nullptr; //12517
+		case uml::umlPackage::INTERACTIONUSE_ATTRIBUTE_ACTUALGATE:
+			return getActualGate() != nullptr; //12413
+		case uml::umlPackage::INTERACTIONUSE_ATTRIBUTE_ARGUMENT:
+			return getArgument() != nullptr; //12414
+		case uml::umlPackage::INTERACTIONUSE_ATTRIBUTE_REFERSTO:
+			return getRefersTo() != nullptr; //12415
+		case uml::umlPackage::INTERACTIONUSE_ATTRIBUTE_RETURNVALUE:
+			return getReturnValue() != nullptr; //12416
+		case uml::umlPackage::INTERACTIONUSE_ATTRIBUTE_RETURNVALUERECIPIENT:
+			return getReturnValueRecipient() != nullptr; //12417
 	}
 	return InteractionFragmentImpl::internalEIsSet(featureID);
 }
@@ -500,7 +500,7 @@ bool InteractionUseImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::INTERACTIONUSE_ATTRIBUTE_ACTUALGATE:
+		case uml::umlPackage::INTERACTIONUSE_ATTRIBUTE_ACTUALGATE:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -536,7 +536,7 @@ bool InteractionUseImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case uml::UmlPackage::INTERACTIONUSE_ATTRIBUTE_ARGUMENT:
+		case uml::umlPackage::INTERACTIONUSE_ATTRIBUTE_ARGUMENT:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -572,28 +572,28 @@ bool InteractionUseImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case uml::UmlPackage::INTERACTIONUSE_ATTRIBUTE_REFERSTO:
+		case uml::umlPackage::INTERACTIONUSE_ATTRIBUTE_REFERSTO:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Interaction> _refersTo = std::dynamic_pointer_cast<uml::Interaction>(_temp);
-			setRefersTo(_refersTo); //12515
+			setRefersTo(_refersTo); //12415
 			return true;
 		}
-		case uml::UmlPackage::INTERACTIONUSE_ATTRIBUTE_RETURNVALUE:
+		case uml::umlPackage::INTERACTIONUSE_ATTRIBUTE_RETURNVALUE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ValueSpecification> _returnValue = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
-			setReturnValue(_returnValue); //12516
+			setReturnValue(_returnValue); //12416
 			return true;
 		}
-		case uml::UmlPackage::INTERACTIONUSE_ATTRIBUTE_RETURNVALUERECIPIENT:
+		case uml::umlPackage::INTERACTIONUSE_ATTRIBUTE_RETURNVALUERECIPIENT:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Property> _returnValueRecipient = std::dynamic_pointer_cast<uml::Property>(_temp);
-			setReturnValueRecipient(_returnValueRecipient); //12517
+			setReturnValueRecipient(_returnValueRecipient); //12417
 			return true;
 		}
 	}
@@ -612,7 +612,7 @@ void InteractionUseImpl::load(std::shared_ptr<persistence::interfaces::XLoadHand
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -654,7 +654,7 @@ void InteractionUseImpl::loadAttributes(std::shared_ptr<persistence::interfaces:
 
 void InteractionUseImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -726,7 +726,7 @@ void InteractionUseImpl::resolveReferences(const int featureID, std::list<std::s
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::INTERACTIONUSE_ATTRIBUTE_REFERSTO:
+		case uml::umlPackage::INTERACTIONUSE_ATTRIBUTE_REFERSTO:
 		{
 			if (references.size() == 1)
 			{
@@ -738,7 +738,7 @@ void InteractionUseImpl::resolveReferences(const int featureID, std::list<std::s
 			return;
 		}
 
-		case uml::UmlPackage::INTERACTIONUSE_ATTRIBUTE_RETURNVALUERECIPIENT:
+		case uml::umlPackage::INTERACTIONUSE_ATTRIBUTE_RETURNVALUERECIPIENT:
 		{
 			if (references.size() == 1)
 			{
@@ -776,7 +776,7 @@ void InteractionUseImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 		// Save 'actualGate'
 		for (std::shared_ptr<uml::Gate> actualGate : *this->getActualGate()) 

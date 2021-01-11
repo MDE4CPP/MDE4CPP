@@ -74,8 +74,8 @@
 #include "uml/VariableAction.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -251,7 +251,7 @@ std::shared_ptr<ecore::EObject>  ClearVariableActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ClearVariableActionImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getClearVariableAction_Class();
+	return uml::umlPackage::eInstance()->getClearVariableAction_Class();
 }
 
 //*********************************
@@ -392,7 +392,7 @@ void ClearVariableActionImpl::load(std::shared_ptr<persistence::interfaces::XLoa
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -408,7 +408,7 @@ void ClearVariableActionImpl::loadAttributes(std::shared_ptr<persistence::interf
 
 void ClearVariableActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	VariableActionImpl::loadNode(nodeName, loadHandler);
@@ -431,7 +431,6 @@ void ClearVariableActionImpl::save(std::shared_ptr<persistence::interfaces::XSav
 	
 	ActivityNodeImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);
@@ -455,7 +454,7 @@ void ClearVariableActionImpl::saveContent(std::shared_ptr<persistence::interface
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 

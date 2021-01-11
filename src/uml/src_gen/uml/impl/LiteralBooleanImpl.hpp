@@ -28,7 +28,7 @@ namespace uml
 			LiteralBooleanImpl& operator=(LiteralBooleanImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			LiteralBooleanImpl();
 			virtual std::shared_ptr<LiteralBoolean> getThisLiteralBooleanPtr() const;
 			virtual void setThisLiteralBooleanPtr(std::weak_ptr<LiteralBoolean> thisLiteralBooleanPtr);

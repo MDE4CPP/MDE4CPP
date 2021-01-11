@@ -28,7 +28,7 @@ namespace uml
 			LiteralSpecificationImpl& operator=(LiteralSpecificationImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			LiteralSpecificationImpl();
 			virtual std::shared_ptr<LiteralSpecification> getThisLiteralSpecificationPtr() const;
 			virtual void setThisLiteralSpecificationPtr(std::weak_ptr<LiteralSpecification> thisLiteralSpecificationPtr);

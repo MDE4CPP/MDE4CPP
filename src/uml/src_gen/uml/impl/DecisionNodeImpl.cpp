@@ -69,8 +69,8 @@
 #include "uml/StructuredActivityNode.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -221,7 +221,7 @@ std::shared_ptr<ecore::EObject>  DecisionNodeImpl::copy() const
 
 std::shared_ptr<ecore::EClass> DecisionNodeImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getDecisionNode_Class();
+	return uml::umlPackage::eInstance()->getDecisionNode_Class();
 }
 
 //*********************************
@@ -410,10 +410,10 @@ Any DecisionNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::DECISIONNODE_ATTRIBUTE_DECISIONINPUT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDecisionInput())); //6720
-		case uml::UmlPackage::DECISIONNODE_ATTRIBUTE_DECISIONINPUTFLOW:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDecisionInputFlow())); //6721
+		case uml::umlPackage::DECISIONNODE_ATTRIBUTE_DECISIONINPUT:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDecisionInput())); //6620
+		case uml::umlPackage::DECISIONNODE_ATTRIBUTE_DECISIONINPUTFLOW:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDecisionInputFlow())); //6621
 	}
 	return ControlNodeImpl::eGet(featureID, resolve, coreType);
 }
@@ -421,10 +421,10 @@ bool DecisionNodeImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::DECISIONNODE_ATTRIBUTE_DECISIONINPUT:
-			return getDecisionInput() != nullptr; //6720
-		case uml::UmlPackage::DECISIONNODE_ATTRIBUTE_DECISIONINPUTFLOW:
-			return getDecisionInputFlow() != nullptr; //6721
+		case uml::umlPackage::DECISIONNODE_ATTRIBUTE_DECISIONINPUT:
+			return getDecisionInput() != nullptr; //6620
+		case uml::umlPackage::DECISIONNODE_ATTRIBUTE_DECISIONINPUTFLOW:
+			return getDecisionInputFlow() != nullptr; //6621
 	}
 	return ControlNodeImpl::internalEIsSet(featureID);
 }
@@ -432,20 +432,20 @@ bool DecisionNodeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::DECISIONNODE_ATTRIBUTE_DECISIONINPUT:
+		case uml::umlPackage::DECISIONNODE_ATTRIBUTE_DECISIONINPUT:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Behavior> _decisionInput = std::dynamic_pointer_cast<uml::Behavior>(_temp);
-			setDecisionInput(_decisionInput); //6720
+			setDecisionInput(_decisionInput); //6620
 			return true;
 		}
-		case uml::UmlPackage::DECISIONNODE_ATTRIBUTE_DECISIONINPUTFLOW:
+		case uml::umlPackage::DECISIONNODE_ATTRIBUTE_DECISIONINPUTFLOW:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ObjectFlow> _decisionInputFlow = std::dynamic_pointer_cast<uml::ObjectFlow>(_temp);
-			setDecisionInputFlow(_decisionInputFlow); //6721
+			setDecisionInputFlow(_decisionInputFlow); //6621
 			return true;
 		}
 	}
@@ -464,7 +464,7 @@ void DecisionNodeImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandle
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -506,7 +506,7 @@ void DecisionNodeImpl::loadAttributes(std::shared_ptr<persistence::interfaces::X
 
 void DecisionNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	ControlNodeImpl::loadNode(nodeName, loadHandler);
@@ -516,7 +516,7 @@ void DecisionNodeImpl::resolveReferences(const int featureID, std::list<std::sha
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::DECISIONNODE_ATTRIBUTE_DECISIONINPUT:
+		case uml::umlPackage::DECISIONNODE_ATTRIBUTE_DECISIONINPUT:
 		{
 			if (references.size() == 1)
 			{
@@ -528,7 +528,7 @@ void DecisionNodeImpl::resolveReferences(const int featureID, std::list<std::sha
 			return;
 		}
 
-		case uml::UmlPackage::DECISIONNODE_ATTRIBUTE_DECISIONINPUTFLOW:
+		case uml::umlPackage::DECISIONNODE_ATTRIBUTE_DECISIONINPUTFLOW:
 		{
 			if (references.size() == 1)
 			{
@@ -551,7 +551,6 @@ void DecisionNodeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandle
 	
 	ActivityNodeImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);
@@ -573,7 +572,7 @@ void DecisionNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 

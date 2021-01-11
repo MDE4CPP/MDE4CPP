@@ -7,7 +7,7 @@
 #ifndef PSCS_SEMANTICS_COMMONBEHAVIORPACKAGEIMPL_HPP
 #define PSCS_SEMANTICS_COMMONBEHAVIORPACKAGEIMPL_HPP
 
-#include "ecore/EcorePackage.hpp"
+#include "ecore/ecorePackage.hpp"
 #include "ecore/impl/EPackageImpl.hpp"
 
 #include "PSCS/Semantics/CommonBehavior/CommonBehaviorPackage.hpp" 
@@ -20,7 +20,7 @@ namespace PSCS::Semantics::CommonBehavior
 
 namespace ecore
 {
-	class EcoreFactory;
+	class ecoreFactory;
 }
 
 namespace PSCS::Semantics::CommonBehavior
@@ -93,9 +93,9 @@ namespace PSCS::Semantics::CommonBehavior
 			void initializePackageContents();
 
 		private:
-			void createCS_CallEventExecutionContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
-			void createCS_EventOccurrenceContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
-			void createPackageEDataTypes(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory);
+			void createCS_CallEventExecutionContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
+			void createCS_EventOccurrenceContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
+			void createPackageEDataTypes(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory);
 
 			void initializeCS_CallEventExecutionContent();
 			void initializeCS_EventOccurrenceContent();

@@ -53,8 +53,8 @@
 #include "uml/ValueSpecification.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -82,11 +82,11 @@ TimeConstraintImpl::TimeConstraintImpl(std::weak_ptr<uml::Namespace > par_Namesp
 {
 	switch(reference_id)
 	{	
-	case UmlPackage::CONSTRAINT_ATTRIBUTE_CONTEXT:
+	case umlPackage::CONSTRAINT_ATTRIBUTE_CONTEXT:
 		m_context = par_Namespace;
 		m_namespace = par_Namespace;
 		 return;
-	case UmlPackage::NAMEDELEMENT_ATTRIBUTE_NAMESPACE:
+	case umlPackage::NAMEDELEMENT_ATTRIBUTE_NAMESPACE:
 		m_namespace = par_Namespace;
 		m_owner = par_Namespace;
 		 return;
@@ -189,7 +189,7 @@ std::shared_ptr<ecore::EObject>  TimeConstraintImpl::copy() const
 
 std::shared_ptr<ecore::EClass> TimeConstraintImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getTimeConstraint_Class();
+	return uml::umlPackage::eInstance()->getTimeConstraint_Class();
 }
 
 //*********************************
@@ -299,8 +299,8 @@ Any TimeConstraintImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::TIMECONSTRAINT_ATTRIBUTE_FIRSTEVENT:
-			return eAny(getFirstEvent()); //23715
+		case uml::umlPackage::TIMECONSTRAINT_ATTRIBUTE_FIRSTEVENT:
+			return eAny(getFirstEvent()); //23615
 	}
 	return IntervalConstraintImpl::eGet(featureID, resolve, coreType);
 }
@@ -308,8 +308,8 @@ bool TimeConstraintImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::TIMECONSTRAINT_ATTRIBUTE_FIRSTEVENT:
-			return getFirstEvent() != true; //23715
+		case uml::umlPackage::TIMECONSTRAINT_ATTRIBUTE_FIRSTEVENT:
+			return getFirstEvent() != true; //23615
 	}
 	return IntervalConstraintImpl::internalEIsSet(featureID);
 }
@@ -317,11 +317,11 @@ bool TimeConstraintImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::TIMECONSTRAINT_ATTRIBUTE_FIRSTEVENT:
+		case uml::umlPackage::TIMECONSTRAINT_ATTRIBUTE_FIRSTEVENT:
 		{
 			// BOOST CAST
 			bool _firstEvent = newValue->get<bool>();
-			setFirstEvent(_firstEvent); //23715
+			setFirstEvent(_firstEvent); //23615
 			return true;
 		}
 	}
@@ -340,7 +340,7 @@ void TimeConstraintImpl::load(std::shared_ptr<persistence::interfaces::XLoadHand
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -377,7 +377,7 @@ void TimeConstraintImpl::loadAttributes(std::shared_ptr<persistence::interfaces:
 
 void TimeConstraintImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	IntervalConstraintImpl::loadNode(nodeName, loadHandler);
@@ -418,7 +418,7 @@ void TimeConstraintImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 		// Add attributes

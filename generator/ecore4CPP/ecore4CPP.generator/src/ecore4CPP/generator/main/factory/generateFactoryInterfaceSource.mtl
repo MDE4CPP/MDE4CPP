@@ -17,12 +17,12 @@
 [import ecore4CPP::generator::main::generateSingleton /]
 [import ecore4CPP::generator::main::helper /]
 
-[template public generateFactoryCpp(anPackage : EPackage) {packageName : String = anPackage.name.toUpperFirst().concat('Factory').toUpperFirst();}]
-[file  (anPackage.generateNamespacePath().concat('/').concat(packageName).concat('.cpp'), false, 'UTF-8')]
-#include "[anPackage.generateNamespacePath()/]/[packageName/].hpp"
-#include "[anPackage.generateNamespacePath()/]/impl/[packageName.concat('Impl')/].hpp"
+[template public generateFactoryCpp(anEPackage : EPackage) {packageName : String = anEPackage.name.concat('Factory');}]
+[file  (anEPackage.generateNamespacePath().concat('/').concat(packageName).concat('.cpp'), false, 'UTF-8')]
+#include "[anEPackage.generateNamespacePath()/]/[packageName/].hpp"
+#include "[anEPackage.generateNamespacePath()/]/impl/[packageName.concat('Impl')/].hpp"
 
-using namespace [anPackage.generateNamespaceDefinition()/];
+using namespace [anEPackage.generateNamespaceDefinition()/];
 				 
 //static initialisation
 [generateSingletonImpl(packageName, false)/]

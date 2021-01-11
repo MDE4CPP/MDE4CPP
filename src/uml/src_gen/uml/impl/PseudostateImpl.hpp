@@ -28,7 +28,7 @@ namespace uml
 			PseudostateImpl& operator=(PseudostateImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			PseudostateImpl();
 			virtual std::shared_ptr<Pseudostate> getThisPseudostatePtr() const;
 			virtual void setThisPseudostatePtr(std::weak_ptr<Pseudostate> thisPseudostatePtr);

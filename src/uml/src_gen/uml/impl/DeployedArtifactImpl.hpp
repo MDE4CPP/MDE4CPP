@@ -28,7 +28,7 @@ namespace uml
 			DeployedArtifactImpl& operator=(DeployedArtifactImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			DeployedArtifactImpl();
 			virtual std::shared_ptr<DeployedArtifact> getThisDeployedArtifactPtr() const;
 			virtual void setThisDeployedArtifactPtr(std::weak_ptr<DeployedArtifact> thisDeployedArtifactPtr);

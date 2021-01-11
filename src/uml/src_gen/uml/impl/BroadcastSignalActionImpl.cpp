@@ -77,8 +77,8 @@
 #include "uml/StructuredActivityNode.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -264,7 +264,7 @@ std::shared_ptr<ecore::EObject>  BroadcastSignalActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> BroadcastSignalActionImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getBroadcastSignalAction_Class();
+	return uml::umlPackage::eInstance()->getBroadcastSignalAction_Class();
 }
 
 //*********************************
@@ -427,8 +427,8 @@ Any BroadcastSignalActionImpl::eGet(int featureID, bool resolve, bool coreType) 
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::BROADCASTSIGNALACTION_ATTRIBUTE_SIGNAL:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSignal())); //2829
+		case uml::umlPackage::BROADCASTSIGNALACTION_ATTRIBUTE_SIGNAL:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSignal())); //2729
 	}
 	return InvocationActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -436,8 +436,8 @@ bool BroadcastSignalActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::BROADCASTSIGNALACTION_ATTRIBUTE_SIGNAL:
-			return getSignal() != nullptr; //2829
+		case uml::umlPackage::BROADCASTSIGNALACTION_ATTRIBUTE_SIGNAL:
+			return getSignal() != nullptr; //2729
 	}
 	return InvocationActionImpl::internalEIsSet(featureID);
 }
@@ -445,12 +445,12 @@ bool BroadcastSignalActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::BROADCASTSIGNALACTION_ATTRIBUTE_SIGNAL:
+		case uml::umlPackage::BROADCASTSIGNALACTION_ATTRIBUTE_SIGNAL:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Signal> _signal = std::dynamic_pointer_cast<uml::Signal>(_temp);
-			setSignal(_signal); //2829
+			setSignal(_signal); //2729
 			return true;
 		}
 	}
@@ -469,7 +469,7 @@ void BroadcastSignalActionImpl::load(std::shared_ptr<persistence::interfaces::XL
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -504,7 +504,7 @@ void BroadcastSignalActionImpl::loadAttributes(std::shared_ptr<persistence::inte
 
 void BroadcastSignalActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	InvocationActionImpl::loadNode(nodeName, loadHandler);
@@ -514,7 +514,7 @@ void BroadcastSignalActionImpl::resolveReferences(const int featureID, std::list
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::BROADCASTSIGNALACTION_ATTRIBUTE_SIGNAL:
+		case uml::umlPackage::BROADCASTSIGNALACTION_ATTRIBUTE_SIGNAL:
 		{
 			if (references.size() == 1)
 			{
@@ -541,7 +541,6 @@ void BroadcastSignalActionImpl::save(std::shared_ptr<persistence::interfaces::XS
 	
 	ActivityNodeImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);
@@ -565,7 +564,7 @@ void BroadcastSignalActionImpl::saveContent(std::shared_ptr<persistence::interfa
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 

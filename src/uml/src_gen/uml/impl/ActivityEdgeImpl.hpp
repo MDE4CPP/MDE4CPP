@@ -28,7 +28,7 @@ namespace uml
 			ActivityEdgeImpl& operator=(ActivityEdgeImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			ActivityEdgeImpl();
 			virtual std::shared_ptr<ActivityEdge> getThisActivityEdgePtr() const;
 			virtual void setThisActivityEdgePtr(std::weak_ptr<ActivityEdge> thisActivityEdgePtr);

@@ -53,8 +53,8 @@
 #include "uml/ValueSpecification.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -82,11 +82,11 @@ InteractionConstraintImpl::InteractionConstraintImpl(std::weak_ptr<uml::Namespac
 {
 	switch(reference_id)
 	{	
-	case UmlPackage::CONSTRAINT_ATTRIBUTE_CONTEXT:
+	case umlPackage::CONSTRAINT_ATTRIBUTE_CONTEXT:
 		m_context = par_Namespace;
 		m_namespace = par_Namespace;
 		 return;
-	case UmlPackage::NAMEDELEMENT_ATTRIBUTE_NAMESPACE:
+	case umlPackage::NAMEDELEMENT_ATTRIBUTE_NAMESPACE:
 		m_namespace = par_Namespace;
 		m_owner = par_Namespace;
 		 return;
@@ -205,7 +205,7 @@ std::shared_ptr<ecore::EObject>  InteractionConstraintImpl::copy() const
 
 std::shared_ptr<ecore::EClass> InteractionConstraintImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getInteractionConstraint_Class();
+	return uml::umlPackage::eInstance()->getInteractionConstraint_Class();
 }
 
 //*********************************
@@ -362,10 +362,10 @@ Any InteractionConstraintImpl::eGet(int featureID, bool resolve, bool coreType) 
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::INTERACTIONCONSTRAINT_ATTRIBUTE_MAXINT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getMaxint())); //12115
-		case uml::UmlPackage::INTERACTIONCONSTRAINT_ATTRIBUTE_MININT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getMinint())); //12116
+		case uml::umlPackage::INTERACTIONCONSTRAINT_ATTRIBUTE_MAXINT:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getMaxint())); //12015
+		case uml::umlPackage::INTERACTIONCONSTRAINT_ATTRIBUTE_MININT:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getMinint())); //12016
 	}
 	return ConstraintImpl::eGet(featureID, resolve, coreType);
 }
@@ -373,10 +373,10 @@ bool InteractionConstraintImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::INTERACTIONCONSTRAINT_ATTRIBUTE_MAXINT:
-			return getMaxint() != nullptr; //12115
-		case uml::UmlPackage::INTERACTIONCONSTRAINT_ATTRIBUTE_MININT:
-			return getMinint() != nullptr; //12116
+		case uml::umlPackage::INTERACTIONCONSTRAINT_ATTRIBUTE_MAXINT:
+			return getMaxint() != nullptr; //12015
+		case uml::umlPackage::INTERACTIONCONSTRAINT_ATTRIBUTE_MININT:
+			return getMinint() != nullptr; //12016
 	}
 	return ConstraintImpl::internalEIsSet(featureID);
 }
@@ -384,20 +384,20 @@ bool InteractionConstraintImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::INTERACTIONCONSTRAINT_ATTRIBUTE_MAXINT:
+		case uml::umlPackage::INTERACTIONCONSTRAINT_ATTRIBUTE_MAXINT:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ValueSpecification> _maxint = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
-			setMaxint(_maxint); //12115
+			setMaxint(_maxint); //12015
 			return true;
 		}
-		case uml::UmlPackage::INTERACTIONCONSTRAINT_ATTRIBUTE_MININT:
+		case uml::umlPackage::INTERACTIONCONSTRAINT_ATTRIBUTE_MININT:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ValueSpecification> _minint = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
-			setMinint(_minint); //12116
+			setMinint(_minint); //12016
 			return true;
 		}
 	}
@@ -416,7 +416,7 @@ void InteractionConstraintImpl::load(std::shared_ptr<persistence::interfaces::XL
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -432,7 +432,7 @@ void InteractionConstraintImpl::loadAttributes(std::shared_ptr<persistence::inte
 
 void InteractionConstraintImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -514,7 +514,7 @@ void InteractionConstraintImpl::saveContent(std::shared_ptr<persistence::interfa
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 		// Save 'maxint'
 		std::shared_ptr<uml::ValueSpecification > maxint = this->getMaxint();

@@ -89,8 +89,8 @@
 #include "uml/WriteStructuralFeatureAction.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -353,7 +353,7 @@ std::shared_ptr<ecore::EObject>  ActionInputPinImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ActionInputPinImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getActionInputPin_Class();
+	return uml::umlPackage::eInstance()->getActionInputPin_Class();
 }
 
 //*********************************
@@ -536,7 +536,7 @@ Any ActionInputPinImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::ACTIONINPUTPIN_ATTRIBUTE_FROMACTION:
+		case uml::umlPackage::ACTIONINPUTPIN_ATTRIBUTE_FROMACTION:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getFromAction())); //641
 	}
 	return InputPinImpl::eGet(featureID, resolve, coreType);
@@ -545,7 +545,7 @@ bool ActionInputPinImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::ACTIONINPUTPIN_ATTRIBUTE_FROMACTION:
+		case uml::umlPackage::ACTIONINPUTPIN_ATTRIBUTE_FROMACTION:
 			return getFromAction() != nullptr; //641
 	}
 	return InputPinImpl::internalEIsSet(featureID);
@@ -554,7 +554,7 @@ bool ActionInputPinImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::ACTIONINPUTPIN_ATTRIBUTE_FROMACTION:
+		case uml::umlPackage::ACTIONINPUTPIN_ATTRIBUTE_FROMACTION:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -578,7 +578,7 @@ void ActionInputPinImpl::load(std::shared_ptr<persistence::interfaces::XLoadHand
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -594,7 +594,7 @@ void ActionInputPinImpl::loadAttributes(std::shared_ptr<persistence::interfaces:
 
 void ActionInputPinImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -646,7 +646,6 @@ void ActionInputPinImpl::save(std::shared_ptr<persistence::interfaces::XSaveHand
 	ActivityNodeImpl::saveContent(saveHandler);
 	TypedElementImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);
@@ -670,7 +669,7 @@ void ActionInputPinImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 		// Save 'fromAction'
 		std::shared_ptr<uml::Action > fromAction = this->getFromAction();

@@ -28,7 +28,7 @@ namespace uml
 			UseCaseImpl& operator=(UseCaseImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			UseCaseImpl();
 			virtual std::shared_ptr<UseCase> getThisUseCasePtr() const;
 			virtual void setThisUseCasePtr(std::weak_ptr<UseCase> thisUseCasePtr);

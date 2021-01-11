@@ -28,7 +28,7 @@ namespace uml
 			InitialNodeImpl& operator=(InitialNodeImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			InitialNodeImpl();
 			virtual std::shared_ptr<InitialNode> getThisInitialNodePtr() const;
 			virtual void setThisInitialNodePtr(std::weak_ptr<InitialNode> thisInitialNodePtr);

@@ -93,13 +93,14 @@
       <body>result = (index &lt; (int) context->getModules()->size());</body>
     </ownedBehavior>
     <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_vySDEF0cEeq5aMbnrvR8VA" name="obGetModulesAtIndex" specification="_1zr-IF0XEeq5aMbnrvR8VA">
+      <eAnnotations xmi:id="_-fHFkFAcEeukhN12il4vjA" source="noExecution"/>
       <ownedParameter xmi:id="_xUgq0F0cEeq5aMbnrvR8VA" name="index">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
       </ownedParameter>
       <ownedParameter xmi:id="_xUgq0V0cEeq5aMbnrvR8VA" name="module" type="_eCnyIF0WEeq5aMbnrvR8VA" direction="return"/>
       <language>CPP</language>
-      <body>	module = m_modules->at(index);&#xD;
-	std::cout &lt;&lt; &quot;    (type of module at index &quot; &lt;&lt; index &lt;&lt; &quot;: &quot; &lt;&lt; module->getMetaClass()->getName() &lt;&lt; &quot;)&quot; &lt;&lt; std::endl;</body>
+      <body>module = m_modules->at(index);&#xD;
+std::cout &lt;&lt; &quot;    (type of module at index &quot; &lt;&lt; index &lt;&lt; &quot;: &quot; &lt;&lt; module->getMetaClass()->getName() &lt;&lt; &quot;)&quot; &lt;&lt; std::endl;</body>
     </ownedBehavior>
     <ownedOperation xmi:id="_1zr-IF0XEeq5aMbnrvR8VA" name="getModulesAtIndex" method="_vySDEF0cEeq5aMbnrvR8VA">
       <ownedParameter xmi:id="_3DeLAF0XEeq5aMbnrvR8VA" name="index">
@@ -116,7 +117,7 @@
     <interfaceRealization xmi:id="_mVoKIF0WEeq5aMbnrvR8VA" client="_iHmDcF0WEeq5aMbnrvR8VA" supplier="_eCnyIF0WEeq5aMbnrvR8VA" contract="_eCnyIF0WEeq5aMbnrvR8VA"/>
     <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_21tRQF0WEeq5aMbnrvR8VA" name="obPrintA" specification="_lsz2oF0WEeq5aMbnrvR8VA">
       <language>CPP</language>
-      <body>	std::cout &lt;&lt; &quot;printing from ClassA&quot; &lt;&lt; std::endl;</body>
+      <body>std::cout &lt;&lt; &quot;printing from ClassA&quot; &lt;&lt; std::endl;</body>
     </ownedBehavior>
     <ownedOperation xmi:id="_lsz2oF0WEeq5aMbnrvR8VA" name="print" method="_21tRQF0WEeq5aMbnrvR8VA"/>
   </packagedElement>
@@ -124,7 +125,7 @@
     <interfaceRealization xmi:id="_mxUnoF0WEeq5aMbnrvR8VA" client="_i7KOYF0WEeq5aMbnrvR8VA" supplier="_eCnyIF0WEeq5aMbnrvR8VA" contract="_eCnyIF0WEeq5aMbnrvR8VA"/>
     <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_9LwNUF0WEeq5aMbnrvR8VA" name="obPrintB" specification="_lziwwF0WEeq5aMbnrvR8VA">
       <language>CPP</language>
-      <body>	std::cout &lt;&lt; &quot;printing from ClassB&quot; &lt;&lt; std::endl;</body>
+      <body>std::cout &lt;&lt; &quot;printing from ClassB&quot; &lt;&lt; std::endl;</body>
     </ownedBehavior>
     <ownedOperation xmi:id="_lziwwF0WEeq5aMbnrvR8VA" name="print" method="_9LwNUF0WEeq5aMbnrvR8VA"/>
   </packagedElement>
@@ -132,7 +133,7 @@
     <interfaceRealization xmi:id="_nPACIF0WEeq5aMbnrvR8VA" client="_j6oHUF0WEeq5aMbnrvR8VA" supplier="_eCnyIF0WEeq5aMbnrvR8VA" contract="_eCnyIF0WEeq5aMbnrvR8VA"/>
     <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_9XhYcF0WEeq5aMbnrvR8VA" name="obPrintC" specification="_l7BRwF0WEeq5aMbnrvR8VA">
       <language>CPP</language>
-      <body>	std::cout &lt;&lt; &quot;printing from ClassC&quot; &lt;&lt; std::endl;</body>
+      <body>std::cout &lt;&lt; &quot;printing from ClassC&quot; &lt;&lt; std::endl;</body>
     </ownedBehavior>
     <ownedOperation xmi:id="_l7BRwF0WEeq5aMbnrvR8VA" name="print" method="_9XhYcF0WEeq5aMbnrvR8VA"/>
   </packagedElement>

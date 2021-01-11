@@ -28,7 +28,7 @@ namespace uml
 			DurationObservationImpl& operator=(DurationObservationImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			DurationObservationImpl();
 			virtual std::shared_ptr<DurationObservation> getThisDurationObservationPtr() const;
 			virtual void setThisDurationObservationPtr(std::weak_ptr<DurationObservation> thisDurationObservationPtr);
@@ -77,7 +77,7 @@ namespace uml
 			<p>From package UML::Values.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<bool> > getFirstEvent() const ;
+			virtual std::shared_ptr<Bag<bool> > isFirstEvent() const ;
 			
 			
 			

@@ -37,18 +37,13 @@ namespace persistence
 
 namespace uml
 {
-	class UmlFactory;
+	class umlFactory;
 }
 
 //Forward Declaration for used types
 namespace uml 
 {
 	class Activity;
-}
-
-namespace uml 
-{
-	class ActivityContent;
 }
 
 namespace uml 
@@ -97,8 +92,6 @@ namespace uml
 }
 
 // base class includes
-#include "uml/ActivityContent.hpp"
-
 #include "uml/NamedElement.hpp"
 
 // enum includes
@@ -113,7 +106,7 @@ namespace uml
 	<p>From package UML::Activities.</p>
 	*/
 	
-	class ActivityGroup:virtual public ActivityContent,virtual public NamedElement
+	class ActivityGroup:virtual public NamedElement
 	{
 		public:
  			ActivityGroup(const ActivityGroup &) {}
@@ -148,6 +141,16 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
+			/*!
+			The Activity that directly or indirectly contains this ActivityGroup.
+			result = (if superGroup<>null then superGroup.containingActivity()
+			else inActivity
+			endif)
+			<p>From package UML::Activities.</p>
+			*/
+			 
+			virtual std::shared_ptr<uml::Activity> containingActivity() = 0;
+			
 			/*!
 			All containedNodes and containeEdges of an ActivityGroup must be in the same Activity as the group.
 			containedNode->forAll(activity = self.containingActivity()) and 

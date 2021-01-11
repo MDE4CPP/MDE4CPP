@@ -1,7 +1,7 @@
 #include "PSCS/Semantics/Actions/impl/ActionsPackageImpl.hpp"
 
 // metametamodel factory
-#include "ecore/EcoreFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 
 #include <cassert>
 
@@ -18,9 +18,9 @@
 
 //depending model packages
 #include "PSCS/PSCSPackage.hpp"
-#include "ecore/EcorePackage.hpp"
-#include "fUML/FUMLPackage.hpp"
-#include "uml/UmlPackage.hpp"
+#include "ecore/ecorePackage.hpp"
+#include "fUML/fUMLPackage.hpp"
+#include "uml/umlPackage.hpp"
 //include subpackages 
  
 using namespace PSCS::Semantics::Actions;
@@ -33,7 +33,7 @@ void ActionsPackageImpl::createPackageContents(std::shared_ptr<ecore::EPackage> 
 	}
 	isCreated = true;
 
-	std::shared_ptr<ecore::EcoreFactory> factory = ecore::EcoreFactory::eInstance();
+	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
 
 	createCS_AcceptCallActionActivationContent(package, factory);
 	createCS_AcceptEventActionActivationContent(package, factory);
@@ -53,7 +53,7 @@ void ActionsPackageImpl::createPackageContents(std::shared_ptr<ecore::EPackage> 
 
 }
 
-void ActionsPackageImpl::createCS_AcceptCallActionActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ActionsPackageImpl::createCS_AcceptCallActionActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_cS_AcceptCallActionActivation_Class = factory->createEClass_in_EPackage(package, CS_ACCEPTCALLACTIONACTIVATION_CLASS);
 	
@@ -62,7 +62,7 @@ void ActionsPackageImpl::createCS_AcceptCallActionActivationContent(std::shared_
 	
 }
 
-void ActionsPackageImpl::createCS_AcceptEventActionActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ActionsPackageImpl::createCS_AcceptEventActionActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_cS_AcceptEventActionActivation_Class = factory->createEClass_in_EPackage(package, CS_ACCEPTEVENTACTIONACTIVATION_CLASS);
 	
@@ -71,7 +71,7 @@ void ActionsPackageImpl::createCS_AcceptEventActionActivationContent(std::shared
 	
 }
 
-void ActionsPackageImpl::createCS_AddStructuralFeatureValueActionActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ActionsPackageImpl::createCS_AddStructuralFeatureValueActionActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_cS_AddStructuralFeatureValueActionActivation_Class = factory->createEClass_in_EPackage(package, CS_ADDSTRUCTURALFEATUREVALUEACTIONACTIVATION_CLASS);
 	
@@ -81,7 +81,7 @@ void ActionsPackageImpl::createCS_AddStructuralFeatureValueActionActivationConte
 	
 }
 
-void ActionsPackageImpl::createCS_CallOperationActionActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ActionsPackageImpl::createCS_CallOperationActionActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_cS_CallOperationActionActivation_Class = factory->createEClass_in_EPackage(package, CS_CALLOPERATIONACTIONACTIVATION_CLASS);
 	
@@ -95,7 +95,7 @@ void ActionsPackageImpl::createCS_CallOperationActionActivationContent(std::shar
 	
 }
 
-void ActionsPackageImpl::createCS_ClearStructuralFeatureActionActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ActionsPackageImpl::createCS_ClearStructuralFeatureActionActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_cS_ClearStructuralFeatureActionActivation_Class = factory->createEClass_in_EPackage(package, CS_CLEARSTRUCTURALFEATUREACTIONACTIVATION_CLASS);
 	
@@ -106,7 +106,7 @@ void ActionsPackageImpl::createCS_ClearStructuralFeatureActionActivationContent(
 	
 }
 
-void ActionsPackageImpl::createCS_ConstructStrategyContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ActionsPackageImpl::createCS_ConstructStrategyContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_cS_ConstructStrategy_Class = factory->createEClass_in_EPackage(package, CS_CONSTRUCTSTRATEGY_CLASS);
 	
@@ -116,7 +116,7 @@ void ActionsPackageImpl::createCS_ConstructStrategyContent(std::shared_ptr<ecore
 	
 }
 
-void ActionsPackageImpl::createCS_CreateLinkActionActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ActionsPackageImpl::createCS_CreateLinkActionActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_cS_CreateLinkActionActivation_Class = factory->createEClass_in_EPackage(package, CS_CREATELINKACTIONACTIVATION_CLASS);
 	
@@ -125,7 +125,7 @@ void ActionsPackageImpl::createCS_CreateLinkActionActivationContent(std::shared_
 	
 }
 
-void ActionsPackageImpl::createCS_CreateObjectActionActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ActionsPackageImpl::createCS_CreateObjectActionActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_cS_CreateObjectActionActivation_Class = factory->createEClass_in_EPackage(package, CS_CREATEOBJECTACTIONACTIVATION_CLASS);
 	
@@ -134,7 +134,7 @@ void ActionsPackageImpl::createCS_CreateObjectActionActivationContent(std::share
 	
 }
 
-void ActionsPackageImpl::createCS_DefaultConstructStrategyContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ActionsPackageImpl::createCS_DefaultConstructStrategyContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_cS_DefaultConstructStrategy_Class = factory->createEClass_in_EPackage(package, CS_DEFAULTCONSTRUCTSTRATEGY_CLASS);
 	
@@ -159,7 +159,7 @@ void ActionsPackageImpl::createCS_DefaultConstructStrategyContent(std::shared_pt
 	
 }
 
-void ActionsPackageImpl::createCS_ReadExtentActionActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ActionsPackageImpl::createCS_ReadExtentActionActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_cS_ReadExtentActionActivation_Class = factory->createEClass_in_EPackage(package, CS_READEXTENTACTIONACTIVATION_CLASS);
 	
@@ -168,7 +168,7 @@ void ActionsPackageImpl::createCS_ReadExtentActionActivationContent(std::shared_
 	
 }
 
-void ActionsPackageImpl::createCS_ReadSelfActionActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ActionsPackageImpl::createCS_ReadSelfActionActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_cS_ReadSelfActionActivation_Class = factory->createEClass_in_EPackage(package, CS_READSELFACTIONACTIVATION_CLASS);
 	
@@ -177,7 +177,7 @@ void ActionsPackageImpl::createCS_ReadSelfActionActivationContent(std::shared_pt
 	
 }
 
-void ActionsPackageImpl::createCS_RemoveStructuralFeatureValueActionActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ActionsPackageImpl::createCS_RemoveStructuralFeatureValueActionActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_cS_RemoveStructuralFeatureValueActionActivation_Class = factory->createEClass_in_EPackage(package, CS_REMOVESTRUCTURALFEATUREVALUEACTIONACTIVATION_CLASS);
 	
@@ -188,7 +188,7 @@ void ActionsPackageImpl::createCS_RemoveStructuralFeatureValueActionActivationCo
 	
 }
 
-void ActionsPackageImpl::createCS_SendSignalActionActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ActionsPackageImpl::createCS_SendSignalActionActivationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_cS_SendSignalActionActivation_Class = factory->createEClass_in_EPackage(package, CS_SENDSIGNALACTIONACTIVATION_CLASS);
 	
@@ -197,7 +197,7 @@ void ActionsPackageImpl::createCS_SendSignalActionActivationContent(std::shared_
 	
 }
 
-void ActionsPackageImpl::createPackageEDataTypes(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::EcoreFactory> factory)
+void ActionsPackageImpl::createPackageEDataTypes(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	
 }

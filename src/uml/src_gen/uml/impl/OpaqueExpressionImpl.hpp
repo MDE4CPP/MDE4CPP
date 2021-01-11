@@ -28,7 +28,7 @@ namespace uml
 			OpaqueExpressionImpl& operator=(OpaqueExpressionImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			OpaqueExpressionImpl();
 			virtual std::shared_ptr<OpaqueExpression> getThisOpaqueExpressionPtr() const;
 			virtual void setThisOpaqueExpressionPtr(std::weak_ptr<OpaqueExpression> thisOpaqueExpressionPtr);

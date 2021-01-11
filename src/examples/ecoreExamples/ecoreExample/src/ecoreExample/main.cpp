@@ -3,8 +3,8 @@
 #include <chrono>
 
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "ecore/EcorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
+#include "ecore/ecorePackage.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EClass.hpp"
@@ -18,8 +18,8 @@ using namespace ecore;
 
 int main()
 {
-  std::shared_ptr<EcorePackage> package = EcorePackage::eInstance();
-  std::shared_ptr<EcoreFactory> factory = EcoreFactory::eInstance();
+  std::shared_ptr<ecorePackage> package = ecorePackage::eInstance();
+  std::shared_ptr<ecoreFactory> factory = ecoreFactory::eInstance();
 
   // Create Instances of Ecore-Elemets
 

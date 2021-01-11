@@ -28,7 +28,7 @@ namespace uml
 			ObservationImpl& operator=(ObservationImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			ObservationImpl();
 			virtual std::shared_ptr<Observation> getThisObservationPtr() const;
 			virtual void setThisObservationPtr(std::weak_ptr<Observation> thisObservationPtr);

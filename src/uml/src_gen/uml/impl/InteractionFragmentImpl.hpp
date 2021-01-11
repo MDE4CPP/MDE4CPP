@@ -28,7 +28,7 @@ namespace uml
 			InteractionFragmentImpl& operator=(InteractionFragmentImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			InteractionFragmentImpl();
 			virtual std::shared_ptr<InteractionFragment> getThisInteractionFragmentPtr() const;
 			virtual void setThisInteractionFragmentPtr(std::weak_ptr<InteractionFragment> thisInteractionFragmentPtr);

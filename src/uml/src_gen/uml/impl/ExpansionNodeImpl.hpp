@@ -28,7 +28,7 @@ namespace uml
 			ExpansionNodeImpl& operator=(ExpansionNodeImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			ExpansionNodeImpl();
 			virtual std::shared_ptr<ExpansionNode> getThisExpansionNodePtr() const;
 			virtual void setThisExpansionNodePtr(std::weak_ptr<ExpansionNode> thisExpansionNodePtr);

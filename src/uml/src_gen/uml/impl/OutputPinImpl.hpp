@@ -28,7 +28,7 @@ namespace uml
 			OutputPinImpl& operator=(OutputPinImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			OutputPinImpl();
 			virtual std::shared_ptr<OutputPin> getThisOutputPinPtr() const;
 			virtual void setThisOutputPinPtr(std::weak_ptr<OutputPin> thisOutputPinPtr);

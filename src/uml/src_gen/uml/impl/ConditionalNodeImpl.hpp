@@ -28,7 +28,7 @@ namespace uml
 			ConditionalNodeImpl& operator=(ConditionalNodeImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			ConditionalNodeImpl();
 			virtual std::shared_ptr<ConditionalNode> getThisConditionalNodePtr() const;
 			virtual void setThisConditionalNodePtr(std::weak_ptr<ConditionalNode> thisConditionalNodePtr);

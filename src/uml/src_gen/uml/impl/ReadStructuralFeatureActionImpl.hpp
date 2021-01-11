@@ -28,7 +28,7 @@ namespace uml
 			ReadStructuralFeatureActionImpl& operator=(ReadStructuralFeatureActionImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			ReadStructuralFeatureActionImpl();
 			virtual std::shared_ptr<ReadStructuralFeatureAction> getThisReadStructuralFeatureActionPtr() const;
 			virtual void setThisReadStructuralFeatureActionPtr(std::weak_ptr<ReadStructuralFeatureAction> thisReadStructuralFeatureActionPtr);

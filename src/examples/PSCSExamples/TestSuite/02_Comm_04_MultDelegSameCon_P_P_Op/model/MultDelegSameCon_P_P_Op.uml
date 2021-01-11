@@ -39,6 +39,7 @@ If the operation call is forwarded, at least one of the properties c::b[0], c::b
     </ownedAttribute>
     <interfaceRealization xmi:id="_q--1EHN2EeqRednEYw10kw" name="IRealization" client="_cIY0QHN2EeqRednEYw10kw" supplier="_1v85wHN1EeqRednEYw10kw" contract="_1v85wHN1EeqRednEYw10kw"/>
     <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_EYNHIHN3EeqRednEYw10kw" name="assignP" specification="_xvii4HN2EeqRednEYw10kw">
+      <eAnnotations xmi:id="_94ZAMERdEeupAptt1hjWPg" source="noExecution"/>
       <ownedParameter xmi:id="_MJ13cHN3EeqRednEYw10kw" name="v">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
       </ownedParameter>
@@ -46,6 +47,7 @@ If the operation call is forwarded, at least one of the properties c::b[0], c::b
       <body>this->setP(v);</body>
     </ownedBehavior>
     <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_aqhD4HN9EeqRednEYw10kw" name="printP" specification="_vgBTIHN9EeqRednEYw10kw">
+      <eAnnotations xmi:id="_ALC_UEReEeupAptt1hjWPg" source="noExecution"/>
       <language>CPP</language>
       <body>std::cout&lt;&lt;&quot;Operation call delegated: &quot;&lt;&lt;(getP() ==  4)&lt;&lt;std::endl;</body>
     </ownedBehavior>

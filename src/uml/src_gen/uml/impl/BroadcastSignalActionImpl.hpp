@@ -28,7 +28,7 @@ namespace uml
 			BroadcastSignalActionImpl& operator=(BroadcastSignalActionImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			BroadcastSignalActionImpl();
 			virtual std::shared_ptr<BroadcastSignalAction> getThisBroadcastSignalActionPtr() const;
 			virtual void setThisBroadcastSignalActionPtr(std::weak_ptr<BroadcastSignalAction> thisBroadcastSignalActionPtr);

@@ -28,7 +28,7 @@ namespace uml
 			ProfileApplicationImpl& operator=(ProfileApplicationImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			ProfileApplicationImpl();
 			virtual std::shared_ptr<ProfileApplication> getThisProfileApplicationPtr() const;
 			virtual void setThisProfileApplicationPtr(std::weak_ptr<ProfileApplication> thisProfileApplicationPtr);

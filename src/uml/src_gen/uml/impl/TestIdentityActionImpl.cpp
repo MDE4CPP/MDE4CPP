@@ -73,8 +73,8 @@
 #include "uml/StructuredActivityNode.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -274,7 +274,7 @@ std::shared_ptr<ecore::EObject>  TestIdentityActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> TestIdentityActionImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getTestIdentityAction_Class();
+	return uml::umlPackage::eInstance()->getTestIdentityAction_Class();
 }
 
 //*********************************
@@ -489,12 +489,12 @@ Any TestIdentityActionImpl::eGet(int featureID, bool resolve, bool coreType) con
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::TESTIDENTITYACTION_ATTRIBUTE_FIRST:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getFirst())); //23627
-		case uml::UmlPackage::TESTIDENTITYACTION_ATTRIBUTE_RESULT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //23628
-		case uml::UmlPackage::TESTIDENTITYACTION_ATTRIBUTE_SECOND:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSecond())); //23629
+		case uml::umlPackage::TESTIDENTITYACTION_ATTRIBUTE_FIRST:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getFirst())); //23527
+		case uml::umlPackage::TESTIDENTITYACTION_ATTRIBUTE_RESULT:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //23528
+		case uml::umlPackage::TESTIDENTITYACTION_ATTRIBUTE_SECOND:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSecond())); //23529
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -502,12 +502,12 @@ bool TestIdentityActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::TESTIDENTITYACTION_ATTRIBUTE_FIRST:
-			return getFirst() != nullptr; //23627
-		case uml::UmlPackage::TESTIDENTITYACTION_ATTRIBUTE_RESULT:
-			return getResult() != nullptr; //23628
-		case uml::UmlPackage::TESTIDENTITYACTION_ATTRIBUTE_SECOND:
-			return getSecond() != nullptr; //23629
+		case uml::umlPackage::TESTIDENTITYACTION_ATTRIBUTE_FIRST:
+			return getFirst() != nullptr; //23527
+		case uml::umlPackage::TESTIDENTITYACTION_ATTRIBUTE_RESULT:
+			return getResult() != nullptr; //23528
+		case uml::umlPackage::TESTIDENTITYACTION_ATTRIBUTE_SECOND:
+			return getSecond() != nullptr; //23529
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
@@ -515,28 +515,28 @@ bool TestIdentityActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::TESTIDENTITYACTION_ATTRIBUTE_FIRST:
+		case uml::umlPackage::TESTIDENTITYACTION_ATTRIBUTE_FIRST:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::InputPin> _first = std::dynamic_pointer_cast<uml::InputPin>(_temp);
-			setFirst(_first); //23627
+			setFirst(_first); //23527
 			return true;
 		}
-		case uml::UmlPackage::TESTIDENTITYACTION_ATTRIBUTE_RESULT:
+		case uml::umlPackage::TESTIDENTITYACTION_ATTRIBUTE_RESULT:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::OutputPin> _result = std::dynamic_pointer_cast<uml::OutputPin>(_temp);
-			setResult(_result); //23628
+			setResult(_result); //23528
 			return true;
 		}
-		case uml::UmlPackage::TESTIDENTITYACTION_ATTRIBUTE_SECOND:
+		case uml::umlPackage::TESTIDENTITYACTION_ATTRIBUTE_SECOND:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::InputPin> _second = std::dynamic_pointer_cast<uml::InputPin>(_temp);
-			setSecond(_second); //23629
+			setSecond(_second); //23529
 			return true;
 		}
 	}
@@ -555,7 +555,7 @@ void TestIdentityActionImpl::load(std::shared_ptr<persistence::interfaces::XLoad
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -571,7 +571,7 @@ void TestIdentityActionImpl::loadAttributes(std::shared_ptr<persistence::interfa
 
 void TestIdentityActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -650,7 +650,6 @@ void TestIdentityActionImpl::save(std::shared_ptr<persistence::interfaces::XSave
 	
 	ActivityNodeImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);
@@ -673,7 +672,7 @@ void TestIdentityActionImpl::saveContent(std::shared_ptr<persistence::interfaces
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 		// Save 'first'
 		std::shared_ptr<uml::InputPin > first = this->getFirst();

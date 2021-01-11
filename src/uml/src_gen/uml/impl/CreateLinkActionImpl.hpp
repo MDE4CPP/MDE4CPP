@@ -28,7 +28,7 @@ namespace uml
 			CreateLinkActionImpl& operator=(CreateLinkActionImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			CreateLinkActionImpl();
 			virtual std::shared_ptr<CreateLinkAction> getThisCreateLinkActionPtr() const;
 			virtual void setThisCreateLinkActionPtr(std::weak_ptr<CreateLinkAction> thisCreateLinkActionPtr);

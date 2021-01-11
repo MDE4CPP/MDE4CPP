@@ -52,8 +52,8 @@
 #include "uml/StringExpression.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -142,7 +142,7 @@ std::shared_ptr<ecore::EObject>  MessageEndImpl::copy() const
 
 std::shared_ptr<ecore::EClass> MessageEndImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getMessageEnd_Class();
+	return uml::umlPackage::eInstance()->getMessageEnd_Class();
 }
 
 //*********************************
@@ -251,8 +251,8 @@ Any MessageEndImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::MESSAGEEND_ATTRIBUTE_MESSAGE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getMessage())); //1499
+		case uml::umlPackage::MESSAGEEND_ATTRIBUTE_MESSAGE:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getMessage())); //1489
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -260,8 +260,8 @@ bool MessageEndImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::MESSAGEEND_ATTRIBUTE_MESSAGE:
-			return getMessage() != nullptr; //1499
+		case uml::umlPackage::MESSAGEEND_ATTRIBUTE_MESSAGE:
+			return getMessage() != nullptr; //1489
 	}
 	return NamedElementImpl::internalEIsSet(featureID);
 }
@@ -269,12 +269,12 @@ bool MessageEndImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::MESSAGEEND_ATTRIBUTE_MESSAGE:
+		case uml::umlPackage::MESSAGEEND_ATTRIBUTE_MESSAGE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Message> _message = std::dynamic_pointer_cast<uml::Message>(_temp);
-			setMessage(_message); //1499
+			setMessage(_message); //1489
 			return true;
 		}
 	}
@@ -293,7 +293,7 @@ void MessageEndImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler>
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -328,7 +328,7 @@ void MessageEndImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLo
 
 void MessageEndImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	NamedElementImpl::loadNode(nodeName, loadHandler);
@@ -338,7 +338,7 @@ void MessageEndImpl::resolveReferences(const int featureID, std::list<std::share
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::MESSAGEEND_ATTRIBUTE_MESSAGE:
+		case uml::umlPackage::MESSAGEEND_ATTRIBUTE_MESSAGE:
 		{
 			if (references.size() == 1)
 			{
@@ -373,7 +373,7 @@ void MessageEndImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 

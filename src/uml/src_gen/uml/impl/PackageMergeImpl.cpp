@@ -42,8 +42,8 @@
 #include "uml/Package.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -127,7 +127,7 @@ std::shared_ptr<ecore::EObject>  PackageMergeImpl::copy() const
 
 std::shared_ptr<ecore::EClass> PackageMergeImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getPackageMerge_Class();
+	return uml::umlPackage::eInstance()->getPackageMerge_Class();
 }
 
 //*********************************
@@ -284,10 +284,10 @@ Any PackageMergeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::PACKAGEMERGE_ATTRIBUTE_MERGEDPACKAGE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getMergedPackage())); //1736
-		case uml::UmlPackage::PACKAGEMERGE_ATTRIBUTE_RECEIVINGPACKAGE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getReceivingPackage().lock())); //1737
+		case uml::umlPackage::PACKAGEMERGE_ATTRIBUTE_MERGEDPACKAGE:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getMergedPackage())); //1726
+		case uml::umlPackage::PACKAGEMERGE_ATTRIBUTE_RECEIVINGPACKAGE:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getReceivingPackage().lock())); //1727
 	}
 	return DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
 }
@@ -295,10 +295,10 @@ bool PackageMergeImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::PACKAGEMERGE_ATTRIBUTE_MERGEDPACKAGE:
-			return getMergedPackage() != nullptr; //1736
-		case uml::UmlPackage::PACKAGEMERGE_ATTRIBUTE_RECEIVINGPACKAGE:
-			return getReceivingPackage().lock() != nullptr; //1737
+		case uml::umlPackage::PACKAGEMERGE_ATTRIBUTE_MERGEDPACKAGE:
+			return getMergedPackage() != nullptr; //1726
+		case uml::umlPackage::PACKAGEMERGE_ATTRIBUTE_RECEIVINGPACKAGE:
+			return getReceivingPackage().lock() != nullptr; //1727
 	}
 	return DirectedRelationshipImpl::internalEIsSet(featureID);
 }
@@ -306,20 +306,20 @@ bool PackageMergeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::PACKAGEMERGE_ATTRIBUTE_MERGEDPACKAGE:
+		case uml::umlPackage::PACKAGEMERGE_ATTRIBUTE_MERGEDPACKAGE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Package> _mergedPackage = std::dynamic_pointer_cast<uml::Package>(_temp);
-			setMergedPackage(_mergedPackage); //1736
+			setMergedPackage(_mergedPackage); //1726
 			return true;
 		}
-		case uml::UmlPackage::PACKAGEMERGE_ATTRIBUTE_RECEIVINGPACKAGE:
+		case uml::umlPackage::PACKAGEMERGE_ATTRIBUTE_RECEIVINGPACKAGE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Package> _receivingPackage = std::dynamic_pointer_cast<uml::Package>(_temp);
-			setReceivingPackage(_receivingPackage); //1737
+			setReceivingPackage(_receivingPackage); //1727
 			return true;
 		}
 	}
@@ -338,7 +338,7 @@ void PackageMergeImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandle
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -373,7 +373,7 @@ void PackageMergeImpl::loadAttributes(std::shared_ptr<persistence::interfaces::X
 
 void PackageMergeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	DirectedRelationshipImpl::loadNode(nodeName, loadHandler);
@@ -383,7 +383,7 @@ void PackageMergeImpl::resolveReferences(const int featureID, std::list<std::sha
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::PACKAGEMERGE_ATTRIBUTE_MERGEDPACKAGE:
+		case uml::umlPackage::PACKAGEMERGE_ATTRIBUTE_MERGEDPACKAGE:
 		{
 			if (references.size() == 1)
 			{
@@ -395,7 +395,7 @@ void PackageMergeImpl::resolveReferences(const int featureID, std::list<std::sha
 			return;
 		}
 
-		case uml::UmlPackage::PACKAGEMERGE_ATTRIBUTE_RECEIVINGPACKAGE:
+		case uml::umlPackage::PACKAGEMERGE_ATTRIBUTE_RECEIVINGPACKAGE:
 		{
 			if (references.size() == 1)
 			{
@@ -433,7 +433,7 @@ void PackageMergeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 

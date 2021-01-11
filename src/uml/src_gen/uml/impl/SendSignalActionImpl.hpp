@@ -28,7 +28,7 @@ namespace uml
 			SendSignalActionImpl& operator=(SendSignalActionImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			SendSignalActionImpl();
 			virtual std::shared_ptr<SendSignalAction> getThisSendSignalActionPtr() const;
 			virtual void setThisSendSignalActionPtr(std::weak_ptr<SendSignalAction> thisSendSignalActionPtr);

@@ -28,7 +28,7 @@ namespace ecore
 			ETypedElementImpl& operator=(ETypedElementImpl const&) = delete;
 
 		protected:
-			friend class EcoreFactoryImpl;
+			friend class ecoreFactoryImpl;
 			ETypedElementImpl();
 			virtual std::shared_ptr<ETypedElement> getThisETypedElementPtr() const;
 			virtual void setThisETypedElementPtr(std::weak_ptr<ETypedElement> thisETypedElementPtr);

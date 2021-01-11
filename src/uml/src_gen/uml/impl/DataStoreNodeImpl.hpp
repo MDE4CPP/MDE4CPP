@@ -28,7 +28,7 @@ namespace uml
 			DataStoreNodeImpl& operator=(DataStoreNodeImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			DataStoreNodeImpl();
 			virtual std::shared_ptr<DataStoreNode> getThisDataStoreNodePtr() const;
 			virtual void setThisDataStoreNodePtr(std::weak_ptr<DataStoreNode> thisDataStoreNodePtr);

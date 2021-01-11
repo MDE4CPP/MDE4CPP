@@ -28,7 +28,7 @@ namespace uml
 			OpaqueBehaviorImpl& operator=(OpaqueBehaviorImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			OpaqueBehaviorImpl();
 			virtual std::shared_ptr<OpaqueBehavior> getThisOpaqueBehaviorPtr() const;
 			virtual void setThisOpaqueBehaviorPtr(std::weak_ptr<OpaqueBehavior> thisOpaqueBehaviorPtr);

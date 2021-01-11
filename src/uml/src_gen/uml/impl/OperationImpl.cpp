@@ -87,8 +87,8 @@
 #include "uml/Type.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -340,7 +340,7 @@ std::shared_ptr<ecore::EObject>  OperationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> OperationImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getOperation_Class();
+	return uml::umlPackage::eInstance()->getOperation_Class();
 }
 
 //*********************************
@@ -871,23 +871,23 @@ Any OperationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::OPERATION_ATTRIBUTE_BODYCONDITION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getBodyCondition())); //16830
-		case uml::UmlPackage::OPERATION_ATTRIBUTE_CLASS:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getClass().lock())); //16831
-		case uml::UmlPackage::OPERATION_ATTRIBUTE_DATATYPE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDatatype().lock())); //16832
-		case uml::UmlPackage::OPERATION_ATTRIBUTE_INTERFACE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getInterface().lock())); //16833
-		case uml::UmlPackage::OPERATION_ATTRIBUTE_ISORDERED:
-			return eAny(getIsOrdered()); //16834
-		case uml::UmlPackage::OPERATION_ATTRIBUTE_ISQUERY:
-			return eAny(getIsQuery()); //16835
-		case uml::UmlPackage::OPERATION_ATTRIBUTE_ISUNIQUE:
-			return eAny(getIsUnique()); //16836
-		case uml::UmlPackage::OPERATION_ATTRIBUTE_LOWER:
-			return eAny(getLower()); //16837
-		case uml::UmlPackage::OPERATION_ATTRIBUTE_POSTCONDITION:
+		case uml::umlPackage::OPERATION_ATTRIBUTE_BODYCONDITION:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getBodyCondition())); //16730
+		case uml::umlPackage::OPERATION_ATTRIBUTE_CLASS:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getClass().lock())); //16731
+		case uml::umlPackage::OPERATION_ATTRIBUTE_DATATYPE:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDatatype().lock())); //16732
+		case uml::umlPackage::OPERATION_ATTRIBUTE_INTERFACE:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getInterface().lock())); //16733
+		case uml::umlPackage::OPERATION_ATTRIBUTE_ISORDERED:
+			return eAny(getIsOrdered()); //16734
+		case uml::umlPackage::OPERATION_ATTRIBUTE_ISQUERY:
+			return eAny(getIsQuery()); //16735
+		case uml::umlPackage::OPERATION_ATTRIBUTE_ISUNIQUE:
+			return eAny(getIsUnique()); //16736
+		case uml::umlPackage::OPERATION_ATTRIBUTE_LOWER:
+			return eAny(getLower()); //16737
+		case uml::umlPackage::OPERATION_ATTRIBUTE_POSTCONDITION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Constraint>::iterator iter = m_postcondition->begin();
@@ -897,9 +897,9 @@ Any OperationImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //16838
+			return eAny(tempList); //16738
 		}
-		case uml::UmlPackage::OPERATION_ATTRIBUTE_PRECONDITION:
+		case uml::umlPackage::OPERATION_ATTRIBUTE_PRECONDITION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Constraint>::iterator iter = m_precondition->begin();
@@ -909,9 +909,9 @@ Any OperationImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //16839
+			return eAny(tempList); //16739
 		}
-		case uml::UmlPackage::OPERATION_ATTRIBUTE_REDEFINEDOPERATION:
+		case uml::umlPackage::OPERATION_ATTRIBUTE_REDEFINEDOPERATION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Operation>::iterator iter = m_redefinedOperation->begin();
@@ -921,12 +921,12 @@ Any OperationImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //16840
+			return eAny(tempList); //16740
 		}
-		case uml::UmlPackage::OPERATION_ATTRIBUTE_TYPE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getType())); //16841
-		case uml::UmlPackage::OPERATION_ATTRIBUTE_UPPER:
-			return eAny(getUpper()); //16842
+		case uml::umlPackage::OPERATION_ATTRIBUTE_TYPE:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getType())); //16741
+		case uml::umlPackage::OPERATION_ATTRIBUTE_UPPER:
+			return eAny(getUpper()); //16742
 	}
 	Any result;
 	result = BehavioralFeatureImpl::eGet(featureID, resolve, coreType);
@@ -946,32 +946,32 @@ bool OperationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::OPERATION_ATTRIBUTE_BODYCONDITION:
-			return getBodyCondition() != nullptr; //16830
-		case uml::UmlPackage::OPERATION_ATTRIBUTE_CLASS:
-			return getClass().lock() != nullptr; //16831
-		case uml::UmlPackage::OPERATION_ATTRIBUTE_DATATYPE:
-			return getDatatype().lock() != nullptr; //16832
-		case uml::UmlPackage::OPERATION_ATTRIBUTE_INTERFACE:
-			return getInterface().lock() != nullptr; //16833
-		case uml::UmlPackage::OPERATION_ATTRIBUTE_ISORDERED:
-			return getIsOrdered() != false; //16834
-		case uml::UmlPackage::OPERATION_ATTRIBUTE_ISQUERY:
-			return getIsQuery() != false; //16835
-		case uml::UmlPackage::OPERATION_ATTRIBUTE_ISUNIQUE:
-			return getIsUnique() != true; //16836
-		case uml::UmlPackage::OPERATION_ATTRIBUTE_LOWER:
-			return getLower() != 1; //16837
-		case uml::UmlPackage::OPERATION_ATTRIBUTE_POSTCONDITION:
-			return getPostcondition() != nullptr; //16838
-		case uml::UmlPackage::OPERATION_ATTRIBUTE_PRECONDITION:
-			return getPrecondition() != nullptr; //16839
-		case uml::UmlPackage::OPERATION_ATTRIBUTE_REDEFINEDOPERATION:
-			return getRedefinedOperation() != nullptr; //16840
-		case uml::UmlPackage::OPERATION_ATTRIBUTE_TYPE:
-			return getType() != nullptr; //16841
-		case uml::UmlPackage::OPERATION_ATTRIBUTE_UPPER:
-			return getUpper() != 1; //16842
+		case uml::umlPackage::OPERATION_ATTRIBUTE_BODYCONDITION:
+			return getBodyCondition() != nullptr; //16730
+		case uml::umlPackage::OPERATION_ATTRIBUTE_CLASS:
+			return getClass().lock() != nullptr; //16731
+		case uml::umlPackage::OPERATION_ATTRIBUTE_DATATYPE:
+			return getDatatype().lock() != nullptr; //16732
+		case uml::umlPackage::OPERATION_ATTRIBUTE_INTERFACE:
+			return getInterface().lock() != nullptr; //16733
+		case uml::umlPackage::OPERATION_ATTRIBUTE_ISORDERED:
+			return getIsOrdered() != false; //16734
+		case uml::umlPackage::OPERATION_ATTRIBUTE_ISQUERY:
+			return getIsQuery() != false; //16735
+		case uml::umlPackage::OPERATION_ATTRIBUTE_ISUNIQUE:
+			return getIsUnique() != true; //16736
+		case uml::umlPackage::OPERATION_ATTRIBUTE_LOWER:
+			return getLower() != 1; //16737
+		case uml::umlPackage::OPERATION_ATTRIBUTE_POSTCONDITION:
+			return getPostcondition() != nullptr; //16738
+		case uml::umlPackage::OPERATION_ATTRIBUTE_PRECONDITION:
+			return getPrecondition() != nullptr; //16739
+		case uml::umlPackage::OPERATION_ATTRIBUTE_REDEFINEDOPERATION:
+			return getRedefinedOperation() != nullptr; //16740
+		case uml::umlPackage::OPERATION_ATTRIBUTE_TYPE:
+			return getType() != nullptr; //16741
+		case uml::umlPackage::OPERATION_ATTRIBUTE_UPPER:
+			return getUpper() != 1; //16742
 	}
 	bool result = false;
 	result = BehavioralFeatureImpl::internalEIsSet(featureID);
@@ -991,46 +991,46 @@ bool OperationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::OPERATION_ATTRIBUTE_BODYCONDITION:
+		case uml::umlPackage::OPERATION_ATTRIBUTE_BODYCONDITION:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Constraint> _bodyCondition = std::dynamic_pointer_cast<uml::Constraint>(_temp);
-			setBodyCondition(_bodyCondition); //16830
+			setBodyCondition(_bodyCondition); //16730
 			return true;
 		}
-		case uml::UmlPackage::OPERATION_ATTRIBUTE_CLASS:
+		case uml::umlPackage::OPERATION_ATTRIBUTE_CLASS:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Class> _class = std::dynamic_pointer_cast<uml::Class>(_temp);
-			setClass(_class); //16831
+			setClass(_class); //16731
 			return true;
 		}
-		case uml::UmlPackage::OPERATION_ATTRIBUTE_DATATYPE:
+		case uml::umlPackage::OPERATION_ATTRIBUTE_DATATYPE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::DataType> _datatype = std::dynamic_pointer_cast<uml::DataType>(_temp);
-			setDatatype(_datatype); //16832
+			setDatatype(_datatype); //16732
 			return true;
 		}
-		case uml::UmlPackage::OPERATION_ATTRIBUTE_INTERFACE:
+		case uml::umlPackage::OPERATION_ATTRIBUTE_INTERFACE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Interface> _interface = std::dynamic_pointer_cast<uml::Interface>(_temp);
-			setInterface(_interface); //16833
+			setInterface(_interface); //16733
 			return true;
 		}
-		case uml::UmlPackage::OPERATION_ATTRIBUTE_ISQUERY:
+		case uml::umlPackage::OPERATION_ATTRIBUTE_ISQUERY:
 		{
 			// BOOST CAST
 			bool _isQuery = newValue->get<bool>();
-			setIsQuery(_isQuery); //16835
+			setIsQuery(_isQuery); //16735
 			return true;
 		}
-		case uml::UmlPackage::OPERATION_ATTRIBUTE_POSTCONDITION:
+		case uml::umlPackage::OPERATION_ATTRIBUTE_POSTCONDITION:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -1066,7 +1066,7 @@ bool OperationImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case uml::UmlPackage::OPERATION_ATTRIBUTE_PRECONDITION:
+		case uml::umlPackage::OPERATION_ATTRIBUTE_PRECONDITION:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -1102,7 +1102,7 @@ bool OperationImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case uml::UmlPackage::OPERATION_ATTRIBUTE_REDEFINEDOPERATION:
+		case uml::umlPackage::OPERATION_ATTRIBUTE_REDEFINEDOPERATION:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -1166,7 +1166,7 @@ void OperationImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> 
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -1233,7 +1233,7 @@ void OperationImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoa
 
 void OperationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	BehavioralFeatureImpl::loadNode(nodeName, loadHandler);
@@ -1245,7 +1245,7 @@ void OperationImpl::resolveReferences(const int featureID, std::list<std::shared
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::OPERATION_ATTRIBUTE_BODYCONDITION:
+		case uml::umlPackage::OPERATION_ATTRIBUTE_BODYCONDITION:
 		{
 			if (references.size() == 1)
 			{
@@ -1257,7 +1257,7 @@ void OperationImpl::resolveReferences(const int featureID, std::list<std::shared
 			return;
 		}
 
-		case uml::UmlPackage::OPERATION_ATTRIBUTE_CLASS:
+		case uml::umlPackage::OPERATION_ATTRIBUTE_CLASS:
 		{
 			if (references.size() == 1)
 			{
@@ -1269,7 +1269,7 @@ void OperationImpl::resolveReferences(const int featureID, std::list<std::shared
 			return;
 		}
 
-		case uml::UmlPackage::OPERATION_ATTRIBUTE_DATATYPE:
+		case uml::umlPackage::OPERATION_ATTRIBUTE_DATATYPE:
 		{
 			if (references.size() == 1)
 			{
@@ -1281,7 +1281,7 @@ void OperationImpl::resolveReferences(const int featureID, std::list<std::shared
 			return;
 		}
 
-		case uml::UmlPackage::OPERATION_ATTRIBUTE_INTERFACE:
+		case uml::umlPackage::OPERATION_ATTRIBUTE_INTERFACE:
 		{
 			if (references.size() == 1)
 			{
@@ -1293,7 +1293,7 @@ void OperationImpl::resolveReferences(const int featureID, std::list<std::shared
 			return;
 		}
 
-		case uml::UmlPackage::OPERATION_ATTRIBUTE_POSTCONDITION:
+		case uml::umlPackage::OPERATION_ATTRIBUTE_POSTCONDITION:
 		{
 			std::shared_ptr<Bag<uml::Constraint>> _postcondition = getPostcondition();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -1307,7 +1307,7 @@ void OperationImpl::resolveReferences(const int featureID, std::list<std::shared
 			return;
 		}
 
-		case uml::UmlPackage::OPERATION_ATTRIBUTE_PRECONDITION:
+		case uml::umlPackage::OPERATION_ATTRIBUTE_PRECONDITION:
 		{
 			std::shared_ptr<Bag<uml::Constraint>> _precondition = getPrecondition();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -1321,7 +1321,7 @@ void OperationImpl::resolveReferences(const int featureID, std::list<std::shared
 			return;
 		}
 
-		case uml::UmlPackage::OPERATION_ATTRIBUTE_REDEFINEDOPERATION:
+		case uml::umlPackage::OPERATION_ATTRIBUTE_REDEFINEDOPERATION:
 		{
 			std::shared_ptr<Bag<uml::Operation>> _redefinedOperation = getRedefinedOperation();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -1372,7 +1372,7 @@ void OperationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 		// Add attributes

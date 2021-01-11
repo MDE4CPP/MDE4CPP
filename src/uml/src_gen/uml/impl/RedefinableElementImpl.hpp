@@ -28,7 +28,7 @@ namespace uml
 			RedefinableElementImpl& operator=(RedefinableElementImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			RedefinableElementImpl();
 			virtual std::shared_ptr<RedefinableElement> getThisRedefinableElementPtr() const;
 			virtual void setThisRedefinableElementPtr(std::weak_ptr<RedefinableElement> thisRedefinableElementPtr);

@@ -28,7 +28,7 @@ namespace uml
 			EnumerationImpl& operator=(EnumerationImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			EnumerationImpl();
 			virtual std::shared_ptr<Enumeration> getThisEnumerationPtr() const;
 			virtual void setThisEnumerationPtr(std::weak_ptr<Enumeration> thisEnumerationPtr);

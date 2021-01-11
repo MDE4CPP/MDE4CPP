@@ -71,8 +71,8 @@
 #include "uml/ValueSpecification.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -303,7 +303,7 @@ std::shared_ptr<ecore::EObject>  ExtensionEndImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ExtensionEndImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getExtensionEnd_Class();
+	return uml::umlPackage::eInstance()->getExtensionEnd_Class();
 }
 
 //*********************************
@@ -495,7 +495,7 @@ void ExtensionEndImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandle
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -511,7 +511,7 @@ void ExtensionEndImpl::loadAttributes(std::shared_ptr<persistence::interfaces::X
 
 void ExtensionEndImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	PropertyImpl::loadNode(nodeName, loadHandler);
@@ -559,7 +559,7 @@ void ExtensionEndImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 

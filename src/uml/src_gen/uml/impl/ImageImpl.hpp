@@ -28,7 +28,7 @@ namespace uml
 			ImageImpl& operator=(ImageImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			ImageImpl();
 			virtual std::shared_ptr<Image> getThisImagePtr() const;
 			virtual void setThisImagePtr(std::weak_ptr<Image> thisImagePtr);

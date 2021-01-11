@@ -28,7 +28,7 @@ namespace uml
 			ClearStructuralFeatureActionImpl& operator=(ClearStructuralFeatureActionImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			ClearStructuralFeatureActionImpl();
 			virtual std::shared_ptr<ClearStructuralFeatureAction> getThisClearStructuralFeatureActionPtr() const;
 			virtual void setThisClearStructuralFeatureActionPtr(std::weak_ptr<ClearStructuralFeatureAction> thisClearStructuralFeatureActionPtr);

@@ -50,7 +50,7 @@
 #include "fUML/Semantics/Values/LiteralIntegerEvaluation.hpp"
 #include "fUML/Semantics/Values/LiteralRealEvaluation.hpp"
 #include "fUML/Semantics/CommonBehavior/CallEventExecution.hpp"
-#include "uml/UmlPackage.hpp"
+#include "uml/umlPackage.hpp"
 #include "uml/InstanceValue.hpp"
 #include "uml/LiteralBoolean.hpp"
 #include "uml/LiteralInteger.hpp"
@@ -173,8 +173,8 @@
 #include "fUML/Semantics/Loci/impl/LociFactoryImpl.hpp"
 #include "fUML/Semantics/Loci/impl/LociPackageImpl.hpp"
 
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
+#include "fUML/fUMLFactory.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsFactory.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
 
@@ -302,13 +302,13 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> ExecutionFactoryImpl
 	//generated from body annotation
 		std::shared_ptr <fUML::Semantics::CommonBehavior::Execution> execution;
 	int behaviorMetaElementID = behavior->getMetaElementID();
-    if((behaviorMetaElementID == uml::UmlPackage::OPAQUEBEHAVIOR_CLASS) || (behaviorMetaElementID == uml::UmlPackage::FUNCTIONBEHAVIOR_CLASS))
+    if((behaviorMetaElementID == uml::umlPackage::OPAQUEBEHAVIOR_CLASS) || (behaviorMetaElementID == uml::umlPackage::FUNCTIONBEHAVIOR_CLASS))
     {
         execution = this->instantiateOpaqueBehaviorExecution(behavior);
     }
     else
     {
-		if(behaviorMetaElementID == uml::UmlPackage::ACTIVITY_CLASS)
+		if(behaviorMetaElementID == uml::umlPackage::ACTIVITY_CLASS)
 		{
 			execution = fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createActivityExecution();
 			execution->getTypes()->push_back(behavior);
@@ -458,242 +458,242 @@ std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> ExecutionFactoryImpl::in
 
 	switch (element->eClass()->getClassifierID()) 
 	{
-		case uml::UmlPackage::LITERALBOOLEAN_CLASS:
+		case uml::umlPackage::LITERALBOOLEAN_CLASS:
 		{
 			visitor = fUML::Semantics::Values::ValuesFactory::eInstance()->createLiteralBooleanEvaluation();
 			break;
 		}
-		case uml::UmlPackage::LITERALSTRING_CLASS:
+		case uml::umlPackage::LITERALSTRING_CLASS:
 		{
 			visitor = fUML::Semantics::Values::ValuesFactory::eInstance()->createLiteralStringEvaluation();
 			break;
 		}
-		case uml::UmlPackage::LITERALNULL_CLASS:
+		case uml::umlPackage::LITERALNULL_CLASS:
 		{
 			visitor =  fUML::Semantics::Values::ValuesFactory::eInstance()->createLiteralNullEvaluation();
 			break;
 		}
-		case uml::UmlPackage::INSTANCEVALUE_CLASS:
+		case uml::umlPackage::INSTANCEVALUE_CLASS:
 		{
 			visitor = fUML::Semantics::Classification::ClassificationFactory::eInstance()->createInstanceValueEvaluation();
 			break;
 		}
-		case uml::UmlPackage::LITERALUNLIMITEDNATURAL_CLASS:
+		case uml::umlPackage::LITERALUNLIMITEDNATURAL_CLASS:
 		{
 			visitor = fUML::Semantics::Values::ValuesFactory::eInstance()->createLiteralUnlimitedNaturalEvaluation();
 			break;
 		}
-		case uml::UmlPackage::LITERALINTEGER_CLASS:
+		case uml::umlPackage::LITERALINTEGER_CLASS:
 		{
 			visitor = fUML::Semantics::Values::ValuesFactory::eInstance()->createLiteralIntegerEvaluation();
 			break;
 		}
-		case uml::UmlPackage::LITERALREAL_CLASS:
+		case uml::umlPackage::LITERALREAL_CLASS:
 		{
 			visitor = fUML::Semantics::Values::ValuesFactory::eInstance()->createLiteralRealEvaluation();
 			break;
 		}
-		case uml::UmlPackage::ACTIVITY_CLASS:
+		case uml::umlPackage::ACTIVITY_CLASS:
 		{
 			visitor = fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createActivityExecution();
 			break;
 		}
-		case uml::UmlPackage::ACTIVITYPARAMETERNODE_CLASS:
+		case uml::umlPackage::ACTIVITYPARAMETERNODE_CLASS:
 		{
 			visitor = fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createActivityParameterNodeActivation();
 			break;
 		}
-		case uml::UmlPackage::INITIALNODE_CLASS:
+		case uml::umlPackage::INITIALNODE_CLASS:
 		{
 			visitor = fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createInitialNodeActivation();
 			break;
 		}
-		case uml::UmlPackage::ACTIVITYFINALNODE_CLASS:
+		case uml::umlPackage::ACTIVITYFINALNODE_CLASS:
 		{
 			visitor = fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createActivityFinalNodeActivation();
 			break;
 		}
-		case uml::UmlPackage::FLOWFINALNODE_CLASS:
+		case uml::umlPackage::FLOWFINALNODE_CLASS:
 		{
 			visitor = fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createFlowFinalNodeActivation();
 			break;
 		}
-		case uml::UmlPackage::JOINNODE_CLASS:
+		case uml::umlPackage::JOINNODE_CLASS:
 		{
 			visitor = fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createJoinNodeActivation();
 			break;
 		}
-		case uml::UmlPackage::MERGENODE_CLASS:
+		case uml::umlPackage::MERGENODE_CLASS:
 		{
 			visitor = fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createMergeNodeActivation();
 			break;
 		}
-		case uml::UmlPackage::FORKNODE_CLASS:
+		case uml::umlPackage::FORKNODE_CLASS:
 		{
 			visitor = fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createForkNodeActivation();
 			break;
 		}
-		case uml::UmlPackage::DECISIONNODE_CLASS:
+		case uml::umlPackage::DECISIONNODE_CLASS:
 		{
 			visitor = fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createDecisionNodeActivation();
 			break;
 		}
-		case uml::UmlPackage::EXPANSIONREGION_CLASS:
+		case uml::umlPackage::EXPANSIONREGION_CLASS:
 		{
 			visitor = fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createExpansionRegionActivation();
 			break;
 		}
-		case uml::UmlPackage::EXPANSIONNODE_CLASS:
+		case uml::umlPackage::EXPANSIONNODE_CLASS:
 		{
 			visitor = fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createExpansionNodeActivation();
 			break;
 		}
-		case uml::UmlPackage::INPUTPIN_CLASS:
+		case uml::umlPackage::INPUTPIN_CLASS:
 		{
 			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createInputPinActivation();
 			break;
 		}
-		case uml::UmlPackage::OUTPUTPIN_CLASS:
+		case uml::umlPackage::OUTPUTPIN_CLASS:
 		{
 			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createOutputPinActivation();
 			break;
 		}
-		case uml::UmlPackage::CALLBEHAVIORACTION_CLASS:
+		case uml::umlPackage::CALLBEHAVIORACTION_CLASS:
 		{
 			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createCallBehaviorActionActivation();
 			break;
 		}
-		case uml::UmlPackage::CALLOPERATIONACTION_CLASS:
+		case uml::umlPackage::CALLOPERATIONACTION_CLASS:
 		{
 			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createCallOperationActionActivation();
 			break;
 		}
-		case uml::UmlPackage::SENDSIGNALACTION_CLASS:
+		case uml::umlPackage::SENDSIGNALACTION_CLASS:
 		{
 			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createSendSignalActionActivation();
 			break;
 		}
-		case uml::UmlPackage::READSELFACTION_CLASS:
+		case uml::umlPackage::READSELFACTION_CLASS:
 		{
 			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createReadSelfActionActivation();
 			break;
 		}
-		case uml::UmlPackage:: TESTIDENTITYACTION_CLASS:
+		case uml::umlPackage:: TESTIDENTITYACTION_CLASS:
 		{
 			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createTestIdentityActionActivation();
 			break;
 		}
-		case uml::UmlPackage::VALUESPECIFICATIONACTION_CLASS:
+		case uml::umlPackage::VALUESPECIFICATIONACTION_CLASS:
 		{
 			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createValueSpecificationActionActivation();
 			break;
 		}
-		case uml::UmlPackage::CREATEOBJECTACTION_CLASS:
+		case uml::umlPackage::CREATEOBJECTACTION_CLASS:
 		{
 			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createCreateObjectActionActivation();
 			break;
 		}
-		case uml::UmlPackage::DESTROYOBJECTACTION_CLASS:
+		case uml::umlPackage::DESTROYOBJECTACTION_CLASS:
 		{
 			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createDestroyObjectActionActivation();
 			break;
 		}
-		case uml::UmlPackage::READSTRUCTURALFEATUREACTION_CLASS:
+		case uml::umlPackage::READSTRUCTURALFEATUREACTION_CLASS:
 		{
 			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createReadStructuralFeatureActionActivation();
 			break;
 		}
-		case uml::UmlPackage::CLEARSTRUCTURALFEATUREACTION_CLASS:
+		case uml::umlPackage::CLEARSTRUCTURALFEATUREACTION_CLASS:
 		{
 			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createClearStructuralFeatureActionActivation();
 			break;
 		}
-		case uml::UmlPackage::ADDSTRUCTURALFEATUREVALUEACTION_CLASS:
+		case uml::umlPackage::ADDSTRUCTURALFEATUREVALUEACTION_CLASS:
 		{
 			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createAddStructuralFeatureValueActionActivation();
 			break;
 		}
-		case uml::UmlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_CLASS:
+		case uml::umlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_CLASS:
 		{
 			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createRemoveStructuralFeatureValueActivation();
 			break;
 		}
-		case uml::UmlPackage::READLINKACTION_CLASS:
+		case uml::umlPackage::READLINKACTION_CLASS:
 		{
 			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createReadLinkActionActivation();
 			break;
 		}
-		case uml::UmlPackage::CLEARASSOCIATIONACTION_CLASS:
+		case uml::umlPackage::CLEARASSOCIATIONACTION_CLASS:
 		{
 			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createClearAssociationActionActivation();
 			break;
 		}
-		case uml::UmlPackage::CREATELINKACTION_CLASS:
+		case uml::umlPackage::CREATELINKACTION_CLASS:
 		{
 			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createCreateLinkActionActivation();
 			break;
 		}
-		case uml::UmlPackage::DESTROYLINKACTION_CLASS:
+		case uml::umlPackage::DESTROYLINKACTION_CLASS:
 		{
 			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createDestroyLinkActionActivation();
 			break;
 		}
-		case uml::UmlPackage::CONDITIONALNODE_CLASS: 
+		case uml::umlPackage::CONDITIONALNODE_CLASS: 
 		{
 			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createConditionalNodeActivation();
 			break;
 		}
-		case uml::UmlPackage::LOOPNODE_CLASS: 
+		case uml::umlPackage::LOOPNODE_CLASS: 
 		{
 			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createLoopNodeActivation();
 			break;
 		}
-		case uml::UmlPackage::STRUCTUREDACTIVITYNODE_CLASS: 
+		case uml::umlPackage::STRUCTUREDACTIVITYNODE_CLASS: 
 		{
 			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createStructuredActivityNodeActivation();
 			break;
 		}
-		case uml::UmlPackage::READEXTENTACTION_CLASS: 
+		case uml::umlPackage::READEXTENTACTION_CLASS: 
 		{
 			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createReadExtentActionActivation();
 			break;
 		}
-		case uml::UmlPackage::READISCLASSIFIEDOBJECTACTION_CLASS: 
+		case uml::umlPackage::READISCLASSIFIEDOBJECTACTION_CLASS: 
 		{
 			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createReadIsClassifiedObjectActionActivation();
 			break;
 		}
-		case uml::UmlPackage::RECLASSIFYOBJECTACTION_CLASS: 
+		case uml::umlPackage::RECLASSIFYOBJECTACTION_CLASS: 
 		{
 			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createReclassifyObjectActionActivation();
 			break;
 		}
-		case uml::UmlPackage::STARTOBJECTBEHAVIORACTION_CLASS: 
+		case uml::umlPackage::STARTOBJECTBEHAVIORACTION_CLASS: 
 		{
 			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createStartObjectBehaviorActionActivation();
 			break;
 		}
-		case uml::UmlPackage::STARTCLASSIFIERBEHAVIORACTION_CLASS: 
+		case uml::umlPackage::STARTCLASSIFIERBEHAVIORACTION_CLASS: 
 		{
 			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createStartClassifierBehaviorActionActivation();
 			break;
 		}
-		case uml::UmlPackage::ACCEPTEVENTACTION_CLASS: 
+		case uml::umlPackage::ACCEPTEVENTACTION_CLASS: 
 		{
 			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createAcceptEventActionActivation();
 			break;
 		}
-		case uml::UmlPackage::REDUCEACTION_CLASS: 
+		case uml::umlPackage::REDUCEACTION_CLASS: 
 		{
 			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createReduceActionActivation();
 			break;
 		}
-		case uml::UmlPackage::DATASTORENODE_CLASS: 
+		case uml::umlPackage::DATASTORENODE_CLASS: 
 		{
 			visitor = fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createDataStoreNodeActivation();
 			break;
 		}
-		case uml::UmlPackage::CENTRALBUFFERNODE_CLASS: 
+		case uml::umlPackage::CENTRALBUFFERNODE_CLASS: 
 		{
 			visitor = fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createCentralBufferNodeActivation();
 			break;
@@ -1011,7 +1011,7 @@ void ExecutionFactoryImpl::load(std::shared_ptr<persistence::interfaces::XLoadHa
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get FUMLFactory
+	// get fUMLFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{

@@ -38,7 +38,7 @@
 #include "uml/Port.hpp"
 #include "uml/StructuralFeature.hpp"
 #include "uml/Association.hpp"
-#include "uml/UmlPackage.hpp"
+#include "uml/umlPackage.hpp"
 #include "uml/InputPin.hpp"
 #include "fUML/Semantics/Values/Value.hpp"
 #include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
@@ -83,10 +83,10 @@
 #include "PSCS/Semantics/Actions/impl/ActionsFactoryImpl.hpp"
 #include "PSCS/Semantics/Actions/impl/ActionsPackageImpl.hpp"
 
-#include "PSCS/Semantics/SemanticsFactory.hpp"
-#include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "PSCS/PSCSFactory.hpp"
 #include "PSCS/PSCSPackage.hpp"
+#include "PSCS/Semantics/SemanticsFactory.hpp"
+#include "PSCS/Semantics/SemanticsPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -205,7 +205,7 @@ void CS_AddStructuralFeatureValueActionActivationImpl::doAction()
 	std::shared_ptr<uml::AddStructuralFeatureValueAction> action = this->getAddStructuralFeatureValueAction();
 	std::shared_ptr<uml::StructuralFeature> feature = action->getStructuralFeature();
 	
-	if(feature->getMetaElementID() != uml::UmlPackage::PORT_CLASS) {
+	if(feature->getMetaElementID() != uml::umlPackage::PORT_CLASS) {
 		// Behaves as usual
 		this->doActionDefault();
 	}

@@ -28,7 +28,7 @@ namespace uml
 			TriggerImpl& operator=(TriggerImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			TriggerImpl();
 			virtual std::shared_ptr<Trigger> getThisTriggerPtr() const;
 			virtual void setThisTriggerPtr(std::weak_ptr<Trigger> thisTriggerPtr);

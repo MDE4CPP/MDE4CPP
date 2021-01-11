@@ -82,8 +82,8 @@
 #include "uml/Variable.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -111,11 +111,11 @@ ExpansionRegionImpl::ExpansionRegionImpl(std::weak_ptr<uml::Activity > par_Activ
 {
 	switch(reference_id)
 	{	
-	case UmlPackage::ACTIVITYNODE_ATTRIBUTE_ACTIVITY:
+	case umlPackage::ACTIVITYNODE_ATTRIBUTE_ACTIVITY:
 		m_activity = par_Activity;
 		m_owner = par_Activity;
 		 return;
-	case UmlPackage::ACTIVITYGROUP_ATTRIBUTE_INACTIVITY:
+	case umlPackage::ACTIVITYGROUP_ATTRIBUTE_INACTIVITY:
 		m_inActivity = par_Activity;
 		m_owner = par_Activity;
 		 return;
@@ -371,7 +371,7 @@ std::shared_ptr<ecore::EObject>  ExpansionRegionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ExpansionRegionImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getExpansionRegion_Class();
+	return uml::umlPackage::eInstance()->getExpansionRegion_Class();
 }
 
 //*********************************
@@ -648,7 +648,7 @@ Any ExpansionRegionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::EXPANSIONREGION_ATTRIBUTE_INPUTELEMENT:
+		case uml::umlPackage::EXPANSIONREGION_ATTRIBUTE_INPUTELEMENT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::ExpansionNode>::iterator iter = m_inputElement->begin();
@@ -658,11 +658,11 @@ Any ExpansionRegionImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //9546
+			return eAny(tempList); //9446
 		}
-		case uml::UmlPackage::EXPANSIONREGION_ATTRIBUTE_MODE:
-			return eAny(getMode()); //9544
-		case uml::UmlPackage::EXPANSIONREGION_ATTRIBUTE_OUTPUTELEMENT:
+		case uml::umlPackage::EXPANSIONREGION_ATTRIBUTE_MODE:
+			return eAny(getMode()); //9444
+		case uml::umlPackage::EXPANSIONREGION_ATTRIBUTE_OUTPUTELEMENT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::ExpansionNode>::iterator iter = m_outputElement->begin();
@@ -672,7 +672,7 @@ Any ExpansionRegionImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //9545
+			return eAny(tempList); //9445
 		}
 	}
 	return StructuredActivityNodeImpl::eGet(featureID, resolve, coreType);
@@ -681,12 +681,12 @@ bool ExpansionRegionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::EXPANSIONREGION_ATTRIBUTE_INPUTELEMENT:
-			return getInputElement() != nullptr; //9546
-		case uml::UmlPackage::EXPANSIONREGION_ATTRIBUTE_MODE:
-			return m_mode != ExpansionKind::ITERATIVE;; //9544
-		case uml::UmlPackage::EXPANSIONREGION_ATTRIBUTE_OUTPUTELEMENT:
-			return getOutputElement() != nullptr; //9545
+		case uml::umlPackage::EXPANSIONREGION_ATTRIBUTE_INPUTELEMENT:
+			return getInputElement() != nullptr; //9446
+		case uml::umlPackage::EXPANSIONREGION_ATTRIBUTE_MODE:
+			return m_mode != ExpansionKind::ITERATIVE;; //9444
+		case uml::umlPackage::EXPANSIONREGION_ATTRIBUTE_OUTPUTELEMENT:
+			return getOutputElement() != nullptr; //9445
 	}
 	return StructuredActivityNodeImpl::internalEIsSet(featureID);
 }
@@ -694,7 +694,7 @@ bool ExpansionRegionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::EXPANSIONREGION_ATTRIBUTE_INPUTELEMENT:
+		case uml::umlPackage::EXPANSIONREGION_ATTRIBUTE_INPUTELEMENT:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -730,14 +730,14 @@ bool ExpansionRegionImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case uml::UmlPackage::EXPANSIONREGION_ATTRIBUTE_MODE:
+		case uml::umlPackage::EXPANSIONREGION_ATTRIBUTE_MODE:
 		{
 			// BOOST CAST
 			uml::ExpansionKind _mode = newValue->get<uml::ExpansionKind>();
-			setMode(_mode); //9544
+			setMode(_mode); //9444
 			return true;
 		}
-		case uml::UmlPackage::EXPANSIONREGION_ATTRIBUTE_OUTPUTELEMENT:
+		case uml::umlPackage::EXPANSIONREGION_ATTRIBUTE_OUTPUTELEMENT:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -789,7 +789,7 @@ void ExpansionRegionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHan
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -851,7 +851,7 @@ void ExpansionRegionImpl::loadAttributes(std::shared_ptr<persistence::interfaces
 
 void ExpansionRegionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	StructuredActivityNodeImpl::loadNode(nodeName, loadHandler);
@@ -861,7 +861,7 @@ void ExpansionRegionImpl::resolveReferences(const int featureID, std::list<std::
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::EXPANSIONREGION_ATTRIBUTE_INPUTELEMENT:
+		case uml::umlPackage::EXPANSIONREGION_ATTRIBUTE_INPUTELEMENT:
 		{
 			std::shared_ptr<Bag<uml::ExpansionNode>> _inputElement = getInputElement();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -875,7 +875,7 @@ void ExpansionRegionImpl::resolveReferences(const int featureID, std::list<std::
 			return;
 		}
 
-		case uml::UmlPackage::EXPANSIONREGION_ATTRIBUTE_OUTPUTELEMENT:
+		case uml::umlPackage::EXPANSIONREGION_ATTRIBUTE_OUTPUTELEMENT:
 		{
 			std::shared_ptr<Bag<uml::ExpansionNode>> _outputElement = getOutputElement();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -906,7 +906,6 @@ void ExpansionRegionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHan
 	
 	ActivityNodeImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);
@@ -930,7 +929,7 @@ void ExpansionRegionImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 		// Add attributes

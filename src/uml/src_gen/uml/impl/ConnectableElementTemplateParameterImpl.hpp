@@ -28,7 +28,7 @@ namespace uml
 			ConnectableElementTemplateParameterImpl& operator=(ConnectableElementTemplateParameterImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			ConnectableElementTemplateParameterImpl();
 			virtual std::shared_ptr<ConnectableElementTemplateParameter> getThisConnectableElementTemplateParameterPtr() const;
 			virtual void setThisConnectableElementTemplateParameterPtr(std::weak_ptr<ConnectableElementTemplateParameter> thisConnectableElementTemplateParameterPtr);

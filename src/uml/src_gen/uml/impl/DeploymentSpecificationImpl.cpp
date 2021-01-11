@@ -89,8 +89,8 @@
 #include "uml/UseCase.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -141,11 +141,11 @@ DeploymentSpecificationImpl::DeploymentSpecificationImpl(std::weak_ptr<uml::Pack
 {
 	switch(reference_id)
 	{	
-	case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
+	case umlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
 		m_owningPackage = par_Package;
 		m_namespace = par_Package;
 		 return;
-	case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
+	case umlPackage::TYPE_ATTRIBUTE_PACKAGE:
 		m_package = par_Package;
 		m_namespace = par_Package;
 		 return;
@@ -382,7 +382,7 @@ std::shared_ptr<ecore::EObject>  DeploymentSpecificationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> DeploymentSpecificationImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getDeploymentSpecification_Class();
+	return uml::umlPackage::eInstance()->getDeploymentSpecification_Class();
 }
 
 //*********************************
@@ -623,12 +623,12 @@ Any DeploymentSpecificationImpl::eGet(int featureID, bool resolve, bool coreType
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::DEPLOYMENTSPECIFICATION_ATTRIBUTE_DEPLOYMENT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDeployment().lock())); //7145
-		case uml::UmlPackage::DEPLOYMENTSPECIFICATION_ATTRIBUTE_DEPLOYMENTLOCATION:
-			return eAny(getDeploymentLocation()); //7143
-		case uml::UmlPackage::DEPLOYMENTSPECIFICATION_ATTRIBUTE_EXECUTIONLOCATION:
-			return eAny(getExecutionLocation()); //7144
+		case uml::umlPackage::DEPLOYMENTSPECIFICATION_ATTRIBUTE_DEPLOYMENT:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDeployment().lock())); //7045
+		case uml::umlPackage::DEPLOYMENTSPECIFICATION_ATTRIBUTE_DEPLOYMENTLOCATION:
+			return eAny(getDeploymentLocation()); //7043
+		case uml::umlPackage::DEPLOYMENTSPECIFICATION_ATTRIBUTE_EXECUTIONLOCATION:
+			return eAny(getExecutionLocation()); //7044
 	}
 	return ArtifactImpl::eGet(featureID, resolve, coreType);
 }
@@ -636,12 +636,12 @@ bool DeploymentSpecificationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::DEPLOYMENTSPECIFICATION_ATTRIBUTE_DEPLOYMENT:
-			return getDeployment().lock() != nullptr; //7145
-		case uml::UmlPackage::DEPLOYMENTSPECIFICATION_ATTRIBUTE_DEPLOYMENTLOCATION:
-			return getDeploymentLocation() != ""; //7143
-		case uml::UmlPackage::DEPLOYMENTSPECIFICATION_ATTRIBUTE_EXECUTIONLOCATION:
-			return getExecutionLocation() != ""; //7144
+		case uml::umlPackage::DEPLOYMENTSPECIFICATION_ATTRIBUTE_DEPLOYMENT:
+			return getDeployment().lock() != nullptr; //7045
+		case uml::umlPackage::DEPLOYMENTSPECIFICATION_ATTRIBUTE_DEPLOYMENTLOCATION:
+			return getDeploymentLocation() != ""; //7043
+		case uml::umlPackage::DEPLOYMENTSPECIFICATION_ATTRIBUTE_EXECUTIONLOCATION:
+			return getExecutionLocation() != ""; //7044
 	}
 	return ArtifactImpl::internalEIsSet(featureID);
 }
@@ -649,26 +649,26 @@ bool DeploymentSpecificationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::DEPLOYMENTSPECIFICATION_ATTRIBUTE_DEPLOYMENT:
+		case uml::umlPackage::DEPLOYMENTSPECIFICATION_ATTRIBUTE_DEPLOYMENT:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Deployment> _deployment = std::dynamic_pointer_cast<uml::Deployment>(_temp);
-			setDeployment(_deployment); //7145
+			setDeployment(_deployment); //7045
 			return true;
 		}
-		case uml::UmlPackage::DEPLOYMENTSPECIFICATION_ATTRIBUTE_DEPLOYMENTLOCATION:
+		case uml::umlPackage::DEPLOYMENTSPECIFICATION_ATTRIBUTE_DEPLOYMENTLOCATION:
 		{
 			// BOOST CAST
 			std::string _deploymentLocation = newValue->get<std::string>();
-			setDeploymentLocation(_deploymentLocation); //7143
+			setDeploymentLocation(_deploymentLocation); //7043
 			return true;
 		}
-		case uml::UmlPackage::DEPLOYMENTSPECIFICATION_ATTRIBUTE_EXECUTIONLOCATION:
+		case uml::umlPackage::DEPLOYMENTSPECIFICATION_ATTRIBUTE_EXECUTIONLOCATION:
 		{
 			// BOOST CAST
 			std::string _executionLocation = newValue->get<std::string>();
-			setExecutionLocation(_executionLocation); //7144
+			setExecutionLocation(_executionLocation); //7044
 			return true;
 		}
 	}
@@ -687,7 +687,7 @@ void DeploymentSpecificationImpl::load(std::shared_ptr<persistence::interfaces::
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -733,7 +733,7 @@ void DeploymentSpecificationImpl::loadAttributes(std::shared_ptr<persistence::in
 
 void DeploymentSpecificationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	ArtifactImpl::loadNode(nodeName, loadHandler);
@@ -743,7 +743,7 @@ void DeploymentSpecificationImpl::resolveReferences(const int featureID, std::li
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::DEPLOYMENTSPECIFICATION_ATTRIBUTE_DEPLOYMENT:
+		case uml::umlPackage::DEPLOYMENTSPECIFICATION_ATTRIBUTE_DEPLOYMENT:
 		{
 			if (references.size() == 1)
 			{
@@ -795,7 +795,7 @@ void DeploymentSpecificationImpl::saveContent(std::shared_ptr<persistence::inter
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 		// Add attributes

@@ -77,8 +77,8 @@
 #include "uml/StructuredActivityNode.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -273,7 +273,7 @@ std::shared_ptr<ecore::EObject>  CallBehaviorActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> CallBehaviorActionImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getCallBehaviorAction_Class();
+	return uml::umlPackage::eInstance()->getCallBehaviorAction_Class();
 }
 
 //*********************************
@@ -444,8 +444,8 @@ Any CallBehaviorActionImpl::eGet(int featureID, bool resolve, bool coreType) con
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::CALLBEHAVIORACTION_ATTRIBUTE_BEHAVIOR:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getBehavior())); //3031
+		case uml::umlPackage::CALLBEHAVIORACTION_ATTRIBUTE_BEHAVIOR:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getBehavior())); //2931
 	}
 	return CallActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -453,8 +453,8 @@ bool CallBehaviorActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::CALLBEHAVIORACTION_ATTRIBUTE_BEHAVIOR:
-			return getBehavior() != nullptr; //3031
+		case uml::umlPackage::CALLBEHAVIORACTION_ATTRIBUTE_BEHAVIOR:
+			return getBehavior() != nullptr; //2931
 	}
 	return CallActionImpl::internalEIsSet(featureID);
 }
@@ -462,12 +462,12 @@ bool CallBehaviorActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::CALLBEHAVIORACTION_ATTRIBUTE_BEHAVIOR:
+		case uml::umlPackage::CALLBEHAVIORACTION_ATTRIBUTE_BEHAVIOR:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Behavior> _behavior = std::dynamic_pointer_cast<uml::Behavior>(_temp);
-			setBehavior(_behavior); //3031
+			setBehavior(_behavior); //2931
 			return true;
 		}
 	}
@@ -486,7 +486,7 @@ void CallBehaviorActionImpl::load(std::shared_ptr<persistence::interfaces::XLoad
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -521,7 +521,7 @@ void CallBehaviorActionImpl::loadAttributes(std::shared_ptr<persistence::interfa
 
 void CallBehaviorActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	CallActionImpl::loadNode(nodeName, loadHandler);
@@ -531,7 +531,7 @@ void CallBehaviorActionImpl::resolveReferences(const int featureID, std::list<st
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::CALLBEHAVIORACTION_ATTRIBUTE_BEHAVIOR:
+		case uml::umlPackage::CALLBEHAVIORACTION_ATTRIBUTE_BEHAVIOR:
 		{
 			if (references.size() == 1)
 			{
@@ -560,7 +560,6 @@ void CallBehaviorActionImpl::save(std::shared_ptr<persistence::interfaces::XSave
 	
 	ActivityNodeImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);
@@ -585,7 +584,7 @@ void CallBehaviorActionImpl::saveContent(std::shared_ptr<persistence::interfaces
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 

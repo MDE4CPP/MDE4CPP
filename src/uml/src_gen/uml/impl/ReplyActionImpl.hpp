@@ -28,7 +28,7 @@ namespace uml
 			ReplyActionImpl& operator=(ReplyActionImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			ReplyActionImpl();
 			virtual std::shared_ptr<ReplyAction> getThisReplyActionPtr() const;
 			virtual void setThisReplyActionPtr(std::weak_ptr<ReplyAction> thisReplyActionPtr);

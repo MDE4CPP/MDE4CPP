@@ -75,8 +75,8 @@
 #include "uml/ValueSpecification.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -243,7 +243,7 @@ std::shared_ptr<ecore::EObject>  ExpansionNodeImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ExpansionNodeImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getExpansionNode_Class();
+	return uml::umlPackage::eInstance()->getExpansionNode_Class();
 }
 
 //*********************************
@@ -390,10 +390,10 @@ Any ExpansionNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::EXPANSIONNODE_ATTRIBUTE_REGIONASINPUT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getRegionAsInput())); //9426
-		case uml::UmlPackage::EXPANSIONNODE_ATTRIBUTE_REGIONASOUTPUT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getRegionAsOutput())); //9427
+		case uml::umlPackage::EXPANSIONNODE_ATTRIBUTE_REGIONASINPUT:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getRegionAsInput())); //9326
+		case uml::umlPackage::EXPANSIONNODE_ATTRIBUTE_REGIONASOUTPUT:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getRegionAsOutput())); //9327
 	}
 	return ObjectNodeImpl::eGet(featureID, resolve, coreType);
 }
@@ -401,10 +401,10 @@ bool ExpansionNodeImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::EXPANSIONNODE_ATTRIBUTE_REGIONASINPUT:
-			return getRegionAsInput() != nullptr; //9426
-		case uml::UmlPackage::EXPANSIONNODE_ATTRIBUTE_REGIONASOUTPUT:
-			return getRegionAsOutput() != nullptr; //9427
+		case uml::umlPackage::EXPANSIONNODE_ATTRIBUTE_REGIONASINPUT:
+			return getRegionAsInput() != nullptr; //9326
+		case uml::umlPackage::EXPANSIONNODE_ATTRIBUTE_REGIONASOUTPUT:
+			return getRegionAsOutput() != nullptr; //9327
 	}
 	return ObjectNodeImpl::internalEIsSet(featureID);
 }
@@ -412,20 +412,20 @@ bool ExpansionNodeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::EXPANSIONNODE_ATTRIBUTE_REGIONASINPUT:
+		case uml::umlPackage::EXPANSIONNODE_ATTRIBUTE_REGIONASINPUT:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ExpansionRegion> _regionAsInput = std::dynamic_pointer_cast<uml::ExpansionRegion>(_temp);
-			setRegionAsInput(_regionAsInput); //9426
+			setRegionAsInput(_regionAsInput); //9326
 			return true;
 		}
-		case uml::UmlPackage::EXPANSIONNODE_ATTRIBUTE_REGIONASOUTPUT:
+		case uml::umlPackage::EXPANSIONNODE_ATTRIBUTE_REGIONASOUTPUT:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ExpansionRegion> _regionAsOutput = std::dynamic_pointer_cast<uml::ExpansionRegion>(_temp);
-			setRegionAsOutput(_regionAsOutput); //9427
+			setRegionAsOutput(_regionAsOutput); //9327
 			return true;
 		}
 	}
@@ -444,7 +444,7 @@ void ExpansionNodeImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandl
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -486,7 +486,7 @@ void ExpansionNodeImpl::loadAttributes(std::shared_ptr<persistence::interfaces::
 
 void ExpansionNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	ObjectNodeImpl::loadNode(nodeName, loadHandler);
@@ -496,7 +496,7 @@ void ExpansionNodeImpl::resolveReferences(const int featureID, std::list<std::sh
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::EXPANSIONNODE_ATTRIBUTE_REGIONASINPUT:
+		case uml::umlPackage::EXPANSIONNODE_ATTRIBUTE_REGIONASINPUT:
 		{
 			if (references.size() == 1)
 			{
@@ -508,7 +508,7 @@ void ExpansionNodeImpl::resolveReferences(const int featureID, std::list<std::sh
 			return;
 		}
 
-		case uml::UmlPackage::EXPANSIONNODE_ATTRIBUTE_REGIONASOUTPUT:
+		case uml::umlPackage::EXPANSIONNODE_ATTRIBUTE_REGIONASOUTPUT:
 		{
 			if (references.size() == 1)
 			{
@@ -532,7 +532,6 @@ void ExpansionNodeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandl
 	ActivityNodeImpl::saveContent(saveHandler);
 	TypedElementImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);
@@ -554,7 +553,7 @@ void ExpansionNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 

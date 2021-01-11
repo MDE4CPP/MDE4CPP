@@ -88,8 +88,8 @@
 #include "uml/UseCase.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -132,11 +132,11 @@ EncapsulatedClassifierImpl::EncapsulatedClassifierImpl(std::weak_ptr<uml::Packag
 {
 	switch(reference_id)
 	{	
-	case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
+	case umlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
 		m_owningPackage = par_Package;
 		m_namespace = par_Package;
 		 return;
-	case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
+	case umlPackage::TYPE_ATTRIBUTE_PACKAGE:
 		m_package = par_Package;
 		m_namespace = par_Package;
 		 return;
@@ -363,7 +363,7 @@ std::shared_ptr<ecore::EObject>  EncapsulatedClassifierImpl::copy() const
 
 std::shared_ptr<ecore::EClass> EncapsulatedClassifierImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getEncapsulatedClassifier_Class();
+	return uml::umlPackage::eInstance()->getEncapsulatedClassifier_Class();
 }
 
 //*********************************
@@ -596,7 +596,7 @@ Any EncapsulatedClassifierImpl::eGet(int featureID, bool resolve, bool coreType)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::ENCAPSULATEDCLASSIFIER_ATTRIBUTE_OWNEDPORT:
+		case uml::umlPackage::ENCAPSULATEDCLASSIFIER_ATTRIBUTE_OWNEDPORT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Port>::iterator iter = m_ownedPort->begin();
@@ -606,7 +606,7 @@ Any EncapsulatedClassifierImpl::eGet(int featureID, bool resolve, bool coreType)
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //8442
+			return eAny(tempList); //8342
 		}
 	}
 	return StructuredClassifierImpl::eGet(featureID, resolve, coreType);
@@ -615,8 +615,8 @@ bool EncapsulatedClassifierImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::ENCAPSULATEDCLASSIFIER_ATTRIBUTE_OWNEDPORT:
-			return getOwnedPort() != nullptr; //8442
+		case uml::umlPackage::ENCAPSULATEDCLASSIFIER_ATTRIBUTE_OWNEDPORT:
+			return getOwnedPort() != nullptr; //8342
 	}
 	return StructuredClassifierImpl::internalEIsSet(featureID);
 }
@@ -640,7 +640,7 @@ void EncapsulatedClassifierImpl::load(std::shared_ptr<persistence::interfaces::X
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -656,7 +656,7 @@ void EncapsulatedClassifierImpl::loadAttributes(std::shared_ptr<persistence::int
 
 void EncapsulatedClassifierImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	StructuredClassifierImpl::loadNode(nodeName, loadHandler);
@@ -703,7 +703,7 @@ void EncapsulatedClassifierImpl::saveContent(std::shared_ptr<persistence::interf
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 

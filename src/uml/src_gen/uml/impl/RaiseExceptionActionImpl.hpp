@@ -28,7 +28,7 @@ namespace uml
 			RaiseExceptionActionImpl& operator=(RaiseExceptionActionImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			RaiseExceptionActionImpl();
 			virtual std::shared_ptr<RaiseExceptionAction> getThisRaiseExceptionActionPtr() const;
 			virtual void setThisRaiseExceptionActionPtr(std::weak_ptr<RaiseExceptionAction> thisRaiseExceptionActionPtr);

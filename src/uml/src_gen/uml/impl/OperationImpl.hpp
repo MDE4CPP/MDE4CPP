@@ -30,7 +30,7 @@ namespace uml
 			OperationImpl& operator=(OperationImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			OperationImpl();
 			virtual std::shared_ptr<Operation> getThisOperationPtr() const;
 			virtual void setThisOperationPtr(std::weak_ptr<Operation> thisOperationPtr);

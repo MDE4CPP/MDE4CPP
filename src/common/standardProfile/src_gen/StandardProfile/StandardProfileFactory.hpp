@@ -10,7 +10,7 @@
 #include "uml/Factory.hpp"
 #include "StandardProfile/StandardProfilePackage.hpp"
 
-namespace StandardProfile 
+namespace StandardProfile
 {
 	class Auxiliary;
 	class BuildComponent;
@@ -45,6 +45,10 @@ namespace StandardProfile
 	class Trace;
 	class Type;
 	class Utility;
+}
+
+namespace StandardProfile 
+{
 	class StandardProfilePackage;
 	class StandardProfileFactory;
 

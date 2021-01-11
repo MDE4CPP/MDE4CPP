@@ -29,7 +29,7 @@ namespace uml
 			InformationFlowImpl& operator=(InformationFlowImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			InformationFlowImpl();
 			virtual std::shared_ptr<InformationFlow> getThisInformationFlowPtr() const;
 			virtual void setThisInformationFlowPtr(std::weak_ptr<InformationFlow> thisInformationFlowPtr);

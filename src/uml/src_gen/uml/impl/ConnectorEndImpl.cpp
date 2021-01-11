@@ -48,8 +48,8 @@
 #include "uml/ValueSpecification.hpp"
 
 //Factories an Package includes
-#include "uml/impl/UmlFactoryImpl.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -146,7 +146,7 @@ std::shared_ptr<ecore::EObject>  ConnectorEndImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ConnectorEndImpl::eStaticClass() const
 {
-	return uml::UmlPackage::eInstance()->getConnectorEnd_Class();
+	return uml::umlPackage::eInstance()->getConnectorEnd_Class();
 }
 
 //*********************************
@@ -297,14 +297,14 @@ Any ConnectorEndImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::CONNECTOREND_ATTRIBUTE_CONNECTOR:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getConnector().lock())); //5512
-		case uml::UmlPackage::CONNECTOREND_ATTRIBUTE_DEFININGEND:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDefiningEnd())); //559
-		case uml::UmlPackage::CONNECTOREND_ATTRIBUTE_PARTWITHPORT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getPartWithPort())); //5510
-		case uml::UmlPackage::CONNECTOREND_ATTRIBUTE_ROLE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getRole())); //5511
+		case uml::umlPackage::CONNECTOREND_ATTRIBUTE_CONNECTOR:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getConnector().lock())); //5412
+		case uml::umlPackage::CONNECTOREND_ATTRIBUTE_DEFININGEND:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDefiningEnd())); //549
+		case uml::umlPackage::CONNECTOREND_ATTRIBUTE_PARTWITHPORT:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getPartWithPort())); //5410
+		case uml::umlPackage::CONNECTOREND_ATTRIBUTE_ROLE:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getRole())); //5411
 	}
 	return MultiplicityElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -312,14 +312,14 @@ bool ConnectorEndImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::CONNECTOREND_ATTRIBUTE_CONNECTOR:
-			return getConnector().lock() != nullptr; //5512
-		case uml::UmlPackage::CONNECTOREND_ATTRIBUTE_DEFININGEND:
-			return getDefiningEnd() != nullptr; //559
-		case uml::UmlPackage::CONNECTOREND_ATTRIBUTE_PARTWITHPORT:
-			return getPartWithPort() != nullptr; //5510
-		case uml::UmlPackage::CONNECTOREND_ATTRIBUTE_ROLE:
-			return getRole() != nullptr; //5511
+		case uml::umlPackage::CONNECTOREND_ATTRIBUTE_CONNECTOR:
+			return getConnector().lock() != nullptr; //5412
+		case uml::umlPackage::CONNECTOREND_ATTRIBUTE_DEFININGEND:
+			return getDefiningEnd() != nullptr; //549
+		case uml::umlPackage::CONNECTOREND_ATTRIBUTE_PARTWITHPORT:
+			return getPartWithPort() != nullptr; //5410
+		case uml::umlPackage::CONNECTOREND_ATTRIBUTE_ROLE:
+			return getRole() != nullptr; //5411
 	}
 	return MultiplicityElementImpl::internalEIsSet(featureID);
 }
@@ -327,28 +327,28 @@ bool ConnectorEndImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::CONNECTOREND_ATTRIBUTE_CONNECTOR:
+		case uml::umlPackage::CONNECTOREND_ATTRIBUTE_CONNECTOR:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Connector> _connector = std::dynamic_pointer_cast<uml::Connector>(_temp);
-			setConnector(_connector); //5512
+			setConnector(_connector); //5412
 			return true;
 		}
-		case uml::UmlPackage::CONNECTOREND_ATTRIBUTE_PARTWITHPORT:
+		case uml::umlPackage::CONNECTOREND_ATTRIBUTE_PARTWITHPORT:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Property> _partWithPort = std::dynamic_pointer_cast<uml::Property>(_temp);
-			setPartWithPort(_partWithPort); //5510
+			setPartWithPort(_partWithPort); //5410
 			return true;
 		}
-		case uml::UmlPackage::CONNECTOREND_ATTRIBUTE_ROLE:
+		case uml::umlPackage::CONNECTOREND_ATTRIBUTE_ROLE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ConnectableElement> _role = std::dynamic_pointer_cast<uml::ConnectableElement>(_temp);
-			setRole(_role); //5511
+			setRole(_role); //5411
 			return true;
 		}
 	}
@@ -367,7 +367,7 @@ void ConnectorEndImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandle
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
@@ -409,7 +409,7 @@ void ConnectorEndImpl::loadAttributes(std::shared_ptr<persistence::interfaces::X
 
 void ConnectorEndImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::UmlFactory> modelFactory=uml::UmlFactory::eInstance();
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	MultiplicityElementImpl::loadNode(nodeName, loadHandler);
@@ -419,7 +419,7 @@ void ConnectorEndImpl::resolveReferences(const int featureID, std::list<std::sha
 {
 	switch(featureID)
 	{
-		case uml::UmlPackage::CONNECTOREND_ATTRIBUTE_CONNECTOR:
+		case uml::umlPackage::CONNECTOREND_ATTRIBUTE_CONNECTOR:
 		{
 			if (references.size() == 1)
 			{
@@ -431,7 +431,7 @@ void ConnectorEndImpl::resolveReferences(const int featureID, std::list<std::sha
 			return;
 		}
 
-		case uml::UmlPackage::CONNECTOREND_ATTRIBUTE_PARTWITHPORT:
+		case uml::umlPackage::CONNECTOREND_ATTRIBUTE_PARTWITHPORT:
 		{
 			if (references.size() == 1)
 			{
@@ -443,7 +443,7 @@ void ConnectorEndImpl::resolveReferences(const int featureID, std::list<std::sha
 			return;
 		}
 
-		case uml::UmlPackage::CONNECTOREND_ATTRIBUTE_ROLE:
+		case uml::umlPackage::CONNECTOREND_ATTRIBUTE_ROLE:
 		{
 			if (references.size() == 1)
 			{
@@ -478,7 +478,7 @@ void ConnectorEndImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 

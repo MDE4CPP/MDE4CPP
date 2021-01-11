@@ -28,7 +28,7 @@ namespace uml
 			CallEventImpl& operator=(CallEventImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			CallEventImpl();
 			virtual std::shared_ptr<CallEvent> getThisCallEventPtr() const;
 			virtual void setThisCallEventPtr(std::weak_ptr<CallEvent> thisCallEventPtr);

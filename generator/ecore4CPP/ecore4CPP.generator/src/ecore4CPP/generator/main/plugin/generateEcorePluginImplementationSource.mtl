@@ -17,12 +17,12 @@
 [import ecore4CPP::generator::main::generateType /]
 [import ecore4CPP::generator::main::helper /]
 
-[template public generateEcorePluginImplSource(aPackage : EPackage) { packageName : String = aPackage.name.toUpperFirst().concat('PluginImpl'); }]
+[template public generateEcorePluginImplSource(aPackage : EPackage) { packageName : String = aPackage.name.concat('PluginImpl'); }]
 [file (aPackage.generateNamespacePath().concat('/impl/').concat(packageName).concat('.cpp'), false, 'UTF-8')]
 #include "[aPackage.name/]/impl/[packageName/].hpp"
 
-#include "[aPackage.name/]/[aPackage.name.toUpperFirst()/]Factory.hpp"
-#include "[aPackage.name/]/[aPackage.name.toUpperFirst()/]Package.hpp"
+#include "[aPackage.name/]/[aPackage.name/]Factory.hpp"
+#include "[aPackage.name/]/[aPackage.name/]Package.hpp"
 
 using namespace [aPackage.name/];
 
@@ -40,22 +40,22 @@ using namespace [aPackage.name/];
 
 std::shared_ptr<ecore::EObject> [packageName/]::create(const std::string& name) const
 {
-	return [aPackage.name.toUpperFirst()/]Factory::eInstance()->create(name);
+	return [aPackage.name/]Factory::eInstance()->create(name);
 }
 
 std::shared_ptr<ecore::EObject> [packageName/]::create(const std::string& name, std::shared_ptr<ecore::EObject> container, const unsigned int referenceID) const
 {
-	return [aPackage.name.toUpperFirst()/]Factory::eInstance()->create(name, container, referenceID);
+	return [aPackage.name/]Factory::eInstance()->create(name, container, referenceID);
 }
 
 std::shared_ptr<ecore::EFactory> [packageName/]::getEFactory()
 {
-	return [aPackage.name.toUpperFirst()/]Factory::eInstance();
+	return [aPackage.name/]Factory::eInstance();
 }
 
 std::shared_ptr<ecore::EPackage> [packageName/]::getEPackage()
 {
-	return [aPackage.name.toUpperFirst()/]Package::eInstance();
+	return [aPackage.name/]Package::eInstance();
 }
 
 std::string [packageName/]::eclipseURI()

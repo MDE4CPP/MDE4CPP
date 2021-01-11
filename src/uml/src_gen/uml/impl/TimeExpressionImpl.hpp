@@ -28,7 +28,7 @@ namespace uml
 			TimeExpressionImpl& operator=(TimeExpressionImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			TimeExpressionImpl();
 			virtual std::shared_ptr<TimeExpression> getThisTimeExpressionPtr() const;
 			virtual void setThisTimeExpressionPtr(std::weak_ptr<TimeExpression> thisTimeExpressionPtr);
