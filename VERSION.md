@@ -13,7 +13,7 @@
 - generate .cproject files for both, model source & main application
 - id now type of long int
 - Added possibility to specify libraries to be linked during compilation in a model
-
+---
 
 ## Ecore
 ### Additional functions:
@@ -23,6 +23,7 @@
 - generate is-Getter for boolean values
 - adapted create-methods in factory: create$Classname$ methods are now called with the classes correct metaelement id by default
 - root base class of all classes is now EModelElement instead of EObject (conforming to Eclipses built-in metamodels)
+---
 
 ## UML
 ### Additional functions:
@@ -53,7 +54,7 @@
 - don't generate usual classes for Behavior, AssociationClass, ComponentStereotype and Node
 - generation of opaque behaviors which are not defined on root level or not owned by a class into package
 - support of isUnique flag of UML::Property
-
+---
 
 ## fUML
 ### Additional functions:
@@ -90,6 +91,7 @@
 - bugfix OpaqueBehavior executions for DecisionNode
 - missing type inludes for parameters of activities that are not referenced by an operation
 - adapted create-methods in model factory: create$Classname$ methods are now called with the classes correct metaelement id by default
+---
 
 ## PSCS
 ### Additional functions:
