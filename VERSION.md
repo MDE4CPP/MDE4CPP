@@ -17,10 +17,12 @@
 
 ## Ecore
 ### Additional functions:
+- support of redefined properties in ecore-models using special EAnnotation
 ### Model changes:
 ### Bugfixes and minor changes:
 - generate is-Getter for boolean values
 - adapted create-methods in factory: create$Classname$ methods are now called with the classes correct metaelement id by default
+- root base class of all classes is now EModelElement instead of EObject (conforming to Eclipses built-in metamodels)
 
 ## UML
 ### Additional functions:
@@ -41,6 +43,7 @@
 
 ### Model changes:
 - add connector/ ConnectorEnd based backreferences
+- removed interface "ActivityContent" which is not defined by OMG UML
 
 ### Bugfixes and minor changes:
 - generate is-Getter for boolean values
@@ -55,9 +58,10 @@
 - added usage of PSCS execution engine
 	-- PSCS-specific strategy
 	-- implement getLinks() operation
-- Implementation of StructuralFeatureActionActivation
+- Implementation of StructuralFeatureActionActivations
 	-- Add feature handling to add, edeit and remove features of model objects in AD
 	-- support of removeAt - pin for RemoveStructuralFeatureValueAction	
+	-- possibility to use "self" as pin name for object pin to use the activities context object
 - Implement additional Actions
 	-- implement acrtion related to StructuralFeature handling
 	-- WriteStructuralFeautreActionActivation
@@ -69,6 +73,9 @@
 - updated UMLValue functionality (get/set UML values)
 - performance and momory usage optimizations (avoid dynamic_casts, ...      ???  .... ______________________ )
 - realize different methods for  recursive deep copy (copy()) and fuml specific copy method (_copy())
+- support import of external models as well as import and usage of metamodels (UML & Ecore) in ADs
+- Initialization of execution plugin now moved to a special "initialize()" method
+- new EAnnotation "noExecution" to prevent generation of specific execution classes (e.g. for OperationExecutions, OperationExecutions, ...)
 
 ### Model changes:
 
@@ -167,7 +174,7 @@
     -  Add fuml::Value handling of enumeration literals (using fUML EnumerationValue)
 -  Add support for OpaqueBehaviors realized in C++
 -  Generate model-specific Locus to provide the possibility to create model-specific objects during runtime
--  Implement self.attribute concept of CallOperationAction::target-pin also for argument pins of CallOperationAction and CallBehaviorAction
+-  Implement self.attribute concept of CallOperationAction::target-pin also for argument pins of CallOperationAction, CallBehaviorAction and StructuralFeatureActions
 -  Enhanced handling of primitive types with upper bound <> 1:
     -  Handling of parameter / pin (in, out, inout and return)
     -  Send and receive of primitive types
