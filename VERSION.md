@@ -3,8 +3,8 @@
 ## General
 - Integrate PSCS to MDE4CPP. Details see below
 - Add support of hierarchical Package structure for each sub projects
-	-- rework upper and lowercase package names
-	-- rework include statement generation
+	- rework upper and lowercase package names
+	- rework include statement generation
 - extend or rework of examples or testmodels
 	-- ...
 	-- Ampelsteuerung example to PSCS examples
@@ -44,6 +44,7 @@
 ### Model changes:
 - add connector/ ConnectorEnd based backreferences
 - removed interface "ActivityContent" which is not defined by OMG UML
+- implemented several methods of UML::Operation in uml.ecore
 
 ### Bugfixes and minor changes:
 - generate is-Getter for boolean values
@@ -51,6 +52,7 @@
 - use of ValueSpecification name for LiteralSpecifications
 - don't generate usual classes for Behavior, AssociationClass, ComponentStereotype and Node
 - generation of opaque behaviors which are not defined on root level or not owned by a class into package
+- support of isUnique flag of UML::Property
 
 
 ## fUML
