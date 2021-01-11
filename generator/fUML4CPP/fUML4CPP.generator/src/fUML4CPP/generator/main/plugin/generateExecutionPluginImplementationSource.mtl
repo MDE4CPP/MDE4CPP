@@ -198,6 +198,10 @@ Any [packageName/]::executeActivity(std::shared_ptr<uml::Activity> activity, std
 	->addAll(aPackage.allOwnedElements()->filter(Activity).ownedParameter.type->asSet())->sortedBy(qualifiedName))]
 [type.generateTypeInclude(type.getNearestPackage(), aPackage)/]
 [/for]
+
+[for ( type : Type | aPackage.getActivitiesOwnedByPackage().ownedParameter.type->asSet()->sortedBy(qualifiedName))]
+[type.generateTypeInclude(type.getNearestPackage(), aPackage)/]
+[/for]
 [/template]
 
 [template public generateGetInputParameter(anActivity : Activity)]
@@ -440,8 +444,11 @@ m_locus->setFactory(nullptr);
 [query private getActivitiesUsedByOperation(aPackage : Package) : Set(Activity) = 
 	aPackage.allOwnedElements()->filter(Operation).method->reject(oclIsUndefined())->reject(not oclIsKindOf(Activity))->asSet()/]
 
+[query private getActivitiesOwnedByPackage(aPackage : Package) : Set(Activity) = 
+	aPackage.ownedElement->filter(Activity)->asSet()/]
+
 [query private getUsedActivities (aPackage : Package) : OrderedSet(Activity) = 
-	Set{aPackage.getActivitiesUsedByCallBehaviorAction(), aPackage.getActivitiesUsedByDecisionNode(), aPackage.getActivitiesUsedByOperation(), aPackage.getMainActivity()->asSet()->reject(oclIsUndefined())}->flatten()->sortedBy(name)/]
+	Set{aPackage.getActivitiesUsedByCallBehaviorAction(), aPackage.getActivitiesUsedByDecisionNode(), aPackage.getActivitiesUsedByOperation(), aPackage.getActivitiesOwnedByPackage(), aPackage.getMainActivity()->asSet()->reject(oclIsUndefined())}->flatten()->sortedBy(name)/]
 
 [query public listNumber(aParameter : Parameter, anActivity : Activity) : Integer =  
 	anActivity.ownedParameter->select((direction = ParameterDirectionKind::_out) or (direction = ParameterDirectionKind::_in))->indexOf(aParameter)-1 /]
