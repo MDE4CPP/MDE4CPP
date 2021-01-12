@@ -245,8 +245,8 @@ m_factory->assignStrategy(PSCS::Semantics::StructuredClassifiers::StructuredClas
 	[comment TODO: Is this the best solution?/]
 	[comment This is currently a hack. When executing an operation of an interface-typed object, the operation must have a method for correct dispatching (even if none is defined in the model) /]
 	[comment BUT PSCS semantics require that an operation for which no method is defined in the model (specifically a constructor method) must not have any method /]
-	[comment By now, the generator checks for such specific constructor methods /]
-	[if ((anOperation.hasStereotypeApplied('StandardProfile::Create')) and (anOperation.method->isEmpty()))]//[/if][anOperation.generatePackageGetterCall()/]->getMethod()->insert([anOperation.generatePackageGetterCall()/]->getMethod()->begin(), m_[anOperation.getFBPackageElement()/]);
+	[comment By now, the generator checks for operations without a method if its owner is not an interface /]
+	[if ((not anOperation.owner.oclIsKindOf(Interface)) and (anOperation.method->isEmpty()))]//[/if][anOperation.generatePackageGetterCall()/]->getMethod()->insert([anOperation.generatePackageGetterCall()/]->getMethod()->begin(), m_[anOperation.getFBPackageElement()/]);
 	[for (aParameter : Parameter | anOperation.ownedParameter)]
 	{	/*creating parameter [aParameter.name/]*/
 		std::shared_ptr<uml::Parameter> [memberName(aParameter)/](uml::umlFactory::eInstance()->createParameter_in_Behavior(m_[anOperation.getFBPackageElement()/]));
