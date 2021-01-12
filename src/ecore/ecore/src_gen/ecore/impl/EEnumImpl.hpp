@@ -18,7 +18,7 @@
 //*********************************
 namespace ecore 
 {
-	class EEnumImpl :virtual public EDataTypeImpl, virtual public EEnum 
+	class EEnumImpl : virtual public EDataTypeImpl, virtual public EEnum 
 	{
 		public: 
 			EEnumImpl(const EEnumImpl & obj);
@@ -28,7 +28,7 @@ namespace ecore
 			EEnumImpl& operator=(EEnumImpl const&) = delete;
 
 		protected:
-			friend class EcoreFactoryImpl;
+			friend class ecoreFactoryImpl;
 			EEnumImpl();
 			virtual std::shared_ptr<EEnum> getThisEEnumPtr() const;
 			virtual void setThisEEnumPtr(std::weak_ptr<EEnum> thisEEnumPtr);
@@ -50,16 +50,13 @@ namespace ecore
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<ecore::EEnumLiteral> getEEnumLiteral(std::string name) const ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<ecore::EEnumLiteral> getEEnumLiteral(int value) const ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<ecore::EEnumLiteral> getEEnumLiteralByLiteral(std::string literal) const ;
 			
 			
@@ -72,17 +69,16 @@ namespace ecore
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Subset<ecore::EEnumLiteral, ecore::EObject>> getELiterals() const ;
+			
 			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const ; 
 			 
 			//*********************************
@@ -96,7 +92,7 @@ namespace ecore
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<ecore::EcoreFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

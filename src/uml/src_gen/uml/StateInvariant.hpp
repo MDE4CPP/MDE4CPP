@@ -33,7 +33,7 @@ namespace persistence
 
 namespace uml
 {
-	class UmlFactory;
+	class umlFactory;
 }
 
 //Forward Declaration for used types
@@ -103,8 +103,10 @@ namespace uml
 namespace uml 
 {
 	/*!
-	 A StateInvariant is a runtime constraint on the participants of the Interaction. It may be used to specify a variety of different kinds of Constraints, such as values of Attributes or Variables, internal or external States, and so on. A StateInvariant is an InteractionFragment and it is placed on a Lifeline.
-	<p>From package UML::Interactions.</p> */
+	A StateInvariant is a runtime constraint on the participants of the Interaction. It may be used to specify a variety of different kinds of Constraints, such as values of Attributes or Variables, internal or external States, and so on. A StateInvariant is an InteractionFragment and it is placed on a Lifeline.
+	<p>From package UML::Interactions.</p>
+	*/
+	
 	class StateInvariant:virtual public InteractionFragment
 	{
 		public:
@@ -133,14 +135,19 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 A Constraint that should hold at runtime for this StateInvariant.
-			<p>From package UML::Interactions.</p> */
+			A Constraint that should hold at runtime for this StateInvariant.
+			<p>From package UML::Interactions.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::Constraint > getInvariant() const = 0;
 			
 			/*!
-			 A Constraint that should hold at runtime for this StateInvariant.
-			<p>From package UML::Interactions.</p> */
-			virtual void setInvariant(std::shared_ptr<uml::Constraint> _invariant_invariant) = 0;
+			A Constraint that should hold at runtime for this StateInvariant.
+			<p>From package UML::Interactions.</p>
+			*/
+			
+			virtual void setInvariant(std::shared_ptr<uml::Constraint> _invariant) = 0;
+			
 			
 
 		protected:
@@ -153,24 +160,31 @@ namespace uml
 			// Reference Members
 			//*********************************
 			/*!
-			 A Constraint that should hold at runtime for this StateInvariant.
-			<p>From package UML::Interactions.</p> */
-			std::shared_ptr<uml::Constraint > m_invariant;
+			A Constraint that should hold at runtime for this StateInvariant.
+			<p>From package UML::Interactions.</p>
+			*/
 			
+			std::shared_ptr<uml::Constraint > m_invariant;
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

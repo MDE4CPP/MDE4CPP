@@ -1,0 +1,29 @@
+# -----------------------------------------------------------------------------
+# Handle line endings
+# @see https://help.github.com/en/github/using-git/configuring-git-to-handle-line-endings
+#
+# At best, configure your Git globally:
+#
+#   GNU/Linux & macOS : git config --global core.autocrlf input
+#   Microsoft Windows : git config --global core.autocrlf true
+#
+# -----------------------------------------------------------------------------
+
+# Set the default behavior, in case people don't have core.autocrlf set.
+* text=auto
+
+# Explicit normalized and converted file types to native line endings on checkout
+*.bat text eol=crlf
+
+*.gradle text=auto
+
+*.java text=auto
+*.mtl text=auto
+
+*.c text=auto
+*.cpp text=auto
+*.h text=auto
+*.hpp text=auto
+
+# Explicit format of line endings on checkout
+*.sln text eol=crlf

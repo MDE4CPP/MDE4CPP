@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -25,21 +24,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -65,10 +55,11 @@
 
 #include "uml/TemplateParameter.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -78,19 +69,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 ManifestationImpl::ManifestationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	//Init references
-	
+{	
 }
 
 ManifestationImpl::~ManifestationImpl()
@@ -100,53 +79,36 @@ ManifestationImpl::~ManifestationImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+ManifestationImpl::ManifestationImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:ManifestationImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			ManifestationImpl::ManifestationImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:ManifestationImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
-
-
-
+ManifestationImpl::ManifestationImpl(std::weak_ptr<uml::Element > par_owner)
+:ManifestationImpl()
+{
+	m_owner = par_owner;
+}
 
 //Additional constructor for the containments back reference
-			ManifestationImpl::ManifestationImpl(std::weak_ptr<uml::Element > par_owner)
-			:ManifestationImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-
-
+ManifestationImpl::ManifestationImpl(std::weak_ptr<uml::Package > par_owningPackage)
+:ManifestationImpl()
+{
+	m_owningPackage = par_owningPackage;
+	m_namespace = par_owningPackage;
+}
 
 //Additional constructor for the containments back reference
-			ManifestationImpl::ManifestationImpl(std::weak_ptr<uml::Package > par_owningPackage)
-			:ManifestationImpl()
-			{
-			    m_owningPackage = par_owningPackage;
-				m_namespace = par_owningPackage;
-			}
-
-
-
-
-
-//Additional constructor for the containments back reference
-			ManifestationImpl::ManifestationImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
-			:ManifestationImpl()
-			{
-			    m_owningTemplateParameter = par_owningTemplateParameter;
-				m_owner = par_owningTemplateParameter;
-			}
-
-
-
-
+ManifestationImpl::ManifestationImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+:ManifestationImpl()
+{
+	m_owningTemplateParameter = par_owningTemplateParameter;
+	m_owner = par_owningTemplateParameter;
+}
 
 
 ManifestationImpl::ManifestationImpl(const ManifestationImpl & obj):ManifestationImpl()
@@ -237,7 +199,7 @@ std::shared_ptr<ecore::EObject>  ManifestationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ManifestationImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getManifestation_Class();
+	return uml::umlPackage::eInstance()->getManifestation_Class();
 }
 
 //*********************************
@@ -251,15 +213,21 @@ std::shared_ptr<ecore::EClass> ManifestationImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference utilizedElement
+*/
 std::shared_ptr<uml::PackageableElement > ManifestationImpl::getUtilizedElement() const
 {
 //assert(m_utilizedElement);
     return m_utilizedElement;
 }
+
 void ManifestationImpl::setUtilizedElement(std::shared_ptr<uml::PackageableElement> _utilizedElement)
 {
     m_utilizedElement = _utilizedElement;
 }
+
+
 
 //*********************************
 // Union Getter
@@ -268,26 +236,83 @@ std::weak_ptr<uml::Namespace > ManifestationImpl::getNamespace() const
 {
 	return m_namespace;
 }
+
 std::shared_ptr<Union<uml::Element>> ManifestationImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > ManifestationImpl::getOwner() const
 {
 	return m_owner;
 }
+
 std::shared_ptr<Union<uml::Element>> ManifestationImpl::getRelatedElement() const
 {
+	if(m_relatedElement == nullptr)
+	{
+		/*Union*/
+		m_relatedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_relatedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_relatedElement;
 }
+
 std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> ManifestationImpl::getSource() const
 {
+	if(m_source == nullptr)
+	{
+		/*SubsetUnion*/
+		m_source.reset(new SubsetUnion<uml::Element, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_source - SubsetUnion<uml::Element, uml::Element >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_source->initSubsetUnion(getRelatedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_source - SubsetUnion<uml::Element, uml::Element >(getRelatedElement())" << std::endl;
+		#endif
+		
+	}
 	return m_source;
 }
+
 std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> ManifestationImpl::getTarget() const
 {
+	if(m_target == nullptr)
+	{
+		/*SubsetUnion*/
+		m_target.reset(new SubsetUnion<uml::Element, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_target - SubsetUnion<uml::Element, uml::Element >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_target->initSubsetUnion(getRelatedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_target - SubsetUnion<uml::Element, uml::Element >(getRelatedElement())" << std::endl;
+		#endif
+		
+	}
 	return m_target;
 }
+
+
 
 
 std::shared_ptr<Manifestation> ManifestationImpl::getThisManifestationPtr() const
@@ -330,8 +355,8 @@ Any ManifestationImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::MANIFESTATION_ATTRIBUTE_UTILIZEDELEMENT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getUtilizedElement())); //14618
+		case uml::umlPackage::MANIFESTATION_ATTRIBUTE_UTILIZEDELEMENT:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getUtilizedElement())); //14518
 	}
 	return AbstractionImpl::eGet(featureID, resolve, coreType);
 }
@@ -339,8 +364,8 @@ bool ManifestationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::MANIFESTATION_ATTRIBUTE_UTILIZEDELEMENT:
-			return getUtilizedElement() != nullptr; //14618
+		case uml::umlPackage::MANIFESTATION_ATTRIBUTE_UTILIZEDELEMENT:
+			return getUtilizedElement() != nullptr; //14518
 	}
 	return AbstractionImpl::internalEIsSet(featureID);
 }
@@ -348,12 +373,12 @@ bool ManifestationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::MANIFESTATION_ATTRIBUTE_UTILIZEDELEMENT:
+		case uml::umlPackage::MANIFESTATION_ATTRIBUTE_UTILIZEDELEMENT:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::PackageableElement> _utilizedElement = std::dynamic_pointer_cast<uml::PackageableElement>(_temp);
-			setUtilizedElement(_utilizedElement); //14618
+			setUtilizedElement(_utilizedElement); //14518
 			return true;
 		}
 	}
@@ -372,12 +397,11 @@ void ManifestationImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandl
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -406,18 +430,19 @@ void ManifestationImpl::loadAttributes(std::shared_ptr<persistence::interfaces::
 	AbstractionImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ManifestationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void ManifestationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
-
-	AbstractionImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	AbstractionImpl::loadNode(nodeName, loadHandler);
 }
 
 void ManifestationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case UmlPackage::MANIFESTATION_ATTRIBUTE_UTILIZEDELEMENT:
+		case uml::umlPackage::MANIFESTATION_ATTRIBUTE_UTILIZEDELEMENT:
 		{
 			if (references.size() == 1)
 			{
@@ -464,7 +489,7 @@ void ManifestationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 

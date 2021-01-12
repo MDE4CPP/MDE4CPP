@@ -18,20 +18,20 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "fUML/impl/FUMLPackageImpl.hpp"
+
+//Includes from codegen annotation
 #include "fUML/Semantics/Activities/ControlToken.hpp"
 #include "fUML/Semantics/Loci/ExecutionFactory.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
 
+#include "uml/ActivityNode.hpp"
+
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -41,10 +41,15 @@
 
 #include "fUML/Semantics/Values/Value.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
-#include "fUML/FUMLFactory.hpp"
+//Factories an Package includes
+#include "fUML/Semantics/Activities/impl/ActivitiesFactoryImpl.hpp"
+#include "fUML/Semantics/Activities/impl/ActivitiesPackageImpl.hpp"
+
+#include "fUML/fUMLFactory.hpp"
+#include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsFactory.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -54,19 +59,7 @@ using namespace fUML::Semantics::Activities;
 // Constructor / Destructor
 //*********************************
 TokenImpl::TokenImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	//Init references
-	
+{	
 }
 
 TokenImpl::~TokenImpl()
@@ -75,7 +68,6 @@ TokenImpl::~TokenImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Token "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -106,25 +98,38 @@ std::shared_ptr<ecore::EObject>  TokenImpl::copy() const
 
 std::shared_ptr<ecore::EClass> TokenImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getToken_Class();
+	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getToken_Class();
 }
 
 //*********************************
 // Attribute Setter Getter
 //*********************************
-void TokenImpl::setWithdrawn(bool _withdrawn)
-{
-	m_withdrawn = _withdrawn;
-} 
-
+/*
+Getter & Setter for attribute withdrawn
+*/
 bool TokenImpl::isWithdrawn() const 
 {
 	return m_withdrawn;
 }
 
+void TokenImpl::setWithdrawn(bool _withdrawn)
+{
+	m_withdrawn = _withdrawn;
+} 
+
+
+
 //*********************************
 // Operations
 //*********************************
+std::shared_ptr<fUML::Semantics::Activities::Token> TokenImpl::_copy()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	return std::dynamic_pointer_cast<fUML::Semantics::Activities::Token>(this->copy());
+	//end of body
+}
+
 bool TokenImpl::equals(std::shared_ptr<fUML::Semantics::Activities::Token>  other)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
@@ -133,8 +138,10 @@ bool TokenImpl::equals(std::shared_ptr<fUML::Semantics::Activities::Token>  othe
 
 std::shared_ptr<fUML::Semantics::Values::Value> TokenImpl::getValue() const
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	return nullptr;
+	//end of body
 }
 
 bool TokenImpl::isControl()
@@ -169,10 +176,14 @@ void TokenImpl::withdraw()
 	if (!this->isWithdrawn()) 
 	{
 		std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> holder = this->getHolder().lock();
+		//NEWDEBUG
+		DEBUG_MESSAGE(std::cout<<"-- printing from Token::"<<__FUNCTION__<<" '"<<(holder->getNode() == nullptr ? "..." : ("holder = " + holder->getNode()->getName()))<<"' : !isWithdrawn"<<std::endl;)
         this->setHolder(nullptr);
 		this->setWithdrawn(true);
 		if (holder)
-		{
+		{	
+			//NEWDEBUG
+			DEBUG_MESSAGE(std::cout<<"-- printing from Token::"<<__FUNCTION__<<" '"<<(holder->getNode() == nullptr ? "..." : ("holder = " + holder->getNode()->getName()))<<"' : withdrawing token..."<<std::endl;)
 			holder->removeToken(getThisTokenPtr());
 		}
     }
@@ -182,19 +193,26 @@ void TokenImpl::withdraw()
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference holder
+*/
 std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivation > TokenImpl::getHolder() const
 {
 
     return m_holder;
 }
+
 void TokenImpl::setHolder(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> _holder)
 {
     m_holder = _holder;
 }
 
+
+
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<Token> TokenImpl::getThisTokenPtr() const
@@ -217,9 +235,9 @@ Any TokenImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::TOKEN_ATTRIBUTE_HOLDER:
+		case fUML::Semantics::Activities::ActivitiesPackage::TOKEN_ATTRIBUTE_HOLDER:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getHolder().lock())); //1150
-		case fUML::FUMLPackage::TOKEN_ATTRIBUTE_WITHDRAWN:
+		case fUML::Semantics::Activities::ActivitiesPackage::TOKEN_ATTRIBUTE_WITHDRAWN:
 			return eAny(isWithdrawn()); //1151
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
@@ -228,9 +246,9 @@ bool TokenImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::TOKEN_ATTRIBUTE_HOLDER:
+		case fUML::Semantics::Activities::ActivitiesPackage::TOKEN_ATTRIBUTE_HOLDER:
 			return getHolder().lock() != nullptr; //1150
-		case fUML::FUMLPackage::TOKEN_ATTRIBUTE_WITHDRAWN:
+		case fUML::Semantics::Activities::ActivitiesPackage::TOKEN_ATTRIBUTE_WITHDRAWN:
 			return isWithdrawn() != true; //1151
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
@@ -239,7 +257,7 @@ bool TokenImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::TOKEN_ATTRIBUTE_HOLDER:
+		case fUML::Semantics::Activities::ActivitiesPackage::TOKEN_ATTRIBUTE_HOLDER:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -247,7 +265,7 @@ bool TokenImpl::eSet(int featureID, Any newValue)
 			setHolder(_holder); //1150
 			return true;
 		}
-		case fUML::FUMLPackage::TOKEN_ATTRIBUTE_WITHDRAWN:
+		case fUML::Semantics::Activities::ActivitiesPackage::TOKEN_ATTRIBUTE_WITHDRAWN:
 		{
 			// BOOST CAST
 			bool _withdrawn = newValue->get<bool>();
@@ -270,12 +288,11 @@ void TokenImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> load
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get FUMLFactory
-	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
+	// get fUMLFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -306,18 +323,18 @@ void TokenImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHan
 	ecore::EObjectImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void TokenImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+void TokenImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<fUML::Semantics::Activities::ActivitiesFactory> modelFactory=fUML::Semantics::Activities::ActivitiesFactory::eInstance();
 
-
-	ecore::EObjectImpl::loadNode(nodeName, loadHandler, ecore::EcoreFactory::eInstance());
+	//load BasePackage Nodes
 }
 
 void TokenImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::TOKEN_ATTRIBUTE_HOLDER:
+		case fUML::Semantics::Activities::ActivitiesPackage::TOKEN_ATTRIBUTE_HOLDER:
 		{
 			if (references.size() == 1)
 			{
@@ -345,10 +362,9 @@ void TokenImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 {
 	try
 	{
-		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+		std::shared_ptr<fUML::Semantics::Activities::ActivitiesPackage> package = fUML::Semantics::Activities::ActivitiesPackage::eInstance();
 
 	
- 
 		// Add attributes
 		if ( this->eIsSet(package->getToken_Attribute_withdrawn()) )
 		{

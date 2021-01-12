@@ -14,7 +14,7 @@
 
 
 // forward declarations
-template<class T> class Bag;
+template<class T> class Bag; 
 template<class T, class ... U> class Subset;
 
 
@@ -37,7 +37,7 @@ namespace persistence
 
 namespace uml
 {
-	class UmlFactory;
+	class umlFactory;
 }
 
 //Forward Declaration for used types
@@ -76,8 +76,10 @@ namespace uml
 namespace uml 
 {
 	/*!
-	 An ExceptionHandler is an Element that specifies a handlerBody ExecutableNode to execute in case the specified exception occurs during the execution of the protected ExecutableNode.
-	<p>From package UML::Activities.</p> */
+	An ExceptionHandler is an Element that specifies a handlerBody ExecutableNode to execute in case the specified exception occurs during the execution of the protected ExecutableNode.
+	<p>From package UML::Activities.</p>
+	*/
+	
 	class ExceptionHandler:virtual public Element
 	{
 		public:
@@ -106,37 +108,47 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 An ActivityEdge that has a source within the handlerBody of an ExceptionHandler must have its target in the handlerBody also, and vice versa.
+			An ActivityEdge that has a source within the handlerBody of an ExceptionHandler must have its target in the handlerBody also, and vice versa.
 			let nodes:Set(ActivityNode) = handlerBody.oclAsType(Action).allOwnedNodes() in
 			nodes.outgoing->forAll(nodes->includes(target)) and
-			nodes.incoming->forAll(nodes->includes(source)) */ 
+			nodes.incoming->forAll(nodes->includes(source))
+			*/
+			 
 			virtual bool edge_source_target(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
-			 The exceptionInput must either have no type or every exceptionType must conform to the exceptionInput type.
+			The exceptionInput must either have no type or every exceptionType must conform to the exceptionInput type.
 			exceptionInput.type=null or 
-			exceptionType->forAll(conformsTo(exceptionInput.type.oclAsType(Classifier))) */ 
+			exceptionType->forAll(conformsTo(exceptionInput.type.oclAsType(Classifier)))
+			*/
+			 
 			virtual bool exception_input_type(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
-			 The handlerBody has no incoming or outgoing ActivityEdges and the exceptionInput has no incoming ActivityEdges.
-			handlerBody.incoming->isEmpty() and handlerBody.outgoing->isEmpty() and exceptionInput.incoming->isEmpty() */ 
+			The handlerBody has no incoming or outgoing ActivityEdges and the exceptionInput has no incoming ActivityEdges.
+			handlerBody.incoming->isEmpty() and handlerBody.outgoing->isEmpty() and exceptionInput.incoming->isEmpty()
+			*/
+			 
 			virtual bool handler_body_edges(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
-			 The handlerBody must have the same owner as the protectedNode.
-			handlerBody.owner=protectedNode.owner */ 
+			The handlerBody must have the same owner as the protectedNode.
+			handlerBody.owner=protectedNode.owner
+			*/
+			 
 			virtual bool handler_body_owner(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
-			 The handlerBody is an Action with one InputPin, and that InputPin is the same as the exceptionInput.
+			The handlerBody is an Action with one InputPin, and that InputPin is the same as the exceptionInput.
 			handlerBody.oclIsKindOf(Action) and
 			let inputs: OrderedSet(InputPin) = handlerBody.oclAsType(Action).input in
-			inputs->size()=1 and inputs->first()=exceptionInput */ 
+			inputs->size()=1 and inputs->first()=exceptionInput
+			*/
+			 
 			virtual bool one_input(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
-			 If the protectedNode is an Action with OutputPins, then the handlerBody must also be an Action with the same number of OutputPins, which are compatible in type, ordering, and multiplicity to those of the protectedNode.
+			If the protectedNode is an Action with OutputPins, then the handlerBody must also be an Action with the same number of OutputPins, which are compatible in type, ordering, and multiplicity to those of the protectedNode.
 			(protectedNode.oclIsKindOf(Action) and protectedNode.oclAsType(Action).output->notEmpty()) implies
 			(
 			  handlerBody.oclIsKindOf(Action) and 
@@ -147,7 +159,9 @@ namespace uml
 			    	handlerBodyOutput->at(i).type.conformsTo(protectedNodeOutput->at(i).type) and
 			    	handlerBodyOutput->at(i).isOrdered=protectedNodeOutput->at(i).isOrdered and
 			    	handlerBodyOutput->at(i).compatibleWith(protectedNodeOutput->at(i)))
-			) */ 
+			)
+			*/
+			 
 			virtual bool output_pins(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
@@ -159,37 +173,55 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 An ObjectNode within the handlerBody. When the ExceptionHandler catches an exception, the exception token is placed on this ObjectNode, causing the handlerBody to execute.
-			<p>From package UML::Activities.</p> */
+			An ObjectNode within the handlerBody. When the ExceptionHandler catches an exception, the exception token is placed on this ObjectNode, causing the handlerBody to execute.
+			<p>From package UML::Activities.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::ObjectNode > getExceptionInput() const = 0;
 			
 			/*!
-			 An ObjectNode within the handlerBody. When the ExceptionHandler catches an exception, the exception token is placed on this ObjectNode, causing the handlerBody to execute.
-			<p>From package UML::Activities.</p> */
-			virtual void setExceptionInput(std::shared_ptr<uml::ObjectNode> _exceptionInput_exceptionInput) = 0;
-			/*!
-			 The Classifiers whose instances the ExceptionHandler catches as exceptions. If an exception occurs whose type is any exceptionType, the ExceptionHandler catches the exception and executes the handlerBody.
-			<p>From package UML::Activities.</p> */
-			virtual std::shared_ptr<Bag<uml::Classifier>> getExceptionType() const = 0;
+			An ObjectNode within the handlerBody. When the ExceptionHandler catches an exception, the exception token is placed on this ObjectNode, causing the handlerBody to execute.
+			<p>From package UML::Activities.</p>
+			*/
+			
+			virtual void setExceptionInput(std::shared_ptr<uml::ObjectNode> _exceptionInput) = 0;
 			
 			/*!
-			 An ExecutableNode that is executed if the ExceptionHandler catches an exception.
-			<p>From package UML::Activities.</p> */
+			The Classifiers whose instances the ExceptionHandler catches as exceptions. If an exception occurs whose type is any exceptionType, the ExceptionHandler catches the exception and executes the handlerBody.
+			<p>From package UML::Activities.</p>
+			*/
+			
+			virtual std::shared_ptr<Bag<uml::Classifier>> getExceptionType() const = 0;
+			
+			
+			/*!
+			An ExecutableNode that is executed if the ExceptionHandler catches an exception.
+			<p>From package UML::Activities.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::ExecutableNode > getHandlerBody() const = 0;
 			
 			/*!
-			 An ExecutableNode that is executed if the ExceptionHandler catches an exception.
-			<p>From package UML::Activities.</p> */
-			virtual void setHandlerBody(std::shared_ptr<uml::ExecutableNode> _handlerBody_handlerBody) = 0;
+			An ExecutableNode that is executed if the ExceptionHandler catches an exception.
+			<p>From package UML::Activities.</p>
+			*/
+			
+			virtual void setHandlerBody(std::shared_ptr<uml::ExecutableNode> _handlerBody) = 0;
+			
 			/*!
-			 The ExecutableNode protected by the ExceptionHandler. If an exception propagates out of the protectedNode and has a type matching one of the exceptionTypes, then it is caught by this ExceptionHandler.
-			<p>From package UML::Activities.</p> */
+			The ExecutableNode protected by the ExceptionHandler. If an exception propagates out of the protectedNode and has a type matching one of the exceptionTypes, then it is caught by this ExceptionHandler.
+			<p>From package UML::Activities.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::ExecutableNode > getProtectedNode() const = 0;
 			
 			/*!
-			 The ExecutableNode protected by the ExceptionHandler. If an exception propagates out of the protectedNode and has a type matching one of the exceptionTypes, then it is caught by this ExceptionHandler.
-			<p>From package UML::Activities.</p> */
-			virtual void setProtectedNode(std::shared_ptr<uml::ExecutableNode> _protectedNode_protectedNode) = 0;
+			The ExecutableNode protected by the ExceptionHandler. If an exception propagates out of the protectedNode and has a type matching one of the exceptionTypes, then it is caught by this ExceptionHandler.
+			<p>From package UML::Activities.</p>
+			*/
+			
+			virtual void setProtectedNode(std::shared_ptr<uml::ExecutableNode> _protectedNode) = 0;
+			
 			
 
 		protected:
@@ -202,33 +234,41 @@ namespace uml
 			// Reference Members
 			//*********************************
 			/*!
-			 An ObjectNode within the handlerBody. When the ExceptionHandler catches an exception, the exception token is placed on this ObjectNode, causing the handlerBody to execute.
-			<p>From package UML::Activities.</p> */
-			std::shared_ptr<uml::ObjectNode > m_exceptionInput;
-			/*!
-			 The Classifiers whose instances the ExceptionHandler catches as exceptions. If an exception occurs whose type is any exceptionType, the ExceptionHandler catches the exception and executes the handlerBody.
-			<p>From package UML::Activities.</p> */
-			std::shared_ptr<Bag<uml::Classifier>> m_exceptionType;
-			/*!
-			 An ExecutableNode that is executed if the ExceptionHandler catches an exception.
-			<p>From package UML::Activities.</p> */
-			std::shared_ptr<uml::ExecutableNode > m_handlerBody;
-			/*!
-			 The ExecutableNode protected by the ExceptionHandler. If an exception propagates out of the protectedNode and has a type matching one of the exceptionTypes, then it is caught by this ExceptionHandler.
-			<p>From package UML::Activities.</p> */
-			std::weak_ptr<uml::ExecutableNode > m_protectedNode;
+			An ObjectNode within the handlerBody. When the ExceptionHandler catches an exception, the exception token is placed on this ObjectNode, causing the handlerBody to execute.
+			<p>From package UML::Activities.</p>
+			*/
 			
+			std::shared_ptr<uml::ObjectNode > m_exceptionInput;/*!
+			The Classifiers whose instances the ExceptionHandler catches as exceptions. If an exception occurs whose type is any exceptionType, the ExceptionHandler catches the exception and executes the handlerBody.
+			<p>From package UML::Activities.</p>
+			*/
+			
+			mutable std::shared_ptr<Bag<uml::Classifier>> m_exceptionType;/*!
+			An ExecutableNode that is executed if the ExceptionHandler catches an exception.
+			<p>From package UML::Activities.</p>
+			*/
+			
+			std::shared_ptr<uml::ExecutableNode > m_handlerBody;/*!
+			The ExecutableNode protected by the ExceptionHandler. If an exception propagates out of the protectedNode and has a type matching one of the exceptionTypes, then it is caught by this ExceptionHandler.
+			<p>From package UML::Activities.</p>
+			*/
+			
+			std::weak_ptr<uml::ExecutableNode > m_protectedNode;
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
@@ -25,7 +24,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "util/stereotypestorage.hpp"
 #include "uml/Property.hpp"
@@ -33,10 +33,6 @@
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -64,10 +60,11 @@
 
 #include "uml/Stereotype.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -77,46 +74,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 ElementImpl::ElementImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		/*Subset*/
-		m_ownedComment.reset(new Subset<uml::Comment, uml::Element >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_ownedComment - Subset<uml::Comment, uml::Element >()" << std::endl;
-		#endif
-	
-	
-
-		/*Union*/
-		m_ownedElement.reset(new Union<uml::Element>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
-		#endif
-	
-	
-
-	
-
-	//Init references
-		/*Subset*/
-		m_ownedComment->initSubset(m_ownedElement);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_ownedComment - Subset<uml::Comment, uml::Element >(m_ownedElement)" << std::endl;
-		#endif
-	
-	
-
-	
-	
-
-	
+{	
 }
 
 ElementImpl::~ElementImpl()
@@ -126,17 +84,12 @@ ElementImpl::~ElementImpl()
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			ElementImpl::ElementImpl(std::weak_ptr<uml::Element > par_owner)
-			:ElementImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-
-
+ElementImpl::ElementImpl(std::weak_ptr<uml::Element > par_owner)
+:ElementImpl()
+{
+	m_owner = par_owner;
+}
 
 
 ElementImpl::ElementImpl(const ElementImpl & obj):ElementImpl()
@@ -162,12 +115,11 @@ ElementImpl::ElementImpl(const ElementImpl & obj):ElementImpl()
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 
-		/*Subset*/
-		m_ownedComment->initSubset(m_ownedElement);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_ownedComment - Subset<uml::Comment, uml::Element >(m_ownedElement)" << std::endl;
-		#endif
-	
+	/*Subset*/
+	m_ownedComment->initSubset(getOwnedElement());
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Initialising value Subset: " << "m_ownedComment - Subset<uml::Comment, uml::Element >(getOwnedElement())" << std::endl;
+	#endif
 	
 }
 
@@ -180,7 +132,7 @@ std::shared_ptr<ecore::EObject>  ElementImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ElementImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getElement_Class();
+	return uml::umlPackage::eInstance()->getElement_Class();
 }
 
 //*********************************
@@ -198,8 +150,24 @@ bool ElementImpl::addKeyword(std::string keyword)
 
 std::shared_ptr<Bag<uml::Element> > ElementImpl::allOwnedElements()
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+		std::shared_ptr<Bag<uml::Element>> list(new Bag<uml::Element>());
+	list->insert(list->begin(), this->getOwnedElement()->begin(), this->getOwnedElement()->end());
+
+	Bag<uml::Element>::iterator iter = this->getOwnedElement()->begin();
+	Bag<uml::Element>::iterator end = this->getOwnedElement()->end();
+	int i = 0;
+	while(iter != end)
+	{
+		std::shared_ptr<Bag<uml::Element>> elementList = (*iter)->allOwnedElements();
+		list->insert(list->end(), elementList->begin(), elementList->end());
+		iter++;
+		i++;
+	}
+
+	return list;
+	//end of body
 }
 
 std::shared_ptr<ecore::EObject> ElementImpl::applyStereotype(std::shared_ptr<uml::Stereotype>  stereotype)
@@ -454,13 +422,46 @@ std::shared_ptr<ecore::EObject> ElementImpl::unapplyStereotype(std::shared_ptr<u
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference ownedComment
+*/
 std::shared_ptr<Subset<uml::Comment, uml::Element>> ElementImpl::getOwnedComment() const
 {
+	if(m_ownedComment == nullptr)
+	{
+		/*Subset*/
+		m_ownedComment.reset(new Subset<uml::Comment, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_ownedComment - Subset<uml::Comment, uml::Element >()" << std::endl;
+		#endif
+		
+		/*Subset*/
+		m_ownedComment->initSubset(getOwnedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_ownedComment - Subset<uml::Comment, uml::Element >(getOwnedElement())" << std::endl;
+		#endif
+		
+	}
 
     return m_ownedComment;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference ownedElement
+*/
+
+
+
+
+
+
+/*
+Getter & Setter for reference owner
+*/
 
 
 
@@ -472,12 +473,25 @@ std::shared_ptr<Subset<uml::Comment, uml::Element>> ElementImpl::getOwnedComment
 //*********************************
 std::shared_ptr<Union<uml::Element>> ElementImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > ElementImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<Element> ElementImpl::getThisElementPtr() const
@@ -505,7 +519,7 @@ Any ElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::ELEMENT_ATTRIBUTE_OWNEDCOMMENT:
+		case uml::umlPackage::ELEMENT_ATTRIBUTE_OWNEDCOMMENT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Comment>::iterator iter = m_ownedComment->begin();
@@ -515,9 +529,9 @@ Any ElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //820
+			return eAny(tempList); //810
 		}
-		case UmlPackage::ELEMENT_ATTRIBUTE_OWNEDELEMENT:
+		case uml::umlPackage::ELEMENT_ATTRIBUTE_OWNEDELEMENT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Element>::iterator iter = m_ownedElement->begin();
@@ -527,10 +541,10 @@ Any ElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //821
+			return eAny(tempList); //811
 		}
-		case UmlPackage::ELEMENT_ATTRIBUTE_OWNER:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOwner().lock())); //822
+		case uml::umlPackage::ELEMENT_ATTRIBUTE_OWNER:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOwner().lock())); //812
 	}
 	return ObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -538,12 +552,12 @@ bool ElementImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::ELEMENT_ATTRIBUTE_OWNEDCOMMENT:
-			return getOwnedComment() != nullptr; //820
-		case UmlPackage::ELEMENT_ATTRIBUTE_OWNEDELEMENT:
-			return getOwnedElement() != nullptr; //821
-		case UmlPackage::ELEMENT_ATTRIBUTE_OWNER:
-			return getOwner().lock() != nullptr; //822
+		case uml::umlPackage::ELEMENT_ATTRIBUTE_OWNEDCOMMENT:
+			return getOwnedComment() != nullptr; //810
+		case uml::umlPackage::ELEMENT_ATTRIBUTE_OWNEDELEMENT:
+			return getOwnedElement() != nullptr; //811
+		case uml::umlPackage::ELEMENT_ATTRIBUTE_OWNER:
+			return getOwner().lock() != nullptr; //812
 	}
 	return ObjectImpl::internalEIsSet(featureID);
 }
@@ -551,7 +565,7 @@ bool ElementImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::ELEMENT_ATTRIBUTE_OWNEDCOMMENT:
+		case uml::umlPackage::ELEMENT_ATTRIBUTE_OWNEDCOMMENT:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -603,12 +617,11 @@ void ElementImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> lo
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -618,8 +631,9 @@ void ElementImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadH
 	ObjectImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ElementImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void ElementImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -630,7 +644,7 @@ void ElementImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::in
 			{
 				typeName = "Comment";
 			}
-			std::shared_ptr<ecore::EObject> ownedComment = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::ELEMENT_ATTRIBUTE_OWNER);
+			std::shared_ptr<ecore::EObject> ownedComment = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::ELEMENT_ATTRIBUTE_OWNER);
 			if (ownedComment != nullptr)
 			{
 				loadHandler->handleChild(ownedComment);
@@ -646,7 +660,7 @@ void ElementImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::in
 				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			std::shared_ptr<ecore::EObject> ownedElement = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::ELEMENT_ATTRIBUTE_OWNER);
+			std::shared_ptr<ecore::EObject> ownedElement = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::ELEMENT_ATTRIBUTE_OWNER);
 			if (ownedElement != nullptr)
 			{
 				loadHandler->handleChild(ownedElement);
@@ -662,8 +676,8 @@ void ElementImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::in
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
-
-	ObjectImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	ObjectImpl::loadNode(nodeName, loadHandler);
 }
 
 void ElementImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -685,7 +699,7 @@ void ElementImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 		// Save 'ownedComment'
 		for (std::shared_ptr<uml::Comment> ownedComment : *this->getOwnedComment()) 
@@ -703,7 +717,7 @@ void ElementImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 		std::shared_ptr<Union<uml::Element>> list_ownedElement = this->getOwnedElement();
 		for (std::shared_ptr<uml::Element> ownedElement : *list_ownedElement) 
 		{
-			saveHandler->addReference(ownedElement, "ownedElement", ownedElement->eClass() != package->getElement_Class());
+			saveHandler->addReference(ownedElement, "ownedElement", ownedElement->eClass() !=uml::umlPackage::eInstance()->getElement_Class());
 		}
 	}
 	catch (std::exception& e)

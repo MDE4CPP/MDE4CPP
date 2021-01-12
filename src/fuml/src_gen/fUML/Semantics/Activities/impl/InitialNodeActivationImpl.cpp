@@ -17,23 +17,19 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "fUML/impl/FUMLPackageImpl.hpp"
+
+//Includes from codegen annotation
 #include "fUML/Semantics/Activities/ControlToken.hpp"
 #include "fUML/FUMLFactory.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -47,10 +43,15 @@
 
 #include "fUML/Semantics/Activities/Token.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
-#include "fUML/FUMLFactory.hpp"
+//Factories an Package includes
+#include "fUML/Semantics/Activities/impl/ActivitiesFactoryImpl.hpp"
+#include "fUML/Semantics/Activities/impl/ActivitiesPackageImpl.hpp"
+
+#include "fUML/fUMLFactory.hpp"
+#include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsFactory.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -60,17 +61,7 @@ using namespace fUML::Semantics::Activities;
 // Constructor / Destructor
 //*********************************
 InitialNodeActivationImpl::InitialNodeActivationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 InitialNodeActivationImpl::~InitialNodeActivationImpl()
@@ -80,17 +71,12 @@ InitialNodeActivationImpl::~InitialNodeActivationImpl()
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			InitialNodeActivationImpl::InitialNodeActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
-			:InitialNodeActivationImpl()
-			{
-			    m_group = par_group;
-			}
-
-
-
-
+InitialNodeActivationImpl::InitialNodeActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
+:InitialNodeActivationImpl()
+{
+	m_group = par_group;
+}
 
 
 InitialNodeActivationImpl::InitialNodeActivationImpl(const InitialNodeActivationImpl & obj):InitialNodeActivationImpl()
@@ -136,7 +122,7 @@ std::shared_ptr<ecore::EObject>  InitialNodeActivationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> InitialNodeActivationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getInitialNodeActivation_Class();
+	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getInitialNodeActivation_Class();
 }
 
 //*********************************
@@ -152,7 +138,7 @@ void InitialNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Semantics::Activi
 	//generated from body annotation
 		std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > tokens(new Bag<fUML::Semantics::Activities::Token>());
 	//struct null_deleter{void operator()(void const *) const { } };
-	std::shared_ptr<fUML::Semantics::Activities::ControlToken> controlToken(fUML::FUMLFactory::eInstance()->createControlToken());
+	std::shared_ptr<fUML::Semantics::Activities::ControlToken> controlToken(fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createControlToken());
     tokens->push_back(controlToken);
     this->addTokens(tokens);
     this->sendOffers(tokens);
@@ -166,6 +152,7 @@ void InitialNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Semantics::Activi
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<InitialNodeActivation> InitialNodeActivationImpl::getThisInitialNodeActivationPtr() const
@@ -223,12 +210,11 @@ void InitialNodeActivationImpl::load(std::shared_ptr<persistence::interfaces::XL
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get FUMLFactory
-	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
+	// get fUMLFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -238,11 +224,12 @@ void InitialNodeActivationImpl::loadAttributes(std::shared_ptr<persistence::inte
 	ControlNodeActivationImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void InitialNodeActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+void InitialNodeActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<fUML::Semantics::Activities::ActivitiesFactory> modelFactory=fUML::Semantics::Activities::ActivitiesFactory::eInstance();
 
-
-	ControlNodeActivationImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	ControlNodeActivationImpl::loadNode(nodeName, loadHandler);
 }
 
 void InitialNodeActivationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -270,7 +257,7 @@ void InitialNodeActivationImpl::saveContent(std::shared_ptr<persistence::interfa
 {
 	try
 	{
-		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+		std::shared_ptr<fUML::Semantics::Activities::ActivitiesPackage> package = fUML::Semantics::Activities::ActivitiesPackage::eInstance();
 
 	
 

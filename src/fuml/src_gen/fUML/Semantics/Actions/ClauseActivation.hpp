@@ -32,7 +32,7 @@ namespace persistence
 
 namespace fUML
 {
-	class FUMLFactory;
+	class fUMLFactory;
 }
 
 //Forward Declaration for used types
@@ -60,14 +60,13 @@ namespace fUML::Semantics::Actions
 
 // enum includes
 
-#include "ecore/EObject.hpp"
+#include "ecore/EModelElement.hpp"
 
 //*********************************
 namespace fUML::Semantics::Actions 
 {
-	/*!
-	 */
-	class ClauseActivation : virtual public ecore::EObject 
+	
+	class ClauseActivation : virtual public ecore::EModelElement
 
 	{
 		public:
@@ -87,32 +86,25 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> getDecision() = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<Bag<fUML::Semantics::Actions::ClauseActivation> > getPredecessors() = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<Bag<fUML::Semantics::Actions::ClauseActivation> > getSuccessors() = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual bool isReady() = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual void recieveControl() = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual void runTest() = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual void selectBody() = 0;
 			
 			
@@ -123,20 +115,18 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<uml::Clause > getClause() const = 0;
 			
-			/*!
-			 */
-			virtual void setClause(std::shared_ptr<uml::Clause> _clause_clause) = 0;
-			/*!
-			 */
+			
+			virtual void setClause(std::shared_ptr<uml::Clause> _clause) = 0;
+			
+			
 			virtual std::shared_ptr<fUML::Semantics::Actions::ConditionalNodeActivation > getConditionalNodeActivation() const = 0;
 			
-			/*!
-			 */
-			virtual void setConditionalNodeActivation(std::shared_ptr<fUML::Semantics::Actions::ConditionalNodeActivation> _conditionalNodeActivation_conditionalNodeActivation) = 0;
+			
+			virtual void setConditionalNodeActivation(std::shared_ptr<fUML::Semantics::Actions::ConditionalNodeActivation> _conditionalNodeActivation) = 0;
+			
 			
 
 		protected:
@@ -148,13 +138,9 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Reference Members
 			//*********************************
-			/*!
-			 */
-			std::shared_ptr<uml::Clause > m_clause;
-			/*!
-			 */
-			std::shared_ptr<fUML::Semantics::Actions::ConditionalNodeActivation > m_conditionalNodeActivation;
 			
+			std::shared_ptr<uml::Clause > m_clause;
+			std::shared_ptr<fUML::Semantics::Actions::ConditionalNodeActivation > m_conditionalNodeActivation;
 
 		public:
 			//*********************************

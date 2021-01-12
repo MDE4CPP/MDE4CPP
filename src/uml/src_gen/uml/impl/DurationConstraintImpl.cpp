@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -26,23 +25,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -64,10 +52,11 @@
 
 #include "uml/ValueSpecification.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -77,17 +66,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 DurationConstraintImpl::DurationConstraintImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	m_firstEvent.reset(new Bag<bool>());
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 DurationConstraintImpl::~DurationConstraintImpl()
@@ -97,18 +76,17 @@ DurationConstraintImpl::~DurationConstraintImpl()
 #endif
 }
 
-
 //Additional constructor for the containments back reference
 DurationConstraintImpl::DurationConstraintImpl(std::weak_ptr<uml::Namespace > par_Namespace, const int reference_id)
 :DurationConstraintImpl()
 {
 	switch(reference_id)
 	{	
-	case UmlPackage::CONSTRAINT_ATTRIBUTE_CONTEXT:
+	case umlPackage::CONSTRAINT_ATTRIBUTE_CONTEXT:
 		m_context = par_Namespace;
 		m_namespace = par_Namespace;
 		 return;
-	case UmlPackage::NAMEDELEMENT_ATTRIBUTE_NAMESPACE:
+	case umlPackage::NAMEDELEMENT_ATTRIBUTE_NAMESPACE:
 		m_namespace = par_Namespace;
 		m_owner = par_Namespace;
 		 return;
@@ -119,49 +97,28 @@ DurationConstraintImpl::DurationConstraintImpl(std::weak_ptr<uml::Namespace > pa
 }
 
 
-
-
+//Additional constructor for the containments back reference
+DurationConstraintImpl::DurationConstraintImpl(std::weak_ptr<uml::Element > par_owner)
+:DurationConstraintImpl()
+{
+	m_owner = par_owner;
+}
 
 //Additional constructor for the containments back reference
-
-
-
-
-
-//Additional constructor for the containments back reference
-			DurationConstraintImpl::DurationConstraintImpl(std::weak_ptr<uml::Element > par_owner)
-			:DurationConstraintImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-
-
+DurationConstraintImpl::DurationConstraintImpl(std::weak_ptr<uml::Package > par_owningPackage)
+:DurationConstraintImpl()
+{
+	m_owningPackage = par_owningPackage;
+	m_namespace = par_owningPackage;
+}
 
 //Additional constructor for the containments back reference
-			DurationConstraintImpl::DurationConstraintImpl(std::weak_ptr<uml::Package > par_owningPackage)
-			:DurationConstraintImpl()
-			{
-			    m_owningPackage = par_owningPackage;
-				m_namespace = par_owningPackage;
-			}
-
-
-
-
-
-//Additional constructor for the containments back reference
-			DurationConstraintImpl::DurationConstraintImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
-			:DurationConstraintImpl()
-			{
-			    m_owningTemplateParameter = par_owningTemplateParameter;
-				m_owner = par_owningTemplateParameter;
-			}
-
-
-
-
+DurationConstraintImpl::DurationConstraintImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+:DurationConstraintImpl()
+{
+	m_owningTemplateParameter = par_owningTemplateParameter;
+	m_owner = par_owningTemplateParameter;
+}
 
 
 DurationConstraintImpl::DurationConstraintImpl(const DurationConstraintImpl & obj):DurationConstraintImpl()
@@ -170,7 +127,7 @@ DurationConstraintImpl::DurationConstraintImpl(const DurationConstraintImpl & ob
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy DurationConstraint "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
-	m_firstEvent = obj.getFirstEvent();
+	m_firstEvent = obj.isFirstEvent();
 	m_name = obj.getName();
 	m_qualifiedName = obj.getQualifiedName();
 	m_visibility = obj.getVisibility();
@@ -232,18 +189,27 @@ std::shared_ptr<ecore::EObject>  DurationConstraintImpl::copy() const
 
 std::shared_ptr<ecore::EClass> DurationConstraintImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getDurationConstraint_Class();
+	return uml::umlPackage::eInstance()->getDurationConstraint_Class();
 }
 
 //*********************************
 // Attribute Setter Getter
 //*********************************
-
-
-std::shared_ptr<Bag<bool> > DurationConstraintImpl::getFirstEvent() const 
+/*
+Getter & Setter for attribute firstEvent
+*/
+std::shared_ptr<Bag<bool> > DurationConstraintImpl::isFirstEvent() const 
 {
+	if(m_firstEvent == nullptr)
+	{
+		m_firstEvent.reset(new Bag<bool>());
+	}
 	return m_firstEvent;
 }
+
+
+
+
 
 //*********************************
 // Operations
@@ -271,14 +237,28 @@ std::weak_ptr<uml::Namespace > DurationConstraintImpl::getNamespace() const
 {
 	return m_namespace;
 }
+
 std::shared_ptr<Union<uml::Element>> DurationConstraintImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > DurationConstraintImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<DurationConstraint> DurationConstraintImpl::getThisDurationConstraintPtr() const
@@ -326,8 +306,8 @@ Any DurationConstraintImpl::eGet(int featureID, bool resolve, bool coreType) con
 {
 	switch(featureID)
 	{
-		case UmlPackage::DURATIONCONSTRAINT_ATTRIBUTE_FIRSTEVENT:
-			return eAny(getFirstEvent()); //7915
+		case uml::umlPackage::DURATIONCONSTRAINT_ATTRIBUTE_FIRSTEVENT:
+			return eAny(isFirstEvent()); //7815
 	}
 	return IntervalConstraintImpl::eGet(featureID, resolve, coreType);
 }
@@ -335,8 +315,8 @@ bool DurationConstraintImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::DURATIONCONSTRAINT_ATTRIBUTE_FIRSTEVENT:
-			return !getFirstEvent()->empty(); //7915
+		case uml::umlPackage::DURATIONCONSTRAINT_ATTRIBUTE_FIRSTEVENT:
+			return !isFirstEvent()->empty(); //7815
 	}
 	return IntervalConstraintImpl::internalEIsSet(featureID);
 }
@@ -344,7 +324,7 @@ bool DurationConstraintImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::DURATIONCONSTRAINT_ATTRIBUTE_FIRSTEVENT:
+		case uml::umlPackage::DURATIONCONSTRAINT_ATTRIBUTE_FIRSTEVENT:
 		{
 			// BOOST CAST
 			// nothing to do
@@ -366,12 +346,11 @@ void DurationConstraintImpl::load(std::shared_ptr<persistence::interfaces::XLoad
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -381,8 +360,9 @@ void DurationConstraintImpl::loadAttributes(std::shared_ptr<persistence::interfa
 	IntervalConstraintImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void DurationConstraintImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void DurationConstraintImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 	try
 	{
 		if (nodeName.compare("firstEvent") == 0)
@@ -400,8 +380,8 @@ void DurationConstraintImpl::loadNode(std::string nodeName, std::shared_ptr<pers
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
 
-
-	IntervalConstraintImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	IntervalConstraintImpl::loadNode(nodeName, loadHandler);
 }
 
 void DurationConstraintImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -439,10 +419,9 @@ void DurationConstraintImpl::saveContent(std::shared_ptr<persistence::interfaces
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
- 
 		// Add attributes
 		if ( this->eIsSet(package->getDurationConstraint_Attribute_firstEvent()) )
 		{

@@ -36,7 +36,7 @@ namespace persistence
 
 namespace uml
 {
-	class UmlFactory;
+	class umlFactory;
 }
 
 //Forward Declaration for used types
@@ -75,8 +75,10 @@ namespace uml
 namespace uml 
 {
 	/*!
-	 A TemplateParameterSubstitution relates the actual parameter to a formal TemplateParameter as part of a template binding.
-	<p>From package UML::CommonStructure.</p> */
+	A TemplateParameterSubstitution relates the actual parameter to a formal TemplateParameter as part of a template binding.
+	<p>From package UML::CommonStructure.</p>
+	*/
+	
 	class TemplateParameterSubstitution:virtual public Element
 	{
 		public:
@@ -105,8 +107,10 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 The actual ParameterableElement must be compatible with the formal TemplateParameter, e.g., the actual ParameterableElement for a Class TemplateParameter must be a Class.
-			actual->forAll(a | a.isCompatibleWith(formal.parameteredElement)) */ 
+			The actual ParameterableElement must be compatible with the formal TemplateParameter, e.g., the actual ParameterableElement for a Class TemplateParameter must be a Class.
+			actual->forAll(a | a.isCompatibleWith(formal.parameteredElement))
+			*/
+			 
 			virtual bool must_be_compatible(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
@@ -118,41 +122,61 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 The ParameterableElement that is the actual parameter for this TemplateParameterSubstitution.
-			<p>From package UML::CommonStructure.</p> */
+			The ParameterableElement that is the actual parameter for this TemplateParameterSubstitution.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::ParameterableElement > getActual() const = 0;
 			
 			/*!
-			 The ParameterableElement that is the actual parameter for this TemplateParameterSubstitution.
-			<p>From package UML::CommonStructure.</p> */
-			virtual void setActual(std::shared_ptr<uml::ParameterableElement> _actual_actual) = 0;
+			The ParameterableElement that is the actual parameter for this TemplateParameterSubstitution.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
+			virtual void setActual(std::shared_ptr<uml::ParameterableElement> _actual) = 0;
+			
 			/*!
-			 The formal TemplateParameter that is associated with this TemplateParameterSubstitution.
-			<p>From package UML::CommonStructure.</p> */
+			The formal TemplateParameter that is associated with this TemplateParameterSubstitution.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::TemplateParameter > getFormal() const = 0;
 			
 			/*!
-			 The formal TemplateParameter that is associated with this TemplateParameterSubstitution.
-			<p>From package UML::CommonStructure.</p> */
-			virtual void setFormal(std::shared_ptr<uml::TemplateParameter> _formal_formal) = 0;
+			The formal TemplateParameter that is associated with this TemplateParameterSubstitution.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
+			virtual void setFormal(std::shared_ptr<uml::TemplateParameter> _formal) = 0;
+			
 			/*!
-			 The ParameterableElement that is owned by this TemplateParameterSubstitution as its actual parameter.
-			<p>From package UML::CommonStructure.</p> */
+			The ParameterableElement that is owned by this TemplateParameterSubstitution as its actual parameter.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::ParameterableElement > getOwnedActual() const = 0;
 			
 			/*!
-			 The ParameterableElement that is owned by this TemplateParameterSubstitution as its actual parameter.
-			<p>From package UML::CommonStructure.</p> */
-			virtual void setOwnedActual(std::shared_ptr<uml::ParameterableElement> _ownedActual_ownedActual) = 0;
+			The ParameterableElement that is owned by this TemplateParameterSubstitution as its actual parameter.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
+			virtual void setOwnedActual(std::shared_ptr<uml::ParameterableElement> _ownedActual) = 0;
+			
 			/*!
-			 The TemplateBinding that owns this TemplateParameterSubstitution.
-			<p>From package UML::CommonStructure.</p> */
+			The TemplateBinding that owns this TemplateParameterSubstitution.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::TemplateBinding > getTemplateBinding() const = 0;
 			
 			/*!
-			 The TemplateBinding that owns this TemplateParameterSubstitution.
-			<p>From package UML::CommonStructure.</p> */
-			virtual void setTemplateBinding(std::shared_ptr<uml::TemplateBinding> _templateBinding_templateBinding) = 0;
+			The TemplateBinding that owns this TemplateParameterSubstitution.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
+			virtual void setTemplateBinding(std::shared_ptr<uml::TemplateBinding> _templateBinding) = 0;
+			
 			
 
 		protected:
@@ -165,33 +189,41 @@ namespace uml
 			// Reference Members
 			//*********************************
 			/*!
-			 The ParameterableElement that is the actual parameter for this TemplateParameterSubstitution.
-			<p>From package UML::CommonStructure.</p> */
-			std::shared_ptr<uml::ParameterableElement > m_actual;
-			/*!
-			 The formal TemplateParameter that is associated with this TemplateParameterSubstitution.
-			<p>From package UML::CommonStructure.</p> */
-			std::shared_ptr<uml::TemplateParameter > m_formal;
-			/*!
-			 The ParameterableElement that is owned by this TemplateParameterSubstitution as its actual parameter.
-			<p>From package UML::CommonStructure.</p> */
-			std::shared_ptr<uml::ParameterableElement > m_ownedActual;
-			/*!
-			 The TemplateBinding that owns this TemplateParameterSubstitution.
-			<p>From package UML::CommonStructure.</p> */
-			std::weak_ptr<uml::TemplateBinding > m_templateBinding;
+			The ParameterableElement that is the actual parameter for this TemplateParameterSubstitution.
+			<p>From package UML::CommonStructure.</p>
+			*/
 			
+			std::shared_ptr<uml::ParameterableElement > m_actual;/*!
+			The formal TemplateParameter that is associated with this TemplateParameterSubstitution.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
+			std::shared_ptr<uml::TemplateParameter > m_formal;/*!
+			The ParameterableElement that is owned by this TemplateParameterSubstitution as its actual parameter.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
+			std::shared_ptr<uml::ParameterableElement > m_ownedActual;/*!
+			The TemplateBinding that owns this TemplateParameterSubstitution.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
+			std::weak_ptr<uml::TemplateBinding > m_templateBinding;
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

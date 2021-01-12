@@ -24,13 +24,22 @@
  */]
 [template public generateUnionGetterCpp(aClass : EClass)]
 [aClass.getUnionsReference()->sortedBy(name).generateUnionGetterCpp(aClass)/]
+
 [/template]
 
 [template public generateUnionGetterCpp(aReference : EReference,aClass: EClass) ? (hasGetter() and aReference.isUnion() )]
 [aReference.generateReferenceType()/] [aClass.name.toUpperFirst()/]Impl::[aReference.GetterName()/]() const
 {
+[if (not (aReference.upperBound = 1))]
+	if(m_[aReference.name/] == nullptr)
+	{
+		[aReference.generateReferenceInit()/]
+		[aReference.InitReferences()/]
+	}
+[/if]
 	return m_[aReference.name/];
 }
+
 
 [/template]
 
@@ -39,12 +48,12 @@
 [/template]
 
 [template public generateUnionGetterDeclaretaion(aReference : EReference, impl : EBoolean)? (hasGetter() and isUnion() )]
-[aReference.generateDokumentation()/]
+[aReference.generateDocumentation()/]
 virtual [aReference.generateReferenceType()/] [aReference.GetterName()/]() const [abstractSufix(impl)/];
 [/template]
 
 [template public generateUnionGetterDeclaretaionBag(aReference : EReference, impl : EBoolean)? (hasGetter() and isUnion() )]
-[aReference.generateDokumentation()/]
+[aReference.generateDocumentation()/]
 virtual [aReference.generateReferenceType()/] [aReference.GetterName()/]() const [abstractSufix(impl)/];
 [/template]
 

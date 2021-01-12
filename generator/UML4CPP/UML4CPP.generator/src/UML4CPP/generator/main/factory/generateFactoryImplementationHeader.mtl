@@ -26,27 +26,27 @@
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
 [template public generateFactoryImplHeader(aPackage : Package)]
-[file (aPackage.getPackageName().concat('/impl/').concat(aPackage.name.toUpperFirst()).concat('FactoryImpl.hpp'), false, 'UTF-8')]
+[file (aPackage.generateNamespacePath(false).concat('/impl/').concat(aPackage.name).concat('FactoryImpl.hpp'), false, 'UTF-8')]
 [startGuard(aPackage,'FactoryImpl')/]
 
 #include <functional>
 #include <map>
 
 #include "uml/impl/FactoryImpl.hpp"
-#include "[aPackage.getPackageName()/]/[aPackage.name.toUpperFirst().concat('Factory')/].hpp"
+#include "[aPackage.generateNamespacePath(false)/]/[aPackage.name.concat('Factory')/].hpp"
 
-[if (not aPackage.ignoreNamespace())]namespace [aPackage.name/] 
+[if (not aPackage.ignoreNamespace())]namespace [aPackage.generateNamespace(false)/] 
 {
 [/if]
-	class [aPackage.name.toUpperFirst().concat('FactoryImpl')/] : virtual public uml::FactoryImpl , virtual public [aPackage.name.toUpperFirst().concat('Factory')/] 
+	class [aPackage.name.concat('FactoryImpl')/] : virtual public uml::FactoryImpl , virtual public [aPackage.name.concat('Factory')/] 
 	{
 		protected:
-			friend class [aPackage.name.toUpperFirst().concat('Factory')/];
+			friend class [aPackage.name.concat('Factory')/];
 			// Constructor
-			[aPackage.name.toUpperFirst().concat('FactoryImpl')/]();
+			[aPackage.name.concat('FactoryImpl')/]();
 
 		public:
-			virtual ~[aPackage.name.toUpperFirst().concat('FactoryImpl')/]();
+			virtual ~[aPackage.name.concat('FactoryImpl')/]();
 			virtual std::shared_ptr<uml::Element> create(const unsigned int _metaClassId,  std::shared_ptr<uml::Element> container= nullptr, const unsigned int referenceID = -1) const;
 			virtual std::shared_ptr<uml::Element> create(const std::shared_ptr<uml::Class> _class,  std::shared_ptr<uml::Element> container= nullptr, const unsigned int referenceID = -1) const;
 			virtual std::shared_ptr<uml::Element> create(const std::string _className,  std::shared_ptr<uml::Element> container= nullptr, const unsigned int referenceID = -1) const;
@@ -55,10 +55,10 @@
 			[aPackage.collectModelClassesForFactoryFunctions().generateClassCreate(true)/]
 
 			//Package
-			virtual std::shared_ptr<[aPackage.name.toUpperFirst()/]Package> get[aPackage.name.toUpperFirst()/]Package();
+			virtual std::shared_ptr<[aPackage.name/]Package> get[aPackage.name/]Package();
 
 		private:
-			static [aPackage.name.toUpperFirst().concat('Factory')/] * create();
+			static [aPackage.name.concat('Factory')/] * create();
 			std::map<std::string,unsigned int> m_idMap;
 			virtual void init() {}
 	};

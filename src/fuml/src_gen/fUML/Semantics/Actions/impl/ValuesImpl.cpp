@@ -17,28 +17,31 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "fUML/impl/FUMLPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
 
 #include <exception> // used in Persistence
 
 #include "fUML/Semantics/Values/Value.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
-#include "fUML/FUMLFactory.hpp"
+//Factories an Package includes
+#include "fUML/Semantics/Actions/impl/ActionsFactoryImpl.hpp"
+#include "fUML/Semantics/Actions/impl/ActionsPackageImpl.hpp"
+
+#include "fUML/fUMLFactory.hpp"
+#include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsFactory.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -48,22 +51,7 @@ using namespace fUML::Semantics::Actions;
 // Constructor / Destructor
 //*********************************
 ValuesImpl::ValuesImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		m_values.reset(new Bag<fUML::Semantics::Values::Value>());
-	
-	
-
-	//Init references
-	
-	
+{	
 }
 
 ValuesImpl::~ValuesImpl()
@@ -72,7 +60,6 @@ ValuesImpl::~ValuesImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Values "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -103,7 +90,7 @@ std::shared_ptr<ecore::EObject>  ValuesImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ValuesImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getValues_Class();
+	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getValues_Class();
 }
 
 //*********************************
@@ -117,16 +104,29 @@ std::shared_ptr<ecore::EClass> ValuesImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference values
+*/
 std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ValuesImpl::getValues() const
 {
+	if(m_values == nullptr)
+	{
+		m_values.reset(new Bag<fUML::Semantics::Values::Value>());
+		
+		
+	}
 
     return m_values;
 }
 
 
+
+
+
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<Values> ValuesImpl::getThisValuesPtr() const
@@ -149,7 +149,7 @@ Any ValuesImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::VALUES_ATTRIBUTE_VALUES:
+		case fUML::Semantics::Actions::ActionsPackage::VALUES_ATTRIBUTE_VALUES:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<fUML::Semantics::Values::Value>::iterator iter = m_values->begin();
@@ -168,7 +168,7 @@ bool ValuesImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::VALUES_ATTRIBUTE_VALUES:
+		case fUML::Semantics::Actions::ActionsPackage::VALUES_ATTRIBUTE_VALUES:
 			return getValues() != nullptr; //1200
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
@@ -177,7 +177,7 @@ bool ValuesImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::VALUES_ATTRIBUTE_VALUES:
+		case fUML::Semantics::Actions::ActionsPackage::VALUES_ATTRIBUTE_VALUES:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -229,12 +229,11 @@ void ValuesImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loa
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get FUMLFactory
-	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
+	// get fUMLFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -263,18 +262,18 @@ void ValuesImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHa
 	ecore::EObjectImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ValuesImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+void ValuesImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<fUML::Semantics::Actions::ActionsFactory> modelFactory=fUML::Semantics::Actions::ActionsFactory::eInstance();
 
-
-	ecore::EObjectImpl::loadNode(nodeName, loadHandler, ecore::EcoreFactory::eInstance());
+	//load BasePackage Nodes
 }
 
 void ValuesImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::VALUES_ATTRIBUTE_VALUES:
+		case fUML::Semantics::Actions::ActionsPackage::VALUES_ATTRIBUTE_VALUES:
 		{
 			std::shared_ptr<Bag<fUML::Semantics::Values::Value>> _values = getValues();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -304,7 +303,7 @@ void ValuesImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 {
 	try
 	{
-		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+		std::shared_ptr<fUML::Semantics::Actions::ActionsPackage> package = fUML::Semantics::Actions::ActionsPackage::eInstance();
 
 	
 

@@ -51,7 +51,7 @@ task compileUMLProfiles() {
 	group 'Source'
 	description 'compile all uml profile models'
 	
-	dependsOn 'common:standardProfile:compileStandardProfile'
+	dependsOn 'common:standardProfile:src_gen:compileStandardProfile'
 }
 
 task generateEcoreModels() {
@@ -77,7 +77,7 @@ task generateUMLProfiles() {
 	group 'Source'
 	description 'generate all uml profile models'
 	
-	dependsOn 'common:standardProfile:generateStandardProfile'
+	dependsOn 'common:standardProfile:model:generateStandardProfile'
 }
 
 task deliverBasicInterfaces() {

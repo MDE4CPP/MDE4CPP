@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -26,21 +25,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -84,10 +74,11 @@
 
 #include "uml/Variable.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -97,19 +88,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 VariableActionImpl::VariableActionImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	//Init references
-	
+{	
 }
 
 VariableActionImpl::~VariableActionImpl()
@@ -119,53 +98,36 @@ VariableActionImpl::~VariableActionImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+VariableActionImpl::VariableActionImpl(std::weak_ptr<uml::Activity > par_activity)
+:VariableActionImpl()
+{
+	m_activity = par_activity;
+	m_owner = par_activity;
+}
 
 //Additional constructor for the containments back reference
-			VariableActionImpl::VariableActionImpl(std::weak_ptr<uml::Activity > par_activity)
-			:VariableActionImpl()
-			{
-			    m_activity = par_activity;
-				m_owner = par_activity;
-			}
-
-
-
-
+VariableActionImpl::VariableActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
+:VariableActionImpl()
+{
+	m_inStructuredNode = par_inStructuredNode;
+	m_owner = par_inStructuredNode;
+}
 
 //Additional constructor for the containments back reference
-			VariableActionImpl::VariableActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
-			:VariableActionImpl()
-			{
-			    m_inStructuredNode = par_inStructuredNode;
-				m_owner = par_inStructuredNode;
-			}
-
-
-
-
+VariableActionImpl::VariableActionImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:VariableActionImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			VariableActionImpl::VariableActionImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:VariableActionImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
-
-
-
-
-//Additional constructor for the containments back reference
-			VariableActionImpl::VariableActionImpl(std::weak_ptr<uml::Element > par_owner)
-			:VariableActionImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-
-
+VariableActionImpl::VariableActionImpl(std::weak_ptr<uml::Element > par_owner)
+:VariableActionImpl()
+{
+	m_owner = par_owner;
+}
 
 
 VariableActionImpl::VariableActionImpl(const VariableActionImpl & obj):VariableActionImpl()
@@ -290,7 +252,7 @@ std::shared_ptr<ecore::EObject>  VariableActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> VariableActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getVariableAction_Class();
+	return uml::umlPackage::eInstance()->getVariableAction_Class();
 }
 
 //*********************************
@@ -309,35 +271,76 @@ bool VariableActionImpl::scope_of_variable(Any diagnostics,std::map <   Any, Any
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference variable
+*/
 std::shared_ptr<uml::Variable > VariableActionImpl::getVariable() const
 {
 //assert(m_variable);
     return m_variable;
 }
+
 void VariableActionImpl::setVariable(std::shared_ptr<uml::Variable> _variable)
 {
     m_variable = _variable;
 }
+
+
 
 //*********************************
 // Union Getter
 //*********************************
 std::shared_ptr<Union<uml::ActivityGroup>> VariableActionImpl::getInGroup() const
 {
+	if(m_inGroup == nullptr)
+	{
+		/*Union*/
+		m_inGroup.reset(new Union<uml::ActivityGroup>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_inGroup - Union<uml::ActivityGroup>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_inGroup;
 }
+
 std::shared_ptr<Union<uml::Element>> VariableActionImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > VariableActionImpl::getOwner() const
 {
 	return m_owner;
 }
+
 std::shared_ptr<Union<uml::RedefinableElement>> VariableActionImpl::getRedefinedElement() const
 {
+	if(m_redefinedElement == nullptr)
+	{
+		/*Union*/
+		m_redefinedElement.reset(new Union<uml::RedefinableElement>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_redefinedElement - Union<uml::RedefinableElement>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_redefinedElement;
 }
+
+
 
 
 std::shared_ptr<VariableAction> VariableActionImpl::getThisVariableActionPtr() const
@@ -380,8 +383,8 @@ Any VariableActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::VARIABLEACTION_ATTRIBUTE_VARIABLE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getVariable())); //25427
+		case uml::umlPackage::VARIABLEACTION_ATTRIBUTE_VARIABLE:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getVariable())); //25327
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -389,8 +392,8 @@ bool VariableActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::VARIABLEACTION_ATTRIBUTE_VARIABLE:
-			return getVariable() != nullptr; //25427
+		case uml::umlPackage::VARIABLEACTION_ATTRIBUTE_VARIABLE:
+			return getVariable() != nullptr; //25327
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
@@ -398,12 +401,12 @@ bool VariableActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::VARIABLEACTION_ATTRIBUTE_VARIABLE:
+		case uml::umlPackage::VARIABLEACTION_ATTRIBUTE_VARIABLE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Variable> _variable = std::dynamic_pointer_cast<uml::Variable>(_temp);
-			setVariable(_variable); //25427
+			setVariable(_variable); //25327
 			return true;
 		}
 	}
@@ -422,12 +425,11 @@ void VariableActionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHand
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -456,18 +458,19 @@ void VariableActionImpl::loadAttributes(std::shared_ptr<persistence::interfaces:
 	ActionImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void VariableActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void VariableActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
-
-	ActionImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	ActionImpl::loadNode(nodeName, loadHandler);
 }
 
 void VariableActionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case UmlPackage::VARIABLEACTION_ATTRIBUTE_VARIABLE:
+		case uml::umlPackage::VARIABLEACTION_ATTRIBUTE_VARIABLE:
 		{
 			if (references.size() == 1)
 			{
@@ -492,7 +495,6 @@ void VariableActionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHand
 	
 	ActivityNodeImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);
@@ -515,7 +517,7 @@ void VariableActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 

@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class DirectedRelationshipImpl :virtual public RelationshipImpl, virtual public DirectedRelationship 
+	class DirectedRelationshipImpl : virtual public RelationshipImpl, virtual public DirectedRelationship 
 	{
 		public: 
 			DirectedRelationshipImpl(const DirectedRelationshipImpl & obj);
@@ -28,7 +28,7 @@ namespace uml
 			DirectedRelationshipImpl& operator=(DirectedRelationshipImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			DirectedRelationshipImpl();
 			virtual std::shared_ptr<DirectedRelationship> getThisDirectedRelationshipPtr() const;
 			virtual void setThisDirectedRelationshipPtr(std::weak_ptr<DirectedRelationship> thisDirectedRelationshipPtr);
@@ -58,23 +58,33 @@ namespace uml
 			//*********************************
 			
 			
+			
+			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
-			 Specifies the elements related by the Relationship.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the elements related by the Relationship.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getRelatedElement() const ;/*!
-			 Specifies the source Element(s) of the DirectedRelationship.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the source Element(s) of the DirectedRelationship.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> getSource() const ;/*!
-			 Specifies the target Element(s) of the DirectedRelationship.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the target Element(s) of the DirectedRelationship.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> getTarget() const ; 
 			 
 			//*********************************
@@ -88,7 +98,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

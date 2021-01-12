@@ -14,12 +14,12 @@
 #include "../Object.hpp"
 
 
-#include "ecore/impl/EObjectImpl.hpp"
+#include "ecore/impl/EModelElementImpl.hpp"
 
 //*********************************
 namespace uml 
 {
-	class ObjectImpl :virtual public ecore::EObjectImpl,
+	class ObjectImpl : virtual public ecore::EModelElementImpl,
 virtual public Object 
 	{
 		public: 
@@ -30,7 +30,7 @@ virtual public Object
 			ObjectImpl& operator=(ObjectImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			ObjectImpl();
 			virtual std::shared_ptr<Object> getThisObjectPtr() const;
 			virtual void setThisObjectPtr(std::weak_ptr<Object> thisObjectPtr);
@@ -45,24 +45,29 @@ virtual public Object
 			// Operations
 			//*********************************
 			/*!
-			 Gets the value of the given property. If the Property has multiplicity upper bound of 1, get() returns the value of the
+			Gets the value of the given property. If the Property has multiplicity upper bound of 1, get() returns the value of the
 			Property. If Property has multiplicity upper bound >1, get() returns a ReflectiveCollection containing the values of the
-			Property. If there are no values, the ReflectiveCollection returned is empty.  */ 
+			Property. If there are no values, the ReflectiveCollection returned is empty. 
+			*/
+			 
 			virtual Any get(std::shared_ptr<uml::Property>  property) const ;
 			
 			/*!
-			 Calls the supplied Operation on the object, passing the supplied Arguments and returning the result.
+			Calls the supplied Operation on the object, passing the supplied Arguments and returning the result.
 			The Operation must be defined on the Class of the Object, and the arguments must refer to Parameters of the Operation.
-			If an Argument is not supplied for a Parameter, its default value, if any, will be used. */ 
+			If an Argument is not supplied for a Parameter, its default value, if any, will be used.
+			*/
+			 
 			virtual std::shared_ptr<Bag<uml::Object> > invoke(std::shared_ptr<uml::Operation>  op,std::shared_ptr<Bag<uml::Argument> >  arguments) ;
 			
 			/*!
-			 If the Property has multiplicity upper bound = 1, set() atomically updates the value of the Property to the object
-			parameter. If Property has multiplicity upper bound >1, the Object must be a kind of ReflectiveCollection. */ 
+			If the Property has multiplicity upper bound = 1, set() atomically updates the value of the Property to the object
+			parameter. If Property has multiplicity upper bound >1, the Object must be a kind of ReflectiveCollection.
+			*/
+			 
 			virtual void set(std::shared_ptr<uml::Property>  property,Any value) ;
 			
-			/*!
-			 */ 
+			 
 			virtual void unset(std::shared_ptr<uml::Property>  property) ;
 			
 			
@@ -93,7 +98,7 @@ virtual public Object
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

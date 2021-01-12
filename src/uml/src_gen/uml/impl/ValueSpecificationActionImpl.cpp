@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -26,21 +25,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -84,10 +74,11 @@
 
 #include "uml/ValueSpecification.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -97,23 +88,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 ValueSpecificationActionImpl::ValueSpecificationActionImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	
-
-	//Init references
-	
-
-	
+{	
 }
 
 ValueSpecificationActionImpl::~ValueSpecificationActionImpl()
@@ -123,53 +98,36 @@ ValueSpecificationActionImpl::~ValueSpecificationActionImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+ValueSpecificationActionImpl::ValueSpecificationActionImpl(std::weak_ptr<uml::Activity > par_activity)
+:ValueSpecificationActionImpl()
+{
+	m_activity = par_activity;
+	m_owner = par_activity;
+}
 
 //Additional constructor for the containments back reference
-			ValueSpecificationActionImpl::ValueSpecificationActionImpl(std::weak_ptr<uml::Activity > par_activity)
-			:ValueSpecificationActionImpl()
-			{
-			    m_activity = par_activity;
-				m_owner = par_activity;
-			}
-
-
-
-
+ValueSpecificationActionImpl::ValueSpecificationActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
+:ValueSpecificationActionImpl()
+{
+	m_inStructuredNode = par_inStructuredNode;
+	m_owner = par_inStructuredNode;
+}
 
 //Additional constructor for the containments back reference
-			ValueSpecificationActionImpl::ValueSpecificationActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
-			:ValueSpecificationActionImpl()
-			{
-			    m_inStructuredNode = par_inStructuredNode;
-				m_owner = par_inStructuredNode;
-			}
-
-
-
-
+ValueSpecificationActionImpl::ValueSpecificationActionImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:ValueSpecificationActionImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			ValueSpecificationActionImpl::ValueSpecificationActionImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:ValueSpecificationActionImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
-
-
-
-
-//Additional constructor for the containments back reference
-			ValueSpecificationActionImpl::ValueSpecificationActionImpl(std::weak_ptr<uml::Element > par_owner)
-			:ValueSpecificationActionImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-
-
+ValueSpecificationActionImpl::ValueSpecificationActionImpl(std::weak_ptr<uml::Element > par_owner)
+:ValueSpecificationActionImpl()
+{
+	m_owner = par_owner;
+}
 
 
 ValueSpecificationActionImpl::ValueSpecificationActionImpl(const ValueSpecificationActionImpl & obj):ValueSpecificationActionImpl()
@@ -309,7 +267,7 @@ std::shared_ptr<ecore::EObject>  ValueSpecificationActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ValueSpecificationActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getValueSpecificationAction_Class();
+	return uml::umlPackage::eInstance()->getValueSpecificationAction_Class();
 }
 
 //*********************************
@@ -334,49 +292,112 @@ bool ValueSpecificationActionImpl::multiplicity(Any diagnostics,std::map <   Any
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference result
+*/
 std::shared_ptr<uml::OutputPin > ValueSpecificationActionImpl::getResult() const
 {
 //assert(m_result);
     return m_result;
 }
+
 void ValueSpecificationActionImpl::setResult(std::shared_ptr<uml::OutputPin> _result)
 {
     m_result = _result;
 }
 
+
+
+/*
+Getter & Setter for reference value
+*/
 std::shared_ptr<uml::ValueSpecification > ValueSpecificationActionImpl::getValue() const
 {
 //assert(m_value);
     return m_value;
 }
+
 void ValueSpecificationActionImpl::setValue(std::shared_ptr<uml::ValueSpecification> _value)
 {
     m_value = _value;
 }
+
+
 
 //*********************************
 // Union Getter
 //*********************************
 std::shared_ptr<Union<uml::ActivityGroup>> ValueSpecificationActionImpl::getInGroup() const
 {
+	if(m_inGroup == nullptr)
+	{
+		/*Union*/
+		m_inGroup.reset(new Union<uml::ActivityGroup>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_inGroup - Union<uml::ActivityGroup>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_inGroup;
 }
+
 std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element>> ValueSpecificationActionImpl::getOutput() const
 {
+	if(m_output == nullptr)
+	{
+		/*SubsetUnion*/
+		m_output.reset(new SubsetUnion<uml::OutputPin, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_output - SubsetUnion<uml::OutputPin, uml::Element >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_output->initSubsetUnion(getOwnedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_output - SubsetUnion<uml::OutputPin, uml::Element >(getOwnedElement())" << std::endl;
+		#endif
+		
+	}
 	return m_output;
 }
+
 std::shared_ptr<Union<uml::Element>> ValueSpecificationActionImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > ValueSpecificationActionImpl::getOwner() const
 {
 	return m_owner;
 }
+
 std::shared_ptr<Union<uml::RedefinableElement>> ValueSpecificationActionImpl::getRedefinedElement() const
 {
+	if(m_redefinedElement == nullptr)
+	{
+		/*Union*/
+		m_redefinedElement.reset(new Union<uml::RedefinableElement>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_redefinedElement - Union<uml::RedefinableElement>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_redefinedElement;
 }
+
+
 
 
 std::shared_ptr<ValueSpecificationAction> ValueSpecificationActionImpl::getThisValueSpecificationActionPtr() const
@@ -419,10 +440,10 @@ Any ValueSpecificationActionImpl::eGet(int featureID, bool resolve, bool coreTyp
 {
 	switch(featureID)
 	{
-		case UmlPackage::VALUESPECIFICATIONACTION_ATTRIBUTE_RESULT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //25227
-		case UmlPackage::VALUESPECIFICATIONACTION_ATTRIBUTE_VALUE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getValue())); //25228
+		case uml::umlPackage::VALUESPECIFICATIONACTION_ATTRIBUTE_RESULT:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //25127
+		case uml::umlPackage::VALUESPECIFICATIONACTION_ATTRIBUTE_VALUE:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getValue())); //25128
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -430,10 +451,10 @@ bool ValueSpecificationActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::VALUESPECIFICATIONACTION_ATTRIBUTE_RESULT:
-			return getResult() != nullptr; //25227
-		case UmlPackage::VALUESPECIFICATIONACTION_ATTRIBUTE_VALUE:
-			return getValue() != nullptr; //25228
+		case uml::umlPackage::VALUESPECIFICATIONACTION_ATTRIBUTE_RESULT:
+			return getResult() != nullptr; //25127
+		case uml::umlPackage::VALUESPECIFICATIONACTION_ATTRIBUTE_VALUE:
+			return getValue() != nullptr; //25128
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
@@ -441,20 +462,20 @@ bool ValueSpecificationActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::VALUESPECIFICATIONACTION_ATTRIBUTE_RESULT:
+		case uml::umlPackage::VALUESPECIFICATIONACTION_ATTRIBUTE_RESULT:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::OutputPin> _result = std::dynamic_pointer_cast<uml::OutputPin>(_temp);
-			setResult(_result); //25227
+			setResult(_result); //25127
 			return true;
 		}
-		case UmlPackage::VALUESPECIFICATIONACTION_ATTRIBUTE_VALUE:
+		case uml::umlPackage::VALUESPECIFICATIONACTION_ATTRIBUTE_VALUE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ValueSpecification> _value = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
-			setValue(_value); //25228
+			setValue(_value); //25128
 			return true;
 		}
 	}
@@ -473,12 +494,11 @@ void ValueSpecificationActionImpl::load(std::shared_ptr<persistence::interfaces:
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -488,8 +508,9 @@ void ValueSpecificationActionImpl::loadAttributes(std::shared_ptr<persistence::i
 	ActionImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ValueSpecificationActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void ValueSpecificationActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -500,7 +521,7 @@ void ValueSpecificationActionImpl::loadNode(std::string nodeName, std::shared_pt
 			{
 				typeName = "OutputPin";
 			}
-			std::shared_ptr<ecore::EObject> result = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::OUTPUTPIN_ATTRIBUTE_VALUESPECIFICATIONACTION);
+			std::shared_ptr<ecore::EObject> result = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::OUTPUTPIN_ATTRIBUTE_VALUESPECIFICATIONACTION);
 			if (result != nullptr)
 			{
 				loadHandler->handleChild(result);
@@ -516,7 +537,7 @@ void ValueSpecificationActionImpl::loadNode(std::string nodeName, std::shared_pt
 				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			std::shared_ptr<ecore::EObject> value = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::VALUESPECIFICATION_ATTRIBUTE_VALUESPECIFICATIONACTION);
+			std::shared_ptr<ecore::EObject> value = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::VALUESPECIFICATION_ATTRIBUTE_VALUESPECIFICATIONACTION);
 			if (value != nullptr)
 			{
 				loadHandler->handleChild(value);
@@ -532,8 +553,8 @@ void ValueSpecificationActionImpl::loadNode(std::string nodeName, std::shared_pt
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
-
-	ActionImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	ActionImpl::loadNode(nodeName, loadHandler);
 }
 
 void ValueSpecificationActionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -551,7 +572,6 @@ void ValueSpecificationActionImpl::save(std::shared_ptr<persistence::interfaces:
 	
 	ActivityNodeImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);
@@ -574,7 +594,7 @@ void ValueSpecificationActionImpl::saveContent(std::shared_ptr<persistence::inte
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 		// Save 'result'
 		std::shared_ptr<uml::OutputPin > result = this->getResult();

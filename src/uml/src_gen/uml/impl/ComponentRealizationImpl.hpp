@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class ComponentRealizationImpl :virtual public RealizationImpl, virtual public ComponentRealization 
+	class ComponentRealizationImpl : virtual public RealizationImpl, virtual public ComponentRealization 
 	{
 		public: 
 			ComponentRealizationImpl(const ComponentRealizationImpl & obj);
@@ -28,7 +28,7 @@ namespace uml
 			ComponentRealizationImpl& operator=(ComponentRealizationImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			ComponentRealizationImpl();
 			virtual std::shared_ptr<ComponentRealization> getThisComponentRealizationPtr() const;
 			virtual void setThisComponentRealizationPtr(std::weak_ptr<ComponentRealization> thisComponentRealizationPtr);
@@ -73,18 +73,26 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 The Component that owns this ComponentRealization and which is implemented by its realizing Classifiers.
-			<p>From package UML::StructuredClassifiers.</p> */
+			The Component that owns this ComponentRealization and which is implemented by its realizing Classifiers.
+			<p>From package UML::StructuredClassifiers.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Component > getAbstraction() const ;
 			
 			/*!
-			 The Component that owns this ComponentRealization and which is implemented by its realizing Classifiers.
-			<p>From package UML::StructuredClassifiers.</p> */
-			virtual void setAbstraction(std::shared_ptr<uml::Component> _abstraction_abstraction) ;
+			The Component that owns this ComponentRealization and which is implemented by its realizing Classifiers.
+			<p>From package UML::StructuredClassifiers.</p>
+			*/
+			
+			virtual void setAbstraction(std::shared_ptr<uml::Component> _abstraction) ;
+			
 			/*!
-			 The Classifiers that are involved in the implementation of the Component that owns this Realization.
-			<p>From package UML::StructuredClassifiers.</p> */
+			The Classifiers that are involved in the implementation of the Component that owns this Realization.
+			<p>From package UML::StructuredClassifiers.</p>
+			*/
+			
 			virtual std::shared_ptr<Subset<uml::Classifier, uml::NamedElement /*Subset does not reference a union*/>> getRealizingClassifier() const ;
+			
 			
 							
 			
@@ -92,23 +100,35 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
-			 Specifies the elements related by the Relationship.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the elements related by the Relationship.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getRelatedElement() const ;/*!
-			 Specifies the source Element(s) of the DirectedRelationship.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the source Element(s) of the DirectedRelationship.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> getSource() const ;/*!
-			 Specifies the target Element(s) of the DirectedRelationship.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the target Element(s) of the DirectedRelationship.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> getTarget() const ; 
 			 
 			//*********************************
@@ -122,7 +142,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

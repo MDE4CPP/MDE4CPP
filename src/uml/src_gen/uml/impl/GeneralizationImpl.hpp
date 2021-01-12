@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class GeneralizationImpl :virtual public DirectedRelationshipImpl, virtual public Generalization 
+	class GeneralizationImpl : virtual public DirectedRelationshipImpl, virtual public Generalization 
 	{
 		public: 
 			GeneralizationImpl(const GeneralizationImpl & obj);
@@ -28,7 +28,7 @@ namespace uml
 			GeneralizationImpl& operator=(GeneralizationImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			GeneralizationImpl();
 			virtual std::shared_ptr<Generalization> getThisGeneralizationPtr() const;
 			virtual void setThisGeneralizationPtr(std::weak_ptr<Generalization> thisGeneralizationPtr);
@@ -56,63 +56,89 @@ namespace uml
 			// Attributes Getter Setter
 			//*********************************
 			/*!
-			 Indicates whether the specific Classifier can be used wherever the general Classifier can be used. If true, the execution traces of the specific Classifier shall be a superset of the execution traces of the general Classifier. If false, there is no such constraint on execution traces. If unset, the modeler has not stated whether there is such a constraint or not.
-			<p>From package UML::Classification.</p> */ 
+			Indicates whether the specific Classifier can be used wherever the general Classifier can be used. If true, the execution traces of the specific Classifier shall be a superset of the execution traces of the general Classifier. If false, there is no such constraint on execution traces. If unset, the modeler has not stated whether there is such a constraint or not.
+			<p>From package UML::Classification.</p>
+			*/
+			 
 			virtual bool getIsSubstitutable() const ;
 			
 			/*!
-			 Indicates whether the specific Classifier can be used wherever the general Classifier can be used. If true, the execution traces of the specific Classifier shall be a superset of the execution traces of the general Classifier. If false, there is no such constraint on execution traces. If unset, the modeler has not stated whether there is such a constraint or not.
-			<p>From package UML::Classification.</p> */ 
+			Indicates whether the specific Classifier can be used wherever the general Classifier can be used. If true, the execution traces of the specific Classifier shall be a superset of the execution traces of the general Classifier. If false, there is no such constraint on execution traces. If unset, the modeler has not stated whether there is such a constraint or not.
+			<p>From package UML::Classification.</p>
+			*/
+			 
 			virtual void setIsSubstitutable (bool _isSubstitutable); 
-			
 			
 			
 			//*********************************
 			// Reference
 			//*********************************
 			/*!
-			 The general classifier in the Generalization relationship.
-			<p>From package UML::Classification.</p> */
+			The general classifier in the Generalization relationship.
+			<p>From package UML::Classification.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::Classifier > getGeneral() const ;
 			
 			/*!
-			 The general classifier in the Generalization relationship.
-			<p>From package UML::Classification.</p> */
-			virtual void setGeneral(std::shared_ptr<uml::Classifier> _general_general) ;
-			/*!
-			 Represents a set of instances of Generalization.  A Generalization may appear in many GeneralizationSets.
-			<p>From package UML::Classification.</p> */
-			virtual std::shared_ptr<Bag<uml::GeneralizationSet>> getGeneralizationSet() const ;
+			The general classifier in the Generalization relationship.
+			<p>From package UML::Classification.</p>
+			*/
+			
+			virtual void setGeneral(std::shared_ptr<uml::Classifier> _general) ;
 			
 			/*!
-			 The specializing Classifier in the Generalization relationship.
-			<p>From package UML::Classification.</p> */
+			Represents a set of instances of Generalization.  A Generalization may appear in many GeneralizationSets.
+			<p>From package UML::Classification.</p>
+			*/
+			
+			virtual std::shared_ptr<Bag<uml::GeneralizationSet>> getGeneralizationSet() const ;
+			
+			
+			/*!
+			The specializing Classifier in the Generalization relationship.
+			<p>From package UML::Classification.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Classifier > getSpecific() const ;
 			
 			/*!
-			 The specializing Classifier in the Generalization relationship.
-			<p>From package UML::Classification.</p> */
-			virtual void setSpecific(std::shared_ptr<uml::Classifier> _specific_specific) ;
+			The specializing Classifier in the Generalization relationship.
+			<p>From package UML::Classification.</p>
+			*/
+			
+			virtual void setSpecific(std::shared_ptr<uml::Classifier> _specific) ;
+			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
-			 Specifies the elements related by the Relationship.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the elements related by the Relationship.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getRelatedElement() const ;/*!
-			 Specifies the source Element(s) of the DirectedRelationship.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the source Element(s) of the DirectedRelationship.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> getSource() const ;/*!
-			 Specifies the target Element(s) of the DirectedRelationship.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the target Element(s) of the DirectedRelationship.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> getTarget() const ; 
 			 
 			//*********************************
@@ -126,7 +152,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

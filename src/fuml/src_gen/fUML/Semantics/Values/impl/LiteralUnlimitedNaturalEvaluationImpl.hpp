@@ -13,13 +13,13 @@
 //Model includes
 #include "../LiteralUnlimitedNaturalEvaluation.hpp"
 
-#include "fUML/impl/FUMLFactoryImpl.hpp"
+#include "fUML/Semantics/Values/impl/ValuesFactoryImpl.hpp"
 #include "fUML/Semantics/Values/impl/LiteralEvaluationImpl.hpp"
 
 //*********************************
 namespace fUML::Semantics::Values 
 {
-	class LiteralUnlimitedNaturalEvaluationImpl :virtual public LiteralEvaluationImpl, virtual public LiteralUnlimitedNaturalEvaluation 
+	class LiteralUnlimitedNaturalEvaluationImpl : virtual public LiteralEvaluationImpl, virtual public LiteralUnlimitedNaturalEvaluation 
 	{
 		public: 
 			LiteralUnlimitedNaturalEvaluationImpl(const LiteralUnlimitedNaturalEvaluationImpl & obj);
@@ -29,7 +29,7 @@ namespace fUML::Semantics::Values
 			LiteralUnlimitedNaturalEvaluationImpl& operator=(LiteralUnlimitedNaturalEvaluationImpl const&) = delete;
 
 		protected:
-			friend class fUML::FUMLFactoryImpl;
+			friend class fUML::Semantics::Values::ValuesFactoryImpl;
 			LiteralUnlimitedNaturalEvaluationImpl();
 			virtual std::shared_ptr<LiteralUnlimitedNaturalEvaluation> getThisLiteralUnlimitedNaturalEvaluationPtr() const;
 			virtual void setThisLiteralUnlimitedNaturalEvaluationPtr(std::weak_ptr<LiteralUnlimitedNaturalEvaluation> thisLiteralUnlimitedNaturalEvaluationPtr);
@@ -43,8 +43,7 @@ namespace fUML::Semantics::Values
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> evaluate() ;
 			
 			
@@ -75,7 +74,7 @@ namespace fUML::Semantics::Values
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

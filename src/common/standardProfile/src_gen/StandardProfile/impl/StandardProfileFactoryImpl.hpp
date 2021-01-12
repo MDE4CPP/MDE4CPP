@@ -29,71 +29,71 @@ namespace StandardProfile
 			virtual std::shared_ptr<uml::Element> create(const std::string _className,  std::shared_ptr<uml::Element> container= nullptr, const unsigned int referenceID = -1) const;
 
 			//Creator functions
-			virtual std::shared_ptr<StandardProfile::Auxiliary> createAuxiliary(const int metaElementID=-1) const ;
+			virtual std::shared_ptr<StandardProfile::Auxiliary> createAuxiliary(const int metaElementID = StandardProfilePackage::AUXILIARY_CLASS) const ;
 			
-			virtual std::shared_ptr<StandardProfile::BuildComponent> createBuildComponent(const int metaElementID=-1) const ;
+			virtual std::shared_ptr<StandardProfile::BuildComponent> createBuildComponent(const int metaElementID = StandardProfilePackage::BUILDCOMPONENT_CLASS) const ;
 			
-			virtual std::shared_ptr<StandardProfile::Call> createCall(const int metaElementID=-1) const ;
+			virtual std::shared_ptr<StandardProfile::Call> createCall(const int metaElementID = StandardProfilePackage::CALL_CLASS) const ;
 			
-			virtual std::shared_ptr<StandardProfile::Create> createCreate(const int metaElementID=-1) const ;
+			virtual std::shared_ptr<StandardProfile::Create> createCreate(const int metaElementID = StandardProfilePackage::CREATE_CLASS) const ;
 			
-			virtual std::shared_ptr<StandardProfile::Derive> createDerive(const int metaElementID=-1) const ;
+			virtual std::shared_ptr<StandardProfile::Derive> createDerive(const int metaElementID = StandardProfilePackage::DERIVE_CLASS) const ;
 			
-			virtual std::shared_ptr<StandardProfile::Destroy> createDestroy(const int metaElementID=-1) const ;
+			virtual std::shared_ptr<StandardProfile::Destroy> createDestroy(const int metaElementID = StandardProfilePackage::DESTROY_CLASS) const ;
 			
-			virtual std::shared_ptr<StandardProfile::Document> createDocument(const int metaElementID=-1) const ;
+			virtual std::shared_ptr<StandardProfile::Document> createDocument(const int metaElementID = StandardProfilePackage::DOCUMENT_CLASS) const ;
 			
-			virtual std::shared_ptr<StandardProfile::Entity> createEntity(const int metaElementID=-1) const ;
+			virtual std::shared_ptr<StandardProfile::Entity> createEntity(const int metaElementID = StandardProfilePackage::ENTITY_CLASS) const ;
 			
-			virtual std::shared_ptr<StandardProfile::Executable> createExecutable(const int metaElementID=-1) const ;
+			virtual std::shared_ptr<StandardProfile::Executable> createExecutable(const int metaElementID = StandardProfilePackage::EXECUTABLE_CLASS) const ;
 			
-			virtual std::shared_ptr<StandardProfile::File> createFile(const int metaElementID=-1) const ;
+			virtual std::shared_ptr<StandardProfile::File> createFile(const int metaElementID = StandardProfilePackage::FILE_CLASS) const ;
 			
-			virtual std::shared_ptr<StandardProfile::Focus> createFocus(const int metaElementID=-1) const ;
+			virtual std::shared_ptr<StandardProfile::Focus> createFocus(const int metaElementID = StandardProfilePackage::FOCUS_CLASS) const ;
 			
-			virtual std::shared_ptr<StandardProfile::Framework> createFramework(const int metaElementID=-1) const ;
+			virtual std::shared_ptr<StandardProfile::Framework> createFramework(const int metaElementID = StandardProfilePackage::FRAMEWORK_CLASS) const ;
 			
-			virtual std::shared_ptr<StandardProfile::Implement> createImplement(const int metaElementID=-1) const ;
+			virtual std::shared_ptr<StandardProfile::Implement> createImplement(const int metaElementID = StandardProfilePackage::IMPLEMENT_CLASS) const ;
 			
-			virtual std::shared_ptr<StandardProfile::ImplementationClass> createImplementationClass(const int metaElementID=-1) const ;
+			virtual std::shared_ptr<StandardProfile::ImplementationClass> createImplementationClass(const int metaElementID = StandardProfilePackage::IMPLEMENTATIONCLASS_CLASS) const ;
 			
-			virtual std::shared_ptr<StandardProfile::Instantiate> createInstantiate(const int metaElementID=-1) const ;
+			virtual std::shared_ptr<StandardProfile::Instantiate> createInstantiate(const int metaElementID = StandardProfilePackage::INSTANTIATE_CLASS) const ;
 			
-			virtual std::shared_ptr<StandardProfile::Library> createLibrary(const int metaElementID=-1) const ;
+			virtual std::shared_ptr<StandardProfile::Library> createLibrary(const int metaElementID = StandardProfilePackage::LIBRARY_CLASS) const ;
 			
-			virtual std::shared_ptr<StandardProfile::Metaclass> createMetaclass(const int metaElementID=-1) const ;
+			virtual std::shared_ptr<StandardProfile::Metaclass> createMetaclass(const int metaElementID = StandardProfilePackage::METACLASS_CLASS) const ;
 			
-			virtual std::shared_ptr<StandardProfile::Metamodel> createMetamodel(const int metaElementID=-1) const ;
+			virtual std::shared_ptr<StandardProfile::Metamodel> createMetamodel(const int metaElementID = StandardProfilePackage::METAMODEL_CLASS) const ;
 			
-			virtual std::shared_ptr<StandardProfile::ModelLibrary> createModelLibrary(const int metaElementID=-1) const ;
+			virtual std::shared_ptr<StandardProfile::ModelLibrary> createModelLibrary(const int metaElementID = StandardProfilePackage::MODELLIBRARY_CLASS) const ;
 			
-			virtual std::shared_ptr<StandardProfile::Process> createProcess(const int metaElementID=-1) const ;
+			virtual std::shared_ptr<StandardProfile::Process> createProcess(const int metaElementID = StandardProfilePackage::PROCESS_CLASS) const ;
 			
-			virtual std::shared_ptr<StandardProfile::Realization> createRealization(const int metaElementID=-1) const ;
+			virtual std::shared_ptr<StandardProfile::Realization> createRealization(const int metaElementID = StandardProfilePackage::REALIZATION_CLASS) const ;
 			
-			virtual std::shared_ptr<StandardProfile::Refine> createRefine(const int metaElementID=-1) const ;
+			virtual std::shared_ptr<StandardProfile::Refine> createRefine(const int metaElementID = StandardProfilePackage::REFINE_CLASS) const ;
 			
-			virtual std::shared_ptr<StandardProfile::Responsibility> createResponsibility(const int metaElementID=-1) const ;
+			virtual std::shared_ptr<StandardProfile::Responsibility> createResponsibility(const int metaElementID = StandardProfilePackage::RESPONSIBILITY_CLASS) const ;
 			
-			virtual std::shared_ptr<StandardProfile::Script> createScript(const int metaElementID=-1) const ;
+			virtual std::shared_ptr<StandardProfile::Script> createScript(const int metaElementID = StandardProfilePackage::SCRIPT_CLASS) const ;
 			
-			virtual std::shared_ptr<StandardProfile::Send> createSend(const int metaElementID=-1) const ;
+			virtual std::shared_ptr<StandardProfile::Send> createSend(const int metaElementID = StandardProfilePackage::SEND_CLASS) const ;
 			
-			virtual std::shared_ptr<StandardProfile::Service> createService(const int metaElementID=-1) const ;
+			virtual std::shared_ptr<StandardProfile::Service> createService(const int metaElementID = StandardProfilePackage::SERVICE_CLASS) const ;
 			
-			virtual std::shared_ptr<StandardProfile::Source> createSource(const int metaElementID=-1) const ;
+			virtual std::shared_ptr<StandardProfile::Source> createSource(const int metaElementID = StandardProfilePackage::SOURCE_CLASS) const ;
 			
-			virtual std::shared_ptr<StandardProfile::Specification> createSpecification(const int metaElementID=-1) const ;
+			virtual std::shared_ptr<StandardProfile::Specification> createSpecification(const int metaElementID = StandardProfilePackage::SPECIFICATION_CLASS) const ;
 			
-			virtual std::shared_ptr<StandardProfile::Subsystem> createSubsystem(const int metaElementID=-1) const ;
+			virtual std::shared_ptr<StandardProfile::Subsystem> createSubsystem(const int metaElementID = StandardProfilePackage::SUBSYSTEM_CLASS) const ;
 			
-			virtual std::shared_ptr<StandardProfile::SystemModel> createSystemModel(const int metaElementID=-1) const ;
+			virtual std::shared_ptr<StandardProfile::SystemModel> createSystemModel(const int metaElementID = StandardProfilePackage::SYSTEMMODEL_CLASS) const ;
 			
-			virtual std::shared_ptr<StandardProfile::Trace> createTrace(const int metaElementID=-1) const ;
+			virtual std::shared_ptr<StandardProfile::Trace> createTrace(const int metaElementID = StandardProfilePackage::TRACE_CLASS) const ;
 			
-			virtual std::shared_ptr<StandardProfile::Type> createType(const int metaElementID=-1) const ;
+			virtual std::shared_ptr<StandardProfile::Type> createType(const int metaElementID = StandardProfilePackage::TYPE_CLASS) const ;
 			
-			virtual std::shared_ptr<StandardProfile::Utility> createUtility(const int metaElementID=-1) const ;
+			virtual std::shared_ptr<StandardProfile::Utility> createUtility(const int metaElementID = StandardProfilePackage::UTILITY_CLASS) const ;
 			
 			
 

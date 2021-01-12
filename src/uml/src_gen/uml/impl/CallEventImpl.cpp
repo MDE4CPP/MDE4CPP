@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -25,21 +24,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -61,10 +51,11 @@
 
 #include "uml/TemplateParameter.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -74,19 +65,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 CallEventImpl::CallEventImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	//Init references
-	
+{	
 }
 
 CallEventImpl::~CallEventImpl()
@@ -96,53 +75,36 @@ CallEventImpl::~CallEventImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+CallEventImpl::CallEventImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:CallEventImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			CallEventImpl::CallEventImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:CallEventImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
-
-
-
+CallEventImpl::CallEventImpl(std::weak_ptr<uml::Element > par_owner)
+:CallEventImpl()
+{
+	m_owner = par_owner;
+}
 
 //Additional constructor for the containments back reference
-			CallEventImpl::CallEventImpl(std::weak_ptr<uml::Element > par_owner)
-			:CallEventImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-
-
+CallEventImpl::CallEventImpl(std::weak_ptr<uml::Package > par_owningPackage)
+:CallEventImpl()
+{
+	m_owningPackage = par_owningPackage;
+	m_namespace = par_owningPackage;
+}
 
 //Additional constructor for the containments back reference
-			CallEventImpl::CallEventImpl(std::weak_ptr<uml::Package > par_owningPackage)
-			:CallEventImpl()
-			{
-			    m_owningPackage = par_owningPackage;
-				m_namespace = par_owningPackage;
-			}
-
-
-
-
-
-//Additional constructor for the containments back reference
-			CallEventImpl::CallEventImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
-			:CallEventImpl()
-			{
-			    m_owningTemplateParameter = par_owningTemplateParameter;
-				m_owner = par_owningTemplateParameter;
-			}
-
-
-
-
+CallEventImpl::CallEventImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+:CallEventImpl()
+{
+	m_owningTemplateParameter = par_owningTemplateParameter;
+	m_owner = par_owningTemplateParameter;
+}
 
 
 CallEventImpl::CallEventImpl(const CallEventImpl & obj):CallEventImpl()
@@ -202,7 +164,7 @@ std::shared_ptr<ecore::EObject>  CallEventImpl::copy() const
 
 std::shared_ptr<ecore::EClass> CallEventImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getCallEvent_Class();
+	return uml::umlPackage::eInstance()->getCallEvent_Class();
 }
 
 //*********************************
@@ -216,15 +178,21 @@ std::shared_ptr<ecore::EClass> CallEventImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference operation
+*/
 std::shared_ptr<uml::Operation > CallEventImpl::getOperation() const
 {
 //assert(m_operation);
     return m_operation;
 }
+
 void CallEventImpl::setOperation(std::shared_ptr<uml::Operation> _operation)
 {
     m_operation = _operation;
 }
+
+
 
 //*********************************
 // Union Getter
@@ -233,14 +201,28 @@ std::weak_ptr<uml::Namespace > CallEventImpl::getNamespace() const
 {
 	return m_namespace;
 }
+
 std::shared_ptr<Union<uml::Element>> CallEventImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > CallEventImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<CallEvent> CallEventImpl::getThisCallEventPtr() const
@@ -283,8 +265,8 @@ Any CallEventImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::CALLEVENT_ATTRIBUTE_OPERATION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOperation())); //3212
+		case uml::umlPackage::CALLEVENT_ATTRIBUTE_OPERATION:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOperation())); //3112
 	}
 	return MessageEventImpl::eGet(featureID, resolve, coreType);
 }
@@ -292,8 +274,8 @@ bool CallEventImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::CALLEVENT_ATTRIBUTE_OPERATION:
-			return getOperation() != nullptr; //3212
+		case uml::umlPackage::CALLEVENT_ATTRIBUTE_OPERATION:
+			return getOperation() != nullptr; //3112
 	}
 	return MessageEventImpl::internalEIsSet(featureID);
 }
@@ -301,12 +283,12 @@ bool CallEventImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::CALLEVENT_ATTRIBUTE_OPERATION:
+		case uml::umlPackage::CALLEVENT_ATTRIBUTE_OPERATION:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Operation> _operation = std::dynamic_pointer_cast<uml::Operation>(_temp);
-			setOperation(_operation); //3212
+			setOperation(_operation); //3112
 			return true;
 		}
 	}
@@ -325,12 +307,11 @@ void CallEventImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> 
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -359,18 +340,19 @@ void CallEventImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoa
 	MessageEventImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void CallEventImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void CallEventImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
-
-	MessageEventImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	MessageEventImpl::loadNode(nodeName, loadHandler);
 }
 
 void CallEventImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case UmlPackage::CALLEVENT_ATTRIBUTE_OPERATION:
+		case uml::umlPackage::CALLEVENT_ATTRIBUTE_OPERATION:
 		{
 			if (references.size() == 1)
 			{
@@ -415,7 +397,7 @@ void CallEventImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 

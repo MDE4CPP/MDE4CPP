@@ -18,23 +18,21 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "fUML/impl/FUMLPackageImpl.hpp"
+
+//Includes from codegen annotation
 #include "fUML/FUMLFactory.hpp"
 #include "uml/Class.hpp"
 #include "uml/LiteralString.hpp"
 #include "uml/PrimitiveType.hpp"
 #include "uml/Type.hpp"
-#include "uml/UmlFactory.hpp"
+#include "uml/umlFactory.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -46,10 +44,15 @@
 
 #include "uml/ValueSpecification.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
-#include "fUML/FUMLFactory.hpp"
+//Factories an Package includes
+#include "fUML/Semantics/SimpleClassifiers/impl/SimpleClassifiersFactoryImpl.hpp"
+#include "fUML/Semantics/SimpleClassifiers/impl/SimpleClassifiersPackageImpl.hpp"
+
+#include "fUML/fUMLFactory.hpp"
+#include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsFactory.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -59,17 +62,7 @@ using namespace fUML::Semantics::SimpleClassifiers;
 // Constructor / Destructor
 //*********************************
 StringValueImpl::StringValueImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 StringValueImpl::~StringValueImpl()
@@ -78,7 +71,6 @@ StringValueImpl::~StringValueImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete StringValue "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -109,25 +101,43 @@ std::shared_ptr<ecore::EObject>  StringValueImpl::copy() const
 
 std::shared_ptr<ecore::EClass> StringValueImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getStringValue_Class();
+	return fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance()->getStringValue_Class();
 }
 
 //*********************************
 // Attribute Setter Getter
 //*********************************
-void StringValueImpl::setValue(std::string _value)
-{
-	m_value = _value;
-} 
-
+/*
+Getter & Setter for attribute value
+*/
 std::string StringValueImpl::getValue() const 
 {
 	return m_value;
 }
 
+void StringValueImpl::setValue(std::string _value)
+{
+	m_value = _value;
+} 
+
+
+
 //*********************************
 // Operations
 //*********************************
+std::shared_ptr<fUML::Semantics::Values::Value> StringValueImpl::_copy()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Create a new string value with the same value as this string value.
+
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> newValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createStringValue();
+newValue->setType(this->getType()); //Duplicated from _copy()-method of super class in order to avoid having to call _copy()-method of super class and having to cast afterwards
+newValue->setValue(this->getValue());
+return newValue;
+	//end of body
+}
+
 bool StringValueImpl::equals(std::shared_ptr<fUML::Semantics::Values::Value>  otherValue)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
@@ -148,7 +158,7 @@ std::shared_ptr<uml::ValueSpecification> StringValueImpl::specify()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<uml::LiteralString> literal = uml::UmlFactory::eInstance()->createLiteralString_in_Namespace(std::shared_ptr<uml::Class>());
+	std::shared_ptr<uml::LiteralString> literal = uml::umlFactory::eInstance()->createLiteralString_in_Namespace(std::shared_ptr<uml::Class>());
 	literal->setType(this->getType());
     literal->setValue(this->getValue());
     return literal;
@@ -172,6 +182,7 @@ std::string StringValueImpl::toString()
 //*********************************
 
 
+
 std::shared_ptr<StringValue> StringValueImpl::getThisStringValuePtr() const
 {
 	return m_thisStringValuePtr.lock();
@@ -193,7 +204,7 @@ Any StringValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::STRINGVALUE_ATTRIBUTE_VALUE:
+		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::STRINGVALUE_ATTRIBUTE_VALUE:
 			return eAny(getValue()); //1101
 	}
 	return PrimitiveValueImpl::eGet(featureID, resolve, coreType);
@@ -202,7 +213,7 @@ bool StringValueImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::STRINGVALUE_ATTRIBUTE_VALUE:
+		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::STRINGVALUE_ATTRIBUTE_VALUE:
 			return getValue() != ""; //1101
 	}
 	return PrimitiveValueImpl::internalEIsSet(featureID);
@@ -211,7 +222,7 @@ bool StringValueImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::STRINGVALUE_ATTRIBUTE_VALUE:
+		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::STRINGVALUE_ATTRIBUTE_VALUE:
 		{
 			// BOOST CAST
 			std::string _value = newValue->get<std::string>();
@@ -234,12 +245,11 @@ void StringValueImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get FUMLFactory
-	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
+	// get fUMLFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -270,11 +280,12 @@ void StringValueImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XL
 	PrimitiveValueImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void StringValueImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+void StringValueImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory> modelFactory=fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance();
 
-
-	PrimitiveValueImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	PrimitiveValueImpl::loadNode(nodeName, loadHandler);
 }
 
 void StringValueImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -302,10 +313,9 @@ void StringValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 {
 	try
 	{
-		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+		std::shared_ptr<fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage> package = fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance();
 
 	
- 
 		// Add attributes
 		if ( this->eIsSet(package->getStringValue_Attribute_value()) )
 		{

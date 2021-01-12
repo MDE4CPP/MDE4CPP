@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -26,21 +25,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -84,10 +74,11 @@
 
 #include "uml/Trigger.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -97,19 +88,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 AcceptCallActionImpl::AcceptCallActionImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	//Init references
-	
+{	
 }
 
 AcceptCallActionImpl::~AcceptCallActionImpl()
@@ -119,53 +98,36 @@ AcceptCallActionImpl::~AcceptCallActionImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+AcceptCallActionImpl::AcceptCallActionImpl(std::weak_ptr<uml::Activity > par_activity)
+:AcceptCallActionImpl()
+{
+	m_activity = par_activity;
+	m_owner = par_activity;
+}
 
 //Additional constructor for the containments back reference
-			AcceptCallActionImpl::AcceptCallActionImpl(std::weak_ptr<uml::Activity > par_activity)
-			:AcceptCallActionImpl()
-			{
-			    m_activity = par_activity;
-				m_owner = par_activity;
-			}
-
-
-
-
+AcceptCallActionImpl::AcceptCallActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
+:AcceptCallActionImpl()
+{
+	m_inStructuredNode = par_inStructuredNode;
+	m_owner = par_inStructuredNode;
+}
 
 //Additional constructor for the containments back reference
-			AcceptCallActionImpl::AcceptCallActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
-			:AcceptCallActionImpl()
-			{
-			    m_inStructuredNode = par_inStructuredNode;
-				m_owner = par_inStructuredNode;
-			}
-
-
-
-
+AcceptCallActionImpl::AcceptCallActionImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:AcceptCallActionImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			AcceptCallActionImpl::AcceptCallActionImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:AcceptCallActionImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
-
-
-
-
-//Additional constructor for the containments back reference
-			AcceptCallActionImpl::AcceptCallActionImpl(std::weak_ptr<uml::Element > par_owner)
-			:AcceptCallActionImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-
-
+AcceptCallActionImpl::AcceptCallActionImpl(std::weak_ptr<uml::Element > par_owner)
+:AcceptCallActionImpl()
+{
+	m_owner = par_owner;
+}
 
 
 AcceptCallActionImpl::AcceptCallActionImpl(const AcceptCallActionImpl & obj):AcceptCallActionImpl()
@@ -313,7 +275,7 @@ std::shared_ptr<ecore::EObject>  AcceptCallActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> AcceptCallActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getAcceptCallAction_Class();
+	return uml::umlPackage::eInstance()->getAcceptCallAction_Class();
 }
 
 //*********************************
@@ -344,39 +306,96 @@ bool AcceptCallActionImpl::unmarshall(Any diagnostics,std::map <   Any, Any >  c
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference returnInformation
+*/
 std::shared_ptr<uml::OutputPin > AcceptCallActionImpl::getReturnInformation() const
 {
 //assert(m_returnInformation);
     return m_returnInformation;
 }
+
 void AcceptCallActionImpl::setReturnInformation(std::shared_ptr<uml::OutputPin> _returnInformation)
 {
     m_returnInformation = _returnInformation;
 }
+
+
 
 //*********************************
 // Union Getter
 //*********************************
 std::shared_ptr<Union<uml::ActivityGroup>> AcceptCallActionImpl::getInGroup() const
 {
+	if(m_inGroup == nullptr)
+	{
+		/*Union*/
+		m_inGroup.reset(new Union<uml::ActivityGroup>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_inGroup - Union<uml::ActivityGroup>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_inGroup;
 }
+
 std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element>> AcceptCallActionImpl::getOutput() const
 {
+	if(m_output == nullptr)
+	{
+		/*SubsetUnion*/
+		m_output.reset(new SubsetUnion<uml::OutputPin, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_output - SubsetUnion<uml::OutputPin, uml::Element >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_output->initSubsetUnion(getOwnedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_output - SubsetUnion<uml::OutputPin, uml::Element >(getOwnedElement())" << std::endl;
+		#endif
+		
+	}
 	return m_output;
 }
+
 std::shared_ptr<Union<uml::Element>> AcceptCallActionImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > AcceptCallActionImpl::getOwner() const
 {
 	return m_owner;
 }
+
 std::shared_ptr<Union<uml::RedefinableElement>> AcceptCallActionImpl::getRedefinedElement() const
 {
+	if(m_redefinedElement == nullptr)
+	{
+		/*Union*/
+		m_redefinedElement.reset(new Union<uml::RedefinableElement>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_redefinedElement - Union<uml::RedefinableElement>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_redefinedElement;
 }
+
+
 
 
 std::shared_ptr<AcceptCallAction> AcceptCallActionImpl::getThisAcceptCallActionPtr() const
@@ -419,7 +438,7 @@ Any AcceptCallActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::ACCEPTCALLACTION_ATTRIBUTE_RETURNINFORMATION:
+		case uml::umlPackage::ACCEPTCALLACTION_ATTRIBUTE_RETURNINFORMATION:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getReturnInformation())); //230
 	}
 	return AcceptEventActionImpl::eGet(featureID, resolve, coreType);
@@ -428,7 +447,7 @@ bool AcceptCallActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::ACCEPTCALLACTION_ATTRIBUTE_RETURNINFORMATION:
+		case uml::umlPackage::ACCEPTCALLACTION_ATTRIBUTE_RETURNINFORMATION:
 			return getReturnInformation() != nullptr; //230
 	}
 	return AcceptEventActionImpl::internalEIsSet(featureID);
@@ -437,7 +456,7 @@ bool AcceptCallActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::ACCEPTCALLACTION_ATTRIBUTE_RETURNINFORMATION:
+		case uml::umlPackage::ACCEPTCALLACTION_ATTRIBUTE_RETURNINFORMATION:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -461,12 +480,11 @@ void AcceptCallActionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHa
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -476,8 +494,9 @@ void AcceptCallActionImpl::loadAttributes(std::shared_ptr<persistence::interface
 	AcceptEventActionImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void AcceptCallActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void AcceptCallActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -505,8 +524,8 @@ void AcceptCallActionImpl::loadNode(std::string nodeName, std::shared_ptr<persis
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
-
-	AcceptEventActionImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	AcceptEventActionImpl::loadNode(nodeName, loadHandler);
 }
 
 void AcceptCallActionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -526,7 +545,6 @@ void AcceptCallActionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHa
 	
 	ActivityNodeImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);
@@ -550,7 +568,7 @@ void AcceptCallActionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 		// Save 'returnInformation'
 		std::shared_ptr<uml::OutputPin > returnInformation = this->getReturnInformation();

@@ -62,6 +62,6 @@
 ['class '.concat(aClass.name).concat(': interface realization cannot be generated because interface is undefined (').concat(aSupplier.toString()).concat(')').registerError()/]
 [/for]
 [for (aSupplier : NamedElement | interfaceR.supplier->reject(oclIsUndefined() or name.oclIsUndefined())) before(',') separator (',')]
-public [if (not aSupplier.namespace.oclIsInvalid())][aSupplier.namespace.myNamespaceName()/]::[/if][aSupplier.name/][/for]
+public [if (not aSupplier.namespace.oclIsInvalid())][aSupplier.getNearestPackage().generateNamespace(false)/]::[/if][aSupplier.name/][/for]
 [/for]
 [/template]

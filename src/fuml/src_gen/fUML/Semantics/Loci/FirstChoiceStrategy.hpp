@@ -32,7 +32,7 @@ namespace persistence
 
 namespace fUML
 {
-	class FUMLFactory;
+	class fUMLFactory;
 }
 
 //Forward Declaration for used types
@@ -50,8 +50,7 @@ namespace fUML::Semantics::Loci
 //*********************************
 namespace fUML::Semantics::Loci 
 {
-	/*!
-	 */
+	
 	class FirstChoiceStrategy:virtual public ChoiceStrategy
 	{
 		public:
@@ -71,8 +70,7 @@ namespace fUML::Semantics::Loci
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual int choose(int size) = 0;
 			
 			

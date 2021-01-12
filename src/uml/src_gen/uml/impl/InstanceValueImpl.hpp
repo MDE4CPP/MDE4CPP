@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class InstanceValueImpl :virtual public ValueSpecificationImpl, virtual public InstanceValue 
+	class InstanceValueImpl : virtual public ValueSpecificationImpl, virtual public InstanceValue 
 	{
 		public: 
 			InstanceValueImpl(const InstanceValueImpl & obj);
@@ -28,7 +28,7 @@ namespace uml
 			InstanceValueImpl& operator=(InstanceValueImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			InstanceValueImpl();
 			virtual std::shared_ptr<InstanceValue> getThisInstanceValuePtr() const;
 			virtual void setThisInstanceValuePtr(std::weak_ptr<InstanceValue> thisInstanceValuePtr);
@@ -77,28 +77,39 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 The InstanceSpecification that represents the specified value.
-			<p>From package UML::Classification.</p> */
+			The InstanceSpecification that represents the specified value.
+			<p>From package UML::Classification.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::InstanceSpecification > getInstance() const ;
 			
 			/*!
-			 The InstanceSpecification that represents the specified value.
-			<p>From package UML::Classification.</p> */
-			virtual void setInstance(std::shared_ptr<uml::InstanceSpecification> _instance_instance) ;
+			The InstanceSpecification that represents the specified value.
+			<p>From package UML::Classification.</p>
+			*/
+			
+			virtual void setInstance(std::shared_ptr<uml::InstanceSpecification> _instance) ;
+			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
@@ -112,7 +123,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

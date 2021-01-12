@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -25,17 +24,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "ecore/impl/EcorePackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "ecore/EcoreFactory.hpp"
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "ecore/EcorePackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -55,10 +49,11 @@
 
 #include "ecore/EStructuralFeature.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
+//Factories an Package includes
+#include "ecore/impl/ecoreFactoryImpl.hpp"
+#include "ecore/impl/ecorePackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -68,32 +63,7 @@ using namespace ecore;
 // Constructor / Destructor
 //*********************************
 EReferenceImpl::EReferenceImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		m_eKeys.reset(new Bag<ecore::EAttribute>());
-	
-	
-
-	
-
-	
-
-	//Init references
-	
-	
-
-	
-
-	
+{	
 }
 
 EReferenceImpl::~EReferenceImpl()
@@ -103,28 +73,19 @@ EReferenceImpl::~EReferenceImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+EReferenceImpl::EReferenceImpl(std::weak_ptr<ecore::EObject > par_eContainer)
+:EReferenceImpl()
+{
+	m_eContainer = par_eContainer;
+}
 
 //Additional constructor for the containments back reference
-			EReferenceImpl::EReferenceImpl(std::weak_ptr<ecore::EObject > par_eContainer)
-			:EReferenceImpl()
-			{
-			    m_eContainer = par_eContainer;
-			}
-
-
-
-
-
-//Additional constructor for the containments back reference
-			EReferenceImpl::EReferenceImpl(std::weak_ptr<ecore::EClass > par_eContainingClass)
-			:EReferenceImpl()
-			{
-			    m_eContainingClass = par_eContainingClass;
-			}
-
-
-
-
+EReferenceImpl::EReferenceImpl(std::weak_ptr<ecore::EClass > par_eContainingClass)
+:EReferenceImpl()
+{
+	m_eContainingClass = par_eContainingClass;
+}
 
 
 EReferenceImpl::EReferenceImpl(const EReferenceImpl & obj):EReferenceImpl()
@@ -198,17 +159,30 @@ std::shared_ptr<ecore::EObject>  EReferenceImpl::copy() const
 
 std::shared_ptr<EClass> EReferenceImpl::eStaticClass() const
 {
-	return EcorePackageImpl::eInstance()->getEReference_Class();
+	return ecore::ecorePackage::eInstance()->getEReference_Class();
 }
 
 //*********************************
 // Attribute Setter Getter
 //*********************************
-
-
+/*
+Getter & Setter for attribute container
+*/
 bool EReferenceImpl::isContainer() const 
 {
 	return m_container;
+}
+
+
+
+
+
+/*
+Getter & Setter for attribute containment
+*/
+bool EReferenceImpl::isContainment() const 
+{
+	return m_containment;
 }
 
 void EReferenceImpl::setContainment(bool _containment)
@@ -216,9 +190,14 @@ void EReferenceImpl::setContainment(bool _containment)
 	m_containment = _containment;
 } 
 
-bool EReferenceImpl::isContainment() const 
+
+
+/*
+Getter & Setter for attribute resolveProxies
+*/
+bool EReferenceImpl::isResolveProxies() const 
 {
-	return m_containment;
+	return m_resolveProxies;
 }
 
 void EReferenceImpl::setResolveProxies(bool _resolveProxies)
@@ -226,10 +205,7 @@ void EReferenceImpl::setResolveProxies(bool _resolveProxies)
 	m_resolveProxies = _resolveProxies;
 } 
 
-bool EReferenceImpl::isResolveProxies() const 
-{
-	return m_resolveProxies;
-}
+
 
 //*********************************
 // Operations
@@ -238,40 +214,76 @@ bool EReferenceImpl::isResolveProxies() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference eKeys
+*/
 std::shared_ptr<Bag<ecore::EAttribute>> EReferenceImpl::getEKeys() const
 {
+	if(m_eKeys == nullptr)
+	{
+		m_eKeys.reset(new Bag<ecore::EAttribute>());
+		
+		
+	}
 
     return m_eKeys;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference eOpposite
+*/
 std::shared_ptr<ecore::EReference > EReferenceImpl::getEOpposite() const
 {
 
     return m_eOpposite;
 }
+
 void EReferenceImpl::setEOpposite(std::shared_ptr<ecore::EReference> _eOpposite)
 {
     m_eOpposite = _eOpposite;
 }
 
+
+
+/*
+Getter & Setter for reference eReferenceType
+*/
 std::shared_ptr<ecore::EClass > EReferenceImpl::getEReferenceType() const
 {
 //assert(m_eReferenceType);
     return m_eReferenceType;
 }
+
 void EReferenceImpl::setEReferenceType(std::shared_ptr<ecore::EClass> _eReferenceType)
 {
     m_eReferenceType = _eReferenceType;
 }
+
+
 
 //*********************************
 // Union Getter
 //*********************************
 std::shared_ptr<Union<ecore::EObject>> EReferenceImpl::getEContens() const
 {
+	if(m_eContens == nullptr)
+	{
+		/*Union*/
+		m_eContens.reset(new Union<ecore::EObject>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_eContens - Union<ecore::EObject>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_eContens;
 }
+
+
 
 
 std::shared_ptr<EReference> EReferenceImpl::getThisEReferencePtr() const
@@ -304,11 +316,11 @@ Any EReferenceImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case EcorePackage::EREFERENCE_ATTRIBUTE_CONTAINER:
+		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_CONTAINER:
 			return eAny(isContainer()); //4323
-		case EcorePackage::EREFERENCE_ATTRIBUTE_CONTAINMENT:
+		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_CONTAINMENT:
 			return eAny(isContainment()); //4322
-		case EcorePackage::EREFERENCE_ATTRIBUTE_EKEYS:
+		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_EKEYS:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<ecore::EAttribute>::iterator iter = m_eKeys->begin();
@@ -320,11 +332,11 @@ Any EReferenceImpl::eGet(int featureID, bool resolve, bool coreType) const
 			}
 			return eAny(tempList); //4327
 		}
-		case EcorePackage::EREFERENCE_ATTRIBUTE_EOPPOSITE:
+		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_EOPPOSITE:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEOpposite())); //4325
-		case EcorePackage::EREFERENCE_ATTRIBUTE_EREFERENCETYPE:
+		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_EREFERENCETYPE:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEReferenceType())); //4326
-		case EcorePackage::EREFERENCE_ATTRIBUTE_RESOLVEPROXIES:
+		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_RESOLVEPROXIES:
 			return eAny(isResolveProxies()); //4324
 	}
 	return EStructuralFeatureImpl::eGet(featureID, resolve, coreType);
@@ -333,17 +345,17 @@ bool EReferenceImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case EcorePackage::EREFERENCE_ATTRIBUTE_CONTAINER:
+		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_CONTAINER:
 			return isContainer() != false; //4323
-		case EcorePackage::EREFERENCE_ATTRIBUTE_CONTAINMENT:
+		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_CONTAINMENT:
 			return isContainment() != false; //4322
-		case EcorePackage::EREFERENCE_ATTRIBUTE_EKEYS:
+		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_EKEYS:
 			return getEKeys() != nullptr; //4327
-		case EcorePackage::EREFERENCE_ATTRIBUTE_EOPPOSITE:
+		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_EOPPOSITE:
 			return getEOpposite() != nullptr; //4325
-		case EcorePackage::EREFERENCE_ATTRIBUTE_EREFERENCETYPE:
+		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_EREFERENCETYPE:
 			return getEReferenceType() != nullptr; //4326
-		case EcorePackage::EREFERENCE_ATTRIBUTE_RESOLVEPROXIES:
+		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_RESOLVEPROXIES:
 			return isResolveProxies() != true; //4324
 	}
 	return EStructuralFeatureImpl::internalEIsSet(featureID);
@@ -352,14 +364,14 @@ bool EReferenceImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case EcorePackage::EREFERENCE_ATTRIBUTE_CONTAINMENT:
+		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_CONTAINMENT:
 		{
 			// BOOST CAST
 			bool _containment = newValue->get<bool>();
 			setContainment(_containment); //4322
 			return true;
 		}
-		case EcorePackage::EREFERENCE_ATTRIBUTE_EKEYS:
+		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_EKEYS:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -395,7 +407,7 @@ bool EReferenceImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case EcorePackage::EREFERENCE_ATTRIBUTE_EOPPOSITE:
+		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_EOPPOSITE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -403,7 +415,7 @@ bool EReferenceImpl::eSet(int featureID, Any newValue)
 			setEOpposite(_eOpposite); //4325
 			return true;
 		}
-		case EcorePackage::EREFERENCE_ATTRIBUTE_EREFERENCETYPE:
+		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_EREFERENCETYPE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -411,7 +423,7 @@ bool EReferenceImpl::eSet(int featureID, Any newValue)
 			setEReferenceType(_eReferenceType); //4326
 			return true;
 		}
-		case EcorePackage::EREFERENCE_ATTRIBUTE_RESOLVEPROXIES:
+		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_RESOLVEPROXIES:
 		{
 			// BOOST CAST
 			bool _resolveProxies = newValue->get<bool>();
@@ -434,12 +446,11 @@ void EReferenceImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler>
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get EcoreFactory
-	std::shared_ptr<ecore::EcoreFactory> modelFactory = ecore::EcoreFactory::eInstance();
+	// get ecoreFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -500,18 +511,19 @@ void EReferenceImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLo
 	EStructuralFeatureImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void EReferenceImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<ecore::EcoreFactory> modelFactory)
+void EReferenceImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<ecore::ecoreFactory> modelFactory=ecore::ecoreFactory::eInstance();
 
-
-	EStructuralFeatureImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	EStructuralFeatureImpl::loadNode(nodeName, loadHandler);
 }
 
 void EReferenceImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references)
 {
 	switch(featureID)
 	{
-		case EcorePackage::EREFERENCE_ATTRIBUTE_EKEYS:
+		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_EKEYS:
 		{
 			std::shared_ptr<Bag<ecore::EAttribute>> _eKeys = getEKeys();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -525,7 +537,7 @@ void EReferenceImpl::resolveReferences(const int featureID, std::list<std::share
 			return;
 		}
 
-		case EcorePackage::EREFERENCE_ATTRIBUTE_EOPPOSITE:
+		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_EOPPOSITE:
 		{
 			if (references.size() == 1)
 			{
@@ -537,7 +549,7 @@ void EReferenceImpl::resolveReferences(const int featureID, std::list<std::share
 			return;
 		}
 
-		case EcorePackage::EREFERENCE_ATTRIBUTE_EREFERENCETYPE:
+		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_EREFERENCETYPE:
 		{
 			if (references.size() == 1)
 			{
@@ -578,10 +590,9 @@ void EReferenceImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 {
 	try
 	{
-		std::shared_ptr<ecore::EcorePackage> package = ecore::EcorePackage::eInstance();
+		std::shared_ptr<ecore::ecorePackage> package = ecore::ecorePackage::eInstance();
 
 	
- 
 		// Add attributes
 		if ( this->eIsSet(package->getEReference_Attribute_containment()) )
 		{

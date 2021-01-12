@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -25,19 +24,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -61,10 +53,11 @@
 
 #include "uml/TypedElement.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -74,22 +67,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 ConnectableElementImpl::ConnectableElementImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		m_end.reset(new Bag<uml::ConnectorEnd>());
-	
-	
-
-	//Init references
-	
-	
+{	
 }
 
 ConnectableElementImpl::~ConnectableElementImpl()
@@ -99,41 +77,28 @@ ConnectableElementImpl::~ConnectableElementImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+ConnectableElementImpl::ConnectableElementImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:ConnectableElementImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			ConnectableElementImpl::ConnectableElementImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:ConnectableElementImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
-
-
-
+ConnectableElementImpl::ConnectableElementImpl(std::weak_ptr<uml::Element > par_owner)
+:ConnectableElementImpl()
+{
+	m_owner = par_owner;
+}
 
 //Additional constructor for the containments back reference
-			ConnectableElementImpl::ConnectableElementImpl(std::weak_ptr<uml::Element > par_owner)
-			:ConnectableElementImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-
-
-
-//Additional constructor for the containments back reference
-			ConnectableElementImpl::ConnectableElementImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
-			:ConnectableElementImpl()
-			{
-			    m_owningTemplateParameter = par_owningTemplateParameter;
-				m_owner = par_owningTemplateParameter;
-			}
-
-
-
-
+ConnectableElementImpl::ConnectableElementImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+:ConnectableElementImpl()
+{
+	m_owningTemplateParameter = par_owningTemplateParameter;
+	m_owner = par_owningTemplateParameter;
+}
 
 
 ConnectableElementImpl::ConnectableElementImpl(const ConnectableElementImpl & obj):ConnectableElementImpl()
@@ -194,7 +159,7 @@ std::shared_ptr<ecore::EObject>  ConnectableElementImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ConnectableElementImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getConnectableElement_Class();
+	return uml::umlPackage::eInstance()->getConnectableElement_Class();
 }
 
 //*********************************
@@ -213,11 +178,23 @@ std::shared_ptr<Bag<uml::ConnectorEnd> > ConnectableElementImpl::getEnds()
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference end
+*/
 std::shared_ptr<Bag<uml::ConnectorEnd>> ConnectableElementImpl::getEnd() const
 {
+	if(m_end == nullptr)
+	{
+		m_end.reset(new Bag<uml::ConnectorEnd>());
+		
+		
+	}
 
     return m_end;
 }
+
+
+
 
 
 //*********************************
@@ -225,12 +202,25 @@ std::shared_ptr<Bag<uml::ConnectorEnd>> ConnectableElementImpl::getEnd() const
 //*********************************
 std::shared_ptr<Union<uml::Element>> ConnectableElementImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > ConnectableElementImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<ConnectableElement> ConnectableElementImpl::getThisConnectableElementPtr() const
@@ -269,7 +259,7 @@ Any ConnectableElementImpl::eGet(int featureID, bool resolve, bool coreType) con
 {
 	switch(featureID)
 	{
-		case UmlPackage::CONNECTABLEELEMENT_ATTRIBUTE_END:
+		case uml::umlPackage::CONNECTABLEELEMENT_ATTRIBUTE_END:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::ConnectorEnd>::iterator iter = m_end->begin();
@@ -279,7 +269,7 @@ Any ConnectableElementImpl::eGet(int featureID, bool resolve, bool coreType) con
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //5112
+			return eAny(tempList); //5012
 		}
 	}
 	Any result;
@@ -295,8 +285,8 @@ bool ConnectableElementImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::CONNECTABLEELEMENT_ATTRIBUTE_END:
-			return getEnd() != nullptr; //5112
+		case uml::umlPackage::CONNECTABLEELEMENT_ATTRIBUTE_END:
+			return getEnd() != nullptr; //5012
 	}
 	bool result = false;
 	result = ParameterableElementImpl::internalEIsSet(featureID);
@@ -334,12 +324,11 @@ void ConnectableElementImpl::load(std::shared_ptr<persistence::interfaces::XLoad
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -350,12 +339,13 @@ void ConnectableElementImpl::loadAttributes(std::shared_ptr<persistence::interfa
 	TypedElementImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ConnectableElementImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void ConnectableElementImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
-
-	ParameterableElementImpl::loadNode(nodeName, loadHandler, modelFactory);
-	TypedElementImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	ParameterableElementImpl::loadNode(nodeName, loadHandler);
+	TypedElementImpl::loadNode(nodeName, loadHandler);
 }
 
 void ConnectableElementImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -388,7 +378,7 @@ void ConnectableElementImpl::saveContent(std::shared_ptr<persistence::interfaces
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 

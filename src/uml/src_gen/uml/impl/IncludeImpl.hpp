@@ -19,7 +19,7 @@
 //*********************************
 namespace uml 
 {
-	class IncludeImpl :virtual public DirectedRelationshipImpl, virtual public NamedElementImpl, virtual public Include 
+	class IncludeImpl : virtual public DirectedRelationshipImpl, virtual public NamedElementImpl, virtual public Include 
 	{
 		public: 
 			IncludeImpl(const IncludeImpl & obj);
@@ -29,7 +29,7 @@ namespace uml
 			IncludeImpl& operator=(IncludeImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			IncludeImpl();
 			virtual std::shared_ptr<Include> getThisIncludePtr() const;
 			virtual void setThisIncludePtr(std::weak_ptr<Include> thisIncludePtr);
@@ -66,46 +66,68 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 The UseCase that is to be included.
-			<p>From package UML::UseCases.</p> */
+			The UseCase that is to be included.
+			<p>From package UML::UseCases.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::UseCase > getAddition() const ;
 			
 			/*!
-			 The UseCase that is to be included.
-			<p>From package UML::UseCases.</p> */
-			virtual void setAddition(std::shared_ptr<uml::UseCase> _addition_addition) ;
+			The UseCase that is to be included.
+			<p>From package UML::UseCases.</p>
+			*/
+			
+			virtual void setAddition(std::shared_ptr<uml::UseCase> _addition) ;
+			
 			/*!
-			 The UseCase which includes the addition and owns the Include relationship.
-			<p>From package UML::UseCases.</p> */
+			The UseCase which includes the addition and owns the Include relationship.
+			<p>From package UML::UseCases.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::UseCase > getIncludingCase() const ;
 			
 			/*!
-			 The UseCase which includes the addition and owns the Include relationship.
-			<p>From package UML::UseCases.</p> */
-			virtual void setIncludingCase(std::shared_ptr<uml::UseCase> _includingCase_includingCase) ;
+			The UseCase which includes the addition and owns the Include relationship.
+			<p>From package UML::UseCases.</p>
+			*/
+			
+			virtual void setIncludingCase(std::shared_ptr<uml::UseCase> _includingCase) ;
+			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
-			 Specifies the elements related by the Relationship.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the elements related by the Relationship.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getRelatedElement() const ;/*!
-			 Specifies the source Element(s) of the DirectedRelationship.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the source Element(s) of the DirectedRelationship.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> getSource() const ;/*!
-			 Specifies the target Element(s) of the DirectedRelationship.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the target Element(s) of the DirectedRelationship.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> getTarget() const ; 
 			 
 			//*********************************
@@ -119,7 +141,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

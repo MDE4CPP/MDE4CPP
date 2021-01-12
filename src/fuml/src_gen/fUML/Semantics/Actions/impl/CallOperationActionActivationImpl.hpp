@@ -13,13 +13,13 @@
 //Model includes
 #include "../CallOperationActionActivation.hpp"
 
-#include "fUML/impl/FUMLFactoryImpl.hpp"
+#include "fUML/Semantics/Actions/impl/ActionsFactoryImpl.hpp"
 #include "fUML/Semantics/Actions/impl/CallActionActivationImpl.hpp"
 
 //*********************************
 namespace fUML::Semantics::Actions 
 {
-	class CallOperationActionActivationImpl :virtual public CallActionActivationImpl, virtual public CallOperationActionActivation 
+	class CallOperationActionActivationImpl : virtual public CallActionActivationImpl, virtual public CallOperationActionActivation 
 	{
 		public: 
 			CallOperationActionActivationImpl(const CallOperationActionActivationImpl & obj);
@@ -29,7 +29,7 @@ namespace fUML::Semantics::Actions
 			CallOperationActionActivationImpl& operator=(CallOperationActionActivationImpl const&) = delete;
 
 		protected:
-			friend class fUML::FUMLFactoryImpl;
+			friend class fUML::Semantics::Actions::ActionsFactoryImpl;
 			CallOperationActionActivationImpl();
 			virtual std::shared_ptr<CallOperationActionActivation> getThisCallOperationActionActivationPtr() const;
 			virtual void setThisCallOperationActionActivationPtr(std::weak_ptr<CallOperationActionActivation> thisCallOperationActionActivationPtr);
@@ -47,8 +47,7 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> getCallExecution() ;
 			
 			
@@ -61,13 +60,30 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Reference
 			//*********************************
+			
+			virtual std::shared_ptr<uml::CallOperationAction > getCallOperationAction() const ;
+			
+			
+			virtual void setCallOperationAction(std::shared_ptr<uml::CallOperationAction> _callOperationAction) ;
+			
+			/*Additional Setter for 'CallActionActivation::callAction' redefined by reference 'callOperationAction'*/
+			
+			virtual void setCallAction(std::shared_ptr<uml::CallAction> _callAction) ;
+			
+			/*Additional Setter for 'ActionActivation::action' redefined by reference 'callOperationAction'*/
+			
+			virtual void setAction(std::shared_ptr<uml::Action> _action) ;
+			
+			/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'callOperationAction'*/
+			
+			virtual void setNode(std::shared_ptr<uml::ActivityNode> _node) ;
+			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> getPinActivation() const ; 
 			 
 			//*********************************
@@ -81,7 +97,7 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

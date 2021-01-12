@@ -38,7 +38,7 @@
 
 [template public generateOperationDecl(anEOperation : EOperation, impl: Boolean)]
 [if (((impl or (not hasImplOnly())) and (not (doNotGenerate() or ignore()))))]
-[anEOperation.generateDokumentation()/] 
+[anEOperation.generateDocumentation()/] 
 virtual [anEOperation.generateOperationType()/] [anEOperation.name/]([anEOperation.generateParameterList()/])[if (hasKey('const'))] const[/if] [abstractSufix(impl)/];[/if]
 
 
@@ -83,7 +83,7 @@ virtual [anEOperation.generateOperationType()/] [anEOperation.name/]([anEOperati
 
 [for (anEParameter : EParameter | anEOperation.eParameters) separator ('\r\n')]
 {
-	std::shared_ptr<ecore::EParameter> parameter = ecore::EcoreFactory::eInstance()->createEParameter_in_EOperation([anEOperation.getClassMemberName()/]);
+	std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation([anEOperation.getClassMemberName()/]);
 	parameter->setName("[anEParameter.name/]");
 	parameter->setEType([anEParameter.eType.simpleDatatypeGetter(anEParameter.eOperation)/]);
 	parameter->setLowerBound(0);

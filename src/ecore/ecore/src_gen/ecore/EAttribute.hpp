@@ -32,7 +32,7 @@ namespace persistence
 
 namespace ecore
 {
-	class EcoreFactory;
+	class ecoreFactory;
 }
 
 //Forward Declaration for used types
@@ -80,8 +80,7 @@ namespace ecore
 //*********************************
 namespace ecore 
 {
-	/*!
-	 */
+	
 	class EAttribute:virtual public EStructuralFeature
 	{
 		public:
@@ -105,21 +104,18 @@ namespace ecore
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual bool isID() const = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual void setID (bool _iD)= 0; 
-			
 			
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<ecore::EDataType > getEAttributeType() const = 0;
+			
 			
 			
 
@@ -127,25 +123,21 @@ namespace ecore
 			//*********************************
 			// Attribute Members
 			//*********************************
-			/*!
-			 */ 
+			 
 			bool m_iD = false;
 			
 			
 			//*********************************
 			// Reference Members
 			//*********************************
-			/*!
-			 */
-			std::shared_ptr<ecore::EDataType > m_eAttributeType;
 			
+			std::shared_ptr<ecore::EDataType > m_eAttributeType;
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

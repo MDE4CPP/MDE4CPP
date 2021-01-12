@@ -33,7 +33,7 @@ namespace persistence
 
 namespace ecore
 {
-	class EcoreFactory;
+	class ecoreFactory;
 }
 
 //Forward Declaration for used types
@@ -76,8 +76,7 @@ namespace ecore
 //*********************************
 namespace ecore 
 {
-	/*!
-	 */
+	
 	class EEnum:virtual public EDataType
 	{
 		public:
@@ -97,16 +96,13 @@ namespace ecore
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<ecore::EEnumLiteral> getEEnumLiteral(std::string name) const = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<ecore::EEnumLiteral> getEEnumLiteral(int value) const = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<ecore::EEnumLiteral> getEEnumLiteralByLiteral(std::string literal) const = 0;
 			
 			
@@ -117,9 +113,9 @@ namespace ecore
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Subset<ecore::EEnumLiteral, ecore::EObject>> getELiterals() const = 0;
+			
 			
 			
 
@@ -132,17 +128,14 @@ namespace ecore
 			//*********************************
 			// Reference Members
 			//*********************************
-			/*!
-			 */
-			std::shared_ptr<Subset<ecore::EEnumLiteral, ecore::EObject>> m_eLiterals;
 			
+			mutable std::shared_ptr<Subset<ecore::EEnumLiteral, ecore::EObject>> m_eLiterals;
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

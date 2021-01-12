@@ -18,7 +18,7 @@
 //*********************************
 namespace ecore 
 {
-	class ENamedElementImpl :virtual public EModelElementImpl, virtual public ENamedElement 
+	class ENamedElementImpl : virtual public EModelElementImpl, virtual public ENamedElement 
 	{
 		public: 
 			ENamedElementImpl(const ENamedElementImpl & obj);
@@ -28,7 +28,7 @@ namespace ecore
 			ENamedElementImpl& operator=(ENamedElementImpl const&) = delete;
 
 		protected:
-			friend class EcoreFactoryImpl;
+			friend class ecoreFactoryImpl;
 			ENamedElementImpl();
 			virtual std::shared_ptr<ENamedElement> getThisENamedElementPtr() const;
 			virtual void setThisENamedElementPtr(std::weak_ptr<ENamedElement> thisENamedElementPtr);
@@ -51,14 +51,11 @@ namespace ecore
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::string getName() const ;
 			
-			/*!
-			 */ 
+			 
 			virtual void setName (std::string _name); 
-			
 			
 			
 			//*********************************
@@ -69,8 +66,7 @@ namespace ecore
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const ; 
 			 
 			//*********************************
@@ -84,7 +80,7 @@ namespace ecore
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<ecore::EcoreFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

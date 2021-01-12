@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class ProtocolConformanceImpl :virtual public DirectedRelationshipImpl, virtual public ProtocolConformance 
+	class ProtocolConformanceImpl : virtual public DirectedRelationshipImpl, virtual public ProtocolConformance 
 	{
 		public: 
 			ProtocolConformanceImpl(const ProtocolConformanceImpl & obj);
@@ -28,7 +28,7 @@ namespace uml
 			ProtocolConformanceImpl& operator=(ProtocolConformanceImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			ProtocolConformanceImpl();
 			virtual std::shared_ptr<ProtocolConformance> getThisProtocolConformancePtr() const;
 			virtual void setThisProtocolConformancePtr(std::weak_ptr<ProtocolConformance> thisProtocolConformancePtr);
@@ -61,43 +61,63 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 Specifies the ProtocolStateMachine to which the specific ProtocolStateMachine conforms.
-			<p>From package UML::StateMachines.</p> */
+			Specifies the ProtocolStateMachine to which the specific ProtocolStateMachine conforms.
+			<p>From package UML::StateMachines.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::ProtocolStateMachine > getGeneralMachine() const ;
 			
 			/*!
-			 Specifies the ProtocolStateMachine to which the specific ProtocolStateMachine conforms.
-			<p>From package UML::StateMachines.</p> */
-			virtual void setGeneralMachine(std::shared_ptr<uml::ProtocolStateMachine> _generalMachine_generalMachine) ;
+			Specifies the ProtocolStateMachine to which the specific ProtocolStateMachine conforms.
+			<p>From package UML::StateMachines.</p>
+			*/
+			
+			virtual void setGeneralMachine(std::shared_ptr<uml::ProtocolStateMachine> _generalMachine) ;
+			
 			/*!
-			 Specifies the ProtocolStateMachine which conforms to the general ProtocolStateMachine.
-			<p>From package UML::StateMachines.</p> */
+			Specifies the ProtocolStateMachine which conforms to the general ProtocolStateMachine.
+			<p>From package UML::StateMachines.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::ProtocolStateMachine > getSpecificMachine() const ;
 			
 			/*!
-			 Specifies the ProtocolStateMachine which conforms to the general ProtocolStateMachine.
-			<p>From package UML::StateMachines.</p> */
-			virtual void setSpecificMachine(std::shared_ptr<uml::ProtocolStateMachine> _specificMachine_specificMachine) ;
+			Specifies the ProtocolStateMachine which conforms to the general ProtocolStateMachine.
+			<p>From package UML::StateMachines.</p>
+			*/
+			
+			virtual void setSpecificMachine(std::shared_ptr<uml::ProtocolStateMachine> _specificMachine) ;
+			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
-			 Specifies the elements related by the Relationship.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the elements related by the Relationship.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getRelatedElement() const ;/*!
-			 Specifies the source Element(s) of the DirectedRelationship.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the source Element(s) of the DirectedRelationship.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> getSource() const ;/*!
-			 Specifies the target Element(s) of the DirectedRelationship.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the target Element(s) of the DirectedRelationship.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> getTarget() const ; 
 			 
 			//*********************************
@@ -111,7 +131,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

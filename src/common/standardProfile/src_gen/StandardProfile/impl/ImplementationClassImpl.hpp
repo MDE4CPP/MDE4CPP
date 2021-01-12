@@ -56,11 +56,15 @@ namespace StandardProfile
 			// Attributes Getter Setter
 			//*********************************
 			virtual std::weak_ptr<uml::Class> getBase_Class() const ;
-			virtual void setBase_Class (std::weak_ptr<uml::Class> _base_Class);
+			virtual void setBase_Class(std::weak_ptr<uml::Class> _base_Class);
+			
+			
 			
 
 		protected:
 			virtual std::shared_ptr<uml::Class> getMetaClass();
+			virtual void instantiate();
+			virtual void destroy();
 
 		public:
 			//*********************************

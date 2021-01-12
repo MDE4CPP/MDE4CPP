@@ -13,7 +13,7 @@
 
 
 // forward declarations
-template<class T> class Bag;
+template<class T> class Bag; 
 
 
 
@@ -33,7 +33,7 @@ namespace persistence
 
 namespace ecore
 {
-	class EcoreFactory;
+	class ecoreFactory;
 }
 
 //Forward Declaration for used types
@@ -66,8 +66,7 @@ namespace ecore
 //*********************************
 namespace ecore 
 {
-	/*!
-	 */
+	
 	class ETypeParameter:virtual public ENamedElement
 	{
 		public:
@@ -95,9 +94,9 @@ namespace ecore
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Bag<ecore::EGenericType>> getEBounds() const = 0;
+			
 			
 			
 
@@ -110,17 +109,14 @@ namespace ecore
 			//*********************************
 			// Reference Members
 			//*********************************
-			/*!
-			 */
-			std::shared_ptr<Bag<ecore::EGenericType>> m_eBounds;
 			
+			mutable std::shared_ptr<Bag<ecore::EGenericType>> m_eBounds;
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

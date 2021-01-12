@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class FactoryImpl :virtual public ElementImpl, virtual public Factory 
+	class FactoryImpl : virtual public ElementImpl, virtual public Factory 
 	{
 		public: 
 			FactoryImpl(const FactoryImpl & obj);
@@ -28,7 +28,7 @@ namespace uml
 			FactoryImpl& operator=(FactoryImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			FactoryImpl();
 			virtual std::shared_ptr<Factory> getThisFactoryPtr() const;
 			virtual void setThisFactoryPtr(std::weak_ptr<Factory> thisFactoryPtr);
@@ -47,10 +47,12 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 Creates an element that is an instance of the metaClass. Object::metaClass == metaClass and metaClass.isInstance(object)
+			Creates an element that is an instance of the metaClass. Object::metaClass == metaClass and metaClass.isInstance(object)
 			== true.
 			All properties of the element are considered unset. The values are the same as if object.unset(property) was invoked for
-			every property. */ 
+			every property.
+			*/
+			 
 			virtual std::shared_ptr<uml::Element> create(std::shared_ptr<uml::Class>  metaClass) ;
 			
 			
@@ -69,8 +71,10 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ; 
 			 
 			//*********************************
@@ -84,7 +88,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

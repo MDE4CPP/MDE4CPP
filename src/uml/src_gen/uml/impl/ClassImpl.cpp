@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -26,23 +25,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -116,10 +104,11 @@
 
 #include "uml/UseCase.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -129,77 +118,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 ClassImpl::ClassImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		m_extension.reset(new Bag<uml::Extension>());
-	
-	
-
-		/*Subset*/
-		m_nestedClassifier.reset(new Subset<uml::Classifier, uml::NamedElement >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_nestedClassifier - Subset<uml::Classifier, uml::NamedElement >()" << std::endl;
-		#endif
-	
-	
-
-		/*Subset*/
-		m_ownedOperation.reset(new Subset<uml::Operation, uml::Feature,uml::NamedElement >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_ownedOperation - Subset<uml::Operation, uml::Feature,uml::NamedElement >()" << std::endl;
-		#endif
-	
-	
-
-		/*Subset*/
-		m_ownedReception.reset(new Subset<uml::Reception, uml::Feature,uml::NamedElement >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_ownedReception - Subset<uml::Reception, uml::Feature,uml::NamedElement >()" << std::endl;
-		#endif
-	
-	
-
-		m_superClass.reset(new Bag<uml::Class>());
-	
-	
-
-	//Init references
-	
-	
-
-		/*Subset*/
-		m_nestedClassifier->initSubset(m_ownedMember);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_nestedClassifier - Subset<uml::Classifier, uml::NamedElement >(m_ownedMember)" << std::endl;
-		#endif
-	
-	
-
-		/*Subset*/
-		m_ownedOperation->initSubset(m_feature,m_ownedMember);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_ownedOperation - Subset<uml::Operation, uml::Feature,uml::NamedElement >(m_feature,m_ownedMember)" << std::endl;
-		#endif
-	
-	
-
-		/*Subset*/
-		m_ownedReception->initSubset(m_feature,m_ownedMember);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_ownedReception - Subset<uml::Reception, uml::Feature,uml::NamedElement >(m_feature,m_ownedMember)" << std::endl;
-		#endif
-	
-	
-
-	
-	
+{	
 }
 
 ClassImpl::~ClassImpl()
@@ -209,29 +128,20 @@ ClassImpl::~ClassImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+ClassImpl::ClassImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:ClassImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			ClassImpl::ClassImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:ClassImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
-
-
-
-
-//Additional constructor for the containments back reference
-			ClassImpl::ClassImpl(std::weak_ptr<uml::Element > par_owner)
-			:ClassImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-
-
+ClassImpl::ClassImpl(std::weak_ptr<uml::Element > par_owner)
+:ClassImpl()
+{
+	m_owner = par_owner;
+}
 
 //Additional constructor for the containments back reference
 ClassImpl::ClassImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id)
@@ -239,11 +149,11 @@ ClassImpl::ClassImpl(std::weak_ptr<uml::Package > par_Package, const int referen
 {
 	switch(reference_id)
 	{	
-	case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
+	case umlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
 		m_owningPackage = par_Package;
 		m_namespace = par_Package;
 		 return;
-	case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
+	case umlPackage::TYPE_ATTRIBUTE_PACKAGE:
 		m_package = par_Package;
 		m_namespace = par_Package;
 		 return;
@@ -253,26 +163,13 @@ ClassImpl::ClassImpl(std::weak_ptr<uml::Package > par_Package, const int referen
    
 }
 
-
-
-
-
 //Additional constructor for the containments back reference
-			ClassImpl::ClassImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
-			:ClassImpl()
-			{
-			    m_owningTemplateParameter = par_owningTemplateParameter;
-				m_owner = par_owningTemplateParameter;
-			}
-
-
-
-
-
-//Additional constructor for the containments back reference
-
-
-
+ClassImpl::ClassImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+:ClassImpl()
+{
+	m_owningTemplateParameter = par_owningTemplateParameter;
+	m_owner = par_owningTemplateParameter;
+}
 
 
 
@@ -526,28 +423,25 @@ ClassImpl::ClassImpl(const ClassImpl & obj):ClassImpl()
 		std::cout << "Copying the Subset: " << "m_templateBinding" << std::endl;
 	#endif
 
-		/*Subset*/
-		m_nestedClassifier->initSubset(m_ownedMember);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_nestedClassifier - Subset<uml::Classifier, uml::NamedElement >(m_ownedMember)" << std::endl;
-		#endif
-	
-	
-
-		/*Subset*/
-		m_ownedOperation->initSubset(m_feature,m_ownedMember);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_ownedOperation - Subset<uml::Operation, uml::Feature,uml::NamedElement >(m_feature,m_ownedMember)" << std::endl;
-		#endif
-	
+	/*Subset*/
+	m_nestedClassifier->initSubset(getOwnedMember());
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Initialising value Subset: " << "m_nestedClassifier - Subset<uml::Classifier, uml::NamedElement >(getOwnedMember())" << std::endl;
+	#endif
 	
 
-		/*Subset*/
-		m_ownedReception->initSubset(m_feature,m_ownedMember);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_ownedReception - Subset<uml::Reception, uml::Feature,uml::NamedElement >(m_feature,m_ownedMember)" << std::endl;
-		#endif
+	/*Subset*/
+	m_ownedOperation->initSubset(getFeature(),getOwnedMember());
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Initialising value Subset: " << "m_ownedOperation - Subset<uml::Operation, uml::Feature,uml::NamedElement >(getFeature(),getOwnedMember())" << std::endl;
+	#endif
 	
+
+	/*Subset*/
+	m_ownedReception->initSubset(getFeature(),getOwnedMember());
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Initialising value Subset: " << "m_ownedReception - Subset<uml::Reception, uml::Feature,uml::NamedElement >(getFeature(),getOwnedMember())" << std::endl;
+	#endif
 	
 }
 
@@ -560,21 +454,26 @@ std::shared_ptr<ecore::EObject>  ClassImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ClassImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getClass_Class();
+	return uml::umlPackage::eInstance()->getClass_Class();
 }
 
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute isActive
+*/
+bool ClassImpl::getIsActive() const 
+{
+	return m_isActive;
+}
+
 void ClassImpl::setIsActive(bool _isActive)
 {
 	m_isActive = _isActive;
 } 
 
-bool ClassImpl::getIsActive() const 
-{
-	return m_isActive;
-}
+
 
 //*********************************
 // Operations
@@ -583,6 +482,27 @@ std::shared_ptr<uml::Operation> ClassImpl::createOwnedOperation(std::string name
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
+}
+
+std::shared_ptr<Bag<uml::Operation> > ClassImpl::getAllOperations()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	std::shared_ptr<Bag<uml::Operation>> allOperations(new Bag<uml::Operation>());
+std::shared_ptr<Bag<uml::Operation>> ownedOperations = this->getOwnedOperation();
+
+allOperations->insert(allOperations->end(), ownedOperations->begin(), ownedOperations->end());
+
+std::shared_ptr<Bag<uml::Classifier> > superTypes = this->getGeneral();
+
+for (std::shared_ptr<Classifier> superType : *superTypes)	
+{	
+	std::shared_ptr<Bag<uml::Operation>> superTypeOperations = superType->getAllOperations();
+	allOperations->insert(allOperations->end(), superTypeOperations->begin(), superTypeOperations->end());
+}
+
+return allOperations;
+	//end of body
 }
 
 std::shared_ptr<Bag<uml::Extension> > ClassImpl::getExtensions()
@@ -625,39 +545,128 @@ bool ClassImpl::passive_class(Any diagnostics,std::map <   Any, Any >  context)
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference extension
+*/
 std::shared_ptr<Bag<uml::Extension>> ClassImpl::getExtension() const
 {
+	if(m_extension == nullptr)
+	{
+		m_extension.reset(new Bag<uml::Extension>());
+		
+		
+	}
 
     return m_extension;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference nestedClassifier
+*/
 std::shared_ptr<Subset<uml::Classifier, uml::NamedElement>> ClassImpl::getNestedClassifier() const
 {
+	if(m_nestedClassifier == nullptr)
+	{
+		/*Subset*/
+		m_nestedClassifier.reset(new Subset<uml::Classifier, uml::NamedElement >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_nestedClassifier - Subset<uml::Classifier, uml::NamedElement >()" << std::endl;
+		#endif
+		
+		/*Subset*/
+		m_nestedClassifier->initSubset(getOwnedMember());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_nestedClassifier - Subset<uml::Classifier, uml::NamedElement >(getOwnedMember())" << std::endl;
+		#endif
+		
+	}
 
     return m_nestedClassifier;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference ownedOperation
+*/
 std::shared_ptr<Subset<uml::Operation, uml::Feature,uml::NamedElement>> ClassImpl::getOwnedOperation() const
 {
+	if(m_ownedOperation == nullptr)
+	{
+		/*Subset*/
+		m_ownedOperation.reset(new Subset<uml::Operation, uml::Feature,uml::NamedElement >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_ownedOperation - Subset<uml::Operation, uml::Feature,uml::NamedElement >()" << std::endl;
+		#endif
+		
+		/*Subset*/
+		m_ownedOperation->initSubset(getFeature(),getOwnedMember());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_ownedOperation - Subset<uml::Operation, uml::Feature,uml::NamedElement >(getFeature(),getOwnedMember())" << std::endl;
+		#endif
+		
+	}
 
     return m_ownedOperation;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference ownedReception
+*/
 std::shared_ptr<Subset<uml::Reception, uml::Feature,uml::NamedElement>> ClassImpl::getOwnedReception() const
 {
+	if(m_ownedReception == nullptr)
+	{
+		/*Subset*/
+		m_ownedReception.reset(new Subset<uml::Reception, uml::Feature,uml::NamedElement >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_ownedReception - Subset<uml::Reception, uml::Feature,uml::NamedElement >()" << std::endl;
+		#endif
+		
+		/*Subset*/
+		m_ownedReception->initSubset(getFeature(),getOwnedMember());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_ownedReception - Subset<uml::Reception, uml::Feature,uml::NamedElement >(getFeature(),getOwnedMember())" << std::endl;
+		#endif
+		
+	}
 
     return m_ownedReception;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference superClass
+*/
 std::shared_ptr<Bag<uml::Class>> ClassImpl::getSuperClass() const
 {
+	if(m_superClass == nullptr)
+	{
+		m_superClass.reset(new Bag<uml::Class>());
+		
+		
+	}
 
     return m_superClass;
 }
+
+
+
+/*Additional Setter for redefined reference 'Classifier::general'*/
+
 
 
 //*********************************
@@ -665,40 +674,140 @@ std::shared_ptr<Bag<uml::Class>> ClassImpl::getSuperClass() const
 //*********************************
 std::shared_ptr<SubsetUnion<uml::Property, uml::Feature>> ClassImpl::getAttribute() const
 {
+	if(m_attribute == nullptr)
+	{
+		/*SubsetUnion*/
+		m_attribute.reset(new SubsetUnion<uml::Property, uml::Feature >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_attribute - SubsetUnion<uml::Property, uml::Feature >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_attribute->initSubsetUnion(getFeature());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_attribute - SubsetUnion<uml::Property, uml::Feature >(getFeature())" << std::endl;
+		#endif
+		
+	}
 	return m_attribute;
 }
+
 std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement>> ClassImpl::getFeature() const
 {
+	if(m_feature == nullptr)
+	{
+		/*SubsetUnion*/
+		m_feature.reset(new SubsetUnion<uml::Feature, uml::NamedElement >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_feature - SubsetUnion<uml::Feature, uml::NamedElement >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_feature->initSubsetUnion(getMember());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_feature - SubsetUnion<uml::Feature, uml::NamedElement >(getMember())" << std::endl;
+		#endif
+		
+	}
 	return m_feature;
 }
+
 std::shared_ptr<Union<uml::NamedElement>> ClassImpl::getMember() const
 {
+	if(m_member == nullptr)
+	{
+		/*Union*/
+		m_member.reset(new Union<uml::NamedElement>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_member - Union<uml::NamedElement>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_member;
 }
+
 std::weak_ptr<uml::Namespace > ClassImpl::getNamespace() const
 {
 	return m_namespace;
 }
+
 std::shared_ptr<Union<uml::Element>> ClassImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> ClassImpl::getOwnedMember() const
 {
+	if(m_ownedMember == nullptr)
+	{
+		/*SubsetUnion*/
+		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_ownedMember->initSubsetUnion(getOwnedElement(),getMember());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >(getOwnedElement(),getMember())" << std::endl;
+		#endif
+		
+	}
 	return m_ownedMember;
 }
+
 std::weak_ptr<uml::Element > ClassImpl::getOwner() const
 {
 	return m_owner;
 }
+
 std::shared_ptr<Union<uml::RedefinableElement>> ClassImpl::getRedefinedElement() const
 {
+	if(m_redefinedElement == nullptr)
+	{
+		/*Union*/
+		m_redefinedElement.reset(new Union<uml::RedefinableElement>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_redefinedElement - Union<uml::RedefinableElement>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_redefinedElement;
 }
+
 std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement>> ClassImpl::getRole() const
 {
+	if(m_role == nullptr)
+	{
+		/*SubsetUnion*/
+		m_role.reset(new SubsetUnion<uml::ConnectableElement, uml::NamedElement >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_role - SubsetUnion<uml::ConnectableElement, uml::NamedElement >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_role->initSubsetUnion(getMember());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_role - SubsetUnion<uml::ConnectableElement, uml::NamedElement >(getMember())" << std::endl;
+		#endif
+		
+	}
 	return m_role;
 }
+
+
 
 
 std::shared_ptr<Class> ClassImpl::getThisClassPtr() const
@@ -747,7 +856,7 @@ Any ClassImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::CLASS_ATTRIBUTE_EXTENSION:
+		case uml::umlPackage::CLASS_ATTRIBUTE_EXTENSION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Extension>::iterator iter = m_extension->begin();
@@ -757,11 +866,11 @@ Any ClassImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //3647
+			return eAny(tempList); //3547
 		}
-		case UmlPackage::CLASS_ATTRIBUTE_ISACTIVE:
-			return eAny(getIsActive()); //3648
-		case UmlPackage::CLASS_ATTRIBUTE_NESTEDCLASSIFIER:
+		case uml::umlPackage::CLASS_ATTRIBUTE_ISACTIVE:
+			return eAny(getIsActive()); //3548
+		case uml::umlPackage::CLASS_ATTRIBUTE_NESTEDCLASSIFIER:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Classifier>::iterator iter = m_nestedClassifier->begin();
@@ -771,9 +880,9 @@ Any ClassImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //3649
+			return eAny(tempList); //3549
 		}
-		case UmlPackage::CLASS_ATTRIBUTE_OWNEDOPERATION:
+		case uml::umlPackage::CLASS_ATTRIBUTE_OWNEDOPERATION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Operation>::iterator iter = m_ownedOperation->begin();
@@ -783,9 +892,9 @@ Any ClassImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //3646
+			return eAny(tempList); //3546
 		}
-		case UmlPackage::CLASS_ATTRIBUTE_OWNEDRECEPTION:
+		case uml::umlPackage::CLASS_ATTRIBUTE_OWNEDRECEPTION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Reception>::iterator iter = m_ownedReception->begin();
@@ -795,9 +904,9 @@ Any ClassImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //3650
+			return eAny(tempList); //3550
 		}
-		case UmlPackage::CLASS_ATTRIBUTE_SUPERCLASS:
+		case uml::umlPackage::CLASS_ATTRIBUTE_SUPERCLASS:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Class>::iterator iter = m_superClass->begin();
@@ -807,7 +916,7 @@ Any ClassImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //3651
+			return eAny(tempList); //3551
 		}
 	}
 	Any result;
@@ -823,18 +932,18 @@ bool ClassImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::CLASS_ATTRIBUTE_EXTENSION:
-			return getExtension() != nullptr; //3647
-		case UmlPackage::CLASS_ATTRIBUTE_ISACTIVE:
-			return getIsActive() != false; //3648
-		case UmlPackage::CLASS_ATTRIBUTE_NESTEDCLASSIFIER:
-			return getNestedClassifier() != nullptr; //3649
-		case UmlPackage::CLASS_ATTRIBUTE_OWNEDOPERATION:
-			return getOwnedOperation() != nullptr; //3646
-		case UmlPackage::CLASS_ATTRIBUTE_OWNEDRECEPTION:
-			return getOwnedReception() != nullptr; //3650
-		case UmlPackage::CLASS_ATTRIBUTE_SUPERCLASS:
-			return getSuperClass() != nullptr; //3651
+		case uml::umlPackage::CLASS_ATTRIBUTE_EXTENSION:
+			return getExtension() != nullptr; //3547
+		case uml::umlPackage::CLASS_ATTRIBUTE_ISACTIVE:
+			return getIsActive() != false; //3548
+		case uml::umlPackage::CLASS_ATTRIBUTE_NESTEDCLASSIFIER:
+			return getNestedClassifier() != nullptr; //3549
+		case uml::umlPackage::CLASS_ATTRIBUTE_OWNEDOPERATION:
+			return getOwnedOperation() != nullptr; //3546
+		case uml::umlPackage::CLASS_ATTRIBUTE_OWNEDRECEPTION:
+			return getOwnedReception() != nullptr; //3550
+		case uml::umlPackage::CLASS_ATTRIBUTE_SUPERCLASS:
+			return getSuperClass() != nullptr; //3551
 	}
 	bool result = false;
 	result = BehavioredClassifierImpl::internalEIsSet(featureID);
@@ -849,14 +958,14 @@ bool ClassImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::CLASS_ATTRIBUTE_ISACTIVE:
+		case uml::umlPackage::CLASS_ATTRIBUTE_ISACTIVE:
 		{
 			// BOOST CAST
 			bool _isActive = newValue->get<bool>();
-			setIsActive(_isActive); //3648
+			setIsActive(_isActive); //3548
 			return true;
 		}
-		case UmlPackage::CLASS_ATTRIBUTE_NESTEDCLASSIFIER:
+		case uml::umlPackage::CLASS_ATTRIBUTE_NESTEDCLASSIFIER:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -892,7 +1001,7 @@ bool ClassImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case UmlPackage::CLASS_ATTRIBUTE_OWNEDOPERATION:
+		case uml::umlPackage::CLASS_ATTRIBUTE_OWNEDOPERATION:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -928,7 +1037,7 @@ bool ClassImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case UmlPackage::CLASS_ATTRIBUTE_OWNEDRECEPTION:
+		case uml::umlPackage::CLASS_ATTRIBUTE_OWNEDRECEPTION:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -964,7 +1073,7 @@ bool ClassImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case UmlPackage::CLASS_ATTRIBUTE_SUPERCLASS:
+		case uml::umlPackage::CLASS_ATTRIBUTE_SUPERCLASS:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -1023,12 +1132,11 @@ void ClassImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> load
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -1067,8 +1175,9 @@ void ClassImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHan
 	EncapsulatedClassifierImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ClassImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void ClassImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -1097,7 +1206,7 @@ void ClassImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inte
 			{
 				typeName = "Operation";
 			}
-			std::shared_ptr<ecore::EObject> ownedOperation = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::OPERATION_ATTRIBUTE_CLASS);
+			std::shared_ptr<ecore::EObject> ownedOperation = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::OPERATION_ATTRIBUTE_CLASS);
 			if (ownedOperation != nullptr)
 			{
 				loadHandler->handleChild(ownedOperation);
@@ -1130,16 +1239,16 @@ void ClassImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inte
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
-
-	BehavioredClassifierImpl::loadNode(nodeName, loadHandler, modelFactory);
-	EncapsulatedClassifierImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	BehavioredClassifierImpl::loadNode(nodeName, loadHandler);
+	EncapsulatedClassifierImpl::loadNode(nodeName, loadHandler);
 }
 
 void ClassImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case UmlPackage::CLASS_ATTRIBUTE_SUPERCLASS:
+		case uml::umlPackage::CLASS_ATTRIBUTE_SUPERCLASS:
 		{
 			std::shared_ptr<Bag<uml::Class>> _superClass = getSuperClass();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -1197,7 +1306,7 @@ void ClassImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 		// Save 'nestedClassifier'
 		for (std::shared_ptr<uml::Classifier> nestedClassifier : *this->getNestedClassifier()) 
@@ -1217,7 +1326,6 @@ void ClassImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 			saveHandler->addReference(ownedReception, "ownedReception", ownedReception->eClass() != package->getReception_Class());
 		}
 	
- 
 		// Add attributes
 		if ( this->eIsSet(package->getClass_Attribute_isActive()) )
 		{

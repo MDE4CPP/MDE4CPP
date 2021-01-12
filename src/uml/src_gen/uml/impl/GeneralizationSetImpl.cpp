@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -26,21 +25,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -64,10 +54,11 @@
 
 #include "uml/TemplateParameter.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -77,27 +68,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 GeneralizationSetImpl::GeneralizationSetImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		m_generalization.reset(new Bag<uml::Generalization>());
-	
-	
-
-	
-
-	//Init references
-	
-	
-
-	
+{	
 }
 
 GeneralizationSetImpl::~GeneralizationSetImpl()
@@ -107,53 +78,36 @@ GeneralizationSetImpl::~GeneralizationSetImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+GeneralizationSetImpl::GeneralizationSetImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:GeneralizationSetImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			GeneralizationSetImpl::GeneralizationSetImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:GeneralizationSetImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
-
-
-
+GeneralizationSetImpl::GeneralizationSetImpl(std::weak_ptr<uml::Element > par_owner)
+:GeneralizationSetImpl()
+{
+	m_owner = par_owner;
+}
 
 //Additional constructor for the containments back reference
-			GeneralizationSetImpl::GeneralizationSetImpl(std::weak_ptr<uml::Element > par_owner)
-			:GeneralizationSetImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-
-
+GeneralizationSetImpl::GeneralizationSetImpl(std::weak_ptr<uml::Package > par_owningPackage)
+:GeneralizationSetImpl()
+{
+	m_owningPackage = par_owningPackage;
+	m_namespace = par_owningPackage;
+}
 
 //Additional constructor for the containments back reference
-			GeneralizationSetImpl::GeneralizationSetImpl(std::weak_ptr<uml::Package > par_owningPackage)
-			:GeneralizationSetImpl()
-			{
-			    m_owningPackage = par_owningPackage;
-				m_namespace = par_owningPackage;
-			}
-
-
-
-
-
-//Additional constructor for the containments back reference
-			GeneralizationSetImpl::GeneralizationSetImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
-			:GeneralizationSetImpl()
-			{
-			    m_owningTemplateParameter = par_owningTemplateParameter;
-				m_owner = par_owningTemplateParameter;
-			}
-
-
-
-
+GeneralizationSetImpl::GeneralizationSetImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+:GeneralizationSetImpl()
+{
+	m_owningTemplateParameter = par_owningTemplateParameter;
+	m_owner = par_owningTemplateParameter;
+}
 
 
 GeneralizationSetImpl::GeneralizationSetImpl(const GeneralizationSetImpl & obj):GeneralizationSetImpl()
@@ -218,20 +172,33 @@ std::shared_ptr<ecore::EObject>  GeneralizationSetImpl::copy() const
 
 std::shared_ptr<ecore::EClass> GeneralizationSetImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getGeneralizationSet_Class();
+	return uml::umlPackage::eInstance()->getGeneralizationSet_Class();
 }
 
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute isCovering
+*/
+bool GeneralizationSetImpl::getIsCovering() const 
+{
+	return m_isCovering;
+}
+
 void GeneralizationSetImpl::setIsCovering(bool _isCovering)
 {
 	m_isCovering = _isCovering;
 } 
 
-bool GeneralizationSetImpl::getIsCovering() const 
+
+
+/*
+Getter & Setter for attribute isDisjoint
+*/
+bool GeneralizationSetImpl::getIsDisjoint() const 
 {
-	return m_isCovering;
+	return m_isDisjoint;
 }
 
 void GeneralizationSetImpl::setIsDisjoint(bool _isDisjoint)
@@ -239,10 +206,7 @@ void GeneralizationSetImpl::setIsDisjoint(bool _isDisjoint)
 	m_isDisjoint = _isDisjoint;
 } 
 
-bool GeneralizationSetImpl::getIsDisjoint() const 
-{
-	return m_isDisjoint;
-}
+
 
 //*********************************
 // Operations
@@ -262,22 +226,40 @@ bool GeneralizationSetImpl::maps_to_generalization_set(Any diagnostics,std::map 
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference generalization
+*/
 std::shared_ptr<Bag<uml::Generalization>> GeneralizationSetImpl::getGeneralization() const
 {
+	if(m_generalization == nullptr)
+	{
+		m_generalization.reset(new Bag<uml::Generalization>());
+		
+		
+	}
 
     return m_generalization;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference powertype
+*/
 std::shared_ptr<uml::Classifier > GeneralizationSetImpl::getPowertype() const
 {
 
     return m_powertype;
 }
+
 void GeneralizationSetImpl::setPowertype(std::shared_ptr<uml::Classifier> _powertype)
 {
     m_powertype = _powertype;
 }
+
+
 
 //*********************************
 // Union Getter
@@ -286,14 +268,28 @@ std::weak_ptr<uml::Namespace > GeneralizationSetImpl::getNamespace() const
 {
 	return m_namespace;
 }
+
 std::shared_ptr<Union<uml::Element>> GeneralizationSetImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > GeneralizationSetImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<GeneralizationSet> GeneralizationSetImpl::getThisGeneralizationSetPtr() const
@@ -336,7 +332,7 @@ Any GeneralizationSetImpl::eGet(int featureID, bool resolve, bool coreType) cons
 {
 	switch(featureID)
 	{
-		case UmlPackage::GENERALIZATIONSET_ATTRIBUTE_GENERALIZATION:
+		case uml::umlPackage::GENERALIZATIONSET_ATTRIBUTE_GENERALIZATION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Generalization>::iterator iter = m_generalization->begin();
@@ -346,14 +342,14 @@ Any GeneralizationSetImpl::eGet(int featureID, bool resolve, bool coreType) cons
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //11115
+			return eAny(tempList); //11015
 		}
-		case UmlPackage::GENERALIZATIONSET_ATTRIBUTE_ISCOVERING:
-			return eAny(getIsCovering()); //11112
-		case UmlPackage::GENERALIZATIONSET_ATTRIBUTE_ISDISJOINT:
-			return eAny(getIsDisjoint()); //11113
-		case UmlPackage::GENERALIZATIONSET_ATTRIBUTE_POWERTYPE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getPowertype())); //11114
+		case uml::umlPackage::GENERALIZATIONSET_ATTRIBUTE_ISCOVERING:
+			return eAny(getIsCovering()); //11012
+		case uml::umlPackage::GENERALIZATIONSET_ATTRIBUTE_ISDISJOINT:
+			return eAny(getIsDisjoint()); //11013
+		case uml::umlPackage::GENERALIZATIONSET_ATTRIBUTE_POWERTYPE:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getPowertype())); //11014
 	}
 	return PackageableElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -361,14 +357,14 @@ bool GeneralizationSetImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::GENERALIZATIONSET_ATTRIBUTE_GENERALIZATION:
-			return getGeneralization() != nullptr; //11115
-		case UmlPackage::GENERALIZATIONSET_ATTRIBUTE_ISCOVERING:
-			return getIsCovering() != false; //11112
-		case UmlPackage::GENERALIZATIONSET_ATTRIBUTE_ISDISJOINT:
-			return getIsDisjoint() != false; //11113
-		case UmlPackage::GENERALIZATIONSET_ATTRIBUTE_POWERTYPE:
-			return getPowertype() != nullptr; //11114
+		case uml::umlPackage::GENERALIZATIONSET_ATTRIBUTE_GENERALIZATION:
+			return getGeneralization() != nullptr; //11015
+		case uml::umlPackage::GENERALIZATIONSET_ATTRIBUTE_ISCOVERING:
+			return getIsCovering() != false; //11012
+		case uml::umlPackage::GENERALIZATIONSET_ATTRIBUTE_ISDISJOINT:
+			return getIsDisjoint() != false; //11013
+		case uml::umlPackage::GENERALIZATIONSET_ATTRIBUTE_POWERTYPE:
+			return getPowertype() != nullptr; //11014
 	}
 	return PackageableElementImpl::internalEIsSet(featureID);
 }
@@ -376,7 +372,7 @@ bool GeneralizationSetImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::GENERALIZATIONSET_ATTRIBUTE_GENERALIZATION:
+		case uml::umlPackage::GENERALIZATIONSET_ATTRIBUTE_GENERALIZATION:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -412,26 +408,26 @@ bool GeneralizationSetImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case UmlPackage::GENERALIZATIONSET_ATTRIBUTE_ISCOVERING:
+		case uml::umlPackage::GENERALIZATIONSET_ATTRIBUTE_ISCOVERING:
 		{
 			// BOOST CAST
 			bool _isCovering = newValue->get<bool>();
-			setIsCovering(_isCovering); //11112
+			setIsCovering(_isCovering); //11012
 			return true;
 		}
-		case UmlPackage::GENERALIZATIONSET_ATTRIBUTE_ISDISJOINT:
+		case uml::umlPackage::GENERALIZATIONSET_ATTRIBUTE_ISDISJOINT:
 		{
 			// BOOST CAST
 			bool _isDisjoint = newValue->get<bool>();
-			setIsDisjoint(_isDisjoint); //11113
+			setIsDisjoint(_isDisjoint); //11013
 			return true;
 		}
-		case UmlPackage::GENERALIZATIONSET_ATTRIBUTE_POWERTYPE:
+		case uml::umlPackage::GENERALIZATIONSET_ATTRIBUTE_POWERTYPE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Classifier> _powertype = std::dynamic_pointer_cast<uml::Classifier>(_temp);
-			setPowertype(_powertype); //11114
+			setPowertype(_powertype); //11014
 			return true;
 		}
 	}
@@ -450,12 +446,11 @@ void GeneralizationSetImpl::load(std::shared_ptr<persistence::interfaces::XLoadH
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -509,18 +504,19 @@ void GeneralizationSetImpl::loadAttributes(std::shared_ptr<persistence::interfac
 	PackageableElementImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void GeneralizationSetImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void GeneralizationSetImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
-
-	PackageableElementImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	PackageableElementImpl::loadNode(nodeName, loadHandler);
 }
 
 void GeneralizationSetImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case UmlPackage::GENERALIZATIONSET_ATTRIBUTE_GENERALIZATION:
+		case uml::umlPackage::GENERALIZATIONSET_ATTRIBUTE_GENERALIZATION:
 		{
 			std::shared_ptr<Bag<uml::Generalization>> _generalization = getGeneralization();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -534,7 +530,7 @@ void GeneralizationSetImpl::resolveReferences(const int featureID, std::list<std
 			return;
 		}
 
-		case UmlPackage::GENERALIZATIONSET_ATTRIBUTE_POWERTYPE:
+		case uml::umlPackage::GENERALIZATIONSET_ATTRIBUTE_POWERTYPE:
 		{
 			if (references.size() == 1)
 			{
@@ -573,10 +569,9 @@ void GeneralizationSetImpl::saveContent(std::shared_ptr<persistence::interfaces:
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
- 
 		// Add attributes
 		if ( this->eIsSet(package->getGeneralizationSet_Attribute_isCovering()) )
 		{

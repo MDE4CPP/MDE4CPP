@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class InitialNodeImpl :virtual public ControlNodeImpl, virtual public InitialNode 
+	class InitialNodeImpl : virtual public ControlNodeImpl, virtual public InitialNode 
 	{
 		public: 
 			InitialNodeImpl(const InitialNodeImpl & obj);
@@ -28,7 +28,7 @@ namespace uml
 			InitialNodeImpl& operator=(InitialNodeImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			InitialNodeImpl();
 			virtual std::shared_ptr<InitialNode> getThisInitialNodePtr() const;
 			virtual void setThisInitialNodePtr(std::weak_ptr<InitialNode> thisInitialNodePtr);
@@ -59,13 +59,17 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 All the outgoing ActivityEdges from an InitialNode must be ControlFlows.
-			outgoing->forAll(oclIsKindOf(ControlFlow)) */ 
+			All the outgoing ActivityEdges from an InitialNode must be ControlFlows.
+			outgoing->forAll(oclIsKindOf(ControlFlow))
+			*/
+			 
 			virtual bool control_edges(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
-			 An InitialNode has no incoming ActivityEdges.
-			incoming->isEmpty() */ 
+			An InitialNode has no incoming ActivityEdges.
+			incoming->isEmpty()
+			*/
+			 
 			virtual bool no_incoming_edges(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
@@ -84,17 +88,25 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
+			ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::ActivityGroup>> getInGroup() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
+			The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const ; 
 			 
 			//*********************************
@@ -108,7 +120,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

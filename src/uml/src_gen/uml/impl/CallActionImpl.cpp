@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -26,21 +25,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -86,10 +76,11 @@
 
 #include "uml/StructuredActivityNode.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -99,31 +90,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 CallActionImpl::CallActionImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		/*Subset*/
-		m_result.reset(new Subset<uml::OutputPin, uml::OutputPin >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_result - Subset<uml::OutputPin, uml::OutputPin >()" << std::endl;
-		#endif
-	
-	
-
-	//Init references
-		/*Subset*/
-		m_result->initSubset(m_output);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_result - Subset<uml::OutputPin, uml::OutputPin >(m_output)" << std::endl;
-		#endif
-	
-	
+{	
 }
 
 CallActionImpl::~CallActionImpl()
@@ -133,53 +100,36 @@ CallActionImpl::~CallActionImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+CallActionImpl::CallActionImpl(std::weak_ptr<uml::Activity > par_activity)
+:CallActionImpl()
+{
+	m_activity = par_activity;
+	m_owner = par_activity;
+}
 
 //Additional constructor for the containments back reference
-			CallActionImpl::CallActionImpl(std::weak_ptr<uml::Activity > par_activity)
-			:CallActionImpl()
-			{
-			    m_activity = par_activity;
-				m_owner = par_activity;
-			}
-
-
-
-
+CallActionImpl::CallActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
+:CallActionImpl()
+{
+	m_inStructuredNode = par_inStructuredNode;
+	m_owner = par_inStructuredNode;
+}
 
 //Additional constructor for the containments back reference
-			CallActionImpl::CallActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
-			:CallActionImpl()
-			{
-			    m_inStructuredNode = par_inStructuredNode;
-				m_owner = par_inStructuredNode;
-			}
-
-
-
-
+CallActionImpl::CallActionImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:CallActionImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			CallActionImpl::CallActionImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:CallActionImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
-
-
-
-
-//Additional constructor for the containments back reference
-			CallActionImpl::CallActionImpl(std::weak_ptr<uml::Element > par_owner)
-			:CallActionImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-
-
+CallActionImpl::CallActionImpl(std::weak_ptr<uml::Element > par_owner)
+:CallActionImpl()
+{
+	m_owner = par_owner;
+}
 
 
 CallActionImpl::CallActionImpl(const CallActionImpl & obj):CallActionImpl()
@@ -310,12 +260,11 @@ CallActionImpl::CallActionImpl(const CallActionImpl & obj):CallActionImpl()
 		std::cout << "Copying the Subset: " << "m_result" << std::endl;
 	#endif
 
-		/*Subset*/
-		m_result->initSubset(m_output);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_result - Subset<uml::OutputPin, uml::OutputPin >(m_output)" << std::endl;
-		#endif
-	
+	/*Subset*/
+	m_result->initSubset(getOutput());
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Initialising value Subset: " << "m_result - Subset<uml::OutputPin, uml::OutputPin >(getOutput())" << std::endl;
+	#endif
 	
 }
 
@@ -328,21 +277,26 @@ std::shared_ptr<ecore::EObject>  CallActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> CallActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getCallAction_Class();
+	return uml::umlPackage::eInstance()->getCallAction_Class();
 }
 
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute isSynchronous
+*/
+bool CallActionImpl::getIsSynchronous() const 
+{
+	return m_isSynchronous;
+}
+
 void CallActionImpl::setIsSynchronous(bool _isSynchronous)
 {
 	m_isSynchronous = _isSynchronous;
 } 
 
-bool CallActionImpl::getIsSynchronous() const 
-{
-	return m_isSynchronous;
-}
+
 
 //*********************************
 // Operations
@@ -380,11 +334,32 @@ bool CallActionImpl::synchronous_call(Any diagnostics,std::map <   Any, Any >  c
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference result
+*/
 std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> CallActionImpl::getResult() const
 {
+	if(m_result == nullptr)
+	{
+		/*Subset*/
+		m_result.reset(new Subset<uml::OutputPin, uml::OutputPin >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_result - Subset<uml::OutputPin, uml::OutputPin >()" << std::endl;
+		#endif
+		
+		/*Subset*/
+		m_result->initSubset(getOutput());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_result - Subset<uml::OutputPin, uml::OutputPin >(getOutput())" << std::endl;
+		#endif
+		
+	}
 
     return m_result;
 }
+
+
+
 
 
 //*********************************
@@ -392,28 +367,95 @@ std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> CallActionImpl::getResul
 //*********************************
 std::shared_ptr<Union<uml::ActivityGroup>> CallActionImpl::getInGroup() const
 {
+	if(m_inGroup == nullptr)
+	{
+		/*Union*/
+		m_inGroup.reset(new Union<uml::ActivityGroup>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_inGroup - Union<uml::ActivityGroup>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_inGroup;
 }
+
 std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> CallActionImpl::getInput() const
 {
+	if(m_input == nullptr)
+	{
+		/*SubsetUnion*/
+		m_input.reset(new SubsetUnion<uml::InputPin, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_input - SubsetUnion<uml::InputPin, uml::Element >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_input->initSubsetUnion(getOwnedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_input - SubsetUnion<uml::InputPin, uml::Element >(getOwnedElement())" << std::endl;
+		#endif
+		
+	}
 	return m_input;
 }
+
 std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element>> CallActionImpl::getOutput() const
 {
+	if(m_output == nullptr)
+	{
+		/*SubsetUnion*/
+		m_output.reset(new SubsetUnion<uml::OutputPin, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_output - SubsetUnion<uml::OutputPin, uml::Element >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_output->initSubsetUnion(getOwnedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_output - SubsetUnion<uml::OutputPin, uml::Element >(getOwnedElement())" << std::endl;
+		#endif
+		
+	}
 	return m_output;
 }
+
 std::shared_ptr<Union<uml::Element>> CallActionImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > CallActionImpl::getOwner() const
 {
 	return m_owner;
 }
+
 std::shared_ptr<Union<uml::RedefinableElement>> CallActionImpl::getRedefinedElement() const
 {
+	if(m_redefinedElement == nullptr)
+	{
+		/*Union*/
+		m_redefinedElement.reset(new Union<uml::RedefinableElement>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_redefinedElement - Union<uml::RedefinableElement>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_redefinedElement;
 }
+
+
 
 
 std::shared_ptr<CallAction> CallActionImpl::getThisCallActionPtr() const
@@ -456,9 +498,9 @@ Any CallActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::CALLACTION_ATTRIBUTE_ISSYNCHRONOUS:
-			return eAny(getIsSynchronous()); //2929
-		case UmlPackage::CALLACTION_ATTRIBUTE_RESULT:
+		case uml::umlPackage::CALLACTION_ATTRIBUTE_ISSYNCHRONOUS:
+			return eAny(getIsSynchronous()); //2829
+		case uml::umlPackage::CALLACTION_ATTRIBUTE_RESULT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::OutputPin>::iterator iter = m_result->begin();
@@ -468,7 +510,7 @@ Any CallActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //2930
+			return eAny(tempList); //2830
 		}
 	}
 	return InvocationActionImpl::eGet(featureID, resolve, coreType);
@@ -477,10 +519,10 @@ bool CallActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::CALLACTION_ATTRIBUTE_ISSYNCHRONOUS:
-			return getIsSynchronous() != true; //2929
-		case UmlPackage::CALLACTION_ATTRIBUTE_RESULT:
-			return getResult() != nullptr; //2930
+		case uml::umlPackage::CALLACTION_ATTRIBUTE_ISSYNCHRONOUS:
+			return getIsSynchronous() != true; //2829
+		case uml::umlPackage::CALLACTION_ATTRIBUTE_RESULT:
+			return getResult() != nullptr; //2830
 	}
 	return InvocationActionImpl::internalEIsSet(featureID);
 }
@@ -488,14 +530,14 @@ bool CallActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::CALLACTION_ATTRIBUTE_ISSYNCHRONOUS:
+		case uml::umlPackage::CALLACTION_ATTRIBUTE_ISSYNCHRONOUS:
 		{
 			// BOOST CAST
 			bool _isSynchronous = newValue->get<bool>();
-			setIsSynchronous(_isSynchronous); //2929
+			setIsSynchronous(_isSynchronous); //2829
 			return true;
 		}
-		case UmlPackage::CALLACTION_ATTRIBUTE_RESULT:
+		case uml::umlPackage::CALLACTION_ATTRIBUTE_RESULT:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -547,12 +589,11 @@ void CallActionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler>
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -583,8 +624,9 @@ void CallActionImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLo
 	InvocationActionImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void CallActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void CallActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -595,7 +637,7 @@ void CallActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence:
 			{
 				typeName = "OutputPin";
 			}
-			std::shared_ptr<ecore::EObject> result = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::OUTPUTPIN_ATTRIBUTE_CALLACTION);
+			std::shared_ptr<ecore::EObject> result = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::OUTPUTPIN_ATTRIBUTE_CALLACTION);
 			if (result != nullptr)
 			{
 				loadHandler->handleChild(result);
@@ -611,8 +653,8 @@ void CallActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence:
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
-
-	InvocationActionImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	InvocationActionImpl::loadNode(nodeName, loadHandler);
 }
 
 void CallActionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -632,7 +674,6 @@ void CallActionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler>
 	
 	ActivityNodeImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);
@@ -656,7 +697,7 @@ void CallActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 		// Save 'result'
 		for (std::shared_ptr<uml::OutputPin> result : *this->getResult()) 
@@ -664,7 +705,6 @@ void CallActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_Class());
 		}
 	
- 
 		// Add attributes
 		if ( this->eIsSet(package->getCallAction_Attribute_isSynchronous()) )
 		{

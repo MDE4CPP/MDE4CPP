@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -26,19 +25,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -64,10 +56,11 @@
 
 #include "uml/TemplateableElement.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -77,51 +70,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 RedefinableTemplateSignatureImpl::RedefinableTemplateSignatureImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-		/*Subset*/
-		m_extendedSignature.reset(new Subset<uml::RedefinableTemplateSignature, uml::RedefinableElement >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_extendedSignature - Subset<uml::RedefinableTemplateSignature, uml::RedefinableElement >()" << std::endl;
-		#endif
-	
-	
-
-		/*Subset*/
-		m_inheritedParameter.reset(new Subset<uml::TemplateParameter, uml::TemplateParameter >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_inheritedParameter - Subset<uml::TemplateParameter, uml::TemplateParameter >()" << std::endl;
-		#endif
-	
-	
-
-	//Init references
-	
-
-		/*Subset*/
-		m_extendedSignature->initSubset(m_redefinedElement);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_extendedSignature - Subset<uml::RedefinableTemplateSignature, uml::RedefinableElement >(m_redefinedElement)" << std::endl;
-		#endif
-	
-	
-
-		/*Subset*/
-		m_inheritedParameter->initSubset(m_parameter);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_inheritedParameter - Subset<uml::TemplateParameter, uml::TemplateParameter >(m_parameter)" << std::endl;
-		#endif
-	
-	
+{	
 }
 
 RedefinableTemplateSignatureImpl::~RedefinableTemplateSignatureImpl()
@@ -131,41 +80,28 @@ RedefinableTemplateSignatureImpl::~RedefinableTemplateSignatureImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+RedefinableTemplateSignatureImpl::RedefinableTemplateSignatureImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:RedefinableTemplateSignatureImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			RedefinableTemplateSignatureImpl::RedefinableTemplateSignatureImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:RedefinableTemplateSignatureImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
-
-
-
+RedefinableTemplateSignatureImpl::RedefinableTemplateSignatureImpl(std::weak_ptr<uml::Element > par_owner)
+:RedefinableTemplateSignatureImpl()
+{
+	m_owner = par_owner;
+}
 
 //Additional constructor for the containments back reference
-			RedefinableTemplateSignatureImpl::RedefinableTemplateSignatureImpl(std::weak_ptr<uml::Element > par_owner)
-			:RedefinableTemplateSignatureImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-
-
-
-//Additional constructor for the containments back reference
-			RedefinableTemplateSignatureImpl::RedefinableTemplateSignatureImpl(std::weak_ptr<uml::TemplateableElement > par_template)
-			:RedefinableTemplateSignatureImpl()
-			{
-			    m_template = par_template;
-				m_owner = par_template;
-			}
-
-
-
-
+RedefinableTemplateSignatureImpl::RedefinableTemplateSignatureImpl(std::weak_ptr<uml::TemplateableElement > par_template)
+:RedefinableTemplateSignatureImpl()
+{
+	m_template = par_template;
+	m_owner = par_template;
+}
 
 
 RedefinableTemplateSignatureImpl::RedefinableTemplateSignatureImpl(const RedefinableTemplateSignatureImpl & obj):RedefinableTemplateSignatureImpl()
@@ -181,6 +117,8 @@ RedefinableTemplateSignatureImpl::RedefinableTemplateSignatureImpl(const Redefin
 
 	//copy references with no containment (soft copy)
 	
+	m_classifier  = obj.getClassifier();
+
 	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
 	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
 
@@ -202,13 +140,6 @@ RedefinableTemplateSignatureImpl::RedefinableTemplateSignatureImpl(const Redefin
 
 	//Clone references with containment (deep copy)
 
-	if(obj.getClassifier()!=nullptr)
-	{
-		m_classifier = std::dynamic_pointer_cast<uml::Classifier>(obj.getClassifier()->copy());
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_classifier" << std::endl;
-	#endif
 	std::shared_ptr<Bag<uml::RedefinableTemplateSignature>> _extendedSignatureList = obj.getExtendedSignature();
 	for(std::shared_ptr<uml::RedefinableTemplateSignature> _extendedSignature : *_extendedSignatureList)
 	{
@@ -260,7 +191,7 @@ std::shared_ptr<ecore::EObject>  RedefinableTemplateSignatureImpl::copy() const
 
 std::shared_ptr<ecore::EClass> RedefinableTemplateSignatureImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getRedefinableTemplateSignature_Class();
+	return uml::umlPackage::eInstance()->getRedefinableTemplateSignature_Class();
 }
 
 //*********************************
@@ -285,25 +216,94 @@ bool RedefinableTemplateSignatureImpl::redefines_parents(Any diagnostics,std::ma
 //*********************************
 // References
 //*********************************
-std::shared_ptr<uml::Classifier > RedefinableTemplateSignatureImpl::getClassifier() const
+/*
+Getter & Setter for reference classifier
+*/
+std::weak_ptr<uml::Classifier > RedefinableTemplateSignatureImpl::getClassifier() const
 {
 //assert(m_classifier);
     return m_classifier;
 }
 
+void RedefinableTemplateSignatureImpl::setClassifier(std::shared_ptr<uml::Classifier> _classifier)
+{
+    m_classifier = _classifier;
+	//additional setter call for redefined reference TemplateSignature::template
+	uml::TemplateSignatureImpl::setTemplate(_classifier);
+}
 
+/*Additional Setter for redefined reference 'TemplateSignature::template'*/
+void RedefinableTemplateSignatureImpl::setTemplate(std::shared_ptr<uml::TemplateableElement> _template)
+{
+	std::shared_ptr<uml::Classifier> _classifier = std::dynamic_pointer_cast<uml::Classifier>(_template);
+	if(_classifier)
+	{
+		m_classifier = _classifier;
+
+		//additional setter call for redefined reference TemplateSignature::template
+		uml::TemplateSignatureImpl::setTemplate(_template);
+	}
+	else
+	{
+		std::cerr<<"[RedefinableTemplateSignature::setTemplate] : Could not set template because provided template was not of type 'uml::Classifier'"<<std::endl;
+	}
+}
+
+
+/*
+Getter & Setter for reference extendedSignature
+*/
 std::shared_ptr<Subset<uml::RedefinableTemplateSignature, uml::RedefinableElement>> RedefinableTemplateSignatureImpl::getExtendedSignature() const
 {
+	if(m_extendedSignature == nullptr)
+	{
+		/*Subset*/
+		m_extendedSignature.reset(new Subset<uml::RedefinableTemplateSignature, uml::RedefinableElement >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_extendedSignature - Subset<uml::RedefinableTemplateSignature, uml::RedefinableElement >()" << std::endl;
+		#endif
+		
+		/*Subset*/
+		m_extendedSignature->initSubset(getRedefinedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_extendedSignature - Subset<uml::RedefinableTemplateSignature, uml::RedefinableElement >(getRedefinedElement())" << std::endl;
+		#endif
+		
+	}
 
     return m_extendedSignature;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference inheritedParameter
+*/
 std::shared_ptr<Subset<uml::TemplateParameter, uml::TemplateParameter>> RedefinableTemplateSignatureImpl::getInheritedParameter() const
 {
+	if(m_inheritedParameter == nullptr)
+	{
+		/*Subset*/
+		m_inheritedParameter.reset(new Subset<uml::TemplateParameter, uml::TemplateParameter >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_inheritedParameter - Subset<uml::TemplateParameter, uml::TemplateParameter >()" << std::endl;
+		#endif
+		
+		/*Subset*/
+		m_inheritedParameter->initSubset(getParameter());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_inheritedParameter - Subset<uml::TemplateParameter, uml::TemplateParameter >(getParameter())" << std::endl;
+		#endif
+		
+	}
 
     return m_inheritedParameter;
 }
+
+
+
 
 
 //*********************************
@@ -311,24 +311,70 @@ std::shared_ptr<Subset<uml::TemplateParameter, uml::TemplateParameter>> Redefina
 //*********************************
 std::shared_ptr<Union<uml::Element>> RedefinableTemplateSignatureImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > RedefinableTemplateSignatureImpl::getOwner() const
 {
 	return m_owner;
 }
+
 std::shared_ptr<Union<uml::TemplateParameter>> RedefinableTemplateSignatureImpl::getParameter() const
 {
+	if(m_parameter == nullptr)
+	{
+		/*Union*/
+		m_parameter.reset(new Union<uml::TemplateParameter>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_parameter - Union<uml::TemplateParameter>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_parameter;
 }
+
 std::shared_ptr<Union<uml::RedefinableElement>> RedefinableTemplateSignatureImpl::getRedefinedElement() const
 {
+	if(m_redefinedElement == nullptr)
+	{
+		/*Union*/
+		m_redefinedElement.reset(new Union<uml::RedefinableElement>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_redefinedElement - Union<uml::RedefinableElement>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_redefinedElement;
 }
+
 std::shared_ptr<Union<uml::Classifier>> RedefinableTemplateSignatureImpl::getRedefinitionContext() const
 {
+	if(m_redefinitionContext == nullptr)
+	{
+		/*Union*/
+		m_redefinitionContext.reset(new Union<uml::Classifier>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_redefinitionContext - Union<uml::Classifier>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_redefinitionContext;
 }
+
+
 
 
 std::shared_ptr<RedefinableTemplateSignature> RedefinableTemplateSignatureImpl::getThisRedefinableTemplateSignaturePtr() const
@@ -367,9 +413,9 @@ Any RedefinableTemplateSignatureImpl::eGet(int featureID, bool resolve, bool cor
 {
 	switch(featureID)
 	{
-		case UmlPackage::REDEFINABLETEMPLATESIGNATURE_ATTRIBUTE_CLASSIFIER:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getClassifier())); //20617
-		case UmlPackage::REDEFINABLETEMPLATESIGNATURE_ATTRIBUTE_EXTENDEDSIGNATURE:
+		case uml::umlPackage::REDEFINABLETEMPLATESIGNATURE_ATTRIBUTE_CLASSIFIER:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getClassifier().lock())); //20517
+		case uml::umlPackage::REDEFINABLETEMPLATESIGNATURE_ATTRIBUTE_EXTENDEDSIGNATURE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::RedefinableTemplateSignature>::iterator iter = m_extendedSignature->begin();
@@ -379,9 +425,9 @@ Any RedefinableTemplateSignatureImpl::eGet(int featureID, bool resolve, bool cor
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //20615
+			return eAny(tempList); //20515
 		}
-		case UmlPackage::REDEFINABLETEMPLATESIGNATURE_ATTRIBUTE_INHERITEDPARAMETER:
+		case uml::umlPackage::REDEFINABLETEMPLATESIGNATURE_ATTRIBUTE_INHERITEDPARAMETER:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::TemplateParameter>::iterator iter = m_inheritedParameter->begin();
@@ -391,7 +437,7 @@ Any RedefinableTemplateSignatureImpl::eGet(int featureID, bool resolve, bool cor
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //20616
+			return eAny(tempList); //20516
 		}
 	}
 	Any result;
@@ -407,12 +453,12 @@ bool RedefinableTemplateSignatureImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::REDEFINABLETEMPLATESIGNATURE_ATTRIBUTE_CLASSIFIER:
-			return getClassifier() != nullptr; //20617
-		case UmlPackage::REDEFINABLETEMPLATESIGNATURE_ATTRIBUTE_EXTENDEDSIGNATURE:
-			return getExtendedSignature() != nullptr; //20615
-		case UmlPackage::REDEFINABLETEMPLATESIGNATURE_ATTRIBUTE_INHERITEDPARAMETER:
-			return getInheritedParameter() != nullptr; //20616
+		case uml::umlPackage::REDEFINABLETEMPLATESIGNATURE_ATTRIBUTE_CLASSIFIER:
+			return getClassifier().lock() != nullptr; //20517
+		case uml::umlPackage::REDEFINABLETEMPLATESIGNATURE_ATTRIBUTE_EXTENDEDSIGNATURE:
+			return getExtendedSignature() != nullptr; //20515
+		case uml::umlPackage::REDEFINABLETEMPLATESIGNATURE_ATTRIBUTE_INHERITEDPARAMETER:
+			return getInheritedParameter() != nullptr; //20516
 	}
 	bool result = false;
 	result = RedefinableElementImpl::internalEIsSet(featureID);
@@ -427,7 +473,15 @@ bool RedefinableTemplateSignatureImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::REDEFINABLETEMPLATESIGNATURE_ATTRIBUTE_EXTENDEDSIGNATURE:
+		case uml::umlPackage::REDEFINABLETEMPLATESIGNATURE_ATTRIBUTE_CLASSIFIER:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::Classifier> _classifier = std::dynamic_pointer_cast<uml::Classifier>(_temp);
+			setClassifier(_classifier); //20517
+			return true;
+		}
+		case uml::umlPackage::REDEFINABLETEMPLATESIGNATURE_ATTRIBUTE_EXTENDEDSIGNATURE:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -486,12 +540,11 @@ void RedefinableTemplateSignatureImpl::load(std::shared_ptr<persistence::interfa
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -521,19 +574,32 @@ void RedefinableTemplateSignatureImpl::loadAttributes(std::shared_ptr<persistenc
 	TemplateSignatureImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void RedefinableTemplateSignatureImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void RedefinableTemplateSignatureImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
-
-	RedefinableElementImpl::loadNode(nodeName, loadHandler, modelFactory);
-	TemplateSignatureImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	RedefinableElementImpl::loadNode(nodeName, loadHandler);
+	TemplateSignatureImpl::loadNode(nodeName, loadHandler);
 }
 
 void RedefinableTemplateSignatureImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case UmlPackage::REDEFINABLETEMPLATESIGNATURE_ATTRIBUTE_EXTENDEDSIGNATURE:
+		case uml::umlPackage::REDEFINABLETEMPLATESIGNATURE_ATTRIBUTE_CLASSIFIER:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::Classifier> _classifier = std::dynamic_pointer_cast<uml::Classifier>( references.front() );
+				setClassifier(_classifier);
+			}
+			
+			return;
+		}
+
+		case uml::umlPackage::REDEFINABLETEMPLATESIGNATURE_ATTRIBUTE_EXTENDEDSIGNATURE:
 		{
 			std::shared_ptr<Bag<uml::RedefinableTemplateSignature>> _extendedSignature = getExtendedSignature();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -575,7 +641,7 @@ void RedefinableTemplateSignatureImpl::saveContent(std::shared_ptr<persistence::
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 

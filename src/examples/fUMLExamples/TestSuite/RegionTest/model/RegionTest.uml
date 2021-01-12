@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_0MvC0BmJEeqOHbkWkfH76A" name="RegionTest">
+  <eAnnotations xmi:id="_lOoioBnHEeqOHbkWkfH76A" source="prepareApplication">
+    <details xmi:id="_H9r7oBnIEeqOHbkWkfH76A" key="sourceCodeMain" value="std::shared_ptr&lt;A> a = factory->createA();&#xA;auto b = a->createB();&#xA;a->doB(b);&#xA;std::cout &lt;&lt; &quot;END&quot; &lt;&lt; std::endl;"/>
+  </eAnnotations>
+  <packagedElement xmi:type="uml:Class" xmi:id="_5uuEsBmJEeqOHbkWkfH76A" name="A">
+    <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_WTRN0BmLEeqOHbkWkfH76A" name="fbCreateB" specification="_Yu_e0BmKEeqOHbkWkfH76A">
+      <ownedParameter xmi:id="_YojDIBmLEeqOHbkWkfH76A" name="bArray" type="_7Vcx8BmJEeqOHbkWkfH76A" direction="return">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_YojDIRmLEeqOHbkWkfH76A"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_YojDIhmLEeqOHbkWkfH76A" value="*"/>
+      </ownedParameter>
+      <language>CPP</language>
+      <language>INCLUDE</language>
+      <body>for (int i=0; i&lt;10; i++)&#xD;
+{&#xD;
+	std::shared_ptr&lt;B> b = RegionTestFactory::eInstance()->createB();&#xD;
+	b->setX(i);&#xD;
+	bArray->push_back(b);&#xD;
+}</body>
+      <body>#include &quot;RegionTest/RegionTestFactory.hpp&quot;</body>
+    </ownedBehavior>
+    <ownedBehavior xmi:type="uml:Activity" xmi:id="__OsQMBmQEeqOHbkWkfH76A" name="ActDoB" specification="_bVXrMBmKEeqOHbkWkfH76A" node="_SS5g8BmREeqOHbkWkfH76A _eXPckBmREeqOHbkWkfH76A _gb404BmREeqOHbkWkfH76A" group="_eXPckBmREeqOHbkWkfH76A">
+      <ownedParameter xmi:id="_SS2doBmREeqOHbkWkfH76A" name="bArray" type="_7Vcx8BmJEeqOHbkWkfH76A">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_T51CgBmREeqOHbkWkfH76A"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_UQB8ABmREeqOHbkWkfH76A" value="*"/>
+      </ownedParameter>
+      <edge xmi:type="uml:ObjectFlow" xmi:id="_qnFdkBmREeqOHbkWkfH76A" target="_gb404BmREeqOHbkWkfH76A" source="_SS5g8BmREeqOHbkWkfH76A"/>
+      <structuredNode xmi:type="uml:ExpansionRegion" xmi:id="_eXPckBmREeqOHbkWkfH76A" name="ExpansionRegion" inputElement="_gb404BmREeqOHbkWkfH76A">
+        <edge xmi:type="uml:ObjectFlow" xmi:id="_u_LfMBmREeqOHbkWkfH76A" target="_rBgvwRmREeqOHbkWkfH76A" source="_gb404BmREeqOHbkWkfH76A"/>
+        <node xmi:type="uml:CallOperationAction" xmi:id="_rBgvwBmREeqOHbkWkfH76A" name="call B::print" operation="_QhIskBmKEeqOHbkWkfH76A">
+          <target xmi:id="_rBgvwRmREeqOHbkWkfH76A" name="target" incoming="_u_LfMBmREeqOHbkWkfH76A" type="_7Vcx8BmJEeqOHbkWkfH76A"/>
+        </node>
+      </structuredNode>
+      <node xmi:type="uml:ActivityParameterNode" xmi:id="_SS5g8BmREeqOHbkWkfH76A" name="b" outgoing="_qnFdkBmREeqOHbkWkfH76A" type="_7Vcx8BmJEeqOHbkWkfH76A" parameter="_SS2doBmREeqOHbkWkfH76A">
+        <upperBound xmi:type="uml:LiteralInteger" xmi:id="_SS6IABmREeqOHbkWkfH76A" value="1"/>
+      </node>
+      <node xmi:type="uml:ExpansionNode" xmi:id="_gb404BmREeqOHbkWkfH76A" name="ExpansionNodeB" incoming="_qnFdkBmREeqOHbkWkfH76A" outgoing="_u_LfMBmREeqOHbkWkfH76A" type="_7Vcx8BmJEeqOHbkWkfH76A" regionAsInput="_eXPckBmREeqOHbkWkfH76A"/>
+    </ownedBehavior>
+    <ownedOperation xmi:id="_Yu_e0BmKEeqOHbkWkfH76A" name="createB" method="_WTRN0BmLEeqOHbkWkfH76A">
+      <ownedParameter xmi:id="_wXsOcBmKEeqOHbkWkfH76A" name="bArray" type="_7Vcx8BmJEeqOHbkWkfH76A" direction="return">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_5WDhgBmTEeqOHbkWkfH76A"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_528BABmTEeqOHbkWkfH76A" value="*"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="_bVXrMBmKEeqOHbkWkfH76A" name="doB" method="__OsQMBmQEeqOHbkWkfH76A">
+      <ownedParameter xmi:id="_zf-1EBmKEeqOHbkWkfH76A" name="bArray" type="_7Vcx8BmJEeqOHbkWkfH76A">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_kdWIQBnKEeqOHbkWkfH76A"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_kmO-gBnKEeqOHbkWkfH76A" value="*"/>
+      </ownedParameter>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_7Vcx8BmJEeqOHbkWkfH76A" name="B">
+    <ownedAttribute xmi:id="_FfQTgBmKEeqOHbkWkfH76A" name="x" visibility="public">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_FfQTgRmKEeqOHbkWkfH76A" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_FfQTghmKEeqOHbkWkfH76A" value="1"/>
+    </ownedAttribute>
+    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_T4b_kBmKEeqOHbkWkfH76A" name="fbPrint" specification="_QhIskBmKEeqOHbkWkfH76A">
+      <eAnnotations xmi:id="_cZJCoFAYEeukhN12il4vjA" source="noExecution"/>
+      <language>CPP</language>
+      <body>std::cout &lt;&lt; &quot;printing content of class B object: x=&quot; &lt;&lt; m_x &lt;&lt; std::endl;</body>
+    </ownedBehavior>
+    <ownedOperation xmi:id="_QhIskBmKEeqOHbkWkfH76A" name="print" method="_T4b_kBmKEeqOHbkWkfH76A"/>
+  </packagedElement>
+</uml:Model>

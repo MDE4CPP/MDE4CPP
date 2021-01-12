@@ -13,13 +13,13 @@
 //Model includes
 #include "../RemoveStructuralFeatureValueActivation.hpp"
 
-#include "fUML/impl/FUMLFactoryImpl.hpp"
+#include "fUML/Semantics/Actions/impl/ActionsFactoryImpl.hpp"
 #include "fUML/Semantics/Actions/impl/WriteStructuralFeatureActionActivationImpl.hpp"
 
 //*********************************
 namespace fUML::Semantics::Actions 
 {
-	class RemoveStructuralFeatureValueActivationImpl :virtual public WriteStructuralFeatureActionActivationImpl, virtual public RemoveStructuralFeatureValueActivation 
+	class RemoveStructuralFeatureValueActivationImpl : virtual public WriteStructuralFeatureActionActivationImpl, virtual public RemoveStructuralFeatureValueActivation 
 	{
 		public: 
 			RemoveStructuralFeatureValueActivationImpl(const RemoveStructuralFeatureValueActivationImpl & obj);
@@ -29,7 +29,7 @@ namespace fUML::Semantics::Actions
 			RemoveStructuralFeatureValueActivationImpl& operator=(RemoveStructuralFeatureValueActivationImpl const&) = delete;
 
 		protected:
-			friend class fUML::FUMLFactoryImpl;
+			friend class fUML::Semantics::Actions::ActionsFactoryImpl;
 			RemoveStructuralFeatureValueActivationImpl();
 			virtual std::shared_ptr<RemoveStructuralFeatureValueActivation> getThisRemoveStructuralFeatureValueActivationPtr() const;
 			virtual void setThisRemoveStructuralFeatureValueActivationPtr(std::weak_ptr<RemoveStructuralFeatureValueActivation> thisRemoveStructuralFeatureValueActivationPtr);
@@ -47,8 +47,7 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual void doAction() ;
 			
 			
@@ -61,13 +60,26 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Reference
 			//*********************************
+			
+			virtual std::shared_ptr<uml::RemoveStructuralFeatureValueAction > getRemoveStructuralFeatureValueAction() const ;
+			
+			
+			virtual void setRemoveStructuralFeatureValueAction(std::shared_ptr<uml::RemoveStructuralFeatureValueAction> _removeStructuralFeatureValueAction) ;
+			
+			/*Additional Setter for 'ActionActivation::action' redefined by reference 'removeStructuralFeatureValueAction'*/
+			
+			virtual void setAction(std::shared_ptr<uml::Action> _action) ;
+			
+			/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'removeStructuralFeatureValueAction'*/
+			
+			virtual void setNode(std::shared_ptr<uml::ActivityNode> _node) ;
+			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> getPinActivation() const ; 
 			 
 			//*********************************
@@ -81,7 +93,7 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

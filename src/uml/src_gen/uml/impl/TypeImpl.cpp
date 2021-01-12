@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -25,23 +24,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -65,10 +53,11 @@
 
 #include "uml/Type.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -78,19 +67,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 TypeImpl::TypeImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	//Init references
-	
+{	
 }
 
 TypeImpl::~TypeImpl()
@@ -100,29 +77,20 @@ TypeImpl::~TypeImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+TypeImpl::TypeImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:TypeImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			TypeImpl::TypeImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:TypeImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
-
-
-
-
-//Additional constructor for the containments back reference
-			TypeImpl::TypeImpl(std::weak_ptr<uml::Element > par_owner)
-			:TypeImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-
-
+TypeImpl::TypeImpl(std::weak_ptr<uml::Element > par_owner)
+:TypeImpl()
+{
+	m_owner = par_owner;
+}
 
 //Additional constructor for the containments back reference
 TypeImpl::TypeImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id)
@@ -130,11 +98,11 @@ TypeImpl::TypeImpl(std::weak_ptr<uml::Package > par_Package, const int reference
 {
 	switch(reference_id)
 	{	
-	case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
+	case umlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
 		m_owningPackage = par_Package;
 		m_namespace = par_Package;
 		 return;
-	case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
+	case umlPackage::TYPE_ATTRIBUTE_PACKAGE:
 		m_package = par_Package;
 		m_namespace = par_Package;
 		 return;
@@ -144,26 +112,13 @@ TypeImpl::TypeImpl(std::weak_ptr<uml::Package > par_Package, const int reference
    
 }
 
-
-
-
-
 //Additional constructor for the containments back reference
-			TypeImpl::TypeImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
-			:TypeImpl()
-			{
-			    m_owningTemplateParameter = par_owningTemplateParameter;
-				m_owner = par_owningTemplateParameter;
-			}
-
-
-
-
-
-//Additional constructor for the containments back reference
-
-
-
+TypeImpl::TypeImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+:TypeImpl()
+{
+	m_owningTemplateParameter = par_owningTemplateParameter;
+	m_owner = par_owningTemplateParameter;
+}
 
 
 
@@ -224,7 +179,7 @@ std::shared_ptr<ecore::EObject>  TypeImpl::copy() const
 
 std::shared_ptr<ecore::EClass> TypeImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getType_Class();
+	return uml::umlPackage::eInstance()->getType_Class();
 }
 
 //*********************************
@@ -255,15 +210,21 @@ std::shared_ptr<Bag<uml::Association> > TypeImpl::getAssociations()
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference package
+*/
 std::weak_ptr<uml::Package > TypeImpl::getPackage() const
 {
 
     return m_package;
 }
+
 void TypeImpl::setPackage(std::shared_ptr<uml::Package> _package)
 {
     m_package = _package;
 }
+
+
 
 //*********************************
 // Union Getter
@@ -272,14 +233,28 @@ std::weak_ptr<uml::Namespace > TypeImpl::getNamespace() const
 {
 	return m_namespace;
 }
+
 std::shared_ptr<Union<uml::Element>> TypeImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > TypeImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<Type> TypeImpl::getThisTypePtr() const
@@ -327,8 +302,8 @@ Any TypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getPackage().lock())); //24512
+		case uml::umlPackage::TYPE_ATTRIBUTE_PACKAGE:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getPackage().lock())); //24412
 	}
 	return PackageableElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -336,8 +311,8 @@ bool TypeImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
-			return getPackage().lock() != nullptr; //24512
+		case uml::umlPackage::TYPE_ATTRIBUTE_PACKAGE:
+			return getPackage().lock() != nullptr; //24412
 	}
 	return PackageableElementImpl::internalEIsSet(featureID);
 }
@@ -345,12 +320,12 @@ bool TypeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
+		case uml::umlPackage::TYPE_ATTRIBUTE_PACKAGE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Package> _package = std::dynamic_pointer_cast<uml::Package>(_temp);
-			setPackage(_package); //24512
+			setPackage(_package); //24412
 			return true;
 		}
 	}
@@ -369,12 +344,11 @@ void TypeImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadH
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -384,18 +358,19 @@ void TypeImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHand
 	PackageableElementImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void TypeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void TypeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
-
-	PackageableElementImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	PackageableElementImpl::loadNode(nodeName, loadHandler);
 }
 
 void TypeImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
+		case uml::umlPackage::TYPE_ATTRIBUTE_PACKAGE:
 		{
 			if (references.size() == 1)
 			{
@@ -434,7 +409,7 @@ void TypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 

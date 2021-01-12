@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class ActionExecutionSpecificationImpl :virtual public ExecutionSpecificationImpl, virtual public ActionExecutionSpecification 
+	class ActionExecutionSpecificationImpl : virtual public ExecutionSpecificationImpl, virtual public ActionExecutionSpecification 
 	{
 		public: 
 			ActionExecutionSpecificationImpl(const ActionExecutionSpecificationImpl & obj);
@@ -28,7 +28,7 @@ namespace uml
 			ActionExecutionSpecificationImpl& operator=(ActionExecutionSpecificationImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			ActionExecutionSpecificationImpl();
 			virtual std::shared_ptr<ActionExecutionSpecification> getThisActionExecutionSpecificationPtr() const;
 			virtual void setThisActionExecutionSpecificationPtr(std::weak_ptr<ActionExecutionSpecification> thisActionExecutionSpecificationPtr);
@@ -59,12 +59,14 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 The Action referenced by the ActionExecutionSpecification must be owned by the Interaction owning that ActionExecutionSpecification.
+			The Action referenced by the ActionExecutionSpecification must be owned by the Interaction owning that ActionExecutionSpecification.
 			(enclosingInteraction->notEmpty() or enclosingOperand.combinedFragment->notEmpty()) and
 			let parentInteraction : Set(Interaction) = enclosingInteraction.oclAsType(Interaction)->asSet()->union(
 			enclosingOperand.combinedFragment->closure(enclosingOperand.combinedFragment)->
 			collect(enclosingInteraction).oclAsType(Interaction)->asSet()) in
-			(parentInteraction->size() = 1) and self.action.interaction->asSet() = parentInteraction */ 
+			(parentInteraction->size() = 1) and self.action.interaction->asSet() = parentInteraction
+			*/
+			 
 			virtual bool action_referenced(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
@@ -78,28 +80,39 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 Action whose execution is occurring.
-			<p>From package UML::Interactions.</p> */
+			Action whose execution is occurring.
+			<p>From package UML::Interactions.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::Action > getAction() const ;
 			
 			/*!
-			 Action whose execution is occurring.
-			<p>From package UML::Interactions.</p> */
-			virtual void setAction(std::shared_ptr<uml::Action> _action_action) ;
+			Action whose execution is occurring.
+			<p>From package UML::Interactions.</p>
+			*/
+			
+			virtual void setAction(std::shared_ptr<uml::Action> _action) ;
+			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
@@ -113,7 +126,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

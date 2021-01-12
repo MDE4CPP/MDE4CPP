@@ -25,28 +25,42 @@
 [module generateApplicationFiles('http://www.eclipse.org/uml2/5.0.0/UML')]
 
 [import UML4CPP::generator::main::components::generateParameter /]
+[import UML4CPP::generator::main::components::generateType /]
 [import UML4CPP::generator::main::configuration::generateEclipseFiles /]
 [import UML4CPP::generator::main::helpers::collectionHelper /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
-[template public generateApplication(aPackage : Package) { packageName : String = getPackageName().toUpperFirst(); }]
+[template public generateApplication(aPackage : Package)]
+[if(aPackage.hasMainSourceCode() or (aPackage.hasMainActivity() and (aPackage.getHasMainActivity() = 'true')))]
+	[if (aPackage.hasMainSourceCode())]
+		[aPackage.generateApplicationFromSourceCode()/]
+	[else]
+		[aPackage.generateApplicationFromActivity()/]
+	[/if]
+		[aPackage.generateApplicationCMakeLists()/]
+		[aPackage.generateApplicationGradleFile()/]
+		[aPackage.generateEclipseFiles(true)/]
+[/if]
+[/template]
+
+[template private generateApplicationFromSourceCode(aPackage : Package) { packageName : String = getPackageName(); }]
 [file ('../application/src/main.cpp', false, 'UTF-8')]
 
 #include <iostream>
 
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "[aPackage.getPackageName()/]/[packageName/]Factory.hpp"
-#include "[aPackage.getPackageName()/]/[packageName/]Package.hpp"
+#include "[aPackage.generateNamespacePath(false)/]/[packageName/]Factory.hpp"
+#include "[aPackage.generateNamespacePath(false)/]/[packageName/]Package.hpp"
 
 [for (aClass : Class | aPackage.allOwnedElements()->select(e|e.oclIsKindOf(uml::Class))->select(e|not (e.oclIsKindOf(FunctionBehavior) or e.oclIsKindOf(OpaqueBehavior) or e.oclIsKindOf(Activity))).oclAsType(uml::Class)->sortedBy(name))]
-#include "[aPackage.getPackageName()/]/[aClass.name.toUpperFirst()/].hpp"
+#include "[aClass.getNearestPackage().generateNamespacePath(false)/]/[aClass.name.toUpperFirst()/].hpp"
 [/for]
 [for (anInterface : Interface | aPackage.allOwnedElements()->select(e|e.oclIsKindOf(uml::Interface)).oclAsType(uml::Interface)->sortedBy(name))]
-#include "[aPackage.getPackageName()/]/[anInterface.name.toUpperFirst()/].hpp"
+#include "[anInterface.getNearestPackage().generateNamespacePath(false)/]/[anInterface.name.toUpperFirst()/].hpp"
 [/for]
 [for (anEnumeration : Enumeration | aPackage.ownedMember->filter(Enumeration))]
-#include "[aPackage.getPackageName()/]/[anEnumeration.name/].hpp"
+#include "[anEnumeration.getNearestPackage().generateNamespacePath(false)/]/[anEnumeration.name/].hpp"
 [/for]
 
 [if (hasMainIncludes())]
@@ -58,7 +72,7 @@
 
 // [/protected]
 
-[if (not aPackage.ignoreNamespace())]using namespace [getPackageName()/];[/if]
+[if (not aPackage.ignoreNamespace())]using namespace [aPackage.generateNamespace(false)/];[/if]
 
 // [protected ('functions')] 
 // You may manually edit additional functions, won't be overwritten upon generation.
@@ -71,21 +85,115 @@ int main ()
 	std::shared_ptr<[packageName/]Factory> factory = [packageName/]Factory::eInstance();
 	std::shared_ptr<[packageName/]Package> package = [packageName/]Package::eInstance();
 
-[if (hasMainSourceCode())]
-[getMainSourceCode()/]
+	[if (hasMainSourceCode())]
+	[getMainSourceCode()/]
+	[/if]
+	// [protected ('main')]
+	// You may manually edit the following lines, won't be overwritten upon generation.
 
-[/if]
-// [protected ('main')]
-// You may manually edit the following lines, won't be overwritten upon generation.
-
-// [/protected]
+	// [/protected]
 
     return 0;
-
 }
 [/file]
+[/template]
 
-[comment	build application files/]
+[template private generateApplicationFromActivity(aPackage : Package) { packageName : String = getPackageName(); }]
+[file ('../application/src/main.cpp', false, 'UTF-8')]
+#include <iostream>
+#include <memory>
+#include <vector>
+
+[if (not aPackage.allOwnedElements()->filter(Activity)->isEmpty())]
+#include "abstractDataTypes/Bag.hpp"
+#include "abstractDataTypes/Any.hpp"
+#include "abstractDataTypes/SubsetUnion.hpp"
+[let mainActivity : Activity = aPackage.getMainActivity()]
+[if (mainActivity.owner.oclIsKindOf(Classifier))]
+#include "[mainActivity.owner.oclAsType(Classifier).getNearestPackage().generateNamespacePath(false)/]/[mainActivity.owner.oclAsType(Classifier).name.toUpperFirst()/].hpp"
+#include "[mainActivity.owner.oclAsType(Classifier).getNearestPackage().generateNamespacePath(false)/]/[mainActivity.owner.oclAsType(Classifier).getNearestPackage().getPackageName()/]Package.hpp"
+#include "[mainActivity.owner.oclAsType(Classifier).getNearestPackage().generateNamespacePath(false)/]/[mainActivity.owner.oclAsType(Classifier).getNearestPackage().getPackageName()/]Factory.hpp"
+[else]
+#include "[mainActivity.getNearestPackage().generateNamespacePath(false)/]/[mainActivity.getNearestPackage().getPackageName()/]Package.hpp"
+[/if]
+[for ( type : Type | mainActivity.ownedParameter.type->asOrderedSet())]
+#include "[type.getNearestPackage().generateNamespacePath(false)/]/[type.name/].hpp"
+[/for]
+#include "pluginFramework/PluginFramework.hpp"
+#include "pluginFramework/UMLExecutionModelPlugin.hpp"
+[/let]
+[else]
+//Info: No main activity found! Mark one activity as the main activity using the proper annotation in the model.
+[/if]
+
+using namespace [aPackage.getPackageName()/];
+
+int main()
+{	
+	[if (not aPackage.allOwnedElements()->filter(Activity)->isEmpty())]
+    //executing main activity
+	[let mainActivity : Activity = aPackage.getMainActivity()]
+	[mainActivity.generateParameterInstances(aPackage)/]
+	std::shared_ptr<[if (mainActivity.owner.oclIsKindOf(Classifier))][mainActivity.owner.oclAsType(Classifier).generateNamespaceName(false)/][else]uml::Element[/if]> element = [if (mainActivity.owner.oclIsKindOf(Classifier))][mainActivity.owner.oclAsType(Classifier).generateNamespace(false)/]::[mainActivity.owner.oclAsType(Classifier).getNearestPackage().getPackageName()/]Factory::eInstance()->create[mainActivity.owner.oclAsType(Classifier).name.toUpperFirst()/]()[else]nullptr[/if];
+
+	std::shared_ptr<PluginFramework> pluginFramework = PluginFramework::eInstance();
+	std::string pluginName = "[mainActivity.getRootPackage().getPackageName()/]Exec";
+	std::shared_ptr<MDE4CPPPlugin> plugin = pluginFramework->findPluginByName(pluginName);
+	if (plugin)
+	{
+		DEBUG_MESSAGE(std::cout << "plugin" << plugin->eNAME() << " found" << std::endl;)
+
+		std::shared_ptr<UMLExecutionModelPlugin> executionPlugin = std::dynamic_pointer_cast<UMLExecutionModelPlugin>(plugin);
+		if (executionPlugin)
+		{
+			DEBUG_MESSAGE(std::cout << "JIHA fumlplugin " << executionPlugin->eNAME() << " is accessable" << std::endl;)
+
+			std::shared_ptr<std::vector<Any>> parameterList(new std::vector<Any>());
+			[for (par : Parameter | mainActivity.ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in)))]
+			parameterList->push_back(eAny([par.name/]));
+			[/for]
+			Any activityResult = executionPlugin->executeActivity([mainActivity.generatePackageGetterCall()/], parameterList, element);
+
+
+			[if (mainActivity.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->notEmpty())]
+			[let returnParameter : Parameter = mainActivity.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->first()]
+			[returnParameter.type.generateCppType(false)/] returnValue = activityResult->get<[returnParameter.type.generateCppType(false)/]>();
+			DEBUG_MESSAGE(
+			std::cout << "The activity has a return parameter" << std::endl;
+			std::cout << "Parameter name: [returnParameter.name/]"<< std::endl;
+			if(returnValue == nullptr)
+			{
+				std::cout << "The returned value was nullptr" << std::endl;
+			}
+			else
+			{
+				std::cout << "The returned value was " << returnValue << std::endl;
+			}
+			)
+			[/let]
+			[else]
+			DEBUG_MESSAGE(std::cout << "The activity did not return any result." << std::endl;)
+			[/if]
+		}
+		else
+		{
+			std::cout << "plugin " << plugin->eNAME() << " is not a fuml based plugin" << std::endl;
+		}
+	}
+	else
+	{ 
+		std::cout << "plugin" << pluginName << " not found" << std::endl;
+	}
+	[/let]
+	[else]
+	//Info: No main activity found! Mark one activity as the main activity using the proper annotation in the model.
+	[/if]
+    return EXIT_SUCCESS;
+}
+[/file]
+[/template]
+
+[template private generateApplicationCMakeLists(aPackage : Package) { packageName : String = getPackageName(); }]
 [file ('../application/src/CMakeLists.txt', false, 'UTF-8')]
 #############################################################################
 #																			#
@@ -164,8 +272,9 @@ INSTALL(TARGETS ${PROJECT_NAME}
 	RUNTIME DESTINATION ${MDE4CPP_HOME}/application/bin
 )
 [/file]
+[/template]
 
-[comment gradle file for compile command of application /]
+[template private generateApplicationGradleFile(aPackage : Package) { packageName : String = getPackageName(); }]
 [file ('../application/build.gradle', false, 'UTF-8')]
 plugins {
 	id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.5"
@@ -204,8 +313,6 @@ task clean {
 	}
 }
 [/file]
-
-[aPackage.generateEclipseFiles(true)/]
 [/template]
 
 [template private generateCMakeFindLibraryCommands(aPackage : Package, ending : String, folderName : String, system : String)]
@@ -216,15 +323,14 @@ ELSE()
 ENDIF()
 [/template]
 
-[query private libraryVariableNameSuffix(debugMode : Boolean) : String = if (debugMode) then 'DEBUG' else 'RELEASE' endif/]
-[query private libraryNameSuffix(debugMode : Boolean) : String = if (debugMode) then 'd' else '' endif/]
-[query private buildModeCMakeProperty(debugMode : Boolean) : String = if (debugMode) then 'debug' else 'optimized' endif/]
-
 [template private generateCMakeFindLibraryCommand(aPackage : Package, ending : String, folderName : String, debugMode : Boolean, system : String)]
 [for (packName : String | aPackage.collectIncludingModelNames())]
 FIND_LIBRARY([packName.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/] [packName/][libraryNameSuffix(debugMode)/][ending/] ${MDE4CPP_HOME}/application/[folderName/])
 [/for]
-FIND_LIBRARY([aPackage.getPackageName().toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/] [aPackage.getPackageName().toUpperFirst()/][libraryNameSuffix(debugMode)/][ending/] ${MDE4CPP_HOME}/application/[folderName/])
+FIND_LIBRARY([aPackage.getPackageName().toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/] [aPackage.getPackageName()/][libraryNameSuffix(debugMode)/][ending/] ${MDE4CPP_HOME}/application/[folderName/])
+[if (aPackage.isActivityWithMainKeyExisting())]
+FIND_LIBRARY(PLUGINFRAMEWORK_[libraryVariableNameSuffix(debugMode)/] pluginFramework[libraryNameSuffix(debugMode)/][ending/] ${MDE4CPP_HOME}/application/[folderName/])
+[/if]
 # ['['/]protected ('library_[system/]_[buildModeCMakeProperty(debugMode)/]')[']'/]
 # You may manually edit the following lines, won't be overwritten upon generation.
 
@@ -237,6 +343,9 @@ TARGET_LINK_LIBRARIES(${PROJECT_NAME}
 	[buildModeCMakeProperty(debugMode)/] ${[packName.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/]}
 [/for]
 	[buildModeCMakeProperty(debugMode)/] ${[aPackage.getPackageName().toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/]}
+[if (aPackage.isActivityWithMainKeyExisting())]
+	[buildModeCMakeProperty(debugMode)/] ${PLUGINFRAMEWORK_[libraryVariableNameSuffix(debugMode)/]}
+[/if]
 
 	# ['['/]protected ('library_linking_[buildModeCMakeProperty(debugMode)/]')[']'/]
 	# You may manually edit the following lines, won't be overwritten upon generation.
@@ -244,3 +353,6 @@ TARGET_LINK_LIBRARIES(${PROJECT_NAME}
 	# ['['/]/protected[']'/]
 )
 [/template]
+[query private libraryVariableNameSuffix(debugMode : Boolean) : String = if (debugMode) then 'DEBUG' else 'RELEASE' endif/]
+[query private libraryNameSuffix(debugMode : Boolean) : String = if (debugMode) then 'd' else '' endif/]
+[query private buildModeCMakeProperty(debugMode : Boolean) : String = if (debugMode) then 'debug' else 'optimized' endif/]

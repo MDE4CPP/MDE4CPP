@@ -11,12 +11,28 @@
 
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
+#include "StandardProfile/StandardProfileFactory.hpp"
 #include "StandardProfile/impl/StandardProfilePackageImpl.hpp"
 #include "uml/Stereotype.hpp"
+
+//Types included from attributes, operation parameters, imports and composite owner classes
 #include "uml/Component.hpp"
 
+//Packges and Factories included from types of attributes, operation parameters, imports and composite owner classes
+#include "uml/umlFactory.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
+//Packages of included Enumerations
 
+//Includes of PluginFramework (if required)
+
+//Includes of OpaqueBevaiors (if required)
+
+//Includes from InstanceValues (if required)
+
+//Includes from Ports typed by interfaces (if required)
+
+//Includes from roles of ConnectorEnds (if required)
 
 using namespace StandardProfile;
 
@@ -25,6 +41,12 @@ using namespace StandardProfile;
 //*********************************
 ServiceImpl::ServiceImpl()
 {
+	#ifdef ADD_COUNT
+		ADD_COUNT("ServiceImpl()");
+	#endif
+
+	DEBUG_MESSAGE(std::cout<<"Service is created..."<<std::endl;)
+
 	//***********************************
 	// init Get Set
 	//getter init
@@ -34,16 +56,16 @@ ServiceImpl::ServiceImpl()
 	
 	m_unsetterMap.insert(std::pair<std::string,std::function<void()>>("StandardProfile::Service::base_Component",[this](){m_base_Component = std::shared_ptr<uml::Component>(nullptr);}));
 	 
-
-	// init properties without default
-	
-
-	
 }
 
 
 ServiceImpl::~ServiceImpl()
 {
+	#ifdef SUB_COUNT
+		SUB_COUNT("ServiceImpl()");
+	#endif
+
+	DEBUG_MESSAGE(std::cout<<"Service is destroyed..."<<std::endl;)
 }
 
 ServiceImpl::ServiceImpl(const ServiceImpl & obj):ServiceImpl()
@@ -52,6 +74,7 @@ ServiceImpl::ServiceImpl(const ServiceImpl & obj):ServiceImpl()
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Service "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	instantiate();
 }
 
 std::shared_ptr<ecore::EObject>  ServiceImpl::copy() const
@@ -65,6 +88,21 @@ std::shared_ptr<ecore::EObject>  ServiceImpl::copy() const
 std::shared_ptr<uml::Class> ServiceImpl::getMetaClass()
 {
 	return StandardProfilePackageImpl::eInstance()->get_StandardProfile_Service();
+}
+
+void ServiceImpl::instantiate()
+{   
+	
+}
+
+void ServiceImpl::destroy()
+{	
+
+	//Erase properties
+	//deleting property base_Component
+	m_base_Component.reset();
+	
+	//Erase back reference to owner
 }
 
 //*********************************

@@ -6,8 +6,8 @@
 #include <stdlib.h>
 
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
+#include "uml/umlFactory.hpp"
+#include "uml/umlPackage.hpp"
 #include "uml/Package.hpp"
 #include "uml/Class.hpp"
 #include "uml/Property.hpp"
@@ -24,7 +24,7 @@ int main(int argc, char *argv[])
 
 	for (int i=0; i<1; i++){
 	
-    shared_ptr<uml::UmlFactory> umlFactory = uml::UmlFactory::eInstance();
+    shared_ptr<uml::umlFactory> umlFactory = uml::umlFactory::eInstance();
     cout << "factory created " << umlFactory << endl;
     shared_ptr<UML::UMLPackage> umlPackage = UML::UMLPackage::eInstance();
     cout << "package created " << umlPackage << endl;
@@ -38,7 +38,7 @@ int main(int argc, char *argv[])
 		char buffer [33];
 
 		start = std::chrono::high_resolution_clock::now();
-		for (int i=0; i<10; i++)
+		for (int i=0; i<10000; i++)
 		{
 			shared_ptr<uml::Class> classObject = umlFactory->createClass_in_Package(package);
 			classObject->setName("Class " + sprintf (buffer, "%i", i));

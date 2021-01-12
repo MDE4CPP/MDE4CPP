@@ -15,10 +15,11 @@
 [module generateBuildFile('http://www.eclipse.org/emf/2002/Ecore')]
 
 [import ecore4CPP::generator::main::helper /]
+[import ecore4CPP::generator::main::helpers::keywords /]
 
 [query public metaModelLibraries(anEPackage : EPackage) : Set(EPackage) = OrderedSet{anEPackage.eAllContents().eClass().getRootPackage(),anEPackage.eAllContents(EClass).eAllSuperTypes.getRootPackage(),anEPackage.eAllContents(EStructuralFeature).eType.getRootPackage(),anEPackage.eAllContents(EParameter).eType.getRootPackage()}->flatten()->sortedBy(name) /]
 
-[template public generateBuildFile(aPackage : EPackage) { packageName : String = aPackage.name; }]
+[template public generateBuildFile(aPackage : EPackage) { packageName : String = aPackage.generateNamespacePath(); }]
 [comment	generate CMakeLists.txt for model libary/]
 [file (packageName.concat('/').concat('CMakeLists.txt'), false, 'UTF-8')]
 #############################################################################
@@ -57,14 +58,12 @@ SET(CMAKE_CXX_FLAGS_RELEASE " -O3  ${ENABLED_DEBUG_MESSAGE}")
 string(REPLACE "\\" "/" MDE4CPP_HOME $ENV{MDE4CPP_HOME})
 
 SET(SOURCE_FILES
-	impl/[packageName.toUpperFirst()/]FactoryImpl.cpp
-	[packageName.toUpperFirst()/]Factory.cpp
-	impl/[packageName.toUpperFirst()/]PackageImpl.cpp
-	impl/[packageName.toUpperFirst()/]PackageImpl_Creation.cpp
-	impl/[packageName.toUpperFirst()/]PackageImpl_Initialization.cpp
-	[packageName.toUpperFirst()/]Package.cpp
-	impl/[packageName.toUpperFirst()/]PluginImpl.cpp
-	[packageName.toUpperFirst()/]Plugin.cpp
+# Factories and packages
+	[aPackage.generatePackageAndFactory()/]
+# Package plugin
+	impl/[packageName/]PluginImpl.cpp
+	[packageName/]Plugin.cpp
+# Package content
 [for (aClass : EClass | aPackage.eAllContents(EClass)->asOrderedSet()->sortedBy(name))]
 	[aClass.getNamespacePathWithoutRoot()/]impl/[aClass.name.toUpperFirst()/]Impl.cpp
 [/for]
@@ -137,6 +136,11 @@ task build[packageName.toUpperFirst()/]() {
 [for (pack : EPackage | aPackage.metaModelLibraries()) before ('\n') ? (not(pack.name = aPackage.name))]
 	dependsOn getRootProject().getTasksByName('build[pack.name.toUpperFirst()/]', true)
 [/for]
+[for (libName : String | aPackage.eAllContents()->filter(EClass)->select(c : EClass | c.hasKey(keyLibrary())).valueKeys(keyLibrary())->asOrderedSet())]
+[if (not (libName.oclIsUndefined() or libName = ''))]
+	dependsOn getRootProject().getTasksByName('build[libName.toUpperFirst()/]', true)
+[/if]
+[/for]
 }
 
 tasks.getByPath('src_gen:compile[packageName.toUpperFirst()/]').mustRunAfter tasks.getByPath('model:generate[packageName.toUpperFirst()/]')
@@ -197,6 +201,15 @@ task compile[packageName.toUpperFirst()/](type: tui.sse.mde4cpp.MDE4CPPCompile) 
 	dependsOn [pack.name/]
 	inputs.files([pack.name/].outputs)
 [/for]
+[for (libName : String | aPackage.eAllContents()->filter(EClass)->select(c : EClass | c.hasKey(keyLibrary())).valueKeys(keyLibrary())->asOrderedSet())]
+[if (not (libName.oclIsUndefined() or libName = ''))]
+
+	// dependency to model '[libName/]'
+	def [libName/] = getRootProject().getTasksByName('compile[libName.toUpperFirst()/]', true)
+	dependsOn [libName/]
+	inputs.files([libName/].outputs)
+[/if]
+[/for]
 }
 
 task clean {
@@ -209,6 +222,16 @@ task clean {
 	}
 }
 [/file]
+[/template]
+
+[template private generatePackageAndFactory(aPackage : EPackage) { packageName : String = aPackage.name; }]	
+[aPackage.getNamespacePathWithoutRoot()/][packageName/]Factory.cpp
+[aPackage.getNamespacePathWithoutRoot()/]impl/[packageName/]FactoryImpl.cpp
+[aPackage.getNamespacePathWithoutRoot()/][packageName/]Package.cpp
+[aPackage.getNamespacePathWithoutRoot()/]impl/[packageName/]PackageImpl.cpp
+[aPackage.getNamespacePathWithoutRoot()/]impl/[packageName/]PackageImpl_Creation.cpp
+[aPackage.getNamespacePathWithoutRoot()/]impl/[packageName/]PackageImpl_Initialization.cpp
+[aPackage.eSubpackages.generatePackageAndFactory()/]
 [/template]
 
 [template private generateCMakeFindLibraryCommands(aPackage : EPackage, ending : String, folderName : String)]
@@ -227,12 +250,22 @@ ENDIF()
 [for (pack : EPackage | aPackage.metaModelLibraries()) ? (not(pack.name = aPackage.name))]
 FIND_LIBRARY([pack.name.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/] [pack.name/][libraryNameSuffix(debugMode)/][ending/] ${MDE4CPP_HOME}/application/[folderName/])
 [/for]
+[for (libName : String | aPackage.eAllContents()->filter(EClass)->select(c : EClass | c.hasKey(keyLibrary())).valueKeys(keyLibrary())->asOrderedSet())]
+[if (not (libName.oclIsUndefined() or libName = ''))]
+FIND_LIBRARY([libName.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/] [libName/][libraryNameSuffix(debugMode)/][ending/] ${MDE4CPP_HOME}/application/[folderName/])
+[/if]
+[/for]
 [/template]
 
 [template private generateLibraryLinking(aPackage : EPackage, debugMode : Boolean)]
 TARGET_LINK_LIBRARIES(${PROJECT_NAME}
 [for (pack : EPackage | aPackage.metaModelLibraries()) ? (not(pack.name = aPackage.name))]
 	[buildModeCMakeProperty(debugMode)/] ${[pack.name.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/]}
+[/for]
+[for (libName : String | aPackage.eAllContents()->filter(EClass)->select(c : EClass | c.hasKey(keyLibrary())).valueKeys(keyLibrary())->asOrderedSet())]
+[if (not (libName.oclIsUndefined() or libName = ''))]
+	[buildModeCMakeProperty(debugMode)/] ${[libName.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/]}
+[/if]
 [/for]
 )
 [/template]

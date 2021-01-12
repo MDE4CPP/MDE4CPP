@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -26,23 +25,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -66,10 +54,11 @@
 
 #include "uml/StringExpression.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -79,72 +68,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 ActivityPartitionImpl::ActivityPartitionImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		/*Subset*/
-		m_edge.reset(new Subset<uml::ActivityEdge, uml::ActivityEdge >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_edge - Subset<uml::ActivityEdge, uml::ActivityEdge >()" << std::endl;
-		#endif
-	
-	
-
-		/*Subset*/
-		m_node.reset(new Subset<uml::ActivityNode, uml::ActivityNode >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_node - Subset<uml::ActivityNode, uml::ActivityNode >()" << std::endl;
-		#endif
-	
-	
-
-	
-
-		/*Subset*/
-		m_subpartition.reset(new Subset<uml::ActivityPartition, uml::ActivityGroup >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_subpartition - Subset<uml::ActivityPartition, uml::ActivityGroup >()" << std::endl;
-		#endif
-	
-	
-
-	
-
-	//Init references
-		/*Subset*/
-		m_edge->initSubset(m_containedEdge);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_edge - Subset<uml::ActivityEdge, uml::ActivityEdge >(m_containedEdge)" << std::endl;
-		#endif
-	
-	
-
-		/*Subset*/
-		m_node->initSubset(m_containedNode);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_node - Subset<uml::ActivityNode, uml::ActivityNode >(m_containedNode)" << std::endl;
-		#endif
-	
-	
-
-	
-
-		/*Subset*/
-		m_subpartition->initSubset(m_subgroup);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_subpartition - Subset<uml::ActivityPartition, uml::ActivityGroup >(m_subgroup)" << std::endl;
-		#endif
-	
-	
-
-	
+{	
 }
 
 ActivityPartitionImpl::~ActivityPartitionImpl()
@@ -154,65 +78,44 @@ ActivityPartitionImpl::~ActivityPartitionImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+ActivityPartitionImpl::ActivityPartitionImpl(std::weak_ptr<uml::Activity > par_inActivity)
+:ActivityPartitionImpl()
+{
+	m_inActivity = par_inActivity;
+	m_owner = par_inActivity;
+}
 
 //Additional constructor for the containments back reference
-			ActivityPartitionImpl::ActivityPartitionImpl(std::weak_ptr<uml::Activity > par_inActivity)
-			:ActivityPartitionImpl()
-			{
-			    m_inActivity = par_inActivity;
-				m_owner = par_inActivity;
-			}
-
-
-
-
+ActivityPartitionImpl::ActivityPartitionImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:ActivityPartitionImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			ActivityPartitionImpl::ActivityPartitionImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:ActivityPartitionImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
-
-
-
+ActivityPartitionImpl::ActivityPartitionImpl(std::weak_ptr<uml::Element > par_owner)
+:ActivityPartitionImpl()
+{
+	m_owner = par_owner;
+}
 
 //Additional constructor for the containments back reference
-			ActivityPartitionImpl::ActivityPartitionImpl(std::weak_ptr<uml::Element > par_owner)
-			:ActivityPartitionImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-
-
+ActivityPartitionImpl::ActivityPartitionImpl(std::weak_ptr<uml::ActivityGroup > par_superGroup)
+:ActivityPartitionImpl()
+{
+	m_superGroup = par_superGroup;
+	m_owner = par_superGroup;
+}
 
 //Additional constructor for the containments back reference
-			ActivityPartitionImpl::ActivityPartitionImpl(std::weak_ptr<uml::ActivityGroup > par_superGroup)
-			:ActivityPartitionImpl()
-			{
-			    m_superGroup = par_superGroup;
-				m_owner = par_superGroup;
-			}
-
-
-
-
-
-//Additional constructor for the containments back reference
-			ActivityPartitionImpl::ActivityPartitionImpl(std::weak_ptr<uml::ActivityPartition > par_superPartition)
-			:ActivityPartitionImpl()
-			{
-			    m_superPartition = par_superPartition;
-				m_superGroup = par_superPartition;
-			}
-
-
-
-
+ActivityPartitionImpl::ActivityPartitionImpl(std::weak_ptr<uml::ActivityPartition > par_superPartition)
+:ActivityPartitionImpl()
+{
+	m_superPartition = par_superPartition;
+	m_superGroup = par_superPartition;
+}
 
 
 ActivityPartitionImpl::ActivityPartitionImpl(const ActivityPartitionImpl & obj):ActivityPartitionImpl()
@@ -293,12 +196,11 @@ ActivityPartitionImpl::ActivityPartitionImpl(const ActivityPartitionImpl & obj):
 		std::cout << "Copying the Subset: " << "m_subpartition" << std::endl;
 	#endif
 
-		/*Subset*/
-		m_subpartition->initSubset(m_subgroup);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_subpartition - Subset<uml::ActivityPartition, uml::ActivityGroup >(m_subgroup)" << std::endl;
-		#endif
-	
+	/*Subset*/
+	m_subpartition->initSubset(getSubgroup());
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Initialising value Subset: " << "m_subpartition - Subset<uml::ActivityPartition, uml::ActivityGroup >(getSubgroup())" << std::endl;
+	#endif
 	
 }
 
@@ -311,20 +213,33 @@ std::shared_ptr<ecore::EObject>  ActivityPartitionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ActivityPartitionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getActivityPartition_Class();
+	return uml::umlPackage::eInstance()->getActivityPartition_Class();
 }
 
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute isDimension
+*/
+bool ActivityPartitionImpl::getIsDimension() const 
+{
+	return m_isDimension;
+}
+
 void ActivityPartitionImpl::setIsDimension(bool _isDimension)
 {
 	m_isDimension = _isDimension;
 } 
 
-bool ActivityPartitionImpl::getIsDimension() const 
+
+
+/*
+Getter & Setter for attribute isExternal
+*/
+bool ActivityPartitionImpl::getIsExternal() const 
 {
-	return m_isDimension;
+	return m_isExternal;
 }
 
 void ActivityPartitionImpl::setIsExternal(bool _isExternal)
@@ -332,10 +247,7 @@ void ActivityPartitionImpl::setIsExternal(bool _isExternal)
 	m_isExternal = _isExternal;
 } 
 
-bool ActivityPartitionImpl::getIsExternal() const 
-{
-	return m_isExternal;
-}
+
 
 //*********************************
 // Operations
@@ -367,74 +279,201 @@ bool ActivityPartitionImpl::represents_property_and_is_contained(Any diagnostics
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference edge
+*/
 std::shared_ptr<Subset<uml::ActivityEdge, uml::ActivityEdge>> ActivityPartitionImpl::getEdge() const
 {
+	if(m_edge == nullptr)
+	{
+		/*Subset*/
+		m_edge.reset(new Subset<uml::ActivityEdge, uml::ActivityEdge >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_edge - Subset<uml::ActivityEdge, uml::ActivityEdge >()" << std::endl;
+		#endif
+		
+		/*Subset*/
+		m_edge->initSubset(getContainedEdge());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_edge - Subset<uml::ActivityEdge, uml::ActivityEdge >(getContainedEdge())" << std::endl;
+		#endif
+		
+	}
 
     return m_edge;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference node
+*/
 std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode>> ActivityPartitionImpl::getNode() const
 {
+	if(m_node == nullptr)
+	{
+		/*Subset*/
+		m_node.reset(new Subset<uml::ActivityNode, uml::ActivityNode >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_node - Subset<uml::ActivityNode, uml::ActivityNode >()" << std::endl;
+		#endif
+		
+		/*Subset*/
+		m_node->initSubset(getContainedNode());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_node - Subset<uml::ActivityNode, uml::ActivityNode >(getContainedNode())" << std::endl;
+		#endif
+		
+	}
 
     return m_node;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference represents
+*/
 std::shared_ptr<uml::Element > ActivityPartitionImpl::getRepresents() const
 {
 
     return m_represents;
 }
+
 void ActivityPartitionImpl::setRepresents(std::shared_ptr<uml::Element> _represents)
 {
     m_represents = _represents;
 }
 
+
+
+/*
+Getter & Setter for reference subpartition
+*/
 std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup>> ActivityPartitionImpl::getSubpartition() const
 {
+	if(m_subpartition == nullptr)
+	{
+		/*Subset*/
+		m_subpartition.reset(new Subset<uml::ActivityPartition, uml::ActivityGroup >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_subpartition - Subset<uml::ActivityPartition, uml::ActivityGroup >()" << std::endl;
+		#endif
+		
+		/*Subset*/
+		m_subpartition->initSubset(getSubgroup());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_subpartition - Subset<uml::ActivityPartition, uml::ActivityGroup >(getSubgroup())" << std::endl;
+		#endif
+		
+	}
 
     return m_subpartition;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference superPartition
+*/
 std::weak_ptr<uml::ActivityPartition > ActivityPartitionImpl::getSuperPartition() const
 {
 
     return m_superPartition;
 }
+
 void ActivityPartitionImpl::setSuperPartition(std::shared_ptr<uml::ActivityPartition> _superPartition)
 {
     m_superPartition = _superPartition;
 }
+
+
 
 //*********************************
 // Union Getter
 //*********************************
 std::shared_ptr<Union<uml::ActivityEdge>> ActivityPartitionImpl::getContainedEdge() const
 {
+	if(m_containedEdge == nullptr)
+	{
+		/*Union*/
+		m_containedEdge.reset(new Union<uml::ActivityEdge>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_containedEdge - Union<uml::ActivityEdge>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_containedEdge;
 }
+
 std::shared_ptr<Union<uml::ActivityNode>> ActivityPartitionImpl::getContainedNode() const
 {
+	if(m_containedNode == nullptr)
+	{
+		/*Union*/
+		m_containedNode.reset(new Union<uml::ActivityNode>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_containedNode - Union<uml::ActivityNode>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_containedNode;
 }
+
 std::shared_ptr<Union<uml::Element>> ActivityPartitionImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > ActivityPartitionImpl::getOwner() const
 {
 	return m_owner;
 }
+
 std::shared_ptr<SubsetUnion<uml::ActivityGroup, uml::Element>> ActivityPartitionImpl::getSubgroup() const
 {
+	if(m_subgroup == nullptr)
+	{
+		/*SubsetUnion*/
+		m_subgroup.reset(new SubsetUnion<uml::ActivityGroup, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_subgroup - SubsetUnion<uml::ActivityGroup, uml::Element >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_subgroup->initSubsetUnion(getOwnedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_subgroup - SubsetUnion<uml::ActivityGroup, uml::Element >(getOwnedElement())" << std::endl;
+		#endif
+		
+	}
 	return m_subgroup;
 }
+
 std::weak_ptr<uml::ActivityGroup > ActivityPartitionImpl::getSuperGroup() const
 {
 	return m_superGroup;
 }
+
+
 
 
 std::shared_ptr<ActivityPartition> ActivityPartitionImpl::getThisActivityPartitionPtr() const
@@ -482,7 +521,7 @@ Any ActivityPartitionImpl::eGet(int featureID, bool resolve, bool coreType) cons
 {
 	switch(featureID)
 	{
-		case UmlPackage::ACTIVITYPARTITION_ATTRIBUTE_EDGE:
+		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_EDGE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::ActivityEdge>::iterator iter = m_edge->begin();
@@ -492,13 +531,13 @@ Any ActivityPartitionImpl::eGet(int featureID, bool resolve, bool coreType) cons
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //1420
+			return eAny(tempList); //1320
 		}
-		case UmlPackage::ACTIVITYPARTITION_ATTRIBUTE_ISDIMENSION:
-			return eAny(getIsDimension()); //1414
-		case UmlPackage::ACTIVITYPARTITION_ATTRIBUTE_ISEXTERNAL:
-			return eAny(getIsExternal()); //1415
-		case UmlPackage::ACTIVITYPARTITION_ATTRIBUTE_NODE:
+		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_ISDIMENSION:
+			return eAny(getIsDimension()); //1314
+		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_ISEXTERNAL:
+			return eAny(getIsExternal()); //1315
+		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_NODE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::ActivityNode>::iterator iter = m_node->begin();
@@ -508,11 +547,11 @@ Any ActivityPartitionImpl::eGet(int featureID, bool resolve, bool coreType) cons
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //1416
+			return eAny(tempList); //1316
 		}
-		case UmlPackage::ACTIVITYPARTITION_ATTRIBUTE_REPRESENTS:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getRepresents())); //1417
-		case UmlPackage::ACTIVITYPARTITION_ATTRIBUTE_SUBPARTITION:
+		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_REPRESENTS:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getRepresents())); //1317
+		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_SUBPARTITION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::ActivityPartition>::iterator iter = m_subpartition->begin();
@@ -522,10 +561,10 @@ Any ActivityPartitionImpl::eGet(int featureID, bool resolve, bool coreType) cons
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //1418
+			return eAny(tempList); //1318
 		}
-		case UmlPackage::ACTIVITYPARTITION_ATTRIBUTE_SUPERPARTITION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSuperPartition().lock())); //1419
+		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_SUPERPARTITION:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSuperPartition().lock())); //1319
 	}
 	return ActivityGroupImpl::eGet(featureID, resolve, coreType);
 }
@@ -533,20 +572,20 @@ bool ActivityPartitionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::ACTIVITYPARTITION_ATTRIBUTE_EDGE:
-			return getEdge() != nullptr; //1420
-		case UmlPackage::ACTIVITYPARTITION_ATTRIBUTE_ISDIMENSION:
-			return getIsDimension() != false; //1414
-		case UmlPackage::ACTIVITYPARTITION_ATTRIBUTE_ISEXTERNAL:
-			return getIsExternal() != false; //1415
-		case UmlPackage::ACTIVITYPARTITION_ATTRIBUTE_NODE:
-			return getNode() != nullptr; //1416
-		case UmlPackage::ACTIVITYPARTITION_ATTRIBUTE_REPRESENTS:
-			return getRepresents() != nullptr; //1417
-		case UmlPackage::ACTIVITYPARTITION_ATTRIBUTE_SUBPARTITION:
-			return getSubpartition() != nullptr; //1418
-		case UmlPackage::ACTIVITYPARTITION_ATTRIBUTE_SUPERPARTITION:
-			return getSuperPartition().lock() != nullptr; //1419
+		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_EDGE:
+			return getEdge() != nullptr; //1320
+		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_ISDIMENSION:
+			return getIsDimension() != false; //1314
+		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_ISEXTERNAL:
+			return getIsExternal() != false; //1315
+		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_NODE:
+			return getNode() != nullptr; //1316
+		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_REPRESENTS:
+			return getRepresents() != nullptr; //1317
+		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_SUBPARTITION:
+			return getSubpartition() != nullptr; //1318
+		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_SUPERPARTITION:
+			return getSuperPartition().lock() != nullptr; //1319
 	}
 	return ActivityGroupImpl::internalEIsSet(featureID);
 }
@@ -554,7 +593,7 @@ bool ActivityPartitionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::ACTIVITYPARTITION_ATTRIBUTE_EDGE:
+		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_EDGE:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -590,21 +629,21 @@ bool ActivityPartitionImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case UmlPackage::ACTIVITYPARTITION_ATTRIBUTE_ISDIMENSION:
+		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_ISDIMENSION:
 		{
 			// BOOST CAST
 			bool _isDimension = newValue->get<bool>();
-			setIsDimension(_isDimension); //1414
+			setIsDimension(_isDimension); //1314
 			return true;
 		}
-		case UmlPackage::ACTIVITYPARTITION_ATTRIBUTE_ISEXTERNAL:
+		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_ISEXTERNAL:
 		{
 			// BOOST CAST
 			bool _isExternal = newValue->get<bool>();
-			setIsExternal(_isExternal); //1415
+			setIsExternal(_isExternal); //1315
 			return true;
 		}
-		case UmlPackage::ACTIVITYPARTITION_ATTRIBUTE_NODE:
+		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_NODE:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -640,15 +679,15 @@ bool ActivityPartitionImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case UmlPackage::ACTIVITYPARTITION_ATTRIBUTE_REPRESENTS:
+		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_REPRESENTS:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Element> _represents = std::dynamic_pointer_cast<uml::Element>(_temp);
-			setRepresents(_represents); //1417
+			setRepresents(_represents); //1317
 			return true;
 		}
-		case UmlPackage::ACTIVITYPARTITION_ATTRIBUTE_SUBPARTITION:
+		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_SUBPARTITION:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -684,12 +723,12 @@ bool ActivityPartitionImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case UmlPackage::ACTIVITYPARTITION_ATTRIBUTE_SUPERPARTITION:
+		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_SUPERPARTITION:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ActivityPartition> _superPartition = std::dynamic_pointer_cast<uml::ActivityPartition>(_temp);
-			setSuperPartition(_superPartition); //1419
+			setSuperPartition(_superPartition); //1319
 			return true;
 		}
 	}
@@ -708,12 +747,11 @@ void ActivityPartitionImpl::load(std::shared_ptr<persistence::interfaces::XLoadH
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -774,8 +812,9 @@ void ActivityPartitionImpl::loadAttributes(std::shared_ptr<persistence::interfac
 	ActivityGroupImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ActivityPartitionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void ActivityPartitionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -786,7 +825,7 @@ void ActivityPartitionImpl::loadNode(std::string nodeName, std::shared_ptr<persi
 			{
 				typeName = "ActivityPartition";
 			}
-			std::shared_ptr<ecore::EObject> subpartition = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::ACTIVITYPARTITION_ATTRIBUTE_SUPERPARTITION);
+			std::shared_ptr<ecore::EObject> subpartition = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_SUPERPARTITION);
 			if (subpartition != nullptr)
 			{
 				loadHandler->handleChild(subpartition);
@@ -802,15 +841,15 @@ void ActivityPartitionImpl::loadNode(std::string nodeName, std::shared_ptr<persi
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
-
-	ActivityGroupImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	ActivityGroupImpl::loadNode(nodeName, loadHandler);
 }
 
 void ActivityPartitionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case UmlPackage::ACTIVITYPARTITION_ATTRIBUTE_EDGE:
+		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_EDGE:
 		{
 			std::shared_ptr<Bag<uml::ActivityEdge>> _edge = getEdge();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -824,7 +863,7 @@ void ActivityPartitionImpl::resolveReferences(const int featureID, std::list<std
 			return;
 		}
 
-		case UmlPackage::ACTIVITYPARTITION_ATTRIBUTE_NODE:
+		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_NODE:
 		{
 			std::shared_ptr<Bag<uml::ActivityNode>> _node = getNode();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -838,7 +877,7 @@ void ActivityPartitionImpl::resolveReferences(const int featureID, std::list<std
 			return;
 		}
 
-		case UmlPackage::ACTIVITYPARTITION_ATTRIBUTE_REPRESENTS:
+		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_REPRESENTS:
 		{
 			if (references.size() == 1)
 			{
@@ -850,7 +889,7 @@ void ActivityPartitionImpl::resolveReferences(const int featureID, std::list<std
 			return;
 		}
 
-		case UmlPackage::ACTIVITYPARTITION_ATTRIBUTE_SUPERPARTITION:
+		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_SUPERPARTITION:
 		{
 			if (references.size() == 1)
 			{
@@ -871,7 +910,6 @@ void ActivityPartitionImpl::save(std::shared_ptr<persistence::interfaces::XSaveH
 
 	ActivityGroupImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	NamedElementImpl::saveContent(saveHandler);
 	
 	ElementImpl::saveContent(saveHandler);
@@ -889,7 +927,7 @@ void ActivityPartitionImpl::saveContent(std::shared_ptr<persistence::interfaces:
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 		// Save 'subpartition'
 		for (std::shared_ptr<uml::ActivityPartition> subpartition : *this->getSubpartition()) 
@@ -897,7 +935,6 @@ void ActivityPartitionImpl::saveContent(std::shared_ptr<persistence::interfaces:
 			saveHandler->addReference(subpartition, "subpartition", subpartition->eClass() != package->getActivityPartition_Class());
 		}
 	
- 
 		// Add attributes
 		if ( this->eIsSet(package->getActivityPartition_Attribute_isDimension()) )
 		{

@@ -32,7 +32,7 @@ namespace persistence
 
 namespace uml
 {
-	class UmlFactory;
+	class umlFactory;
 }
 
 //Forward Declaration for used types
@@ -102,8 +102,10 @@ namespace uml
 namespace uml 
 {
 	/*!
-	 A LiteralNull specifies the lack of a value.
-	<p>From package UML::Values.</p> */
+	A LiteralNull specifies the lack of a value.
+	<p>From package UML::Values.</p>
+	*/
+	
 	class LiteralNull:virtual public LiteralSpecification
 	{
 		public:
@@ -123,6 +125,22 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
+			/*!
+			The query isComputable() is redefined to be true.
+			result = (true)
+			<p>From package UML::Values.</p>
+			*/
+			 
+			virtual bool isComputable() = 0;
+			
+			/*!
+			The query isNull() returns true.
+			result = (true)
+			<p>From package UML::Values.</p>
+			*/
+			 
+			virtual bool isNull() = 0;
+			
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -149,14 +167,20 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

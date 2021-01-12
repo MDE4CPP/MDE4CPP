@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class EnumerationLiteralImpl :virtual public InstanceSpecificationImpl, virtual public EnumerationLiteral 
+	class EnumerationLiteralImpl : virtual public InstanceSpecificationImpl, virtual public EnumerationLiteral 
 	{
 		public: 
 			EnumerationLiteralImpl(const EnumerationLiteralImpl & obj);
@@ -28,7 +28,7 @@ namespace uml
 			EnumerationLiteralImpl& operator=(EnumerationLiteralImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			EnumerationLiteralImpl();
 			virtual std::shared_ptr<EnumerationLiteral> getThisEnumerationLiteralPtr() const;
 			virtual void setThisEnumerationLiteralPtr(std::weak_ptr<EnumerationLiteral> thisEnumerationLiteralPtr);
@@ -64,8 +64,7 @@ namespace uml
 			//*********************************
 			
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<Bag<uml::Classifier> > getClassifiers() ;
 			
 			
@@ -79,28 +78,39 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 The Enumeration that this EnumerationLiteral is a member of.
-			<p>From package UML::SimpleClassifiers.</p> */
+			The Enumeration that this EnumerationLiteral is a member of.
+			<p>From package UML::SimpleClassifiers.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Enumeration > getEnumeration() const ;
 			
 			/*!
-			 The Enumeration that this EnumerationLiteral is a member of.
-			<p>From package UML::SimpleClassifiers.</p> */
-			virtual void setEnumeration(std::shared_ptr<uml::Enumeration> _enumeration_enumeration) ;
+			The Enumeration that this EnumerationLiteral is a member of.
+			<p>From package UML::SimpleClassifiers.</p>
+			*/
+			
+			virtual void setEnumeration(std::shared_ptr<uml::Enumeration> _enumeration) ;
+			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
@@ -114,7 +124,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

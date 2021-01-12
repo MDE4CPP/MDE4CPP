@@ -37,8 +37,8 @@
 [/for]
 
 [if (aPackage.eSuperPackage.oclIsUndefined())]
-[aPackage.generateFactoryImpl()/]
-[aPackage.generatePackageImpl()/]
+[aPackage.generateFactoryImpl(true)/]
+[aPackage.generatePackageImpl(true)/]
 [aPackage.generateEcorePlugin()/]
 
 [aPackage.generateBuildFile()/]

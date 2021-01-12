@@ -35,7 +35,7 @@ namespace persistence
 
 namespace uml
 {
-	class UmlFactory;
+	class umlFactory;
 }
 
 //Forward Declaration for used types
@@ -125,8 +125,10 @@ namespace uml
 namespace uml 
 {
 	/*!
-	 An InitialNode is a ControlNode that offers a single control token when initially enabled.
-	<p>From package UML::Activities.</p> */
+	An InitialNode is a ControlNode that offers a single control token when initially enabled.
+	<p>From package UML::Activities.</p>
+	*/
+	
 	class InitialNode:virtual public ControlNode
 	{
 		public:
@@ -147,13 +149,17 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 All the outgoing ActivityEdges from an InitialNode must be ControlFlows.
-			outgoing->forAll(oclIsKindOf(ControlFlow)) */ 
+			All the outgoing ActivityEdges from an InitialNode must be ControlFlows.
+			outgoing->forAll(oclIsKindOf(ControlFlow))
+			*/
+			 
 			virtual bool control_edges(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
-			 An InitialNode has no incoming ActivityEdges.
-			incoming->isEmpty() */ 
+			An InitialNode has no incoming ActivityEdges.
+			incoming->isEmpty()
+			*/
+			 
 			virtual bool no_incoming_edges(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
@@ -182,17 +188,25 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
+			ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::ActivityGroup>> getInGroup() const = 0;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
+			The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

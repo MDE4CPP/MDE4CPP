@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -26,21 +25,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -62,10 +52,11 @@
 
 #include "uml/TemplateParameter.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -75,19 +66,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 PackageableElementImpl::PackageableElementImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	//Init references
-	
+{	
 }
 
 PackageableElementImpl::~PackageableElementImpl()
@@ -97,53 +76,36 @@ PackageableElementImpl::~PackageableElementImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+PackageableElementImpl::PackageableElementImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:PackageableElementImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			PackageableElementImpl::PackageableElementImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:PackageableElementImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
-
-
-
+PackageableElementImpl::PackageableElementImpl(std::weak_ptr<uml::Element > par_owner)
+:PackageableElementImpl()
+{
+	m_owner = par_owner;
+}
 
 //Additional constructor for the containments back reference
-			PackageableElementImpl::PackageableElementImpl(std::weak_ptr<uml::Element > par_owner)
-			:PackageableElementImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-
-
+PackageableElementImpl::PackageableElementImpl(std::weak_ptr<uml::Package > par_owningPackage)
+:PackageableElementImpl()
+{
+	m_owningPackage = par_owningPackage;
+	m_namespace = par_owningPackage;
+}
 
 //Additional constructor for the containments back reference
-			PackageableElementImpl::PackageableElementImpl(std::weak_ptr<uml::Package > par_owningPackage)
-			:PackageableElementImpl()
-			{
-			    m_owningPackage = par_owningPackage;
-				m_namespace = par_owningPackage;
-			}
-
-
-
-
-
-//Additional constructor for the containments back reference
-			PackageableElementImpl::PackageableElementImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
-			:PackageableElementImpl()
-			{
-			    m_owningTemplateParameter = par_owningTemplateParameter;
-				m_owner = par_owningTemplateParameter;
-			}
-
-
-
-
+PackageableElementImpl::PackageableElementImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+:PackageableElementImpl()
+{
+	m_owningTemplateParameter = par_owningTemplateParameter;
+	m_owner = par_owningTemplateParameter;
+}
 
 
 PackageableElementImpl::PackageableElementImpl(const PackageableElementImpl & obj):PackageableElementImpl()
@@ -201,7 +163,7 @@ std::shared_ptr<ecore::EObject>  PackageableElementImpl::copy() const
 
 std::shared_ptr<ecore::EClass> PackageableElementImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getPackageableElement_Class();
+	return uml::umlPackage::eInstance()->getPackageableElement_Class();
 }
 
 //*********************************
@@ -220,15 +182,21 @@ bool PackageableElementImpl::namespace_needs_visibility(Any diagnostics,std::map
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference owningPackage
+*/
 std::weak_ptr<uml::Package > PackageableElementImpl::getOwningPackage() const
 {
 
     return m_owningPackage;
 }
+
 void PackageableElementImpl::setOwningPackage(std::shared_ptr<uml::Package> _owningPackage)
 {
     m_owningPackage = _owningPackage;
 }
+
+
 
 //*********************************
 // Union Getter
@@ -237,14 +205,28 @@ std::weak_ptr<uml::Namespace > PackageableElementImpl::getNamespace() const
 {
 	return m_namespace;
 }
+
 std::shared_ptr<Union<uml::Element>> PackageableElementImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > PackageableElementImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<PackageableElement> PackageableElementImpl::getThisPackageableElementPtr() const
@@ -288,8 +270,8 @@ Any PackageableElementImpl::eGet(int featureID, bool resolve, bool coreType) con
 {
 	switch(featureID)
 	{
-		case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOwningPackage().lock())); //17411
+		case uml::umlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOwningPackage().lock())); //17311
 	}
 	Any result;
 	result = NamedElementImpl::eGet(featureID, resolve, coreType);
@@ -304,8 +286,8 @@ bool PackageableElementImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
-			return getOwningPackage().lock() != nullptr; //17411
+		case uml::umlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
+			return getOwningPackage().lock() != nullptr; //17311
 	}
 	bool result = false;
 	result = NamedElementImpl::internalEIsSet(featureID);
@@ -320,12 +302,12 @@ bool PackageableElementImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
+		case uml::umlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Package> _owningPackage = std::dynamic_pointer_cast<uml::Package>(_temp);
-			setOwningPackage(_owningPackage); //17411
+			setOwningPackage(_owningPackage); //17311
 			return true;
 		}
 	}
@@ -351,12 +333,11 @@ void PackageableElementImpl::load(std::shared_ptr<persistence::interfaces::XLoad
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -367,19 +348,20 @@ void PackageableElementImpl::loadAttributes(std::shared_ptr<persistence::interfa
 	ParameterableElementImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void PackageableElementImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void PackageableElementImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
-
-	NamedElementImpl::loadNode(nodeName, loadHandler, modelFactory);
-	ParameterableElementImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	NamedElementImpl::loadNode(nodeName, loadHandler);
+	ParameterableElementImpl::loadNode(nodeName, loadHandler);
 }
 
 void PackageableElementImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
+		case uml::umlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
 		{
 			if (references.size() == 1)
 			{
@@ -416,7 +398,7 @@ void PackageableElementImpl::saveContent(std::shared_ptr<persistence::interfaces
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 

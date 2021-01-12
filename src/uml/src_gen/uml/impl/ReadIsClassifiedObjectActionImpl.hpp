@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class ReadIsClassifiedObjectActionImpl :virtual public ActionImpl, virtual public ReadIsClassifiedObjectAction 
+	class ReadIsClassifiedObjectActionImpl : virtual public ActionImpl, virtual public ReadIsClassifiedObjectAction 
 	{
 		public: 
 			ReadIsClassifiedObjectActionImpl(const ReadIsClassifiedObjectActionImpl & obj);
@@ -28,7 +28,7 @@ namespace uml
 			ReadIsClassifiedObjectActionImpl& operator=(ReadIsClassifiedObjectActionImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			ReadIsClassifiedObjectActionImpl();
 			virtual std::shared_ptr<ReadIsClassifiedObjectAction> getThisReadIsClassifiedObjectActionPtr() const;
 			virtual void setThisReadIsClassifiedObjectActionPtr(std::weak_ptr<ReadIsClassifiedObjectAction> thisReadIsClassifiedObjectActionPtr);
@@ -59,23 +59,31 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 The type of the result OutputPin is Boolean.
-			result.type = Boolean */ 
+			The type of the result OutputPin is Boolean.
+			result.type = Boolean
+			*/
+			 
 			virtual bool boolean_result(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
-			 The multiplicity of the object InputPin is 1..1.
-			object.is(1,1) */ 
+			The multiplicity of the object InputPin is 1..1.
+			object.is(1,1)
+			*/
+			 
 			virtual bool multiplicity_of_input(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
-			 The multiplicity of the result OutputPin is 1..1.
-			result.is(1,1) */ 
+			The multiplicity of the result OutputPin is 1..1.
+			result.is(1,1)
+			*/
+			 
 			virtual bool multiplicity_of_output(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
-			 The object InputPin has no type.
-			object.type = null */ 
+			The object InputPin has no type.
+			object.type = null
+			*/
+			 
 			virtual bool no_type(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
@@ -84,70 +92,100 @@ namespace uml
 			// Attributes Getter Setter
 			//*********************************
 			/*!
-			 Indicates whether the input object must be directly classified by the given Classifier or whether it may also be an instance of a specialization of the given Classifier.
-			<p>From package UML::Actions.</p> */ 
+			Indicates whether the input object must be directly classified by the given Classifier or whether it may also be an instance of a specialization of the given Classifier.
+			<p>From package UML::Actions.</p>
+			*/
+			 
 			virtual bool getIsDirect() const ;
 			
 			/*!
-			 Indicates whether the input object must be directly classified by the given Classifier or whether it may also be an instance of a specialization of the given Classifier.
-			<p>From package UML::Actions.</p> */ 
+			Indicates whether the input object must be directly classified by the given Classifier or whether it may also be an instance of a specialization of the given Classifier.
+			<p>From package UML::Actions.</p>
+			*/
+			 
 			virtual void setIsDirect (bool _isDirect); 
-			
 			
 			
 			//*********************************
 			// Reference
 			//*********************************
 			/*!
-			 The Classifier against which the classification of the input object is tested.
-			<p>From package UML::Actions.</p> */
+			The Classifier against which the classification of the input object is tested.
+			<p>From package UML::Actions.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::Classifier > getClassifier() const ;
 			
 			/*!
-			 The Classifier against which the classification of the input object is tested.
-			<p>From package UML::Actions.</p> */
-			virtual void setClassifier(std::shared_ptr<uml::Classifier> _classifier_classifier) ;
+			The Classifier against which the classification of the input object is tested.
+			<p>From package UML::Actions.</p>
+			*/
+			
+			virtual void setClassifier(std::shared_ptr<uml::Classifier> _classifier) ;
+			
 			/*!
-			 The InputPin that holds the object whose classification is to be tested.
-			<p>From package UML::Actions.</p> */
+			The InputPin that holds the object whose classification is to be tested.
+			<p>From package UML::Actions.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::InputPin > getObject() const ;
 			
 			/*!
-			 The InputPin that holds the object whose classification is to be tested.
-			<p>From package UML::Actions.</p> */
-			virtual void setObject(std::shared_ptr<uml::InputPin> _object_object) ;
+			The InputPin that holds the object whose classification is to be tested.
+			<p>From package UML::Actions.</p>
+			*/
+			
+			virtual void setObject(std::shared_ptr<uml::InputPin> _object) ;
+			
 			/*!
-			 The OutputPin that holds the Boolean result of the test.
-			<p>From package UML::Actions.</p> */
+			The OutputPin that holds the Boolean result of the test.
+			<p>From package UML::Actions.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::OutputPin > getResult() const ;
 			
 			/*!
-			 The OutputPin that holds the Boolean result of the test.
-			<p>From package UML::Actions.</p> */
-			virtual void setResult(std::shared_ptr<uml::OutputPin> _result_result) ;
+			The OutputPin that holds the Boolean result of the test.
+			<p>From package UML::Actions.</p>
+			*/
+			
+			virtual void setResult(std::shared_ptr<uml::OutputPin> _result) ;
+			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
+			ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::ActivityGroup>> getInGroup() const ;/*!
-			 The ordered set of InputPins representing the inputs to the Action.
-			<p>From package UML::Actions.</p> */
+			The ordered set of InputPins representing the inputs to the Action.
+			<p>From package UML::Actions.</p>
+			*/
+			
 			virtual std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> getInput() const ;/*!
-			 The ordered set of OutputPins representing outputs from the Action.
-			<p>From package UML::Actions.</p> */
+			The ordered set of OutputPins representing outputs from the Action.
+			<p>From package UML::Actions.</p>
+			*/
+			
 			virtual std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element>> getOutput() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
+			The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const ; 
 			 
 			//*********************************
@@ -161,7 +199,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

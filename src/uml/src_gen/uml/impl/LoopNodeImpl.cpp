@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -26,25 +25,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -96,10 +82,11 @@
 
 #include "uml/Variable.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -109,77 +96,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 LoopNodeImpl::LoopNodeImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		m_bodyOutput.reset(new Bag<uml::OutputPin>());
-	
-	
-
-		m_bodyPart.reset(new Bag<uml::ExecutableNode>());
-	
-	
-
-	
-
-		/*Subset*/
-		m_loopVariable.reset(new Subset<uml::OutputPin, uml::Element >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_loopVariable - Subset<uml::OutputPin, uml::Element >()" << std::endl;
-		#endif
-	
-	
-
-		m_loopVariableInput.reset(new Bag<uml::InputPin>());
-	
-	
-
-		m_result.reset(new Bag<uml::OutputPin>());
-	
-	
-
-		m_setupPart.reset(new Bag<uml::ExecutableNode>());
-	
-	
-
-		m_test.reset(new Bag<uml::ExecutableNode>());
-	
-	
-
-	//Init references
-	
-	
-
-	
-	
-
-	
-
-		/*Subset*/
-		m_loopVariable->initSubset(m_ownedElement);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_loopVariable - Subset<uml::OutputPin, uml::Element >(m_ownedElement)" << std::endl;
-		#endif
-	
-	
-
-	
-	
-
-	
-	
-
-	
-	
-
-	
-	
+{	
 }
 
 LoopNodeImpl::~LoopNodeImpl()
@@ -189,18 +106,17 @@ LoopNodeImpl::~LoopNodeImpl()
 #endif
 }
 
-
 //Additional constructor for the containments back reference
 LoopNodeImpl::LoopNodeImpl(std::weak_ptr<uml::Activity > par_Activity, const int reference_id)
 :LoopNodeImpl()
 {
 	switch(reference_id)
 	{	
-	case UmlPackage::ACTIVITYNODE_ATTRIBUTE_ACTIVITY:
+	case umlPackage::ACTIVITYNODE_ATTRIBUTE_ACTIVITY:
 		m_activity = par_Activity;
 		m_owner = par_Activity;
 		 return;
-	case UmlPackage::ACTIVITYGROUP_ATTRIBUTE_INACTIVITY:
+	case umlPackage::ACTIVITYGROUP_ATTRIBUTE_INACTIVITY:
 		m_inActivity = par_Activity;
 		m_owner = par_Activity;
 		 return;
@@ -211,61 +127,36 @@ LoopNodeImpl::LoopNodeImpl(std::weak_ptr<uml::Activity > par_Activity, const int
 }
 
 
-
-
+//Additional constructor for the containments back reference
+LoopNodeImpl::LoopNodeImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
+:LoopNodeImpl()
+{
+	m_inStructuredNode = par_inStructuredNode;
+	m_owner = par_inStructuredNode;
+}
 
 //Additional constructor for the containments back reference
-
-
-
-
-
-//Additional constructor for the containments back reference
-			LoopNodeImpl::LoopNodeImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
-			:LoopNodeImpl()
-			{
-			    m_inStructuredNode = par_inStructuredNode;
-				m_owner = par_inStructuredNode;
-			}
-
-
-
-
+LoopNodeImpl::LoopNodeImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:LoopNodeImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			LoopNodeImpl::LoopNodeImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:LoopNodeImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
-
-
-
+LoopNodeImpl::LoopNodeImpl(std::weak_ptr<uml::Element > par_owner)
+:LoopNodeImpl()
+{
+	m_owner = par_owner;
+}
 
 //Additional constructor for the containments back reference
-			LoopNodeImpl::LoopNodeImpl(std::weak_ptr<uml::Element > par_owner)
-			:LoopNodeImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-
-
-
-//Additional constructor for the containments back reference
-			LoopNodeImpl::LoopNodeImpl(std::weak_ptr<uml::ActivityGroup > par_superGroup)
-			:LoopNodeImpl()
-			{
-			    m_superGroup = par_superGroup;
-				m_owner = par_superGroup;
-			}
-
-
-
-
+LoopNodeImpl::LoopNodeImpl(std::weak_ptr<uml::ActivityGroup > par_superGroup)
+:LoopNodeImpl()
+{
+	m_superGroup = par_superGroup;
+	m_owner = par_superGroup;
+}
 
 
 LoopNodeImpl::LoopNodeImpl(const LoopNodeImpl & obj):LoopNodeImpl()
@@ -502,18 +393,15 @@ LoopNodeImpl::LoopNodeImpl(const LoopNodeImpl & obj):LoopNodeImpl()
 		std::cout << "Copying the Subset: " << "m_variable" << std::endl;
 	#endif
 
-		/*Subset*/
-		m_loopVariable->initSubset(m_ownedElement);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_loopVariable - Subset<uml::OutputPin, uml::Element >(m_ownedElement)" << std::endl;
-		#endif
-	
-	
-
-	
+	/*Subset*/
+	m_loopVariable->initSubset(getOwnedElement());
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Initialising value Subset: " << "m_loopVariable - Subset<uml::OutputPin, uml::Element >(getOwnedElement())" << std::endl;
+	#endif
 	
 
 	
+
 	
 }
 
@@ -526,21 +414,26 @@ std::shared_ptr<ecore::EObject>  LoopNodeImpl::copy() const
 
 std::shared_ptr<ecore::EClass> LoopNodeImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getLoopNode_Class();
+	return uml::umlPackage::eInstance()->getLoopNode_Class();
 }
 
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute isTestedFirst
+*/
+bool LoopNodeImpl::getIsTestedFirst() const 
+{
+	return m_isTestedFirst;
+}
+
 void LoopNodeImpl::setIsTestedFirst(bool _isTestedFirst)
 {
 	m_isTestedFirst = _isTestedFirst;
 } 
 
-bool LoopNodeImpl::getIsTestedFirst() const 
-{
-	return m_isTestedFirst;
-}
+
 
 //*********************************
 // Operations
@@ -602,63 +495,166 @@ bool LoopNodeImpl::setup_test_and_body(Any diagnostics,std::map <   Any, Any >  
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference bodyOutput
+*/
 std::shared_ptr<Bag<uml::OutputPin>> LoopNodeImpl::getBodyOutput() const
 {
+	if(m_bodyOutput == nullptr)
+	{
+		m_bodyOutput.reset(new Bag<uml::OutputPin>());
+		
+		
+	}
 
     return m_bodyOutput;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference bodyPart
+*/
 std::shared_ptr<Bag<uml::ExecutableNode>> LoopNodeImpl::getBodyPart() const
 {
+	if(m_bodyPart == nullptr)
+	{
+		m_bodyPart.reset(new Bag<uml::ExecutableNode>());
+		
+		
+	}
 
     return m_bodyPart;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference decider
+*/
 std::shared_ptr<uml::OutputPin > LoopNodeImpl::getDecider() const
 {
 //assert(m_decider);
     return m_decider;
 }
+
 void LoopNodeImpl::setDecider(std::shared_ptr<uml::OutputPin> _decider)
 {
     m_decider = _decider;
 }
 
+
+
+/*
+Getter & Setter for reference loopVariable
+*/
 std::shared_ptr<Subset<uml::OutputPin, uml::Element>> LoopNodeImpl::getLoopVariable() const
 {
+	if(m_loopVariable == nullptr)
+	{
+		/*Subset*/
+		m_loopVariable.reset(new Subset<uml::OutputPin, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_loopVariable - Subset<uml::OutputPin, uml::Element >()" << std::endl;
+		#endif
+		
+		/*Subset*/
+		m_loopVariable->initSubset(getOwnedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_loopVariable - Subset<uml::OutputPin, uml::Element >(getOwnedElement())" << std::endl;
+		#endif
+		
+	}
 
     return m_loopVariable;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference loopVariableInput
+*/
 std::shared_ptr<Bag<uml::InputPin>> LoopNodeImpl::getLoopVariableInput() const
 {
+	if(m_loopVariableInput == nullptr)
+	{
+		m_loopVariableInput.reset(new Bag<uml::InputPin>());
+		
+		
+	}
 
     return m_loopVariableInput;
 }
 
 
+
+/*Additional Setter for redefined reference 'StructuredActivityNode::structuredNodeInput'*/
+
+
+
+/*
+Getter & Setter for reference result
+*/
 std::shared_ptr<Bag<uml::OutputPin>> LoopNodeImpl::getResult() const
 {
+	if(m_result == nullptr)
+	{
+		m_result.reset(new Bag<uml::OutputPin>());
+		
+		
+	}
 
     return m_result;
 }
 
 
+
+/*Additional Setter for redefined reference 'StructuredActivityNode::structuredNodeOutput'*/
+
+
+
+/*
+Getter & Setter for reference setupPart
+*/
 std::shared_ptr<Bag<uml::ExecutableNode>> LoopNodeImpl::getSetupPart() const
 {
+	if(m_setupPart == nullptr)
+	{
+		m_setupPart.reset(new Bag<uml::ExecutableNode>());
+		
+		
+	}
 
     return m_setupPart;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference test
+*/
 std::shared_ptr<Bag<uml::ExecutableNode>> LoopNodeImpl::getTest() const
 {
+	if(m_test == nullptr)
+	{
+		m_test.reset(new Bag<uml::ExecutableNode>());
+		
+		
+	}
 //assert(m_test);
     return m_test;
 }
+
+
+
 
 
 //*********************************
@@ -666,44 +662,160 @@ std::shared_ptr<Bag<uml::ExecutableNode>> LoopNodeImpl::getTest() const
 //*********************************
 std::shared_ptr<Union<uml::ActivityEdge>> LoopNodeImpl::getContainedEdge() const
 {
+	if(m_containedEdge == nullptr)
+	{
+		/*Union*/
+		m_containedEdge.reset(new Union<uml::ActivityEdge>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_containedEdge - Union<uml::ActivityEdge>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_containedEdge;
 }
+
 std::shared_ptr<Union<uml::ActivityNode>> LoopNodeImpl::getContainedNode() const
 {
+	if(m_containedNode == nullptr)
+	{
+		/*Union*/
+		m_containedNode.reset(new Union<uml::ActivityNode>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_containedNode - Union<uml::ActivityNode>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_containedNode;
 }
+
 std::shared_ptr<Union<uml::ActivityGroup>> LoopNodeImpl::getInGroup() const
 {
+	if(m_inGroup == nullptr)
+	{
+		/*Union*/
+		m_inGroup.reset(new Union<uml::ActivityGroup>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_inGroup - Union<uml::ActivityGroup>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_inGroup;
 }
+
 std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> LoopNodeImpl::getInput() const
 {
+	if(m_input == nullptr)
+	{
+		/*SubsetUnion*/
+		m_input.reset(new SubsetUnion<uml::InputPin, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_input - SubsetUnion<uml::InputPin, uml::Element >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_input->initSubsetUnion(getOwnedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_input - SubsetUnion<uml::InputPin, uml::Element >(getOwnedElement())" << std::endl;
+		#endif
+		
+	}
 	return m_input;
 }
+
 std::shared_ptr<Union<uml::NamedElement>> LoopNodeImpl::getMember() const
 {
+	if(m_member == nullptr)
+	{
+		/*Union*/
+		m_member.reset(new Union<uml::NamedElement>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_member - Union<uml::NamedElement>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_member;
 }
+
 std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element>> LoopNodeImpl::getOutput() const
 {
+	if(m_output == nullptr)
+	{
+		/*SubsetUnion*/
+		m_output.reset(new SubsetUnion<uml::OutputPin, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_output - SubsetUnion<uml::OutputPin, uml::Element >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_output->initSubsetUnion(getOwnedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_output - SubsetUnion<uml::OutputPin, uml::Element >(getOwnedElement())" << std::endl;
+		#endif
+		
+	}
 	return m_output;
 }
+
 std::shared_ptr<Union<uml::Element>> LoopNodeImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> LoopNodeImpl::getOwnedMember() const
 {
+	if(m_ownedMember == nullptr)
+	{
+		/*SubsetUnion*/
+		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_ownedMember->initSubsetUnion(getOwnedElement(),getMember());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >(getOwnedElement(),getMember())" << std::endl;
+		#endif
+		
+	}
 	return m_ownedMember;
 }
+
 std::weak_ptr<uml::Element > LoopNodeImpl::getOwner() const
 {
 	return m_owner;
 }
+
 std::shared_ptr<Union<uml::RedefinableElement>> LoopNodeImpl::getRedefinedElement() const
 {
+	if(m_redefinedElement == nullptr)
+	{
+		/*Union*/
+		m_redefinedElement.reset(new Union<uml::RedefinableElement>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_redefinedElement - Union<uml::RedefinableElement>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_redefinedElement;
 }
+
+
 
 
 std::shared_ptr<LoopNode> LoopNodeImpl::getThisLoopNodePtr() const
@@ -756,7 +868,7 @@ Any LoopNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::LOOPNODE_ATTRIBUTE_BODYOUTPUT:
+		case uml::umlPackage::LOOPNODE_ATTRIBUTE_BODYOUTPUT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::OutputPin>::iterator iter = m_bodyOutput->begin();
@@ -766,9 +878,9 @@ Any LoopNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //14544
+			return eAny(tempList); //14444
 		}
-		case UmlPackage::LOOPNODE_ATTRIBUTE_BODYPART:
+		case uml::umlPackage::LOOPNODE_ATTRIBUTE_BODYPART:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::ExecutableNode>::iterator iter = m_bodyPart->begin();
@@ -778,13 +890,13 @@ Any LoopNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //14545
+			return eAny(tempList); //14445
 		}
-		case UmlPackage::LOOPNODE_ATTRIBUTE_DECIDER:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDecider())); //14546
-		case UmlPackage::LOOPNODE_ATTRIBUTE_ISTESTEDFIRST:
-			return eAny(getIsTestedFirst()); //14547
-		case UmlPackage::LOOPNODE_ATTRIBUTE_LOOPVARIABLE:
+		case uml::umlPackage::LOOPNODE_ATTRIBUTE_DECIDER:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDecider())); //14446
+		case uml::umlPackage::LOOPNODE_ATTRIBUTE_ISTESTEDFIRST:
+			return eAny(getIsTestedFirst()); //14447
+		case uml::umlPackage::LOOPNODE_ATTRIBUTE_LOOPVARIABLE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::OutputPin>::iterator iter = m_loopVariable->begin();
@@ -794,9 +906,9 @@ Any LoopNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //14548
+			return eAny(tempList); //14448
 		}
-		case UmlPackage::LOOPNODE_ATTRIBUTE_LOOPVARIABLEINPUT:
+		case uml::umlPackage::LOOPNODE_ATTRIBUTE_LOOPVARIABLEINPUT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::InputPin>::iterator iter = m_loopVariableInput->begin();
@@ -806,9 +918,9 @@ Any LoopNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //14549
+			return eAny(tempList); //14449
 		}
-		case UmlPackage::LOOPNODE_ATTRIBUTE_RESULT:
+		case uml::umlPackage::LOOPNODE_ATTRIBUTE_RESULT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::OutputPin>::iterator iter = m_result->begin();
@@ -818,9 +930,9 @@ Any LoopNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //14550
+			return eAny(tempList); //14450
 		}
-		case UmlPackage::LOOPNODE_ATTRIBUTE_SETUPPART:
+		case uml::umlPackage::LOOPNODE_ATTRIBUTE_SETUPPART:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::ExecutableNode>::iterator iter = m_setupPart->begin();
@@ -830,9 +942,9 @@ Any LoopNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //14551
+			return eAny(tempList); //14451
 		}
-		case UmlPackage::LOOPNODE_ATTRIBUTE_TEST:
+		case uml::umlPackage::LOOPNODE_ATTRIBUTE_TEST:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::ExecutableNode>::iterator iter = m_test->begin();
@@ -842,7 +954,7 @@ Any LoopNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //14552
+			return eAny(tempList); //14452
 		}
 	}
 	return StructuredActivityNodeImpl::eGet(featureID, resolve, coreType);
@@ -851,24 +963,24 @@ bool LoopNodeImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::LOOPNODE_ATTRIBUTE_BODYOUTPUT:
-			return getBodyOutput() != nullptr; //14544
-		case UmlPackage::LOOPNODE_ATTRIBUTE_BODYPART:
-			return getBodyPart() != nullptr; //14545
-		case UmlPackage::LOOPNODE_ATTRIBUTE_DECIDER:
-			return getDecider() != nullptr; //14546
-		case UmlPackage::LOOPNODE_ATTRIBUTE_ISTESTEDFIRST:
-			return getIsTestedFirst() != false; //14547
-		case UmlPackage::LOOPNODE_ATTRIBUTE_LOOPVARIABLE:
-			return getLoopVariable() != nullptr; //14548
-		case UmlPackage::LOOPNODE_ATTRIBUTE_LOOPVARIABLEINPUT:
-			return getLoopVariableInput() != nullptr; //14549
-		case UmlPackage::LOOPNODE_ATTRIBUTE_RESULT:
-			return getResult() != nullptr; //14550
-		case UmlPackage::LOOPNODE_ATTRIBUTE_SETUPPART:
-			return getSetupPart() != nullptr; //14551
-		case UmlPackage::LOOPNODE_ATTRIBUTE_TEST:
-			return getTest() != nullptr; //14552
+		case uml::umlPackage::LOOPNODE_ATTRIBUTE_BODYOUTPUT:
+			return getBodyOutput() != nullptr; //14444
+		case uml::umlPackage::LOOPNODE_ATTRIBUTE_BODYPART:
+			return getBodyPart() != nullptr; //14445
+		case uml::umlPackage::LOOPNODE_ATTRIBUTE_DECIDER:
+			return getDecider() != nullptr; //14446
+		case uml::umlPackage::LOOPNODE_ATTRIBUTE_ISTESTEDFIRST:
+			return getIsTestedFirst() != false; //14447
+		case uml::umlPackage::LOOPNODE_ATTRIBUTE_LOOPVARIABLE:
+			return getLoopVariable() != nullptr; //14448
+		case uml::umlPackage::LOOPNODE_ATTRIBUTE_LOOPVARIABLEINPUT:
+			return getLoopVariableInput() != nullptr; //14449
+		case uml::umlPackage::LOOPNODE_ATTRIBUTE_RESULT:
+			return getResult() != nullptr; //14450
+		case uml::umlPackage::LOOPNODE_ATTRIBUTE_SETUPPART:
+			return getSetupPart() != nullptr; //14451
+		case uml::umlPackage::LOOPNODE_ATTRIBUTE_TEST:
+			return getTest() != nullptr; //14452
 	}
 	return StructuredActivityNodeImpl::internalEIsSet(featureID);
 }
@@ -876,7 +988,7 @@ bool LoopNodeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::LOOPNODE_ATTRIBUTE_BODYOUTPUT:
+		case uml::umlPackage::LOOPNODE_ATTRIBUTE_BODYOUTPUT:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -912,7 +1024,7 @@ bool LoopNodeImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case UmlPackage::LOOPNODE_ATTRIBUTE_BODYPART:
+		case uml::umlPackage::LOOPNODE_ATTRIBUTE_BODYPART:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -948,22 +1060,22 @@ bool LoopNodeImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case UmlPackage::LOOPNODE_ATTRIBUTE_DECIDER:
+		case uml::umlPackage::LOOPNODE_ATTRIBUTE_DECIDER:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::OutputPin> _decider = std::dynamic_pointer_cast<uml::OutputPin>(_temp);
-			setDecider(_decider); //14546
+			setDecider(_decider); //14446
 			return true;
 		}
-		case UmlPackage::LOOPNODE_ATTRIBUTE_ISTESTEDFIRST:
+		case uml::umlPackage::LOOPNODE_ATTRIBUTE_ISTESTEDFIRST:
 		{
 			// BOOST CAST
 			bool _isTestedFirst = newValue->get<bool>();
-			setIsTestedFirst(_isTestedFirst); //14547
+			setIsTestedFirst(_isTestedFirst); //14447
 			return true;
 		}
-		case UmlPackage::LOOPNODE_ATTRIBUTE_LOOPVARIABLE:
+		case uml::umlPackage::LOOPNODE_ATTRIBUTE_LOOPVARIABLE:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -999,7 +1111,7 @@ bool LoopNodeImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case UmlPackage::LOOPNODE_ATTRIBUTE_LOOPVARIABLEINPUT:
+		case uml::umlPackage::LOOPNODE_ATTRIBUTE_LOOPVARIABLEINPUT:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -1035,7 +1147,7 @@ bool LoopNodeImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case UmlPackage::LOOPNODE_ATTRIBUTE_RESULT:
+		case uml::umlPackage::LOOPNODE_ATTRIBUTE_RESULT:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -1071,7 +1183,7 @@ bool LoopNodeImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case UmlPackage::LOOPNODE_ATTRIBUTE_SETUPPART:
+		case uml::umlPackage::LOOPNODE_ATTRIBUTE_SETUPPART:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -1107,7 +1219,7 @@ bool LoopNodeImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case UmlPackage::LOOPNODE_ATTRIBUTE_TEST:
+		case uml::umlPackage::LOOPNODE_ATTRIBUTE_TEST:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -1159,12 +1271,11 @@ void LoopNodeImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> l
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -1230,8 +1341,9 @@ void LoopNodeImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoad
 	StructuredActivityNodeImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void LoopNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void LoopNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -1294,15 +1406,15 @@ void LoopNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::i
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
-
-	StructuredActivityNodeImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	StructuredActivityNodeImpl::loadNode(nodeName, loadHandler);
 }
 
 void LoopNodeImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case UmlPackage::LOOPNODE_ATTRIBUTE_BODYOUTPUT:
+		case uml::umlPackage::LOOPNODE_ATTRIBUTE_BODYOUTPUT:
 		{
 			std::shared_ptr<Bag<uml::OutputPin>> _bodyOutput = getBodyOutput();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -1316,7 +1428,7 @@ void LoopNodeImpl::resolveReferences(const int featureID, std::list<std::shared_
 			return;
 		}
 
-		case UmlPackage::LOOPNODE_ATTRIBUTE_BODYPART:
+		case uml::umlPackage::LOOPNODE_ATTRIBUTE_BODYPART:
 		{
 			std::shared_ptr<Bag<uml::ExecutableNode>> _bodyPart = getBodyPart();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -1330,7 +1442,7 @@ void LoopNodeImpl::resolveReferences(const int featureID, std::list<std::shared_
 			return;
 		}
 
-		case UmlPackage::LOOPNODE_ATTRIBUTE_DECIDER:
+		case uml::umlPackage::LOOPNODE_ATTRIBUTE_DECIDER:
 		{
 			if (references.size() == 1)
 			{
@@ -1342,7 +1454,7 @@ void LoopNodeImpl::resolveReferences(const int featureID, std::list<std::shared_
 			return;
 		}
 
-		case UmlPackage::LOOPNODE_ATTRIBUTE_SETUPPART:
+		case uml::umlPackage::LOOPNODE_ATTRIBUTE_SETUPPART:
 		{
 			std::shared_ptr<Bag<uml::ExecutableNode>> _setupPart = getSetupPart();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -1356,7 +1468,7 @@ void LoopNodeImpl::resolveReferences(const int featureID, std::list<std::shared_
 			return;
 		}
 
-		case UmlPackage::LOOPNODE_ATTRIBUTE_TEST:
+		case uml::umlPackage::LOOPNODE_ATTRIBUTE_TEST:
 		{
 			std::shared_ptr<Bag<uml::ExecutableNode>> _test = getTest();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -1387,7 +1499,6 @@ void LoopNodeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> s
 	
 	ActivityNodeImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);
@@ -1411,7 +1522,7 @@ void LoopNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 		// Save 'loopVariable'
 		for (std::shared_ptr<uml::OutputPin> loopVariable : *this->getLoopVariable()) 
@@ -1419,7 +1530,6 @@ void LoopNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 			saveHandler->addReference(loopVariable, "loopVariable", loopVariable->eClass() != package->getOutputPin_Class());
 		}
 	
- 
 		// Add attributes
 		if ( this->eIsSet(package->getLoopNode_Attribute_isTestedFirst()) )
 		{
@@ -1458,14 +1568,14 @@ void LoopNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 		std::shared_ptr<Bag<uml::InputPin>> list_loopVariableInput = this->getLoopVariableInput();
 		for (std::shared_ptr<uml::InputPin> loopVariableInput : *list_loopVariableInput) 
 		{
-			saveHandler->addReference(loopVariableInput, "loopVariableInput", loopVariableInput->eClass() != package->getInputPin_Class());
+			saveHandler->addReference(loopVariableInput, "loopVariableInput", loopVariableInput->eClass() !=uml::umlPackage::eInstance()->getInputPin_Class());
 		}
 
 		// Save 'result'
 		std::shared_ptr<Bag<uml::OutputPin>> list_result = this->getResult();
 		for (std::shared_ptr<uml::OutputPin> result : *list_result) 
 		{
-			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_Class());
+			saveHandler->addReference(result, "result", result->eClass() !=uml::umlPackage::eInstance()->getOutputPin_Class());
 		}
 	}
 	catch (std::exception& e)

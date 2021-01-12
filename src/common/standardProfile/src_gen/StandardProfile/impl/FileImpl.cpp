@@ -11,12 +11,28 @@
 
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
+#include "StandardProfile/StandardProfileFactory.hpp"
 #include "StandardProfile/impl/StandardProfilePackageImpl.hpp"
 #include "uml/Stereotype.hpp"
+
+//Types included from attributes, operation parameters, imports and composite owner classes
 #include "uml/Artifact.hpp"
 
+//Packges and Factories included from types of attributes, operation parameters, imports and composite owner classes
+#include "uml/umlFactory.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
+//Packages of included Enumerations
 
+//Includes of PluginFramework (if required)
+
+//Includes of OpaqueBevaiors (if required)
+
+//Includes from InstanceValues (if required)
+
+//Includes from Ports typed by interfaces (if required)
+
+//Includes from roles of ConnectorEnds (if required)
 
 using namespace StandardProfile;
 
@@ -25,6 +41,12 @@ using namespace StandardProfile;
 //*********************************
 FileImpl::FileImpl()
 {
+	#ifdef ADD_COUNT
+		ADD_COUNT("FileImpl()");
+	#endif
+
+	DEBUG_MESSAGE(std::cout<<"File is created..."<<std::endl;)
+
 	//***********************************
 	// init Get Set
 	//getter init
@@ -34,16 +56,16 @@ FileImpl::FileImpl()
 	
 	m_unsetterMap.insert(std::pair<std::string,std::function<void()>>("StandardProfile::File::base_Artifact",[this](){m_base_Artifact = std::shared_ptr<uml::Artifact>(nullptr);}));
 	 
-
-	// init properties without default
-	
-
-	
 }
 
 
 FileImpl::~FileImpl()
 {
+	#ifdef SUB_COUNT
+		SUB_COUNT("FileImpl()");
+	#endif
+
+	DEBUG_MESSAGE(std::cout<<"File is destroyed..."<<std::endl;)
 }
 
 FileImpl::FileImpl(const FileImpl & obj):FileImpl()
@@ -52,6 +74,7 @@ FileImpl::FileImpl(const FileImpl & obj):FileImpl()
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy File "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	instantiate();
 }
 
 std::shared_ptr<ecore::EObject>  FileImpl::copy() const
@@ -65,6 +88,21 @@ std::shared_ptr<ecore::EObject>  FileImpl::copy() const
 std::shared_ptr<uml::Class> FileImpl::getMetaClass()
 {
 	return StandardProfilePackageImpl::eInstance()->get_StandardProfile_File();
+}
+
+void FileImpl::instantiate()
+{   
+	
+}
+
+void FileImpl::destroy()
+{	
+
+	//Erase properties
+	//deleting property base_Artifact
+	m_base_Artifact.reset();
+	
+	//Erase back reference to owner
 }
 
 //*********************************

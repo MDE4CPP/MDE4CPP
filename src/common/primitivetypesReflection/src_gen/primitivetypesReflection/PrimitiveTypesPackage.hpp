@@ -14,6 +14,7 @@ namespace uml
 	class ConnectorEnd;
 }
 
+
 namespace PrimitiveTypes 
 {
 	/*!
@@ -40,6 +41,8 @@ namespace PrimitiveTypes
 			virtual std::shared_ptr<uml::PrimitiveType> get_PrimitiveTypes_UnlimitedNatural() = 0;  
 			
 			
+
+			//getter for subPackages
 
 			//Singleton Instance and Getter
 			

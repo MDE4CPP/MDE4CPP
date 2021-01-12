@@ -35,7 +35,7 @@ namespace persistence
 
 namespace uml
 {
-	class UmlFactory;
+	class umlFactory;
 }
 
 //Forward Declaration for used types
@@ -185,8 +185,10 @@ namespace uml
 namespace uml 
 {
 	/*!
-	 An extension is used to indicate that the properties of a metaclass are extended through a stereotype, and gives the ability to flexibly add (and later remove) stereotypes to classes.
-	<p>From package UML::Packages.</p> */
+	An extension is used to indicate that the properties of a metaclass are extended through a stereotype, and gives the ability to flexibly add (and later remove) stereotypes to classes.
+	<p>From package UML::Packages.</p>
+	*/
+	
 	class Extension:virtual public Association
 	{
 		public:
@@ -209,33 +211,45 @@ namespace uml
 			
 			
 			/*!
-			 Retrieves the stereotype that extends a metaclass through this extension. */ 
+			Retrieves the stereotype that extends a metaclass through this extension.
+			*/
+			 
 			virtual std::shared_ptr<uml::Stereotype> getStereotype() = 0;
 			
 			/*!
-			 Retrieves the extension end that is typed by a stereotype (as opposed to a metaclass). */ 
+			Retrieves the extension end that is typed by a stereotype (as opposed to a metaclass).
+			*/
+			 
 			virtual std::shared_ptr<uml::Property> getStereotypeEnd() = 0;
 			
 			/*!
-			 The query isRequired() is true if the owned end has a multiplicity with the lower bound of 1.
+			The query isRequired() is true if the owned end has a multiplicity with the lower bound of 1.
 			result = (ownedEnd.lowerBound() = 1)
-			<p>From package UML::Packages.</p> */ 
+			<p>From package UML::Packages.</p>
+			*/
+			 
 			virtual bool isRequired() = 0;
 			
 			/*!
-			 An Extension is binary, i.e., it has only two memberEnds.
-			memberEnd->size() = 2 */ 
+			An Extension is binary, i.e., it has only two memberEnds.
+			memberEnd->size() = 2
+			*/
+			 
 			virtual bool is_binary(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
-			 The query metaclassEnd() returns the Property that is typed by a metaclass (as opposed to a stereotype).
+			The query metaclassEnd() returns the Property that is typed by a metaclass (as opposed to a stereotype).
 			result = (memberEnd->reject(p | ownedEnd->includes(p.oclAsType(ExtensionEnd)))->any(true))
-			<p>From package UML::Packages.</p> */ 
+			<p>From package UML::Packages.</p>
+			*/
+			 
 			virtual std::shared_ptr<uml::Property> metaclassEnd() = 0;
 			
 			/*!
-			 The non-owned end of an Extension is typed by a Class.
-			metaclassEnd()->notEmpty() and metaclassEnd().type.oclIsKindOf(Class) */ 
+			The non-owned end of an Extension is typed by a Class.
+			metaclassEnd()->notEmpty() and metaclassEnd().type.oclIsKindOf(Class)
+			*/
+			 
 			virtual bool non_owned_end(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
@@ -243,18 +257,24 @@ namespace uml
 			// Attributes Getter Setter
 			//*********************************
 			/*!
-			 Indicates whether an instance of the extending stereotype must be created when an instance of the extended class is created. The attribute value is derived from the value of the lower property of the ExtensionEnd referenced by Extension::ownedEnd; a lower value of 1 means that isRequired is true, but otherwise it is false. Since the default value of ExtensionEnd::lower is 0, the default value of isRequired is false.
-			<p>From package UML::Packages.</p> */ 
+			Indicates whether an instance of the extending stereotype must be created when an instance of the extended class is created. The attribute value is derived from the value of the lower property of the ExtensionEnd referenced by Extension::ownedEnd; a lower value of 1 means that isRequired is true, but otherwise it is false. Since the default value of ExtensionEnd::lower is 0, the default value of isRequired is false.
+			<p>From package UML::Packages.</p>
+			*/
+			 
 			virtual bool getIsRequired() const = 0;
+			
 			
 			
 			//*********************************
 			// Reference
 			//*********************************
 			/*!
-			 References the Class that is extended through an Extension. The property is derived from the type of the memberEnd that is not the ownedEnd.
-			<p>From package UML::Packages.</p> */
+			References the Class that is extended through an Extension. The property is derived from the type of the memberEnd that is not the ownedEnd.
+			<p>From package UML::Packages.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::Class > getMetaclass() const = 0;
+			
 			
 			
 
@@ -263,8 +283,10 @@ namespace uml
 			// Attribute Members
 			//*********************************
 			/*!
-			 Indicates whether an instance of the extending stereotype must be created when an instance of the extended class is created. The attribute value is derived from the value of the lower property of the ExtensionEnd referenced by Extension::ownedEnd; a lower value of 1 means that isRequired is true, but otherwise it is false. Since the default value of ExtensionEnd::lower is 0, the default value of isRequired is false.
-			<p>From package UML::Packages.</p> */ 
+			Indicates whether an instance of the extending stereotype must be created when an instance of the extended class is created. The attribute value is derived from the value of the lower property of the ExtensionEnd referenced by Extension::ownedEnd; a lower value of 1 means that isRequired is true, but otherwise it is false. Since the default value of ExtensionEnd::lower is 0, the default value of isRequired is false.
+			<p>From package UML::Packages.</p>
+			*/
+			 
 			bool m_isRequired = false;
 			
 			
@@ -272,39 +294,56 @@ namespace uml
 			// Reference Members
 			//*********************************
 			/*!
-			 References the Class that is extended through an Extension. The property is derived from the type of the memberEnd that is not the ownedEnd.
-			<p>From package UML::Packages.</p> */
-			std::shared_ptr<uml::Class > m_metaclass;
+			References the Class that is extended through an Extension. The property is derived from the type of the memberEnd that is not the ownedEnd.
+			<p>From package UML::Packages.</p>
+			*/
 			
+			std::shared_ptr<uml::Class > m_metaclass;
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 Specifies each Feature directly defined in the classifier. Note that there may be members of the Classifier that are of the type Feature but are not included, e.g., inherited features.
-			<p>From package UML::Classification.</p> */
+			Specifies each Feature directly defined in the classifier. Note that there may be members of the Classifier that are of the type Feature but are not included, e.g., inherited features.
+			<p>From package UML::Classification.</p>
+			*/
+			
 			virtual std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement>> getFeature() const = 0;/*!
-			 A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
-			<p>From package UML::CommonStructure.</p> */
+			A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::NamedElement>> getMember() const = 0;/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;/*!
-			 A collection of NamedElements owned by the Namespace.
-			<p>From package UML::CommonStructure.</p> */
+			A collection of NamedElements owned by the Namespace.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> getOwnedMember() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
+			The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const = 0;/*!
-			 Specifies the elements related by the Relationship.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the elements related by the Relationship.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getRelatedElement() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

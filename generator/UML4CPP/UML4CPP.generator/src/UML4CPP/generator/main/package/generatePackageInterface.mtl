@@ -24,23 +24,31 @@
 [import UML4CPP::generator::main::helpers::nameHelper /]
 [import UML4CPP::generator::main::helpers::singletonHelper /]
 [import UML4CPP::generator::main::components::generateClass /]
+[import UML4CPP::generator::main::helpers::collectionHelper /]
 
 
-[template public generatePackageInterface(aPackage : Package) {packageName : String = aPackage.name.toUpperFirst().concat('Package');}]
-[file (aPackage.getPackageName().concat('/').concat(packageName).concat('.hpp'), false, 'UTF-8')]
+[template public generatePackageInterface(aPackage : Package) {packageName : String = aPackage.name.concat('Package');}]
+[file (aPackage.generateNamespacePath(false).concat('/').concat(packageName).concat('.hpp'), false, 'UTF-8')]
 [startGuard(aPackage,'MetaModelPackage')/]
 #include "uml/[aPackage.eClass().name/].hpp"
 
 namespace uml 
 {
-[for (nE : EClass | OrderedSet{(aPackage.allOwnedElements()->filter(NamedElement)-aPackage.allOwnedElements()->filter(ValueSpecification)).eClass()}->flatten()->sortedBy(name))]
+[for (nE : EClass | OrderedSet{(aPackage.getElementsBelongingToPackage()->filter(NamedElement)-aPackage.getElementsBelongingToPackage()->filter(ValueSpecification)).eClass()}->flatten()->sortedBy(name))]
 	class [nE.name/];
 [/for]
 	class ConnectorEnd;
 }
 
+[for (subPackage : Package| aPackage.ownedElement->filter(Package)->sortedBy(name)) separator ('\n')]
+namespace [subPackage.generateNamespace(false)/] 
+{
+	class [subPackage.name/]Package;
+}
+[/for]
+
 [comment namespace /]
-[if (not aPackage.ignoreNamespace())]namespace [aPackage.name/] 
+[if (not aPackage.ignoreNamespace())]namespace [aPackage.generateNamespace(false)/] 
 {
 [/if]
 	/*!
@@ -60,8 +68,13 @@ namespace uml
 			static const std::string eNS_PREFIX;
 
 			//getter for the ownedMember
-			[(aPackage.allOwnedElements()->filter(NamedElement)-aPackage.allOwnedElements()->filter(ValueSpecification))->asOrderedSet()->sortedBy(myQualifiedName()).generatePackageMemberGetter(false)/]
-			[(aPackage.allOwnedElements()->filter(ConnectorEnd))->asOrderedSet()->sortedBy(myQualifiedName()).generatePackageMemberGetter(false)/]
+			[(aPackage.getElementsBelongingToPackage()->filter(NamedElement)-aPackage.getElementsBelongingToPackage()->filter(ValueSpecification))->asOrderedSet()->sortedBy(myQualifiedName()).generatePackageMemberGetter(false)/]
+			[(aPackage.getElementsBelongingToPackage()->filter(ConnectorEnd))->asOrderedSet()->sortedBy(myQualifiedName()).generatePackageMemberGetter(false)/]
+
+			//getter for subPackages
+			[for (subPackage : Package | aPackage.nestedPackage->sortedBy(name))]
+			[subPackage.generateSubPackageGetter(false)/]
+			[/for]
 
 			//Singleton Instance and Getter
 			[generateSingletonDecl(packageName)/]

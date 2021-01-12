@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
@@ -25,15 +24,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -49,10 +45,11 @@
 
 #include "uml/QualifierValue.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -62,19 +59,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 LinkEndDestructionDataImpl::LinkEndDestructionDataImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	//Init references
-	
+{	
 }
 
 LinkEndDestructionDataImpl::~LinkEndDestructionDataImpl()
@@ -84,17 +69,12 @@ LinkEndDestructionDataImpl::~LinkEndDestructionDataImpl()
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			LinkEndDestructionDataImpl::LinkEndDestructionDataImpl(std::weak_ptr<uml::Element > par_owner)
-			:LinkEndDestructionDataImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-
-
+LinkEndDestructionDataImpl::LinkEndDestructionDataImpl(std::weak_ptr<uml::Element > par_owner)
+:LinkEndDestructionDataImpl()
+{
+	m_owner = par_owner;
+}
 
 
 LinkEndDestructionDataImpl::LinkEndDestructionDataImpl(const LinkEndDestructionDataImpl & obj):LinkEndDestructionDataImpl()
@@ -146,21 +126,26 @@ std::shared_ptr<ecore::EObject>  LinkEndDestructionDataImpl::copy() const
 
 std::shared_ptr<ecore::EClass> LinkEndDestructionDataImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getLinkEndDestructionData_Class();
+	return uml::umlPackage::eInstance()->getLinkEndDestructionData_Class();
 }
 
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute isDestroyDuplicates
+*/
+bool LinkEndDestructionDataImpl::getIsDestroyDuplicates() const 
+{
+	return m_isDestroyDuplicates;
+}
+
 void LinkEndDestructionDataImpl::setIsDestroyDuplicates(bool _isDestroyDuplicates)
 {
 	m_isDestroyDuplicates = _isDestroyDuplicates;
 } 
 
-bool LinkEndDestructionDataImpl::getIsDestroyDuplicates() const 
-{
-	return m_isDestroyDuplicates;
-}
+
 
 //*********************************
 // Operations
@@ -174,23 +159,41 @@ bool LinkEndDestructionDataImpl::destroyAt_pin(Any diagnostics,std::map <   Any,
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference destroyAt
+*/
 std::shared_ptr<uml::InputPin > LinkEndDestructionDataImpl::getDestroyAt() const
 {
 
     return m_destroyAt;
 }
+
 void LinkEndDestructionDataImpl::setDestroyAt(std::shared_ptr<uml::InputPin> _destroyAt)
 {
     m_destroyAt = _destroyAt;
 }
+
+
 
 //*********************************
 // Union Getter
 //*********************************
 std::shared_ptr<Union<uml::Element>> LinkEndDestructionDataImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
+
 
 
 std::shared_ptr<LinkEndDestructionData> LinkEndDestructionDataImpl::getThisLinkEndDestructionDataPtr() const
@@ -218,10 +221,10 @@ Any LinkEndDestructionDataImpl::eGet(int featureID, bool resolve, bool coreType)
 {
 	switch(featureID)
 	{
-		case UmlPackage::LINKENDDESTRUCTIONDATA_ATTRIBUTE_DESTROYAT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDestroyAt())); //1376
-		case UmlPackage::LINKENDDESTRUCTIONDATA_ATTRIBUTE_ISDESTROYDUPLICATES:
-			return eAny(getIsDestroyDuplicates()); //1377
+		case uml::umlPackage::LINKENDDESTRUCTIONDATA_ATTRIBUTE_DESTROYAT:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDestroyAt())); //1366
+		case uml::umlPackage::LINKENDDESTRUCTIONDATA_ATTRIBUTE_ISDESTROYDUPLICATES:
+			return eAny(getIsDestroyDuplicates()); //1367
 	}
 	return LinkEndDataImpl::eGet(featureID, resolve, coreType);
 }
@@ -229,10 +232,10 @@ bool LinkEndDestructionDataImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::LINKENDDESTRUCTIONDATA_ATTRIBUTE_DESTROYAT:
-			return getDestroyAt() != nullptr; //1376
-		case UmlPackage::LINKENDDESTRUCTIONDATA_ATTRIBUTE_ISDESTROYDUPLICATES:
-			return getIsDestroyDuplicates() != false; //1377
+		case uml::umlPackage::LINKENDDESTRUCTIONDATA_ATTRIBUTE_DESTROYAT:
+			return getDestroyAt() != nullptr; //1366
+		case uml::umlPackage::LINKENDDESTRUCTIONDATA_ATTRIBUTE_ISDESTROYDUPLICATES:
+			return getIsDestroyDuplicates() != false; //1367
 	}
 	return LinkEndDataImpl::internalEIsSet(featureID);
 }
@@ -240,19 +243,19 @@ bool LinkEndDestructionDataImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::LINKENDDESTRUCTIONDATA_ATTRIBUTE_DESTROYAT:
+		case uml::umlPackage::LINKENDDESTRUCTIONDATA_ATTRIBUTE_DESTROYAT:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::InputPin> _destroyAt = std::dynamic_pointer_cast<uml::InputPin>(_temp);
-			setDestroyAt(_destroyAt); //1376
+			setDestroyAt(_destroyAt); //1366
 			return true;
 		}
-		case UmlPackage::LINKENDDESTRUCTIONDATA_ATTRIBUTE_ISDESTROYDUPLICATES:
+		case uml::umlPackage::LINKENDDESTRUCTIONDATA_ATTRIBUTE_ISDESTROYDUPLICATES:
 		{
 			// BOOST CAST
 			bool _isDestroyDuplicates = newValue->get<bool>();
-			setIsDestroyDuplicates(_isDestroyDuplicates); //1377
+			setIsDestroyDuplicates(_isDestroyDuplicates); //1367
 			return true;
 		}
 	}
@@ -271,12 +274,11 @@ void LinkEndDestructionDataImpl::load(std::shared_ptr<persistence::interfaces::X
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -314,18 +316,19 @@ void LinkEndDestructionDataImpl::loadAttributes(std::shared_ptr<persistence::int
 	LinkEndDataImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void LinkEndDestructionDataImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void LinkEndDestructionDataImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
-
-	LinkEndDataImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	LinkEndDataImpl::loadNode(nodeName, loadHandler);
 }
 
 void LinkEndDestructionDataImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case UmlPackage::LINKENDDESTRUCTIONDATA_ATTRIBUTE_DESTROYAT:
+		case uml::umlPackage::LINKENDDESTRUCTIONDATA_ATTRIBUTE_DESTROYAT:
 		{
 			if (references.size() == 1)
 			{
@@ -360,10 +363,9 @@ void LinkEndDestructionDataImpl::saveContent(std::shared_ptr<persistence::interf
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
- 
 		// Add attributes
 		if ( this->eIsSet(package->getLinkEndDestructionData_Attribute_isDestroyDuplicates()) )
 		{

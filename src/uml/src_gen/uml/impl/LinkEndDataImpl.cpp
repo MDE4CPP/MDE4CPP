@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
@@ -25,15 +24,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -47,10 +43,11 @@
 
 #include "uml/QualifierValue.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -60,39 +57,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 LinkEndDataImpl::LinkEndDataImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-		/*Subset*/
-		m_qualifier.reset(new Subset<uml::QualifierValue, uml::Element >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_qualifier - Subset<uml::QualifierValue, uml::Element >()" << std::endl;
-		#endif
-	
-	
-
-	
-
-	//Init references
-	
-
-		/*Subset*/
-		m_qualifier->initSubset(m_ownedElement);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_qualifier - Subset<uml::QualifierValue, uml::Element >(m_ownedElement)" << std::endl;
-		#endif
-	
-	
-
-	
+{	
 }
 
 LinkEndDataImpl::~LinkEndDataImpl()
@@ -102,17 +67,12 @@ LinkEndDataImpl::~LinkEndDataImpl()
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			LinkEndDataImpl::LinkEndDataImpl(std::weak_ptr<uml::Element > par_owner)
-			:LinkEndDataImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-
-
+LinkEndDataImpl::LinkEndDataImpl(std::weak_ptr<uml::Element > par_owner)
+:LinkEndDataImpl()
+{
+	m_owner = par_owner;
+}
 
 
 LinkEndDataImpl::LinkEndDataImpl(const LinkEndDataImpl & obj):LinkEndDataImpl()
@@ -150,12 +110,11 @@ LinkEndDataImpl::LinkEndDataImpl(const LinkEndDataImpl & obj):LinkEndDataImpl()
 		std::cout << "Copying the Subset: " << "m_qualifier" << std::endl;
 	#endif
 
-		/*Subset*/
-		m_qualifier->initSubset(m_ownedElement);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_qualifier - Subset<uml::QualifierValue, uml::Element >(m_ownedElement)" << std::endl;
-		#endif
-	
+	/*Subset*/
+	m_qualifier->initSubset(getOwnedElement());
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Initialising value Subset: " << "m_qualifier - Subset<uml::QualifierValue, uml::Element >(getOwnedElement())" << std::endl;
+	#endif
 	
 }
 
@@ -168,7 +127,7 @@ std::shared_ptr<ecore::EObject>  LinkEndDataImpl::copy() const
 
 std::shared_ptr<ecore::EClass> LinkEndDataImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getLinkEndData_Class();
+	return uml::umlPackage::eInstance()->getLinkEndData_Class();
 }
 
 //*********************************
@@ -217,40 +176,85 @@ bool LinkEndDataImpl::same_type(Any diagnostics,std::map <   Any, Any >  context
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference end
+*/
 std::shared_ptr<uml::Property > LinkEndDataImpl::getEnd() const
 {
 //assert(m_end);
     return m_end;
 }
+
 void LinkEndDataImpl::setEnd(std::shared_ptr<uml::Property> _end)
 {
     m_end = _end;
 }
 
+
+
+/*
+Getter & Setter for reference qualifier
+*/
 std::shared_ptr<Subset<uml::QualifierValue, uml::Element>> LinkEndDataImpl::getQualifier() const
 {
+	if(m_qualifier == nullptr)
+	{
+		/*Subset*/
+		m_qualifier.reset(new Subset<uml::QualifierValue, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_qualifier - Subset<uml::QualifierValue, uml::Element >()" << std::endl;
+		#endif
+		
+		/*Subset*/
+		m_qualifier->initSubset(getOwnedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_qualifier - Subset<uml::QualifierValue, uml::Element >(getOwnedElement())" << std::endl;
+		#endif
+		
+	}
 
     return m_qualifier;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference value
+*/
 std::shared_ptr<uml::InputPin > LinkEndDataImpl::getValue() const
 {
 
     return m_value;
 }
+
 void LinkEndDataImpl::setValue(std::shared_ptr<uml::InputPin> _value)
 {
     m_value = _value;
 }
+
+
 
 //*********************************
 // Union Getter
 //*********************************
 std::shared_ptr<Union<uml::Element>> LinkEndDataImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
+
 
 
 std::shared_ptr<LinkEndData> LinkEndDataImpl::getThisLinkEndDataPtr() const
@@ -278,9 +282,9 @@ Any LinkEndDataImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::LINKENDDATA_ATTRIBUTE_END:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEnd())); //1363
-		case UmlPackage::LINKENDDATA_ATTRIBUTE_QUALIFIER:
+		case uml::umlPackage::LINKENDDATA_ATTRIBUTE_END:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEnd())); //1353
+		case uml::umlPackage::LINKENDDATA_ATTRIBUTE_QUALIFIER:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::QualifierValue>::iterator iter = m_qualifier->begin();
@@ -290,10 +294,10 @@ Any LinkEndDataImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //1364
+			return eAny(tempList); //1354
 		}
-		case UmlPackage::LINKENDDATA_ATTRIBUTE_VALUE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getValue())); //1365
+		case uml::umlPackage::LINKENDDATA_ATTRIBUTE_VALUE:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getValue())); //1355
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -301,12 +305,12 @@ bool LinkEndDataImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::LINKENDDATA_ATTRIBUTE_END:
-			return getEnd() != nullptr; //1363
-		case UmlPackage::LINKENDDATA_ATTRIBUTE_QUALIFIER:
-			return getQualifier() != nullptr; //1364
-		case UmlPackage::LINKENDDATA_ATTRIBUTE_VALUE:
-			return getValue() != nullptr; //1365
+		case uml::umlPackage::LINKENDDATA_ATTRIBUTE_END:
+			return getEnd() != nullptr; //1353
+		case uml::umlPackage::LINKENDDATA_ATTRIBUTE_QUALIFIER:
+			return getQualifier() != nullptr; //1354
+		case uml::umlPackage::LINKENDDATA_ATTRIBUTE_VALUE:
+			return getValue() != nullptr; //1355
 	}
 	return ElementImpl::internalEIsSet(featureID);
 }
@@ -314,15 +318,15 @@ bool LinkEndDataImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::LINKENDDATA_ATTRIBUTE_END:
+		case uml::umlPackage::LINKENDDATA_ATTRIBUTE_END:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Property> _end = std::dynamic_pointer_cast<uml::Property>(_temp);
-			setEnd(_end); //1363
+			setEnd(_end); //1353
 			return true;
 		}
-		case UmlPackage::LINKENDDATA_ATTRIBUTE_QUALIFIER:
+		case uml::umlPackage::LINKENDDATA_ATTRIBUTE_QUALIFIER:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -358,12 +362,12 @@ bool LinkEndDataImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case UmlPackage::LINKENDDATA_ATTRIBUTE_VALUE:
+		case uml::umlPackage::LINKENDDATA_ATTRIBUTE_VALUE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::InputPin> _value = std::dynamic_pointer_cast<uml::InputPin>(_temp);
-			setValue(_value); //1365
+			setValue(_value); //1355
 			return true;
 		}
 	}
@@ -382,12 +386,11 @@ void LinkEndDataImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -423,8 +426,9 @@ void LinkEndDataImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XL
 	ElementImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void LinkEndDataImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void LinkEndDataImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -453,15 +457,15 @@ void LinkEndDataImpl::loadNode(std::string nodeName, std::shared_ptr<persistence
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
-
-	ElementImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	ElementImpl::loadNode(nodeName, loadHandler);
 }
 
 void LinkEndDataImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case UmlPackage::LINKENDDATA_ATTRIBUTE_END:
+		case uml::umlPackage::LINKENDDATA_ATTRIBUTE_END:
 		{
 			if (references.size() == 1)
 			{
@@ -473,7 +477,7 @@ void LinkEndDataImpl::resolveReferences(const int featureID, std::list<std::shar
 			return;
 		}
 
-		case UmlPackage::LINKENDDATA_ATTRIBUTE_VALUE:
+		case uml::umlPackage::LINKENDDATA_ATTRIBUTE_VALUE:
 		{
 			if (references.size() == 1)
 			{
@@ -505,7 +509,7 @@ void LinkEndDataImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 		// Save 'qualifier'
 		for (std::shared_ptr<uml::QualifierValue> qualifier : *this->getQualifier()) 

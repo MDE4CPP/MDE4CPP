@@ -33,7 +33,7 @@ namespace persistence
 
 namespace uml
 {
-	class UmlFactory;
+	class umlFactory;
 }
 
 //Forward Declaration for used types
@@ -100,8 +100,10 @@ namespace uml
 namespace uml 
 {
 	/*!
-	 A Type constrains the values represented by a TypedElement.
-	<p>From package UML::CommonStructure.</p> */
+	A Type constrains the values represented by a TypedElement.
+	<p>From package UML::CommonStructure.</p>
+	*/
+	
 	class Type:virtual public PackageableElement
 	{
 		public:
@@ -141,17 +143,23 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 The query conformsTo() gives true for a Type that conforms to another. By default, two Types do not conform to each other. This query is intended to be redefined for specific conformance situations.
+			The query conformsTo() gives true for a Type that conforms to another. By default, two Types do not conform to each other. This query is intended to be redefined for specific conformance situations.
 			result = (false)
-			<p>From package UML::CommonStructure.</p> */ 
+			<p>From package UML::CommonStructure.</p>
+			*/
+			 
 			virtual bool conformsTo(std::shared_ptr<uml::Type>  other) = 0;
 			
 			/*!
-			 Creates a(n) (binary) association between this type and the specified other type, with the specified navigabilities, aggregations, names, lower bounds, and upper bounds, and owned by this type's nearest package. */ 
+			Creates a(n) (binary) association between this type and the specified other type, with the specified navigabilities, aggregations, names, lower bounds, and upper bounds, and owned by this type's nearest package.
+			*/
+			 
 			virtual std::shared_ptr<uml::Association> createAssociation(bool end1IsNavigable,uml::AggregationKind end1Aggregation,std::string end1Name,int end1Lower,int end1Upper,std::shared_ptr<uml::Type>  end1Type,bool end2IsNavigable,uml::AggregationKind end2Aggregation,std::string end2Name,int end2Lower,int end2Upper) = 0;
 			
 			/*!
-			 Retrieves the associations in which this type is involved. */ 
+			Retrieves the associations in which this type is involved.
+			*/
+			 
 			virtual std::shared_ptr<Bag<uml::Association> > getAssociations() = 0;
 			
 			
@@ -163,14 +171,19 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 Specifies the owning Package of this Type, if any.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the owning Package of this Type, if any.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Package > getPackage() const = 0;
 			
 			/*!
-			 Specifies the owning Package of this Type, if any.
-			<p>From package UML::CommonStructure.</p> */
-			virtual void setPackage(std::shared_ptr<uml::Package> _package_package) = 0;
+			Specifies the owning Package of this Type, if any.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
+			virtual void setPackage(std::shared_ptr<uml::Package> _package) = 0;
+			
 			
 
 		protected:
@@ -183,24 +196,31 @@ namespace uml
 			// Reference Members
 			//*********************************
 			/*!
-			 Specifies the owning Package of this Type, if any.
-			<p>From package UML::CommonStructure.</p> */
-			std::weak_ptr<uml::Package > m_package;
+			Specifies the owning Package of this Type, if any.
+			<p>From package UML::CommonStructure.</p>
+			*/
 			
+			std::weak_ptr<uml::Package > m_package;
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

@@ -13,7 +13,7 @@
 
 
 // forward declarations
-template<class T> class Bag;
+template<class T> class Bag; 
 
 
 
@@ -33,7 +33,7 @@ namespace persistence
 
 namespace fUML
 {
-	class FUMLFactory;
+	class fUMLFactory;
 }
 
 //Forward Declaration for used types
@@ -71,8 +71,7 @@ namespace fUML::Semantics::Activities
 //*********************************
 namespace fUML::Semantics::Activities 
 {
-	/*!
-	 */
+	
 	class ActivityFinalNodeActivation:virtual public ControlNodeActivation
 	{
 		public:
@@ -92,8 +91,7 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual void fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token> >  incomingTokens) = 0;
 			
 			

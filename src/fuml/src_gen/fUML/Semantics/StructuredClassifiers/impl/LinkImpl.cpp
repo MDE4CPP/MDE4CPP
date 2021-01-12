@@ -17,13 +17,13 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "fUML/impl/FUMLPackageImpl.hpp"
+
+//Includes from codegen annotation
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "uml/Property.hpp"
 #include "uml/Association.hpp"
@@ -31,8 +31,6 @@
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -48,10 +46,17 @@
 
 #include "uml/Property.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
-#include "fUML/FUMLFactory.hpp"
+#include "fUML/Semantics/Values/Value.hpp"
+
+//Factories an Package includes
+#include "fUML/Semantics/StructuredClassifiers/impl/StructuredClassifiersFactoryImpl.hpp"
+#include "fUML/Semantics/StructuredClassifiers/impl/StructuredClassifiersPackageImpl.hpp"
+
+#include "fUML/fUMLFactory.hpp"
+#include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsFactory.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -61,19 +66,7 @@ using namespace fUML::Semantics::StructuredClassifiers;
 // Constructor / Destructor
 //*********************************
 LinkImpl::LinkImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	//Init references
-	
+{	
 }
 
 LinkImpl::~LinkImpl()
@@ -82,7 +75,6 @@ LinkImpl::~LinkImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Link "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -122,7 +114,7 @@ std::shared_ptr<ecore::EObject>  LinkImpl::copy() const
 
 std::shared_ptr<ecore::EClass> LinkImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getLink_Class();
+	return fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getLink_Class();
 }
 
 //*********************************
@@ -132,19 +124,89 @@ std::shared_ptr<ecore::EClass> LinkImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
+std::shared_ptr<fUML::Semantics::Values::Value> LinkImpl::_copy()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Create a new link with the same type, locus and feature values as this link.
+
+std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> newValue = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Link>(fUML::Semantics::StructuredClassifiers::ExtensionalValueImpl::_copy());
+
+newValue->setType(this->getType());
+
+return newValue;
+	//end of body
+}
+
 void LinkImpl::addTo(std::shared_ptr<fUML::Semantics::Loci::Locus>  locus)
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+		// Add this link to the extent of its association at the given locus,
+	// Shift the positions of ends of other links, as appropriate, for ends
+	// that are ordered.
+
+	std::shared_ptr<Bag<uml::Property>> ends = this->getType()->getMemberEnd();
+	std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>> extent = locus->retrieveExtent(this->getType());
+
+	unsigned int endsSize = ends->size();
+	for (unsigned int i = 0; i < endsSize; i++) {
+		std::shared_ptr<uml::Property> end = ends->at(i);
+		if (end->getIsOrdered()) {
+			std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> featureValue =
+					this->retrieveFeatureValue(end);
+			std::shared_ptr<
+					Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> otherFeatureValues =
+					this->getOtherFeatureValues(extent, end);
+			int n = otherFeatureValues->size();
+			if (featureValue->getPosition() < 0
+					|| featureValue->getPosition() > n) {
+				featureValue->setPosition(n + 1);
+			} else {
+				if (featureValue->getPosition() == 0) {
+					featureValue->setPosition(-1);
+				}
+				for (int j = 0; j < n; j++) {
+					std::shared_ptr<
+							fUML::Semantics::SimpleClassifiers::FeatureValue> otherFeatureValue =
+							otherFeatureValues->at(j);
+					if (featureValue->getPosition()
+							<= otherFeatureValue->getPosition()) {
+						otherFeatureValue->setPosition(
+								otherFeatureValue->getPosition() + 1);
+					}
+				}
+			}
+		}
+	}
+	locus->add(getThisLinkPtr());
+	//end of body
 }
 
 std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue> > LinkImpl::getOtherFeatureValues(std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue> >  extent,std::shared_ptr<uml::Property>  end)
 {
-	std::cout << __PRETTY_FUNCTION__  << std::endl;
-	throw "UnsupportedOperationException";
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+		// Return all feature values for the given end of links in the given
+	// extent whose other ends match this link.
+	std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> featureValues(new Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>());
+	unsigned int extentSize = extent->size();
+	for(unsigned int i = 0; i < extentSize; i++)
+	{
+		std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> link = extent->at(i);
+		if(link != getThisLinkPtr())
+		{
+			if(isMatchingLink(link, end))
+			{
+				featureValues->add(link->retrieveFeatureValue(end));
+			}
+		}
+	}
+	return featureValues;
+	//end of body
 }
 
-std::shared_ptr<Bag<uml::Classifier> > LinkImpl::getTypes()
+std::shared_ptr<Bag<uml::Classifier> > LinkImpl::getTypes() const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -185,19 +247,26 @@ bool LinkImpl::isMatchingLink(std::shared_ptr<fUML::Semantics::StructuredClassif
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference type
+*/
 std::shared_ptr<uml::Association > LinkImpl::getType() const
 {
 
     return m_type;
 }
+
 void LinkImpl::setType(std::shared_ptr<uml::Association> _type)
 {
     m_type = _type;
 }
 
+
+
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<Link> LinkImpl::getThisLinkPtr() const
@@ -221,7 +290,7 @@ Any LinkImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::LINK_ATTRIBUTE_TYPE:
+		case fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::LINK_ATTRIBUTE_TYPE:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getType())); //682
 	}
 	return ExtensionalValueImpl::eGet(featureID, resolve, coreType);
@@ -230,7 +299,7 @@ bool LinkImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::LINK_ATTRIBUTE_TYPE:
+		case fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::LINK_ATTRIBUTE_TYPE:
 			return getType() != nullptr; //682
 	}
 	return ExtensionalValueImpl::internalEIsSet(featureID);
@@ -239,7 +308,7 @@ bool LinkImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::LINK_ATTRIBUTE_TYPE:
+		case fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::LINK_ATTRIBUTE_TYPE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -263,12 +332,11 @@ void LinkImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadH
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get FUMLFactory
-	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
+	// get fUMLFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -297,18 +365,19 @@ void LinkImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHand
 	ExtensionalValueImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void LinkImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+void LinkImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactory> modelFactory=fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance();
 
-
-	ExtensionalValueImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	ExtensionalValueImpl::loadNode(nodeName, loadHandler);
 }
 
 void LinkImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::LINK_ATTRIBUTE_TYPE:
+		case fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::LINK_ATTRIBUTE_TYPE:
 		{
 			if (references.size() == 1)
 			{
@@ -349,7 +418,7 @@ void LinkImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler
 {
 	try
 	{
-		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+		std::shared_ptr<fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage> package = fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance();
 
 	
 

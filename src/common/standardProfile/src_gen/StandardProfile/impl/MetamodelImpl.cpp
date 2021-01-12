@@ -11,12 +11,28 @@
 
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
+#include "StandardProfile/StandardProfileFactory.hpp"
 #include "StandardProfile/impl/StandardProfilePackageImpl.hpp"
 #include "uml/Stereotype.hpp"
+
+//Types included from attributes, operation parameters, imports and composite owner classes
 #include "uml/Model.hpp"
 
+//Packges and Factories included from types of attributes, operation parameters, imports and composite owner classes
+#include "uml/umlFactory.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
+//Packages of included Enumerations
 
+//Includes of PluginFramework (if required)
+
+//Includes of OpaqueBevaiors (if required)
+
+//Includes from InstanceValues (if required)
+
+//Includes from Ports typed by interfaces (if required)
+
+//Includes from roles of ConnectorEnds (if required)
 
 using namespace StandardProfile;
 
@@ -25,6 +41,12 @@ using namespace StandardProfile;
 //*********************************
 MetamodelImpl::MetamodelImpl()
 {
+	#ifdef ADD_COUNT
+		ADD_COUNT("MetamodelImpl()");
+	#endif
+
+	DEBUG_MESSAGE(std::cout<<"Metamodel is created..."<<std::endl;)
+
 	//***********************************
 	// init Get Set
 	//getter init
@@ -34,16 +56,16 @@ MetamodelImpl::MetamodelImpl()
 	
 	m_unsetterMap.insert(std::pair<std::string,std::function<void()>>("StandardProfile::Metamodel::base_Model",[this](){m_base_Model = std::shared_ptr<uml::Model>(nullptr);}));
 	 
-
-	// init properties without default
-	
-
-	
 }
 
 
 MetamodelImpl::~MetamodelImpl()
 {
+	#ifdef SUB_COUNT
+		SUB_COUNT("MetamodelImpl()");
+	#endif
+
+	DEBUG_MESSAGE(std::cout<<"Metamodel is destroyed..."<<std::endl;)
 }
 
 MetamodelImpl::MetamodelImpl(const MetamodelImpl & obj):MetamodelImpl()
@@ -52,6 +74,7 @@ MetamodelImpl::MetamodelImpl(const MetamodelImpl & obj):MetamodelImpl()
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Metamodel "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	instantiate();
 }
 
 std::shared_ptr<ecore::EObject>  MetamodelImpl::copy() const
@@ -65,6 +88,21 @@ std::shared_ptr<ecore::EObject>  MetamodelImpl::copy() const
 std::shared_ptr<uml::Class> MetamodelImpl::getMetaClass()
 {
 	return StandardProfilePackageImpl::eInstance()->get_StandardProfile_Metamodel();
+}
+
+void MetamodelImpl::instantiate()
+{   
+	
+}
+
+void MetamodelImpl::destroy()
+{	
+
+	//Erase properties
+	//deleting property base_Model
+	m_base_Model.reset();
+	
+	//Erase back reference to owner
 }
 
 //*********************************

@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -25,21 +24,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -71,10 +61,11 @@
 
 #include "uml/StructuredActivityNode.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -84,17 +75,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 ControlNodeImpl::ControlNodeImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 ControlNodeImpl::~ControlNodeImpl()
@@ -104,53 +85,36 @@ ControlNodeImpl::~ControlNodeImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+ControlNodeImpl::ControlNodeImpl(std::weak_ptr<uml::Activity > par_activity)
+:ControlNodeImpl()
+{
+	m_activity = par_activity;
+	m_owner = par_activity;
+}
 
 //Additional constructor for the containments back reference
-			ControlNodeImpl::ControlNodeImpl(std::weak_ptr<uml::Activity > par_activity)
-			:ControlNodeImpl()
-			{
-			    m_activity = par_activity;
-				m_owner = par_activity;
-			}
-
-
-
-
+ControlNodeImpl::ControlNodeImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
+:ControlNodeImpl()
+{
+	m_inStructuredNode = par_inStructuredNode;
+	m_owner = par_inStructuredNode;
+}
 
 //Additional constructor for the containments back reference
-			ControlNodeImpl::ControlNodeImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
-			:ControlNodeImpl()
-			{
-			    m_inStructuredNode = par_inStructuredNode;
-				m_owner = par_inStructuredNode;
-			}
-
-
-
-
+ControlNodeImpl::ControlNodeImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:ControlNodeImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			ControlNodeImpl::ControlNodeImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:ControlNodeImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
-
-
-
-
-//Additional constructor for the containments back reference
-			ControlNodeImpl::ControlNodeImpl(std::weak_ptr<uml::Element > par_owner)
-			:ControlNodeImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-
-
+ControlNodeImpl::ControlNodeImpl(std::weak_ptr<uml::Element > par_owner)
+:ControlNodeImpl()
+{
+	m_owner = par_owner;
+}
 
 
 ControlNodeImpl::ControlNodeImpl(const ControlNodeImpl & obj):ControlNodeImpl()
@@ -246,7 +210,7 @@ std::shared_ptr<ecore::EObject>  ControlNodeImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ControlNodeImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getControlNode_Class();
+	return uml::umlPackage::eInstance()->getControlNode_Class();
 }
 
 //*********************************
@@ -266,20 +230,55 @@ std::shared_ptr<ecore::EClass> ControlNodeImpl::eStaticClass() const
 //*********************************
 std::shared_ptr<Union<uml::ActivityGroup>> ControlNodeImpl::getInGroup() const
 {
+	if(m_inGroup == nullptr)
+	{
+		/*Union*/
+		m_inGroup.reset(new Union<uml::ActivityGroup>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_inGroup - Union<uml::ActivityGroup>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_inGroup;
 }
+
 std::shared_ptr<Union<uml::Element>> ControlNodeImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > ControlNodeImpl::getOwner() const
 {
 	return m_owner;
 }
+
 std::shared_ptr<Union<uml::RedefinableElement>> ControlNodeImpl::getRedefinedElement() const
 {
+	if(m_redefinedElement == nullptr)
+	{
+		/*Union*/
+		m_redefinedElement.reset(new Union<uml::RedefinableElement>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_redefinedElement - Union<uml::RedefinableElement>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_redefinedElement;
 }
+
+
 
 
 std::shared_ptr<ControlNode> ControlNodeImpl::getThisControlNodePtr() const
@@ -352,12 +351,11 @@ void ControlNodeImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -367,11 +365,12 @@ void ControlNodeImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XL
 	ActivityNodeImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ControlNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void ControlNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
-
-	ActivityNodeImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	ActivityNodeImpl::loadNode(nodeName, loadHandler);
 }
 
 void ControlNodeImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -385,7 +384,6 @@ void ControlNodeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler
 
 	ActivityNodeImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);
@@ -406,7 +404,7 @@ void ControlNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 

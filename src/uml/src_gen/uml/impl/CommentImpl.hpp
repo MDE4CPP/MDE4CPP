@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class CommentImpl :virtual public ElementImpl, virtual public Comment 
+	class CommentImpl : virtual public ElementImpl, virtual public Comment 
 	{
 		public: 
 			CommentImpl(const CommentImpl & obj);
@@ -28,7 +28,7 @@ namespace uml
 			CommentImpl& operator=(CommentImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			CommentImpl();
 			virtual std::shared_ptr<Comment> getThisCommentPtr() const;
 			virtual void setThisCommentPtr(std::weak_ptr<Comment> thisCommentPtr);
@@ -52,24 +52,30 @@ namespace uml
 			// Attributes Getter Setter
 			//*********************************
 			/*!
-			 Specifies a string that is the comment.
-			<p>From package UML::CommonStructure.</p> */ 
+			Specifies a string that is the comment.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			 
 			virtual std::string getBody() const ;
 			
 			/*!
-			 Specifies a string that is the comment.
-			<p>From package UML::CommonStructure.</p> */ 
+			Specifies a string that is the comment.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			 
 			virtual void setBody (std::string _body); 
-			
 			
 			
 			//*********************************
 			// Reference
 			//*********************************
 			/*!
-			 References the Element(s) being commented.
-			<p>From package UML::CommonStructure.</p> */
+			References the Element(s) being commented.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Bag<uml::Element>> getAnnotatedElement() const ;
+			
 			
 							
 			
@@ -77,8 +83,10 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ; 
 			 
 			//*********************************
@@ -92,7 +100,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

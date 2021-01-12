@@ -17,14 +17,27 @@
 [import fUML4CPP::generator::main::generateOpaqueBehaviorExecution /]
 [import UML4CPP::generator::main::components::generateType /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
+[import UML4CPP::generator::main::helpers::collectionHelper /]
+
+[query public getFUMLCommonBehaviorFactory(any : OclAny) : String = 'fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()' /]
+[query public getPSCSCommonBehaviorFactory(any : OclAny) : String = 'PSCS::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()' /]
+[query public getFUMLLociFactory(any : OclAny) : String = 'fUML::Semantics::Loci::LociFactory::eInstance()' /]
+[query public getPSCSLociFactory(any : OclAny) : String = 'PSCS::Semantics::Loci::LociFactory::eInstance()' /]
+[query public getFUMLSimpleClassifierFactory(any : OclAny) : String = 'fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()' /]
+[query public getPSCSSimpleClassifierFactory(any : OclAny) : String = 'PSCS::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()' /]
+[query public getFUMLStructuredClassifierFactory(any : OclAny) : String = 'fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()' /]
+[query public getPSCSStructuredClassifierFactory(any : OclAny) : String = 'PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()' /]
+[query public getPSCSActionsFactory(any : OclAny) : String = 'PSCS::Semantics::Actions::ActionsFactory::eInstance()' /]
 
 [query public getValueClass(aType : Type) : String = if (aType.oclIsKindOf(PrimitiveType)) then 'fUML::Semantics::SimpleClassifiers::'.concat(aType.name.toUpperFirst()).concat('Value') else aType.oclAsType(Classifier).objectClassName() endif /]
 
-[query public pointerName(aClassifier : Classifier, aPackage : Package) : String = if (aPackage.name = aClassifier.namespace.myNamespaceName()) then aClassifier.name.toUpperFirst() else aClassifier.namespace.myNamespaceName().concat('::').concat(aClassifier.name.toUpperFirst()) endif /]
+[query public pointerName(aClassifier : Classifier, aPackage : Package) : String = if (aPackage.name = aClassifier.namespace.myNamespaceName()) then aClassifier.name.toUpperFirst() else aClassifier.getNearestPackage().generateNamespace(false).concat('::').concat(aClassifier.name.toUpperFirst()) endif /]
 [query public executionClassName(aClassifier : Classifier) : String = aClassifier.name.toUpperFirst().concat('Execution') /]
 [query public objectClassName(aClassifier : Classifier) : String = aClassifier.name.toUpperFirst().concat('Object') /]
 
 [query public supportedTypes(type : Type) : Boolean = (name = 'Integer') or (name = 'Boolean') or (name = 'String') or (name = 'Real') or (name = 'UnlimitedNatural') /]
+
+[query public isUMLElement(type : Type) : Boolean = type.oclIsKindOf(uml::Element) and (not (type._package.name = 'Ecore')) /]
 
 [query public getClassiferExecutions(aPackage : Package) : Set(Classifier) = OrderedSet{
 				aPackage.allOwnedElements()->filter(Activity)._context->reject(oclIsUndefined()),
@@ -37,8 +50,58 @@
 				aPackage.allOwnedElements()->filter(AddStructuralFeatureValueAction).structuralFeature.type,
 				aPackage.allOwnedElements()->filter(RemoveStructuralFeatureValueAction).structuralFeature.type,
 				aPackage.allOwnedElements()->filter(Action).input.type,
-				aPackage.allOwnedElements()->filter(Action).output.type	
-			}->flatten()->reject(oclIsKindOf(Activity))->reject(supportedTypes())->reject(oclIsKindOf(Enumeration))->sortedBy(name)/]
+				aPackage.allOwnedElements()->filter(Action).output.type,
+				aPackage.getPackageClasses().attribute.type,
+				aPackage.getPackageClasses().getAllOperations().ownedParameter.type,
+				aPackage.getPackageInterfaces().getAllOperations().ownedParameter.type,
+				aPackage.getPackageClasses().attribute.getAppliedStereotypes(),
+				aPackage.getPackageClasses().interfaceRealization.supplier.oclAsType(Classifier),
+				aPackage.getPackageClasses().generalization.general 
+			}->flatten()->reject(oclIsUndefined())->reject(oclIsKindOf(Activity))->reject(supportedTypes())->reject(oclIsKindOf(PrimitiveType))->reject(oclIsKindOf(Enumeration))->sortedBy(name)/]
+
+[query private getReflectionClassesForObjectClasses(aPackage : Package) : Set(Classifier) = 
+	getDirectlyUsedReflectionPackageClasses()
+	->addAll(getDirectlyUsedReflectionPackageClasses().getNearestPackage()->asSet()->flatten()->reject(p : Package | p = aPackage).getReflectionClassesForObjectClasses()->asSet()->flatten())
+	->flatten()->asOrderedSet()->sortedBy(name)/]
+
+[query private getDirectlyUsedReflectionPackageClasses(aPackage : Package) : Set(Classifier) = getClassiferExecutions()->select(c : Classifier | c.getNearestPackage().isReflectionModel()) /]
+
+[query private getStereotypeClassifierExecutions(aPackage : Package) : Set(Classifier) = OrderedSet{
+				aPackage.getPackageStereotypes().attribute.type,
+				aPackage.getPackageClasses().generalization.general 
+			}->flatten()->reject(oclIsUndefined())->reject(oclIsKindOf(Activity))->reject(supportedTypes())->reject(oclIsKindOf(PrimitiveType))->reject(oclIsKindOf(Enumeration))->sortedBy(name)/]
+
+[query private getStereotypeReflectionClassesForObjectClasses(aPackage : Package) : Set(Classifier) = 
+	getDirectlyUsedStereotypeReflectionPackageClasses()
+	->addAll(getDirectlyUsedStereotypeReflectionPackageClasses().getNearestPackage()->asSet()->flatten()->reject(p : Package | p = aPackage).getStereotypeReflectionClassesForObjectClasses()->asSet()->flatten())
+	->flatten()->asOrderedSet()->sortedBy(name)/]
+
+[query private getDirectlyUsedStereotypeReflectionPackageClasses(aPackage : Package) : Set(Classifier) = getStereotypeClassifierExecutions()->select(c : Classifier | c.getNearestPackage().isReflectionModel()) /]
+
+[query public getPackageClasses(aPackage : Package) : Set(Class) = 
+	aPackage.getElementsBelongingToPackage()->filter(Class)->flatten()->reject(oclIsKindOf(AssociationClass))->reject(oclIsKindOf(Component))->reject(oclIsKindOf(Behavior))->reject(oclIsKindOf(Stereotype))->reject(oclIsKindOf(Node))->sortedBy(name)/]
+
+[query public getPackageInterfaces(aPackage : Package) : Set(Classifier) = aPackage.getElementsBelongingToPackage()->filter(Interface)->sortedBy(name) /]
+
+[query public getPackageStereotypes(aPackage : Package) : Set(Class) = 
+	aPackage.getElementsBelongingToPackage()->filter(Stereotype)->flatten()->sortedBy(name)/]
+
+[query public getPackageClassifiers(aPackage : Package) : Set(Classifier) = OrderedSet{getPackageClasses(), getPackageInterfaces(), getPackageStereotypes()}->flatten()->sortedBy(name) /]
+
+[query public getClassifiersForObjectClasses(aPackage : Package) : Set(Classifier) =
+				getPackageClassifiers()->flatten()->sortedBy(name)/]
+
+[query public getClassifiersForPackageOnly(aPackage : Package) : Set(Classifier) = aPackage.getClassifiersForObjectClasses()->reject(parents()->isEmpty()) /]
+
+[query private getMetamodelStereotypeClassifiersForObjectClasses(aPackage: Package) : Set(Classifier) = aPackage.getStereotypeReflectionClassesForObjectClasses()->addAll(aPackage.getStereotypeClassifierExecutions().getNearestPackage()->select(isReflectionModel()).getPackageClassifiers())->flatten()->asOrderedSet()->sortedBy(name)/]
+
+[comment]Get all Operations in Package[/comment]
+[query public getPackageOperations(aPackage : Package) : Set(Operation) = OrderedSet{
+				aPackage.getElementsBelongingToPackage()->filter(Classifier).getAllOperations()
+				}->flatten()->sortedBy(name)
+/]
+
+
 
 [comment]INPUT SWITCH ----------------------------------------------------------[/comment]
 [template public generateInputParameter(par : Parameter, index:Integer)]
@@ -74,32 +137,36 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> [name/]ValueList = inputPar
 [/template]
 
 [template public generateOutputParameter(par : Parameter) ? (par.type.supportedTypes())]
-std::shared_ptr<fUML::Semantics::SimpleClassifiers::[par.type.name/]Value> [par.name/]OutValue(fUML::FUMLFactory::eInstance()->create[par.type.name/]Value());
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::[par.type.name/]Value> [par.name/]OutValue([getFUMLSimpleClassifierFactory()/]->create[par.type.name/]Value());
 [/template]
 
 [template public generateOutputParameter(par : Parameter) ? (not type.supportedTypes() and type.oclIsKindOf(Enumeration))]
-std::shared_ptr<fUML::Semantics::SimpleClassifiers::EnumerationValue> [par.name/]OutValue(fUML::FUMLFactory::eInstance()->createEnumerationValue());
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::EnumerationValue> [par.name/]OutValue([getFUMLSimpleClassifierFactory()/]->createEnumerationValue());
 [/template]
 
 [template public generateOutputParameter(par : Parameter) ? ((not type.supportedTypes()) and (not type.oclIsKindOf(Enumeration)))]
-std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> [par.name/]OutValue(fUML::FUMLFactory::eInstance()->createReference());
-std::shared_ptr<[par.type.name.toUpperFirst()/]Object> [par.name/]OutUmlLinker(new [par.type.name.toUpperFirst()/]Object([par.name.toLowerFirst()/][if (par.upper <> 1)]Temp[/if]));
+std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> [par.name/]OutValue([getPSCSStructuredClassifierFactory()/]->createCS_Reference());
+std::shared_ptr<[par.type.getNearestPackage().generateNamespace(false)/]::[par.type.name.toUpperFirst()/]Object> [par.name/]OutUmlLinker(new [par.type.getNearestPackage().generateNamespace(false)/]::[par.type.name.toUpperFirst()/]Object([par.name.toLowerFirst()/][if (par.upper <> 1)]Temp[/if]));
 [par.name/]OutUmlLinker->setThis[par.type.name.toUpperFirst()/]ObjectPtr([par.name/]OutUmlLinker);
 [/template]
 
 
 [comment]INCLUDE SWITCH----------------------------------------------------------[/comment]
-[template public generateTypeInclude(type : Type, aPackage : Package) ? ((not type.supportedTypes()) and (not type.oclIsKindOf(Enumeration)))]
-#include "[type.getNearestPackage().myNamespaceName()/]/[type.name/].hpp"
-#include "[aPackage.getPackageName()/]Exec/[type.name/]Object.hpp"
+[template public generateTypeInclude(type : Type, aPackage : Package, thisPackage : Package) ? ((not type.supportedTypes()) and (not type.oclIsKindOf(Enumeration)))]
+#include "[aPackage.generateNamespacePath(true)/]/[type.name/].hpp"
+#include "[aPackage.generateNamespacePath(false)/]Exec/[type.name.toUpperFirst()/]Object.hpp"
 [/template]
 
-[template public generateTypeInclude(type : Type, aPackage : Package) ? (not type.supportedTypes() and type.oclIsKindOf(Enumeration))]
+[template public generateTypeInclude(type : Type, aPackage : Package, thisPackage : Package) ? (not type.supportedTypes() and type.oclIsKindOf(Enumeration))]
 #include "fUML/Semantics/SimpleClassifiers/EnumerationValue.hpp"
-#include "[type.getNearestPackage().myNamespaceName()/]/[type.name/].hpp"
-#include "[type.getNearestPackage().myNamespaceName()/]/[type.getNearestPackage().myNamespaceName()/]Package.hpp"
+#include "[aPackage.generateNamespacePath(false)/]/[type.name/].hpp"
 [/template]
 
-[template public generateTypeInclude(type : Type, aPackage : Package) ? (supportedTypes())]
+[template public generateTypeInclude(type : Type, aPackage : Package, thisPackage : Package) ? (supportedTypes())]
 #include "fUML/Semantics/SimpleClassifiers/[type.name/]Value.hpp"
 [/template]
+
+[comment]UMLValue Getter---------------------------------------------------------[/comment]
+[query public UMLValueName(aClassifier : Classifier) : String = 'm_'.concat(aClassifier.name.toUpperFirst()).concat('Value')/]
+[query public UMLValueGetterName(aClassifier : Classifier) : String = 'get'.concat(aClassifier.name.toUpperFirst()).concat('Value')/]
+[query public UMLValueSetterName(aClassifier : Classifier) : String = 'set'.concat(aClassifier.name.toUpperFirst()).concat('Value')/]

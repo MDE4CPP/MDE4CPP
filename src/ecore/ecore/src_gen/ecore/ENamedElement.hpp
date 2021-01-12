@@ -32,7 +32,7 @@ namespace persistence
 
 namespace ecore
 {
-	class EcoreFactory;
+	class ecoreFactory;
 }
 
 //Forward Declaration for used types
@@ -60,8 +60,7 @@ namespace ecore
 //*********************************
 namespace ecore 
 {
-	/*!
-	 */
+	
 	class ENamedElement:virtual public EModelElement
 	{
 		public:
@@ -85,14 +84,11 @@ namespace ecore
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::string getName() const = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual void setName (std::string _name)= 0; 
-			
 			
 			//*********************************
 			// Reference
@@ -103,8 +99,7 @@ namespace ecore
 			//*********************************
 			// Attribute Members
 			//*********************************
-			/*!
-			 */ 
+			 
 			std::string m_name = "";
 			
 			
@@ -117,8 +112,7 @@ namespace ecore
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

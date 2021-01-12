@@ -80,7 +80,7 @@ std::shared_ptr<Bag<[eOperation.eGenericType.generateCppType()/]> >[/if]
 [template public generateSubsetElements(eReference : EReference)]
 [let subsets : OrderedSet(EModelElement) = eReference.oclAsType(EModelElement).Subset()->asOrderedSet()]
 [for (m : EModelElement | subsets) separator(',')]
-m_[m.oclAsType(EReference).name/][/for][/let]
+[m.oclAsType(EReference).GetterName()/]()[/for][/let]
 [/template]
 
 [template public generateReferenceType(eReference : EReference, pointer : Boolean) post(trim())]

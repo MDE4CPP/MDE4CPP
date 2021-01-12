@@ -18,17 +18,15 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "fUML/impl/FUMLPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -40,10 +38,15 @@
 
 #include "uml/ValueSpecification.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
-#include "fUML/FUMLFactory.hpp"
+//Factories an Package includes
+#include "fUML/Semantics/Values/impl/ValuesFactoryImpl.hpp"
+#include "fUML/Semantics/Values/impl/ValuesPackageImpl.hpp"
+
+#include "fUML/fUMLFactory.hpp"
+#include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsFactory.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -53,17 +56,7 @@ using namespace fUML::Semantics::Values;
 // Constructor / Destructor
 //*********************************
 LiteralNullEvaluationImpl::LiteralNullEvaluationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 LiteralNullEvaluationImpl::~LiteralNullEvaluationImpl()
@@ -72,7 +65,6 @@ LiteralNullEvaluationImpl::~LiteralNullEvaluationImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete LiteralNullEvaluation "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -104,7 +96,7 @@ std::shared_ptr<ecore::EObject>  LiteralNullEvaluationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> LiteralNullEvaluationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getLiteralNullEvaluation_Class();
+	return fUML::Semantics::Values::ValuesPackage::eInstance()->getLiteralNullEvaluation_Class();
 }
 
 //*********************************
@@ -129,6 +121,7 @@ std::shared_ptr<fUML::Semantics::Values::Value> LiteralNullEvaluationImpl::evalu
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<LiteralNullEvaluation> LiteralNullEvaluationImpl::getThisLiteralNullEvaluationPtr() const
@@ -182,12 +175,11 @@ void LiteralNullEvaluationImpl::load(std::shared_ptr<persistence::interfaces::XL
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get FUMLFactory
-	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
+	// get fUMLFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -197,11 +189,12 @@ void LiteralNullEvaluationImpl::loadAttributes(std::shared_ptr<persistence::inte
 	LiteralEvaluationImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void LiteralNullEvaluationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+void LiteralNullEvaluationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<fUML::Semantics::Values::ValuesFactory> modelFactory=fUML::Semantics::Values::ValuesFactory::eInstance();
 
-
-	LiteralEvaluationImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	LiteralEvaluationImpl::loadNode(nodeName, loadHandler);
 }
 
 void LiteralNullEvaluationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -229,7 +222,7 @@ void LiteralNullEvaluationImpl::saveContent(std::shared_ptr<persistence::interfa
 {
 	try
 	{
-		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+		std::shared_ptr<fUML::Semantics::Values::ValuesPackage> package = fUML::Semantics::Values::ValuesPackage::eInstance();
 
 	
 

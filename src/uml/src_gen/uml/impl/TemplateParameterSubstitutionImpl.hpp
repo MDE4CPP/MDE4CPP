@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class TemplateParameterSubstitutionImpl :virtual public ElementImpl, virtual public TemplateParameterSubstitution 
+	class TemplateParameterSubstitutionImpl : virtual public ElementImpl, virtual public TemplateParameterSubstitution 
 	{
 		public: 
 			TemplateParameterSubstitutionImpl(const TemplateParameterSubstitutionImpl & obj);
@@ -28,7 +28,7 @@ namespace uml
 			TemplateParameterSubstitutionImpl& operator=(TemplateParameterSubstitutionImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			TemplateParameterSubstitutionImpl();
 			virtual std::shared_ptr<TemplateParameterSubstitution> getThisTemplateParameterSubstitutionPtr() const;
 			virtual void setThisTemplateParameterSubstitutionPtr(std::weak_ptr<TemplateParameterSubstitution> thisTemplateParameterSubstitutionPtr);
@@ -51,8 +51,10 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 The actual ParameterableElement must be compatible with the formal TemplateParameter, e.g., the actual ParameterableElement for a Class TemplateParameter must be a Class.
-			actual->forAll(a | a.isCompatibleWith(formal.parameteredElement)) */ 
+			The actual ParameterableElement must be compatible with the formal TemplateParameter, e.g., the actual ParameterableElement for a Class TemplateParameter must be a Class.
+			actual->forAll(a | a.isCompatibleWith(formal.parameteredElement))
+			*/
+			 
 			virtual bool must_be_compatible(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
@@ -66,52 +68,76 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 The ParameterableElement that is the actual parameter for this TemplateParameterSubstitution.
-			<p>From package UML::CommonStructure.</p> */
+			The ParameterableElement that is the actual parameter for this TemplateParameterSubstitution.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::ParameterableElement > getActual() const ;
 			
 			/*!
-			 The ParameterableElement that is the actual parameter for this TemplateParameterSubstitution.
-			<p>From package UML::CommonStructure.</p> */
-			virtual void setActual(std::shared_ptr<uml::ParameterableElement> _actual_actual) ;
+			The ParameterableElement that is the actual parameter for this TemplateParameterSubstitution.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
+			virtual void setActual(std::shared_ptr<uml::ParameterableElement> _actual) ;
+			
 			/*!
-			 The formal TemplateParameter that is associated with this TemplateParameterSubstitution.
-			<p>From package UML::CommonStructure.</p> */
+			The formal TemplateParameter that is associated with this TemplateParameterSubstitution.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::TemplateParameter > getFormal() const ;
 			
 			/*!
-			 The formal TemplateParameter that is associated with this TemplateParameterSubstitution.
-			<p>From package UML::CommonStructure.</p> */
-			virtual void setFormal(std::shared_ptr<uml::TemplateParameter> _formal_formal) ;
+			The formal TemplateParameter that is associated with this TemplateParameterSubstitution.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
+			virtual void setFormal(std::shared_ptr<uml::TemplateParameter> _formal) ;
+			
 			/*!
-			 The ParameterableElement that is owned by this TemplateParameterSubstitution as its actual parameter.
-			<p>From package UML::CommonStructure.</p> */
+			The ParameterableElement that is owned by this TemplateParameterSubstitution as its actual parameter.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::ParameterableElement > getOwnedActual() const ;
 			
 			/*!
-			 The ParameterableElement that is owned by this TemplateParameterSubstitution as its actual parameter.
-			<p>From package UML::CommonStructure.</p> */
-			virtual void setOwnedActual(std::shared_ptr<uml::ParameterableElement> _ownedActual_ownedActual) ;
+			The ParameterableElement that is owned by this TemplateParameterSubstitution as its actual parameter.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
+			virtual void setOwnedActual(std::shared_ptr<uml::ParameterableElement> _ownedActual) ;
+			
 			/*!
-			 The TemplateBinding that owns this TemplateParameterSubstitution.
-			<p>From package UML::CommonStructure.</p> */
+			The TemplateBinding that owns this TemplateParameterSubstitution.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::TemplateBinding > getTemplateBinding() const ;
 			
 			/*!
-			 The TemplateBinding that owns this TemplateParameterSubstitution.
-			<p>From package UML::CommonStructure.</p> */
-			virtual void setTemplateBinding(std::shared_ptr<uml::TemplateBinding> _templateBinding_templateBinding) ;
+			The TemplateBinding that owns this TemplateParameterSubstitution.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
+			virtual void setTemplateBinding(std::shared_ptr<uml::TemplateBinding> _templateBinding) ;
+			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
@@ -125,7 +151,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

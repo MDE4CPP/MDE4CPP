@@ -18,7 +18,7 @@
 //*********************************
 namespace ecore 
 {
-	class EClassifierImpl :virtual public ENamedElementImpl, virtual public EClassifier 
+	class EClassifierImpl : virtual public ENamedElementImpl, virtual public EClassifier 
 	{
 		public: 
 			EClassifierImpl(const EClassifierImpl & obj);
@@ -28,7 +28,7 @@ namespace ecore
 			EClassifierImpl& operator=(EClassifierImpl const&) = delete;
 
 		protected:
-			friend class EcoreFactoryImpl;
+			friend class ecoreFactoryImpl;
 			EClassifierImpl();
 			virtual std::shared_ptr<EClassifier> getThisEClassifierPtr() const;
 			virtual void setThisEClassifierPtr(std::weak_ptr<EClassifier> thisEClassifierPtr);
@@ -50,12 +50,10 @@ namespace ecore
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual int getClassifierID() ;
 			
-			/*!
-			 */ 
+			 
 			virtual bool isInstance(Any object) const ;
 			
 			
@@ -63,54 +61,44 @@ namespace ecore
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual Any getDefaultValue() const ;
 			
-			/*!
-			 */ 
+			 
 			virtual void setDefaultValue (Any _defaultValue); 
-			
-			/*!
-			 */ 
+			 
 			virtual void *  getInstanceClass() const ;
 			
-			/*!
-			 */ 
+			
+			 
 			virtual std::string getInstanceClassName() const ;
 			
-			/*!
-			 */ 
+			 
 			virtual void setInstanceClassName (std::string _instanceClassName); 
-			
-			/*!
-			 */ 
+			 
 			virtual std::string getInstanceTypeName() const ;
 			
-			/*!
-			 */ 
+			 
 			virtual void setInstanceTypeName (std::string _instanceTypeName); 
-			
 			
 			
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::weak_ptr<ecore::EPackage > getEPackage() const ;
 			
-			/*!
-			 */
+			
+			
 			virtual std::shared_ptr<Bag<ecore::ETypeParameter>> getETypeParameters() const ;
+			
 			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const ; 
 			 
 			//*********************************
@@ -124,7 +112,7 @@ namespace ecore
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<ecore::EcoreFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

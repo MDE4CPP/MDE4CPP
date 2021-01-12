@@ -13,13 +13,13 @@
 //Model includes
 #include "../RedefinitionBasedDispatchStrategy.hpp"
 
-#include "fUML/impl/FUMLFactoryImpl.hpp"
+#include "fUML/Semantics/StructuredClassifiers/impl/StructuredClassifiersFactoryImpl.hpp"
 #include "fUML/Semantics/StructuredClassifiers/impl/DispatchStrategyImpl.hpp"
 
 //*********************************
 namespace fUML::Semantics::StructuredClassifiers 
 {
-	class RedefinitionBasedDispatchStrategyImpl :virtual public DispatchStrategyImpl, virtual public RedefinitionBasedDispatchStrategy 
+	class RedefinitionBasedDispatchStrategyImpl : virtual public DispatchStrategyImpl, virtual public RedefinitionBasedDispatchStrategy 
 	{
 		public: 
 			RedefinitionBasedDispatchStrategyImpl(const RedefinitionBasedDispatchStrategyImpl & obj);
@@ -29,7 +29,7 @@ namespace fUML::Semantics::StructuredClassifiers
 			RedefinitionBasedDispatchStrategyImpl& operator=(RedefinitionBasedDispatchStrategyImpl const&) = delete;
 
 		protected:
-			friend class fUML::FUMLFactoryImpl;
+			friend class fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactoryImpl;
 			RedefinitionBasedDispatchStrategyImpl();
 			virtual std::shared_ptr<RedefinitionBasedDispatchStrategy> getThisRedefinitionBasedDispatchStrategyPtr() const;
 			virtual void setThisRedefinitionBasedDispatchStrategyPtr(std::weak_ptr<RedefinitionBasedDispatchStrategy> thisRedefinitionBasedDispatchStrategyPtr);
@@ -43,12 +43,10 @@ namespace fUML::Semantics::StructuredClassifiers
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual bool operationsMatch(std::shared_ptr<uml::Operation>  ownedOperation,std::shared_ptr<uml::Operation>  baseOperation) ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<uml::Behavior> retrieveMethod(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object>  object,std::shared_ptr<uml::Operation>  operation) ;
 			
 			
@@ -79,7 +77,7 @@ namespace fUML::Semantics::StructuredClassifiers
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

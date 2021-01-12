@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class ExecutionOccurrenceSpecificationImpl :virtual public OccurrenceSpecificationImpl, virtual public ExecutionOccurrenceSpecification 
+	class ExecutionOccurrenceSpecificationImpl : virtual public OccurrenceSpecificationImpl, virtual public ExecutionOccurrenceSpecification 
 	{
 		public: 
 			ExecutionOccurrenceSpecificationImpl(const ExecutionOccurrenceSpecificationImpl & obj);
@@ -28,7 +28,7 @@ namespace uml
 			ExecutionOccurrenceSpecificationImpl& operator=(ExecutionOccurrenceSpecificationImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			ExecutionOccurrenceSpecificationImpl();
 			virtual std::shared_ptr<ExecutionOccurrenceSpecification> getThisExecutionOccurrenceSpecificationPtr() const;
 			virtual void setThisExecutionOccurrenceSpecificationPtr(std::weak_ptr<ExecutionOccurrenceSpecification> thisExecutionOccurrenceSpecificationPtr);
@@ -69,28 +69,39 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 References the execution specification describing the execution that is started or finished at this execution event.
-			<p>From package UML::Interactions.</p> */
+			References the execution specification describing the execution that is started or finished at this execution event.
+			<p>From package UML::Interactions.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::ExecutionSpecification > getExecution() const ;
 			
 			/*!
-			 References the execution specification describing the execution that is started or finished at this execution event.
-			<p>From package UML::Interactions.</p> */
-			virtual void setExecution(std::shared_ptr<uml::ExecutionSpecification> _execution_execution) ;
+			References the execution specification describing the execution that is started or finished at this execution event.
+			<p>From package UML::Interactions.</p>
+			*/
+			
+			virtual void setExecution(std::shared_ptr<uml::ExecutionSpecification> _execution) ;
+			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
@@ -104,7 +115,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

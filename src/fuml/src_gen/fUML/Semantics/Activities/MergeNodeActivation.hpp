@@ -32,7 +32,7 @@ namespace persistence
 
 namespace fUML
 {
-	class FUMLFactory;
+	class fUMLFactory;
 }
 
 //Forward Declaration for used types
@@ -70,8 +70,7 @@ namespace fUML::Semantics::Activities
 //*********************************
 namespace fUML::Semantics::Activities 
 {
-	/*!
-	 */
+	
 	class MergeNodeActivation:virtual public ControlNodeActivation
 	{
 		public:

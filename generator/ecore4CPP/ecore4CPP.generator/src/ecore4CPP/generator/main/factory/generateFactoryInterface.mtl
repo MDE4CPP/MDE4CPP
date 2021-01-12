@@ -19,20 +19,25 @@
 [import ecore4CPP::generator::main::generateType /]
 [import ecore4CPP::generator::main::helper /]
  
-[template public generateFactoryInterface(anEPackage : EPackage) {packageName : String = anEPackage.name.toUpperFirst().concat('Factory');}]
-[file (anEPackage.name.concat('/').concat(packageName).concat('.hpp'), false, 'UTF-8')]
+[template public generateFactoryInterface(anEPackage : EPackage) {packageName : String = anEPackage.name.concat('Factory');}]
+[file (anEPackage.generateNamespacePath().concat('/').concat(packageName).concat('.hpp'), false, 'UTF-8')]
 [startGuard(anEPackage,'Factory')/]
 
 #include <map>
 #include <memory>
 
 #include "ecore/EFactory.hpp"
+[if (not (anEPackage = anEPackage.getRootPackage()))]
+#include "[anEPackage.getRootPackage().name/]/[anEPackage.getNamespacePathWithoutRoot()/][anEPackage.name/]Package.hpp"
+[else]
+#include "[anEPackage.getRootPackage().name/]/[anEPackage.getRootPackage().name/]Package.hpp"
+[/if]
 
 [comment  Generate Includes for the Factory/]
 [anEPackage.generateForwardDeclarations()/]
 
 [comment namespace /]
-namespace [anEPackage.name/] 
+namespace [anEPackage.generateNamespaceDefinition()/] 
 {
 	class [packageName/] : virtual public [needNamespace(anEPackage, 'EFactory')/] 
 	{
@@ -50,9 +55,11 @@ namespace [anEPackage.name/]
 			virtual std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> create(const int classID,  std::shared_ptr<ecore::EObject> container = nullptr, const int referenceID = -1)[if (not generateObjectMonitoring())] const[/if] = 0;
 			virtual std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> create(std::shared_ptr<[needNamespace(anEPackage, 'EClass')/]> _class, std::shared_ptr<EObject> _container=nullptr, const int referenceID = -1)[if (not generateObjectMonitoring())] const[/if] = 0;
 
-			[anEPackage.eAllContents(EClass)->sortedBy(name).generateClassCreate(false)/]
+			[anEPackage.eClassifiers->selectByKind(EClass)->sortedBy(name).generateClassCreate(false)/]
+[comment] Package in Factory notwendig???
 			//Package
-			virtual std::shared_ptr<[anEPackage.name.toUpperFirst().concat('Package')/]> get[anEPackage.name.toUpperFirst().concat('Package')/]() const = 0;
+			virtual std::shared_ptr<[anEPackage.name.concat('Package')/]> get[anEPackage.name.concat('Package')/]() const = 0;
+[/comment]
 [if (generateObjectMonitoring())]
 			virtual void print() = 0;
 			virtual void add(std::shared_ptr<ecore::EObject> obj) = 0;
@@ -71,7 +78,7 @@ namespace [anEPackage.generateNamespaceDefinition()/]
 	class [elements.name/];
 [/for]
 [if (anEPackage.eSuperPackage.oclIsUndefined())]
-	class [anEPackage.name.toUpperFirst().concat('Package')/];
+	class [anEPackage.name.concat('Package')/];
 [/if]
 }
 [/if]

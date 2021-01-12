@@ -17,18 +17,18 @@
 [import ecore4CPP::generator::main::helper /]
 
 [template public generateEcorePluginImplHeader(aPackage : EPackage)]
-[file (aPackage.name.concat('/impl/').concat(aPackage.name.toUpperFirst()).concat('PluginImpl.hpp'), false, 'UTF-8')]
+[file (aPackage.generateNamespacePath().concat('/impl/').concat(aPackage.name).concat('PluginImpl.hpp'), false, 'UTF-8')]
 [startGuard(aPackage,'PluginImpl')/]
 
-#include "[aPackage.name/]/[aPackage.name.toUpperFirst()/]Plugin.hpp"
+#include "[aPackage.name/]/[aPackage.name/]Plugin.hpp"
 
 namespace [aPackage.name/] 
 {
-	class [aPackage.name.toUpperFirst().concat('PluginImpl')/] : virtual public [aPackage.name.toUpperFirst().concat('Plugin')/] 
+	class [aPackage.name.concat('PluginImpl')/] : virtual public [aPackage.name.concat('Plugin')/] 
 	{
 		public:
-			[aPackage.name.toUpperFirst()/]PluginImpl();
-			virtual ~[aPackage.name.toUpperFirst()/]PluginImpl();
+			[aPackage.name/]PluginImpl();
+			virtual ~[aPackage.name/]PluginImpl();
 		
 			virtual std::string eclipseURI();
 			virtual std::string eNAME();

@@ -18,12 +18,12 @@
 [import ecore4CPP::generator::main::helper /]
 [import ecore4CPP::generator::main::package::generatePackageHelper /]
 
-[template public generatePackageInterfaceSource(anEPackage : EPackage) {packageName : String = anEPackage.name.toUpperFirst().concat('Package').toUpperFirst(); }]
-[file (anEPackage.name.concat('/').concat(packageName).concat('.cpp'), false, 'UTF-8')]
-#include "[anEPackage.name/]/[packageName/].hpp"
-#include "[anEPackage.name/]/impl/[packageName.concat('Impl')/].hpp"
+[template public generatePackageInterfaceSource(anEPackage : EPackage) {packageName : String = anEPackage.name.concat('Package'); }]
+[file (anEPackage.generateNamespacePath().concat('/').concat(packageName).concat('.cpp'), false, 'UTF-8')]
+#include "[anEPackage.generateNamespacePath()/]/[packageName/].hpp"
+#include "[anEPackage.generateNamespacePath()/]/impl/[packageName.concat('Impl')/].hpp"
 
-using namespace [anEPackage.name/];
+using namespace [anEPackage.generateNamespaceDefinition()/];
 
 //static initialisation
 const std::string [packageName/]::eNAME ="[anEPackage.name/]";

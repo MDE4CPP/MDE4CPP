@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -26,25 +25,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -96,10 +82,11 @@
 
 #include "uml/Variable.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -109,95 +96,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 StructuredActivityNodeImpl::StructuredActivityNodeImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		/*Subset*/
-		m_edge.reset(new Subset<uml::ActivityEdge, uml::ActivityEdge,uml::Element >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_edge - Subset<uml::ActivityEdge, uml::ActivityEdge,uml::Element >()" << std::endl;
-		#endif
-	
-	
-
-		/*Subset*/
-		m_node.reset(new Subset<uml::ActivityNode, uml::ActivityNode,uml::Element >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_node - Subset<uml::ActivityNode, uml::ActivityNode,uml::Element >()" << std::endl;
-		#endif
-	
-	
-
-		/*Subset*/
-		m_structuredNodeInput.reset(new Subset<uml::InputPin, uml::InputPin >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_structuredNodeInput - Subset<uml::InputPin, uml::InputPin >()" << std::endl;
-		#endif
-	
-	
-
-		/*Subset*/
-		m_structuredNodeOutput.reset(new Subset<uml::OutputPin, uml::OutputPin >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_structuredNodeOutput - Subset<uml::OutputPin, uml::OutputPin >()" << std::endl;
-		#endif
-	
-	
-
-		/*Subset*/
-		m_variable.reset(new Subset<uml::Variable, uml::NamedElement >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_variable - Subset<uml::Variable, uml::NamedElement >()" << std::endl;
-		#endif
-	
-	
-
-	//Init references
-		/*Subset*/
-		m_edge->initSubset(m_containedEdge,m_ownedElement);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_edge - Subset<uml::ActivityEdge, uml::ActivityEdge,uml::Element >(m_containedEdge,m_ownedElement)" << std::endl;
-		#endif
-	
-	
-
-		/*Subset*/
-		m_node->initSubset(m_containedNode,m_ownedElement);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_node - Subset<uml::ActivityNode, uml::ActivityNode,uml::Element >(m_containedNode,m_ownedElement)" << std::endl;
-		#endif
-	
-	
-
-		/*Subset*/
-		m_structuredNodeInput->initSubset(m_input);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_structuredNodeInput - Subset<uml::InputPin, uml::InputPin >(m_input)" << std::endl;
-		#endif
-	
-	
-
-		/*Subset*/
-		m_structuredNodeOutput->initSubset(m_output);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_structuredNodeOutput - Subset<uml::OutputPin, uml::OutputPin >(m_output)" << std::endl;
-		#endif
-	
-	
-
-		/*Subset*/
-		m_variable->initSubset(m_ownedMember);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_variable - Subset<uml::Variable, uml::NamedElement >(m_ownedMember)" << std::endl;
-		#endif
-	
-	
+{	
 }
 
 StructuredActivityNodeImpl::~StructuredActivityNodeImpl()
@@ -207,18 +106,17 @@ StructuredActivityNodeImpl::~StructuredActivityNodeImpl()
 #endif
 }
 
-
 //Additional constructor for the containments back reference
 StructuredActivityNodeImpl::StructuredActivityNodeImpl(std::weak_ptr<uml::Activity > par_Activity, const int reference_id)
 :StructuredActivityNodeImpl()
 {
 	switch(reference_id)
 	{	
-	case UmlPackage::ACTIVITYNODE_ATTRIBUTE_ACTIVITY:
+	case umlPackage::ACTIVITYNODE_ATTRIBUTE_ACTIVITY:
 		m_activity = par_Activity;
 		m_owner = par_Activity;
 		 return;
-	case UmlPackage::ACTIVITYGROUP_ATTRIBUTE_INACTIVITY:
+	case umlPackage::ACTIVITYGROUP_ATTRIBUTE_INACTIVITY:
 		m_inActivity = par_Activity;
 		m_owner = par_Activity;
 		 return;
@@ -229,61 +127,36 @@ StructuredActivityNodeImpl::StructuredActivityNodeImpl(std::weak_ptr<uml::Activi
 }
 
 
-
-
+//Additional constructor for the containments back reference
+StructuredActivityNodeImpl::StructuredActivityNodeImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
+:StructuredActivityNodeImpl()
+{
+	m_inStructuredNode = par_inStructuredNode;
+	m_owner = par_inStructuredNode;
+}
 
 //Additional constructor for the containments back reference
-
-
-
-
-
-//Additional constructor for the containments back reference
-			StructuredActivityNodeImpl::StructuredActivityNodeImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
-			:StructuredActivityNodeImpl()
-			{
-			    m_inStructuredNode = par_inStructuredNode;
-				m_owner = par_inStructuredNode;
-			}
-
-
-
-
+StructuredActivityNodeImpl::StructuredActivityNodeImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:StructuredActivityNodeImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			StructuredActivityNodeImpl::StructuredActivityNodeImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:StructuredActivityNodeImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
-
-
-
+StructuredActivityNodeImpl::StructuredActivityNodeImpl(std::weak_ptr<uml::Element > par_owner)
+:StructuredActivityNodeImpl()
+{
+	m_owner = par_owner;
+}
 
 //Additional constructor for the containments back reference
-			StructuredActivityNodeImpl::StructuredActivityNodeImpl(std::weak_ptr<uml::Element > par_owner)
-			:StructuredActivityNodeImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-
-
-
-//Additional constructor for the containments back reference
-			StructuredActivityNodeImpl::StructuredActivityNodeImpl(std::weak_ptr<uml::ActivityGroup > par_superGroup)
-			:StructuredActivityNodeImpl()
-			{
-			    m_superGroup = par_superGroup;
-				m_owner = par_superGroup;
-			}
-
-
-
-
+StructuredActivityNodeImpl::StructuredActivityNodeImpl(std::weak_ptr<uml::ActivityGroup > par_superGroup)
+:StructuredActivityNodeImpl()
+{
+	m_superGroup = par_superGroup;
+	m_owner = par_superGroup;
+}
 
 
 StructuredActivityNodeImpl::StructuredActivityNodeImpl(const StructuredActivityNodeImpl & obj):StructuredActivityNodeImpl()
@@ -481,44 +354,39 @@ StructuredActivityNodeImpl::StructuredActivityNodeImpl(const StructuredActivityN
 		std::cout << "Copying the Subset: " << "m_variable" << std::endl;
 	#endif
 
-		/*Subset*/
-		m_edge->initSubset(m_containedEdge,m_ownedElement);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_edge - Subset<uml::ActivityEdge, uml::ActivityEdge,uml::Element >(m_containedEdge,m_ownedElement)" << std::endl;
-		#endif
-	
-	
-
-		/*Subset*/
-		m_node->initSubset(m_containedNode,m_ownedElement);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_node - Subset<uml::ActivityNode, uml::ActivityNode,uml::Element >(m_containedNode,m_ownedElement)" << std::endl;
-		#endif
-	
+	/*Subset*/
+	m_edge->initSubset(getContainedEdge(),getOwnedElement());
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Initialising value Subset: " << "m_edge - Subset<uml::ActivityEdge, uml::ActivityEdge,uml::Element >(getContainedEdge(),getOwnedElement())" << std::endl;
+	#endif
 	
 
-		/*Subset*/
-		m_structuredNodeInput->initSubset(m_input);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_structuredNodeInput - Subset<uml::InputPin, uml::InputPin >(m_input)" << std::endl;
-		#endif
-	
-	
-
-		/*Subset*/
-		m_structuredNodeOutput->initSubset(m_output);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_structuredNodeOutput - Subset<uml::OutputPin, uml::OutputPin >(m_output)" << std::endl;
-		#endif
-	
+	/*Subset*/
+	m_node->initSubset(getContainedNode(),getOwnedElement());
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Initialising value Subset: " << "m_node - Subset<uml::ActivityNode, uml::ActivityNode,uml::Element >(getContainedNode(),getOwnedElement())" << std::endl;
+	#endif
 	
 
-		/*Subset*/
-		m_variable->initSubset(m_ownedMember);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_variable - Subset<uml::Variable, uml::NamedElement >(m_ownedMember)" << std::endl;
-		#endif
+	/*Subset*/
+	m_structuredNodeInput->initSubset(getInput());
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Initialising value Subset: " << "m_structuredNodeInput - Subset<uml::InputPin, uml::InputPin >(getInput())" << std::endl;
+	#endif
 	
+
+	/*Subset*/
+	m_structuredNodeOutput->initSubset(getOutput());
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Initialising value Subset: " << "m_structuredNodeOutput - Subset<uml::OutputPin, uml::OutputPin >(getOutput())" << std::endl;
+	#endif
+	
+
+	/*Subset*/
+	m_variable->initSubset(getOwnedMember());
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Initialising value Subset: " << "m_variable - Subset<uml::Variable, uml::NamedElement >(getOwnedMember())" << std::endl;
+	#endif
 	
 }
 
@@ -531,21 +399,26 @@ std::shared_ptr<ecore::EObject>  StructuredActivityNodeImpl::copy() const
 
 std::shared_ptr<ecore::EClass> StructuredActivityNodeImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getStructuredActivityNode_Class();
+	return uml::umlPackage::eInstance()->getStructuredActivityNode_Class();
 }
 
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute mustIsolate
+*/
+bool StructuredActivityNodeImpl::getMustIsolate() const 
+{
+	return m_mustIsolate;
+}
+
 void StructuredActivityNodeImpl::setMustIsolate(bool _mustIsolate)
 {
 	m_mustIsolate = _mustIsolate;
 } 
 
-bool StructuredActivityNodeImpl::getMustIsolate() const 
-{
-	return m_mustIsolate;
-}
+
 
 //*********************************
 // Operations
@@ -583,39 +456,144 @@ std::shared_ptr<Bag<uml::ActivityNode> > StructuredActivityNodeImpl::targetNodes
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference edge
+*/
 std::shared_ptr<Subset<uml::ActivityEdge, uml::ActivityEdge,uml::Element>> StructuredActivityNodeImpl::getEdge() const
 {
+	if(m_edge == nullptr)
+	{
+		/*Subset*/
+		m_edge.reset(new Subset<uml::ActivityEdge, uml::ActivityEdge,uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_edge - Subset<uml::ActivityEdge, uml::ActivityEdge,uml::Element >()" << std::endl;
+		#endif
+		
+		/*Subset*/
+		m_edge->initSubset(getContainedEdge(),getOwnedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_edge - Subset<uml::ActivityEdge, uml::ActivityEdge,uml::Element >(getContainedEdge(),getOwnedElement())" << std::endl;
+		#endif
+		
+	}
 
     return m_edge;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference node
+*/
 std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode,uml::Element>> StructuredActivityNodeImpl::getNode() const
 {
+	if(m_node == nullptr)
+	{
+		/*Subset*/
+		m_node.reset(new Subset<uml::ActivityNode, uml::ActivityNode,uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_node - Subset<uml::ActivityNode, uml::ActivityNode,uml::Element >()" << std::endl;
+		#endif
+		
+		/*Subset*/
+		m_node->initSubset(getContainedNode(),getOwnedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_node - Subset<uml::ActivityNode, uml::ActivityNode,uml::Element >(getContainedNode(),getOwnedElement())" << std::endl;
+		#endif
+		
+	}
 
     return m_node;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference structuredNodeInput
+*/
 std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> StructuredActivityNodeImpl::getStructuredNodeInput() const
 {
+	if(m_structuredNodeInput == nullptr)
+	{
+		/*Subset*/
+		m_structuredNodeInput.reset(new Subset<uml::InputPin, uml::InputPin >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_structuredNodeInput - Subset<uml::InputPin, uml::InputPin >()" << std::endl;
+		#endif
+		
+		/*Subset*/
+		m_structuredNodeInput->initSubset(getInput());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_structuredNodeInput - Subset<uml::InputPin, uml::InputPin >(getInput())" << std::endl;
+		#endif
+		
+	}
 
     return m_structuredNodeInput;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference structuredNodeOutput
+*/
 std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> StructuredActivityNodeImpl::getStructuredNodeOutput() const
 {
+	if(m_structuredNodeOutput == nullptr)
+	{
+		/*Subset*/
+		m_structuredNodeOutput.reset(new Subset<uml::OutputPin, uml::OutputPin >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_structuredNodeOutput - Subset<uml::OutputPin, uml::OutputPin >()" << std::endl;
+		#endif
+		
+		/*Subset*/
+		m_structuredNodeOutput->initSubset(getOutput());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_structuredNodeOutput - Subset<uml::OutputPin, uml::OutputPin >(getOutput())" << std::endl;
+		#endif
+		
+	}
 
     return m_structuredNodeOutput;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference variable
+*/
 std::shared_ptr<Subset<uml::Variable, uml::NamedElement>> StructuredActivityNodeImpl::getVariable() const
 {
+	if(m_variable == nullptr)
+	{
+		/*Subset*/
+		m_variable.reset(new Subset<uml::Variable, uml::NamedElement >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_variable - Subset<uml::Variable, uml::NamedElement >()" << std::endl;
+		#endif
+		
+		/*Subset*/
+		m_variable->initSubset(getOwnedMember());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_variable - Subset<uml::Variable, uml::NamedElement >(getOwnedMember())" << std::endl;
+		#endif
+		
+	}
 
     return m_variable;
 }
+
+
+
 
 
 //*********************************
@@ -623,44 +601,160 @@ std::shared_ptr<Subset<uml::Variable, uml::NamedElement>> StructuredActivityNode
 //*********************************
 std::shared_ptr<Union<uml::ActivityEdge>> StructuredActivityNodeImpl::getContainedEdge() const
 {
+	if(m_containedEdge == nullptr)
+	{
+		/*Union*/
+		m_containedEdge.reset(new Union<uml::ActivityEdge>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_containedEdge - Union<uml::ActivityEdge>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_containedEdge;
 }
+
 std::shared_ptr<Union<uml::ActivityNode>> StructuredActivityNodeImpl::getContainedNode() const
 {
+	if(m_containedNode == nullptr)
+	{
+		/*Union*/
+		m_containedNode.reset(new Union<uml::ActivityNode>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_containedNode - Union<uml::ActivityNode>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_containedNode;
 }
+
 std::shared_ptr<Union<uml::ActivityGroup>> StructuredActivityNodeImpl::getInGroup() const
 {
+	if(m_inGroup == nullptr)
+	{
+		/*Union*/
+		m_inGroup.reset(new Union<uml::ActivityGroup>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_inGroup - Union<uml::ActivityGroup>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_inGroup;
 }
+
 std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> StructuredActivityNodeImpl::getInput() const
 {
+	if(m_input == nullptr)
+	{
+		/*SubsetUnion*/
+		m_input.reset(new SubsetUnion<uml::InputPin, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_input - SubsetUnion<uml::InputPin, uml::Element >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_input->initSubsetUnion(getOwnedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_input - SubsetUnion<uml::InputPin, uml::Element >(getOwnedElement())" << std::endl;
+		#endif
+		
+	}
 	return m_input;
 }
+
 std::shared_ptr<Union<uml::NamedElement>> StructuredActivityNodeImpl::getMember() const
 {
+	if(m_member == nullptr)
+	{
+		/*Union*/
+		m_member.reset(new Union<uml::NamedElement>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_member - Union<uml::NamedElement>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_member;
 }
+
 std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element>> StructuredActivityNodeImpl::getOutput() const
 {
+	if(m_output == nullptr)
+	{
+		/*SubsetUnion*/
+		m_output.reset(new SubsetUnion<uml::OutputPin, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_output - SubsetUnion<uml::OutputPin, uml::Element >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_output->initSubsetUnion(getOwnedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_output - SubsetUnion<uml::OutputPin, uml::Element >(getOwnedElement())" << std::endl;
+		#endif
+		
+	}
 	return m_output;
 }
+
 std::shared_ptr<Union<uml::Element>> StructuredActivityNodeImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> StructuredActivityNodeImpl::getOwnedMember() const
 {
+	if(m_ownedMember == nullptr)
+	{
+		/*SubsetUnion*/
+		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_ownedMember->initSubsetUnion(getOwnedElement(),getMember());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >(getOwnedElement(),getMember())" << std::endl;
+		#endif
+		
+	}
 	return m_ownedMember;
 }
+
 std::weak_ptr<uml::Element > StructuredActivityNodeImpl::getOwner() const
 {
 	return m_owner;
 }
+
 std::shared_ptr<Union<uml::RedefinableElement>> StructuredActivityNodeImpl::getRedefinedElement() const
 {
+	if(m_redefinedElement == nullptr)
+	{
+		/*Union*/
+		m_redefinedElement.reset(new Union<uml::RedefinableElement>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_redefinedElement - Union<uml::RedefinableElement>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_redefinedElement;
 }
+
+
 
 
 std::shared_ptr<StructuredActivityNode> StructuredActivityNodeImpl::getThisStructuredActivityNodePtr() const
@@ -715,7 +809,7 @@ Any StructuredActivityNodeImpl::eGet(int featureID, bool resolve, bool coreType)
 {
 	switch(featureID)
 	{
-		case UmlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_EDGE:
+		case uml::umlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_EDGE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::ActivityEdge>::iterator iter = m_edge->begin();
@@ -725,11 +819,11 @@ Any StructuredActivityNodeImpl::eGet(int featureID, bool resolve, bool coreType)
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //22838
+			return eAny(tempList); //22738
 		}
-		case UmlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_MUSTISOLATE:
-			return eAny(getMustIsolate()); //22839
-		case UmlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_NODE:
+		case uml::umlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_MUSTISOLATE:
+			return eAny(getMustIsolate()); //22739
+		case uml::umlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_NODE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::ActivityNode>::iterator iter = m_node->begin();
@@ -739,9 +833,9 @@ Any StructuredActivityNodeImpl::eGet(int featureID, bool resolve, bool coreType)
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //22843
+			return eAny(tempList); //22743
 		}
-		case UmlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_STRUCTUREDNODEINPUT:
+		case uml::umlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_STRUCTUREDNODEINPUT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::InputPin>::iterator iter = m_structuredNodeInput->begin();
@@ -751,9 +845,9 @@ Any StructuredActivityNodeImpl::eGet(int featureID, bool resolve, bool coreType)
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //22840
+			return eAny(tempList); //22740
 		}
-		case UmlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_STRUCTUREDNODEOUTPUT:
+		case uml::umlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_STRUCTUREDNODEOUTPUT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::OutputPin>::iterator iter = m_structuredNodeOutput->begin();
@@ -763,9 +857,9 @@ Any StructuredActivityNodeImpl::eGet(int featureID, bool resolve, bool coreType)
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //22841
+			return eAny(tempList); //22741
 		}
-		case UmlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_VARIABLE:
+		case uml::umlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_VARIABLE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Variable>::iterator iter = m_variable->begin();
@@ -775,7 +869,7 @@ Any StructuredActivityNodeImpl::eGet(int featureID, bool resolve, bool coreType)
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //22842
+			return eAny(tempList); //22742
 		}
 	}
 	Any result;
@@ -796,18 +890,18 @@ bool StructuredActivityNodeImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_EDGE:
-			return getEdge() != nullptr; //22838
-		case UmlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_MUSTISOLATE:
-			return getMustIsolate() != false; //22839
-		case UmlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_NODE:
-			return getNode() != nullptr; //22843
-		case UmlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_STRUCTUREDNODEINPUT:
-			return getStructuredNodeInput() != nullptr; //22840
-		case UmlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_STRUCTUREDNODEOUTPUT:
-			return getStructuredNodeOutput() != nullptr; //22841
-		case UmlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_VARIABLE:
-			return getVariable() != nullptr; //22842
+		case uml::umlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_EDGE:
+			return getEdge() != nullptr; //22738
+		case uml::umlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_MUSTISOLATE:
+			return getMustIsolate() != false; //22739
+		case uml::umlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_NODE:
+			return getNode() != nullptr; //22743
+		case uml::umlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_STRUCTUREDNODEINPUT:
+			return getStructuredNodeInput() != nullptr; //22740
+		case uml::umlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_STRUCTUREDNODEOUTPUT:
+			return getStructuredNodeOutput() != nullptr; //22741
+		case uml::umlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_VARIABLE:
+			return getVariable() != nullptr; //22742
 	}
 	bool result = false;
 	result = ActionImpl::internalEIsSet(featureID);
@@ -827,7 +921,7 @@ bool StructuredActivityNodeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_EDGE:
+		case uml::umlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_EDGE:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -863,14 +957,14 @@ bool StructuredActivityNodeImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case UmlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_MUSTISOLATE:
+		case uml::umlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_MUSTISOLATE:
 		{
 			// BOOST CAST
 			bool _mustIsolate = newValue->get<bool>();
-			setMustIsolate(_mustIsolate); //22839
+			setMustIsolate(_mustIsolate); //22739
 			return true;
 		}
-		case UmlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_NODE:
+		case uml::umlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_NODE:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -906,7 +1000,7 @@ bool StructuredActivityNodeImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case UmlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_STRUCTUREDNODEINPUT:
+		case uml::umlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_STRUCTUREDNODEINPUT:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -942,7 +1036,7 @@ bool StructuredActivityNodeImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case UmlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_STRUCTUREDNODEOUTPUT:
+		case uml::umlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_STRUCTUREDNODEOUTPUT:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -978,7 +1072,7 @@ bool StructuredActivityNodeImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case UmlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_VARIABLE:
+		case uml::umlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_VARIABLE:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -1042,12 +1136,11 @@ void StructuredActivityNodeImpl::load(std::shared_ptr<persistence::interfaces::X
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -1080,8 +1173,9 @@ void StructuredActivityNodeImpl::loadAttributes(std::shared_ptr<persistence::int
 	NamespaceImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void StructuredActivityNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void StructuredActivityNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -1093,7 +1187,7 @@ void StructuredActivityNodeImpl::loadNode(std::string nodeName, std::shared_ptr<
 				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			std::shared_ptr<ecore::EObject> edge = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::ACTIVITYEDGE_ATTRIBUTE_INSTRUCTUREDNODE);
+			std::shared_ptr<ecore::EObject> edge = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_INSTRUCTUREDNODE);
 			if (edge != nullptr)
 			{
 				loadHandler->handleChild(edge);
@@ -1109,7 +1203,7 @@ void StructuredActivityNodeImpl::loadNode(std::string nodeName, std::shared_ptr<
 				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			std::shared_ptr<ecore::EObject> node = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::ACTIVITYNODE_ATTRIBUTE_INSTRUCTUREDNODE);
+			std::shared_ptr<ecore::EObject> node = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::ACTIVITYNODE_ATTRIBUTE_INSTRUCTUREDNODE);
 			if (node != nullptr)
 			{
 				loadHandler->handleChild(node);
@@ -1124,7 +1218,7 @@ void StructuredActivityNodeImpl::loadNode(std::string nodeName, std::shared_ptr<
 			{
 				typeName = "InputPin";
 			}
-			std::shared_ptr<ecore::EObject> structuredNodeInput = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::ACTIVITYNODE_ATTRIBUTE_INSTRUCTUREDNODE);
+			std::shared_ptr<ecore::EObject> structuredNodeInput = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::ACTIVITYNODE_ATTRIBUTE_INSTRUCTUREDNODE);
 			if (structuredNodeInput != nullptr)
 			{
 				loadHandler->handleChild(structuredNodeInput);
@@ -1139,7 +1233,7 @@ void StructuredActivityNodeImpl::loadNode(std::string nodeName, std::shared_ptr<
 			{
 				typeName = "OutputPin";
 			}
-			std::shared_ptr<ecore::EObject> structuredNodeOutput = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::ACTIVITYNODE_ATTRIBUTE_INSTRUCTUREDNODE);
+			std::shared_ptr<ecore::EObject> structuredNodeOutput = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::ACTIVITYNODE_ATTRIBUTE_INSTRUCTUREDNODE);
 			if (structuredNodeOutput != nullptr)
 			{
 				loadHandler->handleChild(structuredNodeOutput);
@@ -1154,7 +1248,7 @@ void StructuredActivityNodeImpl::loadNode(std::string nodeName, std::shared_ptr<
 			{
 				typeName = "Variable";
 			}
-			std::shared_ptr<ecore::EObject> variable = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::VARIABLE_ATTRIBUTE_SCOPE);
+			std::shared_ptr<ecore::EObject> variable = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::VARIABLE_ATTRIBUTE_SCOPE);
 			if (variable != nullptr)
 			{
 				loadHandler->handleChild(variable);
@@ -1170,10 +1264,10 @@ void StructuredActivityNodeImpl::loadNode(std::string nodeName, std::shared_ptr<
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
-
-	ActionImpl::loadNode(nodeName, loadHandler, modelFactory);
-	ActivityGroupImpl::loadNode(nodeName, loadHandler, modelFactory);
-	NamespaceImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	ActionImpl::loadNode(nodeName, loadHandler);
+	ActivityGroupImpl::loadNode(nodeName, loadHandler);
+	NamespaceImpl::loadNode(nodeName, loadHandler);
 }
 
 void StructuredActivityNodeImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -1195,7 +1289,6 @@ void StructuredActivityNodeImpl::save(std::shared_ptr<persistence::interfaces::X
 	
 	ActivityNodeImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);
@@ -1218,7 +1311,7 @@ void StructuredActivityNodeImpl::saveContent(std::shared_ptr<persistence::interf
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 		// Save 'edge'
 		for (std::shared_ptr<uml::ActivityEdge> edge : *this->getEdge()) 
@@ -1250,7 +1343,6 @@ void StructuredActivityNodeImpl::saveContent(std::shared_ptr<persistence::interf
 			saveHandler->addReference(variable, "variable", variable->eClass() != package->getVariable_Class());
 		}
 	
- 
 		// Add attributes
 		if ( this->eIsSet(package->getStructuredActivityNode_Attribute_mustIsolate()) )
 		{

@@ -11,12 +11,28 @@
 
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
+#include "StandardProfile/StandardProfileFactory.hpp"
 #include "StandardProfile/impl/StandardProfilePackageImpl.hpp"
 #include "uml/Stereotype.hpp"
+
+//Types included from attributes, operation parameters, imports and composite owner classes
 #include "uml/Abstraction.hpp"
 
+//Packges and Factories included from types of attributes, operation parameters, imports and composite owner classes
+#include "uml/umlFactory.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
+//Packages of included Enumerations
 
+//Includes of PluginFramework (if required)
+
+//Includes of OpaqueBevaiors (if required)
+
+//Includes from InstanceValues (if required)
+
+//Includes from Ports typed by interfaces (if required)
+
+//Includes from roles of ConnectorEnds (if required)
 
 using namespace StandardProfile;
 
@@ -25,6 +41,12 @@ using namespace StandardProfile;
 //*********************************
 RefineImpl::RefineImpl()
 {
+	#ifdef ADD_COUNT
+		ADD_COUNT("RefineImpl()");
+	#endif
+
+	DEBUG_MESSAGE(std::cout<<"Refine is created..."<<std::endl;)
+
 	//***********************************
 	// init Get Set
 	//getter init
@@ -34,16 +56,16 @@ RefineImpl::RefineImpl()
 	
 	m_unsetterMap.insert(std::pair<std::string,std::function<void()>>("StandardProfile::Refine::base_Abstraction",[this](){m_base_Abstraction = std::shared_ptr<uml::Abstraction>(nullptr);}));
 	 
-
-	// init properties without default
-	
-
-	
 }
 
 
 RefineImpl::~RefineImpl()
 {
+	#ifdef SUB_COUNT
+		SUB_COUNT("RefineImpl()");
+	#endif
+
+	DEBUG_MESSAGE(std::cout<<"Refine is destroyed..."<<std::endl;)
 }
 
 RefineImpl::RefineImpl(const RefineImpl & obj):RefineImpl()
@@ -52,6 +74,7 @@ RefineImpl::RefineImpl(const RefineImpl & obj):RefineImpl()
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Refine "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	instantiate();
 }
 
 std::shared_ptr<ecore::EObject>  RefineImpl::copy() const
@@ -65,6 +88,21 @@ std::shared_ptr<ecore::EObject>  RefineImpl::copy() const
 std::shared_ptr<uml::Class> RefineImpl::getMetaClass()
 {
 	return StandardProfilePackageImpl::eInstance()->get_StandardProfile_Refine();
+}
+
+void RefineImpl::instantiate()
+{   
+	
+}
+
+void RefineImpl::destroy()
+{	
+
+	//Erase properties
+	//deleting property base_Abstraction
+	m_base_Abstraction.reset();
+	
+	//Erase back reference to owner
 }
 
 //*********************************

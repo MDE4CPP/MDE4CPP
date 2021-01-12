@@ -13,7 +13,7 @@
 
 
 // forward declarations
-template<class T> class Bag;
+template<class T> class Bag; 
 template<class T, class ... U> class Subset;
 
 
@@ -34,7 +34,7 @@ namespace persistence
 
 namespace ecore
 {
-	class EcoreFactory;
+	class ecoreFactory;
 }
 
 //Forward Declaration for used types
@@ -67,8 +67,7 @@ namespace ecore
 //*********************************
 namespace ecore 
 {
-	/*!
-	 */
+	
 	class EAnnotation:virtual public EModelElement
 	{
 		public:
@@ -100,36 +99,32 @@ namespace ecore
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::string getSource() const = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual void setSource (std::string _source)= 0; 
-			
 			
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Subset<ecore::EObject, ecore::EObject>> getContents() const = 0;
 			
-			/*!
-			 */
+			
+			
 			virtual std::shared_ptr<Bag<ecore::EStringToStringMapEntry>> getDetails() const = 0;
 			
-			/*!
-			 */
+			
+			
 			virtual std::weak_ptr<ecore::EModelElement > getEModelElement() const = 0;
 			
-			/*!
-			 */
-			virtual void setEModelElement(std::shared_ptr<ecore::EModelElement> _eModelElement_eModelElement) = 0;
-			/*!
-			 */
+			
+			virtual void setEModelElement(std::shared_ptr<ecore::EModelElement> _eModelElement) = 0;
+			
+			
 			virtual std::shared_ptr<Bag<ecore::EObject>> getReferences() const = 0;
+			
 			
 			
 
@@ -137,34 +132,24 @@ namespace ecore
 			//*********************************
 			// Attribute Members
 			//*********************************
-			/*!
-			 */ 
+			 
 			std::string m_source = "";
 			
 			
 			//*********************************
 			// Reference Members
 			//*********************************
-			/*!
-			 */
-			std::shared_ptr<Subset<ecore::EObject, ecore::EObject>> m_contents;
-			/*!
-			 */
-			std::shared_ptr<Bag<ecore::EStringToStringMapEntry>> m_details;
-			/*!
-			 */
-			std::weak_ptr<ecore::EModelElement > m_eModelElement;
-			/*!
-			 */
-			std::shared_ptr<Bag<ecore::EObject>> m_references;
 			
+			mutable std::shared_ptr<Subset<ecore::EObject, ecore::EObject>> m_contents;
+			mutable std::shared_ptr<Bag<ecore::EStringToStringMapEntry>> m_details;
+			std::weak_ptr<ecore::EModelElement > m_eModelElement;
+			mutable std::shared_ptr<Bag<ecore::EObject>> m_references;
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

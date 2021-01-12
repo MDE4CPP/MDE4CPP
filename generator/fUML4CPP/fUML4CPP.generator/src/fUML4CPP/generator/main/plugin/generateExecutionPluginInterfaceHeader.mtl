@@ -16,14 +16,37 @@
 
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
+[import fUML4CPP::generator::main::parameterHelper /]
+[import fUML4CPP::generator::main::generateOperationExecution /]
+[import fUML4CPP::generator::main::plugin::generateExecutionPluginImplementationSource /]
+[import fUML4CPP::generator::main::fUMLKeywords /]
 
-[template public generateExecutionPluginInterfaceHeader(aPackage : Package){packageName : String = aPackage.name.toUpperFirst().concat('ExecPlugin');}]
-[file (aPackage.name.concat('Exec/').concat(packageName).concat('.hpp'), false, 'UTF-8')]
+[template public generateExecutionPluginInterfaceHeader(aPackage : Package){packageName : String = aPackage.name.concat('ExecPlugin');}]
+[file (aPackage.generateNamespacePath(false).concat('Exec/').concat(packageName).concat('.hpp'), false, 'UTF-8')]
 [startGuard(aPackage,'Plugin')/]
 
 #include "pluginFramework/UMLExecutionModelPlugin.hpp"
 
-namespace [aPackage.name/]
+[if(aPackage.allOwnedElements()->filter(Operation)->reject(hasEAnnotation(sourceNoExecution()))->size() > 0)]
+namespace uml
+{
+	class OpaqueBehavior;
+}
+[/if]
+
+namespace PSCS::Semantics::Loci
+{
+	class CS_Executor;
+	class CS_ExecutionFactory;
+}
+
+namespace [aPackage.generateNamespace(false).sanitize()/]
+{
+	class [aPackage.generateNamespace(false).sanitize() + 'Locus'/];
+}
+
+
+namespace [aPackage.generateNamespace(false)/]
 {
 	class [packageName/] : virtual public UMLExecutionModelPlugin
 	{
@@ -45,6 +68,21 @@ namespace [aPackage.name/]
 	
 		private:
 			static std::shared_ptr<MDE4CPPPlugin> instance;
+
+		protected:
+			//Execution Environment
+[if (not aPackage.isReflectionModel())]
+			std::shared_ptr<[aPackage.generateNamespace(false).sanitize() + 'Locus'/]> m_locus;
+			std::shared_ptr<PSCS::Semantics::Loci::CS_Executor> m_executor;
+			std::shared_ptr<PSCS::Semantics::Loci::CS_ExecutionFactory> m_factory;
+			//OpaqueBehaviors for primitive prototypes for activity executions
+			[for (anOperation : Operation | aPackage.allOwnedElements()->filter(Operation)->addAll(aPackage.getOperationExecutionsCOA())->reject(hasEAnnotation(sourceNoExecution())))]
+			[if (not anOperation.name.oclIsUndefined())]
+			std::shared_ptr<uml::OpaqueBehavior> m_[anOperation.getFBPackageElement()/];
+			[/if]
+			[/for]
+[/if]
+			
 	};
 }
 [endGuard(aPackage,'ExecPlugin')/]

@@ -18,24 +18,22 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "fUML/impl/FUMLPackageImpl.hpp"
+
+//Includes from codegen annotation
 #include <sstream>
 #include "fUML/FUMLFactory.hpp"
 #include "uml/Class.hpp"
 #include "uml/LiteralReal.hpp"
 #include "uml/PrimitiveType.hpp"
-#include "uml/UmlFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "uml/Type.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -47,10 +45,15 @@
 
 #include "uml/ValueSpecification.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
-#include "fUML/FUMLFactory.hpp"
+//Factories an Package includes
+#include "fUML/Semantics/SimpleClassifiers/impl/SimpleClassifiersFactoryImpl.hpp"
+#include "fUML/Semantics/SimpleClassifiers/impl/SimpleClassifiersPackageImpl.hpp"
+
+#include "fUML/fUMLFactory.hpp"
+#include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsFactory.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -60,17 +63,7 @@ using namespace fUML::Semantics::SimpleClassifiers;
 // Constructor / Destructor
 //*********************************
 RealValueImpl::RealValueImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 RealValueImpl::~RealValueImpl()
@@ -79,7 +72,6 @@ RealValueImpl::~RealValueImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete RealValue "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -110,32 +102,50 @@ std::shared_ptr<ecore::EObject>  RealValueImpl::copy() const
 
 std::shared_ptr<ecore::EClass> RealValueImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getRealValue_Class();
+	return fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance()->getRealValue_Class();
 }
 
 //*********************************
 // Attribute Setter Getter
 //*********************************
-void RealValueImpl::setValue(double _value)
-{
-	m_value = _value;
-} 
-
+/*
+Getter & Setter for attribute value
+*/
 double RealValueImpl::getValue() const 
 {
 	return m_value;
 }
 
+void RealValueImpl::setValue(double _value)
+{
+	m_value = _value;
+} 
+
+
+
 //*********************************
 // Operations
 //*********************************
+std::shared_ptr<fUML::Semantics::Values::Value> RealValueImpl::_copy()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Create a new real value with the same value as this real value.
+
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::RealValue> newValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createRealValue();
+newValue->setType(this->getType()); //Duplicated from _copy()-method of super class in order to avoid having to call _copy()-method of super class and having to cast afterwards
+newValue->setValue(this->getValue());
+return newValue;
+	//end of body
+}
+
 bool RealValueImpl::equals(std::shared_ptr<fUML::Semantics::Values::Value>  otherValue)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 		bool isEqual = false;
 
-    if(otherValue != nullptr && otherValue->eClass()->getClassifierID() == fUML::FUMLPackage::REALVALUE_CLASS)
+    if(otherValue != nullptr && otherValue->eClass()->getClassifierID() == fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::REALVALUE_CLASS)
     {
 		std::shared_ptr<fUML::Semantics::SimpleClassifiers::RealValue> otherRealValue = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::RealValue>(otherValue);
         isEqual = (otherRealValue->getValue() == this->getValue());
@@ -149,7 +159,7 @@ std::shared_ptr<uml::ValueSpecification> RealValueImpl::specify()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<uml::LiteralReal> literal = uml::UmlFactory::eInstance()->createLiteralReal_in_Namespace(std::shared_ptr<uml::Class>());
+	std::shared_ptr<uml::LiteralReal> literal = uml::umlFactory::eInstance()->createLiteralReal_in_Namespace(std::shared_ptr<uml::Class>());
 	literal->setType(this->getType());
     literal->setValue(this->getValue());
     return literal;
@@ -176,6 +186,7 @@ std::string RealValueImpl::toString()
 //*********************************
 
 
+
 std::shared_ptr<RealValue> RealValueImpl::getThisRealValuePtr() const
 {
 	return m_thisRealValuePtr.lock();
@@ -197,7 +208,7 @@ Any RealValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::REALVALUE_ATTRIBUTE_VALUE:
+		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::REALVALUE_ATTRIBUTE_VALUE:
 			return eAny(getValue()); //951
 	}
 	return PrimitiveValueImpl::eGet(featureID, resolve, coreType);
@@ -206,7 +217,7 @@ bool RealValueImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::REALVALUE_ATTRIBUTE_VALUE:
+		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::REALVALUE_ATTRIBUTE_VALUE:
 			return getValue() != 0; //951
 	}
 	return PrimitiveValueImpl::internalEIsSet(featureID);
@@ -215,7 +226,7 @@ bool RealValueImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::REALVALUE_ATTRIBUTE_VALUE:
+		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::REALVALUE_ATTRIBUTE_VALUE:
 		{
 			// BOOST CAST
 			double _value = newValue->get<double>();
@@ -238,12 +249,11 @@ void RealValueImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> 
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get FUMLFactory
-	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
+	// get fUMLFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -274,11 +284,12 @@ void RealValueImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoa
 	PrimitiveValueImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void RealValueImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+void RealValueImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory> modelFactory=fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance();
 
-
-	PrimitiveValueImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	PrimitiveValueImpl::loadNode(nodeName, loadHandler);
 }
 
 void RealValueImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -306,10 +317,9 @@ void RealValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 {
 	try
 	{
-		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+		std::shared_ptr<fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage> package = fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance();
 
 	
- 
 		// Add attributes
 		if ( this->eIsSet(package->getRealValue_Attribute_value()) )
 		{

@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class ForkNodeImpl :virtual public ControlNodeImpl, virtual public ForkNode 
+	class ForkNodeImpl : virtual public ControlNodeImpl, virtual public ForkNode 
 	{
 		public: 
 			ForkNodeImpl(const ForkNodeImpl & obj);
@@ -28,7 +28,7 @@ namespace uml
 			ForkNodeImpl& operator=(ForkNodeImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			ForkNodeImpl();
 			virtual std::shared_ptr<ForkNode> getThisForkNodePtr() const;
 			virtual void setThisForkNodePtr(std::weak_ptr<ForkNode> thisForkNodePtr);
@@ -59,14 +59,18 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 The ActivityEdges incoming to and outgoing from a ForkNode must be either all ObjectFlows or all ControlFlows.
+			The ActivityEdges incoming to and outgoing from a ForkNode must be either all ObjectFlows or all ControlFlows.
 			let allEdges : Set(ActivityEdge) = incoming->union(outgoing) in
-			allEdges->forAll(oclIsKindOf(ControlFlow)) or allEdges->forAll(oclIsKindOf(ObjectFlow)) */ 
+			allEdges->forAll(oclIsKindOf(ControlFlow)) or allEdges->forAll(oclIsKindOf(ObjectFlow))
+			*/
+			 
 			virtual bool edges(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
-			 A ForkNode has one incoming ActivityEdge.
-			incoming->size()=1 */ 
+			A ForkNode has one incoming ActivityEdge.
+			incoming->size()=1
+			*/
+			 
 			virtual bool one_incoming_edge(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
@@ -85,17 +89,25 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
+			ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::ActivityGroup>> getInGroup() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
+			The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const ; 
 			 
 			//*********************************
@@ -109,7 +121,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

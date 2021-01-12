@@ -17,23 +17,19 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "fUML/impl/FUMLPackageImpl.hpp"
+
+//Includes from codegen annotation
 #include "uml/ExpansionNode.hpp"
 #include "uml/ExpansionRegion.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -49,10 +45,15 @@
 
 #include "fUML/Semantics/Activities/Token.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
-#include "fUML/FUMLFactory.hpp"
+//Factories an Package includes
+#include "fUML/Semantics/Activities/impl/ActivitiesFactoryImpl.hpp"
+#include "fUML/Semantics/Activities/impl/ActivitiesPackageImpl.hpp"
+
+#include "fUML/fUMLFactory.hpp"
+#include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsFactory.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -62,17 +63,7 @@ using namespace fUML::Semantics::Activities;
 // Constructor / Destructor
 //*********************************
 ExpansionNodeActivationImpl::ExpansionNodeActivationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 ExpansionNodeActivationImpl::~ExpansionNodeActivationImpl()
@@ -82,17 +73,12 @@ ExpansionNodeActivationImpl::~ExpansionNodeActivationImpl()
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			ExpansionNodeActivationImpl::ExpansionNodeActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
-			:ExpansionNodeActivationImpl()
-			{
-			    m_group = par_group;
-			}
-
-
-
-
+ExpansionNodeActivationImpl::ExpansionNodeActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
+:ExpansionNodeActivationImpl()
+{
+	m_group = par_group;
+}
 
 
 ExpansionNodeActivationImpl::ExpansionNodeActivationImpl(const ExpansionNodeActivationImpl & obj):ExpansionNodeActivationImpl()
@@ -139,7 +125,7 @@ std::shared_ptr<ecore::EObject>  ExpansionNodeActivationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ExpansionNodeActivationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getExpansionNodeActivation_Class();
+	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getExpansionNodeActivation_Class();
 }
 
 //*********************************
@@ -204,6 +190,7 @@ void ExpansionNodeActivationImpl::receiveOffer()
 //*********************************
 
 
+
 std::shared_ptr<ExpansionNodeActivation> ExpansionNodeActivationImpl::getThisExpansionNodeActivationPtr() const
 {
 	return m_thisExpansionNodeActivationPtr.lock();
@@ -259,12 +246,11 @@ void ExpansionNodeActivationImpl::load(std::shared_ptr<persistence::interfaces::
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get FUMLFactory
-	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
+	// get fUMLFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -274,11 +260,12 @@ void ExpansionNodeActivationImpl::loadAttributes(std::shared_ptr<persistence::in
 	ObjectNodeActivationImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ExpansionNodeActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+void ExpansionNodeActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<fUML::Semantics::Activities::ActivitiesFactory> modelFactory=fUML::Semantics::Activities::ActivitiesFactory::eInstance();
 
-
-	ObjectNodeActivationImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	ObjectNodeActivationImpl::loadNode(nodeName, loadHandler);
 }
 
 void ExpansionNodeActivationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -306,7 +293,7 @@ void ExpansionNodeActivationImpl::saveContent(std::shared_ptr<persistence::inter
 {
 	try
 	{
-		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+		std::shared_ptr<fUML::Semantics::Activities::ActivitiesPackage> package = fUML::Semantics::Activities::ActivitiesPackage::eInstance();
 
 	
 

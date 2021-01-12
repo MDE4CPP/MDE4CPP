@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -26,21 +25,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -86,10 +76,11 @@
 
 #include "uml/StructuredActivityNode.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -99,19 +90,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 StartObjectBehaviorActionImpl::StartObjectBehaviorActionImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	//Init references
-	
+{	
 }
 
 StartObjectBehaviorActionImpl::~StartObjectBehaviorActionImpl()
@@ -121,53 +100,36 @@ StartObjectBehaviorActionImpl::~StartObjectBehaviorActionImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+StartObjectBehaviorActionImpl::StartObjectBehaviorActionImpl(std::weak_ptr<uml::Activity > par_activity)
+:StartObjectBehaviorActionImpl()
+{
+	m_activity = par_activity;
+	m_owner = par_activity;
+}
 
 //Additional constructor for the containments back reference
-			StartObjectBehaviorActionImpl::StartObjectBehaviorActionImpl(std::weak_ptr<uml::Activity > par_activity)
-			:StartObjectBehaviorActionImpl()
-			{
-			    m_activity = par_activity;
-				m_owner = par_activity;
-			}
-
-
-
-
+StartObjectBehaviorActionImpl::StartObjectBehaviorActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
+:StartObjectBehaviorActionImpl()
+{
+	m_inStructuredNode = par_inStructuredNode;
+	m_owner = par_inStructuredNode;
+}
 
 //Additional constructor for the containments back reference
-			StartObjectBehaviorActionImpl::StartObjectBehaviorActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
-			:StartObjectBehaviorActionImpl()
-			{
-			    m_inStructuredNode = par_inStructuredNode;
-				m_owner = par_inStructuredNode;
-			}
-
-
-
-
+StartObjectBehaviorActionImpl::StartObjectBehaviorActionImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:StartObjectBehaviorActionImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			StartObjectBehaviorActionImpl::StartObjectBehaviorActionImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:StartObjectBehaviorActionImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
-
-
-
-
-//Additional constructor for the containments back reference
-			StartObjectBehaviorActionImpl::StartObjectBehaviorActionImpl(std::weak_ptr<uml::Element > par_owner)
-			:StartObjectBehaviorActionImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-
-
+StartObjectBehaviorActionImpl::StartObjectBehaviorActionImpl(std::weak_ptr<uml::Element > par_owner)
+:StartObjectBehaviorActionImpl()
+{
+	m_owner = par_owner;
+}
 
 
 StartObjectBehaviorActionImpl::StartObjectBehaviorActionImpl(const StartObjectBehaviorActionImpl & obj):StartObjectBehaviorActionImpl()
@@ -317,7 +279,7 @@ std::shared_ptr<ecore::EObject>  StartObjectBehaviorActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> StartObjectBehaviorActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getStartObjectBehaviorAction_Class();
+	return uml::umlPackage::eInstance()->getStartObjectBehaviorAction_Class();
 }
 
 //*********************************
@@ -354,43 +316,116 @@ bool StartObjectBehaviorActionImpl::type_of_object(Any diagnostics,std::map <   
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference object
+*/
 std::shared_ptr<uml::InputPin > StartObjectBehaviorActionImpl::getObject() const
 {
 //assert(m_object);
     return m_object;
 }
+
 void StartObjectBehaviorActionImpl::setObject(std::shared_ptr<uml::InputPin> _object)
 {
     m_object = _object;
 }
+
+
 
 //*********************************
 // Union Getter
 //*********************************
 std::shared_ptr<Union<uml::ActivityGroup>> StartObjectBehaviorActionImpl::getInGroup() const
 {
+	if(m_inGroup == nullptr)
+	{
+		/*Union*/
+		m_inGroup.reset(new Union<uml::ActivityGroup>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_inGroup - Union<uml::ActivityGroup>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_inGroup;
 }
+
 std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> StartObjectBehaviorActionImpl::getInput() const
 {
+	if(m_input == nullptr)
+	{
+		/*SubsetUnion*/
+		m_input.reset(new SubsetUnion<uml::InputPin, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_input - SubsetUnion<uml::InputPin, uml::Element >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_input->initSubsetUnion(getOwnedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_input - SubsetUnion<uml::InputPin, uml::Element >(getOwnedElement())" << std::endl;
+		#endif
+		
+	}
 	return m_input;
 }
+
 std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element>> StartObjectBehaviorActionImpl::getOutput() const
 {
+	if(m_output == nullptr)
+	{
+		/*SubsetUnion*/
+		m_output.reset(new SubsetUnion<uml::OutputPin, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_output - SubsetUnion<uml::OutputPin, uml::Element >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_output->initSubsetUnion(getOwnedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_output - SubsetUnion<uml::OutputPin, uml::Element >(getOwnedElement())" << std::endl;
+		#endif
+		
+	}
 	return m_output;
 }
+
 std::shared_ptr<Union<uml::Element>> StartObjectBehaviorActionImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > StartObjectBehaviorActionImpl::getOwner() const
 {
 	return m_owner;
 }
+
 std::shared_ptr<Union<uml::RedefinableElement>> StartObjectBehaviorActionImpl::getRedefinedElement() const
 {
+	if(m_redefinedElement == nullptr)
+	{
+		/*Union*/
+		m_redefinedElement.reset(new Union<uml::RedefinableElement>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_redefinedElement - Union<uml::RedefinableElement>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_redefinedElement;
 }
+
+
 
 
 std::shared_ptr<StartObjectBehaviorAction> StartObjectBehaviorActionImpl::getThisStartObjectBehaviorActionPtr() const
@@ -433,8 +468,8 @@ Any StartObjectBehaviorActionImpl::eGet(int featureID, bool resolve, bool coreTy
 {
 	switch(featureID)
 	{
-		case UmlPackage::STARTOBJECTBEHAVIORACTION_ATTRIBUTE_OBJECT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getObject())); //22031
+		case uml::umlPackage::STARTOBJECTBEHAVIORACTION_ATTRIBUTE_OBJECT:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getObject())); //21931
 	}
 	return CallActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -442,8 +477,8 @@ bool StartObjectBehaviorActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::STARTOBJECTBEHAVIORACTION_ATTRIBUTE_OBJECT:
-			return getObject() != nullptr; //22031
+		case uml::umlPackage::STARTOBJECTBEHAVIORACTION_ATTRIBUTE_OBJECT:
+			return getObject() != nullptr; //21931
 	}
 	return CallActionImpl::internalEIsSet(featureID);
 }
@@ -451,12 +486,12 @@ bool StartObjectBehaviorActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::STARTOBJECTBEHAVIORACTION_ATTRIBUTE_OBJECT:
+		case uml::umlPackage::STARTOBJECTBEHAVIORACTION_ATTRIBUTE_OBJECT:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::InputPin> _object = std::dynamic_pointer_cast<uml::InputPin>(_temp);
-			setObject(_object); //22031
+			setObject(_object); //21931
 			return true;
 		}
 	}
@@ -475,12 +510,11 @@ void StartObjectBehaviorActionImpl::load(std::shared_ptr<persistence::interfaces
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -490,8 +524,9 @@ void StartObjectBehaviorActionImpl::loadAttributes(std::shared_ptr<persistence::
 	CallActionImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void StartObjectBehaviorActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void StartObjectBehaviorActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -519,8 +554,8 @@ void StartObjectBehaviorActionImpl::loadNode(std::string nodeName, std::shared_p
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
-
-	CallActionImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	CallActionImpl::loadNode(nodeName, loadHandler);
 }
 
 void StartObjectBehaviorActionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -542,7 +577,6 @@ void StartObjectBehaviorActionImpl::save(std::shared_ptr<persistence::interfaces
 	
 	ActivityNodeImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);
@@ -567,7 +601,7 @@ void StartObjectBehaviorActionImpl::saveContent(std::shared_ptr<persistence::int
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 		// Save 'object'
 		std::shared_ptr<uml::InputPin > object = this->getObject();

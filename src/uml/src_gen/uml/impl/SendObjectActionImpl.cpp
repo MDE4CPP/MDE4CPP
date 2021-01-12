@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -26,21 +25,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -84,10 +74,11 @@
 
 #include "uml/StructuredActivityNode.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -97,23 +88,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 SendObjectActionImpl::SendObjectActionImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	
-
-	//Init references
-	
-
-	
+{	
 }
 
 SendObjectActionImpl::~SendObjectActionImpl()
@@ -123,53 +98,36 @@ SendObjectActionImpl::~SendObjectActionImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+SendObjectActionImpl::SendObjectActionImpl(std::weak_ptr<uml::Activity > par_activity)
+:SendObjectActionImpl()
+{
+	m_activity = par_activity;
+	m_owner = par_activity;
+}
 
 //Additional constructor for the containments back reference
-			SendObjectActionImpl::SendObjectActionImpl(std::weak_ptr<uml::Activity > par_activity)
-			:SendObjectActionImpl()
-			{
-			    m_activity = par_activity;
-				m_owner = par_activity;
-			}
-
-
-
-
+SendObjectActionImpl::SendObjectActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
+:SendObjectActionImpl()
+{
+	m_inStructuredNode = par_inStructuredNode;
+	m_owner = par_inStructuredNode;
+}
 
 //Additional constructor for the containments back reference
-			SendObjectActionImpl::SendObjectActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
-			:SendObjectActionImpl()
-			{
-			    m_inStructuredNode = par_inStructuredNode;
-				m_owner = par_inStructuredNode;
-			}
-
-
-
-
+SendObjectActionImpl::SendObjectActionImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:SendObjectActionImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			SendObjectActionImpl::SendObjectActionImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:SendObjectActionImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
-
-
-
-
-//Additional constructor for the containments back reference
-			SendObjectActionImpl::SendObjectActionImpl(std::weak_ptr<uml::Element > par_owner)
-			:SendObjectActionImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-
-
+SendObjectActionImpl::SendObjectActionImpl(std::weak_ptr<uml::Element > par_owner)
+:SendObjectActionImpl()
+{
+	m_owner = par_owner;
+}
 
 
 SendObjectActionImpl::SendObjectActionImpl(const SendObjectActionImpl & obj):SendObjectActionImpl()
@@ -319,7 +277,7 @@ std::shared_ptr<ecore::EObject>  SendObjectActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> SendObjectActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getSendObjectAction_Class();
+	return uml::umlPackage::eInstance()->getSendObjectAction_Class();
 }
 
 //*********************************
@@ -338,49 +296,112 @@ bool SendObjectActionImpl::type_target_pin(Any diagnostics,std::map <   Any, Any
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference request
+*/
 std::shared_ptr<uml::InputPin > SendObjectActionImpl::getRequest() const
 {
 //assert(m_request);
     return m_request;
 }
+
 void SendObjectActionImpl::setRequest(std::shared_ptr<uml::InputPin> _request)
 {
     m_request = _request;
 }
 
+
+
+/*
+Getter & Setter for reference target
+*/
 std::shared_ptr<uml::InputPin > SendObjectActionImpl::getTarget() const
 {
 //assert(m_target);
     return m_target;
 }
+
 void SendObjectActionImpl::setTarget(std::shared_ptr<uml::InputPin> _target)
 {
     m_target = _target;
 }
+
+
 
 //*********************************
 // Union Getter
 //*********************************
 std::shared_ptr<Union<uml::ActivityGroup>> SendObjectActionImpl::getInGroup() const
 {
+	if(m_inGroup == nullptr)
+	{
+		/*Union*/
+		m_inGroup.reset(new Union<uml::ActivityGroup>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_inGroup - Union<uml::ActivityGroup>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_inGroup;
 }
+
 std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> SendObjectActionImpl::getInput() const
 {
+	if(m_input == nullptr)
+	{
+		/*SubsetUnion*/
+		m_input.reset(new SubsetUnion<uml::InputPin, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_input - SubsetUnion<uml::InputPin, uml::Element >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_input->initSubsetUnion(getOwnedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_input - SubsetUnion<uml::InputPin, uml::Element >(getOwnedElement())" << std::endl;
+		#endif
+		
+	}
 	return m_input;
 }
+
 std::shared_ptr<Union<uml::Element>> SendObjectActionImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > SendObjectActionImpl::getOwner() const
 {
 	return m_owner;
 }
+
 std::shared_ptr<Union<uml::RedefinableElement>> SendObjectActionImpl::getRedefinedElement() const
 {
+	if(m_redefinedElement == nullptr)
+	{
+		/*Union*/
+		m_redefinedElement.reset(new Union<uml::RedefinableElement>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_redefinedElement - Union<uml::RedefinableElement>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_redefinedElement;
 }
+
+
 
 
 std::shared_ptr<SendObjectAction> SendObjectActionImpl::getThisSendObjectActionPtr() const
@@ -423,10 +444,10 @@ Any SendObjectActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::SENDOBJECTACTION_ATTRIBUTE_REQUEST:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getRequest())); //21329
-		case UmlPackage::SENDOBJECTACTION_ATTRIBUTE_TARGET:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getTarget())); //21330
+		case uml::umlPackage::SENDOBJECTACTION_ATTRIBUTE_REQUEST:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getRequest())); //21229
+		case uml::umlPackage::SENDOBJECTACTION_ATTRIBUTE_TARGET:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getTarget())); //21230
 	}
 	return InvocationActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -434,10 +455,10 @@ bool SendObjectActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::SENDOBJECTACTION_ATTRIBUTE_REQUEST:
-			return getRequest() != nullptr; //21329
-		case UmlPackage::SENDOBJECTACTION_ATTRIBUTE_TARGET:
-			return getTarget() != nullptr; //21330
+		case uml::umlPackage::SENDOBJECTACTION_ATTRIBUTE_REQUEST:
+			return getRequest() != nullptr; //21229
+		case uml::umlPackage::SENDOBJECTACTION_ATTRIBUTE_TARGET:
+			return getTarget() != nullptr; //21230
 	}
 	return InvocationActionImpl::internalEIsSet(featureID);
 }
@@ -445,20 +466,20 @@ bool SendObjectActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::SENDOBJECTACTION_ATTRIBUTE_REQUEST:
+		case uml::umlPackage::SENDOBJECTACTION_ATTRIBUTE_REQUEST:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::InputPin> _request = std::dynamic_pointer_cast<uml::InputPin>(_temp);
-			setRequest(_request); //21329
+			setRequest(_request); //21229
 			return true;
 		}
-		case UmlPackage::SENDOBJECTACTION_ATTRIBUTE_TARGET:
+		case uml::umlPackage::SENDOBJECTACTION_ATTRIBUTE_TARGET:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::InputPin> _target = std::dynamic_pointer_cast<uml::InputPin>(_temp);
-			setTarget(_target); //21330
+			setTarget(_target); //21230
 			return true;
 		}
 	}
@@ -477,12 +498,11 @@ void SendObjectActionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHa
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -492,8 +512,9 @@ void SendObjectActionImpl::loadAttributes(std::shared_ptr<persistence::interface
 	InvocationActionImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void SendObjectActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void SendObjectActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -537,8 +558,8 @@ void SendObjectActionImpl::loadNode(std::string nodeName, std::shared_ptr<persis
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
-
-	InvocationActionImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	InvocationActionImpl::loadNode(nodeName, loadHandler);
 }
 
 void SendObjectActionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -558,7 +579,6 @@ void SendObjectActionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHa
 	
 	ActivityNodeImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);
@@ -582,7 +602,14 @@ void SendObjectActionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
+
+		// Save 'request'
+		std::shared_ptr<uml::InputPin > request = this->getRequest();
+		if (request != nullptr)
+		{
+			saveHandler->addReference(request, "request", request->eClass() != package->getInputPin_Class());
+		}
 
 		// Save 'target'
 		std::shared_ptr<uml::InputPin > target = this->getTarget();
@@ -592,17 +619,6 @@ void SendObjectActionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 		}
 	
 
-
-		//
-		// Add new tags (from references)
-		//
-		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
-		// Save 'request'
-		std::shared_ptr<uml::InputPin > request = this->getRequest();
-		if (request != nullptr)
-		{
-			saveHandler->addReference(request, "request", request->eClass() != package->getInputPin_Class());
-		}
 	}
 	catch (std::exception& e)
 	{

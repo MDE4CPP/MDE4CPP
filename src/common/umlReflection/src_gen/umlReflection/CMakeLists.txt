@@ -24,10 +24,13 @@ SET(CMAKE_CXX_FLAGS_RELEASE " -DNDEBUG")
 string(REPLACE "\\" "/" MDE4CPP_HOME $ENV{MDE4CPP_HOME})
 
 SET(SOURCE_FILES
-	impl/UMLPackageImpl.cpp
-	UMLPackage.cpp
+	# Model plugin
 	impl/UMLPluginImpl.cpp
 	UMLPlugin.cpp
+	# Package of UML
+	impl/UMLPackageImpl.cpp
+	UMLPackage.cpp
+	
 )
 
 INCLUDE_DIRECTORIES(

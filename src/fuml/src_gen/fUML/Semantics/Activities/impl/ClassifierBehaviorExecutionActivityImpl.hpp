@@ -13,14 +13,14 @@
 //Model includes
 #include "../ClassifierBehaviorExecutionActivity.hpp"
 
-#include "fUML/impl/FUMLFactoryImpl.hpp"
+#include "fUML/Semantics/Activities/impl/ActivitiesFactoryImpl.hpp"
 
-#include "ecore/impl/EObjectImpl.hpp"
+#include "ecore/impl/EModelElementImpl.hpp"
 
 //*********************************
 namespace fUML::Semantics::Activities 
 {
-	class ClassifierBehaviorExecutionActivityImpl :virtual public ecore::EObjectImpl,
+	class ClassifierBehaviorExecutionActivityImpl : virtual public ecore::EModelElementImpl,
 virtual public ClassifierBehaviorExecutionActivity 
 	{
 		public: 
@@ -31,7 +31,7 @@ virtual public ClassifierBehaviorExecutionActivity
 			ClassifierBehaviorExecutionActivityImpl& operator=(ClassifierBehaviorExecutionActivityImpl const&) = delete;
 
 		protected:
-			friend class fUML::FUMLFactoryImpl;
+			friend class fUML::Semantics::Activities::ActivitiesFactoryImpl;
 			ClassifierBehaviorExecutionActivityImpl();
 			virtual std::shared_ptr<ClassifierBehaviorExecutionActivity> getThisClassifierBehaviorExecutionActivityPtr() const;
 			virtual void setThisClassifierBehaviorExecutionActivityPtr(std::weak_ptr<ClassifierBehaviorExecutionActivity> thisClassifierBehaviorExecutionActivityPtr);
@@ -73,7 +73,7 @@ virtual public ClassifierBehaviorExecutionActivity
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

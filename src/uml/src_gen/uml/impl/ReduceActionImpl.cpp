@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -26,21 +25,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -84,10 +74,11 @@
 
 #include "uml/StructuredActivityNode.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -97,27 +88,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 ReduceActionImpl::ReduceActionImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	
-
-	
-
-	//Init references
-	
-
-	
-
-	
+{	
 }
 
 ReduceActionImpl::~ReduceActionImpl()
@@ -127,53 +98,36 @@ ReduceActionImpl::~ReduceActionImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+ReduceActionImpl::ReduceActionImpl(std::weak_ptr<uml::Activity > par_activity)
+:ReduceActionImpl()
+{
+	m_activity = par_activity;
+	m_owner = par_activity;
+}
 
 //Additional constructor for the containments back reference
-			ReduceActionImpl::ReduceActionImpl(std::weak_ptr<uml::Activity > par_activity)
-			:ReduceActionImpl()
-			{
-			    m_activity = par_activity;
-				m_owner = par_activity;
-			}
-
-
-
-
+ReduceActionImpl::ReduceActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
+:ReduceActionImpl()
+{
+	m_inStructuredNode = par_inStructuredNode;
+	m_owner = par_inStructuredNode;
+}
 
 //Additional constructor for the containments back reference
-			ReduceActionImpl::ReduceActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
-			:ReduceActionImpl()
-			{
-			    m_inStructuredNode = par_inStructuredNode;
-				m_owner = par_inStructuredNode;
-			}
-
-
-
-
+ReduceActionImpl::ReduceActionImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:ReduceActionImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			ReduceActionImpl::ReduceActionImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:ReduceActionImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
-
-
-
-
-//Additional constructor for the containments back reference
-			ReduceActionImpl::ReduceActionImpl(std::weak_ptr<uml::Element > par_owner)
-			:ReduceActionImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-
-
+ReduceActionImpl::ReduceActionImpl(std::weak_ptr<uml::Element > par_owner)
+:ReduceActionImpl()
+{
+	m_owner = par_owner;
+}
 
 
 ReduceActionImpl::ReduceActionImpl(const ReduceActionImpl & obj):ReduceActionImpl()
@@ -316,21 +270,26 @@ std::shared_ptr<ecore::EObject>  ReduceActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ReduceActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getReduceAction_Class();
+	return uml::umlPackage::eInstance()->getReduceAction_Class();
 }
 
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute isOrdered
+*/
+bool ReduceActionImpl::getIsOrdered() const 
+{
+	return m_isOrdered;
+}
+
 void ReduceActionImpl::setIsOrdered(bool _isOrdered)
 {
 	m_isOrdered = _isOrdered;
 } 
 
-bool ReduceActionImpl::getIsOrdered() const 
-{
-	return m_isOrdered;
-}
+
 
 //*********************************
 // Operations
@@ -356,63 +315,148 @@ bool ReduceActionImpl::reducer_inputs_output(Any diagnostics,std::map <   Any, A
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference collection
+*/
 std::shared_ptr<uml::InputPin > ReduceActionImpl::getCollection() const
 {
 //assert(m_collection);
     return m_collection;
 }
+
 void ReduceActionImpl::setCollection(std::shared_ptr<uml::InputPin> _collection)
 {
     m_collection = _collection;
 }
 
+
+
+/*
+Getter & Setter for reference reducer
+*/
 std::shared_ptr<uml::Behavior > ReduceActionImpl::getReducer() const
 {
 //assert(m_reducer);
     return m_reducer;
 }
+
 void ReduceActionImpl::setReducer(std::shared_ptr<uml::Behavior> _reducer)
 {
     m_reducer = _reducer;
 }
 
+
+
+/*
+Getter & Setter for reference result
+*/
 std::shared_ptr<uml::OutputPin > ReduceActionImpl::getResult() const
 {
 //assert(m_result);
     return m_result;
 }
+
 void ReduceActionImpl::setResult(std::shared_ptr<uml::OutputPin> _result)
 {
     m_result = _result;
 }
+
+
 
 //*********************************
 // Union Getter
 //*********************************
 std::shared_ptr<Union<uml::ActivityGroup>> ReduceActionImpl::getInGroup() const
 {
+	if(m_inGroup == nullptr)
+	{
+		/*Union*/
+		m_inGroup.reset(new Union<uml::ActivityGroup>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_inGroup - Union<uml::ActivityGroup>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_inGroup;
 }
+
 std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> ReduceActionImpl::getInput() const
 {
+	if(m_input == nullptr)
+	{
+		/*SubsetUnion*/
+		m_input.reset(new SubsetUnion<uml::InputPin, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_input - SubsetUnion<uml::InputPin, uml::Element >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_input->initSubsetUnion(getOwnedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_input - SubsetUnion<uml::InputPin, uml::Element >(getOwnedElement())" << std::endl;
+		#endif
+		
+	}
 	return m_input;
 }
+
 std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element>> ReduceActionImpl::getOutput() const
 {
+	if(m_output == nullptr)
+	{
+		/*SubsetUnion*/
+		m_output.reset(new SubsetUnion<uml::OutputPin, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_output - SubsetUnion<uml::OutputPin, uml::Element >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_output->initSubsetUnion(getOwnedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_output - SubsetUnion<uml::OutputPin, uml::Element >(getOwnedElement())" << std::endl;
+		#endif
+		
+	}
 	return m_output;
 }
+
 std::shared_ptr<Union<uml::Element>> ReduceActionImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > ReduceActionImpl::getOwner() const
 {
 	return m_owner;
 }
+
 std::shared_ptr<Union<uml::RedefinableElement>> ReduceActionImpl::getRedefinedElement() const
 {
+	if(m_redefinedElement == nullptr)
+	{
+		/*Union*/
+		m_redefinedElement.reset(new Union<uml::RedefinableElement>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_redefinedElement - Union<uml::RedefinableElement>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_redefinedElement;
 }
+
+
 
 
 std::shared_ptr<ReduceAction> ReduceActionImpl::getThisReduceActionPtr() const
@@ -455,14 +499,14 @@ Any ReduceActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::REDUCEACTION_ATTRIBUTE_COLLECTION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getCollection())); //20727
-		case UmlPackage::REDUCEACTION_ATTRIBUTE_ISORDERED:
-			return eAny(getIsOrdered()); //20728
-		case UmlPackage::REDUCEACTION_ATTRIBUTE_REDUCER:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getReducer())); //20729
-		case UmlPackage::REDUCEACTION_ATTRIBUTE_RESULT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //20730
+		case uml::umlPackage::REDUCEACTION_ATTRIBUTE_COLLECTION:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getCollection())); //20627
+		case uml::umlPackage::REDUCEACTION_ATTRIBUTE_ISORDERED:
+			return eAny(getIsOrdered()); //20628
+		case uml::umlPackage::REDUCEACTION_ATTRIBUTE_REDUCER:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getReducer())); //20629
+		case uml::umlPackage::REDUCEACTION_ATTRIBUTE_RESULT:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //20630
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -470,14 +514,14 @@ bool ReduceActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::REDUCEACTION_ATTRIBUTE_COLLECTION:
-			return getCollection() != nullptr; //20727
-		case UmlPackage::REDUCEACTION_ATTRIBUTE_ISORDERED:
-			return getIsOrdered() != false; //20728
-		case UmlPackage::REDUCEACTION_ATTRIBUTE_REDUCER:
-			return getReducer() != nullptr; //20729
-		case UmlPackage::REDUCEACTION_ATTRIBUTE_RESULT:
-			return getResult() != nullptr; //20730
+		case uml::umlPackage::REDUCEACTION_ATTRIBUTE_COLLECTION:
+			return getCollection() != nullptr; //20627
+		case uml::umlPackage::REDUCEACTION_ATTRIBUTE_ISORDERED:
+			return getIsOrdered() != false; //20628
+		case uml::umlPackage::REDUCEACTION_ATTRIBUTE_REDUCER:
+			return getReducer() != nullptr; //20629
+		case uml::umlPackage::REDUCEACTION_ATTRIBUTE_RESULT:
+			return getResult() != nullptr; //20630
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
@@ -485,35 +529,35 @@ bool ReduceActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::REDUCEACTION_ATTRIBUTE_COLLECTION:
+		case uml::umlPackage::REDUCEACTION_ATTRIBUTE_COLLECTION:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::InputPin> _collection = std::dynamic_pointer_cast<uml::InputPin>(_temp);
-			setCollection(_collection); //20727
+			setCollection(_collection); //20627
 			return true;
 		}
-		case UmlPackage::REDUCEACTION_ATTRIBUTE_ISORDERED:
+		case uml::umlPackage::REDUCEACTION_ATTRIBUTE_ISORDERED:
 		{
 			// BOOST CAST
 			bool _isOrdered = newValue->get<bool>();
-			setIsOrdered(_isOrdered); //20728
+			setIsOrdered(_isOrdered); //20628
 			return true;
 		}
-		case UmlPackage::REDUCEACTION_ATTRIBUTE_REDUCER:
+		case uml::umlPackage::REDUCEACTION_ATTRIBUTE_REDUCER:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Behavior> _reducer = std::dynamic_pointer_cast<uml::Behavior>(_temp);
-			setReducer(_reducer); //20729
+			setReducer(_reducer); //20629
 			return true;
 		}
-		case UmlPackage::REDUCEACTION_ATTRIBUTE_RESULT:
+		case uml::umlPackage::REDUCEACTION_ATTRIBUTE_RESULT:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::OutputPin> _result = std::dynamic_pointer_cast<uml::OutputPin>(_temp);
-			setResult(_result); //20730
+			setResult(_result); //20630
 			return true;
 		}
 	}
@@ -532,12 +576,11 @@ void ReduceActionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandle
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -575,8 +618,9 @@ void ReduceActionImpl::loadAttributes(std::shared_ptr<persistence::interfaces::X
 	ActionImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ReduceActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void ReduceActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -620,15 +664,15 @@ void ReduceActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistenc
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
-
-	ActionImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	ActionImpl::loadNode(nodeName, loadHandler);
 }
 
 void ReduceActionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case UmlPackage::REDUCEACTION_ATTRIBUTE_REDUCER:
+		case uml::umlPackage::REDUCEACTION_ATTRIBUTE_REDUCER:
 		{
 			if (references.size() == 1)
 			{
@@ -653,7 +697,6 @@ void ReduceActionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandle
 	
 	ActivityNodeImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);
@@ -676,7 +719,7 @@ void ReduceActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 		// Save 'collection'
 		std::shared_ptr<uml::InputPin > collection = this->getCollection();
@@ -692,7 +735,6 @@ void ReduceActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_Class());
 		}
 	
- 
 		// Add attributes
 		if ( this->eIsSet(package->getReduceAction_Attribute_isOrdered()) )
 		{

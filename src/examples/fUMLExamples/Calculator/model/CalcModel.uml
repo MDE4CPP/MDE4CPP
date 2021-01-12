@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_lTky4IxoEeazCdUXohZ79Q" name="CalcModel">
+  <eAnnotations xmi:id="_-e3U8AGvEeuJAuxe-SDWBA" source="prepareApplication">
+    <details xmi:id="_SZt50AGwEeuJAuxe-SDWBA" key="activityMain" value="true"/>
+  </eAnnotations>
   <packagedElement xmi:type="uml:Class" xmi:id="_As0b8IxpEeazCdUXohZ79Q" name="PrimeChecker">
     <ownedAttribute xmi:id="_d2XO4IxyEeazCdUXohZ79Q" name="number">
       <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
@@ -10,6 +13,7 @@
       <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_hUiJcIxzEeazCdUXohZ79Q" value="3"/>
     </ownedAttribute>
     <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_19O9sIxxEeazCdUXohZ79Q" name="fbDivides" specification="_uxuS4IxpEeazCdUXohZ79Q">
+      <eAnnotations xmi:id="_zi4T4ENrEeuWpawb503BRA" source="noExecution"/>
       <ownedParameter xmi:id="_XHdG4oxyEeazCdUXohZ79Q" name="isDivisible" direction="return">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
         <defaultValue xmi:type="uml:LiteralString" xmi:id="_XHdG44xyEeazCdUXohZ79Q" value=""/>
@@ -18,6 +22,7 @@
       <body>isDivisible = this->getNumber() % this->getDivider() == 0;</body>
     </ownedBehavior>
     <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_3E-o4IxxEeazCdUXohZ79Q" name="fbNext" specification="_UtQZgIxrEeazCdUXohZ79Q">
+      <eAnnotations xmi:id="_2yDloENrEeuWpawb503BRA" source="noExecution"/>
       <language>CPP</language>
       <body>this->setDivider (this->getDivider() + 2);</body>
     </ownedBehavior>
@@ -28,6 +33,7 @@
       <body>#include &lt;iostream></body>
     </ownedBehavior>
     <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_37xG8IxxEeazCdUXohZ79Q" name="fbIsOdd" specification="_QBniEIxxEeazCdUXohZ79Q">
+      <eAnnotations xmi:id="_49FSwENrEeuWpawb503BRA" source="noExecution"/>
       <ownedParameter xmi:id="_XFyNkI7QEeaDf9S-W91Htg" name="isOdd" direction="return">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
         <defaultValue xmi:type="uml:LiteralString" xmi:id="_XFyNkY7QEeaDf9S-W91Htg" value=""/>
@@ -42,6 +48,7 @@
       <body>#include &lt;iostream></body>
     </ownedBehavior>
     <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_MhsMoIxzEeazCdUXohZ79Q" name="fbIsNotFinished" specification="_FtjmYIxzEeazCdUXohZ79Q">
+      <eAnnotations xmi:id="_9PPEcENrEeuWpawb503BRA" source="noExecution"/>
       <ownedParameter xmi:id="_TJtCcIxzEeazCdUXohZ79Q" name="isNotFinished" direction="return">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
       </ownedParameter>
@@ -49,6 +56,9 @@
       <body>isNotFinished = this->getDivider() &lt;= this->getNumber() / 2;</body>
     </ownedBehavior>
     <ownedBehavior xmi:type="uml:Activity" xmi:id="_196CMIxoEeazCdUXohZ79Q" name="CheckIfPrime" node="_7XVkAIxzEeazCdUXohZ79Q _-az8EIxzEeazCdUXohZ79Q _QJrKgIx0EeazCdUXohZ79Q _Vf7dgIx0EeazCdUXohZ79Q _Yq_EQIx0EeazCdUXohZ79Q _bDbiUIx0EeazCdUXohZ79Q _8C8QUIx0EeazCdUXohZ79Q _PBb6oIx1EeazCdUXohZ79Q _SI3loIx1EeazCdUXohZ79Q _fCIMgIx0EeazCdUXohZ79Q _aYAhkIyGEeaffY4wOnNpKQ _LYTdUI7REeaDf9S-W91Htg _MUDT4I7REeaDf9S-W91Htg _AXMOYI7TEeaDf9S-W91Htg _xG4rQDy9EeiNErdsza5ATQ _qOEZEFGWEeqeyKUsnKD-hQ">
+      <eAnnotations xmi:id="_rF3qgAGwEeuJAuxe-SDWBA" source="http://sse.tu-ilmenau.de/codegen">
+        <details xmi:id="_8jk3gAGwEeuJAuxe-SDWBA" key="mainActivity" value="1"/>
+      </eAnnotations>
       <ownedParameter xmi:id="_7Bd8gIyFEeaE8Ot-1J8eNg" name="actInputNode" type="_As0b8IxpEeazCdUXohZ79Q"/>
       <edge xmi:type="uml:ControlFlow" xmi:id="_We8DcIx0EeazCdUXohZ79Q" target="_Vf7dgIx0EeazCdUXohZ79Q" source="_QJrKgIx0EeazCdUXohZ79Q">
         <guard xmi:type="uml:LiteralBoolean" xmi:id="_We8qgIx0EeazCdUXohZ79Q" name="_To_ActivityFinal1_guard" value="true"/>
@@ -140,6 +150,7 @@
       </node>
     </ownedBehavior>
     <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_zg094FGWEeqeyKUsnKD-hQ" name="enterNumber" specification="_jMpkwFGWEeqeyKUsnKD-hQ">
+      <eAnnotations xmi:id="_9qKF4ENrEeuWpawb503BRA" source="noExecution"/>
       <language>CPP</language>
       <language>INCLUDE</language>
       <body>std::cout &lt;&lt; &quot;Please enter a number: &quot;;&#xD;

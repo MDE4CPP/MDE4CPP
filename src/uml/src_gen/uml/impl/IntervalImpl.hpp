@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class IntervalImpl :virtual public ValueSpecificationImpl, virtual public Interval 
+	class IntervalImpl : virtual public ValueSpecificationImpl, virtual public Interval 
 	{
 		public: 
 			IntervalImpl(const IntervalImpl & obj);
@@ -28,7 +28,7 @@ namespace uml
 			IntervalImpl& operator=(IntervalImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			IntervalImpl();
 			virtual std::shared_ptr<Interval> getThisIntervalPtr() const;
 			virtual void setThisIntervalPtr(std::weak_ptr<Interval> thisIntervalPtr);
@@ -77,37 +77,53 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 Refers to the ValueSpecification denoting the maximum value of the range.
-			<p>From package UML::Values.</p> */
+			Refers to the ValueSpecification denoting the maximum value of the range.
+			<p>From package UML::Values.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::ValueSpecification > getMax() const ;
 			
 			/*!
-			 Refers to the ValueSpecification denoting the maximum value of the range.
-			<p>From package UML::Values.</p> */
-			virtual void setMax(std::shared_ptr<uml::ValueSpecification> _max_max) ;
+			Refers to the ValueSpecification denoting the maximum value of the range.
+			<p>From package UML::Values.</p>
+			*/
+			
+			virtual void setMax(std::shared_ptr<uml::ValueSpecification> _max) ;
+			
 			/*!
-			 Refers to the ValueSpecification denoting the minimum value of the range.
-			<p>From package UML::Values.</p> */
+			Refers to the ValueSpecification denoting the minimum value of the range.
+			<p>From package UML::Values.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::ValueSpecification > getMin() const ;
 			
 			/*!
-			 Refers to the ValueSpecification denoting the minimum value of the range.
-			<p>From package UML::Values.</p> */
-			virtual void setMin(std::shared_ptr<uml::ValueSpecification> _min_min) ;
+			Refers to the ValueSpecification denoting the minimum value of the range.
+			<p>From package UML::Values.</p>
+			*/
+			
+			virtual void setMin(std::shared_ptr<uml::ValueSpecification> _min) ;
+			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
@@ -121,7 +137,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

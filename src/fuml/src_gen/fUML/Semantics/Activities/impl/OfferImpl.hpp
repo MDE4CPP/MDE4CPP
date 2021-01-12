@@ -13,14 +13,14 @@
 //Model includes
 #include "../Offer.hpp"
 
-#include "fUML/impl/FUMLFactoryImpl.hpp"
+#include "fUML/Semantics/Activities/impl/ActivitiesFactoryImpl.hpp"
 
-#include "ecore/impl/EObjectImpl.hpp"
+#include "ecore/impl/EModelElementImpl.hpp"
 
 //*********************************
 namespace fUML::Semantics::Activities 
 {
-	class OfferImpl :virtual public ecore::EObjectImpl,
+	class OfferImpl : virtual public ecore::EModelElementImpl,
 virtual public Offer 
 	{
 		public: 
@@ -31,7 +31,7 @@ virtual public Offer
 			OfferImpl& operator=(OfferImpl const&) = delete;
 
 		protected:
-			friend class fUML::FUMLFactoryImpl;
+			friend class fUML::Semantics::Activities::ActivitiesFactoryImpl;
 			OfferImpl();
 			virtual std::shared_ptr<Offer> getThisOfferPtr() const;
 			virtual void setThisOfferPtr(std::weak_ptr<Offer> thisOfferPtr);
@@ -45,24 +45,19 @@ virtual public Offer
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual int countOfferedVales() ;
 			
-			/*!
-			 */ 
+			 
 			virtual bool hasTokens() ;
 			
-			/*!
-			 */ 
+			 
 			virtual void removeOfferedValues(int count) ;
 			
-			/*!
-			 */ 
+			 
 			virtual void removeWithdrawnTokens() ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > retrieveOfferedTokens() ;
 			
 			
@@ -75,9 +70,9 @@ virtual public Offer
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> getOfferedTokens() const ;
+			
 			
 							
 			
@@ -97,7 +92,7 @@ virtual public Offer
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

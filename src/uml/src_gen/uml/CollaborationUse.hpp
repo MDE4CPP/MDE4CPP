@@ -36,7 +36,7 @@ namespace persistence
 
 namespace uml
 {
-	class UmlFactory;
+	class umlFactory;
 }
 
 //Forward Declaration for used types
@@ -86,8 +86,10 @@ namespace uml
 namespace uml 
 {
 	/*!
-	 A CollaborationUse is used to specify the application of a pattern specified by a Collaboration to a specific situation.
-	<p>From package UML::StructuredClassifiers.</p> */
+	A CollaborationUse is used to specify the application of a pattern specified by a Collaboration to a specific situation.
+	<p>From package UML::StructuredClassifiers.</p>
+	*/
+	
 	class CollaborationUse:virtual public NamedElement
 	{
 		public:
@@ -108,7 +110,7 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 All the client elements of a roleBinding are in one Classifier and all supplier elements of a roleBinding are in one Collaboration.
+			All the client elements of a roleBinding are in one Classifier and all supplier elements of a roleBinding are in one Collaboration.
 			roleBinding->collect(client)->forAll(ne1, ne2 |
 			  ne1.oclIsKindOf(ConnectableElement) and ne2.oclIsKindOf(ConnectableElement) and
 			    let ce1 : ConnectableElement = ne1.oclAsType(ConnectableElement), ce2 : ConnectableElement = ne2.oclAsType(ConnectableElement) in
@@ -117,11 +119,13 @@ namespace uml
 			  roleBinding->collect(supplier)->forAll(ne1, ne2 |
 			  ne1.oclIsKindOf(ConnectableElement) and ne2.oclIsKindOf(ConnectableElement) and
 			    let ce1 : ConnectableElement = ne1.oclAsType(ConnectableElement), ce2 : ConnectableElement = ne2.oclAsType(ConnectableElement) in
-			      ce1.collaboration = ce2.collaboration) */ 
+			      ce1.collaboration = ce2.collaboration)
+			*/
+			 
 			virtual bool client_elements(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
-			 Connectors in a Collaboration typing a CollaborationUse must have corresponding Connectors between elements bound in the context Classifier, and these corresponding Connectors must have the same or more general type than the Collaboration Connectors.
+			Connectors in a Collaboration typing a CollaborationUse must have corresponding Connectors between elements bound in the context Classifier, and these corresponding Connectors must have the same or more general type than the Collaboration Connectors.
 			type.ownedConnector->forAll(connector |
 			  let rolesConnectedInCollab : Set(ConnectableElement) = connector.end.role->asSet(),
 			        relevantBindings : Set(Dependency) = roleBinding->select(rb | rb.supplier->intersection(rolesConnectedInCollab)->notEmpty()),
@@ -130,12 +134,16 @@ namespace uml
 			          contextClassifier.ownedConnector->exists( correspondingConnector | 
 			              correspondingConnector.end.role->forAll( role | boundRoles->includes(role) )
 			              and (connector.type->notEmpty() and correspondingConnector.type->notEmpty()) implies connector.type->forAll(conformsTo(correspondingConnector.type)) )
-			) */ 
+			)
+			*/
+			 
 			virtual bool connectors(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
-			 Every collaborationRole in the Collaboration is bound within the CollaborationUse.
-			type.collaborationRole->forAll(role | roleBinding->exists(rb | rb.supplier->includes(role))) */ 
+			Every collaborationRole in the Collaboration is bound within the CollaborationUse.
+			type.collaborationRole->forAll(role | roleBinding->exists(rb | rb.supplier->includes(role)))
+			*/
+			 
 			virtual bool every_role(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
@@ -147,19 +155,27 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 A mapping between features of the Collaboration and features of the owning Classifier. This mapping indicates which ConnectableElement of the Classifier plays which role(s) in the Collaboration. A ConnectableElement may be bound to multiple roles in the same CollaborationUse (that is, it may play multiple roles).
-			<p>From package UML::StructuredClassifiers.</p> */
+			A mapping between features of the Collaboration and features of the owning Classifier. This mapping indicates which ConnectableElement of the Classifier plays which role(s) in the Collaboration. A ConnectableElement may be bound to multiple roles in the same CollaborationUse (that is, it may play multiple roles).
+			<p>From package UML::StructuredClassifiers.</p>
+			*/
+			
 			virtual std::shared_ptr<Subset<uml::Dependency, uml::Element>> getRoleBinding() const = 0;
 			
+			
 			/*!
-			 The Collaboration which is used in this CollaborationUse. The Collaboration defines the cooperation between its roles which are mapped to ConnectableElements relating to the Classifier owning the CollaborationUse.
-			<p>From package UML::StructuredClassifiers.</p> */
+			The Collaboration which is used in this CollaborationUse. The Collaboration defines the cooperation between its roles which are mapped to ConnectableElements relating to the Classifier owning the CollaborationUse.
+			<p>From package UML::StructuredClassifiers.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::Collaboration > getType() const = 0;
 			
 			/*!
-			 The Collaboration which is used in this CollaborationUse. The Collaboration defines the cooperation between its roles which are mapped to ConnectableElements relating to the Classifier owning the CollaborationUse.
-			<p>From package UML::StructuredClassifiers.</p> */
-			virtual void setType(std::shared_ptr<uml::Collaboration> _type_type) = 0;
+			The Collaboration which is used in this CollaborationUse. The Collaboration defines the cooperation between its roles which are mapped to ConnectableElements relating to the Classifier owning the CollaborationUse.
+			<p>From package UML::StructuredClassifiers.</p>
+			*/
+			
+			virtual void setType(std::shared_ptr<uml::Collaboration> _type) = 0;
+			
 			
 
 		protected:
@@ -172,25 +188,31 @@ namespace uml
 			// Reference Members
 			//*********************************
 			/*!
-			 A mapping between features of the Collaboration and features of the owning Classifier. This mapping indicates which ConnectableElement of the Classifier plays which role(s) in the Collaboration. A ConnectableElement may be bound to multiple roles in the same CollaborationUse (that is, it may play multiple roles).
-			<p>From package UML::StructuredClassifiers.</p> */
-			std::shared_ptr<Subset<uml::Dependency, uml::Element>> m_roleBinding;
-			/*!
-			 The Collaboration which is used in this CollaborationUse. The Collaboration defines the cooperation between its roles which are mapped to ConnectableElements relating to the Classifier owning the CollaborationUse.
-			<p>From package UML::StructuredClassifiers.</p> */
-			std::shared_ptr<uml::Collaboration > m_type;
+			A mapping between features of the Collaboration and features of the owning Classifier. This mapping indicates which ConnectableElement of the Classifier plays which role(s) in the Collaboration. A ConnectableElement may be bound to multiple roles in the same CollaborationUse (that is, it may play multiple roles).
+			<p>From package UML::StructuredClassifiers.</p>
+			*/
 			
+			mutable std::shared_ptr<Subset<uml::Dependency, uml::Element>> m_roleBinding;/*!
+			The Collaboration which is used in this CollaborationUse. The Collaboration defines the cooperation between its roles which are mapped to ConnectableElements relating to the Classifier owning the CollaborationUse.
+			<p>From package UML::StructuredClassifiers.</p>
+			*/
+			
+			std::shared_ptr<uml::Collaboration > m_type;
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

@@ -32,7 +32,7 @@ namespace persistence
 
 namespace uml
 {
-	class UmlFactory;
+	class umlFactory;
 }
 
 //Forward Declaration for used types
@@ -82,8 +82,10 @@ namespace uml
 namespace uml 
 {
 	/*!
-	 A TypedElement is a NamedElement that may have a Type specified for it.
-	<p>From package UML::CommonStructure.</p> */
+	A TypedElement is a NamedElement that may have a Type specified for it.
+	<p>From package UML::CommonStructure.</p>
+	*/
+	
 	class TypedElement:virtual public NamedElement
 	{
 		public:
@@ -112,14 +114,19 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 The type of the TypedElement.
-			<p>From package UML::CommonStructure.</p> */
+			The type of the TypedElement.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::Type > getType() const = 0;
 			
 			/*!
-			 The type of the TypedElement.
-			<p>From package UML::CommonStructure.</p> */
-			virtual void setType(std::shared_ptr<uml::Type> _type_type) = 0;
+			The type of the TypedElement.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
+			virtual void setType(std::shared_ptr<uml::Type> _type) = 0;
+			
 			
 
 		protected:
@@ -132,21 +139,26 @@ namespace uml
 			// Reference Members
 			//*********************************
 			/*!
-			 The type of the TypedElement.
-			<p>From package UML::CommonStructure.</p> */
-			std::shared_ptr<uml::Type > m_type;
+			The type of the TypedElement.
+			<p>From package UML::CommonStructure.</p>
+			*/
 			
+			std::shared_ptr<uml::Type > m_type;
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

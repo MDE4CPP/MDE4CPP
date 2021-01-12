@@ -36,7 +36,7 @@ namespace persistence
 
 namespace uml
 {
-	class UmlFactory;
+	class umlFactory;
 }
 
 //Forward Declaration for used types
@@ -131,8 +131,10 @@ namespace uml
 namespace uml 
 {
 	/*!
-	 A JoinNode is a ControlNode that synchronizes multiple flows.
-	<p>From package UML::Activities.</p> */
+	A JoinNode is a ControlNode that synchronizes multiple flows.
+	<p>From package UML::Activities.</p>
+	*/
+	
 	class JoinNode:virtual public ControlNode
 	{
 		public:
@@ -153,15 +155,19 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 If one of the incoming ActivityEdges of a JoinNode is an ObjectFlow, then its outgoing ActivityEdge must be an ObjectFlow. Otherwise its outgoing ActivityEdge must be a ControlFlow.
+			If one of the incoming ActivityEdges of a JoinNode is an ObjectFlow, then its outgoing ActivityEdge must be an ObjectFlow. Otherwise its outgoing ActivityEdge must be a ControlFlow.
 			if incoming->exists(oclIsKindOf(ObjectFlow)) then outgoing->forAll(oclIsKindOf(ObjectFlow))
 			else outgoing->forAll(oclIsKindOf(ControlFlow))
-			endif */ 
+			endif
+			*/
+			 
 			virtual bool incoming_object_flow(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
-			 A JoinNode has one outgoing ActivityEdge.
-			outgoing->size() = 1 */ 
+			A JoinNode has one outgoing ActivityEdge.
+			outgoing->size() = 1
+			*/
+			 
 			virtual bool one_outgoing_edge(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
@@ -169,28 +175,36 @@ namespace uml
 			// Attributes Getter Setter
 			//*********************************
 			/*!
-			 Indicates whether incoming tokens having objects with the same identity are combined into one by the JoinNode.
-			<p>From package UML::Activities.</p> */ 
+			Indicates whether incoming tokens having objects with the same identity are combined into one by the JoinNode.
+			<p>From package UML::Activities.</p>
+			*/
+			 
 			virtual bool getIsCombineDuplicate() const = 0;
 			
 			/*!
-			 Indicates whether incoming tokens having objects with the same identity are combined into one by the JoinNode.
-			<p>From package UML::Activities.</p> */ 
+			Indicates whether incoming tokens having objects with the same identity are combined into one by the JoinNode.
+			<p>From package UML::Activities.</p>
+			*/
+			 
 			virtual void setIsCombineDuplicate (bool _isCombineDuplicate)= 0; 
-			
 			
 			//*********************************
 			// Reference
 			//*********************************
 			/*!
-			 A ValueSpecification giving the condition under which the JoinNode will offer a token on its outgoing ActivityEdge. If no joinSpec is specified, then the JoinNode will offer an outgoing token if tokens are offered on all of its incoming ActivityEdges (an "and" condition).
-			<p>From package UML::Activities.</p> */
+			A ValueSpecification giving the condition under which the JoinNode will offer a token on its outgoing ActivityEdge. If no joinSpec is specified, then the JoinNode will offer an outgoing token if tokens are offered on all of its incoming ActivityEdges (an "and" condition).
+			<p>From package UML::Activities.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::ValueSpecification > getJoinSpec() const = 0;
 			
 			/*!
-			 A ValueSpecification giving the condition under which the JoinNode will offer a token on its outgoing ActivityEdge. If no joinSpec is specified, then the JoinNode will offer an outgoing token if tokens are offered on all of its incoming ActivityEdges (an "and" condition).
-			<p>From package UML::Activities.</p> */
-			virtual void setJoinSpec(std::shared_ptr<uml::ValueSpecification> _joinSpec_joinSpec) = 0;
+			A ValueSpecification giving the condition under which the JoinNode will offer a token on its outgoing ActivityEdge. If no joinSpec is specified, then the JoinNode will offer an outgoing token if tokens are offered on all of its incoming ActivityEdges (an "and" condition).
+			<p>From package UML::Activities.</p>
+			*/
+			
+			virtual void setJoinSpec(std::shared_ptr<uml::ValueSpecification> _joinSpec) = 0;
+			
 			
 
 		protected:
@@ -198,8 +212,10 @@ namespace uml
 			// Attribute Members
 			//*********************************
 			/*!
-			 Indicates whether incoming tokens having objects with the same identity are combined into one by the JoinNode.
-			<p>From package UML::Activities.</p> */ 
+			Indicates whether incoming tokens having objects with the same identity are combined into one by the JoinNode.
+			<p>From package UML::Activities.</p>
+			*/
+			 
 			bool m_isCombineDuplicate = true;
 			
 			
@@ -207,27 +223,36 @@ namespace uml
 			// Reference Members
 			//*********************************
 			/*!
-			 A ValueSpecification giving the condition under which the JoinNode will offer a token on its outgoing ActivityEdge. If no joinSpec is specified, then the JoinNode will offer an outgoing token if tokens are offered on all of its incoming ActivityEdges (an "and" condition).
-			<p>From package UML::Activities.</p> */
-			std::shared_ptr<uml::ValueSpecification > m_joinSpec;
+			A ValueSpecification giving the condition under which the JoinNode will offer a token on its outgoing ActivityEdge. If no joinSpec is specified, then the JoinNode will offer an outgoing token if tokens are offered on all of its incoming ActivityEdges (an "and" condition).
+			<p>From package UML::Activities.</p>
+			*/
 			
+			std::shared_ptr<uml::ValueSpecification > m_joinSpec;
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
+			ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::ActivityGroup>> getInGroup() const = 0;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
+			The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

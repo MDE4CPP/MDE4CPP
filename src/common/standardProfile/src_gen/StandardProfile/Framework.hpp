@@ -39,7 +39,8 @@ namespace StandardProfile
 			// Getter Setter
 			//*********************************
 			virtual std::weak_ptr<uml::Package> getBase_Package() const  = 0;
-			virtual void setBase_Package (std::weak_ptr<uml::Package> _base_Package) = 0;
+			virtual void setBase_Package(std::weak_ptr<uml::Package> _base_Package) = 0;
+			
 			
 			
 			//*********************************
@@ -52,6 +53,7 @@ namespace StandardProfile
 			// Members
 			//*********************************
 			std::weak_ptr<uml::Package> m_base_Package;
+			
 			
 	};
 }

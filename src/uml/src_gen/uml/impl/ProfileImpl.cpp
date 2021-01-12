@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -26,23 +25,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -96,10 +84,11 @@
 
 #include "uml/Type.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -109,47 +98,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 ProfileImpl::ProfileImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		/*Subset*/
-		m_metaclassReference.reset(new Subset<uml::ElementImport, uml::ElementImport /*Subset does not reference a union*/ >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_metaclassReference - Subset<uml::ElementImport, uml::ElementImport /*Subset does not reference a union*/ >()" << std::endl;
-		#endif
-	
-	
-
-		/*Subset*/
-		m_metamodelReference.reset(new Subset<uml::PackageImport, uml::PackageImport /*Subset does not reference a union*/ >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_metamodelReference - Subset<uml::PackageImport, uml::PackageImport /*Subset does not reference a union*/ >()" << std::endl;
-		#endif
-	
-	
-
-	//Init references
-		/*Subset*/
-		m_metaclassReference->initSubset(m_elementImport);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_metaclassReference - Subset<uml::ElementImport, uml::ElementImport /*Subset does not reference a union*/ >(m_elementImport)" << std::endl;
-		#endif
-	
-	
-
-		/*Subset*/
-		m_metamodelReference->initSubset(m_packageImport);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_metamodelReference - Subset<uml::PackageImport, uml::PackageImport /*Subset does not reference a union*/ >(m_packageImport)" << std::endl;
-		#endif
-	
-	
+{	
 }
 
 ProfileImpl::~ProfileImpl()
@@ -159,18 +108,13 @@ ProfileImpl::~ProfileImpl()
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			ProfileImpl::ProfileImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:ProfileImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
-
-
-
+ProfileImpl::ProfileImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:ProfileImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
 ProfileImpl::ProfileImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id)
@@ -178,11 +122,11 @@ ProfileImpl::ProfileImpl(std::weak_ptr<uml::Package > par_Package, const int ref
 {
 	switch(reference_id)
 	{	
-	case UmlPackage::PACKAGE_ATTRIBUTE_NESTINGPACKAGE:
+	case umlPackage::PACKAGE_ATTRIBUTE_NESTINGPACKAGE:
 		m_nestingPackage = par_Package;
 		m_namespace = par_Package;
 		 return;
-	case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
+	case umlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
 		m_owningPackage = par_Package;
 		m_namespace = par_Package;
 		 return;
@@ -192,38 +136,21 @@ ProfileImpl::ProfileImpl(std::weak_ptr<uml::Package > par_Package, const int ref
    
 }
 
-
-
+//Additional constructor for the containments back reference
+ProfileImpl::ProfileImpl(std::weak_ptr<uml::Element > par_owner)
+:ProfileImpl()
+{
+	m_owner = par_owner;
+}
 
 
 //Additional constructor for the containments back reference
-			ProfileImpl::ProfileImpl(std::weak_ptr<uml::Element > par_owner)
-			:ProfileImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-
-
-
-//Additional constructor for the containments back reference
-
-
-
-
-
-//Additional constructor for the containments back reference
-			ProfileImpl::ProfileImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
-			:ProfileImpl()
-			{
-			    m_owningTemplateParameter = par_owningTemplateParameter;
-				m_owner = par_owningTemplateParameter;
-			}
-
-
-
-
+ProfileImpl::ProfileImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+:ProfileImpl()
+{
+	m_owningTemplateParameter = par_owningTemplateParameter;
+	m_owner = par_owningTemplateParameter;
+}
 
 
 ProfileImpl::ProfileImpl(const ProfileImpl & obj):ProfileImpl()
@@ -398,7 +325,7 @@ std::shared_ptr<ecore::EObject>  ProfileImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ProfileImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getProfile_Class();
+	return uml::umlPackage::eInstance()->getProfile_Class();
 }
 
 //*********************************
@@ -477,18 +404,60 @@ bool ProfileImpl::references_same_metamodel(Any diagnostics,std::map <   Any, An
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference metaclassReference
+*/
 std::shared_ptr<Subset<uml::ElementImport, uml::ElementImport /*Subset does not reference a union*/>> ProfileImpl::getMetaclassReference() const
 {
+	if(m_metaclassReference == nullptr)
+	{
+		/*Subset*/
+		m_metaclassReference.reset(new Subset<uml::ElementImport, uml::ElementImport /*Subset does not reference a union*/ >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_metaclassReference - Subset<uml::ElementImport, uml::ElementImport /*Subset does not reference a union*/ >()" << std::endl;
+		#endif
+		
+		/*Subset*/
+		m_metaclassReference->initSubset(getElementImport());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_metaclassReference - Subset<uml::ElementImport, uml::ElementImport /*Subset does not reference a union*/ >(getElementImport())" << std::endl;
+		#endif
+		
+	}
 
     return m_metaclassReference;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference metamodelReference
+*/
 std::shared_ptr<Subset<uml::PackageImport, uml::PackageImport /*Subset does not reference a union*/>> ProfileImpl::getMetamodelReference() const
 {
+	if(m_metamodelReference == nullptr)
+	{
+		/*Subset*/
+		m_metamodelReference.reset(new Subset<uml::PackageImport, uml::PackageImport /*Subset does not reference a union*/ >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_metamodelReference - Subset<uml::PackageImport, uml::PackageImport /*Subset does not reference a union*/ >()" << std::endl;
+		#endif
+		
+		/*Subset*/
+		m_metamodelReference->initSubset(getPackageImport());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_metamodelReference - Subset<uml::PackageImport, uml::PackageImport /*Subset does not reference a union*/ >(getPackageImport())" << std::endl;
+		#endif
+		
+	}
 
     return m_metamodelReference;
 }
+
+
+
 
 
 //*********************************
@@ -496,24 +465,65 @@ std::shared_ptr<Subset<uml::PackageImport, uml::PackageImport /*Subset does not 
 //*********************************
 std::shared_ptr<Union<uml::NamedElement>> ProfileImpl::getMember() const
 {
+	if(m_member == nullptr)
+	{
+		/*Union*/
+		m_member.reset(new Union<uml::NamedElement>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_member - Union<uml::NamedElement>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_member;
 }
+
 std::weak_ptr<uml::Namespace > ProfileImpl::getNamespace() const
 {
 	return m_namespace;
 }
+
 std::shared_ptr<Union<uml::Element>> ProfileImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> ProfileImpl::getOwnedMember() const
 {
+	if(m_ownedMember == nullptr)
+	{
+		/*SubsetUnion*/
+		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_ownedMember->initSubsetUnion(getOwnedElement(),getMember());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >(getOwnedElement(),getMember())" << std::endl;
+		#endif
+		
+	}
 	return m_ownedMember;
 }
+
 std::weak_ptr<uml::Element > ProfileImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<Profile> ProfileImpl::getThisProfilePtr() const
@@ -561,7 +571,7 @@ Any ProfileImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::PROFILE_ATTRIBUTE_METACLASSREFERENCE:
+		case uml::umlPackage::PROFILE_ATTRIBUTE_METACLASSREFERENCE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::ElementImport>::iterator iter = m_metaclassReference->begin();
@@ -571,9 +581,9 @@ Any ProfileImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //18428
+			return eAny(tempList); //18328
 		}
-		case UmlPackage::PROFILE_ATTRIBUTE_METAMODELREFERENCE:
+		case uml::umlPackage::PROFILE_ATTRIBUTE_METAMODELREFERENCE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::PackageImport>::iterator iter = m_metamodelReference->begin();
@@ -583,7 +593,7 @@ Any ProfileImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //18429
+			return eAny(tempList); //18329
 		}
 	}
 	return PackageImpl::eGet(featureID, resolve, coreType);
@@ -592,10 +602,10 @@ bool ProfileImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::PROFILE_ATTRIBUTE_METACLASSREFERENCE:
-			return getMetaclassReference() != nullptr; //18428
-		case UmlPackage::PROFILE_ATTRIBUTE_METAMODELREFERENCE:
-			return getMetamodelReference() != nullptr; //18429
+		case uml::umlPackage::PROFILE_ATTRIBUTE_METACLASSREFERENCE:
+			return getMetaclassReference() != nullptr; //18328
+		case uml::umlPackage::PROFILE_ATTRIBUTE_METAMODELREFERENCE:
+			return getMetamodelReference() != nullptr; //18329
 	}
 	return PackageImpl::internalEIsSet(featureID);
 }
@@ -603,7 +613,7 @@ bool ProfileImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::PROFILE_ATTRIBUTE_METACLASSREFERENCE:
+		case uml::umlPackage::PROFILE_ATTRIBUTE_METACLASSREFERENCE:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -639,7 +649,7 @@ bool ProfileImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case UmlPackage::PROFILE_ATTRIBUTE_METAMODELREFERENCE:
+		case uml::umlPackage::PROFILE_ATTRIBUTE_METAMODELREFERENCE:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -691,12 +701,11 @@ void ProfileImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> lo
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -732,18 +741,19 @@ void ProfileImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadH
 	PackageImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ProfileImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void ProfileImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
-
-	PackageImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	PackageImpl::loadNode(nodeName, loadHandler);
 }
 
 void ProfileImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case UmlPackage::PROFILE_ATTRIBUTE_METACLASSREFERENCE:
+		case uml::umlPackage::PROFILE_ATTRIBUTE_METACLASSREFERENCE:
 		{
 			std::shared_ptr<Bag<uml::ElementImport>> _metaclassReference = getMetaclassReference();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -757,7 +767,7 @@ void ProfileImpl::resolveReferences(const int featureID, std::list<std::shared_p
 			return;
 		}
 
-		case UmlPackage::PROFILE_ATTRIBUTE_METAMODELREFERENCE:
+		case uml::umlPackage::PROFILE_ATTRIBUTE_METAMODELREFERENCE:
 		{
 			std::shared_ptr<Bag<uml::PackageImport>> _metamodelReference = getMetamodelReference();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -803,7 +813,7 @@ void ProfileImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 

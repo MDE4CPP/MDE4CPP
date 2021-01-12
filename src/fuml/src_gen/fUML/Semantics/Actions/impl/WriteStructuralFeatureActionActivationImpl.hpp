@@ -13,13 +13,13 @@
 //Model includes
 #include "../WriteStructuralFeatureActionActivation.hpp"
 
-#include "fUML/impl/FUMLFactoryImpl.hpp"
+#include "fUML/Semantics/Actions/impl/ActionsFactoryImpl.hpp"
 #include "fUML/Semantics/Actions/impl/StructuralFeatureActionActivationImpl.hpp"
 
 //*********************************
 namespace fUML::Semantics::Actions 
 {
-	class WriteStructuralFeatureActionActivationImpl :virtual public StructuralFeatureActionActivationImpl, virtual public WriteStructuralFeatureActionActivation 
+	class WriteStructuralFeatureActionActivationImpl : virtual public StructuralFeatureActionActivationImpl, virtual public WriteStructuralFeatureActionActivation 
 	{
 		public: 
 			WriteStructuralFeatureActionActivationImpl(const WriteStructuralFeatureActionActivationImpl & obj);
@@ -29,7 +29,7 @@ namespace fUML::Semantics::Actions
 			WriteStructuralFeatureActionActivationImpl& operator=(WriteStructuralFeatureActionActivationImpl const&) = delete;
 
 		protected:
-			friend class fUML::FUMLFactoryImpl;
+			friend class fUML::Semantics::Actions::ActionsFactoryImpl;
 			WriteStructuralFeatureActionActivationImpl();
 			virtual std::shared_ptr<WriteStructuralFeatureActionActivation> getThisWriteStructuralFeatureActionActivationPtr() const;
 			virtual void setThisWriteStructuralFeatureActionActivationPtr(std::weak_ptr<WriteStructuralFeatureActionActivation> thisWriteStructuralFeatureActionActivationPtr);
@@ -47,8 +47,7 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual int position(std::shared_ptr<fUML::Semantics::Values::Value>  value,std::shared_ptr<Bag<fUML::Semantics::Values::Value> >  list,int startAt) ;
 			
 			
@@ -66,8 +65,7 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> getPinActivation() const ; 
 			 
 			//*********************************
@@ -81,7 +79,7 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

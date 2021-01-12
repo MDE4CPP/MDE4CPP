@@ -30,7 +30,7 @@
  * generate operation declaration
  */]
 [template public generateOperationDecl(aOperation : Operation, impl: Boolean)]
-virtual [aOperation.generateCppType()/] [aOperation.name/]([for (sParameter : Parameter | aOperation.ownedParameter->select(p :Parameter | not (p.direction = ParameterDirectionKind::return))) separator (', ')][sParameter.generateCppType(true)/] [sParameter.name/][if (sParameter.default->notEmpty())] = [sParameter.genDefault()/][/if][/for]) [abstractSuffix(impl)/];
+virtual [aOperation.generateCppType()/] [aOperation.name/]([for (sParameter : Parameter | aOperation.ownedParameter->select(p :Parameter | not (p.direction = ParameterDirectionKind::return))) separator (', ')][sParameter.generateCppType(true)/] [sParameter.name/][if (sParameter.default->notEmpty())] = [sParameter.genDefault()/][/if][/for])[if (aOperation.isConst())] const[/if] [abstractSuffix(impl)/];
 
 [/template]
 
@@ -44,11 +44,11 @@ virtual [aOperation.generateCppType()/] [aOperation.name/]([for (sParameter : Pa
 */]
 [template public generateOperationImplementation(aOperation : Operation)]
 [aOperation.generateCppType()/] [aOperation.class.name.toUpperFirst()/]Impl::[aOperation.name/]([for (sParameter : Parameter | aOperation.ownedParameter->select(p :Parameter | not (p.direction = ParameterDirectionKind::return))) separator (',')]
-[sParameter.generateCppType(true)/] [sParameter.name/][/for])
+[sParameter.generateCppType(true)/] [sParameter.name/][/for])[if (aOperation.isConst())] const[/if] 
 {
 [if (aOperation.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->notEmpty())]
 [let parameter : Parameter = aOperation.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->first()]
-	[aOperation.generateCppType()/] [if(parameter.name.oclIsUndefined())][parameter.myQualifiedName()/][else][parameter.name/][/if][if (parameter.upper > 1)](new Bag<[parameter.type.generateCppType(true)/]>())[/if][if(parameter.type.isPrimitive())] = [parameter.genDefault()/][/if];
+	[aOperation.generateCppType()/] [if(parameter.name.oclIsUndefined())][parameter.myQualifiedName()/][else][parameter.name/][/if][if (parameter.upper <> 1)](new Bag<[parameter.type.generateCppType(true)/]>())[/if][if(parameter.type.isPrimitive())] = [parameter.genDefault()/][/if];
 [/let]
 [/if]
 
@@ -56,7 +56,7 @@ virtual [aOperation.generateCppType()/] [aOperation.name/]([for (sParameter : Pa
 [if (aOperation.method->notEmpty())]
 [if(aOperation.method->filter(Activity)->notEmpty())]
 	std::shared_ptr<PluginFramework> pluginFramework = PluginFramework::eInstance();
-	std::string pluginName = "[aOperation.getNearestPackage().getPackageName()/]Exec";
+	std::string pluginName = "[aOperation.getRootPackage().getPackageName()/]Exec";
 	std::shared_ptr<MDE4CPPPlugin> plugin = pluginFramework->findPluginByName(pluginName);
 	if (plugin)
 	{
@@ -72,11 +72,11 @@ virtual [aOperation.generateCppType()/] [aOperation.name/]([for (sParameter : Pa
 			parameterList->push_back(eAny([par.name/]));
 [/for]
 [let anActivity : Activity = aOperation.method->filter(Activity)->asOrderedSet()->first()]
-			Any result = executionPlugin->executeActivity([anActivity.getNearestPackage().myQualifiedTypeNamePackage()/]eInstance()->[anActivity.generatePackageGetterCall()/], parameterList, getThis[aOperation.class.name.toUpperFirst()/]Ptr());
+			Any activityResult = executionPlugin->executeActivity([anActivity.generatePackageGetterCall()/], parameterList, getThis[aOperation.class.name.toUpperFirst()/]Ptr());
 [/let]
 
 [if (aOperation.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return)->notEmpty())]
-			[aOperation.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return).name/] = result->get<[aOperation.generateCppType()/]>();
+			[aOperation.ownedParameter->select(p :Parameter | p.direction = ParameterDirectionKind::return).name/] = activityResult->get<[aOperation.generateCppType()/]>();
 [/if]
 		}
 		else
@@ -134,8 +134,11 @@ virtual [aOperation.generateCppType()/] [aOperation.name/]([for (sParameter : Pa
 */]
 [template public initalizeOperation(aOperation : Operation)]
 [memberName(aOperation)/]->setName("[aOperation.name/]");
+[if(not aOperation.type.oclIsUndefined())]
+[memberName(aOperation)/]->setType([aOperation.type.generatePackageGetterCall(aOperation)/]);
+[/if]
 [for (beh : Behavior | aOperation.method) separator ('\n')]
-[memberName(aOperation)/]->getMethod()->push_back([memberName(beh)/]);[/for]
+[memberName(aOperation)/]->getMethod()->push_back([beh.generatePackageGetterCall(aOperation)/]);[/for]
 
 [for (anOwnedParameter : Parameter | aOperation.ownedParameter) separator ('\n')]
 [anOwnedParameter.generateParameterInitialization()/]
@@ -143,3 +146,18 @@ virtual [aOperation.generateCppType()/] [aOperation.name/]([for (sParameter : Pa
 
 [aOperation.generateStereotypeApplication()/]
 [/template]
+
+[**
+ * checks if 'matchingOperation' matches 'baseOperation'
+ * 
+ * operations match if:
+ * - they have the sme name
+ * - they have the same number of input parameters
+ * - the input parameter lists have the same types in the same order
+*/]
+[query public matches(baseOperation : Operation, matchingOperation : Operation) : Boolean = 
+	if(baseOperation.name <> matchingOperation.name) then false
+		else 	(baseOperation.ownedParameter->select(direction = ParameterDirectionKind::_in or direction = ParameterDirectionKind::_inout).type 
+				= matchingOperation.ownedParameter->select(direction = ParameterDirectionKind::_in or direction = ParameterDirectionKind::_inout).type)
+		endif
+/]

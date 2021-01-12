@@ -13,7 +13,7 @@
 
 
 // forward declarations
-template<class T> class Bag;
+template<class T> class Bag; 
 
 
 
@@ -33,7 +33,7 @@ namespace persistence
 
 namespace fUML
 {
-	class FUMLFactory;
+	class fUMLFactory;
 }
 
 //Forward Declaration for used types
@@ -67,6 +67,11 @@ namespace uml
 	class Property;
 }
 
+namespace fUML::Semantics::Values 
+{
+	class Value;
+}
+
 // base class includes
 #include "fUML/Semantics/StructuredClassifiers/ExtensionalValue.hpp"
 
@@ -76,8 +81,7 @@ namespace uml
 //*********************************
 namespace fUML::Semantics::StructuredClassifiers 
 {
-	/*!
-	 */
+	
 	class Link:virtual public ExtensionalValue
 	{
 		public:
@@ -97,20 +101,19 @@ namespace fUML::Semantics::StructuredClassifiers
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() = 0;
+			
+			 
 			virtual void addTo(std::shared_ptr<fUML::Semantics::Loci::Locus>  locus) = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue> > getOtherFeatureValues(std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue> >  extent,std::shared_ptr<uml::Property>  end) = 0;
 			
-			/*!
-			 */ 
-			virtual std::shared_ptr<Bag<uml::Classifier> > getTypes() = 0;
+			 
+			virtual std::shared_ptr<Bag<uml::Classifier> > getTypes() const = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual bool isMatchingLink(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue>  link,std::shared_ptr<uml::Property>  end) = 0;
 			
 			
@@ -121,13 +124,12 @@ namespace fUML::Semantics::StructuredClassifiers
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<uml::Association > getType() const = 0;
 			
-			/*!
-			 */
-			virtual void setType(std::shared_ptr<uml::Association> _type_type) = 0;
+			
+			virtual void setType(std::shared_ptr<uml::Association> _type) = 0;
+			
 			
 
 		protected:
@@ -139,10 +141,8 @@ namespace fUML::Semantics::StructuredClassifiers
 			//*********************************
 			// Reference Members
 			//*********************************
-			/*!
-			 */
-			std::shared_ptr<uml::Association > m_type;
 			
+			std::shared_ptr<uml::Association > m_type;
 
 		public:
 			//*********************************

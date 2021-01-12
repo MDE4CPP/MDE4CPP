@@ -19,7 +19,7 @@
 //*********************************
 namespace uml 
 {
-	class PinImpl :virtual public MultiplicityElementImpl, virtual public ObjectNodeImpl, virtual public Pin 
+	class PinImpl : virtual public MultiplicityElementImpl, virtual public ObjectNodeImpl, virtual public Pin 
 	{
 		public: 
 			PinImpl(const PinImpl & obj);
@@ -29,7 +29,7 @@ namespace uml
 			PinImpl& operator=(PinImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			PinImpl();
 			virtual std::shared_ptr<Pin> getThisPinPtr() const;
 			virtual void setThisPinPtr(std::weak_ptr<Pin> thisPinPtr);
@@ -60,13 +60,17 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 A control Pin has a control type.
-			isControl implies isControlType */ 
+			A control Pin has a control type.
+			isControl implies isControlType
+			*/
+			 
 			virtual bool control_pins(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
-			 Pin multiplicity is not unique.
-			not isUnique */ 
+			Pin multiplicity is not unique.
+			not isUnique
+			*/
+			 
 			virtual bool not_unique(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
@@ -75,15 +79,18 @@ namespace uml
 			// Attributes Getter Setter
 			//*********************************
 			/*!
-			 Indicates whether the Pin provides data to the Action or just controls how the Action executes.
-			<p>From package UML::Actions.</p> */ 
+			Indicates whether the Pin provides data to the Action or just controls how the Action executes.
+			<p>From package UML::Actions.</p>
+			*/
+			 
 			virtual bool getIsControl() const ;
 			
 			/*!
-			 Indicates whether the Pin provides data to the Action or just controls how the Action executes.
-			<p>From package UML::Actions.</p> */ 
+			Indicates whether the Pin provides data to the Action or just controls how the Action executes.
+			<p>From package UML::Actions.</p>
+			*/
+			 
 			virtual void setIsControl (bool _isControl); 
-			
 			
 			
 			//*********************************
@@ -95,17 +102,25 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
+			ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::ActivityGroup>> getInGroup() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
+			The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const ; 
 			 
 			//*********************************
@@ -119,7 +134,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

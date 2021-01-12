@@ -13,7 +13,7 @@
 
 
 // forward declarations
-template<class T> class Bag;
+template<class T> class Bag; 
 
 
 
@@ -33,7 +33,7 @@ namespace persistence
 
 namespace fUML
 {
-	class FUMLFactory;
+	class fUMLFactory;
 }
 
 //Forward Declaration for used types
@@ -66,14 +66,13 @@ namespace fUML::Semantics::Activities
 
 // enum includes
 
-#include "ecore/EObject.hpp"
+#include "ecore/EModelElement.hpp"
 
 //*********************************
 namespace fUML::Semantics::Activities 
 {
-	/*!
-	 */
-	class ActivityEdgeInstance : virtual public ecore::EObject 
+	
+	class ActivityEdgeInstance : virtual public ecore::EModelElement
 
 	{
 		public:
@@ -97,28 +96,22 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual int countOfferedValue() = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > getOfferedTokens() = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual bool hasOffer() = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual void sendOffer(std::shared_ptr<Bag<fUML::Semantics::Activities::Token> >  tokens) = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > takeOfferedTokens() = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > takeOfferedTokens(int maxCount) = 0;
 			
 			
@@ -129,38 +122,34 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<uml::ActivityEdge > getEdge() const = 0;
 			
-			/*!
-			 */
-			virtual void setEdge(std::shared_ptr<uml::ActivityEdge> _edge_edge) = 0;
-			/*!
-			 */
+			
+			virtual void setEdge(std::shared_ptr<uml::ActivityEdge> _edge) = 0;
+			
+			
 			virtual std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > getGroup() const = 0;
 			
-			/*!
-			 */
-			virtual void setGroup(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> _group_group) = 0;
-			/*!
-			 */
+			
+			virtual void setGroup(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> _group) = 0;
+			
+			
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Offer>> getOffers() const = 0;
 			
-			/*!
-			 */
+			
+			
 			virtual std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivation > getSource() const = 0;
 			
-			/*!
-			 */
-			virtual void setSource(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> _source_source) = 0;
-			/*!
-			 */
+			
+			virtual void setSource(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> _source) = 0;
+			
+			
 			virtual std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivation > getTarget() const = 0;
 			
-			/*!
-			 */
-			virtual void setTarget(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> _target_target) = 0;
+			
+			virtual void setTarget(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> _target) = 0;
+			
 			
 
 		protected:
@@ -172,22 +161,12 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			// Reference Members
 			//*********************************
-			/*!
-			 */
-			std::shared_ptr<uml::ActivityEdge > m_edge;
-			/*!
-			 */
-			std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > m_group;
-			/*!
-			 */
-			std::shared_ptr<Bag<fUML::Semantics::Activities::Offer>> m_offers;
-			/*!
-			 */
-			std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivation > m_source;
-			/*!
-			 */
-			std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivation > m_target;
 			
+			std::shared_ptr<uml::ActivityEdge > m_edge;
+			std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > m_group;
+			mutable std::shared_ptr<Bag<fUML::Semantics::Activities::Offer>> m_offers;
+			std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivation > m_source;
+			std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivation > m_target;
 
 		public:
 			//*********************************

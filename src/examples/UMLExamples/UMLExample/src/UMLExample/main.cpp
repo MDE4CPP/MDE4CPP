@@ -28,7 +28,7 @@ SOFTWARE.
 #include <iostream>
 
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "uml/UmlFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "uml/UmlPackage.hpp"
 #include "uml/Class.hpp"
 #include "uml/Model.hpp"
@@ -45,8 +45,8 @@ using namespace std;
 int main()
 {
     //#############  Create simple UML model  #############
-    std::shared_ptr<uml::UmlFactory> factory = uml::UmlFactory::eInstance();
-    std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+    std::shared_ptr<uml::umlFactory> factory = uml::umlFactory::eInstance();
+    std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
     std::shared_ptr<uml::Model> p = factory->createModel();
     p->setName("Model");
@@ -64,7 +64,7 @@ int main()
     c->setName("Class2");
 
     //use a Package::MetaElement-ID to create a class
-    a = factory->create(uml::UmlPackage::CLASS_CLASS, p, package->TYPE_ATTRIBUTE_PACKAGE);
+    a = factory->create(uml::umlPackage::CLASS_CLASS, p, package->TYPE_ATTRIBUTE_PACKAGE);
     c = std::dynamic_pointer_cast<uml::Class>(a);
     c->setName("Class3");
 
@@ -74,7 +74,7 @@ int main()
     c->setName("Class4");
     c->setPackage(p);
 
-    //use a UmlPackage MetaClass to create a class
+    //use a umlPackage MetaClass to create a class
     a = factory->create(package->getClass_Class(), p, package->TYPE_ATTRIBUTE_PACKAGE);
     c = std::dynamic_pointer_cast<uml::Class>(a);
     c->setName("Class5");
@@ -95,7 +95,7 @@ int main()
     for(std::shared_ptr<uml::PackageableElement>it : *elements)
     {
         // optional type check using UML Metamodel
-        std::shared_ptr<ecore::EClass> uc = uml::UmlPackage::eInstance()->getClass_Class();
+        std::shared_ptr<ecore::EClass> uc = uml::umlPackage::eInstance()->getClass_Class();
         if(it->eClass() == uc->eClass())
         {
             cout << it->getName() << " is a Class"<< endl;

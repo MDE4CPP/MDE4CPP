@@ -17,24 +17,18 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "ecore/impl/EcorePackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "ecore/EcoreFactory.hpp"
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "ecore/EcorePackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -48,10 +42,11 @@
 
 #include "ecore/ETypeParameter.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
+//Factories an Package includes
+#include "ecore/impl/ecoreFactoryImpl.hpp"
+#include "ecore/impl/ecorePackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -61,17 +56,7 @@ using namespace ecore;
 // Constructor / Destructor
 //*********************************
 EDataTypeImpl::EDataTypeImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 EDataTypeImpl::~EDataTypeImpl()
@@ -81,28 +66,19 @@ EDataTypeImpl::~EDataTypeImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+EDataTypeImpl::EDataTypeImpl(std::weak_ptr<ecore::EObject > par_eContainer)
+:EDataTypeImpl()
+{
+	m_eContainer = par_eContainer;
+}
 
 //Additional constructor for the containments back reference
-			EDataTypeImpl::EDataTypeImpl(std::weak_ptr<ecore::EObject > par_eContainer)
-			:EDataTypeImpl()
-			{
-			    m_eContainer = par_eContainer;
-			}
-
-
-
-
-
-//Additional constructor for the containments back reference
-			EDataTypeImpl::EDataTypeImpl(std::weak_ptr<ecore::EPackage > par_ePackage)
-			:EDataTypeImpl()
-			{
-			    m_ePackage = par_ePackage;
-			}
-
-
-
-
+EDataTypeImpl::EDataTypeImpl(std::weak_ptr<ecore::EPackage > par_ePackage)
+:EDataTypeImpl()
+{
+	m_ePackage = par_ePackage;
+}
 
 
 EDataTypeImpl::EDataTypeImpl(const EDataTypeImpl & obj):EDataTypeImpl()
@@ -156,21 +132,26 @@ std::shared_ptr<ecore::EObject>  EDataTypeImpl::copy() const
 
 std::shared_ptr<EClass> EDataTypeImpl::eStaticClass() const
 {
-	return EcorePackageImpl::eInstance()->getEDataType_Class();
+	return ecore::ecorePackage::eInstance()->getEDataType_Class();
 }
 
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute serializable
+*/
+bool EDataTypeImpl::isSerializable() const 
+{
+	return m_serializable;
+}
+
 void EDataTypeImpl::setSerializable(bool _serializable)
 {
 	m_serializable = _serializable;
 } 
 
-bool EDataTypeImpl::isSerializable() const 
-{
-	return m_serializable;
-}
+
 
 //*********************************
 // Operations
@@ -185,8 +166,20 @@ bool EDataTypeImpl::isSerializable() const
 //*********************************
 std::shared_ptr<Union<ecore::EObject>> EDataTypeImpl::getEContens() const
 {
+	if(m_eContens == nullptr)
+	{
+		/*Union*/
+		m_eContens.reset(new Union<ecore::EObject>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_eContens - Union<ecore::EObject>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_eContens;
 }
+
+
 
 
 std::shared_ptr<EDataType> EDataTypeImpl::getThisEDataTypePtr() const
@@ -219,7 +212,7 @@ Any EDataTypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case EcorePackage::EDATATYPE_ATTRIBUTE_SERIALIZABLE:
+		case ecore::ecorePackage::EDATATYPE_ATTRIBUTE_SERIALIZABLE:
 			return eAny(isSerializable()); //1411
 	}
 	return EClassifierImpl::eGet(featureID, resolve, coreType);
@@ -228,7 +221,7 @@ bool EDataTypeImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case EcorePackage::EDATATYPE_ATTRIBUTE_SERIALIZABLE:
+		case ecore::ecorePackage::EDATATYPE_ATTRIBUTE_SERIALIZABLE:
 			return isSerializable() != true; //1411
 	}
 	return EClassifierImpl::internalEIsSet(featureID);
@@ -237,7 +230,7 @@ bool EDataTypeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case EcorePackage::EDATATYPE_ATTRIBUTE_SERIALIZABLE:
+		case ecore::ecorePackage::EDATATYPE_ATTRIBUTE_SERIALIZABLE:
 		{
 			// BOOST CAST
 			bool _serializable = newValue->get<bool>();
@@ -260,12 +253,11 @@ void EDataTypeImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> 
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get EcoreFactory
-	std::shared_ptr<ecore::EcoreFactory> modelFactory = ecore::EcoreFactory::eInstance();
+	// get ecoreFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -296,11 +288,12 @@ void EDataTypeImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoa
 	EClassifierImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void EDataTypeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<ecore::EcoreFactory> modelFactory)
+void EDataTypeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<ecore::ecoreFactory> modelFactory=ecore::ecoreFactory::eInstance();
 
-
-	EClassifierImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	EClassifierImpl::loadNode(nodeName, loadHandler);
 }
 
 void EDataTypeImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references)
@@ -331,10 +324,9 @@ void EDataTypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 {
 	try
 	{
-		std::shared_ptr<ecore::EcorePackage> package = ecore::EcorePackage::eInstance();
+		std::shared_ptr<ecore::ecorePackage> package = ecore::ecorePackage::eInstance();
 
 	
- 
 		// Add attributes
 		if ( this->eIsSet(package->getEDataType_Attribute_serializable()) )
 		{

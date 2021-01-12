@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -25,17 +24,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -63,10 +57,11 @@
 
 #include "uml/ValueSpecification.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -76,17 +71,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 StructuralFeatureImpl::StructuralFeatureImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 StructuralFeatureImpl::~StructuralFeatureImpl()
@@ -96,29 +81,20 @@ StructuralFeatureImpl::~StructuralFeatureImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+StructuralFeatureImpl::StructuralFeatureImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:StructuralFeatureImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			StructuralFeatureImpl::StructuralFeatureImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:StructuralFeatureImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
-
-
-
-
-//Additional constructor for the containments back reference
-			StructuralFeatureImpl::StructuralFeatureImpl(std::weak_ptr<uml::Element > par_owner)
-			:StructuralFeatureImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-
-
+StructuralFeatureImpl::StructuralFeatureImpl(std::weak_ptr<uml::Element > par_owner)
+:StructuralFeatureImpl()
+{
+	m_owner = par_owner;
+}
 
 
 StructuralFeatureImpl::StructuralFeatureImpl(const StructuralFeatureImpl & obj):StructuralFeatureImpl()
@@ -202,21 +178,26 @@ std::shared_ptr<ecore::EObject>  StructuralFeatureImpl::copy() const
 
 std::shared_ptr<ecore::EClass> StructuralFeatureImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getStructuralFeature_Class();
+	return uml::umlPackage::eInstance()->getStructuralFeature_Class();
 }
 
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute isReadOnly
+*/
+bool StructuralFeatureImpl::getIsReadOnly() const 
+{
+	return m_isReadOnly;
+}
+
 void StructuralFeatureImpl::setIsReadOnly(bool _isReadOnly)
 {
 	m_isReadOnly = _isReadOnly;
 } 
 
-bool StructuralFeatureImpl::getIsReadOnly() const 
-{
-	return m_isReadOnly;
-}
+
 
 //*********************************
 // Operations
@@ -231,12 +212,25 @@ bool StructuralFeatureImpl::getIsReadOnly() const
 //*********************************
 std::shared_ptr<Union<uml::Element>> StructuralFeatureImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > StructuralFeatureImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<StructuralFeature> StructuralFeatureImpl::getThisStructuralFeaturePtr() const
@@ -271,8 +265,8 @@ Any StructuralFeatureImpl::eGet(int featureID, bool resolve, bool coreType) cons
 {
 	switch(featureID)
 	{
-		case UmlPackage::STRUCTURALFEATURE_ATTRIBUTE_ISREADONLY:
-			return eAny(getIsReadOnly()); //22621
+		case uml::umlPackage::STRUCTURALFEATURE_ATTRIBUTE_ISREADONLY:
+			return eAny(getIsReadOnly()); //22521
 	}
 	Any result;
 	result = FeatureImpl::eGet(featureID, resolve, coreType);
@@ -292,8 +286,8 @@ bool StructuralFeatureImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::STRUCTURALFEATURE_ATTRIBUTE_ISREADONLY:
-			return getIsReadOnly() != false; //22621
+		case uml::umlPackage::STRUCTURALFEATURE_ATTRIBUTE_ISREADONLY:
+			return getIsReadOnly() != false; //22521
 	}
 	bool result = false;
 	result = FeatureImpl::internalEIsSet(featureID);
@@ -313,11 +307,11 @@ bool StructuralFeatureImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::STRUCTURALFEATURE_ATTRIBUTE_ISREADONLY:
+		case uml::umlPackage::STRUCTURALFEATURE_ATTRIBUTE_ISREADONLY:
 		{
 			// BOOST CAST
 			bool _isReadOnly = newValue->get<bool>();
-			setIsReadOnly(_isReadOnly); //22621
+			setIsReadOnly(_isReadOnly); //22521
 			return true;
 		}
 	}
@@ -348,12 +342,11 @@ void StructuralFeatureImpl::load(std::shared_ptr<persistence::interfaces::XLoadH
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -386,13 +379,14 @@ void StructuralFeatureImpl::loadAttributes(std::shared_ptr<persistence::interfac
 	TypedElementImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void StructuralFeatureImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void StructuralFeatureImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
-
-	FeatureImpl::loadNode(nodeName, loadHandler, modelFactory);
-	MultiplicityElementImpl::loadNode(nodeName, loadHandler, modelFactory);
-	TypedElementImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	FeatureImpl::loadNode(nodeName, loadHandler);
+	MultiplicityElementImpl::loadNode(nodeName, loadHandler);
+	TypedElementImpl::loadNode(nodeName, loadHandler);
 }
 
 void StructuralFeatureImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -430,10 +424,9 @@ void StructuralFeatureImpl::saveContent(std::shared_ptr<persistence::interfaces:
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
- 
 		// Add attributes
 		if ( this->eIsSet(package->getStructuralFeature_Attribute_isReadOnly()) )
 		{

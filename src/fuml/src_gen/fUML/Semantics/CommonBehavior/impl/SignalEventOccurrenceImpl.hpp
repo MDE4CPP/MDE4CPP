@@ -13,13 +13,13 @@
 //Model includes
 #include "../SignalEventOccurrence.hpp"
 
-#include "fUML/impl/FUMLFactoryImpl.hpp"
+#include "fUML/Semantics/CommonBehavior/impl/CommonBehaviorFactoryImpl.hpp"
 #include "fUML/Semantics/CommonBehavior/impl/EventOccurrenceImpl.hpp"
 
 //*********************************
 namespace fUML::Semantics::CommonBehavior 
 {
-	class SignalEventOccurrenceImpl :virtual public EventOccurrenceImpl, virtual public SignalEventOccurrence 
+	class SignalEventOccurrenceImpl : virtual public EventOccurrenceImpl, virtual public SignalEventOccurrence 
 	{
 		public: 
 			SignalEventOccurrenceImpl(const SignalEventOccurrenceImpl & obj);
@@ -29,7 +29,7 @@ namespace fUML::Semantics::CommonBehavior
 			SignalEventOccurrenceImpl& operator=(SignalEventOccurrenceImpl const&) = delete;
 
 		protected:
-			friend class fUML::FUMLFactoryImpl;
+			friend class fUML::Semantics::CommonBehavior::CommonBehaviorFactoryImpl;
 			SignalEventOccurrenceImpl();
 			virtual std::shared_ptr<SignalEventOccurrence> getThisSignalEventOccurrencePtr() const;
 			virtual void setThisSignalEventOccurrencePtr(std::weak_ptr<SignalEventOccurrence> thisSignalEventOccurrencePtr);
@@ -43,12 +43,10 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > getParameterValues() ;
 			
-			/*!
-			 */ 
+			 
 			virtual bool match(std::shared_ptr<uml::Trigger>  trigger) ;
 			
 			
@@ -61,13 +59,12 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance > getSignalInstance() const ;
 			
-			/*!
-			 */
-			virtual void setSignalInstance(std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> _signalInstance_signalInstance) ;
+			
+			virtual void setSignalInstance(std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> _signalInstance) ;
+			
 							
 			
 			//*********************************
@@ -86,7 +83,7 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

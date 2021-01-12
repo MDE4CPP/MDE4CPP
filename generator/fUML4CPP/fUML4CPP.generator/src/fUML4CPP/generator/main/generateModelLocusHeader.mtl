@@ -19,17 +19,17 @@
 
 
 [template public generateModelLocusHeader(aPackage : Package) {
-upperName : String = aPackage.getPackageName().sanitize().toUpperFirst(); originalName : String = aPackage.getPackageName();}]
+upperName : String = aPackage.getPackageName().sanitize(); originalName : String = aPackage.generateNamespacePath(false);}]
 [file (originalName.concat('Exec/') + upperName.concat('Locus.hpp'), false, 'UTF-8')]
 [startGuard(aPackage,'LocusExecution')/]
 
-#include "fUML/Semantics/Loci/Locus.hpp"
+#include "PSCS/Semantics/Loci/CS_Locus.hpp"
 
 #include "ecore/impl/EObjectImpl.hpp"
 
-namespace [originalName/] 
+namespace [aPackage.generateNamespace(false)/] 
 {
-	class [upperName/]Locus: virtual public fUML::Semantics::Loci::Locus
+	class [upperName/]Locus: virtual public PSCS::Semantics::Loci::CS_Locus
 	{
 		public: 
 			[upperName/]Locus (){};
@@ -50,13 +50,13 @@ namespace [originalName/]
 [startGuard(aPackage,'LocusImpl_Execution')/]
 
 #include "../[upperName/]Locus.hpp"
-#include "fUML/Semantics/Loci/impl/LocusImpl.hpp"
+#include "PSCS/Semantics/Loci/impl/CS_LocusImpl.hpp"
 
 #include "ecore/impl/EObjectImpl.hpp"
 
-namespace [originalName/] 
+namespace [aPackage.generateNamespace(false)/] 
 {
-	class [upperName/]LocusImpl :virtual public fUML::Semantics::Loci::LocusImpl, virtual public [upperName/]Locus
+	class [upperName/]LocusImpl :virtual public PSCS::Semantics::Loci::CS_LocusImpl, virtual public [upperName/]Locus
 	{
 		private:    
 			[upperName/]LocusImpl& operator=([upperName/]LocusImpl const&) = delete;
@@ -71,7 +71,7 @@ namespace [originalName/]
 			/*!
 			 */ 
 			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> instantiate(std::shared_ptr<uml::Class>  type) ;
-			virtual void setThisLocusPtr(std::weak_ptr<fUML::Semantics::Loci::Locus> thisLocusPtr){fUML::Semantics::Loci::LocusImpl::setThisLocusPtr(thisLocusPtr);};
+			virtual void setThisLocusPtr(std::weak_ptr<PSCS::Semantics::Loci::CS_Locus> thisLocusPtr){PSCS::Semantics::Loci::CS_LocusImpl::setThisLocusPtr(thisLocusPtr);};
 	};
 }
 [endGuard(aPackage,'LocusImpl_Execution')/]

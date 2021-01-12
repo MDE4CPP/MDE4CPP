@@ -14,12 +14,12 @@
 #include "../EStringToStringMapEntry.hpp"
 
 
-#include "ecore/impl/EObjectImpl.hpp"
+#include "ecore/impl/EModelElementImpl.hpp"
 
 //*********************************
 namespace ecore 
 {
-	class EStringToStringMapEntryImpl :virtual public ecore::EObjectImpl,
+	class EStringToStringMapEntryImpl : virtual public ecore::EModelElementImpl,
 virtual public EStringToStringMapEntry 
 	{
 		public: 
@@ -30,7 +30,7 @@ virtual public EStringToStringMapEntry
 			EStringToStringMapEntryImpl& operator=(EStringToStringMapEntryImpl const&) = delete;
 
 		protected:
-			friend class EcoreFactoryImpl;
+			friend class ecoreFactoryImpl;
 			EStringToStringMapEntryImpl();
 			virtual std::shared_ptr<EStringToStringMapEntry> getThisEStringToStringMapEntryPtr() const;
 			virtual void setThisEStringToStringMapEntryPtr(std::weak_ptr<EStringToStringMapEntry> thisEStringToStringMapEntryPtr);
@@ -49,22 +49,16 @@ virtual public EStringToStringMapEntry
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::string getKey() const ;
 			
-			/*!
-			 */ 
+			 
 			virtual void setKey (std::string _key); 
-			
-			/*!
-			 */ 
+			 
 			virtual std::string getValue() const ;
 			
-			/*!
-			 */ 
+			 
 			virtual void setValue (std::string _value); 
-			
 			
 			
 			//*********************************
@@ -88,7 +82,7 @@ virtual public EStringToStringMapEntry
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<ecore::EcoreFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

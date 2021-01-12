@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -26,23 +25,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -74,10 +62,11 @@
 
 #include "uml/ValueSpecification.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -87,38 +76,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 ParameterImpl::ParameterImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	
-	
-	
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	
-
-	
-
-		m_parameterSet.reset(new Bag<uml::ParameterSet>());
-	
-	
-
-	//Init references
-	
-
-	
-
-	
-
-	
-	
+{	
 }
 
 ParameterImpl::~ParameterImpl()
@@ -128,65 +86,44 @@ ParameterImpl::~ParameterImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+ParameterImpl::ParameterImpl(std::weak_ptr<uml::Behavior > par_behavior)
+:ParameterImpl()
+{
+	m_behavior = par_behavior;
+	m_namespace = par_behavior;
+}
 
 //Additional constructor for the containments back reference
-			ParameterImpl::ParameterImpl(std::weak_ptr<uml::Behavior > par_behavior)
-			:ParameterImpl()
-			{
-			    m_behavior = par_behavior;
-				m_namespace = par_behavior;
-			}
-
-
-
-
+ParameterImpl::ParameterImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:ParameterImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			ParameterImpl::ParameterImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:ParameterImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
-
-
-
+ParameterImpl::ParameterImpl(std::weak_ptr<uml::Operation > par_operation)
+:ParameterImpl()
+{
+	m_operation = par_operation;
+	m_namespace = par_operation;
+}
 
 //Additional constructor for the containments back reference
-			ParameterImpl::ParameterImpl(std::weak_ptr<uml::Operation > par_operation)
-			:ParameterImpl()
-			{
-			    m_operation = par_operation;
-				m_namespace = par_operation;
-			}
-
-
-
-
+ParameterImpl::ParameterImpl(std::weak_ptr<uml::Element > par_owner)
+:ParameterImpl()
+{
+	m_owner = par_owner;
+}
 
 //Additional constructor for the containments back reference
-			ParameterImpl::ParameterImpl(std::weak_ptr<uml::Element > par_owner)
-			:ParameterImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-
-
-
-//Additional constructor for the containments back reference
-			ParameterImpl::ParameterImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
-			:ParameterImpl()
-			{
-			    m_owningTemplateParameter = par_owningTemplateParameter;
-				m_owner = par_owningTemplateParameter;
-			}
-
-
-
-
+ParameterImpl::ParameterImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+:ParameterImpl()
+{
+	m_owningTemplateParameter = par_owningTemplateParameter;
+	m_owner = par_owningTemplateParameter;
+}
 
 
 ParameterImpl::ParameterImpl(const ParameterImpl & obj):ParameterImpl()
@@ -285,20 +222,33 @@ std::shared_ptr<ecore::EObject>  ParameterImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ParameterImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getParameter_Class();
+	return uml::umlPackage::eInstance()->getParameter_Class();
 }
 
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute default
+*/
+std::string ParameterImpl::getDefault() const 
+{
+	return m_default;
+}
+
 void ParameterImpl::setDefault(std::string _default)
 {
 	m_default = _default;
 } 
 
-std::string ParameterImpl::getDefault() const 
+
+
+/*
+Getter & Setter for attribute direction
+*/
+uml::ParameterDirectionKind ParameterImpl::getDirection() const 
 {
-	return m_default;
+	return m_direction;
 }
 
 void ParameterImpl::setDirection(uml::ParameterDirectionKind _direction)
@@ -306,9 +256,14 @@ void ParameterImpl::setDirection(uml::ParameterDirectionKind _direction)
 	m_direction = _direction;
 } 
 
-uml::ParameterDirectionKind ParameterImpl::getDirection() const 
+
+
+/*
+Getter & Setter for attribute effect
+*/
+uml::ParameterEffectKind ParameterImpl::getEffect() const 
 {
-	return m_direction;
+	return m_effect;
 }
 
 void ParameterImpl::setEffect(uml::ParameterEffectKind _effect)
@@ -316,9 +271,14 @@ void ParameterImpl::setEffect(uml::ParameterEffectKind _effect)
 	m_effect = _effect;
 } 
 
-uml::ParameterEffectKind ParameterImpl::getEffect() const 
+
+
+/*
+Getter & Setter for attribute isException
+*/
+bool ParameterImpl::getIsException() const 
 {
-	return m_effect;
+	return m_isException;
 }
 
 void ParameterImpl::setIsException(bool _isException)
@@ -326,9 +286,14 @@ void ParameterImpl::setIsException(bool _isException)
 	m_isException = _isException;
 } 
 
-bool ParameterImpl::getIsException() const 
+
+
+/*
+Getter & Setter for attribute isStream
+*/
+bool ParameterImpl::getIsStream() const 
 {
-	return m_isException;
+	return m_isStream;
 }
 
 void ParameterImpl::setIsStream(bool _isStream)
@@ -336,10 +301,7 @@ void ParameterImpl::setIsStream(bool _isStream)
 	m_isStream = _isStream;
 } 
 
-bool ParameterImpl::getIsStream() const 
-{
-	return m_isStream;
-}
+
 
 //*********************************
 // Operations
@@ -431,26 +393,41 @@ void ParameterImpl::unsetDefault()
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference behavior
+*/
 std::weak_ptr<uml::Behavior > ParameterImpl::getBehavior() const
 {
 
     return m_behavior;
 }
+
 void ParameterImpl::setBehavior(std::shared_ptr<uml::Behavior> _behavior)
 {
     m_behavior = _behavior;
 }
 
+
+
+/*
+Getter & Setter for reference defaultValue
+*/
 std::shared_ptr<uml::ValueSpecification > ParameterImpl::getDefaultValue() const
 {
 
     return m_defaultValue;
 }
+
 void ParameterImpl::setDefaultValue(std::shared_ptr<uml::ValueSpecification> _defaultValue)
 {
     m_defaultValue = _defaultValue;
 }
 
+
+
+/*
+Getter & Setter for reference operation
+*/
 std::weak_ptr<uml::Operation > ParameterImpl::getOperation() const
 {
 
@@ -458,11 +435,26 @@ std::weak_ptr<uml::Operation > ParameterImpl::getOperation() const
 }
 
 
+
+
+
+/*
+Getter & Setter for reference parameterSet
+*/
 std::shared_ptr<Bag<uml::ParameterSet>> ParameterImpl::getParameterSet() const
 {
+	if(m_parameterSet == nullptr)
+	{
+		m_parameterSet.reset(new Bag<uml::ParameterSet>());
+		
+		
+	}
 
     return m_parameterSet;
 }
+
+
+
 
 
 //*********************************
@@ -472,14 +464,28 @@ std::weak_ptr<uml::Namespace > ParameterImpl::getNamespace() const
 {
 	return m_namespace;
 }
+
 std::shared_ptr<Union<uml::Element>> ParameterImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > ParameterImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<Parameter> ParameterImpl::getThisParameterPtr() const
@@ -528,23 +534,23 @@ Any ParameterImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::PARAMETER_ATTRIBUTE_BEHAVIOR:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getBehavior().lock())); //17527
-		case UmlPackage::PARAMETER_ATTRIBUTE_DEFAULT:
-			return eAny(getDefault()); //17519
-		case UmlPackage::PARAMETER_ATTRIBUTE_DEFAULTVALUE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDefaultValue())); //17520
-		case UmlPackage::PARAMETER_ATTRIBUTE_DIRECTION:
-			return eAny(getDirection()); //17521
-		case UmlPackage::PARAMETER_ATTRIBUTE_EFFECT:
-			return eAny(getEffect()); //17522
-		case UmlPackage::PARAMETER_ATTRIBUTE_ISEXCEPTION:
-			return eAny(getIsException()); //17523
-		case UmlPackage::PARAMETER_ATTRIBUTE_ISSTREAM:
-			return eAny(getIsStream()); //17524
-		case UmlPackage::PARAMETER_ATTRIBUTE_OPERATION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOperation().lock())); //17525
-		case UmlPackage::PARAMETER_ATTRIBUTE_PARAMETERSET:
+		case uml::umlPackage::PARAMETER_ATTRIBUTE_BEHAVIOR:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getBehavior().lock())); //17427
+		case uml::umlPackage::PARAMETER_ATTRIBUTE_DEFAULT:
+			return eAny(getDefault()); //17419
+		case uml::umlPackage::PARAMETER_ATTRIBUTE_DEFAULTVALUE:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDefaultValue())); //17420
+		case uml::umlPackage::PARAMETER_ATTRIBUTE_DIRECTION:
+			return eAny(getDirection()); //17421
+		case uml::umlPackage::PARAMETER_ATTRIBUTE_EFFECT:
+			return eAny(getEffect()); //17422
+		case uml::umlPackage::PARAMETER_ATTRIBUTE_ISEXCEPTION:
+			return eAny(getIsException()); //17423
+		case uml::umlPackage::PARAMETER_ATTRIBUTE_ISSTREAM:
+			return eAny(getIsStream()); //17424
+		case uml::umlPackage::PARAMETER_ATTRIBUTE_OPERATION:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOperation().lock())); //17425
+		case uml::umlPackage::PARAMETER_ATTRIBUTE_PARAMETERSET:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::ParameterSet>::iterator iter = m_parameterSet->begin();
@@ -554,7 +560,7 @@ Any ParameterImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //17526
+			return eAny(tempList); //17426
 		}
 	}
 	Any result;
@@ -570,24 +576,24 @@ bool ParameterImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::PARAMETER_ATTRIBUTE_BEHAVIOR:
-			return getBehavior().lock() != nullptr; //17527
-		case UmlPackage::PARAMETER_ATTRIBUTE_DEFAULT:
-			return getDefault() != ""; //17519
-		case UmlPackage::PARAMETER_ATTRIBUTE_DEFAULTVALUE:
-			return getDefaultValue() != nullptr; //17520
-		case UmlPackage::PARAMETER_ATTRIBUTE_DIRECTION:
-			return m_direction != ParameterDirectionKind::IN;; //17521
-		case UmlPackage::PARAMETER_ATTRIBUTE_EFFECT:
-			return m_effect != ParameterEffectKind::CREATE;; //17522
-		case UmlPackage::PARAMETER_ATTRIBUTE_ISEXCEPTION:
-			return getIsException() != false; //17523
-		case UmlPackage::PARAMETER_ATTRIBUTE_ISSTREAM:
-			return getIsStream() != false; //17524
-		case UmlPackage::PARAMETER_ATTRIBUTE_OPERATION:
-			return getOperation().lock() != nullptr; //17525
-		case UmlPackage::PARAMETER_ATTRIBUTE_PARAMETERSET:
-			return getParameterSet() != nullptr; //17526
+		case uml::umlPackage::PARAMETER_ATTRIBUTE_BEHAVIOR:
+			return getBehavior().lock() != nullptr; //17427
+		case uml::umlPackage::PARAMETER_ATTRIBUTE_DEFAULT:
+			return getDefault() != ""; //17419
+		case uml::umlPackage::PARAMETER_ATTRIBUTE_DEFAULTVALUE:
+			return getDefaultValue() != nullptr; //17420
+		case uml::umlPackage::PARAMETER_ATTRIBUTE_DIRECTION:
+			return m_direction != ParameterDirectionKind::IN;; //17421
+		case uml::umlPackage::PARAMETER_ATTRIBUTE_EFFECT:
+			return m_effect != ParameterEffectKind::CREATE;; //17422
+		case uml::umlPackage::PARAMETER_ATTRIBUTE_ISEXCEPTION:
+			return getIsException() != false; //17423
+		case uml::umlPackage::PARAMETER_ATTRIBUTE_ISSTREAM:
+			return getIsStream() != false; //17424
+		case uml::umlPackage::PARAMETER_ATTRIBUTE_OPERATION:
+			return getOperation().lock() != nullptr; //17425
+		case uml::umlPackage::PARAMETER_ATTRIBUTE_PARAMETERSET:
+			return getParameterSet() != nullptr; //17426
 	}
 	bool result = false;
 	result = ConnectableElementImpl::internalEIsSet(featureID);
@@ -602,58 +608,58 @@ bool ParameterImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::PARAMETER_ATTRIBUTE_BEHAVIOR:
+		case uml::umlPackage::PARAMETER_ATTRIBUTE_BEHAVIOR:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Behavior> _behavior = std::dynamic_pointer_cast<uml::Behavior>(_temp);
-			setBehavior(_behavior); //17527
+			setBehavior(_behavior); //17427
 			return true;
 		}
-		case UmlPackage::PARAMETER_ATTRIBUTE_DEFAULT:
+		case uml::umlPackage::PARAMETER_ATTRIBUTE_DEFAULT:
 		{
 			// BOOST CAST
 			std::string _default = newValue->get<std::string>();
-			setDefault(_default); //17519
+			setDefault(_default); //17419
 			return true;
 		}
-		case UmlPackage::PARAMETER_ATTRIBUTE_DEFAULTVALUE:
+		case uml::umlPackage::PARAMETER_ATTRIBUTE_DEFAULTVALUE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ValueSpecification> _defaultValue = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
-			setDefaultValue(_defaultValue); //17520
+			setDefaultValue(_defaultValue); //17420
 			return true;
 		}
-		case UmlPackage::PARAMETER_ATTRIBUTE_DIRECTION:
+		case uml::umlPackage::PARAMETER_ATTRIBUTE_DIRECTION:
 		{
 			// BOOST CAST
 			uml::ParameterDirectionKind _direction = newValue->get<uml::ParameterDirectionKind>();
-			setDirection(_direction); //17521
+			setDirection(_direction); //17421
 			return true;
 		}
-		case UmlPackage::PARAMETER_ATTRIBUTE_EFFECT:
+		case uml::umlPackage::PARAMETER_ATTRIBUTE_EFFECT:
 		{
 			// BOOST CAST
 			uml::ParameterEffectKind _effect = newValue->get<uml::ParameterEffectKind>();
-			setEffect(_effect); //17522
+			setEffect(_effect); //17422
 			return true;
 		}
-		case UmlPackage::PARAMETER_ATTRIBUTE_ISEXCEPTION:
+		case uml::umlPackage::PARAMETER_ATTRIBUTE_ISEXCEPTION:
 		{
 			// BOOST CAST
 			bool _isException = newValue->get<bool>();
-			setIsException(_isException); //17523
+			setIsException(_isException); //17423
 			return true;
 		}
-		case UmlPackage::PARAMETER_ATTRIBUTE_ISSTREAM:
+		case uml::umlPackage::PARAMETER_ATTRIBUTE_ISSTREAM:
 		{
 			// BOOST CAST
 			bool _isStream = newValue->get<bool>();
-			setIsStream(_isStream); //17524
+			setIsStream(_isStream); //17424
 			return true;
 		}
-		case UmlPackage::PARAMETER_ATTRIBUTE_PARAMETERSET:
+		case uml::umlPackage::PARAMETER_ATTRIBUTE_PARAMETERSET:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -712,12 +718,11 @@ void ParameterImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> 
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -813,8 +818,9 @@ void ParameterImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoa
 	MultiplicityElementImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ParameterImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void ParameterImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -843,16 +849,16 @@ void ParameterImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
-
-	ConnectableElementImpl::loadNode(nodeName, loadHandler, modelFactory);
-	MultiplicityElementImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	ConnectableElementImpl::loadNode(nodeName, loadHandler);
+	MultiplicityElementImpl::loadNode(nodeName, loadHandler);
 }
 
 void ParameterImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case UmlPackage::PARAMETER_ATTRIBUTE_BEHAVIOR:
+		case uml::umlPackage::PARAMETER_ATTRIBUTE_BEHAVIOR:
 		{
 			if (references.size() == 1)
 			{
@@ -864,7 +870,7 @@ void ParameterImpl::resolveReferences(const int featureID, std::list<std::shared
 			return;
 		}
 
-		case UmlPackage::PARAMETER_ATTRIBUTE_PARAMETERSET:
+		case uml::umlPackage::PARAMETER_ATTRIBUTE_PARAMETERSET:
 		{
 			std::shared_ptr<Bag<uml::ParameterSet>> _parameterSet = getParameterSet();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -910,7 +916,7 @@ void ParameterImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 		// Save 'defaultValue'
 		std::shared_ptr<uml::ValueSpecification > defaultValue = this->getDefaultValue();
@@ -919,7 +925,6 @@ void ParameterImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 			saveHandler->addReference(defaultValue, "defaultValue", defaultValue->eClass() != package->getValueSpecification_Class());
 		}
 	
- 
 		// Add attributes
 		if ( this->eIsSet(package->getParameter_Attribute_direction()) )
 		{

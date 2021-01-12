@@ -17,22 +17,18 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "ecore/impl/EcorePackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "ecore/EcoreFactory.hpp"
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "ecore/EcorePackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -42,10 +38,11 @@
 
 #include "ecore/EObject.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
+//Factories an Package includes
+#include "ecore/impl/ecoreFactoryImpl.hpp"
+#include "ecore/impl/ecorePackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -55,17 +52,7 @@ using namespace ecore;
 // Constructor / Destructor
 //*********************************
 ENamedElementImpl::ENamedElementImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 ENamedElementImpl::~ENamedElementImpl()
@@ -75,17 +62,12 @@ ENamedElementImpl::~ENamedElementImpl()
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			ENamedElementImpl::ENamedElementImpl(std::weak_ptr<ecore::EObject > par_eContainer)
-			:ENamedElementImpl()
-			{
-			    m_eContainer = par_eContainer;
-			}
-
-
-
-
+ENamedElementImpl::ENamedElementImpl(std::weak_ptr<ecore::EObject > par_eContainer)
+:ENamedElementImpl()
+{
+	m_eContainer = par_eContainer;
+}
 
 
 ENamedElementImpl::ENamedElementImpl(const ENamedElementImpl & obj):ENamedElementImpl()
@@ -124,21 +106,26 @@ std::shared_ptr<ecore::EObject>  ENamedElementImpl::copy() const
 
 std::shared_ptr<EClass> ENamedElementImpl::eStaticClass() const
 {
-	return EcorePackageImpl::eInstance()->getENamedElement_Class();
+	return ecore::ecorePackage::eInstance()->getENamedElement_Class();
 }
 
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute name
+*/
+std::string ENamedElementImpl::getName() const 
+{
+	return m_name;
+}
+
 void ENamedElementImpl::setName(std::string _name)
 {
 	m_name = _name;
 } 
 
-std::string ENamedElementImpl::getName() const 
-{
-	return m_name;
-}
+
 
 //*********************************
 // Operations
@@ -153,8 +140,20 @@ std::string ENamedElementImpl::getName() const
 //*********************************
 std::shared_ptr<Union<ecore::EObject>> ENamedElementImpl::getEContens() const
 {
+	if(m_eContens == nullptr)
+	{
+		/*Union*/
+		m_eContens.reset(new Union<ecore::EObject>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_eContens - Union<ecore::EObject>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_eContens;
 }
+
+
 
 
 std::shared_ptr<ENamedElement> ENamedElementImpl::getThisENamedElementPtr() const
@@ -182,7 +181,7 @@ Any ENamedElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case EcorePackage::ENAMEDELEMENT_ATTRIBUTE_NAME:
+		case ecore::ecorePackage::ENAMEDELEMENT_ATTRIBUTE_NAME:
 			return eAny(getName()); //384
 	}
 	return EModelElementImpl::eGet(featureID, resolve, coreType);
@@ -191,7 +190,7 @@ bool ENamedElementImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case EcorePackage::ENAMEDELEMENT_ATTRIBUTE_NAME:
+		case ecore::ecorePackage::ENAMEDELEMENT_ATTRIBUTE_NAME:
 			return getName() != ""; //384
 	}
 	return EModelElementImpl::internalEIsSet(featureID);
@@ -200,7 +199,7 @@ bool ENamedElementImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case EcorePackage::ENAMEDELEMENT_ATTRIBUTE_NAME:
+		case ecore::ecorePackage::ENAMEDELEMENT_ATTRIBUTE_NAME:
 		{
 			// BOOST CAST
 			std::string _name = newValue->get<std::string>();
@@ -223,12 +222,11 @@ void ENamedElementImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandl
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get EcoreFactory
-	std::shared_ptr<ecore::EcoreFactory> modelFactory = ecore::EcoreFactory::eInstance();
+	// get ecoreFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -259,11 +257,12 @@ void ENamedElementImpl::loadAttributes(std::shared_ptr<persistence::interfaces::
 	EModelElementImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ENamedElementImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<ecore::EcoreFactory> modelFactory)
+void ENamedElementImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<ecore::ecoreFactory> modelFactory=ecore::ecoreFactory::eInstance();
 
-
-	EModelElementImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	EModelElementImpl::loadNode(nodeName, loadHandler);
 }
 
 void ENamedElementImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references)
@@ -288,10 +287,9 @@ void ENamedElementImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 {
 	try
 	{
-		std::shared_ptr<ecore::EcorePackage> package = ecore::EcorePackage::eInstance();
+		std::shared_ptr<ecore::ecorePackage> package = ecore::ecorePackage::eInstance();
 
 	
- 
 		// Add attributes
 		if ( this->eIsSet(package->getENamedElement_Attribute_name()) )
 		{

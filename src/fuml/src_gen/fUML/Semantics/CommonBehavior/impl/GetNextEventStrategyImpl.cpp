@@ -18,17 +18,15 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "fUML/impl/FUMLPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -38,10 +36,15 @@
 
 #include "fUML/Semantics/SimpleClassifiers/SignalInstance.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
-#include "fUML/FUMLFactory.hpp"
+//Factories an Package includes
+#include "fUML/Semantics/CommonBehavior/impl/CommonBehaviorFactoryImpl.hpp"
+#include "fUML/Semantics/CommonBehavior/impl/CommonBehaviorPackageImpl.hpp"
+
+#include "fUML/fUMLFactory.hpp"
+#include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsFactory.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -51,17 +54,7 @@ using namespace fUML::Semantics::CommonBehavior;
 // Constructor / Destructor
 //*********************************
 GetNextEventStrategyImpl::GetNextEventStrategyImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 GetNextEventStrategyImpl::~GetNextEventStrategyImpl()
@@ -70,7 +63,6 @@ GetNextEventStrategyImpl::~GetNextEventStrategyImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete GetNextEventStrategy "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -98,7 +90,7 @@ std::shared_ptr<ecore::EObject>  GetNextEventStrategyImpl::copy() const
 
 std::shared_ptr<ecore::EClass> GetNextEventStrategyImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getGetNextEventStrategy_Class();
+	return fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getGetNextEventStrategy_Class();
 }
 
 //*********************************
@@ -130,6 +122,7 @@ std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> GetNextEvent
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<GetNextEventStrategy> GetNextEventStrategyImpl::getThisGetNextEventStrategyPtr() const
@@ -183,12 +176,11 @@ void GetNextEventStrategyImpl::load(std::shared_ptr<persistence::interfaces::XLo
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get FUMLFactory
-	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
+	// get fUMLFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -198,11 +190,12 @@ void GetNextEventStrategyImpl::loadAttributes(std::shared_ptr<persistence::inter
 	fUML::Semantics::Loci::SemanticStrategyImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void GetNextEventStrategyImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+void GetNextEventStrategyImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<fUML::Semantics::CommonBehavior::CommonBehaviorFactory> modelFactory=fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance();
 
-
-	fUML::Semantics::Loci::SemanticStrategyImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	fUML::Semantics::Loci::SemanticStrategyImpl::loadNode(nodeName, loadHandler);
 }
 
 void GetNextEventStrategyImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -224,7 +217,7 @@ void GetNextEventStrategyImpl::saveContent(std::shared_ptr<persistence::interfac
 {
 	try
 	{
-		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+		std::shared_ptr<fUML::Semantics::CommonBehavior::CommonBehaviorPackage> package = fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance();
 
 	
 

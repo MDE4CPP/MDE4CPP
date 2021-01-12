@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -25,21 +24,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -59,10 +49,11 @@
 
 #include "uml/TemplateParameter.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -72,17 +63,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 AnyReceiveEventImpl::AnyReceiveEventImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 AnyReceiveEventImpl::~AnyReceiveEventImpl()
@@ -92,53 +73,36 @@ AnyReceiveEventImpl::~AnyReceiveEventImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+AnyReceiveEventImpl::AnyReceiveEventImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:AnyReceiveEventImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			AnyReceiveEventImpl::AnyReceiveEventImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:AnyReceiveEventImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
-
-
-
+AnyReceiveEventImpl::AnyReceiveEventImpl(std::weak_ptr<uml::Element > par_owner)
+:AnyReceiveEventImpl()
+{
+	m_owner = par_owner;
+}
 
 //Additional constructor for the containments back reference
-			AnyReceiveEventImpl::AnyReceiveEventImpl(std::weak_ptr<uml::Element > par_owner)
-			:AnyReceiveEventImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-
-
+AnyReceiveEventImpl::AnyReceiveEventImpl(std::weak_ptr<uml::Package > par_owningPackage)
+:AnyReceiveEventImpl()
+{
+	m_owningPackage = par_owningPackage;
+	m_namespace = par_owningPackage;
+}
 
 //Additional constructor for the containments back reference
-			AnyReceiveEventImpl::AnyReceiveEventImpl(std::weak_ptr<uml::Package > par_owningPackage)
-			:AnyReceiveEventImpl()
-			{
-			    m_owningPackage = par_owningPackage;
-				m_namespace = par_owningPackage;
-			}
-
-
-
-
-
-//Additional constructor for the containments back reference
-			AnyReceiveEventImpl::AnyReceiveEventImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
-			:AnyReceiveEventImpl()
-			{
-			    m_owningTemplateParameter = par_owningTemplateParameter;
-				m_owner = par_owningTemplateParameter;
-			}
-
-
-
-
+AnyReceiveEventImpl::AnyReceiveEventImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+:AnyReceiveEventImpl()
+{
+	m_owningTemplateParameter = par_owningTemplateParameter;
+	m_owner = par_owningTemplateParameter;
+}
 
 
 AnyReceiveEventImpl::AnyReceiveEventImpl(const AnyReceiveEventImpl & obj):AnyReceiveEventImpl()
@@ -196,7 +160,7 @@ std::shared_ptr<ecore::EObject>  AnyReceiveEventImpl::copy() const
 
 std::shared_ptr<ecore::EClass> AnyReceiveEventImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getAnyReceiveEvent_Class();
+	return uml::umlPackage::eInstance()->getAnyReceiveEvent_Class();
 }
 
 //*********************************
@@ -218,14 +182,28 @@ std::weak_ptr<uml::Namespace > AnyReceiveEventImpl::getNamespace() const
 {
 	return m_namespace;
 }
+
 std::shared_ptr<Union<uml::Element>> AnyReceiveEventImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > AnyReceiveEventImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<AnyReceiveEvent> AnyReceiveEventImpl::getThisAnyReceiveEventPtr() const
@@ -298,12 +276,11 @@ void AnyReceiveEventImpl::load(std::shared_ptr<persistence::interfaces::XLoadHan
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -313,11 +290,12 @@ void AnyReceiveEventImpl::loadAttributes(std::shared_ptr<persistence::interfaces
 	MessageEventImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void AnyReceiveEventImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void AnyReceiveEventImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
-
-	MessageEventImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	MessageEventImpl::loadNode(nodeName, loadHandler);
 }
 
 void AnyReceiveEventImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -355,7 +333,7 @@ void AnyReceiveEventImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 

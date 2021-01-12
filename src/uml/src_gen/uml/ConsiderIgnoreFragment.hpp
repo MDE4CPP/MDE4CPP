@@ -14,7 +14,7 @@
 
 
 // forward declarations
-template<class T> class Bag;
+template<class T> class Bag; 
 
 
 class AnyObject;
@@ -36,7 +36,7 @@ namespace persistence
 
 namespace uml
 {
-	class UmlFactory;
+	class umlFactory;
 }
 
 //Forward Declaration for used types
@@ -113,8 +113,10 @@ namespace uml
 namespace uml 
 {
 	/*!
-	 A ConsiderIgnoreFragment is a kind of CombinedFragment that is used for the consider and ignore cases, which require lists of pertinent Messages to be specified.
-	<p>From package UML::Interactions.</p> */
+	A ConsiderIgnoreFragment is a kind of CombinedFragment that is used for the consider and ignore cases, which require lists of pertinent Messages to be specified.
+	<p>From package UML::Interactions.</p>
+	*/
+	
 	class ConsiderIgnoreFragment:virtual public CombinedFragment
 	{
 		public:
@@ -135,13 +137,17 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 The interaction operator of a ConsiderIgnoreFragment must be either 'consider' or 'ignore'.
-			(interactionOperator =  InteractionOperatorKind::consider) or (interactionOperator =  InteractionOperatorKind::ignore) */ 
+			The interaction operator of a ConsiderIgnoreFragment must be either 'consider' or 'ignore'.
+			(interactionOperator =  InteractionOperatorKind::consider) or (interactionOperator =  InteractionOperatorKind::ignore)
+			*/
+			 
 			virtual bool consider_or_ignore(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
-			 The NamedElements must be of a type of element that can be a signature for a message (i.e.., an Operation, or a Signal).
-			message->forAll(m | m.oclIsKindOf(Operation) or m.oclIsKindOf(Signal)) */ 
+			The NamedElements must be of a type of element that can be a signature for a message (i.e.., an Operation, or a Signal).
+			message->forAll(m | m.oclIsKindOf(Operation) or m.oclIsKindOf(Signal))
+			*/
+			 
 			virtual bool type(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
@@ -153,9 +159,12 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 The set of messages that apply to this fragment.
-			<p>From package UML::Interactions.</p> */
+			The set of messages that apply to this fragment.
+			<p>From package UML::Interactions.</p>
+			*/
+			
 			virtual std::shared_ptr<Bag<uml::NamedElement>> getMessage() const = 0;
+			
 			
 			
 
@@ -169,24 +178,31 @@ namespace uml
 			// Reference Members
 			//*********************************
 			/*!
-			 The set of messages that apply to this fragment.
-			<p>From package UML::Interactions.</p> */
-			std::shared_ptr<Bag<uml::NamedElement>> m_message;
+			The set of messages that apply to this fragment.
+			<p>From package UML::Interactions.</p>
+			*/
 			
+			mutable std::shared_ptr<Bag<uml::NamedElement>> m_message;
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

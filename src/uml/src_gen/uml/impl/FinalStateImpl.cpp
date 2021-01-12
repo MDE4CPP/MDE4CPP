@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -26,19 +25,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -82,10 +74,11 @@
 
 #include "uml/Trigger.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -95,17 +88,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 FinalStateImpl::FinalStateImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 FinalStateImpl::~FinalStateImpl()
@@ -115,41 +98,28 @@ FinalStateImpl::~FinalStateImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+FinalStateImpl::FinalStateImpl(std::weak_ptr<uml::Region > par_container)
+:FinalStateImpl()
+{
+	m_container = par_container;
+	m_namespace = par_container;
+}
 
 //Additional constructor for the containments back reference
-			FinalStateImpl::FinalStateImpl(std::weak_ptr<uml::Region > par_container)
-			:FinalStateImpl()
-			{
-			    m_container = par_container;
-				m_namespace = par_container;
-			}
-
-
-
-
+FinalStateImpl::FinalStateImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:FinalStateImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			FinalStateImpl::FinalStateImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:FinalStateImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
-
-
-
-
-//Additional constructor for the containments back reference
-			FinalStateImpl::FinalStateImpl(std::weak_ptr<uml::Element > par_owner)
-			:FinalStateImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-
-
+FinalStateImpl::FinalStateImpl(std::weak_ptr<uml::Element > par_owner)
+:FinalStateImpl()
+{
+	m_owner = par_owner;
+}
 
 
 FinalStateImpl::FinalStateImpl(const FinalStateImpl & obj):FinalStateImpl()
@@ -324,7 +294,7 @@ std::shared_ptr<ecore::EObject>  FinalStateImpl::copy() const
 
 std::shared_ptr<ecore::EClass> FinalStateImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getFinalState_Class();
+	return uml::umlPackage::eInstance()->getFinalState_Class();
 }
 
 //*********************************
@@ -379,28 +349,80 @@ bool FinalStateImpl::no_state_behavior(Any diagnostics,std::map <   Any, Any >  
 //*********************************
 std::shared_ptr<Union<uml::NamedElement>> FinalStateImpl::getMember() const
 {
+	if(m_member == nullptr)
+	{
+		/*Union*/
+		m_member.reset(new Union<uml::NamedElement>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_member - Union<uml::NamedElement>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_member;
 }
+
 std::weak_ptr<uml::Namespace > FinalStateImpl::getNamespace() const
 {
 	return m_namespace;
 }
+
 std::shared_ptr<Union<uml::Element>> FinalStateImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> FinalStateImpl::getOwnedMember() const
 {
+	if(m_ownedMember == nullptr)
+	{
+		/*SubsetUnion*/
+		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_ownedMember->initSubsetUnion(getOwnedElement(),getMember());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >(getOwnedElement(),getMember())" << std::endl;
+		#endif
+		
+	}
 	return m_ownedMember;
 }
+
 std::weak_ptr<uml::Element > FinalStateImpl::getOwner() const
 {
 	return m_owner;
 }
+
 std::shared_ptr<Union<uml::RedefinableElement>> FinalStateImpl::getRedefinedElement() const
 {
+	if(m_redefinedElement == nullptr)
+	{
+		/*Union*/
+		m_redefinedElement.reset(new Union<uml::RedefinableElement>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_redefinedElement - Union<uml::RedefinableElement>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_redefinedElement;
 }
+
+
 
 
 std::shared_ptr<FinalState> FinalStateImpl::getThisFinalStatePtr() const
@@ -468,12 +490,11 @@ void FinalStateImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler>
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -483,11 +504,12 @@ void FinalStateImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLo
 	StateImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void FinalStateImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void FinalStateImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
-
-	StateImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	StateImpl::loadNode(nodeName, loadHandler);
 }
 
 void FinalStateImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -523,7 +545,7 @@ void FinalStateImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 

@@ -33,14 +33,18 @@ SET(CMAKE_CXX_FLAGS_RELEASE " -O3  ${ENABLED_DEBUG_MESSAGE}")
 string(REPLACE "\\" "/" MDE4CPP_HOME $ENV{MDE4CPP_HOME})
 
 SET(SOURCE_FILES
-	impl/TypesFactoryImpl.cpp
-	TypesFactory.cpp
-	impl/TypesPackageImpl.cpp
-	impl/TypesPackageImpl_Creation.cpp
-	impl/TypesPackageImpl_Initialization.cpp
-	TypesPackage.cpp
-	impl/TypesPluginImpl.cpp
-	TypesPlugin.cpp
+# Factories and packages
+	typesFactory.cpp
+	impl/typesFactoryImpl.cpp
+	typesPackage.cpp
+	impl/typesPackageImpl.cpp
+	impl/typesPackageImpl_Creation.cpp
+	impl/typesPackageImpl_Initialization.cpp
+	
+# Package plugin
+	impl/typesPluginImpl.cpp
+	typesPlugin.cpp
+# Package content
 	#${MDE4CPP_HOME}/application/include/util/ProfileCallCount.cpp
 )
 

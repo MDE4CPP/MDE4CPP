@@ -39,7 +39,8 @@ namespace StandardProfile
 			// Getter Setter
 			//*********************************
 			virtual std::weak_ptr<uml::Abstraction> getBase_Abstraction() const  = 0;
-			virtual void setBase_Abstraction (std::weak_ptr<uml::Abstraction> _base_Abstraction) = 0;
+			virtual void setBase_Abstraction(std::weak_ptr<uml::Abstraction> _base_Abstraction) = 0;
+			
 			
 			
 			//*********************************
@@ -52,6 +53,7 @@ namespace StandardProfile
 			// Members
 			//*********************************
 			std::weak_ptr<uml::Abstraction> m_base_Abstraction;
+			
 			
 	};
 }

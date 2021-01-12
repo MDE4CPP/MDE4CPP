@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -26,29 +25,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -88,10 +70,11 @@
 
 #include "uml/ValueSpecification.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -101,17 +84,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 ExtensionEndImpl::ExtensionEndImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 ExtensionEndImpl::~ExtensionEndImpl()
@@ -121,101 +94,68 @@ ExtensionEndImpl::~ExtensionEndImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+ExtensionEndImpl::ExtensionEndImpl(std::weak_ptr<uml::Property > par_associationEnd)
+:ExtensionEndImpl()
+{
+	m_associationEnd = par_associationEnd;
+	m_owner = par_associationEnd;
+}
 
 //Additional constructor for the containments back reference
-			ExtensionEndImpl::ExtensionEndImpl(std::weak_ptr<uml::Property > par_associationEnd)
-			:ExtensionEndImpl()
-			{
-			    m_associationEnd = par_associationEnd;
-				m_owner = par_associationEnd;
-			}
-
-
-
-
+ExtensionEndImpl::ExtensionEndImpl(std::weak_ptr<uml::Class > par_class)
+:ExtensionEndImpl()
+{
+	m_class = par_class;
+	m_namespace = par_class;
+}
 
 //Additional constructor for the containments back reference
-			ExtensionEndImpl::ExtensionEndImpl(std::weak_ptr<uml::Class > par_class)
-			:ExtensionEndImpl()
-			{
-			    m_class = par_class;
-				m_namespace = par_class;
-			}
-
-
-
-
+ExtensionEndImpl::ExtensionEndImpl(std::weak_ptr<uml::DataType > par_datatype)
+:ExtensionEndImpl()
+{
+	m_datatype = par_datatype;
+	m_namespace = par_datatype;
+}
 
 //Additional constructor for the containments back reference
-			ExtensionEndImpl::ExtensionEndImpl(std::weak_ptr<uml::DataType > par_datatype)
-			:ExtensionEndImpl()
-			{
-			    m_datatype = par_datatype;
-				m_namespace = par_datatype;
-			}
-
-
-
-
+ExtensionEndImpl::ExtensionEndImpl(std::weak_ptr<uml::Interface > par_interface)
+:ExtensionEndImpl()
+{
+	m_interface = par_interface;
+	m_namespace = par_interface;
+}
 
 //Additional constructor for the containments back reference
-			ExtensionEndImpl::ExtensionEndImpl(std::weak_ptr<uml::Interface > par_interface)
-			:ExtensionEndImpl()
-			{
-			    m_interface = par_interface;
-				m_namespace = par_interface;
-			}
-
-
-
-
+ExtensionEndImpl::ExtensionEndImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:ExtensionEndImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			ExtensionEndImpl::ExtensionEndImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:ExtensionEndImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
-
-
-
+ExtensionEndImpl::ExtensionEndImpl(std::weak_ptr<uml::Element > par_owner)
+:ExtensionEndImpl()
+{
+	m_owner = par_owner;
+}
 
 //Additional constructor for the containments back reference
-			ExtensionEndImpl::ExtensionEndImpl(std::weak_ptr<uml::Element > par_owner)
-			:ExtensionEndImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-
-
+ExtensionEndImpl::ExtensionEndImpl(std::weak_ptr<uml::Association > par_owningAssociation)
+:ExtensionEndImpl()
+{
+	m_owningAssociation = par_owningAssociation;
+	m_namespace = par_owningAssociation;
+}
 
 //Additional constructor for the containments back reference
-			ExtensionEndImpl::ExtensionEndImpl(std::weak_ptr<uml::Association > par_owningAssociation)
-			:ExtensionEndImpl()
-			{
-			    m_owningAssociation = par_owningAssociation;
-				m_namespace = par_owningAssociation;
-			}
-
-
-
-
-
-//Additional constructor for the containments back reference
-			ExtensionEndImpl::ExtensionEndImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
-			:ExtensionEndImpl()
-			{
-			    m_owningTemplateParameter = par_owningTemplateParameter;
-				m_owner = par_owningTemplateParameter;
-			}
-
-
-
-
+ExtensionEndImpl::ExtensionEndImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+:ExtensionEndImpl()
+{
+	m_owningTemplateParameter = par_owningTemplateParameter;
+	m_owner = par_owningTemplateParameter;
+}
 
 
 ExtensionEndImpl::ExtensionEndImpl(const ExtensionEndImpl & obj):ExtensionEndImpl()
@@ -363,7 +303,7 @@ std::shared_ptr<ecore::EObject>  ExtensionEndImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ExtensionEndImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getExtensionEnd_Class();
+	return uml::umlPackage::eInstance()->getExtensionEnd_Class();
 }
 
 //*********************************
@@ -394,28 +334,75 @@ bool ExtensionEndImpl::multiplicity(Any diagnostics,std::map <   Any, Any >  con
 //*********************************
 std::shared_ptr<Union<uml::Classifier>> ExtensionEndImpl::getFeaturingClassifier() const
 {
+	if(m_featuringClassifier == nullptr)
+	{
+		/*Union*/
+		m_featuringClassifier.reset(new Union<uml::Classifier>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_featuringClassifier - Union<uml::Classifier>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_featuringClassifier;
 }
+
 std::weak_ptr<uml::Namespace > ExtensionEndImpl::getNamespace() const
 {
 	return m_namespace;
 }
+
 std::shared_ptr<Union<uml::Element>> ExtensionEndImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > ExtensionEndImpl::getOwner() const
 {
 	return m_owner;
 }
+
 std::shared_ptr<Union<uml::RedefinableElement>> ExtensionEndImpl::getRedefinedElement() const
 {
+	if(m_redefinedElement == nullptr)
+	{
+		/*Union*/
+		m_redefinedElement.reset(new Union<uml::RedefinableElement>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_redefinedElement - Union<uml::RedefinableElement>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_redefinedElement;
 }
+
 std::shared_ptr<Union<uml::Classifier>> ExtensionEndImpl::getRedefinitionContext() const
 {
+	if(m_redefinitionContext == nullptr)
+	{
+		/*Union*/
+		m_redefinitionContext.reset(new Union<uml::Classifier>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_redefinitionContext - Union<uml::Classifier>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_redefinitionContext;
 }
+
+
 
 
 std::shared_ptr<ExtensionEnd> ExtensionEndImpl::getThisExtensionEndPtr() const
@@ -508,12 +495,11 @@ void ExtensionEndImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandle
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -523,11 +509,12 @@ void ExtensionEndImpl::loadAttributes(std::shared_ptr<persistence::interfaces::X
 	PropertyImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ExtensionEndImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void ExtensionEndImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
-
-	PropertyImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	PropertyImpl::loadNode(nodeName, loadHandler);
 }
 
 void ExtensionEndImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -572,7 +559,7 @@ void ExtensionEndImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 

@@ -33,14 +33,18 @@ SET(CMAKE_CXX_FLAGS_RELEASE " -O3  ${ENABLED_DEBUG_MESSAGE}")
 string(REPLACE "\\" "/" MDE4CPP_HOME $ENV{MDE4CPP_HOME})
 
 SET(SOURCE_FILES
-	impl/UmlFactoryImpl.cpp
-	UmlFactory.cpp
-	impl/UmlPackageImpl.cpp
-	impl/UmlPackageImpl_Creation.cpp
-	impl/UmlPackageImpl_Initialization.cpp
-	UmlPackage.cpp
-	impl/UmlPluginImpl.cpp
-	UmlPlugin.cpp
+# Factories and packages
+	umlFactory.cpp
+	impl/umlFactoryImpl.cpp
+	umlPackage.cpp
+	impl/umlPackageImpl.cpp
+	impl/umlPackageImpl_Creation.cpp
+	impl/umlPackageImpl_Initialization.cpp
+	
+# Package plugin
+	impl/umlPluginImpl.cpp
+	umlPlugin.cpp
+# Package content
 	impl/AbstractionImpl.cpp
 	impl/AcceptCallActionImpl.cpp
 	impl/AcceptEventActionImpl.cpp
@@ -48,7 +52,6 @@ SET(SOURCE_FILES
 	impl/ActionExecutionSpecificationImpl.cpp
 	impl/ActionInputPinImpl.cpp
 	impl/ActivityImpl.cpp
-	impl/ActivityContentImpl.cpp
 	impl/ActivityEdgeImpl.cpp
 	impl/ActivityFinalNodeImpl.cpp
 	impl/ActivityGroupImpl.cpp

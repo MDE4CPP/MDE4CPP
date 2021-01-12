@@ -18,25 +18,28 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "fUML/impl/FUMLPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
 
 #include <exception> // used in Persistence
 
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
-#include "fUML/FUMLFactory.hpp"
+//Factories an Package includes
+#include "fUML/Semantics/Activities/impl/ActivitiesFactoryImpl.hpp"
+#include "fUML/Semantics/Activities/impl/ActivitiesPackageImpl.hpp"
+
+#include "fUML/fUMLFactory.hpp"
+#include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsFactory.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -46,17 +49,7 @@ using namespace fUML::Semantics::Activities;
 // Constructor / Destructor
 //*********************************
 ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl::ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl::~ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl()
@@ -65,7 +58,6 @@ ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl::~ClassifierBehav
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1 "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -93,7 +85,7 @@ std::shared_ptr<ecore::EObject>  ClassifierBehaviorExecutionActivity_OwnedBehavi
 
 std::shared_ptr<ecore::EClass> ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1_Class();
+	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1_Class();
 }
 
 //*********************************
@@ -111,6 +103,7 @@ std::shared_ptr<ecore::EClass> ClassifierBehaviorExecutionActivity_OwnedBehavior
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1> ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl::getThisClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Ptr() const
@@ -163,12 +156,11 @@ void ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl::load(std::s
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get FUMLFactory
-	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
+	// get fUMLFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -178,11 +170,11 @@ void ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl::loadAttribu
 	ecore::EObjectImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+void ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<fUML::Semantics::Activities::ActivitiesFactory> modelFactory=fUML::Semantics::Activities::ActivitiesFactory::eInstance();
 
-
-	ecore::EObjectImpl::loadNode(nodeName, loadHandler, ecore::EcoreFactory::eInstance());
+	//load BasePackage Nodes
 }
 
 void ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -203,7 +195,7 @@ void ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl::saveContent
 {
 	try
 	{
-		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+		std::shared_ptr<fUML::Semantics::Activities::ActivitiesPackage> package = fUML::Semantics::Activities::ActivitiesPackage::eInstance();
 
 	
 

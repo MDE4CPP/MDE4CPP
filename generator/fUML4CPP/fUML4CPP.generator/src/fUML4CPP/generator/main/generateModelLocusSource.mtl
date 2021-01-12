@@ -15,72 +15,78 @@
 [module generateModelLocusSource('http://www.eclipse.org/uml2/5.0.0/UML')]
  
 [import fUML4CPP::generator::main::parameterHelper /]
+[import fUML4CPP::generator::main::fUMLKeywords /]
 [import UML4CPP::generator::main::components::generateType /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
 
+[query private getAllLocusClasses(aPackage : Package) : Set(Class) = aPackage.allOwnedElements()->filter(Class)->asSet()->flatten()->addAll(aPackage.getClassesOfCreateObjectAction())
+																	->reject(oclIsKindOf(Behavior))->reject(oclIsKindOf(AssociationClass))->reject(oclIsKindOf(Component))->reject(oclIsKindOf(Stereotype))->reject(oclIsKindOf(Node)) /]
 [query private getClassesOfCreateObjectAction(aPackage : Package) : Set(Class) = aPackage.allOwnedElements()->filter(CreateObjectAction).classifier->asSet()->flatten()->filter(Class) /]
 [query private getClassesOfCreateObjectActionForPackage(aPackage : Package, classPackage : Package) : Set(Class) = aPackage.getClassesOfCreateObjectAction()->select(aClass : Class | aClass.getNearestPackage() = classPackage)->sortedBy(name) /]
-[query private getClassPackagesOfCreateObjectAction(aPackage : Package) : Set(Package) = aPackage.getClassesOfCreateObjectAction().getNamespace()->asSet()->flatten()->sortedBy(name) /]
+[query private getClassPackagesOfCreateObjectAction(aPackage : Package) : Set(Package) = aPackage.getAllLocusClasses().getNamespace()->asSet()->flatten()->sortedBy(name) /]
 
 [template public generateModelLocusSource(aPackage : Package) 
 {
-upperName : String = aPackage.getPackageName().sanitize().toUpperFirst(); 
-originalName : String = aPackage.getPackageName();
+packageName : String = aPackage.getPackageName().sanitize(); 
+originalName : String = aPackage.generateNamespacePath(false);
 }]
 
-[file (originalName.concat('Exec/impl/') + upperName.concat('LocusImpl.cpp'), false, 'UTF-8')]
-#include "[upperName/]LocusImpl.hpp"
+[file (originalName.concat('Exec/impl/') + packageName.concat('LocusImpl.cpp'), false, 'UTF-8')]
+#include "[packageName/]LocusImpl.hpp"
 #include <iostream>
 
 [defineDebugMacro()/]
 
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "uml/Class.hpp"
 
 [for (classPackage : Package | aPackage.getClassPackagesOfCreateObjectAction())]
-#include "[classPackage.name/]/[classPackage.name.toUpperFirst()/]Factory.hpp"
-#include "[classPackage.name/]/[classPackage.name.toUpperFirst()/]Package.hpp"
-[for (aClass : Class | aPackage.getClassesOfCreateObjectActionForPackage(classPackage))]
-#include "[aClass.getNearestPackage().name/]/[aClass.name.toUpperFirst()/].hpp"
-#include "[originalName/]Exec/[aClass.name.toUpperFirst()/]Object.hpp"
+#include "[classPackage.generateNamespacePath(true)/]/[classPackage.myNamespaceName()/]Factory.hpp"
+#include "[classPackage.generateNamespacePath(true)/]/[classPackage.myNamespaceName()/]Package.hpp"
+[if (classPackage.isReflectionModel())]
+#include "[classPackage.generateNamespacePath(false)/]/[classPackage.name/]Package.hpp"
+[/if]
+[for (aClass : Class | classPackage.ownedElement->filter(Class)->reject(c : Class | c.oclIsKindOf(Behavior) or c.isAbstract)->reject(hasEAnnotation(sourceNoExecution()))->sortedBy(myQualifiedName()))]
+#include "[aClass.getNearestPackage().generateNamespacePath(true)/]/[aClass.name.toUpperFirst()/].hpp"
+#include "[aClass.getNearestPackage().generateNamespacePath(false)/]Exec/[aClass.name.toUpperFirst()/]Object.hpp"
 [/for]
 [/for]
 
 
-using namespace fUML;
-using namespace [originalName/];
+using namespace [aPackage.generateNamespace(false)/];
 
 //*********************************
 // Constructor / Destructor
 //*********************************
-[upperName/]LocusImpl::[upperName/]LocusImpl()
+[packageName/]LocusImpl::[packageName/]LocusImpl()
 {
 }
 
-[upperName/]LocusImpl::~[upperName/]LocusImpl()
+[packageName/]LocusImpl::~[packageName/]LocusImpl()
 {
 #ifdef SHOW_DELETION
-	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete [upperName/]Locus "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
+	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete [packageName/]Locus "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> [upperName/]LocusImpl::instantiate(std::shared_ptr<uml::Class>  type)
+std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> [packageName/]LocusImpl::instantiate(std::shared_ptr<uml::Class>  type)
 {
 [let packageList : Set(Package) = aPackage.getClassPackagesOfCreateObjectAction()]
 [if (packageList->size() > 0)]
 	std::shared_ptr<uml::Package> typePackage = type->getPackage().lock();
 [for (classPackage : Package | packageList)]
-[let packageName : String = classPackage.name]
-	if (typePackage == [packageName/]::[packageName.toUpperFirst()/]Package::eInstance())
+[let packageNamespace : String = classPackage.generateNamespace(true)]
+	if (typePackage == [classPackage.generateNamespace(false)/]::[classPackage.name/]Package::eInstance())
 	{		
 		switch(type->getMetaElementID())
 		{
-[for (aClass : Class | aPackage.getClassesOfCreateObjectActionForPackage(classPackage)) separator('\n')]
+[for (aClass : Class | classPackage.ownedElement->filter(Class)->reject(c : Class | c.oclIsKindOf(Behavior) or c.isAbstract)->reject(hasEAnnotation(sourceNoExecution()))->sortedBy(myQualifiedName())) separator('\n')]
 [let className : String = aClass.name.toUpperFirst()]
-			case [packageName/]::[packageName.toUpperFirst()/]Package::[aClass.getMemberName().toUpperCase()/]:
+			case [packageNamespace/]::[classPackage.myNamespaceName()/]Package::[aClass.getMemberName().toUpperCase()/]:
 			{
-				std::shared_ptr<[originalName/]::[className/]Object> object(new [originalName/]::[className/]Object());
+				std::shared_ptr<[aClass.getNearestPackage().generateNamespace(false)/]::[className/]Object> object(new [aClass.getNearestPackage().generateNamespace(false)/]::[className/]Object());
 				object->setThis[className/]ObjectPtr(object);
-				object->setUmlValue([packageName/]::[packageName.toUpperFirst()/]Factory::eInstance()->create[aClass.name.toUpperFirst()/]());
+				object->setUmlValue([packageNamespace/]::[classPackage.myNamespaceName()/]Factory::eInstance()->create[aClass.name.toUpperFirst()/]());
 				object->setLocus(this->getThisLocusPtr());
 				return object;
 			}
@@ -89,14 +95,14 @@ std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> [upperName/]Locu
 [/let]
 			default:
 			{
-				return fUML::Semantics::Loci::LocusImpl::instantiate(type);
+				return PSCS::Semantics::Loci::CS_LocusImpl::instantiate(type);
 			}
 		}
 	}
 [/for]
 [/if]
 [/let]
-	return fUML::Semantics::Loci::LocusImpl::instantiate(type);
+	return PSCS::Semantics::Loci::CS_LocusImpl::instantiate(type);
 }
 [/file]
 [/template]

@@ -26,10 +26,10 @@
  * template for generation of file with delcaration of enumeration class and corresponding literals
 */]
 [template public generateEnumerationFile(anEnum : Enumeration)]
-[file (anEnum._package.getPackageName().concat('/').concat(anEnum.name).concat('.hpp'), false, 'UTF-8')]
+[file (anEnum._package.generateNamespacePath(false).concat('/').concat(anEnum.name).concat('.hpp'), false, 'UTF-8')]
 [anEnum.startGuard()/]
 
-[if (not anEnum.getNearestPackage().ignoreNamespace())]namespace [anEnum._package.name/] 
+[if (not anEnum.getNearestPackage().ignoreNamespace())]namespace [anEnum._package.generateNamespace(false)/] 
 {
 [/if]
 	enum class [anEnum.name/] 

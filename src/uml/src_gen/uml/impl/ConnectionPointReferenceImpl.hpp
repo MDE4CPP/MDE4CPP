@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class ConnectionPointReferenceImpl :virtual public VertexImpl, virtual public ConnectionPointReference 
+	class ConnectionPointReferenceImpl : virtual public VertexImpl, virtual public ConnectionPointReference 
 	{
 		public: 
 			ConnectionPointReferenceImpl(const ConnectionPointReferenceImpl & obj);
@@ -28,7 +28,7 @@ namespace uml
 			ConnectionPointReferenceImpl& operator=(ConnectionPointReferenceImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			ConnectionPointReferenceImpl();
 			virtual std::shared_ptr<ConnectionPointReference> getThisConnectionPointReferencePtr() const;
 			virtual void setThisConnectionPointReferencePtr(std::weak_ptr<ConnectionPointReference> thisConnectionPointReferencePtr);
@@ -59,13 +59,17 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 The entry Pseudostates must be Pseudostates with kind entryPoint.
-			entry->forAll(kind = PseudostateKind::entryPoint) */ 
+			The entry Pseudostates must be Pseudostates with kind entryPoint.
+			entry->forAll(kind = PseudostateKind::entryPoint)
+			*/
+			 
 			virtual bool entry_pseudostates(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
-			 The exit Pseudostates must be Pseudostates with kind exitPoint.
-			exit->forAll(kind = PseudostateKind::exitPoint) */ 
+			The exit Pseudostates must be Pseudostates with kind exitPoint.
+			exit->forAll(kind = PseudostateKind::exitPoint)
+			*/
+			 
 			virtual bool exit_pseudostates(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
@@ -79,38 +83,55 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 The entryPoint Pseudostates corresponding to this connection point.
-			<p>From package UML::StateMachines.</p> */
+			The entryPoint Pseudostates corresponding to this connection point.
+			<p>From package UML::StateMachines.</p>
+			*/
+			
 			virtual std::shared_ptr<Bag<uml::Pseudostate>> getEntry() const ;
 			
-			/*!
-			 The exitPoints kind Pseudostates corresponding to this connection point.
-			<p>From package UML::StateMachines.</p> */
-			virtual std::shared_ptr<Bag<uml::Pseudostate>> getExit() const ;
 			
 			/*!
-			 The State in which the ConnectionPointReference is defined.
-			<p>From package UML::StateMachines.</p> */
+			The exitPoints kind Pseudostates corresponding to this connection point.
+			<p>From package UML::StateMachines.</p>
+			*/
+			
+			virtual std::shared_ptr<Bag<uml::Pseudostate>> getExit() const ;
+			
+			
+			/*!
+			The State in which the ConnectionPointReference is defined.
+			<p>From package UML::StateMachines.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::State > getState() const ;
 			
 			/*!
-			 The State in which the ConnectionPointReference is defined.
-			<p>From package UML::StateMachines.</p> */
-			virtual void setState(std::shared_ptr<uml::State> _state_state) ;
+			The State in which the ConnectionPointReference is defined.
+			<p>From package UML::StateMachines.</p>
+			*/
+			
+			virtual void setState(std::shared_ptr<uml::State> _state) ;
+			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
@@ -124,7 +145,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

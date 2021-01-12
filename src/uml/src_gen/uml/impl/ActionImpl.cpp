@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -25,21 +24,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -85,10 +75,11 @@
 
 #include "uml/StructuredActivityNode.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -98,83 +89,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 ActionImpl::ActionImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-		/*SubsetUnion*/
-		m_input.reset(new SubsetUnion<uml::InputPin, uml::Element >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_input - SubsetUnion<uml::InputPin, uml::Element >()" << std::endl;
-		#endif
-	
-	
-
-		/*Subset*/
-		m_localPostcondition.reset(new Subset<uml::Constraint, uml::Element >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_localPostcondition - Subset<uml::Constraint, uml::Element >()" << std::endl;
-		#endif
-	
-	
-
-		/*Subset*/
-		m_localPrecondition.reset(new Subset<uml::Constraint, uml::Element >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_localPrecondition - Subset<uml::Constraint, uml::Element >()" << std::endl;
-		#endif
-	
-	
-
-		/*SubsetUnion*/
-		m_output.reset(new SubsetUnion<uml::OutputPin, uml::Element >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_output - SubsetUnion<uml::OutputPin, uml::Element >()" << std::endl;
-		#endif
-	
-	
-
-	//Init references
-	
-
-		/*SubsetUnion*/
-		m_input->initSubsetUnion(m_ownedElement);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_input - SubsetUnion<uml::InputPin, uml::Element >(m_ownedElement)" << std::endl;
-		#endif
-	
-	
-
-		/*Subset*/
-		m_localPostcondition->initSubset(m_ownedElement);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_localPostcondition - Subset<uml::Constraint, uml::Element >(m_ownedElement)" << std::endl;
-		#endif
-	
-	
-
-		/*Subset*/
-		m_localPrecondition->initSubset(m_ownedElement);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_localPrecondition - Subset<uml::Constraint, uml::Element >(m_ownedElement)" << std::endl;
-		#endif
-	
-	
-
-		/*SubsetUnion*/
-		m_output->initSubsetUnion(m_ownedElement);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_output - SubsetUnion<uml::OutputPin, uml::Element >(m_ownedElement)" << std::endl;
-		#endif
-	
-	
+{	
 }
 
 ActionImpl::~ActionImpl()
@@ -184,53 +99,36 @@ ActionImpl::~ActionImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+ActionImpl::ActionImpl(std::weak_ptr<uml::Activity > par_activity)
+:ActionImpl()
+{
+	m_activity = par_activity;
+	m_owner = par_activity;
+}
 
 //Additional constructor for the containments back reference
-			ActionImpl::ActionImpl(std::weak_ptr<uml::Activity > par_activity)
-			:ActionImpl()
-			{
-			    m_activity = par_activity;
-				m_owner = par_activity;
-			}
-
-
-
-
+ActionImpl::ActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
+:ActionImpl()
+{
+	m_inStructuredNode = par_inStructuredNode;
+	m_owner = par_inStructuredNode;
+}
 
 //Additional constructor for the containments back reference
-			ActionImpl::ActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
-			:ActionImpl()
-			{
-			    m_inStructuredNode = par_inStructuredNode;
-				m_owner = par_inStructuredNode;
-			}
-
-
-
-
+ActionImpl::ActionImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:ActionImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			ActionImpl::ActionImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:ActionImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
-
-
-
-
-//Additional constructor for the containments back reference
-			ActionImpl::ActionImpl(std::weak_ptr<uml::Element > par_owner)
-			:ActionImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-
-
+ActionImpl::ActionImpl(std::weak_ptr<uml::Element > par_owner)
+:ActionImpl()
+{
+	m_owner = par_owner;
+}
 
 
 ActionImpl::ActionImpl(const ActionImpl & obj):ActionImpl()
@@ -342,20 +240,18 @@ ActionImpl::ActionImpl(const ActionImpl & obj):ActionImpl()
 		std::cout << "Copying the Subset: " << "m_redefinedNode" << std::endl;
 	#endif
 
-		/*Subset*/
-		m_localPostcondition->initSubset(m_ownedElement);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_localPostcondition - Subset<uml::Constraint, uml::Element >(m_ownedElement)" << std::endl;
-		#endif
-	
+	/*Subset*/
+	m_localPostcondition->initSubset(getOwnedElement());
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Initialising value Subset: " << "m_localPostcondition - Subset<uml::Constraint, uml::Element >(getOwnedElement())" << std::endl;
+	#endif
 	
 
-		/*Subset*/
-		m_localPrecondition->initSubset(m_ownedElement);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_localPrecondition - Subset<uml::Constraint, uml::Element >(m_ownedElement)" << std::endl;
-		#endif
-	
+	/*Subset*/
+	m_localPrecondition->initSubset(getOwnedElement());
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Initialising value Subset: " << "m_localPrecondition - Subset<uml::Constraint, uml::Element >(getOwnedElement())" << std::endl;
+	#endif
 	
 }
 
@@ -368,21 +264,26 @@ std::shared_ptr<ecore::EObject>  ActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getAction_Class();
+	return uml::umlPackage::eInstance()->getAction_Class();
 }
 
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute isLocallyReentrant
+*/
+bool ActionImpl::getIsLocallyReentrant() const 
+{
+	return m_isLocallyReentrant;
+}
+
 void ActionImpl::setIsLocallyReentrant(bool _isLocallyReentrant)
 {
 	m_isLocallyReentrant = _isLocallyReentrant;
 } 
 
-bool ActionImpl::getIsLocallyReentrant() const 
-{
-	return m_isLocallyReentrant;
-}
+
 
 //*********************************
 // Operations
@@ -410,6 +311,9 @@ std::shared_ptr<uml::Behavior> ActionImpl::containingBehavior()
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference context
+*/
 std::shared_ptr<uml::Classifier > ActionImpl::getContext() const
 {
 
@@ -420,18 +324,75 @@ std::shared_ptr<uml::Classifier > ActionImpl::getContext() const
 
 
 
+/*
+Getter & Setter for reference input
+*/
+
+
+
+
+
+
+/*
+Getter & Setter for reference localPostcondition
+*/
 std::shared_ptr<Subset<uml::Constraint, uml::Element>> ActionImpl::getLocalPostcondition() const
 {
+	if(m_localPostcondition == nullptr)
+	{
+		/*Subset*/
+		m_localPostcondition.reset(new Subset<uml::Constraint, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_localPostcondition - Subset<uml::Constraint, uml::Element >()" << std::endl;
+		#endif
+		
+		/*Subset*/
+		m_localPostcondition->initSubset(getOwnedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_localPostcondition - Subset<uml::Constraint, uml::Element >(getOwnedElement())" << std::endl;
+		#endif
+		
+	}
 
     return m_localPostcondition;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference localPrecondition
+*/
 std::shared_ptr<Subset<uml::Constraint, uml::Element>> ActionImpl::getLocalPrecondition() const
 {
+	if(m_localPrecondition == nullptr)
+	{
+		/*Subset*/
+		m_localPrecondition.reset(new Subset<uml::Constraint, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_localPrecondition - Subset<uml::Constraint, uml::Element >()" << std::endl;
+		#endif
+		
+		/*Subset*/
+		m_localPrecondition->initSubset(getOwnedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_localPrecondition - Subset<uml::Constraint, uml::Element >(getOwnedElement())" << std::endl;
+		#endif
+		
+	}
 
     return m_localPrecondition;
 }
+
+
+
+
+
+/*
+Getter & Setter for reference output
+*/
+
 
 
 
@@ -442,28 +403,95 @@ std::shared_ptr<Subset<uml::Constraint, uml::Element>> ActionImpl::getLocalPreco
 //*********************************
 std::shared_ptr<Union<uml::ActivityGroup>> ActionImpl::getInGroup() const
 {
+	if(m_inGroup == nullptr)
+	{
+		/*Union*/
+		m_inGroup.reset(new Union<uml::ActivityGroup>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_inGroup - Union<uml::ActivityGroup>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_inGroup;
 }
+
 std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> ActionImpl::getInput() const
 {
+	if(m_input == nullptr)
+	{
+		/*SubsetUnion*/
+		m_input.reset(new SubsetUnion<uml::InputPin, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_input - SubsetUnion<uml::InputPin, uml::Element >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_input->initSubsetUnion(getOwnedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_input - SubsetUnion<uml::InputPin, uml::Element >(getOwnedElement())" << std::endl;
+		#endif
+		
+	}
 	return m_input;
 }
+
 std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element>> ActionImpl::getOutput() const
 {
+	if(m_output == nullptr)
+	{
+		/*SubsetUnion*/
+		m_output.reset(new SubsetUnion<uml::OutputPin, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_output - SubsetUnion<uml::OutputPin, uml::Element >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_output->initSubsetUnion(getOwnedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_output - SubsetUnion<uml::OutputPin, uml::Element >(getOwnedElement())" << std::endl;
+		#endif
+		
+	}
 	return m_output;
 }
+
 std::shared_ptr<Union<uml::Element>> ActionImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > ActionImpl::getOwner() const
 {
 	return m_owner;
 }
+
 std::shared_ptr<Union<uml::RedefinableElement>> ActionImpl::getRedefinedElement() const
 {
+	if(m_redefinedElement == nullptr)
+	{
+		/*Union*/
+		m_redefinedElement.reset(new Union<uml::RedefinableElement>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_redefinedElement - Union<uml::RedefinableElement>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_redefinedElement;
 }
+
+
 
 
 std::shared_ptr<Action> ActionImpl::getThisActionPtr() const
@@ -506,9 +534,9 @@ Any ActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::ACTION_ATTRIBUTE_CONTEXT:
+		case uml::umlPackage::ACTION_ATTRIBUTE_CONTEXT:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getContext())); //421
-		case UmlPackage::ACTION_ATTRIBUTE_INPUT:
+		case uml::umlPackage::ACTION_ATTRIBUTE_INPUT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::InputPin>::iterator iter = m_input->begin();
@@ -520,9 +548,9 @@ Any ActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 			}
 			return eAny(tempList); //422
 		}
-		case UmlPackage::ACTION_ATTRIBUTE_ISLOCALLYREENTRANT:
+		case uml::umlPackage::ACTION_ATTRIBUTE_ISLOCALLYREENTRANT:
 			return eAny(getIsLocallyReentrant()); //423
-		case UmlPackage::ACTION_ATTRIBUTE_LOCALPOSTCONDITION:
+		case uml::umlPackage::ACTION_ATTRIBUTE_LOCALPOSTCONDITION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Constraint>::iterator iter = m_localPostcondition->begin();
@@ -534,7 +562,7 @@ Any ActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 			}
 			return eAny(tempList); //424
 		}
-		case UmlPackage::ACTION_ATTRIBUTE_LOCALPRECONDITION:
+		case uml::umlPackage::ACTION_ATTRIBUTE_LOCALPRECONDITION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Constraint>::iterator iter = m_localPrecondition->begin();
@@ -546,7 +574,7 @@ Any ActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 			}
 			return eAny(tempList); //425
 		}
-		case UmlPackage::ACTION_ATTRIBUTE_OUTPUT:
+		case uml::umlPackage::ACTION_ATTRIBUTE_OUTPUT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::OutputPin>::iterator iter = m_output->begin();
@@ -565,17 +593,17 @@ bool ActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::ACTION_ATTRIBUTE_CONTEXT:
+		case uml::umlPackage::ACTION_ATTRIBUTE_CONTEXT:
 			return getContext() != nullptr; //421
-		case UmlPackage::ACTION_ATTRIBUTE_INPUT:
+		case uml::umlPackage::ACTION_ATTRIBUTE_INPUT:
 			return getInput() != nullptr; //422
-		case UmlPackage::ACTION_ATTRIBUTE_ISLOCALLYREENTRANT:
+		case uml::umlPackage::ACTION_ATTRIBUTE_ISLOCALLYREENTRANT:
 			return getIsLocallyReentrant() != false; //423
-		case UmlPackage::ACTION_ATTRIBUTE_LOCALPOSTCONDITION:
+		case uml::umlPackage::ACTION_ATTRIBUTE_LOCALPOSTCONDITION:
 			return getLocalPostcondition() != nullptr; //424
-		case UmlPackage::ACTION_ATTRIBUTE_LOCALPRECONDITION:
+		case uml::umlPackage::ACTION_ATTRIBUTE_LOCALPRECONDITION:
 			return getLocalPrecondition() != nullptr; //425
-		case UmlPackage::ACTION_ATTRIBUTE_OUTPUT:
+		case uml::umlPackage::ACTION_ATTRIBUTE_OUTPUT:
 			return getOutput() != nullptr; //426
 	}
 	return ExecutableNodeImpl::internalEIsSet(featureID);
@@ -584,14 +612,14 @@ bool ActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::ACTION_ATTRIBUTE_ISLOCALLYREENTRANT:
+		case uml::umlPackage::ACTION_ATTRIBUTE_ISLOCALLYREENTRANT:
 		{
 			// BOOST CAST
 			bool _isLocallyReentrant = newValue->get<bool>();
 			setIsLocallyReentrant(_isLocallyReentrant); //423
 			return true;
 		}
-		case UmlPackage::ACTION_ATTRIBUTE_LOCALPOSTCONDITION:
+		case uml::umlPackage::ACTION_ATTRIBUTE_LOCALPOSTCONDITION:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -627,7 +655,7 @@ bool ActionImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case UmlPackage::ACTION_ATTRIBUTE_LOCALPRECONDITION:
+		case uml::umlPackage::ACTION_ATTRIBUTE_LOCALPRECONDITION:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -679,12 +707,11 @@ void ActionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loa
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -715,8 +742,9 @@ void ActionImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHa
 	ExecutableNodeImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void ActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -727,7 +755,7 @@ void ActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::int
 			{
 				typeName = "InputPin";
 			}
-			std::shared_ptr<ecore::EObject> input = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::INPUTPIN_ATTRIBUTE_ACTION);
+			std::shared_ptr<ecore::EObject> input = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::INPUTPIN_ATTRIBUTE_ACTION);
 			if (input != nullptr)
 			{
 				loadHandler->handleChild(input);
@@ -776,7 +804,7 @@ void ActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::int
 			{
 				typeName = "OutputPin";
 			}
-			std::shared_ptr<ecore::EObject> output = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::OUTPUTPIN_ATTRIBUTE_ACTION);
+			std::shared_ptr<ecore::EObject> output = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::OUTPUTPIN_ATTRIBUTE_ACTION);
 			if (output != nullptr)
 			{
 				loadHandler->handleChild(output);
@@ -792,8 +820,8 @@ void ActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::int
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
-
-	ExecutableNodeImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	ExecutableNodeImpl::loadNode(nodeName, loadHandler);
 }
 
 void ActionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -809,7 +837,6 @@ void ActionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> sav
 	
 	ActivityNodeImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);
@@ -831,7 +858,7 @@ void ActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 		// Save 'localPostcondition'
 		for (std::shared_ptr<uml::Constraint> localPostcondition : *this->getLocalPostcondition()) 
@@ -845,7 +872,6 @@ void ActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 			saveHandler->addReference(localPrecondition, "localPrecondition", localPrecondition->eClass() != package->getConstraint_Class());
 		}
 	
- 
 		// Add attributes
 		if ( this->eIsSet(package->getAction_Attribute_isLocallyReentrant()) )
 		{
@@ -861,14 +887,14 @@ void ActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 		std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> list_input = this->getInput();
 		for (std::shared_ptr<uml::InputPin> input : *list_input) 
 		{
-			saveHandler->addReference(input, "input", input->eClass() != package->getInputPin_Class());
+			saveHandler->addReference(input, "input", input->eClass() !=uml::umlPackage::eInstance()->getInputPin_Class());
 		}
 
 		// Save 'output'
 		std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element>> list_output = this->getOutput();
 		for (std::shared_ptr<uml::OutputPin> output : *list_output) 
 		{
-			saveHandler->addReference(output, "output", output->eClass() != package->getOutputPin_Class());
+			saveHandler->addReference(output, "output", output->eClass() !=uml::umlPackage::eInstance()->getOutputPin_Class());
 		}
 	}
 	catch (std::exception& e)

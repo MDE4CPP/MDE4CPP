@@ -11,12 +11,28 @@
 
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
+#include "StandardProfile/StandardProfileFactory.hpp"
 #include "StandardProfile/impl/StandardProfilePackageImpl.hpp"
 #include "uml/Stereotype.hpp"
+
+//Types included from attributes, operation parameters, imports and composite owner classes
 #include "uml/Model.hpp"
 
+//Packges and Factories included from types of attributes, operation parameters, imports and composite owner classes
+#include "uml/umlFactory.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
+//Packages of included Enumerations
 
+//Includes of PluginFramework (if required)
+
+//Includes of OpaqueBevaiors (if required)
+
+//Includes from InstanceValues (if required)
+
+//Includes from Ports typed by interfaces (if required)
+
+//Includes from roles of ConnectorEnds (if required)
 
 using namespace StandardProfile;
 
@@ -25,6 +41,12 @@ using namespace StandardProfile;
 //*********************************
 SystemModelImpl::SystemModelImpl()
 {
+	#ifdef ADD_COUNT
+		ADD_COUNT("SystemModelImpl()");
+	#endif
+
+	DEBUG_MESSAGE(std::cout<<"SystemModel is created..."<<std::endl;)
+
 	//***********************************
 	// init Get Set
 	//getter init
@@ -34,16 +56,16 @@ SystemModelImpl::SystemModelImpl()
 	
 	m_unsetterMap.insert(std::pair<std::string,std::function<void()>>("StandardProfile::SystemModel::base_Model",[this](){m_base_Model = std::shared_ptr<uml::Model>(nullptr);}));
 	 
-
-	// init properties without default
-	
-
-	
 }
 
 
 SystemModelImpl::~SystemModelImpl()
 {
+	#ifdef SUB_COUNT
+		SUB_COUNT("SystemModelImpl()");
+	#endif
+
+	DEBUG_MESSAGE(std::cout<<"SystemModel is destroyed..."<<std::endl;)
 }
 
 SystemModelImpl::SystemModelImpl(const SystemModelImpl & obj):SystemModelImpl()
@@ -52,6 +74,7 @@ SystemModelImpl::SystemModelImpl(const SystemModelImpl & obj):SystemModelImpl()
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy SystemModel "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	instantiate();
 }
 
 std::shared_ptr<ecore::EObject>  SystemModelImpl::copy() const
@@ -65,6 +88,21 @@ std::shared_ptr<ecore::EObject>  SystemModelImpl::copy() const
 std::shared_ptr<uml::Class> SystemModelImpl::getMetaClass()
 {
 	return StandardProfilePackageImpl::eInstance()->get_StandardProfile_SystemModel();
+}
+
+void SystemModelImpl::instantiate()
+{   
+	
+}
+
+void SystemModelImpl::destroy()
+{	
+
+	//Erase properties
+	//deleting property base_Model
+	m_base_Model.reset();
+	
+	//Erase back reference to owner
 }
 
 //*********************************

@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -26,17 +25,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -74,10 +68,11 @@
 
 #include "uml/Type.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -87,62 +82,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 BehavioralFeatureImpl::BehavioralFeatureImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		m_method.reset(new Bag<uml::Behavior>());
-	
-	
-
-		/*Subset*/
-		m_ownedParameter.reset(new Subset<uml::Parameter, uml::NamedElement >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_ownedParameter - Subset<uml::Parameter, uml::NamedElement >()" << std::endl;
-		#endif
-	
-	
-
-		/*Subset*/
-		m_ownedParameterSet.reset(new Subset<uml::ParameterSet, uml::NamedElement >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_ownedParameterSet - Subset<uml::ParameterSet, uml::NamedElement >()" << std::endl;
-		#endif
-	
-	
-
-		m_raisedException.reset(new Bag<uml::Type>());
-	
-	
-
-	//Init references
-	
-	
-
-		/*Subset*/
-		m_ownedParameter->initSubset(m_ownedMember);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_ownedParameter - Subset<uml::Parameter, uml::NamedElement >(m_ownedMember)" << std::endl;
-		#endif
-	
-	
-
-		/*Subset*/
-		m_ownedParameterSet->initSubset(m_ownedMember);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_ownedParameterSet - Subset<uml::ParameterSet, uml::NamedElement >(m_ownedMember)" << std::endl;
-		#endif
-	
-	
-
-	
-	
+{	
 }
 
 BehavioralFeatureImpl::~BehavioralFeatureImpl()
@@ -152,29 +92,20 @@ BehavioralFeatureImpl::~BehavioralFeatureImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+BehavioralFeatureImpl::BehavioralFeatureImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:BehavioralFeatureImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			BehavioralFeatureImpl::BehavioralFeatureImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:BehavioralFeatureImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
-
-
-
-
-//Additional constructor for the containments back reference
-			BehavioralFeatureImpl::BehavioralFeatureImpl(std::weak_ptr<uml::Element > par_owner)
-			:BehavioralFeatureImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-
-
+BehavioralFeatureImpl::BehavioralFeatureImpl(std::weak_ptr<uml::Element > par_owner)
+:BehavioralFeatureImpl()
+{
+	m_owner = par_owner;
+}
 
 
 BehavioralFeatureImpl::BehavioralFeatureImpl(const BehavioralFeatureImpl & obj):BehavioralFeatureImpl()
@@ -285,20 +216,18 @@ BehavioralFeatureImpl::BehavioralFeatureImpl(const BehavioralFeatureImpl & obj):
 		std::cout << "Copying the Subset: " << "m_packageImport" << std::endl;
 	#endif
 
-		/*Subset*/
-		m_ownedParameter->initSubset(m_ownedMember);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_ownedParameter - Subset<uml::Parameter, uml::NamedElement >(m_ownedMember)" << std::endl;
-		#endif
-	
+	/*Subset*/
+	m_ownedParameter->initSubset(getOwnedMember());
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Initialising value Subset: " << "m_ownedParameter - Subset<uml::Parameter, uml::NamedElement >(getOwnedMember())" << std::endl;
+	#endif
 	
 
-		/*Subset*/
-		m_ownedParameterSet->initSubset(m_ownedMember);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_ownedParameterSet - Subset<uml::ParameterSet, uml::NamedElement >(m_ownedMember)" << std::endl;
-		#endif
-	
+	/*Subset*/
+	m_ownedParameterSet->initSubset(getOwnedMember());
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Initialising value Subset: " << "m_ownedParameterSet - Subset<uml::ParameterSet, uml::NamedElement >(getOwnedMember())" << std::endl;
+	#endif
 	
 }
 
@@ -311,20 +240,33 @@ std::shared_ptr<ecore::EObject>  BehavioralFeatureImpl::copy() const
 
 std::shared_ptr<ecore::EClass> BehavioralFeatureImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getBehavioralFeature_Class();
+	return uml::umlPackage::eInstance()->getBehavioralFeature_Class();
 }
 
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute concurrency
+*/
+uml::CallConcurrencyKind BehavioralFeatureImpl::getConcurrency() const 
+{
+	return m_concurrency;
+}
+
 void BehavioralFeatureImpl::setConcurrency(uml::CallConcurrencyKind _concurrency)
 {
 	m_concurrency = _concurrency;
 } 
 
-uml::CallConcurrencyKind BehavioralFeatureImpl::getConcurrency() const 
+
+
+/*
+Getter & Setter for attribute isAbstract
+*/
+bool BehavioralFeatureImpl::getIsAbstract() const 
 {
-	return m_concurrency;
+	return m_isAbstract;
 }
 
 void BehavioralFeatureImpl::setIsAbstract(bool _isAbstract)
@@ -332,10 +274,7 @@ void BehavioralFeatureImpl::setIsAbstract(bool _isAbstract)
 	m_isAbstract = _isAbstract;
 } 
 
-bool BehavioralFeatureImpl::getIsAbstract() const 
-{
-	return m_isAbstract;
-}
+
 
 //*********************************
 // Operations
@@ -367,32 +306,98 @@ std::shared_ptr<Bag<uml::Parameter> > BehavioralFeatureImpl::outputParameters()
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference method
+*/
 std::shared_ptr<Bag<uml::Behavior>> BehavioralFeatureImpl::getMethod() const
 {
+	if(m_method == nullptr)
+	{
+		m_method.reset(new Bag<uml::Behavior>());
+		
+		
+	}
 
     return m_method;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference ownedParameter
+*/
 std::shared_ptr<Subset<uml::Parameter, uml::NamedElement>> BehavioralFeatureImpl::getOwnedParameter() const
 {
+	if(m_ownedParameter == nullptr)
+	{
+		/*Subset*/
+		m_ownedParameter.reset(new Subset<uml::Parameter, uml::NamedElement >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_ownedParameter - Subset<uml::Parameter, uml::NamedElement >()" << std::endl;
+		#endif
+		
+		/*Subset*/
+		m_ownedParameter->initSubset(getOwnedMember());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_ownedParameter - Subset<uml::Parameter, uml::NamedElement >(getOwnedMember())" << std::endl;
+		#endif
+		
+	}
 
     return m_ownedParameter;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference ownedParameterSet
+*/
 std::shared_ptr<Subset<uml::ParameterSet, uml::NamedElement>> BehavioralFeatureImpl::getOwnedParameterSet() const
 {
+	if(m_ownedParameterSet == nullptr)
+	{
+		/*Subset*/
+		m_ownedParameterSet.reset(new Subset<uml::ParameterSet, uml::NamedElement >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_ownedParameterSet - Subset<uml::ParameterSet, uml::NamedElement >()" << std::endl;
+		#endif
+		
+		/*Subset*/
+		m_ownedParameterSet->initSubset(getOwnedMember());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_ownedParameterSet - Subset<uml::ParameterSet, uml::NamedElement >(getOwnedMember())" << std::endl;
+		#endif
+		
+	}
 
     return m_ownedParameterSet;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference raisedException
+*/
 std::shared_ptr<Bag<uml::Type>> BehavioralFeatureImpl::getRaisedException() const
 {
+	if(m_raisedException == nullptr)
+	{
+		m_raisedException.reset(new Bag<uml::Type>());
+		
+		
+	}
 
     return m_raisedException;
 }
+
+
+
 
 
 //*********************************
@@ -400,20 +405,60 @@ std::shared_ptr<Bag<uml::Type>> BehavioralFeatureImpl::getRaisedException() cons
 //*********************************
 std::shared_ptr<Union<uml::NamedElement>> BehavioralFeatureImpl::getMember() const
 {
+	if(m_member == nullptr)
+	{
+		/*Union*/
+		m_member.reset(new Union<uml::NamedElement>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_member - Union<uml::NamedElement>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_member;
 }
+
 std::shared_ptr<Union<uml::Element>> BehavioralFeatureImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> BehavioralFeatureImpl::getOwnedMember() const
 {
+	if(m_ownedMember == nullptr)
+	{
+		/*SubsetUnion*/
+		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_ownedMember->initSubsetUnion(getOwnedElement(),getMember());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >(getOwnedElement(),getMember())" << std::endl;
+		#endif
+		
+	}
 	return m_ownedMember;
 }
+
 std::weak_ptr<uml::Element > BehavioralFeatureImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<BehavioralFeature> BehavioralFeatureImpl::getThisBehavioralFeaturePtr() const
@@ -447,11 +492,11 @@ Any BehavioralFeatureImpl::eGet(int featureID, bool resolve, bool coreType) cons
 {
 	switch(featureID)
 	{
-		case UmlPackage::BEHAVIORALFEATURE_ATTRIBUTE_CONCURRENCY:
-			return eAny(getConcurrency()); //2620
-		case UmlPackage::BEHAVIORALFEATURE_ATTRIBUTE_ISABSTRACT:
-			return eAny(getIsAbstract()); //2621
-		case UmlPackage::BEHAVIORALFEATURE_ATTRIBUTE_METHOD:
+		case uml::umlPackage::BEHAVIORALFEATURE_ATTRIBUTE_CONCURRENCY:
+			return eAny(getConcurrency()); //2520
+		case uml::umlPackage::BEHAVIORALFEATURE_ATTRIBUTE_ISABSTRACT:
+			return eAny(getIsAbstract()); //2521
+		case uml::umlPackage::BEHAVIORALFEATURE_ATTRIBUTE_METHOD:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Behavior>::iterator iter = m_method->begin();
@@ -461,9 +506,9 @@ Any BehavioralFeatureImpl::eGet(int featureID, bool resolve, bool coreType) cons
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //2622
+			return eAny(tempList); //2522
 		}
-		case UmlPackage::BEHAVIORALFEATURE_ATTRIBUTE_OWNEDPARAMETER:
+		case uml::umlPackage::BEHAVIORALFEATURE_ATTRIBUTE_OWNEDPARAMETER:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Parameter>::iterator iter = m_ownedParameter->begin();
@@ -473,9 +518,9 @@ Any BehavioralFeatureImpl::eGet(int featureID, bool resolve, bool coreType) cons
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //2623
+			return eAny(tempList); //2523
 		}
-		case UmlPackage::BEHAVIORALFEATURE_ATTRIBUTE_OWNEDPARAMETERSET:
+		case uml::umlPackage::BEHAVIORALFEATURE_ATTRIBUTE_OWNEDPARAMETERSET:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::ParameterSet>::iterator iter = m_ownedParameterSet->begin();
@@ -485,9 +530,9 @@ Any BehavioralFeatureImpl::eGet(int featureID, bool resolve, bool coreType) cons
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //2624
+			return eAny(tempList); //2524
 		}
-		case UmlPackage::BEHAVIORALFEATURE_ATTRIBUTE_RAISEDEXCEPTION:
+		case uml::umlPackage::BEHAVIORALFEATURE_ATTRIBUTE_RAISEDEXCEPTION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Type>::iterator iter = m_raisedException->begin();
@@ -497,7 +542,7 @@ Any BehavioralFeatureImpl::eGet(int featureID, bool resolve, bool coreType) cons
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //2625
+			return eAny(tempList); //2525
 		}
 	}
 	Any result;
@@ -513,18 +558,18 @@ bool BehavioralFeatureImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::BEHAVIORALFEATURE_ATTRIBUTE_CONCURRENCY:
-			return m_concurrency != CallConcurrencyKind::SEQUENTIAL;; //2620
-		case UmlPackage::BEHAVIORALFEATURE_ATTRIBUTE_ISABSTRACT:
-			return getIsAbstract() != false; //2621
-		case UmlPackage::BEHAVIORALFEATURE_ATTRIBUTE_METHOD:
-			return getMethod() != nullptr; //2622
-		case UmlPackage::BEHAVIORALFEATURE_ATTRIBUTE_OWNEDPARAMETER:
-			return getOwnedParameter() != nullptr; //2623
-		case UmlPackage::BEHAVIORALFEATURE_ATTRIBUTE_OWNEDPARAMETERSET:
-			return getOwnedParameterSet() != nullptr; //2624
-		case UmlPackage::BEHAVIORALFEATURE_ATTRIBUTE_RAISEDEXCEPTION:
-			return getRaisedException() != nullptr; //2625
+		case uml::umlPackage::BEHAVIORALFEATURE_ATTRIBUTE_CONCURRENCY:
+			return m_concurrency != CallConcurrencyKind::SEQUENTIAL;; //2520
+		case uml::umlPackage::BEHAVIORALFEATURE_ATTRIBUTE_ISABSTRACT:
+			return getIsAbstract() != false; //2521
+		case uml::umlPackage::BEHAVIORALFEATURE_ATTRIBUTE_METHOD:
+			return getMethod() != nullptr; //2522
+		case uml::umlPackage::BEHAVIORALFEATURE_ATTRIBUTE_OWNEDPARAMETER:
+			return getOwnedParameter() != nullptr; //2523
+		case uml::umlPackage::BEHAVIORALFEATURE_ATTRIBUTE_OWNEDPARAMETERSET:
+			return getOwnedParameterSet() != nullptr; //2524
+		case uml::umlPackage::BEHAVIORALFEATURE_ATTRIBUTE_RAISEDEXCEPTION:
+			return getRaisedException() != nullptr; //2525
 	}
 	bool result = false;
 	result = FeatureImpl::internalEIsSet(featureID);
@@ -539,21 +584,21 @@ bool BehavioralFeatureImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::BEHAVIORALFEATURE_ATTRIBUTE_CONCURRENCY:
+		case uml::umlPackage::BEHAVIORALFEATURE_ATTRIBUTE_CONCURRENCY:
 		{
 			// BOOST CAST
 			uml::CallConcurrencyKind _concurrency = newValue->get<uml::CallConcurrencyKind>();
-			setConcurrency(_concurrency); //2620
+			setConcurrency(_concurrency); //2520
 			return true;
 		}
-		case UmlPackage::BEHAVIORALFEATURE_ATTRIBUTE_ISABSTRACT:
+		case uml::umlPackage::BEHAVIORALFEATURE_ATTRIBUTE_ISABSTRACT:
 		{
 			// BOOST CAST
 			bool _isAbstract = newValue->get<bool>();
-			setIsAbstract(_isAbstract); //2621
+			setIsAbstract(_isAbstract); //2521
 			return true;
 		}
-		case UmlPackage::BEHAVIORALFEATURE_ATTRIBUTE_METHOD:
+		case uml::umlPackage::BEHAVIORALFEATURE_ATTRIBUTE_METHOD:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -589,7 +634,7 @@ bool BehavioralFeatureImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case UmlPackage::BEHAVIORALFEATURE_ATTRIBUTE_OWNEDPARAMETER:
+		case uml::umlPackage::BEHAVIORALFEATURE_ATTRIBUTE_OWNEDPARAMETER:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -625,7 +670,7 @@ bool BehavioralFeatureImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case UmlPackage::BEHAVIORALFEATURE_ATTRIBUTE_OWNEDPARAMETERSET:
+		case uml::umlPackage::BEHAVIORALFEATURE_ATTRIBUTE_OWNEDPARAMETERSET:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -661,7 +706,7 @@ bool BehavioralFeatureImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case UmlPackage::BEHAVIORALFEATURE_ATTRIBUTE_RAISEDEXCEPTION:
+		case uml::umlPackage::BEHAVIORALFEATURE_ATTRIBUTE_RAISEDEXCEPTION:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -720,12 +765,11 @@ void BehavioralFeatureImpl::load(std::shared_ptr<persistence::interfaces::XLoadH
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -791,8 +835,9 @@ void BehavioralFeatureImpl::loadAttributes(std::shared_ptr<persistence::interfac
 	NamespaceImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void BehavioralFeatureImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void BehavioralFeatureImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -838,16 +883,16 @@ void BehavioralFeatureImpl::loadNode(std::string nodeName, std::shared_ptr<persi
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
-
-	FeatureImpl::loadNode(nodeName, loadHandler, modelFactory);
-	NamespaceImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	FeatureImpl::loadNode(nodeName, loadHandler);
+	NamespaceImpl::loadNode(nodeName, loadHandler);
 }
 
 void BehavioralFeatureImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case UmlPackage::BEHAVIORALFEATURE_ATTRIBUTE_METHOD:
+		case uml::umlPackage::BEHAVIORALFEATURE_ATTRIBUTE_METHOD:
 		{
 			std::shared_ptr<Bag<uml::Behavior>> _method = getMethod();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -861,7 +906,7 @@ void BehavioralFeatureImpl::resolveReferences(const int featureID, std::list<std
 			return;
 		}
 
-		case UmlPackage::BEHAVIORALFEATURE_ATTRIBUTE_RAISEDEXCEPTION:
+		case uml::umlPackage::BEHAVIORALFEATURE_ATTRIBUTE_RAISEDEXCEPTION:
 		{
 			std::shared_ptr<Bag<uml::Type>> _raisedException = getRaisedException();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -906,7 +951,7 @@ void BehavioralFeatureImpl::saveContent(std::shared_ptr<persistence::interfaces:
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 		// Save 'ownedParameter'
 		for (std::shared_ptr<uml::Parameter> ownedParameter : *this->getOwnedParameter()) 
@@ -920,7 +965,6 @@ void BehavioralFeatureImpl::saveContent(std::shared_ptr<persistence::interfaces:
 			saveHandler->addReference(ownedParameterSet, "ownedParameterSet", ownedParameterSet->eClass() != package->getParameterSet_Class());
 		}
 	
- 
 		// Add attributes
 		if ( this->eIsSet(package->getBehavioralFeature_Attribute_concurrency()) )
 		{

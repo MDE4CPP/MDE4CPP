@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class DeploymentTargetImpl :virtual public NamedElementImpl, virtual public DeploymentTarget 
+	class DeploymentTargetImpl : virtual public NamedElementImpl, virtual public DeploymentTarget 
 	{
 		public: 
 			DeploymentTargetImpl(const DeploymentTargetImpl & obj);
@@ -28,7 +28,7 @@ namespace uml
 			DeploymentTargetImpl& operator=(DeploymentTargetImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			DeploymentTargetImpl();
 			virtual std::shared_ptr<DeploymentTarget> getThisDeploymentTargetPtr() const;
 			virtual void setThisDeploymentTargetPtr(std::weak_ptr<DeploymentTarget> thisDeploymentTargetPtr);
@@ -51,9 +51,11 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 Derivation for DeploymentTarget::/deployedElement
+			Derivation for DeploymentTarget::/deployedElement
 			result = (deployment.deployedArtifact->select(oclIsKindOf(Artifact))->collect(oclAsType(Artifact).manifestation)->collect(utilizedElement)->asSet())
-			<p>From package UML::Deployments.</p> */ 
+			<p>From package UML::Deployments.</p>
+			*/
+			 
 			virtual std::shared_ptr<Bag<uml::PackageableElement> > getDeployedElements() ;
 			
 			
@@ -67,14 +69,20 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 The set of elements that are manifested in an Artifact that is involved in Deployment to a DeploymentTarget.
-			<p>From package UML::Deployments.</p> */
+			The set of elements that are manifested in an Artifact that is involved in Deployment to a DeploymentTarget.
+			<p>From package UML::Deployments.</p>
+			*/
+			
 			virtual std::shared_ptr<Bag<uml::PackageableElement>> getDeployedElement() const ;
 			
+			
 			/*!
-			 The set of Deployments for a DeploymentTarget.
-			<p>From package UML::Deployments.</p> */
+			The set of Deployments for a DeploymentTarget.
+			<p>From package UML::Deployments.</p>
+			*/
+			
 			virtual std::shared_ptr<Subset<uml::Deployment, uml::Element>> getDeployment() const ;
+			
 			
 							
 			
@@ -82,11 +90,15 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
@@ -100,7 +112,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

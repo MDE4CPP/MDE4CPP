@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -26,21 +25,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -84,10 +74,11 @@
 
 #include "uml/WriteVariableAction.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -97,19 +88,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 RemoveVariableValueActionImpl::RemoveVariableValueActionImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	//Init references
-	
+{	
 }
 
 RemoveVariableValueActionImpl::~RemoveVariableValueActionImpl()
@@ -119,53 +98,36 @@ RemoveVariableValueActionImpl::~RemoveVariableValueActionImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+RemoveVariableValueActionImpl::RemoveVariableValueActionImpl(std::weak_ptr<uml::Activity > par_activity)
+:RemoveVariableValueActionImpl()
+{
+	m_activity = par_activity;
+	m_owner = par_activity;
+}
 
 //Additional constructor for the containments back reference
-			RemoveVariableValueActionImpl::RemoveVariableValueActionImpl(std::weak_ptr<uml::Activity > par_activity)
-			:RemoveVariableValueActionImpl()
-			{
-			    m_activity = par_activity;
-				m_owner = par_activity;
-			}
-
-
-
-
+RemoveVariableValueActionImpl::RemoveVariableValueActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
+:RemoveVariableValueActionImpl()
+{
+	m_inStructuredNode = par_inStructuredNode;
+	m_owner = par_inStructuredNode;
+}
 
 //Additional constructor for the containments back reference
-			RemoveVariableValueActionImpl::RemoveVariableValueActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
-			:RemoveVariableValueActionImpl()
-			{
-			    m_inStructuredNode = par_inStructuredNode;
-				m_owner = par_inStructuredNode;
-			}
-
-
-
-
+RemoveVariableValueActionImpl::RemoveVariableValueActionImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:RemoveVariableValueActionImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			RemoveVariableValueActionImpl::RemoveVariableValueActionImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:RemoveVariableValueActionImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
-
-
-
-
-//Additional constructor for the containments back reference
-			RemoveVariableValueActionImpl::RemoveVariableValueActionImpl(std::weak_ptr<uml::Element > par_owner)
-			:RemoveVariableValueActionImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-
-
+RemoveVariableValueActionImpl::RemoveVariableValueActionImpl(std::weak_ptr<uml::Element > par_owner)
+:RemoveVariableValueActionImpl()
+{
+	m_owner = par_owner;
+}
 
 
 RemoveVariableValueActionImpl::RemoveVariableValueActionImpl(const RemoveVariableValueActionImpl & obj):RemoveVariableValueActionImpl()
@@ -306,21 +268,26 @@ std::shared_ptr<ecore::EObject>  RemoveVariableValueActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> RemoveVariableValueActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getRemoveVariableValueAction_Class();
+	return uml::umlPackage::eInstance()->getRemoveVariableValueAction_Class();
 }
 
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute isRemoveDuplicates
+*/
+bool RemoveVariableValueActionImpl::getIsRemoveDuplicates() const 
+{
+	return m_isRemoveDuplicates;
+}
+
 void RemoveVariableValueActionImpl::setIsRemoveDuplicates(bool _isRemoveDuplicates)
 {
 	m_isRemoveDuplicates = _isRemoveDuplicates;
 } 
 
-bool RemoveVariableValueActionImpl::getIsRemoveDuplicates() const 
-{
-	return m_isRemoveDuplicates;
-}
+
 
 //*********************************
 // Operations
@@ -334,39 +301,96 @@ bool RemoveVariableValueActionImpl::removeAt_and_value(Any diagnostics,std::map 
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference removeAt
+*/
 std::shared_ptr<uml::InputPin > RemoveVariableValueActionImpl::getRemoveAt() const
 {
 
     return m_removeAt;
 }
+
 void RemoveVariableValueActionImpl::setRemoveAt(std::shared_ptr<uml::InputPin> _removeAt)
 {
     m_removeAt = _removeAt;
 }
+
+
 
 //*********************************
 // Union Getter
 //*********************************
 std::shared_ptr<Union<uml::ActivityGroup>> RemoveVariableValueActionImpl::getInGroup() const
 {
+	if(m_inGroup == nullptr)
+	{
+		/*Union*/
+		m_inGroup.reset(new Union<uml::ActivityGroup>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_inGroup - Union<uml::ActivityGroup>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_inGroup;
 }
+
 std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> RemoveVariableValueActionImpl::getInput() const
 {
+	if(m_input == nullptr)
+	{
+		/*SubsetUnion*/
+		m_input.reset(new SubsetUnion<uml::InputPin, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_input - SubsetUnion<uml::InputPin, uml::Element >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_input->initSubsetUnion(getOwnedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_input - SubsetUnion<uml::InputPin, uml::Element >(getOwnedElement())" << std::endl;
+		#endif
+		
+	}
 	return m_input;
 }
+
 std::shared_ptr<Union<uml::Element>> RemoveVariableValueActionImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > RemoveVariableValueActionImpl::getOwner() const
 {
 	return m_owner;
 }
+
 std::shared_ptr<Union<uml::RedefinableElement>> RemoveVariableValueActionImpl::getRedefinedElement() const
 {
+	if(m_redefinedElement == nullptr)
+	{
+		/*Union*/
+		m_redefinedElement.reset(new Union<uml::RedefinableElement>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_redefinedElement - Union<uml::RedefinableElement>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_redefinedElement;
 }
+
+
 
 
 std::shared_ptr<RemoveVariableValueAction> RemoveVariableValueActionImpl::getThisRemoveVariableValueActionPtr() const
@@ -409,10 +433,10 @@ Any RemoveVariableValueActionImpl::eGet(int featureID, bool resolve, bool coreTy
 {
 	switch(featureID)
 	{
-		case UmlPackage::REMOVEVARIABLEVALUEACTION_ATTRIBUTE_ISREMOVEDUPLICATES:
-			return eAny(getIsRemoveDuplicates()); //21129
-		case UmlPackage::REMOVEVARIABLEVALUEACTION_ATTRIBUTE_REMOVEAT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getRemoveAt())); //21130
+		case uml::umlPackage::REMOVEVARIABLEVALUEACTION_ATTRIBUTE_ISREMOVEDUPLICATES:
+			return eAny(getIsRemoveDuplicates()); //21029
+		case uml::umlPackage::REMOVEVARIABLEVALUEACTION_ATTRIBUTE_REMOVEAT:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getRemoveAt())); //21030
 	}
 	return WriteVariableActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -420,10 +444,10 @@ bool RemoveVariableValueActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::REMOVEVARIABLEVALUEACTION_ATTRIBUTE_ISREMOVEDUPLICATES:
-			return getIsRemoveDuplicates() != false; //21129
-		case UmlPackage::REMOVEVARIABLEVALUEACTION_ATTRIBUTE_REMOVEAT:
-			return getRemoveAt() != nullptr; //21130
+		case uml::umlPackage::REMOVEVARIABLEVALUEACTION_ATTRIBUTE_ISREMOVEDUPLICATES:
+			return getIsRemoveDuplicates() != false; //21029
+		case uml::umlPackage::REMOVEVARIABLEVALUEACTION_ATTRIBUTE_REMOVEAT:
+			return getRemoveAt() != nullptr; //21030
 	}
 	return WriteVariableActionImpl::internalEIsSet(featureID);
 }
@@ -431,19 +455,19 @@ bool RemoveVariableValueActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::REMOVEVARIABLEVALUEACTION_ATTRIBUTE_ISREMOVEDUPLICATES:
+		case uml::umlPackage::REMOVEVARIABLEVALUEACTION_ATTRIBUTE_ISREMOVEDUPLICATES:
 		{
 			// BOOST CAST
 			bool _isRemoveDuplicates = newValue->get<bool>();
-			setIsRemoveDuplicates(_isRemoveDuplicates); //21129
+			setIsRemoveDuplicates(_isRemoveDuplicates); //21029
 			return true;
 		}
-		case UmlPackage::REMOVEVARIABLEVALUEACTION_ATTRIBUTE_REMOVEAT:
+		case uml::umlPackage::REMOVEVARIABLEVALUEACTION_ATTRIBUTE_REMOVEAT:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::InputPin> _removeAt = std::dynamic_pointer_cast<uml::InputPin>(_temp);
-			setRemoveAt(_removeAt); //21130
+			setRemoveAt(_removeAt); //21030
 			return true;
 		}
 	}
@@ -462,12 +486,11 @@ void RemoveVariableValueActionImpl::load(std::shared_ptr<persistence::interfaces
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -498,8 +521,9 @@ void RemoveVariableValueActionImpl::loadAttributes(std::shared_ptr<persistence::
 	WriteVariableActionImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void RemoveVariableValueActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void RemoveVariableValueActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -527,8 +551,8 @@ void RemoveVariableValueActionImpl::loadNode(std::string nodeName, std::shared_p
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
-
-	WriteVariableActionImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	WriteVariableActionImpl::loadNode(nodeName, loadHandler);
 }
 
 void RemoveVariableValueActionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -550,7 +574,6 @@ void RemoveVariableValueActionImpl::save(std::shared_ptr<persistence::interfaces
 	
 	ActivityNodeImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);
@@ -575,7 +598,7 @@ void RemoveVariableValueActionImpl::saveContent(std::shared_ptr<persistence::int
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 		// Save 'removeAt'
 		std::shared_ptr<uml::InputPin > removeAt = this->getRemoveAt();
@@ -584,7 +607,6 @@ void RemoveVariableValueActionImpl::saveContent(std::shared_ptr<persistence::int
 			saveHandler->addReference(removeAt, "removeAt", removeAt->eClass() != package->getInputPin_Class());
 		}
 	
- 
 		// Add attributes
 		if ( this->eIsSet(package->getRemoveVariableValueAction_Attribute_isRemoveDuplicates()) )
 		{

@@ -19,7 +19,7 @@
 //*********************************
 namespace uml 
 {
-	class StringExpressionImpl :virtual public ExpressionImpl, virtual public TemplateableElementImpl, virtual public StringExpression 
+	class StringExpressionImpl : virtual public ExpressionImpl, virtual public TemplateableElementImpl, virtual public StringExpression 
 	{
 		public: 
 			StringExpressionImpl(const StringExpressionImpl & obj);
@@ -29,7 +29,7 @@ namespace uml
 			StringExpressionImpl& operator=(StringExpressionImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			StringExpressionImpl();
 			virtual std::shared_ptr<StringExpression> getThisStringExpressionPtr() const;
 			virtual void setThisStringExpressionPtr(std::weak_ptr<StringExpression> thisStringExpressionPtr);
@@ -72,13 +72,17 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 All the operands of a StringExpression must be LiteralStrings
-			operand->forAll (oclIsKindOf (LiteralString)) */ 
+			All the operands of a StringExpression must be LiteralStrings
+			operand->forAll (oclIsKindOf (LiteralString))
+			*/
+			 
 			virtual bool operands(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
-			 If a StringExpression has sub-expressions, it cannot have operands and vice versa (this avoids the problem of having to define a collating sequence between operands and subexpressions).
-			if subExpression->notEmpty() then operand->isEmpty() else operand->notEmpty() endif */ 
+			If a StringExpression has sub-expressions, it cannot have operands and vice versa (this avoids the problem of having to define a collating sequence between operands and subexpressions).
+			if subExpression->notEmpty() then operand->isEmpty() else operand->notEmpty() endif
+			*/
+			 
 			virtual bool subexpressions(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
@@ -92,18 +96,26 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 The StringExpression of which this StringExpression is a subExpression.
-			<p>From package UML::Values.</p> */
+			The StringExpression of which this StringExpression is a subExpression.
+			<p>From package UML::Values.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::StringExpression > getOwningExpression() const ;
 			
 			/*!
-			 The StringExpression of which this StringExpression is a subExpression.
-			<p>From package UML::Values.</p> */
-			virtual void setOwningExpression(std::shared_ptr<uml::StringExpression> _owningExpression_owningExpression) ;
+			The StringExpression of which this StringExpression is a subExpression.
+			<p>From package UML::Values.</p>
+			*/
+			
+			virtual void setOwningExpression(std::shared_ptr<uml::StringExpression> _owningExpression) ;
+			
 			/*!
-			 The StringExpressions that constitute this StringExpression.
-			<p>From package UML::Values.</p> */
+			The StringExpressions that constitute this StringExpression.
+			<p>From package UML::Values.</p>
+			*/
+			
 			virtual std::shared_ptr<Subset<uml::StringExpression, uml::Element>> getSubExpression() const ;
+			
 			
 							
 			
@@ -111,14 +123,20 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
@@ -132,7 +150,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

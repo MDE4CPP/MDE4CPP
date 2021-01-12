@@ -35,7 +35,7 @@ namespace persistence
 
 namespace uml
 {
-	class UmlFactory;
+	class umlFactory;
 }
 
 //Forward Declaration for used types
@@ -110,8 +110,10 @@ namespace uml
 namespace uml 
 {
 	/*!
-	 An ActionExecutionSpecification is a kind of ExecutionSpecification representing the execution of an Action.
-	<p>From package UML::Interactions.</p> */
+	An ActionExecutionSpecification is a kind of ExecutionSpecification representing the execution of an Action.
+	<p>From package UML::Interactions.</p>
+	*/
+	
 	class ActionExecutionSpecification:virtual public ExecutionSpecification
 	{
 		public:
@@ -132,12 +134,14 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 The Action referenced by the ActionExecutionSpecification must be owned by the Interaction owning that ActionExecutionSpecification.
+			The Action referenced by the ActionExecutionSpecification must be owned by the Interaction owning that ActionExecutionSpecification.
 			(enclosingInteraction->notEmpty() or enclosingOperand.combinedFragment->notEmpty()) and
 			let parentInteraction : Set(Interaction) = enclosingInteraction.oclAsType(Interaction)->asSet()->union(
 			enclosingOperand.combinedFragment->closure(enclosingOperand.combinedFragment)->
 			collect(enclosingInteraction).oclAsType(Interaction)->asSet()) in
-			(parentInteraction->size() = 1) and self.action.interaction->asSet() = parentInteraction */ 
+			(parentInteraction->size() = 1) and self.action.interaction->asSet() = parentInteraction
+			*/
+			 
 			virtual bool action_referenced(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
@@ -149,14 +153,19 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 Action whose execution is occurring.
-			<p>From package UML::Interactions.</p> */
+			Action whose execution is occurring.
+			<p>From package UML::Interactions.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::Action > getAction() const = 0;
 			
 			/*!
-			 Action whose execution is occurring.
-			<p>From package UML::Interactions.</p> */
-			virtual void setAction(std::shared_ptr<uml::Action> _action_action) = 0;
+			Action whose execution is occurring.
+			<p>From package UML::Interactions.</p>
+			*/
+			
+			virtual void setAction(std::shared_ptr<uml::Action> _action) = 0;
+			
 			
 
 		protected:
@@ -169,24 +178,31 @@ namespace uml
 			// Reference Members
 			//*********************************
 			/*!
-			 Action whose execution is occurring.
-			<p>From package UML::Interactions.</p> */
-			std::shared_ptr<uml::Action > m_action;
+			Action whose execution is occurring.
+			<p>From package UML::Interactions.</p>
+			*/
 			
+			std::shared_ptr<uml::Action > m_action;
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -25,21 +24,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -59,10 +49,11 @@
 
 #include "uml/TemplateParameter.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -72,17 +63,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 MessageEventImpl::MessageEventImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 MessageEventImpl::~MessageEventImpl()
@@ -92,53 +73,36 @@ MessageEventImpl::~MessageEventImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+MessageEventImpl::MessageEventImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:MessageEventImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			MessageEventImpl::MessageEventImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:MessageEventImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
-
-
-
+MessageEventImpl::MessageEventImpl(std::weak_ptr<uml::Element > par_owner)
+:MessageEventImpl()
+{
+	m_owner = par_owner;
+}
 
 //Additional constructor for the containments back reference
-			MessageEventImpl::MessageEventImpl(std::weak_ptr<uml::Element > par_owner)
-			:MessageEventImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-
-
+MessageEventImpl::MessageEventImpl(std::weak_ptr<uml::Package > par_owningPackage)
+:MessageEventImpl()
+{
+	m_owningPackage = par_owningPackage;
+	m_namespace = par_owningPackage;
+}
 
 //Additional constructor for the containments back reference
-			MessageEventImpl::MessageEventImpl(std::weak_ptr<uml::Package > par_owningPackage)
-			:MessageEventImpl()
-			{
-			    m_owningPackage = par_owningPackage;
-				m_namespace = par_owningPackage;
-			}
-
-
-
-
-
-//Additional constructor for the containments back reference
-			MessageEventImpl::MessageEventImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
-			:MessageEventImpl()
-			{
-			    m_owningTemplateParameter = par_owningTemplateParameter;
-				m_owner = par_owningTemplateParameter;
-			}
-
-
-
-
+MessageEventImpl::MessageEventImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+:MessageEventImpl()
+{
+	m_owningTemplateParameter = par_owningTemplateParameter;
+	m_owner = par_owningTemplateParameter;
+}
 
 
 MessageEventImpl::MessageEventImpl(const MessageEventImpl & obj):MessageEventImpl()
@@ -196,7 +160,7 @@ std::shared_ptr<ecore::EObject>  MessageEventImpl::copy() const
 
 std::shared_ptr<ecore::EClass> MessageEventImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getMessageEvent_Class();
+	return uml::umlPackage::eInstance()->getMessageEvent_Class();
 }
 
 //*********************************
@@ -218,14 +182,28 @@ std::weak_ptr<uml::Namespace > MessageEventImpl::getNamespace() const
 {
 	return m_namespace;
 }
+
 std::shared_ptr<Union<uml::Element>> MessageEventImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > MessageEventImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<MessageEvent> MessageEventImpl::getThisMessageEventPtr() const
@@ -298,12 +276,11 @@ void MessageEventImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandle
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -313,11 +290,12 @@ void MessageEventImpl::loadAttributes(std::shared_ptr<persistence::interfaces::X
 	EventImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void MessageEventImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void MessageEventImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
-
-	EventImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	EventImpl::loadNode(nodeName, loadHandler);
 }
 
 void MessageEventImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -352,7 +330,7 @@ void MessageEventImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 

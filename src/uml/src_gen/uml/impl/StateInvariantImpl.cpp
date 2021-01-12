@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -25,21 +24,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -65,10 +55,11 @@
 
 #include "uml/StringExpression.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -78,19 +69,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 StateInvariantImpl::StateInvariantImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	//Init references
-	
+{	
 }
 
 StateInvariantImpl::~StateInvariantImpl()
@@ -100,53 +79,36 @@ StateInvariantImpl::~StateInvariantImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+StateInvariantImpl::StateInvariantImpl(std::weak_ptr<uml::Interaction > par_enclosingInteraction)
+:StateInvariantImpl()
+{
+	m_enclosingInteraction = par_enclosingInteraction;
+	m_namespace = par_enclosingInteraction;
+}
 
 //Additional constructor for the containments back reference
-			StateInvariantImpl::StateInvariantImpl(std::weak_ptr<uml::Interaction > par_enclosingInteraction)
-			:StateInvariantImpl()
-			{
-			    m_enclosingInteraction = par_enclosingInteraction;
-				m_namespace = par_enclosingInteraction;
-			}
-
-
-
-
+StateInvariantImpl::StateInvariantImpl(std::weak_ptr<uml::InteractionOperand > par_enclosingOperand)
+:StateInvariantImpl()
+{
+	m_enclosingOperand = par_enclosingOperand;
+	m_namespace = par_enclosingOperand;
+}
 
 //Additional constructor for the containments back reference
-			StateInvariantImpl::StateInvariantImpl(std::weak_ptr<uml::InteractionOperand > par_enclosingOperand)
-			:StateInvariantImpl()
-			{
-			    m_enclosingOperand = par_enclosingOperand;
-				m_namespace = par_enclosingOperand;
-			}
-
-
-
-
+StateInvariantImpl::StateInvariantImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:StateInvariantImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			StateInvariantImpl::StateInvariantImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:StateInvariantImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
-
-
-
-
-//Additional constructor for the containments back reference
-			StateInvariantImpl::StateInvariantImpl(std::weak_ptr<uml::Element > par_owner)
-			:StateInvariantImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-
-
+StateInvariantImpl::StateInvariantImpl(std::weak_ptr<uml::Element > par_owner)
+:StateInvariantImpl()
+{
+	m_owner = par_owner;
+}
 
 
 StateInvariantImpl::StateInvariantImpl(const StateInvariantImpl & obj):StateInvariantImpl()
@@ -221,7 +183,7 @@ std::shared_ptr<ecore::EObject>  StateInvariantImpl::copy() const
 
 std::shared_ptr<ecore::EClass> StateInvariantImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getStateInvariant_Class();
+	return uml::umlPackage::eInstance()->getStateInvariant_Class();
 }
 
 //*********************************
@@ -235,15 +197,21 @@ std::shared_ptr<ecore::EClass> StateInvariantImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference invariant
+*/
 std::shared_ptr<uml::Constraint > StateInvariantImpl::getInvariant() const
 {
 //assert(m_invariant);
     return m_invariant;
 }
+
 void StateInvariantImpl::setInvariant(std::shared_ptr<uml::Constraint> _invariant)
 {
     m_invariant = _invariant;
 }
+
+
 
 //*********************************
 // Union Getter
@@ -252,14 +220,28 @@ std::weak_ptr<uml::Namespace > StateInvariantImpl::getNamespace() const
 {
 	return m_namespace;
 }
+
 std::shared_ptr<Union<uml::Element>> StateInvariantImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > StateInvariantImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<StateInvariant> StateInvariantImpl::getThisStateInvariantPtr() const
@@ -302,8 +284,8 @@ Any StateInvariantImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::STATEINVARIANT_ATTRIBUTE_INVARIANT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getInvariant())); //22213
+		case uml::umlPackage::STATEINVARIANT_ATTRIBUTE_INVARIANT:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getInvariant())); //22113
 	}
 	return InteractionFragmentImpl::eGet(featureID, resolve, coreType);
 }
@@ -311,8 +293,8 @@ bool StateInvariantImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::STATEINVARIANT_ATTRIBUTE_INVARIANT:
-			return getInvariant() != nullptr; //22213
+		case uml::umlPackage::STATEINVARIANT_ATTRIBUTE_INVARIANT:
+			return getInvariant() != nullptr; //22113
 	}
 	return InteractionFragmentImpl::internalEIsSet(featureID);
 }
@@ -320,12 +302,12 @@ bool StateInvariantImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::STATEINVARIANT_ATTRIBUTE_INVARIANT:
+		case uml::umlPackage::STATEINVARIANT_ATTRIBUTE_INVARIANT:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Constraint> _invariant = std::dynamic_pointer_cast<uml::Constraint>(_temp);
-			setInvariant(_invariant); //22213
+			setInvariant(_invariant); //22113
 			return true;
 		}
 	}
@@ -344,12 +326,11 @@ void StateInvariantImpl::load(std::shared_ptr<persistence::interfaces::XLoadHand
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -359,8 +340,9 @@ void StateInvariantImpl::loadAttributes(std::shared_ptr<persistence::interfaces:
 	InteractionFragmentImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void StateInvariantImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void StateInvariantImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -388,8 +370,8 @@ void StateInvariantImpl::loadNode(std::string nodeName, std::shared_ptr<persiste
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
-
-	InteractionFragmentImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	InteractionFragmentImpl::loadNode(nodeName, loadHandler);
 }
 
 void StateInvariantImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -420,7 +402,7 @@ void StateInvariantImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 		// Save 'invariant'
 		std::shared_ptr<uml::Constraint > invariant = this->getInvariant();

@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -26,21 +25,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -82,10 +72,11 @@
 
 #include "uml/StructuredActivityNode.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -95,19 +86,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 ReadSelfActionImpl::ReadSelfActionImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	//Init references
-	
+{	
 }
 
 ReadSelfActionImpl::~ReadSelfActionImpl()
@@ -117,53 +96,36 @@ ReadSelfActionImpl::~ReadSelfActionImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+ReadSelfActionImpl::ReadSelfActionImpl(std::weak_ptr<uml::Activity > par_activity)
+:ReadSelfActionImpl()
+{
+	m_activity = par_activity;
+	m_owner = par_activity;
+}
 
 //Additional constructor for the containments back reference
-			ReadSelfActionImpl::ReadSelfActionImpl(std::weak_ptr<uml::Activity > par_activity)
-			:ReadSelfActionImpl()
-			{
-			    m_activity = par_activity;
-				m_owner = par_activity;
-			}
-
-
-
-
+ReadSelfActionImpl::ReadSelfActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
+:ReadSelfActionImpl()
+{
+	m_inStructuredNode = par_inStructuredNode;
+	m_owner = par_inStructuredNode;
+}
 
 //Additional constructor for the containments back reference
-			ReadSelfActionImpl::ReadSelfActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
-			:ReadSelfActionImpl()
-			{
-			    m_inStructuredNode = par_inStructuredNode;
-				m_owner = par_inStructuredNode;
-			}
-
-
-
-
+ReadSelfActionImpl::ReadSelfActionImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:ReadSelfActionImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			ReadSelfActionImpl::ReadSelfActionImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:ReadSelfActionImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
-
-
-
-
-//Additional constructor for the containments back reference
-			ReadSelfActionImpl::ReadSelfActionImpl(std::weak_ptr<uml::Element > par_owner)
-			:ReadSelfActionImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-
-
+ReadSelfActionImpl::ReadSelfActionImpl(std::weak_ptr<uml::Element > par_owner)
+:ReadSelfActionImpl()
+{
+	m_owner = par_owner;
+}
 
 
 ReadSelfActionImpl::ReadSelfActionImpl(const ReadSelfActionImpl & obj):ReadSelfActionImpl()
@@ -294,7 +256,7 @@ std::shared_ptr<ecore::EObject>  ReadSelfActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ReadSelfActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getReadSelfAction_Class();
+	return uml::umlPackage::eInstance()->getReadSelfAction_Class();
 }
 
 //*********************************
@@ -331,39 +293,96 @@ bool ReadSelfActionImpl::type(Any diagnostics,std::map <   Any, Any >  context)
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference result
+*/
 std::shared_ptr<uml::OutputPin > ReadSelfActionImpl::getResult() const
 {
 //assert(m_result);
     return m_result;
 }
+
 void ReadSelfActionImpl::setResult(std::shared_ptr<uml::OutputPin> _result)
 {
     m_result = _result;
 }
+
+
 
 //*********************************
 // Union Getter
 //*********************************
 std::shared_ptr<Union<uml::ActivityGroup>> ReadSelfActionImpl::getInGroup() const
 {
+	if(m_inGroup == nullptr)
+	{
+		/*Union*/
+		m_inGroup.reset(new Union<uml::ActivityGroup>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_inGroup - Union<uml::ActivityGroup>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_inGroup;
 }
+
 std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element>> ReadSelfActionImpl::getOutput() const
 {
+	if(m_output == nullptr)
+	{
+		/*SubsetUnion*/
+		m_output.reset(new SubsetUnion<uml::OutputPin, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_output - SubsetUnion<uml::OutputPin, uml::Element >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_output->initSubsetUnion(getOwnedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_output - SubsetUnion<uml::OutputPin, uml::Element >(getOwnedElement())" << std::endl;
+		#endif
+		
+	}
 	return m_output;
 }
+
 std::shared_ptr<Union<uml::Element>> ReadSelfActionImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > ReadSelfActionImpl::getOwner() const
 {
 	return m_owner;
 }
+
 std::shared_ptr<Union<uml::RedefinableElement>> ReadSelfActionImpl::getRedefinedElement() const
 {
+	if(m_redefinedElement == nullptr)
+	{
+		/*Union*/
+		m_redefinedElement.reset(new Union<uml::RedefinableElement>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_redefinedElement - Union<uml::RedefinableElement>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_redefinedElement;
 }
+
+
 
 
 std::shared_ptr<ReadSelfAction> ReadSelfActionImpl::getThisReadSelfActionPtr() const
@@ -406,8 +425,8 @@ Any ReadSelfActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::READSELFACTION_ATTRIBUTE_RESULT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //19927
+		case uml::umlPackage::READSELFACTION_ATTRIBUTE_RESULT:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //19827
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -415,8 +434,8 @@ bool ReadSelfActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::READSELFACTION_ATTRIBUTE_RESULT:
-			return getResult() != nullptr; //19927
+		case uml::umlPackage::READSELFACTION_ATTRIBUTE_RESULT:
+			return getResult() != nullptr; //19827
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
@@ -424,12 +443,12 @@ bool ReadSelfActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::READSELFACTION_ATTRIBUTE_RESULT:
+		case uml::umlPackage::READSELFACTION_ATTRIBUTE_RESULT:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::OutputPin> _result = std::dynamic_pointer_cast<uml::OutputPin>(_temp);
-			setResult(_result); //19927
+			setResult(_result); //19827
 			return true;
 		}
 	}
@@ -448,12 +467,11 @@ void ReadSelfActionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHand
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -463,8 +481,9 @@ void ReadSelfActionImpl::loadAttributes(std::shared_ptr<persistence::interfaces:
 	ActionImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ReadSelfActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void ReadSelfActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -475,7 +494,7 @@ void ReadSelfActionImpl::loadNode(std::string nodeName, std::shared_ptr<persiste
 			{
 				typeName = "OutputPin";
 			}
-			std::shared_ptr<ecore::EObject> result = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::OUTPUTPIN_ATTRIBUTE_READSELFACTION);
+			std::shared_ptr<ecore::EObject> result = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::OUTPUTPIN_ATTRIBUTE_READSELFACTION);
 			if (result != nullptr)
 			{
 				loadHandler->handleChild(result);
@@ -491,8 +510,8 @@ void ReadSelfActionImpl::loadNode(std::string nodeName, std::shared_ptr<persiste
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
-
-	ActionImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	ActionImpl::loadNode(nodeName, loadHandler);
 }
 
 void ReadSelfActionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -510,7 +529,6 @@ void ReadSelfActionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHand
 	
 	ActivityNodeImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);
@@ -533,7 +551,7 @@ void ReadSelfActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 		// Save 'result'
 		std::shared_ptr<uml::OutputPin > result = this->getResult();

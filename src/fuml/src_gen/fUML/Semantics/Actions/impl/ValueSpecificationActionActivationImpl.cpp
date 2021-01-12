@@ -17,14 +17,14 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "fUML/impl/FUMLPackageImpl.hpp"
+
+//Includes from codegen annotation
 #include "fUML/Semantics/Loci/Locus.hpp"
 #include "fUML/Semantics/Loci/Executor.hpp"
 #include "uml/ValueSpecification.hpp"
@@ -33,12 +33,10 @@
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
 
 #include <exception> // used in Persistence
+
+#include "uml/Action.hpp"
 
 #include "fUML/Semantics/Actions/ActionActivation.hpp"
 
@@ -56,10 +54,15 @@
 
 #include "fUML/Semantics/Activities/Token.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
-#include "fUML/FUMLFactory.hpp"
+//Factories an Package includes
+#include "fUML/Semantics/Actions/impl/ActionsFactoryImpl.hpp"
+#include "fUML/Semantics/Actions/impl/ActionsPackageImpl.hpp"
+
+#include "fUML/fUMLFactory.hpp"
+#include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsFactory.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -69,17 +72,7 @@ using namespace fUML::Semantics::Actions;
 // Constructor / Destructor
 //*********************************
 ValueSpecificationActionActivationImpl::ValueSpecificationActionActivationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 ValueSpecificationActionActivationImpl::~ValueSpecificationActionActivationImpl()
@@ -89,17 +82,12 @@ ValueSpecificationActionActivationImpl::~ValueSpecificationActionActivationImpl(
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			ValueSpecificationActionActivationImpl::ValueSpecificationActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
-			:ValueSpecificationActionActivationImpl()
-			{
-			    m_group = par_group;
-			}
-
-
-
-
+ValueSpecificationActionActivationImpl::ValueSpecificationActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
+:ValueSpecificationActionActivationImpl()
+{
+	m_group = par_group;
+}
 
 
 ValueSpecificationActionActivationImpl::ValueSpecificationActionActivationImpl(const ValueSpecificationActionActivationImpl & obj):ValueSpecificationActionActivationImpl()
@@ -113,6 +101,8 @@ ValueSpecificationActionActivationImpl::ValueSpecificationActionActivationImpl(c
 
 	//copy references with no containment (soft copy)
 	
+	m_action  = obj.getAction();
+
 	m_group  = obj.getGroup();
 
 	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> _incomingEdges = obj.getIncomingEdges();
@@ -165,7 +155,7 @@ std::shared_ptr<ecore::EObject>  ValueSpecificationActionActivationImpl::copy() 
 
 std::shared_ptr<ecore::EClass> ValueSpecificationActionActivationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getValueSpecificationActionActivation_Class();
+	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getValueSpecificationActionActivation_Class();
 }
 
 //*********************************
@@ -202,8 +192,20 @@ void ValueSpecificationActionActivationImpl::doAction()
 //*********************************
 std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> ValueSpecificationActionActivationImpl::getPinActivation() const
 {
+	if(m_pinActivation == nullptr)
+	{
+		/*Union*/
+		m_pinActivation.reset(new Union<fUML::Semantics::Actions::PinActivation>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_pinActivation - Union<fUML::Semantics::Actions::PinActivation>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_pinActivation;
 }
+
+
 
 
 std::shared_ptr<ValueSpecificationActionActivation> ValueSpecificationActionActivationImpl::getThisValueSpecificationActionActivationPtr() const
@@ -261,12 +263,11 @@ void ValueSpecificationActionActivationImpl::load(std::shared_ptr<persistence::i
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get FUMLFactory
-	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
+	// get fUMLFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -276,11 +277,12 @@ void ValueSpecificationActionActivationImpl::loadAttributes(std::shared_ptr<pers
 	ActionActivationImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ValueSpecificationActionActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+void ValueSpecificationActionActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<fUML::Semantics::Actions::ActionsFactory> modelFactory=fUML::Semantics::Actions::ActionsFactory::eInstance();
 
-
-	ActionActivationImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	ActionActivationImpl::loadNode(nodeName, loadHandler);
 }
 
 void ValueSpecificationActionActivationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -308,7 +310,7 @@ void ValueSpecificationActionActivationImpl::saveContent(std::shared_ptr<persist
 {
 	try
 	{
-		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+		std::shared_ptr<fUML::Semantics::Actions::ActionsPackage> package = fUML::Semantics::Actions::ActionsPackage::eInstance();
 
 	
 

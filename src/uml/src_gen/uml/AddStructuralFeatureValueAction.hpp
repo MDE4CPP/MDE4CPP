@@ -36,7 +36,7 @@ namespace persistence
 
 namespace uml
 {
-	class UmlFactory;
+	class umlFactory;
 }
 
 //Forward Declaration for used types
@@ -151,8 +151,10 @@ namespace uml
 namespace uml 
 {
 	/*!
-	 An AddStructuralFeatureValueAction is a WriteStructuralFeatureAction for adding values to a StructuralFeature.
-	<p>From package UML::Actions.</p> */
+	An AddStructuralFeatureValueAction is a WriteStructuralFeatureAction for adding values to a StructuralFeature.
+	<p>From package UML::Actions.</p>
+	*/
+	
 	class AddStructuralFeatureValueAction:virtual public WriteStructuralFeatureAction
 	{
 		public:
@@ -173,18 +175,22 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 AddStructuralFeatureActions adding a value to ordered StructuralFeatures must have a single InputPin for the insertion point with type UnlimitedNatural and multiplicity of 1..1 if isReplaceAll=false, and must have no Input Pin for the insertion point when the StructuralFeature is unordered.
+			AddStructuralFeatureActions adding a value to ordered StructuralFeatures must have a single InputPin for the insertion point with type UnlimitedNatural and multiplicity of 1..1 if isReplaceAll=false, and must have no Input Pin for the insertion point when the StructuralFeature is unordered.
 			if not structuralFeature.isOrdered then insertAt = null
 			else 
 			  not isReplaceAll implies
 			  	insertAt<>null and 
 			  	insertAt->forAll(type=UnlimitedNatural and is(1,1.oclAsType(UnlimitedNatural)))
-			endif */ 
+			endif
+			*/
+			 
 			virtual bool insertAt_pin(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
-			 A value InputPin is required.
-			value<>null */ 
+			A value InputPin is required.
+			value<>null
+			*/
+			 
 			virtual bool required_value(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
@@ -192,28 +198,36 @@ namespace uml
 			// Attributes Getter Setter
 			//*********************************
 			/*!
-			 Specifies whether existing values of the StructuralFeature should be removed before adding the new value.
-			<p>From package UML::Actions.</p> */ 
+			Specifies whether existing values of the StructuralFeature should be removed before adding the new value.
+			<p>From package UML::Actions.</p>
+			*/
+			 
 			virtual bool getIsReplaceAll() const = 0;
 			
 			/*!
-			 Specifies whether existing values of the StructuralFeature should be removed before adding the new value.
-			<p>From package UML::Actions.</p> */ 
+			Specifies whether existing values of the StructuralFeature should be removed before adding the new value.
+			<p>From package UML::Actions.</p>
+			*/
+			 
 			virtual void setIsReplaceAll (bool _isReplaceAll)= 0; 
-			
 			
 			//*********************************
 			// Reference
 			//*********************************
 			/*!
-			 The InputPin that gives the position at which to insert the value in an ordered StructuralFeature. The type of the insertAt InputPin is UnlimitedNatural, but the value cannot be zero. It is omitted for unordered StructuralFeatures.
-			<p>From package UML::Actions.</p> */
+			The InputPin that gives the position at which to insert the value in an ordered StructuralFeature. The type of the insertAt InputPin is UnlimitedNatural, but the value cannot be zero. It is omitted for unordered StructuralFeatures.
+			<p>From package UML::Actions.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::InputPin > getInsertAt() const = 0;
 			
 			/*!
-			 The InputPin that gives the position at which to insert the value in an ordered StructuralFeature. The type of the insertAt InputPin is UnlimitedNatural, but the value cannot be zero. It is omitted for unordered StructuralFeatures.
-			<p>From package UML::Actions.</p> */
-			virtual void setInsertAt(std::shared_ptr<uml::InputPin> _insertAt_insertAt) = 0;
+			The InputPin that gives the position at which to insert the value in an ordered StructuralFeature. The type of the insertAt InputPin is UnlimitedNatural, but the value cannot be zero. It is omitted for unordered StructuralFeatures.
+			<p>From package UML::Actions.</p>
+			*/
+			
+			virtual void setInsertAt(std::shared_ptr<uml::InputPin> _insertAt) = 0;
+			
 			
 
 		protected:
@@ -221,8 +235,10 @@ namespace uml
 			// Attribute Members
 			//*********************************
 			/*!
-			 Specifies whether existing values of the StructuralFeature should be removed before adding the new value.
-			<p>From package UML::Actions.</p> */ 
+			Specifies whether existing values of the StructuralFeature should be removed before adding the new value.
+			<p>From package UML::Actions.</p>
+			*/
+			 
 			bool m_isReplaceAll = false;
 			
 			
@@ -230,33 +246,46 @@ namespace uml
 			// Reference Members
 			//*********************************
 			/*!
-			 The InputPin that gives the position at which to insert the value in an ordered StructuralFeature. The type of the insertAt InputPin is UnlimitedNatural, but the value cannot be zero. It is omitted for unordered StructuralFeatures.
-			<p>From package UML::Actions.</p> */
-			std::shared_ptr<uml::InputPin > m_insertAt;
+			The InputPin that gives the position at which to insert the value in an ordered StructuralFeature. The type of the insertAt InputPin is UnlimitedNatural, but the value cannot be zero. It is omitted for unordered StructuralFeatures.
+			<p>From package UML::Actions.</p>
+			*/
 			
+			std::shared_ptr<uml::InputPin > m_insertAt;
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
+			ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::ActivityGroup>> getInGroup() const = 0;/*!
-			 The ordered set of InputPins representing the inputs to the Action.
-			<p>From package UML::Actions.</p> */
+			The ordered set of InputPins representing the inputs to the Action.
+			<p>From package UML::Actions.</p>
+			*/
+			
 			virtual std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> getInput() const = 0;/*!
-			 The ordered set of OutputPins representing outputs from the Action.
-			<p>From package UML::Actions.</p> */
+			The ordered set of OutputPins representing outputs from the Action.
+			<p>From package UML::Actions.</p>
+			*/
+			
 			virtual std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element>> getOutput() const = 0;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
+			The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

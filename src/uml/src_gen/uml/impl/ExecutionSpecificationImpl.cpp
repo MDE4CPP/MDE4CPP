@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -26,21 +25,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -66,10 +56,11 @@
 
 #include "uml/StringExpression.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -79,23 +70,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 ExecutionSpecificationImpl::ExecutionSpecificationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	
-
-	//Init references
-	
-
-	
+{	
 }
 
 ExecutionSpecificationImpl::~ExecutionSpecificationImpl()
@@ -105,53 +80,36 @@ ExecutionSpecificationImpl::~ExecutionSpecificationImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+ExecutionSpecificationImpl::ExecutionSpecificationImpl(std::weak_ptr<uml::Interaction > par_enclosingInteraction)
+:ExecutionSpecificationImpl()
+{
+	m_enclosingInteraction = par_enclosingInteraction;
+	m_namespace = par_enclosingInteraction;
+}
 
 //Additional constructor for the containments back reference
-			ExecutionSpecificationImpl::ExecutionSpecificationImpl(std::weak_ptr<uml::Interaction > par_enclosingInteraction)
-			:ExecutionSpecificationImpl()
-			{
-			    m_enclosingInteraction = par_enclosingInteraction;
-				m_namespace = par_enclosingInteraction;
-			}
-
-
-
-
+ExecutionSpecificationImpl::ExecutionSpecificationImpl(std::weak_ptr<uml::InteractionOperand > par_enclosingOperand)
+:ExecutionSpecificationImpl()
+{
+	m_enclosingOperand = par_enclosingOperand;
+	m_namespace = par_enclosingOperand;
+}
 
 //Additional constructor for the containments back reference
-			ExecutionSpecificationImpl::ExecutionSpecificationImpl(std::weak_ptr<uml::InteractionOperand > par_enclosingOperand)
-			:ExecutionSpecificationImpl()
-			{
-			    m_enclosingOperand = par_enclosingOperand;
-				m_namespace = par_enclosingOperand;
-			}
-
-
-
-
+ExecutionSpecificationImpl::ExecutionSpecificationImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:ExecutionSpecificationImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			ExecutionSpecificationImpl::ExecutionSpecificationImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:ExecutionSpecificationImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
-
-
-
-
-//Additional constructor for the containments back reference
-			ExecutionSpecificationImpl::ExecutionSpecificationImpl(std::weak_ptr<uml::Element > par_owner)
-			:ExecutionSpecificationImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-
-
+ExecutionSpecificationImpl::ExecutionSpecificationImpl(std::weak_ptr<uml::Element > par_owner)
+:ExecutionSpecificationImpl()
+{
+	m_owner = par_owner;
+}
 
 
 ExecutionSpecificationImpl::ExecutionSpecificationImpl(const ExecutionSpecificationImpl & obj):ExecutionSpecificationImpl()
@@ -222,7 +180,7 @@ std::shared_ptr<ecore::EObject>  ExecutionSpecificationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ExecutionSpecificationImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getExecutionSpecification_Class();
+	return uml::umlPackage::eInstance()->getExecutionSpecification_Class();
 }
 
 //*********************************
@@ -241,25 +199,37 @@ bool ExecutionSpecificationImpl::same_lifeline(Any diagnostics,std::map <   Any,
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference finish
+*/
 std::shared_ptr<uml::OccurrenceSpecification > ExecutionSpecificationImpl::getFinish() const
 {
 //assert(m_finish);
     return m_finish;
 }
+
 void ExecutionSpecificationImpl::setFinish(std::shared_ptr<uml::OccurrenceSpecification> _finish)
 {
     m_finish = _finish;
 }
 
+
+
+/*
+Getter & Setter for reference start
+*/
 std::shared_ptr<uml::OccurrenceSpecification > ExecutionSpecificationImpl::getStart() const
 {
 //assert(m_start);
     return m_start;
 }
+
 void ExecutionSpecificationImpl::setStart(std::shared_ptr<uml::OccurrenceSpecification> _start)
 {
     m_start = _start;
 }
+
+
 
 //*********************************
 // Union Getter
@@ -268,14 +238,28 @@ std::weak_ptr<uml::Namespace > ExecutionSpecificationImpl::getNamespace() const
 {
 	return m_namespace;
 }
+
 std::shared_ptr<Union<uml::Element>> ExecutionSpecificationImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > ExecutionSpecificationImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<ExecutionSpecification> ExecutionSpecificationImpl::getThisExecutionSpecificationPtr() const
@@ -318,10 +302,10 @@ Any ExecutionSpecificationImpl::eGet(int featureID, bool resolve, bool coreType)
 {
 	switch(featureID)
 	{
-		case UmlPackage::EXECUTIONSPECIFICATION_ATTRIBUTE_FINISH:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getFinish())); //9213
-		case UmlPackage::EXECUTIONSPECIFICATION_ATTRIBUTE_START:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getStart())); //9214
+		case uml::umlPackage::EXECUTIONSPECIFICATION_ATTRIBUTE_FINISH:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getFinish())); //9113
+		case uml::umlPackage::EXECUTIONSPECIFICATION_ATTRIBUTE_START:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getStart())); //9114
 	}
 	return InteractionFragmentImpl::eGet(featureID, resolve, coreType);
 }
@@ -329,10 +313,10 @@ bool ExecutionSpecificationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::EXECUTIONSPECIFICATION_ATTRIBUTE_FINISH:
-			return getFinish() != nullptr; //9213
-		case UmlPackage::EXECUTIONSPECIFICATION_ATTRIBUTE_START:
-			return getStart() != nullptr; //9214
+		case uml::umlPackage::EXECUTIONSPECIFICATION_ATTRIBUTE_FINISH:
+			return getFinish() != nullptr; //9113
+		case uml::umlPackage::EXECUTIONSPECIFICATION_ATTRIBUTE_START:
+			return getStart() != nullptr; //9114
 	}
 	return InteractionFragmentImpl::internalEIsSet(featureID);
 }
@@ -340,20 +324,20 @@ bool ExecutionSpecificationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::EXECUTIONSPECIFICATION_ATTRIBUTE_FINISH:
+		case uml::umlPackage::EXECUTIONSPECIFICATION_ATTRIBUTE_FINISH:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::OccurrenceSpecification> _finish = std::dynamic_pointer_cast<uml::OccurrenceSpecification>(_temp);
-			setFinish(_finish); //9213
+			setFinish(_finish); //9113
 			return true;
 		}
-		case UmlPackage::EXECUTIONSPECIFICATION_ATTRIBUTE_START:
+		case uml::umlPackage::EXECUTIONSPECIFICATION_ATTRIBUTE_START:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::OccurrenceSpecification> _start = std::dynamic_pointer_cast<uml::OccurrenceSpecification>(_temp);
-			setStart(_start); //9214
+			setStart(_start); //9114
 			return true;
 		}
 	}
@@ -372,12 +356,11 @@ void ExecutionSpecificationImpl::load(std::shared_ptr<persistence::interfaces::X
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -413,18 +396,19 @@ void ExecutionSpecificationImpl::loadAttributes(std::shared_ptr<persistence::int
 	InteractionFragmentImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ExecutionSpecificationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void ExecutionSpecificationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
-
-	InteractionFragmentImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	InteractionFragmentImpl::loadNode(nodeName, loadHandler);
 }
 
 void ExecutionSpecificationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case UmlPackage::EXECUTIONSPECIFICATION_ATTRIBUTE_FINISH:
+		case uml::umlPackage::EXECUTIONSPECIFICATION_ATTRIBUTE_FINISH:
 		{
 			if (references.size() == 1)
 			{
@@ -436,7 +420,7 @@ void ExecutionSpecificationImpl::resolveReferences(const int featureID, std::lis
 			return;
 		}
 
-		case UmlPackage::EXECUTIONSPECIFICATION_ATTRIBUTE_START:
+		case uml::umlPackage::EXECUTIONSPECIFICATION_ATTRIBUTE_START:
 		{
 			if (references.size() == 1)
 			{
@@ -474,7 +458,7 @@ void ExecutionSpecificationImpl::saveContent(std::shared_ptr<persistence::interf
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 

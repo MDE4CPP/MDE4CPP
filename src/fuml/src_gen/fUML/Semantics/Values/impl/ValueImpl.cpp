@@ -18,19 +18,17 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "fUML/impl/FUMLPackageImpl.hpp"
+
+//Includes from codegen annotation
 #include "abstractDataTypes/Subset.hpp"
 #include "uml/Classifier.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -42,10 +40,15 @@
 
 #include "uml/ValueSpecification.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
-#include "fUML/FUMLFactory.hpp"
+//Factories an Package includes
+#include "fUML/Semantics/Values/impl/ValuesFactoryImpl.hpp"
+#include "fUML/Semantics/Values/impl/ValuesPackageImpl.hpp"
+
+#include "fUML/fUMLFactory.hpp"
+#include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsFactory.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -55,17 +58,7 @@ using namespace fUML::Semantics::Values;
 // Constructor / Destructor
 //*********************************
 ValueImpl::ValueImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 ValueImpl::~ValueImpl()
@@ -74,7 +67,6 @@ ValueImpl::~ValueImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Value "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -102,7 +94,7 @@ std::shared_ptr<ecore::EObject>  ValueImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ValueImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getValue_Class();
+	return fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class();
 }
 
 //*********************************
@@ -112,6 +104,19 @@ std::shared_ptr<ecore::EClass> ValueImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
+std::shared_ptr<fUML::Semantics::Values::Value> ValueImpl::_copy()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Create a new value that is equal to this value.
+// By default, this operation simply creates a new value with empty properties.
+// It must be overridden in each Value subclass to do the superclass copy and then appropriately set properties defined in the subclass.
+
+std::shared_ptr<fUML::Semantics::Values::Value> newValue(new fUML::Semantics::Values::ValueImpl());
+return newValue;
+	//end of body
+}
+
 bool ValueImpl::checkAllParents(std::shared_ptr<uml::Classifier>  type,std::shared_ptr<uml::Classifier>  classifier)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
@@ -208,6 +213,7 @@ std::string ValueImpl::toString()
 //*********************************
 
 
+
 std::shared_ptr<Value> ValueImpl::getThisValuePtr() const
 {
 	return m_thisValuePtr.lock();
@@ -259,12 +265,11 @@ void ValueImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> load
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get FUMLFactory
-	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
+	// get fUMLFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -274,11 +279,12 @@ void ValueImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHan
 	fUML::Semantics::Loci::SemanticVisitorImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ValueImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+void ValueImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<fUML::Semantics::Values::ValuesFactory> modelFactory=fUML::Semantics::Values::ValuesFactory::eInstance();
 
-
-	fUML::Semantics::Loci::SemanticVisitorImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	fUML::Semantics::Loci::SemanticVisitorImpl::loadNode(nodeName, loadHandler);
 }
 
 void ValueImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -300,7 +306,7 @@ void ValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 {
 	try
 	{
-		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+		std::shared_ptr<fUML::Semantics::Values::ValuesPackage> package = fUML::Semantics::Values::ValuesPackage::eInstance();
 
 	
 

@@ -18,11 +18,11 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "fUML/impl/FUMLPackageImpl.hpp"
+
+//Includes from codegen annotation
 #include "fUML/Semantics/Loci/ExecutionFactory.hpp"
 #include "uml/ValueSpecification.hpp"
 #include "uml/PrimitiveType.hpp"
@@ -31,8 +31,6 @@
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -44,10 +42,15 @@
 
 #include "uml/ValueSpecification.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
-#include "fUML/FUMLFactory.hpp"
+//Factories an Package includes
+#include "fUML/Semantics/Values/impl/ValuesFactoryImpl.hpp"
+#include "fUML/Semantics/Values/impl/ValuesPackageImpl.hpp"
+
+#include "fUML/fUMLFactory.hpp"
+#include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsFactory.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -57,17 +60,7 @@ using namespace fUML::Semantics::Values;
 // Constructor / Destructor
 //*********************************
 LiteralEvaluationImpl::LiteralEvaluationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 LiteralEvaluationImpl::~LiteralEvaluationImpl()
@@ -76,7 +69,6 @@ LiteralEvaluationImpl::~LiteralEvaluationImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete LiteralEvaluation "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -108,7 +100,7 @@ std::shared_ptr<ecore::EObject>  LiteralEvaluationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> LiteralEvaluationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getLiteralEvaluation_Class();
+	return fUML::Semantics::Values::ValuesPackage::eInstance()->getLiteralEvaluation_Class();
 }
 
 //*********************************
@@ -140,6 +132,7 @@ std::shared_ptr<uml::PrimitiveType> LiteralEvaluationImpl::getType(std::string b
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<LiteralEvaluation> LiteralEvaluationImpl::getThisLiteralEvaluationPtr() const
@@ -193,12 +186,11 @@ void LiteralEvaluationImpl::load(std::shared_ptr<persistence::interfaces::XLoadH
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get FUMLFactory
-	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
+	// get fUMLFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -208,11 +200,12 @@ void LiteralEvaluationImpl::loadAttributes(std::shared_ptr<persistence::interfac
 	EvaluationImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void LiteralEvaluationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+void LiteralEvaluationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<fUML::Semantics::Values::ValuesFactory> modelFactory=fUML::Semantics::Values::ValuesFactory::eInstance();
 
-
-	EvaluationImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	EvaluationImpl::loadNode(nodeName, loadHandler);
 }
 
 void LiteralEvaluationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -237,7 +230,7 @@ void LiteralEvaluationImpl::saveContent(std::shared_ptr<persistence::interfaces:
 {
 	try
 	{
-		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+		std::shared_ptr<fUML::Semantics::Values::ValuesPackage> package = fUML::Semantics::Values::ValuesPackage::eInstance();
 
 	
 

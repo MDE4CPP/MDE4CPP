@@ -13,13 +13,13 @@
 //Model includes
 #include "../ExpansionNodeActivation.hpp"
 
-#include "fUML/impl/FUMLFactoryImpl.hpp"
+#include "fUML/Semantics/Activities/impl/ActivitiesFactoryImpl.hpp"
 #include "fUML/Semantics/Activities/impl/ObjectNodeActivationImpl.hpp"
 
 //*********************************
 namespace fUML::Semantics::Activities 
 {
-	class ExpansionNodeActivationImpl :virtual public ObjectNodeActivationImpl, virtual public ExpansionNodeActivation 
+	class ExpansionNodeActivationImpl : virtual public ObjectNodeActivationImpl, virtual public ExpansionNodeActivation 
 	{
 		public: 
 			ExpansionNodeActivationImpl(const ExpansionNodeActivationImpl & obj);
@@ -29,7 +29,7 @@ namespace fUML::Semantics::Activities
 			ExpansionNodeActivationImpl& operator=(ExpansionNodeActivationImpl const&) = delete;
 
 		protected:
-			friend class fUML::FUMLFactoryImpl;
+			friend class fUML::Semantics::Activities::ActivitiesFactoryImpl;
 			ExpansionNodeActivationImpl();
 			virtual std::shared_ptr<ExpansionNodeActivation> getThisExpansionNodeActivationPtr() const;
 			virtual void setThisExpansionNodeActivationPtr(std::weak_ptr<ExpansionNodeActivation> thisExpansionNodeActivationPtr);
@@ -47,20 +47,16 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual void fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token> >  incomingTokens) ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<fUML::Semantics::Activities::ExpansionRegionActivation> getExpansionRegionActivation() ;
 			
-			/*!
-			 */ 
+			 
 			virtual bool isReady() ;
 			
-			/*!
-			 */ 
+			 
 			virtual void receiveOffer() ;
 			
 			
@@ -91,7 +87,7 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

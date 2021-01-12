@@ -13,13 +13,13 @@
 //Model includes
 #include "../ControlToken.hpp"
 
-#include "fUML/impl/FUMLFactoryImpl.hpp"
+#include "fUML/Semantics/Activities/impl/ActivitiesFactoryImpl.hpp"
 #include "fUML/Semantics/Activities/impl/TokenImpl.hpp"
 
 //*********************************
 namespace fUML::Semantics::Activities 
 {
-	class ControlTokenImpl :virtual public TokenImpl, virtual public ControlToken 
+	class ControlTokenImpl : virtual public TokenImpl, virtual public ControlToken 
 	{
 		public: 
 			ControlTokenImpl(const ControlTokenImpl & obj);
@@ -29,7 +29,7 @@ namespace fUML::Semantics::Activities
 			ControlTokenImpl& operator=(ControlTokenImpl const&) = delete;
 
 		protected:
-			friend class fUML::FUMLFactoryImpl;
+			friend class fUML::Semantics::Activities::ActivitiesFactoryImpl;
 			ControlTokenImpl();
 			virtual std::shared_ptr<ControlToken> getThisControlTokenPtr() const;
 			virtual void setThisControlTokenPtr(std::weak_ptr<ControlToken> thisControlTokenPtr);
@@ -43,16 +43,13 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
+			virtual std::shared_ptr<fUML::Semantics::Activities::Token> _copy() ;
+			
+			 
 			virtual bool equals(std::shared_ptr<fUML::Semantics::Activities::Token>  other) ;
 			
-			/*!
-			 */ 
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> getValue() const ;
-			
-			/*!
-			 */ 
+			 
 			virtual bool isControl() ;
 			
 			
@@ -83,7 +80,7 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
