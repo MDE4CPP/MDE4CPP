@@ -21,9 +21,6 @@
 - Realized lazy initialization for container properties as well as redefined properties
 - Added new annotation 'library' to specify libraries that should additionally be linked during compilation of generated model code
 
-### Model changes:
-none
-
 ### Bugfixes and minor changes:
 - Names of getter-methods for boolean values are now generated with 'is' as prefix (instead of 'get')
 - Adapted create-methods in model factory: 'create$ClassName$' methods are now called with the correct metaelement ID by default
@@ -82,14 +79,11 @@ none
 - Realized different methods for recursive deep copy (copy()) and fUML-specific copy methods (_copy())
 - Added support of imported external models as well as import and usage of metamodels (UML & Ecore) in fUML models
 - Moved initialization of execution plugin to a special "initialize()" method rather than doing it in the constructor (lazy initialization)
-- Added new annotation "noExecution" to prevent generation of specific execution classes (e.g. for OperationExecutions, OperationExecutions, ...)
+- Added new annotation "noExecution" to prevent generation of specific execution classes (e.g. for OperationExecutions, OpaqueBehaviorExecutions, ...)
 #### PSCS-specific extensions:
 - Added usage of PSCS execution engine for model-specific execution library
 	- Usage of PSCS-specific execution model elements like strategy classes, activation classes, execution classes and classifier object classes
 	- Implemented special overloded operation for 'CS_Object::getLinks()' to adapt execution engine and lower level, model-specific concepts during model execution
-
-### Model changes:
-none
 
 ### Bugfixes and minor changes:
 - Removed memory leak in anonymus forks
@@ -109,6 +103,8 @@ none
 	- Test Suite 3: Communication (onPort)
 	- Test Suite 4: Destruction
 - Introduced first PSCS example model 'AmpelsteuerungExample'
+- *see section 'UML/PSCS-specific extensions'*
+- *see section 'fUML/PSCS-specific extensions'*
 
 ### Model changes:
 - Introduced PSCS execution model as file 'PSCS.ecore' (NOTE: handling of 'Signals' is not supported in MDE4CPP right now)
@@ -119,8 +115,3 @@ none
 	- Loci
 	- StructuredClassifiers
 	- Values
-- *see section 'UML/PSCS-specific extensions'*
-- *see section 'fUML/PSCS-specific extensions'*
-
-### Bugfixes and minor changes:
-none (since newly introduced)
