@@ -32,7 +32,7 @@ namespace persistence
 
 namespace fUML
 {
-	class FUMLFactory;
+	class fUMLFactory;
 }
 
 //Forward Declaration for used types
@@ -65,8 +65,7 @@ namespace fUML::Semantics::Values
 //*********************************
 namespace fUML::Semantics::StructuredClassifiers 
 {
-	/*!
-	 */
+	
 	class ExtensionalValueList:virtual public ExtensionalValue
 	{
 		public:
@@ -86,24 +85,19 @@ namespace fUML::Semantics::StructuredClassifiers
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual bool addValue(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue>  value) = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual void addValue(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue>  value,int i) = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> getValue() = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual std::string removeValue(int i) = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> setValue(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue>  value,int i) = 0;
 			
 			

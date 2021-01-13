@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -26,17 +25,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -62,10 +56,11 @@
 
 #include "uml/StringExpression.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -75,106 +70,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 NamespaceImpl::NamespaceImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		/*SubsetUnion*/
-		m_elementImport.reset(new SubsetUnion<uml::ElementImport, uml::Element >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_elementImport - SubsetUnion<uml::ElementImport, uml::Element >()" << std::endl;
-		#endif
-	
-	
-
-		/*Subset*/
-		m_importedMember.reset(new Subset<uml::PackageableElement, uml::NamedElement >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_importedMember - Subset<uml::PackageableElement, uml::NamedElement >()" << std::endl;
-		#endif
-	
-	
-
-		/*Union*/
-		m_member.reset(new Union<uml::NamedElement>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_member - Union<uml::NamedElement>()" << std::endl;
-		#endif
-	
-	
-
-		/*SubsetUnion*/
-		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >()" << std::endl;
-		#endif
-	
-	
-
-		/*SubsetUnion*/
-		m_ownedRule.reset(new SubsetUnion<uml::Constraint, uml::NamedElement >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedRule - SubsetUnion<uml::Constraint, uml::NamedElement >()" << std::endl;
-		#endif
-	
-	
-
-		/*SubsetUnion*/
-		m_packageImport.reset(new SubsetUnion<uml::PackageImport, uml::Element >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_packageImport - SubsetUnion<uml::PackageImport, uml::Element >()" << std::endl;
-		#endif
-	
-	
-
-	//Init references
-		/*SubsetUnion*/
-		m_elementImport->initSubsetUnion(m_ownedElement);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_elementImport - SubsetUnion<uml::ElementImport, uml::Element >(m_ownedElement)" << std::endl;
-		#endif
-	
-	
-
-		/*Subset*/
-		m_importedMember->initSubset(m_member);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_importedMember - Subset<uml::PackageableElement, uml::NamedElement >(m_member)" << std::endl;
-		#endif
-	
-	
-
-	
-	
-
-		/*SubsetUnion*/
-		m_ownedMember->initSubsetUnion(m_ownedElement,m_member);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >(m_ownedElement,m_member)" << std::endl;
-		#endif
-	
-	
-
-		/*SubsetUnion*/
-		m_ownedRule->initSubsetUnion(m_ownedMember);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_ownedRule - SubsetUnion<uml::Constraint, uml::NamedElement >(m_ownedMember)" << std::endl;
-		#endif
-	
-	
-
-		/*SubsetUnion*/
-		m_packageImport->initSubsetUnion(m_ownedElement);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_packageImport - SubsetUnion<uml::PackageImport, uml::Element >(m_ownedElement)" << std::endl;
-		#endif
-	
-	
+{	
 }
 
 NamespaceImpl::~NamespaceImpl()
@@ -184,29 +80,20 @@ NamespaceImpl::~NamespaceImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+NamespaceImpl::NamespaceImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:NamespaceImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			NamespaceImpl::NamespaceImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:NamespaceImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
-
-
-
-
-//Additional constructor for the containments back reference
-			NamespaceImpl::NamespaceImpl(std::weak_ptr<uml::Element > par_owner)
-			:NamespaceImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-
-
+NamespaceImpl::NamespaceImpl(std::weak_ptr<uml::Element > par_owner)
+:NamespaceImpl()
+{
+	m_owner = par_owner;
+}
 
 
 NamespaceImpl::NamespaceImpl(const NamespaceImpl & obj):NamespaceImpl()
@@ -282,28 +169,25 @@ NamespaceImpl::NamespaceImpl(const NamespaceImpl & obj):NamespaceImpl()
 		std::cout << "Copying the Subset: " << "m_packageImport" << std::endl;
 	#endif
 
-		/*SubsetUnion*/
-		m_elementImport->initSubsetUnion(m_ownedElement);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_elementImport - SubsetUnion<uml::ElementImport, uml::Element >(m_ownedElement)" << std::endl;
-		#endif
-	
-	
-
-		/*SubsetUnion*/
-		m_ownedRule->initSubsetUnion(m_ownedMember);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_ownedRule - SubsetUnion<uml::Constraint, uml::NamedElement >(m_ownedMember)" << std::endl;
-		#endif
-	
+	/*SubsetUnion*/
+	m_elementImport->initSubsetUnion(getOwnedElement());
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Initialising value SubsetUnion: " << "m_elementImport - SubsetUnion<uml::ElementImport, uml::Element >(getOwnedElement())" << std::endl;
+	#endif
 	
 
-		/*SubsetUnion*/
-		m_packageImport->initSubsetUnion(m_ownedElement);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_packageImport - SubsetUnion<uml::PackageImport, uml::Element >(m_ownedElement)" << std::endl;
-		#endif
+	/*SubsetUnion*/
+	m_ownedRule->initSubsetUnion(getOwnedMember());
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Initialising value SubsetUnion: " << "m_ownedRule - SubsetUnion<uml::Constraint, uml::NamedElement >(getOwnedMember())" << std::endl;
+	#endif
 	
+
+	/*SubsetUnion*/
+	m_packageImport->initSubsetUnion(getOwnedElement());
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Initialising value SubsetUnion: " << "m_packageImport - SubsetUnion<uml::PackageImport, uml::Element >(getOwnedElement())" << std::endl;
+	#endif
 	
 }
 
@@ -316,7 +200,7 @@ std::shared_ptr<ecore::EObject>  NamespaceImpl::copy() const
 
 std::shared_ptr<ecore::EClass> NamespaceImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getNamespace_Class();
+	return uml::umlPackage::eInstance()->getNamespace_Class();
 }
 
 //*********************************
@@ -407,15 +291,54 @@ bool NamespaceImpl::members_distinguishable(Any diagnostics,std::map <   Any, An
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference elementImport
+*/
 std::shared_ptr<SubsetUnion<uml::ElementImport, uml::Element>> NamespaceImpl::getElementImport() const
 {
+	if(m_elementImport == nullptr)
+	{
+		/*SubsetUnion*/
+		m_elementImport.reset(new SubsetUnion<uml::ElementImport, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_elementImport - SubsetUnion<uml::ElementImport, uml::Element >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_elementImport->initSubsetUnion(getOwnedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_elementImport - SubsetUnion<uml::ElementImport, uml::Element >(getOwnedElement())" << std::endl;
+		#endif
+		
+	}
 
     return m_elementImport;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference importedMember
+*/
 std::shared_ptr<Subset<uml::PackageableElement, uml::NamedElement>> NamespaceImpl::getImportedMember() const
 {
+	if(m_importedMember == nullptr)
+	{
+		/*Subset*/
+		m_importedMember.reset(new Subset<uml::PackageableElement, uml::NamedElement >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_importedMember - Subset<uml::PackageableElement, uml::NamedElement >()" << std::endl;
+		#endif
+		
+		/*Subset*/
+		m_importedMember->initSubset(getMember());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_importedMember - Subset<uml::PackageableElement, uml::NamedElement >(getMember())" << std::endl;
+		#endif
+		
+	}
 
     return m_importedMember;
 }
@@ -424,21 +347,78 @@ std::shared_ptr<Subset<uml::PackageableElement, uml::NamedElement>> NamespaceImp
 
 
 
+/*
+Getter & Setter for reference member
+*/
 
 
 
+
+
+
+/*
+Getter & Setter for reference ownedMember
+*/
+
+
+
+
+
+
+/*
+Getter & Setter for reference ownedRule
+*/
 std::shared_ptr<SubsetUnion<uml::Constraint, uml::NamedElement>> NamespaceImpl::getOwnedRule() const
 {
+	if(m_ownedRule == nullptr)
+	{
+		/*SubsetUnion*/
+		m_ownedRule.reset(new SubsetUnion<uml::Constraint, uml::NamedElement >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedRule - SubsetUnion<uml::Constraint, uml::NamedElement >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_ownedRule->initSubsetUnion(getOwnedMember());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_ownedRule - SubsetUnion<uml::Constraint, uml::NamedElement >(getOwnedMember())" << std::endl;
+		#endif
+		
+	}
 
     return m_ownedRule;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference packageImport
+*/
 std::shared_ptr<SubsetUnion<uml::PackageImport, uml::Element>> NamespaceImpl::getPackageImport() const
 {
+	if(m_packageImport == nullptr)
+	{
+		/*SubsetUnion*/
+		m_packageImport.reset(new SubsetUnion<uml::PackageImport, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_packageImport - SubsetUnion<uml::PackageImport, uml::Element >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_packageImport->initSubsetUnion(getOwnedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_packageImport - SubsetUnion<uml::PackageImport, uml::Element >(getOwnedElement())" << std::endl;
+		#endif
+		
+	}
 
     return m_packageImport;
 }
+
+
+
 
 
 //*********************************
@@ -446,20 +426,60 @@ std::shared_ptr<SubsetUnion<uml::PackageImport, uml::Element>> NamespaceImpl::ge
 //*********************************
 std::shared_ptr<Union<uml::NamedElement>> NamespaceImpl::getMember() const
 {
+	if(m_member == nullptr)
+	{
+		/*Union*/
+		m_member.reset(new Union<uml::NamedElement>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_member - Union<uml::NamedElement>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_member;
 }
+
 std::shared_ptr<Union<uml::Element>> NamespaceImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> NamespaceImpl::getOwnedMember() const
 {
+	if(m_ownedMember == nullptr)
+	{
+		/*SubsetUnion*/
+		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_ownedMember->initSubsetUnion(getOwnedElement(),getMember());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >(getOwnedElement(),getMember())" << std::endl;
+		#endif
+		
+	}
 	return m_ownedMember;
 }
+
 std::weak_ptr<uml::Element > NamespaceImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<Namespace> NamespaceImpl::getThisNamespacePtr() const
@@ -492,7 +512,7 @@ Any NamespaceImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::NAMESPACE_ATTRIBUTE_ELEMENTIMPORT:
+		case uml::umlPackage::NAMESPACE_ATTRIBUTE_ELEMENTIMPORT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::ElementImport>::iterator iter = m_elementImport->begin();
@@ -502,9 +522,9 @@ Any NamespaceImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //15710
+			return eAny(tempList); //15610
 		}
-		case UmlPackage::NAMESPACE_ATTRIBUTE_IMPORTEDMEMBER:
+		case uml::umlPackage::NAMESPACE_ATTRIBUTE_IMPORTEDMEMBER:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::PackageableElement>::iterator iter = m_importedMember->begin();
@@ -514,9 +534,9 @@ Any NamespaceImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //15713
+			return eAny(tempList); //15613
 		}
-		case UmlPackage::NAMESPACE_ATTRIBUTE_MEMBER:
+		case uml::umlPackage::NAMESPACE_ATTRIBUTE_MEMBER:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::NamedElement>::iterator iter = m_member->begin();
@@ -526,9 +546,9 @@ Any NamespaceImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //15714
+			return eAny(tempList); //15614
 		}
-		case UmlPackage::NAMESPACE_ATTRIBUTE_OWNEDMEMBER:
+		case uml::umlPackage::NAMESPACE_ATTRIBUTE_OWNEDMEMBER:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::NamedElement>::iterator iter = m_ownedMember->begin();
@@ -538,9 +558,9 @@ Any NamespaceImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //15712
+			return eAny(tempList); //15612
 		}
-		case UmlPackage::NAMESPACE_ATTRIBUTE_OWNEDRULE:
+		case uml::umlPackage::NAMESPACE_ATTRIBUTE_OWNEDRULE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Constraint>::iterator iter = m_ownedRule->begin();
@@ -550,9 +570,9 @@ Any NamespaceImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //1579
+			return eAny(tempList); //1569
 		}
-		case UmlPackage::NAMESPACE_ATTRIBUTE_PACKAGEIMPORT:
+		case uml::umlPackage::NAMESPACE_ATTRIBUTE_PACKAGEIMPORT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::PackageImport>::iterator iter = m_packageImport->begin();
@@ -562,7 +582,7 @@ Any NamespaceImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //15711
+			return eAny(tempList); //15611
 		}
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
@@ -571,18 +591,18 @@ bool NamespaceImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::NAMESPACE_ATTRIBUTE_ELEMENTIMPORT:
-			return getElementImport() != nullptr; //15710
-		case UmlPackage::NAMESPACE_ATTRIBUTE_IMPORTEDMEMBER:
-			return getImportedMember() != nullptr; //15713
-		case UmlPackage::NAMESPACE_ATTRIBUTE_MEMBER:
-			return getMember() != nullptr; //15714
-		case UmlPackage::NAMESPACE_ATTRIBUTE_OWNEDMEMBER:
-			return getOwnedMember() != nullptr; //15712
-		case UmlPackage::NAMESPACE_ATTRIBUTE_OWNEDRULE:
-			return getOwnedRule() != nullptr; //1579
-		case UmlPackage::NAMESPACE_ATTRIBUTE_PACKAGEIMPORT:
-			return getPackageImport() != nullptr; //15711
+		case uml::umlPackage::NAMESPACE_ATTRIBUTE_ELEMENTIMPORT:
+			return getElementImport() != nullptr; //15610
+		case uml::umlPackage::NAMESPACE_ATTRIBUTE_IMPORTEDMEMBER:
+			return getImportedMember() != nullptr; //15613
+		case uml::umlPackage::NAMESPACE_ATTRIBUTE_MEMBER:
+			return getMember() != nullptr; //15614
+		case uml::umlPackage::NAMESPACE_ATTRIBUTE_OWNEDMEMBER:
+			return getOwnedMember() != nullptr; //15612
+		case uml::umlPackage::NAMESPACE_ATTRIBUTE_OWNEDRULE:
+			return getOwnedRule() != nullptr; //1569
+		case uml::umlPackage::NAMESPACE_ATTRIBUTE_PACKAGEIMPORT:
+			return getPackageImport() != nullptr; //15611
 	}
 	return NamedElementImpl::internalEIsSet(featureID);
 }
@@ -590,7 +610,7 @@ bool NamespaceImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::NAMESPACE_ATTRIBUTE_ELEMENTIMPORT:
+		case uml::umlPackage::NAMESPACE_ATTRIBUTE_ELEMENTIMPORT:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -626,7 +646,7 @@ bool NamespaceImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case UmlPackage::NAMESPACE_ATTRIBUTE_OWNEDRULE:
+		case uml::umlPackage::NAMESPACE_ATTRIBUTE_OWNEDRULE:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -662,7 +682,7 @@ bool NamespaceImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case UmlPackage::NAMESPACE_ATTRIBUTE_PACKAGEIMPORT:
+		case uml::umlPackage::NAMESPACE_ATTRIBUTE_PACKAGEIMPORT:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -714,12 +734,11 @@ void NamespaceImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> 
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -729,8 +748,9 @@ void NamespaceImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoa
 	NamedElementImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void NamespaceImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void NamespaceImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -741,7 +761,7 @@ void NamespaceImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::
 			{
 				typeName = "ElementImport";
 			}
-			std::shared_ptr<ecore::EObject> elementImport = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::ELEMENTIMPORT_ATTRIBUTE_IMPORTINGNAMESPACE);
+			std::shared_ptr<ecore::EObject> elementImport = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::ELEMENTIMPORT_ATTRIBUTE_IMPORTINGNAMESPACE);
 			if (elementImport != nullptr)
 			{
 				loadHandler->handleChild(elementImport);
@@ -757,7 +777,7 @@ void NamespaceImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::
 				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			std::shared_ptr<ecore::EObject> ownedMember = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::NAMEDELEMENT_ATTRIBUTE_NAMESPACE);
+			std::shared_ptr<ecore::EObject> ownedMember = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::NAMEDELEMENT_ATTRIBUTE_NAMESPACE);
 			if (ownedMember != nullptr)
 			{
 				loadHandler->handleChild(ownedMember);
@@ -775,8 +795,8 @@ void NamespaceImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::
 			// TODO here are multiple containers of same object. Check this!
 			std::cout << "| ERROR    | " << __PRETTY_FUNCTION__ << " 'ownedRule' has more then one back-reference Object." << std::endl;
 			std::shared_ptr<ecore::EObject> ownedRule;
-				ownedRule = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::CONSTRAINT_ATTRIBUTE_CONTEXT);
-				ownedRule = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::NAMEDELEMENT_ATTRIBUTE_NAMESPACE);
+				ownedRule = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::CONSTRAINT_ATTRIBUTE_CONTEXT);
+				ownedRule = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::NAMEDELEMENT_ATTRIBUTE_NAMESPACE);
 			if (ownedRule != nullptr)
 			{
 				loadHandler->handleChild(ownedRule);
@@ -791,7 +811,7 @@ void NamespaceImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::
 			{
 				typeName = "PackageImport";
 			}
-			std::shared_ptr<ecore::EObject> packageImport = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::PACKAGEIMPORT_ATTRIBUTE_IMPORTINGNAMESPACE);
+			std::shared_ptr<ecore::EObject> packageImport = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::PACKAGEIMPORT_ATTRIBUTE_IMPORTINGNAMESPACE);
 			if (packageImport != nullptr)
 			{
 				loadHandler->handleChild(packageImport);
@@ -807,8 +827,8 @@ void NamespaceImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
-
-	NamedElementImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	NamedElementImpl::loadNode(nodeName, loadHandler);
 }
 
 void NamespaceImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -836,7 +856,7 @@ void NamespaceImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 
@@ -849,28 +869,28 @@ void NamespaceImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 		std::shared_ptr<SubsetUnion<uml::ElementImport, uml::Element>> list_elementImport = this->getElementImport();
 		for (std::shared_ptr<uml::ElementImport> elementImport : *list_elementImport) 
 		{
-			saveHandler->addReference(elementImport, "elementImport", elementImport->eClass() != package->getElementImport_Class());
+			saveHandler->addReference(elementImport, "elementImport", elementImport->eClass() !=uml::umlPackage::eInstance()->getElementImport_Class());
 		}
 
 		// Save 'ownedMember'
 		std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> list_ownedMember = this->getOwnedMember();
 		for (std::shared_ptr<uml::NamedElement> ownedMember : *list_ownedMember) 
 		{
-			saveHandler->addReference(ownedMember, "ownedMember", ownedMember->eClass() != package->getNamedElement_Class());
+			saveHandler->addReference(ownedMember, "ownedMember", ownedMember->eClass() !=uml::umlPackage::eInstance()->getNamedElement_Class());
 		}
 
 		// Save 'ownedRule'
 		std::shared_ptr<SubsetUnion<uml::Constraint, uml::NamedElement>> list_ownedRule = this->getOwnedRule();
 		for (std::shared_ptr<uml::Constraint> ownedRule : *list_ownedRule) 
 		{
-			saveHandler->addReference(ownedRule, "ownedRule", ownedRule->eClass() != package->getConstraint_Class());
+			saveHandler->addReference(ownedRule, "ownedRule", ownedRule->eClass() !=uml::umlPackage::eInstance()->getConstraint_Class());
 		}
 
 		// Save 'packageImport'
 		std::shared_ptr<SubsetUnion<uml::PackageImport, uml::Element>> list_packageImport = this->getPackageImport();
 		for (std::shared_ptr<uml::PackageImport> packageImport : *list_packageImport) 
 		{
-			saveHandler->addReference(packageImport, "packageImport", packageImport->eClass() != package->getPackageImport_Class());
+			saveHandler->addReference(packageImport, "packageImport", packageImport->eClass() !=uml::umlPackage::eInstance()->getPackageImport_Class());
 		}
 	}
 	catch (std::exception& e)

@@ -18,26 +18,29 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "fUML/impl/FUMLPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
 
 #include <exception> // used in Persistence
 
 #include "fUML/Semantics/Loci/SemanticStrategy.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
-#include "fUML/FUMLFactory.hpp"
+//Factories an Package includes
+#include "fUML/Semantics/Loci/impl/LociFactoryImpl.hpp"
+#include "fUML/Semantics/Loci/impl/LociPackageImpl.hpp"
+
+#include "fUML/fUMLFactory.hpp"
+#include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsFactory.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -47,17 +50,7 @@ using namespace fUML::Semantics::Loci;
 // Constructor / Destructor
 //*********************************
 ChoiceStrategyImpl::ChoiceStrategyImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 ChoiceStrategyImpl::~ChoiceStrategyImpl()
@@ -66,7 +59,6 @@ ChoiceStrategyImpl::~ChoiceStrategyImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ChoiceStrategy "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -94,7 +86,7 @@ std::shared_ptr<ecore::EObject>  ChoiceStrategyImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ChoiceStrategyImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getChoiceStrategy_Class();
+	return fUML::Semantics::Loci::LociPackage::eInstance()->getChoiceStrategy_Class();
 }
 
 //*********************************
@@ -125,6 +117,7 @@ std::string ChoiceStrategyImpl::getName()
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<ChoiceStrategy> ChoiceStrategyImpl::getThisChoiceStrategyPtr() const
@@ -178,12 +171,11 @@ void ChoiceStrategyImpl::load(std::shared_ptr<persistence::interfaces::XLoadHand
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get FUMLFactory
-	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
+	// get fUMLFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -193,11 +185,12 @@ void ChoiceStrategyImpl::loadAttributes(std::shared_ptr<persistence::interfaces:
 	SemanticStrategyImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ChoiceStrategyImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+void ChoiceStrategyImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<fUML::Semantics::Loci::LociFactory> modelFactory=fUML::Semantics::Loci::LociFactory::eInstance();
 
-
-	SemanticStrategyImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	SemanticStrategyImpl::loadNode(nodeName, loadHandler);
 }
 
 void ChoiceStrategyImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -219,7 +212,7 @@ void ChoiceStrategyImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 {
 	try
 	{
-		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+		std::shared_ptr<fUML::Semantics::Loci::LociPackage> package = fUML::Semantics::Loci::LociPackage::eInstance();
 
 	
 

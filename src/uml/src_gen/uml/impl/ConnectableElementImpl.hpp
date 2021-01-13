@@ -19,7 +19,7 @@
 //*********************************
 namespace uml 
 {
-	class ConnectableElementImpl :virtual public ParameterableElementImpl, virtual public TypedElementImpl, virtual public ConnectableElement 
+	class ConnectableElementImpl : virtual public ParameterableElementImpl, virtual public TypedElementImpl, virtual public ConnectableElement 
 	{
 		public: 
 			ConnectableElementImpl(const ConnectableElementImpl & obj);
@@ -29,7 +29,7 @@ namespace uml
 			ConnectableElementImpl& operator=(ConnectableElementImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			ConnectableElementImpl();
 			virtual std::shared_ptr<ConnectableElement> getThisConnectableElementPtr() const;
 			virtual void setThisConnectableElementPtr(std::weak_ptr<ConnectableElement> thisConnectableElementPtr);
@@ -56,9 +56,11 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 Derivation for ConnectableElement::/end : ConnectorEnd
+			Derivation for ConnectableElement::/end : ConnectorEnd
 			result = (ConnectorEnd.allInstances()->select(role = self))
-			<p>From package UML::StructuredClassifiers.</p> */ 
+			<p>From package UML::StructuredClassifiers.</p>
+			*/
+			 
 			virtual std::shared_ptr<Bag<uml::ConnectorEnd> > getEnds() ;
 			
 			
@@ -72,9 +74,12 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 A set of ConnectorEnds that attach to this ConnectableElement.
-			<p>From package UML::StructuredClassifiers.</p> */
+			A set of ConnectorEnds that attach to this ConnectableElement.
+			<p>From package UML::StructuredClassifiers.</p>
+			*/
+			
 			virtual std::shared_ptr<Bag<uml::ConnectorEnd>> getEnd() const ;
+			
 			
 							
 			
@@ -82,11 +87,15 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
@@ -100,7 +109,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

@@ -56,11 +56,15 @@ namespace StandardProfile
 			// Attributes Getter Setter
 			//*********************************
 			virtual std::weak_ptr<uml::Classifier> getBase_Classifier() const ;
-			virtual void setBase_Classifier (std::weak_ptr<uml::Classifier> _base_Classifier);
+			virtual void setBase_Classifier(std::weak_ptr<uml::Classifier> _base_Classifier);
+			
+			
 			
 
 		protected:
 			virtual std::shared_ptr<uml::Class> getMetaClass();
+			virtual void instantiate();
+			virtual void destroy();
 
 		public:
 			//*********************************

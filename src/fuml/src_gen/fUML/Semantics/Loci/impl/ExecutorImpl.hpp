@@ -13,14 +13,14 @@
 //Model includes
 #include "../Executor.hpp"
 
-#include "fUML/impl/FUMLFactoryImpl.hpp"
+#include "fUML/Semantics/Loci/impl/LociFactoryImpl.hpp"
 
-#include "ecore/impl/EObjectImpl.hpp"
+#include "ecore/impl/EModelElementImpl.hpp"
 
 //*********************************
 namespace fUML::Semantics::Loci 
 {
-	class ExecutorImpl :virtual public ecore::EObjectImpl,
+	class ExecutorImpl : virtual public ecore::EModelElementImpl,
 virtual public Executor 
 	{
 		public: 
@@ -31,7 +31,7 @@ virtual public Executor
 			ExecutorImpl& operator=(ExecutorImpl const&) = delete;
 
 		protected:
-			friend class fUML::FUMLFactoryImpl;
+			friend class fUML::Semantics::Loci::LociFactoryImpl;
 			ExecutorImpl();
 			virtual std::shared_ptr<Executor> getThisExecutorPtr() const;
 			virtual void setThisExecutorPtr(std::weak_ptr<Executor> thisExecutorPtr);
@@ -49,16 +49,13 @@ virtual public Executor
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> evaluate(std::shared_ptr<uml::ValueSpecification>  specification) ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > execute(std::shared_ptr<uml::Behavior>  behavior,std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object>  context,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> >  inputs) ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> start(std::shared_ptr<uml::Class>  type,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> >  inputs) ;
 			
 			
@@ -71,13 +68,12 @@ virtual public Executor
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::weak_ptr<fUML::Semantics::Loci::Locus > getLocus() const ;
 			
-			/*!
-			 */
-			virtual void setLocus(std::shared_ptr<fUML::Semantics::Loci::Locus> _locus_locus) ;
+			
+			virtual void setLocus(std::shared_ptr<fUML::Semantics::Loci::Locus> _locus) ;
+			
 							
 			
 			//*********************************
@@ -96,7 +92,7 @@ virtual public Executor
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

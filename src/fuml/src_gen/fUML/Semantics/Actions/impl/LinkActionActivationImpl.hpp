@@ -13,13 +13,13 @@
 //Model includes
 #include "../LinkActionActivation.hpp"
 
-#include "fUML/impl/FUMLFactoryImpl.hpp"
+#include "fUML/Semantics/Actions/impl/ActionsFactoryImpl.hpp"
 #include "fUML/Semantics/Actions/impl/ActionActivationImpl.hpp"
 
 //*********************************
 namespace fUML::Semantics::Actions 
 {
-	class LinkActionActivationImpl :virtual public ActionActivationImpl, virtual public LinkActionActivation 
+	class LinkActionActivationImpl : virtual public ActionActivationImpl, virtual public LinkActionActivation 
 	{
 		public: 
 			LinkActionActivationImpl(const LinkActionActivationImpl & obj);
@@ -29,7 +29,7 @@ namespace fUML::Semantics::Actions
 			LinkActionActivationImpl& operator=(LinkActionActivationImpl const&) = delete;
 
 		protected:
-			friend class fUML::FUMLFactoryImpl;
+			friend class fUML::Semantics::Actions::ActionsFactoryImpl;
 			LinkActionActivationImpl();
 			virtual std::shared_ptr<LinkActionActivation> getThisLinkActionActivationPtr() const;
 			virtual void setThisLinkActionActivationPtr(std::weak_ptr<LinkActionActivation> thisLinkActionActivationPtr);
@@ -47,16 +47,13 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual bool endMatchesEndData(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link>  link,std::shared_ptr<uml::LinkEndData>  endData) ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<uml::Association> getAssociation() ;
 			
-			/*!
-			 */ 
+			 
 			virtual bool linkMatchesEndData(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link>  link,std::shared_ptr<Bag<uml::LinkEndData> >  endDataList) ;
 			
 			
@@ -74,8 +71,7 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> getPinActivation() const ; 
 			 
 			//*********************************
@@ -89,7 +85,7 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

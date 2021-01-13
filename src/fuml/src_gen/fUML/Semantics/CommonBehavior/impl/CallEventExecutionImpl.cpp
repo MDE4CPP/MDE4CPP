@@ -17,13 +17,13 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "fUML/impl/FUMLPackageImpl.hpp"
+
+//Includes from codegen annotation
 #include "fUML/Semantics/CommonBehavior/CallEventOccurrence.hpp"
 #include "fUML/Semantics/CommonBehavior/CallEventBehavior.hpp"
 #include "fUML/FUMLFactory.hpp"
@@ -35,10 +35,10 @@
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
 
 #include <exception> // used in Persistence
+
+#include "uml/Behavior.hpp"
 
 #include "uml/Classifier.hpp"
 
@@ -60,10 +60,15 @@
 
 #include "fUML/Semantics/Values/Value.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
-#include "fUML/FUMLFactory.hpp"
+//Factories an Package includes
+#include "fUML/Semantics/CommonBehavior/impl/CommonBehaviorFactoryImpl.hpp"
+#include "fUML/Semantics/CommonBehavior/impl/CommonBehaviorPackageImpl.hpp"
+
+#include "fUML/fUMLFactory.hpp"
+#include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsFactory.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -73,17 +78,7 @@ using namespace fUML::Semantics::CommonBehavior;
 // Constructor / Destructor
 //*********************************
 CallEventExecutionImpl::CallEventExecutionImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 CallEventExecutionImpl::~CallEventExecutionImpl()
@@ -92,7 +87,6 @@ CallEventExecutionImpl::~CallEventExecutionImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete CallEventExecution "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -106,6 +100,8 @@ CallEventExecutionImpl::CallEventExecutionImpl(const CallEventExecutionImpl & ob
 
 	//copy references with no containment (soft copy)
 	
+	m_behavior  = obj.getBehavior();
+
 	m_context  = obj.getContext();
 
 	m_locus  = obj.getLocus();
@@ -151,32 +147,48 @@ std::shared_ptr<ecore::EObject>  CallEventExecutionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> CallEventExecutionImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getCallEventExecution_Class();
+	return fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getCallEventExecution_Class();
 }
 
 //*********************************
 // Attribute Setter Getter
 //*********************************
-void CallEventExecutionImpl::setCallerSuspended(bool _callerSuspended)
-{
-	m_callerSuspended = _callerSuspended;
-} 
-
+/*
+Getter & Setter for attribute callerSuspended
+*/
 bool CallEventExecutionImpl::getCallerSuspended() const 
 {
 	return m_callerSuspended;
 }
 
+void CallEventExecutionImpl::setCallerSuspended(bool _callerSuspended)
+{
+	m_callerSuspended = _callerSuspended;
+} 
+
+
+
 //*********************************
 // Operations
 //*********************************
+std::shared_ptr<fUML::Semantics::Values::Value> CallEventExecutionImpl::_copy()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Create a new call event execution that is a copy of this execution, with the
+// caller initially not suspended.
 
+std::shared_ptr<fUML::Semantics::CommonBehavior::CallEventExecution> newValue = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::CallEventExecution>(fUML::Semantics::CommonBehavior::ExecutionImpl::_copy());
+newValue->setCallerSuspended(false);
+return newValue;
+	//end of body
+}
 
 std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> CallEventExecutionImpl::createEventOccurrence()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<fUML::Semantics::CommonBehavior::CallEventOccurrence> eventOccurrence = fUML::FUMLFactory::eInstance()->createCallEventOccurrence();
+	std::shared_ptr<fUML::Semantics::CommonBehavior::CallEventOccurrence> eventOccurrence = fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createCallEventOccurrence();
 	eventOccurrence->setExecution(getThisCallEventExecutionPtr());
 	return eventOccurrence;
 	//end of body
@@ -248,7 +260,7 @@ void CallEventExecutionImpl::makeCall()
 // completed if the target is not an active object, since then the object
 // would then have no event pool in which the event occurrence could be placed.)
 
-	std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> reference = fUML::FUMLFactory::eInstance()->createReference();
+	std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> reference = fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createReference();
 	reference->setReferent(this->getContext());
 	this->createEventOccurrence()->sendTo(reference);
 	//end of body
@@ -258,7 +270,7 @@ std::shared_ptr<fUML::Semantics::Values::Value> CallEventExecutionImpl::new_()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	return fUML::FUMLFactory::eInstance()->createCallEventExecution();
+	return fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createCallEventExecution();
 	//end of body
 }
 
@@ -326,6 +338,7 @@ void CallEventExecutionImpl::wait_()
 //*********************************
 
 
+
 std::shared_ptr<CallEventExecution> CallEventExecutionImpl::getThisCallEventExecutionPtr() const
 {
 	return m_thisCallEventExecutionPtr.lock();
@@ -347,8 +360,8 @@ Any CallEventExecutionImpl::eGet(int featureID, bool resolve, bool coreType) con
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::CALLEVENTEXECUTION_ATTRIBUTE_CALLERSUSPENDED:
-			return eAny(getCallerSuspended()); //176
+		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CALLEVENTEXECUTION_ATTRIBUTE_CALLERSUSPENDED:
+			return eAny(getCallerSuspended()); //177
 	}
 	return ExecutionImpl::eGet(featureID, resolve, coreType);
 }
@@ -356,8 +369,8 @@ bool CallEventExecutionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::CALLEVENTEXECUTION_ATTRIBUTE_CALLERSUSPENDED:
-			return getCallerSuspended() != false; //176
+		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CALLEVENTEXECUTION_ATTRIBUTE_CALLERSUSPENDED:
+			return getCallerSuspended() != false; //177
 	}
 	return ExecutionImpl::internalEIsSet(featureID);
 }
@@ -365,11 +378,11 @@ bool CallEventExecutionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::CALLEVENTEXECUTION_ATTRIBUTE_CALLERSUSPENDED:
+		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CALLEVENTEXECUTION_ATTRIBUTE_CALLERSUSPENDED:
 		{
 			// BOOST CAST
 			bool _callerSuspended = newValue->get<bool>();
-			setCallerSuspended(_callerSuspended); //176
+			setCallerSuspended(_callerSuspended); //177
 			return true;
 		}
 	}
@@ -388,12 +401,11 @@ void CallEventExecutionImpl::load(std::shared_ptr<persistence::interfaces::XLoad
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get FUMLFactory
-	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
+	// get fUMLFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -424,11 +436,12 @@ void CallEventExecutionImpl::loadAttributes(std::shared_ptr<persistence::interfa
 	ExecutionImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void CallEventExecutionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+void CallEventExecutionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<fUML::Semantics::CommonBehavior::CommonBehaviorFactory> modelFactory=fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance();
 
-
-	ExecutionImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	ExecutionImpl::loadNode(nodeName, loadHandler);
 }
 
 void CallEventExecutionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -468,10 +481,9 @@ void CallEventExecutionImpl::saveContent(std::shared_ptr<persistence::interfaces
 {
 	try
 	{
-		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+		std::shared_ptr<fUML::Semantics::CommonBehavior::CommonBehaviorPackage> package = fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance();
 
 	
- 
 		// Add attributes
 		if ( this->eIsSet(package->getCallEventExecution_Attribute_callerSuspended()) )
 		{

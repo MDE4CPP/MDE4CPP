@@ -17,14 +17,22 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "fUML/impl/FUMLPackageImpl.hpp"
+
+//Includes from codegen annotation
 #include "fUML/FUMLPackage.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/Semantics/Values/ValuesFactory.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
+#include "fUML/Semantics/Actions/ActionsFactory.hpp"
+#include "fUML/Semantics/Classification/ClassificationFactory.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
+
 #include "uml/OpaqueBehavior.hpp"
 #include "fUML/Semantics/CommonBehavior/OpaqueBehaviorExecution.hpp"
 #include "fUML/Semantics/CommonBehavior/CallEventBehavior.hpp"
@@ -34,7 +42,6 @@
 #include "fUML/Semantics/Values/Evaluation.hpp"
 #include "uml/Element.hpp"
 #include "uml/ValueSpecification.hpp"
-#include "fUML/FUMLFactory.hpp"
 #include "fUML/Semantics/Values/LiteralBooleanEvaluation.hpp"
 #include "fUML/Semantics/Values/LiteralStringEvaluation.hpp"
 #include "fUML/Semantics/Values/LiteralNullEvaluation.hpp"
@@ -43,7 +50,7 @@
 #include "fUML/Semantics/Values/LiteralIntegerEvaluation.hpp"
 #include "fUML/Semantics/Values/LiteralRealEvaluation.hpp"
 #include "fUML/Semantics/CommonBehavior/CallEventExecution.hpp"
-#include "uml/UmlPackage.hpp"
+#include "uml/umlPackage.hpp"
 #include "uml/InstanceValue.hpp"
 #include "uml/LiteralBoolean.hpp"
 #include "uml/LiteralInteger.hpp"
@@ -135,10 +142,6 @@
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -166,10 +169,15 @@
 
 #include "uml/ValueSpecification.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
-#include "fUML/FUMLFactory.hpp"
+//Factories an Package includes
+#include "fUML/Semantics/Loci/impl/LociFactoryImpl.hpp"
+#include "fUML/Semantics/Loci/impl/LociPackageImpl.hpp"
+
+#include "fUML/fUMLFactory.hpp"
+#include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsFactory.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -179,40 +187,7 @@ using namespace fUML::Semantics::Loci;
 // Constructor / Destructor
 //*********************************
 ExecutionFactoryImpl::ExecutionFactoryImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		m_builtInTypes.reset(new Bag<uml::PrimitiveType>());
-	
-	
-
-	
-
-		m_primitiveBehaviorPrototypes.reset(new Bag<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution>());
-	
-	
-
-		m_strategies.reset(new Bag<fUML::Semantics::Loci::SemanticStrategy>());
-	
-	
-
-	//Init references
-	
-	
-
-	
-
-	
-	
-
-	
-	
+{	
 }
 
 ExecutionFactoryImpl::~ExecutionFactoryImpl()
@@ -222,17 +197,12 @@ ExecutionFactoryImpl::~ExecutionFactoryImpl()
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			ExecutionFactoryImpl::ExecutionFactoryImpl(std::weak_ptr<fUML::Semantics::Loci::Locus > par_locus)
-			:ExecutionFactoryImpl()
-			{
-			    m_locus = par_locus;
-			}
-
-
-
-
+ExecutionFactoryImpl::ExecutionFactoryImpl(std::weak_ptr<fUML::Semantics::Loci::Locus > par_locus)
+:ExecutionFactoryImpl()
+{
+	m_locus = par_locus;
+}
 
 
 ExecutionFactoryImpl::ExecutionFactoryImpl(const ExecutionFactoryImpl & obj):ExecutionFactoryImpl()
@@ -270,7 +240,7 @@ std::shared_ptr<ecore::EObject>  ExecutionFactoryImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ExecutionFactoryImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getExecutionFactory_Class();
+	return fUML::Semantics::Loci::LociPackage::eInstance()->getExecutionFactory_Class();
 }
 
 //*********************************
@@ -330,21 +300,31 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> ExecutionFactoryImpl
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	 std::shared_ptr <fUML::Semantics::CommonBehavior::Execution> execution;
-
-    std::shared_ptr <uml::OpaqueBehavior> opaqueBehavior = std::dynamic_pointer_cast<uml::OpaqueBehavior>(behavior);
-    if(opaqueBehavior != nullptr)
+		std::shared_ptr <fUML::Semantics::CommonBehavior::Execution> execution;
+	int behaviorMetaElementID = behavior->getMetaElementID();
+    if((behaviorMetaElementID == uml::umlPackage::OPAQUEBEHAVIOR_CLASS) || (behaviorMetaElementID == uml::umlPackage::FUNCTIONBEHAVIOR_CLASS))
     {
-        execution = this->instantiateOpaqueBehaviorExecution(opaqueBehavior);
+        execution = this->instantiateOpaqueBehaviorExecution(behavior);
     }
     else
     {
-        execution = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::Execution>(this->instantiateVisitor(behavior));
-        if(execution != nullptr)
-        {
-            execution->getTypes()->push_back(behavior);
+		if(behaviorMetaElementID == uml::umlPackage::ACTIVITY_CLASS)
+		{
+			execution = fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createActivityExecution();
+			execution->getTypes()->push_back(behavior);
+            execution->createFeatureValues();	
+		}
+		else{
+			/*
+			Should never be reached
+			*/
+			execution = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::Execution>(this->instantiateVisitor(behavior));
+			if(execution != nullptr)
+			{
+			execution->getTypes()->push_back(behavior);
             execution->createFeatureValues();
-        }
+			}
+		}
     }
 
     if(nullptr == execution)
@@ -359,7 +339,13 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> ExecutionFactoryImpl
     {
         if(execution != nullptr)
         {
-            execution->setContext(execution);
+	  /*
+	  Setting the execution as the context of itself creates a circular dependecy between shared_ptrs,
+	  which results in a memory leak.
+	  Since the execution context should not be needed if the executed behavior does not have a context,
+	  this line is commented out
+	  */
+            //execution->setContext(execution);
         }
     }
     else
@@ -434,7 +420,9 @@ int ExecutionFactoryImpl::getStrategyIndex(std::string name)
 	//end of body
 }
 
-std::shared_ptr<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution> ExecutionFactoryImpl::instantiateOpaqueBehaviorExecution(std::shared_ptr<uml::OpaqueBehavior>  behavior)
+
+
+std::shared_ptr<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution> ExecutionFactoryImpl::instantiateOpaqueBehaviorExecution(std::shared_ptr<uml::Behavior>  behavior)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -442,11 +430,11 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution> Execut
     unsigned int i = 0;
     //DEBUG_MESSAGE(std::cout<<"SIZE PROTOTYPES "<< this->getPrimitiveBehaviorPrototypes()->size()<<std::endl;)
     auto primitiveBehaviorPrototypes = this->getPrimitiveBehaviorPrototypes();
-    while(execution == nullptr && (i < this->getPrimitiveBehaviorPrototypes()->size()))
+    while(execution == nullptr && (i < primitiveBehaviorPrototypes->size()))
     {
     	std::shared_ptr<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution> prototype = primitiveBehaviorPrototypes->at(i);
         //DEBUG_MESSAGE(std::cout<<"BEHAVIOUR NAME:"<<prototype->getBehavior()->getName()<<"AND"<<behavior->getName()<<std::endl;)
-        if( prototype->getTypes()->front() == behavior)
+        if(prototype->getBehavior() == behavior)
         {
             execution = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution>(prototype->copy());
         }
@@ -468,250 +456,251 @@ std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> ExecutionFactoryImpl::in
 	//generated from body annotation
 		std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> visitor = nullptr;
 
-	if(std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::CallEventBehavior>(element) != nullptr) {
-		return FUMLFactory::eInstance()->createCallEventExecution();
-	}
-
 	switch (element->eClass()->getClassifierID()) 
 	{
-		case uml::UmlPackage::LITERALBOOLEAN_CLASS:
+		case uml::umlPackage::LITERALBOOLEAN_CLASS:
 		{
-			visitor = FUMLFactory::eInstance()->createLiteralBooleanEvaluation();
+			visitor = fUML::Semantics::Values::ValuesFactory::eInstance()->createLiteralBooleanEvaluation();
 			break;
 		}
-		case uml::UmlPackage::LITERALSTRING_CLASS:
+		case uml::umlPackage::LITERALSTRING_CLASS:
 		{
-			visitor = FUMLFactory::eInstance()->createLiteralStringEvaluation();
+			visitor = fUML::Semantics::Values::ValuesFactory::eInstance()->createLiteralStringEvaluation();
 			break;
 		}
-		case uml::UmlPackage::LITERALNULL_CLASS:
+		case uml::umlPackage::LITERALNULL_CLASS:
 		{
-			visitor =  FUMLFactory::eInstance()->createLiteralNullEvaluation();
+			visitor =  fUML::Semantics::Values::ValuesFactory::eInstance()->createLiteralNullEvaluation();
 			break;
 		}
-		case uml::UmlPackage::INSTANCEVALUE_CLASS:
+		case uml::umlPackage::INSTANCEVALUE_CLASS:
 		{
-			visitor = FUMLFactory::eInstance()->createInstanceValueEvaluation();
+			visitor = fUML::Semantics::Classification::ClassificationFactory::eInstance()->createInstanceValueEvaluation();
 			break;
 		}
-		case uml::UmlPackage::LITERALUNLIMITEDNATURAL_CLASS:
+		case uml::umlPackage::LITERALUNLIMITEDNATURAL_CLASS:
 		{
-			visitor = FUMLFactory::eInstance()->createLiteralUnlimitedNaturalEvaluation();
+			visitor = fUML::Semantics::Values::ValuesFactory::eInstance()->createLiteralUnlimitedNaturalEvaluation();
 			break;
 		}
-		case uml::UmlPackage::LITERALINTEGER_CLASS:
+		case uml::umlPackage::LITERALINTEGER_CLASS:
 		{
-			visitor = FUMLFactory::eInstance()->createLiteralIntegerEvaluation();
+			visitor = fUML::Semantics::Values::ValuesFactory::eInstance()->createLiteralIntegerEvaluation();
 			break;
 		}
-		case uml::UmlPackage::LITERALREAL_CLASS:
+		case uml::umlPackage::LITERALREAL_CLASS:
 		{
-			visitor = FUMLFactory::eInstance()->createLiteralRealEvaluation();
+			visitor = fUML::Semantics::Values::ValuesFactory::eInstance()->createLiteralRealEvaluation();
 			break;
 		}
-		case uml::UmlPackage::ACTIVITY_CLASS:
+		case uml::umlPackage::ACTIVITY_CLASS:
 		{
-			visitor = std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createActivityExecution());
+			visitor = fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createActivityExecution();
 			break;
 		}
-		case uml::UmlPackage::ACTIVITYPARAMETERNODE_CLASS:
+		case uml::umlPackage::ACTIVITYPARAMETERNODE_CLASS:
 		{
-			visitor = std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createActivityParameterNodeActivation());
+			visitor = fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createActivityParameterNodeActivation();
 			break;
 		}
-		case uml::UmlPackage::INITIALNODE_CLASS:
+		case uml::umlPackage::INITIALNODE_CLASS:
 		{
-			visitor = std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createInitialNodeActivation());
+			visitor = fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createInitialNodeActivation();
 			break;
 		}
-		case uml::UmlPackage::ACTIVITYFINALNODE_CLASS:
+		case uml::umlPackage::ACTIVITYFINALNODE_CLASS:
 		{
-			visitor = std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createActivityFinalNodeActivation());
+			visitor = fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createActivityFinalNodeActivation();
 			break;
 		}
-		case uml::UmlPackage::FLOWFINALNODE_CLASS:
+		case uml::umlPackage::FLOWFINALNODE_CLASS:
 		{
-			visitor = std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createFlowFinalNodeActivation());
+			visitor = fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createFlowFinalNodeActivation();
 			break;
 		}
-		case uml::UmlPackage::JOINNODE_CLASS:
+		case uml::umlPackage::JOINNODE_CLASS:
 		{
-			visitor = std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createJoinNodeActivation());
+			visitor = fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createJoinNodeActivation();
 			break;
 		}
-		case uml::UmlPackage::MERGENODE_CLASS:
+		case uml::umlPackage::MERGENODE_CLASS:
 		{
-			visitor = std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createMergeNodeActivation());
+			visitor = fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createMergeNodeActivation();
 			break;
 		}
-		case uml::UmlPackage::FORKNODE_CLASS:
+		case uml::umlPackage::FORKNODE_CLASS:
 		{
-			visitor = std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createForkNodeActivation());
+			visitor = fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createForkNodeActivation();
 			break;
 		}
-		case uml::UmlPackage::DECISIONNODE_CLASS:
+		case uml::umlPackage::DECISIONNODE_CLASS:
 		{
-			visitor = std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createDecisionNodeActivation());
+			visitor = fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createDecisionNodeActivation();
 			break;
 		}
-		case uml::UmlPackage::INPUTPIN_CLASS:
+		case uml::umlPackage::EXPANSIONREGION_CLASS:
 		{
-			visitor = std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createInputPinActivation());
+			visitor = fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createExpansionRegionActivation();
 			break;
 		}
-		case uml::UmlPackage::OUTPUTPIN_CLASS:
+		case uml::umlPackage::EXPANSIONNODE_CLASS:
 		{
-			visitor = std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createOutputPinActivation());
+			visitor = fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createExpansionNodeActivation();
 			break;
 		}
-		case uml::UmlPackage::CALLBEHAVIORACTION_CLASS:
+		case uml::umlPackage::INPUTPIN_CLASS:
 		{
-			visitor = std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createCallBehaviorActionActivation());
+			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createInputPinActivation();
 			break;
 		}
-		case uml::UmlPackage::CALLOPERATIONACTION_CLASS:
+		case uml::umlPackage::OUTPUTPIN_CLASS:
 		{
-			visitor = std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createCallOperationActionActivation());
+			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createOutputPinActivation();
 			break;
 		}
-		case uml::UmlPackage::SENDSIGNALACTION_CLASS:
+		case uml::umlPackage::CALLBEHAVIORACTION_CLASS:
 		{
-			visitor = std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createSendSignalActionActivation());
+			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createCallBehaviorActionActivation();
 			break;
 		}
-		case uml::UmlPackage::READSELFACTION_CLASS:
+		case uml::umlPackage::CALLOPERATIONACTION_CLASS:
 		{
-			visitor = std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createReadSelfActionActivation());
+			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createCallOperationActionActivation();
 			break;
 		}
-		case uml::UmlPackage:: TESTIDENTITYACTION_CLASS:
+		case uml::umlPackage::SENDSIGNALACTION_CLASS:
 		{
-			visitor = std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createTestIdentityActionActivation());
+			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createSendSignalActionActivation();
 			break;
 		}
-		case uml::UmlPackage::VALUESPECIFICATIONACTION_CLASS:
+		case uml::umlPackage::READSELFACTION_CLASS:
 		{
-			visitor = std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createValueSpecificationActionActivation());
+			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createReadSelfActionActivation();
 			break;
 		}
-		case uml::UmlPackage::CREATEOBJECTACTION_CLASS:
+		case uml::umlPackage:: TESTIDENTITYACTION_CLASS:
 		{
-			visitor = std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createCreateObjectActionActivation());
+			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createTestIdentityActionActivation();
 			break;
 		}
-		case uml::UmlPackage::DESTROYOBJECTACTION_CLASS:
+		case uml::umlPackage::VALUESPECIFICATIONACTION_CLASS:
 		{
-			visitor = std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createDestroyObjectActionActivation());
+			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createValueSpecificationActionActivation();
 			break;
 		}
-		case uml::UmlPackage::READSTRUCTURALFEATUREACTION_CLASS:
+		case uml::umlPackage::CREATEOBJECTACTION_CLASS:
 		{
-			visitor = std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createReadStructuralFeatureActionActivation());
+			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createCreateObjectActionActivation();
 			break;
 		}
-		case uml::UmlPackage::CLEARSTRUCTURALFEATUREACTION_CLASS:
+		case uml::umlPackage::DESTROYOBJECTACTION_CLASS:
 		{
-			visitor = std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createClearStructuralFeatureActionActivation());
+			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createDestroyObjectActionActivation();
 			break;
 		}
-		case uml::UmlPackage::ADDSTRUCTURALFEATUREVALUEACTION_CLASS:
+		case uml::umlPackage::READSTRUCTURALFEATUREACTION_CLASS:
 		{
-			visitor = std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createAddStructuralFeatureValueActionActivation());
+			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createReadStructuralFeatureActionActivation();
 			break;
 		}
-		case uml::UmlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_CLASS:
+		case uml::umlPackage::CLEARSTRUCTURALFEATUREACTION_CLASS:
 		{
-			visitor = std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createRemoveStructuralFeatureValueActivation());
+			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createClearStructuralFeatureActionActivation();
 			break;
 		}
-		case uml::UmlPackage::READLINKACTION_CLASS:
+		case uml::umlPackage::ADDSTRUCTURALFEATUREVALUEACTION_CLASS:
 		{
-			visitor = std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createReadLinkActionActivation());
+			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createAddStructuralFeatureValueActionActivation();
 			break;
 		}
-		case uml::UmlPackage::CLEARASSOCIATIONACTION_CLASS:
+		case uml::umlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_CLASS:
 		{
-			visitor = std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createClearAssociationActionActivation());
+			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createRemoveStructuralFeatureValueActivation();
 			break;
 		}
-		case uml::UmlPackage::CREATELINKACTION_CLASS:
+		case uml::umlPackage::READLINKACTION_CLASS:
 		{
-			visitor = std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createCreateLinkActionActivation());
+			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createReadLinkActionActivation();
 			break;
 		}
-		case uml::UmlPackage::DESTROYLINKACTION_CLASS:
+		case uml::umlPackage::CLEARASSOCIATIONACTION_CLASS:
 		{
-			visitor = std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createDestroyLinkActionActivation());
+			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createClearAssociationActionActivation();
 			break;
 		}
-		case uml::UmlPackage::CONDITIONALNODE_CLASS: 
+		case uml::umlPackage::CREATELINKACTION_CLASS:
 		{
-			visitor = std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createConditionalNodeActivation());
+			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createCreateLinkActionActivation();
 			break;
 		}
-		case uml::UmlPackage::LOOPNODE_CLASS: 
+		case uml::umlPackage::DESTROYLINKACTION_CLASS:
 		{
-			visitor = std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createLoopNodeActivation());
+			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createDestroyLinkActionActivation();
 			break;
 		}
-		case uml::UmlPackage::EXPANSIONREGION_CLASS: 
+		case uml::umlPackage::CONDITIONALNODE_CLASS: 
 		{
-			visitor = std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createExpansionRegionActivation());
+			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createConditionalNodeActivation();
 			break;
 		}
-		case uml::UmlPackage::STRUCTUREDACTIVITYNODE_CLASS: 
+		case uml::umlPackage::LOOPNODE_CLASS: 
 		{
-			visitor = std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createStructuredActivityNodeActivation());
+			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createLoopNodeActivation();
 			break;
 		}
-		case uml::UmlPackage::EXPANSIONNODE_CLASS: 
+		case uml::umlPackage::STRUCTUREDACTIVITYNODE_CLASS: 
 		{
-			visitor = std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createExpansionNodeActivation());
+			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createStructuredActivityNodeActivation();
 			break;
 		}
-		case uml::UmlPackage::READEXTENTACTION_CLASS: 
+		case uml::umlPackage::READEXTENTACTION_CLASS: 
 		{
-			visitor = std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createReadExtentActionActivation());
+			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createReadExtentActionActivation();
 			break;
 		}
-		case uml::UmlPackage::READISCLASSIFIEDOBJECTACTION_CLASS: 
+		case uml::umlPackage::READISCLASSIFIEDOBJECTACTION_CLASS: 
 		{
-			visitor = std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createReadIsClassifiedObjectActionActivation());
+			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createReadIsClassifiedObjectActionActivation();
 			break;
 		}
-		case uml::UmlPackage::RECLASSIFYOBJECTACTION_CLASS: 
+		case uml::umlPackage::RECLASSIFYOBJECTACTION_CLASS: 
 		{
-			visitor = std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createReclassifyObjectActionActivation());
+			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createReclassifyObjectActionActivation();
 			break;
 		}
-		case uml::UmlPackage::STARTOBJECTBEHAVIORACTION_CLASS: 
+		case uml::umlPackage::STARTOBJECTBEHAVIORACTION_CLASS: 
 		{
-			visitor = std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createStartObjectBehaviorActionActivation());
+			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createStartObjectBehaviorActionActivation();
 			break;
 		}
-		case uml::UmlPackage::STARTCLASSIFIERBEHAVIORACTION_CLASS: 
+		case uml::umlPackage::STARTCLASSIFIERBEHAVIORACTION_CLASS: 
 		{
-			visitor = std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createStartClassifierBehaviorActionActivation());
+			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createStartClassifierBehaviorActionActivation();
 			break;
 		}
-		case uml::UmlPackage::ACCEPTEVENTACTION_CLASS: 
+		case uml::umlPackage::ACCEPTEVENTACTION_CLASS: 
 		{
-			visitor = std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createAcceptEventActionActivation());
+			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createAcceptEventActionActivation();
 			break;
 		}
-		case uml::UmlPackage::REDUCEACTION_CLASS: 
+		case uml::umlPackage::REDUCEACTION_CLASS: 
 		{
-			visitor = std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createReduceActionActivation());
+			visitor = fUML::Semantics::Actions::ActionsFactory::eInstance()->createReduceActionActivation();
 			break;
 		}
-		case uml::UmlPackage::DATASTORENODE_CLASS: 
+		case uml::umlPackage::DATASTORENODE_CLASS: 
 		{
-			visitor = std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createDataStoreNodeActivation());
+			visitor = fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createDataStoreNodeActivation();
 			break;
 		}
-		case uml::UmlPackage::CENTRALBUFFERNODE_CLASS: 
+		case uml::umlPackage::CENTRALBUFFERNODE_CLASS: 
 		{
-			visitor = std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>(FUMLFactory::eInstance()->createCentralBufferNodeActivation());
+			visitor = fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createCentralBufferNodeActivation();
+			break;
+		}
+		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CALLEVENTBEHAVIOR_CLASS:
+		{
+			visitor = fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createCallEventExecution();
 			break;
 		}		
 		default: 
@@ -727,40 +716,83 @@ std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> ExecutionFactoryImpl::in
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference builtInTypes
+*/
 std::shared_ptr<Bag<uml::PrimitiveType>> ExecutionFactoryImpl::getBuiltInTypes() const
 {
+	if(m_builtInTypes == nullptr)
+	{
+		m_builtInTypes.reset(new Bag<uml::PrimitiveType>());
+		
+		
+	}
 
     return m_builtInTypes;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference locus
+*/
 std::weak_ptr<fUML::Semantics::Loci::Locus > ExecutionFactoryImpl::getLocus() const
 {
 
     return m_locus;
 }
+
 void ExecutionFactoryImpl::setLocus(std::shared_ptr<fUML::Semantics::Loci::Locus> _locus)
 {
     m_locus = _locus;
 }
 
+
+
+/*
+Getter & Setter for reference primitiveBehaviorPrototypes
+*/
 std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution>> ExecutionFactoryImpl::getPrimitiveBehaviorPrototypes() const
 {
+	if(m_primitiveBehaviorPrototypes == nullptr)
+	{
+		m_primitiveBehaviorPrototypes.reset(new Bag<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution>());
+		
+		
+	}
 
     return m_primitiveBehaviorPrototypes;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference strategies
+*/
 std::shared_ptr<Bag<fUML::Semantics::Loci::SemanticStrategy>> ExecutionFactoryImpl::getStrategies() const
 {
+	if(m_strategies == nullptr)
+	{
+		m_strategies.reset(new Bag<fUML::Semantics::Loci::SemanticStrategy>());
+		
+		
+	}
 
     return m_strategies;
 }
 
 
+
+
+
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<ExecutionFactory> ExecutionFactoryImpl::getThisExecutionFactoryPtr() const
@@ -787,7 +819,7 @@ Any ExecutionFactoryImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::EXECUTIONFACTORY_ATTRIBUTE_BUILTINTYPES:
+		case fUML::Semantics::Loci::LociPackage::EXECUTIONFACTORY_ATTRIBUTE_BUILTINTYPES:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::PrimitiveType>::iterator iter = m_builtInTypes->begin();
@@ -799,9 +831,9 @@ Any ExecutionFactoryImpl::eGet(int featureID, bool resolve, bool coreType) const
 			}
 			return eAny(tempList); //473
 		}
-		case fUML::FUMLPackage::EXECUTIONFACTORY_ATTRIBUTE_LOCUS:
+		case fUML::Semantics::Loci::LociPackage::EXECUTIONFACTORY_ATTRIBUTE_LOCUS:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getLocus().lock())); //470
-		case fUML::FUMLPackage::EXECUTIONFACTORY_ATTRIBUTE_PRIMITIVEBEHAVIORPROTOTYPES:
+		case fUML::Semantics::Loci::LociPackage::EXECUTIONFACTORY_ATTRIBUTE_PRIMITIVEBEHAVIORPROTOTYPES:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution>::iterator iter = m_primitiveBehaviorPrototypes->begin();
@@ -813,7 +845,7 @@ Any ExecutionFactoryImpl::eGet(int featureID, bool resolve, bool coreType) const
 			}
 			return eAny(tempList); //472
 		}
-		case fUML::FUMLPackage::EXECUTIONFACTORY_ATTRIBUTE_STRATEGIES:
+		case fUML::Semantics::Loci::LociPackage::EXECUTIONFACTORY_ATTRIBUTE_STRATEGIES:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<fUML::Semantics::Loci::SemanticStrategy>::iterator iter = m_strategies->begin();
@@ -832,13 +864,13 @@ bool ExecutionFactoryImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::EXECUTIONFACTORY_ATTRIBUTE_BUILTINTYPES:
+		case fUML::Semantics::Loci::LociPackage::EXECUTIONFACTORY_ATTRIBUTE_BUILTINTYPES:
 			return getBuiltInTypes() != nullptr; //473
-		case fUML::FUMLPackage::EXECUTIONFACTORY_ATTRIBUTE_LOCUS:
+		case fUML::Semantics::Loci::LociPackage::EXECUTIONFACTORY_ATTRIBUTE_LOCUS:
 			return getLocus().lock() != nullptr; //470
-		case fUML::FUMLPackage::EXECUTIONFACTORY_ATTRIBUTE_PRIMITIVEBEHAVIORPROTOTYPES:
+		case fUML::Semantics::Loci::LociPackage::EXECUTIONFACTORY_ATTRIBUTE_PRIMITIVEBEHAVIORPROTOTYPES:
 			return getPrimitiveBehaviorPrototypes() != nullptr; //472
-		case fUML::FUMLPackage::EXECUTIONFACTORY_ATTRIBUTE_STRATEGIES:
+		case fUML::Semantics::Loci::LociPackage::EXECUTIONFACTORY_ATTRIBUTE_STRATEGIES:
 			return getStrategies() != nullptr; //471
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
@@ -847,7 +879,7 @@ bool ExecutionFactoryImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::EXECUTIONFACTORY_ATTRIBUTE_BUILTINTYPES:
+		case fUML::Semantics::Loci::LociPackage::EXECUTIONFACTORY_ATTRIBUTE_BUILTINTYPES:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -883,7 +915,7 @@ bool ExecutionFactoryImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case fUML::FUMLPackage::EXECUTIONFACTORY_ATTRIBUTE_LOCUS:
+		case fUML::Semantics::Loci::LociPackage::EXECUTIONFACTORY_ATTRIBUTE_LOCUS:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -891,7 +923,7 @@ bool ExecutionFactoryImpl::eSet(int featureID, Any newValue)
 			setLocus(_locus); //470
 			return true;
 		}
-		case fUML::FUMLPackage::EXECUTIONFACTORY_ATTRIBUTE_PRIMITIVEBEHAVIORPROTOTYPES:
+		case fUML::Semantics::Loci::LociPackage::EXECUTIONFACTORY_ATTRIBUTE_PRIMITIVEBEHAVIORPROTOTYPES:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -927,7 +959,7 @@ bool ExecutionFactoryImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case fUML::FUMLPackage::EXECUTIONFACTORY_ATTRIBUTE_STRATEGIES:
+		case fUML::Semantics::Loci::LociPackage::EXECUTIONFACTORY_ATTRIBUTE_STRATEGIES:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -979,12 +1011,11 @@ void ExecutionFactoryImpl::load(std::shared_ptr<persistence::interfaces::XLoadHa
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get FUMLFactory
-	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
+	// get fUMLFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -1027,18 +1058,18 @@ void ExecutionFactoryImpl::loadAttributes(std::shared_ptr<persistence::interface
 	ecore::EObjectImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ExecutionFactoryImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+void ExecutionFactoryImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<fUML::Semantics::Loci::LociFactory> modelFactory=fUML::Semantics::Loci::LociFactory::eInstance();
 
-
-	ecore::EObjectImpl::loadNode(nodeName, loadHandler, ecore::EcoreFactory::eInstance());
+	//load BasePackage Nodes
 }
 
 void ExecutionFactoryImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::EXECUTIONFACTORY_ATTRIBUTE_BUILTINTYPES:
+		case fUML::Semantics::Loci::LociPackage::EXECUTIONFACTORY_ATTRIBUTE_BUILTINTYPES:
 		{
 			std::shared_ptr<Bag<uml::PrimitiveType>> _builtInTypes = getBuiltInTypes();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -1052,7 +1083,7 @@ void ExecutionFactoryImpl::resolveReferences(const int featureID, std::list<std:
 			return;
 		}
 
-		case fUML::FUMLPackage::EXECUTIONFACTORY_ATTRIBUTE_LOCUS:
+		case fUML::Semantics::Loci::LociPackage::EXECUTIONFACTORY_ATTRIBUTE_LOCUS:
 		{
 			if (references.size() == 1)
 			{
@@ -1064,7 +1095,7 @@ void ExecutionFactoryImpl::resolveReferences(const int featureID, std::list<std:
 			return;
 		}
 
-		case fUML::FUMLPackage::EXECUTIONFACTORY_ATTRIBUTE_PRIMITIVEBEHAVIORPROTOTYPES:
+		case fUML::Semantics::Loci::LociPackage::EXECUTIONFACTORY_ATTRIBUTE_PRIMITIVEBEHAVIORPROTOTYPES:
 		{
 			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution>> _primitiveBehaviorPrototypes = getPrimitiveBehaviorPrototypes();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -1078,7 +1109,7 @@ void ExecutionFactoryImpl::resolveReferences(const int featureID, std::list<std:
 			return;
 		}
 
-		case fUML::FUMLPackage::EXECUTIONFACTORY_ATTRIBUTE_STRATEGIES:
+		case fUML::Semantics::Loci::LociPackage::EXECUTIONFACTORY_ATTRIBUTE_STRATEGIES:
 		{
 			std::shared_ptr<Bag<fUML::Semantics::Loci::SemanticStrategy>> _strategies = getStrategies();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -1108,7 +1139,7 @@ void ExecutionFactoryImpl::saveContent(std::shared_ptr<persistence::interfaces::
 {
 	try
 	{
-		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+		std::shared_ptr<fUML::Semantics::Loci::LociPackage> package = fUML::Semantics::Loci::LociPackage::eInstance();
 
 	
 

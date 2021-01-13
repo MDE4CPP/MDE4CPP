@@ -28,9 +28,12 @@ public class FUML4CPPEMtlResourceFactory extends UML4CPPEMtlResourceFactory {
 	{		
 		String[] moduleNames = {
 								"generateClassifierObjectHeader",
+								"generateMetamodelClassifierObjectHeader",
 								"generateClassifierObjectSource",
+								"generateMetamodelClassifierObjectSource",
 								"generateExpansionRegionActiviationHeader",
 								"generateExpansionRegionActiviationSource",
+								"generateExecution",
 								"generateExecutionBuildFile",
 								"generateExecutionProjectFiles",
 								"generateModelExecutionFactoryHeader",
@@ -42,6 +45,11 @@ public class FUML4CPPEMtlResourceFactory extends UML4CPPEMtlResourceFactory {
 								"generateOpaqueBehaviorExecution",
 								"generateOpaqueBehaviorExecutionHeader",
 								"generateOpaqueBehaviorExecutionSource",
+								"generateOperationExecution",
+								"generateOperationExecutionHeader",
+								"generateOperationExecutionSource",
+								"fUMLCollectionHelper",
+								"fUMLKeywords",
 								"parameterHelper"
 		};
 		generateFilePathMapData(moduleNames, "", resourcePathPrefix);

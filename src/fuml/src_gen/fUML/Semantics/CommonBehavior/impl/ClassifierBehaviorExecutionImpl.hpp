@@ -13,14 +13,14 @@
 //Model includes
 #include "../ClassifierBehaviorExecution.hpp"
 
-#include "fUML/impl/FUMLFactoryImpl.hpp"
+#include "fUML/Semantics/CommonBehavior/impl/CommonBehaviorFactoryImpl.hpp"
 
-#include "ecore/impl/EObjectImpl.hpp"
+#include "ecore/impl/EModelElementImpl.hpp"
 
 //*********************************
 namespace fUML::Semantics::CommonBehavior 
 {
-	class ClassifierBehaviorExecutionImpl :virtual public ecore::EObjectImpl,
+	class ClassifierBehaviorExecutionImpl : virtual public ecore::EModelElementImpl,
 virtual public ClassifierBehaviorExecution 
 	{
 		public: 
@@ -31,7 +31,7 @@ virtual public ClassifierBehaviorExecution
 			ClassifierBehaviorExecutionImpl& operator=(ClassifierBehaviorExecutionImpl const&) = delete;
 
 		protected:
-			friend class fUML::FUMLFactoryImpl;
+			friend class fUML::Semantics::CommonBehavior::CommonBehaviorFactoryImpl;
 			ClassifierBehaviorExecutionImpl();
 			virtual std::shared_ptr<ClassifierBehaviorExecution> getThisClassifierBehaviorExecutionPtr() const;
 			virtual void setThisClassifierBehaviorExecutionPtr(std::weak_ptr<ClassifierBehaviorExecution> thisClassifierBehaviorExecutionPtr);
@@ -45,16 +45,13 @@ virtual public ClassifierBehaviorExecution
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual void _startObjectBehavior() ;
 			
-			/*!
-			 */ 
+			 
 			virtual void execute(std::shared_ptr<Bag<uml::Class> >  classifier,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> >  inputs) ;
 			
-			/*!
-			 */ 
+			 
 			virtual void terminate() ;
 			
 			
@@ -67,27 +64,24 @@ virtual public ClassifierBehaviorExecution
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<uml::Class > getClassifier() const ;
 			
-			/*!
-			 */
-			virtual void setClassifier(std::shared_ptr<uml::Class> _classifier_classifier) ;
-			/*!
-			 */
+			
+			virtual void setClassifier(std::shared_ptr<uml::Class> _classifier) ;
+			
+			
 			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution > getExecution() const ;
 			
-			/*!
-			 */
-			virtual void setExecution(std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> _execution_execution) ;
-			/*!
-			 */
+			
+			virtual void setExecution(std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> _execution) ;
+			
+			
 			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation > getObjectActivation() const ;
 			
-			/*!
-			 */
-			virtual void setObjectActivation(std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> _objectActivation_objectActivation) ;
+			
+			virtual void setObjectActivation(std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> _objectActivation) ;
+			
 							
 			
 			//*********************************
@@ -106,7 +100,7 @@ virtual public ClassifierBehaviorExecution
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

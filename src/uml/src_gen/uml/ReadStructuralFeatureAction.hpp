@@ -36,7 +36,7 @@ namespace persistence
 
 namespace uml
 {
-	class UmlFactory;
+	class umlFactory;
 }
 
 //Forward Declaration for used types
@@ -151,8 +151,10 @@ namespace uml
 namespace uml 
 {
 	/*!
-	 A ReadStructuralFeatureAction is a StructuralFeatureAction that retrieves the values of a StructuralFeature.
-	<p>From package UML::Actions.</p> */
+	A ReadStructuralFeatureAction is a StructuralFeatureAction that retrieves the values of a StructuralFeature.
+	<p>From package UML::Actions.</p>
+	*/
+	
 	class ReadStructuralFeatureAction:virtual public StructuralFeatureAction
 	{
 		public:
@@ -173,9 +175,11 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 The type and ordering of the result OutputPin are the same as the type and ordering of the StructuralFeature.
+			The type and ordering of the result OutputPin are the same as the type and ordering of the StructuralFeature.
 			result.type =structuralFeature.type and 
-			result.isOrdered = structuralFeature.isOrdered */ 
+			result.isOrdered = structuralFeature.isOrdered
+			*/
+			 
 			virtual bool type_and_ordering(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
@@ -187,14 +191,19 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 The OutputPin on which the result values are placed.
-			<p>From package UML::Actions.</p> */
+			The OutputPin on which the result values are placed.
+			<p>From package UML::Actions.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::OutputPin > getResult() const = 0;
 			
 			/*!
-			 The OutputPin on which the result values are placed.
-			<p>From package UML::Actions.</p> */
-			virtual void setResult(std::shared_ptr<uml::OutputPin> _result_result) = 0;
+			The OutputPin on which the result values are placed.
+			<p>From package UML::Actions.</p>
+			*/
+			
+			virtual void setResult(std::shared_ptr<uml::OutputPin> _result) = 0;
+			
 			
 
 		protected:
@@ -207,33 +216,46 @@ namespace uml
 			// Reference Members
 			//*********************************
 			/*!
-			 The OutputPin on which the result values are placed.
-			<p>From package UML::Actions.</p> */
-			std::shared_ptr<uml::OutputPin > m_result;
+			The OutputPin on which the result values are placed.
+			<p>From package UML::Actions.</p>
+			*/
 			
+			std::shared_ptr<uml::OutputPin > m_result;
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
+			ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::ActivityGroup>> getInGroup() const = 0;/*!
-			 The ordered set of InputPins representing the inputs to the Action.
-			<p>From package UML::Actions.</p> */
+			The ordered set of InputPins representing the inputs to the Action.
+			<p>From package UML::Actions.</p>
+			*/
+			
 			virtual std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> getInput() const = 0;/*!
-			 The ordered set of OutputPins representing outputs from the Action.
-			<p>From package UML::Actions.</p> */
+			The ordered set of OutputPins representing outputs from the Action.
+			<p>From package UML::Actions.</p>
+			*/
+			
 			virtual std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element>> getOutput() const = 0;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
+			The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

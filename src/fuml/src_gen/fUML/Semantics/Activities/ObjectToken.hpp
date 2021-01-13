@@ -32,7 +32,7 @@ namespace persistence
 
 namespace fUML
 {
-	class FUMLFactory;
+	class fUMLFactory;
 }
 
 //Forward Declaration for used types
@@ -60,8 +60,7 @@ namespace fUML::Semantics::Values
 //*********************************
 namespace fUML::Semantics::Activities 
 {
-	/*!
-	 */
+	
 	class ObjectToken:virtual public Token
 	{
 		public:
@@ -81,12 +80,13 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
+			virtual std::shared_ptr<fUML::Semantics::Activities::Token> _copy() = 0;
+			
+			 
 			virtual bool equals(std::shared_ptr<fUML::Semantics::Activities::Token>  other) = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual bool isControl() = 0;
 			
 			
@@ -97,13 +97,12 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<fUML::Semantics::Values::Value > getValue() const = 0;
 			
-			/*!
-			 */
-			virtual void setValue(std::shared_ptr<fUML::Semantics::Values::Value> _value_value) = 0;
+			
+			virtual void setValue(std::shared_ptr<fUML::Semantics::Values::Value> _value) = 0;
+			
 			
 
 		protected:
@@ -115,10 +114,8 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			// Reference Members
 			//*********************************
-			/*!
-			 */
-			std::shared_ptr<fUML::Semantics::Values::Value > m_value;
 			
+			std::shared_ptr<fUML::Semantics::Values::Value > m_value;
 
 		public:
 			//*********************************

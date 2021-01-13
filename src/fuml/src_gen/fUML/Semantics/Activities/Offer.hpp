@@ -13,7 +13,7 @@
 
 
 // forward declarations
-template<class T> class Bag;
+template<class T> class Bag; 
 
 
 
@@ -33,7 +33,7 @@ namespace persistence
 
 namespace fUML
 {
-	class FUMLFactory;
+	class fUMLFactory;
 }
 
 //Forward Declaration for used types
@@ -46,14 +46,13 @@ namespace fUML::Semantics::Activities
 
 // enum includes
 
-#include "ecore/EObject.hpp"
+#include "ecore/EModelElement.hpp"
 
 //*********************************
 namespace fUML::Semantics::Activities 
 {
-	/*!
-	 */
-	class Offer : virtual public ecore::EObject 
+	
+	class Offer : virtual public ecore::EModelElement
 
 	{
 		public:
@@ -73,24 +72,19 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual int countOfferedVales() = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual bool hasTokens() = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual void removeOfferedValues(int count) = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual void removeWithdrawnTokens() = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > retrieveOfferedTokens() = 0;
 			
 			
@@ -101,9 +95,9 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> getOfferedTokens() const = 0;
+			
 			
 			
 
@@ -116,10 +110,8 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			// Reference Members
 			//*********************************
-			/*!
-			 */
-			std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> m_offeredTokens;
 			
+			mutable std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> m_offeredTokens;
 
 		public:
 			//*********************************

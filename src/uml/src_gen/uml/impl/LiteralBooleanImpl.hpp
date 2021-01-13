@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class LiteralBooleanImpl :virtual public LiteralSpecificationImpl, virtual public LiteralBoolean 
+	class LiteralBooleanImpl : virtual public LiteralSpecificationImpl, virtual public LiteralBoolean 
 	{
 		public: 
 			LiteralBooleanImpl(const LiteralBooleanImpl & obj);
@@ -28,7 +28,7 @@ namespace uml
 			LiteralBooleanImpl& operator=(LiteralBooleanImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			LiteralBooleanImpl();
 			virtual std::shared_ptr<LiteralBoolean> getThisLiteralBooleanPtr() const;
 			virtual void setThisLiteralBooleanPtr(std::weak_ptr<LiteralBoolean> thisLiteralBooleanPtr);
@@ -66,21 +66,40 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
+			/*!
+			The query booleanValue() gives the value.
+			result = (value)
+			<p>From package UML::Values.</p>
+			*/
+			 
+			virtual bool booleanValue() ;
+			
+			/*!
+			The query isComputable() is redefined to be true.
+			result = (true)
+			<p>From package UML::Values.</p>
+			*/
+			 
+			virtual bool isComputable() ;
+			
 			
 			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
 			/*!
-			 The specified Boolean value.
-			<p>From package UML::Values.</p> */ 
+			The specified Boolean value.
+			<p>From package UML::Values.</p>
+			*/
+			 
 			virtual bool getValue() const ;
 			
 			/*!
-			 The specified Boolean value.
-			<p>From package UML::Values.</p> */ 
+			The specified Boolean value.
+			<p>From package UML::Values.</p>
+			*/
+			 
 			virtual void setValue (bool _value); 
-			
 			
 			
 			//*********************************
@@ -92,14 +111,20 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
@@ -113,7 +138,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

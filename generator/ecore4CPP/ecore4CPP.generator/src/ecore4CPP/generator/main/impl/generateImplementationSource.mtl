@@ -35,10 +35,11 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+[comment] root factory notwendig? 
 [if (generateObjectMonitoring())]
-#include "[getRootPackage().name/]/[aClass.getRootPackage().name.toUpperFirst()/]Factory.hpp"
+#include "[getRootPackage().name/]/[aClass.getRootPackage().name/]Factory.hpp"
 [/if]
-
+[/comment]
 [generateAbstractDataTypesIncludes()/]
 [if (aClass.eAttributes.eType->select(requiresAny())->size() = 0 and aClass.eOperations.eParameters.eType->select(requiresAny())->size() > 0)]
 #include "abstractDataTypes/Any.hpp"
@@ -46,7 +47,8 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "[getRootPackage().name/]/impl/[aClass.getRootPackage().name.toUpperFirst().concat('PackageImpl')/].hpp"
+
+//Includes from codegen annotation
 [if (aClass.hasKey(keyIncludes()))]
 [aClass.valueKey(keyIncludes())/]
 [/if]
@@ -58,10 +60,15 @@
 #include "[element.generateNamespacePath()/]/[element.name.toUpperFirst()/].hpp"
 [/for]
 
-#include "[aClass.eClass().getRootPackage().name/]/[aClass.eClass().getRootPackage().name.toUpperFirst()/]Package.hpp"
-#include "[aClass.eClass().getRootPackage().name/]/[aClass.eClass().getRootPackage().name.toUpperFirst()/]Factory.hpp"
-#include "[aClass.getRootPackage().name/]/[aClass.getRootPackage().name.toUpperFirst()/]Package.hpp"
-#include "[aClass.getRootPackage().name/]/[aClass.getRootPackage().name.toUpperFirst()/]Factory.hpp"
+//Factories an Package includes
+#include "[aClass.ePackage.getRootPackage().name/]/[aClass.ePackage.getNamespacePathWithoutRoot()/]impl/[aClass.ePackage.name/]FactoryImpl.hpp"
+#include "[aClass.ePackage.getRootPackage().name/]/[aClass.ePackage.getNamespacePathWithoutRoot()/]impl/[aClass.ePackage.name/]PackageImpl.hpp"
+
+[for (anEPackage: EPackage| aClass.ePackage->closure(p|p.eSuperPackage)->asSet() )]
+#include "[anEPackage.getRootPackage().name/]/[anEPackage.getNamespacePathWithoutRoot()/][anEPackage.name/]Factory.hpp"
+#include "[anEPackage.getRootPackage().name/]/[anEPackage.getNamespacePathWithoutRoot()/][anEPackage.name/]Package.hpp"
+[/for]
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -72,10 +79,12 @@ using namespace [aClass.generateNamespaceDefinition()/];
 // Constructor / Destructor
 //*********************************
 [className/]::[className/]()
-{
+{	
+	[comment]
 	//*********************************
 	// Attribute Members
 	//*********************************
+	
 	[for (aAttribute : EAttribute | aClass.eAttributes->asOrderedSet()->sortedBy(name)) separator ('\n')]
 	[aAttribute.generateAttributeInit()/][/for]
 
@@ -97,6 +106,7 @@ using namespace [aClass.generateNamespaceDefinition()/];
 	[for (aReference : EReference | aClass.eReferences->asOrderedSet()->sortedBy(name)) separator ('\n')]
 	[aReference.InitReferences()/]
 	[/for]
+	[/comment]
 }
 
 [className/]::~[className/]()
@@ -106,19 +116,18 @@ using namespace [aClass.generateNamespaceDefinition()/];
 #endif
 }
 
-
 [let ref:OrderedSet(EReference) = aClass.getAllContainers()]
 [for(aReference:EReference | ref->sortedBy(name)) separator('\n')]
-//Additional constructor for the containments back reference
 [if(ref->select(eType.name = aReference.eType.name)->size()>1 )]
-	[if(ref->select(eType.name = aReference.eType.name)->asOrderedSet()->sortedBy(name)->first() = aReference)]
+[if(ref->select(eType.name = aReference.eType.name)->asOrderedSet()->sortedBy(name)->first() = aReference)]
+//Additional constructor for the containments back reference
 [className/]::[className/]([aReference.generateReferenceType(true)/] par_[aReference.eType.name/], const int reference_id)
 :[className/]()
 {
 	switch(reference_id)
 	{	
 	[for(multipleRef : EReference | ref->select(eType.name = aReference.eType.name)->sortedBy(name))]
-	case [aClass.getRootPackage().name.toUpperFirst()/]Package::[multipleRef.getStaticAttributeIDName()/]:
+	case [aClass.getRootPackage().name/]Package::[multipleRef.getStaticAttributeIDName()/]:
 		m_[multipleRef.name/] = par_[aReference.eType.name/];
 		[if (multipleRef.hasSubset() and multipleRef.upperBound = 1)]
 		[for (m : EReference | multipleRef.oclAsType(EReference).Subset()->selectByKind(EReference).oclAsType(EReference)->select(isBackReference())->asOrderedSet())]
@@ -131,22 +140,19 @@ using namespace [aClass.generateNamespaceDefinition()/];
 	}
    
 }
-	[/if]
-	[else]
-			[className/]::[className/]([aReference.generateReferenceType(true)/] par_[aReference.name/])
-			:[className/]()
-			{
-			    m_[aReference.name/] = par_[aReference.name/];
-				[if (aReference.hasSubset() and aReference.upperBound = 1)]
-					[for (m : EReference | aReference.oclAsType(EReference).Subset()->selectByKind(EReference).oclAsType(EReference)->select(isBackReference())->asOrderedSet())]
-				m_[m.name/] = par_[aReference.name/];
-				[/for][/if]
-			}
-	[/if]
-
-
-
-
+[/if]
+[else]
+//Additional constructor for the containments back reference
+[className/]::[className/]([aReference.generateReferenceType(true)/] par_[aReference.name/])
+:[className/]()
+{
+	m_[aReference.name/] = par_[aReference.name/];
+	[if (aReference.hasSubset() and aReference.upperBound = 1)]
+	[for (m : EReference | aReference.oclAsType(EReference).Subset()->selectByKind(EReference).oclAsType(EReference)->select(isBackReference())->asOrderedSet())]
+	m_[m.name/] = par_[aReference.name/];
+	[/for][/if]
+}
+[/if]
 [/for]
 [/let]
 
@@ -213,23 +219,21 @@ std::shared_ptr<ecore::EObject>  [className/]::copy() const
 	std::shared_ptr<[className/]> element(new [className/](*this));
 	element->[generateGetThisPtrPropertySetterName()/](element);
 [if (generateObjectMonitoring())]
-	[aClass.getRootPackage().name.toUpperFirst()/]Factory::eInstance()->add(element);
+	[aClass.getRootPackage().name/]Factory::eInstance()->add(element);
 [/if]
 	return element;
 }
 
 std::shared_ptr<[needNamespace(aClass.ePackage, 'EClass')/]> [className/]::eStaticClass() const
 {
-	return [aClass.getRootPackage().name.concat('PackageImpl').toUpperFirst()/]::eInstance()->get[aClass.getMemberNameUpperFirst()/]();
+	return [aClass.getRootPackage().name/][getPackageAccess(aClass, true)/]::[aClass.ePackage.name/]Package::eInstance()->get[aClass.getMemberNameUpperFirst()/]();
 }
 
 //*********************************
 // Attribute Setter Getter
 //*********************************
 [for (aAttribute : EAttribute | aClass.eAttributes->asOrderedSet()->sortedBy(name)) separator ('\n')]
-[aAttribute.generateAttributeSetterImplementationCpp(true)/]
-
-[aAttribute.generateAttributeGetterImplementationCpp()/]
+[aAttribute.generateAttributeCpp()/]
 [/for]
 
 //*********************************

@@ -15,36 +15,20 @@
 [module generateExecutionBuildFile('http://www.eclipse.org/uml2/5.0.0/UML')]
 
 [import fUML4CPP::generator::main::generateOpaqueBehaviorExecution /]
+[import fUML4CPP::generator::main::generateOperationExecution /]
 [import fUML4CPP::generator::main::parameterHelper /]
+[import fUML4CPP::generator::main::fUMLKeywords /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
-[query public metaModelIncludes(aPackage : Package) : Set(Package) = OrderedSet{
-																			aPackage.member->filter(Class).attribute.type.getNearestPackage(),
-																			aPackage.member->filter(Class).ownedOperation.ownedParameter.type.getNearestPackage(),
-																			aPackage.member->filter(Class).attribute.getAppliedStereotypes().getNearestPackage(), 
-																			aPackage.member->filter(Class).interfaceRealization.supplier.getNearestPackage(), 
-																			aPackage.member->filter(Class).generalization.general.getNearestPackage(), 
-																			aPackage.getCallOperationActions().operation.method->reject(oclIsUndefined()).ownedParameter.type.getNearestPackage(),
-																			aPackage.packageImport.importedPackage
-																		}->flatten() /]
-[query public isReflectionModel(aPackage : Package) : Boolean = if ((aPackage.name='UML') or (aPackage.name='Ecore')or (aPackage.name='PrimitiveTypes') or (aPackage.eAllContents()->filter(ecore::EAnnotation)->select(source = 'SDK')->notEmpty())) then true else false endif /]
-[query public metaModelIncludesWithoutReflection(aPackage : Package) : Set(Package) = aPackage.metaModelIncludes()->reject((name = aPackage.name) or (name = 'PrimitiveTypes') or (name = 'UML')or (name = 'Ecore'))/]
-[query public metaModelIncludesReflection(aPackage : Package) : Set(Package) = aPackage.metaModelIncludes()->select((not (name = aPackage.name) or (name = 'PrimitiveTypes') or (name = 'UML')or (name = 'Ecore')))/]
-[query public metaModelLibrariesNamesForNonReflectionModels(aPackage : Package) : Set(String) = if(metaModelIncludesWithoutReflection()->size() = 0) then OrderedSet{'ecore', 'uml', 'fUML', 'ecoreReflection', 'primitivetypesReflection', 'umlReflection', aPackage.name} else OrderedSet{'ecore', 'uml', 'fUML', 'ecoreReflection', 'primitivetypesReflection', 'umlReflection', aPackage.name}->addAll(metaModelIncludesWithoutReflection()->sortedBy(name).name)->flatten() endif/]
-[query public metaModelLibrariesNamesForReflectionModels(aPackage : Package) : Set(String) = if ((aPackage.name='UML') or (aPackage.eAllContents()->filter(ecore::EAnnotation)->select(source = 'SDK')->notEmpty())) then OrderedSet{'ecore', 'uml', 'ecoreReflection', 'primitivetypesReflection'} else OrderedSet{'ecore', 'uml'} endif/]
-[query public metaModelLibrariesNames(aPackage : Package) : Set(String) = if (aPackage.isReflectionModel()) then metaModelLibrariesNamesForReflectionModels() else metaModelLibrariesNamesForNonReflectionModels() endif/]
-[query public getBinaryTypeName(buildLibrary : Boolean) : String = if (buildLibrary) then 'SharedLibrary' else 'Executable' endif/]
-[query public getBinaryTypeExtension(buildLibrary : Boolean) : String = if (buildLibrary) then 'dll' else 'exe' endif/]
-[query public getBinaryTypeFolder(buildLibrary : Boolean) : String = if (buildLibrary) then 'libs' else 'exe' endif/]
-[query public getBuildTask(buildLibrary : Boolean) : String = if (buildLibrary) then 'NativeLibrarySpec' else 'NativeExecutableSpec' endif/]
 
-[template public generateExecutionBuildFile(aPackage : Package)]
-[generateExecutionBuildFile(aPackage, false)/]
+[template public generateExecutionBuildFiles(aPackage : Package, packageOnly : Boolean)]
+[generateCMakeLists(aPackage, packageOnly)/]
+[generateGradleFiles(aPackage)/]
 [/template]
 
-[template public generateExecutionBuildFile(aPackage : Package, buildLibrary : Boolean) { packageName : String = getPackageName(); execPackageName : String = getPackageName().concat('Exec'); }]
-[file (aPackage.name.concat('Exec/').concat('CMakeLists.txt'), false, 'UTF-8')]
+[template private generateCMakeLists(aPackage : Package, packageOnly : Boolean) { packageName : String = getPackageName(); execPackageName : String = getPackageName().concat('Exec'); }]
+[file (aPackage.generateNamespacePath(false).concat('Exec/').concat('CMakeLists.txt'), false, 'UTF-8')]
 #############################################################################
 #																			#
 #		 			CMakeList created by fUML4CPP Generator					# 
@@ -72,25 +56,14 @@ SET(CMAKE_CXX_FLAGS_RELEASE " -O3 -DNDEBUG")
 string(REPLACE "\\" "/" MDE4CPP_HOME $ENV{MDE4CPP_HOME})
 
 SET(SOURCE_FILES
-[for (aDecisionNode : DecisionNode | aPackage.getDecisionNodesWithOB())]
-	[aDecisionNode.generateOpaqueBehaviorExecutionName()/].cpp
-[/for]
-[for (aCBA : CallBehaviorAction | aPackage.getCallBehaviorActionsWithOB())]
-	[aCBA.generateOpaqueBehaviorExecutionName()/].cpp
-[/for]
-[for (aCOA : CallOperationAction | aPackage.getCallOperationActions()->sortedBy(name))]
-	[aCOA.generateOpaqueBehaviorExecutionName()/].cpp
-[/for]
-[for (aClassifier : Classifier | getClassiferExecutions()->sortedBy(name))]
-	[aClassifier.name.toUpperFirst()/]Object.cpp
-[/for]
-	impl/[aPackage.name.toUpperFirst()/]LocusImpl.cpp
-[if (buildLibrary)]
-	[packageName.concat('ExecPlugin.cpp')/]
-	['impl/'.concat(packageName).concat('ExecPluginImpl.cpp')/]
-[else]
-	main.cpp
-[/if]
+	#Model Execution Plugin
+	[aPackage.name.concat('ExecPlugin.cpp')/]
+	['impl/'.concat(aPackage.name).concat('ExecPluginImpl.cpp')/]
+	[if (not packageOnly)]
+	# Model Execution Locus
+	impl/[aPackage.name/]LocusImpl.cpp
+	[/if]
+	[aPackage.generatePackageSourceFilesToCompile(packageOnly, true)/]
 )
 
 INCLUDE_DIRECTORIES(
@@ -113,13 +86,9 @@ ELSE()
 	[generateCMakeFindLibraryCommands('', 'lib')/]
 ENDIF()
 
-[if (buildLibrary)]
+
 ADD_LIBRARY(${PROJECT_NAME} SHARED ${SOURCE_FILES})
 SET_TARGET_PROPERTIES(${PROJECT_NAME} PROPERTIES PREFIX "")
-[else]
-ADD_EXECUTABLE(${PROJECT_NAME} ${SOURCE_FILES})
-SET_TARGET_PROPERTIES(${PROJECT_NAME} PROPERTIES DEBUG_POSTFIX ${CMAKE_DEBUG_POSTFIX})
-[/if]
 
 IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
 	[generateLibraryLinking(true)/]
@@ -133,19 +102,17 @@ ENDIF()
 
 INSTALL(TARGETS ${PROJECT_NAME}
 	RUNTIME DESTINATION ${MDE4CPP_HOME}/application/bin
-[if (buildLibrary)]
     ARCHIVE DESTINATION ${MDE4CPP_HOME}/application/lib
-[/if]
 )
 
-[if (buildLibrary)]
 INSTALL(DIRECTORY . DESTINATION ${MDE4CPP_HOME}/application/include/${PROJECT_NAME}
 	FILES_MATCHING PATTERN "*.hpp"
 	PATTERN ".cmake" EXCLUDE
 )
-[/if]
 [/file]
+[/template]
 
+[template private generateGradleFiles(aPackage : Package) { packageName : String = getPackageName(); execPackageName : String = getPackageName().concat('Exec'); }]
 [comment gradle file for build command /]
 [file ('../build.gradle', false, 'UTF-8')]
 description 'Build tasks for project: [packageName/]'
@@ -159,7 +126,7 @@ task build[packageName.toUpperFirst()/]() {
 [if(aPackage.prepareApplication())]
 	dependsOn 'application:compileApplicationFor[packageName.toUpperFirst()/]'
 [/if]
-[for (packName : String | aPackage.metaModelLibrariesNames()) ? (not(packName = aPackage.name))]
+[for (packName : String | aPackage.metaModelLibrariesNames()) ? (not(packName = aPackage.getPackageName()))]
 	dependsOn getRootProject().getTasksByName('build[packName.toUpperFirst()/]', true)
 [/for]
 }
@@ -212,13 +179,8 @@ task compile[packageName.toUpperFirst()/](type: tui.sse.mde4cpp.MDE4CPPCompile) 
 	}
 	outputs.file file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'bin' + File.separator + '[packageName/].dll')
 	outputs.file file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'bin' + File.separator + '[packageName/]d.dll')
-[if (buildLibrary)]
 	outputs.file file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'bin' + File.separator + '[packageName/]Exec.dll')
 	outputs.file file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'bin' + File.separator + '[packageName/]Execd.dll')
-[else]
-	outputs.file file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'bin' + File.separator + '[packageName/]Exec.exe')
-	outputs.file file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'bin' + File.separator + '[packageName/]Execd.exe')
-[/if]
 	outputs.dir file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'include' + File.separator + '[packageName/]')
 
 	// dependency to basic interfaces
@@ -227,7 +189,7 @@ task compile[packageName.toUpperFirst()/](type: tui.sse.mde4cpp.MDE4CPPCompile) 
 	outputs.dir file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'include' + File.separator + 'persistence' + File.separator + 'interfaces')
 	outputs.dir file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'include' + File.separator + 'pluginFramework')
 	outputs.dir file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'include' + File.separator + 'util')
-[for (packName : String | aPackage.metaModelLibrariesNames()) ? (not(packName = aPackage.name))]
+[for (packName : String | aPackage.metaModelLibrariesNames()) ? (not(packName = aPackage.getPackageName()))]
 
 	// dependency to model '[packName/]'
 	def [packName/] = getRootProject().getTasksByName('compile[packName.toUpperFirst()/]', true)
@@ -254,6 +216,26 @@ task clean {
 [/file]
 [/template]
 
+[template private generatePackageSourceFilesToCompile(aPackage : Package, packOnly : Boolean, isRoot : Boolean)]
+#ClassifierObject classes for Package [aPackage.generateNamespace(false)/]
+[for (aClassifier : Classifier | getClassifiersForObjectClasses()->reject(hasEAnnotation(sourceNoExecution()))->sortedBy(name))]
+[if(not isRoot)]../[aPackage.generateNamespacePath(false)/]Exec/[/if][aClassifier.name.toUpperFirst()/]Object.cpp
+[/for]
+[if (not packOnly)]
+#OpaqueBehaviorExecution classes for Package [aPackage.generateNamespace(false)/]
+[for (anOpaqueBehavior : OpaqueBehavior | aPackage.getPackageOpaqueBehaviors()->reject(hasEAnnotation(sourceNoExecution()))->sortedBy(name))]
+[if(not isRoot)]../[aPackage.generateNamespacePath(false)/]Exec/[/if][anOpaqueBehavior.generateOpaqueBehaviorExecutionName()/].cpp
+[/for]
+#OperationExecution classes for Package [aPackage.generateNamespace(false)/]
+[for (anOperation : Operation | aPackage.getPackageOperations()->sortedBy(name))]
+[if(not isRoot)]../[aPackage.generateNamespacePath(false)/]Exec/[/if][anOperation.generateOperationExecutionName()->reject(hasEAnnotation(sourceNoExecution()))->sortedBy(name)/].cpp
+[/for]
+[/if]
+[for (subPackage : Package | aPackage.ownedElement->filter(Package))]
+[subPackage.generatePackageSourceFilesToCompile(packOnly, false)/]
+[/for]
+[/template]
+
 [template private generateCMakeFindLibraryCommands(aPackage : Package, ending : String, folderName : String)]
 IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
 	[generateCMakeFindLibraryCommand(aPackage, ending, folderName, true)/]
@@ -262,25 +244,51 @@ ELSE()
 ENDIF()
 [/template]
 
-[query private libraryVariableNameSuffix(debugMode : Boolean) : String = if (debugMode) then 'DEBUG' else 'RELEASE' endif/]
-[query private libraryNameSuffix(debugMode : Boolean) : String = if (debugMode) then 'd' else '' endif/]
-[query private buildModeCMakeProperty(debugMode : Boolean) : String = if (debugMode) then 'debug' else 'optimized' endif/]
-
 [template private generateCMakeFindLibraryCommand(aPackage : Package, ending : String, folderName : String, debugMode : Boolean)]
-[for (packName : String | aPackage.metaModelLibrariesNames())]
+[for (packName : String | aPackage.metaModelLibrariesNames()->reject(name : String | aPackage.getAllSubPackageNames()->includes(name)))]
 FIND_LIBRARY([packName.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/] [packName/][libraryNameSuffix(debugMode)/][ending/] ${MDE4CPP_HOME}/application/[folderName/])
+[if (OrderedSet{'ecore', 'uml', 'fUML', 'PSCS', 'ecoreReflection', 'primitivetypesReflection', aPackage.getPackageName()}->excludes(packName))]
+FIND_LIBRARY([packName.toUpperCase()/]EXEC_[libraryVariableNameSuffix(debugMode)/] [packName/]Exec[libraryNameSuffix(debugMode)/][ending/] ${MDE4CPP_HOME}/application/[folderName/])
+[/if]
 [/for]
 [/template]
 
 [template private generateLibraryLinking(aPackage : Package, debugMode : Boolean)]
 TARGET_LINK_LIBRARIES(${PROJECT_NAME}
-[for (packName : String | aPackage.metaModelLibrariesNames())]
+[for (packName : String | aPackage.metaModelLibrariesNames()->reject(name : String | aPackage.getAllSubPackageNames()->includes(name)))]
 	[buildModeCMakeProperty(debugMode)/] ${[packName.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/]}
+	[if (OrderedSet{'ecore', 'uml', 'fUML', 'PSCS', 'ecoreReflection', 'primitivetypesReflection', aPackage.getPackageName()}->excludes(packName))]
+	[buildModeCMakeProperty(debugMode)/] ${[packName.toUpperCase()/]EXEC_[libraryVariableNameSuffix(debugMode)/]}
+	[/if]
 [/for]
 )
 [/template]
 
 [template private generateRelatedModelNameList(aPackage : Package) post (trim())]
-[for (packName : String | aPackage.metaModelLibrariesNames()) separator (', ') ? (not(packName = aPackage.name))]
+[for (packName : String | aPackage.metaModelLibrariesNames()) separator (', ') ? (not(packName = aPackage.getPackageName()))]
 '[packName/]'[/for]
 [/template]
+
+[query private libraryVariableNameSuffix(debugMode : Boolean) : String = if (debugMode) then 'DEBUG' else 'RELEASE' endif/]
+[query private libraryNameSuffix(debugMode : Boolean) : String = if (debugMode) then 'd' else '' endif/]
+[query private buildModeCMakeProperty(debugMode : Boolean) : String = if (debugMode) then 'debug' else 'optimized' endif/]
+
+[query public metaModelIncludes(aPackage : Package) : Set(Package) = OrderedSet{
+																			aPackage.member->filter(Class).attribute.type->reject(oclIsUndefined()).getNearestPackage(),
+																			aPackage.member->filter(Class).ownedOperation.ownedParameter.type->reject(oclIsUndefined()).getNearestPackage(),
+																			aPackage.member->filter(Class).attribute.getAppliedStereotypes().getNearestPackage(), 
+																			aPackage.member->filter(Class).interfaceRealization.supplier.getNearestPackage(), 
+																			aPackage.member->filter(Class).generalization.general.getNearestPackage(), 
+																			aPackage.getCallOperationActions().operation.method->reject(oclIsUndefined()).ownedParameter.type->reject(oclIsUndefined()).getNearestPackage(),
+																			aPackage.packageImport.importedPackage
+																		}->flatten() /]
+[query public isReflectionModel(aPackage : Package) : Boolean = if ((aPackage.name='UML') or (aPackage.name='Ecore')or (aPackage.name='PrimitiveTypes') or (aPackage.eAllContents()->filter(ecore::EAnnotation)->select(source = 'SDK')->notEmpty())) then true else false endif /]
+[query public metaModelIncludesWithoutReflection(aPackage : Package) : Set(Package) = aPackage.metaModelIncludes()->reject((name = aPackage.name) or (name = 'PrimitiveTypes') or (name = 'UML')or (name = 'Ecore'))/]
+[query public metaModelIncludesReflection(aPackage : Package) : Set(Package) = aPackage.metaModelIncludes()->select((not (name = aPackage.name) or (name = 'PrimitiveTypes') or (name = 'UML')or (name = 'Ecore')))/]
+[query public metaModelLibrariesNamesForNonReflectionModels(aPackage : Package) : Set(String) = if(metaModelIncludesWithoutReflection()->size() = 0) then OrderedSet{'ecore', 'uml', 'fUML', 'PSCS', 'ecoreReflection', 'primitivetypesReflection', 'umlReflection', aPackage.name} else OrderedSet{'ecore', 'uml', 'fUML', 'PSCS', 'ecoreReflection', 'primitivetypesReflection', 'umlReflection', aPackage.name}->addAll(metaModelIncludesWithoutReflection()->sortedBy(name).name)->flatten() endif/]
+[query public metaModelLibrariesNamesForReflectionModels(aPackage : Package) : Set(String) = if ((aPackage.name='UML') or (aPackage.eAllContents()->filter(ecore::EAnnotation)->select(source = 'SDK')->notEmpty())) then OrderedSet{'ecore', 'uml', 'ecoreReflection', 'primitivetypesReflection', 'fUML', 'PSCS', 'umlReflection'} else OrderedSet{'ecore', 'uml'} endif/]
+[query public metaModelLibrariesNames(aPackage : Package) : Set(String) = if (aPackage.isReflectionModel()) then metaModelLibrariesNamesForReflectionModels() else metaModelLibrariesNamesForNonReflectionModels() endif/]
+[query public getBinaryTypeName(buildLibrary : Boolean) : String = if (buildLibrary) then 'SharedLibrary' else 'Executable' endif/]
+[query public getBinaryTypeExtension(buildLibrary : Boolean) : String = if (buildLibrary) then 'dll' else 'exe' endif/]
+[query public getBinaryTypeFolder(buildLibrary : Boolean) : String = if (buildLibrary) then 'libs' else 'exe' endif/]
+[query public getBuildTask(buildLibrary : Boolean) : String = if (buildLibrary) then 'NativeLibrarySpec' else 'NativeExecutableSpec' endif/]

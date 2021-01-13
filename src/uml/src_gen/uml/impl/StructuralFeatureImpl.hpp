@@ -20,7 +20,7 @@
 //*********************************
 namespace uml 
 {
-	class StructuralFeatureImpl :virtual public FeatureImpl, virtual public MultiplicityElementImpl, virtual public TypedElementImpl, virtual public StructuralFeature 
+	class StructuralFeatureImpl : virtual public FeatureImpl, virtual public MultiplicityElementImpl, virtual public TypedElementImpl, virtual public StructuralFeature 
 	{
 		public: 
 			StructuralFeatureImpl(const StructuralFeatureImpl & obj);
@@ -30,7 +30,7 @@ namespace uml
 			StructuralFeatureImpl& operator=(StructuralFeatureImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			StructuralFeatureImpl();
 			virtual std::shared_ptr<StructuralFeature> getThisStructuralFeaturePtr() const;
 			virtual void setThisStructuralFeaturePtr(std::weak_ptr<StructuralFeature> thisStructuralFeaturePtr);
@@ -58,15 +58,18 @@ namespace uml
 			// Attributes Getter Setter
 			//*********************************
 			/*!
-			 If isReadOnly is true, the StructuralFeature may not be written to after initialization.
-			<p>From package UML::Classification.</p> */ 
+			If isReadOnly is true, the StructuralFeature may not be written to after initialization.
+			<p>From package UML::Classification.</p>
+			*/
+			 
 			virtual bool getIsReadOnly() const ;
 			
 			/*!
-			 If isReadOnly is true, the StructuralFeature may not be written to after initialization.
-			<p>From package UML::Classification.</p> */ 
+			If isReadOnly is true, the StructuralFeature may not be written to after initialization.
+			<p>From package UML::Classification.</p>
+			*/
+			 
 			virtual void setIsReadOnly (bool _isReadOnly); 
-			
 			
 			
 			//*********************************
@@ -78,11 +81,15 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
@@ -96,7 +103,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

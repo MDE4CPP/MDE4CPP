@@ -13,14 +13,14 @@
 //Model includes
 #include "../EventAccepter.hpp"
 
-#include "fUML/impl/FUMLFactoryImpl.hpp"
+#include "fUML/Semantics/CommonBehavior/impl/CommonBehaviorFactoryImpl.hpp"
 
-#include "ecore/impl/EObjectImpl.hpp"
+#include "ecore/impl/EModelElementImpl.hpp"
 
 //*********************************
 namespace fUML::Semantics::CommonBehavior 
 {
-	class EventAccepterImpl :virtual public ecore::EObjectImpl,
+	class EventAccepterImpl : virtual public ecore::EModelElementImpl,
 virtual public EventAccepter 
 	{
 		public: 
@@ -31,7 +31,7 @@ virtual public EventAccepter
 			EventAccepterImpl& operator=(EventAccepterImpl const&) = delete;
 
 		protected:
-			friend class fUML::FUMLFactoryImpl;
+			friend class fUML::Semantics::CommonBehavior::CommonBehaviorFactoryImpl;
 			EventAccepterImpl();
 			virtual std::shared_ptr<EventAccepter> getThisEventAccepterPtr() const;
 			virtual void setThisEventAccepterPtr(std::weak_ptr<EventAccepter> thisEventAccepterPtr);
@@ -45,12 +45,10 @@ virtual public EventAccepter
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual void accept(std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance>  signalInstance) ;
 			
-			/*!
-			 */ 
+			 
 			virtual bool match(std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance>  signalInstance) ;
 			
 			
@@ -81,7 +79,7 @@ virtual public EventAccepter
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

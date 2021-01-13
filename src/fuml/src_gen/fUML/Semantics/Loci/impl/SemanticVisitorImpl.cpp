@@ -18,25 +18,28 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "fUML/impl/FUMLPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
 
 #include <exception> // used in Persistence
 
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
-#include "fUML/FUMLFactory.hpp"
+//Factories an Package includes
+#include "fUML/Semantics/Loci/impl/LociFactoryImpl.hpp"
+#include "fUML/Semantics/Loci/impl/LociPackageImpl.hpp"
+
+#include "fUML/fUMLFactory.hpp"
+#include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsFactory.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -46,17 +49,7 @@ using namespace fUML::Semantics::Loci;
 // Constructor / Destructor
 //*********************************
 SemanticVisitorImpl::SemanticVisitorImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 SemanticVisitorImpl::~SemanticVisitorImpl()
@@ -65,7 +58,6 @@ SemanticVisitorImpl::~SemanticVisitorImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete SemanticVisitor "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -93,7 +85,7 @@ std::shared_ptr<ecore::EObject>  SemanticVisitorImpl::copy() const
 
 std::shared_ptr<ecore::EClass> SemanticVisitorImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getSemanticVisitor_Class();
+	return fUML::Semantics::Loci::LociPackage::eInstance()->getSemanticVisitor_Class();
 }
 
 //*********************************
@@ -126,6 +118,7 @@ void SemanticVisitorImpl::_endIsolation()
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<SemanticVisitor> SemanticVisitorImpl::getThisSemanticVisitorPtr() const
@@ -178,12 +171,11 @@ void SemanticVisitorImpl::load(std::shared_ptr<persistence::interfaces::XLoadHan
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get FUMLFactory
-	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
+	// get fUMLFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -193,11 +185,11 @@ void SemanticVisitorImpl::loadAttributes(std::shared_ptr<persistence::interfaces
 	ecore::EObjectImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void SemanticVisitorImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+void SemanticVisitorImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<fUML::Semantics::Loci::LociFactory> modelFactory=fUML::Semantics::Loci::LociFactory::eInstance();
 
-
-	ecore::EObjectImpl::loadNode(nodeName, loadHandler, ecore::EcoreFactory::eInstance());
+	//load BasePackage Nodes
 }
 
 void SemanticVisitorImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -218,7 +210,7 @@ void SemanticVisitorImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 {
 	try
 	{
-		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+		std::shared_ptr<fUML::Semantics::Loci::LociPackage> package = fUML::Semantics::Loci::LociPackage::eInstance();
 
 	
 

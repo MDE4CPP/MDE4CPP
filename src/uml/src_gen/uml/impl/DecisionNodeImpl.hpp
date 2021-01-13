@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class DecisionNodeImpl :virtual public ControlNodeImpl, virtual public DecisionNode 
+	class DecisionNodeImpl : virtual public ControlNodeImpl, virtual public DecisionNode 
 	{
 		public: 
 			DecisionNodeImpl(const DecisionNodeImpl & obj);
@@ -28,7 +28,7 @@ namespace uml
 			DecisionNodeImpl& operator=(DecisionNodeImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			DecisionNodeImpl();
 			virtual std::shared_ptr<DecisionNode> getThisDecisionNodePtr() const;
 			virtual void setThisDecisionNodePtr(std::weak_ptr<DecisionNode> thisDecisionNodePtr);
@@ -59,55 +59,71 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 The decisionInputFlow of a DecisionNode must be an incoming ActivityEdge of the DecisionNode.
-			incoming->includes(decisionInputFlow) */ 
+			The decisionInputFlow of a DecisionNode must be an incoming ActivityEdge of the DecisionNode.
+			incoming->includes(decisionInputFlow)
+			*/
+			 
 			virtual bool decision_input_flow_incoming(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
-			 The ActivityEdges incoming to and outgoing from a DecisionNode, other than the decisionInputFlow (if any), must be either all ObjectFlows or all ControlFlows.
+			The ActivityEdges incoming to and outgoing from a DecisionNode, other than the decisionInputFlow (if any), must be either all ObjectFlows or all ControlFlows.
 			let allEdges: Set(ActivityEdge) = incoming->union(outgoing) in
 			let allRelevantEdges: Set(ActivityEdge) = if decisionInputFlow->notEmpty() then allEdges->excluding(decisionInputFlow) else allEdges endif in
 			allRelevantEdges->forAll(oclIsKindOf(ControlFlow)) or allRelevantEdges->forAll(oclIsKindOf(ObjectFlow))
-			 */ 
+			
+			*/
+			 
 			virtual bool edges(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
-			 If the DecisionNode has a decisionInputFlow and an incoming ControlFlow, then any decisionInput Behavior has one in Parameter whose type is the same as or a supertype of the type of object tokens offered on the decisionInputFlow.
+			If the DecisionNode has a decisionInputFlow and an incoming ControlFlow, then any decisionInput Behavior has one in Parameter whose type is the same as or a supertype of the type of object tokens offered on the decisionInputFlow.
 			(decisionInput<>null and decisionInputFlow<>null and incoming->exists(oclIsKindOf(ControlFlow))) implies
-				decisionInput.inputParameters()->size()=1 */ 
+				decisionInput.inputParameters()->size()=1
+			*/
+			 
 			virtual bool incoming_control_one_input_parameter(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
-			 If the DecisionNode has no decisionInputFlow and an incoming ObjectFlow, then any decisionInput Behavior has one in Parameter whose type is the same as or a supertype of the type of object tokens offered on the incoming ObjectFlow.
+			If the DecisionNode has no decisionInputFlow and an incoming ObjectFlow, then any decisionInput Behavior has one in Parameter whose type is the same as or a supertype of the type of object tokens offered on the incoming ObjectFlow.
 			(decisionInput<>null and decisionInputFlow=null and incoming->forAll(oclIsKindOf(ObjectFlow))) implies
-				decisionInput.inputParameters()->size()=1 */ 
+				decisionInput.inputParameters()->size()=1
+			*/
+			 
 			virtual bool incoming_object_one_input_parameter(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
-			 A DecisionNode has one or two incoming ActivityEdges and at least one outgoing ActivityEdge.
-			(incoming->size() = 1 or incoming->size() = 2) and outgoing->size() > 0 */ 
+			A DecisionNode has one or two incoming ActivityEdges and at least one outgoing ActivityEdge.
+			(incoming->size() = 1 or incoming->size() = 2) and outgoing->size() > 0
+			*/
+			 
 			virtual bool incoming_outgoing_edges(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
-			 A decisionInput Behavior has no out parameters, no inout parameters, and one return parameter.
+			A decisionInput Behavior has no out parameters, no inout parameters, and one return parameter.
 			decisionInput<>null implies 
 			  (decisionInput.ownedParameter->forAll(par | 
 			     par.direction <> ParameterDirectionKind::out and 
 			     par.direction <> ParameterDirectionKind::inout ) and
 			   decisionInput.ownedParameter->one(par | 
-			     par.direction <> ParameterDirectionKind::return)) */ 
+			     par.direction <> ParameterDirectionKind::return))
+			*/
+			 
 			virtual bool parameters(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
-			 If the DecisionNode has a decisionInputFlow and an second incoming ObjectFlow, then any decisionInput has two in Parameters, the first of which has a type that is the same as or a supertype of the type of object tokens offered on the non-decisionInputFlow and the second of which has a type that is the same as or a supertype of the type of object tokens offered on the decisionInputFlow.
+			If the DecisionNode has a decisionInputFlow and an second incoming ObjectFlow, then any decisionInput has two in Parameters, the first of which has a type that is the same as or a supertype of the type of object tokens offered on the non-decisionInputFlow and the second of which has a type that is the same as or a supertype of the type of object tokens offered on the decisionInputFlow.
 			(decisionInput<>null and decisionInputFlow<>null and incoming->forAll(oclIsKindOf(ObjectFlow))) implies
-				decisionInput.inputParameters()->size()=2 */ 
+				decisionInput.inputParameters()->size()=2
+			*/
+			 
 			virtual bool two_input_parameters(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
-			 If the DecisionNode has no decisionInputFlow and an incoming ControlFlow, then any decisionInput Behavior has no in parameters.
+			If the DecisionNode has no decisionInputFlow and an incoming ControlFlow, then any decisionInput Behavior has no in parameters.
 			(decisionInput<>null and decisionInputFlow=null and incoming->exists(oclIsKindOf(ControlFlow))) implies
-			   decisionInput.inputParameters()->isEmpty() */ 
+			   decisionInput.inputParameters()->isEmpty()
+			*/
+			 
 			virtual bool zero_input_parameters(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
@@ -121,40 +137,58 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 A Behavior that is executed to provide an input to guard ValueSpecifications on ActivityEdges outgoing from the DecisionNode.
-			<p>From package UML::Activities.</p> */
+			A Behavior that is executed to provide an input to guard ValueSpecifications on ActivityEdges outgoing from the DecisionNode.
+			<p>From package UML::Activities.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::Behavior > getDecisionInput() const ;
 			
 			/*!
-			 A Behavior that is executed to provide an input to guard ValueSpecifications on ActivityEdges outgoing from the DecisionNode.
-			<p>From package UML::Activities.</p> */
-			virtual void setDecisionInput(std::shared_ptr<uml::Behavior> _decisionInput_decisionInput) ;
+			A Behavior that is executed to provide an input to guard ValueSpecifications on ActivityEdges outgoing from the DecisionNode.
+			<p>From package UML::Activities.</p>
+			*/
+			
+			virtual void setDecisionInput(std::shared_ptr<uml::Behavior> _decisionInput) ;
+			
 			/*!
-			 An additional ActivityEdge incoming to the DecisionNode that provides a decision input value for the guards ValueSpecifications on ActivityEdges outgoing from the DecisionNode.
-			<p>From package UML::Activities.</p> */
+			An additional ActivityEdge incoming to the DecisionNode that provides a decision input value for the guards ValueSpecifications on ActivityEdges outgoing from the DecisionNode.
+			<p>From package UML::Activities.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::ObjectFlow > getDecisionInputFlow() const ;
 			
 			/*!
-			 An additional ActivityEdge incoming to the DecisionNode that provides a decision input value for the guards ValueSpecifications on ActivityEdges outgoing from the DecisionNode.
-			<p>From package UML::Activities.</p> */
-			virtual void setDecisionInputFlow(std::shared_ptr<uml::ObjectFlow> _decisionInputFlow_decisionInputFlow) ;
+			An additional ActivityEdge incoming to the DecisionNode that provides a decision input value for the guards ValueSpecifications on ActivityEdges outgoing from the DecisionNode.
+			<p>From package UML::Activities.</p>
+			*/
+			
+			virtual void setDecisionInputFlow(std::shared_ptr<uml::ObjectFlow> _decisionInputFlow) ;
+			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
+			ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::ActivityGroup>> getInGroup() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
+			The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const ; 
 			 
 			//*********************************
@@ -168,7 +202,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

@@ -13,13 +13,13 @@
 //Model includes
 #include "../EnumerationValue.hpp"
 
-#include "fUML/impl/FUMLFactoryImpl.hpp"
+#include "fUML/Semantics/SimpleClassifiers/impl/SimpleClassifiersFactoryImpl.hpp"
 #include "fUML/Semantics/Values/impl/ValueImpl.hpp"
 
 //*********************************
 namespace fUML::Semantics::SimpleClassifiers 
 {
-	class EnumerationValueImpl :virtual public fUML::Semantics::Values::ValueImpl, virtual public EnumerationValue 
+	class EnumerationValueImpl : virtual public fUML::Semantics::Values::ValueImpl, virtual public EnumerationValue 
 	{
 		public: 
 			EnumerationValueImpl(const EnumerationValueImpl & obj);
@@ -29,7 +29,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			EnumerationValueImpl& operator=(EnumerationValueImpl const&) = delete;
 
 		protected:
-			friend class fUML::FUMLFactoryImpl;
+			friend class fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactoryImpl;
 			EnumerationValueImpl();
 			virtual std::shared_ptr<EnumerationValue> getThisEnumerationValuePtr() const;
 			virtual void setThisEnumerationValuePtr(std::weak_ptr<EnumerationValue> thisEnumerationValuePtr);
@@ -43,24 +43,22 @@ namespace fUML::Semantics::SimpleClassifiers
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() ;
+			
+			 
 			virtual bool equals(std::shared_ptr<fUML::Semantics::Values::Value>  otherValue) ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<Bag<uml::Classifier> > getTypes() ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> new_() ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<uml::ValueSpecification> specify() ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::string toString() ;
 			
 			
@@ -73,20 +71,18 @@ namespace fUML::Semantics::SimpleClassifiers
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<uml::EnumerationLiteral > getLiteral() const ;
 			
-			/*!
-			 */
-			virtual void setLiteral(std::shared_ptr<uml::EnumerationLiteral> _literal_literal) ;
-			/*!
-			 */
+			
+			virtual void setLiteral(std::shared_ptr<uml::EnumerationLiteral> _literal) ;
+			
+			
 			virtual std::shared_ptr<uml::Enumeration > getType() const ;
 			
-			/*!
-			 */
-			virtual void setType(std::shared_ptr<uml::Enumeration> _type_type) ;
+			
+			virtual void setType(std::shared_ptr<uml::Enumeration> _type) ;
+			
 							
 			
 			//*********************************
@@ -105,7 +101,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class FeatureImpl :virtual public RedefinableElementImpl, virtual public Feature 
+	class FeatureImpl : virtual public RedefinableElementImpl, virtual public Feature 
 	{
 		public: 
 			FeatureImpl(const FeatureImpl & obj);
@@ -28,7 +28,7 @@ namespace uml
 			FeatureImpl& operator=(FeatureImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			FeatureImpl();
 			virtual std::shared_ptr<Feature> getThisFeaturePtr() const;
 			virtual void setThisFeaturePtr(std::weak_ptr<Feature> thisFeaturePtr);
@@ -56,20 +56,24 @@ namespace uml
 			// Attributes Getter Setter
 			//*********************************
 			/*!
-			 Specifies whether this Feature characterizes individual instances classified by the Classifier (false) or the Classifier itself (true).
-			<p>From package UML::Classification.</p> */ 
+			Specifies whether this Feature characterizes individual instances classified by the Classifier (false) or the Classifier itself (true).
+			<p>From package UML::Classification.</p>
+			*/
+			 
 			virtual bool getIsStatic() const ;
 			
 			/*!
-			 Specifies whether this Feature characterizes individual instances classified by the Classifier (false) or the Classifier itself (true).
-			<p>From package UML::Classification.</p> */ 
+			Specifies whether this Feature characterizes individual instances classified by the Classifier (false) or the Classifier itself (true).
+			<p>From package UML::Classification.</p>
+			*/
+			 
 			virtual void setIsStatic (bool _isStatic); 
-			
 			
 			
 			//*********************************
 			// Reference
 			//*********************************
+			
 			
 							
 			
@@ -77,14 +81,20 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Classifiers that have this Feature as a feature.
-			<p>From package UML::Classification.</p> */
+			The Classifiers that have this Feature as a feature.
+			<p>From package UML::Classification.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Classifier>> getFeaturingClassifier() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
@@ -98,7 +108,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

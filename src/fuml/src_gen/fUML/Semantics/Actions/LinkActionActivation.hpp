@@ -13,7 +13,7 @@
 
 
 // forward declarations
-template<class T> class Bag;
+template<class T> class Bag; 
 
 
 
@@ -33,10 +33,15 @@ namespace persistence
 
 namespace fUML
 {
-	class FUMLFactory;
+	class fUMLFactory;
 }
 
 //Forward Declaration for used types
+namespace uml 
+{
+	class Action;
+}
+
 namespace fUML::Semantics::Actions 
 {
 	class ActionActivation;
@@ -101,8 +106,7 @@ namespace fUML::Semantics::Activities
 //*********************************
 namespace fUML::Semantics::Actions 
 {
-	/*!
-	 */
+	
 	class LinkActionActivation:virtual public ActionActivation
 	{
 		public:
@@ -122,16 +126,13 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual bool endMatchesEndData(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link>  link,std::shared_ptr<uml::LinkEndData>  endData) = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<uml::Association> getAssociation() = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual bool linkMatchesEndData(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link>  link,std::shared_ptr<Bag<uml::LinkEndData> >  endDataList) = 0;
 			
 			
@@ -159,8 +160,7 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> getPinActivation() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

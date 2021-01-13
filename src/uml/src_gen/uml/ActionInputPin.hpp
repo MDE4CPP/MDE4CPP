@@ -36,7 +36,7 @@ namespace persistence
 
 namespace uml
 {
-	class UmlFactory;
+	class umlFactory;
 }
 
 //Forward Declaration for used types
@@ -137,6 +137,11 @@ namespace uml
 
 namespace uml 
 {
+	class RemoveStructuralFeatureValueAction;
+}
+
+namespace uml 
+{
 	class State;
 }
 
@@ -183,8 +188,10 @@ namespace uml
 namespace uml 
 {
 	/*!
-	 An ActionInputPin is a kind of InputPin that executes an Action to determine the values to input to another Action.
-	<p>From package UML::Actions.</p> */
+	An ActionInputPin is a kind of InputPin that executes an Action to determine the values to input to another Action.
+	<p>From package UML::Actions.</p>
+	*/
+	
 	class ActionInputPin:virtual public InputPin
 	{
 		public:
@@ -205,20 +212,26 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 The fromAction of an ActionInputPin must only have ActionInputPins as InputPins.
-			fromAction.input->forAll(oclIsKindOf(ActionInputPin)) */ 
+			The fromAction of an ActionInputPin must only have ActionInputPins as InputPins.
+			fromAction.input->forAll(oclIsKindOf(ActionInputPin))
+			*/
+			 
 			virtual bool input_pin(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
-			 The fromAction of an ActionInputPin cannot have ActivityEdges coming into or out of it or its Pins.
+			The fromAction of an ActionInputPin cannot have ActivityEdges coming into or out of it or its Pins.
 			fromAction.incoming->union(outgoing)->isEmpty() and
 			fromAction.input.incoming->isEmpty() and
-			fromAction.output.outgoing->isEmpty() */ 
+			fromAction.output.outgoing->isEmpty()
+			*/
+			 
 			virtual bool no_control_or_object_flow(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
-			 The fromAction of an ActionInputPin must have exactly one OutputPin.
-			fromAction.output->size() = 1 */ 
+			The fromAction of an ActionInputPin must have exactly one OutputPin.
+			fromAction.output->size() = 1
+			*/
+			 
 			virtual bool one_output_pin(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
@@ -230,14 +243,19 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 The Action used to provide the values of the ActionInputPin.
-			<p>From package UML::Actions.</p> */
+			The Action used to provide the values of the ActionInputPin.
+			<p>From package UML::Actions.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::Action > getFromAction() const = 0;
 			
 			/*!
-			 The Action used to provide the values of the ActionInputPin.
-			<p>From package UML::Actions.</p> */
-			virtual void setFromAction(std::shared_ptr<uml::Action> _fromAction_fromAction) = 0;
+			The Action used to provide the values of the ActionInputPin.
+			<p>From package UML::Actions.</p>
+			*/
+			
+			virtual void setFromAction(std::shared_ptr<uml::Action> _fromAction) = 0;
+			
 			
 
 		protected:
@@ -250,27 +268,36 @@ namespace uml
 			// Reference Members
 			//*********************************
 			/*!
-			 The Action used to provide the values of the ActionInputPin.
-			<p>From package UML::Actions.</p> */
-			std::shared_ptr<uml::Action > m_fromAction;
+			The Action used to provide the values of the ActionInputPin.
+			<p>From package UML::Actions.</p>
+			*/
 			
+			std::shared_ptr<uml::Action > m_fromAction;
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
+			ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::ActivityGroup>> getInGroup() const = 0;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
+			The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

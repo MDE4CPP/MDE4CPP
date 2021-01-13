@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -25,21 +24,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -81,10 +71,11 @@
 
 #include "uml/ValueSpecification.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -94,17 +85,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 CentralBufferNodeImpl::CentralBufferNodeImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 CentralBufferNodeImpl::~CentralBufferNodeImpl()
@@ -114,53 +95,36 @@ CentralBufferNodeImpl::~CentralBufferNodeImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+CentralBufferNodeImpl::CentralBufferNodeImpl(std::weak_ptr<uml::Activity > par_activity)
+:CentralBufferNodeImpl()
+{
+	m_activity = par_activity;
+	m_owner = par_activity;
+}
 
 //Additional constructor for the containments back reference
-			CentralBufferNodeImpl::CentralBufferNodeImpl(std::weak_ptr<uml::Activity > par_activity)
-			:CentralBufferNodeImpl()
-			{
-			    m_activity = par_activity;
-				m_owner = par_activity;
-			}
-
-
-
-
+CentralBufferNodeImpl::CentralBufferNodeImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
+:CentralBufferNodeImpl()
+{
+	m_inStructuredNode = par_inStructuredNode;
+	m_owner = par_inStructuredNode;
+}
 
 //Additional constructor for the containments back reference
-			CentralBufferNodeImpl::CentralBufferNodeImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
-			:CentralBufferNodeImpl()
-			{
-			    m_inStructuredNode = par_inStructuredNode;
-				m_owner = par_inStructuredNode;
-			}
-
-
-
-
+CentralBufferNodeImpl::CentralBufferNodeImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:CentralBufferNodeImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			CentralBufferNodeImpl::CentralBufferNodeImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:CentralBufferNodeImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
-
-
-
-
-//Additional constructor for the containments back reference
-			CentralBufferNodeImpl::CentralBufferNodeImpl(std::weak_ptr<uml::Element > par_owner)
-			:CentralBufferNodeImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-
-
+CentralBufferNodeImpl::CentralBufferNodeImpl(std::weak_ptr<uml::Element > par_owner)
+:CentralBufferNodeImpl()
+{
+	m_owner = par_owner;
+}
 
 
 CentralBufferNodeImpl::CentralBufferNodeImpl(const CentralBufferNodeImpl & obj):CentralBufferNodeImpl()
@@ -272,7 +236,7 @@ std::shared_ptr<ecore::EObject>  CentralBufferNodeImpl::copy() const
 
 std::shared_ptr<ecore::EClass> CentralBufferNodeImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getCentralBufferNode_Class();
+	return uml::umlPackage::eInstance()->getCentralBufferNode_Class();
 }
 
 //*********************************
@@ -292,20 +256,55 @@ std::shared_ptr<ecore::EClass> CentralBufferNodeImpl::eStaticClass() const
 //*********************************
 std::shared_ptr<Union<uml::ActivityGroup>> CentralBufferNodeImpl::getInGroup() const
 {
+	if(m_inGroup == nullptr)
+	{
+		/*Union*/
+		m_inGroup.reset(new Union<uml::ActivityGroup>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_inGroup - Union<uml::ActivityGroup>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_inGroup;
 }
+
 std::shared_ptr<Union<uml::Element>> CentralBufferNodeImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > CentralBufferNodeImpl::getOwner() const
 {
 	return m_owner;
 }
+
 std::shared_ptr<Union<uml::RedefinableElement>> CentralBufferNodeImpl::getRedefinedElement() const
 {
+	if(m_redefinedElement == nullptr)
+	{
+		/*Union*/
+		m_redefinedElement.reset(new Union<uml::RedefinableElement>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_redefinedElement - Union<uml::RedefinableElement>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_redefinedElement;
 }
+
+
 
 
 std::shared_ptr<CentralBufferNode> CentralBufferNodeImpl::getThisCentralBufferNodePtr() const
@@ -378,12 +377,11 @@ void CentralBufferNodeImpl::load(std::shared_ptr<persistence::interfaces::XLoadH
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -393,11 +391,12 @@ void CentralBufferNodeImpl::loadAttributes(std::shared_ptr<persistence::interfac
 	ObjectNodeImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void CentralBufferNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void CentralBufferNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
-
-	ObjectNodeImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	ObjectNodeImpl::loadNode(nodeName, loadHandler);
 }
 
 void CentralBufferNodeImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -414,7 +413,6 @@ void CentralBufferNodeImpl::save(std::shared_ptr<persistence::interfaces::XSaveH
 	ActivityNodeImpl::saveContent(saveHandler);
 	TypedElementImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);
@@ -436,7 +434,7 @@ void CentralBufferNodeImpl::saveContent(std::shared_ptr<persistence::interfaces:
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 

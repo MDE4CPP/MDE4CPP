@@ -11,12 +11,28 @@
 
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
+#include "StandardProfile/StandardProfileFactory.hpp"
 #include "StandardProfile/impl/StandardProfilePackageImpl.hpp"
 #include "uml/Stereotype.hpp"
+
+//Types included from attributes, operation parameters, imports and composite owner classes
 #include "uml/Artifact.hpp"
 
+//Packges and Factories included from types of attributes, operation parameters, imports and composite owner classes
+#include "uml/umlFactory.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
+//Packages of included Enumerations
 
+//Includes of PluginFramework (if required)
+
+//Includes of OpaqueBevaiors (if required)
+
+//Includes from InstanceValues (if required)
+
+//Includes from Ports typed by interfaces (if required)
+
+//Includes from roles of ConnectorEnds (if required)
 
 using namespace StandardProfile;
 
@@ -25,6 +41,12 @@ using namespace StandardProfile;
 //*********************************
 LibraryImpl::LibraryImpl()
 {
+	#ifdef ADD_COUNT
+		ADD_COUNT("LibraryImpl()");
+	#endif
+
+	DEBUG_MESSAGE(std::cout<<"Library is created..."<<std::endl;)
+
 	//***********************************
 	// init Get Set
 	//getter init
@@ -34,16 +56,16 @@ LibraryImpl::LibraryImpl()
 	
 	m_unsetterMap.insert(std::pair<std::string,std::function<void()>>("StandardProfile::Library::base_Artifact",[this](){m_base_Artifact = std::shared_ptr<uml::Artifact>(nullptr);}));
 	 
-
-	// init properties without default
-	
-
-	
 }
 
 
 LibraryImpl::~LibraryImpl()
 {
+	#ifdef SUB_COUNT
+		SUB_COUNT("LibraryImpl()");
+	#endif
+
+	DEBUG_MESSAGE(std::cout<<"Library is destroyed..."<<std::endl;)
 }
 
 LibraryImpl::LibraryImpl(const LibraryImpl & obj):LibraryImpl()
@@ -52,6 +74,7 @@ LibraryImpl::LibraryImpl(const LibraryImpl & obj):LibraryImpl()
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Library "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	instantiate();
 }
 
 std::shared_ptr<ecore::EObject>  LibraryImpl::copy() const
@@ -65,6 +88,22 @@ std::shared_ptr<ecore::EObject>  LibraryImpl::copy() const
 std::shared_ptr<uml::Class> LibraryImpl::getMetaClass()
 {
 	return StandardProfilePackageImpl::eInstance()->get_StandardProfile_Library();
+}
+
+void LibraryImpl::instantiate()
+{   
+	FileImpl::instantiate();
+	
+}
+
+void LibraryImpl::destroy()
+{	
+
+	//Erase properties
+	//deleting property base_Artifact
+	m_base_Artifact.reset();
+	
+	//Erase back reference to owner
 }
 
 //*********************************

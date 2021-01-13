@@ -35,7 +35,7 @@ namespace persistence
 
 namespace uml
 {
-	class UmlFactory;
+	class umlFactory;
 }
 
 //Forward Declaration for used types
@@ -95,8 +95,10 @@ namespace uml
 namespace uml 
 {
 	/*!
-	 A TimeConstraint is a Constraint that refers to a TimeInterval.
-	<p>From package UML::Values.</p> */
+	A TimeConstraint is a Constraint that refers to a TimeInterval.
+	<p>From package UML::Values.</p>
+	*/
+	
 	class TimeConstraint:virtual public IntervalConstraint
 	{
 		public:
@@ -117,8 +119,10 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 A TimeConstraint has one constrainedElement.
-			constrainedElement->size() = 1 */ 
+			A TimeConstraint has one constrainedElement.
+			constrainedElement->size() = 1
+			*/
+			 
 			virtual bool has_one_constrainedElement(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
@@ -126,15 +130,18 @@ namespace uml
 			// Attributes Getter Setter
 			//*********************************
 			/*!
-			 The value of firstEvent is related to the constrainedElement. If firstEvent is true, then the corresponding observation event is the first time instant the execution enters the constrainedElement. If firstEvent is false, then the corresponding observation event is the last time instant the execution is within the constrainedElement.
-			<p>From package UML::Values.</p> */ 
+			The value of firstEvent is related to the constrainedElement. If firstEvent is true, then the corresponding observation event is the first time instant the execution enters the constrainedElement. If firstEvent is false, then the corresponding observation event is the last time instant the execution is within the constrainedElement.
+			<p>From package UML::Values.</p>
+			*/
+			 
 			virtual bool getFirstEvent() const = 0;
 			
 			/*!
-			 The value of firstEvent is related to the constrainedElement. If firstEvent is true, then the corresponding observation event is the first time instant the execution enters the constrainedElement. If firstEvent is false, then the corresponding observation event is the last time instant the execution is within the constrainedElement.
-			<p>From package UML::Values.</p> */ 
+			The value of firstEvent is related to the constrainedElement. If firstEvent is true, then the corresponding observation event is the first time instant the execution enters the constrainedElement. If firstEvent is false, then the corresponding observation event is the last time instant the execution is within the constrainedElement.
+			<p>From package UML::Values.</p>
+			*/
+			 
 			virtual void setFirstEvent (bool _firstEvent)= 0; 
-			
 			
 			//*********************************
 			// Reference
@@ -146,8 +153,10 @@ namespace uml
 			// Attribute Members
 			//*********************************
 			/*!
-			 The value of firstEvent is related to the constrainedElement. If firstEvent is true, then the corresponding observation event is the first time instant the execution enters the constrainedElement. If firstEvent is false, then the corresponding observation event is the last time instant the execution is within the constrainedElement.
-			<p>From package UML::Values.</p> */ 
+			The value of firstEvent is related to the constrainedElement. If firstEvent is true, then the corresponding observation event is the first time instant the execution enters the constrainedElement. If firstEvent is false, then the corresponding observation event is the last time instant the execution is within the constrainedElement.
+			<p>From package UML::Values.</p>
+			*/
+			 
 			bool m_firstEvent = true;
 			
 			
@@ -161,14 +170,20 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

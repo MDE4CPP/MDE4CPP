@@ -33,7 +33,7 @@ namespace persistence
 
 namespace uml
 {
-	class UmlFactory;
+	class umlFactory;
 }
 
 //Forward Declaration for used types
@@ -103,8 +103,10 @@ namespace uml
 namespace uml 
 {
 	/*!
-	 A substitution is a relationship between two classifiers signifying that the substituting classifier complies with the contract specified by the contract classifier. This implies that instances of the substituting classifier are runtime substitutable where instances of the contract classifier are expected.
-	<p>From package UML::Classification.</p> */
+	A substitution is a relationship between two classifiers signifying that the substituting classifier complies with the contract specified by the contract classifier. This implies that instances of the substituting classifier are runtime substitutable where instances of the contract classifier are expected.
+	<p>From package UML::Classification.</p>
+	*/
+	
 	class Substitution:virtual public Realization
 	{
 		public:
@@ -153,23 +155,33 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 The contract with which the substituting classifier complies.
-			<p>From package UML::Classification.</p> */
+			The contract with which the substituting classifier complies.
+			<p>From package UML::Classification.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::Classifier > getContract() const = 0;
 			
 			/*!
-			 The contract with which the substituting classifier complies.
-			<p>From package UML::Classification.</p> */
-			virtual void setContract(std::shared_ptr<uml::Classifier> _contract_contract) = 0;
+			The contract with which the substituting classifier complies.
+			<p>From package UML::Classification.</p>
+			*/
+			
+			virtual void setContract(std::shared_ptr<uml::Classifier> _contract) = 0;
+			
 			/*!
-			 Instances of the substituting classifier are runtime substitutable where instances of the contract classifier are expected.
-			<p>From package UML::Classification.</p> */
+			Instances of the substituting classifier are runtime substitutable where instances of the contract classifier are expected.
+			<p>From package UML::Classification.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Classifier > getSubstitutingClassifier() const = 0;
 			
 			/*!
-			 Instances of the substituting classifier are runtime substitutable where instances of the contract classifier are expected.
-			<p>From package UML::Classification.</p> */
-			virtual void setSubstitutingClassifier(std::shared_ptr<uml::Classifier> _substitutingClassifier_substitutingClassifier) = 0;
+			Instances of the substituting classifier are runtime substitutable where instances of the contract classifier are expected.
+			<p>From package UML::Classification.</p>
+			*/
+			
+			virtual void setSubstitutingClassifier(std::shared_ptr<uml::Classifier> _substitutingClassifier) = 0;
+			
 			
 
 		protected:
@@ -182,37 +194,51 @@ namespace uml
 			// Reference Members
 			//*********************************
 			/*!
-			 The contract with which the substituting classifier complies.
-			<p>From package UML::Classification.</p> */
-			std::shared_ptr<uml::Classifier > m_contract;
-			/*!
-			 Instances of the substituting classifier are runtime substitutable where instances of the contract classifier are expected.
-			<p>From package UML::Classification.</p> */
-			std::weak_ptr<uml::Classifier > m_substitutingClassifier;
+			The contract with which the substituting classifier complies.
+			<p>From package UML::Classification.</p>
+			*/
 			
+			std::shared_ptr<uml::Classifier > m_contract;/*!
+			Instances of the substituting classifier are runtime substitutable where instances of the contract classifier are expected.
+			<p>From package UML::Classification.</p>
+			*/
+			
+			std::weak_ptr<uml::Classifier > m_substitutingClassifier;
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
-			 Specifies the elements related by the Relationship.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the elements related by the Relationship.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getRelatedElement() const = 0;/*!
-			 Specifies the source Element(s) of the DirectedRelationship.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the source Element(s) of the DirectedRelationship.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> getSource() const = 0;/*!
-			 Specifies the target Element(s) of the DirectedRelationship.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the target Element(s) of the DirectedRelationship.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> getTarget() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

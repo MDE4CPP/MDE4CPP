@@ -17,20 +17,21 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "fUML/impl/FUMLPackageImpl.hpp"
+
+//Includes from codegen annotation
 #include "abstractDataTypes/Subset.hpp"
 #include "fUML/Semantics/Loci/Executor.hpp"
 #include "fUML/Semantics/Loci/ExecutionFactory.hpp"
-#include "fUML/FUMLFactory.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
 #include "fUML/Semantics/Activities/ObjectToken.hpp"
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Activities/Token.hpp"
 #include "fUML/Semantics/Values/Value.hpp"
 #include "uml/ActivityEdge.hpp"
@@ -39,16 +40,12 @@
 #include "uml/ObjectFlow.hpp"
 #include "uml/Parameter.hpp"
 #include "uml/ParameterDirectionKind.hpp"
-#include "uml/UmlFactory.hpp"
+#include "uml/umlFactory.hpp"
 #include "uml/ValueSpecification.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -60,6 +57,8 @@
 
 #include "fUML/Semantics/Activities/ControlNodeActivation.hpp"
 
+#include "uml/DecisionNode.hpp"
+
 #include "fUML/Semantics/CommonBehavior/Execution.hpp"
 
 #include "fUML/Semantics/Activities/Token.hpp"
@@ -68,10 +67,15 @@
 
 #include "uml/ValueSpecification.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
-#include "fUML/FUMLFactory.hpp"
+//Factories an Package includes
+#include "fUML/Semantics/Activities/impl/ActivitiesFactoryImpl.hpp"
+#include "fUML/Semantics/Activities/impl/ActivitiesPackageImpl.hpp"
+
+#include "fUML/fUMLFactory.hpp"
+#include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsFactory.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -81,19 +85,7 @@ using namespace fUML::Semantics::Activities;
 // Constructor / Destructor
 //*********************************
 DecisionNodeActivationImpl::DecisionNodeActivationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	//Init references
-	
+{	
 }
 
 DecisionNodeActivationImpl::~DecisionNodeActivationImpl()
@@ -103,17 +95,12 @@ DecisionNodeActivationImpl::~DecisionNodeActivationImpl()
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			DecisionNodeActivationImpl::DecisionNodeActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
-			:DecisionNodeActivationImpl()
-			{
-			    m_group = par_group;
-			}
-
-
-
-
+DecisionNodeActivationImpl::DecisionNodeActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
+:DecisionNodeActivationImpl()
+{
+	m_group = par_group;
+}
 
 
 DecisionNodeActivationImpl::DecisionNodeActivationImpl(const DecisionNodeActivationImpl & obj):DecisionNodeActivationImpl()
@@ -126,6 +113,8 @@ DecisionNodeActivationImpl::DecisionNodeActivationImpl(const DecisionNodeActivat
 
 	//copy references with no containment (soft copy)
 	
+	m_decisionNode  = obj.getDecisionNode();
+
 	m_group  = obj.getGroup();
 
 	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> _incomingEdges = obj.getIncomingEdges();
@@ -167,7 +156,7 @@ std::shared_ptr<ecore::EObject>  DecisionNodeActivationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> DecisionNodeActivationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getDecisionNodeActivation_Class();
+	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getDecisionNodeActivation_Class();
 }
 
 //*********************************
@@ -181,7 +170,7 @@ std::shared_ptr<fUML::Semantics::Values::Value> DecisionNodeActivationImpl::exec
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		std::shared_ptr<uml::DecisionNode> decisionNode = std::dynamic_pointer_cast<uml::DecisionNode>(this->getNode());
+		std::shared_ptr<uml::DecisionNode> decisionNode = this->getDecisionNode();
 	std::shared_ptr<uml::Behavior> decisionInputBehavior = nullptr;
 
     if(decisionNode != nullptr)
@@ -215,7 +204,7 @@ std::shared_ptr<fUML::Semantics::Values::Value> DecisionNodeActivationImpl::exec
             if (parameter->getDirection() == uml::ParameterDirectionKind::IN
                     || parameter->getDirection() == uml::ParameterDirectionKind::INOUT)
             {
-            	std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> inputParameterValue(fUML::FUMLFactory::eInstance()->createParameterValue());
+            	std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> inputParameterValue(fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance()->createParameterValue());
                 inputParameterValue->setParameter(parameter);
 
                 j = j + 1;
@@ -287,7 +276,7 @@ std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> DecisionNodeA
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		std::shared_ptr<uml::ActivityEdge>  decisionInputFlow = (std::dynamic_pointer_cast<uml::DecisionNode> (this->getNode()))->getDecisionInputFlow();
+		std::shared_ptr<uml::ActivityEdge>  decisionInputFlow = this->getDecisionNode()->getDecisionInputFlow();
 
 	std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> edgeInstance = nullptr;
     if (decisionInputFlow != nullptr) 
@@ -367,7 +356,7 @@ bool DecisionNodeActivationImpl::hasObjectFlowInput()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		std::shared_ptr<uml::ActivityEdge> decisionInputFlow = (std::dynamic_pointer_cast<uml::DecisionNode> (this->getNode()))->getDecisionInputFlow();
+		std::shared_ptr<uml::ActivityEdge> decisionInputFlow = this->getDecisionNode()->getDecisionInputFlow();
 
     bool isObjectFlow = false;
     unsigned int i = 0;
@@ -427,7 +416,7 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > DecisionNodeActivation
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<uml::ObjectFlow> decisionInputFlow = (std::dynamic_pointer_cast<uml::DecisionNode> (this->getNode()))->getDecisionInputFlow();
+	std::shared_ptr<uml::ObjectFlow> decisionInputFlow = this->getDecisionNode()->getDecisionInputFlow();
 
 	std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > allTokens(new Bag<fUML::Semantics::Activities::Token>());
 	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance> > incomingEdges = this->getIncomingEdges();
@@ -477,19 +466,60 @@ bool DecisionNodeActivationImpl::test(std::shared_ptr<uml::ValueSpecification>  
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference decisionInputExecution
+*/
 std::shared_ptr<fUML::Semantics::CommonBehavior::Execution > DecisionNodeActivationImpl::getDecisionInputExecution() const
 {
 //assert(m_decisionInputExecution);
     return m_decisionInputExecution;
 }
+
 void DecisionNodeActivationImpl::setDecisionInputExecution(std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> _decisionInputExecution)
 {
     m_decisionInputExecution = _decisionInputExecution;
 }
 
+
+
+/*
+Getter & Setter for reference decisionNode
+*/
+std::shared_ptr<uml::DecisionNode > DecisionNodeActivationImpl::getDecisionNode() const
+{
+//assert(m_decisionNode);
+    return m_decisionNode;
+}
+
+void DecisionNodeActivationImpl::setDecisionNode(std::shared_ptr<uml::DecisionNode> _decisionNode)
+{
+    m_decisionNode = _decisionNode;
+	//additional setter call for redefined reference ActivityNodeActivation::node
+	fUML::Semantics::Activities::ActivityNodeActivationImpl::setNode(_decisionNode);
+}
+
+/*Additional Setter for redefined reference 'ActivityNodeActivation::node'*/
+void DecisionNodeActivationImpl::setNode(std::shared_ptr<uml::ActivityNode> _node)
+{
+	std::shared_ptr<uml::DecisionNode> _decisionNode = std::dynamic_pointer_cast<uml::DecisionNode>(_node);
+	if(_decisionNode)
+	{
+		m_decisionNode = _decisionNode;
+
+		//additional setter call for redefined reference ActivityNodeActivation::node
+		fUML::Semantics::Activities::ActivityNodeActivationImpl::setNode(_node);
+	}
+	else
+	{
+		std::cerr<<"[DecisionNodeActivation::setNode] : Could not set node because provided node was not of type 'uml::DecisionNode'"<<std::endl;
+	}
+}
+
+
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<DecisionNodeActivation> DecisionNodeActivationImpl::getThisDecisionNodeActivationPtr() const
@@ -517,8 +547,10 @@ Any DecisionNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType)
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::DECISIONNODEACTIVATION_ATTRIBUTE_DECISIONINPUTEXECUTION:
+		case fUML::Semantics::Activities::ActivitiesPackage::DECISIONNODEACTIVATION_ATTRIBUTE_DECISIONINPUTEXECUTION:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDecisionInputExecution())); //376
+		case fUML::Semantics::Activities::ActivitiesPackage::DECISIONNODEACTIVATION_ATTRIBUTE_DECISIONNODE:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDecisionNode())); //377
 	}
 	return ControlNodeActivationImpl::eGet(featureID, resolve, coreType);
 }
@@ -526,8 +558,10 @@ bool DecisionNodeActivationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::DECISIONNODEACTIVATION_ATTRIBUTE_DECISIONINPUTEXECUTION:
+		case fUML::Semantics::Activities::ActivitiesPackage::DECISIONNODEACTIVATION_ATTRIBUTE_DECISIONINPUTEXECUTION:
 			return getDecisionInputExecution() != nullptr; //376
+		case fUML::Semantics::Activities::ActivitiesPackage::DECISIONNODEACTIVATION_ATTRIBUTE_DECISIONNODE:
+			return getDecisionNode() != nullptr; //377
 	}
 	return ControlNodeActivationImpl::internalEIsSet(featureID);
 }
@@ -535,12 +569,20 @@ bool DecisionNodeActivationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::DECISIONNODEACTIVATION_ATTRIBUTE_DECISIONINPUTEXECUTION:
+		case fUML::Semantics::Activities::ActivitiesPackage::DECISIONNODEACTIVATION_ATTRIBUTE_DECISIONINPUTEXECUTION:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> _decisionInputExecution = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::Execution>(_temp);
 			setDecisionInputExecution(_decisionInputExecution); //376
+			return true;
+		}
+		case fUML::Semantics::Activities::ActivitiesPackage::DECISIONNODEACTIVATION_ATTRIBUTE_DECISIONNODE:
+		{
+			// BOOST CAST
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<uml::DecisionNode> _decisionNode = std::dynamic_pointer_cast<uml::DecisionNode>(_temp);
+			setDecisionNode(_decisionNode); //377
 			return true;
 		}
 	}
@@ -559,23 +601,42 @@ void DecisionNodeActivationImpl::load(std::shared_ptr<persistence::interfaces::X
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get FUMLFactory
-	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
+	// get fUMLFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
 void DecisionNodeActivationImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list)
 {
+	try
+	{
+		std::map<std::string, std::string>::const_iterator iter;
+		std::shared_ptr<ecore::EClass> metaClass = this->eClass(); // get MetaClass
+		iter = attr_list.find("decisionNode");
+		if ( iter != attr_list.end() )
+		{
+			// add unresolvedReference to loadHandler's list
+			loadHandler->addUnresolvedReference(iter->second, loadHandler->getCurrentObject(), metaClass->getEStructuralFeature("decisionNode")); // TODO use getEStructuralFeature() with id, for faster access to EStructuralFeature
+		}
+	}
+	catch (std::exception& e)
+	{
+		std::cout << "| ERROR    | " << e.what() << std::endl;
+	}
+	catch (...) 
+	{
+		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
+	}
 
 	ControlNodeActivationImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void DecisionNodeActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+void DecisionNodeActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<fUML::Semantics::Activities::ActivitiesFactory> modelFactory=fUML::Semantics::Activities::ActivitiesFactory::eInstance();
 
 	try
 	{
@@ -604,12 +665,26 @@ void DecisionNodeActivationImpl::loadNode(std::string nodeName, std::shared_ptr<
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
-
-	ControlNodeActivationImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	ControlNodeActivationImpl::loadNode(nodeName, loadHandler);
 }
 
 void DecisionNodeActivationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
+	switch(featureID)
+	{
+		case fUML::Semantics::Activities::ActivitiesPackage::DECISIONNODEACTIVATION_ATTRIBUTE_DECISIONNODE:
+		{
+			if (references.size() == 1)
+			{
+				// Cast object to correct type
+				std::shared_ptr<uml::DecisionNode> _decisionNode = std::dynamic_pointer_cast<uml::DecisionNode>( references.front() );
+				setDecisionNode(_decisionNode);
+			}
+			
+			return;
+		}
+	}
 	ControlNodeActivationImpl::resolveReferences(featureID, references);
 }
 
@@ -633,9 +708,12 @@ void DecisionNodeActivationImpl::saveContent(std::shared_ptr<persistence::interf
 {
 	try
 	{
-		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+		std::shared_ptr<fUML::Semantics::Activities::ActivitiesPackage> package = fUML::Semantics::Activities::ActivitiesPackage::eInstance();
 
 	
+
+		// Add references
+		saveHandler->addReference("decisionNode", this->getDecisionNode());
 
 
 		//
@@ -646,7 +724,7 @@ void DecisionNodeActivationImpl::saveContent(std::shared_ptr<persistence::interf
 		std::shared_ptr<fUML::Semantics::CommonBehavior::Execution > decisionInputExecution = this->getDecisionInputExecution();
 		if (decisionInputExecution != nullptr)
 		{
-			saveHandler->addReference(decisionInputExecution, "decisionInputExecution", decisionInputExecution->eClass() != package->fUML::FUMLPackage::eInstance()->getExecution_Class());
+			saveHandler->addReference(decisionInputExecution, "decisionInputExecution", decisionInputExecution->eClass() != fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getExecution_Class());
 		}
 	}
 	catch (std::exception& e)

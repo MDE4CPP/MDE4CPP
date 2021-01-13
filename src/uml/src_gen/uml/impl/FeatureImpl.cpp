@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -25,17 +24,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -53,10 +47,11 @@
 
 #include "uml/StringExpression.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -66,26 +61,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 FeatureImpl::FeatureImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		/*Union*/
-		m_featuringClassifier.reset(new Union<uml::Classifier>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_featuringClassifier - Union<uml::Classifier>()" << std::endl;
-		#endif
-	
-	
-
-	//Init references
-	
-	
+{	
 }
 
 FeatureImpl::~FeatureImpl()
@@ -95,29 +71,20 @@ FeatureImpl::~FeatureImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+FeatureImpl::FeatureImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:FeatureImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			FeatureImpl::FeatureImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:FeatureImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
-
-
-
-
-//Additional constructor for the containments back reference
-			FeatureImpl::FeatureImpl(std::weak_ptr<uml::Element > par_owner)
-			:FeatureImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-
-
+FeatureImpl::FeatureImpl(std::weak_ptr<uml::Element > par_owner)
+:FeatureImpl()
+{
+	m_owner = par_owner;
+}
 
 
 FeatureImpl::FeatureImpl(const FeatureImpl & obj):FeatureImpl()
@@ -180,21 +147,26 @@ std::shared_ptr<ecore::EObject>  FeatureImpl::copy() const
 
 std::shared_ptr<ecore::EClass> FeatureImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getFeature_Class();
+	return uml::umlPackage::eInstance()->getFeature_Class();
 }
 
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute isStatic
+*/
+bool FeatureImpl::getIsStatic() const 
+{
+	return m_isStatic;
+}
+
 void FeatureImpl::setIsStatic(bool _isStatic)
 {
 	m_isStatic = _isStatic;
 } 
 
-bool FeatureImpl::getIsStatic() const 
-{
-	return m_isStatic;
-}
+
 
 //*********************************
 // Operations
@@ -203,6 +175,12 @@ bool FeatureImpl::getIsStatic() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference featuringClassifier
+*/
+
+
+
 
 
 
@@ -211,16 +189,40 @@ bool FeatureImpl::getIsStatic() const
 //*********************************
 std::shared_ptr<Union<uml::Classifier>> FeatureImpl::getFeaturingClassifier() const
 {
+	if(m_featuringClassifier == nullptr)
+	{
+		/*Union*/
+		m_featuringClassifier.reset(new Union<uml::Classifier>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_featuringClassifier - Union<uml::Classifier>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_featuringClassifier;
 }
+
 std::shared_ptr<Union<uml::Element>> FeatureImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > FeatureImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<Feature> FeatureImpl::getThisFeaturePtr() const
@@ -253,7 +255,7 @@ Any FeatureImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::FEATURE_ATTRIBUTE_FEATURINGCLASSIFIER:
+		case uml::umlPackage::FEATURE_ATTRIBUTE_FEATURINGCLASSIFIER:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Classifier>::iterator iter = m_featuringClassifier->begin();
@@ -263,10 +265,10 @@ Any FeatureImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //10212
+			return eAny(tempList); //10112
 		}
-		case UmlPackage::FEATURE_ATTRIBUTE_ISSTATIC:
-			return eAny(getIsStatic()); //10213
+		case uml::umlPackage::FEATURE_ATTRIBUTE_ISSTATIC:
+			return eAny(getIsStatic()); //10113
 	}
 	return RedefinableElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -274,10 +276,10 @@ bool FeatureImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::FEATURE_ATTRIBUTE_FEATURINGCLASSIFIER:
-			return getFeaturingClassifier() != nullptr; //10212
-		case UmlPackage::FEATURE_ATTRIBUTE_ISSTATIC:
-			return getIsStatic() != false; //10213
+		case uml::umlPackage::FEATURE_ATTRIBUTE_FEATURINGCLASSIFIER:
+			return getFeaturingClassifier() != nullptr; //10112
+		case uml::umlPackage::FEATURE_ATTRIBUTE_ISSTATIC:
+			return getIsStatic() != false; //10113
 	}
 	return RedefinableElementImpl::internalEIsSet(featureID);
 }
@@ -285,11 +287,11 @@ bool FeatureImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::FEATURE_ATTRIBUTE_ISSTATIC:
+		case uml::umlPackage::FEATURE_ATTRIBUTE_ISSTATIC:
 		{
 			// BOOST CAST
 			bool _isStatic = newValue->get<bool>();
-			setIsStatic(_isStatic); //10213
+			setIsStatic(_isStatic); //10113
 			return true;
 		}
 	}
@@ -308,12 +310,11 @@ void FeatureImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> lo
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -344,11 +345,12 @@ void FeatureImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadH
 	RedefinableElementImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void FeatureImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void FeatureImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
-
-	RedefinableElementImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	RedefinableElementImpl::loadNode(nodeName, loadHandler);
 }
 
 void FeatureImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -379,10 +381,9 @@ void FeatureImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
- 
 		// Add attributes
 		if ( this->eIsSet(package->getFeature_Attribute_isStatic()) )
 		{

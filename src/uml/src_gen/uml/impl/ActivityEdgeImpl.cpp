@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -26,21 +25,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -74,10 +64,11 @@
 
 #include "uml/ValueSpecification.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -87,86 +78,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 ActivityEdgeImpl::ActivityEdgeImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	
-
-		/*Union*/
-		m_inGroup.reset(new Union<uml::ActivityGroup>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_inGroup - Union<uml::ActivityGroup>()" << std::endl;
-		#endif
-	
-	
-
-		/*Subset*/
-		m_inPartition.reset(new Subset<uml::ActivityPartition, uml::ActivityGroup >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_inPartition - Subset<uml::ActivityPartition, uml::ActivityGroup >()" << std::endl;
-		#endif
-	
-	
-
-	
-
-	
-
-		/*Subset*/
-		m_redefinedEdge.reset(new Subset<uml::ActivityEdge, uml::RedefinableElement >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_redefinedEdge - Subset<uml::ActivityEdge, uml::RedefinableElement >()" << std::endl;
-		#endif
-	
-	
-
-	
-
-	
-
-	
-
-	//Init references
-	
-
-	
-
-	
-	
-
-		/*Subset*/
-		m_inPartition->initSubset(m_inGroup);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_inPartition - Subset<uml::ActivityPartition, uml::ActivityGroup >(m_inGroup)" << std::endl;
-		#endif
-	
-	
-
-	
-
-	
-
-		/*Subset*/
-		m_redefinedEdge->initSubset(m_redefinedElement);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_redefinedEdge - Subset<uml::ActivityEdge, uml::RedefinableElement >(m_redefinedElement)" << std::endl;
-		#endif
-	
-	
-
-	
-
-	
-
-	
+{	
 }
 
 ActivityEdgeImpl::~ActivityEdgeImpl()
@@ -176,53 +88,36 @@ ActivityEdgeImpl::~ActivityEdgeImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+ActivityEdgeImpl::ActivityEdgeImpl(std::weak_ptr<uml::Activity > par_activity)
+:ActivityEdgeImpl()
+{
+	m_activity = par_activity;
+	m_owner = par_activity;
+}
 
 //Additional constructor for the containments back reference
-			ActivityEdgeImpl::ActivityEdgeImpl(std::weak_ptr<uml::Activity > par_activity)
-			:ActivityEdgeImpl()
-			{
-			    m_activity = par_activity;
-				m_owner = par_activity;
-			}
-
-
-
-
+ActivityEdgeImpl::ActivityEdgeImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
+:ActivityEdgeImpl()
+{
+	m_inStructuredNode = par_inStructuredNode;
+	m_owner = par_inStructuredNode;
+}
 
 //Additional constructor for the containments back reference
-			ActivityEdgeImpl::ActivityEdgeImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
-			:ActivityEdgeImpl()
-			{
-			    m_inStructuredNode = par_inStructuredNode;
-				m_owner = par_inStructuredNode;
-			}
-
-
-
-
+ActivityEdgeImpl::ActivityEdgeImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:ActivityEdgeImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			ActivityEdgeImpl::ActivityEdgeImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:ActivityEdgeImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
-
-
-
-
-//Additional constructor for the containments back reference
-			ActivityEdgeImpl::ActivityEdgeImpl(std::weak_ptr<uml::Element > par_owner)
-			:ActivityEdgeImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-
-
+ActivityEdgeImpl::ActivityEdgeImpl(std::weak_ptr<uml::Element > par_owner)
+:ActivityEdgeImpl()
+{
+	m_owner = par_owner;
+}
 
 
 ActivityEdgeImpl::ActivityEdgeImpl(const ActivityEdgeImpl & obj):ActivityEdgeImpl()
@@ -327,7 +222,7 @@ std::shared_ptr<ecore::EObject>  ActivityEdgeImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ActivityEdgeImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getActivityEdge_Class();
+	return uml::umlPackage::eInstance()->getActivityEdge_Class();
 }
 
 //*********************************
@@ -346,21 +241,31 @@ bool ActivityEdgeImpl::source_and_target(Any diagnostics,std::map <   Any, Any >
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference activity
+*/
 std::weak_ptr<uml::Activity > ActivityEdgeImpl::getActivity() const
 {
 
     return m_activity;
 }
+
 void ActivityEdgeImpl::setActivity(std::shared_ptr<uml::Activity> _activity)
 {
     m_activity = _activity;
 }
 
+
+
+/*
+Getter & Setter for reference guard
+*/
 std::shared_ptr<uml::ValueSpecification > ActivityEdgeImpl::getGuard() const
 {
 
     return m_guard;
 }
+
 void ActivityEdgeImpl::setGuard(std::shared_ptr<uml::ValueSpecification> _guard)
 {
     m_guard = _guard;
@@ -368,90 +273,205 @@ void ActivityEdgeImpl::setGuard(std::shared_ptr<uml::ValueSpecification> _guard)
 
 
 
+/*
+Getter & Setter for reference inGroup
+*/
 
+
+
+
+
+
+/*
+Getter & Setter for reference inPartition
+*/
 std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup>> ActivityEdgeImpl::getInPartition() const
 {
+	if(m_inPartition == nullptr)
+	{
+		/*Subset*/
+		m_inPartition.reset(new Subset<uml::ActivityPartition, uml::ActivityGroup >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_inPartition - Subset<uml::ActivityPartition, uml::ActivityGroup >()" << std::endl;
+		#endif
+		
+		/*Subset*/
+		m_inPartition->initSubset(getInGroup());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_inPartition - Subset<uml::ActivityPartition, uml::ActivityGroup >(getInGroup())" << std::endl;
+		#endif
+		
+	}
 
     return m_inPartition;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference inStructuredNode
+*/
 std::weak_ptr<uml::StructuredActivityNode > ActivityEdgeImpl::getInStructuredNode() const
 {
 
     return m_inStructuredNode;
 }
+
 void ActivityEdgeImpl::setInStructuredNode(std::shared_ptr<uml::StructuredActivityNode> _inStructuredNode)
 {
     m_inStructuredNode = _inStructuredNode;
 }
 
+
+
+/*
+Getter & Setter for reference interrupts
+*/
 std::shared_ptr<uml::InterruptibleActivityRegion > ActivityEdgeImpl::getInterrupts() const
 {
 
     return m_interrupts;
 }
+
 void ActivityEdgeImpl::setInterrupts(std::shared_ptr<uml::InterruptibleActivityRegion> _interrupts)
 {
     m_interrupts = _interrupts;
 }
 
+
+
+/*
+Getter & Setter for reference redefinedEdge
+*/
 std::shared_ptr<Subset<uml::ActivityEdge, uml::RedefinableElement>> ActivityEdgeImpl::getRedefinedEdge() const
 {
+	if(m_redefinedEdge == nullptr)
+	{
+		/*Subset*/
+		m_redefinedEdge.reset(new Subset<uml::ActivityEdge, uml::RedefinableElement >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_redefinedEdge - Subset<uml::ActivityEdge, uml::RedefinableElement >()" << std::endl;
+		#endif
+		
+		/*Subset*/
+		m_redefinedEdge->initSubset(getRedefinedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_redefinedEdge - Subset<uml::ActivityEdge, uml::RedefinableElement >(getRedefinedElement())" << std::endl;
+		#endif
+		
+	}
 
     return m_redefinedEdge;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference source
+*/
 std::shared_ptr<uml::ActivityNode > ActivityEdgeImpl::getSource() const
 {
 //assert(m_source);
     return m_source;
 }
+
 void ActivityEdgeImpl::setSource(std::shared_ptr<uml::ActivityNode> _source)
 {
     m_source = _source;
 }
 
+
+
+/*
+Getter & Setter for reference target
+*/
 std::shared_ptr<uml::ActivityNode > ActivityEdgeImpl::getTarget() const
 {
 //assert(m_target);
     return m_target;
 }
+
 void ActivityEdgeImpl::setTarget(std::shared_ptr<uml::ActivityNode> _target)
 {
     m_target = _target;
 }
 
+
+
+/*
+Getter & Setter for reference weight
+*/
 std::shared_ptr<uml::ValueSpecification > ActivityEdgeImpl::getWeight() const
 {
 
     return m_weight;
 }
+
 void ActivityEdgeImpl::setWeight(std::shared_ptr<uml::ValueSpecification> _weight)
 {
     m_weight = _weight;
 }
+
+
 
 //*********************************
 // Union Getter
 //*********************************
 std::shared_ptr<Union<uml::ActivityGroup>> ActivityEdgeImpl::getInGroup() const
 {
+	if(m_inGroup == nullptr)
+	{
+		/*Union*/
+		m_inGroup.reset(new Union<uml::ActivityGroup>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_inGroup - Union<uml::ActivityGroup>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_inGroup;
 }
+
 std::shared_ptr<Union<uml::Element>> ActivityEdgeImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > ActivityEdgeImpl::getOwner() const
 {
 	return m_owner;
 }
+
 std::shared_ptr<Union<uml::RedefinableElement>> ActivityEdgeImpl::getRedefinedElement() const
 {
+	if(m_redefinedElement == nullptr)
+	{
+		/*Union*/
+		m_redefinedElement.reset(new Union<uml::RedefinableElement>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_redefinedElement - Union<uml::RedefinableElement>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_redefinedElement;
 }
+
+
 
 
 std::shared_ptr<ActivityEdge> ActivityEdgeImpl::getThisActivityEdgePtr() const
@@ -494,11 +514,11 @@ Any ActivityEdgeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::ACTIVITYEDGE_ATTRIBUTE_ACTIVITY:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getActivity().lock())); //912
-		case UmlPackage::ACTIVITYEDGE_ATTRIBUTE_GUARD:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getGuard())); //913
-		case UmlPackage::ACTIVITYEDGE_ATTRIBUTE_INGROUP:
+		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_ACTIVITY:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getActivity().lock())); //812
+		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_GUARD:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getGuard())); //813
+		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_INGROUP:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::ActivityGroup>::iterator iter = m_inGroup->begin();
@@ -508,9 +528,9 @@ Any ActivityEdgeImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //921
+			return eAny(tempList); //821
 		}
-		case UmlPackage::ACTIVITYEDGE_ATTRIBUTE_INPARTITION:
+		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_INPARTITION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::ActivityPartition>::iterator iter = m_inPartition->begin();
@@ -520,13 +540,13 @@ Any ActivityEdgeImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //914
+			return eAny(tempList); //814
 		}
-		case UmlPackage::ACTIVITYEDGE_ATTRIBUTE_INSTRUCTUREDNODE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getInStructuredNode().lock())); //916
-		case UmlPackage::ACTIVITYEDGE_ATTRIBUTE_INTERRUPTS:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getInterrupts())); //915
-		case UmlPackage::ACTIVITYEDGE_ATTRIBUTE_REDEFINEDEDGE:
+		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_INSTRUCTUREDNODE:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getInStructuredNode().lock())); //816
+		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_INTERRUPTS:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getInterrupts())); //815
+		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_REDEFINEDEDGE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::ActivityEdge>::iterator iter = m_redefinedEdge->begin();
@@ -536,14 +556,14 @@ Any ActivityEdgeImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //919
+			return eAny(tempList); //819
 		}
-		case UmlPackage::ACTIVITYEDGE_ATTRIBUTE_SOURCE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSource())); //918
-		case UmlPackage::ACTIVITYEDGE_ATTRIBUTE_TARGET:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getTarget())); //917
-		case UmlPackage::ACTIVITYEDGE_ATTRIBUTE_WEIGHT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getWeight())); //920
+		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_SOURCE:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSource())); //818
+		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_TARGET:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getTarget())); //817
+		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_WEIGHT:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getWeight())); //820
 	}
 	return RedefinableElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -551,26 +571,26 @@ bool ActivityEdgeImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::ACTIVITYEDGE_ATTRIBUTE_ACTIVITY:
-			return getActivity().lock() != nullptr; //912
-		case UmlPackage::ACTIVITYEDGE_ATTRIBUTE_GUARD:
-			return getGuard() != nullptr; //913
-		case UmlPackage::ACTIVITYEDGE_ATTRIBUTE_INGROUP:
-			return getInGroup() != nullptr; //921
-		case UmlPackage::ACTIVITYEDGE_ATTRIBUTE_INPARTITION:
-			return getInPartition() != nullptr; //914
-		case UmlPackage::ACTIVITYEDGE_ATTRIBUTE_INSTRUCTUREDNODE:
-			return getInStructuredNode().lock() != nullptr; //916
-		case UmlPackage::ACTIVITYEDGE_ATTRIBUTE_INTERRUPTS:
-			return getInterrupts() != nullptr; //915
-		case UmlPackage::ACTIVITYEDGE_ATTRIBUTE_REDEFINEDEDGE:
-			return getRedefinedEdge() != nullptr; //919
-		case UmlPackage::ACTIVITYEDGE_ATTRIBUTE_SOURCE:
-			return getSource() != nullptr; //918
-		case UmlPackage::ACTIVITYEDGE_ATTRIBUTE_TARGET:
-			return getTarget() != nullptr; //917
-		case UmlPackage::ACTIVITYEDGE_ATTRIBUTE_WEIGHT:
-			return getWeight() != nullptr; //920
+		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_ACTIVITY:
+			return getActivity().lock() != nullptr; //812
+		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_GUARD:
+			return getGuard() != nullptr; //813
+		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_INGROUP:
+			return getInGroup() != nullptr; //821
+		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_INPARTITION:
+			return getInPartition() != nullptr; //814
+		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_INSTRUCTUREDNODE:
+			return getInStructuredNode().lock() != nullptr; //816
+		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_INTERRUPTS:
+			return getInterrupts() != nullptr; //815
+		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_REDEFINEDEDGE:
+			return getRedefinedEdge() != nullptr; //819
+		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_SOURCE:
+			return getSource() != nullptr; //818
+		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_TARGET:
+			return getTarget() != nullptr; //817
+		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_WEIGHT:
+			return getWeight() != nullptr; //820
 	}
 	return RedefinableElementImpl::internalEIsSet(featureID);
 }
@@ -578,23 +598,23 @@ bool ActivityEdgeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::ACTIVITYEDGE_ATTRIBUTE_ACTIVITY:
+		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_ACTIVITY:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Activity> _activity = std::dynamic_pointer_cast<uml::Activity>(_temp);
-			setActivity(_activity); //912
+			setActivity(_activity); //812
 			return true;
 		}
-		case UmlPackage::ACTIVITYEDGE_ATTRIBUTE_GUARD:
+		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_GUARD:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ValueSpecification> _guard = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
-			setGuard(_guard); //913
+			setGuard(_guard); //813
 			return true;
 		}
-		case UmlPackage::ACTIVITYEDGE_ATTRIBUTE_INPARTITION:
+		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_INPARTITION:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -630,23 +650,23 @@ bool ActivityEdgeImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case UmlPackage::ACTIVITYEDGE_ATTRIBUTE_INSTRUCTUREDNODE:
+		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_INSTRUCTUREDNODE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::StructuredActivityNode> _inStructuredNode = std::dynamic_pointer_cast<uml::StructuredActivityNode>(_temp);
-			setInStructuredNode(_inStructuredNode); //916
+			setInStructuredNode(_inStructuredNode); //816
 			return true;
 		}
-		case UmlPackage::ACTIVITYEDGE_ATTRIBUTE_INTERRUPTS:
+		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_INTERRUPTS:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::InterruptibleActivityRegion> _interrupts = std::dynamic_pointer_cast<uml::InterruptibleActivityRegion>(_temp);
-			setInterrupts(_interrupts); //915
+			setInterrupts(_interrupts); //815
 			return true;
 		}
-		case UmlPackage::ACTIVITYEDGE_ATTRIBUTE_REDEFINEDEDGE:
+		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_REDEFINEDEDGE:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -682,28 +702,28 @@ bool ActivityEdgeImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case UmlPackage::ACTIVITYEDGE_ATTRIBUTE_SOURCE:
+		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_SOURCE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ActivityNode> _source = std::dynamic_pointer_cast<uml::ActivityNode>(_temp);
-			setSource(_source); //918
+			setSource(_source); //818
 			return true;
 		}
-		case UmlPackage::ACTIVITYEDGE_ATTRIBUTE_TARGET:
+		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_TARGET:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ActivityNode> _target = std::dynamic_pointer_cast<uml::ActivityNode>(_temp);
-			setTarget(_target); //917
+			setTarget(_target); //817
 			return true;
 		}
-		case UmlPackage::ACTIVITYEDGE_ATTRIBUTE_WEIGHT:
+		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_WEIGHT:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ValueSpecification> _weight = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
-			setWeight(_weight); //920
+			setWeight(_weight); //820
 			return true;
 		}
 	}
@@ -722,12 +742,11 @@ void ActivityEdgeImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandle
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -784,8 +803,9 @@ void ActivityEdgeImpl::loadAttributes(std::shared_ptr<persistence::interfaces::X
 	RedefinableElementImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ActivityEdgeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void ActivityEdgeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -831,15 +851,15 @@ void ActivityEdgeImpl::loadNode(std::string nodeName, std::shared_ptr<persistenc
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
-
-	RedefinableElementImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	RedefinableElementImpl::loadNode(nodeName, loadHandler);
 }
 
 void ActivityEdgeImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case UmlPackage::ACTIVITYEDGE_ATTRIBUTE_ACTIVITY:
+		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_ACTIVITY:
 		{
 			if (references.size() == 1)
 			{
@@ -851,7 +871,7 @@ void ActivityEdgeImpl::resolveReferences(const int featureID, std::list<std::sha
 			return;
 		}
 
-		case UmlPackage::ACTIVITYEDGE_ATTRIBUTE_INPARTITION:
+		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_INPARTITION:
 		{
 			std::shared_ptr<Bag<uml::ActivityPartition>> _inPartition = getInPartition();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -865,7 +885,7 @@ void ActivityEdgeImpl::resolveReferences(const int featureID, std::list<std::sha
 			return;
 		}
 
-		case UmlPackage::ACTIVITYEDGE_ATTRIBUTE_INSTRUCTUREDNODE:
+		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_INSTRUCTUREDNODE:
 		{
 			if (references.size() == 1)
 			{
@@ -877,7 +897,7 @@ void ActivityEdgeImpl::resolveReferences(const int featureID, std::list<std::sha
 			return;
 		}
 
-		case UmlPackage::ACTIVITYEDGE_ATTRIBUTE_INTERRUPTS:
+		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_INTERRUPTS:
 		{
 			if (references.size() == 1)
 			{
@@ -889,7 +909,7 @@ void ActivityEdgeImpl::resolveReferences(const int featureID, std::list<std::sha
 			return;
 		}
 
-		case UmlPackage::ACTIVITYEDGE_ATTRIBUTE_REDEFINEDEDGE:
+		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_REDEFINEDEDGE:
 		{
 			std::shared_ptr<Bag<uml::ActivityEdge>> _redefinedEdge = getRedefinedEdge();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -903,7 +923,7 @@ void ActivityEdgeImpl::resolveReferences(const int featureID, std::list<std::sha
 			return;
 		}
 
-		case UmlPackage::ACTIVITYEDGE_ATTRIBUTE_SOURCE:
+		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_SOURCE:
 		{
 			if (references.size() == 1)
 			{
@@ -915,7 +935,7 @@ void ActivityEdgeImpl::resolveReferences(const int featureID, std::list<std::sha
 			return;
 		}
 
-		case UmlPackage::ACTIVITYEDGE_ATTRIBUTE_TARGET:
+		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_TARGET:
 		{
 			if (references.size() == 1)
 			{
@@ -953,7 +973,7 @@ void ActivityEdgeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 		// Save 'guard'
 		std::shared_ptr<uml::ValueSpecification > guard = this->getGuard();

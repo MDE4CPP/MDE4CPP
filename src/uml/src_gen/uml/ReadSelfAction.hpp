@@ -36,7 +36,7 @@ namespace persistence
 
 namespace uml
 {
-	class UmlFactory;
+	class umlFactory;
 }
 
 //Forward Declaration for used types
@@ -146,8 +146,10 @@ namespace uml
 namespace uml 
 {
 	/*!
-	 A ReadSelfAction is an Action that retrieves the context object of the Behavior execution within which the ReadSelfAction execution is taking place.
-	<p>From package UML::Actions.</p> */
+	A ReadSelfAction is an Action that retrieves the context object of the Behavior execution within which the ReadSelfAction execution is taking place.
+	<p>From package UML::Actions.</p>
+	*/
+	
 	class ReadSelfAction:virtual public Action
 	{
 		public:
@@ -168,24 +170,32 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 A ReadSelfAction must have a context Classifier.
-			_'context' <> null */ 
+			A ReadSelfAction must have a context Classifier.
+			_'context' <> null
+			*/
+			 
 			virtual bool contained(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
-			 The multiplicity of the result OutputPin is 1..1.
-			result.is(1,1) */ 
+			The multiplicity of the result OutputPin is 1..1.
+			result.is(1,1)
+			*/
+			 
 			virtual bool multiplicity(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
-			 If the ReadSelfAction is contained in an Behavior that is acting as a method, then the Operation of the method must not be static.
+			If the ReadSelfAction is contained in an Behavior that is acting as a method, then the Operation of the method must not be static.
 			let behavior: Behavior = self.containingBehavior() in
-			behavior.specification<>null implies not behavior.specification.isStatic */ 
+			behavior.specification<>null implies not behavior.specification.isStatic
+			*/
+			 
 			virtual bool not_static(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
-			 The type of the result OutputPin is the context Classifier.
-			result.type = _'context' */ 
+			The type of the result OutputPin is the context Classifier.
+			result.type = _'context'
+			*/
+			 
 			virtual bool type(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
@@ -197,14 +207,19 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 The OutputPin on which the context object is placed.
-			<p>From package UML::Actions.</p> */
+			The OutputPin on which the context object is placed.
+			<p>From package UML::Actions.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::OutputPin > getResult() const = 0;
 			
 			/*!
-			 The OutputPin on which the context object is placed.
-			<p>From package UML::Actions.</p> */
-			virtual void setResult(std::shared_ptr<uml::OutputPin> _result_result) = 0;
+			The OutputPin on which the context object is placed.
+			<p>From package UML::Actions.</p>
+			*/
+			
+			virtual void setResult(std::shared_ptr<uml::OutputPin> _result) = 0;
+			
 			
 
 		protected:
@@ -217,30 +232,41 @@ namespace uml
 			// Reference Members
 			//*********************************
 			/*!
-			 The OutputPin on which the context object is placed.
-			<p>From package UML::Actions.</p> */
-			std::shared_ptr<uml::OutputPin > m_result;
+			The OutputPin on which the context object is placed.
+			<p>From package UML::Actions.</p>
+			*/
 			
+			std::shared_ptr<uml::OutputPin > m_result;
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
+			ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::ActivityGroup>> getInGroup() const = 0;/*!
-			 The ordered set of OutputPins representing outputs from the Action.
-			<p>From package UML::Actions.</p> */
+			The ordered set of OutputPins representing outputs from the Action.
+			<p>From package UML::Actions.</p>
+			*/
+			
 			virtual std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element>> getOutput() const = 0;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
+			The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

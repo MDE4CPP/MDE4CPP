@@ -30,15 +30,12 @@
  * - creation of function behavior parameter
 */]
 [template public generateOpaqueBehaviorCreation(aOpaqueBehavior : OpaqueBehavior)]
-[aOpaqueBehavior.memberName()/] = factory->createOpaqueBehavior_in_BehavioredClassifier([aOpaqueBehavior.owner.oclAsType(NamedElement).memberName()/]);
-[for (aParameter : Parameter | aOpaqueBehavior.ownedParameter) separator ('\n')]
-[aParameter.generateParameterCreation()/]
-[/for]
-[/template]
-
-[template public generateFunctionBehaviorCreation(aFunctionBehavior : FunctionBehavior)]
-[aFunctionBehavior.memberName()/] = factory->createFunctionBehavior_in_BehavioredClassifier([aFunctionBehavior.owner.oclAsType(NamedElement).memberName()/]);
-[for (aParameter : Parameter | aFunctionBehavior.ownedParameter) separator ('\n')]
+[if (aOpaqueBehavior.owner = aOpaqueBehavior._package)]
+[aOpaqueBehavior.memberName()/] = factory->create[if(aOpaqueBehavior.oclIsKindOf(FunctionBehavior))]FunctionBehavior[else]OpaqueBehavior[/if]_in_Package([aOpaqueBehavior._package.memberName()/]);
+[else]
+[aOpaqueBehavior.memberName()/] = factory->create[if(aOpaqueBehavior.oclIsKindOf(FunctionBehavior))]FunctionBehavior[else]OpaqueBehavior[/if]_in_BehavioredClassifier([aOpaqueBehavior.owner.oclAsType(NamedElement).memberName()/]);
+[/if]
+[for (aParameter : Parameter | aOpaqueBehavior.ownedParameter)]
 [aParameter.generateParameterCreation()/]
 [/for]
 [/template]
@@ -52,8 +49,10 @@
 */]
 [template public generateOpaqueBehaviorInitialization(aOpaqueBehavior : OpaqueBehavior)]
 [aOpaqueBehavior.memberName()/]->setName("[aOpaqueBehavior.name/]");
+[if (not aOpaqueBehavior._context.oclIsUndefined())]
 [aOpaqueBehavior.memberName()/]->setContext([aOpaqueBehavior._context.memberName()/]);
-[for (aParameter : Parameter | aOpaqueBehavior.ownedParameter) separator ('\n')]
+[/if]
+[for (aParameter : Parameter | aOpaqueBehavior.ownedParameter)]
 [aParameter.generateParameterInitialization()/]
 [/for]
 [/template]
@@ -68,7 +67,7 @@
 [template public generateFunctionBehaviorInitialization(aFunctionBehavior : FunctionBehavior)]
 [aFunctionBehavior.memberName()/]->setName("[aFunctionBehavior.name/]");
 [aFunctionBehavior.memberName()/]->setContext([aFunctionBehavior._context.memberName()/]);
-[for (aParameter : Parameter | aFunctionBehavior.ownedParameter) separator ('\n')]
+[for (aParameter : Parameter | aFunctionBehavior.ownedParameter)]
 [aParameter.generateParameterInitialization()/]
 [/for]
 [/template]

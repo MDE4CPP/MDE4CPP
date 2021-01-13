@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -25,23 +24,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -95,10 +83,11 @@
 
 #include "uml/UseCase.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -108,17 +97,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 PrimitiveTypeImpl::PrimitiveTypeImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 PrimitiveTypeImpl::~PrimitiveTypeImpl()
@@ -128,29 +107,20 @@ PrimitiveTypeImpl::~PrimitiveTypeImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+PrimitiveTypeImpl::PrimitiveTypeImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:PrimitiveTypeImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			PrimitiveTypeImpl::PrimitiveTypeImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:PrimitiveTypeImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
-
-
-
-
-//Additional constructor for the containments back reference
-			PrimitiveTypeImpl::PrimitiveTypeImpl(std::weak_ptr<uml::Element > par_owner)
-			:PrimitiveTypeImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-
-
+PrimitiveTypeImpl::PrimitiveTypeImpl(std::weak_ptr<uml::Element > par_owner)
+:PrimitiveTypeImpl()
+{
+	m_owner = par_owner;
+}
 
 //Additional constructor for the containments back reference
 PrimitiveTypeImpl::PrimitiveTypeImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id)
@@ -158,11 +128,11 @@ PrimitiveTypeImpl::PrimitiveTypeImpl(std::weak_ptr<uml::Package > par_Package, c
 {
 	switch(reference_id)
 	{	
-	case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
+	case umlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
 		m_owningPackage = par_Package;
 		m_namespace = par_Package;
 		 return;
-	case UmlPackage::TYPE_ATTRIBUTE_PACKAGE:
+	case umlPackage::TYPE_ATTRIBUTE_PACKAGE:
 		m_package = par_Package;
 		m_namespace = par_Package;
 		 return;
@@ -172,26 +142,13 @@ PrimitiveTypeImpl::PrimitiveTypeImpl(std::weak_ptr<uml::Package > par_Package, c
    
 }
 
-
-
-
-
 //Additional constructor for the containments back reference
-			PrimitiveTypeImpl::PrimitiveTypeImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
-			:PrimitiveTypeImpl()
-			{
-			    m_owningTemplateParameter = par_owningTemplateParameter;
-				m_owner = par_owningTemplateParameter;
-			}
-
-
-
-
-
-//Additional constructor for the containments back reference
-
-
-
+PrimitiveTypeImpl::PrimitiveTypeImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+:PrimitiveTypeImpl()
+{
+	m_owningTemplateParameter = par_owningTemplateParameter;
+	m_owner = par_owningTemplateParameter;
+}
 
 
 
@@ -391,7 +348,7 @@ std::shared_ptr<ecore::EObject>  PrimitiveTypeImpl::copy() const
 
 std::shared_ptr<ecore::EClass> PrimitiveTypeImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getPrimitiveType_Class();
+	return uml::umlPackage::eInstance()->getPrimitiveType_Class();
 }
 
 //*********************************
@@ -411,36 +368,120 @@ std::shared_ptr<ecore::EClass> PrimitiveTypeImpl::eStaticClass() const
 //*********************************
 std::shared_ptr<SubsetUnion<uml::Property, uml::Feature>> PrimitiveTypeImpl::getAttribute() const
 {
+	if(m_attribute == nullptr)
+	{
+		/*SubsetUnion*/
+		m_attribute.reset(new SubsetUnion<uml::Property, uml::Feature >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_attribute - SubsetUnion<uml::Property, uml::Feature >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_attribute->initSubsetUnion(getFeature());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_attribute - SubsetUnion<uml::Property, uml::Feature >(getFeature())" << std::endl;
+		#endif
+		
+	}
 	return m_attribute;
 }
+
 std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement>> PrimitiveTypeImpl::getFeature() const
 {
+	if(m_feature == nullptr)
+	{
+		/*SubsetUnion*/
+		m_feature.reset(new SubsetUnion<uml::Feature, uml::NamedElement >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_feature - SubsetUnion<uml::Feature, uml::NamedElement >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_feature->initSubsetUnion(getMember());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_feature - SubsetUnion<uml::Feature, uml::NamedElement >(getMember())" << std::endl;
+		#endif
+		
+	}
 	return m_feature;
 }
+
 std::shared_ptr<Union<uml::NamedElement>> PrimitiveTypeImpl::getMember() const
 {
+	if(m_member == nullptr)
+	{
+		/*Union*/
+		m_member.reset(new Union<uml::NamedElement>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_member - Union<uml::NamedElement>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_member;
 }
+
 std::weak_ptr<uml::Namespace > PrimitiveTypeImpl::getNamespace() const
 {
 	return m_namespace;
 }
+
 std::shared_ptr<Union<uml::Element>> PrimitiveTypeImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> PrimitiveTypeImpl::getOwnedMember() const
 {
+	if(m_ownedMember == nullptr)
+	{
+		/*SubsetUnion*/
+		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_ownedMember->initSubsetUnion(getOwnedElement(),getMember());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >(getOwnedElement(),getMember())" << std::endl;
+		#endif
+		
+	}
 	return m_ownedMember;
 }
+
 std::weak_ptr<uml::Element > PrimitiveTypeImpl::getOwner() const
 {
 	return m_owner;
 }
+
 std::shared_ptr<Union<uml::RedefinableElement>> PrimitiveTypeImpl::getRedefinedElement() const
 {
+	if(m_redefinedElement == nullptr)
+	{
+		/*Union*/
+		m_redefinedElement.reset(new Union<uml::RedefinableElement>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_redefinedElement - Union<uml::RedefinableElement>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_redefinedElement;
 }
+
+
 
 
 std::shared_ptr<PrimitiveType> PrimitiveTypeImpl::getThisPrimitiveTypePtr() const
@@ -518,12 +559,11 @@ void PrimitiveTypeImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandl
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -533,11 +573,12 @@ void PrimitiveTypeImpl::loadAttributes(std::shared_ptr<persistence::interfaces::
 	DataTypeImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void PrimitiveTypeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void PrimitiveTypeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
-
-	DataTypeImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	DataTypeImpl::loadNode(nodeName, loadHandler);
 }
 
 void PrimitiveTypeImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -581,7 +622,7 @@ void PrimitiveTypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 

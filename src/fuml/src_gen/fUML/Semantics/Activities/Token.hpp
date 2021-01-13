@@ -32,7 +32,7 @@ namespace persistence
 
 namespace fUML
 {
-	class FUMLFactory;
+	class fUMLFactory;
 }
 
 //Forward Declaration for used types
@@ -55,14 +55,13 @@ namespace fUML::Semantics::Values
 
 // enum includes
 
-#include "ecore/EObject.hpp"
+#include "ecore/EModelElement.hpp"
 
 //*********************************
 namespace fUML::Semantics::Activities 
 {
-	/*!
-	 */
-	class Token : virtual public ecore::EObject 
+	
+	class Token : virtual public ecore::EModelElement
 
 	{
 		public:
@@ -82,67 +81,58 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
+			virtual std::shared_ptr<fUML::Semantics::Activities::Token> _copy() = 0;
+			
+			 
 			virtual bool equals(std::shared_ptr<fUML::Semantics::Activities::Token>  other) = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> getValue() const = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual bool isControl() = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<fUML::Semantics::Activities::Token> transfer(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation>  holder) = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual void withdraw() = 0;
 			
 			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual bool isWithdrawn() const = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual void setWithdrawn (bool _withdrawn)= 0; 
-			
 			
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivation > getHolder() const = 0;
 			
-			/*!
-			 */
-			virtual void setHolder(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> _holder_holder) = 0;
+			
+			virtual void setHolder(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> _holder) = 0;
+			
 			
 
 		protected:
 			//*********************************
 			// Attribute Members
 			//*********************************
-			/*!
-			 */ 
+			 
 			bool m_withdrawn = true;
 			
 			
 			//*********************************
 			// Reference Members
 			//*********************************
-			/*!
-			 */
-			std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivation > m_holder;
 			
+			std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivation > m_holder;
 
 		public:
 			//*********************************

@@ -13,14 +13,14 @@
 //Model includes
 #include "../FeatureValue.hpp"
 
-#include "fUML/impl/FUMLFactoryImpl.hpp"
+#include "fUML/Semantics/SimpleClassifiers/impl/SimpleClassifiersFactoryImpl.hpp"
 
-#include "ecore/impl/EObjectImpl.hpp"
+#include "ecore/impl/EModelElementImpl.hpp"
 
 //*********************************
 namespace fUML::Semantics::SimpleClassifiers 
 {
-	class FeatureValueImpl :virtual public ecore::EObjectImpl,
+	class FeatureValueImpl : virtual public ecore::EModelElementImpl,
 virtual public FeatureValue 
 	{
 		public: 
@@ -31,7 +31,7 @@ virtual public FeatureValue
 			FeatureValueImpl& operator=(FeatureValueImpl const&) = delete;
 
 		protected:
-			friend class fUML::FUMLFactoryImpl;
+			friend class fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactoryImpl;
 			FeatureValueImpl();
 			virtual std::shared_ptr<FeatureValue> getThisFeatureValuePtr() const;
 			virtual void setThisFeatureValuePtr(std::weak_ptr<FeatureValue> thisFeatureValuePtr);
@@ -45,8 +45,10 @@ virtual public FeatureValue
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
+			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> _copy() ;
+			
+			 
 			virtual bool hasEqualValues(std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue>  other) ;
 			
 			
@@ -54,29 +56,25 @@ virtual public FeatureValue
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual int getPosition() const ;
 			
-			/*!
-			 */ 
+			 
 			virtual void setPosition (int _position); 
-			
 			
 			
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<uml::StructuralFeature > getFeature() const ;
 			
-			/*!
-			 */
-			virtual void setFeature(std::shared_ptr<uml::StructuralFeature> _feature_feature) ;
-			/*!
-			 */
+			
+			virtual void setFeature(std::shared_ptr<uml::StructuralFeature> _feature) ;
+			
+			
 			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value>> getValues() const ;
+			
 			
 							
 			
@@ -96,7 +94,7 @@ virtual public FeatureValue
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

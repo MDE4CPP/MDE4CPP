@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class TriggerImpl :virtual public NamedElementImpl, virtual public Trigger 
+	class TriggerImpl : virtual public NamedElementImpl, virtual public Trigger 
 	{
 		public: 
 			TriggerImpl(const TriggerImpl & obj);
@@ -28,7 +28,7 @@ namespace uml
 			TriggerImpl& operator=(TriggerImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			TriggerImpl();
 			virtual std::shared_ptr<Trigger> getThisTriggerPtr() const;
 			virtual void setThisTriggerPtr(std::weak_ptr<Trigger> thisTriggerPtr);
@@ -51,8 +51,10 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 If a Trigger specifies one or more ports, the event of the Trigger must be a MessageEvent.
-			port->notEmpty() implies event.oclIsKindOf(MessageEvent) */ 
+			If a Trigger specifies one or more ports, the event of the Trigger must be a MessageEvent.
+			port->notEmpty() implies event.oclIsKindOf(MessageEvent)
+			*/
+			 
 			virtual bool trigger_with_ports(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
@@ -66,18 +68,26 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 The Event that detected by the Trigger.
-			<p>From package UML::CommonBehavior.</p> */
+			The Event that detected by the Trigger.
+			<p>From package UML::CommonBehavior.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::Event > getEvent() const ;
 			
 			/*!
-			 The Event that detected by the Trigger.
-			<p>From package UML::CommonBehavior.</p> */
-			virtual void setEvent(std::shared_ptr<uml::Event> _event_event) ;
+			The Event that detected by the Trigger.
+			<p>From package UML::CommonBehavior.</p>
+			*/
+			
+			virtual void setEvent(std::shared_ptr<uml::Event> _event) ;
+			
 			/*!
-			 A optional Port of through which the given effect is detected.
-			<p>From package UML::CommonBehavior.</p> */
+			A optional Port of through which the given effect is detected.
+			<p>From package UML::CommonBehavior.</p>
+			*/
+			
 			virtual std::shared_ptr<Bag<uml::Port>> getPort() const ;
+			
 			
 							
 			
@@ -85,11 +95,15 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
@@ -103,7 +117,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

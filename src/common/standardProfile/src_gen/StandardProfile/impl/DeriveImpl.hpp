@@ -56,11 +56,15 @@ namespace StandardProfile
 			// Attributes Getter Setter
 			//*********************************
 			virtual std::weak_ptr<uml::Abstraction> getBase_Abstraction() const ;
-			virtual void setBase_Abstraction (std::weak_ptr<uml::Abstraction> _base_Abstraction);
+			virtual void setBase_Abstraction(std::weak_ptr<uml::Abstraction> _base_Abstraction);
+			
+			
 			
 
 		protected:
 			virtual std::shared_ptr<uml::Class> getMetaClass();
+			virtual void instantiate();
+			virtual void destroy();
 
 		public:
 			//*********************************

@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -25,23 +24,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -81,10 +69,11 @@
 
 #include "uml/Type.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -94,17 +83,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 ModelImpl::ModelImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 ModelImpl::~ModelImpl()
@@ -114,18 +93,13 @@ ModelImpl::~ModelImpl()
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			ModelImpl::ModelImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:ModelImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
-
-
-
+ModelImpl::ModelImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:ModelImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
 ModelImpl::ModelImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id)
@@ -133,11 +107,11 @@ ModelImpl::ModelImpl(std::weak_ptr<uml::Package > par_Package, const int referen
 {
 	switch(reference_id)
 	{	
-	case UmlPackage::PACKAGE_ATTRIBUTE_NESTINGPACKAGE:
+	case umlPackage::PACKAGE_ATTRIBUTE_NESTINGPACKAGE:
 		m_nestingPackage = par_Package;
 		m_namespace = par_Package;
 		 return;
-	case UmlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
+	case umlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
 		m_owningPackage = par_Package;
 		m_namespace = par_Package;
 		 return;
@@ -147,38 +121,21 @@ ModelImpl::ModelImpl(std::weak_ptr<uml::Package > par_Package, const int referen
    
 }
 
-
-
+//Additional constructor for the containments back reference
+ModelImpl::ModelImpl(std::weak_ptr<uml::Element > par_owner)
+:ModelImpl()
+{
+	m_owner = par_owner;
+}
 
 
 //Additional constructor for the containments back reference
-			ModelImpl::ModelImpl(std::weak_ptr<uml::Element > par_owner)
-			:ModelImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-
-
-
-//Additional constructor for the containments back reference
-
-
-
-
-
-//Additional constructor for the containments back reference
-			ModelImpl::ModelImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
-			:ModelImpl()
-			{
-			    m_owningTemplateParameter = par_owningTemplateParameter;
-				m_owner = par_owningTemplateParameter;
-			}
-
-
-
-
+ModelImpl::ModelImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+:ModelImpl()
+{
+	m_owningTemplateParameter = par_owningTemplateParameter;
+	m_owner = par_owningTemplateParameter;
+}
 
 
 ModelImpl::ModelImpl(const ModelImpl & obj):ModelImpl()
@@ -338,21 +295,26 @@ std::shared_ptr<ecore::EObject>  ModelImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ModelImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getModel_Class();
+	return uml::umlPackage::eInstance()->getModel_Class();
 }
 
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute viewpoint
+*/
+std::string ModelImpl::getViewpoint() const 
+{
+	return m_viewpoint;
+}
+
 void ModelImpl::setViewpoint(std::string _viewpoint)
 {
 	m_viewpoint = _viewpoint;
 } 
 
-std::string ModelImpl::getViewpoint() const 
-{
-	return m_viewpoint;
-}
+
 
 //*********************************
 // Operations
@@ -372,24 +334,65 @@ bool ModelImpl::isMetamodel()
 //*********************************
 std::shared_ptr<Union<uml::NamedElement>> ModelImpl::getMember() const
 {
+	if(m_member == nullptr)
+	{
+		/*Union*/
+		m_member.reset(new Union<uml::NamedElement>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_member - Union<uml::NamedElement>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_member;
 }
+
 std::weak_ptr<uml::Namespace > ModelImpl::getNamespace() const
 {
 	return m_namespace;
 }
+
 std::shared_ptr<Union<uml::Element>> ModelImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> ModelImpl::getOwnedMember() const
 {
+	if(m_ownedMember == nullptr)
+	{
+		/*SubsetUnion*/
+		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_ownedMember->initSubsetUnion(getOwnedElement(),getMember());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >(getOwnedElement(),getMember())" << std::endl;
+		#endif
+		
+	}
 	return m_ownedMember;
 }
+
 std::weak_ptr<uml::Element > ModelImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<Model> ModelImpl::getThisModelPtr() const
@@ -437,8 +440,8 @@ Any ModelImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::MODEL_ATTRIBUTE_VIEWPOINT:
-			return eAny(getViewpoint()); //15428
+		case uml::umlPackage::MODEL_ATTRIBUTE_VIEWPOINT:
+			return eAny(getViewpoint()); //15328
 	}
 	return PackageImpl::eGet(featureID, resolve, coreType);
 }
@@ -446,8 +449,8 @@ bool ModelImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::MODEL_ATTRIBUTE_VIEWPOINT:
-			return getViewpoint() != ""; //15428
+		case uml::umlPackage::MODEL_ATTRIBUTE_VIEWPOINT:
+			return getViewpoint() != ""; //15328
 	}
 	return PackageImpl::internalEIsSet(featureID);
 }
@@ -455,11 +458,11 @@ bool ModelImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::MODEL_ATTRIBUTE_VIEWPOINT:
+		case uml::umlPackage::MODEL_ATTRIBUTE_VIEWPOINT:
 		{
 			// BOOST CAST
 			std::string _viewpoint = newValue->get<std::string>();
-			setViewpoint(_viewpoint); //15428
+			setViewpoint(_viewpoint); //15328
 			return true;
 		}
 	}
@@ -478,12 +481,11 @@ void ModelImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> load
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -514,11 +516,12 @@ void ModelImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHan
 	PackageImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ModelImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void ModelImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
-
-	PackageImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	PackageImpl::loadNode(nodeName, loadHandler);
 }
 
 void ModelImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -555,10 +558,9 @@ void ModelImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
- 
 		// Add attributes
 		if ( this->eIsSet(package->getModel_Attribute_viewpoint()) )
 		{

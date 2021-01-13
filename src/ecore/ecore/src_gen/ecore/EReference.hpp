@@ -13,7 +13,7 @@
 
 
 // forward declarations
-template<class T> class Bag;
+template<class T> class Bag; 
 
 
 
@@ -33,7 +33,7 @@ namespace persistence
 
 namespace ecore
 {
-	class EcoreFactory;
+	class ecoreFactory;
 }
 
 //Forward Declaration for used types
@@ -86,8 +86,7 @@ namespace ecore
 //*********************************
 namespace ecore 
 {
-	/*!
-	 */
+	
 	class EReference:virtual public EStructuralFeature
 	{
 		public:
@@ -111,85 +110,67 @@ namespace ecore
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual bool isContainer() const = 0;
 			
-			/*!
-			 */ 
+			
+			 
 			virtual bool isContainment() const = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual void setContainment (bool _containment)= 0; 
-			
-			/*!
-			 */ 
+			 
 			virtual bool isResolveProxies() const = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual void setResolveProxies (bool _resolveProxies)= 0; 
-			
 			
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Bag<ecore::EAttribute>> getEKeys() const = 0;
 			
-			/*!
-			 */
+			
+			
 			virtual std::shared_ptr<ecore::EReference > getEOpposite() const = 0;
 			
-			/*!
-			 */
-			virtual void setEOpposite(std::shared_ptr<ecore::EReference> _eOpposite_eOpposite) = 0;
-			/*!
-			 */
+			
+			virtual void setEOpposite(std::shared_ptr<ecore::EReference> _eOpposite) = 0;
+			
+			
 			virtual std::shared_ptr<ecore::EClass > getEReferenceType() const = 0;
 			
-			/*!
-			 */
-			virtual void setEReferenceType(std::shared_ptr<ecore::EClass> _eReferenceType_eReferenceType) = 0;
+			
+			virtual void setEReferenceType(std::shared_ptr<ecore::EClass> _eReferenceType) = 0;
+			
 			
 
 		protected:
 			//*********************************
 			// Attribute Members
 			//*********************************
-			/*!
-			 */ 
+			 
 			bool m_container = false;
-			/*!
-			 */ 
+			 
 			bool m_containment = false;
-			/*!
-			 */ 
+			 
 			bool m_resolveProxies = true;
 			
 			
 			//*********************************
 			// Reference Members
 			//*********************************
-			/*!
-			 */
-			std::shared_ptr<Bag<ecore::EAttribute>> m_eKeys;
-			/*!
-			 */
-			std::shared_ptr<ecore::EReference > m_eOpposite;
-			/*!
-			 */
-			std::shared_ptr<ecore::EClass > m_eReferenceType;
 			
+			mutable std::shared_ptr<Bag<ecore::EAttribute>> m_eKeys;
+			std::shared_ptr<ecore::EReference > m_eOpposite;
+			std::shared_ptr<ecore::EClass > m_eReferenceType;
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
@@ -25,15 +24,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -45,10 +41,11 @@
 
 #include "uml/Property.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -58,23 +55,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 QualifierValueImpl::QualifierValueImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	
-
-	//Init references
-	
-
-	
+{	
 }
 
 QualifierValueImpl::~QualifierValueImpl()
@@ -84,17 +65,12 @@ QualifierValueImpl::~QualifierValueImpl()
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			QualifierValueImpl::QualifierValueImpl(std::weak_ptr<uml::Element > par_owner)
-			:QualifierValueImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-
-
+QualifierValueImpl::QualifierValueImpl(std::weak_ptr<uml::Element > par_owner)
+:QualifierValueImpl()
+{
+	m_owner = par_owner;
+}
 
 
 QualifierValueImpl::QualifierValueImpl(const QualifierValueImpl & obj):QualifierValueImpl()
@@ -135,7 +111,7 @@ std::shared_ptr<ecore::EObject>  QualifierValueImpl::copy() const
 
 std::shared_ptr<ecore::EClass> QualifierValueImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getQualifierValue_Class();
+	return uml::umlPackage::eInstance()->getQualifierValue_Class();
 }
 
 //*********************************
@@ -166,33 +142,57 @@ bool QualifierValueImpl::type_of_qualifier(Any diagnostics,std::map <   Any, Any
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference qualifier
+*/
 std::shared_ptr<uml::Property > QualifierValueImpl::getQualifier() const
 {
 //assert(m_qualifier);
     return m_qualifier;
 }
+
 void QualifierValueImpl::setQualifier(std::shared_ptr<uml::Property> _qualifier)
 {
     m_qualifier = _qualifier;
 }
 
+
+
+/*
+Getter & Setter for reference value
+*/
 std::shared_ptr<uml::InputPin > QualifierValueImpl::getValue() const
 {
 //assert(m_value);
     return m_value;
 }
+
 void QualifierValueImpl::setValue(std::shared_ptr<uml::InputPin> _value)
 {
     m_value = _value;
 }
+
+
 
 //*********************************
 // Union Getter
 //*********************************
 std::shared_ptr<Union<uml::Element>> QualifierValueImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
+
 
 
 std::shared_ptr<QualifierValue> QualifierValueImpl::getThisQualifierValuePtr() const
@@ -220,10 +220,10 @@ Any QualifierValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::QUALIFIERVALUE_ATTRIBUTE_QUALIFIER:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getQualifier())); //1923
-		case UmlPackage::QUALIFIERVALUE_ATTRIBUTE_VALUE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getValue())); //1924
+		case uml::umlPackage::QUALIFIERVALUE_ATTRIBUTE_QUALIFIER:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getQualifier())); //1913
+		case uml::umlPackage::QUALIFIERVALUE_ATTRIBUTE_VALUE:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getValue())); //1914
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -231,10 +231,10 @@ bool QualifierValueImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::QUALIFIERVALUE_ATTRIBUTE_QUALIFIER:
-			return getQualifier() != nullptr; //1923
-		case UmlPackage::QUALIFIERVALUE_ATTRIBUTE_VALUE:
-			return getValue() != nullptr; //1924
+		case uml::umlPackage::QUALIFIERVALUE_ATTRIBUTE_QUALIFIER:
+			return getQualifier() != nullptr; //1913
+		case uml::umlPackage::QUALIFIERVALUE_ATTRIBUTE_VALUE:
+			return getValue() != nullptr; //1914
 	}
 	return ElementImpl::internalEIsSet(featureID);
 }
@@ -242,20 +242,20 @@ bool QualifierValueImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::QUALIFIERVALUE_ATTRIBUTE_QUALIFIER:
+		case uml::umlPackage::QUALIFIERVALUE_ATTRIBUTE_QUALIFIER:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::Property> _qualifier = std::dynamic_pointer_cast<uml::Property>(_temp);
-			setQualifier(_qualifier); //1923
+			setQualifier(_qualifier); //1913
 			return true;
 		}
-		case UmlPackage::QUALIFIERVALUE_ATTRIBUTE_VALUE:
+		case uml::umlPackage::QUALIFIERVALUE_ATTRIBUTE_VALUE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::InputPin> _value = std::dynamic_pointer_cast<uml::InputPin>(_temp);
-			setValue(_value); //1924
+			setValue(_value); //1914
 			return true;
 		}
 	}
@@ -274,12 +274,11 @@ void QualifierValueImpl::load(std::shared_ptr<persistence::interfaces::XLoadHand
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -315,18 +314,19 @@ void QualifierValueImpl::loadAttributes(std::shared_ptr<persistence::interfaces:
 	ElementImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void QualifierValueImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void QualifierValueImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
-
-	ElementImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	ElementImpl::loadNode(nodeName, loadHandler);
 }
 
 void QualifierValueImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case UmlPackage::QUALIFIERVALUE_ATTRIBUTE_QUALIFIER:
+		case uml::umlPackage::QUALIFIERVALUE_ATTRIBUTE_QUALIFIER:
 		{
 			if (references.size() == 1)
 			{
@@ -338,7 +338,7 @@ void QualifierValueImpl::resolveReferences(const int featureID, std::list<std::s
 			return;
 		}
 
-		case UmlPackage::QUALIFIERVALUE_ATTRIBUTE_VALUE:
+		case uml::umlPackage::QUALIFIERVALUE_ATTRIBUTE_VALUE:
 		{
 			if (references.size() == 1)
 			{
@@ -370,7 +370,7 @@ void QualifierValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 

@@ -13,14 +13,14 @@
 //Model includes
 #include "../EventOccurrence.hpp"
 
-#include "fUML/impl/FUMLFactoryImpl.hpp"
+#include "fUML/Semantics/CommonBehavior/impl/CommonBehaviorFactoryImpl.hpp"
 
-#include "ecore/impl/EObjectImpl.hpp"
+#include "ecore/impl/EModelElementImpl.hpp"
 
 //*********************************
 namespace fUML::Semantics::CommonBehavior 
 {
-	class EventOccurrenceImpl :virtual public ecore::EObjectImpl,
+	class EventOccurrenceImpl : virtual public ecore::EModelElementImpl,
 virtual public EventOccurrence 
 	{
 		public: 
@@ -31,7 +31,7 @@ virtual public EventOccurrence
 			EventOccurrenceImpl& operator=(EventOccurrenceImpl const&) = delete;
 
 		protected:
-			friend class fUML::FUMLFactoryImpl;
+			friend class fUML::Semantics::CommonBehavior::CommonBehaviorFactoryImpl;
 			EventOccurrenceImpl();
 			virtual std::shared_ptr<EventOccurrence> getThisEventOccurrencePtr() const;
 			virtual void setThisEventOccurrencePtr(std::weak_ptr<EventOccurrence> thisEventOccurrencePtr);
@@ -45,24 +45,19 @@ virtual public EventOccurrence
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual void doSend() ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > getParameterValues() ;
 			
-			/*!
-			 */ 
+			 
 			virtual bool match(std::shared_ptr<uml::Trigger>  trigger) ;
 			
-			/*!
-			 */ 
+			 
 			virtual bool matchAny(std::shared_ptr<Bag<uml::Trigger> >  triggers) ;
 			
-			/*!
-			 */ 
+			 
 			virtual void sendTo(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference>  target) ;
 			
 			
@@ -75,13 +70,12 @@ virtual public EventOccurrence
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference > getTarget() const ;
 			
-			/*!
-			 */
-			virtual void setTarget(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> _target_target) ;
+			
+			virtual void setTarget(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> _target) ;
+			
 							
 			
 			//*********************************
@@ -100,7 +94,7 @@ virtual public EventOccurrence
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

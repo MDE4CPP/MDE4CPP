@@ -14,7 +14,7 @@
 #include "uml/Association.hpp"
 #include "uml/Property.hpp"
 #include "uml/Stereotype.hpp"
-#include "uml/UmlPackage.hpp"
+#include "uml/umlPackage.hpp"
 
 using namespace util;
 
@@ -46,7 +46,7 @@ void StereotypeStorage::applyStereotype(std::shared_ptr<uml::Element> element, s
 		if (prop != nullptr)
 		{
 			//check if it is an extension association
-			if (prop->getAssociation()->eClass() == uml::UmlPackage::eInstance()->getExtension_Class())
+			if (prop->getAssociation()->eClass() == uml::umlPackage::eInstance()->getExtension_Class())
 			{
 				//check type of the property
 				if (element->eClass()->getName() == prop->getType()->getName())

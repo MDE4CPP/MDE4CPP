@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class TypedElementImpl :virtual public NamedElementImpl, virtual public TypedElement 
+	class TypedElementImpl : virtual public NamedElementImpl, virtual public TypedElement 
 	{
 		public: 
 			TypedElementImpl(const TypedElementImpl & obj);
@@ -28,7 +28,7 @@ namespace uml
 			TypedElementImpl& operator=(TypedElementImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			TypedElementImpl();
 			virtual std::shared_ptr<TypedElement> getThisTypedElementPtr() const;
 			virtual void setThisTypedElementPtr(std::weak_ptr<TypedElement> thisTypedElementPtr);
@@ -61,25 +61,34 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 The type of the TypedElement.
-			<p>From package UML::CommonStructure.</p> */
+			The type of the TypedElement.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::Type > getType() const ;
 			
 			/*!
-			 The type of the TypedElement.
-			<p>From package UML::CommonStructure.</p> */
-			virtual void setType(std::shared_ptr<uml::Type> _type_type) ;
+			The type of the TypedElement.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
+			virtual void setType(std::shared_ptr<uml::Type> _type) ;
+			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
@@ -93,7 +102,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

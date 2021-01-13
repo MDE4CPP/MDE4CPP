@@ -17,24 +17,18 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -48,10 +42,11 @@
 
 #include "uml/ValueSpecification.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -61,39 +56,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 SlotImpl::SlotImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	
-
-		/*Subset*/
-		m_value.reset(new Subset<uml::ValueSpecification, uml::Element >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_value - Subset<uml::ValueSpecification, uml::Element >()" << std::endl;
-		#endif
-	
-	
-
-	//Init references
-	
-
-	
-
-		/*Subset*/
-		m_value->initSubset(m_ownedElement);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_value - Subset<uml::ValueSpecification, uml::Element >(m_ownedElement)" << std::endl;
-		#endif
-	
-	
+{	
 }
 
 SlotImpl::~SlotImpl()
@@ -103,29 +66,20 @@ SlotImpl::~SlotImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+SlotImpl::SlotImpl(std::weak_ptr<uml::Element > par_owner)
+:SlotImpl()
+{
+	m_owner = par_owner;
+}
 
 //Additional constructor for the containments back reference
-			SlotImpl::SlotImpl(std::weak_ptr<uml::Element > par_owner)
-			:SlotImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-
-
-
-//Additional constructor for the containments back reference
-			SlotImpl::SlotImpl(std::weak_ptr<uml::InstanceSpecification > par_owningInstance)
-			:SlotImpl()
-			{
-			    m_owningInstance = par_owningInstance;
-				m_owner = par_owningInstance;
-			}
-
-
-
-
+SlotImpl::SlotImpl(std::weak_ptr<uml::InstanceSpecification > par_owningInstance)
+:SlotImpl()
+{
+	m_owningInstance = par_owningInstance;
+	m_owner = par_owningInstance;
+}
 
 
 SlotImpl::SlotImpl(const SlotImpl & obj):SlotImpl()
@@ -163,12 +117,11 @@ SlotImpl::SlotImpl(const SlotImpl & obj):SlotImpl()
 		std::cout << "Copying the Subset: " << "m_value" << std::endl;
 	#endif
 
-		/*Subset*/
-		m_value->initSubset(m_ownedElement);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_value - Subset<uml::ValueSpecification, uml::Element >(m_ownedElement)" << std::endl;
-		#endif
-	
+	/*Subset*/
+	m_value->initSubset(getOwnedElement());
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Initialising value Subset: " << "m_value - Subset<uml::ValueSpecification, uml::Element >(getOwnedElement())" << std::endl;
+	#endif
 	
 }
 
@@ -181,7 +134,7 @@ std::shared_ptr<ecore::EObject>  SlotImpl::copy() const
 
 std::shared_ptr<ecore::EClass> SlotImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getSlot_Class();
+	return uml::umlPackage::eInstance()->getSlot_Class();
 }
 
 //*********************************
@@ -195,31 +148,64 @@ std::shared_ptr<ecore::EClass> SlotImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference definingFeature
+*/
 std::shared_ptr<uml::StructuralFeature > SlotImpl::getDefiningFeature() const
 {
 //assert(m_definingFeature);
     return m_definingFeature;
 }
+
 void SlotImpl::setDefiningFeature(std::shared_ptr<uml::StructuralFeature> _definingFeature)
 {
     m_definingFeature = _definingFeature;
 }
 
+
+
+/*
+Getter & Setter for reference owningInstance
+*/
 std::weak_ptr<uml::InstanceSpecification > SlotImpl::getOwningInstance() const
 {
 //assert(m_owningInstance);
     return m_owningInstance;
 }
+
 void SlotImpl::setOwningInstance(std::shared_ptr<uml::InstanceSpecification> _owningInstance)
 {
     m_owningInstance = _owningInstance;
 }
 
+
+
+/*
+Getter & Setter for reference value
+*/
 std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>> SlotImpl::getValue() const
 {
+	if(m_value == nullptr)
+	{
+		/*Subset*/
+		m_value.reset(new Subset<uml::ValueSpecification, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_value - Subset<uml::ValueSpecification, uml::Element >()" << std::endl;
+		#endif
+		
+		/*Subset*/
+		m_value->initSubset(getOwnedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_value - Subset<uml::ValueSpecification, uml::Element >(getOwnedElement())" << std::endl;
+		#endif
+		
+	}
 
     return m_value;
 }
+
+
+
 
 
 //*********************************
@@ -227,12 +213,25 @@ std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>> SlotImpl::getValu
 //*********************************
 std::shared_ptr<Union<uml::Element>> SlotImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > SlotImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<Slot> SlotImpl::getThisSlotPtr() const
@@ -265,11 +264,11 @@ Any SlotImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::SLOT_ATTRIBUTE_DEFININGFEATURE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDefiningFeature())); //2183
-		case UmlPackage::SLOT_ATTRIBUTE_OWNINGINSTANCE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOwningInstance().lock())); //2185
-		case UmlPackage::SLOT_ATTRIBUTE_VALUE:
+		case uml::umlPackage::SLOT_ATTRIBUTE_DEFININGFEATURE:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDefiningFeature())); //2173
+		case uml::umlPackage::SLOT_ATTRIBUTE_OWNINGINSTANCE:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOwningInstance().lock())); //2175
+		case uml::umlPackage::SLOT_ATTRIBUTE_VALUE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::ValueSpecification>::iterator iter = m_value->begin();
@@ -279,7 +278,7 @@ Any SlotImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //2184
+			return eAny(tempList); //2174
 		}
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
@@ -288,12 +287,12 @@ bool SlotImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::SLOT_ATTRIBUTE_DEFININGFEATURE:
-			return getDefiningFeature() != nullptr; //2183
-		case UmlPackage::SLOT_ATTRIBUTE_OWNINGINSTANCE:
-			return getOwningInstance().lock() != nullptr; //2185
-		case UmlPackage::SLOT_ATTRIBUTE_VALUE:
-			return getValue() != nullptr; //2184
+		case uml::umlPackage::SLOT_ATTRIBUTE_DEFININGFEATURE:
+			return getDefiningFeature() != nullptr; //2173
+		case uml::umlPackage::SLOT_ATTRIBUTE_OWNINGINSTANCE:
+			return getOwningInstance().lock() != nullptr; //2175
+		case uml::umlPackage::SLOT_ATTRIBUTE_VALUE:
+			return getValue() != nullptr; //2174
 	}
 	return ElementImpl::internalEIsSet(featureID);
 }
@@ -301,23 +300,23 @@ bool SlotImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::SLOT_ATTRIBUTE_DEFININGFEATURE:
+		case uml::umlPackage::SLOT_ATTRIBUTE_DEFININGFEATURE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::StructuralFeature> _definingFeature = std::dynamic_pointer_cast<uml::StructuralFeature>(_temp);
-			setDefiningFeature(_definingFeature); //2183
+			setDefiningFeature(_definingFeature); //2173
 			return true;
 		}
-		case UmlPackage::SLOT_ATTRIBUTE_OWNINGINSTANCE:
+		case uml::umlPackage::SLOT_ATTRIBUTE_OWNINGINSTANCE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::InstanceSpecification> _owningInstance = std::dynamic_pointer_cast<uml::InstanceSpecification>(_temp);
-			setOwningInstance(_owningInstance); //2185
+			setOwningInstance(_owningInstance); //2175
 			return true;
 		}
-		case UmlPackage::SLOT_ATTRIBUTE_VALUE:
+		case uml::umlPackage::SLOT_ATTRIBUTE_VALUE:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -369,12 +368,11 @@ void SlotImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadH
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -403,8 +401,9 @@ void SlotImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHand
 	ElementImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void SlotImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void SlotImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -416,7 +415,7 @@ void SlotImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inter
 				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			std::shared_ptr<ecore::EObject> value = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::VALUESPECIFICATION_ATTRIBUTE_OWNINGSLOT);
+			std::shared_ptr<ecore::EObject> value = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::VALUESPECIFICATION_ATTRIBUTE_OWNINGSLOT);
 			if (value != nullptr)
 			{
 				loadHandler->handleChild(value);
@@ -432,15 +431,15 @@ void SlotImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inter
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
-
-	ElementImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	ElementImpl::loadNode(nodeName, loadHandler);
 }
 
 void SlotImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case UmlPackage::SLOT_ATTRIBUTE_DEFININGFEATURE:
+		case uml::umlPackage::SLOT_ATTRIBUTE_DEFININGFEATURE:
 		{
 			if (references.size() == 1)
 			{
@@ -452,7 +451,7 @@ void SlotImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<
 			return;
 		}
 
-		case UmlPackage::SLOT_ATTRIBUTE_OWNINGINSTANCE:
+		case uml::umlPackage::SLOT_ATTRIBUTE_OWNINGINSTANCE:
 		{
 			if (references.size() == 1)
 			{
@@ -484,7 +483,7 @@ void SlotImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 		// Save 'value'
 		for (std::shared_ptr<uml::ValueSpecification> value : *this->getValue()) 

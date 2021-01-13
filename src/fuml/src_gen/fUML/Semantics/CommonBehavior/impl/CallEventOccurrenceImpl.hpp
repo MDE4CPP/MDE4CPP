@@ -13,13 +13,13 @@
 //Model includes
 #include "../CallEventOccurrence.hpp"
 
-#include "fUML/impl/FUMLFactoryImpl.hpp"
+#include "fUML/Semantics/CommonBehavior/impl/CommonBehaviorFactoryImpl.hpp"
 #include "fUML/Semantics/CommonBehavior/impl/EventOccurrenceImpl.hpp"
 
 //*********************************
 namespace fUML::Semantics::CommonBehavior 
 {
-	class CallEventOccurrenceImpl :virtual public EventOccurrenceImpl, virtual public CallEventOccurrence 
+	class CallEventOccurrenceImpl : virtual public EventOccurrenceImpl, virtual public CallEventOccurrence 
 	{
 		public: 
 			CallEventOccurrenceImpl(const CallEventOccurrenceImpl & obj);
@@ -29,7 +29,7 @@ namespace fUML::Semantics::CommonBehavior
 			CallEventOccurrenceImpl& operator=(CallEventOccurrenceImpl const&) = delete;
 
 		protected:
-			friend class fUML::FUMLFactoryImpl;
+			friend class fUML::Semantics::CommonBehavior::CommonBehaviorFactoryImpl;
 			CallEventOccurrenceImpl();
 			virtual std::shared_ptr<CallEventOccurrence> getThisCallEventOccurrencePtr() const;
 			virtual void setThisCallEventOccurrencePtr(std::weak_ptr<CallEventOccurrence> thisCallEventOccurrencePtr);
@@ -43,24 +43,19 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<uml::Operation> getOperation() ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > getParameterValues() ;
 			
-			/*!
-			 */ 
+			 
 			virtual bool match(std::shared_ptr<uml::Trigger>  trigger) ;
 			
-			/*!
-			 */ 
+			 
 			virtual void releaseCaller() ;
 			
-			/*!
-			 */ 
+			 
 			virtual void setOutputParameterValues(std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> >  parameterValues) ;
 			
 			
@@ -73,13 +68,12 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::CallEventExecution > getExecution() const ;
 			
-			/*!
-			 */
-			virtual void setExecution(std::shared_ptr<fUML::Semantics::CommonBehavior::CallEventExecution> _execution_execution) ;
+			
+			virtual void setExecution(std::shared_ptr<fUML::Semantics::CommonBehavior::CallEventExecution> _execution) ;
+			
 							
 			
 			//*********************************
@@ -98,7 +92,7 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

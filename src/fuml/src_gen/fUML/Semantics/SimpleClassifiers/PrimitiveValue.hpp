@@ -32,7 +32,7 @@ namespace persistence
 
 namespace fUML
 {
-	class FUMLFactory;
+	class fUMLFactory;
 }
 
 //Forward Declaration for used types
@@ -60,8 +60,7 @@ namespace fUML::Semantics::Values
 //*********************************
 namespace fUML::Semantics::SimpleClassifiers 
 {
-	/*!
-	 */
+	
 	class PrimitiveValue:virtual public fUML::Semantics::Values::Value
 	{
 		public:
@@ -81,8 +80,10 @@ namespace fUML::Semantics::SimpleClassifiers
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() = 0;
+			
+			 
 			virtual std::shared_ptr<Bag<uml::Classifier> > getTypes() = 0;
 			
 			
@@ -93,13 +94,12 @@ namespace fUML::Semantics::SimpleClassifiers
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<uml::PrimitiveType > getType() const = 0;
 			
-			/*!
-			 */
-			virtual void setType(std::shared_ptr<uml::PrimitiveType> _type_type) = 0;
+			
+			virtual void setType(std::shared_ptr<uml::PrimitiveType> _type) = 0;
+			
 			
 
 		protected:
@@ -111,10 +111,8 @@ namespace fUML::Semantics::SimpleClassifiers
 			//*********************************
 			// Reference Members
 			//*********************************
-			/*!
-			 */
-			std::shared_ptr<uml::PrimitiveType > m_type;
 			
+			std::shared_ptr<uml::PrimitiveType > m_type;
 
 		public:
 			//*********************************

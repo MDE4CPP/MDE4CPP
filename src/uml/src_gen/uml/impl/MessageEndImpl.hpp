@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class MessageEndImpl :virtual public NamedElementImpl, virtual public MessageEnd 
+	class MessageEndImpl : virtual public NamedElementImpl, virtual public MessageEnd 
 	{
 		public: 
 			MessageEndImpl(const MessageEndImpl & obj);
@@ -28,7 +28,7 @@ namespace uml
 			MessageEndImpl& operator=(MessageEndImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			MessageEndImpl();
 			virtual std::shared_ptr<MessageEnd> getThisMessageEndPtr() const;
 			virtual void setThisMessageEndPtr(std::weak_ptr<MessageEnd> thisMessageEndPtr);
@@ -51,7 +51,7 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 This query returns a set including the enclosing InteractionFragment this MessageEnd is enclosed within.
+			This query returns a set including the enclosing InteractionFragment this MessageEnd is enclosed within.
 			result = (if self->select(oclIsKindOf(Gate))->notEmpty() 
 			then -- it is a Gate
 			let endGate : Gate = 
@@ -81,28 +81,36 @@ namespace uml
 			  else endMOS.enclosingOperand.oclAsType(InteractionFragment)->asSet()
 			  endif
 			endif)
-			<p>From package UML::Interactions.</p> */ 
+			<p>From package UML::Interactions.</p>
+			*/
+			 
 			virtual std::shared_ptr<Bag<uml::InteractionFragment> > enclosingFragment() ;
 			
 			/*!
-			 This query returns value true if this MessageEnd is a receiveEvent.
+			This query returns value true if this MessageEnd is a receiveEvent.
 			message->notEmpty()
 			result = (message.receiveEvent->asSet()->includes(self))
-			<p>From package UML::Interactions.</p> */ 
+			<p>From package UML::Interactions.</p>
+			*/
+			 
 			virtual bool isReceive() ;
 			
 			/*!
-			 This query returns value true if this MessageEnd is a sendEvent.
+			This query returns value true if this MessageEnd is a sendEvent.
 			message->notEmpty()
 			result = (message.sendEvent->asSet()->includes(self))
-			<p>From package UML::Interactions.</p> */ 
+			<p>From package UML::Interactions.</p>
+			*/
+			 
 			virtual bool isSend() ;
 			
 			/*!
-			 This query returns a set including the MessageEnd (if exists) at the opposite end of the Message for this MessageEnd.
+			This query returns a set including the MessageEnd (if exists) at the opposite end of the Message for this MessageEnd.
 			result = (message->asSet().messageEnd->asSet()->excluding(self))
 			message->notEmpty()
-			<p>From package UML::Interactions.</p> */ 
+			<p>From package UML::Interactions.</p>
+			*/
+			 
 			virtual std::shared_ptr<Bag<uml::MessageEnd> > oppositeEnd() ;
 			
 			
@@ -116,25 +124,34 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 References a Message.
-			<p>From package UML::Interactions.</p> */
+			References a Message.
+			<p>From package UML::Interactions.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::Message > getMessage() const ;
 			
 			/*!
-			 References a Message.
-			<p>From package UML::Interactions.</p> */
-			virtual void setMessage(std::shared_ptr<uml::Message> _message_message) ;
+			References a Message.
+			<p>From package UML::Interactions.</p>
+			*/
+			
+			virtual void setMessage(std::shared_ptr<uml::Message> _message) ;
+			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
@@ -148,7 +165,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

@@ -58,25 +58,10 @@ SET(CMAKE_CXX_FLAGS_RELEASE " -O3 -DNDEBUG")
 string(REPLACE "\\" "/" MDE4CPP_HOME $ENV{MDE4CPP_HOME})
 
 SET(SOURCE_FILES
-	impl/[aPackage.name.toUpperFirst()/]PackageImpl.cpp
-	[aPackage.name.toUpperFirst()/]Package.cpp
-	impl/[aPackage.name.toUpperFirst()/]PluginImpl.cpp
-	[aPackage.name.toUpperFirst()/]Plugin.cpp
-[if (not packOnly)]
-	impl/[aPackage.name.toUpperFirst()/]FactoryImpl.cpp
-	[aPackage.name.toUpperFirst()/]Factory.cpp
-[for (aClass : Class | aPackage.allOwnedElements()->filter(Class)->select(e|not (e.oclIsKindOf(FunctionBehavior) or e.oclIsKindOf(OpaqueBehavior) or e.oclIsKindOf(Activity)))->sortedBy(myQualifiedName()))]
-	impl/[aClass.name.toUpperFirst()/]Impl.cpp
-[if (aClass.isSingleton())]
-	[aClass.name.toUpperFirst()/].cpp
-[/if]
-[/for]
-[comment] DISABLE INTERFACE IMPLEMENTATION
-[for (anInterface : Interface | aPackage.allOwnedElements()->filter(Interface)->sortedBy(myQualifiedName()))]
-	impl/[anInterface.name.toUpperFirst()/]Impl.cpp
-[/for]
-[/comment]
-[/if]
+	# Model plugin
+	impl/[aPackage.name/]PluginImpl.cpp
+	[aPackage.name/]Plugin.cpp
+	[aPackage.generatePackageSourceFilesToCompile(packOnly, true)/]
 )
 
 INCLUDE_DIRECTORIES(
@@ -134,7 +119,9 @@ FIND_LIBRARY([packName.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/] [
 [if (aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior).language->includes(keyLibrary()))]
 [let index : Integer = aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior).language->indexOf(keyLibrary())]
 [if (0 <index and index <= aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior)._body->size())]
-FIND_LIBRARY([aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior)._body->asOrderedSet()->at(index).toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/] [aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior)._body->asOrderedSet()->at(3)/][libraryNameSuffix(debugMode)/][ending/] ${MDE4CPP_HOME}/application/[folderName/])
+[for (libName : String | aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior)._body->asOrderedSet()->at(index).tokenize(lineSeparator()))]
+FIND_LIBRARY([libName.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/] [libName/][libraryNameSuffix(debugMode)/][ending/] ${MDE4CPP_HOME}/application/[folderName/])
+[/for]
 [/if][/let][/if][/if][/for]
 [if(aPackage.eAllContents()->select(oclIsKindOf(Operation)).oclAsType(Operation).method->filter(Activity)->asSet()->notEmpty())]
 FIND_LIBRARY(PLUGINFRAMEWORK_[libraryVariableNameSuffix(debugMode)/] pluginFramework[libraryNameSuffix(debugMode)/][ending/] ${MDE4CPP_HOME}/application/[folderName/])[/if]
@@ -158,12 +145,44 @@ TARGET_LINK_LIBRARIES(${PROJECT_NAME}
 [if (aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior).language->includes(keyLibrary()))]
 [let index : Integer = aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior).language->indexOf(keyLibrary())]
 [if (0 <index and index <= aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior)._body->size())]
-	[buildModeCMakeProperty(debugMode)/] ${[aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior)._body->asOrderedSet()->at(index).toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/]}
+[for (libName : String | aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior)._body->asOrderedSet()->at(index).tokenize(lineSeparator()))]
+	[buildModeCMakeProperty(debugMode)/] ${[libName.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/]}
+[/for]
 [/if][/let][/if][/if][/for]
 [if(aPackage.eAllContents()->select(oclIsKindOf(Operation)).oclAsType(Operation).method->filter(Activity)->asSet()->notEmpty())]
 	[buildModeCMakeProperty(debugMode)/] ${PLUGINFRAMEWORK_[libraryVariableNameSuffix(debugMode)/]}
-	${CMAKE_DL_LIBS}[/if]          
+	${CMAKE_DL_LIBS}[/if]        
 )
+[/template]
+
+[template private generatePackageSourceFilesToCompile(aPackage : Package, packOnly : Boolean, isRoot : Boolean)]
+# Package of [aPackage.generateNamespace(false)/]
+[if(not isRoot)][aPackage.generateNamespacePathWithoutRoot(false)/]/[/if]impl/[aPackage.name/]PackageImpl.cpp
+[if(not isRoot)][aPackage.generateNamespacePathWithoutRoot(false)/]/[/if][aPackage.name/]Package.cpp
+[if (not packOnly)]
+# Factory of [aPackage.generateNamespace(false)/]
+[if(not isRoot)][aPackage.generateNamespacePathWithoutRoot(false)/]/[/if]impl/[aPackage.name/]FactoryImpl.cpp
+[if(not isRoot)][aPackage.generateNamespacePathWithoutRoot(false)/]/[/if][aPackage.name/]Factory.cpp
+# Contents of [aPackage.generateNamespace(false)/]
+[aPackage.generatePackageContents(isRoot)/]
+[/if]
+[for (subPackage : Package | aPackage.ownedElement->filter(Package))]
+[subPackage.generatePackageSourceFilesToCompile(packOnly, false)/]
+[/for]
+[/template]
+
+[template private generatePackageContents(aPackage : Package, isRoot : Boolean)]
+[for (aClass : Class | aPackage.ownedElement->filter(Class)->select(e|not (e.oclIsKindOf(FunctionBehavior) or e.oclIsKindOf(OpaqueBehavior) or e.oclIsKindOf(Activity)))->sortedBy(myQualifiedName()))]
+[if(not isRoot)][aPackage.generateNamespacePathWithoutRoot(false)/]/[/if]impl/[aClass.name.toUpperFirst()/]Impl.cpp
+[if (aClass.isSingleton())]
+[if(not isRoot)][aPackage.generateNamespacePathWithoutRoot(false)/]/[/if][aClass.name.toUpperFirst()/].cpp
+[/if]
+[/for]
+[comment] DISABLE INTERFACE IMPLEMENTATION
+[for (anInterface : Interface | aPackage.allOwnedElements()->filter(Interface)->sortedBy(myQualifiedName()))]
+[if(not isRoot)][aPackage.generateNamespacePath(false)/]/[/if]impl/[anInterface.name.toUpperFirst()/]Impl.cpp
+[/for]
+[/comment]
 [/template]
 
 [query private buildModeCMakeProperty(debugMode : Boolean) : String = if (debugMode) then 'debug' else 'optimized' endif/]

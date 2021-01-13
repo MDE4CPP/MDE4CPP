@@ -13,13 +13,13 @@
 //Model includes
 #include "../LiteralEvaluation.hpp"
 
-#include "fUML/impl/FUMLFactoryImpl.hpp"
+#include "fUML/Semantics/Values/impl/ValuesFactoryImpl.hpp"
 #include "fUML/Semantics/Values/impl/EvaluationImpl.hpp"
 
 //*********************************
 namespace fUML::Semantics::Values 
 {
-	class LiteralEvaluationImpl :virtual public EvaluationImpl, virtual public LiteralEvaluation 
+	class LiteralEvaluationImpl : virtual public EvaluationImpl, virtual public LiteralEvaluation 
 	{
 		public: 
 			LiteralEvaluationImpl(const LiteralEvaluationImpl & obj);
@@ -29,7 +29,7 @@ namespace fUML::Semantics::Values
 			LiteralEvaluationImpl& operator=(LiteralEvaluationImpl const&) = delete;
 
 		protected:
-			friend class fUML::FUMLFactoryImpl;
+			friend class fUML::Semantics::Values::ValuesFactoryImpl;
 			LiteralEvaluationImpl();
 			virtual std::shared_ptr<LiteralEvaluation> getThisLiteralEvaluationPtr() const;
 			virtual void setThisLiteralEvaluationPtr(std::weak_ptr<LiteralEvaluation> thisLiteralEvaluationPtr);
@@ -43,8 +43,7 @@ namespace fUML::Semantics::Values
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<uml::PrimitiveType> getType(std::string builtInTypeName) ;
 			
 			
@@ -75,7 +74,7 @@ namespace fUML::Semantics::Values
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

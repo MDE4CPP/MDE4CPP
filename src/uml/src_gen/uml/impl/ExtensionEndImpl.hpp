@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class ExtensionEndImpl :virtual public PropertyImpl, virtual public ExtensionEnd 
+	class ExtensionEndImpl : virtual public PropertyImpl, virtual public ExtensionEnd 
 	{
 		public: 
 			ExtensionEndImpl(const ExtensionEndImpl & obj);
@@ -28,7 +28,7 @@ namespace uml
 			ExtensionEndImpl& operator=(ExtensionEndImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			ExtensionEndImpl();
 			virtual std::shared_ptr<ExtensionEnd> getThisExtensionEndPtr() const;
 			virtual void setThisExtensionEndPtr(std::weak_ptr<ExtensionEnd> thisExtensionEndPtr);
@@ -75,13 +75,17 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 The aggregation of an ExtensionEnd is composite.
-			self.aggregation = AggregationKind::composite */ 
+			The aggregation of an ExtensionEnd is composite.
+			self.aggregation = AggregationKind::composite
+			*/
+			 
 			virtual bool aggregation(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
-			 The multiplicity of ExtensionEnd is 0..1 or 1.
-			(lowerBound() = 0 or lowerBound() = 1) and upperBound() = 1 */ 
+			The multiplicity of ExtensionEnd is 0..1 or 1.
+			(lowerBound() = 0 or lowerBound() = 1) and upperBound() = 1
+			*/
+			 
 			virtual bool multiplicity(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
@@ -100,23 +104,35 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Classifiers that have this Feature as a feature.
-			<p>From package UML::Classification.</p> */
+			The Classifiers that have this Feature as a feature.
+			<p>From package UML::Classification.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Classifier>> getFeaturingClassifier() const ;/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
+			The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const ;/*!
-			 The contexts that this element may be redefined from.
-			<p>From package UML::Classification.</p> */
+			The contexts that this element may be redefined from.
+			<p>From package UML::Classification.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Classifier>> getRedefinitionContext() const ; 
 			 
 			//*********************************
@@ -130,7 +146,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

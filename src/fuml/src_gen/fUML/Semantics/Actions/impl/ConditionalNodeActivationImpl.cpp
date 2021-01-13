@@ -17,24 +17,22 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "fUML/impl/FUMLPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
 
 #include <exception> // used in Persistence
+
+#include "uml/Action.hpp"
 
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 
@@ -56,10 +54,15 @@
 
 #include "fUML/Semantics/Activities/Token.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
-#include "fUML/FUMLFactory.hpp"
+//Factories an Package includes
+#include "fUML/Semantics/Actions/impl/ActionsFactoryImpl.hpp"
+#include "fUML/Semantics/Actions/impl/ActionsPackageImpl.hpp"
+
+#include "fUML/fUMLFactory.hpp"
+#include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsFactory.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -69,29 +72,7 @@ using namespace fUML::Semantics::Actions;
 // Constructor / Destructor
 //*********************************
 ConditionalNodeActivationImpl::ConditionalNodeActivationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		m_clauseActivations.reset(new Bag<fUML::Semantics::Actions::ClauseActivation>());
-	
-	
-
-		m_selectedClauses.reset(new Bag<uml::Clause>());
-	
-	
-
-	//Init references
-	
-	
-
-	
-	
+{	
 }
 
 ConditionalNodeActivationImpl::~ConditionalNodeActivationImpl()
@@ -101,17 +82,12 @@ ConditionalNodeActivationImpl::~ConditionalNodeActivationImpl()
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			ConditionalNodeActivationImpl::ConditionalNodeActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
-			:ConditionalNodeActivationImpl()
-			{
-			    m_group = par_group;
-			}
-
-
-
-
+ConditionalNodeActivationImpl::ConditionalNodeActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
+:ConditionalNodeActivationImpl()
+{
+	m_group = par_group;
+}
 
 
 ConditionalNodeActivationImpl::ConditionalNodeActivationImpl(const ConditionalNodeActivationImpl & obj):ConditionalNodeActivationImpl()
@@ -125,6 +101,8 @@ ConditionalNodeActivationImpl::ConditionalNodeActivationImpl(const ConditionalNo
 
 	//copy references with no containment (soft copy)
 	
+	m_action  = obj.getAction();
+
 	m_group  = obj.getGroup();
 
 	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> _incomingEdges = obj.getIncomingEdges();
@@ -185,7 +163,6 @@ ConditionalNodeActivationImpl::ConditionalNodeActivationImpl(const ConditionalNo
 	#endif
 
 	
-	
 }
 
 std::shared_ptr<ecore::EObject>  ConditionalNodeActivationImpl::copy() const
@@ -197,7 +174,7 @@ std::shared_ptr<ecore::EObject>  ConditionalNodeActivationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ConditionalNodeActivationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getConditionalNodeActivation_Class();
+	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getConditionalNodeActivation_Class();
 }
 
 //*********************************
@@ -228,18 +205,42 @@ void ConditionalNodeActivationImpl::selectBody(std::shared_ptr<uml::Clause>  cla
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference clauseActivations
+*/
 std::shared_ptr<Bag<fUML::Semantics::Actions::ClauseActivation>> ConditionalNodeActivationImpl::getClauseActivations() const
 {
+	if(m_clauseActivations == nullptr)
+	{
+		m_clauseActivations.reset(new Bag<fUML::Semantics::Actions::ClauseActivation>());
+		
+		
+	}
 
     return m_clauseActivations;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference selectedClauses
+*/
 std::shared_ptr<Bag<uml::Clause>> ConditionalNodeActivationImpl::getSelectedClauses() const
 {
+	if(m_selectedClauses == nullptr)
+	{
+		m_selectedClauses.reset(new Bag<uml::Clause>());
+		
+		
+	}
 
     return m_selectedClauses;
 }
+
+
+
 
 
 //*********************************
@@ -247,8 +248,20 @@ std::shared_ptr<Bag<uml::Clause>> ConditionalNodeActivationImpl::getSelectedClau
 //*********************************
 std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> ConditionalNodeActivationImpl::getPinActivation() const
 {
+	if(m_pinActivation == nullptr)
+	{
+		/*Union*/
+		m_pinActivation.reset(new Union<fUML::Semantics::Actions::PinActivation>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_pinActivation - Union<fUML::Semantics::Actions::PinActivation>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_pinActivation;
 }
+
+
 
 
 std::shared_ptr<ConditionalNodeActivation> ConditionalNodeActivationImpl::getThisConditionalNodeActivationPtr() const
@@ -276,7 +289,7 @@ Any ConditionalNodeActivationImpl::eGet(int featureID, bool resolve, bool coreTy
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::CONDITIONALNODEACTIVATION_ATTRIBUTE_CLAUSEACTIVATIONS:
+		case fUML::Semantics::Actions::ActionsPackage::CONDITIONALNODEACTIVATION_ATTRIBUTE_CLAUSEACTIVATIONS:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<fUML::Semantics::Actions::ClauseActivation>::iterator iter = m_clauseActivations->begin();
@@ -286,9 +299,9 @@ Any ConditionalNodeActivationImpl::eGet(int featureID, bool resolve, bool coreTy
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //3011
+			return eAny(tempList); //3012
 		}
-		case fUML::FUMLPackage::CONDITIONALNODEACTIVATION_ATTRIBUTE_SELECTEDCLAUSES:
+		case fUML::Semantics::Actions::ActionsPackage::CONDITIONALNODEACTIVATION_ATTRIBUTE_SELECTEDCLAUSES:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Clause>::iterator iter = m_selectedClauses->begin();
@@ -298,7 +311,7 @@ Any ConditionalNodeActivationImpl::eGet(int featureID, bool resolve, bool coreTy
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //3012
+			return eAny(tempList); //3013
 		}
 	}
 	return StructuredActivityNodeActivationImpl::eGet(featureID, resolve, coreType);
@@ -307,10 +320,10 @@ bool ConditionalNodeActivationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::CONDITIONALNODEACTIVATION_ATTRIBUTE_CLAUSEACTIVATIONS:
-			return getClauseActivations() != nullptr; //3011
-		case fUML::FUMLPackage::CONDITIONALNODEACTIVATION_ATTRIBUTE_SELECTEDCLAUSES:
-			return getSelectedClauses() != nullptr; //3012
+		case fUML::Semantics::Actions::ActionsPackage::CONDITIONALNODEACTIVATION_ATTRIBUTE_CLAUSEACTIVATIONS:
+			return getClauseActivations() != nullptr; //3012
+		case fUML::Semantics::Actions::ActionsPackage::CONDITIONALNODEACTIVATION_ATTRIBUTE_SELECTEDCLAUSES:
+			return getSelectedClauses() != nullptr; //3013
 	}
 	return StructuredActivityNodeActivationImpl::internalEIsSet(featureID);
 }
@@ -318,7 +331,7 @@ bool ConditionalNodeActivationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::CONDITIONALNODEACTIVATION_ATTRIBUTE_CLAUSEACTIVATIONS:
+		case fUML::Semantics::Actions::ActionsPackage::CONDITIONALNODEACTIVATION_ATTRIBUTE_CLAUSEACTIVATIONS:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -354,7 +367,7 @@ bool ConditionalNodeActivationImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case fUML::FUMLPackage::CONDITIONALNODEACTIVATION_ATTRIBUTE_SELECTEDCLAUSES:
+		case fUML::Semantics::Actions::ActionsPackage::CONDITIONALNODEACTIVATION_ATTRIBUTE_SELECTEDCLAUSES:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -406,12 +419,11 @@ void ConditionalNodeActivationImpl::load(std::shared_ptr<persistence::interfaces
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get FUMLFactory
-	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
+	// get fUMLFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -440,8 +452,9 @@ void ConditionalNodeActivationImpl::loadAttributes(std::shared_ptr<persistence::
 	StructuredActivityNodeActivationImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ConditionalNodeActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+void ConditionalNodeActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<fUML::Semantics::Actions::ActionsFactory> modelFactory=fUML::Semantics::Actions::ActionsFactory::eInstance();
 
 	try
 	{
@@ -470,15 +483,15 @@ void ConditionalNodeActivationImpl::loadNode(std::string nodeName, std::shared_p
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
-
-	StructuredActivityNodeActivationImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	StructuredActivityNodeActivationImpl::loadNode(nodeName, loadHandler);
 }
 
 void ConditionalNodeActivationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::CONDITIONALNODEACTIVATION_ATTRIBUTE_SELECTEDCLAUSES:
+		case fUML::Semantics::Actions::ActionsPackage::CONDITIONALNODEACTIVATION_ATTRIBUTE_SELECTEDCLAUSES:
 		{
 			std::shared_ptr<Bag<uml::Clause>> _selectedClauses = getSelectedClauses();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -518,7 +531,7 @@ void ConditionalNodeActivationImpl::saveContent(std::shared_ptr<persistence::int
 {
 	try
 	{
-		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+		std::shared_ptr<fUML::Semantics::Actions::ActionsPackage> package = fUML::Semantics::Actions::ActionsPackage::eInstance();
 
 	
 
@@ -538,7 +551,7 @@ void ConditionalNodeActivationImpl::saveContent(std::shared_ptr<persistence::int
 		std::shared_ptr<Bag<fUML::Semantics::Actions::ClauseActivation>> list_clauseActivations = this->getClauseActivations();
 		for (std::shared_ptr<fUML::Semantics::Actions::ClauseActivation> clauseActivations : *list_clauseActivations) 
 		{
-			saveHandler->addReference(clauseActivations, "clauseActivations", clauseActivations->eClass() != package->getClauseActivation_Class());
+			saveHandler->addReference(clauseActivations, "clauseActivations", clauseActivations->eClass() !=fUML::Semantics::Actions::ActionsPackage::eInstance()->getClauseActivation_Class());
 		}
 	}
 	catch (std::exception& e)

@@ -11,12 +11,28 @@
 
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
+#include "StandardProfile/StandardProfileFactory.hpp"
 #include "StandardProfile/impl/StandardProfilePackageImpl.hpp"
 #include "uml/Stereotype.hpp"
+
+//Types included from attributes, operation parameters, imports and composite owner classes
 #include "uml/Component.hpp"
 
+//Packges and Factories included from types of attributes, operation parameters, imports and composite owner classes
+#include "uml/umlFactory.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
+//Packages of included Enumerations
 
+//Includes of PluginFramework (if required)
+
+//Includes of OpaqueBevaiors (if required)
+
+//Includes from InstanceValues (if required)
+
+//Includes from Ports typed by interfaces (if required)
+
+//Includes from roles of ConnectorEnds (if required)
 
 using namespace StandardProfile;
 
@@ -25,6 +41,12 @@ using namespace StandardProfile;
 //*********************************
 SubsystemImpl::SubsystemImpl()
 {
+	#ifdef ADD_COUNT
+		ADD_COUNT("SubsystemImpl()");
+	#endif
+
+	DEBUG_MESSAGE(std::cout<<"Subsystem is created..."<<std::endl;)
+
 	//***********************************
 	// init Get Set
 	//getter init
@@ -34,16 +56,16 @@ SubsystemImpl::SubsystemImpl()
 	
 	m_unsetterMap.insert(std::pair<std::string,std::function<void()>>("StandardProfile::Subsystem::base_Component",[this](){m_base_Component = std::shared_ptr<uml::Component>(nullptr);}));
 	 
-
-	// init properties without default
-	
-
-	
 }
 
 
 SubsystemImpl::~SubsystemImpl()
 {
+	#ifdef SUB_COUNT
+		SUB_COUNT("SubsystemImpl()");
+	#endif
+
+	DEBUG_MESSAGE(std::cout<<"Subsystem is destroyed..."<<std::endl;)
 }
 
 SubsystemImpl::SubsystemImpl(const SubsystemImpl & obj):SubsystemImpl()
@@ -52,6 +74,7 @@ SubsystemImpl::SubsystemImpl(const SubsystemImpl & obj):SubsystemImpl()
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Subsystem "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	instantiate();
 }
 
 std::shared_ptr<ecore::EObject>  SubsystemImpl::copy() const
@@ -65,6 +88,21 @@ std::shared_ptr<ecore::EObject>  SubsystemImpl::copy() const
 std::shared_ptr<uml::Class> SubsystemImpl::getMetaClass()
 {
 	return StandardProfilePackageImpl::eInstance()->get_StandardProfile_Subsystem();
+}
+
+void SubsystemImpl::instantiate()
+{   
+	
+}
+
+void SubsystemImpl::destroy()
+{	
+
+	//Erase properties
+	//deleting property base_Component
+	m_base_Component.reset();
+	
+	//Erase back reference to owner
 }
 
 //*********************************

@@ -11,12 +11,28 @@
 
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
+#include "StandardProfile/StandardProfileFactory.hpp"
 #include "StandardProfile/impl/StandardProfilePackageImpl.hpp"
 #include "uml/Stereotype.hpp"
+
+//Types included from attributes, operation parameters, imports and composite owner classes
 #include "uml/Class.hpp"
 
+//Packges and Factories included from types of attributes, operation parameters, imports and composite owner classes
+#include "uml/umlFactory.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
+//Packages of included Enumerations
 
+//Includes of PluginFramework (if required)
+
+//Includes of OpaqueBevaiors (if required)
+
+//Includes from InstanceValues (if required)
+
+//Includes from Ports typed by interfaces (if required)
+
+//Includes from roles of ConnectorEnds (if required)
 
 using namespace StandardProfile;
 
@@ -25,6 +41,12 @@ using namespace StandardProfile;
 //*********************************
 TypeImpl::TypeImpl()
 {
+	#ifdef ADD_COUNT
+		ADD_COUNT("TypeImpl()");
+	#endif
+
+	DEBUG_MESSAGE(std::cout<<"Type is created..."<<std::endl;)
+
 	//***********************************
 	// init Get Set
 	//getter init
@@ -34,16 +56,16 @@ TypeImpl::TypeImpl()
 	
 	m_unsetterMap.insert(std::pair<std::string,std::function<void()>>("StandardProfile::Type::base_Class",[this](){m_base_Class = std::shared_ptr<uml::Class>(nullptr);}));
 	 
-
-	// init properties without default
-	
-
-	
 }
 
 
 TypeImpl::~TypeImpl()
 {
+	#ifdef SUB_COUNT
+		SUB_COUNT("TypeImpl()");
+	#endif
+
+	DEBUG_MESSAGE(std::cout<<"Type is destroyed..."<<std::endl;)
 }
 
 TypeImpl::TypeImpl(const TypeImpl & obj):TypeImpl()
@@ -52,6 +74,7 @@ TypeImpl::TypeImpl(const TypeImpl & obj):TypeImpl()
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Type "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	instantiate();
 }
 
 std::shared_ptr<ecore::EObject>  TypeImpl::copy() const
@@ -65,6 +88,21 @@ std::shared_ptr<ecore::EObject>  TypeImpl::copy() const
 std::shared_ptr<uml::Class> TypeImpl::getMetaClass()
 {
 	return StandardProfilePackageImpl::eInstance()->get_StandardProfile_Type();
+}
+
+void TypeImpl::instantiate()
+{   
+	
+}
+
+void TypeImpl::destroy()
+{	
+
+	//Erase properties
+	//deleting property base_Class
+	m_base_Class.reset();
+	
+	//Erase back reference to owner
 }
 
 //*********************************

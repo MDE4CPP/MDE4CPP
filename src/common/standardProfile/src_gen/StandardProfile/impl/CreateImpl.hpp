@@ -56,13 +56,17 @@ namespace StandardProfile
 			// Attributes Getter Setter
 			//*********************************
 			virtual std::weak_ptr<uml::BehavioralFeature> getBase_BehavioralFeature() const ;
-			virtual void setBase_BehavioralFeature (std::weak_ptr<uml::BehavioralFeature> _base_BehavioralFeature);
+			virtual void setBase_BehavioralFeature(std::weak_ptr<uml::BehavioralFeature> _base_BehavioralFeature);
 			virtual std::weak_ptr<uml::Usage> getBase_Usage() const ;
-			virtual void setBase_Usage (std::weak_ptr<uml::Usage> _base_Usage);
+			virtual void setBase_Usage(std::weak_ptr<uml::Usage> _base_Usage);
+			
+			
 			
 
 		protected:
 			virtual std::shared_ptr<uml::Class> getMetaClass();
+			virtual void instantiate();
+			virtual void destroy();
 
 		public:
 			//*********************************

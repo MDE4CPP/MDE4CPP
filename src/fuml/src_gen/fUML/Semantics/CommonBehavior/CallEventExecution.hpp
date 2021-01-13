@@ -13,7 +13,7 @@
 
 
 // forward declarations
-template<class T> class Bag;
+template<class T> class Bag; 
 
 
 
@@ -33,10 +33,15 @@ namespace persistence
 
 namespace fUML
 {
-	class FUMLFactory;
+	class fUMLFactory;
 }
 
 //Forward Declaration for used types
+namespace uml 
+{
+	class Behavior;
+}
+
 namespace uml 
 {
 	class Classifier;
@@ -96,8 +101,7 @@ namespace fUML::Semantics::Values
 //*********************************
 namespace fUML::Semantics::CommonBehavior 
 {
-	/*!
-	 */
+	
 	class CallEventExecution:virtual public Execution
 	{
 		public:
@@ -117,64 +121,51 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			// Operations
 			//*********************************
+			 
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() = 0;
 			
-			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> createEventOccurrence() = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual void execute() = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > getInputParameterValues() = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<uml::Operation> getOperation() = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual bool isCallerSuspended() = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual void makeCall() = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> new_() = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual void releaseCaller() = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual void setOutputParameterValues(std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> >  parameterValues) = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual void suspendCaller() = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual void wait_() = 0;
 			
 			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual bool getCallerSuspended() const = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual void setCallerSuspended (bool _callerSuspended)= 0; 
-			
 			
 			//*********************************
 			// Reference
@@ -185,8 +176,7 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			// Attribute Members
 			//*********************************
-			/*!
-			 */ 
+			 
 			bool m_callerSuspended = false;
 			
 			

@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -26,21 +25,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -74,10 +64,11 @@
 
 #include "uml/StructuredActivityNode.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -87,17 +78,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 MergeNodeImpl::MergeNodeImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 MergeNodeImpl::~MergeNodeImpl()
@@ -107,53 +88,36 @@ MergeNodeImpl::~MergeNodeImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+MergeNodeImpl::MergeNodeImpl(std::weak_ptr<uml::Activity > par_activity)
+:MergeNodeImpl()
+{
+	m_activity = par_activity;
+	m_owner = par_activity;
+}
 
 //Additional constructor for the containments back reference
-			MergeNodeImpl::MergeNodeImpl(std::weak_ptr<uml::Activity > par_activity)
-			:MergeNodeImpl()
-			{
-			    m_activity = par_activity;
-				m_owner = par_activity;
-			}
-
-
-
-
+MergeNodeImpl::MergeNodeImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
+:MergeNodeImpl()
+{
+	m_inStructuredNode = par_inStructuredNode;
+	m_owner = par_inStructuredNode;
+}
 
 //Additional constructor for the containments back reference
-			MergeNodeImpl::MergeNodeImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
-			:MergeNodeImpl()
-			{
-			    m_inStructuredNode = par_inStructuredNode;
-				m_owner = par_inStructuredNode;
-			}
-
-
-
-
+MergeNodeImpl::MergeNodeImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:MergeNodeImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			MergeNodeImpl::MergeNodeImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:MergeNodeImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
-
-
-
-
-//Additional constructor for the containments back reference
-			MergeNodeImpl::MergeNodeImpl(std::weak_ptr<uml::Element > par_owner)
-			:MergeNodeImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-
-
+MergeNodeImpl::MergeNodeImpl(std::weak_ptr<uml::Element > par_owner)
+:MergeNodeImpl()
+{
+	m_owner = par_owner;
+}
 
 
 MergeNodeImpl::MergeNodeImpl(const MergeNodeImpl & obj):MergeNodeImpl()
@@ -249,7 +213,7 @@ std::shared_ptr<ecore::EObject>  MergeNodeImpl::copy() const
 
 std::shared_ptr<ecore::EClass> MergeNodeImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getMergeNode_Class();
+	return uml::umlPackage::eInstance()->getMergeNode_Class();
 }
 
 //*********************************
@@ -280,20 +244,55 @@ bool MergeNodeImpl::one_outgoing_edge(Any diagnostics,std::map <   Any, Any >  c
 //*********************************
 std::shared_ptr<Union<uml::ActivityGroup>> MergeNodeImpl::getInGroup() const
 {
+	if(m_inGroup == nullptr)
+	{
+		/*Union*/
+		m_inGroup.reset(new Union<uml::ActivityGroup>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_inGroup - Union<uml::ActivityGroup>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_inGroup;
 }
+
 std::shared_ptr<Union<uml::Element>> MergeNodeImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > MergeNodeImpl::getOwner() const
 {
 	return m_owner;
 }
+
 std::shared_ptr<Union<uml::RedefinableElement>> MergeNodeImpl::getRedefinedElement() const
 {
+	if(m_redefinedElement == nullptr)
+	{
+		/*Union*/
+		m_redefinedElement.reset(new Union<uml::RedefinableElement>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_redefinedElement - Union<uml::RedefinableElement>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_redefinedElement;
 }
+
+
 
 
 std::shared_ptr<MergeNode> MergeNodeImpl::getThisMergeNodePtr() const
@@ -366,12 +365,11 @@ void MergeNodeImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> 
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -381,11 +379,12 @@ void MergeNodeImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoa
 	ControlNodeImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void MergeNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void MergeNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
-
-	ControlNodeImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	ControlNodeImpl::loadNode(nodeName, loadHandler);
 }
 
 void MergeNodeImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -401,7 +400,6 @@ void MergeNodeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandler> 
 	
 	ActivityNodeImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);
@@ -423,7 +421,7 @@ void MergeNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 

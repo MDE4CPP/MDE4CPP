@@ -35,7 +35,7 @@ namespace persistence
 
 namespace uml
 {
-	class UmlFactory;
+	class umlFactory;
 }
 
 //Forward Declaration for used types
@@ -79,8 +79,10 @@ namespace uml
 namespace uml 
 {
 	/*!
-	 LinkEndDestructionData is LinkEndData used to provide values for one end of a link to be destroyed by a DestroyLinkAction.
-	<p>From package UML::Actions.</p> */
+	LinkEndDestructionData is LinkEndData used to provide values for one end of a link to be destroyed by a DestroyLinkAction.
+	<p>From package UML::Actions.</p>
+	*/
+	
 	class LinkEndDestructionData:virtual public LinkEndData
 	{
 		public:
@@ -101,13 +103,15 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 LinkEndDestructionData for ordered, nonunique Association ends must have a single destroyAt InputPin if isDestroyDuplicates is false, which must be of type UnlimitedNatural and have a multiplicity of 1..1. Otherwise, the action has no destroyAt input pin.
+			LinkEndDestructionData for ordered, nonunique Association ends must have a single destroyAt InputPin if isDestroyDuplicates is false, which must be of type UnlimitedNatural and have a multiplicity of 1..1. Otherwise, the action has no destroyAt input pin.
 			if  not end.isOrdered or end.isUnique or isDestroyDuplicates
 			then destroyAt = null
 			else
 				destroyAt <> null and 
 				destroyAt->forAll(type=UnlimitedNatural and is(1,1))
-			endif */ 
+			endif
+			*/
+			 
 			virtual bool destroyAt_pin(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
@@ -115,28 +119,36 @@ namespace uml
 			// Attributes Getter Setter
 			//*********************************
 			/*!
-			 Specifies whether to destroy duplicates of the value in nonunique Association ends.
-			<p>From package UML::Actions.</p> */ 
+			Specifies whether to destroy duplicates of the value in nonunique Association ends.
+			<p>From package UML::Actions.</p>
+			*/
+			 
 			virtual bool getIsDestroyDuplicates() const = 0;
 			
 			/*!
-			 Specifies whether to destroy duplicates of the value in nonunique Association ends.
-			<p>From package UML::Actions.</p> */ 
+			Specifies whether to destroy duplicates of the value in nonunique Association ends.
+			<p>From package UML::Actions.</p>
+			*/
+			 
 			virtual void setIsDestroyDuplicates (bool _isDestroyDuplicates)= 0; 
-			
 			
 			//*********************************
 			// Reference
 			//*********************************
 			/*!
-			 The InputPin that provides the position of an existing link to be destroyed in an ordered, nonunique Association end. The type of the destroyAt InputPin is UnlimitedNatural, but the value cannot be zero or unlimited.
-			<p>From package UML::Actions.</p> */
+			The InputPin that provides the position of an existing link to be destroyed in an ordered, nonunique Association end. The type of the destroyAt InputPin is UnlimitedNatural, but the value cannot be zero or unlimited.
+			<p>From package UML::Actions.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::InputPin > getDestroyAt() const = 0;
 			
 			/*!
-			 The InputPin that provides the position of an existing link to be destroyed in an ordered, nonunique Association end. The type of the destroyAt InputPin is UnlimitedNatural, but the value cannot be zero or unlimited.
-			<p>From package UML::Actions.</p> */
-			virtual void setDestroyAt(std::shared_ptr<uml::InputPin> _destroyAt_destroyAt) = 0;
+			The InputPin that provides the position of an existing link to be destroyed in an ordered, nonunique Association end. The type of the destroyAt InputPin is UnlimitedNatural, but the value cannot be zero or unlimited.
+			<p>From package UML::Actions.</p>
+			*/
+			
+			virtual void setDestroyAt(std::shared_ptr<uml::InputPin> _destroyAt) = 0;
+			
 			
 
 		protected:
@@ -144,8 +156,10 @@ namespace uml
 			// Attribute Members
 			//*********************************
 			/*!
-			 Specifies whether to destroy duplicates of the value in nonunique Association ends.
-			<p>From package UML::Actions.</p> */ 
+			Specifies whether to destroy duplicates of the value in nonunique Association ends.
+			<p>From package UML::Actions.</p>
+			*/
+			 
 			bool m_isDestroyDuplicates = false;
 			
 			
@@ -153,18 +167,21 @@ namespace uml
 			// Reference Members
 			//*********************************
 			/*!
-			 The InputPin that provides the position of an existing link to be destroyed in an ordered, nonunique Association end. The type of the destroyAt InputPin is UnlimitedNatural, but the value cannot be zero or unlimited.
-			<p>From package UML::Actions.</p> */
-			std::shared_ptr<uml::InputPin > m_destroyAt;
+			The InputPin that provides the position of an existing link to be destroyed in an ordered, nonunique Association end. The type of the destroyAt InputPin is UnlimitedNatural, but the value cannot be zero or unlimited.
+			<p>From package UML::Actions.</p>
+			*/
 			
+			std::shared_ptr<uml::InputPin > m_destroyAt;
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

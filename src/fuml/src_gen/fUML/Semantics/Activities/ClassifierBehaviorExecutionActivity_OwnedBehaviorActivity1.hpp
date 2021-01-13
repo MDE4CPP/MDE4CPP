@@ -32,7 +32,7 @@ namespace persistence
 
 namespace fUML
 {
-	class FUMLFactory;
+	class fUMLFactory;
 }
 
 //Forward Declaration for used types
@@ -41,14 +41,13 @@ namespace fUML
 
 // enum includes
 
-#include "ecore/EObject.hpp"
+#include "ecore/EModelElement.hpp"
 
 //*********************************
 namespace fUML::Semantics::Activities 
 {
-	/*!
-	 */
-	class ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1 : virtual public ecore::EObject 
+	
+	class ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1 : virtual public ecore::EModelElement
 
 	{
 		public:

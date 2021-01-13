@@ -18,18 +18,16 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "fUML/impl/FUMLPackageImpl.hpp"
+
+//Includes from codegen annotation
 #include "fUML/FUMLFactory.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -37,12 +35,15 @@
 
 #include "fUML/Semantics/Activities/Token.hpp"
 
-#include "fUML/Semantics/Values/Value.hpp"
+//Factories an Package includes
+#include "fUML/Semantics/Activities/impl/ActivitiesFactoryImpl.hpp"
+#include "fUML/Semantics/Activities/impl/ActivitiesPackageImpl.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
-#include "fUML/FUMLFactory.hpp"
+#include "fUML/fUMLFactory.hpp"
+#include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsFactory.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -52,17 +53,7 @@ using namespace fUML::Semantics::Activities;
 // Constructor / Destructor
 //*********************************
 ControlTokenImpl::ControlTokenImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 ControlTokenImpl::~ControlTokenImpl()
@@ -71,7 +62,6 @@ ControlTokenImpl::~ControlTokenImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ControlToken "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -102,7 +92,7 @@ std::shared_ptr<ecore::EObject>  ControlTokenImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ControlTokenImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getControlToken_Class();
+	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getControlToken_Class();
 }
 
 //*********************************
@@ -112,19 +102,21 @@ std::shared_ptr<ecore::EClass> ControlTokenImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
+std::shared_ptr<fUML::Semantics::Activities::Token> ControlTokenImpl::_copy()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Return a new control token.
+
+return fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createControlToken();
+	//end of body
+}
+
 bool ControlTokenImpl::equals(std::shared_ptr<fUML::Semantics::Activities::Token>  other)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	return (std::dynamic_pointer_cast<fUML::Semantics::Activities::ControlToken>(other) != nullptr);
-	//end of body
-}
-
-std::shared_ptr<fUML::Semantics::Values::Value> ControlTokenImpl::getValue() const
-{
-	//ADD_COUNT(__PRETTY_FUNCTION__)
-	//generated from body annotation
-	return nullptr;
+	return (other->getMetaElementID() == fUML::Semantics::Activities::ActivitiesPackage::CONTROLTOKEN_CLASS);
 	//end of body
 }
 
@@ -143,6 +135,7 @@ bool ControlTokenImpl::isControl()
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<ControlToken> ControlTokenImpl::getThisControlTokenPtr() const
@@ -196,12 +189,11 @@ void ControlTokenImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandle
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get FUMLFactory
-	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
+	// get fUMLFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -211,11 +203,12 @@ void ControlTokenImpl::loadAttributes(std::shared_ptr<persistence::interfaces::X
 	TokenImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ControlTokenImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+void ControlTokenImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<fUML::Semantics::Activities::ActivitiesFactory> modelFactory=fUML::Semantics::Activities::ActivitiesFactory::eInstance();
 
-
-	TokenImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	TokenImpl::loadNode(nodeName, loadHandler);
 }
 
 void ControlTokenImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -237,7 +230,7 @@ void ControlTokenImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 {
 	try
 	{
-		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+		std::shared_ptr<fUML::Semantics::Activities::ActivitiesPackage> package = fUML::Semantics::Activities::ActivitiesPackage::eInstance();
 
 	
 

@@ -33,7 +33,7 @@ namespace persistence
 
 namespace uml
 {
-	class UmlFactory;
+	class umlFactory;
 }
 
 //Forward Declaration for used types
@@ -103,8 +103,10 @@ namespace uml
 namespace uml 
 {
 	/*!
-	 An Expression represents a node in an expression tree, which may be non-terminal or terminal. It defines a symbol, and has a possibly empty sequence of operands that are ValueSpecifications. It denotes a (possibly empty) set of values when evaluated in a context.
-	<p>From package UML::Values.</p> */
+	An Expression represents a node in an expression tree, which may be non-terminal or terminal. It defines a symbol, and has a possibly empty sequence of operands that are ValueSpecifications. It denotes a (possibly empty) set of values when evaluated in a context.
+	<p>From package UML::Values.</p>
+	*/
+	
 	class Expression:virtual public ValueSpecification
 	{
 		public:
@@ -129,23 +131,29 @@ namespace uml
 			// Attributes Getter Setter
 			//*********************************
 			/*!
-			 The symbol associated with this node in the expression tree.
-			<p>From package UML::Values.</p> */ 
+			The symbol associated with this node in the expression tree.
+			<p>From package UML::Values.</p>
+			*/
+			 
 			virtual std::string getSymbol() const = 0;
 			
 			/*!
-			 The symbol associated with this node in the expression tree.
-			<p>From package UML::Values.</p> */ 
+			The symbol associated with this node in the expression tree.
+			<p>From package UML::Values.</p>
+			*/
+			 
 			virtual void setSymbol (std::string _symbol)= 0; 
-			
 			
 			//*********************************
 			// Reference
 			//*********************************
 			/*!
-			 Specifies a sequence of operand ValueSpecifications.
-			<p>From package UML::Values.</p> */
+			Specifies a sequence of operand ValueSpecifications.
+			<p>From package UML::Values.</p>
+			*/
+			
 			virtual std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>> getOperand() const = 0;
+			
 			
 			
 
@@ -154,8 +162,10 @@ namespace uml
 			// Attribute Members
 			//*********************************
 			/*!
-			 The symbol associated with this node in the expression tree.
-			<p>From package UML::Values.</p> */ 
+			The symbol associated with this node in the expression tree.
+			<p>From package UML::Values.</p>
+			*/
+			 
 			std::string m_symbol = "";
 			
 			
@@ -163,24 +173,31 @@ namespace uml
 			// Reference Members
 			//*********************************
 			/*!
-			 Specifies a sequence of operand ValueSpecifications.
-			<p>From package UML::Values.</p> */
-			std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>> m_operand;
+			Specifies a sequence of operand ValueSpecifications.
+			<p>From package UML::Values.</p>
+			*/
 			
+			mutable std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>> m_operand;
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

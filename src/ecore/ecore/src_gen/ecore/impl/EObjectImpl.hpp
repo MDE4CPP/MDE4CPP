@@ -18,7 +18,7 @@
 //*********************************
 namespace ecore 
 {
-	class EObjectImpl :
+	class EObjectImpl : 
 virtual public EObject 
 	{
 		public: 
@@ -29,7 +29,7 @@ virtual public EObject
 			EObjectImpl& operator=(EObjectImpl const&) = delete;
 
 		protected:
-			friend class EcoreFactoryImpl;
+			friend class ecoreFactoryImpl;
 			EObjectImpl();
 			virtual std::shared_ptr<EObject> getThisEObjectPtr() const;
 			virtual void setThisEObjectPtr(std::weak_ptr<EObject> thisEObjectPtr);
@@ -47,62 +47,48 @@ virtual public EObject
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<Bag <   ecore::EObject > > eAllContents() const ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<ecore::EClass> eClass() const ;
 			
 			
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<ecore::EStructuralFeature> eContainingFeature() const ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<ecore::EReference> eContainmentFeature() const ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<Bag <   ecore::EObject > > eContents() const ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<Bag <   ecore::EObject > > eCrossReferences() const ;
 			
-			/*!
-			 */ 
+			 
 			virtual Any eGet(std::shared_ptr<ecore::EStructuralFeature>  feature) const ;
 			
-			/*!
-			 */ 
+			 
 			virtual Any eGet(std::shared_ptr<ecore::EStructuralFeature>  feature,bool resolve) const ;
 			
-			/*!
-			 */ 
+			 
 			virtual Any eInvoke(std::shared_ptr<ecore::EOperation>  operation,Bag <   Any >  arguments) const ;
 			
-			/*!
-			 */ 
+			 
 			virtual bool eIsProxy() const ;
 			
-			/*!
-			 */ 
+			 
 			virtual bool eIsSet(std::shared_ptr<ecore::EStructuralFeature>  feature) const ;
 			
-			/*!
-			 */ 
+			 
 			virtual int eResource() const ;
 			
-			/*!
-			 */ 
+			 
 			virtual void eSet(std::shared_ptr<ecore::EStructuralFeature>  feature,Any newValue) ;
 			
-			/*!
-			 */ 
+			 
 			virtual void eUnset(std::shared_ptr<ecore::EStructuralFeature>  feature) const ;
 			
 			
@@ -110,34 +96,30 @@ virtual public EObject
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual int getMetaElementID() const ;
 			
-			/*!
-			 */ 
+			 
 			virtual void setMetaElementID (int _metaElementID); 
-			
 			
 			
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::weak_ptr<ecore::EObject > getEContainer() const ;
 			
-			/*!
-			 */
-			virtual void setEContainer(std::shared_ptr<ecore::EObject> _eContainer_eContainer) ;
+			
+			virtual void setEContainer(std::shared_ptr<ecore::EObject> _eContainer) ;
+			
+			
 			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const ; 
 			 
 			//*********************************
@@ -151,7 +133,7 @@ virtual public EObject
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<ecore::EcoreFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

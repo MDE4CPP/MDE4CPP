@@ -17,22 +17,20 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "fUML/impl/FUMLPackageImpl.hpp"
+
+//Includes from codegen annotation
 #include <uml/Classifier.hpp>
-    #include "fUML/FUMLFactory.hpp"
-    #include "uml/Class.hpp"
+#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
+#include "uml/Class.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -60,10 +58,15 @@
 
 #include "fUML/Semantics/Values/Value.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
-#include "fUML/FUMLFactory.hpp"
+//Factories an Package includes
+#include "fUML/Semantics/StructuredClassifiers/impl/StructuredClassifiersFactoryImpl.hpp"
+#include "fUML/Semantics/StructuredClassifiers/impl/StructuredClassifiersPackageImpl.hpp"
+
+#include "fUML/fUMLFactory.hpp"
+#include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsFactory.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -73,19 +76,7 @@ using namespace fUML::Semantics::StructuredClassifiers;
 // Constructor / Destructor
 //*********************************
 ReferenceImpl::ReferenceImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	//Init references
-	
+{	
 }
 
 ReferenceImpl::~ReferenceImpl()
@@ -94,7 +85,6 @@ ReferenceImpl::~ReferenceImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete Reference "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -124,7 +114,7 @@ std::shared_ptr<ecore::EObject>  ReferenceImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ReferenceImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getReference_Class();
+	return fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getReference_Class();
 }
 
 //*********************************
@@ -134,6 +124,20 @@ std::shared_ptr<ecore::EClass> ReferenceImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
+std::shared_ptr<fUML::Semantics::Values::Value> ReferenceImpl::_copy()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// // Create a new reference with the same referent as this reference.
+
+std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> newValue = fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createReference();
+
+newValue->setReferent(this->getReferent());
+
+return newValue;
+	//end of body
+}
+
 void ReferenceImpl::assignFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<Bag<fUML::Semantics::Values::Value> >  values,int position)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
@@ -163,8 +167,8 @@ bool ReferenceImpl::equals(std::shared_ptr<fUML::Semantics::Values::Value>  othe
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 		bool isEqual = false;
-	if (otherValue->eClass()->getClassifierID() == fUML::FUMLPackage::REFERENCE_CLASS) {
-		auto other = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Reference>(otherValue);
+	auto other = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Reference>(otherValue);
+	if (other != nullptr) {
 		if (this->getReferent() == nullptr) {
 			isEqual = other->getReferent() == nullptr;
 		} else {
@@ -195,7 +199,7 @@ std::shared_ptr<fUML::Semantics::Values::Value> ReferenceImpl::new_()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	return std::shared_ptr<fUML::Semantics::Values::Value>(FUMLFactory::eInstance()->createReference());
+	return fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createReference();
 	//end of body
 }
 
@@ -266,19 +270,26 @@ std::string ReferenceImpl::toString()
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference referent
+*/
 std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object > ReferenceImpl::getReferent() const
 {
 //assert(m_referent);
     return m_referent;
 }
+
 void ReferenceImpl::setReferent(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> _referent)
 {
     m_referent = _referent;
 }
 
+
+
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<Reference> ReferenceImpl::getThisReferencePtr() const
@@ -302,7 +313,7 @@ Any ReferenceImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::REFERENCE_ATTRIBUTE_REFERENT:
+		case fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::REFERENCE_ATTRIBUTE_REFERENT:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getReferent())); //990
 	}
 	return fUML::Semantics::SimpleClassifiers::StructuredValueImpl::eGet(featureID, resolve, coreType);
@@ -311,7 +322,7 @@ bool ReferenceImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::REFERENCE_ATTRIBUTE_REFERENT:
+		case fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::REFERENCE_ATTRIBUTE_REFERENT:
 			return getReferent() != nullptr; //990
 	}
 	return fUML::Semantics::SimpleClassifiers::StructuredValueImpl::internalEIsSet(featureID);
@@ -320,7 +331,7 @@ bool ReferenceImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::REFERENCE_ATTRIBUTE_REFERENT:
+		case fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::REFERENCE_ATTRIBUTE_REFERENT:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -344,12 +355,11 @@ void ReferenceImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> 
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get FUMLFactory
-	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
+	// get fUMLFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -378,18 +388,19 @@ void ReferenceImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoa
 	fUML::Semantics::SimpleClassifiers::StructuredValueImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ReferenceImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+void ReferenceImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactory> modelFactory=fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance();
 
-
-	fUML::Semantics::SimpleClassifiers::StructuredValueImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	fUML::Semantics::SimpleClassifiers::StructuredValueImpl::loadNode(nodeName, loadHandler);
 }
 
 void ReferenceImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::REFERENCE_ATTRIBUTE_REFERENT:
+		case fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::REFERENCE_ATTRIBUTE_REFERENT:
 		{
 			if (references.size() == 1)
 			{
@@ -424,7 +435,7 @@ void ReferenceImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 {
 	try
 	{
-		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+		std::shared_ptr<fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage> package = fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance();
 
 	
 

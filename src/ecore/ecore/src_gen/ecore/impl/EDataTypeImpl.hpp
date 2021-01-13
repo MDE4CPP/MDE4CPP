@@ -18,7 +18,7 @@
 //*********************************
 namespace ecore 
 {
-	class EDataTypeImpl :virtual public EClassifierImpl, virtual public EDataType 
+	class EDataTypeImpl : virtual public EClassifierImpl, virtual public EDataType 
 	{
 		public: 
 			EDataTypeImpl(const EDataTypeImpl & obj);
@@ -28,7 +28,7 @@ namespace ecore
 			EDataTypeImpl& operator=(EDataTypeImpl const&) = delete;
 
 		protected:
-			friend class EcoreFactoryImpl;
+			friend class ecoreFactoryImpl;
 			EDataTypeImpl();
 			virtual std::shared_ptr<EDataType> getThisEDataTypePtr() const;
 			virtual void setThisEDataTypePtr(std::weak_ptr<EDataType> thisEDataTypePtr);
@@ -55,14 +55,11 @@ namespace ecore
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual bool isSerializable() const ;
 			
-			/*!
-			 */ 
+			 
 			virtual void setSerializable (bool _serializable); 
-			
 			
 			
 			//*********************************
@@ -73,8 +70,7 @@ namespace ecore
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const ; 
 			 
 			//*********************************
@@ -88,7 +84,7 @@ namespace ecore
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<ecore::EcoreFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

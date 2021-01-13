@@ -17,19 +17,17 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "fUML/impl/FUMLPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -41,10 +39,15 @@
 
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
-#include "fUML/FUMLFactory.hpp"
+//Factories an Package includes
+#include "fUML/Semantics/CommonBehavior/impl/CommonBehaviorFactoryImpl.hpp"
+#include "fUML/Semantics/CommonBehavior/impl/CommonBehaviorPackageImpl.hpp"
+
+#include "fUML/fUMLFactory.hpp"
+#include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsFactory.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -54,27 +57,7 @@ using namespace fUML::Semantics::CommonBehavior;
 // Constructor / Destructor
 //*********************************
 ClassifierBehaviorExecutionImpl::ClassifierBehaviorExecutionImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	
-
-	
-
-	//Init references
-	
-
-	
-
-	
+{	
 }
 
 ClassifierBehaviorExecutionImpl::~ClassifierBehaviorExecutionImpl()
@@ -83,7 +66,6 @@ ClassifierBehaviorExecutionImpl::~ClassifierBehaviorExecutionImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete ClassifierBehaviorExecution "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -117,7 +99,7 @@ std::shared_ptr<ecore::EObject>  ClassifierBehaviorExecutionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ClassifierBehaviorExecutionImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getClassifierBehaviorExecution_Class();
+	return fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getClassifierBehaviorExecution_Class();
 }
 
 //*********************************
@@ -148,39 +130,58 @@ void ClassifierBehaviorExecutionImpl::terminate()
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference classifier
+*/
 std::shared_ptr<uml::Class > ClassifierBehaviorExecutionImpl::getClassifier() const
 {
 //assert(m_classifier);
     return m_classifier;
 }
+
 void ClassifierBehaviorExecutionImpl::setClassifier(std::shared_ptr<uml::Class> _classifier)
 {
     m_classifier = _classifier;
 }
 
+
+
+/*
+Getter & Setter for reference execution
+*/
 std::shared_ptr<fUML::Semantics::CommonBehavior::Execution > ClassifierBehaviorExecutionImpl::getExecution() const
 {
 //assert(m_execution);
     return m_execution;
 }
+
 void ClassifierBehaviorExecutionImpl::setExecution(std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> _execution)
 {
     m_execution = _execution;
 }
 
+
+
+/*
+Getter & Setter for reference objectActivation
+*/
 std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation > ClassifierBehaviorExecutionImpl::getObjectActivation() const
 {
 
     return m_objectActivation;
 }
+
 void ClassifierBehaviorExecutionImpl::setObjectActivation(std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> _objectActivation)
 {
     m_objectActivation = _objectActivation;
 }
 
+
+
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<ClassifierBehaviorExecution> ClassifierBehaviorExecutionImpl::getThisClassifierBehaviorExecutionPtr() const
@@ -203,11 +204,11 @@ Any ClassifierBehaviorExecutionImpl::eGet(int featureID, bool resolve, bool core
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_ATTRIBUTE_CLASSIFIER:
+		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CLASSIFIERBEHAVIOREXECUTION_ATTRIBUTE_CLASSIFIER:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getClassifier())); //221
-		case fUML::FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_ATTRIBUTE_EXECUTION:
+		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CLASSIFIERBEHAVIOREXECUTION_ATTRIBUTE_EXECUTION:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getExecution())); //220
-		case fUML::FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_ATTRIBUTE_OBJECTACTIVATION:
+		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CLASSIFIERBEHAVIOREXECUTION_ATTRIBUTE_OBJECTACTIVATION:
 			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getObjectActivation())); //222
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
@@ -216,11 +217,11 @@ bool ClassifierBehaviorExecutionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_ATTRIBUTE_CLASSIFIER:
+		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CLASSIFIERBEHAVIOREXECUTION_ATTRIBUTE_CLASSIFIER:
 			return getClassifier() != nullptr; //221
-		case fUML::FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_ATTRIBUTE_EXECUTION:
+		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CLASSIFIERBEHAVIOREXECUTION_ATTRIBUTE_EXECUTION:
 			return getExecution() != nullptr; //220
-		case fUML::FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_ATTRIBUTE_OBJECTACTIVATION:
+		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CLASSIFIERBEHAVIOREXECUTION_ATTRIBUTE_OBJECTACTIVATION:
 			return getObjectActivation() != nullptr; //222
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
@@ -229,7 +230,7 @@ bool ClassifierBehaviorExecutionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_ATTRIBUTE_CLASSIFIER:
+		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CLASSIFIERBEHAVIOREXECUTION_ATTRIBUTE_CLASSIFIER:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -237,7 +238,7 @@ bool ClassifierBehaviorExecutionImpl::eSet(int featureID, Any newValue)
 			setClassifier(_classifier); //221
 			return true;
 		}
-		case fUML::FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_ATTRIBUTE_EXECUTION:
+		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CLASSIFIERBEHAVIOREXECUTION_ATTRIBUTE_EXECUTION:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -245,7 +246,7 @@ bool ClassifierBehaviorExecutionImpl::eSet(int featureID, Any newValue)
 			setExecution(_execution); //220
 			return true;
 		}
-		case fUML::FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_ATTRIBUTE_OBJECTACTIVATION:
+		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CLASSIFIERBEHAVIOREXECUTION_ATTRIBUTE_OBJECTACTIVATION:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
@@ -269,12 +270,11 @@ void ClassifierBehaviorExecutionImpl::load(std::shared_ptr<persistence::interfac
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get FUMLFactory
-	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
+	// get fUMLFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -317,18 +317,18 @@ void ClassifierBehaviorExecutionImpl::loadAttributes(std::shared_ptr<persistence
 	ecore::EObjectImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ClassifierBehaviorExecutionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+void ClassifierBehaviorExecutionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<fUML::Semantics::CommonBehavior::CommonBehaviorFactory> modelFactory=fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance();
 
-
-	ecore::EObjectImpl::loadNode(nodeName, loadHandler, ecore::EcoreFactory::eInstance());
+	//load BasePackage Nodes
 }
 
 void ClassifierBehaviorExecutionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_ATTRIBUTE_CLASSIFIER:
+		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CLASSIFIERBEHAVIOREXECUTION_ATTRIBUTE_CLASSIFIER:
 		{
 			if (references.size() == 1)
 			{
@@ -340,7 +340,7 @@ void ClassifierBehaviorExecutionImpl::resolveReferences(const int featureID, std
 			return;
 		}
 
-		case fUML::FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_ATTRIBUTE_EXECUTION:
+		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CLASSIFIERBEHAVIOREXECUTION_ATTRIBUTE_EXECUTION:
 		{
 			if (references.size() == 1)
 			{
@@ -352,7 +352,7 @@ void ClassifierBehaviorExecutionImpl::resolveReferences(const int featureID, std
 			return;
 		}
 
-		case fUML::FUMLPackage::CLASSIFIERBEHAVIOREXECUTION_ATTRIBUTE_OBJECTACTIVATION:
+		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CLASSIFIERBEHAVIOREXECUTION_ATTRIBUTE_OBJECTACTIVATION:
 		{
 			if (references.size() == 1)
 			{
@@ -380,7 +380,7 @@ void ClassifierBehaviorExecutionImpl::saveContent(std::shared_ptr<persistence::i
 {
 	try
 	{
-		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+		std::shared_ptr<fUML::Semantics::CommonBehavior::CommonBehaviorPackage> package = fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance();
 
 	
 

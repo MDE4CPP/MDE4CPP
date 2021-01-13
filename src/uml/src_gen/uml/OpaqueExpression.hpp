@@ -35,7 +35,7 @@ namespace persistence
 
 namespace uml
 {
-	class UmlFactory;
+	class umlFactory;
 }
 
 //Forward Declaration for used types
@@ -115,8 +115,10 @@ namespace uml
 namespace uml 
 {
 	/*!
-	 An OpaqueExpression is a ValueSpecification that specifies the computation of a collection of values either in terms of a UML Behavior or based on a textual statement in a language other than UML
-	<p>From package UML::Values.</p> */
+	An OpaqueExpression is a ValueSpecification that specifies the computation of a collection of values either in terms of a UML Behavior or based on a textual statement in a language other than UML
+	<p>From package UML::Values.</p>
+	*/
+	
 	class OpaqueExpression:virtual public ValueSpecification
 	{
 		public:
@@ -139,46 +141,60 @@ namespace uml
 			
 			
 			/*!
-			 The query isIntegral() tells whether an expression is intended to produce an Integer.
+			The query isIntegral() tells whether an expression is intended to produce an Integer.
 			result = (false)
-			<p>From package UML::Values.</p> */ 
+			<p>From package UML::Values.</p>
+			*/
+			 
 			virtual bool isIntegral() = 0;
 			
 			/*!
-			 The query isNonNegative() tells whether an integer expression has a non-negative value.
+			The query isNonNegative() tells whether an integer expression has a non-negative value.
 			self.isIntegral()
 			result = (false)
-			<p>From package UML::Values.</p> */ 
+			<p>From package UML::Values.</p>
+			*/
+			 
 			virtual bool isNonNegative() = 0;
 			
 			/*!
-			 The query isPositive() tells whether an integer expression has a positive value.
+			The query isPositive() tells whether an integer expression has a positive value.
 			result = (false)
 			self.isIntegral()
-			<p>From package UML::Values.</p> */ 
+			<p>From package UML::Values.</p>
+			*/
+			 
 			virtual bool isPositive() = 0;
 			
 			/*!
-			 If the language attribute is not empty, then the size of the body and language arrays must be the same.
-			language->notEmpty() implies (_'body'->size() = language->size()) */ 
+			If the language attribute is not empty, then the size of the body and language arrays must be the same.
+			language->notEmpty() implies (_'body'->size() = language->size())
+			*/
+			 
 			virtual bool language_body_size(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
-			 The behavior must have exactly one return result parameter.
+			The behavior must have exactly one return result parameter.
 			behavior <> null implies
-			   behavior.ownedParameter->select(direction=ParameterDirectionKind::return)->size() = 1 */ 
+			   behavior.ownedParameter->select(direction=ParameterDirectionKind::return)->size() = 1
+			*/
+			 
 			virtual bool one_return_result_parameter(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
-			 The behavior may only have return result parameters.
-			behavior <> null implies behavior.ownedParameter->select(direction<>ParameterDirectionKind::return)->isEmpty() */ 
+			The behavior may only have return result parameters.
+			behavior <> null implies behavior.ownedParameter->select(direction<>ParameterDirectionKind::return)->isEmpty()
+			*/
+			 
 			virtual bool only_return_result_parameters(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
-			 The query value() gives an integer value for an expression intended to produce one.
+			The query value() gives an integer value for an expression intended to produce one.
 			self.isIntegral()
 			result = (0)
-			<p>From package UML::Values.</p> */ 
+			<p>From package UML::Values.</p>
+			*/
+			 
 			virtual int value() = 0;
 			
 			
@@ -186,32 +202,46 @@ namespace uml
 			// Attributes Getter Setter
 			//*********************************
 			/*!
-			 A textual definition of the behavior of the OpaqueExpression, possibly in multiple languages.
-			<p>From package UML::Values.</p> */ 
+			A textual definition of the behavior of the OpaqueExpression, possibly in multiple languages.
+			<p>From package UML::Values.</p>
+			*/
+			 
 			virtual std::shared_ptr<Bag<std::string> > getBody() const = 0;
 			
+			
 			/*!
-			 Specifies the languages used to express the textual bodies of the OpaqueExpression.  Languages are matched to body Strings by order. The interpretation of the body depends on the languages. If the languages are unspecified, they may be implicit from the expression body or the context.
-			<p>From package UML::Values.</p> */ 
+			Specifies the languages used to express the textual bodies of the OpaqueExpression.  Languages are matched to body Strings by order. The interpretation of the body depends on the languages. If the languages are unspecified, they may be implicit from the expression body or the context.
+			<p>From package UML::Values.</p>
+			*/
+			 
 			virtual std::shared_ptr<Bag<std::string> > getLanguage() const = 0;
+			
 			
 			
 			//*********************************
 			// Reference
 			//*********************************
 			/*!
-			 Specifies the behavior of the OpaqueExpression as a UML Behavior.
-			<p>From package UML::Values.</p> */
+			Specifies the behavior of the OpaqueExpression as a UML Behavior.
+			<p>From package UML::Values.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::Behavior > getBehavior() const = 0;
 			
 			/*!
-			 Specifies the behavior of the OpaqueExpression as a UML Behavior.
-			<p>From package UML::Values.</p> */
-			virtual void setBehavior(std::shared_ptr<uml::Behavior> _behavior_behavior) = 0;
+			Specifies the behavior of the OpaqueExpression as a UML Behavior.
+			<p>From package UML::Values.</p>
+			*/
+			
+			virtual void setBehavior(std::shared_ptr<uml::Behavior> _behavior) = 0;
+			
 			/*!
-			 If an OpaqueExpression is specified using a UML Behavior, then this refers to the single required return Parameter of that Behavior. When the Behavior completes execution, the values on this Parameter give the result of evaluating the OpaqueExpression.
-			<p>From package UML::Values.</p> */
+			If an OpaqueExpression is specified using a UML Behavior, then this refers to the single required return Parameter of that Behavior. When the Behavior completes execution, the values on this Parameter give the result of evaluating the OpaqueExpression.
+			<p>From package UML::Values.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::Parameter > getResult() const = 0;
+			
 			
 			
 
@@ -220,39 +250,53 @@ namespace uml
 			// Attribute Members
 			//*********************************
 			/*!
-			 A textual definition of the behavior of the OpaqueExpression, possibly in multiple languages.
-			<p>From package UML::Values.</p> */ 
-			std::shared_ptr<Bag<std::string> > m_body; /*!
-			 Specifies the languages used to express the textual bodies of the OpaqueExpression.  Languages are matched to body Strings by order. The interpretation of the body depends on the languages. If the languages are unspecified, they may be implicit from the expression body or the context.
-			<p>From package UML::Values.</p> */ 
-			std::shared_ptr<Bag<std::string> > m_language; 
+			A textual definition of the behavior of the OpaqueExpression, possibly in multiple languages.
+			<p>From package UML::Values.</p>
+			*/
+			 
+			mutable std::shared_ptr<Bag<std::string> > m_body; 
+			/*!
+			Specifies the languages used to express the textual bodies of the OpaqueExpression.  Languages are matched to body Strings by order. The interpretation of the body depends on the languages. If the languages are unspecified, they may be implicit from the expression body or the context.
+			<p>From package UML::Values.</p>
+			*/
+			 
+			mutable std::shared_ptr<Bag<std::string> > m_language; 
+			
 			
 			//*********************************
 			// Reference Members
 			//*********************************
 			/*!
-			 Specifies the behavior of the OpaqueExpression as a UML Behavior.
-			<p>From package UML::Values.</p> */
-			std::shared_ptr<uml::Behavior > m_behavior;
-			/*!
-			 If an OpaqueExpression is specified using a UML Behavior, then this refers to the single required return Parameter of that Behavior. When the Behavior completes execution, the values on this Parameter give the result of evaluating the OpaqueExpression.
-			<p>From package UML::Values.</p> */
-			std::shared_ptr<uml::Parameter > m_result;
+			Specifies the behavior of the OpaqueExpression as a UML Behavior.
+			<p>From package UML::Values.</p>
+			*/
 			
+			std::shared_ptr<uml::Behavior > m_behavior;/*!
+			If an OpaqueExpression is specified using a UML Behavior, then this refers to the single required return Parameter of that Behavior. When the Behavior completes execution, the values on this Parameter give the result of evaluating the OpaqueExpression.
+			<p>From package UML::Values.</p>
+			*/
+			
+			std::shared_ptr<uml::Parameter > m_result;
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

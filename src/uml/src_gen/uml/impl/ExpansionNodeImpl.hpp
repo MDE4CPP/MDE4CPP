@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class ExpansionNodeImpl :virtual public ObjectNodeImpl, virtual public ExpansionNode 
+	class ExpansionNodeImpl : virtual public ObjectNodeImpl, virtual public ExpansionNode 
 	{
 		public: 
 			ExpansionNodeImpl(const ExpansionNodeImpl & obj);
@@ -28,7 +28,7 @@ namespace uml
 			ExpansionNodeImpl& operator=(ExpansionNodeImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			ExpansionNodeImpl();
 			virtual std::shared_ptr<ExpansionNode> getThisExpansionNodePtr() const;
 			virtual void setThisExpansionNodePtr(std::weak_ptr<ExpansionNode> thisExpansionNodePtr);
@@ -59,8 +59,10 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 One of regionAsInput or regionAsOutput must be non-empty, but not both.
-			regionAsInput->notEmpty() xor regionAsOutput->notEmpty() */ 
+			One of regionAsInput or regionAsOutput must be non-empty, but not both.
+			regionAsInput->notEmpty() xor regionAsOutput->notEmpty()
+			*/
+			 
 			virtual bool region_as_input_or_output(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
@@ -74,40 +76,58 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 The ExpansionRegion for which the ExpansionNode is an input.
-			<p>From package UML::Actions.</p> */
+			The ExpansionRegion for which the ExpansionNode is an input.
+			<p>From package UML::Actions.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::ExpansionRegion > getRegionAsInput() const ;
 			
 			/*!
-			 The ExpansionRegion for which the ExpansionNode is an input.
-			<p>From package UML::Actions.</p> */
-			virtual void setRegionAsInput(std::shared_ptr<uml::ExpansionRegion> _regionAsInput_regionAsInput) ;
+			The ExpansionRegion for which the ExpansionNode is an input.
+			<p>From package UML::Actions.</p>
+			*/
+			
+			virtual void setRegionAsInput(std::shared_ptr<uml::ExpansionRegion> _regionAsInput) ;
+			
 			/*!
-			 The ExpansionRegion for which the ExpansionNode is an output.
-			<p>From package UML::Actions.</p> */
+			The ExpansionRegion for which the ExpansionNode is an output.
+			<p>From package UML::Actions.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::ExpansionRegion > getRegionAsOutput() const ;
 			
 			/*!
-			 The ExpansionRegion for which the ExpansionNode is an output.
-			<p>From package UML::Actions.</p> */
-			virtual void setRegionAsOutput(std::shared_ptr<uml::ExpansionRegion> _regionAsOutput_regionAsOutput) ;
+			The ExpansionRegion for which the ExpansionNode is an output.
+			<p>From package UML::Actions.</p>
+			*/
+			
+			virtual void setRegionAsOutput(std::shared_ptr<uml::ExpansionRegion> _regionAsOutput) ;
+			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
+			ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::ActivityGroup>> getInGroup() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
+			The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const ; 
 			 
 			//*********************************
@@ -121,7 +141,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

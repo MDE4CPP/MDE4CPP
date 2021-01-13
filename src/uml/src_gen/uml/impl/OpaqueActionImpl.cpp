@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -26,21 +25,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -82,10 +72,11 @@
 
 #include "uml/StructuredActivityNode.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -95,48 +86,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 OpaqueActionImpl::OpaqueActionImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	m_body.reset(new Bag<std::string>());
-	m_language.reset(new Bag<std::string>());
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		/*Subset*/
-		m_inputValue.reset(new Subset<uml::InputPin, uml::InputPin >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_inputValue - Subset<uml::InputPin, uml::InputPin >()" << std::endl;
-		#endif
-	
-	
-
-		/*Subset*/
-		m_outputValue.reset(new Subset<uml::OutputPin, uml::OutputPin >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_outputValue - Subset<uml::OutputPin, uml::OutputPin >()" << std::endl;
-		#endif
-	
-	
-
-	//Init references
-		/*Subset*/
-		m_inputValue->initSubset(m_input);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_inputValue - Subset<uml::InputPin, uml::InputPin >(m_input)" << std::endl;
-		#endif
-	
-	
-
-		/*Subset*/
-		m_outputValue->initSubset(m_output);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_outputValue - Subset<uml::OutputPin, uml::OutputPin >(m_output)" << std::endl;
-		#endif
-	
-	
+{	
 }
 
 OpaqueActionImpl::~OpaqueActionImpl()
@@ -146,53 +96,36 @@ OpaqueActionImpl::~OpaqueActionImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+OpaqueActionImpl::OpaqueActionImpl(std::weak_ptr<uml::Activity > par_activity)
+:OpaqueActionImpl()
+{
+	m_activity = par_activity;
+	m_owner = par_activity;
+}
 
 //Additional constructor for the containments back reference
-			OpaqueActionImpl::OpaqueActionImpl(std::weak_ptr<uml::Activity > par_activity)
-			:OpaqueActionImpl()
-			{
-			    m_activity = par_activity;
-				m_owner = par_activity;
-			}
-
-
-
-
+OpaqueActionImpl::OpaqueActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
+:OpaqueActionImpl()
+{
+	m_inStructuredNode = par_inStructuredNode;
+	m_owner = par_inStructuredNode;
+}
 
 //Additional constructor for the containments back reference
-			OpaqueActionImpl::OpaqueActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
-			:OpaqueActionImpl()
-			{
-			    m_inStructuredNode = par_inStructuredNode;
-				m_owner = par_inStructuredNode;
-			}
-
-
-
-
+OpaqueActionImpl::OpaqueActionImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:OpaqueActionImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			OpaqueActionImpl::OpaqueActionImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:OpaqueActionImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
-
-
-
-
-//Additional constructor for the containments back reference
-			OpaqueActionImpl::OpaqueActionImpl(std::weak_ptr<uml::Element > par_owner)
-			:OpaqueActionImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-
-
+OpaqueActionImpl::OpaqueActionImpl(std::weak_ptr<uml::Element > par_owner)
+:OpaqueActionImpl()
+{
+	m_owner = par_owner;
+}
 
 
 OpaqueActionImpl::OpaqueActionImpl(const OpaqueActionImpl & obj):OpaqueActionImpl()
@@ -322,20 +255,18 @@ OpaqueActionImpl::OpaqueActionImpl(const OpaqueActionImpl & obj):OpaqueActionImp
 		std::cout << "Copying the Subset: " << "m_redefinedNode" << std::endl;
 	#endif
 
-		/*Subset*/
-		m_inputValue->initSubset(m_input);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_inputValue - Subset<uml::InputPin, uml::InputPin >(m_input)" << std::endl;
-		#endif
-	
+	/*Subset*/
+	m_inputValue->initSubset(getInput());
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Initialising value Subset: " << "m_inputValue - Subset<uml::InputPin, uml::InputPin >(getInput())" << std::endl;
+	#endif
 	
 
-		/*Subset*/
-		m_outputValue->initSubset(m_output);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_outputValue - Subset<uml::OutputPin, uml::OutputPin >(m_output)" << std::endl;
-		#endif
-	
+	/*Subset*/
+	m_outputValue->initSubset(getOutput());
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Initialising value Subset: " << "m_outputValue - Subset<uml::OutputPin, uml::OutputPin >(getOutput())" << std::endl;
+	#endif
 	
 }
 
@@ -348,25 +279,43 @@ std::shared_ptr<ecore::EObject>  OpaqueActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> OpaqueActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getOpaqueAction_Class();
+	return uml::umlPackage::eInstance()->getOpaqueAction_Class();
 }
 
 //*********************************
 // Attribute Setter Getter
 //*********************************
-
-
+/*
+Getter & Setter for attribute body
+*/
 std::shared_ptr<Bag<std::string> > OpaqueActionImpl::getBody() const 
 {
+	if(m_body == nullptr)
+	{
+		m_body.reset(new Bag<std::string>());
+	}
 	return m_body;
 }
 
 
 
+
+
+/*
+Getter & Setter for attribute language
+*/
 std::shared_ptr<Bag<std::string> > OpaqueActionImpl::getLanguage() const 
 {
+	if(m_language == nullptr)
+	{
+		m_language.reset(new Bag<std::string>());
+	}
 	return m_language;
 }
+
+
+
+
 
 //*********************************
 // Operations
@@ -380,18 +329,60 @@ bool OpaqueActionImpl::language_body_size(Any diagnostics,std::map <   Any, Any 
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference inputValue
+*/
 std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> OpaqueActionImpl::getInputValue() const
 {
+	if(m_inputValue == nullptr)
+	{
+		/*Subset*/
+		m_inputValue.reset(new Subset<uml::InputPin, uml::InputPin >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_inputValue - Subset<uml::InputPin, uml::InputPin >()" << std::endl;
+		#endif
+		
+		/*Subset*/
+		m_inputValue->initSubset(getInput());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_inputValue - Subset<uml::InputPin, uml::InputPin >(getInput())" << std::endl;
+		#endif
+		
+	}
 
     return m_inputValue;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference outputValue
+*/
 std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> OpaqueActionImpl::getOutputValue() const
 {
+	if(m_outputValue == nullptr)
+	{
+		/*Subset*/
+		m_outputValue.reset(new Subset<uml::OutputPin, uml::OutputPin >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_outputValue - Subset<uml::OutputPin, uml::OutputPin >()" << std::endl;
+		#endif
+		
+		/*Subset*/
+		m_outputValue->initSubset(getOutput());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_outputValue - Subset<uml::OutputPin, uml::OutputPin >(getOutput())" << std::endl;
+		#endif
+		
+	}
 
     return m_outputValue;
 }
+
+
+
 
 
 //*********************************
@@ -399,28 +390,95 @@ std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> OpaqueActionImpl::getOut
 //*********************************
 std::shared_ptr<Union<uml::ActivityGroup>> OpaqueActionImpl::getInGroup() const
 {
+	if(m_inGroup == nullptr)
+	{
+		/*Union*/
+		m_inGroup.reset(new Union<uml::ActivityGroup>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_inGroup - Union<uml::ActivityGroup>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_inGroup;
 }
+
 std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> OpaqueActionImpl::getInput() const
 {
+	if(m_input == nullptr)
+	{
+		/*SubsetUnion*/
+		m_input.reset(new SubsetUnion<uml::InputPin, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_input - SubsetUnion<uml::InputPin, uml::Element >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_input->initSubsetUnion(getOwnedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_input - SubsetUnion<uml::InputPin, uml::Element >(getOwnedElement())" << std::endl;
+		#endif
+		
+	}
 	return m_input;
 }
+
 std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element>> OpaqueActionImpl::getOutput() const
 {
+	if(m_output == nullptr)
+	{
+		/*SubsetUnion*/
+		m_output.reset(new SubsetUnion<uml::OutputPin, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_output - SubsetUnion<uml::OutputPin, uml::Element >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_output->initSubsetUnion(getOwnedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_output - SubsetUnion<uml::OutputPin, uml::Element >(getOwnedElement())" << std::endl;
+		#endif
+		
+	}
 	return m_output;
 }
+
 std::shared_ptr<Union<uml::Element>> OpaqueActionImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > OpaqueActionImpl::getOwner() const
 {
 	return m_owner;
 }
+
 std::shared_ptr<Union<uml::RedefinableElement>> OpaqueActionImpl::getRedefinedElement() const
 {
+	if(m_redefinedElement == nullptr)
+	{
+		/*Union*/
+		m_redefinedElement.reset(new Union<uml::RedefinableElement>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_redefinedElement - Union<uml::RedefinableElement>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_redefinedElement;
 }
+
+
 
 
 std::shared_ptr<OpaqueAction> OpaqueActionImpl::getThisOpaqueActionPtr() const
@@ -463,9 +521,9 @@ Any OpaqueActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::OPAQUEACTION_ATTRIBUTE_BODY:
-			return eAny(getBody()); //16527
-		case UmlPackage::OPAQUEACTION_ATTRIBUTE_INPUTVALUE:
+		case uml::umlPackage::OPAQUEACTION_ATTRIBUTE_BODY:
+			return eAny(getBody()); //16427
+		case uml::umlPackage::OPAQUEACTION_ATTRIBUTE_INPUTVALUE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::InputPin>::iterator iter = m_inputValue->begin();
@@ -475,11 +533,11 @@ Any OpaqueActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //16528
+			return eAny(tempList); //16428
 		}
-		case UmlPackage::OPAQUEACTION_ATTRIBUTE_LANGUAGE:
-			return eAny(getLanguage()); //16529
-		case UmlPackage::OPAQUEACTION_ATTRIBUTE_OUTPUTVALUE:
+		case uml::umlPackage::OPAQUEACTION_ATTRIBUTE_LANGUAGE:
+			return eAny(getLanguage()); //16429
+		case uml::umlPackage::OPAQUEACTION_ATTRIBUTE_OUTPUTVALUE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::OutputPin>::iterator iter = m_outputValue->begin();
@@ -489,7 +547,7 @@ Any OpaqueActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //16530
+			return eAny(tempList); //16430
 		}
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
@@ -498,14 +556,14 @@ bool OpaqueActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::OPAQUEACTION_ATTRIBUTE_BODY:
-			return !getBody()->empty(); //16527
-		case UmlPackage::OPAQUEACTION_ATTRIBUTE_INPUTVALUE:
-			return getInputValue() != nullptr; //16528
-		case UmlPackage::OPAQUEACTION_ATTRIBUTE_LANGUAGE:
-			return !getLanguage()->empty(); //16529
-		case UmlPackage::OPAQUEACTION_ATTRIBUTE_OUTPUTVALUE:
-			return getOutputValue() != nullptr; //16530
+		case uml::umlPackage::OPAQUEACTION_ATTRIBUTE_BODY:
+			return !getBody()->empty(); //16427
+		case uml::umlPackage::OPAQUEACTION_ATTRIBUTE_INPUTVALUE:
+			return getInputValue() != nullptr; //16428
+		case uml::umlPackage::OPAQUEACTION_ATTRIBUTE_LANGUAGE:
+			return !getLanguage()->empty(); //16429
+		case uml::umlPackage::OPAQUEACTION_ATTRIBUTE_OUTPUTVALUE:
+			return getOutputValue() != nullptr; //16430
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
@@ -513,13 +571,13 @@ bool OpaqueActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::OPAQUEACTION_ATTRIBUTE_BODY:
+		case uml::umlPackage::OPAQUEACTION_ATTRIBUTE_BODY:
 		{
 			// BOOST CAST
 			// nothing to do
 			return true;
 		}
-		case UmlPackage::OPAQUEACTION_ATTRIBUTE_INPUTVALUE:
+		case uml::umlPackage::OPAQUEACTION_ATTRIBUTE_INPUTVALUE:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -555,13 +613,13 @@ bool OpaqueActionImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case UmlPackage::OPAQUEACTION_ATTRIBUTE_LANGUAGE:
+		case uml::umlPackage::OPAQUEACTION_ATTRIBUTE_LANGUAGE:
 		{
 			// BOOST CAST
 			// nothing to do
 			return true;
 		}
-		case UmlPackage::OPAQUEACTION_ATTRIBUTE_OUTPUTVALUE:
+		case uml::umlPackage::OPAQUEACTION_ATTRIBUTE_OUTPUTVALUE:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -613,12 +671,11 @@ void OpaqueActionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandle
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -628,8 +685,9 @@ void OpaqueActionImpl::loadAttributes(std::shared_ptr<persistence::interfaces::X
 	ActionImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void OpaqueActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void OpaqueActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 	try
 	{
 		if (nodeName.compare("body") == 0)
@@ -701,8 +759,8 @@ void OpaqueActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistenc
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
-
-	ActionImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	ActionImpl::loadNode(nodeName, loadHandler);
 }
 
 void OpaqueActionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -720,7 +778,6 @@ void OpaqueActionImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandle
 	
 	ActivityNodeImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);
@@ -743,7 +800,7 @@ void OpaqueActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 		// Save 'inputValue'
 		for (std::shared_ptr<uml::InputPin> inputValue : *this->getInputValue()) 
@@ -757,7 +814,6 @@ void OpaqueActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 			saveHandler->addReference(outputValue, "outputValue", outputValue->eClass() != package->getOutputPin_Class());
 		}
 	
- 
 		// Add attributes
 		if ( this->eIsSet(package->getOpaqueAction_Attribute_body()) )
 		{

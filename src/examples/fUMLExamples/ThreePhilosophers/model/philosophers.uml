@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_IKz9kM4AEeiodM2OQof3Cg" name="philosophers" URI="aaa">
+  <eAnnotations xmi:id="_5l-QMBUzEeu4rbshyHztaA" source="prepareApplication">
+    <details xmi:id="_7PfywBUzEeu4rbshyHztaA" key="activityMain" value="true"/>
+  </eAnnotations>
   <elementImport xmi:id="_-aAVYM4AEeiodM2OQof3Cg">
     <importedElement xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
   </elementImport>
@@ -38,6 +41,9 @@
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="_WqyOIM4AEeiodM2OQof3Cg" name="Dinner">
     <ownedBehavior xmi:type="uml:Activity" xmi:id="_aZsI0M4AEeiodM2OQof3Cg" name="haveDinner" node="_hJCVsM4AEeiodM2OQof3Cg _j95NgM4BEeiodM2OQof3Cg _kdXXwM4BEeiodM2OQof3Cg _kzrmAM4BEeiodM2OQof3Cg _zjN8kM4BEeiodM2OQof3Cg _9Qn2AM4BEeiodM2OQof3Cg _D1B-MM4CEeiodM2OQof3Cg _EKAvsM4CEeiodM2OQof3Cg _14cSEM4CEeiodM2OQof3Cg _5tMWEM4CEeiodM2OQof3Cg _EQO3AM4DEeiodM2OQof3Cg _-xdPQM4EEeiodM2OQof3Cg __KEjkM4EEeiodM2OQof3Cg __nZ_0M4EEeiodM2OQof3Cg _pCw4wM4FEeiodM2OQof3Cg _pkEPAM4FEeiodM2OQof3Cg _v9uMoNBeEei3e9DrtJbqqQ _X4TPUNBfEei3e9DrtJbqqQ _Hjt4oNCCEei3e9DrtJbqqQ _eUfrUNCOEei8zLsowetvzg _iJ-IENCOEei8zLsowetvzg _mTh-cNCOEei8zLsowetvzg">
+      <eAnnotations xmi:id="_-9nqUBUzEeu4rbshyHztaA" source="http://sse.tu-ilmenau.de/codegen">
+        <details xmi:id="__5h48BUzEeu4rbshyHztaA" key="mainActivity" value="1"/>
+      </eAnnotations>
       <ownedParameter xmi:id="_Th3sgNBdEei3e9DrtJbqqQ" name="Philosopher1" type="_Uen4kM4AEeiodM2OQof3Cg"/>
       <ownedParameter xmi:id="_YQCr0NBdEei3e9DrtJbqqQ" name="Philosopher2" type="_Uen4kM4AEeiodM2OQof3Cg"/>
       <ownedParameter xmi:id="_YgNOwNBdEei3e9DrtJbqqQ" name="Philosopher3" type="_Uen4kM4AEeiodM2OQof3Cg"/>

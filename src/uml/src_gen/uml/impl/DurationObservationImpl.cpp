@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -26,21 +25,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -62,10 +52,11 @@
 
 #include "uml/TemplateParameter.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -75,22 +66,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 DurationObservationImpl::DurationObservationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	m_firstEvent.reset(new Bag<bool>());
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		m_event.reset(new Bag<uml::NamedElement>());
-	
-	
-
-	//Init references
-	
-	
+{	
 }
 
 DurationObservationImpl::~DurationObservationImpl()
@@ -100,53 +76,36 @@ DurationObservationImpl::~DurationObservationImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+DurationObservationImpl::DurationObservationImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:DurationObservationImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			DurationObservationImpl::DurationObservationImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:DurationObservationImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
-
-
-
+DurationObservationImpl::DurationObservationImpl(std::weak_ptr<uml::Element > par_owner)
+:DurationObservationImpl()
+{
+	m_owner = par_owner;
+}
 
 //Additional constructor for the containments back reference
-			DurationObservationImpl::DurationObservationImpl(std::weak_ptr<uml::Element > par_owner)
-			:DurationObservationImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-
-
+DurationObservationImpl::DurationObservationImpl(std::weak_ptr<uml::Package > par_owningPackage)
+:DurationObservationImpl()
+{
+	m_owningPackage = par_owningPackage;
+	m_namespace = par_owningPackage;
+}
 
 //Additional constructor for the containments back reference
-			DurationObservationImpl::DurationObservationImpl(std::weak_ptr<uml::Package > par_owningPackage)
-			:DurationObservationImpl()
-			{
-			    m_owningPackage = par_owningPackage;
-				m_namespace = par_owningPackage;
-			}
-
-
-
-
-
-//Additional constructor for the containments back reference
-			DurationObservationImpl::DurationObservationImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
-			:DurationObservationImpl()
-			{
-			    m_owningTemplateParameter = par_owningTemplateParameter;
-				m_owner = par_owningTemplateParameter;
-			}
-
-
-
-
+DurationObservationImpl::DurationObservationImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+:DurationObservationImpl()
+{
+	m_owningTemplateParameter = par_owningTemplateParameter;
+	m_owner = par_owningTemplateParameter;
+}
 
 
 DurationObservationImpl::DurationObservationImpl(const DurationObservationImpl & obj):DurationObservationImpl()
@@ -155,7 +114,7 @@ DurationObservationImpl::DurationObservationImpl(const DurationObservationImpl &
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy DurationObservation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
-	m_firstEvent = obj.getFirstEvent();
+	m_firstEvent = obj.isFirstEvent();
 	m_name = obj.getName();
 	m_qualifiedName = obj.getQualifiedName();
 	m_visibility = obj.getVisibility();
@@ -208,18 +167,27 @@ std::shared_ptr<ecore::EObject>  DurationObservationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> DurationObservationImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getDurationObservation_Class();
+	return uml::umlPackage::eInstance()->getDurationObservation_Class();
 }
 
 //*********************************
 // Attribute Setter Getter
 //*********************************
-
-
-std::shared_ptr<Bag<bool> > DurationObservationImpl::getFirstEvent() const 
+/*
+Getter & Setter for attribute firstEvent
+*/
+std::shared_ptr<Bag<bool> > DurationObservationImpl::isFirstEvent() const 
 {
+	if(m_firstEvent == nullptr)
+	{
+		m_firstEvent.reset(new Bag<bool>());
+	}
 	return m_firstEvent;
 }
+
+
+
+
 
 //*********************************
 // Operations
@@ -233,11 +201,23 @@ bool DurationObservationImpl::first_event_multiplicity(Any diagnostics,std::map 
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference event
+*/
 std::shared_ptr<Bag<uml::NamedElement>> DurationObservationImpl::getEvent() const
 {
+	if(m_event == nullptr)
+	{
+		m_event.reset(new Bag<uml::NamedElement>());
+		
+		
+	}
 //assert(m_event);
     return m_event;
 }
+
+
+
 
 
 //*********************************
@@ -247,14 +227,28 @@ std::weak_ptr<uml::Namespace > DurationObservationImpl::getNamespace() const
 {
 	return m_namespace;
 }
+
 std::shared_ptr<Union<uml::Element>> DurationObservationImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > DurationObservationImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<DurationObservation> DurationObservationImpl::getThisDurationObservationPtr() const
@@ -297,7 +291,7 @@ Any DurationObservationImpl::eGet(int featureID, bool resolve, bool coreType) co
 {
 	switch(featureID)
 	{
-		case UmlPackage::DURATIONOBSERVATION_ATTRIBUTE_EVENT:
+		case uml::umlPackage::DURATIONOBSERVATION_ATTRIBUTE_EVENT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::NamedElement>::iterator iter = m_event->begin();
@@ -307,10 +301,10 @@ Any DurationObservationImpl::eGet(int featureID, bool resolve, bool coreType) co
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //8112
+			return eAny(tempList); //8012
 		}
-		case UmlPackage::DURATIONOBSERVATION_ATTRIBUTE_FIRSTEVENT:
-			return eAny(getFirstEvent()); //8113
+		case uml::umlPackage::DURATIONOBSERVATION_ATTRIBUTE_FIRSTEVENT:
+			return eAny(isFirstEvent()); //8013
 	}
 	return ObservationImpl::eGet(featureID, resolve, coreType);
 }
@@ -318,10 +312,10 @@ bool DurationObservationImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::DURATIONOBSERVATION_ATTRIBUTE_EVENT:
-			return getEvent() != nullptr; //8112
-		case UmlPackage::DURATIONOBSERVATION_ATTRIBUTE_FIRSTEVENT:
-			return !getFirstEvent()->empty(); //8113
+		case uml::umlPackage::DURATIONOBSERVATION_ATTRIBUTE_EVENT:
+			return getEvent() != nullptr; //8012
+		case uml::umlPackage::DURATIONOBSERVATION_ATTRIBUTE_FIRSTEVENT:
+			return !isFirstEvent()->empty(); //8013
 	}
 	return ObservationImpl::internalEIsSet(featureID);
 }
@@ -329,7 +323,7 @@ bool DurationObservationImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::DURATIONOBSERVATION_ATTRIBUTE_EVENT:
+		case uml::umlPackage::DURATIONOBSERVATION_ATTRIBUTE_EVENT:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -365,7 +359,7 @@ bool DurationObservationImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case UmlPackage::DURATIONOBSERVATION_ATTRIBUTE_FIRSTEVENT:
+		case uml::umlPackage::DURATIONOBSERVATION_ATTRIBUTE_FIRSTEVENT:
 		{
 			// BOOST CAST
 			// nothing to do
@@ -387,12 +381,11 @@ void DurationObservationImpl::load(std::shared_ptr<persistence::interfaces::XLoa
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -421,8 +414,9 @@ void DurationObservationImpl::loadAttributes(std::shared_ptr<persistence::interf
 	ObservationImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void DurationObservationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void DurationObservationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 	try
 	{
 		if (nodeName.compare("firstEvent") == 0)
@@ -440,15 +434,15 @@ void DurationObservationImpl::loadNode(std::string nodeName, std::shared_ptr<per
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
 
-
-	ObservationImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	ObservationImpl::loadNode(nodeName, loadHandler);
 }
 
 void DurationObservationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case UmlPackage::DURATIONOBSERVATION_ATTRIBUTE_EVENT:
+		case uml::umlPackage::DURATIONOBSERVATION_ATTRIBUTE_EVENT:
 		{
 			std::shared_ptr<Bag<uml::NamedElement>> _event = getEvent();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -492,10 +486,9 @@ void DurationObservationImpl::saveContent(std::shared_ptr<persistence::interface
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
- 
 		// Add attributes
 		if ( this->eIsSet(package->getDurationObservation_Attribute_firstEvent()) )
 		{

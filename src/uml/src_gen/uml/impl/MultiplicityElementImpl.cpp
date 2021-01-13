@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
@@ -25,15 +24,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -45,10 +41,11 @@
 
 #include "uml/ValueSpecification.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -58,26 +55,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 MultiplicityElementImpl::MultiplicityElementImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	
-	
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	
-
-	//Init references
-	
-
-	
+{	
 }
 
 MultiplicityElementImpl::~MultiplicityElementImpl()
@@ -87,17 +65,12 @@ MultiplicityElementImpl::~MultiplicityElementImpl()
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			MultiplicityElementImpl::MultiplicityElementImpl(std::weak_ptr<uml::Element > par_owner)
-			:MultiplicityElementImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-
-
+MultiplicityElementImpl::MultiplicityElementImpl(std::weak_ptr<uml::Element > par_owner)
+:MultiplicityElementImpl()
+{
+	m_owner = par_owner;
+}
 
 
 MultiplicityElementImpl::MultiplicityElementImpl(const MultiplicityElementImpl & obj):MultiplicityElementImpl()
@@ -155,20 +128,33 @@ std::shared_ptr<ecore::EObject>  MultiplicityElementImpl::copy() const
 
 std::shared_ptr<ecore::EClass> MultiplicityElementImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getMultiplicityElement_Class();
+	return uml::umlPackage::eInstance()->getMultiplicityElement_Class();
 }
 
 //*********************************
 // Attribute Setter Getter
 //*********************************
+/*
+Getter & Setter for attribute isOrdered
+*/
+bool MultiplicityElementImpl::getIsOrdered() const 
+{
+	return m_isOrdered;
+}
+
 void MultiplicityElementImpl::setIsOrdered(bool _isOrdered)
 {
 	m_isOrdered = _isOrdered;
 } 
 
-bool MultiplicityElementImpl::getIsOrdered() const 
+
+
+/*
+Getter & Setter for attribute isUnique
+*/
+bool MultiplicityElementImpl::getIsUnique() const 
 {
-	return m_isOrdered;
+	return m_isUnique;
 }
 
 void MultiplicityElementImpl::setIsUnique(bool _isUnique)
@@ -176,9 +162,14 @@ void MultiplicityElementImpl::setIsUnique(bool _isUnique)
 	m_isUnique = _isUnique;
 } 
 
-bool MultiplicityElementImpl::getIsUnique() const 
+
+
+/*
+Getter & Setter for attribute lower
+*/
+int MultiplicityElementImpl::getLower() const 
 {
-	return m_isUnique;
+	return m_lower;
 }
 
 void MultiplicityElementImpl::setLower(int _lower)
@@ -186,9 +177,14 @@ void MultiplicityElementImpl::setLower(int _lower)
 	m_lower = _lower;
 } 
 
-int MultiplicityElementImpl::getLower() const 
+
+
+/*
+Getter & Setter for attribute upper
+*/
+int MultiplicityElementImpl::getUpper() const 
 {
-	return m_lower;
+	return m_upper;
 }
 
 void MultiplicityElementImpl::setUpper(int _upper)
@@ -196,10 +192,7 @@ void MultiplicityElementImpl::setUpper(int _upper)
 	m_upper = _upper;
 } 
 
-int MultiplicityElementImpl::getUpper() const 
-{
-	return m_upper;
-}
+
 
 //*********************************
 // Operations
@@ -279,33 +272,57 @@ bool MultiplicityElementImpl::value_specification_no_side_effects(Any diagnostic
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference lowerValue
+*/
 std::shared_ptr<uml::ValueSpecification > MultiplicityElementImpl::getLowerValue() const
 {
 
     return m_lowerValue;
 }
+
 void MultiplicityElementImpl::setLowerValue(std::shared_ptr<uml::ValueSpecification> _lowerValue)
 {
     m_lowerValue = _lowerValue;
 }
 
+
+
+/*
+Getter & Setter for reference upperValue
+*/
 std::shared_ptr<uml::ValueSpecification > MultiplicityElementImpl::getUpperValue() const
 {
 
     return m_upperValue;
 }
+
 void MultiplicityElementImpl::setUpperValue(std::shared_ptr<uml::ValueSpecification> _upperValue)
 {
     m_upperValue = _upperValue;
 }
+
+
 
 //*********************************
 // Union Getter
 //*********************************
 std::shared_ptr<Union<uml::Element>> MultiplicityElementImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
+
 
 
 std::shared_ptr<MultiplicityElement> MultiplicityElementImpl::getThisMultiplicityElementPtr() const
@@ -333,18 +350,18 @@ Any MultiplicityElementImpl::eGet(int featureID, bool resolve, bool coreType) co
 {
 	switch(featureID)
 	{
-		case UmlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_ISORDERED:
-			return eAny(getIsOrdered()); //1553
-		case UmlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_ISUNIQUE:
-			return eAny(getIsUnique()); //1554
-		case UmlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_LOWER:
-			return eAny(getLower()); //1555
-		case UmlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_LOWERVALUE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getLowerValue())); //1556
-		case UmlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_UPPER:
-			return eAny(getUpper()); //1557
-		case UmlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_UPPERVALUE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getUpperValue())); //1558
+		case uml::umlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_ISORDERED:
+			return eAny(getIsOrdered()); //1543
+		case uml::umlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_ISUNIQUE:
+			return eAny(getIsUnique()); //1544
+		case uml::umlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_LOWER:
+			return eAny(getLower()); //1545
+		case uml::umlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_LOWERVALUE:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getLowerValue())); //1546
+		case uml::umlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_UPPER:
+			return eAny(getUpper()); //1547
+		case uml::umlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_UPPERVALUE:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getUpperValue())); //1548
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -352,18 +369,18 @@ bool MultiplicityElementImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_ISORDERED:
-			return getIsOrdered() != false; //1553
-		case UmlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_ISUNIQUE:
-			return getIsUnique() != true; //1554
-		case UmlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_LOWER:
-			return getLower() != 1; //1555
-		case UmlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_LOWERVALUE:
-			return getLowerValue() != nullptr; //1556
-		case UmlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_UPPER:
-			return getUpper() != 1; //1557
-		case UmlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_UPPERVALUE:
-			return getUpperValue() != nullptr; //1558
+		case uml::umlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_ISORDERED:
+			return getIsOrdered() != false; //1543
+		case uml::umlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_ISUNIQUE:
+			return getIsUnique() != true; //1544
+		case uml::umlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_LOWER:
+			return getLower() != 1; //1545
+		case uml::umlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_LOWERVALUE:
+			return getLowerValue() != nullptr; //1546
+		case uml::umlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_UPPER:
+			return getUpper() != 1; //1547
+		case uml::umlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_UPPERVALUE:
+			return getUpperValue() != nullptr; //1548
 	}
 	return ElementImpl::internalEIsSet(featureID);
 }
@@ -371,48 +388,48 @@ bool MultiplicityElementImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_ISORDERED:
+		case uml::umlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_ISORDERED:
 		{
 			// BOOST CAST
 			bool _isOrdered = newValue->get<bool>();
-			setIsOrdered(_isOrdered); //1553
+			setIsOrdered(_isOrdered); //1543
 			return true;
 		}
-		case UmlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_ISUNIQUE:
+		case uml::umlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_ISUNIQUE:
 		{
 			// BOOST CAST
 			bool _isUnique = newValue->get<bool>();
-			setIsUnique(_isUnique); //1554
+			setIsUnique(_isUnique); //1544
 			return true;
 		}
-		case UmlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_LOWER:
+		case uml::umlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_LOWER:
 		{
 			// BOOST CAST
 			int _lower = newValue->get<int>();
-			setLower(_lower); //1555
+			setLower(_lower); //1545
 			return true;
 		}
-		case UmlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_LOWERVALUE:
+		case uml::umlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_LOWERVALUE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ValueSpecification> _lowerValue = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
-			setLowerValue(_lowerValue); //1556
+			setLowerValue(_lowerValue); //1546
 			return true;
 		}
-		case UmlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_UPPER:
+		case uml::umlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_UPPER:
 		{
 			// BOOST CAST
 			int _upper = newValue->get<int>();
-			setUpper(_upper); //1557
+			setUpper(_upper); //1547
 			return true;
 		}
-		case UmlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_UPPERVALUE:
+		case uml::umlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_UPPERVALUE:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ValueSpecification> _upperValue = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
-			setUpperValue(_upperValue); //1558
+			setUpperValue(_upperValue); //1548
 			return true;
 		}
 	}
@@ -431,12 +448,11 @@ void MultiplicityElementImpl::load(std::shared_ptr<persistence::interfaces::XLoa
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -476,8 +492,9 @@ void MultiplicityElementImpl::loadAttributes(std::shared_ptr<persistence::interf
 	ElementImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void MultiplicityElementImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void MultiplicityElementImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -523,8 +540,8 @@ void MultiplicityElementImpl::loadNode(std::string nodeName, std::shared_ptr<per
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
-
-	ElementImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	ElementImpl::loadNode(nodeName, loadHandler);
 }
 
 void MultiplicityElementImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -549,7 +566,7 @@ void MultiplicityElementImpl::saveContent(std::shared_ptr<persistence::interface
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 		// Save 'lowerValue'
 		std::shared_ptr<uml::ValueSpecification > lowerValue = this->getLowerValue();
@@ -565,7 +582,6 @@ void MultiplicityElementImpl::saveContent(std::shared_ptr<persistence::interface
 			saveHandler->addReference(upperValue, "upperValue", upperValue->eClass() != package->getValueSpecification_Class());
 		}
 	
- 
 		// Add attributes
 		if ( this->eIsSet(package->getMultiplicityElement_Attribute_isOrdered()) )
 		{

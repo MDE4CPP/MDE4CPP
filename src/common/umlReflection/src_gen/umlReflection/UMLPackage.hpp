@@ -15,13 +15,13 @@ namespace uml
 	class Constraint;
 	class Enumeration;
 	class EnumerationLiteral;
-	class Interface;
 	class Operation;
 	class Parameter;
 	class PrimitiveType;
 	class Property;
 	class ConnectorEnd;
 }
+
 
 namespace UML 
 {
@@ -837,9 +837,6 @@ namespace UML
 			virtual std::shared_ptr<uml::Property> get_UML_Action_localPrecondition() = 0;  
 			virtual std::shared_ptr<uml::Property> get_UML_Action_output() = 0;  
 			virtual std::shared_ptr<uml::Class> get_UML_Activity() = 0;  
-			virtual std::shared_ptr<uml::Interface> get_UML_ActivityContent() = 0;  
-			virtual std::shared_ptr<uml::Operation> get_UML_ActivityContent_containingActivity__() = 0;  
-			virtual std::shared_ptr<uml::Parameter> get_UML_ActivityContent_containingActivity_containingActivity() = 0;  
 			virtual std::shared_ptr<uml::Class> get_UML_ActivityEdge() = 0;  
 			virtual std::shared_ptr<uml::Property> get_UML_ActivityEdge_activity() = 0;  
 			virtual std::shared_ptr<uml::Property> get_UML_ActivityEdge_guard() = 0;  
@@ -3297,6 +3294,8 @@ namespace UML
 			virtual std::shared_ptr<uml::Constraint> get_UML_WriteVariableAction_value_type() = 0;  
 			
 			
+
+			//getter for subPackages
 
 			//Singleton Instance and Getter
 			

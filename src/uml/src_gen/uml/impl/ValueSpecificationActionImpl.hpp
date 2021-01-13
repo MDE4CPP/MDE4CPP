@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class ValueSpecificationActionImpl :virtual public ActionImpl, virtual public ValueSpecificationAction 
+	class ValueSpecificationActionImpl : virtual public ActionImpl, virtual public ValueSpecificationAction 
 	{
 		public: 
 			ValueSpecificationActionImpl(const ValueSpecificationActionImpl & obj);
@@ -28,7 +28,7 @@ namespace uml
 			ValueSpecificationActionImpl& operator=(ValueSpecificationActionImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			ValueSpecificationActionImpl();
 			virtual std::shared_ptr<ValueSpecificationAction> getThisValueSpecificationActionPtr() const;
 			virtual void setThisValueSpecificationActionPtr(std::weak_ptr<ValueSpecificationAction> thisValueSpecificationActionPtr);
@@ -59,13 +59,17 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 The type of the value ValueSpecification must conform to the type of the result OutputPin.
-			value.type.conformsTo(result.type) */ 
+			The type of the value ValueSpecification must conform to the type of the result OutputPin.
+			value.type.conformsTo(result.type)
+			*/
+			 
 			virtual bool compatible_type(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
-			 The multiplicity of the result OutputPin is 1..1
-			result.is(1,1) */ 
+			The multiplicity of the result OutputPin is 1..1
+			result.is(1,1)
+			*/
+			 
 			virtual bool multiplicity(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
@@ -79,43 +83,63 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 The OutputPin on which the result value is placed.
-			<p>From package UML::Actions.</p> */
+			The OutputPin on which the result value is placed.
+			<p>From package UML::Actions.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::OutputPin > getResult() const ;
 			
 			/*!
-			 The OutputPin on which the result value is placed.
-			<p>From package UML::Actions.</p> */
-			virtual void setResult(std::shared_ptr<uml::OutputPin> _result_result) ;
+			The OutputPin on which the result value is placed.
+			<p>From package UML::Actions.</p>
+			*/
+			
+			virtual void setResult(std::shared_ptr<uml::OutputPin> _result) ;
+			
 			/*!
-			 The ValueSpecification to be evaluated.
-			<p>From package UML::Actions.</p> */
+			The ValueSpecification to be evaluated.
+			<p>From package UML::Actions.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::ValueSpecification > getValue() const ;
 			
 			/*!
-			 The ValueSpecification to be evaluated.
-			<p>From package UML::Actions.</p> */
-			virtual void setValue(std::shared_ptr<uml::ValueSpecification> _value_value) ;
+			The ValueSpecification to be evaluated.
+			<p>From package UML::Actions.</p>
+			*/
+			
+			virtual void setValue(std::shared_ptr<uml::ValueSpecification> _value) ;
+			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
+			ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::ActivityGroup>> getInGroup() const ;/*!
-			 The ordered set of OutputPins representing outputs from the Action.
-			<p>From package UML::Actions.</p> */
+			The ordered set of OutputPins representing outputs from the Action.
+			<p>From package UML::Actions.</p>
+			*/
+			
 			virtual std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element>> getOutput() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
+			The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const ; 
 			 
 			//*********************************
@@ -129,7 +153,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

@@ -32,7 +32,7 @@ namespace persistence
 
 namespace fUML
 {
-	class FUMLFactory;
+	class fUMLFactory;
 }
 
 //Forward Declaration for used types
@@ -51,6 +51,11 @@ namespace uml
 	class Signal;
 }
 
+namespace fUML::Semantics::Values 
+{
+	class Value;
+}
+
 // base class includes
 #include "fUML/Semantics/SimpleClassifiers/CompoundValue.hpp"
 
@@ -60,8 +65,7 @@ namespace uml
 //*********************************
 namespace fUML::Semantics::SimpleClassifiers 
 {
-	/*!
-	 */
+	
 	class SignalInstance:virtual public CompoundValue
 	{
 		public:
@@ -81,6 +85,9 @@ namespace fUML::Semantics::SimpleClassifiers
 			//*********************************
 			// Operations
 			//*********************************
+			 
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() = 0;
+			
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -89,13 +96,12 @@ namespace fUML::Semantics::SimpleClassifiers
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<uml::Signal > getType() const = 0;
 			
-			/*!
-			 */
-			virtual void setType(std::shared_ptr<uml::Signal> _type_type) = 0;
+			
+			virtual void setType(std::shared_ptr<uml::Signal> _type) = 0;
+			
 			
 
 		protected:
@@ -107,10 +113,8 @@ namespace fUML::Semantics::SimpleClassifiers
 			//*********************************
 			// Reference Members
 			//*********************************
-			/*!
-			 */
-			std::shared_ptr<uml::Signal > m_type;
 			
+			std::shared_ptr<uml::Signal > m_type;
 
 		public:
 			//*********************************

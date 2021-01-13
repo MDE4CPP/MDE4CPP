@@ -11,12 +11,28 @@
 
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
+#include "StandardProfile/StandardProfileFactory.hpp"
 #include "StandardProfile/impl/StandardProfilePackageImpl.hpp"
 #include "uml/Stereotype.hpp"
+
+//Types included from attributes, operation parameters, imports and composite owner classes
 #include "uml/Package.hpp"
 
+//Packges and Factories included from types of attributes, operation parameters, imports and composite owner classes
+#include "uml/umlFactory.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
+//Packages of included Enumerations
 
+//Includes of PluginFramework (if required)
+
+//Includes of OpaqueBevaiors (if required)
+
+//Includes from InstanceValues (if required)
+
+//Includes from Ports typed by interfaces (if required)
+
+//Includes from roles of ConnectorEnds (if required)
 
 using namespace StandardProfile;
 
@@ -25,6 +41,12 @@ using namespace StandardProfile;
 //*********************************
 ModelLibraryImpl::ModelLibraryImpl()
 {
+	#ifdef ADD_COUNT
+		ADD_COUNT("ModelLibraryImpl()");
+	#endif
+
+	DEBUG_MESSAGE(std::cout<<"ModelLibrary is created..."<<std::endl;)
+
 	//***********************************
 	// init Get Set
 	//getter init
@@ -34,16 +56,16 @@ ModelLibraryImpl::ModelLibraryImpl()
 	
 	m_unsetterMap.insert(std::pair<std::string,std::function<void()>>("StandardProfile::ModelLibrary::base_Package",[this](){m_base_Package = std::shared_ptr<uml::Package>(nullptr);}));
 	 
-
-	// init properties without default
-	
-
-	
 }
 
 
 ModelLibraryImpl::~ModelLibraryImpl()
 {
+	#ifdef SUB_COUNT
+		SUB_COUNT("ModelLibraryImpl()");
+	#endif
+
+	DEBUG_MESSAGE(std::cout<<"ModelLibrary is destroyed..."<<std::endl;)
 }
 
 ModelLibraryImpl::ModelLibraryImpl(const ModelLibraryImpl & obj):ModelLibraryImpl()
@@ -52,6 +74,7 @@ ModelLibraryImpl::ModelLibraryImpl(const ModelLibraryImpl & obj):ModelLibraryImp
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ModelLibrary "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	instantiate();
 }
 
 std::shared_ptr<ecore::EObject>  ModelLibraryImpl::copy() const
@@ -65,6 +88,21 @@ std::shared_ptr<ecore::EObject>  ModelLibraryImpl::copy() const
 std::shared_ptr<uml::Class> ModelLibraryImpl::getMetaClass()
 {
 	return StandardProfilePackageImpl::eInstance()->get_StandardProfile_ModelLibrary();
+}
+
+void ModelLibraryImpl::instantiate()
+{   
+	
+}
+
+void ModelLibraryImpl::destroy()
+{	
+
+	//Erase properties
+	//deleting property base_Package
+	m_base_Package.reset();
+	
+	//Erase back reference to owner
 }
 
 //*********************************

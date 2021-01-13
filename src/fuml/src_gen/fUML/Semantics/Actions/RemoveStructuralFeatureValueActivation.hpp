@@ -32,10 +32,15 @@ namespace persistence
 
 namespace fUML
 {
-	class FUMLFactory;
+	class fUMLFactory;
 }
 
 //Forward Declaration for used types
+namespace uml 
+{
+	class Action;
+}
+
 namespace fUML::Semantics::Activities 
 {
 	class ActivityEdgeInstance;
@@ -66,6 +71,11 @@ namespace fUML::Semantics::Actions
 	class PinActivation;
 }
 
+namespace uml 
+{
+	class RemoveStructuralFeatureValueAction;
+}
+
 namespace fUML::Semantics::Activities 
 {
 	class Token;
@@ -85,8 +95,7 @@ namespace fUML::Semantics::Actions
 //*********************************
 namespace fUML::Semantics::Actions 
 {
-	/*!
-	 */
+	
 	class RemoveStructuralFeatureValueActivation:virtual public WriteStructuralFeatureActionActivation
 	{
 		public:
@@ -106,8 +115,7 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual void doAction() = 0;
 			
 			
@@ -118,6 +126,20 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Reference
 			//*********************************
+			
+			virtual std::shared_ptr<uml::RemoveStructuralFeatureValueAction > getRemoveStructuralFeatureValueAction() const = 0;
+			
+			
+			virtual void setRemoveStructuralFeatureValueAction(std::shared_ptr<uml::RemoveStructuralFeatureValueAction> _removeStructuralFeatureValueAction) = 0;
+			
+			/*Additional Setter for 'ActionActivation::action' redefined by reference 'removeStructuralFeatureValueAction'*/
+			
+			virtual void setAction(std::shared_ptr<uml::Action> _action) = 0;
+			
+			/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'removeStructuralFeatureValueAction'*/
+			
+			virtual void setNode(std::shared_ptr<uml::ActivityNode> _node) = 0;
+			
 			
 
 		protected:
@@ -130,13 +152,13 @@ namespace fUML::Semantics::Actions
 			// Reference Members
 			//*********************************
 			
+			std::shared_ptr<uml::RemoveStructuralFeatureValueAction > m_removeStructuralFeatureValueAction;
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> getPinActivation() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

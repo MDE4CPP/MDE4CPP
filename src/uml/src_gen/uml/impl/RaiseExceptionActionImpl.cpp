@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -25,21 +24,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -81,10 +71,11 @@
 
 #include "uml/StructuredActivityNode.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -94,19 +85,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 RaiseExceptionActionImpl::RaiseExceptionActionImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	//Init references
-	
+{	
 }
 
 RaiseExceptionActionImpl::~RaiseExceptionActionImpl()
@@ -116,53 +95,36 @@ RaiseExceptionActionImpl::~RaiseExceptionActionImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+RaiseExceptionActionImpl::RaiseExceptionActionImpl(std::weak_ptr<uml::Activity > par_activity)
+:RaiseExceptionActionImpl()
+{
+	m_activity = par_activity;
+	m_owner = par_activity;
+}
 
 //Additional constructor for the containments back reference
-			RaiseExceptionActionImpl::RaiseExceptionActionImpl(std::weak_ptr<uml::Activity > par_activity)
-			:RaiseExceptionActionImpl()
-			{
-			    m_activity = par_activity;
-				m_owner = par_activity;
-			}
-
-
-
-
+RaiseExceptionActionImpl::RaiseExceptionActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
+:RaiseExceptionActionImpl()
+{
+	m_inStructuredNode = par_inStructuredNode;
+	m_owner = par_inStructuredNode;
+}
 
 //Additional constructor for the containments back reference
-			RaiseExceptionActionImpl::RaiseExceptionActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
-			:RaiseExceptionActionImpl()
-			{
-			    m_inStructuredNode = par_inStructuredNode;
-				m_owner = par_inStructuredNode;
-			}
-
-
-
-
+RaiseExceptionActionImpl::RaiseExceptionActionImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:RaiseExceptionActionImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			RaiseExceptionActionImpl::RaiseExceptionActionImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:RaiseExceptionActionImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
-
-
-
-
-//Additional constructor for the containments back reference
-			RaiseExceptionActionImpl::RaiseExceptionActionImpl(std::weak_ptr<uml::Element > par_owner)
-			:RaiseExceptionActionImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-
-
+RaiseExceptionActionImpl::RaiseExceptionActionImpl(std::weak_ptr<uml::Element > par_owner)
+:RaiseExceptionActionImpl()
+{
+	m_owner = par_owner;
+}
 
 
 RaiseExceptionActionImpl::RaiseExceptionActionImpl(const RaiseExceptionActionImpl & obj):RaiseExceptionActionImpl()
@@ -293,7 +255,7 @@ std::shared_ptr<ecore::EObject>  RaiseExceptionActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> RaiseExceptionActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getRaiseExceptionAction_Class();
+	return uml::umlPackage::eInstance()->getRaiseExceptionAction_Class();
 }
 
 //*********************************
@@ -307,39 +269,96 @@ std::shared_ptr<ecore::EClass> RaiseExceptionActionImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference exception
+*/
 std::shared_ptr<uml::InputPin > RaiseExceptionActionImpl::getException() const
 {
 //assert(m_exception);
     return m_exception;
 }
+
 void RaiseExceptionActionImpl::setException(std::shared_ptr<uml::InputPin> _exception)
 {
     m_exception = _exception;
 }
+
+
 
 //*********************************
 // Union Getter
 //*********************************
 std::shared_ptr<Union<uml::ActivityGroup>> RaiseExceptionActionImpl::getInGroup() const
 {
+	if(m_inGroup == nullptr)
+	{
+		/*Union*/
+		m_inGroup.reset(new Union<uml::ActivityGroup>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_inGroup - Union<uml::ActivityGroup>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_inGroup;
 }
+
 std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> RaiseExceptionActionImpl::getInput() const
 {
+	if(m_input == nullptr)
+	{
+		/*SubsetUnion*/
+		m_input.reset(new SubsetUnion<uml::InputPin, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_input - SubsetUnion<uml::InputPin, uml::Element >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_input->initSubsetUnion(getOwnedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_input - SubsetUnion<uml::InputPin, uml::Element >(getOwnedElement())" << std::endl;
+		#endif
+		
+	}
 	return m_input;
 }
+
 std::shared_ptr<Union<uml::Element>> RaiseExceptionActionImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > RaiseExceptionActionImpl::getOwner() const
 {
 	return m_owner;
 }
+
 std::shared_ptr<Union<uml::RedefinableElement>> RaiseExceptionActionImpl::getRedefinedElement() const
 {
+	if(m_redefinedElement == nullptr)
+	{
+		/*Union*/
+		m_redefinedElement.reset(new Union<uml::RedefinableElement>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_redefinedElement - Union<uml::RedefinableElement>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_redefinedElement;
 }
+
+
 
 
 std::shared_ptr<RaiseExceptionAction> RaiseExceptionActionImpl::getThisRaiseExceptionActionPtr() const
@@ -382,8 +401,8 @@ Any RaiseExceptionActionImpl::eGet(int featureID, bool resolve, bool coreType) c
 {
 	switch(featureID)
 	{
-		case UmlPackage::RAISEEXCEPTIONACTION_ATTRIBUTE_EXCEPTION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getException())); //19327
+		case uml::umlPackage::RAISEEXCEPTIONACTION_ATTRIBUTE_EXCEPTION:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getException())); //19227
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -391,8 +410,8 @@ bool RaiseExceptionActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::RAISEEXCEPTIONACTION_ATTRIBUTE_EXCEPTION:
-			return getException() != nullptr; //19327
+		case uml::umlPackage::RAISEEXCEPTIONACTION_ATTRIBUTE_EXCEPTION:
+			return getException() != nullptr; //19227
 	}
 	return ActionImpl::internalEIsSet(featureID);
 }
@@ -400,12 +419,12 @@ bool RaiseExceptionActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::RAISEEXCEPTIONACTION_ATTRIBUTE_EXCEPTION:
+		case uml::umlPackage::RAISEEXCEPTIONACTION_ATTRIBUTE_EXCEPTION:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::InputPin> _exception = std::dynamic_pointer_cast<uml::InputPin>(_temp);
-			setException(_exception); //19327
+			setException(_exception); //19227
 			return true;
 		}
 	}
@@ -424,12 +443,11 @@ void RaiseExceptionActionImpl::load(std::shared_ptr<persistence::interfaces::XLo
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -439,8 +457,9 @@ void RaiseExceptionActionImpl::loadAttributes(std::shared_ptr<persistence::inter
 	ActionImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void RaiseExceptionActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void RaiseExceptionActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -468,8 +487,8 @@ void RaiseExceptionActionImpl::loadNode(std::string nodeName, std::shared_ptr<pe
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
-
-	ActionImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	ActionImpl::loadNode(nodeName, loadHandler);
 }
 
 void RaiseExceptionActionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -487,7 +506,6 @@ void RaiseExceptionActionImpl::save(std::shared_ptr<persistence::interfaces::XSa
 	
 	ActivityNodeImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);
@@ -510,7 +528,7 @@ void RaiseExceptionActionImpl::saveContent(std::shared_ptr<persistence::interfac
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 		// Save 'exception'
 		std::shared_ptr<uml::InputPin > exception = this->getException();

@@ -17,8 +17,9 @@ namespace uml
 	class LiteralInteger;
 	class LiteralUnlimitedNatural;
 	class OpaqueExpression;
-	class UmlFactory;
+	class umlFactory;
 }
+
 
 namespace UML
 {
@@ -828,9 +829,6 @@ namespace UML
 			virtual std::shared_ptr<uml::Property> get_UML_Action_localPrecondition();  
 			virtual std::shared_ptr<uml::Property> get_UML_Action_output();  
 			virtual std::shared_ptr<uml::Class> get_UML_Activity();  
-			virtual std::shared_ptr<uml::Interface> get_UML_ActivityContent();  
-			virtual std::shared_ptr<uml::Operation> get_UML_ActivityContent_containingActivity__();  
-			virtual std::shared_ptr<uml::Parameter> get_UML_ActivityContent_containingActivity_containingActivity();  
 			virtual std::shared_ptr<uml::Class> get_UML_ActivityEdge();  
 			virtual std::shared_ptr<uml::Property> get_UML_ActivityEdge_activity();  
 			virtual std::shared_ptr<uml::Property> get_UML_ActivityEdge_guard();  
@@ -3289,6 +3287,8 @@ namespace UML
 			
 			
 
+			//getter for subPackages
+
 		private:
 			//private variables for ownedMember of the metamodel package
 			std::shared_ptr<uml::Association> uML_A_action_actionExecutionSpecification = nullptr;
@@ -4592,10 +4592,6 @@ namespace UML
 			std::shared_ptr<uml::LiteralInteger> uML_Action_output_lowerValue_LiteralInteger_UML_Action_output = nullptr;
 			std::shared_ptr<uml::LiteralUnlimitedNatural> uML_Action_output_upperValue_LiteralUnlimitedNatural_UML_Action_output = nullptr;
 			std::shared_ptr<uml::Class> uML_Activity = nullptr;
-			std::shared_ptr<uml::Interface> uML_ActivityContent = nullptr;
-			std::shared_ptr<uml::Operation> uML_ActivityContent_containingActivity__ = nullptr;
-			std::shared_ptr<uml::Parameter> uML_ActivityContent_containingActivity_containingActivity = nullptr;
-			std::shared_ptr<uml::LiteralInteger> uML_ActivityContent_containingActivity_containingActivity_lowerValue_LiteralInteger_UML_ActivityContent_containingActivity_containingActivity = nullptr;
 			std::shared_ptr<uml::Class> uML_ActivityEdge = nullptr;
 			std::shared_ptr<uml::Property> uML_ActivityEdge_activity = nullptr;
 			std::shared_ptr<uml::LiteralInteger> uML_ActivityEdge_activity_lowerValue_LiteralInteger_UML_ActivityEdge_activity = nullptr;
@@ -8783,23 +8779,26 @@ namespace UML
 			void createPackageContents(std::shared_ptr<uml::Package> uML);
 
 		private:
-			void createPackageActivities(std::shared_ptr<uml::Package> uML, std::shared_ptr<uml::UmlFactory> factory);
-			void createPackageClasses(std::shared_ptr<uml::Package> uML, std::shared_ptr<uml::UmlFactory> factory);
-			void createPackageDependencies(std::shared_ptr<uml::Package> uML, std::shared_ptr<uml::UmlFactory> factory);
-			void createPackageEnumerationLiterals(std::shared_ptr<uml::Package> uML, std::shared_ptr<uml::UmlFactory> factory);
-			void createPackageInstanceSpecifications(std::shared_ptr<uml::Package> uML, std::shared_ptr<uml::UmlFactory> factory);
-			void createPackageInterfaceRealizations(std::shared_ptr<uml::Package> uML, std::shared_ptr<uml::UmlFactory> factory);
-			void createPackageInterfaces(std::shared_ptr<uml::Package> uML, std::shared_ptr<uml::UmlFactory> factory);
-			void createPackagePrimitiveTypes(std::shared_ptr<uml::Package> uML, std::shared_ptr<uml::UmlFactory> factory);
-			void createPackageStereotypes(std::shared_ptr<uml::Package> uML, std::shared_ptr<uml::UmlFactory> factory);
-			void createPackageValueSpecifications(std::shared_ptr<uml::Package> uML, std::shared_ptr<uml::UmlFactory> factory);
+			void createPackageActivities(std::shared_ptr<uml::Package> uML, std::shared_ptr<uml::umlFactory> factory);
+			void createPackageClasses(std::shared_ptr<uml::Package> uML, std::shared_ptr<uml::umlFactory> factory);
+			void createPackageAssociations(std::shared_ptr<uml::Package> uML, std::shared_ptr<uml::umlFactory> factory);
+			void createPackageDependencies(std::shared_ptr<uml::Package> uML, std::shared_ptr<uml::umlFactory> factory);
+			void createPackageEnumerationLiterals(std::shared_ptr<uml::Package> uML, std::shared_ptr<uml::umlFactory> factory);
+			void createPackageInstanceSpecifications(std::shared_ptr<uml::Package> uML, std::shared_ptr<uml::umlFactory> factory);
+			void createPackageInterfaceRealizations(std::shared_ptr<uml::Package> uML, std::shared_ptr<uml::umlFactory> factory);
+			void createPackageInterfaces(std::shared_ptr<uml::Package> uML, std::shared_ptr<uml::umlFactory> factory);
+			void createPackagePrimitiveTypes(std::shared_ptr<uml::Package> uML, std::shared_ptr<uml::umlFactory> factory);
+			void createPackageStereotypes(std::shared_ptr<uml::Package> uML, std::shared_ptr<uml::umlFactory> factory);
+			void createPackageValueSpecifications(std::shared_ptr<uml::Package> uML, std::shared_ptr<uml::umlFactory> factory);
 
 			void initializePackageActivities();
 			void initializePackageClasses();
+			void initializePackageAssociations();
 			void initializePackageDependencies();
 			void initializePackageInstanceSpecifications();
 			void initializePackageInterfaceRealizations();
 			void initializePackageInterfaces();
+			void initializePackageNestedPackages();
 			void initializePackageStereotypes();
 			void initializePackageValueSpecifications();
 	};

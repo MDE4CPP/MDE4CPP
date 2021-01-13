@@ -32,7 +32,7 @@ namespace persistence
 
 namespace uml
 {
-	class UmlFactory;
+	class umlFactory;
 }
 
 //Forward Declaration for used types
@@ -77,8 +77,10 @@ namespace uml
 namespace uml 
 {
 	/*!
-	 A deployed artifact is an artifact or artifact instance that has been deployed to a deployment target.
-	<p>From package UML::Deployments.</p> */
+	A deployed artifact is an artifact or artifact instance that has been deployed to a deployment target.
+	<p>From package UML::Deployments.</p>
+	*/
+	
 	class DeployedArtifact:virtual public NamedElement
 	{
 		public:
@@ -124,11 +126,15 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

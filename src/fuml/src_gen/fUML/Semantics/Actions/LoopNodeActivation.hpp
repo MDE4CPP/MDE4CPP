@@ -13,7 +13,7 @@
 
 
 // forward declarations
-template<class T> class Bag;
+template<class T> class Bag; 
 
 
 
@@ -33,10 +33,15 @@ namespace persistence
 
 namespace fUML
 {
-	class FUMLFactory;
+	class fUMLFactory;
 }
 
 //Forward Declaration for used types
+namespace uml 
+{
+	class Action;
+}
+
 namespace fUML::Semantics::Activities 
 {
 	class ActivityEdgeInstance;
@@ -91,8 +96,7 @@ namespace fUML::Semantics::Actions
 //*********************************
 namespace fUML::Semantics::Actions 
 {
-	/*!
-	 */
+	
 	class LoopNodeActivation:virtual public StructuredActivityNodeActivation
 	{
 		public:
@@ -112,20 +116,16 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<uml::ActivityNode> makeLoopVariableList() = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual void runBody() = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual void runLoopVariables() = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual bool runTest() = 0;
 			
 			
@@ -136,9 +136,9 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Bag<fUML::Semantics::Actions::Values>> getBodyOutputLists() const = 0;
+			
 			
 			
 
@@ -151,17 +151,14 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Reference Members
 			//*********************************
-			/*!
-			 */
-			std::shared_ptr<Bag<fUML::Semantics::Actions::Values>> m_bodyOutputLists;
 			
+			mutable std::shared_ptr<Bag<fUML::Semantics::Actions::Values>> m_bodyOutputLists;
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> getPinActivation() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

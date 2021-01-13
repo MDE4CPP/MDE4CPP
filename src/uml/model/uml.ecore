@@ -7,9 +7,6 @@
   <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
     <details key="eclipseURI" value="pathmap://UML_METAMODELS/UML.metamodel.uml"/>
   </eAnnotations>
-  <eClassifiers xsi:type="ecore:EClass" name="ActivityContent" abstract="true" interface="true">
-    <eOperations name="containingActivity" ordered="false" eType="#//Activity"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Activity" eSuperTypes="#//Behavior">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="An Activity is the specification of parameterized Behavior as the coordinated sequencing of subordinate units.&#xA;&lt;p>From package UML::Activities.&lt;/p>"/>
@@ -381,6 +378,11 @@
         <details key="body" value="std::shared_ptr&lt;Bag&lt;uml::Class> > superClass(new Bag&lt;uml::Class> () );&#x9;&#xD;&#xA;&#x9;&#xD;&#xA;    std::shared_ptr&lt;Bag&lt;uml::Classifier> > classifierList = getGenerals();&#x9;&#xD;&#xA;    for (std::shared_ptr&lt;Classifier> c : *classifierList)&#x9;&#xD;&#xA;    {&#x9;&#xD;&#xA;    &#x9;std::shared_ptr&lt;uml::Class> cl = std::dynamic_pointer_cast&lt;uml::Class>(c);&#xD;&#xA;        if(cl)&#xD;&#xA;        {&#xD;&#xA;            superClass->push_back(cl);&#xD;&#xA;        }&#x9;&#xD;&#xA;    }&#x9;&#xD;&#xA;    return superClass;"/>
       </eAnnotations>
     </eOperations>
+    <eOperations name="getAllOperations" ordered="false" upperBound="-1" eType="#//Operation">
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="std::shared_ptr&lt;Bag&lt;uml::Operation>> allOperations(new Bag&lt;uml::Operation>());&#xA;std::shared_ptr&lt;Bag&lt;uml::Operation>> ownedOperations = this->getOwnedOperation();&#xA;&#xA;allOperations->insert(allOperations->end(), ownedOperations->begin(), ownedOperations->end());&#xA;&#xA;std::shared_ptr&lt;Bag&lt;uml::Classifier> > superTypes = this->getGeneral();&#xA;&#xA;for (std::shared_ptr&lt;Classifier> superType : *superTypes)&#x9;&#xA;{&#x9;&#xA;&#x9;std::shared_ptr&lt;Bag&lt;uml::Operation>> superTypeOperations = superType->getAllOperations();&#xA;&#x9;allOperations->insert(allOperations->end(), superTypeOperations->begin(), superTypeOperations->end());&#xA;}&#xA;&#xA;return allOperations;"/>
+      </eAnnotations>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedOperation" upperBound="-1"
         eType="#//Operation" containment="true" eOpposite="#//Operation/class">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -522,6 +524,9 @@
         <eAnnotations source="redefines" references="#//ParameterableElement/templateParameter"/>
       </contents>
     </eAnnotations>
+    <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+      <details key="includes" value="#include &quot;uml/BehavioredClassifier.hpp&quot;&#xA;#include &quot;uml/InterfaceRealization.hpp&quot;&#xA;#include &quot;uml/Interface.hpp&quot;&#xA;#include &quot;uml/Usage.hpp&quot;"/>
+    </eAnnotations>
     <eOperations name="specialize_type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="A Classifier may only specialize Classifiers of a valid type.&#xA;parents()->forAll(c | self.maySpecializeType(c))"/>
@@ -609,6 +614,9 @@
     <eOperations name="getAllOperations" ordered="false" upperBound="-1" eType="#//Operation">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Retrieves all the operations of this classifier, including those inherited from its parents."/>
+      </eAnnotations>
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="&#x9;std::shared_ptr&lt;Bag&lt;uml::Operation>> allOperations(new Bag&lt;uml::Operation>());&#xA;&#x9;std::shared_ptr&lt;Bag&lt;uml::Feature>> allDirectFeatures = this->getFeature();&#xA;&#x9;&#xA;&#x9;for(unsigned int i = 0; i &lt; allDirectFeatures->size(); i++)&#xA;&#x9;{&#xA;&#x9;&#x9;std::shared_ptr&lt;uml::Operation> operation = std::dynamic_pointer_cast&lt;uml::Operation>(allDirectFeatures->at(i));&#xA;&#x9;&#x9;if(operation != nullptr){ allOperations->add(operation); }&#xA;&#x9;}&#xA;&#x9;&#xA;&#x9;std::shared_ptr&lt;Bag&lt;uml::Classifier>> superTypes = this->getGenerals();&#xA;&#x9;&#xA;&#x9;for(unsigned int i = 0; i &lt; superTypes->size(); i++)&#xA;&#x9;{&#xA;&#x9;&#x9;std::shared_ptr&lt;Bag&lt;uml::Operation>> superTypeOperations = superTypes->at(i)->getAllOperations();&#xA;&#x9;&#x9;allOperations->insert(allOperations->end(), superTypeOperations->begin(), superTypeOperations->end());&#xA;&#x9;}&#xA;&#x9;&#xA;&#x9;return allOperations;"/>
       </eAnnotations>
     </eOperations>
     <eOperations name="getAllUsedInterfaces" ordered="false" upperBound="-1" eType="#//Interface">
@@ -731,7 +739,7 @@
         <details key="documentation" value="The query parents() gives all of the immediate ancestors of a generalized Classifier.&#xA;result = (generalization.general->asSet())&#xA;&lt;p>From package UML::Classification.&lt;/p>"/>
       </eAnnotations>
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="std::shared_ptr&lt; Bag&lt;uml::Classifier> > returnList(new Bag&lt;uml::Classifier>());&#xD;&#xA;&#xD;&#xA;&#x9;for(std::shared_ptr&lt;Generalization> gen : *m_generalization)&#xD;&#xA;&#x9;{&#xD;&#xA;&#x9;&#x9;returnList->push_back(gen->getGeneral());&#xD;&#xA;&#x9;}&#xD;&#xA;&#xD;&#xA;&#x9;return returnList;"/>
+        <details key="body" value="std::shared_ptr&lt; Bag&lt;uml::Classifier> > returnList(new Bag&lt;uml::Classifier>());&#xA;&#xA;&#x9;for(std::shared_ptr&lt;Generalization> gen : *getGeneralization())&#xA;&#x9;{&#xA;&#x9;&#x9;returnList->push_back(gen->getGeneral());&#xA;&#x9;}&#xA;&#xA;&#x9;return returnList;"/>
       </eAnnotations>
     </eOperations>
     <eOperations name="directlyRealizedInterfaces" ordered="false" upperBound="-1"
@@ -739,20 +747,32 @@
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The Interfaces directly realized by this Classifier&#xA;result = ((clientDependency->&#xD;&#xA;  select(oclIsKindOf(Realization) and supplier->forAll(oclIsKindOf(Interface))))->&#xD;&#xA;      collect(supplier.oclAsType(Interface))->asSet())&#xA;&lt;p>From package UML::Classification.&lt;/p>"/>
       </eAnnotations>
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="std::shared_ptr&lt;Bag&lt;uml::Interface>> directlyRealizedInterfaces(new Bag&lt;uml::Interface>());&#xA;std::shared_ptr&lt;uml::BehavioredClassifier> bClassifier = std::dynamic_pointer_cast&lt;uml::BehavioredClassifier>(getThisClassifierPtr());&#xA;&#xA;if(bClassifier != nullptr)&#xA;{&#xA;&#x9;std::shared_ptr&lt;Bag&lt;uml::InterfaceRealization>> interfaceRealizations = bClassifier->getInterfaceRealization();&#xA;&#x9;for(unsigned int i = 0; i &lt; interfaceRealizations->size(); i++)&#xA;&#x9;{&#xA;&#x9;&#x9;std::shared_ptr&lt;uml::InterfaceRealization> interfaceRealization = interfaceRealizations->at(i);&#xA;&#x9;&#x9;std::shared_ptr&lt;uml::Interface> contract = interfaceRealization->getContract();&#xA;&#xA;&#x9;&#x9;if(contract != nullptr)&#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;directlyRealizedInterfaces->add(contract);&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;}&#xA;&#xA;return directlyRealizedInterfaces;"/>
+      </eAnnotations>
     </eOperations>
     <eOperations name="directlyUsedInterfaces" ordered="false" upperBound="-1" eType="#//Interface">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The Interfaces directly used by this Classifier&#xA;result = ((supplierDependency->&#xD;&#xA;  select(oclIsKindOf(Usage) and client->forAll(oclIsKindOf(Interface))))->&#xD;&#xA;    collect(client.oclAsType(Interface))->asSet())&#xA;&lt;p>From package UML::Classification.&lt;/p>"/>
+      </eAnnotations>
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="&#x9;std::shared_ptr&lt;Bag&lt;uml::Interface>> directlyUsedInterfaces(new Bag&lt;uml::Interface>());&#xA;&#xA;&#x9;std::shared_ptr&lt;Bag&lt;uml::Dependency>> clientDependencies = this->getClientDependency();&#xA;&#x9;&#xA;&#x9;for(unsigned int i = 0; i &lt; clientDependencies->size(); i++)&#xA;&#x9;{&#xA;&#x9;&#x9;std::shared_ptr&lt;uml::Usage> usage = std::dynamic_pointer_cast&lt;uml::Usage>(clientDependencies->at(i));&#xA;&#x9;&#x9;if(usage != nullptr)&#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;std::shared_ptr&lt;Bag&lt;uml::NamedElement>> suppliers = usage->getSupplier();&#xA;&#x9;&#x9;&#x9;std::shared_ptr&lt;Bag&lt;uml::Interface>> interfacesInSuppliers(new Bag&lt;uml::Interface>());&#xA;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;for(unsigned int j = 0; j &lt; suppliers->size(); j++)&#xA;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;std::shared_ptr&lt;uml::Interface> supplyingInterface = std::dynamic_pointer_cast&lt;uml::Interface>(suppliers->at(j));&#xA;&#x9;&#x9;&#x9;&#x9;if(supplyingInterface != nullptr)&#xA;&#x9;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;interfacesInSuppliers->add(supplyingInterface);&#xA;&#x9;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;&#x9;&#xA;&#x9;&#x9;&#x9;directlyUsedInterfaces->insert(directlyUsedInterfaces->end(), interfacesInSuppliers->begin(), interfacesInSuppliers->end());&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;&#x9;&#xA;&#x9;return directlyUsedInterfaces;"/>
       </eAnnotations>
     </eOperations>
     <eOperations name="allRealizedInterfaces" ordered="false" upperBound="-1" eType="#//Interface">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The Interfaces realized by this Classifier and all of its generalizations&#xA;result = (directlyRealizedInterfaces()->union(self.allParents()->collect(directlyRealizedInterfaces()))->asSet())&#xA;&lt;p>From package UML::Classification.&lt;/p>"/>
       </eAnnotations>
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="std::shared_ptr&lt;Bag&lt;uml::Interface>> allRealizedInterface(new Bag&lt;uml::Interface>());&#xA;std::shared_ptr&lt;Bag&lt;uml::Interface>> directlyRealizedInterfaces = this->directlyRealizedInterfaces();&#xA;&#x9;&#xA;allRealizedInterface->insert(allRealizedInterface->end(), directlyRealizedInterfaces->begin(), directlyRealizedInterfaces->end());&#xA;&#x9;&#xA;std::shared_ptr&lt;Bag&lt;uml::Classifier>> superClasses = this->getGenerals();&#xA;for(unsigned int i = 0; i &lt; superClasses->size(); i++)&#xA;{&#xA;&#x9;std::shared_ptr&lt;Bag&lt;uml::Interface>> superRealizedInterfaces = superClasses->at(i)->allRealizedInterfaces();&#xA;&#x9;allRealizedInterface->insert(allRealizedInterface->end(), superRealizedInterfaces->begin(), superRealizedInterfaces->end());&#xA;}&#xA;&#xA;return allRealizedInterface;"/>
+      </eAnnotations>
     </eOperations>
     <eOperations name="allUsedInterfaces" ordered="false" upperBound="-1" eType="#//Interface">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The Interfaces used by this Classifier and all of its generalizations&#xA;result = (directlyUsedInterfaces()->union(self.allParents()->collect(directlyUsedInterfaces()))->asSet())&#xA;&lt;p>From package UML::Classification.&lt;/p>"/>
+      </eAnnotations>
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="&#x9;std::shared_ptr&lt;Bag&lt;uml::Interface>> allUsedInterfaces(new Bag&lt;uml::Interface>());&#xA;&#x9;std::shared_ptr&lt;Bag&lt;uml::Interface>> directlyUsedInterfaces = this->directlyUsedInterfaces();&#xA;&#x9;&#xA;&#x9;allUsedInterfaces->insert(allUsedInterfaces->end(), directlyUsedInterfaces->begin(), directlyUsedInterfaces->end());&#xA;&#x9;&#xA;&#x9;std::shared_ptr&lt;Bag&lt;uml::Classifier>> superClasses = this->getGenerals();&#xA;&#x9;for(unsigned int i = 0; i &lt; superClasses->size(); i++)&#xA;&#x9;{&#xA;&#x9;&#x9;std::shared_ptr&lt;Bag&lt;uml::Interface>> superUsedInterfaces = superClasses->at(i)->allUsedInterfaces();&#xA;&#x9;&#x9;allUsedInterfaces->insert(allUsedInterfaces->end(), superUsedInterfaces->begin(), superUsedInterfaces->end());&#xA;&#x9;}&#xA;&#xA;&#x9;return allUsedInterfaces;"/>
       </eAnnotations>
     </eOperations>
     <eOperations name="isSubstitutableFor" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Boolean">
@@ -1270,7 +1290,7 @@
       <details key="documentation" value="An Element is a constituent of a model. As such, it has the capability of owning other Elements.&#xA;&lt;p>From package UML::CommonStructure.&lt;/p>"/>
     </eAnnotations>
     <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-      <details key="includes" value="#include &quot;abstractDataTypes/SubsetUnion.hpp&quot;&#xD;&#xA;#include &quot;util/stereotypestorage.hpp&quot;&#xD;&#xA;#include &quot;uml/Property.hpp&quot;"/>
+      <details key="includes" value="#include &quot;abstractDataTypes/SubsetUnion.hpp&quot;&#xA;#include &quot;util/stereotypestorage.hpp&quot;&#xA;#include &quot;uml/Property.hpp&quot;"/>
     </eAnnotations>
     <eOperations name="has_owner" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -1628,6 +1648,9 @@
     <eOperations name="allOwnedElements" ordered="false" upperBound="-1" eType="#//Element">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The query allOwnedElements() gives all of the direct and indirect ownedElements of an Element.&#xA;result = (ownedElement->union(ownedElement->collect(e | e.allOwnedElements()))->asSet())&#xA;&lt;p>From package UML::CommonStructure.&lt;/p>"/>
+      </eAnnotations>
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="&#x9;std::shared_ptr&lt;Bag&lt;uml::Element>> list(new Bag&lt;uml::Element>());&#xA;&#x9;list->insert(list->begin(), this->getOwnedElement()->begin(), this->getOwnedElement()->end());&#xA;&#xA;&#x9;Bag&lt;uml::Element>::iterator iter = this->getOwnedElement()->begin();&#xA;&#x9;Bag&lt;uml::Element>::iterator end = this->getOwnedElement()->end();&#xA;&#x9;int i = 0;&#xA;&#x9;while(iter != end)&#xA;&#x9;{&#xA;&#x9;&#x9;std::shared_ptr&lt;Bag&lt;uml::Element>> elementList = (*iter)->allOwnedElements();&#xA;&#x9;&#x9;list->insert(list->end(), elementList->begin(), elementList->end());&#xA;&#x9;&#x9;iter++;&#xA;&#x9;&#x9;i++;&#xA;&#x9;}&#xA;&#xA;&#x9;return list;"/>
       </eAnnotations>
     </eOperations>
     <eOperations name="mustBeOwned" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Boolean">
@@ -3692,6 +3715,8 @@
         <details key="documentation" value="The ConnectableElement attached at this ConnectorEnd. When an instance of the containing Classifier is created, a link may (depending on the multiplicities) be created to an instance of the Classifier that types this ConnectableElement.&#xA;&lt;p>From package UML::StructuredClassifiers.&lt;/p>"/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="connector" lowerBound="1"
+        eType="#//Connector" eOpposite="#//Connector/end"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MultiplicityElement" abstract="true"
       eSuperTypes="#//Element">
@@ -4717,20 +4742,38 @@
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Retrieves the (only) return result parameter for this operation."/>
       </eAnnotations>
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="this->returnResult();"/>
+      </eAnnotations>
     </eOperations>
     <eOperations name="setIsOrdered" ordered="false" lowerBound="1">
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="m_isOrdered = newIsOrdered;"/>
+      </eAnnotations>
       <eParameters name="newIsOrdered" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Boolean"/>
     </eOperations>
     <eOperations name="setIsUnique" ordered="false" lowerBound="1">
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="m_isUnique = newIsUnique;"/>
+      </eAnnotations>
       <eParameters name="newIsUnique" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Boolean"/>
     </eOperations>
     <eOperations name="setLower" ordered="false" lowerBound="1">
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="m_lower = newLower;"/>
+      </eAnnotations>
       <eParameters name="newLower" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Integer"/>
     </eOperations>
     <eOperations name="setType" ordered="false" lowerBound="1">
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="m_type = newType;"/>
+      </eAnnotations>
       <eParameters name="newType" ordered="false" lowerBound="1" eType="#//Type"/>
     </eOperations>
     <eOperations name="setUpper" ordered="false" lowerBound="1">
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="m_upper = newUpper;"/>
+      </eAnnotations>
       <eParameters name="newUpper" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//UnlimitedNatural"/>
     </eOperations>
     <eOperations name="isOrdered" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Boolean">
@@ -4756,6 +4799,9 @@
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The query returnResult() returns the set containing the return parameter of the Operation if one exists, otherwise, it returns an empty set&#xA;result = (ownedParameter->select (direction = ParameterDirectionKind::return)->asSet())&#xA;&lt;p>From package UML::Classification.&lt;/p>"/>
       </eAnnotations>
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="&#x9;std::shared_ptr&lt;Bag&lt;uml::Parameter>> ownedParameters = this->getOwnedParameter();&#xA;&#x9;std::shared_ptr&lt;Bag&lt;uml::Parameter>> returnResult(new Bag&lt;uml::Parameter>);&#xA;&#xA;&#x9;for(std::shared_ptr&lt;uml::Parameter> p : *ownedParameters)&#xA;&#x9;{&#xA;&#x9;&#x9;if(p->getDirection() == uml::ParameterDirectionKind::RETURN)&#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;returnResult->add(p);&#xA;&#x9;&#x9;&#x9;&#x9;break;&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;&#x9;&#xA;&#x9;return returnResult;"/>
+      </eAnnotations>
     </eOperations>
     <eOperations name="getType" ordered="false" lowerBound="1" eType="#//Type">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -4775,6 +4821,12 @@
       <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
         <details key="originalName" value="upper"/>
       </eAnnotations>
+    </eOperations>
+    <eOperations name="matches" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Boolean">
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="//Checks whether two uml::Operations share the same name and input parameter types (= share same signature)&#xA;&#xA;bool equals = false;&#xA;&#xA;if(this->getName() != comparedOperation->getName()) {return equals;}&#xA;&#xA;std::shared_ptr&lt;Bag&lt;uml::Parameter>> thisParameters = this->getOwnedParameter();&#xA;std::shared_ptr&lt;Bag&lt;uml::Parameter>> otherParameters = comparedOperation->getOwnedParameter();&#xA;&#xA;if(thisParameters->size() != otherParameters->size()) {return equals;}&#xA;&#xA;for(unsigned int i = 0; i &lt; thisParameters->size(); i++)&#xA;{&#xA;&#x9;if(thisParameters->at(i)->getType() != otherParameters->at(i)->getType()) {return equals;}&#xA;}&#xA;&#xA;equals = true;&#xA;return equals;&#xA;"/>
+      </eAnnotations>
+      <eParameters name="comparedOperation" lowerBound="1" eType="#//Operation"/>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="bodyCondition" ordered="false"
         eType="#//Constraint">
@@ -6624,6 +6676,9 @@
       <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
         <details key="originalName" value="provided"/>
       </eAnnotations>
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="&#x9;if(m_isConjugated) return this->basicRequired();&#xA;&#x9;else return this->basicProvided();"/>
+      </eAnnotations>
     </eOperations>
     <eOperations name="getRequireds" ordered="false" upperBound="-1" eType="#//Interface">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -6633,15 +6688,24 @@
       <eAnnotations source="http://www.eclipse.org/uml2/2.0.0/UML">
         <details key="originalName" value="required"/>
       </eAnnotations>
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="&#x9;if(m_isConjugated) return this->basicProvided();&#xA;&#x9;else return this->basicRequired();"/>
+      </eAnnotations>
     </eOperations>
     <eOperations name="basicProvided" ordered="false" upperBound="-1" eType="#//Interface">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The union of the sets of Interfaces realized by the type of the Port and its supertypes, or directly the type of the Port if the Port is typed by an Interface.&#xA;result = (if type.oclIsKindOf(Interface) &#xD;&#xA;then type.oclAsType(Interface)->asSet() &#xD;&#xA;else type.oclAsType(Classifier).allRealizedInterfaces() &#xD;&#xA;endif)&#xA;&lt;p>From package UML::StructuredClassifiers.&lt;/p>"/>
       </eAnnotations>
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="&#x9;std::shared_ptr&lt;Bag&lt;uml::Interface>> providedInterfaces(new Bag&lt;uml::Interface>());&#xA;&#x9;std::shared_ptr&lt;uml::Classifier> type = std::dynamic_pointer_cast&lt;uml::Classifier>(this->getType());&#xA;&#x9;&#xA;&#x9;if(std::dynamic_pointer_cast&lt;uml::Interface>(type) != nullptr)&#xA;&#x9;{&#xA;&#x9;&#x9;providedInterfaces->add(std::dynamic_pointer_cast&lt;uml::Interface>(type));&#xA;&#x9;}&#xA;&#x9;else&#xA;&#x9;{&#xA;&#x9;&#x9;std::shared_ptr&lt;Bag&lt;uml::Interface>> typingClassRealizedInterfaces = type->allRealizedInterfaces();&#xA;&#x9;&#x9;providedInterfaces->insert(providedInterfaces->end(), typingClassRealizedInterfaces->begin(), typingClassRealizedInterfaces->end());&#xA;&#x9;}&#xA;&#x9;return providedInterfaces;"/>
+      </eAnnotations>
     </eOperations>
     <eOperations name="basicRequired" ordered="false" upperBound="-1" eType="#//Interface">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The union of the sets of Interfaces used by the type of the Port and its supertypes.&#xA;result = ( type.oclAsType(Classifier).allUsedInterfaces() )&#xA;&lt;p>From package UML::StructuredClassifiers.&lt;/p>"/>
+      </eAnnotations>
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="&#x9;std::shared_ptr&lt;Bag&lt;uml::Interface>> requiredInterfaces(new Bag&lt;uml::Interface>());&#xA;&#x9;std::shared_ptr&lt;uml::Classifier> type = std::dynamic_pointer_cast&lt;uml::Classifier>(this->getType());&#xA;&#x9;&#xA;&#x9;std::shared_ptr&lt;Bag&lt;uml::Interface>> typingClassRequiredInterfaces = type->allUsedInterfaces();&#xA;&#x9;requiredInterfaces->insert(requiredInterfaces->end(), typingClassRequiredInterfaces->begin(), typingClassRequiredInterfaces->end());&#xA;&#x9;&#xA;&#x9;return requiredInterfaces;"/>
       </eAnnotations>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="isBehavior" ordered="false"
@@ -7917,7 +7981,7 @@
       <eAnnotations source="subsets" references="#//Classifier/attribute #//Namespace/ownedMember #//StructuredClassifier/role"/>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedConnector" ordered="false"
-        upperBound="-1" eType="#//Connector" containment="true">
+        upperBound="-1" eType="#//Connector" containment="true" eOpposite="#//Connector/structuredClassifier">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The connectors owned by the StructuredClassifier.&#xA;&lt;p>From package UML::StructuredClassifiers.&lt;/p>"/>
       </eAnnotations>
@@ -7997,7 +8061,7 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="end" lowerBound="2" upperBound="-1"
-        eType="#//ConnectorEnd" containment="true">
+        eType="#//ConnectorEnd" containment="true" eOpposite="#//ConnectorEnd/connector">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="A Connector has at least two ConnectorEnds, each representing the participation of instances of the Classifiers typing the ConnectableElements attached to the end. The set of ConnectorEnds is ordered.&#xA;&lt;p>From package UML::StructuredClassifiers.&lt;/p>"/>
       </eAnnotations>
@@ -8021,6 +8085,10 @@
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="An optional Association that classifies links corresponding to this Connector.&#xA;&lt;p>From package UML::StructuredClassifiers.&lt;/p>"/>
       </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="structuredClassifier" eType="#//StructuredClassifier"
+        eOpposite="#//StructuredClassifier/ownedConnector">
+      <eAnnotations source="subsets" references="#//Feature/featuringClassifier #//NamedElement/namespace #//RedefinableElement/redefinitionContext"/>
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="ConnectorKind">
@@ -8197,12 +8265,15 @@
       <eAnnotations source="subsets" references="#//TemplateSignature/parameter"/>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="classifier" ordered="false"
-        lowerBound="1" eType="#//Classifier" changeable="false" volatile="true" transient="true">
+        lowerBound="1" eType="#//Classifier" volatile="true" transient="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The Classifier that owns this RedefinableTemplateSignature.&#xA;&lt;p>From package UML::Classification.&lt;/p>"/>
       </eAnnotations>
       <eAnnotations source="redefines" references="#//TemplateSignature/template"/>
       <eAnnotations source="subsets" references="#//RedefinableElement/redefinitionContext"/>
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="AggregationKind" value="shared"/>
+      </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="UseCase" eSuperTypes="#//BehavioredClassifier">
@@ -8629,18 +8700,9 @@
       <eAnnotations source="subsets" references="#//StructuredClassifier/ownedAttribute"/>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ActivityGroup" abstract="true" eSuperTypes="#//NamedElement #//ActivityContent">
+  <eClassifiers xsi:type="ecore:EClass" name="ActivityGroup" abstract="true" eSuperTypes="#//NamedElement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="ActivityGroup is an abstract class for defining sets of ActivityNodes and ActivityEdges in an Activity.&#xA;&lt;p>From package UML::Activities.&lt;/p>"/>
-    </eAnnotations>
-    <eAnnotations source="duplicates">
-      <contents xsi:type="ecore:EOperation" name="containingActivity" ordered="false"
-          eType="#//Activity">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="The Activity that directly or indirectly contains this ActivityGroup.&#xA;result = (if superGroup&lt;>null then superGroup.containingActivity()&#xD;&#xA;else inActivity&#xD;&#xA;endif)&#xA;&lt;p>From package UML::Activities.&lt;/p>"/>
-        </eAnnotations>
-        <eAnnotations source="redefines" references="#//ActivityContent/containingActivity"/>
-      </contents>
     </eAnnotations>
     <eOperations name="nodes_and_edges" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -8679,6 +8741,11 @@
           <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
         </eGenericType>
       </eParameters>
+    </eOperations>
+    <eOperations name="containingActivity" ordered="false" eType="#//Activity">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The Activity that directly or indirectly contains this ActivityGroup.&#xA;result = (if superGroup&lt;>null then superGroup.containingActivity()&#xD;&#xA;else inActivity&#xD;&#xA;endif)&#xA;&lt;p>From package UML::Activities.&lt;/p>"/>
+      </eAnnotations>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="containedEdge" ordered="false"
         upperBound="-1" eType="#//ActivityEdge" changeable="false" volatile="true"
@@ -8953,18 +9020,11 @@
       <eAnnotations source="subsets" references="#//ActivityGroup/containedEdge"/>
     </eStructuralFeatures>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="ActivityNode" abstract="true" eSuperTypes="#//RedefinableElement #//ActivityContent">
+  <eClassifiers xsi:type="ecore:EClass" name="ActivityNode" abstract="true" eSuperTypes="#//RedefinableElement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="ActivityNode is an abstract class for points in the flow of an Activity connected by ActivityEdges.&#xA;&lt;p>From package UML::Activities.&lt;/p>"/>
     </eAnnotations>
     <eAnnotations source="duplicates">
-      <contents xsi:type="ecore:EOperation" name="containingActivity" ordered="false"
-          eType="#//Activity">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="The Activity that directly or indirectly contains this ActivityNode.&#xA;result = (if inStructuredNode&lt;>null then inStructuredNode.containingActivity()&#xD;&#xA;else activity&#xD;&#xA;endif)&#xA;&lt;p>From package UML::Activities.&lt;/p>"/>
-        </eAnnotations>
-        <eAnnotations source="redefines" references="#//ActivityContent/containingActivity"/>
-      </contents>
       <contents xsi:type="ecore:EOperation" name="isConsistentWith" ordered="false"
           lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Boolean">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -8974,6 +9034,11 @@
         <eParameters name="redefiningElement" ordered="false" lowerBound="1" eType="#//RedefinableElement"/>
       </contents>
     </eAnnotations>
+    <eOperations name="containingActivity" ordered="false" eType="#//Activity">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The Activity that directly or indirectly contains this ActivityNode.&#xA;result = (if inStructuredNode&lt;>null then inStructuredNode.containingActivity()&#xD;&#xA;else activity&#xD;&#xA;endif)&#xA;&lt;p>From package UML::Activities.&lt;/p>"/>
+      </eAnnotations>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="activity" ordered="false"
         eType="#//Activity" volatile="true" transient="true" derived="true" eOpposite="#//Activity/node">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -9091,7 +9156,7 @@
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
           <details key="documentation" value="The Activity that directly or indirectly contains this StructuredActivityNode (considered as an Action).&#xA;result = (self.Action::containingActivity())&#xA;&lt;p>From package UML::Actions.&lt;/p>"/>
         </eAnnotations>
-        <eAnnotations source="redefines" references="#//ActivityContent/containingActivity"/>
+        <eAnnotations source="redefines" references="#//ActivityGroup/containingActivity"/>
       </contents>
       <contents xsi:type="ecore:EReference" name="activity" ordered="false" eType="#//Activity"
           volatile="true" transient="true" derived="true">
@@ -9613,6 +9678,8 @@
         eOpposite="#//DestroyObjectAction/target">
       <eAnnotations source="subsets" references="#//ActionExecutionSpecification/action"/>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="removeStructuralFeatureValueAction"
+        eType="#//RemoveStructuralFeatureValueAction" eOpposite="#//RemoveStructuralFeatureValueAction/removeAt"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Pin" abstract="true" eSuperTypes="#//ObjectNode #//MultiplicityElement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -13176,7 +13243,7 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="removeAt" ordered="false"
-        eType="#//InputPin" containment="true">
+        eType="#//InputPin" containment="true" eOpposite="#//InputPin/removeStructuralFeatureValueAction">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="An InputPin that provides the position of an existing value to remove in ordered, nonunique structural features. The type of the removeAt InputPin is UnlimitedNatural, but the value cannot be zero or unlimited.&#xA;&lt;p>From package UML::Actions.&lt;/p>"/>
       </eAnnotations>
@@ -13312,7 +13379,7 @@
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The request object, which is transmitted to the target object. The object may be copied in transmission, so identity might not be preserved.&#xA;&lt;p>From package UML::Actions.&lt;/p>"/>
       </eAnnotations>
-      <eAnnotations source="redefines" references="#//InvocationAction/argument"/>
+      <eAnnotations source="subsets" references="#//InvocationAction/argument"/>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="target" ordered="false"
         lowerBound="1" eType="#//InputPin" containment="true">
@@ -17206,7 +17273,7 @@
       </eParameters>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="firstEvent" ordered="false"
-        upperBound="2" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Boolean">
+        upperBound="2" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The value of firstEvent[i] is related to constrainedElement[i] (where i is 1 or 2). If firstEvent[i] is true, then the corresponding observation event is the first time instant the execution enters constrainedElement[i]. If firstEvent[i] is false, then the corresponding observation event is the last time instant the execution is within constrainedElement[i].&#xA;&lt;p>From package UML::Values.&lt;/p>"/>
       </eAnnotations>
@@ -17303,7 +17370,7 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="firstEvent" ordered="false"
-        upperBound="2" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Boolean">
+        upperBound="2" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The value of firstEvent[i] is related to event[i] (where i is 1 or 2). If firstEvent[i] is true, then the corresponding observation event is the first time instant the execution enters event[i]. If firstEvent[i] is false, then the corresponding observation event is the time instant the execution exits event[i].&#xA;&lt;p>From package UML::Values.&lt;/p>"/>
       </eAnnotations>
@@ -17320,20 +17387,23 @@
         </eAnnotations>
         <eAnnotations source="redefines" references="#//ValueSpecification/stringValue"/>
       </contents>
-      <contents xsi:type="ecore:EOperation" name="booleanValue" ordered="false" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Boolean">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="The query booleanValue() gives the value.&#xA;result = (value)&#xA;&lt;p>From package UML::Values.&lt;/p>"/>
-        </eAnnotations>
-        <eAnnotations source="redefines" references="#//ValueSpecification/booleanValue"/>
-      </contents>
-      <contents xsi:type="ecore:EOperation" name="isComputable" ordered="false" lowerBound="1"
-          eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Boolean">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="The query isComputable() is redefined to be true.&#xA;result = (true)&#xA;&lt;p>From package UML::Values.&lt;/p>"/>
-        </eAnnotations>
-        <eAnnotations source="redefines" references="#//ValueSpecification/isComputable"/>
-      </contents>
     </eAnnotations>
+    <eOperations name="booleanValue" ordered="false" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Boolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The query booleanValue() gives the value.&#xA;result = (value)&#xA;&lt;p>From package UML::Values.&lt;/p>"/>
+      </eAnnotations>
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="return m_value;"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="isComputable" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Boolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The query isComputable() is redefined to be true.&#xA;result = (true)&#xA;&lt;p>From package UML::Values.&lt;/p>"/>
+      </eAnnotations>
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="return true;"/>
+      </eAnnotations>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" ordered="false"
         lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Boolean"
         defaultValueLiteral="false">
@@ -17359,20 +17429,23 @@
         </eAnnotations>
         <eAnnotations source="redefines" references="#//ValueSpecification/stringValue"/>
       </contents>
-      <contents xsi:type="ecore:EOperation" name="integerValue" ordered="false" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Integer">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="The query integerValue() gives the value.&#xA;result = (value)&#xA;&lt;p>From package UML::Values.&lt;/p>"/>
-        </eAnnotations>
-        <eAnnotations source="redefines" references="#//ValueSpecification/integerValue"/>
-      </contents>
-      <contents xsi:type="ecore:EOperation" name="isComputable" ordered="false" lowerBound="1"
-          eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Boolean">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="The query isComputable() is redefined to be true.&#xA;result = (true)&#xA;&lt;p>From package UML::Values.&lt;/p>"/>
-        </eAnnotations>
-        <eAnnotations source="redefines" references="#//ValueSpecification/isComputable"/>
-      </contents>
     </eAnnotations>
+    <eOperations name="integerValue" ordered="false" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Integer">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The query integerValue() gives the value.&#xA;result = (value)&#xA;&lt;p>From package UML::Values.&lt;/p>"/>
+      </eAnnotations>
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="return m_value;"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="isComputable" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Boolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The query isComputable() is redefined to be true.&#xA;result = (true)&#xA;&lt;p>From package UML::Values.&lt;/p>"/>
+      </eAnnotations>
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="return true;"/>
+      </eAnnotations>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" ordered="false"
         lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Integer"
         defaultValueLiteral="0">
@@ -17385,22 +17458,22 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="A LiteralNull specifies the lack of a value.&#xA;&lt;p>From package UML::Values.&lt;/p>"/>
     </eAnnotations>
-    <eAnnotations source="duplicates">
-      <contents xsi:type="ecore:EOperation" name="isComputable" ordered="false" lowerBound="1"
-          eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Boolean">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="The query isComputable() is redefined to be true.&#xA;result = (true)&#xA;&lt;p>From package UML::Values.&lt;/p>"/>
-        </eAnnotations>
-        <eAnnotations source="redefines" references="#//ValueSpecification/isComputable"/>
-      </contents>
-      <contents xsi:type="ecore:EOperation" name="isNull" ordered="false" lowerBound="1"
-          eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Boolean">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="The query isNull() returns true.&#xA;result = (true)&#xA;&lt;p>From package UML::Values.&lt;/p>"/>
-        </eAnnotations>
-        <eAnnotations source="redefines" references="#//ValueSpecification/isNull"/>
-      </contents>
-    </eAnnotations>
+    <eOperations name="isComputable" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Boolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The query isComputable() is redefined to be true.&#xA;result = (true)&#xA;&lt;p>From package UML::Values.&lt;/p>"/>
+      </eAnnotations>
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="return true;"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="isNull" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Boolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The query isNull() returns true.&#xA;result = (true)&#xA;&lt;p>From package UML::Values.&lt;/p>"/>
+      </eAnnotations>
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="return true;"/>
+      </eAnnotations>
+    </eOperations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="LiteralReal" eSuperTypes="#//LiteralSpecification">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -17410,20 +17483,23 @@
       <contents xsi:type="ecore:EOperation" name="stringValue" ordered="false" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//String">
         <eAnnotations source="redefines" references="#//ValueSpecification/stringValue"/>
       </contents>
-      <contents xsi:type="ecore:EOperation" name="isComputable" ordered="false" lowerBound="1"
-          eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Boolean">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="The query isComputable() is redefined to be true.&#xA;result = (true)&#xA;&lt;p>From package UML::Values.&lt;/p>"/>
-        </eAnnotations>
-        <eAnnotations source="redefines" references="#//ValueSpecification/isComputable"/>
-      </contents>
-      <contents xsi:type="ecore:EOperation" name="realValue" ordered="false" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Real">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="The query realValue() gives the value.&#xA;result = (value)&#xA;&lt;p>From package UML::Values.&lt;/p>"/>
-        </eAnnotations>
-        <eAnnotations source="redefines" references="#//ValueSpecification/realValue"/>
-      </contents>
     </eAnnotations>
+    <eOperations name="isComputable" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Boolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The query isComputable() is redefined to be true.&#xA;result = (true)&#xA;&lt;p>From package UML::Values.&lt;/p>"/>
+      </eAnnotations>
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="return true;"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="realValue" ordered="false" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Real">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The query realValue() gives the value.&#xA;result = (value)&#xA;&lt;p>From package UML::Values.&lt;/p>"/>
+      </eAnnotations>
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="return m_value;"/>
+      </eAnnotations>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" ordered="false"
         lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Real">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -17449,20 +17525,23 @@
         </eAnnotations>
         <eAnnotations source="redefines" references="#//ValueSpecification/unlimitedValue"/>
       </contents>
-      <contents xsi:type="ecore:EOperation" name="isComputable" ordered="false" lowerBound="1"
-          eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Boolean">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="The query isComputable() is redefined to be true.&#xA;result = (true)&#xA;&lt;p>From package UML::Values.&lt;/p>"/>
-        </eAnnotations>
-        <eAnnotations source="redefines" references="#//ValueSpecification/isComputable"/>
-      </contents>
-      <contents xsi:type="ecore:EOperation" name="stringValue" ordered="false" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//String">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="The query stringValue() gives the value.&#xA;result = (value)&#xA;&lt;p>From package UML::Values.&lt;/p>"/>
-        </eAnnotations>
-        <eAnnotations source="redefines" references="#//ValueSpecification/stringValue"/>
-      </contents>
     </eAnnotations>
+    <eOperations name="isComputable" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Boolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The query isComputable() is redefined to be true.&#xA;result = (true)&#xA;&lt;p>From package UML::Values.&lt;/p>"/>
+      </eAnnotations>
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="return true;"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="stringValue" ordered="false" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//String">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The query stringValue() gives the value.&#xA;result = (value)&#xA;&lt;p>From package UML::Values.&lt;/p>"/>
+      </eAnnotations>
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="return m_value;"/>
+      </eAnnotations>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" ordered="false"
         eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//String" unsettable="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -17481,21 +17560,23 @@
         </eAnnotations>
         <eAnnotations source="redefines" references="#//ValueSpecification/stringValue"/>
       </contents>
-      <contents xsi:type="ecore:EOperation" name="isComputable" ordered="false" lowerBound="1"
-          eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Boolean">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="The query isComputable() is redefined to be true.&#xA;result = (true)&#xA;&lt;p>From package UML::Values.&lt;/p>"/>
-        </eAnnotations>
-        <eAnnotations source="redefines" references="#//ValueSpecification/isComputable"/>
-      </contents>
-      <contents xsi:type="ecore:EOperation" name="unlimitedValue" ordered="false"
-          eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//UnlimitedNatural">
-        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
-          <details key="documentation" value="The query unlimitedValue() gives the value.&#xA;result = (value)&#xA;&lt;p>From package UML::Values.&lt;/p>"/>
-        </eAnnotations>
-        <eAnnotations source="redefines" references="#//ValueSpecification/unlimitedValue"/>
-      </contents>
     </eAnnotations>
+    <eOperations name="isComputable" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//Boolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The query isComputable() is redefined to be true.&#xA;result = (true)&#xA;&lt;p>From package UML::Values.&lt;/p>"/>
+      </eAnnotations>
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="return true;"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="unlimitedValue" ordered="false" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//UnlimitedNatural">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The query unlimitedValue() gives the value.&#xA;result = (value)&#xA;&lt;p>From package UML::Values.&lt;/p>"/>
+      </eAnnotations>
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="return m_value;"/>
+      </eAnnotations>
+    </eOperations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" ordered="false"
         lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//UnlimitedNatural"
         defaultValueLiteral="0">

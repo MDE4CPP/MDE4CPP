@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class GeneralOrderingImpl :virtual public NamedElementImpl, virtual public GeneralOrdering 
+	class GeneralOrderingImpl : virtual public NamedElementImpl, virtual public GeneralOrdering 
 	{
 		public: 
 			GeneralOrderingImpl(const GeneralOrderingImpl & obj);
@@ -28,7 +28,7 @@ namespace uml
 			GeneralOrderingImpl& operator=(GeneralOrderingImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			GeneralOrderingImpl();
 			virtual std::shared_ptr<GeneralOrdering> getThisGeneralOrderingPtr() const;
 			virtual void setThisGeneralOrderingPtr(std::weak_ptr<GeneralOrdering> thisGeneralOrderingPtr);
@@ -51,8 +51,10 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 An occurrence specification must not be ordered relative to itself through a series of general orderings. (In other words, the transitive closure of the general orderings is irreflexive.)
-			after->closure(toAfter.after)->excludes(before) */ 
+			An occurrence specification must not be ordered relative to itself through a series of general orderings. (In other words, the transitive closure of the general orderings is irreflexive.)
+			after->closure(toAfter.after)->excludes(before)
+			*/
+			 
 			virtual bool irreflexive_transitive_closure(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
@@ -66,34 +68,48 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 The OccurrenceSpecification referenced comes after the OccurrenceSpecification referenced by before.
-			<p>From package UML::Interactions.</p> */
+			The OccurrenceSpecification referenced comes after the OccurrenceSpecification referenced by before.
+			<p>From package UML::Interactions.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::OccurrenceSpecification > getAfter() const ;
 			
 			/*!
-			 The OccurrenceSpecification referenced comes after the OccurrenceSpecification referenced by before.
-			<p>From package UML::Interactions.</p> */
-			virtual void setAfter(std::shared_ptr<uml::OccurrenceSpecification> _after_after) ;
+			The OccurrenceSpecification referenced comes after the OccurrenceSpecification referenced by before.
+			<p>From package UML::Interactions.</p>
+			*/
+			
+			virtual void setAfter(std::shared_ptr<uml::OccurrenceSpecification> _after) ;
+			
 			/*!
-			 The OccurrenceSpecification referenced comes before the OccurrenceSpecification referenced by after.
-			<p>From package UML::Interactions.</p> */
+			The OccurrenceSpecification referenced comes before the OccurrenceSpecification referenced by after.
+			<p>From package UML::Interactions.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::OccurrenceSpecification > getBefore() const ;
 			
 			/*!
-			 The OccurrenceSpecification referenced comes before the OccurrenceSpecification referenced by after.
-			<p>From package UML::Interactions.</p> */
-			virtual void setBefore(std::shared_ptr<uml::OccurrenceSpecification> _before_before) ;
+			The OccurrenceSpecification referenced comes before the OccurrenceSpecification referenced by after.
+			<p>From package UML::Interactions.</p>
+			*/
+			
+			virtual void setBefore(std::shared_ptr<uml::OccurrenceSpecification> _before) ;
+			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
@@ -107,7 +123,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

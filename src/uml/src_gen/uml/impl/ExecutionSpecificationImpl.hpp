@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class ExecutionSpecificationImpl :virtual public InteractionFragmentImpl, virtual public ExecutionSpecification 
+	class ExecutionSpecificationImpl : virtual public InteractionFragmentImpl, virtual public ExecutionSpecification 
 	{
 		public: 
 			ExecutionSpecificationImpl(const ExecutionSpecificationImpl & obj);
@@ -28,7 +28,7 @@ namespace uml
 			ExecutionSpecificationImpl& operator=(ExecutionSpecificationImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			ExecutionSpecificationImpl();
 			virtual std::shared_ptr<ExecutionSpecification> getThisExecutionSpecificationPtr() const;
 			virtual void setThisExecutionSpecificationPtr(std::weak_ptr<ExecutionSpecification> thisExecutionSpecificationPtr);
@@ -59,8 +59,10 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 The startEvent and the finishEvent must be on the same Lifeline.
-			start.covered = finish.covered */ 
+			The startEvent and the finishEvent must be on the same Lifeline.
+			start.covered = finish.covered
+			*/
+			 
 			virtual bool same_lifeline(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
@@ -74,37 +76,53 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 References the OccurrenceSpecification that designates the finish of the Action or Behavior.
-			<p>From package UML::Interactions.</p> */
+			References the OccurrenceSpecification that designates the finish of the Action or Behavior.
+			<p>From package UML::Interactions.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::OccurrenceSpecification > getFinish() const ;
 			
 			/*!
-			 References the OccurrenceSpecification that designates the finish of the Action or Behavior.
-			<p>From package UML::Interactions.</p> */
-			virtual void setFinish(std::shared_ptr<uml::OccurrenceSpecification> _finish_finish) ;
+			References the OccurrenceSpecification that designates the finish of the Action or Behavior.
+			<p>From package UML::Interactions.</p>
+			*/
+			
+			virtual void setFinish(std::shared_ptr<uml::OccurrenceSpecification> _finish) ;
+			
 			/*!
-			 References the OccurrenceSpecification that designates the start of the Action or Behavior.
-			<p>From package UML::Interactions.</p> */
+			References the OccurrenceSpecification that designates the start of the Action or Behavior.
+			<p>From package UML::Interactions.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::OccurrenceSpecification > getStart() const ;
 			
 			/*!
-			 References the OccurrenceSpecification that designates the start of the Action or Behavior.
-			<p>From package UML::Interactions.</p> */
-			virtual void setStart(std::shared_ptr<uml::OccurrenceSpecification> _start_start) ;
+			References the OccurrenceSpecification that designates the start of the Action or Behavior.
+			<p>From package UML::Interactions.</p>
+			*/
+			
+			virtual void setStart(std::shared_ptr<uml::OccurrenceSpecification> _start) ;
+			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
@@ -118,7 +136,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

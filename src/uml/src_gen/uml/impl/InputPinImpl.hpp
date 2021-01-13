@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class InputPinImpl :virtual public PinImpl, virtual public InputPin 
+	class InputPinImpl : virtual public PinImpl, virtual public InputPin 
 	{
 		public: 
 			InputPinImpl(const InputPinImpl & obj);
@@ -28,7 +28,7 @@ namespace uml
 			InputPinImpl& operator=(InputPinImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			InputPinImpl();
 			virtual std::shared_ptr<InputPin> getThisInputPinPtr() const;
 			virtual void setThisInputPinPtr(std::weak_ptr<InputPin> thisInputPinPtr);
@@ -70,6 +70,10 @@ namespace uml
 
 
 			//Additional constructors for the containments back reference
+			InputPinImpl(std::weak_ptr<uml::RemoveStructuralFeatureValueAction > par_removeStructuralFeatureValueAction);
+
+
+			//Additional constructors for the containments back reference
 			InputPinImpl(std::weak_ptr<uml::StructuralFeatureAction > par_structuralFeatureAction);
 
 
@@ -87,11 +91,13 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 An InputPin may have outgoing ActivityEdges only when it is owned by a StructuredActivityNode, and these edges must target a node contained (directly or indirectly) in the owning StructuredActivityNode.
+			An InputPin may have outgoing ActivityEdges only when it is owned by a StructuredActivityNode, and these edges must target a node contained (directly or indirectly) in the owning StructuredActivityNode.
 			outgoing->notEmpty() implies
 				action<>null and
 				action.oclIsKindOf(StructuredActivityNode) and
-				action.oclAsType(StructuredActivityNode).allOwnedNodes()->includesAll(outgoing.target) */ 
+				action.oclAsType(StructuredActivityNode).allOwnedNodes()->includesAll(outgoing.target)
+			*/
+			 
 			virtual bool outgoing_edges_structured_only(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
@@ -104,69 +110,77 @@ namespace uml
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::weak_ptr<uml::Action > getAction() const ;
 			
-			/*!
-			 */
+			
+			
 			virtual std::weak_ptr<uml::AddStructuralFeatureValueAction > getAddStructuralFeatureValueAction() const ;
 			
-			/*!
-			 */
-			virtual void setAddStructuralFeatureValueAction(std::shared_ptr<uml::AddStructuralFeatureValueAction> _addStructuralFeatureValueAction_addStructuralFeatureValueAction) ;
-			/*!
-			 */
+			
+			virtual void setAddStructuralFeatureValueAction(std::shared_ptr<uml::AddStructuralFeatureValueAction> _addStructuralFeatureValueAction) ;
+			
+			
 			virtual std::weak_ptr<uml::CallOperationAction > getCallOperationAction() const ;
 			
-			/*!
-			 */
-			virtual void setCallOperationAction(std::shared_ptr<uml::CallOperationAction> _callOperationAction_callOperationAction) ;
-			/*!
-			 */
+			
+			virtual void setCallOperationAction(std::shared_ptr<uml::CallOperationAction> _callOperationAction) ;
+			
+			
 			virtual std::weak_ptr<uml::DestroyObjectAction > getDestroyObjectAction() const ;
 			
-			/*!
-			 */
-			virtual void setDestroyObjectAction(std::shared_ptr<uml::DestroyObjectAction> _destroyObjectAction_destroyObjectAction) ;
-			/*!
-			 */
+			
+			virtual void setDestroyObjectAction(std::shared_ptr<uml::DestroyObjectAction> _destroyObjectAction) ;
+			
+			
 			virtual std::weak_ptr<uml::InvocationAction > getInvocationAction() const ;
 			
-			/*!
-			 */
-			virtual void setInvocationAction(std::shared_ptr<uml::InvocationAction> _invocationAction_invocationAction) ;
-			/*!
-			 */
+			
+			virtual void setInvocationAction(std::shared_ptr<uml::InvocationAction> _invocationAction) ;
+			
+			
+			virtual std::weak_ptr<uml::RemoveStructuralFeatureValueAction > getRemoveStructuralFeatureValueAction() const ;
+			
+			
+			virtual void setRemoveStructuralFeatureValueAction(std::shared_ptr<uml::RemoveStructuralFeatureValueAction> _removeStructuralFeatureValueAction) ;
+			
+			
 			virtual std::weak_ptr<uml::StructuralFeatureAction > getStructuralFeatureAction() const ;
 			
-			/*!
-			 */
-			virtual void setStructuralFeatureAction(std::shared_ptr<uml::StructuralFeatureAction> _structuralFeatureAction_structuralFeatureAction) ;
-			/*!
-			 */
+			
+			virtual void setStructuralFeatureAction(std::shared_ptr<uml::StructuralFeatureAction> _structuralFeatureAction) ;
+			
+			
 			virtual std::weak_ptr<uml::WriteStructuralFeatureAction > getWriteStructuralFeatureAction() const ;
 			
-			/*!
-			 */
-			virtual void setWriteStructuralFeatureAction(std::shared_ptr<uml::WriteStructuralFeatureAction> _writeStructuralFeatureAction_writeStructuralFeatureAction) ;
+			
+			virtual void setWriteStructuralFeatureAction(std::shared_ptr<uml::WriteStructuralFeatureAction> _writeStructuralFeatureAction) ;
+			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
+			ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::ActivityGroup>> getInGroup() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
+			The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const ; 
 			 
 			//*********************************
@@ -180,7 +194,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

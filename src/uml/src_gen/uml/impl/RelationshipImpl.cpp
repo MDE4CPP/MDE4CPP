@@ -17,22 +17,18 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -40,10 +36,11 @@
 
 #include "uml/Element.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -53,26 +50,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 RelationshipImpl::RelationshipImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		/*Union*/
-		m_relatedElement.reset(new Union<uml::Element>());
-			#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising Union: " << "m_relatedElement - Union<uml::Element>()" << std::endl;
-		#endif
-	
-	
-
-	//Init references
-	
-	
+{	
 }
 
 RelationshipImpl::~RelationshipImpl()
@@ -82,17 +60,12 @@ RelationshipImpl::~RelationshipImpl()
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			RelationshipImpl::RelationshipImpl(std::weak_ptr<uml::Element > par_owner)
-			:RelationshipImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-
-
+RelationshipImpl::RelationshipImpl(std::weak_ptr<uml::Element > par_owner)
+:RelationshipImpl()
+{
+	m_owner = par_owner;
+}
 
 
 RelationshipImpl::RelationshipImpl(const RelationshipImpl & obj):RelationshipImpl()
@@ -132,7 +105,7 @@ std::shared_ptr<ecore::EObject>  RelationshipImpl::copy() const
 
 std::shared_ptr<ecore::EClass> RelationshipImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getRelationship_Class();
+	return uml::umlPackage::eInstance()->getRelationship_Class();
 }
 
 //*********************************
@@ -146,6 +119,12 @@ std::shared_ptr<ecore::EClass> RelationshipImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference relatedElement
+*/
+
+
+
 
 
 
@@ -154,12 +133,35 @@ std::shared_ptr<ecore::EClass> RelationshipImpl::eStaticClass() const
 //*********************************
 std::shared_ptr<Union<uml::Element>> RelationshipImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::shared_ptr<Union<uml::Element>> RelationshipImpl::getRelatedElement() const
 {
+	if(m_relatedElement == nullptr)
+	{
+		/*Union*/
+		m_relatedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_relatedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_relatedElement;
 }
+
+
 
 
 std::shared_ptr<Relationship> RelationshipImpl::getThisRelationshipPtr() const
@@ -187,7 +189,7 @@ Any RelationshipImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::RELATIONSHIP_ATTRIBUTE_RELATEDELEMENT:
+		case uml::umlPackage::RELATIONSHIP_ATTRIBUTE_RELATEDELEMENT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Element>::iterator iter = m_relatedElement->begin();
@@ -197,7 +199,7 @@ Any RelationshipImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //2093
+			return eAny(tempList); //2083
 		}
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
@@ -206,8 +208,8 @@ bool RelationshipImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::RELATIONSHIP_ATTRIBUTE_RELATEDELEMENT:
-			return getRelatedElement() != nullptr; //2093
+		case uml::umlPackage::RELATIONSHIP_ATTRIBUTE_RELATEDELEMENT:
+			return getRelatedElement() != nullptr; //2083
 	}
 	return ElementImpl::internalEIsSet(featureID);
 }
@@ -231,12 +233,11 @@ void RelationshipImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandle
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -246,11 +247,12 @@ void RelationshipImpl::loadAttributes(std::shared_ptr<persistence::interfaces::X
 	ElementImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void RelationshipImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void RelationshipImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
-
-	ElementImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	ElementImpl::loadNode(nodeName, loadHandler);
 }
 
 void RelationshipImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -275,7 +277,7 @@ void RelationshipImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 

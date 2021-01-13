@@ -18,7 +18,7 @@
 //*********************************
 namespace ecore 
 {
-	class ETypedElementImpl :virtual public ENamedElementImpl, virtual public ETypedElement 
+	class ETypedElementImpl : virtual public ENamedElementImpl, virtual public ETypedElement 
 	{
 		public: 
 			ETypedElementImpl(const ETypedElementImpl & obj);
@@ -28,7 +28,7 @@ namespace ecore
 			ETypedElementImpl& operator=(ETypedElementImpl const&) = delete;
 
 		protected:
-			friend class EcoreFactoryImpl;
+			friend class ecoreFactoryImpl;
 			ETypedElementImpl();
 			virtual std::shared_ptr<ETypedElement> getThisETypedElementPtr() const;
 			virtual void setThisETypedElementPtr(std::weak_ptr<ETypedElement> thisETypedElementPtr);
@@ -51,76 +51,58 @@ namespace ecore
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual int getLowerBound() const ;
 			
-			/*!
-			 */ 
+			 
 			virtual void setLowerBound (int _lowerBound); 
-			
-			/*!
-			 */ 
+			 
 			virtual bool isMany() const ;
 			
-			/*!
-			 */ 
+			
+			 
 			virtual bool isOrdered() const ;
 			
-			/*!
-			 */ 
+			 
 			virtual void setOrdered (bool _ordered); 
-			
-			/*!
-			 */ 
+			 
 			virtual bool isRequired() const ;
 			
-			/*!
-			 */ 
+			 
 			virtual void setRequired (bool _required); 
-			
-			/*!
-			 */ 
+			 
 			virtual bool isUnique() const ;
 			
-			/*!
-			 */ 
+			 
 			virtual void setUnique (bool _unique); 
-			
-			/*!
-			 */ 
+			 
 			virtual int getUpperBound() const ;
 			
-			/*!
-			 */ 
+			 
 			virtual void setUpperBound (int _upperBound); 
-			
 			
 			
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<ecore::EGenericType > getEGenericType() const ;
 			
-			/*!
-			 */
-			virtual void setEGenericType(std::shared_ptr<ecore::EGenericType> _eGenericType_eGenericType) ;
-			/*!
-			 */
+			
+			virtual void setEGenericType(std::shared_ptr<ecore::EGenericType> _eGenericType) ;
+			
+			
 			virtual std::shared_ptr<ecore::EClassifier > getEType() const ;
 			
-			/*!
-			 */
-			virtual void setEType(std::shared_ptr<ecore::EClassifier> _eType_eType) ;
+			
+			virtual void setEType(std::shared_ptr<ecore::EClassifier> _eType) ;
+			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const ; 
 			 
 			//*********************************
@@ -134,7 +116,7 @@ namespace ecore
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<ecore::EcoreFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

@@ -3,8 +3,8 @@
 #include <chrono>
 
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "ecore/EcorePackage.hpp"
+#include "ecore/ecoreFactory.hpp"
+#include "ecore/ecorePackage.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EAttribute.hpp"
 #include "ecore/EClass.hpp"
@@ -24,8 +24,8 @@ int main()
 
     {
 		start = std::chrono::high_resolution_clock::now();
-		std::shared_ptr<EcorePackage> package=EcorePackage::eInstance();
-		std::shared_ptr<EcoreFactory> factory = EcoreFactory::eInstance();
+		std::shared_ptr<ecorePackage> package=ecorePackage::eInstance();
+		std::shared_ptr<ecoreFactory> factory = ecoreFactory::eInstance();
 		end = std::chrono::high_resolution_clock::now();
 
 		std::cout << "setup time: " << std::chrono::duration_cast<std::chrono::microseconds>(end-start).count() << std::endl;

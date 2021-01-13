@@ -39,7 +39,8 @@ namespace StandardProfile
 			// Getter Setter
 			//*********************************
 			virtual std::weak_ptr<uml::Component> getBase_Component() const  = 0;
-			virtual void setBase_Component (std::weak_ptr<uml::Component> _base_Component) = 0;
+			virtual void setBase_Component(std::weak_ptr<uml::Component> _base_Component) = 0;
+			
 			
 			
 			//*********************************
@@ -52,6 +53,7 @@ namespace StandardProfile
 			// Members
 			//*********************************
 			std::weak_ptr<uml::Component> m_base_Component;
+			
 			
 	};
 }

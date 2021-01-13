@@ -17,13 +17,13 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "fUML/impl/FUMLPackageImpl.hpp"
+
+//Includes from codegen annotation
 #include "abstractDataTypes/Subset.hpp"
 #include "fUML/FUMLFactory.hpp"
 #include "uml/Class.hpp"
@@ -33,14 +33,12 @@
 #include "uml/NamedElement.hpp"
 #include "uml/Slot.hpp"
 #include "uml/StructuralFeature.hpp"
-#include "uml/UmlFactory.hpp"
+#include "uml/umlFactory.hpp"
 
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -52,10 +50,15 @@
 
 #include "uml/ValueSpecification.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
-#include "fUML/FUMLFactory.hpp"
+//Factories an Package includes
+#include "fUML/Semantics/SimpleClassifiers/impl/SimpleClassifiersFactoryImpl.hpp"
+#include "fUML/Semantics/SimpleClassifiers/impl/SimpleClassifiersPackageImpl.hpp"
+
+#include "fUML/fUMLFactory.hpp"
+#include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsFactory.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -65,17 +68,7 @@ using namespace fUML::Semantics::SimpleClassifiers;
 // Constructor / Destructor
 //*********************************
 StructuredValueImpl::StructuredValueImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 StructuredValueImpl::~StructuredValueImpl()
@@ -84,7 +77,6 @@ StructuredValueImpl::~StructuredValueImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete StructuredValue "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -112,7 +104,7 @@ std::shared_ptr<ecore::EObject>  StructuredValueImpl::copy() const
 
 std::shared_ptr<ecore::EClass> StructuredValueImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getStructuredValue_Class();
+	return fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance()->getStructuredValue_Class();
 }
 
 //*********************************
@@ -194,8 +186,8 @@ std::shared_ptr<uml::ValueSpecification> StructuredValueImpl::specify()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		std::shared_ptr<uml::InstanceValue> instanceValue = uml::UmlFactory::eInstance()->createInstanceValue_in_Namespace(std::shared_ptr<uml::Class>());
-	std::shared_ptr<uml::InstanceSpecification> instance = uml::UmlFactory::eInstance()->createInstanceSpecification_in_Namespace(std::shared_ptr<uml::Class>());
+		std::shared_ptr<uml::InstanceValue> instanceValue = uml::umlFactory::eInstance()->createInstanceValue_in_Namespace(std::shared_ptr<uml::Class>());
+	std::shared_ptr<uml::InstanceSpecification> instance = uml::umlFactory::eInstance()->createInstanceSpecification_in_Namespace(std::shared_ptr<uml::Class>());
 
     instanceValue->setType(nullptr);
     instanceValue->setInstance(instance);
@@ -209,7 +201,7 @@ std::shared_ptr<uml::ValueSpecification> StructuredValueImpl::specify()
     {
     	std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> featureValue = featureValues->at(i);
 
-    	std::shared_ptr<uml::Slot> slot = uml::UmlFactory::eInstance()->createSlot_in_OwningInstance(std::shared_ptr<uml::InstanceSpecification>());
+    	std::shared_ptr<uml::Slot> slot = uml::umlFactory::eInstance()->createSlot_in_OwningInstance(std::shared_ptr<uml::InstanceSpecification>());
         slot->setDefiningFeature(featureValue->getFeature());
 
         // Debug.println("[specify] feature = " + featureValue.feature.name
@@ -237,6 +229,7 @@ std::shared_ptr<uml::ValueSpecification> StructuredValueImpl::specify()
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<StructuredValue> StructuredValueImpl::getThisStructuredValuePtr() const
@@ -290,12 +283,11 @@ void StructuredValueImpl::load(std::shared_ptr<persistence::interfaces::XLoadHan
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get FUMLFactory
-	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
+	// get fUMLFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -305,11 +297,12 @@ void StructuredValueImpl::loadAttributes(std::shared_ptr<persistence::interfaces
 	fUML::Semantics::Values::ValueImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void StructuredValueImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+void StructuredValueImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory> modelFactory=fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance();
 
-
-	fUML::Semantics::Values::ValueImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	fUML::Semantics::Values::ValueImpl::loadNode(nodeName, loadHandler);
 }
 
 void StructuredValueImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -334,7 +327,7 @@ void StructuredValueImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 {
 	try
 	{
-		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+		std::shared_ptr<fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage> package = fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance();
 
 	
 

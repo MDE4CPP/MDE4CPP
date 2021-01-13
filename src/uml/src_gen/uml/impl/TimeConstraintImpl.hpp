@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class TimeConstraintImpl :virtual public IntervalConstraintImpl, virtual public TimeConstraint 
+	class TimeConstraintImpl : virtual public IntervalConstraintImpl, virtual public TimeConstraint 
 	{
 		public: 
 			TimeConstraintImpl(const TimeConstraintImpl & obj);
@@ -28,7 +28,7 @@ namespace uml
 			TimeConstraintImpl& operator=(TimeConstraintImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			TimeConstraintImpl();
 			virtual std::shared_ptr<TimeConstraint> getThisTimeConstraintPtr() const;
 			virtual void setThisTimeConstraintPtr(std::weak_ptr<TimeConstraint> thisTimeConstraintPtr);
@@ -62,8 +62,10 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 A TimeConstraint has one constrainedElement.
-			constrainedElement->size() = 1 */ 
+			A TimeConstraint has one constrainedElement.
+			constrainedElement->size() = 1
+			*/
+			 
 			virtual bool has_one_constrainedElement(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
@@ -72,15 +74,18 @@ namespace uml
 			// Attributes Getter Setter
 			//*********************************
 			/*!
-			 The value of firstEvent is related to the constrainedElement. If firstEvent is true, then the corresponding observation event is the first time instant the execution enters the constrainedElement. If firstEvent is false, then the corresponding observation event is the last time instant the execution is within the constrainedElement.
-			<p>From package UML::Values.</p> */ 
+			The value of firstEvent is related to the constrainedElement. If firstEvent is true, then the corresponding observation event is the first time instant the execution enters the constrainedElement. If firstEvent is false, then the corresponding observation event is the last time instant the execution is within the constrainedElement.
+			<p>From package UML::Values.</p>
+			*/
+			 
 			virtual bool getFirstEvent() const ;
 			
 			/*!
-			 The value of firstEvent is related to the constrainedElement. If firstEvent is true, then the corresponding observation event is the first time instant the execution enters the constrainedElement. If firstEvent is false, then the corresponding observation event is the last time instant the execution is within the constrainedElement.
-			<p>From package UML::Values.</p> */ 
+			The value of firstEvent is related to the constrainedElement. If firstEvent is true, then the corresponding observation event is the first time instant the execution enters the constrainedElement. If firstEvent is false, then the corresponding observation event is the last time instant the execution is within the constrainedElement.
+			<p>From package UML::Values.</p>
+			*/
+			 
 			virtual void setFirstEvent (bool _firstEvent); 
-			
 			
 			
 			//*********************************
@@ -92,14 +97,20 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
@@ -113,7 +124,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

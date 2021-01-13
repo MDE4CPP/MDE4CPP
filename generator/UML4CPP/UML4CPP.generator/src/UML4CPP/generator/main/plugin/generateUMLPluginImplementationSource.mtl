@@ -23,15 +23,15 @@
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
-[template public generateUMLPluginImplSource(aPackage : Package, packOnly:Boolean) { packageName : String = aPackage.name.toUpperFirst().concat('PluginImpl'); }]
+[template public generateUMLPluginImplSource(aPackage : Package, packOnly:Boolean) { packageName : String = aPackage.name.concat('PluginImpl'); }]
 [file (aPackage.getPackageName().concat('/impl/').concat(packageName).concat('.cpp'), false, 'UTF-8')]
 #include "[aPackage.getPackageName()/]/impl/[packageName/].hpp"
 
 [defineDebugMacro()/]
 #include <iostream>
 
-[if (not packOnly)]#include "[aPackage.getPackageName()/]/[aPackage.name.toUpperFirst()/]Factory.hpp"[/if]
-#include "[aPackage.getPackageName()/]/[aPackage.name.toUpperFirst()/]Package.hpp"
+[if (not packOnly)]#include "[aPackage.getPackageName()/]/[aPackage.name/]Factory.hpp"[/if]
+#include "[aPackage.getPackageName()/]/[aPackage.name/]Package.hpp"
 
 [if (not aPackage.ignoreNamespace())]using namespace [aPackage.name/];[/if]
 
@@ -48,14 +48,14 @@
 
 std::shared_ptr<ecore::EObject> [packageName/]::create(const std::string& name) const
 {		
-	return [if (packOnly)]nullptr[else][aPackage.name.toUpperFirst()/]Factory::eInstance()->create(name)[/if];
+	return [if (packOnly)]nullptr[else][aPackage.name/]Factory::eInstance()->create(name)[/if];
 }
 
 std::shared_ptr<ecore::EObject> [packageName/]::create(const std::string& name, std::shared_ptr<ecore::EObject> container, const unsigned int referenceID) const
 {
 [if (not packOnly)]
 	std::cout << "WARNING: container based create function is not implemented for UML models!!!" << std::endl;
-	return nullptr; //[aPackage.name.toUpperFirst()/]Factory::eInstance()->create(name, container, referenceID);
+	return nullptr; //[aPackage.name/]Factory::eInstance()->create(name, container, referenceID);
 [else]
 	return nullptr;
 [/if]
@@ -63,12 +63,12 @@ std::shared_ptr<ecore::EObject> [packageName/]::create(const std::string& name, 
 
 std::shared_ptr<uml::Factory> [packageName/]::getFactory()
 {
-	return [if (packOnly)]nullptr[else][aPackage.name.toUpperFirst()/]Factory::eInstance()[/if];
+	return [if (packOnly)]nullptr[else][aPackage.name/]Factory::eInstance()[/if];
 }
 
 std::shared_ptr<uml::Package> [packageName/]::getPackage()
 {
-	return [aPackage.name.toUpperFirst()/]Package::eInstance();
+	return [aPackage.name/]Package::eInstance();
 }
 
 std::string [packageName/]::eclipseURI()

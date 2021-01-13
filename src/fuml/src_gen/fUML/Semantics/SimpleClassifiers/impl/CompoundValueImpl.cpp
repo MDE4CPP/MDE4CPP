@@ -17,13 +17,13 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "fUML/impl/FUMLPackageImpl.hpp"
+
+//Includes from codegen annotation
 #include <algorithm>
 #include "uml/Classifier.hpp"
 #include <fUML/FUMLFactory.hpp>
@@ -34,8 +34,6 @@
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -49,10 +47,15 @@
 
 #include "fUML/Semantics/Values/Value.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
-#include "fUML/FUMLFactory.hpp"
+//Factories an Package includes
+#include "fUML/Semantics/SimpleClassifiers/impl/SimpleClassifiersFactoryImpl.hpp"
+#include "fUML/Semantics/SimpleClassifiers/impl/SimpleClassifiersPackageImpl.hpp"
+
+#include "fUML/fUMLFactory.hpp"
+#include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsFactory.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -62,22 +65,7 @@ using namespace fUML::Semantics::SimpleClassifiers;
 // Constructor / Destructor
 //*********************************
 CompoundValueImpl::CompoundValueImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		m_featureValues.reset(new Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>());
-	
-	
-
-	//Init references
-	
-	
+{	
 }
 
 CompoundValueImpl::~CompoundValueImpl()
@@ -86,7 +74,6 @@ CompoundValueImpl::~CompoundValueImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete CompoundValue "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -112,7 +99,6 @@ CompoundValueImpl::CompoundValueImpl(const CompoundValueImpl & obj):CompoundValu
 	#endif
 
 	
-	
 }
 
 std::shared_ptr<ecore::EObject>  CompoundValueImpl::copy() const
@@ -124,7 +110,7 @@ std::shared_ptr<ecore::EObject>  CompoundValueImpl::copy() const
 
 std::shared_ptr<ecore::EClass> CompoundValueImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getCompoundValue_Class();
+	return fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance()->getCompoundValue_Class();
 }
 
 //*********************************
@@ -134,6 +120,28 @@ std::shared_ptr<ecore::EClass> CompoundValueImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
+std::shared_ptr<fUML::Semantics::Values::Value> CompoundValueImpl::_copy()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Create a new data value with the same featureValues as this data value.
+
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::CompoundValue> newValue(new fUML::Semantics::SimpleClassifiers::CompoundValueImpl());
+
+std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> featureValues = this->retrieveFeatureValues();
+unsigned int featureValuesSize = featureValues->size();
+
+for(unsigned int i = 0; i < featureValuesSize; i++)
+{
+	std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> featureValue = featureValues->at(i);
+	newValue->getFeatureValues()->add(featureValue);
+}
+
+return newValue;
+
+	//end of body
+}
+
 void CompoundValueImpl::assignFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<Bag<fUML::Semantics::Values::Value> >  values,int position)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
@@ -141,7 +149,7 @@ void CompoundValueImpl::assignFeatureValue(std::shared_ptr<uml::StructuralFeatur
 	std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> featureValue = this->retrieveFeatureValue(feature);
     if(featureValue == nullptr)
     {
-        featureValue = FUMLFactory::eInstance()->createFeatureValue();
+        featureValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createFeatureValue();
         this->getFeatureValues()->push_back(featureValue);
     }
     featureValue->setFeature(feature);
@@ -160,21 +168,23 @@ bool CompoundValueImpl::equals(std::shared_ptr<fUML::Semantics::Values::Value>  
 	//generated from body annotation
 		std::shared_ptr<fUML::Semantics::SimpleClassifiers::CompoundValue> otherCompoundValue = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::CompoundValue>(otherValue);
 	bool isEqual = (otherCompoundValue != nullptr);
+	
     if (isEqual)
     {
         isEqual = fUML::Semantics::SimpleClassifiers::StructuredValueImpl::equals(otherValue)
-                && otherCompoundValue->getFeatureValues()->size() == this->getFeatureValues()->size();
+                && otherCompoundValue->retrieveFeatureValues()->size() == this->retrieveFeatureValues()->size();
 
         unsigned int i = 0;
-        while (isEqual && i < this->getFeatureValues()->size())
+        while (isEqual && i < this->retrieveFeatureValues()->size())
         {
-        	std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> thisFeatureValue = this->getFeatureValues()->at(i);
+        	std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> thisFeatureValue = this->retrieveFeatureValues()->at(i);
 
             bool matched = false;
             unsigned int j = 0;
-            while (!matched && j < otherCompoundValue->getFeatureValues()->size())
+            while (!matched && j < otherCompoundValue->retrieveFeatureValues()->size())
             {
-            	std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> otherFeatureValue = otherCompoundValue->getFeatureValues()->at(j);
+            	std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> otherFeatureValue = otherCompoundValue->retrieveFeatureValues()->at(j);		
+				
                 if (thisFeatureValue->getFeature() == otherFeatureValue->getFeature())
                 {
                     matched = thisFeatureValue->hasEqualValues(otherFeatureValue);
@@ -186,7 +196,7 @@ bool CompoundValueImpl::equals(std::shared_ptr<fUML::Semantics::Values::Value>  
             i = i + 1;
         }
     }
-
+	
     return isEqual;
 	//end of body
 }
@@ -265,16 +275,29 @@ std::string CompoundValueImpl::toString()
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference featureValues
+*/
 std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> CompoundValueImpl::getFeatureValues() const
 {
+	if(m_featureValues == nullptr)
+	{
+		m_featureValues.reset(new Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>());
+		
+		
+	}
 
     return m_featureValues;
 }
 
 
+
+
+
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<CompoundValue> CompoundValueImpl::getThisCompoundValuePtr() const
@@ -298,7 +321,7 @@ Any CompoundValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::COMPOUNDVALUE_ATTRIBUTE_FEATUREVALUES:
+		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::COMPOUNDVALUE_ATTRIBUTE_FEATUREVALUES:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>::iterator iter = m_featureValues->begin();
@@ -317,7 +340,7 @@ bool CompoundValueImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::COMPOUNDVALUE_ATTRIBUTE_FEATUREVALUES:
+		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::COMPOUNDVALUE_ATTRIBUTE_FEATUREVALUES:
 			return getFeatureValues() != nullptr; //290
 	}
 	return StructuredValueImpl::internalEIsSet(featureID);
@@ -326,7 +349,7 @@ bool CompoundValueImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::COMPOUNDVALUE_ATTRIBUTE_FEATUREVALUES:
+		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::COMPOUNDVALUE_ATTRIBUTE_FEATUREVALUES:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -378,12 +401,11 @@ void CompoundValueImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandl
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get FUMLFactory
-	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
+	// get fUMLFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -393,8 +415,9 @@ void CompoundValueImpl::loadAttributes(std::shared_ptr<persistence::interfaces::
 	StructuredValueImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void CompoundValueImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+void CompoundValueImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory> modelFactory=fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance();
 
 	try
 	{
@@ -423,8 +446,8 @@ void CompoundValueImpl::loadNode(std::string nodeName, std::shared_ptr<persisten
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
-
-	StructuredValueImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	StructuredValueImpl::loadNode(nodeName, loadHandler);
 }
 
 void CompoundValueImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -452,7 +475,7 @@ void CompoundValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 {
 	try
 	{
-		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+		std::shared_ptr<fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage> package = fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance();
 
 	
 
@@ -465,7 +488,7 @@ void CompoundValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 		std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> list_featureValues = this->getFeatureValues();
 		for (std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> featureValues : *list_featureValues) 
 		{
-			saveHandler->addReference(featureValues, "featureValues", featureValues->eClass() != package->getFeatureValue_Class());
+			saveHandler->addReference(featureValues, "featureValues", featureValues->eClass() !=fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance()->getFeatureValue_Class());
 		}
 	}
 	catch (std::exception& e)

@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -25,25 +24,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -69,10 +55,11 @@
 
 #include "uml/ValueSpecificationAction.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -82,17 +69,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 LiteralNullImpl::LiteralNullImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 LiteralNullImpl::~LiteralNullImpl()
@@ -102,77 +79,52 @@ LiteralNullImpl::~LiteralNullImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+LiteralNullImpl::LiteralNullImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:LiteralNullImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			LiteralNullImpl::LiteralNullImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:LiteralNullImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
-
-
-
+LiteralNullImpl::LiteralNullImpl(std::weak_ptr<uml::Element > par_owner)
+:LiteralNullImpl()
+{
+	m_owner = par_owner;
+}
 
 //Additional constructor for the containments back reference
-			LiteralNullImpl::LiteralNullImpl(std::weak_ptr<uml::Element > par_owner)
-			:LiteralNullImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-
-
+LiteralNullImpl::LiteralNullImpl(std::weak_ptr<uml::Package > par_owningPackage)
+:LiteralNullImpl()
+{
+	m_owningPackage = par_owningPackage;
+	m_namespace = par_owningPackage;
+}
 
 //Additional constructor for the containments back reference
-			LiteralNullImpl::LiteralNullImpl(std::weak_ptr<uml::Package > par_owningPackage)
-			:LiteralNullImpl()
-			{
-			    m_owningPackage = par_owningPackage;
-				m_namespace = par_owningPackage;
-			}
-
-
-
-
+LiteralNullImpl::LiteralNullImpl(std::weak_ptr<uml::Slot > par_owningSlot)
+:LiteralNullImpl()
+{
+	m_owningSlot = par_owningSlot;
+	m_owner = par_owningSlot;
+}
 
 //Additional constructor for the containments back reference
-			LiteralNullImpl::LiteralNullImpl(std::weak_ptr<uml::Slot > par_owningSlot)
-			:LiteralNullImpl()
-			{
-			    m_owningSlot = par_owningSlot;
-				m_owner = par_owningSlot;
-			}
-
-
-
-
+LiteralNullImpl::LiteralNullImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+:LiteralNullImpl()
+{
+	m_owningTemplateParameter = par_owningTemplateParameter;
+	m_owner = par_owningTemplateParameter;
+}
 
 //Additional constructor for the containments back reference
-			LiteralNullImpl::LiteralNullImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
-			:LiteralNullImpl()
-			{
-			    m_owningTemplateParameter = par_owningTemplateParameter;
-				m_owner = par_owningTemplateParameter;
-			}
-
-
-
-
-
-//Additional constructor for the containments back reference
-			LiteralNullImpl::LiteralNullImpl(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction)
-			:LiteralNullImpl()
-			{
-			    m_valueSpecificationAction = par_valueSpecificationAction;
-				m_owner = par_valueSpecificationAction;
-			}
-
-
-
-
+LiteralNullImpl::LiteralNullImpl(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction)
+:LiteralNullImpl()
+{
+	m_valueSpecificationAction = par_valueSpecificationAction;
+	m_owner = par_valueSpecificationAction;
+}
 
 
 LiteralNullImpl::LiteralNullImpl(const LiteralNullImpl & obj):LiteralNullImpl()
@@ -236,7 +188,7 @@ std::shared_ptr<ecore::EObject>  LiteralNullImpl::copy() const
 
 std::shared_ptr<ecore::EClass> LiteralNullImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getLiteralNull_Class();
+	return uml::umlPackage::eInstance()->getLiteralNull_Class();
 }
 
 //*********************************
@@ -246,6 +198,21 @@ std::shared_ptr<ecore::EClass> LiteralNullImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
+bool LiteralNullImpl::isComputable()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	return true;
+	//end of body
+}
+
+bool LiteralNullImpl::isNull()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	return true;
+	//end of body
+}
 
 //*********************************
 // References
@@ -258,14 +225,28 @@ std::weak_ptr<uml::Namespace > LiteralNullImpl::getNamespace() const
 {
 	return m_namespace;
 }
+
 std::shared_ptr<Union<uml::Element>> LiteralNullImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > LiteralNullImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<LiteralNull> LiteralNullImpl::getThisLiteralNullPtr() const
@@ -348,12 +329,11 @@ void LiteralNullImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -363,11 +343,12 @@ void LiteralNullImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XL
 	LiteralSpecificationImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void LiteralNullImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void LiteralNullImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
-
-	LiteralSpecificationImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	LiteralSpecificationImpl::loadNode(nodeName, loadHandler);
 }
 
 void LiteralNullImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -406,7 +387,7 @@ void LiteralNullImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 

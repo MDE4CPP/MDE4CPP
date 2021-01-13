@@ -13,13 +13,13 @@
 //Model includes
 #include "../UnlimitedNaturalValue.hpp"
 
-#include "fUML/impl/FUMLFactoryImpl.hpp"
+#include "fUML/Semantics/SimpleClassifiers/impl/SimpleClassifiersFactoryImpl.hpp"
 #include "fUML/Semantics/SimpleClassifiers/impl/PrimitiveValueImpl.hpp"
 
 //*********************************
 namespace fUML::Semantics::SimpleClassifiers 
 {
-	class UnlimitedNaturalValueImpl :virtual public PrimitiveValueImpl, virtual public UnlimitedNaturalValue 
+	class UnlimitedNaturalValueImpl : virtual public PrimitiveValueImpl, virtual public UnlimitedNaturalValue 
 	{
 		public: 
 			UnlimitedNaturalValueImpl(const UnlimitedNaturalValueImpl & obj);
@@ -29,7 +29,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			UnlimitedNaturalValueImpl& operator=(UnlimitedNaturalValueImpl const&) = delete;
 
 		protected:
-			friend class fUML::FUMLFactoryImpl;
+			friend class fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactoryImpl;
 			UnlimitedNaturalValueImpl();
 			virtual std::shared_ptr<UnlimitedNaturalValue> getThisUnlimitedNaturalValuePtr() const;
 			virtual void setThisUnlimitedNaturalValuePtr(std::weak_ptr<UnlimitedNaturalValue> thisUnlimitedNaturalValuePtr);
@@ -43,16 +43,16 @@ namespace fUML::Semantics::SimpleClassifiers
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() ;
+			
+			 
 			virtual bool equals(std::shared_ptr<fUML::Semantics::Values::Value>  otherValue) ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<uml::ValueSpecification> specify() ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::string toString() ;
 			
 			
@@ -60,14 +60,11 @@ namespace fUML::Semantics::SimpleClassifiers
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual int getValue() const ;
 			
-			/*!
-			 */ 
+			 
 			virtual void setValue (int _value); 
-			
 			
 			
 			//*********************************
@@ -91,7 +88,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

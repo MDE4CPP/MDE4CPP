@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class TemplateableElementImpl :virtual public ElementImpl, virtual public TemplateableElement 
+	class TemplateableElementImpl : virtual public ElementImpl, virtual public TemplateableElement 
 	{
 		public: 
 			TemplateableElementImpl(const TemplateableElementImpl & obj);
@@ -28,7 +28,7 @@ namespace uml
 			TemplateableElementImpl& operator=(TemplateableElementImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			TemplateableElementImpl();
 			virtual std::shared_ptr<TemplateableElement> getThisTemplateableElementPtr() const;
 			virtual void setThisTemplateableElementPtr(std::weak_ptr<TemplateableElement> thisTemplateableElementPtr);
@@ -47,15 +47,19 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 The query isTemplate() returns whether this TemplateableElement is actually a template.
+			The query isTemplate() returns whether this TemplateableElement is actually a template.
 			result = (ownedTemplateSignature <> null)
-			<p>From package UML::CommonStructure.</p> */ 
+			<p>From package UML::CommonStructure.</p>
+			*/
+			 
 			virtual bool isTemplate() ;
 			
 			/*!
-			 The query parameterableElements() returns the set of ParameterableElements that may be used as the parameteredElements for a TemplateParameter of this TemplateableElement. By default, this set includes all the ownedElements. Subclasses may override this operation if they choose to restrict the set of ParameterableElements.
+			The query parameterableElements() returns the set of ParameterableElements that may be used as the parameteredElements for a TemplateParameter of this TemplateableElement. By default, this set includes all the ownedElements. Subclasses may override this operation if they choose to restrict the set of ParameterableElements.
 			result = (self.allOwnedElements()->select(oclIsKindOf(ParameterableElement)).oclAsType(ParameterableElement)->asSet())
-			<p>From package UML::CommonStructure.</p> */ 
+			<p>From package UML::CommonStructure.</p>
+			*/
+			 
 			virtual std::shared_ptr<Bag<uml::ParameterableElement> > parameterableElements() ;
 			
 			
@@ -69,18 +73,26 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 The optional TemplateSignature specifying the formal TemplateParameters for this TemplateableElement. If a TemplateableElement has a TemplateSignature, then it is a template.
-			<p>From package UML::CommonStructure.</p> */
+			The optional TemplateSignature specifying the formal TemplateParameters for this TemplateableElement. If a TemplateableElement has a TemplateSignature, then it is a template.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::TemplateSignature > getOwnedTemplateSignature() const ;
 			
 			/*!
-			 The optional TemplateSignature specifying the formal TemplateParameters for this TemplateableElement. If a TemplateableElement has a TemplateSignature, then it is a template.
-			<p>From package UML::CommonStructure.</p> */
-			virtual void setOwnedTemplateSignature(std::shared_ptr<uml::TemplateSignature> _ownedTemplateSignature_ownedTemplateSignature) ;
+			The optional TemplateSignature specifying the formal TemplateParameters for this TemplateableElement. If a TemplateableElement has a TemplateSignature, then it is a template.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
+			virtual void setOwnedTemplateSignature(std::shared_ptr<uml::TemplateSignature> _ownedTemplateSignature) ;
+			
 			/*!
-			 The optional TemplateBindings from this TemplateableElement to one or more templates.
-			<p>From package UML::CommonStructure.</p> */
+			The optional TemplateBindings from this TemplateableElement to one or more templates.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Subset<uml::TemplateBinding, uml::Element>> getTemplateBinding() const ;
+			
 			
 							
 			
@@ -88,8 +100,10 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ; 
 			 
 			//*********************************
@@ -103,7 +117,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

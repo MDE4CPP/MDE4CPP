@@ -13,13 +13,13 @@
 //Model includes
 #include "../CallEventExecution.hpp"
 
-#include "fUML/impl/FUMLFactoryImpl.hpp"
+#include "fUML/Semantics/CommonBehavior/impl/CommonBehaviorFactoryImpl.hpp"
 #include "fUML/Semantics/CommonBehavior/impl/ExecutionImpl.hpp"
 
 //*********************************
 namespace fUML::Semantics::CommonBehavior 
 {
-	class CallEventExecutionImpl :virtual public ExecutionImpl, virtual public CallEventExecution 
+	class CallEventExecutionImpl : virtual public ExecutionImpl, virtual public CallEventExecution 
 	{
 		public: 
 			CallEventExecutionImpl(const CallEventExecutionImpl & obj);
@@ -29,7 +29,7 @@ namespace fUML::Semantics::CommonBehavior
 			CallEventExecutionImpl& operator=(CallEventExecutionImpl const&) = delete;
 
 		protected:
-			friend class fUML::FUMLFactoryImpl;
+			friend class fUML::Semantics::CommonBehavior::CommonBehaviorFactoryImpl;
 			CallEventExecutionImpl();
 			virtual std::shared_ptr<CallEventExecution> getThisCallEventExecutionPtr() const;
 			virtual void setThisCallEventExecutionPtr(std::weak_ptr<CallEventExecution> thisCallEventExecutionPtr);
@@ -43,50 +43,40 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			// Operations
 			//*********************************
+			 
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() ;
 			
-			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> createEventOccurrence() ;
 			
-			/*!
-			 */ 
+			 
 			virtual void execute() ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > getInputParameterValues() ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<uml::Operation> getOperation() ;
 			
-			/*!
-			 */ 
+			 
 			virtual bool isCallerSuspended() ;
 			
-			/*!
-			 */ 
+			 
 			virtual void makeCall() ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> new_() ;
 			
-			/*!
-			 */ 
+			 
 			virtual void releaseCaller() ;
 			
-			/*!
-			 */ 
+			 
 			virtual void setOutputParameterValues(std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> >  parameterValues) ;
 			
-			/*!
-			 */ 
+			 
 			virtual void suspendCaller() ;
 			
-			/*!
-			 */ 
+			 
 			virtual void wait_() ;
 			
 			
@@ -94,14 +84,11 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual bool getCallerSuspended() const ;
 			
-			/*!
-			 */ 
+			 
 			virtual void setCallerSuspended (bool _callerSuspended); 
-			
 			
 			
 			//*********************************
@@ -125,7 +112,7 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

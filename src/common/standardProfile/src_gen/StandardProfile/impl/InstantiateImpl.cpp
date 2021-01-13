@@ -11,12 +11,28 @@
 
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
+#include "StandardProfile/StandardProfileFactory.hpp"
 #include "StandardProfile/impl/StandardProfilePackageImpl.hpp"
 #include "uml/Stereotype.hpp"
+
+//Types included from attributes, operation parameters, imports and composite owner classes
 #include "uml/Usage.hpp"
 
+//Packges and Factories included from types of attributes, operation parameters, imports and composite owner classes
+#include "uml/umlFactory.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
+//Packages of included Enumerations
 
+//Includes of PluginFramework (if required)
+
+//Includes of OpaqueBevaiors (if required)
+
+//Includes from InstanceValues (if required)
+
+//Includes from Ports typed by interfaces (if required)
+
+//Includes from roles of ConnectorEnds (if required)
 
 using namespace StandardProfile;
 
@@ -25,6 +41,12 @@ using namespace StandardProfile;
 //*********************************
 InstantiateImpl::InstantiateImpl()
 {
+	#ifdef ADD_COUNT
+		ADD_COUNT("InstantiateImpl()");
+	#endif
+
+	DEBUG_MESSAGE(std::cout<<"Instantiate is created..."<<std::endl;)
+
 	//***********************************
 	// init Get Set
 	//getter init
@@ -34,16 +56,16 @@ InstantiateImpl::InstantiateImpl()
 	
 	m_unsetterMap.insert(std::pair<std::string,std::function<void()>>("StandardProfile::Instantiate::base_Usage",[this](){m_base_Usage = std::shared_ptr<uml::Usage>(nullptr);}));
 	 
-
-	// init properties without default
-	
-
-	
 }
 
 
 InstantiateImpl::~InstantiateImpl()
 {
+	#ifdef SUB_COUNT
+		SUB_COUNT("InstantiateImpl()");
+	#endif
+
+	DEBUG_MESSAGE(std::cout<<"Instantiate is destroyed..."<<std::endl;)
 }
 
 InstantiateImpl::InstantiateImpl(const InstantiateImpl & obj):InstantiateImpl()
@@ -52,6 +74,7 @@ InstantiateImpl::InstantiateImpl(const InstantiateImpl & obj):InstantiateImpl()
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Instantiate "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	instantiate();
 }
 
 std::shared_ptr<ecore::EObject>  InstantiateImpl::copy() const
@@ -65,6 +88,21 @@ std::shared_ptr<ecore::EObject>  InstantiateImpl::copy() const
 std::shared_ptr<uml::Class> InstantiateImpl::getMetaClass()
 {
 	return StandardProfilePackageImpl::eInstance()->get_StandardProfile_Instantiate();
+}
+
+void InstantiateImpl::instantiate()
+{   
+	
+}
+
+void InstantiateImpl::destroy()
+{	
+
+	//Erase properties
+	//deleting property base_Usage
+	m_base_Usage.reset();
+	
+	//Erase back reference to owner
 }
 
 //*********************************

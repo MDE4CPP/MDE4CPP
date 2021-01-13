@@ -19,7 +19,7 @@
 //*********************************
 namespace uml 
 {
-	class PackageableElementImpl :virtual public NamedElementImpl, virtual public ParameterableElementImpl, virtual public PackageableElement 
+	class PackageableElementImpl : virtual public NamedElementImpl, virtual public ParameterableElementImpl, virtual public PackageableElement 
 	{
 		public: 
 			PackageableElementImpl(const PackageableElementImpl & obj);
@@ -29,7 +29,7 @@ namespace uml
 			PackageableElementImpl& operator=(PackageableElementImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			PackageableElementImpl();
 			virtual std::shared_ptr<PackageableElement> getThisPackageableElementPtr() const;
 			virtual void setThisPackageableElementPtr(std::weak_ptr<PackageableElement> thisPackageableElementPtr);
@@ -60,8 +60,10 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 A PackageableElement owned by a Namespace must have a visibility.
-			visibility = null implies namespace = null */ 
+			A PackageableElement owned by a Namespace must have a visibility.
+			visibility = null implies namespace = null
+			*/
+			 
 			virtual bool namespace_needs_visibility(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
@@ -74,27 +76,32 @@ namespace uml
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::weak_ptr<uml::Package > getOwningPackage() const ;
 			
-			/*!
-			 */
-			virtual void setOwningPackage(std::shared_ptr<uml::Package> _owningPackage_owningPackage) ;
+			
+			virtual void setOwningPackage(std::shared_ptr<uml::Package> _owningPackage) ;
+			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
@@ -108,7 +115,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

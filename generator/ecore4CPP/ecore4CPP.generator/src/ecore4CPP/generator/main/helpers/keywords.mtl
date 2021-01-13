@@ -29,8 +29,10 @@
 [query public keyGetterName(any : OclAny) : String = 'includes'/]	[**	indicates the name of getter function /]
 [query public keySetterName(any : OclAny) : String = 'includes'/]	[**	indicates the name of setter function /]
 [query public keyIncludes(any : OclAny) : String = 'includes'/]	[**	indicates a header include specification /]
+[query public keyLibrary(any : OclAny) : String = 'library' /] [**	indicates a specification for a library to link /]
 [query public keyAggregationKind(any : OclAny) : String = 'AggregationKind'/]	[** indicates a AggregationKind specifiation, values: 'shared' -> indicates a back reference, otherwise -> no action/]
 [query public keyNoBackReference(any : OclAny) : String = 'no_back_reference'/] [** indicates that no back reference for a reference should exists/]
+[query public keyQualify(any : OclAny) : String = 'qualify' /] [**	indicates a type qualifier for an attribute /]
 [query public keyWeakptr(any : OclAny) : String = 'weakptr'/] [** indicates that an operation with upper=1 should return an weak pointer/]
 
 [** indicates, that an operation is only on implementation layer existing (not in header file), 
@@ -55,6 +57,7 @@
 [query public keyKind(any : OclAny) : String = 'kind'/] [** indicates the kind of extended meta data/]
 [query public sourceNameGenModel(any : OclAny) : String = 'http://www.eclipse.org/emf/2002/GenModel' /]	[** source name for annotation, which indicates GenModel information  /]
 [query public keyDocumentation(any : OclAny) : String = 'documentation' /]	[** indicates a documentation of an element /]
+[query public sourceNameRedefines(any : OclAny) : String = 'redefines'/]  [** indicates that an attribute redefines another attribute /]
 
 
 [** 

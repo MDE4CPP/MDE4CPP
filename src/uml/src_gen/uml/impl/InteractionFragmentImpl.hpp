@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class InteractionFragmentImpl :virtual public NamedElementImpl, virtual public InteractionFragment 
+	class InteractionFragmentImpl : virtual public NamedElementImpl, virtual public InteractionFragment 
 	{
 		public: 
 			InteractionFragmentImpl(const InteractionFragmentImpl & obj);
@@ -28,7 +28,7 @@ namespace uml
 			InteractionFragmentImpl& operator=(InteractionFragmentImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			InteractionFragmentImpl();
 			virtual std::shared_ptr<InteractionFragment> getThisInteractionFragmentPtr() const;
 			virtual void setThisInteractionFragmentPtr(std::weak_ptr<InteractionFragment> thisInteractionFragmentPtr);
@@ -69,32 +69,48 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 References the Lifelines that the InteractionFragment involves.
-			<p>From package UML::Interactions.</p> */
+			References the Lifelines that the InteractionFragment involves.
+			<p>From package UML::Interactions.</p>
+			*/
+			
 			virtual std::shared_ptr<Bag<uml::Lifeline>> getCovered() const ;
 			
+			
 			/*!
-			 The Interaction enclosing this InteractionFragment.
-			<p>From package UML::Interactions.</p> */
+			The Interaction enclosing this InteractionFragment.
+			<p>From package UML::Interactions.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Interaction > getEnclosingInteraction() const ;
 			
 			/*!
-			 The Interaction enclosing this InteractionFragment.
-			<p>From package UML::Interactions.</p> */
-			virtual void setEnclosingInteraction(std::shared_ptr<uml::Interaction> _enclosingInteraction_enclosingInteraction) ;
+			The Interaction enclosing this InteractionFragment.
+			<p>From package UML::Interactions.</p>
+			*/
+			
+			virtual void setEnclosingInteraction(std::shared_ptr<uml::Interaction> _enclosingInteraction) ;
+			
 			/*!
-			 The operand enclosing this InteractionFragment (they may nest recursively).
-			<p>From package UML::Interactions.</p> */
+			The operand enclosing this InteractionFragment (they may nest recursively).
+			<p>From package UML::Interactions.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::InteractionOperand > getEnclosingOperand() const ;
 			
 			/*!
-			 The operand enclosing this InteractionFragment (they may nest recursively).
-			<p>From package UML::Interactions.</p> */
-			virtual void setEnclosingOperand(std::shared_ptr<uml::InteractionOperand> _enclosingOperand_enclosingOperand) ;
+			The operand enclosing this InteractionFragment (they may nest recursively).
+			<p>From package UML::Interactions.</p>
+			*/
+			
+			virtual void setEnclosingOperand(std::shared_ptr<uml::InteractionOperand> _enclosingOperand) ;
+			
 			/*!
-			 The general ordering relationships contained in this fragment.
-			<p>From package UML::Interactions.</p> */
+			The general ordering relationships contained in this fragment.
+			<p>From package UML::Interactions.</p>
+			*/
+			
 			virtual std::shared_ptr<Subset<uml::GeneralOrdering, uml::Element>> getGeneralOrdering() const ;
+			
 			
 							
 			
@@ -102,14 +118,20 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
@@ -123,7 +145,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

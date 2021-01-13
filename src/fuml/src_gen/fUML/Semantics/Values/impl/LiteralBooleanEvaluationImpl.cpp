@@ -18,20 +18,19 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "fUML/impl/FUMLPackageImpl.hpp"
+
+//Includes from codegen annotation
 #include "fUML/Semantics/SimpleClassifiers/BooleanValue.hpp"
-#include "fUML/FUMLFactory.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "uml/LiteralBoolean.hpp"
+#include "primitivetypesReflection/PrimitiveTypesPackage.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -43,10 +42,15 @@
 
 #include "uml/ValueSpecification.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
-#include "fUML/FUMLFactory.hpp"
+//Factories an Package includes
+#include "fUML/Semantics/Values/impl/ValuesFactoryImpl.hpp"
+#include "fUML/Semantics/Values/impl/ValuesPackageImpl.hpp"
+
+#include "fUML/fUMLFactory.hpp"
+#include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsFactory.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -56,17 +60,7 @@ using namespace fUML::Semantics::Values;
 // Constructor / Destructor
 //*********************************
 LiteralBooleanEvaluationImpl::LiteralBooleanEvaluationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 LiteralBooleanEvaluationImpl::~LiteralBooleanEvaluationImpl()
@@ -75,7 +69,6 @@ LiteralBooleanEvaluationImpl::~LiteralBooleanEvaluationImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete LiteralBooleanEvaluation "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -107,7 +100,7 @@ std::shared_ptr<ecore::EObject>  LiteralBooleanEvaluationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> LiteralBooleanEvaluationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getLiteralBooleanEvaluation_Class();
+	return fUML::Semantics::Values::ValuesPackage::eInstance()->getLiteralBooleanEvaluation_Class();
 }
 
 //*********************************
@@ -121,11 +114,10 @@ std::shared_ptr<fUML::Semantics::Values::Value> LiteralBooleanEvaluationImpl::ev
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<uml::LiteralBoolean> literal = std::dynamic_pointer_cast<uml::LiteralBoolean>(getSpecification());
-	std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> booleanValue(FUMLFactory::eInstance()->createBooleanValue());
-    booleanValue->setType(this->getType("Boolean"));
-    booleanValue->setValue(literal->getValue());
-    return booleanValue;
+	std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> booleanValue(fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createBooleanValue());
+booleanValue->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
+booleanValue->setValue(getSpecification()->booleanValue());
+return booleanValue;
 	//end of body
 }
 
@@ -136,6 +128,7 @@ std::shared_ptr<fUML::Semantics::Values::Value> LiteralBooleanEvaluationImpl::ev
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<LiteralBooleanEvaluation> LiteralBooleanEvaluationImpl::getThisLiteralBooleanEvaluationPtr() const
@@ -189,12 +182,11 @@ void LiteralBooleanEvaluationImpl::load(std::shared_ptr<persistence::interfaces:
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get FUMLFactory
-	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
+	// get fUMLFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -204,11 +196,12 @@ void LiteralBooleanEvaluationImpl::loadAttributes(std::shared_ptr<persistence::i
 	LiteralEvaluationImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void LiteralBooleanEvaluationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+void LiteralBooleanEvaluationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<fUML::Semantics::Values::ValuesFactory> modelFactory=fUML::Semantics::Values::ValuesFactory::eInstance();
 
-
-	LiteralEvaluationImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	LiteralEvaluationImpl::loadNode(nodeName, loadHandler);
 }
 
 void LiteralBooleanEvaluationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -236,7 +229,7 @@ void LiteralBooleanEvaluationImpl::saveContent(std::shared_ptr<persistence::inte
 {
 	try
 	{
-		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+		std::shared_ptr<fUML::Semantics::Values::ValuesPackage> package = fUML::Semantics::Values::ValuesPackage::eInstance();
 
 	
 

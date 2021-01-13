@@ -13,7 +13,7 @@
 
 
 // forward declarations
-template<class T> class Bag;
+template<class T> class Bag; 
 
 
 
@@ -33,7 +33,7 @@ namespace persistence
 
 namespace fUML
 {
-	class FUMLFactory;
+	class fUMLFactory;
 }
 
 //Forward Declaration for used types
@@ -76,8 +76,7 @@ namespace uml
 //*********************************
 namespace fUML::Semantics::Actions 
 {
-	/*!
-	 */
+	
 	class ReturnInformation:virtual public fUML::Semantics::Values::Value
 	{
 		public:
@@ -97,34 +96,28 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Operations
 			//*********************************
+			 
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() = 0;
 			
-			
-			/*!
-			 */ 
+			 
 			virtual bool equals(std::shared_ptr<fUML::Semantics::Values::Value>  otherValue) = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<uml::Operation> getOperation() = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<Bag<uml::Classifier> > getTypes() = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> new_() = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual void reply(std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> >  outputParameterValues) = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<uml::ValueSpecification> specify() = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual std::string toString() = 0;
 			
 			
@@ -135,13 +128,12 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::CallEventOccurrence > getCallEventOccurrence() const = 0;
 			
-			/*!
-			 */
-			virtual void setCallEventOccurrence(std::shared_ptr<fUML::Semantics::CommonBehavior::CallEventOccurrence> _callEventOccurrence_callEventOccurrence) = 0;
+			
+			virtual void setCallEventOccurrence(std::shared_ptr<fUML::Semantics::CommonBehavior::CallEventOccurrence> _callEventOccurrence) = 0;
+			
 			
 
 		protected:
@@ -153,10 +145,8 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Reference Members
 			//*********************************
-			/*!
-			 */
-			std::shared_ptr<fUML::Semantics::CommonBehavior::CallEventOccurrence > m_callEventOccurrence;
 			
+			std::shared_ptr<fUML::Semantics::CommonBehavior::CallEventOccurrence > m_callEventOccurrence;
 
 		public:
 			//*********************************

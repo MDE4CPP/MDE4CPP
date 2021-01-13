@@ -32,7 +32,7 @@ namespace persistence
 
 namespace fUML
 {
-	class FUMLFactory;
+	class fUMLFactory;
 }
 
 //Forward Declaration for used types
@@ -70,8 +70,7 @@ namespace fUML::Semantics::Loci
 //*********************************
 namespace fUML::Semantics::StructuredClassifiers 
 {
-	/*!
-	 */
+	
 	class DispatchStrategy:virtual public fUML::Semantics::Loci::SemanticStrategy
 	{
 		public:
@@ -91,16 +90,13 @@ namespace fUML::Semantics::StructuredClassifiers
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> dispatch(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object>  object,std::shared_ptr<uml::Operation>  operation) = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual std::string getName() = 0;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<uml::Behavior> retrieveMethod(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object>  object,std::shared_ptr<uml::Operation>  operation) = 0;
 			
 			

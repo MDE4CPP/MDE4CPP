@@ -35,7 +35,7 @@ namespace persistence
 
 namespace uml
 {
-	class UmlFactory;
+	class umlFactory;
 }
 
 //Forward Declaration for used types
@@ -155,8 +155,10 @@ namespace uml
 namespace uml 
 {
 	/*!
-	 A CallBehaviorAction is a CallAction that invokes a Behavior directly. The argument values of the CallBehaviorAction are passed on the input Parameters of the invoked Behavior. If the call is synchronous, the execution of the CallBehaviorAction waits until the execution of the invoked Behavior completes and the values of output Parameters of the Behavior are placed on the result OutputPins. If the call is asynchronous, the CallBehaviorAction completes immediately and no results values can be provided.
-	<p>From package UML::Actions.</p> */
+	A CallBehaviorAction is a CallAction that invokes a Behavior directly. The argument values of the CallBehaviorAction are passed on the input Parameters of the invoked Behavior. If the call is synchronous, the execution of the CallBehaviorAction waits until the execution of the invoked Behavior completes and the values of output Parameters of the Behavior are placed on the result OutputPins. If the call is asynchronous, the CallBehaviorAction completes immediately and no results values can be provided.
+	<p>From package UML::Actions.</p>
+	*/
+	
 	class CallBehaviorAction:virtual public CallAction
 	{
 		public:
@@ -177,8 +179,10 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 A CallBehaviorAction may not specify onPort.
-			onPort=null */ 
+			A CallBehaviorAction may not specify onPort.
+			onPort=null
+			*/
+			 
 			virtual bool no_onport(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
@@ -190,14 +194,19 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 The Behavior being invoked.
-			<p>From package UML::Actions.</p> */
+			The Behavior being invoked.
+			<p>From package UML::Actions.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::Behavior > getBehavior() const = 0;
 			
 			/*!
-			 The Behavior being invoked.
-			<p>From package UML::Actions.</p> */
-			virtual void setBehavior(std::shared_ptr<uml::Behavior> _behavior_behavior) = 0;
+			The Behavior being invoked.
+			<p>From package UML::Actions.</p>
+			*/
+			
+			virtual void setBehavior(std::shared_ptr<uml::Behavior> _behavior) = 0;
+			
 			
 
 		protected:
@@ -210,33 +219,46 @@ namespace uml
 			// Reference Members
 			//*********************************
 			/*!
-			 The Behavior being invoked.
-			<p>From package UML::Actions.</p> */
-			std::shared_ptr<uml::Behavior > m_behavior;
+			The Behavior being invoked.
+			<p>From package UML::Actions.</p>
+			*/
 			
+			std::shared_ptr<uml::Behavior > m_behavior;
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
+			ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::ActivityGroup>> getInGroup() const = 0;/*!
-			 The ordered set of InputPins representing the inputs to the Action.
-			<p>From package UML::Actions.</p> */
+			The ordered set of InputPins representing the inputs to the Action.
+			<p>From package UML::Actions.</p>
+			*/
+			
 			virtual std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> getInput() const = 0;/*!
-			 The ordered set of OutputPins representing outputs from the Action.
-			<p>From package UML::Actions.</p> */
+			The ordered set of OutputPins representing outputs from the Action.
+			<p>From package UML::Actions.</p>
+			*/
+			
 			virtual std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element>> getOutput() const = 0;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
+			The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

@@ -36,7 +36,7 @@ namespace persistence
 
 namespace uml
 {
-	class UmlFactory;
+	class umlFactory;
 }
 
 //Forward Declaration for used types
@@ -151,8 +151,10 @@ namespace uml
 namespace uml 
 {
 	/*!
-	 A SendObjectAction is an InvocationAction that transmits an input object to the target object, which is handled as a request message by the target object. The requestor continues execution immediately after the object is sent out and cannot receive reply values.
-	<p>From package UML::Actions.</p> */
+	A SendObjectAction is an InvocationAction that transmits an input object to the target object, which is handled as a request message by the target object. The requestor continues execution immediately after the object is sent out and cannot receive reply values.
+	<p>From package UML::Actions.</p>
+	*/
+	
 	class SendObjectAction:virtual public InvocationAction
 	{
 		public:
@@ -173,8 +175,10 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 If onPort is not empty, the Port given by onPort must be an owned or inherited feature of the type of the target InputPin.
-			onPort<>null implies target.type.oclAsType(Classifier).allFeatures()->includes(onPort) */ 
+			If onPort is not empty, the Port given by onPort must be an owned or inherited feature of the type of the target InputPin.
+			onPort<>null implies target.type.oclAsType(Classifier).allFeatures()->includes(onPort)
+			*/
+			 
 			virtual bool type_target_pin(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
@@ -186,23 +190,33 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 The request object, which is transmitted to the target object. The object may be copied in transmission, so identity might not be preserved.
-			<p>From package UML::Actions.</p> */
+			The request object, which is transmitted to the target object. The object may be copied in transmission, so identity might not be preserved.
+			<p>From package UML::Actions.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::InputPin > getRequest() const = 0;
 			
 			/*!
-			 The request object, which is transmitted to the target object. The object may be copied in transmission, so identity might not be preserved.
-			<p>From package UML::Actions.</p> */
-			virtual void setRequest(std::shared_ptr<uml::InputPin> _request_request) = 0;
+			The request object, which is transmitted to the target object. The object may be copied in transmission, so identity might not be preserved.
+			<p>From package UML::Actions.</p>
+			*/
+			
+			virtual void setRequest(std::shared_ptr<uml::InputPin> _request) = 0;
+			
 			/*!
-			 The target object to which the object is sent.
-			<p>From package UML::Actions.</p> */
+			The target object to which the object is sent.
+			<p>From package UML::Actions.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::InputPin > getTarget() const = 0;
 			
 			/*!
-			 The target object to which the object is sent.
-			<p>From package UML::Actions.</p> */
-			virtual void setTarget(std::shared_ptr<uml::InputPin> _target_target) = 0;
+			The target object to which the object is sent.
+			<p>From package UML::Actions.</p>
+			*/
+			
+			virtual void setTarget(std::shared_ptr<uml::InputPin> _target) = 0;
+			
 			
 
 		protected:
@@ -215,34 +229,46 @@ namespace uml
 			// Reference Members
 			//*********************************
 			/*!
-			 The request object, which is transmitted to the target object. The object may be copied in transmission, so identity might not be preserved.
-			<p>From package UML::Actions.</p> */
-			std::shared_ptr<uml::InputPin > m_request;
-			/*!
-			 The target object to which the object is sent.
-			<p>From package UML::Actions.</p> */
-			std::shared_ptr<uml::InputPin > m_target;
+			The request object, which is transmitted to the target object. The object may be copied in transmission, so identity might not be preserved.
+			<p>From package UML::Actions.</p>
+			*/
 			
+			std::shared_ptr<uml::InputPin > m_request;/*!
+			The target object to which the object is sent.
+			<p>From package UML::Actions.</p>
+			*/
+			
+			std::shared_ptr<uml::InputPin > m_target;
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
+			ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::ActivityGroup>> getInGroup() const = 0;/*!
-			 The ordered set of InputPins representing the inputs to the Action.
-			<p>From package UML::Actions.</p> */
+			The ordered set of InputPins representing the inputs to the Action.
+			<p>From package UML::Actions.</p>
+			*/
+			
 			virtual std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> getInput() const = 0;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
+			The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

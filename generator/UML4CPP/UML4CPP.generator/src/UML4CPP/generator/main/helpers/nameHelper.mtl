@@ -26,11 +26,13 @@
  *  queries to generate qualified name, required for elements without defined name
 */]
 [query public myQualifiedName (anElement : NamedElement) : String = if oclIsUndefined() then anElement.handleUndefinedElement() else myPinName().sanitize() endif /] 
-[query private myPinName (anElement : NamedElement) : String = if(oclIsKindOf(Pin)) then eClass().name.concat('_').concat(owner.owner.oclAsType(NamedElement).name).concat('_').concat(owner.oclAsType(NamedElement).name).concat('_').concat(name) else myElementQualifiedName() endif /]
+[query private myPinName (anElement : NamedElement) : String = if(oclIsKindOf(Pin)) then eClass().name.concat('_').concat(owner.oclAsType(Action)._context.name).concat('_').concat(owner.owner.oclAsType(NamedElement).name).concat('_').concat(owner.oclAsType(NamedElement).name).concat('_').concat(name) else myElementQualifiedName() endif /]
 [query private myElementQualifiedName (anElement : NamedElement) : String = if (namespace.oclIsUndefined() or ''=namespace) and (not owner.oclIsUndefined()) and (not owner.oclAsType(NamedElement).qualifiedName.oclIsUndefined()) and (not (qualifiedName.oclIsUndefined())) then (owner.oclAsType(NamedElement).myQualifiedName()).concat('_').concat(eClass().name).concat('_').concat(qualifiedName).substituteAll('.', '_') else myLiteralSpecificationName() endif /]
-[query private myLiteralSpecificationName(anElement :NamedElement) : String = if (oclIsKindOf(LiteralSpecification)) then if (owner.oclIsTypeOf(ConnectorEnd)) then myValuSpecName().concat('_').concat(owner.oclAsType(ConnectorEnd).myQualifiedName()) else myValuSpecName().concat('_').concat(owner.mySlotName())endif else myValuSpecName()endif /]
+[query private myLiteralSpecificationName(anElement :NamedElement) : String = if (oclIsKindOf(LiteralSpecification)) then if (owner.oclIsTypeOf(ConnectorEnd)) then myValueSpecName().concat('_').concat(owner.oclAsType(ConnectorEnd).myQualifiedName()) else myValueSpecName().concat('_').concat(owner.mySlotName()).concat(myLiteralName()) endif else myValueSpecName()endif /]
+[query private myLiteralName(anElement : NamedElement) : String = if (anElement.name.oclIsUndefined()) then '' else '_'.concat(anElement.name) endif /]
 [query private mySlotName(anElement : Element) : String = if (oclIsTypeOf(Slot)) then oclAsType(Slot).definingFeature.name else myOwnerName() endif /]
-[query private myValuSpecName (anElement : NamedElement) : String = if(oclIsKindOf(ValueSpecification)) then owner.myOwnerName().concat('_').concat(eContainingFeature().name).concat('_').concat(anElement.eClass().name) else myParameterReturnName() endif /]
+[query private myValueSpecName (anElement : NamedElement) : String = if(oclIsKindOf(ValueSpecification)) then owner.myOwnerName().concat('_').concat(eContainingFeature().name).concat('_').concat(anElement.eClass().name).concat(myValueSpecName2()) else myParameterReturnName() endif /]
+[query private myValueSpecName2 (anElement : NamedElement) : String = if(name.oclIsUndefined()) then '' else '_'.concat(name) endif /]
 [query private myOwnerName (anElement : Element) : String = if(oclIsKindOf(NamedElement)) then oclAsType(NamedElement).myQualifiedName() else owner.myOwnerName() endif /]
 [query private myParameterReturnName(anElement : NamedElement) : String = if(oclIsKindOf(Parameter) and (name.oclIsUndefined() or ''=name) and (oclAsType(Parameter).direction = ParameterDirectionKind::return) ) then owner.oclAsType(NamedElement).myQualifiedName().concat('return') else myParameterName() endif /]
 [query private myParameterName(anElement : NamedElement) : String = if(oclIsKindOf(Parameter)  and not((oclAsType(Parameter).direction = ParameterDirectionKind::return)) ) then owner.oclAsType(NamedElement).myQualifiedName().concat('_').concat(myName()) else myAssociationName() endif /]
@@ -48,6 +50,31 @@
 [query private myGeneralName(anElement : NamedElement) : String = if (oclIsUndefined()) then handleUndefinedElement() else if (anElement.qualifiedName.oclIsUndefined() or anElement.qualifiedName='' ) then owner.myOwnerName().concat('_').concat(anElement.eClass().name).concat(anElement.owner.allOwnedElements()->asOrderedSet()->indexOf(anElement).toString()) else anElement.qualifiedName endif endif /]
 [query public myQualifiedName (aConnectorEnd : ConnectorEnd) : String = if oclIsUndefined() then handleUndefinedElement() else (aConnectorEnd.owner.oclAsType(NamedElement).qualifiedName.concat('_ConnectorEnd_').concat(aConnectorEnd.definingEnd.memberName())).sanitize() endif /]
 
+
+[query public getSuperPackage(aPackage : Package) : Package = if((not owner.oclIsUndefined()) and (owner.oclIsKindOf(Package))) then owner.oclAsType(Package) else null endif /]
+[query public getAllSubPackageNames(aPackage : Package) : OrderedSet(String) = aPackage.allOwnedElements()->selectByKind(Package).name->asOrderedSet()/]
+[query public getRootPackage(aPackage : Package) : Package = if aPackage.getSuperPackage().oclIsUndefined() then aPackage else aPackage.getSuperPackage().getRootPackage() endif /]
+[query public getRootPackage(anElement : Element) : Package = anElement.getNearestPackage().getRootPackage() /]
+
+[**
+ * generate package namespace names
+*/]
+[comment  flag 'noReflection' indicates wether package names UML/Ecore will be transformed to uml/ecore (true) or umlReflection/ecoreReflection (false)/]
+[query public generateNamespace(aPackage : Package, noReflection : Boolean) : String = getNamespace(noReflection, false) /]
+[query public generateNamespace(aClassifier : Classifier, noReflection : Boolean) : String = aClassifier.getNearestPackage().getNamespace(noReflection ,false) /]
+[query public generateNamespaceName(aClassifier : Classifier, noReflection : Boolean) : String = generateNamespace(noReflection).concat('::').concat(aClassifier.name.toUpperFirst())/]
+[query private getNamespace(aPackage : Package, noReflection : Boolean, ignoreRoot : Boolean) : String = if(aPackage.getSuperPackage().oclIsUndefined()) then getRootPackageNamespaceName(noReflection, ignoreRoot) else aPackage.getSuperPackage().getNamespace(noReflection, ignoreRoot).concat('::').concat(aPackage.name) endif/]
+[query private getRootPackageNamespaceName(aPackage : Package, noReflection : Boolean, ignoreRoot : Boolean) : String = if (ignoreRoot) then '' else if (noReflection) then aPackage.myNamespaceName() else aPackage.name endif endif /]
+
+[**
+ * generate package namespace paths
+*/]
+[comment  flag 'noReflection' indicates wether package names UML/Ecore will be transformed to uml/ecore (true) or umlReflection/ecoreReflection (false)/]
+[query private getRootPackageName(aPackage : Package, noReflection : Boolean, ignoreRoot : Boolean) : String = if (ignoreRoot) then '' else if (noReflection) then aPackage.myNamespaceName() else aPackage.getPackageName() endif endif /]
+[query private getNamespacePath(aPackage : Package, noReflection : Boolean, ignoreRoot : Boolean) : String = if(aPackage.getSuperPackage().oclIsUndefined()) then getRootPackageName(noReflection, ignoreRoot) else aPackage.getSuperPackage().getNamespacePath(noReflection, ignoreRoot).concat('/').concat(aPackage.name) endif/]
+[query public generateNamespacePath(aPackage : Package, noReflection : Boolean) : String = getNamespacePath(noReflection, false) /]
+[query public generateNamespacePathWithoutRoot(aPackage : Package, noReflection : Boolean) : String = aPackage.getNamespacePath(noReflection, true).substring(2)/] [comment first char is '/', which should be removed, index starts at 1 /] 
+
 [**
  *  queries to determinate name of NamedElement elements
 */]
@@ -57,7 +84,8 @@
 */]
 [query public setterName(feature : StructuralFeature) : String = 'set'.concat(name.toUpperFirst()) /]
 [query public getterName(feature : StructuralFeature) : String = getterPrefix().concat(name.toUpperFirst()) /]
-[query public getterPrefix(feature : StructuralFeature) : String = if feature.type.name = 'Boolean' then 'is' else 'get' endif/]
+[query public getterPrefix(feature : StructuralFeature) : String = feature.type.getterPrefix() /]
+[query public getterPrefix(type : Type) : String = if type.name = 'Boolean' then 'is' else 'get' endif/]
 
 [**
  * query to replace characters, which are not permitted in names of classes, variable, macros, ... in C++
@@ -83,7 +111,7 @@
  * if namespaces are equal, namespace is not necessary and is not generated
  * if flag 'ignoreNamespace' is true, namespace is also not generated 
 */]
-[query public getClassifierName(aClassifier : Classifier, base: Classifier, ignoreNamespace : Boolean) : String = if (aClassifier.namespace.myNamespaceName() = base.namespace.myNamespaceName() or ignoreNamespace) then aClassifier.name.toUpperFirst() else aClassifier.namespace.myNamespaceName().concat('::').concat(aClassifier.name.toUpperFirst()) endif/]
+[query public getClassifierName(aClassifier : Classifier, base: Classifier, noReflection : Boolean, ignoreNamespace : Boolean) : String = if (aClassifier.namespace.myNamespaceName() = base.namespace.myNamespaceName() or ignoreNamespace) then aClassifier.name.toUpperFirst() else aClassifier.owner.oclAsType(Package).generateNamespace(noReflection).concat('::').concat(aClassifier.name.toUpperFirst()) endif/]
 
 [**
  *  generate substring of a qualified name, name is made up of parameter type names
@@ -98,6 +126,7 @@
 [query public getMetaClassName(anElement : Element) : String = if anElement.getNearestPackage().name = anElement.eClass().ePackage.name then anElement.eClass().name else anElement.eClass().ePackage.name.concat('::').concat(anElement.eClass().name) endif /]
 
 [query public getStaticClassID_ID(aClass : Class) : String = aClass._package.allOwnedElements()->asOrderedSet()->indexOf(aClass).toString()/]
+[query public getStaticPropertyID_ID(aProperty : Property) : String = if (not aProperty.association.oclIsUndefined()) then aProperty.association._package.allOwnedElements()->asOrderedSet()->indexOf(aProperty.association).toString().concat('00').concat(aProperty.association.memberEnd->indexOf(aProperty).toString()) else '0' endif/]
 [query public getStaticInterfaceID_ID(aInterface : Interface) : String = aInterface._package.allOwnedElements()->asOrderedSet()->indexOf(aInterface).toString()/]
 
 [** 

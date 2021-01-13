@@ -39,7 +39,8 @@ namespace StandardProfile
 			// Getter Setter
 			//*********************************
 			virtual std::weak_ptr<uml::Usage> getBase_Usage() const  = 0;
-			virtual void setBase_Usage (std::weak_ptr<uml::Usage> _base_Usage) = 0;
+			virtual void setBase_Usage(std::weak_ptr<uml::Usage> _base_Usage) = 0;
+			
 			
 			
 			//*********************************
@@ -52,6 +53,7 @@ namespace StandardProfile
 			// Members
 			//*********************************
 			std::weak_ptr<uml::Usage> m_base_Usage;
+			
 			
 	};
 }

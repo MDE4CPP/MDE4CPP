@@ -19,7 +19,7 @@
 //*********************************
 namespace uml 
 {
-	class InteractionOperandImpl :virtual public InteractionFragmentImpl, virtual public NamespaceImpl, virtual public InteractionOperand 
+	class InteractionOperandImpl : virtual public InteractionFragmentImpl, virtual public NamespaceImpl, virtual public InteractionOperand 
 	{
 		public: 
 			InteractionOperandImpl(const InteractionOperandImpl & obj);
@@ -29,7 +29,7 @@ namespace uml
 			InteractionOperandImpl& operator=(InteractionOperandImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			InteractionOperandImpl();
 			virtual std::shared_ptr<InteractionOperand> getThisInteractionOperandPtr() const;
 			virtual void setThisInteractionOperandPtr(std::weak_ptr<InteractionOperand> thisInteractionOperandPtr);
@@ -60,11 +60,15 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 The guard must contain only references to values local to the Lifeline on which it resides, or values global to the whole Interaction. */ 
+			The guard must contain only references to values local to the Lifeline on which it resides, or values global to the whole Interaction.
+			*/
+			 
 			virtual bool guard_contain_references(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
-			 The guard must be placed directly prior to (above) the OccurrenceSpecification that will become the first OccurrenceSpecification within this InteractionOperand. */ 
+			The guard must be placed directly prior to (above) the OccurrenceSpecification that will become the first OccurrenceSpecification within this InteractionOperand.
+			*/
+			 
 			virtual bool guard_directly_prior(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			
@@ -78,39 +82,57 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 The fragments of the operand.
-			<p>From package UML::Interactions.</p> */
+			The fragments of the operand.
+			<p>From package UML::Interactions.</p>
+			*/
+			
 			virtual std::shared_ptr<Subset<uml::InteractionFragment, uml::NamedElement>> getFragment() const ;
 			
+			
 			/*!
-			 Constraint of the operand.
-			<p>From package UML::Interactions.</p> */
+			Constraint of the operand.
+			<p>From package UML::Interactions.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::InteractionConstraint > getGuard() const ;
 			
 			/*!
-			 Constraint of the operand.
-			<p>From package UML::Interactions.</p> */
-			virtual void setGuard(std::shared_ptr<uml::InteractionConstraint> _guard_guard) ;
+			Constraint of the operand.
+			<p>From package UML::Interactions.</p>
+			*/
+			
+			virtual void setGuard(std::shared_ptr<uml::InteractionConstraint> _guard) ;
+			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
-			<p>From package UML::CommonStructure.</p> */
+			A collection of NamedElements identifiable within the Namespace, either by being owned or by being introduced by importing or inheritance.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::NamedElement>> getMember() const ;/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
-			 A collection of NamedElements owned by the Namespace.
-			<p>From package UML::CommonStructure.</p> */
+			A collection of NamedElements owned by the Namespace.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> getOwnedMember() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
@@ -124,7 +146,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

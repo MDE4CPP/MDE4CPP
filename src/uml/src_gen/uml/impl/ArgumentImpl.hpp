@@ -14,12 +14,12 @@
 #include "../Argument.hpp"
 
 
-#include "ecore/impl/EObjectImpl.hpp"
+#include "ecore/impl/EModelElementImpl.hpp"
 
 //*********************************
 namespace uml 
 {
-	class ArgumentImpl :virtual public ecore::EObjectImpl,
+	class ArgumentImpl : virtual public ecore::EModelElementImpl,
 virtual public Argument 
 	{
 		public: 
@@ -30,7 +30,7 @@ virtual public Argument
 			ArgumentImpl& operator=(ArgumentImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			ArgumentImpl();
 			virtual std::shared_ptr<Argument> getThisArgumentPtr() const;
 			virtual void setThisArgumentPtr(std::weak_ptr<Argument> thisArgumentPtr);
@@ -49,26 +49,22 @@ virtual public Argument
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::string getName() const ;
 			
-			/*!
-			 */ 
+			 
 			virtual void setName (std::string _name); 
-			
 			
 			
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<uml::Object > getValue() const ;
 			
-			/*!
-			 */
-			virtual void setValue(std::shared_ptr<uml::Object> _value_value) ;
+			
+			virtual void setValue(std::shared_ptr<uml::Object> _value) ;
+			
 							
 			
 			//*********************************
@@ -87,7 +83,7 @@ virtual public Argument
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

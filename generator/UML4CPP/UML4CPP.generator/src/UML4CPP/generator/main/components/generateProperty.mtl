@@ -30,14 +30,29 @@
 [query public hasSetter(aProperty : Property) : Boolean = not aProperty.isReadOnly and aProperty.upper = 1/]
 
 [**
+ * checks if Property is container
+*/]
+[query public isContainer(aProperty : Property) : Boolean = aProperty.upper = -1/]
+
+[**
+ * checks if Property is single value
+*/]
+[query public isSingleValue(aProperty : Property) : Boolean = aProperty.upper = 1/]
+
+[**
  * generate getter and setter declaration
  * setter is only generated if hasSetter query returns true
 */]
 [template public generateAttributeAccessorsDeclaration(aProperty : Property, impl : Boolean)]
 virtual [aProperty.generateCppType()/] [aProperty.getterName()/]() const [abstractSuffix(impl)/];
 [if (aProperty.hasSetter())]
-virtual void [aProperty.setterName()/] ([aProperty.generateCppType()/] _[aProperty.name/])[abstractSuffix(impl)/];
+virtual void [aProperty.setterName()/]([aProperty.generateCppType()/] _[aProperty.name/])[abstractSuffix(impl)/];
 [/if]
+[/template]
+
+[template public generateCompositeOwnerAttributeAccessorsDeclaration(compositeOwnerClass : Class, impl : Boolean)]
+virtual std::weak_ptr<[compositeOwnerClass.generateCppType(true)/]> get[compositeOwnerClass.name.toUpperFirst()/]() const [abstractSuffix(impl)/];
+virtual void set[compositeOwnerClass.name.toUpperFirst()/](std::weak_ptr<[compositeOwnerClass.generateCppType(true)/]> _[compositeOwnerClass.name/])[abstractSuffix(impl)/];
 [/template]
 
 [**
@@ -48,6 +63,10 @@ virtual void [aProperty.setterName()/] ([aProperty.generateCppType()/] _[aProper
 
 [/template]
 
+[template public generateCompositeOwnerAttributeProtectedMember(compositeOwnerClass : Class)]
+std::weak_ptr<[compositeOwnerClass.generateCppType(true)/]> m_[compositeOwnerClass.name/];
+[/template]
+
 [**
  * generate attribute member initialization for properties without default value and upper <> 1
  */]
@@ -56,13 +75,6 @@ m_[aProperty.name/].reset(new Bag<[aProperty.type.transformType()/]>());
 
 [/template]
 
-[**
- * generate attribute member initialization for properties with InstanceValue as default value
-*/]
-[template public initPropertyFromInstanceValue(instVal : InstanceValue)]
-m_[instVal.owner.oclAsType(NamedElement).name/] = [instVal.type._package.getPackageName()/]::[instVal.type._package.getPackageName()/]Factory::eInstance()->create[instVal.type.name.toUpperFirst()/]();
-
-[/template]
 
 [***
  * generate property getter implementation
@@ -85,6 +97,13 @@ m_[instVal.owner.oclAsType(NamedElement).name/] = [instVal.type._package.getPack
 }
 [/template]
 
+[template public generateCompositeOwnerAttributeGetterImplementationCpp(aClass : Class, compositeOwnerClass : Class)]
+std::weak_ptr<[compositeOwnerClass.generateCppType(true)/]> [aClass.name.toUpperFirst()/]Impl::get[compositeOwnerClass.name.toUpperFirst()/]() const
+{
+	return m_[compositeOwnerClass.name/];
+}
+[/template]
+
 [**
  * generate property setter implementation
 */]
@@ -103,6 +122,13 @@ void [aClass.name.toUpperFirst()/]Impl::[aProperty.setterName()/]([aProperty.gen
 void [aInterface.name.toUpperFirst()/]Impl::[aProperty.setterName()/]([aProperty.generateCppType()/] _[aProperty.name/])
 {
 	m_[aProperty.name/] = _[aProperty.name/];
+}
+[/template]
+
+[template public generateCompositeOwnerAttributeSetterImplementationCpp(aClass : Class, compositeOwnerClass : Class)]
+void [aClass.name.toUpperFirst()/]Impl::set[compositeOwnerClass.name.toUpperFirst()/](std::weak_ptr<[compositeOwnerClass.generateCppType(true)/]> _[compositeOwnerClass.name/])
+{
+	m_[compositeOwnerClass.name/] = _[compositeOwnerClass.name/];
 }
 [/template]
 
@@ -142,8 +168,13 @@ void [aInterface.name.toUpperFirst()/]Impl::[aProperty.setterName()/]([aProperty
 [aProperty.memberName()/]->setType([aProperty.type.generatePackageGetterCall(aProperty)/]);
 [aProperty.memberName()/]->setLower([aProperty.lower/]);
 [aProperty.memberName()/]->setUpper([aProperty.upper/]);
+[aProperty.memberName()/]->setIsUnique([aProperty.isUnique/]);
+[aProperty.memberName()/]->setAggregation(uml::AggregationKind::[aProperty.aggregation.toString().toUpper()/]);
+[if (aProperty.oclIsTypeOf(Port))]
+[aProperty.memberName()/]->setIsConjugated([aProperty.oclAsType(Port).isConjugated/]);
+[/if]
 [aProperty.memberName()/]->setVisibility(uml::VisibilityKind::[aProperty.visibility.toString().toUpperCase()/]);
-
+[if (not aProperty.association.oclIsUndefined())][aProperty.memberName()/]->setAssociation([aProperty.association.generatePackageGetterCall(aProperty)/]);[/if]
 [if (not aProperty.defaultValue.oclIsUndefined())][aProperty.memberName()/]->setDefaultValue([memberName(aProperty.defaultValue)/]);[/if]
 [aProperty.generateStereotypeApplication()/]
 [/template]
@@ -162,10 +193,14 @@ void [aInterface.name.toUpperFirst()/]Impl::[aProperty.setterName()/]([aProperty
 "[aProperty.default/]" /*defined default string*/
 [/template]
 
-[template public genDefault(aProperty : Property) ? ((aProperty.type.name='Integer') or (aProperty.type.name='Real') or (aProperty.type.name='Boolean') or (aProperty.type.name='UnlimitedNatural') or (aProperty.type.name='EInt') or (aProperty.type.name='EDouble') or (aProperty.type.name='EBoolean') or (aProperty.type.name='EFloat'))]
+[template public genDefault(aProperty : Property) ? ((aProperty.type.name='Integer') or (aProperty.type.name='Real') or (aProperty.type.name='Boolean') or (aProperty.type.name='EInt') or (aProperty.type.name='EDouble') or (aProperty.type.name='EBoolean') or (aProperty.type.name='EFloat'))]
 [aProperty.default/] /*defined default value*/
 [/template]
 
+[template public genDefault(aProperty : Property) ? (aProperty.type.name='UnlimitedNatural')]
+[if (aProperty.default='*')]-1[else][aProperty.default/][/if] /*defined default value*/
+[/template]
+
 [template public genDefault(aProperty : Property) ? (aProperty.type.oclIsKindOf(Enumeration))]
-[aProperty.type.qualifiedName/]::[aProperty.default.toUpper()/]
+[aProperty.type.getNearestPackage().generateNamespace(true)/]::[aProperty.type.name/]::[aProperty.default.toUpper()/] /*defined default value*/
 [/template]

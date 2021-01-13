@@ -18,24 +18,22 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "fUML/impl/FUMLPackageImpl.hpp"
+
+//Includes from codegen annotation
 #include <cstdio>
 #include "fUML/FUMLFactory.hpp"
 #include "uml/Class.hpp"
 #include "uml/LiteralInteger.hpp"
 #include "uml/PrimitiveType.hpp"
 #include "uml/Type.hpp"
-#include "uml/UmlFactory.hpp"
+#include "uml/umlFactory.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -47,10 +45,15 @@
 
 #include "uml/ValueSpecification.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
-#include "fUML/FUMLFactory.hpp"
+//Factories an Package includes
+#include "fUML/Semantics/SimpleClassifiers/impl/SimpleClassifiersFactoryImpl.hpp"
+#include "fUML/Semantics/SimpleClassifiers/impl/SimpleClassifiersPackageImpl.hpp"
+
+#include "fUML/fUMLFactory.hpp"
+#include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsFactory.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -60,17 +63,7 @@ using namespace fUML::Semantics::SimpleClassifiers;
 // Constructor / Destructor
 //*********************************
 IntegerValueImpl::IntegerValueImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 IntegerValueImpl::~IntegerValueImpl()
@@ -79,7 +72,6 @@ IntegerValueImpl::~IntegerValueImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete IntegerValue "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -110,25 +102,43 @@ std::shared_ptr<ecore::EObject>  IntegerValueImpl::copy() const
 
 std::shared_ptr<ecore::EClass> IntegerValueImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getIntegerValue_Class();
+	return fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance()->getIntegerValue_Class();
 }
 
 //*********************************
 // Attribute Setter Getter
 //*********************************
-void IntegerValueImpl::setValue(int _value)
-{
-	m_value = _value;
-} 
-
+/*
+Getter & Setter for attribute value
+*/
 int IntegerValueImpl::getValue() const 
 {
 	return m_value;
 }
 
+void IntegerValueImpl::setValue(int _value)
+{
+	m_value = _value;
+} 
+
+
+
 //*********************************
 // Operations
 //*********************************
+std::shared_ptr<fUML::Semantics::Values::Value> IntegerValueImpl::_copy()
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+	// Create a new integer value with the same value as this integer value.
+
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::IntegerValue> newValue = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createIntegerValue();
+newValue->setType(this->getType()); //Duplicated from _copy()-method of super class in order to avoid having to call _copy()-method of super class and having to cast afterwards
+newValue->setValue(this->getValue());
+return newValue;
+	//end of body
+}
+
 bool IntegerValueImpl::equals(std::shared_ptr<fUML::Semantics::Values::Value>  otherValue)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
@@ -136,7 +146,7 @@ bool IntegerValueImpl::equals(std::shared_ptr<fUML::Semantics::Values::Value>  o
 		bool isEqual = false;
 
 
-    if(otherValue != nullptr && otherValue->eClass()->getClassifierID() == fUML::FUMLPackage::INTEGERVALUE_CLASS)
+    if(otherValue != nullptr && otherValue->eClass()->getClassifierID() == fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::INTEGERVALUE_CLASS)
     {
 		std::shared_ptr<fUML::Semantics::SimpleClassifiers::IntegerValue> otherIntegerValue = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::IntegerValue>(otherValue);
         isEqual = (otherIntegerValue->getValue() == this->getValue());
@@ -150,7 +160,7 @@ std::shared_ptr<uml::ValueSpecification> IntegerValueImpl::specify()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<uml::LiteralInteger> literal = uml::UmlFactory::eInstance()->createLiteralInteger_in_Namespace(std::shared_ptr<uml::Classifier>());
+	std::shared_ptr<uml::LiteralInteger> literal = uml::umlFactory::eInstance()->createLiteralInteger_in_Namespace(std::shared_ptr<uml::Classifier>());
 
     literal->setType(this->getType());
     literal->setValue(this->getValue());
@@ -178,6 +188,7 @@ std::string IntegerValueImpl::toString()
 //*********************************
 
 
+
 std::shared_ptr<IntegerValue> IntegerValueImpl::getThisIntegerValuePtr() const
 {
 	return m_thisIntegerValuePtr.lock();
@@ -199,7 +210,7 @@ Any IntegerValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::INTEGERVALUE_ATTRIBUTE_VALUE:
+		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::INTEGERVALUE_ATTRIBUTE_VALUE:
 			return eAny(getValue()); //641
 	}
 	return PrimitiveValueImpl::eGet(featureID, resolve, coreType);
@@ -208,7 +219,7 @@ bool IntegerValueImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::INTEGERVALUE_ATTRIBUTE_VALUE:
+		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::INTEGERVALUE_ATTRIBUTE_VALUE:
 			return getValue() != 0; //641
 	}
 	return PrimitiveValueImpl::internalEIsSet(featureID);
@@ -217,7 +228,7 @@ bool IntegerValueImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case fUML::FUMLPackage::INTEGERVALUE_ATTRIBUTE_VALUE:
+		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::INTEGERVALUE_ATTRIBUTE_VALUE:
 		{
 			// BOOST CAST
 			int _value = newValue->get<int>();
@@ -240,12 +251,11 @@ void IntegerValueImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandle
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get FUMLFactory
-	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
+	// get fUMLFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -276,11 +286,12 @@ void IntegerValueImpl::loadAttributes(std::shared_ptr<persistence::interfaces::X
 	PrimitiveValueImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void IntegerValueImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+void IntegerValueImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory> modelFactory=fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance();
 
-
-	PrimitiveValueImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	PrimitiveValueImpl::loadNode(nodeName, loadHandler);
 }
 
 void IntegerValueImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -308,10 +319,9 @@ void IntegerValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 {
 	try
 	{
-		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+		std::shared_ptr<fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage> package = fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance();
 
 	
- 
 		// Add attributes
 		if ( this->eIsSet(package->getIntegerValue_Attribute_value()) )
 		{

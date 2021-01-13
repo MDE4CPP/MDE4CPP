@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -26,25 +25,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -72,10 +58,11 @@
 
 #include "uml/ValueSpecificationAction.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -85,26 +72,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 TimeExpressionImpl::TimeExpressionImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-		m_observation.reset(new Bag<uml::Observation>());
-	
-	
-
-	//Init references
-	
-
-	
-	
+{	
 }
 
 TimeExpressionImpl::~TimeExpressionImpl()
@@ -114,77 +82,52 @@ TimeExpressionImpl::~TimeExpressionImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+TimeExpressionImpl::TimeExpressionImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:TimeExpressionImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			TimeExpressionImpl::TimeExpressionImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:TimeExpressionImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
-
-
-
+TimeExpressionImpl::TimeExpressionImpl(std::weak_ptr<uml::Element > par_owner)
+:TimeExpressionImpl()
+{
+	m_owner = par_owner;
+}
 
 //Additional constructor for the containments back reference
-			TimeExpressionImpl::TimeExpressionImpl(std::weak_ptr<uml::Element > par_owner)
-			:TimeExpressionImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-
-
+TimeExpressionImpl::TimeExpressionImpl(std::weak_ptr<uml::Package > par_owningPackage)
+:TimeExpressionImpl()
+{
+	m_owningPackage = par_owningPackage;
+	m_namespace = par_owningPackage;
+}
 
 //Additional constructor for the containments back reference
-			TimeExpressionImpl::TimeExpressionImpl(std::weak_ptr<uml::Package > par_owningPackage)
-			:TimeExpressionImpl()
-			{
-			    m_owningPackage = par_owningPackage;
-				m_namespace = par_owningPackage;
-			}
-
-
-
-
+TimeExpressionImpl::TimeExpressionImpl(std::weak_ptr<uml::Slot > par_owningSlot)
+:TimeExpressionImpl()
+{
+	m_owningSlot = par_owningSlot;
+	m_owner = par_owningSlot;
+}
 
 //Additional constructor for the containments back reference
-			TimeExpressionImpl::TimeExpressionImpl(std::weak_ptr<uml::Slot > par_owningSlot)
-			:TimeExpressionImpl()
-			{
-			    m_owningSlot = par_owningSlot;
-				m_owner = par_owningSlot;
-			}
-
-
-
-
+TimeExpressionImpl::TimeExpressionImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+:TimeExpressionImpl()
+{
+	m_owningTemplateParameter = par_owningTemplateParameter;
+	m_owner = par_owningTemplateParameter;
+}
 
 //Additional constructor for the containments back reference
-			TimeExpressionImpl::TimeExpressionImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
-			:TimeExpressionImpl()
-			{
-			    m_owningTemplateParameter = par_owningTemplateParameter;
-				m_owner = par_owningTemplateParameter;
-			}
-
-
-
-
-
-//Additional constructor for the containments back reference
-			TimeExpressionImpl::TimeExpressionImpl(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction)
-			:TimeExpressionImpl()
-			{
-			    m_valueSpecificationAction = par_valueSpecificationAction;
-				m_owner = par_valueSpecificationAction;
-			}
-
-
-
-
+TimeExpressionImpl::TimeExpressionImpl(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction)
+:TimeExpressionImpl()
+{
+	m_valueSpecificationAction = par_valueSpecificationAction;
+	m_owner = par_valueSpecificationAction;
+}
 
 
 TimeExpressionImpl::TimeExpressionImpl(const TimeExpressionImpl & obj):TimeExpressionImpl()
@@ -259,7 +202,7 @@ std::shared_ptr<ecore::EObject>  TimeExpressionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> TimeExpressionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getTimeExpression_Class();
+	return uml::umlPackage::eInstance()->getTimeExpression_Class();
 }
 
 //*********************************
@@ -278,21 +221,39 @@ bool TimeExpressionImpl::no_expr_requires_observation(Any diagnostics,std::map <
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference expr
+*/
 std::shared_ptr<uml::ValueSpecification > TimeExpressionImpl::getExpr() const
 {
 
     return m_expr;
 }
+
 void TimeExpressionImpl::setExpr(std::shared_ptr<uml::ValueSpecification> _expr)
 {
     m_expr = _expr;
 }
 
+
+
+/*
+Getter & Setter for reference observation
+*/
 std::shared_ptr<Bag<uml::Observation>> TimeExpressionImpl::getObservation() const
 {
+	if(m_observation == nullptr)
+	{
+		m_observation.reset(new Bag<uml::Observation>());
+		
+		
+	}
 
     return m_observation;
 }
+
+
+
 
 
 //*********************************
@@ -302,14 +263,28 @@ std::weak_ptr<uml::Namespace > TimeExpressionImpl::getNamespace() const
 {
 	return m_namespace;
 }
+
 std::shared_ptr<Union<uml::Element>> TimeExpressionImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > TimeExpressionImpl::getOwner() const
 {
 	return m_owner;
 }
+
+
 
 
 std::shared_ptr<TimeExpression> TimeExpressionImpl::getThisTimeExpressionPtr() const
@@ -362,9 +337,9 @@ Any TimeExpressionImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::TIMEEXPRESSION_ATTRIBUTE_EXPR:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getExpr())); //23915
-		case UmlPackage::TIMEEXPRESSION_ATTRIBUTE_OBSERVATION:
+		case uml::umlPackage::TIMEEXPRESSION_ATTRIBUTE_EXPR:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getExpr())); //23815
+		case uml::umlPackage::TIMEEXPRESSION_ATTRIBUTE_OBSERVATION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Observation>::iterator iter = m_observation->begin();
@@ -374,7 +349,7 @@ Any TimeExpressionImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //23916
+			return eAny(tempList); //23816
 		}
 	}
 	return ValueSpecificationImpl::eGet(featureID, resolve, coreType);
@@ -383,10 +358,10 @@ bool TimeExpressionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::TIMEEXPRESSION_ATTRIBUTE_EXPR:
-			return getExpr() != nullptr; //23915
-		case UmlPackage::TIMEEXPRESSION_ATTRIBUTE_OBSERVATION:
-			return getObservation() != nullptr; //23916
+		case uml::umlPackage::TIMEEXPRESSION_ATTRIBUTE_EXPR:
+			return getExpr() != nullptr; //23815
+		case uml::umlPackage::TIMEEXPRESSION_ATTRIBUTE_OBSERVATION:
+			return getObservation() != nullptr; //23816
 	}
 	return ValueSpecificationImpl::internalEIsSet(featureID);
 }
@@ -394,15 +369,15 @@ bool TimeExpressionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::TIMEEXPRESSION_ATTRIBUTE_EXPR:
+		case uml::umlPackage::TIMEEXPRESSION_ATTRIBUTE_EXPR:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::ValueSpecification> _expr = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
-			setExpr(_expr); //23915
+			setExpr(_expr); //23815
 			return true;
 		}
-		case UmlPackage::TIMEEXPRESSION_ATTRIBUTE_OBSERVATION:
+		case uml::umlPackage::TIMEEXPRESSION_ATTRIBUTE_OBSERVATION:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -454,12 +429,11 @@ void TimeExpressionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHand
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -488,8 +462,9 @@ void TimeExpressionImpl::loadAttributes(std::shared_ptr<persistence::interfaces:
 	ValueSpecificationImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void TimeExpressionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void TimeExpressionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -518,15 +493,15 @@ void TimeExpressionImpl::loadNode(std::string nodeName, std::shared_ptr<persiste
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
-
-	ValueSpecificationImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	ValueSpecificationImpl::loadNode(nodeName, loadHandler);
 }
 
 void TimeExpressionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case UmlPackage::TIMEEXPRESSION_ATTRIBUTE_OBSERVATION:
+		case uml::umlPackage::TIMEEXPRESSION_ATTRIBUTE_OBSERVATION:
 		{
 			std::shared_ptr<Bag<uml::Observation>> _observation = getObservation();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -571,7 +546,7 @@ void TimeExpressionImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 		// Save 'expr'
 		std::shared_ptr<uml::ValueSpecification > expr = this->getExpr();

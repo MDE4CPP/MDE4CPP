@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -25,21 +24,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -63,10 +53,11 @@
 
 #include "uml/TemplateParameter.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -76,47 +67,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 DependencyImpl::DependencyImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		/*SubsetUnion*/
-		m_client.reset(new SubsetUnion<uml::NamedElement, uml::Element >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_client - SubsetUnion<uml::NamedElement, uml::Element >()" << std::endl;
-		#endif
-	
-	
-
-		/*SubsetUnion*/
-		m_supplier.reset(new SubsetUnion<uml::NamedElement, uml::Element >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer SubsetUnion: " << "m_supplier - SubsetUnion<uml::NamedElement, uml::Element >()" << std::endl;
-		#endif
-	
-	
-
-	//Init references
-		/*SubsetUnion*/
-		m_client->initSubsetUnion(m_source);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_client - SubsetUnion<uml::NamedElement, uml::Element >(m_source)" << std::endl;
-		#endif
-	
-	
-
-		/*SubsetUnion*/
-		m_supplier->initSubsetUnion(m_target);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value SubsetUnion: " << "m_supplier - SubsetUnion<uml::NamedElement, uml::Element >(m_target)" << std::endl;
-		#endif
-	
-	
+{	
 }
 
 DependencyImpl::~DependencyImpl()
@@ -126,53 +77,36 @@ DependencyImpl::~DependencyImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+DependencyImpl::DependencyImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:DependencyImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			DependencyImpl::DependencyImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:DependencyImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
-
-
-
+DependencyImpl::DependencyImpl(std::weak_ptr<uml::Element > par_owner)
+:DependencyImpl()
+{
+	m_owner = par_owner;
+}
 
 //Additional constructor for the containments back reference
-			DependencyImpl::DependencyImpl(std::weak_ptr<uml::Element > par_owner)
-			:DependencyImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-
-
+DependencyImpl::DependencyImpl(std::weak_ptr<uml::Package > par_owningPackage)
+:DependencyImpl()
+{
+	m_owningPackage = par_owningPackage;
+	m_namespace = par_owningPackage;
+}
 
 //Additional constructor for the containments back reference
-			DependencyImpl::DependencyImpl(std::weak_ptr<uml::Package > par_owningPackage)
-			:DependencyImpl()
-			{
-			    m_owningPackage = par_owningPackage;
-				m_namespace = par_owningPackage;
-			}
-
-
-
-
-
-//Additional constructor for the containments back reference
-			DependencyImpl::DependencyImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
-			:DependencyImpl()
-			{
-			    m_owningTemplateParameter = par_owningTemplateParameter;
-				m_owner = par_owningTemplateParameter;
-			}
-
-
-
-
+DependencyImpl::DependencyImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+:DependencyImpl()
+{
+	m_owningTemplateParameter = par_owningTemplateParameter;
+	m_owner = par_owningTemplateParameter;
+}
 
 
 DependencyImpl::DependencyImpl(const DependencyImpl & obj):DependencyImpl()
@@ -249,7 +183,7 @@ std::shared_ptr<ecore::EObject>  DependencyImpl::copy() const
 
 std::shared_ptr<ecore::EClass> DependencyImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getDependency_Class();
+	return uml::umlPackage::eInstance()->getDependency_Class();
 }
 
 //*********************************
@@ -263,18 +197,60 @@ std::shared_ptr<ecore::EClass> DependencyImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference client
+*/
 std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element>> DependencyImpl::getClient() const
 {
+	if(m_client == nullptr)
+	{
+		/*SubsetUnion*/
+		m_client.reset(new SubsetUnion<uml::NamedElement, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_client - SubsetUnion<uml::NamedElement, uml::Element >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_client->initSubsetUnion(getSource());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_client - SubsetUnion<uml::NamedElement, uml::Element >(getSource())" << std::endl;
+		#endif
+		
+	}
 //assert(m_client);
     return m_client;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference supplier
+*/
 std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element>> DependencyImpl::getSupplier() const
 {
+	if(m_supplier == nullptr)
+	{
+		/*SubsetUnion*/
+		m_supplier.reset(new SubsetUnion<uml::NamedElement, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_supplier - SubsetUnion<uml::NamedElement, uml::Element >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_supplier->initSubsetUnion(getTarget());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_supplier - SubsetUnion<uml::NamedElement, uml::Element >(getTarget())" << std::endl;
+		#endif
+		
+	}
 //assert(m_supplier);
     return m_supplier;
 }
+
+
+
 
 
 //*********************************
@@ -284,26 +260,83 @@ std::weak_ptr<uml::Namespace > DependencyImpl::getNamespace() const
 {
 	return m_namespace;
 }
+
 std::shared_ptr<Union<uml::Element>> DependencyImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > DependencyImpl::getOwner() const
 {
 	return m_owner;
 }
+
 std::shared_ptr<Union<uml::Element>> DependencyImpl::getRelatedElement() const
 {
+	if(m_relatedElement == nullptr)
+	{
+		/*Union*/
+		m_relatedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_relatedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_relatedElement;
 }
+
 std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> DependencyImpl::getSource() const
 {
+	if(m_source == nullptr)
+	{
+		/*SubsetUnion*/
+		m_source.reset(new SubsetUnion<uml::Element, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_source - SubsetUnion<uml::Element, uml::Element >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_source->initSubsetUnion(getRelatedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_source - SubsetUnion<uml::Element, uml::Element >(getRelatedElement())" << std::endl;
+		#endif
+		
+	}
 	return m_source;
 }
+
 std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> DependencyImpl::getTarget() const
 {
+	if(m_target == nullptr)
+	{
+		/*SubsetUnion*/
+		m_target.reset(new SubsetUnion<uml::Element, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_target - SubsetUnion<uml::Element, uml::Element >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_target->initSubsetUnion(getRelatedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_target - SubsetUnion<uml::Element, uml::Element >(getRelatedElement())" << std::endl;
+		#endif
+		
+	}
 	return m_target;
 }
+
+
 
 
 std::shared_ptr<Dependency> DependencyImpl::getThisDependencyPtr() const
@@ -347,7 +380,7 @@ Any DependencyImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::DEPENDENCY_ATTRIBUTE_CLIENT:
+		case uml::umlPackage::DEPENDENCY_ATTRIBUTE_CLIENT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::NamedElement>::iterator iter = m_client->begin();
@@ -357,9 +390,9 @@ Any DependencyImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //6815
+			return eAny(tempList); //6715
 		}
-		case UmlPackage::DEPENDENCY_ATTRIBUTE_SUPPLIER:
+		case uml::umlPackage::DEPENDENCY_ATTRIBUTE_SUPPLIER:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::NamedElement>::iterator iter = m_supplier->begin();
@@ -369,7 +402,7 @@ Any DependencyImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //6816
+			return eAny(tempList); //6716
 		}
 	}
 	Any result;
@@ -385,10 +418,10 @@ bool DependencyImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::DEPENDENCY_ATTRIBUTE_CLIENT:
-			return getClient() != nullptr; //6815
-		case UmlPackage::DEPENDENCY_ATTRIBUTE_SUPPLIER:
-			return getSupplier() != nullptr; //6816
+		case uml::umlPackage::DEPENDENCY_ATTRIBUTE_CLIENT:
+			return getClient() != nullptr; //6715
+		case uml::umlPackage::DEPENDENCY_ATTRIBUTE_SUPPLIER:
+			return getSupplier() != nullptr; //6716
 	}
 	bool result = false;
 	result = DirectedRelationshipImpl::internalEIsSet(featureID);
@@ -403,7 +436,7 @@ bool DependencyImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::DEPENDENCY_ATTRIBUTE_CLIENT:
+		case uml::umlPackage::DEPENDENCY_ATTRIBUTE_CLIENT:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -439,7 +472,7 @@ bool DependencyImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case UmlPackage::DEPENDENCY_ATTRIBUTE_SUPPLIER:
+		case uml::umlPackage::DEPENDENCY_ATTRIBUTE_SUPPLIER:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -498,12 +531,11 @@ void DependencyImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler>
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -540,19 +572,20 @@ void DependencyImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLo
 	PackageableElementImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void DependencyImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void DependencyImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
-
-	DirectedRelationshipImpl::loadNode(nodeName, loadHandler, modelFactory);
-	PackageableElementImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	DirectedRelationshipImpl::loadNode(nodeName, loadHandler);
+	PackageableElementImpl::loadNode(nodeName, loadHandler);
 }
 
 void DependencyImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case UmlPackage::DEPENDENCY_ATTRIBUTE_CLIENT:
+		case uml::umlPackage::DEPENDENCY_ATTRIBUTE_CLIENT:
 		{
 			std::shared_ptr<Bag<uml::NamedElement>> _client = getClient();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -566,7 +599,7 @@ void DependencyImpl::resolveReferences(const int featureID, std::list<std::share
 			return;
 		}
 
-		case UmlPackage::DEPENDENCY_ATTRIBUTE_SUPPLIER:
+		case uml::umlPackage::DEPENDENCY_ATTRIBUTE_SUPPLIER:
 		{
 			std::shared_ptr<Bag<uml::NamedElement>> _supplier = getSupplier();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -610,7 +643,7 @@ void DependencyImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 

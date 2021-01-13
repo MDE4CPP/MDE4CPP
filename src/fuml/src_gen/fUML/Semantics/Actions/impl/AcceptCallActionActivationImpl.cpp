@@ -17,28 +17,26 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "fUML/impl/FUMLPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
 
 #include <exception> // used in Persistence
 
 #include "fUML/Semantics/Actions/AcceptEventActionActivation.hpp"
 
 #include "fUML/Semantics/Actions/AcceptEventActionEventAccepter.hpp"
+
+#include "uml/Action.hpp"
 
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 
@@ -56,10 +54,15 @@
 
 #include "fUML/Semantics/Activities/Token.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
-#include "fUML/FUMLFactory.hpp"
+//Factories an Package includes
+#include "fUML/Semantics/Actions/impl/ActionsFactoryImpl.hpp"
+#include "fUML/Semantics/Actions/impl/ActionsPackageImpl.hpp"
+
+#include "fUML/fUMLFactory.hpp"
+#include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsFactory.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -69,17 +72,7 @@ using namespace fUML::Semantics::Actions;
 // Constructor / Destructor
 //*********************************
 AcceptCallActionActivationImpl::AcceptCallActionActivationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 AcceptCallActionActivationImpl::~AcceptCallActionActivationImpl()
@@ -89,17 +82,12 @@ AcceptCallActionActivationImpl::~AcceptCallActionActivationImpl()
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			AcceptCallActionActivationImpl::AcceptCallActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
-			:AcceptCallActionActivationImpl()
-			{
-			    m_group = par_group;
-			}
-
-
-
-
+AcceptCallActionActivationImpl::AcceptCallActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
+:AcceptCallActionActivationImpl()
+{
+	m_group = par_group;
+}
 
 
 AcceptCallActionActivationImpl::AcceptCallActionActivationImpl(const AcceptCallActionActivationImpl & obj):AcceptCallActionActivationImpl()
@@ -114,6 +102,8 @@ AcceptCallActionActivationImpl::AcceptCallActionActivationImpl(const AcceptCallA
 
 	//copy references with no containment (soft copy)
 	
+	m_action  = obj.getAction();
+
 	m_eventAccepter  = obj.getEventAccepter();
 
 	m_group  = obj.getGroup();
@@ -168,7 +158,7 @@ std::shared_ptr<ecore::EObject>  AcceptCallActionActivationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> AcceptCallActionActivationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getAcceptCallActionActivation_Class();
+	return fUML::Semantics::Actions::ActionsPackage::eInstance()->getAcceptCallActionActivation_Class();
 }
 
 //*********************************
@@ -193,8 +183,20 @@ void AcceptCallActionActivationImpl::accept(std::shared_ptr<fUML::Semantics::Com
 //*********************************
 std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> AcceptCallActionActivationImpl::getPinActivation() const
 {
+	if(m_pinActivation == nullptr)
+	{
+		/*Union*/
+		m_pinActivation.reset(new Union<fUML::Semantics::Actions::PinActivation>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_pinActivation - Union<fUML::Semantics::Actions::PinActivation>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_pinActivation;
 }
+
+
 
 
 std::shared_ptr<AcceptCallActionActivation> AcceptCallActionActivationImpl::getThisAcceptCallActionActivationPtr() const
@@ -252,12 +254,11 @@ void AcceptCallActionActivationImpl::load(std::shared_ptr<persistence::interface
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get FUMLFactory
-	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
+	// get fUMLFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -267,11 +268,12 @@ void AcceptCallActionActivationImpl::loadAttributes(std::shared_ptr<persistence:
 	AcceptEventActionActivationImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void AcceptCallActionActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+void AcceptCallActionActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<fUML::Semantics::Actions::ActionsFactory> modelFactory=fUML::Semantics::Actions::ActionsFactory::eInstance();
 
-
-	AcceptEventActionActivationImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	AcceptEventActionActivationImpl::loadNode(nodeName, loadHandler);
 }
 
 void AcceptCallActionActivationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -302,7 +304,7 @@ void AcceptCallActionActivationImpl::saveContent(std::shared_ptr<persistence::in
 {
 	try
 	{
-		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+		std::shared_ptr<fUML::Semantics::Actions::ActionsPackage> package = fUML::Semantics::Actions::ActionsPackage::eInstance();
 
 	
 

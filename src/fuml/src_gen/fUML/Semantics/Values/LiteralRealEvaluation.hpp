@@ -32,7 +32,7 @@ namespace persistence
 
 namespace fUML
 {
-	class FUMLFactory;
+	class fUMLFactory;
 }
 
 //Forward Declaration for used types
@@ -65,8 +65,7 @@ namespace uml
 //*********************************
 namespace fUML::Semantics::Values 
 {
-	/*!
-	 */
+	
 	class LiteralRealEvaluation:virtual public LiteralEvaluation
 	{
 		public:
@@ -86,8 +85,7 @@ namespace fUML::Semantics::Values
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> evaluate() = 0;
 			
 			

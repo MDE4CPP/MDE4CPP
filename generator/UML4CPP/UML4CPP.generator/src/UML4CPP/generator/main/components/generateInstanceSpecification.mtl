@@ -56,11 +56,11 @@
 */]
 [template private generateSlotCreation(aSlot : Slot, anInstSpec : InstanceSpecification)]
 {
-	std::shared_ptr<uml::Slot> slot(uml::UmlFactory::eInstance()->createSlot_in_OwningInstance([anInstSpec.memberName()/]));
+	std::shared_ptr<uml::Slot> slot(uml::umlFactory::eInstance()->createSlot_in_OwningInstance([anInstSpec.memberName()/]));
 	slot->setDefiningFeature([aSlot.definingFeature.memberName()/]);
 [for (aValueSpec : ValueSpecification | aSlot.value->asOrderedSet()->sortedBy(myQualifiedName()))]
 	{
-		std::shared_ptr<uml::[aValueSpec.eClass().name/]> literal = uml::UmlFactory::eInstance()->create[aValueSpec.eClass().name/]_in_OwningSlot(slot);
+		std::shared_ptr<uml::[aValueSpec.eClass().name/]> literal = uml::umlFactory::eInstance()->create[aValueSpec.eClass().name/]_in_OwningSlot(slot);
 [if (aValueSpec.oclIsKindOf(LiteralSpecification))]
 		literal->setValue([aValueSpec.oclAsType(LiteralSpecification).generateLiteralValue()/]);
 [elseif(aValueSpec.oclIsKindOf(InstanceValue))]

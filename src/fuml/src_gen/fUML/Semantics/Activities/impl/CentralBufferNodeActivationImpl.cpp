@@ -17,21 +17,17 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "fUML/impl/FUMLPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -45,10 +41,15 @@
 
 #include "fUML/Semantics/Activities/Token.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
-#include "fUML/FUMLFactory.hpp"
+//Factories an Package includes
+#include "fUML/Semantics/Activities/impl/ActivitiesFactoryImpl.hpp"
+#include "fUML/Semantics/Activities/impl/ActivitiesPackageImpl.hpp"
+
+#include "fUML/fUMLFactory.hpp"
+#include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsFactory.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -58,17 +59,7 @@ using namespace fUML::Semantics::Activities;
 // Constructor / Destructor
 //*********************************
 CentralBufferNodeActivationImpl::CentralBufferNodeActivationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 CentralBufferNodeActivationImpl::~CentralBufferNodeActivationImpl()
@@ -78,17 +69,12 @@ CentralBufferNodeActivationImpl::~CentralBufferNodeActivationImpl()
 #endif
 }
 
-
 //Additional constructor for the containments back reference
-			CentralBufferNodeActivationImpl::CentralBufferNodeActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
-			:CentralBufferNodeActivationImpl()
-			{
-			    m_group = par_group;
-			}
-
-
-
-
+CentralBufferNodeActivationImpl::CentralBufferNodeActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
+:CentralBufferNodeActivationImpl()
+{
+	m_group = par_group;
+}
 
 
 CentralBufferNodeActivationImpl::CentralBufferNodeActivationImpl(const CentralBufferNodeActivationImpl & obj):CentralBufferNodeActivationImpl()
@@ -135,7 +121,7 @@ std::shared_ptr<ecore::EObject>  CentralBufferNodeActivationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> CentralBufferNodeActivationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getCentralBufferNodeActivation_Class();
+	return fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getCentralBufferNodeActivation_Class();
 }
 
 //*********************************
@@ -165,6 +151,7 @@ void CentralBufferNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Semantics::
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<CentralBufferNodeActivation> CentralBufferNodeActivationImpl::getThisCentralBufferNodeActivationPtr() const
@@ -222,12 +209,11 @@ void CentralBufferNodeActivationImpl::load(std::shared_ptr<persistence::interfac
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get FUMLFactory
-	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
+	// get fUMLFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -237,11 +223,12 @@ void CentralBufferNodeActivationImpl::loadAttributes(std::shared_ptr<persistence
 	ObjectNodeActivationImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void CentralBufferNodeActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+void CentralBufferNodeActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<fUML::Semantics::Activities::ActivitiesFactory> modelFactory=fUML::Semantics::Activities::ActivitiesFactory::eInstance();
 
-
-	ObjectNodeActivationImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	ObjectNodeActivationImpl::loadNode(nodeName, loadHandler);
 }
 
 void CentralBufferNodeActivationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -269,7 +256,7 @@ void CentralBufferNodeActivationImpl::saveContent(std::shared_ptr<persistence::i
 {
 	try
 	{
-		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+		std::shared_ptr<fUML::Semantics::Activities::ActivitiesPackage> package = fUML::Semantics::Activities::ActivitiesPackage::eInstance();
 
 	
 

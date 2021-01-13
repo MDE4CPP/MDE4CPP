@@ -18,12 +18,13 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "fUML/impl/FUMLPackageImpl.hpp"
+
+//Includes from codegen annotation
 #include "abstractDataTypes/Subset.hpp"
+#include "uml/umlPackage.hpp"
 #include "uml/NamedElement.hpp"
 #include "uml/Class.hpp"
 #include "uml/Operation.hpp"
@@ -31,8 +32,6 @@
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -44,10 +43,15 @@
 
 #include "uml/Operation.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
-#include "fUML/FUMLFactory.hpp"
+//Factories an Package includes
+#include "fUML/Semantics/StructuredClassifiers/impl/StructuredClassifiersFactoryImpl.hpp"
+#include "fUML/Semantics/StructuredClassifiers/impl/StructuredClassifiersPackageImpl.hpp"
+
+#include "fUML/fUMLFactory.hpp"
+#include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsFactory.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -57,17 +61,7 @@ using namespace fUML::Semantics::StructuredClassifiers;
 // Constructor / Destructor
 //*********************************
 RedefinitionBasedDispatchStrategyImpl::RedefinitionBasedDispatchStrategyImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 RedefinitionBasedDispatchStrategyImpl::~RedefinitionBasedDispatchStrategyImpl()
@@ -76,7 +70,6 @@ RedefinitionBasedDispatchStrategyImpl::~RedefinitionBasedDispatchStrategyImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete RedefinitionBasedDispatchStrategy "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -104,7 +97,7 @@ std::shared_ptr<ecore::EObject>  RedefinitionBasedDispatchStrategyImpl::copy() c
 
 std::shared_ptr<ecore::EClass> RedefinitionBasedDispatchStrategyImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getRedefinitionBasedDispatchStrategy_Class();
+	return fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getRedefinitionBasedDispatchStrategy_Class();
 }
 
 //*********************************
@@ -119,7 +112,7 @@ bool RedefinitionBasedDispatchStrategyImpl::operationsMatch(std::shared_ptr<uml:
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 		bool matches = false;
-	if(ownedOperation == baseOperation)
+	if(ownedOperation->matches(baseOperation))
 	{
 		matches = true;
 	}
@@ -140,17 +133,25 @@ std::shared_ptr<uml::Behavior> RedefinitionBasedDispatchStrategyImpl::retrieveMe
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-		std::shared_ptr<uml::Behavior> method = nullptr;
+		std::shared_ptr<uml::Behavior> method = DispatchStrategyImpl::retrieveMethod(object, operation);
 	unsigned int i = 0;
 	while(method == nullptr && (i < object->getTypes()->size()))
 	{
-		std::shared_ptr<uml::Class> type = std::dynamic_pointer_cast<uml::Class>(object->getTypes()->at(i));
-		std::shared_ptr<Bag<uml::NamedElement> > members = type->getMember();
-		unsigned int j = 0;
-		while(method == nullptr && (j < members->size()))
+		std::shared_ptr<uml::Classifier> type = object->getTypes()->at(i);
+		/*
+		MDE4CPP specific implementation:
+		Normalley. only classes would be taken into account. 
+		In MDE4CPP object classes for interfaces also exist. Those are typed by interfaces as well.
+		Because of that, interfaces are also taken into account here.
+		*/
+		unsigned long metaElementID = type->eClass()->getMetaElementID();
+		if(metaElementID == uml::umlPackage::CLASS_CLASS || metaElementID == uml::umlPackage::INTERFACE_CLASS)
 		{
-			std::shared_ptr<uml::NamedElement> member = members->at(j);
-			std::shared_ptr<uml::Operation> memberOperation = std::dynamic_pointer_cast<uml::Operation>(member);
+		std::shared_ptr<Bag<uml::Operation> > memberOperations = type->getAllOperations();
+		unsigned int j = 0;
+		while(method == nullptr && (j < memberOperations->size()))
+		{
+			std::shared_ptr<uml::Operation> memberOperation = memberOperations->at(j);
 			if(memberOperation != nullptr)
 			{	
 				if(this->operationsMatch(memberOperation, operation))
@@ -159,6 +160,7 @@ std::shared_ptr<uml::Behavior> RedefinitionBasedDispatchStrategyImpl::retrieveMe
 				}
 			}
 			j = j + 1;
+		}
 		}
 		i = i + 1;
 	}
@@ -174,6 +176,7 @@ std::shared_ptr<uml::Behavior> RedefinitionBasedDispatchStrategyImpl::retrieveMe
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<RedefinitionBasedDispatchStrategy> RedefinitionBasedDispatchStrategyImpl::getThisRedefinitionBasedDispatchStrategyPtr() const
@@ -227,12 +230,11 @@ void RedefinitionBasedDispatchStrategyImpl::load(std::shared_ptr<persistence::in
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get FUMLFactory
-	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
+	// get fUMLFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -242,11 +244,12 @@ void RedefinitionBasedDispatchStrategyImpl::loadAttributes(std::shared_ptr<persi
 	DispatchStrategyImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void RedefinitionBasedDispatchStrategyImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+void RedefinitionBasedDispatchStrategyImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactory> modelFactory=fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance();
 
-
-	DispatchStrategyImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	DispatchStrategyImpl::loadNode(nodeName, loadHandler);
 }
 
 void RedefinitionBasedDispatchStrategyImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -271,7 +274,7 @@ void RedefinitionBasedDispatchStrategyImpl::saveContent(std::shared_ptr<persiste
 {
 	try
 	{
-		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+		std::shared_ptr<fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage> package = fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance();
 
 	
 

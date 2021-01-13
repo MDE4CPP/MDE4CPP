@@ -18,20 +18,19 @@
 #include <iostream>
 #include <sstream>
 
-
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "fUML/impl/FUMLPackageImpl.hpp"
+
+//Includes from codegen annotation
 #include "fUML/Semantics/SimpleClassifiers/RealValue.hpp"
-#include "fUML/FUMLFactory.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "uml/LiteralReal.hpp"
+#include "primitivetypesReflection/PrimitiveTypesPackage.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -43,10 +42,15 @@
 
 #include "uml/ValueSpecification.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "fUML/FUMLPackage.hpp"
-#include "fUML/FUMLFactory.hpp"
+//Factories an Package includes
+#include "fUML/Semantics/Values/impl/ValuesFactoryImpl.hpp"
+#include "fUML/Semantics/Values/impl/ValuesPackageImpl.hpp"
+
+#include "fUML/fUMLFactory.hpp"
+#include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsFactory.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -56,17 +60,7 @@ using namespace fUML::Semantics::Values;
 // Constructor / Destructor
 //*********************************
 LiteralRealEvaluationImpl::LiteralRealEvaluationImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-
-	//Init references
+{	
 }
 
 LiteralRealEvaluationImpl::~LiteralRealEvaluationImpl()
@@ -75,7 +69,6 @@ LiteralRealEvaluationImpl::~LiteralRealEvaluationImpl()
 	std::cout << "-------------------------------------------------------------------------------------------------\r\ndelete LiteralRealEvaluation "<< this << "\r\n------------------------------------------------------------------------ " << std::endl;
 #endif
 }
-
 
 
 
@@ -107,7 +100,7 @@ std::shared_ptr<ecore::EObject>  LiteralRealEvaluationImpl::copy() const
 
 std::shared_ptr<ecore::EClass> LiteralRealEvaluationImpl::eStaticClass() const
 {
-	return FUMLPackageImpl::eInstance()->getLiteralRealEvaluation_Class();
+	return fUML::Semantics::Values::ValuesPackage::eInstance()->getLiteralRealEvaluation_Class();
 }
 
 //*********************************
@@ -121,11 +114,10 @@ std::shared_ptr<fUML::Semantics::Values::Value> LiteralRealEvaluationImpl::evalu
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	std::shared_ptr<uml::LiteralReal> literal = std::dynamic_pointer_cast<uml::LiteralReal>(this->getSpecification());
-	std::shared_ptr<fUML::Semantics::SimpleClassifiers::RealValue> realValue(fUML::FUMLFactory::eInstance()->createRealValue());
-	realValue->setType(this->getType("Real"));
-	realValue->setValue(literal->getValue());
-	return realValue;
+	std::shared_ptr<fUML::Semantics::SimpleClassifiers::RealValue> realValue(fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createRealValue());
+realValue->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
+realValue->setValue(getSpecification()->realValue());
+return realValue;
 	//end of body
 }
 
@@ -136,6 +128,7 @@ std::shared_ptr<fUML::Semantics::Values::Value> LiteralRealEvaluationImpl::evalu
 //*********************************
 // Union Getter
 //*********************************
+
 
 
 std::shared_ptr<LiteralRealEvaluation> LiteralRealEvaluationImpl::getThisLiteralRealEvaluationPtr() const
@@ -189,12 +182,11 @@ void LiteralRealEvaluationImpl::load(std::shared_ptr<persistence::interfaces::XL
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get FUMLFactory
-	std::shared_ptr<fUML::FUMLFactory> modelFactory = fUML::FUMLFactory::eInstance();
+	// get fUMLFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -204,11 +196,12 @@ void LiteralRealEvaluationImpl::loadAttributes(std::shared_ptr<persistence::inte
 	LiteralEvaluationImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void LiteralRealEvaluationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory)
+void LiteralRealEvaluationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<fUML::Semantics::Values::ValuesFactory> modelFactory=fUML::Semantics::Values::ValuesFactory::eInstance();
 
-
-	LiteralEvaluationImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	LiteralEvaluationImpl::loadNode(nodeName, loadHandler);
 }
 
 void LiteralRealEvaluationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -236,7 +229,7 @@ void LiteralRealEvaluationImpl::saveContent(std::shared_ptr<persistence::interfa
 {
 	try
 	{
-		std::shared_ptr<fUML::FUMLPackage> package = fUML::FUMLPackage::eInstance();
+		std::shared_ptr<fUML::Semantics::Values::ValuesPackage> package = fUML::Semantics::Values::ValuesPackage::eInstance();
 
 	
 

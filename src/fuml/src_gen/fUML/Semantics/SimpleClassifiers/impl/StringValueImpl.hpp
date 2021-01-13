@@ -13,13 +13,13 @@
 //Model includes
 #include "../StringValue.hpp"
 
-#include "fUML/impl/FUMLFactoryImpl.hpp"
+#include "fUML/Semantics/SimpleClassifiers/impl/SimpleClassifiersFactoryImpl.hpp"
 #include "fUML/Semantics/SimpleClassifiers/impl/PrimitiveValueImpl.hpp"
 
 //*********************************
 namespace fUML::Semantics::SimpleClassifiers 
 {
-	class StringValueImpl :virtual public PrimitiveValueImpl, virtual public StringValue 
+	class StringValueImpl : virtual public PrimitiveValueImpl, virtual public StringValue 
 	{
 		public: 
 			StringValueImpl(const StringValueImpl & obj);
@@ -29,7 +29,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			StringValueImpl& operator=(StringValueImpl const&) = delete;
 
 		protected:
-			friend class fUML::FUMLFactoryImpl;
+			friend class fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactoryImpl;
 			StringValueImpl();
 			virtual std::shared_ptr<StringValue> getThisStringValuePtr() const;
 			virtual void setThisStringValuePtr(std::weak_ptr<StringValue> thisStringValuePtr);
@@ -43,16 +43,16 @@ namespace fUML::Semantics::SimpleClassifiers
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() ;
+			
+			 
 			virtual bool equals(std::shared_ptr<fUML::Semantics::Values::Value>  otherValue) ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<uml::ValueSpecification> specify() ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::string toString() ;
 			
 			
@@ -60,14 +60,11 @@ namespace fUML::Semantics::SimpleClassifiers
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::string getValue() const ;
 			
-			/*!
-			 */ 
+			 
 			virtual void setValue (std::string _value); 
-			
 			
 			
 			//*********************************
@@ -91,7 +88,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

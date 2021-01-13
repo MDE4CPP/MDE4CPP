@@ -35,7 +35,7 @@ namespace persistence
 
 namespace uml
 {
-	class UmlFactory;
+	class umlFactory;
 }
 
 //Forward Declaration for used types
@@ -125,8 +125,10 @@ namespace uml
 namespace uml 
 {
 	/*!
-	 A FinalNode is an abstract ControlNode at which a flow in an Activity stops.
-	<p>From package UML::Activities.</p> */
+	A FinalNode is an abstract ControlNode at which a flow in an Activity stops.
+	<p>From package UML::Activities.</p>
+	*/
+	
 	class FinalNode:virtual public ControlNode
 	{
 		public:
@@ -147,8 +149,10 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 A FinalNode has no outgoing ActivityEdges.
-			outgoing->isEmpty() */ 
+			A FinalNode has no outgoing ActivityEdges.
+			outgoing->isEmpty()
+			*/
+			 
 			virtual bool no_outgoing_edges(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
@@ -177,17 +181,25 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
+			ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::ActivityGroup>> getInGroup() const = 0;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
+			The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

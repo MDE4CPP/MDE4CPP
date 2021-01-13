@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -26,21 +25,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -84,10 +74,11 @@
 
 #include "uml/StructuredActivityNode.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -97,19 +88,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 ReadStructuralFeatureActionImpl::ReadStructuralFeatureActionImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-	
-
-	//Init references
-	
+{	
 }
 
 ReadStructuralFeatureActionImpl::~ReadStructuralFeatureActionImpl()
@@ -119,53 +98,36 @@ ReadStructuralFeatureActionImpl::~ReadStructuralFeatureActionImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+ReadStructuralFeatureActionImpl::ReadStructuralFeatureActionImpl(std::weak_ptr<uml::Activity > par_activity)
+:ReadStructuralFeatureActionImpl()
+{
+	m_activity = par_activity;
+	m_owner = par_activity;
+}
 
 //Additional constructor for the containments back reference
-			ReadStructuralFeatureActionImpl::ReadStructuralFeatureActionImpl(std::weak_ptr<uml::Activity > par_activity)
-			:ReadStructuralFeatureActionImpl()
-			{
-			    m_activity = par_activity;
-				m_owner = par_activity;
-			}
-
-
-
-
+ReadStructuralFeatureActionImpl::ReadStructuralFeatureActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
+:ReadStructuralFeatureActionImpl()
+{
+	m_inStructuredNode = par_inStructuredNode;
+	m_owner = par_inStructuredNode;
+}
 
 //Additional constructor for the containments back reference
-			ReadStructuralFeatureActionImpl::ReadStructuralFeatureActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
-			:ReadStructuralFeatureActionImpl()
-			{
-			    m_inStructuredNode = par_inStructuredNode;
-				m_owner = par_inStructuredNode;
-			}
-
-
-
-
+ReadStructuralFeatureActionImpl::ReadStructuralFeatureActionImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:ReadStructuralFeatureActionImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			ReadStructuralFeatureActionImpl::ReadStructuralFeatureActionImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:ReadStructuralFeatureActionImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
-
-
-
-
-//Additional constructor for the containments back reference
-			ReadStructuralFeatureActionImpl::ReadStructuralFeatureActionImpl(std::weak_ptr<uml::Element > par_owner)
-			:ReadStructuralFeatureActionImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-
-
+ReadStructuralFeatureActionImpl::ReadStructuralFeatureActionImpl(std::weak_ptr<uml::Element > par_owner)
+:ReadStructuralFeatureActionImpl()
+{
+	m_owner = par_owner;
+}
 
 
 ReadStructuralFeatureActionImpl::ReadStructuralFeatureActionImpl(const ReadStructuralFeatureActionImpl & obj):ReadStructuralFeatureActionImpl()
@@ -305,7 +267,7 @@ std::shared_ptr<ecore::EObject>  ReadStructuralFeatureActionImpl::copy() const
 
 std::shared_ptr<ecore::EClass> ReadStructuralFeatureActionImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getReadStructuralFeatureAction_Class();
+	return uml::umlPackage::eInstance()->getReadStructuralFeatureAction_Class();
 }
 
 //*********************************
@@ -324,43 +286,116 @@ bool ReadStructuralFeatureActionImpl::type_and_ordering(Any diagnostics,std::map
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference result
+*/
 std::shared_ptr<uml::OutputPin > ReadStructuralFeatureActionImpl::getResult() const
 {
 //assert(m_result);
     return m_result;
 }
+
 void ReadStructuralFeatureActionImpl::setResult(std::shared_ptr<uml::OutputPin> _result)
 {
     m_result = _result;
 }
+
+
 
 //*********************************
 // Union Getter
 //*********************************
 std::shared_ptr<Union<uml::ActivityGroup>> ReadStructuralFeatureActionImpl::getInGroup() const
 {
+	if(m_inGroup == nullptr)
+	{
+		/*Union*/
+		m_inGroup.reset(new Union<uml::ActivityGroup>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_inGroup - Union<uml::ActivityGroup>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_inGroup;
 }
+
 std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> ReadStructuralFeatureActionImpl::getInput() const
 {
+	if(m_input == nullptr)
+	{
+		/*SubsetUnion*/
+		m_input.reset(new SubsetUnion<uml::InputPin, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_input - SubsetUnion<uml::InputPin, uml::Element >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_input->initSubsetUnion(getOwnedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_input - SubsetUnion<uml::InputPin, uml::Element >(getOwnedElement())" << std::endl;
+		#endif
+		
+	}
 	return m_input;
 }
+
 std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element>> ReadStructuralFeatureActionImpl::getOutput() const
 {
+	if(m_output == nullptr)
+	{
+		/*SubsetUnion*/
+		m_output.reset(new SubsetUnion<uml::OutputPin, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_output - SubsetUnion<uml::OutputPin, uml::Element >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_output->initSubsetUnion(getOwnedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_output - SubsetUnion<uml::OutputPin, uml::Element >(getOwnedElement())" << std::endl;
+		#endif
+		
+	}
 	return m_output;
 }
+
 std::shared_ptr<Union<uml::Element>> ReadStructuralFeatureActionImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > ReadStructuralFeatureActionImpl::getOwner() const
 {
 	return m_owner;
 }
+
 std::shared_ptr<Union<uml::RedefinableElement>> ReadStructuralFeatureActionImpl::getRedefinedElement() const
 {
+	if(m_redefinedElement == nullptr)
+	{
+		/*Union*/
+		m_redefinedElement.reset(new Union<uml::RedefinableElement>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_redefinedElement - Union<uml::RedefinableElement>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_redefinedElement;
 }
+
+
 
 
 std::shared_ptr<ReadStructuralFeatureAction> ReadStructuralFeatureActionImpl::getThisReadStructuralFeatureActionPtr() const
@@ -403,8 +438,8 @@ Any ReadStructuralFeatureActionImpl::eGet(int featureID, bool resolve, bool core
 {
 	switch(featureID)
 	{
-		case UmlPackage::READSTRUCTURALFEATUREACTION_ATTRIBUTE_RESULT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //20029
+		case uml::umlPackage::READSTRUCTURALFEATUREACTION_ATTRIBUTE_RESULT:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //19929
 	}
 	return StructuralFeatureActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -412,8 +447,8 @@ bool ReadStructuralFeatureActionImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::READSTRUCTURALFEATUREACTION_ATTRIBUTE_RESULT:
-			return getResult() != nullptr; //20029
+		case uml::umlPackage::READSTRUCTURALFEATUREACTION_ATTRIBUTE_RESULT:
+			return getResult() != nullptr; //19929
 	}
 	return StructuralFeatureActionImpl::internalEIsSet(featureID);
 }
@@ -421,12 +456,12 @@ bool ReadStructuralFeatureActionImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::READSTRUCTURALFEATUREACTION_ATTRIBUTE_RESULT:
+		case uml::umlPackage::READSTRUCTURALFEATUREACTION_ATTRIBUTE_RESULT:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::OutputPin> _result = std::dynamic_pointer_cast<uml::OutputPin>(_temp);
-			setResult(_result); //20029
+			setResult(_result); //19929
 			return true;
 		}
 	}
@@ -445,12 +480,11 @@ void ReadStructuralFeatureActionImpl::load(std::shared_ptr<persistence::interfac
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -460,8 +494,9 @@ void ReadStructuralFeatureActionImpl::loadAttributes(std::shared_ptr<persistence
 	StructuralFeatureActionImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void ReadStructuralFeatureActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void ReadStructuralFeatureActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -472,7 +507,7 @@ void ReadStructuralFeatureActionImpl::loadNode(std::string nodeName, std::shared
 			{
 				typeName = "OutputPin";
 			}
-			std::shared_ptr<ecore::EObject> result = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::OUTPUTPIN_ATTRIBUTE_READSTRUCTURALFEATUREACTION);
+			std::shared_ptr<ecore::EObject> result = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::OUTPUTPIN_ATTRIBUTE_READSTRUCTURALFEATUREACTION);
 			if (result != nullptr)
 			{
 				loadHandler->handleChild(result);
@@ -488,8 +523,8 @@ void ReadStructuralFeatureActionImpl::loadNode(std::string nodeName, std::shared
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
-
-	StructuralFeatureActionImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	StructuralFeatureActionImpl::loadNode(nodeName, loadHandler);
 }
 
 void ReadStructuralFeatureActionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -509,7 +544,6 @@ void ReadStructuralFeatureActionImpl::save(std::shared_ptr<persistence::interfac
 	
 	ActivityNodeImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);
@@ -533,7 +567,7 @@ void ReadStructuralFeatureActionImpl::saveContent(std::shared_ptr<persistence::i
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 		// Save 'result'
 		std::shared_ptr<uml::OutputPin > result = this->getResult();

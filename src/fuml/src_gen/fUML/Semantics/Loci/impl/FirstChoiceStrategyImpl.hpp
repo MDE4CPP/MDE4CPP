@@ -13,13 +13,13 @@
 //Model includes
 #include "../FirstChoiceStrategy.hpp"
 
-#include "fUML/impl/FUMLFactoryImpl.hpp"
+#include "fUML/Semantics/Loci/impl/LociFactoryImpl.hpp"
 #include "fUML/Semantics/Loci/impl/ChoiceStrategyImpl.hpp"
 
 //*********************************
 namespace fUML::Semantics::Loci 
 {
-	class FirstChoiceStrategyImpl :virtual public ChoiceStrategyImpl, virtual public FirstChoiceStrategy 
+	class FirstChoiceStrategyImpl : virtual public ChoiceStrategyImpl, virtual public FirstChoiceStrategy 
 	{
 		public: 
 			FirstChoiceStrategyImpl(const FirstChoiceStrategyImpl & obj);
@@ -29,7 +29,7 @@ namespace fUML::Semantics::Loci
 			FirstChoiceStrategyImpl& operator=(FirstChoiceStrategyImpl const&) = delete;
 
 		protected:
-			friend class fUML::FUMLFactoryImpl;
+			friend class fUML::Semantics::Loci::LociFactoryImpl;
 			FirstChoiceStrategyImpl();
 			virtual std::shared_ptr<FirstChoiceStrategy> getThisFirstChoiceStrategyPtr() const;
 			virtual void setThisFirstChoiceStrategyPtr(std::weak_ptr<FirstChoiceStrategy> thisFirstChoiceStrategyPtr);
@@ -43,8 +43,7 @@ namespace fUML::Semantics::Loci
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual int choose(int size) ;
 			
 			
@@ -75,7 +74,7 @@ namespace fUML::Semantics::Loci
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

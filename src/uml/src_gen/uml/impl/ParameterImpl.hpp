@@ -19,7 +19,7 @@
 //*********************************
 namespace uml 
 {
-	class ParameterImpl :virtual public ConnectableElementImpl, virtual public MultiplicityElementImpl, virtual public Parameter 
+	class ParameterImpl : virtual public ConnectableElementImpl, virtual public MultiplicityElementImpl, virtual public Parameter 
 	{
 		public: 
 			ParameterImpl(const ParameterImpl & obj);
@@ -29,7 +29,7 @@ namespace uml
 			ParameterImpl& operator=(ParameterImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			ParameterImpl();
 			virtual std::shared_ptr<Parameter> getThisParameterPtr() const;
 			virtual void setThisParameterPtr(std::weak_ptr<Parameter> thisParameterPtr);
@@ -64,67 +64,89 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 A Parameter may only be associated with a Connector end within the context of a Collaboration.
-			end->notEmpty() implies collaboration->notEmpty() */ 
+			A Parameter may only be associated with a Connector end within the context of a Collaboration.
+			end->notEmpty() implies collaboration->notEmpty()
+			*/
+			 
 			virtual bool connector_end(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
-			 Only in and inout Parameters may have a delete effect. Only out, inout, and return Parameters may have a create effect.
+			Only in and inout Parameters may have a delete effect. Only out, inout, and return Parameters may have a create effect.
 			(effect = ParameterEffectKind::delete implies (direction = ParameterDirectionKind::_'in' or direction = ParameterDirectionKind::inout))
 			and
-			(effect = ParameterEffectKind::create implies (direction = ParameterDirectionKind::out or direction = ParameterDirectionKind::inout or direction = ParameterDirectionKind::return)) */ 
+			(effect = ParameterEffectKind::create implies (direction = ParameterDirectionKind::out or direction = ParameterDirectionKind::inout or direction = ParameterDirectionKind::return))
+			*/
+			 
 			virtual bool in_and_out(Any diagnostics,std::map <   Any, Any >  context) ;
 			
-			/*!
-			 */ 
+			 
 			virtual bool isSetDefault() ;
 			
 			/*!
-			 An input Parameter cannot be an exception.
-			isException implies (direction <> ParameterDirectionKind::_'in' and direction <> ParameterDirectionKind::inout) */ 
+			An input Parameter cannot be an exception.
+			isException implies (direction <> ParameterDirectionKind::_'in' and direction <> ParameterDirectionKind::inout)
+			*/
+			 
 			virtual bool not_exception(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
-			 Parameters typed by DataTypes cannot have an effect.
-			(type.oclIsKindOf(DataType)) implies (effect = null) */ 
+			Parameters typed by DataTypes cannot have an effect.
+			(type.oclIsKindOf(DataType)) implies (effect = null)
+			*/
+			 
 			virtual bool object_effect(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
-			 Reentrant behaviors cannot have stream Parameters.
-			(isStream and behavior <> null) implies not behavior.isReentrant */ 
+			Reentrant behaviors cannot have stream Parameters.
+			(isStream and behavior <> null) implies not behavior.isReentrant
+			*/
+			 
 			virtual bool reentrant_behaviors(Any diagnostics,std::map <   Any, Any >  context) ;
 			
 			/*!
-			 Sets the default value for this parameter to the specified Boolean value. */ 
+			Sets the default value for this parameter to the specified Boolean value.
+			*/
+			 
 			virtual void setBooleanDefaultValue(bool value) ;
 			
 			/*!
-			 Sets the default value for this parameter to the specified integer value. */ 
+			Sets the default value for this parameter to the specified integer value.
+			*/
+			 
 			virtual void setIntegerDefaultValue(int value) ;
 			
 			/*!
-			 Sets the default value for this parameter to the null value. */ 
+			Sets the default value for this parameter to the null value.
+			*/
+			 
 			virtual void setNullDefaultValue() ;
 			
 			/*!
-			 Sets the default value for this parameter to the specified real value. */ 
+			Sets the default value for this parameter to the specified real value.
+			*/
+			 
 			virtual void setRealDefaultValue(double value) ;
 			
 			/*!
-			 Sets the default value for this parameter to the specified string value. */ 
+			Sets the default value for this parameter to the specified string value.
+			*/
+			 
 			virtual void setStringDefaultValue(std::string value) ;
 			
 			/*!
-			 Sets the default value for this parameter to the specified unlimited natural value. */ 
+			Sets the default value for this parameter to the specified unlimited natural value.
+			*/
+			 
 			virtual void setUnlimitedNaturalDefaultValue(int value) ;
 			
 			/*!
-			 A Parameter cannot be a stream and exception at the same time.
-			not (isException and isStream) */ 
+			A Parameter cannot be a stream and exception at the same time.
+			not (isException and isStream)
+			*/
+			 
 			virtual bool stream_and_exception(Any diagnostics,std::map <   Any, Any >  context) ;
 			
-			/*!
-			 */ 
+			 
 			virtual void unsetDefault() ;
 			
 			
@@ -133,85 +155,110 @@ namespace uml
 			// Attributes Getter Setter
 			//*********************************
 			/*!
-			 A String that represents a value to be used when no argument is supplied for the Parameter.
-			<p>From package UML::Classification.</p> */ 
+			A String that represents a value to be used when no argument is supplied for the Parameter.
+			<p>From package UML::Classification.</p>
+			*/
+			 
 			virtual std::string getDefault() const ;
 			
 			/*!
-			 A String that represents a value to be used when no argument is supplied for the Parameter.
-			<p>From package UML::Classification.</p> */ 
+			A String that represents a value to be used when no argument is supplied for the Parameter.
+			<p>From package UML::Classification.</p>
+			*/
+			 
 			virtual void setDefault (std::string _default); 
-			
 			/*!
-			 Indicates whether a parameter is being sent into or out of a behavioral element.
-			<p>From package UML::Classification.</p> */ 
+			Indicates whether a parameter is being sent into or out of a behavioral element.
+			<p>From package UML::Classification.</p>
+			*/
+			 
 			virtual uml::ParameterDirectionKind getDirection() const ;
 			
 			/*!
-			 Indicates whether a parameter is being sent into or out of a behavioral element.
-			<p>From package UML::Classification.</p> */ 
+			Indicates whether a parameter is being sent into or out of a behavioral element.
+			<p>From package UML::Classification.</p>
+			*/
+			 
 			virtual void setDirection (uml::ParameterDirectionKind _direction); 
-			
 			/*!
-			 Specifies the effect that executions of the owner of the Parameter have on objects passed in or out of the parameter.
-			<p>From package UML::Classification.</p> */ 
+			Specifies the effect that executions of the owner of the Parameter have on objects passed in or out of the parameter.
+			<p>From package UML::Classification.</p>
+			*/
+			 
 			virtual uml::ParameterEffectKind getEffect() const ;
 			
 			/*!
-			 Specifies the effect that executions of the owner of the Parameter have on objects passed in or out of the parameter.
-			<p>From package UML::Classification.</p> */ 
+			Specifies the effect that executions of the owner of the Parameter have on objects passed in or out of the parameter.
+			<p>From package UML::Classification.</p>
+			*/
+			 
 			virtual void setEffect (uml::ParameterEffectKind _effect); 
-			
 			/*!
-			 Tells whether an output parameter may emit a value to the exclusion of the other outputs.
-			<p>From package UML::Classification.</p> */ 
+			Tells whether an output parameter may emit a value to the exclusion of the other outputs.
+			<p>From package UML::Classification.</p>
+			*/
+			 
 			virtual bool getIsException() const ;
 			
 			/*!
-			 Tells whether an output parameter may emit a value to the exclusion of the other outputs.
-			<p>From package UML::Classification.</p> */ 
+			Tells whether an output parameter may emit a value to the exclusion of the other outputs.
+			<p>From package UML::Classification.</p>
+			*/
+			 
 			virtual void setIsException (bool _isException); 
-			
 			/*!
-			 Tells whether an input parameter may accept values while its behavior is executing, or whether an output parameter may post values while the behavior is executing.
-			<p>From package UML::Classification.</p> */ 
+			Tells whether an input parameter may accept values while its behavior is executing, or whether an output parameter may post values while the behavior is executing.
+			<p>From package UML::Classification.</p>
+			*/
+			 
 			virtual bool getIsStream() const ;
 			
 			/*!
-			 Tells whether an input parameter may accept values while its behavior is executing, or whether an output parameter may post values while the behavior is executing.
-			<p>From package UML::Classification.</p> */ 
+			Tells whether an input parameter may accept values while its behavior is executing, or whether an output parameter may post values while the behavior is executing.
+			<p>From package UML::Classification.</p>
+			*/
+			 
 			virtual void setIsStream (bool _isStream); 
-			
 			
 			
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::weak_ptr<uml::Behavior > getBehavior() const ;
 			
+			
+			virtual void setBehavior(std::shared_ptr<uml::Behavior> _behavior) ;
+			
 			/*!
-			 */
-			virtual void setBehavior(std::shared_ptr<uml::Behavior> _behavior_behavior) ;
-			/*!
-			 Specifies a ValueSpecification that represents a value to be used when no argument is supplied for the Parameter.
-			<p>From package UML::Classification.</p> */
+			Specifies a ValueSpecification that represents a value to be used when no argument is supplied for the Parameter.
+			<p>From package UML::Classification.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::ValueSpecification > getDefaultValue() const ;
 			
 			/*!
-			 Specifies a ValueSpecification that represents a value to be used when no argument is supplied for the Parameter.
-			<p>From package UML::Classification.</p> */
-			virtual void setDefaultValue(std::shared_ptr<uml::ValueSpecification> _defaultValue_defaultValue) ;
-			/*!
-			 The Operation owning this parameter.
-			<p>From package UML::Classification.</p> */
-			virtual std::weak_ptr<uml::Operation > getOperation() const ;
+			Specifies a ValueSpecification that represents a value to be used when no argument is supplied for the Parameter.
+			<p>From package UML::Classification.</p>
+			*/
+			
+			virtual void setDefaultValue(std::shared_ptr<uml::ValueSpecification> _defaultValue) ;
 			
 			/*!
-			 The ParameterSets containing the parameter. See ParameterSet.
-			<p>From package UML::Classification.</p> */
+			The Operation owning this parameter.
+			<p>From package UML::Classification.</p>
+			*/
+			
+			virtual std::weak_ptr<uml::Operation > getOperation() const ;
+			
+			
+			/*!
+			The ParameterSets containing the parameter. See ParameterSet.
+			<p>From package UML::Classification.</p>
+			*/
+			
 			virtual std::shared_ptr<Bag<uml::ParameterSet>> getParameterSet() const ;
+			
 			
 							
 			
@@ -219,14 +266,20 @@ namespace uml
 			// Union Getter
 			//*********************************
 			/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
@@ -240,7 +293,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

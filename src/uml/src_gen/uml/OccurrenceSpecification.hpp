@@ -13,7 +13,7 @@
 
 
 // forward declarations
-template<class T> class Bag;
+template<class T> class Bag; 
 
 
 
@@ -33,7 +33,7 @@ namespace persistence
 
 namespace uml
 {
-	class UmlFactory;
+	class umlFactory;
 }
 
 //Forward Declaration for used types
@@ -98,8 +98,10 @@ namespace uml
 namespace uml 
 {
 	/*!
-	 An OccurrenceSpecification is the basic semantic unit of Interactions. The sequences of occurrences specified by them are the meanings of Interactions.
-	<p>From package UML::Interactions.</p> */
+	An OccurrenceSpecification is the basic semantic unit of Interactions. The sequences of occurrences specified by them are the meanings of Interactions.
+	<p>From package UML::Interactions.</p>
+	*/
+	
 	class OccurrenceSpecification:virtual public InteractionFragment
 	{
 		public:
@@ -122,7 +124,9 @@ namespace uml
 			
 			
 			/*!
-			 Sets the Lifeline on which the OccurrenceSpecification appears. */ 
+			Sets the Lifeline on which the OccurrenceSpecification appears.
+			*/
+			 
 			virtual void setCovered(std::shared_ptr<uml::Lifeline>  value) = 0;
 			
 			
@@ -134,14 +138,20 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 References the GeneralOrderings that specify EventOcurrences that must occur after this OccurrenceSpecification.
-			<p>From package UML::Interactions.</p> */
+			References the GeneralOrderings that specify EventOcurrences that must occur after this OccurrenceSpecification.
+			<p>From package UML::Interactions.</p>
+			*/
+			
 			virtual std::shared_ptr<Bag<uml::GeneralOrdering>> getToAfter() const = 0;
 			
+			
 			/*!
-			 References the GeneralOrderings that specify EventOcurrences that must occur before this OccurrenceSpecification.
-			<p>From package UML::Interactions.</p> */
+			References the GeneralOrderings that specify EventOcurrences that must occur before this OccurrenceSpecification.
+			<p>From package UML::Interactions.</p>
+			*/
+			
 			virtual std::shared_ptr<Bag<uml::GeneralOrdering>> getToBefore() const = 0;
+			
 			
 			
 
@@ -155,28 +165,36 @@ namespace uml
 			// Reference Members
 			//*********************************
 			/*!
-			 References the GeneralOrderings that specify EventOcurrences that must occur after this OccurrenceSpecification.
-			<p>From package UML::Interactions.</p> */
-			std::shared_ptr<Bag<uml::GeneralOrdering>> m_toAfter;
-			/*!
-			 References the GeneralOrderings that specify EventOcurrences that must occur before this OccurrenceSpecification.
-			<p>From package UML::Interactions.</p> */
-			std::shared_ptr<Bag<uml::GeneralOrdering>> m_toBefore;
+			References the GeneralOrderings that specify EventOcurrences that must occur after this OccurrenceSpecification.
+			<p>From package UML::Interactions.</p>
+			*/
 			
+			mutable std::shared_ptr<Bag<uml::GeneralOrdering>> m_toAfter;/*!
+			References the GeneralOrderings that specify EventOcurrences that must occur before this OccurrenceSpecification.
+			<p>From package UML::Interactions.</p>
+			*/
+			
+			mutable std::shared_ptr<Bag<uml::GeneralOrdering>> m_toBefore;
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

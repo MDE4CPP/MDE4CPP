@@ -11,12 +11,28 @@
 
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
+#include "StandardProfile/StandardProfileFactory.hpp"
 #include "StandardProfile/impl/StandardProfilePackageImpl.hpp"
 #include "uml/Stereotype.hpp"
+
+//Types included from attributes, operation parameters, imports and composite owner classes
 #include "uml/Class.hpp"
 
+//Packges and Factories included from types of attributes, operation parameters, imports and composite owner classes
+#include "uml/umlFactory.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
 
+//Packages of included Enumerations
 
+//Includes of PluginFramework (if required)
+
+//Includes of OpaqueBevaiors (if required)
+
+//Includes from InstanceValues (if required)
+
+//Includes from Ports typed by interfaces (if required)
+
+//Includes from roles of ConnectorEnds (if required)
 
 using namespace StandardProfile;
 
@@ -25,6 +41,12 @@ using namespace StandardProfile;
 //*********************************
 ImplementationClassImpl::ImplementationClassImpl()
 {
+	#ifdef ADD_COUNT
+		ADD_COUNT("ImplementationClassImpl()");
+	#endif
+
+	DEBUG_MESSAGE(std::cout<<"ImplementationClass is created..."<<std::endl;)
+
 	//***********************************
 	// init Get Set
 	//getter init
@@ -34,16 +56,16 @@ ImplementationClassImpl::ImplementationClassImpl()
 	
 	m_unsetterMap.insert(std::pair<std::string,std::function<void()>>("StandardProfile::ImplementationClass::base_Class",[this](){m_base_Class = std::shared_ptr<uml::Class>(nullptr);}));
 	 
-
-	// init properties without default
-	
-
-	
 }
 
 
 ImplementationClassImpl::~ImplementationClassImpl()
 {
+	#ifdef SUB_COUNT
+		SUB_COUNT("ImplementationClassImpl()");
+	#endif
+
+	DEBUG_MESSAGE(std::cout<<"ImplementationClass is destroyed..."<<std::endl;)
 }
 
 ImplementationClassImpl::ImplementationClassImpl(const ImplementationClassImpl & obj):ImplementationClassImpl()
@@ -52,6 +74,7 @@ ImplementationClassImpl::ImplementationClassImpl(const ImplementationClassImpl &
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ImplementationClass "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	instantiate();
 }
 
 std::shared_ptr<ecore::EObject>  ImplementationClassImpl::copy() const
@@ -65,6 +88,21 @@ std::shared_ptr<ecore::EObject>  ImplementationClassImpl::copy() const
 std::shared_ptr<uml::Class> ImplementationClassImpl::getMetaClass()
 {
 	return StandardProfilePackageImpl::eInstance()->get_StandardProfile_ImplementationClass();
+}
+
+void ImplementationClassImpl::instantiate()
+{   
+	
+}
+
+void ImplementationClassImpl::destroy()
+{	
+
+	//Erase properties
+	//deleting property base_Class
+	m_base_Class.reset();
+	
+	//Erase back reference to owner
 }
 
 //*********************************

@@ -36,7 +36,7 @@ namespace persistence
 
 namespace uml
 {
-	class UmlFactory;
+	class umlFactory;
 }
 
 //Forward Declaration for used types
@@ -151,8 +151,10 @@ namespace uml
 namespace uml 
 {
 	/*!
-	 A ReplyAction is an Action that accepts a set of reply values and a value containing return information produced by a previous AcceptCallAction. The ReplyAction returns the values to the caller of the previous call, completing execution of the call.
-	<p>From package UML::Actions.</p> */
+	A ReplyAction is an Action that accepts a set of reply values and a value containing return information produced by a previous AcceptCallAction. The ReplyAction returns the values to the caller of the previous call, completing execution of the call.
+	<p>From package UML::Actions.</p>
+	*/
+	
 	class ReplyAction:virtual public Action
 	{
 		public:
@@ -173,18 +175,22 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 The event of the replyToCall Trigger must be a CallEvent.
-			replyToCall.event.oclIsKindOf(CallEvent) */ 
+			The event of the replyToCall Trigger must be a CallEvent.
+			replyToCall.event.oclIsKindOf(CallEvent)
+			*/
+			 
 			virtual bool event_on_reply_to_call_trigger(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			/*!
-			 The replyValue InputPins must match the output (return, out, and inout) parameters of the operation of the event of the replyToCall Trigger in number, type, ordering, and multiplicity.
+			The replyValue InputPins must match the output (return, out, and inout) parameters of the operation of the event of the replyToCall Trigger in number, type, ordering, and multiplicity.
 			let parameter:OrderedSet(Parameter) = replyToCall.event.oclAsType(CallEvent).operation.outputParameters() in
 			replyValue->size()=parameter->size() and
 			Sequence{1..replyValue->size()}->forAll(i |
 				replyValue->at(i).type.conformsTo(parameter->at(i).type) and
 				replyValue->at(i).isOrdered=parameter->at(i).isOrdered and
-				replyValue->at(i).compatibleWith(parameter->at(i))) */ 
+				replyValue->at(i).compatibleWith(parameter->at(i)))
+			*/
+			 
 			virtual bool pins_match_parameter(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
@@ -196,28 +202,41 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 The Trigger specifying the Operation whose call is being replied to.
-			<p>From package UML::Actions.</p> */
+			The Trigger specifying the Operation whose call is being replied to.
+			<p>From package UML::Actions.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::Trigger > getReplyToCall() const = 0;
 			
 			/*!
-			 The Trigger specifying the Operation whose call is being replied to.
-			<p>From package UML::Actions.</p> */
-			virtual void setReplyToCall(std::shared_ptr<uml::Trigger> _replyToCall_replyToCall) = 0;
-			/*!
-			 A list of InputPins providing the values for the output (inout, out, and return) Parameters of the Operation. These values are returned to the caller.
-			<p>From package UML::Actions.</p> */
-			virtual std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> getReplyValue() const = 0;
+			The Trigger specifying the Operation whose call is being replied to.
+			<p>From package UML::Actions.</p>
+			*/
+			
+			virtual void setReplyToCall(std::shared_ptr<uml::Trigger> _replyToCall) = 0;
 			
 			/*!
-			 An InputPin that holds the return information value produced by an earlier AcceptCallAction.
-			<p>From package UML::Actions.</p> */
+			A list of InputPins providing the values for the output (inout, out, and return) Parameters of the Operation. These values are returned to the caller.
+			<p>From package UML::Actions.</p>
+			*/
+			
+			virtual std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> getReplyValue() const = 0;
+			
+			
+			/*!
+			An InputPin that holds the return information value produced by an earlier AcceptCallAction.
+			<p>From package UML::Actions.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::InputPin > getReturnInformation() const = 0;
 			
 			/*!
-			 An InputPin that holds the return information value produced by an earlier AcceptCallAction.
-			<p>From package UML::Actions.</p> */
-			virtual void setReturnInformation(std::shared_ptr<uml::InputPin> _returnInformation_returnInformation) = 0;
+			An InputPin that holds the return information value produced by an earlier AcceptCallAction.
+			<p>From package UML::Actions.</p>
+			*/
+			
+			virtual void setReturnInformation(std::shared_ptr<uml::InputPin> _returnInformation) = 0;
+			
 			
 
 		protected:
@@ -230,38 +249,51 @@ namespace uml
 			// Reference Members
 			//*********************************
 			/*!
-			 The Trigger specifying the Operation whose call is being replied to.
-			<p>From package UML::Actions.</p> */
-			std::shared_ptr<uml::Trigger > m_replyToCall;
-			/*!
-			 A list of InputPins providing the values for the output (inout, out, and return) Parameters of the Operation. These values are returned to the caller.
-			<p>From package UML::Actions.</p> */
-			std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> m_replyValue;
-			/*!
-			 An InputPin that holds the return information value produced by an earlier AcceptCallAction.
-			<p>From package UML::Actions.</p> */
-			std::shared_ptr<uml::InputPin > m_returnInformation;
+			The Trigger specifying the Operation whose call is being replied to.
+			<p>From package UML::Actions.</p>
+			*/
 			
+			std::shared_ptr<uml::Trigger > m_replyToCall;/*!
+			A list of InputPins providing the values for the output (inout, out, and return) Parameters of the Operation. These values are returned to the caller.
+			<p>From package UML::Actions.</p>
+			*/
+			
+			mutable std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> m_replyValue;/*!
+			An InputPin that holds the return information value produced by an earlier AcceptCallAction.
+			<p>From package UML::Actions.</p>
+			*/
+			
+			std::shared_ptr<uml::InputPin > m_returnInformation;
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
+			ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::ActivityGroup>> getInGroup() const = 0;/*!
-			 The ordered set of InputPins representing the inputs to the Action.
-			<p>From package UML::Actions.</p> */
+			The ordered set of InputPins representing the inputs to the Action.
+			<p>From package UML::Actions.</p>
+			*/
+			
 			virtual std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> getInput() const = 0;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
+			The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

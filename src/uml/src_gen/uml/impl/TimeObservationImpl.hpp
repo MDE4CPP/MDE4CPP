@@ -18,7 +18,7 @@
 //*********************************
 namespace uml 
 {
-	class TimeObservationImpl :virtual public ObservationImpl, virtual public TimeObservation 
+	class TimeObservationImpl : virtual public ObservationImpl, virtual public TimeObservation 
 	{
 		public: 
 			TimeObservationImpl(const TimeObservationImpl & obj);
@@ -28,7 +28,7 @@ namespace uml
 			TimeObservationImpl& operator=(TimeObservationImpl const&) = delete;
 
 		protected:
-			friend class UmlFactoryImpl;
+			friend class umlFactoryImpl;
 			TimeObservationImpl();
 			virtual std::shared_ptr<TimeObservation> getThisTimeObservationPtr() const;
 			virtual void setThisTimeObservationPtr(std::weak_ptr<TimeObservation> thisTimeObservationPtr);
@@ -64,43 +64,57 @@ namespace uml
 			// Attributes Getter Setter
 			//*********************************
 			/*!
-			 The value of firstEvent is related to the event. If firstEvent is true, then the corresponding observation event is the first time instant the execution enters the event Element. If firstEvent is false, then the corresponding observation event is the time instant the execution exits the event Element.
-			<p>From package UML::Values.</p> */ 
+			The value of firstEvent is related to the event. If firstEvent is true, then the corresponding observation event is the first time instant the execution enters the event Element. If firstEvent is false, then the corresponding observation event is the time instant the execution exits the event Element.
+			<p>From package UML::Values.</p>
+			*/
+			 
 			virtual bool getFirstEvent() const ;
 			
 			/*!
-			 The value of firstEvent is related to the event. If firstEvent is true, then the corresponding observation event is the first time instant the execution enters the event Element. If firstEvent is false, then the corresponding observation event is the time instant the execution exits the event Element.
-			<p>From package UML::Values.</p> */ 
+			The value of firstEvent is related to the event. If firstEvent is true, then the corresponding observation event is the first time instant the execution enters the event Element. If firstEvent is false, then the corresponding observation event is the time instant the execution exits the event Element.
+			<p>From package UML::Values.</p>
+			*/
+			 
 			virtual void setFirstEvent (bool _firstEvent); 
-			
 			
 			
 			//*********************************
 			// Reference
 			//*********************************
 			/*!
-			 The TimeObservation is determined by the entering or exiting of the event Element during execution.
-			<p>From package UML::Values.</p> */
+			The TimeObservation is determined by the entering or exiting of the event Element during execution.
+			<p>From package UML::Values.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::NamedElement > getEvent() const ;
 			
 			/*!
-			 The TimeObservation is determined by the entering or exiting of the event Element during execution.
-			<p>From package UML::Values.</p> */
-			virtual void setEvent(std::shared_ptr<uml::NamedElement> _event_event) ;
+			The TimeObservation is determined by the entering or exiting of the event Element during execution.
+			<p>From package UML::Values.</p>
+			*/
+			
+			virtual void setEvent(std::shared_ptr<uml::NamedElement> _event) ;
+			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 Specifies the Namespace that owns the NamedElement.
-			<p>From package UML::CommonStructure.</p> */
+			Specifies the Namespace that owns the NamedElement.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const ;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const ; 
 			 
 			//*********************************
@@ -114,7 +128,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

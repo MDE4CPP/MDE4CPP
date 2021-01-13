@@ -13,13 +13,13 @@
 //Model includes
 #include "../StructuredActivityNodeActivation.hpp"
 
-#include "fUML/impl/FUMLFactoryImpl.hpp"
+#include "fUML/Semantics/Actions/impl/ActionsFactoryImpl.hpp"
 #include "fUML/Semantics/Actions/impl/ActionActivationImpl.hpp"
 
 //*********************************
 namespace fUML::Semantics::Actions 
 {
-	class StructuredActivityNodeActivationImpl :virtual public ActionActivationImpl, virtual public StructuredActivityNodeActivation 
+	class StructuredActivityNodeActivationImpl : virtual public ActionActivationImpl, virtual public StructuredActivityNodeActivation 
 	{
 		public: 
 			StructuredActivityNodeActivationImpl(const StructuredActivityNodeActivationImpl & obj);
@@ -29,7 +29,7 @@ namespace fUML::Semantics::Actions
 			StructuredActivityNodeActivationImpl& operator=(StructuredActivityNodeActivationImpl const&) = delete;
 
 		protected:
-			friend class fUML::FUMLFactoryImpl;
+			friend class fUML::Semantics::Actions::ActionsFactoryImpl;
 			StructuredActivityNodeActivationImpl();
 			virtual std::shared_ptr<StructuredActivityNodeActivation> getThisStructuredActivityNodeActivationPtr() const;
 			virtual void setThisStructuredActivityNodeActivationPtr(std::weak_ptr<StructuredActivityNodeActivation> thisStructuredActivityNodeActivationPtr);
@@ -47,60 +47,46 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > completeAction() ;
 			
-			/*!
-			 */ 
+			 
 			virtual void createEdgeInstances() ;
 			
-			/*!
-			 */ 
+			 
 			virtual void createNodeActivations() ;
 			
-			/*!
-			 */ 
+			 
 			virtual void doAction() ;
 			
-			/*!
-			 */ 
+			 
 			virtual void doStructuredActivity() ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> getNodeActivation(std::shared_ptr<uml::ActivityNode>  node) ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value> > getPinValues(std::shared_ptr<uml::OutputPin>  pin) ;
 			
-			/*!
-			 */ 
+			 
 			virtual bool isSourceFor(std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance>  edgeInstance) ;
 			
-			/*!
-			 */ 
+			 
 			virtual bool isSuspended() ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<Bag<uml::ActivityNode> > makeActivityNodeList(std::shared_ptr<Bag<uml::ExecutableNode> >  nodes) ;
 			
-			/*!
-			 */ 
+			 
 			virtual void putPinValues(std::shared_ptr<uml::OutputPin>  pin,std::shared_ptr<Bag<fUML::Semantics::Values::Value> >  values) ;
 			
-			/*!
-			 */ 
+			 
 			virtual void resume() ;
 			
-			/*!
-			 */ 
+			 
 			virtual void terminate() ;
 			
-			/*!
-			 */ 
+			 
 			virtual void terminateAll() ;
 			
 			
@@ -113,20 +99,18 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > getActivationGroup() const ;
 			
-			/*!
-			 */
-			virtual void setActivationGroup(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> _activationGroup_activationGroup) ;
+			
+			virtual void setActivationGroup(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> _activationGroup) ;
+			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> getPinActivation() const ; 
 			 
 			//*********************************
@@ -140,7 +124,7 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

@@ -26,8 +26,11 @@
  * generate creation of meta model instance for an Dependency element
 */]
 [template public generateDependencyCreation(aDependency : Dependency)]
+[if(aDependency.oclIsTypeOf(Usage))]
+[aDependency.memberName()/] = factory->createUsage_in_Namespace([aDependency.namespace.memberName()/]);
+[else]
 [aDependency.memberName()/] = factory->createDependency_in_Namespace([aDependency.namespace.memberName()/]);
-
+[/if]
 [/template]
 
 [**

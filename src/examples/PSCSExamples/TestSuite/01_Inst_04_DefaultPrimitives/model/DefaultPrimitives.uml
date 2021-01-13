@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_PmmP8LAqEeert7O7oCVCsA" name="DefaultPrimitives">
+  <eAnnotations xmi:id="_otFUEFgQEeqZPe2oHCHy2Q" source="prepareApplication">
+    <details xmi:id="_qWW_AFgQEeqZPe2oHCHy2Q" key="sourceCodeMain" value="std::cout&lt;&lt;&quot;-- Test model : Default Values&quot;&lt;&lt;std::endl;&#xA;std::cout&lt;&lt;&quot;-- Running test case - Instantiation of Default values - basic types --&quot;&lt;&lt;std::endl;&#xA;std::cout&lt;&lt;std::endl;&#xA;&#xA;std::shared_ptr&lt;DefaultPrimitives::A> a = factory->createA();&#xA;bool successful = true;&#xA;&#xA;successful = (a->getPInteger() == 4);&#xA;std::cout&lt;&lt;&quot;Default value of a.pInteger is 4 : &quot;&lt;&lt;std::boolalpha&lt;&lt;successful&lt;&lt;std::endl;&#xA;&#xA;successful = (a->getPString() == &quot;Hello&quot;);&#xA;std::cout&lt;&lt;&quot;Default value of a.pString is 'Hello' : &quot;&lt;&lt;std::boolalpha&lt;&lt;successful&lt;&lt;std::endl;&#xA;&#xA;successful = (a->isPBoolean());&#xA;std::cout&lt;&lt;&quot;Default value of a.pBoolean is true : &quot;&lt;&lt;std::boolalpha&lt;&lt;successful&lt;&lt;std::endl;&#xA;&#xA;successful = (a->getPUnlimitedNatural() == -1);&#xA;std::cout&lt;&lt;&quot;Default value of a.pUnlimitedNatural is * : &quot;&lt;&lt;std::boolalpha&lt;&lt;successful&lt;&lt;std::endl;&#xA;&#xA;successful = (a->getPEnum() == DefaultPrimitives::E::E2);&#xA;std::cout&lt;&lt;&quot;Default value of a.pEnum is E::e2 : &quot;&lt;&lt;std::boolalpha&lt;&lt;successful&lt;&lt;std::endl;&#xA;&#xA;std::cout&lt;&lt;&quot;Test case successful : &quot;&lt;&lt;std::boolalpha&lt;&lt;successful&lt;&lt;std::endl;&#xA;std::cout&lt;&lt;std::endl;&#xA;std::cout&lt;&lt;&quot;-- End of test case --&quot;&lt;&lt;std::endl;"/>
+  </eAnnotations>
+  <ownedComment xmi:id="_ll_zgKDvEeq8Z9IqI9dZbA">
+    <body>This test case addresses instantiation of default values for properties typed by primitive types and enumerations.</body>
+  </ownedComment>
+  <packageImport xmi:id="_rgWIkLArEeert7O7oCVCsA">
+    <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+  </packageImport>
+  <packagedElement xmi:type="uml:Class" xmi:id="_SW-VkFlAEeqCEpOYlPRuRQ" name="A">
+    <ownedAttribute xmi:id="_cGE4IFlAEeqCEpOYlPRuRQ" name="pInteger">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_vP0wMFlAEeqCEpOYlPRuRQ" name="pIntegerDefault" value="4">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </defaultValue>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_hUnZkFlAEeqCEpOYlPRuRQ" name="pString">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_09OX4FlAEeqCEpOYlPRuRQ" name="pStringDefault" value="Hello">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </defaultValue>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_jG-IAFlAEeqCEpOYlPRuRQ" name="pBoolean">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+      <defaultValue xmi:type="uml:LiteralBoolean" xmi:id="_4GP-UFlAEeqCEpOYlPRuRQ" name="pBooleanDefault" value="true">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+      </defaultValue>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_kpKTgFlAEeqCEpOYlPRuRQ" name="pUnlimitedNatural">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#UnlimitedNatural"/>
+      <defaultValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_7ytB8FlAEeqCEpOYlPRuRQ" name="pUnlimitedNaturalDefault" value="*">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#UnlimitedNatural"/>
+      </defaultValue>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_nMxfwFlAEeqCEpOYlPRuRQ" name="pReal">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Real"/>
+      <defaultValue xmi:type="uml:LiteralReal" xmi:id="_BJpRcFlBEeqCEpOYlPRuRQ" name="pRealDefault" value="4.0">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Real"/>
+      </defaultValue>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_pJaLkFlAEeqCEpOYlPRuRQ" name="pEnum" type="_U-TkMFlAEeqCEpOYlPRuRQ">
+      <defaultValue xmi:type="uml:InstanceValue" xmi:id="_RQFGoAyEEeuSELmyjf9iew" name="pEnumDefault" type="_U-TkMFlAEeqCEpOYlPRuRQ" instance="_aDZ1wFlAEeqCEpOYlPRuRQ"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Enumeration" xmi:id="_U-TkMFlAEeqCEpOYlPRuRQ" name="E">
+    <ownedLiteral xmi:id="_YDmhMFlAEeqCEpOYlPRuRQ" name="e1"/>
+    <ownedLiteral xmi:id="_aDZ1wFlAEeqCEpOYlPRuRQ" name="e2"/>
+  </packagedElement>
+</uml:Model>

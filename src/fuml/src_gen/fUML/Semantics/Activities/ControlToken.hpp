@@ -32,7 +32,7 @@ namespace persistence
 
 namespace fUML
 {
-	class FUMLFactory;
+	class fUMLFactory;
 }
 
 //Forward Declaration for used types
@@ -46,11 +46,6 @@ namespace fUML::Semantics::Activities
 	class Token;
 }
 
-namespace fUML::Semantics::Values 
-{
-	class Value;
-}
-
 // base class includes
 #include "fUML/Semantics/Activities/Token.hpp"
 
@@ -60,8 +55,7 @@ namespace fUML::Semantics::Values
 //*********************************
 namespace fUML::Semantics::Activities 
 {
-	/*!
-	 */
+	
 	class ControlToken:virtual public Token
 	{
 		public:
@@ -81,16 +75,13 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
+			virtual std::shared_ptr<fUML::Semantics::Activities::Token> _copy() = 0;
+			
+			 
 			virtual bool equals(std::shared_ptr<fUML::Semantics::Activities::Token>  other) = 0;
 			
-			/*!
-			 */ 
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> getValue() const = 0;
-			
-			/*!
-			 */ 
+			 
 			virtual bool isControl() = 0;
 			
 			

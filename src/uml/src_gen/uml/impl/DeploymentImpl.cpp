@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -25,23 +24,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -67,10 +55,11 @@
 
 #include "uml/TemplateParameter.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -80,51 +69,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 DeploymentImpl::DeploymentImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		/*Subset*/
-		m_configuration.reset(new Subset<uml::DeploymentSpecification, uml::Element >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_configuration - Subset<uml::DeploymentSpecification, uml::Element >()" << std::endl;
-		#endif
-	
-	
-
-		/*Subset*/
-		m_deployedArtifact.reset(new Subset<uml::DeployedArtifact, uml::NamedElement /*Subset does not reference a union*/ >());
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising shared pointer Subset: " << "m_deployedArtifact - Subset<uml::DeployedArtifact, uml::NamedElement /*Subset does not reference a union*/ >()" << std::endl;
-		#endif
-	
-	
-
-	
-
-	//Init references
-		/*Subset*/
-		m_configuration->initSubset(m_ownedElement);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_configuration - Subset<uml::DeploymentSpecification, uml::Element >(m_ownedElement)" << std::endl;
-		#endif
-	
-	
-
-		/*Subset*/
-		m_deployedArtifact->initSubset(m_supplier);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_deployedArtifact - Subset<uml::DeployedArtifact, uml::NamedElement /*Subset does not reference a union*/ >(m_supplier)" << std::endl;
-		#endif
-	
-	
-
-	
+{	
 }
 
 DeploymentImpl::~DeploymentImpl()
@@ -134,65 +79,44 @@ DeploymentImpl::~DeploymentImpl()
 #endif
 }
 
+//Additional constructor for the containments back reference
+DeploymentImpl::DeploymentImpl(std::weak_ptr<uml::DeploymentTarget > par_location)
+:DeploymentImpl()
+{
+	m_location = par_location;
+	m_owner = par_location;
+}
 
 //Additional constructor for the containments back reference
-			DeploymentImpl::DeploymentImpl(std::weak_ptr<uml::DeploymentTarget > par_location)
-			:DeploymentImpl()
-			{
-			    m_location = par_location;
-				m_owner = par_location;
-			}
-
-
-
-
+DeploymentImpl::DeploymentImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:DeploymentImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			DeploymentImpl::DeploymentImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:DeploymentImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
-
-
-
+DeploymentImpl::DeploymentImpl(std::weak_ptr<uml::Element > par_owner)
+:DeploymentImpl()
+{
+	m_owner = par_owner;
+}
 
 //Additional constructor for the containments back reference
-			DeploymentImpl::DeploymentImpl(std::weak_ptr<uml::Element > par_owner)
-			:DeploymentImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-
-
+DeploymentImpl::DeploymentImpl(std::weak_ptr<uml::Package > par_owningPackage)
+:DeploymentImpl()
+{
+	m_owningPackage = par_owningPackage;
+	m_namespace = par_owningPackage;
+}
 
 //Additional constructor for the containments back reference
-			DeploymentImpl::DeploymentImpl(std::weak_ptr<uml::Package > par_owningPackage)
-			:DeploymentImpl()
-			{
-			    m_owningPackage = par_owningPackage;
-				m_namespace = par_owningPackage;
-			}
-
-
-
-
-
-//Additional constructor for the containments back reference
-			DeploymentImpl::DeploymentImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
-			:DeploymentImpl()
-			{
-			    m_owningTemplateParameter = par_owningTemplateParameter;
-				m_owner = par_owningTemplateParameter;
-			}
-
-
-
-
+DeploymentImpl::DeploymentImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+:DeploymentImpl()
+{
+	m_owningTemplateParameter = par_owningTemplateParameter;
+	m_owner = par_owningTemplateParameter;
+}
 
 
 DeploymentImpl::DeploymentImpl(const DeploymentImpl & obj):DeploymentImpl()
@@ -276,12 +200,11 @@ DeploymentImpl::DeploymentImpl(const DeploymentImpl & obj):DeploymentImpl()
 		std::cout << "Copying the Subset: " << "m_supplier" << std::endl;
 	#endif
 
-		/*Subset*/
-		m_configuration->initSubset(m_ownedElement);
-		#ifdef SHOW_SUBSET_UNION
-			std::cout << "Initialising value Subset: " << "m_configuration - Subset<uml::DeploymentSpecification, uml::Element >(m_ownedElement)" << std::endl;
-		#endif
-	
+	/*Subset*/
+	m_configuration->initSubset(getOwnedElement());
+	#ifdef SHOW_SUBSET_UNION
+		std::cout << "Initialising value Subset: " << "m_configuration - Subset<uml::DeploymentSpecification, uml::Element >(getOwnedElement())" << std::endl;
+	#endif
 	
 }
 
@@ -294,7 +217,7 @@ std::shared_ptr<ecore::EObject>  DeploymentImpl::copy() const
 
 std::shared_ptr<ecore::EClass> DeploymentImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getDeployment_Class();
+	return uml::umlPackage::eInstance()->getDeployment_Class();
 }
 
 //*********************************
@@ -308,29 +231,77 @@ std::shared_ptr<ecore::EClass> DeploymentImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference configuration
+*/
 std::shared_ptr<Subset<uml::DeploymentSpecification, uml::Element>> DeploymentImpl::getConfiguration() const
 {
+	if(m_configuration == nullptr)
+	{
+		/*Subset*/
+		m_configuration.reset(new Subset<uml::DeploymentSpecification, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_configuration - Subset<uml::DeploymentSpecification, uml::Element >()" << std::endl;
+		#endif
+		
+		/*Subset*/
+		m_configuration->initSubset(getOwnedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_configuration - Subset<uml::DeploymentSpecification, uml::Element >(getOwnedElement())" << std::endl;
+		#endif
+		
+	}
 
     return m_configuration;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference deployedArtifact
+*/
 std::shared_ptr<Subset<uml::DeployedArtifact, uml::NamedElement /*Subset does not reference a union*/>> DeploymentImpl::getDeployedArtifact() const
 {
+	if(m_deployedArtifact == nullptr)
+	{
+		/*Subset*/
+		m_deployedArtifact.reset(new Subset<uml::DeployedArtifact, uml::NamedElement /*Subset does not reference a union*/ >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer Subset: " << "m_deployedArtifact - Subset<uml::DeployedArtifact, uml::NamedElement /*Subset does not reference a union*/ >()" << std::endl;
+		#endif
+		
+		/*Subset*/
+		m_deployedArtifact->initSubset(getSupplier());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value Subset: " << "m_deployedArtifact - Subset<uml::DeployedArtifact, uml::NamedElement /*Subset does not reference a union*/ >(getSupplier())" << std::endl;
+		#endif
+		
+	}
 
     return m_deployedArtifact;
 }
 
 
+
+
+
+/*
+Getter & Setter for reference location
+*/
 std::weak_ptr<uml::DeploymentTarget > DeploymentImpl::getLocation() const
 {
 //assert(m_location);
     return m_location;
 }
+
 void DeploymentImpl::setLocation(std::shared_ptr<uml::DeploymentTarget> _location)
 {
     m_location = _location;
 }
+
+
 
 //*********************************
 // Union Getter
@@ -339,26 +310,83 @@ std::weak_ptr<uml::Namespace > DeploymentImpl::getNamespace() const
 {
 	return m_namespace;
 }
+
 std::shared_ptr<Union<uml::Element>> DeploymentImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::weak_ptr<uml::Element > DeploymentImpl::getOwner() const
 {
 	return m_owner;
 }
+
 std::shared_ptr<Union<uml::Element>> DeploymentImpl::getRelatedElement() const
 {
+	if(m_relatedElement == nullptr)
+	{
+		/*Union*/
+		m_relatedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_relatedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_relatedElement;
 }
+
 std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> DeploymentImpl::getSource() const
 {
+	if(m_source == nullptr)
+	{
+		/*SubsetUnion*/
+		m_source.reset(new SubsetUnion<uml::Element, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_source - SubsetUnion<uml::Element, uml::Element >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_source->initSubsetUnion(getRelatedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_source - SubsetUnion<uml::Element, uml::Element >(getRelatedElement())" << std::endl;
+		#endif
+		
+	}
 	return m_source;
 }
+
 std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> DeploymentImpl::getTarget() const
 {
+	if(m_target == nullptr)
+	{
+		/*SubsetUnion*/
+		m_target.reset(new SubsetUnion<uml::Element, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_target - SubsetUnion<uml::Element, uml::Element >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_target->initSubsetUnion(getRelatedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_target - SubsetUnion<uml::Element, uml::Element >(getRelatedElement())" << std::endl;
+		#endif
+		
+	}
 	return m_target;
 }
+
+
 
 
 std::shared_ptr<Deployment> DeploymentImpl::getThisDeploymentPtr() const
@@ -406,7 +434,7 @@ Any DeploymentImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::DEPLOYMENT_ATTRIBUTE_CONFIGURATION:
+		case uml::umlPackage::DEPLOYMENT_ATTRIBUTE_CONFIGURATION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::DeploymentSpecification>::iterator iter = m_configuration->begin();
@@ -416,9 +444,9 @@ Any DeploymentImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //7017
+			return eAny(tempList); //6917
 		}
-		case UmlPackage::DEPLOYMENT_ATTRIBUTE_DEPLOYEDARTIFACT:
+		case uml::umlPackage::DEPLOYMENT_ATTRIBUTE_DEPLOYEDARTIFACT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::DeployedArtifact>::iterator iter = m_deployedArtifact->begin();
@@ -428,10 +456,10 @@ Any DeploymentImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //7018
+			return eAny(tempList); //6918
 		}
-		case UmlPackage::DEPLOYMENT_ATTRIBUTE_LOCATION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getLocation().lock())); //7019
+		case uml::umlPackage::DEPLOYMENT_ATTRIBUTE_LOCATION:
+			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getLocation().lock())); //6919
 	}
 	return DependencyImpl::eGet(featureID, resolve, coreType);
 }
@@ -439,12 +467,12 @@ bool DeploymentImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::DEPLOYMENT_ATTRIBUTE_CONFIGURATION:
-			return getConfiguration() != nullptr; //7017
-		case UmlPackage::DEPLOYMENT_ATTRIBUTE_DEPLOYEDARTIFACT:
-			return getDeployedArtifact() != nullptr; //7018
-		case UmlPackage::DEPLOYMENT_ATTRIBUTE_LOCATION:
-			return getLocation().lock() != nullptr; //7019
+		case uml::umlPackage::DEPLOYMENT_ATTRIBUTE_CONFIGURATION:
+			return getConfiguration() != nullptr; //6917
+		case uml::umlPackage::DEPLOYMENT_ATTRIBUTE_DEPLOYEDARTIFACT:
+			return getDeployedArtifact() != nullptr; //6918
+		case uml::umlPackage::DEPLOYMENT_ATTRIBUTE_LOCATION:
+			return getLocation().lock() != nullptr; //6919
 	}
 	return DependencyImpl::internalEIsSet(featureID);
 }
@@ -452,7 +480,7 @@ bool DeploymentImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::DEPLOYMENT_ATTRIBUTE_CONFIGURATION:
+		case uml::umlPackage::DEPLOYMENT_ATTRIBUTE_CONFIGURATION:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -488,7 +516,7 @@ bool DeploymentImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case UmlPackage::DEPLOYMENT_ATTRIBUTE_DEPLOYEDARTIFACT:
+		case uml::umlPackage::DEPLOYMENT_ATTRIBUTE_DEPLOYEDARTIFACT:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -524,12 +552,12 @@ bool DeploymentImpl::eSet(int featureID, Any newValue)
 			}
 			return true;
 		}
-		case UmlPackage::DEPLOYMENT_ATTRIBUTE_LOCATION:
+		case uml::umlPackage::DEPLOYMENT_ATTRIBUTE_LOCATION:
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<uml::DeploymentTarget> _location = std::dynamic_pointer_cast<uml::DeploymentTarget>(_temp);
-			setLocation(_location); //7019
+			setLocation(_location); //6919
 			return true;
 		}
 	}
@@ -548,12 +576,11 @@ void DeploymentImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler>
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -582,8 +609,9 @@ void DeploymentImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLo
 	DependencyImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void DeploymentImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void DeploymentImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -594,7 +622,7 @@ void DeploymentImpl::loadNode(std::string nodeName, std::shared_ptr<persistence:
 			{
 				typeName = "DeploymentSpecification";
 			}
-			std::shared_ptr<ecore::EObject> configuration = modelFactory->create(typeName, loadHandler->getCurrentObject(), UmlPackage::DEPLOYMENTSPECIFICATION_ATTRIBUTE_DEPLOYMENT);
+			std::shared_ptr<ecore::EObject> configuration = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::DEPLOYMENTSPECIFICATION_ATTRIBUTE_DEPLOYMENT);
 			if (configuration != nullptr)
 			{
 				loadHandler->handleChild(configuration);
@@ -610,15 +638,15 @@ void DeploymentImpl::loadNode(std::string nodeName, std::shared_ptr<persistence:
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
-
-	DependencyImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	DependencyImpl::loadNode(nodeName, loadHandler);
 }
 
 void DeploymentImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
-		case UmlPackage::DEPLOYMENT_ATTRIBUTE_DEPLOYEDARTIFACT:
+		case uml::umlPackage::DEPLOYMENT_ATTRIBUTE_DEPLOYEDARTIFACT:
 		{
 			std::shared_ptr<Bag<uml::DeployedArtifact>> _deployedArtifact = getDeployedArtifact();
 			for(std::shared_ptr<ecore::EObject> ref : references)
@@ -632,7 +660,7 @@ void DeploymentImpl::resolveReferences(const int featureID, std::list<std::share
 			return;
 		}
 
-		case UmlPackage::DEPLOYMENT_ATTRIBUTE_LOCATION:
+		case uml::umlPackage::DEPLOYMENT_ATTRIBUTE_LOCATION:
 		{
 			if (references.size() == 1)
 			{
@@ -676,7 +704,7 @@ void DeploymentImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 		// Save 'configuration'
 		for (std::shared_ptr<uml::DeploymentSpecification> configuration : *this->getConfiguration()) 

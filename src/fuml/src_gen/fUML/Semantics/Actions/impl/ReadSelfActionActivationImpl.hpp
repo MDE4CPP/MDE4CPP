@@ -13,13 +13,13 @@
 //Model includes
 #include "../ReadSelfActionActivation.hpp"
 
-#include "fUML/impl/FUMLFactoryImpl.hpp"
+#include "fUML/Semantics/Actions/impl/ActionsFactoryImpl.hpp"
 #include "fUML/Semantics/Actions/impl/ActionActivationImpl.hpp"
 
 //*********************************
 namespace fUML::Semantics::Actions 
 {
-	class ReadSelfActionActivationImpl :virtual public ActionActivationImpl, virtual public ReadSelfActionActivation 
+	class ReadSelfActionActivationImpl : virtual public ActionActivationImpl, virtual public ReadSelfActionActivation 
 	{
 		public: 
 			ReadSelfActionActivationImpl(const ReadSelfActionActivationImpl & obj);
@@ -29,7 +29,7 @@ namespace fUML::Semantics::Actions
 			ReadSelfActionActivationImpl& operator=(ReadSelfActionActivationImpl const&) = delete;
 
 		protected:
-			friend class fUML::FUMLFactoryImpl;
+			friend class fUML::Semantics::Actions::ActionsFactoryImpl;
 			ReadSelfActionActivationImpl();
 			virtual std::shared_ptr<ReadSelfActionActivation> getThisReadSelfActionActivationPtr() const;
 			virtual void setThisReadSelfActionActivationPtr(std::weak_ptr<ReadSelfActionActivation> thisReadSelfActionActivationPtr);
@@ -47,8 +47,7 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual void doAction() ;
 			
 			
@@ -61,13 +60,26 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Reference
 			//*********************************
+			
+			virtual std::shared_ptr<uml::ReadSelfAction > getReadSelfAction() const ;
+			
+			
+			virtual void setReadSelfAction(std::shared_ptr<uml::ReadSelfAction> _readSelfAction) ;
+			
+			/*Additional Setter for 'ActionActivation::action' redefined by reference 'readSelfAction'*/
+			
+			virtual void setAction(std::shared_ptr<uml::Action> _action) ;
+			
+			/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'readSelfAction'*/
+			
+			virtual void setNode(std::shared_ptr<uml::ActivityNode> _node) ;
+			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> getPinActivation() const ; 
 			 
 			//*********************************
@@ -81,7 +93,7 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

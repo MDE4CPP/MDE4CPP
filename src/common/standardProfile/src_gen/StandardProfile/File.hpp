@@ -39,7 +39,8 @@ namespace StandardProfile
 			// Getter Setter
 			//*********************************
 			virtual std::weak_ptr<uml::Artifact> getBase_Artifact() const  = 0;
-			virtual void setBase_Artifact (std::weak_ptr<uml::Artifact> _base_Artifact) = 0;
+			virtual void setBase_Artifact(std::weak_ptr<uml::Artifact> _base_Artifact) = 0;
+			
 			
 			
 			//*********************************
@@ -52,6 +53,7 @@ namespace StandardProfile
 			// Members
 			//*********************************
 			std::weak_ptr<uml::Artifact> m_base_Artifact;
+			
 			
 	};
 }

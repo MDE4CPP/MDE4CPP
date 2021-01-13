@@ -13,13 +13,13 @@
 //Model includes
 #include "../ExtensionalValueList.hpp"
 
-#include "fUML/impl/FUMLFactoryImpl.hpp"
+#include "fUML/Semantics/StructuredClassifiers/impl/StructuredClassifiersFactoryImpl.hpp"
 #include "fUML/Semantics/StructuredClassifiers/impl/ExtensionalValueImpl.hpp"
 
 //*********************************
 namespace fUML::Semantics::StructuredClassifiers 
 {
-	class ExtensionalValueListImpl :virtual public ExtensionalValueImpl, virtual public ExtensionalValueList 
+	class ExtensionalValueListImpl : virtual public ExtensionalValueImpl, virtual public ExtensionalValueList 
 	{
 		public: 
 			ExtensionalValueListImpl(const ExtensionalValueListImpl & obj);
@@ -29,7 +29,7 @@ namespace fUML::Semantics::StructuredClassifiers
 			ExtensionalValueListImpl& operator=(ExtensionalValueListImpl const&) = delete;
 
 		protected:
-			friend class fUML::FUMLFactoryImpl;
+			friend class fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactoryImpl;
 			ExtensionalValueListImpl();
 			virtual std::shared_ptr<ExtensionalValueList> getThisExtensionalValueListPtr() const;
 			virtual void setThisExtensionalValueListPtr(std::weak_ptr<ExtensionalValueList> thisExtensionalValueListPtr);
@@ -43,24 +43,19 @@ namespace fUML::Semantics::StructuredClassifiers
 			//*********************************
 			// Operations
 			//*********************************
-			/*!
-			 */ 
+			 
 			virtual bool addValue(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue>  value) ;
 			
-			/*!
-			 */ 
+			 
 			virtual void addValue(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue>  value,int i) ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> getValue() ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::string removeValue(int i) ;
 			
-			/*!
-			 */ 
+			 
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> setValue(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue>  value,int i) ;
 			
 			
@@ -91,7 +86,7 @@ namespace fUML::Semantics::StructuredClassifiers
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<fUML::FUMLFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

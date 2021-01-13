@@ -17,7 +17,6 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -25,25 +24,12 @@
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
-#include "uml/impl/UmlPackageImpl.hpp"
+
+//Includes from codegen annotation
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 
 #include <exception> // used in Persistence
 
@@ -95,10 +81,11 @@
 
 #include "uml/Variable.hpp"
 
-#include "ecore/EcorePackage.hpp"
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlPackage.hpp"
-#include "uml/UmlFactory.hpp"
+//Factories an Package includes
+#include "uml/impl/umlFactoryImpl.hpp"
+#include "uml/impl/umlPackageImpl.hpp"
+
+
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
 
@@ -108,22 +95,7 @@ using namespace uml;
 // Constructor / Destructor
 //*********************************
 SequenceNodeImpl::SequenceNodeImpl()
-{
-	//*********************************
-	// Attribute Members
-	//*********************************
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	//References
-		m_executableNode.reset(new Bag<uml::ExecutableNode>());
-	
-	
-
-	//Init references
-	
-	
+{	
 }
 
 SequenceNodeImpl::~SequenceNodeImpl()
@@ -133,18 +105,17 @@ SequenceNodeImpl::~SequenceNodeImpl()
 #endif
 }
 
-
 //Additional constructor for the containments back reference
 SequenceNodeImpl::SequenceNodeImpl(std::weak_ptr<uml::Activity > par_Activity, const int reference_id)
 :SequenceNodeImpl()
 {
 	switch(reference_id)
 	{	
-	case UmlPackage::ACTIVITYNODE_ATTRIBUTE_ACTIVITY:
+	case umlPackage::ACTIVITYNODE_ATTRIBUTE_ACTIVITY:
 		m_activity = par_Activity;
 		m_owner = par_Activity;
 		 return;
-	case UmlPackage::ACTIVITYGROUP_ATTRIBUTE_INACTIVITY:
+	case umlPackage::ACTIVITYGROUP_ATTRIBUTE_INACTIVITY:
 		m_inActivity = par_Activity;
 		m_owner = par_Activity;
 		 return;
@@ -155,61 +126,36 @@ SequenceNodeImpl::SequenceNodeImpl(std::weak_ptr<uml::Activity > par_Activity, c
 }
 
 
-
-
+//Additional constructor for the containments back reference
+SequenceNodeImpl::SequenceNodeImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
+:SequenceNodeImpl()
+{
+	m_inStructuredNode = par_inStructuredNode;
+	m_owner = par_inStructuredNode;
+}
 
 //Additional constructor for the containments back reference
-
-
-
-
-
-//Additional constructor for the containments back reference
-			SequenceNodeImpl::SequenceNodeImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
-			:SequenceNodeImpl()
-			{
-			    m_inStructuredNode = par_inStructuredNode;
-				m_owner = par_inStructuredNode;
-			}
-
-
-
-
+SequenceNodeImpl::SequenceNodeImpl(std::weak_ptr<uml::Namespace > par_namespace)
+:SequenceNodeImpl()
+{
+	m_namespace = par_namespace;
+	m_owner = par_namespace;
+}
 
 //Additional constructor for the containments back reference
-			SequenceNodeImpl::SequenceNodeImpl(std::weak_ptr<uml::Namespace > par_namespace)
-			:SequenceNodeImpl()
-			{
-			    m_namespace = par_namespace;
-				m_owner = par_namespace;
-			}
-
-
-
-
+SequenceNodeImpl::SequenceNodeImpl(std::weak_ptr<uml::Element > par_owner)
+:SequenceNodeImpl()
+{
+	m_owner = par_owner;
+}
 
 //Additional constructor for the containments back reference
-			SequenceNodeImpl::SequenceNodeImpl(std::weak_ptr<uml::Element > par_owner)
-			:SequenceNodeImpl()
-			{
-			    m_owner = par_owner;
-			}
-
-
-
-
-
-//Additional constructor for the containments back reference
-			SequenceNodeImpl::SequenceNodeImpl(std::weak_ptr<uml::ActivityGroup > par_superGroup)
-			:SequenceNodeImpl()
-			{
-			    m_superGroup = par_superGroup;
-				m_owner = par_superGroup;
-			}
-
-
-
-
+SequenceNodeImpl::SequenceNodeImpl(std::weak_ptr<uml::ActivityGroup > par_superGroup)
+:SequenceNodeImpl()
+{
+	m_superGroup = par_superGroup;
+	m_owner = par_superGroup;
+}
 
 
 SequenceNodeImpl::SequenceNodeImpl(const SequenceNodeImpl & obj):SequenceNodeImpl()
@@ -416,7 +362,6 @@ SequenceNodeImpl::SequenceNodeImpl(const SequenceNodeImpl & obj):SequenceNodeImp
 	#endif
 
 	
-	
 }
 
 std::shared_ptr<ecore::EObject>  SequenceNodeImpl::copy() const
@@ -428,7 +373,7 @@ std::shared_ptr<ecore::EObject>  SequenceNodeImpl::copy() const
 
 std::shared_ptr<ecore::EClass> SequenceNodeImpl::eStaticClass() const
 {
-	return UmlPackageImpl::eInstance()->getSequenceNode_Class();
+	return uml::umlPackage::eInstance()->getSequenceNode_Class();
 }
 
 //*********************************
@@ -442,11 +387,25 @@ std::shared_ptr<ecore::EClass> SequenceNodeImpl::eStaticClass() const
 //*********************************
 // References
 //*********************************
+/*
+Getter & Setter for reference executableNode
+*/
 std::shared_ptr<Bag<uml::ExecutableNode>> SequenceNodeImpl::getExecutableNode() const
 {
+	if(m_executableNode == nullptr)
+	{
+		m_executableNode.reset(new Bag<uml::ExecutableNode>());
+		
+		
+	}
 
     return m_executableNode;
 }
+
+
+
+/*Additional Setter for redefined reference 'StructuredActivityNode::node'*/
+
 
 
 //*********************************
@@ -454,44 +413,160 @@ std::shared_ptr<Bag<uml::ExecutableNode>> SequenceNodeImpl::getExecutableNode() 
 //*********************************
 std::shared_ptr<Union<uml::ActivityEdge>> SequenceNodeImpl::getContainedEdge() const
 {
+	if(m_containedEdge == nullptr)
+	{
+		/*Union*/
+		m_containedEdge.reset(new Union<uml::ActivityEdge>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_containedEdge - Union<uml::ActivityEdge>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_containedEdge;
 }
+
 std::shared_ptr<Union<uml::ActivityNode>> SequenceNodeImpl::getContainedNode() const
 {
+	if(m_containedNode == nullptr)
+	{
+		/*Union*/
+		m_containedNode.reset(new Union<uml::ActivityNode>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_containedNode - Union<uml::ActivityNode>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_containedNode;
 }
+
 std::shared_ptr<Union<uml::ActivityGroup>> SequenceNodeImpl::getInGroup() const
 {
+	if(m_inGroup == nullptr)
+	{
+		/*Union*/
+		m_inGroup.reset(new Union<uml::ActivityGroup>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_inGroup - Union<uml::ActivityGroup>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_inGroup;
 }
+
 std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> SequenceNodeImpl::getInput() const
 {
+	if(m_input == nullptr)
+	{
+		/*SubsetUnion*/
+		m_input.reset(new SubsetUnion<uml::InputPin, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_input - SubsetUnion<uml::InputPin, uml::Element >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_input->initSubsetUnion(getOwnedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_input - SubsetUnion<uml::InputPin, uml::Element >(getOwnedElement())" << std::endl;
+		#endif
+		
+	}
 	return m_input;
 }
+
 std::shared_ptr<Union<uml::NamedElement>> SequenceNodeImpl::getMember() const
 {
+	if(m_member == nullptr)
+	{
+		/*Union*/
+		m_member.reset(new Union<uml::NamedElement>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_member - Union<uml::NamedElement>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_member;
 }
+
 std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element>> SequenceNodeImpl::getOutput() const
 {
+	if(m_output == nullptr)
+	{
+		/*SubsetUnion*/
+		m_output.reset(new SubsetUnion<uml::OutputPin, uml::Element >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_output - SubsetUnion<uml::OutputPin, uml::Element >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_output->initSubsetUnion(getOwnedElement());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_output - SubsetUnion<uml::OutputPin, uml::Element >(getOwnedElement())" << std::endl;
+		#endif
+		
+	}
 	return m_output;
 }
+
 std::shared_ptr<Union<uml::Element>> SequenceNodeImpl::getOwnedElement() const
 {
+	if(m_ownedElement == nullptr)
+	{
+		/*Union*/
+		m_ownedElement.reset(new Union<uml::Element>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_ownedElement - Union<uml::Element>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_ownedElement;
 }
+
 std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> SequenceNodeImpl::getOwnedMember() const
 {
+	if(m_ownedMember == nullptr)
+	{
+		/*SubsetUnion*/
+		m_ownedMember.reset(new SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising shared pointer SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >()" << std::endl;
+		#endif
+		
+		/*SubsetUnion*/
+		m_ownedMember->initSubsetUnion(getOwnedElement(),getMember());
+		#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising value SubsetUnion: " << "m_ownedMember - SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement >(getOwnedElement(),getMember())" << std::endl;
+		#endif
+		
+	}
 	return m_ownedMember;
 }
+
 std::weak_ptr<uml::Element > SequenceNodeImpl::getOwner() const
 {
 	return m_owner;
 }
+
 std::shared_ptr<Union<uml::RedefinableElement>> SequenceNodeImpl::getRedefinedElement() const
 {
+	if(m_redefinedElement == nullptr)
+	{
+		/*Union*/
+		m_redefinedElement.reset(new Union<uml::RedefinableElement>());
+			#ifdef SHOW_SUBSET_UNION
+			std::cout << "Initialising Union: " << "m_redefinedElement - Union<uml::RedefinableElement>()" << std::endl;
+		#endif
+		
+		
+	}
 	return m_redefinedElement;
 }
+
+
 
 
 std::shared_ptr<SequenceNode> SequenceNodeImpl::getThisSequenceNodePtr() const
@@ -544,7 +619,7 @@ Any SequenceNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::SEQUENCENODE_ATTRIBUTE_EXECUTABLENODE:
+		case uml::umlPackage::SEQUENCENODE_ATTRIBUTE_EXECUTABLENODE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::ExecutableNode>::iterator iter = m_executableNode->begin();
@@ -554,7 +629,7 @@ Any SequenceNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //21544
+			return eAny(tempList); //21444
 		}
 	}
 	return StructuredActivityNodeImpl::eGet(featureID, resolve, coreType);
@@ -563,8 +638,8 @@ bool SequenceNodeImpl::internalEIsSet(int featureID) const
 {
 	switch(featureID)
 	{
-		case UmlPackage::SEQUENCENODE_ATTRIBUTE_EXECUTABLENODE:
-			return getExecutableNode() != nullptr; //21544
+		case uml::umlPackage::SEQUENCENODE_ATTRIBUTE_EXECUTABLENODE:
+			return getExecutableNode() != nullptr; //21444
 	}
 	return StructuredActivityNodeImpl::internalEIsSet(featureID);
 }
@@ -572,7 +647,7 @@ bool SequenceNodeImpl::eSet(int featureID, Any newValue)
 {
 	switch(featureID)
 	{
-		case UmlPackage::SEQUENCENODE_ATTRIBUTE_EXECUTABLENODE:
+		case uml::umlPackage::SEQUENCENODE_ATTRIBUTE_EXECUTABLENODE:
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
@@ -624,12 +699,11 @@ void SequenceNodeImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandle
 	//
 	// Create new objects (from references (containment == true))
 	//
-	// get UmlFactory
-	std::shared_ptr<uml::UmlFactory> modelFactory = uml::UmlFactory::eInstance();
+	// get umlFactory
 	int numNodes = loadHandler->getNumOfChildNodes();
 	for(int ii = 0; ii < numNodes; ii++)
 	{
-		loadNode(loadHandler->getNextNodeName(), loadHandler, modelFactory);
+		loadNode(loadHandler->getNextNodeName(), loadHandler);
 	}
 }		
 
@@ -639,8 +713,9 @@ void SequenceNodeImpl::loadAttributes(std::shared_ptr<persistence::interfaces::X
 	StructuredActivityNodeImpl::loadAttributes(loadHandler, attr_list);
 }
 
-void SequenceNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<uml::UmlFactory> modelFactory)
+void SequenceNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
+	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -670,8 +745,8 @@ void SequenceNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persistenc
 	{
 		std::cout << "| ERROR    | " <<  "Exception occurred" << std::endl;
 	}
-
-	StructuredActivityNodeImpl::loadNode(nodeName, loadHandler, modelFactory);
+	//load BasePackage Nodes
+	StructuredActivityNodeImpl::loadNode(nodeName, loadHandler);
 }
 
 void SequenceNodeImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
@@ -693,7 +768,6 @@ void SequenceNodeImpl::save(std::shared_ptr<persistence::interfaces::XSaveHandle
 	
 	ActivityNodeImpl::saveContent(saveHandler);
 	
-	ActivityContentImpl::saveContent(saveHandler);
 	RedefinableElementImpl::saveContent(saveHandler);
 	
 	NamedElementImpl::saveContent(saveHandler);
@@ -717,7 +791,7 @@ void SequenceNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 {
 	try
 	{
-		std::shared_ptr<uml::UmlPackage> package = uml::UmlPackage::eInstance();
+		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	
 
@@ -730,7 +804,7 @@ void SequenceNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 		std::shared_ptr<Bag<uml::ExecutableNode>> list_executableNode = this->getExecutableNode();
 		for (std::shared_ptr<uml::ExecutableNode> executableNode : *list_executableNode) 
 		{
-			saveHandler->addReference(executableNode, "executableNode", executableNode->eClass() != package->getExecutableNode_Class());
+			saveHandler->addReference(executableNode, "executableNode", executableNode->eClass() !=uml::umlPackage::eInstance()->getExecutableNode_Class());
 		}
 	}
 	catch (std::exception& e)

@@ -18,7 +18,7 @@
 //*********************************
 namespace ecore 
 {
-	class ETypeParameterImpl :virtual public ENamedElementImpl, virtual public ETypeParameter 
+	class ETypeParameterImpl : virtual public ENamedElementImpl, virtual public ETypeParameter 
 	{
 		public: 
 			ETypeParameterImpl(const ETypeParameterImpl & obj);
@@ -28,7 +28,7 @@ namespace ecore
 			ETypeParameterImpl& operator=(ETypeParameterImpl const&) = delete;
 
 		protected:
-			friend class EcoreFactoryImpl;
+			friend class ecoreFactoryImpl;
 			ETypeParameterImpl();
 			virtual std::shared_ptr<ETypeParameter> getThisETypeParameterPtr() const;
 			virtual void setThisETypeParameterPtr(std::weak_ptr<ETypeParameter> thisETypeParameterPtr);
@@ -56,17 +56,16 @@ namespace ecore
 			//*********************************
 			// Reference
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Bag<ecore::EGenericType>> getEBounds() const ;
+			
 			
 							
 			
 			//*********************************
 			// Union Getter
 			//*********************************
-			/*!
-			 */
+			
 			virtual std::shared_ptr<Union<ecore::EObject>> getEContens() const ; 
 			 
 			//*********************************
@@ -80,7 +79,7 @@ namespace ecore
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) ;
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
-			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::shared_ptr<ecore::EcoreFactory> modelFactory);
+			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
 			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;

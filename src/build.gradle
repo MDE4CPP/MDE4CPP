@@ -8,6 +8,7 @@ task buildEcoreModels() {
 	dependsOn 'ecore:types:buildTypes'
 	dependsOn 'uml:buildUml'
 	dependsOn 'fuml:buildFUML'
+	dependsOn 'pscs:buildPSCS'
 }
 
 task buildReflectionModels() {
@@ -35,6 +36,7 @@ task compileEcoreModels() {
 	dependsOn 'ecore:types:src_gen:compileTypes'
 	dependsOn 'uml:src_gen:compileUml'
 	dependsOn 'fuml:src_gen:compileFUML'
+	dependsOn 'pscs:src_gen:compilePSCS'
 }
 
 // Compile all without generating the models
@@ -51,7 +53,7 @@ task compileUMLProfiles() {
 	group 'Source'
 	description 'compile all uml profile models'
 	
-	dependsOn 'common:standardProfile:compileStandardProfile'
+	dependsOn 'common:standardProfile:src_gen:compileStandardProfile'
 }
 
 task generateEcoreModels() {
@@ -62,6 +64,7 @@ task generateEcoreModels() {
 	dependsOn 'ecore:types:model:generateTypes'
 	dependsOn 'uml:model:generateUml'
 	dependsOn 'fuml:model:generateFUML'
+	dependsOn 'pscs:model:generatePSCS'
 }
 
 task generateReflectionModels() {
@@ -77,7 +80,7 @@ task generateUMLProfiles() {
 	group 'Source'
 	description 'generate all uml profile models'
 	
-	dependsOn 'common:standardProfile:generateStandardProfile'
+	dependsOn 'common:standardProfile:model:generateStandardProfile'
 }
 
 task deliverBasicInterfaces() {

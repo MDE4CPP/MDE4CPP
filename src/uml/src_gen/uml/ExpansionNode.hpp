@@ -35,7 +35,7 @@ namespace persistence
 
 namespace uml
 {
-	class UmlFactory;
+	class umlFactory;
 }
 
 //Forward Declaration for used types
@@ -152,8 +152,10 @@ namespace uml
 namespace uml 
 {
 	/*!
-	 An ExpansionNode is an ObjectNode used to indicate a collection input or output for an ExpansionRegion. A collection input of an ExpansionRegion contains a collection that is broken into its individual elements inside the region, whose content is executed once per element. A collection output of an ExpansionRegion combines individual elements produced by the execution of the region into a collection for use outside the region.
-	<p>From package UML::Actions.</p> */
+	An ExpansionNode is an ObjectNode used to indicate a collection input or output for an ExpansionRegion. A collection input of an ExpansionRegion contains a collection that is broken into its individual elements inside the region, whose content is executed once per element. A collection output of an ExpansionRegion combines individual elements produced by the execution of the region into a collection for use outside the region.
+	<p>From package UML::Actions.</p>
+	*/
+	
 	class ExpansionNode:virtual public ObjectNode
 	{
 		public:
@@ -174,8 +176,10 @@ namespace uml
 			// Operations
 			//*********************************
 			/*!
-			 One of regionAsInput or regionAsOutput must be non-empty, but not both.
-			regionAsInput->notEmpty() xor regionAsOutput->notEmpty() */ 
+			One of regionAsInput or regionAsOutput must be non-empty, but not both.
+			regionAsInput->notEmpty() xor regionAsOutput->notEmpty()
+			*/
+			 
 			virtual bool region_as_input_or_output(Any diagnostics,std::map <   Any, Any >  context) = 0;
 			
 			
@@ -187,23 +191,33 @@ namespace uml
 			// Reference
 			//*********************************
 			/*!
-			 The ExpansionRegion for which the ExpansionNode is an input.
-			<p>From package UML::Actions.</p> */
+			The ExpansionRegion for which the ExpansionNode is an input.
+			<p>From package UML::Actions.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::ExpansionRegion > getRegionAsInput() const = 0;
 			
 			/*!
-			 The ExpansionRegion for which the ExpansionNode is an input.
-			<p>From package UML::Actions.</p> */
-			virtual void setRegionAsInput(std::shared_ptr<uml::ExpansionRegion> _regionAsInput_regionAsInput) = 0;
+			The ExpansionRegion for which the ExpansionNode is an input.
+			<p>From package UML::Actions.</p>
+			*/
+			
+			virtual void setRegionAsInput(std::shared_ptr<uml::ExpansionRegion> _regionAsInput) = 0;
+			
 			/*!
-			 The ExpansionRegion for which the ExpansionNode is an output.
-			<p>From package UML::Actions.</p> */
+			The ExpansionRegion for which the ExpansionNode is an output.
+			<p>From package UML::Actions.</p>
+			*/
+			
 			virtual std::shared_ptr<uml::ExpansionRegion > getRegionAsOutput() const = 0;
 			
 			/*!
-			 The ExpansionRegion for which the ExpansionNode is an output.
-			<p>From package UML::Actions.</p> */
-			virtual void setRegionAsOutput(std::shared_ptr<uml::ExpansionRegion> _regionAsOutput_regionAsOutput) = 0;
+			The ExpansionRegion for which the ExpansionNode is an output.
+			<p>From package UML::Actions.</p>
+			*/
+			
+			virtual void setRegionAsOutput(std::shared_ptr<uml::ExpansionRegion> _regionAsOutput) = 0;
+			
 			
 
 		protected:
@@ -216,31 +230,41 @@ namespace uml
 			// Reference Members
 			//*********************************
 			/*!
-			 The ExpansionRegion for which the ExpansionNode is an input.
-			<p>From package UML::Actions.</p> */
-			std::shared_ptr<uml::ExpansionRegion > m_regionAsInput;
-			/*!
-			 The ExpansionRegion for which the ExpansionNode is an output.
-			<p>From package UML::Actions.</p> */
-			std::shared_ptr<uml::ExpansionRegion > m_regionAsOutput;
+			The ExpansionRegion for which the ExpansionNode is an input.
+			<p>From package UML::Actions.</p>
+			*/
 			
+			std::shared_ptr<uml::ExpansionRegion > m_regionAsInput;/*!
+			The ExpansionRegion for which the ExpansionNode is an output.
+			<p>From package UML::Actions.</p>
+			*/
+			
+			std::shared_ptr<uml::ExpansionRegion > m_regionAsOutput;
 
 		public:
 			//*********************************
 			// Union Getter
 			//*********************************
 			/*!
-			 ActivityGroups containing the ActivityNode.
-			<p>From package UML::Activities.</p> */
+			ActivityGroups containing the ActivityNode.
+			<p>From package UML::Activities.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::ActivityGroup>> getInGroup() const = 0;/*!
-			 The Elements owned by this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Elements owned by this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::Element>> getOwnedElement() const = 0;/*!
-			 The Element that owns this Element.
-			<p>From package UML::CommonStructure.</p> */
+			The Element that owns this Element.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			
 			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
-			 The RedefinableElement that is being redefined by this element.
-			<p>From package UML::Classification.</p> */
+			The RedefinableElement that is being redefined by this element.
+			<p>From package UML::Classification.</p>
+			*/
+			
 			virtual std::shared_ptr<Union<uml::RedefinableElement>> getRedefinedElement() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 

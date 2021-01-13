@@ -22,7 +22,7 @@
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
-[template public generateUMLPluginInterfaceSource(anPackage : Package) {packageName : String = anPackage.name.concat('Plugin').toUpperFirst(); }]
+[template public generateUMLPluginInterfaceSource(anPackage : Package) {packageName : String = anPackage.name.concat('Plugin'); }]
 [file  (anPackage.getPackageName().concat('/').concat(packageName).concat('.cpp'), false, 'UTF-8')]
 
 #include "[anPackage.getPackageName()/]/[packageName/].hpp"

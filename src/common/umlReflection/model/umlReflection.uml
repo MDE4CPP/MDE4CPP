@@ -24,13 +24,6 @@
     <packageImport xmi:id="_packageImport.1">
       <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
     </packageImport>
-    <packagedElement xmi:type="uml:Interface" xmi:id="ActivityContent" name="ActivityContent" visibility="private" isAbstract="true">
-      <ownedOperation xmi:id="ActivityContent-containingActivity" name="containingActivity">
-        <ownedParameter xmi:id="ActivityContent-containingActivity-containingActivity" name="containingActivity" type="Activity" direction="return" effect="read">
-          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="ActivityContent-containingActivity-containingActivity-_lowerValue"/>
-        </ownedParameter>
-      </ownedOperation>
-    </packagedElement>
     <packagedElement xmi:type="uml:Class" xmi:id="ValueSpecificationAction" name="ValueSpecificationAction">
       <ownedComment xmi:id="ValueSpecificationAction-_ownedComment.0" annotatedElement="ValueSpecificationAction">
         <body>A ValueSpecificationAction is an Action that evaluates a ValueSpecification and provides a result.</body>
@@ -2997,7 +2990,7 @@ _'context'.conformsTo(structuralFeature.oclAsType(Property).opposite.type.oclAsT
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="StructuredActivityNode-targetNodes-result-_upperValue" value="*"/>
         </ownedParameter>
       </ownedOperation>
-      <ownedOperation xmi:id="StructuredActivityNode-containingActivity" name="containingActivity" bodyCondition="StructuredActivityNode-containingActivity-spec" isQuery="true" redefinedOperation="ActivityGroup-containingActivity ActivityNode-containingActivity ActivityContent-containingActivity">
+      <ownedOperation xmi:id="StructuredActivityNode-containingActivity" name="containingActivity" bodyCondition="StructuredActivityNode-containingActivity-spec" isQuery="true" redefinedOperation="ActivityGroup-containingActivity ActivityNode-containingActivity">
         <ownedComment xmi:id="StructuredActivityNode-containingActivity-_ownedComment.0" annotatedElement="StructuredActivityNode-containingActivity">
           <body>The Activity that directly or indirectly contains this StructuredActivityNode (considered as an Action).</body>
         </ownedComment>
@@ -3909,7 +3902,6 @@ subgroup->closure(subgroup).containedEdge->excludesAll(containedEdge) and &#xD;
 superGroup->closure(superGroup).containedEdge->excludesAll(containedEdge)</body>
         </specification>
       </ownedRule>
-      <generalization xmi:id="ActivityGroup-_generalization.0" general="ActivityContent"/>
       <generalization xmi:id="ActivityGroup-_generalization.1" general="NamedElement"/>
       <ownedAttribute xmi:id="ActivityGroup-containedEdge" name="containedEdge" type="ActivityEdge" isReadOnly="true" isDerived="true" isDerivedUnion="true" association="A_containedEdge_inGroup">
         <ownedComment xmi:id="ActivityGroup-containedEdge-_ownedComment.0" annotatedElement="ActivityGroup-containedEdge">
@@ -3944,7 +3936,7 @@ superGroup->closure(superGroup).containedEdge->excludesAll(containedEdge)</body>
         </ownedComment>
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="ActivityGroup-superGroup-_lowerValue"/>
       </ownedAttribute>
-      <ownedOperation xmi:id="ActivityGroup-containingActivity" name="containingActivity" bodyCondition="ActivityGroup-containingActivity-spec" isQuery="true" redefinedOperation="ActivityContent-containingActivity">
+      <ownedOperation xmi:id="ActivityGroup-containingActivity" name="containingActivity" bodyCondition="ActivityGroup-containingActivity-spec" isQuery="true">
         <ownedComment xmi:id="ActivityGroup-containingActivity-_ownedComment.0" annotatedElement="ActivityGroup-containingActivity">
           <body>The Activity that directly or indirectly contains this ActivityGroup.</body>
         </ownedComment>
@@ -3965,7 +3957,6 @@ endif)</body>
       <ownedComment xmi:id="ActivityNode-_ownedComment.0" annotatedElement="ActivityNode">
         <body>ActivityNode is an abstract class for points in the flow of an Activity connected by ActivityEdges.</body>
       </ownedComment>
-      <generalization xmi:id="ActivityNode-_generalization.0" general="ActivityContent"/>
       <generalization xmi:id="ActivityNode-_generalization.1" general="RedefinableElement"/>
       <ownedAttribute xmi:id="ActivityNode-activity" name="activity" visibility="protected" type="Activity" subsettedProperty="Element-owner" association="A_node_activity">
         <ownedComment xmi:id="ActivityNode-activity-_ownedComment.0" annotatedElement="ActivityNode-activity">
@@ -4021,7 +4012,7 @@ endif)</body>
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="ActivityNode-redefinedNode-_lowerValue"/>
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="ActivityNode-redefinedNode-_upperValue" value="*"/>
       </ownedAttribute>
-      <ownedOperation xmi:id="ActivityNode-containingActivity" name="containingActivity" bodyCondition="ActivityNode-containingActivity-spec" isQuery="true" redefinedOperation="ActivityContent-containingActivity">
+      <ownedOperation xmi:id="ActivityNode-containingActivity" name="containingActivity" bodyCondition="ActivityNode-containingActivity-spec" isQuery="true">
         <ownedComment xmi:id="ActivityNode-containingActivity-_ownedComment.0" annotatedElement="ActivityNode-containingActivity">
           <body>The Activity that directly or indirectly contains this ActivityNode.</body>
         </ownedComment>
