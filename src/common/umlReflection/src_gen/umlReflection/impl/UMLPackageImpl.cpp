@@ -114,14 +114,15 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	std::shared_ptr<uml::Constraint> con = nullptr;
 	std::shared_ptr<uml::OpaqueExpression> oe = nullptr;
 
-	// Abstraction
+	//Abstraction
 	uML_Abstraction = factory->createClass_in_Package(uML, uml::umlPackage::ABSTRACTION_CLASS);
 	
     // Abstraction attributes
+	//mapping
 	uML_Abstraction_mapping = factory->createProperty_in_Class(uML_Abstraction);
 
     //-------------------------------------------
-	// AcceptCallAction
+	//AcceptCallAction
 	uML_AcceptCallAction = factory->createClass_in_Package(uML, uml::umlPackage::ACCEPTCALLACTION_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_AcceptCallAction);
@@ -168,10 +169,11 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // AcceptCallAction attributes
+	//returnInformation
 	uML_AcceptCallAction_returnInformation = factory->createProperty_in_Class(uML_AcceptCallAction);
 
     //-------------------------------------------
-	// AcceptEventAction
+	//AcceptEventAction
 	uML_AcceptEventAction = factory->createClass_in_Package(uML, uml::umlPackage::ACCEPTEVENTACTION_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_AcceptEventAction);
@@ -268,36 +270,49 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // AcceptEventAction attributes
+	//isUnmarshall
 	uML_AcceptEventAction_isUnmarshall = factory->createProperty_in_Class(uML_AcceptEventAction);
+	//result
 	uML_AcceptEventAction_result = factory->createProperty_in_Class(uML_AcceptEventAction);
+	//trigger
 	uML_AcceptEventAction_trigger = factory->createProperty_in_Class(uML_AcceptEventAction);
 
     //-------------------------------------------
-	// Action
+	//Action
 	uML_Action = factory->createClass_in_Package(uML, uml::umlPackage::ACTION_CLASS);
 	
     // Action attributes
+	//context
 	uML_Action_context = factory->createProperty_in_Class(uML_Action);
+	//input
 	uML_Action_input = factory->createProperty_in_Class(uML_Action);
+	//isLocallyReentrant
 	uML_Action_isLocallyReentrant = factory->createProperty_in_Class(uML_Action);
+	//localPostcondition
 	uML_Action_localPostcondition = factory->createProperty_in_Class(uML_Action);
+	//localPrecondition
 	uML_Action_localPrecondition = factory->createProperty_in_Class(uML_Action);
+	//output
 	uML_Action_output = factory->createProperty_in_Class(uML_Action);
     // Action operations
+	//allActions
 	uML_Action_allActions__ = factory->createOperation_in_Class(uML_Action);
 	uML_Action_allActions_result = factory->createParameter_in_Operation(uML_Action_allActions__);
 
+	//allOwnedNodes
 	uML_Action_allOwnedNodes__ = factory->createOperation_in_Class(uML_Action);
 	uML_Action_allOwnedNodes_result = factory->createParameter_in_Operation(uML_Action_allOwnedNodes__);
 
+	//containingBehavior
 	uML_Action_containingBehavior__ = factory->createOperation_in_Class(uML_Action);
 	uML_Action_containingBehavior_result = factory->createParameter_in_Operation(uML_Action_containingBehavior__);
 
+	//context
 	uML_Action_context__ = factory->createOperation_in_Class(uML_Action);
 	uML_Action_context_result = factory->createParameter_in_Operation(uML_Action_context__);
 
     //-------------------------------------------
-	// ActionExecutionSpecification
+	//ActionExecutionSpecification
 	uML_ActionExecutionSpecification = factory->createClass_in_Package(uML, uml::umlPackage::ACTIONEXECUTIONSPECIFICATION_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_ActionExecutionSpecification);
@@ -313,10 +328,11 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // ActionExecutionSpecification attributes
+	//action
 	uML_ActionExecutionSpecification_action = factory->createProperty_in_Class(uML_ActionExecutionSpecification);
 
     //-------------------------------------------
-	// ActionInputPin
+	//ActionInputPin
 	uML_ActionInputPin = factory->createClass_in_Package(uML, uml::umlPackage::ACTIONINPUTPIN_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_ActionInputPin);
@@ -360,10 +376,11 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // ActionInputPin attributes
+	//fromAction
 	uML_ActionInputPin_fromAction = factory->createProperty_in_Class(uML_ActionInputPin);
 
     //-------------------------------------------
-	// Activity
+	//Activity
 	uML_Activity = factory->createClass_in_Package(uML, uml::umlPackage::ACTIVITY_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_Activity);
@@ -405,19 +422,29 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // Activity attributes
+	//edge
 	uML_Activity_edge = factory->createProperty_in_Class(uML_Activity);
+	//group
 	uML_Activity_group = factory->createProperty_in_Class(uML_Activity);
+	//isReadOnly
 	uML_Activity_isReadOnly = factory->createProperty_in_Class(uML_Activity);
+	//isSingleExecution
 	uML_Activity_isSingleExecution = factory->createProperty_in_Class(uML_Activity);
+	//node
 	uML_Activity_node = factory->createProperty_in_Class(uML_Activity);
+	//ownedGroup
 	uML_Activity_ownedGroup = factory->createProperty_in_Class(uML_Activity);
+	//ownedNode
 	uML_Activity_ownedNode = factory->createProperty_in_Class(uML_Activity);
+	//partition
 	uML_Activity_partition = factory->createProperty_in_Class(uML_Activity);
+	//structuredNode
 	uML_Activity_structuredNode = factory->createProperty_in_Class(uML_Activity);
+	//variable
 	uML_Activity_variable = factory->createProperty_in_Class(uML_Activity);
 
     //-------------------------------------------
-	// ActivityEdge
+	//ActivityEdge
 	uML_ActivityEdge = factory->createClass_in_Package(uML, uml::umlPackage::ACTIVITYEDGE_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_ActivityEdge);
@@ -429,27 +456,38 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // ActivityEdge attributes
+	//activity
 	uML_ActivityEdge_activity = factory->createProperty_in_Class(uML_ActivityEdge);
+	//guard
 	uML_ActivityEdge_guard = factory->createProperty_in_Class(uML_ActivityEdge);
+	//inGroup
 	uML_ActivityEdge_inGroup = factory->createProperty_in_Class(uML_ActivityEdge);
+	//inPartition
 	uML_ActivityEdge_inPartition = factory->createProperty_in_Class(uML_ActivityEdge);
+	//inStructuredNode
 	uML_ActivityEdge_inStructuredNode = factory->createProperty_in_Class(uML_ActivityEdge);
+	//interrupts
 	uML_ActivityEdge_interrupts = factory->createProperty_in_Class(uML_ActivityEdge);
+	//redefinedEdge
 	uML_ActivityEdge_redefinedEdge = factory->createProperty_in_Class(uML_ActivityEdge);
+	//source
 	uML_ActivityEdge_source = factory->createProperty_in_Class(uML_ActivityEdge);
+	//target
 	uML_ActivityEdge_target = factory->createProperty_in_Class(uML_ActivityEdge);
+	//weight
 	uML_ActivityEdge_weight = factory->createProperty_in_Class(uML_ActivityEdge);
     // ActivityEdge operations
+	//isConsistentWith
 	uML_ActivityEdge_isConsistentWith_RedefinableElement_RedefinableElement = factory->createOperation_in_Class(uML_ActivityEdge);
 	uML_ActivityEdge_isConsistentWith_result = factory->createParameter_in_Operation(uML_ActivityEdge_isConsistentWith_RedefinableElement_RedefinableElement);uML_ActivityEdge_isConsistentWith_RedefinableElement_RedefinableElement_redefiningElement = factory->createParameter_in_Operation(uML_ActivityEdge_isConsistentWith_RedefinableElement_RedefinableElement);
 
     //-------------------------------------------
-	// ActivityFinalNode
+	//ActivityFinalNode
 	uML_ActivityFinalNode = factory->createClass_in_Package(uML, uml::umlPackage::ACTIVITYFINALNODE_CLASS);
 	
 
     //-------------------------------------------
-	// ActivityGroup
+	//ActivityGroup
 	uML_ActivityGroup = factory->createClass_in_Package(uML, uml::umlPackage::ACTIVITYGROUP_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_ActivityGroup);
@@ -482,37 +520,53 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // ActivityGroup attributes
+	//containedEdge
 	uML_ActivityGroup_containedEdge = factory->createProperty_in_Class(uML_ActivityGroup);
+	//containedNode
 	uML_ActivityGroup_containedNode = factory->createProperty_in_Class(uML_ActivityGroup);
+	//inActivity
 	uML_ActivityGroup_inActivity = factory->createProperty_in_Class(uML_ActivityGroup);
+	//subgroup
 	uML_ActivityGroup_subgroup = factory->createProperty_in_Class(uML_ActivityGroup);
+	//superGroup
 	uML_ActivityGroup_superGroup = factory->createProperty_in_Class(uML_ActivityGroup);
     // ActivityGroup operations
+	//containingActivity
 	uML_ActivityGroup_containingActivity__ = factory->createOperation_in_Class(uML_ActivityGroup);
 	uML_ActivityGroup_containingActivity_result = factory->createParameter_in_Operation(uML_ActivityGroup_containingActivity__);
 
     //-------------------------------------------
-	// ActivityNode
+	//ActivityNode
 	uML_ActivityNode = factory->createClass_in_Package(uML, uml::umlPackage::ACTIVITYNODE_CLASS);
 	
     // ActivityNode attributes
+	//activity
 	uML_ActivityNode_activity = factory->createProperty_in_Class(uML_ActivityNode);
+	//inGroup
 	uML_ActivityNode_inGroup = factory->createProperty_in_Class(uML_ActivityNode);
+	//inInterruptibleRegion
 	uML_ActivityNode_inInterruptibleRegion = factory->createProperty_in_Class(uML_ActivityNode);
+	//inPartition
 	uML_ActivityNode_inPartition = factory->createProperty_in_Class(uML_ActivityNode);
+	//inStructuredNode
 	uML_ActivityNode_inStructuredNode = factory->createProperty_in_Class(uML_ActivityNode);
+	//incoming
 	uML_ActivityNode_incoming = factory->createProperty_in_Class(uML_ActivityNode);
+	//outgoing
 	uML_ActivityNode_outgoing = factory->createProperty_in_Class(uML_ActivityNode);
+	//redefinedNode
 	uML_ActivityNode_redefinedNode = factory->createProperty_in_Class(uML_ActivityNode);
     // ActivityNode operations
+	//containingActivity
 	uML_ActivityNode_containingActivity__ = factory->createOperation_in_Class(uML_ActivityNode);
 	uML_ActivityNode_containingActivity_result = factory->createParameter_in_Operation(uML_ActivityNode_containingActivity__);
 
+	//isConsistentWith
 	uML_ActivityNode_isConsistentWith_RedefinableElement_RedefinableElement = factory->createOperation_in_Class(uML_ActivityNode);
 	uML_ActivityNode_isConsistentWith_result = factory->createParameter_in_Operation(uML_ActivityNode_isConsistentWith_RedefinableElement_RedefinableElement);uML_ActivityNode_isConsistentWith_RedefinableElement_RedefinableElement_redefiningElement = factory->createParameter_in_Operation(uML_ActivityNode_isConsistentWith_RedefinableElement_RedefinableElement);
 
     //-------------------------------------------
-	// ActivityParameterNode
+	//ActivityParameterNode
 	uML_ActivityParameterNode = factory->createClass_in_Package(uML, uml::umlPackage::ACTIVITYPARAMETERNODE_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_ActivityParameterNode);
@@ -590,10 +644,11 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // ActivityParameterNode attributes
+	//parameter
 	uML_ActivityParameterNode_parameter = factory->createProperty_in_Class(uML_ActivityParameterNode);
 
     //-------------------------------------------
-	// ActivityPartition
+	//ActivityPartition
 	uML_ActivityPartition = factory->createClass_in_Package(uML, uml::umlPackage::ACTIVITYPARTITION_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_ActivityPartition);
@@ -691,16 +746,23 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // ActivityPartition attributes
+	//edge
 	uML_ActivityPartition_edge = factory->createProperty_in_Class(uML_ActivityPartition);
+	//isDimension
 	uML_ActivityPartition_isDimension = factory->createProperty_in_Class(uML_ActivityPartition);
+	//isExternal
 	uML_ActivityPartition_isExternal = factory->createProperty_in_Class(uML_ActivityPartition);
+	//node
 	uML_ActivityPartition_node = factory->createProperty_in_Class(uML_ActivityPartition);
+	//represents
 	uML_ActivityPartition_represents = factory->createProperty_in_Class(uML_ActivityPartition);
+	//subpartition
 	uML_ActivityPartition_subpartition = factory->createProperty_in_Class(uML_ActivityPartition);
+	//superPartition
 	uML_ActivityPartition_superPartition = factory->createProperty_in_Class(uML_ActivityPartition);
 
     //-------------------------------------------
-	// Actor
+	//Actor
 	uML_Actor = factory->createClass_in_Package(uML, uml::umlPackage::ACTOR_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_Actor);
@@ -727,7 +789,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 
     //-------------------------------------------
-	// AddStructuralFeatureValueAction
+	//AddStructuralFeatureValueAction
 	uML_AddStructuralFeatureValueAction = factory->createClass_in_Package(uML, uml::umlPackage::ADDSTRUCTURALFEATUREVALUEACTION_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_AddStructuralFeatureValueAction);
@@ -753,11 +815,13 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // AddStructuralFeatureValueAction attributes
+	//insertAt
 	uML_AddStructuralFeatureValueAction_insertAt = factory->createProperty_in_Class(uML_AddStructuralFeatureValueAction);
+	//isReplaceAll
 	uML_AddStructuralFeatureValueAction_isReplaceAll = factory->createProperty_in_Class(uML_AddStructuralFeatureValueAction);
 
     //-------------------------------------------
-	// AddVariableValueAction
+	//AddVariableValueAction
 	uML_AddVariableValueAction = factory->createClass_in_Package(uML, uml::umlPackage::ADDVARIABLEVALUEACTION_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_AddVariableValueAction);
@@ -783,33 +847,42 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // AddVariableValueAction attributes
+	//insertAt
 	uML_AddVariableValueAction_insertAt = factory->createProperty_in_Class(uML_AddVariableValueAction);
+	//isReplaceAll
 	uML_AddVariableValueAction_isReplaceAll = factory->createProperty_in_Class(uML_AddVariableValueAction);
 
     //-------------------------------------------
-	// AnyReceiveEvent
+	//AnyReceiveEvent
 	uML_AnyReceiveEvent = factory->createClass_in_Package(uML, uml::umlPackage::ANYRECEIVEEVENT_CLASS);
 	
 
     //-------------------------------------------
-	// Artifact
+	//Artifact
 	uML_Artifact = factory->createClass_in_Package(uML, uml::umlPackage::ARTIFACT_CLASS);
 	
     // Artifact attributes
+	//fileName
 	uML_Artifact_fileName = factory->createProperty_in_Class(uML_Artifact);
+	//manifestation
 	uML_Artifact_manifestation = factory->createProperty_in_Class(uML_Artifact);
+	//nestedArtifact
 	uML_Artifact_nestedArtifact = factory->createProperty_in_Class(uML_Artifact);
+	//ownedAttribute
 	uML_Artifact_ownedAttribute = factory->createProperty_in_Class(uML_Artifact);
+	//ownedOperation
 	uML_Artifact_ownedOperation = factory->createProperty_in_Class(uML_Artifact);
     // Artifact operations
+	//createOwnedAttribute
 	uML_Artifact_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural = factory->createOperation_in_Class(uML_Artifact);
 	uML_Artifact_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNaturalreturn = factory->createParameter_in_Operation(uML_Artifact_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural);uML_Artifact_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_name = factory->createParameter_in_Operation(uML_Artifact_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural);uML_Artifact_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_type = factory->createParameter_in_Operation(uML_Artifact_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural);uML_Artifact_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_lower = factory->createParameter_in_Operation(uML_Artifact_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural);uML_Artifact_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_upper = factory->createParameter_in_Operation(uML_Artifact_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural);
 
+	//createOwnedOperation
 	uML_Artifact_createOwnedOperation_String_String_Type_Type_String_String_Type_Type = factory->createOperation_in_Class(uML_Artifact);
 	uML_Artifact_createOwnedOperation_String_String_Type_Type_String_String_Type_Typereturn = factory->createParameter_in_Operation(uML_Artifact_createOwnedOperation_String_String_Type_Type_String_String_Type_Type);uML_Artifact_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_name = factory->createParameter_in_Operation(uML_Artifact_createOwnedOperation_String_String_Type_Type_String_String_Type_Type);uML_Artifact_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_parameterNames = factory->createParameter_in_Operation(uML_Artifact_createOwnedOperation_String_String_Type_Type_String_String_Type_Type);uML_Artifact_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_parameterTypes = factory->createParameter_in_Operation(uML_Artifact_createOwnedOperation_String_String_Type_Type_String_String_Type_Type);uML_Artifact_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_returnType = factory->createParameter_in_Operation(uML_Artifact_createOwnedOperation_String_String_Type_Type_String_String_Type_Type);
 
     //-------------------------------------------
-	// Association
+	//Association
 	uML_Association = factory->createClass_in_Package(uML, uml::umlPackage::ASSOCIATION_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_Association);
@@ -881,20 +954,27 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // Association attributes
+	//endType
 	uML_Association_endType = factory->createProperty_in_Class(uML_Association);
+	//isDerived
 	uML_Association_isDerived = factory->createProperty_in_Class(uML_Association);
+	//memberEnd
 	uML_Association_memberEnd = factory->createProperty_in_Class(uML_Association);
+	//navigableOwnedEnd
 	uML_Association_navigableOwnedEnd = factory->createProperty_in_Class(uML_Association);
+	//ownedEnd
 	uML_Association_ownedEnd = factory->createProperty_in_Class(uML_Association);
     // Association operations
+	//endType
 	uML_Association_endType__ = factory->createOperation_in_Class(uML_Association);
 	uML_Association_endType_result = factory->createParameter_in_Operation(uML_Association_endType__);
 
+	//isBinary
 	uML_Association_isBinary__ = factory->createOperation_in_Class(uML_Association);
 	uML_Association_isBinary__return = factory->createParameter_in_Operation(uML_Association_isBinary__);
 
     //-------------------------------------------
-	// AssociationClass
+	//AssociationClass
 	uML_AssociationClass = factory->createClass_in_Package(uML, uml::umlPackage::ASSOCIATIONCLASS_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_AssociationClass);
@@ -921,7 +1001,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 
     //-------------------------------------------
-	// Behavior
+	//Behavior
 	uML_Behavior = factory->createClass_in_Package(uML, uml::umlPackage::BEHAVIOR_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_Behavior);
@@ -961,36 +1041,49 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // Behavior attributes
+	//context
 	uML_Behavior_context = factory->createProperty_in_Class(uML_Behavior);
+	//isReentrant
 	uML_Behavior_isReentrant = factory->createProperty_in_Class(uML_Behavior);
+	//ownedParameter
 	uML_Behavior_ownedParameter = factory->createProperty_in_Class(uML_Behavior);
+	//ownedParameterSet
 	uML_Behavior_ownedParameterSet = factory->createProperty_in_Class(uML_Behavior);
+	//postcondition
 	uML_Behavior_postcondition = factory->createProperty_in_Class(uML_Behavior);
+	//precondition
 	uML_Behavior_precondition = factory->createProperty_in_Class(uML_Behavior);
+	//redefinedBehavior
 	uML_Behavior_redefinedBehavior = factory->createProperty_in_Class(uML_Behavior);
+	//specification
 	uML_Behavior_specification = factory->createProperty_in_Class(uML_Behavior);
     // Behavior operations
+	//behavioredClassifier
 	uML_Behavior_behavioredClassifier_Element_Element = factory->createOperation_in_Class(uML_Behavior);
 	uML_Behavior_behavioredClassifier_Element_Element_from = factory->createParameter_in_Operation(uML_Behavior_behavioredClassifier_Element_Element);uML_Behavior_behavioredClassifier_result = factory->createParameter_in_Operation(uML_Behavior_behavioredClassifier_Element_Element);
 
+	//context
 	uML_Behavior_context__ = factory->createOperation_in_Class(uML_Behavior);
 	uML_Behavior_context_result = factory->createParameter_in_Operation(uML_Behavior_context__);
 
+	//inputParameters
 	uML_Behavior_inputParameters__ = factory->createOperation_in_Class(uML_Behavior);
 	uML_Behavior_inputParameters_result = factory->createParameter_in_Operation(uML_Behavior_inputParameters__);
 
+	//outputParameters
 	uML_Behavior_outputParameters__ = factory->createOperation_in_Class(uML_Behavior);
 	uML_Behavior_outputParameters_result = factory->createParameter_in_Operation(uML_Behavior_outputParameters__);
 
     //-------------------------------------------
-	// BehaviorExecutionSpecification
+	//BehaviorExecutionSpecification
 	uML_BehaviorExecutionSpecification = factory->createClass_in_Package(uML, uml::umlPackage::BEHAVIOREXECUTIONSPECIFICATION_CLASS);
 	
     // BehaviorExecutionSpecification attributes
+	//behavior
 	uML_BehaviorExecutionSpecification_behavior = factory->createProperty_in_Class(uML_BehaviorExecutionSpecification);
 
     //-------------------------------------------
-	// BehavioralFeature
+	//BehavioralFeature
 	uML_BehavioralFeature = factory->createClass_in_Package(uML, uml::umlPackage::BEHAVIORALFEATURE_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_BehavioralFeature);
@@ -1002,27 +1095,37 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // BehavioralFeature attributes
+	//concurrency
 	uML_BehavioralFeature_concurrency = factory->createProperty_in_Class(uML_BehavioralFeature);
+	//isAbstract
 	uML_BehavioralFeature_isAbstract = factory->createProperty_in_Class(uML_BehavioralFeature);
+	//method
 	uML_BehavioralFeature_method = factory->createProperty_in_Class(uML_BehavioralFeature);
+	//ownedParameter
 	uML_BehavioralFeature_ownedParameter = factory->createProperty_in_Class(uML_BehavioralFeature);
+	//ownedParameterSet
 	uML_BehavioralFeature_ownedParameterSet = factory->createProperty_in_Class(uML_BehavioralFeature);
+	//raisedException
 	uML_BehavioralFeature_raisedException = factory->createProperty_in_Class(uML_BehavioralFeature);
     // BehavioralFeature operations
+	//createReturnResult
 	uML_BehavioralFeature_createReturnResult_String_Type_String_Type = factory->createOperation_in_Class(uML_BehavioralFeature);
 	uML_BehavioralFeature_createReturnResult_String_Type_String_Typereturn = factory->createParameter_in_Operation(uML_BehavioralFeature_createReturnResult_String_Type_String_Type);uML_BehavioralFeature_createReturnResult_String_Type_String_Type_name = factory->createParameter_in_Operation(uML_BehavioralFeature_createReturnResult_String_Type_String_Type);uML_BehavioralFeature_createReturnResult_String_Type_String_Type_type = factory->createParameter_in_Operation(uML_BehavioralFeature_createReturnResult_String_Type_String_Type);
 
+	//inputParameters
 	uML_BehavioralFeature_inputParameters__ = factory->createOperation_in_Class(uML_BehavioralFeature);
 	uML_BehavioralFeature_inputParameters_result = factory->createParameter_in_Operation(uML_BehavioralFeature_inputParameters__);
 
+	//isDistinguishableFrom
 	uML_BehavioralFeature_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace = factory->createOperation_in_Class(uML_BehavioralFeature);
 	uML_BehavioralFeature_isDistinguishableFrom_result = factory->createParameter_in_Operation(uML_BehavioralFeature_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace);uML_BehavioralFeature_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace_n = factory->createParameter_in_Operation(uML_BehavioralFeature_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace);uML_BehavioralFeature_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace_ns = factory->createParameter_in_Operation(uML_BehavioralFeature_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace);
 
+	//outputParameters
 	uML_BehavioralFeature_outputParameters__ = factory->createOperation_in_Class(uML_BehavioralFeature);
 	uML_BehavioralFeature_outputParameters_result = factory->createParameter_in_Operation(uML_BehavioralFeature_outputParameters__);
 
     //-------------------------------------------
-	// BehavioredClassifier
+	//BehavioredClassifier
 	uML_BehavioredClassifier = factory->createClass_in_Package(uML, uml::umlPackage::BEHAVIOREDCLASSIFIER_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_BehavioredClassifier);
@@ -1034,18 +1137,23 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // BehavioredClassifier attributes
+	//classifierBehavior
 	uML_BehavioredClassifier_classifierBehavior = factory->createProperty_in_Class(uML_BehavioredClassifier);
+	//interfaceRealization
 	uML_BehavioredClassifier_interfaceRealization = factory->createProperty_in_Class(uML_BehavioredClassifier);
+	//ownedBehavior
 	uML_BehavioredClassifier_ownedBehavior = factory->createProperty_in_Class(uML_BehavioredClassifier);
     // BehavioredClassifier operations
+	//getAllImplementedInterfaces
 	uML_BehavioredClassifier_getAllImplementedInterfaces__ = factory->createOperation_in_Class(uML_BehavioredClassifier);
 	uML_BehavioredClassifier_getAllImplementedInterfaces__return = factory->createParameter_in_Operation(uML_BehavioredClassifier_getAllImplementedInterfaces__);
 
+	//getImplementedInterfaces
 	uML_BehavioredClassifier_getImplementedInterfaces__ = factory->createOperation_in_Class(uML_BehavioredClassifier);
 	uML_BehavioredClassifier_getImplementedInterfaces__return = factory->createParameter_in_Operation(uML_BehavioredClassifier_getImplementedInterfaces__);
 
     //-------------------------------------------
-	// BroadcastSignalAction
+	//BroadcastSignalAction
 	uML_BroadcastSignalAction = factory->createClass_in_Package(uML, uml::umlPackage::BROADCASTSIGNALACTION_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_BroadcastSignalAction);
@@ -1093,10 +1201,11 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // BroadcastSignalAction attributes
+	//signal
 	uML_BroadcastSignalAction_signal = factory->createProperty_in_Class(uML_BroadcastSignalAction);
 
     //-------------------------------------------
-	// CallAction
+	//CallAction
 	uML_CallAction = factory->createClass_in_Package(uML, uml::umlPackage::CALLACTION_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_CallAction);
@@ -1151,17 +1260,21 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // CallAction attributes
+	//isSynchronous
 	uML_CallAction_isSynchronous = factory->createProperty_in_Class(uML_CallAction);
+	//result
 	uML_CallAction_result = factory->createProperty_in_Class(uML_CallAction);
     // CallAction operations
+	//inputParameters
 	uML_CallAction_inputParameters__ = factory->createOperation_in_Class(uML_CallAction);
 	uML_CallAction_inputParameters_result = factory->createParameter_in_Operation(uML_CallAction_inputParameters__);
 
+	//outputParameters
 	uML_CallAction_outputParameters__ = factory->createOperation_in_Class(uML_CallAction);
 	uML_CallAction_outputParameters_result = factory->createParameter_in_Operation(uML_CallAction_outputParameters__);
 
     //-------------------------------------------
-	// CallBehaviorAction
+	//CallBehaviorAction
 	uML_CallBehaviorAction = factory->createClass_in_Package(uML, uml::umlPackage::CALLBEHAVIORACTION_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_CallBehaviorAction);
@@ -1173,23 +1286,27 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // CallBehaviorAction attributes
+	//behavior
 	uML_CallBehaviorAction_behavior = factory->createProperty_in_Class(uML_CallBehaviorAction);
     // CallBehaviorAction operations
+	//inputParameters
 	uML_CallBehaviorAction_inputParameters__ = factory->createOperation_in_Class(uML_CallBehaviorAction);
 	uML_CallBehaviorAction_inputParameters_result = factory->createParameter_in_Operation(uML_CallBehaviorAction_inputParameters__);
 
+	//outputParameters
 	uML_CallBehaviorAction_outputParameters__ = factory->createOperation_in_Class(uML_CallBehaviorAction);
 	uML_CallBehaviorAction_outputParameters_result = factory->createParameter_in_Operation(uML_CallBehaviorAction_outputParameters__);
 
     //-------------------------------------------
-	// CallEvent
+	//CallEvent
 	uML_CallEvent = factory->createClass_in_Package(uML, uml::umlPackage::CALLEVENT_CLASS);
 	
     // CallEvent attributes
+	//operation
 	uML_CallEvent_operation = factory->createProperty_in_Class(uML_CallEvent);
 
     //-------------------------------------------
-	// CallOperationAction
+	//CallOperationAction
 	uML_CallOperationAction = factory->createClass_in_Package(uML, uml::umlPackage::CALLOPERATIONACTION_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_CallOperationAction);
@@ -1203,29 +1320,34 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // CallOperationAction attributes
+	//operation
 	uML_CallOperationAction_operation = factory->createProperty_in_Class(uML_CallOperationAction);
+	//target
 	uML_CallOperationAction_target = factory->createProperty_in_Class(uML_CallOperationAction);
     // CallOperationAction operations
+	//inputParameters
 	uML_CallOperationAction_inputParameters__ = factory->createOperation_in_Class(uML_CallOperationAction);
 	uML_CallOperationAction_inputParameters_result = factory->createParameter_in_Operation(uML_CallOperationAction_inputParameters__);
 
+	//outputParameters
 	uML_CallOperationAction_outputParameters__ = factory->createOperation_in_Class(uML_CallOperationAction);
 	uML_CallOperationAction_outputParameters_result = factory->createParameter_in_Operation(uML_CallOperationAction_outputParameters__);
 
     //-------------------------------------------
-	// CentralBufferNode
+	//CentralBufferNode
 	uML_CentralBufferNode = factory->createClass_in_Package(uML, uml::umlPackage::CENTRALBUFFERNODE_CLASS);
 	
 
     //-------------------------------------------
-	// ChangeEvent
+	//ChangeEvent
 	uML_ChangeEvent = factory->createClass_in_Package(uML, uml::umlPackage::CHANGEEVENT_CLASS);
 	
     // ChangeEvent attributes
+	//changeExpression
 	uML_ChangeEvent_changeExpression = factory->createProperty_in_Class(uML_ChangeEvent);
 
     //-------------------------------------------
-	// Class
+	//Class
 	uML_Class = factory->createClass_in_Package(uML, uml::umlPackage::CLASS_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_Class);
@@ -1237,29 +1359,41 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // Class attributes
+	//extension
 	uML_Class_extension = factory->createProperty_in_Class(uML_Class);
+	//isAbstract
 	uML_Class_isAbstract = factory->createProperty_in_Class(uML_Class);
+	//isActive
 	uML_Class_isActive = factory->createProperty_in_Class(uML_Class);
+	//nestedClassifier
 	uML_Class_nestedClassifier = factory->createProperty_in_Class(uML_Class);
+	//ownedAttribute
 	uML_Class_ownedAttribute = factory->createProperty_in_Class(uML_Class);
+	//ownedOperation
 	uML_Class_ownedOperation = factory->createProperty_in_Class(uML_Class);
+	//ownedReception
 	uML_Class_ownedReception = factory->createProperty_in_Class(uML_Class);
+	//superClass
 	uML_Class_superClass = factory->createProperty_in_Class(uML_Class);
     // Class operations
+	//createOwnedOperation
 	uML_Class_createOwnedOperation_String_String_Type_Type_String_String_Type_Type = factory->createOperation_in_Class(uML_Class);
 	uML_Class_createOwnedOperation_String_String_Type_Type_String_String_Type_Typereturn = factory->createParameter_in_Operation(uML_Class_createOwnedOperation_String_String_Type_Type_String_String_Type_Type);uML_Class_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_name = factory->createParameter_in_Operation(uML_Class_createOwnedOperation_String_String_Type_Type_String_String_Type_Type);uML_Class_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_parameterNames = factory->createParameter_in_Operation(uML_Class_createOwnedOperation_String_String_Type_Type_String_String_Type_Type);uML_Class_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_parameterTypes = factory->createParameter_in_Operation(uML_Class_createOwnedOperation_String_String_Type_Type_String_String_Type_Type);uML_Class_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_returnType = factory->createParameter_in_Operation(uML_Class_createOwnedOperation_String_String_Type_Type_String_String_Type_Type);
 
+	//extension
 	uML_Class_extension__ = factory->createOperation_in_Class(uML_Class);
 	uML_Class_extension_result = factory->createParameter_in_Operation(uML_Class_extension__);
 
+	//isMetaclass
 	uML_Class_isMetaclass__ = factory->createOperation_in_Class(uML_Class);
 	uML_Class_isMetaclass__return = factory->createParameter_in_Operation(uML_Class_isMetaclass__);
 
+	//superClass
 	uML_Class_superClass__ = factory->createOperation_in_Class(uML_Class);
 	uML_Class_superClass_result = factory->createParameter_in_Operation(uML_Class_superClass__);
 
     //-------------------------------------------
-	// Classifier
+	//Classifier
 	uML_Classifier = factory->createClass_in_Package(uML, uml::umlPackage::CLASSIFIER_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_Classifier);
@@ -1316,100 +1450,141 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // Classifier attributes
+	//attribute
 	uML_Classifier_attribute = factory->createProperty_in_Class(uML_Classifier);
+	//collaborationUse
 	uML_Classifier_collaborationUse = factory->createProperty_in_Class(uML_Classifier);
+	//feature
 	uML_Classifier_feature = factory->createProperty_in_Class(uML_Classifier);
+	//general
 	uML_Classifier_general = factory->createProperty_in_Class(uML_Classifier);
+	//generalization
 	uML_Classifier_generalization = factory->createProperty_in_Class(uML_Classifier);
+	//inheritedMember
 	uML_Classifier_inheritedMember = factory->createProperty_in_Class(uML_Classifier);
+	//isAbstract
 	uML_Classifier_isAbstract = factory->createProperty_in_Class(uML_Classifier);
+	//isFinalSpecialization
 	uML_Classifier_isFinalSpecialization = factory->createProperty_in_Class(uML_Classifier);
+	//ownedTemplateSignature
 	uML_Classifier_ownedTemplateSignature = factory->createProperty_in_Class(uML_Classifier);
+	//ownedUseCase
 	uML_Classifier_ownedUseCase = factory->createProperty_in_Class(uML_Classifier);
+	//powertypeExtent
 	uML_Classifier_powertypeExtent = factory->createProperty_in_Class(uML_Classifier);
+	//redefinedClassifier
 	uML_Classifier_redefinedClassifier = factory->createProperty_in_Class(uML_Classifier);
+	//representation
 	uML_Classifier_representation = factory->createProperty_in_Class(uML_Classifier);
+	//substitution
 	uML_Classifier_substitution = factory->createProperty_in_Class(uML_Classifier);
+	//templateParameter
 	uML_Classifier_templateParameter = factory->createProperty_in_Class(uML_Classifier);
+	//useCase
 	uML_Classifier_useCase = factory->createProperty_in_Class(uML_Classifier);
     // Classifier operations
+	//allAttributes
 	uML_Classifier_allAttributes__ = factory->createOperation_in_Class(uML_Classifier);
 	uML_Classifier_allAttributes_result = factory->createParameter_in_Operation(uML_Classifier_allAttributes__);
 
+	//allFeatures
 	uML_Classifier_allFeatures__ = factory->createOperation_in_Class(uML_Classifier);
 	uML_Classifier_allFeatures_result = factory->createParameter_in_Operation(uML_Classifier_allFeatures__);
 
+	//allParents
 	uML_Classifier_allParents__ = factory->createOperation_in_Class(uML_Classifier);
 	uML_Classifier_allParents_result = factory->createParameter_in_Operation(uML_Classifier_allParents__);
 
+	//allRealizedInterfaces
 	uML_Classifier_allRealizedInterfaces__ = factory->createOperation_in_Class(uML_Classifier);
 	uML_Classifier_allRealizedInterfaces_result = factory->createParameter_in_Operation(uML_Classifier_allRealizedInterfaces__);
 
+	//allSlottableFeatures
 	uML_Classifier_allSlottableFeatures__ = factory->createOperation_in_Class(uML_Classifier);
 	uML_Classifier_allSlottableFeatures_result = factory->createParameter_in_Operation(uML_Classifier_allSlottableFeatures__);
 
+	//allUsedInterfaces
 	uML_Classifier_allUsedInterfaces__ = factory->createOperation_in_Class(uML_Classifier);
 	uML_Classifier_allUsedInterfaces_result = factory->createParameter_in_Operation(uML_Classifier_allUsedInterfaces__);
 
+	//conformsTo
 	uML_Classifier_conformsTo_Type_Type = factory->createOperation_in_Class(uML_Classifier);
 	uML_Classifier_conformsTo_result = factory->createParameter_in_Operation(uML_Classifier_conformsTo_Type_Type);uML_Classifier_conformsTo_Type_Type_other = factory->createParameter_in_Operation(uML_Classifier_conformsTo_Type_Type);
 
+	//directlyRealizedInterfaces
 	uML_Classifier_directlyRealizedInterfaces__ = factory->createOperation_in_Class(uML_Classifier);
 	uML_Classifier_directlyRealizedInterfaces_result = factory->createParameter_in_Operation(uML_Classifier_directlyRealizedInterfaces__);
 
+	//directlyUsedInterfaces
 	uML_Classifier_directlyUsedInterfaces__ = factory->createOperation_in_Class(uML_Classifier);
 	uML_Classifier_directlyUsedInterfaces_result = factory->createParameter_in_Operation(uML_Classifier_directlyUsedInterfaces__);
 
+	//general
 	uML_Classifier_general__ = factory->createOperation_in_Class(uML_Classifier);
 	uML_Classifier_general_result = factory->createParameter_in_Operation(uML_Classifier_general__);
 
+	//getAllAttributes
 	uML_Classifier_getAllAttributes__ = factory->createOperation_in_Class(uML_Classifier);
 	uML_Classifier_getAllAttributes__return = factory->createParameter_in_Operation(uML_Classifier_getAllAttributes__);
 
+	//getAllOperations
 	uML_Classifier_getAllOperations__ = factory->createOperation_in_Class(uML_Classifier);
 	uML_Classifier_getAllOperations__return = factory->createParameter_in_Operation(uML_Classifier_getAllOperations__);
 
+	//getAllUsedInterfaces
 	uML_Classifier_getAllUsedInterfaces__ = factory->createOperation_in_Class(uML_Classifier);
 	uML_Classifier_getAllUsedInterfaces__return = factory->createParameter_in_Operation(uML_Classifier_getAllUsedInterfaces__);
 
+	//getOperation
 	uML_Classifier_getOperation_String_String_Type_String_String_Type = factory->createOperation_in_Class(uML_Classifier);
 	uML_Classifier_getOperation_String_String_Type_String_String_Typereturn = factory->createParameter_in_Operation(uML_Classifier_getOperation_String_String_Type_String_String_Type);uML_Classifier_getOperation_String_String_Type_String_String_Type_name = factory->createParameter_in_Operation(uML_Classifier_getOperation_String_String_Type_String_String_Type);uML_Classifier_getOperation_String_String_Type_String_String_Type_parameterNames = factory->createParameter_in_Operation(uML_Classifier_getOperation_String_String_Type_String_String_Type);uML_Classifier_getOperation_String_String_Type_String_String_Type_parameterTypes = factory->createParameter_in_Operation(uML_Classifier_getOperation_String_String_Type_String_String_Type);
 
+	//getOperation
 	uML_Classifier_getOperation_String_String_Type_Boolean_String_String_Type_Boolean = factory->createOperation_in_Class(uML_Classifier);
 	uML_Classifier_getOperation_String_String_Type_Boolean_String_String_Type_Booleanreturn = factory->createParameter_in_Operation(uML_Classifier_getOperation_String_String_Type_Boolean_String_String_Type_Boolean);uML_Classifier_getOperation_String_String_Type_Boolean_String_String_Type_Boolean_name = factory->createParameter_in_Operation(uML_Classifier_getOperation_String_String_Type_Boolean_String_String_Type_Boolean);uML_Classifier_getOperation_String_String_Type_Boolean_String_String_Type_Boolean_parameterNames = factory->createParameter_in_Operation(uML_Classifier_getOperation_String_String_Type_Boolean_String_String_Type_Boolean);uML_Classifier_getOperation_String_String_Type_Boolean_String_String_Type_Boolean_parameterTypes = factory->createParameter_in_Operation(uML_Classifier_getOperation_String_String_Type_Boolean_String_String_Type_Boolean);uML_Classifier_getOperation_String_String_Type_Boolean_String_String_Type_Boolean_ignoreCase = factory->createParameter_in_Operation(uML_Classifier_getOperation_String_String_Type_Boolean_String_String_Type_Boolean);
 
+	//getOperations
 	uML_Classifier_getOperations__ = factory->createOperation_in_Class(uML_Classifier);
 	uML_Classifier_getOperations__return = factory->createParameter_in_Operation(uML_Classifier_getOperations__);
 
+	//getUsedInterfaces
 	uML_Classifier_getUsedInterfaces__ = factory->createOperation_in_Class(uML_Classifier);
 	uML_Classifier_getUsedInterfaces__return = factory->createParameter_in_Operation(uML_Classifier_getUsedInterfaces__);
 
+	//hasVisibilityOf
 	uML_Classifier_hasVisibilityOf_NamedElement_NamedElement = factory->createOperation_in_Class(uML_Classifier);
 	uML_Classifier_hasVisibilityOf_result = factory->createParameter_in_Operation(uML_Classifier_hasVisibilityOf_NamedElement_NamedElement);uML_Classifier_hasVisibilityOf_NamedElement_NamedElement_n = factory->createParameter_in_Operation(uML_Classifier_hasVisibilityOf_NamedElement_NamedElement);
 
+	//inherit
 	uML_Classifier_inherit_NamedElement_NamedElement = factory->createOperation_in_Class(uML_Classifier);
 	uML_Classifier_inherit_result = factory->createParameter_in_Operation(uML_Classifier_inherit_NamedElement_NamedElement);uML_Classifier_inherit_NamedElement_NamedElement_inhs = factory->createParameter_in_Operation(uML_Classifier_inherit_NamedElement_NamedElement);
 
+	//inheritableMembers
 	uML_Classifier_inheritableMembers_Classifier_Classifier = factory->createOperation_in_Class(uML_Classifier);
 	uML_Classifier_inheritableMembers_result = factory->createParameter_in_Operation(uML_Classifier_inheritableMembers_Classifier_Classifier);uML_Classifier_inheritableMembers_Classifier_Classifier_c = factory->createParameter_in_Operation(uML_Classifier_inheritableMembers_Classifier_Classifier);
 
+	//inheritedMember
 	uML_Classifier_inheritedMember__ = factory->createOperation_in_Class(uML_Classifier);
 	uML_Classifier_inheritedMember_result = factory->createParameter_in_Operation(uML_Classifier_inheritedMember__);
 
+	//isSubstitutableFor
 	uML_Classifier_isSubstitutableFor_Classifier_Classifier = factory->createOperation_in_Class(uML_Classifier);
 	uML_Classifier_isSubstitutableFor_Classifier_Classifier_contract = factory->createParameter_in_Operation(uML_Classifier_isSubstitutableFor_Classifier_Classifier);uML_Classifier_isSubstitutableFor_result = factory->createParameter_in_Operation(uML_Classifier_isSubstitutableFor_Classifier_Classifier);
 
+	//isTemplate
 	uML_Classifier_isTemplate__ = factory->createOperation_in_Class(uML_Classifier);
 	uML_Classifier_isTemplate_result = factory->createParameter_in_Operation(uML_Classifier_isTemplate__);
 
+	//maySpecializeType
 	uML_Classifier_maySpecializeType_Classifier_Classifier = factory->createOperation_in_Class(uML_Classifier);
 	uML_Classifier_maySpecializeType_result = factory->createParameter_in_Operation(uML_Classifier_maySpecializeType_Classifier_Classifier);uML_Classifier_maySpecializeType_Classifier_Classifier_c = factory->createParameter_in_Operation(uML_Classifier_maySpecializeType_Classifier_Classifier);
 
+	//parents
 	uML_Classifier_parents__ = factory->createOperation_in_Class(uML_Classifier);
 	uML_Classifier_parents_result = factory->createParameter_in_Operation(uML_Classifier_parents__);
 
     //-------------------------------------------
-	// ClassifierTemplateParameter
+	//ClassifierTemplateParameter
 	uML_ClassifierTemplateParameter = factory->createClass_in_Package(uML, uml::umlPackage::CLASSIFIERTEMPLATEPARAMETER_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_ClassifierTemplateParameter);
@@ -1507,12 +1682,15 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // ClassifierTemplateParameter attributes
+	//allowSubstitutable
 	uML_ClassifierTemplateParameter_allowSubstitutable = factory->createProperty_in_Class(uML_ClassifierTemplateParameter);
+	//constrainingClassifier
 	uML_ClassifierTemplateParameter_constrainingClassifier = factory->createProperty_in_Class(uML_ClassifierTemplateParameter);
+	//parameteredElement
 	uML_ClassifierTemplateParameter_parameteredElement = factory->createProperty_in_Class(uML_ClassifierTemplateParameter);
 
     //-------------------------------------------
-	// Clause
+	//Clause
 	uML_Clause = factory->createClass_in_Package(uML, uml::umlPackage::CLAUSE_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_Clause);
@@ -1556,15 +1734,21 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // Clause attributes
+	//body
 	uML_Clause_body = factory->createProperty_in_Class(uML_Clause);
+	//bodyOutput
 	uML_Clause_bodyOutput = factory->createProperty_in_Class(uML_Clause);
+	//decider
 	uML_Clause_decider = factory->createProperty_in_Class(uML_Clause);
+	//predecessorClause
 	uML_Clause_predecessorClause = factory->createProperty_in_Class(uML_Clause);
+	//successorClause
 	uML_Clause_successorClause = factory->createProperty_in_Class(uML_Clause);
+	//test
 	uML_Clause_test = factory->createProperty_in_Class(uML_Clause);
 
     //-------------------------------------------
-	// ClearAssociationAction
+	//ClearAssociationAction
 	uML_ClearAssociationAction = factory->createClass_in_Package(uML, uml::umlPackage::CLEARASSOCIATIONACTION_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_ClearAssociationAction);
@@ -1590,11 +1774,13 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // ClearAssociationAction attributes
+	//association
 	uML_ClearAssociationAction_association = factory->createProperty_in_Class(uML_ClearAssociationAction);
+	//object
 	uML_ClearAssociationAction_object = factory->createProperty_in_Class(uML_ClearAssociationAction);
 
     //-------------------------------------------
-	// ClearStructuralFeatureAction
+	//ClearStructuralFeatureAction
 	uML_ClearStructuralFeatureAction = factory->createClass_in_Package(uML, uml::umlPackage::CLEARSTRUCTURALFEATUREACTION_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_ClearStructuralFeatureAction);
@@ -1620,22 +1806,24 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // ClearStructuralFeatureAction attributes
+	//result
 	uML_ClearStructuralFeatureAction_result = factory->createProperty_in_Class(uML_ClearStructuralFeatureAction);
 
     //-------------------------------------------
-	// ClearVariableAction
+	//ClearVariableAction
 	uML_ClearVariableAction = factory->createClass_in_Package(uML, uml::umlPackage::CLEARVARIABLEACTION_CLASS);
 	
 
     //-------------------------------------------
-	// Collaboration
+	//Collaboration
 	uML_Collaboration = factory->createClass_in_Package(uML, uml::umlPackage::COLLABORATION_CLASS);
 	
     // Collaboration attributes
+	//collaborationRole
 	uML_Collaboration_collaborationRole = factory->createProperty_in_Class(uML_Collaboration);
 
     //-------------------------------------------
-	// CollaborationUse
+	//CollaborationUse
 	uML_CollaborationUse = factory->createClass_in_Package(uML, uml::umlPackage::COLLABORATIONUSE_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_CollaborationUse);
@@ -1699,11 +1887,13 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // CollaborationUse attributes
+	//roleBinding
 	uML_CollaborationUse_roleBinding = factory->createProperty_in_Class(uML_CollaborationUse);
+	//type
 	uML_CollaborationUse_type = factory->createProperty_in_Class(uML_CollaborationUse);
 
     //-------------------------------------------
-	// CombinedFragment
+	//CombinedFragment
 	uML_CombinedFragment = factory->createClass_in_Package(uML, uml::umlPackage::COMBINEDFRAGMENT_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_CombinedFragment);
@@ -1751,20 +1941,25 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // CombinedFragment attributes
+	//cfragmentGate
 	uML_CombinedFragment_cfragmentGate = factory->createProperty_in_Class(uML_CombinedFragment);
+	//interactionOperator
 	uML_CombinedFragment_interactionOperator = factory->createProperty_in_Class(uML_CombinedFragment);
+	//operand
 	uML_CombinedFragment_operand = factory->createProperty_in_Class(uML_CombinedFragment);
 
     //-------------------------------------------
-	// Comment
+	//Comment
 	uML_Comment = factory->createClass_in_Package(uML, uml::umlPackage::COMMENT_CLASS);
 	
     // Comment attributes
+	//annotatedElement
 	uML_Comment_annotatedElement = factory->createProperty_in_Class(uML_Comment);
+	//body
 	uML_Comment_body = factory->createProperty_in_Class(uML_Comment);
 
     //-------------------------------------------
-	// CommunicationPath
+	//CommunicationPath
 	uML_CommunicationPath = factory->createClass_in_Package(uML, uml::umlPackage::COMMUNICATIONPATH_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_CommunicationPath);
@@ -1777,7 +1972,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 
     //-------------------------------------------
-	// Component
+	//Component
 	uML_Component = factory->createClass_in_Package(uML, uml::umlPackage::COMPONENT_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_Component);
@@ -1803,40 +1998,53 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // Component attributes
+	//isIndirectlyInstantiated
 	uML_Component_isIndirectlyInstantiated = factory->createProperty_in_Class(uML_Component);
+	//packagedElement
 	uML_Component_packagedElement = factory->createProperty_in_Class(uML_Component);
+	//provided
 	uML_Component_provided = factory->createProperty_in_Class(uML_Component);
+	//realization
 	uML_Component_realization = factory->createProperty_in_Class(uML_Component);
+	//required
 	uML_Component_required = factory->createProperty_in_Class(uML_Component);
     // Component operations
+	//createOwnedClass
 	uML_Component_createOwnedClass_String_Boolean_String_Boolean = factory->createOperation_in_Class(uML_Component);
 	uML_Component_createOwnedClass_String_Boolean_String_Booleanreturn = factory->createParameter_in_Operation(uML_Component_createOwnedClass_String_Boolean_String_Boolean);uML_Component_createOwnedClass_String_Boolean_String_Boolean_name = factory->createParameter_in_Operation(uML_Component_createOwnedClass_String_Boolean_String_Boolean);uML_Component_createOwnedClass_String_Boolean_String_Boolean_isAbstract = factory->createParameter_in_Operation(uML_Component_createOwnedClass_String_Boolean_String_Boolean);
 
+	//createOwnedEnumeration
 	uML_Component_createOwnedEnumeration_String_String = factory->createOperation_in_Class(uML_Component);
 	uML_Component_createOwnedEnumeration_String_Stringreturn = factory->createParameter_in_Operation(uML_Component_createOwnedEnumeration_String_String);uML_Component_createOwnedEnumeration_String_String_name = factory->createParameter_in_Operation(uML_Component_createOwnedEnumeration_String_String);
 
+	//createOwnedInterface
 	uML_Component_createOwnedInterface_String_String = factory->createOperation_in_Class(uML_Component);
 	uML_Component_createOwnedInterface_String_Stringreturn = factory->createParameter_in_Operation(uML_Component_createOwnedInterface_String_String);uML_Component_createOwnedInterface_String_String_name = factory->createParameter_in_Operation(uML_Component_createOwnedInterface_String_String);
 
+	//createOwnedPrimitiveType
 	uML_Component_createOwnedPrimitiveType_String_String = factory->createOperation_in_Class(uML_Component);
 	uML_Component_createOwnedPrimitiveType_String_Stringreturn = factory->createParameter_in_Operation(uML_Component_createOwnedPrimitiveType_String_String);uML_Component_createOwnedPrimitiveType_String_String_name = factory->createParameter_in_Operation(uML_Component_createOwnedPrimitiveType_String_String);
 
+	//provided
 	uML_Component_provided__ = factory->createOperation_in_Class(uML_Component);
 	uML_Component_provided_result = factory->createParameter_in_Operation(uML_Component_provided__);
 
+	//required
 	uML_Component_required__ = factory->createOperation_in_Class(uML_Component);
 	uML_Component_required_result = factory->createParameter_in_Operation(uML_Component_required__);
 
     //-------------------------------------------
-	// ComponentRealization
+	//ComponentRealization
 	uML_ComponentRealization = factory->createClass_in_Package(uML, uml::umlPackage::COMPONENTREALIZATION_CLASS);
 	
     // ComponentRealization attributes
+	//abstraction
 	uML_ComponentRealization_abstraction = factory->createProperty_in_Class(uML_ComponentRealization);
+	//realizingClassifier
 	uML_ComponentRealization_realizingClassifier = factory->createProperty_in_Class(uML_ComponentRealization);
 
     //-------------------------------------------
-	// ConditionalNode
+	//ConditionalNode
 	uML_ConditionalNode = factory->createClass_in_Package(uML, uml::umlPackage::CONDITIONALNODE_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_ConditionalNode);
@@ -1932,34 +2140,43 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // ConditionalNode attributes
+	//clause
 	uML_ConditionalNode_clause = factory->createProperty_in_Class(uML_ConditionalNode);
+	//isAssured
 	uML_ConditionalNode_isAssured = factory->createProperty_in_Class(uML_ConditionalNode);
+	//isDeterminate
 	uML_ConditionalNode_isDeterminate = factory->createProperty_in_Class(uML_ConditionalNode);
+	//result
 	uML_ConditionalNode_result = factory->createProperty_in_Class(uML_ConditionalNode);
     // ConditionalNode operations
+	//allActions
 	uML_ConditionalNode_allActions__ = factory->createOperation_in_Class(uML_ConditionalNode);
 	uML_ConditionalNode_allActions_result = factory->createParameter_in_Operation(uML_ConditionalNode_allActions__);
 
     //-------------------------------------------
-	// ConnectableElement
+	//ConnectableElement
 	uML_ConnectableElement = factory->createClass_in_Package(uML, uml::umlPackage::CONNECTABLEELEMENT_CLASS);
 	
     // ConnectableElement attributes
+	//end
 	uML_ConnectableElement_end = factory->createProperty_in_Class(uML_ConnectableElement);
+	//templateParameter
 	uML_ConnectableElement_templateParameter = factory->createProperty_in_Class(uML_ConnectableElement);
     // ConnectableElement operations
+	//end
 	uML_ConnectableElement_end__ = factory->createOperation_in_Class(uML_ConnectableElement);
 	uML_ConnectableElement_end_result = factory->createParameter_in_Operation(uML_ConnectableElement_end__);
 
     //-------------------------------------------
-	// ConnectableElementTemplateParameter
+	//ConnectableElementTemplateParameter
 	uML_ConnectableElementTemplateParameter = factory->createClass_in_Package(uML, uml::umlPackage::CONNECTABLEELEMENTTEMPLATEPARAMETER_CLASS);
 	
     // ConnectableElementTemplateParameter attributes
+	//parameteredElement
 	uML_ConnectableElementTemplateParameter_parameteredElement = factory->createProperty_in_Class(uML_ConnectableElementTemplateParameter);
 
     //-------------------------------------------
-	// ConnectionPointReference
+	//ConnectionPointReference
 	uML_ConnectionPointReference = factory->createClass_in_Package(uML, uml::umlPackage::CONNECTIONPOINTREFERENCE_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_ConnectionPointReference);
@@ -1985,12 +2202,15 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // ConnectionPointReference attributes
+	//entry
 	uML_ConnectionPointReference_entry = factory->createProperty_in_Class(uML_ConnectionPointReference);
+	//exit
 	uML_ConnectionPointReference_exit = factory->createProperty_in_Class(uML_ConnectionPointReference);
+	//state
 	uML_ConnectionPointReference_state = factory->createProperty_in_Class(uML_ConnectionPointReference);
 
     //-------------------------------------------
-	// Connector
+	//Connector
 	uML_Connector = factory->createClass_in_Package(uML, uml::umlPackage::CONNECTOR_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_Connector);
@@ -2024,17 +2244,23 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // Connector attributes
+	//contract
 	uML_Connector_contract = factory->createProperty_in_Class(uML_Connector);
+	//end
 	uML_Connector_end = factory->createProperty_in_Class(uML_Connector);
+	//kind
 	uML_Connector_kind = factory->createProperty_in_Class(uML_Connector);
+	//redefinedConnector
 	uML_Connector_redefinedConnector = factory->createProperty_in_Class(uML_Connector);
+	//type
 	uML_Connector_type = factory->createProperty_in_Class(uML_Connector);
     // Connector operations
+	//kind
 	uML_Connector_kind__ = factory->createOperation_in_Class(uML_Connector);
 	uML_Connector_kind_result = factory->createParameter_in_Operation(uML_Connector_kind__);
 
     //-------------------------------------------
-	// ConnectorEnd
+	//ConnectorEnd
 	uML_ConnectorEnd = factory->createClass_in_Package(uML, uml::umlPackage::CONNECTOREND_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_ConnectorEnd);
@@ -2090,15 +2316,19 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // ConnectorEnd attributes
+	//definingEnd
 	uML_ConnectorEnd_definingEnd = factory->createProperty_in_Class(uML_ConnectorEnd);
+	//partWithPort
 	uML_ConnectorEnd_partWithPort = factory->createProperty_in_Class(uML_ConnectorEnd);
+	//role
 	uML_ConnectorEnd_role = factory->createProperty_in_Class(uML_ConnectorEnd);
     // ConnectorEnd operations
+	//definingEnd
 	uML_ConnectorEnd_definingEnd__ = factory->createOperation_in_Class(uML_ConnectorEnd);
 	uML_ConnectorEnd_definingEnd_result = factory->createParameter_in_Operation(uML_ConnectorEnd_definingEnd__);
 
     //-------------------------------------------
-	// ConsiderIgnoreFragment
+	//ConsiderIgnoreFragment
 	uML_ConsiderIgnoreFragment = factory->createClass_in_Package(uML, uml::umlPackage::CONSIDERIGNOREFRAGMENT_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_ConsiderIgnoreFragment);
@@ -2124,10 +2354,11 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // ConsiderIgnoreFragment attributes
+	//message
 	uML_ConsiderIgnoreFragment_message = factory->createProperty_in_Class(uML_ConsiderIgnoreFragment);
 
     //-------------------------------------------
-	// Constraint
+	//Constraint
 	uML_Constraint = factory->createClass_in_Package(uML, uml::umlPackage::CONSTRAINT_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_Constraint);
@@ -2161,12 +2392,15 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // Constraint attributes
+	//constrainedElement
 	uML_Constraint_constrainedElement = factory->createProperty_in_Class(uML_Constraint);
+	//context
 	uML_Constraint_context = factory->createProperty_in_Class(uML_Constraint);
+	//specification
 	uML_Constraint_specification = factory->createProperty_in_Class(uML_Constraint);
 
     //-------------------------------------------
-	// Continuation
+	//Continuation
 	uML_Continuation = factory->createClass_in_Package(uML, uml::umlPackage::CONTINUATION_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_Continuation);
@@ -2261,10 +2495,11 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // Continuation attributes
+	//setting
 	uML_Continuation_setting = factory->createProperty_in_Class(uML_Continuation);
 
     //-------------------------------------------
-	// ControlFlow
+	//ControlFlow
 	uML_ControlFlow = factory->createClass_in_Package(uML, uml::umlPackage::CONTROLFLOW_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_ControlFlow);
@@ -2278,12 +2513,12 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 
     //-------------------------------------------
-	// ControlNode
+	//ControlNode
 	uML_ControlNode = factory->createClass_in_Package(uML, uml::umlPackage::CONTROLNODE_CLASS);
 	
 
     //-------------------------------------------
-	// CreateLinkAction
+	//CreateLinkAction
 	uML_CreateLinkAction = factory->createClass_in_Package(uML, uml::umlPackage::CREATELINKACTION_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_CreateLinkAction);
@@ -2295,10 +2530,11 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // CreateLinkAction attributes
+	//endData
 	uML_CreateLinkAction_endData = factory->createProperty_in_Class(uML_CreateLinkAction);
 
     //-------------------------------------------
-	// CreateLinkObjectAction
+	//CreateLinkObjectAction
 	uML_CreateLinkObjectAction = factory->createClass_in_Package(uML, uml::umlPackage::CREATELINKOBJECTACTION_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_CreateLinkObjectAction);
@@ -2338,10 +2574,11 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // CreateLinkObjectAction attributes
+	//result
 	uML_CreateLinkObjectAction_result = factory->createProperty_in_Class(uML_CreateLinkObjectAction);
 
     //-------------------------------------------
-	// CreateObjectAction
+	//CreateObjectAction
 	uML_CreateObjectAction = factory->createClass_in_Package(uML, uml::umlPackage::CREATEOBJECTACTION_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_CreateObjectAction);
@@ -2395,30 +2632,36 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // CreateObjectAction attributes
+	//classifier
 	uML_CreateObjectAction_classifier = factory->createProperty_in_Class(uML_CreateObjectAction);
+	//result
 	uML_CreateObjectAction_result = factory->createProperty_in_Class(uML_CreateObjectAction);
 
     //-------------------------------------------
-	// DataStoreNode
+	//DataStoreNode
 	uML_DataStoreNode = factory->createClass_in_Package(uML, uml::umlPackage::DATASTORENODE_CLASS);
 	
 
     //-------------------------------------------
-	// DataType
+	//DataType
 	uML_DataType = factory->createClass_in_Package(uML, uml::umlPackage::DATATYPE_CLASS);
 	
     // DataType attributes
+	//ownedAttribute
 	uML_DataType_ownedAttribute = factory->createProperty_in_Class(uML_DataType);
+	//ownedOperation
 	uML_DataType_ownedOperation = factory->createProperty_in_Class(uML_DataType);
     // DataType operations
+	//createOwnedAttribute
 	uML_DataType_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural = factory->createOperation_in_Class(uML_DataType);
 	uML_DataType_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNaturalreturn = factory->createParameter_in_Operation(uML_DataType_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural);uML_DataType_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_name = factory->createParameter_in_Operation(uML_DataType_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural);uML_DataType_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_type = factory->createParameter_in_Operation(uML_DataType_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural);uML_DataType_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_lower = factory->createParameter_in_Operation(uML_DataType_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural);uML_DataType_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_upper = factory->createParameter_in_Operation(uML_DataType_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural);
 
+	//createOwnedOperation
 	uML_DataType_createOwnedOperation_String_String_Type_Type_String_String_Type_Type = factory->createOperation_in_Class(uML_DataType);
 	uML_DataType_createOwnedOperation_String_String_Type_Type_String_String_Type_Typereturn = factory->createParameter_in_Operation(uML_DataType_createOwnedOperation_String_String_Type_Type_String_String_Type_Type);uML_DataType_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_name = factory->createParameter_in_Operation(uML_DataType_createOwnedOperation_String_String_Type_Type_String_String_Type_Type);uML_DataType_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_parameterNames = factory->createParameter_in_Operation(uML_DataType_createOwnedOperation_String_String_Type_Type_String_String_Type_Type);uML_DataType_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_parameterTypes = factory->createParameter_in_Operation(uML_DataType_createOwnedOperation_String_String_Type_Type_String_String_Type_Type);uML_DataType_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_returnType = factory->createParameter_in_Operation(uML_DataType_createOwnedOperation_String_String_Type_Type_String_String_Type_Type);
 
     //-------------------------------------------
-	// DecisionNode
+	//DecisionNode
 	uML_DecisionNode = factory->createClass_in_Package(uML, uml::umlPackage::DECISIONNODE_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_DecisionNode);
@@ -2552,33 +2795,40 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // DecisionNode attributes
+	//decisionInput
 	uML_DecisionNode_decisionInput = factory->createProperty_in_Class(uML_DecisionNode);
+	//decisionInputFlow
 	uML_DecisionNode_decisionInputFlow = factory->createProperty_in_Class(uML_DecisionNode);
 
     //-------------------------------------------
-	// Dependency
+	//Dependency
 	uML_Dependency = factory->createClass_in_Package(uML, uml::umlPackage::DEPENDENCY_CLASS);
 	
     // Dependency attributes
+	//client
 	uML_Dependency_client = factory->createProperty_in_Class(uML_Dependency);
+	//supplier
 	uML_Dependency_supplier = factory->createProperty_in_Class(uML_Dependency);
 
     //-------------------------------------------
-	// DeployedArtifact
+	//DeployedArtifact
 	uML_DeployedArtifact = factory->createClass_in_Package(uML, uml::umlPackage::DEPLOYEDARTIFACT_CLASS);
 	
 
     //-------------------------------------------
-	// Deployment
+	//Deployment
 	uML_Deployment = factory->createClass_in_Package(uML, uml::umlPackage::DEPLOYMENT_CLASS);
 	
     // Deployment attributes
+	//configuration
 	uML_Deployment_configuration = factory->createProperty_in_Class(uML_Deployment);
+	//deployedArtifact
 	uML_Deployment_deployedArtifact = factory->createProperty_in_Class(uML_Deployment);
+	//location
 	uML_Deployment_location = factory->createProperty_in_Class(uML_Deployment);
 
     //-------------------------------------------
-	// DeploymentSpecification
+	//DeploymentSpecification
 	uML_DeploymentSpecification = factory->createClass_in_Package(uML, uml::umlPackage::DEPLOYMENTSPECIFICATION_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_DeploymentSpecification);
@@ -2604,30 +2854,37 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // DeploymentSpecification attributes
+	//deployment
 	uML_DeploymentSpecification_deployment = factory->createProperty_in_Class(uML_DeploymentSpecification);
+	//deploymentLocation
 	uML_DeploymentSpecification_deploymentLocation = factory->createProperty_in_Class(uML_DeploymentSpecification);
+	//executionLocation
 	uML_DeploymentSpecification_executionLocation = factory->createProperty_in_Class(uML_DeploymentSpecification);
 
     //-------------------------------------------
-	// DeploymentTarget
+	//DeploymentTarget
 	uML_DeploymentTarget = factory->createClass_in_Package(uML, uml::umlPackage::DEPLOYMENTTARGET_CLASS);
 	
     // DeploymentTarget attributes
+	//deployedElement
 	uML_DeploymentTarget_deployedElement = factory->createProperty_in_Class(uML_DeploymentTarget);
+	//deployment
 	uML_DeploymentTarget_deployment = factory->createProperty_in_Class(uML_DeploymentTarget);
     // DeploymentTarget operations
+	//deployedElement
 	uML_DeploymentTarget_deployedElement__ = factory->createOperation_in_Class(uML_DeploymentTarget);
 	uML_DeploymentTarget_deployedElement_result = factory->createParameter_in_Operation(uML_DeploymentTarget_deployedElement__);
 
     //-------------------------------------------
-	// DestroyLinkAction
+	//DestroyLinkAction
 	uML_DestroyLinkAction = factory->createClass_in_Package(uML, uml::umlPackage::DESTROYLINKACTION_CLASS);
 	
     // DestroyLinkAction attributes
+	//endData
 	uML_DestroyLinkAction_endData = factory->createProperty_in_Class(uML_DestroyLinkAction);
 
     //-------------------------------------------
-	// DestroyObjectAction
+	//DestroyObjectAction
 	uML_DestroyObjectAction = factory->createClass_in_Package(uML, uml::umlPackage::DESTROYOBJECTACTION_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_DestroyObjectAction);
@@ -2653,12 +2910,15 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // DestroyObjectAction attributes
+	//isDestroyLinks
 	uML_DestroyObjectAction_isDestroyLinks = factory->createProperty_in_Class(uML_DestroyObjectAction);
+	//isDestroyOwnedObjects
 	uML_DestroyObjectAction_isDestroyOwnedObjects = factory->createProperty_in_Class(uML_DestroyObjectAction);
+	//target
 	uML_DestroyObjectAction_target = factory->createProperty_in_Class(uML_DestroyObjectAction);
 
     //-------------------------------------------
-	// DestructionOccurrenceSpecification
+	//DestructionOccurrenceSpecification
 	uML_DestructionOccurrenceSpecification = factory->createClass_in_Package(uML, uml::umlPackage::DESTRUCTIONOCCURRENCESPECIFICATION_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_DestructionOccurrenceSpecification);
@@ -2673,20 +2933,22 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 
     //-------------------------------------------
-	// Device
+	//Device
 	uML_Device = factory->createClass_in_Package(uML, uml::umlPackage::DEVICE_CLASS);
 	
 
     //-------------------------------------------
-	// DirectedRelationship
+	//DirectedRelationship
 	uML_DirectedRelationship = factory->createClass_in_Package(uML, uml::umlPackage::DIRECTEDRELATIONSHIP_CLASS);
 	
     // DirectedRelationship attributes
+	//source
 	uML_DirectedRelationship_source = factory->createProperty_in_Class(uML_DirectedRelationship);
+	//target
 	uML_DirectedRelationship_target = factory->createProperty_in_Class(uML_DirectedRelationship);
 
     //-------------------------------------------
-	// Duration
+	//Duration
 	uML_Duration = factory->createClass_in_Package(uML, uml::umlPackage::DURATION_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_Duration);
@@ -2698,14 +2960,17 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // Duration attributes
+	//expr
 	uML_Duration_expr = factory->createProperty_in_Class(uML_Duration);
+	//observation
 	uML_Duration_observation = factory->createProperty_in_Class(uML_Duration);
     // Duration operations
+	//stringValue
 	uML_Duration_stringValue__ = factory->createOperation_in_Class(uML_Duration);
 	uML_Duration_stringValue__return = factory->createParameter_in_Operation(uML_Duration_stringValue__);
 
     //-------------------------------------------
-	// DurationConstraint
+	//DurationConstraint
 	uML_DurationConstraint = factory->createClass_in_Package(uML, uml::umlPackage::DURATIONCONSTRAINT_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_DurationConstraint);
@@ -2733,19 +2998,23 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // DurationConstraint attributes
+	//firstEvent
 	uML_DurationConstraint_firstEvent = factory->createProperty_in_Class(uML_DurationConstraint);
+	//specification
 	uML_DurationConstraint_specification = factory->createProperty_in_Class(uML_DurationConstraint);
 
     //-------------------------------------------
-	// DurationInterval
+	//DurationInterval
 	uML_DurationInterval = factory->createClass_in_Package(uML, uml::umlPackage::DURATIONINTERVAL_CLASS);
 	
     // DurationInterval attributes
+	//max
 	uML_DurationInterval_max = factory->createProperty_in_Class(uML_DurationInterval);
+	//min
 	uML_DurationInterval_min = factory->createProperty_in_Class(uML_DurationInterval);
 
     //-------------------------------------------
-	// DurationObservation
+	//DurationObservation
 	uML_DurationObservation = factory->createClass_in_Package(uML, uml::umlPackage::DURATIONOBSERVATION_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_DurationObservation);
@@ -2759,11 +3028,13 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // DurationObservation attributes
+	//event
 	uML_DurationObservation_event = factory->createProperty_in_Class(uML_DurationObservation);
+	//firstEvent
 	uML_DurationObservation_firstEvent = factory->createProperty_in_Class(uML_DurationObservation);
 
     //-------------------------------------------
-	// Element
+	//Element
 	uML_Element = factory->createClass_in_Package(uML, uml::umlPackage::ELEMENT_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_Element);
@@ -2789,113 +3060,150 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // Element attributes
+	//ownedComment
 	uML_Element_ownedComment = factory->createProperty_in_Class(uML_Element);
+	//ownedElement
 	uML_Element_ownedElement = factory->createProperty_in_Class(uML_Element);
+	//owner
 	uML_Element_owner = factory->createProperty_in_Class(uML_Element);
     // Element operations
+	//addKeyword
 	uML_Element_addKeyword_String_String = factory->createOperation_in_Class(uML_Element);
 	uML_Element_addKeyword_String_Stringreturn = factory->createParameter_in_Operation(uML_Element_addKeyword_String_String);uML_Element_addKeyword_String_String_keyword = factory->createParameter_in_Operation(uML_Element_addKeyword_String_String);
 
+	//allOwnedElements
 	uML_Element_allOwnedElements__ = factory->createOperation_in_Class(uML_Element);
 	uML_Element_allOwnedElements_result = factory->createParameter_in_Operation(uML_Element_allOwnedElements__);
 
+	//applyStereotype
 	uML_Element_applyStereotype_Stereotype_Stereotype = factory->createOperation_in_Class(uML_Element);
 	uML_Element_applyStereotype_Stereotype_Stereotypereturn = factory->createParameter_in_Operation(uML_Element_applyStereotype_Stereotype_Stereotype);uML_Element_applyStereotype_Stereotype_Stereotype_stereotype = factory->createParameter_in_Operation(uML_Element_applyStereotype_Stereotype_Stereotype);
 
+	//createEAnnotation
 	uML_Element_createEAnnotation_String_String = factory->createOperation_in_Class(uML_Element);
 	uML_Element_createEAnnotation_String_Stringreturn = factory->createParameter_in_Operation(uML_Element_createEAnnotation_String_String);uML_Element_createEAnnotation_String_String_source = factory->createParameter_in_Operation(uML_Element_createEAnnotation_String_String);
 
+	//destroy
 	uML_Element_destroy__ = factory->createOperation_in_Class(uML_Element);
 
+	//getApplicableStereotype
 	uML_Element_getApplicableStereotype_String_String = factory->createOperation_in_Class(uML_Element);
 	uML_Element_getApplicableStereotype_String_Stringreturn = factory->createParameter_in_Operation(uML_Element_getApplicableStereotype_String_String);uML_Element_getApplicableStereotype_String_String_qualifiedName = factory->createParameter_in_Operation(uML_Element_getApplicableStereotype_String_String);
 
+	//getApplicableStereotypes
 	uML_Element_getApplicableStereotypes__ = factory->createOperation_in_Class(uML_Element);
 	uML_Element_getApplicableStereotypes__return = factory->createParameter_in_Operation(uML_Element_getApplicableStereotypes__);
 
+	//getAppliedStereotype
 	uML_Element_getAppliedStereotype_String_String = factory->createOperation_in_Class(uML_Element);
 	uML_Element_getAppliedStereotype_String_Stringreturn = factory->createParameter_in_Operation(uML_Element_getAppliedStereotype_String_String);uML_Element_getAppliedStereotype_String_String_qualifiedName = factory->createParameter_in_Operation(uML_Element_getAppliedStereotype_String_String);
 
+	//getAppliedStereotypes
 	uML_Element_getAppliedStereotypes__ = factory->createOperation_in_Class(uML_Element);
 	uML_Element_getAppliedStereotypes__return = factory->createParameter_in_Operation(uML_Element_getAppliedStereotypes__);
 
+	//getAppliedSubstereotype
 	uML_Element_getAppliedSubstereotype_Stereotype_String_Stereotype_String = factory->createOperation_in_Class(uML_Element);
 	uML_Element_getAppliedSubstereotype_Stereotype_String_Stereotype_Stringreturn = factory->createParameter_in_Operation(uML_Element_getAppliedSubstereotype_Stereotype_String_Stereotype_String);uML_Element_getAppliedSubstereotype_Stereotype_String_Stereotype_String_stereotype = factory->createParameter_in_Operation(uML_Element_getAppliedSubstereotype_Stereotype_String_Stereotype_String);uML_Element_getAppliedSubstereotype_Stereotype_String_Stereotype_String_qualifiedName = factory->createParameter_in_Operation(uML_Element_getAppliedSubstereotype_Stereotype_String_Stereotype_String);
 
+	//getAppliedSubstereotypes
 	uML_Element_getAppliedSubstereotypes_Stereotype_Stereotype = factory->createOperation_in_Class(uML_Element);
 	uML_Element_getAppliedSubstereotypes_Stereotype_Stereotypereturn = factory->createParameter_in_Operation(uML_Element_getAppliedSubstereotypes_Stereotype_Stereotype);uML_Element_getAppliedSubstereotypes_Stereotype_Stereotype_stereotype = factory->createParameter_in_Operation(uML_Element_getAppliedSubstereotypes_Stereotype_Stereotype);
 
+	//getKeywords
 	uML_Element_getKeywords__ = factory->createOperation_in_Class(uML_Element);
 	uML_Element_getKeywords__return = factory->createParameter_in_Operation(uML_Element_getKeywords__);
 
+	//getModel
 	uML_Element_getModel__ = factory->createOperation_in_Class(uML_Element);
 	uML_Element_getModel__return = factory->createParameter_in_Operation(uML_Element_getModel__);
 
+	//getNearestPackage
 	uML_Element_getNearestPackage__ = factory->createOperation_in_Class(uML_Element);
 	uML_Element_getNearestPackage__return = factory->createParameter_in_Operation(uML_Element_getNearestPackage__);
 
+	//getRelationships
 	uML_Element_getRelationships__ = factory->createOperation_in_Class(uML_Element);
 	uML_Element_getRelationships__return = factory->createParameter_in_Operation(uML_Element_getRelationships__);
 
+	//getRelationships
 	uML_Element_getRelationships_EClass_EClass = factory->createOperation_in_Class(uML_Element);
 	uML_Element_getRelationships_EClass_EClassreturn = factory->createParameter_in_Operation(uML_Element_getRelationships_EClass_EClass);uML_Element_getRelationships_EClass_EClass_eClass = factory->createParameter_in_Operation(uML_Element_getRelationships_EClass_EClass);
 
+	//getRequiredStereotype
 	uML_Element_getRequiredStereotype_String_String = factory->createOperation_in_Class(uML_Element);
 	uML_Element_getRequiredStereotype_String_Stringreturn = factory->createParameter_in_Operation(uML_Element_getRequiredStereotype_String_String);uML_Element_getRequiredStereotype_String_String_qualifiedName = factory->createParameter_in_Operation(uML_Element_getRequiredStereotype_String_String);
 
+	//getRequiredStereotypes
 	uML_Element_getRequiredStereotypes__ = factory->createOperation_in_Class(uML_Element);
 	uML_Element_getRequiredStereotypes__return = factory->createParameter_in_Operation(uML_Element_getRequiredStereotypes__);
 
+	//getSourceDirectedRelationships
 	uML_Element_getSourceDirectedRelationships__ = factory->createOperation_in_Class(uML_Element);
 	uML_Element_getSourceDirectedRelationships__return = factory->createParameter_in_Operation(uML_Element_getSourceDirectedRelationships__);
 
+	//getSourceDirectedRelationships
 	uML_Element_getSourceDirectedRelationships_EClass_EClass = factory->createOperation_in_Class(uML_Element);
 	uML_Element_getSourceDirectedRelationships_EClass_EClassreturn = factory->createParameter_in_Operation(uML_Element_getSourceDirectedRelationships_EClass_EClass);uML_Element_getSourceDirectedRelationships_EClass_EClass_eClass = factory->createParameter_in_Operation(uML_Element_getSourceDirectedRelationships_EClass_EClass);
 
+	//getStereotypeApplication
 	uML_Element_getStereotypeApplication_Stereotype_Stereotype = factory->createOperation_in_Class(uML_Element);
 	uML_Element_getStereotypeApplication_Stereotype_Stereotypereturn = factory->createParameter_in_Operation(uML_Element_getStereotypeApplication_Stereotype_Stereotype);uML_Element_getStereotypeApplication_Stereotype_Stereotype_stereotype = factory->createParameter_in_Operation(uML_Element_getStereotypeApplication_Stereotype_Stereotype);
 
+	//getStereotypeApplications
 	uML_Element_getStereotypeApplications__ = factory->createOperation_in_Class(uML_Element);
 	uML_Element_getStereotypeApplications__return = factory->createParameter_in_Operation(uML_Element_getStereotypeApplications__);
 
+	//getTargetDirectedRelationships
 	uML_Element_getTargetDirectedRelationships__ = factory->createOperation_in_Class(uML_Element);
 	uML_Element_getTargetDirectedRelationships__return = factory->createParameter_in_Operation(uML_Element_getTargetDirectedRelationships__);
 
+	//getTargetDirectedRelationships
 	uML_Element_getTargetDirectedRelationships_EClass_EClass = factory->createOperation_in_Class(uML_Element);
 	uML_Element_getTargetDirectedRelationships_EClass_EClassreturn = factory->createParameter_in_Operation(uML_Element_getTargetDirectedRelationships_EClass_EClass);uML_Element_getTargetDirectedRelationships_EClass_EClass_eClass = factory->createParameter_in_Operation(uML_Element_getTargetDirectedRelationships_EClass_EClass);
 
+	//getValue
 	uML_Element_getValue_Stereotype_String_Stereotype_String = factory->createOperation_in_Class(uML_Element);
 	uML_Element_getValue_Stereotype_String_Stereotype_Stringreturn = factory->createParameter_in_Operation(uML_Element_getValue_Stereotype_String_Stereotype_String);uML_Element_getValue_Stereotype_String_Stereotype_String_stereotype = factory->createParameter_in_Operation(uML_Element_getValue_Stereotype_String_Stereotype_String);uML_Element_getValue_Stereotype_String_Stereotype_String_propertyName = factory->createParameter_in_Operation(uML_Element_getValue_Stereotype_String_Stereotype_String);
 
+	//hasKeyword
 	uML_Element_hasKeyword_String_String = factory->createOperation_in_Class(uML_Element);
 	uML_Element_hasKeyword_String_Stringreturn = factory->createParameter_in_Operation(uML_Element_hasKeyword_String_String);uML_Element_hasKeyword_String_String_keyword = factory->createParameter_in_Operation(uML_Element_hasKeyword_String_String);
 
+	//hasValue
 	uML_Element_hasValue_Stereotype_String_Stereotype_String = factory->createOperation_in_Class(uML_Element);
 	uML_Element_hasValue_Stereotype_String_Stereotype_Stringreturn = factory->createParameter_in_Operation(uML_Element_hasValue_Stereotype_String_Stereotype_String);uML_Element_hasValue_Stereotype_String_Stereotype_String_stereotype = factory->createParameter_in_Operation(uML_Element_hasValue_Stereotype_String_Stereotype_String);uML_Element_hasValue_Stereotype_String_Stereotype_String_propertyName = factory->createParameter_in_Operation(uML_Element_hasValue_Stereotype_String_Stereotype_String);
 
+	//isStereotypeApplicable
 	uML_Element_isStereotypeApplicable_Stereotype_Stereotype = factory->createOperation_in_Class(uML_Element);
 	uML_Element_isStereotypeApplicable_Stereotype_Stereotypereturn = factory->createParameter_in_Operation(uML_Element_isStereotypeApplicable_Stereotype_Stereotype);uML_Element_isStereotypeApplicable_Stereotype_Stereotype_stereotype = factory->createParameter_in_Operation(uML_Element_isStereotypeApplicable_Stereotype_Stereotype);
 
+	//isStereotypeApplied
 	uML_Element_isStereotypeApplied_Stereotype_Stereotype = factory->createOperation_in_Class(uML_Element);
 	uML_Element_isStereotypeApplied_Stereotype_Stereotypereturn = factory->createParameter_in_Operation(uML_Element_isStereotypeApplied_Stereotype_Stereotype);uML_Element_isStereotypeApplied_Stereotype_Stereotype_stereotype = factory->createParameter_in_Operation(uML_Element_isStereotypeApplied_Stereotype_Stereotype);
 
+	//isStereotypeRequired
 	uML_Element_isStereotypeRequired_Stereotype_Stereotype = factory->createOperation_in_Class(uML_Element);
 	uML_Element_isStereotypeRequired_Stereotype_Stereotypereturn = factory->createParameter_in_Operation(uML_Element_isStereotypeRequired_Stereotype_Stereotype);uML_Element_isStereotypeRequired_Stereotype_Stereotype_stereotype = factory->createParameter_in_Operation(uML_Element_isStereotypeRequired_Stereotype_Stereotype);
 
+	//mustBeOwned
 	uML_Element_mustBeOwned__ = factory->createOperation_in_Class(uML_Element);
 	uML_Element_mustBeOwned_result = factory->createParameter_in_Operation(uML_Element_mustBeOwned__);
 
+	//removeKeyword
 	uML_Element_removeKeyword_String_String = factory->createOperation_in_Class(uML_Element);
 	uML_Element_removeKeyword_String_Stringreturn = factory->createParameter_in_Operation(uML_Element_removeKeyword_String_String);uML_Element_removeKeyword_String_String_keyword = factory->createParameter_in_Operation(uML_Element_removeKeyword_String_String);
 
+	//setValue
 	uML_Element_setValue_Stereotype_String_EJavaObject_Stereotype_String_EJavaObject = factory->createOperation_in_Class(uML_Element);
 	uML_Element_setValue_Stereotype_String_EJavaObject_Stereotype_String_EJavaObject_stereotype = factory->createParameter_in_Operation(uML_Element_setValue_Stereotype_String_EJavaObject_Stereotype_String_EJavaObject);uML_Element_setValue_Stereotype_String_EJavaObject_Stereotype_String_EJavaObject_propertyName = factory->createParameter_in_Operation(uML_Element_setValue_Stereotype_String_EJavaObject_Stereotype_String_EJavaObject);uML_Element_setValue_Stereotype_String_EJavaObject_Stereotype_String_EJavaObject_newValue = factory->createParameter_in_Operation(uML_Element_setValue_Stereotype_String_EJavaObject_Stereotype_String_EJavaObject);
 
+	//unapplyStereotype
 	uML_Element_unapplyStereotype_Stereotype_Stereotype = factory->createOperation_in_Class(uML_Element);
 	uML_Element_unapplyStereotype_Stereotype_Stereotypereturn = factory->createParameter_in_Operation(uML_Element_unapplyStereotype_Stereotype_Stereotype);uML_Element_unapplyStereotype_Stereotype_Stereotype_stereotype = factory->createParameter_in_Operation(uML_Element_unapplyStereotype_Stereotype_Stereotype);
 
     //-------------------------------------------
-	// ElementImport
+	//ElementImport
 	uML_ElementImport = factory->createClass_in_Package(uML, uml::umlPackage::ELEMENTIMPORT_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_ElementImport);
@@ -2921,26 +3229,33 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // ElementImport attributes
+	//alias
 	uML_ElementImport_alias = factory->createProperty_in_Class(uML_ElementImport);
+	//importedElement
 	uML_ElementImport_importedElement = factory->createProperty_in_Class(uML_ElementImport);
+	//importingNamespace
 	uML_ElementImport_importingNamespace = factory->createProperty_in_Class(uML_ElementImport);
+	//visibility
 	uML_ElementImport_visibility = factory->createProperty_in_Class(uML_ElementImport);
     // ElementImport operations
+	//getName
 	uML_ElementImport_getName__ = factory->createOperation_in_Class(uML_ElementImport);
 	uML_ElementImport_getName_result = factory->createParameter_in_Operation(uML_ElementImport_getName__);
 
     //-------------------------------------------
-	// EncapsulatedClassifier
+	//EncapsulatedClassifier
 	uML_EncapsulatedClassifier = factory->createClass_in_Package(uML, uml::umlPackage::ENCAPSULATEDCLASSIFIER_CLASS);
 	
     // EncapsulatedClassifier attributes
+	//ownedPort
 	uML_EncapsulatedClassifier_ownedPort = factory->createProperty_in_Class(uML_EncapsulatedClassifier);
     // EncapsulatedClassifier operations
+	//ownedPort
 	uML_EncapsulatedClassifier_ownedPort__ = factory->createOperation_in_Class(uML_EncapsulatedClassifier);
 	uML_EncapsulatedClassifier_ownedPort_result = factory->createParameter_in_Operation(uML_EncapsulatedClassifier_ownedPort__);
 
     //-------------------------------------------
-	// Enumeration
+	//Enumeration
 	uML_Enumeration = factory->createClass_in_Package(uML, uml::umlPackage::ENUMERATION_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_Enumeration);
@@ -2952,29 +3267,34 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // Enumeration attributes
+	//ownedLiteral
 	uML_Enumeration_ownedLiteral = factory->createProperty_in_Class(uML_Enumeration);
 
     //-------------------------------------------
-	// EnumerationLiteral
+	//EnumerationLiteral
 	uML_EnumerationLiteral = factory->createClass_in_Package(uML, uml::umlPackage::ENUMERATIONLITERAL_CLASS);
 	
     // EnumerationLiteral attributes
+	//classifier
 	uML_EnumerationLiteral_classifier = factory->createProperty_in_Class(uML_EnumerationLiteral);
+	//enumeration
 	uML_EnumerationLiteral_enumeration = factory->createProperty_in_Class(uML_EnumerationLiteral);
     // EnumerationLiteral operations
+	//classifier
 	uML_EnumerationLiteral_classifier__ = factory->createOperation_in_Class(uML_EnumerationLiteral);
 	uML_EnumerationLiteral_classifier_result = factory->createParameter_in_Operation(uML_EnumerationLiteral_classifier__);
 
+	//getClassifiers
 	uML_EnumerationLiteral_getClassifiers__ = factory->createOperation_in_Class(uML_EnumerationLiteral);
 	uML_EnumerationLiteral_getClassifiers__return = factory->createParameter_in_Operation(uML_EnumerationLiteral_getClassifiers__);
 
     //-------------------------------------------
-	// Event
+	//Event
 	uML_Event = factory->createClass_in_Package(uML, uml::umlPackage::EVENT_CLASS);
 	
 
     //-------------------------------------------
-	// ExceptionHandler
+	//ExceptionHandler
 	uML_ExceptionHandler = factory->createClass_in_Package(uML, uml::umlPackage::EXCEPTIONHANDLER_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_ExceptionHandler);
@@ -3084,32 +3404,38 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // ExceptionHandler attributes
+	//exceptionInput
 	uML_ExceptionHandler_exceptionInput = factory->createProperty_in_Class(uML_ExceptionHandler);
+	//exceptionType
 	uML_ExceptionHandler_exceptionType = factory->createProperty_in_Class(uML_ExceptionHandler);
+	//handlerBody
 	uML_ExceptionHandler_handlerBody = factory->createProperty_in_Class(uML_ExceptionHandler);
+	//protectedNode
 	uML_ExceptionHandler_protectedNode = factory->createProperty_in_Class(uML_ExceptionHandler);
 
     //-------------------------------------------
-	// ExecutableNode
+	//ExecutableNode
 	uML_ExecutableNode = factory->createClass_in_Package(uML, uml::umlPackage::EXECUTABLENODE_CLASS);
 	
     // ExecutableNode attributes
+	//handler
 	uML_ExecutableNode_handler = factory->createProperty_in_Class(uML_ExecutableNode);
 
     //-------------------------------------------
-	// ExecutionEnvironment
+	//ExecutionEnvironment
 	uML_ExecutionEnvironment = factory->createClass_in_Package(uML, uml::umlPackage::EXECUTIONENVIRONMENT_CLASS);
 	
 
     //-------------------------------------------
-	// ExecutionOccurrenceSpecification
+	//ExecutionOccurrenceSpecification
 	uML_ExecutionOccurrenceSpecification = factory->createClass_in_Package(uML, uml::umlPackage::EXECUTIONOCCURRENCESPECIFICATION_CLASS);
 	
     // ExecutionOccurrenceSpecification attributes
+	//execution
 	uML_ExecutionOccurrenceSpecification_execution = factory->createProperty_in_Class(uML_ExecutionOccurrenceSpecification);
 
     //-------------------------------------------
-	// ExecutionSpecification
+	//ExecutionSpecification
 	uML_ExecutionSpecification = factory->createClass_in_Package(uML, uml::umlPackage::EXECUTIONSPECIFICATION_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_ExecutionSpecification);
@@ -3121,11 +3447,13 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // ExecutionSpecification attributes
+	//finish
 	uML_ExecutionSpecification_finish = factory->createProperty_in_Class(uML_ExecutionSpecification);
+	//start
 	uML_ExecutionSpecification_start = factory->createProperty_in_Class(uML_ExecutionSpecification);
 
     //-------------------------------------------
-	// ExpansionNode
+	//ExpansionNode
 	uML_ExpansionNode = factory->createClass_in_Package(uML, uml::umlPackage::EXPANSIONNODE_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_ExpansionNode);
@@ -3137,28 +3465,35 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // ExpansionNode attributes
+	//regionAsInput
 	uML_ExpansionNode_regionAsInput = factory->createProperty_in_Class(uML_ExpansionNode);
+	//regionAsOutput
 	uML_ExpansionNode_regionAsOutput = factory->createProperty_in_Class(uML_ExpansionNode);
 
     //-------------------------------------------
-	// ExpansionRegion
+	//ExpansionRegion
 	uML_ExpansionRegion = factory->createClass_in_Package(uML, uml::umlPackage::EXPANSIONREGION_CLASS);
 	
     // ExpansionRegion attributes
+	//inputElement
 	uML_ExpansionRegion_inputElement = factory->createProperty_in_Class(uML_ExpansionRegion);
+	//mode
 	uML_ExpansionRegion_mode = factory->createProperty_in_Class(uML_ExpansionRegion);
+	//outputElement
 	uML_ExpansionRegion_outputElement = factory->createProperty_in_Class(uML_ExpansionRegion);
 
     //-------------------------------------------
-	// Expression
+	//Expression
 	uML_Expression = factory->createClass_in_Package(uML, uml::umlPackage::EXPRESSION_CLASS);
 	
     // Expression attributes
+	//operand
 	uML_Expression_operand = factory->createProperty_in_Class(uML_Expression);
+	//symbol
 	uML_Expression_symbol = factory->createProperty_in_Class(uML_Expression);
 
     //-------------------------------------------
-	// Extend
+	//Extend
 	uML_Extend = factory->createClass_in_Package(uML, uml::umlPackage::EXTEND_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_Extend);
@@ -3170,13 +3505,17 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // Extend attributes
+	//condition
 	uML_Extend_condition = factory->createProperty_in_Class(uML_Extend);
+	//extendedCase
 	uML_Extend_extendedCase = factory->createProperty_in_Class(uML_Extend);
+	//extension
 	uML_Extend_extension = factory->createProperty_in_Class(uML_Extend);
+	//extensionLocation
 	uML_Extend_extensionLocation = factory->createProperty_in_Class(uML_Extend);
 
     //-------------------------------------------
-	// Extension
+	//Extension
 	uML_Extension = factory->createClass_in_Package(uML, uml::umlPackage::EXTENSION_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_Extension);
@@ -3202,27 +3541,35 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // Extension attributes
+	//isRequired
 	uML_Extension_isRequired = factory->createProperty_in_Class(uML_Extension);
+	//metaclass
 	uML_Extension_metaclass = factory->createProperty_in_Class(uML_Extension);
+	//ownedEnd
 	uML_Extension_ownedEnd = factory->createProperty_in_Class(uML_Extension);
     // Extension operations
+	//getStereotype
 	uML_Extension_getStereotype__ = factory->createOperation_in_Class(uML_Extension);
 	uML_Extension_getStereotype__return = factory->createParameter_in_Operation(uML_Extension_getStereotype__);
 
+	//getStereotypeEnd
 	uML_Extension_getStereotypeEnd__ = factory->createOperation_in_Class(uML_Extension);
 	uML_Extension_getStereotypeEnd__return = factory->createParameter_in_Operation(uML_Extension_getStereotypeEnd__);
 
+	//isRequired
 	uML_Extension_isRequired__ = factory->createOperation_in_Class(uML_Extension);
 	uML_Extension_isRequired_result = factory->createParameter_in_Operation(uML_Extension_isRequired__);
 
+	//metaclass
 	uML_Extension_metaclass__ = factory->createOperation_in_Class(uML_Extension);
 	uML_Extension_metaclass_result = factory->createParameter_in_Operation(uML_Extension_metaclass__);
 
+	//metaclassEnd
 	uML_Extension_metaclassEnd__ = factory->createOperation_in_Class(uML_Extension);
 	uML_Extension_metaclassEnd_result = factory->createParameter_in_Operation(uML_Extension_metaclassEnd__);
 
     //-------------------------------------------
-	// ExtensionEnd
+	//ExtensionEnd
 	uML_ExtensionEnd = factory->createClass_in_Package(uML, uml::umlPackage::EXTENSIONEND_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_ExtensionEnd);
@@ -3248,20 +3595,25 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // ExtensionEnd attributes
+	//lower
 	uML_ExtensionEnd_lower = factory->createProperty_in_Class(uML_ExtensionEnd);
+	//type
 	uML_ExtensionEnd_type = factory->createProperty_in_Class(uML_ExtensionEnd);
     // ExtensionEnd operations
+	//getLower
 	uML_ExtensionEnd_getLower__ = factory->createOperation_in_Class(uML_ExtensionEnd);
 	uML_ExtensionEnd_getLower__return = factory->createParameter_in_Operation(uML_ExtensionEnd_getLower__);
 
+	//lowerBound
 	uML_ExtensionEnd_lowerBound__ = factory->createOperation_in_Class(uML_ExtensionEnd);
 	uML_ExtensionEnd_lowerBound_result = factory->createParameter_in_Operation(uML_ExtensionEnd_lowerBound__);
 
+	//setLower
 	uML_ExtensionEnd_setLower_Integer_Integer = factory->createOperation_in_Class(uML_ExtensionEnd);
 	uML_ExtensionEnd_setLower_Integer_Integer_newLower = factory->createParameter_in_Operation(uML_ExtensionEnd_setLower_Integer_Integer);
 
     //-------------------------------------------
-	// ExtensionPoint
+	//ExtensionPoint
 	uML_ExtensionPoint = factory->createClass_in_Package(uML, uml::umlPackage::EXTENSIONPOINT_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_ExtensionPoint);
@@ -3273,18 +3625,21 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // ExtensionPoint attributes
+	//useCase
 	uML_ExtensionPoint_useCase = factory->createProperty_in_Class(uML_ExtensionPoint);
 
     //-------------------------------------------
-	// Feature
+	//Feature
 	uML_Feature = factory->createClass_in_Package(uML, uml::umlPackage::FEATURE_CLASS);
 	
     // Feature attributes
+	//featuringClassifier
 	uML_Feature_featuringClassifier = factory->createProperty_in_Class(uML_Feature);
+	//isStatic
 	uML_Feature_isStatic = factory->createProperty_in_Class(uML_Feature);
 
     //-------------------------------------------
-	// FinalNode
+	//FinalNode
 	uML_FinalNode = factory->createClass_in_Package(uML, uml::umlPackage::FINALNODE_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_FinalNode);
@@ -3297,7 +3652,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 
     //-------------------------------------------
-	// FinalState
+	//FinalState
 	uML_FinalState = factory->createClass_in_Package(uML, uml::umlPackage::FINALSTATE_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_FinalState);
@@ -3380,12 +3735,12 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 
     //-------------------------------------------
-	// FlowFinalNode
+	//FlowFinalNode
 	uML_FlowFinalNode = factory->createClass_in_Package(uML, uml::umlPackage::FLOWFINALNODE_CLASS);
 	
 
     //-------------------------------------------
-	// ForkNode
+	//ForkNode
 	uML_ForkNode = factory->createClass_in_Package(uML, uml::umlPackage::FORKNODE_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_ForkNode);
@@ -3413,7 +3768,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 
     //-------------------------------------------
-	// FunctionBehavior
+	//FunctionBehavior
 	uML_FunctionBehavior = factory->createClass_in_Package(uML, uml::umlPackage::FUNCTIONBEHAVIOR_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_FunctionBehavior);
@@ -3442,11 +3797,12 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // FunctionBehavior operations
+	//hasAllDataTypeAttributes
 	uML_FunctionBehavior_hasAllDataTypeAttributes_DataType_DataType = factory->createOperation_in_Class(uML_FunctionBehavior);
 	uML_FunctionBehavior_hasAllDataTypeAttributes_result = factory->createParameter_in_Operation(uML_FunctionBehavior_hasAllDataTypeAttributes_DataType_DataType);uML_FunctionBehavior_hasAllDataTypeAttributes_DataType_DataType_d = factory->createParameter_in_Operation(uML_FunctionBehavior_hasAllDataTypeAttributes_DataType_DataType);
 
     //-------------------------------------------
-	// Gate
+	//Gate
 	uML_Gate = factory->createClass_in_Package(uML, uml::umlPackage::GATE_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_Gate);
@@ -3558,32 +3914,40 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // Gate operations
+	//getName
 	uML_Gate_getName__ = factory->createOperation_in_Class(uML_Gate);
 	uML_Gate_getName_result = factory->createParameter_in_Operation(uML_Gate_getName__);
 
+	//getOperand
 	uML_Gate_getOperand__ = factory->createOperation_in_Class(uML_Gate);
 	uML_Gate_getOperand_result = factory->createParameter_in_Operation(uML_Gate_getOperand__);
 
+	//isActual
 	uML_Gate_isActual__ = factory->createOperation_in_Class(uML_Gate);
 	uML_Gate_isActual_result = factory->createParameter_in_Operation(uML_Gate_isActual__);
 
+	//isDistinguishableFrom
 	uML_Gate_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace = factory->createOperation_in_Class(uML_Gate);
 	uML_Gate_isDistinguishableFrom_result = factory->createParameter_in_Operation(uML_Gate_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace);uML_Gate_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace_n = factory->createParameter_in_Operation(uML_Gate_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace);uML_Gate_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace_ns = factory->createParameter_in_Operation(uML_Gate_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace);
 
+	//isFormal
 	uML_Gate_isFormal__ = factory->createOperation_in_Class(uML_Gate);
 	uML_Gate_isFormal_result = factory->createParameter_in_Operation(uML_Gate_isFormal__);
 
+	//isInsideCF
 	uML_Gate_isInsideCF__ = factory->createOperation_in_Class(uML_Gate);
 	uML_Gate_isInsideCF_result = factory->createParameter_in_Operation(uML_Gate_isInsideCF__);
 
+	//isOutsideCF
 	uML_Gate_isOutsideCF__ = factory->createOperation_in_Class(uML_Gate);
 	uML_Gate_isOutsideCF_result = factory->createParameter_in_Operation(uML_Gate_isOutsideCF__);
 
+	//matches
 	uML_Gate_matches_Gate_Gate = factory->createOperation_in_Class(uML_Gate);
 	uML_Gate_matches_result = factory->createParameter_in_Operation(uML_Gate_matches_Gate_Gate);uML_Gate_matches_Gate_Gate_gateToMatch = factory->createParameter_in_Operation(uML_Gate_matches_Gate_Gate);
 
     //-------------------------------------------
-	// GeneralOrdering
+	//GeneralOrdering
 	uML_GeneralOrdering = factory->createClass_in_Package(uML, uml::umlPackage::GENERALORDERING_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_GeneralOrdering);
@@ -3595,21 +3959,27 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // GeneralOrdering attributes
+	//after
 	uML_GeneralOrdering_after = factory->createProperty_in_Class(uML_GeneralOrdering);
+	//before
 	uML_GeneralOrdering_before = factory->createProperty_in_Class(uML_GeneralOrdering);
 
     //-------------------------------------------
-	// Generalization
+	//Generalization
 	uML_Generalization = factory->createClass_in_Package(uML, uml::umlPackage::GENERALIZATION_CLASS);
 	
     // Generalization attributes
+	//general
 	uML_Generalization_general = factory->createProperty_in_Class(uML_Generalization);
+	//generalizationSet
 	uML_Generalization_generalizationSet = factory->createProperty_in_Class(uML_Generalization);
+	//isSubstitutable
 	uML_Generalization_isSubstitutable = factory->createProperty_in_Class(uML_Generalization);
+	//specific
 	uML_Generalization_specific = factory->createProperty_in_Class(uML_Generalization);
 
     //-------------------------------------------
-	// GeneralizationSet
+	//GeneralizationSet
 	uML_GeneralizationSet = factory->createClass_in_Package(uML, uml::umlPackage::GENERALIZATIONSET_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_GeneralizationSet);
@@ -3639,30 +4009,39 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // GeneralizationSet attributes
+	//generalization
 	uML_GeneralizationSet_generalization = factory->createProperty_in_Class(uML_GeneralizationSet);
+	//isCovering
 	uML_GeneralizationSet_isCovering = factory->createProperty_in_Class(uML_GeneralizationSet);
+	//isDisjoint
 	uML_GeneralizationSet_isDisjoint = factory->createProperty_in_Class(uML_GeneralizationSet);
+	//powertype
 	uML_GeneralizationSet_powertype = factory->createProperty_in_Class(uML_GeneralizationSet);
 
     //-------------------------------------------
-	// Image
+	//Image
 	uML_Image = factory->createClass_in_Package(uML, uml::umlPackage::IMAGE_CLASS);
 	
     // Image attributes
+	//content
 	uML_Image_content = factory->createProperty_in_Class(uML_Image);
+	//format
 	uML_Image_format = factory->createProperty_in_Class(uML_Image);
+	//location
 	uML_Image_location = factory->createProperty_in_Class(uML_Image);
 
     //-------------------------------------------
-	// Include
+	//Include
 	uML_Include = factory->createClass_in_Package(uML, uml::umlPackage::INCLUDE_CLASS);
 	
     // Include attributes
+	//addition
 	uML_Include_addition = factory->createProperty_in_Class(uML_Include);
+	//includingCase
 	uML_Include_includingCase = factory->createProperty_in_Class(uML_Include);
 
     //-------------------------------------------
-	// InformationFlow
+	//InformationFlow
 	uML_InformationFlow = factory->createClass_in_Package(uML, uml::umlPackage::INFORMATIONFLOW_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_InformationFlow);
@@ -3723,16 +4102,23 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // InformationFlow attributes
+	//conveyed
 	uML_InformationFlow_conveyed = factory->createProperty_in_Class(uML_InformationFlow);
+	//informationSource
 	uML_InformationFlow_informationSource = factory->createProperty_in_Class(uML_InformationFlow);
+	//informationTarget
 	uML_InformationFlow_informationTarget = factory->createProperty_in_Class(uML_InformationFlow);
+	//realization
 	uML_InformationFlow_realization = factory->createProperty_in_Class(uML_InformationFlow);
+	//realizingActivityEdge
 	uML_InformationFlow_realizingActivityEdge = factory->createProperty_in_Class(uML_InformationFlow);
+	//realizingConnector
 	uML_InformationFlow_realizingConnector = factory->createProperty_in_Class(uML_InformationFlow);
+	//realizingMessage
 	uML_InformationFlow_realizingMessage = factory->createProperty_in_Class(uML_InformationFlow);
 
     //-------------------------------------------
-	// InformationItem
+	//InformationItem
 	uML_InformationItem = factory->createClass_in_Package(uML, uml::umlPackage::INFORMATIONITEM_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_InformationItem);
@@ -3780,10 +4166,11 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // InformationItem attributes
+	//represented
 	uML_InformationItem_represented = factory->createProperty_in_Class(uML_InformationItem);
 
     //-------------------------------------------
-	// InitialNode
+	//InitialNode
 	uML_InitialNode = factory->createClass_in_Package(uML, uml::umlPackage::INITIALNODE_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_InitialNode);
@@ -3810,7 +4197,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 
     //-------------------------------------------
-	// InputPin
+	//InputPin
 	uML_InputPin = factory->createClass_in_Package(uML, uml::umlPackage::INPUTPIN_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_InputPin);
@@ -3826,7 +4213,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 
     //-------------------------------------------
-	// InstanceSpecification
+	//InstanceSpecification
 	uML_InstanceSpecification = factory->createClass_in_Package(uML, uml::umlPackage::INSTANCESPECIFICATION_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_InstanceSpecification);
@@ -3880,22 +4267,27 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // InstanceSpecification attributes
+	//classifier
 	uML_InstanceSpecification_classifier = factory->createProperty_in_Class(uML_InstanceSpecification);
+	//slot
 	uML_InstanceSpecification_slot = factory->createProperty_in_Class(uML_InstanceSpecification);
+	//specification
 	uML_InstanceSpecification_specification = factory->createProperty_in_Class(uML_InstanceSpecification);
 
     //-------------------------------------------
-	// InstanceValue
+	//InstanceValue
 	uML_InstanceValue = factory->createClass_in_Package(uML, uml::umlPackage::INSTANCEVALUE_CLASS);
 	
     // InstanceValue attributes
+	//instance
 	uML_InstanceValue_instance = factory->createProperty_in_Class(uML_InstanceValue);
     // InstanceValue operations
+	//stringValue
 	uML_InstanceValue_stringValue__ = factory->createOperation_in_Class(uML_InstanceValue);
 	uML_InstanceValue_stringValue__return = factory->createParameter_in_Operation(uML_InstanceValue_stringValue__);
 
     //-------------------------------------------
-	// Interaction
+	//Interaction
 	uML_Interaction = factory->createClass_in_Package(uML, uml::umlPackage::INTERACTION_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_Interaction);
@@ -3907,14 +4299,19 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // Interaction attributes
+	//action
 	uML_Interaction_action = factory->createProperty_in_Class(uML_Interaction);
+	//formalGate
 	uML_Interaction_formalGate = factory->createProperty_in_Class(uML_Interaction);
+	//fragment
 	uML_Interaction_fragment = factory->createProperty_in_Class(uML_Interaction);
+	//lifeline
 	uML_Interaction_lifeline = factory->createProperty_in_Class(uML_Interaction);
+	//message
 	uML_Interaction_message = factory->createProperty_in_Class(uML_Interaction);
 
     //-------------------------------------------
-	// InteractionConstraint
+	//InteractionConstraint
 	uML_InteractionConstraint = factory->createClass_in_Package(uML, uml::umlPackage::INTERACTIONCONSTRAINT_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_InteractionConstraint);
@@ -4002,21 +4399,27 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // InteractionConstraint attributes
+	//maxint
 	uML_InteractionConstraint_maxint = factory->createProperty_in_Class(uML_InteractionConstraint);
+	//minint
 	uML_InteractionConstraint_minint = factory->createProperty_in_Class(uML_InteractionConstraint);
 
     //-------------------------------------------
-	// InteractionFragment
+	//InteractionFragment
 	uML_InteractionFragment = factory->createClass_in_Package(uML, uml::umlPackage::INTERACTIONFRAGMENT_CLASS);
 	
     // InteractionFragment attributes
+	//covered
 	uML_InteractionFragment_covered = factory->createProperty_in_Class(uML_InteractionFragment);
+	//enclosingInteraction
 	uML_InteractionFragment_enclosingInteraction = factory->createProperty_in_Class(uML_InteractionFragment);
+	//enclosingOperand
 	uML_InteractionFragment_enclosingOperand = factory->createProperty_in_Class(uML_InteractionFragment);
+	//generalOrdering
 	uML_InteractionFragment_generalOrdering = factory->createProperty_in_Class(uML_InteractionFragment);
 
     //-------------------------------------------
-	// InteractionOperand
+	//InteractionOperand
 	uML_InteractionOperand = factory->createClass_in_Package(uML, uml::umlPackage::INTERACTIONOPERAND_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_InteractionOperand);
@@ -4036,11 +4439,13 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // InteractionOperand attributes
+	//fragment
 	uML_InteractionOperand_fragment = factory->createProperty_in_Class(uML_InteractionOperand);
+	//guard
 	uML_InteractionOperand_guard = factory->createProperty_in_Class(uML_InteractionOperand);
 
     //-------------------------------------------
-	// InteractionUse
+	//InteractionUse
 	uML_InteractionUse = factory->createClass_in_Package(uML, uml::umlPackage::INTERACTIONUSE_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_InteractionUse);
@@ -4140,14 +4545,19 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // InteractionUse attributes
+	//actualGate
 	uML_InteractionUse_actualGate = factory->createProperty_in_Class(uML_InteractionUse);
+	//argument
 	uML_InteractionUse_argument = factory->createProperty_in_Class(uML_InteractionUse);
+	//refersTo
 	uML_InteractionUse_refersTo = factory->createProperty_in_Class(uML_InteractionUse);
+	//returnValue
 	uML_InteractionUse_returnValue = factory->createProperty_in_Class(uML_InteractionUse);
+	//returnValueRecipient
 	uML_InteractionUse_returnValueRecipient = factory->createProperty_in_Class(uML_InteractionUse);
 
     //-------------------------------------------
-	// Interface
+	//Interface
 	uML_Interface = factory->createClass_in_Package(uML, uml::umlPackage::INTERFACE_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_Interface);
@@ -4159,29 +4569,39 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // Interface attributes
+	//nestedClassifier
 	uML_Interface_nestedClassifier = factory->createProperty_in_Class(uML_Interface);
+	//ownedAttribute
 	uML_Interface_ownedAttribute = factory->createProperty_in_Class(uML_Interface);
+	//ownedOperation
 	uML_Interface_ownedOperation = factory->createProperty_in_Class(uML_Interface);
+	//ownedReception
 	uML_Interface_ownedReception = factory->createProperty_in_Class(uML_Interface);
+	//protocol
 	uML_Interface_protocol = factory->createProperty_in_Class(uML_Interface);
+	//redefinedInterface
 	uML_Interface_redefinedInterface = factory->createProperty_in_Class(uML_Interface);
     // Interface operations
+	//createOwnedAttribute
 	uML_Interface_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural = factory->createOperation_in_Class(uML_Interface);
 	uML_Interface_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNaturalreturn = factory->createParameter_in_Operation(uML_Interface_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural);uML_Interface_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_name = factory->createParameter_in_Operation(uML_Interface_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural);uML_Interface_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_type = factory->createParameter_in_Operation(uML_Interface_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural);uML_Interface_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_lower = factory->createParameter_in_Operation(uML_Interface_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural);uML_Interface_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_upper = factory->createParameter_in_Operation(uML_Interface_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural);
 
+	//createOwnedOperation
 	uML_Interface_createOwnedOperation_String_String_Type_Type_String_String_Type_Type = factory->createOperation_in_Class(uML_Interface);
 	uML_Interface_createOwnedOperation_String_String_Type_Type_String_String_Type_Typereturn = factory->createParameter_in_Operation(uML_Interface_createOwnedOperation_String_String_Type_Type_String_String_Type_Type);uML_Interface_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_name = factory->createParameter_in_Operation(uML_Interface_createOwnedOperation_String_String_Type_Type_String_String_Type_Type);uML_Interface_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_parameterNames = factory->createParameter_in_Operation(uML_Interface_createOwnedOperation_String_String_Type_Type_String_String_Type_Type);uML_Interface_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_parameterTypes = factory->createParameter_in_Operation(uML_Interface_createOwnedOperation_String_String_Type_Type_String_String_Type_Type);uML_Interface_createOwnedOperation_String_String_Type_Type_String_String_Type_Type_returnType = factory->createParameter_in_Operation(uML_Interface_createOwnedOperation_String_String_Type_Type_String_String_Type_Type);
 
     //-------------------------------------------
-	// InterfaceRealization
+	//InterfaceRealization
 	uML_InterfaceRealization = factory->createClass_in_Package(uML, uml::umlPackage::INTERFACEREALIZATION_CLASS);
 	
     // InterfaceRealization attributes
+	//contract
 	uML_InterfaceRealization_contract = factory->createProperty_in_Class(uML_InterfaceRealization);
+	//implementingClassifier
 	uML_InterfaceRealization_implementingClassifier = factory->createProperty_in_Class(uML_InterfaceRealization);
 
     //-------------------------------------------
-	// InterruptibleActivityRegion
+	//InterruptibleActivityRegion
 	uML_InterruptibleActivityRegion = factory->createClass_in_Package(uML, uml::umlPackage::INTERRUPTIBLEACTIVITYREGION_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_InterruptibleActivityRegion);
@@ -4194,34 +4614,41 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // InterruptibleActivityRegion attributes
+	//interruptingEdge
 	uML_InterruptibleActivityRegion_interruptingEdge = factory->createProperty_in_Class(uML_InterruptibleActivityRegion);
+	//node
 	uML_InterruptibleActivityRegion_node = factory->createProperty_in_Class(uML_InterruptibleActivityRegion);
 
     //-------------------------------------------
-	// Interval
+	//Interval
 	uML_Interval = factory->createClass_in_Package(uML, uml::umlPackage::INTERVAL_CLASS);
 	
     // Interval attributes
+	//max
 	uML_Interval_max = factory->createProperty_in_Class(uML_Interval);
+	//min
 	uML_Interval_min = factory->createProperty_in_Class(uML_Interval);
 
     //-------------------------------------------
-	// IntervalConstraint
+	//IntervalConstraint
 	uML_IntervalConstraint = factory->createClass_in_Package(uML, uml::umlPackage::INTERVALCONSTRAINT_CLASS);
 	
     // IntervalConstraint attributes
+	//specification
 	uML_IntervalConstraint_specification = factory->createProperty_in_Class(uML_IntervalConstraint);
 
     //-------------------------------------------
-	// InvocationAction
+	//InvocationAction
 	uML_InvocationAction = factory->createClass_in_Package(uML, uml::umlPackage::INVOCATIONACTION_CLASS);
 	
     // InvocationAction attributes
+	//argument
 	uML_InvocationAction_argument = factory->createProperty_in_Class(uML_InvocationAction);
+	//onPort
 	uML_InvocationAction_onPort = factory->createProperty_in_Class(uML_InvocationAction);
 
     //-------------------------------------------
-	// JoinNode
+	//JoinNode
 	uML_JoinNode = factory->createClass_in_Package(uML, uml::umlPackage::JOINNODE_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_JoinNode);
@@ -4249,11 +4676,13 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // JoinNode attributes
+	//isCombineDuplicate
 	uML_JoinNode_isCombineDuplicate = factory->createProperty_in_Class(uML_JoinNode);
+	//joinSpec
 	uML_JoinNode_joinSpec = factory->createProperty_in_Class(uML_JoinNode);
 
     //-------------------------------------------
-	// Lifeline
+	//Lifeline
 	uML_Lifeline = factory->createClass_in_Package(uML, uml::umlPackage::LIFELINE_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_Lifeline);
@@ -4348,14 +4777,19 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // Lifeline attributes
+	//coveredBy
 	uML_Lifeline_coveredBy = factory->createProperty_in_Class(uML_Lifeline);
+	//decomposedAs
 	uML_Lifeline_decomposedAs = factory->createProperty_in_Class(uML_Lifeline);
+	//interaction
 	uML_Lifeline_interaction = factory->createProperty_in_Class(uML_Lifeline);
+	//represents
 	uML_Lifeline_represents = factory->createProperty_in_Class(uML_Lifeline);
+	//selector
 	uML_Lifeline_selector = factory->createProperty_in_Class(uML_Lifeline);
 
     //-------------------------------------------
-	// LinkAction
+	//LinkAction
 	uML_LinkAction = factory->createClass_in_Package(uML, uml::umlPackage::LINKACTION_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_LinkAction);
@@ -4395,14 +4829,17 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // LinkAction attributes
+	//endData
 	uML_LinkAction_endData = factory->createProperty_in_Class(uML_LinkAction);
+	//inputValue
 	uML_LinkAction_inputValue = factory->createProperty_in_Class(uML_LinkAction);
     // LinkAction operations
+	//association
 	uML_LinkAction_association__ = factory->createOperation_in_Class(uML_LinkAction);
 	uML_LinkAction_association_result = factory->createParameter_in_Operation(uML_LinkAction_association__);
 
     //-------------------------------------------
-	// LinkEndCreationData
+	//LinkEndCreationData
 	uML_LinkEndCreationData = factory->createClass_in_Package(uML, uml::umlPackage::LINKENDCREATIONDATA_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_LinkEndCreationData);
@@ -4414,14 +4851,17 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // LinkEndCreationData attributes
+	//insertAt
 	uML_LinkEndCreationData_insertAt = factory->createProperty_in_Class(uML_LinkEndCreationData);
+	//isReplaceAll
 	uML_LinkEndCreationData_isReplaceAll = factory->createProperty_in_Class(uML_LinkEndCreationData);
     // LinkEndCreationData operations
+	//allPins
 	uML_LinkEndCreationData_allPins__ = factory->createOperation_in_Class(uML_LinkEndCreationData);
 	uML_LinkEndCreationData_allPins_result = factory->createParameter_in_Operation(uML_LinkEndCreationData_allPins__);
 
     //-------------------------------------------
-	// LinkEndData
+	//LinkEndData
 	uML_LinkEndData = factory->createClass_in_Package(uML, uml::umlPackage::LINKENDDATA_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_LinkEndData);
@@ -4489,15 +4929,19 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // LinkEndData attributes
+	//end
 	uML_LinkEndData_end = factory->createProperty_in_Class(uML_LinkEndData);
+	//qualifier
 	uML_LinkEndData_qualifier = factory->createProperty_in_Class(uML_LinkEndData);
+	//value
 	uML_LinkEndData_value = factory->createProperty_in_Class(uML_LinkEndData);
     // LinkEndData operations
+	//allPins
 	uML_LinkEndData_allPins__ = factory->createOperation_in_Class(uML_LinkEndData);
 	uML_LinkEndData_allPins_result = factory->createParameter_in_Operation(uML_LinkEndData_allPins__);
 
     //-------------------------------------------
-	// LinkEndDestructionData
+	//LinkEndDestructionData
 	uML_LinkEndDestructionData = factory->createClass_in_Package(uML, uml::umlPackage::LINKENDDESTRUCTIONDATA_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_LinkEndDestructionData);
@@ -4514,113 +4958,139 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // LinkEndDestructionData attributes
+	//destroyAt
 	uML_LinkEndDestructionData_destroyAt = factory->createProperty_in_Class(uML_LinkEndDestructionData);
+	//isDestroyDuplicates
 	uML_LinkEndDestructionData_isDestroyDuplicates = factory->createProperty_in_Class(uML_LinkEndDestructionData);
     // LinkEndDestructionData operations
+	//allPins
 	uML_LinkEndDestructionData_allPins__ = factory->createOperation_in_Class(uML_LinkEndDestructionData);
 	uML_LinkEndDestructionData_allPins_result = factory->createParameter_in_Operation(uML_LinkEndDestructionData_allPins__);
 
     //-------------------------------------------
-	// LiteralBoolean
+	//LiteralBoolean
 	uML_LiteralBoolean = factory->createClass_in_Package(uML, uml::umlPackage::LITERALBOOLEAN_CLASS);
 	
     // LiteralBoolean attributes
+	//value
 	uML_LiteralBoolean_value = factory->createProperty_in_Class(uML_LiteralBoolean);
     // LiteralBoolean operations
+	//booleanValue
 	uML_LiteralBoolean_booleanValue__ = factory->createOperation_in_Class(uML_LiteralBoolean);
 	uML_LiteralBoolean_booleanValue_result = factory->createParameter_in_Operation(uML_LiteralBoolean_booleanValue__);
 
+	//isComputable
 	uML_LiteralBoolean_isComputable__ = factory->createOperation_in_Class(uML_LiteralBoolean);
 	uML_LiteralBoolean_isComputable_result = factory->createParameter_in_Operation(uML_LiteralBoolean_isComputable__);
 
+	//stringValue
 	uML_LiteralBoolean_stringValue__ = factory->createOperation_in_Class(uML_LiteralBoolean);
 	uML_LiteralBoolean_stringValue__return = factory->createParameter_in_Operation(uML_LiteralBoolean_stringValue__);
 
     //-------------------------------------------
-	// LiteralInteger
+	//LiteralInteger
 	uML_LiteralInteger = factory->createClass_in_Package(uML, uml::umlPackage::LITERALINTEGER_CLASS);
 	
     // LiteralInteger attributes
+	//value
 	uML_LiteralInteger_value = factory->createProperty_in_Class(uML_LiteralInteger);
     // LiteralInteger operations
+	//integerValue
 	uML_LiteralInteger_integerValue__ = factory->createOperation_in_Class(uML_LiteralInteger);
 	uML_LiteralInteger_integerValue_result = factory->createParameter_in_Operation(uML_LiteralInteger_integerValue__);
 
+	//isComputable
 	uML_LiteralInteger_isComputable__ = factory->createOperation_in_Class(uML_LiteralInteger);
 	uML_LiteralInteger_isComputable_result = factory->createParameter_in_Operation(uML_LiteralInteger_isComputable__);
 
+	//stringValue
 	uML_LiteralInteger_stringValue__ = factory->createOperation_in_Class(uML_LiteralInteger);
 	uML_LiteralInteger_stringValue__return = factory->createParameter_in_Operation(uML_LiteralInteger_stringValue__);
 
     //-------------------------------------------
-	// LiteralNull
+	//LiteralNull
 	uML_LiteralNull = factory->createClass_in_Package(uML, uml::umlPackage::LITERALNULL_CLASS);
 	
     // LiteralNull operations
+	//isComputable
 	uML_LiteralNull_isComputable__ = factory->createOperation_in_Class(uML_LiteralNull);
 	uML_LiteralNull_isComputable_result = factory->createParameter_in_Operation(uML_LiteralNull_isComputable__);
 
+	//isNull
 	uML_LiteralNull_isNull__ = factory->createOperation_in_Class(uML_LiteralNull);
 	uML_LiteralNull_isNull_result = factory->createParameter_in_Operation(uML_LiteralNull_isNull__);
 
     //-------------------------------------------
-	// LiteralReal
+	//LiteralReal
 	uML_LiteralReal = factory->createClass_in_Package(uML, uml::umlPackage::LITERALREAL_CLASS);
 	
     // LiteralReal attributes
+	//value
 	uML_LiteralReal_value = factory->createProperty_in_Class(uML_LiteralReal);
     // LiteralReal operations
+	//isComputable
 	uML_LiteralReal_isComputable__ = factory->createOperation_in_Class(uML_LiteralReal);
 	uML_LiteralReal_isComputable_result = factory->createParameter_in_Operation(uML_LiteralReal_isComputable__);
 
+	//realValue
 	uML_LiteralReal_realValue__ = factory->createOperation_in_Class(uML_LiteralReal);
 	uML_LiteralReal_realValue_result = factory->createParameter_in_Operation(uML_LiteralReal_realValue__);
 
+	//stringValue
 	uML_LiteralReal_stringValue__ = factory->createOperation_in_Class(uML_LiteralReal);
 	uML_LiteralReal_stringValue__return = factory->createParameter_in_Operation(uML_LiteralReal_stringValue__);
 
     //-------------------------------------------
-	// LiteralSpecification
+	//LiteralSpecification
 	uML_LiteralSpecification = factory->createClass_in_Package(uML, uml::umlPackage::LITERALSPECIFICATION_CLASS);
 	
 
     //-------------------------------------------
-	// LiteralString
+	//LiteralString
 	uML_LiteralString = factory->createClass_in_Package(uML, uml::umlPackage::LITERALSTRING_CLASS);
 	
     // LiteralString attributes
+	//value
 	uML_LiteralString_value = factory->createProperty_in_Class(uML_LiteralString);
     // LiteralString operations
+	//integerValue
 	uML_LiteralString_integerValue__ = factory->createOperation_in_Class(uML_LiteralString);
 	uML_LiteralString_integerValue__return = factory->createParameter_in_Operation(uML_LiteralString_integerValue__);
 
+	//isComputable
 	uML_LiteralString_isComputable__ = factory->createOperation_in_Class(uML_LiteralString);
 	uML_LiteralString_isComputable_result = factory->createParameter_in_Operation(uML_LiteralString_isComputable__);
 
+	//stringValue
 	uML_LiteralString_stringValue__ = factory->createOperation_in_Class(uML_LiteralString);
 	uML_LiteralString_stringValue_result = factory->createParameter_in_Operation(uML_LiteralString_stringValue__);
 
+	//unlimitedValue
 	uML_LiteralString_unlimitedValue__ = factory->createOperation_in_Class(uML_LiteralString);
 	uML_LiteralString_unlimitedValue__return = factory->createParameter_in_Operation(uML_LiteralString_unlimitedValue__);
 
     //-------------------------------------------
-	// LiteralUnlimitedNatural
+	//LiteralUnlimitedNatural
 	uML_LiteralUnlimitedNatural = factory->createClass_in_Package(uML, uml::umlPackage::LITERALUNLIMITEDNATURAL_CLASS);
 	
     // LiteralUnlimitedNatural attributes
+	//value
 	uML_LiteralUnlimitedNatural_value = factory->createProperty_in_Class(uML_LiteralUnlimitedNatural);
     // LiteralUnlimitedNatural operations
+	//isComputable
 	uML_LiteralUnlimitedNatural_isComputable__ = factory->createOperation_in_Class(uML_LiteralUnlimitedNatural);
 	uML_LiteralUnlimitedNatural_isComputable_result = factory->createParameter_in_Operation(uML_LiteralUnlimitedNatural_isComputable__);
 
+	//stringValue
 	uML_LiteralUnlimitedNatural_stringValue__ = factory->createOperation_in_Class(uML_LiteralUnlimitedNatural);
 	uML_LiteralUnlimitedNatural_stringValue__return = factory->createParameter_in_Operation(uML_LiteralUnlimitedNatural_stringValue__);
 
+	//unlimitedValue
 	uML_LiteralUnlimitedNatural_unlimitedValue__ = factory->createOperation_in_Class(uML_LiteralUnlimitedNatural);
 	uML_LiteralUnlimitedNatural_unlimitedValue_result = factory->createParameter_in_Operation(uML_LiteralUnlimitedNatural_unlimitedValue__);
 
     //-------------------------------------------
-	// LoopNode
+	//LoopNode
 	uML_LoopNode = factory->createClass_in_Package(uML, uml::umlPackage::LOOPNODE_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_LoopNode);
@@ -4774,31 +5244,43 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // LoopNode attributes
+	//bodyOutput
 	uML_LoopNode_bodyOutput = factory->createProperty_in_Class(uML_LoopNode);
+	//bodyPart
 	uML_LoopNode_bodyPart = factory->createProperty_in_Class(uML_LoopNode);
+	//decider
 	uML_LoopNode_decider = factory->createProperty_in_Class(uML_LoopNode);
+	//isTestedFirst
 	uML_LoopNode_isTestedFirst = factory->createProperty_in_Class(uML_LoopNode);
+	//loopVariable
 	uML_LoopNode_loopVariable = factory->createProperty_in_Class(uML_LoopNode);
+	//loopVariableInput
 	uML_LoopNode_loopVariableInput = factory->createProperty_in_Class(uML_LoopNode);
+	//result
 	uML_LoopNode_result = factory->createProperty_in_Class(uML_LoopNode);
+	//setupPart
 	uML_LoopNode_setupPart = factory->createProperty_in_Class(uML_LoopNode);
+	//test
 	uML_LoopNode_test = factory->createProperty_in_Class(uML_LoopNode);
     // LoopNode operations
+	//allActions
 	uML_LoopNode_allActions__ = factory->createOperation_in_Class(uML_LoopNode);
 	uML_LoopNode_allActions_result = factory->createParameter_in_Operation(uML_LoopNode_allActions__);
 
+	//sourceNodes
 	uML_LoopNode_sourceNodes__ = factory->createOperation_in_Class(uML_LoopNode);
 	uML_LoopNode_sourceNodes_result = factory->createParameter_in_Operation(uML_LoopNode_sourceNodes__);
 
     //-------------------------------------------
-	// Manifestation
+	//Manifestation
 	uML_Manifestation = factory->createClass_in_Package(uML, uml::umlPackage::MANIFESTATION_CLASS);
 	
     // Manifestation attributes
+	//utilizedElement
 	uML_Manifestation_utilizedElement = factory->createProperty_in_Class(uML_Manifestation);
 
     //-------------------------------------------
-	// MergeNode
+	//MergeNode
 	uML_MergeNode = factory->createClass_in_Package(uML, uml::umlPackage::MERGENODE_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_MergeNode);
@@ -4826,7 +5308,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 
     //-------------------------------------------
-	// Message
+	//Message
 	uML_Message = factory->createClass_in_Package(uML, uml::umlPackage::MESSAGE_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_Message);
@@ -5010,62 +5492,79 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // Message attributes
+	//argument
 	uML_Message_argument = factory->createProperty_in_Class(uML_Message);
+	//connector
 	uML_Message_connector = factory->createProperty_in_Class(uML_Message);
+	//interaction
 	uML_Message_interaction = factory->createProperty_in_Class(uML_Message);
+	//messageKind
 	uML_Message_messageKind = factory->createProperty_in_Class(uML_Message);
+	//messageSort
 	uML_Message_messageSort = factory->createProperty_in_Class(uML_Message);
+	//receiveEvent
 	uML_Message_receiveEvent = factory->createProperty_in_Class(uML_Message);
+	//sendEvent
 	uML_Message_sendEvent = factory->createProperty_in_Class(uML_Message);
+	//signature
 	uML_Message_signature = factory->createProperty_in_Class(uML_Message);
     // Message operations
+	//isDistinguishableFrom
 	uML_Message_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace = factory->createOperation_in_Class(uML_Message);
 	uML_Message_isDistinguishableFrom_result = factory->createParameter_in_Operation(uML_Message_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace);uML_Message_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace_n = factory->createParameter_in_Operation(uML_Message_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace);uML_Message_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace_ns = factory->createParameter_in_Operation(uML_Message_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace);
 
+	//messageKind
 	uML_Message_messageKind__ = factory->createOperation_in_Class(uML_Message);
 	uML_Message_messageKind_result = factory->createParameter_in_Operation(uML_Message_messageKind__);
 
     //-------------------------------------------
-	// MessageEnd
+	//MessageEnd
 	uML_MessageEnd = factory->createClass_in_Package(uML, uml::umlPackage::MESSAGEEND_CLASS);
 	
     // MessageEnd attributes
+	//message
 	uML_MessageEnd_message = factory->createProperty_in_Class(uML_MessageEnd);
     // MessageEnd operations
+	//enclosingFragment
 	uML_MessageEnd_enclosingFragment__ = factory->createOperation_in_Class(uML_MessageEnd);
 	uML_MessageEnd_enclosingFragment_result = factory->createParameter_in_Operation(uML_MessageEnd_enclosingFragment__);
 
+	//isReceive
 	uML_MessageEnd_isReceive__ = factory->createOperation_in_Class(uML_MessageEnd);
 	uML_MessageEnd_isReceive_result = factory->createParameter_in_Operation(uML_MessageEnd_isReceive__);
 
+	//isSend
 	uML_MessageEnd_isSend__ = factory->createOperation_in_Class(uML_MessageEnd);
 	uML_MessageEnd_isSend_result = factory->createParameter_in_Operation(uML_MessageEnd_isSend__);
 
+	//oppositeEnd
 	uML_MessageEnd_oppositeEnd__ = factory->createOperation_in_Class(uML_MessageEnd);
 	uML_MessageEnd_oppositeEnd_result = factory->createParameter_in_Operation(uML_MessageEnd_oppositeEnd__);
 
     //-------------------------------------------
-	// MessageEvent
+	//MessageEvent
 	uML_MessageEvent = factory->createClass_in_Package(uML, uml::umlPackage::MESSAGEEVENT_CLASS);
 	
 
     //-------------------------------------------
-	// MessageOccurrenceSpecification
+	//MessageOccurrenceSpecification
 	uML_MessageOccurrenceSpecification = factory->createClass_in_Package(uML, uml::umlPackage::MESSAGEOCCURRENCESPECIFICATION_CLASS);
 	
 
     //-------------------------------------------
-	// Model
+	//Model
 	uML_Model = factory->createClass_in_Package(uML, uml::umlPackage::MODEL_CLASS);
 	
     // Model attributes
+	//viewpoint
 	uML_Model_viewpoint = factory->createProperty_in_Class(uML_Model);
     // Model operations
+	//isMetamodel
 	uML_Model_isMetamodel__ = factory->createOperation_in_Class(uML_Model);
 	uML_Model_isMetamodel__return = factory->createParameter_in_Operation(uML_Model_isMetamodel__);
 
     //-------------------------------------------
-	// MultiplicityElement
+	//MultiplicityElement
 	uML_MultiplicityElement = factory->createClass_in_Package(uML, uml::umlPackage::MULTIPLICITYELEMENT_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_MultiplicityElement);
@@ -5139,45 +5638,61 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // MultiplicityElement attributes
+	//isOrdered
 	uML_MultiplicityElement_isOrdered = factory->createProperty_in_Class(uML_MultiplicityElement);
+	//isUnique
 	uML_MultiplicityElement_isUnique = factory->createProperty_in_Class(uML_MultiplicityElement);
+	//lower
 	uML_MultiplicityElement_lower = factory->createProperty_in_Class(uML_MultiplicityElement);
+	//lowerValue
 	uML_MultiplicityElement_lowerValue = factory->createProperty_in_Class(uML_MultiplicityElement);
+	//upper
 	uML_MultiplicityElement_upper = factory->createProperty_in_Class(uML_MultiplicityElement);
+	//upperValue
 	uML_MultiplicityElement_upperValue = factory->createProperty_in_Class(uML_MultiplicityElement);
     // MultiplicityElement operations
+	//compatibleWith
 	uML_MultiplicityElement_compatibleWith_MultiplicityElement_MultiplicityElement = factory->createOperation_in_Class(uML_MultiplicityElement);
 	uML_MultiplicityElement_compatibleWith_result = factory->createParameter_in_Operation(uML_MultiplicityElement_compatibleWith_MultiplicityElement_MultiplicityElement);uML_MultiplicityElement_compatibleWith_MultiplicityElement_MultiplicityElement_other = factory->createParameter_in_Operation(uML_MultiplicityElement_compatibleWith_MultiplicityElement_MultiplicityElement);
 
+	//includesMultiplicity
 	uML_MultiplicityElement_includesMultiplicity_MultiplicityElement_MultiplicityElement = factory->createOperation_in_Class(uML_MultiplicityElement);
 	uML_MultiplicityElement_includesMultiplicity_result = factory->createParameter_in_Operation(uML_MultiplicityElement_includesMultiplicity_MultiplicityElement_MultiplicityElement);uML_MultiplicityElement_includesMultiplicity_MultiplicityElement_MultiplicityElement_M = factory->createParameter_in_Operation(uML_MultiplicityElement_includesMultiplicity_MultiplicityElement_MultiplicityElement);
 
+	//is
 	uML_MultiplicityElement_is_Integer_UnlimitedNatural_Integer_UnlimitedNatural = factory->createOperation_in_Class(uML_MultiplicityElement);
 	uML_MultiplicityElement_is_result = factory->createParameter_in_Operation(uML_MultiplicityElement_is_Integer_UnlimitedNatural_Integer_UnlimitedNatural);uML_MultiplicityElement_is_Integer_UnlimitedNatural_Integer_UnlimitedNatural_lowerbound = factory->createParameter_in_Operation(uML_MultiplicityElement_is_Integer_UnlimitedNatural_Integer_UnlimitedNatural);uML_MultiplicityElement_is_Integer_UnlimitedNatural_Integer_UnlimitedNatural_upperbound = factory->createParameter_in_Operation(uML_MultiplicityElement_is_Integer_UnlimitedNatural_Integer_UnlimitedNatural);
 
+	//isMultivalued
 	uML_MultiplicityElement_isMultivalued__ = factory->createOperation_in_Class(uML_MultiplicityElement);
 	uML_MultiplicityElement_isMultivalued_result = factory->createParameter_in_Operation(uML_MultiplicityElement_isMultivalued__);
 
+	//lower
 	uML_MultiplicityElement_lower__ = factory->createOperation_in_Class(uML_MultiplicityElement);
 	uML_MultiplicityElement_lower_result = factory->createParameter_in_Operation(uML_MultiplicityElement_lower__);
 
+	//lowerBound
 	uML_MultiplicityElement_lowerBound__ = factory->createOperation_in_Class(uML_MultiplicityElement);
 	uML_MultiplicityElement_lowerBound_result = factory->createParameter_in_Operation(uML_MultiplicityElement_lowerBound__);
 
+	//setLower
 	uML_MultiplicityElement_setLower_Integer_Integer = factory->createOperation_in_Class(uML_MultiplicityElement);
 	uML_MultiplicityElement_setLower_Integer_Integer_newLower = factory->createParameter_in_Operation(uML_MultiplicityElement_setLower_Integer_Integer);
 
+	//setUpper
 	uML_MultiplicityElement_setUpper_UnlimitedNatural_UnlimitedNatural = factory->createOperation_in_Class(uML_MultiplicityElement);
 	uML_MultiplicityElement_setUpper_UnlimitedNatural_UnlimitedNatural_newUpper = factory->createParameter_in_Operation(uML_MultiplicityElement_setUpper_UnlimitedNatural_UnlimitedNatural);
 
+	//upper
 	uML_MultiplicityElement_upper__ = factory->createOperation_in_Class(uML_MultiplicityElement);
 	uML_MultiplicityElement_upper_result = factory->createParameter_in_Operation(uML_MultiplicityElement_upper__);
 
+	//upperBound
 	uML_MultiplicityElement_upperBound__ = factory->createOperation_in_Class(uML_MultiplicityElement);
 	uML_MultiplicityElement_upperBound_result = factory->createParameter_in_Operation(uML_MultiplicityElement_upperBound__);
 
     //-------------------------------------------
-	// NamedElement
+	//NamedElement
 	uML_NamedElement = factory->createClass_in_Package(uML, uml::umlPackage::NAMEDELEMENT_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_NamedElement);
@@ -5217,48 +5732,65 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // NamedElement attributes
+	//clientDependency
 	uML_NamedElement_clientDependency = factory->createProperty_in_Class(uML_NamedElement);
+	//name
 	uML_NamedElement_name = factory->createProperty_in_Class(uML_NamedElement);
+	//nameExpression
 	uML_NamedElement_nameExpression = factory->createProperty_in_Class(uML_NamedElement);
+	//namespace
 	uML_NamedElement_namespace = factory->createProperty_in_Class(uML_NamedElement);
+	//qualifiedName
 	uML_NamedElement_qualifiedName = factory->createProperty_in_Class(uML_NamedElement);
+	//visibility
 	uML_NamedElement_visibility = factory->createProperty_in_Class(uML_NamedElement);
     // NamedElement operations
+	//allNamespaces
 	uML_NamedElement_allNamespaces__ = factory->createOperation_in_Class(uML_NamedElement);
 	uML_NamedElement_allNamespaces_result = factory->createParameter_in_Operation(uML_NamedElement_allNamespaces__);
 
+	//allOwningPackages
 	uML_NamedElement_allOwningPackages__ = factory->createOperation_in_Class(uML_NamedElement);
 	uML_NamedElement_allOwningPackages_result = factory->createParameter_in_Operation(uML_NamedElement_allOwningPackages__);
 
+	//clientDependency
 	uML_NamedElement_clientDependency__ = factory->createOperation_in_Class(uML_NamedElement);
 	uML_NamedElement_clientDependency_result = factory->createParameter_in_Operation(uML_NamedElement_clientDependency__);
 
+	//createDependency
 	uML_NamedElement_createDependency_NamedElement_NamedElement = factory->createOperation_in_Class(uML_NamedElement);
 	uML_NamedElement_createDependency_NamedElement_NamedElementreturn = factory->createParameter_in_Operation(uML_NamedElement_createDependency_NamedElement_NamedElement);uML_NamedElement_createDependency_NamedElement_NamedElement_supplier = factory->createParameter_in_Operation(uML_NamedElement_createDependency_NamedElement_NamedElement);
 
+	//createUsage
 	uML_NamedElement_createUsage_NamedElement_NamedElement = factory->createOperation_in_Class(uML_NamedElement);
 	uML_NamedElement_createUsage_NamedElement_NamedElementreturn = factory->createParameter_in_Operation(uML_NamedElement_createUsage_NamedElement_NamedElement);uML_NamedElement_createUsage_NamedElement_NamedElement_supplier = factory->createParameter_in_Operation(uML_NamedElement_createUsage_NamedElement_NamedElement);
 
+	//getLabel
 	uML_NamedElement_getLabel__ = factory->createOperation_in_Class(uML_NamedElement);
 	uML_NamedElement_getLabel__return = factory->createParameter_in_Operation(uML_NamedElement_getLabel__);
 
+	//getLabel
 	uML_NamedElement_getLabel_Boolean_Boolean = factory->createOperation_in_Class(uML_NamedElement);
 	uML_NamedElement_getLabel_Boolean_Booleanreturn = factory->createParameter_in_Operation(uML_NamedElement_getLabel_Boolean_Boolean);uML_NamedElement_getLabel_Boolean_Boolean_localize = factory->createParameter_in_Operation(uML_NamedElement_getLabel_Boolean_Boolean);
 
+	//isDistinguishableFrom
 	uML_NamedElement_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace = factory->createOperation_in_Class(uML_NamedElement);
 	uML_NamedElement_isDistinguishableFrom_result = factory->createParameter_in_Operation(uML_NamedElement_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace);uML_NamedElement_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace_n = factory->createParameter_in_Operation(uML_NamedElement_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace);uML_NamedElement_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace_ns = factory->createParameter_in_Operation(uML_NamedElement_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace);
 
+	//namespace
 	uML_NamedElement_namespace__ = factory->createOperation_in_Class(uML_NamedElement);
 	uML_NamedElement_namespace_result = factory->createParameter_in_Operation(uML_NamedElement_namespace__);
 
+	//qualifiedName
 	uML_NamedElement_qualifiedName__ = factory->createOperation_in_Class(uML_NamedElement);
 	uML_NamedElement_qualifiedName_result = factory->createParameter_in_Operation(uML_NamedElement_qualifiedName__);
 
+	//separator
 	uML_NamedElement_separator__ = factory->createOperation_in_Class(uML_NamedElement);
 	uML_NamedElement_separator_result = factory->createParameter_in_Operation(uML_NamedElement_separator__);
 
     //-------------------------------------------
-	// Namespace
+	//Namespace
 	uML_Namespace = factory->createClass_in_Package(uML, uml::umlPackage::NAMESPACE_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_Namespace);
@@ -5298,45 +5830,61 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // Namespace attributes
+	//elementImport
 	uML_Namespace_elementImport = factory->createProperty_in_Class(uML_Namespace);
+	//importedMember
 	uML_Namespace_importedMember = factory->createProperty_in_Class(uML_Namespace);
+	//member
 	uML_Namespace_member = factory->createProperty_in_Class(uML_Namespace);
+	//ownedMember
 	uML_Namespace_ownedMember = factory->createProperty_in_Class(uML_Namespace);
+	//ownedRule
 	uML_Namespace_ownedRule = factory->createProperty_in_Class(uML_Namespace);
+	//packageImport
 	uML_Namespace_packageImport = factory->createProperty_in_Class(uML_Namespace);
     // Namespace operations
+	//createElementImport
 	uML_Namespace_createElementImport_PackageableElement_VisibilityKind_PackageableElement_VisibilityKind = factory->createOperation_in_Class(uML_Namespace);
 	uML_Namespace_createElementImport_PackageableElement_VisibilityKind_PackageableElement_VisibilityKindreturn = factory->createParameter_in_Operation(uML_Namespace_createElementImport_PackageableElement_VisibilityKind_PackageableElement_VisibilityKind);uML_Namespace_createElementImport_PackageableElement_VisibilityKind_PackageableElement_VisibilityKind_element = factory->createParameter_in_Operation(uML_Namespace_createElementImport_PackageableElement_VisibilityKind_PackageableElement_VisibilityKind);uML_Namespace_createElementImport_PackageableElement_VisibilityKind_PackageableElement_VisibilityKind_visibility = factory->createParameter_in_Operation(uML_Namespace_createElementImport_PackageableElement_VisibilityKind_PackageableElement_VisibilityKind);
 
+	//createPackageImport
 	uML_Namespace_createPackageImport_Package_VisibilityKind_Package_VisibilityKind = factory->createOperation_in_Class(uML_Namespace);
 	uML_Namespace_createPackageImport_Package_VisibilityKind_Package_VisibilityKindreturn = factory->createParameter_in_Operation(uML_Namespace_createPackageImport_Package_VisibilityKind_Package_VisibilityKind);uML_Namespace_createPackageImport_Package_VisibilityKind_Package_VisibilityKind_package_ = factory->createParameter_in_Operation(uML_Namespace_createPackageImport_Package_VisibilityKind_Package_VisibilityKind);uML_Namespace_createPackageImport_Package_VisibilityKind_Package_VisibilityKind_visibility = factory->createParameter_in_Operation(uML_Namespace_createPackageImport_Package_VisibilityKind_Package_VisibilityKind);
 
+	//excludeCollisions
 	uML_Namespace_excludeCollisions_PackageableElement_PackageableElement = factory->createOperation_in_Class(uML_Namespace);
 	uML_Namespace_excludeCollisions_result = factory->createParameter_in_Operation(uML_Namespace_excludeCollisions_PackageableElement_PackageableElement);uML_Namespace_excludeCollisions_PackageableElement_PackageableElement_imps = factory->createParameter_in_Operation(uML_Namespace_excludeCollisions_PackageableElement_PackageableElement);
 
+	//getImportedElements
 	uML_Namespace_getImportedElements__ = factory->createOperation_in_Class(uML_Namespace);
 	uML_Namespace_getImportedElements__return = factory->createParameter_in_Operation(uML_Namespace_getImportedElements__);
 
+	//getImportedPackages
 	uML_Namespace_getImportedPackages__ = factory->createOperation_in_Class(uML_Namespace);
 	uML_Namespace_getImportedPackages__return = factory->createParameter_in_Operation(uML_Namespace_getImportedPackages__);
 
+	//getNamesOfMember
 	uML_Namespace_getNamesOfMember_NamedElement_NamedElement = factory->createOperation_in_Class(uML_Namespace);
 	uML_Namespace_getNamesOfMember_result = factory->createParameter_in_Operation(uML_Namespace_getNamesOfMember_NamedElement_NamedElement);uML_Namespace_getNamesOfMember_NamedElement_NamedElement_element = factory->createParameter_in_Operation(uML_Namespace_getNamesOfMember_NamedElement_NamedElement);
 
+	//importMembers
 	uML_Namespace_importMembers_PackageableElement_PackageableElement = factory->createOperation_in_Class(uML_Namespace);
 	uML_Namespace_importMembers_result = factory->createParameter_in_Operation(uML_Namespace_importMembers_PackageableElement_PackageableElement);uML_Namespace_importMembers_PackageableElement_PackageableElement_imps = factory->createParameter_in_Operation(uML_Namespace_importMembers_PackageableElement_PackageableElement);
 
+	//importedMember
 	uML_Namespace_importedMember__ = factory->createOperation_in_Class(uML_Namespace);
 	uML_Namespace_importedMember_result = factory->createParameter_in_Operation(uML_Namespace_importedMember__);
 
+	//membersAreDistinguishable
 	uML_Namespace_membersAreDistinguishable__ = factory->createOperation_in_Class(uML_Namespace);
 	uML_Namespace_membersAreDistinguishable_result = factory->createParameter_in_Operation(uML_Namespace_membersAreDistinguishable__);
 
+	//ownedMember
 	uML_Namespace_ownedMember__ = factory->createOperation_in_Class(uML_Namespace);
 	uML_Namespace_ownedMember_result = factory->createParameter_in_Operation(uML_Namespace_ownedMember__);
 
     //-------------------------------------------
-	// Node
+	//Node
 	uML_Node = factory->createClass_in_Package(uML, uml::umlPackage::NODE_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_Node);
@@ -5348,16 +5896,19 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // Node attributes
+	//nestedNode
 	uML_Node_nestedNode = factory->createProperty_in_Class(uML_Node);
     // Node operations
+	//createCommunicationPath
 	uML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural = factory->createOperation_in_Class(uML_Node);
 	uML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNaturalreturn = factory->createParameter_in_Operation(uML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural);uML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end1IsNavigable = factory->createParameter_in_Operation(uML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural);uML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end1Aggregation = factory->createParameter_in_Operation(uML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural);uML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end1Name = factory->createParameter_in_Operation(uML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural);uML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end1Lower = factory->createParameter_in_Operation(uML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural);uML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end1Upper = factory->createParameter_in_Operation(uML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural);uML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end1Node = factory->createParameter_in_Operation(uML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural);uML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end2IsNavigable = factory->createParameter_in_Operation(uML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural);uML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end2Aggregation = factory->createParameter_in_Operation(uML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural);uML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end2Name = factory->createParameter_in_Operation(uML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural);uML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end2Lower = factory->createParameter_in_Operation(uML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural);uML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end2Upper = factory->createParameter_in_Operation(uML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural);
 
+	//getCommunicationPaths
 	uML_Node_getCommunicationPaths__ = factory->createOperation_in_Class(uML_Node);
 	uML_Node_getCommunicationPaths__return = factory->createParameter_in_Operation(uML_Node_getCommunicationPaths__);
 
     //-------------------------------------------
-	// ObjectFlow
+	//ObjectFlow
 	uML_ObjectFlow = factory->createClass_in_Package(uML, uml::umlPackage::OBJECTFLOW_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_ObjectFlow);
@@ -5467,13 +6018,17 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // ObjectFlow attributes
+	//isMulticast
 	uML_ObjectFlow_isMulticast = factory->createProperty_in_Class(uML_ObjectFlow);
+	//isMultireceive
 	uML_ObjectFlow_isMultireceive = factory->createProperty_in_Class(uML_ObjectFlow);
+	//selection
 	uML_ObjectFlow_selection = factory->createProperty_in_Class(uML_ObjectFlow);
+	//transformation
 	uML_ObjectFlow_transformation = factory->createProperty_in_Class(uML_ObjectFlow);
 
     //-------------------------------------------
-	// ObjectNode
+	//ObjectNode
 	uML_ObjectNode = factory->createClass_in_Package(uML, uml::umlPackage::OBJECTNODE_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_ObjectNode);
@@ -5517,34 +6072,44 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // ObjectNode attributes
+	//inState
 	uML_ObjectNode_inState = factory->createProperty_in_Class(uML_ObjectNode);
+	//isControlType
 	uML_ObjectNode_isControlType = factory->createProperty_in_Class(uML_ObjectNode);
+	//ordering
 	uML_ObjectNode_ordering = factory->createProperty_in_Class(uML_ObjectNode);
+	//selection
 	uML_ObjectNode_selection = factory->createProperty_in_Class(uML_ObjectNode);
+	//upperBound
 	uML_ObjectNode_upperBound = factory->createProperty_in_Class(uML_ObjectNode);
 
     //-------------------------------------------
-	// Observation
+	//Observation
 	uML_Observation = factory->createClass_in_Package(uML, uml::umlPackage::OBSERVATION_CLASS);
 	
 
     //-------------------------------------------
-	// OccurrenceSpecification
+	//OccurrenceSpecification
 	uML_OccurrenceSpecification = factory->createClass_in_Package(uML, uml::umlPackage::OCCURRENCESPECIFICATION_CLASS);
 	
     // OccurrenceSpecification attributes
+	//covered
 	uML_OccurrenceSpecification_covered = factory->createProperty_in_Class(uML_OccurrenceSpecification);
+	//toAfter
 	uML_OccurrenceSpecification_toAfter = factory->createProperty_in_Class(uML_OccurrenceSpecification);
+	//toBefore
 	uML_OccurrenceSpecification_toBefore = factory->createProperty_in_Class(uML_OccurrenceSpecification);
     // OccurrenceSpecification operations
+	//getCovered
 	uML_OccurrenceSpecification_getCovered__ = factory->createOperation_in_Class(uML_OccurrenceSpecification);
 	uML_OccurrenceSpecification_getCovered__return = factory->createParameter_in_Operation(uML_OccurrenceSpecification_getCovered__);
 
+	//setCovered
 	uML_OccurrenceSpecification_setCovered_Lifeline_Lifeline = factory->createOperation_in_Class(uML_OccurrenceSpecification);
 	uML_OccurrenceSpecification_setCovered_Lifeline_Lifeline_value = factory->createParameter_in_Operation(uML_OccurrenceSpecification_setCovered_Lifeline_Lifeline);
 
     //-------------------------------------------
-	// OpaqueAction
+	//OpaqueAction
 	uML_OpaqueAction = factory->createClass_in_Package(uML, uml::umlPackage::OPAQUEACTION_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_OpaqueAction);
@@ -5556,21 +6121,27 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // OpaqueAction attributes
+	//body
 	uML_OpaqueAction_body = factory->createProperty_in_Class(uML_OpaqueAction);
+	//inputValue
 	uML_OpaqueAction_inputValue = factory->createProperty_in_Class(uML_OpaqueAction);
+	//language
 	uML_OpaqueAction_language = factory->createProperty_in_Class(uML_OpaqueAction);
+	//outputValue
 	uML_OpaqueAction_outputValue = factory->createProperty_in_Class(uML_OpaqueAction);
 
     //-------------------------------------------
-	// OpaqueBehavior
+	//OpaqueBehavior
 	uML_OpaqueBehavior = factory->createClass_in_Package(uML, uml::umlPackage::OPAQUEBEHAVIOR_CLASS);
 	
     // OpaqueBehavior attributes
+	//body
 	uML_OpaqueBehavior_body = factory->createProperty_in_Class(uML_OpaqueBehavior);
+	//language
 	uML_OpaqueBehavior_language = factory->createProperty_in_Class(uML_OpaqueBehavior);
 
     //-------------------------------------------
-	// OpaqueExpression
+	//OpaqueExpression
 	uML_OpaqueExpression = factory->createClass_in_Package(uML, uml::umlPackage::OPAQUEEXPRESSION_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_OpaqueExpression);
@@ -5612,31 +6183,41 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // OpaqueExpression attributes
+	//behavior
 	uML_OpaqueExpression_behavior = factory->createProperty_in_Class(uML_OpaqueExpression);
+	//body
 	uML_OpaqueExpression_body = factory->createProperty_in_Class(uML_OpaqueExpression);
+	//language
 	uML_OpaqueExpression_language = factory->createProperty_in_Class(uML_OpaqueExpression);
+	//result
 	uML_OpaqueExpression_result = factory->createProperty_in_Class(uML_OpaqueExpression);
     // OpaqueExpression operations
+	//isIntegral
 	uML_OpaqueExpression_isIntegral__ = factory->createOperation_in_Class(uML_OpaqueExpression);
 	uML_OpaqueExpression_isIntegral_result = factory->createParameter_in_Operation(uML_OpaqueExpression_isIntegral__);
 
+	//isNonNegative
 	uML_OpaqueExpression_isNonNegative__ = factory->createOperation_in_Class(uML_OpaqueExpression);
 	uML_OpaqueExpression_isNonNegative_result = factory->createParameter_in_Operation(uML_OpaqueExpression_isNonNegative__);
 
+	//isPositive
 	uML_OpaqueExpression_isPositive__ = factory->createOperation_in_Class(uML_OpaqueExpression);
 	uML_OpaqueExpression_isPositive_result = factory->createParameter_in_Operation(uML_OpaqueExpression_isPositive__);
 
+	//result
 	uML_OpaqueExpression_result__ = factory->createOperation_in_Class(uML_OpaqueExpression);
 	uML_OpaqueExpression_result_result = factory->createParameter_in_Operation(uML_OpaqueExpression_result__);
 
+	//stringValue
 	uML_OpaqueExpression_stringValue__ = factory->createOperation_in_Class(uML_OpaqueExpression);
 	uML_OpaqueExpression_stringValue__return = factory->createParameter_in_Operation(uML_OpaqueExpression_stringValue__);
 
+	//value
 	uML_OpaqueExpression_value__ = factory->createOperation_in_Class(uML_OpaqueExpression);
 	uML_OpaqueExpression_value_result = factory->createParameter_in_Operation(uML_OpaqueExpression_value__);
 
     //-------------------------------------------
-	// Operation
+	//Operation
 	uML_Operation = factory->createClass_in_Package(uML, uml::umlPackage::OPERATION_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_Operation);
@@ -5662,64 +6243,93 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // Operation attributes
+	//bodyCondition
 	uML_Operation_bodyCondition = factory->createProperty_in_Class(uML_Operation);
+	//class
 	uML_Operation_class = factory->createProperty_in_Class(uML_Operation);
+	//datatype
 	uML_Operation_datatype = factory->createProperty_in_Class(uML_Operation);
+	//interface
 	uML_Operation_interface = factory->createProperty_in_Class(uML_Operation);
+	//isOrdered
 	uML_Operation_isOrdered = factory->createProperty_in_Class(uML_Operation);
+	//isQuery
 	uML_Operation_isQuery = factory->createProperty_in_Class(uML_Operation);
+	//isUnique
 	uML_Operation_isUnique = factory->createProperty_in_Class(uML_Operation);
+	//lower
 	uML_Operation_lower = factory->createProperty_in_Class(uML_Operation);
+	//ownedParameter
 	uML_Operation_ownedParameter = factory->createProperty_in_Class(uML_Operation);
+	//postcondition
 	uML_Operation_postcondition = factory->createProperty_in_Class(uML_Operation);
+	//precondition
 	uML_Operation_precondition = factory->createProperty_in_Class(uML_Operation);
+	//raisedException
 	uML_Operation_raisedException = factory->createProperty_in_Class(uML_Operation);
+	//redefinedOperation
 	uML_Operation_redefinedOperation = factory->createProperty_in_Class(uML_Operation);
+	//templateParameter
 	uML_Operation_templateParameter = factory->createProperty_in_Class(uML_Operation);
+	//type
 	uML_Operation_type = factory->createProperty_in_Class(uML_Operation);
+	//upper
 	uML_Operation_upper = factory->createProperty_in_Class(uML_Operation);
     // Operation operations
+	//getReturnResult
 	uML_Operation_getReturnResult__ = factory->createOperation_in_Class(uML_Operation);
 	uML_Operation_getReturnResult__return = factory->createParameter_in_Operation(uML_Operation_getReturnResult__);
 
+	//isConsistentWith
 	uML_Operation_isConsistentWith_RedefinableElement_RedefinableElement = factory->createOperation_in_Class(uML_Operation);
 	uML_Operation_isConsistentWith_result = factory->createParameter_in_Operation(uML_Operation_isConsistentWith_RedefinableElement_RedefinableElement);uML_Operation_isConsistentWith_RedefinableElement_RedefinableElement_redefiningElement = factory->createParameter_in_Operation(uML_Operation_isConsistentWith_RedefinableElement_RedefinableElement);
 
+	//isOrdered
 	uML_Operation_isOrdered__ = factory->createOperation_in_Class(uML_Operation);
 	uML_Operation_isOrdered_result = factory->createParameter_in_Operation(uML_Operation_isOrdered__);
 
+	//isUnique
 	uML_Operation_isUnique__ = factory->createOperation_in_Class(uML_Operation);
 	uML_Operation_isUnique_result = factory->createParameter_in_Operation(uML_Operation_isUnique__);
 
+	//lower
 	uML_Operation_lower__ = factory->createOperation_in_Class(uML_Operation);
 	uML_Operation_lower_result = factory->createParameter_in_Operation(uML_Operation_lower__);
 
+	//returnResult
 	uML_Operation_returnResult__ = factory->createOperation_in_Class(uML_Operation);
 	uML_Operation_returnResult_result = factory->createParameter_in_Operation(uML_Operation_returnResult__);
 
+	//setIsOrdered
 	uML_Operation_setIsOrdered_Boolean_Boolean = factory->createOperation_in_Class(uML_Operation);
 	uML_Operation_setIsOrdered_Boolean_Boolean_newIsOrdered = factory->createParameter_in_Operation(uML_Operation_setIsOrdered_Boolean_Boolean);
 
+	//setIsUnique
 	uML_Operation_setIsUnique_Boolean_Boolean = factory->createOperation_in_Class(uML_Operation);
 	uML_Operation_setIsUnique_Boolean_Boolean_newIsUnique = factory->createParameter_in_Operation(uML_Operation_setIsUnique_Boolean_Boolean);
 
+	//setLower
 	uML_Operation_setLower_Integer_Integer = factory->createOperation_in_Class(uML_Operation);
 	uML_Operation_setLower_Integer_Integer_newLower = factory->createParameter_in_Operation(uML_Operation_setLower_Integer_Integer);
 
+	//setType
 	uML_Operation_setType_Type_Type = factory->createOperation_in_Class(uML_Operation);
 	uML_Operation_setType_Type_Type_newType = factory->createParameter_in_Operation(uML_Operation_setType_Type_Type);
 
+	//setUpper
 	uML_Operation_setUpper_UnlimitedNatural_UnlimitedNatural = factory->createOperation_in_Class(uML_Operation);
 	uML_Operation_setUpper_UnlimitedNatural_UnlimitedNatural_newUpper = factory->createParameter_in_Operation(uML_Operation_setUpper_UnlimitedNatural_UnlimitedNatural);
 
+	//type
 	uML_Operation_type__ = factory->createOperation_in_Class(uML_Operation);
 	uML_Operation_type_result = factory->createParameter_in_Operation(uML_Operation_type__);
 
+	//upper
 	uML_Operation_upper__ = factory->createOperation_in_Class(uML_Operation);
 	uML_Operation_upper_result = factory->createParameter_in_Operation(uML_Operation_upper__);
 
     //-------------------------------------------
-	// OperationTemplateParameter
+	//OperationTemplateParameter
 	uML_OperationTemplateParameter = factory->createClass_in_Package(uML, uml::umlPackage::OPERATIONTEMPLATEPARAMETER_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_OperationTemplateParameter);
@@ -5735,10 +6345,11 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // OperationTemplateParameter attributes
+	//parameteredElement
 	uML_OperationTemplateParameter_parameteredElement = factory->createProperty_in_Class(uML_OperationTemplateParameter);
 
     //-------------------------------------------
-	// OutputPin
+	//OutputPin
 	uML_OutputPin = factory->createClass_in_Package(uML, uml::umlPackage::OUTPUTPIN_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_OutputPin);
@@ -5754,7 +6365,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 
     //-------------------------------------------
-	// Package
+	//Package
 	uML_Package = factory->createClass_in_Package(uML, uml::umlPackage::PACKAGE_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_Package);
@@ -5766,89 +6377,121 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // Package attributes
+	//URI
 	uML_Package_URI = factory->createProperty_in_Class(uML_Package);
+	//nestedPackage
 	uML_Package_nestedPackage = factory->createProperty_in_Class(uML_Package);
+	//nestingPackage
 	uML_Package_nestingPackage = factory->createProperty_in_Class(uML_Package);
+	//ownedStereotype
 	uML_Package_ownedStereotype = factory->createProperty_in_Class(uML_Package);
+	//ownedType
 	uML_Package_ownedType = factory->createProperty_in_Class(uML_Package);
+	//packageMerge
 	uML_Package_packageMerge = factory->createProperty_in_Class(uML_Package);
+	//packagedElement
 	uML_Package_packagedElement = factory->createProperty_in_Class(uML_Package);
+	//profileApplication
 	uML_Package_profileApplication = factory->createProperty_in_Class(uML_Package);
     // Package operations
+	//allApplicableStereotypes
 	uML_Package_allApplicableStereotypes__ = factory->createOperation_in_Class(uML_Package);
 	uML_Package_allApplicableStereotypes_result = factory->createParameter_in_Operation(uML_Package_allApplicableStereotypes__);
 
+	//applyProfile
 	uML_Package_applyProfile_Profile_Profile = factory->createOperation_in_Class(uML_Package);
 	uML_Package_applyProfile_Profile_Profilereturn = factory->createParameter_in_Operation(uML_Package_applyProfile_Profile_Profile);uML_Package_applyProfile_Profile_Profile_profile = factory->createParameter_in_Operation(uML_Package_applyProfile_Profile_Profile);
 
+	//containingProfile
 	uML_Package_containingProfile__ = factory->createOperation_in_Class(uML_Package);
 	uML_Package_containingProfile_result = factory->createParameter_in_Operation(uML_Package_containingProfile__);
 
+	//createOwnedClass
 	uML_Package_createOwnedClass_String_Boolean_String_Boolean = factory->createOperation_in_Class(uML_Package);
 	uML_Package_createOwnedClass_String_Boolean_String_Booleanreturn = factory->createParameter_in_Operation(uML_Package_createOwnedClass_String_Boolean_String_Boolean);uML_Package_createOwnedClass_String_Boolean_String_Boolean_name = factory->createParameter_in_Operation(uML_Package_createOwnedClass_String_Boolean_String_Boolean);uML_Package_createOwnedClass_String_Boolean_String_Boolean_isAbstract = factory->createParameter_in_Operation(uML_Package_createOwnedClass_String_Boolean_String_Boolean);
 
+	//createOwnedEnumeration
 	uML_Package_createOwnedEnumeration_String_String = factory->createOperation_in_Class(uML_Package);
 	uML_Package_createOwnedEnumeration_String_Stringreturn = factory->createParameter_in_Operation(uML_Package_createOwnedEnumeration_String_String);uML_Package_createOwnedEnumeration_String_String_name = factory->createParameter_in_Operation(uML_Package_createOwnedEnumeration_String_String);
 
+	//createOwnedInterface
 	uML_Package_createOwnedInterface_String_String = factory->createOperation_in_Class(uML_Package);
 	uML_Package_createOwnedInterface_String_Stringreturn = factory->createParameter_in_Operation(uML_Package_createOwnedInterface_String_String);uML_Package_createOwnedInterface_String_String_name = factory->createParameter_in_Operation(uML_Package_createOwnedInterface_String_String);
 
+	//createOwnedPrimitiveType
 	uML_Package_createOwnedPrimitiveType_String_String = factory->createOperation_in_Class(uML_Package);
 	uML_Package_createOwnedPrimitiveType_String_Stringreturn = factory->createParameter_in_Operation(uML_Package_createOwnedPrimitiveType_String_String);uML_Package_createOwnedPrimitiveType_String_String_name = factory->createParameter_in_Operation(uML_Package_createOwnedPrimitiveType_String_String);
 
+	//createOwnedStereotype
 	uML_Package_createOwnedStereotype_String_Boolean_String_Boolean = factory->createOperation_in_Class(uML_Package);
 	uML_Package_createOwnedStereotype_String_Boolean_String_Booleanreturn = factory->createParameter_in_Operation(uML_Package_createOwnedStereotype_String_Boolean_String_Boolean);uML_Package_createOwnedStereotype_String_Boolean_String_Boolean_name = factory->createParameter_in_Operation(uML_Package_createOwnedStereotype_String_Boolean_String_Boolean);uML_Package_createOwnedStereotype_String_Boolean_String_Boolean_isAbstract = factory->createParameter_in_Operation(uML_Package_createOwnedStereotype_String_Boolean_String_Boolean);
 
+	//getAllAppliedProfiles
 	uML_Package_getAllAppliedProfiles__ = factory->createOperation_in_Class(uML_Package);
 	uML_Package_getAllAppliedProfiles__return = factory->createParameter_in_Operation(uML_Package_getAllAppliedProfiles__);
 
+	//getAllProfileApplications
 	uML_Package_getAllProfileApplications__ = factory->createOperation_in_Class(uML_Package);
 	uML_Package_getAllProfileApplications__return = factory->createParameter_in_Operation(uML_Package_getAllProfileApplications__);
 
+	//getAppliedProfile
 	uML_Package_getAppliedProfile_String_String = factory->createOperation_in_Class(uML_Package);
 	uML_Package_getAppliedProfile_String_Stringreturn = factory->createParameter_in_Operation(uML_Package_getAppliedProfile_String_String);uML_Package_getAppliedProfile_String_String_qualifiedName = factory->createParameter_in_Operation(uML_Package_getAppliedProfile_String_String);
 
+	//getAppliedProfile
 	uML_Package_getAppliedProfile_String_Boolean_String_Boolean = factory->createOperation_in_Class(uML_Package);
 	uML_Package_getAppliedProfile_String_Boolean_String_Booleanreturn = factory->createParameter_in_Operation(uML_Package_getAppliedProfile_String_Boolean_String_Boolean);uML_Package_getAppliedProfile_String_Boolean_String_Boolean_qualifiedName = factory->createParameter_in_Operation(uML_Package_getAppliedProfile_String_Boolean_String_Boolean);uML_Package_getAppliedProfile_String_Boolean_String_Boolean_recurse = factory->createParameter_in_Operation(uML_Package_getAppliedProfile_String_Boolean_String_Boolean);
 
+	//getAppliedProfiles
 	uML_Package_getAppliedProfiles__ = factory->createOperation_in_Class(uML_Package);
 	uML_Package_getAppliedProfiles__return = factory->createParameter_in_Operation(uML_Package_getAppliedProfiles__);
 
+	//getProfileApplication
 	uML_Package_getProfileApplication_Profile_Profile = factory->createOperation_in_Class(uML_Package);
 	uML_Package_getProfileApplication_Profile_Profilereturn = factory->createParameter_in_Operation(uML_Package_getProfileApplication_Profile_Profile);uML_Package_getProfileApplication_Profile_Profile_profile = factory->createParameter_in_Operation(uML_Package_getProfileApplication_Profile_Profile);
 
+	//getProfileApplication
 	uML_Package_getProfileApplication_Profile_Boolean_Profile_Boolean = factory->createOperation_in_Class(uML_Package);
 	uML_Package_getProfileApplication_Profile_Boolean_Profile_Booleanreturn = factory->createParameter_in_Operation(uML_Package_getProfileApplication_Profile_Boolean_Profile_Boolean);uML_Package_getProfileApplication_Profile_Boolean_Profile_Boolean_profile = factory->createParameter_in_Operation(uML_Package_getProfileApplication_Profile_Boolean_Profile_Boolean);uML_Package_getProfileApplication_Profile_Boolean_Profile_Boolean_recurse = factory->createParameter_in_Operation(uML_Package_getProfileApplication_Profile_Boolean_Profile_Boolean);
 
+	//isModelLibrary
 	uML_Package_isModelLibrary__ = factory->createOperation_in_Class(uML_Package);
 	uML_Package_isModelLibrary__return = factory->createParameter_in_Operation(uML_Package_isModelLibrary__);
 
+	//isProfileApplied
 	uML_Package_isProfileApplied_Profile_Profile = factory->createOperation_in_Class(uML_Package);
 	uML_Package_isProfileApplied_Profile_Profilereturn = factory->createParameter_in_Operation(uML_Package_isProfileApplied_Profile_Profile);uML_Package_isProfileApplied_Profile_Profile_profile = factory->createParameter_in_Operation(uML_Package_isProfileApplied_Profile_Profile);
 
+	//makesVisible
 	uML_Package_makesVisible_NamedElement_NamedElement = factory->createOperation_in_Class(uML_Package);
 	uML_Package_makesVisible_result = factory->createParameter_in_Operation(uML_Package_makesVisible_NamedElement_NamedElement);uML_Package_makesVisible_NamedElement_NamedElement_el = factory->createParameter_in_Operation(uML_Package_makesVisible_NamedElement_NamedElement);
 
+	//mustBeOwned
 	uML_Package_mustBeOwned__ = factory->createOperation_in_Class(uML_Package);
 	uML_Package_mustBeOwned_result = factory->createParameter_in_Operation(uML_Package_mustBeOwned__);
 
+	//nestedPackage
 	uML_Package_nestedPackage__ = factory->createOperation_in_Class(uML_Package);
 	uML_Package_nestedPackage_result = factory->createParameter_in_Operation(uML_Package_nestedPackage__);
 
+	//ownedStereotype
 	uML_Package_ownedStereotype__ = factory->createOperation_in_Class(uML_Package);
 	uML_Package_ownedStereotype_result = factory->createParameter_in_Operation(uML_Package_ownedStereotype__);
 
+	//ownedType
 	uML_Package_ownedType__ = factory->createOperation_in_Class(uML_Package);
 	uML_Package_ownedType_result = factory->createParameter_in_Operation(uML_Package_ownedType__);
 
+	//unapplyProfile
 	uML_Package_unapplyProfile_Profile_Profile = factory->createOperation_in_Class(uML_Package);
 	uML_Package_unapplyProfile_Profile_Profilereturn = factory->createParameter_in_Operation(uML_Package_unapplyProfile_Profile_Profile);uML_Package_unapplyProfile_Profile_Profile_profile = factory->createParameter_in_Operation(uML_Package_unapplyProfile_Profile_Profile);
 
+	//visibleMembers
 	uML_Package_visibleMembers__ = factory->createOperation_in_Class(uML_Package);
 	uML_Package_visibleMembers_result = factory->createParameter_in_Operation(uML_Package_visibleMembers__);
 
     //-------------------------------------------
-	// PackageImport
+	//PackageImport
 	uML_PackageImport = factory->createClass_in_Package(uML, uml::umlPackage::PACKAGEIMPORT_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_PackageImport);
@@ -5860,20 +6503,25 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // PackageImport attributes
+	//importedPackage
 	uML_PackageImport_importedPackage = factory->createProperty_in_Class(uML_PackageImport);
+	//importingNamespace
 	uML_PackageImport_importingNamespace = factory->createProperty_in_Class(uML_PackageImport);
+	//visibility
 	uML_PackageImport_visibility = factory->createProperty_in_Class(uML_PackageImport);
 
     //-------------------------------------------
-	// PackageMerge
+	//PackageMerge
 	uML_PackageMerge = factory->createClass_in_Package(uML, uml::umlPackage::PACKAGEMERGE_CLASS);
 	
     // PackageMerge attributes
+	//mergedPackage
 	uML_PackageMerge_mergedPackage = factory->createProperty_in_Class(uML_PackageMerge);
+	//receivingPackage
 	uML_PackageMerge_receivingPackage = factory->createProperty_in_Class(uML_PackageMerge);
 
     //-------------------------------------------
-	// PackageableElement
+	//PackageableElement
 	uML_PackageableElement = factory->createClass_in_Package(uML, uml::umlPackage::PACKAGEABLEELEMENT_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_PackageableElement);
@@ -5885,10 +6533,11 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // PackageableElement attributes
+	//visibility
 	uML_PackageableElement_visibility = factory->createProperty_in_Class(uML_PackageableElement);
 
     //-------------------------------------------
-	// Parameter
+	//Parameter
 	uML_Parameter = factory->createClass_in_Package(uML, uml::umlPackage::PARAMETER_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_Parameter);
@@ -5974,45 +6623,63 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // Parameter attributes
+	//default
 	uML_Parameter_default = factory->createProperty_in_Class(uML_Parameter);
+	//defaultValue
 	uML_Parameter_defaultValue = factory->createProperty_in_Class(uML_Parameter);
+	//direction
 	uML_Parameter_direction = factory->createProperty_in_Class(uML_Parameter);
+	//effect
 	uML_Parameter_effect = factory->createProperty_in_Class(uML_Parameter);
+	//isException
 	uML_Parameter_isException = factory->createProperty_in_Class(uML_Parameter);
+	//isStream
 	uML_Parameter_isStream = factory->createProperty_in_Class(uML_Parameter);
+	//operation
 	uML_Parameter_operation = factory->createProperty_in_Class(uML_Parameter);
+	//parameterSet
 	uML_Parameter_parameterSet = factory->createProperty_in_Class(uML_Parameter);
     // Parameter operations
+	//default
 	uML_Parameter_default__ = factory->createOperation_in_Class(uML_Parameter);
 	uML_Parameter_default_result = factory->createParameter_in_Operation(uML_Parameter_default__);
 
+	//isSetDefault
 	uML_Parameter_isSetDefault__ = factory->createOperation_in_Class(uML_Parameter);
 	uML_Parameter_isSetDefault__return = factory->createParameter_in_Operation(uML_Parameter_isSetDefault__);
 
+	//setBooleanDefaultValue
 	uML_Parameter_setBooleanDefaultValue_Boolean_Boolean = factory->createOperation_in_Class(uML_Parameter);
 	uML_Parameter_setBooleanDefaultValue_Boolean_Boolean_value = factory->createParameter_in_Operation(uML_Parameter_setBooleanDefaultValue_Boolean_Boolean);
 
+	//setDefault
 	uML_Parameter_setDefault_String_String = factory->createOperation_in_Class(uML_Parameter);
 	uML_Parameter_setDefault_String_String_newDefault = factory->createParameter_in_Operation(uML_Parameter_setDefault_String_String);
 
+	//setIntegerDefaultValue
 	uML_Parameter_setIntegerDefaultValue_Integer_Integer = factory->createOperation_in_Class(uML_Parameter);
 	uML_Parameter_setIntegerDefaultValue_Integer_Integer_value = factory->createParameter_in_Operation(uML_Parameter_setIntegerDefaultValue_Integer_Integer);
 
+	//setNullDefaultValue
 	uML_Parameter_setNullDefaultValue__ = factory->createOperation_in_Class(uML_Parameter);
 
+	//setRealDefaultValue
 	uML_Parameter_setRealDefaultValue_Real_Real = factory->createOperation_in_Class(uML_Parameter);
 	uML_Parameter_setRealDefaultValue_Real_Real_value = factory->createParameter_in_Operation(uML_Parameter_setRealDefaultValue_Real_Real);
 
+	//setStringDefaultValue
 	uML_Parameter_setStringDefaultValue_String_String = factory->createOperation_in_Class(uML_Parameter);
 	uML_Parameter_setStringDefaultValue_String_String_value = factory->createParameter_in_Operation(uML_Parameter_setStringDefaultValue_String_String);
 
+	//setUnlimitedNaturalDefaultValue
 	uML_Parameter_setUnlimitedNaturalDefaultValue_UnlimitedNatural_UnlimitedNatural = factory->createOperation_in_Class(uML_Parameter);
 	uML_Parameter_setUnlimitedNaturalDefaultValue_UnlimitedNatural_UnlimitedNatural_value = factory->createParameter_in_Operation(uML_Parameter_setUnlimitedNaturalDefaultValue_UnlimitedNatural_UnlimitedNatural);
 
+	//unsetDefault
 	uML_Parameter_unsetDefault__ = factory->createOperation_in_Class(uML_Parameter);
 
     //-------------------------------------------
-	// ParameterSet
+	//ParameterSet
 	uML_ParameterSet = factory->createClass_in_Package(uML, uml::umlPackage::PARAMETERSET_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_ParameterSet);
@@ -6056,25 +6723,31 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // ParameterSet attributes
+	//condition
 	uML_ParameterSet_condition = factory->createProperty_in_Class(uML_ParameterSet);
+	//parameter
 	uML_ParameterSet_parameter = factory->createProperty_in_Class(uML_ParameterSet);
 
     //-------------------------------------------
-	// ParameterableElement
+	//ParameterableElement
 	uML_ParameterableElement = factory->createClass_in_Package(uML, uml::umlPackage::PARAMETERABLEELEMENT_CLASS);
 	
     // ParameterableElement attributes
+	//owningTemplateParameter
 	uML_ParameterableElement_owningTemplateParameter = factory->createProperty_in_Class(uML_ParameterableElement);
+	//templateParameter
 	uML_ParameterableElement_templateParameter = factory->createProperty_in_Class(uML_ParameterableElement);
     // ParameterableElement operations
+	//isCompatibleWith
 	uML_ParameterableElement_isCompatibleWith_ParameterableElement_ParameterableElement = factory->createOperation_in_Class(uML_ParameterableElement);
 	uML_ParameterableElement_isCompatibleWith_result = factory->createParameter_in_Operation(uML_ParameterableElement_isCompatibleWith_ParameterableElement_ParameterableElement);uML_ParameterableElement_isCompatibleWith_ParameterableElement_ParameterableElement_p = factory->createParameter_in_Operation(uML_ParameterableElement_isCompatibleWith_ParameterableElement_ParameterableElement);
 
+	//isTemplateParameter
 	uML_ParameterableElement_isTemplateParameter__ = factory->createOperation_in_Class(uML_ParameterableElement);
 	uML_ParameterableElement_isTemplateParameter_result = factory->createParameter_in_Operation(uML_ParameterableElement_isTemplateParameter__);
 
     //-------------------------------------------
-	// PartDecomposition
+	//PartDecomposition
 	uML_PartDecomposition = factory->createClass_in_Package(uML, uml::umlPackage::PARTDECOMPOSITION_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_PartDecomposition);
@@ -6105,7 +6778,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 
     //-------------------------------------------
-	// Pin
+	//Pin
 	uML_Pin = factory->createClass_in_Package(uML, uml::umlPackage::PIN_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_Pin);
@@ -6131,10 +6804,11 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // Pin attributes
+	//isControl
 	uML_Pin_isControl = factory->createProperty_in_Class(uML_Pin);
 
     //-------------------------------------------
-	// Port
+	//Port
 	uML_Port = factory->createClass_in_Package(uML, uml::umlPackage::PORT_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_Port);
@@ -6174,33 +6848,44 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // Port attributes
+	//isBehavior
 	uML_Port_isBehavior = factory->createProperty_in_Class(uML_Port);
+	//isConjugated
 	uML_Port_isConjugated = factory->createProperty_in_Class(uML_Port);
+	//isService
 	uML_Port_isService = factory->createProperty_in_Class(uML_Port);
+	//protocol
 	uML_Port_protocol = factory->createProperty_in_Class(uML_Port);
+	//provided
 	uML_Port_provided = factory->createProperty_in_Class(uML_Port);
+	//redefinedPort
 	uML_Port_redefinedPort = factory->createProperty_in_Class(uML_Port);
+	//required
 	uML_Port_required = factory->createProperty_in_Class(uML_Port);
     // Port operations
+	//basicProvided
 	uML_Port_basicProvided__ = factory->createOperation_in_Class(uML_Port);
 	uML_Port_basicProvided_result = factory->createParameter_in_Operation(uML_Port_basicProvided__);
 
+	//basicRequired
 	uML_Port_basicRequired__ = factory->createOperation_in_Class(uML_Port);
 	uML_Port_basicRequired_result = factory->createParameter_in_Operation(uML_Port_basicRequired__);
 
+	//provided
 	uML_Port_provided__ = factory->createOperation_in_Class(uML_Port);
 	uML_Port_provided_result = factory->createParameter_in_Operation(uML_Port_provided__);
 
+	//required
 	uML_Port_required__ = factory->createOperation_in_Class(uML_Port);
 	uML_Port_required_result = factory->createParameter_in_Operation(uML_Port_required__);
 
     //-------------------------------------------
-	// PrimitiveType
+	//PrimitiveType
 	uML_PrimitiveType = factory->createClass_in_Package(uML, uml::umlPackage::PRIMITIVETYPE_CLASS);
 	
 
     //-------------------------------------------
-	// Profile
+	//Profile
 	uML_Profile = factory->createClass_in_Package(uML, uml::umlPackage::PROFILE_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_Profile);
@@ -6234,50 +6919,65 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // Profile attributes
+	//metaclassReference
 	uML_Profile_metaclassReference = factory->createProperty_in_Class(uML_Profile);
+	//metamodelReference
 	uML_Profile_metamodelReference = factory->createProperty_in_Class(uML_Profile);
     // Profile operations
+	//create
 	uML_Profile_create_Classifier_Classifier = factory->createOperation_in_Class(uML_Profile);
 	uML_Profile_create_Classifier_Classifierreturn = factory->createParameter_in_Operation(uML_Profile_create_Classifier_Classifier);uML_Profile_create_Classifier_Classifier_classifier = factory->createParameter_in_Operation(uML_Profile_create_Classifier_Classifier);
 
+	//define
 	uML_Profile_define__ = factory->createOperation_in_Class(uML_Profile);
 	uML_Profile_define__return = factory->createParameter_in_Operation(uML_Profile_define__);
 
+	//getDefinition
 	uML_Profile_getDefinition__ = factory->createOperation_in_Class(uML_Profile);
 	uML_Profile_getDefinition__return = factory->createParameter_in_Operation(uML_Profile_getDefinition__);
 
+	//getDefinition
 	uML_Profile_getDefinition_NamedElement_NamedElement = factory->createOperation_in_Class(uML_Profile);
 	uML_Profile_getDefinition_NamedElement_NamedElementreturn = factory->createParameter_in_Operation(uML_Profile_getDefinition_NamedElement_NamedElement);uML_Profile_getDefinition_NamedElement_NamedElement_namedElement = factory->createParameter_in_Operation(uML_Profile_getDefinition_NamedElement_NamedElement);
 
+	//getOwnedExtensions
 	uML_Profile_getOwnedExtensions_Boolean_Boolean = factory->createOperation_in_Class(uML_Profile);
 	uML_Profile_getOwnedExtensions_Boolean_Booleanreturn = factory->createParameter_in_Operation(uML_Profile_getOwnedExtensions_Boolean_Boolean);uML_Profile_getOwnedExtensions_Boolean_Boolean_requiredOnly = factory->createParameter_in_Operation(uML_Profile_getOwnedExtensions_Boolean_Boolean);
 
+	//getReferencedMetaclasses
 	uML_Profile_getReferencedMetaclasses__ = factory->createOperation_in_Class(uML_Profile);
 	uML_Profile_getReferencedMetaclasses__return = factory->createParameter_in_Operation(uML_Profile_getReferencedMetaclasses__);
 
+	//getReferencedMetamodels
 	uML_Profile_getReferencedMetamodels__ = factory->createOperation_in_Class(uML_Profile);
 	uML_Profile_getReferencedMetamodels__return = factory->createParameter_in_Operation(uML_Profile_getReferencedMetamodels__);
 
+	//isDefined
 	uML_Profile_isDefined__ = factory->createOperation_in_Class(uML_Profile);
 	uML_Profile_isDefined__return = factory->createParameter_in_Operation(uML_Profile_isDefined__);
 
     //-------------------------------------------
-	// ProfileApplication
+	//ProfileApplication
 	uML_ProfileApplication = factory->createClass_in_Package(uML, uml::umlPackage::PROFILEAPPLICATION_CLASS);
 	
     // ProfileApplication attributes
+	//appliedProfile
 	uML_ProfileApplication_appliedProfile = factory->createProperty_in_Class(uML_ProfileApplication);
+	//applyingPackage
 	uML_ProfileApplication_applyingPackage = factory->createProperty_in_Class(uML_ProfileApplication);
+	//isStrict
 	uML_ProfileApplication_isStrict = factory->createProperty_in_Class(uML_ProfileApplication);
     // ProfileApplication operations
+	//getAppliedDefinition
 	uML_ProfileApplication_getAppliedDefinition__ = factory->createOperation_in_Class(uML_ProfileApplication);
 	uML_ProfileApplication_getAppliedDefinition__return = factory->createParameter_in_Operation(uML_ProfileApplication_getAppliedDefinition__);
 
+	//getAppliedDefinition
 	uML_ProfileApplication_getAppliedDefinition_NamedElement_NamedElement = factory->createOperation_in_Class(uML_ProfileApplication);
 	uML_ProfileApplication_getAppliedDefinition_NamedElement_NamedElementreturn = factory->createParameter_in_Operation(uML_ProfileApplication_getAppliedDefinition_NamedElement_NamedElement);uML_ProfileApplication_getAppliedDefinition_NamedElement_NamedElement_namedElement = factory->createParameter_in_Operation(uML_ProfileApplication_getAppliedDefinition_NamedElement_NamedElement);
 
     //-------------------------------------------
-	// Property
+	//Property
 	uML_Property = factory->createClass_in_Package(uML, uml::umlPackage::PROPERTY_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_Property);
@@ -6441,95 +7141,135 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // Property attributes
+	//aggregation
 	uML_Property_aggregation = factory->createProperty_in_Class(uML_Property);
+	//association
 	uML_Property_association = factory->createProperty_in_Class(uML_Property);
+	//associationEnd
 	uML_Property_associationEnd = factory->createProperty_in_Class(uML_Property);
+	//class
 	uML_Property_class = factory->createProperty_in_Class(uML_Property);
+	//datatype
 	uML_Property_datatype = factory->createProperty_in_Class(uML_Property);
+	//default
 	uML_Property_default = factory->createProperty_in_Class(uML_Property);
+	//defaultValue
 	uML_Property_defaultValue = factory->createProperty_in_Class(uML_Property);
+	//interface
 	uML_Property_interface = factory->createProperty_in_Class(uML_Property);
+	//isComposite
 	uML_Property_isComposite = factory->createProperty_in_Class(uML_Property);
+	//isDerived
 	uML_Property_isDerived = factory->createProperty_in_Class(uML_Property);
+	//isDerivedUnion
 	uML_Property_isDerivedUnion = factory->createProperty_in_Class(uML_Property);
+	//isID
 	uML_Property_isID = factory->createProperty_in_Class(uML_Property);
+	//opposite
 	uML_Property_opposite = factory->createProperty_in_Class(uML_Property);
+	//owningAssociation
 	uML_Property_owningAssociation = factory->createProperty_in_Class(uML_Property);
+	//qualifier
 	uML_Property_qualifier = factory->createProperty_in_Class(uML_Property);
+	//redefinedProperty
 	uML_Property_redefinedProperty = factory->createProperty_in_Class(uML_Property);
+	//subsettedProperty
 	uML_Property_subsettedProperty = factory->createProperty_in_Class(uML_Property);
     // Property operations
+	//getDefault
 	uML_Property_getDefault__ = factory->createOperation_in_Class(uML_Property);
 	uML_Property_getDefault_result = factory->createParameter_in_Operation(uML_Property_getDefault__);
 
+	//getOtherEnd
 	uML_Property_getOtherEnd__ = factory->createOperation_in_Class(uML_Property);
 	uML_Property_getOtherEnd__return = factory->createParameter_in_Operation(uML_Property_getOtherEnd__);
 
+	//isAttribute
 	uML_Property_isAttribute__ = factory->createOperation_in_Class(uML_Property);
 	uML_Property_isAttribute_result = factory->createParameter_in_Operation(uML_Property_isAttribute__);
 
+	//isCompatibleWith
 	uML_Property_isCompatibleWith_ParameterableElement_ParameterableElement = factory->createOperation_in_Class(uML_Property);
 	uML_Property_isCompatibleWith_result = factory->createParameter_in_Operation(uML_Property_isCompatibleWith_ParameterableElement_ParameterableElement);uML_Property_isCompatibleWith_ParameterableElement_ParameterableElement_p = factory->createParameter_in_Operation(uML_Property_isCompatibleWith_ParameterableElement_ParameterableElement);
 
+	//isComposite
 	uML_Property_isComposite__ = factory->createOperation_in_Class(uML_Property);
 	uML_Property_isComposite_result = factory->createParameter_in_Operation(uML_Property_isComposite__);
 
+	//isConsistentWith
 	uML_Property_isConsistentWith_RedefinableElement_RedefinableElement = factory->createOperation_in_Class(uML_Property);
 	uML_Property_isConsistentWith_result = factory->createParameter_in_Operation(uML_Property_isConsistentWith_RedefinableElement_RedefinableElement);uML_Property_isConsistentWith_RedefinableElement_RedefinableElement_redefiningElement = factory->createParameter_in_Operation(uML_Property_isConsistentWith_RedefinableElement_RedefinableElement);
 
+	//isNavigable
 	uML_Property_isNavigable__ = factory->createOperation_in_Class(uML_Property);
 	uML_Property_isNavigable_result = factory->createParameter_in_Operation(uML_Property_isNavigable__);
 
+	//isSetDefault
 	uML_Property_isSetDefault__ = factory->createOperation_in_Class(uML_Property);
 	uML_Property_isSetDefault__return = factory->createParameter_in_Operation(uML_Property_isSetDefault__);
 
+	//opposite
 	uML_Property_opposite__ = factory->createOperation_in_Class(uML_Property);
 	uML_Property_opposite_result = factory->createParameter_in_Operation(uML_Property_opposite__);
 
+	//setBooleanDefaultValue
 	uML_Property_setBooleanDefaultValue_Boolean_Boolean = factory->createOperation_in_Class(uML_Property);
 	uML_Property_setBooleanDefaultValue_Boolean_Boolean_value = factory->createParameter_in_Operation(uML_Property_setBooleanDefaultValue_Boolean_Boolean);
 
+	//setDefault
 	uML_Property_setDefault_String_String = factory->createOperation_in_Class(uML_Property);
 	uML_Property_setDefault_String_String_newDefault = factory->createParameter_in_Operation(uML_Property_setDefault_String_String);
 
+	//setIntegerDefaultValue
 	uML_Property_setIntegerDefaultValue_Integer_Integer = factory->createOperation_in_Class(uML_Property);
 	uML_Property_setIntegerDefaultValue_Integer_Integer_value = factory->createParameter_in_Operation(uML_Property_setIntegerDefaultValue_Integer_Integer);
 
+	//setIsComposite
 	uML_Property_setIsComposite_Boolean_Boolean = factory->createOperation_in_Class(uML_Property);
 	uML_Property_setIsComposite_Boolean_Boolean_newIsComposite = factory->createParameter_in_Operation(uML_Property_setIsComposite_Boolean_Boolean);
 
+	//setIsNavigable
 	uML_Property_setIsNavigable_Boolean_Boolean = factory->createOperation_in_Class(uML_Property);
 	uML_Property_setIsNavigable_Boolean_Boolean_isNavigable = factory->createParameter_in_Operation(uML_Property_setIsNavigable_Boolean_Boolean);
 
+	//setNullDefaultValue
 	uML_Property_setNullDefaultValue__ = factory->createOperation_in_Class(uML_Property);
 
+	//setOpposite
 	uML_Property_setOpposite_Property_Property = factory->createOperation_in_Class(uML_Property);
 	uML_Property_setOpposite_Property_Property_newOpposite = factory->createParameter_in_Operation(uML_Property_setOpposite_Property_Property);
 
+	//setRealDefaultValue
 	uML_Property_setRealDefaultValue_Real_Real = factory->createOperation_in_Class(uML_Property);
 	uML_Property_setRealDefaultValue_Real_Real_value = factory->createParameter_in_Operation(uML_Property_setRealDefaultValue_Real_Real);
 
+	//setStringDefaultValue
 	uML_Property_setStringDefaultValue_String_String = factory->createOperation_in_Class(uML_Property);
 	uML_Property_setStringDefaultValue_String_String_value = factory->createParameter_in_Operation(uML_Property_setStringDefaultValue_String_String);
 
+	//setUnlimitedNaturalDefaultValue
 	uML_Property_setUnlimitedNaturalDefaultValue_UnlimitedNatural_UnlimitedNatural = factory->createOperation_in_Class(uML_Property);
 	uML_Property_setUnlimitedNaturalDefaultValue_UnlimitedNatural_UnlimitedNatural_value = factory->createParameter_in_Operation(uML_Property_setUnlimitedNaturalDefaultValue_UnlimitedNatural_UnlimitedNatural);
 
+	//subsettingContext
 	uML_Property_subsettingContext__ = factory->createOperation_in_Class(uML_Property);
 	uML_Property_subsettingContext_result = factory->createParameter_in_Operation(uML_Property_subsettingContext__);
 
+	//unsetDefault
 	uML_Property_unsetDefault__ = factory->createOperation_in_Class(uML_Property);
 
     //-------------------------------------------
-	// ProtocolConformance
+	//ProtocolConformance
 	uML_ProtocolConformance = factory->createClass_in_Package(uML, uml::umlPackage::PROTOCOLCONFORMANCE_CLASS);
 	
     // ProtocolConformance attributes
+	//generalMachine
 	uML_ProtocolConformance_generalMachine = factory->createProperty_in_Class(uML_ProtocolConformance);
+	//specificMachine
 	uML_ProtocolConformance_specificMachine = factory->createProperty_in_Class(uML_ProtocolConformance);
 
     //-------------------------------------------
-	// ProtocolStateMachine
+	//ProtocolStateMachine
 	uML_ProtocolStateMachine = factory->createClass_in_Package(uML, uml::umlPackage::PROTOCOLSTATEMACHINE_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_ProtocolStateMachine);
@@ -6583,10 +7323,11 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // ProtocolStateMachine attributes
+	//conformance
 	uML_ProtocolStateMachine_conformance = factory->createProperty_in_Class(uML_ProtocolStateMachine);
 
     //-------------------------------------------
-	// ProtocolTransition
+	//ProtocolTransition
 	uML_ProtocolTransition = factory->createClass_in_Package(uML, uml::umlPackage::PROTOCOLTRANSITION_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_ProtocolTransition);
@@ -6630,15 +7371,19 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // ProtocolTransition attributes
+	//postCondition
 	uML_ProtocolTransition_postCondition = factory->createProperty_in_Class(uML_ProtocolTransition);
+	//preCondition
 	uML_ProtocolTransition_preCondition = factory->createProperty_in_Class(uML_ProtocolTransition);
+	//referred
 	uML_ProtocolTransition_referred = factory->createProperty_in_Class(uML_ProtocolTransition);
     // ProtocolTransition operations
+	//referred
 	uML_ProtocolTransition_referred__ = factory->createOperation_in_Class(uML_ProtocolTransition);
 	uML_ProtocolTransition_referred_result = factory->createParameter_in_Operation(uML_ProtocolTransition_referred__);
 
     //-------------------------------------------
-	// Pseudostate
+	//Pseudostate
 	uML_Pseudostate = factory->createClass_in_Package(uML, uml::umlPackage::PSEUDOSTATE_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_Pseudostate);
@@ -6776,12 +7521,15 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // Pseudostate attributes
+	//kind
 	uML_Pseudostate_kind = factory->createProperty_in_Class(uML_Pseudostate);
+	//state
 	uML_Pseudostate_state = factory->createProperty_in_Class(uML_Pseudostate);
+	//stateMachine
 	uML_Pseudostate_stateMachine = factory->createProperty_in_Class(uML_Pseudostate);
 
     //-------------------------------------------
-	// QualifierValue
+	//QualifierValue
 	uML_QualifierValue = factory->createClass_in_Package(uML, uml::umlPackage::QUALIFIERVALUE_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_QualifierValue);
@@ -6821,18 +7569,21 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // QualifierValue attributes
+	//qualifier
 	uML_QualifierValue_qualifier = factory->createProperty_in_Class(uML_QualifierValue);
+	//value
 	uML_QualifierValue_value = factory->createProperty_in_Class(uML_QualifierValue);
 
     //-------------------------------------------
-	// RaiseExceptionAction
+	//RaiseExceptionAction
 	uML_RaiseExceptionAction = factory->createClass_in_Package(uML, uml::umlPackage::RAISEEXCEPTIONACTION_CLASS);
 	
     // RaiseExceptionAction attributes
+	//exception
 	uML_RaiseExceptionAction_exception = factory->createProperty_in_Class(uML_RaiseExceptionAction);
 
     //-------------------------------------------
-	// ReadExtentAction
+	//ReadExtentAction
 	uML_ReadExtentAction = factory->createClass_in_Package(uML, uml::umlPackage::READEXTENTACTION_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_ReadExtentAction);
@@ -6858,11 +7609,13 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // ReadExtentAction attributes
+	//classifier
 	uML_ReadExtentAction_classifier = factory->createProperty_in_Class(uML_ReadExtentAction);
+	//result
 	uML_ReadExtentAction_result = factory->createProperty_in_Class(uML_ReadExtentAction);
 
     //-------------------------------------------
-	// ReadIsClassifiedObjectAction
+	//ReadIsClassifiedObjectAction
 	uML_ReadIsClassifiedObjectAction = factory->createClass_in_Package(uML, uml::umlPackage::READISCLASSIFIEDOBJECTACTION_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_ReadIsClassifiedObjectAction);
@@ -6916,13 +7669,17 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // ReadIsClassifiedObjectAction attributes
+	//classifier
 	uML_ReadIsClassifiedObjectAction_classifier = factory->createProperty_in_Class(uML_ReadIsClassifiedObjectAction);
+	//isDirect
 	uML_ReadIsClassifiedObjectAction_isDirect = factory->createProperty_in_Class(uML_ReadIsClassifiedObjectAction);
+	//object
 	uML_ReadIsClassifiedObjectAction_object = factory->createProperty_in_Class(uML_ReadIsClassifiedObjectAction);
+	//result
 	uML_ReadIsClassifiedObjectAction_result = factory->createProperty_in_Class(uML_ReadIsClassifiedObjectAction);
 
     //-------------------------------------------
-	// ReadLinkAction
+	//ReadLinkAction
 	uML_ReadLinkAction = factory->createClass_in_Package(uML, uml::umlPackage::READLINKACTION_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_ReadLinkAction);
@@ -6990,13 +7747,15 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // ReadLinkAction attributes
+	//result
 	uML_ReadLinkAction_result = factory->createProperty_in_Class(uML_ReadLinkAction);
     // ReadLinkAction operations
+	//openEnd
 	uML_ReadLinkAction_openEnd__ = factory->createOperation_in_Class(uML_ReadLinkAction);
 	uML_ReadLinkAction_openEnd_result = factory->createParameter_in_Operation(uML_ReadLinkAction_openEnd__);
 
     //-------------------------------------------
-	// ReadLinkObjectEndAction
+	//ReadLinkObjectEndAction
 	uML_ReadLinkObjectEndAction = factory->createClass_in_Package(uML, uml::umlPackage::READLINKOBJECTENDACTION_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_ReadLinkObjectEndAction);
@@ -7092,12 +7851,15 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // ReadLinkObjectEndAction attributes
+	//end
 	uML_ReadLinkObjectEndAction_end = factory->createProperty_in_Class(uML_ReadLinkObjectEndAction);
+	//object
 	uML_ReadLinkObjectEndAction_object = factory->createProperty_in_Class(uML_ReadLinkObjectEndAction);
+	//result
 	uML_ReadLinkObjectEndAction_result = factory->createProperty_in_Class(uML_ReadLinkObjectEndAction);
 
     //-------------------------------------------
-	// ReadLinkObjectEndQualifierAction
+	//ReadLinkObjectEndQualifierAction
 	uML_ReadLinkObjectEndQualifierAction = factory->createClass_in_Package(uML, uml::umlPackage::READLINKOBJECTENDQUALIFIERACTION_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_ReadLinkObjectEndQualifierAction);
@@ -7207,12 +7969,15 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // ReadLinkObjectEndQualifierAction attributes
+	//object
 	uML_ReadLinkObjectEndQualifierAction_object = factory->createProperty_in_Class(uML_ReadLinkObjectEndQualifierAction);
+	//qualifier
 	uML_ReadLinkObjectEndQualifierAction_qualifier = factory->createProperty_in_Class(uML_ReadLinkObjectEndQualifierAction);
+	//result
 	uML_ReadLinkObjectEndQualifierAction_result = factory->createProperty_in_Class(uML_ReadLinkObjectEndQualifierAction);
 
     //-------------------------------------------
-	// ReadSelfAction
+	//ReadSelfAction
 	uML_ReadSelfAction = factory->createClass_in_Package(uML, uml::umlPackage::READSELFACTION_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_ReadSelfAction);
@@ -7268,10 +8033,11 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // ReadSelfAction attributes
+	//result
 	uML_ReadSelfAction_result = factory->createProperty_in_Class(uML_ReadSelfAction);
 
     //-------------------------------------------
-	// ReadStructuralFeatureAction
+	//ReadStructuralFeatureAction
 	uML_ReadStructuralFeatureAction = factory->createClass_in_Package(uML, uml::umlPackage::READSTRUCTURALFEATUREACTION_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_ReadStructuralFeatureAction);
@@ -7297,10 +8063,11 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // ReadStructuralFeatureAction attributes
+	//result
 	uML_ReadStructuralFeatureAction_result = factory->createProperty_in_Class(uML_ReadStructuralFeatureAction);
 
     //-------------------------------------------
-	// ReadVariableAction
+	//ReadVariableAction
 	uML_ReadVariableAction = factory->createClass_in_Package(uML, uml::umlPackage::READVARIABLEACTION_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_ReadVariableAction);
@@ -7326,15 +8093,16 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // ReadVariableAction attributes
+	//result
 	uML_ReadVariableAction_result = factory->createProperty_in_Class(uML_ReadVariableAction);
 
     //-------------------------------------------
-	// Realization
+	//Realization
 	uML_Realization = factory->createClass_in_Package(uML, uml::umlPackage::REALIZATION_CLASS);
 	
 
     //-------------------------------------------
-	// Reception
+	//Reception
 	uML_Reception = factory->createClass_in_Package(uML, uml::umlPackage::RECEPTION_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_Reception);
@@ -7374,10 +8142,11 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // Reception attributes
+	//signal
 	uML_Reception_signal = factory->createProperty_in_Class(uML_Reception);
 
     //-------------------------------------------
-	// ReclassifyObjectAction
+	//ReclassifyObjectAction
 	uML_ReclassifyObjectAction = factory->createClass_in_Package(uML, uml::umlPackage::RECLASSIFYOBJECTACTION_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_ReclassifyObjectAction);
@@ -7417,13 +8186,17 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // ReclassifyObjectAction attributes
+	//isReplaceAll
 	uML_ReclassifyObjectAction_isReplaceAll = factory->createProperty_in_Class(uML_ReclassifyObjectAction);
+	//newClassifier
 	uML_ReclassifyObjectAction_newClassifier = factory->createProperty_in_Class(uML_ReclassifyObjectAction);
+	//object
 	uML_ReclassifyObjectAction_object = factory->createProperty_in_Class(uML_ReclassifyObjectAction);
+	//oldClassifier
 	uML_ReclassifyObjectAction_oldClassifier = factory->createProperty_in_Class(uML_ReclassifyObjectAction);
 
     //-------------------------------------------
-	// RedefinableElement
+	//RedefinableElement
 	uML_RedefinableElement = factory->createClass_in_Package(uML, uml::umlPackage::REDEFINABLEELEMENT_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_RedefinableElement);
@@ -7463,18 +8236,23 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // RedefinableElement attributes
+	//isLeaf
 	uML_RedefinableElement_isLeaf = factory->createProperty_in_Class(uML_RedefinableElement);
+	//redefinedElement
 	uML_RedefinableElement_redefinedElement = factory->createProperty_in_Class(uML_RedefinableElement);
+	//redefinitionContext
 	uML_RedefinableElement_redefinitionContext = factory->createProperty_in_Class(uML_RedefinableElement);
     // RedefinableElement operations
+	//isConsistentWith
 	uML_RedefinableElement_isConsistentWith_RedefinableElement_RedefinableElement = factory->createOperation_in_Class(uML_RedefinableElement);
 	uML_RedefinableElement_isConsistentWith_result = factory->createParameter_in_Operation(uML_RedefinableElement_isConsistentWith_RedefinableElement_RedefinableElement);uML_RedefinableElement_isConsistentWith_RedefinableElement_RedefinableElement_redefiningElement = factory->createParameter_in_Operation(uML_RedefinableElement_isConsistentWith_RedefinableElement_RedefinableElement);
 
+	//isRedefinitionContextValid
 	uML_RedefinableElement_isRedefinitionContextValid_RedefinableElement_RedefinableElement = factory->createOperation_in_Class(uML_RedefinableElement);
 	uML_RedefinableElement_isRedefinitionContextValid_result = factory->createParameter_in_Operation(uML_RedefinableElement_isRedefinitionContextValid_RedefinableElement_RedefinableElement);uML_RedefinableElement_isRedefinitionContextValid_RedefinableElement_RedefinableElement_redefinedElement = factory->createParameter_in_Operation(uML_RedefinableElement_isRedefinitionContextValid_RedefinableElement_RedefinableElement);
 
     //-------------------------------------------
-	// RedefinableTemplateSignature
+	//RedefinableTemplateSignature
 	uML_RedefinableTemplateSignature = factory->createClass_in_Package(uML, uml::umlPackage::REDEFINABLETEMPLATESIGNATURE_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_RedefinableTemplateSignature);
@@ -7486,18 +8264,23 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // RedefinableTemplateSignature attributes
+	//classifier
 	uML_RedefinableTemplateSignature_classifier = factory->createProperty_in_Class(uML_RedefinableTemplateSignature);
+	//extendedSignature
 	uML_RedefinableTemplateSignature_extendedSignature = factory->createProperty_in_Class(uML_RedefinableTemplateSignature);
+	//inheritedParameter
 	uML_RedefinableTemplateSignature_inheritedParameter = factory->createProperty_in_Class(uML_RedefinableTemplateSignature);
     // RedefinableTemplateSignature operations
+	//inheritedParameter
 	uML_RedefinableTemplateSignature_inheritedParameter__ = factory->createOperation_in_Class(uML_RedefinableTemplateSignature);
 	uML_RedefinableTemplateSignature_inheritedParameter_result = factory->createParameter_in_Operation(uML_RedefinableTemplateSignature_inheritedParameter__);
 
+	//isConsistentWith
 	uML_RedefinableTemplateSignature_isConsistentWith_RedefinableElement_RedefinableElement = factory->createOperation_in_Class(uML_RedefinableTemplateSignature);
 	uML_RedefinableTemplateSignature_isConsistentWith_result = factory->createParameter_in_Operation(uML_RedefinableTemplateSignature_isConsistentWith_RedefinableElement_RedefinableElement);uML_RedefinableTemplateSignature_isConsistentWith_RedefinableElement_RedefinableElement_redefiningElement = factory->createParameter_in_Operation(uML_RedefinableTemplateSignature_isConsistentWith_RedefinableElement_RedefinableElement);
 
     //-------------------------------------------
-	// ReduceAction
+	//ReduceAction
 	uML_ReduceAction = factory->createClass_in_Package(uML, uml::umlPackage::REDUCEACTION_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_ReduceAction);
@@ -7547,13 +8330,17 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // ReduceAction attributes
+	//collection
 	uML_ReduceAction_collection = factory->createProperty_in_Class(uML_ReduceAction);
+	//isOrdered
 	uML_ReduceAction_isOrdered = factory->createProperty_in_Class(uML_ReduceAction);
+	//reducer
 	uML_ReduceAction_reducer = factory->createProperty_in_Class(uML_ReduceAction);
+	//result
 	uML_ReduceAction_result = factory->createProperty_in_Class(uML_ReduceAction);
 
     //-------------------------------------------
-	// Region
+	//Region
 	uML_Region = factory->createClass_in_Package(uML, uml::umlPackage::REGION_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_Region);
@@ -7607,37 +8394,49 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // Region attributes
+	//extendedRegion
 	uML_Region_extendedRegion = factory->createProperty_in_Class(uML_Region);
+	//redefinitionContext
 	uML_Region_redefinitionContext = factory->createProperty_in_Class(uML_Region);
+	//state
 	uML_Region_state = factory->createProperty_in_Class(uML_Region);
+	//stateMachine
 	uML_Region_stateMachine = factory->createProperty_in_Class(uML_Region);
+	//subvertex
 	uML_Region_subvertex = factory->createProperty_in_Class(uML_Region);
+	//transition
 	uML_Region_transition = factory->createProperty_in_Class(uML_Region);
     // Region operations
+	//belongsToPSM
 	uML_Region_belongsToPSM__ = factory->createOperation_in_Class(uML_Region);
 	uML_Region_belongsToPSM_result = factory->createParameter_in_Operation(uML_Region_belongsToPSM__);
 
+	//containingStateMachine
 	uML_Region_containingStateMachine__ = factory->createOperation_in_Class(uML_Region);
 	uML_Region_containingStateMachine_result = factory->createParameter_in_Operation(uML_Region_containingStateMachine__);
 
+	//isConsistentWith
 	uML_Region_isConsistentWith_RedefinableElement_RedefinableElement = factory->createOperation_in_Class(uML_Region);
 	uML_Region_isConsistentWith_result = factory->createParameter_in_Operation(uML_Region_isConsistentWith_RedefinableElement_RedefinableElement);uML_Region_isConsistentWith_RedefinableElement_RedefinableElement_redefiningElement = factory->createParameter_in_Operation(uML_Region_isConsistentWith_RedefinableElement_RedefinableElement);
 
+	//isRedefinitionContextValid
 	uML_Region_isRedefinitionContextValid_RedefinableElement_RedefinableElement = factory->createOperation_in_Class(uML_Region);
 	uML_Region_isRedefinitionContextValid_result = factory->createParameter_in_Operation(uML_Region_isRedefinitionContextValid_RedefinableElement_RedefinableElement);uML_Region_isRedefinitionContextValid_RedefinableElement_RedefinableElement_redefinedElement = factory->createParameter_in_Operation(uML_Region_isRedefinitionContextValid_RedefinableElement_RedefinableElement);
 
+	//redefinitionContext
 	uML_Region_redefinitionContext__ = factory->createOperation_in_Class(uML_Region);
 	uML_Region_redefinitionContext_result = factory->createParameter_in_Operation(uML_Region_redefinitionContext__);
 
     //-------------------------------------------
-	// Relationship
+	//Relationship
 	uML_Relationship = factory->createClass_in_Package(uML, uml::umlPackage::RELATIONSHIP_CLASS);
 	
     // Relationship attributes
+	//relatedElement
 	uML_Relationship_relatedElement = factory->createProperty_in_Class(uML_Relationship);
 
     //-------------------------------------------
-	// RemoveStructuralFeatureValueAction
+	//RemoveStructuralFeatureValueAction
 	uML_RemoveStructuralFeatureValueAction = factory->createClass_in_Package(uML, uml::umlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_RemoveStructuralFeatureValueAction);
@@ -7656,11 +8455,13 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // RemoveStructuralFeatureValueAction attributes
+	//isRemoveDuplicates
 	uML_RemoveStructuralFeatureValueAction_isRemoveDuplicates = factory->createProperty_in_Class(uML_RemoveStructuralFeatureValueAction);
+	//removeAt
 	uML_RemoveStructuralFeatureValueAction_removeAt = factory->createProperty_in_Class(uML_RemoveStructuralFeatureValueAction);
 
     //-------------------------------------------
-	// RemoveVariableValueAction
+	//RemoveVariableValueAction
 	uML_RemoveVariableValueAction = factory->createClass_in_Package(uML, uml::umlPackage::REMOVEVARIABLEVALUEACTION_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_RemoveVariableValueAction);
@@ -7679,11 +8480,13 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // RemoveVariableValueAction attributes
+	//isRemoveDuplicates
 	uML_RemoveVariableValueAction_isRemoveDuplicates = factory->createProperty_in_Class(uML_RemoveVariableValueAction);
+	//removeAt
 	uML_RemoveVariableValueAction_removeAt = factory->createProperty_in_Class(uML_RemoveVariableValueAction);
 
     //-------------------------------------------
-	// ReplyAction
+	//ReplyAction
 	uML_ReplyAction = factory->createClass_in_Package(uML, uml::umlPackage::REPLYACTION_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_ReplyAction);
@@ -7719,12 +8522,15 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // ReplyAction attributes
+	//replyToCall
 	uML_ReplyAction_replyToCall = factory->createProperty_in_Class(uML_ReplyAction);
+	//replyValue
 	uML_ReplyAction_replyValue = factory->createProperty_in_Class(uML_ReplyAction);
+	//returnInformation
 	uML_ReplyAction_returnInformation = factory->createProperty_in_Class(uML_ReplyAction);
 
     //-------------------------------------------
-	// SendObjectAction
+	//SendObjectAction
 	uML_SendObjectAction = factory->createClass_in_Package(uML, uml::umlPackage::SENDOBJECTACTION_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_SendObjectAction);
@@ -7736,11 +8542,13 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // SendObjectAction attributes
+	//request
 	uML_SendObjectAction_request = factory->createProperty_in_Class(uML_SendObjectAction);
+	//target
 	uML_SendObjectAction_target = factory->createProperty_in_Class(uML_SendObjectAction);
 
     //-------------------------------------------
-	// SendSignalAction
+	//SendSignalAction
 	uML_SendSignalAction = factory->createClass_in_Package(uML, uml::umlPackage::SENDSIGNALACTION_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_SendSignalAction);
@@ -7788,44 +8596,53 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // SendSignalAction attributes
+	//signal
 	uML_SendSignalAction_signal = factory->createProperty_in_Class(uML_SendSignalAction);
+	//target
 	uML_SendSignalAction_target = factory->createProperty_in_Class(uML_SendSignalAction);
 
     //-------------------------------------------
-	// SequenceNode
+	//SequenceNode
 	uML_SequenceNode = factory->createClass_in_Package(uML, uml::umlPackage::SEQUENCENODE_CLASS);
 	
     // SequenceNode attributes
+	//executableNode
 	uML_SequenceNode_executableNode = factory->createProperty_in_Class(uML_SequenceNode);
 
     //-------------------------------------------
-	// Signal
+	//Signal
 	uML_Signal = factory->createClass_in_Package(uML, uml::umlPackage::SIGNAL_CLASS);
 	
     // Signal attributes
+	//ownedAttribute
 	uML_Signal_ownedAttribute = factory->createProperty_in_Class(uML_Signal);
     // Signal operations
+	//createOwnedAttribute
 	uML_Signal_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural = factory->createOperation_in_Class(uML_Signal);
 	uML_Signal_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNaturalreturn = factory->createParameter_in_Operation(uML_Signal_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural);uML_Signal_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_name = factory->createParameter_in_Operation(uML_Signal_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural);uML_Signal_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_type = factory->createParameter_in_Operation(uML_Signal_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural);uML_Signal_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_lower = factory->createParameter_in_Operation(uML_Signal_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural);uML_Signal_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_upper = factory->createParameter_in_Operation(uML_Signal_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural);
 
     //-------------------------------------------
-	// SignalEvent
+	//SignalEvent
 	uML_SignalEvent = factory->createClass_in_Package(uML, uml::umlPackage::SIGNALEVENT_CLASS);
 	
     // SignalEvent attributes
+	//signal
 	uML_SignalEvent_signal = factory->createProperty_in_Class(uML_SignalEvent);
 
     //-------------------------------------------
-	// Slot
+	//Slot
 	uML_Slot = factory->createClass_in_Package(uML, uml::umlPackage::SLOT_CLASS);
 	
     // Slot attributes
+	//definingFeature
 	uML_Slot_definingFeature = factory->createProperty_in_Class(uML_Slot);
+	//owningInstance
 	uML_Slot_owningInstance = factory->createProperty_in_Class(uML_Slot);
+	//value
 	uML_Slot_value = factory->createProperty_in_Class(uML_Slot);
 
     //-------------------------------------------
-	// StartClassifierBehaviorAction
+	//StartClassifierBehaviorAction
 	uML_StartClassifierBehaviorAction = factory->createClass_in_Package(uML, uml::umlPackage::STARTCLASSIFIERBEHAVIORACTION_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_StartClassifierBehaviorAction);
@@ -7853,10 +8670,11 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // StartClassifierBehaviorAction attributes
+	//object
 	uML_StartClassifierBehaviorAction_object = factory->createProperty_in_Class(uML_StartClassifierBehaviorAction);
 
     //-------------------------------------------
-	// StartObjectBehaviorAction
+	//StartObjectBehaviorAction
 	uML_StartObjectBehaviorAction = factory->createClass_in_Package(uML, uml::umlPackage::STARTOBJECTBEHAVIORACTION_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_StartObjectBehaviorAction);
@@ -7896,19 +8714,23 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // StartObjectBehaviorAction attributes
+	//object
 	uML_StartObjectBehaviorAction_object = factory->createProperty_in_Class(uML_StartObjectBehaviorAction);
     // StartObjectBehaviorAction operations
+	//behavior
 	uML_StartObjectBehaviorAction_behavior__ = factory->createOperation_in_Class(uML_StartObjectBehaviorAction);
 	uML_StartObjectBehaviorAction_behavior_result = factory->createParameter_in_Operation(uML_StartObjectBehaviorAction_behavior__);
 
+	//inputParameters
 	uML_StartObjectBehaviorAction_inputParameters__ = factory->createOperation_in_Class(uML_StartObjectBehaviorAction);
 	uML_StartObjectBehaviorAction_inputParameters_result = factory->createParameter_in_Operation(uML_StartObjectBehaviorAction_inputParameters__);
 
+	//outputParameters
 	uML_StartObjectBehaviorAction_outputParameters__ = factory->createOperation_in_Class(uML_StartObjectBehaviorAction);
 	uML_StartObjectBehaviorAction_outputParameters_result = factory->createParameter_in_Operation(uML_StartObjectBehaviorAction_outputParameters__);
 
     //-------------------------------------------
-	// State
+	//State
 	uML_State = factory->createClass_in_Package(uML, uml::umlPackage::STATE_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_State);
@@ -7980,56 +8802,81 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // State attributes
+	//connection
 	uML_State_connection = factory->createProperty_in_Class(uML_State);
+	//connectionPoint
 	uML_State_connectionPoint = factory->createProperty_in_Class(uML_State);
+	//deferrableTrigger
 	uML_State_deferrableTrigger = factory->createProperty_in_Class(uML_State);
+	//doActivity
 	uML_State_doActivity = factory->createProperty_in_Class(uML_State);
+	//entry
 	uML_State_entry = factory->createProperty_in_Class(uML_State);
+	//exit
 	uML_State_exit = factory->createProperty_in_Class(uML_State);
+	//isComposite
 	uML_State_isComposite = factory->createProperty_in_Class(uML_State);
+	//isOrthogonal
 	uML_State_isOrthogonal = factory->createProperty_in_Class(uML_State);
+	//isSimple
 	uML_State_isSimple = factory->createProperty_in_Class(uML_State);
+	//isSubmachineState
 	uML_State_isSubmachineState = factory->createProperty_in_Class(uML_State);
+	//redefinedState
 	uML_State_redefinedState = factory->createProperty_in_Class(uML_State);
+	//redefinitionContext
 	uML_State_redefinitionContext = factory->createProperty_in_Class(uML_State);
+	//region
 	uML_State_region = factory->createProperty_in_Class(uML_State);
+	//stateInvariant
 	uML_State_stateInvariant = factory->createProperty_in_Class(uML_State);
+	//submachine
 	uML_State_submachine = factory->createProperty_in_Class(uML_State);
     // State operations
+	//containingStateMachine
 	uML_State_containingStateMachine__ = factory->createOperation_in_Class(uML_State);
 	uML_State_containingStateMachine_result = factory->createParameter_in_Operation(uML_State_containingStateMachine__);
 
+	//isComposite
 	uML_State_isComposite__ = factory->createOperation_in_Class(uML_State);
 	uML_State_isComposite_result = factory->createParameter_in_Operation(uML_State_isComposite__);
 
+	//isConsistentWith
 	uML_State_isConsistentWith_RedefinableElement_RedefinableElement = factory->createOperation_in_Class(uML_State);
 	uML_State_isConsistentWith_result = factory->createParameter_in_Operation(uML_State_isConsistentWith_RedefinableElement_RedefinableElement);uML_State_isConsistentWith_RedefinableElement_RedefinableElement_redefiningElement = factory->createParameter_in_Operation(uML_State_isConsistentWith_RedefinableElement_RedefinableElement);
 
+	//isOrthogonal
 	uML_State_isOrthogonal__ = factory->createOperation_in_Class(uML_State);
 	uML_State_isOrthogonal_result = factory->createParameter_in_Operation(uML_State_isOrthogonal__);
 
+	//isRedefinitionContextValid
 	uML_State_isRedefinitionContextValid_RedefinableElement_RedefinableElement = factory->createOperation_in_Class(uML_State);
 	uML_State_isRedefinitionContextValid_result = factory->createParameter_in_Operation(uML_State_isRedefinitionContextValid_RedefinableElement_RedefinableElement);uML_State_isRedefinitionContextValid_RedefinableElement_RedefinableElement_redefinedElement = factory->createParameter_in_Operation(uML_State_isRedefinitionContextValid_RedefinableElement_RedefinableElement);
 
+	//isSimple
 	uML_State_isSimple__ = factory->createOperation_in_Class(uML_State);
 	uML_State_isSimple_result = factory->createParameter_in_Operation(uML_State_isSimple__);
 
+	//isSubmachineState
 	uML_State_isSubmachineState__ = factory->createOperation_in_Class(uML_State);
 	uML_State_isSubmachineState_result = factory->createParameter_in_Operation(uML_State_isSubmachineState__);
 
+	//redefinitionContext
 	uML_State_redefinitionContext__ = factory->createOperation_in_Class(uML_State);
 	uML_State_redefinitionContext_result = factory->createParameter_in_Operation(uML_State_redefinitionContext__);
 
     //-------------------------------------------
-	// StateInvariant
+	//StateInvariant
 	uML_StateInvariant = factory->createClass_in_Package(uML, uml::umlPackage::STATEINVARIANT_CLASS);
 	
     // StateInvariant attributes
+	//covered
 	uML_StateInvariant_covered = factory->createProperty_in_Class(uML_StateInvariant);
+	//invariant
 	uML_StateInvariant_invariant = factory->createProperty_in_Class(uML_StateInvariant);
 
     //-------------------------------------------
-	// StateMachine
+	//StateMachine
 	uML_StateMachine = factory->createClass_in_Package(uML, uml::umlPackage::STATEMACHINE_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_StateMachine);
@@ -8083,28 +8930,37 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // StateMachine attributes
+	//connectionPoint
 	uML_StateMachine_connectionPoint = factory->createProperty_in_Class(uML_StateMachine);
+	//extendedStateMachine
 	uML_StateMachine_extendedStateMachine = factory->createProperty_in_Class(uML_StateMachine);
+	//region
 	uML_StateMachine_region = factory->createProperty_in_Class(uML_StateMachine);
+	//submachineState
 	uML_StateMachine_submachineState = factory->createProperty_in_Class(uML_StateMachine);
     // StateMachine operations
+	//LCA
 	uML_StateMachine_LCA_Vertex_Vertex_Vertex_Vertex = factory->createOperation_in_Class(uML_StateMachine);
 	uML_StateMachine_LCA_result = factory->createParameter_in_Operation(uML_StateMachine_LCA_Vertex_Vertex_Vertex_Vertex);uML_StateMachine_LCA_Vertex_Vertex_Vertex_Vertex_s1 = factory->createParameter_in_Operation(uML_StateMachine_LCA_Vertex_Vertex_Vertex_Vertex);uML_StateMachine_LCA_Vertex_Vertex_Vertex_Vertex_s2 = factory->createParameter_in_Operation(uML_StateMachine_LCA_Vertex_Vertex_Vertex_Vertex);
 
+	//LCAState
 	uML_StateMachine_LCAState_Vertex_Vertex_Vertex_Vertex = factory->createOperation_in_Class(uML_StateMachine);
 	uML_StateMachine_LCAState_result = factory->createParameter_in_Operation(uML_StateMachine_LCAState_Vertex_Vertex_Vertex_Vertex);uML_StateMachine_LCAState_Vertex_Vertex_Vertex_Vertex_v1 = factory->createParameter_in_Operation(uML_StateMachine_LCAState_Vertex_Vertex_Vertex_Vertex);uML_StateMachine_LCAState_Vertex_Vertex_Vertex_Vertex_v2 = factory->createParameter_in_Operation(uML_StateMachine_LCAState_Vertex_Vertex_Vertex_Vertex);
 
+	//ancestor
 	uML_StateMachine_ancestor_Vertex_Vertex_Vertex_Vertex = factory->createOperation_in_Class(uML_StateMachine);
 	uML_StateMachine_ancestor_result = factory->createParameter_in_Operation(uML_StateMachine_ancestor_Vertex_Vertex_Vertex_Vertex);uML_StateMachine_ancestor_Vertex_Vertex_Vertex_Vertex_s1 = factory->createParameter_in_Operation(uML_StateMachine_ancestor_Vertex_Vertex_Vertex_Vertex);uML_StateMachine_ancestor_Vertex_Vertex_Vertex_Vertex_s2 = factory->createParameter_in_Operation(uML_StateMachine_ancestor_Vertex_Vertex_Vertex_Vertex);
 
+	//isConsistentWith
 	uML_StateMachine_isConsistentWith_RedefinableElement_RedefinableElement = factory->createOperation_in_Class(uML_StateMachine);
 	uML_StateMachine_isConsistentWith_result = factory->createParameter_in_Operation(uML_StateMachine_isConsistentWith_RedefinableElement_RedefinableElement);uML_StateMachine_isConsistentWith_RedefinableElement_RedefinableElement_redefiningElement = factory->createParameter_in_Operation(uML_StateMachine_isConsistentWith_RedefinableElement_RedefinableElement);
 
+	//isRedefinitionContextValid
 	uML_StateMachine_isRedefinitionContextValid_RedefinableElement_RedefinableElement = factory->createOperation_in_Class(uML_StateMachine);
 	uML_StateMachine_isRedefinitionContextValid_result = factory->createParameter_in_Operation(uML_StateMachine_isRedefinitionContextValid_RedefinableElement_RedefinableElement);uML_StateMachine_isRedefinitionContextValid_RedefinableElement_RedefinableElement_redefinedElement = factory->createParameter_in_Operation(uML_StateMachine_isRedefinitionContextValid_RedefinableElement_RedefinableElement);
 
     //-------------------------------------------
-	// Stereotype
+	//Stereotype
 	uML_Stereotype = factory->createClass_in_Package(uML, uml::umlPackage::STEREOTYPE_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_Stereotype);
@@ -8188,41 +9044,53 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // Stereotype attributes
+	//icon
 	uML_Stereotype_icon = factory->createProperty_in_Class(uML_Stereotype);
+	//profile
 	uML_Stereotype_profile = factory->createProperty_in_Class(uML_Stereotype);
     // Stereotype operations
+	//containingProfile
 	uML_Stereotype_containingProfile__ = factory->createOperation_in_Class(uML_Stereotype);
 	uML_Stereotype_containingProfile_result = factory->createParameter_in_Operation(uML_Stereotype_containingProfile__);
 
+	//createExtension
 	uML_Stereotype_createExtension_Class_Boolean_Class_Boolean = factory->createOperation_in_Class(uML_Stereotype);
 	uML_Stereotype_createExtension_Class_Boolean_Class_Booleanreturn = factory->createParameter_in_Operation(uML_Stereotype_createExtension_Class_Boolean_Class_Boolean);uML_Stereotype_createExtension_Class_Boolean_Class_Boolean_metaclass = factory->createParameter_in_Operation(uML_Stereotype_createExtension_Class_Boolean_Class_Boolean);uML_Stereotype_createExtension_Class_Boolean_Class_Boolean_isRequired = factory->createParameter_in_Operation(uML_Stereotype_createExtension_Class_Boolean_Class_Boolean);
 
+	//createIcon
 	uML_Stereotype_createIcon_String_String = factory->createOperation_in_Class(uML_Stereotype);
 	uML_Stereotype_createIcon_String_Stringreturn = factory->createParameter_in_Operation(uML_Stereotype_createIcon_String_String);uML_Stereotype_createIcon_String_String_location = factory->createParameter_in_Operation(uML_Stereotype_createIcon_String_String);
 
+	//createIcon
 	uML_Stereotype_createIcon_String_String_String_String = factory->createOperation_in_Class(uML_Stereotype);
 	uML_Stereotype_createIcon_String_String_String_Stringreturn = factory->createParameter_in_Operation(uML_Stereotype_createIcon_String_String_String_String);uML_Stereotype_createIcon_String_String_String_String_format = factory->createParameter_in_Operation(uML_Stereotype_createIcon_String_String_String_String);uML_Stereotype_createIcon_String_String_String_String_content = factory->createParameter_in_Operation(uML_Stereotype_createIcon_String_String_String_String);
 
+	//getAllExtendedMetaclasses
 	uML_Stereotype_getAllExtendedMetaclasses__ = factory->createOperation_in_Class(uML_Stereotype);
 	uML_Stereotype_getAllExtendedMetaclasses__return = factory->createParameter_in_Operation(uML_Stereotype_getAllExtendedMetaclasses__);
 
+	//getDefinition
 	uML_Stereotype_getDefinition__ = factory->createOperation_in_Class(uML_Stereotype);
 	uML_Stereotype_getDefinition__return = factory->createParameter_in_Operation(uML_Stereotype_getDefinition__);
 
+	//getExtendedMetaclasses
 	uML_Stereotype_getExtendedMetaclasses__ = factory->createOperation_in_Class(uML_Stereotype);
 	uML_Stereotype_getExtendedMetaclasses__return = factory->createParameter_in_Operation(uML_Stereotype_getExtendedMetaclasses__);
 
+	//getKeyword
 	uML_Stereotype_getKeyword__ = factory->createOperation_in_Class(uML_Stereotype);
 	uML_Stereotype_getKeyword__return = factory->createParameter_in_Operation(uML_Stereotype_getKeyword__);
 
+	//getKeyword
 	uML_Stereotype_getKeyword_Boolean_Boolean = factory->createOperation_in_Class(uML_Stereotype);
 	uML_Stereotype_getKeyword_Boolean_Booleanreturn = factory->createParameter_in_Operation(uML_Stereotype_getKeyword_Boolean_Boolean);uML_Stereotype_getKeyword_Boolean_Boolean_localize = factory->createParameter_in_Operation(uML_Stereotype_getKeyword_Boolean_Boolean);
 
+	//profile
 	uML_Stereotype_profile__ = factory->createOperation_in_Class(uML_Stereotype);
 	uML_Stereotype_profile_result = factory->createParameter_in_Operation(uML_Stereotype_profile__);
 
     //-------------------------------------------
-	// StringExpression
+	//StringExpression
 	uML_StringExpression = factory->createClass_in_Package(uML, uml::umlPackage::STRINGEXPRESSION_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_StringExpression);
@@ -8248,21 +9116,25 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // StringExpression attributes
+	//owningExpression
 	uML_StringExpression_owningExpression = factory->createProperty_in_Class(uML_StringExpression);
+	//subExpression
 	uML_StringExpression_subExpression = factory->createProperty_in_Class(uML_StringExpression);
     // StringExpression operations
+	//stringValue
 	uML_StringExpression_stringValue__ = factory->createOperation_in_Class(uML_StringExpression);
 	uML_StringExpression_stringValue_result = factory->createParameter_in_Operation(uML_StringExpression_stringValue__);
 
     //-------------------------------------------
-	// StructuralFeature
+	//StructuralFeature
 	uML_StructuralFeature = factory->createClass_in_Package(uML, uml::umlPackage::STRUCTURALFEATURE_CLASS);
 	
     // StructuralFeature attributes
+	//isReadOnly
 	uML_StructuralFeature_isReadOnly = factory->createProperty_in_Class(uML_StructuralFeature);
 
     //-------------------------------------------
-	// StructuralFeatureAction
+	//StructuralFeatureAction
 	uML_StructuralFeatureAction = factory->createClass_in_Package(uML, uml::umlPackage::STRUCTURALFEATUREACTION_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_StructuralFeatureAction);
@@ -8332,11 +9204,13 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // StructuralFeatureAction attributes
+	//object
 	uML_StructuralFeatureAction_object = factory->createProperty_in_Class(uML_StructuralFeatureAction);
+	//structuralFeature
 	uML_StructuralFeatureAction_structuralFeature = factory->createProperty_in_Class(uML_StructuralFeatureAction);
 
     //-------------------------------------------
-	// StructuredActivityNode
+	//StructuredActivityNode
 	uML_StructuredActivityNode = factory->createClass_in_Package(uML, uml::umlPackage::STRUCTUREDACTIVITYNODE_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_StructuredActivityNode);
@@ -8377,58 +9251,79 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // StructuredActivityNode attributes
+	//activity
 	uML_StructuredActivityNode_activity = factory->createProperty_in_Class(uML_StructuredActivityNode);
+	//edge
 	uML_StructuredActivityNode_edge = factory->createProperty_in_Class(uML_StructuredActivityNode);
+	//mustIsolate
 	uML_StructuredActivityNode_mustIsolate = factory->createProperty_in_Class(uML_StructuredActivityNode);
+	//node
 	uML_StructuredActivityNode_node = factory->createProperty_in_Class(uML_StructuredActivityNode);
+	//structuredNodeInput
 	uML_StructuredActivityNode_structuredNodeInput = factory->createProperty_in_Class(uML_StructuredActivityNode);
+	//structuredNodeOutput
 	uML_StructuredActivityNode_structuredNodeOutput = factory->createProperty_in_Class(uML_StructuredActivityNode);
+	//variable
 	uML_StructuredActivityNode_variable = factory->createProperty_in_Class(uML_StructuredActivityNode);
     // StructuredActivityNode operations
+	//allActions
 	uML_StructuredActivityNode_allActions__ = factory->createOperation_in_Class(uML_StructuredActivityNode);
 	uML_StructuredActivityNode_allActions_result = factory->createParameter_in_Operation(uML_StructuredActivityNode_allActions__);
 
+	//allOwnedNodes
 	uML_StructuredActivityNode_allOwnedNodes__ = factory->createOperation_in_Class(uML_StructuredActivityNode);
 	uML_StructuredActivityNode_allOwnedNodes_result = factory->createParameter_in_Operation(uML_StructuredActivityNode_allOwnedNodes__);
 
+	//containingActivity
 	uML_StructuredActivityNode_containingActivity__ = factory->createOperation_in_Class(uML_StructuredActivityNode);
 	uML_StructuredActivityNode_containingActivity_result = factory->createParameter_in_Operation(uML_StructuredActivityNode_containingActivity__);
 
+	//sourceNodes
 	uML_StructuredActivityNode_sourceNodes__ = factory->createOperation_in_Class(uML_StructuredActivityNode);
 	uML_StructuredActivityNode_sourceNodes_result = factory->createParameter_in_Operation(uML_StructuredActivityNode_sourceNodes__);
 
+	//targetNodes
 	uML_StructuredActivityNode_targetNodes__ = factory->createOperation_in_Class(uML_StructuredActivityNode);
 	uML_StructuredActivityNode_targetNodes_result = factory->createParameter_in_Operation(uML_StructuredActivityNode_targetNodes__);
 
     //-------------------------------------------
-	// StructuredClassifier
+	//StructuredClassifier
 	uML_StructuredClassifier = factory->createClass_in_Package(uML, uml::umlPackage::STRUCTUREDCLASSIFIER_CLASS);
 	
     // StructuredClassifier attributes
+	//ownedAttribute
 	uML_StructuredClassifier_ownedAttribute = factory->createProperty_in_Class(uML_StructuredClassifier);
+	//ownedConnector
 	uML_StructuredClassifier_ownedConnector = factory->createProperty_in_Class(uML_StructuredClassifier);
+	//part
 	uML_StructuredClassifier_part = factory->createProperty_in_Class(uML_StructuredClassifier);
+	//role
 	uML_StructuredClassifier_role = factory->createProperty_in_Class(uML_StructuredClassifier);
     // StructuredClassifier operations
+	//allRoles
 	uML_StructuredClassifier_allRoles__ = factory->createOperation_in_Class(uML_StructuredClassifier);
 	uML_StructuredClassifier_allRoles_result = factory->createParameter_in_Operation(uML_StructuredClassifier_allRoles__);
 
+	//createOwnedAttribute
 	uML_StructuredClassifier_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural = factory->createOperation_in_Class(uML_StructuredClassifier);
 	uML_StructuredClassifier_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNaturalreturn = factory->createParameter_in_Operation(uML_StructuredClassifier_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural);uML_StructuredClassifier_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_name = factory->createParameter_in_Operation(uML_StructuredClassifier_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural);uML_StructuredClassifier_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_type = factory->createParameter_in_Operation(uML_StructuredClassifier_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural);uML_StructuredClassifier_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_lower = factory->createParameter_in_Operation(uML_StructuredClassifier_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural);uML_StructuredClassifier_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural_upper = factory->createParameter_in_Operation(uML_StructuredClassifier_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural);
 
+	//part
 	uML_StructuredClassifier_part__ = factory->createOperation_in_Class(uML_StructuredClassifier);
 	uML_StructuredClassifier_part_result = factory->createParameter_in_Operation(uML_StructuredClassifier_part__);
 
     //-------------------------------------------
-	// Substitution
+	//Substitution
 	uML_Substitution = factory->createClass_in_Package(uML, uml::umlPackage::SUBSTITUTION_CLASS);
 	
     // Substitution attributes
+	//contract
 	uML_Substitution_contract = factory->createProperty_in_Class(uML_Substitution);
+	//substitutingClassifier
 	uML_Substitution_substitutingClassifier = factory->createProperty_in_Class(uML_Substitution);
 
     //-------------------------------------------
-	// TemplateBinding
+	//TemplateBinding
 	uML_TemplateBinding = factory->createClass_in_Package(uML, uml::umlPackage::TEMPLATEBINDING_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_TemplateBinding);
@@ -8454,12 +9349,15 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // TemplateBinding attributes
+	//boundElement
 	uML_TemplateBinding_boundElement = factory->createProperty_in_Class(uML_TemplateBinding);
+	//parameterSubstitution
 	uML_TemplateBinding_parameterSubstitution = factory->createProperty_in_Class(uML_TemplateBinding);
+	//signature
 	uML_TemplateBinding_signature = factory->createProperty_in_Class(uML_TemplateBinding);
 
     //-------------------------------------------
-	// TemplateParameter
+	//TemplateParameter
 	uML_TemplateParameter = factory->createClass_in_Package(uML, uml::umlPackage::TEMPLATEPARAMETER_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_TemplateParameter);
@@ -8471,14 +9369,19 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // TemplateParameter attributes
+	//default
 	uML_TemplateParameter_default = factory->createProperty_in_Class(uML_TemplateParameter);
+	//ownedDefault
 	uML_TemplateParameter_ownedDefault = factory->createProperty_in_Class(uML_TemplateParameter);
+	//ownedParameteredElement
 	uML_TemplateParameter_ownedParameteredElement = factory->createProperty_in_Class(uML_TemplateParameter);
+	//parameteredElement
 	uML_TemplateParameter_parameteredElement = factory->createProperty_in_Class(uML_TemplateParameter);
+	//signature
 	uML_TemplateParameter_signature = factory->createProperty_in_Class(uML_TemplateParameter);
 
     //-------------------------------------------
-	// TemplateParameterSubstitution
+	//TemplateParameterSubstitution
 	uML_TemplateParameterSubstitution = factory->createClass_in_Package(uML, uml::umlPackage::TEMPLATEPARAMETERSUBSTITUTION_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_TemplateParameterSubstitution);
@@ -8490,13 +9393,17 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // TemplateParameterSubstitution attributes
+	//actual
 	uML_TemplateParameterSubstitution_actual = factory->createProperty_in_Class(uML_TemplateParameterSubstitution);
+	//formal
 	uML_TemplateParameterSubstitution_formal = factory->createProperty_in_Class(uML_TemplateParameterSubstitution);
+	//ownedActual
 	uML_TemplateParameterSubstitution_ownedActual = factory->createProperty_in_Class(uML_TemplateParameterSubstitution);
+	//templateBinding
 	uML_TemplateParameterSubstitution_templateBinding = factory->createProperty_in_Class(uML_TemplateParameterSubstitution);
 
     //-------------------------------------------
-	// TemplateSignature
+	//TemplateSignature
 	uML_TemplateSignature = factory->createClass_in_Package(uML, uml::umlPackage::TEMPLATESIGNATURE_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_TemplateSignature);
@@ -8524,26 +9431,33 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // TemplateSignature attributes
+	//ownedParameter
 	uML_TemplateSignature_ownedParameter = factory->createProperty_in_Class(uML_TemplateSignature);
+	//parameter
 	uML_TemplateSignature_parameter = factory->createProperty_in_Class(uML_TemplateSignature);
+	//template
 	uML_TemplateSignature_template = factory->createProperty_in_Class(uML_TemplateSignature);
 
     //-------------------------------------------
-	// TemplateableElement
+	//TemplateableElement
 	uML_TemplateableElement = factory->createClass_in_Package(uML, uml::umlPackage::TEMPLATEABLEELEMENT_CLASS);
 	
     // TemplateableElement attributes
+	//ownedTemplateSignature
 	uML_TemplateableElement_ownedTemplateSignature = factory->createProperty_in_Class(uML_TemplateableElement);
+	//templateBinding
 	uML_TemplateableElement_templateBinding = factory->createProperty_in_Class(uML_TemplateableElement);
     // TemplateableElement operations
+	//isTemplate
 	uML_TemplateableElement_isTemplate__ = factory->createOperation_in_Class(uML_TemplateableElement);
 	uML_TemplateableElement_isTemplate_result = factory->createParameter_in_Operation(uML_TemplateableElement_isTemplate__);
 
+	//parameterableElements
 	uML_TemplateableElement_parameterableElements__ = factory->createOperation_in_Class(uML_TemplateableElement);
 	uML_TemplateableElement_parameterableElements_result = factory->createParameter_in_Operation(uML_TemplateableElement_parameterableElements__);
 
     //-------------------------------------------
-	// TestIdentityAction
+	//TestIdentityAction
 	uML_TestIdentityAction = factory->createClass_in_Package(uML, uml::umlPackage::TESTIDENTITYACTION_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_TestIdentityAction);
@@ -8583,12 +9497,15 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // TestIdentityAction attributes
+	//first
 	uML_TestIdentityAction_first = factory->createProperty_in_Class(uML_TestIdentityAction);
+	//result
 	uML_TestIdentityAction_result = factory->createProperty_in_Class(uML_TestIdentityAction);
+	//second
 	uML_TestIdentityAction_second = factory->createProperty_in_Class(uML_TestIdentityAction);
 
     //-------------------------------------------
-	// TimeConstraint
+	//TimeConstraint
 	uML_TimeConstraint = factory->createClass_in_Package(uML, uml::umlPackage::TIMECONSTRAINT_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_TimeConstraint);
@@ -8600,11 +9517,13 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // TimeConstraint attributes
+	//firstEvent
 	uML_TimeConstraint_firstEvent = factory->createProperty_in_Class(uML_TimeConstraint);
+	//specification
 	uML_TimeConstraint_specification = factory->createProperty_in_Class(uML_TimeConstraint);
 
     //-------------------------------------------
-	// TimeEvent
+	//TimeEvent
 	uML_TimeEvent = factory->createClass_in_Package(uML, uml::umlPackage::TIMEEVENT_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_TimeEvent);
@@ -8616,11 +9535,13 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // TimeEvent attributes
+	//isRelative
 	uML_TimeEvent_isRelative = factory->createProperty_in_Class(uML_TimeEvent);
+	//when
 	uML_TimeEvent_when = factory->createProperty_in_Class(uML_TimeEvent);
 
     //-------------------------------------------
-	// TimeExpression
+	//TimeExpression
 	uML_TimeExpression = factory->createClass_in_Package(uML, uml::umlPackage::TIMEEXPRESSION_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_TimeExpression);
@@ -8632,30 +9553,37 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // TimeExpression attributes
+	//expr
 	uML_TimeExpression_expr = factory->createProperty_in_Class(uML_TimeExpression);
+	//observation
 	uML_TimeExpression_observation = factory->createProperty_in_Class(uML_TimeExpression);
     // TimeExpression operations
+	//stringValue
 	uML_TimeExpression_stringValue__ = factory->createOperation_in_Class(uML_TimeExpression);
 	uML_TimeExpression_stringValue__return = factory->createParameter_in_Operation(uML_TimeExpression_stringValue__);
 
     //-------------------------------------------
-	// TimeInterval
+	//TimeInterval
 	uML_TimeInterval = factory->createClass_in_Package(uML, uml::umlPackage::TIMEINTERVAL_CLASS);
 	
     // TimeInterval attributes
+	//max
 	uML_TimeInterval_max = factory->createProperty_in_Class(uML_TimeInterval);
+	//min
 	uML_TimeInterval_min = factory->createProperty_in_Class(uML_TimeInterval);
 
     //-------------------------------------------
-	// TimeObservation
+	//TimeObservation
 	uML_TimeObservation = factory->createClass_in_Package(uML, uml::umlPackage::TIMEOBSERVATION_CLASS);
 	
     // TimeObservation attributes
+	//event
 	uML_TimeObservation_event = factory->createProperty_in_Class(uML_TimeObservation);
+	//firstEvent
 	uML_TimeObservation_firstEvent = factory->createProperty_in_Class(uML_TimeObservation);
 
     //-------------------------------------------
-	// Transition
+	//Transition
 	uML_Transition = factory->createClass_in_Package(uML, uml::umlPackage::TRANSITION_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_Transition);
@@ -8787,27 +9715,39 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // Transition attributes
+	//container
 	uML_Transition_container = factory->createProperty_in_Class(uML_Transition);
+	//effect
 	uML_Transition_effect = factory->createProperty_in_Class(uML_Transition);
+	//guard
 	uML_Transition_guard = factory->createProperty_in_Class(uML_Transition);
+	//kind
 	uML_Transition_kind = factory->createProperty_in_Class(uML_Transition);
+	//redefinedTransition
 	uML_Transition_redefinedTransition = factory->createProperty_in_Class(uML_Transition);
+	//redefinitionContext
 	uML_Transition_redefinitionContext = factory->createProperty_in_Class(uML_Transition);
+	//source
 	uML_Transition_source = factory->createProperty_in_Class(uML_Transition);
+	//target
 	uML_Transition_target = factory->createProperty_in_Class(uML_Transition);
+	//trigger
 	uML_Transition_trigger = factory->createProperty_in_Class(uML_Transition);
     // Transition operations
+	//containingStateMachine
 	uML_Transition_containingStateMachine__ = factory->createOperation_in_Class(uML_Transition);
 	uML_Transition_containingStateMachine_result = factory->createParameter_in_Operation(uML_Transition_containingStateMachine__);
 
+	//isConsistentWith
 	uML_Transition_isConsistentWith_RedefinableElement_RedefinableElement = factory->createOperation_in_Class(uML_Transition);
 	uML_Transition_isConsistentWith_result = factory->createParameter_in_Operation(uML_Transition_isConsistentWith_RedefinableElement_RedefinableElement);uML_Transition_isConsistentWith_RedefinableElement_RedefinableElement_redefiningElement = factory->createParameter_in_Operation(uML_Transition_isConsistentWith_RedefinableElement_RedefinableElement);
 
+	//redefinitionContext
 	uML_Transition_redefinitionContext__ = factory->createOperation_in_Class(uML_Transition);
 	uML_Transition_redefinitionContext_result = factory->createParameter_in_Operation(uML_Transition_redefinitionContext__);
 
     //-------------------------------------------
-	// Trigger
+	//Trigger
 	uML_Trigger = factory->createClass_in_Package(uML, uml::umlPackage::TRIGGER_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_Trigger);
@@ -8819,34 +9759,41 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // Trigger attributes
+	//event
 	uML_Trigger_event = factory->createProperty_in_Class(uML_Trigger);
+	//port
 	uML_Trigger_port = factory->createProperty_in_Class(uML_Trigger);
 
     //-------------------------------------------
-	// Type
+	//Type
 	uML_Type = factory->createClass_in_Package(uML, uml::umlPackage::TYPE_CLASS);
 	
     // Type attributes
+	//package
 	uML_Type_package = factory->createProperty_in_Class(uML_Type);
     // Type operations
+	//conformsTo
 	uML_Type_conformsTo_Type_Type = factory->createOperation_in_Class(uML_Type);
 	uML_Type_conformsTo_result = factory->createParameter_in_Operation(uML_Type_conformsTo_Type_Type);uML_Type_conformsTo_Type_Type_other = factory->createParameter_in_Operation(uML_Type_conformsTo_Type_Type);
 
+	//createAssociation
 	uML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural = factory->createOperation_in_Class(uML_Type);
 	uML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNaturalreturn = factory->createParameter_in_Operation(uML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural);uML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end1IsNavigable = factory->createParameter_in_Operation(uML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural);uML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end1Aggregation = factory->createParameter_in_Operation(uML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural);uML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end1Name = factory->createParameter_in_Operation(uML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural);uML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end1Lower = factory->createParameter_in_Operation(uML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural);uML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end1Upper = factory->createParameter_in_Operation(uML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural);uML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end1Type = factory->createParameter_in_Operation(uML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural);uML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end2IsNavigable = factory->createParameter_in_Operation(uML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural);uML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end2Aggregation = factory->createParameter_in_Operation(uML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural);uML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end2Name = factory->createParameter_in_Operation(uML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural);uML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end2Lower = factory->createParameter_in_Operation(uML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural);uML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_end2Upper = factory->createParameter_in_Operation(uML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural);
 
+	//getAssociations
 	uML_Type_getAssociations__ = factory->createOperation_in_Class(uML_Type);
 	uML_Type_getAssociations__return = factory->createParameter_in_Operation(uML_Type_getAssociations__);
 
     //-------------------------------------------
-	// TypedElement
+	//TypedElement
 	uML_TypedElement = factory->createClass_in_Package(uML, uml::umlPackage::TYPEDELEMENT_CLASS);
 	
     // TypedElement attributes
+	//type
 	uML_TypedElement_type = factory->createProperty_in_Class(uML_TypedElement);
 
     //-------------------------------------------
-	// UnmarshallAction
+	//UnmarshallAction
 	uML_UnmarshallAction = factory->createClass_in_Package(uML, uml::umlPackage::UNMARSHALLACTION_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_UnmarshallAction);
@@ -8922,17 +9869,20 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // UnmarshallAction attributes
+	//object
 	uML_UnmarshallAction_object = factory->createProperty_in_Class(uML_UnmarshallAction);
+	//result
 	uML_UnmarshallAction_result = factory->createProperty_in_Class(uML_UnmarshallAction);
+	//unmarshallType
 	uML_UnmarshallAction_unmarshallType = factory->createProperty_in_Class(uML_UnmarshallAction);
 
     //-------------------------------------------
-	// Usage
+	//Usage
 	uML_Usage = factory->createClass_in_Package(uML, uml::umlPackage::USAGE_CLASS);
 	
 
     //-------------------------------------------
-	// UseCase
+	//UseCase
 	uML_UseCase = factory->createClass_in_Package(uML, uml::umlPackage::USECASE_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_UseCase);
@@ -8996,16 +9946,21 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // UseCase attributes
+	//extend
 	uML_UseCase_extend = factory->createProperty_in_Class(uML_UseCase);
+	//extensionPoint
 	uML_UseCase_extensionPoint = factory->createProperty_in_Class(uML_UseCase);
+	//include
 	uML_UseCase_include = factory->createProperty_in_Class(uML_UseCase);
+	//subject
 	uML_UseCase_subject = factory->createProperty_in_Class(uML_UseCase);
     // UseCase operations
+	//allIncludedUseCases
 	uML_UseCase_allIncludedUseCases__ = factory->createOperation_in_Class(uML_UseCase);
 	uML_UseCase_allIncludedUseCases_result = factory->createParameter_in_Operation(uML_UseCase_allIncludedUseCases__);
 
     //-------------------------------------------
-	// ValuePin
+	//ValuePin
 	uML_ValuePin = factory->createClass_in_Package(uML, uml::umlPackage::VALUEPIN_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_ValuePin);
@@ -9031,39 +9986,48 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // ValuePin attributes
+	//value
 	uML_ValuePin_value = factory->createProperty_in_Class(uML_ValuePin);
 
     //-------------------------------------------
-	// ValueSpecification
+	//ValueSpecification
 	uML_ValueSpecification = factory->createClass_in_Package(uML, uml::umlPackage::VALUESPECIFICATION_CLASS);
 	
     // ValueSpecification operations
+	//booleanValue
 	uML_ValueSpecification_booleanValue__ = factory->createOperation_in_Class(uML_ValueSpecification);
 	uML_ValueSpecification_booleanValue_result = factory->createParameter_in_Operation(uML_ValueSpecification_booleanValue__);
 
+	//integerValue
 	uML_ValueSpecification_integerValue__ = factory->createOperation_in_Class(uML_ValueSpecification);
 	uML_ValueSpecification_integerValue_result = factory->createParameter_in_Operation(uML_ValueSpecification_integerValue__);
 
+	//isCompatibleWith
 	uML_ValueSpecification_isCompatibleWith_ParameterableElement_ParameterableElement = factory->createOperation_in_Class(uML_ValueSpecification);
 	uML_ValueSpecification_isCompatibleWith_result = factory->createParameter_in_Operation(uML_ValueSpecification_isCompatibleWith_ParameterableElement_ParameterableElement);uML_ValueSpecification_isCompatibleWith_ParameterableElement_ParameterableElement_p = factory->createParameter_in_Operation(uML_ValueSpecification_isCompatibleWith_ParameterableElement_ParameterableElement);
 
+	//isComputable
 	uML_ValueSpecification_isComputable__ = factory->createOperation_in_Class(uML_ValueSpecification);
 	uML_ValueSpecification_isComputable_result = factory->createParameter_in_Operation(uML_ValueSpecification_isComputable__);
 
+	//isNull
 	uML_ValueSpecification_isNull__ = factory->createOperation_in_Class(uML_ValueSpecification);
 	uML_ValueSpecification_isNull_result = factory->createParameter_in_Operation(uML_ValueSpecification_isNull__);
 
+	//realValue
 	uML_ValueSpecification_realValue__ = factory->createOperation_in_Class(uML_ValueSpecification);
 	uML_ValueSpecification_realValue_result = factory->createParameter_in_Operation(uML_ValueSpecification_realValue__);
 
+	//stringValue
 	uML_ValueSpecification_stringValue__ = factory->createOperation_in_Class(uML_ValueSpecification);
 	uML_ValueSpecification_stringValue_result = factory->createParameter_in_Operation(uML_ValueSpecification_stringValue__);
 
+	//unlimitedValue
 	uML_ValueSpecification_unlimitedValue__ = factory->createOperation_in_Class(uML_ValueSpecification);
 	uML_ValueSpecification_unlimitedValue_result = factory->createParameter_in_Operation(uML_ValueSpecification_unlimitedValue__);
 
     //-------------------------------------------
-	// ValueSpecificationAction
+	//ValueSpecificationAction
 	uML_ValueSpecificationAction = factory->createClass_in_Package(uML, uml::umlPackage::VALUESPECIFICATIONACTION_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_ValueSpecificationAction);
@@ -9089,22 +10053,27 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // ValueSpecificationAction attributes
+	//result
 	uML_ValueSpecificationAction_result = factory->createProperty_in_Class(uML_ValueSpecificationAction);
+	//value
 	uML_ValueSpecificationAction_value = factory->createProperty_in_Class(uML_ValueSpecificationAction);
 
     //-------------------------------------------
-	// Variable
+	//Variable
 	uML_Variable = factory->createClass_in_Package(uML, uml::umlPackage::VARIABLE_CLASS);
 	
     // Variable attributes
+	//activityScope
 	uML_Variable_activityScope = factory->createProperty_in_Class(uML_Variable);
+	//scope
 	uML_Variable_scope = factory->createProperty_in_Class(uML_Variable);
     // Variable operations
+	//isAccessibleBy
 	uML_Variable_isAccessibleBy_Action_Action = factory->createOperation_in_Class(uML_Variable);
 	uML_Variable_isAccessibleBy_result = factory->createParameter_in_Operation(uML_Variable_isAccessibleBy_Action_Action);uML_Variable_isAccessibleBy_Action_Action_a = factory->createParameter_in_Operation(uML_Variable_isAccessibleBy_Action_Action);
 
     //-------------------------------------------
-	// VariableAction
+	//VariableAction
 	uML_VariableAction = factory->createClass_in_Package(uML, uml::umlPackage::VARIABLEACTION_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_VariableAction);
@@ -9116,34 +10085,43 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // VariableAction attributes
+	//variable
 	uML_VariableAction_variable = factory->createProperty_in_Class(uML_VariableAction);
 
     //-------------------------------------------
-	// Vertex
+	//Vertex
 	uML_Vertex = factory->createClass_in_Package(uML, uml::umlPackage::VERTEX_CLASS);
 	
     // Vertex attributes
+	//container
 	uML_Vertex_container = factory->createProperty_in_Class(uML_Vertex);
+	//incoming
 	uML_Vertex_incoming = factory->createProperty_in_Class(uML_Vertex);
+	//outgoing
 	uML_Vertex_outgoing = factory->createProperty_in_Class(uML_Vertex);
     // Vertex operations
+	//containingStateMachine
 	uML_Vertex_containingStateMachine__ = factory->createOperation_in_Class(uML_Vertex);
 	uML_Vertex_containingStateMachine_result = factory->createParameter_in_Operation(uML_Vertex_containingStateMachine__);
 
+	//incoming
 	uML_Vertex_incoming__ = factory->createOperation_in_Class(uML_Vertex);
 	uML_Vertex_incoming_result = factory->createParameter_in_Operation(uML_Vertex_incoming__);
 
+	//isContainedInRegion
 	uML_Vertex_isContainedInRegion_Region_Region = factory->createOperation_in_Class(uML_Vertex);
 	uML_Vertex_isContainedInRegion_result = factory->createParameter_in_Operation(uML_Vertex_isContainedInRegion_Region_Region);uML_Vertex_isContainedInRegion_Region_Region_r = factory->createParameter_in_Operation(uML_Vertex_isContainedInRegion_Region_Region);
 
+	//isContainedInState
 	uML_Vertex_isContainedInState_State_State = factory->createOperation_in_Class(uML_Vertex);
 	uML_Vertex_isContainedInState_result = factory->createParameter_in_Operation(uML_Vertex_isContainedInState_State_State);uML_Vertex_isContainedInState_State_State_s = factory->createParameter_in_Operation(uML_Vertex_isContainedInState_State_State);
 
+	//outgoing
 	uML_Vertex_outgoing__ = factory->createOperation_in_Class(uML_Vertex);
 	uML_Vertex_outgoing_result = factory->createParameter_in_Operation(uML_Vertex_outgoing__);
 
     //-------------------------------------------
-	// WriteLinkAction
+	//WriteLinkAction
 	uML_WriteLinkAction = factory->createClass_in_Package(uML, uml::umlPackage::WRITELINKACTION_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_WriteLinkAction);
@@ -9161,7 +10139,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	
 
     //-------------------------------------------
-	// WriteStructuralFeatureAction
+	//WriteStructuralFeatureAction
 	uML_WriteStructuralFeatureAction = factory->createClass_in_Package(uML, uml::umlPackage::WRITESTRUCTURALFEATUREACTION_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_WriteStructuralFeatureAction);
@@ -9215,11 +10193,13 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // WriteStructuralFeatureAction attributes
+	//result
 	uML_WriteStructuralFeatureAction_result = factory->createProperty_in_Class(uML_WriteStructuralFeatureAction);
+	//value
 	uML_WriteStructuralFeatureAction_value = factory->createProperty_in_Class(uML_WriteStructuralFeatureAction);
 
     //-------------------------------------------
-	// WriteVariableAction
+	//WriteVariableAction
 	uML_WriteVariableAction = factory->createClass_in_Package(uML, uml::umlPackage::WRITEVARIABLEACTION_CLASS);
 	//constraints
 	con = factory->createConstraint_in_Context(uML_WriteVariableAction);
@@ -9245,6 +10225,7 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 	con->setSpecification(oe);
 	
     // WriteVariableAction attributes
+	//value
 	uML_WriteVariableAction_value = factory->createProperty_in_Class(uML_WriteVariableAction);
 
 //-------------------------------------------
@@ -9254,1675 +10235,1675 @@ void UMLPackageImpl::createPackageClasses(std::shared_ptr<uml::Package> uML, std
 
 void UMLPackageImpl::createPackageAssociations(std::shared_ptr<uml::Package> uML, std::shared_ptr<uml::umlFactory> factory)
 {
-	// A_action_actionExecutionSpecification
+	//A_action_actionExecutionSpecification
 	uML_A_action_actionExecutionSpecification = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_action_interaction
+	//A_action_interaction
 	uML_A_action_interaction = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_actualGate_interactionUse
+	//A_actualGate_interactionUse
 	uML_A_actualGate_interactionUse = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_actual_templateParameterSubstitution
+	//A_actual_templateParameterSubstitution
 	uML_A_actual_templateParameterSubstitution = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_addition_include
+	//A_addition_include
 	uML_A_addition_include = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_annotatedElement_comment
+	//A_annotatedElement_comment
 	uML_A_annotatedElement_comment = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_appliedProfile_profileApplication
+	//A_appliedProfile_profileApplication
 	uML_A_appliedProfile_profileApplication = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_argument_interactionUse
+	//A_argument_interactionUse
 	uML_A_argument_interactionUse = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_argument_invocationAction
+	//A_argument_invocationAction
 	uML_A_argument_invocationAction = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_argument_message
+	//A_argument_message
 	uML_A_argument_message = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_association_clearAssociationAction
+	//A_association_clearAssociationAction
 	uML_A_association_clearAssociationAction = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_attribute_classifier
+	//A_attribute_classifier
 	uML_A_attribute_classifier = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_before_toAfter
+	//A_before_toAfter
 	uML_A_before_toAfter = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_behavior_behaviorExecutionSpecification
+	//A_behavior_behaviorExecutionSpecification
 	uML_A_behavior_behaviorExecutionSpecification = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_behavior_callBehaviorAction
+	//A_behavior_callBehaviorAction
 	uML_A_behavior_callBehaviorAction = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_behavior_opaqueExpression
+	//A_behavior_opaqueExpression
 	uML_A_behavior_opaqueExpression = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_bodyCondition_bodyContext
+	//A_bodyCondition_bodyContext
 	uML_A_bodyCondition_bodyContext = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_bodyOutput_clause
+	//A_bodyOutput_clause
 	uML_A_bodyOutput_clause = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_bodyOutput_loopNode
+	//A_bodyOutput_loopNode
 	uML_A_bodyOutput_loopNode = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_bodyPart_loopNode
+	//A_bodyPart_loopNode
 	uML_A_bodyPart_loopNode = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_body_clause
+	//A_body_clause
 	uML_A_body_clause = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_cfragmentGate_combinedFragment
+	//A_cfragmentGate_combinedFragment
 	uML_A_cfragmentGate_combinedFragment = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_changeExpression_changeEvent
+	//A_changeExpression_changeEvent
 	uML_A_changeExpression_changeEvent = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_classifierBehavior_behavioredClassifier
+	//A_classifierBehavior_behavioredClassifier
 	uML_A_classifierBehavior_behavioredClassifier = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_classifier_createObjectAction
+	//A_classifier_createObjectAction
 	uML_A_classifier_createObjectAction = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_classifier_enumerationLiteral
+	//A_classifier_enumerationLiteral
 	uML_A_classifier_enumerationLiteral = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_classifier_instanceSpecification
+	//A_classifier_instanceSpecification
 	uML_A_classifier_instanceSpecification = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_classifier_readExtentAction
+	//A_classifier_readExtentAction
 	uML_A_classifier_readExtentAction = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_classifier_readIsClassifiedObjectAction
+	//A_classifier_readIsClassifiedObjectAction
 	uML_A_classifier_readIsClassifiedObjectAction = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_classifier_templateParameter_parameteredElement
+	//A_classifier_templateParameter_parameteredElement
 	uML_A_classifier_templateParameter_parameteredElement = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_clause_conditionalNode
+	//A_clause_conditionalNode
 	uML_A_clause_conditionalNode = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_clientDependency_client
+	//A_clientDependency_client
 	uML_A_clientDependency_client = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_collaborationRole_collaboration
+	//A_collaborationRole_collaboration
 	uML_A_collaborationRole_collaboration = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_collaborationUse_classifier
+	//A_collaborationUse_classifier
 	uML_A_collaborationUse_classifier = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_collection_reduceAction
+	//A_collection_reduceAction
 	uML_A_collection_reduceAction = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_condition_extend
+	//A_condition_extend
 	uML_A_condition_extend = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_condition_parameterSet
+	//A_condition_parameterSet
 	uML_A_condition_parameterSet = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_configuration_deployment
+	//A_configuration_deployment
 	uML_A_configuration_deployment = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_conformance_specificMachine
+	//A_conformance_specificMachine
 	uML_A_conformance_specificMachine = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_connectableElement_templateParameter_parameteredElement
+	//A_connectableElement_templateParameter_parameteredElement
 	uML_A_connectableElement_templateParameter_parameteredElement = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_connectionPoint_state
+	//A_connectionPoint_state
 	uML_A_connectionPoint_state = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_connectionPoint_stateMachine
+	//A_connectionPoint_stateMachine
 	uML_A_connectionPoint_stateMachine = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_connection_state
+	//A_connection_state
 	uML_A_connection_state = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_connector_message
+	//A_connector_message
 	uML_A_connector_message = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_constrainedElement_constraint
+	//A_constrainedElement_constraint
 	uML_A_constrainedElement_constraint = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_constrainingClassifier_classifierTemplateParameter
+	//A_constrainingClassifier_classifierTemplateParameter
 	uML_A_constrainingClassifier_classifierTemplateParameter = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_containedEdge_inGroup
+	//A_containedEdge_inGroup
 	uML_A_containedEdge_inGroup = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_containedNode_inGroup
+	//A_containedNode_inGroup
 	uML_A_containedNode_inGroup = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_context_action
+	//A_context_action
 	uML_A_context_action = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_context_behavior
+	//A_context_behavior
 	uML_A_context_behavior = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_contract_connector
+	//A_contract_connector
 	uML_A_contract_connector = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_contract_interfaceRealization
+	//A_contract_interfaceRealization
 	uML_A_contract_interfaceRealization = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_contract_substitution
+	//A_contract_substitution
 	uML_A_contract_substitution = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_conveyed_conveyingFlow
+	//A_conveyed_conveyingFlow
 	uML_A_conveyed_conveyingFlow = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_covered_coveredBy
+	//A_covered_coveredBy
 	uML_A_covered_coveredBy = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_covered_events
+	//A_covered_events
 	uML_A_covered_events = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_covered_stateInvariant
+	//A_covered_stateInvariant
 	uML_A_covered_stateInvariant = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_decider_clause
+	//A_decider_clause
 	uML_A_decider_clause = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_decider_loopNode
+	//A_decider_loopNode
 	uML_A_decider_loopNode = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_decisionInputFlow_decisionNode
+	//A_decisionInputFlow_decisionNode
 	uML_A_decisionInputFlow_decisionNode = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_decisionInput_decisionNode
+	//A_decisionInput_decisionNode
 	uML_A_decisionInput_decisionNode = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_decomposedAs_lifeline
+	//A_decomposedAs_lifeline
 	uML_A_decomposedAs_lifeline = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_defaultValue_owningParameter
+	//A_defaultValue_owningParameter
 	uML_A_defaultValue_owningParameter = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_defaultValue_owningProperty
+	//A_defaultValue_owningProperty
 	uML_A_defaultValue_owningProperty = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_default_templateParameter
+	//A_default_templateParameter
 	uML_A_default_templateParameter = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_deferrableTrigger_state
+	//A_deferrableTrigger_state
 	uML_A_deferrableTrigger_state = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_definingEnd_connectorEnd
+	//A_definingEnd_connectorEnd
 	uML_A_definingEnd_connectorEnd = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_definingFeature_slot
+	//A_definingFeature_slot
 	uML_A_definingFeature_slot = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_deployedArtifact_deploymentForArtifact
+	//A_deployedArtifact_deploymentForArtifact
 	uML_A_deployedArtifact_deploymentForArtifact = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_deployedElement_deploymentTarget
+	//A_deployedElement_deploymentTarget
 	uML_A_deployedElement_deploymentTarget = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_deployment_location
+	//A_deployment_location
 	uML_A_deployment_location = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_destroyAt_linkEndDestructionData
+	//A_destroyAt_linkEndDestructionData
 	uML_A_destroyAt_linkEndDestructionData = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_doActivity_state
+	//A_doActivity_state
 	uML_A_doActivity_state = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_edge_activity
+	//A_edge_activity
 	uML_A_edge_activity = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_edge_inPartition
+	//A_edge_inPartition
 	uML_A_edge_inPartition = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_edge_inStructuredNode
+	//A_edge_inStructuredNode
 	uML_A_edge_inStructuredNode = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_effect_transition
+	//A_effect_transition
 	uML_A_effect_transition = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_elementImport_importingNamespace
+	//A_elementImport_importingNamespace
 	uML_A_elementImport_importingNamespace = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_endData_createLinkAction
+	//A_endData_createLinkAction
 	uML_A_endData_createLinkAction = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_endData_destroyLinkAction
+	//A_endData_destroyLinkAction
 	uML_A_endData_destroyLinkAction = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_endData_linkAction
+	//A_endData_linkAction
 	uML_A_endData_linkAction = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_endType_association
+	//A_endType_association
 	uML_A_endType_association = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_end_connector
+	//A_end_connector
 	uML_A_end_connector = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_end_linkEndData
+	//A_end_linkEndData
 	uML_A_end_linkEndData = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_end_readLinkObjectEndAction
+	//A_end_readLinkObjectEndAction
 	uML_A_end_readLinkObjectEndAction = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_end_role
+	//A_end_role
 	uML_A_end_role = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_entry_connectionPointReference
+	//A_entry_connectionPointReference
 	uML_A_entry_connectionPointReference = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_entry_state
+	//A_entry_state
 	uML_A_entry_state = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_event_durationObservation
+	//A_event_durationObservation
 	uML_A_event_durationObservation = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_event_timeObservation
+	//A_event_timeObservation
 	uML_A_event_timeObservation = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_event_trigger
+	//A_event_trigger
 	uML_A_event_trigger = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_exceptionInput_exceptionHandler
+	//A_exceptionInput_exceptionHandler
 	uML_A_exceptionInput_exceptionHandler = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_exceptionType_exceptionHandler
+	//A_exceptionType_exceptionHandler
 	uML_A_exceptionType_exceptionHandler = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_exception_raiseExceptionAction
+	//A_exception_raiseExceptionAction
 	uML_A_exception_raiseExceptionAction = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_executableNode_sequenceNode
+	//A_executableNode_sequenceNode
 	uML_A_executableNode_sequenceNode = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_execution_executionOccurrenceSpecification
+	//A_execution_executionOccurrenceSpecification
 	uML_A_execution_executionOccurrenceSpecification = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_exit_connectionPointReference
+	//A_exit_connectionPointReference
 	uML_A_exit_connectionPointReference = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_exit_state
+	//A_exit_state
 	uML_A_exit_state = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_expr_duration
+	//A_expr_duration
 	uML_A_expr_duration = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_expr_timeExpression
+	//A_expr_timeExpression
 	uML_A_expr_timeExpression = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_extend_extension
+	//A_extend_extension
 	uML_A_extend_extension = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_extendedCase_extend
+	//A_extendedCase_extend
 	uML_A_extendedCase_extend = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_extendedRegion_region
+	//A_extendedRegion_region
 	uML_A_extendedRegion_region = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_extendedSignature_redefinableTemplateSignature
+	//A_extendedSignature_redefinableTemplateSignature
 	uML_A_extendedSignature_redefinableTemplateSignature = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_extendedStateMachine_stateMachine
+	//A_extendedStateMachine_stateMachine
 	uML_A_extendedStateMachine_stateMachine = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_extensionLocation_extension
+	//A_extensionLocation_extension
 	uML_A_extensionLocation_extension = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_extensionPoint_useCase
+	//A_extensionPoint_useCase
 	uML_A_extensionPoint_useCase = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_extension_metaclass
+	//A_extension_metaclass
 	uML_A_extension_metaclass = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_feature_featuringClassifier
+	//A_feature_featuringClassifier
 	uML_A_feature_featuringClassifier = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_finish_executionSpecification
+	//A_finish_executionSpecification
 	uML_A_finish_executionSpecification = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_first_testIdentityAction
+	//A_first_testIdentityAction
 	uML_A_first_testIdentityAction = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_formalGate_interaction
+	//A_formalGate_interaction
 	uML_A_formalGate_interaction = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_formal_templateParameterSubstitution
+	//A_formal_templateParameterSubstitution
 	uML_A_formal_templateParameterSubstitution = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_fragment_enclosingInteraction
+	//A_fragment_enclosingInteraction
 	uML_A_fragment_enclosingInteraction = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_fragment_enclosingOperand
+	//A_fragment_enclosingOperand
 	uML_A_fragment_enclosingOperand = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_fromAction_actionInputPin
+	//A_fromAction_actionInputPin
 	uML_A_fromAction_actionInputPin = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_generalMachine_protocolConformance
+	//A_generalMachine_protocolConformance
 	uML_A_generalMachine_protocolConformance = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_generalOrdering_interactionFragment
+	//A_generalOrdering_interactionFragment
 	uML_A_generalOrdering_interactionFragment = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_general_classifier
+	//A_general_classifier
 	uML_A_general_classifier = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_general_generalization
+	//A_general_generalization
 	uML_A_general_generalization = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_generalizationSet_generalization
+	//A_generalizationSet_generalization
 	uML_A_generalizationSet_generalization = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_generalization_specific
+	//A_generalization_specific
 	uML_A_generalization_specific = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_group_inActivity
+	//A_group_inActivity
 	uML_A_group_inActivity = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_guard_activityEdge
+	//A_guard_activityEdge
 	uML_A_guard_activityEdge = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_guard_interactionOperand
+	//A_guard_interactionOperand
 	uML_A_guard_interactionOperand = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_guard_transition
+	//A_guard_transition
 	uML_A_guard_transition = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_handlerBody_exceptionHandler
+	//A_handlerBody_exceptionHandler
 	uML_A_handlerBody_exceptionHandler = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_handler_protectedNode
+	//A_handler_protectedNode
 	uML_A_handler_protectedNode = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_icon_stereotype
+	//A_icon_stereotype
 	uML_A_icon_stereotype = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_importedElement_import
+	//A_importedElement_import
 	uML_A_importedElement_import = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_importedMember_namespace
+	//A_importedMember_namespace
 	uML_A_importedMember_namespace = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_importedPackage_packageImport
+	//A_importedPackage_packageImport
 	uML_A_importedPackage_packageImport = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_inInterruptibleRegion_node
+	//A_inInterruptibleRegion_node
 	uML_A_inInterruptibleRegion_node = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_inPartition_node
+	//A_inPartition_node
 	uML_A_inPartition_node = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_inState_objectNode
+	//A_inState_objectNode
 	uML_A_inState_objectNode = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_include_includingCase
+	//A_include_includingCase
 	uML_A_include_includingCase = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_incoming_target_node
+	//A_incoming_target_node
 	uML_A_incoming_target_node = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_incoming_target_vertex
+	//A_incoming_target_vertex
 	uML_A_incoming_target_vertex = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_informationSource_informationFlow
+	//A_informationSource_informationFlow
 	uML_A_informationSource_informationFlow = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_informationTarget_informationFlow
+	//A_informationTarget_informationFlow
 	uML_A_informationTarget_informationFlow = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_inheritedMember_inheritingClassifier
+	//A_inheritedMember_inheritingClassifier
 	uML_A_inheritedMember_inheritingClassifier = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_inheritedParameter_redefinableTemplateSignature
+	//A_inheritedParameter_redefinableTemplateSignature
 	uML_A_inheritedParameter_redefinableTemplateSignature = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_inputElement_regionAsInput
+	//A_inputElement_regionAsInput
 	uML_A_inputElement_regionAsInput = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_inputValue_linkAction
+	//A_inputValue_linkAction
 	uML_A_inputValue_linkAction = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_inputValue_opaqueAction
+	//A_inputValue_opaqueAction
 	uML_A_inputValue_opaqueAction = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_input_action
+	//A_input_action
 	uML_A_input_action = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_insertAt_addStructuralFeatureValueAction
+	//A_insertAt_addStructuralFeatureValueAction
 	uML_A_insertAt_addStructuralFeatureValueAction = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_insertAt_addVariableValueAction
+	//A_insertAt_addVariableValueAction
 	uML_A_insertAt_addVariableValueAction = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_insertAt_linkEndCreationData
+	//A_insertAt_linkEndCreationData
 	uML_A_insertAt_linkEndCreationData = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_instance_instanceValue
+	//A_instance_instanceValue
 	uML_A_instance_instanceValue = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_interfaceRealization_implementingClassifier
+	//A_interfaceRealization_implementingClassifier
 	uML_A_interfaceRealization_implementingClassifier = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_interruptingEdge_interrupts
+	//A_interruptingEdge_interrupts
 	uML_A_interruptingEdge_interrupts = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_invariant_stateInvariant
+	//A_invariant_stateInvariant
 	uML_A_invariant_stateInvariant = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_joinSpec_joinNode
+	//A_joinSpec_joinNode
 	uML_A_joinSpec_joinNode = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_lifeline_interaction
+	//A_lifeline_interaction
 	uML_A_lifeline_interaction = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_localPostcondition_action
+	//A_localPostcondition_action
 	uML_A_localPostcondition_action = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_localPrecondition_action
+	//A_localPrecondition_action
 	uML_A_localPrecondition_action = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_loopVariableInput_loopNode
+	//A_loopVariableInput_loopNode
 	uML_A_loopVariableInput_loopNode = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_loopVariable_loopNode
+	//A_loopVariable_loopNode
 	uML_A_loopVariable_loopNode = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_lowerValue_owningLower
+	//A_lowerValue_owningLower
 	uML_A_lowerValue_owningLower = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_manifestation_artifact
+	//A_manifestation_artifact
 	uML_A_manifestation_artifact = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_mapping_abstraction
+	//A_mapping_abstraction
 	uML_A_mapping_abstraction = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_max_durationInterval
+	//A_max_durationInterval
 	uML_A_max_durationInterval = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_max_interval
+	//A_max_interval
 	uML_A_max_interval = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_max_timeInterval
+	//A_max_timeInterval
 	uML_A_max_timeInterval = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_maxint_interactionConstraint
+	//A_maxint_interactionConstraint
 	uML_A_maxint_interactionConstraint = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_memberEnd_association
+	//A_memberEnd_association
 	uML_A_memberEnd_association = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_member_memberNamespace
+	//A_member_memberNamespace
 	uML_A_member_memberNamespace = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_mergedPackage_packageMerge
+	//A_mergedPackage_packageMerge
 	uML_A_mergedPackage_packageMerge = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_message_considerIgnoreFragment
+	//A_message_considerIgnoreFragment
 	uML_A_message_considerIgnoreFragment = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_message_interaction
+	//A_message_interaction
 	uML_A_message_interaction = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_message_messageEnd
+	//A_message_messageEnd
 	uML_A_message_messageEnd = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_metaclassReference_profile
+	//A_metaclassReference_profile
 	uML_A_metaclassReference_profile = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_metamodelReference_profile
+	//A_metamodelReference_profile
 	uML_A_metamodelReference_profile = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_method_specification
+	//A_method_specification
 	uML_A_method_specification = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_min_durationInterval
+	//A_min_durationInterval
 	uML_A_min_durationInterval = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_min_interval
+	//A_min_interval
 	uML_A_min_interval = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_min_timeInterval
+	//A_min_timeInterval
 	uML_A_min_timeInterval = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_minint_interactionConstraint
+	//A_minint_interactionConstraint
 	uML_A_minint_interactionConstraint = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_nameExpression_namedElement
+	//A_nameExpression_namedElement
 	uML_A_nameExpression_namedElement = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_navigableOwnedEnd_association
+	//A_navigableOwnedEnd_association
 	uML_A_navigableOwnedEnd_association = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_nestedArtifact_artifact
+	//A_nestedArtifact_artifact
 	uML_A_nestedArtifact_artifact = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_nestedClassifier_interface
+	//A_nestedClassifier_interface
 	uML_A_nestedClassifier_interface = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_nestedClassifier_nestingClass
+	//A_nestedClassifier_nestingClass
 	uML_A_nestedClassifier_nestingClass = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_nestedNode_node
+	//A_nestedNode_node
 	uML_A_nestedNode_node = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_nestedPackage_nestingPackage
+	//A_nestedPackage_nestingPackage
 	uML_A_nestedPackage_nestingPackage = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_newClassifier_reclassifyObjectAction
+	//A_newClassifier_reclassifyObjectAction
 	uML_A_newClassifier_reclassifyObjectAction = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_node_activity
+	//A_node_activity
 	uML_A_node_activity = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_node_inStructuredNode
+	//A_node_inStructuredNode
 	uML_A_node_inStructuredNode = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_object_clearAssociationAction
+	//A_object_clearAssociationAction
 	uML_A_object_clearAssociationAction = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_object_readIsClassifiedObjectAction
+	//A_object_readIsClassifiedObjectAction
 	uML_A_object_readIsClassifiedObjectAction = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_object_readLinkObjectEndAction
+	//A_object_readLinkObjectEndAction
 	uML_A_object_readLinkObjectEndAction = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_object_readLinkObjectEndQualifierAction
+	//A_object_readLinkObjectEndQualifierAction
 	uML_A_object_readLinkObjectEndQualifierAction = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_object_reclassifyObjectAction
+	//A_object_reclassifyObjectAction
 	uML_A_object_reclassifyObjectAction = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_object_startClassifierBehaviorAction
+	//A_object_startClassifierBehaviorAction
 	uML_A_object_startClassifierBehaviorAction = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_object_startObjectBehaviorAction
+	//A_object_startObjectBehaviorAction
 	uML_A_object_startObjectBehaviorAction = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_object_structuralFeatureAction
+	//A_object_structuralFeatureAction
 	uML_A_object_structuralFeatureAction = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_object_unmarshallAction
+	//A_object_unmarshallAction
 	uML_A_object_unmarshallAction = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_observation_duration
+	//A_observation_duration
 	uML_A_observation_duration = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_observation_timeExpression
+	//A_observation_timeExpression
 	uML_A_observation_timeExpression = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_oldClassifier_reclassifyObjectAction
+	//A_oldClassifier_reclassifyObjectAction
 	uML_A_oldClassifier_reclassifyObjectAction = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_onPort_invocationAction
+	//A_onPort_invocationAction
 	uML_A_onPort_invocationAction = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_operand_combinedFragment
+	//A_operand_combinedFragment
 	uML_A_operand_combinedFragment = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_operand_expression
+	//A_operand_expression
 	uML_A_operand_expression = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_operation_callEvent
+	//A_operation_callEvent
 	uML_A_operation_callEvent = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_operation_callOperationAction
+	//A_operation_callOperationAction
 	uML_A_operation_callOperationAction = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_operation_templateParameter_parameteredElement
+	//A_operation_templateParameter_parameteredElement
 	uML_A_operation_templateParameter_parameteredElement = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_opposite_property
+	//A_opposite_property
 	uML_A_opposite_property = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_outgoing_source_node
+	//A_outgoing_source_node
 	uML_A_outgoing_source_node = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_outgoing_source_vertex
+	//A_outgoing_source_vertex
 	uML_A_outgoing_source_vertex = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_outputElement_regionAsOutput
+	//A_outputElement_regionAsOutput
 	uML_A_outputElement_regionAsOutput = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_outputValue_opaqueAction
+	//A_outputValue_opaqueAction
 	uML_A_outputValue_opaqueAction = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_output_action
+	//A_output_action
 	uML_A_output_action = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_ownedActual_owningTemplateParameterSubstitution
+	//A_ownedActual_owningTemplateParameterSubstitution
 	uML_A_ownedActual_owningTemplateParameterSubstitution = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_ownedAttribute_artifact
+	//A_ownedAttribute_artifact
 	uML_A_ownedAttribute_artifact = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_ownedAttribute_class
+	//A_ownedAttribute_class
 	uML_A_ownedAttribute_class = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_ownedAttribute_datatype
+	//A_ownedAttribute_datatype
 	uML_A_ownedAttribute_datatype = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_ownedAttribute_interface
+	//A_ownedAttribute_interface
 	uML_A_ownedAttribute_interface = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_ownedAttribute_owningSignal
+	//A_ownedAttribute_owningSignal
 	uML_A_ownedAttribute_owningSignal = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_ownedAttribute_structuredClassifier
+	//A_ownedAttribute_structuredClassifier
 	uML_A_ownedAttribute_structuredClassifier = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_ownedBehavior_behavioredClassifier
+	//A_ownedBehavior_behavioredClassifier
 	uML_A_ownedBehavior_behavioredClassifier = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_ownedComment_owningElement
+	//A_ownedComment_owningElement
 	uML_A_ownedComment_owningElement = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_ownedConnector_structuredClassifier
+	//A_ownedConnector_structuredClassifier
 	uML_A_ownedConnector_structuredClassifier = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_ownedDefault_templateParameter
+	//A_ownedDefault_templateParameter
 	uML_A_ownedDefault_templateParameter = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_ownedElement_owner
+	//A_ownedElement_owner
 	uML_A_ownedElement_owner = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_ownedEnd_extension
+	//A_ownedEnd_extension
 	uML_A_ownedEnd_extension = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_ownedEnd_owningAssociation
+	//A_ownedEnd_owningAssociation
 	uML_A_ownedEnd_owningAssociation = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_ownedLiteral_enumeration
+	//A_ownedLiteral_enumeration
 	uML_A_ownedLiteral_enumeration = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_ownedMember_namespace
+	//A_ownedMember_namespace
 	uML_A_ownedMember_namespace = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_ownedOperation_artifact
+	//A_ownedOperation_artifact
 	uML_A_ownedOperation_artifact = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_ownedOperation_class
+	//A_ownedOperation_class
 	uML_A_ownedOperation_class = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_ownedOperation_datatype
+	//A_ownedOperation_datatype
 	uML_A_ownedOperation_datatype = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_ownedOperation_interface
+	//A_ownedOperation_interface
 	uML_A_ownedOperation_interface = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_ownedParameterSet_behavior
+	//A_ownedParameterSet_behavior
 	uML_A_ownedParameterSet_behavior = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_ownedParameterSet_behavioralFeature
+	//A_ownedParameterSet_behavioralFeature
 	uML_A_ownedParameterSet_behavioralFeature = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_ownedParameter_behavior
+	//A_ownedParameter_behavior
 	uML_A_ownedParameter_behavior = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_ownedParameter_operation
+	//A_ownedParameter_operation
 	uML_A_ownedParameter_operation = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_ownedParameter_ownerFormalParam
+	//A_ownedParameter_ownerFormalParam
 	uML_A_ownedParameter_ownerFormalParam = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_ownedParameter_signature
+	//A_ownedParameter_signature
 	uML_A_ownedParameter_signature = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_ownedParameteredElement_owningTemplateParameter
+	//A_ownedParameteredElement_owningTemplateParameter
 	uML_A_ownedParameteredElement_owningTemplateParameter = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_ownedPort_encapsulatedClassifier
+	//A_ownedPort_encapsulatedClassifier
 	uML_A_ownedPort_encapsulatedClassifier = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_ownedReception_class
+	//A_ownedReception_class
 	uML_A_ownedReception_class = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_ownedReception_interface
+	//A_ownedReception_interface
 	uML_A_ownedReception_interface = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_ownedRule_context
+	//A_ownedRule_context
 	uML_A_ownedRule_context = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_ownedStereotype_owningPackage
+	//A_ownedStereotype_owningPackage
 	uML_A_ownedStereotype_owningPackage = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_ownedTemplateSignature_classifier
+	//A_ownedTemplateSignature_classifier
 	uML_A_ownedTemplateSignature_classifier = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_ownedTemplateSignature_template
+	//A_ownedTemplateSignature_template
 	uML_A_ownedTemplateSignature_template = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_ownedType_package
+	//A_ownedType_package
 	uML_A_ownedType_package = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_ownedUseCase_classifier
+	//A_ownedUseCase_classifier
 	uML_A_ownedUseCase_classifier = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_packageImport_importingNamespace
+	//A_packageImport_importingNamespace
 	uML_A_packageImport_importingNamespace = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_packageMerge_receivingPackage
+	//A_packageMerge_receivingPackage
 	uML_A_packageMerge_receivingPackage = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_packagedElement_component
+	//A_packagedElement_component
 	uML_A_packagedElement_component = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_packagedElement_owningPackage
+	//A_packagedElement_owningPackage
 	uML_A_packagedElement_owningPackage = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_parameterSet_parameter
+	//A_parameterSet_parameter
 	uML_A_parameterSet_parameter = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_parameterSubstitution_templateBinding
+	//A_parameterSubstitution_templateBinding
 	uML_A_parameterSubstitution_templateBinding = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_parameter_activityParameterNode
+	//A_parameter_activityParameterNode
 	uML_A_parameter_activityParameterNode = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_parameter_templateSignature
+	//A_parameter_templateSignature
 	uML_A_parameter_templateSignature = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_parameteredElement_templateParameter
+	//A_parameteredElement_templateParameter
 	uML_A_parameteredElement_templateParameter = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_partWithPort_connectorEnd
+	//A_partWithPort_connectorEnd
 	uML_A_partWithPort_connectorEnd = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_part_structuredClassifier
+	//A_part_structuredClassifier
 	uML_A_part_structuredClassifier = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_partition_activity
+	//A_partition_activity
 	uML_A_partition_activity = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_port_trigger
+	//A_port_trigger
 	uML_A_port_trigger = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_postCondition_owningTransition
+	//A_postCondition_owningTransition
 	uML_A_postCondition_owningTransition = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_postcondition_behavior
+	//A_postcondition_behavior
 	uML_A_postcondition_behavior = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_postcondition_postContext
+	//A_postcondition_postContext
 	uML_A_postcondition_postContext = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_powertypeExtent_powertype
+	//A_powertypeExtent_powertype
 	uML_A_powertypeExtent_powertype = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_preCondition_protocolTransition
+	//A_preCondition_protocolTransition
 	uML_A_preCondition_protocolTransition = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_precondition_behavior
+	//A_precondition_behavior
 	uML_A_precondition_behavior = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_precondition_preContext
+	//A_precondition_preContext
 	uML_A_precondition_preContext = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_predecessorClause_successorClause
+	//A_predecessorClause_successorClause
 	uML_A_predecessorClause_successorClause = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_profileApplication_applyingPackage
+	//A_profileApplication_applyingPackage
 	uML_A_profileApplication_applyingPackage = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_profile_stereotype
+	//A_profile_stereotype
 	uML_A_profile_stereotype = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_protocol_interface
+	//A_protocol_interface
 	uML_A_protocol_interface = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_protocol_port
+	//A_protocol_port
 	uML_A_protocol_port = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_provided_component
+	//A_provided_component
 	uML_A_provided_component = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_provided_port
+	//A_provided_port
 	uML_A_provided_port = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_qualifier_associationEnd
+	//A_qualifier_associationEnd
 	uML_A_qualifier_associationEnd = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_qualifier_linkEndData
+	//A_qualifier_linkEndData
 	uML_A_qualifier_linkEndData = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_qualifier_qualifierValue
+	//A_qualifier_qualifierValue
 	uML_A_qualifier_qualifierValue = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_qualifier_readLinkObjectEndQualifierAction
+	//A_qualifier_readLinkObjectEndQualifierAction
 	uML_A_qualifier_readLinkObjectEndQualifierAction = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_raisedException_behavioralFeature
+	//A_raisedException_behavioralFeature
 	uML_A_raisedException_behavioralFeature = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_raisedException_operation
+	//A_raisedException_operation
 	uML_A_raisedException_operation = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_realization_abstraction_component
+	//A_realization_abstraction_component
 	uML_A_realization_abstraction_component = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_realization_abstraction_flow
+	//A_realization_abstraction_flow
 	uML_A_realization_abstraction_flow = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_realizingActivityEdge_informationFlow
+	//A_realizingActivityEdge_informationFlow
 	uML_A_realizingActivityEdge_informationFlow = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_realizingClassifier_componentRealization
+	//A_realizingClassifier_componentRealization
 	uML_A_realizingClassifier_componentRealization = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_realizingConnector_informationFlow
+	//A_realizingConnector_informationFlow
 	uML_A_realizingConnector_informationFlow = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_realizingMessage_informationFlow
+	//A_realizingMessage_informationFlow
 	uML_A_realizingMessage_informationFlow = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_receiveEvent_endMessage
+	//A_receiveEvent_endMessage
 	uML_A_receiveEvent_endMessage = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_redefinedBehavior_behavior
+	//A_redefinedBehavior_behavior
 	uML_A_redefinedBehavior_behavior = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_redefinedClassifier_classifier
+	//A_redefinedClassifier_classifier
 	uML_A_redefinedClassifier_classifier = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_redefinedConnector_connector
+	//A_redefinedConnector_connector
 	uML_A_redefinedConnector_connector = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_redefinedEdge_activityEdge
+	//A_redefinedEdge_activityEdge
 	uML_A_redefinedEdge_activityEdge = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_redefinedElement_redefinableElement
+	//A_redefinedElement_redefinableElement
 	uML_A_redefinedElement_redefinableElement = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_redefinedInterface_interface
+	//A_redefinedInterface_interface
 	uML_A_redefinedInterface_interface = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_redefinedNode_activityNode
+	//A_redefinedNode_activityNode
 	uML_A_redefinedNode_activityNode = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_redefinedOperation_operation
+	//A_redefinedOperation_operation
 	uML_A_redefinedOperation_operation = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_redefinedPort_port
+	//A_redefinedPort_port
 	uML_A_redefinedPort_port = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_redefinedProperty_property
+	//A_redefinedProperty_property
 	uML_A_redefinedProperty_property = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_redefinedState_state
+	//A_redefinedState_state
 	uML_A_redefinedState_state = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_redefinedTransition_transition
+	//A_redefinedTransition_transition
 	uML_A_redefinedTransition_transition = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_redefinitionContext_redefinableElement
+	//A_redefinitionContext_redefinableElement
 	uML_A_redefinitionContext_redefinableElement = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_redefinitionContext_region
+	//A_redefinitionContext_region
 	uML_A_redefinitionContext_region = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_redefinitionContext_state
+	//A_redefinitionContext_state
 	uML_A_redefinitionContext_state = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_redefinitionContext_transition
+	//A_redefinitionContext_transition
 	uML_A_redefinitionContext_transition = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_reducer_reduceAction
+	//A_reducer_reduceAction
 	uML_A_reducer_reduceAction = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_referred_protocolTransition
+	//A_referred_protocolTransition
 	uML_A_referred_protocolTransition = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_refersTo_interactionUse
+	//A_refersTo_interactionUse
 	uML_A_refersTo_interactionUse = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_region_state
+	//A_region_state
 	uML_A_region_state = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_region_stateMachine
+	//A_region_stateMachine
 	uML_A_region_stateMachine = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_relatedElement_relationship
+	//A_relatedElement_relationship
 	uML_A_relatedElement_relationship = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_removeAt_removeStructuralFeatureValueAction
+	//A_removeAt_removeStructuralFeatureValueAction
 	uML_A_removeAt_removeStructuralFeatureValueAction = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_removeAt_removeVariableValueAction
+	//A_removeAt_removeVariableValueAction
 	uML_A_removeAt_removeVariableValueAction = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_replyToCall_replyAction
+	//A_replyToCall_replyAction
 	uML_A_replyToCall_replyAction = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_replyValue_replyAction
+	//A_replyValue_replyAction
 	uML_A_replyValue_replyAction = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_representation_classifier
+	//A_representation_classifier
 	uML_A_representation_classifier = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_represented_representation
+	//A_represented_representation
 	uML_A_represented_representation = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_represents_activityPartition
+	//A_represents_activityPartition
 	uML_A_represents_activityPartition = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_represents_lifeline
+	//A_represents_lifeline
 	uML_A_represents_lifeline = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_request_sendObjectAction
+	//A_request_sendObjectAction
 	uML_A_request_sendObjectAction = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_required_component
+	//A_required_component
 	uML_A_required_component = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_required_port
+	//A_required_port
 	uML_A_required_port = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_result_acceptEventAction
+	//A_result_acceptEventAction
 	uML_A_result_acceptEventAction = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_result_callAction
+	//A_result_callAction
 	uML_A_result_callAction = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_result_clearStructuralFeatureAction
+	//A_result_clearStructuralFeatureAction
 	uML_A_result_clearStructuralFeatureAction = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_result_conditionalNode
+	//A_result_conditionalNode
 	uML_A_result_conditionalNode = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_result_createLinkObjectAction
+	//A_result_createLinkObjectAction
 	uML_A_result_createLinkObjectAction = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_result_createObjectAction
+	//A_result_createObjectAction
 	uML_A_result_createObjectAction = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_result_loopNode
+	//A_result_loopNode
 	uML_A_result_loopNode = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_result_opaqueExpression
+	//A_result_opaqueExpression
 	uML_A_result_opaqueExpression = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_result_readExtentAction
+	//A_result_readExtentAction
 	uML_A_result_readExtentAction = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_result_readIsClassifiedObjectAction
+	//A_result_readIsClassifiedObjectAction
 	uML_A_result_readIsClassifiedObjectAction = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_result_readLinkAction
+	//A_result_readLinkAction
 	uML_A_result_readLinkAction = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_result_readLinkObjectEndAction
+	//A_result_readLinkObjectEndAction
 	uML_A_result_readLinkObjectEndAction = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_result_readLinkObjectEndQualifierAction
+	//A_result_readLinkObjectEndQualifierAction
 	uML_A_result_readLinkObjectEndQualifierAction = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_result_readSelfAction
+	//A_result_readSelfAction
 	uML_A_result_readSelfAction = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_result_readStructuralFeatureAction
+	//A_result_readStructuralFeatureAction
 	uML_A_result_readStructuralFeatureAction = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_result_readVariableAction
+	//A_result_readVariableAction
 	uML_A_result_readVariableAction = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_result_reduceAction
+	//A_result_reduceAction
 	uML_A_result_reduceAction = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_result_testIdentityAction
+	//A_result_testIdentityAction
 	uML_A_result_testIdentityAction = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_result_unmarshallAction
+	//A_result_unmarshallAction
 	uML_A_result_unmarshallAction = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_result_valueSpecificationAction
+	//A_result_valueSpecificationAction
 	uML_A_result_valueSpecificationAction = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_result_writeStructuralFeatureAction
+	//A_result_writeStructuralFeatureAction
 	uML_A_result_writeStructuralFeatureAction = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_returnInformation_acceptCallAction
+	//A_returnInformation_acceptCallAction
 	uML_A_returnInformation_acceptCallAction = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_returnInformation_replyAction
+	//A_returnInformation_replyAction
 	uML_A_returnInformation_replyAction = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_returnValueRecipient_interactionUse
+	//A_returnValueRecipient_interactionUse
 	uML_A_returnValueRecipient_interactionUse = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_returnValue_interactionUse
+	//A_returnValue_interactionUse
 	uML_A_returnValue_interactionUse = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_roleBinding_collaborationUse
+	//A_roleBinding_collaborationUse
 	uML_A_roleBinding_collaborationUse = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_role_structuredClassifier
+	//A_role_structuredClassifier
 	uML_A_role_structuredClassifier = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_second_testIdentityAction
+	//A_second_testIdentityAction
 	uML_A_second_testIdentityAction = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_selection_objectFlow
+	//A_selection_objectFlow
 	uML_A_selection_objectFlow = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_selection_objectNode
+	//A_selection_objectNode
 	uML_A_selection_objectNode = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_selector_lifeline
+	//A_selector_lifeline
 	uML_A_selector_lifeline = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_sendEvent_endMessage
+	//A_sendEvent_endMessage
 	uML_A_sendEvent_endMessage = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_setupPart_loopNode
+	//A_setupPart_loopNode
 	uML_A_setupPart_loopNode = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_signal_broadcastSignalAction
+	//A_signal_broadcastSignalAction
 	uML_A_signal_broadcastSignalAction = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_signal_reception
+	//A_signal_reception
 	uML_A_signal_reception = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_signal_sendSignalAction
+	//A_signal_sendSignalAction
 	uML_A_signal_sendSignalAction = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_signal_signalEvent
+	//A_signal_signalEvent
 	uML_A_signal_signalEvent = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_signature_message
+	//A_signature_message
 	uML_A_signature_message = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_signature_templateBinding
+	//A_signature_templateBinding
 	uML_A_signature_templateBinding = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_slot_owningInstance
+	//A_slot_owningInstance
 	uML_A_slot_owningInstance = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_source_directedRelationship
+	//A_source_directedRelationship
 	uML_A_source_directedRelationship = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_specification_durationConstraint
+	//A_specification_durationConstraint
 	uML_A_specification_durationConstraint = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_specification_intervalConstraint
+	//A_specification_intervalConstraint
 	uML_A_specification_intervalConstraint = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_specification_owningConstraint
+	//A_specification_owningConstraint
 	uML_A_specification_owningConstraint = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_specification_owningInstanceSpec
+	//A_specification_owningInstanceSpec
 	uML_A_specification_owningInstanceSpec = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_specification_timeConstraint
+	//A_specification_timeConstraint
 	uML_A_specification_timeConstraint = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_start_executionSpecification
+	//A_start_executionSpecification
 	uML_A_start_executionSpecification = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_stateInvariant_owningState
+	//A_stateInvariant_owningState
 	uML_A_stateInvariant_owningState = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_structuralFeature_structuralFeatureAction
+	//A_structuralFeature_structuralFeatureAction
 	uML_A_structuralFeature_structuralFeatureAction = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_structuredNodeInput_structuredActivityNode
+	//A_structuredNodeInput_structuredActivityNode
 	uML_A_structuredNodeInput_structuredActivityNode = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_structuredNodeOutput_structuredActivityNode
+	//A_structuredNodeOutput_structuredActivityNode
 	uML_A_structuredNodeOutput_structuredActivityNode = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_structuredNode_activity
+	//A_structuredNode_activity
 	uML_A_structuredNode_activity = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_subExpression_owningExpression
+	//A_subExpression_owningExpression
 	uML_A_subExpression_owningExpression = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_subgroup_superGroup
+	//A_subgroup_superGroup
 	uML_A_subgroup_superGroup = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_subject_useCase
+	//A_subject_useCase
 	uML_A_subject_useCase = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_submachineState_submachine
+	//A_submachineState_submachine
 	uML_A_submachineState_submachine = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_subpartition_superPartition
+	//A_subpartition_superPartition
 	uML_A_subpartition_superPartition = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_subsettedProperty_property
+	//A_subsettedProperty_property
 	uML_A_subsettedProperty_property = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_substitution_substitutingClassifier
+	//A_substitution_substitutingClassifier
 	uML_A_substitution_substitutingClassifier = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_subvertex_container
+	//A_subvertex_container
 	uML_A_subvertex_container = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_superClass_class
+	//A_superClass_class
 	uML_A_superClass_class = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_supplier_supplierDependency
+	//A_supplier_supplierDependency
 	uML_A_supplier_supplierDependency = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_target_callOperationAction
+	//A_target_callOperationAction
 	uML_A_target_callOperationAction = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_target_destroyObjectAction
+	//A_target_destroyObjectAction
 	uML_A_target_destroyObjectAction = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_target_directedRelationship
+	//A_target_directedRelationship
 	uML_A_target_directedRelationship = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_target_sendObjectAction
+	//A_target_sendObjectAction
 	uML_A_target_sendObjectAction = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_target_sendSignalAction
+	//A_target_sendSignalAction
 	uML_A_target_sendSignalAction = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_templateBinding_boundElement
+	//A_templateBinding_boundElement
 	uML_A_templateBinding_boundElement = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_test_clause
+	//A_test_clause
 	uML_A_test_clause = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_test_loopNode
+	//A_test_loopNode
 	uML_A_test_loopNode = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_toBefore_after
+	//A_toBefore_after
 	uML_A_toBefore_after = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_transformation_objectFlow
+	//A_transformation_objectFlow
 	uML_A_transformation_objectFlow = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_transition_container
+	//A_transition_container
 	uML_A_transition_container = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_trigger_acceptEventAction
+	//A_trigger_acceptEventAction
 	uML_A_trigger_acceptEventAction = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_trigger_transition
+	//A_trigger_transition
 	uML_A_trigger_transition = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_type_collaborationUse
+	//A_type_collaborationUse
 	uML_A_type_collaborationUse = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_type_connector
+	//A_type_connector
 	uML_A_type_connector = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_type_extensionEnd
+	//A_type_extensionEnd
 	uML_A_type_extensionEnd = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_type_operation
+	//A_type_operation
 	uML_A_type_operation = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_type_typedElement
+	//A_type_typedElement
 	uML_A_type_typedElement = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_unmarshallType_unmarshallAction
+	//A_unmarshallType_unmarshallAction
 	uML_A_unmarshallType_unmarshallAction = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_upperBound_objectNode
+	//A_upperBound_objectNode
 	uML_A_upperBound_objectNode = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_upperValue_owningUpper
+	//A_upperValue_owningUpper
 	uML_A_upperValue_owningUpper = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_utilizedElement_manifestation
+	//A_utilizedElement_manifestation
 	uML_A_utilizedElement_manifestation = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_value_linkEndData
+	//A_value_linkEndData
 	uML_A_value_linkEndData = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_value_owningSlot
+	//A_value_owningSlot
 	uML_A_value_owningSlot = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_value_qualifierValue
+	//A_value_qualifierValue
 	uML_A_value_qualifierValue = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_value_valuePin
+	//A_value_valuePin
 	uML_A_value_valuePin = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_value_valueSpecificationAction
+	//A_value_valueSpecificationAction
 	uML_A_value_valueSpecificationAction = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_value_writeStructuralFeatureAction
+	//A_value_writeStructuralFeatureAction
 	uML_A_value_writeStructuralFeatureAction = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_value_writeVariableAction
+	//A_value_writeVariableAction
 	uML_A_value_writeVariableAction = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_variable_activityScope
+	//A_variable_activityScope
 	uML_A_variable_activityScope = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_variable_scope
+	//A_variable_scope
 	uML_A_variable_scope = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_variable_variableAction
+	//A_variable_variableAction
 	uML_A_variable_variableAction = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_weight_activityEdge
+	//A_weight_activityEdge
 	uML_A_weight_activityEdge = factory->createAssociation_in_Package(uML);
 
     //-------------------------------------------
-	// A_when_timeEvent
+	//A_when_timeEvent
 	uML_A_when_timeEvent = factory->createAssociation_in_Package(uML);
 }
 
@@ -15672,6 +16653,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_Dependency());
 	
     // Abstraction attributes
+	//mapping
 	uML_Abstraction_mapping->setName("mapping");
 	uML_Abstraction_mapping->setType(get_UML_OpaqueExpression());
 	uML_Abstraction_mapping->setLower(0);
@@ -15693,6 +16675,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_AcceptEventAction());
 	
     // AcceptCallAction attributes
+	//returnInformation
 	uML_AcceptCallAction_returnInformation->setName("returnInformation");
 	uML_AcceptCallAction_returnInformation->setType(get_UML_OutputPin());
 	uML_AcceptCallAction_returnInformation->setLower(1);
@@ -15714,6 +16697,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_Action());
 	
     // AcceptEventAction attributes
+	//isUnmarshall
 	uML_AcceptEventAction_isUnmarshall->setName("isUnmarshall");
 	uML_AcceptEventAction_isUnmarshall->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_AcceptEventAction_isUnmarshall->setLower(1);
@@ -15724,6 +16708,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_AcceptEventAction_isUnmarshall->setDefaultValue(uML_AcceptEventAction_isUnmarshall_defaultValue_LiteralBoolean_UML_AcceptEventAction_isUnmarshall);
 	
+	//result
 	uML_AcceptEventAction_result->setName("result");
 	uML_AcceptEventAction_result->setType(get_UML_OutputPin());
 	uML_AcceptEventAction_result->setLower(0);
@@ -15734,6 +16719,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_AcceptEventAction_result->setAssociation(get_UML_A_result_acceptEventAction());
 	
 	
+	//trigger
 	uML_AcceptEventAction_trigger->setName("trigger");
 	uML_AcceptEventAction_trigger->setType(get_UML_Trigger());
 	uML_AcceptEventAction_trigger->setLower(1);
@@ -15755,6 +16741,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_ExecutableNode());
 	
     // Action attributes
+	//context
 	uML_Action_context->setName("context");
 	uML_Action_context->setType(get_UML_Classifier());
 	uML_Action_context->setLower(0);
@@ -15765,6 +16752,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Action_context->setAssociation(get_UML_A_context_action());
 	
 	
+	//input
 	uML_Action_input->setName("input");
 	uML_Action_input->setType(get_UML_InputPin());
 	uML_Action_input->setLower(0);
@@ -15775,6 +16763,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Action_input->setAssociation(get_UML_A_input_action());
 	
 	
+	//isLocallyReentrant
 	uML_Action_isLocallyReentrant->setName("isLocallyReentrant");
 	uML_Action_isLocallyReentrant->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_Action_isLocallyReentrant->setLower(1);
@@ -15785,6 +16774,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Action_isLocallyReentrant->setDefaultValue(uML_Action_isLocallyReentrant_defaultValue_LiteralBoolean_UML_Action_isLocallyReentrant);
 	
+	//localPostcondition
 	uML_Action_localPostcondition->setName("localPostcondition");
 	uML_Action_localPostcondition->setType(get_UML_Constraint());
 	uML_Action_localPostcondition->setLower(0);
@@ -15795,6 +16785,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Action_localPostcondition->setAssociation(get_UML_A_localPostcondition_action());
 	
 	
+	//localPrecondition
 	uML_Action_localPrecondition->setName("localPrecondition");
 	uML_Action_localPrecondition->setType(get_UML_Constraint());
 	uML_Action_localPrecondition->setLower(0);
@@ -15805,6 +16796,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Action_localPrecondition->setAssociation(get_UML_A_localPrecondition_action());
 	
 	
+	//output
 	uML_Action_output->setName("output");
 	uML_Action_output->setType(get_UML_OutputPin());
 	uML_Action_output->setLower(0);
@@ -15817,6 +16809,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 
     // Action operations
+	//allActions
 	uML_Action_allActions__->setName("allActions");
 	uML_Action_allActions__->setType(get_UML_Action());
 	
@@ -15829,6 +16822,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//allOwnedNodes
 	uML_Action_allOwnedNodes__->setName("allOwnedNodes");
 	uML_Action_allOwnedNodes__->setType(get_UML_ActivityNode());
 	
@@ -15841,6 +16835,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//containingBehavior
 	uML_Action_containingBehavior__->setName("containingBehavior");
 	uML_Action_containingBehavior__->setType(get_UML_Behavior());
 	
@@ -15853,6 +16848,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//context
 	uML_Action_context__->setName("context");
 	uML_Action_context__->setType(get_UML_Classifier());
 	
@@ -15865,7 +16861,6 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
-
     //-------------------------------------------
 	//	class ActionExecutionSpecification
 	uML_ActionExecutionSpecification->setName("ActionExecutionSpecification");
@@ -15875,6 +16870,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_ExecutionSpecification());
 	
     // ActionExecutionSpecification attributes
+	//action
 	uML_ActionExecutionSpecification_action->setName("action");
 	uML_ActionExecutionSpecification_action->setType(get_UML_Action());
 	uML_ActionExecutionSpecification_action->setLower(1);
@@ -15896,6 +16892,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_InputPin());
 	
     // ActionInputPin attributes
+	//fromAction
 	uML_ActionInputPin_fromAction->setName("fromAction");
 	uML_ActionInputPin_fromAction->setType(get_UML_Action());
 	uML_ActionInputPin_fromAction->setLower(1);
@@ -15917,6 +16914,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_Behavior());
 	
     // Activity attributes
+	//edge
 	uML_Activity_edge->setName("edge");
 	uML_Activity_edge->setType(get_UML_ActivityEdge());
 	uML_Activity_edge->setLower(0);
@@ -15927,6 +16925,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Activity_edge->setAssociation(get_UML_A_edge_activity());
 	
 	
+	//group
 	uML_Activity_group->setName("group");
 	uML_Activity_group->setType(get_UML_ActivityGroup());
 	uML_Activity_group->setLower(0);
@@ -15937,6 +16936,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Activity_group->setAssociation(get_UML_A_group_inActivity());
 	
 	
+	//isReadOnly
 	uML_Activity_isReadOnly->setName("isReadOnly");
 	uML_Activity_isReadOnly->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_Activity_isReadOnly->setLower(1);
@@ -15947,6 +16947,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Activity_isReadOnly->setDefaultValue(uML_Activity_isReadOnly_defaultValue_LiteralBoolean_UML_Activity_isReadOnly);
 	
+	//isSingleExecution
 	uML_Activity_isSingleExecution->setName("isSingleExecution");
 	uML_Activity_isSingleExecution->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_Activity_isSingleExecution->setLower(1);
@@ -15957,6 +16958,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Activity_isSingleExecution->setDefaultValue(uML_Activity_isSingleExecution_defaultValue_LiteralBoolean_UML_Activity_isSingleExecution);
 	
+	//node
 	uML_Activity_node->setName("node");
 	uML_Activity_node->setType(get_UML_ActivityNode());
 	uML_Activity_node->setLower(0);
@@ -15967,6 +16969,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Activity_node->setAssociation(get_UML_A_node_activity());
 	
 	
+	//ownedGroup
 	uML_Activity_ownedGroup->setName("ownedGroup");
 	uML_Activity_ownedGroup->setType(get_UML_ActivityGroup());
 	uML_Activity_ownedGroup->setLower(0);
@@ -15977,6 +16980,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 	
+	//ownedNode
 	uML_Activity_ownedNode->setName("ownedNode");
 	uML_Activity_ownedNode->setType(get_UML_ActivityNode());
 	uML_Activity_ownedNode->setLower(0);
@@ -15987,6 +16991,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 	
+	//partition
 	uML_Activity_partition->setName("partition");
 	uML_Activity_partition->setType(get_UML_ActivityPartition());
 	uML_Activity_partition->setLower(0);
@@ -15997,6 +17002,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Activity_partition->setAssociation(get_UML_A_partition_activity());
 	
 	
+	//structuredNode
 	uML_Activity_structuredNode->setName("structuredNode");
 	uML_Activity_structuredNode->setType(get_UML_StructuredActivityNode());
 	uML_Activity_structuredNode->setLower(0);
@@ -16007,6 +17013,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Activity_structuredNode->setAssociation(get_UML_A_structuredNode_activity());
 	
 	
+	//variable
 	uML_Activity_variable->setName("variable");
 	uML_Activity_variable->setType(get_UML_Variable());
 	uML_Activity_variable->setLower(0);
@@ -16028,6 +17035,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_RedefinableElement());
 	
     // ActivityEdge attributes
+	//activity
 	uML_ActivityEdge_activity->setName("activity");
 	uML_ActivityEdge_activity->setType(get_UML_Activity());
 	uML_ActivityEdge_activity->setLower(0);
@@ -16038,6 +17046,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ActivityEdge_activity->setAssociation(get_UML_A_edge_activity());
 	
 	
+	//guard
 	uML_ActivityEdge_guard->setName("guard");
 	uML_ActivityEdge_guard->setType(get_UML_ValueSpecification());
 	uML_ActivityEdge_guard->setLower(0);
@@ -16048,6 +17057,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ActivityEdge_guard->setAssociation(get_UML_A_guard_activityEdge());
 	
 	
+	//inGroup
 	uML_ActivityEdge_inGroup->setName("inGroup");
 	uML_ActivityEdge_inGroup->setType(get_UML_ActivityGroup());
 	uML_ActivityEdge_inGroup->setLower(0);
@@ -16058,6 +17068,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ActivityEdge_inGroup->setAssociation(get_UML_A_containedEdge_inGroup());
 	
 	
+	//inPartition
 	uML_ActivityEdge_inPartition->setName("inPartition");
 	uML_ActivityEdge_inPartition->setType(get_UML_ActivityPartition());
 	uML_ActivityEdge_inPartition->setLower(0);
@@ -16068,6 +17079,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ActivityEdge_inPartition->setAssociation(get_UML_A_edge_inPartition());
 	
 	
+	//inStructuredNode
 	uML_ActivityEdge_inStructuredNode->setName("inStructuredNode");
 	uML_ActivityEdge_inStructuredNode->setType(get_UML_StructuredActivityNode());
 	uML_ActivityEdge_inStructuredNode->setLower(0);
@@ -16078,6 +17090,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ActivityEdge_inStructuredNode->setAssociation(get_UML_A_edge_inStructuredNode());
 	
 	
+	//interrupts
 	uML_ActivityEdge_interrupts->setName("interrupts");
 	uML_ActivityEdge_interrupts->setType(get_UML_InterruptibleActivityRegion());
 	uML_ActivityEdge_interrupts->setLower(0);
@@ -16088,6 +17101,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ActivityEdge_interrupts->setAssociation(get_UML_A_interruptingEdge_interrupts());
 	
 	
+	//redefinedEdge
 	uML_ActivityEdge_redefinedEdge->setName("redefinedEdge");
 	uML_ActivityEdge_redefinedEdge->setType(get_UML_ActivityEdge());
 	uML_ActivityEdge_redefinedEdge->setLower(0);
@@ -16098,6 +17112,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ActivityEdge_redefinedEdge->setAssociation(get_UML_A_redefinedEdge_activityEdge());
 	
 	
+	//source
 	uML_ActivityEdge_source->setName("source");
 	uML_ActivityEdge_source->setType(get_UML_ActivityNode());
 	uML_ActivityEdge_source->setLower(1);
@@ -16108,6 +17123,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ActivityEdge_source->setAssociation(get_UML_A_outgoing_source_node());
 	
 	
+	//target
 	uML_ActivityEdge_target->setName("target");
 	uML_ActivityEdge_target->setType(get_UML_ActivityNode());
 	uML_ActivityEdge_target->setLower(1);
@@ -16118,6 +17134,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ActivityEdge_target->setAssociation(get_UML_A_incoming_target_node());
 	
 	
+	//weight
 	uML_ActivityEdge_weight->setName("weight");
 	uML_ActivityEdge_weight->setType(get_UML_ValueSpecification());
 	uML_ActivityEdge_weight->setLower(0);
@@ -16130,6 +17147,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 
     // ActivityEdge operations
+	//isConsistentWith
 	uML_ActivityEdge_isConsistentWith_RedefinableElement_RedefinableElement->setName("isConsistentWith");
 	uML_ActivityEdge_isConsistentWith_RedefinableElement_RedefinableElement->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -16154,7 +17172,6 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
-
     //-------------------------------------------
 	//	class ActivityFinalNode
 	uML_ActivityFinalNode->setName("ActivityFinalNode");
@@ -16173,6 +17190,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_NamedElement());
 	
     // ActivityGroup attributes
+	//containedEdge
 	uML_ActivityGroup_containedEdge->setName("containedEdge");
 	uML_ActivityGroup_containedEdge->setType(get_UML_ActivityEdge());
 	uML_ActivityGroup_containedEdge->setLower(0);
@@ -16183,6 +17201,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ActivityGroup_containedEdge->setAssociation(get_UML_A_containedEdge_inGroup());
 	
 	
+	//containedNode
 	uML_ActivityGroup_containedNode->setName("containedNode");
 	uML_ActivityGroup_containedNode->setType(get_UML_ActivityNode());
 	uML_ActivityGroup_containedNode->setLower(0);
@@ -16193,6 +17212,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ActivityGroup_containedNode->setAssociation(get_UML_A_containedNode_inGroup());
 	
 	
+	//inActivity
 	uML_ActivityGroup_inActivity->setName("inActivity");
 	uML_ActivityGroup_inActivity->setType(get_UML_Activity());
 	uML_ActivityGroup_inActivity->setLower(0);
@@ -16203,6 +17223,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ActivityGroup_inActivity->setAssociation(get_UML_A_group_inActivity());
 	
 	
+	//subgroup
 	uML_ActivityGroup_subgroup->setName("subgroup");
 	uML_ActivityGroup_subgroup->setType(get_UML_ActivityGroup());
 	uML_ActivityGroup_subgroup->setLower(0);
@@ -16213,6 +17234,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ActivityGroup_subgroup->setAssociation(get_UML_A_subgroup_superGroup());
 	
 	
+	//superGroup
 	uML_ActivityGroup_superGroup->setName("superGroup");
 	uML_ActivityGroup_superGroup->setType(get_UML_ActivityGroup());
 	uML_ActivityGroup_superGroup->setLower(0);
@@ -16225,6 +17247,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 
     // ActivityGroup operations
+	//containingActivity
 	uML_ActivityGroup_containingActivity__->setName("containingActivity");
 	uML_ActivityGroup_containingActivity__->setType(get_UML_Activity());
 	
@@ -16237,7 +17260,6 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
-
     //-------------------------------------------
 	//	class ActivityNode
 	uML_ActivityNode->setName("ActivityNode");
@@ -16247,6 +17269,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_RedefinableElement());
 	
     // ActivityNode attributes
+	//activity
 	uML_ActivityNode_activity->setName("activity");
 	uML_ActivityNode_activity->setType(get_UML_Activity());
 	uML_ActivityNode_activity->setLower(0);
@@ -16257,6 +17280,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ActivityNode_activity->setAssociation(get_UML_A_node_activity());
 	
 	
+	//inGroup
 	uML_ActivityNode_inGroup->setName("inGroup");
 	uML_ActivityNode_inGroup->setType(get_UML_ActivityGroup());
 	uML_ActivityNode_inGroup->setLower(0);
@@ -16267,6 +17291,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ActivityNode_inGroup->setAssociation(get_UML_A_containedNode_inGroup());
 	
 	
+	//inInterruptibleRegion
 	uML_ActivityNode_inInterruptibleRegion->setName("inInterruptibleRegion");
 	uML_ActivityNode_inInterruptibleRegion->setType(get_UML_InterruptibleActivityRegion());
 	uML_ActivityNode_inInterruptibleRegion->setLower(0);
@@ -16277,6 +17302,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ActivityNode_inInterruptibleRegion->setAssociation(get_UML_A_inInterruptibleRegion_node());
 	
 	
+	//inPartition
 	uML_ActivityNode_inPartition->setName("inPartition");
 	uML_ActivityNode_inPartition->setType(get_UML_ActivityPartition());
 	uML_ActivityNode_inPartition->setLower(0);
@@ -16287,6 +17313,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ActivityNode_inPartition->setAssociation(get_UML_A_inPartition_node());
 	
 	
+	//inStructuredNode
 	uML_ActivityNode_inStructuredNode->setName("inStructuredNode");
 	uML_ActivityNode_inStructuredNode->setType(get_UML_StructuredActivityNode());
 	uML_ActivityNode_inStructuredNode->setLower(0);
@@ -16297,6 +17324,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ActivityNode_inStructuredNode->setAssociation(get_UML_A_node_inStructuredNode());
 	
 	
+	//incoming
 	uML_ActivityNode_incoming->setName("incoming");
 	uML_ActivityNode_incoming->setType(get_UML_ActivityEdge());
 	uML_ActivityNode_incoming->setLower(0);
@@ -16307,6 +17335,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ActivityNode_incoming->setAssociation(get_UML_A_incoming_target_node());
 	
 	
+	//outgoing
 	uML_ActivityNode_outgoing->setName("outgoing");
 	uML_ActivityNode_outgoing->setType(get_UML_ActivityEdge());
 	uML_ActivityNode_outgoing->setLower(0);
@@ -16317,6 +17346,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ActivityNode_outgoing->setAssociation(get_UML_A_outgoing_source_node());
 	
 	
+	//redefinedNode
 	uML_ActivityNode_redefinedNode->setName("redefinedNode");
 	uML_ActivityNode_redefinedNode->setType(get_UML_ActivityNode());
 	uML_ActivityNode_redefinedNode->setLower(0);
@@ -16329,6 +17359,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 
     // ActivityNode operations
+	//containingActivity
 	uML_ActivityNode_containingActivity__->setName("containingActivity");
 	uML_ActivityNode_containingActivity__->setType(get_UML_Activity());
 	
@@ -16341,6 +17372,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//isConsistentWith
 	uML_ActivityNode_isConsistentWith_RedefinableElement_RedefinableElement->setName("isConsistentWith");
 	uML_ActivityNode_isConsistentWith_RedefinableElement_RedefinableElement->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -16365,7 +17397,6 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
-
     //-------------------------------------------
 	//	class ActivityParameterNode
 	uML_ActivityParameterNode->setName("ActivityParameterNode");
@@ -16375,6 +17406,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_ObjectNode());
 	
     // ActivityParameterNode attributes
+	//parameter
 	uML_ActivityParameterNode_parameter->setName("parameter");
 	uML_ActivityParameterNode_parameter->setType(get_UML_Parameter());
 	uML_ActivityParameterNode_parameter->setLower(1);
@@ -16396,6 +17428,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_ActivityGroup());
 	
     // ActivityPartition attributes
+	//edge
 	uML_ActivityPartition_edge->setName("edge");
 	uML_ActivityPartition_edge->setType(get_UML_ActivityEdge());
 	uML_ActivityPartition_edge->setLower(0);
@@ -16406,6 +17439,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ActivityPartition_edge->setAssociation(get_UML_A_edge_inPartition());
 	
 	
+	//isDimension
 	uML_ActivityPartition_isDimension->setName("isDimension");
 	uML_ActivityPartition_isDimension->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_ActivityPartition_isDimension->setLower(1);
@@ -16416,6 +17450,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_ActivityPartition_isDimension->setDefaultValue(uML_ActivityPartition_isDimension_defaultValue_LiteralBoolean_UML_ActivityPartition_isDimension);
 	
+	//isExternal
 	uML_ActivityPartition_isExternal->setName("isExternal");
 	uML_ActivityPartition_isExternal->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_ActivityPartition_isExternal->setLower(1);
@@ -16426,6 +17461,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_ActivityPartition_isExternal->setDefaultValue(uML_ActivityPartition_isExternal_defaultValue_LiteralBoolean_UML_ActivityPartition_isExternal);
 	
+	//node
 	uML_ActivityPartition_node->setName("node");
 	uML_ActivityPartition_node->setType(get_UML_ActivityNode());
 	uML_ActivityPartition_node->setLower(0);
@@ -16436,6 +17472,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ActivityPartition_node->setAssociation(get_UML_A_inPartition_node());
 	
 	
+	//represents
 	uML_ActivityPartition_represents->setName("represents");
 	uML_ActivityPartition_represents->setType(get_UML_Element());
 	uML_ActivityPartition_represents->setLower(0);
@@ -16446,6 +17483,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ActivityPartition_represents->setAssociation(get_UML_A_represents_activityPartition());
 	
 	
+	//subpartition
 	uML_ActivityPartition_subpartition->setName("subpartition");
 	uML_ActivityPartition_subpartition->setType(get_UML_ActivityPartition());
 	uML_ActivityPartition_subpartition->setLower(0);
@@ -16456,6 +17494,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ActivityPartition_subpartition->setAssociation(get_UML_A_subpartition_superPartition());
 	
 	
+	//superPartition
 	uML_ActivityPartition_superPartition->setName("superPartition");
 	uML_ActivityPartition_superPartition->setType(get_UML_ActivityPartition());
 	uML_ActivityPartition_superPartition->setLower(0);
@@ -16486,6 +17525,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_WriteStructuralFeatureAction());
 	
     // AddStructuralFeatureValueAction attributes
+	//insertAt
 	uML_AddStructuralFeatureValueAction_insertAt->setName("insertAt");
 	uML_AddStructuralFeatureValueAction_insertAt->setType(get_UML_InputPin());
 	uML_AddStructuralFeatureValueAction_insertAt->setLower(0);
@@ -16496,6 +17536,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_AddStructuralFeatureValueAction_insertAt->setAssociation(get_UML_A_insertAt_addStructuralFeatureValueAction());
 	
 	
+	//isReplaceAll
 	uML_AddStructuralFeatureValueAction_isReplaceAll->setName("isReplaceAll");
 	uML_AddStructuralFeatureValueAction_isReplaceAll->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_AddStructuralFeatureValueAction_isReplaceAll->setLower(1);
@@ -16517,6 +17558,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_WriteVariableAction());
 	
     // AddVariableValueAction attributes
+	//insertAt
 	uML_AddVariableValueAction_insertAt->setName("insertAt");
 	uML_AddVariableValueAction_insertAt->setType(get_UML_InputPin());
 	uML_AddVariableValueAction_insertAt->setLower(0);
@@ -16527,6 +17569,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_AddVariableValueAction_insertAt->setAssociation(get_UML_A_insertAt_addVariableValueAction());
 	
 	
+	//isReplaceAll
 	uML_AddVariableValueAction_isReplaceAll->setName("isReplaceAll");
 	uML_AddVariableValueAction_isReplaceAll->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_AddVariableValueAction_isReplaceAll->setLower(1);
@@ -16560,6 +17603,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_DeployedArtifact());
 	
     // Artifact attributes
+	//fileName
 	uML_Artifact_fileName->setName("fileName");
 	uML_Artifact_fileName->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
 	uML_Artifact_fileName->setLower(0);
@@ -16570,6 +17614,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 	
+	//manifestation
 	uML_Artifact_manifestation->setName("manifestation");
 	uML_Artifact_manifestation->setType(get_UML_Manifestation());
 	uML_Artifact_manifestation->setLower(0);
@@ -16580,6 +17625,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Artifact_manifestation->setAssociation(get_UML_A_manifestation_artifact());
 	
 	
+	//nestedArtifact
 	uML_Artifact_nestedArtifact->setName("nestedArtifact");
 	uML_Artifact_nestedArtifact->setType(get_UML_Artifact());
 	uML_Artifact_nestedArtifact->setLower(0);
@@ -16590,6 +17636,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Artifact_nestedArtifact->setAssociation(get_UML_A_nestedArtifact_artifact());
 	
 	
+	//ownedAttribute
 	uML_Artifact_ownedAttribute->setName("ownedAttribute");
 	uML_Artifact_ownedAttribute->setType(get_UML_Property());
 	uML_Artifact_ownedAttribute->setLower(0);
@@ -16600,6 +17647,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Artifact_ownedAttribute->setAssociation(get_UML_A_ownedAttribute_artifact());
 	
 	
+	//ownedOperation
 	uML_Artifact_ownedOperation->setName("ownedOperation");
 	uML_Artifact_ownedOperation->setType(get_UML_Operation());
 	uML_Artifact_ownedOperation->setLower(0);
@@ -16612,6 +17660,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 
     // Artifact operations
+	//createOwnedAttribute
 	uML_Artifact_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural->setName("createOwnedAttribute");
 	uML_Artifact_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural->setType(get_UML_Property());
 	
@@ -16672,6 +17721,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//createOwnedOperation
 	uML_Artifact_createOwnedOperation_String_String_Type_Type_String_String_Type_Type->setName("createOwnedOperation");
 	uML_Artifact_createOwnedOperation_String_String_Type_Type_String_String_Type_Type->setType(get_UML_Operation());
 	
@@ -16732,7 +17782,6 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
-
     //-------------------------------------------
 	//	class Association
 	uML_Association->setName("Association");
@@ -16745,6 +17794,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_Relationship());
 	
     // Association attributes
+	//endType
 	uML_Association_endType->setName("endType");
 	uML_Association_endType->setType(get_UML_Type());
 	uML_Association_endType->setLower(1);
@@ -16755,6 +17805,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Association_endType->setAssociation(get_UML_A_endType_association());
 	
 	
+	//isDerived
 	uML_Association_isDerived->setName("isDerived");
 	uML_Association_isDerived->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_Association_isDerived->setLower(1);
@@ -16765,6 +17816,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Association_isDerived->setDefaultValue(uML_Association_isDerived_defaultValue_LiteralBoolean_UML_Association_isDerived);
 	
+	//memberEnd
 	uML_Association_memberEnd->setName("memberEnd");
 	uML_Association_memberEnd->setType(get_UML_Property());
 	uML_Association_memberEnd->setLower(2);
@@ -16775,6 +17827,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Association_memberEnd->setAssociation(get_UML_A_memberEnd_association());
 	
 	
+	//navigableOwnedEnd
 	uML_Association_navigableOwnedEnd->setName("navigableOwnedEnd");
 	uML_Association_navigableOwnedEnd->setType(get_UML_Property());
 	uML_Association_navigableOwnedEnd->setLower(0);
@@ -16785,6 +17838,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Association_navigableOwnedEnd->setAssociation(get_UML_A_navigableOwnedEnd_association());
 	
 	
+	//ownedEnd
 	uML_Association_ownedEnd->setName("ownedEnd");
 	uML_Association_ownedEnd->setType(get_UML_Property());
 	uML_Association_ownedEnd->setLower(0);
@@ -16797,6 +17851,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 
     // Association operations
+	//endType
 	uML_Association_endType__->setName("endType");
 	uML_Association_endType__->setType(get_UML_Type());
 	
@@ -16809,6 +17864,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//isBinary
 	uML_Association_isBinary__->setName("isBinary");
 	uML_Association_isBinary__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -16820,7 +17876,6 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Association_isBinary__return->setDirection(uml::ParameterDirectionKind::RETURN);
 	
 	
-
 
     //-------------------------------------------
 	//	class AssociationClass
@@ -16843,6 +17898,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_Class());
 	
     // Behavior attributes
+	//context
 	uML_Behavior_context->setName("context");
 	uML_Behavior_context->setType(get_UML_BehavioredClassifier());
 	uML_Behavior_context->setLower(0);
@@ -16853,6 +17909,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Behavior_context->setAssociation(get_UML_A_context_behavior());
 	
 	
+	//isReentrant
 	uML_Behavior_isReentrant->setName("isReentrant");
 	uML_Behavior_isReentrant->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_Behavior_isReentrant->setLower(0);
@@ -16863,6 +17920,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Behavior_isReentrant->setDefaultValue(uML_Behavior_isReentrant_defaultValue_LiteralBoolean_UML_Behavior_isReentrant);
 	
+	//ownedParameter
 	uML_Behavior_ownedParameter->setName("ownedParameter");
 	uML_Behavior_ownedParameter->setType(get_UML_Parameter());
 	uML_Behavior_ownedParameter->setLower(0);
@@ -16873,6 +17931,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Behavior_ownedParameter->setAssociation(get_UML_A_ownedParameter_behavior());
 	
 	
+	//ownedParameterSet
 	uML_Behavior_ownedParameterSet->setName("ownedParameterSet");
 	uML_Behavior_ownedParameterSet->setType(get_UML_ParameterSet());
 	uML_Behavior_ownedParameterSet->setLower(0);
@@ -16883,6 +17942,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Behavior_ownedParameterSet->setAssociation(get_UML_A_ownedParameterSet_behavior());
 	
 	
+	//postcondition
 	uML_Behavior_postcondition->setName("postcondition");
 	uML_Behavior_postcondition->setType(get_UML_Constraint());
 	uML_Behavior_postcondition->setLower(0);
@@ -16893,6 +17953,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Behavior_postcondition->setAssociation(get_UML_A_postcondition_behavior());
 	
 	
+	//precondition
 	uML_Behavior_precondition->setName("precondition");
 	uML_Behavior_precondition->setType(get_UML_Constraint());
 	uML_Behavior_precondition->setLower(0);
@@ -16903,6 +17964,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Behavior_precondition->setAssociation(get_UML_A_precondition_behavior());
 	
 	
+	//redefinedBehavior
 	uML_Behavior_redefinedBehavior->setName("redefinedBehavior");
 	uML_Behavior_redefinedBehavior->setType(get_UML_Behavior());
 	uML_Behavior_redefinedBehavior->setLower(0);
@@ -16913,6 +17975,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Behavior_redefinedBehavior->setAssociation(get_UML_A_redefinedBehavior_behavior());
 	
 	
+	//specification
 	uML_Behavior_specification->setName("specification");
 	uML_Behavior_specification->setType(get_UML_BehavioralFeature());
 	uML_Behavior_specification->setLower(0);
@@ -16925,6 +17988,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 
     // Behavior operations
+	//behavioredClassifier
 	uML_Behavior_behavioredClassifier_Element_Element->setName("behavioredClassifier");
 	uML_Behavior_behavioredClassifier_Element_Element->setType(get_UML_BehavioredClassifier());
 	
@@ -16949,6 +18013,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//context
 	uML_Behavior_context__->setName("context");
 	uML_Behavior_context__->setType(get_UML_BehavioredClassifier());
 	
@@ -16961,6 +18026,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//inputParameters
 	uML_Behavior_inputParameters__->setName("inputParameters");
 	uML_Behavior_inputParameters__->setType(get_UML_Parameter());
 	
@@ -16973,6 +18039,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//outputParameters
 	uML_Behavior_outputParameters__->setName("outputParameters");
 	uML_Behavior_outputParameters__->setType(get_UML_Parameter());
 	
@@ -16985,7 +18052,6 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
-
     //-------------------------------------------
 	//	class BehaviorExecutionSpecification
 	uML_BehaviorExecutionSpecification->setName("BehaviorExecutionSpecification");
@@ -16995,6 +18061,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_ExecutionSpecification());
 	
     // BehaviorExecutionSpecification attributes
+	//behavior
 	uML_BehaviorExecutionSpecification_behavior->setName("behavior");
 	uML_BehaviorExecutionSpecification_behavior->setType(get_UML_Behavior());
 	uML_BehaviorExecutionSpecification_behavior->setLower(0);
@@ -17019,6 +18086,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_Namespace());
 	
     // BehavioralFeature attributes
+	//concurrency
 	uML_BehavioralFeature_concurrency->setName("concurrency");
 	uML_BehavioralFeature_concurrency->setType(get_UML_CallConcurrencyKind());
 	uML_BehavioralFeature_concurrency->setLower(1);
@@ -17029,6 +18097,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_BehavioralFeature_concurrency->setDefaultValue(uML_BehavioralFeature_concurrency_defaultValue_InstanceValue);
 	
+	//isAbstract
 	uML_BehavioralFeature_isAbstract->setName("isAbstract");
 	uML_BehavioralFeature_isAbstract->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_BehavioralFeature_isAbstract->setLower(1);
@@ -17039,6 +18108,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_BehavioralFeature_isAbstract->setDefaultValue(uML_BehavioralFeature_isAbstract_defaultValue_LiteralBoolean_UML_BehavioralFeature_isAbstract);
 	
+	//method
 	uML_BehavioralFeature_method->setName("method");
 	uML_BehavioralFeature_method->setType(get_UML_Behavior());
 	uML_BehavioralFeature_method->setLower(0);
@@ -17049,6 +18119,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_BehavioralFeature_method->setAssociation(get_UML_A_method_specification());
 	
 	
+	//ownedParameter
 	uML_BehavioralFeature_ownedParameter->setName("ownedParameter");
 	uML_BehavioralFeature_ownedParameter->setType(get_UML_Parameter());
 	uML_BehavioralFeature_ownedParameter->setLower(0);
@@ -17059,6 +18130,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_BehavioralFeature_ownedParameter->setAssociation(get_UML_A_ownedParameter_ownerFormalParam());
 	
 	
+	//ownedParameterSet
 	uML_BehavioralFeature_ownedParameterSet->setName("ownedParameterSet");
 	uML_BehavioralFeature_ownedParameterSet->setType(get_UML_ParameterSet());
 	uML_BehavioralFeature_ownedParameterSet->setLower(0);
@@ -17069,6 +18141,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_BehavioralFeature_ownedParameterSet->setAssociation(get_UML_A_ownedParameterSet_behavioralFeature());
 	
 	
+	//raisedException
 	uML_BehavioralFeature_raisedException->setName("raisedException");
 	uML_BehavioralFeature_raisedException->setType(get_UML_Type());
 	uML_BehavioralFeature_raisedException->setLower(0);
@@ -17081,6 +18154,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 
     // BehavioralFeature operations
+	//createReturnResult
 	uML_BehavioralFeature_createReturnResult_String_Type_String_Type->setName("createReturnResult");
 	uML_BehavioralFeature_createReturnResult_String_Type_String_Type->setType(get_UML_Parameter());
 	
@@ -17117,6 +18191,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//inputParameters
 	uML_BehavioralFeature_inputParameters__->setName("inputParameters");
 	uML_BehavioralFeature_inputParameters__->setType(get_UML_Parameter());
 	
@@ -17129,6 +18204,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//isDistinguishableFrom
 	uML_BehavioralFeature_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace->setName("isDistinguishableFrom");
 	uML_BehavioralFeature_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -17165,6 +18241,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//outputParameters
 	uML_BehavioralFeature_outputParameters__->setName("outputParameters");
 	uML_BehavioralFeature_outputParameters__->setType(get_UML_Parameter());
 	
@@ -17177,7 +18254,6 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
-
     //-------------------------------------------
 	//	class BehavioredClassifier
 	uML_BehavioredClassifier->setName("BehavioredClassifier");
@@ -17187,6 +18263,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_Classifier());
 	
     // BehavioredClassifier attributes
+	//classifierBehavior
 	uML_BehavioredClassifier_classifierBehavior->setName("classifierBehavior");
 	uML_BehavioredClassifier_classifierBehavior->setType(get_UML_Behavior());
 	uML_BehavioredClassifier_classifierBehavior->setLower(0);
@@ -17197,6 +18274,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_BehavioredClassifier_classifierBehavior->setAssociation(get_UML_A_classifierBehavior_behavioredClassifier());
 	
 	
+	//interfaceRealization
 	uML_BehavioredClassifier_interfaceRealization->setName("interfaceRealization");
 	uML_BehavioredClassifier_interfaceRealization->setType(get_UML_InterfaceRealization());
 	uML_BehavioredClassifier_interfaceRealization->setLower(0);
@@ -17207,6 +18285,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_BehavioredClassifier_interfaceRealization->setAssociation(get_UML_A_interfaceRealization_implementingClassifier());
 	
 	
+	//ownedBehavior
 	uML_BehavioredClassifier_ownedBehavior->setName("ownedBehavior");
 	uML_BehavioredClassifier_ownedBehavior->setType(get_UML_Behavior());
 	uML_BehavioredClassifier_ownedBehavior->setLower(0);
@@ -17219,6 +18298,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 
     // BehavioredClassifier operations
+	//getAllImplementedInterfaces
 	uML_BehavioredClassifier_getAllImplementedInterfaces__->setName("getAllImplementedInterfaces");
 	uML_BehavioredClassifier_getAllImplementedInterfaces__->setType(get_UML_Interface());
 	
@@ -17231,6 +18311,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//getImplementedInterfaces
 	uML_BehavioredClassifier_getImplementedInterfaces__->setName("getImplementedInterfaces");
 	uML_BehavioredClassifier_getImplementedInterfaces__->setType(get_UML_Interface());
 	
@@ -17243,7 +18324,6 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
-
     //-------------------------------------------
 	//	class BroadcastSignalAction
 	uML_BroadcastSignalAction->setName("BroadcastSignalAction");
@@ -17253,6 +18333,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_InvocationAction());
 	
     // BroadcastSignalAction attributes
+	//signal
 	uML_BroadcastSignalAction_signal->setName("signal");
 	uML_BroadcastSignalAction_signal->setType(get_UML_Signal());
 	uML_BroadcastSignalAction_signal->setLower(1);
@@ -17274,6 +18355,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_InvocationAction());
 	
     // CallAction attributes
+	//isSynchronous
 	uML_CallAction_isSynchronous->setName("isSynchronous");
 	uML_CallAction_isSynchronous->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_CallAction_isSynchronous->setLower(1);
@@ -17284,6 +18366,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_CallAction_isSynchronous->setDefaultValue(uML_CallAction_isSynchronous_defaultValue_LiteralBoolean_UML_CallAction_isSynchronous);
 	
+	//result
 	uML_CallAction_result->setName("result");
 	uML_CallAction_result->setType(get_UML_OutputPin());
 	uML_CallAction_result->setLower(0);
@@ -17296,6 +18379,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 
     // CallAction operations
+	//inputParameters
 	uML_CallAction_inputParameters__->setName("inputParameters");
 	uML_CallAction_inputParameters__->setType(get_UML_Parameter());
 	
@@ -17308,6 +18392,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//outputParameters
 	uML_CallAction_outputParameters__->setName("outputParameters");
 	uML_CallAction_outputParameters__->setType(get_UML_Parameter());
 	
@@ -17320,7 +18405,6 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
-
     //-------------------------------------------
 	//	class CallBehaviorAction
 	uML_CallBehaviorAction->setName("CallBehaviorAction");
@@ -17330,6 +18414,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_CallAction());
 	
     // CallBehaviorAction attributes
+	//behavior
 	uML_CallBehaviorAction_behavior->setName("behavior");
 	uML_CallBehaviorAction_behavior->setType(get_UML_Behavior());
 	uML_CallBehaviorAction_behavior->setLower(1);
@@ -17342,6 +18427,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 
     // CallBehaviorAction operations
+	//inputParameters
 	uML_CallBehaviorAction_inputParameters__->setName("inputParameters");
 	uML_CallBehaviorAction_inputParameters__->setType(get_UML_Parameter());
 	
@@ -17354,6 +18440,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//outputParameters
 	uML_CallBehaviorAction_outputParameters__->setName("outputParameters");
 	uML_CallBehaviorAction_outputParameters__->setType(get_UML_Parameter());
 	
@@ -17366,7 +18453,6 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
-
     //-------------------------------------------
 	//	class CallEvent
 	uML_CallEvent->setName("CallEvent");
@@ -17376,6 +18462,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_MessageEvent());
 	
     // CallEvent attributes
+	//operation
 	uML_CallEvent_operation->setName("operation");
 	uML_CallEvent_operation->setType(get_UML_Operation());
 	uML_CallEvent_operation->setLower(1);
@@ -17397,6 +18484,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_CallAction());
 	
     // CallOperationAction attributes
+	//operation
 	uML_CallOperationAction_operation->setName("operation");
 	uML_CallOperationAction_operation->setType(get_UML_Operation());
 	uML_CallOperationAction_operation->setLower(1);
@@ -17407,6 +18495,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_CallOperationAction_operation->setAssociation(get_UML_A_operation_callOperationAction());
 	
 	
+	//target
 	uML_CallOperationAction_target->setName("target");
 	uML_CallOperationAction_target->setType(get_UML_InputPin());
 	uML_CallOperationAction_target->setLower(1);
@@ -17419,6 +18508,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 
     // CallOperationAction operations
+	//inputParameters
 	uML_CallOperationAction_inputParameters__->setName("inputParameters");
 	uML_CallOperationAction_inputParameters__->setType(get_UML_Parameter());
 	
@@ -17431,6 +18521,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//outputParameters
 	uML_CallOperationAction_outputParameters__->setName("outputParameters");
 	uML_CallOperationAction_outputParameters__->setType(get_UML_Parameter());
 	
@@ -17442,7 +18533,6 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_CallOperationAction_outputParameters_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
 	
-
 
     //-------------------------------------------
 	//	class CentralBufferNode
@@ -17462,6 +18552,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_Event());
 	
     // ChangeEvent attributes
+	//changeExpression
 	uML_ChangeEvent_changeExpression->setName("changeExpression");
 	uML_ChangeEvent_changeExpression->setType(get_UML_ValueSpecification());
 	uML_ChangeEvent_changeExpression->setLower(1);
@@ -17486,6 +18577,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_EncapsulatedClassifier());
 	
     // Class attributes
+	//extension
 	uML_Class_extension->setName("extension");
 	uML_Class_extension->setType(get_UML_Extension());
 	uML_Class_extension->setLower(0);
@@ -17496,6 +18588,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Class_extension->setAssociation(get_UML_A_extension_metaclass());
 	
 	
+	//isAbstract
 	uML_Class_isAbstract->setName("isAbstract");
 	uML_Class_isAbstract->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_Class_isAbstract->setLower(1);
@@ -17506,6 +18599,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Class_isAbstract->setDefaultValue(uML_Class_isAbstract_defaultValue_LiteralBoolean_UML_Class_isAbstract);
 	
+	//isActive
 	uML_Class_isActive->setName("isActive");
 	uML_Class_isActive->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_Class_isActive->setLower(1);
@@ -17516,6 +18610,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Class_isActive->setDefaultValue(uML_Class_isActive_defaultValue_LiteralBoolean_UML_Class_isActive);
 	
+	//nestedClassifier
 	uML_Class_nestedClassifier->setName("nestedClassifier");
 	uML_Class_nestedClassifier->setType(get_UML_Classifier());
 	uML_Class_nestedClassifier->setLower(0);
@@ -17526,6 +18621,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Class_nestedClassifier->setAssociation(get_UML_A_nestedClassifier_nestingClass());
 	
 	
+	//ownedAttribute
 	uML_Class_ownedAttribute->setName("ownedAttribute");
 	uML_Class_ownedAttribute->setType(get_UML_Property());
 	uML_Class_ownedAttribute->setLower(0);
@@ -17536,6 +18632,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Class_ownedAttribute->setAssociation(get_UML_A_ownedAttribute_class());
 	
 	
+	//ownedOperation
 	uML_Class_ownedOperation->setName("ownedOperation");
 	uML_Class_ownedOperation->setType(get_UML_Operation());
 	uML_Class_ownedOperation->setLower(0);
@@ -17546,6 +18643,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Class_ownedOperation->setAssociation(get_UML_A_ownedOperation_class());
 	
 	
+	//ownedReception
 	uML_Class_ownedReception->setName("ownedReception");
 	uML_Class_ownedReception->setType(get_UML_Reception());
 	uML_Class_ownedReception->setLower(0);
@@ -17556,6 +18654,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Class_ownedReception->setAssociation(get_UML_A_ownedReception_class());
 	
 	
+	//superClass
 	uML_Class_superClass->setName("superClass");
 	uML_Class_superClass->setType(get_UML_Class());
 	uML_Class_superClass->setLower(0);
@@ -17568,6 +18667,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 
     // Class operations
+	//createOwnedOperation
 	uML_Class_createOwnedOperation_String_String_Type_Type_String_String_Type_Type->setName("createOwnedOperation");
 	uML_Class_createOwnedOperation_String_String_Type_Type_String_String_Type_Type->setType(get_UML_Operation());
 	
@@ -17628,6 +18728,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//extension
 	uML_Class_extension__->setName("extension");
 	uML_Class_extension__->setType(get_UML_Extension());
 	
@@ -17640,6 +18741,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//isMetaclass
 	uML_Class_isMetaclass__->setName("isMetaclass");
 	uML_Class_isMetaclass__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -17652,6 +18754,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//superClass
 	uML_Class_superClass__->setName("superClass");
 	uML_Class_superClass__->setType(get_UML_Class());
 	
@@ -17663,7 +18766,6 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Class_superClass_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
 	
-
 
     //-------------------------------------------
 	//	class Classifier
@@ -17683,6 +18785,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_Type());
 	
     // Classifier attributes
+	//attribute
 	uML_Classifier_attribute->setName("attribute");
 	uML_Classifier_attribute->setType(get_UML_Property());
 	uML_Classifier_attribute->setLower(0);
@@ -17693,6 +18796,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Classifier_attribute->setAssociation(get_UML_A_attribute_classifier());
 	
 	
+	//collaborationUse
 	uML_Classifier_collaborationUse->setName("collaborationUse");
 	uML_Classifier_collaborationUse->setType(get_UML_CollaborationUse());
 	uML_Classifier_collaborationUse->setLower(0);
@@ -17703,6 +18807,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Classifier_collaborationUse->setAssociation(get_UML_A_collaborationUse_classifier());
 	
 	
+	//feature
 	uML_Classifier_feature->setName("feature");
 	uML_Classifier_feature->setType(get_UML_Feature());
 	uML_Classifier_feature->setLower(0);
@@ -17713,6 +18818,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Classifier_feature->setAssociation(get_UML_A_feature_featuringClassifier());
 	
 	
+	//general
 	uML_Classifier_general->setName("general");
 	uML_Classifier_general->setType(get_UML_Classifier());
 	uML_Classifier_general->setLower(0);
@@ -17723,6 +18829,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Classifier_general->setAssociation(get_UML_A_general_classifier());
 	
 	
+	//generalization
 	uML_Classifier_generalization->setName("generalization");
 	uML_Classifier_generalization->setType(get_UML_Generalization());
 	uML_Classifier_generalization->setLower(0);
@@ -17733,6 +18840,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Classifier_generalization->setAssociation(get_UML_A_generalization_specific());
 	
 	
+	//inheritedMember
 	uML_Classifier_inheritedMember->setName("inheritedMember");
 	uML_Classifier_inheritedMember->setType(get_UML_NamedElement());
 	uML_Classifier_inheritedMember->setLower(0);
@@ -17743,6 +18851,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Classifier_inheritedMember->setAssociation(get_UML_A_inheritedMember_inheritingClassifier());
 	
 	
+	//isAbstract
 	uML_Classifier_isAbstract->setName("isAbstract");
 	uML_Classifier_isAbstract->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_Classifier_isAbstract->setLower(1);
@@ -17753,6 +18862,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Classifier_isAbstract->setDefaultValue(uML_Classifier_isAbstract_defaultValue_LiteralBoolean_UML_Classifier_isAbstract);
 	
+	//isFinalSpecialization
 	uML_Classifier_isFinalSpecialization->setName("isFinalSpecialization");
 	uML_Classifier_isFinalSpecialization->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_Classifier_isFinalSpecialization->setLower(1);
@@ -17763,6 +18873,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Classifier_isFinalSpecialization->setDefaultValue(uML_Classifier_isFinalSpecialization_defaultValue_LiteralBoolean_UML_Classifier_isFinalSpecialization);
 	
+	//ownedTemplateSignature
 	uML_Classifier_ownedTemplateSignature->setName("ownedTemplateSignature");
 	uML_Classifier_ownedTemplateSignature->setType(get_UML_RedefinableTemplateSignature());
 	uML_Classifier_ownedTemplateSignature->setLower(0);
@@ -17773,6 +18884,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Classifier_ownedTemplateSignature->setAssociation(get_UML_A_ownedTemplateSignature_classifier());
 	
 	
+	//ownedUseCase
 	uML_Classifier_ownedUseCase->setName("ownedUseCase");
 	uML_Classifier_ownedUseCase->setType(get_UML_UseCase());
 	uML_Classifier_ownedUseCase->setLower(0);
@@ -17783,6 +18895,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Classifier_ownedUseCase->setAssociation(get_UML_A_ownedUseCase_classifier());
 	
 	
+	//powertypeExtent
 	uML_Classifier_powertypeExtent->setName("powertypeExtent");
 	uML_Classifier_powertypeExtent->setType(get_UML_GeneralizationSet());
 	uML_Classifier_powertypeExtent->setLower(0);
@@ -17793,6 +18906,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Classifier_powertypeExtent->setAssociation(get_UML_A_powertypeExtent_powertype());
 	
 	
+	//redefinedClassifier
 	uML_Classifier_redefinedClassifier->setName("redefinedClassifier");
 	uML_Classifier_redefinedClassifier->setType(get_UML_Classifier());
 	uML_Classifier_redefinedClassifier->setLower(0);
@@ -17803,6 +18917,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Classifier_redefinedClassifier->setAssociation(get_UML_A_redefinedClassifier_classifier());
 	
 	
+	//representation
 	uML_Classifier_representation->setName("representation");
 	uML_Classifier_representation->setType(get_UML_CollaborationUse());
 	uML_Classifier_representation->setLower(0);
@@ -17813,6 +18928,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Classifier_representation->setAssociation(get_UML_A_representation_classifier());
 	
 	
+	//substitution
 	uML_Classifier_substitution->setName("substitution");
 	uML_Classifier_substitution->setType(get_UML_Substitution());
 	uML_Classifier_substitution->setLower(0);
@@ -17823,6 +18939,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Classifier_substitution->setAssociation(get_UML_A_substitution_substitutingClassifier());
 	
 	
+	//templateParameter
 	uML_Classifier_templateParameter->setName("templateParameter");
 	uML_Classifier_templateParameter->setType(get_UML_ClassifierTemplateParameter());
 	uML_Classifier_templateParameter->setLower(0);
@@ -17833,6 +18950,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Classifier_templateParameter->setAssociation(get_UML_A_classifier_templateParameter_parameteredElement());
 	
 	
+	//useCase
 	uML_Classifier_useCase->setName("useCase");
 	uML_Classifier_useCase->setType(get_UML_UseCase());
 	uML_Classifier_useCase->setLower(0);
@@ -17845,6 +18963,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 
     // Classifier operations
+	//allAttributes
 	uML_Classifier_allAttributes__->setName("allAttributes");
 	uML_Classifier_allAttributes__->setType(get_UML_Property());
 	
@@ -17857,6 +18976,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//allFeatures
 	uML_Classifier_allFeatures__->setName("allFeatures");
 	uML_Classifier_allFeatures__->setType(get_UML_Feature());
 	
@@ -17869,6 +18989,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//allParents
 	uML_Classifier_allParents__->setName("allParents");
 	uML_Classifier_allParents__->setType(get_UML_Classifier());
 	
@@ -17881,6 +19002,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//allRealizedInterfaces
 	uML_Classifier_allRealizedInterfaces__->setName("allRealizedInterfaces");
 	uML_Classifier_allRealizedInterfaces__->setType(get_UML_Interface());
 	
@@ -17893,6 +19015,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//allSlottableFeatures
 	uML_Classifier_allSlottableFeatures__->setName("allSlottableFeatures");
 	uML_Classifier_allSlottableFeatures__->setType(get_UML_StructuralFeature());
 	
@@ -17905,6 +19028,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//allUsedInterfaces
 	uML_Classifier_allUsedInterfaces__->setName("allUsedInterfaces");
 	uML_Classifier_allUsedInterfaces__->setType(get_UML_Interface());
 	
@@ -17917,6 +19041,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//conformsTo
 	uML_Classifier_conformsTo_Type_Type->setName("conformsTo");
 	uML_Classifier_conformsTo_Type_Type->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -17941,6 +19066,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//directlyRealizedInterfaces
 	uML_Classifier_directlyRealizedInterfaces__->setName("directlyRealizedInterfaces");
 	uML_Classifier_directlyRealizedInterfaces__->setType(get_UML_Interface());
 	
@@ -17953,6 +19079,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//directlyUsedInterfaces
 	uML_Classifier_directlyUsedInterfaces__->setName("directlyUsedInterfaces");
 	uML_Classifier_directlyUsedInterfaces__->setType(get_UML_Interface());
 	
@@ -17965,6 +19092,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//general
 	uML_Classifier_general__->setName("general");
 	uML_Classifier_general__->setType(get_UML_Classifier());
 	
@@ -17977,6 +19105,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//getAllAttributes
 	uML_Classifier_getAllAttributes__->setName("getAllAttributes");
 	uML_Classifier_getAllAttributes__->setType(get_UML_Property());
 	
@@ -17989,6 +19118,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//getAllOperations
 	uML_Classifier_getAllOperations__->setName("getAllOperations");
 	uML_Classifier_getAllOperations__->setType(get_UML_Operation());
 	
@@ -18001,6 +19131,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//getAllUsedInterfaces
 	uML_Classifier_getAllUsedInterfaces__->setName("getAllUsedInterfaces");
 	uML_Classifier_getAllUsedInterfaces__->setType(get_UML_Interface());
 	
@@ -18013,6 +19144,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//getOperation
 	uML_Classifier_getOperation_String_String_Type_String_String_Type->setName("getOperation");
 	uML_Classifier_getOperation_String_String_Type_String_String_Type->setType(get_UML_Operation());
 	
@@ -18061,6 +19193,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//getOperation
 	uML_Classifier_getOperation_String_String_Type_Boolean_String_String_Type_Boolean->setName("getOperation");
 	uML_Classifier_getOperation_String_String_Type_Boolean_String_String_Type_Boolean->setType(get_UML_Operation());
 	
@@ -18121,6 +19254,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//getOperations
 	uML_Classifier_getOperations__->setName("getOperations");
 	uML_Classifier_getOperations__->setType(get_UML_Operation());
 	
@@ -18133,6 +19267,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//getUsedInterfaces
 	uML_Classifier_getUsedInterfaces__->setName("getUsedInterfaces");
 	uML_Classifier_getUsedInterfaces__->setType(get_UML_Interface());
 	
@@ -18145,6 +19280,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//hasVisibilityOf
 	uML_Classifier_hasVisibilityOf_NamedElement_NamedElement->setName("hasVisibilityOf");
 	uML_Classifier_hasVisibilityOf_NamedElement_NamedElement->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -18169,6 +19305,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//inherit
 	uML_Classifier_inherit_NamedElement_NamedElement->setName("inherit");
 	uML_Classifier_inherit_NamedElement_NamedElement->setType(get_UML_NamedElement());
 	
@@ -18193,6 +19330,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//inheritableMembers
 	uML_Classifier_inheritableMembers_Classifier_Classifier->setName("inheritableMembers");
 	uML_Classifier_inheritableMembers_Classifier_Classifier->setType(get_UML_NamedElement());
 	
@@ -18217,6 +19355,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//inheritedMember
 	uML_Classifier_inheritedMember__->setName("inheritedMember");
 	uML_Classifier_inheritedMember__->setType(get_UML_NamedElement());
 	
@@ -18229,6 +19368,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//isSubstitutableFor
 	uML_Classifier_isSubstitutableFor_Classifier_Classifier->setName("isSubstitutableFor");
 	uML_Classifier_isSubstitutableFor_Classifier_Classifier->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -18253,6 +19393,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//isTemplate
 	uML_Classifier_isTemplate__->setName("isTemplate");
 	uML_Classifier_isTemplate__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -18265,6 +19406,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//maySpecializeType
 	uML_Classifier_maySpecializeType_Classifier_Classifier->setName("maySpecializeType");
 	uML_Classifier_maySpecializeType_Classifier_Classifier->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -18289,6 +19431,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//parents
 	uML_Classifier_parents__->setName("parents");
 	uML_Classifier_parents__->setType(get_UML_Classifier());
 	
@@ -18301,7 +19444,6 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
-
     //-------------------------------------------
 	//	class ClassifierTemplateParameter
 	uML_ClassifierTemplateParameter->setName("ClassifierTemplateParameter");
@@ -18311,6 +19453,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_TemplateParameter());
 	
     // ClassifierTemplateParameter attributes
+	//allowSubstitutable
 	uML_ClassifierTemplateParameter_allowSubstitutable->setName("allowSubstitutable");
 	uML_ClassifierTemplateParameter_allowSubstitutable->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_ClassifierTemplateParameter_allowSubstitutable->setLower(1);
@@ -18321,6 +19464,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_ClassifierTemplateParameter_allowSubstitutable->setDefaultValue(uML_ClassifierTemplateParameter_allowSubstitutable_defaultValue_LiteralBoolean_UML_ClassifierTemplateParameter_allowSubstitutable);
 	
+	//constrainingClassifier
 	uML_ClassifierTemplateParameter_constrainingClassifier->setName("constrainingClassifier");
 	uML_ClassifierTemplateParameter_constrainingClassifier->setType(get_UML_Classifier());
 	uML_ClassifierTemplateParameter_constrainingClassifier->setLower(0);
@@ -18331,6 +19475,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ClassifierTemplateParameter_constrainingClassifier->setAssociation(get_UML_A_constrainingClassifier_classifierTemplateParameter());
 	
 	
+	//parameteredElement
 	uML_ClassifierTemplateParameter_parameteredElement->setName("parameteredElement");
 	uML_ClassifierTemplateParameter_parameteredElement->setType(get_UML_Classifier());
 	uML_ClassifierTemplateParameter_parameteredElement->setLower(1);
@@ -18352,6 +19497,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_Element());
 	
     // Clause attributes
+	//body
 	uML_Clause_body->setName("body");
 	uML_Clause_body->setType(get_UML_ExecutableNode());
 	uML_Clause_body->setLower(0);
@@ -18362,6 +19508,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Clause_body->setAssociation(get_UML_A_body_clause());
 	
 	
+	//bodyOutput
 	uML_Clause_bodyOutput->setName("bodyOutput");
 	uML_Clause_bodyOutput->setType(get_UML_OutputPin());
 	uML_Clause_bodyOutput->setLower(0);
@@ -18372,6 +19519,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Clause_bodyOutput->setAssociation(get_UML_A_bodyOutput_clause());
 	
 	
+	//decider
 	uML_Clause_decider->setName("decider");
 	uML_Clause_decider->setType(get_UML_OutputPin());
 	uML_Clause_decider->setLower(1);
@@ -18382,6 +19530,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Clause_decider->setAssociation(get_UML_A_decider_clause());
 	
 	
+	//predecessorClause
 	uML_Clause_predecessorClause->setName("predecessorClause");
 	uML_Clause_predecessorClause->setType(get_UML_Clause());
 	uML_Clause_predecessorClause->setLower(0);
@@ -18392,6 +19541,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Clause_predecessorClause->setAssociation(get_UML_A_predecessorClause_successorClause());
 	
 	
+	//successorClause
 	uML_Clause_successorClause->setName("successorClause");
 	uML_Clause_successorClause->setType(get_UML_Clause());
 	uML_Clause_successorClause->setLower(0);
@@ -18402,6 +19552,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Clause_successorClause->setAssociation(get_UML_A_predecessorClause_successorClause());
 	
 	
+	//test
 	uML_Clause_test->setName("test");
 	uML_Clause_test->setType(get_UML_ExecutableNode());
 	uML_Clause_test->setLower(1);
@@ -18423,6 +19574,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_Action());
 	
     // ClearAssociationAction attributes
+	//association
 	uML_ClearAssociationAction_association->setName("association");
 	uML_ClearAssociationAction_association->setType(get_UML_Association());
 	uML_ClearAssociationAction_association->setLower(1);
@@ -18433,6 +19585,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ClearAssociationAction_association->setAssociation(get_UML_A_association_clearAssociationAction());
 	
 	
+	//object
 	uML_ClearAssociationAction_object->setName("object");
 	uML_ClearAssociationAction_object->setType(get_UML_InputPin());
 	uML_ClearAssociationAction_object->setLower(1);
@@ -18454,6 +19607,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_StructuralFeatureAction());
 	
     // ClearStructuralFeatureAction attributes
+	//result
 	uML_ClearStructuralFeatureAction_result->setName("result");
 	uML_ClearStructuralFeatureAction_result->setType(get_UML_OutputPin());
 	uML_ClearStructuralFeatureAction_result->setLower(0);
@@ -18487,6 +19641,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_StructuredClassifier());
 	
     // Collaboration attributes
+	//collaborationRole
 	uML_Collaboration_collaborationRole->setName("collaborationRole");
 	uML_Collaboration_collaborationRole->setType(get_UML_ConnectableElement());
 	uML_Collaboration_collaborationRole->setLower(0);
@@ -18508,6 +19663,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_NamedElement());
 	
     // CollaborationUse attributes
+	//roleBinding
 	uML_CollaborationUse_roleBinding->setName("roleBinding");
 	uML_CollaborationUse_roleBinding->setType(get_UML_Dependency());
 	uML_CollaborationUse_roleBinding->setLower(0);
@@ -18518,6 +19674,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_CollaborationUse_roleBinding->setAssociation(get_UML_A_roleBinding_collaborationUse());
 	
 	
+	//type
 	uML_CollaborationUse_type->setName("type");
 	uML_CollaborationUse_type->setType(get_UML_Collaboration());
 	uML_CollaborationUse_type->setLower(1);
@@ -18539,6 +19696,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_InteractionFragment());
 	
     // CombinedFragment attributes
+	//cfragmentGate
 	uML_CombinedFragment_cfragmentGate->setName("cfragmentGate");
 	uML_CombinedFragment_cfragmentGate->setType(get_UML_Gate());
 	uML_CombinedFragment_cfragmentGate->setLower(0);
@@ -18549,6 +19707,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_CombinedFragment_cfragmentGate->setAssociation(get_UML_A_cfragmentGate_combinedFragment());
 	
 	
+	//interactionOperator
 	uML_CombinedFragment_interactionOperator->setName("interactionOperator");
 	uML_CombinedFragment_interactionOperator->setType(get_UML_InteractionOperatorKind());
 	uML_CombinedFragment_interactionOperator->setLower(1);
@@ -18559,6 +19718,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_CombinedFragment_interactionOperator->setDefaultValue(uML_CombinedFragment_interactionOperator_defaultValue_InstanceValue);
 	
+	//operand
 	uML_CombinedFragment_operand->setName("operand");
 	uML_CombinedFragment_operand->setType(get_UML_InteractionOperand());
 	uML_CombinedFragment_operand->setLower(1);
@@ -18580,6 +19740,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_Element());
 	
     // Comment attributes
+	//annotatedElement
 	uML_Comment_annotatedElement->setName("annotatedElement");
 	uML_Comment_annotatedElement->setType(get_UML_Element());
 	uML_Comment_annotatedElement->setLower(0);
@@ -18590,6 +19751,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Comment_annotatedElement->setAssociation(get_UML_A_annotatedElement_comment());
 	
 	
+	//body
 	uML_Comment_body->setName("body");
 	uML_Comment_body->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
 	uML_Comment_body->setLower(0);
@@ -18620,6 +19782,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_Class());
 	
     // Component attributes
+	//isIndirectlyInstantiated
 	uML_Component_isIndirectlyInstantiated->setName("isIndirectlyInstantiated");
 	uML_Component_isIndirectlyInstantiated->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_Component_isIndirectlyInstantiated->setLower(1);
@@ -18630,6 +19793,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Component_isIndirectlyInstantiated->setDefaultValue(uML_Component_isIndirectlyInstantiated_defaultValue_LiteralBoolean_UML_Component_isIndirectlyInstantiated);
 	
+	//packagedElement
 	uML_Component_packagedElement->setName("packagedElement");
 	uML_Component_packagedElement->setType(get_UML_PackageableElement());
 	uML_Component_packagedElement->setLower(0);
@@ -18640,6 +19804,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Component_packagedElement->setAssociation(get_UML_A_packagedElement_component());
 	
 	
+	//provided
 	uML_Component_provided->setName("provided");
 	uML_Component_provided->setType(get_UML_Interface());
 	uML_Component_provided->setLower(0);
@@ -18650,6 +19815,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Component_provided->setAssociation(get_UML_A_provided_component());
 	
 	
+	//realization
 	uML_Component_realization->setName("realization");
 	uML_Component_realization->setType(get_UML_ComponentRealization());
 	uML_Component_realization->setLower(0);
@@ -18660,6 +19826,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Component_realization->setAssociation(get_UML_A_realization_abstraction_component());
 	
 	
+	//required
 	uML_Component_required->setName("required");
 	uML_Component_required->setType(get_UML_Interface());
 	uML_Component_required->setLower(0);
@@ -18672,6 +19839,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 
     // Component operations
+	//createOwnedClass
 	uML_Component_createOwnedClass_String_Boolean_String_Boolean->setName("createOwnedClass");
 	uML_Component_createOwnedClass_String_Boolean_String_Boolean->setType(get_UML_Class());
 	
@@ -18708,6 +19876,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//createOwnedEnumeration
 	uML_Component_createOwnedEnumeration_String_String->setName("createOwnedEnumeration");
 	uML_Component_createOwnedEnumeration_String_String->setType(get_UML_Enumeration());
 	
@@ -18732,6 +19901,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//createOwnedInterface
 	uML_Component_createOwnedInterface_String_String->setName("createOwnedInterface");
 	uML_Component_createOwnedInterface_String_String->setType(get_UML_Interface());
 	
@@ -18756,6 +19926,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//createOwnedPrimitiveType
 	uML_Component_createOwnedPrimitiveType_String_String->setName("createOwnedPrimitiveType");
 	uML_Component_createOwnedPrimitiveType_String_String->setType(get_UML_PrimitiveType());
 	
@@ -18780,6 +19951,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//provided
 	uML_Component_provided__->setName("provided");
 	uML_Component_provided__->setType(get_UML_Interface());
 	
@@ -18792,6 +19964,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//required
 	uML_Component_required__->setName("required");
 	uML_Component_required__->setType(get_UML_Interface());
 	
@@ -18804,7 +19977,6 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
-
     //-------------------------------------------
 	//	class ComponentRealization
 	uML_ComponentRealization->setName("ComponentRealization");
@@ -18814,6 +19986,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_Realization());
 	
     // ComponentRealization attributes
+	//abstraction
 	uML_ComponentRealization_abstraction->setName("abstraction");
 	uML_ComponentRealization_abstraction->setType(get_UML_Component());
 	uML_ComponentRealization_abstraction->setLower(0);
@@ -18824,6 +19997,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ComponentRealization_abstraction->setAssociation(get_UML_A_realization_abstraction_component());
 	
 	
+	//realizingClassifier
 	uML_ComponentRealization_realizingClassifier->setName("realizingClassifier");
 	uML_ComponentRealization_realizingClassifier->setType(get_UML_Classifier());
 	uML_ComponentRealization_realizingClassifier->setLower(1);
@@ -18845,6 +20019,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_StructuredActivityNode());
 	
     // ConditionalNode attributes
+	//clause
 	uML_ConditionalNode_clause->setName("clause");
 	uML_ConditionalNode_clause->setType(get_UML_Clause());
 	uML_ConditionalNode_clause->setLower(1);
@@ -18855,6 +20030,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ConditionalNode_clause->setAssociation(get_UML_A_clause_conditionalNode());
 	
 	
+	//isAssured
 	uML_ConditionalNode_isAssured->setName("isAssured");
 	uML_ConditionalNode_isAssured->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_ConditionalNode_isAssured->setLower(1);
@@ -18865,6 +20041,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_ConditionalNode_isAssured->setDefaultValue(uML_ConditionalNode_isAssured_defaultValue_LiteralBoolean_UML_ConditionalNode_isAssured);
 	
+	//isDeterminate
 	uML_ConditionalNode_isDeterminate->setName("isDeterminate");
 	uML_ConditionalNode_isDeterminate->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_ConditionalNode_isDeterminate->setLower(1);
@@ -18875,6 +20052,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_ConditionalNode_isDeterminate->setDefaultValue(uML_ConditionalNode_isDeterminate_defaultValue_LiteralBoolean_UML_ConditionalNode_isDeterminate);
 	
+	//result
 	uML_ConditionalNode_result->setName("result");
 	uML_ConditionalNode_result->setType(get_UML_OutputPin());
 	uML_ConditionalNode_result->setLower(0);
@@ -18887,6 +20065,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 
     // ConditionalNode operations
+	//allActions
 	uML_ConditionalNode_allActions__->setName("allActions");
 	uML_ConditionalNode_allActions__->setType(get_UML_Action());
 	
@@ -18898,7 +20077,6 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ConditionalNode_allActions_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
 	
-
 
     //-------------------------------------------
 	//	class ConnectableElement
@@ -18912,6 +20090,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_TypedElement());
 	
     // ConnectableElement attributes
+	//end
 	uML_ConnectableElement_end->setName("end");
 	uML_ConnectableElement_end->setType(get_UML_ConnectorEnd());
 	uML_ConnectableElement_end->setLower(0);
@@ -18922,6 +20101,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ConnectableElement_end->setAssociation(get_UML_A_end_role());
 	
 	
+	//templateParameter
 	uML_ConnectableElement_templateParameter->setName("templateParameter");
 	uML_ConnectableElement_templateParameter->setType(get_UML_ConnectableElementTemplateParameter());
 	uML_ConnectableElement_templateParameter->setLower(0);
@@ -18934,6 +20114,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 
     // ConnectableElement operations
+	//end
 	uML_ConnectableElement_end__->setName("end");
 	uML_ConnectableElement_end__->setType(get_UML_ConnectorEnd());
 	
@@ -18946,7 +20127,6 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
-
     //-------------------------------------------
 	//	class ConnectableElementTemplateParameter
 	uML_ConnectableElementTemplateParameter->setName("ConnectableElementTemplateParameter");
@@ -18956,6 +20136,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_TemplateParameter());
 	
     // ConnectableElementTemplateParameter attributes
+	//parameteredElement
 	uML_ConnectableElementTemplateParameter_parameteredElement->setName("parameteredElement");
 	uML_ConnectableElementTemplateParameter_parameteredElement->setType(get_UML_ConnectableElement());
 	uML_ConnectableElementTemplateParameter_parameteredElement->setLower(1);
@@ -18977,6 +20158,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_Vertex());
 	
     // ConnectionPointReference attributes
+	//entry
 	uML_ConnectionPointReference_entry->setName("entry");
 	uML_ConnectionPointReference_entry->setType(get_UML_Pseudostate());
 	uML_ConnectionPointReference_entry->setLower(0);
@@ -18987,6 +20169,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ConnectionPointReference_entry->setAssociation(get_UML_A_entry_connectionPointReference());
 	
 	
+	//exit
 	uML_ConnectionPointReference_exit->setName("exit");
 	uML_ConnectionPointReference_exit->setType(get_UML_Pseudostate());
 	uML_ConnectionPointReference_exit->setLower(0);
@@ -18997,6 +20180,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ConnectionPointReference_exit->setAssociation(get_UML_A_exit_connectionPointReference());
 	
 	
+	//state
 	uML_ConnectionPointReference_state->setName("state");
 	uML_ConnectionPointReference_state->setType(get_UML_State());
 	uML_ConnectionPointReference_state->setLower(0);
@@ -19018,6 +20202,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_Feature());
 	
     // Connector attributes
+	//contract
 	uML_Connector_contract->setName("contract");
 	uML_Connector_contract->setType(get_UML_Behavior());
 	uML_Connector_contract->setLower(0);
@@ -19028,6 +20213,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Connector_contract->setAssociation(get_UML_A_contract_connector());
 	
 	
+	//end
 	uML_Connector_end->setName("end");
 	uML_Connector_end->setType(get_UML_ConnectorEnd());
 	uML_Connector_end->setLower(2);
@@ -19038,6 +20224,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Connector_end->setAssociation(get_UML_A_end_connector());
 	
 	
+	//kind
 	uML_Connector_kind->setName("kind");
 	uML_Connector_kind->setType(get_UML_ConnectorKind());
 	uML_Connector_kind->setLower(1);
@@ -19048,6 +20235,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 	
+	//redefinedConnector
 	uML_Connector_redefinedConnector->setName("redefinedConnector");
 	uML_Connector_redefinedConnector->setType(get_UML_Connector());
 	uML_Connector_redefinedConnector->setLower(0);
@@ -19058,6 +20246,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Connector_redefinedConnector->setAssociation(get_UML_A_redefinedConnector_connector());
 	
 	
+	//type
 	uML_Connector_type->setName("type");
 	uML_Connector_type->setType(get_UML_Association());
 	uML_Connector_type->setLower(0);
@@ -19070,6 +20259,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 
     // Connector operations
+	//kind
 	uML_Connector_kind__->setName("kind");
 	uML_Connector_kind__->setType(get_UML_ConnectorKind());
 	
@@ -19082,7 +20272,6 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
-
     //-------------------------------------------
 	//	class ConnectorEnd
 	uML_ConnectorEnd->setName("ConnectorEnd");
@@ -19092,6 +20281,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_MultiplicityElement());
 	
     // ConnectorEnd attributes
+	//definingEnd
 	uML_ConnectorEnd_definingEnd->setName("definingEnd");
 	uML_ConnectorEnd_definingEnd->setType(get_UML_Property());
 	uML_ConnectorEnd_definingEnd->setLower(0);
@@ -19102,6 +20292,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ConnectorEnd_definingEnd->setAssociation(get_UML_A_definingEnd_connectorEnd());
 	
 	
+	//partWithPort
 	uML_ConnectorEnd_partWithPort->setName("partWithPort");
 	uML_ConnectorEnd_partWithPort->setType(get_UML_Property());
 	uML_ConnectorEnd_partWithPort->setLower(0);
@@ -19112,6 +20303,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ConnectorEnd_partWithPort->setAssociation(get_UML_A_partWithPort_connectorEnd());
 	
 	
+	//role
 	uML_ConnectorEnd_role->setName("role");
 	uML_ConnectorEnd_role->setType(get_UML_ConnectableElement());
 	uML_ConnectorEnd_role->setLower(1);
@@ -19124,6 +20316,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 
     // ConnectorEnd operations
+	//definingEnd
 	uML_ConnectorEnd_definingEnd__->setName("definingEnd");
 	uML_ConnectorEnd_definingEnd__->setType(get_UML_Property());
 	
@@ -19136,7 +20329,6 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
-
     //-------------------------------------------
 	//	class ConsiderIgnoreFragment
 	uML_ConsiderIgnoreFragment->setName("ConsiderIgnoreFragment");
@@ -19146,6 +20338,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_CombinedFragment());
 	
     // ConsiderIgnoreFragment attributes
+	//message
 	uML_ConsiderIgnoreFragment_message->setName("message");
 	uML_ConsiderIgnoreFragment_message->setType(get_UML_NamedElement());
 	uML_ConsiderIgnoreFragment_message->setLower(0);
@@ -19167,6 +20360,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_PackageableElement());
 	
     // Constraint attributes
+	//constrainedElement
 	uML_Constraint_constrainedElement->setName("constrainedElement");
 	uML_Constraint_constrainedElement->setType(get_UML_Element());
 	uML_Constraint_constrainedElement->setLower(0);
@@ -19177,6 +20371,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Constraint_constrainedElement->setAssociation(get_UML_A_constrainedElement_constraint());
 	
 	
+	//context
 	uML_Constraint_context->setName("context");
 	uML_Constraint_context->setType(get_UML_Namespace());
 	uML_Constraint_context->setLower(0);
@@ -19187,6 +20382,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Constraint_context->setAssociation(get_UML_A_ownedRule_context());
 	
 	
+	//specification
 	uML_Constraint_specification->setName("specification");
 	uML_Constraint_specification->setType(get_UML_ValueSpecification());
 	uML_Constraint_specification->setLower(1);
@@ -19208,6 +20404,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_InteractionFragment());
 	
     // Continuation attributes
+	//setting
 	uML_Continuation_setting->setName("setting");
 	uML_Continuation_setting->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_Continuation_setting->setLower(1);
@@ -19247,6 +20444,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_WriteLinkAction());
 	
     // CreateLinkAction attributes
+	//endData
 	uML_CreateLinkAction_endData->setName("endData");
 	uML_CreateLinkAction_endData->setType(get_UML_LinkEndCreationData());
 	uML_CreateLinkAction_endData->setLower(2);
@@ -19268,6 +20466,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_CreateLinkAction());
 	
     // CreateLinkObjectAction attributes
+	//result
 	uML_CreateLinkObjectAction_result->setName("result");
 	uML_CreateLinkObjectAction_result->setType(get_UML_OutputPin());
 	uML_CreateLinkObjectAction_result->setLower(1);
@@ -19289,6 +20488,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_Action());
 	
     // CreateObjectAction attributes
+	//classifier
 	uML_CreateObjectAction_classifier->setName("classifier");
 	uML_CreateObjectAction_classifier->setType(get_UML_Classifier());
 	uML_CreateObjectAction_classifier->setLower(1);
@@ -19299,6 +20499,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_CreateObjectAction_classifier->setAssociation(get_UML_A_classifier_createObjectAction());
 	
 	
+	//result
 	uML_CreateObjectAction_result->setName("result");
 	uML_CreateObjectAction_result->setType(get_UML_OutputPin());
 	uML_CreateObjectAction_result->setLower(1);
@@ -19329,6 +20530,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_Classifier());
 	
     // DataType attributes
+	//ownedAttribute
 	uML_DataType_ownedAttribute->setName("ownedAttribute");
 	uML_DataType_ownedAttribute->setType(get_UML_Property());
 	uML_DataType_ownedAttribute->setLower(0);
@@ -19339,6 +20541,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_DataType_ownedAttribute->setAssociation(get_UML_A_ownedAttribute_datatype());
 	
 	
+	//ownedOperation
 	uML_DataType_ownedOperation->setName("ownedOperation");
 	uML_DataType_ownedOperation->setType(get_UML_Operation());
 	uML_DataType_ownedOperation->setLower(0);
@@ -19351,6 +20554,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 
     // DataType operations
+	//createOwnedAttribute
 	uML_DataType_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural->setName("createOwnedAttribute");
 	uML_DataType_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural->setType(get_UML_Property());
 	
@@ -19411,6 +20615,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//createOwnedOperation
 	uML_DataType_createOwnedOperation_String_String_Type_Type_String_String_Type_Type->setName("createOwnedOperation");
 	uML_DataType_createOwnedOperation_String_String_Type_Type_String_String_Type_Type->setType(get_UML_Operation());
 	
@@ -19471,7 +20676,6 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
-
     //-------------------------------------------
 	//	class DecisionNode
 	uML_DecisionNode->setName("DecisionNode");
@@ -19481,6 +20685,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_ControlNode());
 	
     // DecisionNode attributes
+	//decisionInput
 	uML_DecisionNode_decisionInput->setName("decisionInput");
 	uML_DecisionNode_decisionInput->setType(get_UML_Behavior());
 	uML_DecisionNode_decisionInput->setLower(0);
@@ -19491,6 +20696,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_DecisionNode_decisionInput->setAssociation(get_UML_A_decisionInput_decisionNode());
 	
 	
+	//decisionInputFlow
 	uML_DecisionNode_decisionInputFlow->setName("decisionInputFlow");
 	uML_DecisionNode_decisionInputFlow->setType(get_UML_ObjectFlow());
 	uML_DecisionNode_decisionInputFlow->setLower(0);
@@ -19515,6 +20721,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_PackageableElement());
 	
     // Dependency attributes
+	//client
 	uML_Dependency_client->setName("client");
 	uML_Dependency_client->setType(get_UML_NamedElement());
 	uML_Dependency_client->setLower(1);
@@ -19525,6 +20732,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Dependency_client->setAssociation(get_UML_A_clientDependency_client());
 	
 	
+	//supplier
 	uML_Dependency_supplier->setName("supplier");
 	uML_Dependency_supplier->setType(get_UML_NamedElement());
 	uML_Dependency_supplier->setLower(1);
@@ -19555,6 +20763,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_Dependency());
 	
     // Deployment attributes
+	//configuration
 	uML_Deployment_configuration->setName("configuration");
 	uML_Deployment_configuration->setType(get_UML_DeploymentSpecification());
 	uML_Deployment_configuration->setLower(0);
@@ -19565,6 +20774,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Deployment_configuration->setAssociation(get_UML_A_configuration_deployment());
 	
 	
+	//deployedArtifact
 	uML_Deployment_deployedArtifact->setName("deployedArtifact");
 	uML_Deployment_deployedArtifact->setType(get_UML_DeployedArtifact());
 	uML_Deployment_deployedArtifact->setLower(0);
@@ -19575,6 +20785,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Deployment_deployedArtifact->setAssociation(get_UML_A_deployedArtifact_deploymentForArtifact());
 	
 	
+	//location
 	uML_Deployment_location->setName("location");
 	uML_Deployment_location->setType(get_UML_DeploymentTarget());
 	uML_Deployment_location->setLower(1);
@@ -19596,6 +20807,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_Artifact());
 	
     // DeploymentSpecification attributes
+	//deployment
 	uML_DeploymentSpecification_deployment->setName("deployment");
 	uML_DeploymentSpecification_deployment->setType(get_UML_Deployment());
 	uML_DeploymentSpecification_deployment->setLower(0);
@@ -19606,6 +20818,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_DeploymentSpecification_deployment->setAssociation(get_UML_A_configuration_deployment());
 	
 	
+	//deploymentLocation
 	uML_DeploymentSpecification_deploymentLocation->setName("deploymentLocation");
 	uML_DeploymentSpecification_deploymentLocation->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
 	uML_DeploymentSpecification_deploymentLocation->setLower(0);
@@ -19616,6 +20829,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 	
+	//executionLocation
 	uML_DeploymentSpecification_executionLocation->setName("executionLocation");
 	uML_DeploymentSpecification_executionLocation->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
 	uML_DeploymentSpecification_executionLocation->setLower(0);
@@ -19637,6 +20851,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_NamedElement());
 	
     // DeploymentTarget attributes
+	//deployedElement
 	uML_DeploymentTarget_deployedElement->setName("deployedElement");
 	uML_DeploymentTarget_deployedElement->setType(get_UML_PackageableElement());
 	uML_DeploymentTarget_deployedElement->setLower(0);
@@ -19647,6 +20862,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_DeploymentTarget_deployedElement->setAssociation(get_UML_A_deployedElement_deploymentTarget());
 	
 	
+	//deployment
 	uML_DeploymentTarget_deployment->setName("deployment");
 	uML_DeploymentTarget_deployment->setType(get_UML_Deployment());
 	uML_DeploymentTarget_deployment->setLower(0);
@@ -19659,6 +20875,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 
     // DeploymentTarget operations
+	//deployedElement
 	uML_DeploymentTarget_deployedElement__->setName("deployedElement");
 	uML_DeploymentTarget_deployedElement__->setType(get_UML_PackageableElement());
 	
@@ -19671,7 +20888,6 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
-
     //-------------------------------------------
 	//	class DestroyLinkAction
 	uML_DestroyLinkAction->setName("DestroyLinkAction");
@@ -19681,6 +20897,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_WriteLinkAction());
 	
     // DestroyLinkAction attributes
+	//endData
 	uML_DestroyLinkAction_endData->setName("endData");
 	uML_DestroyLinkAction_endData->setType(get_UML_LinkEndDestructionData());
 	uML_DestroyLinkAction_endData->setLower(2);
@@ -19702,6 +20919,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_Action());
 	
     // DestroyObjectAction attributes
+	//isDestroyLinks
 	uML_DestroyObjectAction_isDestroyLinks->setName("isDestroyLinks");
 	uML_DestroyObjectAction_isDestroyLinks->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_DestroyObjectAction_isDestroyLinks->setLower(1);
@@ -19712,6 +20930,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_DestroyObjectAction_isDestroyLinks->setDefaultValue(uML_DestroyObjectAction_isDestroyLinks_defaultValue_LiteralBoolean_UML_DestroyObjectAction_isDestroyLinks);
 	
+	//isDestroyOwnedObjects
 	uML_DestroyObjectAction_isDestroyOwnedObjects->setName("isDestroyOwnedObjects");
 	uML_DestroyObjectAction_isDestroyOwnedObjects->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_DestroyObjectAction_isDestroyOwnedObjects->setLower(1);
@@ -19722,6 +20941,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_DestroyObjectAction_isDestroyOwnedObjects->setDefaultValue(uML_DestroyObjectAction_isDestroyOwnedObjects_defaultValue_LiteralBoolean_UML_DestroyObjectAction_isDestroyOwnedObjects);
 	
+	//target
 	uML_DestroyObjectAction_target->setName("target");
 	uML_DestroyObjectAction_target->setType(get_UML_InputPin());
 	uML_DestroyObjectAction_target->setLower(1);
@@ -19761,6 +20981,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_Relationship());
 	
     // DirectedRelationship attributes
+	//source
 	uML_DirectedRelationship_source->setName("source");
 	uML_DirectedRelationship_source->setType(get_UML_Element());
 	uML_DirectedRelationship_source->setLower(1);
@@ -19771,6 +20992,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_DirectedRelationship_source->setAssociation(get_UML_A_source_directedRelationship());
 	
 	
+	//target
 	uML_DirectedRelationship_target->setName("target");
 	uML_DirectedRelationship_target->setType(get_UML_Element());
 	uML_DirectedRelationship_target->setLower(1);
@@ -19792,6 +21014,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_ValueSpecification());
 	
     // Duration attributes
+	//expr
 	uML_Duration_expr->setName("expr");
 	uML_Duration_expr->setType(get_UML_ValueSpecification());
 	uML_Duration_expr->setLower(0);
@@ -19802,6 +21025,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Duration_expr->setAssociation(get_UML_A_expr_duration());
 	
 	
+	//observation
 	uML_Duration_observation->setName("observation");
 	uML_Duration_observation->setType(get_UML_Observation());
 	uML_Duration_observation->setLower(0);
@@ -19814,6 +21038,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 
     // Duration operations
+	//stringValue
 	uML_Duration_stringValue__->setName("stringValue");
 	uML_Duration_stringValue__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
 	
@@ -19826,7 +21051,6 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
-
     //-------------------------------------------
 	//	class DurationConstraint
 	uML_DurationConstraint->setName("DurationConstraint");
@@ -19836,6 +21060,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_IntervalConstraint());
 	
     // DurationConstraint attributes
+	//firstEvent
 	uML_DurationConstraint_firstEvent->setName("firstEvent");
 	uML_DurationConstraint_firstEvent->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_DurationConstraint_firstEvent->setLower(0);
@@ -19846,6 +21071,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 	
+	//specification
 	uML_DurationConstraint_specification->setName("specification");
 	uML_DurationConstraint_specification->setType(get_UML_DurationInterval());
 	uML_DurationConstraint_specification->setLower(1);
@@ -19867,6 +21093,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_Interval());
 	
     // DurationInterval attributes
+	//max
 	uML_DurationInterval_max->setName("max");
 	uML_DurationInterval_max->setType(get_UML_Duration());
 	uML_DurationInterval_max->setLower(1);
@@ -19877,6 +21104,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_DurationInterval_max->setAssociation(get_UML_A_max_durationInterval());
 	
 	
+	//min
 	uML_DurationInterval_min->setName("min");
 	uML_DurationInterval_min->setType(get_UML_Duration());
 	uML_DurationInterval_min->setLower(1);
@@ -19898,6 +21126,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_Observation());
 	
     // DurationObservation attributes
+	//event
 	uML_DurationObservation_event->setName("event");
 	uML_DurationObservation_event->setType(get_UML_NamedElement());
 	uML_DurationObservation_event->setLower(1);
@@ -19908,6 +21137,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_DurationObservation_event->setAssociation(get_UML_A_event_durationObservation());
 	
 	
+	//firstEvent
 	uML_DurationObservation_firstEvent->setName("firstEvent");
 	uML_DurationObservation_firstEvent->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_DurationObservation_firstEvent->setLower(0);
@@ -19929,6 +21159,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(Ecore::EcorePackage::eInstance()->get_Ecore_EModelElement());
 	
     // Element attributes
+	//ownedComment
 	uML_Element_ownedComment->setName("ownedComment");
 	uML_Element_ownedComment->setType(get_UML_Comment());
 	uML_Element_ownedComment->setLower(0);
@@ -19939,6 +21170,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Element_ownedComment->setAssociation(get_UML_A_ownedComment_owningElement());
 	
 	
+	//ownedElement
 	uML_Element_ownedElement->setName("ownedElement");
 	uML_Element_ownedElement->setType(get_UML_Element());
 	uML_Element_ownedElement->setLower(0);
@@ -19949,6 +21181,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Element_ownedElement->setAssociation(get_UML_A_ownedElement_owner());
 	
 	
+	//owner
 	uML_Element_owner->setName("owner");
 	uML_Element_owner->setType(get_UML_Element());
 	uML_Element_owner->setLower(0);
@@ -19961,6 +21194,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 
     // Element operations
+	//addKeyword
 	uML_Element_addKeyword_String_String->setName("addKeyword");
 	uML_Element_addKeyword_String_String->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -19985,6 +21219,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//allOwnedElements
 	uML_Element_allOwnedElements__->setName("allOwnedElements");
 	uML_Element_allOwnedElements__->setType(get_UML_Element());
 	
@@ -19997,6 +21232,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//applyStereotype
 	uML_Element_applyStereotype_Stereotype_Stereotype->setName("applyStereotype");
 	uML_Element_applyStereotype_Stereotype_Stereotype->setType(Ecore::EcorePackage::eInstance()->get_Ecore_EObject());
 	
@@ -20021,6 +21257,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//createEAnnotation
 	uML_Element_createEAnnotation_String_String->setName("createEAnnotation");
 	uML_Element_createEAnnotation_String_String->setType(Ecore::EcorePackage::eInstance()->get_Ecore_EAnnotation());
 	
@@ -20045,11 +21282,13 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//destroy
 	uML_Element_destroy__->setName("destroy");
 	
 	
 	
 
+	//getApplicableStereotype
 	uML_Element_getApplicableStereotype_String_String->setName("getApplicableStereotype");
 	uML_Element_getApplicableStereotype_String_String->setType(get_UML_Stereotype());
 	
@@ -20074,6 +21313,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//getApplicableStereotypes
 	uML_Element_getApplicableStereotypes__->setName("getApplicableStereotypes");
 	uML_Element_getApplicableStereotypes__->setType(get_UML_Stereotype());
 	
@@ -20086,6 +21326,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//getAppliedStereotype
 	uML_Element_getAppliedStereotype_String_String->setName("getAppliedStereotype");
 	uML_Element_getAppliedStereotype_String_String->setType(get_UML_Stereotype());
 	
@@ -20110,6 +21351,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//getAppliedStereotypes
 	uML_Element_getAppliedStereotypes__->setName("getAppliedStereotypes");
 	uML_Element_getAppliedStereotypes__->setType(get_UML_Stereotype());
 	
@@ -20122,6 +21364,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//getAppliedSubstereotype
 	uML_Element_getAppliedSubstereotype_Stereotype_String_Stereotype_String->setName("getAppliedSubstereotype");
 	uML_Element_getAppliedSubstereotype_Stereotype_String_Stereotype_String->setType(get_UML_Stereotype());
 	
@@ -20158,6 +21401,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//getAppliedSubstereotypes
 	uML_Element_getAppliedSubstereotypes_Stereotype_Stereotype->setName("getAppliedSubstereotypes");
 	uML_Element_getAppliedSubstereotypes_Stereotype_Stereotype->setType(get_UML_Stereotype());
 	
@@ -20182,6 +21426,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//getKeywords
 	uML_Element_getKeywords__->setName("getKeywords");
 	uML_Element_getKeywords__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
 	
@@ -20194,6 +21439,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//getModel
 	uML_Element_getModel__->setName("getModel");
 	uML_Element_getModel__->setType(get_UML_Model());
 	
@@ -20206,6 +21452,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//getNearestPackage
 	uML_Element_getNearestPackage__->setName("getNearestPackage");
 	uML_Element_getNearestPackage__->setType(get_UML_Package());
 	
@@ -20218,6 +21465,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//getRelationships
 	uML_Element_getRelationships__->setName("getRelationships");
 	uML_Element_getRelationships__->setType(get_UML_Relationship());
 	
@@ -20230,6 +21478,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//getRelationships
 	uML_Element_getRelationships_EClass_EClass->setName("getRelationships");
 	uML_Element_getRelationships_EClass_EClass->setType(get_UML_Relationship());
 	
@@ -20254,6 +21503,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//getRequiredStereotype
 	uML_Element_getRequiredStereotype_String_String->setName("getRequiredStereotype");
 	uML_Element_getRequiredStereotype_String_String->setType(get_UML_Stereotype());
 	
@@ -20278,6 +21528,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//getRequiredStereotypes
 	uML_Element_getRequiredStereotypes__->setName("getRequiredStereotypes");
 	uML_Element_getRequiredStereotypes__->setType(get_UML_Stereotype());
 	
@@ -20290,6 +21541,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//getSourceDirectedRelationships
 	uML_Element_getSourceDirectedRelationships__->setName("getSourceDirectedRelationships");
 	uML_Element_getSourceDirectedRelationships__->setType(get_UML_DirectedRelationship());
 	
@@ -20302,6 +21554,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//getSourceDirectedRelationships
 	uML_Element_getSourceDirectedRelationships_EClass_EClass->setName("getSourceDirectedRelationships");
 	uML_Element_getSourceDirectedRelationships_EClass_EClass->setType(get_UML_DirectedRelationship());
 	
@@ -20326,6 +21579,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//getStereotypeApplication
 	uML_Element_getStereotypeApplication_Stereotype_Stereotype->setName("getStereotypeApplication");
 	uML_Element_getStereotypeApplication_Stereotype_Stereotype->setType(Ecore::EcorePackage::eInstance()->get_Ecore_EObject());
 	
@@ -20350,6 +21604,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//getStereotypeApplications
 	uML_Element_getStereotypeApplications__->setName("getStereotypeApplications");
 	uML_Element_getStereotypeApplications__->setType(Ecore::EcorePackage::eInstance()->get_Ecore_EObject());
 	
@@ -20362,6 +21617,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//getTargetDirectedRelationships
 	uML_Element_getTargetDirectedRelationships__->setName("getTargetDirectedRelationships");
 	uML_Element_getTargetDirectedRelationships__->setType(get_UML_DirectedRelationship());
 	
@@ -20374,6 +21630,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//getTargetDirectedRelationships
 	uML_Element_getTargetDirectedRelationships_EClass_EClass->setName("getTargetDirectedRelationships");
 	uML_Element_getTargetDirectedRelationships_EClass_EClass->setType(get_UML_DirectedRelationship());
 	
@@ -20398,6 +21655,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//getValue
 	uML_Element_getValue_Stereotype_String_Stereotype_String->setName("getValue");
 	uML_Element_getValue_Stereotype_String_Stereotype_String->setType(Ecore::EcorePackage::eInstance()->get_Ecore_EJavaObject());
 	
@@ -20434,6 +21692,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//hasKeyword
 	uML_Element_hasKeyword_String_String->setName("hasKeyword");
 	uML_Element_hasKeyword_String_String->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -20458,6 +21717,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//hasValue
 	uML_Element_hasValue_Stereotype_String_Stereotype_String->setName("hasValue");
 	uML_Element_hasValue_Stereotype_String_Stereotype_String->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -20494,6 +21754,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//isStereotypeApplicable
 	uML_Element_isStereotypeApplicable_Stereotype_Stereotype->setName("isStereotypeApplicable");
 	uML_Element_isStereotypeApplicable_Stereotype_Stereotype->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -20518,6 +21779,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//isStereotypeApplied
 	uML_Element_isStereotypeApplied_Stereotype_Stereotype->setName("isStereotypeApplied");
 	uML_Element_isStereotypeApplied_Stereotype_Stereotype->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -20542,6 +21804,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//isStereotypeRequired
 	uML_Element_isStereotypeRequired_Stereotype_Stereotype->setName("isStereotypeRequired");
 	uML_Element_isStereotypeRequired_Stereotype_Stereotype->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -20566,6 +21829,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//mustBeOwned
 	uML_Element_mustBeOwned__->setName("mustBeOwned");
 	uML_Element_mustBeOwned__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -20578,6 +21842,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//removeKeyword
 	uML_Element_removeKeyword_String_String->setName("removeKeyword");
 	uML_Element_removeKeyword_String_String->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -20602,6 +21867,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//setValue
 	uML_Element_setValue_Stereotype_String_EJavaObject_Stereotype_String_EJavaObject->setName("setValue");
 	
 	// parameter stereotype
@@ -20637,6 +21903,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//unapplyStereotype
 	uML_Element_unapplyStereotype_Stereotype_Stereotype->setName("unapplyStereotype");
 	uML_Element_unapplyStereotype_Stereotype_Stereotype->setType(Ecore::EcorePackage::eInstance()->get_Ecore_EObject());
 	
@@ -20661,7 +21928,6 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
-
     //-------------------------------------------
 	//	class ElementImport
 	uML_ElementImport->setName("ElementImport");
@@ -20671,6 +21937,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_DirectedRelationship());
 	
     // ElementImport attributes
+	//alias
 	uML_ElementImport_alias->setName("alias");
 	uML_ElementImport_alias->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
 	uML_ElementImport_alias->setLower(0);
@@ -20681,6 +21948,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 	
+	//importedElement
 	uML_ElementImport_importedElement->setName("importedElement");
 	uML_ElementImport_importedElement->setType(get_UML_PackageableElement());
 	uML_ElementImport_importedElement->setLower(1);
@@ -20691,6 +21959,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ElementImport_importedElement->setAssociation(get_UML_A_importedElement_import());
 	
 	
+	//importingNamespace
 	uML_ElementImport_importingNamespace->setName("importingNamespace");
 	uML_ElementImport_importingNamespace->setType(get_UML_Namespace());
 	uML_ElementImport_importingNamespace->setLower(1);
@@ -20701,6 +21970,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ElementImport_importingNamespace->setAssociation(get_UML_A_elementImport_importingNamespace());
 	
 	
+	//visibility
 	uML_ElementImport_visibility->setName("visibility");
 	uML_ElementImport_visibility->setType(get_UML_VisibilityKind());
 	uML_ElementImport_visibility->setLower(1);
@@ -20713,6 +21983,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 
     // ElementImport operations
+	//getName
 	uML_ElementImport_getName__->setName("getName");
 	uML_ElementImport_getName__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
 	
@@ -20725,7 +21996,6 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
-
     //-------------------------------------------
 	//	class EncapsulatedClassifier
 	uML_EncapsulatedClassifier->setName("EncapsulatedClassifier");
@@ -20735,6 +22005,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_StructuredClassifier());
 	
     // EncapsulatedClassifier attributes
+	//ownedPort
 	uML_EncapsulatedClassifier_ownedPort->setName("ownedPort");
 	uML_EncapsulatedClassifier_ownedPort->setType(get_UML_Port());
 	uML_EncapsulatedClassifier_ownedPort->setLower(0);
@@ -20747,6 +22018,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 
     // EncapsulatedClassifier operations
+	//ownedPort
 	uML_EncapsulatedClassifier_ownedPort__->setName("ownedPort");
 	uML_EncapsulatedClassifier_ownedPort__->setType(get_UML_Port());
 	
@@ -20759,7 +22031,6 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
-
     //-------------------------------------------
 	//	class Enumeration
 	uML_Enumeration->setName("Enumeration");
@@ -20769,6 +22040,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_DataType());
 	
     // Enumeration attributes
+	//ownedLiteral
 	uML_Enumeration_ownedLiteral->setName("ownedLiteral");
 	uML_Enumeration_ownedLiteral->setType(get_UML_EnumerationLiteral());
 	uML_Enumeration_ownedLiteral->setLower(0);
@@ -20790,6 +22062,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_InstanceSpecification());
 	
     // EnumerationLiteral attributes
+	//classifier
 	uML_EnumerationLiteral_classifier->setName("classifier");
 	uML_EnumerationLiteral_classifier->setType(get_UML_Enumeration());
 	uML_EnumerationLiteral_classifier->setLower(1);
@@ -20800,6 +22073,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_EnumerationLiteral_classifier->setAssociation(get_UML_A_classifier_enumerationLiteral());
 	
 	
+	//enumeration
 	uML_EnumerationLiteral_enumeration->setName("enumeration");
 	uML_EnumerationLiteral_enumeration->setType(get_UML_Enumeration());
 	uML_EnumerationLiteral_enumeration->setLower(1);
@@ -20812,6 +22086,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 
     // EnumerationLiteral operations
+	//classifier
 	uML_EnumerationLiteral_classifier__->setName("classifier");
 	uML_EnumerationLiteral_classifier__->setType(get_UML_Enumeration());
 	
@@ -20824,6 +22099,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//getClassifiers
 	uML_EnumerationLiteral_getClassifiers__->setName("getClassifiers");
 	uML_EnumerationLiteral_getClassifiers__->setType(get_UML_Classifier());
 	
@@ -20835,7 +22111,6 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_EnumerationLiteral_getClassifiers__return->setDirection(uml::ParameterDirectionKind::RETURN);
 	
 	
-
 
     //-------------------------------------------
 	//	class Event
@@ -20855,6 +22130,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_Element());
 	
     // ExceptionHandler attributes
+	//exceptionInput
 	uML_ExceptionHandler_exceptionInput->setName("exceptionInput");
 	uML_ExceptionHandler_exceptionInput->setType(get_UML_ObjectNode());
 	uML_ExceptionHandler_exceptionInput->setLower(1);
@@ -20865,6 +22141,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ExceptionHandler_exceptionInput->setAssociation(get_UML_A_exceptionInput_exceptionHandler());
 	
 	
+	//exceptionType
 	uML_ExceptionHandler_exceptionType->setName("exceptionType");
 	uML_ExceptionHandler_exceptionType->setType(get_UML_Classifier());
 	uML_ExceptionHandler_exceptionType->setLower(1);
@@ -20875,6 +22152,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ExceptionHandler_exceptionType->setAssociation(get_UML_A_exceptionType_exceptionHandler());
 	
 	
+	//handlerBody
 	uML_ExceptionHandler_handlerBody->setName("handlerBody");
 	uML_ExceptionHandler_handlerBody->setType(get_UML_ExecutableNode());
 	uML_ExceptionHandler_handlerBody->setLower(1);
@@ -20885,6 +22163,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ExceptionHandler_handlerBody->setAssociation(get_UML_A_handlerBody_exceptionHandler());
 	
 	
+	//protectedNode
 	uML_ExceptionHandler_protectedNode->setName("protectedNode");
 	uML_ExceptionHandler_protectedNode->setType(get_UML_ExecutableNode());
 	uML_ExceptionHandler_protectedNode->setLower(1);
@@ -20906,6 +22185,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_ActivityNode());
 	
     // ExecutableNode attributes
+	//handler
 	uML_ExecutableNode_handler->setName("handler");
 	uML_ExecutableNode_handler->setType(get_UML_ExceptionHandler());
 	uML_ExecutableNode_handler->setLower(0);
@@ -20936,6 +22216,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_OccurrenceSpecification());
 	
     // ExecutionOccurrenceSpecification attributes
+	//execution
 	uML_ExecutionOccurrenceSpecification_execution->setName("execution");
 	uML_ExecutionOccurrenceSpecification_execution->setType(get_UML_ExecutionSpecification());
 	uML_ExecutionOccurrenceSpecification_execution->setLower(1);
@@ -20957,6 +22238,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_InteractionFragment());
 	
     // ExecutionSpecification attributes
+	//finish
 	uML_ExecutionSpecification_finish->setName("finish");
 	uML_ExecutionSpecification_finish->setType(get_UML_OccurrenceSpecification());
 	uML_ExecutionSpecification_finish->setLower(1);
@@ -20967,6 +22249,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ExecutionSpecification_finish->setAssociation(get_UML_A_finish_executionSpecification());
 	
 	
+	//start
 	uML_ExecutionSpecification_start->setName("start");
 	uML_ExecutionSpecification_start->setType(get_UML_OccurrenceSpecification());
 	uML_ExecutionSpecification_start->setLower(1);
@@ -20988,6 +22271,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_ObjectNode());
 	
     // ExpansionNode attributes
+	//regionAsInput
 	uML_ExpansionNode_regionAsInput->setName("regionAsInput");
 	uML_ExpansionNode_regionAsInput->setType(get_UML_ExpansionRegion());
 	uML_ExpansionNode_regionAsInput->setLower(0);
@@ -20998,6 +22282,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ExpansionNode_regionAsInput->setAssociation(get_UML_A_inputElement_regionAsInput());
 	
 	
+	//regionAsOutput
 	uML_ExpansionNode_regionAsOutput->setName("regionAsOutput");
 	uML_ExpansionNode_regionAsOutput->setType(get_UML_ExpansionRegion());
 	uML_ExpansionNode_regionAsOutput->setLower(0);
@@ -21019,6 +22304,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_StructuredActivityNode());
 	
     // ExpansionRegion attributes
+	//inputElement
 	uML_ExpansionRegion_inputElement->setName("inputElement");
 	uML_ExpansionRegion_inputElement->setType(get_UML_ExpansionNode());
 	uML_ExpansionRegion_inputElement->setLower(1);
@@ -21029,6 +22315,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ExpansionRegion_inputElement->setAssociation(get_UML_A_inputElement_regionAsInput());
 	
 	
+	//mode
 	uML_ExpansionRegion_mode->setName("mode");
 	uML_ExpansionRegion_mode->setType(get_UML_ExpansionKind());
 	uML_ExpansionRegion_mode->setLower(1);
@@ -21039,6 +22326,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_ExpansionRegion_mode->setDefaultValue(uML_ExpansionRegion_mode_defaultValue_InstanceValue);
 	
+	//outputElement
 	uML_ExpansionRegion_outputElement->setName("outputElement");
 	uML_ExpansionRegion_outputElement->setType(get_UML_ExpansionNode());
 	uML_ExpansionRegion_outputElement->setLower(0);
@@ -21060,6 +22348,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_ValueSpecification());
 	
     // Expression attributes
+	//operand
 	uML_Expression_operand->setName("operand");
 	uML_Expression_operand->setType(get_UML_ValueSpecification());
 	uML_Expression_operand->setLower(0);
@@ -21070,6 +22359,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Expression_operand->setAssociation(get_UML_A_operand_expression());
 	
 	
+	//symbol
 	uML_Expression_symbol->setName("symbol");
 	uML_Expression_symbol->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
 	uML_Expression_symbol->setLower(0);
@@ -21094,6 +22384,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_NamedElement());
 	
     // Extend attributes
+	//condition
 	uML_Extend_condition->setName("condition");
 	uML_Extend_condition->setType(get_UML_Constraint());
 	uML_Extend_condition->setLower(0);
@@ -21104,6 +22395,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Extend_condition->setAssociation(get_UML_A_condition_extend());
 	
 	
+	//extendedCase
 	uML_Extend_extendedCase->setName("extendedCase");
 	uML_Extend_extendedCase->setType(get_UML_UseCase());
 	uML_Extend_extendedCase->setLower(1);
@@ -21114,6 +22406,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Extend_extendedCase->setAssociation(get_UML_A_extendedCase_extend());
 	
 	
+	//extension
 	uML_Extend_extension->setName("extension");
 	uML_Extend_extension->setType(get_UML_UseCase());
 	uML_Extend_extension->setLower(1);
@@ -21124,6 +22417,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Extend_extension->setAssociation(get_UML_A_extend_extension());
 	
 	
+	//extensionLocation
 	uML_Extend_extensionLocation->setName("extensionLocation");
 	uML_Extend_extensionLocation->setType(get_UML_ExtensionPoint());
 	uML_Extend_extensionLocation->setLower(1);
@@ -21145,6 +22439,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_Association());
 	
     // Extension attributes
+	//isRequired
 	uML_Extension_isRequired->setName("isRequired");
 	uML_Extension_isRequired->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_Extension_isRequired->setLower(1);
@@ -21155,6 +22450,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 	
+	//metaclass
 	uML_Extension_metaclass->setName("metaclass");
 	uML_Extension_metaclass->setType(get_UML_Class());
 	uML_Extension_metaclass->setLower(1);
@@ -21165,6 +22461,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Extension_metaclass->setAssociation(get_UML_A_extension_metaclass());
 	
 	
+	//ownedEnd
 	uML_Extension_ownedEnd->setName("ownedEnd");
 	uML_Extension_ownedEnd->setType(get_UML_ExtensionEnd());
 	uML_Extension_ownedEnd->setLower(1);
@@ -21177,6 +22474,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 
     // Extension operations
+	//getStereotype
 	uML_Extension_getStereotype__->setName("getStereotype");
 	uML_Extension_getStereotype__->setType(get_UML_Stereotype());
 	
@@ -21189,6 +22487,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//getStereotypeEnd
 	uML_Extension_getStereotypeEnd__->setName("getStereotypeEnd");
 	uML_Extension_getStereotypeEnd__->setType(get_UML_Property());
 	
@@ -21201,6 +22500,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//isRequired
 	uML_Extension_isRequired__->setName("isRequired");
 	uML_Extension_isRequired__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -21213,6 +22513,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//metaclass
 	uML_Extension_metaclass__->setName("metaclass");
 	uML_Extension_metaclass__->setType(get_UML_Class());
 	
@@ -21225,6 +22526,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//metaclassEnd
 	uML_Extension_metaclassEnd__->setName("metaclassEnd");
 	uML_Extension_metaclassEnd__->setType(get_UML_Property());
 	
@@ -21237,7 +22539,6 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
-
     //-------------------------------------------
 	//	class ExtensionEnd
 	uML_ExtensionEnd->setName("ExtensionEnd");
@@ -21247,6 +22548,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_Property());
 	
     // ExtensionEnd attributes
+	//lower
 	uML_ExtensionEnd_lower->setName("lower");
 	uML_ExtensionEnd_lower->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
 	uML_ExtensionEnd_lower->setLower(0);
@@ -21257,6 +22559,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 	
+	//type
 	uML_ExtensionEnd_type->setName("type");
 	uML_ExtensionEnd_type->setType(get_UML_Stereotype());
 	uML_ExtensionEnd_type->setLower(1);
@@ -21269,6 +22572,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 
     // ExtensionEnd operations
+	//getLower
 	uML_ExtensionEnd_getLower__->setName("getLower");
 	uML_ExtensionEnd_getLower__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
 	
@@ -21281,6 +22585,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//lowerBound
 	uML_ExtensionEnd_lowerBound__->setName("lowerBound");
 	uML_ExtensionEnd_lowerBound__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
 	
@@ -21293,6 +22598,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//setLower
 	uML_ExtensionEnd_setLower_Integer_Integer->setName("setLower");
 	
 	// parameter newLower
@@ -21304,7 +22610,6 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
-
     //-------------------------------------------
 	//	class ExtensionPoint
 	uML_ExtensionPoint->setName("ExtensionPoint");
@@ -21314,6 +22619,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_RedefinableElement());
 	
     // ExtensionPoint attributes
+	//useCase
 	uML_ExtensionPoint_useCase->setName("useCase");
 	uML_ExtensionPoint_useCase->setType(get_UML_UseCase());
 	uML_ExtensionPoint_useCase->setLower(1);
@@ -21335,6 +22641,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_RedefinableElement());
 	
     // Feature attributes
+	//featuringClassifier
 	uML_Feature_featuringClassifier->setName("featuringClassifier");
 	uML_Feature_featuringClassifier->setType(get_UML_Classifier());
 	uML_Feature_featuringClassifier->setLower(0);
@@ -21345,6 +22652,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Feature_featuringClassifier->setAssociation(get_UML_A_feature_featuringClassifier());
 	
 	
+	//isStatic
 	uML_Feature_isStatic->setName("isStatic");
 	uML_Feature_isStatic->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_Feature_isStatic->setLower(1);
@@ -21402,6 +22710,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_OpaqueBehavior());
 	
     // FunctionBehavior operations
+	//hasAllDataTypeAttributes
 	uML_FunctionBehavior_hasAllDataTypeAttributes_DataType_DataType->setName("hasAllDataTypeAttributes");
 	uML_FunctionBehavior_hasAllDataTypeAttributes_DataType_DataType->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -21426,7 +22735,6 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
-
     //-------------------------------------------
 	//	class Gate
 	uML_Gate->setName("Gate");
@@ -21436,6 +22744,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_MessageEnd());
 	
     // Gate operations
+	//getName
 	uML_Gate_getName__->setName("getName");
 	uML_Gate_getName__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
 	
@@ -21448,6 +22757,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//getOperand
 	uML_Gate_getOperand__->setName("getOperand");
 	uML_Gate_getOperand__->setType(get_UML_InteractionOperand());
 	
@@ -21460,6 +22770,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//isActual
 	uML_Gate_isActual__->setName("isActual");
 	uML_Gate_isActual__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -21472,6 +22783,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//isDistinguishableFrom
 	uML_Gate_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace->setName("isDistinguishableFrom");
 	uML_Gate_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -21508,6 +22820,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//isFormal
 	uML_Gate_isFormal__->setName("isFormal");
 	uML_Gate_isFormal__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -21520,6 +22833,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//isInsideCF
 	uML_Gate_isInsideCF__->setName("isInsideCF");
 	uML_Gate_isInsideCF__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -21532,6 +22846,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//isOutsideCF
 	uML_Gate_isOutsideCF__->setName("isOutsideCF");
 	uML_Gate_isOutsideCF__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -21544,6 +22859,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//matches
 	uML_Gate_matches_Gate_Gate->setName("matches");
 	uML_Gate_matches_Gate_Gate->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -21568,7 +22884,6 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
-
     //-------------------------------------------
 	//	class GeneralOrdering
 	uML_GeneralOrdering->setName("GeneralOrdering");
@@ -21578,6 +22893,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_NamedElement());
 	
     // GeneralOrdering attributes
+	//after
 	uML_GeneralOrdering_after->setName("after");
 	uML_GeneralOrdering_after->setType(get_UML_OccurrenceSpecification());
 	uML_GeneralOrdering_after->setLower(1);
@@ -21588,6 +22904,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_GeneralOrdering_after->setAssociation(get_UML_A_toBefore_after());
 	
 	
+	//before
 	uML_GeneralOrdering_before->setName("before");
 	uML_GeneralOrdering_before->setType(get_UML_OccurrenceSpecification());
 	uML_GeneralOrdering_before->setLower(1);
@@ -21609,6 +22926,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_DirectedRelationship());
 	
     // Generalization attributes
+	//general
 	uML_Generalization_general->setName("general");
 	uML_Generalization_general->setType(get_UML_Classifier());
 	uML_Generalization_general->setLower(1);
@@ -21619,6 +22937,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Generalization_general->setAssociation(get_UML_A_general_generalization());
 	
 	
+	//generalizationSet
 	uML_Generalization_generalizationSet->setName("generalizationSet");
 	uML_Generalization_generalizationSet->setType(get_UML_GeneralizationSet());
 	uML_Generalization_generalizationSet->setLower(0);
@@ -21629,6 +22948,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Generalization_generalizationSet->setAssociation(get_UML_A_generalizationSet_generalization());
 	
 	
+	//isSubstitutable
 	uML_Generalization_isSubstitutable->setName("isSubstitutable");
 	uML_Generalization_isSubstitutable->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_Generalization_isSubstitutable->setLower(0);
@@ -21639,6 +22959,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Generalization_isSubstitutable->setDefaultValue(uML_Generalization_isSubstitutable_defaultValue_LiteralBoolean_UML_Generalization_isSubstitutable);
 	
+	//specific
 	uML_Generalization_specific->setName("specific");
 	uML_Generalization_specific->setType(get_UML_Classifier());
 	uML_Generalization_specific->setLower(1);
@@ -21660,6 +22981,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_PackageableElement());
 	
     // GeneralizationSet attributes
+	//generalization
 	uML_GeneralizationSet_generalization->setName("generalization");
 	uML_GeneralizationSet_generalization->setType(get_UML_Generalization());
 	uML_GeneralizationSet_generalization->setLower(0);
@@ -21670,6 +22992,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_GeneralizationSet_generalization->setAssociation(get_UML_A_generalizationSet_generalization());
 	
 	
+	//isCovering
 	uML_GeneralizationSet_isCovering->setName("isCovering");
 	uML_GeneralizationSet_isCovering->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_GeneralizationSet_isCovering->setLower(1);
@@ -21680,6 +23003,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_GeneralizationSet_isCovering->setDefaultValue(uML_GeneralizationSet_isCovering_defaultValue_LiteralBoolean_UML_GeneralizationSet_isCovering);
 	
+	//isDisjoint
 	uML_GeneralizationSet_isDisjoint->setName("isDisjoint");
 	uML_GeneralizationSet_isDisjoint->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_GeneralizationSet_isDisjoint->setLower(1);
@@ -21690,6 +23014,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_GeneralizationSet_isDisjoint->setDefaultValue(uML_GeneralizationSet_isDisjoint_defaultValue_LiteralBoolean_UML_GeneralizationSet_isDisjoint);
 	
+	//powertype
 	uML_GeneralizationSet_powertype->setName("powertype");
 	uML_GeneralizationSet_powertype->setType(get_UML_Classifier());
 	uML_GeneralizationSet_powertype->setLower(0);
@@ -21711,6 +23036,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_Element());
 	
     // Image attributes
+	//content
 	uML_Image_content->setName("content");
 	uML_Image_content->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
 	uML_Image_content->setLower(0);
@@ -21721,6 +23047,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 	
+	//format
 	uML_Image_format->setName("format");
 	uML_Image_format->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
 	uML_Image_format->setLower(0);
@@ -21731,6 +23058,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 	
+	//location
 	uML_Image_location->setName("location");
 	uML_Image_location->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
 	uML_Image_location->setLower(0);
@@ -21755,6 +23083,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_NamedElement());
 	
     // Include attributes
+	//addition
 	uML_Include_addition->setName("addition");
 	uML_Include_addition->setType(get_UML_UseCase());
 	uML_Include_addition->setLower(1);
@@ -21765,6 +23094,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Include_addition->setAssociation(get_UML_A_addition_include());
 	
 	
+	//includingCase
 	uML_Include_includingCase->setName("includingCase");
 	uML_Include_includingCase->setType(get_UML_UseCase());
 	uML_Include_includingCase->setLower(1);
@@ -21789,6 +23119,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_PackageableElement());
 	
     // InformationFlow attributes
+	//conveyed
 	uML_InformationFlow_conveyed->setName("conveyed");
 	uML_InformationFlow_conveyed->setType(get_UML_Classifier());
 	uML_InformationFlow_conveyed->setLower(1);
@@ -21799,6 +23130,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_InformationFlow_conveyed->setAssociation(get_UML_A_conveyed_conveyingFlow());
 	
 	
+	//informationSource
 	uML_InformationFlow_informationSource->setName("informationSource");
 	uML_InformationFlow_informationSource->setType(get_UML_NamedElement());
 	uML_InformationFlow_informationSource->setLower(1);
@@ -21809,6 +23141,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_InformationFlow_informationSource->setAssociation(get_UML_A_informationSource_informationFlow());
 	
 	
+	//informationTarget
 	uML_InformationFlow_informationTarget->setName("informationTarget");
 	uML_InformationFlow_informationTarget->setType(get_UML_NamedElement());
 	uML_InformationFlow_informationTarget->setLower(1);
@@ -21819,6 +23152,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_InformationFlow_informationTarget->setAssociation(get_UML_A_informationTarget_informationFlow());
 	
 	
+	//realization
 	uML_InformationFlow_realization->setName("realization");
 	uML_InformationFlow_realization->setType(get_UML_Relationship());
 	uML_InformationFlow_realization->setLower(0);
@@ -21829,6 +23163,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_InformationFlow_realization->setAssociation(get_UML_A_realization_abstraction_flow());
 	
 	
+	//realizingActivityEdge
 	uML_InformationFlow_realizingActivityEdge->setName("realizingActivityEdge");
 	uML_InformationFlow_realizingActivityEdge->setType(get_UML_ActivityEdge());
 	uML_InformationFlow_realizingActivityEdge->setLower(0);
@@ -21839,6 +23174,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_InformationFlow_realizingActivityEdge->setAssociation(get_UML_A_realizingActivityEdge_informationFlow());
 	
 	
+	//realizingConnector
 	uML_InformationFlow_realizingConnector->setName("realizingConnector");
 	uML_InformationFlow_realizingConnector->setType(get_UML_Connector());
 	uML_InformationFlow_realizingConnector->setLower(0);
@@ -21849,6 +23185,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_InformationFlow_realizingConnector->setAssociation(get_UML_A_realizingConnector_informationFlow());
 	
 	
+	//realizingMessage
 	uML_InformationFlow_realizingMessage->setName("realizingMessage");
 	uML_InformationFlow_realizingMessage->setType(get_UML_Message());
 	uML_InformationFlow_realizingMessage->setLower(0);
@@ -21870,6 +23207,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_Classifier());
 	
     // InformationItem attributes
+	//represented
 	uML_InformationItem_represented->setName("represented");
 	uML_InformationItem_represented->setType(get_UML_Classifier());
 	uML_InformationItem_represented->setLower(0);
@@ -21915,6 +23253,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_PackageableElement());
 	
     // InstanceSpecification attributes
+	//classifier
 	uML_InstanceSpecification_classifier->setName("classifier");
 	uML_InstanceSpecification_classifier->setType(get_UML_Classifier());
 	uML_InstanceSpecification_classifier->setLower(0);
@@ -21925,6 +23264,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_InstanceSpecification_classifier->setAssociation(get_UML_A_classifier_instanceSpecification());
 	
 	
+	//slot
 	uML_InstanceSpecification_slot->setName("slot");
 	uML_InstanceSpecification_slot->setType(get_UML_Slot());
 	uML_InstanceSpecification_slot->setLower(0);
@@ -21935,6 +23275,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_InstanceSpecification_slot->setAssociation(get_UML_A_slot_owningInstance());
 	
 	
+	//specification
 	uML_InstanceSpecification_specification->setName("specification");
 	uML_InstanceSpecification_specification->setType(get_UML_ValueSpecification());
 	uML_InstanceSpecification_specification->setLower(0);
@@ -21956,6 +23297,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_ValueSpecification());
 	
     // InstanceValue attributes
+	//instance
 	uML_InstanceValue_instance->setName("instance");
 	uML_InstanceValue_instance->setType(get_UML_InstanceSpecification());
 	uML_InstanceValue_instance->setLower(1);
@@ -21968,6 +23310,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 
     // InstanceValue operations
+	//stringValue
 	uML_InstanceValue_stringValue__->setName("stringValue");
 	uML_InstanceValue_stringValue__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
 	
@@ -21979,7 +23322,6 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_InstanceValue_stringValue__return->setDirection(uml::ParameterDirectionKind::RETURN);
 	
 	
-
 
     //-------------------------------------------
 	//	class Interaction
@@ -21993,6 +23335,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_InteractionFragment());
 	
     // Interaction attributes
+	//action
 	uML_Interaction_action->setName("action");
 	uML_Interaction_action->setType(get_UML_Action());
 	uML_Interaction_action->setLower(0);
@@ -22003,6 +23346,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Interaction_action->setAssociation(get_UML_A_action_interaction());
 	
 	
+	//formalGate
 	uML_Interaction_formalGate->setName("formalGate");
 	uML_Interaction_formalGate->setType(get_UML_Gate());
 	uML_Interaction_formalGate->setLower(0);
@@ -22013,6 +23357,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Interaction_formalGate->setAssociation(get_UML_A_formalGate_interaction());
 	
 	
+	//fragment
 	uML_Interaction_fragment->setName("fragment");
 	uML_Interaction_fragment->setType(get_UML_InteractionFragment());
 	uML_Interaction_fragment->setLower(0);
@@ -22023,6 +23368,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Interaction_fragment->setAssociation(get_UML_A_fragment_enclosingInteraction());
 	
 	
+	//lifeline
 	uML_Interaction_lifeline->setName("lifeline");
 	uML_Interaction_lifeline->setType(get_UML_Lifeline());
 	uML_Interaction_lifeline->setLower(0);
@@ -22033,6 +23379,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Interaction_lifeline->setAssociation(get_UML_A_lifeline_interaction());
 	
 	
+	//message
 	uML_Interaction_message->setName("message");
 	uML_Interaction_message->setType(get_UML_Message());
 	uML_Interaction_message->setLower(0);
@@ -22054,6 +23401,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_Constraint());
 	
     // InteractionConstraint attributes
+	//maxint
 	uML_InteractionConstraint_maxint->setName("maxint");
 	uML_InteractionConstraint_maxint->setType(get_UML_ValueSpecification());
 	uML_InteractionConstraint_maxint->setLower(0);
@@ -22064,6 +23412,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_InteractionConstraint_maxint->setAssociation(get_UML_A_maxint_interactionConstraint());
 	
 	
+	//minint
 	uML_InteractionConstraint_minint->setName("minint");
 	uML_InteractionConstraint_minint->setType(get_UML_ValueSpecification());
 	uML_InteractionConstraint_minint->setLower(0);
@@ -22085,6 +23434,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_NamedElement());
 	
     // InteractionFragment attributes
+	//covered
 	uML_InteractionFragment_covered->setName("covered");
 	uML_InteractionFragment_covered->setType(get_UML_Lifeline());
 	uML_InteractionFragment_covered->setLower(0);
@@ -22095,6 +23445,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_InteractionFragment_covered->setAssociation(get_UML_A_covered_coveredBy());
 	
 	
+	//enclosingInteraction
 	uML_InteractionFragment_enclosingInteraction->setName("enclosingInteraction");
 	uML_InteractionFragment_enclosingInteraction->setType(get_UML_Interaction());
 	uML_InteractionFragment_enclosingInteraction->setLower(0);
@@ -22105,6 +23456,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_InteractionFragment_enclosingInteraction->setAssociation(get_UML_A_fragment_enclosingInteraction());
 	
 	
+	//enclosingOperand
 	uML_InteractionFragment_enclosingOperand->setName("enclosingOperand");
 	uML_InteractionFragment_enclosingOperand->setType(get_UML_InteractionOperand());
 	uML_InteractionFragment_enclosingOperand->setLower(0);
@@ -22115,6 +23467,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_InteractionFragment_enclosingOperand->setAssociation(get_UML_A_fragment_enclosingOperand());
 	
 	
+	//generalOrdering
 	uML_InteractionFragment_generalOrdering->setName("generalOrdering");
 	uML_InteractionFragment_generalOrdering->setType(get_UML_GeneralOrdering());
 	uML_InteractionFragment_generalOrdering->setLower(0);
@@ -22139,6 +23492,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_Namespace());
 	
     // InteractionOperand attributes
+	//fragment
 	uML_InteractionOperand_fragment->setName("fragment");
 	uML_InteractionOperand_fragment->setType(get_UML_InteractionFragment());
 	uML_InteractionOperand_fragment->setLower(0);
@@ -22149,6 +23503,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_InteractionOperand_fragment->setAssociation(get_UML_A_fragment_enclosingOperand());
 	
 	
+	//guard
 	uML_InteractionOperand_guard->setName("guard");
 	uML_InteractionOperand_guard->setType(get_UML_InteractionConstraint());
 	uML_InteractionOperand_guard->setLower(0);
@@ -22170,6 +23525,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_InteractionFragment());
 	
     // InteractionUse attributes
+	//actualGate
 	uML_InteractionUse_actualGate->setName("actualGate");
 	uML_InteractionUse_actualGate->setType(get_UML_Gate());
 	uML_InteractionUse_actualGate->setLower(0);
@@ -22180,6 +23536,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_InteractionUse_actualGate->setAssociation(get_UML_A_actualGate_interactionUse());
 	
 	
+	//argument
 	uML_InteractionUse_argument->setName("argument");
 	uML_InteractionUse_argument->setType(get_UML_ValueSpecification());
 	uML_InteractionUse_argument->setLower(0);
@@ -22190,6 +23547,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_InteractionUse_argument->setAssociation(get_UML_A_argument_interactionUse());
 	
 	
+	//refersTo
 	uML_InteractionUse_refersTo->setName("refersTo");
 	uML_InteractionUse_refersTo->setType(get_UML_Interaction());
 	uML_InteractionUse_refersTo->setLower(1);
@@ -22200,6 +23558,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_InteractionUse_refersTo->setAssociation(get_UML_A_refersTo_interactionUse());
 	
 	
+	//returnValue
 	uML_InteractionUse_returnValue->setName("returnValue");
 	uML_InteractionUse_returnValue->setType(get_UML_ValueSpecification());
 	uML_InteractionUse_returnValue->setLower(0);
@@ -22210,6 +23569,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_InteractionUse_returnValue->setAssociation(get_UML_A_returnValue_interactionUse());
 	
 	
+	//returnValueRecipient
 	uML_InteractionUse_returnValueRecipient->setName("returnValueRecipient");
 	uML_InteractionUse_returnValueRecipient->setType(get_UML_Property());
 	uML_InteractionUse_returnValueRecipient->setLower(0);
@@ -22231,6 +23591,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_Classifier());
 	
     // Interface attributes
+	//nestedClassifier
 	uML_Interface_nestedClassifier->setName("nestedClassifier");
 	uML_Interface_nestedClassifier->setType(get_UML_Classifier());
 	uML_Interface_nestedClassifier->setLower(0);
@@ -22241,6 +23602,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Interface_nestedClassifier->setAssociation(get_UML_A_nestedClassifier_interface());
 	
 	
+	//ownedAttribute
 	uML_Interface_ownedAttribute->setName("ownedAttribute");
 	uML_Interface_ownedAttribute->setType(get_UML_Property());
 	uML_Interface_ownedAttribute->setLower(0);
@@ -22251,6 +23613,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Interface_ownedAttribute->setAssociation(get_UML_A_ownedAttribute_interface());
 	
 	
+	//ownedOperation
 	uML_Interface_ownedOperation->setName("ownedOperation");
 	uML_Interface_ownedOperation->setType(get_UML_Operation());
 	uML_Interface_ownedOperation->setLower(0);
@@ -22261,6 +23624,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Interface_ownedOperation->setAssociation(get_UML_A_ownedOperation_interface());
 	
 	
+	//ownedReception
 	uML_Interface_ownedReception->setName("ownedReception");
 	uML_Interface_ownedReception->setType(get_UML_Reception());
 	uML_Interface_ownedReception->setLower(0);
@@ -22271,6 +23635,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Interface_ownedReception->setAssociation(get_UML_A_ownedReception_interface());
 	
 	
+	//protocol
 	uML_Interface_protocol->setName("protocol");
 	uML_Interface_protocol->setType(get_UML_ProtocolStateMachine());
 	uML_Interface_protocol->setLower(0);
@@ -22281,6 +23646,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Interface_protocol->setAssociation(get_UML_A_protocol_interface());
 	
 	
+	//redefinedInterface
 	uML_Interface_redefinedInterface->setName("redefinedInterface");
 	uML_Interface_redefinedInterface->setType(get_UML_Interface());
 	uML_Interface_redefinedInterface->setLower(0);
@@ -22293,6 +23659,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 
     // Interface operations
+	//createOwnedAttribute
 	uML_Interface_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural->setName("createOwnedAttribute");
 	uML_Interface_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural->setType(get_UML_Property());
 	
@@ -22353,6 +23720,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//createOwnedOperation
 	uML_Interface_createOwnedOperation_String_String_Type_Type_String_String_Type_Type->setName("createOwnedOperation");
 	uML_Interface_createOwnedOperation_String_String_Type_Type_String_String_Type_Type->setType(get_UML_Operation());
 	
@@ -22413,7 +23781,6 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
-
     //-------------------------------------------
 	//	class InterfaceRealization
 	uML_InterfaceRealization->setName("InterfaceRealization");
@@ -22423,6 +23790,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_Realization());
 	
     // InterfaceRealization attributes
+	//contract
 	uML_InterfaceRealization_contract->setName("contract");
 	uML_InterfaceRealization_contract->setType(get_UML_Interface());
 	uML_InterfaceRealization_contract->setLower(1);
@@ -22433,6 +23801,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_InterfaceRealization_contract->setAssociation(get_UML_A_contract_interfaceRealization());
 	
 	
+	//implementingClassifier
 	uML_InterfaceRealization_implementingClassifier->setName("implementingClassifier");
 	uML_InterfaceRealization_implementingClassifier->setType(get_UML_BehavioredClassifier());
 	uML_InterfaceRealization_implementingClassifier->setLower(1);
@@ -22454,6 +23823,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_ActivityGroup());
 	
     // InterruptibleActivityRegion attributes
+	//interruptingEdge
 	uML_InterruptibleActivityRegion_interruptingEdge->setName("interruptingEdge");
 	uML_InterruptibleActivityRegion_interruptingEdge->setType(get_UML_ActivityEdge());
 	uML_InterruptibleActivityRegion_interruptingEdge->setLower(0);
@@ -22464,6 +23834,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_InterruptibleActivityRegion_interruptingEdge->setAssociation(get_UML_A_interruptingEdge_interrupts());
 	
 	
+	//node
 	uML_InterruptibleActivityRegion_node->setName("node");
 	uML_InterruptibleActivityRegion_node->setType(get_UML_ActivityNode());
 	uML_InterruptibleActivityRegion_node->setLower(0);
@@ -22485,6 +23856,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_ValueSpecification());
 	
     // Interval attributes
+	//max
 	uML_Interval_max->setName("max");
 	uML_Interval_max->setType(get_UML_ValueSpecification());
 	uML_Interval_max->setLower(1);
@@ -22495,6 +23867,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Interval_max->setAssociation(get_UML_A_max_interval());
 	
 	
+	//min
 	uML_Interval_min->setName("min");
 	uML_Interval_min->setType(get_UML_ValueSpecification());
 	uML_Interval_min->setLower(1);
@@ -22516,6 +23889,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_Constraint());
 	
     // IntervalConstraint attributes
+	//specification
 	uML_IntervalConstraint_specification->setName("specification");
 	uML_IntervalConstraint_specification->setType(get_UML_Interval());
 	uML_IntervalConstraint_specification->setLower(1);
@@ -22537,6 +23911,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_Action());
 	
     // InvocationAction attributes
+	//argument
 	uML_InvocationAction_argument->setName("argument");
 	uML_InvocationAction_argument->setType(get_UML_InputPin());
 	uML_InvocationAction_argument->setLower(0);
@@ -22547,6 +23922,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_InvocationAction_argument->setAssociation(get_UML_A_argument_invocationAction());
 	
 	
+	//onPort
 	uML_InvocationAction_onPort->setName("onPort");
 	uML_InvocationAction_onPort->setType(get_UML_Port());
 	uML_InvocationAction_onPort->setLower(0);
@@ -22568,6 +23944,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_ControlNode());
 	
     // JoinNode attributes
+	//isCombineDuplicate
 	uML_JoinNode_isCombineDuplicate->setName("isCombineDuplicate");
 	uML_JoinNode_isCombineDuplicate->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_JoinNode_isCombineDuplicate->setLower(1);
@@ -22578,6 +23955,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_JoinNode_isCombineDuplicate->setDefaultValue(uML_JoinNode_isCombineDuplicate_defaultValue_LiteralBoolean_UML_JoinNode_isCombineDuplicate);
 	
+	//joinSpec
 	uML_JoinNode_joinSpec->setName("joinSpec");
 	uML_JoinNode_joinSpec->setType(get_UML_ValueSpecification());
 	uML_JoinNode_joinSpec->setLower(0);
@@ -22599,6 +23977,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_NamedElement());
 	
     // Lifeline attributes
+	//coveredBy
 	uML_Lifeline_coveredBy->setName("coveredBy");
 	uML_Lifeline_coveredBy->setType(get_UML_InteractionFragment());
 	uML_Lifeline_coveredBy->setLower(0);
@@ -22609,6 +23988,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Lifeline_coveredBy->setAssociation(get_UML_A_covered_coveredBy());
 	
 	
+	//decomposedAs
 	uML_Lifeline_decomposedAs->setName("decomposedAs");
 	uML_Lifeline_decomposedAs->setType(get_UML_PartDecomposition());
 	uML_Lifeline_decomposedAs->setLower(0);
@@ -22619,6 +23999,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Lifeline_decomposedAs->setAssociation(get_UML_A_decomposedAs_lifeline());
 	
 	
+	//interaction
 	uML_Lifeline_interaction->setName("interaction");
 	uML_Lifeline_interaction->setType(get_UML_Interaction());
 	uML_Lifeline_interaction->setLower(1);
@@ -22629,6 +24010,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Lifeline_interaction->setAssociation(get_UML_A_lifeline_interaction());
 	
 	
+	//represents
 	uML_Lifeline_represents->setName("represents");
 	uML_Lifeline_represents->setType(get_UML_ConnectableElement());
 	uML_Lifeline_represents->setLower(0);
@@ -22639,6 +24021,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Lifeline_represents->setAssociation(get_UML_A_represents_lifeline());
 	
 	
+	//selector
 	uML_Lifeline_selector->setName("selector");
 	uML_Lifeline_selector->setType(get_UML_ValueSpecification());
 	uML_Lifeline_selector->setLower(0);
@@ -22660,6 +24043,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_Action());
 	
     // LinkAction attributes
+	//endData
 	uML_LinkAction_endData->setName("endData");
 	uML_LinkAction_endData->setType(get_UML_LinkEndData());
 	uML_LinkAction_endData->setLower(2);
@@ -22670,6 +24054,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_LinkAction_endData->setAssociation(get_UML_A_endData_linkAction());
 	
 	
+	//inputValue
 	uML_LinkAction_inputValue->setName("inputValue");
 	uML_LinkAction_inputValue->setType(get_UML_InputPin());
 	uML_LinkAction_inputValue->setLower(1);
@@ -22682,6 +24067,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 
     // LinkAction operations
+	//association
 	uML_LinkAction_association__->setName("association");
 	uML_LinkAction_association__->setType(get_UML_Association());
 	
@@ -22694,7 +24080,6 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
-
     //-------------------------------------------
 	//	class LinkEndCreationData
 	uML_LinkEndCreationData->setName("LinkEndCreationData");
@@ -22704,6 +24089,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_LinkEndData());
 	
     // LinkEndCreationData attributes
+	//insertAt
 	uML_LinkEndCreationData_insertAt->setName("insertAt");
 	uML_LinkEndCreationData_insertAt->setType(get_UML_InputPin());
 	uML_LinkEndCreationData_insertAt->setLower(0);
@@ -22714,6 +24100,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_LinkEndCreationData_insertAt->setAssociation(get_UML_A_insertAt_linkEndCreationData());
 	
 	
+	//isReplaceAll
 	uML_LinkEndCreationData_isReplaceAll->setName("isReplaceAll");
 	uML_LinkEndCreationData_isReplaceAll->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_LinkEndCreationData_isReplaceAll->setLower(1);
@@ -22726,6 +24113,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 
     // LinkEndCreationData operations
+	//allPins
 	uML_LinkEndCreationData_allPins__->setName("allPins");
 	uML_LinkEndCreationData_allPins__->setType(get_UML_InputPin());
 	
@@ -22738,7 +24126,6 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
-
     //-------------------------------------------
 	//	class LinkEndData
 	uML_LinkEndData->setName("LinkEndData");
@@ -22748,6 +24135,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_Element());
 	
     // LinkEndData attributes
+	//end
 	uML_LinkEndData_end->setName("end");
 	uML_LinkEndData_end->setType(get_UML_Property());
 	uML_LinkEndData_end->setLower(1);
@@ -22758,6 +24146,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_LinkEndData_end->setAssociation(get_UML_A_end_linkEndData());
 	
 	
+	//qualifier
 	uML_LinkEndData_qualifier->setName("qualifier");
 	uML_LinkEndData_qualifier->setType(get_UML_QualifierValue());
 	uML_LinkEndData_qualifier->setLower(0);
@@ -22768,6 +24157,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_LinkEndData_qualifier->setAssociation(get_UML_A_qualifier_linkEndData());
 	
 	
+	//value
 	uML_LinkEndData_value->setName("value");
 	uML_LinkEndData_value->setType(get_UML_InputPin());
 	uML_LinkEndData_value->setLower(0);
@@ -22780,6 +24170,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 
     // LinkEndData operations
+	//allPins
 	uML_LinkEndData_allPins__->setName("allPins");
 	uML_LinkEndData_allPins__->setType(get_UML_InputPin());
 	
@@ -22792,7 +24183,6 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
-
     //-------------------------------------------
 	//	class LinkEndDestructionData
 	uML_LinkEndDestructionData->setName("LinkEndDestructionData");
@@ -22802,6 +24192,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_LinkEndData());
 	
     // LinkEndDestructionData attributes
+	//destroyAt
 	uML_LinkEndDestructionData_destroyAt->setName("destroyAt");
 	uML_LinkEndDestructionData_destroyAt->setType(get_UML_InputPin());
 	uML_LinkEndDestructionData_destroyAt->setLower(0);
@@ -22812,6 +24203,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_LinkEndDestructionData_destroyAt->setAssociation(get_UML_A_destroyAt_linkEndDestructionData());
 	
 	
+	//isDestroyDuplicates
 	uML_LinkEndDestructionData_isDestroyDuplicates->setName("isDestroyDuplicates");
 	uML_LinkEndDestructionData_isDestroyDuplicates->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_LinkEndDestructionData_isDestroyDuplicates->setLower(1);
@@ -22824,6 +24216,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 
     // LinkEndDestructionData operations
+	//allPins
 	uML_LinkEndDestructionData_allPins__->setName("allPins");
 	uML_LinkEndDestructionData_allPins__->setType(get_UML_InputPin());
 	
@@ -22836,7 +24229,6 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
-
     //-------------------------------------------
 	//	class LiteralBoolean
 	uML_LiteralBoolean->setName("LiteralBoolean");
@@ -22846,6 +24238,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_LiteralSpecification());
 	
     // LiteralBoolean attributes
+	//value
 	uML_LiteralBoolean_value->setName("value");
 	uML_LiteralBoolean_value->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_LiteralBoolean_value->setLower(1);
@@ -22858,6 +24251,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 
     // LiteralBoolean operations
+	//booleanValue
 	uML_LiteralBoolean_booleanValue__->setName("booleanValue");
 	uML_LiteralBoolean_booleanValue__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -22870,6 +24264,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//isComputable
 	uML_LiteralBoolean_isComputable__->setName("isComputable");
 	uML_LiteralBoolean_isComputable__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -22882,6 +24277,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//stringValue
 	uML_LiteralBoolean_stringValue__->setName("stringValue");
 	uML_LiteralBoolean_stringValue__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
 	
@@ -22894,7 +24290,6 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
-
     //-------------------------------------------
 	//	class LiteralInteger
 	uML_LiteralInteger->setName("LiteralInteger");
@@ -22904,6 +24299,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_LiteralSpecification());
 	
     // LiteralInteger attributes
+	//value
 	uML_LiteralInteger_value->setName("value");
 	uML_LiteralInteger_value->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
 	uML_LiteralInteger_value->setLower(1);
@@ -22916,6 +24312,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 
     // LiteralInteger operations
+	//integerValue
 	uML_LiteralInteger_integerValue__->setName("integerValue");
 	uML_LiteralInteger_integerValue__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
 	
@@ -22928,6 +24325,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//isComputable
 	uML_LiteralInteger_isComputable__->setName("isComputable");
 	uML_LiteralInteger_isComputable__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -22940,6 +24338,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//stringValue
 	uML_LiteralInteger_stringValue__->setName("stringValue");
 	uML_LiteralInteger_stringValue__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
 	
@@ -22952,7 +24351,6 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
-
     //-------------------------------------------
 	//	class LiteralNull
 	uML_LiteralNull->setName("LiteralNull");
@@ -22962,6 +24360,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_LiteralSpecification());
 	
     // LiteralNull operations
+	//isComputable
 	uML_LiteralNull_isComputable__->setName("isComputable");
 	uML_LiteralNull_isComputable__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -22974,6 +24373,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//isNull
 	uML_LiteralNull_isNull__->setName("isNull");
 	uML_LiteralNull_isNull__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -22986,7 +24386,6 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
-
     //-------------------------------------------
 	//	class LiteralReal
 	uML_LiteralReal->setName("LiteralReal");
@@ -22996,6 +24395,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_LiteralSpecification());
 	
     // LiteralReal attributes
+	//value
 	uML_LiteralReal_value->setName("value");
 	uML_LiteralReal_value->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
 	uML_LiteralReal_value->setLower(1);
@@ -23008,6 +24408,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 
     // LiteralReal operations
+	//isComputable
 	uML_LiteralReal_isComputable__->setName("isComputable");
 	uML_LiteralReal_isComputable__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -23020,6 +24421,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//realValue
 	uML_LiteralReal_realValue__->setName("realValue");
 	uML_LiteralReal_realValue__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
 	
@@ -23032,6 +24434,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//stringValue
 	uML_LiteralReal_stringValue__->setName("stringValue");
 	uML_LiteralReal_stringValue__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
 	
@@ -23043,7 +24446,6 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_LiteralReal_stringValue__return->setDirection(uml::ParameterDirectionKind::RETURN);
 	
 	
-
 
     //-------------------------------------------
 	//	class LiteralSpecification
@@ -23063,6 +24465,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_LiteralSpecification());
 	
     // LiteralString attributes
+	//value
 	uML_LiteralString_value->setName("value");
 	uML_LiteralString_value->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
 	uML_LiteralString_value->setLower(0);
@@ -23075,6 +24478,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 
     // LiteralString operations
+	//integerValue
 	uML_LiteralString_integerValue__->setName("integerValue");
 	uML_LiteralString_integerValue__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
 	
@@ -23087,6 +24491,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//isComputable
 	uML_LiteralString_isComputable__->setName("isComputable");
 	uML_LiteralString_isComputable__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -23099,6 +24504,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//stringValue
 	uML_LiteralString_stringValue__->setName("stringValue");
 	uML_LiteralString_stringValue__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
 	
@@ -23111,6 +24517,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//unlimitedValue
 	uML_LiteralString_unlimitedValue__->setName("unlimitedValue");
 	uML_LiteralString_unlimitedValue__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_UnlimitedNatural());
 	
@@ -23123,7 +24530,6 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
-
     //-------------------------------------------
 	//	class LiteralUnlimitedNatural
 	uML_LiteralUnlimitedNatural->setName("LiteralUnlimitedNatural");
@@ -23133,6 +24539,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_LiteralSpecification());
 	
     // LiteralUnlimitedNatural attributes
+	//value
 	uML_LiteralUnlimitedNatural_value->setName("value");
 	uML_LiteralUnlimitedNatural_value->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_UnlimitedNatural());
 	uML_LiteralUnlimitedNatural_value->setLower(1);
@@ -23145,6 +24552,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 
     // LiteralUnlimitedNatural operations
+	//isComputable
 	uML_LiteralUnlimitedNatural_isComputable__->setName("isComputable");
 	uML_LiteralUnlimitedNatural_isComputable__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -23157,6 +24565,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//stringValue
 	uML_LiteralUnlimitedNatural_stringValue__->setName("stringValue");
 	uML_LiteralUnlimitedNatural_stringValue__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
 	
@@ -23169,6 +24578,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//unlimitedValue
 	uML_LiteralUnlimitedNatural_unlimitedValue__->setName("unlimitedValue");
 	uML_LiteralUnlimitedNatural_unlimitedValue__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_UnlimitedNatural());
 	
@@ -23181,7 +24591,6 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
-
     //-------------------------------------------
 	//	class LoopNode
 	uML_LoopNode->setName("LoopNode");
@@ -23191,6 +24600,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_StructuredActivityNode());
 	
     // LoopNode attributes
+	//bodyOutput
 	uML_LoopNode_bodyOutput->setName("bodyOutput");
 	uML_LoopNode_bodyOutput->setType(get_UML_OutputPin());
 	uML_LoopNode_bodyOutput->setLower(0);
@@ -23201,6 +24611,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_LoopNode_bodyOutput->setAssociation(get_UML_A_bodyOutput_loopNode());
 	
 	
+	//bodyPart
 	uML_LoopNode_bodyPart->setName("bodyPart");
 	uML_LoopNode_bodyPart->setType(get_UML_ExecutableNode());
 	uML_LoopNode_bodyPart->setLower(0);
@@ -23211,6 +24622,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_LoopNode_bodyPart->setAssociation(get_UML_A_bodyPart_loopNode());
 	
 	
+	//decider
 	uML_LoopNode_decider->setName("decider");
 	uML_LoopNode_decider->setType(get_UML_OutputPin());
 	uML_LoopNode_decider->setLower(1);
@@ -23221,6 +24633,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_LoopNode_decider->setAssociation(get_UML_A_decider_loopNode());
 	
 	
+	//isTestedFirst
 	uML_LoopNode_isTestedFirst->setName("isTestedFirst");
 	uML_LoopNode_isTestedFirst->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_LoopNode_isTestedFirst->setLower(1);
@@ -23231,6 +24644,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_LoopNode_isTestedFirst->setDefaultValue(uML_LoopNode_isTestedFirst_defaultValue_LiteralBoolean_UML_LoopNode_isTestedFirst);
 	
+	//loopVariable
 	uML_LoopNode_loopVariable->setName("loopVariable");
 	uML_LoopNode_loopVariable->setType(get_UML_OutputPin());
 	uML_LoopNode_loopVariable->setLower(0);
@@ -23241,6 +24655,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_LoopNode_loopVariable->setAssociation(get_UML_A_loopVariable_loopNode());
 	
 	
+	//loopVariableInput
 	uML_LoopNode_loopVariableInput->setName("loopVariableInput");
 	uML_LoopNode_loopVariableInput->setType(get_UML_InputPin());
 	uML_LoopNode_loopVariableInput->setLower(0);
@@ -23251,6 +24666,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_LoopNode_loopVariableInput->setAssociation(get_UML_A_loopVariableInput_loopNode());
 	
 	
+	//result
 	uML_LoopNode_result->setName("result");
 	uML_LoopNode_result->setType(get_UML_OutputPin());
 	uML_LoopNode_result->setLower(0);
@@ -23261,6 +24677,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_LoopNode_result->setAssociation(get_UML_A_result_loopNode());
 	
 	
+	//setupPart
 	uML_LoopNode_setupPart->setName("setupPart");
 	uML_LoopNode_setupPart->setType(get_UML_ExecutableNode());
 	uML_LoopNode_setupPart->setLower(0);
@@ -23271,6 +24688,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_LoopNode_setupPart->setAssociation(get_UML_A_setupPart_loopNode());
 	
 	
+	//test
 	uML_LoopNode_test->setName("test");
 	uML_LoopNode_test->setType(get_UML_ExecutableNode());
 	uML_LoopNode_test->setLower(1);
@@ -23283,6 +24701,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 
     // LoopNode operations
+	//allActions
 	uML_LoopNode_allActions__->setName("allActions");
 	uML_LoopNode_allActions__->setType(get_UML_Action());
 	
@@ -23295,6 +24714,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//sourceNodes
 	uML_LoopNode_sourceNodes__->setName("sourceNodes");
 	uML_LoopNode_sourceNodes__->setType(get_UML_ActivityNode());
 	
@@ -23307,7 +24727,6 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
-
     //-------------------------------------------
 	//	class Manifestation
 	uML_Manifestation->setName("Manifestation");
@@ -23317,6 +24736,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_Abstraction());
 	
     // Manifestation attributes
+	//utilizedElement
 	uML_Manifestation_utilizedElement->setName("utilizedElement");
 	uML_Manifestation_utilizedElement->setType(get_UML_PackageableElement());
 	uML_Manifestation_utilizedElement->setLower(1);
@@ -23347,6 +24767,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_NamedElement());
 	
     // Message attributes
+	//argument
 	uML_Message_argument->setName("argument");
 	uML_Message_argument->setType(get_UML_ValueSpecification());
 	uML_Message_argument->setLower(0);
@@ -23357,6 +24778,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Message_argument->setAssociation(get_UML_A_argument_message());
 	
 	
+	//connector
 	uML_Message_connector->setName("connector");
 	uML_Message_connector->setType(get_UML_Connector());
 	uML_Message_connector->setLower(0);
@@ -23367,6 +24789,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Message_connector->setAssociation(get_UML_A_connector_message());
 	
 	
+	//interaction
 	uML_Message_interaction->setName("interaction");
 	uML_Message_interaction->setType(get_UML_Interaction());
 	uML_Message_interaction->setLower(1);
@@ -23377,6 +24800,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Message_interaction->setAssociation(get_UML_A_message_interaction());
 	
 	
+	//messageKind
 	uML_Message_messageKind->setName("messageKind");
 	uML_Message_messageKind->setType(get_UML_MessageKind());
 	uML_Message_messageKind->setLower(1);
@@ -23387,6 +24811,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Message_messageKind->setDefaultValue(uML_Message_messageKind_defaultValue_InstanceValue);
 	
+	//messageSort
 	uML_Message_messageSort->setName("messageSort");
 	uML_Message_messageSort->setType(get_UML_MessageSort());
 	uML_Message_messageSort->setLower(1);
@@ -23397,6 +24822,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Message_messageSort->setDefaultValue(uML_Message_messageSort_defaultValue_InstanceValue);
 	
+	//receiveEvent
 	uML_Message_receiveEvent->setName("receiveEvent");
 	uML_Message_receiveEvent->setType(get_UML_MessageEnd());
 	uML_Message_receiveEvent->setLower(0);
@@ -23407,6 +24833,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Message_receiveEvent->setAssociation(get_UML_A_receiveEvent_endMessage());
 	
 	
+	//sendEvent
 	uML_Message_sendEvent->setName("sendEvent");
 	uML_Message_sendEvent->setType(get_UML_MessageEnd());
 	uML_Message_sendEvent->setLower(0);
@@ -23417,6 +24844,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Message_sendEvent->setAssociation(get_UML_A_sendEvent_endMessage());
 	
 	
+	//signature
 	uML_Message_signature->setName("signature");
 	uML_Message_signature->setType(get_UML_NamedElement());
 	uML_Message_signature->setLower(0);
@@ -23429,6 +24857,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 
     // Message operations
+	//isDistinguishableFrom
 	uML_Message_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace->setName("isDistinguishableFrom");
 	uML_Message_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -23465,6 +24894,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//messageKind
 	uML_Message_messageKind__->setName("messageKind");
 	uML_Message_messageKind__->setType(get_UML_MessageKind());
 	
@@ -23477,7 +24907,6 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
-
     //-------------------------------------------
 	//	class MessageEnd
 	uML_MessageEnd->setName("MessageEnd");
@@ -23487,6 +24916,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_NamedElement());
 	
     // MessageEnd attributes
+	//message
 	uML_MessageEnd_message->setName("message");
 	uML_MessageEnd_message->setType(get_UML_Message());
 	uML_MessageEnd_message->setLower(0);
@@ -23499,6 +24929,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 
     // MessageEnd operations
+	//enclosingFragment
 	uML_MessageEnd_enclosingFragment__->setName("enclosingFragment");
 	uML_MessageEnd_enclosingFragment__->setType(get_UML_InteractionFragment());
 	
@@ -23511,6 +24942,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//isReceive
 	uML_MessageEnd_isReceive__->setName("isReceive");
 	uML_MessageEnd_isReceive__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -23523,6 +24955,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//isSend
 	uML_MessageEnd_isSend__->setName("isSend");
 	uML_MessageEnd_isSend__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -23535,6 +24968,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//oppositeEnd
 	uML_MessageEnd_oppositeEnd__->setName("oppositeEnd");
 	uML_MessageEnd_oppositeEnd__->setType(get_UML_MessageEnd());
 	
@@ -23546,7 +24980,6 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_MessageEnd_oppositeEnd_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
 	
-
 
     //-------------------------------------------
 	//	class MessageEvent
@@ -23578,6 +25011,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_Package());
 	
     // Model attributes
+	//viewpoint
 	uML_Model_viewpoint->setName("viewpoint");
 	uML_Model_viewpoint->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
 	uML_Model_viewpoint->setLower(0);
@@ -23590,6 +25024,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 
     // Model operations
+	//isMetamodel
 	uML_Model_isMetamodel__->setName("isMetamodel");
 	uML_Model_isMetamodel__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -23602,7 +25037,6 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
-
     //-------------------------------------------
 	//	class MultiplicityElement
 	uML_MultiplicityElement->setName("MultiplicityElement");
@@ -23612,6 +25046,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_Element());
 	
     // MultiplicityElement attributes
+	//isOrdered
 	uML_MultiplicityElement_isOrdered->setName("isOrdered");
 	uML_MultiplicityElement_isOrdered->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_MultiplicityElement_isOrdered->setLower(1);
@@ -23622,6 +25057,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_MultiplicityElement_isOrdered->setDefaultValue(uML_MultiplicityElement_isOrdered_defaultValue_LiteralBoolean_UML_MultiplicityElement_isOrdered);
 	
+	//isUnique
 	uML_MultiplicityElement_isUnique->setName("isUnique");
 	uML_MultiplicityElement_isUnique->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_MultiplicityElement_isUnique->setLower(1);
@@ -23632,6 +25068,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_MultiplicityElement_isUnique->setDefaultValue(uML_MultiplicityElement_isUnique_defaultValue_LiteralBoolean_UML_MultiplicityElement_isUnique);
 	
+	//lower
 	uML_MultiplicityElement_lower->setName("lower");
 	uML_MultiplicityElement_lower->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
 	uML_MultiplicityElement_lower->setLower(1);
@@ -23642,6 +25079,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_MultiplicityElement_lower->setDefaultValue(uML_MultiplicityElement_lower_defaultValue_LiteralInteger_UML_MultiplicityElement_lower);
 	
+	//lowerValue
 	uML_MultiplicityElement_lowerValue->setName("lowerValue");
 	uML_MultiplicityElement_lowerValue->setType(get_UML_ValueSpecification());
 	uML_MultiplicityElement_lowerValue->setLower(0);
@@ -23652,6 +25090,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_MultiplicityElement_lowerValue->setAssociation(get_UML_A_lowerValue_owningLower());
 	
 	
+	//upper
 	uML_MultiplicityElement_upper->setName("upper");
 	uML_MultiplicityElement_upper->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_UnlimitedNatural());
 	uML_MultiplicityElement_upper->setLower(1);
@@ -23662,6 +25101,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_MultiplicityElement_upper->setDefaultValue(uML_MultiplicityElement_upper_defaultValue_LiteralUnlimitedNatural_UML_MultiplicityElement_upper);
 	
+	//upperValue
 	uML_MultiplicityElement_upperValue->setName("upperValue");
 	uML_MultiplicityElement_upperValue->setType(get_UML_ValueSpecification());
 	uML_MultiplicityElement_upperValue->setLower(0);
@@ -23674,6 +25114,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 
     // MultiplicityElement operations
+	//compatibleWith
 	uML_MultiplicityElement_compatibleWith_MultiplicityElement_MultiplicityElement->setName("compatibleWith");
 	uML_MultiplicityElement_compatibleWith_MultiplicityElement_MultiplicityElement->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -23698,6 +25139,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//includesMultiplicity
 	uML_MultiplicityElement_includesMultiplicity_MultiplicityElement_MultiplicityElement->setName("includesMultiplicity");
 	uML_MultiplicityElement_includesMultiplicity_MultiplicityElement_MultiplicityElement->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -23722,6 +25164,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//is
 	uML_MultiplicityElement_is_Integer_UnlimitedNatural_Integer_UnlimitedNatural->setName("is");
 	uML_MultiplicityElement_is_Integer_UnlimitedNatural_Integer_UnlimitedNatural->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -23758,6 +25201,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//isMultivalued
 	uML_MultiplicityElement_isMultivalued__->setName("isMultivalued");
 	uML_MultiplicityElement_isMultivalued__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -23770,6 +25214,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//lower
 	uML_MultiplicityElement_lower__->setName("lower");
 	uML_MultiplicityElement_lower__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
 	
@@ -23782,6 +25227,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//lowerBound
 	uML_MultiplicityElement_lowerBound__->setName("lowerBound");
 	uML_MultiplicityElement_lowerBound__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
 	
@@ -23794,6 +25240,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//setLower
 	uML_MultiplicityElement_setLower_Integer_Integer->setName("setLower");
 	
 	// parameter newLower
@@ -23805,6 +25252,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//setUpper
 	uML_MultiplicityElement_setUpper_UnlimitedNatural_UnlimitedNatural->setName("setUpper");
 	
 	// parameter newUpper
@@ -23816,6 +25264,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//upper
 	uML_MultiplicityElement_upper__->setName("upper");
 	uML_MultiplicityElement_upper__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_UnlimitedNatural());
 	
@@ -23828,6 +25277,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//upperBound
 	uML_MultiplicityElement_upperBound__->setName("upperBound");
 	uML_MultiplicityElement_upperBound__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_UnlimitedNatural());
 	
@@ -23840,7 +25290,6 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
-
     //-------------------------------------------
 	//	class NamedElement
 	uML_NamedElement->setName("NamedElement");
@@ -23850,6 +25299,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_Element());
 	
     // NamedElement attributes
+	//clientDependency
 	uML_NamedElement_clientDependency->setName("clientDependency");
 	uML_NamedElement_clientDependency->setType(get_UML_Dependency());
 	uML_NamedElement_clientDependency->setLower(0);
@@ -23860,6 +25310,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_NamedElement_clientDependency->setAssociation(get_UML_A_clientDependency_client());
 	
 	
+	//name
 	uML_NamedElement_name->setName("name");
 	uML_NamedElement_name->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
 	uML_NamedElement_name->setLower(0);
@@ -23870,6 +25321,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 	
+	//nameExpression
 	uML_NamedElement_nameExpression->setName("nameExpression");
 	uML_NamedElement_nameExpression->setType(get_UML_StringExpression());
 	uML_NamedElement_nameExpression->setLower(0);
@@ -23880,6 +25332,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_NamedElement_nameExpression->setAssociation(get_UML_A_nameExpression_namedElement());
 	
 	
+	//namespace
 	uML_NamedElement_namespace->setName("namespace");
 	uML_NamedElement_namespace->setType(get_UML_Namespace());
 	uML_NamedElement_namespace->setLower(0);
@@ -23890,6 +25343,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_NamedElement_namespace->setAssociation(get_UML_A_ownedMember_namespace());
 	
 	
+	//qualifiedName
 	uML_NamedElement_qualifiedName->setName("qualifiedName");
 	uML_NamedElement_qualifiedName->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
 	uML_NamedElement_qualifiedName->setLower(0);
@@ -23900,6 +25354,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 	
+	//visibility
 	uML_NamedElement_visibility->setName("visibility");
 	uML_NamedElement_visibility->setType(get_UML_VisibilityKind());
 	uML_NamedElement_visibility->setLower(0);
@@ -23912,6 +25367,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 
     // NamedElement operations
+	//allNamespaces
 	uML_NamedElement_allNamespaces__->setName("allNamespaces");
 	uML_NamedElement_allNamespaces__->setType(get_UML_Namespace());
 	
@@ -23924,6 +25380,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//allOwningPackages
 	uML_NamedElement_allOwningPackages__->setName("allOwningPackages");
 	uML_NamedElement_allOwningPackages__->setType(get_UML_Package());
 	
@@ -23936,6 +25393,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//clientDependency
 	uML_NamedElement_clientDependency__->setName("clientDependency");
 	uML_NamedElement_clientDependency__->setType(get_UML_Dependency());
 	
@@ -23948,6 +25406,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//createDependency
 	uML_NamedElement_createDependency_NamedElement_NamedElement->setName("createDependency");
 	uML_NamedElement_createDependency_NamedElement_NamedElement->setType(get_UML_Dependency());
 	
@@ -23972,6 +25431,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//createUsage
 	uML_NamedElement_createUsage_NamedElement_NamedElement->setName("createUsage");
 	uML_NamedElement_createUsage_NamedElement_NamedElement->setType(get_UML_Usage());
 	
@@ -23996,6 +25456,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//getLabel
 	uML_NamedElement_getLabel__->setName("getLabel");
 	uML_NamedElement_getLabel__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
 	
@@ -24008,6 +25469,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//getLabel
 	uML_NamedElement_getLabel_Boolean_Boolean->setName("getLabel");
 	uML_NamedElement_getLabel_Boolean_Boolean->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
 	
@@ -24032,6 +25494,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//isDistinguishableFrom
 	uML_NamedElement_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace->setName("isDistinguishableFrom");
 	uML_NamedElement_isDistinguishableFrom_NamedElement_Namespace_NamedElement_Namespace->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -24068,6 +25531,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//namespace
 	uML_NamedElement_namespace__->setName("namespace");
 	uML_NamedElement_namespace__->setType(get_UML_Namespace());
 	
@@ -24080,6 +25544,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//qualifiedName
 	uML_NamedElement_qualifiedName__->setName("qualifiedName");
 	uML_NamedElement_qualifiedName__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
 	
@@ -24092,6 +25557,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//separator
 	uML_NamedElement_separator__->setName("separator");
 	uML_NamedElement_separator__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
 	
@@ -24104,7 +25570,6 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
-
     //-------------------------------------------
 	//	class Namespace
 	uML_Namespace->setName("Namespace");
@@ -24114,6 +25579,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_NamedElement());
 	
     // Namespace attributes
+	//elementImport
 	uML_Namespace_elementImport->setName("elementImport");
 	uML_Namespace_elementImport->setType(get_UML_ElementImport());
 	uML_Namespace_elementImport->setLower(0);
@@ -24124,6 +25590,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Namespace_elementImport->setAssociation(get_UML_A_elementImport_importingNamespace());
 	
 	
+	//importedMember
 	uML_Namespace_importedMember->setName("importedMember");
 	uML_Namespace_importedMember->setType(get_UML_PackageableElement());
 	uML_Namespace_importedMember->setLower(0);
@@ -24134,6 +25601,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Namespace_importedMember->setAssociation(get_UML_A_importedMember_namespace());
 	
 	
+	//member
 	uML_Namespace_member->setName("member");
 	uML_Namespace_member->setType(get_UML_NamedElement());
 	uML_Namespace_member->setLower(0);
@@ -24144,6 +25612,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Namespace_member->setAssociation(get_UML_A_member_memberNamespace());
 	
 	
+	//ownedMember
 	uML_Namespace_ownedMember->setName("ownedMember");
 	uML_Namespace_ownedMember->setType(get_UML_NamedElement());
 	uML_Namespace_ownedMember->setLower(0);
@@ -24154,6 +25623,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Namespace_ownedMember->setAssociation(get_UML_A_ownedMember_namespace());
 	
 	
+	//ownedRule
 	uML_Namespace_ownedRule->setName("ownedRule");
 	uML_Namespace_ownedRule->setType(get_UML_Constraint());
 	uML_Namespace_ownedRule->setLower(0);
@@ -24164,6 +25634,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Namespace_ownedRule->setAssociation(get_UML_A_ownedRule_context());
 	
 	
+	//packageImport
 	uML_Namespace_packageImport->setName("packageImport");
 	uML_Namespace_packageImport->setType(get_UML_PackageImport());
 	uML_Namespace_packageImport->setLower(0);
@@ -24176,6 +25647,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 
     // Namespace operations
+	//createElementImport
 	uML_Namespace_createElementImport_PackageableElement_VisibilityKind_PackageableElement_VisibilityKind->setName("createElementImport");
 	uML_Namespace_createElementImport_PackageableElement_VisibilityKind_PackageableElement_VisibilityKind->setType(get_UML_ElementImport());
 	
@@ -24212,6 +25684,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//createPackageImport
 	uML_Namespace_createPackageImport_Package_VisibilityKind_Package_VisibilityKind->setName("createPackageImport");
 	uML_Namespace_createPackageImport_Package_VisibilityKind_Package_VisibilityKind->setType(get_UML_PackageImport());
 	
@@ -24248,6 +25721,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//excludeCollisions
 	uML_Namespace_excludeCollisions_PackageableElement_PackageableElement->setName("excludeCollisions");
 	uML_Namespace_excludeCollisions_PackageableElement_PackageableElement->setType(get_UML_PackageableElement());
 	
@@ -24272,6 +25746,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//getImportedElements
 	uML_Namespace_getImportedElements__->setName("getImportedElements");
 	uML_Namespace_getImportedElements__->setType(get_UML_PackageableElement());
 	
@@ -24284,6 +25759,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//getImportedPackages
 	uML_Namespace_getImportedPackages__->setName("getImportedPackages");
 	uML_Namespace_getImportedPackages__->setType(get_UML_Package());
 	
@@ -24296,6 +25772,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//getNamesOfMember
 	uML_Namespace_getNamesOfMember_NamedElement_NamedElement->setName("getNamesOfMember");
 	uML_Namespace_getNamesOfMember_NamedElement_NamedElement->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
 	
@@ -24320,6 +25797,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//importMembers
 	uML_Namespace_importMembers_PackageableElement_PackageableElement->setName("importMembers");
 	uML_Namespace_importMembers_PackageableElement_PackageableElement->setType(get_UML_PackageableElement());
 	
@@ -24344,6 +25822,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//importedMember
 	uML_Namespace_importedMember__->setName("importedMember");
 	uML_Namespace_importedMember__->setType(get_UML_PackageableElement());
 	
@@ -24356,6 +25835,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//membersAreDistinguishable
 	uML_Namespace_membersAreDistinguishable__->setName("membersAreDistinguishable");
 	uML_Namespace_membersAreDistinguishable__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -24368,6 +25848,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//ownedMember
 	uML_Namespace_ownedMember__->setName("ownedMember");
 	uML_Namespace_ownedMember__->setType(get_UML_NamedElement());
 	
@@ -24379,7 +25860,6 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Namespace_ownedMember_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
 	
-
 
     //-------------------------------------------
 	//	class Node
@@ -24393,6 +25873,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_DeploymentTarget());
 	
     // Node attributes
+	//nestedNode
 	uML_Node_nestedNode->setName("nestedNode");
 	uML_Node_nestedNode->setType(get_UML_Node());
 	uML_Node_nestedNode->setLower(0);
@@ -24405,6 +25886,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 
     // Node operations
+	//createCommunicationPath
 	uML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural->setName("createCommunicationPath");
 	uML_Node_createCommunicationPath_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Node_Boolean_AggregationKind_String_Integer_UnlimitedNatural->setType(get_UML_CommunicationPath());
 	
@@ -24549,6 +26031,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//getCommunicationPaths
 	uML_Node_getCommunicationPaths__->setName("getCommunicationPaths");
 	uML_Node_getCommunicationPaths__->setType(get_UML_CommunicationPath());
 	
@@ -24561,7 +26044,6 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
-
     //-------------------------------------------
 	//	class ObjectFlow
 	uML_ObjectFlow->setName("ObjectFlow");
@@ -24571,6 +26053,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_ActivityEdge());
 	
     // ObjectFlow attributes
+	//isMulticast
 	uML_ObjectFlow_isMulticast->setName("isMulticast");
 	uML_ObjectFlow_isMulticast->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_ObjectFlow_isMulticast->setLower(1);
@@ -24581,6 +26064,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_ObjectFlow_isMulticast->setDefaultValue(uML_ObjectFlow_isMulticast_defaultValue_LiteralBoolean_UML_ObjectFlow_isMulticast);
 	
+	//isMultireceive
 	uML_ObjectFlow_isMultireceive->setName("isMultireceive");
 	uML_ObjectFlow_isMultireceive->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_ObjectFlow_isMultireceive->setLower(1);
@@ -24591,6 +26075,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_ObjectFlow_isMultireceive->setDefaultValue(uML_ObjectFlow_isMultireceive_defaultValue_LiteralBoolean_UML_ObjectFlow_isMultireceive);
 	
+	//selection
 	uML_ObjectFlow_selection->setName("selection");
 	uML_ObjectFlow_selection->setType(get_UML_Behavior());
 	uML_ObjectFlow_selection->setLower(0);
@@ -24601,6 +26086,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ObjectFlow_selection->setAssociation(get_UML_A_selection_objectFlow());
 	
 	
+	//transformation
 	uML_ObjectFlow_transformation->setName("transformation");
 	uML_ObjectFlow_transformation->setType(get_UML_Behavior());
 	uML_ObjectFlow_transformation->setLower(0);
@@ -24625,6 +26111,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_TypedElement());
 	
     // ObjectNode attributes
+	//inState
 	uML_ObjectNode_inState->setName("inState");
 	uML_ObjectNode_inState->setType(get_UML_State());
 	uML_ObjectNode_inState->setLower(0);
@@ -24635,6 +26122,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ObjectNode_inState->setAssociation(get_UML_A_inState_objectNode());
 	
 	
+	//isControlType
 	uML_ObjectNode_isControlType->setName("isControlType");
 	uML_ObjectNode_isControlType->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_ObjectNode_isControlType->setLower(1);
@@ -24645,6 +26133,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_ObjectNode_isControlType->setDefaultValue(uML_ObjectNode_isControlType_defaultValue_LiteralBoolean_UML_ObjectNode_isControlType);
 	
+	//ordering
 	uML_ObjectNode_ordering->setName("ordering");
 	uML_ObjectNode_ordering->setType(get_UML_ObjectNodeOrderingKind());
 	uML_ObjectNode_ordering->setLower(1);
@@ -24655,6 +26144,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_ObjectNode_ordering->setDefaultValue(uML_ObjectNode_ordering_defaultValue_InstanceValue);
 	
+	//selection
 	uML_ObjectNode_selection->setName("selection");
 	uML_ObjectNode_selection->setType(get_UML_Behavior());
 	uML_ObjectNode_selection->setLower(0);
@@ -24665,6 +26155,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ObjectNode_selection->setAssociation(get_UML_A_selection_objectNode());
 	
 	
+	//upperBound
 	uML_ObjectNode_upperBound->setName("upperBound");
 	uML_ObjectNode_upperBound->setType(get_UML_ValueSpecification());
 	uML_ObjectNode_upperBound->setLower(0);
@@ -24695,6 +26186,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_InteractionFragment());
 	
     // OccurrenceSpecification attributes
+	//covered
 	uML_OccurrenceSpecification_covered->setName("covered");
 	uML_OccurrenceSpecification_covered->setType(get_UML_Lifeline());
 	uML_OccurrenceSpecification_covered->setLower(1);
@@ -24705,6 +26197,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_OccurrenceSpecification_covered->setAssociation(get_UML_A_covered_events());
 	
 	
+	//toAfter
 	uML_OccurrenceSpecification_toAfter->setName("toAfter");
 	uML_OccurrenceSpecification_toAfter->setType(get_UML_GeneralOrdering());
 	uML_OccurrenceSpecification_toAfter->setLower(0);
@@ -24715,6 +26208,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_OccurrenceSpecification_toAfter->setAssociation(get_UML_A_before_toAfter());
 	
 	
+	//toBefore
 	uML_OccurrenceSpecification_toBefore->setName("toBefore");
 	uML_OccurrenceSpecification_toBefore->setType(get_UML_GeneralOrdering());
 	uML_OccurrenceSpecification_toBefore->setLower(0);
@@ -24727,6 +26221,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 
     // OccurrenceSpecification operations
+	//getCovered
 	uML_OccurrenceSpecification_getCovered__->setName("getCovered");
 	uML_OccurrenceSpecification_getCovered__->setType(get_UML_Lifeline());
 	
@@ -24739,6 +26234,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//setCovered
 	uML_OccurrenceSpecification_setCovered_Lifeline_Lifeline->setName("setCovered");
 	
 	// parameter value
@@ -24750,7 +26246,6 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
-
     //-------------------------------------------
 	//	class OpaqueAction
 	uML_OpaqueAction->setName("OpaqueAction");
@@ -24760,6 +26255,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_Action());
 	
     // OpaqueAction attributes
+	//body
 	uML_OpaqueAction_body->setName("body");
 	uML_OpaqueAction_body->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
 	uML_OpaqueAction_body->setLower(0);
@@ -24770,6 +26266,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 	
+	//inputValue
 	uML_OpaqueAction_inputValue->setName("inputValue");
 	uML_OpaqueAction_inputValue->setType(get_UML_InputPin());
 	uML_OpaqueAction_inputValue->setLower(0);
@@ -24780,6 +26277,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_OpaqueAction_inputValue->setAssociation(get_UML_A_inputValue_opaqueAction());
 	
 	
+	//language
 	uML_OpaqueAction_language->setName("language");
 	uML_OpaqueAction_language->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
 	uML_OpaqueAction_language->setLower(0);
@@ -24790,6 +26288,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 	
+	//outputValue
 	uML_OpaqueAction_outputValue->setName("outputValue");
 	uML_OpaqueAction_outputValue->setType(get_UML_OutputPin());
 	uML_OpaqueAction_outputValue->setLower(0);
@@ -24811,6 +26310,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_Behavior());
 	
     // OpaqueBehavior attributes
+	//body
 	uML_OpaqueBehavior_body->setName("body");
 	uML_OpaqueBehavior_body->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
 	uML_OpaqueBehavior_body->setLower(0);
@@ -24821,6 +26321,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 	
+	//language
 	uML_OpaqueBehavior_language->setName("language");
 	uML_OpaqueBehavior_language->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
 	uML_OpaqueBehavior_language->setLower(0);
@@ -24842,6 +26343,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_ValueSpecification());
 	
     // OpaqueExpression attributes
+	//behavior
 	uML_OpaqueExpression_behavior->setName("behavior");
 	uML_OpaqueExpression_behavior->setType(get_UML_Behavior());
 	uML_OpaqueExpression_behavior->setLower(0);
@@ -24852,6 +26354,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_OpaqueExpression_behavior->setAssociation(get_UML_A_behavior_opaqueExpression());
 	
 	
+	//body
 	uML_OpaqueExpression_body->setName("body");
 	uML_OpaqueExpression_body->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
 	uML_OpaqueExpression_body->setLower(0);
@@ -24862,6 +26365,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 	
+	//language
 	uML_OpaqueExpression_language->setName("language");
 	uML_OpaqueExpression_language->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
 	uML_OpaqueExpression_language->setLower(0);
@@ -24872,6 +26376,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 	
+	//result
 	uML_OpaqueExpression_result->setName("result");
 	uML_OpaqueExpression_result->setType(get_UML_Parameter());
 	uML_OpaqueExpression_result->setLower(0);
@@ -24884,6 +26389,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 
     // OpaqueExpression operations
+	//isIntegral
 	uML_OpaqueExpression_isIntegral__->setName("isIntegral");
 	uML_OpaqueExpression_isIntegral__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -24896,6 +26402,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//isNonNegative
 	uML_OpaqueExpression_isNonNegative__->setName("isNonNegative");
 	uML_OpaqueExpression_isNonNegative__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -24908,6 +26415,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//isPositive
 	uML_OpaqueExpression_isPositive__->setName("isPositive");
 	uML_OpaqueExpression_isPositive__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -24920,6 +26428,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//result
 	uML_OpaqueExpression_result__->setName("result");
 	uML_OpaqueExpression_result__->setType(get_UML_Parameter());
 	
@@ -24932,6 +26441,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//stringValue
 	uML_OpaqueExpression_stringValue__->setName("stringValue");
 	uML_OpaqueExpression_stringValue__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
 	
@@ -24944,6 +26454,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//value
 	uML_OpaqueExpression_value__->setName("value");
 	uML_OpaqueExpression_value__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
 	
@@ -24955,7 +26466,6 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_OpaqueExpression_value_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
 	
-
 
     //-------------------------------------------
 	//	class Operation
@@ -24972,6 +26482,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_TemplateableElement());
 	
     // Operation attributes
+	//bodyCondition
 	uML_Operation_bodyCondition->setName("bodyCondition");
 	uML_Operation_bodyCondition->setType(get_UML_Constraint());
 	uML_Operation_bodyCondition->setLower(0);
@@ -24982,6 +26493,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Operation_bodyCondition->setAssociation(get_UML_A_bodyCondition_bodyContext());
 	
 	
+	//class
 	uML_Operation_class->setName("class");
 	uML_Operation_class->setType(get_UML_Class());
 	uML_Operation_class->setLower(0);
@@ -24992,6 +26504,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Operation_class->setAssociation(get_UML_A_ownedOperation_class());
 	
 	
+	//datatype
 	uML_Operation_datatype->setName("datatype");
 	uML_Operation_datatype->setType(get_UML_DataType());
 	uML_Operation_datatype->setLower(0);
@@ -25002,6 +26515,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Operation_datatype->setAssociation(get_UML_A_ownedOperation_datatype());
 	
 	
+	//interface
 	uML_Operation_interface->setName("interface");
 	uML_Operation_interface->setType(get_UML_Interface());
 	uML_Operation_interface->setLower(0);
@@ -25012,6 +26526,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Operation_interface->setAssociation(get_UML_A_ownedOperation_interface());
 	
 	
+	//isOrdered
 	uML_Operation_isOrdered->setName("isOrdered");
 	uML_Operation_isOrdered->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_Operation_isOrdered->setLower(1);
@@ -25022,6 +26537,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 	
+	//isQuery
 	uML_Operation_isQuery->setName("isQuery");
 	uML_Operation_isQuery->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_Operation_isQuery->setLower(1);
@@ -25032,6 +26548,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Operation_isQuery->setDefaultValue(uML_Operation_isQuery_defaultValue_LiteralBoolean_UML_Operation_isQuery);
 	
+	//isUnique
 	uML_Operation_isUnique->setName("isUnique");
 	uML_Operation_isUnique->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_Operation_isUnique->setLower(1);
@@ -25042,6 +26559,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Operation_isUnique->setDefaultValue(uML_Operation_isUnique_defaultValue_LiteralBoolean_UML_Operation_isUnique);
 	
+	//lower
 	uML_Operation_lower->setName("lower");
 	uML_Operation_lower->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
 	uML_Operation_lower->setLower(0);
@@ -25052,6 +26570,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Operation_lower->setDefaultValue(uML_Operation_lower_defaultValue_LiteralInteger_UML_Operation_lower);
 	
+	//ownedParameter
 	uML_Operation_ownedParameter->setName("ownedParameter");
 	uML_Operation_ownedParameter->setType(get_UML_Parameter());
 	uML_Operation_ownedParameter->setLower(0);
@@ -25062,6 +26581,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Operation_ownedParameter->setAssociation(get_UML_A_ownedParameter_operation());
 	
 	
+	//postcondition
 	uML_Operation_postcondition->setName("postcondition");
 	uML_Operation_postcondition->setType(get_UML_Constraint());
 	uML_Operation_postcondition->setLower(0);
@@ -25072,6 +26592,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Operation_postcondition->setAssociation(get_UML_A_postcondition_postContext());
 	
 	
+	//precondition
 	uML_Operation_precondition->setName("precondition");
 	uML_Operation_precondition->setType(get_UML_Constraint());
 	uML_Operation_precondition->setLower(0);
@@ -25082,6 +26603,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Operation_precondition->setAssociation(get_UML_A_precondition_preContext());
 	
 	
+	//raisedException
 	uML_Operation_raisedException->setName("raisedException");
 	uML_Operation_raisedException->setType(get_UML_Type());
 	uML_Operation_raisedException->setLower(0);
@@ -25092,6 +26614,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Operation_raisedException->setAssociation(get_UML_A_raisedException_operation());
 	
 	
+	//redefinedOperation
 	uML_Operation_redefinedOperation->setName("redefinedOperation");
 	uML_Operation_redefinedOperation->setType(get_UML_Operation());
 	uML_Operation_redefinedOperation->setLower(0);
@@ -25102,6 +26625,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Operation_redefinedOperation->setAssociation(get_UML_A_redefinedOperation_operation());
 	
 	
+	//templateParameter
 	uML_Operation_templateParameter->setName("templateParameter");
 	uML_Operation_templateParameter->setType(get_UML_OperationTemplateParameter());
 	uML_Operation_templateParameter->setLower(0);
@@ -25112,6 +26636,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Operation_templateParameter->setAssociation(get_UML_A_operation_templateParameter_parameteredElement());
 	
 	
+	//type
 	uML_Operation_type->setName("type");
 	uML_Operation_type->setType(get_UML_Type());
 	uML_Operation_type->setLower(0);
@@ -25122,6 +26647,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Operation_type->setAssociation(get_UML_A_type_operation());
 	
 	
+	//upper
 	uML_Operation_upper->setName("upper");
 	uML_Operation_upper->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_UnlimitedNatural());
 	uML_Operation_upper->setLower(0);
@@ -25134,6 +26660,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 
     // Operation operations
+	//getReturnResult
 	uML_Operation_getReturnResult__->setName("getReturnResult");
 	uML_Operation_getReturnResult__->setType(get_UML_Parameter());
 	
@@ -25146,6 +26673,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//isConsistentWith
 	uML_Operation_isConsistentWith_RedefinableElement_RedefinableElement->setName("isConsistentWith");
 	uML_Operation_isConsistentWith_RedefinableElement_RedefinableElement->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -25170,6 +26698,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//isOrdered
 	uML_Operation_isOrdered__->setName("isOrdered");
 	uML_Operation_isOrdered__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -25182,6 +26711,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//isUnique
 	uML_Operation_isUnique__->setName("isUnique");
 	uML_Operation_isUnique__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -25194,6 +26724,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//lower
 	uML_Operation_lower__->setName("lower");
 	uML_Operation_lower__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
 	
@@ -25206,6 +26737,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//returnResult
 	uML_Operation_returnResult__->setName("returnResult");
 	uML_Operation_returnResult__->setType(get_UML_Parameter());
 	
@@ -25218,6 +26750,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//setIsOrdered
 	uML_Operation_setIsOrdered_Boolean_Boolean->setName("setIsOrdered");
 	
 	// parameter newIsOrdered
@@ -25229,6 +26762,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//setIsUnique
 	uML_Operation_setIsUnique_Boolean_Boolean->setName("setIsUnique");
 	
 	// parameter newIsUnique
@@ -25240,6 +26774,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//setLower
 	uML_Operation_setLower_Integer_Integer->setName("setLower");
 	
 	// parameter newLower
@@ -25251,6 +26786,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//setType
 	uML_Operation_setType_Type_Type->setName("setType");
 	
 	// parameter newType
@@ -25262,6 +26798,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//setUpper
 	uML_Operation_setUpper_UnlimitedNatural_UnlimitedNatural->setName("setUpper");
 	
 	// parameter newUpper
@@ -25273,6 +26810,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//type
 	uML_Operation_type__->setName("type");
 	uML_Operation_type__->setType(get_UML_Type());
 	
@@ -25285,6 +26823,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//upper
 	uML_Operation_upper__->setName("upper");
 	uML_Operation_upper__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_UnlimitedNatural());
 	
@@ -25297,7 +26836,6 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
-
     //-------------------------------------------
 	//	class OperationTemplateParameter
 	uML_OperationTemplateParameter->setName("OperationTemplateParameter");
@@ -25307,6 +26845,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_TemplateParameter());
 	
     // OperationTemplateParameter attributes
+	//parameteredElement
 	uML_OperationTemplateParameter_parameteredElement->setName("parameteredElement");
 	uML_OperationTemplateParameter_parameteredElement->setType(get_UML_Operation());
 	uML_OperationTemplateParameter_parameteredElement->setLower(1);
@@ -25343,6 +26882,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_TemplateableElement());
 	
     // Package attributes
+	//URI
 	uML_Package_URI->setName("URI");
 	uML_Package_URI->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
 	uML_Package_URI->setLower(0);
@@ -25353,6 +26893,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 	
+	//nestedPackage
 	uML_Package_nestedPackage->setName("nestedPackage");
 	uML_Package_nestedPackage->setType(get_UML_Package());
 	uML_Package_nestedPackage->setLower(0);
@@ -25363,6 +26904,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Package_nestedPackage->setAssociation(get_UML_A_nestedPackage_nestingPackage());
 	
 	
+	//nestingPackage
 	uML_Package_nestingPackage->setName("nestingPackage");
 	uML_Package_nestingPackage->setType(get_UML_Package());
 	uML_Package_nestingPackage->setLower(0);
@@ -25373,6 +26915,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Package_nestingPackage->setAssociation(get_UML_A_nestedPackage_nestingPackage());
 	
 	
+	//ownedStereotype
 	uML_Package_ownedStereotype->setName("ownedStereotype");
 	uML_Package_ownedStereotype->setType(get_UML_Stereotype());
 	uML_Package_ownedStereotype->setLower(0);
@@ -25383,6 +26926,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Package_ownedStereotype->setAssociation(get_UML_A_ownedStereotype_owningPackage());
 	
 	
+	//ownedType
 	uML_Package_ownedType->setName("ownedType");
 	uML_Package_ownedType->setType(get_UML_Type());
 	uML_Package_ownedType->setLower(0);
@@ -25393,6 +26937,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Package_ownedType->setAssociation(get_UML_A_ownedType_package());
 	
 	
+	//packageMerge
 	uML_Package_packageMerge->setName("packageMerge");
 	uML_Package_packageMerge->setType(get_UML_PackageMerge());
 	uML_Package_packageMerge->setLower(0);
@@ -25403,6 +26948,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Package_packageMerge->setAssociation(get_UML_A_packageMerge_receivingPackage());
 	
 	
+	//packagedElement
 	uML_Package_packagedElement->setName("packagedElement");
 	uML_Package_packagedElement->setType(get_UML_PackageableElement());
 	uML_Package_packagedElement->setLower(0);
@@ -25413,6 +26959,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Package_packagedElement->setAssociation(get_UML_A_packagedElement_owningPackage());
 	
 	
+	//profileApplication
 	uML_Package_profileApplication->setName("profileApplication");
 	uML_Package_profileApplication->setType(get_UML_ProfileApplication());
 	uML_Package_profileApplication->setLower(0);
@@ -25425,6 +26972,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 
     // Package operations
+	//allApplicableStereotypes
 	uML_Package_allApplicableStereotypes__->setName("allApplicableStereotypes");
 	uML_Package_allApplicableStereotypes__->setType(get_UML_Stereotype());
 	
@@ -25437,6 +26985,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//applyProfile
 	uML_Package_applyProfile_Profile_Profile->setName("applyProfile");
 	uML_Package_applyProfile_Profile_Profile->setType(Ecore::EcorePackage::eInstance()->get_Ecore_EObject());
 	
@@ -25461,6 +27010,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//containingProfile
 	uML_Package_containingProfile__->setName("containingProfile");
 	uML_Package_containingProfile__->setType(get_UML_Profile());
 	
@@ -25473,6 +27023,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//createOwnedClass
 	uML_Package_createOwnedClass_String_Boolean_String_Boolean->setName("createOwnedClass");
 	uML_Package_createOwnedClass_String_Boolean_String_Boolean->setType(get_UML_Class());
 	
@@ -25509,6 +27060,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//createOwnedEnumeration
 	uML_Package_createOwnedEnumeration_String_String->setName("createOwnedEnumeration");
 	uML_Package_createOwnedEnumeration_String_String->setType(get_UML_Enumeration());
 	
@@ -25533,6 +27085,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//createOwnedInterface
 	uML_Package_createOwnedInterface_String_String->setName("createOwnedInterface");
 	uML_Package_createOwnedInterface_String_String->setType(get_UML_Interface());
 	
@@ -25557,6 +27110,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//createOwnedPrimitiveType
 	uML_Package_createOwnedPrimitiveType_String_String->setName("createOwnedPrimitiveType");
 	uML_Package_createOwnedPrimitiveType_String_String->setType(get_UML_PrimitiveType());
 	
@@ -25581,6 +27135,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//createOwnedStereotype
 	uML_Package_createOwnedStereotype_String_Boolean_String_Boolean->setName("createOwnedStereotype");
 	uML_Package_createOwnedStereotype_String_Boolean_String_Boolean->setType(get_UML_Stereotype());
 	
@@ -25617,6 +27172,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//getAllAppliedProfiles
 	uML_Package_getAllAppliedProfiles__->setName("getAllAppliedProfiles");
 	uML_Package_getAllAppliedProfiles__->setType(get_UML_Profile());
 	
@@ -25629,6 +27185,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//getAllProfileApplications
 	uML_Package_getAllProfileApplications__->setName("getAllProfileApplications");
 	uML_Package_getAllProfileApplications__->setType(get_UML_ProfileApplication());
 	
@@ -25641,6 +27198,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//getAppliedProfile
 	uML_Package_getAppliedProfile_String_String->setName("getAppliedProfile");
 	uML_Package_getAppliedProfile_String_String->setType(get_UML_Profile());
 	
@@ -25665,6 +27223,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//getAppliedProfile
 	uML_Package_getAppliedProfile_String_Boolean_String_Boolean->setName("getAppliedProfile");
 	uML_Package_getAppliedProfile_String_Boolean_String_Boolean->setType(get_UML_Profile());
 	
@@ -25701,6 +27260,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//getAppliedProfiles
 	uML_Package_getAppliedProfiles__->setName("getAppliedProfiles");
 	uML_Package_getAppliedProfiles__->setType(get_UML_Profile());
 	
@@ -25713,6 +27273,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//getProfileApplication
 	uML_Package_getProfileApplication_Profile_Profile->setName("getProfileApplication");
 	uML_Package_getProfileApplication_Profile_Profile->setType(get_UML_ProfileApplication());
 	
@@ -25737,6 +27298,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//getProfileApplication
 	uML_Package_getProfileApplication_Profile_Boolean_Profile_Boolean->setName("getProfileApplication");
 	uML_Package_getProfileApplication_Profile_Boolean_Profile_Boolean->setType(get_UML_ProfileApplication());
 	
@@ -25773,6 +27335,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//isModelLibrary
 	uML_Package_isModelLibrary__->setName("isModelLibrary");
 	uML_Package_isModelLibrary__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -25785,6 +27348,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//isProfileApplied
 	uML_Package_isProfileApplied_Profile_Profile->setName("isProfileApplied");
 	uML_Package_isProfileApplied_Profile_Profile->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -25809,6 +27373,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//makesVisible
 	uML_Package_makesVisible_NamedElement_NamedElement->setName("makesVisible");
 	uML_Package_makesVisible_NamedElement_NamedElement->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -25833,6 +27398,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//mustBeOwned
 	uML_Package_mustBeOwned__->setName("mustBeOwned");
 	uML_Package_mustBeOwned__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -25845,6 +27411,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//nestedPackage
 	uML_Package_nestedPackage__->setName("nestedPackage");
 	uML_Package_nestedPackage__->setType(get_UML_Package());
 	
@@ -25857,6 +27424,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//ownedStereotype
 	uML_Package_ownedStereotype__->setName("ownedStereotype");
 	uML_Package_ownedStereotype__->setType(get_UML_Stereotype());
 	
@@ -25869,6 +27437,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//ownedType
 	uML_Package_ownedType__->setName("ownedType");
 	uML_Package_ownedType__->setType(get_UML_Type());
 	
@@ -25881,6 +27450,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//unapplyProfile
 	uML_Package_unapplyProfile_Profile_Profile->setName("unapplyProfile");
 	uML_Package_unapplyProfile_Profile_Profile->setType(Ecore::EcorePackage::eInstance()->get_Ecore_EObject());
 	
@@ -25905,6 +27475,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//visibleMembers
 	uML_Package_visibleMembers__->setName("visibleMembers");
 	uML_Package_visibleMembers__->setType(get_UML_PackageableElement());
 	
@@ -25917,7 +27488,6 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
-
     //-------------------------------------------
 	//	class PackageImport
 	uML_PackageImport->setName("PackageImport");
@@ -25927,6 +27497,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_DirectedRelationship());
 	
     // PackageImport attributes
+	//importedPackage
 	uML_PackageImport_importedPackage->setName("importedPackage");
 	uML_PackageImport_importedPackage->setType(get_UML_Package());
 	uML_PackageImport_importedPackage->setLower(1);
@@ -25937,6 +27508,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_PackageImport_importedPackage->setAssociation(get_UML_A_importedPackage_packageImport());
 	
 	
+	//importingNamespace
 	uML_PackageImport_importingNamespace->setName("importingNamespace");
 	uML_PackageImport_importingNamespace->setType(get_UML_Namespace());
 	uML_PackageImport_importingNamespace->setLower(1);
@@ -25947,6 +27519,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_PackageImport_importingNamespace->setAssociation(get_UML_A_packageImport_importingNamespace());
 	
 	
+	//visibility
 	uML_PackageImport_visibility->setName("visibility");
 	uML_PackageImport_visibility->setType(get_UML_VisibilityKind());
 	uML_PackageImport_visibility->setLower(1);
@@ -25968,6 +27541,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_DirectedRelationship());
 	
     // PackageMerge attributes
+	//mergedPackage
 	uML_PackageMerge_mergedPackage->setName("mergedPackage");
 	uML_PackageMerge_mergedPackage->setType(get_UML_Package());
 	uML_PackageMerge_mergedPackage->setLower(1);
@@ -25978,6 +27552,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_PackageMerge_mergedPackage->setAssociation(get_UML_A_mergedPackage_packageMerge());
 	
 	
+	//receivingPackage
 	uML_PackageMerge_receivingPackage->setName("receivingPackage");
 	uML_PackageMerge_receivingPackage->setType(get_UML_Package());
 	uML_PackageMerge_receivingPackage->setLower(1);
@@ -26002,6 +27577,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_ParameterableElement());
 	
     // PackageableElement attributes
+	//visibility
 	uML_PackageableElement_visibility->setName("visibility");
 	uML_PackageableElement_visibility->setType(get_UML_VisibilityKind());
 	uML_PackageableElement_visibility->setLower(0);
@@ -26026,6 +27602,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_MultiplicityElement());
 	
     // Parameter attributes
+	//default
 	uML_Parameter_default->setName("default");
 	uML_Parameter_default->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
 	uML_Parameter_default->setLower(0);
@@ -26036,6 +27613,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 	
+	//defaultValue
 	uML_Parameter_defaultValue->setName("defaultValue");
 	uML_Parameter_defaultValue->setType(get_UML_ValueSpecification());
 	uML_Parameter_defaultValue->setLower(0);
@@ -26046,6 +27624,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Parameter_defaultValue->setAssociation(get_UML_A_defaultValue_owningParameter());
 	
 	
+	//direction
 	uML_Parameter_direction->setName("direction");
 	uML_Parameter_direction->setType(get_UML_ParameterDirectionKind());
 	uML_Parameter_direction->setLower(1);
@@ -26056,6 +27635,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Parameter_direction->setDefaultValue(uML_Parameter_direction_defaultValue_InstanceValue);
 	
+	//effect
 	uML_Parameter_effect->setName("effect");
 	uML_Parameter_effect->setType(get_UML_ParameterEffectKind());
 	uML_Parameter_effect->setLower(0);
@@ -26066,6 +27646,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 	
+	//isException
 	uML_Parameter_isException->setName("isException");
 	uML_Parameter_isException->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_Parameter_isException->setLower(1);
@@ -26076,6 +27657,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Parameter_isException->setDefaultValue(uML_Parameter_isException_defaultValue_LiteralBoolean_UML_Parameter_isException);
 	
+	//isStream
 	uML_Parameter_isStream->setName("isStream");
 	uML_Parameter_isStream->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_Parameter_isStream->setLower(1);
@@ -26086,6 +27668,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Parameter_isStream->setDefaultValue(uML_Parameter_isStream_defaultValue_LiteralBoolean_UML_Parameter_isStream);
 	
+	//operation
 	uML_Parameter_operation->setName("operation");
 	uML_Parameter_operation->setType(get_UML_Operation());
 	uML_Parameter_operation->setLower(0);
@@ -26096,6 +27679,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Parameter_operation->setAssociation(get_UML_A_ownedParameter_operation());
 	
 	
+	//parameterSet
 	uML_Parameter_parameterSet->setName("parameterSet");
 	uML_Parameter_parameterSet->setType(get_UML_ParameterSet());
 	uML_Parameter_parameterSet->setLower(0);
@@ -26108,6 +27692,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 
     // Parameter operations
+	//default
 	uML_Parameter_default__->setName("default");
 	uML_Parameter_default__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
 	
@@ -26120,6 +27705,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//isSetDefault
 	uML_Parameter_isSetDefault__->setName("isSetDefault");
 	uML_Parameter_isSetDefault__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -26132,6 +27718,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//setBooleanDefaultValue
 	uML_Parameter_setBooleanDefaultValue_Boolean_Boolean->setName("setBooleanDefaultValue");
 	
 	// parameter value
@@ -26143,6 +27730,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//setDefault
 	uML_Parameter_setDefault_String_String->setName("setDefault");
 	
 	// parameter newDefault
@@ -26154,6 +27742,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//setIntegerDefaultValue
 	uML_Parameter_setIntegerDefaultValue_Integer_Integer->setName("setIntegerDefaultValue");
 	
 	// parameter value
@@ -26165,11 +27754,13 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//setNullDefaultValue
 	uML_Parameter_setNullDefaultValue__->setName("setNullDefaultValue");
 	
 	
 	
 
+	//setRealDefaultValue
 	uML_Parameter_setRealDefaultValue_Real_Real->setName("setRealDefaultValue");
 	
 	// parameter value
@@ -26181,6 +27772,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//setStringDefaultValue
 	uML_Parameter_setStringDefaultValue_String_String->setName("setStringDefaultValue");
 	
 	// parameter value
@@ -26192,6 +27784,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//setUnlimitedNaturalDefaultValue
 	uML_Parameter_setUnlimitedNaturalDefaultValue_UnlimitedNatural_UnlimitedNatural->setName("setUnlimitedNaturalDefaultValue");
 	
 	// parameter value
@@ -26203,11 +27796,11 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//unsetDefault
 	uML_Parameter_unsetDefault__->setName("unsetDefault");
 	
 	
 	
-
 
     //-------------------------------------------
 	//	class ParameterSet
@@ -26218,6 +27811,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_NamedElement());
 	
     // ParameterSet attributes
+	//condition
 	uML_ParameterSet_condition->setName("condition");
 	uML_ParameterSet_condition->setType(get_UML_Constraint());
 	uML_ParameterSet_condition->setLower(0);
@@ -26228,6 +27822,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ParameterSet_condition->setAssociation(get_UML_A_condition_parameterSet());
 	
 	
+	//parameter
 	uML_ParameterSet_parameter->setName("parameter");
 	uML_ParameterSet_parameter->setType(get_UML_Parameter());
 	uML_ParameterSet_parameter->setLower(1);
@@ -26249,6 +27844,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_Element());
 	
     // ParameterableElement attributes
+	//owningTemplateParameter
 	uML_ParameterableElement_owningTemplateParameter->setName("owningTemplateParameter");
 	uML_ParameterableElement_owningTemplateParameter->setType(get_UML_TemplateParameter());
 	uML_ParameterableElement_owningTemplateParameter->setLower(0);
@@ -26259,6 +27855,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ParameterableElement_owningTemplateParameter->setAssociation(get_UML_A_ownedParameteredElement_owningTemplateParameter());
 	
 	
+	//templateParameter
 	uML_ParameterableElement_templateParameter->setName("templateParameter");
 	uML_ParameterableElement_templateParameter->setType(get_UML_TemplateParameter());
 	uML_ParameterableElement_templateParameter->setLower(0);
@@ -26271,6 +27868,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 
     // ParameterableElement operations
+	//isCompatibleWith
 	uML_ParameterableElement_isCompatibleWith_ParameterableElement_ParameterableElement->setName("isCompatibleWith");
 	uML_ParameterableElement_isCompatibleWith_ParameterableElement_ParameterableElement->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -26295,6 +27893,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//isTemplateParameter
 	uML_ParameterableElement_isTemplateParameter__->setName("isTemplateParameter");
 	uML_ParameterableElement_isTemplateParameter__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -26306,7 +27905,6 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ParameterableElement_isTemplateParameter_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
 	
-
 
     //-------------------------------------------
 	//	class PartDecomposition
@@ -26329,6 +27927,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_ObjectNode());
 	
     // Pin attributes
+	//isControl
 	uML_Pin_isControl->setName("isControl");
 	uML_Pin_isControl->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_Pin_isControl->setLower(1);
@@ -26350,6 +27949,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_Property());
 	
     // Port attributes
+	//isBehavior
 	uML_Port_isBehavior->setName("isBehavior");
 	uML_Port_isBehavior->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_Port_isBehavior->setLower(1);
@@ -26360,6 +27960,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Port_isBehavior->setDefaultValue(uML_Port_isBehavior_defaultValue_LiteralBoolean_UML_Port_isBehavior);
 	
+	//isConjugated
 	uML_Port_isConjugated->setName("isConjugated");
 	uML_Port_isConjugated->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_Port_isConjugated->setLower(1);
@@ -26370,6 +27971,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Port_isConjugated->setDefaultValue(uML_Port_isConjugated_defaultValue_LiteralBoolean_UML_Port_isConjugated);
 	
+	//isService
 	uML_Port_isService->setName("isService");
 	uML_Port_isService->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_Port_isService->setLower(1);
@@ -26380,6 +27982,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Port_isService->setDefaultValue(uML_Port_isService_defaultValue_LiteralBoolean_UML_Port_isService);
 	
+	//protocol
 	uML_Port_protocol->setName("protocol");
 	uML_Port_protocol->setType(get_UML_ProtocolStateMachine());
 	uML_Port_protocol->setLower(0);
@@ -26390,6 +27993,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Port_protocol->setAssociation(get_UML_A_protocol_port());
 	
 	
+	//provided
 	uML_Port_provided->setName("provided");
 	uML_Port_provided->setType(get_UML_Interface());
 	uML_Port_provided->setLower(0);
@@ -26400,6 +28004,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Port_provided->setAssociation(get_UML_A_provided_port());
 	
 	
+	//redefinedPort
 	uML_Port_redefinedPort->setName("redefinedPort");
 	uML_Port_redefinedPort->setType(get_UML_Port());
 	uML_Port_redefinedPort->setLower(0);
@@ -26410,6 +28015,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Port_redefinedPort->setAssociation(get_UML_A_redefinedPort_port());
 	
 	
+	//required
 	uML_Port_required->setName("required");
 	uML_Port_required->setType(get_UML_Interface());
 	uML_Port_required->setLower(0);
@@ -26422,6 +28028,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 
     // Port operations
+	//basicProvided
 	uML_Port_basicProvided__->setName("basicProvided");
 	uML_Port_basicProvided__->setType(get_UML_Interface());
 	
@@ -26434,6 +28041,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//basicRequired
 	uML_Port_basicRequired__->setName("basicRequired");
 	uML_Port_basicRequired__->setType(get_UML_Interface());
 	
@@ -26446,6 +28054,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//provided
 	uML_Port_provided__->setName("provided");
 	uML_Port_provided__->setType(get_UML_Interface());
 	
@@ -26458,6 +28067,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//required
 	uML_Port_required__->setName("required");
 	uML_Port_required__->setType(get_UML_Interface());
 	
@@ -26469,7 +28079,6 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Port_required_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
 	
-
 
     //-------------------------------------------
 	//	class PrimitiveType
@@ -26489,6 +28098,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_Package());
 	
     // Profile attributes
+	//metaclassReference
 	uML_Profile_metaclassReference->setName("metaclassReference");
 	uML_Profile_metaclassReference->setType(get_UML_ElementImport());
 	uML_Profile_metaclassReference->setLower(0);
@@ -26499,6 +28109,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Profile_metaclassReference->setAssociation(get_UML_A_metaclassReference_profile());
 	
 	
+	//metamodelReference
 	uML_Profile_metamodelReference->setName("metamodelReference");
 	uML_Profile_metamodelReference->setType(get_UML_PackageImport());
 	uML_Profile_metamodelReference->setLower(0);
@@ -26511,6 +28122,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 
     // Profile operations
+	//create
 	uML_Profile_create_Classifier_Classifier->setName("create");
 	uML_Profile_create_Classifier_Classifier->setType(Ecore::EcorePackage::eInstance()->get_Ecore_EObject());
 	
@@ -26535,6 +28147,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//define
 	uML_Profile_define__->setName("define");
 	uML_Profile_define__->setType(Ecore::EcorePackage::eInstance()->get_Ecore_EPackage());
 	
@@ -26547,6 +28160,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//getDefinition
 	uML_Profile_getDefinition__->setName("getDefinition");
 	uML_Profile_getDefinition__->setType(Ecore::EcorePackage::eInstance()->get_Ecore_EPackage());
 	
@@ -26559,6 +28173,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//getDefinition
 	uML_Profile_getDefinition_NamedElement_NamedElement->setName("getDefinition");
 	uML_Profile_getDefinition_NamedElement_NamedElement->setType(Ecore::EcorePackage::eInstance()->get_Ecore_ENamedElement());
 	
@@ -26583,6 +28198,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//getOwnedExtensions
 	uML_Profile_getOwnedExtensions_Boolean_Boolean->setName("getOwnedExtensions");
 	uML_Profile_getOwnedExtensions_Boolean_Boolean->setType(get_UML_Extension());
 	
@@ -26607,6 +28223,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//getReferencedMetaclasses
 	uML_Profile_getReferencedMetaclasses__->setName("getReferencedMetaclasses");
 	uML_Profile_getReferencedMetaclasses__->setType(get_UML_Class());
 	
@@ -26619,6 +28236,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//getReferencedMetamodels
 	uML_Profile_getReferencedMetamodels__->setName("getReferencedMetamodels");
 	uML_Profile_getReferencedMetamodels__->setType(get_UML_Model());
 	
@@ -26631,6 +28249,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//isDefined
 	uML_Profile_isDefined__->setName("isDefined");
 	uML_Profile_isDefined__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -26643,7 +28262,6 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
-
     //-------------------------------------------
 	//	class ProfileApplication
 	uML_ProfileApplication->setName("ProfileApplication");
@@ -26653,6 +28271,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_DirectedRelationship());
 	
     // ProfileApplication attributes
+	//appliedProfile
 	uML_ProfileApplication_appliedProfile->setName("appliedProfile");
 	uML_ProfileApplication_appliedProfile->setType(get_UML_Profile());
 	uML_ProfileApplication_appliedProfile->setLower(1);
@@ -26663,6 +28282,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ProfileApplication_appliedProfile->setAssociation(get_UML_A_appliedProfile_profileApplication());
 	
 	
+	//applyingPackage
 	uML_ProfileApplication_applyingPackage->setName("applyingPackage");
 	uML_ProfileApplication_applyingPackage->setType(get_UML_Package());
 	uML_ProfileApplication_applyingPackage->setLower(1);
@@ -26673,6 +28293,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ProfileApplication_applyingPackage->setAssociation(get_UML_A_profileApplication_applyingPackage());
 	
 	
+	//isStrict
 	uML_ProfileApplication_isStrict->setName("isStrict");
 	uML_ProfileApplication_isStrict->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_ProfileApplication_isStrict->setLower(1);
@@ -26685,6 +28306,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 
     // ProfileApplication operations
+	//getAppliedDefinition
 	uML_ProfileApplication_getAppliedDefinition__->setName("getAppliedDefinition");
 	uML_ProfileApplication_getAppliedDefinition__->setType(Ecore::EcorePackage::eInstance()->get_Ecore_EPackage());
 	
@@ -26697,6 +28319,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//getAppliedDefinition
 	uML_ProfileApplication_getAppliedDefinition_NamedElement_NamedElement->setName("getAppliedDefinition");
 	uML_ProfileApplication_getAppliedDefinition_NamedElement_NamedElement->setType(Ecore::EcorePackage::eInstance()->get_Ecore_ENamedElement());
 	
@@ -26721,7 +28344,6 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
-
     //-------------------------------------------
 	//	class Property
 	uML_Property->setName("Property");
@@ -26737,6 +28359,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_StructuralFeature());
 	
     // Property attributes
+	//aggregation
 	uML_Property_aggregation->setName("aggregation");
 	uML_Property_aggregation->setType(get_UML_AggregationKind());
 	uML_Property_aggregation->setLower(1);
@@ -26747,6 +28370,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Property_aggregation->setDefaultValue(uML_Property_aggregation_defaultValue_InstanceValue);
 	
+	//association
 	uML_Property_association->setName("association");
 	uML_Property_association->setType(get_UML_Association());
 	uML_Property_association->setLower(0);
@@ -26757,6 +28381,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Property_association->setAssociation(get_UML_A_memberEnd_association());
 	
 	
+	//associationEnd
 	uML_Property_associationEnd->setName("associationEnd");
 	uML_Property_associationEnd->setType(get_UML_Property());
 	uML_Property_associationEnd->setLower(0);
@@ -26767,6 +28392,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Property_associationEnd->setAssociation(get_UML_A_qualifier_associationEnd());
 	
 	
+	//class
 	uML_Property_class->setName("class");
 	uML_Property_class->setType(get_UML_Class());
 	uML_Property_class->setLower(0);
@@ -26777,6 +28403,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Property_class->setAssociation(get_UML_A_ownedAttribute_class());
 	
 	
+	//datatype
 	uML_Property_datatype->setName("datatype");
 	uML_Property_datatype->setType(get_UML_DataType());
 	uML_Property_datatype->setLower(0);
@@ -26787,6 +28414,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Property_datatype->setAssociation(get_UML_A_ownedAttribute_datatype());
 	
 	
+	//default
 	uML_Property_default->setName("default");
 	uML_Property_default->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
 	uML_Property_default->setLower(0);
@@ -26797,6 +28425,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 	
+	//defaultValue
 	uML_Property_defaultValue->setName("defaultValue");
 	uML_Property_defaultValue->setType(get_UML_ValueSpecification());
 	uML_Property_defaultValue->setLower(0);
@@ -26807,6 +28436,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Property_defaultValue->setAssociation(get_UML_A_defaultValue_owningProperty());
 	
 	
+	//interface
 	uML_Property_interface->setName("interface");
 	uML_Property_interface->setType(get_UML_Interface());
 	uML_Property_interface->setLower(0);
@@ -26817,6 +28447,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Property_interface->setAssociation(get_UML_A_ownedAttribute_interface());
 	
 	
+	//isComposite
 	uML_Property_isComposite->setName("isComposite");
 	uML_Property_isComposite->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_Property_isComposite->setLower(1);
@@ -26827,6 +28458,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Property_isComposite->setDefaultValue(uML_Property_isComposite_defaultValue_LiteralBoolean_UML_Property_isComposite);
 	
+	//isDerived
 	uML_Property_isDerived->setName("isDerived");
 	uML_Property_isDerived->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_Property_isDerived->setLower(1);
@@ -26837,6 +28469,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Property_isDerived->setDefaultValue(uML_Property_isDerived_defaultValue_LiteralBoolean_UML_Property_isDerived);
 	
+	//isDerivedUnion
 	uML_Property_isDerivedUnion->setName("isDerivedUnion");
 	uML_Property_isDerivedUnion->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_Property_isDerivedUnion->setLower(1);
@@ -26847,6 +28480,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Property_isDerivedUnion->setDefaultValue(uML_Property_isDerivedUnion_defaultValue_LiteralBoolean_UML_Property_isDerivedUnion);
 	
+	//isID
 	uML_Property_isID->setName("isID");
 	uML_Property_isID->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_Property_isID->setLower(1);
@@ -26857,6 +28491,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Property_isID->setDefaultValue(uML_Property_isID_defaultValue_LiteralBoolean_UML_Property_isID);
 	
+	//opposite
 	uML_Property_opposite->setName("opposite");
 	uML_Property_opposite->setType(get_UML_Property());
 	uML_Property_opposite->setLower(0);
@@ -26867,6 +28502,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Property_opposite->setAssociation(get_UML_A_opposite_property());
 	
 	
+	//owningAssociation
 	uML_Property_owningAssociation->setName("owningAssociation");
 	uML_Property_owningAssociation->setType(get_UML_Association());
 	uML_Property_owningAssociation->setLower(0);
@@ -26877,6 +28513,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Property_owningAssociation->setAssociation(get_UML_A_ownedEnd_owningAssociation());
 	
 	
+	//qualifier
 	uML_Property_qualifier->setName("qualifier");
 	uML_Property_qualifier->setType(get_UML_Property());
 	uML_Property_qualifier->setLower(0);
@@ -26887,6 +28524,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Property_qualifier->setAssociation(get_UML_A_qualifier_associationEnd());
 	
 	
+	//redefinedProperty
 	uML_Property_redefinedProperty->setName("redefinedProperty");
 	uML_Property_redefinedProperty->setType(get_UML_Property());
 	uML_Property_redefinedProperty->setLower(0);
@@ -26897,6 +28535,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Property_redefinedProperty->setAssociation(get_UML_A_redefinedProperty_property());
 	
 	
+	//subsettedProperty
 	uML_Property_subsettedProperty->setName("subsettedProperty");
 	uML_Property_subsettedProperty->setType(get_UML_Property());
 	uML_Property_subsettedProperty->setLower(0);
@@ -26909,6 +28548,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 
     // Property operations
+	//getDefault
 	uML_Property_getDefault__->setName("getDefault");
 	uML_Property_getDefault__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
 	
@@ -26921,6 +28561,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//getOtherEnd
 	uML_Property_getOtherEnd__->setName("getOtherEnd");
 	uML_Property_getOtherEnd__->setType(get_UML_Property());
 	
@@ -26933,6 +28574,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//isAttribute
 	uML_Property_isAttribute__->setName("isAttribute");
 	uML_Property_isAttribute__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -26945,6 +28587,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//isCompatibleWith
 	uML_Property_isCompatibleWith_ParameterableElement_ParameterableElement->setName("isCompatibleWith");
 	uML_Property_isCompatibleWith_ParameterableElement_ParameterableElement->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -26969,6 +28612,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//isComposite
 	uML_Property_isComposite__->setName("isComposite");
 	uML_Property_isComposite__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -26981,6 +28625,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//isConsistentWith
 	uML_Property_isConsistentWith_RedefinableElement_RedefinableElement->setName("isConsistentWith");
 	uML_Property_isConsistentWith_RedefinableElement_RedefinableElement->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -27005,6 +28650,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//isNavigable
 	uML_Property_isNavigable__->setName("isNavigable");
 	uML_Property_isNavigable__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -27017,6 +28663,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//isSetDefault
 	uML_Property_isSetDefault__->setName("isSetDefault");
 	uML_Property_isSetDefault__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -27029,6 +28676,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//opposite
 	uML_Property_opposite__->setName("opposite");
 	uML_Property_opposite__->setType(get_UML_Property());
 	
@@ -27041,6 +28689,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//setBooleanDefaultValue
 	uML_Property_setBooleanDefaultValue_Boolean_Boolean->setName("setBooleanDefaultValue");
 	
 	// parameter value
@@ -27052,6 +28701,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//setDefault
 	uML_Property_setDefault_String_String->setName("setDefault");
 	
 	// parameter newDefault
@@ -27063,6 +28713,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//setIntegerDefaultValue
 	uML_Property_setIntegerDefaultValue_Integer_Integer->setName("setIntegerDefaultValue");
 	
 	// parameter value
@@ -27074,6 +28725,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//setIsComposite
 	uML_Property_setIsComposite_Boolean_Boolean->setName("setIsComposite");
 	
 	// parameter newIsComposite
@@ -27085,6 +28737,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//setIsNavigable
 	uML_Property_setIsNavigable_Boolean_Boolean->setName("setIsNavigable");
 	
 	// parameter isNavigable
@@ -27096,11 +28749,13 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//setNullDefaultValue
 	uML_Property_setNullDefaultValue__->setName("setNullDefaultValue");
 	
 	
 	
 
+	//setOpposite
 	uML_Property_setOpposite_Property_Property->setName("setOpposite");
 	
 	// parameter newOpposite
@@ -27112,6 +28767,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//setRealDefaultValue
 	uML_Property_setRealDefaultValue_Real_Real->setName("setRealDefaultValue");
 	
 	// parameter value
@@ -27123,6 +28779,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//setStringDefaultValue
 	uML_Property_setStringDefaultValue_String_String->setName("setStringDefaultValue");
 	
 	// parameter value
@@ -27134,6 +28791,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//setUnlimitedNaturalDefaultValue
 	uML_Property_setUnlimitedNaturalDefaultValue_UnlimitedNatural_UnlimitedNatural->setName("setUnlimitedNaturalDefaultValue");
 	
 	// parameter value
@@ -27145,6 +28803,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//subsettingContext
 	uML_Property_subsettingContext__->setName("subsettingContext");
 	uML_Property_subsettingContext__->setType(get_UML_Type());
 	
@@ -27157,11 +28816,11 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//unsetDefault
 	uML_Property_unsetDefault__->setName("unsetDefault");
 	
 	
 	
-
 
     //-------------------------------------------
 	//	class ProtocolConformance
@@ -27172,6 +28831,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_DirectedRelationship());
 	
     // ProtocolConformance attributes
+	//generalMachine
 	uML_ProtocolConformance_generalMachine->setName("generalMachine");
 	uML_ProtocolConformance_generalMachine->setType(get_UML_ProtocolStateMachine());
 	uML_ProtocolConformance_generalMachine->setLower(1);
@@ -27182,6 +28842,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ProtocolConformance_generalMachine->setAssociation(get_UML_A_generalMachine_protocolConformance());
 	
 	
+	//specificMachine
 	uML_ProtocolConformance_specificMachine->setName("specificMachine");
 	uML_ProtocolConformance_specificMachine->setType(get_UML_ProtocolStateMachine());
 	uML_ProtocolConformance_specificMachine->setLower(1);
@@ -27203,6 +28864,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_StateMachine());
 	
     // ProtocolStateMachine attributes
+	//conformance
 	uML_ProtocolStateMachine_conformance->setName("conformance");
 	uML_ProtocolStateMachine_conformance->setType(get_UML_ProtocolConformance());
 	uML_ProtocolStateMachine_conformance->setLower(0);
@@ -27224,6 +28886,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_Transition());
 	
     // ProtocolTransition attributes
+	//postCondition
 	uML_ProtocolTransition_postCondition->setName("postCondition");
 	uML_ProtocolTransition_postCondition->setType(get_UML_Constraint());
 	uML_ProtocolTransition_postCondition->setLower(0);
@@ -27234,6 +28897,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ProtocolTransition_postCondition->setAssociation(get_UML_A_postCondition_owningTransition());
 	
 	
+	//preCondition
 	uML_ProtocolTransition_preCondition->setName("preCondition");
 	uML_ProtocolTransition_preCondition->setType(get_UML_Constraint());
 	uML_ProtocolTransition_preCondition->setLower(0);
@@ -27244,6 +28908,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ProtocolTransition_preCondition->setAssociation(get_UML_A_preCondition_protocolTransition());
 	
 	
+	//referred
 	uML_ProtocolTransition_referred->setName("referred");
 	uML_ProtocolTransition_referred->setType(get_UML_Operation());
 	uML_ProtocolTransition_referred->setLower(0);
@@ -27256,6 +28921,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 
     // ProtocolTransition operations
+	//referred
 	uML_ProtocolTransition_referred__->setName("referred");
 	uML_ProtocolTransition_referred__->setType(get_UML_Operation());
 	
@@ -27268,7 +28934,6 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
-
     //-------------------------------------------
 	//	class Pseudostate
 	uML_Pseudostate->setName("Pseudostate");
@@ -27278,6 +28943,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_Vertex());
 	
     // Pseudostate attributes
+	//kind
 	uML_Pseudostate_kind->setName("kind");
 	uML_Pseudostate_kind->setType(get_UML_PseudostateKind());
 	uML_Pseudostate_kind->setLower(1);
@@ -27288,6 +28954,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Pseudostate_kind->setDefaultValue(uML_Pseudostate_kind_defaultValue_InstanceValue);
 	
+	//state
 	uML_Pseudostate_state->setName("state");
 	uML_Pseudostate_state->setType(get_UML_State());
 	uML_Pseudostate_state->setLower(0);
@@ -27298,6 +28965,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Pseudostate_state->setAssociation(get_UML_A_connectionPoint_state());
 	
 	
+	//stateMachine
 	uML_Pseudostate_stateMachine->setName("stateMachine");
 	uML_Pseudostate_stateMachine->setType(get_UML_StateMachine());
 	uML_Pseudostate_stateMachine->setLower(0);
@@ -27319,6 +28987,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_Element());
 	
     // QualifierValue attributes
+	//qualifier
 	uML_QualifierValue_qualifier->setName("qualifier");
 	uML_QualifierValue_qualifier->setType(get_UML_Property());
 	uML_QualifierValue_qualifier->setLower(1);
@@ -27329,6 +28998,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_QualifierValue_qualifier->setAssociation(get_UML_A_qualifier_qualifierValue());
 	
 	
+	//value
 	uML_QualifierValue_value->setName("value");
 	uML_QualifierValue_value->setType(get_UML_InputPin());
 	uML_QualifierValue_value->setLower(1);
@@ -27350,6 +29020,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_Action());
 	
     // RaiseExceptionAction attributes
+	//exception
 	uML_RaiseExceptionAction_exception->setName("exception");
 	uML_RaiseExceptionAction_exception->setType(get_UML_InputPin());
 	uML_RaiseExceptionAction_exception->setLower(1);
@@ -27371,6 +29042,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_Action());
 	
     // ReadExtentAction attributes
+	//classifier
 	uML_ReadExtentAction_classifier->setName("classifier");
 	uML_ReadExtentAction_classifier->setType(get_UML_Classifier());
 	uML_ReadExtentAction_classifier->setLower(1);
@@ -27381,6 +29053,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ReadExtentAction_classifier->setAssociation(get_UML_A_classifier_readExtentAction());
 	
 	
+	//result
 	uML_ReadExtentAction_result->setName("result");
 	uML_ReadExtentAction_result->setType(get_UML_OutputPin());
 	uML_ReadExtentAction_result->setLower(1);
@@ -27402,6 +29075,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_Action());
 	
     // ReadIsClassifiedObjectAction attributes
+	//classifier
 	uML_ReadIsClassifiedObjectAction_classifier->setName("classifier");
 	uML_ReadIsClassifiedObjectAction_classifier->setType(get_UML_Classifier());
 	uML_ReadIsClassifiedObjectAction_classifier->setLower(1);
@@ -27412,6 +29086,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ReadIsClassifiedObjectAction_classifier->setAssociation(get_UML_A_classifier_readIsClassifiedObjectAction());
 	
 	
+	//isDirect
 	uML_ReadIsClassifiedObjectAction_isDirect->setName("isDirect");
 	uML_ReadIsClassifiedObjectAction_isDirect->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_ReadIsClassifiedObjectAction_isDirect->setLower(1);
@@ -27422,6 +29097,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_ReadIsClassifiedObjectAction_isDirect->setDefaultValue(uML_ReadIsClassifiedObjectAction_isDirect_defaultValue_LiteralBoolean_UML_ReadIsClassifiedObjectAction_isDirect);
 	
+	//object
 	uML_ReadIsClassifiedObjectAction_object->setName("object");
 	uML_ReadIsClassifiedObjectAction_object->setType(get_UML_InputPin());
 	uML_ReadIsClassifiedObjectAction_object->setLower(1);
@@ -27432,6 +29108,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ReadIsClassifiedObjectAction_object->setAssociation(get_UML_A_object_readIsClassifiedObjectAction());
 	
 	
+	//result
 	uML_ReadIsClassifiedObjectAction_result->setName("result");
 	uML_ReadIsClassifiedObjectAction_result->setType(get_UML_OutputPin());
 	uML_ReadIsClassifiedObjectAction_result->setLower(1);
@@ -27453,6 +29130,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_LinkAction());
 	
     // ReadLinkAction attributes
+	//result
 	uML_ReadLinkAction_result->setName("result");
 	uML_ReadLinkAction_result->setType(get_UML_OutputPin());
 	uML_ReadLinkAction_result->setLower(1);
@@ -27465,6 +29143,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 
     // ReadLinkAction operations
+	//openEnd
 	uML_ReadLinkAction_openEnd__->setName("openEnd");
 	uML_ReadLinkAction_openEnd__->setType(get_UML_Property());
 	
@@ -27477,7 +29156,6 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
-
     //-------------------------------------------
 	//	class ReadLinkObjectEndAction
 	uML_ReadLinkObjectEndAction->setName("ReadLinkObjectEndAction");
@@ -27487,6 +29165,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_Action());
 	
     // ReadLinkObjectEndAction attributes
+	//end
 	uML_ReadLinkObjectEndAction_end->setName("end");
 	uML_ReadLinkObjectEndAction_end->setType(get_UML_Property());
 	uML_ReadLinkObjectEndAction_end->setLower(1);
@@ -27497,6 +29176,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ReadLinkObjectEndAction_end->setAssociation(get_UML_A_end_readLinkObjectEndAction());
 	
 	
+	//object
 	uML_ReadLinkObjectEndAction_object->setName("object");
 	uML_ReadLinkObjectEndAction_object->setType(get_UML_InputPin());
 	uML_ReadLinkObjectEndAction_object->setLower(1);
@@ -27507,6 +29187,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ReadLinkObjectEndAction_object->setAssociation(get_UML_A_object_readLinkObjectEndAction());
 	
 	
+	//result
 	uML_ReadLinkObjectEndAction_result->setName("result");
 	uML_ReadLinkObjectEndAction_result->setType(get_UML_OutputPin());
 	uML_ReadLinkObjectEndAction_result->setLower(1);
@@ -27528,6 +29209,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_Action());
 	
     // ReadLinkObjectEndQualifierAction attributes
+	//object
 	uML_ReadLinkObjectEndQualifierAction_object->setName("object");
 	uML_ReadLinkObjectEndQualifierAction_object->setType(get_UML_InputPin());
 	uML_ReadLinkObjectEndQualifierAction_object->setLower(1);
@@ -27538,6 +29220,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ReadLinkObjectEndQualifierAction_object->setAssociation(get_UML_A_object_readLinkObjectEndQualifierAction());
 	
 	
+	//qualifier
 	uML_ReadLinkObjectEndQualifierAction_qualifier->setName("qualifier");
 	uML_ReadLinkObjectEndQualifierAction_qualifier->setType(get_UML_Property());
 	uML_ReadLinkObjectEndQualifierAction_qualifier->setLower(1);
@@ -27548,6 +29231,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ReadLinkObjectEndQualifierAction_qualifier->setAssociation(get_UML_A_qualifier_readLinkObjectEndQualifierAction());
 	
 	
+	//result
 	uML_ReadLinkObjectEndQualifierAction_result->setName("result");
 	uML_ReadLinkObjectEndQualifierAction_result->setType(get_UML_OutputPin());
 	uML_ReadLinkObjectEndQualifierAction_result->setLower(1);
@@ -27569,6 +29253,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_Action());
 	
     // ReadSelfAction attributes
+	//result
 	uML_ReadSelfAction_result->setName("result");
 	uML_ReadSelfAction_result->setType(get_UML_OutputPin());
 	uML_ReadSelfAction_result->setLower(1);
@@ -27590,6 +29275,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_StructuralFeatureAction());
 	
     // ReadStructuralFeatureAction attributes
+	//result
 	uML_ReadStructuralFeatureAction_result->setName("result");
 	uML_ReadStructuralFeatureAction_result->setType(get_UML_OutputPin());
 	uML_ReadStructuralFeatureAction_result->setLower(1);
@@ -27611,6 +29297,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_VariableAction());
 	
     // ReadVariableAction attributes
+	//result
 	uML_ReadVariableAction_result->setName("result");
 	uML_ReadVariableAction_result->setType(get_UML_OutputPin());
 	uML_ReadVariableAction_result->setLower(1);
@@ -27641,6 +29328,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_BehavioralFeature());
 	
     // Reception attributes
+	//signal
 	uML_Reception_signal->setName("signal");
 	uML_Reception_signal->setType(get_UML_Signal());
 	uML_Reception_signal->setLower(1);
@@ -27662,6 +29350,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_Action());
 	
     // ReclassifyObjectAction attributes
+	//isReplaceAll
 	uML_ReclassifyObjectAction_isReplaceAll->setName("isReplaceAll");
 	uML_ReclassifyObjectAction_isReplaceAll->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_ReclassifyObjectAction_isReplaceAll->setLower(1);
@@ -27672,6 +29361,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_ReclassifyObjectAction_isReplaceAll->setDefaultValue(uML_ReclassifyObjectAction_isReplaceAll_defaultValue_LiteralBoolean_UML_ReclassifyObjectAction_isReplaceAll);
 	
+	//newClassifier
 	uML_ReclassifyObjectAction_newClassifier->setName("newClassifier");
 	uML_ReclassifyObjectAction_newClassifier->setType(get_UML_Classifier());
 	uML_ReclassifyObjectAction_newClassifier->setLower(0);
@@ -27682,6 +29372,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ReclassifyObjectAction_newClassifier->setAssociation(get_UML_A_newClassifier_reclassifyObjectAction());
 	
 	
+	//object
 	uML_ReclassifyObjectAction_object->setName("object");
 	uML_ReclassifyObjectAction_object->setType(get_UML_InputPin());
 	uML_ReclassifyObjectAction_object->setLower(1);
@@ -27692,6 +29383,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ReclassifyObjectAction_object->setAssociation(get_UML_A_object_reclassifyObjectAction());
 	
 	
+	//oldClassifier
 	uML_ReclassifyObjectAction_oldClassifier->setName("oldClassifier");
 	uML_ReclassifyObjectAction_oldClassifier->setType(get_UML_Classifier());
 	uML_ReclassifyObjectAction_oldClassifier->setLower(0);
@@ -27713,6 +29405,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_NamedElement());
 	
     // RedefinableElement attributes
+	//isLeaf
 	uML_RedefinableElement_isLeaf->setName("isLeaf");
 	uML_RedefinableElement_isLeaf->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_RedefinableElement_isLeaf->setLower(1);
@@ -27723,6 +29416,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_RedefinableElement_isLeaf->setDefaultValue(uML_RedefinableElement_isLeaf_defaultValue_LiteralBoolean_UML_RedefinableElement_isLeaf);
 	
+	//redefinedElement
 	uML_RedefinableElement_redefinedElement->setName("redefinedElement");
 	uML_RedefinableElement_redefinedElement->setType(get_UML_RedefinableElement());
 	uML_RedefinableElement_redefinedElement->setLower(0);
@@ -27733,6 +29427,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_RedefinableElement_redefinedElement->setAssociation(get_UML_A_redefinedElement_redefinableElement());
 	
 	
+	//redefinitionContext
 	uML_RedefinableElement_redefinitionContext->setName("redefinitionContext");
 	uML_RedefinableElement_redefinitionContext->setType(get_UML_Classifier());
 	uML_RedefinableElement_redefinitionContext->setLower(0);
@@ -27745,6 +29440,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 
     // RedefinableElement operations
+	//isConsistentWith
 	uML_RedefinableElement_isConsistentWith_RedefinableElement_RedefinableElement->setName("isConsistentWith");
 	uML_RedefinableElement_isConsistentWith_RedefinableElement_RedefinableElement->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -27769,6 +29465,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//isRedefinitionContextValid
 	uML_RedefinableElement_isRedefinitionContextValid_RedefinableElement_RedefinableElement->setName("isRedefinitionContextValid");
 	uML_RedefinableElement_isRedefinitionContextValid_RedefinableElement_RedefinableElement->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -27793,7 +29490,6 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
-
     //-------------------------------------------
 	//	class RedefinableTemplateSignature
 	uML_RedefinableTemplateSignature->setName("RedefinableTemplateSignature");
@@ -27806,6 +29502,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_TemplateSignature());
 	
     // RedefinableTemplateSignature attributes
+	//classifier
 	uML_RedefinableTemplateSignature_classifier->setName("classifier");
 	uML_RedefinableTemplateSignature_classifier->setType(get_UML_Classifier());
 	uML_RedefinableTemplateSignature_classifier->setLower(1);
@@ -27816,6 +29513,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_RedefinableTemplateSignature_classifier->setAssociation(get_UML_A_ownedTemplateSignature_classifier());
 	
 	
+	//extendedSignature
 	uML_RedefinableTemplateSignature_extendedSignature->setName("extendedSignature");
 	uML_RedefinableTemplateSignature_extendedSignature->setType(get_UML_RedefinableTemplateSignature());
 	uML_RedefinableTemplateSignature_extendedSignature->setLower(0);
@@ -27826,6 +29524,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_RedefinableTemplateSignature_extendedSignature->setAssociation(get_UML_A_extendedSignature_redefinableTemplateSignature());
 	
 	
+	//inheritedParameter
 	uML_RedefinableTemplateSignature_inheritedParameter->setName("inheritedParameter");
 	uML_RedefinableTemplateSignature_inheritedParameter->setType(get_UML_TemplateParameter());
 	uML_RedefinableTemplateSignature_inheritedParameter->setLower(0);
@@ -27838,6 +29537,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 
     // RedefinableTemplateSignature operations
+	//inheritedParameter
 	uML_RedefinableTemplateSignature_inheritedParameter__->setName("inheritedParameter");
 	uML_RedefinableTemplateSignature_inheritedParameter__->setType(get_UML_TemplateParameter());
 	
@@ -27850,6 +29550,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//isConsistentWith
 	uML_RedefinableTemplateSignature_isConsistentWith_RedefinableElement_RedefinableElement->setName("isConsistentWith");
 	uML_RedefinableTemplateSignature_isConsistentWith_RedefinableElement_RedefinableElement->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -27874,7 +29575,6 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
-
     //-------------------------------------------
 	//	class ReduceAction
 	uML_ReduceAction->setName("ReduceAction");
@@ -27884,6 +29584,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_Action());
 	
     // ReduceAction attributes
+	//collection
 	uML_ReduceAction_collection->setName("collection");
 	uML_ReduceAction_collection->setType(get_UML_InputPin());
 	uML_ReduceAction_collection->setLower(1);
@@ -27894,6 +29595,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ReduceAction_collection->setAssociation(get_UML_A_collection_reduceAction());
 	
 	
+	//isOrdered
 	uML_ReduceAction_isOrdered->setName("isOrdered");
 	uML_ReduceAction_isOrdered->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_ReduceAction_isOrdered->setLower(1);
@@ -27904,6 +29606,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_ReduceAction_isOrdered->setDefaultValue(uML_ReduceAction_isOrdered_defaultValue_LiteralBoolean_UML_ReduceAction_isOrdered);
 	
+	//reducer
 	uML_ReduceAction_reducer->setName("reducer");
 	uML_ReduceAction_reducer->setType(get_UML_Behavior());
 	uML_ReduceAction_reducer->setLower(1);
@@ -27914,6 +29617,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ReduceAction_reducer->setAssociation(get_UML_A_reducer_reduceAction());
 	
 	
+	//result
 	uML_ReduceAction_result->setName("result");
 	uML_ReduceAction_result->setType(get_UML_OutputPin());
 	uML_ReduceAction_result->setLower(1);
@@ -27938,6 +29642,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_RedefinableElement());
 	
     // Region attributes
+	//extendedRegion
 	uML_Region_extendedRegion->setName("extendedRegion");
 	uML_Region_extendedRegion->setType(get_UML_Region());
 	uML_Region_extendedRegion->setLower(0);
@@ -27948,6 +29653,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Region_extendedRegion->setAssociation(get_UML_A_extendedRegion_region());
 	
 	
+	//redefinitionContext
 	uML_Region_redefinitionContext->setName("redefinitionContext");
 	uML_Region_redefinitionContext->setType(get_UML_Classifier());
 	uML_Region_redefinitionContext->setLower(1);
@@ -27958,6 +29664,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Region_redefinitionContext->setAssociation(get_UML_A_redefinitionContext_region());
 	
 	
+	//state
 	uML_Region_state->setName("state");
 	uML_Region_state->setType(get_UML_State());
 	uML_Region_state->setLower(0);
@@ -27968,6 +29675,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Region_state->setAssociation(get_UML_A_region_state());
 	
 	
+	//stateMachine
 	uML_Region_stateMachine->setName("stateMachine");
 	uML_Region_stateMachine->setType(get_UML_StateMachine());
 	uML_Region_stateMachine->setLower(0);
@@ -27978,6 +29686,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Region_stateMachine->setAssociation(get_UML_A_region_stateMachine());
 	
 	
+	//subvertex
 	uML_Region_subvertex->setName("subvertex");
 	uML_Region_subvertex->setType(get_UML_Vertex());
 	uML_Region_subvertex->setLower(0);
@@ -27988,6 +29697,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Region_subvertex->setAssociation(get_UML_A_subvertex_container());
 	
 	
+	//transition
 	uML_Region_transition->setName("transition");
 	uML_Region_transition->setType(get_UML_Transition());
 	uML_Region_transition->setLower(0);
@@ -28000,6 +29710,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 
     // Region operations
+	//belongsToPSM
 	uML_Region_belongsToPSM__->setName("belongsToPSM");
 	uML_Region_belongsToPSM__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -28012,6 +29723,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//containingStateMachine
 	uML_Region_containingStateMachine__->setName("containingStateMachine");
 	uML_Region_containingStateMachine__->setType(get_UML_StateMachine());
 	
@@ -28024,6 +29736,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//isConsistentWith
 	uML_Region_isConsistentWith_RedefinableElement_RedefinableElement->setName("isConsistentWith");
 	uML_Region_isConsistentWith_RedefinableElement_RedefinableElement->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -28048,6 +29761,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//isRedefinitionContextValid
 	uML_Region_isRedefinitionContextValid_RedefinableElement_RedefinableElement->setName("isRedefinitionContextValid");
 	uML_Region_isRedefinitionContextValid_RedefinableElement_RedefinableElement->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -28072,6 +29786,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//redefinitionContext
 	uML_Region_redefinitionContext__->setName("redefinitionContext");
 	uML_Region_redefinitionContext__->setType(get_UML_Classifier());
 	
@@ -28084,7 +29799,6 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
-
     //-------------------------------------------
 	//	class Relationship
 	uML_Relationship->setName("Relationship");
@@ -28094,6 +29808,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_Element());
 	
     // Relationship attributes
+	//relatedElement
 	uML_Relationship_relatedElement->setName("relatedElement");
 	uML_Relationship_relatedElement->setType(get_UML_Element());
 	uML_Relationship_relatedElement->setLower(1);
@@ -28115,6 +29830,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_WriteStructuralFeatureAction());
 	
     // RemoveStructuralFeatureValueAction attributes
+	//isRemoveDuplicates
 	uML_RemoveStructuralFeatureValueAction_isRemoveDuplicates->setName("isRemoveDuplicates");
 	uML_RemoveStructuralFeatureValueAction_isRemoveDuplicates->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_RemoveStructuralFeatureValueAction_isRemoveDuplicates->setLower(1);
@@ -28125,6 +29841,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_RemoveStructuralFeatureValueAction_isRemoveDuplicates->setDefaultValue(uML_RemoveStructuralFeatureValueAction_isRemoveDuplicates_defaultValue_LiteralBoolean_UML_RemoveStructuralFeatureValueAction_isRemoveDuplicates);
 	
+	//removeAt
 	uML_RemoveStructuralFeatureValueAction_removeAt->setName("removeAt");
 	uML_RemoveStructuralFeatureValueAction_removeAt->setType(get_UML_InputPin());
 	uML_RemoveStructuralFeatureValueAction_removeAt->setLower(0);
@@ -28146,6 +29863,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_WriteVariableAction());
 	
     // RemoveVariableValueAction attributes
+	//isRemoveDuplicates
 	uML_RemoveVariableValueAction_isRemoveDuplicates->setName("isRemoveDuplicates");
 	uML_RemoveVariableValueAction_isRemoveDuplicates->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_RemoveVariableValueAction_isRemoveDuplicates->setLower(1);
@@ -28156,6 +29874,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_RemoveVariableValueAction_isRemoveDuplicates->setDefaultValue(uML_RemoveVariableValueAction_isRemoveDuplicates_defaultValue_LiteralBoolean_UML_RemoveVariableValueAction_isRemoveDuplicates);
 	
+	//removeAt
 	uML_RemoveVariableValueAction_removeAt->setName("removeAt");
 	uML_RemoveVariableValueAction_removeAt->setType(get_UML_InputPin());
 	uML_RemoveVariableValueAction_removeAt->setLower(0);
@@ -28177,6 +29896,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_Action());
 	
     // ReplyAction attributes
+	//replyToCall
 	uML_ReplyAction_replyToCall->setName("replyToCall");
 	uML_ReplyAction_replyToCall->setType(get_UML_Trigger());
 	uML_ReplyAction_replyToCall->setLower(1);
@@ -28187,6 +29907,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ReplyAction_replyToCall->setAssociation(get_UML_A_replyToCall_replyAction());
 	
 	
+	//replyValue
 	uML_ReplyAction_replyValue->setName("replyValue");
 	uML_ReplyAction_replyValue->setType(get_UML_InputPin());
 	uML_ReplyAction_replyValue->setLower(0);
@@ -28197,6 +29918,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ReplyAction_replyValue->setAssociation(get_UML_A_replyValue_replyAction());
 	
 	
+	//returnInformation
 	uML_ReplyAction_returnInformation->setName("returnInformation");
 	uML_ReplyAction_returnInformation->setType(get_UML_InputPin());
 	uML_ReplyAction_returnInformation->setLower(1);
@@ -28218,6 +29940,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_InvocationAction());
 	
     // SendObjectAction attributes
+	//request
 	uML_SendObjectAction_request->setName("request");
 	uML_SendObjectAction_request->setType(get_UML_InputPin());
 	uML_SendObjectAction_request->setLower(1);
@@ -28228,6 +29951,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_SendObjectAction_request->setAssociation(get_UML_A_request_sendObjectAction());
 	
 	
+	//target
 	uML_SendObjectAction_target->setName("target");
 	uML_SendObjectAction_target->setType(get_UML_InputPin());
 	uML_SendObjectAction_target->setLower(1);
@@ -28249,6 +29973,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_InvocationAction());
 	
     // SendSignalAction attributes
+	//signal
 	uML_SendSignalAction_signal->setName("signal");
 	uML_SendSignalAction_signal->setType(get_UML_Signal());
 	uML_SendSignalAction_signal->setLower(1);
@@ -28259,6 +29984,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_SendSignalAction_signal->setAssociation(get_UML_A_signal_sendSignalAction());
 	
 	
+	//target
 	uML_SendSignalAction_target->setName("target");
 	uML_SendSignalAction_target->setType(get_UML_InputPin());
 	uML_SendSignalAction_target->setLower(1);
@@ -28280,6 +30006,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_StructuredActivityNode());
 	
     // SequenceNode attributes
+	//executableNode
 	uML_SequenceNode_executableNode->setName("executableNode");
 	uML_SequenceNode_executableNode->setType(get_UML_ExecutableNode());
 	uML_SequenceNode_executableNode->setLower(0);
@@ -28301,6 +30028,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_Classifier());
 	
     // Signal attributes
+	//ownedAttribute
 	uML_Signal_ownedAttribute->setName("ownedAttribute");
 	uML_Signal_ownedAttribute->setType(get_UML_Property());
 	uML_Signal_ownedAttribute->setLower(0);
@@ -28313,6 +30041,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 
     // Signal operations
+	//createOwnedAttribute
 	uML_Signal_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural->setName("createOwnedAttribute");
 	uML_Signal_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural->setType(get_UML_Property());
 	
@@ -28373,7 +30102,6 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
-
     //-------------------------------------------
 	//	class SignalEvent
 	uML_SignalEvent->setName("SignalEvent");
@@ -28383,6 +30111,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_MessageEvent());
 	
     // SignalEvent attributes
+	//signal
 	uML_SignalEvent_signal->setName("signal");
 	uML_SignalEvent_signal->setType(get_UML_Signal());
 	uML_SignalEvent_signal->setLower(1);
@@ -28404,6 +30133,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_Element());
 	
     // Slot attributes
+	//definingFeature
 	uML_Slot_definingFeature->setName("definingFeature");
 	uML_Slot_definingFeature->setType(get_UML_StructuralFeature());
 	uML_Slot_definingFeature->setLower(1);
@@ -28414,6 +30144,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Slot_definingFeature->setAssociation(get_UML_A_definingFeature_slot());
 	
 	
+	//owningInstance
 	uML_Slot_owningInstance->setName("owningInstance");
 	uML_Slot_owningInstance->setType(get_UML_InstanceSpecification());
 	uML_Slot_owningInstance->setLower(1);
@@ -28424,6 +30155,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Slot_owningInstance->setAssociation(get_UML_A_slot_owningInstance());
 	
 	
+	//value
 	uML_Slot_value->setName("value");
 	uML_Slot_value->setType(get_UML_ValueSpecification());
 	uML_Slot_value->setLower(0);
@@ -28445,6 +30177,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_Action());
 	
     // StartClassifierBehaviorAction attributes
+	//object
 	uML_StartClassifierBehaviorAction_object->setName("object");
 	uML_StartClassifierBehaviorAction_object->setType(get_UML_InputPin());
 	uML_StartClassifierBehaviorAction_object->setLower(1);
@@ -28466,6 +30199,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_CallAction());
 	
     // StartObjectBehaviorAction attributes
+	//object
 	uML_StartObjectBehaviorAction_object->setName("object");
 	uML_StartObjectBehaviorAction_object->setType(get_UML_InputPin());
 	uML_StartObjectBehaviorAction_object->setLower(1);
@@ -28478,6 +30212,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 
     // StartObjectBehaviorAction operations
+	//behavior
 	uML_StartObjectBehaviorAction_behavior__->setName("behavior");
 	uML_StartObjectBehaviorAction_behavior__->setType(get_UML_Behavior());
 	
@@ -28490,6 +30225,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//inputParameters
 	uML_StartObjectBehaviorAction_inputParameters__->setName("inputParameters");
 	uML_StartObjectBehaviorAction_inputParameters__->setType(get_UML_Parameter());
 	
@@ -28502,6 +30238,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//outputParameters
 	uML_StartObjectBehaviorAction_outputParameters__->setName("outputParameters");
 	uML_StartObjectBehaviorAction_outputParameters__->setType(get_UML_Parameter());
 	
@@ -28513,7 +30250,6 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_StartObjectBehaviorAction_outputParameters_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
 	
-
 
     //-------------------------------------------
 	//	class State
@@ -28530,6 +30266,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_Vertex());
 	
     // State attributes
+	//connection
 	uML_State_connection->setName("connection");
 	uML_State_connection->setType(get_UML_ConnectionPointReference());
 	uML_State_connection->setLower(0);
@@ -28540,6 +30277,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_State_connection->setAssociation(get_UML_A_connection_state());
 	
 	
+	//connectionPoint
 	uML_State_connectionPoint->setName("connectionPoint");
 	uML_State_connectionPoint->setType(get_UML_Pseudostate());
 	uML_State_connectionPoint->setLower(0);
@@ -28550,6 +30288,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_State_connectionPoint->setAssociation(get_UML_A_connectionPoint_state());
 	
 	
+	//deferrableTrigger
 	uML_State_deferrableTrigger->setName("deferrableTrigger");
 	uML_State_deferrableTrigger->setType(get_UML_Trigger());
 	uML_State_deferrableTrigger->setLower(0);
@@ -28560,6 +30299,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_State_deferrableTrigger->setAssociation(get_UML_A_deferrableTrigger_state());
 	
 	
+	//doActivity
 	uML_State_doActivity->setName("doActivity");
 	uML_State_doActivity->setType(get_UML_Behavior());
 	uML_State_doActivity->setLower(0);
@@ -28570,6 +30310,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_State_doActivity->setAssociation(get_UML_A_doActivity_state());
 	
 	
+	//entry
 	uML_State_entry->setName("entry");
 	uML_State_entry->setType(get_UML_Behavior());
 	uML_State_entry->setLower(0);
@@ -28580,6 +30321,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_State_entry->setAssociation(get_UML_A_entry_state());
 	
 	
+	//exit
 	uML_State_exit->setName("exit");
 	uML_State_exit->setType(get_UML_Behavior());
 	uML_State_exit->setLower(0);
@@ -28590,6 +30332,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_State_exit->setAssociation(get_UML_A_exit_state());
 	
 	
+	//isComposite
 	uML_State_isComposite->setName("isComposite");
 	uML_State_isComposite->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_State_isComposite->setLower(1);
@@ -28600,6 +30343,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 	
+	//isOrthogonal
 	uML_State_isOrthogonal->setName("isOrthogonal");
 	uML_State_isOrthogonal->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_State_isOrthogonal->setLower(1);
@@ -28610,6 +30354,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 	
+	//isSimple
 	uML_State_isSimple->setName("isSimple");
 	uML_State_isSimple->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_State_isSimple->setLower(1);
@@ -28620,6 +30365,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_State_isSimple->setDefaultValue(uML_State_isSimple_defaultValue_LiteralBoolean_UML_State_isSimple);
 	
+	//isSubmachineState
 	uML_State_isSubmachineState->setName("isSubmachineState");
 	uML_State_isSubmachineState->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_State_isSubmachineState->setLower(1);
@@ -28630,6 +30376,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 	
+	//redefinedState
 	uML_State_redefinedState->setName("redefinedState");
 	uML_State_redefinedState->setType(get_UML_State());
 	uML_State_redefinedState->setLower(0);
@@ -28640,6 +30387,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_State_redefinedState->setAssociation(get_UML_A_redefinedState_state());
 	
 	
+	//redefinitionContext
 	uML_State_redefinitionContext->setName("redefinitionContext");
 	uML_State_redefinitionContext->setType(get_UML_Classifier());
 	uML_State_redefinitionContext->setLower(1);
@@ -28650,6 +30398,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_State_redefinitionContext->setAssociation(get_UML_A_redefinitionContext_state());
 	
 	
+	//region
 	uML_State_region->setName("region");
 	uML_State_region->setType(get_UML_Region());
 	uML_State_region->setLower(0);
@@ -28660,6 +30409,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_State_region->setAssociation(get_UML_A_region_state());
 	
 	
+	//stateInvariant
 	uML_State_stateInvariant->setName("stateInvariant");
 	uML_State_stateInvariant->setType(get_UML_Constraint());
 	uML_State_stateInvariant->setLower(0);
@@ -28670,6 +30420,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_State_stateInvariant->setAssociation(get_UML_A_stateInvariant_owningState());
 	
 	
+	//submachine
 	uML_State_submachine->setName("submachine");
 	uML_State_submachine->setType(get_UML_StateMachine());
 	uML_State_submachine->setLower(0);
@@ -28682,6 +30433,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 
     // State operations
+	//containingStateMachine
 	uML_State_containingStateMachine__->setName("containingStateMachine");
 	uML_State_containingStateMachine__->setType(get_UML_StateMachine());
 	
@@ -28694,6 +30446,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//isComposite
 	uML_State_isComposite__->setName("isComposite");
 	uML_State_isComposite__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -28706,6 +30459,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//isConsistentWith
 	uML_State_isConsistentWith_RedefinableElement_RedefinableElement->setName("isConsistentWith");
 	uML_State_isConsistentWith_RedefinableElement_RedefinableElement->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -28730,6 +30484,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//isOrthogonal
 	uML_State_isOrthogonal__->setName("isOrthogonal");
 	uML_State_isOrthogonal__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -28742,6 +30497,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//isRedefinitionContextValid
 	uML_State_isRedefinitionContextValid_RedefinableElement_RedefinableElement->setName("isRedefinitionContextValid");
 	uML_State_isRedefinitionContextValid_RedefinableElement_RedefinableElement->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -28766,6 +30522,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//isSimple
 	uML_State_isSimple__->setName("isSimple");
 	uML_State_isSimple__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -28778,6 +30535,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//isSubmachineState
 	uML_State_isSubmachineState__->setName("isSubmachineState");
 	uML_State_isSubmachineState__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -28790,6 +30548,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//redefinitionContext
 	uML_State_redefinitionContext__->setName("redefinitionContext");
 	uML_State_redefinitionContext__->setType(get_UML_Classifier());
 	
@@ -28802,7 +30561,6 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
-
     //-------------------------------------------
 	//	class StateInvariant
 	uML_StateInvariant->setName("StateInvariant");
@@ -28812,6 +30570,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_InteractionFragment());
 	
     // StateInvariant attributes
+	//covered
 	uML_StateInvariant_covered->setName("covered");
 	uML_StateInvariant_covered->setType(get_UML_Lifeline());
 	uML_StateInvariant_covered->setLower(1);
@@ -28822,6 +30581,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_StateInvariant_covered->setAssociation(get_UML_A_covered_stateInvariant());
 	
 	
+	//invariant
 	uML_StateInvariant_invariant->setName("invariant");
 	uML_StateInvariant_invariant->setType(get_UML_Constraint());
 	uML_StateInvariant_invariant->setLower(1);
@@ -28843,6 +30603,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_Behavior());
 	
     // StateMachine attributes
+	//connectionPoint
 	uML_StateMachine_connectionPoint->setName("connectionPoint");
 	uML_StateMachine_connectionPoint->setType(get_UML_Pseudostate());
 	uML_StateMachine_connectionPoint->setLower(0);
@@ -28853,6 +30614,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_StateMachine_connectionPoint->setAssociation(get_UML_A_connectionPoint_stateMachine());
 	
 	
+	//extendedStateMachine
 	uML_StateMachine_extendedStateMachine->setName("extendedStateMachine");
 	uML_StateMachine_extendedStateMachine->setType(get_UML_StateMachine());
 	uML_StateMachine_extendedStateMachine->setLower(0);
@@ -28863,6 +30625,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_StateMachine_extendedStateMachine->setAssociation(get_UML_A_extendedStateMachine_stateMachine());
 	
 	
+	//region
 	uML_StateMachine_region->setName("region");
 	uML_StateMachine_region->setType(get_UML_Region());
 	uML_StateMachine_region->setLower(1);
@@ -28873,6 +30636,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_StateMachine_region->setAssociation(get_UML_A_region_stateMachine());
 	
 	
+	//submachineState
 	uML_StateMachine_submachineState->setName("submachineState");
 	uML_StateMachine_submachineState->setType(get_UML_State());
 	uML_StateMachine_submachineState->setLower(0);
@@ -28885,6 +30649,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 
     // StateMachine operations
+	//LCA
 	uML_StateMachine_LCA_Vertex_Vertex_Vertex_Vertex->setName("LCA");
 	uML_StateMachine_LCA_Vertex_Vertex_Vertex_Vertex->setType(get_UML_Region());
 	
@@ -28921,6 +30686,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//LCAState
 	uML_StateMachine_LCAState_Vertex_Vertex_Vertex_Vertex->setName("LCAState");
 	uML_StateMachine_LCAState_Vertex_Vertex_Vertex_Vertex->setType(get_UML_State());
 	
@@ -28957,6 +30723,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//ancestor
 	uML_StateMachine_ancestor_Vertex_Vertex_Vertex_Vertex->setName("ancestor");
 	uML_StateMachine_ancestor_Vertex_Vertex_Vertex_Vertex->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -28993,6 +30760,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//isConsistentWith
 	uML_StateMachine_isConsistentWith_RedefinableElement_RedefinableElement->setName("isConsistentWith");
 	uML_StateMachine_isConsistentWith_RedefinableElement_RedefinableElement->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -29017,6 +30785,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//isRedefinitionContextValid
 	uML_StateMachine_isRedefinitionContextValid_RedefinableElement_RedefinableElement->setName("isRedefinitionContextValid");
 	uML_StateMachine_isRedefinitionContextValid_RedefinableElement_RedefinableElement->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -29041,7 +30810,6 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
-
     //-------------------------------------------
 	//	class Stereotype
 	uML_Stereotype->setName("Stereotype");
@@ -29051,6 +30819,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_Class());
 	
     // Stereotype attributes
+	//icon
 	uML_Stereotype_icon->setName("icon");
 	uML_Stereotype_icon->setType(get_UML_Image());
 	uML_Stereotype_icon->setLower(0);
@@ -29061,6 +30830,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Stereotype_icon->setAssociation(get_UML_A_icon_stereotype());
 	
 	
+	//profile
 	uML_Stereotype_profile->setName("profile");
 	uML_Stereotype_profile->setType(get_UML_Profile());
 	uML_Stereotype_profile->setLower(1);
@@ -29073,6 +30843,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 
     // Stereotype operations
+	//containingProfile
 	uML_Stereotype_containingProfile__->setName("containingProfile");
 	uML_Stereotype_containingProfile__->setType(get_UML_Profile());
 	
@@ -29085,6 +30856,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//createExtension
 	uML_Stereotype_createExtension_Class_Boolean_Class_Boolean->setName("createExtension");
 	uML_Stereotype_createExtension_Class_Boolean_Class_Boolean->setType(get_UML_Extension());
 	
@@ -29121,6 +30893,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//createIcon
 	uML_Stereotype_createIcon_String_String->setName("createIcon");
 	uML_Stereotype_createIcon_String_String->setType(get_UML_Image());
 	
@@ -29145,6 +30918,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//createIcon
 	uML_Stereotype_createIcon_String_String_String_String->setName("createIcon");
 	uML_Stereotype_createIcon_String_String_String_String->setType(get_UML_Image());
 	
@@ -29181,6 +30955,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//getAllExtendedMetaclasses
 	uML_Stereotype_getAllExtendedMetaclasses__->setName("getAllExtendedMetaclasses");
 	uML_Stereotype_getAllExtendedMetaclasses__->setType(get_UML_Class());
 	
@@ -29193,6 +30968,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//getDefinition
 	uML_Stereotype_getDefinition__->setName("getDefinition");
 	uML_Stereotype_getDefinition__->setType(Ecore::EcorePackage::eInstance()->get_Ecore_EClass());
 	
@@ -29205,6 +30981,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//getExtendedMetaclasses
 	uML_Stereotype_getExtendedMetaclasses__->setName("getExtendedMetaclasses");
 	uML_Stereotype_getExtendedMetaclasses__->setType(get_UML_Class());
 	
@@ -29217,6 +30994,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//getKeyword
 	uML_Stereotype_getKeyword__->setName("getKeyword");
 	uML_Stereotype_getKeyword__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
 	
@@ -29229,6 +31007,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//getKeyword
 	uML_Stereotype_getKeyword_Boolean_Boolean->setName("getKeyword");
 	uML_Stereotype_getKeyword_Boolean_Boolean->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
 	
@@ -29253,6 +31032,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//profile
 	uML_Stereotype_profile__->setName("profile");
 	uML_Stereotype_profile__->setType(get_UML_Profile());
 	
@@ -29264,7 +31044,6 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Stereotype_profile_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
 	
-
 
     //-------------------------------------------
 	//	class StringExpression
@@ -29278,6 +31057,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_TemplateableElement());
 	
     // StringExpression attributes
+	//owningExpression
 	uML_StringExpression_owningExpression->setName("owningExpression");
 	uML_StringExpression_owningExpression->setType(get_UML_StringExpression());
 	uML_StringExpression_owningExpression->setLower(0);
@@ -29288,6 +31068,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_StringExpression_owningExpression->setAssociation(get_UML_A_subExpression_owningExpression());
 	
 	
+	//subExpression
 	uML_StringExpression_subExpression->setName("subExpression");
 	uML_StringExpression_subExpression->setType(get_UML_StringExpression());
 	uML_StringExpression_subExpression->setLower(0);
@@ -29300,6 +31081,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 
     // StringExpression operations
+	//stringValue
 	uML_StringExpression_stringValue__->setName("stringValue");
 	uML_StringExpression_stringValue__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
 	
@@ -29311,7 +31093,6 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_StringExpression_stringValue_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
 	
-
 
     //-------------------------------------------
 	//	class StructuralFeature
@@ -29328,6 +31109,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_TypedElement());
 	
     // StructuralFeature attributes
+	//isReadOnly
 	uML_StructuralFeature_isReadOnly->setName("isReadOnly");
 	uML_StructuralFeature_isReadOnly->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_StructuralFeature_isReadOnly->setLower(1);
@@ -29349,6 +31131,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_Action());
 	
     // StructuralFeatureAction attributes
+	//object
 	uML_StructuralFeatureAction_object->setName("object");
 	uML_StructuralFeatureAction_object->setType(get_UML_InputPin());
 	uML_StructuralFeatureAction_object->setLower(1);
@@ -29359,6 +31142,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_StructuralFeatureAction_object->setAssociation(get_UML_A_object_structuralFeatureAction());
 	
 	
+	//structuralFeature
 	uML_StructuralFeatureAction_structuralFeature->setName("structuralFeature");
 	uML_StructuralFeatureAction_structuralFeature->setType(get_UML_StructuralFeature());
 	uML_StructuralFeatureAction_structuralFeature->setLower(1);
@@ -29386,6 +31170,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_Namespace());
 	
     // StructuredActivityNode attributes
+	//activity
 	uML_StructuredActivityNode_activity->setName("activity");
 	uML_StructuredActivityNode_activity->setType(get_UML_Activity());
 	uML_StructuredActivityNode_activity->setLower(0);
@@ -29396,6 +31181,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_StructuredActivityNode_activity->setAssociation(get_UML_A_structuredNode_activity());
 	
 	
+	//edge
 	uML_StructuredActivityNode_edge->setName("edge");
 	uML_StructuredActivityNode_edge->setType(get_UML_ActivityEdge());
 	uML_StructuredActivityNode_edge->setLower(0);
@@ -29406,6 +31192,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_StructuredActivityNode_edge->setAssociation(get_UML_A_edge_inStructuredNode());
 	
 	
+	//mustIsolate
 	uML_StructuredActivityNode_mustIsolate->setName("mustIsolate");
 	uML_StructuredActivityNode_mustIsolate->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_StructuredActivityNode_mustIsolate->setLower(1);
@@ -29416,6 +31203,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_StructuredActivityNode_mustIsolate->setDefaultValue(uML_StructuredActivityNode_mustIsolate_defaultValue_LiteralBoolean_UML_StructuredActivityNode_mustIsolate);
 	
+	//node
 	uML_StructuredActivityNode_node->setName("node");
 	uML_StructuredActivityNode_node->setType(get_UML_ActivityNode());
 	uML_StructuredActivityNode_node->setLower(0);
@@ -29426,6 +31214,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_StructuredActivityNode_node->setAssociation(get_UML_A_node_inStructuredNode());
 	
 	
+	//structuredNodeInput
 	uML_StructuredActivityNode_structuredNodeInput->setName("structuredNodeInput");
 	uML_StructuredActivityNode_structuredNodeInput->setType(get_UML_InputPin());
 	uML_StructuredActivityNode_structuredNodeInput->setLower(0);
@@ -29436,6 +31225,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_StructuredActivityNode_structuredNodeInput->setAssociation(get_UML_A_structuredNodeInput_structuredActivityNode());
 	
 	
+	//structuredNodeOutput
 	uML_StructuredActivityNode_structuredNodeOutput->setName("structuredNodeOutput");
 	uML_StructuredActivityNode_structuredNodeOutput->setType(get_UML_OutputPin());
 	uML_StructuredActivityNode_structuredNodeOutput->setLower(0);
@@ -29446,6 +31236,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_StructuredActivityNode_structuredNodeOutput->setAssociation(get_UML_A_structuredNodeOutput_structuredActivityNode());
 	
 	
+	//variable
 	uML_StructuredActivityNode_variable->setName("variable");
 	uML_StructuredActivityNode_variable->setType(get_UML_Variable());
 	uML_StructuredActivityNode_variable->setLower(0);
@@ -29458,6 +31249,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 
     // StructuredActivityNode operations
+	//allActions
 	uML_StructuredActivityNode_allActions__->setName("allActions");
 	uML_StructuredActivityNode_allActions__->setType(get_UML_Action());
 	
@@ -29470,6 +31262,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//allOwnedNodes
 	uML_StructuredActivityNode_allOwnedNodes__->setName("allOwnedNodes");
 	uML_StructuredActivityNode_allOwnedNodes__->setType(get_UML_ActivityNode());
 	
@@ -29482,6 +31275,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//containingActivity
 	uML_StructuredActivityNode_containingActivity__->setName("containingActivity");
 	uML_StructuredActivityNode_containingActivity__->setType(get_UML_Activity());
 	
@@ -29494,6 +31288,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//sourceNodes
 	uML_StructuredActivityNode_sourceNodes__->setName("sourceNodes");
 	uML_StructuredActivityNode_sourceNodes__->setType(get_UML_ActivityNode());
 	
@@ -29506,6 +31301,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//targetNodes
 	uML_StructuredActivityNode_targetNodes__->setName("targetNodes");
 	uML_StructuredActivityNode_targetNodes__->setType(get_UML_ActivityNode());
 	
@@ -29518,7 +31314,6 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
-
     //-------------------------------------------
 	//	class StructuredClassifier
 	uML_StructuredClassifier->setName("StructuredClassifier");
@@ -29528,6 +31323,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_Classifier());
 	
     // StructuredClassifier attributes
+	//ownedAttribute
 	uML_StructuredClassifier_ownedAttribute->setName("ownedAttribute");
 	uML_StructuredClassifier_ownedAttribute->setType(get_UML_Property());
 	uML_StructuredClassifier_ownedAttribute->setLower(0);
@@ -29538,6 +31334,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_StructuredClassifier_ownedAttribute->setAssociation(get_UML_A_ownedAttribute_structuredClassifier());
 	
 	
+	//ownedConnector
 	uML_StructuredClassifier_ownedConnector->setName("ownedConnector");
 	uML_StructuredClassifier_ownedConnector->setType(get_UML_Connector());
 	uML_StructuredClassifier_ownedConnector->setLower(0);
@@ -29548,6 +31345,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_StructuredClassifier_ownedConnector->setAssociation(get_UML_A_ownedConnector_structuredClassifier());
 	
 	
+	//part
 	uML_StructuredClassifier_part->setName("part");
 	uML_StructuredClassifier_part->setType(get_UML_Property());
 	uML_StructuredClassifier_part->setLower(0);
@@ -29558,6 +31356,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_StructuredClassifier_part->setAssociation(get_UML_A_part_structuredClassifier());
 	
 	
+	//role
 	uML_StructuredClassifier_role->setName("role");
 	uML_StructuredClassifier_role->setType(get_UML_ConnectableElement());
 	uML_StructuredClassifier_role->setLower(0);
@@ -29570,6 +31369,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 
     // StructuredClassifier operations
+	//allRoles
 	uML_StructuredClassifier_allRoles__->setName("allRoles");
 	uML_StructuredClassifier_allRoles__->setType(get_UML_ConnectableElement());
 	
@@ -29582,6 +31382,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//createOwnedAttribute
 	uML_StructuredClassifier_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural->setName("createOwnedAttribute");
 	uML_StructuredClassifier_createOwnedAttribute_String_Type_Integer_UnlimitedNatural_String_Type_Integer_UnlimitedNatural->setType(get_UML_Property());
 	
@@ -29642,6 +31443,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//part
 	uML_StructuredClassifier_part__->setName("part");
 	uML_StructuredClassifier_part__->setType(get_UML_Property());
 	
@@ -29654,7 +31456,6 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
-
     //-------------------------------------------
 	//	class Substitution
 	uML_Substitution->setName("Substitution");
@@ -29664,6 +31465,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_Realization());
 	
     // Substitution attributes
+	//contract
 	uML_Substitution_contract->setName("contract");
 	uML_Substitution_contract->setType(get_UML_Classifier());
 	uML_Substitution_contract->setLower(1);
@@ -29674,6 +31476,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Substitution_contract->setAssociation(get_UML_A_contract_substitution());
 	
 	
+	//substitutingClassifier
 	uML_Substitution_substitutingClassifier->setName("substitutingClassifier");
 	uML_Substitution_substitutingClassifier->setType(get_UML_Classifier());
 	uML_Substitution_substitutingClassifier->setLower(1);
@@ -29695,6 +31498,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_DirectedRelationship());
 	
     // TemplateBinding attributes
+	//boundElement
 	uML_TemplateBinding_boundElement->setName("boundElement");
 	uML_TemplateBinding_boundElement->setType(get_UML_TemplateableElement());
 	uML_TemplateBinding_boundElement->setLower(1);
@@ -29705,6 +31509,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_TemplateBinding_boundElement->setAssociation(get_UML_A_templateBinding_boundElement());
 	
 	
+	//parameterSubstitution
 	uML_TemplateBinding_parameterSubstitution->setName("parameterSubstitution");
 	uML_TemplateBinding_parameterSubstitution->setType(get_UML_TemplateParameterSubstitution());
 	uML_TemplateBinding_parameterSubstitution->setLower(0);
@@ -29715,6 +31520,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_TemplateBinding_parameterSubstitution->setAssociation(get_UML_A_parameterSubstitution_templateBinding());
 	
 	
+	//signature
 	uML_TemplateBinding_signature->setName("signature");
 	uML_TemplateBinding_signature->setType(get_UML_TemplateSignature());
 	uML_TemplateBinding_signature->setLower(1);
@@ -29736,6 +31542,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_Element());
 	
     // TemplateParameter attributes
+	//default
 	uML_TemplateParameter_default->setName("default");
 	uML_TemplateParameter_default->setType(get_UML_ParameterableElement());
 	uML_TemplateParameter_default->setLower(0);
@@ -29746,6 +31553,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_TemplateParameter_default->setAssociation(get_UML_A_default_templateParameter());
 	
 	
+	//ownedDefault
 	uML_TemplateParameter_ownedDefault->setName("ownedDefault");
 	uML_TemplateParameter_ownedDefault->setType(get_UML_ParameterableElement());
 	uML_TemplateParameter_ownedDefault->setLower(0);
@@ -29756,6 +31564,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_TemplateParameter_ownedDefault->setAssociation(get_UML_A_ownedDefault_templateParameter());
 	
 	
+	//ownedParameteredElement
 	uML_TemplateParameter_ownedParameteredElement->setName("ownedParameteredElement");
 	uML_TemplateParameter_ownedParameteredElement->setType(get_UML_ParameterableElement());
 	uML_TemplateParameter_ownedParameteredElement->setLower(0);
@@ -29766,6 +31575,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_TemplateParameter_ownedParameteredElement->setAssociation(get_UML_A_ownedParameteredElement_owningTemplateParameter());
 	
 	
+	//parameteredElement
 	uML_TemplateParameter_parameteredElement->setName("parameteredElement");
 	uML_TemplateParameter_parameteredElement->setType(get_UML_ParameterableElement());
 	uML_TemplateParameter_parameteredElement->setLower(1);
@@ -29776,6 +31586,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_TemplateParameter_parameteredElement->setAssociation(get_UML_A_parameteredElement_templateParameter());
 	
 	
+	//signature
 	uML_TemplateParameter_signature->setName("signature");
 	uML_TemplateParameter_signature->setType(get_UML_TemplateSignature());
 	uML_TemplateParameter_signature->setLower(1);
@@ -29797,6 +31608,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_Element());
 	
     // TemplateParameterSubstitution attributes
+	//actual
 	uML_TemplateParameterSubstitution_actual->setName("actual");
 	uML_TemplateParameterSubstitution_actual->setType(get_UML_ParameterableElement());
 	uML_TemplateParameterSubstitution_actual->setLower(1);
@@ -29807,6 +31619,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_TemplateParameterSubstitution_actual->setAssociation(get_UML_A_actual_templateParameterSubstitution());
 	
 	
+	//formal
 	uML_TemplateParameterSubstitution_formal->setName("formal");
 	uML_TemplateParameterSubstitution_formal->setType(get_UML_TemplateParameter());
 	uML_TemplateParameterSubstitution_formal->setLower(1);
@@ -29817,6 +31630,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_TemplateParameterSubstitution_formal->setAssociation(get_UML_A_formal_templateParameterSubstitution());
 	
 	
+	//ownedActual
 	uML_TemplateParameterSubstitution_ownedActual->setName("ownedActual");
 	uML_TemplateParameterSubstitution_ownedActual->setType(get_UML_ParameterableElement());
 	uML_TemplateParameterSubstitution_ownedActual->setLower(0);
@@ -29827,6 +31641,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_TemplateParameterSubstitution_ownedActual->setAssociation(get_UML_A_ownedActual_owningTemplateParameterSubstitution());
 	
 	
+	//templateBinding
 	uML_TemplateParameterSubstitution_templateBinding->setName("templateBinding");
 	uML_TemplateParameterSubstitution_templateBinding->setType(get_UML_TemplateBinding());
 	uML_TemplateParameterSubstitution_templateBinding->setLower(1);
@@ -29848,6 +31663,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_Element());
 	
     // TemplateSignature attributes
+	//ownedParameter
 	uML_TemplateSignature_ownedParameter->setName("ownedParameter");
 	uML_TemplateSignature_ownedParameter->setType(get_UML_TemplateParameter());
 	uML_TemplateSignature_ownedParameter->setLower(0);
@@ -29858,6 +31674,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_TemplateSignature_ownedParameter->setAssociation(get_UML_A_ownedParameter_signature());
 	
 	
+	//parameter
 	uML_TemplateSignature_parameter->setName("parameter");
 	uML_TemplateSignature_parameter->setType(get_UML_TemplateParameter());
 	uML_TemplateSignature_parameter->setLower(1);
@@ -29868,6 +31685,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_TemplateSignature_parameter->setAssociation(get_UML_A_parameter_templateSignature());
 	
 	
+	//template
 	uML_TemplateSignature_template->setName("template");
 	uML_TemplateSignature_template->setType(get_UML_TemplateableElement());
 	uML_TemplateSignature_template->setLower(1);
@@ -29889,6 +31707,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_Element());
 	
     // TemplateableElement attributes
+	//ownedTemplateSignature
 	uML_TemplateableElement_ownedTemplateSignature->setName("ownedTemplateSignature");
 	uML_TemplateableElement_ownedTemplateSignature->setType(get_UML_TemplateSignature());
 	uML_TemplateableElement_ownedTemplateSignature->setLower(0);
@@ -29899,6 +31718,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_TemplateableElement_ownedTemplateSignature->setAssociation(get_UML_A_ownedTemplateSignature_template());
 	
 	
+	//templateBinding
 	uML_TemplateableElement_templateBinding->setName("templateBinding");
 	uML_TemplateableElement_templateBinding->setType(get_UML_TemplateBinding());
 	uML_TemplateableElement_templateBinding->setLower(0);
@@ -29911,6 +31731,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 
     // TemplateableElement operations
+	//isTemplate
 	uML_TemplateableElement_isTemplate__->setName("isTemplate");
 	uML_TemplateableElement_isTemplate__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -29923,6 +31744,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//parameterableElements
 	uML_TemplateableElement_parameterableElements__->setName("parameterableElements");
 	uML_TemplateableElement_parameterableElements__->setType(get_UML_ParameterableElement());
 	
@@ -29935,7 +31757,6 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
-
     //-------------------------------------------
 	//	class TestIdentityAction
 	uML_TestIdentityAction->setName("TestIdentityAction");
@@ -29945,6 +31766,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_Action());
 	
     // TestIdentityAction attributes
+	//first
 	uML_TestIdentityAction_first->setName("first");
 	uML_TestIdentityAction_first->setType(get_UML_InputPin());
 	uML_TestIdentityAction_first->setLower(1);
@@ -29955,6 +31777,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_TestIdentityAction_first->setAssociation(get_UML_A_first_testIdentityAction());
 	
 	
+	//result
 	uML_TestIdentityAction_result->setName("result");
 	uML_TestIdentityAction_result->setType(get_UML_OutputPin());
 	uML_TestIdentityAction_result->setLower(1);
@@ -29965,6 +31788,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_TestIdentityAction_result->setAssociation(get_UML_A_result_testIdentityAction());
 	
 	
+	//second
 	uML_TestIdentityAction_second->setName("second");
 	uML_TestIdentityAction_second->setType(get_UML_InputPin());
 	uML_TestIdentityAction_second->setLower(1);
@@ -29986,6 +31810,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_IntervalConstraint());
 	
     // TimeConstraint attributes
+	//firstEvent
 	uML_TimeConstraint_firstEvent->setName("firstEvent");
 	uML_TimeConstraint_firstEvent->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_TimeConstraint_firstEvent->setLower(0);
@@ -29996,6 +31821,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_TimeConstraint_firstEvent->setDefaultValue(uML_TimeConstraint_firstEvent_defaultValue_LiteralBoolean_UML_TimeConstraint_firstEvent);
 	
+	//specification
 	uML_TimeConstraint_specification->setName("specification");
 	uML_TimeConstraint_specification->setType(get_UML_TimeInterval());
 	uML_TimeConstraint_specification->setLower(1);
@@ -30017,6 +31843,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_Event());
 	
     // TimeEvent attributes
+	//isRelative
 	uML_TimeEvent_isRelative->setName("isRelative");
 	uML_TimeEvent_isRelative->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_TimeEvent_isRelative->setLower(1);
@@ -30027,6 +31854,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_TimeEvent_isRelative->setDefaultValue(uML_TimeEvent_isRelative_defaultValue_LiteralBoolean_UML_TimeEvent_isRelative);
 	
+	//when
 	uML_TimeEvent_when->setName("when");
 	uML_TimeEvent_when->setType(get_UML_TimeExpression());
 	uML_TimeEvent_when->setLower(1);
@@ -30048,6 +31876,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_ValueSpecification());
 	
     // TimeExpression attributes
+	//expr
 	uML_TimeExpression_expr->setName("expr");
 	uML_TimeExpression_expr->setType(get_UML_ValueSpecification());
 	uML_TimeExpression_expr->setLower(0);
@@ -30058,6 +31887,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_TimeExpression_expr->setAssociation(get_UML_A_expr_timeExpression());
 	
 	
+	//observation
 	uML_TimeExpression_observation->setName("observation");
 	uML_TimeExpression_observation->setType(get_UML_Observation());
 	uML_TimeExpression_observation->setLower(0);
@@ -30070,6 +31900,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 
     // TimeExpression operations
+	//stringValue
 	uML_TimeExpression_stringValue__->setName("stringValue");
 	uML_TimeExpression_stringValue__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
 	
@@ -30082,7 +31913,6 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
-
     //-------------------------------------------
 	//	class TimeInterval
 	uML_TimeInterval->setName("TimeInterval");
@@ -30092,6 +31922,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_Interval());
 	
     // TimeInterval attributes
+	//max
 	uML_TimeInterval_max->setName("max");
 	uML_TimeInterval_max->setType(get_UML_TimeExpression());
 	uML_TimeInterval_max->setLower(1);
@@ -30102,6 +31933,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_TimeInterval_max->setAssociation(get_UML_A_max_timeInterval());
 	
 	
+	//min
 	uML_TimeInterval_min->setName("min");
 	uML_TimeInterval_min->setType(get_UML_TimeExpression());
 	uML_TimeInterval_min->setLower(1);
@@ -30123,6 +31955,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_Observation());
 	
     // TimeObservation attributes
+	//event
 	uML_TimeObservation_event->setName("event");
 	uML_TimeObservation_event->setType(get_UML_NamedElement());
 	uML_TimeObservation_event->setLower(1);
@@ -30133,6 +31966,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_TimeObservation_event->setAssociation(get_UML_A_event_timeObservation());
 	
 	
+	//firstEvent
 	uML_TimeObservation_firstEvent->setName("firstEvent");
 	uML_TimeObservation_firstEvent->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	uML_TimeObservation_firstEvent->setLower(1);
@@ -30157,6 +31991,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_RedefinableElement());
 	
     // Transition attributes
+	//container
 	uML_Transition_container->setName("container");
 	uML_Transition_container->setType(get_UML_Region());
 	uML_Transition_container->setLower(1);
@@ -30167,6 +32002,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Transition_container->setAssociation(get_UML_A_transition_container());
 	
 	
+	//effect
 	uML_Transition_effect->setName("effect");
 	uML_Transition_effect->setType(get_UML_Behavior());
 	uML_Transition_effect->setLower(0);
@@ -30177,6 +32013,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Transition_effect->setAssociation(get_UML_A_effect_transition());
 	
 	
+	//guard
 	uML_Transition_guard->setName("guard");
 	uML_Transition_guard->setType(get_UML_Constraint());
 	uML_Transition_guard->setLower(0);
@@ -30187,6 +32024,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Transition_guard->setAssociation(get_UML_A_guard_transition());
 	
 	
+	//kind
 	uML_Transition_kind->setName("kind");
 	uML_Transition_kind->setType(get_UML_TransitionKind());
 	uML_Transition_kind->setLower(1);
@@ -30197,6 +32035,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	uML_Transition_kind->setDefaultValue(uML_Transition_kind_defaultValue_InstanceValue);
 	
+	//redefinedTransition
 	uML_Transition_redefinedTransition->setName("redefinedTransition");
 	uML_Transition_redefinedTransition->setType(get_UML_Transition());
 	uML_Transition_redefinedTransition->setLower(0);
@@ -30207,6 +32046,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Transition_redefinedTransition->setAssociation(get_UML_A_redefinedTransition_transition());
 	
 	
+	//redefinitionContext
 	uML_Transition_redefinitionContext->setName("redefinitionContext");
 	uML_Transition_redefinitionContext->setType(get_UML_Classifier());
 	uML_Transition_redefinitionContext->setLower(1);
@@ -30217,6 +32057,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Transition_redefinitionContext->setAssociation(get_UML_A_redefinitionContext_transition());
 	
 	
+	//source
 	uML_Transition_source->setName("source");
 	uML_Transition_source->setType(get_UML_Vertex());
 	uML_Transition_source->setLower(1);
@@ -30227,6 +32068,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Transition_source->setAssociation(get_UML_A_outgoing_source_vertex());
 	
 	
+	//target
 	uML_Transition_target->setName("target");
 	uML_Transition_target->setType(get_UML_Vertex());
 	uML_Transition_target->setLower(1);
@@ -30237,6 +32079,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Transition_target->setAssociation(get_UML_A_incoming_target_vertex());
 	
 	
+	//trigger
 	uML_Transition_trigger->setName("trigger");
 	uML_Transition_trigger->setType(get_UML_Trigger());
 	uML_Transition_trigger->setLower(0);
@@ -30249,6 +32092,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 
     // Transition operations
+	//containingStateMachine
 	uML_Transition_containingStateMachine__->setName("containingStateMachine");
 	uML_Transition_containingStateMachine__->setType(get_UML_StateMachine());
 	
@@ -30261,6 +32105,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//isConsistentWith
 	uML_Transition_isConsistentWith_RedefinableElement_RedefinableElement->setName("isConsistentWith");
 	uML_Transition_isConsistentWith_RedefinableElement_RedefinableElement->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -30285,6 +32130,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//redefinitionContext
 	uML_Transition_redefinitionContext__->setName("redefinitionContext");
 	uML_Transition_redefinitionContext__->setType(get_UML_Classifier());
 	
@@ -30297,7 +32143,6 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
-
     //-------------------------------------------
 	//	class Trigger
 	uML_Trigger->setName("Trigger");
@@ -30307,6 +32152,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_NamedElement());
 	
     // Trigger attributes
+	//event
 	uML_Trigger_event->setName("event");
 	uML_Trigger_event->setType(get_UML_Event());
 	uML_Trigger_event->setLower(1);
@@ -30317,6 +32163,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Trigger_event->setAssociation(get_UML_A_event_trigger());
 	
 	
+	//port
 	uML_Trigger_port->setName("port");
 	uML_Trigger_port->setType(get_UML_Port());
 	uML_Trigger_port->setLower(0);
@@ -30338,6 +32185,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_PackageableElement());
 	
     // Type attributes
+	//package
 	uML_Type_package->setName("package");
 	uML_Type_package->setType(get_UML_Package());
 	uML_Type_package->setLower(0);
@@ -30350,6 +32198,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 
     // Type operations
+	//conformsTo
 	uML_Type_conformsTo_Type_Type->setName("conformsTo");
 	uML_Type_conformsTo_Type_Type->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -30374,6 +32223,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//createAssociation
 	uML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural->setName("createAssociation");
 	uML_Type_createAssociation_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Boolean_AggregationKind_String_Integer_UnlimitedNatural_Type_Boolean_AggregationKind_String_Integer_UnlimitedNatural->setType(get_UML_Association());
 	
@@ -30518,6 +32368,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//getAssociations
 	uML_Type_getAssociations__->setName("getAssociations");
 	uML_Type_getAssociations__->setType(get_UML_Association());
 	
@@ -30530,7 +32381,6 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
-
     //-------------------------------------------
 	//	class TypedElement
 	uML_TypedElement->setName("TypedElement");
@@ -30540,6 +32390,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_NamedElement());
 	
     // TypedElement attributes
+	//type
 	uML_TypedElement_type->setName("type");
 	uML_TypedElement_type->setType(get_UML_Type());
 	uML_TypedElement_type->setLower(0);
@@ -30561,6 +32412,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_Action());
 	
     // UnmarshallAction attributes
+	//object
 	uML_UnmarshallAction_object->setName("object");
 	uML_UnmarshallAction_object->setType(get_UML_InputPin());
 	uML_UnmarshallAction_object->setLower(1);
@@ -30571,6 +32423,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_UnmarshallAction_object->setAssociation(get_UML_A_object_unmarshallAction());
 	
 	
+	//result
 	uML_UnmarshallAction_result->setName("result");
 	uML_UnmarshallAction_result->setType(get_UML_OutputPin());
 	uML_UnmarshallAction_result->setLower(1);
@@ -30581,6 +32434,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_UnmarshallAction_result->setAssociation(get_UML_A_result_unmarshallAction());
 	
 	
+	//unmarshallType
 	uML_UnmarshallAction_unmarshallType->setName("unmarshallType");
 	uML_UnmarshallAction_unmarshallType->setType(get_UML_Classifier());
 	uML_UnmarshallAction_unmarshallType->setLower(1);
@@ -30611,6 +32465,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_BehavioredClassifier());
 	
     // UseCase attributes
+	//extend
 	uML_UseCase_extend->setName("extend");
 	uML_UseCase_extend->setType(get_UML_Extend());
 	uML_UseCase_extend->setLower(0);
@@ -30621,6 +32476,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_UseCase_extend->setAssociation(get_UML_A_extend_extension());
 	
 	
+	//extensionPoint
 	uML_UseCase_extensionPoint->setName("extensionPoint");
 	uML_UseCase_extensionPoint->setType(get_UML_ExtensionPoint());
 	uML_UseCase_extensionPoint->setLower(0);
@@ -30631,6 +32487,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_UseCase_extensionPoint->setAssociation(get_UML_A_extensionPoint_useCase());
 	
 	
+	//include
 	uML_UseCase_include->setName("include");
 	uML_UseCase_include->setType(get_UML_Include());
 	uML_UseCase_include->setLower(0);
@@ -30641,6 +32498,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_UseCase_include->setAssociation(get_UML_A_include_includingCase());
 	
 	
+	//subject
 	uML_UseCase_subject->setName("subject");
 	uML_UseCase_subject->setType(get_UML_Classifier());
 	uML_UseCase_subject->setLower(0);
@@ -30653,6 +32511,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 
     // UseCase operations
+	//allIncludedUseCases
 	uML_UseCase_allIncludedUseCases__->setName("allIncludedUseCases");
 	uML_UseCase_allIncludedUseCases__->setType(get_UML_UseCase());
 	
@@ -30665,7 +32524,6 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
-
     //-------------------------------------------
 	//	class ValuePin
 	uML_ValuePin->setName("ValuePin");
@@ -30675,6 +32533,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_InputPin());
 	
     // ValuePin attributes
+	//value
 	uML_ValuePin_value->setName("value");
 	uML_ValuePin_value->setType(get_UML_ValueSpecification());
 	uML_ValuePin_value->setLower(1);
@@ -30699,6 +32558,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_TypedElement());
 	
     // ValueSpecification operations
+	//booleanValue
 	uML_ValueSpecification_booleanValue__->setName("booleanValue");
 	uML_ValueSpecification_booleanValue__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -30711,6 +32571,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//integerValue
 	uML_ValueSpecification_integerValue__->setName("integerValue");
 	uML_ValueSpecification_integerValue__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Integer());
 	
@@ -30723,6 +32584,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//isCompatibleWith
 	uML_ValueSpecification_isCompatibleWith_ParameterableElement_ParameterableElement->setName("isCompatibleWith");
 	uML_ValueSpecification_isCompatibleWith_ParameterableElement_ParameterableElement->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -30747,6 +32609,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//isComputable
 	uML_ValueSpecification_isComputable__->setName("isComputable");
 	uML_ValueSpecification_isComputable__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -30759,6 +32622,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//isNull
 	uML_ValueSpecification_isNull__->setName("isNull");
 	uML_ValueSpecification_isNull__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -30771,6 +32635,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//realValue
 	uML_ValueSpecification_realValue__->setName("realValue");
 	uML_ValueSpecification_realValue__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Real());
 	
@@ -30783,6 +32648,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//stringValue
 	uML_ValueSpecification_stringValue__->setName("stringValue");
 	uML_ValueSpecification_stringValue__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
 	
@@ -30795,6 +32661,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//unlimitedValue
 	uML_ValueSpecification_unlimitedValue__->setName("unlimitedValue");
 	uML_ValueSpecification_unlimitedValue__->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_UnlimitedNatural());
 	
@@ -30807,7 +32674,6 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
-
     //-------------------------------------------
 	//	class ValueSpecificationAction
 	uML_ValueSpecificationAction->setName("ValueSpecificationAction");
@@ -30817,6 +32683,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_Action());
 	
     // ValueSpecificationAction attributes
+	//result
 	uML_ValueSpecificationAction_result->setName("result");
 	uML_ValueSpecificationAction_result->setType(get_UML_OutputPin());
 	uML_ValueSpecificationAction_result->setLower(1);
@@ -30827,6 +32694,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_ValueSpecificationAction_result->setAssociation(get_UML_A_result_valueSpecificationAction());
 	
 	
+	//value
 	uML_ValueSpecificationAction_value->setName("value");
 	uML_ValueSpecificationAction_value->setType(get_UML_ValueSpecification());
 	uML_ValueSpecificationAction_value->setLower(1);
@@ -30851,6 +32719,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_MultiplicityElement());
 	
     // Variable attributes
+	//activityScope
 	uML_Variable_activityScope->setName("activityScope");
 	uML_Variable_activityScope->setType(get_UML_Activity());
 	uML_Variable_activityScope->setLower(0);
@@ -30861,6 +32730,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Variable_activityScope->setAssociation(get_UML_A_variable_activityScope());
 	
 	
+	//scope
 	uML_Variable_scope->setName("scope");
 	uML_Variable_scope->setType(get_UML_StructuredActivityNode());
 	uML_Variable_scope->setLower(0);
@@ -30873,6 +32743,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 
     // Variable operations
+	//isAccessibleBy
 	uML_Variable_isAccessibleBy_Action_Action->setName("isAccessibleBy");
 	uML_Variable_isAccessibleBy_Action_Action->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -30897,7 +32768,6 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
-
     //-------------------------------------------
 	//	class VariableAction
 	uML_VariableAction->setName("VariableAction");
@@ -30907,6 +32777,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_Action());
 	
     // VariableAction attributes
+	//variable
 	uML_VariableAction_variable->setName("variable");
 	uML_VariableAction_variable->setType(get_UML_Variable());
 	uML_VariableAction_variable->setLower(1);
@@ -30928,6 +32799,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_NamedElement());
 	
     // Vertex attributes
+	//container
 	uML_Vertex_container->setName("container");
 	uML_Vertex_container->setType(get_UML_Region());
 	uML_Vertex_container->setLower(0);
@@ -30938,6 +32810,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Vertex_container->setAssociation(get_UML_A_subvertex_container());
 	
 	
+	//incoming
 	uML_Vertex_incoming->setName("incoming");
 	uML_Vertex_incoming->setType(get_UML_Transition());
 	uML_Vertex_incoming->setLower(0);
@@ -30948,6 +32821,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Vertex_incoming->setAssociation(get_UML_A_incoming_target_vertex());
 	
 	
+	//outgoing
 	uML_Vertex_outgoing->setName("outgoing");
 	uML_Vertex_outgoing->setType(get_UML_Transition());
 	uML_Vertex_outgoing->setLower(0);
@@ -30960,6 +32834,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 
     // Vertex operations
+	//containingStateMachine
 	uML_Vertex_containingStateMachine__->setName("containingStateMachine");
 	uML_Vertex_containingStateMachine__->setType(get_UML_StateMachine());
 	
@@ -30972,6 +32847,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//incoming
 	uML_Vertex_incoming__->setName("incoming");
 	uML_Vertex_incoming__->setType(get_UML_Transition());
 	
@@ -30984,6 +32860,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//isContainedInRegion
 	uML_Vertex_isContainedInRegion_Region_Region->setName("isContainedInRegion");
 	uML_Vertex_isContainedInRegion_Region_Region->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -31008,6 +32885,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//isContainedInState
 	uML_Vertex_isContainedInState_State_State->setName("isContainedInState");
 	uML_Vertex_isContainedInState_State_State->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_Boolean());
 	
@@ -31032,6 +32910,7 @@ void UMLPackageImpl::initializePackageClasses()
 	
 	
 
+	//outgoing
 	uML_Vertex_outgoing__->setName("outgoing");
 	uML_Vertex_outgoing__->setType(get_UML_Transition());
 	
@@ -31043,7 +32922,6 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_Vertex_outgoing_result->setDirection(uml::ParameterDirectionKind::RETURN);
 	
 	
-
 
     //-------------------------------------------
 	//	class WriteLinkAction
@@ -31063,6 +32941,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_StructuralFeatureAction());
 	
     // WriteStructuralFeatureAction attributes
+	//result
 	uML_WriteStructuralFeatureAction_result->setName("result");
 	uML_WriteStructuralFeatureAction_result->setType(get_UML_OutputPin());
 	uML_WriteStructuralFeatureAction_result->setLower(0);
@@ -31073,6 +32952,7 @@ void UMLPackageImpl::initializePackageClasses()
 	uML_WriteStructuralFeatureAction_result->setAssociation(get_UML_A_result_writeStructuralFeatureAction());
 	
 	
+	//value
 	uML_WriteStructuralFeatureAction_value->setName("value");
 	uML_WriteStructuralFeatureAction_value->setType(get_UML_InputPin());
 	uML_WriteStructuralFeatureAction_value->setLower(0);
@@ -31094,6 +32974,7 @@ void UMLPackageImpl::initializePackageClasses()
 	gen->setGeneral(get_UML_VariableAction());
 	
     // WriteVariableAction attributes
+	//value
 	uML_WriteVariableAction_value->setName("value");
 	uML_WriteVariableAction_value->setType(get_UML_InputPin());
 	uML_WriteVariableAction_value->setLower(0);
@@ -31113,224 +32994,224 @@ void UMLPackageImpl::initializePackageClasses()
 
 void UMLPackageImpl::initializePackageAssociations()
 {
-	// A_action_actionExecutionSpecification
+	//A_action_actionExecutionSpecification
 	uML_A_action_actionExecutionSpecification->setName("A_action_actionExecutionSpecification");
 	uML_A_action_actionExecutionSpecification->getMemberEnd()->add(get_UML_ActionExecutionSpecification_action());
 	uML_A_action_actionExecutionSpecification->getMemberEnd()->add(get_UML_A_action_actionExecutionSpecification_actionExecutionSpecification());
 	
 
     //-------------------------------------------
-	// A_action_interaction
+	//A_action_interaction
 	uML_A_action_interaction->setName("A_action_interaction");
 	uML_A_action_interaction->getMemberEnd()->add(get_UML_Interaction_action());
 	uML_A_action_interaction->getMemberEnd()->add(get_UML_A_action_interaction_interaction());
 	
 
     //-------------------------------------------
-	// A_actualGate_interactionUse
+	//A_actualGate_interactionUse
 	uML_A_actualGate_interactionUse->setName("A_actualGate_interactionUse");
 	uML_A_actualGate_interactionUse->getMemberEnd()->add(get_UML_InteractionUse_actualGate());
 	uML_A_actualGate_interactionUse->getMemberEnd()->add(get_UML_A_actualGate_interactionUse_interactionUse());
 	
 
     //-------------------------------------------
-	// A_actual_templateParameterSubstitution
+	//A_actual_templateParameterSubstitution
 	uML_A_actual_templateParameterSubstitution->setName("A_actual_templateParameterSubstitution");
 	uML_A_actual_templateParameterSubstitution->getMemberEnd()->add(get_UML_TemplateParameterSubstitution_actual());
 	uML_A_actual_templateParameterSubstitution->getMemberEnd()->add(get_UML_A_actual_templateParameterSubstitution_templateParameterSubstitution());
 	
 
     //-------------------------------------------
-	// A_addition_include
+	//A_addition_include
 	uML_A_addition_include->setName("A_addition_include");
 	uML_A_addition_include->getMemberEnd()->add(get_UML_Include_addition());
 	uML_A_addition_include->getMemberEnd()->add(get_UML_A_addition_include_include());
 	
 
     //-------------------------------------------
-	// A_annotatedElement_comment
+	//A_annotatedElement_comment
 	uML_A_annotatedElement_comment->setName("A_annotatedElement_comment");
 	uML_A_annotatedElement_comment->getMemberEnd()->add(get_UML_Comment_annotatedElement());
 	uML_A_annotatedElement_comment->getMemberEnd()->add(get_UML_A_annotatedElement_comment_comment());
 	
 
     //-------------------------------------------
-	// A_appliedProfile_profileApplication
+	//A_appliedProfile_profileApplication
 	uML_A_appliedProfile_profileApplication->setName("A_appliedProfile_profileApplication");
 	uML_A_appliedProfile_profileApplication->getMemberEnd()->add(get_UML_ProfileApplication_appliedProfile());
 	uML_A_appliedProfile_profileApplication->getMemberEnd()->add(get_UML_A_appliedProfile_profileApplication_profileApplication());
 	
 
     //-------------------------------------------
-	// A_argument_interactionUse
+	//A_argument_interactionUse
 	uML_A_argument_interactionUse->setName("A_argument_interactionUse");
 	uML_A_argument_interactionUse->getMemberEnd()->add(get_UML_InteractionUse_argument());
 	uML_A_argument_interactionUse->getMemberEnd()->add(get_UML_A_argument_interactionUse_interactionUse());
 	
 
     //-------------------------------------------
-	// A_argument_invocationAction
+	//A_argument_invocationAction
 	uML_A_argument_invocationAction->setName("A_argument_invocationAction");
 	uML_A_argument_invocationAction->getMemberEnd()->add(get_UML_InvocationAction_argument());
 	uML_A_argument_invocationAction->getMemberEnd()->add(get_UML_A_argument_invocationAction_invocationAction());
 	
 
     //-------------------------------------------
-	// A_argument_message
+	//A_argument_message
 	uML_A_argument_message->setName("A_argument_message");
 	uML_A_argument_message->getMemberEnd()->add(get_UML_Message_argument());
 	uML_A_argument_message->getMemberEnd()->add(get_UML_A_argument_message_message());
 	
 
     //-------------------------------------------
-	// A_association_clearAssociationAction
+	//A_association_clearAssociationAction
 	uML_A_association_clearAssociationAction->setName("A_association_clearAssociationAction");
 	uML_A_association_clearAssociationAction->getMemberEnd()->add(get_UML_ClearAssociationAction_association());
 	uML_A_association_clearAssociationAction->getMemberEnd()->add(get_UML_A_association_clearAssociationAction_clearAssociationAction());
 	
 
     //-------------------------------------------
-	// A_attribute_classifier
+	//A_attribute_classifier
 	uML_A_attribute_classifier->setName("A_attribute_classifier");
 	uML_A_attribute_classifier->getMemberEnd()->add(get_UML_Classifier_attribute());
 	uML_A_attribute_classifier->getMemberEnd()->add(get_UML_A_attribute_classifier_classifier());
 	
 
     //-------------------------------------------
-	// A_before_toAfter
+	//A_before_toAfter
 	uML_A_before_toAfter->setName("A_before_toAfter");
 	uML_A_before_toAfter->getMemberEnd()->add(get_UML_GeneralOrdering_before());
 	uML_A_before_toAfter->getMemberEnd()->add(get_UML_OccurrenceSpecification_toAfter());
 	
 
     //-------------------------------------------
-	// A_behavior_behaviorExecutionSpecification
+	//A_behavior_behaviorExecutionSpecification
 	uML_A_behavior_behaviorExecutionSpecification->setName("A_behavior_behaviorExecutionSpecification");
 	uML_A_behavior_behaviorExecutionSpecification->getMemberEnd()->add(get_UML_BehaviorExecutionSpecification_behavior());
 	uML_A_behavior_behaviorExecutionSpecification->getMemberEnd()->add(get_UML_A_behavior_behaviorExecutionSpecification_behaviorExecutionSpecification());
 	
 
     //-------------------------------------------
-	// A_behavior_callBehaviorAction
+	//A_behavior_callBehaviorAction
 	uML_A_behavior_callBehaviorAction->setName("A_behavior_callBehaviorAction");
 	uML_A_behavior_callBehaviorAction->getMemberEnd()->add(get_UML_CallBehaviorAction_behavior());
 	uML_A_behavior_callBehaviorAction->getMemberEnd()->add(get_UML_A_behavior_callBehaviorAction_callBehaviorAction());
 	
 
     //-------------------------------------------
-	// A_behavior_opaqueExpression
+	//A_behavior_opaqueExpression
 	uML_A_behavior_opaqueExpression->setName("A_behavior_opaqueExpression");
 	uML_A_behavior_opaqueExpression->getMemberEnd()->add(get_UML_OpaqueExpression_behavior());
 	uML_A_behavior_opaqueExpression->getMemberEnd()->add(get_UML_A_behavior_opaqueExpression_opaqueExpression());
 	
 
     //-------------------------------------------
-	// A_bodyCondition_bodyContext
+	//A_bodyCondition_bodyContext
 	uML_A_bodyCondition_bodyContext->setName("A_bodyCondition_bodyContext");
 	uML_A_bodyCondition_bodyContext->getMemberEnd()->add(get_UML_Operation_bodyCondition());
 	uML_A_bodyCondition_bodyContext->getMemberEnd()->add(get_UML_A_bodyCondition_bodyContext_bodyContext());
 	
 
     //-------------------------------------------
-	// A_bodyOutput_clause
+	//A_bodyOutput_clause
 	uML_A_bodyOutput_clause->setName("A_bodyOutput_clause");
 	uML_A_bodyOutput_clause->getMemberEnd()->add(get_UML_Clause_bodyOutput());
 	uML_A_bodyOutput_clause->getMemberEnd()->add(get_UML_A_bodyOutput_clause_clause());
 	
 
     //-------------------------------------------
-	// A_bodyOutput_loopNode
+	//A_bodyOutput_loopNode
 	uML_A_bodyOutput_loopNode->setName("A_bodyOutput_loopNode");
 	uML_A_bodyOutput_loopNode->getMemberEnd()->add(get_UML_LoopNode_bodyOutput());
 	uML_A_bodyOutput_loopNode->getMemberEnd()->add(get_UML_A_bodyOutput_loopNode_loopNode());
 	
 
     //-------------------------------------------
-	// A_bodyPart_loopNode
+	//A_bodyPart_loopNode
 	uML_A_bodyPart_loopNode->setName("A_bodyPart_loopNode");
 	uML_A_bodyPart_loopNode->getMemberEnd()->add(get_UML_LoopNode_bodyPart());
 	uML_A_bodyPart_loopNode->getMemberEnd()->add(get_UML_A_bodyPart_loopNode_loopNode());
 	
 
     //-------------------------------------------
-	// A_body_clause
+	//A_body_clause
 	uML_A_body_clause->setName("A_body_clause");
 	uML_A_body_clause->getMemberEnd()->add(get_UML_Clause_body());
 	uML_A_body_clause->getMemberEnd()->add(get_UML_A_body_clause_clause());
 	
 
     //-------------------------------------------
-	// A_cfragmentGate_combinedFragment
+	//A_cfragmentGate_combinedFragment
 	uML_A_cfragmentGate_combinedFragment->setName("A_cfragmentGate_combinedFragment");
 	uML_A_cfragmentGate_combinedFragment->getMemberEnd()->add(get_UML_CombinedFragment_cfragmentGate());
 	uML_A_cfragmentGate_combinedFragment->getMemberEnd()->add(get_UML_A_cfragmentGate_combinedFragment_combinedFragment());
 	
 
     //-------------------------------------------
-	// A_changeExpression_changeEvent
+	//A_changeExpression_changeEvent
 	uML_A_changeExpression_changeEvent->setName("A_changeExpression_changeEvent");
 	uML_A_changeExpression_changeEvent->getMemberEnd()->add(get_UML_ChangeEvent_changeExpression());
 	uML_A_changeExpression_changeEvent->getMemberEnd()->add(get_UML_A_changeExpression_changeEvent_changeEvent());
 	
 
     //-------------------------------------------
-	// A_classifierBehavior_behavioredClassifier
+	//A_classifierBehavior_behavioredClassifier
 	uML_A_classifierBehavior_behavioredClassifier->setName("A_classifierBehavior_behavioredClassifier");
 	uML_A_classifierBehavior_behavioredClassifier->getMemberEnd()->add(get_UML_BehavioredClassifier_classifierBehavior());
 	uML_A_classifierBehavior_behavioredClassifier->getMemberEnd()->add(get_UML_A_classifierBehavior_behavioredClassifier_behavioredClassifier());
 	
 
     //-------------------------------------------
-	// A_classifier_createObjectAction
+	//A_classifier_createObjectAction
 	uML_A_classifier_createObjectAction->setName("A_classifier_createObjectAction");
 	uML_A_classifier_createObjectAction->getMemberEnd()->add(get_UML_CreateObjectAction_classifier());
 	uML_A_classifier_createObjectAction->getMemberEnd()->add(get_UML_A_classifier_createObjectAction_createObjectAction());
 	
 
     //-------------------------------------------
-	// A_classifier_enumerationLiteral
+	//A_classifier_enumerationLiteral
 	uML_A_classifier_enumerationLiteral->setName("A_classifier_enumerationLiteral");
 	uML_A_classifier_enumerationLiteral->getMemberEnd()->add(get_UML_EnumerationLiteral_classifier());
 	uML_A_classifier_enumerationLiteral->getMemberEnd()->add(get_UML_A_classifier_enumerationLiteral_enumerationLiteral());
 	
 
     //-------------------------------------------
-	// A_classifier_instanceSpecification
+	//A_classifier_instanceSpecification
 	uML_A_classifier_instanceSpecification->setName("A_classifier_instanceSpecification");
 	uML_A_classifier_instanceSpecification->getMemberEnd()->add(get_UML_InstanceSpecification_classifier());
 	uML_A_classifier_instanceSpecification->getMemberEnd()->add(get_UML_A_classifier_instanceSpecification_instanceSpecification());
 	
 
     //-------------------------------------------
-	// A_classifier_readExtentAction
+	//A_classifier_readExtentAction
 	uML_A_classifier_readExtentAction->setName("A_classifier_readExtentAction");
 	uML_A_classifier_readExtentAction->getMemberEnd()->add(get_UML_ReadExtentAction_classifier());
 	uML_A_classifier_readExtentAction->getMemberEnd()->add(get_UML_A_classifier_readExtentAction_readExtentAction());
 	
 
     //-------------------------------------------
-	// A_classifier_readIsClassifiedObjectAction
+	//A_classifier_readIsClassifiedObjectAction
 	uML_A_classifier_readIsClassifiedObjectAction->setName("A_classifier_readIsClassifiedObjectAction");
 	uML_A_classifier_readIsClassifiedObjectAction->getMemberEnd()->add(get_UML_ReadIsClassifiedObjectAction_classifier());
 	uML_A_classifier_readIsClassifiedObjectAction->getMemberEnd()->add(get_UML_A_classifier_readIsClassifiedObjectAction_readIsClassifiedObjectAction());
 	
 
     //-------------------------------------------
-	// A_classifier_templateParameter_parameteredElement
+	//A_classifier_templateParameter_parameteredElement
 	uML_A_classifier_templateParameter_parameteredElement->setName("A_classifier_templateParameter_parameteredElement");
 	uML_A_classifier_templateParameter_parameteredElement->getMemberEnd()->add(get_UML_Classifier_templateParameter());
 	uML_A_classifier_templateParameter_parameteredElement->getMemberEnd()->add(get_UML_ClassifierTemplateParameter_parameteredElement());
 	
 
     //-------------------------------------------
-	// A_clause_conditionalNode
+	//A_clause_conditionalNode
 	uML_A_clause_conditionalNode->setName("A_clause_conditionalNode");
 	uML_A_clause_conditionalNode->getMemberEnd()->add(get_UML_ConditionalNode_clause());
 	uML_A_clause_conditionalNode->getMemberEnd()->add(get_UML_A_clause_conditionalNode_conditionalNode());
 	
 
     //-------------------------------------------
-	// A_clientDependency_client
+	//A_clientDependency_client
 	uML_A_clientDependency_client->setName("A_clientDependency_client");
 	uML_A_clientDependency_client->getMemberEnd()->add(get_UML_NamedElement_clientDependency());
 	uML_A_clientDependency_client->getMemberEnd()->add(get_UML_Dependency_client());
@@ -31338,378 +33219,378 @@ void UMLPackageImpl::initializePackageAssociations()
 	
 
     //-------------------------------------------
-	// A_collaborationRole_collaboration
+	//A_collaborationRole_collaboration
 	uML_A_collaborationRole_collaboration->setName("A_collaborationRole_collaboration");
 	uML_A_collaborationRole_collaboration->getMemberEnd()->add(get_UML_Collaboration_collaborationRole());
 	uML_A_collaborationRole_collaboration->getMemberEnd()->add(get_UML_A_collaborationRole_collaboration_collaboration());
 	
 
     //-------------------------------------------
-	// A_collaborationUse_classifier
+	//A_collaborationUse_classifier
 	uML_A_collaborationUse_classifier->setName("A_collaborationUse_classifier");
 	uML_A_collaborationUse_classifier->getMemberEnd()->add(get_UML_Classifier_collaborationUse());
 	uML_A_collaborationUse_classifier->getMemberEnd()->add(get_UML_A_collaborationUse_classifier_classifier());
 	
 
     //-------------------------------------------
-	// A_collection_reduceAction
+	//A_collection_reduceAction
 	uML_A_collection_reduceAction->setName("A_collection_reduceAction");
 	uML_A_collection_reduceAction->getMemberEnd()->add(get_UML_ReduceAction_collection());
 	uML_A_collection_reduceAction->getMemberEnd()->add(get_UML_A_collection_reduceAction_reduceAction());
 	
 
     //-------------------------------------------
-	// A_condition_extend
+	//A_condition_extend
 	uML_A_condition_extend->setName("A_condition_extend");
 	uML_A_condition_extend->getMemberEnd()->add(get_UML_Extend_condition());
 	uML_A_condition_extend->getMemberEnd()->add(get_UML_A_condition_extend_extend());
 	
 
     //-------------------------------------------
-	// A_condition_parameterSet
+	//A_condition_parameterSet
 	uML_A_condition_parameterSet->setName("A_condition_parameterSet");
 	uML_A_condition_parameterSet->getMemberEnd()->add(get_UML_ParameterSet_condition());
 	uML_A_condition_parameterSet->getMemberEnd()->add(get_UML_A_condition_parameterSet_parameterSet());
 	
 
     //-------------------------------------------
-	// A_configuration_deployment
+	//A_configuration_deployment
 	uML_A_configuration_deployment->setName("A_configuration_deployment");
 	uML_A_configuration_deployment->getMemberEnd()->add(get_UML_Deployment_configuration());
 	uML_A_configuration_deployment->getMemberEnd()->add(get_UML_DeploymentSpecification_deployment());
 	
 
     //-------------------------------------------
-	// A_conformance_specificMachine
+	//A_conformance_specificMachine
 	uML_A_conformance_specificMachine->setName("A_conformance_specificMachine");
 	uML_A_conformance_specificMachine->getMemberEnd()->add(get_UML_ProtocolStateMachine_conformance());
 	uML_A_conformance_specificMachine->getMemberEnd()->add(get_UML_ProtocolConformance_specificMachine());
 	
 
     //-------------------------------------------
-	// A_connectableElement_templateParameter_parameteredElement
+	//A_connectableElement_templateParameter_parameteredElement
 	uML_A_connectableElement_templateParameter_parameteredElement->setName("A_connectableElement_templateParameter_parameteredElement");
 	uML_A_connectableElement_templateParameter_parameteredElement->getMemberEnd()->add(get_UML_ConnectableElement_templateParameter());
 	uML_A_connectableElement_templateParameter_parameteredElement->getMemberEnd()->add(get_UML_ConnectableElementTemplateParameter_parameteredElement());
 	
 
     //-------------------------------------------
-	// A_connectionPoint_state
+	//A_connectionPoint_state
 	uML_A_connectionPoint_state->setName("A_connectionPoint_state");
 	uML_A_connectionPoint_state->getMemberEnd()->add(get_UML_State_connectionPoint());
 	uML_A_connectionPoint_state->getMemberEnd()->add(get_UML_Pseudostate_state());
 	
 
     //-------------------------------------------
-	// A_connectionPoint_stateMachine
+	//A_connectionPoint_stateMachine
 	uML_A_connectionPoint_stateMachine->setName("A_connectionPoint_stateMachine");
 	uML_A_connectionPoint_stateMachine->getMemberEnd()->add(get_UML_StateMachine_connectionPoint());
 	uML_A_connectionPoint_stateMachine->getMemberEnd()->add(get_UML_Pseudostate_stateMachine());
 	
 
     //-------------------------------------------
-	// A_connection_state
+	//A_connection_state
 	uML_A_connection_state->setName("A_connection_state");
 	uML_A_connection_state->getMemberEnd()->add(get_UML_State_connection());
 	uML_A_connection_state->getMemberEnd()->add(get_UML_ConnectionPointReference_state());
 	
 
     //-------------------------------------------
-	// A_connector_message
+	//A_connector_message
 	uML_A_connector_message->setName("A_connector_message");
 	uML_A_connector_message->getMemberEnd()->add(get_UML_Message_connector());
 	uML_A_connector_message->getMemberEnd()->add(get_UML_A_connector_message_message());
 	
 
     //-------------------------------------------
-	// A_constrainedElement_constraint
+	//A_constrainedElement_constraint
 	uML_A_constrainedElement_constraint->setName("A_constrainedElement_constraint");
 	uML_A_constrainedElement_constraint->getMemberEnd()->add(get_UML_Constraint_constrainedElement());
 	uML_A_constrainedElement_constraint->getMemberEnd()->add(get_UML_A_constrainedElement_constraint_constraint());
 	
 
     //-------------------------------------------
-	// A_constrainingClassifier_classifierTemplateParameter
+	//A_constrainingClassifier_classifierTemplateParameter
 	uML_A_constrainingClassifier_classifierTemplateParameter->setName("A_constrainingClassifier_classifierTemplateParameter");
 	uML_A_constrainingClassifier_classifierTemplateParameter->getMemberEnd()->add(get_UML_ClassifierTemplateParameter_constrainingClassifier());
 	uML_A_constrainingClassifier_classifierTemplateParameter->getMemberEnd()->add(get_UML_A_constrainingClassifier_classifierTemplateParameter_classifierTemplateParameter());
 	
 
     //-------------------------------------------
-	// A_containedEdge_inGroup
+	//A_containedEdge_inGroup
 	uML_A_containedEdge_inGroup->setName("A_containedEdge_inGroup");
 	uML_A_containedEdge_inGroup->getMemberEnd()->add(get_UML_ActivityGroup_containedEdge());
 	uML_A_containedEdge_inGroup->getMemberEnd()->add(get_UML_ActivityEdge_inGroup());
 	
 
     //-------------------------------------------
-	// A_containedNode_inGroup
+	//A_containedNode_inGroup
 	uML_A_containedNode_inGroup->setName("A_containedNode_inGroup");
 	uML_A_containedNode_inGroup->getMemberEnd()->add(get_UML_ActivityGroup_containedNode());
 	uML_A_containedNode_inGroup->getMemberEnd()->add(get_UML_ActivityNode_inGroup());
 	
 
     //-------------------------------------------
-	// A_context_action
+	//A_context_action
 	uML_A_context_action->setName("A_context_action");
 	uML_A_context_action->getMemberEnd()->add(get_UML_Action_context());
 	uML_A_context_action->getMemberEnd()->add(get_UML_A_context_action_action());
 	
 
     //-------------------------------------------
-	// A_context_behavior
+	//A_context_behavior
 	uML_A_context_behavior->setName("A_context_behavior");
 	uML_A_context_behavior->getMemberEnd()->add(get_UML_Behavior_context());
 	uML_A_context_behavior->getMemberEnd()->add(get_UML_A_context_behavior_behavior());
 	
 
     //-------------------------------------------
-	// A_contract_connector
+	//A_contract_connector
 	uML_A_contract_connector->setName("A_contract_connector");
 	uML_A_contract_connector->getMemberEnd()->add(get_UML_Connector_contract());
 	uML_A_contract_connector->getMemberEnd()->add(get_UML_A_contract_connector_connector());
 	
 
     //-------------------------------------------
-	// A_contract_interfaceRealization
+	//A_contract_interfaceRealization
 	uML_A_contract_interfaceRealization->setName("A_contract_interfaceRealization");
 	uML_A_contract_interfaceRealization->getMemberEnd()->add(get_UML_InterfaceRealization_contract());
 	uML_A_contract_interfaceRealization->getMemberEnd()->add(get_UML_A_contract_interfaceRealization_interfaceRealization());
 	
 
     //-------------------------------------------
-	// A_contract_substitution
+	//A_contract_substitution
 	uML_A_contract_substitution->setName("A_contract_substitution");
 	uML_A_contract_substitution->getMemberEnd()->add(get_UML_Substitution_contract());
 	uML_A_contract_substitution->getMemberEnd()->add(get_UML_A_contract_substitution_substitution());
 	
 
     //-------------------------------------------
-	// A_conveyed_conveyingFlow
+	//A_conveyed_conveyingFlow
 	uML_A_conveyed_conveyingFlow->setName("A_conveyed_conveyingFlow");
 	uML_A_conveyed_conveyingFlow->getMemberEnd()->add(get_UML_InformationFlow_conveyed());
 	uML_A_conveyed_conveyingFlow->getMemberEnd()->add(get_UML_A_conveyed_conveyingFlow_conveyingFlow());
 	
 
     //-------------------------------------------
-	// A_covered_coveredBy
+	//A_covered_coveredBy
 	uML_A_covered_coveredBy->setName("A_covered_coveredBy");
 	uML_A_covered_coveredBy->getMemberEnd()->add(get_UML_InteractionFragment_covered());
 	uML_A_covered_coveredBy->getMemberEnd()->add(get_UML_Lifeline_coveredBy());
 	
 
     //-------------------------------------------
-	// A_covered_events
+	//A_covered_events
 	uML_A_covered_events->setName("A_covered_events");
 	uML_A_covered_events->getMemberEnd()->add(get_UML_OccurrenceSpecification_covered());
 	uML_A_covered_events->getMemberEnd()->add(get_UML_A_covered_events_events());
 	
 
     //-------------------------------------------
-	// A_covered_stateInvariant
+	//A_covered_stateInvariant
 	uML_A_covered_stateInvariant->setName("A_covered_stateInvariant");
 	uML_A_covered_stateInvariant->getMemberEnd()->add(get_UML_StateInvariant_covered());
 	uML_A_covered_stateInvariant->getMemberEnd()->add(get_UML_A_covered_stateInvariant_stateInvariant());
 	
 
     //-------------------------------------------
-	// A_decider_clause
+	//A_decider_clause
 	uML_A_decider_clause->setName("A_decider_clause");
 	uML_A_decider_clause->getMemberEnd()->add(get_UML_Clause_decider());
 	uML_A_decider_clause->getMemberEnd()->add(get_UML_A_decider_clause_clause());
 	
 
     //-------------------------------------------
-	// A_decider_loopNode
+	//A_decider_loopNode
 	uML_A_decider_loopNode->setName("A_decider_loopNode");
 	uML_A_decider_loopNode->getMemberEnd()->add(get_UML_LoopNode_decider());
 	uML_A_decider_loopNode->getMemberEnd()->add(get_UML_A_decider_loopNode_loopNode());
 	
 
     //-------------------------------------------
-	// A_decisionInputFlow_decisionNode
+	//A_decisionInputFlow_decisionNode
 	uML_A_decisionInputFlow_decisionNode->setName("A_decisionInputFlow_decisionNode");
 	uML_A_decisionInputFlow_decisionNode->getMemberEnd()->add(get_UML_DecisionNode_decisionInputFlow());
 	uML_A_decisionInputFlow_decisionNode->getMemberEnd()->add(get_UML_A_decisionInputFlow_decisionNode_decisionNode());
 	
 
     //-------------------------------------------
-	// A_decisionInput_decisionNode
+	//A_decisionInput_decisionNode
 	uML_A_decisionInput_decisionNode->setName("A_decisionInput_decisionNode");
 	uML_A_decisionInput_decisionNode->getMemberEnd()->add(get_UML_DecisionNode_decisionInput());
 	uML_A_decisionInput_decisionNode->getMemberEnd()->add(get_UML_A_decisionInput_decisionNode_decisionNode());
 	
 
     //-------------------------------------------
-	// A_decomposedAs_lifeline
+	//A_decomposedAs_lifeline
 	uML_A_decomposedAs_lifeline->setName("A_decomposedAs_lifeline");
 	uML_A_decomposedAs_lifeline->getMemberEnd()->add(get_UML_Lifeline_decomposedAs());
 	uML_A_decomposedAs_lifeline->getMemberEnd()->add(get_UML_A_decomposedAs_lifeline_lifeline());
 	
 
     //-------------------------------------------
-	// A_defaultValue_owningParameter
+	//A_defaultValue_owningParameter
 	uML_A_defaultValue_owningParameter->setName("A_defaultValue_owningParameter");
 	uML_A_defaultValue_owningParameter->getMemberEnd()->add(get_UML_Parameter_defaultValue());
 	uML_A_defaultValue_owningParameter->getMemberEnd()->add(get_UML_A_defaultValue_owningParameter_owningParameter());
 	
 
     //-------------------------------------------
-	// A_defaultValue_owningProperty
+	//A_defaultValue_owningProperty
 	uML_A_defaultValue_owningProperty->setName("A_defaultValue_owningProperty");
 	uML_A_defaultValue_owningProperty->getMemberEnd()->add(get_UML_Property_defaultValue());
 	uML_A_defaultValue_owningProperty->getMemberEnd()->add(get_UML_A_defaultValue_owningProperty_owningProperty());
 	
 
     //-------------------------------------------
-	// A_default_templateParameter
+	//A_default_templateParameter
 	uML_A_default_templateParameter->setName("A_default_templateParameter");
 	uML_A_default_templateParameter->getMemberEnd()->add(get_UML_TemplateParameter_default());
 	uML_A_default_templateParameter->getMemberEnd()->add(get_UML_A_default_templateParameter_templateParameter());
 	
 
     //-------------------------------------------
-	// A_deferrableTrigger_state
+	//A_deferrableTrigger_state
 	uML_A_deferrableTrigger_state->setName("A_deferrableTrigger_state");
 	uML_A_deferrableTrigger_state->getMemberEnd()->add(get_UML_State_deferrableTrigger());
 	uML_A_deferrableTrigger_state->getMemberEnd()->add(get_UML_A_deferrableTrigger_state_state());
 	
 
     //-------------------------------------------
-	// A_definingEnd_connectorEnd
+	//A_definingEnd_connectorEnd
 	uML_A_definingEnd_connectorEnd->setName("A_definingEnd_connectorEnd");
 	uML_A_definingEnd_connectorEnd->getMemberEnd()->add(get_UML_ConnectorEnd_definingEnd());
 	uML_A_definingEnd_connectorEnd->getMemberEnd()->add(get_UML_A_definingEnd_connectorEnd_connectorEnd());
 	
 
     //-------------------------------------------
-	// A_definingFeature_slot
+	//A_definingFeature_slot
 	uML_A_definingFeature_slot->setName("A_definingFeature_slot");
 	uML_A_definingFeature_slot->getMemberEnd()->add(get_UML_Slot_definingFeature());
 	uML_A_definingFeature_slot->getMemberEnd()->add(get_UML_A_definingFeature_slot_slot());
 	
 
     //-------------------------------------------
-	// A_deployedArtifact_deploymentForArtifact
+	//A_deployedArtifact_deploymentForArtifact
 	uML_A_deployedArtifact_deploymentForArtifact->setName("A_deployedArtifact_deploymentForArtifact");
 	uML_A_deployedArtifact_deploymentForArtifact->getMemberEnd()->add(get_UML_Deployment_deployedArtifact());
 	uML_A_deployedArtifact_deploymentForArtifact->getMemberEnd()->add(get_UML_A_deployedArtifact_deploymentForArtifact_deploymentForArtifact());
 	
 
     //-------------------------------------------
-	// A_deployedElement_deploymentTarget
+	//A_deployedElement_deploymentTarget
 	uML_A_deployedElement_deploymentTarget->setName("A_deployedElement_deploymentTarget");
 	uML_A_deployedElement_deploymentTarget->getMemberEnd()->add(get_UML_DeploymentTarget_deployedElement());
 	uML_A_deployedElement_deploymentTarget->getMemberEnd()->add(get_UML_A_deployedElement_deploymentTarget_deploymentTarget());
 	
 
     //-------------------------------------------
-	// A_deployment_location
+	//A_deployment_location
 	uML_A_deployment_location->setName("A_deployment_location");
 	uML_A_deployment_location->getMemberEnd()->add(get_UML_DeploymentTarget_deployment());
 	uML_A_deployment_location->getMemberEnd()->add(get_UML_Deployment_location());
 	
 
     //-------------------------------------------
-	// A_destroyAt_linkEndDestructionData
+	//A_destroyAt_linkEndDestructionData
 	uML_A_destroyAt_linkEndDestructionData->setName("A_destroyAt_linkEndDestructionData");
 	uML_A_destroyAt_linkEndDestructionData->getMemberEnd()->add(get_UML_LinkEndDestructionData_destroyAt());
 	uML_A_destroyAt_linkEndDestructionData->getMemberEnd()->add(get_UML_A_destroyAt_linkEndDestructionData_linkEndDestructionData());
 	
 
     //-------------------------------------------
-	// A_doActivity_state
+	//A_doActivity_state
 	uML_A_doActivity_state->setName("A_doActivity_state");
 	uML_A_doActivity_state->getMemberEnd()->add(get_UML_State_doActivity());
 	uML_A_doActivity_state->getMemberEnd()->add(get_UML_A_doActivity_state_state());
 	
 
     //-------------------------------------------
-	// A_edge_activity
+	//A_edge_activity
 	uML_A_edge_activity->setName("A_edge_activity");
 	uML_A_edge_activity->getMemberEnd()->add(get_UML_Activity_edge());
 	uML_A_edge_activity->getMemberEnd()->add(get_UML_ActivityEdge_activity());
 	
 
     //-------------------------------------------
-	// A_edge_inPartition
+	//A_edge_inPartition
 	uML_A_edge_inPartition->setName("A_edge_inPartition");
 	uML_A_edge_inPartition->getMemberEnd()->add(get_UML_ActivityPartition_edge());
 	uML_A_edge_inPartition->getMemberEnd()->add(get_UML_ActivityEdge_inPartition());
 	
 
     //-------------------------------------------
-	// A_edge_inStructuredNode
+	//A_edge_inStructuredNode
 	uML_A_edge_inStructuredNode->setName("A_edge_inStructuredNode");
 	uML_A_edge_inStructuredNode->getMemberEnd()->add(get_UML_StructuredActivityNode_edge());
 	uML_A_edge_inStructuredNode->getMemberEnd()->add(get_UML_ActivityEdge_inStructuredNode());
 	
 
     //-------------------------------------------
-	// A_effect_transition
+	//A_effect_transition
 	uML_A_effect_transition->setName("A_effect_transition");
 	uML_A_effect_transition->getMemberEnd()->add(get_UML_Transition_effect());
 	uML_A_effect_transition->getMemberEnd()->add(get_UML_A_effect_transition_transition());
 	
 
     //-------------------------------------------
-	// A_elementImport_importingNamespace
+	//A_elementImport_importingNamespace
 	uML_A_elementImport_importingNamespace->setName("A_elementImport_importingNamespace");
 	uML_A_elementImport_importingNamespace->getMemberEnd()->add(get_UML_Namespace_elementImport());
 	uML_A_elementImport_importingNamespace->getMemberEnd()->add(get_UML_ElementImport_importingNamespace());
 	
 
     //-------------------------------------------
-	// A_endData_createLinkAction
+	//A_endData_createLinkAction
 	uML_A_endData_createLinkAction->setName("A_endData_createLinkAction");
 	uML_A_endData_createLinkAction->getMemberEnd()->add(get_UML_CreateLinkAction_endData());
 	uML_A_endData_createLinkAction->getMemberEnd()->add(get_UML_A_endData_createLinkAction_createLinkAction());
 	
 
     //-------------------------------------------
-	// A_endData_destroyLinkAction
+	//A_endData_destroyLinkAction
 	uML_A_endData_destroyLinkAction->setName("A_endData_destroyLinkAction");
 	uML_A_endData_destroyLinkAction->getMemberEnd()->add(get_UML_DestroyLinkAction_endData());
 	uML_A_endData_destroyLinkAction->getMemberEnd()->add(get_UML_A_endData_destroyLinkAction_destroyLinkAction());
 	
 
     //-------------------------------------------
-	// A_endData_linkAction
+	//A_endData_linkAction
 	uML_A_endData_linkAction->setName("A_endData_linkAction");
 	uML_A_endData_linkAction->getMemberEnd()->add(get_UML_LinkAction_endData());
 	uML_A_endData_linkAction->getMemberEnd()->add(get_UML_A_endData_linkAction_linkAction());
 	
 
     //-------------------------------------------
-	// A_endType_association
+	//A_endType_association
 	uML_A_endType_association->setName("A_endType_association");
 	uML_A_endType_association->getMemberEnd()->add(get_UML_Association_endType());
 	uML_A_endType_association->getMemberEnd()->add(get_UML_A_endType_association_association());
 	
 
     //-------------------------------------------
-	// A_end_connector
+	//A_end_connector
 	uML_A_end_connector->setName("A_end_connector");
 	uML_A_end_connector->getMemberEnd()->add(get_UML_Connector_end());
 	uML_A_end_connector->getMemberEnd()->add(get_UML_A_end_connector_connector());
 	
 
     //-------------------------------------------
-	// A_end_linkEndData
+	//A_end_linkEndData
 	uML_A_end_linkEndData->setName("A_end_linkEndData");
 	uML_A_end_linkEndData->getMemberEnd()->add(get_UML_LinkEndData_end());
 	uML_A_end_linkEndData->getMemberEnd()->add(get_UML_A_end_linkEndData_linkEndData());
 	
 
     //-------------------------------------------
-	// A_end_readLinkObjectEndAction
+	//A_end_readLinkObjectEndAction
 	uML_A_end_readLinkObjectEndAction->setName("A_end_readLinkObjectEndAction");
 	uML_A_end_readLinkObjectEndAction->getMemberEnd()->add(get_UML_ReadLinkObjectEndAction_end());
 	uML_A_end_readLinkObjectEndAction->getMemberEnd()->add(get_UML_A_end_readLinkObjectEndAction_readLinkObjectEndAction());
 	
 
     //-------------------------------------------
-	// A_end_role
+	//A_end_role
 	uML_A_end_role->setName("A_end_role");
 	uML_A_end_role->getMemberEnd()->add(get_UML_ConnectableElement_end());
 	uML_A_end_role->getMemberEnd()->add(get_UML_ConnectorEnd_role());
@@ -31717,364 +33598,364 @@ void UMLPackageImpl::initializePackageAssociations()
 	
 
     //-------------------------------------------
-	// A_entry_connectionPointReference
+	//A_entry_connectionPointReference
 	uML_A_entry_connectionPointReference->setName("A_entry_connectionPointReference");
 	uML_A_entry_connectionPointReference->getMemberEnd()->add(get_UML_ConnectionPointReference_entry());
 	uML_A_entry_connectionPointReference->getMemberEnd()->add(get_UML_A_entry_connectionPointReference_connectionPointReference());
 	
 
     //-------------------------------------------
-	// A_entry_state
+	//A_entry_state
 	uML_A_entry_state->setName("A_entry_state");
 	uML_A_entry_state->getMemberEnd()->add(get_UML_State_entry());
 	uML_A_entry_state->getMemberEnd()->add(get_UML_A_entry_state_state());
 	
 
     //-------------------------------------------
-	// A_event_durationObservation
+	//A_event_durationObservation
 	uML_A_event_durationObservation->setName("A_event_durationObservation");
 	uML_A_event_durationObservation->getMemberEnd()->add(get_UML_DurationObservation_event());
 	uML_A_event_durationObservation->getMemberEnd()->add(get_UML_A_event_durationObservation_durationObservation());
 	
 
     //-------------------------------------------
-	// A_event_timeObservation
+	//A_event_timeObservation
 	uML_A_event_timeObservation->setName("A_event_timeObservation");
 	uML_A_event_timeObservation->getMemberEnd()->add(get_UML_TimeObservation_event());
 	uML_A_event_timeObservation->getMemberEnd()->add(get_UML_A_event_timeObservation_timeObservation());
 	
 
     //-------------------------------------------
-	// A_event_trigger
+	//A_event_trigger
 	uML_A_event_trigger->setName("A_event_trigger");
 	uML_A_event_trigger->getMemberEnd()->add(get_UML_Trigger_event());
 	uML_A_event_trigger->getMemberEnd()->add(get_UML_A_event_trigger_trigger());
 	
 
     //-------------------------------------------
-	// A_exceptionInput_exceptionHandler
+	//A_exceptionInput_exceptionHandler
 	uML_A_exceptionInput_exceptionHandler->setName("A_exceptionInput_exceptionHandler");
 	uML_A_exceptionInput_exceptionHandler->getMemberEnd()->add(get_UML_ExceptionHandler_exceptionInput());
 	uML_A_exceptionInput_exceptionHandler->getMemberEnd()->add(get_UML_A_exceptionInput_exceptionHandler_exceptionHandler());
 	
 
     //-------------------------------------------
-	// A_exceptionType_exceptionHandler
+	//A_exceptionType_exceptionHandler
 	uML_A_exceptionType_exceptionHandler->setName("A_exceptionType_exceptionHandler");
 	uML_A_exceptionType_exceptionHandler->getMemberEnd()->add(get_UML_ExceptionHandler_exceptionType());
 	uML_A_exceptionType_exceptionHandler->getMemberEnd()->add(get_UML_A_exceptionType_exceptionHandler_exceptionHandler());
 	
 
     //-------------------------------------------
-	// A_exception_raiseExceptionAction
+	//A_exception_raiseExceptionAction
 	uML_A_exception_raiseExceptionAction->setName("A_exception_raiseExceptionAction");
 	uML_A_exception_raiseExceptionAction->getMemberEnd()->add(get_UML_RaiseExceptionAction_exception());
 	uML_A_exception_raiseExceptionAction->getMemberEnd()->add(get_UML_A_exception_raiseExceptionAction_raiseExceptionAction());
 	
 
     //-------------------------------------------
-	// A_executableNode_sequenceNode
+	//A_executableNode_sequenceNode
 	uML_A_executableNode_sequenceNode->setName("A_executableNode_sequenceNode");
 	uML_A_executableNode_sequenceNode->getMemberEnd()->add(get_UML_SequenceNode_executableNode());
 	uML_A_executableNode_sequenceNode->getMemberEnd()->add(get_UML_A_executableNode_sequenceNode_sequenceNode());
 	
 
     //-------------------------------------------
-	// A_execution_executionOccurrenceSpecification
+	//A_execution_executionOccurrenceSpecification
 	uML_A_execution_executionOccurrenceSpecification->setName("A_execution_executionOccurrenceSpecification");
 	uML_A_execution_executionOccurrenceSpecification->getMemberEnd()->add(get_UML_ExecutionOccurrenceSpecification_execution());
 	uML_A_execution_executionOccurrenceSpecification->getMemberEnd()->add(get_UML_A_execution_executionOccurrenceSpecification_executionOccurrenceSpecification());
 	
 
     //-------------------------------------------
-	// A_exit_connectionPointReference
+	//A_exit_connectionPointReference
 	uML_A_exit_connectionPointReference->setName("A_exit_connectionPointReference");
 	uML_A_exit_connectionPointReference->getMemberEnd()->add(get_UML_ConnectionPointReference_exit());
 	uML_A_exit_connectionPointReference->getMemberEnd()->add(get_UML_A_exit_connectionPointReference_connectionPointReference());
 	
 
     //-------------------------------------------
-	// A_exit_state
+	//A_exit_state
 	uML_A_exit_state->setName("A_exit_state");
 	uML_A_exit_state->getMemberEnd()->add(get_UML_State_exit());
 	uML_A_exit_state->getMemberEnd()->add(get_UML_A_exit_state_state());
 	
 
     //-------------------------------------------
-	// A_expr_duration
+	//A_expr_duration
 	uML_A_expr_duration->setName("A_expr_duration");
 	uML_A_expr_duration->getMemberEnd()->add(get_UML_Duration_expr());
 	uML_A_expr_duration->getMemberEnd()->add(get_UML_A_expr_duration_duration());
 	
 
     //-------------------------------------------
-	// A_expr_timeExpression
+	//A_expr_timeExpression
 	uML_A_expr_timeExpression->setName("A_expr_timeExpression");
 	uML_A_expr_timeExpression->getMemberEnd()->add(get_UML_TimeExpression_expr());
 	uML_A_expr_timeExpression->getMemberEnd()->add(get_UML_A_expr_timeExpression_timeExpression());
 	
 
     //-------------------------------------------
-	// A_extend_extension
+	//A_extend_extension
 	uML_A_extend_extension->setName("A_extend_extension");
 	uML_A_extend_extension->getMemberEnd()->add(get_UML_UseCase_extend());
 	uML_A_extend_extension->getMemberEnd()->add(get_UML_Extend_extension());
 	
 
     //-------------------------------------------
-	// A_extendedCase_extend
+	//A_extendedCase_extend
 	uML_A_extendedCase_extend->setName("A_extendedCase_extend");
 	uML_A_extendedCase_extend->getMemberEnd()->add(get_UML_Extend_extendedCase());
 	uML_A_extendedCase_extend->getMemberEnd()->add(get_UML_A_extendedCase_extend_extend());
 	
 
     //-------------------------------------------
-	// A_extendedRegion_region
+	//A_extendedRegion_region
 	uML_A_extendedRegion_region->setName("A_extendedRegion_region");
 	uML_A_extendedRegion_region->getMemberEnd()->add(get_UML_Region_extendedRegion());
 	uML_A_extendedRegion_region->getMemberEnd()->add(get_UML_A_extendedRegion_region_region());
 	
 
     //-------------------------------------------
-	// A_extendedSignature_redefinableTemplateSignature
+	//A_extendedSignature_redefinableTemplateSignature
 	uML_A_extendedSignature_redefinableTemplateSignature->setName("A_extendedSignature_redefinableTemplateSignature");
 	uML_A_extendedSignature_redefinableTemplateSignature->getMemberEnd()->add(get_UML_RedefinableTemplateSignature_extendedSignature());
 	uML_A_extendedSignature_redefinableTemplateSignature->getMemberEnd()->add(get_UML_A_extendedSignature_redefinableTemplateSignature_redefinableTemplateSignature());
 	
 
     //-------------------------------------------
-	// A_extendedStateMachine_stateMachine
+	//A_extendedStateMachine_stateMachine
 	uML_A_extendedStateMachine_stateMachine->setName("A_extendedStateMachine_stateMachine");
 	uML_A_extendedStateMachine_stateMachine->getMemberEnd()->add(get_UML_StateMachine_extendedStateMachine());
 	uML_A_extendedStateMachine_stateMachine->getMemberEnd()->add(get_UML_A_extendedStateMachine_stateMachine_stateMachine());
 	
 
     //-------------------------------------------
-	// A_extensionLocation_extension
+	//A_extensionLocation_extension
 	uML_A_extensionLocation_extension->setName("A_extensionLocation_extension");
 	uML_A_extensionLocation_extension->getMemberEnd()->add(get_UML_Extend_extensionLocation());
 	uML_A_extensionLocation_extension->getMemberEnd()->add(get_UML_A_extensionLocation_extension_extension());
 	
 
     //-------------------------------------------
-	// A_extensionPoint_useCase
+	//A_extensionPoint_useCase
 	uML_A_extensionPoint_useCase->setName("A_extensionPoint_useCase");
 	uML_A_extensionPoint_useCase->getMemberEnd()->add(get_UML_UseCase_extensionPoint());
 	uML_A_extensionPoint_useCase->getMemberEnd()->add(get_UML_ExtensionPoint_useCase());
 	
 
     //-------------------------------------------
-	// A_extension_metaclass
+	//A_extension_metaclass
 	uML_A_extension_metaclass->setName("A_extension_metaclass");
 	uML_A_extension_metaclass->getMemberEnd()->add(get_UML_Class_extension());
 	uML_A_extension_metaclass->getMemberEnd()->add(get_UML_Extension_metaclass());
 	
 
     //-------------------------------------------
-	// A_feature_featuringClassifier
+	//A_feature_featuringClassifier
 	uML_A_feature_featuringClassifier->setName("A_feature_featuringClassifier");
 	uML_A_feature_featuringClassifier->getMemberEnd()->add(get_UML_Classifier_feature());
 	uML_A_feature_featuringClassifier->getMemberEnd()->add(get_UML_Feature_featuringClassifier());
 	
 
     //-------------------------------------------
-	// A_finish_executionSpecification
+	//A_finish_executionSpecification
 	uML_A_finish_executionSpecification->setName("A_finish_executionSpecification");
 	uML_A_finish_executionSpecification->getMemberEnd()->add(get_UML_ExecutionSpecification_finish());
 	uML_A_finish_executionSpecification->getMemberEnd()->add(get_UML_A_finish_executionSpecification_executionSpecification());
 	
 
     //-------------------------------------------
-	// A_first_testIdentityAction
+	//A_first_testIdentityAction
 	uML_A_first_testIdentityAction->setName("A_first_testIdentityAction");
 	uML_A_first_testIdentityAction->getMemberEnd()->add(get_UML_TestIdentityAction_first());
 	uML_A_first_testIdentityAction->getMemberEnd()->add(get_UML_A_first_testIdentityAction_testIdentityAction());
 	
 
     //-------------------------------------------
-	// A_formalGate_interaction
+	//A_formalGate_interaction
 	uML_A_formalGate_interaction->setName("A_formalGate_interaction");
 	uML_A_formalGate_interaction->getMemberEnd()->add(get_UML_Interaction_formalGate());
 	uML_A_formalGate_interaction->getMemberEnd()->add(get_UML_A_formalGate_interaction_interaction());
 	
 
     //-------------------------------------------
-	// A_formal_templateParameterSubstitution
+	//A_formal_templateParameterSubstitution
 	uML_A_formal_templateParameterSubstitution->setName("A_formal_templateParameterSubstitution");
 	uML_A_formal_templateParameterSubstitution->getMemberEnd()->add(get_UML_TemplateParameterSubstitution_formal());
 	uML_A_formal_templateParameterSubstitution->getMemberEnd()->add(get_UML_A_formal_templateParameterSubstitution_templateParameterSubstitution());
 	
 
     //-------------------------------------------
-	// A_fragment_enclosingInteraction
+	//A_fragment_enclosingInteraction
 	uML_A_fragment_enclosingInteraction->setName("A_fragment_enclosingInteraction");
 	uML_A_fragment_enclosingInteraction->getMemberEnd()->add(get_UML_Interaction_fragment());
 	uML_A_fragment_enclosingInteraction->getMemberEnd()->add(get_UML_InteractionFragment_enclosingInteraction());
 	
 
     //-------------------------------------------
-	// A_fragment_enclosingOperand
+	//A_fragment_enclosingOperand
 	uML_A_fragment_enclosingOperand->setName("A_fragment_enclosingOperand");
 	uML_A_fragment_enclosingOperand->getMemberEnd()->add(get_UML_InteractionOperand_fragment());
 	uML_A_fragment_enclosingOperand->getMemberEnd()->add(get_UML_InteractionFragment_enclosingOperand());
 	
 
     //-------------------------------------------
-	// A_fromAction_actionInputPin
+	//A_fromAction_actionInputPin
 	uML_A_fromAction_actionInputPin->setName("A_fromAction_actionInputPin");
 	uML_A_fromAction_actionInputPin->getMemberEnd()->add(get_UML_ActionInputPin_fromAction());
 	uML_A_fromAction_actionInputPin->getMemberEnd()->add(get_UML_A_fromAction_actionInputPin_actionInputPin());
 	
 
     //-------------------------------------------
-	// A_generalMachine_protocolConformance
+	//A_generalMachine_protocolConformance
 	uML_A_generalMachine_protocolConformance->setName("A_generalMachine_protocolConformance");
 	uML_A_generalMachine_protocolConformance->getMemberEnd()->add(get_UML_ProtocolConformance_generalMachine());
 	uML_A_generalMachine_protocolConformance->getMemberEnd()->add(get_UML_A_generalMachine_protocolConformance_protocolConformance());
 	
 
     //-------------------------------------------
-	// A_generalOrdering_interactionFragment
+	//A_generalOrdering_interactionFragment
 	uML_A_generalOrdering_interactionFragment->setName("A_generalOrdering_interactionFragment");
 	uML_A_generalOrdering_interactionFragment->getMemberEnd()->add(get_UML_InteractionFragment_generalOrdering());
 	uML_A_generalOrdering_interactionFragment->getMemberEnd()->add(get_UML_A_generalOrdering_interactionFragment_interactionFragment());
 	
 
     //-------------------------------------------
-	// A_general_classifier
+	//A_general_classifier
 	uML_A_general_classifier->setName("A_general_classifier");
 	uML_A_general_classifier->getMemberEnd()->add(get_UML_Classifier_general());
 	uML_A_general_classifier->getMemberEnd()->add(get_UML_A_general_classifier_classifier());
 	
 
     //-------------------------------------------
-	// A_general_generalization
+	//A_general_generalization
 	uML_A_general_generalization->setName("A_general_generalization");
 	uML_A_general_generalization->getMemberEnd()->add(get_UML_Generalization_general());
 	uML_A_general_generalization->getMemberEnd()->add(get_UML_A_general_generalization_generalization());
 	
 
     //-------------------------------------------
-	// A_generalizationSet_generalization
+	//A_generalizationSet_generalization
 	uML_A_generalizationSet_generalization->setName("A_generalizationSet_generalization");
 	uML_A_generalizationSet_generalization->getMemberEnd()->add(get_UML_Generalization_generalizationSet());
 	uML_A_generalizationSet_generalization->getMemberEnd()->add(get_UML_GeneralizationSet_generalization());
 	
 
     //-------------------------------------------
-	// A_generalization_specific
+	//A_generalization_specific
 	uML_A_generalization_specific->setName("A_generalization_specific");
 	uML_A_generalization_specific->getMemberEnd()->add(get_UML_Classifier_generalization());
 	uML_A_generalization_specific->getMemberEnd()->add(get_UML_Generalization_specific());
 	
 
     //-------------------------------------------
-	// A_group_inActivity
+	//A_group_inActivity
 	uML_A_group_inActivity->setName("A_group_inActivity");
 	uML_A_group_inActivity->getMemberEnd()->add(get_UML_Activity_group());
 	uML_A_group_inActivity->getMemberEnd()->add(get_UML_ActivityGroup_inActivity());
 	
 
     //-------------------------------------------
-	// A_guard_activityEdge
+	//A_guard_activityEdge
 	uML_A_guard_activityEdge->setName("A_guard_activityEdge");
 	uML_A_guard_activityEdge->getMemberEnd()->add(get_UML_ActivityEdge_guard());
 	uML_A_guard_activityEdge->getMemberEnd()->add(get_UML_A_guard_activityEdge_activityEdge());
 	
 
     //-------------------------------------------
-	// A_guard_interactionOperand
+	//A_guard_interactionOperand
 	uML_A_guard_interactionOperand->setName("A_guard_interactionOperand");
 	uML_A_guard_interactionOperand->getMemberEnd()->add(get_UML_InteractionOperand_guard());
 	uML_A_guard_interactionOperand->getMemberEnd()->add(get_UML_A_guard_interactionOperand_interactionOperand());
 	
 
     //-------------------------------------------
-	// A_guard_transition
+	//A_guard_transition
 	uML_A_guard_transition->setName("A_guard_transition");
 	uML_A_guard_transition->getMemberEnd()->add(get_UML_Transition_guard());
 	uML_A_guard_transition->getMemberEnd()->add(get_UML_A_guard_transition_transition());
 	
 
     //-------------------------------------------
-	// A_handlerBody_exceptionHandler
+	//A_handlerBody_exceptionHandler
 	uML_A_handlerBody_exceptionHandler->setName("A_handlerBody_exceptionHandler");
 	uML_A_handlerBody_exceptionHandler->getMemberEnd()->add(get_UML_ExceptionHandler_handlerBody());
 	uML_A_handlerBody_exceptionHandler->getMemberEnd()->add(get_UML_A_handlerBody_exceptionHandler_exceptionHandler());
 	
 
     //-------------------------------------------
-	// A_handler_protectedNode
+	//A_handler_protectedNode
 	uML_A_handler_protectedNode->setName("A_handler_protectedNode");
 	uML_A_handler_protectedNode->getMemberEnd()->add(get_UML_ExecutableNode_handler());
 	uML_A_handler_protectedNode->getMemberEnd()->add(get_UML_ExceptionHandler_protectedNode());
 	
 
     //-------------------------------------------
-	// A_icon_stereotype
+	//A_icon_stereotype
 	uML_A_icon_stereotype->setName("A_icon_stereotype");
 	uML_A_icon_stereotype->getMemberEnd()->add(get_UML_Stereotype_icon());
 	uML_A_icon_stereotype->getMemberEnd()->add(get_UML_A_icon_stereotype_stereotype());
 	
 
     //-------------------------------------------
-	// A_importedElement_import
+	//A_importedElement_import
 	uML_A_importedElement_import->setName("A_importedElement_import");
 	uML_A_importedElement_import->getMemberEnd()->add(get_UML_ElementImport_importedElement());
 	uML_A_importedElement_import->getMemberEnd()->add(get_UML_A_importedElement_import_import());
 	
 
     //-------------------------------------------
-	// A_importedMember_namespace
+	//A_importedMember_namespace
 	uML_A_importedMember_namespace->setName("A_importedMember_namespace");
 	uML_A_importedMember_namespace->getMemberEnd()->add(get_UML_Namespace_importedMember());
 	uML_A_importedMember_namespace->getMemberEnd()->add(get_UML_A_importedMember_namespace_namespace());
 	
 
     //-------------------------------------------
-	// A_importedPackage_packageImport
+	//A_importedPackage_packageImport
 	uML_A_importedPackage_packageImport->setName("A_importedPackage_packageImport");
 	uML_A_importedPackage_packageImport->getMemberEnd()->add(get_UML_PackageImport_importedPackage());
 	uML_A_importedPackage_packageImport->getMemberEnd()->add(get_UML_A_importedPackage_packageImport_packageImport());
 	
 
     //-------------------------------------------
-	// A_inInterruptibleRegion_node
+	//A_inInterruptibleRegion_node
 	uML_A_inInterruptibleRegion_node->setName("A_inInterruptibleRegion_node");
 	uML_A_inInterruptibleRegion_node->getMemberEnd()->add(get_UML_ActivityNode_inInterruptibleRegion());
 	uML_A_inInterruptibleRegion_node->getMemberEnd()->add(get_UML_InterruptibleActivityRegion_node());
 	
 
     //-------------------------------------------
-	// A_inPartition_node
+	//A_inPartition_node
 	uML_A_inPartition_node->setName("A_inPartition_node");
 	uML_A_inPartition_node->getMemberEnd()->add(get_UML_ActivityNode_inPartition());
 	uML_A_inPartition_node->getMemberEnd()->add(get_UML_ActivityPartition_node());
 	
 
     //-------------------------------------------
-	// A_inState_objectNode
+	//A_inState_objectNode
 	uML_A_inState_objectNode->setName("A_inState_objectNode");
 	uML_A_inState_objectNode->getMemberEnd()->add(get_UML_ObjectNode_inState());
 	uML_A_inState_objectNode->getMemberEnd()->add(get_UML_A_inState_objectNode_objectNode());
 	
 
     //-------------------------------------------
-	// A_include_includingCase
+	//A_include_includingCase
 	uML_A_include_includingCase->setName("A_include_includingCase");
 	uML_A_include_includingCase->getMemberEnd()->add(get_UML_UseCase_include());
 	uML_A_include_includingCase->getMemberEnd()->add(get_UML_Include_includingCase());
 	
 
     //-------------------------------------------
-	// A_incoming_target_node
+	//A_incoming_target_node
 	uML_A_incoming_target_node->setName("A_incoming_target_node");
 	uML_A_incoming_target_node->getMemberEnd()->add(get_UML_ActivityNode_incoming());
 	uML_A_incoming_target_node->getMemberEnd()->add(get_UML_ActivityEdge_target());
 	
 
     //-------------------------------------------
-	// A_incoming_target_vertex
+	//A_incoming_target_vertex
 	uML_A_incoming_target_vertex->setName("A_incoming_target_vertex");
 	uML_A_incoming_target_vertex->getMemberEnd()->add(get_UML_Vertex_incoming());
 	uML_A_incoming_target_vertex->getMemberEnd()->add(get_UML_Transition_target());
@@ -32082,504 +33963,504 @@ void UMLPackageImpl::initializePackageAssociations()
 	
 
     //-------------------------------------------
-	// A_informationSource_informationFlow
+	//A_informationSource_informationFlow
 	uML_A_informationSource_informationFlow->setName("A_informationSource_informationFlow");
 	uML_A_informationSource_informationFlow->getMemberEnd()->add(get_UML_InformationFlow_informationSource());
 	uML_A_informationSource_informationFlow->getMemberEnd()->add(get_UML_A_informationSource_informationFlow_informationFlow());
 	
 
     //-------------------------------------------
-	// A_informationTarget_informationFlow
+	//A_informationTarget_informationFlow
 	uML_A_informationTarget_informationFlow->setName("A_informationTarget_informationFlow");
 	uML_A_informationTarget_informationFlow->getMemberEnd()->add(get_UML_InformationFlow_informationTarget());
 	uML_A_informationTarget_informationFlow->getMemberEnd()->add(get_UML_A_informationTarget_informationFlow_informationFlow());
 	
 
     //-------------------------------------------
-	// A_inheritedMember_inheritingClassifier
+	//A_inheritedMember_inheritingClassifier
 	uML_A_inheritedMember_inheritingClassifier->setName("A_inheritedMember_inheritingClassifier");
 	uML_A_inheritedMember_inheritingClassifier->getMemberEnd()->add(get_UML_Classifier_inheritedMember());
 	uML_A_inheritedMember_inheritingClassifier->getMemberEnd()->add(get_UML_A_inheritedMember_inheritingClassifier_inheritingClassifier());
 	
 
     //-------------------------------------------
-	// A_inheritedParameter_redefinableTemplateSignature
+	//A_inheritedParameter_redefinableTemplateSignature
 	uML_A_inheritedParameter_redefinableTemplateSignature->setName("A_inheritedParameter_redefinableTemplateSignature");
 	uML_A_inheritedParameter_redefinableTemplateSignature->getMemberEnd()->add(get_UML_RedefinableTemplateSignature_inheritedParameter());
 	uML_A_inheritedParameter_redefinableTemplateSignature->getMemberEnd()->add(get_UML_A_inheritedParameter_redefinableTemplateSignature_redefinableTemplateSignature());
 	
 
     //-------------------------------------------
-	// A_inputElement_regionAsInput
+	//A_inputElement_regionAsInput
 	uML_A_inputElement_regionAsInput->setName("A_inputElement_regionAsInput");
 	uML_A_inputElement_regionAsInput->getMemberEnd()->add(get_UML_ExpansionRegion_inputElement());
 	uML_A_inputElement_regionAsInput->getMemberEnd()->add(get_UML_ExpansionNode_regionAsInput());
 	
 
     //-------------------------------------------
-	// A_inputValue_linkAction
+	//A_inputValue_linkAction
 	uML_A_inputValue_linkAction->setName("A_inputValue_linkAction");
 	uML_A_inputValue_linkAction->getMemberEnd()->add(get_UML_LinkAction_inputValue());
 	uML_A_inputValue_linkAction->getMemberEnd()->add(get_UML_A_inputValue_linkAction_linkAction());
 	
 
     //-------------------------------------------
-	// A_inputValue_opaqueAction
+	//A_inputValue_opaqueAction
 	uML_A_inputValue_opaqueAction->setName("A_inputValue_opaqueAction");
 	uML_A_inputValue_opaqueAction->getMemberEnd()->add(get_UML_OpaqueAction_inputValue());
 	uML_A_inputValue_opaqueAction->getMemberEnd()->add(get_UML_A_inputValue_opaqueAction_opaqueAction());
 	
 
     //-------------------------------------------
-	// A_input_action
+	//A_input_action
 	uML_A_input_action->setName("A_input_action");
 	uML_A_input_action->getMemberEnd()->add(get_UML_Action_input());
 	uML_A_input_action->getMemberEnd()->add(get_UML_A_input_action_action());
 	
 
     //-------------------------------------------
-	// A_insertAt_addStructuralFeatureValueAction
+	//A_insertAt_addStructuralFeatureValueAction
 	uML_A_insertAt_addStructuralFeatureValueAction->setName("A_insertAt_addStructuralFeatureValueAction");
 	uML_A_insertAt_addStructuralFeatureValueAction->getMemberEnd()->add(get_UML_AddStructuralFeatureValueAction_insertAt());
 	uML_A_insertAt_addStructuralFeatureValueAction->getMemberEnd()->add(get_UML_A_insertAt_addStructuralFeatureValueAction_addStructuralFeatureValueAction());
 	
 
     //-------------------------------------------
-	// A_insertAt_addVariableValueAction
+	//A_insertAt_addVariableValueAction
 	uML_A_insertAt_addVariableValueAction->setName("A_insertAt_addVariableValueAction");
 	uML_A_insertAt_addVariableValueAction->getMemberEnd()->add(get_UML_AddVariableValueAction_insertAt());
 	uML_A_insertAt_addVariableValueAction->getMemberEnd()->add(get_UML_A_insertAt_addVariableValueAction_addVariableValueAction());
 	
 
     //-------------------------------------------
-	// A_insertAt_linkEndCreationData
+	//A_insertAt_linkEndCreationData
 	uML_A_insertAt_linkEndCreationData->setName("A_insertAt_linkEndCreationData");
 	uML_A_insertAt_linkEndCreationData->getMemberEnd()->add(get_UML_LinkEndCreationData_insertAt());
 	uML_A_insertAt_linkEndCreationData->getMemberEnd()->add(get_UML_A_insertAt_linkEndCreationData_linkEndCreationData());
 	
 
     //-------------------------------------------
-	// A_instance_instanceValue
+	//A_instance_instanceValue
 	uML_A_instance_instanceValue->setName("A_instance_instanceValue");
 	uML_A_instance_instanceValue->getMemberEnd()->add(get_UML_InstanceValue_instance());
 	uML_A_instance_instanceValue->getMemberEnd()->add(get_UML_A_instance_instanceValue_instanceValue());
 	
 
     //-------------------------------------------
-	// A_interfaceRealization_implementingClassifier
+	//A_interfaceRealization_implementingClassifier
 	uML_A_interfaceRealization_implementingClassifier->setName("A_interfaceRealization_implementingClassifier");
 	uML_A_interfaceRealization_implementingClassifier->getMemberEnd()->add(get_UML_BehavioredClassifier_interfaceRealization());
 	uML_A_interfaceRealization_implementingClassifier->getMemberEnd()->add(get_UML_InterfaceRealization_implementingClassifier());
 	
 
     //-------------------------------------------
-	// A_interruptingEdge_interrupts
+	//A_interruptingEdge_interrupts
 	uML_A_interruptingEdge_interrupts->setName("A_interruptingEdge_interrupts");
 	uML_A_interruptingEdge_interrupts->getMemberEnd()->add(get_UML_InterruptibleActivityRegion_interruptingEdge());
 	uML_A_interruptingEdge_interrupts->getMemberEnd()->add(get_UML_ActivityEdge_interrupts());
 	
 
     //-------------------------------------------
-	// A_invariant_stateInvariant
+	//A_invariant_stateInvariant
 	uML_A_invariant_stateInvariant->setName("A_invariant_stateInvariant");
 	uML_A_invariant_stateInvariant->getMemberEnd()->add(get_UML_StateInvariant_invariant());
 	uML_A_invariant_stateInvariant->getMemberEnd()->add(get_UML_A_invariant_stateInvariant_stateInvariant());
 	
 
     //-------------------------------------------
-	// A_joinSpec_joinNode
+	//A_joinSpec_joinNode
 	uML_A_joinSpec_joinNode->setName("A_joinSpec_joinNode");
 	uML_A_joinSpec_joinNode->getMemberEnd()->add(get_UML_JoinNode_joinSpec());
 	uML_A_joinSpec_joinNode->getMemberEnd()->add(get_UML_A_joinSpec_joinNode_joinNode());
 	
 
     //-------------------------------------------
-	// A_lifeline_interaction
+	//A_lifeline_interaction
 	uML_A_lifeline_interaction->setName("A_lifeline_interaction");
 	uML_A_lifeline_interaction->getMemberEnd()->add(get_UML_Interaction_lifeline());
 	uML_A_lifeline_interaction->getMemberEnd()->add(get_UML_Lifeline_interaction());
 	
 
     //-------------------------------------------
-	// A_localPostcondition_action
+	//A_localPostcondition_action
 	uML_A_localPostcondition_action->setName("A_localPostcondition_action");
 	uML_A_localPostcondition_action->getMemberEnd()->add(get_UML_Action_localPostcondition());
 	uML_A_localPostcondition_action->getMemberEnd()->add(get_UML_A_localPostcondition_action_action());
 	
 
     //-------------------------------------------
-	// A_localPrecondition_action
+	//A_localPrecondition_action
 	uML_A_localPrecondition_action->setName("A_localPrecondition_action");
 	uML_A_localPrecondition_action->getMemberEnd()->add(get_UML_Action_localPrecondition());
 	uML_A_localPrecondition_action->getMemberEnd()->add(get_UML_A_localPrecondition_action_action());
 	
 
     //-------------------------------------------
-	// A_loopVariableInput_loopNode
+	//A_loopVariableInput_loopNode
 	uML_A_loopVariableInput_loopNode->setName("A_loopVariableInput_loopNode");
 	uML_A_loopVariableInput_loopNode->getMemberEnd()->add(get_UML_LoopNode_loopVariableInput());
 	uML_A_loopVariableInput_loopNode->getMemberEnd()->add(get_UML_A_loopVariableInput_loopNode_loopNode());
 	
 
     //-------------------------------------------
-	// A_loopVariable_loopNode
+	//A_loopVariable_loopNode
 	uML_A_loopVariable_loopNode->setName("A_loopVariable_loopNode");
 	uML_A_loopVariable_loopNode->getMemberEnd()->add(get_UML_LoopNode_loopVariable());
 	uML_A_loopVariable_loopNode->getMemberEnd()->add(get_UML_A_loopVariable_loopNode_loopNode());
 	
 
     //-------------------------------------------
-	// A_lowerValue_owningLower
+	//A_lowerValue_owningLower
 	uML_A_lowerValue_owningLower->setName("A_lowerValue_owningLower");
 	uML_A_lowerValue_owningLower->getMemberEnd()->add(get_UML_MultiplicityElement_lowerValue());
 	uML_A_lowerValue_owningLower->getMemberEnd()->add(get_UML_A_lowerValue_owningLower_owningLower());
 	
 
     //-------------------------------------------
-	// A_manifestation_artifact
+	//A_manifestation_artifact
 	uML_A_manifestation_artifact->setName("A_manifestation_artifact");
 	uML_A_manifestation_artifact->getMemberEnd()->add(get_UML_Artifact_manifestation());
 	uML_A_manifestation_artifact->getMemberEnd()->add(get_UML_A_manifestation_artifact_artifact());
 	
 
     //-------------------------------------------
-	// A_mapping_abstraction
+	//A_mapping_abstraction
 	uML_A_mapping_abstraction->setName("A_mapping_abstraction");
 	uML_A_mapping_abstraction->getMemberEnd()->add(get_UML_Abstraction_mapping());
 	uML_A_mapping_abstraction->getMemberEnd()->add(get_UML_A_mapping_abstraction_abstraction());
 	
 
     //-------------------------------------------
-	// A_max_durationInterval
+	//A_max_durationInterval
 	uML_A_max_durationInterval->setName("A_max_durationInterval");
 	uML_A_max_durationInterval->getMemberEnd()->add(get_UML_DurationInterval_max());
 	uML_A_max_durationInterval->getMemberEnd()->add(get_UML_A_max_durationInterval_durationInterval());
 	
 
     //-------------------------------------------
-	// A_max_interval
+	//A_max_interval
 	uML_A_max_interval->setName("A_max_interval");
 	uML_A_max_interval->getMemberEnd()->add(get_UML_Interval_max());
 	uML_A_max_interval->getMemberEnd()->add(get_UML_A_max_interval_interval());
 	
 
     //-------------------------------------------
-	// A_max_timeInterval
+	//A_max_timeInterval
 	uML_A_max_timeInterval->setName("A_max_timeInterval");
 	uML_A_max_timeInterval->getMemberEnd()->add(get_UML_TimeInterval_max());
 	uML_A_max_timeInterval->getMemberEnd()->add(get_UML_A_max_timeInterval_timeInterval());
 	
 
     //-------------------------------------------
-	// A_maxint_interactionConstraint
+	//A_maxint_interactionConstraint
 	uML_A_maxint_interactionConstraint->setName("A_maxint_interactionConstraint");
 	uML_A_maxint_interactionConstraint->getMemberEnd()->add(get_UML_InteractionConstraint_maxint());
 	uML_A_maxint_interactionConstraint->getMemberEnd()->add(get_UML_A_maxint_interactionConstraint_interactionConstraint());
 	
 
     //-------------------------------------------
-	// A_memberEnd_association
+	//A_memberEnd_association
 	uML_A_memberEnd_association->setName("A_memberEnd_association");
 	uML_A_memberEnd_association->getMemberEnd()->add(get_UML_Association_memberEnd());
 	uML_A_memberEnd_association->getMemberEnd()->add(get_UML_Property_association());
 	
 
     //-------------------------------------------
-	// A_member_memberNamespace
+	//A_member_memberNamespace
 	uML_A_member_memberNamespace->setName("A_member_memberNamespace");
 	uML_A_member_memberNamespace->getMemberEnd()->add(get_UML_Namespace_member());
 	uML_A_member_memberNamespace->getMemberEnd()->add(get_UML_A_member_memberNamespace_memberNamespace());
 	
 
     //-------------------------------------------
-	// A_mergedPackage_packageMerge
+	//A_mergedPackage_packageMerge
 	uML_A_mergedPackage_packageMerge->setName("A_mergedPackage_packageMerge");
 	uML_A_mergedPackage_packageMerge->getMemberEnd()->add(get_UML_PackageMerge_mergedPackage());
 	uML_A_mergedPackage_packageMerge->getMemberEnd()->add(get_UML_A_mergedPackage_packageMerge_packageMerge());
 	
 
     //-------------------------------------------
-	// A_message_considerIgnoreFragment
+	//A_message_considerIgnoreFragment
 	uML_A_message_considerIgnoreFragment->setName("A_message_considerIgnoreFragment");
 	uML_A_message_considerIgnoreFragment->getMemberEnd()->add(get_UML_ConsiderIgnoreFragment_message());
 	uML_A_message_considerIgnoreFragment->getMemberEnd()->add(get_UML_A_message_considerIgnoreFragment_considerIgnoreFragment());
 	
 
     //-------------------------------------------
-	// A_message_interaction
+	//A_message_interaction
 	uML_A_message_interaction->setName("A_message_interaction");
 	uML_A_message_interaction->getMemberEnd()->add(get_UML_Interaction_message());
 	uML_A_message_interaction->getMemberEnd()->add(get_UML_Message_interaction());
 	
 
     //-------------------------------------------
-	// A_message_messageEnd
+	//A_message_messageEnd
 	uML_A_message_messageEnd->setName("A_message_messageEnd");
 	uML_A_message_messageEnd->getMemberEnd()->add(get_UML_MessageEnd_message());
 	uML_A_message_messageEnd->getMemberEnd()->add(get_UML_A_message_messageEnd_messageEnd());
 	
 
     //-------------------------------------------
-	// A_metaclassReference_profile
+	//A_metaclassReference_profile
 	uML_A_metaclassReference_profile->setName("A_metaclassReference_profile");
 	uML_A_metaclassReference_profile->getMemberEnd()->add(get_UML_Profile_metaclassReference());
 	uML_A_metaclassReference_profile->getMemberEnd()->add(get_UML_A_metaclassReference_profile_profile());
 	
 
     //-------------------------------------------
-	// A_metamodelReference_profile
+	//A_metamodelReference_profile
 	uML_A_metamodelReference_profile->setName("A_metamodelReference_profile");
 	uML_A_metamodelReference_profile->getMemberEnd()->add(get_UML_Profile_metamodelReference());
 	uML_A_metamodelReference_profile->getMemberEnd()->add(get_UML_A_metamodelReference_profile_profile());
 	
 
     //-------------------------------------------
-	// A_method_specification
+	//A_method_specification
 	uML_A_method_specification->setName("A_method_specification");
 	uML_A_method_specification->getMemberEnd()->add(get_UML_BehavioralFeature_method());
 	uML_A_method_specification->getMemberEnd()->add(get_UML_Behavior_specification());
 	
 
     //-------------------------------------------
-	// A_min_durationInterval
+	//A_min_durationInterval
 	uML_A_min_durationInterval->setName("A_min_durationInterval");
 	uML_A_min_durationInterval->getMemberEnd()->add(get_UML_DurationInterval_min());
 	uML_A_min_durationInterval->getMemberEnd()->add(get_UML_A_min_durationInterval_durationInterval());
 	
 
     //-------------------------------------------
-	// A_min_interval
+	//A_min_interval
 	uML_A_min_interval->setName("A_min_interval");
 	uML_A_min_interval->getMemberEnd()->add(get_UML_Interval_min());
 	uML_A_min_interval->getMemberEnd()->add(get_UML_A_min_interval_interval());
 	
 
     //-------------------------------------------
-	// A_min_timeInterval
+	//A_min_timeInterval
 	uML_A_min_timeInterval->setName("A_min_timeInterval");
 	uML_A_min_timeInterval->getMemberEnd()->add(get_UML_TimeInterval_min());
 	uML_A_min_timeInterval->getMemberEnd()->add(get_UML_A_min_timeInterval_timeInterval());
 	
 
     //-------------------------------------------
-	// A_minint_interactionConstraint
+	//A_minint_interactionConstraint
 	uML_A_minint_interactionConstraint->setName("A_minint_interactionConstraint");
 	uML_A_minint_interactionConstraint->getMemberEnd()->add(get_UML_InteractionConstraint_minint());
 	uML_A_minint_interactionConstraint->getMemberEnd()->add(get_UML_A_minint_interactionConstraint_interactionConstraint());
 	
 
     //-------------------------------------------
-	// A_nameExpression_namedElement
+	//A_nameExpression_namedElement
 	uML_A_nameExpression_namedElement->setName("A_nameExpression_namedElement");
 	uML_A_nameExpression_namedElement->getMemberEnd()->add(get_UML_NamedElement_nameExpression());
 	uML_A_nameExpression_namedElement->getMemberEnd()->add(get_UML_A_nameExpression_namedElement_namedElement());
 	
 
     //-------------------------------------------
-	// A_navigableOwnedEnd_association
+	//A_navigableOwnedEnd_association
 	uML_A_navigableOwnedEnd_association->setName("A_navigableOwnedEnd_association");
 	uML_A_navigableOwnedEnd_association->getMemberEnd()->add(get_UML_Association_navigableOwnedEnd());
 	uML_A_navigableOwnedEnd_association->getMemberEnd()->add(get_UML_A_navigableOwnedEnd_association_association());
 	
 
     //-------------------------------------------
-	// A_nestedArtifact_artifact
+	//A_nestedArtifact_artifact
 	uML_A_nestedArtifact_artifact->setName("A_nestedArtifact_artifact");
 	uML_A_nestedArtifact_artifact->getMemberEnd()->add(get_UML_Artifact_nestedArtifact());
 	uML_A_nestedArtifact_artifact->getMemberEnd()->add(get_UML_A_nestedArtifact_artifact_artifact());
 	
 
     //-------------------------------------------
-	// A_nestedClassifier_interface
+	//A_nestedClassifier_interface
 	uML_A_nestedClassifier_interface->setName("A_nestedClassifier_interface");
 	uML_A_nestedClassifier_interface->getMemberEnd()->add(get_UML_Interface_nestedClassifier());
 	uML_A_nestedClassifier_interface->getMemberEnd()->add(get_UML_A_nestedClassifier_interface_interface());
 	
 
     //-------------------------------------------
-	// A_nestedClassifier_nestingClass
+	//A_nestedClassifier_nestingClass
 	uML_A_nestedClassifier_nestingClass->setName("A_nestedClassifier_nestingClass");
 	uML_A_nestedClassifier_nestingClass->getMemberEnd()->add(get_UML_Class_nestedClassifier());
 	uML_A_nestedClassifier_nestingClass->getMemberEnd()->add(get_UML_A_nestedClassifier_nestingClass_nestingClass());
 	
 
     //-------------------------------------------
-	// A_nestedNode_node
+	//A_nestedNode_node
 	uML_A_nestedNode_node->setName("A_nestedNode_node");
 	uML_A_nestedNode_node->getMemberEnd()->add(get_UML_Node_nestedNode());
 	uML_A_nestedNode_node->getMemberEnd()->add(get_UML_A_nestedNode_node_node());
 	
 
     //-------------------------------------------
-	// A_nestedPackage_nestingPackage
+	//A_nestedPackage_nestingPackage
 	uML_A_nestedPackage_nestingPackage->setName("A_nestedPackage_nestingPackage");
 	uML_A_nestedPackage_nestingPackage->getMemberEnd()->add(get_UML_Package_nestedPackage());
 	uML_A_nestedPackage_nestingPackage->getMemberEnd()->add(get_UML_Package_nestingPackage());
 	
 
     //-------------------------------------------
-	// A_newClassifier_reclassifyObjectAction
+	//A_newClassifier_reclassifyObjectAction
 	uML_A_newClassifier_reclassifyObjectAction->setName("A_newClassifier_reclassifyObjectAction");
 	uML_A_newClassifier_reclassifyObjectAction->getMemberEnd()->add(get_UML_ReclassifyObjectAction_newClassifier());
 	uML_A_newClassifier_reclassifyObjectAction->getMemberEnd()->add(get_UML_A_newClassifier_reclassifyObjectAction_reclassifyObjectAction());
 	
 
     //-------------------------------------------
-	// A_node_activity
+	//A_node_activity
 	uML_A_node_activity->setName("A_node_activity");
 	uML_A_node_activity->getMemberEnd()->add(get_UML_Activity_node());
 	uML_A_node_activity->getMemberEnd()->add(get_UML_ActivityNode_activity());
 	
 
     //-------------------------------------------
-	// A_node_inStructuredNode
+	//A_node_inStructuredNode
 	uML_A_node_inStructuredNode->setName("A_node_inStructuredNode");
 	uML_A_node_inStructuredNode->getMemberEnd()->add(get_UML_StructuredActivityNode_node());
 	uML_A_node_inStructuredNode->getMemberEnd()->add(get_UML_ActivityNode_inStructuredNode());
 	
 
     //-------------------------------------------
-	// A_object_clearAssociationAction
+	//A_object_clearAssociationAction
 	uML_A_object_clearAssociationAction->setName("A_object_clearAssociationAction");
 	uML_A_object_clearAssociationAction->getMemberEnd()->add(get_UML_ClearAssociationAction_object());
 	uML_A_object_clearAssociationAction->getMemberEnd()->add(get_UML_A_object_clearAssociationAction_clearAssociationAction());
 	
 
     //-------------------------------------------
-	// A_object_readIsClassifiedObjectAction
+	//A_object_readIsClassifiedObjectAction
 	uML_A_object_readIsClassifiedObjectAction->setName("A_object_readIsClassifiedObjectAction");
 	uML_A_object_readIsClassifiedObjectAction->getMemberEnd()->add(get_UML_ReadIsClassifiedObjectAction_object());
 	uML_A_object_readIsClassifiedObjectAction->getMemberEnd()->add(get_UML_A_object_readIsClassifiedObjectAction_readIsClassifiedObjectAction());
 	
 
     //-------------------------------------------
-	// A_object_readLinkObjectEndAction
+	//A_object_readLinkObjectEndAction
 	uML_A_object_readLinkObjectEndAction->setName("A_object_readLinkObjectEndAction");
 	uML_A_object_readLinkObjectEndAction->getMemberEnd()->add(get_UML_ReadLinkObjectEndAction_object());
 	uML_A_object_readLinkObjectEndAction->getMemberEnd()->add(get_UML_A_object_readLinkObjectEndAction_readLinkObjectEndAction());
 	
 
     //-------------------------------------------
-	// A_object_readLinkObjectEndQualifierAction
+	//A_object_readLinkObjectEndQualifierAction
 	uML_A_object_readLinkObjectEndQualifierAction->setName("A_object_readLinkObjectEndQualifierAction");
 	uML_A_object_readLinkObjectEndQualifierAction->getMemberEnd()->add(get_UML_ReadLinkObjectEndQualifierAction_object());
 	uML_A_object_readLinkObjectEndQualifierAction->getMemberEnd()->add(get_UML_A_object_readLinkObjectEndQualifierAction_readLinkObjectEndQualifierAction());
 	
 
     //-------------------------------------------
-	// A_object_reclassifyObjectAction
+	//A_object_reclassifyObjectAction
 	uML_A_object_reclassifyObjectAction->setName("A_object_reclassifyObjectAction");
 	uML_A_object_reclassifyObjectAction->getMemberEnd()->add(get_UML_ReclassifyObjectAction_object());
 	uML_A_object_reclassifyObjectAction->getMemberEnd()->add(get_UML_A_object_reclassifyObjectAction_reclassifyObjectAction());
 	
 
     //-------------------------------------------
-	// A_object_startClassifierBehaviorAction
+	//A_object_startClassifierBehaviorAction
 	uML_A_object_startClassifierBehaviorAction->setName("A_object_startClassifierBehaviorAction");
 	uML_A_object_startClassifierBehaviorAction->getMemberEnd()->add(get_UML_StartClassifierBehaviorAction_object());
 	uML_A_object_startClassifierBehaviorAction->getMemberEnd()->add(get_UML_A_object_startClassifierBehaviorAction_startClassifierBehaviorAction());
 	
 
     //-------------------------------------------
-	// A_object_startObjectBehaviorAction
+	//A_object_startObjectBehaviorAction
 	uML_A_object_startObjectBehaviorAction->setName("A_object_startObjectBehaviorAction");
 	uML_A_object_startObjectBehaviorAction->getMemberEnd()->add(get_UML_StartObjectBehaviorAction_object());
 	uML_A_object_startObjectBehaviorAction->getMemberEnd()->add(get_UML_A_object_startObjectBehaviorAction_startObjectBehaviorAction());
 	
 
     //-------------------------------------------
-	// A_object_structuralFeatureAction
+	//A_object_structuralFeatureAction
 	uML_A_object_structuralFeatureAction->setName("A_object_structuralFeatureAction");
 	uML_A_object_structuralFeatureAction->getMemberEnd()->add(get_UML_StructuralFeatureAction_object());
 	uML_A_object_structuralFeatureAction->getMemberEnd()->add(get_UML_A_object_structuralFeatureAction_structuralFeatureAction());
 	
 
     //-------------------------------------------
-	// A_object_unmarshallAction
+	//A_object_unmarshallAction
 	uML_A_object_unmarshallAction->setName("A_object_unmarshallAction");
 	uML_A_object_unmarshallAction->getMemberEnd()->add(get_UML_UnmarshallAction_object());
 	uML_A_object_unmarshallAction->getMemberEnd()->add(get_UML_A_object_unmarshallAction_unmarshallAction());
 	
 
     //-------------------------------------------
-	// A_observation_duration
+	//A_observation_duration
 	uML_A_observation_duration->setName("A_observation_duration");
 	uML_A_observation_duration->getMemberEnd()->add(get_UML_Duration_observation());
 	uML_A_observation_duration->getMemberEnd()->add(get_UML_A_observation_duration_duration());
 	
 
     //-------------------------------------------
-	// A_observation_timeExpression
+	//A_observation_timeExpression
 	uML_A_observation_timeExpression->setName("A_observation_timeExpression");
 	uML_A_observation_timeExpression->getMemberEnd()->add(get_UML_TimeExpression_observation());
 	uML_A_observation_timeExpression->getMemberEnd()->add(get_UML_A_observation_timeExpression_timeExpression());
 	
 
     //-------------------------------------------
-	// A_oldClassifier_reclassifyObjectAction
+	//A_oldClassifier_reclassifyObjectAction
 	uML_A_oldClassifier_reclassifyObjectAction->setName("A_oldClassifier_reclassifyObjectAction");
 	uML_A_oldClassifier_reclassifyObjectAction->getMemberEnd()->add(get_UML_ReclassifyObjectAction_oldClassifier());
 	uML_A_oldClassifier_reclassifyObjectAction->getMemberEnd()->add(get_UML_A_oldClassifier_reclassifyObjectAction_reclassifyObjectAction());
 	
 
     //-------------------------------------------
-	// A_onPort_invocationAction
+	//A_onPort_invocationAction
 	uML_A_onPort_invocationAction->setName("A_onPort_invocationAction");
 	uML_A_onPort_invocationAction->getMemberEnd()->add(get_UML_InvocationAction_onPort());
 	uML_A_onPort_invocationAction->getMemberEnd()->add(get_UML_A_onPort_invocationAction_invocationAction());
 	
 
     //-------------------------------------------
-	// A_operand_combinedFragment
+	//A_operand_combinedFragment
 	uML_A_operand_combinedFragment->setName("A_operand_combinedFragment");
 	uML_A_operand_combinedFragment->getMemberEnd()->add(get_UML_CombinedFragment_operand());
 	uML_A_operand_combinedFragment->getMemberEnd()->add(get_UML_A_operand_combinedFragment_combinedFragment());
 	
 
     //-------------------------------------------
-	// A_operand_expression
+	//A_operand_expression
 	uML_A_operand_expression->setName("A_operand_expression");
 	uML_A_operand_expression->getMemberEnd()->add(get_UML_Expression_operand());
 	uML_A_operand_expression->getMemberEnd()->add(get_UML_A_operand_expression_expression());
 	
 
     //-------------------------------------------
-	// A_operation_callEvent
+	//A_operation_callEvent
 	uML_A_operation_callEvent->setName("A_operation_callEvent");
 	uML_A_operation_callEvent->getMemberEnd()->add(get_UML_CallEvent_operation());
 	uML_A_operation_callEvent->getMemberEnd()->add(get_UML_A_operation_callEvent_callEvent());
 	
 
     //-------------------------------------------
-	// A_operation_callOperationAction
+	//A_operation_callOperationAction
 	uML_A_operation_callOperationAction->setName("A_operation_callOperationAction");
 	uML_A_operation_callOperationAction->getMemberEnd()->add(get_UML_CallOperationAction_operation());
 	uML_A_operation_callOperationAction->getMemberEnd()->add(get_UML_A_operation_callOperationAction_callOperationAction());
 	
 
     //-------------------------------------------
-	// A_operation_templateParameter_parameteredElement
+	//A_operation_templateParameter_parameteredElement
 	uML_A_operation_templateParameter_parameteredElement->setName("A_operation_templateParameter_parameteredElement");
 	uML_A_operation_templateParameter_parameteredElement->getMemberEnd()->add(get_UML_Operation_templateParameter());
 	uML_A_operation_templateParameter_parameteredElement->getMemberEnd()->add(get_UML_OperationTemplateParameter_parameteredElement());
 	
 
     //-------------------------------------------
-	// A_opposite_property
+	//A_opposite_property
 	uML_A_opposite_property->setName("A_opposite_property");
 	uML_A_opposite_property->getMemberEnd()->add(get_UML_Property_opposite());
 	uML_A_opposite_property->getMemberEnd()->add(get_UML_A_opposite_property_property());
 	
 
     //-------------------------------------------
-	// A_outgoing_source_node
+	//A_outgoing_source_node
 	uML_A_outgoing_source_node->setName("A_outgoing_source_node");
 	uML_A_outgoing_source_node->getMemberEnd()->add(get_UML_ActivityNode_outgoing());
 	uML_A_outgoing_source_node->getMemberEnd()->add(get_UML_ActivityEdge_source());
 	
 
     //-------------------------------------------
-	// A_outgoing_source_vertex
+	//A_outgoing_source_vertex
 	uML_A_outgoing_source_vertex->setName("A_outgoing_source_vertex");
 	uML_A_outgoing_source_vertex->getMemberEnd()->add(get_UML_Vertex_outgoing());
 	uML_A_outgoing_source_vertex->getMemberEnd()->add(get_UML_Transition_source());
@@ -32587,1148 +34468,1148 @@ void UMLPackageImpl::initializePackageAssociations()
 	
 
     //-------------------------------------------
-	// A_outputElement_regionAsOutput
+	//A_outputElement_regionAsOutput
 	uML_A_outputElement_regionAsOutput->setName("A_outputElement_regionAsOutput");
 	uML_A_outputElement_regionAsOutput->getMemberEnd()->add(get_UML_ExpansionRegion_outputElement());
 	uML_A_outputElement_regionAsOutput->getMemberEnd()->add(get_UML_ExpansionNode_regionAsOutput());
 	
 
     //-------------------------------------------
-	// A_outputValue_opaqueAction
+	//A_outputValue_opaqueAction
 	uML_A_outputValue_opaqueAction->setName("A_outputValue_opaqueAction");
 	uML_A_outputValue_opaqueAction->getMemberEnd()->add(get_UML_OpaqueAction_outputValue());
 	uML_A_outputValue_opaqueAction->getMemberEnd()->add(get_UML_A_outputValue_opaqueAction_opaqueAction());
 	
 
     //-------------------------------------------
-	// A_output_action
+	//A_output_action
 	uML_A_output_action->setName("A_output_action");
 	uML_A_output_action->getMemberEnd()->add(get_UML_Action_output());
 	uML_A_output_action->getMemberEnd()->add(get_UML_A_output_action_action());
 	
 
     //-------------------------------------------
-	// A_ownedActual_owningTemplateParameterSubstitution
+	//A_ownedActual_owningTemplateParameterSubstitution
 	uML_A_ownedActual_owningTemplateParameterSubstitution->setName("A_ownedActual_owningTemplateParameterSubstitution");
 	uML_A_ownedActual_owningTemplateParameterSubstitution->getMemberEnd()->add(get_UML_TemplateParameterSubstitution_ownedActual());
 	uML_A_ownedActual_owningTemplateParameterSubstitution->getMemberEnd()->add(get_UML_A_ownedActual_owningTemplateParameterSubstitution_owningTemplateParameterSubstitution());
 	
 
     //-------------------------------------------
-	// A_ownedAttribute_artifact
+	//A_ownedAttribute_artifact
 	uML_A_ownedAttribute_artifact->setName("A_ownedAttribute_artifact");
 	uML_A_ownedAttribute_artifact->getMemberEnd()->add(get_UML_Artifact_ownedAttribute());
 	uML_A_ownedAttribute_artifact->getMemberEnd()->add(get_UML_A_ownedAttribute_artifact_artifact());
 	
 
     //-------------------------------------------
-	// A_ownedAttribute_class
+	//A_ownedAttribute_class
 	uML_A_ownedAttribute_class->setName("A_ownedAttribute_class");
 	uML_A_ownedAttribute_class->getMemberEnd()->add(get_UML_Class_ownedAttribute());
 	uML_A_ownedAttribute_class->getMemberEnd()->add(get_UML_Property_class());
 	
 
     //-------------------------------------------
-	// A_ownedAttribute_datatype
+	//A_ownedAttribute_datatype
 	uML_A_ownedAttribute_datatype->setName("A_ownedAttribute_datatype");
 	uML_A_ownedAttribute_datatype->getMemberEnd()->add(get_UML_DataType_ownedAttribute());
 	uML_A_ownedAttribute_datatype->getMemberEnd()->add(get_UML_Property_datatype());
 	
 
     //-------------------------------------------
-	// A_ownedAttribute_interface
+	//A_ownedAttribute_interface
 	uML_A_ownedAttribute_interface->setName("A_ownedAttribute_interface");
 	uML_A_ownedAttribute_interface->getMemberEnd()->add(get_UML_Interface_ownedAttribute());
 	uML_A_ownedAttribute_interface->getMemberEnd()->add(get_UML_Property_interface());
 	
 
     //-------------------------------------------
-	// A_ownedAttribute_owningSignal
+	//A_ownedAttribute_owningSignal
 	uML_A_ownedAttribute_owningSignal->setName("A_ownedAttribute_owningSignal");
 	uML_A_ownedAttribute_owningSignal->getMemberEnd()->add(get_UML_Signal_ownedAttribute());
 	uML_A_ownedAttribute_owningSignal->getMemberEnd()->add(get_UML_A_ownedAttribute_owningSignal_owningSignal());
 	
 
     //-------------------------------------------
-	// A_ownedAttribute_structuredClassifier
+	//A_ownedAttribute_structuredClassifier
 	uML_A_ownedAttribute_structuredClassifier->setName("A_ownedAttribute_structuredClassifier");
 	uML_A_ownedAttribute_structuredClassifier->getMemberEnd()->add(get_UML_StructuredClassifier_ownedAttribute());
 	uML_A_ownedAttribute_structuredClassifier->getMemberEnd()->add(get_UML_A_ownedAttribute_structuredClassifier_structuredClassifier());
 	
 
     //-------------------------------------------
-	// A_ownedBehavior_behavioredClassifier
+	//A_ownedBehavior_behavioredClassifier
 	uML_A_ownedBehavior_behavioredClassifier->setName("A_ownedBehavior_behavioredClassifier");
 	uML_A_ownedBehavior_behavioredClassifier->getMemberEnd()->add(get_UML_BehavioredClassifier_ownedBehavior());
 	uML_A_ownedBehavior_behavioredClassifier->getMemberEnd()->add(get_UML_A_ownedBehavior_behavioredClassifier_behavioredClassifier());
 	
 
     //-------------------------------------------
-	// A_ownedComment_owningElement
+	//A_ownedComment_owningElement
 	uML_A_ownedComment_owningElement->setName("A_ownedComment_owningElement");
 	uML_A_ownedComment_owningElement->getMemberEnd()->add(get_UML_Element_ownedComment());
 	uML_A_ownedComment_owningElement->getMemberEnd()->add(get_UML_A_ownedComment_owningElement_owningElement());
 	
 
     //-------------------------------------------
-	// A_ownedConnector_structuredClassifier
+	//A_ownedConnector_structuredClassifier
 	uML_A_ownedConnector_structuredClassifier->setName("A_ownedConnector_structuredClassifier");
 	uML_A_ownedConnector_structuredClassifier->getMemberEnd()->add(get_UML_StructuredClassifier_ownedConnector());
 	uML_A_ownedConnector_structuredClassifier->getMemberEnd()->add(get_UML_A_ownedConnector_structuredClassifier_structuredClassifier());
 	
 
     //-------------------------------------------
-	// A_ownedDefault_templateParameter
+	//A_ownedDefault_templateParameter
 	uML_A_ownedDefault_templateParameter->setName("A_ownedDefault_templateParameter");
 	uML_A_ownedDefault_templateParameter->getMemberEnd()->add(get_UML_TemplateParameter_ownedDefault());
 	uML_A_ownedDefault_templateParameter->getMemberEnd()->add(get_UML_A_ownedDefault_templateParameter_templateParameter());
 	
 
     //-------------------------------------------
-	// A_ownedElement_owner
+	//A_ownedElement_owner
 	uML_A_ownedElement_owner->setName("A_ownedElement_owner");
 	uML_A_ownedElement_owner->getMemberEnd()->add(get_UML_Element_ownedElement());
 	uML_A_ownedElement_owner->getMemberEnd()->add(get_UML_Element_owner());
 	
 
     //-------------------------------------------
-	// A_ownedEnd_extension
+	//A_ownedEnd_extension
 	uML_A_ownedEnd_extension->setName("A_ownedEnd_extension");
 	uML_A_ownedEnd_extension->getMemberEnd()->add(get_UML_Extension_ownedEnd());
 	uML_A_ownedEnd_extension->getMemberEnd()->add(get_UML_A_ownedEnd_extension_extension());
 	
 
     //-------------------------------------------
-	// A_ownedEnd_owningAssociation
+	//A_ownedEnd_owningAssociation
 	uML_A_ownedEnd_owningAssociation->setName("A_ownedEnd_owningAssociation");
 	uML_A_ownedEnd_owningAssociation->getMemberEnd()->add(get_UML_Association_ownedEnd());
 	uML_A_ownedEnd_owningAssociation->getMemberEnd()->add(get_UML_Property_owningAssociation());
 	
 
     //-------------------------------------------
-	// A_ownedLiteral_enumeration
+	//A_ownedLiteral_enumeration
 	uML_A_ownedLiteral_enumeration->setName("A_ownedLiteral_enumeration");
 	uML_A_ownedLiteral_enumeration->getMemberEnd()->add(get_UML_Enumeration_ownedLiteral());
 	uML_A_ownedLiteral_enumeration->getMemberEnd()->add(get_UML_EnumerationLiteral_enumeration());
 	
 
     //-------------------------------------------
-	// A_ownedMember_namespace
+	//A_ownedMember_namespace
 	uML_A_ownedMember_namespace->setName("A_ownedMember_namespace");
 	uML_A_ownedMember_namespace->getMemberEnd()->add(get_UML_Namespace_ownedMember());
 	uML_A_ownedMember_namespace->getMemberEnd()->add(get_UML_NamedElement_namespace());
 	
 
     //-------------------------------------------
-	// A_ownedOperation_artifact
+	//A_ownedOperation_artifact
 	uML_A_ownedOperation_artifact->setName("A_ownedOperation_artifact");
 	uML_A_ownedOperation_artifact->getMemberEnd()->add(get_UML_Artifact_ownedOperation());
 	uML_A_ownedOperation_artifact->getMemberEnd()->add(get_UML_A_ownedOperation_artifact_artifact());
 	
 
     //-------------------------------------------
-	// A_ownedOperation_class
+	//A_ownedOperation_class
 	uML_A_ownedOperation_class->setName("A_ownedOperation_class");
 	uML_A_ownedOperation_class->getMemberEnd()->add(get_UML_Class_ownedOperation());
 	uML_A_ownedOperation_class->getMemberEnd()->add(get_UML_Operation_class());
 	
 
     //-------------------------------------------
-	// A_ownedOperation_datatype
+	//A_ownedOperation_datatype
 	uML_A_ownedOperation_datatype->setName("A_ownedOperation_datatype");
 	uML_A_ownedOperation_datatype->getMemberEnd()->add(get_UML_DataType_ownedOperation());
 	uML_A_ownedOperation_datatype->getMemberEnd()->add(get_UML_Operation_datatype());
 	
 
     //-------------------------------------------
-	// A_ownedOperation_interface
+	//A_ownedOperation_interface
 	uML_A_ownedOperation_interface->setName("A_ownedOperation_interface");
 	uML_A_ownedOperation_interface->getMemberEnd()->add(get_UML_Interface_ownedOperation());
 	uML_A_ownedOperation_interface->getMemberEnd()->add(get_UML_Operation_interface());
 	
 
     //-------------------------------------------
-	// A_ownedParameterSet_behavior
+	//A_ownedParameterSet_behavior
 	uML_A_ownedParameterSet_behavior->setName("A_ownedParameterSet_behavior");
 	uML_A_ownedParameterSet_behavior->getMemberEnd()->add(get_UML_Behavior_ownedParameterSet());
 	uML_A_ownedParameterSet_behavior->getMemberEnd()->add(get_UML_A_ownedParameterSet_behavior_behavior());
 	
 
     //-------------------------------------------
-	// A_ownedParameterSet_behavioralFeature
+	//A_ownedParameterSet_behavioralFeature
 	uML_A_ownedParameterSet_behavioralFeature->setName("A_ownedParameterSet_behavioralFeature");
 	uML_A_ownedParameterSet_behavioralFeature->getMemberEnd()->add(get_UML_BehavioralFeature_ownedParameterSet());
 	uML_A_ownedParameterSet_behavioralFeature->getMemberEnd()->add(get_UML_A_ownedParameterSet_behavioralFeature_behavioralFeature());
 	
 
     //-------------------------------------------
-	// A_ownedParameter_behavior
+	//A_ownedParameter_behavior
 	uML_A_ownedParameter_behavior->setName("A_ownedParameter_behavior");
 	uML_A_ownedParameter_behavior->getMemberEnd()->add(get_UML_Behavior_ownedParameter());
 	uML_A_ownedParameter_behavior->getMemberEnd()->add(get_UML_A_ownedParameter_behavior_behavior());
 	
 
     //-------------------------------------------
-	// A_ownedParameter_operation
+	//A_ownedParameter_operation
 	uML_A_ownedParameter_operation->setName("A_ownedParameter_operation");
 	uML_A_ownedParameter_operation->getMemberEnd()->add(get_UML_Operation_ownedParameter());
 	uML_A_ownedParameter_operation->getMemberEnd()->add(get_UML_Parameter_operation());
 	
 
     //-------------------------------------------
-	// A_ownedParameter_ownerFormalParam
+	//A_ownedParameter_ownerFormalParam
 	uML_A_ownedParameter_ownerFormalParam->setName("A_ownedParameter_ownerFormalParam");
 	uML_A_ownedParameter_ownerFormalParam->getMemberEnd()->add(get_UML_BehavioralFeature_ownedParameter());
 	uML_A_ownedParameter_ownerFormalParam->getMemberEnd()->add(get_UML_A_ownedParameter_ownerFormalParam_ownerFormalParam());
 	
 
     //-------------------------------------------
-	// A_ownedParameter_signature
+	//A_ownedParameter_signature
 	uML_A_ownedParameter_signature->setName("A_ownedParameter_signature");
 	uML_A_ownedParameter_signature->getMemberEnd()->add(get_UML_TemplateSignature_ownedParameter());
 	uML_A_ownedParameter_signature->getMemberEnd()->add(get_UML_TemplateParameter_signature());
 	
 
     //-------------------------------------------
-	// A_ownedParameteredElement_owningTemplateParameter
+	//A_ownedParameteredElement_owningTemplateParameter
 	uML_A_ownedParameteredElement_owningTemplateParameter->setName("A_ownedParameteredElement_owningTemplateParameter");
 	uML_A_ownedParameteredElement_owningTemplateParameter->getMemberEnd()->add(get_UML_TemplateParameter_ownedParameteredElement());
 	uML_A_ownedParameteredElement_owningTemplateParameter->getMemberEnd()->add(get_UML_ParameterableElement_owningTemplateParameter());
 	
 
     //-------------------------------------------
-	// A_ownedPort_encapsulatedClassifier
+	//A_ownedPort_encapsulatedClassifier
 	uML_A_ownedPort_encapsulatedClassifier->setName("A_ownedPort_encapsulatedClassifier");
 	uML_A_ownedPort_encapsulatedClassifier->getMemberEnd()->add(get_UML_EncapsulatedClassifier_ownedPort());
 	uML_A_ownedPort_encapsulatedClassifier->getMemberEnd()->add(get_UML_A_ownedPort_encapsulatedClassifier_encapsulatedClassifier());
 	
 
     //-------------------------------------------
-	// A_ownedReception_class
+	//A_ownedReception_class
 	uML_A_ownedReception_class->setName("A_ownedReception_class");
 	uML_A_ownedReception_class->getMemberEnd()->add(get_UML_Class_ownedReception());
 	uML_A_ownedReception_class->getMemberEnd()->add(get_UML_A_ownedReception_class_class());
 	
 
     //-------------------------------------------
-	// A_ownedReception_interface
+	//A_ownedReception_interface
 	uML_A_ownedReception_interface->setName("A_ownedReception_interface");
 	uML_A_ownedReception_interface->getMemberEnd()->add(get_UML_Interface_ownedReception());
 	uML_A_ownedReception_interface->getMemberEnd()->add(get_UML_A_ownedReception_interface_interface());
 	
 
     //-------------------------------------------
-	// A_ownedRule_context
+	//A_ownedRule_context
 	uML_A_ownedRule_context->setName("A_ownedRule_context");
 	uML_A_ownedRule_context->getMemberEnd()->add(get_UML_Namespace_ownedRule());
 	uML_A_ownedRule_context->getMemberEnd()->add(get_UML_Constraint_context());
 	
 
     //-------------------------------------------
-	// A_ownedStereotype_owningPackage
+	//A_ownedStereotype_owningPackage
 	uML_A_ownedStereotype_owningPackage->setName("A_ownedStereotype_owningPackage");
 	uML_A_ownedStereotype_owningPackage->getMemberEnd()->add(get_UML_Package_ownedStereotype());
 	uML_A_ownedStereotype_owningPackage->getMemberEnd()->add(get_UML_A_ownedStereotype_owningPackage_owningPackage());
 	
 
     //-------------------------------------------
-	// A_ownedTemplateSignature_classifier
+	//A_ownedTemplateSignature_classifier
 	uML_A_ownedTemplateSignature_classifier->setName("A_ownedTemplateSignature_classifier");
 	uML_A_ownedTemplateSignature_classifier->getMemberEnd()->add(get_UML_Classifier_ownedTemplateSignature());
 	uML_A_ownedTemplateSignature_classifier->getMemberEnd()->add(get_UML_RedefinableTemplateSignature_classifier());
 	
 
     //-------------------------------------------
-	// A_ownedTemplateSignature_template
+	//A_ownedTemplateSignature_template
 	uML_A_ownedTemplateSignature_template->setName("A_ownedTemplateSignature_template");
 	uML_A_ownedTemplateSignature_template->getMemberEnd()->add(get_UML_TemplateableElement_ownedTemplateSignature());
 	uML_A_ownedTemplateSignature_template->getMemberEnd()->add(get_UML_TemplateSignature_template());
 	
 
     //-------------------------------------------
-	// A_ownedType_package
+	//A_ownedType_package
 	uML_A_ownedType_package->setName("A_ownedType_package");
 	uML_A_ownedType_package->getMemberEnd()->add(get_UML_Package_ownedType());
 	uML_A_ownedType_package->getMemberEnd()->add(get_UML_Type_package());
 	
 
     //-------------------------------------------
-	// A_ownedUseCase_classifier
+	//A_ownedUseCase_classifier
 	uML_A_ownedUseCase_classifier->setName("A_ownedUseCase_classifier");
 	uML_A_ownedUseCase_classifier->getMemberEnd()->add(get_UML_Classifier_ownedUseCase());
 	uML_A_ownedUseCase_classifier->getMemberEnd()->add(get_UML_A_ownedUseCase_classifier_classifier());
 	
 
     //-------------------------------------------
-	// A_packageImport_importingNamespace
+	//A_packageImport_importingNamespace
 	uML_A_packageImport_importingNamespace->setName("A_packageImport_importingNamespace");
 	uML_A_packageImport_importingNamespace->getMemberEnd()->add(get_UML_Namespace_packageImport());
 	uML_A_packageImport_importingNamespace->getMemberEnd()->add(get_UML_PackageImport_importingNamespace());
 	
 
     //-------------------------------------------
-	// A_packageMerge_receivingPackage
+	//A_packageMerge_receivingPackage
 	uML_A_packageMerge_receivingPackage->setName("A_packageMerge_receivingPackage");
 	uML_A_packageMerge_receivingPackage->getMemberEnd()->add(get_UML_Package_packageMerge());
 	uML_A_packageMerge_receivingPackage->getMemberEnd()->add(get_UML_PackageMerge_receivingPackage());
 	
 
     //-------------------------------------------
-	// A_packagedElement_component
+	//A_packagedElement_component
 	uML_A_packagedElement_component->setName("A_packagedElement_component");
 	uML_A_packagedElement_component->getMemberEnd()->add(get_UML_Component_packagedElement());
 	uML_A_packagedElement_component->getMemberEnd()->add(get_UML_A_packagedElement_component_component());
 	
 
     //-------------------------------------------
-	// A_packagedElement_owningPackage
+	//A_packagedElement_owningPackage
 	uML_A_packagedElement_owningPackage->setName("A_packagedElement_owningPackage");
 	uML_A_packagedElement_owningPackage->getMemberEnd()->add(get_UML_Package_packagedElement());
 	uML_A_packagedElement_owningPackage->getMemberEnd()->add(get_UML_A_packagedElement_owningPackage_owningPackage());
 	
 
     //-------------------------------------------
-	// A_parameterSet_parameter
+	//A_parameterSet_parameter
 	uML_A_parameterSet_parameter->setName("A_parameterSet_parameter");
 	uML_A_parameterSet_parameter->getMemberEnd()->add(get_UML_Parameter_parameterSet());
 	uML_A_parameterSet_parameter->getMemberEnd()->add(get_UML_ParameterSet_parameter());
 	
 
     //-------------------------------------------
-	// A_parameterSubstitution_templateBinding
+	//A_parameterSubstitution_templateBinding
 	uML_A_parameterSubstitution_templateBinding->setName("A_parameterSubstitution_templateBinding");
 	uML_A_parameterSubstitution_templateBinding->getMemberEnd()->add(get_UML_TemplateBinding_parameterSubstitution());
 	uML_A_parameterSubstitution_templateBinding->getMemberEnd()->add(get_UML_TemplateParameterSubstitution_templateBinding());
 	
 
     //-------------------------------------------
-	// A_parameter_activityParameterNode
+	//A_parameter_activityParameterNode
 	uML_A_parameter_activityParameterNode->setName("A_parameter_activityParameterNode");
 	uML_A_parameter_activityParameterNode->getMemberEnd()->add(get_UML_ActivityParameterNode_parameter());
 	uML_A_parameter_activityParameterNode->getMemberEnd()->add(get_UML_A_parameter_activityParameterNode_activityParameterNode());
 	
 
     //-------------------------------------------
-	// A_parameter_templateSignature
+	//A_parameter_templateSignature
 	uML_A_parameter_templateSignature->setName("A_parameter_templateSignature");
 	uML_A_parameter_templateSignature->getMemberEnd()->add(get_UML_TemplateSignature_parameter());
 	uML_A_parameter_templateSignature->getMemberEnd()->add(get_UML_A_parameter_templateSignature_templateSignature());
 	
 
     //-------------------------------------------
-	// A_parameteredElement_templateParameter
+	//A_parameteredElement_templateParameter
 	uML_A_parameteredElement_templateParameter->setName("A_parameteredElement_templateParameter");
 	uML_A_parameteredElement_templateParameter->getMemberEnd()->add(get_UML_TemplateParameter_parameteredElement());
 	uML_A_parameteredElement_templateParameter->getMemberEnd()->add(get_UML_ParameterableElement_templateParameter());
 	
 
     //-------------------------------------------
-	// A_partWithPort_connectorEnd
+	//A_partWithPort_connectorEnd
 	uML_A_partWithPort_connectorEnd->setName("A_partWithPort_connectorEnd");
 	uML_A_partWithPort_connectorEnd->getMemberEnd()->add(get_UML_ConnectorEnd_partWithPort());
 	uML_A_partWithPort_connectorEnd->getMemberEnd()->add(get_UML_A_partWithPort_connectorEnd_connectorEnd());
 	
 
     //-------------------------------------------
-	// A_part_structuredClassifier
+	//A_part_structuredClassifier
 	uML_A_part_structuredClassifier->setName("A_part_structuredClassifier");
 	uML_A_part_structuredClassifier->getMemberEnd()->add(get_UML_StructuredClassifier_part());
 	uML_A_part_structuredClassifier->getMemberEnd()->add(get_UML_A_part_structuredClassifier_structuredClassifier());
 	
 
     //-------------------------------------------
-	// A_partition_activity
+	//A_partition_activity
 	uML_A_partition_activity->setName("A_partition_activity");
 	uML_A_partition_activity->getMemberEnd()->add(get_UML_Activity_partition());
 	uML_A_partition_activity->getMemberEnd()->add(get_UML_A_partition_activity_activity());
 	
 
     //-------------------------------------------
-	// A_port_trigger
+	//A_port_trigger
 	uML_A_port_trigger->setName("A_port_trigger");
 	uML_A_port_trigger->getMemberEnd()->add(get_UML_Trigger_port());
 	uML_A_port_trigger->getMemberEnd()->add(get_UML_A_port_trigger_trigger());
 	
 
     //-------------------------------------------
-	// A_postCondition_owningTransition
+	//A_postCondition_owningTransition
 	uML_A_postCondition_owningTransition->setName("A_postCondition_owningTransition");
 	uML_A_postCondition_owningTransition->getMemberEnd()->add(get_UML_ProtocolTransition_postCondition());
 	uML_A_postCondition_owningTransition->getMemberEnd()->add(get_UML_A_postCondition_owningTransition_owningTransition());
 	
 
     //-------------------------------------------
-	// A_postcondition_behavior
+	//A_postcondition_behavior
 	uML_A_postcondition_behavior->setName("A_postcondition_behavior");
 	uML_A_postcondition_behavior->getMemberEnd()->add(get_UML_Behavior_postcondition());
 	uML_A_postcondition_behavior->getMemberEnd()->add(get_UML_A_postcondition_behavior_behavior());
 	
 
     //-------------------------------------------
-	// A_postcondition_postContext
+	//A_postcondition_postContext
 	uML_A_postcondition_postContext->setName("A_postcondition_postContext");
 	uML_A_postcondition_postContext->getMemberEnd()->add(get_UML_Operation_postcondition());
 	uML_A_postcondition_postContext->getMemberEnd()->add(get_UML_A_postcondition_postContext_postContext());
 	
 
     //-------------------------------------------
-	// A_powertypeExtent_powertype
+	//A_powertypeExtent_powertype
 	uML_A_powertypeExtent_powertype->setName("A_powertypeExtent_powertype");
 	uML_A_powertypeExtent_powertype->getMemberEnd()->add(get_UML_Classifier_powertypeExtent());
 	uML_A_powertypeExtent_powertype->getMemberEnd()->add(get_UML_GeneralizationSet_powertype());
 	
 
     //-------------------------------------------
-	// A_preCondition_protocolTransition
+	//A_preCondition_protocolTransition
 	uML_A_preCondition_protocolTransition->setName("A_preCondition_protocolTransition");
 	uML_A_preCondition_protocolTransition->getMemberEnd()->add(get_UML_ProtocolTransition_preCondition());
 	uML_A_preCondition_protocolTransition->getMemberEnd()->add(get_UML_A_preCondition_protocolTransition_protocolTransition());
 	
 
     //-------------------------------------------
-	// A_precondition_behavior
+	//A_precondition_behavior
 	uML_A_precondition_behavior->setName("A_precondition_behavior");
 	uML_A_precondition_behavior->getMemberEnd()->add(get_UML_Behavior_precondition());
 	uML_A_precondition_behavior->getMemberEnd()->add(get_UML_A_precondition_behavior_behavior());
 	
 
     //-------------------------------------------
-	// A_precondition_preContext
+	//A_precondition_preContext
 	uML_A_precondition_preContext->setName("A_precondition_preContext");
 	uML_A_precondition_preContext->getMemberEnd()->add(get_UML_Operation_precondition());
 	uML_A_precondition_preContext->getMemberEnd()->add(get_UML_A_precondition_preContext_preContext());
 	
 
     //-------------------------------------------
-	// A_predecessorClause_successorClause
+	//A_predecessorClause_successorClause
 	uML_A_predecessorClause_successorClause->setName("A_predecessorClause_successorClause");
 	uML_A_predecessorClause_successorClause->getMemberEnd()->add(get_UML_Clause_predecessorClause());
 	uML_A_predecessorClause_successorClause->getMemberEnd()->add(get_UML_Clause_successorClause());
 	
 
     //-------------------------------------------
-	// A_profileApplication_applyingPackage
+	//A_profileApplication_applyingPackage
 	uML_A_profileApplication_applyingPackage->setName("A_profileApplication_applyingPackage");
 	uML_A_profileApplication_applyingPackage->getMemberEnd()->add(get_UML_Package_profileApplication());
 	uML_A_profileApplication_applyingPackage->getMemberEnd()->add(get_UML_ProfileApplication_applyingPackage());
 	
 
     //-------------------------------------------
-	// A_profile_stereotype
+	//A_profile_stereotype
 	uML_A_profile_stereotype->setName("A_profile_stereotype");
 	uML_A_profile_stereotype->getMemberEnd()->add(get_UML_Stereotype_profile());
 	uML_A_profile_stereotype->getMemberEnd()->add(get_UML_A_profile_stereotype_stereotype());
 	
 
     //-------------------------------------------
-	// A_protocol_interface
+	//A_protocol_interface
 	uML_A_protocol_interface->setName("A_protocol_interface");
 	uML_A_protocol_interface->getMemberEnd()->add(get_UML_Interface_protocol());
 	uML_A_protocol_interface->getMemberEnd()->add(get_UML_A_protocol_interface_interface());
 	
 
     //-------------------------------------------
-	// A_protocol_port
+	//A_protocol_port
 	uML_A_protocol_port->setName("A_protocol_port");
 	uML_A_protocol_port->getMemberEnd()->add(get_UML_Port_protocol());
 	uML_A_protocol_port->getMemberEnd()->add(get_UML_A_protocol_port_port());
 	
 
     //-------------------------------------------
-	// A_provided_component
+	//A_provided_component
 	uML_A_provided_component->setName("A_provided_component");
 	uML_A_provided_component->getMemberEnd()->add(get_UML_Component_provided());
 	uML_A_provided_component->getMemberEnd()->add(get_UML_A_provided_component_component());
 	
 
     //-------------------------------------------
-	// A_provided_port
+	//A_provided_port
 	uML_A_provided_port->setName("A_provided_port");
 	uML_A_provided_port->getMemberEnd()->add(get_UML_Port_provided());
 	uML_A_provided_port->getMemberEnd()->add(get_UML_A_provided_port_port());
 	
 
     //-------------------------------------------
-	// A_qualifier_associationEnd
+	//A_qualifier_associationEnd
 	uML_A_qualifier_associationEnd->setName("A_qualifier_associationEnd");
 	uML_A_qualifier_associationEnd->getMemberEnd()->add(get_UML_Property_qualifier());
 	uML_A_qualifier_associationEnd->getMemberEnd()->add(get_UML_Property_associationEnd());
 	
 
     //-------------------------------------------
-	// A_qualifier_linkEndData
+	//A_qualifier_linkEndData
 	uML_A_qualifier_linkEndData->setName("A_qualifier_linkEndData");
 	uML_A_qualifier_linkEndData->getMemberEnd()->add(get_UML_LinkEndData_qualifier());
 	uML_A_qualifier_linkEndData->getMemberEnd()->add(get_UML_A_qualifier_linkEndData_linkEndData());
 	
 
     //-------------------------------------------
-	// A_qualifier_qualifierValue
+	//A_qualifier_qualifierValue
 	uML_A_qualifier_qualifierValue->setName("A_qualifier_qualifierValue");
 	uML_A_qualifier_qualifierValue->getMemberEnd()->add(get_UML_QualifierValue_qualifier());
 	uML_A_qualifier_qualifierValue->getMemberEnd()->add(get_UML_A_qualifier_qualifierValue_qualifierValue());
 	
 
     //-------------------------------------------
-	// A_qualifier_readLinkObjectEndQualifierAction
+	//A_qualifier_readLinkObjectEndQualifierAction
 	uML_A_qualifier_readLinkObjectEndQualifierAction->setName("A_qualifier_readLinkObjectEndQualifierAction");
 	uML_A_qualifier_readLinkObjectEndQualifierAction->getMemberEnd()->add(get_UML_ReadLinkObjectEndQualifierAction_qualifier());
 	uML_A_qualifier_readLinkObjectEndQualifierAction->getMemberEnd()->add(get_UML_A_qualifier_readLinkObjectEndQualifierAction_readLinkObjectEndQualifierAction());
 	
 
     //-------------------------------------------
-	// A_raisedException_behavioralFeature
+	//A_raisedException_behavioralFeature
 	uML_A_raisedException_behavioralFeature->setName("A_raisedException_behavioralFeature");
 	uML_A_raisedException_behavioralFeature->getMemberEnd()->add(get_UML_BehavioralFeature_raisedException());
 	uML_A_raisedException_behavioralFeature->getMemberEnd()->add(get_UML_A_raisedException_behavioralFeature_behavioralFeature());
 	
 
     //-------------------------------------------
-	// A_raisedException_operation
+	//A_raisedException_operation
 	uML_A_raisedException_operation->setName("A_raisedException_operation");
 	uML_A_raisedException_operation->getMemberEnd()->add(get_UML_Operation_raisedException());
 	uML_A_raisedException_operation->getMemberEnd()->add(get_UML_A_raisedException_operation_operation());
 	
 
     //-------------------------------------------
-	// A_realization_abstraction_component
+	//A_realization_abstraction_component
 	uML_A_realization_abstraction_component->setName("A_realization_abstraction_component");
 	uML_A_realization_abstraction_component->getMemberEnd()->add(get_UML_Component_realization());
 	uML_A_realization_abstraction_component->getMemberEnd()->add(get_UML_ComponentRealization_abstraction());
 	
 
     //-------------------------------------------
-	// A_realization_abstraction_flow
+	//A_realization_abstraction_flow
 	uML_A_realization_abstraction_flow->setName("A_realization_abstraction_flow");
 	uML_A_realization_abstraction_flow->getMemberEnd()->add(get_UML_InformationFlow_realization());
 	uML_A_realization_abstraction_flow->getMemberEnd()->add(get_UML_A_realization_abstraction_flow_abstraction());
 	
 
     //-------------------------------------------
-	// A_realizingActivityEdge_informationFlow
+	//A_realizingActivityEdge_informationFlow
 	uML_A_realizingActivityEdge_informationFlow->setName("A_realizingActivityEdge_informationFlow");
 	uML_A_realizingActivityEdge_informationFlow->getMemberEnd()->add(get_UML_InformationFlow_realizingActivityEdge());
 	uML_A_realizingActivityEdge_informationFlow->getMemberEnd()->add(get_UML_A_realizingActivityEdge_informationFlow_informationFlow());
 	
 
     //-------------------------------------------
-	// A_realizingClassifier_componentRealization
+	//A_realizingClassifier_componentRealization
 	uML_A_realizingClassifier_componentRealization->setName("A_realizingClassifier_componentRealization");
 	uML_A_realizingClassifier_componentRealization->getMemberEnd()->add(get_UML_ComponentRealization_realizingClassifier());
 	uML_A_realizingClassifier_componentRealization->getMemberEnd()->add(get_UML_A_realizingClassifier_componentRealization_componentRealization());
 	
 
     //-------------------------------------------
-	// A_realizingConnector_informationFlow
+	//A_realizingConnector_informationFlow
 	uML_A_realizingConnector_informationFlow->setName("A_realizingConnector_informationFlow");
 	uML_A_realizingConnector_informationFlow->getMemberEnd()->add(get_UML_InformationFlow_realizingConnector());
 	uML_A_realizingConnector_informationFlow->getMemberEnd()->add(get_UML_A_realizingConnector_informationFlow_informationFlow());
 	
 
     //-------------------------------------------
-	// A_realizingMessage_informationFlow
+	//A_realizingMessage_informationFlow
 	uML_A_realizingMessage_informationFlow->setName("A_realizingMessage_informationFlow");
 	uML_A_realizingMessage_informationFlow->getMemberEnd()->add(get_UML_InformationFlow_realizingMessage());
 	uML_A_realizingMessage_informationFlow->getMemberEnd()->add(get_UML_A_realizingMessage_informationFlow_informationFlow());
 	
 
     //-------------------------------------------
-	// A_receiveEvent_endMessage
+	//A_receiveEvent_endMessage
 	uML_A_receiveEvent_endMessage->setName("A_receiveEvent_endMessage");
 	uML_A_receiveEvent_endMessage->getMemberEnd()->add(get_UML_Message_receiveEvent());
 	uML_A_receiveEvent_endMessage->getMemberEnd()->add(get_UML_A_receiveEvent_endMessage_endMessage());
 	
 
     //-------------------------------------------
-	// A_redefinedBehavior_behavior
+	//A_redefinedBehavior_behavior
 	uML_A_redefinedBehavior_behavior->setName("A_redefinedBehavior_behavior");
 	uML_A_redefinedBehavior_behavior->getMemberEnd()->add(get_UML_Behavior_redefinedBehavior());
 	uML_A_redefinedBehavior_behavior->getMemberEnd()->add(get_UML_A_redefinedBehavior_behavior_behavior());
 	
 
     //-------------------------------------------
-	// A_redefinedClassifier_classifier
+	//A_redefinedClassifier_classifier
 	uML_A_redefinedClassifier_classifier->setName("A_redefinedClassifier_classifier");
 	uML_A_redefinedClassifier_classifier->getMemberEnd()->add(get_UML_Classifier_redefinedClassifier());
 	uML_A_redefinedClassifier_classifier->getMemberEnd()->add(get_UML_A_redefinedClassifier_classifier_classifier());
 	
 
     //-------------------------------------------
-	// A_redefinedConnector_connector
+	//A_redefinedConnector_connector
 	uML_A_redefinedConnector_connector->setName("A_redefinedConnector_connector");
 	uML_A_redefinedConnector_connector->getMemberEnd()->add(get_UML_Connector_redefinedConnector());
 	uML_A_redefinedConnector_connector->getMemberEnd()->add(get_UML_A_redefinedConnector_connector_connector());
 	
 
     //-------------------------------------------
-	// A_redefinedEdge_activityEdge
+	//A_redefinedEdge_activityEdge
 	uML_A_redefinedEdge_activityEdge->setName("A_redefinedEdge_activityEdge");
 	uML_A_redefinedEdge_activityEdge->getMemberEnd()->add(get_UML_ActivityEdge_redefinedEdge());
 	uML_A_redefinedEdge_activityEdge->getMemberEnd()->add(get_UML_A_redefinedEdge_activityEdge_activityEdge());
 	
 
     //-------------------------------------------
-	// A_redefinedElement_redefinableElement
+	//A_redefinedElement_redefinableElement
 	uML_A_redefinedElement_redefinableElement->setName("A_redefinedElement_redefinableElement");
 	uML_A_redefinedElement_redefinableElement->getMemberEnd()->add(get_UML_RedefinableElement_redefinedElement());
 	uML_A_redefinedElement_redefinableElement->getMemberEnd()->add(get_UML_A_redefinedElement_redefinableElement_redefinableElement());
 	
 
     //-------------------------------------------
-	// A_redefinedInterface_interface
+	//A_redefinedInterface_interface
 	uML_A_redefinedInterface_interface->setName("A_redefinedInterface_interface");
 	uML_A_redefinedInterface_interface->getMemberEnd()->add(get_UML_Interface_redefinedInterface());
 	uML_A_redefinedInterface_interface->getMemberEnd()->add(get_UML_A_redefinedInterface_interface_interface());
 	
 
     //-------------------------------------------
-	// A_redefinedNode_activityNode
+	//A_redefinedNode_activityNode
 	uML_A_redefinedNode_activityNode->setName("A_redefinedNode_activityNode");
 	uML_A_redefinedNode_activityNode->getMemberEnd()->add(get_UML_ActivityNode_redefinedNode());
 	uML_A_redefinedNode_activityNode->getMemberEnd()->add(get_UML_A_redefinedNode_activityNode_activityNode());
 	
 
     //-------------------------------------------
-	// A_redefinedOperation_operation
+	//A_redefinedOperation_operation
 	uML_A_redefinedOperation_operation->setName("A_redefinedOperation_operation");
 	uML_A_redefinedOperation_operation->getMemberEnd()->add(get_UML_Operation_redefinedOperation());
 	uML_A_redefinedOperation_operation->getMemberEnd()->add(get_UML_A_redefinedOperation_operation_operation());
 	
 
     //-------------------------------------------
-	// A_redefinedPort_port
+	//A_redefinedPort_port
 	uML_A_redefinedPort_port->setName("A_redefinedPort_port");
 	uML_A_redefinedPort_port->getMemberEnd()->add(get_UML_Port_redefinedPort());
 	uML_A_redefinedPort_port->getMemberEnd()->add(get_UML_A_redefinedPort_port_port());
 	
 
     //-------------------------------------------
-	// A_redefinedProperty_property
+	//A_redefinedProperty_property
 	uML_A_redefinedProperty_property->setName("A_redefinedProperty_property");
 	uML_A_redefinedProperty_property->getMemberEnd()->add(get_UML_Property_redefinedProperty());
 	uML_A_redefinedProperty_property->getMemberEnd()->add(get_UML_A_redefinedProperty_property_property());
 	
 
     //-------------------------------------------
-	// A_redefinedState_state
+	//A_redefinedState_state
 	uML_A_redefinedState_state->setName("A_redefinedState_state");
 	uML_A_redefinedState_state->getMemberEnd()->add(get_UML_State_redefinedState());
 	uML_A_redefinedState_state->getMemberEnd()->add(get_UML_A_redefinedState_state_state());
 	
 
     //-------------------------------------------
-	// A_redefinedTransition_transition
+	//A_redefinedTransition_transition
 	uML_A_redefinedTransition_transition->setName("A_redefinedTransition_transition");
 	uML_A_redefinedTransition_transition->getMemberEnd()->add(get_UML_Transition_redefinedTransition());
 	uML_A_redefinedTransition_transition->getMemberEnd()->add(get_UML_A_redefinedTransition_transition_transition());
 	
 
     //-------------------------------------------
-	// A_redefinitionContext_redefinableElement
+	//A_redefinitionContext_redefinableElement
 	uML_A_redefinitionContext_redefinableElement->setName("A_redefinitionContext_redefinableElement");
 	uML_A_redefinitionContext_redefinableElement->getMemberEnd()->add(get_UML_RedefinableElement_redefinitionContext());
 	uML_A_redefinitionContext_redefinableElement->getMemberEnd()->add(get_UML_A_redefinitionContext_redefinableElement_redefinableElement());
 	
 
     //-------------------------------------------
-	// A_redefinitionContext_region
+	//A_redefinitionContext_region
 	uML_A_redefinitionContext_region->setName("A_redefinitionContext_region");
 	uML_A_redefinitionContext_region->getMemberEnd()->add(get_UML_Region_redefinitionContext());
 	uML_A_redefinitionContext_region->getMemberEnd()->add(get_UML_A_redefinitionContext_region_region());
 	
 
     //-------------------------------------------
-	// A_redefinitionContext_state
+	//A_redefinitionContext_state
 	uML_A_redefinitionContext_state->setName("A_redefinitionContext_state");
 	uML_A_redefinitionContext_state->getMemberEnd()->add(get_UML_State_redefinitionContext());
 	uML_A_redefinitionContext_state->getMemberEnd()->add(get_UML_A_redefinitionContext_state_state());
 	
 
     //-------------------------------------------
-	// A_redefinitionContext_transition
+	//A_redefinitionContext_transition
 	uML_A_redefinitionContext_transition->setName("A_redefinitionContext_transition");
 	uML_A_redefinitionContext_transition->getMemberEnd()->add(get_UML_Transition_redefinitionContext());
 	uML_A_redefinitionContext_transition->getMemberEnd()->add(get_UML_A_redefinitionContext_transition_transition());
 	
 
     //-------------------------------------------
-	// A_reducer_reduceAction
+	//A_reducer_reduceAction
 	uML_A_reducer_reduceAction->setName("A_reducer_reduceAction");
 	uML_A_reducer_reduceAction->getMemberEnd()->add(get_UML_ReduceAction_reducer());
 	uML_A_reducer_reduceAction->getMemberEnd()->add(get_UML_A_reducer_reduceAction_reduceAction());
 	
 
     //-------------------------------------------
-	// A_referred_protocolTransition
+	//A_referred_protocolTransition
 	uML_A_referred_protocolTransition->setName("A_referred_protocolTransition");
 	uML_A_referred_protocolTransition->getMemberEnd()->add(get_UML_ProtocolTransition_referred());
 	uML_A_referred_protocolTransition->getMemberEnd()->add(get_UML_A_referred_protocolTransition_protocolTransition());
 	
 
     //-------------------------------------------
-	// A_refersTo_interactionUse
+	//A_refersTo_interactionUse
 	uML_A_refersTo_interactionUse->setName("A_refersTo_interactionUse");
 	uML_A_refersTo_interactionUse->getMemberEnd()->add(get_UML_InteractionUse_refersTo());
 	uML_A_refersTo_interactionUse->getMemberEnd()->add(get_UML_A_refersTo_interactionUse_interactionUse());
 	
 
     //-------------------------------------------
-	// A_region_state
+	//A_region_state
 	uML_A_region_state->setName("A_region_state");
 	uML_A_region_state->getMemberEnd()->add(get_UML_State_region());
 	uML_A_region_state->getMemberEnd()->add(get_UML_Region_state());
 	
 
     //-------------------------------------------
-	// A_region_stateMachine
+	//A_region_stateMachine
 	uML_A_region_stateMachine->setName("A_region_stateMachine");
 	uML_A_region_stateMachine->getMemberEnd()->add(get_UML_StateMachine_region());
 	uML_A_region_stateMachine->getMemberEnd()->add(get_UML_Region_stateMachine());
 	
 
     //-------------------------------------------
-	// A_relatedElement_relationship
+	//A_relatedElement_relationship
 	uML_A_relatedElement_relationship->setName("A_relatedElement_relationship");
 	uML_A_relatedElement_relationship->getMemberEnd()->add(get_UML_Relationship_relatedElement());
 	uML_A_relatedElement_relationship->getMemberEnd()->add(get_UML_A_relatedElement_relationship_relationship());
 	
 
     //-------------------------------------------
-	// A_removeAt_removeStructuralFeatureValueAction
+	//A_removeAt_removeStructuralFeatureValueAction
 	uML_A_removeAt_removeStructuralFeatureValueAction->setName("A_removeAt_removeStructuralFeatureValueAction");
 	uML_A_removeAt_removeStructuralFeatureValueAction->getMemberEnd()->add(get_UML_RemoveStructuralFeatureValueAction_removeAt());
 	uML_A_removeAt_removeStructuralFeatureValueAction->getMemberEnd()->add(get_UML_A_removeAt_removeStructuralFeatureValueAction_removeStructuralFeatureValueAction());
 	
 
     //-------------------------------------------
-	// A_removeAt_removeVariableValueAction
+	//A_removeAt_removeVariableValueAction
 	uML_A_removeAt_removeVariableValueAction->setName("A_removeAt_removeVariableValueAction");
 	uML_A_removeAt_removeVariableValueAction->getMemberEnd()->add(get_UML_RemoveVariableValueAction_removeAt());
 	uML_A_removeAt_removeVariableValueAction->getMemberEnd()->add(get_UML_A_removeAt_removeVariableValueAction_removeVariableValueAction());
 	
 
     //-------------------------------------------
-	// A_replyToCall_replyAction
+	//A_replyToCall_replyAction
 	uML_A_replyToCall_replyAction->setName("A_replyToCall_replyAction");
 	uML_A_replyToCall_replyAction->getMemberEnd()->add(get_UML_ReplyAction_replyToCall());
 	uML_A_replyToCall_replyAction->getMemberEnd()->add(get_UML_A_replyToCall_replyAction_replyAction());
 	
 
     //-------------------------------------------
-	// A_replyValue_replyAction
+	//A_replyValue_replyAction
 	uML_A_replyValue_replyAction->setName("A_replyValue_replyAction");
 	uML_A_replyValue_replyAction->getMemberEnd()->add(get_UML_ReplyAction_replyValue());
 	uML_A_replyValue_replyAction->getMemberEnd()->add(get_UML_A_replyValue_replyAction_replyAction());
 	
 
     //-------------------------------------------
-	// A_representation_classifier
+	//A_representation_classifier
 	uML_A_representation_classifier->setName("A_representation_classifier");
 	uML_A_representation_classifier->getMemberEnd()->add(get_UML_Classifier_representation());
 	uML_A_representation_classifier->getMemberEnd()->add(get_UML_A_representation_classifier_classifier());
 	
 
     //-------------------------------------------
-	// A_represented_representation
+	//A_represented_representation
 	uML_A_represented_representation->setName("A_represented_representation");
 	uML_A_represented_representation->getMemberEnd()->add(get_UML_InformationItem_represented());
 	uML_A_represented_representation->getMemberEnd()->add(get_UML_A_represented_representation_representation());
 	
 
     //-------------------------------------------
-	// A_represents_activityPartition
+	//A_represents_activityPartition
 	uML_A_represents_activityPartition->setName("A_represents_activityPartition");
 	uML_A_represents_activityPartition->getMemberEnd()->add(get_UML_ActivityPartition_represents());
 	uML_A_represents_activityPartition->getMemberEnd()->add(get_UML_A_represents_activityPartition_activityPartition());
 	
 
     //-------------------------------------------
-	// A_represents_lifeline
+	//A_represents_lifeline
 	uML_A_represents_lifeline->setName("A_represents_lifeline");
 	uML_A_represents_lifeline->getMemberEnd()->add(get_UML_Lifeline_represents());
 	uML_A_represents_lifeline->getMemberEnd()->add(get_UML_A_represents_lifeline_lifeline());
 	
 
     //-------------------------------------------
-	// A_request_sendObjectAction
+	//A_request_sendObjectAction
 	uML_A_request_sendObjectAction->setName("A_request_sendObjectAction");
 	uML_A_request_sendObjectAction->getMemberEnd()->add(get_UML_SendObjectAction_request());
 	uML_A_request_sendObjectAction->getMemberEnd()->add(get_UML_A_request_sendObjectAction_sendObjectAction());
 	
 
     //-------------------------------------------
-	// A_required_component
+	//A_required_component
 	uML_A_required_component->setName("A_required_component");
 	uML_A_required_component->getMemberEnd()->add(get_UML_Component_required());
 	uML_A_required_component->getMemberEnd()->add(get_UML_A_required_component_component());
 	
 
     //-------------------------------------------
-	// A_required_port
+	//A_required_port
 	uML_A_required_port->setName("A_required_port");
 	uML_A_required_port->getMemberEnd()->add(get_UML_Port_required());
 	uML_A_required_port->getMemberEnd()->add(get_UML_A_required_port_port());
 	
 
     //-------------------------------------------
-	// A_result_acceptEventAction
+	//A_result_acceptEventAction
 	uML_A_result_acceptEventAction->setName("A_result_acceptEventAction");
 	uML_A_result_acceptEventAction->getMemberEnd()->add(get_UML_AcceptEventAction_result());
 	uML_A_result_acceptEventAction->getMemberEnd()->add(get_UML_A_result_acceptEventAction_acceptEventAction());
 	
 
     //-------------------------------------------
-	// A_result_callAction
+	//A_result_callAction
 	uML_A_result_callAction->setName("A_result_callAction");
 	uML_A_result_callAction->getMemberEnd()->add(get_UML_CallAction_result());
 	uML_A_result_callAction->getMemberEnd()->add(get_UML_A_result_callAction_callAction());
 	
 
     //-------------------------------------------
-	// A_result_clearStructuralFeatureAction
+	//A_result_clearStructuralFeatureAction
 	uML_A_result_clearStructuralFeatureAction->setName("A_result_clearStructuralFeatureAction");
 	uML_A_result_clearStructuralFeatureAction->getMemberEnd()->add(get_UML_ClearStructuralFeatureAction_result());
 	uML_A_result_clearStructuralFeatureAction->getMemberEnd()->add(get_UML_A_result_clearStructuralFeatureAction_clearStructuralFeatureAction());
 	
 
     //-------------------------------------------
-	// A_result_conditionalNode
+	//A_result_conditionalNode
 	uML_A_result_conditionalNode->setName("A_result_conditionalNode");
 	uML_A_result_conditionalNode->getMemberEnd()->add(get_UML_ConditionalNode_result());
 	uML_A_result_conditionalNode->getMemberEnd()->add(get_UML_A_result_conditionalNode_conditionalNode());
 	
 
     //-------------------------------------------
-	// A_result_createLinkObjectAction
+	//A_result_createLinkObjectAction
 	uML_A_result_createLinkObjectAction->setName("A_result_createLinkObjectAction");
 	uML_A_result_createLinkObjectAction->getMemberEnd()->add(get_UML_CreateLinkObjectAction_result());
 	uML_A_result_createLinkObjectAction->getMemberEnd()->add(get_UML_A_result_createLinkObjectAction_createLinkObjectAction());
 	
 
     //-------------------------------------------
-	// A_result_createObjectAction
+	//A_result_createObjectAction
 	uML_A_result_createObjectAction->setName("A_result_createObjectAction");
 	uML_A_result_createObjectAction->getMemberEnd()->add(get_UML_CreateObjectAction_result());
 	uML_A_result_createObjectAction->getMemberEnd()->add(get_UML_A_result_createObjectAction_createObjectAction());
 	
 
     //-------------------------------------------
-	// A_result_loopNode
+	//A_result_loopNode
 	uML_A_result_loopNode->setName("A_result_loopNode");
 	uML_A_result_loopNode->getMemberEnd()->add(get_UML_LoopNode_result());
 	uML_A_result_loopNode->getMemberEnd()->add(get_UML_A_result_loopNode_loopNode());
 	
 
     //-------------------------------------------
-	// A_result_opaqueExpression
+	//A_result_opaqueExpression
 	uML_A_result_opaqueExpression->setName("A_result_opaqueExpression");
 	uML_A_result_opaqueExpression->getMemberEnd()->add(get_UML_OpaqueExpression_result());
 	uML_A_result_opaqueExpression->getMemberEnd()->add(get_UML_A_result_opaqueExpression_opaqueExpression());
 	
 
     //-------------------------------------------
-	// A_result_readExtentAction
+	//A_result_readExtentAction
 	uML_A_result_readExtentAction->setName("A_result_readExtentAction");
 	uML_A_result_readExtentAction->getMemberEnd()->add(get_UML_ReadExtentAction_result());
 	uML_A_result_readExtentAction->getMemberEnd()->add(get_UML_A_result_readExtentAction_readExtentAction());
 	
 
     //-------------------------------------------
-	// A_result_readIsClassifiedObjectAction
+	//A_result_readIsClassifiedObjectAction
 	uML_A_result_readIsClassifiedObjectAction->setName("A_result_readIsClassifiedObjectAction");
 	uML_A_result_readIsClassifiedObjectAction->getMemberEnd()->add(get_UML_ReadIsClassifiedObjectAction_result());
 	uML_A_result_readIsClassifiedObjectAction->getMemberEnd()->add(get_UML_A_result_readIsClassifiedObjectAction_readIsClassifiedObjectAction());
 	
 
     //-------------------------------------------
-	// A_result_readLinkAction
+	//A_result_readLinkAction
 	uML_A_result_readLinkAction->setName("A_result_readLinkAction");
 	uML_A_result_readLinkAction->getMemberEnd()->add(get_UML_ReadLinkAction_result());
 	uML_A_result_readLinkAction->getMemberEnd()->add(get_UML_A_result_readLinkAction_readLinkAction());
 	
 
     //-------------------------------------------
-	// A_result_readLinkObjectEndAction
+	//A_result_readLinkObjectEndAction
 	uML_A_result_readLinkObjectEndAction->setName("A_result_readLinkObjectEndAction");
 	uML_A_result_readLinkObjectEndAction->getMemberEnd()->add(get_UML_ReadLinkObjectEndAction_result());
 	uML_A_result_readLinkObjectEndAction->getMemberEnd()->add(get_UML_A_result_readLinkObjectEndAction_readLinkObjectEndAction());
 	
 
     //-------------------------------------------
-	// A_result_readLinkObjectEndQualifierAction
+	//A_result_readLinkObjectEndQualifierAction
 	uML_A_result_readLinkObjectEndQualifierAction->setName("A_result_readLinkObjectEndQualifierAction");
 	uML_A_result_readLinkObjectEndQualifierAction->getMemberEnd()->add(get_UML_ReadLinkObjectEndQualifierAction_result());
 	uML_A_result_readLinkObjectEndQualifierAction->getMemberEnd()->add(get_UML_A_result_readLinkObjectEndQualifierAction_readLinkObjectEndQualifierAction());
 	
 
     //-------------------------------------------
-	// A_result_readSelfAction
+	//A_result_readSelfAction
 	uML_A_result_readSelfAction->setName("A_result_readSelfAction");
 	uML_A_result_readSelfAction->getMemberEnd()->add(get_UML_ReadSelfAction_result());
 	uML_A_result_readSelfAction->getMemberEnd()->add(get_UML_A_result_readSelfAction_readSelfAction());
 	
 
     //-------------------------------------------
-	// A_result_readStructuralFeatureAction
+	//A_result_readStructuralFeatureAction
 	uML_A_result_readStructuralFeatureAction->setName("A_result_readStructuralFeatureAction");
 	uML_A_result_readStructuralFeatureAction->getMemberEnd()->add(get_UML_ReadStructuralFeatureAction_result());
 	uML_A_result_readStructuralFeatureAction->getMemberEnd()->add(get_UML_A_result_readStructuralFeatureAction_readStructuralFeatureAction());
 	
 
     //-------------------------------------------
-	// A_result_readVariableAction
+	//A_result_readVariableAction
 	uML_A_result_readVariableAction->setName("A_result_readVariableAction");
 	uML_A_result_readVariableAction->getMemberEnd()->add(get_UML_ReadVariableAction_result());
 	uML_A_result_readVariableAction->getMemberEnd()->add(get_UML_A_result_readVariableAction_readVariableAction());
 	
 
     //-------------------------------------------
-	// A_result_reduceAction
+	//A_result_reduceAction
 	uML_A_result_reduceAction->setName("A_result_reduceAction");
 	uML_A_result_reduceAction->getMemberEnd()->add(get_UML_ReduceAction_result());
 	uML_A_result_reduceAction->getMemberEnd()->add(get_UML_A_result_reduceAction_reduceAction());
 	
 
     //-------------------------------------------
-	// A_result_testIdentityAction
+	//A_result_testIdentityAction
 	uML_A_result_testIdentityAction->setName("A_result_testIdentityAction");
 	uML_A_result_testIdentityAction->getMemberEnd()->add(get_UML_TestIdentityAction_result());
 	uML_A_result_testIdentityAction->getMemberEnd()->add(get_UML_A_result_testIdentityAction_testIdentityAction());
 	
 
     //-------------------------------------------
-	// A_result_unmarshallAction
+	//A_result_unmarshallAction
 	uML_A_result_unmarshallAction->setName("A_result_unmarshallAction");
 	uML_A_result_unmarshallAction->getMemberEnd()->add(get_UML_UnmarshallAction_result());
 	uML_A_result_unmarshallAction->getMemberEnd()->add(get_UML_A_result_unmarshallAction_unmarshallAction());
 	
 
     //-------------------------------------------
-	// A_result_valueSpecificationAction
+	//A_result_valueSpecificationAction
 	uML_A_result_valueSpecificationAction->setName("A_result_valueSpecificationAction");
 	uML_A_result_valueSpecificationAction->getMemberEnd()->add(get_UML_ValueSpecificationAction_result());
 	uML_A_result_valueSpecificationAction->getMemberEnd()->add(get_UML_A_result_valueSpecificationAction_valueSpecificationAction());
 	
 
     //-------------------------------------------
-	// A_result_writeStructuralFeatureAction
+	//A_result_writeStructuralFeatureAction
 	uML_A_result_writeStructuralFeatureAction->setName("A_result_writeStructuralFeatureAction");
 	uML_A_result_writeStructuralFeatureAction->getMemberEnd()->add(get_UML_WriteStructuralFeatureAction_result());
 	uML_A_result_writeStructuralFeatureAction->getMemberEnd()->add(get_UML_A_result_writeStructuralFeatureAction_writeStructuralFeatureAction());
 	
 
     //-------------------------------------------
-	// A_returnInformation_acceptCallAction
+	//A_returnInformation_acceptCallAction
 	uML_A_returnInformation_acceptCallAction->setName("A_returnInformation_acceptCallAction");
 	uML_A_returnInformation_acceptCallAction->getMemberEnd()->add(get_UML_AcceptCallAction_returnInformation());
 	uML_A_returnInformation_acceptCallAction->getMemberEnd()->add(get_UML_A_returnInformation_acceptCallAction_acceptCallAction());
 	
 
     //-------------------------------------------
-	// A_returnInformation_replyAction
+	//A_returnInformation_replyAction
 	uML_A_returnInformation_replyAction->setName("A_returnInformation_replyAction");
 	uML_A_returnInformation_replyAction->getMemberEnd()->add(get_UML_ReplyAction_returnInformation());
 	uML_A_returnInformation_replyAction->getMemberEnd()->add(get_UML_A_returnInformation_replyAction_replyAction());
 	
 
     //-------------------------------------------
-	// A_returnValueRecipient_interactionUse
+	//A_returnValueRecipient_interactionUse
 	uML_A_returnValueRecipient_interactionUse->setName("A_returnValueRecipient_interactionUse");
 	uML_A_returnValueRecipient_interactionUse->getMemberEnd()->add(get_UML_InteractionUse_returnValueRecipient());
 	uML_A_returnValueRecipient_interactionUse->getMemberEnd()->add(get_UML_A_returnValueRecipient_interactionUse_interactionUse());
 	
 
     //-------------------------------------------
-	// A_returnValue_interactionUse
+	//A_returnValue_interactionUse
 	uML_A_returnValue_interactionUse->setName("A_returnValue_interactionUse");
 	uML_A_returnValue_interactionUse->getMemberEnd()->add(get_UML_InteractionUse_returnValue());
 	uML_A_returnValue_interactionUse->getMemberEnd()->add(get_UML_A_returnValue_interactionUse_interactionUse());
 	
 
     //-------------------------------------------
-	// A_roleBinding_collaborationUse
+	//A_roleBinding_collaborationUse
 	uML_A_roleBinding_collaborationUse->setName("A_roleBinding_collaborationUse");
 	uML_A_roleBinding_collaborationUse->getMemberEnd()->add(get_UML_CollaborationUse_roleBinding());
 	uML_A_roleBinding_collaborationUse->getMemberEnd()->add(get_UML_A_roleBinding_collaborationUse_collaborationUse());
 	
 
     //-------------------------------------------
-	// A_role_structuredClassifier
+	//A_role_structuredClassifier
 	uML_A_role_structuredClassifier->setName("A_role_structuredClassifier");
 	uML_A_role_structuredClassifier->getMemberEnd()->add(get_UML_StructuredClassifier_role());
 	uML_A_role_structuredClassifier->getMemberEnd()->add(get_UML_A_role_structuredClassifier_structuredClassifier());
 	
 
     //-------------------------------------------
-	// A_second_testIdentityAction
+	//A_second_testIdentityAction
 	uML_A_second_testIdentityAction->setName("A_second_testIdentityAction");
 	uML_A_second_testIdentityAction->getMemberEnd()->add(get_UML_TestIdentityAction_second());
 	uML_A_second_testIdentityAction->getMemberEnd()->add(get_UML_A_second_testIdentityAction_testIdentityAction());
 	
 
     //-------------------------------------------
-	// A_selection_objectFlow
+	//A_selection_objectFlow
 	uML_A_selection_objectFlow->setName("A_selection_objectFlow");
 	uML_A_selection_objectFlow->getMemberEnd()->add(get_UML_ObjectFlow_selection());
 	uML_A_selection_objectFlow->getMemberEnd()->add(get_UML_A_selection_objectFlow_objectFlow());
 	
 
     //-------------------------------------------
-	// A_selection_objectNode
+	//A_selection_objectNode
 	uML_A_selection_objectNode->setName("A_selection_objectNode");
 	uML_A_selection_objectNode->getMemberEnd()->add(get_UML_ObjectNode_selection());
 	uML_A_selection_objectNode->getMemberEnd()->add(get_UML_A_selection_objectNode_objectNode());
 	
 
     //-------------------------------------------
-	// A_selector_lifeline
+	//A_selector_lifeline
 	uML_A_selector_lifeline->setName("A_selector_lifeline");
 	uML_A_selector_lifeline->getMemberEnd()->add(get_UML_Lifeline_selector());
 	uML_A_selector_lifeline->getMemberEnd()->add(get_UML_A_selector_lifeline_lifeline());
 	
 
     //-------------------------------------------
-	// A_sendEvent_endMessage
+	//A_sendEvent_endMessage
 	uML_A_sendEvent_endMessage->setName("A_sendEvent_endMessage");
 	uML_A_sendEvent_endMessage->getMemberEnd()->add(get_UML_Message_sendEvent());
 	uML_A_sendEvent_endMessage->getMemberEnd()->add(get_UML_A_sendEvent_endMessage_endMessage());
 	
 
     //-------------------------------------------
-	// A_setupPart_loopNode
+	//A_setupPart_loopNode
 	uML_A_setupPart_loopNode->setName("A_setupPart_loopNode");
 	uML_A_setupPart_loopNode->getMemberEnd()->add(get_UML_LoopNode_setupPart());
 	uML_A_setupPart_loopNode->getMemberEnd()->add(get_UML_A_setupPart_loopNode_loopNode());
 	
 
     //-------------------------------------------
-	// A_signal_broadcastSignalAction
+	//A_signal_broadcastSignalAction
 	uML_A_signal_broadcastSignalAction->setName("A_signal_broadcastSignalAction");
 	uML_A_signal_broadcastSignalAction->getMemberEnd()->add(get_UML_BroadcastSignalAction_signal());
 	uML_A_signal_broadcastSignalAction->getMemberEnd()->add(get_UML_A_signal_broadcastSignalAction_broadcastSignalAction());
 	
 
     //-------------------------------------------
-	// A_signal_reception
+	//A_signal_reception
 	uML_A_signal_reception->setName("A_signal_reception");
 	uML_A_signal_reception->getMemberEnd()->add(get_UML_Reception_signal());
 	uML_A_signal_reception->getMemberEnd()->add(get_UML_A_signal_reception_reception());
 	
 
     //-------------------------------------------
-	// A_signal_sendSignalAction
+	//A_signal_sendSignalAction
 	uML_A_signal_sendSignalAction->setName("A_signal_sendSignalAction");
 	uML_A_signal_sendSignalAction->getMemberEnd()->add(get_UML_SendSignalAction_signal());
 	uML_A_signal_sendSignalAction->getMemberEnd()->add(get_UML_A_signal_sendSignalAction_sendSignalAction());
 	
 
     //-------------------------------------------
-	// A_signal_signalEvent
+	//A_signal_signalEvent
 	uML_A_signal_signalEvent->setName("A_signal_signalEvent");
 	uML_A_signal_signalEvent->getMemberEnd()->add(get_UML_SignalEvent_signal());
 	uML_A_signal_signalEvent->getMemberEnd()->add(get_UML_A_signal_signalEvent_signalEvent());
 	
 
     //-------------------------------------------
-	// A_signature_message
+	//A_signature_message
 	uML_A_signature_message->setName("A_signature_message");
 	uML_A_signature_message->getMemberEnd()->add(get_UML_Message_signature());
 	uML_A_signature_message->getMemberEnd()->add(get_UML_A_signature_message_message());
 	
 
     //-------------------------------------------
-	// A_signature_templateBinding
+	//A_signature_templateBinding
 	uML_A_signature_templateBinding->setName("A_signature_templateBinding");
 	uML_A_signature_templateBinding->getMemberEnd()->add(get_UML_TemplateBinding_signature());
 	uML_A_signature_templateBinding->getMemberEnd()->add(get_UML_A_signature_templateBinding_templateBinding());
 	
 
     //-------------------------------------------
-	// A_slot_owningInstance
+	//A_slot_owningInstance
 	uML_A_slot_owningInstance->setName("A_slot_owningInstance");
 	uML_A_slot_owningInstance->getMemberEnd()->add(get_UML_InstanceSpecification_slot());
 	uML_A_slot_owningInstance->getMemberEnd()->add(get_UML_Slot_owningInstance());
 	
 
     //-------------------------------------------
-	// A_source_directedRelationship
+	//A_source_directedRelationship
 	uML_A_source_directedRelationship->setName("A_source_directedRelationship");
 	uML_A_source_directedRelationship->getMemberEnd()->add(get_UML_DirectedRelationship_source());
 	uML_A_source_directedRelationship->getMemberEnd()->add(get_UML_A_source_directedRelationship_directedRelationship());
 	
 
     //-------------------------------------------
-	// A_specification_durationConstraint
+	//A_specification_durationConstraint
 	uML_A_specification_durationConstraint->setName("A_specification_durationConstraint");
 	uML_A_specification_durationConstraint->getMemberEnd()->add(get_UML_DurationConstraint_specification());
 	uML_A_specification_durationConstraint->getMemberEnd()->add(get_UML_A_specification_durationConstraint_durationConstraint());
 	
 
     //-------------------------------------------
-	// A_specification_intervalConstraint
+	//A_specification_intervalConstraint
 	uML_A_specification_intervalConstraint->setName("A_specification_intervalConstraint");
 	uML_A_specification_intervalConstraint->getMemberEnd()->add(get_UML_IntervalConstraint_specification());
 	uML_A_specification_intervalConstraint->getMemberEnd()->add(get_UML_A_specification_intervalConstraint_intervalConstraint());
 	
 
     //-------------------------------------------
-	// A_specification_owningConstraint
+	//A_specification_owningConstraint
 	uML_A_specification_owningConstraint->setName("A_specification_owningConstraint");
 	uML_A_specification_owningConstraint->getMemberEnd()->add(get_UML_Constraint_specification());
 	uML_A_specification_owningConstraint->getMemberEnd()->add(get_UML_A_specification_owningConstraint_owningConstraint());
 	
 
     //-------------------------------------------
-	// A_specification_owningInstanceSpec
+	//A_specification_owningInstanceSpec
 	uML_A_specification_owningInstanceSpec->setName("A_specification_owningInstanceSpec");
 	uML_A_specification_owningInstanceSpec->getMemberEnd()->add(get_UML_InstanceSpecification_specification());
 	uML_A_specification_owningInstanceSpec->getMemberEnd()->add(get_UML_A_specification_owningInstanceSpec_owningInstanceSpec());
 	
 
     //-------------------------------------------
-	// A_specification_timeConstraint
+	//A_specification_timeConstraint
 	uML_A_specification_timeConstraint->setName("A_specification_timeConstraint");
 	uML_A_specification_timeConstraint->getMemberEnd()->add(get_UML_TimeConstraint_specification());
 	uML_A_specification_timeConstraint->getMemberEnd()->add(get_UML_A_specification_timeConstraint_timeConstraint());
 	
 
     //-------------------------------------------
-	// A_start_executionSpecification
+	//A_start_executionSpecification
 	uML_A_start_executionSpecification->setName("A_start_executionSpecification");
 	uML_A_start_executionSpecification->getMemberEnd()->add(get_UML_ExecutionSpecification_start());
 	uML_A_start_executionSpecification->getMemberEnd()->add(get_UML_A_start_executionSpecification_executionSpecification());
 	
 
     //-------------------------------------------
-	// A_stateInvariant_owningState
+	//A_stateInvariant_owningState
 	uML_A_stateInvariant_owningState->setName("A_stateInvariant_owningState");
 	uML_A_stateInvariant_owningState->getMemberEnd()->add(get_UML_State_stateInvariant());
 	uML_A_stateInvariant_owningState->getMemberEnd()->add(get_UML_A_stateInvariant_owningState_owningState());
 	
 
     //-------------------------------------------
-	// A_structuralFeature_structuralFeatureAction
+	//A_structuralFeature_structuralFeatureAction
 	uML_A_structuralFeature_structuralFeatureAction->setName("A_structuralFeature_structuralFeatureAction");
 	uML_A_structuralFeature_structuralFeatureAction->getMemberEnd()->add(get_UML_StructuralFeatureAction_structuralFeature());
 	uML_A_structuralFeature_structuralFeatureAction->getMemberEnd()->add(get_UML_A_structuralFeature_structuralFeatureAction_structuralFeatureAction());
 	
 
     //-------------------------------------------
-	// A_structuredNodeInput_structuredActivityNode
+	//A_structuredNodeInput_structuredActivityNode
 	uML_A_structuredNodeInput_structuredActivityNode->setName("A_structuredNodeInput_structuredActivityNode");
 	uML_A_structuredNodeInput_structuredActivityNode->getMemberEnd()->add(get_UML_StructuredActivityNode_structuredNodeInput());
 	uML_A_structuredNodeInput_structuredActivityNode->getMemberEnd()->add(get_UML_A_structuredNodeInput_structuredActivityNode_structuredActivityNode());
 	
 
     //-------------------------------------------
-	// A_structuredNodeOutput_structuredActivityNode
+	//A_structuredNodeOutput_structuredActivityNode
 	uML_A_structuredNodeOutput_structuredActivityNode->setName("A_structuredNodeOutput_structuredActivityNode");
 	uML_A_structuredNodeOutput_structuredActivityNode->getMemberEnd()->add(get_UML_StructuredActivityNode_structuredNodeOutput());
 	uML_A_structuredNodeOutput_structuredActivityNode->getMemberEnd()->add(get_UML_A_structuredNodeOutput_structuredActivityNode_structuredActivityNode());
 	
 
     //-------------------------------------------
-	// A_structuredNode_activity
+	//A_structuredNode_activity
 	uML_A_structuredNode_activity->setName("A_structuredNode_activity");
 	uML_A_structuredNode_activity->getMemberEnd()->add(get_UML_Activity_structuredNode());
 	uML_A_structuredNode_activity->getMemberEnd()->add(get_UML_StructuredActivityNode_activity());
@@ -33736,308 +35617,308 @@ void UMLPackageImpl::initializePackageAssociations()
 	
 
     //-------------------------------------------
-	// A_subExpression_owningExpression
+	//A_subExpression_owningExpression
 	uML_A_subExpression_owningExpression->setName("A_subExpression_owningExpression");
 	uML_A_subExpression_owningExpression->getMemberEnd()->add(get_UML_StringExpression_subExpression());
 	uML_A_subExpression_owningExpression->getMemberEnd()->add(get_UML_StringExpression_owningExpression());
 	
 
     //-------------------------------------------
-	// A_subgroup_superGroup
+	//A_subgroup_superGroup
 	uML_A_subgroup_superGroup->setName("A_subgroup_superGroup");
 	uML_A_subgroup_superGroup->getMemberEnd()->add(get_UML_ActivityGroup_subgroup());
 	uML_A_subgroup_superGroup->getMemberEnd()->add(get_UML_ActivityGroup_superGroup());
 	
 
     //-------------------------------------------
-	// A_subject_useCase
+	//A_subject_useCase
 	uML_A_subject_useCase->setName("A_subject_useCase");
 	uML_A_subject_useCase->getMemberEnd()->add(get_UML_UseCase_subject());
 	uML_A_subject_useCase->getMemberEnd()->add(get_UML_Classifier_useCase());
 	
 
     //-------------------------------------------
-	// A_submachineState_submachine
+	//A_submachineState_submachine
 	uML_A_submachineState_submachine->setName("A_submachineState_submachine");
 	uML_A_submachineState_submachine->getMemberEnd()->add(get_UML_StateMachine_submachineState());
 	uML_A_submachineState_submachine->getMemberEnd()->add(get_UML_State_submachine());
 	
 
     //-------------------------------------------
-	// A_subpartition_superPartition
+	//A_subpartition_superPartition
 	uML_A_subpartition_superPartition->setName("A_subpartition_superPartition");
 	uML_A_subpartition_superPartition->getMemberEnd()->add(get_UML_ActivityPartition_subpartition());
 	uML_A_subpartition_superPartition->getMemberEnd()->add(get_UML_ActivityPartition_superPartition());
 	
 
     //-------------------------------------------
-	// A_subsettedProperty_property
+	//A_subsettedProperty_property
 	uML_A_subsettedProperty_property->setName("A_subsettedProperty_property");
 	uML_A_subsettedProperty_property->getMemberEnd()->add(get_UML_Property_subsettedProperty());
 	uML_A_subsettedProperty_property->getMemberEnd()->add(get_UML_A_subsettedProperty_property_property());
 	
 
     //-------------------------------------------
-	// A_substitution_substitutingClassifier
+	//A_substitution_substitutingClassifier
 	uML_A_substitution_substitutingClassifier->setName("A_substitution_substitutingClassifier");
 	uML_A_substitution_substitutingClassifier->getMemberEnd()->add(get_UML_Classifier_substitution());
 	uML_A_substitution_substitutingClassifier->getMemberEnd()->add(get_UML_Substitution_substitutingClassifier());
 	
 
     //-------------------------------------------
-	// A_subvertex_container
+	//A_subvertex_container
 	uML_A_subvertex_container->setName("A_subvertex_container");
 	uML_A_subvertex_container->getMemberEnd()->add(get_UML_Region_subvertex());
 	uML_A_subvertex_container->getMemberEnd()->add(get_UML_Vertex_container());
 	
 
     //-------------------------------------------
-	// A_superClass_class
+	//A_superClass_class
 	uML_A_superClass_class->setName("A_superClass_class");
 	uML_A_superClass_class->getMemberEnd()->add(get_UML_Class_superClass());
 	uML_A_superClass_class->getMemberEnd()->add(get_UML_A_superClass_class_class());
 	
 
     //-------------------------------------------
-	// A_supplier_supplierDependency
+	//A_supplier_supplierDependency
 	uML_A_supplier_supplierDependency->setName("A_supplier_supplierDependency");
 	uML_A_supplier_supplierDependency->getMemberEnd()->add(get_UML_Dependency_supplier());
 	uML_A_supplier_supplierDependency->getMemberEnd()->add(get_UML_A_supplier_supplierDependency_supplierDependency());
 	
 
     //-------------------------------------------
-	// A_target_callOperationAction
+	//A_target_callOperationAction
 	uML_A_target_callOperationAction->setName("A_target_callOperationAction");
 	uML_A_target_callOperationAction->getMemberEnd()->add(get_UML_CallOperationAction_target());
 	uML_A_target_callOperationAction->getMemberEnd()->add(get_UML_A_target_callOperationAction_callOperationAction());
 	
 
     //-------------------------------------------
-	// A_target_destroyObjectAction
+	//A_target_destroyObjectAction
 	uML_A_target_destroyObjectAction->setName("A_target_destroyObjectAction");
 	uML_A_target_destroyObjectAction->getMemberEnd()->add(get_UML_DestroyObjectAction_target());
 	uML_A_target_destroyObjectAction->getMemberEnd()->add(get_UML_A_target_destroyObjectAction_destroyObjectAction());
 	
 
     //-------------------------------------------
-	// A_target_directedRelationship
+	//A_target_directedRelationship
 	uML_A_target_directedRelationship->setName("A_target_directedRelationship");
 	uML_A_target_directedRelationship->getMemberEnd()->add(get_UML_DirectedRelationship_target());
 	uML_A_target_directedRelationship->getMemberEnd()->add(get_UML_A_target_directedRelationship_directedRelationship());
 	
 
     //-------------------------------------------
-	// A_target_sendObjectAction
+	//A_target_sendObjectAction
 	uML_A_target_sendObjectAction->setName("A_target_sendObjectAction");
 	uML_A_target_sendObjectAction->getMemberEnd()->add(get_UML_SendObjectAction_target());
 	uML_A_target_sendObjectAction->getMemberEnd()->add(get_UML_A_target_sendObjectAction_sendObjectAction());
 	
 
     //-------------------------------------------
-	// A_target_sendSignalAction
+	//A_target_sendSignalAction
 	uML_A_target_sendSignalAction->setName("A_target_sendSignalAction");
 	uML_A_target_sendSignalAction->getMemberEnd()->add(get_UML_SendSignalAction_target());
 	uML_A_target_sendSignalAction->getMemberEnd()->add(get_UML_A_target_sendSignalAction_sendSignalAction());
 	
 
     //-------------------------------------------
-	// A_templateBinding_boundElement
+	//A_templateBinding_boundElement
 	uML_A_templateBinding_boundElement->setName("A_templateBinding_boundElement");
 	uML_A_templateBinding_boundElement->getMemberEnd()->add(get_UML_TemplateableElement_templateBinding());
 	uML_A_templateBinding_boundElement->getMemberEnd()->add(get_UML_TemplateBinding_boundElement());
 	
 
     //-------------------------------------------
-	// A_test_clause
+	//A_test_clause
 	uML_A_test_clause->setName("A_test_clause");
 	uML_A_test_clause->getMemberEnd()->add(get_UML_Clause_test());
 	uML_A_test_clause->getMemberEnd()->add(get_UML_A_test_clause_clause());
 	
 
     //-------------------------------------------
-	// A_test_loopNode
+	//A_test_loopNode
 	uML_A_test_loopNode->setName("A_test_loopNode");
 	uML_A_test_loopNode->getMemberEnd()->add(get_UML_LoopNode_test());
 	uML_A_test_loopNode->getMemberEnd()->add(get_UML_A_test_loopNode_loopNode());
 	
 
     //-------------------------------------------
-	// A_toBefore_after
+	//A_toBefore_after
 	uML_A_toBefore_after->setName("A_toBefore_after");
 	uML_A_toBefore_after->getMemberEnd()->add(get_UML_OccurrenceSpecification_toBefore());
 	uML_A_toBefore_after->getMemberEnd()->add(get_UML_GeneralOrdering_after());
 	
 
     //-------------------------------------------
-	// A_transformation_objectFlow
+	//A_transformation_objectFlow
 	uML_A_transformation_objectFlow->setName("A_transformation_objectFlow");
 	uML_A_transformation_objectFlow->getMemberEnd()->add(get_UML_ObjectFlow_transformation());
 	uML_A_transformation_objectFlow->getMemberEnd()->add(get_UML_A_transformation_objectFlow_objectFlow());
 	
 
     //-------------------------------------------
-	// A_transition_container
+	//A_transition_container
 	uML_A_transition_container->setName("A_transition_container");
 	uML_A_transition_container->getMemberEnd()->add(get_UML_Region_transition());
 	uML_A_transition_container->getMemberEnd()->add(get_UML_Transition_container());
 	
 
     //-------------------------------------------
-	// A_trigger_acceptEventAction
+	//A_trigger_acceptEventAction
 	uML_A_trigger_acceptEventAction->setName("A_trigger_acceptEventAction");
 	uML_A_trigger_acceptEventAction->getMemberEnd()->add(get_UML_AcceptEventAction_trigger());
 	uML_A_trigger_acceptEventAction->getMemberEnd()->add(get_UML_A_trigger_acceptEventAction_acceptEventAction());
 	
 
     //-------------------------------------------
-	// A_trigger_transition
+	//A_trigger_transition
 	uML_A_trigger_transition->setName("A_trigger_transition");
 	uML_A_trigger_transition->getMemberEnd()->add(get_UML_Transition_trigger());
 	uML_A_trigger_transition->getMemberEnd()->add(get_UML_A_trigger_transition_transition());
 	
 
     //-------------------------------------------
-	// A_type_collaborationUse
+	//A_type_collaborationUse
 	uML_A_type_collaborationUse->setName("A_type_collaborationUse");
 	uML_A_type_collaborationUse->getMemberEnd()->add(get_UML_CollaborationUse_type());
 	uML_A_type_collaborationUse->getMemberEnd()->add(get_UML_A_type_collaborationUse_collaborationUse());
 	
 
     //-------------------------------------------
-	// A_type_connector
+	//A_type_connector
 	uML_A_type_connector->setName("A_type_connector");
 	uML_A_type_connector->getMemberEnd()->add(get_UML_Connector_type());
 	uML_A_type_connector->getMemberEnd()->add(get_UML_A_type_connector_connector());
 	
 
     //-------------------------------------------
-	// A_type_extensionEnd
+	//A_type_extensionEnd
 	uML_A_type_extensionEnd->setName("A_type_extensionEnd");
 	uML_A_type_extensionEnd->getMemberEnd()->add(get_UML_ExtensionEnd_type());
 	uML_A_type_extensionEnd->getMemberEnd()->add(get_UML_A_type_extensionEnd_extensionEnd());
 	
 
     //-------------------------------------------
-	// A_type_operation
+	//A_type_operation
 	uML_A_type_operation->setName("A_type_operation");
 	uML_A_type_operation->getMemberEnd()->add(get_UML_Operation_type());
 	uML_A_type_operation->getMemberEnd()->add(get_UML_A_type_operation_operation());
 	
 
     //-------------------------------------------
-	// A_type_typedElement
+	//A_type_typedElement
 	uML_A_type_typedElement->setName("A_type_typedElement");
 	uML_A_type_typedElement->getMemberEnd()->add(get_UML_TypedElement_type());
 	uML_A_type_typedElement->getMemberEnd()->add(get_UML_A_type_typedElement_typedElement());
 	
 
     //-------------------------------------------
-	// A_unmarshallType_unmarshallAction
+	//A_unmarshallType_unmarshallAction
 	uML_A_unmarshallType_unmarshallAction->setName("A_unmarshallType_unmarshallAction");
 	uML_A_unmarshallType_unmarshallAction->getMemberEnd()->add(get_UML_UnmarshallAction_unmarshallType());
 	uML_A_unmarshallType_unmarshallAction->getMemberEnd()->add(get_UML_A_unmarshallType_unmarshallAction_unmarshallAction());
 	
 
     //-------------------------------------------
-	// A_upperBound_objectNode
+	//A_upperBound_objectNode
 	uML_A_upperBound_objectNode->setName("A_upperBound_objectNode");
 	uML_A_upperBound_objectNode->getMemberEnd()->add(get_UML_ObjectNode_upperBound());
 	uML_A_upperBound_objectNode->getMemberEnd()->add(get_UML_A_upperBound_objectNode_objectNode());
 	
 
     //-------------------------------------------
-	// A_upperValue_owningUpper
+	//A_upperValue_owningUpper
 	uML_A_upperValue_owningUpper->setName("A_upperValue_owningUpper");
 	uML_A_upperValue_owningUpper->getMemberEnd()->add(get_UML_MultiplicityElement_upperValue());
 	uML_A_upperValue_owningUpper->getMemberEnd()->add(get_UML_A_upperValue_owningUpper_owningUpper());
 	
 
     //-------------------------------------------
-	// A_utilizedElement_manifestation
+	//A_utilizedElement_manifestation
 	uML_A_utilizedElement_manifestation->setName("A_utilizedElement_manifestation");
 	uML_A_utilizedElement_manifestation->getMemberEnd()->add(get_UML_Manifestation_utilizedElement());
 	uML_A_utilizedElement_manifestation->getMemberEnd()->add(get_UML_A_utilizedElement_manifestation_manifestation());
 	
 
     //-------------------------------------------
-	// A_value_linkEndData
+	//A_value_linkEndData
 	uML_A_value_linkEndData->setName("A_value_linkEndData");
 	uML_A_value_linkEndData->getMemberEnd()->add(get_UML_LinkEndData_value());
 	uML_A_value_linkEndData->getMemberEnd()->add(get_UML_A_value_linkEndData_linkEndData());
 	
 
     //-------------------------------------------
-	// A_value_owningSlot
+	//A_value_owningSlot
 	uML_A_value_owningSlot->setName("A_value_owningSlot");
 	uML_A_value_owningSlot->getMemberEnd()->add(get_UML_Slot_value());
 	uML_A_value_owningSlot->getMemberEnd()->add(get_UML_A_value_owningSlot_owningSlot());
 	
 
     //-------------------------------------------
-	// A_value_qualifierValue
+	//A_value_qualifierValue
 	uML_A_value_qualifierValue->setName("A_value_qualifierValue");
 	uML_A_value_qualifierValue->getMemberEnd()->add(get_UML_QualifierValue_value());
 	uML_A_value_qualifierValue->getMemberEnd()->add(get_UML_A_value_qualifierValue_qualifierValue());
 	
 
     //-------------------------------------------
-	// A_value_valuePin
+	//A_value_valuePin
 	uML_A_value_valuePin->setName("A_value_valuePin");
 	uML_A_value_valuePin->getMemberEnd()->add(get_UML_ValuePin_value());
 	uML_A_value_valuePin->getMemberEnd()->add(get_UML_A_value_valuePin_valuePin());
 	
 
     //-------------------------------------------
-	// A_value_valueSpecificationAction
+	//A_value_valueSpecificationAction
 	uML_A_value_valueSpecificationAction->setName("A_value_valueSpecificationAction");
 	uML_A_value_valueSpecificationAction->getMemberEnd()->add(get_UML_ValueSpecificationAction_value());
 	uML_A_value_valueSpecificationAction->getMemberEnd()->add(get_UML_A_value_valueSpecificationAction_valueSpecificationAction());
 	
 
     //-------------------------------------------
-	// A_value_writeStructuralFeatureAction
+	//A_value_writeStructuralFeatureAction
 	uML_A_value_writeStructuralFeatureAction->setName("A_value_writeStructuralFeatureAction");
 	uML_A_value_writeStructuralFeatureAction->getMemberEnd()->add(get_UML_WriteStructuralFeatureAction_value());
 	uML_A_value_writeStructuralFeatureAction->getMemberEnd()->add(get_UML_A_value_writeStructuralFeatureAction_writeStructuralFeatureAction());
 	
 
     //-------------------------------------------
-	// A_value_writeVariableAction
+	//A_value_writeVariableAction
 	uML_A_value_writeVariableAction->setName("A_value_writeVariableAction");
 	uML_A_value_writeVariableAction->getMemberEnd()->add(get_UML_WriteVariableAction_value());
 	uML_A_value_writeVariableAction->getMemberEnd()->add(get_UML_A_value_writeVariableAction_writeVariableAction());
 	
 
     //-------------------------------------------
-	// A_variable_activityScope
+	//A_variable_activityScope
 	uML_A_variable_activityScope->setName("A_variable_activityScope");
 	uML_A_variable_activityScope->getMemberEnd()->add(get_UML_Activity_variable());
 	uML_A_variable_activityScope->getMemberEnd()->add(get_UML_Variable_activityScope());
 	
 
     //-------------------------------------------
-	// A_variable_scope
+	//A_variable_scope
 	uML_A_variable_scope->setName("A_variable_scope");
 	uML_A_variable_scope->getMemberEnd()->add(get_UML_StructuredActivityNode_variable());
 	uML_A_variable_scope->getMemberEnd()->add(get_UML_Variable_scope());
 	
 
     //-------------------------------------------
-	// A_variable_variableAction
+	//A_variable_variableAction
 	uML_A_variable_variableAction->setName("A_variable_variableAction");
 	uML_A_variable_variableAction->getMemberEnd()->add(get_UML_VariableAction_variable());
 	uML_A_variable_variableAction->getMemberEnd()->add(get_UML_A_variable_variableAction_variableAction());
 	
 
     //-------------------------------------------
-	// A_weight_activityEdge
+	//A_weight_activityEdge
 	uML_A_weight_activityEdge->setName("A_weight_activityEdge");
 	uML_A_weight_activityEdge->getMemberEnd()->add(get_UML_ActivityEdge_weight());
 	uML_A_weight_activityEdge->getMemberEnd()->add(get_UML_A_weight_activityEdge_activityEdge());
 	
 
     //-------------------------------------------
-	// A_when_timeEvent
+	//A_when_timeEvent
 	uML_A_when_timeEvent->setName("A_when_timeEvent");
 	uML_A_when_timeEvent->getMemberEnd()->add(get_UML_TimeEvent_when());
 	uML_A_when_timeEvent->getMemberEnd()->add(get_UML_A_when_timeEvent_timeEvent());
