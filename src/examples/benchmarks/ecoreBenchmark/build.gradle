@@ -3,7 +3,7 @@ plugins {
 }
 
 task compileEcoreBenchmark(type: tui.sse.mde4cpp.MDE4CPPCompile) {
-	group 'Examples'
+	group 'Benchmarks'
 	description 'compile ecoreBenchmark'
 	
 	projectFolder = file('.' + File.separator + 'src' + File.separator + 'ecoreBenchmark')
