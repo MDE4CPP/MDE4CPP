@@ -1,30 +1,8 @@
 description 'Example collection'
 
-task compileAllExamplesWithoutModel() {
+task generateAllExamples() {
 	group 'Examples'
-	description 'build all example applications'	
-	
-	// benchmarks
-	dependsOn getRootProject().getTasksByName('compileEcoreBenchmark', true)
-	dependsOn getRootProject().getTasksByName('compileMemoryBenchmarkEcore', true)
-	dependsOn getRootProject().getTasksByName('compileUMLBenchmark', true)
-	
-	// common examples
-	dependsOn getRootProject().getTasksByName('compileExamplePersistence', true)
-	dependsOn getRootProject().getTasksByName('compileExamplePluginFramework', true)
-	
-	// ecore examples
-	dependsOn getRootProject().getTasksByName('compileEcoreExample', true)
-	
-	// fuml examples
-	
-	// uml examples
-	dependsOn getRootProject().getTasksByName('compileUMLExample', true)
-}
-
-task generateAllModelExamples() {
-	group 'Examples'
-	description 'generate all model examples using there generate file'	
+	description 'generate all examples'	
 	
 	dependsOn getRootProject().getTasksByName('createAllGenerators', true)
 		
@@ -41,16 +19,11 @@ task generateAllModelExamples() {
 	
 		[  	'./commonExamples/SubsetUnionExample/SubsetUnion/model/', 
 			'./commonExamples/SubsetUnionExample/SubsetUnionDepth/model/', 
-			'./ecoreExamples/ecoreModelExample/model/', 
-			'./fUMLExamples/ActionTest/model/', 
+			'./ecoreExamples/ecoreModelExample/model/',
+			'./UMLExamples/UMLModelExample/model/',		
 			'./fUMLExamples/Calculator/model/', 
-			'./fUMLExamples/ForkNodeTest/model/', 
-			'./fUMLExamples/JoinNodeTest/model/', 
-			'./fUMLExamples/MultiplePins/model/', 
-			'./fUMLExamples/RegionTest/model/', 
-			'./fUMLExamples/SimpleBehaviorTest/model/', 
-			'./fUMLExamples/ThreePhilosophers/model/', 
-			'./UMLExamples/UMLModelExample/model/'
+			'./fUMLExamples/ThreePhilosophers/model/',
+			'./PSCSExamples/Ampelsteuerung_Example/model'
 		].each { path ->
 			exec
 			{
@@ -61,20 +34,66 @@ task generateAllModelExamples() {
     }
 }
 
-task buildAllModelExamples() {
+task compileAllExamples() {
 	group 'Examples'
-	description 'build all model example applications'
+	description 'compile applications for all examples without generating the models'
 	
+	// common examples
+	dependsOn getRootProject().getTasksByName('compileExamplePersistence', true)
+	dependsOn getRootProject().getTasksByName('compileExamplePluginFramework', true)
+	dependsOn getRootProject().getTasksByName('compileApplicationForSubsetUnion', true)
+	dependsOn getRootProject().getTasksByName('compileApplicationForSubsetUnionDepth', true)
+	
+	// ecore examples
+	dependsOn getRootProject().getTasksByName('compileEcoreExample', true)
+	dependsOn getRootProject().getTasksByName('compileApplicationForLibraryModel_ecore', true)
+	
+	// uml examples
+	dependsOn getRootProject().getTasksByName('compileUMLExample', true)
+	dependsOn getRootProject().getTasksByName('compileApplicationForLibraryModel_uml', true)
+	
+	// fUML examples
+	dependsOn getRootProject().getTasksByName('compileApplicationForCalcModel', true)
+	dependsOn getRootProject().getTasksByName('compileApplicationForPhilosophers', true)
+	
+	// PSCS examples
+	dependsOn getRootProject().getTasksByName('compileApplicationForAmpelsteuerung_Example', true)
+}
+
+task buildAllExamples() {
+	group 'Examples'
+	description 'generate and compile all example applications'
+	
+	// common examples
+	dependsOn getRootProject().getTasksByName('compileExamplePersistence', true)
+	dependsOn getRootProject().getTasksByName('compileExamplePluginFramework', true)
 	dependsOn getRootProject().getTasksByName('buildSubsetUnion', true)
 	dependsOn getRootProject().getTasksByName('buildSubsetUnionDepth', true)
+	
+	// ecore examples
+	dependsOn getRootProject().getTasksByName('compileEcoreExample', true)
 	dependsOn getRootProject().getTasksByName('buildLibraryModel_ecore', true)
-	dependsOn getRootProject().getTasksByName('buildActionTest', true)
-	dependsOn getRootProject().getTasksByName('buildCalcModel', true)
-	dependsOn getRootProject().getTasksByName('buildForkNodeTest', true)
-	dependsOn getRootProject().getTasksByName('buildJoinNodeTest', true)
-	dependsOn getRootProject().getTasksByName('buildFUMLMultiplePins', true)
-	dependsOn getRootProject().getTasksByName('buildRegionTest', true)
-	dependsOn getRootProject().getTasksByName('SimpleBehaviorTest', true)
-	dependsOn getRootProject().getTasksByName('ThreePhilosophers', true)
+	
+	// uml examples
+	dependsOn getRootProject().getTasksByName('compileUMLExample', true)
 	dependsOn getRootProject().getTasksByName('buildLibraryModel_uml', true)
+	
+	// fUML examples
+	dependsOn getRootProject().getTasksByName('buildCalcModel', true)
+	dependsOn getRootProject().getTasksByName('buildPhilosophers', true)
+	
+	// PSCS examples
+	dependsOn getRootProject().getTasksByName('buildAmpelsteuerung_Example', true)
+}
+
+
+
+task compileAllBenchmarks() {
+	group 'Benchmarks'
+	description 'compile applications for all benchmarks'	
+	
+	// benchmarks
+	dependsOn getRootProject().getTasksByName('compileEcoreBenchmark', true)
+	dependsOn getRootProject().getTasksByName('compileMemoryBenchmarkEcore', true)
+	dependsOn getRootProject().getTasksByName('compileUMLBenchmark', true)
 }
