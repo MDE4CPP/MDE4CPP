@@ -86,8 +86,6 @@ task buildAllExamples() {
 	dependsOn getRootProject().getTasksByName('buildAmpelsteuerung_Example', true)
 }
 
-
-
 task compileAllBenchmarks() {
 	group 'Benchmarks'
 	description 'compile applications for all benchmarks'	
@@ -96,4 +94,210 @@ task compileAllBenchmarks() {
 	dependsOn getRootProject().getTasksByName('compileEcoreBenchmark', true)
 	dependsOn getRootProject().getTasksByName('compileMemoryBenchmarkEcore', true)
 	dependsOn getRootProject().getTasksByName('compileUMLBenchmark', true)
+}
+
+task generateFUMLTestSuite() {
+	group 'Tests'
+	description 'generate test suite for fUML'	
+	
+	dependsOn getRootProject().getTasksByName('createAllGenerators', true)
+		
+	doLast {				
+		def tool = '/bin/sh'
+		def command = '-c'
+		def prefix = './'
+		
+		if (System.properties['os.name'].toLowerCase().contains('windows')) {
+			tool = 'cmd'
+			command = '/C'
+			prefix = ''
+		}
+	
+		[  	'./fUMLExamples/TestSuite/ActionTest/model/',
+			'./fUMLExamples/TestSuite/ForkNodeTest/model/',
+			'./fUMLExamples/TestSuite/JoinNodeTest/model/',
+			'./fUMLExamples/TestSuite/MultiplePins/model/',
+			'./fUMLExamples/TestSuite/RegionTest/model/',
+			'./fUMLExamples/TestSuite/SimpleBehaviorTest/model/',
+			'./fUMLExamples/TestSuite/TargetPinTest/model/',
+			'./fUMLExamples/TestSuite/TestModelImport/model/',
+			'./fUMLExamples/TestSuite/TestModelMain/model/'
+		].each { path ->
+			exec
+			{
+				workingDir = file("${path}")
+				commandLine = [tool, command, prefix + 'generate']
+			}
+		} 		
+    }
+}
+
+task compileFUMLTestSuite() {
+	group 'Tests'
+	description 'compile applications for fUML test suite'
+	
+	// fUML tests
+	dependsOn getRootProject().getTasksByName('compileApplicationForActionTest', true)
+	dependsOn getRootProject().getTasksByName('compileApplicationForForkNodeTest', true)
+	dependsOn getRootProject().getTasksByName('compileApplicationForJoinNodeTest', true)
+	dependsOn getRootProject().getTasksByName('compileApplicationForFUMLMultiplePins', true)
+	dependsOn getRootProject().getTasksByName('compileApplicationForRegionTest', true)
+	dependsOn getRootProject().getTasksByName('compileApplicationForSimpleBehaviorTest', true)
+	dependsOn getRootProject().getTasksByName('compileApplicationForTargetPinTest', true)
+	dependsOn getRootProject().getTasksByName('compileApplicationForTestModelMain', true)	
+}
+
+task buildFUMLTestSuite() {
+	group 'Tests'
+	description 'generate and compile applications for fUML test suite'
+	
+	// fUML tests
+	dependsOn getRootProject().getTasksByName('buildActionTest', true)
+	dependsOn getRootProject().getTasksByName('buildForkNodeTest', true)
+	dependsOn getRootProject().getTasksByName('buildJoinNodeTest', true)
+	dependsOn getRootProject().getTasksByName('buildFUMLMultiplePins', true)
+	dependsOn getRootProject().getTasksByName('buildRegionTest', true)
+	dependsOn getRootProject().getTasksByName('buildSimpleBehaviorTest', true)
+	dependsOn getRootProject().getTasksByName('buildTargetPinTest', true)
+	dependsOn getRootProject().getTasksByName('buildTestModelMain', true)	
+}
+
+/*
+TODO
+These tasks are currently not executable since the amount of produced tasks (around 100)
+causes gradlew to crash
+
+task generatePSCSTestSuite() {
+	group 'Tests'
+	description 'generate test suite for PSCS'	
+	
+	dependsOn getRootProject().getTasksByName('createAllGenerators', true)
+		
+	doLast {				
+		def tool = '/bin/sh'
+		def command = '-c'
+		def prefix = './'
+		
+		if (System.properties['os.name'].toLowerCase().contains('windows')) {
+			tool = 'cmd'
+			command = '/C'
+			prefix = ''
+		}
+	
+		[  	'./PSCSExamples/TestSuite/01_Inst_01_AssemblyConnectors_P_P/model/',
+			'./PSCSExamples/TestSuite/01_Inst_02_AssemblyConnectors_PWP_P/model/',
+			'./PSCSExamples/TestSuite/01_Inst_03_AssemblyConnectors_PWP_PWP/model/',
+			'./PSCSExamples/TestSuite/01_Inst_04_DefaultPrimitives/model/',
+			'./PSCSExamples/TestSuite/01_Inst_05_DefaultStructures/model/',
+			'./PSCSExamples/TestSuite/01_Inst_06_DelegationPort_P/model/',
+			'./PSCSExamples/TestSuite/01_Inst_07_DelegationPort_PWP/model/',
+			'./PSCSExamples/TestSuite/01_Inst_08_Hierarchy/model/',
+			'./PSCSExamples/TestSuite/02_Comm_01_MessageLoss/model/',
+			'./PSCSExamples/TestSuite/02_Comm_02_SingleDeleg_P_P_Op/model/',
+			'./PSCSExamples/TestSuite/02_Comm_03_SingleDeleg_PWP_P_Op/model/',
+			'./PSCSExamples/TestSuite/02_Comm_04_MultDelegSameCon_P_P_Op/model/',
+			'./PSCSExamples/TestSuite/02_Comm_05_MultDelegSameCon_PWP_P_Op/model/',
+			'./PSCSExamples/TestSuite/02_Comm_06_MultDelegMultCon_P_P_Op/model/',
+			'./PSCSExamples/TestSuite/02_Comm_07_MultDelegMultCon_PWP_P_Op/model/',
+			'./PSCSExamples/TestSuite/03_onPort_01_Op_ProvInterface/model/',
+			'./PSCSExamples/TestSuite/03_onPort_02_Op_ReqInterface/model/',
+			'./PSCSExamples/TestSuite/03_onPort_03_Op_Prov_Req_Interface/model/',
+			'./PSCSExamples/TestSuite/03_onPort_04_Op_Req_Deleg/model/',
+			'./PSCSExamples/TestSuite/04_Dest_01_RecursiveDestruction/model/',
+			'./PSCSExamples/TestSuite/04_Dest_02_DestructionPart/model/',
+			'./PSCSExamples/TestSuite/04_Dest_03_DestructionPort/model/',
+			'./PSCSExamples/TestSuite/04_Dest_04_DestructionInstances/model/'
+		].each { path ->
+			exec
+			{
+				workingDir = file("${path}")
+				commandLine = [tool, command, prefix + 'generate']
+			}
+		} 		
+    }
+}
+
+task compilePSCSTestSuite() {
+	group 'Tests'
+	description 'compile applications for PSCS test suite'
+	
+	// PSCS tests
+	dependsOn getRootProject().getTasksByName('compileApplicationForAssemblyConnectors_P_P', true)
+	dependsOn getRootProject().getTasksByName('compileApplicationForAssemblyConnectors_PWP_P', true)
+	dependsOn getRootProject().getTasksByName('compileApplicationForAssemblyConnectors_PWP_PWP', true)
+	dependsOn getRootProject().getTasksByName('compileApplicationForDefaultPrimitives', true)
+	dependsOn getRootProject().getTasksByName('compileApplicationForDefaultStructures', true)
+	dependsOn getRootProject().getTasksByName('compileApplicationForDelegationPort_P', true)
+	dependsOn getRootProject().getTasksByName('compileApplicationForDelegationPort_PWP', true)
+	dependsOn getRootProject().getTasksByName('compileApplicationForHierarchy', true)
+	dependsOn getRootProject().getTasksByName('compileApplicationForMessageLoss', true)
+	dependsOn getRootProject().getTasksByName('compileApplicationForSingleDeleg_P_P_Op', true)
+	dependsOn getRootProject().getTasksByName('compileApplicationForSingleDeleg_PWP_P_Op', true)
+	dependsOn getRootProject().getTasksByName('compileApplicationForMultDelegSameCon_P_P_Op', true)
+	dependsOn getRootProject().getTasksByName('compileApplicationForMultDelegSameCon_PWP_P_Op', true)
+	dependsOn getRootProject().getTasksByName('compileApplicationForMultDelegMultCon_P_P_Op', true)
+	dependsOn getRootProject().getTasksByName('compileApplicationForMultDelegMultCon_PWP_P_Op', true)
+	dependsOn getRootProject().getTasksByName('compileApplicationForOp_ProvInterface', true)
+	dependsOn getRootProject().getTasksByName('compileApplicationForOp_ReqInterface', true)
+	dependsOn getRootProject().getTasksByName('compileApplicationForOp_Prov_Req_Interface', true)
+	dependsOn getRootProject().getTasksByName('compileApplicationForOp_Req_Deleg', true)
+	dependsOn getRootProject().getTasksByName('compileApplicationForRecursiveDestruction', true)
+	dependsOn getRootProject().getTasksByName('compileApplicationForDestructionPart', true)
+	dependsOn getRootProject().getTasksByName('compileApplicationForDestructionPort', true)
+	dependsOn getRootProject().getTasksByName('compileApplicationForDestructionInstances', true)
+}
+
+task buildPSCSTestSuite() {
+	group 'Tests'
+	description 'generate and compile applications for PSCS test suite'
+	
+	// PSCS tests
+	dependsOn getRootProject().getTasksByName('buildAssemblyConnectors_P_P', true)
+	dependsOn getRootProject().getTasksByName('buildAssemblyConnectors_PWP_P', true)
+	dependsOn getRootProject().getTasksByName('buildAssemblyConnectors_PWP_PWP', true)
+	dependsOn getRootProject().getTasksByName('buildDefaultPrimitives', true)
+	dependsOn getRootProject().getTasksByName('buildDefaultStructures', true)
+	dependsOn getRootProject().getTasksByName('buildDelegationPort_P', true)
+	dependsOn getRootProject().getTasksByName('buildDelegationPort_PWP', true)
+	dependsOn getRootProject().getTasksByName('buildHierarchy', true)
+	dependsOn getRootProject().getTasksByName('buildMessageLoss', true)
+	dependsOn getRootProject().getTasksByName('buildSingleDeleg_P_P_Op', true)
+	dependsOn getRootProject().getTasksByName('buildSingleDeleg_PWP_P_Op', true)
+	dependsOn getRootProject().getTasksByName('buildMultDelegSameCon_P_P_Op', true)
+	dependsOn getRootProject().getTasksByName('buildMultDelegSameCon_PWP_P_Op', true)
+	dependsOn getRootProject().getTasksByName('buildMultDelegMultCon_P_P_Op', true)
+	dependsOn getRootProject().getTasksByName('buildMultDelegMultCon_PWP_P_Op', true)
+	dependsOn getRootProject().getTasksByName('buildOp_ProvInterface', true)
+	dependsOn getRootProject().getTasksByName('buildOp_ReqInterface', true)
+	dependsOn getRootProject().getTasksByName('buildOp_Prov_Req_Interface', true)
+	dependsOn getRootProject().getTasksByName('buildOp_Req_Deleg', true)
+	dependsOn getRootProject().getTasksByName('buildRecursiveDestruction', true)
+	dependsOn getRootProject().getTasksByName('buildDestructionPart', true)
+	dependsOn getRootProject().getTasksByName('buildDestructionPort', true)
+	dependsOn getRootProject().getTasksByName('buildDestructionInstances', true)
+}
+*/
+
+task generateAllTests() {
+	group 'Tests'
+	description 'generate all test suites (currently only fUML test suite can be generated automatically)'
+	
+	dependsOn getRootProject().getTasksByName('generateFUMLTestSuite', true)
+	//dependsOn getRootProject().getTasksByName('generatePSCSTestSuite', true)
+}
+
+task compileAllTests() {
+	group 'Tests'
+	description 'compile applications for all test suites (currently only fUML test suite can be compiled automatically)'
+	
+	dependsOn getRootProject().getTasksByName('compileFUMLTestSuite', true)
+	//dependsOn getRootProject().getTasksByName('compilePSCSTestSuite', true)
+}
+
+task buildAllTests() {
+	group 'Tests'
+	description 'generate and compile applictions for all test suites (currently only fUML test suite can be built automatically)'
+	
+	dependsOn getRootProject().getTasksByName('buildFUMLTestSuite', true)
+	//dependsOn getRootProject().getTasksByName('buildPSCSTestSuite', true)
 }
