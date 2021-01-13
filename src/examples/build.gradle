@@ -96,6 +96,11 @@ task compileAllBenchmarks() {
 	dependsOn getRootProject().getTasksByName('compileUMLBenchmark', true)
 }
 
+/*
+TODO
+These tasks are currently not executable since the amount of produced tasks (around 100)
+causes gradlew to crash
+
 task generateFUMLTestSuite() {
 	group 'Tests'
 	description 'generate test suite for fUML'	
@@ -113,7 +118,7 @@ task generateFUMLTestSuite() {
 			prefix = ''
 		}
 	
-		[  	'./fUMLExamples/TestSuite/ActionTest/model/',
+		[  	
 			'./fUMLExamples/TestSuite/ForkNodeTest/model/',
 			'./fUMLExamples/TestSuite/JoinNodeTest/model/',
 			'./fUMLExamples/TestSuite/MultiplePins/model/',
@@ -121,6 +126,7 @@ task generateFUMLTestSuite() {
 			'./fUMLExamples/TestSuite/SimpleBehaviorTest/model/',
 			'./fUMLExamples/TestSuite/TargetPinTest/model/',
 			'./fUMLExamples/TestSuite/TestModelImport/model/',
+			'./fUMLExamples/TestSuite/ActionTest/model/',
 			'./fUMLExamples/TestSuite/TestModelMain/model/'
 		].each { path ->
 			exec
@@ -161,11 +167,6 @@ task buildFUMLTestSuite() {
 	dependsOn getRootProject().getTasksByName('buildTargetPinTest', true)
 	dependsOn getRootProject().getTasksByName('buildTestModelMain', true)	
 }
-
-/*
-TODO
-These tasks are currently not executable since the amount of produced tasks (around 100)
-causes gradlew to crash
 
 task generatePSCSTestSuite() {
 	group 'Tests'
@@ -276,7 +277,6 @@ task buildPSCSTestSuite() {
 	dependsOn getRootProject().getTasksByName('buildDestructionPort', true)
 	dependsOn getRootProject().getTasksByName('buildDestructionInstances', true)
 }
-*/
 
 task generateAllTests() {
 	group 'Tests'
@@ -301,3 +301,4 @@ task buildAllTests() {
 	dependsOn getRootProject().getTasksByName('buildFUMLTestSuite', true)
 	//dependsOn getRootProject().getTasksByName('buildPSCSTestSuite', true)
 }
+*/
