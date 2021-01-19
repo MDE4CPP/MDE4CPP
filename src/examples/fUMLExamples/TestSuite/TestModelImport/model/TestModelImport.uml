@@ -78,6 +78,9 @@
     </ownedOperation>
   </packagedElement>
   <packagedElement xmi:type="uml:Interface" xmi:id="_GDyJQBJWEeuI2oJVG-zT2A" name="X">
+    <ownedAttribute xmi:id="_Eq3JoFpDEeuDlrhhJ0b14w" name="umlAttribute">
+      <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#InstanceSpecification"/>
+    </ownedAttribute>
     <ownedOperation xmi:id="_KD2FYBJWEeuI2oJVG-zT2A" name="publish"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Enumeration" xmi:id="_HxH0ABdoEeu6nLgfxtyxzQ" name="TestEnum" visibility="public">
