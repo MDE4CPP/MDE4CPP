@@ -14,8 +14,6 @@
       <details key="constraints" value="WellFormedSourceURI"/>
     </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="source" eType="#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="details" upperBound="-1"
-        eType="#//EStringToStringMapEntry" containment="true" resolveProxies="false"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="eModelElement" eType="#//EModelElement"
         transient="true" resolveProxies="false" eOpposite="#//EModelElement/eAnnotations">
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
@@ -28,6 +26,12 @@
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="references" upperBound="-1"
         eType="#//EObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="details" transient="true">
+      <eGenericType eClassifier="#//EMap">
+        <eTypeArguments eClassifier="#//EString"/>
+        <eTypeArguments eClassifier="#//EString"/>
+      </eGenericType>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EClass" eSuperTypes="#//EClassifier">
     <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
@@ -127,13 +131,11 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="eReferences" upperBound="-1"
-        eType="#//EReference" changeable="true" volatile="true" transient="true"
-        derived="true">
+        eType="#//EReference" volatile="true" transient="true" derived="true">
       <eAnnotations source="subsets" references="#//EClass/eStructuralFeatures"/>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="eAttributes" upperBound="-1"
-        eType="#//EAttribute" changeable="true" volatile="true" transient="true"
-        derived="true">
+        eType="#//EAttribute" volatile="true" transient="true" derived="true">
       <eAnnotations source="subsets" references="#//EClass/eStructuralFeatures"/>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="eAllContainments" upperBound="-1"
@@ -160,7 +162,7 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="eIDAttribute" eType="#//EAttribute"
-        changeable="true" volatile="true" transient="true" derived="true" resolveProxies="false"/>
+        volatile="true" transient="true" derived="true" resolveProxies="false"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="eStructuralFeatures" upperBound="-1"
         eType="#//EStructuralFeature" containment="true" resolveProxies="false" eOpposite="#//EStructuralFeature/eContainingClass">
       <eAnnotations source="union"/>
@@ -209,7 +211,7 @@
       </eGenericType>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultValue" eType="#//EJavaObject"
-        changeable="true" volatile="true" transient="true" derived="true"/>
+        volatile="true" transient="true" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="instanceTypeName" eType="#//EString"
         volatile="true" unsettable="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -532,7 +534,7 @@
         defaultValueLiteral="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="eOpposite" eType="#//EReference"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="eReferenceType" lowerBound="1"
-        eType="#//EClass" changeable="true" volatile="true" transient="true" derived="true"/>
+        eType="#//EClass" volatile="true" transient="true" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="eKeys" upperBound="-1"
         eType="#//EAttribute"/>
   </eClassifiers>
@@ -557,7 +559,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="transient" eType="#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultValueLiteral" eType="#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultValue" eType="#//EJavaObject"
-        changeable="true" volatile="true" transient="true" derived="true"/>
+        volatile="true" transient="true" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="unsettable" eType="#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="derived" eType="#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="featureID" eType="#//EInt"
@@ -587,7 +589,7 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="many" eType="#//EBoolean"
         changeable="false" volatile="true" transient="true" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="required" eType="#//EBoolean"
-        changeable="true" volatile="true" transient="true" derived="true"/>
+        volatile="true" transient="true" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="eType" eType="#//EClassifier"
         volatile="true" unsettable="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -647,7 +649,6 @@
       <details key="name" value="EChar:Object"/>
     </eAnnotations>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EDataType" name="EDate" instanceClassName="java.util.Date"/>
   <eClassifiers xsi:type="ecore:EDataType" name="EDiagnosticChain" instanceClassName="org.eclipse.emf.common.util.DiagnosticChain"
       serializable="false"/>
   <eClassifiers xsi:type="ecore:EDataType" name="EDouble" instanceClassName="double">
@@ -734,6 +735,12 @@
     </eAnnotations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EStringToStringMapEntry" instanceClassName="java.util.Map$Entry">
+    <eAnnotations source="http://sse.tu-ilmenau.de/codegen" references="../../../../unorderedMap_src_gen/model/std.ecore#//%http:%2F%2Fsse.tu-ilmenau.de%2Fcodegen%">
+      <details key="doNotGenerate" value="false"/>
+    </eAnnotations>
+    <eAnnotations source="comment">
+      <details key="comment" value="Map alias Class was  used in EAnnotation only. Hence, it is replaced by Map-Realization using EMap - Generic type"/>
+    </eAnnotations>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" eType="#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="#//EString"/>
   </eClassifiers>
@@ -756,7 +763,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="eTypeArguments" upperBound="-1"
         eType="#//EGenericType" containment="true" resolveProxies="false"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="eRawType" lowerBound="1"
-        eType="#//EClassifier" changeable="true" transient="true" derived="true"/>
+        eType="#//EClassifier" transient="true" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="eLowerBound" eType="#//EGenericType"
         containment="true" resolveProxies="false"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="eTypeParameter" eType="#//ETypeParameter"
