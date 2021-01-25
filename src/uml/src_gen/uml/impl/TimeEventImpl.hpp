@@ -63,7 +63,7 @@ namespace uml
 			when.integerValue() >= 0
 			*/
 			 
-			virtual bool when_non_negative(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool when_non_negative(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			
@@ -75,14 +75,14 @@ namespace uml
 			<p>From package UML::CommonBehavior.</p>
 			*/
 			 
-			virtual bool getIsRelative() const ;
+			virtual bool  getIsRelative() const ;
 			
 			/*!
 			Specifies whether the TimeEvent is specified as an absolute or relative time.
 			<p>From package UML::CommonBehavior.</p>
 			*/
 			 
-			virtual void setIsRelative (bool _isRelative); 
+			virtual void setIsRelative (bool  _isRelative); 
 			
 			
 			//*********************************

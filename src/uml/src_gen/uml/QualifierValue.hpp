@@ -38,24 +38,11 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Comment;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class InputPin;
-}
-
-namespace uml 
-{
 	class Property;
 }
 
@@ -64,6 +51,8 @@ namespace uml
 
 // enum includes
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -97,21 +86,21 @@ namespace uml
 			value.is(1,1)
 			*/
 			 
-			virtual bool multiplicity_of_qualifier(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool multiplicity_of_qualifier(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			The qualifier must be a qualifier of the Association end of the linkEndData that owns this QualifierValue.
 			linkEndData.end.qualifier->includes(qualifier)
 			*/
 			 
-			virtual bool qualifier_attribute(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool qualifier_attribute(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			The type of the value InputPin conforms to the type of the qualifier Property.
 			value.type.conformsTo(qualifier.type)
 			*/
 			 
-			virtual bool type_of_qualifier(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool type_of_qualifier(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			
 			//*********************************

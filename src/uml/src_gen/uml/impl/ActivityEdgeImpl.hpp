@@ -63,7 +63,7 @@ namespace uml
 			activity<>null implies source.containingActivity() = activity and target.containingActivity() = activity
 			*/
 			 
-			virtual bool source_and_target(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool source_and_target(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			

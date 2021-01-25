@@ -63,14 +63,14 @@ namespace uml
 			result.is(0,*)
 			*/
 			 
-			virtual bool multiplicity_of_result(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool multiplicity_of_result(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			The type of the result OutputPin is the classifier.
 			result.type = classifier
 			*/
 			 
-			virtual bool type_is_classifier(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool type_is_classifier(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			

@@ -223,13 +223,13 @@ std::shared_ptr<ecore::EClass> InitialNodeImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool InitialNodeImpl::control_edges(Any diagnostics,std::map <   Any, Any >  context)
+bool InitialNodeImpl::control_edges(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool InitialNodeImpl::no_incoming_edges(Any diagnostics,std::map <   Any, Any >  context)
+bool InitialNodeImpl::no_incoming_edges(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -422,9 +422,6 @@ void InitialNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

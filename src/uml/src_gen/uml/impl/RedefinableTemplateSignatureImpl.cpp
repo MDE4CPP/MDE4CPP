@@ -207,7 +207,7 @@ std::shared_ptr<Bag<uml::TemplateParameter> > RedefinableTemplateSignatureImpl::
 	throw "UnsupportedOperationException";
 }
 
-bool RedefinableTemplateSignatureImpl::redefines_parents(Any diagnostics,std::map <   Any, Any >  context)
+bool RedefinableTemplateSignatureImpl::redefines_parents(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -414,30 +414,14 @@ Any RedefinableTemplateSignatureImpl::eGet(int featureID, bool resolve, bool cor
 	switch(featureID)
 	{
 		case uml::umlPackage::REDEFINABLETEMPLATESIGNATURE_ATTRIBUTE_CLASSIFIER:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getClassifier().lock())); //20517
+			return eAny(getClassifier().lock()); //20517
 		case uml::umlPackage::REDEFINABLETEMPLATESIGNATURE_ATTRIBUTE_EXTENDEDSIGNATURE:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::RedefinableTemplateSignature>::iterator iter = m_extendedSignature->begin();
-			Bag<uml::RedefinableTemplateSignature>::iterator end = m_extendedSignature->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //20515
+			return eAny(getExtendedSignature()); //20515			
 		}
 		case uml::umlPackage::REDEFINABLETEMPLATESIGNATURE_ATTRIBUTE_INHERITEDPARAMETER:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::TemplateParameter>::iterator iter = m_inheritedParameter->begin();
-			Bag<uml::TemplateParameter>::iterator end = m_inheritedParameter->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //20516
+			return eAny(getInheritedParameter()); //20516			
 		}
 	}
 	Any result;
@@ -643,15 +627,8 @@ void RedefinableTemplateSignatureImpl::saveContent(std::shared_ptr<persistence::
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
-	
-
-		// Add references
-		std::shared_ptr<Bag<uml::RedefinableTemplateSignature>> extendedSignature_list = this->getExtendedSignature();
-		for (std::shared_ptr<uml::RedefinableTemplateSignature > object : *extendedSignature_list)
-		{ 
-			saveHandler->addReferences("extendedSignature", object);
-		}
-
+	// Add references
+		saveHandler->addReferences<uml::RedefinableTemplateSignature>("extendedSignature", this->getExtendedSignature());	
 	}
 	catch (std::exception& e)
 	{

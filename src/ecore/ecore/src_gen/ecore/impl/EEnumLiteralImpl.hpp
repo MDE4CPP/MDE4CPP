@@ -56,20 +56,20 @@ namespace ecore
 			// Attributes Getter Setter
 			//*********************************
 			 
-			virtual Any getInstance() const ;
+			virtual Any  getInstance() const ;
 			
 			 
-			virtual void setInstance (Any _instance); 
+			virtual void setInstance (Any  _instance); 
 			 
-			virtual std::string getLiteral() const ;
+			virtual std::string  getLiteral() const ;
 			
 			 
-			virtual void setLiteral (std::string _literal); 
+			virtual void setLiteral (std::string  _literal); 
 			 
-			virtual int getValue() const ;
+			virtual int  getValue() const ;
 			
 			 
-			virtual void setValue (int _value); 
+			virtual void setValue (int  _value); 
 			
 			
 			//*********************************

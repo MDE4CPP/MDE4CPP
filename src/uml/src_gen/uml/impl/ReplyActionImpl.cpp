@@ -285,13 +285,13 @@ std::shared_ptr<ecore::EClass> ReplyActionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ReplyActionImpl::event_on_reply_to_call_trigger(Any diagnostics,std::map <   Any, Any >  context)
+bool ReplyActionImpl::event_on_reply_to_call_trigger(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ReplyActionImpl::pins_match_parameter(Any diagnostics,std::map <   Any, Any >  context)
+bool ReplyActionImpl::pins_match_parameter(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -477,9 +477,11 @@ Any ReplyActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::REPLYACTION_ATTRIBUTE_REPLYTOCALL:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getReplyToCall())); //21127
+			return eAny(getReplyToCall()); //21127
 		case uml::umlPackage::REPLYACTION_ATTRIBUTE_REPLYVALUE:
 		{
+			return eAny(getReplyValue()); //21128			
+			/*
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::InputPin>::iterator iter = m_replyValue->begin();
 			Bag<uml::InputPin>::iterator end = m_replyValue->end();
@@ -489,9 +491,10 @@ Any ReplyActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 				iter++;
 			}
 			return eAny(tempList); //21128
+			*/
 		}
 		case uml::umlPackage::REPLYACTION_ATTRIBUTE_RETURNINFORMATION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getReturnInformation())); //21129
+			return eAny(getReturnInformation()); //21129
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -716,7 +719,6 @@ void ReplyActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'replyValue'
 		for (std::shared_ptr<uml::InputPin> replyValue : *this->getReplyValue()) 
 		{
@@ -729,11 +731,9 @@ void ReplyActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 		{
 			saveHandler->addReference(returnInformation, "returnInformation", returnInformation->eClass() != package->getInputPin_Class());
 		}
-	
 
-		// Add references
-		saveHandler->addReference("replyToCall", this->getReplyToCall());
-
+	// Add references
+		saveHandler->addReference("replyToCall", this->getReplyToCall());		 
 	}
 	catch (std::exception& e)
 	{

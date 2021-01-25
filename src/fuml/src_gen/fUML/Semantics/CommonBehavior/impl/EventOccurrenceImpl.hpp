@@ -52,13 +52,13 @@ virtual public EventOccurrence
 			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > getParameterValues() ;
 			
 			 
-			virtual bool match(std::shared_ptr<uml::Trigger>  trigger) ;
+			virtual bool match(std::shared_ptr<org.eclipse.uml2.uml.Trigger> trigger) ;
 			
 			 
-			virtual bool matchAny(std::shared_ptr<Bag<uml::Trigger> >  triggers) ;
+			virtual bool matchAny(std::shared_ptr<Bag<org.eclipse.uml2.uml.Trigger> > triggers) ;
 			
 			 
-			virtual void sendTo(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference>  target) ;
+			virtual void sendTo(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> target) ;
 			
 			
 			

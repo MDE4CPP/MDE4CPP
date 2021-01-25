@@ -427,25 +427,25 @@ std::shared_ptr<Bag<uml::UseCase> > UseCaseImpl::allIncludedUseCases()
 	throw "UnsupportedOperationException";
 }
 
-bool UseCaseImpl::binary_associations(Any diagnostics,std::map <   Any, Any >  context)
+bool UseCaseImpl::binary_associations(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool UseCaseImpl::cannot_include_self(Any diagnostics,std::map <   Any, Any >  context)
+bool UseCaseImpl::cannot_include_self(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool UseCaseImpl::must_have_name(Any diagnostics,std::map <   Any, Any >  context)
+bool UseCaseImpl::must_have_name(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool UseCaseImpl::no_association_to_use_case(Any diagnostics,std::map <   Any, Any >  context)
+bool UseCaseImpl::no_association_to_use_case(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -705,51 +705,19 @@ Any UseCaseImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::USECASE_ATTRIBUTE_EXTEND:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Extend>::iterator iter = m_extend->begin();
-			Bag<uml::Extend>::iterator end = m_extend->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //24841
+			return eAny(getExtend()); //24841			
 		}
 		case uml::umlPackage::USECASE_ATTRIBUTE_EXTENSIONPOINT:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ExtensionPoint>::iterator iter = m_extensionPoint->begin();
-			Bag<uml::ExtensionPoint>::iterator end = m_extensionPoint->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //24842
+			return eAny(getExtensionPoint()); //24842			
 		}
 		case uml::umlPackage::USECASE_ATTRIBUTE_INCLUDE:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Include>::iterator iter = m_include->begin();
-			Bag<uml::Include>::iterator end = m_include->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //24843
+			return eAny(getInclude()); //24843			
 		}
 		case uml::umlPackage::USECASE_ATTRIBUTE_SUBJECT:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Classifier>::iterator iter = m_subject->begin();
-			Bag<uml::Classifier>::iterator end = m_subject->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //24844
+			return eAny(getSubject()); //24844			
 		}
 	}
 	return BehavioredClassifierImpl::eGet(featureID, resolve, coreType);
@@ -1087,7 +1055,6 @@ void UseCaseImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'extend'
 		for (std::shared_ptr<uml::Extend> extend : *this->getExtend()) 
 		{
@@ -1105,15 +1072,9 @@ void UseCaseImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 		{
 			saveHandler->addReference(include, "include", include->eClass() != package->getInclude_Class());
 		}
-	
 
-		// Add references
-		std::shared_ptr<Bag<uml::Classifier>> subject_list = this->getSubject();
-		for (std::shared_ptr<uml::Classifier > object : *subject_list)
-		{ 
-			saveHandler->addReferences("subject", object);
-		}
-
+	// Add references
+		saveHandler->addReferences<uml::Classifier>("subject", this->getSubject());	
 	}
 	catch (std::exception& e)
 	{

@@ -47,7 +47,7 @@ namespace fUML::Semantics::CommonBehavior
 			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > getParameterValues() ;
 			
 			 
-			virtual bool match(std::shared_ptr<uml::Trigger>  trigger) ;
+			virtual bool match(std::shared_ptr<org.eclipse.uml2.uml.Trigger> trigger) ;
 			
 			
 			

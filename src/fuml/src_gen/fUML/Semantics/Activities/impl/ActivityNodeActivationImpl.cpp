@@ -143,12 +143,12 @@ std::shared_ptr<ecore::EClass> ActivityNodeActivationImpl::eStaticClass() const
 /*
 Getter & Setter for attribute running
 */
-bool ActivityNodeActivationImpl::isRunning() const 
+bool  ActivityNodeActivationImpl::isRunning() const 
 {
 	return m_running;
 }
 
-void ActivityNodeActivationImpl::setRunning(bool _running)
+void ActivityNodeActivationImpl::setRunning(bool  _running)
 {
 	m_running = _running;
 } 
@@ -158,7 +158,7 @@ void ActivityNodeActivationImpl::setRunning(bool _running)
 //*********************************
 // Operations
 //*********************************
-void ActivityNodeActivationImpl::addIncomingEdge(std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance>  edge)
+void ActivityNodeActivationImpl::addIncomingEdge(std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> edge)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -170,7 +170,7 @@ void ActivityNodeActivationImpl::addIncomingEdge(std::shared_ptr<fUML::Semantics
 	//end of body
 }
 
-void ActivityNodeActivationImpl::addOutgoingEdge(std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance>  edge)
+void ActivityNodeActivationImpl::addOutgoingEdge(std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> edge)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -182,7 +182,7 @@ void ActivityNodeActivationImpl::addOutgoingEdge(std::shared_ptr<fUML::Semantics
 	//end of body
 }
 
-void ActivityNodeActivationImpl::addToken(std::shared_ptr<fUML::Semantics::Activities::Token>  token)
+void ActivityNodeActivationImpl::addToken(std::shared_ptr<fUML::Semantics::Activities::Token> token)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -223,7 +223,7 @@ this->getHeldTokens()->push_back(token);
 	//end of body
 }
 
-void ActivityNodeActivationImpl::addTokens(std::shared_ptr<Bag<fUML::Semantics::Activities::Token> >  tokens)
+void ActivityNodeActivationImpl::addTokens(std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > tokens)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -260,7 +260,7 @@ void ActivityNodeActivationImpl::createNodeActivations()
 	//end of body
 }
 
-void ActivityNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token> >  incomingTokens)
+void ActivityNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > incomingTokens)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -302,7 +302,7 @@ std::shared_ptr<fUML::Semantics::Loci::Locus> ActivityNodeActivationImpl::getExe
 	//end of body
 }
 
-std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> ActivityNodeActivationImpl::getNodeActivation(std::shared_ptr<uml::ActivityNode>  node)
+std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> ActivityNodeActivationImpl::getNodeActivation(std::shared_ptr<org.eclipse.uml2.uml.ActivityNode> node)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -349,7 +349,7 @@ bool ActivityNodeActivationImpl::isReady()
 	//end of body
 }
 
-bool ActivityNodeActivationImpl::isSourceFor(std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance>  edgeInstances)
+bool ActivityNodeActivationImpl::isSourceFor(std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> edgeInstances)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -393,7 +393,7 @@ void ActivityNodeActivationImpl::receiveOffer()
 	//end of body
 }
 
-int ActivityNodeActivationImpl::removeToken(std::shared_ptr<fUML::Semantics::Activities::Token>  token)
+int ActivityNodeActivationImpl::removeToken(std::shared_ptr<fUML::Semantics::Activities::Token> token)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -469,7 +469,7 @@ void ActivityNodeActivationImpl::run()
 	//end of body
 }
 
-void ActivityNodeActivationImpl::sendOffers(std::shared_ptr<Bag<fUML::Semantics::Activities::Token> >  tokens)
+void ActivityNodeActivationImpl::sendOffers(std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > tokens)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -644,13 +644,13 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> Activity
 /*
 Getter & Setter for reference node
 */
-std::shared_ptr<uml::ActivityNode > ActivityNodeActivationImpl::getNode() const
+std::shared_ptr<org.eclipse.uml2.uml.ActivityNode > ActivityNodeActivationImpl::getNode() const
 {
 
     return m_node;
 }
 
-void ActivityNodeActivationImpl::setNode(std::shared_ptr<uml::ActivityNode> _node)
+void ActivityNodeActivationImpl::setNode(std::shared_ptr<org.eclipse.uml2.uml.ActivityNode> _node)
 {
     m_node = _node;
 }
@@ -708,9 +708,11 @@ Any ActivityNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType)
 	switch(featureID)
 	{
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_GROUP:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getGroup().lock())); //93
+			return eAny(getGroup().lock()); //93
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_HELDTOKENS:
 		{
+			return eAny(getHeldTokens()); //92			
+			/*
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<fUML::Semantics::Activities::Token>::iterator iter = m_heldTokens->begin();
 			Bag<fUML::Semantics::Activities::Token>::iterator end = m_heldTokens->end();
@@ -720,9 +722,12 @@ Any ActivityNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType)
 				iter++;
 			}
 			return eAny(tempList); //92
+			*/
 		}
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_INCOMINGEDGES:
 		{
+			return eAny(getIncomingEdges()); //91			
+			/*
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<fUML::Semantics::Activities::ActivityEdgeInstance>::iterator iter = m_incomingEdges->begin();
 			Bag<fUML::Semantics::Activities::ActivityEdgeInstance>::iterator end = m_incomingEdges->end();
@@ -732,11 +737,14 @@ Any ActivityNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType)
 				iter++;
 			}
 			return eAny(tempList); //91
+			*/
 		}
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_NODE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getNode())); //94
+			return eAny(getNode()); //94
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_OUTGOINGEDGES:
 		{
+			return eAny(getOutgoingEdges()); //90			
+			/*
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<fUML::Semantics::Activities::ActivityEdgeInstance>::iterator iter = m_outgoingEdges->begin();
 			Bag<fUML::Semantics::Activities::ActivityEdgeInstance>::iterator end = m_outgoingEdges->end();
@@ -746,6 +754,7 @@ Any ActivityNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType)
 				iter++;
 			}
 			return eAny(tempList); //90
+			*/
 		}
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_RUNNING:
 			return eAny(isRunning()); //95
@@ -859,7 +868,7 @@ bool ActivityNodeActivationImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::ActivityNode> _node = std::dynamic_pointer_cast<uml::ActivityNode>(_temp);
+			std::shared_ptr<org.eclipse.uml2.uml.ActivityNode> _node = std::dynamic_pointer_cast<org.eclipse.uml2.uml.ActivityNode>(_temp);
 			setNode(_node); //94
 			return true;
 		}
@@ -1049,7 +1058,7 @@ void ActivityNodeActivationImpl::resolveReferences(const int featureID, std::lis
 			if (references.size() == 1)
 			{
 				// Cast object to correct type
-				std::shared_ptr<uml::ActivityNode> _node = std::dynamic_pointer_cast<uml::ActivityNode>( references.front() );
+				std::shared_ptr<org.eclipse.uml2.uml.ActivityNode> _node = std::dynamic_pointer_cast<org.eclipse.uml2.uml.ActivityNode>( references.front() );
 				setNode(_node);
 			}
 			
@@ -1088,27 +1097,16 @@ void ActivityNodeActivationImpl::saveContent(std::shared_ptr<persistence::interf
 	try
 	{
 		std::shared_ptr<fUML::Semantics::Activities::ActivitiesPackage> package = fUML::Semantics::Activities::ActivitiesPackage::eInstance();
-
-	
 		// Add attributes
 		if ( this->eIsSet(package->getActivityNodeActivation_Attribute_running()) )
 		{
 			saveHandler->addAttribute("running", this->isRunning());
 		}
 
-		// Add references
-		std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> incomingEdges_list = this->getIncomingEdges();
-		for (std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance > object : *incomingEdges_list)
-		{ 
-			saveHandler->addReferences("incomingEdges", object);
-		}
-		saveHandler->addReference("node", this->getNode());
-		std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> outgoingEdges_list = this->getOutgoingEdges();
-		for (std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance > object : *outgoingEdges_list)
-		{ 
-			saveHandler->addReferences("outgoingEdges", object);
-		}
-
+	// Add references
+		saveHandler->addReferences<fUML::Semantics::Activities::ActivityEdgeInstance>("incomingEdges", this->getIncomingEdges());	
+		saveHandler->addReference("node", this->getNode());		
+		saveHandler->addReferences<fUML::Semantics::Activities::ActivityEdgeInstance>("outgoingEdges", this->getOutgoingEdges());	
 
 		//
 		// Add new tags (from references)

@@ -291,7 +291,7 @@ std::shared_ptr<ecore::EClass> CallOperationActionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool CallOperationActionImpl::type_target_pin(Any diagnostics,std::map <   Any, Any >  context)
+bool CallOperationActionImpl::type_target_pin(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -469,9 +469,9 @@ Any CallOperationActionImpl::eGet(int featureID, bool resolve, bool coreType) co
 	switch(featureID)
 	{
 		case uml::umlPackage::CALLOPERATIONACTION_ATTRIBUTE_OPERATION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOperation())); //3231
+			return eAny(getOperation()); //3231
 		case uml::umlPackage::CALLOPERATIONACTION_ATTRIBUTE_TARGET:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getTarget())); //3232
+			return eAny(getTarget()); //3232
 	}
 	return CallActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -646,18 +646,15 @@ void CallOperationActionImpl::saveContent(std::shared_ptr<persistence::interface
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'target'
 		std::shared_ptr<uml::InputPin > target = this->getTarget();
 		if (target != nullptr)
 		{
 			saveHandler->addReference(target, "target", target->eClass() != package->getInputPin_Class());
 		}
-	
 
-		// Add references
-		saveHandler->addReference("operation", this->getOperation());
-
+	// Add references
+		saveHandler->addReference("operation", this->getOperation());		 
 	}
 	catch (std::exception& e)
 	{

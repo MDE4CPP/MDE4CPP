@@ -128,7 +128,7 @@ std::shared_ptr<ecore::EClass> ParameterableElementImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ParameterableElementImpl::isCompatibleWith(std::shared_ptr<uml::ParameterableElement>  p)
+bool ParameterableElementImpl::isCompatibleWith(std::shared_ptr<uml::ParameterableElement> p)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -232,9 +232,9 @@ Any ParameterableElementImpl::eGet(int featureID, bool resolve, bool coreType) c
 	switch(featureID)
 	{
 		case uml::umlPackage::PARAMETERABLEELEMENT_ATTRIBUTE_OWNINGTEMPLATEPARAMETER:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOwningTemplateParameter().lock())); //1783
+			return eAny(getOwningTemplateParameter().lock()); //1783
 		case uml::umlPackage::PARAMETERABLEELEMENT_ATTRIBUTE_TEMPLATEPARAMETER:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getTemplateParameter())); //1784
+			return eAny(getTemplateParameter()); //1784
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -376,11 +376,8 @@ void ParameterableElementImpl::saveContent(std::shared_ptr<persistence::interfac
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
-	
-
-		// Add references
-		saveHandler->addReference("templateParameter", this->getTemplateParameter());
-
+	// Add references
+		saveHandler->addReference("templateParameter", this->getTemplateParameter());		 
 	}
 	catch (std::exception& e)
 	{

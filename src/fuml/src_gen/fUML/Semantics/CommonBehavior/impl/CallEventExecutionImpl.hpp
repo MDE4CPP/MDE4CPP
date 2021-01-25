@@ -56,7 +56,7 @@ namespace fUML::Semantics::CommonBehavior
 			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > getInputParameterValues() ;
 			
 			 
-			virtual std::shared_ptr<uml::Operation> getOperation() ;
+			virtual std::shared_ptr<org.eclipse.uml2.uml.Operation> getOperation() ;
 			
 			 
 			virtual bool isCallerSuspended() ;
@@ -71,7 +71,7 @@ namespace fUML::Semantics::CommonBehavior
 			virtual void releaseCaller() ;
 			
 			 
-			virtual void setOutputParameterValues(std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> >  parameterValues) ;
+			virtual void setOutputParameterValues(std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > parameterValues) ;
 			
 			 
 			virtual void suspendCaller() ;
@@ -85,10 +85,10 @@ namespace fUML::Semantics::CommonBehavior
 			// Attributes Getter Setter
 			//*********************************
 			 
-			virtual bool getCallerSuspended() const ;
+			virtual bool  getCallerSuspended() const ;
 			
 			 
-			virtual void setCallerSuspended (bool _callerSuspended); 
+			virtual void setCallerSuspended (bool  _callerSuspended); 
 			
 			
 			//*********************************

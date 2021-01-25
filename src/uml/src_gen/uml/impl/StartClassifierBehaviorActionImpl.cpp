@@ -266,13 +266,13 @@ std::shared_ptr<ecore::EClass> StartClassifierBehaviorActionImpl::eStaticClass()
 //*********************************
 // Operations
 //*********************************
-bool StartClassifierBehaviorActionImpl::multiplicity(Any diagnostics,std::map <   Any, Any >  context)
+bool StartClassifierBehaviorActionImpl::multiplicity(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool StartClassifierBehaviorActionImpl::type_has_classifier(Any diagnostics,std::map <   Any, Any >  context)
+bool StartClassifierBehaviorActionImpl::type_has_classifier(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -414,7 +414,7 @@ Any StartClassifierBehaviorActionImpl::eGet(int featureID, bool resolve, bool co
 	switch(featureID)
 	{
 		case uml::umlPackage::STARTCLASSIFIERBEHAVIORACTION_ATTRIBUTE_OBJECT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getObject())); //21827
+			return eAny(getObject()); //21827
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -541,15 +541,12 @@ void StartClassifierBehaviorActionImpl::saveContent(std::shared_ptr<persistence:
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'object'
 		std::shared_ptr<uml::InputPin > object = this->getObject();
 		if (object != nullptr)
 		{
 			saveHandler->addReference(object, "object", object->eClass() != package->getInputPin_Class());
 		}
-	
-
 	}
 	catch (std::exception& e)
 	{

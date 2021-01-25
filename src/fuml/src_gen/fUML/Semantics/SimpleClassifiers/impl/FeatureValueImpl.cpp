@@ -114,12 +114,12 @@ std::shared_ptr<ecore::EClass> FeatureValueImpl::eStaticClass() const
 /*
 Getter & Setter for attribute position
 */
-int FeatureValueImpl::getPosition() const 
+int  FeatureValueImpl::getPosition() const 
 {
 	return m_position;
 }
 
-void FeatureValueImpl::setPosition(int _position)
+void FeatureValueImpl::setPosition(int  _position)
 {
 	m_position = _position;
 } 
@@ -152,7 +152,7 @@ return newValue;
 	//end of body
 }
 
-bool FeatureValueImpl::hasEqualValues(std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue>  other)
+bool FeatureValueImpl::hasEqualValues(std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> other)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -217,13 +217,13 @@ bool FeatureValueImpl::hasEqualValues(std::shared_ptr<fUML::Semantics::SimpleCla
 /*
 Getter & Setter for reference feature
 */
-std::shared_ptr<uml::StructuralFeature > FeatureValueImpl::getFeature() const
+std::shared_ptr<org.eclipse.uml2.uml.StructuralFeature > FeatureValueImpl::getFeature() const
 {
 //assert(m_feature);
     return m_feature;
 }
 
-void FeatureValueImpl::setFeature(std::shared_ptr<uml::StructuralFeature> _feature)
+void FeatureValueImpl::setFeature(std::shared_ptr<org.eclipse.uml2.uml.StructuralFeature> _feature)
 {
     m_feature = _feature;
 }
@@ -276,11 +276,13 @@ Any FeatureValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_FEATURE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getFeature())); //552
+			return eAny(getFeature()); //552
 		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_POSITION:
 			return eAny(getPosition()); //551
 		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_VALUES:
 		{
+			return eAny(getValues()); //550			
+			/*
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<fUML::Semantics::Values::Value>::iterator iter = m_values->begin();
 			Bag<fUML::Semantics::Values::Value>::iterator end = m_values->end();
@@ -290,6 +292,7 @@ Any FeatureValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 				iter++;
 			}
 			return eAny(tempList); //550
+			*/
 		}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
@@ -315,7 +318,7 @@ bool FeatureValueImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::StructuralFeature> _feature = std::dynamic_pointer_cast<uml::StructuralFeature>(_temp);
+			std::shared_ptr<org.eclipse.uml2.uml.StructuralFeature> _feature = std::dynamic_pointer_cast<org.eclipse.uml2.uml.StructuralFeature>(_temp);
 			setFeature(_feature); //552
 			return true;
 		}
@@ -464,7 +467,7 @@ void FeatureValueImpl::resolveReferences(const int featureID, std::list<std::sha
 			if (references.size() == 1)
 			{
 				// Cast object to correct type
-				std::shared_ptr<uml::StructuralFeature> _feature = std::dynamic_pointer_cast<uml::StructuralFeature>( references.front() );
+				std::shared_ptr<org.eclipse.uml2.uml.StructuralFeature> _feature = std::dynamic_pointer_cast<org.eclipse.uml2.uml.StructuralFeature>( references.front() );
 				setFeature(_feature);
 			}
 			
@@ -488,17 +491,14 @@ void FeatureValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	try
 	{
 		std::shared_ptr<fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage> package = fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance();
-
-	
 		// Add attributes
 		if ( this->eIsSet(package->getFeatureValue_Attribute_position()) )
 		{
 			saveHandler->addAttribute("position", this->getPosition());
 		}
 
-		// Add references
-		saveHandler->addReference("feature", this->getFeature());
-
+	// Add references
+		saveHandler->addReference("feature", this->getFeature());		
 
 		//
 		// Add new tags (from references)

@@ -38,49 +38,15 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Comment;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
-	class IntervalConstraint;
-}
-
-namespace uml 
-{
 	class Namespace;
-}
-
-namespace uml 
-{
 	class Package;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class TemplateParameter;
-}
-
-namespace uml 
-{
 	class ValueSpecification;
 }
 
@@ -90,6 +56,8 @@ namespace uml
 // enum includes
 #include "uml/VisibilityKind.hpp"
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -123,7 +91,7 @@ namespace uml
 			constrainedElement->size() = 1
 			*/
 			 
-			virtual bool has_one_constrainedElement(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool has_one_constrainedElement(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			
 			//*********************************
@@ -134,14 +102,14 @@ namespace uml
 			<p>From package UML::Values.</p>
 			*/
 			 
-			virtual bool getFirstEvent() const = 0;
+			virtual bool  getFirstEvent() const = 0;
 			
 			/*!
 			The value of firstEvent is related to the constrainedElement. If firstEvent is true, then the corresponding observation event is the first time instant the execution enters the constrainedElement. If firstEvent is false, then the corresponding observation event is the last time instant the execution is within the constrainedElement.
 			<p>From package UML::Values.</p>
 			*/
 			 
-			virtual void setFirstEvent (bool _firstEvent)= 0; 
+			virtual void setFirstEvent (bool  _firstEvent)= 0; 
 			
 			//*********************************
 			// Reference
@@ -157,7 +125,7 @@ namespace uml
 			<p>From package UML::Values.</p>
 			*/
 			 
-			bool m_firstEvent = true;
+			bool  m_firstEvent = true;
 			
 			
 			//*********************************

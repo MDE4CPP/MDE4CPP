@@ -328,9 +328,6 @@ void ObservationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

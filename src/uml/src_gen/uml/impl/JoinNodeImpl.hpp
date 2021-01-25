@@ -65,14 +65,14 @@ namespace uml
 			endif
 			*/
 			 
-			virtual bool incoming_object_flow(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool incoming_object_flow(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			A JoinNode has one outgoing ActivityEdge.
 			outgoing->size() = 1
 			*/
 			 
-			virtual bool one_outgoing_edge(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool one_outgoing_edge(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			
@@ -84,14 +84,14 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			 
-			virtual bool getIsCombineDuplicate() const ;
+			virtual bool  getIsCombineDuplicate() const ;
 			
 			/*!
 			Indicates whether incoming tokens having objects with the same identity are combined into one by the JoinNode.
 			<p>From package UML::Activities.</p>
 			*/
 			 
-			virtual void setIsCombineDuplicate (bool _isCombineDuplicate); 
+			virtual void setIsCombineDuplicate (bool  _isCombineDuplicate); 
 			
 			
 			//*********************************

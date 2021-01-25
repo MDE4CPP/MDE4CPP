@@ -213,15 +213,7 @@ Any EModelElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case ecore::ecorePackage::EMODELELEMENT_ATTRIBUTE_EANNOTATIONS:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ecore::EAnnotation>::iterator iter = m_eAnnotations->begin();
-			Bag<ecore::EAnnotation>::iterator end = m_eAnnotations->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //373
+			return eAny(getEAnnotations()); //363			
 		}
 	}
 	return EObjectImpl::eGet(featureID, resolve, coreType);
@@ -231,7 +223,7 @@ bool EModelElementImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ecore::ecorePackage::EMODELELEMENT_ATTRIBUTE_EANNOTATIONS:
-			return getEAnnotations() != nullptr; //373
+			return getEAnnotations() != nullptr; //363
 	}
 	return EObjectImpl::internalEIsSet(featureID);
 }
@@ -358,14 +350,11 @@ void EModelElementImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	try
 	{
 		std::shared_ptr<ecore::ecorePackage> package = ecore::ecorePackage::eInstance();
-
 		// Save 'eAnnotations'
 		for (std::shared_ptr<ecore::EAnnotation> eAnnotations : *this->getEAnnotations()) 
 		{
 			saveHandler->addReference(eAnnotations, "eAnnotations", eAnnotations->eClass() != package->getEAnnotation_Class());
 		}
-	
-
 	}
 	catch (std::exception& e)
 	{

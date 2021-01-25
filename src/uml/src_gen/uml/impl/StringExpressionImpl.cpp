@@ -255,13 +255,13 @@ std::shared_ptr<ecore::EClass> StringExpressionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool StringExpressionImpl::operands(Any diagnostics,std::map <   Any, Any >  context)
+bool StringExpressionImpl::operands(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool StringExpressionImpl::subexpressions(Any diagnostics,std::map <   Any, Any >  context)
+bool StringExpressionImpl::subexpressions(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -402,18 +402,10 @@ Any StringExpressionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::STRINGEXPRESSION_ATTRIBUTE_OWNINGEXPRESSION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOwningExpression().lock())); //22419
+			return eAny(getOwningExpression().lock()); //22419
 		case uml::umlPackage::STRINGEXPRESSION_ATTRIBUTE_SUBEXPRESSION:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::StringExpression>::iterator iter = m_subExpression->begin();
-			Bag<uml::StringExpression>::iterator end = m_subExpression->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //22420
+			return eAny(getSubExpression()); //22420			
 		}
 	}
 	Any result;
@@ -616,14 +608,11 @@ void StringExpressionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'subExpression'
 		for (std::shared_ptr<uml::StringExpression> subExpression : *this->getSubExpression()) 
 		{
 			saveHandler->addReference(subExpression, "subExpression", subExpression->eClass() != package->getStringExpression_Class());
 		}
-	
-
 	}
 	catch (std::exception& e)
 	{

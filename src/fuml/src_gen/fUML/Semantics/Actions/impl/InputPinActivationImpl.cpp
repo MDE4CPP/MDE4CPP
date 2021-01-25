@@ -284,9 +284,6 @@ void InputPinActivationImpl::saveContent(std::shared_ptr<persistence::interfaces
 	try
 	{
 		std::shared_ptr<fUML::Semantics::Actions::ActionsPackage> package = fUML::Semantics::Actions::ActionsPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

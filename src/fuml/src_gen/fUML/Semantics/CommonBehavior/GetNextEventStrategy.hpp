@@ -35,17 +35,11 @@ namespace fUML
 	class fUMLFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace fUML::Semantics::CommonBehavior 
 {
 	class ObjectActivation;
 }
-
-namespace fUML::Semantics::Loci 
-{
-	class SemanticStrategy;
-}
-
 namespace fUML::Semantics::SimpleClassifiers 
 {
 	class SignalInstance;
@@ -56,6 +50,8 @@ namespace fUML::Semantics::SimpleClassifiers
 
 // enum includes
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace fUML::Semantics::CommonBehavior 
@@ -84,7 +80,7 @@ namespace fUML::Semantics::CommonBehavior
 			virtual std::string getName() = 0;
 			
 			 
-			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> retrieveNextEvent(std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation>  objectActivation) = 0;
+			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> retrieveNextEvent(std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> objectActivation) = 0;
 			
 			
 			//*********************************

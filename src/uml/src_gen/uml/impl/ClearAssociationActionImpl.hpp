@@ -63,14 +63,14 @@ namespace uml
 			object.is(1,1)
 			*/
 			 
-			virtual bool multiplicity(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool multiplicity(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			The type of the InputPin must conform to the type of at least one of the memberEnds of the association.
 			association.memberEnd->exists(self.object.type.conformsTo(type))
 			*/
 			 
-			virtual bool same_type(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool same_type(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			

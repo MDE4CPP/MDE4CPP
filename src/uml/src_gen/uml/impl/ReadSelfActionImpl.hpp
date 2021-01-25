@@ -63,14 +63,14 @@ namespace uml
 			_'context' <> null
 			*/
 			 
-			virtual bool contained(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool contained(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			The multiplicity of the result OutputPin is 1..1.
 			result.is(1,1)
 			*/
 			 
-			virtual bool multiplicity(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool multiplicity(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			If the ReadSelfAction is contained in an Behavior that is acting as a method, then the Operation of the method must not be static.
@@ -78,14 +78,14 @@ namespace uml
 			behavior.specification<>null implies not behavior.specification.isStatic
 			*/
 			 
-			virtual bool not_static(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool not_static(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			The type of the result OutputPin is the context Classifier.
 			result.type = _'context'
 			*/
 			 
-			virtual bool type(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool type(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			

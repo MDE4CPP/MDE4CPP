@@ -104,8 +104,8 @@ ExecutionImpl::ExecutionImpl(const ExecutionImpl & obj):ExecutionImpl()
 
 	m_locus  = obj.getLocus();
 
-	std::shared_ptr<Bag<uml::Classifier>> _types = obj.getTypes();
-	m_types.reset(new Bag<uml::Classifier>(*(obj.getTypes().get())));
+	std::shared_ptr<Bag<org.eclipse.uml2.uml.Classifier>> _types = obj.getTypes();
+	m_types.reset(new Bag<org.eclipse.uml2.uml.Classifier>(*(obj.getTypes().get())));
 
 
 	//Clone references with containment (deep copy)
@@ -211,7 +211,7 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > Execution
 	//end of body
 }
 
-std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> ExecutionImpl::getParameterValue(std::shared_ptr<uml::Parameter>  parameter)
+std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> ExecutionImpl::getParameterValue(std::shared_ptr<org.eclipse.uml2.uml.Parameter> parameter)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -233,7 +233,7 @@ std::shared_ptr<fUML::Semantics::Values::Value> ExecutionImpl::new_()
 	throw "UnsupportedOperationException";
 }
 
-void ExecutionImpl::setParameterValue(std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue>  parameterValue)
+void ExecutionImpl::setParameterValue(std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> parameterValue)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -266,7 +266,7 @@ void ExecutionImpl::terminate()
 /*
 Getter & Setter for reference behavior
 */
-std::shared_ptr<uml::Behavior > ExecutionImpl::getBehavior() const
+std::shared_ptr<org.eclipse.uml2.uml.Behavior > ExecutionImpl::getBehavior() const
 {
 	//generated from getterbody annotation
 if(!m_behavior)
@@ -278,7 +278,7 @@ return m_behavior;
 	//end of body
 }
 
-void ExecutionImpl::setBehavior(std::shared_ptr<uml::Behavior> _behavior)
+void ExecutionImpl::setBehavior(std::shared_ptr<org.eclipse.uml2.uml.Behavior> _behavior)
 {
     m_behavior = _behavior;
 }
@@ -348,11 +348,13 @@ Any ExecutionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_ATTRIBUTE_BEHAVIOR:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getBehavior())); //466
+			return eAny(getBehavior()); //466
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_ATTRIBUTE_CONTEXT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getContext())); //464
+			return eAny(getContext()); //464
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_ATTRIBUTE_PARAMETERVALUES:
 		{
+			return eAny(getParameterValues()); //465			
+			/*
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<fUML::Semantics::CommonBehavior::ParameterValue>::iterator iter = m_parameterValues->begin();
 			Bag<fUML::Semantics::CommonBehavior::ParameterValue>::iterator end = m_parameterValues->end();
@@ -362,6 +364,7 @@ Any ExecutionImpl::eGet(int featureID, bool resolve, bool coreType) const
 				iter++;
 			}
 			return eAny(tempList); //465
+			*/
 		}
 	}
 	return fUML::Semantics::StructuredClassifiers::ObjectImpl::eGet(featureID, resolve, coreType);
@@ -387,7 +390,7 @@ bool ExecutionImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Behavior> _behavior = std::dynamic_pointer_cast<uml::Behavior>(_temp);
+			std::shared_ptr<org.eclipse.uml2.uml.Behavior> _behavior = std::dynamic_pointer_cast<org.eclipse.uml2.uml.Behavior>(_temp);
 			setBehavior(_behavior); //466
 			return true;
 		}
@@ -535,7 +538,7 @@ void ExecutionImpl::resolveReferences(const int featureID, std::list<std::shared
 			if (references.size() == 1)
 			{
 				// Cast object to correct type
-				std::shared_ptr<uml::Behavior> _behavior = std::dynamic_pointer_cast<uml::Behavior>( references.front() );
+				std::shared_ptr<org.eclipse.uml2.uml.Behavior> _behavior = std::dynamic_pointer_cast<org.eclipse.uml2.uml.Behavior>( references.front() );
 				setBehavior(_behavior);
 			}
 			
@@ -588,12 +591,9 @@ void ExecutionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	{
 		std::shared_ptr<fUML::Semantics::CommonBehavior::CommonBehaviorPackage> package = fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance();
 
-	
-
-		// Add references
-		saveHandler->addReference("behavior", this->getBehavior());
-		saveHandler->addReference("context", this->getContext());
-
+	// Add references
+		saveHandler->addReference("behavior", this->getBehavior());		
+		saveHandler->addReference("context", this->getContext());		 
 
 		//
 		// Add new tags (from references)

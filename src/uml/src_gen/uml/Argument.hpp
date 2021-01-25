@@ -35,7 +35,7 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Object;
@@ -46,6 +46,8 @@ namespace uml
 // enum includes
 
 #include "ecore/EModelElement.hpp"
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -81,10 +83,10 @@ namespace uml
 			// Attributes Getter Setter
 			//*********************************
 			 
-			virtual std::string getName() const = 0;
+			virtual std::string  getName() const = 0;
 			
 			 
-			virtual void setName (std::string _name)= 0; 
+			virtual void setName (std::string  _name)= 0; 
 			
 			//*********************************
 			// Reference
@@ -102,7 +104,7 @@ namespace uml
 			// Attribute Members
 			//*********************************
 			 
-			std::string m_name = "";
+			std::string  m_name = "";
 			
 			
 			//*********************************

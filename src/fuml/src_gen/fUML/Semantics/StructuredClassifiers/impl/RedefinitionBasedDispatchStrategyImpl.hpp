@@ -44,10 +44,10 @@ namespace fUML::Semantics::StructuredClassifiers
 			// Operations
 			//*********************************
 			 
-			virtual bool operationsMatch(std::shared_ptr<uml::Operation>  ownedOperation,std::shared_ptr<uml::Operation>  baseOperation) ;
+			virtual bool operationsMatch(std::shared_ptr<org.eclipse.uml2.uml.Operation> ownedOperation,std::shared_ptr<org.eclipse.uml2.uml.Operation> baseOperation) ;
 			
 			 
-			virtual std::shared_ptr<uml::Behavior> retrieveMethod(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object>  object,std::shared_ptr<uml::Operation>  operation) ;
+			virtual std::shared_ptr<org.eclipse.uml2.uml.Behavior> retrieveMethod(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> object,std::shared_ptr<org.eclipse.uml2.uml.Operation> operation) ;
 			
 			
 			

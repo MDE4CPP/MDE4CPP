@@ -345,6 +345,8 @@ Any InteractionFragmentImpl::eGet(int featureID, bool resolve, bool coreType) co
 	{
 		case uml::umlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_COVERED:
 		{
+			return eAny(getCovered()); //1219			
+			/*
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Lifeline>::iterator iter = m_covered->begin();
 			Bag<uml::Lifeline>::iterator end = m_covered->end();
@@ -354,13 +356,16 @@ Any InteractionFragmentImpl::eGet(int featureID, bool resolve, bool coreType) co
 				iter++;
 			}
 			return eAny(tempList); //1219
+			*/
 		}
 		case uml::umlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_ENCLOSINGINTERACTION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEnclosingInteraction().lock())); //12111
+			return eAny(getEnclosingInteraction().lock()); //12111
 		case uml::umlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_ENCLOSINGOPERAND:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEnclosingOperand().lock())); //12110
+			return eAny(getEnclosingOperand().lock()); //12110
 		case uml::umlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_GENERALORDERING:
 		{
+			return eAny(getGeneralOrdering()); //12112			
+			/*
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::GeneralOrdering>::iterator iter = m_generalOrdering->begin();
 			Bag<uml::GeneralOrdering>::iterator end = m_generalOrdering->end();
@@ -370,6 +375,7 @@ Any InteractionFragmentImpl::eGet(int featureID, bool resolve, bool coreType) co
 				iter++;
 			}
 			return eAny(tempList); //12112
+			*/
 		}
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
@@ -631,21 +637,14 @@ void InteractionFragmentImpl::saveContent(std::shared_ptr<persistence::interface
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'generalOrdering'
 		for (std::shared_ptr<uml::GeneralOrdering> generalOrdering : *this->getGeneralOrdering()) 
 		{
 			saveHandler->addReference(generalOrdering, "generalOrdering", generalOrdering->eClass() != package->getGeneralOrdering_Class());
 		}
-	
 
-		// Add references
-		std::shared_ptr<Bag<uml::Lifeline>> covered_list = this->getCovered();
-		for (std::shared_ptr<uml::Lifeline > object : *covered_list)
-		{ 
-			saveHandler->addReferences("covered", object);
-		}
-
+	// Add references
+		saveHandler->addReferences<uml::Lifeline>("covered", this->getCovered());	
 	}
 	catch (std::exception& e)
 	{

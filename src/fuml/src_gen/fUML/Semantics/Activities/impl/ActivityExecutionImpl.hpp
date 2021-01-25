@@ -72,14 +72,14 @@ namespace fUML::Semantics::Activities
 			virtual void setActivationGroup(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> _activationGroup) ;
 			
 			
-			virtual std::shared_ptr<uml::Activity > getActivity() const ;
+			virtual std::shared_ptr<org.eclipse.uml2.uml.Activity > getActivity() const ;
 			
 			
-			virtual void setActivity(std::shared_ptr<uml::Activity> _activity) ;
+			virtual void setActivity(std::shared_ptr<org.eclipse.uml2.uml.Activity> _activity) ;
 			
 			/*Additional Setter for 'Execution::behavior' redefined by reference 'activity'*/
 			
-			virtual void setBehavior(std::shared_ptr<uml::Behavior> _behavior) ;
+			virtual void setBehavior(std::shared_ptr<org.eclipse.uml2.uml.Behavior> _behavior) ;
 			
 							
 			

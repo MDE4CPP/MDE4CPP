@@ -64,14 +64,14 @@ namespace uml
 			isControl implies isControlType
 			*/
 			 
-			virtual bool control_pins(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool control_pins(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			Pin multiplicity is not unique.
 			not isUnique
 			*/
 			 
-			virtual bool not_unique(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool not_unique(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			
@@ -83,14 +83,14 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual bool getIsControl() const ;
+			virtual bool  getIsControl() const ;
 			
 			/*!
 			Indicates whether the Pin provides data to the Action or just controls how the Action executes.
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual void setIsControl (bool _isControl); 
+			virtual void setIsControl (bool  _isControl); 
 			
 			
 			//*********************************

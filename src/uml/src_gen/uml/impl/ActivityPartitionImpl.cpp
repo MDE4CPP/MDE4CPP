@@ -222,12 +222,12 @@ std::shared_ptr<ecore::EClass> ActivityPartitionImpl::eStaticClass() const
 /*
 Getter & Setter for attribute isDimension
 */
-bool ActivityPartitionImpl::getIsDimension() const 
+bool  ActivityPartitionImpl::getIsDimension() const 
 {
 	return m_isDimension;
 }
 
-void ActivityPartitionImpl::setIsDimension(bool _isDimension)
+void ActivityPartitionImpl::setIsDimension(bool  _isDimension)
 {
 	m_isDimension = _isDimension;
 } 
@@ -237,12 +237,12 @@ void ActivityPartitionImpl::setIsDimension(bool _isDimension)
 /*
 Getter & Setter for attribute isExternal
 */
-bool ActivityPartitionImpl::getIsExternal() const 
+bool  ActivityPartitionImpl::getIsExternal() const 
 {
 	return m_isExternal;
 }
 
-void ActivityPartitionImpl::setIsExternal(bool _isExternal)
+void ActivityPartitionImpl::setIsExternal(bool  _isExternal)
 {
 	m_isExternal = _isExternal;
 } 
@@ -252,25 +252,25 @@ void ActivityPartitionImpl::setIsExternal(bool _isExternal)
 //*********************************
 // Operations
 //*********************************
-bool ActivityPartitionImpl::dimension_not_contained(Any diagnostics,std::map <   Any, Any >  context)
+bool ActivityPartitionImpl::dimension_not_contained(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ActivityPartitionImpl::represents_classifier(Any diagnostics,std::map <   Any, Any >  context)
+bool ActivityPartitionImpl::represents_classifier(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ActivityPartitionImpl::represents_property(Any diagnostics,std::map <   Any, Any >  context)
+bool ActivityPartitionImpl::represents_property(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ActivityPartitionImpl::represents_property_and_is_contained(Any diagnostics,std::map <   Any, Any >  context)
+bool ActivityPartitionImpl::represents_property_and_is_contained(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -523,15 +523,7 @@ Any ActivityPartitionImpl::eGet(int featureID, bool resolve, bool coreType) cons
 	{
 		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_EDGE:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ActivityEdge>::iterator iter = m_edge->begin();
-			Bag<uml::ActivityEdge>::iterator end = m_edge->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //1320
+			return eAny(getEdge()); //1320			
 		}
 		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_ISDIMENSION:
 			return eAny(getIsDimension()); //1314
@@ -539,32 +531,16 @@ Any ActivityPartitionImpl::eGet(int featureID, bool resolve, bool coreType) cons
 			return eAny(getIsExternal()); //1315
 		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_NODE:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ActivityNode>::iterator iter = m_node->begin();
-			Bag<uml::ActivityNode>::iterator end = m_node->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //1316
+			return eAny(getNode()); //1316			
 		}
 		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_REPRESENTS:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getRepresents())); //1317
+			return eAny(getRepresents()); //1317
 		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_SUBPARTITION:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ActivityPartition>::iterator iter = m_subpartition->begin();
-			Bag<uml::ActivityPartition>::iterator end = m_subpartition->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //1318
+			return eAny(getSubpartition()); //1318			
 		}
 		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_SUPERPARTITION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSuperPartition().lock())); //1319
+			return eAny(getSuperPartition().lock()); //1319
 	}
 	return ActivityGroupImpl::eGet(featureID, resolve, coreType);
 }
@@ -928,13 +904,11 @@ void ActivityPartitionImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'subpartition'
 		for (std::shared_ptr<uml::ActivityPartition> subpartition : *this->getSubpartition()) 
 		{
 			saveHandler->addReference(subpartition, "subpartition", subpartition->eClass() != package->getActivityPartition_Class());
 		}
-	
 		// Add attributes
 		if ( this->eIsSet(package->getActivityPartition_Attribute_isDimension()) )
 		{
@@ -946,19 +920,10 @@ void ActivityPartitionImpl::saveContent(std::shared_ptr<persistence::interfaces:
 			saveHandler->addAttribute("isExternal", this->getIsExternal());
 		}
 
-		// Add references
-		std::shared_ptr<Bag<uml::ActivityEdge>> edge_list = this->getEdge();
-		for (std::shared_ptr<uml::ActivityEdge > object : *edge_list)
-		{ 
-			saveHandler->addReferences("edge", object);
-		}
-		std::shared_ptr<Bag<uml::ActivityNode>> node_list = this->getNode();
-		for (std::shared_ptr<uml::ActivityNode > object : *node_list)
-		{ 
-			saveHandler->addReferences("node", object);
-		}
-		saveHandler->addReference("represents", this->getRepresents());
-
+	// Add references
+		saveHandler->addReferences<uml::ActivityEdge>("edge", this->getEdge());	
+		saveHandler->addReferences<uml::ActivityNode>("node", this->getNode());	
+		saveHandler->addReference("represents", this->getRepresents());		 
 	}
 	catch (std::exception& e)
 	{

@@ -36,124 +36,25 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Activity;
-}
-
-namespace uml 
-{
 	class ActivityEdge;
-}
-
-namespace uml 
-{
-	class ActivityGroup;
-}
-
-namespace uml 
-{
-	class ActivityNode;
-}
-
-namespace uml 
-{
 	class ActivityPartition;
-}
-
-namespace uml 
-{
 	class Classifier;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
 	class Constraint;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class ElementImport;
-}
-
-namespace uml 
-{
 	class ExceptionHandler;
-}
-
-namespace uml 
-{
 	class ExpansionNode;
-}
-
-namespace uml 
-{
 	class InputPin;
-}
-
-namespace uml 
-{
 	class InterruptibleActivityRegion;
-}
-
-namespace uml 
-{
-	class NamedElement;
-}
-
-namespace uml 
-{
-	class Namespace;
-}
-
-namespace uml 
-{
 	class OutputPin;
-}
-
-namespace uml 
-{
 	class PackageImport;
-}
-
-namespace uml 
-{
 	class PackageableElement;
-}
-
-namespace uml 
-{
-	class RedefinableElement;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
-	class StructuredActivityNode;
-}
-
-namespace uml 
-{
 	class Variable;
 }
 
@@ -165,6 +66,8 @@ namespace uml
 
 #include "uml/VisibilityKind.hpp"
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -202,14 +105,14 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual uml::ExpansionKind getMode() const = 0;
+			virtual uml::ExpansionKind  getMode() const = 0;
 			
 			/*!
 			The mode in which the ExpansionRegion executes its contents. If parallel, executions are concurrent. If iterative, executions are sequential. If stream, a stream of values flows into a single execution.
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual void setMode (uml::ExpansionKind _mode)= 0; 
+			virtual void setMode (uml::ExpansionKind  _mode)= 0; 
 			
 			//*********************************
 			// Reference
@@ -241,7 +144,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			uml::ExpansionKind m_mode = ExpansionKind::ITERATIVE;
+			uml::ExpansionKind  m_mode = ExpansionKind::ITERATIVE;
 			
 			
 			//*********************************

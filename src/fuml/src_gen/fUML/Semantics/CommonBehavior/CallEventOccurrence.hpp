@@ -36,34 +36,19 @@ namespace fUML
 	class fUMLFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace fUML::Semantics::CommonBehavior 
 {
 	class CallEventExecution;
-}
-
-namespace fUML::Semantics::CommonBehavior 
-{
-	class EventOccurrence;
-}
-
-namespace uml 
-{
-	class Operation;
-}
-
-namespace fUML::Semantics::CommonBehavior 
-{
 	class ParameterValue;
 }
-
 namespace fUML::Semantics::StructuredClassifiers 
 {
 	class Reference;
 }
-
 namespace uml 
 {
+	class Operation;
 	class Trigger;
 }
 
@@ -72,6 +57,11 @@ namespace uml
 
 // enum includes
 
+
+//Includes from codegen annotation
+#include <memory>
+#include "uml/Trigger.hpp"
+#include "uml/CallEvent.hpp"
 
 //*********************************
 namespace fUML::Semantics::CommonBehavior 
@@ -97,19 +87,19 @@ namespace fUML::Semantics::CommonBehavior
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<uml::Operation> getOperation() = 0;
+			virtual std::shared_ptr<org.eclipse.uml2.uml.Operation> getOperation() = 0;
 			
 			 
 			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > getParameterValues() = 0;
 			
 			 
-			virtual bool match(std::shared_ptr<uml::Trigger>  trigger) = 0;
+			virtual bool match(std::shared_ptr<org.eclipse.uml2.uml.Trigger> trigger) = 0;
 			
 			 
 			virtual void releaseCaller() = 0;
 			
 			 
-			virtual void setOutputParameterValues(std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> >  parameterValues) = 0;
+			virtual void setOutputParameterValues(std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > parameterValues) = 0;
 			
 			
 			//*********************************

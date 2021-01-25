@@ -136,7 +136,8 @@ void CommonBehaviorPackageImpl::initializeCallEventExecutionContent()
 	
 	m_callEventExecution_Attribute_callerSuspended = getCallEventExecution_Attribute_callerSuspended();
 	m_callEventExecution_Attribute_callerSuspended->setName("callerSuspended");
-	m_callEventExecution_Attribute_callerSuspended->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+	
+		m_callEventExecution_Attribute_callerSuspended->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_callEventExecution_Attribute_callerSuspended->setLowerBound(0);
 	m_callEventExecution_Attribute_callerSuspended->setUpperBound(1);
 	m_callEventExecution_Attribute_callerSuspended->setTransient(false);

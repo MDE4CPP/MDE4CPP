@@ -335,7 +335,7 @@ std::shared_ptr<ecore::EClass> ProfileImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<ecore::EObject> ProfileImpl::create(std::shared_ptr<uml::Classifier>  classifier)
+std::shared_ptr<ecore::EObject> ProfileImpl::create(std::shared_ptr<uml::Classifier> classifier)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -347,7 +347,7 @@ std::shared_ptr<ecore::EPackage> ProfileImpl::define()
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<ecore::EPackage> ProfileImpl::define(std::map <   std::string, std::string >  options,Any diagnostics,std::map <   Any, Any >  context)
+std::shared_ptr<ecore::EPackage> ProfileImpl::define(std::map <  std::string ,  std::string > options,Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -359,7 +359,7 @@ std::shared_ptr<ecore::EPackage> ProfileImpl::getDefinition()
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<ecore::ENamedElement> ProfileImpl::getDefinition(std::shared_ptr<uml::NamedElement>  namedElement)
+std::shared_ptr<ecore::ENamedElement> ProfileImpl::getDefinition(std::shared_ptr<uml::NamedElement> namedElement)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -389,13 +389,13 @@ bool ProfileImpl::isDefined()
 	throw "UnsupportedOperationException";
 }
 
-bool ProfileImpl::metaclass_reference_not_specialized(Any diagnostics,std::map <   Any, Any >  context)
+bool ProfileImpl::metaclass_reference_not_specialized(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ProfileImpl::references_same_metamodel(Any diagnostics,std::map <   Any, Any >  context)
+bool ProfileImpl::references_same_metamodel(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -573,27 +573,11 @@ Any ProfileImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::PROFILE_ATTRIBUTE_METACLASSREFERENCE:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ElementImport>::iterator iter = m_metaclassReference->begin();
-			Bag<uml::ElementImport>::iterator end = m_metaclassReference->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //18328
+			return eAny(getMetaclassReference()); //18328			
 		}
 		case uml::umlPackage::PROFILE_ATTRIBUTE_METAMODELREFERENCE:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::PackageImport>::iterator iter = m_metamodelReference->begin();
-			Bag<uml::PackageImport>::iterator end = m_metamodelReference->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //18329
+			return eAny(getMetamodelReference()); //18329			
 		}
 	}
 	return PackageImpl::eGet(featureID, resolve, coreType);
@@ -815,20 +799,9 @@ void ProfileImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
-	
-
-		// Add references
-		std::shared_ptr<Bag<uml::ElementImport>> metaclassReference_list = this->getMetaclassReference();
-		for (std::shared_ptr<uml::ElementImport > object : *metaclassReference_list)
-		{ 
-			saveHandler->addReferences("metaclassReference", object);
-		}
-		std::shared_ptr<Bag<uml::PackageImport>> metamodelReference_list = this->getMetamodelReference();
-		for (std::shared_ptr<uml::PackageImport > object : *metamodelReference_list)
-		{ 
-			saveHandler->addReferences("metamodelReference", object);
-		}
-
+	// Add references
+		saveHandler->addReferences<uml::ElementImport>("metaclassReference", this->getMetaclassReference());	
+		saveHandler->addReferences<uml::PackageImport>("metamodelReference", this->getMetamodelReference());	
 	}
 	catch (std::exception& e)
 	{

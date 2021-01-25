@@ -36,20 +36,18 @@ namespace fUML
 	class fUMLFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace fUML::Semantics::SimpleClassifiers 
 {
 	class FeatureValue;
 }
-
-namespace uml 
-{
-	class StructuralFeature;
-}
-
 namespace fUML::Semantics::Values 
 {
 	class Value;
+}
+namespace uml 
+{
+	class StructuralFeature;
 }
 
 // base class includes
@@ -57,6 +55,10 @@ namespace fUML::Semantics::Values
 // enum includes
 
 #include "ecore/EModelElement.hpp"
+
+//Includes from codegen annotation
+#include "uml/StructuralFeature.hpp"
+#include "fUML/Semantics/Values/ValuesPackage.hpp"
 
 //*********************************
 namespace fUML::Semantics::SimpleClassifiers 
@@ -86,26 +88,26 @@ namespace fUML::Semantics::SimpleClassifiers
 			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> _copy() = 0;
 			
 			 
-			virtual bool hasEqualValues(std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue>  other) = 0;
+			virtual bool hasEqualValues(std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> other) = 0;
 			
 			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
 			 
-			virtual int getPosition() const = 0;
+			virtual int  getPosition() const = 0;
 			
 			 
-			virtual void setPosition (int _position)= 0; 
+			virtual void setPosition (int  _position)= 0; 
 			
 			//*********************************
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<uml::StructuralFeature > getFeature() const = 0;
+			virtual std::shared_ptr<org.eclipse.uml2.uml.StructuralFeature > getFeature() const = 0;
 			
 			
-			virtual void setFeature(std::shared_ptr<uml::StructuralFeature> _feature) = 0;
+			virtual void setFeature(std::shared_ptr<org.eclipse.uml2.uml.StructuralFeature> _feature) = 0;
 			
 			
 			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value>> getValues() const = 0;
@@ -118,14 +120,14 @@ namespace fUML::Semantics::SimpleClassifiers
 			// Attribute Members
 			//*********************************
 			 
-			int m_position = 0;
+			int  m_position = 0;
 			
 			
 			//*********************************
 			// Reference Members
 			//*********************************
 			
-			std::shared_ptr<uml::StructuralFeature > m_feature;
+			std::shared_ptr<org.eclipse.uml2.uml.StructuralFeature > m_feature;
 			mutable std::shared_ptr<Bag<fUML::Semantics::Values::Value>> m_values;
 
 		public:

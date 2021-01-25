@@ -734,7 +734,8 @@ void umlPackageImpl::initializeAcceptEventActionContent()
 	
 	m_acceptEventAction_Attribute_isUnmarshall = getAcceptEventAction_Attribute_isUnmarshall();
 	m_acceptEventAction_Attribute_isUnmarshall->setName("isUnmarshall");
-	m_acceptEventAction_Attribute_isUnmarshall->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+	
+		m_acceptEventAction_Attribute_isUnmarshall->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_acceptEventAction_Attribute_isUnmarshall->setLowerBound(1);
 	m_acceptEventAction_Attribute_isUnmarshall->setUpperBound(1);
 	m_acceptEventAction_Attribute_isUnmarshall->setTransient(false);
@@ -944,7 +945,8 @@ void umlPackageImpl::initializeActionContent()
 	
 	m_action_Attribute_isLocallyReentrant = getAction_Attribute_isLocallyReentrant();
 	m_action_Attribute_isLocallyReentrant->setName("isLocallyReentrant");
-	m_action_Attribute_isLocallyReentrant->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+	
+		m_action_Attribute_isLocallyReentrant->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_action_Attribute_isLocallyReentrant->setLowerBound(1);
 	m_action_Attribute_isLocallyReentrant->setUpperBound(1);
 	m_action_Attribute_isLocallyReentrant->setTransient(false);
@@ -1297,7 +1299,8 @@ void umlPackageImpl::initializeActivityContent()
 	
 	m_activity_Attribute_isReadOnly = getActivity_Attribute_isReadOnly();
 	m_activity_Attribute_isReadOnly->setName("isReadOnly");
-	m_activity_Attribute_isReadOnly->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+	
+		m_activity_Attribute_isReadOnly->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_activity_Attribute_isReadOnly->setLowerBound(1);
 	m_activity_Attribute_isReadOnly->setUpperBound(1);
 	m_activity_Attribute_isReadOnly->setTransient(false);
@@ -1317,7 +1320,8 @@ void umlPackageImpl::initializeActivityContent()
 	}
 	m_activity_Attribute_isSingleExecution = getActivity_Attribute_isSingleExecution();
 	m_activity_Attribute_isSingleExecution->setName("isSingleExecution");
-	m_activity_Attribute_isSingleExecution->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+	
+		m_activity_Attribute_isSingleExecution->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_activity_Attribute_isSingleExecution->setLowerBound(1);
 	m_activity_Attribute_isSingleExecution->setUpperBound(1);
 	m_activity_Attribute_isSingleExecution->setTransient(false);
@@ -2462,7 +2466,8 @@ void umlPackageImpl::initializeActivityPartitionContent()
 	
 	m_activityPartition_Attribute_isDimension = getActivityPartition_Attribute_isDimension();
 	m_activityPartition_Attribute_isDimension->setName("isDimension");
-	m_activityPartition_Attribute_isDimension->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+	
+		m_activityPartition_Attribute_isDimension->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_activityPartition_Attribute_isDimension->setLowerBound(1);
 	m_activityPartition_Attribute_isDimension->setUpperBound(1);
 	m_activityPartition_Attribute_isDimension->setTransient(false);
@@ -2482,7 +2487,8 @@ void umlPackageImpl::initializeActivityPartitionContent()
 	}
 	m_activityPartition_Attribute_isExternal = getActivityPartition_Attribute_isExternal();
 	m_activityPartition_Attribute_isExternal->setName("isExternal");
-	m_activityPartition_Attribute_isExternal->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+	
+		m_activityPartition_Attribute_isExternal->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_activityPartition_Attribute_isExternal->setLowerBound(1);
 	m_activityPartition_Attribute_isExternal->setUpperBound(1);
 	m_activityPartition_Attribute_isExternal->setTransient(false);
@@ -2808,7 +2814,8 @@ void umlPackageImpl::initializeAddStructuralFeatureValueActionContent()
 	
 	m_addStructuralFeatureValueAction_Attribute_isReplaceAll = getAddStructuralFeatureValueAction_Attribute_isReplaceAll();
 	m_addStructuralFeatureValueAction_Attribute_isReplaceAll->setName("isReplaceAll");
-	m_addStructuralFeatureValueAction_Attribute_isReplaceAll->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+	
+		m_addStructuralFeatureValueAction_Attribute_isReplaceAll->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_addStructuralFeatureValueAction_Attribute_isReplaceAll->setLowerBound(1);
 	m_addStructuralFeatureValueAction_Attribute_isReplaceAll->setUpperBound(1);
 	m_addStructuralFeatureValueAction_Attribute_isReplaceAll->setTransient(false);
@@ -2918,7 +2925,8 @@ void umlPackageImpl::initializeAddVariableValueActionContent()
 	
 	m_addVariableValueAction_Attribute_isReplaceAll = getAddVariableValueAction_Attribute_isReplaceAll();
 	m_addVariableValueAction_Attribute_isReplaceAll->setName("isReplaceAll");
-	m_addVariableValueAction_Attribute_isReplaceAll->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+	
+		m_addVariableValueAction_Attribute_isReplaceAll->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_addVariableValueAction_Attribute_isReplaceAll->setLowerBound(1);
 	m_addVariableValueAction_Attribute_isReplaceAll->setUpperBound(1);
 	m_addVariableValueAction_Attribute_isReplaceAll->setTransient(false);
@@ -3036,7 +3044,8 @@ void umlPackageImpl::initializeArgumentContent()
 	
 	m_argument_Attribute_name = getArgument_Attribute_name();
 	m_argument_Attribute_name->setName("name");
-	m_argument_Attribute_name->setEType(ecore::ecorePackage::eInstance()->getEString_Class());
+	
+		m_argument_Attribute_name->setEType(ecore::ecorePackage::eInstance()->getEString_Class());
 	m_argument_Attribute_name->setLowerBound(0);
 	m_argument_Attribute_name->setUpperBound(1);
 	m_argument_Attribute_name->setTransient(false);
@@ -3089,7 +3098,8 @@ void umlPackageImpl::initializeArtifactContent()
 	
 	m_artifact_Attribute_fileName = getArtifact_Attribute_fileName();
 	m_artifact_Attribute_fileName->setName("fileName");
-	m_artifact_Attribute_fileName->setEType(types::typesPackage::eInstance()->getString_Class());
+	
+		m_artifact_Attribute_fileName->setEType(types::typesPackage::eInstance()->getString_Class());
 	m_artifact_Attribute_fileName->setLowerBound(0);
 	m_artifact_Attribute_fileName->setUpperBound(1);
 	m_artifact_Attribute_fileName->setTransient(false);
@@ -3302,7 +3312,8 @@ void umlPackageImpl::initializeAssociationContent()
 	
 	m_association_Attribute_isDerived = getAssociation_Attribute_isDerived();
 	m_association_Attribute_isDerived->setName("isDerived");
-	m_association_Attribute_isDerived->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+	
+		m_association_Attribute_isDerived->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_association_Attribute_isDerived->setLowerBound(1);
 	m_association_Attribute_isDerived->setUpperBound(1);
 	m_association_Attribute_isDerived->setTransient(false);
@@ -3643,7 +3654,8 @@ void umlPackageImpl::initializeBehaviorContent()
 	
 	m_behavior_Attribute_isReentrant = getBehavior_Attribute_isReentrant();
 	m_behavior_Attribute_isReentrant->setName("isReentrant");
-	m_behavior_Attribute_isReentrant->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+	
+		m_behavior_Attribute_isReentrant->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_behavior_Attribute_isReentrant->setLowerBound(0);
 	m_behavior_Attribute_isReentrant->setUpperBound(1);
 	m_behavior_Attribute_isReentrant->setTransient(false);
@@ -4014,7 +4026,8 @@ void umlPackageImpl::initializeBehavioralFeatureContent()
 	
 	m_behavioralFeature_Attribute_concurrency = getBehavioralFeature_Attribute_concurrency();
 	m_behavioralFeature_Attribute_concurrency->setName("concurrency");
-	m_behavioralFeature_Attribute_concurrency->setEType(getCallConcurrencyKind_Class());
+	
+		m_behavioralFeature_Attribute_concurrency->setEType(getCallConcurrencyKind_Class());
 	m_behavioralFeature_Attribute_concurrency->setLowerBound(1);
 	m_behavioralFeature_Attribute_concurrency->setUpperBound(1);
 	m_behavioralFeature_Attribute_concurrency->setTransient(false);
@@ -4034,7 +4047,8 @@ void umlPackageImpl::initializeBehavioralFeatureContent()
 	}
 	m_behavioralFeature_Attribute_isAbstract = getBehavioralFeature_Attribute_isAbstract();
 	m_behavioralFeature_Attribute_isAbstract->setName("isAbstract");
-	m_behavioralFeature_Attribute_isAbstract->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+	
+		m_behavioralFeature_Attribute_isAbstract->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_behavioralFeature_Attribute_isAbstract->setLowerBound(1);
 	m_behavioralFeature_Attribute_isAbstract->setUpperBound(1);
 	m_behavioralFeature_Attribute_isAbstract->setTransient(false);
@@ -4469,7 +4483,8 @@ void umlPackageImpl::initializeCallActionContent()
 	
 	m_callAction_Attribute_isSynchronous = getCallAction_Attribute_isSynchronous();
 	m_callAction_Attribute_isSynchronous->setName("isSynchronous");
-	m_callAction_Attribute_isSynchronous->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+	
+		m_callAction_Attribute_isSynchronous->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_callAction_Attribute_isSynchronous->setLowerBound(1);
 	m_callAction_Attribute_isSynchronous->setUpperBound(1);
 	m_callAction_Attribute_isSynchronous->setTransient(false);
@@ -4844,7 +4859,8 @@ void umlPackageImpl::initializeClassContent()
 	
 	m_class_Attribute_isActive = getClass_Attribute_isActive();
 	m_class_Attribute_isActive->setName("isActive");
-	m_class_Attribute_isActive->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+	
+		m_class_Attribute_isActive->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_class_Attribute_isActive->setLowerBound(1);
 	m_class_Attribute_isActive->setUpperBound(1);
 	m_class_Attribute_isActive->setTransient(false);
@@ -5097,7 +5113,8 @@ void umlPackageImpl::initializeClassifierContent()
 	
 	m_classifier_Attribute_isAbstract = getClassifier_Attribute_isAbstract();
 	m_classifier_Attribute_isAbstract->setName("isAbstract");
-	m_classifier_Attribute_isAbstract->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+	
+		m_classifier_Attribute_isAbstract->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_classifier_Attribute_isAbstract->setLowerBound(1);
 	m_classifier_Attribute_isAbstract->setUpperBound(1);
 	m_classifier_Attribute_isAbstract->setTransient(false);
@@ -5117,7 +5134,8 @@ void umlPackageImpl::initializeClassifierContent()
 	}
 	m_classifier_Attribute_isFinalSpecialization = getClassifier_Attribute_isFinalSpecialization();
 	m_classifier_Attribute_isFinalSpecialization->setName("isFinalSpecialization");
-	m_classifier_Attribute_isFinalSpecialization->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+	
+		m_classifier_Attribute_isFinalSpecialization->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_classifier_Attribute_isFinalSpecialization->setLowerBound(1);
 	m_classifier_Attribute_isFinalSpecialization->setUpperBound(1);
 	m_classifier_Attribute_isFinalSpecialization->setTransient(false);
@@ -5832,7 +5850,8 @@ void umlPackageImpl::initializeClassifierTemplateParameterContent()
 	
 	m_classifierTemplateParameter_Attribute_allowSubstitutable = getClassifierTemplateParameter_Attribute_allowSubstitutable();
 	m_classifierTemplateParameter_Attribute_allowSubstitutable->setName("allowSubstitutable");
-	m_classifierTemplateParameter_Attribute_allowSubstitutable->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+	
+		m_classifierTemplateParameter_Attribute_allowSubstitutable->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_classifierTemplateParameter_Attribute_allowSubstitutable->setLowerBound(1);
 	m_classifierTemplateParameter_Attribute_allowSubstitutable->setUpperBound(1);
 	m_classifierTemplateParameter_Attribute_allowSubstitutable->setTransient(false);
@@ -6656,7 +6675,8 @@ void umlPackageImpl::initializeCombinedFragmentContent()
 	
 	m_combinedFragment_Attribute_interactionOperator = getCombinedFragment_Attribute_interactionOperator();
 	m_combinedFragment_Attribute_interactionOperator->setName("interactionOperator");
-	m_combinedFragment_Attribute_interactionOperator->setEType(getInteractionOperatorKind_Class());
+	
+		m_combinedFragment_Attribute_interactionOperator->setEType(getInteractionOperatorKind_Class());
 	m_combinedFragment_Attribute_interactionOperator->setLowerBound(1);
 	m_combinedFragment_Attribute_interactionOperator->setUpperBound(1);
 	m_combinedFragment_Attribute_interactionOperator->setTransient(false);
@@ -6812,7 +6832,8 @@ void umlPackageImpl::initializeCommentContent()
 	
 	m_comment_Attribute_body = getComment_Attribute_body();
 	m_comment_Attribute_body->setName("body");
-	m_comment_Attribute_body->setEType(types::typesPackage::eInstance()->getString_Class());
+	
+		m_comment_Attribute_body->setEType(types::typesPackage::eInstance()->getString_Class());
 	m_comment_Attribute_body->setLowerBound(0);
 	m_comment_Attribute_body->setUpperBound(1);
 	m_comment_Attribute_body->setTransient(false);
@@ -6876,7 +6897,8 @@ void umlPackageImpl::initializeComponentContent()
 	
 	m_component_Attribute_isIndirectlyInstantiated = getComponent_Attribute_isIndirectlyInstantiated();
 	m_component_Attribute_isIndirectlyInstantiated->setName("isIndirectlyInstantiated");
-	m_component_Attribute_isIndirectlyInstantiated->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+	
+		m_component_Attribute_isIndirectlyInstantiated->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_component_Attribute_isIndirectlyInstantiated->setLowerBound(1);
 	m_component_Attribute_isIndirectlyInstantiated->setUpperBound(1);
 	m_component_Attribute_isIndirectlyInstantiated->setTransient(false);
@@ -7204,7 +7226,8 @@ void umlPackageImpl::initializeConditionalNodeContent()
 	
 	m_conditionalNode_Attribute_isAssured = getConditionalNode_Attribute_isAssured();
 	m_conditionalNode_Attribute_isAssured->setName("isAssured");
-	m_conditionalNode_Attribute_isAssured->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+	
+		m_conditionalNode_Attribute_isAssured->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_conditionalNode_Attribute_isAssured->setLowerBound(1);
 	m_conditionalNode_Attribute_isAssured->setUpperBound(1);
 	m_conditionalNode_Attribute_isAssured->setTransient(false);
@@ -7224,7 +7247,8 @@ void umlPackageImpl::initializeConditionalNodeContent()
 	}
 	m_conditionalNode_Attribute_isDeterminate = getConditionalNode_Attribute_isDeterminate();
 	m_conditionalNode_Attribute_isDeterminate->setName("isDeterminate");
-	m_conditionalNode_Attribute_isDeterminate->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+	
+		m_conditionalNode_Attribute_isDeterminate->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_conditionalNode_Attribute_isDeterminate->setLowerBound(1);
 	m_conditionalNode_Attribute_isDeterminate->setUpperBound(1);
 	m_conditionalNode_Attribute_isDeterminate->setTransient(false);
@@ -7647,7 +7671,8 @@ void umlPackageImpl::initializeConnectorContent()
 	
 	m_connector_Attribute_kind = getConnector_Attribute_kind();
 	m_connector_Attribute_kind->setName("kind");
-	m_connector_Attribute_kind->setEType(getConnectorKind_Class());
+	
+		m_connector_Attribute_kind->setEType(getConnectorKind_Class());
 	m_connector_Attribute_kind->setLowerBound(1);
 	m_connector_Attribute_kind->setUpperBound(1);
 	m_connector_Attribute_kind->setTransient(true);
@@ -8322,7 +8347,8 @@ void umlPackageImpl::initializeContinuationContent()
 	
 	m_continuation_Attribute_setting = getContinuation_Attribute_setting();
 	m_continuation_Attribute_setting->setName("setting");
-	m_continuation_Attribute_setting->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+	
+		m_continuation_Attribute_setting->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_continuation_Attribute_setting->setLowerBound(1);
 	m_continuation_Attribute_setting->setUpperBound(1);
 	m_continuation_Attribute_setting->setTransient(false);
@@ -9387,7 +9413,8 @@ void umlPackageImpl::initializeDeploymentSpecificationContent()
 	
 	m_deploymentSpecification_Attribute_deploymentLocation = getDeploymentSpecification_Attribute_deploymentLocation();
 	m_deploymentSpecification_Attribute_deploymentLocation->setName("deploymentLocation");
-	m_deploymentSpecification_Attribute_deploymentLocation->setEType(types::typesPackage::eInstance()->getString_Class());
+	
+		m_deploymentSpecification_Attribute_deploymentLocation->setEType(types::typesPackage::eInstance()->getString_Class());
 	m_deploymentSpecification_Attribute_deploymentLocation->setLowerBound(0);
 	m_deploymentSpecification_Attribute_deploymentLocation->setUpperBound(1);
 	m_deploymentSpecification_Attribute_deploymentLocation->setTransient(false);
@@ -9407,7 +9434,8 @@ void umlPackageImpl::initializeDeploymentSpecificationContent()
 	}
 	m_deploymentSpecification_Attribute_executionLocation = getDeploymentSpecification_Attribute_executionLocation();
 	m_deploymentSpecification_Attribute_executionLocation->setName("executionLocation");
-	m_deploymentSpecification_Attribute_executionLocation->setEType(types::typesPackage::eInstance()->getString_Class());
+	
+		m_deploymentSpecification_Attribute_executionLocation->setEType(types::typesPackage::eInstance()->getString_Class());
 	m_deploymentSpecification_Attribute_executionLocation->setLowerBound(0);
 	m_deploymentSpecification_Attribute_executionLocation->setUpperBound(1);
 	m_deploymentSpecification_Attribute_executionLocation->setTransient(false);
@@ -9594,7 +9622,8 @@ void umlPackageImpl::initializeDestroyObjectActionContent()
 	
 	m_destroyObjectAction_Attribute_isDestroyLinks = getDestroyObjectAction_Attribute_isDestroyLinks();
 	m_destroyObjectAction_Attribute_isDestroyLinks->setName("isDestroyLinks");
-	m_destroyObjectAction_Attribute_isDestroyLinks->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+	
+		m_destroyObjectAction_Attribute_isDestroyLinks->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_destroyObjectAction_Attribute_isDestroyLinks->setLowerBound(1);
 	m_destroyObjectAction_Attribute_isDestroyLinks->setUpperBound(1);
 	m_destroyObjectAction_Attribute_isDestroyLinks->setTransient(false);
@@ -9614,7 +9643,8 @@ void umlPackageImpl::initializeDestroyObjectActionContent()
 	}
 	m_destroyObjectAction_Attribute_isDestroyOwnedObjects = getDestroyObjectAction_Attribute_isDestroyOwnedObjects();
 	m_destroyObjectAction_Attribute_isDestroyOwnedObjects->setName("isDestroyOwnedObjects");
-	m_destroyObjectAction_Attribute_isDestroyOwnedObjects->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+	
+		m_destroyObjectAction_Attribute_isDestroyOwnedObjects->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_destroyObjectAction_Attribute_isDestroyOwnedObjects->setLowerBound(1);
 	m_destroyObjectAction_Attribute_isDestroyOwnedObjects->setUpperBound(1);
 	m_destroyObjectAction_Attribute_isDestroyOwnedObjects->setTransient(false);
@@ -9910,7 +9940,8 @@ void umlPackageImpl::initializeDurationConstraintContent()
 	
 	m_durationConstraint_Attribute_firstEvent = getDurationConstraint_Attribute_firstEvent();
 	m_durationConstraint_Attribute_firstEvent->setName("firstEvent");
-	m_durationConstraint_Attribute_firstEvent->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
+	
+		m_durationConstraint_Attribute_firstEvent->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_durationConstraint_Attribute_firstEvent->setLowerBound(0);
 	m_durationConstraint_Attribute_firstEvent->setUpperBound(2);
 	m_durationConstraint_Attribute_firstEvent->setTransient(false);
@@ -10006,7 +10037,8 @@ void umlPackageImpl::initializeDurationObservationContent()
 	
 	m_durationObservation_Attribute_firstEvent = getDurationObservation_Attribute_firstEvent();
 	m_durationObservation_Attribute_firstEvent->setName("firstEvent");
-	m_durationObservation_Attribute_firstEvent->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
+	
+		m_durationObservation_Attribute_firstEvent->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_durationObservation_Attribute_firstEvent->setLowerBound(0);
 	m_durationObservation_Attribute_firstEvent->setUpperBound(2);
 	m_durationObservation_Attribute_firstEvent->setTransient(false);
@@ -10750,7 +10782,8 @@ void umlPackageImpl::initializeElementImportContent()
 	
 	m_elementImport_Attribute_alias = getElementImport_Attribute_alias();
 	m_elementImport_Attribute_alias->setName("alias");
-	m_elementImport_Attribute_alias->setEType(types::typesPackage::eInstance()->getString_Class());
+	
+		m_elementImport_Attribute_alias->setEType(types::typesPackage::eInstance()->getString_Class());
 	m_elementImport_Attribute_alias->setLowerBound(0);
 	m_elementImport_Attribute_alias->setUpperBound(1);
 	m_elementImport_Attribute_alias->setTransient(false);
@@ -10770,7 +10803,8 @@ void umlPackageImpl::initializeElementImportContent()
 	}
 	m_elementImport_Attribute_visibility = getElementImport_Attribute_visibility();
 	m_elementImport_Attribute_visibility->setName("visibility");
-	m_elementImport_Attribute_visibility->setEType(getVisibilityKind_Class());
+	
+		m_elementImport_Attribute_visibility->setEType(getVisibilityKind_Class());
 	m_elementImport_Attribute_visibility->setLowerBound(1);
 	m_elementImport_Attribute_visibility->setUpperBound(1);
 	m_elementImport_Attribute_visibility->setTransient(false);
@@ -11591,7 +11625,8 @@ void umlPackageImpl::initializeExpansionRegionContent()
 	
 	m_expansionRegion_Attribute_mode = getExpansionRegion_Attribute_mode();
 	m_expansionRegion_Attribute_mode->setName("mode");
-	m_expansionRegion_Attribute_mode->setEType(getExpansionKind_Class());
+	
+		m_expansionRegion_Attribute_mode->setEType(getExpansionKind_Class());
 	m_expansionRegion_Attribute_mode->setLowerBound(1);
 	m_expansionRegion_Attribute_mode->setUpperBound(1);
 	m_expansionRegion_Attribute_mode->setTransient(false);
@@ -11672,7 +11707,8 @@ void umlPackageImpl::initializeExpressionContent()
 	
 	m_expression_Attribute_symbol = getExpression_Attribute_symbol();
 	m_expression_Attribute_symbol->setName("symbol");
-	m_expression_Attribute_symbol->setEType(types::typesPackage::eInstance()->getString_Class());
+	
+		m_expression_Attribute_symbol->setEType(types::typesPackage::eInstance()->getString_Class());
 	m_expression_Attribute_symbol->setLowerBound(0);
 	m_expression_Attribute_symbol->setUpperBound(1);
 	m_expression_Attribute_symbol->setTransient(false);
@@ -11854,7 +11890,8 @@ void umlPackageImpl::initializeExtensionContent()
 	
 	m_extension_Attribute_isRequired = getExtension_Attribute_isRequired();
 	m_extension_Attribute_isRequired->setName("isRequired");
-	m_extension_Attribute_isRequired->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+	
+		m_extension_Attribute_isRequired->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_extension_Attribute_isRequired->setLowerBound(1);
 	m_extension_Attribute_isRequired->setUpperBound(1);
 	m_extension_Attribute_isRequired->setTransient(true);
@@ -12160,7 +12197,8 @@ void umlPackageImpl::initializeFeatureContent()
 	
 	m_feature_Attribute_isStatic = getFeature_Attribute_isStatic();
 	m_feature_Attribute_isStatic->setName("isStatic");
-	m_feature_Attribute_isStatic->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+	
+		m_feature_Attribute_isStatic->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_feature_Attribute_isStatic->setLowerBound(1);
 	m_feature_Attribute_isStatic->setUpperBound(1);
 	m_feature_Attribute_isStatic->setTransient(false);
@@ -12938,7 +12976,8 @@ void umlPackageImpl::initializeGeneralizationContent()
 	
 	m_generalization_Attribute_isSubstitutable = getGeneralization_Attribute_isSubstitutable();
 	m_generalization_Attribute_isSubstitutable->setName("isSubstitutable");
-	m_generalization_Attribute_isSubstitutable->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+	
+		m_generalization_Attribute_isSubstitutable->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_generalization_Attribute_isSubstitutable->setLowerBound(0);
 	m_generalization_Attribute_isSubstitutable->setUpperBound(1);
 	m_generalization_Attribute_isSubstitutable->setTransient(false);
@@ -13041,7 +13080,8 @@ void umlPackageImpl::initializeGeneralizationSetContent()
 	
 	m_generalizationSet_Attribute_isCovering = getGeneralizationSet_Attribute_isCovering();
 	m_generalizationSet_Attribute_isCovering->setName("isCovering");
-	m_generalizationSet_Attribute_isCovering->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+	
+		m_generalizationSet_Attribute_isCovering->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_generalizationSet_Attribute_isCovering->setLowerBound(1);
 	m_generalizationSet_Attribute_isCovering->setUpperBound(1);
 	m_generalizationSet_Attribute_isCovering->setTransient(false);
@@ -13061,7 +13101,8 @@ void umlPackageImpl::initializeGeneralizationSetContent()
 	}
 	m_generalizationSet_Attribute_isDisjoint = getGeneralizationSet_Attribute_isDisjoint();
 	m_generalizationSet_Attribute_isDisjoint->setName("isDisjoint");
-	m_generalizationSet_Attribute_isDisjoint->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+	
+		m_generalizationSet_Attribute_isDisjoint->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_generalizationSet_Attribute_isDisjoint->setLowerBound(1);
 	m_generalizationSet_Attribute_isDisjoint->setUpperBound(1);
 	m_generalizationSet_Attribute_isDisjoint->setTransient(false);
@@ -13196,7 +13237,8 @@ void umlPackageImpl::initializeImageContent()
 	
 	m_image_Attribute_content = getImage_Attribute_content();
 	m_image_Attribute_content->setName("content");
-	m_image_Attribute_content->setEType(types::typesPackage::eInstance()->getString_Class());
+	
+		m_image_Attribute_content->setEType(types::typesPackage::eInstance()->getString_Class());
 	m_image_Attribute_content->setLowerBound(0);
 	m_image_Attribute_content->setUpperBound(1);
 	m_image_Attribute_content->setTransient(false);
@@ -13216,7 +13258,8 @@ void umlPackageImpl::initializeImageContent()
 	}
 	m_image_Attribute_format = getImage_Attribute_format();
 	m_image_Attribute_format->setName("format");
-	m_image_Attribute_format->setEType(types::typesPackage::eInstance()->getString_Class());
+	
+		m_image_Attribute_format->setEType(types::typesPackage::eInstance()->getString_Class());
 	m_image_Attribute_format->setLowerBound(0);
 	m_image_Attribute_format->setUpperBound(1);
 	m_image_Attribute_format->setTransient(false);
@@ -13236,7 +13279,8 @@ void umlPackageImpl::initializeImageContent()
 	}
 	m_image_Attribute_location = getImage_Attribute_location();
 	m_image_Attribute_location->setName("location");
-	m_image_Attribute_location->setEType(types::typesPackage::eInstance()->getString_Class());
+	
+		m_image_Attribute_location->setEType(types::typesPackage::eInstance()->getString_Class());
 	m_image_Attribute_location->setLowerBound(0);
 	m_image_Attribute_location->setUpperBound(1);
 	m_image_Attribute_location->setTransient(false);
@@ -15626,7 +15670,8 @@ void umlPackageImpl::initializeJoinNodeContent()
 	
 	m_joinNode_Attribute_isCombineDuplicate = getJoinNode_Attribute_isCombineDuplicate();
 	m_joinNode_Attribute_isCombineDuplicate->setName("isCombineDuplicate");
-	m_joinNode_Attribute_isCombineDuplicate->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+	
+		m_joinNode_Attribute_isCombineDuplicate->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_joinNode_Attribute_isCombineDuplicate->setLowerBound(1);
 	m_joinNode_Attribute_isCombineDuplicate->setUpperBound(1);
 	m_joinNode_Attribute_isCombineDuplicate->setTransient(false);
@@ -16112,7 +16157,8 @@ void umlPackageImpl::initializeLinkEndCreationDataContent()
 	
 	m_linkEndCreationData_Attribute_isReplaceAll = getLinkEndCreationData_Attribute_isReplaceAll();
 	m_linkEndCreationData_Attribute_isReplaceAll->setName("isReplaceAll");
-	m_linkEndCreationData_Attribute_isReplaceAll->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+	
+		m_linkEndCreationData_Attribute_isReplaceAll->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_linkEndCreationData_Attribute_isReplaceAll->setLowerBound(1);
 	m_linkEndCreationData_Attribute_isReplaceAll->setUpperBound(1);
 	m_linkEndCreationData_Attribute_isReplaceAll->setTransient(false);
@@ -16412,7 +16458,8 @@ void umlPackageImpl::initializeLinkEndDestructionDataContent()
 	
 	m_linkEndDestructionData_Attribute_isDestroyDuplicates = getLinkEndDestructionData_Attribute_isDestroyDuplicates();
 	m_linkEndDestructionData_Attribute_isDestroyDuplicates->setName("isDestroyDuplicates");
-	m_linkEndDestructionData_Attribute_isDestroyDuplicates->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+	
+		m_linkEndDestructionData_Attribute_isDestroyDuplicates->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_linkEndDestructionData_Attribute_isDestroyDuplicates->setLowerBound(1);
 	m_linkEndDestructionData_Attribute_isDestroyDuplicates->setUpperBound(1);
 	m_linkEndDestructionData_Attribute_isDestroyDuplicates->setTransient(false);
@@ -16492,7 +16539,8 @@ void umlPackageImpl::initializeLiteralBooleanContent()
 	
 	m_literalBoolean_Attribute_value = getLiteralBoolean_Attribute_value();
 	m_literalBoolean_Attribute_value->setName("value");
-	m_literalBoolean_Attribute_value->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+	
+		m_literalBoolean_Attribute_value->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_literalBoolean_Attribute_value->setLowerBound(1);
 	m_literalBoolean_Attribute_value->setUpperBound(1);
 	m_literalBoolean_Attribute_value->setTransient(false);
@@ -16539,7 +16587,8 @@ void umlPackageImpl::initializeLiteralIntegerContent()
 	
 	m_literalInteger_Attribute_value = getLiteralInteger_Attribute_value();
 	m_literalInteger_Attribute_value->setName("value");
-	m_literalInteger_Attribute_value->setEType(types::typesPackage::eInstance()->getInteger_Class());
+	
+		m_literalInteger_Attribute_value->setEType(types::typesPackage::eInstance()->getInteger_Class());
 	m_literalInteger_Attribute_value->setLowerBound(1);
 	m_literalInteger_Attribute_value->setUpperBound(1);
 	m_literalInteger_Attribute_value->setTransient(false);
@@ -16613,7 +16662,8 @@ void umlPackageImpl::initializeLiteralRealContent()
 	
 	m_literalReal_Attribute_value = getLiteralReal_Attribute_value();
 	m_literalReal_Attribute_value->setName("value");
-	m_literalReal_Attribute_value->setEType(types::typesPackage::eInstance()->getReal_Class());
+	
+		m_literalReal_Attribute_value->setEType(types::typesPackage::eInstance()->getReal_Class());
 	m_literalReal_Attribute_value->setLowerBound(1);
 	m_literalReal_Attribute_value->setUpperBound(1);
 	m_literalReal_Attribute_value->setTransient(false);
@@ -16671,7 +16721,8 @@ void umlPackageImpl::initializeLiteralStringContent()
 	
 	m_literalString_Attribute_value = getLiteralString_Attribute_value();
 	m_literalString_Attribute_value->setName("value");
-	m_literalString_Attribute_value->setEType(types::typesPackage::eInstance()->getString_Class());
+	
+		m_literalString_Attribute_value->setEType(types::typesPackage::eInstance()->getString_Class());
 	m_literalString_Attribute_value->setLowerBound(0);
 	m_literalString_Attribute_value->setUpperBound(1);
 	m_literalString_Attribute_value->setTransient(false);
@@ -16718,7 +16769,8 @@ void umlPackageImpl::initializeLiteralUnlimitedNaturalContent()
 	
 	m_literalUnlimitedNatural_Attribute_value = getLiteralUnlimitedNatural_Attribute_value();
 	m_literalUnlimitedNatural_Attribute_value->setName("value");
-	m_literalUnlimitedNatural_Attribute_value->setEType(types::typesPackage::eInstance()->getUnlimitedNatural_Class());
+	
+		m_literalUnlimitedNatural_Attribute_value->setEType(types::typesPackage::eInstance()->getUnlimitedNatural_Class());
 	m_literalUnlimitedNatural_Attribute_value->setLowerBound(1);
 	m_literalUnlimitedNatural_Attribute_value->setUpperBound(1);
 	m_literalUnlimitedNatural_Attribute_value->setTransient(false);
@@ -16765,7 +16817,8 @@ void umlPackageImpl::initializeLoopNodeContent()
 	
 	m_loopNode_Attribute_isTestedFirst = getLoopNode_Attribute_isTestedFirst();
 	m_loopNode_Attribute_isTestedFirst->setName("isTestedFirst");
-	m_loopNode_Attribute_isTestedFirst->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+	
+		m_loopNode_Attribute_isTestedFirst->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_loopNode_Attribute_isTestedFirst->setLowerBound(1);
 	m_loopNode_Attribute_isTestedFirst->setUpperBound(1);
 	m_loopNode_Attribute_isTestedFirst->setTransient(false);
@@ -17313,7 +17366,8 @@ void umlPackageImpl::initializeMessageContent()
 	
 	m_message_Attribute_messageKind = getMessage_Attribute_messageKind();
 	m_message_Attribute_messageKind->setName("messageKind");
-	m_message_Attribute_messageKind->setEType(getMessageKind_Class());
+	
+		m_message_Attribute_messageKind->setEType(getMessageKind_Class());
 	m_message_Attribute_messageKind->setLowerBound(1);
 	m_message_Attribute_messageKind->setUpperBound(1);
 	m_message_Attribute_messageKind->setTransient(true);
@@ -17333,7 +17387,8 @@ void umlPackageImpl::initializeMessageContent()
 	}
 	m_message_Attribute_messageSort = getMessage_Attribute_messageSort();
 	m_message_Attribute_messageSort->setName("messageSort");
-	m_message_Attribute_messageSort->setEType(getMessageSort_Class());
+	
+		m_message_Attribute_messageSort->setEType(getMessageSort_Class());
 	m_message_Attribute_messageSort->setLowerBound(1);
 	m_message_Attribute_messageSort->setUpperBound(1);
 	m_message_Attribute_messageSort->setTransient(false);
@@ -17810,7 +17865,8 @@ void umlPackageImpl::initializeModelContent()
 	
 	m_model_Attribute_viewpoint = getModel_Attribute_viewpoint();
 	m_model_Attribute_viewpoint->setName("viewpoint");
-	m_model_Attribute_viewpoint->setEType(types::typesPackage::eInstance()->getString_Class());
+	
+		m_model_Attribute_viewpoint->setEType(types::typesPackage::eInstance()->getString_Class());
 	m_model_Attribute_viewpoint->setLowerBound(0);
 	m_model_Attribute_viewpoint->setUpperBound(1);
 	m_model_Attribute_viewpoint->setTransient(false);
@@ -17849,7 +17905,8 @@ void umlPackageImpl::initializeMultiplicityElementContent()
 	
 	m_multiplicityElement_Attribute_isOrdered = getMultiplicityElement_Attribute_isOrdered();
 	m_multiplicityElement_Attribute_isOrdered->setName("isOrdered");
-	m_multiplicityElement_Attribute_isOrdered->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+	
+		m_multiplicityElement_Attribute_isOrdered->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_multiplicityElement_Attribute_isOrdered->setLowerBound(1);
 	m_multiplicityElement_Attribute_isOrdered->setUpperBound(1);
 	m_multiplicityElement_Attribute_isOrdered->setTransient(false);
@@ -17869,7 +17926,8 @@ void umlPackageImpl::initializeMultiplicityElementContent()
 	}
 	m_multiplicityElement_Attribute_isUnique = getMultiplicityElement_Attribute_isUnique();
 	m_multiplicityElement_Attribute_isUnique->setName("isUnique");
-	m_multiplicityElement_Attribute_isUnique->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+	
+		m_multiplicityElement_Attribute_isUnique->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_multiplicityElement_Attribute_isUnique->setLowerBound(1);
 	m_multiplicityElement_Attribute_isUnique->setUpperBound(1);
 	m_multiplicityElement_Attribute_isUnique->setTransient(false);
@@ -17889,7 +17947,8 @@ void umlPackageImpl::initializeMultiplicityElementContent()
 	}
 	m_multiplicityElement_Attribute_lower = getMultiplicityElement_Attribute_lower();
 	m_multiplicityElement_Attribute_lower->setName("lower");
-	m_multiplicityElement_Attribute_lower->setEType(types::typesPackage::eInstance()->getInteger_Class());
+	
+		m_multiplicityElement_Attribute_lower->setEType(types::typesPackage::eInstance()->getInteger_Class());
 	m_multiplicityElement_Attribute_lower->setLowerBound(0);
 	m_multiplicityElement_Attribute_lower->setUpperBound(1);
 	m_multiplicityElement_Attribute_lower->setTransient(true);
@@ -17909,7 +17968,8 @@ void umlPackageImpl::initializeMultiplicityElementContent()
 	}
 	m_multiplicityElement_Attribute_upper = getMultiplicityElement_Attribute_upper();
 	m_multiplicityElement_Attribute_upper->setName("upper");
-	m_multiplicityElement_Attribute_upper->setEType(types::typesPackage::eInstance()->getUnlimitedNatural_Class());
+	
+		m_multiplicityElement_Attribute_upper->setEType(types::typesPackage::eInstance()->getUnlimitedNatural_Class());
 	m_multiplicityElement_Attribute_upper->setLowerBound(1);
 	m_multiplicityElement_Attribute_upper->setUpperBound(1);
 	m_multiplicityElement_Attribute_upper->setTransient(true);
@@ -18231,7 +18291,8 @@ void umlPackageImpl::initializeNamedElementContent()
 	
 	m_namedElement_Attribute_name = getNamedElement_Attribute_name();
 	m_namedElement_Attribute_name->setName("name");
-	m_namedElement_Attribute_name->setEType(types::typesPackage::eInstance()->getString_Class());
+	
+		m_namedElement_Attribute_name->setEType(types::typesPackage::eInstance()->getString_Class());
 	m_namedElement_Attribute_name->setLowerBound(0);
 	m_namedElement_Attribute_name->setUpperBound(1);
 	m_namedElement_Attribute_name->setTransient(false);
@@ -18251,7 +18312,8 @@ void umlPackageImpl::initializeNamedElementContent()
 	}
 	m_namedElement_Attribute_qualifiedName = getNamedElement_Attribute_qualifiedName();
 	m_namedElement_Attribute_qualifiedName->setName("qualifiedName");
-	m_namedElement_Attribute_qualifiedName->setEType(types::typesPackage::eInstance()->getString_Class());
+	
+		m_namedElement_Attribute_qualifiedName->setEType(types::typesPackage::eInstance()->getString_Class());
 	m_namedElement_Attribute_qualifiedName->setLowerBound(0);
 	m_namedElement_Attribute_qualifiedName->setUpperBound(1);
 	m_namedElement_Attribute_qualifiedName->setTransient(true);
@@ -18271,7 +18333,8 @@ void umlPackageImpl::initializeNamedElementContent()
 	}
 	m_namedElement_Attribute_visibility = getNamedElement_Attribute_visibility();
 	m_namedElement_Attribute_visibility->setName("visibility");
-	m_namedElement_Attribute_visibility->setEType(getVisibilityKind_Class());
+	
+		m_namedElement_Attribute_visibility->setEType(getVisibilityKind_Class());
 	m_namedElement_Attribute_visibility->setLowerBound(0);
 	m_namedElement_Attribute_visibility->setUpperBound(1);
 	m_namedElement_Attribute_visibility->setTransient(false);
@@ -19251,7 +19314,8 @@ void umlPackageImpl::initializeObjectFlowContent()
 	
 	m_objectFlow_Attribute_isMulticast = getObjectFlow_Attribute_isMulticast();
 	m_objectFlow_Attribute_isMulticast->setName("isMulticast");
-	m_objectFlow_Attribute_isMulticast->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+	
+		m_objectFlow_Attribute_isMulticast->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_objectFlow_Attribute_isMulticast->setLowerBound(1);
 	m_objectFlow_Attribute_isMulticast->setUpperBound(1);
 	m_objectFlow_Attribute_isMulticast->setTransient(false);
@@ -19271,7 +19335,8 @@ void umlPackageImpl::initializeObjectFlowContent()
 	}
 	m_objectFlow_Attribute_isMultireceive = getObjectFlow_Attribute_isMultireceive();
 	m_objectFlow_Attribute_isMultireceive->setName("isMultireceive");
-	m_objectFlow_Attribute_isMultireceive->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+	
+		m_objectFlow_Attribute_isMultireceive->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_objectFlow_Attribute_isMultireceive->setLowerBound(1);
 	m_objectFlow_Attribute_isMultireceive->setUpperBound(1);
 	m_objectFlow_Attribute_isMultireceive->setTransient(false);
@@ -19562,7 +19627,8 @@ void umlPackageImpl::initializeObjectNodeContent()
 	
 	m_objectNode_Attribute_isControlType = getObjectNode_Attribute_isControlType();
 	m_objectNode_Attribute_isControlType->setName("isControlType");
-	m_objectNode_Attribute_isControlType->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+	
+		m_objectNode_Attribute_isControlType->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_objectNode_Attribute_isControlType->setLowerBound(1);
 	m_objectNode_Attribute_isControlType->setUpperBound(1);
 	m_objectNode_Attribute_isControlType->setTransient(false);
@@ -19582,7 +19648,8 @@ void umlPackageImpl::initializeObjectNodeContent()
 	}
 	m_objectNode_Attribute_ordering = getObjectNode_Attribute_ordering();
 	m_objectNode_Attribute_ordering->setName("ordering");
-	m_objectNode_Attribute_ordering->setEType(getObjectNodeOrderingKind_Class());
+	
+		m_objectNode_Attribute_ordering->setEType(getObjectNodeOrderingKind_Class());
 	m_objectNode_Attribute_ordering->setLowerBound(1);
 	m_objectNode_Attribute_ordering->setUpperBound(1);
 	m_objectNode_Attribute_ordering->setTransient(false);
@@ -19857,7 +19924,8 @@ void umlPackageImpl::initializeOpaqueActionContent()
 	
 	m_opaqueAction_Attribute_body = getOpaqueAction_Attribute_body();
 	m_opaqueAction_Attribute_body->setName("body");
-	m_opaqueAction_Attribute_body->setEType(types::typesPackage::eInstance()->getString_Class());
+	
+		m_opaqueAction_Attribute_body->setEType(types::typesPackage::eInstance()->getString_Class());
 	m_opaqueAction_Attribute_body->setLowerBound(0);
 	m_opaqueAction_Attribute_body->setUpperBound(-1);
 	m_opaqueAction_Attribute_body->setTransient(false);
@@ -19877,7 +19945,8 @@ void umlPackageImpl::initializeOpaqueActionContent()
 	}
 	m_opaqueAction_Attribute_language = getOpaqueAction_Attribute_language();
 	m_opaqueAction_Attribute_language->setName("language");
-	m_opaqueAction_Attribute_language->setEType(types::typesPackage::eInstance()->getString_Class());
+	
+		m_opaqueAction_Attribute_language->setEType(types::typesPackage::eInstance()->getString_Class());
 	m_opaqueAction_Attribute_language->setLowerBound(0);
 	m_opaqueAction_Attribute_language->setUpperBound(-1);
 	m_opaqueAction_Attribute_language->setTransient(false);
@@ -19979,7 +20048,8 @@ void umlPackageImpl::initializeOpaqueBehaviorContent()
 	
 	m_opaqueBehavior_Attribute_body = getOpaqueBehavior_Attribute_body();
 	m_opaqueBehavior_Attribute_body->setName("body");
-	m_opaqueBehavior_Attribute_body->setEType(types::typesPackage::eInstance()->getString_Class());
+	
+		m_opaqueBehavior_Attribute_body->setEType(types::typesPackage::eInstance()->getString_Class());
 	m_opaqueBehavior_Attribute_body->setLowerBound(0);
 	m_opaqueBehavior_Attribute_body->setUpperBound(-1);
 	m_opaqueBehavior_Attribute_body->setTransient(false);
@@ -19999,7 +20069,8 @@ void umlPackageImpl::initializeOpaqueBehaviorContent()
 	}
 	m_opaqueBehavior_Attribute_language = getOpaqueBehavior_Attribute_language();
 	m_opaqueBehavior_Attribute_language->setName("language");
-	m_opaqueBehavior_Attribute_language->setEType(types::typesPackage::eInstance()->getString_Class());
+	
+		m_opaqueBehavior_Attribute_language->setEType(types::typesPackage::eInstance()->getString_Class());
 	m_opaqueBehavior_Attribute_language->setLowerBound(0);
 	m_opaqueBehavior_Attribute_language->setUpperBound(-1);
 	m_opaqueBehavior_Attribute_language->setTransient(false);
@@ -20030,7 +20101,8 @@ void umlPackageImpl::initializeOpaqueExpressionContent()
 	
 	m_opaqueExpression_Attribute_body = getOpaqueExpression_Attribute_body();
 	m_opaqueExpression_Attribute_body->setName("body");
-	m_opaqueExpression_Attribute_body->setEType(types::typesPackage::eInstance()->getString_Class());
+	
+		m_opaqueExpression_Attribute_body->setEType(types::typesPackage::eInstance()->getString_Class());
 	m_opaqueExpression_Attribute_body->setLowerBound(0);
 	m_opaqueExpression_Attribute_body->setUpperBound(-1);
 	m_opaqueExpression_Attribute_body->setTransient(false);
@@ -20050,7 +20122,8 @@ void umlPackageImpl::initializeOpaqueExpressionContent()
 	}
 	m_opaqueExpression_Attribute_language = getOpaqueExpression_Attribute_language();
 	m_opaqueExpression_Attribute_language->setName("language");
-	m_opaqueExpression_Attribute_language->setEType(types::typesPackage::eInstance()->getString_Class());
+	
+		m_opaqueExpression_Attribute_language->setEType(types::typesPackage::eInstance()->getString_Class());
 	m_opaqueExpression_Attribute_language->setLowerBound(0);
 	m_opaqueExpression_Attribute_language->setUpperBound(-1);
 	m_opaqueExpression_Attribute_language->setTransient(false);
@@ -20246,7 +20319,8 @@ void umlPackageImpl::initializeOperationContent()
 	
 	m_operation_Attribute_isOrdered = getOperation_Attribute_isOrdered();
 	m_operation_Attribute_isOrdered->setName("isOrdered");
-	m_operation_Attribute_isOrdered->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+	
+		m_operation_Attribute_isOrdered->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_operation_Attribute_isOrdered->setLowerBound(1);
 	m_operation_Attribute_isOrdered->setUpperBound(1);
 	m_operation_Attribute_isOrdered->setTransient(true);
@@ -20266,7 +20340,8 @@ void umlPackageImpl::initializeOperationContent()
 	}
 	m_operation_Attribute_isQuery = getOperation_Attribute_isQuery();
 	m_operation_Attribute_isQuery->setName("isQuery");
-	m_operation_Attribute_isQuery->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+	
+		m_operation_Attribute_isQuery->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_operation_Attribute_isQuery->setLowerBound(1);
 	m_operation_Attribute_isQuery->setUpperBound(1);
 	m_operation_Attribute_isQuery->setTransient(false);
@@ -20286,7 +20361,8 @@ void umlPackageImpl::initializeOperationContent()
 	}
 	m_operation_Attribute_isUnique = getOperation_Attribute_isUnique();
 	m_operation_Attribute_isUnique->setName("isUnique");
-	m_operation_Attribute_isUnique->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+	
+		m_operation_Attribute_isUnique->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_operation_Attribute_isUnique->setLowerBound(1);
 	m_operation_Attribute_isUnique->setUpperBound(1);
 	m_operation_Attribute_isUnique->setTransient(true);
@@ -20306,7 +20382,8 @@ void umlPackageImpl::initializeOperationContent()
 	}
 	m_operation_Attribute_lower = getOperation_Attribute_lower();
 	m_operation_Attribute_lower->setName("lower");
-	m_operation_Attribute_lower->setEType(types::typesPackage::eInstance()->getInteger_Class());
+	
+		m_operation_Attribute_lower->setEType(types::typesPackage::eInstance()->getInteger_Class());
 	m_operation_Attribute_lower->setLowerBound(0);
 	m_operation_Attribute_lower->setUpperBound(1);
 	m_operation_Attribute_lower->setTransient(true);
@@ -20326,7 +20403,8 @@ void umlPackageImpl::initializeOperationContent()
 	}
 	m_operation_Attribute_upper = getOperation_Attribute_upper();
 	m_operation_Attribute_upper->setName("upper");
-	m_operation_Attribute_upper->setEType(types::typesPackage::eInstance()->getUnlimitedNatural_Class());
+	
+		m_operation_Attribute_upper->setEType(types::typesPackage::eInstance()->getUnlimitedNatural_Class());
 	m_operation_Attribute_upper->setLowerBound(0);
 	m_operation_Attribute_upper->setUpperBound(1);
 	m_operation_Attribute_upper->setTransient(true);
@@ -21030,7 +21108,8 @@ void umlPackageImpl::initializePackageContent()
 	
 	m_package_Attribute_uRI = getPackage_Attribute_uRI();
 	m_package_Attribute_uRI->setName("URI");
-	m_package_Attribute_uRI->setEType(types::typesPackage::eInstance()->getString_Class());
+	
+		m_package_Attribute_uRI->setEType(types::typesPackage::eInstance()->getString_Class());
 	m_package_Attribute_uRI->setLowerBound(0);
 	m_package_Attribute_uRI->setUpperBound(1);
 	m_package_Attribute_uRI->setTransient(false);
@@ -21601,7 +21680,8 @@ void umlPackageImpl::initializePackageImportContent()
 	
 	m_packageImport_Attribute_visibility = getPackageImport_Attribute_visibility();
 	m_packageImport_Attribute_visibility->setName("visibility");
-	m_packageImport_Attribute_visibility->setEType(getVisibilityKind_Class());
+	
+		m_packageImport_Attribute_visibility->setEType(getVisibilityKind_Class());
 	m_packageImport_Attribute_visibility->setLowerBound(1);
 	m_packageImport_Attribute_visibility->setUpperBound(1);
 	m_packageImport_Attribute_visibility->setTransient(false);
@@ -21827,7 +21907,8 @@ void umlPackageImpl::initializeParameterContent()
 	
 	m_parameter_Attribute_default = getParameter_Attribute_default();
 	m_parameter_Attribute_default->setName("default");
-	m_parameter_Attribute_default->setEType(types::typesPackage::eInstance()->getString_Class());
+	
+		m_parameter_Attribute_default->setEType(types::typesPackage::eInstance()->getString_Class());
 	m_parameter_Attribute_default->setLowerBound(0);
 	m_parameter_Attribute_default->setUpperBound(1);
 	m_parameter_Attribute_default->setTransient(true);
@@ -21847,7 +21928,8 @@ void umlPackageImpl::initializeParameterContent()
 	}
 	m_parameter_Attribute_direction = getParameter_Attribute_direction();
 	m_parameter_Attribute_direction->setName("direction");
-	m_parameter_Attribute_direction->setEType(getParameterDirectionKind_Class());
+	
+		m_parameter_Attribute_direction->setEType(getParameterDirectionKind_Class());
 	m_parameter_Attribute_direction->setLowerBound(1);
 	m_parameter_Attribute_direction->setUpperBound(1);
 	m_parameter_Attribute_direction->setTransient(false);
@@ -21867,7 +21949,8 @@ void umlPackageImpl::initializeParameterContent()
 	}
 	m_parameter_Attribute_effect = getParameter_Attribute_effect();
 	m_parameter_Attribute_effect->setName("effect");
-	m_parameter_Attribute_effect->setEType(getParameterEffectKind_Class());
+	
+		m_parameter_Attribute_effect->setEType(getParameterEffectKind_Class());
 	m_parameter_Attribute_effect->setLowerBound(0);
 	m_parameter_Attribute_effect->setUpperBound(1);
 	m_parameter_Attribute_effect->setTransient(false);
@@ -21887,7 +21970,8 @@ void umlPackageImpl::initializeParameterContent()
 	}
 	m_parameter_Attribute_isException = getParameter_Attribute_isException();
 	m_parameter_Attribute_isException->setName("isException");
-	m_parameter_Attribute_isException->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+	
+		m_parameter_Attribute_isException->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_parameter_Attribute_isException->setLowerBound(1);
 	m_parameter_Attribute_isException->setUpperBound(1);
 	m_parameter_Attribute_isException->setTransient(false);
@@ -21907,7 +21991,8 @@ void umlPackageImpl::initializeParameterContent()
 	}
 	m_parameter_Attribute_isStream = getParameter_Attribute_isStream();
 	m_parameter_Attribute_isStream->setName("isStream");
-	m_parameter_Attribute_isStream->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+	
+		m_parameter_Attribute_isStream->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_parameter_Attribute_isStream->setLowerBound(1);
 	m_parameter_Attribute_isStream->setUpperBound(1);
 	m_parameter_Attribute_isStream->setTransient(false);
@@ -22623,7 +22708,8 @@ void umlPackageImpl::initializePinContent()
 	
 	m_pin_Attribute_isControl = getPin_Attribute_isControl();
 	m_pin_Attribute_isControl->setName("isControl");
-	m_pin_Attribute_isControl->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+	
+		m_pin_Attribute_isControl->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_pin_Attribute_isControl->setLowerBound(1);
 	m_pin_Attribute_isControl->setUpperBound(1);
 	m_pin_Attribute_isControl->setTransient(false);
@@ -22708,7 +22794,8 @@ void umlPackageImpl::initializePortContent()
 	
 	m_port_Attribute_isBehavior = getPort_Attribute_isBehavior();
 	m_port_Attribute_isBehavior->setName("isBehavior");
-	m_port_Attribute_isBehavior->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+	
+		m_port_Attribute_isBehavior->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_port_Attribute_isBehavior->setLowerBound(1);
 	m_port_Attribute_isBehavior->setUpperBound(1);
 	m_port_Attribute_isBehavior->setTransient(false);
@@ -22728,7 +22815,8 @@ void umlPackageImpl::initializePortContent()
 	}
 	m_port_Attribute_isConjugated = getPort_Attribute_isConjugated();
 	m_port_Attribute_isConjugated->setName("isConjugated");
-	m_port_Attribute_isConjugated->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+	
+		m_port_Attribute_isConjugated->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_port_Attribute_isConjugated->setLowerBound(1);
 	m_port_Attribute_isConjugated->setUpperBound(1);
 	m_port_Attribute_isConjugated->setTransient(false);
@@ -22748,7 +22836,8 @@ void umlPackageImpl::initializePortContent()
 	}
 	m_port_Attribute_isService = getPort_Attribute_isService();
 	m_port_Attribute_isService->setName("isService");
-	m_port_Attribute_isService->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+	
+		m_port_Attribute_isService->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_port_Attribute_isService->setLowerBound(1);
 	m_port_Attribute_isService->setUpperBound(1);
 	m_port_Attribute_isService->setTransient(false);
@@ -23228,7 +23317,8 @@ void umlPackageImpl::initializeProfileApplicationContent()
 	
 	m_profileApplication_Attribute_isStrict = getProfileApplication_Attribute_isStrict();
 	m_profileApplication_Attribute_isStrict->setName("isStrict");
-	m_profileApplication_Attribute_isStrict->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+	
+		m_profileApplication_Attribute_isStrict->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_profileApplication_Attribute_isStrict->setLowerBound(1);
 	m_profileApplication_Attribute_isStrict->setUpperBound(1);
 	m_profileApplication_Attribute_isStrict->setTransient(false);
@@ -23331,7 +23421,8 @@ void umlPackageImpl::initializePropertyContent()
 	
 	m_property_Attribute_aggregation = getProperty_Attribute_aggregation();
 	m_property_Attribute_aggregation->setName("aggregation");
-	m_property_Attribute_aggregation->setEType(getAggregationKind_Class());
+	
+		m_property_Attribute_aggregation->setEType(getAggregationKind_Class());
 	m_property_Attribute_aggregation->setLowerBound(1);
 	m_property_Attribute_aggregation->setUpperBound(1);
 	m_property_Attribute_aggregation->setTransient(false);
@@ -23351,7 +23442,8 @@ void umlPackageImpl::initializePropertyContent()
 	}
 	m_property_Attribute_default = getProperty_Attribute_default();
 	m_property_Attribute_default->setName("default");
-	m_property_Attribute_default->setEType(types::typesPackage::eInstance()->getString_Class());
+	
+		m_property_Attribute_default->setEType(types::typesPackage::eInstance()->getString_Class());
 	m_property_Attribute_default->setLowerBound(0);
 	m_property_Attribute_default->setUpperBound(1);
 	m_property_Attribute_default->setTransient(true);
@@ -23371,7 +23463,8 @@ void umlPackageImpl::initializePropertyContent()
 	}
 	m_property_Attribute_isComposite = getProperty_Attribute_isComposite();
 	m_property_Attribute_isComposite->setName("isComposite");
-	m_property_Attribute_isComposite->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+	
+		m_property_Attribute_isComposite->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_property_Attribute_isComposite->setLowerBound(1);
 	m_property_Attribute_isComposite->setUpperBound(1);
 	m_property_Attribute_isComposite->setTransient(true);
@@ -23391,7 +23484,8 @@ void umlPackageImpl::initializePropertyContent()
 	}
 	m_property_Attribute_isDerived = getProperty_Attribute_isDerived();
 	m_property_Attribute_isDerived->setName("isDerived");
-	m_property_Attribute_isDerived->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+	
+		m_property_Attribute_isDerived->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_property_Attribute_isDerived->setLowerBound(1);
 	m_property_Attribute_isDerived->setUpperBound(1);
 	m_property_Attribute_isDerived->setTransient(false);
@@ -23411,7 +23505,8 @@ void umlPackageImpl::initializePropertyContent()
 	}
 	m_property_Attribute_isDerivedUnion = getProperty_Attribute_isDerivedUnion();
 	m_property_Attribute_isDerivedUnion->setName("isDerivedUnion");
-	m_property_Attribute_isDerivedUnion->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+	
+		m_property_Attribute_isDerivedUnion->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_property_Attribute_isDerivedUnion->setLowerBound(1);
 	m_property_Attribute_isDerivedUnion->setUpperBound(1);
 	m_property_Attribute_isDerivedUnion->setTransient(false);
@@ -23431,7 +23526,8 @@ void umlPackageImpl::initializePropertyContent()
 	}
 	m_property_Attribute_isID = getProperty_Attribute_isID();
 	m_property_Attribute_isID->setName("isID");
-	m_property_Attribute_isID->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+	
+		m_property_Attribute_isID->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_property_Attribute_isID->setLowerBound(1);
 	m_property_Attribute_isID->setUpperBound(1);
 	m_property_Attribute_isID->setTransient(false);
@@ -24537,7 +24633,8 @@ void umlPackageImpl::initializePseudostateContent()
 	
 	m_pseudostate_Attribute_kind = getPseudostate_Attribute_kind();
 	m_pseudostate_Attribute_kind->setName("kind");
-	m_pseudostate_Attribute_kind->setEType(getPseudostateKind_Class());
+	
+		m_pseudostate_Attribute_kind->setEType(getPseudostateKind_Class());
 	m_pseudostate_Attribute_kind->setLowerBound(1);
 	m_pseudostate_Attribute_kind->setUpperBound(1);
 	m_pseudostate_Attribute_kind->setTransient(false);
@@ -25139,7 +25236,8 @@ void umlPackageImpl::initializeReadIsClassifiedObjectActionContent()
 	
 	m_readIsClassifiedObjectAction_Attribute_isDirect = getReadIsClassifiedObjectAction_Attribute_isDirect();
 	m_readIsClassifiedObjectAction_Attribute_isDirect->setName("isDirect");
-	m_readIsClassifiedObjectAction_Attribute_isDirect->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+	
+		m_readIsClassifiedObjectAction_Attribute_isDirect->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_readIsClassifiedObjectAction_Attribute_isDirect->setLowerBound(1);
 	m_readIsClassifiedObjectAction_Attribute_isDirect->setUpperBound(1);
 	m_readIsClassifiedObjectAction_Attribute_isDirect->setTransient(false);
@@ -26471,7 +26569,8 @@ void umlPackageImpl::initializeReclassifyObjectActionContent()
 	
 	m_reclassifyObjectAction_Attribute_isReplaceAll = getReclassifyObjectAction_Attribute_isReplaceAll();
 	m_reclassifyObjectAction_Attribute_isReplaceAll->setName("isReplaceAll");
-	m_reclassifyObjectAction_Attribute_isReplaceAll->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+	
+		m_reclassifyObjectAction_Attribute_isReplaceAll->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_reclassifyObjectAction_Attribute_isReplaceAll->setLowerBound(1);
 	m_reclassifyObjectAction_Attribute_isReplaceAll->setUpperBound(1);
 	m_reclassifyObjectAction_Attribute_isReplaceAll->setTransient(false);
@@ -26649,7 +26748,8 @@ void umlPackageImpl::initializeRedefinableElementContent()
 	
 	m_redefinableElement_Attribute_isLeaf = getRedefinableElement_Attribute_isLeaf();
 	m_redefinableElement_Attribute_isLeaf->setName("isLeaf");
-	m_redefinableElement_Attribute_isLeaf->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+	
+		m_redefinableElement_Attribute_isLeaf->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_redefinableElement_Attribute_isLeaf->setLowerBound(1);
 	m_redefinableElement_Attribute_isLeaf->setUpperBound(1);
 	m_redefinableElement_Attribute_isLeaf->setTransient(false);
@@ -26951,7 +27051,8 @@ void umlPackageImpl::initializeReduceActionContent()
 	
 	m_reduceAction_Attribute_isOrdered = getReduceAction_Attribute_isOrdered();
 	m_reduceAction_Attribute_isOrdered->setName("isOrdered");
-	m_reduceAction_Attribute_isOrdered->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+	
+		m_reduceAction_Attribute_isOrdered->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_reduceAction_Attribute_isOrdered->setLowerBound(1);
 	m_reduceAction_Attribute_isOrdered->setUpperBound(1);
 	m_reduceAction_Attribute_isOrdered->setTransient(false);
@@ -27427,7 +27528,8 @@ void umlPackageImpl::initializeRemoveStructuralFeatureValueActionContent()
 	
 	m_removeStructuralFeatureValueAction_Attribute_isRemoveDuplicates = getRemoveStructuralFeatureValueAction_Attribute_isRemoveDuplicates();
 	m_removeStructuralFeatureValueAction_Attribute_isRemoveDuplicates->setName("isRemoveDuplicates");
-	m_removeStructuralFeatureValueAction_Attribute_isRemoveDuplicates->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+	
+		m_removeStructuralFeatureValueAction_Attribute_isRemoveDuplicates->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_removeStructuralFeatureValueAction_Attribute_isRemoveDuplicates->setLowerBound(1);
 	m_removeStructuralFeatureValueAction_Attribute_isRemoveDuplicates->setUpperBound(1);
 	m_removeStructuralFeatureValueAction_Attribute_isRemoveDuplicates->setTransient(false);
@@ -27510,7 +27612,8 @@ void umlPackageImpl::initializeRemoveVariableValueActionContent()
 	
 	m_removeVariableValueAction_Attribute_isRemoveDuplicates = getRemoveVariableValueAction_Attribute_isRemoveDuplicates();
 	m_removeVariableValueAction_Attribute_isRemoveDuplicates->setName("isRemoveDuplicates");
-	m_removeVariableValueAction_Attribute_isRemoveDuplicates->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+	
+		m_removeVariableValueAction_Attribute_isRemoveDuplicates->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_removeVariableValueAction_Attribute_isRemoveDuplicates->setLowerBound(1);
 	m_removeVariableValueAction_Attribute_isRemoveDuplicates->setUpperBound(1);
 	m_removeVariableValueAction_Attribute_isRemoveDuplicates->setTransient(false);
@@ -28377,7 +28480,8 @@ void umlPackageImpl::initializeStateContent()
 	
 	m_state_Attribute_isComposite = getState_Attribute_isComposite();
 	m_state_Attribute_isComposite->setName("isComposite");
-	m_state_Attribute_isComposite->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+	
+		m_state_Attribute_isComposite->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_state_Attribute_isComposite->setLowerBound(1);
 	m_state_Attribute_isComposite->setUpperBound(1);
 	m_state_Attribute_isComposite->setTransient(true);
@@ -28397,7 +28501,8 @@ void umlPackageImpl::initializeStateContent()
 	}
 	m_state_Attribute_isOrthogonal = getState_Attribute_isOrthogonal();
 	m_state_Attribute_isOrthogonal->setName("isOrthogonal");
-	m_state_Attribute_isOrthogonal->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+	
+		m_state_Attribute_isOrthogonal->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_state_Attribute_isOrthogonal->setLowerBound(1);
 	m_state_Attribute_isOrthogonal->setUpperBound(1);
 	m_state_Attribute_isOrthogonal->setTransient(true);
@@ -28417,7 +28522,8 @@ void umlPackageImpl::initializeStateContent()
 	}
 	m_state_Attribute_isSimple = getState_Attribute_isSimple();
 	m_state_Attribute_isSimple->setName("isSimple");
-	m_state_Attribute_isSimple->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+	
+		m_state_Attribute_isSimple->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_state_Attribute_isSimple->setLowerBound(1);
 	m_state_Attribute_isSimple->setUpperBound(1);
 	m_state_Attribute_isSimple->setTransient(true);
@@ -28437,7 +28543,8 @@ void umlPackageImpl::initializeStateContent()
 	}
 	m_state_Attribute_isSubmachineState = getState_Attribute_isSubmachineState();
 	m_state_Attribute_isSubmachineState->setName("isSubmachineState");
-	m_state_Attribute_isSubmachineState->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+	
+		m_state_Attribute_isSubmachineState->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_state_Attribute_isSubmachineState->setLowerBound(1);
 	m_state_Attribute_isSubmachineState->setUpperBound(1);
 	m_state_Attribute_isSubmachineState->setTransient(true);
@@ -29700,7 +29807,8 @@ void umlPackageImpl::initializeStructuralFeatureContent()
 	
 	m_structuralFeature_Attribute_isReadOnly = getStructuralFeature_Attribute_isReadOnly();
 	m_structuralFeature_Attribute_isReadOnly->setName("isReadOnly");
-	m_structuralFeature_Attribute_isReadOnly->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+	
+		m_structuralFeature_Attribute_isReadOnly->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_structuralFeature_Attribute_isReadOnly->setLowerBound(1);
 	m_structuralFeature_Attribute_isReadOnly->setUpperBound(1);
 	m_structuralFeature_Attribute_isReadOnly->setTransient(false);
@@ -29924,7 +30032,8 @@ void umlPackageImpl::initializeStructuredActivityNodeContent()
 	
 	m_structuredActivityNode_Attribute_mustIsolate = getStructuredActivityNode_Attribute_mustIsolate();
 	m_structuredActivityNode_Attribute_mustIsolate->setName("mustIsolate");
-	m_structuredActivityNode_Attribute_mustIsolate->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+	
+		m_structuredActivityNode_Attribute_mustIsolate->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_structuredActivityNode_Attribute_mustIsolate->setLowerBound(1);
 	m_structuredActivityNode_Attribute_mustIsolate->setUpperBound(1);
 	m_structuredActivityNode_Attribute_mustIsolate->setTransient(false);
@@ -31192,7 +31301,8 @@ void umlPackageImpl::initializeTimeConstraintContent()
 	
 	m_timeConstraint_Attribute_firstEvent = getTimeConstraint_Attribute_firstEvent();
 	m_timeConstraint_Attribute_firstEvent->setName("firstEvent");
-	m_timeConstraint_Attribute_firstEvent->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+	
+		m_timeConstraint_Attribute_firstEvent->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_timeConstraint_Attribute_firstEvent->setLowerBound(0);
 	m_timeConstraint_Attribute_firstEvent->setUpperBound(1);
 	m_timeConstraint_Attribute_firstEvent->setTransient(false);
@@ -31250,7 +31360,8 @@ void umlPackageImpl::initializeTimeEventContent()
 	
 	m_timeEvent_Attribute_isRelative = getTimeEvent_Attribute_isRelative();
 	m_timeEvent_Attribute_isRelative->setName("isRelative");
-	m_timeEvent_Attribute_isRelative->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+	
+		m_timeEvent_Attribute_isRelative->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_timeEvent_Attribute_isRelative->setLowerBound(1);
 	m_timeEvent_Attribute_isRelative->setUpperBound(1);
 	m_timeEvent_Attribute_isRelative->setTransient(false);
@@ -31423,7 +31534,8 @@ void umlPackageImpl::initializeTimeObservationContent()
 	
 	m_timeObservation_Attribute_firstEvent = getTimeObservation_Attribute_firstEvent();
 	m_timeObservation_Attribute_firstEvent->setName("firstEvent");
-	m_timeObservation_Attribute_firstEvent->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+	
+		m_timeObservation_Attribute_firstEvent->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_timeObservation_Attribute_firstEvent->setLowerBound(1);
 	m_timeObservation_Attribute_firstEvent->setUpperBound(1);
 	m_timeObservation_Attribute_firstEvent->setTransient(false);
@@ -31476,7 +31588,8 @@ void umlPackageImpl::initializeTransitionContent()
 	
 	m_transition_Attribute_kind = getTransition_Attribute_kind();
 	m_transition_Attribute_kind->setName("kind");
-	m_transition_Attribute_kind->setEType(getTransitionKind_Class());
+	
+		m_transition_Attribute_kind->setEType(getTransitionKind_Class());
 	m_transition_Attribute_kind->setLowerBound(1);
 	m_transition_Attribute_kind->setUpperBound(1);
 	m_transition_Attribute_kind->setTransient(false);

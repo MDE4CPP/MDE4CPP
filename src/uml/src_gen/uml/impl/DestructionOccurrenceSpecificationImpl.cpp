@@ -194,7 +194,7 @@ std::shared_ptr<ecore::EClass> DestructionOccurrenceSpecificationImpl::eStaticCl
 //*********************************
 // Operations
 //*********************************
-bool DestructionOccurrenceSpecificationImpl::no_occurrence_specifications_below(Any diagnostics,std::map <   Any, Any >  context)
+bool DestructionOccurrenceSpecificationImpl::no_occurrence_specifications_below(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -363,9 +363,6 @@ void DestructionOccurrenceSpecificationImpl::saveContent(std::shared_ptr<persist
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

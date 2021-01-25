@@ -154,13 +154,13 @@ void ClauseActivationImpl::selectBody()
 /*
 Getter & Setter for reference clause
 */
-std::shared_ptr<uml::Clause > ClauseActivationImpl::getClause() const
+std::shared_ptr<org.eclipse.uml2.uml.Clause > ClauseActivationImpl::getClause() const
 {
 //assert(m_clause);
     return m_clause;
 }
 
-void ClauseActivationImpl::setClause(std::shared_ptr<uml::Clause> _clause)
+void ClauseActivationImpl::setClause(std::shared_ptr<org.eclipse.uml2.uml.Clause> _clause)
 {
     m_clause = _clause;
 }
@@ -210,9 +210,9 @@ Any ClauseActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::CLAUSEACTIVATION_ATTRIBUTE_CLAUSE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getClause())); //260
+			return eAny(getClause()); //260
 		case fUML::Semantics::Actions::ActionsPackage::CLAUSEACTIVATION_ATTRIBUTE_CONDITIONALNODEACTIVATION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getConditionalNodeActivation())); //261
+			return eAny(getConditionalNodeActivation()); //261
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -235,7 +235,7 @@ bool ClauseActivationImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Clause> _clause = std::dynamic_pointer_cast<uml::Clause>(_temp);
+			std::shared_ptr<org.eclipse.uml2.uml.Clause> _clause = std::dynamic_pointer_cast<org.eclipse.uml2.uml.Clause>(_temp);
 			setClause(_clause); //260
 			return true;
 		}
@@ -319,7 +319,7 @@ void ClauseActivationImpl::resolveReferences(const int featureID, std::list<std:
 			if (references.size() == 1)
 			{
 				// Cast object to correct type
-				std::shared_ptr<uml::Clause> _clause = std::dynamic_pointer_cast<uml::Clause>( references.front() );
+				std::shared_ptr<org.eclipse.uml2.uml.Clause> _clause = std::dynamic_pointer_cast<org.eclipse.uml2.uml.Clause>( references.front() );
 				setClause(_clause);
 			}
 			
@@ -356,12 +356,9 @@ void ClauseActivationImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	{
 		std::shared_ptr<fUML::Semantics::Actions::ActionsPackage> package = fUML::Semantics::Actions::ActionsPackage::eInstance();
 
-	
-
-		// Add references
-		saveHandler->addReference("clause", this->getClause());
-		saveHandler->addReference("conditionalNodeActivation", this->getConditionalNodeActivation());
-
+	// Add references
+		saveHandler->addReference("clause", this->getClause());		
+		saveHandler->addReference("conditionalNodeActivation", this->getConditionalNodeActivation());		 
 	}
 	catch (std::exception& e)
 	{

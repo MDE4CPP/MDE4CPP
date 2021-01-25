@@ -270,13 +270,13 @@ std::shared_ptr<ecore::EClass> WriteVariableActionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool WriteVariableActionImpl::multiplicity(Any diagnostics,std::map <   Any, Any >  context)
+bool WriteVariableActionImpl::multiplicity(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool WriteVariableActionImpl::value_type(Any diagnostics,std::map <   Any, Any >  context)
+bool WriteVariableActionImpl::value_type(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -418,7 +418,7 @@ Any WriteVariableActionImpl::eGet(int featureID, bool resolve, bool coreType) co
 	switch(featureID)
 	{
 		case uml::umlPackage::WRITEVARIABLEACTION_ATTRIBUTE_VALUE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getValue())); //25828
+			return eAny(getValue()); //25828
 	}
 	return VariableActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -548,15 +548,12 @@ void WriteVariableActionImpl::saveContent(std::shared_ptr<persistence::interface
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'value'
 		std::shared_ptr<uml::InputPin > value = this->getValue();
 		if (value != nullptr)
 		{
 			saveHandler->addReference(value, "value", value->eClass() != package->getInputPin_Class());
 		}
-	
-
 	}
 	catch (std::exception& e)
 	{

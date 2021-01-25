@@ -36,65 +36,29 @@ namespace fUML
 	class fUMLFactory;
 }
 
-//Forward Declaration for used types
-namespace uml 
-{
-	class Action;
-}
-
-namespace fUML::Semantics::Actions 
-{
-	class ActionActivation;
-}
-
-namespace fUML::Semantics::Activities 
-{
-	class ActivityEdgeInstance;
-}
-
-namespace uml 
-{
-	class ActivityNode;
-}
-
-namespace fUML::Semantics::Activities 
-{
-	class ActivityNodeActivationGroup;
-}
-
-namespace uml 
-{
-	class Association;
-}
-
+//Forward Declaration for used types 
 namespace fUML::Semantics::Actions 
 {
 	class InputPinActivation;
+	class OutputPinActivation;
+	class PinActivation;
 }
-
+namespace fUML::Semantics::Activities 
+{
+	class ActivityEdgeInstance;
+	class ActivityNodeActivationGroup;
+	class Token;
+}
 namespace fUML::Semantics::StructuredClassifiers 
 {
 	class Link;
 }
-
 namespace uml 
 {
+	class Action;
+	class ActivityNode;
+	class Association;
 	class LinkEndData;
-}
-
-namespace fUML::Semantics::Actions 
-{
-	class OutputPinActivation;
-}
-
-namespace fUML::Semantics::Actions 
-{
-	class PinActivation;
-}
-
-namespace fUML::Semantics::Activities 
-{
-	class Token;
 }
 
 // base class includes
@@ -102,6 +66,8 @@ namespace fUML::Semantics::Activities
 
 // enum includes
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace fUML::Semantics::Actions 
@@ -127,13 +93,13 @@ namespace fUML::Semantics::Actions
 			// Operations
 			//*********************************
 			 
-			virtual bool endMatchesEndData(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link>  link,std::shared_ptr<uml::LinkEndData>  endData) = 0;
+			virtual bool endMatchesEndData(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> link,std::shared_ptr<org.eclipse.uml2.uml.LinkEndData> endData) = 0;
 			
 			 
-			virtual std::shared_ptr<uml::Association> getAssociation() = 0;
+			virtual std::shared_ptr<org.eclipse.uml2.uml.Association> getAssociation() = 0;
 			
 			 
-			virtual bool linkMatchesEndData(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link>  link,std::shared_ptr<Bag<uml::LinkEndData> >  endDataList) = 0;
+			virtual bool linkMatchesEndData(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> link,std::shared_ptr<Bag<org.eclipse.uml2.uml.LinkEndData> > endDataList) = 0;
 			
 			
 			//*********************************

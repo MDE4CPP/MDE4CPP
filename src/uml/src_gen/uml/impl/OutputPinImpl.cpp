@@ -355,7 +355,7 @@ std::shared_ptr<ecore::EClass> OutputPinImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool OutputPinImpl::incoming_edges_structured_only(Any diagnostics,std::map <   Any, Any >  context)
+bool OutputPinImpl::incoming_edges_structured_only(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -626,21 +626,21 @@ Any OutputPinImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_ACTION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getAction().lock())); //16934
+			return eAny(getAction().lock()); //16934
 		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_CALLACTION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getCallAction().lock())); //16933
+			return eAny(getCallAction().lock()); //16933
 		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_CLEARSTRUCTURALFEATUREACTION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getClearStructuralFeatureAction().lock())); //16938
+			return eAny(getClearStructuralFeatureAction().lock()); //16938
 		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_CREATEOBJECTACTION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getCreateObjectAction().lock())); //16940
+			return eAny(getCreateObjectAction().lock()); //16940
 		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_READSELFACTION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getReadSelfAction().lock())); //16939
+			return eAny(getReadSelfAction().lock()); //16939
 		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_READSTRUCTURALFEATUREACTION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getReadStructuralFeatureAction().lock())); //16937
+			return eAny(getReadStructuralFeatureAction().lock()); //16937
 		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_VALUESPECIFICATIONACTION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getValueSpecificationAction().lock())); //16935
+			return eAny(getValueSpecificationAction().lock()); //16935
 		case uml::umlPackage::OUTPUTPIN_ATTRIBUTE_WRITESTRUCTURALFEATUREACTION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getWriteStructuralFeatureAction().lock())); //16936
+			return eAny(getWriteStructuralFeatureAction().lock()); //16936
 	}
 	return PinImpl::eGet(featureID, resolve, coreType);
 }
@@ -891,9 +891,6 @@ void OutputPinImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

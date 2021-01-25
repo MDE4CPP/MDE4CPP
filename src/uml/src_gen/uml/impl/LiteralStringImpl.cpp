@@ -198,12 +198,12 @@ std::shared_ptr<ecore::EClass> LiteralStringImpl::eStaticClass() const
 /*
 Getter & Setter for attribute value
 */
-std::string LiteralStringImpl::getValue() const 
+std::string  LiteralStringImpl::getValue() const 
 {
 	return m_value;
 }
 
-void LiteralStringImpl::setValue(std::string _value)
+void LiteralStringImpl::setValue(std::string  _value)
 {
 	m_value = _value;
 } 
@@ -435,14 +435,11 @@ void LiteralStringImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
 		// Add attributes
 		if ( this->eIsSet(package->getLiteralString_Attribute_value()) )
 		{
 			saveHandler->addAttribute("value", this->getValue());
 		}
-
 	}
 	catch (std::exception& e)
 	{

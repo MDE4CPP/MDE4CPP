@@ -152,12 +152,12 @@ std::shared_ptr<ecore::EClass> ClassifierTemplateParameterImpl::eStaticClass() c
 /*
 Getter & Setter for attribute allowSubstitutable
 */
-bool ClassifierTemplateParameterImpl::getAllowSubstitutable() const 
+bool  ClassifierTemplateParameterImpl::getAllowSubstitutable() const 
 {
 	return m_allowSubstitutable;
 }
 
-void ClassifierTemplateParameterImpl::setAllowSubstitutable(bool _allowSubstitutable)
+void ClassifierTemplateParameterImpl::setAllowSubstitutable(bool  _allowSubstitutable)
 {
 	m_allowSubstitutable = _allowSubstitutable;
 } 
@@ -167,37 +167,37 @@ void ClassifierTemplateParameterImpl::setAllowSubstitutable(bool _allowSubstitut
 //*********************************
 // Operations
 //*********************************
-bool ClassifierTemplateParameterImpl::actual_is_classifier(Any diagnostics,std::map <   Any, Any >  context)
+bool ClassifierTemplateParameterImpl::actual_is_classifier(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ClassifierTemplateParameterImpl::constraining_classifiers_constrain_args(Any diagnostics,std::map <   Any, Any >  context)
+bool ClassifierTemplateParameterImpl::constraining_classifiers_constrain_args(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ClassifierTemplateParameterImpl::constraining_classifiers_constrain_parametered_element(Any diagnostics,std::map <   Any, Any >  context)
+bool ClassifierTemplateParameterImpl::constraining_classifiers_constrain_parametered_element(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ClassifierTemplateParameterImpl::has_constraining_classifier(Any diagnostics,std::map <   Any, Any >  context)
+bool ClassifierTemplateParameterImpl::has_constraining_classifier(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ClassifierTemplateParameterImpl::matching_abstract(Any diagnostics,std::map <   Any, Any >  context)
+bool ClassifierTemplateParameterImpl::matching_abstract(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ClassifierTemplateParameterImpl::parametered_element_no_features(Any diagnostics,std::map <   Any, Any >  context)
+bool ClassifierTemplateParameterImpl::parametered_element_no_features(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -285,15 +285,7 @@ Any ClassifierTemplateParameterImpl::eGet(int featureID, bool resolve, bool core
 			return eAny(getAllowSubstitutable()); //378
 		case uml::umlPackage::CLASSIFIERTEMPLATEPARAMETER_ATTRIBUTE_CONSTRAININGCLASSIFIER:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Classifier>::iterator iter = m_constrainingClassifier->begin();
-			Bag<uml::Classifier>::iterator end = m_constrainingClassifier->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //379
+			return eAny(getConstrainingClassifier()); //379			
 		}
 	}
 	return TemplateParameterImpl::eGet(featureID, resolve, coreType);
@@ -464,21 +456,14 @@ void ClassifierTemplateParameterImpl::saveContent(std::shared_ptr<persistence::i
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
 		// Add attributes
 		if ( this->eIsSet(package->getClassifierTemplateParameter_Attribute_allowSubstitutable()) )
 		{
 			saveHandler->addAttribute("allowSubstitutable", this->getAllowSubstitutable());
 		}
 
-		// Add references
-		std::shared_ptr<Bag<uml::Classifier>> constrainingClassifier_list = this->getConstrainingClassifier();
-		for (std::shared_ptr<uml::Classifier > object : *constrainingClassifier_list)
-		{ 
-			saveHandler->addReferences("constrainingClassifier", object);
-		}
-
+	// Add references
+		saveHandler->addReferences<uml::Classifier>("constrainingClassifier", this->getConstrainingClassifier());	
 	}
 	catch (std::exception& e)
 	{

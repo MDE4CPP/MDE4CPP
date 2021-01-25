@@ -36,44 +36,28 @@ namespace fUML
 	class fUMLFactory;
 }
 
-//Forward Declaration for used types
-namespace uml 
-{
-	class Behavior;
-}
-
-namespace uml 
-{
-	class Class;
-}
-
-namespace fUML::Semantics::Loci 
-{
-	class Locus;
-}
-
-namespace fUML::Semantics::StructuredClassifiers 
-{
-	class Object;
-}
-
+//Forward Declaration for used types 
 namespace fUML::Semantics::CommonBehavior 
 {
 	class ParameterValue;
 }
-
+namespace fUML::Semantics::Loci 
+{
+	class Locus;
+}
 namespace fUML::Semantics::StructuredClassifiers 
 {
+	class Object;
 	class Reference;
 }
-
 namespace fUML::Semantics::Values 
 {
 	class Value;
 }
-
 namespace uml 
 {
+	class Behavior;
+	class Class;
 	class ValueSpecification;
 }
 
@@ -82,6 +66,14 @@ namespace uml
 // enum includes
 
 #include "ecore/EModelElement.hpp"
+
+//Includes from codegen annotation
+#include "fUML/Semantics/Values/Evaluation.hpp"
+#include "fUML/Semantics/CommonBehavior/Execution.hpp"
+#include "fUML/Semantics/Loci/ExecutionFactory.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/Semantics/StructuredClassifiers/Object.hpp"
+#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 
 //*********************************
 namespace fUML::Semantics::Loci 
@@ -112,13 +104,13 @@ namespace fUML::Semantics::Loci
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> evaluate(std::shared_ptr<uml::ValueSpecification>  specification) = 0;
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> evaluate(std::shared_ptr<org.eclipse.uml2.uml.ValueSpecification> specification) = 0;
 			
 			 
-			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > execute(std::shared_ptr<uml::Behavior>  behavior,std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object>  context,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> >  inputs) = 0;
+			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > execute(std::shared_ptr<org.eclipse.uml2.uml.Behavior> behavior,std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> context,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > inputs) = 0;
 			
 			 
-			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> start(std::shared_ptr<uml::Class>  type,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> >  inputs) = 0;
+			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> start(std::shared_ptr<org.eclipse.uml2.uml.Class> type,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > inputs) = 0;
 			
 			
 			//*********************************

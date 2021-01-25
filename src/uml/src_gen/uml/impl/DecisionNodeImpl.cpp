@@ -231,49 +231,49 @@ std::shared_ptr<ecore::EClass> DecisionNodeImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool DecisionNodeImpl::decision_input_flow_incoming(Any diagnostics,std::map <   Any, Any >  context)
+bool DecisionNodeImpl::decision_input_flow_incoming(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool DecisionNodeImpl::edges(Any diagnostics,std::map <   Any, Any >  context)
+bool DecisionNodeImpl::edges(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool DecisionNodeImpl::incoming_control_one_input_parameter(Any diagnostics,std::map <   Any, Any >  context)
+bool DecisionNodeImpl::incoming_control_one_input_parameter(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool DecisionNodeImpl::incoming_object_one_input_parameter(Any diagnostics,std::map <   Any, Any >  context)
+bool DecisionNodeImpl::incoming_object_one_input_parameter(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool DecisionNodeImpl::incoming_outgoing_edges(Any diagnostics,std::map <   Any, Any >  context)
+bool DecisionNodeImpl::incoming_outgoing_edges(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool DecisionNodeImpl::parameters(Any diagnostics,std::map <   Any, Any >  context)
+bool DecisionNodeImpl::parameters(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool DecisionNodeImpl::two_input_parameters(Any diagnostics,std::map <   Any, Any >  context)
+bool DecisionNodeImpl::two_input_parameters(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool DecisionNodeImpl::zero_input_parameters(Any diagnostics,std::map <   Any, Any >  context)
+bool DecisionNodeImpl::zero_input_parameters(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -411,9 +411,9 @@ Any DecisionNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::DECISIONNODE_ATTRIBUTE_DECISIONINPUT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDecisionInput())); //6620
+			return eAny(getDecisionInput()); //6620
 		case uml::umlPackage::DECISIONNODE_ATTRIBUTE_DECISIONINPUTFLOW:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDecisionInputFlow())); //6621
+			return eAny(getDecisionInputFlow()); //6621
 	}
 	return ControlNodeImpl::eGet(featureID, resolve, coreType);
 }
@@ -574,12 +574,9 @@ void DecisionNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
-	
-
-		// Add references
-		saveHandler->addReference("decisionInput", this->getDecisionInput());
-		saveHandler->addReference("decisionInputFlow", this->getDecisionInputFlow());
-
+	// Add references
+		saveHandler->addReference("decisionInput", this->getDecisionInput());		 
+		saveHandler->addReference("decisionInputFlow", this->getDecisionInputFlow());		 
 	}
 	catch (std::exception& e)
 	{

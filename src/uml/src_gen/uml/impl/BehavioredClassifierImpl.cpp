@@ -381,7 +381,7 @@ std::shared_ptr<ecore::EClass> BehavioredClassifierImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool BehavioredClassifierImpl::class_behavior(Any diagnostics,std::map <   Any, Any >  context)
+bool BehavioredClassifierImpl::class_behavior(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -621,30 +621,14 @@ Any BehavioredClassifierImpl::eGet(int featureID, bool resolve, bool coreType) c
 	switch(featureID)
 	{
 		case uml::umlPackage::BEHAVIOREDCLASSIFIER_ATTRIBUTE_CLASSIFIERBEHAVIOR:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getClassifierBehavior())); //2638
+			return eAny(getClassifierBehavior()); //2638
 		case uml::umlPackage::BEHAVIOREDCLASSIFIER_ATTRIBUTE_INTERFACEREALIZATION:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::InterfaceRealization>::iterator iter = m_interfaceRealization->begin();
-			Bag<uml::InterfaceRealization>::iterator end = m_interfaceRealization->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //2639
+			return eAny(getInterfaceRealization()); //2639			
 		}
 		case uml::umlPackage::BEHAVIOREDCLASSIFIER_ATTRIBUTE_OWNEDBEHAVIOR:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Behavior>::iterator iter = m_ownedBehavior->begin();
-			Bag<uml::Behavior>::iterator end = m_ownedBehavior->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //2640
+			return eAny(getOwnedBehavior()); //2640			
 		}
 	}
 	return ClassifierImpl::eGet(featureID, resolve, coreType);
@@ -897,17 +881,14 @@ void BehavioredClassifierImpl::saveContent(std::shared_ptr<persistence::interfac
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'interfaceRealization'
 		for (std::shared_ptr<uml::InterfaceRealization> interfaceRealization : *this->getInterfaceRealization()) 
 		{
 			saveHandler->addReference(interfaceRealization, "interfaceRealization", interfaceRealization->eClass() != package->getInterfaceRealization_Class());
 		}
-	
 
-		// Add references
-		saveHandler->addReference("classifierBehavior", this->getClassifierBehavior());
-
+	// Add references
+		saveHandler->addReference("classifierBehavior", this->getClassifierBehavior());		 
 
 		//
 		// Add new tags (from references)

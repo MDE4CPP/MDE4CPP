@@ -277,12 +277,12 @@ std::shared_ptr<ecore::EClass> RemoveVariableValueActionImpl::eStaticClass() con
 /*
 Getter & Setter for attribute isRemoveDuplicates
 */
-bool RemoveVariableValueActionImpl::getIsRemoveDuplicates() const 
+bool  RemoveVariableValueActionImpl::getIsRemoveDuplicates() const 
 {
 	return m_isRemoveDuplicates;
 }
 
-void RemoveVariableValueActionImpl::setIsRemoveDuplicates(bool _isRemoveDuplicates)
+void RemoveVariableValueActionImpl::setIsRemoveDuplicates(bool  _isRemoveDuplicates)
 {
 	m_isRemoveDuplicates = _isRemoveDuplicates;
 } 
@@ -292,7 +292,7 @@ void RemoveVariableValueActionImpl::setIsRemoveDuplicates(bool _isRemoveDuplicat
 //*********************************
 // Operations
 //*********************************
-bool RemoveVariableValueActionImpl::removeAt_and_value(Any diagnostics,std::map <   Any, Any >  context)
+bool RemoveVariableValueActionImpl::removeAt_and_value(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -436,7 +436,7 @@ Any RemoveVariableValueActionImpl::eGet(int featureID, bool resolve, bool coreTy
 		case uml::umlPackage::REMOVEVARIABLEVALUEACTION_ATTRIBUTE_ISREMOVEDUPLICATES:
 			return eAny(getIsRemoveDuplicates()); //21029
 		case uml::umlPackage::REMOVEVARIABLEVALUEACTION_ATTRIBUTE_REMOVEAT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getRemoveAt())); //21030
+			return eAny(getRemoveAt()); //21030
 	}
 	return WriteVariableActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -599,20 +599,17 @@ void RemoveVariableValueActionImpl::saveContent(std::shared_ptr<persistence::int
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'removeAt'
 		std::shared_ptr<uml::InputPin > removeAt = this->getRemoveAt();
 		if (removeAt != nullptr)
 		{
 			saveHandler->addReference(removeAt, "removeAt", removeAt->eClass() != package->getInputPin_Class());
 		}
-	
 		// Add attributes
 		if ( this->eIsSet(package->getRemoveVariableValueAction_Attribute_isRemoveDuplicates()) )
 		{
 			saveHandler->addAttribute("isRemoveDuplicates", this->getIsRemoveDuplicates());
 		}
-
 	}
 	catch (std::exception& e)
 	{

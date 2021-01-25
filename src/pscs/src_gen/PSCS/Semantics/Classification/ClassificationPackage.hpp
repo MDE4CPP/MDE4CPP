@@ -22,7 +22,7 @@ namespace PSCS::Semantics::Classification
 {
 	class CS_InstanceValueEvaluation;
 }
-
+ 
 namespace PSCS::Semantics::Classification 
 {
 	/*!

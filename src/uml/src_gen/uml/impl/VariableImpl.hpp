@@ -71,7 +71,7 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			 
-			virtual bool isAccessibleBy(std::shared_ptr<uml::Action>  a) ;
+			virtual bool isAccessibleBy(std::shared_ptr<uml::Action> a) ;
 			
 			
 			

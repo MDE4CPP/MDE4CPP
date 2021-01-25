@@ -288,15 +288,7 @@ Any EEnumImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case ecore::ecorePackage::EENUM_ATTRIBUTE_ELITERALS:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ecore::EEnumLiteral>::iterator iter = m_eLiterals->begin();
-			Bag<ecore::EEnumLiteral>::iterator end = m_eLiterals->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //2012
+			return eAny(getELiterals()); //1912			
 		}
 	}
 	return EDataTypeImpl::eGet(featureID, resolve, coreType);
@@ -306,7 +298,7 @@ bool EEnumImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ecore::ecorePackage::EENUM_ATTRIBUTE_ELITERALS:
-			return getELiterals() != nullptr; //2012
+			return getELiterals() != nullptr; //1912
 	}
 	return EDataTypeImpl::internalEIsSet(featureID);
 }
@@ -445,14 +437,11 @@ void EEnumImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 	try
 	{
 		std::shared_ptr<ecore::ecorePackage> package = ecore::ecorePackage::eInstance();
-
 		// Save 'eLiterals'
 		for (std::shared_ptr<ecore::EEnumLiteral> eLiterals : *this->getELiterals()) 
 		{
 			saveHandler->addReference(eLiterals, "eLiterals", eLiterals->eClass() != package->getEEnumLiteral_Class());
 		}
-	
-
 	}
 	catch (std::exception& e)
 	{

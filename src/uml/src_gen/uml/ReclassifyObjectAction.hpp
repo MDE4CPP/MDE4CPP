@@ -40,99 +40,23 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
-namespace uml 
-{
-	class Action;
-}
-
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Activity;
-}
-
-namespace uml 
-{
 	class ActivityEdge;
-}
-
-namespace uml 
-{
 	class ActivityGroup;
-}
-
-namespace uml 
-{
-	class ActivityNode;
-}
-
-namespace uml 
-{
 	class ActivityPartition;
-}
-
-namespace uml 
-{
 	class Classifier;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
 	class Constraint;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class ExceptionHandler;
-}
-
-namespace uml 
-{
 	class InputPin;
-}
-
-namespace uml 
-{
 	class InterruptibleActivityRegion;
-}
-
-namespace uml 
-{
 	class Namespace;
-}
-
-namespace uml 
-{
 	class OutputPin;
-}
-
-namespace uml 
-{
-	class RedefinableElement;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class StructuredActivityNode;
 }
 
@@ -142,6 +66,8 @@ namespace uml
 // enum includes
 #include "uml/VisibilityKind.hpp"
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -175,21 +101,21 @@ namespace uml
 			not newClassifier->exists(isAbstract)
 			*/
 			 
-			virtual bool classifier_not_abstract(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool classifier_not_abstract(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			The object InputPin has no type.
 			object.type = null
 			*/
 			 
-			virtual bool input_pin(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool input_pin(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			The multiplicity of the object InputPin is 1..1.
 			object.is(1,1)
 			*/
 			 
-			virtual bool multiplicity(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool multiplicity(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			
 			//*********************************
@@ -200,14 +126,14 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual bool getIsReplaceAll() const = 0;
+			virtual bool  getIsReplaceAll() const = 0;
 			
 			/*!
 			Specifies whether existing Classifiers should be removed before adding the new Classifiers.
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual void setIsReplaceAll (bool _isReplaceAll)= 0; 
+			virtual void setIsReplaceAll (bool  _isReplaceAll)= 0; 
 			
 			//*********************************
 			// Reference
@@ -253,7 +179,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			bool m_isReplaceAll = false;
+			bool  m_isReplaceAll = false;
 			
 			
 			//*********************************

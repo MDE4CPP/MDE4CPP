@@ -506,7 +506,8 @@ std::shared_ptr<ecore::EClass> OpaqueBehaviorImpl::eStaticClass() const
 /*
 Getter & Setter for attribute body
 */
-std::shared_ptr<Bag<std::string> > OpaqueBehaviorImpl::getBody() const 
+ std::shared_ptr<Bag<std::string> >
+ OpaqueBehaviorImpl::getBody() const 
 {
 	if(m_body == nullptr)
 	{
@@ -522,7 +523,8 @@ std::shared_ptr<Bag<std::string> > OpaqueBehaviorImpl::getBody() const
 /*
 Getter & Setter for attribute language
 */
-std::shared_ptr<Bag<std::string> > OpaqueBehaviorImpl::getLanguage() const 
+ std::shared_ptr<Bag<std::string> >
+ OpaqueBehaviorImpl::getLanguage() const 
 {
 	if(m_language == nullptr)
 	{
@@ -821,7 +823,8 @@ void OpaqueBehaviorImpl::loadNode(std::string nodeName, std::shared_ptr<persiste
 		if (nodeName.compare("body") == 0)
 		{
 			std::shared_ptr<std::string> value = loadHandler->getChildText();
-			std::shared_ptr<Bag<std::string> > list_body = this->getBody();
+			 std::shared_ptr<Bag<std::string> >
+			 list_body = this->getBody();
 			list_body->push_back(value);
 			return;
 		}
@@ -829,7 +832,8 @@ void OpaqueBehaviorImpl::loadNode(std::string nodeName, std::shared_ptr<persiste
 		if (nodeName.compare("language") == 0)
 		{
 			std::shared_ptr<std::string> value = loadHandler->getChildText();
-			std::shared_ptr<Bag<std::string> > list_language = this->getLanguage();
+			 std::shared_ptr<Bag<std::string> >
+			 list_language = this->getLanguage();
 			list_language->push_back(value);
 			return;
 		}
@@ -899,8 +903,6 @@ void OpaqueBehaviorImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
 		// Add attributes
 		if ( this->eIsSet(package->getOpaqueBehavior_Attribute_body()) )
 		{
@@ -917,7 +919,6 @@ void OpaqueBehaviorImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 				saveHandler->addAttributeAsNode("language", *value);
 			}
 		}
-
 	}
 	catch (std::exception& e)
 	{

@@ -313,13 +313,13 @@ std::shared_ptr<ecore::EClass> ExtensionEndImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ExtensionEndImpl::aggregation(Any diagnostics,std::map <   Any, Any >  context)
+bool ExtensionEndImpl::aggregation(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ExtensionEndImpl::multiplicity(Any diagnostics,std::map <   Any, Any >  context)
+bool ExtensionEndImpl::multiplicity(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -560,9 +560,6 @@ void ExtensionEndImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

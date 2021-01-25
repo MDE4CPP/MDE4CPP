@@ -176,7 +176,8 @@ std::shared_ptr<ecore::EClass> DurationObservationImpl::eStaticClass() const
 /*
 Getter & Setter for attribute firstEvent
 */
-std::shared_ptr<Bag<bool> > DurationObservationImpl::isFirstEvent() const 
+ std::shared_ptr<Bag<bool> >
+ DurationObservationImpl::isFirstEvent() const 
 {
 	if(m_firstEvent == nullptr)
 	{
@@ -192,7 +193,7 @@ std::shared_ptr<Bag<bool> > DurationObservationImpl::isFirstEvent() const
 //*********************************
 // Operations
 //*********************************
-bool DurationObservationImpl::first_event_multiplicity(Any diagnostics,std::map <   Any, Any >  context)
+bool DurationObservationImpl::first_event_multiplicity(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -293,6 +294,8 @@ Any DurationObservationImpl::eGet(int featureID, bool resolve, bool coreType) co
 	{
 		case uml::umlPackage::DURATIONOBSERVATION_ATTRIBUTE_EVENT:
 		{
+			return eAny(getEvent()); //8012			
+			/*
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::NamedElement>::iterator iter = m_event->begin();
 			Bag<uml::NamedElement>::iterator end = m_event->end();
@@ -302,6 +305,7 @@ Any DurationObservationImpl::eGet(int featureID, bool resolve, bool coreType) co
 				iter++;
 			}
 			return eAny(tempList); //8012
+			*/
 		}
 		case uml::umlPackage::DURATIONOBSERVATION_ATTRIBUTE_FIRSTEVENT:
 			return eAny(isFirstEvent()); //8013
@@ -487,8 +491,6 @@ void DurationObservationImpl::saveContent(std::shared_ptr<persistence::interface
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
 		// Add attributes
 		if ( this->eIsSet(package->getDurationObservation_Attribute_firstEvent()) )
 		{
@@ -498,13 +500,8 @@ void DurationObservationImpl::saveContent(std::shared_ptr<persistence::interface
 			}
 		}
 
-		// Add references
-		std::shared_ptr<Bag<uml::NamedElement>> event_list = this->getEvent();
-		for (std::shared_ptr<uml::NamedElement > object : *event_list)
-		{ 
-			saveHandler->addReferences("event", object);
-		}
-
+	// Add references
+		saveHandler->addReferences<uml::NamedElement>("event", this->getEvent());	
 	}
 	catch (std::exception& e)
 	{

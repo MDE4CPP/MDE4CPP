@@ -316,9 +316,6 @@ void InstanceValueEvaluationImpl::saveContent(std::shared_ptr<persistence::inter
 	try
 	{
 		std::shared_ptr<fUML::Semantics::Classification::ClassificationPackage> package = fUML::Semantics::Classification::ClassificationPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

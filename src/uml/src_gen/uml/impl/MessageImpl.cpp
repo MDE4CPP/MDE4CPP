@@ -186,7 +186,7 @@ std::shared_ptr<ecore::EClass> MessageImpl::eStaticClass() const
 /*
 Getter & Setter for attribute messageKind
 */
-uml::MessageKind MessageImpl::getMessageKind() const 
+uml::MessageKind  MessageImpl::getMessageKind() const 
 {
 	return m_messageKind;
 }
@@ -198,12 +198,12 @@ uml::MessageKind MessageImpl::getMessageKind() const
 /*
 Getter & Setter for attribute messageSort
 */
-uml::MessageSort MessageImpl::getMessageSort() const 
+uml::MessageSort  MessageImpl::getMessageSort() const 
 {
 	return m_messageSort;
 }
 
-void MessageImpl::setMessageSort(uml::MessageSort _messageSort)
+void MessageImpl::setMessageSort(uml::MessageSort  _messageSort)
 {
 	m_messageSort = _messageSort;
 } 
@@ -213,13 +213,13 @@ void MessageImpl::setMessageSort(uml::MessageSort _messageSort)
 //*********************************
 // Operations
 //*********************************
-bool MessageImpl::arguments(Any diagnostics,std::map <   Any, Any >  context)
+bool MessageImpl::arguments(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool MessageImpl::cannot_cross_boundaries(Any diagnostics,std::map <   Any, Any >  context)
+bool MessageImpl::cannot_cross_boundaries(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -231,37 +231,37 @@ uml::MessageKind MessageImpl::getMessageKind()
 	throw "UnsupportedOperationException";
 }
 
-bool MessageImpl::occurrence_specifications(Any diagnostics,std::map <   Any, Any >  context)
+bool MessageImpl::occurrence_specifications(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool MessageImpl::sending_receiving_message_event(Any diagnostics,std::map <   Any, Any >  context)
+bool MessageImpl::sending_receiving_message_event(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool MessageImpl::signature_is_operation_reply(Any diagnostics,std::map <   Any, Any >  context)
+bool MessageImpl::signature_is_operation_reply(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool MessageImpl::signature_is_operation_request(Any diagnostics,std::map <   Any, Any >  context)
+bool MessageImpl::signature_is_operation_request(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool MessageImpl::signature_is_signal(Any diagnostics,std::map <   Any, Any >  context)
+bool MessageImpl::signature_is_signal(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool MessageImpl::signature_refer_to(Any diagnostics,std::map <   Any, Any >  context)
+bool MessageImpl::signature_refer_to(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -446,6 +446,8 @@ Any MessageImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::MESSAGE_ATTRIBUTE_ARGUMENT:
 		{
+			return eAny(getArgument()); //1479			
+			/*
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::ValueSpecification>::iterator iter = m_argument->begin();
 			Bag<uml::ValueSpecification>::iterator end = m_argument->end();
@@ -455,21 +457,22 @@ Any MessageImpl::eGet(int featureID, bool resolve, bool coreType) const
 				iter++;
 			}
 			return eAny(tempList); //1479
+			*/
 		}
 		case uml::umlPackage::MESSAGE_ATTRIBUTE_CONNECTOR:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getConnector())); //14710
+			return eAny(getConnector()); //14710
 		case uml::umlPackage::MESSAGE_ATTRIBUTE_INTERACTION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getInteraction().lock())); //14711
+			return eAny(getInteraction().lock()); //14711
 		case uml::umlPackage::MESSAGE_ATTRIBUTE_MESSAGEKIND:
 			return eAny(getMessageKind()); //14712
 		case uml::umlPackage::MESSAGE_ATTRIBUTE_MESSAGESORT:
 			return eAny(getMessageSort()); //14713
 		case uml::umlPackage::MESSAGE_ATTRIBUTE_RECEIVEEVENT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getReceiveEvent())); //14714
+			return eAny(getReceiveEvent()); //14714
 		case uml::umlPackage::MESSAGE_ATTRIBUTE_SENDEVENT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSendEvent())); //14715
+			return eAny(getSendEvent()); //14715
 		case uml::umlPackage::MESSAGE_ATTRIBUTE_SIGNATURE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSignature())); //14716
+			return eAny(getSignature()); //14716
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -616,7 +619,7 @@ void MessageImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadH
 		iter = attr_list.find("messageSort");
 		if ( iter != attr_list.end() )
 		{
-			uml::MessageSort value = MessageSort::SYNCHCALL;
+			uml::MessageSort  value = MessageSort::SYNCHCALL;
 			std::string literal = iter->second;
 			if (literal == "synchCall")
 			{
@@ -809,17 +812,15 @@ void MessageImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'argument'
 		for (std::shared_ptr<uml::ValueSpecification> argument : *this->getArgument()) 
 		{
 			saveHandler->addReference(argument, "argument", argument->eClass() != package->getValueSpecification_Class());
 		}
-	
 		// Add attributes
 		if ( this->eIsSet(package->getMessage_Attribute_messageSort()) )
 		{
-			uml::MessageSort value = this->getMessageSort();
+			uml::MessageSort  value = this->getMessageSort();
 			std::string literal = "";
 			if (value == MessageSort::SYNCHCALL)
 			{
@@ -848,12 +849,11 @@ void MessageImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 			saveHandler->addAttribute("messageSort", literal);
 		}
 
-		// Add references
-		saveHandler->addReference("connector", this->getConnector());
-		saveHandler->addReference("receiveEvent", this->getReceiveEvent());
-		saveHandler->addReference("sendEvent", this->getSendEvent());
-		saveHandler->addReference("signature", this->getSignature());
-
+	// Add references
+		saveHandler->addReference("connector", this->getConnector());		 
+		saveHandler->addReference("receiveEvent", this->getReceiveEvent());		 
+		saveHandler->addReference("sendEvent", this->getSendEvent());		 
+		saveHandler->addReference("signature", this->getSignature());		 
 	}
 	catch (std::exception& e)
 	{

@@ -60,7 +60,7 @@ namespace uml
 			extensionLocation->forAll (xp | extendedCase.extensionPoint->includes(xp))
 			*/
 			 
-			virtual bool extension_points(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool extension_points(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			

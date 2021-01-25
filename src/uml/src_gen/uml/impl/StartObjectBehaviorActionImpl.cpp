@@ -295,19 +295,19 @@ std::shared_ptr<uml::Behavior> StartObjectBehaviorActionImpl::behavior()
 	throw "UnsupportedOperationException";
 }
 
-bool StartObjectBehaviorActionImpl::multiplicity_of_object(Any diagnostics,std::map <   Any, Any >  context)
+bool StartObjectBehaviorActionImpl::multiplicity_of_object(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool StartObjectBehaviorActionImpl::no_onport(Any diagnostics,std::map <   Any, Any >  context)
+bool StartObjectBehaviorActionImpl::no_onport(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool StartObjectBehaviorActionImpl::type_of_object(Any diagnostics,std::map <   Any, Any >  context)
+bool StartObjectBehaviorActionImpl::type_of_object(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -469,7 +469,7 @@ Any StartObjectBehaviorActionImpl::eGet(int featureID, bool resolve, bool coreTy
 	switch(featureID)
 	{
 		case uml::umlPackage::STARTOBJECTBEHAVIORACTION_ATTRIBUTE_OBJECT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getObject())); //21931
+			return eAny(getObject()); //21931
 	}
 	return CallActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -602,15 +602,12 @@ void StartObjectBehaviorActionImpl::saveContent(std::shared_ptr<persistence::int
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'object'
 		std::shared_ptr<uml::InputPin > object = this->getObject();
 		if (object != nullptr)
 		{
 			saveHandler->addReference(object, "object", object->eClass() != package->getInputPin_Class());
 		}
-	
-
 	}
 	catch (std::exception& e)
 	{

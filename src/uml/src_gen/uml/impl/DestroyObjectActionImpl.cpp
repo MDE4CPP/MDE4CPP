@@ -267,12 +267,12 @@ std::shared_ptr<ecore::EClass> DestroyObjectActionImpl::eStaticClass() const
 /*
 Getter & Setter for attribute isDestroyLinks
 */
-bool DestroyObjectActionImpl::getIsDestroyLinks() const 
+bool  DestroyObjectActionImpl::getIsDestroyLinks() const 
 {
 	return m_isDestroyLinks;
 }
 
-void DestroyObjectActionImpl::setIsDestroyLinks(bool _isDestroyLinks)
+void DestroyObjectActionImpl::setIsDestroyLinks(bool  _isDestroyLinks)
 {
 	m_isDestroyLinks = _isDestroyLinks;
 } 
@@ -282,12 +282,12 @@ void DestroyObjectActionImpl::setIsDestroyLinks(bool _isDestroyLinks)
 /*
 Getter & Setter for attribute isDestroyOwnedObjects
 */
-bool DestroyObjectActionImpl::getIsDestroyOwnedObjects() const 
+bool  DestroyObjectActionImpl::getIsDestroyOwnedObjects() const 
 {
 	return m_isDestroyOwnedObjects;
 }
 
-void DestroyObjectActionImpl::setIsDestroyOwnedObjects(bool _isDestroyOwnedObjects)
+void DestroyObjectActionImpl::setIsDestroyOwnedObjects(bool  _isDestroyOwnedObjects)
 {
 	m_isDestroyOwnedObjects = _isDestroyOwnedObjects;
 } 
@@ -297,13 +297,13 @@ void DestroyObjectActionImpl::setIsDestroyOwnedObjects(bool _isDestroyOwnedObjec
 //*********************************
 // Operations
 //*********************************
-bool DestroyObjectActionImpl::multiplicity(Any diagnostics,std::map <   Any, Any >  context)
+bool DestroyObjectActionImpl::multiplicity(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool DestroyObjectActionImpl::no_type(Any diagnostics,std::map <   Any, Any >  context)
+bool DestroyObjectActionImpl::no_type(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -449,7 +449,7 @@ Any DestroyObjectActionImpl::eGet(int featureID, bool resolve, bool coreType) co
 		case uml::umlPackage::DESTROYOBJECTACTION_ATTRIBUTE_ISDESTROYOWNEDOBJECTS:
 			return eAny(getIsDestroyOwnedObjects()); //7328
 		case uml::umlPackage::DESTROYOBJECTACTION_ATTRIBUTE_TARGET:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getTarget())); //7329
+			return eAny(getTarget()); //7329
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -623,14 +623,12 @@ void DestroyObjectActionImpl::saveContent(std::shared_ptr<persistence::interface
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'target'
 		std::shared_ptr<uml::InputPin > target = this->getTarget();
 		if (target != nullptr)
 		{
 			saveHandler->addReference(target, "target", target->eClass() != package->getInputPin_Class());
 		}
-	
 		// Add attributes
 		if ( this->eIsSet(package->getDestroyObjectAction_Attribute_isDestroyLinks()) )
 		{
@@ -641,7 +639,6 @@ void DestroyObjectActionImpl::saveContent(std::shared_ptr<persistence::interface
 		{
 			saveHandler->addAttribute("isDestroyOwnedObjects", this->getIsDestroyOwnedObjects());
 		}
-
 	}
 	catch (std::exception& e)
 	{

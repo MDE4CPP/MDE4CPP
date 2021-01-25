@@ -47,16 +47,16 @@ namespace fUML::Semantics::SimpleClassifiers
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() ;
 			
 			 
-			virtual void assignFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<Bag<fUML::Semantics::Values::Value> >  values,int position) ;
+			virtual void assignFeatureValue(std::shared_ptr<org.eclipse.uml2.uml.StructuralFeature> feature,std::shared_ptr<Bag<fUML::Semantics::Values::Value> > values,int position) ;
 			
 			 
-			virtual bool equals(std::shared_ptr<fUML::Semantics::Values::Value>  otherValue) ;
+			virtual bool equals(std::shared_ptr<fUML::Semantics::Values::Value> otherValue) ;
 			
 			 
-			virtual void removeFeatureValues(std::shared_ptr<uml::Classifier>  classifier) ;
+			virtual void removeFeatureValues(std::shared_ptr<org.eclipse.uml2.uml.Classifier> classifier) ;
 			
 			 
-			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> retrieveFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature) ;
+			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> retrieveFeatureValue(std::shared_ptr<org.eclipse.uml2.uml.StructuralFeature> feature) ;
 			
 			 
 			virtual std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue> > retrieveFeatureValues() ;

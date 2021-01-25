@@ -218,13 +218,13 @@ void ReadStructuralFeatureActionActivationImpl::doAction()
 /*
 Getter & Setter for reference readStructuralFeatureAction
 */
-std::shared_ptr<uml::ReadStructuralFeatureAction > ReadStructuralFeatureActionActivationImpl::getReadStructuralFeatureAction() const
+std::shared_ptr<org.eclipse.uml2.uml.ReadStructuralFeatureAction > ReadStructuralFeatureActionActivationImpl::getReadStructuralFeatureAction() const
 {
 //assert(m_readStructuralFeatureAction);
     return m_readStructuralFeatureAction;
 }
 
-void ReadStructuralFeatureActionActivationImpl::setReadStructuralFeatureAction(std::shared_ptr<uml::ReadStructuralFeatureAction> _readStructuralFeatureAction)
+void ReadStructuralFeatureActionActivationImpl::setReadStructuralFeatureAction(std::shared_ptr<org.eclipse.uml2.uml.ReadStructuralFeatureAction> _readStructuralFeatureAction)
 {
     m_readStructuralFeatureAction = _readStructuralFeatureAction;
 	//additional setter call for redefined reference ActionActivation::action
@@ -232,9 +232,9 @@ void ReadStructuralFeatureActionActivationImpl::setReadStructuralFeatureAction(s
 }
 
 /*Additional Setter for redefined reference 'ActionActivation::action'*/
-void ReadStructuralFeatureActionActivationImpl::setAction(std::shared_ptr<uml::Action> _action)
+void ReadStructuralFeatureActionActivationImpl::setAction(std::shared_ptr<org.eclipse.uml2.uml.Action> _action)
 {
-	std::shared_ptr<uml::ReadStructuralFeatureAction> _readStructuralFeatureAction = std::dynamic_pointer_cast<uml::ReadStructuralFeatureAction>(_action);
+	std::shared_ptr<org.eclipse.uml2.uml.ReadStructuralFeatureAction> _readStructuralFeatureAction = std::dynamic_pointer_cast<org.eclipse.uml2.uml.ReadStructuralFeatureAction>(_action);
 	if(_readStructuralFeatureAction)
 	{
 		m_readStructuralFeatureAction = _readStructuralFeatureAction;
@@ -244,13 +244,13 @@ void ReadStructuralFeatureActionActivationImpl::setAction(std::shared_ptr<uml::A
 	}
 	else
 	{
-		std::cerr<<"[ReadStructuralFeatureActionActivation::setAction] : Could not set action because provided action was not of type 'uml::ReadStructuralFeatureAction'"<<std::endl;
+		std::cerr<<"[ReadStructuralFeatureActionActivation::setAction] : Could not set action because provided action was not of type 'org.eclipse.uml2.uml.ReadStructuralFeatureAction'"<<std::endl;
 	}
 }
 /*Additional Setter for redefined reference 'ActivityNodeActivation::node'*/
-void ReadStructuralFeatureActionActivationImpl::setNode(std::shared_ptr<uml::ActivityNode> _node)
+void ReadStructuralFeatureActionActivationImpl::setNode(std::shared_ptr<org.eclipse.uml2.uml.ActivityNode> _node)
 {
-	std::shared_ptr<uml::ReadStructuralFeatureAction> _readStructuralFeatureAction = std::dynamic_pointer_cast<uml::ReadStructuralFeatureAction>(_node);
+	std::shared_ptr<org.eclipse.uml2.uml.ReadStructuralFeatureAction> _readStructuralFeatureAction = std::dynamic_pointer_cast<org.eclipse.uml2.uml.ReadStructuralFeatureAction>(_node);
 	if(_readStructuralFeatureAction)
 	{
 		m_readStructuralFeatureAction = _readStructuralFeatureAction;
@@ -260,7 +260,7 @@ void ReadStructuralFeatureActionActivationImpl::setNode(std::shared_ptr<uml::Act
 	}
 	else
 	{
-		std::cerr<<"[ReadStructuralFeatureActionActivation::setNode] : Could not set node because provided node was not of type 'uml::ReadStructuralFeatureAction'"<<std::endl;
+		std::cerr<<"[ReadStructuralFeatureActionActivation::setNode] : Could not set node because provided node was not of type 'org.eclipse.uml2.uml.ReadStructuralFeatureAction'"<<std::endl;
 	}
 }
 
@@ -312,7 +312,7 @@ Any ReadStructuralFeatureActionActivationImpl::eGet(int featureID, bool resolve,
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::READSTRUCTURALFEATUREACTIONACTIVATION_ATTRIBUTE_READSTRUCTURALFEATUREACTION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getReadStructuralFeatureAction())); //9411
+			return eAny(getReadStructuralFeatureAction()); //9411
 	}
 	return StructuralFeatureActionActivationImpl::eGet(featureID, resolve, coreType);
 }
@@ -333,7 +333,7 @@ bool ReadStructuralFeatureActionActivationImpl::eSet(int featureID, Any newValue
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::ReadStructuralFeatureAction> _readStructuralFeatureAction = std::dynamic_pointer_cast<uml::ReadStructuralFeatureAction>(_temp);
+			std::shared_ptr<org.eclipse.uml2.uml.ReadStructuralFeatureAction> _readStructuralFeatureAction = std::dynamic_pointer_cast<org.eclipse.uml2.uml.ReadStructuralFeatureAction>(_temp);
 			setReadStructuralFeatureAction(_readStructuralFeatureAction); //9411
 			return true;
 		}
@@ -403,7 +403,7 @@ void ReadStructuralFeatureActionActivationImpl::resolveReferences(const int feat
 			if (references.size() == 1)
 			{
 				// Cast object to correct type
-				std::shared_ptr<uml::ReadStructuralFeatureAction> _readStructuralFeatureAction = std::dynamic_pointer_cast<uml::ReadStructuralFeatureAction>( references.front() );
+				std::shared_ptr<org.eclipse.uml2.uml.ReadStructuralFeatureAction> _readStructuralFeatureAction = std::dynamic_pointer_cast<org.eclipse.uml2.uml.ReadStructuralFeatureAction>( references.front() );
 				setReadStructuralFeatureAction(_readStructuralFeatureAction);
 			}
 			
@@ -438,11 +438,8 @@ void ReadStructuralFeatureActionActivationImpl::saveContent(std::shared_ptr<pers
 	{
 		std::shared_ptr<fUML::Semantics::Actions::ActionsPackage> package = fUML::Semantics::Actions::ActionsPackage::eInstance();
 
-	
-
-		// Add references
-		saveHandler->addReference("readStructuralFeatureAction", this->getReadStructuralFeatureAction());
-
+	// Add references
+		saveHandler->addReference("readStructuralFeatureAction", this->getReadStructuralFeatureAction());		
 	}
 	catch (std::exception& e)
 	{

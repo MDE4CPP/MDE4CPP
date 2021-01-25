@@ -38,19 +38,10 @@ namespace ecore
 	class ecoreFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace ecore 
 {
 	class EClassifier;
-}
-
-namespace ecore 
-{
-	class EGenericType;
-}
-
-namespace ecore 
-{
 	class ETypeParameter;
 }
 
@@ -59,6 +50,8 @@ namespace ecore
 // enum includes
 
 #include "ecore/EModelElement.hpp"
+
+//Includes from codegen annotation
 
 //*********************************
 namespace ecore 

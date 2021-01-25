@@ -84,10 +84,10 @@
 #include "PSCS/Semantics/Actions/impl/ActionsFactoryImpl.hpp"
 #include "PSCS/Semantics/Actions/impl/ActionsPackageImpl.hpp"
 
-#include "PSCS/PSCSFactory.hpp"
-#include "PSCS/PSCSPackage.hpp"
 #include "PSCS/Semantics/SemanticsFactory.hpp"
 #include "PSCS/Semantics/SemanticsPackage.hpp"
+#include "PSCS/PSCSFactory.hpp"
+#include "PSCS/PSCSPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -203,7 +203,7 @@ std::shared_ptr<ecore::EClass> CS_CallOperationActionActivationImpl::eStaticClas
 //*********************************
 // Operations
 //*********************************
-bool CS_CallOperationActionActivationImpl::_isCreate(std::shared_ptr<uml::Operation>  operation)
+bool CS_CallOperationActionActivationImpl::_isCreate(std::shared_ptr<org.eclipse.uml2.uml.Operation> operation)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -343,7 +343,7 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> CS_CallOperationActi
 	//end of body
 }
 
-bool CS_CallOperationActionActivationImpl::isCreate(std::shared_ptr<uml::Operation>  operation)
+bool CS_CallOperationActionActivationImpl::isCreate(std::shared_ptr<org.eclipse.uml2.uml.Operation> operation)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -357,7 +357,7 @@ bool CS_CallOperationActionActivationImpl::isCreate(std::shared_ptr<uml::Operati
 	//end of body
 }
 
-bool CS_CallOperationActionActivationImpl::isOperationProvided(std::shared_ptr<uml::Port>  port,std::shared_ptr<uml::Operation>  operation)
+bool CS_CallOperationActionActivationImpl::isOperationProvided(std::shared_ptr<org.eclipse.uml2.uml.Port> port,std::shared_ptr<org.eclipse.uml2.uml.Operation> operation)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -387,7 +387,7 @@ bool CS_CallOperationActionActivationImpl::isOperationProvided(std::shared_ptr<u
 	//end of body
 }
 
-bool CS_CallOperationActionActivationImpl::isOperationRequired(std::shared_ptr<uml::Port>  port,std::shared_ptr<uml::Operation>  operation)
+bool CS_CallOperationActionActivationImpl::isOperationRequired(std::shared_ptr<org.eclipse.uml2.uml.Port> port,std::shared_ptr<org.eclipse.uml2.uml.Operation> operation)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -550,9 +550,6 @@ void CS_CallOperationActionActivationImpl::saveContent(std::shared_ptr<persisten
 	try
 	{
 		std::shared_ptr<PSCS::Semantics::Actions::ActionsPackage> package = PSCS::Semantics::Actions::ActionsPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

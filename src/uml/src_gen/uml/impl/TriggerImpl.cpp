@@ -154,7 +154,7 @@ std::shared_ptr<ecore::EClass> TriggerImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool TriggerImpl::trigger_with_ports(Any diagnostics,std::map <   Any, Any >  context)
+bool TriggerImpl::trigger_with_ports(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -255,18 +255,10 @@ Any TriggerImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::TRIGGER_ATTRIBUTE_EVENT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEvent())); //2439
+			return eAny(getEvent()); //2439
 		case uml::umlPackage::TRIGGER_ATTRIBUTE_PORT:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Port>::iterator iter = m_port->begin();
-			Bag<uml::Port>::iterator end = m_port->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //24310
+			return eAny(getPort()); //24310			
 		}
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
@@ -449,16 +441,9 @@ void TriggerImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
-	
-
-		// Add references
-		saveHandler->addReference("event", this->getEvent());
-		std::shared_ptr<Bag<uml::Port>> port_list = this->getPort();
-		for (std::shared_ptr<uml::Port > object : *port_list)
-		{ 
-			saveHandler->addReferences("port", object);
-		}
-
+	// Add references
+		saveHandler->addReference("event", this->getEvent());		 
+		saveHandler->addReferences<uml::Port>("port", this->getPort());	
 	}
 	catch (std::exception& e)
 	{

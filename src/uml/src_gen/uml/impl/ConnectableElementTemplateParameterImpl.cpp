@@ -285,9 +285,6 @@ void ConnectableElementTemplateParameterImpl::saveContent(std::shared_ptr<persis
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

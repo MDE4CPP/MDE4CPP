@@ -39,184 +39,35 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
-namespace uml 
-{
-	class Behavior;
-}
-
+//Forward Declaration for used types 
 namespace uml 
 {
 	class BehavioralFeature;
-}
-
-namespace uml 
-{
-	class BehavioredClassifier;
-}
-
-namespace uml 
-{
-	class Class;
-}
-
-namespace uml 
-{
-	class Classifier;
-}
-
-namespace uml 
-{
 	class CollaborationUse;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
 	class ConnectableElement;
-}
-
-namespace uml 
-{
 	class Connector;
-}
-
-namespace uml 
-{
 	class Constraint;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class ElementImport;
-}
-
-namespace uml 
-{
 	class Extension;
-}
-
-namespace uml 
-{
 	class Feature;
-}
-
-namespace uml 
-{
 	class Generalization;
-}
-
-namespace uml 
-{
 	class GeneralizationSet;
-}
-
-namespace uml 
-{
 	class InterfaceRealization;
-}
-
-namespace uml 
-{
-	class NamedElement;
-}
-
-namespace uml 
-{
-	class Namespace;
-}
-
-namespace uml 
-{
 	class Operation;
-}
-
-namespace uml 
-{
 	class Package;
-}
-
-namespace uml 
-{
 	class PackageImport;
-}
-
-namespace uml 
-{
-	class PackageableElement;
-}
-
-namespace uml 
-{
 	class Parameter;
-}
-
-namespace uml 
-{
 	class ParameterSet;
-}
-
-namespace uml 
-{
 	class Port;
-}
-
-namespace uml 
-{
 	class Property;
-}
-
-namespace uml 
-{
 	class Reception;
-}
-
-namespace uml 
-{
-	class RedefinableElement;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class Substitution;
-}
-
-namespace uml 
-{
 	class TemplateBinding;
-}
-
-namespace uml 
-{
 	class TemplateParameter;
-}
-
-namespace uml 
-{
 	class TemplateSignature;
-}
-
-namespace uml 
-{
 	class UseCase;
 }
 
@@ -226,6 +77,8 @@ namespace uml
 // enum includes
 #include "uml/VisibilityKind.hpp"
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -290,14 +143,14 @@ namespace uml
 			<p>From package UML::CommonBehavior.</p>
 			*/
 			 
-			virtual std::shared_ptr<uml::BehavioredClassifier> behavioredClassifier(std::shared_ptr<uml::Element>  from) = 0;
+			virtual std::shared_ptr<uml::BehavioredClassifier> behavioredClassifier(std::shared_ptr<uml::Element> from) = 0;
 			
 			/*!
 			The specification BehavioralFeature must be a feature (possibly inherited) of the context BehavioredClassifier of the Behavior.
 			_'context'.feature->includes(specification)
 			*/
 			 
-			virtual bool feature_of_context_classifier(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool feature_of_context_classifier(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			
 			
@@ -314,7 +167,7 @@ namespace uml
 			specification <> null implies _'context'.ownedBehavior->select(specification=self.specification)->size() = 1
 			*/
 			 
-			virtual bool most_one_behavior(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool most_one_behavior(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			The out, inout and return ownedParameters.
@@ -329,7 +182,7 @@ namespace uml
 			specification <> null implies ownedParameter->size() = specification.ownedParameter->size()
 			*/
 			 
-			virtual bool parameters_match(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool parameters_match(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			
 			//*********************************
@@ -340,14 +193,14 @@ namespace uml
 			<p>From package UML::CommonBehavior.</p>
 			*/
 			 
-			virtual bool getIsReentrant() const = 0;
+			virtual bool  getIsReentrant() const = 0;
 			
 			/*!
 			Tells whether the Behavior can be invoked while it is still executing from a previous invocation.
 			<p>From package UML::CommonBehavior.</p>
 			*/
 			 
-			virtual void setIsReentrant (bool _isReentrant)= 0; 
+			virtual void setIsReentrant (bool  _isReentrant)= 0; 
 			
 			//*********************************
 			// Reference
@@ -437,7 +290,7 @@ namespace uml
 			<p>From package UML::CommonBehavior.</p>
 			*/
 			 
-			bool m_isReentrant = true;
+			bool  m_isReentrant = true;
 			
 			
 			//*********************************

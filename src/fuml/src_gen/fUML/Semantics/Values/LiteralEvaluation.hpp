@@ -35,24 +35,14 @@ namespace fUML
 	class fUMLFactory;
 }
 
-//Forward Declaration for used types
-namespace fUML::Semantics::Values 
-{
-	class Evaluation;
-}
-
+//Forward Declaration for used types 
 namespace fUML::Semantics::Loci 
 {
 	class Locus;
 }
-
 namespace uml 
 {
 	class PrimitiveType;
-}
-
-namespace uml 
-{
 	class ValueSpecification;
 }
 
@@ -61,6 +51,12 @@ namespace uml
 
 // enum includes
 
+
+//Includes from codegen annotation
+#include "fUML/Semantics/Loci/ExecutionFactory.hpp"
+#include "uml/ValueSpecification.hpp"
+#include "uml/PrimitiveType.hpp"
+#include "uml/Type.hpp"
 
 //*********************************
 namespace fUML::Semantics::Values 
@@ -86,7 +82,7 @@ namespace fUML::Semantics::Values
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<uml::PrimitiveType> getType(std::string builtInTypeName) = 0;
+			virtual std::shared_ptr<org.eclipse.uml2.uml.PrimitiveType> getType(std::string builtInTypeName) = 0;
 			
 			
 			//*********************************

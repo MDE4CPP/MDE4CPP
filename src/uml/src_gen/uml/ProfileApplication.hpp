@@ -36,44 +36,17 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
-namespace uml 
-{
-	class Comment;
-}
-
-namespace uml 
-{
-	class DirectedRelationship;
-}
-
+//Forward Declaration for used types 
 namespace ecore 
 {
 	class ENamedElement;
-}
-
-namespace ecore 
-{
 	class EPackage;
 }
-
 namespace uml 
 {
-	class Element;
-}
-
-namespace uml 
-{
+	class Comment;
 	class NamedElement;
-}
-
-namespace uml 
-{
 	class Package;
-}
-
-namespace uml 
-{
 	class Profile;
 }
 
@@ -82,6 +55,8 @@ namespace uml
 
 // enum includes
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -128,7 +103,7 @@ namespace uml
 			Retrieves the definition (Ecore representation) of the specified named element in the profile associated with this profile application.
 			*/
 			 
-			virtual std::shared_ptr<ecore::ENamedElement> getAppliedDefinition(std::shared_ptr<uml::NamedElement>  namedElement) = 0;
+			virtual std::shared_ptr<ecore::ENamedElement> getAppliedDefinition(std::shared_ptr<uml::NamedElement> namedElement) = 0;
 			
 			
 			//*********************************
@@ -139,14 +114,14 @@ namespace uml
 			<p>From package UML::Packages.</p>
 			*/
 			 
-			virtual bool getIsStrict() const = 0;
+			virtual bool  getIsStrict() const = 0;
 			
 			/*!
 			Specifies that the Profile filtering rules for the metaclasses of the referenced metamodel shall be strictly applied.
 			<p>From package UML::Packages.</p>
 			*/
 			 
-			virtual void setIsStrict (bool _isStrict)= 0; 
+			virtual void setIsStrict (bool  _isStrict)= 0; 
 			
 			//*********************************
 			// Reference
@@ -190,7 +165,7 @@ namespace uml
 			<p>From package UML::Packages.</p>
 			*/
 			 
-			bool m_isStrict = false;
+			bool  m_isStrict = false;
 			
 			
 			//*********************************

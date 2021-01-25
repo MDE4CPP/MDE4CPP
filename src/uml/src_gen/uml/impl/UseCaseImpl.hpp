@@ -74,21 +74,21 @@ namespace uml
 			Association.allInstances()->forAll(a | a.memberEnd.type->includes(self) implies a.memberEnd->size() = 2)
 			*/
 			 
-			virtual bool binary_associations(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool binary_associations(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			A UseCase cannot include UseCases that directly or indirectly include it.
 			not allIncludedUseCases()->includes(self)
 			*/
 			 
-			virtual bool cannot_include_self(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool cannot_include_self(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			A UseCase must have a name.
 			name -> notEmpty ()
 			*/
 			 
-			virtual bool must_have_name(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool must_have_name(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			UseCases cannot have Associations to UseCases specifying the same subject.
@@ -100,7 +100,7 @@ namespace uml
 			)
 			*/
 			 
-			virtual bool no_association_to_use_case(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool no_association_to_use_case(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			

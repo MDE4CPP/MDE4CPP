@@ -39,59 +39,17 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Comment;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class Gate;
-}
-
-namespace uml 
-{
 	class GeneralOrdering;
-}
-
-namespace uml 
-{
 	class Interaction;
-}
-
-namespace uml 
-{
-	class InteractionFragment;
-}
-
-namespace uml 
-{
 	class InteractionOperand;
-}
-
-namespace uml 
-{
 	class Lifeline;
-}
-
-namespace uml 
-{
 	class Namespace;
-}
-
-namespace uml 
-{
 	class StringExpression;
 }
 
@@ -103,6 +61,8 @@ namespace uml
 
 #include "uml/VisibilityKind.hpp"
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -138,14 +98,14 @@ namespace uml
 			   enclosingOperand.oclAsType(InteractionFragment)->asSet()).covered->asSet() = self.covered->asSet()
 			*/
 			 
-			virtual bool break_(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool break_(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			The interaction operators 'consider' and 'ignore' can only be used for the ConsiderIgnoreFragment subtype of CombinedFragment
 			((interactionOperator = InteractionOperatorKind::consider) or (interactionOperator =  InteractionOperatorKind::ignore)) implies oclIsKindOf(ConsiderIgnoreFragment)
 			*/
 			 
-			virtual bool consider_and_ignore(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool consider_and_ignore(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			If the interactionOperator is opt, loop, break, assert or neg, there must be exactly one operand.
@@ -155,7 +115,7 @@ namespace uml
 			implies operand->size()=1
 			*/
 			 
-			virtual bool opt_loop_break_neg(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool opt_loop_break_neg(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			
 			//*********************************
@@ -166,14 +126,14 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			 
-			virtual uml::InteractionOperatorKind getInteractionOperator() const = 0;
+			virtual uml::InteractionOperatorKind  getInteractionOperator() const = 0;
 			
 			/*!
 			Specifies the operation which defines the semantics of this combination of InteractionFragments.
 			<p>From package UML::Interactions.</p>
 			*/
 			 
-			virtual void setInteractionOperator (uml::InteractionOperatorKind _interactionOperator)= 0; 
+			virtual void setInteractionOperator (uml::InteractionOperatorKind  _interactionOperator)= 0; 
 			
 			//*********************************
 			// Reference
@@ -205,7 +165,7 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			 
-			uml::InteractionOperatorKind m_interactionOperator = InteractionOperatorKind::SEQ;
+			uml::InteractionOperatorKind  m_interactionOperator = InteractionOperatorKind::SEQ;
 			
 			
 			//*********************************

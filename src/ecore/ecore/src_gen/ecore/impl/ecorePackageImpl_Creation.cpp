@@ -61,10 +61,10 @@ void ecorePackageImpl::createPackageContents(std::shared_ptr<ecore::EPackage> pa
 void ecorePackageImpl::createEAnnotationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_eAnnotation_Class = factory->createEClass_in_EPackage(package, EANNOTATION_CLASS);
+	m_eAnnotation_Attribute_details = factory->createEAttribute_in_EContainingClass(m_eAnnotation_Class, EANNOTATION_ATTRIBUTE_DETAILS);
 	m_eAnnotation_Attribute_source = factory->createEAttribute_in_EContainingClass(m_eAnnotation_Class, EANNOTATION_ATTRIBUTE_SOURCE);
 	
 	m_eAnnotation_Attribute_contents = factory->createEReference_in_EContainingClass(m_eAnnotation_Class, EANNOTATION_ATTRIBUTE_CONTENTS);
-	m_eAnnotation_Attribute_details = factory->createEReference_in_EContainingClass(m_eAnnotation_Class, EANNOTATION_ATTRIBUTE_DETAILS);
 	m_eAnnotation_Attribute_eModelElement = factory->createEReference_in_EContainingClass(m_eAnnotation_Class, EANNOTATION_ATTRIBUTE_EMODELELEMENT);
 	m_eAnnotation_Attribute_references = factory->createEReference_in_EContainingClass(m_eAnnotation_Class, EANNOTATION_ATTRIBUTE_REFERENCES);
 	
@@ -355,7 +355,6 @@ void ecorePackageImpl::createPackageEDataTypes(std::shared_ptr<ecore::EPackage> 
 	m_eByteObject_Class = factory->createEDataType_in_EPackage(package, EBYTEOBJECT_CLASS);
 	m_eChar_Class = factory->createEDataType_in_EPackage(package, ECHAR_CLASS);
 	m_eCharacterObject_Class = factory->createEDataType_in_EPackage(package, ECHARACTEROBJECT_CLASS);
-	m_eDate_Class = factory->createEDataType_in_EPackage(package, EDATE_CLASS);
 	m_eDiagnosticChain_Class = factory->createEDataType_in_EPackage(package, EDIAGNOSTICCHAIN_CLASS);
 	m_eDouble_Class = factory->createEDataType_in_EPackage(package, EDOUBLE_CLASS);
 	m_eDoubleObject_Class = factory->createEDataType_in_EPackage(package, EDOUBLEOBJECT_CLASS);

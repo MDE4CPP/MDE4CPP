@@ -50,7 +50,7 @@ virtual public Object
 			Property. If there are no values, the ReflectiveCollection returned is empty. 
 			*/
 			 
-			virtual Any get(std::shared_ptr<uml::Property>  property) const ;
+			virtual Any get(std::shared_ptr<uml::Property> property) const ;
 			
 			/*!
 			Calls the supplied Operation on the object, passing the supplied Arguments and returning the result.
@@ -58,17 +58,17 @@ virtual public Object
 			If an Argument is not supplied for a Parameter, its default value, if any, will be used.
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Object> > invoke(std::shared_ptr<uml::Operation>  op,std::shared_ptr<Bag<uml::Argument> >  arguments) ;
+			virtual std::shared_ptr<Bag<uml::Object> > invoke(std::shared_ptr<uml::Operation> op,std::shared_ptr<Bag<uml::Argument> > arguments) ;
 			
 			/*!
 			If the Property has multiplicity upper bound = 1, set() atomically updates the value of the Property to the object
 			parameter. If Property has multiplicity upper bound >1, the Object must be a kind of ReflectiveCollection.
 			*/
 			 
-			virtual void set(std::shared_ptr<uml::Property>  property,Any value) ;
+			virtual void set(std::shared_ptr<uml::Property> property,Any value) ;
 			
 			 
-			virtual void unset(std::shared_ptr<uml::Property>  property) ;
+			virtual void unset(std::shared_ptr<uml::Property> property) ;
 			
 			
 			

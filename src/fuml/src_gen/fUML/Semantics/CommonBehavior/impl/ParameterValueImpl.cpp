@@ -142,13 +142,13 @@ return newValue;
 /*
 Getter & Setter for reference parameter
 */
-std::shared_ptr<uml::Parameter > ParameterValueImpl::getParameter() const
+std::shared_ptr<org.eclipse.uml2.uml.Parameter > ParameterValueImpl::getParameter() const
 {
 //assert(m_parameter);
     return m_parameter;
 }
 
-void ParameterValueImpl::setParameter(std::shared_ptr<uml::Parameter> _parameter)
+void ParameterValueImpl::setParameter(std::shared_ptr<org.eclipse.uml2.uml.Parameter> _parameter)
 {
     m_parameter = _parameter;
 }
@@ -201,9 +201,11 @@ Any ParameterValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_ATTRIBUTE_PARAMETER:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getParameter())); //870
+			return eAny(getParameter()); //870
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_ATTRIBUTE_VALUES:
 		{
+			return eAny(getValues()); //871			
+			/*
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<fUML::Semantics::Values::Value>::iterator iter = m_values->begin();
 			Bag<fUML::Semantics::Values::Value>::iterator end = m_values->end();
@@ -213,6 +215,7 @@ Any ParameterValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 				iter++;
 			}
 			return eAny(tempList); //871
+			*/
 		}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
@@ -236,7 +239,7 @@ bool ParameterValueImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Parameter> _parameter = std::dynamic_pointer_cast<uml::Parameter>(_temp);
+			std::shared_ptr<org.eclipse.uml2.uml.Parameter> _parameter = std::dynamic_pointer_cast<org.eclipse.uml2.uml.Parameter>(_temp);
 			setParameter(_parameter); //870
 			return true;
 		}
@@ -369,7 +372,7 @@ void ParameterValueImpl::resolveReferences(const int featureID, std::list<std::s
 			if (references.size() == 1)
 			{
 				// Cast object to correct type
-				std::shared_ptr<uml::Parameter> _parameter = std::dynamic_pointer_cast<uml::Parameter>( references.front() );
+				std::shared_ptr<org.eclipse.uml2.uml.Parameter> _parameter = std::dynamic_pointer_cast<org.eclipse.uml2.uml.Parameter>( references.front() );
 				setParameter(_parameter);
 			}
 			
@@ -394,11 +397,8 @@ void ParameterValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	{
 		std::shared_ptr<fUML::Semantics::CommonBehavior::CommonBehaviorPackage> package = fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance();
 
-	
-
-		// Add references
-		saveHandler->addReference("parameter", this->getParameter());
-
+	// Add references
+		saveHandler->addReference("parameter", this->getParameter());		
 
 		//
 		// Add new tags (from references)

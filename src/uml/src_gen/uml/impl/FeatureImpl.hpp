@@ -60,14 +60,14 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual bool getIsStatic() const ;
+			virtual bool  getIsStatic() const ;
 			
 			/*!
 			Specifies whether this Feature characterizes individual instances classified by the Classifier (false) or the Classifier itself (true).
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual void setIsStatic (bool _isStatic); 
+			virtual void setIsStatic (bool  _isStatic); 
 			
 			
 			//*********************************

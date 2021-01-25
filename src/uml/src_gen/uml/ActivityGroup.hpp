@@ -40,54 +40,15 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Activity;
-}
-
-namespace uml 
-{
 	class ActivityEdge;
-}
-
-namespace uml 
-{
-	class ActivityGroup;
-}
-
-namespace uml 
-{
 	class ActivityNode;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
-	class NamedElement;
-}
-
-namespace uml 
-{
 	class Namespace;
-}
-
-namespace uml 
-{
 	class StringExpression;
 }
 
@@ -97,6 +58,8 @@ namespace uml
 // enum includes
 #include "uml/VisibilityKind.hpp"
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -157,7 +120,7 @@ namespace uml
 			containedEdge->forAll(activity = self.containingActivity())
 			*/
 			 
-			virtual bool nodes_and_edges(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool nodes_and_edges(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			No containedNode or containedEdge of an ActivityGroup may be contained by its subgroups or its superGroups, transitively.
@@ -167,7 +130,7 @@ namespace uml
 			superGroup->closure(superGroup).containedEdge->excludesAll(containedEdge)
 			*/
 			 
-			virtual bool not_contained(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool not_contained(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			
 			//*********************************

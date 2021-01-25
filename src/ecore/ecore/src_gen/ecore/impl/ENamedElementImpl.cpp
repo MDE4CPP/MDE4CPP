@@ -115,12 +115,12 @@ std::shared_ptr<EClass> ENamedElementImpl::eStaticClass() const
 /*
 Getter & Setter for attribute name
 */
-std::string ENamedElementImpl::getName() const 
+std::string  ENamedElementImpl::getName() const 
 {
 	return m_name;
 }
 
-void ENamedElementImpl::setName(std::string _name)
+void ENamedElementImpl::setName(std::string  _name)
 {
 	m_name = _name;
 } 
@@ -182,7 +182,7 @@ Any ENamedElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ecore::ecorePackage::ENAMEDELEMENT_ATTRIBUTE_NAME:
-			return eAny(getName()); //384
+			return eAny(getName()); //374
 	}
 	return EModelElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -191,7 +191,7 @@ bool ENamedElementImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ecore::ecorePackage::ENAMEDELEMENT_ATTRIBUTE_NAME:
-			return getName() != ""; //384
+			return getName() != ""; //374
 	}
 	return EModelElementImpl::internalEIsSet(featureID);
 }
@@ -203,7 +203,7 @@ bool ENamedElementImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::string _name = newValue->get<std::string>();
-			setName(_name); //384
+			setName(_name); //374
 			return true;
 		}
 	}
@@ -288,14 +288,11 @@ void ENamedElementImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	try
 	{
 		std::shared_ptr<ecore::ecorePackage> package = ecore::ecorePackage::eInstance();
-
-	
 		// Add attributes
 		if ( this->eIsSet(package->getENamedElement_Attribute_name()) )
 		{
 			saveHandler->addAttribute("name", this->getName());
 		}
-
 	}
 	catch (std::exception& e)
 	{

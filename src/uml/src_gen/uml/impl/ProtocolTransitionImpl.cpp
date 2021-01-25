@@ -272,13 +272,13 @@ std::shared_ptr<ecore::EClass> ProtocolTransitionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ProtocolTransitionImpl::associated_actions(Any diagnostics,std::map <   Any, Any >  context)
+bool ProtocolTransitionImpl::associated_actions(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ProtocolTransitionImpl::belongs_to_psm(Any diagnostics,std::map <   Any, Any >  context)
+bool ProtocolTransitionImpl::belongs_to_psm(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -290,7 +290,7 @@ std::shared_ptr<Bag<uml::Operation> > ProtocolTransitionImpl::getReferreds()
 	throw "UnsupportedOperationException";
 }
 
-bool ProtocolTransitionImpl::refers_to_operation(Any diagnostics,std::map <   Any, Any >  context)
+bool ProtocolTransitionImpl::refers_to_operation(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -467,11 +467,13 @@ Any ProtocolTransitionImpl::eGet(int featureID, bool resolve, bool coreType) con
 	switch(featureID)
 	{
 		case uml::umlPackage::PROTOCOLTRANSITION_ATTRIBUTE_POSTCONDITION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getPostCondition())); //18826
+			return eAny(getPostCondition()); //18826
 		case uml::umlPackage::PROTOCOLTRANSITION_ATTRIBUTE_PRECONDITION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getPreCondition())); //18827
+			return eAny(getPreCondition()); //18827
 		case uml::umlPackage::PROTOCOLTRANSITION_ATTRIBUTE_REFERRED:
 		{
+			return eAny(getReferred()); //18828			
+			/*
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Operation>::iterator iter = m_referred->begin();
 			Bag<uml::Operation>::iterator end = m_referred->end();
@@ -481,6 +483,7 @@ Any ProtocolTransitionImpl::eGet(int featureID, bool resolve, bool coreType) con
 				iter++;
 			}
 			return eAny(tempList); //18828
+			*/
 		}
 	}
 	return TransitionImpl::eGet(featureID, resolve, coreType);
@@ -642,12 +645,9 @@ void ProtocolTransitionImpl::saveContent(std::shared_ptr<persistence::interfaces
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
-	
-
-		// Add references
-		saveHandler->addReference("postCondition", this->getPostCondition());
-		saveHandler->addReference("preCondition", this->getPreCondition());
-
+	// Add references
+		saveHandler->addReference("postCondition", this->getPostCondition());		 
+		saveHandler->addReference("preCondition", this->getPreCondition());		 
 	}
 	catch (std::exception& e)
 	{

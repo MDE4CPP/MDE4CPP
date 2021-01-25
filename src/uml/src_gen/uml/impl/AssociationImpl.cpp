@@ -384,12 +384,12 @@ std::shared_ptr<ecore::EClass> AssociationImpl::eStaticClass() const
 /*
 Getter & Setter for attribute isDerived
 */
-bool AssociationImpl::getIsDerived() const 
+bool  AssociationImpl::getIsDerived() const 
 {
 	return m_isDerived;
 }
 
-void AssociationImpl::setIsDerived(bool _isDerived)
+void AssociationImpl::setIsDerived(bool  _isDerived)
 {
 	m_isDerived = _isDerived;
 } 
@@ -399,19 +399,19 @@ void AssociationImpl::setIsDerived(bool _isDerived)
 //*********************************
 // Operations
 //*********************************
-bool AssociationImpl::association_ends(Any diagnostics,std::map <   Any, Any >  context)
+bool AssociationImpl::association_ends(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool AssociationImpl::binary_associations(Any diagnostics,std::map <   Any, Any >  context)
+bool AssociationImpl::binary_associations(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool AssociationImpl::ends_must_be_typed(Any diagnostics,std::map <   Any, Any >  context)
+bool AssociationImpl::ends_must_be_typed(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -429,13 +429,13 @@ bool AssociationImpl::isBinary()
 	throw "UnsupportedOperationException";
 }
 
-bool AssociationImpl::specialized_end_number(Any diagnostics,std::map <   Any, Any >  context)
+bool AssociationImpl::specialized_end_number(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool AssociationImpl::specialized_end_types(Any diagnostics,std::map <   Any, Any >  context)
+bool AssociationImpl::specialized_end_types(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -720,53 +720,21 @@ Any AssociationImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::ASSOCIATION_ATTRIBUTE_ENDTYPE:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Type>::iterator iter = m_endType->begin();
-			Bag<uml::Type>::iterator end = m_endType->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //2139
+			return eAny(getEndType()); //2139			
 		}
 		case uml::umlPackage::ASSOCIATION_ATTRIBUTE_ISDERIVED:
 			return eAny(getIsDerived()); //2140
 		case uml::umlPackage::ASSOCIATION_ATTRIBUTE_MEMBEREND:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Property>::iterator iter = m_memberEnd->begin();
-			Bag<uml::Property>::iterator end = m_memberEnd->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //2141
+			return eAny(getMemberEnd()); //2141			
 		}
 		case uml::umlPackage::ASSOCIATION_ATTRIBUTE_NAVIGABLEOWNEDEND:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Property>::iterator iter = m_navigableOwnedEnd->begin();
-			Bag<uml::Property>::iterator end = m_navigableOwnedEnd->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //2143
+			return eAny(getNavigableOwnedEnd()); //2143			
 		}
 		case uml::umlPackage::ASSOCIATION_ATTRIBUTE_OWNEDEND:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Property>::iterator iter = m_ownedEnd->begin();
-			Bag<uml::Property>::iterator end = m_ownedEnd->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //2142
+			return eAny(getOwnedEnd()); //2142			
 		}
 	}
 	Any result;
@@ -1099,26 +1067,15 @@ void AssociationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
 		// Add attributes
 		if ( this->eIsSet(package->getAssociation_Attribute_isDerived()) )
 		{
 			saveHandler->addAttribute("isDerived", this->getIsDerived());
 		}
 
-		// Add references
-		std::shared_ptr<Bag<uml::Property>> memberEnd_list = this->getMemberEnd();
-		for (std::shared_ptr<uml::Property > object : *memberEnd_list)
-		{ 
-			saveHandler->addReferences("memberEnd", object);
-		}
-		std::shared_ptr<Bag<uml::Property>> navigableOwnedEnd_list = this->getNavigableOwnedEnd();
-		for (std::shared_ptr<uml::Property > object : *navigableOwnedEnd_list)
-		{ 
-			saveHandler->addReferences("navigableOwnedEnd", object);
-		}
-
+	// Add references
+		saveHandler->addReferences<uml::Property>("memberEnd", this->getMemberEnd());	
+		saveHandler->addReferences<uml::Property>("navigableOwnedEnd", this->getNavigableOwnedEnd());	
 
 		//
 		// Add new tags (from references)

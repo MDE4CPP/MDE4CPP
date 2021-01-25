@@ -64,7 +64,7 @@ namespace uml
 			visibility = null implies namespace = null
 			*/
 			 
-			virtual bool namespace_needs_visibility(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool namespace_needs_visibility(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			

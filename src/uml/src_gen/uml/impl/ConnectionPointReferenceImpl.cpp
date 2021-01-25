@@ -185,13 +185,13 @@ std::shared_ptr<ecore::EClass> ConnectionPointReferenceImpl::eStaticClass() cons
 //*********************************
 // Operations
 //*********************************
-bool ConnectionPointReferenceImpl::entry_pseudostates(Any diagnostics,std::map <   Any, Any >  context)
+bool ConnectionPointReferenceImpl::entry_pseudostates(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ConnectionPointReferenceImpl::exit_pseudostates(Any diagnostics,std::map <   Any, Any >  context)
+bool ConnectionPointReferenceImpl::exit_pseudostates(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -327,30 +327,14 @@ Any ConnectionPointReferenceImpl::eGet(int featureID, bool resolve, bool coreTyp
 	{
 		case uml::umlPackage::CONNECTIONPOINTREFERENCE_ATTRIBUTE_ENTRY:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Pseudostate>::iterator iter = m_entry->begin();
-			Bag<uml::Pseudostate>::iterator end = m_entry->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //5212
+			return eAny(getEntry()); //5212			
 		}
 		case uml::umlPackage::CONNECTIONPOINTREFERENCE_ATTRIBUTE_EXIT:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Pseudostate>::iterator iter = m_exit->begin();
-			Bag<uml::Pseudostate>::iterator end = m_exit->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //5213
+			return eAny(getExit()); //5213			
 		}
 		case uml::umlPackage::CONNECTIONPOINTREFERENCE_ATTRIBUTE_STATE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getState().lock())); //5214
+			return eAny(getState().lock()); //5214
 	}
 	return VertexImpl::eGet(featureID, resolve, coreType);
 }
@@ -587,20 +571,9 @@ void ConnectionPointReferenceImpl::saveContent(std::shared_ptr<persistence::inte
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
-	
-
-		// Add references
-		std::shared_ptr<Bag<uml::Pseudostate>> entry_list = this->getEntry();
-		for (std::shared_ptr<uml::Pseudostate > object : *entry_list)
-		{ 
-			saveHandler->addReferences("entry", object);
-		}
-		std::shared_ptr<Bag<uml::Pseudostate>> exit_list = this->getExit();
-		for (std::shared_ptr<uml::Pseudostate > object : *exit_list)
-		{ 
-			saveHandler->addReferences("exit", object);
-		}
-
+	// Add references
+		saveHandler->addReferences<uml::Pseudostate>("entry", this->getEntry());	
+		saveHandler->addReferences<uml::Pseudostate>("exit", this->getExit());	
 	}
 	catch (std::exception& e)
 	{

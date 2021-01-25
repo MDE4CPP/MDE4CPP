@@ -39,39 +39,13 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Collaboration;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
-	class NamedElement;
-}
-
-namespace uml 
-{
 	class Namespace;
-}
-
-namespace uml 
-{
 	class StringExpression;
 }
 
@@ -81,6 +55,8 @@ namespace uml
 // enum includes
 #include "uml/VisibilityKind.hpp"
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -122,7 +98,7 @@ namespace uml
 			      ce1.collaboration = ce2.collaboration)
 			*/
 			 
-			virtual bool client_elements(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool client_elements(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			Connectors in a Collaboration typing a CollaborationUse must have corresponding Connectors between elements bound in the context Classifier, and these corresponding Connectors must have the same or more general type than the Collaboration Connectors.
@@ -137,14 +113,14 @@ namespace uml
 			)
 			*/
 			 
-			virtual bool connectors(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool connectors(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			Every collaborationRole in the Collaboration is bound within the CollaborationUse.
 			type.collaborationRole->forAll(role | roleBinding->exists(rb | rb.supplier->includes(role)))
 			*/
 			 
-			virtual bool every_role(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool every_role(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			
 			//*********************************

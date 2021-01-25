@@ -284,19 +284,19 @@ std::shared_ptr<ecore::EClass> TestIdentityActionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool TestIdentityActionImpl::multiplicity(Any diagnostics,std::map <   Any, Any >  context)
+bool TestIdentityActionImpl::multiplicity(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool TestIdentityActionImpl::no_type(Any diagnostics,std::map <   Any, Any >  context)
+bool TestIdentityActionImpl::no_type(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool TestIdentityActionImpl::result_is_boolean(Any diagnostics,std::map <   Any, Any >  context)
+bool TestIdentityActionImpl::result_is_boolean(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -490,11 +490,11 @@ Any TestIdentityActionImpl::eGet(int featureID, bool resolve, bool coreType) con
 	switch(featureID)
 	{
 		case uml::umlPackage::TESTIDENTITYACTION_ATTRIBUTE_FIRST:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getFirst())); //23527
+			return eAny(getFirst()); //23527
 		case uml::umlPackage::TESTIDENTITYACTION_ATTRIBUTE_RESULT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //23528
+			return eAny(getResult()); //23528
 		case uml::umlPackage::TESTIDENTITYACTION_ATTRIBUTE_SECOND:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSecond())); //23529
+			return eAny(getSecond()); //23529
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -673,7 +673,6 @@ void TestIdentityActionImpl::saveContent(std::shared_ptr<persistence::interfaces
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'first'
 		std::shared_ptr<uml::InputPin > first = this->getFirst();
 		if (first != nullptr)
@@ -694,8 +693,6 @@ void TestIdentityActionImpl::saveContent(std::shared_ptr<persistence::interfaces
 		{
 			saveHandler->addReference(second, "second", second->eClass() != package->getInputPin_Class());
 		}
-	
-
 	}
 	catch (std::exception& e)
 	{

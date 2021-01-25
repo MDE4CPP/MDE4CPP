@@ -111,12 +111,12 @@ std::shared_ptr<ecore::EClass> RealValueImpl::eStaticClass() const
 /*
 Getter & Setter for attribute value
 */
-double RealValueImpl::getValue() const 
+double  RealValueImpl::getValue() const 
 {
 	return m_value;
 }
 
-void RealValueImpl::setValue(double _value)
+void RealValueImpl::setValue(double  _value)
 {
 	m_value = _value;
 } 
@@ -139,7 +139,7 @@ return newValue;
 	//end of body
 }
 
-bool RealValueImpl::equals(std::shared_ptr<fUML::Semantics::Values::Value>  otherValue)
+bool RealValueImpl::equals(std::shared_ptr<fUML::Semantics::Values::Value> otherValue)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -155,7 +155,7 @@ bool RealValueImpl::equals(std::shared_ptr<fUML::Semantics::Values::Value>  othe
 	//end of body
 }
 
-std::shared_ptr<uml::ValueSpecification> RealValueImpl::specify()
+std::shared_ptr<org.eclipse.uml2.uml.ValueSpecification> RealValueImpl::specify()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -318,14 +318,11 @@ void RealValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	try
 	{
 		std::shared_ptr<fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage> package = fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance();
-
-	
 		// Add attributes
 		if ( this->eIsSet(package->getRealValue_Attribute_value()) )
 		{
 			saveHandler->addAttribute("value", this->getValue());
 		}
-
 	}
 	catch (std::exception& e)
 	{

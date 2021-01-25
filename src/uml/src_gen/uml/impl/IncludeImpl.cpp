@@ -327,9 +327,9 @@ Any IncludeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::INCLUDE_ATTRIBUTE_ADDITION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getAddition())); //11212
+			return eAny(getAddition()); //11212
 		case uml::umlPackage::INCLUDE_ATTRIBUTE_INCLUDINGCASE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getIncludingCase().lock())); //11213
+			return eAny(getIncludingCase().lock()); //11213
 	}
 	Any result;
 	result = DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
@@ -502,11 +502,8 @@ void IncludeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
-	
-
-		// Add references
-		saveHandler->addReference("addition", this->getAddition());
-
+	// Add references
+		saveHandler->addReference("addition", this->getAddition());		 
 	}
 	catch (std::exception& e)
 	{

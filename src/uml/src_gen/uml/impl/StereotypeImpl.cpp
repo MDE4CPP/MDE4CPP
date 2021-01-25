@@ -460,31 +460,31 @@ std::shared_ptr<ecore::EClass> StereotypeImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool StereotypeImpl::associationEndOwnership(Any diagnostics,std::map <   Any, Any >  context)
+bool StereotypeImpl::associationEndOwnership(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool StereotypeImpl::base_property_multiplicity_multiple_extension(Any diagnostics,std::map <   Any, Any >  context)
+bool StereotypeImpl::base_property_multiplicity_multiple_extension(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool StereotypeImpl::base_property_multiplicity_single_extension(Any diagnostics,std::map <   Any, Any >  context)
+bool StereotypeImpl::base_property_multiplicity_single_extension(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool StereotypeImpl::base_property_upper_bound(Any diagnostics,std::map <   Any, Any >  context)
+bool StereotypeImpl::base_property_upper_bound(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool StereotypeImpl::binaryAssociationsOnly(Any diagnostics,std::map <   Any, Any >  context)
+bool StereotypeImpl::binaryAssociationsOnly(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -496,7 +496,7 @@ std::shared_ptr<uml::Profile> StereotypeImpl::containingProfile()
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Extension> StereotypeImpl::createExtension(std::shared_ptr<uml::Class>  metaclass,bool isRequired)
+std::shared_ptr<uml::Extension> StereotypeImpl::createExtension(std::shared_ptr<uml::Class> metaclass,bool isRequired)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -514,7 +514,7 @@ std::shared_ptr<uml::Image> StereotypeImpl::createIcon(std::string format,std::s
 	throw "UnsupportedOperationException";
 }
 
-bool StereotypeImpl::generalize(Any diagnostics,std::map <   Any, Any >  context)
+bool StereotypeImpl::generalize(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -552,7 +552,7 @@ std::string StereotypeImpl::getKeyword(bool localize)
 
 
 
-bool StereotypeImpl::name_not_clash(Any diagnostics,std::map <   Any, Any >  context)
+bool StereotypeImpl::name_not_clash(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -790,18 +790,10 @@ Any StereotypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::STEREOTYPE_ATTRIBUTE_ICON:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Image>::iterator iter = m_icon->begin();
-			Bag<uml::Image>::iterator end = m_icon->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //22352
+			return eAny(getIcon()); //22352			
 		}
 		case uml::umlPackage::STEREOTYPE_ATTRIBUTE_PROFILE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getProfile())); //22353
+			return eAny(getProfile()); //22353
 	}
 	return ClassImpl::eGet(featureID, resolve, coreType);
 }
@@ -970,14 +962,11 @@ void StereotypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'icon'
 		for (std::shared_ptr<uml::Image> icon : *this->getIcon()) 
 		{
 			saveHandler->addReference(icon, "icon", icon->eClass() != package->getImage_Class());
 		}
-	
-
 	}
 	catch (std::exception& e)
 	{

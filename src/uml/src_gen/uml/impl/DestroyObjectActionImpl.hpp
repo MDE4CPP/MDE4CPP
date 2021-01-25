@@ -63,14 +63,14 @@ namespace uml
 			target.is(1,1)
 			*/
 			 
-			virtual bool multiplicity(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool multiplicity(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			The target InputPin has no type.
 			target.type= null
 			*/
 			 
-			virtual bool no_type(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool no_type(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			
@@ -82,27 +82,27 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual bool getIsDestroyLinks() const ;
+			virtual bool  getIsDestroyLinks() const ;
 			
 			/*!
 			Specifies whether links in which the object participates are destroyed along with the object.
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual void setIsDestroyLinks (bool _isDestroyLinks); 
+			virtual void setIsDestroyLinks (bool  _isDestroyLinks); 
 			/*!
 			Specifies whether objects owned by the object (via composition) are destroyed along with the object.
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual bool getIsDestroyOwnedObjects() const ;
+			virtual bool  getIsDestroyOwnedObjects() const ;
 			
 			/*!
 			Specifies whether objects owned by the object (via composition) are destroyed along with the object.
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual void setIsDestroyOwnedObjects (bool _isDestroyOwnedObjects); 
+			virtual void setIsDestroyOwnedObjects (bool  _isDestroyOwnedObjects); 
 			
 			
 			//*********************************

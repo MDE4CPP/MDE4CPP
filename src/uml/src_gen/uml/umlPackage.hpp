@@ -272,7 +272,7 @@ namespace uml
 	class WriteStructuralFeatureAction;
 	class WriteVariableAction;
 }
-
+ 
 namespace uml 
 {
 	/*!

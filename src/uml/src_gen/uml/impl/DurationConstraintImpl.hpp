@@ -68,14 +68,14 @@ namespace uml
 			endif
 			*/
 			 
-			virtual bool first_event_multiplicity(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool first_event_multiplicity(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			A DurationConstraint has either one or two constrainedElements.
 			constrainedElement->size() = 1 or constrainedElement->size()=2
 			*/
 			 
-			virtual bool has_one_or_two_constrainedElements(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool has_one_or_two_constrainedElements(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			
@@ -87,7 +87,8 @@ namespace uml
 			<p>From package UML::Values.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<bool> > isFirstEvent() const ;
+			virtual  std::shared_ptr<Bag<bool> >
+			 isFirstEvent() const ;
 			
 			
 			

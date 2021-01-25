@@ -36,64 +36,32 @@ namespace fUML
 	class fUMLFactory;
 }
 
-//Forward Declaration for used types
-namespace uml 
-{
-	class Behavior;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace fUML::Semantics::Values 
-{
-	class Evaluation;
-}
-
+//Forward Declaration for used types 
 namespace fUML::Semantics::CommonBehavior 
 {
 	class Execution;
+	class OpaqueBehaviorExecution;
 }
-
 namespace fUML::Semantics::Loci 
 {
 	class Locus;
+	class SemanticStrategy;
+	class SemanticVisitor;
 }
-
 namespace fUML::Semantics::StructuredClassifiers 
 {
 	class Object;
 }
-
+namespace fUML::Semantics::Values 
+{
+	class Evaluation;
+}
 namespace uml 
 {
+	class Behavior;
+	class Element;
 	class OpaqueBehavior;
-}
-
-namespace fUML::Semantics::CommonBehavior 
-{
-	class OpaqueBehaviorExecution;
-}
-
-namespace uml 
-{
 	class PrimitiveType;
-}
-
-namespace fUML::Semantics::Loci 
-{
-	class SemanticStrategy;
-}
-
-namespace fUML::Semantics::Loci 
-{
-	class SemanticVisitor;
-}
-
-namespace uml 
-{
 	class ValueSpecification;
 }
 
@@ -102,6 +70,122 @@ namespace uml
 // enum includes
 
 #include "ecore/EModelElement.hpp"
+
+//Includes from codegen annotation
+#include "fUML/FUMLPackage.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/Semantics/Values/ValuesFactory.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
+#include "fUML/Semantics/Actions/ActionsFactory.hpp"
+#include "fUML/Semantics/Classification/ClassificationFactory.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
+
+#include "uml/OpaqueBehavior.hpp"
+#include "fUML/Semantics/CommonBehavior/OpaqueBehaviorExecution.hpp"
+#include "fUML/Semantics/CommonBehavior/CallEventBehavior.hpp"
+#include "uml/CentralBufferNode.hpp"
+#include "uml/StructuredActivityNode.hpp"
+#include "fUML/Semantics/Values/Value.hpp"
+#include "fUML/Semantics/Values/Evaluation.hpp"
+#include "uml/Element.hpp"
+#include "uml/ValueSpecification.hpp"
+#include "fUML/Semantics/Values/LiteralBooleanEvaluation.hpp"
+#include "fUML/Semantics/Values/LiteralStringEvaluation.hpp"
+#include "fUML/Semantics/Values/LiteralNullEvaluation.hpp"
+#include "fUML/Semantics/Classification/InstanceValueEvaluation.hpp"
+#include "fUML/Semantics/Values/LiteralUnlimitedNaturalEvaluation.hpp"
+#include "fUML/Semantics/Values/LiteralIntegerEvaluation.hpp"
+#include "fUML/Semantics/Values/LiteralRealEvaluation.hpp"
+#include "fUML/Semantics/CommonBehavior/CallEventExecution.hpp"
+#include "uml/umlPackage.hpp"
+#include "uml/InstanceValue.hpp"
+#include "uml/LiteralBoolean.hpp"
+#include "uml/LiteralInteger.hpp"
+#include "uml/LiteralNull.hpp"
+#include "uml/LiteralReal.hpp"
+#include "uml/LiteralString.hpp"
+#include "uml/LiteralUnlimitedNatural.hpp"
+#include "fUML/Semantics/Activities/ActivityExecution.hpp"
+#include "fUML/Semantics/Activities/ActivityFinalNodeActivation.hpp"
+#include "fUML/Semantics/Activities/CentralBufferNodeActivation.hpp"
+#include "fUML/Semantics/Activities/ActivityParameterNodeActivation.hpp"
+#include "fUML/Semantics/Actions/AddStructuralFeatureValueActionActivation.hpp"
+#include "fUML/Semantics/Actions/CallBehaviorActionActivation.hpp"
+#include "fUML/Semantics/Actions/CallOperationActionActivation.hpp"
+#include "fUML/Semantics/Actions/ClearAssociationActionActivation.hpp"
+#include "fUML/Semantics/Actions/CreateLinkActionActivation.hpp"
+#include "fUML/Semantics/Actions/ClearStructuralFeatureActionActivation.hpp"
+#include "fUML/Semantics/Actions/CreateObjectActionActivation.hpp"
+#include "fUML/Semantics/Activities/DecisionNodeActivation.hpp"
+#include "fUML/Semantics/Actions/DestroyLinkActionActivation.hpp"
+#include "fUML/Semantics/Actions/DestroyObjectActionActivation.hpp"
+#include "fUML/Semantics/Activities/FlowFinalNodeActivation.hpp"
+#include "fUML/Semantics/Activities/ForkNodeActivation.hpp"
+#include "fUML/Semantics/Activities/InitialNodeActivation.hpp"
+#include "fUML/Semantics/Actions/InputPinActivation.hpp"
+#include "fUML/Semantics/Activities/JoinNodeActivation.hpp"
+#include "fUML/Semantics/Activities/MergeNodeActivation.hpp"
+#include "fUML/Semantics/Actions/OutputPinActivation.hpp"
+#include "fUML/Semantics/Actions/ReadLinkActionActivation.hpp"
+#include "fUML/Semantics/Actions/ReadSelfActionActivation.hpp"
+#include "fUML/Semantics/Actions/ReadStructuralFeatureActionActivation.hpp"
+#include "fUML/Semantics/Actions/RemoveStructuralFeatureValueActivation.hpp"
+#include "fUML/Semantics/Actions/SendSignalActionActivation.hpp"
+#include "fUML/Semantics/Actions/TestIdentityActionActivation.hpp"
+#include "fUML/Semantics/Actions/ValueSpecificationActionActivation.hpp"
+#include "uml/Activity.hpp"
+#include "uml/ActivityFinalNode.hpp"
+#include "uml/ActivityParameterNode.hpp"
+#include "uml/AddStructuralFeatureValueAction.hpp"
+#include "uml/CallBehaviorAction.hpp"
+#include "uml/CallOperationAction.hpp"
+#include "uml/ClearAssociationAction.hpp"
+#include "uml/ClearStructuralFeatureAction.hpp"
+#include "uml/CreateLinkAction.hpp"
+#include "uml/CreateObjectAction.hpp"
+#include "uml/DecisionNode.hpp"
+#include "uml/DestroyLinkAction.hpp"
+#include "uml/DestroyObjectAction.hpp"
+#include "uml/FlowFinalNode.hpp"
+#include "uml/ForkNode.hpp"
+#include "uml/InitialNode.hpp"
+#include "uml/InputPin.hpp"
+#include "uml/JoinNode.hpp"
+#include "uml/MergeNode.hpp"
+#include "uml/OutputPin.hpp"
+#include "uml/ReadLinkAction.hpp"
+#include "uml/ReadSelfAction.hpp"
+#include "uml/ReadStructuralFeatureAction.hpp"
+#include "uml/RemoveStructuralFeatureValueAction.hpp"
+#include "uml/SendSignalAction.hpp"
+#include "uml/TestIdentityAction.hpp"
+#include "uml/ValueSpecificationAction.hpp"
+#include "fUML/Semantics/Actions/AcceptEventActionActivation.hpp"
+#include "fUML/Semantics/Actions/ConditionalNodeActivation.hpp"
+#include "fUML/Semantics/Activities/DataStoreNodeActivation.hpp"
+#include "fUML/Semantics/Activities/ExpansionNodeActivation.hpp"
+#include "fUML/Semantics/Activities/ExpansionRegionActivation.hpp"
+#include "fUML/Semantics/Actions/LoopNodeActivation.hpp"
+#include "fUML/Semantics/Actions/ReadExtentActionActivation.hpp"
+#include "fUML/Semantics/Actions/ReadIsClassifiedObjectActionActivation.hpp"
+#include "fUML/Semantics/Actions/ReclassifyObjectActionActivation.hpp"
+#include "fUML/Semantics/Actions/ReduceActionActivation.hpp"
+#include "fUML/Semantics/Actions/StartClassifierBehaviorActionActivation.hpp"
+#include "fUML/Semantics/Actions/StartObjectBehaviorActionActivation.hpp"
+#include "fUML/Semantics/Actions/StructuredActivityNodeActivation.hpp"
+#include "uml/AcceptEventAction.hpp"
+#include "uml/ConditionalNode.hpp"
+#include "uml/DataStoreNode.hpp"
+#include "uml/ExpansionNode.hpp"
+#include "uml/ExpansionRegion.hpp"
+#include "uml/LoopNode.hpp"
+#include "uml/ReadExtentAction.hpp"
+#include "uml/ReadIsClassifiedObjectAction.hpp"
+#include "uml/ReclassifyObjectAction.hpp"
+#include "uml/ReduceAction.hpp"
+#include "uml/StartClassifierBehaviorAction.hpp"
+#include "uml/StartObjectBehaviorAction.hpp"
 
 //*********************************
 namespace fUML::Semantics::Loci 
@@ -132,22 +216,22 @@ namespace fUML::Semantics::Loci
 			// Operations
 			//*********************************
 			 
-			virtual void addBuiltInType(std::shared_ptr<uml::PrimitiveType>  type) = 0;
+			virtual void addBuiltInType(std::shared_ptr<org.eclipse.uml2.uml.PrimitiveType> type) = 0;
 			
 			 
-			virtual void addPrimitiveBehaviorPrototype(std::shared_ptr<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution>  execution) = 0;
+			virtual void addPrimitiveBehaviorPrototype(std::shared_ptr<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution> execution) = 0;
 			
 			 
-			virtual void assignStrategy(std::shared_ptr<fUML::Semantics::Loci::SemanticStrategy>  strategy) = 0;
+			virtual void assignStrategy(std::shared_ptr<fUML::Semantics::Loci::SemanticStrategy> strategy) = 0;
 			
 			 
-			virtual std::shared_ptr<fUML::Semantics::Values::Evaluation> createEvaluation(std::shared_ptr<uml::ValueSpecification>  specification) = 0;
+			virtual std::shared_ptr<fUML::Semantics::Values::Evaluation> createEvaluation(std::shared_ptr<org.eclipse.uml2.uml.ValueSpecification> specification) = 0;
 			
 			 
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> createExecution(std::shared_ptr<uml::Behavior>  behavior,std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object>  context) = 0;
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> createExecution(std::shared_ptr<org.eclipse.uml2.uml.Behavior> behavior,std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> context) = 0;
 			
 			 
-			virtual std::shared_ptr<uml::PrimitiveType> getBuiltInType(std::string name) = 0;
+			virtual std::shared_ptr<org.eclipse.uml2.uml.PrimitiveType> getBuiltInType(std::string name) = 0;
 			
 			 
 			virtual std::shared_ptr<fUML::Semantics::Loci::SemanticStrategy> getStrategy(std::string name) = 0;
@@ -158,10 +242,10 @@ namespace fUML::Semantics::Loci
 			
 			
 			 
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution> instantiateOpaqueBehaviorExecution(std::shared_ptr<uml::Behavior>  behavior) = 0;
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution> instantiateOpaqueBehaviorExecution(std::shared_ptr<org.eclipse.uml2.uml.Behavior> behavior) = 0;
 			
 			 
-			virtual std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> instantiateVisitor(std::shared_ptr<uml::Element>  element) = 0;
+			virtual std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> instantiateVisitor(std::shared_ptr<org.eclipse.uml2.uml.Element> element) = 0;
 			
 			
 			//*********************************
@@ -172,7 +256,7 @@ namespace fUML::Semantics::Loci
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<Bag<uml::PrimitiveType>> getBuiltInTypes() const = 0;
+			virtual std::shared_ptr<Bag<org.eclipse.uml2.uml.PrimitiveType>> getBuiltInTypes() const = 0;
 			
 			
 			
@@ -201,7 +285,7 @@ namespace fUML::Semantics::Loci
 			// Reference Members
 			//*********************************
 			
-			mutable std::shared_ptr<Bag<uml::PrimitiveType>> m_builtInTypes;
+			mutable std::shared_ptr<Bag<org.eclipse.uml2.uml.PrimitiveType>> m_builtInTypes;
 			std::weak_ptr<fUML::Semantics::Loci::Locus > m_locus;
 			mutable std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution>> m_primitiveBehaviorPrototypes;
 			mutable std::shared_ptr<Bag<fUML::Semantics::Loci::SemanticStrategy>> m_strategies;

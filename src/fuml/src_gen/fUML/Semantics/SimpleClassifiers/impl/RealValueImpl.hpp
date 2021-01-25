@@ -47,10 +47,10 @@ namespace fUML::Semantics::SimpleClassifiers
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() ;
 			
 			 
-			virtual bool equals(std::shared_ptr<fUML::Semantics::Values::Value>  otherValue) ;
+			virtual bool equals(std::shared_ptr<fUML::Semantics::Values::Value> otherValue) ;
 			
 			 
-			virtual std::shared_ptr<uml::ValueSpecification> specify() ;
+			virtual std::shared_ptr<org.eclipse.uml2.uml.ValueSpecification> specify() ;
 			
 			 
 			virtual std::string toString() ;
@@ -61,10 +61,10 @@ namespace fUML::Semantics::SimpleClassifiers
 			// Attributes Getter Setter
 			//*********************************
 			 
-			virtual double getValue() const ;
+			virtual double  getValue() const ;
 			
 			 
-			virtual void setValue (double _value); 
+			virtual void setValue (double  _value); 
 			
 			
 			//*********************************

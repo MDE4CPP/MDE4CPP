@@ -51,21 +51,21 @@ namespace uml
 			value.is(1,1)
 			*/
 			 
-			virtual bool multiplicity_of_qualifier(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool multiplicity_of_qualifier(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			The qualifier must be a qualifier of the Association end of the linkEndData that owns this QualifierValue.
 			linkEndData.end.qualifier->includes(qualifier)
 			*/
 			 
-			virtual bool qualifier_attribute(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool qualifier_attribute(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			The type of the value InputPin conforms to the type of the qualifier Property.
 			value.type.conformsTo(qualifier.type)
 			*/
 			 
-			virtual bool type_of_qualifier(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool type_of_qualifier(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			

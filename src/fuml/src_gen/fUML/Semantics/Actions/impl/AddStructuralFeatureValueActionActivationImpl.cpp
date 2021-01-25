@@ -328,13 +328,13 @@ void AddStructuralFeatureValueActionActivationImpl::doAction()
 /*
 Getter & Setter for reference addStructuralFeatureValueAction
 */
-std::shared_ptr<uml::AddStructuralFeatureValueAction > AddStructuralFeatureValueActionActivationImpl::getAddStructuralFeatureValueAction() const
+std::shared_ptr<org.eclipse.uml2.uml.AddStructuralFeatureValueAction > AddStructuralFeatureValueActionActivationImpl::getAddStructuralFeatureValueAction() const
 {
 //assert(m_addStructuralFeatureValueAction);
     return m_addStructuralFeatureValueAction;
 }
 
-void AddStructuralFeatureValueActionActivationImpl::setAddStructuralFeatureValueAction(std::shared_ptr<uml::AddStructuralFeatureValueAction> _addStructuralFeatureValueAction)
+void AddStructuralFeatureValueActionActivationImpl::setAddStructuralFeatureValueAction(std::shared_ptr<org.eclipse.uml2.uml.AddStructuralFeatureValueAction> _addStructuralFeatureValueAction)
 {
     m_addStructuralFeatureValueAction = _addStructuralFeatureValueAction;
 	//additional setter call for redefined reference ActionActivation::action
@@ -342,9 +342,9 @@ void AddStructuralFeatureValueActionActivationImpl::setAddStructuralFeatureValue
 }
 
 /*Additional Setter for redefined reference 'ActionActivation::action'*/
-void AddStructuralFeatureValueActionActivationImpl::setAction(std::shared_ptr<uml::Action> _action)
+void AddStructuralFeatureValueActionActivationImpl::setAction(std::shared_ptr<org.eclipse.uml2.uml.Action> _action)
 {
-	std::shared_ptr<uml::AddStructuralFeatureValueAction> _addStructuralFeatureValueAction = std::dynamic_pointer_cast<uml::AddStructuralFeatureValueAction>(_action);
+	std::shared_ptr<org.eclipse.uml2.uml.AddStructuralFeatureValueAction> _addStructuralFeatureValueAction = std::dynamic_pointer_cast<org.eclipse.uml2.uml.AddStructuralFeatureValueAction>(_action);
 	if(_addStructuralFeatureValueAction)
 	{
 		m_addStructuralFeatureValueAction = _addStructuralFeatureValueAction;
@@ -354,13 +354,13 @@ void AddStructuralFeatureValueActionActivationImpl::setAction(std::shared_ptr<um
 	}
 	else
 	{
-		std::cerr<<"[AddStructuralFeatureValueActionActivation::setAction] : Could not set action because provided action was not of type 'uml::AddStructuralFeatureValueAction'"<<std::endl;
+		std::cerr<<"[AddStructuralFeatureValueActionActivation::setAction] : Could not set action because provided action was not of type 'org.eclipse.uml2.uml.AddStructuralFeatureValueAction'"<<std::endl;
 	}
 }
 /*Additional Setter for redefined reference 'ActivityNodeActivation::node'*/
-void AddStructuralFeatureValueActionActivationImpl::setNode(std::shared_ptr<uml::ActivityNode> _node)
+void AddStructuralFeatureValueActionActivationImpl::setNode(std::shared_ptr<org.eclipse.uml2.uml.ActivityNode> _node)
 {
-	std::shared_ptr<uml::AddStructuralFeatureValueAction> _addStructuralFeatureValueAction = std::dynamic_pointer_cast<uml::AddStructuralFeatureValueAction>(_node);
+	std::shared_ptr<org.eclipse.uml2.uml.AddStructuralFeatureValueAction> _addStructuralFeatureValueAction = std::dynamic_pointer_cast<org.eclipse.uml2.uml.AddStructuralFeatureValueAction>(_node);
 	if(_addStructuralFeatureValueAction)
 	{
 		m_addStructuralFeatureValueAction = _addStructuralFeatureValueAction;
@@ -370,7 +370,7 @@ void AddStructuralFeatureValueActionActivationImpl::setNode(std::shared_ptr<uml:
 	}
 	else
 	{
-		std::cerr<<"[AddStructuralFeatureValueActionActivation::setNode] : Could not set node because provided node was not of type 'uml::AddStructuralFeatureValueAction'"<<std::endl;
+		std::cerr<<"[AddStructuralFeatureValueActionActivation::setNode] : Could not set node because provided node was not of type 'org.eclipse.uml2.uml.AddStructuralFeatureValueAction'"<<std::endl;
 	}
 }
 
@@ -422,7 +422,7 @@ Any AddStructuralFeatureValueActionActivationImpl::eGet(int featureID, bool reso
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::ADDSTRUCTURALFEATUREVALUEACTIONACTIVATION_ATTRIBUTE_ADDSTRUCTURALFEATUREVALUEACTION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getAddStructuralFeatureValueAction())); //1211
+			return eAny(getAddStructuralFeatureValueAction()); //1211
 	}
 	return WriteStructuralFeatureActionActivationImpl::eGet(featureID, resolve, coreType);
 }
@@ -443,7 +443,7 @@ bool AddStructuralFeatureValueActionActivationImpl::eSet(int featureID, Any newV
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::AddStructuralFeatureValueAction> _addStructuralFeatureValueAction = std::dynamic_pointer_cast<uml::AddStructuralFeatureValueAction>(_temp);
+			std::shared_ptr<org.eclipse.uml2.uml.AddStructuralFeatureValueAction> _addStructuralFeatureValueAction = std::dynamic_pointer_cast<org.eclipse.uml2.uml.AddStructuralFeatureValueAction>(_temp);
 			setAddStructuralFeatureValueAction(_addStructuralFeatureValueAction); //1211
 			return true;
 		}
@@ -513,7 +513,7 @@ void AddStructuralFeatureValueActionActivationImpl::resolveReferences(const int 
 			if (references.size() == 1)
 			{
 				// Cast object to correct type
-				std::shared_ptr<uml::AddStructuralFeatureValueAction> _addStructuralFeatureValueAction = std::dynamic_pointer_cast<uml::AddStructuralFeatureValueAction>( references.front() );
+				std::shared_ptr<org.eclipse.uml2.uml.AddStructuralFeatureValueAction> _addStructuralFeatureValueAction = std::dynamic_pointer_cast<org.eclipse.uml2.uml.AddStructuralFeatureValueAction>( references.front() );
 				setAddStructuralFeatureValueAction(_addStructuralFeatureValueAction);
 			}
 			
@@ -551,11 +551,8 @@ void AddStructuralFeatureValueActionActivationImpl::saveContent(std::shared_ptr<
 	{
 		std::shared_ptr<fUML::Semantics::Actions::ActionsPackage> package = fUML::Semantics::Actions::ActionsPackage::eInstance();
 
-	
-
-		// Add references
-		saveHandler->addReference("addStructuralFeatureValueAction", this->getAddStructuralFeatureValueAction());
-
+	// Add references
+		saveHandler->addReference("addStructuralFeatureValueAction", this->getAddStructuralFeatureValueAction());		
 	}
 	catch (std::exception& e)
 	{

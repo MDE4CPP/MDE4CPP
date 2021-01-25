@@ -36,139 +36,28 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
-namespace uml 
-{
-	class Classifier;
-}
-
+//Forward Declaration for used types 
 namespace uml 
 {
 	class CollaborationUse;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
 	class ConnectableElement;
-}
-
-namespace uml 
-{
 	class Connector;
-}
-
-namespace uml 
-{
 	class Constraint;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class ElementImport;
-}
-
-namespace uml 
-{
 	class Feature;
-}
-
-namespace uml 
-{
 	class Generalization;
-}
-
-namespace uml 
-{
 	class GeneralizationSet;
-}
-
-namespace uml 
-{
-	class NamedElement;
-}
-
-namespace uml 
-{
-	class Namespace;
-}
-
-namespace uml 
-{
 	class Package;
-}
-
-namespace uml 
-{
 	class PackageImport;
-}
-
-namespace uml 
-{
-	class PackageableElement;
-}
-
-namespace uml 
-{
 	class Port;
-}
-
-namespace uml 
-{
 	class Property;
-}
-
-namespace uml 
-{
-	class RedefinableElement;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
-	class StructuredClassifier;
-}
-
-namespace uml 
-{
 	class Substitution;
-}
-
-namespace uml 
-{
 	class TemplateBinding;
-}
-
-namespace uml 
-{
 	class TemplateParameter;
-}
-
-namespace uml 
-{
 	class TemplateSignature;
-}
-
-namespace uml 
-{
 	class UseCase;
 }
 
@@ -178,6 +67,8 @@ namespace uml
 // enum includes
 #include "uml/VisibilityKind.hpp"
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 

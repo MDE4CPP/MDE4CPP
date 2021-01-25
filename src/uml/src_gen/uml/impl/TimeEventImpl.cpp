@@ -181,12 +181,12 @@ std::shared_ptr<ecore::EClass> TimeEventImpl::eStaticClass() const
 /*
 Getter & Setter for attribute isRelative
 */
-bool TimeEventImpl::getIsRelative() const 
+bool  TimeEventImpl::getIsRelative() const 
 {
 	return m_isRelative;
 }
 
-void TimeEventImpl::setIsRelative(bool _isRelative)
+void TimeEventImpl::setIsRelative(bool  _isRelative)
 {
 	m_isRelative = _isRelative;
 } 
@@ -196,7 +196,7 @@ void TimeEventImpl::setIsRelative(bool _isRelative)
 //*********************************
 // Operations
 //*********************************
-bool TimeEventImpl::when_non_negative(Any diagnostics,std::map <   Any, Any >  context)
+bool TimeEventImpl::when_non_negative(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -295,7 +295,7 @@ Any TimeEventImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::TIMEEVENT_ATTRIBUTE_ISRELATIVE:
 			return eAny(getIsRelative()); //23712
 		case uml::umlPackage::TIMEEVENT_ATTRIBUTE_WHEN:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getWhen())); //23713
+			return eAny(getWhen()); //23713
 	}
 	return EventImpl::eGet(featureID, resolve, coreType);
 }
@@ -447,20 +447,17 @@ void TimeEventImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'when'
 		std::shared_ptr<uml::TimeExpression > when = this->getWhen();
 		if (when != nullptr)
 		{
 			saveHandler->addReference(when, "when", when->eClass() != package->getTimeExpression_Class());
 		}
-	
 		// Add attributes
 		if ( this->eIsSet(package->getTimeEvent_Attribute_isRelative()) )
 		{
 			saveHandler->addAttribute("isRelative", this->getIsRelative());
 		}
-
 	}
 	catch (std::exception& e)
 	{

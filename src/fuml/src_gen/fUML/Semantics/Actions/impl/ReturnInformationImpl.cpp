@@ -123,7 +123,7 @@ return newValue;
 	//end of body
 }
 
-bool ReturnInformationImpl::equals(std::shared_ptr<fUML::Semantics::Values::Value>  otherValue)
+bool ReturnInformationImpl::equals(std::shared_ptr<fUML::Semantics::Values::Value> otherValue)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -141,7 +141,7 @@ return isEqual;
 	//end of body
 }
 
-std::shared_ptr<uml::Operation> ReturnInformationImpl::getOperation()
+std::shared_ptr<org.eclipse.uml2.uml.Operation> ReturnInformationImpl::getOperation()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -152,7 +152,7 @@ return this->getCallEventOccurrence()->getOperation();
 	//end of body
 }
 
-std::shared_ptr<Bag<uml::Classifier> > ReturnInformationImpl::getTypes()
+std::shared_ptr<Bag<org.eclipse.uml2.uml.Classifier> > ReturnInformationImpl::getTypes()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -174,7 +174,7 @@ return std::shared_ptr<fUML::Semantics::Actions::ReturnInformation>(fUML::Semant
 	//end of body
 }
 
-void ReturnInformationImpl::reply(std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> >  outputParameterValues)
+void ReturnInformationImpl::reply(std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > outputParameterValues)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -185,7 +185,7 @@ void ReturnInformationImpl::reply(std::shared_ptr<Bag<fUML::Semantics::CommonBeh
 	//end of body
 }
 
-std::shared_ptr<uml::ValueSpecification> ReturnInformationImpl::specify()
+std::shared_ptr<org.eclipse.uml2.uml.ValueSpecification> ReturnInformationImpl::specify()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -256,7 +256,7 @@ Any ReturnInformationImpl::eGet(int featureID, bool resolve, bool coreType) cons
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::RETURNINFORMATION_ATTRIBUTE_CALLEVENTOCCURRENCE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getCallEventOccurrence())); //1020
+			return eAny(getCallEventOccurrence()); //1020
 	}
 	return fUML::Semantics::Values::ValueImpl::eGet(featureID, resolve, coreType);
 }
@@ -376,11 +376,8 @@ void ReturnInformationImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	{
 		std::shared_ptr<fUML::Semantics::Actions::ActionsPackage> package = fUML::Semantics::Actions::ActionsPackage::eInstance();
 
-	
-
-		// Add references
-		saveHandler->addReference("callEventOccurrence", this->getCallEventOccurrence());
-
+	// Add references
+		saveHandler->addReference("callEventOccurrence", this->getCallEventOccurrence());		 
 	}
 	catch (std::exception& e)
 	{

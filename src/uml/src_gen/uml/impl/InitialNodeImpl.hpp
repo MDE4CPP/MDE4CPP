@@ -63,14 +63,14 @@ namespace uml
 			outgoing->forAll(oclIsKindOf(ControlFlow))
 			*/
 			 
-			virtual bool control_edges(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool control_edges(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			An InitialNode has no incoming ActivityEdges.
 			incoming->isEmpty()
 			*/
 			 
-			virtual bool no_incoming_edges(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool no_incoming_edges(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			

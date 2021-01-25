@@ -186,13 +186,13 @@ std::shared_ptr<Bag<uml::Transition> > VertexImpl::getOutgoings()
 	throw "UnsupportedOperationException";
 }
 
-bool VertexImpl::isContainedInRegion(std::shared_ptr<uml::Region>  r)
+bool VertexImpl::isContainedInRegion(std::shared_ptr<uml::Region> r)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool VertexImpl::isContainedInState(std::shared_ptr<uml::State>  s)
+bool VertexImpl::isContainedInState(std::shared_ptr<uml::State> s)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -322,30 +322,14 @@ Any VertexImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::VERTEX_ATTRIBUTE_CONTAINER:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getContainer().lock())); //2549
+			return eAny(getContainer().lock()); //2549
 		case uml::umlPackage::VERTEX_ATTRIBUTE_INCOMING:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Transition>::iterator iter = m_incoming->begin();
-			Bag<uml::Transition>::iterator end = m_incoming->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //25410
+			return eAny(getIncoming()); //25410			
 		}
 		case uml::umlPackage::VERTEX_ATTRIBUTE_OUTGOING:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Transition>::iterator iter = m_outgoing->begin();
-			Bag<uml::Transition>::iterator end = m_outgoing->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //25411
+			return eAny(getOutgoing()); //25411			
 		}
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
@@ -453,9 +437,6 @@ void VertexImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

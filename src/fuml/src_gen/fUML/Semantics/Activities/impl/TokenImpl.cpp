@@ -107,12 +107,12 @@ std::shared_ptr<ecore::EClass> TokenImpl::eStaticClass() const
 /*
 Getter & Setter for attribute withdrawn
 */
-bool TokenImpl::isWithdrawn() const 
+bool  TokenImpl::isWithdrawn() const 
 {
 	return m_withdrawn;
 }
 
-void TokenImpl::setWithdrawn(bool _withdrawn)
+void TokenImpl::setWithdrawn(bool  _withdrawn)
 {
 	m_withdrawn = _withdrawn;
 } 
@@ -130,7 +130,7 @@ std::shared_ptr<fUML::Semantics::Activities::Token> TokenImpl::_copy()
 	//end of body
 }
 
-bool TokenImpl::equals(std::shared_ptr<fUML::Semantics::Activities::Token>  other)
+bool TokenImpl::equals(std::shared_ptr<fUML::Semantics::Activities::Token> other)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -152,7 +152,7 @@ bool TokenImpl::isControl()
 	//end of body
 }
 
-std::shared_ptr<fUML::Semantics::Activities::Token> TokenImpl::transfer(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation>  holder)
+std::shared_ptr<fUML::Semantics::Activities::Token> TokenImpl::transfer(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> holder)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -236,7 +236,7 @@ Any TokenImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case fUML::Semantics::Activities::ActivitiesPackage::TOKEN_ATTRIBUTE_HOLDER:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getHolder().lock())); //1150
+			return eAny(getHolder().lock()); //1150
 		case fUML::Semantics::Activities::ActivitiesPackage::TOKEN_ATTRIBUTE_WITHDRAWN:
 			return eAny(isWithdrawn()); //1151
 	}
@@ -363,14 +363,11 @@ void TokenImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 	try
 	{
 		std::shared_ptr<fUML::Semantics::Activities::ActivitiesPackage> package = fUML::Semantics::Activities::ActivitiesPackage::eInstance();
-
-	
 		// Add attributes
 		if ( this->eIsSet(package->getToken_Attribute_withdrawn()) )
 		{
 			saveHandler->addAttribute("withdrawn", this->isWithdrawn());
 		}
-
 	}
 	catch (std::exception& e)
 	{

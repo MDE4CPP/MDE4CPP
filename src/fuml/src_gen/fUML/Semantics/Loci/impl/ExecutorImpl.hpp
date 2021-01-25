@@ -50,13 +50,13 @@ virtual public Executor
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> evaluate(std::shared_ptr<uml::ValueSpecification>  specification) ;
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> evaluate(std::shared_ptr<org.eclipse.uml2.uml.ValueSpecification> specification) ;
 			
 			 
-			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > execute(std::shared_ptr<uml::Behavior>  behavior,std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object>  context,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> >  inputs) ;
+			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > execute(std::shared_ptr<org.eclipse.uml2.uml.Behavior> behavior,std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> context,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > inputs) ;
 			
 			 
-			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> start(std::shared_ptr<uml::Class>  type,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> >  inputs) ;
+			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> start(std::shared_ptr<org.eclipse.uml2.uml.Class> type,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > inputs) ;
 			
 			
 			

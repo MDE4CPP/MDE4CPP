@@ -270,31 +270,31 @@ std::shared_ptr<ecore::EClass> StructuralFeatureActionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool StructuralFeatureActionImpl::multiplicity(Any diagnostics,std::map <   Any, Any >  context)
+bool StructuralFeatureActionImpl::multiplicity(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool StructuralFeatureActionImpl::not_static(Any diagnostics,std::map <   Any, Any >  context)
+bool StructuralFeatureActionImpl::not_static(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool StructuralFeatureActionImpl::object_type(Any diagnostics,std::map <   Any, Any >  context)
+bool StructuralFeatureActionImpl::object_type(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool StructuralFeatureActionImpl::one_featuring_classifier(Any diagnostics,std::map <   Any, Any >  context)
+bool StructuralFeatureActionImpl::one_featuring_classifier(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool StructuralFeatureActionImpl::visibility(Any diagnostics,std::map <   Any, Any >  context)
+bool StructuralFeatureActionImpl::visibility(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -452,9 +452,9 @@ Any StructuralFeatureActionImpl::eGet(int featureID, bool resolve, bool coreType
 	switch(featureID)
 	{
 		case uml::umlPackage::STRUCTURALFEATUREACTION_ATTRIBUTE_OBJECT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getObject())); //22627
+			return eAny(getObject()); //22627
 		case uml::umlPackage::STRUCTURALFEATUREACTION_ATTRIBUTE_STRUCTURALFEATURE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getStructuralFeature())); //22628
+			return eAny(getStructuralFeature()); //22628
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -623,18 +623,15 @@ void StructuralFeatureActionImpl::saveContent(std::shared_ptr<persistence::inter
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'object'
 		std::shared_ptr<uml::InputPin > object = this->getObject();
 		if (object != nullptr)
 		{
 			saveHandler->addReference(object, "object", object->eClass() != package->getInputPin_Class());
 		}
-	
 
-		// Add references
-		saveHandler->addReference("structuralFeature", this->getStructuralFeature());
-
+	// Add references
+		saveHandler->addReference("structuralFeature", this->getStructuralFeature());		 
 	}
 	catch (std::exception& e)
 	{

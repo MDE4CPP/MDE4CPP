@@ -50,13 +50,13 @@ namespace PSCS::Semantics::CommonBehavior
 			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > getParameterValues() ;
 			
 			 
-			virtual bool match(std::shared_ptr<uml::Trigger>  trigger) ;
+			virtual bool match(std::shared_ptr<org.eclipse.uml2.uml.Trigger> trigger) ;
 			
 			 
-			virtual void sendInTo(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference>  target,std::shared_ptr<uml::Port>  port) ;
+			virtual void sendInTo(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> target,std::shared_ptr<org.eclipse.uml2.uml.Port> port) ;
 			
 			 
-			virtual void sendOutTo(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference>  target,std::shared_ptr<uml::Port>  port) ;
+			virtual void sendOutTo(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> target,std::shared_ptr<org.eclipse.uml2.uml.Port> port) ;
 			
 			
 			
@@ -64,10 +64,10 @@ namespace PSCS::Semantics::CommonBehavior
 			// Attributes Getter Setter
 			//*********************************
 			 
-			virtual bool isPropagationInward() const ;
+			virtual bool  isPropagationInward() const ;
 			
 			 
-			virtual void setPropagationInward (bool _propagationInward); 
+			virtual void setPropagationInward (bool  _propagationInward); 
 			
 			
 			//*********************************
@@ -80,10 +80,10 @@ namespace PSCS::Semantics::CommonBehavior
 			virtual void setInteractionPoint(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> _interactionPoint) ;
 			
 			
-			virtual std::shared_ptr<uml::Port > getOnPort() const ;
+			virtual std::shared_ptr<org.eclipse.uml2.uml.Port > getOnPort() const ;
 			
 			
-			virtual void setOnPort(std::shared_ptr<uml::Port> _onPort) ;
+			virtual void setOnPort(std::shared_ptr<org.eclipse.uml2.uml.Port> _onPort) ;
 			
 			
 			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence > getWrappedEventOccurrence() const ;

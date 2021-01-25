@@ -35,75 +35,34 @@ namespace fUML
 	class fUMLFactory;
 }
 
-//Forward Declaration for used types
-namespace uml 
-{
-	class Action;
-}
-
-namespace fUML::Semantics::Actions 
-{
-	class ActionActivation;
-}
-
-namespace fUML::Semantics::Activities 
-{
-	class ActivityEdgeInstance;
-}
-
-namespace uml 
-{
-	class ActivityNode;
-}
-
-namespace fUML::Semantics::Activities 
-{
-	class ActivityNodeActivationGroup;
-}
-
-namespace uml 
-{
-	class Association;
-}
-
+//Forward Declaration for used types 
 namespace fUML::Semantics::Actions 
 {
 	class InputPinActivation;
+	class OutputPinActivation;
+	class PinActivation;
 }
-
+namespace fUML::Semantics::Activities 
+{
+	class ActivityEdgeInstance;
+	class ActivityNodeActivationGroup;
+	class Token;
+}
 namespace fUML::Semantics::StructuredClassifiers 
 {
 	class Link;
 }
-
-namespace fUML::Semantics::Actions 
-{
-	class OutputPinActivation;
-}
-
-namespace fUML::Semantics::Actions 
-{
-	class PinActivation;
-}
-
-namespace uml 
-{
-	class Property;
-}
-
-namespace uml 
-{
-	class StructuralFeature;
-}
-
-namespace fUML::Semantics::Activities 
-{
-	class Token;
-}
-
 namespace fUML::Semantics::Values 
 {
 	class Value;
+}
+namespace uml 
+{
+	class Action;
+	class ActivityNode;
+	class Association;
+	class Property;
+	class StructuralFeature;
 }
 
 // base class includes
@@ -111,6 +70,11 @@ namespace fUML::Semantics::Values
 
 // enum includes
 
+
+//Includes from codegen annotation
+#include "fUML/Semantics/StructuredClassifiers/Link.hpp"
+#include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
+#include "fUML/Semantics/Loci/Locus.hpp"
 
 //*********************************
 namespace fUML::Semantics::Actions 
@@ -136,16 +100,16 @@ namespace fUML::Semantics::Actions
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<uml::Association> getAssociation(std::shared_ptr<uml::StructuralFeature>  feature) = 0;
+			virtual std::shared_ptr<org.eclipse.uml2.uml.Association> getAssociation(std::shared_ptr<org.eclipse.uml2.uml.StructuralFeature> feature) = 0;
 			
 			 
-			virtual std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Link> > getMatchingLinks(std::shared_ptr<uml::Association>  association,std::shared_ptr<uml::StructuralFeature>  end,std::shared_ptr<fUML::Semantics::Values::Value>  oppositeValue) = 0;
+			virtual std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Link> > getMatchingLinks(std::shared_ptr<org.eclipse.uml2.uml.Association> association,std::shared_ptr<org.eclipse.uml2.uml.StructuralFeature> end,std::shared_ptr<fUML::Semantics::Values::Value> oppositeValue) = 0;
 			
 			 
-			virtual std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Link> > getMatchingLinksForEndValue(std::shared_ptr<uml::Association>  association,std::shared_ptr<uml::StructuralFeature>  end,std::shared_ptr<fUML::Semantics::Values::Value>  oppositeValue,std::shared_ptr<fUML::Semantics::Values::Value>  endValue) = 0;
+			virtual std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Link> > getMatchingLinksForEndValue(std::shared_ptr<org.eclipse.uml2.uml.Association> association,std::shared_ptr<org.eclipse.uml2.uml.StructuralFeature> end,std::shared_ptr<fUML::Semantics::Values::Value> oppositeValue,std::shared_ptr<fUML::Semantics::Values::Value> endValue) = 0;
 			
 			 
-			virtual std::shared_ptr<uml::Property> getOppositeEnd(std::shared_ptr<uml::Association>  association,std::shared_ptr<uml::StructuralFeature>  end) = 0;
+			virtual std::shared_ptr<org.eclipse.uml2.uml.Property> getOppositeEnd(std::shared_ptr<org.eclipse.uml2.uml.Association> association,std::shared_ptr<org.eclipse.uml2.uml.StructuralFeature> end) = 0;
 			
 			
 			//*********************************

@@ -78,14 +78,14 @@ namespace uml
 			<p>From package UML::CommonBehavior.</p>
 			*/
 			 
-			virtual std::shared_ptr<uml::BehavioredClassifier> behavioredClassifier(std::shared_ptr<uml::Element>  from) ;
+			virtual std::shared_ptr<uml::BehavioredClassifier> behavioredClassifier(std::shared_ptr<uml::Element> from) ;
 			
 			/*!
 			The specification BehavioralFeature must be a feature (possibly inherited) of the context BehavioredClassifier of the Behavior.
 			_'context'.feature->includes(specification)
 			*/
 			 
-			virtual bool feature_of_context_classifier(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool feature_of_context_classifier(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			
@@ -102,7 +102,7 @@ namespace uml
 			specification <> null implies _'context'.ownedBehavior->select(specification=self.specification)->size() = 1
 			*/
 			 
-			virtual bool most_one_behavior(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool most_one_behavior(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			The out, inout and return ownedParameters.
@@ -117,7 +117,7 @@ namespace uml
 			specification <> null implies ownedParameter->size() = specification.ownedParameter->size()
 			*/
 			 
-			virtual bool parameters_match(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool parameters_match(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			
@@ -129,14 +129,14 @@ namespace uml
 			<p>From package UML::CommonBehavior.</p>
 			*/
 			 
-			virtual bool getIsReentrant() const ;
+			virtual bool  getIsReentrant() const ;
 			
 			/*!
 			Tells whether the Behavior can be invoked while it is still executing from a previous invocation.
 			<p>From package UML::CommonBehavior.</p>
 			*/
 			 
-			virtual void setIsReentrant (bool _isReentrant); 
+			virtual void setIsReentrant (bool  _isReentrant); 
 			
 			
 			//*********************************

@@ -66,7 +66,7 @@ namespace uml
 			constrainedElement->size() = 1
 			*/
 			 
-			virtual bool has_one_constrainedElement(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool has_one_constrainedElement(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			
@@ -78,14 +78,14 @@ namespace uml
 			<p>From package UML::Values.</p>
 			*/
 			 
-			virtual bool getFirstEvent() const ;
+			virtual bool  getFirstEvent() const ;
 			
 			/*!
 			The value of firstEvent is related to the constrainedElement. If firstEvent is true, then the corresponding observation event is the first time instant the execution enters the constrainedElement. If firstEvent is false, then the corresponding observation event is the last time instant the execution is within the constrainedElement.
 			<p>From package UML::Values.</p>
 			*/
 			 
-			virtual void setFirstEvent (bool _firstEvent); 
+			virtual void setFirstEvent (bool  _firstEvent); 
 			
 			
 			//*********************************

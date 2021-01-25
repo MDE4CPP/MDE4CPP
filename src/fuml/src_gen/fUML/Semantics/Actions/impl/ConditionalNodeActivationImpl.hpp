@@ -48,13 +48,13 @@ namespace fUML::Semantics::Actions
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<fUML::Semantics::Actions::ClauseActivation> getClauseActivation(std::shared_ptr<uml::Clause>  clause) ;
+			virtual std::shared_ptr<fUML::Semantics::Actions::ClauseActivation> getClauseActivation(std::shared_ptr<org.eclipse.uml2.uml.Clause> clause) ;
 			
 			 
-			virtual void runTest(std::shared_ptr<uml::Clause>  clause) ;
+			virtual void runTest(std::shared_ptr<org.eclipse.uml2.uml.Clause> clause) ;
 			
 			 
-			virtual void selectBody(std::shared_ptr<uml::Clause>  clause) ;
+			virtual void selectBody(std::shared_ptr<org.eclipse.uml2.uml.Clause> clause) ;
 			
 			
 			
@@ -71,7 +71,7 @@ namespace fUML::Semantics::Actions
 			
 			
 			
-			virtual std::shared_ptr<Bag<uml::Clause>> getSelectedClauses() const ;
+			virtual std::shared_ptr<Bag<org.eclipse.uml2.uml.Clause>> getSelectedClauses() const ;
 			
 			
 							

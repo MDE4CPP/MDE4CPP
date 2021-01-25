@@ -132,7 +132,7 @@ std::shared_ptr<ecore::EClass> JoinNodeActivationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-void JoinNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token> >  incomingTokens)
+void JoinNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > incomingTokens)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -306,9 +306,6 @@ void JoinNodeActivationImpl::saveContent(std::shared_ptr<persistence::interfaces
 	try
 	{
 		std::shared_ptr<fUML::Semantics::Activities::ActivitiesPackage> package = fUML::Semantics::Activities::ActivitiesPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

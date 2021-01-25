@@ -35,55 +35,24 @@ namespace PSCS
 	class PSCSFactory;
 }
 
-//Forward Declaration for used types
-namespace uml 
-{
-	class Action;
-}
-
-namespace fUML::Semantics::Activities 
-{
-	class ActivityEdgeInstance;
-}
-
-namespace uml 
-{
-	class ActivityNode;
-}
-
-namespace fUML::Semantics::Activities 
-{
-	class ActivityNodeActivationGroup;
-}
-
-namespace uml 
-{
-	class CreateObjectAction;
-}
-
-namespace fUML::Semantics::Actions 
-{
-	class CreateObjectActionActivation;
-}
-
+//Forward Declaration for used types 
 namespace fUML::Semantics::Actions 
 {
 	class InputPinActivation;
-}
-
-namespace fUML::Semantics::Actions 
-{
 	class OutputPinActivation;
-}
-
-namespace fUML::Semantics::Actions 
-{
 	class PinActivation;
 }
-
 namespace fUML::Semantics::Activities 
 {
+	class ActivityEdgeInstance;
+	class ActivityNodeActivationGroup;
 	class Token;
+}
+namespace uml 
+{
+	class Action;
+	class ActivityNode;
+	class CreateObjectAction;
 }
 
 // base class includes
@@ -91,6 +60,20 @@ namespace fUML::Semantics::Activities
 
 // enum includes
 
+
+//Includes from codegen annotation
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
+
+#include "uml/CreateObjectAction.hpp"
+#include "uml/Class.hpp"
+#include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
+#include "fUML/Semantics/StructuredClassifiers/Object.hpp"
+#include "fUML/Semantics/Loci/Locus.hpp"
+#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/CS_Object.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/CS_Reference.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 
 //*********************************
 namespace PSCS::Semantics::Actions 

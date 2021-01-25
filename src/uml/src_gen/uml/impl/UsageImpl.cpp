@@ -407,9 +407,6 @@ void UsageImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

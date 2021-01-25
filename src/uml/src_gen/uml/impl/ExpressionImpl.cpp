@@ -212,12 +212,12 @@ std::shared_ptr<ecore::EClass> ExpressionImpl::eStaticClass() const
 /*
 Getter & Setter for attribute symbol
 */
-std::string ExpressionImpl::getSymbol() const 
+std::string  ExpressionImpl::getSymbol() const 
 {
 	return m_symbol;
 }
 
-void ExpressionImpl::setSymbol(std::string _symbol)
+void ExpressionImpl::setSymbol(std::string  _symbol)
 {
 	m_symbol = _symbol;
 } 
@@ -342,15 +342,7 @@ Any ExpressionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::EXPRESSION_ATTRIBUTE_OPERAND:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ValueSpecification>::iterator iter = m_operand->begin();
-			Bag<uml::ValueSpecification>::iterator end = m_operand->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //9515
+			return eAny(getOperand()); //9515			
 		}
 		case uml::umlPackage::EXPRESSION_ATTRIBUTE_SYMBOL:
 			return eAny(getSymbol()); //9516
@@ -536,19 +528,16 @@ void ExpressionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'operand'
 		for (std::shared_ptr<uml::ValueSpecification> operand : *this->getOperand()) 
 		{
 			saveHandler->addReference(operand, "operand", operand->eClass() != package->getValueSpecification_Class());
 		}
-	
 		// Add attributes
 		if ( this->eIsSet(package->getExpression_Attribute_symbol()) )
 		{
 			saveHandler->addAttribute("symbol", this->getSymbol());
 		}
-
 	}
 	catch (std::exception& e)
 	{

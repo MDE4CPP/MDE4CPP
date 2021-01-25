@@ -35,30 +35,12 @@ namespace ecore
 	class ecoreFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace ecore 
 {
 	class EAnnotation;
-}
-
-namespace ecore 
-{
 	class EClassifier;
-}
-
-namespace ecore 
-{
 	class EGenericType;
-}
-
-namespace ecore 
-{
-	class ENamedElement;
-}
-
-namespace ecore 
-{
-	class EObject;
 }
 
 // base class includes
@@ -66,6 +48,8 @@ namespace ecore
 
 // enum includes
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace ecore 
@@ -95,34 +79,34 @@ namespace ecore
 			// Attributes Getter Setter
 			//*********************************
 			 
-			virtual int getLowerBound() const = 0;
+			virtual int  getLowerBound() const = 0;
 			
 			 
-			virtual void setLowerBound (int _lowerBound)= 0; 
+			virtual void setLowerBound (int  _lowerBound)= 0; 
 			 
-			virtual bool isMany() const = 0;
+			virtual bool  isMany() const = 0;
 			
 			
 			 
-			virtual bool isOrdered() const = 0;
+			virtual bool  isOrdered() const = 0;
 			
 			 
-			virtual void setOrdered (bool _ordered)= 0; 
+			virtual void setOrdered (bool  _ordered)= 0; 
 			 
-			virtual bool isRequired() const = 0;
+			virtual bool  isRequired() const = 0;
 			
 			 
-			virtual void setRequired (bool _required)= 0; 
+			virtual void setRequired (bool  _required)= 0; 
 			 
-			virtual bool isUnique() const = 0;
+			virtual bool  isUnique() const = 0;
 			
 			 
-			virtual void setUnique (bool _unique)= 0; 
+			virtual void setUnique (bool  _unique)= 0; 
 			 
-			virtual int getUpperBound() const = 0;
+			virtual int  getUpperBound() const = 0;
 			
 			 
-			virtual void setUpperBound (int _upperBound)= 0; 
+			virtual void setUpperBound (int  _upperBound)= 0; 
 			
 			//*********************************
 			// Reference
@@ -146,17 +130,17 @@ namespace ecore
 			// Attribute Members
 			//*********************************
 			 
-			int m_lowerBound = 0;
+			int  m_lowerBound = 0;
 			 
-			bool m_many = false;
+			bool  m_many = false;
 			 
-			bool m_ordered = true;
+			bool  m_ordered = true;
 			 
-			bool m_required = false;
+			bool  m_required = false;
 			 
-			bool m_unique = true;
+			bool  m_unique = true;
 			 
-			int m_upperBound = 1;
+			int  m_upperBound = 1;
 			
 			
 			//*********************************

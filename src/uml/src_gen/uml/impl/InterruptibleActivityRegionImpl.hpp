@@ -64,7 +64,7 @@ namespace uml
 			  node->includes(edge.source) and node->excludes(edge.target) and edge.target.containingActivity() = inActivity)
 			*/
 			 
-			virtual bool interrupting_edges(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool interrupting_edges(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			

@@ -385,7 +385,7 @@ std::shared_ptr<ecore::EClass> ExtensionImpl::eStaticClass() const
 /*
 Getter & Setter for attribute isRequired
 */
-bool ExtensionImpl::getIsRequired() const 
+bool  ExtensionImpl::getIsRequired() const 
 {
 	return m_isRequired;
 }
@@ -417,7 +417,7 @@ bool ExtensionImpl::isRequired()
 	throw "UnsupportedOperationException";
 }
 
-bool ExtensionImpl::is_binary(Any diagnostics,std::map <   Any, Any >  context)
+bool ExtensionImpl::is_binary(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -429,7 +429,7 @@ std::shared_ptr<uml::Property> ExtensionImpl::metaclassEnd()
 	throw "UnsupportedOperationException";
 }
 
-bool ExtensionImpl::non_owned_end(Any diagnostics,std::map <   Any, Any >  context)
+bool ExtensionImpl::non_owned_end(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -615,7 +615,7 @@ Any ExtensionImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::EXTENSION_ATTRIBUTE_ISREQUIRED:
 			return eAny(getIsRequired()); //9744
 		case uml::umlPackage::EXTENSION_ATTRIBUTE_METACLASS:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getMetaclass())); //9745
+			return eAny(getMetaclass()); //9745
 	}
 	return AssociationImpl::eGet(featureID, resolve, coreType);
 }
@@ -715,9 +715,6 @@ void ExtensionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

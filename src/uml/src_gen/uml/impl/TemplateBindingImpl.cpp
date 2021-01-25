@@ -156,13 +156,13 @@ std::shared_ptr<ecore::EClass> TemplateBindingImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool TemplateBindingImpl::one_parameter_substitution(Any diagnostics,std::map <   Any, Any >  context)
+bool TemplateBindingImpl::one_parameter_substitution(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool TemplateBindingImpl::parameter_substitution_formal(Any diagnostics,std::map <   Any, Any >  context)
+bool TemplateBindingImpl::parameter_substitution_formal(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -343,21 +343,13 @@ Any TemplateBindingImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::TEMPLATEBINDING_ATTRIBUTE_BOUNDELEMENT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getBoundElement().lock())); //2308
+			return eAny(getBoundElement().lock()); //2308
 		case uml::umlPackage::TEMPLATEBINDING_ATTRIBUTE_PARAMETERSUBSTITUTION:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::TemplateParameterSubstitution>::iterator iter = m_parameterSubstitution->begin();
-			Bag<uml::TemplateParameterSubstitution>::iterator end = m_parameterSubstitution->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //2306
+			return eAny(getParameterSubstitution()); //2306			
 		}
 		case uml::umlPackage::TEMPLATEBINDING_ATTRIBUTE_SIGNATURE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSignature())); //2307
+			return eAny(getSignature()); //2307
 	}
 	return DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
 }
@@ -567,17 +559,14 @@ void TemplateBindingImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'parameterSubstitution'
 		for (std::shared_ptr<uml::TemplateParameterSubstitution> parameterSubstitution : *this->getParameterSubstitution()) 
 		{
 			saveHandler->addReference(parameterSubstitution, "parameterSubstitution", parameterSubstitution->eClass() != package->getTemplateParameterSubstitution_Class());
 		}
-	
 
-		// Add references
-		saveHandler->addReference("signature", this->getSignature());
-
+	// Add references
+		saveHandler->addReference("signature", this->getSignature());		 
 	}
 	catch (std::exception& e)
 	{

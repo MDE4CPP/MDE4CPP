@@ -289,12 +289,12 @@ std::shared_ptr<ecore::EClass> AcceptEventActionImpl::eStaticClass() const
 /*
 Getter & Setter for attribute isUnmarshall
 */
-bool AcceptEventActionImpl::getIsUnmarshall() const 
+bool  AcceptEventActionImpl::getIsUnmarshall() const 
 {
 	return m_isUnmarshall;
 }
 
-void AcceptEventActionImpl::setIsUnmarshall(bool _isUnmarshall)
+void AcceptEventActionImpl::setIsUnmarshall(bool  _isUnmarshall)
 {
 	m_isUnmarshall = _isUnmarshall;
 } 
@@ -304,31 +304,31 @@ void AcceptEventActionImpl::setIsUnmarshall(bool _isUnmarshall)
 //*********************************
 // Operations
 //*********************************
-bool AcceptEventActionImpl::conforming_type(Any diagnostics,std::map <   Any, Any >  context)
+bool AcceptEventActionImpl::conforming_type(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool AcceptEventActionImpl::no_input_pins(Any diagnostics,std::map <   Any, Any >  context)
+bool AcceptEventActionImpl::no_input_pins(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool AcceptEventActionImpl::no_output_pins(Any diagnostics,std::map <   Any, Any >  context)
+bool AcceptEventActionImpl::no_output_pins(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool AcceptEventActionImpl::one_output_pin(Any diagnostics,std::map <   Any, Any >  context)
+bool AcceptEventActionImpl::one_output_pin(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool AcceptEventActionImpl::unmarshall_signal_events(Any diagnostics,std::map <   Any, Any >  context)
+bool AcceptEventActionImpl::unmarshall_signal_events(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -513,6 +513,8 @@ Any AcceptEventActionImpl::eGet(int featureID, bool resolve, bool coreType) cons
 			return eAny(getIsUnmarshall()); //327
 		case uml::umlPackage::ACCEPTEVENTACTION_ATTRIBUTE_RESULT:
 		{
+			return eAny(getResult()); //328			
+			/*
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::OutputPin>::iterator iter = m_result->begin();
 			Bag<uml::OutputPin>::iterator end = m_result->end();
@@ -522,9 +524,12 @@ Any AcceptEventActionImpl::eGet(int featureID, bool resolve, bool coreType) cons
 				iter++;
 			}
 			return eAny(tempList); //328
+			*/
 		}
 		case uml::umlPackage::ACCEPTEVENTACTION_ATTRIBUTE_TRIGGER:
 		{
+			return eAny(getTrigger()); //329			
+			/*
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Trigger>::iterator iter = m_trigger->begin();
 			Bag<uml::Trigger>::iterator end = m_trigger->end();
@@ -534,6 +539,7 @@ Any AcceptEventActionImpl::eGet(int featureID, bool resolve, bool coreType) cons
 				iter++;
 			}
 			return eAny(tempList); //329
+			*/
 		}
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
@@ -775,7 +781,6 @@ void AcceptEventActionImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'result'
 		for (std::shared_ptr<uml::OutputPin> result : *this->getResult()) 
 		{
@@ -787,13 +792,11 @@ void AcceptEventActionImpl::saveContent(std::shared_ptr<persistence::interfaces:
 		{
 			saveHandler->addReference(trigger, "trigger", trigger->eClass() != package->getTrigger_Class());
 		}
-	
 		// Add attributes
 		if ( this->eIsSet(package->getAcceptEventAction_Attribute_isUnmarshall()) )
 		{
 			saveHandler->addAttribute("isUnmarshall", this->getIsUnmarshall());
 		}
-
 	}
 	catch (std::exception& e)
 	{

@@ -36,45 +36,24 @@ namespace fUML
 	class fUMLFactory;
 }
 
-//Forward Declaration for used types
-namespace uml 
-{
-	class Behavior;
-}
-
-namespace uml 
-{
-	class Classifier;
-}
-
+//Forward Declaration for used types 
 namespace fUML::Semantics::CommonBehavior 
 {
-	class Execution;
+	class ObjectActivation;
+	class ParameterValue;
 }
-
-namespace fUML::Semantics::SimpleClassifiers 
-{
-	class FeatureValue;
-}
-
 namespace fUML::Semantics::Loci 
 {
 	class Locus;
 }
-
-namespace fUML::Semantics::StructuredClassifiers 
+namespace fUML::Semantics::SimpleClassifiers 
 {
-	class Object;
+	class FeatureValue;
 }
-
-namespace fUML::Semantics::CommonBehavior 
+namespace uml 
 {
-	class ObjectActivation;
-}
-
-namespace fUML::Semantics::CommonBehavior 
-{
-	class ParameterValue;
+	class Behavior;
+	class Classifier;
 }
 
 // base class includes
@@ -82,6 +61,14 @@ namespace fUML::Semantics::CommonBehavior
 
 // enum includes
 
+
+//Includes from codegen annotation
+#include "abstractDataTypes/Subset.hpp"
+#include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
+#include "uml/Behavior.hpp"
+#include "uml/Parameter.hpp"
+#include "uml/ParameterDirectionKind.hpp"
+#include "fUML/FUMLFactory.hpp"
 
 //*********************************
 namespace fUML::Semantics::CommonBehavior 
@@ -107,7 +94,7 @@ namespace fUML::Semantics::CommonBehavior
 			// Operations
 			//*********************************
 			 
-			virtual void doBody(std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> >  inputParameters,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> >  outputParameters) = 0;
+			virtual void doBody(std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > inputParameters,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > outputParameters) = 0;
 			
 			 
 			virtual void execute() = 0;

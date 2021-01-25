@@ -262,7 +262,7 @@ std::shared_ptr<ecore::EClass> VariableActionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool VariableActionImpl::scope_of_variable(Any diagnostics,std::map <   Any, Any >  context)
+bool VariableActionImpl::scope_of_variable(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -384,7 +384,7 @@ Any VariableActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::VARIABLEACTION_ATTRIBUTE_VARIABLE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getVariable())); //25327
+			return eAny(getVariable()); //25327
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -519,11 +519,8 @@ void VariableActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
-	
-
-		// Add references
-		saveHandler->addReference("variable", this->getVariable());
-
+	// Add references
+		saveHandler->addReference("variable", this->getVariable());		 
 	}
 	catch (std::exception& e)
 	{

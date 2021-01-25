@@ -38,34 +38,12 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Comment;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class InputPin;
-}
-
-namespace uml 
-{
-	class LinkEndData;
-}
-
-namespace uml 
-{
 	class Property;
-}
-
-namespace uml 
-{
 	class QualifierValue;
 }
 
@@ -74,6 +52,8 @@ namespace uml
 
 // enum includes
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -112,7 +92,7 @@ namespace uml
 			endif
 			*/
 			 
-			virtual bool insertAt_pin(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool insertAt_pin(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			
 			//*********************************
@@ -123,14 +103,14 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual bool getIsReplaceAll() const = 0;
+			virtual bool  getIsReplaceAll() const = 0;
 			
 			/*!
 			Specifies whether the existing links emanating from the object on this end should be destroyed before creating a new link.
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual void setIsReplaceAll (bool _isReplaceAll)= 0; 
+			virtual void setIsReplaceAll (bool  _isReplaceAll)= 0; 
 			
 			//*********************************
 			// Reference
@@ -160,7 +140,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			bool m_isReplaceAll = false;
+			bool  m_isReplaceAll = false;
 			
 			
 			//*********************************

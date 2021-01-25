@@ -56,10 +56,10 @@ namespace ecore
 			// Attributes Getter Setter
 			//*********************************
 			 
-			virtual bool isID() const ;
+			virtual bool  isID() const ;
 			
 			 
-			virtual void setID (bool _iD); 
+			virtual void setID (bool  _iD); 
 			
 			
 			//*********************************

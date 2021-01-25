@@ -63,7 +63,7 @@ namespace uml
 			argument->size()=signal.allAttributes()->size()
 			*/
 			 
-			virtual bool number_order(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool number_order(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			The type, ordering, and multiplicity of an argument InputPin must be the same as the corresponding attribute of the signal.
@@ -74,14 +74,14 @@ namespace uml
 				argument->at(i).compatibleWith(attribute->at(i)))
 			*/
 			 
-			virtual bool type_ordering_multiplicity(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool type_ordering_multiplicity(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			If onPort is not empty, the Port given by onPort must be an owned or inherited feature of the type of the target InputPin.
 			not onPort->isEmpty() implies target.type.oclAsType(Classifier).allFeatures()->includes(onPort)
 			*/
 			 
-			virtual bool type_target_pin(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool type_target_pin(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			

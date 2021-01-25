@@ -132,7 +132,7 @@ std::shared_ptr<ecore::EClass> DataStoreNodeActivationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-void DataStoreNodeActivationImpl::addToken(std::shared_ptr<fUML::Semantics::Activities::Token>  token)
+void DataStoreNodeActivationImpl::addToken(std::shared_ptr<fUML::Semantics::Activities::Token> token)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -154,7 +154,7 @@ void DataStoreNodeActivationImpl::addToken(std::shared_ptr<fUML::Semantics::Acti
 	//end of body
 }
 
-int DataStoreNodeActivationImpl::removeToken(std::shared_ptr<fUML::Semantics::Activities::Token>  token)
+int DataStoreNodeActivationImpl::removeToken(std::shared_ptr<fUML::Semantics::Activities::Token> token)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -285,9 +285,6 @@ void DataStoreNodeActivationImpl::saveContent(std::shared_ptr<persistence::inter
 	try
 	{
 		std::shared_ptr<fUML::Semantics::Activities::ActivitiesPackage> package = fUML::Semantics::Activities::ActivitiesPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

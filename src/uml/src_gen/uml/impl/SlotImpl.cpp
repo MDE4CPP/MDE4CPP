@@ -265,20 +265,12 @@ Any SlotImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::SLOT_ATTRIBUTE_DEFININGFEATURE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDefiningFeature())); //2173
+			return eAny(getDefiningFeature()); //2173
 		case uml::umlPackage::SLOT_ATTRIBUTE_OWNINGINSTANCE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOwningInstance().lock())); //2175
+			return eAny(getOwningInstance().lock()); //2175
 		case uml::umlPackage::SLOT_ATTRIBUTE_VALUE:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ValueSpecification>::iterator iter = m_value->begin();
-			Bag<uml::ValueSpecification>::iterator end = m_value->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //2174
+			return eAny(getValue()); //2174			
 		}
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
@@ -484,17 +476,14 @@ void SlotImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'value'
 		for (std::shared_ptr<uml::ValueSpecification> value : *this->getValue()) 
 		{
 			saveHandler->addReference(value, "value", value->eClass() != package->getValueSpecification_Class());
 		}
-	
 
-		// Add references
-		saveHandler->addReference("definingFeature", this->getDefiningFeature());
-
+	// Add references
+		saveHandler->addReference("definingFeature", this->getDefiningFeature());		 
 	}
 	catch (std::exception& e)
 	{

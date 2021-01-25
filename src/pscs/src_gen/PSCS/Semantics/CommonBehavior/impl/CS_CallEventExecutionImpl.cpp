@@ -59,10 +59,10 @@
 #include "PSCS/Semantics/CommonBehavior/impl/CommonBehaviorFactoryImpl.hpp"
 #include "PSCS/Semantics/CommonBehavior/impl/CommonBehaviorPackageImpl.hpp"
 
-#include "PSCS/PSCSFactory.hpp"
-#include "PSCS/PSCSPackage.hpp"
 #include "PSCS/Semantics/SemanticsFactory.hpp"
 #include "PSCS/Semantics/SemanticsPackage.hpp"
+#include "PSCS/PSCSFactory.hpp"
+#include "PSCS/PSCSPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -103,8 +103,8 @@ CS_CallEventExecutionImpl::CS_CallEventExecutionImpl(const CS_CallEventExecution
 
 	m_locus  = obj.getLocus();
 
-	std::shared_ptr<Bag<uml::Classifier>> _types = obj.getTypes();
-	m_types.reset(new Bag<uml::Classifier>(*(obj.getTypes().get())));
+	std::shared_ptr<Bag<org.eclipse.uml2.uml.Classifier>> _types = obj.getTypes();
+	m_types.reset(new Bag<org.eclipse.uml2.uml.Classifier>(*(obj.getTypes().get())));
 
 
 	//Clone references with containment (deep copy)
@@ -237,7 +237,7 @@ Any CS_CallEventExecutionImpl::eGet(int featureID, bool resolve, bool coreType) 
 	switch(featureID)
 	{
 		case PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::CS_CALLEVENTEXECUTION_ATTRIBUTE_INTERACTIONPOINT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getInteractionPoint())); //48
+			return eAny(getInteractionPoint()); //48
 	}
 	return fUML::Semantics::CommonBehavior::CallEventExecutionImpl::eGet(featureID, resolve, coreType);
 }
@@ -375,11 +375,8 @@ void CS_CallEventExecutionImpl::saveContent(std::shared_ptr<persistence::interfa
 	{
 		std::shared_ptr<PSCS::Semantics::CommonBehavior::CommonBehaviorPackage> package = PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance();
 
-	
-
-		// Add references
-		saveHandler->addReference("interactionPoint", this->getInteractionPoint());
-
+	// Add references
+		saveHandler->addReference("interactionPoint", this->getInteractionPoint());		 
 	}
 	catch (std::exception& e)
 	{

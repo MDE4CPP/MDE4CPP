@@ -117,7 +117,7 @@ std::shared_ptr<ecore::EClass> ClassifierBehaviorInvocationEventAccepterImpl::eS
 //*********************************
 // Operations
 //*********************************
-void ClassifierBehaviorInvocationEventAccepterImpl::accept(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>  eventOccurrence)
+void ClassifierBehaviorInvocationEventAccepterImpl::accept(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurrence)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -133,7 +133,7 @@ if(std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::InvocationEventOcc
 
 
 
-bool ClassifierBehaviorInvocationEventAccepterImpl::match(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>  eventOccurrence)
+bool ClassifierBehaviorInvocationEventAccepterImpl::match(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurrence)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -174,13 +174,13 @@ if(this->getExecution() != this->getObjectActivation()->getObject())
 /*
 Getter & Setter for reference classifier
 */
-std::shared_ptr<uml::Class > ClassifierBehaviorInvocationEventAccepterImpl::getClassifier() const
+std::shared_ptr<org.eclipse.uml2.uml.Class > ClassifierBehaviorInvocationEventAccepterImpl::getClassifier() const
 {
 //assert(m_classifier);
     return m_classifier;
 }
 
-void ClassifierBehaviorInvocationEventAccepterImpl::setClassifier(std::shared_ptr<uml::Class> _classifier)
+void ClassifierBehaviorInvocationEventAccepterImpl::setClassifier(std::shared_ptr<org.eclipse.uml2.uml.Class> _classifier)
 {
     m_classifier = _classifier;
 }
@@ -247,11 +247,11 @@ Any ClassifierBehaviorInvocationEventAccepterImpl::eGet(int featureID, bool reso
 	switch(featureID)
 	{
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CLASSIFIERBEHAVIORINVOCATIONEVENTACCEPTER_ATTRIBUTE_CLASSIFIER:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getClassifier())); //250
+			return eAny(getClassifier()); //250
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CLASSIFIERBEHAVIORINVOCATIONEVENTACCEPTER_ATTRIBUTE_EXECUTION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getExecution())); //251
+			return eAny(getExecution()); //251
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CLASSIFIERBEHAVIORINVOCATIONEVENTACCEPTER_ATTRIBUTE_OBJECTACTIVATION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getObjectActivation())); //252
+			return eAny(getObjectActivation()); //252
 	}
 	return EventAccepterImpl::eGet(featureID, resolve, coreType);
 }
@@ -276,7 +276,7 @@ bool ClassifierBehaviorInvocationEventAccepterImpl::eSet(int featureID, Any newV
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Class> _classifier = std::dynamic_pointer_cast<uml::Class>(_temp);
+			std::shared_ptr<org.eclipse.uml2.uml.Class> _classifier = std::dynamic_pointer_cast<org.eclipse.uml2.uml.Class>(_temp);
 			setClassifier(_classifier); //250
 			return true;
 		}
@@ -376,7 +376,7 @@ void ClassifierBehaviorInvocationEventAccepterImpl::resolveReferences(const int 
 			if (references.size() == 1)
 			{
 				// Cast object to correct type
-				std::shared_ptr<uml::Class> _classifier = std::dynamic_pointer_cast<uml::Class>( references.front() );
+				std::shared_ptr<org.eclipse.uml2.uml.Class> _classifier = std::dynamic_pointer_cast<org.eclipse.uml2.uml.Class>( references.front() );
 				setClassifier(_classifier);
 			}
 			
@@ -426,13 +426,10 @@ void ClassifierBehaviorInvocationEventAccepterImpl::saveContent(std::shared_ptr<
 	{
 		std::shared_ptr<fUML::Semantics::CommonBehavior::CommonBehaviorPackage> package = fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance();
 
-	
-
-		// Add references
-		saveHandler->addReference("classifier", this->getClassifier());
-		saveHandler->addReference("execution", this->getExecution());
-		saveHandler->addReference("objectActivation", this->getObjectActivation());
-
+	// Add references
+		saveHandler->addReference("classifier", this->getClassifier());		
+		saveHandler->addReference("execution", this->getExecution());		 
+		saveHandler->addReference("objectActivation", this->getObjectActivation());		 
 	}
 	catch (std::exception& e)
 	{

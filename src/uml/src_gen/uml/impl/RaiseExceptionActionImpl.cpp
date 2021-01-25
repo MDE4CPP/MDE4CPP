@@ -402,7 +402,7 @@ Any RaiseExceptionActionImpl::eGet(int featureID, bool resolve, bool coreType) c
 	switch(featureID)
 	{
 		case uml::umlPackage::RAISEEXCEPTIONACTION_ATTRIBUTE_EXCEPTION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getException())); //19227
+			return eAny(getException()); //19227
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -529,15 +529,12 @@ void RaiseExceptionActionImpl::saveContent(std::shared_ptr<persistence::interfac
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'exception'
 		std::shared_ptr<uml::InputPin > exception = this->getException();
 		if (exception != nullptr)
 		{
 			saveHandler->addReference(exception, "exception", exception->eClass() != package->getInputPin_Class());
 		}
-	
-
 	}
 	catch (std::exception& e)
 	{

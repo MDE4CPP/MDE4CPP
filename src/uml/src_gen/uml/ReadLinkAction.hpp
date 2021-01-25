@@ -39,109 +39,25 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Activity;
-}
-
-namespace uml 
-{
 	class ActivityEdge;
-}
-
-namespace uml 
-{
 	class ActivityGroup;
-}
-
-namespace uml 
-{
-	class ActivityNode;
-}
-
-namespace uml 
-{
 	class ActivityPartition;
-}
-
-namespace uml 
-{
 	class Classifier;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
 	class Constraint;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class ExceptionHandler;
-}
-
-namespace uml 
-{
 	class InputPin;
-}
-
-namespace uml 
-{
 	class InterruptibleActivityRegion;
-}
-
-namespace uml 
-{
-	class LinkAction;
-}
-
-namespace uml 
-{
 	class LinkEndData;
-}
-
-namespace uml 
-{
 	class Namespace;
-}
-
-namespace uml 
-{
 	class OutputPin;
-}
-
-namespace uml 
-{
 	class Property;
-}
-
-namespace uml 
-{
-	class RedefinableElement;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class StructuredActivityNode;
 }
 
@@ -151,6 +67,8 @@ namespace uml
 // enum includes
 #include "uml/VisibilityKind.hpp"
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -184,21 +102,21 @@ namespace uml
 			self.openEnd()->first().compatibleWith(result)
 			*/
 			 
-			virtual bool compatible_multiplicity(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool compatible_multiplicity(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			The open end must be navigable.
 			self.openEnd()->first().isNavigable()
 			*/
 			 
-			virtual bool navigable_open_end(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool navigable_open_end(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			Exactly one linkEndData specification (corresponding to the "open" end) must not have an value InputPin.
 			self.openEnd()->size() = 1
 			*/
 			 
-			virtual bool one_open_end(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool one_open_end(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			Returns the ends corresponding to endData with no value InputPin. (A well-formed ReadLinkAction is constrained to have only one of these.)
@@ -213,7 +131,7 @@ namespace uml
 			self.openEnd()->forAll(type=result.type and isOrdered=result.isOrdered)
 			*/
 			 
-			virtual bool type_and_ordering(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool type_and_ordering(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			Visibility of the open end must allow access from the object performing the action.
@@ -226,7 +144,7 @@ namespace uml
 			        _'context'.conformsTo(oed.end.type.oclAsType(Classifier)))))
 			*/
 			 
-			virtual bool visibility(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool visibility(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			
 			//*********************************

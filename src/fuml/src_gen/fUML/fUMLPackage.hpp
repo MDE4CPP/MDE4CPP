@@ -31,7 +31,7 @@ namespace fUML
 	}
 
 }
-
+ 
 namespace fUML 
 {
 	/*!

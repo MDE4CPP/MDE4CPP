@@ -78,21 +78,21 @@ namespace uml
 			object.is(1,1)
 			*/
 			 
-			virtual bool multiplicity_of_object(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool multiplicity_of_object(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			A StartObjectBehaviorAction may not specify onPort.
 			onPort->isEmpty()
 			*/
 			 
-			virtual bool no_onport(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool no_onport(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			The type of the object InputPin must be either a Behavior or a BehavioredClassifier with a classifierBehavior.
 			self.behavior()<>null
 			*/
 			 
-			virtual bool type_of_object(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool type_of_object(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			

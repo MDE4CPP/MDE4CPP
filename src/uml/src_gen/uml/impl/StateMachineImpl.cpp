@@ -551,43 +551,43 @@ std::shared_ptr<ecore::EClass> StateMachineImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<uml::Region> StateMachineImpl::LCA(std::shared_ptr<uml::Vertex>  s1,std::shared_ptr<uml::Vertex>  s2)
+std::shared_ptr<uml::Region> StateMachineImpl::LCA(std::shared_ptr<uml::Vertex> s1,std::shared_ptr<uml::Vertex> s2)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::State> StateMachineImpl::LCAState(std::shared_ptr<uml::Vertex>  v1,std::shared_ptr<uml::Vertex>  v2)
+std::shared_ptr<uml::State> StateMachineImpl::LCAState(std::shared_ptr<uml::Vertex> v1,std::shared_ptr<uml::Vertex> v2)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool StateMachineImpl::ancestor(std::shared_ptr<uml::Vertex>  s1,std::shared_ptr<uml::Vertex>  s2)
+bool StateMachineImpl::ancestor(std::shared_ptr<uml::Vertex> s1,std::shared_ptr<uml::Vertex> s2)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool StateMachineImpl::classifier_context(Any diagnostics,std::map <   Any, Any >  context)
+bool StateMachineImpl::classifier_context(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool StateMachineImpl::connection_points(Any diagnostics,std::map <   Any, Any >  context)
+bool StateMachineImpl::connection_points(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool StateMachineImpl::context_classifier(Any diagnostics,std::map <   Any, Any >  context)
+bool StateMachineImpl::context_classifier(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool StateMachineImpl::method(Any diagnostics,std::map <   Any, Any >  context)
+bool StateMachineImpl::method(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -900,51 +900,19 @@ Any StateMachineImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::STATEMACHINE_ATTRIBUTE_CONNECTIONPOINT:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Pseudostate>::iterator iter = m_connectionPoint->begin();
-			Bag<uml::Pseudostate>::iterator end = m_connectionPoint->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //22261
+			return eAny(getConnectionPoint()); //22261			
 		}
 		case uml::umlPackage::STATEMACHINE_ATTRIBUTE_EXTENDEDSTATEMACHINE:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::StateMachine>::iterator iter = m_extendedStateMachine->begin();
-			Bag<uml::StateMachine>::iterator end = m_extendedStateMachine->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //22264
+			return eAny(getExtendedStateMachine()); //22264			
 		}
 		case uml::umlPackage::STATEMACHINE_ATTRIBUTE_REGION:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Region>::iterator iter = m_region->begin();
-			Bag<uml::Region>::iterator end = m_region->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //22263
+			return eAny(getRegion()); //22263			
 		}
 		case uml::umlPackage::STATEMACHINE_ATTRIBUTE_SUBMACHINESTATE:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::State>::iterator iter = m_submachineState->begin();
-			Bag<uml::State>::iterator end = m_submachineState->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //22262
+			return eAny(getSubmachineState()); //22262			
 		}
 	}
 	return BehaviorImpl::eGet(featureID, resolve, coreType);
@@ -1298,7 +1266,6 @@ void StateMachineImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'connectionPoint'
 		for (std::shared_ptr<uml::Pseudostate> connectionPoint : *this->getConnectionPoint()) 
 		{
@@ -1310,20 +1277,10 @@ void StateMachineImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 		{
 			saveHandler->addReference(region, "region", region->eClass() != package->getRegion_Class());
 		}
-	
 
-		// Add references
-		std::shared_ptr<Bag<uml::StateMachine>> extendedStateMachine_list = this->getExtendedStateMachine();
-		for (std::shared_ptr<uml::StateMachine > object : *extendedStateMachine_list)
-		{ 
-			saveHandler->addReferences("extendedStateMachine", object);
-		}
-		std::shared_ptr<Bag<uml::State>> submachineState_list = this->getSubmachineState();
-		for (std::shared_ptr<uml::State > object : *submachineState_list)
-		{ 
-			saveHandler->addReferences("submachineState", object);
-		}
-
+	// Add references
+		saveHandler->addReferences<uml::StateMachine>("extendedStateMachine", this->getExtendedStateMachine());	
+		saveHandler->addReferences<uml::State>("submachineState", this->getSubmachineState());	
 	}
 	catch (std::exception& e)
 	{

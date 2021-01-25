@@ -48,22 +48,22 @@ namespace fUML::Semantics::Actions
 			// Operations
 			//*********************************
 			 
-			virtual void accept(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>  eventOccurrence) ;
+			virtual void accept(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurrence) ;
 			
 			 
 			virtual void doAction() ;
 			
 			 
-			virtual void fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token> >  incomingTokens) ;
+			virtual void fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > incomingTokens) ;
 			
 			 
-			virtual void initialize(std::shared_ptr<uml::ActivityNode>  node,std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup>  group) ;
+			virtual void initialize(std::shared_ptr<org.eclipse.uml2.uml.ActivityNode> node,std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> group) ;
 			
 			 
 			virtual bool isReady() ;
 			
 			 
-			virtual bool match(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>  eventOccurrence) ;
+			virtual bool match(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurrence) ;
 			
 			 
 			virtual void run() ;
@@ -77,10 +77,10 @@ namespace fUML::Semantics::Actions
 			// Attributes Getter Setter
 			//*********************************
 			 
-			virtual bool isWaiting() const ;
+			virtual bool  isWaiting() const ;
 			
 			 
-			virtual void setWaiting (bool _waiting); 
+			virtual void setWaiting (bool  _waiting); 
 			
 			
 			//*********************************

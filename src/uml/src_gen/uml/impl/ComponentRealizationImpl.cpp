@@ -402,9 +402,11 @@ Any ComponentRealizationImpl::eGet(int featureID, bool resolve, bool coreType) c
 	switch(featureID)
 	{
 		case uml::umlPackage::COMPONENTREALIZATION_ATTRIBUTE_ABSTRACTION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getAbstraction().lock())); //4819
+			return eAny(getAbstraction().lock()); //4819
 		case uml::umlPackage::COMPONENTREALIZATION_ATTRIBUTE_REALIZINGCLASSIFIER:
 		{
+			return eAny(getRealizingClassifier()); //4818			
+			/*
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Classifier>::iterator iter = m_realizingClassifier->begin();
 			Bag<uml::Classifier>::iterator end = m_realizingClassifier->end();
@@ -414,6 +416,7 @@ Any ComponentRealizationImpl::eGet(int featureID, bool resolve, bool coreType) c
 				iter++;
 			}
 			return eAny(tempList); //4818
+			*/
 		}
 	}
 	return RealizationImpl::eGet(featureID, resolve, coreType);
@@ -604,15 +607,8 @@ void ComponentRealizationImpl::saveContent(std::shared_ptr<persistence::interfac
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
-	
-
-		// Add references
-		std::shared_ptr<Bag<uml::Classifier>> realizingClassifier_list = this->getRealizingClassifier();
-		for (std::shared_ptr<uml::Classifier > object : *realizingClassifier_list)
-		{ 
-			saveHandler->addReferences("realizingClassifier", object);
-		}
-
+	// Add references
+		saveHandler->addReferences<uml::Classifier>("realizingClassifier", this->getRealizingClassifier());	
 	}
 	catch (std::exception& e)
 	{

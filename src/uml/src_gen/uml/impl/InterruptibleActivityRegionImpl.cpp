@@ -188,7 +188,7 @@ std::shared_ptr<ecore::EClass> InterruptibleActivityRegionImpl::eStaticClass() c
 //*********************************
 // Operations
 //*********************************
-bool InterruptibleActivityRegionImpl::interrupting_edges(Any diagnostics,std::map <   Any, Any >  context)
+bool InterruptibleActivityRegionImpl::interrupting_edges(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -327,27 +327,11 @@ Any InterruptibleActivityRegionImpl::eGet(int featureID, bool resolve, bool core
 	{
 		case uml::umlPackage::INTERRUPTIBLEACTIVITYREGION_ATTRIBUTE_INTERRUPTINGEDGE:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ActivityEdge>::iterator iter = m_interruptingEdge->begin();
-			Bag<uml::ActivityEdge>::iterator end = m_interruptingEdge->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //12714
+			return eAny(getInterruptingEdge()); //12714			
 		}
 		case uml::umlPackage::INTERRUPTIBLEACTIVITYREGION_ATTRIBUTE_NODE:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ActivityNode>::iterator iter = m_node->begin();
-			Bag<uml::ActivityNode>::iterator end = m_node->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //12715
+			return eAny(getNode()); //12715			
 		}
 	}
 	return ActivityGroupImpl::eGet(featureID, resolve, coreType);
@@ -563,20 +547,9 @@ void InterruptibleActivityRegionImpl::saveContent(std::shared_ptr<persistence::i
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
-	
-
-		// Add references
-		std::shared_ptr<Bag<uml::ActivityEdge>> interruptingEdge_list = this->getInterruptingEdge();
-		for (std::shared_ptr<uml::ActivityEdge > object : *interruptingEdge_list)
-		{ 
-			saveHandler->addReferences("interruptingEdge", object);
-		}
-		std::shared_ptr<Bag<uml::ActivityNode>> node_list = this->getNode();
-		for (std::shared_ptr<uml::ActivityNode > object : *node_list)
-		{ 
-			saveHandler->addReferences("node", object);
-		}
-
+	// Add references
+		saveHandler->addReferences<uml::ActivityEdge>("interruptingEdge", this->getInterruptingEdge());	
+		saveHandler->addReferences<uml::ActivityNode>("node", this->getNode());	
 	}
 	catch (std::exception& e)
 	{

@@ -266,7 +266,7 @@ Any CallEventImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::CALLEVENT_ATTRIBUTE_OPERATION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOperation())); //3112
+			return eAny(getOperation()); //3112
 	}
 	return MessageEventImpl::eGet(featureID, resolve, coreType);
 }
@@ -399,11 +399,8 @@ void CallEventImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
-	
-
-		// Add references
-		saveHandler->addReference("operation", this->getOperation());
-
+	// Add references
+		saveHandler->addReference("operation", this->getOperation());		 
 	}
 	catch (std::exception& e)
 	{

@@ -196,9 +196,6 @@ void EventDispatchLoopImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	try
 	{
 		std::shared_ptr<fUML::Semantics::CommonBehavior::CommonBehaviorPackage> package = fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

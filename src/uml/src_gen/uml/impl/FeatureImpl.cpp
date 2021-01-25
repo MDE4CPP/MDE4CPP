@@ -156,12 +156,12 @@ std::shared_ptr<ecore::EClass> FeatureImpl::eStaticClass() const
 /*
 Getter & Setter for attribute isStatic
 */
-bool FeatureImpl::getIsStatic() const 
+bool  FeatureImpl::getIsStatic() const 
 {
 	return m_isStatic;
 }
 
-void FeatureImpl::setIsStatic(bool _isStatic)
+void FeatureImpl::setIsStatic(bool  _isStatic)
 {
 	m_isStatic = _isStatic;
 } 
@@ -257,15 +257,7 @@ Any FeatureImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::FEATURE_ATTRIBUTE_FEATURINGCLASSIFIER:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Classifier>::iterator iter = m_featuringClassifier->begin();
-			Bag<uml::Classifier>::iterator end = m_featuringClassifier->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //10112
+			return eAny(getFeaturingClassifier()); //10112			
 		}
 		case uml::umlPackage::FEATURE_ATTRIBUTE_ISSTATIC:
 			return eAny(getIsStatic()); //10113
@@ -382,14 +374,11 @@ void FeatureImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
 		// Add attributes
 		if ( this->eIsSet(package->getFeature_Attribute_isStatic()) )
 		{
 			saveHandler->addAttribute("isStatic", this->getIsStatic());
 		}
-
 	}
 	catch (std::exception& e)
 	{

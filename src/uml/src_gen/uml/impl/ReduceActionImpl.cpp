@@ -279,12 +279,12 @@ std::shared_ptr<ecore::EClass> ReduceActionImpl::eStaticClass() const
 /*
 Getter & Setter for attribute isOrdered
 */
-bool ReduceActionImpl::getIsOrdered() const 
+bool  ReduceActionImpl::getIsOrdered() const 
 {
 	return m_isOrdered;
 }
 
-void ReduceActionImpl::setIsOrdered(bool _isOrdered)
+void ReduceActionImpl::setIsOrdered(bool  _isOrdered)
 {
 	m_isOrdered = _isOrdered;
 } 
@@ -294,19 +294,19 @@ void ReduceActionImpl::setIsOrdered(bool _isOrdered)
 //*********************************
 // Operations
 //*********************************
-bool ReduceActionImpl::input_type_is_collection(Any diagnostics,std::map <   Any, Any >  context)
+bool ReduceActionImpl::input_type_is_collection(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ReduceActionImpl::output_types_are_compatible(Any diagnostics,std::map <   Any, Any >  context)
+bool ReduceActionImpl::output_types_are_compatible(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ReduceActionImpl::reducer_inputs_output(Any diagnostics,std::map <   Any, Any >  context)
+bool ReduceActionImpl::reducer_inputs_output(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -500,13 +500,13 @@ Any ReduceActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::REDUCEACTION_ATTRIBUTE_COLLECTION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getCollection())); //20627
+			return eAny(getCollection()); //20627
 		case uml::umlPackage::REDUCEACTION_ATTRIBUTE_ISORDERED:
 			return eAny(getIsOrdered()); //20628
 		case uml::umlPackage::REDUCEACTION_ATTRIBUTE_REDUCER:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getReducer())); //20629
+			return eAny(getReducer()); //20629
 		case uml::umlPackage::REDUCEACTION_ATTRIBUTE_RESULT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //20630
+			return eAny(getResult()); //20630
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -720,7 +720,6 @@ void ReduceActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'collection'
 		std::shared_ptr<uml::InputPin > collection = this->getCollection();
 		if (collection != nullptr)
@@ -734,16 +733,14 @@ void ReduceActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 		{
 			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_Class());
 		}
-	
 		// Add attributes
 		if ( this->eIsSet(package->getReduceAction_Attribute_isOrdered()) )
 		{
 			saveHandler->addAttribute("isOrdered", this->getIsOrdered());
 		}
 
-		// Add references
-		saveHandler->addReference("reducer", this->getReducer());
-
+	// Add references
+		saveHandler->addReference("reducer", this->getReducer());		 
 	}
 	catch (std::exception& e)
 	{

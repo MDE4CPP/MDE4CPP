@@ -80,7 +80,8 @@ void SimpleClassifiersPackageImpl::initializeBooleanValueContent()
 	
 	m_booleanValue_Attribute_value = getBooleanValue_Attribute_value();
 	m_booleanValue_Attribute_value->setName("value");
-	m_booleanValue_Attribute_value->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
+	
+		m_booleanValue_Attribute_value->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_booleanValue_Attribute_value->setLowerBound(1);
 	m_booleanValue_Attribute_value->setUpperBound(1);
 	m_booleanValue_Attribute_value->setTransient(false);
@@ -466,7 +467,8 @@ void SimpleClassifiersPackageImpl::initializeFeatureValueContent()
 	
 	m_featureValue_Attribute_position = getFeatureValue_Attribute_position();
 	m_featureValue_Attribute_position->setName("position");
-	m_featureValue_Attribute_position->setEType(ecore::ecorePackage::eInstance()->getEInt_Class());
+	
+		m_featureValue_Attribute_position->setEType(ecore::ecorePackage::eInstance()->getEInt_Class());
 	m_featureValue_Attribute_position->setLowerBound(0);
 	m_featureValue_Attribute_position->setUpperBound(1);
 	m_featureValue_Attribute_position->setTransient(false);
@@ -566,7 +568,8 @@ void SimpleClassifiersPackageImpl::initializeIntegerValueContent()
 	
 	m_integerValue_Attribute_value = getIntegerValue_Attribute_value();
 	m_integerValue_Attribute_value->setName("value");
-	m_integerValue_Attribute_value->setEType(ecore::ecorePackage::eInstance()->getEInt_Class());
+	
+		m_integerValue_Attribute_value->setEType(ecore::ecorePackage::eInstance()->getEInt_Class());
 	m_integerValue_Attribute_value->setLowerBound(1);
 	m_integerValue_Attribute_value->setUpperBound(1);
 	m_integerValue_Attribute_value->setTransient(false);
@@ -687,7 +690,8 @@ void SimpleClassifiersPackageImpl::initializeRealValueContent()
 	
 	m_realValue_Attribute_value = getRealValue_Attribute_value();
 	m_realValue_Attribute_value->setName("value");
-	m_realValue_Attribute_value->setEType(ecore::ecorePackage::eInstance()->getEDouble_Class());
+	
+		m_realValue_Attribute_value->setEType(ecore::ecorePackage::eInstance()->getEDouble_Class());
 	m_realValue_Attribute_value->setLowerBound(1);
 	m_realValue_Attribute_value->setUpperBound(1);
 	m_realValue_Attribute_value->setTransient(false);
@@ -800,7 +804,8 @@ void SimpleClassifiersPackageImpl::initializeStringValueContent()
 	
 	m_stringValue_Attribute_value = getStringValue_Attribute_value();
 	m_stringValue_Attribute_value->setName("value");
-	m_stringValue_Attribute_value->setEType(ecore::ecorePackage::eInstance()->getEString_Class());
+	
+		m_stringValue_Attribute_value->setEType(ecore::ecorePackage::eInstance()->getEString_Class());
 	m_stringValue_Attribute_value->setLowerBound(1);
 	m_stringValue_Attribute_value->setUpperBound(1);
 	m_stringValue_Attribute_value->setTransient(false);
@@ -1052,7 +1057,8 @@ void SimpleClassifiersPackageImpl::initializeUnlimitedNaturalValueContent()
 	
 	m_unlimitedNaturalValue_Attribute_value = getUnlimitedNaturalValue_Attribute_value();
 	m_unlimitedNaturalValue_Attribute_value->setName("value");
-	m_unlimitedNaturalValue_Attribute_value->setEType(ecore::ecorePackage::eInstance()->getEInt_Class());
+	
+		m_unlimitedNaturalValue_Attribute_value->setEType(ecore::ecorePackage::eInstance()->getEInt_Class());
 	m_unlimitedNaturalValue_Attribute_value->setLowerBound(1);
 	m_unlimitedNaturalValue_Attribute_value->setUpperBound(1);
 	m_unlimitedNaturalValue_Attribute_value->setTransient(false);

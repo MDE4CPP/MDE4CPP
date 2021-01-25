@@ -56,13 +56,13 @@ namespace uml
 			isAbstract implies method->isEmpty()
 			*/
 			 
-			virtual bool abstract_no_method(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool abstract_no_method(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			Creates a return result parameter with the specified name and type.
 			*/
 			 
-			virtual std::shared_ptr<uml::Parameter> createReturnResult(std::string name,std::shared_ptr<uml::Type>  type) ;
+			virtual std::shared_ptr<uml::Parameter> createReturnResult(std::string name,std::shared_ptr<uml::Type> type) ;
 			
 			/*!
 			The ownedParameters with direction in and inout.
@@ -90,27 +90,27 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual uml::CallConcurrencyKind getConcurrency() const ;
+			virtual uml::CallConcurrencyKind  getConcurrency() const ;
 			
 			/*!
 			Specifies the semantics of concurrent calls to the same passive instance (i.e., an instance originating from a Class with isActive being false). Active instances control access to their own BehavioralFeatures.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual void setConcurrency (uml::CallConcurrencyKind _concurrency); 
+			virtual void setConcurrency (uml::CallConcurrencyKind  _concurrency); 
 			/*!
 			If true, then the BehavioralFeature does not have an implementation, and one must be supplied by a more specific Classifier. If false, the BehavioralFeature must have an implementation in the Classifier or one must be inherited.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual bool getIsAbstract() const ;
+			virtual bool  getIsAbstract() const ;
 			
 			/*!
 			If true, then the BehavioralFeature does not have an implementation, and one must be supplied by a more specific Classifier. If false, the BehavioralFeature must have an implementation in the Classifier or one must be inherited.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual void setIsAbstract (bool _isAbstract); 
+			virtual void setIsAbstract (bool  _isAbstract); 
 			
 			
 			//*********************************

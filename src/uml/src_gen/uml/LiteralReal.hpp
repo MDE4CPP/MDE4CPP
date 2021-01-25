@@ -35,59 +35,17 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Comment;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
-	class LiteralSpecification;
-}
-
-namespace uml 
-{
 	class Namespace;
-}
-
-namespace uml 
-{
 	class Package;
-}
-
-namespace uml 
-{
 	class Slot;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class TemplateParameter;
-}
-
-namespace uml 
-{
 	class Type;
-}
-
-namespace uml 
-{
 	class ValueSpecificationAction;
 }
 
@@ -97,6 +55,8 @@ namespace uml
 // enum includes
 #include "uml/VisibilityKind.hpp"
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -150,14 +110,14 @@ namespace uml
 			<p>From package UML::Values.</p>
 			*/
 			 
-			virtual double getValue() const = 0;
+			virtual double  getValue() const = 0;
 			
 			/*!
 			The specified Real value.
 			<p>From package UML::Values.</p>
 			*/
 			 
-			virtual void setValue (double _value)= 0; 
+			virtual void setValue (double  _value)= 0; 
 			
 			//*********************************
 			// Reference
@@ -173,7 +133,7 @@ namespace uml
 			<p>From package UML::Values.</p>
 			*/
 			 
-			double m_value = 0;
+			double  m_value = 0;
 			
 			
 			//*********************************

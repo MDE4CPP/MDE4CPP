@@ -35,49 +35,14 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Comment;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
-	class NamedElement;
-}
-
-namespace uml 
-{
 	class Namespace;
-}
-
-namespace uml 
-{
-	class Observation;
-}
-
-namespace uml 
-{
 	class Package;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class TemplateParameter;
 }
 
@@ -87,6 +52,8 @@ namespace uml
 // enum includes
 #include "uml/VisibilityKind.hpp"
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -124,14 +91,14 @@ namespace uml
 			<p>From package UML::Values.</p>
 			*/
 			 
-			virtual bool getFirstEvent() const = 0;
+			virtual bool  getFirstEvent() const = 0;
 			
 			/*!
 			The value of firstEvent is related to the event. If firstEvent is true, then the corresponding observation event is the first time instant the execution enters the event Element. If firstEvent is false, then the corresponding observation event is the time instant the execution exits the event Element.
 			<p>From package UML::Values.</p>
 			*/
 			 
-			virtual void setFirstEvent (bool _firstEvent)= 0; 
+			virtual void setFirstEvent (bool  _firstEvent)= 0; 
 			
 			//*********************************
 			// Reference
@@ -161,7 +128,7 @@ namespace uml
 			<p>From package UML::Values.</p>
 			*/
 			 
-			bool m_firstEvent = true;
+			bool  m_firstEvent = true;
 			
 			
 			//*********************************

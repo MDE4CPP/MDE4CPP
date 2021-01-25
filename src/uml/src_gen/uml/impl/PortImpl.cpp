@@ -335,12 +335,12 @@ std::shared_ptr<ecore::EClass> PortImpl::eStaticClass() const
 /*
 Getter & Setter for attribute isBehavior
 */
-bool PortImpl::getIsBehavior() const 
+bool  PortImpl::getIsBehavior() const 
 {
 	return m_isBehavior;
 }
 
-void PortImpl::setIsBehavior(bool _isBehavior)
+void PortImpl::setIsBehavior(bool  _isBehavior)
 {
 	m_isBehavior = _isBehavior;
 } 
@@ -350,12 +350,12 @@ void PortImpl::setIsBehavior(bool _isBehavior)
 /*
 Getter & Setter for attribute isConjugated
 */
-bool PortImpl::getIsConjugated() const 
+bool  PortImpl::getIsConjugated() const 
 {
 	return m_isConjugated;
 }
 
-void PortImpl::setIsConjugated(bool _isConjugated)
+void PortImpl::setIsConjugated(bool  _isConjugated)
 {
 	m_isConjugated = _isConjugated;
 } 
@@ -365,12 +365,12 @@ void PortImpl::setIsConjugated(bool _isConjugated)
 /*
 Getter & Setter for attribute isService
 */
-bool PortImpl::getIsService() const 
+bool  PortImpl::getIsService() const 
 {
 	return m_isService;
 }
 
-void PortImpl::setIsService(bool _isService)
+void PortImpl::setIsService(bool  _isService)
 {
 	m_isService = _isService;
 } 
@@ -414,13 +414,13 @@ std::shared_ptr<Bag<uml::Interface> > PortImpl::basicRequired()
 	//end of body
 }
 
-bool PortImpl::default_value(Any diagnostics,std::map <   Any, Any >  context)
+bool PortImpl::default_value(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PortImpl::encapsulated_owner(Any diagnostics,std::map <   Any, Any >  context)
+bool PortImpl::encapsulated_owner(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -444,7 +444,7 @@ std::shared_ptr<Bag<uml::Interface> > PortImpl::getRequireds()
 	//end of body
 }
 
-bool PortImpl::port_aggregation(Any diagnostics,std::map <   Any, Any >  context)
+bool PortImpl::port_aggregation(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -678,42 +678,18 @@ Any PortImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::PORT_ATTRIBUTE_ISSERVICE:
 			return eAny(getIsService()); //18146
 		case uml::umlPackage::PORT_ATTRIBUTE_PROTOCOL:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getProtocol())); //18147
+			return eAny(getProtocol()); //18147
 		case uml::umlPackage::PORT_ATTRIBUTE_PROVIDED:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Interface>::iterator iter = m_provided->begin();
-			Bag<uml::Interface>::iterator end = m_provided->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //18148
+			return eAny(getProvided()); //18148			
 		}
 		case uml::umlPackage::PORT_ATTRIBUTE_REDEFINEDPORT:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Port>::iterator iter = m_redefinedPort->begin();
-			Bag<uml::Port>::iterator end = m_redefinedPort->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //18149
+			return eAny(getRedefinedPort()); //18149			
 		}
 		case uml::umlPackage::PORT_ATTRIBUTE_REQUIRED:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Interface>::iterator iter = m_required->begin();
-			Bag<uml::Interface>::iterator end = m_required->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //18150
+			return eAny(getRequired()); //18150			
 		}
 	}
 	return PropertyImpl::eGet(featureID, resolve, coreType);
@@ -970,8 +946,6 @@ void PortImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
 		// Add attributes
 		if ( this->eIsSet(package->getPort_Attribute_isBehavior()) )
 		{
@@ -988,14 +962,9 @@ void PortImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler
 			saveHandler->addAttribute("isService", this->getIsService());
 		}
 
-		// Add references
-		saveHandler->addReference("protocol", this->getProtocol());
-		std::shared_ptr<Bag<uml::Port>> redefinedPort_list = this->getRedefinedPort();
-		for (std::shared_ptr<uml::Port > object : *redefinedPort_list)
-		{ 
-			saveHandler->addReferences("redefinedPort", object);
-		}
-
+	// Add references
+		saveHandler->addReference("protocol", this->getProtocol());		 
+		saveHandler->addReferences<uml::Port>("redefinedPort", this->getRedefinedPort());	
 	}
 	catch (std::exception& e)
 	{

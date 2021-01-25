@@ -114,7 +114,7 @@ std::shared_ptr<ecore::EClass> FactoryImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<uml::Element> FactoryImpl::create(std::shared_ptr<uml::Class>  metaClass)
+std::shared_ptr<uml::Element> FactoryImpl::create(std::shared_ptr<uml::Class> metaClass)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -245,9 +245,6 @@ void FactoryImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

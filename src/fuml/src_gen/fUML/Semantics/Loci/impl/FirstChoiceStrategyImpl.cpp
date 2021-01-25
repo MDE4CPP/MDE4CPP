@@ -210,9 +210,6 @@ void FirstChoiceStrategyImpl::saveContent(std::shared_ptr<persistence::interface
 	try
 	{
 		std::shared_ptr<fUML::Semantics::Loci::LociPackage> package = fUML::Semantics::Loci::LociPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

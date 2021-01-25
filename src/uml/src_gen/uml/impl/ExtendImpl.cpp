@@ -184,7 +184,7 @@ std::shared_ptr<ecore::EClass> ExtendImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ExtendImpl::extension_points(Any diagnostics,std::map <   Any, Any >  context)
+bool ExtendImpl::extension_points(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -383,22 +383,14 @@ Any ExtendImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::EXTEND_ATTRIBUTE_CONDITION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getCondition())); //9612
+			return eAny(getCondition()); //9612
 		case uml::umlPackage::EXTEND_ATTRIBUTE_EXTENDEDCASE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getExtendedCase())); //9613
+			return eAny(getExtendedCase()); //9613
 		case uml::umlPackage::EXTEND_ATTRIBUTE_EXTENSION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getExtension().lock())); //9615
+			return eAny(getExtension().lock()); //9615
 		case uml::umlPackage::EXTEND_ATTRIBUTE_EXTENSIONLOCATION:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ExtensionPoint>::iterator iter = m_extensionLocation->begin();
-			Bag<uml::ExtensionPoint>::iterator end = m_extensionLocation->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //9614
+			return eAny(getExtensionLocation()); //9614			
 		}
 	}
 	Any result;
@@ -666,23 +658,16 @@ void ExtendImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'condition'
 		std::shared_ptr<uml::Constraint > condition = this->getCondition();
 		if (condition != nullptr)
 		{
 			saveHandler->addReference(condition, "condition", condition->eClass() != package->getConstraint_Class());
 		}
-	
 
-		// Add references
-		saveHandler->addReference("extendedCase", this->getExtendedCase());
-		std::shared_ptr<Bag<uml::ExtensionPoint>> extensionLocation_list = this->getExtensionLocation();
-		for (std::shared_ptr<uml::ExtensionPoint > object : *extensionLocation_list)
-		{ 
-			saveHandler->addReferences("extensionLocation", object);
-		}
-
+	// Add references
+		saveHandler->addReference("extendedCase", this->getExtendedCase());		 
+		saveHandler->addReferences<uml::ExtensionPoint>("extensionLocation", this->getExtensionLocation());	
 	}
 	catch (std::exception& e)
 	{

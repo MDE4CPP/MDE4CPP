@@ -163,7 +163,7 @@ std::shared_ptr<ecore::EClass> ReadIsClassifiedObjectActionActivationImpl::eStat
 //*********************************
 // Operations
 //*********************************
-bool ReadIsClassifiedObjectActionActivationImpl::checkAllParents(std::shared_ptr<uml::Classifier>  type,std::shared_ptr<uml::Classifier>  classifier)
+bool ReadIsClassifiedObjectActionActivationImpl::checkAllParents(std::shared_ptr<org.eclipse.uml2.uml.Classifier> type,std::shared_ptr<org.eclipse.uml2.uml.Classifier> classifier)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -297,9 +297,6 @@ void ReadIsClassifiedObjectActionActivationImpl::saveContent(std::shared_ptr<per
 	try
 	{
 		std::shared_ptr<fUML::Semantics::Actions::ActionsPackage> package = fUML::Semantics::Actions::ActionsPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

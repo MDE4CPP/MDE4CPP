@@ -39,79 +39,18 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Comment;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
-	class Expression;
-}
-
-namespace uml 
-{
 	class Namespace;
-}
-
-namespace uml 
-{
 	class Package;
-}
-
-namespace uml 
-{
 	class Slot;
-}
-
-namespace uml 
-{
-	class StringExpression;
-}
-
-namespace uml 
-{
 	class TemplateBinding;
-}
-
-namespace uml 
-{
 	class TemplateParameter;
-}
-
-namespace uml 
-{
 	class TemplateSignature;
-}
-
-namespace uml 
-{
-	class TemplateableElement;
-}
-
-namespace uml 
-{
 	class Type;
-}
-
-namespace uml 
-{
-	class ValueSpecification;
-}
-
-namespace uml 
-{
 	class ValueSpecificationAction;
 }
 
@@ -123,6 +62,8 @@ namespace uml
 // enum includes
 #include "uml/VisibilityKind.hpp"
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -184,14 +125,14 @@ namespace uml
 			operand->forAll (oclIsKindOf (LiteralString))
 			*/
 			 
-			virtual bool operands(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool operands(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			If a StringExpression has sub-expressions, it cannot have operands and vice versa (this avoids the problem of having to define a collating sequence between operands and subexpressions).
 			if subExpression->notEmpty() then operand->isEmpty() else operand->notEmpty() endif
 			*/
 			 
-			virtual bool subexpressions(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool subexpressions(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			
 			//*********************************

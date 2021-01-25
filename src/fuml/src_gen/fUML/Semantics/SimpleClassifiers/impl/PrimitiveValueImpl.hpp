@@ -47,7 +47,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() ;
 			
 			 
-			virtual std::shared_ptr<Bag<uml::Classifier> > getTypes() ;
+			virtual std::shared_ptr<Bag<org.eclipse.uml2.uml.Classifier> > getTypes() ;
 			
 			
 			
@@ -60,10 +60,10 @@ namespace fUML::Semantics::SimpleClassifiers
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<uml::PrimitiveType > getType() const ;
+			virtual std::shared_ptr<org.eclipse.uml2.uml.PrimitiveType > getType() const ;
 			
 			
-			virtual void setType(std::shared_ptr<uml::PrimitiveType> _type) ;
+			virtual void setType(std::shared_ptr<org.eclipse.uml2.uml.PrimitiveType> _type) ;
 			
 							
 			

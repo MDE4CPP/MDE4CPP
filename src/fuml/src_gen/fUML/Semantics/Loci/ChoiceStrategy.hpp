@@ -35,17 +35,15 @@ namespace fUML
 	class fUMLFactory;
 }
 
-//Forward Declaration for used types
-namespace fUML::Semantics::Loci 
-{
-	class SemanticStrategy;
-}
+//Forward Declaration for used types 
 
 // base class includes
 #include "fUML/Semantics/Loci/SemanticStrategy.hpp"
 
 // enum includes
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace fUML::Semantics::Loci 

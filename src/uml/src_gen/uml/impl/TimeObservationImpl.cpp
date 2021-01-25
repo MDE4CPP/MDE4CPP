@@ -174,12 +174,12 @@ std::shared_ptr<ecore::EClass> TimeObservationImpl::eStaticClass() const
 /*
 Getter & Setter for attribute firstEvent
 */
-bool TimeObservationImpl::getFirstEvent() const 
+bool  TimeObservationImpl::getFirstEvent() const 
 {
 	return m_firstEvent;
 }
 
-void TimeObservationImpl::setFirstEvent(bool _firstEvent)
+void TimeObservationImpl::setFirstEvent(bool  _firstEvent)
 {
 	m_firstEvent = _firstEvent;
 } 
@@ -281,7 +281,7 @@ Any TimeObservationImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::TIMEOBSERVATION_ATTRIBUTE_EVENT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEvent())); //24012
+			return eAny(getEvent()); //24012
 		case uml::umlPackage::TIMEOBSERVATION_ATTRIBUTE_FIRSTEVENT:
 			return eAny(getFirstEvent()); //24013
 	}
@@ -430,17 +430,14 @@ void TimeObservationImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
 		// Add attributes
 		if ( this->eIsSet(package->getTimeObservation_Attribute_firstEvent()) )
 		{
 			saveHandler->addAttribute("firstEvent", this->getFirstEvent());
 		}
 
-		// Add references
-		saveHandler->addReference("event", this->getEvent());
-
+	// Add references
+		saveHandler->addReference("event", this->getEvent());		 
 	}
 	catch (std::exception& e)
 	{

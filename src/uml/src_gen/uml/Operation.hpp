@@ -39,134 +39,26 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Behavior;
-}
-
-namespace uml 
-{
-	class BehavioralFeature;
-}
-
-namespace uml 
-{
 	class Class;
-}
-
-namespace uml 
-{
 	class Classifier;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
 	class Constraint;
-}
-
-namespace uml 
-{
 	class DataType;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class ElementImport;
-}
-
-namespace uml 
-{
 	class Interface;
-}
-
-namespace uml 
-{
-	class NamedElement;
-}
-
-namespace uml 
-{
-	class Namespace;
-}
-
-namespace uml 
-{
-	class Operation;
-}
-
-namespace uml 
-{
 	class PackageImport;
-}
-
-namespace uml 
-{
 	class PackageableElement;
-}
-
-namespace uml 
-{
 	class Parameter;
-}
-
-namespace uml 
-{
 	class ParameterSet;
-}
-
-namespace uml 
-{
-	class ParameterableElement;
-}
-
-namespace uml 
-{
-	class RedefinableElement;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class TemplateBinding;
-}
-
-namespace uml 
-{
 	class TemplateParameter;
-}
-
-namespace uml 
-{
 	class TemplateSignature;
-}
-
-namespace uml 
-{
-	class TemplateableElement;
-}
-
-namespace uml 
-{
 	class Type;
 }
 
@@ -182,6 +74,8 @@ namespace uml
 
 #include "uml/VisibilityKind.hpp"
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -239,7 +133,7 @@ namespace uml
 			self.ownedParameter->select(direction = ParameterDirectionKind::return)->size() <= 1
 			*/
 			 
-			virtual bool at_most_one_return(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool at_most_one_return(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			If this operation has a return parameter, lower equals the value of lower for that parameter. Otherwise lower has no value.
@@ -282,14 +176,14 @@ namespace uml
 			virtual bool isUnique() = 0;
 			
 			 
-			virtual bool matches(std::shared_ptr<uml::Operation>  comparedOperation) = 0;
+			virtual bool matches(std::shared_ptr<uml::Operation> comparedOperation) = 0;
 			
 			/*!
 			A bodyCondition can only be specified for a query Operation.
 			bodyCondition <> null implies isQuery
 			*/
 			 
-			virtual bool only_body_for_query(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool only_body_for_query(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			The query returnResult() returns the set containing the return parameter of the Operation if one exists, otherwise, it returns an empty set
@@ -309,7 +203,7 @@ namespace uml
 			virtual void setLower(int newLower) = 0;
 			
 			 
-			virtual void setType(std::shared_ptr<uml::Type>  newType) = 0;
+			virtual void setType(std::shared_ptr<uml::Type> newType) = 0;
 			
 			 
 			virtual void setUpper(int newUpper) = 0;
@@ -323,7 +217,7 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual bool getIsOrdered() const = 0;
+			virtual bool  getIsOrdered() const = 0;
 			
 			
 			/*!
@@ -331,20 +225,20 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual bool getIsQuery() const = 0;
+			virtual bool  getIsQuery() const = 0;
 			
 			/*!
 			Specifies whether an execution of the BehavioralFeature leaves the state of the system unchanged (isQuery=true) or whether side effects may occur (isQuery=false).
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual void setIsQuery (bool _isQuery)= 0; 
+			virtual void setIsQuery (bool  _isQuery)= 0; 
 			/*!
 			Specifies whether the return parameter is unique or not, if present. This information is derived from the return result for this Operation.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual bool getIsUnique() const = 0;
+			virtual bool  getIsUnique() const = 0;
 			
 			
 			/*!
@@ -352,7 +246,7 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual int getLower() const = 0;
+			virtual int  getLower() const = 0;
 			
 			
 			/*!
@@ -360,7 +254,7 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual int getUpper() const = 0;
+			virtual int  getUpper() const = 0;
 			
 			
 			
@@ -466,31 +360,31 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			bool m_isOrdered = false;
+			bool  m_isOrdered = false;
 			/*!
 			Specifies whether an execution of the BehavioralFeature leaves the state of the system unchanged (isQuery=true) or whether side effects may occur (isQuery=false).
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			bool m_isQuery = false;
+			bool  m_isQuery = false;
 			/*!
 			Specifies whether the return parameter is unique or not, if present. This information is derived from the return result for this Operation.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			bool m_isUnique = true;
+			bool  m_isUnique = true;
 			/*!
 			Specifies the lower multiplicity of the return parameter, if present. This information is derived from the return result for this Operation.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			int m_lower = 1;
+			int  m_lower = 1;
 			/*!
 			The upper multiplicity of the return parameter, if present. This information is derived from the return result for this Operation.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			int m_upper = 1;
+			int  m_upper = 1;
 			
 			
 			//*********************************

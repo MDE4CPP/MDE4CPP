@@ -132,7 +132,7 @@ std::shared_ptr<ecore::EClass> InitialNodeActivationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-void InitialNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token> >  incomingTokens)
+void InitialNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > incomingTokens)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -258,9 +258,6 @@ void InitialNodeActivationImpl::saveContent(std::shared_ptr<persistence::interfa
 	try
 	{
 		std::shared_ptr<fUML::Semantics::Activities::ActivitiesPackage> package = fUML::Semantics::Activities::ActivitiesPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

@@ -391,12 +391,12 @@ std::shared_ptr<ecore::EClass> DeploymentSpecificationImpl::eStaticClass() const
 /*
 Getter & Setter for attribute deploymentLocation
 */
-std::string DeploymentSpecificationImpl::getDeploymentLocation() const 
+std::string  DeploymentSpecificationImpl::getDeploymentLocation() const 
 {
 	return m_deploymentLocation;
 }
 
-void DeploymentSpecificationImpl::setDeploymentLocation(std::string _deploymentLocation)
+void DeploymentSpecificationImpl::setDeploymentLocation(std::string  _deploymentLocation)
 {
 	m_deploymentLocation = _deploymentLocation;
 } 
@@ -406,12 +406,12 @@ void DeploymentSpecificationImpl::setDeploymentLocation(std::string _deploymentL
 /*
 Getter & Setter for attribute executionLocation
 */
-std::string DeploymentSpecificationImpl::getExecutionLocation() const 
+std::string  DeploymentSpecificationImpl::getExecutionLocation() const 
 {
 	return m_executionLocation;
 }
 
-void DeploymentSpecificationImpl::setExecutionLocation(std::string _executionLocation)
+void DeploymentSpecificationImpl::setExecutionLocation(std::string  _executionLocation)
 {
 	m_executionLocation = _executionLocation;
 } 
@@ -421,13 +421,13 @@ void DeploymentSpecificationImpl::setExecutionLocation(std::string _executionLoc
 //*********************************
 // Operations
 //*********************************
-bool DeploymentSpecificationImpl::deployed_elements(Any diagnostics,std::map <   Any, Any >  context)
+bool DeploymentSpecificationImpl::deployed_elements(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool DeploymentSpecificationImpl::deployment_target(Any diagnostics,std::map <   Any, Any >  context)
+bool DeploymentSpecificationImpl::deployment_target(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -624,7 +624,7 @@ Any DeploymentSpecificationImpl::eGet(int featureID, bool resolve, bool coreType
 	switch(featureID)
 	{
 		case uml::umlPackage::DEPLOYMENTSPECIFICATION_ATTRIBUTE_DEPLOYMENT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDeployment().lock())); //7045
+			return eAny(getDeployment().lock()); //7045
 		case uml::umlPackage::DEPLOYMENTSPECIFICATION_ATTRIBUTE_DEPLOYMENTLOCATION:
 			return eAny(getDeploymentLocation()); //7043
 		case uml::umlPackage::DEPLOYMENTSPECIFICATION_ATTRIBUTE_EXECUTIONLOCATION:
@@ -796,8 +796,6 @@ void DeploymentSpecificationImpl::saveContent(std::shared_ptr<persistence::inter
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
 		// Add attributes
 		if ( this->eIsSet(package->getDeploymentSpecification_Attribute_deploymentLocation()) )
 		{
@@ -808,7 +806,6 @@ void DeploymentSpecificationImpl::saveContent(std::shared_ptr<persistence::inter
 		{
 			saveHandler->addAttribute("executionLocation", this->getExecutionLocation());
 		}
-
 	}
 	catch (std::exception& e)
 	{

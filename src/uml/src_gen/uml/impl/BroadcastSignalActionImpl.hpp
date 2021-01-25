@@ -63,14 +63,14 @@ namespace uml
 			onPort=null
 			*/
 			 
-			virtual bool no_onport(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool no_onport(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			The number of argument InputPins must be the same as the number of attributes in the signal.
 			argument->size() = signal.allAttributes()->size()
 			*/
 			 
-			virtual bool number_of_arguments(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool number_of_arguments(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			The type, ordering, and multiplicity of an argument InputPin must be the same as the corresponding attribute of the signal.
@@ -81,7 +81,7 @@ namespace uml
 				argument->at(i).compatibleWith(attribute->at(i)))
 			*/
 			 
-			virtual bool type_ordering_multiplicity(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool type_ordering_multiplicity(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			

@@ -354,7 +354,7 @@ std::shared_ptr<ecore::EClass> SignalImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<uml::Property> SignalImpl::createOwnedAttribute(std::string name,std::shared_ptr<uml::Type>  type,int lower,int upper)
+std::shared_ptr<uml::Property> SignalImpl::createOwnedAttribute(std::string name,std::shared_ptr<uml::Type> type,int lower,int upper)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -559,15 +559,7 @@ Any SignalImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::SIGNAL_ATTRIBUTE_OWNEDATTRIBUTE:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Property>::iterator iter = m_ownedAttribute->begin();
-			Bag<uml::Property>::iterator end = m_ownedAttribute->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //21538
+			return eAny(getOwnedAttribute()); //21538			
 		}
 	}
 	return ClassifierImpl::eGet(featureID, resolve, coreType);
@@ -725,14 +717,11 @@ void SignalImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'ownedAttribute'
 		for (std::shared_ptr<uml::Property> ownedAttribute : *this->getOwnedAttribute()) 
 		{
 			saveHandler->addReference(ownedAttribute, "ownedAttribute", ownedAttribute->eClass() != package->getProperty_Class());
 		}
-	
-
 	}
 	catch (std::exception& e)
 	{

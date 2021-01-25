@@ -35,17 +35,15 @@ namespace fUML
 	class fUMLFactory;
 }
 
-//Forward Declaration for used types
-namespace fUML::Semantics::CommonBehavior 
-{
-	class GetNextEventStrategy;
-}
+//Forward Declaration for used types 
 
 // base class includes
 #include "fUML/Semantics/CommonBehavior/GetNextEventStrategy.hpp"
 
 // enum includes
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace fUML::Semantics::CommonBehavior 

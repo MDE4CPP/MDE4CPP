@@ -63,21 +63,21 @@ namespace uml
 			self.association().oclIsKindOf(AssociationClass)
 			*/
 			 
-			virtual bool association_class(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool association_class(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			The multiplicity of the OutputPin is 1..1.
 			result.is(1,1)
 			*/
 			 
-			virtual bool multiplicity(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool multiplicity(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			The type of the result OutputPin must be the same as the Association of the CreateLinkObjectAction.
 			result.type = association()
 			*/
 			 
-			virtual bool type_of_result(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool type_of_result(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			

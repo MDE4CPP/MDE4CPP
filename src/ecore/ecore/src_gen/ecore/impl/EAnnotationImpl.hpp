@@ -56,10 +56,17 @@ namespace ecore
 			// Attributes Getter Setter
 			//*********************************
 			 
-			virtual std::string getSource() const ;
+			virtual  std::shared_ptr<std::map <  std::string ,  std::string >> 
+			 getDetails() const ;
 			
 			 
-			virtual void setSource (std::string _source); 
+			virtual void setDetails ( std::shared_ptr<std::map <  std::string ,  std::string >> 
+			 _details); 
+			 
+			virtual std::string  getSource() const ;
+			
+			 
+			virtual void setSource (std::string  _source); 
 			
 			
 			//*********************************
@@ -67,10 +74,6 @@ namespace ecore
 			//*********************************
 			
 			virtual std::shared_ptr<Subset<ecore::EObject, ecore::EObject>> getContents() const ;
-			
-			
-			
-			virtual std::shared_ptr<Bag<ecore::EStringToStringMapEntry>> getDetails() const ;
 			
 			
 			

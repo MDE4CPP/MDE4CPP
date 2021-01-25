@@ -148,7 +148,7 @@ void ActivityParameterNodeActivationImpl::clearTokens()
 	//end of body
 }
 
-void ActivityParameterNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token> >  incomingTokens)
+void ActivityParameterNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > incomingTokens)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -302,9 +302,6 @@ void ActivityParameterNodeActivationImpl::saveContent(std::shared_ptr<persistenc
 	try
 	{
 		std::shared_ptr<fUML::Semantics::Activities::ActivitiesPackage> package = fUML::Semantics::Activities::ActivitiesPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

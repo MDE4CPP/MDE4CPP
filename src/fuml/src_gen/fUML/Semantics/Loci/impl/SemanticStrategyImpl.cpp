@@ -201,9 +201,6 @@ void SemanticStrategyImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	try
 	{
 		std::shared_ptr<fUML::Semantics::Loci::LociPackage> package = fUML::Semantics::Loci::LociPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

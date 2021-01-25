@@ -56,7 +56,7 @@ namespace uml
 			endif
 			*/
 			 
-			virtual bool insertAt_pin(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool insertAt_pin(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			
@@ -68,14 +68,14 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual bool getIsReplaceAll() const ;
+			virtual bool  getIsReplaceAll() const ;
 			
 			/*!
 			Specifies whether the existing links emanating from the object on this end should be destroyed before creating a new link.
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual void setIsReplaceAll (bool _isReplaceAll); 
+			virtual void setIsReplaceAll (bool  _isReplaceAll); 
 			
 			
 			//*********************************

@@ -110,7 +110,7 @@ std::shared_ptr<ecore::EClass> LiteralEvaluationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<uml::PrimitiveType> LiteralEvaluationImpl::getType(std::string builtInTypeName)
+std::shared_ptr<org.eclipse.uml2.uml.PrimitiveType> LiteralEvaluationImpl::getType(std::string builtInTypeName)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -231,9 +231,6 @@ void LiteralEvaluationImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	try
 	{
 		std::shared_ptr<fUML::Semantics::Values::ValuesPackage> package = fUML::Semantics::Values::ValuesPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

@@ -39,34 +39,12 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Comment;
-}
-
-namespace uml 
-{
-	class DirectedRelationship;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class TemplateParameterSubstitution;
-}
-
-namespace uml 
-{
 	class TemplateSignature;
-}
-
-namespace uml 
-{
 	class TemplateableElement;
 }
 
@@ -75,6 +53,8 @@ namespace uml
 
 // enum includes
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -116,14 +96,14 @@ namespace uml
 			signature.parameter->forAll(p | parameterSubstitution->select(b | b.formal = p)->size() <= 1)
 			*/
 			 
-			virtual bool one_parameter_substitution(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool one_parameter_substitution(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			Each parameterSubstitution must refer to a formal TemplateParameter of the target TemplateSignature.
 			parameterSubstitution->forAll(b | signature.parameter->includes(b.formal))
 			*/
 			 
-			virtual bool parameter_substitution_formal(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool parameter_substitution_formal(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			
 			//*********************************

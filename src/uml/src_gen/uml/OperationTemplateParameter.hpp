@@ -38,29 +38,11 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Comment;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class ParameterableElement;
-}
-
-namespace uml 
-{
-	class TemplateParameter;
-}
-
-namespace uml 
-{
 	class TemplateSignature;
 }
 
@@ -69,6 +51,8 @@ namespace uml
 
 // enum includes
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -105,7 +89,7 @@ namespace uml
 			          p1.type = p2.type and p1.upper = p2.upper and p1.lower = p2.lower and p1.direction = p2.direction and p1.isOrdered = p2.isOrdered and p1.isUnique = p2.isUnique)))
 			*/
 			 
-			virtual bool match_default_signature(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool match_default_signature(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			
 			//*********************************

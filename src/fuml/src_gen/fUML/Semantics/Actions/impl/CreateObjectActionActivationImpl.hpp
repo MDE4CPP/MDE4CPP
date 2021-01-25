@@ -61,18 +61,18 @@ namespace fUML::Semantics::Actions
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<uml::CreateObjectAction > getCreateObjectAction() const ;
+			virtual std::shared_ptr<org.eclipse.uml2.uml.CreateObjectAction > getCreateObjectAction() const ;
 			
 			
-			virtual void setCreateObjectAction(std::shared_ptr<uml::CreateObjectAction> _createObjectAction) ;
+			virtual void setCreateObjectAction(std::shared_ptr<org.eclipse.uml2.uml.CreateObjectAction> _createObjectAction) ;
 			
 			/*Additional Setter for 'ActionActivation::action' redefined by reference 'createObjectAction'*/
 			
-			virtual void setAction(std::shared_ptr<uml::Action> _action) ;
+			virtual void setAction(std::shared_ptr<org.eclipse.uml2.uml.Action> _action) ;
 			
 			/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'createObjectAction'*/
 			
-			virtual void setNode(std::shared_ptr<uml::ActivityNode> _node) ;
+			virtual void setNode(std::shared_ptr<org.eclipse.uml2.uml.ActivityNode> _node) ;
 			
 							
 			

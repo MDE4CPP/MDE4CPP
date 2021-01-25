@@ -115,12 +115,12 @@ std::shared_ptr<ecore::EClass> CommentImpl::eStaticClass() const
 /*
 Getter & Setter for attribute body
 */
-std::string CommentImpl::getBody() const 
+std::string  CommentImpl::getBody() const 
 {
 	return m_body;
 }
 
-void CommentImpl::setBody(std::string _body)
+void CommentImpl::setBody(std::string  _body)
 {
 	m_body = _body;
 } 
@@ -201,15 +201,7 @@ Any CommentImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::COMMENT_ATTRIBUTE_ANNOTATEDELEMENT:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Element>::iterator iter = m_annotatedElement->begin();
-			Bag<uml::Element>::iterator end = m_annotatedElement->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //453
+			return eAny(getAnnotatedElement()); //453			
 		}
 		case uml::umlPackage::COMMENT_ATTRIBUTE_BODY:
 			return eAny(getBody()); //454
@@ -379,21 +371,14 @@ void CommentImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
 		// Add attributes
 		if ( this->eIsSet(package->getComment_Attribute_body()) )
 		{
 			saveHandler->addAttribute("body", this->getBody());
 		}
 
-		// Add references
-		std::shared_ptr<Bag<uml::Element>> annotatedElement_list = this->getAnnotatedElement();
-		for (std::shared_ptr<uml::Element > object : *annotatedElement_list)
-		{ 
-			saveHandler->addReferences("annotatedElement", object);
-		}
-
+	// Add references
+		saveHandler->addReferences<uml::Element>("annotatedElement", this->getAnnotatedElement());	
 	}
 	catch (std::exception& e)
 	{

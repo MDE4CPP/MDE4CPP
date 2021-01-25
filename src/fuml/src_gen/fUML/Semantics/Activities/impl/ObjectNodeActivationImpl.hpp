@@ -48,7 +48,7 @@ namespace fUML::Semantics::Activities
 			// Operations
 			//*********************************
 			 
-			virtual void addToken(std::shared_ptr<fUML::Semantics::Activities::Token>  token) ;
+			virtual void addToken(std::shared_ptr<fUML::Semantics::Activities::Token> token) ;
 			
 			 
 			virtual void clearTokens() ;
@@ -63,13 +63,13 @@ namespace fUML::Semantics::Activities
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > getUnofferedTokens() ;
 			
 			 
-			virtual int removeToken(std::shared_ptr<fUML::Semantics::Activities::Token>  token) ;
+			virtual int removeToken(std::shared_ptr<fUML::Semantics::Activities::Token> token) ;
 			
 			 
 			virtual void run() ;
 			
 			 
-			virtual void sendOffers(std::shared_ptr<Bag<fUML::Semantics::Activities::Token> >  tokens) ;
+			virtual void sendOffers(std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > tokens) ;
 			
 			 
 			virtual void sendUnofferedTokens() ;
@@ -86,10 +86,10 @@ namespace fUML::Semantics::Activities
 			// Attributes Getter Setter
 			//*********************************
 			 
-			virtual int getOfferedTokenCount() const ;
+			virtual int  getOfferedTokenCount() const ;
 			
 			 
-			virtual void setOfferedTokenCount (int _offeredTokenCount); 
+			virtual void setOfferedTokenCount (int  _offeredTokenCount); 
 			
 			
 			//*********************************

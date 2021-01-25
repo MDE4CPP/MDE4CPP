@@ -35,55 +35,24 @@ namespace fUML
 	class fUMLFactory;
 }
 
-//Forward Declaration for used types
-namespace uml 
-{
-	class Action;
-}
-
-namespace fUML::Semantics::Activities 
-{
-	class ActivityEdgeInstance;
-}
-
-namespace uml 
-{
-	class ActivityNode;
-}
-
-namespace fUML::Semantics::Activities 
-{
-	class ActivityNodeActivationGroup;
-}
-
-namespace uml 
-{
-	class AddStructuralFeatureValueAction;
-}
-
+//Forward Declaration for used types 
 namespace fUML::Semantics::Actions 
 {
 	class InputPinActivation;
-}
-
-namespace fUML::Semantics::Actions 
-{
 	class OutputPinActivation;
-}
-
-namespace fUML::Semantics::Actions 
-{
 	class PinActivation;
 }
-
 namespace fUML::Semantics::Activities 
 {
+	class ActivityEdgeInstance;
+	class ActivityNodeActivationGroup;
 	class Token;
 }
-
-namespace fUML::Semantics::Actions 
+namespace uml 
 {
-	class WriteStructuralFeatureActionActivation;
+	class Action;
+	class ActivityNode;
+	class AddStructuralFeatureValueAction;
 }
 
 // base class includes
@@ -91,6 +60,21 @@ namespace fUML::Semantics::Actions
 
 // enum includes
 
+
+//Includes from codegen annotation
+#include "fUML/Semantics/Loci/Locus.hpp"
+#include "fUML/Semantics/Loci/ChoiceStrategy.hpp"
+#include "fUML/Semantics/Loci/ExecutionFactory.hpp"
+#include "fUML/Semantics/SimpleClassifiers/StructuredValue.hpp"
+#include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
+#include "fUML/Semantics/SimpleClassifiers/UnlimitedNaturalValue.hpp"
+#include "fUML/Semantics/Activities/ActivityExecution.hpp"
+#include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
+#include "fUML/Semantics/StructuredClassifiers/Link.hpp"
+#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
+#include "uml/AddStructuralFeatureValueAction.hpp"
+#include "uml/Property.hpp"
+#include "uml/InputPin.hpp"
 
 //*********************************
 namespace fUML::Semantics::Actions 
@@ -127,18 +111,18 @@ namespace fUML::Semantics::Actions
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<uml::AddStructuralFeatureValueAction > getAddStructuralFeatureValueAction() const = 0;
+			virtual std::shared_ptr<org.eclipse.uml2.uml.AddStructuralFeatureValueAction > getAddStructuralFeatureValueAction() const = 0;
 			
 			
-			virtual void setAddStructuralFeatureValueAction(std::shared_ptr<uml::AddStructuralFeatureValueAction> _addStructuralFeatureValueAction) = 0;
+			virtual void setAddStructuralFeatureValueAction(std::shared_ptr<org.eclipse.uml2.uml.AddStructuralFeatureValueAction> _addStructuralFeatureValueAction) = 0;
 			
 			/*Additional Setter for 'ActionActivation::action' redefined by reference 'addStructuralFeatureValueAction'*/
 			
-			virtual void setAction(std::shared_ptr<uml::Action> _action) = 0;
+			virtual void setAction(std::shared_ptr<org.eclipse.uml2.uml.Action> _action) = 0;
 			
 			/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'addStructuralFeatureValueAction'*/
 			
-			virtual void setNode(std::shared_ptr<uml::ActivityNode> _node) = 0;
+			virtual void setNode(std::shared_ptr<org.eclipse.uml2.uml.ActivityNode> _node) = 0;
 			
 			
 
@@ -152,7 +136,7 @@ namespace fUML::Semantics::Actions
 			// Reference Members
 			//*********************************
 			
-			std::shared_ptr<uml::AddStructuralFeatureValueAction > m_addStructuralFeatureValueAction;
+			std::shared_ptr<org.eclipse.uml2.uml.AddStructuralFeatureValueAction > m_addStructuralFeatureValueAction;
 
 		public:
 			//*********************************

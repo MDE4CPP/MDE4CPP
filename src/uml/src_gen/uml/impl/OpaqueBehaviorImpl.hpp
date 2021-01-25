@@ -75,7 +75,8 @@ namespace uml
 			<p>From package UML::CommonBehavior.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<std::string> > getBody() const ;
+			virtual  std::shared_ptr<Bag<std::string> >
+			 getBody() const ;
 			
 			
 			/*!
@@ -83,7 +84,8 @@ namespace uml
 			<p>From package UML::CommonBehavior.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<std::string> > getLanguage() const ;
+			virtual  std::shared_ptr<Bag<std::string> >
+			 getLanguage() const ;
 			
 			
 			

@@ -47,7 +47,7 @@ namespace fUML::Semantics::Activities
 			virtual std::shared_ptr<fUML::Semantics::Activities::Token> _copy() ;
 			
 			 
-			virtual bool equals(std::shared_ptr<fUML::Semantics::Activities::Token>  otherToken) ;
+			virtual bool equals(std::shared_ptr<fUML::Semantics::Activities::Token> otherToken) ;
 			
 			 
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> getValue() const ;
@@ -64,15 +64,15 @@ namespace fUML::Semantics::Activities
 			// Attributes Getter Setter
 			//*********************************
 			 
-			virtual bool isBaseTokenIsWithdrawn() const ;
+			virtual bool  isBaseTokenIsWithdrawn() const ;
 			
 			 
-			virtual void setBaseTokenIsWithdrawn (bool _baseTokenIsWithdrawn); 
+			virtual void setBaseTokenIsWithdrawn (bool  _baseTokenIsWithdrawn); 
 			 
-			virtual int getRemainingOffersCount() const ;
+			virtual int  getRemainingOffersCount() const ;
 			
 			 
-			virtual void setRemainingOffersCount (int _remainingOffersCount); 
+			virtual void setRemainingOffersCount (int  _remainingOffersCount); 
 			
 			
 			//*********************************

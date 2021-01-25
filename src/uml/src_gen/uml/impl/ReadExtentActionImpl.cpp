@@ -268,13 +268,13 @@ std::shared_ptr<ecore::EClass> ReadExtentActionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ReadExtentActionImpl::multiplicity_of_result(Any diagnostics,std::map <   Any, Any >  context)
+bool ReadExtentActionImpl::multiplicity_of_result(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ReadExtentActionImpl::type_is_classifier(Any diagnostics,std::map <   Any, Any >  context)
+bool ReadExtentActionImpl::type_is_classifier(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -432,9 +432,9 @@ Any ReadExtentActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::READEXTENTACTION_ATTRIBUTE_CLASSIFIER:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getClassifier())); //19327
+			return eAny(getClassifier()); //19327
 		case uml::umlPackage::READEXTENTACTION_ATTRIBUTE_RESULT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //19328
+			return eAny(getResult()); //19328
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -604,18 +604,15 @@ void ReadExtentActionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'result'
 		std::shared_ptr<uml::OutputPin > result = this->getResult();
 		if (result != nullptr)
 		{
 			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_Class());
 		}
-	
 
-		// Add references
-		saveHandler->addReference("classifier", this->getClassifier());
-
+	// Add references
+		saveHandler->addReference("classifier", this->getClassifier());		 
 	}
 	catch (std::exception& e)
 	{

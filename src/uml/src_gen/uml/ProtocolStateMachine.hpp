@@ -39,209 +39,39 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
-namespace uml 
-{
-	class Behavior;
-}
-
+//Forward Declaration for used types 
 namespace uml 
 {
 	class BehavioralFeature;
-}
-
-namespace uml 
-{
-	class BehavioredClassifier;
-}
-
-namespace uml 
-{
-	class Class;
-}
-
-namespace uml 
-{
-	class Classifier;
-}
-
-namespace uml 
-{
 	class CollaborationUse;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
 	class ConnectableElement;
-}
-
-namespace uml 
-{
 	class Connector;
-}
-
-namespace uml 
-{
 	class Constraint;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class ElementImport;
-}
-
-namespace uml 
-{
 	class Extension;
-}
-
-namespace uml 
-{
 	class Feature;
-}
-
-namespace uml 
-{
 	class Generalization;
-}
-
-namespace uml 
-{
 	class GeneralizationSet;
-}
-
-namespace uml 
-{
 	class InterfaceRealization;
-}
-
-namespace uml 
-{
-	class NamedElement;
-}
-
-namespace uml 
-{
-	class Namespace;
-}
-
-namespace uml 
-{
 	class Operation;
-}
-
-namespace uml 
-{
 	class Package;
-}
-
-namespace uml 
-{
 	class PackageImport;
-}
-
-namespace uml 
-{
-	class PackageableElement;
-}
-
-namespace uml 
-{
 	class Parameter;
-}
-
-namespace uml 
-{
 	class ParameterSet;
-}
-
-namespace uml 
-{
 	class Port;
-}
-
-namespace uml 
-{
 	class Property;
-}
-
-namespace uml 
-{
 	class ProtocolConformance;
-}
-
-namespace uml 
-{
 	class Pseudostate;
-}
-
-namespace uml 
-{
 	class Reception;
-}
-
-namespace uml 
-{
-	class RedefinableElement;
-}
-
-namespace uml 
-{
 	class Region;
-}
-
-namespace uml 
-{
 	class State;
-}
-
-namespace uml 
-{
-	class StateMachine;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class Substitution;
-}
-
-namespace uml 
-{
 	class TemplateBinding;
-}
-
-namespace uml 
-{
 	class TemplateParameter;
-}
-
-namespace uml 
-{
 	class TemplateSignature;
-}
-
-namespace uml 
-{
 	class UseCase;
 }
 
@@ -251,6 +81,8 @@ namespace uml
 // enum includes
 #include "uml/VisibilityKind.hpp"
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -285,7 +117,7 @@ namespace uml
 			((v.oclAsType(Pseudostate).kind <>  PseudostateKind::deepHistory) and (v.oclAsType(Pseudostate).kind <> PseudostateKind::shallowHistory))))
 			*/
 			 
-			virtual bool deep_or_shallow_history(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool deep_or_shallow_history(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			The states of a ProtocolStateMachine cannot have entry, exit, or do activity Behaviors.
@@ -293,14 +125,14 @@ namespace uml
 			(v.oclAsType(State).entry->isEmpty() and v.oclAsType(State).exit->isEmpty() and v.oclAsType(State).doActivity->isEmpty())))
 			*/
 			 
-			virtual bool entry_exit_do(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool entry_exit_do(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			All Transitions of a ProtocolStateMachine must be ProtocolTransitions.
 			region->forAll(r | r.transition->forAll(t | t.oclIsTypeOf(ProtocolTransition)))
 			*/
 			 
-			virtual bool protocol_transitions(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool protocol_transitions(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			
 			//*********************************

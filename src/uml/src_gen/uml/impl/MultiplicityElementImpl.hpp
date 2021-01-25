@@ -52,7 +52,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual bool compatibleWith(std::shared_ptr<uml::MultiplicityElement>  other) ;
+			virtual bool compatibleWith(std::shared_ptr<uml::MultiplicityElement> other) ;
 			
 			/*!
 			The query includesMultiplicity() checks whether this multiplicity includes all the cardinalities allowed by the specified multiplicity.
@@ -61,7 +61,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual bool includesMultiplicity(std::shared_ptr<uml::MultiplicityElement>  M) ;
+			virtual bool includesMultiplicity(std::shared_ptr<uml::MultiplicityElement> M) ;
 			
 			/*!
 			The operation is determines if the upper and lower bound of the ranges are the ones given.
@@ -93,14 +93,14 @@ namespace uml
 			lowerBound() >= 0
 			*/
 			 
-			virtual bool lower_ge_0(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool lower_ge_0(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			If it is not empty, then lowerValue must have an Integer value.
 			lowerValue <> null implies lowerValue.integerValue() <> null
 			*/
 			 
-			virtual bool lower_is_integer(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool lower_is_integer(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			The query upperBound() returns the upper bound of the multiplicity for a bounded multiplicity as an unlimited natural, which is the unlimitedNaturalValue of upperValue, if given, and 1, otherwise.
@@ -115,26 +115,26 @@ namespace uml
 			upperBound() >= lowerBound()
 			*/
 			 
-			virtual bool upper_ge_lower(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool upper_ge_lower(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			If it is not empty, then upperValue must have an UnlimitedNatural value.
 			upperValue <> null implies upperValue.unlimitedValue() <> null
 			*/
 			 
-			virtual bool upper_is_unlimitedNatural(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool upper_is_unlimitedNatural(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			If a non-literal ValueSpecification is used for lowerValue or upperValue, then that specification must be a constant expression.
 			*/
 			 
-			virtual bool value_specification_constant(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool value_specification_constant(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			If a non-literal ValueSpecification is used for lowerValue or upperValue, then evaluating that specification must not have side effects.
 			*/
 			 
-			virtual bool value_specification_no_side_effects(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool value_specification_no_side_effects(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			
@@ -146,53 +146,53 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual bool getIsOrdered() const ;
+			virtual bool  getIsOrdered() const ;
 			
 			/*!
 			For a multivalued multiplicity, this attribute specifies whether the values in an instantiation of this MultiplicityElement are sequentially ordered.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual void setIsOrdered (bool _isOrdered); 
+			virtual void setIsOrdered (bool  _isOrdered); 
 			/*!
 			For a multivalued multiplicity, this attributes specifies whether the values in an instantiation of this MultiplicityElement are unique.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual bool getIsUnique() const ;
+			virtual bool  getIsUnique() const ;
 			
 			/*!
 			For a multivalued multiplicity, this attributes specifies whether the values in an instantiation of this MultiplicityElement are unique.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual void setIsUnique (bool _isUnique); 
+			virtual void setIsUnique (bool  _isUnique); 
 			/*!
 			The lower bound of the multiplicity interval.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual int getLower() const ;
+			virtual int  getLower() const ;
 			
 			/*!
 			The lower bound of the multiplicity interval.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual void setLower (int _lower); 
+			virtual void setLower (int  _lower); 
 			/*!
 			The upper bound of the multiplicity interval.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual int getUpper() const ;
+			virtual int  getUpper() const ;
 			
 			/*!
 			The upper bound of the multiplicity interval.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual void setUpper (int _upper); 
+			virtual void setUpper (int  _upper); 
 			
 			
 			//*********************************

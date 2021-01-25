@@ -218,13 +218,13 @@ void RemoveStructuralFeatureValueActivationImpl::doAction()
 /*
 Getter & Setter for reference removeStructuralFeatureValueAction
 */
-std::shared_ptr<uml::RemoveStructuralFeatureValueAction > RemoveStructuralFeatureValueActivationImpl::getRemoveStructuralFeatureValueAction() const
+std::shared_ptr<org.eclipse.uml2.uml.RemoveStructuralFeatureValueAction > RemoveStructuralFeatureValueActivationImpl::getRemoveStructuralFeatureValueAction() const
 {
 //assert(m_removeStructuralFeatureValueAction);
     return m_removeStructuralFeatureValueAction;
 }
 
-void RemoveStructuralFeatureValueActivationImpl::setRemoveStructuralFeatureValueAction(std::shared_ptr<uml::RemoveStructuralFeatureValueAction> _removeStructuralFeatureValueAction)
+void RemoveStructuralFeatureValueActivationImpl::setRemoveStructuralFeatureValueAction(std::shared_ptr<org.eclipse.uml2.uml.RemoveStructuralFeatureValueAction> _removeStructuralFeatureValueAction)
 {
     m_removeStructuralFeatureValueAction = _removeStructuralFeatureValueAction;
 	//additional setter call for redefined reference ActionActivation::action
@@ -232,9 +232,9 @@ void RemoveStructuralFeatureValueActivationImpl::setRemoveStructuralFeatureValue
 }
 
 /*Additional Setter for redefined reference 'ActionActivation::action'*/
-void RemoveStructuralFeatureValueActivationImpl::setAction(std::shared_ptr<uml::Action> _action)
+void RemoveStructuralFeatureValueActivationImpl::setAction(std::shared_ptr<org.eclipse.uml2.uml.Action> _action)
 {
-	std::shared_ptr<uml::RemoveStructuralFeatureValueAction> _removeStructuralFeatureValueAction = std::dynamic_pointer_cast<uml::RemoveStructuralFeatureValueAction>(_action);
+	std::shared_ptr<org.eclipse.uml2.uml.RemoveStructuralFeatureValueAction> _removeStructuralFeatureValueAction = std::dynamic_pointer_cast<org.eclipse.uml2.uml.RemoveStructuralFeatureValueAction>(_action);
 	if(_removeStructuralFeatureValueAction)
 	{
 		m_removeStructuralFeatureValueAction = _removeStructuralFeatureValueAction;
@@ -244,13 +244,13 @@ void RemoveStructuralFeatureValueActivationImpl::setAction(std::shared_ptr<uml::
 	}
 	else
 	{
-		std::cerr<<"[RemoveStructuralFeatureValueActivation::setAction] : Could not set action because provided action was not of type 'uml::RemoveStructuralFeatureValueAction'"<<std::endl;
+		std::cerr<<"[RemoveStructuralFeatureValueActivation::setAction] : Could not set action because provided action was not of type 'org.eclipse.uml2.uml.RemoveStructuralFeatureValueAction'"<<std::endl;
 	}
 }
 /*Additional Setter for redefined reference 'ActivityNodeActivation::node'*/
-void RemoveStructuralFeatureValueActivationImpl::setNode(std::shared_ptr<uml::ActivityNode> _node)
+void RemoveStructuralFeatureValueActivationImpl::setNode(std::shared_ptr<org.eclipse.uml2.uml.ActivityNode> _node)
 {
-	std::shared_ptr<uml::RemoveStructuralFeatureValueAction> _removeStructuralFeatureValueAction = std::dynamic_pointer_cast<uml::RemoveStructuralFeatureValueAction>(_node);
+	std::shared_ptr<org.eclipse.uml2.uml.RemoveStructuralFeatureValueAction> _removeStructuralFeatureValueAction = std::dynamic_pointer_cast<org.eclipse.uml2.uml.RemoveStructuralFeatureValueAction>(_node);
 	if(_removeStructuralFeatureValueAction)
 	{
 		m_removeStructuralFeatureValueAction = _removeStructuralFeatureValueAction;
@@ -260,7 +260,7 @@ void RemoveStructuralFeatureValueActivationImpl::setNode(std::shared_ptr<uml::Ac
 	}
 	else
 	{
-		std::cerr<<"[RemoveStructuralFeatureValueActivation::setNode] : Could not set node because provided node was not of type 'uml::RemoveStructuralFeatureValueAction'"<<std::endl;
+		std::cerr<<"[RemoveStructuralFeatureValueActivation::setNode] : Could not set node because provided node was not of type 'org.eclipse.uml2.uml.RemoveStructuralFeatureValueAction'"<<std::endl;
 	}
 }
 
@@ -312,7 +312,7 @@ Any RemoveStructuralFeatureValueActivationImpl::eGet(int featureID, bool resolve
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::REMOVESTRUCTURALFEATUREVALUEACTIVATION_ATTRIBUTE_REMOVESTRUCTURALFEATUREVALUEACTION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getRemoveStructuralFeatureValueAction())); //10011
+			return eAny(getRemoveStructuralFeatureValueAction()); //10011
 	}
 	return WriteStructuralFeatureActionActivationImpl::eGet(featureID, resolve, coreType);
 }
@@ -333,7 +333,7 @@ bool RemoveStructuralFeatureValueActivationImpl::eSet(int featureID, Any newValu
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::RemoveStructuralFeatureValueAction> _removeStructuralFeatureValueAction = std::dynamic_pointer_cast<uml::RemoveStructuralFeatureValueAction>(_temp);
+			std::shared_ptr<org.eclipse.uml2.uml.RemoveStructuralFeatureValueAction> _removeStructuralFeatureValueAction = std::dynamic_pointer_cast<org.eclipse.uml2.uml.RemoveStructuralFeatureValueAction>(_temp);
 			setRemoveStructuralFeatureValueAction(_removeStructuralFeatureValueAction); //10011
 			return true;
 		}
@@ -403,7 +403,7 @@ void RemoveStructuralFeatureValueActivationImpl::resolveReferences(const int fea
 			if (references.size() == 1)
 			{
 				// Cast object to correct type
-				std::shared_ptr<uml::RemoveStructuralFeatureValueAction> _removeStructuralFeatureValueAction = std::dynamic_pointer_cast<uml::RemoveStructuralFeatureValueAction>( references.front() );
+				std::shared_ptr<org.eclipse.uml2.uml.RemoveStructuralFeatureValueAction> _removeStructuralFeatureValueAction = std::dynamic_pointer_cast<org.eclipse.uml2.uml.RemoveStructuralFeatureValueAction>( references.front() );
 				setRemoveStructuralFeatureValueAction(_removeStructuralFeatureValueAction);
 			}
 			
@@ -441,11 +441,8 @@ void RemoveStructuralFeatureValueActivationImpl::saveContent(std::shared_ptr<per
 	{
 		std::shared_ptr<fUML::Semantics::Actions::ActionsPackage> package = fUML::Semantics::Actions::ActionsPackage::eInstance();
 
-	
-
-		// Add references
-		saveHandler->addReference("removeStructuralFeatureValueAction", this->getRemoveStructuralFeatureValueAction());
-
+	// Add references
+		saveHandler->addReference("removeStructuralFeatureValueAction", this->getRemoveStructuralFeatureValueAction());		
 	}
 	catch (std::exception& e)
 	{

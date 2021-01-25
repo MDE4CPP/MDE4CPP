@@ -41,59 +41,16 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Comment;
-}
-
-namespace uml 
-{
 	class Constraint;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class ElementImport;
-}
-
-namespace uml 
-{
-	class NamedElement;
-}
-
-namespace uml 
-{
-	class Namespace;
-}
-
-namespace uml 
-{
 	class Package;
-}
-
-namespace uml 
-{
 	class PackageImport;
-}
-
-namespace uml 
-{
 	class PackageableElement;
-}
-
-namespace uml 
-{
 	class StringExpression;
 }
 
@@ -103,6 +60,8 @@ namespace uml
 // enum includes
 #include "uml/VisibilityKind.hpp"
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -136,26 +95,26 @@ namespace uml
 			elementImport.importedElement.oclAsType(Element)->excludesAll(ownedMember)
 			*/
 			 
-			virtual bool cannot_import_ownedMembers(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool cannot_import_ownedMembers(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			A Namespace cannot have a PackageImport to itself.
 			packageImport.importedPackage.oclAsType(Namespace)->excludes(self)
 			*/
 			 
-			virtual bool cannot_import_self(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool cannot_import_self(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			Creates an import of the specified element into this namespace with the specified visibility.
 			*/
 			 
-			virtual std::shared_ptr<uml::ElementImport> createElementImport(std::shared_ptr<uml::PackageableElement>  element,uml::VisibilityKind visibility) = 0;
+			virtual std::shared_ptr<uml::ElementImport> createElementImport(std::shared_ptr<uml::PackageableElement> element,uml::VisibilityKind visibility) = 0;
 			
 			/*!
 			Creates an import of the specified package into this namespace with the specified visibility.
 			*/
 			 
-			virtual std::shared_ptr<uml::PackageImport> createPackageImport(std::shared_ptr<uml::Package>  package_,uml::VisibilityKind visibility) = 0;
+			virtual std::shared_ptr<uml::PackageImport> createPackageImport(std::shared_ptr<uml::Package> package_,uml::VisibilityKind visibility) = 0;
 			
 			/*!
 			The query excludeCollisions() excludes from a set of PackageableElements any that would not be distinguishable from each other in this Namespace.
@@ -163,7 +122,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::PackageableElement> > excludeCollisions(std::shared_ptr<Bag<uml::PackageableElement> >  imps) = 0;
+			virtual std::shared_ptr<Bag<uml::PackageableElement> > excludeCollisions(std::shared_ptr<Bag<uml::PackageableElement> > imps) = 0;
 			
 			/*!
 			Retrieves the elements imported by this namespace.
@@ -200,7 +159,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<std::string> > getNamesOfMember(std::shared_ptr<uml::NamedElement>  element) = 0;
+			virtual std::shared_ptr<Bag<std::string> > getNamesOfMember(std::shared_ptr<uml::NamedElement> element) = 0;
 			
 			 
 			virtual std::shared_ptr<Bag<uml::NamedElement> > getOwnedMembers() = 0;
@@ -211,7 +170,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::PackageableElement> > importMembers(std::shared_ptr<Bag<uml::PackageableElement> >  imps) = 0;
+			virtual std::shared_ptr<Bag<uml::PackageableElement> > importMembers(std::shared_ptr<Bag<uml::PackageableElement> > imps) = 0;
 			
 			/*!
 			The Boolean query membersAreDistinguishable() determines whether all of the Namespace's members are distinguishable within it.
@@ -228,7 +187,7 @@ namespace uml
 			membersAreDistinguishable()
 			*/
 			 
-			virtual bool members_distinguishable(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool members_distinguishable(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			
 			//*********************************

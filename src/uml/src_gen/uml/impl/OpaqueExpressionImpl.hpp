@@ -99,7 +99,7 @@ namespace uml
 			language->notEmpty() implies (_'body'->size() = language->size())
 			*/
 			 
-			virtual bool language_body_size(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool language_body_size(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			The behavior must have exactly one return result parameter.
@@ -107,14 +107,14 @@ namespace uml
 			   behavior.ownedParameter->select(direction=ParameterDirectionKind::return)->size() = 1
 			*/
 			 
-			virtual bool one_return_result_parameter(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool one_return_result_parameter(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			The behavior may only have return result parameters.
 			behavior <> null implies behavior.ownedParameter->select(direction<>ParameterDirectionKind::return)->isEmpty()
 			*/
 			 
-			virtual bool only_return_result_parameters(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool only_return_result_parameters(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			The query value() gives an integer value for an expression intended to produce one.
@@ -135,7 +135,8 @@ namespace uml
 			<p>From package UML::Values.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<std::string> > getBody() const ;
+			virtual  std::shared_ptr<Bag<std::string> >
+			 getBody() const ;
 			
 			
 			/*!
@@ -143,7 +144,8 @@ namespace uml
 			<p>From package UML::Values.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<std::string> > getLanguage() const ;
+			virtual  std::shared_ptr<Bag<std::string> >
+			 getLanguage() const ;
 			
 			
 			

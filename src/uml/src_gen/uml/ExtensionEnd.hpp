@@ -38,94 +38,23 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Association;
-}
-
-namespace uml 
-{
 	class Class;
-}
-
-namespace uml 
-{
 	class Classifier;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
 	class ConnectorEnd;
-}
-
-namespace uml 
-{
 	class DataType;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
 	class Deployment;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class Interface;
-}
-
-namespace uml 
-{
 	class Namespace;
-}
-
-namespace uml 
-{
 	class PackageableElement;
-}
-
-namespace uml 
-{
-	class Property;
-}
-
-namespace uml 
-{
-	class RedefinableElement;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class TemplateParameter;
-}
-
-namespace uml 
-{
 	class Type;
-}
-
-namespace uml 
-{
 	class ValueSpecification;
 }
 
@@ -137,6 +66,8 @@ namespace uml
 
 #include "uml/VisibilityKind.hpp"
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -171,14 +102,14 @@ namespace uml
 			self.aggregation = AggregationKind::composite
 			*/
 			 
-			virtual bool aggregation(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool aggregation(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			The multiplicity of ExtensionEnd is 0..1 or 1.
 			(lowerBound() = 0 or lowerBound() = 1) and upperBound() = 1
 			*/
 			 
-			virtual bool multiplicity(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool multiplicity(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			
 			//*********************************

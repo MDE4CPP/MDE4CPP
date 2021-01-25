@@ -38,54 +38,16 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Comment;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class GeneralOrdering;
-}
-
-namespace uml 
-{
 	class Interaction;
-}
-
-namespace uml 
-{
-	class InteractionFragment;
-}
-
-namespace uml 
-{
 	class InteractionOperand;
-}
-
-namespace uml 
-{
 	class Lifeline;
-}
-
-namespace uml 
-{
 	class Namespace;
-}
-
-namespace uml 
-{
 	class StringExpression;
 }
 
@@ -95,6 +57,8 @@ namespace uml
 // enum includes
 #include "uml/VisibilityKind.hpp"
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -131,7 +95,7 @@ namespace uml
 			   ((peerFragments->first() = self) or  (peerFragments->last() = self)))
 			*/
 			 
-			virtual bool first_or_last_interaction_fragment(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool first_or_last_interaction_fragment(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			Continuations are always global in the enclosing InteractionFragment e.g., it always covers all Lifelines covered by the enclosing InteractionOperator.
@@ -141,7 +105,7 @@ namespace uml
 			    operandLifelines->forAll(ol :Lifeline |self.covered->includes(ol)))
 			*/
 			 
-			virtual bool global(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool global(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			Across all Interaction instances having the same context value, every Lifeline instance covered by a Continuation (self) must be common with one covered Lifeline instance of all other Continuation instances with the same name as self, and every Lifeline instance covered by a Continuation instance with the same name as self must be common with one covered Lifeline instance of self. Lifeline instances are common if they have the same selector and represents associationEnd values.
@@ -171,7 +135,7 @@ namespace uml
 			  )
 			*/
 			 
-			virtual bool same_name(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool same_name(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			
 			//*********************************
@@ -182,14 +146,14 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			 
-			virtual bool getSetting() const = 0;
+			virtual bool  getSetting() const = 0;
 			
 			/*!
 			True: when the Continuation is at the end of the enclosing InteractionFragment and False when it is in the beginning.
 			<p>From package UML::Interactions.</p>
 			*/
 			 
-			virtual void setSetting (bool _setting)= 0; 
+			virtual void setSetting (bool  _setting)= 0; 
 			
 			//*********************************
 			// Reference
@@ -205,7 +169,7 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			 
-			bool m_setting = true;
+			bool  m_setting = true;
 			
 			
 			//*********************************

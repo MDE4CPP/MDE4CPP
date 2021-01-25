@@ -232,7 +232,7 @@ Any ReduceActionActivationImpl::eGet(int featureID, bool resolve, bool coreType)
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::REDUCEACTIONACTIVATION_ATTRIBUTE_CURRENTEXECUTION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getCurrentExecution())); //9811
+			return eAny(getCurrentExecution()); //9811
 	}
 	return ActionActivationImpl::eGet(featureID, resolve, coreType);
 }
@@ -355,11 +355,8 @@ void ReduceActionActivationImpl::saveContent(std::shared_ptr<persistence::interf
 	{
 		std::shared_ptr<fUML::Semantics::Actions::ActionsPackage> package = fUML::Semantics::Actions::ActionsPackage::eInstance();
 
-	
-
-		// Add references
-		saveHandler->addReference("currentExecution", this->getCurrentExecution());
-
+	// Add references
+		saveHandler->addReference("currentExecution", this->getCurrentExecution());		 
 	}
 	catch (std::exception& e)
 	{

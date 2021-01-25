@@ -189,12 +189,12 @@ std::shared_ptr<EClass> EOperationImpl::eStaticClass() const
 /*
 Getter & Setter for attribute operationID
 */
-int EOperationImpl::getOperationID() const 
+int  EOperationImpl::getOperationID() const 
 {
 	return m_operationID;
 }
 
-void EOperationImpl::setOperationID(int _operationID)
+void EOperationImpl::setOperationID(int  _operationID)
 {
 	m_operationID = _operationID;
 } 
@@ -206,7 +206,7 @@ void EOperationImpl::setOperationID(int _operationID)
 //*********************************
 
 
-bool EOperationImpl::isOverrideOf(std::shared_ptr<ecore::EOperation>  someOperation) const
+bool EOperationImpl::isOverrideOf(std::shared_ptr<ecore::EOperation> someOperation) const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -399,57 +399,25 @@ Any EOperationImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_ECONTAININGCLASS:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEContainingClass().lock())); //4014
+			return eAny(getEContainingClass().lock()); //3914
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_EEXCEPTIONS:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ecore::EClassifier>::iterator iter = m_eExceptions->begin();
-			Bag<ecore::EClassifier>::iterator end = m_eExceptions->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //4017
+			return eAny(getEExceptions()); //3917			
 		}
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_EGENERICEXCEPTIONS:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ecore::EGenericType>::iterator iter = m_eGenericExceptions->begin();
-			Bag<ecore::EGenericType>::iterator end = m_eGenericExceptions->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //4018
+			return eAny(getEGenericExceptions()); //3918			
 		}
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_EPARAMETERS:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ecore::EParameter>::iterator iter = m_eParameters->begin();
-			Bag<ecore::EParameter>::iterator end = m_eParameters->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //4016
+			return eAny(getEParameters()); //3916			
 		}
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_ETYPEPARAMETERS:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ecore::ETypeParameter>::iterator iter = m_eTypeParameters->begin();
-			Bag<ecore::ETypeParameter>::iterator end = m_eTypeParameters->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //4015
+			return eAny(getETypeParameters()); //3915			
 		}
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_OPERATIONID:
-			return eAny(getOperationID()); //4013
+			return eAny(getOperationID()); //3913
 	}
 	return ETypedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -458,17 +426,17 @@ bool EOperationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_ECONTAININGCLASS:
-			return getEContainingClass().lock() != nullptr; //4014
+			return getEContainingClass().lock() != nullptr; //3914
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_EEXCEPTIONS:
-			return getEExceptions() != nullptr; //4017
+			return getEExceptions() != nullptr; //3917
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_EGENERICEXCEPTIONS:
-			return getEGenericExceptions() != nullptr; //4018
+			return getEGenericExceptions() != nullptr; //3918
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_EPARAMETERS:
-			return getEParameters() != nullptr; //4016
+			return getEParameters() != nullptr; //3916
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_ETYPEPARAMETERS:
-			return getETypeParameters() != nullptr; //4015
+			return getETypeParameters() != nullptr; //3915
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_OPERATIONID:
-			return getOperationID() != -1; //4013
+			return getOperationID() != -1; //3913
 	}
 	return ETypedElementImpl::internalEIsSet(featureID);
 }
@@ -790,26 +758,19 @@ void EOperationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	try
 	{
 		std::shared_ptr<ecore::ecorePackage> package = ecore::ecorePackage::eInstance();
-
 		// Save 'eParameters'
 		for (std::shared_ptr<ecore::EParameter> eParameters : *this->getEParameters()) 
 		{
 			saveHandler->addReference(eParameters, "eParameters", eParameters->eClass() != package->getEParameter_Class());
 		}
-	
 		// Add attributes
 		if ( this->eIsSet(package->getEOperation_Attribute_operationID()) )
 		{
 			saveHandler->addAttribute("operationID", this->getOperationID());
 		}
 
-		// Add references
-		std::shared_ptr<Bag<ecore::EClassifier>> eExceptions_list = this->getEExceptions();
-		for (std::shared_ptr<ecore::EClassifier > object : *eExceptions_list)
-		{ 
-			saveHandler->addReferences("eExceptions", object);
-		}
-
+	// Add references
+		saveHandler->addReferences<ecore::EClassifier>("eExceptions", this->getEExceptions());	
 
 		//
 		// Add new tags (from references)

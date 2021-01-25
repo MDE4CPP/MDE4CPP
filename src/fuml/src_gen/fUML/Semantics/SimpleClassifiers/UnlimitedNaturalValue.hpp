@@ -35,24 +35,10 @@ namespace fUML
 	class fUMLFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class PrimitiveType;
-}
-
-namespace fUML::Semantics::SimpleClassifiers 
-{
-	class PrimitiveValue;
-}
-
-namespace fUML::Semantics::Values 
-{
-	class Value;
-}
-
-namespace uml 
-{
 	class ValueSpecification;
 }
 
@@ -61,6 +47,16 @@ namespace uml
 
 // enum includes
 
+
+//Includes from codegen annotation
+#include "abstractDataTypes/Subset.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/Semantics/SimpleClassifiers/IntegerValue.hpp"
+#include "uml/Class.hpp"
+#include "uml/LiteralUnlimitedNatural.hpp"
+#include "uml/PrimitiveType.hpp"
+#include "uml/Type.hpp"
+#include "uml/umlFactory.hpp"
 
 //*********************************
 namespace fUML::Semantics::SimpleClassifiers 
@@ -89,10 +85,10 @@ namespace fUML::Semantics::SimpleClassifiers
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() = 0;
 			
 			 
-			virtual bool equals(std::shared_ptr<fUML::Semantics::Values::Value>  otherValue) = 0;
+			virtual bool equals(std::shared_ptr<fUML::Semantics::Values::Value> otherValue) = 0;
 			
 			 
-			virtual std::shared_ptr<uml::ValueSpecification> specify() = 0;
+			virtual std::shared_ptr<org.eclipse.uml2.uml.ValueSpecification> specify() = 0;
 			
 			 
 			virtual std::string toString() = 0;
@@ -102,10 +98,10 @@ namespace fUML::Semantics::SimpleClassifiers
 			// Attributes Getter Setter
 			//*********************************
 			 
-			virtual int getValue() const = 0;
+			virtual int  getValue() const = 0;
 			
 			 
-			virtual void setValue (int _value)= 0; 
+			virtual void setValue (int  _value)= 0; 
 			
 			//*********************************
 			// Reference
@@ -117,7 +113,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			// Attribute Members
 			//*********************************
 			 
-			int m_value = 0;
+			int  m_value = 0;
 			
 			
 			//*********************************

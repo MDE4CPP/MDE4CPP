@@ -40,104 +40,24 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Association;
-}
-
-namespace uml 
-{
 	class Class;
-}
-
-namespace uml 
-{
 	class Classifier;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
 	class ConnectorEnd;
-}
-
-namespace uml 
-{
 	class DataType;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
 	class Deployment;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class Interface;
-}
-
-namespace uml 
-{
 	class Namespace;
-}
-
-namespace uml 
-{
 	class PackageableElement;
-}
-
-namespace uml 
-{
-	class Port;
-}
-
-namespace uml 
-{
-	class Property;
-}
-
-namespace uml 
-{
 	class ProtocolStateMachine;
-}
-
-namespace uml 
-{
-	class RedefinableElement;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class TemplateParameter;
-}
-
-namespace uml 
-{
 	class Type;
-}
-
-namespace uml 
-{
 	class ValueSpecification;
 }
 
@@ -149,6 +69,8 @@ namespace uml
 
 #include "uml/VisibilityKind.hpp"
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -201,14 +123,14 @@ namespace uml
 			type.oclIsKindOf(Interface) implies defaultValue->isEmpty()
 			*/
 			 
-			virtual bool default_value(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool default_value(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			All Ports are owned by an EncapsulatedClassifier.
 			owner = encapsulatedClassifier
 			*/
 			 
-			virtual bool encapsulated_owner(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool encapsulated_owner(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			Derivation for Port::/provided
@@ -231,7 +153,7 @@ namespace uml
 			aggregation = AggregationKind::composite
 			*/
 			 
-			virtual bool port_aggregation(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool port_aggregation(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			
 			//*********************************
@@ -242,40 +164,40 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			 
-			virtual bool getIsBehavior() const = 0;
+			virtual bool  getIsBehavior() const = 0;
 			
 			/*!
 			Specifies whether requests arriving at this Port are sent to the classifier behavior of this EncapsulatedClassifier. Such a Port is referred to as a behavior Port. Any invocation of a BehavioralFeature targeted at a behavior Port will be handled by the instance of the owning EncapsulatedClassifier itself, rather than by any instances that it may contain.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			 
-			virtual void setIsBehavior (bool _isBehavior)= 0; 
+			virtual void setIsBehavior (bool  _isBehavior)= 0; 
 			/*!
 			Specifies the way that the provided and required Interfaces are derived from the Port’s Type.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			 
-			virtual bool getIsConjugated() const = 0;
+			virtual bool  getIsConjugated() const = 0;
 			
 			/*!
 			Specifies the way that the provided and required Interfaces are derived from the Port’s Type.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			 
-			virtual void setIsConjugated (bool _isConjugated)= 0; 
+			virtual void setIsConjugated (bool  _isConjugated)= 0; 
 			/*!
 			If true, indicates that this Port is used to provide the published functionality of an EncapsulatedClassifier.  If false, this Port is used to implement the EncapsulatedClassifier but is not part of the essential externally-visible functionality of the EncapsulatedClassifier and can, therefore, be altered or deleted along with the internal implementation of the EncapsulatedClassifier and other properties that are considered part of its implementation.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			 
-			virtual bool getIsService() const = 0;
+			virtual bool  getIsService() const = 0;
 			
 			/*!
 			If true, indicates that this Port is used to provide the published functionality of an EncapsulatedClassifier.  If false, this Port is used to implement the EncapsulatedClassifier but is not part of the essential externally-visible functionality of the EncapsulatedClassifier and can, therefore, be altered or deleted along with the internal implementation of the EncapsulatedClassifier and other properties that are considered part of its implementation.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			 
-			virtual void setIsService (bool _isService)= 0; 
+			virtual void setIsService (bool  _isService)= 0; 
 			
 			//*********************************
 			// Reference
@@ -329,19 +251,19 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			 
-			bool m_isBehavior = false;
+			bool  m_isBehavior = false;
 			/*!
 			Specifies the way that the provided and required Interfaces are derived from the Port’s Type.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			 
-			bool m_isConjugated = false;
+			bool  m_isConjugated = false;
 			/*!
 			If true, indicates that this Port is used to provide the published functionality of an EncapsulatedClassifier.  If false, this Port is used to implement the EncapsulatedClassifier but is not part of the essential externally-visible functionality of the EncapsulatedClassifier and can, therefore, be altered or deleted along with the internal implementation of the EncapsulatedClassifier and other properties that are considered part of its implementation.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			 
-			bool m_isService = true;
+			bool  m_isService = true;
 			
 			
 			//*********************************

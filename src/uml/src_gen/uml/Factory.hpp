@@ -35,20 +35,11 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Class;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
-	class Element;
 }
 
 // base class includes
@@ -56,6 +47,8 @@ namespace uml
 
 // enum includes
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -93,7 +86,7 @@ namespace uml
 			every property.
 			*/
 			 
-			virtual std::shared_ptr<uml::Element> create(std::shared_ptr<uml::Class>  metaClass) = 0;
+			virtual std::shared_ptr<uml::Element> create(std::shared_ptr<uml::Class> metaClass) = 0;
 			
 			
 			//*********************************

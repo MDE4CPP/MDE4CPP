@@ -180,25 +180,25 @@ std::shared_ptr<ecore::EClass> LifelineImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool LifelineImpl::interaction_uses_share_lifeline(Any diagnostics,std::map <   Any, Any >  context)
+bool LifelineImpl::interaction_uses_share_lifeline(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool LifelineImpl::same_classifier(Any diagnostics,std::map <   Any, Any >  context)
+bool LifelineImpl::same_classifier(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool LifelineImpl::selector_int_or_string(Any diagnostics,std::map <   Any, Any >  context)
+bool LifelineImpl::selector_int_or_string(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool LifelineImpl::selector_specified(Any diagnostics,std::map <   Any, Any >  context)
+bool LifelineImpl::selector_specified(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -358,6 +358,8 @@ Any LifelineImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::LIFELINE_ATTRIBUTE_COVEREDBY:
 		{
+			return eAny(getCoveredBy()); //13213			
+			/*
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::InteractionFragment>::iterator iter = m_coveredBy->begin();
 			Bag<uml::InteractionFragment>::iterator end = m_coveredBy->end();
@@ -367,15 +369,16 @@ Any LifelineImpl::eGet(int featureID, bool resolve, bool coreType) const
 				iter++;
 			}
 			return eAny(tempList); //13213
+			*/
 		}
 		case uml::umlPackage::LIFELINE_ATTRIBUTE_DECOMPOSEDAS:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDecomposedAs())); //1329
+			return eAny(getDecomposedAs()); //1329
 		case uml::umlPackage::LIFELINE_ATTRIBUTE_INTERACTION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getInteraction().lock())); //13210
+			return eAny(getInteraction().lock()); //13210
 		case uml::umlPackage::LIFELINE_ATTRIBUTE_REPRESENTS:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getRepresents())); //13211
+			return eAny(getRepresents()); //13211
 		case uml::umlPackage::LIFELINE_ATTRIBUTE_SELECTOR:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSelector())); //13212
+			return eAny(getSelector()); //13212
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -644,24 +647,17 @@ void LifelineImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'selector'
 		std::shared_ptr<uml::ValueSpecification > selector = this->getSelector();
 		if (selector != nullptr)
 		{
 			saveHandler->addReference(selector, "selector", selector->eClass() != package->getValueSpecification_Class());
 		}
-	
 
-		// Add references
-		std::shared_ptr<Bag<uml::InteractionFragment>> coveredBy_list = this->getCoveredBy();
-		for (std::shared_ptr<uml::InteractionFragment > object : *coveredBy_list)
-		{ 
-			saveHandler->addReferences("coveredBy", object);
-		}
-		saveHandler->addReference("decomposedAs", this->getDecomposedAs());
-		saveHandler->addReference("represents", this->getRepresents());
-
+	// Add references
+		saveHandler->addReferences<uml::InteractionFragment>("coveredBy", this->getCoveredBy());	
+		saveHandler->addReference("decomposedAs", this->getDecomposedAs());		 
+		saveHandler->addReference("represents", this->getRepresents());		 
 	}
 	catch (std::exception& e)
 	{

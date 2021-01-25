@@ -282,19 +282,19 @@ std::shared_ptr<ecore::EClass> SendSignalActionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool SendSignalActionImpl::number_order(Any diagnostics,std::map <   Any, Any >  context)
+bool SendSignalActionImpl::number_order(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool SendSignalActionImpl::type_ordering_multiplicity(Any diagnostics,std::map <   Any, Any >  context)
+bool SendSignalActionImpl::type_ordering_multiplicity(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool SendSignalActionImpl::type_target_pin(Any diagnostics,std::map <   Any, Any >  context)
+bool SendSignalActionImpl::type_target_pin(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -452,9 +452,9 @@ Any SendSignalActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::SENDSIGNALACTION_ATTRIBUTE_SIGNAL:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSignal())); //21329
+			return eAny(getSignal()); //21329
 		case uml::umlPackage::SENDSIGNALACTION_ATTRIBUTE_TARGET:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getTarget())); //21330
+			return eAny(getTarget()); //21330
 	}
 	return InvocationActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -627,18 +627,15 @@ void SendSignalActionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'target'
 		std::shared_ptr<uml::InputPin > target = this->getTarget();
 		if (target != nullptr)
 		{
 			saveHandler->addReference(target, "target", target->eClass() != package->getInputPin_Class());
 		}
-	
 
-		// Add references
-		saveHandler->addReference("signal", this->getSignal());
-
+	// Add references
+		saveHandler->addReference("signal", this->getSignal());		 
 	}
 	catch (std::exception& e)
 	{

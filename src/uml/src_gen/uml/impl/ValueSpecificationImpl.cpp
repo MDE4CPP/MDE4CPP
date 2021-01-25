@@ -360,9 +360,9 @@ Any ValueSpecificationImpl::eGet(int featureID, bool resolve, bool coreType) con
 	switch(featureID)
 	{
 		case uml::umlPackage::VALUESPECIFICATION_ATTRIBUTE_OWNINGSLOT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOwningSlot().lock())); //25013
+			return eAny(getOwningSlot().lock()); //25013
 		case uml::umlPackage::VALUESPECIFICATION_ATTRIBUTE_VALUESPECIFICATIONACTION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getValueSpecificationAction().lock())); //25014
+			return eAny(getValueSpecificationAction().lock()); //25014
 	}
 	Any result;
 	result = PackageableElementImpl::eGet(featureID, resolve, coreType);
@@ -516,9 +516,6 @@ void ValueSpecificationImpl::saveContent(std::shared_ptr<persistence::interfaces
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

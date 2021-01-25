@@ -400,12 +400,12 @@ std::shared_ptr<ecore::EClass> ConditionalNodeImpl::eStaticClass() const
 /*
 Getter & Setter for attribute isAssured
 */
-bool ConditionalNodeImpl::getIsAssured() const 
+bool  ConditionalNodeImpl::getIsAssured() const 
 {
 	return m_isAssured;
 }
 
-void ConditionalNodeImpl::setIsAssured(bool _isAssured)
+void ConditionalNodeImpl::setIsAssured(bool  _isAssured)
 {
 	m_isAssured = _isAssured;
 } 
@@ -415,12 +415,12 @@ void ConditionalNodeImpl::setIsAssured(bool _isAssured)
 /*
 Getter & Setter for attribute isDeterminate
 */
-bool ConditionalNodeImpl::getIsDeterminate() const 
+bool  ConditionalNodeImpl::getIsDeterminate() const 
 {
 	return m_isDeterminate;
 }
 
-void ConditionalNodeImpl::setIsDeterminate(bool _isDeterminate)
+void ConditionalNodeImpl::setIsDeterminate(bool  _isDeterminate)
 {
 	m_isDeterminate = _isDeterminate;
 } 
@@ -430,37 +430,37 @@ void ConditionalNodeImpl::setIsDeterminate(bool _isDeterminate)
 //*********************************
 // Operations
 //*********************************
-bool ConditionalNodeImpl::clause_no_predecessor(Any diagnostics,std::map <   Any, Any >  context)
+bool ConditionalNodeImpl::clause_no_predecessor(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ConditionalNodeImpl::executable_nodes(Any diagnostics,std::map <   Any, Any >  context)
+bool ConditionalNodeImpl::executable_nodes(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ConditionalNodeImpl::matching_output_pins(Any diagnostics,std::map <   Any, Any >  context)
+bool ConditionalNodeImpl::matching_output_pins(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ConditionalNodeImpl::no_input_pins(Any diagnostics,std::map <   Any, Any >  context)
+bool ConditionalNodeImpl::no_input_pins(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ConditionalNodeImpl::one_clause_with_executable_node(Any diagnostics,std::map <   Any, Any >  context)
+bool ConditionalNodeImpl::one_clause_with_executable_node(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ConditionalNodeImpl::result_no_incoming(Any diagnostics,std::map <   Any, Any >  context)
+bool ConditionalNodeImpl::result_no_incoming(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -731,6 +731,8 @@ Any ConditionalNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::CONDITIONALNODE_ATTRIBUTE_CLAUSE:
 		{
+			return eAny(getClause()); //4944			
+			/*
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Clause>::iterator iter = m_clause->begin();
 			Bag<uml::Clause>::iterator end = m_clause->end();
@@ -740,6 +742,7 @@ Any ConditionalNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 				iter++;
 			}
 			return eAny(tempList); //4944
+			*/
 		}
 		case uml::umlPackage::CONDITIONALNODE_ATTRIBUTE_ISASSURED:
 			return eAny(getIsAssured()); //4945
@@ -747,6 +750,8 @@ Any ConditionalNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(getIsDeterminate()); //4946
 		case uml::umlPackage::CONDITIONALNODE_ATTRIBUTE_RESULT:
 		{
+			return eAny(getResult()); //4947			
+			/*
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::OutputPin>::iterator iter = m_result->begin();
 			Bag<uml::OutputPin>::iterator end = m_result->end();
@@ -756,6 +761,7 @@ Any ConditionalNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 				iter++;
 			}
 			return eAny(tempList); //4947
+			*/
 		}
 	}
 	return StructuredActivityNodeImpl::eGet(featureID, resolve, coreType);
@@ -1020,13 +1026,11 @@ void ConditionalNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'clause'
 		for (std::shared_ptr<uml::Clause> clause : *this->getClause()) 
 		{
 			saveHandler->addReference(clause, "clause", clause->eClass() != package->getClause_Class());
 		}
-	
 		// Add attributes
 		if ( this->eIsSet(package->getConditionalNode_Attribute_isAssured()) )
 		{
@@ -1037,7 +1041,6 @@ void ConditionalNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 		{
 			saveHandler->addAttribute("isDeterminate", this->getIsDeterminate());
 		}
-
 
 		//
 		// Add new tags (from references)

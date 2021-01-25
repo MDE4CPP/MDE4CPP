@@ -277,12 +277,12 @@ std::shared_ptr<ecore::EClass> AddVariableValueActionImpl::eStaticClass() const
 /*
 Getter & Setter for attribute isReplaceAll
 */
-bool AddVariableValueActionImpl::getIsReplaceAll() const 
+bool  AddVariableValueActionImpl::getIsReplaceAll() const 
 {
 	return m_isReplaceAll;
 }
 
-void AddVariableValueActionImpl::setIsReplaceAll(bool _isReplaceAll)
+void AddVariableValueActionImpl::setIsReplaceAll(bool  _isReplaceAll)
 {
 	m_isReplaceAll = _isReplaceAll;
 } 
@@ -292,13 +292,13 @@ void AddVariableValueActionImpl::setIsReplaceAll(bool _isReplaceAll)
 //*********************************
 // Operations
 //*********************************
-bool AddVariableValueActionImpl::insertAt_pin(Any diagnostics,std::map <   Any, Any >  context)
+bool AddVariableValueActionImpl::insertAt_pin(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool AddVariableValueActionImpl::required_value(Any diagnostics,std::map <   Any, Any >  context)
+bool AddVariableValueActionImpl::required_value(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -440,7 +440,7 @@ Any AddVariableValueActionImpl::eGet(int featureID, bool resolve, bool coreType)
 	switch(featureID)
 	{
 		case uml::umlPackage::ADDVARIABLEVALUEACTION_ATTRIBUTE_INSERTAT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getInsertAt())); //1629
+			return eAny(getInsertAt()); //1629
 		case uml::umlPackage::ADDVARIABLEVALUEACTION_ATTRIBUTE_ISREPLACEALL:
 			return eAny(getIsReplaceAll()); //1630
 	}
@@ -605,20 +605,17 @@ void AddVariableValueActionImpl::saveContent(std::shared_ptr<persistence::interf
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'insertAt'
 		std::shared_ptr<uml::InputPin > insertAt = this->getInsertAt();
 		if (insertAt != nullptr)
 		{
 			saveHandler->addReference(insertAt, "insertAt", insertAt->eClass() != package->getInputPin_Class());
 		}
-	
 		// Add attributes
 		if ( this->eIsSet(package->getAddVariableValueAction_Attribute_isReplaceAll()) )
 		{
 			saveHandler->addAttribute("isReplaceAll", this->getIsReplaceAll());
 		}
-
 	}
 	catch (std::exception& e)
 	{

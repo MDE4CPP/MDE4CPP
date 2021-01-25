@@ -57,7 +57,7 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual bool isConsistentWith(std::shared_ptr<uml::RedefinableElement>  redefiningElement) ;
+			virtual bool isConsistentWith(std::shared_ptr<uml::RedefinableElement> redefiningElement) ;
 			
 			/*!
 			The query isRedefinitionContextValid() specifies whether the redefinition contexts of this RedefinableElement are properly related to the redefinition contexts of the specified RedefinableElement to allow this element to redefine the other. By default at least one of the redefinition contexts of this element must be a specialization of at least one of the redefinition contexts of the specified element.
@@ -65,28 +65,28 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual bool isRedefinitionContextValid(std::shared_ptr<uml::RedefinableElement>  redefinedElement) ;
+			virtual bool isRedefinitionContextValid(std::shared_ptr<uml::RedefinableElement> redefinedElement) ;
 			
 			/*!
 			A RedefinableElement can only redefine non-leaf RedefinableElements.
 			redefinedElement->forAll(re | not re.isLeaf)
 			*/
 			 
-			virtual bool non_leaf_redefinition(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool non_leaf_redefinition(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			A redefining element must be consistent with each redefined element.
 			redefinedElement->forAll(re | re.isConsistentWith(self))
 			*/
 			 
-			virtual bool redefinition_consistent(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool redefinition_consistent(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			At least one of the redefinition contexts of the redefining element must be a specialization of at least one of the redefinition contexts for each redefined element.
 			redefinedElement->forAll(re | self.isRedefinitionContextValid(re))
 			*/
 			 
-			virtual bool redefinition_context_valid(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool redefinition_context_valid(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			
@@ -98,14 +98,14 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual bool getIsLeaf() const ;
+			virtual bool  getIsLeaf() const ;
 			
 			/*!
 			Indicates whether it is possible to further redefine a RedefinableElement. If the value is true, then it is not possible to further redefine the RedefinableElement.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual void setIsLeaf (bool _isLeaf); 
+			virtual void setIsLeaf (bool  _isLeaf); 
 			
 			
 			//*********************************

@@ -36,55 +36,24 @@ namespace fUML
 	class fUMLFactory;
 }
 
-//Forward Declaration for used types
-namespace uml 
-{
-	class Action;
-}
-
-namespace fUML::Semantics::Activities 
-{
-	class ActivityEdgeInstance;
-}
-
-namespace uml 
-{
-	class ActivityNode;
-}
-
-namespace fUML::Semantics::Activities 
-{
-	class ActivityNodeActivationGroup;
-}
-
+//Forward Declaration for used types 
 namespace fUML::Semantics::Actions 
 {
 	class InputPinActivation;
-}
-
-namespace fUML::Semantics::Actions 
-{
 	class OutputPinActivation;
-}
-
-namespace fUML::Semantics::Actions 
-{
 	class PinActivation;
+	class Values;
 }
-
-namespace fUML::Semantics::Actions 
-{
-	class StructuredActivityNodeActivation;
-}
-
 namespace fUML::Semantics::Activities 
 {
+	class ActivityEdgeInstance;
+	class ActivityNodeActivationGroup;
 	class Token;
 }
-
-namespace fUML::Semantics::Actions 
+namespace uml 
 {
-	class Values;
+	class Action;
+	class ActivityNode;
 }
 
 // base class includes
@@ -92,6 +61,8 @@ namespace fUML::Semantics::Actions
 
 // enum includes
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace fUML::Semantics::Actions 
@@ -117,7 +88,7 @@ namespace fUML::Semantics::Actions
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<uml::ActivityNode> makeLoopVariableList() = 0;
+			virtual std::shared_ptr<org.eclipse.uml2.uml.ActivityNode> makeLoopVariableList() = 0;
 			
 			 
 			virtual void runBody() = 0;

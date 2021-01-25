@@ -39,99 +39,23 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
-namespace uml 
-{
-	class Action;
-}
-
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Activity;
-}
-
-namespace uml 
-{
 	class ActivityEdge;
-}
-
-namespace uml 
-{
 	class ActivityGroup;
-}
-
-namespace uml 
-{
-	class ActivityNode;
-}
-
-namespace uml 
-{
 	class ActivityPartition;
-}
-
-namespace uml 
-{
 	class Classifier;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
 	class Constraint;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class ExceptionHandler;
-}
-
-namespace uml 
-{
 	class InputPin;
-}
-
-namespace uml 
-{
 	class InterruptibleActivityRegion;
-}
-
-namespace uml 
-{
 	class Namespace;
-}
-
-namespace uml 
-{
 	class OutputPin;
-}
-
-namespace uml 
-{
-	class RedefinableElement;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class StructuredActivityNode;
 }
 
@@ -141,6 +65,8 @@ namespace uml
 // enum includes
 #include "uml/VisibilityKind.hpp"
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -174,7 +100,7 @@ namespace uml
 			language->notEmpty() implies (_'body'->size() = language->size())
 			*/
 			 
-			virtual bool language_body_size(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool language_body_size(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			
 			//*********************************
@@ -185,7 +111,8 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<std::string> > getBody() const = 0;
+			virtual  std::shared_ptr<Bag<std::string> >
+			 getBody() const = 0;
 			
 			
 			/*!
@@ -193,7 +120,8 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<std::string> > getLanguage() const = 0;
+			virtual  std::shared_ptr<Bag<std::string> >
+			 getLanguage() const = 0;
 			
 			
 			
@@ -227,13 +155,15 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			mutable std::shared_ptr<Bag<std::string> > m_body; 
+			mutable  std::shared_ptr<Bag<std::string> >
+			 m_body; 
 			/*!
 			If provided, a specification of the language used for each of the body Strings.
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			mutable std::shared_ptr<Bag<std::string> > m_language; 
+			mutable  std::shared_ptr<Bag<std::string> >
+			 m_language; 
 			
 			
 			//*********************************

@@ -35,24 +35,14 @@ namespace fUML
 	class fUMLFactory;
 }
 
-//Forward Declaration for used types
-namespace uml 
-{
-	class Behavior;
-}
-
-namespace fUML::Semantics::StructuredClassifiers 
-{
-	class DispatchStrategy;
-}
-
+//Forward Declaration for used types 
 namespace fUML::Semantics::StructuredClassifiers 
 {
 	class Object;
 }
-
 namespace uml 
 {
+	class Behavior;
 	class Operation;
 }
 
@@ -61,6 +51,13 @@ namespace uml
 
 // enum includes
 
+
+//Includes from codegen annotation
+#include "abstractDataTypes/Subset.hpp"
+#include "uml/umlPackage.hpp"
+#include "uml/NamedElement.hpp"
+#include "uml/Class.hpp"
+#include "uml/Operation.hpp"
 
 //*********************************
 namespace fUML::Semantics::StructuredClassifiers 
@@ -86,10 +83,10 @@ namespace fUML::Semantics::StructuredClassifiers
 			// Operations
 			//*********************************
 			 
-			virtual bool operationsMatch(std::shared_ptr<uml::Operation>  ownedOperation,std::shared_ptr<uml::Operation>  baseOperation) = 0;
+			virtual bool operationsMatch(std::shared_ptr<org.eclipse.uml2.uml.Operation> ownedOperation,std::shared_ptr<org.eclipse.uml2.uml.Operation> baseOperation) = 0;
 			
 			 
-			virtual std::shared_ptr<uml::Behavior> retrieveMethod(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object>  object,std::shared_ptr<uml::Operation>  operation) = 0;
+			virtual std::shared_ptr<org.eclipse.uml2.uml.Behavior> retrieveMethod(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> object,std::shared_ptr<org.eclipse.uml2.uml.Operation> operation) = 0;
 			
 			
 			//*********************************

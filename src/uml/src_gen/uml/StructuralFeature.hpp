@@ -35,64 +35,15 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Classifier;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
-	class Feature;
-}
-
-namespace uml 
-{
-	class MultiplicityElement;
-}
-
-namespace uml 
-{
 	class Namespace;
-}
-
-namespace uml 
-{
-	class RedefinableElement;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class Type;
-}
-
-namespace uml 
-{
-	class TypedElement;
-}
-
-namespace uml 
-{
 	class ValueSpecification;
 }
 
@@ -106,6 +57,8 @@ namespace uml
 // enum includes
 #include "uml/VisibilityKind.hpp"
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -143,14 +96,14 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual bool getIsReadOnly() const = 0;
+			virtual bool  getIsReadOnly() const = 0;
 			
 			/*!
 			If isReadOnly is true, the StructuralFeature may not be written to after initialization.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual void setIsReadOnly (bool _isReadOnly)= 0; 
+			virtual void setIsReadOnly (bool  _isReadOnly)= 0; 
 			
 			//*********************************
 			// Reference
@@ -166,7 +119,7 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			bool m_isReadOnly = false;
+			bool  m_isReadOnly = false;
 			
 			
 			//*********************************

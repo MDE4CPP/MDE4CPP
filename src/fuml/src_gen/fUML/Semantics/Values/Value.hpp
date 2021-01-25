@@ -35,24 +35,14 @@ namespace fUML
 	class fUMLFactory;
 }
 
-//Forward Declaration for used types
-namespace uml 
-{
-	class Classifier;
-}
-
-namespace fUML::Semantics::Loci 
-{
-	class SemanticVisitor;
-}
-
+//Forward Declaration for used types 
 namespace fUML::Semantics::Values 
 {
 	class Value;
 }
-
 namespace uml 
 {
+	class Classifier;
 	class ValueSpecification;
 }
 
@@ -61,6 +51,10 @@ namespace uml
 
 // enum includes
 
+
+//Includes from codegen annotation
+#include "abstractDataTypes/Subset.hpp"
+#include "uml/Classifier.hpp"
 
 //*********************************
 namespace fUML::Semantics::Values 
@@ -89,22 +83,22 @@ namespace fUML::Semantics::Values
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() = 0;
 			
 			 
-			virtual bool checkAllParents(std::shared_ptr<uml::Classifier>  type,std::shared_ptr<uml::Classifier>  classifier) = 0;
+			virtual bool checkAllParents(std::shared_ptr<org.eclipse.uml2.uml.Classifier> type,std::shared_ptr<org.eclipse.uml2.uml.Classifier> classifier) = 0;
 			
 			 
-			virtual bool equals(std::shared_ptr<fUML::Semantics::Values::Value>  otherValue) = 0;
+			virtual bool equals(std::shared_ptr<fUML::Semantics::Values::Value> otherValue) = 0;
 			
 			 
-			virtual std::shared_ptr<Bag<uml::Classifier> > getTypes() const = 0;
+			virtual std::shared_ptr<Bag<org.eclipse.uml2.uml.Classifier> > getTypes() const = 0;
 			
 			 
-			virtual bool hasTypes(std::shared_ptr<uml::Classifier>  type) = 0;
+			virtual bool hasTypes(std::shared_ptr<org.eclipse.uml2.uml.Classifier> type) = 0;
 			
 			 
 			virtual std::string objectId() = 0;
 			
 			 
-			virtual std::shared_ptr<uml::ValueSpecification> specify() = 0;
+			virtual std::shared_ptr<org.eclipse.uml2.uml.ValueSpecification> specify() = 0;
 			
 			 
 			virtual std::string toString() = 0;

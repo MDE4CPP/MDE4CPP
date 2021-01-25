@@ -55,7 +55,7 @@ namespace uml
 			name = signal.name
 			*/
 			 
-			virtual bool same_name_as_signal(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool same_name_as_signal(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			A Reception's parameters match the ownedAttributes of its signal by name, type, and multiplicity
@@ -69,7 +69,7 @@ namespace uml
 			)
 			*/
 			 
-			virtual bool same_structure_as_signal(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool same_structure_as_signal(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			

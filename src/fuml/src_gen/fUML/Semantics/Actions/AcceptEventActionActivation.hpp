@@ -36,60 +36,28 @@ namespace fUML
 	class fUMLFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace fUML::Semantics::Actions 
 {
 	class AcceptEventActionEventAccepter;
+	class InputPinActivation;
+	class OutputPinActivation;
+	class PinActivation;
 }
-
-namespace uml 
-{
-	class Action;
-}
-
-namespace fUML::Semantics::Actions 
-{
-	class ActionActivation;
-}
-
 namespace fUML::Semantics::Activities 
 {
 	class ActivityEdgeInstance;
-}
-
-namespace uml 
-{
-	class ActivityNode;
-}
-
-namespace fUML::Semantics::Activities 
-{
 	class ActivityNodeActivationGroup;
+	class Token;
 }
-
 namespace fUML::Semantics::CommonBehavior 
 {
 	class EventOccurrence;
 }
-
-namespace fUML::Semantics::Actions 
+namespace uml 
 {
-	class InputPinActivation;
-}
-
-namespace fUML::Semantics::Actions 
-{
-	class OutputPinActivation;
-}
-
-namespace fUML::Semantics::Actions 
-{
-	class PinActivation;
-}
-
-namespace fUML::Semantics::Activities 
-{
-	class Token;
+	class Action;
+	class ActivityNode;
 }
 
 // base class includes
@@ -97,6 +65,8 @@ namespace fUML::Semantics::Activities
 
 // enum includes
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace fUML::Semantics::Actions 
@@ -122,22 +92,22 @@ namespace fUML::Semantics::Actions
 			// Operations
 			//*********************************
 			 
-			virtual void accept(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>  eventOccurrence) = 0;
+			virtual void accept(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurrence) = 0;
 			
 			 
 			virtual void doAction() = 0;
 			
 			 
-			virtual void fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token> >  incomingTokens) = 0;
+			virtual void fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > incomingTokens) = 0;
 			
 			 
-			virtual void initialize(std::shared_ptr<uml::ActivityNode>  node,std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup>  group) = 0;
+			virtual void initialize(std::shared_ptr<org.eclipse.uml2.uml.ActivityNode> node,std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> group) = 0;
 			
 			 
 			virtual bool isReady() = 0;
 			
 			 
-			virtual bool match(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>  eventOccurrence) = 0;
+			virtual bool match(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurrence) = 0;
 			
 			 
 			virtual void run() = 0;
@@ -150,10 +120,10 @@ namespace fUML::Semantics::Actions
 			// Attributes Getter Setter
 			//*********************************
 			 
-			virtual bool isWaiting() const = 0;
+			virtual bool  isWaiting() const = 0;
 			
 			 
-			virtual void setWaiting (bool _waiting)= 0; 
+			virtual void setWaiting (bool  _waiting)= 0; 
 			
 			//*********************************
 			// Reference
@@ -171,7 +141,7 @@ namespace fUML::Semantics::Actions
 			// Attribute Members
 			//*********************************
 			 
-			bool m_waiting = false;
+			bool  m_waiting = false;
 			
 			
 			//*********************************

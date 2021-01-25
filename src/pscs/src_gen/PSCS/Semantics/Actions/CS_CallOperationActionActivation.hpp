@@ -35,75 +35,31 @@ namespace PSCS
 	class PSCSFactory;
 }
 
-//Forward Declaration for used types
-namespace uml 
+//Forward Declaration for used types 
+namespace fUML::Semantics::Actions 
 {
-	class Action;
+	class InputPinActivation;
+	class OutputPinActivation;
+	class PinActivation;
 }
-
 namespace fUML::Semantics::Activities 
 {
 	class ActivityEdgeInstance;
-}
-
-namespace uml 
-{
-	class ActivityNode;
-}
-
-namespace fUML::Semantics::Activities 
-{
 	class ActivityNodeActivationGroup;
+	class Token;
 }
-
-namespace uml 
-{
-	class CallAction;
-}
-
-namespace uml 
-{
-	class CallOperationAction;
-}
-
-namespace fUML::Semantics::Actions 
-{
-	class CallOperationActionActivation;
-}
-
 namespace fUML::Semantics::CommonBehavior 
 {
 	class Execution;
 }
-
-namespace fUML::Semantics::Actions 
-{
-	class InputPinActivation;
-}
-
 namespace uml 
 {
+	class Action;
+	class ActivityNode;
+	class CallAction;
+	class CallOperationAction;
 	class Operation;
-}
-
-namespace fUML::Semantics::Actions 
-{
-	class OutputPinActivation;
-}
-
-namespace fUML::Semantics::Actions 
-{
-	class PinActivation;
-}
-
-namespace uml 
-{
 	class Port;
-}
-
-namespace fUML::Semantics::Activities 
-{
-	class Token;
 }
 
 // base class includes
@@ -111,6 +67,28 @@ namespace fUML::Semantics::Activities
 
 // enum includes
 
+
+//Includes from codegen annotation
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
+
+#include "uml/CallOperationAction.hpp"
+#include "uml/Parameter.hpp"
+#include "uml/ParameterDirectionKind.hpp"
+#include "uml/InputPin.hpp"
+#include "uml/OutputPin.hpp"
+#include "uml/Class.hpp"
+#include "uml/Interface.hpp"
+#include "fUML/Semantics/Values/Value.hpp"
+#include "fUML/Semantics/StructuredClassifiers/Object.hpp"
+#include "fUML/Semantics/Activities/ActivityExecution.hpp"
+#include "fUML/Semantics/Loci/Locus.hpp"
+#include "fUML/Semantics/Loci/ExecutionFactory.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/CS_Reference.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/CS_Object.hpp"
+#include "PSCS/Semantics/Actions/CS_ConstructStrategy.hpp"
+#include "PSCS/Semantics/Loci/CS_ExecutionFactory.hpp"
 
 //*********************************
 namespace PSCS::Semantics::Actions 
@@ -136,7 +114,7 @@ namespace PSCS::Semantics::Actions
 			// Operations
 			//*********************************
 			 
-			virtual bool _isCreate(std::shared_ptr<uml::Operation>  operation) = 0;
+			virtual bool _isCreate(std::shared_ptr<org.eclipse.uml2.uml.Operation> operation) = 0;
 			
 			 
 			virtual void doAction() = 0;
@@ -145,13 +123,13 @@ namespace PSCS::Semantics::Actions
 			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> getCallExecution() = 0;
 			
 			 
-			virtual bool isCreate(std::shared_ptr<uml::Operation>  operation) = 0;
+			virtual bool isCreate(std::shared_ptr<org.eclipse.uml2.uml.Operation> operation) = 0;
 			
 			 
-			virtual bool isOperationProvided(std::shared_ptr<uml::Port>  port,std::shared_ptr<uml::Operation>  operation) = 0;
+			virtual bool isOperationProvided(std::shared_ptr<org.eclipse.uml2.uml.Port> port,std::shared_ptr<org.eclipse.uml2.uml.Operation> operation) = 0;
 			
 			 
-			virtual bool isOperationRequired(std::shared_ptr<uml::Port>  port,std::shared_ptr<uml::Operation>  operation) = 0;
+			virtual bool isOperationRequired(std::shared_ptr<org.eclipse.uml2.uml.Port> port,std::shared_ptr<org.eclipse.uml2.uml.Operation> operation) = 0;
 			
 			
 			//*********************************

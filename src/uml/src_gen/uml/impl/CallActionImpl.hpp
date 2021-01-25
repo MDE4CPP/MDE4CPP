@@ -68,7 +68,7 @@ namespace uml
 				argument->at(i).compatibleWith(parameter->at(i)))
 			*/
 			 
-			virtual bool argument_pins(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool argument_pins(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			Return the in and inout ownedParameters of the Behavior or Operation being called. (This operation is abstract and should be overridden by subclasses of CallAction.)
@@ -94,14 +94,14 @@ namespace uml
 				parameter->at(i).compatibleWith(result->at(i)))
 			*/
 			 
-			virtual bool result_pins(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool result_pins(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			Only synchronous CallActions can have result OutputPins.
 			result->notEmpty() implies isSynchronous
 			*/
 			 
-			virtual bool synchronous_call(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool synchronous_call(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			
@@ -113,14 +113,14 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual bool getIsSynchronous() const ;
+			virtual bool  getIsSynchronous() const ;
 			
 			/*!
 			If true, the call is synchronous and the caller waits for completion of the invoked Behavior. If false, the call is asynchronous and the caller proceeds immediately and cannot receive return values.
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual void setIsSynchronous (bool _isSynchronous); 
+			virtual void setIsSynchronous (bool  _isSynchronous); 
 			
 			
 			//*********************************

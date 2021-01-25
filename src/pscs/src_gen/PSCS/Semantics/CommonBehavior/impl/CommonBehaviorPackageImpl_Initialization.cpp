@@ -121,7 +121,8 @@ void CommonBehaviorPackageImpl::initializeCS_EventOccurrenceContent()
 	
 	m_cS_EventOccurrence_Attribute_propagationInward = getCS_EventOccurrence_Attribute_propagationInward();
 	m_cS_EventOccurrence_Attribute_propagationInward->setName("propagationInward");
-	m_cS_EventOccurrence_Attribute_propagationInward->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
+	
+		m_cS_EventOccurrence_Attribute_propagationInward->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_cS_EventOccurrence_Attribute_propagationInward->setLowerBound(0);
 	m_cS_EventOccurrence_Attribute_propagationInward->setUpperBound(1);
 	m_cS_EventOccurrence_Attribute_propagationInward->setTransient(false);

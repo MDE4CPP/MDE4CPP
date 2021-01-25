@@ -39,99 +39,23 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
-namespace uml 
-{
-	class Action;
-}
-
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Activity;
-}
-
-namespace uml 
-{
 	class ActivityEdge;
-}
-
-namespace uml 
-{
 	class ActivityGroup;
-}
-
-namespace uml 
-{
-	class ActivityNode;
-}
-
-namespace uml 
-{
 	class ActivityPartition;
-}
-
-namespace uml 
-{
 	class Classifier;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
 	class Constraint;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class ExceptionHandler;
-}
-
-namespace uml 
-{
 	class InputPin;
-}
-
-namespace uml 
-{
 	class InterruptibleActivityRegion;
-}
-
-namespace uml 
-{
 	class Namespace;
-}
-
-namespace uml 
-{
 	class OutputPin;
-}
-
-namespace uml 
-{
-	class RedefinableElement;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class StructuredActivityNode;
 }
 
@@ -141,6 +65,8 @@ namespace uml
 // enum includes
 #include "uml/VisibilityKind.hpp"
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -174,14 +100,14 @@ namespace uml
 			target.is(1,1)
 			*/
 			 
-			virtual bool multiplicity(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool multiplicity(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			The target InputPin has no type.
 			target.type= null
 			*/
 			 
-			virtual bool no_type(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool no_type(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			
 			//*********************************
@@ -192,27 +118,27 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual bool getIsDestroyLinks() const = 0;
+			virtual bool  getIsDestroyLinks() const = 0;
 			
 			/*!
 			Specifies whether links in which the object participates are destroyed along with the object.
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual void setIsDestroyLinks (bool _isDestroyLinks)= 0; 
+			virtual void setIsDestroyLinks (bool  _isDestroyLinks)= 0; 
 			/*!
 			Specifies whether objects owned by the object (via composition) are destroyed along with the object.
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual bool getIsDestroyOwnedObjects() const = 0;
+			virtual bool  getIsDestroyOwnedObjects() const = 0;
 			
 			/*!
 			Specifies whether objects owned by the object (via composition) are destroyed along with the object.
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual void setIsDestroyOwnedObjects (bool _isDestroyOwnedObjects)= 0; 
+			virtual void setIsDestroyOwnedObjects (bool  _isDestroyOwnedObjects)= 0; 
 			
 			//*********************************
 			// Reference
@@ -242,13 +168,13 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			bool m_isDestroyLinks = false;
+			bool  m_isDestroyLinks = false;
 			/*!
 			Specifies whether objects owned by the object (via composition) are destroyed along with the object.
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			bool m_isDestroyOwnedObjects = false;
+			bool  m_isDestroyOwnedObjects = false;
 			
 			
 			//*********************************

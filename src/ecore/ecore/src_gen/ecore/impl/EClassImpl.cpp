@@ -221,12 +221,12 @@ std::shared_ptr<EClass> EClassImpl::eStaticClass() const
 /*
 Getter & Setter for attribute abstract
 */
-bool EClassImpl::isAbstract() const 
+bool  EClassImpl::isAbstract() const 
 {
 	return m_abstract;
 }
 
-void EClassImpl::setAbstract(bool _abstract)
+void EClassImpl::setAbstract(bool  _abstract)
 {
 	m_abstract = _abstract;
 } 
@@ -236,12 +236,12 @@ void EClassImpl::setAbstract(bool _abstract)
 /*
 Getter & Setter for attribute interface
 */
-bool EClassImpl::isInterface() const 
+bool  EClassImpl::isInterface() const 
 {
 	return m_interface;
 }
 
-void EClassImpl::setInterface(bool _interface)
+void EClassImpl::setInterface(bool  _interface)
 {
 	m_interface = _interface;
 } 
@@ -294,7 +294,7 @@ int EClassImpl::getFeatureCount() const
 	//end of body
 }
 
-int EClassImpl::getFeatureID(std::shared_ptr<ecore::EStructuralFeature>  feature) const
+int EClassImpl::getFeatureID(std::shared_ptr<ecore::EStructuralFeature> feature) const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -319,7 +319,7 @@ int EClassImpl::getFeatureID(std::shared_ptr<ecore::EStructuralFeature>  feature
 	//end of body
 }
 
-std::shared_ptr<ecore::EGenericType> EClassImpl::getFeatureType(std::shared_ptr<ecore::EStructuralFeature>  feature) const
+std::shared_ptr<ecore::EGenericType> EClassImpl::getFeatureType(std::shared_ptr<ecore::EStructuralFeature> feature) const
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -333,7 +333,7 @@ int EClassImpl::getOperationCount() const
 	//end of body
 }
 
-int EClassImpl::getOperationID(std::shared_ptr<ecore::EOperation>  operation) const
+int EClassImpl::getOperationID(std::shared_ptr<ecore::EOperation> operation) const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -358,13 +358,13 @@ int EClassImpl::getOperationID(std::shared_ptr<ecore::EOperation>  operation) co
 	//end of body
 }
 
-std::shared_ptr<ecore::EOperation> EClassImpl::getOverride(std::shared_ptr<ecore::EOperation>  operation) const
+std::shared_ptr<ecore::EOperation> EClassImpl::getOverride(std::shared_ptr<ecore::EOperation> operation) const
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool EClassImpl::isSuperTypeOf(std::shared_ptr<ecore::EClass>  someClass) const
+bool EClassImpl::isSuperTypeOf(std::shared_ptr<ecore::EClass> someClass) const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -765,161 +765,57 @@ Any EClassImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(isAbstract()); //1211
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_EALLATTRIBUTES:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ecore::EAttribute>::iterator iter = m_eAllAttributes->begin();
-			Bag<ecore::EAttribute>::iterator end = m_eAllAttributes->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //1215
+			return eAny(getEAllAttributes()); //1215			
 		}
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_EALLCONTAINMENTS:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ecore::EReference>::iterator iter = m_eAllContainments->begin();
-			Bag<ecore::EReference>::iterator end = m_eAllContainments->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //1219
+			return eAny(getEAllContainments()); //1219			
 		}
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_EALLGENERICSUPERTYPES:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ecore::EGenericType>::iterator iter = m_eAllGenericSuperTypes->begin();
-			Bag<ecore::EGenericType>::iterator end = m_eAllGenericSuperTypes->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //1226
+			return eAny(getEAllGenericSuperTypes()); //1226			
 		}
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_EALLOPERATIONS:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ecore::EOperation>::iterator iter = m_eAllOperations->begin();
-			Bag<ecore::EOperation>::iterator end = m_eAllOperations->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //1220
+			return eAny(getEAllOperations()); //1220			
 		}
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_EALLREFERENCES:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ecore::EReference>::iterator iter = m_eAllReferences->begin();
-			Bag<ecore::EReference>::iterator end = m_eAllReferences->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //1216
+			return eAny(getEAllReferences()); //1216			
 		}
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_EALLSTRUCTURALFEATURES:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ecore::EStructuralFeature>::iterator iter = m_eAllStructuralFeatures->begin();
-			Bag<ecore::EStructuralFeature>::iterator end = m_eAllStructuralFeatures->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //1221
+			return eAny(getEAllStructuralFeatures()); //1221			
 		}
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_EALLSUPERTYPES:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ecore::EClass>::iterator iter = m_eAllSuperTypes->begin();
-			Bag<ecore::EClass>::iterator end = m_eAllSuperTypes->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //1222
+			return eAny(getEAllSuperTypes()); //1222			
 		}
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_EATTRIBUTES:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ecore::EAttribute>::iterator iter = m_eAttributes->begin();
-			Bag<ecore::EAttribute>::iterator end = m_eAttributes->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //1218
+			return eAny(getEAttributes()); //1218			
 		}
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_EGENERICSUPERTYPES:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ecore::EGenericType>::iterator iter = m_eGenericSuperTypes->begin();
-			Bag<ecore::EGenericType>::iterator end = m_eGenericSuperTypes->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //1225
+			return eAny(getEGenericSuperTypes()); //1225			
 		}
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_EIDATTRIBUTE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEIDAttribute())); //1223
+			return eAny(getEIDAttribute()); //1223
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_EOPERATIONS:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ecore::EOperation>::iterator iter = m_eOperations->begin();
-			Bag<ecore::EOperation>::iterator end = m_eOperations->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //1214
+			return eAny(getEOperations()); //1214			
 		}
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_EREFERENCES:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ecore::EReference>::iterator iter = m_eReferences->begin();
-			Bag<ecore::EReference>::iterator end = m_eReferences->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //1217
+			return eAny(getEReferences()); //1217			
 		}
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_ESTRUCTURALFEATURES:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ecore::EStructuralFeature>::iterator iter = m_eStructuralFeatures->begin();
-			Bag<ecore::EStructuralFeature>::iterator end = m_eStructuralFeatures->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //1224
+			return eAny(getEStructuralFeatures()); //1224			
 		}
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_ESUPERTYPES:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ecore::EClass>::iterator iter = m_eSuperTypes->begin();
-			Bag<ecore::EClass>::iterator end = m_eSuperTypes->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //1213
+			return eAny(getESuperTypes()); //1213			
 		}
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_INTERFACE:
 			return eAny(isInterface()); //1212
@@ -1446,13 +1342,11 @@ void EClassImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 	try
 	{
 		std::shared_ptr<ecore::ecorePackage> package = ecore::ecorePackage::eInstance();
-
 		// Save 'eOperations'
 		for (std::shared_ptr<ecore::EOperation> eOperations : *this->getEOperations()) 
 		{
 			saveHandler->addReference(eOperations, "eOperations", eOperations->eClass() != package->getEOperation_Class());
 		}
-	
 		// Add attributes
 		if ( this->eIsSet(package->getEClass_Attribute_abstract()) )
 		{
@@ -1464,24 +1358,11 @@ void EClassImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 			saveHandler->addAttribute("interface", this->isInterface());
 		}
 
-		// Add references
-		std::shared_ptr<Bag<ecore::EAttribute>> eAttributes_list = this->getEAttributes();
-		for (std::shared_ptr<ecore::EAttribute > object : *eAttributes_list)
-		{ 
-			saveHandler->addReferences("eAttributes", object);
-		}
-		saveHandler->addReference("eIDAttribute", this->getEIDAttribute());
-		std::shared_ptr<Bag<ecore::EReference>> eReferences_list = this->getEReferences();
-		for (std::shared_ptr<ecore::EReference > object : *eReferences_list)
-		{ 
-			saveHandler->addReferences("eReferences", object);
-		}
-		std::shared_ptr<Bag<ecore::EClass>> eSuperTypes_list = this->getESuperTypes();
-		for (std::shared_ptr<ecore::EClass > object : *eSuperTypes_list)
-		{ 
-			saveHandler->addReferences("eSuperTypes", object);
-		}
-
+	// Add references
+		saveHandler->addReferences<ecore::EAttribute>("eAttributes", this->getEAttributes());	
+		saveHandler->addReference("eIDAttribute", this->getEIDAttribute());		 
+		saveHandler->addReferences<ecore::EReference>("eReferences", this->getEReferences());	
+		saveHandler->addReferences<ecore::EClass>("eSuperTypes", this->getESuperTypes());	
 
 		//
 		// Add new tags (from references)

@@ -66,7 +66,7 @@ namespace fUML::Semantics
 	}
 
 }
-
+ 
 namespace fUML::Semantics 
 {
 	/*!

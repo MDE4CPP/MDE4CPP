@@ -59,7 +59,7 @@ namespace uml
 			name->notEmpty ()
 			*/
 			 
-			virtual bool must_have_name(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool must_have_name(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			

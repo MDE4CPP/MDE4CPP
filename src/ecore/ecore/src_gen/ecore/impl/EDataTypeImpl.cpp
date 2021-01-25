@@ -141,12 +141,12 @@ std::shared_ptr<EClass> EDataTypeImpl::eStaticClass() const
 /*
 Getter & Setter for attribute serializable
 */
-bool EDataTypeImpl::isSerializable() const 
+bool  EDataTypeImpl::isSerializable() const 
 {
 	return m_serializable;
 }
 
-void EDataTypeImpl::setSerializable(bool _serializable)
+void EDataTypeImpl::setSerializable(bool  _serializable)
 {
 	m_serializable = _serializable;
 } 
@@ -325,14 +325,11 @@ void EDataTypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	try
 	{
 		std::shared_ptr<ecore::ecorePackage> package = ecore::ecorePackage::eInstance();
-
-	
 		// Add attributes
 		if ( this->eIsSet(package->getEDataType_Attribute_serializable()) )
 		{
 			saveHandler->addAttribute("serializable", this->isSerializable());
 		}
-
 	}
 	catch (std::exception& e)
 	{

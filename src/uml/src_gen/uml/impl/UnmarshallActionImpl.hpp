@@ -63,28 +63,28 @@ namespace uml
 			object.is(1,1)
 			*/
 			 
-			virtual bool multiplicity_of_object(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool multiplicity_of_object(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			The number of result outputPins must be the same as the number of attributes of the unmarshallType.
 			unmarshallType.allAttributes()->size() = result->size()
 			*/
 			 
-			virtual bool number_of_result(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool number_of_result(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			The type of the object InputPin conform to the unmarshallType.
 			object.type.conformsTo(unmarshallType)
 			*/
 			 
-			virtual bool object_type(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool object_type(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			The unmarshallType must have at least one StructuralFeature.
 			unmarshallType.allAttributes()->size() >= 1
 			*/
 			 
-			virtual bool structural_feature(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool structural_feature(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			The type, ordering and multiplicity of each attribute of the unmarshallType must be compatible with the type, ordering and multiplicity of the corresponding result OutputPin.
@@ -95,7 +95,7 @@ namespace uml
 				attribute->at(i).compatibleWith(result->at(i)))
 			*/
 			 
-			virtual bool type_ordering_and_multiplicity(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool type_ordering_and_multiplicity(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			

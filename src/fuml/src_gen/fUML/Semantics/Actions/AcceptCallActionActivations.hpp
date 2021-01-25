@@ -35,13 +35,15 @@ namespace fUML
 	class fUMLFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 
 // base class includes
 
 // enum includes
 
 #include "ecore/EModelElement.hpp"
+
+//Includes from codegen annotation
 
 //*********************************
 namespace fUML::Semantics::Actions 

@@ -77,14 +77,14 @@ namespace uml
 			<p>From package UML::Packages.</p>
 			*/
 			 
-			virtual std::string getViewpoint() const ;
+			virtual std::string  getViewpoint() const ;
 			
 			/*!
 			The name of the viewpoint that is expressed by a model (this name may refer to a profile definition).
 			<p>From package UML::Packages.</p>
 			*/
 			 
-			virtual void setViewpoint (std::string _viewpoint); 
+			virtual void setViewpoint (std::string  _viewpoint); 
 			
 			
 			//*********************************

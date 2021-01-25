@@ -65,13 +65,13 @@ namespace uml
 			  or oclIsKindOf(InformationItem) or oclIsKindOf(Signal) or oclIsKindOf(Component))
 			*/
 			 
-			virtual bool convey_classifiers(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool convey_classifiers(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			The sources and targets of the information flow must conform to the sources and targets or conversely the targets and sources of the realization relationships.
 			*/
 			 
-			virtual bool must_conform(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool must_conform(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			The sources and targets of the information flow can only be one of the following kind: Actor, Node, UseCase, Artifact, Class, Component, Port, Property, Interface, Package, ActivityNode, ActivityPartition,
@@ -91,7 +91,7 @@ namespace uml
 			(oclIsKindOf(InstanceSpecification) and not sit.oclAsType(InstanceSpecification).classifier->exists(oclIsKindOf(Relationship)))))
 			*/
 			 
-			virtual bool sources_and_targets_kind(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool sources_and_targets_kind(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			

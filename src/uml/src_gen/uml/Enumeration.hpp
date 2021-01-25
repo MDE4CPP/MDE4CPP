@@ -39,134 +39,27 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
-namespace uml 
-{
-	class Classifier;
-}
-
+//Forward Declaration for used types 
 namespace uml 
 {
 	class CollaborationUse;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
 	class Constraint;
-}
-
-namespace uml 
-{
-	class DataType;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class ElementImport;
-}
-
-namespace uml 
-{
 	class EnumerationLiteral;
-}
-
-namespace uml 
-{
 	class Feature;
-}
-
-namespace uml 
-{
 	class Generalization;
-}
-
-namespace uml 
-{
 	class GeneralizationSet;
-}
-
-namespace uml 
-{
-	class NamedElement;
-}
-
-namespace uml 
-{
-	class Namespace;
-}
-
-namespace uml 
-{
 	class Operation;
-}
-
-namespace uml 
-{
 	class Package;
-}
-
-namespace uml 
-{
 	class PackageImport;
-}
-
-namespace uml 
-{
-	class PackageableElement;
-}
-
-namespace uml 
-{
 	class Property;
-}
-
-namespace uml 
-{
-	class RedefinableElement;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class Substitution;
-}
-
-namespace uml 
-{
 	class TemplateBinding;
-}
-
-namespace uml 
-{
 	class TemplateParameter;
-}
-
-namespace uml 
-{
 	class TemplateSignature;
-}
-
-namespace uml 
-{
 	class UseCase;
 }
 
@@ -176,6 +69,8 @@ namespace uml
 // enum includes
 #include "uml/VisibilityKind.hpp"
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -208,7 +103,7 @@ namespace uml
 			ownedAttribute->forAll(isReadOnly)
 			*/
 			 
-			virtual bool immutable(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool immutable(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			
 			//*********************************

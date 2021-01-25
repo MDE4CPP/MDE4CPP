@@ -66,7 +66,7 @@ namespace uml
 			   ((peerFragments->first() = self) or  (peerFragments->last() = self)))
 			*/
 			 
-			virtual bool first_or_last_interaction_fragment(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool first_or_last_interaction_fragment(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			Continuations are always global in the enclosing InteractionFragment e.g., it always covers all Lifelines covered by the enclosing InteractionOperator.
@@ -76,7 +76,7 @@ namespace uml
 			    operandLifelines->forAll(ol :Lifeline |self.covered->includes(ol)))
 			*/
 			 
-			virtual bool global(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool global(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			Across all Interaction instances having the same context value, every Lifeline instance covered by a Continuation (self) must be common with one covered Lifeline instance of all other Continuation instances with the same name as self, and every Lifeline instance covered by a Continuation instance with the same name as self must be common with one covered Lifeline instance of self. Lifeline instances are common if they have the same selector and represents associationEnd values.
@@ -106,7 +106,7 @@ namespace uml
 			  )
 			*/
 			 
-			virtual bool same_name(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool same_name(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			
@@ -118,14 +118,14 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			 
-			virtual bool getSetting() const ;
+			virtual bool  getSetting() const ;
 			
 			/*!
 			True: when the Continuation is at the end of the enclosing InteractionFragment and False when it is in the beginning.
 			<p>From package UML::Interactions.</p>
 			*/
 			 
-			virtual void setSetting (bool _setting); 
+			virtual void setSetting (bool  _setting); 
 			
 			
 			//*********************************

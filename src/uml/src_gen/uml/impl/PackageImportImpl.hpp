@@ -55,7 +55,7 @@ namespace uml
 			visibility = VisibilityKind::public or visibility = VisibilityKind::private
 			*/
 			 
-			virtual bool public_or_private(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool public_or_private(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			
@@ -67,14 +67,14 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual uml::VisibilityKind getVisibility() const ;
+			virtual uml::VisibilityKind  getVisibility() const ;
 			
 			/*!
 			Specifies the visibility of the imported PackageableElements within the importingNamespace, i.e., whether imported Elements will in turn be visible to other Namespaces. If the PackageImport is public, the imported Elements will be visible outside the importingNamespace, while, if the PackageImport is private, they will not.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual void setVisibility (uml::VisibilityKind _visibility); 
+			virtual void setVisibility (uml::VisibilityKind  _visibility); 
 			
 			
 			//*********************************

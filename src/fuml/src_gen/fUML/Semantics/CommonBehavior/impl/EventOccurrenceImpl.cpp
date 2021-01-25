@@ -115,19 +115,19 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > EventOccu
 	throw "UnsupportedOperationException";
 }
 
-bool EventOccurrenceImpl::match(std::shared_ptr<uml::Trigger>  trigger)
+bool EventOccurrenceImpl::match(std::shared_ptr<org.eclipse.uml2.uml.Trigger> trigger)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool EventOccurrenceImpl::matchAny(std::shared_ptr<Bag<uml::Trigger> >  triggers)
+bool EventOccurrenceImpl::matchAny(std::shared_ptr<Bag<org.eclipse.uml2.uml.Trigger> > triggers)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void EventOccurrenceImpl::sendTo(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference>  target)
+void EventOccurrenceImpl::sendTo(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> target)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -179,7 +179,7 @@ Any EventOccurrenceImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EVENTOCCURRENCE_ATTRIBUTE_TARGET:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getTarget())); //450
+			return eAny(getTarget()); //450
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -294,11 +294,8 @@ void EventOccurrenceImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	{
 		std::shared_ptr<fUML::Semantics::CommonBehavior::CommonBehaviorPackage> package = fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance();
 
-	
-
-		// Add references
-		saveHandler->addReference("target", this->getTarget());
-
+	// Add references
+		saveHandler->addReference("target", this->getTarget());		 
 	}
 	catch (std::exception& e)
 	{

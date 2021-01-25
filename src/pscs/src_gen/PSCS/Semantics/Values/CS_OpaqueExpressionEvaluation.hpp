@@ -35,22 +35,15 @@ namespace PSCS
 	class PSCSFactory;
 }
 
-//Forward Declaration for used types
-namespace fUML::Semantics::Values 
-{
-	class Evaluation;
-}
-
+//Forward Declaration for used types 
 namespace fUML::Semantics::Loci 
 {
 	class Locus;
 }
-
 namespace fUML::Semantics::Values 
 {
 	class Value;
 }
-
 namespace uml 
 {
 	class ValueSpecification;
@@ -61,6 +54,15 @@ namespace uml
 
 // enum includes
 
+
+//Includes from codegen annotation
+#include "abstractDataTypes/Subset.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/Semantics/Loci/Locus.hpp"
+#include "fUML/Semantics/Loci/Executor.hpp"
+#include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
+#include "uml/OpaqueExpression.hpp"
+#include "uml/Behavior.hpp"
 
 //*********************************
 namespace PSCS::Semantics::Values 

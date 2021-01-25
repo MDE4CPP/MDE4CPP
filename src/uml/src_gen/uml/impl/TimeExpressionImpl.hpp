@@ -71,7 +71,7 @@ namespace uml
 			expr = null implies (observation->size() = 1 and observation->forAll(oclIsKindOf(TimeObservation)))
 			*/
 			 
-			virtual bool no_expr_requires_observation(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool no_expr_requires_observation(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			

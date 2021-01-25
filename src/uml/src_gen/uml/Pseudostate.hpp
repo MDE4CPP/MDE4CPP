@@ -39,55 +39,17 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Comment;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class Namespace;
-}
-
-namespace uml 
-{
 	class Region;
-}
-
-namespace uml 
-{
 	class State;
-}
-
-namespace uml 
-{
 	class StateMachine;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class Transition;
-}
-
-namespace uml 
-{
-	class Vertex;
 }
 
 // base class includes
@@ -98,6 +60,8 @@ namespace uml
 
 #include "uml/VisibilityKind.hpp"
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -151,49 +115,49 @@ namespace uml
 			(kind = PseudostateKind::choice) implies (incoming->size() >= 1 and outgoing->size() >= 1)
 			*/
 			 
-			virtual bool choice_vertex(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool choice_vertex(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			In a complete StateMachine, a fork Vertex must have at least two outgoing Transitions and exactly one incoming Transition.
 			(kind = PseudostateKind::fork) implies (incoming->size() = 1 and outgoing->size() >= 2)
 			*/
 			 
-			virtual bool fork_vertex(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool fork_vertex(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			History Vertices can have at most one outgoing Transition.
 			((kind = PseudostateKind::deepHistory) or (kind = PseudostateKind::shallowHistory)) implies (outgoing->size() <= 1)
 			*/
 			 
-			virtual bool history_vertices(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool history_vertices(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			An initial Vertex can have at most one outgoing Transition.
 			(kind = PseudostateKind::initial) implies (outgoing->size() <= 1)
 			*/
 			 
-			virtual bool initial_vertex(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool initial_vertex(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			In a complete StateMachine, a join Vertex must have at least two incoming Transitions and exactly one outgoing Transition.
 			(kind = PseudostateKind::join) implies (outgoing->size() = 1 and incoming->size() >= 2)
 			*/
 			 
-			virtual bool join_vertex(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool join_vertex(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			In a complete StateMachine, a junction Vertex must have at least one incoming and one outgoing Transition.
 			(kind = PseudostateKind::junction) implies (incoming->size() >= 1 and outgoing->size() >= 1)
 			*/
 			 
-			virtual bool junction_vertex(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool junction_vertex(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			The outgoing Transition from an initial vertex may have a behavior, but not a trigger or a guard.
 			(kind = PseudostateKind::initial) implies (outgoing.guard = null and outgoing.trigger->isEmpty())
 			*/
 			 
-			virtual bool outgoing_from_initial(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool outgoing_from_initial(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			All Transitions incoming a join Vertex must originate in different Regions of an orthogonal State.
@@ -207,7 +171,7 @@ namespace uml
 					->exists(r1:Region, r2: Region | (r1 <> r2) and t1.source.isContainedInRegion(r1) and t2.source.isContainedInRegion(r2)))))
 			*/
 			 
-			virtual bool transitions_incoming(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool transitions_incoming(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			All transitions outgoing a fork vertex must target states in different regions of an orthogonal state.
@@ -221,7 +185,7 @@ namespace uml
 					->exists(r1:Region, r2: Region | (r1 <> r2) and t1.target.isContainedInRegion(r1) and t2.target.isContainedInRegion(r2)))))
 			*/
 			 
-			virtual bool transitions_outgoing(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool transitions_outgoing(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			
 			//*********************************
@@ -232,14 +196,14 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			 
-			virtual uml::PseudostateKind getKind() const = 0;
+			virtual uml::PseudostateKind  getKind() const = 0;
 			
 			/*!
 			Determines the precise type of the Pseudostate and can be one of: entryPoint, exitPoint, initial, deepHistory, shallowHistory, join, fork, junction, terminate or choice.
 			<p>From package UML::StateMachines.</p>
 			*/
 			 
-			virtual void setKind (uml::PseudostateKind _kind)= 0; 
+			virtual void setKind (uml::PseudostateKind  _kind)= 0; 
 			
 			//*********************************
 			// Reference
@@ -283,7 +247,7 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			 
-			uml::PseudostateKind m_kind = PseudostateKind::INITIAL;
+			uml::PseudostateKind  m_kind = PseudostateKind::INITIAL;
 			
 			
 			//*********************************

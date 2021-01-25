@@ -56,19 +56,19 @@ namespace ecore
 			// Attributes Getter Setter
 			//*********************************
 			 
-			virtual bool isContainer() const ;
+			virtual bool  isContainer() const ;
 			
 			
 			 
-			virtual bool isContainment() const ;
+			virtual bool  isContainment() const ;
 			
 			 
-			virtual void setContainment (bool _containment); 
+			virtual void setContainment (bool  _containment); 
 			 
-			virtual bool isResolveProxies() const ;
+			virtual bool  isResolveProxies() const ;
 			
 			 
-			virtual void setResolveProxies (bool _resolveProxies); 
+			virtual void setResolveProxies (bool  _resolveProxies); 
 			
 			
 			//*********************************

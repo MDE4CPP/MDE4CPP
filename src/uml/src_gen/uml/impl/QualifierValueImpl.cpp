@@ -121,19 +121,19 @@ std::shared_ptr<ecore::EClass> QualifierValueImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool QualifierValueImpl::multiplicity_of_qualifier(Any diagnostics,std::map <   Any, Any >  context)
+bool QualifierValueImpl::multiplicity_of_qualifier(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool QualifierValueImpl::qualifier_attribute(Any diagnostics,std::map <   Any, Any >  context)
+bool QualifierValueImpl::qualifier_attribute(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool QualifierValueImpl::type_of_qualifier(Any diagnostics,std::map <   Any, Any >  context)
+bool QualifierValueImpl::type_of_qualifier(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -221,9 +221,9 @@ Any QualifierValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::QUALIFIERVALUE_ATTRIBUTE_QUALIFIER:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getQualifier())); //1913
+			return eAny(getQualifier()); //1913
 		case uml::umlPackage::QUALIFIERVALUE_ATTRIBUTE_VALUE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getValue())); //1914
+			return eAny(getValue()); //1914
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -372,12 +372,9 @@ void QualifierValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
-	
-
-		// Add references
-		saveHandler->addReference("qualifier", this->getQualifier());
-		saveHandler->addReference("value", this->getValue());
-
+	// Add references
+		saveHandler->addReference("qualifier", this->getQualifier());		 
+		saveHandler->addReference("value", this->getValue());		 
 	}
 	catch (std::exception& e)
 	{

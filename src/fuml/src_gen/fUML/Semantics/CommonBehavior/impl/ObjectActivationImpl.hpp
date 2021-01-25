@@ -46,7 +46,7 @@ virtual public ObjectActivation
 			// Operations
 			//*********************************
 			 
-			virtual void _register(std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter>  accepter) ;
+			virtual void _register(std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter> accepter) ;
 			
 			 
 			virtual void _send(Any signal) ;
@@ -61,16 +61,16 @@ virtual public ObjectActivation
 			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> retrieveNextEvent() ;
 			
 			 
-			virtual void send(std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance>  signalInstance) ;
+			virtual void send(std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> signalInstance) ;
 			
 			 
-			virtual void startBehavior(std::shared_ptr<uml::Class>  classifier,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> >  inputs) ;
+			virtual void startBehavior(std::shared_ptr<org.eclipse.uml2.uml.Class> classifier,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > inputs) ;
 			
 			 
 			virtual void stop() ;
 			
 			 
-			virtual void unregister(std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter>  accepter) ;
+			virtual void unregister(std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter> accepter) ;
 			
 			
 			

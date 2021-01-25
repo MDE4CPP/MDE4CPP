@@ -194,7 +194,7 @@ std::shared_ptr<ecore::EClass> ActionExecutionSpecificationImpl::eStaticClass() 
 //*********************************
 // Operations
 //*********************************
-bool ActionExecutionSpecificationImpl::action_referenced(Any diagnostics,std::map <   Any, Any >  context)
+bool ActionExecutionSpecificationImpl::action_referenced(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -291,7 +291,7 @@ Any ActionExecutionSpecificationImpl::eGet(int featureID, bool resolve, bool cor
 	switch(featureID)
 	{
 		case uml::umlPackage::ACTIONEXECUTIONSPECIFICATION_ATTRIBUTE_ACTION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getAction())); //515
+			return eAny(getAction()); //515
 	}
 	return ExecutionSpecificationImpl::eGet(featureID, resolve, coreType);
 }
@@ -420,11 +420,8 @@ void ActionExecutionSpecificationImpl::saveContent(std::shared_ptr<persistence::
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
-	
-
-		// Add references
-		saveHandler->addReference("action", this->getAction());
-
+	// Add references
+		saveHandler->addReference("action", this->getAction());		 
 	}
 	catch (std::exception& e)
 	{

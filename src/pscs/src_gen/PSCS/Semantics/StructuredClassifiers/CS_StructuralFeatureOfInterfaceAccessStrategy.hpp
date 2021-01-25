@@ -36,30 +36,22 @@ namespace PSCS
 	class PSCSFactory;
 }
 
-//Forward Declaration for used types
-namespace PSCS::Semantics::StructuredClassifiers 
-{
-	class CS_Object;
-}
-
+//Forward Declaration for used types 
 namespace fUML::Semantics::SimpleClassifiers 
 {
 	class FeatureValue;
 }
-
-namespace fUML::Semantics::Loci 
+namespace PSCS::Semantics::StructuredClassifiers 
 {
-	class SemanticStrategy;
+	class CS_Object;
 }
-
-namespace uml 
-{
-	class StructuralFeature;
-}
-
 namespace fUML::Semantics::Values 
 {
 	class Value;
+}
+namespace uml 
+{
+	class StructuralFeature;
 }
 
 // base class includes
@@ -67,6 +59,9 @@ namespace fUML::Semantics::Values
 
 // enum includes
 
+
+//Includes from codegen annotation
+#include "fUML/FUMLFactory.hpp"
 
 //*********************************
 namespace PSCS::Semantics::StructuredClassifiers 
@@ -95,10 +90,10 @@ namespace PSCS::Semantics::StructuredClassifiers
 			virtual std::string getName() = 0;
 			
 			 
-			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> read(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object>  cs_Object,std::shared_ptr<uml::StructuralFeature>  feature) = 0;
+			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> read(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> cs_Object,std::shared_ptr<org.eclipse.uml2.uml.StructuralFeature> feature) = 0;
 			
 			 
-			virtual void write(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object>  cs_Object,std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<Bag<fUML::Semantics::Values::Value> >  values,int position) = 0;
+			virtual void write(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> cs_Object,std::shared_ptr<org.eclipse.uml2.uml.StructuralFeature> feature,std::shared_ptr<Bag<fUML::Semantics::Values::Value> > values,int position) = 0;
 			
 			
 			//*********************************

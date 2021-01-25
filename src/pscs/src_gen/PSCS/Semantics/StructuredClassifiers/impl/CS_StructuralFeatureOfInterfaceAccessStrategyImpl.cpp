@@ -46,10 +46,10 @@
 #include "PSCS/Semantics/StructuredClassifiers/impl/StructuredClassifiersFactoryImpl.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/impl/StructuredClassifiersPackageImpl.hpp"
 
-#include "PSCS/PSCSFactory.hpp"
-#include "PSCS/PSCSPackage.hpp"
 #include "PSCS/Semantics/SemanticsFactory.hpp"
 #include "PSCS/Semantics/SemanticsPackage.hpp"
+#include "PSCS/PSCSFactory.hpp"
+#include "PSCS/PSCSPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -115,13 +115,13 @@ std::string CS_StructuralFeatureOfInterfaceAccessStrategyImpl::getName()
 	//end of body
 }
 
-std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> CS_StructuralFeatureOfInterfaceAccessStrategyImpl::read(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object>  cs_Object,std::shared_ptr<uml::StructuralFeature>  feature)
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> CS_StructuralFeatureOfInterfaceAccessStrategyImpl::read(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> cs_Object,std::shared_ptr<org.eclipse.uml2.uml.StructuralFeature> feature)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void CS_StructuralFeatureOfInterfaceAccessStrategyImpl::write(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object>  cs_Object,std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<Bag<fUML::Semantics::Values::Value> >  values,int position)
+void CS_StructuralFeatureOfInterfaceAccessStrategyImpl::write(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> cs_Object,std::shared_ptr<org.eclipse.uml2.uml.StructuralFeature> feature,std::shared_ptr<Bag<fUML::Semantics::Values::Value> > values,int position)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -230,9 +230,6 @@ void CS_StructuralFeatureOfInterfaceAccessStrategyImpl::saveContent(std::shared_
 	try
 	{
 		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage> package = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

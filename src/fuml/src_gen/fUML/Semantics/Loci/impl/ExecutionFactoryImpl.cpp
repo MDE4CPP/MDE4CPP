@@ -214,8 +214,8 @@ ExecutionFactoryImpl::ExecutionFactoryImpl(const ExecutionFactoryImpl & obj):Exe
 
 	//copy references with no containment (soft copy)
 	
-	std::shared_ptr<Bag<uml::PrimitiveType>> _builtInTypes = obj.getBuiltInTypes();
-	m_builtInTypes.reset(new Bag<uml::PrimitiveType>(*(obj.getBuiltInTypes().get())));
+	std::shared_ptr<Bag<org.eclipse.uml2.uml.PrimitiveType>> _builtInTypes = obj.getBuiltInTypes();
+	m_builtInTypes.reset(new Bag<org.eclipse.uml2.uml.PrimitiveType>(*(obj.getBuiltInTypes().get())));
 
 	m_locus  = obj.getLocus();
 
@@ -250,7 +250,7 @@ std::shared_ptr<ecore::EClass> ExecutionFactoryImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-void ExecutionFactoryImpl::addBuiltInType(std::shared_ptr<uml::PrimitiveType>  type)
+void ExecutionFactoryImpl::addBuiltInType(std::shared_ptr<org.eclipse.uml2.uml.PrimitiveType> type)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -259,7 +259,7 @@ void ExecutionFactoryImpl::addBuiltInType(std::shared_ptr<uml::PrimitiveType>  t
 	//end of body
 }
 
-void ExecutionFactoryImpl::addPrimitiveBehaviorPrototype(std::shared_ptr<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution>  execution)
+void ExecutionFactoryImpl::addPrimitiveBehaviorPrototype(std::shared_ptr<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution> execution)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -268,7 +268,7 @@ void ExecutionFactoryImpl::addPrimitiveBehaviorPrototype(std::shared_ptr<fUML::S
 	//end of body
 }
 
-void ExecutionFactoryImpl::assignStrategy(std::shared_ptr<fUML::Semantics::Loci::SemanticStrategy>  strategy)
+void ExecutionFactoryImpl::assignStrategy(std::shared_ptr<fUML::Semantics::Loci::SemanticStrategy> strategy)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -283,7 +283,7 @@ void ExecutionFactoryImpl::assignStrategy(std::shared_ptr<fUML::Semantics::Loci:
 	//end of body
 }
 
-std::shared_ptr<fUML::Semantics::Values::Evaluation> ExecutionFactoryImpl::createEvaluation(std::shared_ptr<uml::ValueSpecification>  specification)
+std::shared_ptr<fUML::Semantics::Values::Evaluation> ExecutionFactoryImpl::createEvaluation(std::shared_ptr<org.eclipse.uml2.uml.ValueSpecification> specification)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -296,7 +296,7 @@ std::shared_ptr<fUML::Semantics::Values::Evaluation> ExecutionFactoryImpl::creat
 	//end of body
 }
 
-std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> ExecutionFactoryImpl::createExecution(std::shared_ptr<uml::Behavior>  behavior,std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object>  context)
+std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> ExecutionFactoryImpl::createExecution(std::shared_ptr<org.eclipse.uml2.uml.Behavior> behavior,std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> context)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -360,7 +360,7 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> ExecutionFactoryImpl
 	//end of body
 }
 
-std::shared_ptr<uml::PrimitiveType> ExecutionFactoryImpl::getBuiltInType(std::string name)
+std::shared_ptr<org.eclipse.uml2.uml.PrimitiveType> ExecutionFactoryImpl::getBuiltInType(std::string name)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -422,7 +422,7 @@ int ExecutionFactoryImpl::getStrategyIndex(std::string name)
 
 
 
-std::shared_ptr<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution> ExecutionFactoryImpl::instantiateOpaqueBehaviorExecution(std::shared_ptr<uml::Behavior>  behavior)
+std::shared_ptr<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution> ExecutionFactoryImpl::instantiateOpaqueBehaviorExecution(std::shared_ptr<org.eclipse.uml2.uml.Behavior> behavior)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -450,7 +450,7 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution> Execut
 	//end of body
 }
 
-std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> ExecutionFactoryImpl::instantiateVisitor(std::shared_ptr<uml::Element>  element)
+std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> ExecutionFactoryImpl::instantiateVisitor(std::shared_ptr<org.eclipse.uml2.uml.Element> element)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -719,11 +719,11 @@ std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> ExecutionFactoryImpl::in
 /*
 Getter & Setter for reference builtInTypes
 */
-std::shared_ptr<Bag<uml::PrimitiveType>> ExecutionFactoryImpl::getBuiltInTypes() const
+std::shared_ptr<Bag<org.eclipse.uml2.uml.PrimitiveType>> ExecutionFactoryImpl::getBuiltInTypes() const
 {
 	if(m_builtInTypes == nullptr)
 	{
-		m_builtInTypes.reset(new Bag<uml::PrimitiveType>());
+		m_builtInTypes.reset(new Bag<org.eclipse.uml2.uml.PrimitiveType>());
 		
 		
 	}
@@ -821,20 +821,25 @@ Any ExecutionFactoryImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case fUML::Semantics::Loci::LociPackage::EXECUTIONFACTORY_ATTRIBUTE_BUILTINTYPES:
 		{
+			return eAny(getBuiltInTypes()); //473			
+			/*
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::PrimitiveType>::iterator iter = m_builtInTypes->begin();
-			Bag<uml::PrimitiveType>::iterator end = m_builtInTypes->end();
+			Bag<org.eclipse.uml2.uml.PrimitiveType>::iterator iter = m_builtInTypes->begin();
+			Bag<org.eclipse.uml2.uml.PrimitiveType>::iterator end = m_builtInTypes->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
 				iter++;
 			}
 			return eAny(tempList); //473
+			*/
 		}
 		case fUML::Semantics::Loci::LociPackage::EXECUTIONFACTORY_ATTRIBUTE_LOCUS:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getLocus().lock())); //470
+			return eAny(getLocus().lock()); //470
 		case fUML::Semantics::Loci::LociPackage::EXECUTIONFACTORY_ATTRIBUTE_PRIMITIVEBEHAVIORPROTOTYPES:
 		{
+			return eAny(getPrimitiveBehaviorPrototypes()); //472			
+			/*
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution>::iterator iter = m_primitiveBehaviorPrototypes->begin();
 			Bag<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution>::iterator end = m_primitiveBehaviorPrototypes->end();
@@ -844,9 +849,12 @@ Any ExecutionFactoryImpl::eGet(int featureID, bool resolve, bool coreType) const
 				iter++;
 			}
 			return eAny(tempList); //472
+			*/
 		}
 		case fUML::Semantics::Loci::LociPackage::EXECUTIONFACTORY_ATTRIBUTE_STRATEGIES:
 		{
+			return eAny(getStrategies()); //471			
+			/*
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<fUML::Semantics::Loci::SemanticStrategy>::iterator iter = m_strategies->begin();
 			Bag<fUML::Semantics::Loci::SemanticStrategy>::iterator end = m_strategies->end();
@@ -856,6 +864,7 @@ Any ExecutionFactoryImpl::eGet(int featureID, bool resolve, bool coreType) const
 				iter++;
 			}
 			return eAny(tempList); //471
+			*/
 		}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
@@ -883,17 +892,17 @@ bool ExecutionFactoryImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::PrimitiveType>> builtInTypesList(new Bag<uml::PrimitiveType>());
+			std::shared_ptr<Bag<org.eclipse.uml2.uml.PrimitiveType>> builtInTypesList(new Bag<org.eclipse.uml2.uml.PrimitiveType>());
 			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
 			Bag<ecore::EObject>::iterator end = tempObjectList->end();
 			while (iter != end)
 			{
-				builtInTypesList->add(std::dynamic_pointer_cast<uml::PrimitiveType>(*iter));
+				builtInTypesList->add(std::dynamic_pointer_cast<org.eclipse.uml2.uml.PrimitiveType>(*iter));
 				iter++;
 			}
 			
-			Bag<uml::PrimitiveType>::iterator iterBuiltInTypes = m_builtInTypes->begin();
-			Bag<uml::PrimitiveType>::iterator endBuiltInTypes = m_builtInTypes->end();
+			Bag<org.eclipse.uml2.uml.PrimitiveType>::iterator iterBuiltInTypes = m_builtInTypes->begin();
+			Bag<org.eclipse.uml2.uml.PrimitiveType>::iterator endBuiltInTypes = m_builtInTypes->end();
 			while (iterBuiltInTypes != endBuiltInTypes)
 			{
 				if (builtInTypesList->find(*iterBuiltInTypes) == -1)
@@ -1071,10 +1080,10 @@ void ExecutionFactoryImpl::resolveReferences(const int featureID, std::list<std:
 	{
 		case fUML::Semantics::Loci::LociPackage::EXECUTIONFACTORY_ATTRIBUTE_BUILTINTYPES:
 		{
-			std::shared_ptr<Bag<uml::PrimitiveType>> _builtInTypes = getBuiltInTypes();
+			std::shared_ptr<Bag<org.eclipse.uml2.uml.PrimitiveType>> _builtInTypes = getBuiltInTypes();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
-				std::shared_ptr<uml::PrimitiveType> _r = std::dynamic_pointer_cast<uml::PrimitiveType>(ref);
+				std::shared_ptr<org.eclipse.uml2.uml.PrimitiveType> _r = std::dynamic_pointer_cast<org.eclipse.uml2.uml.PrimitiveType>(ref);
 				if (_r != nullptr)
 				{
 					_builtInTypes->push_back(_r);
@@ -1141,25 +1150,10 @@ void ExecutionFactoryImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	{
 		std::shared_ptr<fUML::Semantics::Loci::LociPackage> package = fUML::Semantics::Loci::LociPackage::eInstance();
 
-	
-
-		// Add references
-		std::shared_ptr<Bag<uml::PrimitiveType>> builtInTypes_list = this->getBuiltInTypes();
-		for (std::shared_ptr<uml::PrimitiveType > object : *builtInTypes_list)
-		{ 
-			saveHandler->addReferences("builtInTypes", object);
-		}
-		std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution>> primitiveBehaviorPrototypes_list = this->getPrimitiveBehaviorPrototypes();
-		for (std::shared_ptr<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution > object : *primitiveBehaviorPrototypes_list)
-		{ 
-			saveHandler->addReferences("primitiveBehaviorPrototypes", object);
-		}
-		std::shared_ptr<Bag<fUML::Semantics::Loci::SemanticStrategy>> strategies_list = this->getStrategies();
-		for (std::shared_ptr<fUML::Semantics::Loci::SemanticStrategy > object : *strategies_list)
-		{ 
-			saveHandler->addReferences("strategies", object);
-		}
-
+	// Add references
+		saveHandler->addReferences<org.eclipse.uml2.uml.PrimitiveType>("builtInTypes", this->getBuiltInTypes());	
+		saveHandler->addReferences<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution>("primitiveBehaviorPrototypes", this->getPrimitiveBehaviorPrototypes());	
+		saveHandler->addReferences<fUML::Semantics::Loci::SemanticStrategy>("strategies", this->getStrategies());	
 	}
 	catch (std::exception& e)
 	{

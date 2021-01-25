@@ -56,14 +56,14 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual std::string getBody() const ;
+			virtual std::string  getBody() const ;
 			
 			/*!
 			Specifies a string that is the comment.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual void setBody (std::string _body); 
+			virtual void setBody (std::string  _body); 
 			
 			
 			//*********************************

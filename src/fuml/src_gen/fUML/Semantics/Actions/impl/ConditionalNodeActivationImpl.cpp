@@ -116,8 +116,8 @@ ConditionalNodeActivationImpl::ConditionalNodeActivationImpl(const ConditionalNo
 	std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> _pinActivation = obj.getPinActivation();
 	m_pinActivation.reset(new Union<fUML::Semantics::Actions::PinActivation>(*(obj.getPinActivation().get())));
 
-	std::shared_ptr<Bag<uml::Clause>> _selectedClauses = obj.getSelectedClauses();
-	m_selectedClauses.reset(new Bag<uml::Clause>(*(obj.getSelectedClauses().get())));
+	std::shared_ptr<Bag<org.eclipse.uml2.uml.Clause>> _selectedClauses = obj.getSelectedClauses();
+	m_selectedClauses.reset(new Bag<org.eclipse.uml2.uml.Clause>(*(obj.getSelectedClauses().get())));
 
 
 	//Clone references with containment (deep copy)
@@ -184,19 +184,19 @@ std::shared_ptr<ecore::EClass> ConditionalNodeActivationImpl::eStaticClass() con
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<fUML::Semantics::Actions::ClauseActivation> ConditionalNodeActivationImpl::getClauseActivation(std::shared_ptr<uml::Clause>  clause)
+std::shared_ptr<fUML::Semantics::Actions::ClauseActivation> ConditionalNodeActivationImpl::getClauseActivation(std::shared_ptr<org.eclipse.uml2.uml.Clause> clause)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void ConditionalNodeActivationImpl::runTest(std::shared_ptr<uml::Clause>  clause)
+void ConditionalNodeActivationImpl::runTest(std::shared_ptr<org.eclipse.uml2.uml.Clause> clause)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void ConditionalNodeActivationImpl::selectBody(std::shared_ptr<uml::Clause>  clause)
+void ConditionalNodeActivationImpl::selectBody(std::shared_ptr<org.eclipse.uml2.uml.Clause> clause)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -227,11 +227,11 @@ std::shared_ptr<Bag<fUML::Semantics::Actions::ClauseActivation>> ConditionalNode
 /*
 Getter & Setter for reference selectedClauses
 */
-std::shared_ptr<Bag<uml::Clause>> ConditionalNodeActivationImpl::getSelectedClauses() const
+std::shared_ptr<Bag<org.eclipse.uml2.uml.Clause>> ConditionalNodeActivationImpl::getSelectedClauses() const
 {
 	if(m_selectedClauses == nullptr)
 	{
-		m_selectedClauses.reset(new Bag<uml::Clause>());
+		m_selectedClauses.reset(new Bag<org.eclipse.uml2.uml.Clause>());
 		
 		
 	}
@@ -291,6 +291,8 @@ Any ConditionalNodeActivationImpl::eGet(int featureID, bool resolve, bool coreTy
 	{
 		case fUML::Semantics::Actions::ActionsPackage::CONDITIONALNODEACTIVATION_ATTRIBUTE_CLAUSEACTIVATIONS:
 		{
+			return eAny(getClauseActivations()); //3012			
+			/*
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<fUML::Semantics::Actions::ClauseActivation>::iterator iter = m_clauseActivations->begin();
 			Bag<fUML::Semantics::Actions::ClauseActivation>::iterator end = m_clauseActivations->end();
@@ -300,18 +302,22 @@ Any ConditionalNodeActivationImpl::eGet(int featureID, bool resolve, bool coreTy
 				iter++;
 			}
 			return eAny(tempList); //3012
+			*/
 		}
 		case fUML::Semantics::Actions::ActionsPackage::CONDITIONALNODEACTIVATION_ATTRIBUTE_SELECTEDCLAUSES:
 		{
+			return eAny(getSelectedClauses()); //3013			
+			/*
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Clause>::iterator iter = m_selectedClauses->begin();
-			Bag<uml::Clause>::iterator end = m_selectedClauses->end();
+			Bag<org.eclipse.uml2.uml.Clause>::iterator iter = m_selectedClauses->begin();
+			Bag<org.eclipse.uml2.uml.Clause>::iterator end = m_selectedClauses->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
 				iter++;
 			}
 			return eAny(tempList); //3013
+			*/
 		}
 	}
 	return StructuredActivityNodeActivationImpl::eGet(featureID, resolve, coreType);
@@ -371,17 +377,17 @@ bool ConditionalNodeActivationImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<uml::Clause>> selectedClausesList(new Bag<uml::Clause>());
+			std::shared_ptr<Bag<org.eclipse.uml2.uml.Clause>> selectedClausesList(new Bag<org.eclipse.uml2.uml.Clause>());
 			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
 			Bag<ecore::EObject>::iterator end = tempObjectList->end();
 			while (iter != end)
 			{
-				selectedClausesList->add(std::dynamic_pointer_cast<uml::Clause>(*iter));
+				selectedClausesList->add(std::dynamic_pointer_cast<org.eclipse.uml2.uml.Clause>(*iter));
 				iter++;
 			}
 			
-			Bag<uml::Clause>::iterator iterSelectedClauses = m_selectedClauses->begin();
-			Bag<uml::Clause>::iterator endSelectedClauses = m_selectedClauses->end();
+			Bag<org.eclipse.uml2.uml.Clause>::iterator iterSelectedClauses = m_selectedClauses->begin();
+			Bag<org.eclipse.uml2.uml.Clause>::iterator endSelectedClauses = m_selectedClauses->end();
 			while (iterSelectedClauses != endSelectedClauses)
 			{
 				if (selectedClausesList->find(*iterSelectedClauses) == -1)
@@ -493,10 +499,10 @@ void ConditionalNodeActivationImpl::resolveReferences(const int featureID, std::
 	{
 		case fUML::Semantics::Actions::ActionsPackage::CONDITIONALNODEACTIVATION_ATTRIBUTE_SELECTEDCLAUSES:
 		{
-			std::shared_ptr<Bag<uml::Clause>> _selectedClauses = getSelectedClauses();
+			std::shared_ptr<Bag<org.eclipse.uml2.uml.Clause>> _selectedClauses = getSelectedClauses();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
-				std::shared_ptr<uml::Clause> _r = std::dynamic_pointer_cast<uml::Clause>(ref);
+				std::shared_ptr<org.eclipse.uml2.uml.Clause> _r = std::dynamic_pointer_cast<org.eclipse.uml2.uml.Clause>(ref);
 				if (_r != nullptr)
 				{
 					_selectedClauses->push_back(_r);
@@ -533,15 +539,8 @@ void ConditionalNodeActivationImpl::saveContent(std::shared_ptr<persistence::int
 	{
 		std::shared_ptr<fUML::Semantics::Actions::ActionsPackage> package = fUML::Semantics::Actions::ActionsPackage::eInstance();
 
-	
-
-		// Add references
-		std::shared_ptr<Bag<uml::Clause>> selectedClauses_list = this->getSelectedClauses();
-		for (std::shared_ptr<uml::Clause > object : *selectedClauses_list)
-		{ 
-			saveHandler->addReferences("selectedClauses", object);
-		}
-
+	// Add references
+		saveHandler->addReferences<org.eclipse.uml2.uml.Clause>("selectedClauses", this->getSelectedClauses());	
 
 		//
 		// Add new tags (from references)

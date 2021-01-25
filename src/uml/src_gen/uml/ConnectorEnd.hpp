@@ -38,39 +38,13 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Comment;
-}
-
-namespace uml 
-{
 	class ConnectableElement;
-}
-
-namespace uml 
-{
 	class Connector;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
-	class MultiplicityElement;
-}
-
-namespace uml 
-{
 	class Property;
-}
-
-namespace uml 
-{
 	class ValueSpecification;
 }
 
@@ -79,6 +53,8 @@ namespace uml
 
 // enum includes
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -122,14 +98,14 @@ namespace uml
 			self.compatibleWith(definingEnd)
 			*/
 			 
-			virtual bool multiplicity(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool multiplicity(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			If a ConnectorEnd is attached to a Port of the containing Classifier, partWithPort will be empty.
 			(role.oclIsKindOf(Port) and role.owner = connector.owner) implies partWithPort->isEmpty()
 			*/
 			 
-			virtual bool part_with_port_empty(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool part_with_port_empty(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			If a ConnectorEnd references a partWithPort, then the role must be a Port that is defined or inherited by the type of the partWithPort.
@@ -137,14 +113,14 @@ namespace uml
 			  (role.oclIsKindOf(Port) and partWithPort.type.oclAsType(Namespace).member->includes(role))
 			*/
 			 
-			virtual bool role_and_part_with_port(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool role_and_part_with_port(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			The Property held in self.partWithPort must not be a Port.
 			partWithPort->notEmpty() implies not partWithPort.oclIsKindOf(Port)
 			*/
 			 
-			virtual bool self_part_with_port(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool self_part_with_port(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			
 			//*********************************

@@ -39,104 +39,24 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
-namespace uml 
-{
-	class Action;
-}
-
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Activity;
-}
-
-namespace uml 
-{
 	class ActivityEdge;
-}
-
-namespace uml 
-{
 	class ActivityGroup;
-}
-
-namespace uml 
-{
-	class ActivityNode;
-}
-
-namespace uml 
-{
 	class ActivityPartition;
-}
-
-namespace uml 
-{
 	class Classifier;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
 	class Constraint;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class ExceptionHandler;
-}
-
-namespace uml 
-{
 	class InputPin;
-}
-
-namespace uml 
-{
 	class InterruptibleActivityRegion;
-}
-
-namespace uml 
-{
 	class Namespace;
-}
-
-namespace uml 
-{
 	class OutputPin;
-}
-
-namespace uml 
-{
-	class RedefinableElement;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class StructuredActivityNode;
-}
-
-namespace uml 
-{
 	class Trigger;
 }
 
@@ -146,6 +66,8 @@ namespace uml
 // enum includes
 #include "uml/VisibilityKind.hpp"
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -179,7 +101,7 @@ namespace uml
 			replyToCall.event.oclIsKindOf(CallEvent)
 			*/
 			 
-			virtual bool event_on_reply_to_call_trigger(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool event_on_reply_to_call_trigger(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			The replyValue InputPins must match the output (return, out, and inout) parameters of the operation of the event of the replyToCall Trigger in number, type, ordering, and multiplicity.
@@ -191,7 +113,7 @@ namespace uml
 				replyValue->at(i).compatibleWith(parameter->at(i)))
 			*/
 			 
-			virtual bool pins_match_parameter(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool pins_match_parameter(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			
 			//*********************************

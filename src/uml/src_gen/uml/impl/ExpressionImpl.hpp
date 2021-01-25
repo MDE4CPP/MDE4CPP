@@ -76,14 +76,14 @@ namespace uml
 			<p>From package UML::Values.</p>
 			*/
 			 
-			virtual std::string getSymbol() const ;
+			virtual std::string  getSymbol() const ;
 			
 			/*!
 			The symbol associated with this node in the expression tree.
 			<p>From package UML::Values.</p>
 			*/
 			 
-			virtual void setSymbol (std::string _symbol); 
+			virtual void setSymbol (std::string  _symbol); 
 			
 			
 			//*********************************

@@ -55,14 +55,14 @@ namespace uml
 			signature.parameter->forAll(p | parameterSubstitution->select(b | b.formal = p)->size() <= 1)
 			*/
 			 
-			virtual bool one_parameter_substitution(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool one_parameter_substitution(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			Each parameterSubstitution must refer to a formal TemplateParameter of the target TemplateSignature.
 			parameterSubstitution->forAll(b | signature.parameter->includes(b.formal))
 			*/
 			 
-			virtual bool parameter_substitution_formal(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool parameter_substitution_formal(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			

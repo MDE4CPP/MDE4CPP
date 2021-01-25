@@ -107,7 +107,7 @@ std::shared_ptr<ecore::EClass> RedefinitionBasedDispatchStrategyImpl::eStaticCla
 //*********************************
 // Operations
 //*********************************
-bool RedefinitionBasedDispatchStrategyImpl::operationsMatch(std::shared_ptr<uml::Operation>  ownedOperation,std::shared_ptr<uml::Operation>  baseOperation)
+bool RedefinitionBasedDispatchStrategyImpl::operationsMatch(std::shared_ptr<org.eclipse.uml2.uml.Operation> ownedOperation,std::shared_ptr<org.eclipse.uml2.uml.Operation> baseOperation)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -129,7 +129,7 @@ bool RedefinitionBasedDispatchStrategyImpl::operationsMatch(std::shared_ptr<uml:
 	//end of body
 }
 
-std::shared_ptr<uml::Behavior> RedefinitionBasedDispatchStrategyImpl::retrieveMethod(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object>  object,std::shared_ptr<uml::Operation>  operation)
+std::shared_ptr<org.eclipse.uml2.uml.Behavior> RedefinitionBasedDispatchStrategyImpl::retrieveMethod(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> object,std::shared_ptr<org.eclipse.uml2.uml.Operation> operation)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -275,9 +275,6 @@ void RedefinitionBasedDispatchStrategyImpl::saveContent(std::shared_ptr<persiste
 	try
 	{
 		std::shared_ptr<fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage> package = fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

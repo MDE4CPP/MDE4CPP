@@ -212,7 +212,7 @@ std::shared_ptr<ecore::EClass> DurationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool DurationImpl::no_expr_requires_observation(Any diagnostics,std::map <   Any, Any >  context)
+bool DurationImpl::no_expr_requires_observation(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -338,9 +338,11 @@ Any DurationImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::DURATION_ATTRIBUTE_EXPR:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getExpr())); //7715
+			return eAny(getExpr()); //7715
 		case uml::umlPackage::DURATION_ATTRIBUTE_OBSERVATION:
 		{
+			return eAny(getObservation()); //7716			
+			/*
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Observation>::iterator iter = m_observation->begin();
 			Bag<uml::Observation>::iterator end = m_observation->end();
@@ -350,6 +352,7 @@ Any DurationImpl::eGet(int featureID, bool resolve, bool coreType) const
 				iter++;
 			}
 			return eAny(tempList); //7716
+			*/
 		}
 	}
 	return ValueSpecificationImpl::eGet(featureID, resolve, coreType);
@@ -547,22 +550,15 @@ void DurationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'expr'
 		std::shared_ptr<uml::ValueSpecification > expr = this->getExpr();
 		if (expr != nullptr)
 		{
 			saveHandler->addReference(expr, "expr", expr->eClass() != package->getValueSpecification_Class());
 		}
-	
 
-		// Add references
-		std::shared_ptr<Bag<uml::Observation>> observation_list = this->getObservation();
-		for (std::shared_ptr<uml::Observation > object : *observation_list)
-		{ 
-			saveHandler->addReferences("observation", object);
-		}
-
+	// Add references
+		saveHandler->addReferences<uml::Observation>("observation", this->getObservation());	
 	}
 	catch (std::exception& e)
 	{

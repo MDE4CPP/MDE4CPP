@@ -138,7 +138,7 @@ return newValue;
 	//end of body
 }
 
-void ReferenceImpl::assignFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<Bag<fUML::Semantics::Values::Value> >  values,int position)
+void ReferenceImpl::assignFeatureValue(std::shared_ptr<org.eclipse.uml2.uml.StructuralFeature> feature,std::shared_ptr<Bag<fUML::Semantics::Values::Value> > values,int position)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -154,7 +154,7 @@ void ReferenceImpl::destroy()
 	//end of body
 }
 
-std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> ReferenceImpl::dispatch(std::shared_ptr<uml::Operation>  operation)
+std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> ReferenceImpl::dispatch(std::shared_ptr<org.eclipse.uml2.uml.Operation> operation)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -162,7 +162,7 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> ReferenceImpl::dispa
 	//end of body
 }
 
-bool ReferenceImpl::equals(std::shared_ptr<fUML::Semantics::Values::Value>  otherValue)
+bool ReferenceImpl::equals(std::shared_ptr<fUML::Semantics::Values::Value> otherValue)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -179,7 +179,7 @@ bool ReferenceImpl::equals(std::shared_ptr<fUML::Semantics::Values::Value>  othe
 	//end of body
 }
 
-std::shared_ptr<Bag<uml::Classifier> > ReferenceImpl::getTypes()
+std::shared_ptr<Bag<org.eclipse.uml2.uml.Classifier> > ReferenceImpl::getTypes()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -187,7 +187,7 @@ std::shared_ptr<Bag<uml::Classifier> > ReferenceImpl::getTypes()
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Semantics::Values::Value> > ReferenceImpl::getValues(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue> >  featureValues)
+std::shared_ptr<Bag<fUML::Semantics::Values::Value> > ReferenceImpl::getValues(std::shared_ptr<org.eclipse.uml2.uml.StructuralFeature> feature,std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue> > featureValues)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -203,7 +203,7 @@ std::shared_ptr<fUML::Semantics::Values::Value> ReferenceImpl::new_()
 	//end of body
 }
 
-void ReferenceImpl::removeValue(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<fUML::Semantics::Values::Value>  value)
+void ReferenceImpl::removeValue(std::shared_ptr<org.eclipse.uml2.uml.StructuralFeature> feature,std::shared_ptr<fUML::Semantics::Values::Value> value)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -211,7 +211,7 @@ void ReferenceImpl::removeValue(std::shared_ptr<uml::StructuralFeature>  feature
 	//end of body
 }
 
-std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> ReferenceImpl::retrieveFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature)
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> ReferenceImpl::retrieveFeatureValue(std::shared_ptr<org.eclipse.uml2.uml.StructuralFeature> feature)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -227,7 +227,7 @@ std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue> > Referenc
 	//end of body
 }
 
-void ReferenceImpl::send(std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance>  signalInstance)
+void ReferenceImpl::send(std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> signalInstance)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -235,7 +235,7 @@ void ReferenceImpl::send(std::shared_ptr<fUML::Semantics::SimpleClassifiers::Sig
 	//end of body
 }
 
-void ReferenceImpl::send(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>  eventOccurrence)
+void ReferenceImpl::send(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurrence)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -243,7 +243,7 @@ void ReferenceImpl::send(std::shared_ptr<fUML::Semantics::CommonBehavior::EventO
 	//end of body
 }
 
-void ReferenceImpl::setFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<Bag<fUML::Semantics::Values::Value> >  values,int position)
+void ReferenceImpl::setFeatureValue(std::shared_ptr<org.eclipse.uml2.uml.StructuralFeature> feature,std::shared_ptr<Bag<fUML::Semantics::Values::Value> > values,int position)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -251,7 +251,7 @@ void ReferenceImpl::setFeatureValue(std::shared_ptr<uml::StructuralFeature>  fea
 	//end of body
 }
 
-void ReferenceImpl::startBehavior(std::shared_ptr<uml::Class>  classifier,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> >  inputs)
+void ReferenceImpl::startBehavior(std::shared_ptr<org.eclipse.uml2.uml.Class> classifier,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > inputs)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -314,7 +314,7 @@ Any ReferenceImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::REFERENCE_ATTRIBUTE_REFERENT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getReferent())); //990
+			return eAny(getReferent()); //990
 	}
 	return fUML::Semantics::SimpleClassifiers::StructuredValueImpl::eGet(featureID, resolve, coreType);
 }
@@ -437,11 +437,8 @@ void ReferenceImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	{
 		std::shared_ptr<fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage> package = fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance();
 
-	
-
-		// Add references
-		saveHandler->addReference("referent", this->getReferent());
-
+	// Add references
+		saveHandler->addReference("referent", this->getReferent());		 
 	}
 	catch (std::exception& e)
 	{

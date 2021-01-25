@@ -35,35 +35,19 @@ namespace PSCS
 	class PSCSFactory;
 }
 
-//Forward Declaration for used types
-namespace uml 
-{
-	class Association;
-}
-
-namespace fUML::Semantics::SimpleClassifiers 
-{
-	class FeatureValue;
-}
-
-namespace fUML::Semantics::StructuredClassifiers 
-{
-	class Link;
-}
-
+//Forward Declaration for used types 
 namespace fUML::Semantics::Loci 
 {
 	class Locus;
 }
-
+namespace fUML::Semantics::SimpleClassifiers 
+{
+	class FeatureValue;
+}
 namespace uml 
 {
+	class Association;
 	class StructuralFeature;
-}
-
-namespace fUML::Semantics::Values 
-{
-	class Value;
 }
 
 // base class includes
@@ -71,6 +55,9 @@ namespace fUML::Semantics::Values
 
 // enum includes
 
+
+//Includes from codegen annotation
+#include "fUML/FUMLFactory.hpp"
 
 //*********************************
 namespace PSCS::Semantics::StructuredClassifiers 
@@ -96,10 +83,10 @@ namespace PSCS::Semantics::StructuredClassifiers
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<uml::StructuralFeature> getFeature(std::shared_ptr<fUML::Semantics::Values::Value>  value) = 0;
+			virtual std::shared_ptr<org.eclipse.uml2.uml.StructuralFeature> getFeature(std::shared_ptr<fUML::Semantics::Values::Value> value) = 0;
 			
 			 
-			virtual bool hasValueForAFeature(std::shared_ptr<fUML::Semantics::Values::Value>  value) = 0;
+			virtual bool hasValueForAFeature(std::shared_ptr<fUML::Semantics::Values::Value> value) = 0;
 			
 			
 			//*********************************

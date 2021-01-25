@@ -215,37 +215,37 @@ std::shared_ptr<ecore::EClass> InteractionConstraintImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool InteractionConstraintImpl::dynamic_variables(Any diagnostics,std::map <   Any, Any >  context)
+bool InteractionConstraintImpl::dynamic_variables(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool InteractionConstraintImpl::global_data(Any diagnostics,std::map <   Any, Any >  context)
+bool InteractionConstraintImpl::global_data(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool InteractionConstraintImpl::maxint_greater_equal_minint(Any diagnostics,std::map <   Any, Any >  context)
+bool InteractionConstraintImpl::maxint_greater_equal_minint(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool InteractionConstraintImpl::maxint_positive(Any diagnostics,std::map <   Any, Any >  context)
+bool InteractionConstraintImpl::maxint_positive(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool InteractionConstraintImpl::minint_maxint(Any diagnostics,std::map <   Any, Any >  context)
+bool InteractionConstraintImpl::minint_maxint(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool InteractionConstraintImpl::minint_non_negative(Any diagnostics,std::map <   Any, Any >  context)
+bool InteractionConstraintImpl::minint_non_negative(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -363,9 +363,9 @@ Any InteractionConstraintImpl::eGet(int featureID, bool resolve, bool coreType) 
 	switch(featureID)
 	{
 		case uml::umlPackage::INTERACTIONCONSTRAINT_ATTRIBUTE_MAXINT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getMaxint())); //12015
+			return eAny(getMaxint()); //12015
 		case uml::umlPackage::INTERACTIONCONSTRAINT_ATTRIBUTE_MININT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getMinint())); //12016
+			return eAny(getMinint()); //12016
 	}
 	return ConstraintImpl::eGet(featureID, resolve, coreType);
 }
@@ -515,7 +515,6 @@ void InteractionConstraintImpl::saveContent(std::shared_ptr<persistence::interfa
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'maxint'
 		std::shared_ptr<uml::ValueSpecification > maxint = this->getMaxint();
 		if (maxint != nullptr)
@@ -529,8 +528,6 @@ void InteractionConstraintImpl::saveContent(std::shared_ptr<persistence::interfa
 		{
 			saveHandler->addReference(minint, "minint", minint->eClass() != package->getValueSpecification_Class());
 		}
-	
-
 	}
 	catch (std::exception& e)
 	{

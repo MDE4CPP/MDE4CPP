@@ -77,7 +77,7 @@ namespace uml
 			  e.role.oclIsKindOf(Port) and structuredClassifier.allRoles()->includes(e.partWithPort))
 			*/
 			 
-			virtual bool roles(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool roles(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			The types of the ConnectableElements that the ends of a Connector are attached to must conform to the types of the ends of the Association that types the Connector, if any.
@@ -86,7 +86,7 @@ namespace uml
 			  (type.memberEnd->size() = noOfEnds) and Sequence{1..noOfEnds}->forAll(i | end->at(i).role.type.conformsTo(type.memberEnd->at(i).type))
 			*/
 			 
-			virtual bool types(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool types(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			
@@ -98,7 +98,7 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			 
-			virtual uml::ConnectorKind getKind() const ;
+			virtual uml::ConnectorKind  getKind() const ;
 			
 			
 			

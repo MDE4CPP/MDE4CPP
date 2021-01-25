@@ -107,7 +107,7 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			 
-			virtual bool isContainedInRegion(std::shared_ptr<uml::Region>  r) ;
+			virtual bool isContainedInRegion(std::shared_ptr<uml::Region> r) ;
 			
 			/*!
 			This utility operation returns true if the Vertex is contained in the State s (input argument).
@@ -123,7 +123,7 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			 
-			virtual bool isContainedInState(std::shared_ptr<uml::State>  s) ;
+			virtual bool isContainedInState(std::shared_ptr<uml::State> s) ;
 			
 			
 			

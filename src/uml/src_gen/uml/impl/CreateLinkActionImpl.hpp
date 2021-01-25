@@ -63,7 +63,7 @@ namespace uml
 			not self.association().isAbstract
 			*/
 			 
-			virtual bool association_not_abstract(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool association_not_abstract(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			

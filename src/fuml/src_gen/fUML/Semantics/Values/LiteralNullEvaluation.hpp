@@ -35,22 +35,15 @@ namespace fUML
 	class fUMLFactory;
 }
 
-//Forward Declaration for used types
-namespace fUML::Semantics::Values 
-{
-	class LiteralEvaluation;
-}
-
+//Forward Declaration for used types 
 namespace fUML::Semantics::Loci 
 {
 	class Locus;
 }
-
 namespace fUML::Semantics::Values 
 {
 	class Value;
 }
-
 namespace uml 
 {
 	class ValueSpecification;
@@ -61,6 +54,8 @@ namespace uml
 
 // enum includes
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace fUML::Semantics::Values 

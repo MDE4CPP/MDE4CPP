@@ -232,37 +232,37 @@ std::shared_ptr<ecore::EClass> InteractionUseImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool InteractionUseImpl::all_lifelines(Any diagnostics,std::map <   Any, Any >  context)
+bool InteractionUseImpl::all_lifelines(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool InteractionUseImpl::arguments_are_constants(Any diagnostics,std::map <   Any, Any >  context)
+bool InteractionUseImpl::arguments_are_constants(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool InteractionUseImpl::arguments_correspond_to_parameters(Any diagnostics,std::map <   Any, Any >  context)
+bool InteractionUseImpl::arguments_correspond_to_parameters(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool InteractionUseImpl::gates_match(Any diagnostics,std::map <   Any, Any >  context)
+bool InteractionUseImpl::gates_match(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool InteractionUseImpl::returnValueRecipient_coverage(Any diagnostics,std::map <   Any, Any >  context)
+bool InteractionUseImpl::returnValueRecipient_coverage(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool InteractionUseImpl::returnValue_type_recipient_correspondence(Any diagnostics,std::map <   Any, Any >  context)
+bool InteractionUseImpl::returnValue_type_recipient_correspondence(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -448,6 +448,8 @@ Any InteractionUseImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::INTERACTIONUSE_ATTRIBUTE_ACTUALGATE:
 		{
+			return eAny(getActualGate()); //12413			
+			/*
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Gate>::iterator iter = m_actualGate->begin();
 			Bag<uml::Gate>::iterator end = m_actualGate->end();
@@ -457,9 +459,12 @@ Any InteractionUseImpl::eGet(int featureID, bool resolve, bool coreType) const
 				iter++;
 			}
 			return eAny(tempList); //12413
+			*/
 		}
 		case uml::umlPackage::INTERACTIONUSE_ATTRIBUTE_ARGUMENT:
 		{
+			return eAny(getArgument()); //12414			
+			/*
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::ValueSpecification>::iterator iter = m_argument->begin();
 			Bag<uml::ValueSpecification>::iterator end = m_argument->end();
@@ -469,13 +474,14 @@ Any InteractionUseImpl::eGet(int featureID, bool resolve, bool coreType) const
 				iter++;
 			}
 			return eAny(tempList); //12414
+			*/
 		}
 		case uml::umlPackage::INTERACTIONUSE_ATTRIBUTE_REFERSTO:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getRefersTo())); //12415
+			return eAny(getRefersTo()); //12415
 		case uml::umlPackage::INTERACTIONUSE_ATTRIBUTE_RETURNVALUE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getReturnValue())); //12416
+			return eAny(getReturnValue()); //12416
 		case uml::umlPackage::INTERACTIONUSE_ATTRIBUTE_RETURNVALUERECIPIENT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getReturnValueRecipient())); //12417
+			return eAny(getReturnValueRecipient()); //12417
 	}
 	return InteractionFragmentImpl::eGet(featureID, resolve, coreType);
 }
@@ -777,7 +783,6 @@ void InteractionUseImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'actualGate'
 		for (std::shared_ptr<uml::Gate> actualGate : *this->getActualGate()) 
 		{
@@ -796,12 +801,10 @@ void InteractionUseImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 		{
 			saveHandler->addReference(returnValue, "returnValue", returnValue->eClass() != package->getValueSpecification_Class());
 		}
-	
 
-		// Add references
-		saveHandler->addReference("refersTo", this->getRefersTo());
-		saveHandler->addReference("returnValueRecipient", this->getReturnValueRecipient());
-
+	// Add references
+		saveHandler->addReference("refersTo", this->getRefersTo());		 
+		saveHandler->addReference("returnValueRecipient", this->getReturnValueRecipient());		 
 	}
 	catch (std::exception& e)
 	{

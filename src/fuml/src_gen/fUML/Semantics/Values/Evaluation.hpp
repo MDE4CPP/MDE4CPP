@@ -35,22 +35,15 @@ namespace fUML
 	class fUMLFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace fUML::Semantics::Loci 
 {
 	class Locus;
 }
-
-namespace fUML::Semantics::Loci 
-{
-	class SemanticVisitor;
-}
-
 namespace fUML::Semantics::Values 
 {
 	class Value;
 }
-
 namespace uml 
 {
 	class ValueSpecification;
@@ -61,6 +54,8 @@ namespace uml
 
 // enum includes
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace fUML::Semantics::Values 
@@ -103,10 +98,10 @@ namespace fUML::Semantics::Values
 			virtual void setLocus(std::shared_ptr<fUML::Semantics::Loci::Locus> _locus) = 0;
 			
 			
-			virtual std::shared_ptr<uml::ValueSpecification > getSpecification() const = 0;
+			virtual std::shared_ptr<org.eclipse.uml2.uml.ValueSpecification > getSpecification() const = 0;
 			
 			
-			virtual void setSpecification(std::shared_ptr<uml::ValueSpecification> _specification) = 0;
+			virtual void setSpecification(std::shared_ptr<org.eclipse.uml2.uml.ValueSpecification> _specification) = 0;
 			
 			
 
@@ -121,7 +116,7 @@ namespace fUML::Semantics::Values
 			//*********************************
 			
 			std::shared_ptr<fUML::Semantics::Loci::Locus > m_locus;
-			std::shared_ptr<uml::ValueSpecification > m_specification;
+			std::shared_ptr<org.eclipse.uml2.uml.ValueSpecification > m_specification;
 
 		public:
 			//*********************************

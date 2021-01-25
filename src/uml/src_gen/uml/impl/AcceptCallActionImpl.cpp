@@ -285,19 +285,19 @@ std::shared_ptr<ecore::EClass> AcceptCallActionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool AcceptCallActionImpl::result_pins(Any diagnostics,std::map <   Any, Any >  context)
+bool AcceptCallActionImpl::result_pins(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool AcceptCallActionImpl::trigger_call_event(Any diagnostics,std::map <   Any, Any >  context)
+bool AcceptCallActionImpl::trigger_call_event(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool AcceptCallActionImpl::unmarshall(Any diagnostics,std::map <   Any, Any >  context)
+bool AcceptCallActionImpl::unmarshall(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -439,7 +439,7 @@ Any AcceptCallActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::ACCEPTCALLACTION_ATTRIBUTE_RETURNINFORMATION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getReturnInformation())); //230
+			return eAny(getReturnInformation()); //230
 	}
 	return AcceptEventActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -569,15 +569,12 @@ void AcceptCallActionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'returnInformation'
 		std::shared_ptr<uml::OutputPin > returnInformation = this->getReturnInformation();
 		if (returnInformation != nullptr)
 		{
 			saveHandler->addReference(returnInformation, "returnInformation", returnInformation->eClass() != package->getOutputPin_Class());
 		}
-	
-
 	}
 	catch (std::exception& e)
 	{

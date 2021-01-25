@@ -40,129 +40,25 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
-namespace uml 
-{
-	class Classifier;
-}
-
+//Forward Declaration for used types 
 namespace uml 
 {
 	class CollaborationUse;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
 	class Constraint;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class ElementImport;
-}
-
-namespace uml 
-{
 	class Feature;
-}
-
-namespace uml 
-{
 	class Generalization;
-}
-
-namespace uml 
-{
 	class GeneralizationSet;
-}
-
-namespace uml 
-{
-	class NamedElement;
-}
-
-namespace uml 
-{
-	class Namespace;
-}
-
-namespace uml 
-{
 	class Package;
-}
-
-namespace uml 
-{
 	class PackageImport;
-}
-
-namespace uml 
-{
-	class PackageableElement;
-}
-
-namespace uml 
-{
 	class Property;
-}
-
-namespace uml 
-{
-	class RedefinableElement;
-}
-
-namespace uml 
-{
-	class Relationship;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class Substitution;
-}
-
-namespace uml 
-{
 	class TemplateBinding;
-}
-
-namespace uml 
-{
 	class TemplateParameter;
-}
-
-namespace uml 
-{
 	class TemplateSignature;
-}
-
-namespace uml 
-{
-	class Type;
-}
-
-namespace uml 
-{
 	class UseCase;
 }
 
@@ -174,6 +70,8 @@ namespace uml
 // enum includes
 #include "uml/VisibilityKind.hpp"
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -207,20 +105,20 @@ namespace uml
 			memberEnd->size() > 2 implies ownedEnd->includesAll(memberEnd)
 			*/
 			 
-			virtual bool association_ends(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool association_ends(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			Only binary Associations can be aggregations.
 			memberEnd->exists(aggregation <> AggregationKind::none) implies (memberEnd->size() = 2 and memberEnd->exists(aggregation = AggregationKind::none))
 			*/
 			 
-			virtual bool binary_associations(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool binary_associations(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			memberEnd->forAll(type->notEmpty())
 			*/
 			 
-			virtual bool ends_must_be_typed(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool ends_must_be_typed(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			endType is derived from the types of the member ends.
@@ -241,7 +139,7 @@ namespace uml
 			parents()->select(oclIsKindOf(Association)).oclAsType(Association)->forAll(p | p.memberEnd->size() = self.memberEnd->size())
 			*/
 			 
-			virtual bool specialized_end_number(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool specialized_end_number(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			When an Association specializes another Association, every end of the specific Association corresponds to an end of the general Association, and the specific end reaches the same type or a subtype of the corresponding general end.
@@ -250,7 +148,7 @@ namespace uml
 					forAll(ga | self.memberEnd->at(i).type.conformsTo(ga.memberEnd->at(i).type)))
 			*/
 			 
-			virtual bool specialized_end_types(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool specialized_end_types(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			
 			//*********************************
@@ -261,14 +159,14 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			 
-			virtual bool getIsDerived() const = 0;
+			virtual bool  getIsDerived() const = 0;
 			
 			/*!
 			Specifies whether the Association is derived from other model elements such as other Associations.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			 
-			virtual void setIsDerived (bool _isDerived)= 0; 
+			virtual void setIsDerived (bool  _isDerived)= 0; 
 			
 			//*********************************
 			// Reference
@@ -316,7 +214,7 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			 
-			bool m_isDerived = false;
+			bool  m_isDerived = false;
 			
 			
 			//*********************************

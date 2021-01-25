@@ -231,12 +231,12 @@ std::shared_ptr<ecore::EClass> ParameterImpl::eStaticClass() const
 /*
 Getter & Setter for attribute default
 */
-std::string ParameterImpl::getDefault() const 
+std::string  ParameterImpl::getDefault() const 
 {
 	return m_default;
 }
 
-void ParameterImpl::setDefault(std::string _default)
+void ParameterImpl::setDefault(std::string  _default)
 {
 	m_default = _default;
 } 
@@ -246,12 +246,12 @@ void ParameterImpl::setDefault(std::string _default)
 /*
 Getter & Setter for attribute direction
 */
-uml::ParameterDirectionKind ParameterImpl::getDirection() const 
+uml::ParameterDirectionKind  ParameterImpl::getDirection() const 
 {
 	return m_direction;
 }
 
-void ParameterImpl::setDirection(uml::ParameterDirectionKind _direction)
+void ParameterImpl::setDirection(uml::ParameterDirectionKind  _direction)
 {
 	m_direction = _direction;
 } 
@@ -261,12 +261,12 @@ void ParameterImpl::setDirection(uml::ParameterDirectionKind _direction)
 /*
 Getter & Setter for attribute effect
 */
-uml::ParameterEffectKind ParameterImpl::getEffect() const 
+uml::ParameterEffectKind  ParameterImpl::getEffect() const 
 {
 	return m_effect;
 }
 
-void ParameterImpl::setEffect(uml::ParameterEffectKind _effect)
+void ParameterImpl::setEffect(uml::ParameterEffectKind  _effect)
 {
 	m_effect = _effect;
 } 
@@ -276,12 +276,12 @@ void ParameterImpl::setEffect(uml::ParameterEffectKind _effect)
 /*
 Getter & Setter for attribute isException
 */
-bool ParameterImpl::getIsException() const 
+bool  ParameterImpl::getIsException() const 
 {
 	return m_isException;
 }
 
-void ParameterImpl::setIsException(bool _isException)
+void ParameterImpl::setIsException(bool  _isException)
 {
 	m_isException = _isException;
 } 
@@ -291,12 +291,12 @@ void ParameterImpl::setIsException(bool _isException)
 /*
 Getter & Setter for attribute isStream
 */
-bool ParameterImpl::getIsStream() const 
+bool  ParameterImpl::getIsStream() const 
 {
 	return m_isStream;
 }
 
-void ParameterImpl::setIsStream(bool _isStream)
+void ParameterImpl::setIsStream(bool  _isStream)
 {
 	m_isStream = _isStream;
 } 
@@ -306,13 +306,13 @@ void ParameterImpl::setIsStream(bool _isStream)
 //*********************************
 // Operations
 //*********************************
-bool ParameterImpl::connector_end(Any diagnostics,std::map <   Any, Any >  context)
+bool ParameterImpl::connector_end(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ParameterImpl::in_and_out(Any diagnostics,std::map <   Any, Any >  context)
+bool ParameterImpl::in_and_out(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -324,19 +324,19 @@ bool ParameterImpl::isSetDefault()
 	throw "UnsupportedOperationException";
 }
 
-bool ParameterImpl::not_exception(Any diagnostics,std::map <   Any, Any >  context)
+bool ParameterImpl::not_exception(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ParameterImpl::object_effect(Any diagnostics,std::map <   Any, Any >  context)
+bool ParameterImpl::object_effect(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ParameterImpl::reentrant_behaviors(Any diagnostics,std::map <   Any, Any >  context)
+bool ParameterImpl::reentrant_behaviors(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -378,7 +378,7 @@ void ParameterImpl::setUnlimitedNaturalDefaultValue(int value)
 	throw "UnsupportedOperationException";
 }
 
-bool ParameterImpl::stream_and_exception(Any diagnostics,std::map <   Any, Any >  context)
+bool ParameterImpl::stream_and_exception(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -535,11 +535,11 @@ Any ParameterImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::PARAMETER_ATTRIBUTE_BEHAVIOR:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getBehavior().lock())); //17427
+			return eAny(getBehavior().lock()); //17427
 		case uml::umlPackage::PARAMETER_ATTRIBUTE_DEFAULT:
 			return eAny(getDefault()); //17419
 		case uml::umlPackage::PARAMETER_ATTRIBUTE_DEFAULTVALUE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDefaultValue())); //17420
+			return eAny(getDefaultValue()); //17420
 		case uml::umlPackage::PARAMETER_ATTRIBUTE_DIRECTION:
 			return eAny(getDirection()); //17421
 		case uml::umlPackage::PARAMETER_ATTRIBUTE_EFFECT:
@@ -549,18 +549,10 @@ Any ParameterImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::PARAMETER_ATTRIBUTE_ISSTREAM:
 			return eAny(getIsStream()); //17424
 		case uml::umlPackage::PARAMETER_ATTRIBUTE_OPERATION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOperation().lock())); //17425
+			return eAny(getOperation().lock()); //17425
 		case uml::umlPackage::PARAMETER_ATTRIBUTE_PARAMETERSET:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ParameterSet>::iterator iter = m_parameterSet->begin();
-			Bag<uml::ParameterSet>::iterator end = m_parameterSet->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //17426
+			return eAny(getParameterSet()); //17426			
 		}
 	}
 	Any result;
@@ -735,7 +727,7 @@ void ParameterImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoa
 		iter = attr_list.find("direction");
 		if ( iter != attr_list.end() )
 		{
-			uml::ParameterDirectionKind value = ParameterDirectionKind::IN;
+			uml::ParameterDirectionKind  value = ParameterDirectionKind::IN;
 			std::string literal = iter->second;
 			if (literal == "in")
 			{
@@ -759,7 +751,7 @@ void ParameterImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoa
 		iter = attr_list.find("effect");
 		if ( iter != attr_list.end() )
 		{
-			uml::ParameterEffectKind value = ParameterEffectKind::CREATE;
+			uml::ParameterEffectKind  value = ParameterEffectKind::CREATE;
 			std::string literal = iter->second;
 			if (literal == "create")
 			{
@@ -917,18 +909,16 @@ void ParameterImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'defaultValue'
 		std::shared_ptr<uml::ValueSpecification > defaultValue = this->getDefaultValue();
 		if (defaultValue != nullptr)
 		{
 			saveHandler->addReference(defaultValue, "defaultValue", defaultValue->eClass() != package->getValueSpecification_Class());
 		}
-	
 		// Add attributes
 		if ( this->eIsSet(package->getParameter_Attribute_direction()) )
 		{
-			uml::ParameterDirectionKind value = this->getDirection();
+			uml::ParameterDirectionKind  value = this->getDirection();
 			std::string literal = "";
 			if (value == ParameterDirectionKind::IN)
 			{
@@ -951,7 +941,7 @@ void ParameterImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 
 		if ( this->eIsSet(package->getParameter_Attribute_effect()) )
 		{
-			uml::ParameterEffectKind value = this->getEffect();
+			uml::ParameterEffectKind  value = this->getEffect();
 			std::string literal = "";
 			if (value == ParameterEffectKind::CREATE)
 			{
@@ -982,13 +972,8 @@ void ParameterImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 			saveHandler->addAttribute("isStream", this->getIsStream());
 		}
 
-		// Add references
-		std::shared_ptr<Bag<uml::ParameterSet>> parameterSet_list = this->getParameterSet();
-		for (std::shared_ptr<uml::ParameterSet > object : *parameterSet_list)
-		{ 
-			saveHandler->addReferences("parameterSet", object);
-		}
-
+	// Add references
+		saveHandler->addReferences<uml::ParameterSet>("parameterSet", this->getParameterSet());	
 	}
 	catch (std::exception& e)
 	{

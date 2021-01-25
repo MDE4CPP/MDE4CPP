@@ -35,60 +35,29 @@ namespace PSCS
 	class PSCSFactory;
 }
 
-//Forward Declaration for used types
-namespace uml 
-{
-	class Behavior;
-}
-
-namespace PSCS::Semantics::StructuredClassifiers 
-{
-	class CS_InteractionPoint;
-}
-
-namespace fUML::Semantics::CommonBehavior 
-{
-	class CallEventExecution;
-}
-
-namespace uml 
-{
-	class Classifier;
-}
-
+//Forward Declaration for used types 
 namespace fUML::Semantics::CommonBehavior 
 {
 	class EventOccurrence;
+	class ObjectActivation;
+	class ParameterValue;
 }
-
-namespace fUML::Semantics::SimpleClassifiers 
-{
-	class FeatureValue;
-}
-
 namespace fUML::Semantics::Loci 
 {
 	class Locus;
 }
-
-namespace fUML::Semantics::StructuredClassifiers 
+namespace fUML::Semantics::SimpleClassifiers 
 {
-	class Object;
+	class FeatureValue;
 }
-
-namespace fUML::Semantics::CommonBehavior 
+namespace PSCS::Semantics::StructuredClassifiers 
 {
-	class ObjectActivation;
+	class CS_InteractionPoint;
 }
-
-namespace fUML::Semantics::CommonBehavior 
+namespace uml 
 {
-	class ParameterValue;
-}
-
-namespace fUML::Semantics::Values 
-{
-	class Value;
+	class Behavior;
+	class Classifier;
 }
 
 // base class includes
@@ -96,6 +65,10 @@ namespace fUML::Semantics::Values
 
 // enum includes
 
+
+//Includes from codegen annotation
+#include "PSCS/Semantics/CommonBehavior/CS_EventOccurrence.hpp"
+#include "fUML/FUMLFactory.hpp"
 
 //*********************************
 namespace PSCS::Semantics::CommonBehavior 

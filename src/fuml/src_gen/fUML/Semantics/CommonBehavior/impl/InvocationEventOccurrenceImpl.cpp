@@ -121,7 +121,7 @@ return parameterValueList;
 	//end of body
 }
 
-bool InvocationEventOccurrenceImpl::match(std::shared_ptr<uml::Trigger>  trigger)
+bool InvocationEventOccurrenceImpl::match(std::shared_ptr<org.eclipse.uml2.uml.Trigger> trigger)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -178,7 +178,7 @@ Any InvocationEventOccurrenceImpl::eGet(int featureID, bool resolve, bool coreTy
 	switch(featureID)
 	{
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::INVOCATIONEVENTOCCURRENCE_ATTRIBUTE_EXECUTION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getExecution())); //661
+			return eAny(getExecution()); //661
 	}
 	return EventOccurrenceImpl::eGet(featureID, resolve, coreType);
 }
@@ -295,11 +295,8 @@ void InvocationEventOccurrenceImpl::saveContent(std::shared_ptr<persistence::int
 	{
 		std::shared_ptr<fUML::Semantics::CommonBehavior::CommonBehaviorPackage> package = fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance();
 
-	
-
-		// Add references
-		saveHandler->addReference("execution", this->getExecution());
-
+	// Add references
+		saveHandler->addReference("execution", this->getExecution());		 
 	}
 	catch (std::exception& e)
 	{

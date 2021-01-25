@@ -61,18 +61,18 @@ namespace fUML::Semantics::Actions
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<uml::ReadStructuralFeatureAction > getReadStructuralFeatureAction() const ;
+			virtual std::shared_ptr<org.eclipse.uml2.uml.ReadStructuralFeatureAction > getReadStructuralFeatureAction() const ;
 			
 			
-			virtual void setReadStructuralFeatureAction(std::shared_ptr<uml::ReadStructuralFeatureAction> _readStructuralFeatureAction) ;
+			virtual void setReadStructuralFeatureAction(std::shared_ptr<org.eclipse.uml2.uml.ReadStructuralFeatureAction> _readStructuralFeatureAction) ;
 			
 			/*Additional Setter for 'ActionActivation::action' redefined by reference 'readStructuralFeatureAction'*/
 			
-			virtual void setAction(std::shared_ptr<uml::Action> _action) ;
+			virtual void setAction(std::shared_ptr<org.eclipse.uml2.uml.Action> _action) ;
 			
 			/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'readStructuralFeatureAction'*/
 			
-			virtual void setNode(std::shared_ptr<uml::ActivityNode> _node) ;
+			virtual void setNode(std::shared_ptr<org.eclipse.uml2.uml.ActivityNode> _node) ;
 			
 							
 			

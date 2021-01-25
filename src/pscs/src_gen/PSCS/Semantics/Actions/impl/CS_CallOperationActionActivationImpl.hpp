@@ -48,7 +48,7 @@ namespace PSCS::Semantics::Actions
 			// Operations
 			//*********************************
 			 
-			virtual bool _isCreate(std::shared_ptr<uml::Operation>  operation) ;
+			virtual bool _isCreate(std::shared_ptr<org.eclipse.uml2.uml.Operation> operation) ;
 			
 			 
 			virtual void doAction() ;
@@ -57,13 +57,13 @@ namespace PSCS::Semantics::Actions
 			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> getCallExecution() ;
 			
 			 
-			virtual bool isCreate(std::shared_ptr<uml::Operation>  operation) ;
+			virtual bool isCreate(std::shared_ptr<org.eclipse.uml2.uml.Operation> operation) ;
 			
 			 
-			virtual bool isOperationProvided(std::shared_ptr<uml::Port>  port,std::shared_ptr<uml::Operation>  operation) ;
+			virtual bool isOperationProvided(std::shared_ptr<org.eclipse.uml2.uml.Port> port,std::shared_ptr<org.eclipse.uml2.uml.Operation> operation) ;
 			
 			 
-			virtual bool isOperationRequired(std::shared_ptr<uml::Port>  port,std::shared_ptr<uml::Operation>  operation) ;
+			virtual bool isOperationRequired(std::shared_ptr<org.eclipse.uml2.uml.Port> port,std::shared_ptr<org.eclipse.uml2.uml.Operation> operation) ;
 			
 			
 			

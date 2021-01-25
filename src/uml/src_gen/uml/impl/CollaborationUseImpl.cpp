@@ -163,19 +163,19 @@ std::shared_ptr<ecore::EClass> CollaborationUseImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool CollaborationUseImpl::client_elements(Any diagnostics,std::map <   Any, Any >  context)
+bool CollaborationUseImpl::client_elements(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool CollaborationUseImpl::connectors(Any diagnostics,std::map <   Any, Any >  context)
+bool CollaborationUseImpl::connectors(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool CollaborationUseImpl::every_role(Any diagnostics,std::map <   Any, Any >  context)
+bool CollaborationUseImpl::every_role(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -286,18 +286,10 @@ Any CollaborationUseImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::COLLABORATIONUSE_ATTRIBUTE_ROLEBINDING:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Dependency>::iterator iter = m_roleBinding->begin();
-			Bag<uml::Dependency>::iterator end = m_roleBinding->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //439
+			return eAny(getRoleBinding()); //439			
 		}
 		case uml::umlPackage::COLLABORATIONUSE_ATTRIBUTE_TYPE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getType())); //4310
+			return eAny(getType()); //4310
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -484,17 +476,14 @@ void CollaborationUseImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'roleBinding'
 		for (std::shared_ptr<uml::Dependency> roleBinding : *this->getRoleBinding()) 
 		{
 			saveHandler->addReference(roleBinding, "roleBinding", roleBinding->eClass() != package->getDependency_Class());
 		}
-	
 
-		// Add references
-		saveHandler->addReference("type", this->getType());
-
+	// Add references
+		saveHandler->addReference("type", this->getType());		 
 	}
 	catch (std::exception& e)
 	{

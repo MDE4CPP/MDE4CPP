@@ -368,13 +368,13 @@ std::shared_ptr<ecore::EClass> ActorImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ActorImpl::associations(Any diagnostics,std::map <   Any, Any >  context)
+bool ActorImpl::associations(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ActorImpl::must_have_name(Any diagnostics,std::map <   Any, Any >  context)
+bool ActorImpl::must_have_name(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -624,9 +624,6 @@ void ActorImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

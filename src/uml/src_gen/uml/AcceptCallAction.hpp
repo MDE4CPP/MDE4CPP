@@ -39,104 +39,24 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
-namespace uml 
-{
-	class AcceptEventAction;
-}
-
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Activity;
-}
-
-namespace uml 
-{
 	class ActivityEdge;
-}
-
-namespace uml 
-{
 	class ActivityGroup;
-}
-
-namespace uml 
-{
-	class ActivityNode;
-}
-
-namespace uml 
-{
 	class ActivityPartition;
-}
-
-namespace uml 
-{
 	class Classifier;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
 	class Constraint;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class ExceptionHandler;
-}
-
-namespace uml 
-{
 	class InputPin;
-}
-
-namespace uml 
-{
 	class InterruptibleActivityRegion;
-}
-
-namespace uml 
-{
 	class Namespace;
-}
-
-namespace uml 
-{
 	class OutputPin;
-}
-
-namespace uml 
-{
-	class RedefinableElement;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class StructuredActivityNode;
-}
-
-namespace uml 
-{
 	class Trigger;
 }
 
@@ -146,6 +66,8 @@ namespace uml
 // enum includes
 #include "uml/VisibilityKind.hpp"
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -184,7 +106,7 @@ namespace uml
 				parameter->at(i).compatibleWith(result->at(i)))
 			*/
 			 
-			virtual bool result_pins(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool result_pins(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			The action must have exactly one trigger, which must be for a CallEvent.
@@ -192,14 +114,14 @@ namespace uml
 			trigger->asSequence()->first().event.oclIsKindOf(CallEvent)
 			*/
 			 
-			virtual bool trigger_call_event(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool trigger_call_event(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			isUnmrashall must be true for an AcceptCallAction.
 			isUnmarshall = true
 			*/
 			 
-			virtual bool unmarshall(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool unmarshall(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			
 			//*********************************

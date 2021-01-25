@@ -36,30 +36,15 @@ namespace fUML
 	class fUMLFactory;
 }
 
-//Forward Declaration for used types
-namespace uml 
-{
-	class Classifier;
-}
-
+//Forward Declaration for used types 
 namespace fUML::Semantics::SimpleClassifiers 
 {
 	class FeatureValue;
 }
-
 namespace uml 
 {
+	class Classifier;
 	class StructuralFeature;
-}
-
-namespace fUML::Semantics::SimpleClassifiers 
-{
-	class StructuredValue;
-}
-
-namespace fUML::Semantics::Values 
-{
-	class Value;
 }
 
 // base class includes
@@ -67,6 +52,14 @@ namespace fUML::Semantics::Values
 
 // enum includes
 
+
+//Includes from codegen annotation
+#include <algorithm>
+#include "uml/Classifier.hpp"
+#include <fUML/FUMLFactory.hpp>
+#include <cstdio>
+
+#include "uml/StructuralFeature.hpp"
 
 //*********************************
 namespace fUML::Semantics::SimpleClassifiers 
@@ -95,16 +88,16 @@ namespace fUML::Semantics::SimpleClassifiers
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() = 0;
 			
 			 
-			virtual void assignFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<Bag<fUML::Semantics::Values::Value> >  values,int position) = 0;
+			virtual void assignFeatureValue(std::shared_ptr<org.eclipse.uml2.uml.StructuralFeature> feature,std::shared_ptr<Bag<fUML::Semantics::Values::Value> > values,int position) = 0;
 			
 			 
-			virtual bool equals(std::shared_ptr<fUML::Semantics::Values::Value>  otherValue) = 0;
+			virtual bool equals(std::shared_ptr<fUML::Semantics::Values::Value> otherValue) = 0;
 			
 			 
-			virtual void removeFeatureValues(std::shared_ptr<uml::Classifier>  classifier) = 0;
+			virtual void removeFeatureValues(std::shared_ptr<org.eclipse.uml2.uml.Classifier> classifier) = 0;
 			
 			 
-			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> retrieveFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature) = 0;
+			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> retrieveFeatureValue(std::shared_ptr<org.eclipse.uml2.uml.StructuralFeature> feature) = 0;
 			
 			 
 			virtual std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue> > retrieveFeatureValues() = 0;

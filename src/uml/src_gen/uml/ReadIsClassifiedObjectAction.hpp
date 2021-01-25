@@ -39,99 +39,23 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
-namespace uml 
-{
-	class Action;
-}
-
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Activity;
-}
-
-namespace uml 
-{
 	class ActivityEdge;
-}
-
-namespace uml 
-{
 	class ActivityGroup;
-}
-
-namespace uml 
-{
-	class ActivityNode;
-}
-
-namespace uml 
-{
 	class ActivityPartition;
-}
-
-namespace uml 
-{
 	class Classifier;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
 	class Constraint;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class ExceptionHandler;
-}
-
-namespace uml 
-{
 	class InputPin;
-}
-
-namespace uml 
-{
 	class InterruptibleActivityRegion;
-}
-
-namespace uml 
-{
 	class Namespace;
-}
-
-namespace uml 
-{
 	class OutputPin;
-}
-
-namespace uml 
-{
-	class RedefinableElement;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class StructuredActivityNode;
 }
 
@@ -141,6 +65,8 @@ namespace uml
 // enum includes
 #include "uml/VisibilityKind.hpp"
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -174,28 +100,28 @@ namespace uml
 			result.type = Boolean
 			*/
 			 
-			virtual bool boolean_result(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool boolean_result(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			The multiplicity of the object InputPin is 1..1.
 			object.is(1,1)
 			*/
 			 
-			virtual bool multiplicity_of_input(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool multiplicity_of_input(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			The multiplicity of the result OutputPin is 1..1.
 			result.is(1,1)
 			*/
 			 
-			virtual bool multiplicity_of_output(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool multiplicity_of_output(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			The object InputPin has no type.
 			object.type = null
 			*/
 			 
-			virtual bool no_type(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool no_type(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			
 			//*********************************
@@ -206,14 +132,14 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual bool getIsDirect() const = 0;
+			virtual bool  getIsDirect() const = 0;
 			
 			/*!
 			Indicates whether the input object must be directly classified by the given Classifier or whether it may also be an instance of a specialization of the given Classifier.
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual void setIsDirect (bool _isDirect)= 0; 
+			virtual void setIsDirect (bool  _isDirect)= 0; 
 			
 			//*********************************
 			// Reference
@@ -271,7 +197,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			bool m_isDirect = false;
+			bool  m_isDirect = false;
 			
 			
 			//*********************************

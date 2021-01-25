@@ -36,30 +36,16 @@ namespace fUML
 	class fUMLFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace fUML::Semantics::Activities 
 {
 	class ActivityEdgeInstance;
+	class ActivityNodeActivationGroup;
+	class Token;
 }
-
 namespace uml 
 {
 	class ActivityNode;
-}
-
-namespace fUML::Semantics::Activities 
-{
-	class ActivityNodeActivationGroup;
-}
-
-namespace fUML::Semantics::Activities 
-{
-	class ControlNodeActivation;
-}
-
-namespace fUML::Semantics::Activities 
-{
-	class Token;
 }
 
 // base class includes
@@ -67,6 +53,10 @@ namespace fUML::Semantics::Activities
 
 // enum includes
 
+
+//Includes from codegen annotation
+#include "fUML/Semantics/Activities/ControlToken.hpp"
+#include "uml/ActivityNode.hpp"
 
 //*********************************
 namespace fUML::Semantics::Activities 
@@ -92,7 +82,7 @@ namespace fUML::Semantics::Activities
 			// Operations
 			//*********************************
 			 
-			virtual void fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token> >  incomingTokens) = 0;
+			virtual void fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > incomingTokens) = 0;
 			
 			 
 			virtual bool isReady() = 0;

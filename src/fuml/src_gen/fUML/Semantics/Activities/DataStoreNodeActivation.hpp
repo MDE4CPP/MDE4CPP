@@ -35,30 +35,16 @@ namespace fUML
 	class fUMLFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace fUML::Semantics::Activities 
 {
 	class ActivityEdgeInstance;
+	class ActivityNodeActivationGroup;
+	class Token;
 }
-
 namespace uml 
 {
 	class ActivityNode;
-}
-
-namespace fUML::Semantics::Activities 
-{
-	class ActivityNodeActivationGroup;
-}
-
-namespace fUML::Semantics::Activities 
-{
-	class CentralBufferNodeActivation;
-}
-
-namespace fUML::Semantics::Activities 
-{
-	class Token;
 }
 
 // base class includes
@@ -66,6 +52,9 @@ namespace fUML::Semantics::Activities
 
 // enum includes
 
+
+//Includes from codegen annotation
+#include "fUML/Semantics/Values/Value.hpp"
 
 //*********************************
 namespace fUML::Semantics::Activities 
@@ -91,10 +80,10 @@ namespace fUML::Semantics::Activities
 			// Operations
 			//*********************************
 			 
-			virtual void addToken(std::shared_ptr<fUML::Semantics::Activities::Token>  token) = 0;
+			virtual void addToken(std::shared_ptr<fUML::Semantics::Activities::Token> token) = 0;
 			
 			 
-			virtual int removeToken(std::shared_ptr<fUML::Semantics::Activities::Token>  token) = 0;
+			virtual int removeToken(std::shared_ptr<fUML::Semantics::Activities::Token> token) = 0;
 			
 			
 			//*********************************

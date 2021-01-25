@@ -63,7 +63,7 @@ namespace uml
 			variable.isAccessibleBy(self)
 			*/
 			 
-			virtual bool scope_of_variable(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool scope_of_variable(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			

@@ -37,29 +37,11 @@ namespace ecore
 	class ecoreFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace ecore 
 {
 	class EAnnotation;
-}
-
-namespace ecore 
-{
-	class ENamedElement;
-}
-
-namespace ecore 
-{
-	class EObject;
-}
-
-namespace ecore 
-{
 	class EPackage;
-}
-
-namespace ecore 
-{
 	class ETypeParameter;
 }
 
@@ -68,6 +50,8 @@ namespace ecore
 
 // enum includes
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace ecore 
@@ -111,24 +95,24 @@ namespace ecore
 			// Attributes Getter Setter
 			//*********************************
 			 
-			virtual Any getDefaultValue() const = 0;
+			virtual Any  getDefaultValue() const = 0;
 			
 			 
-			virtual void setDefaultValue (Any _defaultValue)= 0; 
+			virtual void setDefaultValue (Any  _defaultValue)= 0; 
 			 
 			virtual void *  getInstanceClass() const = 0;
 			
 			
 			 
-			virtual std::string getInstanceClassName() const = 0;
+			virtual std::string  getInstanceClassName() const = 0;
 			
 			 
-			virtual void setInstanceClassName (std::string _instanceClassName)= 0; 
+			virtual void setInstanceClassName (std::string  _instanceClassName)= 0; 
 			 
-			virtual std::string getInstanceTypeName() const = 0;
+			virtual std::string  getInstanceTypeName() const = 0;
 			
 			 
-			virtual void setInstanceTypeName (std::string _instanceTypeName)= 0; 
+			virtual void setInstanceTypeName (std::string  _instanceTypeName)= 0; 
 			
 			//*********************************
 			// Reference
@@ -148,13 +132,13 @@ namespace ecore
 			// Attribute Members
 			//*********************************
 			 
-			Any m_defaultValue = nullptr;
+			Any  m_defaultValue = nullptr;
 			 
 			void *  m_instanceClass = nullptr;
 			 
-			std::string m_instanceClassName = "";
+			std::string  m_instanceClassName = "";
 			 
-			std::string m_instanceTypeName = "";
+			std::string  m_instanceTypeName = "";
 			
 			
 			//*********************************

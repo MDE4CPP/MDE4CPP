@@ -38,49 +38,15 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Comment;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
-	class IntervalConstraint;
-}
-
-namespace uml 
-{
 	class Namespace;
-}
-
-namespace uml 
-{
 	class Package;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class TemplateParameter;
-}
-
-namespace uml 
-{
 	class ValueSpecification;
 }
 
@@ -90,6 +56,8 @@ namespace uml
 // enum includes
 #include "uml/VisibilityKind.hpp"
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -125,14 +93,14 @@ namespace uml
 			endif
 			*/
 			 
-			virtual bool first_event_multiplicity(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool first_event_multiplicity(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			A DurationConstraint has either one or two constrainedElements.
 			constrainedElement->size() = 1 or constrainedElement->size()=2
 			*/
 			 
-			virtual bool has_one_or_two_constrainedElements(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool has_one_or_two_constrainedElements(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			
 			//*********************************
@@ -143,7 +111,8 @@ namespace uml
 			<p>From package UML::Values.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<bool> > isFirstEvent() const = 0;
+			virtual  std::shared_ptr<Bag<bool> >
+			 isFirstEvent() const = 0;
 			
 			
 			
@@ -161,7 +130,8 @@ namespace uml
 			<p>From package UML::Values.</p>
 			*/
 			 
-			mutable std::shared_ptr<Bag<bool> > m_firstEvent; 
+			mutable  std::shared_ptr<Bag<bool> >
+			 m_firstEvent; 
 			
 			
 			//*********************************

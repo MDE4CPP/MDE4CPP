@@ -173,13 +173,13 @@ namespace uml
 			Retrieves the first operation with the specified name, parameter names, and parameter types from this classifier.
 			*/
 			 
-			virtual std::shared_ptr<uml::Operation> getOperation(std::string name,std::shared_ptr<Bag<std::string> >  parameterNames,std::shared_ptr<Bag<uml::Type> >  parameterTypes) ;
+			virtual std::shared_ptr<uml::Operation> getOperation(std::string name,std::shared_ptr<Bag<std::string> > parameterNames,std::shared_ptr<Bag<uml::Type> > parameterTypes) ;
 			
 			/*!
 			Retrieves the first operation with the specified name, parameter names, and parameter types from this classifier, ignoring case if indicated.
 			*/
 			 
-			virtual std::shared_ptr<uml::Operation> getOperation(std::string name,std::shared_ptr<Bag<std::string> >  parameterNames,std::shared_ptr<Bag<uml::Type> >  parameterTypes,bool ignoreCase) ;
+			virtual std::shared_ptr<uml::Operation> getOperation(std::string name,std::shared_ptr<Bag<std::string> > parameterNames,std::shared_ptr<Bag<uml::Type> > parameterTypes,bool ignoreCase) ;
 			
 			/*!
 			Retrieves the operations of this classifier.
@@ -200,7 +200,7 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual bool hasVisibilityOf(std::shared_ptr<uml::NamedElement>  n) ;
+			virtual bool hasVisibilityOf(std::shared_ptr<uml::NamedElement> n) ;
 			
 			/*!
 			The query inherit() defines how to inherit a set of elements passed as its argument.  It excludes redefined elements from the result.
@@ -212,7 +212,7 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::NamedElement> > inherit(std::shared_ptr<Bag<uml::NamedElement> >  inhs) ;
+			virtual std::shared_ptr<Bag<uml::NamedElement> > inherit(std::shared_ptr<Bag<uml::NamedElement> > inhs) ;
 			
 			/*!
 			The query inheritableMembers() gives all of the members of a Classifier that may be inherited in one of its descendants, subject to whatever visibility restrictions apply.
@@ -221,14 +221,14 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::NamedElement> > inheritableMembers(std::shared_ptr<uml::Classifier>  c) ;
+			virtual std::shared_ptr<Bag<uml::NamedElement> > inheritableMembers(std::shared_ptr<uml::Classifier> c) ;
 			
 			/*!
 			result = (substitution.contract->includes(contract))
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual bool isSubstitutableFor(std::shared_ptr<uml::Classifier>  contract) ;
+			virtual bool isSubstitutableFor(std::shared_ptr<uml::Classifier> contract) ;
 			
 			/*!
 			The Classifier that maps to a GeneralizationSet may neither be a specific nor a general Classifier in any of the Generalization relationships defined for that GeneralizationSet. In other words, a power type may not be an instance of itself nor may its instances also be its subclasses.
@@ -238,7 +238,7 @@ namespace uml
 			  ))
 			*/
 			 
-			virtual bool maps_to_generalization_set(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool maps_to_generalization_set(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			The query maySpecializeType() determines whether this classifier may have a generalization relationship to classifiers of the specified type. By default a classifier may specialize classifiers of the same or a more general type. It is intended to be redefined by classifiers that have different specialization constraints.
@@ -246,21 +246,21 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual bool maySpecializeType(std::shared_ptr<uml::Classifier>  c) ;
+			virtual bool maySpecializeType(std::shared_ptr<uml::Classifier> c) ;
 			
 			/*!
 			Generalization hierarchies must be directed and acyclical. A Classifier can not be both a transitively general and transitively specific Classifier of the same Classifier.
 			not allParents()->includes(self)
 			*/
 			 
-			virtual bool no_cycles_in_generalization(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool no_cycles_in_generalization(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			The parents of a Classifier must be non-final.
 			parents()->forAll(not isFinalSpecialization)
 			*/
 			 
-			virtual bool non_final_parents(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool non_final_parents(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			The query parents() gives all of the immediate ancestors of a generalized Classifier.
@@ -275,7 +275,7 @@ namespace uml
 			parents()->forAll(c | self.maySpecializeType(c))
 			*/
 			 
-			virtual bool specialize_type(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool specialize_type(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			
@@ -287,27 +287,27 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual bool getIsAbstract() const ;
+			virtual bool  getIsAbstract() const ;
 			
 			/*!
 			If true, the Classifier can only be instantiated by instantiating one of its specializations. An abstract Classifier is intended to be used by other Classifiers e.g., as the target of Associations or Generalizations.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual void setIsAbstract (bool _isAbstract); 
+			virtual void setIsAbstract (bool  _isAbstract); 
 			/*!
 			If true, the Classifier cannot be specialized.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual bool getIsFinalSpecialization() const ;
+			virtual bool  getIsFinalSpecialization() const ;
 			
 			/*!
 			If true, the Classifier cannot be specialized.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual void setIsFinalSpecialization (bool _isFinalSpecialization); 
+			virtual void setIsFinalSpecialization (bool  _isFinalSpecialization); 
 			
 			
 			//*********************************

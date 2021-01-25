@@ -166,7 +166,7 @@ std::shared_ptr<ecore::EClass> ExtensionPointImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ExtensionPointImpl::must_have_name(Any diagnostics,std::map <   Any, Any >  context)
+bool ExtensionPointImpl::must_have_name(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -258,7 +258,7 @@ Any ExtensionPointImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::EXTENSIONPOINT_ATTRIBUTE_USECASE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getUseCase().lock())); //9912
+			return eAny(getUseCase().lock()); //9912
 	}
 	return RedefinableElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -364,9 +364,6 @@ void ExtensionPointImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

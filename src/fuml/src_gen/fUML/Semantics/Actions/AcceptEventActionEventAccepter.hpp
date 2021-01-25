@@ -35,15 +35,10 @@ namespace fUML
 	class fUMLFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace fUML::Semantics::Actions 
 {
 	class AcceptEventActionActivation;
-}
-
-namespace fUML::Semantics::CommonBehavior 
-{
-	class EventAccepter;
 }
 
 // base class includes
@@ -51,6 +46,8 @@ namespace fUML::Semantics::CommonBehavior
 
 // enum includes
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace fUML::Semantics::Actions 

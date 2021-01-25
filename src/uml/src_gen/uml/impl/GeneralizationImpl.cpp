@@ -142,12 +142,12 @@ std::shared_ptr<ecore::EClass> GeneralizationImpl::eStaticClass() const
 /*
 Getter & Setter for attribute isSubstitutable
 */
-bool GeneralizationImpl::getIsSubstitutable() const 
+bool  GeneralizationImpl::getIsSubstitutable() const 
 {
 	return m_isSubstitutable;
 }
 
-void GeneralizationImpl::setIsSubstitutable(bool _isSubstitutable)
+void GeneralizationImpl::setIsSubstitutable(bool  _isSubstitutable)
 {
 	m_isSubstitutable = _isSubstitutable;
 } 
@@ -324,23 +324,15 @@ Any GeneralizationImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::GENERALIZATION_ATTRIBUTE_GENERAL:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getGeneral())); //1096
+			return eAny(getGeneral()); //1096
 		case uml::umlPackage::GENERALIZATION_ATTRIBUTE_GENERALIZATIONSET:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::GeneralizationSet>::iterator iter = m_generalizationSet->begin();
-			Bag<uml::GeneralizationSet>::iterator end = m_generalizationSet->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //1097
+			return eAny(getGeneralizationSet()); //1097			
 		}
 		case uml::umlPackage::GENERALIZATION_ATTRIBUTE_ISSUBSTITUTABLE:
 			return eAny(getIsSubstitutable()); //1098
 		case uml::umlPackage::GENERALIZATION_ATTRIBUTE_SPECIFIC:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSpecific().lock())); //1099
+			return eAny(getSpecific().lock()); //1099
 	}
 	return DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
 }
@@ -564,22 +556,15 @@ void GeneralizationImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
 		// Add attributes
 		if ( this->eIsSet(package->getGeneralization_Attribute_isSubstitutable()) )
 		{
 			saveHandler->addAttribute("isSubstitutable", this->getIsSubstitutable());
 		}
 
-		// Add references
-		saveHandler->addReference("general", this->getGeneral());
-		std::shared_ptr<Bag<uml::GeneralizationSet>> generalizationSet_list = this->getGeneralizationSet();
-		for (std::shared_ptr<uml::GeneralizationSet > object : *generalizationSet_list)
-		{ 
-			saveHandler->addReferences("generalizationSet", object);
-		}
-
+	// Add references
+		saveHandler->addReference("general", this->getGeneral());		 
+		saveHandler->addReferences<uml::GeneralizationSet>("generalizationSet", this->getGeneralizationSet());	
 	}
 	catch (std::exception& e)
 	{

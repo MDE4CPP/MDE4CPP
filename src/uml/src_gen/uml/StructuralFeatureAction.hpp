@@ -39,104 +39,24 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
-namespace uml 
-{
-	class Action;
-}
-
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Activity;
-}
-
-namespace uml 
-{
 	class ActivityEdge;
-}
-
-namespace uml 
-{
 	class ActivityGroup;
-}
-
-namespace uml 
-{
-	class ActivityNode;
-}
-
-namespace uml 
-{
 	class ActivityPartition;
-}
-
-namespace uml 
-{
 	class Classifier;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
 	class Constraint;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class ExceptionHandler;
-}
-
-namespace uml 
-{
 	class InputPin;
-}
-
-namespace uml 
-{
 	class InterruptibleActivityRegion;
-}
-
-namespace uml 
-{
 	class Namespace;
-}
-
-namespace uml 
-{
 	class OutputPin;
-}
-
-namespace uml 
-{
-	class RedefinableElement;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class StructuralFeature;
-}
-
-namespace uml 
-{
 	class StructuredActivityNode;
 }
 
@@ -146,6 +66,8 @@ namespace uml
 // enum includes
 #include "uml/VisibilityKind.hpp"
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -179,14 +101,14 @@ namespace uml
 			object.is(1,1)
 			*/
 			 
-			virtual bool multiplicity(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool multiplicity(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			The structuralFeature must not be static.
 			not structuralFeature.isStatic
 			*/
 			 
-			virtual bool not_static(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool not_static(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			The structuralFeature must either be an owned or inherited feature of the type of the object InputPin, or it must be an owned end of a binary Association whose opposite end had as a type to which the type of the object InputPin conforms.
@@ -194,14 +116,14 @@ namespace uml
 				object.type.conformsTo(structuralFeature.oclAsType(Property).opposite.type)
 			*/
 			 
-			virtual bool object_type(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool object_type(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			The structuralFeature must have exactly one featuringClassifier.
 			structuralFeature.featuringClassifier->size() = 1
 			*/
 			 
-			virtual bool one_featuring_classifier(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool one_featuring_classifier(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			The visibility of the structuralFeature must allow access from the object performing the ReadStructuralFeatureAction.
@@ -211,7 +133,7 @@ namespace uml
 			_'context'.conformsTo(structuralFeature.oclAsType(Property).opposite.type.oclAsType(Classifier))
 			*/
 			 
-			virtual bool visibility(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool visibility(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			
 			//*********************************

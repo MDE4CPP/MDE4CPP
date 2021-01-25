@@ -37,29 +37,11 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Classifier;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
-	class DirectedRelationship;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class GeneralizationSet;
 }
 
@@ -68,6 +50,8 @@ namespace uml
 
 // enum includes
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -113,14 +97,14 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual bool getIsSubstitutable() const = 0;
+			virtual bool  getIsSubstitutable() const = 0;
 			
 			/*!
 			Indicates whether the specific Classifier can be used wherever the general Classifier can be used. If true, the execution traces of the specific Classifier shall be a superset of the execution traces of the general Classifier. If false, there is no such constraint on execution traces. If unset, the modeler has not stated whether there is such a constraint or not.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual void setIsSubstitutable (bool _isSubstitutable)= 0; 
+			virtual void setIsSubstitutable (bool  _isSubstitutable)= 0; 
 			
 			//*********************************
 			// Reference
@@ -172,7 +156,7 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			bool m_isSubstitutable = true;
+			bool  m_isSubstitutable = true;
 			
 			
 			//*********************************

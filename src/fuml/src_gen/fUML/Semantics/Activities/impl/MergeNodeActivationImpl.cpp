@@ -244,9 +244,6 @@ void MergeNodeActivationImpl::saveContent(std::shared_ptr<persistence::interface
 	try
 	{
 		std::shared_ptr<fUML::Semantics::Activities::ActivitiesPackage> package = fUML::Semantics::Activities::ActivitiesPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

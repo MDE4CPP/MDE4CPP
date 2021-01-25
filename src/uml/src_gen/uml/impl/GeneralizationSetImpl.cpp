@@ -181,12 +181,12 @@ std::shared_ptr<ecore::EClass> GeneralizationSetImpl::eStaticClass() const
 /*
 Getter & Setter for attribute isCovering
 */
-bool GeneralizationSetImpl::getIsCovering() const 
+bool  GeneralizationSetImpl::getIsCovering() const 
 {
 	return m_isCovering;
 }
 
-void GeneralizationSetImpl::setIsCovering(bool _isCovering)
+void GeneralizationSetImpl::setIsCovering(bool  _isCovering)
 {
 	m_isCovering = _isCovering;
 } 
@@ -196,12 +196,12 @@ void GeneralizationSetImpl::setIsCovering(bool _isCovering)
 /*
 Getter & Setter for attribute isDisjoint
 */
-bool GeneralizationSetImpl::getIsDisjoint() const 
+bool  GeneralizationSetImpl::getIsDisjoint() const 
 {
 	return m_isDisjoint;
 }
 
-void GeneralizationSetImpl::setIsDisjoint(bool _isDisjoint)
+void GeneralizationSetImpl::setIsDisjoint(bool  _isDisjoint)
 {
 	m_isDisjoint = _isDisjoint;
 } 
@@ -211,13 +211,13 @@ void GeneralizationSetImpl::setIsDisjoint(bool _isDisjoint)
 //*********************************
 // Operations
 //*********************************
-bool GeneralizationSetImpl::generalization_same_classifier(Any diagnostics,std::map <   Any, Any >  context)
+bool GeneralizationSetImpl::generalization_same_classifier(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool GeneralizationSetImpl::maps_to_generalization_set(Any diagnostics,std::map <   Any, Any >  context)
+bool GeneralizationSetImpl::maps_to_generalization_set(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -334,22 +334,14 @@ Any GeneralizationSetImpl::eGet(int featureID, bool resolve, bool coreType) cons
 	{
 		case uml::umlPackage::GENERALIZATIONSET_ATTRIBUTE_GENERALIZATION:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Generalization>::iterator iter = m_generalization->begin();
-			Bag<uml::Generalization>::iterator end = m_generalization->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //11015
+			return eAny(getGeneralization()); //11015			
 		}
 		case uml::umlPackage::GENERALIZATIONSET_ATTRIBUTE_ISCOVERING:
 			return eAny(getIsCovering()); //11012
 		case uml::umlPackage::GENERALIZATIONSET_ATTRIBUTE_ISDISJOINT:
 			return eAny(getIsDisjoint()); //11013
 		case uml::umlPackage::GENERALIZATIONSET_ATTRIBUTE_POWERTYPE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getPowertype())); //11014
+			return eAny(getPowertype()); //11014
 	}
 	return PackageableElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -570,8 +562,6 @@ void GeneralizationSetImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
 		// Add attributes
 		if ( this->eIsSet(package->getGeneralizationSet_Attribute_isCovering()) )
 		{
@@ -583,14 +573,9 @@ void GeneralizationSetImpl::saveContent(std::shared_ptr<persistence::interfaces:
 			saveHandler->addAttribute("isDisjoint", this->getIsDisjoint());
 		}
 
-		// Add references
-		std::shared_ptr<Bag<uml::Generalization>> generalization_list = this->getGeneralization();
-		for (std::shared_ptr<uml::Generalization > object : *generalization_list)
-		{ 
-			saveHandler->addReferences("generalization", object);
-		}
-		saveHandler->addReference("powertype", this->getPowertype());
-
+	// Add references
+		saveHandler->addReferences<uml::Generalization>("generalization", this->getGeneralization());	
+		saveHandler->addReference("powertype", this->getPowertype());		 
 	}
 	catch (std::exception& e)
 	{

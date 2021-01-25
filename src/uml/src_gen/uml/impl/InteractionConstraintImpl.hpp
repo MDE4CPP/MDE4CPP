@@ -65,13 +65,13 @@ namespace uml
 			The dynamic variables that take part in the constraint must be owned by the ConnectableElement corresponding to the covered Lifeline.
 			*/
 			 
-			virtual bool dynamic_variables(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool dynamic_variables(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			The constraint may contain references to global data or write-once data.
 			*/
 			 
-			virtual bool global_data(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool global_data(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			If maxint is specified, then minint must be specified and the evaluation of maxint must be >= the evaluation of minint.
@@ -80,7 +80,7 @@ namespace uml
 			minint->asSequence()->first().integerValue() )
 			*/
 			 
-			virtual bool maxint_greater_equal_minint(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool maxint_greater_equal_minint(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			If maxint is specified, then the expression must evaluate to a positive integer.
@@ -88,7 +88,7 @@ namespace uml
 			maxint->asSequence()->first().integerValue() > 0
 			*/
 			 
-			virtual bool maxint_positive(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool maxint_positive(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			Minint/maxint can only be present if the InteractionConstraint is associated with the operand of a loop CombinedFragment.
@@ -97,7 +97,7 @@ namespace uml
 			InteractionOperatorKind::loop
 			*/
 			 
-			virtual bool minint_maxint(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool minint_maxint(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			If minint is specified, then the expression must evaluate to a non-negative integer.
@@ -105,7 +105,7 @@ namespace uml
 			minint->asSequence()->first().integerValue() >= 0
 			*/
 			 
-			virtual bool minint_non_negative(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool minint_non_negative(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			

@@ -236,12 +236,12 @@ std::shared_ptr<ecore::EClass> ObjectFlowImpl::eStaticClass() const
 /*
 Getter & Setter for attribute isMulticast
 */
-bool ObjectFlowImpl::getIsMulticast() const 
+bool  ObjectFlowImpl::getIsMulticast() const 
 {
 	return m_isMulticast;
 }
 
-void ObjectFlowImpl::setIsMulticast(bool _isMulticast)
+void ObjectFlowImpl::setIsMulticast(bool  _isMulticast)
 {
 	m_isMulticast = _isMulticast;
 } 
@@ -251,12 +251,12 @@ void ObjectFlowImpl::setIsMulticast(bool _isMulticast)
 /*
 Getter & Setter for attribute isMultireceive
 */
-bool ObjectFlowImpl::getIsMultireceive() const 
+bool  ObjectFlowImpl::getIsMultireceive() const 
 {
 	return m_isMultireceive;
 }
 
-void ObjectFlowImpl::setIsMultireceive(bool _isMultireceive)
+void ObjectFlowImpl::setIsMultireceive(bool  _isMultireceive)
 {
 	m_isMultireceive = _isMultireceive;
 } 
@@ -266,49 +266,49 @@ void ObjectFlowImpl::setIsMultireceive(bool _isMultireceive)
 //*********************************
 // Operations
 //*********************************
-bool ObjectFlowImpl::compatible_types(Any diagnostics,std::map <   Any, Any >  context)
+bool ObjectFlowImpl::compatible_types(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ObjectFlowImpl::input_and_output_parameter(Any diagnostics,std::map <   Any, Any >  context)
+bool ObjectFlowImpl::input_and_output_parameter(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ObjectFlowImpl::is_multicast_or_is_multireceive(Any diagnostics,std::map <   Any, Any >  context)
+bool ObjectFlowImpl::is_multicast_or_is_multireceive(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ObjectFlowImpl::no_executable_nodes(Any diagnostics,std::map <   Any, Any >  context)
+bool ObjectFlowImpl::no_executable_nodes(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ObjectFlowImpl::same_upper_bounds(Any diagnostics,std::map <   Any, Any >  context)
+bool ObjectFlowImpl::same_upper_bounds(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ObjectFlowImpl::selection_behavior(Any diagnostics,std::map <   Any, Any >  context)
+bool ObjectFlowImpl::selection_behavior(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ObjectFlowImpl::target(Any diagnostics,std::map <   Any, Any >  context)
+bool ObjectFlowImpl::target(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ObjectFlowImpl::transformation_behavior(Any diagnostics,std::map <   Any, Any >  context)
+bool ObjectFlowImpl::transformation_behavior(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -450,9 +450,9 @@ Any ObjectFlowImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::OBJECTFLOW_ATTRIBUTE_ISMULTIRECEIVE:
 			return eAny(getIsMultireceive()); //15923
 		case uml::umlPackage::OBJECTFLOW_ATTRIBUTE_SELECTION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSelection())); //15924
+			return eAny(getSelection()); //15924
 		case uml::umlPackage::OBJECTFLOW_ATTRIBUTE_TRANSFORMATION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getTransformation())); //15925
+			return eAny(getTransformation()); //15925
 	}
 	return ActivityEdgeImpl::eGet(featureID, resolve, coreType);
 }
@@ -645,8 +645,6 @@ void ObjectFlowImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
 		// Add attributes
 		if ( this->eIsSet(package->getObjectFlow_Attribute_isMulticast()) )
 		{
@@ -658,10 +656,9 @@ void ObjectFlowImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 			saveHandler->addAttribute("isMultireceive", this->getIsMultireceive());
 		}
 
-		// Add references
-		saveHandler->addReference("selection", this->getSelection());
-		saveHandler->addReference("transformation", this->getTransformation());
-
+	// Add references
+		saveHandler->addReference("selection", this->getSelection());		 
+		saveHandler->addReference("transformation", this->getTransformation());		 
 	}
 	catch (std::exception& e)
 	{

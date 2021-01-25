@@ -63,22 +63,22 @@ namespace ecore
 			virtual int getFeatureCount() const ;
 			
 			 
-			virtual int getFeatureID(std::shared_ptr<ecore::EStructuralFeature>  feature) const ;
+			virtual int getFeatureID(std::shared_ptr<ecore::EStructuralFeature> feature) const ;
 			
 			 
-			virtual std::shared_ptr<ecore::EGenericType> getFeatureType(std::shared_ptr<ecore::EStructuralFeature>  feature) const ;
+			virtual std::shared_ptr<ecore::EGenericType> getFeatureType(std::shared_ptr<ecore::EStructuralFeature> feature) const ;
 			
 			 
 			virtual int getOperationCount() const ;
 			
 			 
-			virtual int getOperationID(std::shared_ptr<ecore::EOperation>  operation) const ;
+			virtual int getOperationID(std::shared_ptr<ecore::EOperation> operation) const ;
 			
 			 
-			virtual std::shared_ptr<ecore::EOperation> getOverride(std::shared_ptr<ecore::EOperation>  operation) const ;
+			virtual std::shared_ptr<ecore::EOperation> getOverride(std::shared_ptr<ecore::EOperation> operation) const ;
 			
 			 
-			virtual bool isSuperTypeOf(std::shared_ptr<ecore::EClass>  someClass) const ;
+			virtual bool isSuperTypeOf(std::shared_ptr<ecore::EClass> someClass) const ;
 			
 			
 			
@@ -86,15 +86,15 @@ namespace ecore
 			// Attributes Getter Setter
 			//*********************************
 			 
-			virtual bool isAbstract() const ;
+			virtual bool  isAbstract() const ;
 			
 			 
-			virtual void setAbstract (bool _abstract); 
+			virtual void setAbstract (bool  _abstract); 
 			 
-			virtual bool isInterface() const ;
+			virtual bool  isInterface() const ;
 			
 			 
-			virtual void setInterface (bool _interface); 
+			virtual void setInterface (bool  _interface); 
 			
 			
 			//*********************************

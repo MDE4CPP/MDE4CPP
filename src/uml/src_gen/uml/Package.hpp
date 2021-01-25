@@ -40,129 +40,30 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
-namespace uml 
-{
-	class Class;
-}
-
-namespace uml 
-{
-	class Comment;
-}
-
-namespace uml 
-{
-	class Constraint;
-}
-
-namespace uml 
-{
-	class Dependency;
-}
-
+//Forward Declaration for used types 
 namespace ecore 
 {
 	class EObject;
 }
-
 namespace uml 
 {
-	class Element;
-}
-
-namespace uml 
-{
+	class Class;
+	class Comment;
+	class Constraint;
+	class Dependency;
 	class ElementImport;
-}
-
-namespace uml 
-{
 	class Enumeration;
-}
-
-namespace uml 
-{
 	class Interface;
-}
-
-namespace uml 
-{
-	class NamedElement;
-}
-
-namespace uml 
-{
-	class Namespace;
-}
-
-namespace uml 
-{
-	class Package;
-}
-
-namespace uml 
-{
 	class PackageImport;
-}
-
-namespace uml 
-{
 	class PackageMerge;
-}
-
-namespace uml 
-{
-	class PackageableElement;
-}
-
-namespace uml 
-{
 	class PrimitiveType;
-}
-
-namespace uml 
-{
 	class Profile;
-}
-
-namespace uml 
-{
 	class ProfileApplication;
-}
-
-namespace uml 
-{
 	class Stereotype;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class TemplateBinding;
-}
-
-namespace uml 
-{
 	class TemplateParameter;
-}
-
-namespace uml 
-{
 	class TemplateSignature;
-}
-
-namespace uml 
-{
-	class TemplateableElement;
-}
-
-namespace uml 
-{
 	class Type;
 }
 
@@ -176,6 +77,8 @@ namespace uml
 // enum includes
 #include "uml/VisibilityKind.hpp"
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -239,7 +142,7 @@ namespace uml
 			Applies the current definition of the specified profile to this package and automatically applies required stereotypes in the profile to elements within this package's namespace hieararchy. If a different definition is already applied, automatically migrates any associated stereotype values on a "best effort" basis (matching classifiers and structural features by name).
 			*/
 			 
-			virtual std::shared_ptr<Bag<ecore::EObject> > applyProfile(std::shared_ptr<uml::Profile>  profile) = 0;
+			virtual std::shared_ptr<Bag<ecore::EObject> > applyProfile(std::shared_ptr<uml::Profile> profile) = 0;
 			
 			/*!
 			The query containingProfile() returns the closest profile directly or indirectly containing this package (or this package itself, if it is a profile).
@@ -288,7 +191,7 @@ namespace uml
 			packagedElement->forAll(e | e.visibility<> null implies e.visibility = VisibilityKind::public or e.visibility = VisibilityKind::private)
 			*/
 			 
-			virtual bool elements_public_or_private(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool elements_public_or_private(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			Retrieves all the profiles that are applied to this package, including profiles applied to its nesting package(s).
@@ -348,13 +251,13 @@ namespace uml
 			Retrieves the application of the specified profile to this package, or null if no such profile is applied.
 			*/
 			 
-			virtual std::shared_ptr<uml::ProfileApplication> getProfileApplication(std::shared_ptr<uml::Profile>  profile) = 0;
+			virtual std::shared_ptr<uml::ProfileApplication> getProfileApplication(std::shared_ptr<uml::Profile> profile) = 0;
 			
 			/*!
 			Retrieves the application of the specified profile to this package or any of its nesting packages (if indicated), or null if no such profile is applied.
 			*/
 			 
-			virtual std::shared_ptr<uml::ProfileApplication> getProfileApplication(std::shared_ptr<uml::Profile>  profile,bool recurse) = 0;
+			virtual std::shared_ptr<uml::ProfileApplication> getProfileApplication(std::shared_ptr<uml::Profile> profile,bool recurse) = 0;
 			
 			/*!
 			Determines whether this package is a model library.
@@ -366,7 +269,7 @@ namespace uml
 			Determines whether the specified profile is applied to this package.
 			*/
 			 
-			virtual bool isProfileApplied(std::shared_ptr<uml::Profile>  profile) = 0;
+			virtual bool isProfileApplied(std::shared_ptr<uml::Profile> profile) = 0;
 			
 			/*!
 			The query makesVisible() defines whether a Package makes an element visible outside itself. Elements with no visibility and elements with public visibility are made visible.
@@ -377,13 +280,13 @@ namespace uml
 			<p>From package UML::Packages.</p>
 			*/
 			 
-			virtual bool makesVisible(std::shared_ptr<uml::NamedElement>  el) = 0;
+			virtual bool makesVisible(std::shared_ptr<uml::NamedElement> el) = 0;
 			
 			/*!
 			Unapplies the specified profile from this package and automatically unapplies stereotypes in the profile from elements within this package's namespace hieararchy.
 			*/
 			 
-			virtual std::shared_ptr<Bag<ecore::EObject> > unapplyProfile(std::shared_ptr<uml::Profile>  profile) = 0;
+			virtual std::shared_ptr<Bag<ecore::EObject> > unapplyProfile(std::shared_ptr<uml::Profile> profile) = 0;
 			
 			/*!
 			The query visibleMembers() defines which members of a Package can be accessed outside it.
@@ -402,14 +305,14 @@ namespace uml
 			<p>From package UML::Packages.</p>
 			*/
 			 
-			virtual std::string getURI() const = 0;
+			virtual std::string  getURI() const = 0;
 			
 			/*!
 			Provides an identifier for the package that can be used for many purposes. A URI is the universally unique identification of the package following the IETF URI specification, RFC 2396 http://www.ietf.org/rfc/rfc2396.txt and it must comply with those syntax rules.
 			<p>From package UML::Packages.</p>
 			*/
 			 
-			virtual void setURI (std::string _URI)= 0; 
+			virtual void setURI (std::string  _URI)= 0; 
 			
 			//*********************************
 			// Reference
@@ -487,7 +390,7 @@ namespace uml
 			<p>From package UML::Packages.</p>
 			*/
 			 
-			std::string m_URI = "";
+			std::string  m_URI = "";
 			
 			
 			//*********************************

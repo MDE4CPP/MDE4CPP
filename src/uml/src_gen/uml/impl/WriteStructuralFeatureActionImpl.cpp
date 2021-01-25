@@ -286,25 +286,25 @@ std::shared_ptr<ecore::EClass> WriteStructuralFeatureActionImpl::eStaticClass() 
 //*********************************
 // Operations
 //*********************************
-bool WriteStructuralFeatureActionImpl::multiplicity_of_result(Any diagnostics,std::map <   Any, Any >  context)
+bool WriteStructuralFeatureActionImpl::multiplicity_of_result(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool WriteStructuralFeatureActionImpl::multiplicity_of_value(Any diagnostics,std::map <   Any, Any >  context)
+bool WriteStructuralFeatureActionImpl::multiplicity_of_value(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool WriteStructuralFeatureActionImpl::type_of_result(Any diagnostics,std::map <   Any, Any >  context)
+bool WriteStructuralFeatureActionImpl::type_of_result(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool WriteStructuralFeatureActionImpl::type_of_value(Any diagnostics,std::map <   Any, Any >  context)
+bool WriteStructuralFeatureActionImpl::type_of_value(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -482,9 +482,9 @@ Any WriteStructuralFeatureActionImpl::eGet(int featureID, bool resolve, bool cor
 	switch(featureID)
 	{
 		case uml::umlPackage::WRITESTRUCTURALFEATUREACTION_ATTRIBUTE_RESULT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //25729
+			return eAny(getResult()); //25729
 		case uml::umlPackage::WRITESTRUCTURALFEATUREACTION_ATTRIBUTE_VALUE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getValue())); //25730
+			return eAny(getValue()); //25730
 	}
 	return StructuralFeatureActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -638,7 +638,6 @@ void WriteStructuralFeatureActionImpl::saveContent(std::shared_ptr<persistence::
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'result'
 		std::shared_ptr<uml::OutputPin > result = this->getResult();
 		if (result != nullptr)
@@ -652,8 +651,6 @@ void WriteStructuralFeatureActionImpl::saveContent(std::shared_ptr<persistence::
 		{
 			saveHandler->addReference(value, "value", value->eClass() != package->getInputPin_Class());
 		}
-	
-
 	}
 	catch (std::exception& e)
 	{

@@ -35,25 +35,18 @@ namespace PSCS
 	class PSCSFactory;
 }
 
-//Forward Declaration for used types
-namespace PSCS::Semantics::StructuredClassifiers 
-{
-	class CS_Object;
-}
-
+//Forward Declaration for used types 
 namespace fUML::Semantics::StructuredClassifiers 
 {
 	class Object;
 }
-
+namespace PSCS::Semantics::StructuredClassifiers 
+{
+	class CS_Object;
+}
 namespace uml 
 {
 	class Operation;
-}
-
-namespace fUML::Semantics::Loci 
-{
-	class SemanticStrategy;
 }
 
 // base class includes
@@ -61,6 +54,9 @@ namespace fUML::Semantics::Loci
 
 // enum includes
 
+
+//Includes from codegen annotation
+#include "fUML/FUMLFactory.hpp"
 
 //*********************************
 namespace PSCS::Semantics::Actions 
@@ -86,7 +82,7 @@ namespace PSCS::Semantics::Actions
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> construct(std::shared_ptr<uml::Operation>  constructor,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object>  context) = 0;
+			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> construct(std::shared_ptr<org.eclipse.uml2.uml.Operation> constructor,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> context) = 0;
 			
 			 
 			virtual std::string getName() = 0;

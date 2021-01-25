@@ -36,70 +36,27 @@ namespace fUML
 	class fUMLFactory;
 }
 
-//Forward Declaration for used types
-namespace uml 
-{
-	class Action;
-}
-
-namespace fUML::Semantics::Actions 
-{
-	class ActionActivation;
-}
-
-namespace fUML::Semantics::Activities 
-{
-	class ActivityEdgeInstance;
-}
-
-namespace uml 
-{
-	class ActivityNode;
-}
-
-namespace fUML::Semantics::Activities 
-{
-	class ActivityNodeActivationGroup;
-}
-
-namespace fUML::Semantics::Activities 
-{
-	class ExpansionActivationGroup;
-}
-
-namespace uml 
-{
-	class ExpansionNode;
-}
-
-namespace fUML::Semantics::Activities 
-{
-	class ExpansionNodeActivation;
-}
-
+//Forward Declaration for used types 
 namespace fUML::Semantics::Actions 
 {
 	class InputPinActivation;
-}
-
-namespace fUML::Semantics::Actions 
-{
 	class OutputPinActivation;
-}
-
-namespace fUML::Semantics::Actions 
-{
 	class PinActivation;
 }
-
 namespace fUML::Semantics::Activities 
 {
+	class ActivityEdgeInstance;
+	class ActivityNodeActivationGroup;
+	class ExpansionActivationGroup;
+	class ExpansionNodeActivation;
 	class Token;
-}
-
-namespace fUML::Semantics::Activities 
-{
 	class TokenSet;
+}
+namespace uml 
+{
+	class Action;
+	class ActivityNode;
+	class ExpansionNode;
 }
 
 // base class includes
@@ -107,6 +64,15 @@ namespace fUML::Semantics::Activities
 
 // enum includes
 
+
+//Includes from codegen annotation
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/Semantics/Activities/ObjectToken.hpp"
+#include "uml/Action.hpp"
+#include "uml/ActivityNode.hpp"
+#include "uml/ExpansionRegion.hpp"
+#include "uml/InputPin.hpp"
+#include "uml/OutputPin.hpp"
 
 //*********************************
 namespace fUML::Semantics::Activities 
@@ -141,7 +107,7 @@ namespace fUML::Semantics::Activities
 			virtual void doStructuredActivity() = 0;
 			
 			 
-			virtual std::shared_ptr<fUML::Semantics::Activities::ExpansionNodeActivation> getExpansionNodeActivation(std::shared_ptr<uml::ExpansionNode>  node) = 0;
+			virtual std::shared_ptr<fUML::Semantics::Activities::ExpansionNodeActivation> getExpansionNodeActivation(std::shared_ptr<org.eclipse.uml2.uml.ExpansionNode> node) = 0;
 			
 			 
 			virtual bool isSuspended() = 0;
@@ -150,10 +116,10 @@ namespace fUML::Semantics::Activities
 			virtual int numberOfValues() = 0;
 			
 			 
-			virtual void resume(std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup>  activationGroup) = 0;
+			virtual void resume(std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup> activationGroup) = 0;
 			
 			 
-			virtual void runGroup(std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup>  activationGroup) = 0;
+			virtual void runGroup(std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup> activationGroup) = 0;
 			
 			 
 			virtual void runIterative() = 0;
@@ -171,17 +137,17 @@ namespace fUML::Semantics::Activities
 			virtual void terminate() = 0;
 			
 			 
-			virtual void terminateGroup(std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup>  activationGroup) = 0;
+			virtual void terminateGroup(std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup> activationGroup) = 0;
 			
 			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
 			 
-			virtual int getNext() const = 0;
+			virtual int  getNext() const = 0;
 			
 			 
-			virtual void setNext (int _next)= 0; 
+			virtual void setNext (int  _next)= 0; 
 			
 			//*********************************
 			// Reference
@@ -205,7 +171,7 @@ namespace fUML::Semantics::Activities
 			// Attribute Members
 			//*********************************
 			 
-			int m_next = 0;
+			int  m_next = 0;
 			
 			
 			//*********************************

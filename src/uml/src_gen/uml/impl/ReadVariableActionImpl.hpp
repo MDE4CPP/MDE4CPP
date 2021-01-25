@@ -63,7 +63,7 @@ namespace uml
 			variable.compatibleWith(result)
 			*/
 			 
-			virtual bool compatible_multiplicity(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool compatible_multiplicity(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			The type and ordering of the result OutputPin are the same as the type and ordering of the variable.
@@ -71,7 +71,7 @@ namespace uml
 			result.isOrdered = variable.isOrdered
 			*/
 			 
-			virtual bool type_and_ordering(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool type_and_ordering(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			

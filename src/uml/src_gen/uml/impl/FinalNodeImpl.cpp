@@ -223,7 +223,7 @@ std::shared_ptr<ecore::EClass> FinalNodeImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool FinalNodeImpl::no_outgoing_edges(Any diagnostics,std::map <   Any, Any >  context)
+bool FinalNodeImpl::no_outgoing_edges(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -416,9 +416,6 @@ void FinalNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

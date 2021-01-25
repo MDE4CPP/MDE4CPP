@@ -35,75 +35,37 @@ namespace PSCS
 	class PSCSFactory;
 }
 
-//Forward Declaration for used types
-namespace uml 
-{
-	class Action;
-}
-
-namespace fUML::Semantics::Activities 
-{
-	class ActivityEdgeInstance;
-}
-
-namespace uml 
-{
-	class ActivityNode;
-}
-
-namespace fUML::Semantics::Activities 
-{
-	class ActivityNodeActivationGroup;
-}
-
-namespace PSCS::Semantics::StructuredClassifiers 
-{
-	class CS_Link;
-}
-
-namespace PSCS::Semantics::StructuredClassifiers 
-{
-	class CS_Reference;
-}
-
-namespace fUML::Semantics::Actions 
-{
-	class ClearStructuralFeatureActionActivation;
-}
-
+//Forward Declaration for used types 
 namespace fUML::Semantics::Actions 
 {
 	class InputPinActivation;
-}
-
-namespace fUML::Semantics::Actions 
-{
 	class OutputPinActivation;
-}
-
-namespace fUML::Semantics::Actions 
-{
 	class PinActivation;
 }
-
-namespace uml 
+namespace fUML::Semantics::Activities 
 {
-	class StructuralFeature;
+	class ActivityEdgeInstance;
+	class ActivityNodeActivationGroup;
+	class Token;
 }
-
 namespace fUML::Semantics::SimpleClassifiers 
 {
 	class StructuredValue;
 }
-
-namespace fUML::Semantics::Activities 
+namespace PSCS::Semantics::StructuredClassifiers 
 {
-	class Token;
+	class CS_Link;
+	class CS_Reference;
 }
-
 namespace fUML::Semantics::Values 
 {
 	class Value;
+}
+namespace uml 
+{
+	class Action;
+	class ActivityNode;
+	class StructuralFeature;
 }
 
 // base class includes
@@ -111,6 +73,23 @@ namespace fUML::Semantics::Values
 
 // enum includes
 
+
+//Includes from codegen annotation
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
+
+#include "uml/ClearStructuralFeatureAction.hpp"
+#include "uml/Association.hpp"
+#include "uml/Port.hpp"
+#include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
+#include "fUML/Semantics/StructuredClassifiers/Object.hpp"
+#include "fUML/Semantics/StructuredClassifiers/ExtensionalValue.hpp"
+#include "fUML/Semantics/Loci/Locus.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/CS_InteractionPoint.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/CS_Object.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
+#include "fUML/Semantics/Activities/ActivityExecution.hpp"
+#include "uml/InputPin.hpp"
 
 //*********************************
 namespace PSCS::Semantics::Actions 
@@ -139,10 +118,10 @@ namespace PSCS::Semantics::Actions
 			virtual void doAction() = 0;
 			
 			 
-			virtual std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Link> > getLinksToDestroy(std::shared_ptr<fUML::Semantics::SimpleClassifiers::StructuredValue>  value,std::shared_ptr<uml::StructuralFeature>  feature) = 0;
+			virtual std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Link> > getLinksToDestroy(std::shared_ptr<fUML::Semantics::SimpleClassifiers::StructuredValue> value,std::shared_ptr<org.eclipse.uml2.uml.StructuralFeature> feature) = 0;
 			
 			 
-			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value> > getPotentialLinkEnds(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference>  context,std::shared_ptr<uml::StructuralFeature>  feature) = 0;
+			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value> > getPotentialLinkEnds(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> context,std::shared_ptr<org.eclipse.uml2.uml.StructuralFeature> feature) = 0;
 			
 			
 			//*********************************

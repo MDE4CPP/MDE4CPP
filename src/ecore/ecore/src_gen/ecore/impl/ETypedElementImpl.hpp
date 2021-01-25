@@ -52,34 +52,34 @@ namespace ecore
 			// Attributes Getter Setter
 			//*********************************
 			 
-			virtual int getLowerBound() const ;
+			virtual int  getLowerBound() const ;
 			
 			 
-			virtual void setLowerBound (int _lowerBound); 
+			virtual void setLowerBound (int  _lowerBound); 
 			 
-			virtual bool isMany() const ;
+			virtual bool  isMany() const ;
 			
 			
 			 
-			virtual bool isOrdered() const ;
+			virtual bool  isOrdered() const ;
 			
 			 
-			virtual void setOrdered (bool _ordered); 
+			virtual void setOrdered (bool  _ordered); 
 			 
-			virtual bool isRequired() const ;
+			virtual bool  isRequired() const ;
 			
 			 
-			virtual void setRequired (bool _required); 
+			virtual void setRequired (bool  _required); 
 			 
-			virtual bool isUnique() const ;
+			virtual bool  isUnique() const ;
 			
 			 
-			virtual void setUnique (bool _unique); 
+			virtual void setUnique (bool  _unique); 
 			 
-			virtual int getUpperBound() const ;
+			virtual int  getUpperBound() const ;
 			
 			 
-			virtual void setUpperBound (int _upperBound); 
+			virtual void setUpperBound (int  _upperBound); 
 			
 			
 			//*********************************

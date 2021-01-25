@@ -35,29 +35,12 @@ namespace fUML
 	class fUMLFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Classifier;
-}
-
-namespace uml 
-{
 	class Enumeration;
-}
-
-namespace uml 
-{
 	class EnumerationLiteral;
-}
-
-namespace fUML::Semantics::Values 
-{
-	class Value;
-}
-
-namespace uml 
-{
 	class ValueSpecification;
 }
 
@@ -66,6 +49,15 @@ namespace uml
 
 // enum includes
 
+
+//Includes from codegen annotation
+#include "fUML/FUMLFactory.hpp"
+#include "uml/Class.hpp"
+#include "uml/Enumeration.hpp"
+#include "uml/EnumerationLiteral.hpp"
+#include "uml/InstanceSpecification.hpp"
+#include "uml/InstanceValue.hpp"
+#include "uml/umlFactory.hpp"
 
 //*********************************
 namespace fUML::Semantics::SimpleClassifiers 
@@ -94,16 +86,16 @@ namespace fUML::Semantics::SimpleClassifiers
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() = 0;
 			
 			 
-			virtual bool equals(std::shared_ptr<fUML::Semantics::Values::Value>  otherValue) = 0;
+			virtual bool equals(std::shared_ptr<fUML::Semantics::Values::Value> otherValue) = 0;
 			
 			 
-			virtual std::shared_ptr<Bag<uml::Classifier> > getTypes() = 0;
+			virtual std::shared_ptr<Bag<org.eclipse.uml2.uml.Classifier> > getTypes() = 0;
 			
 			 
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> new_() = 0;
 			
 			 
-			virtual std::shared_ptr<uml::ValueSpecification> specify() = 0;
+			virtual std::shared_ptr<org.eclipse.uml2.uml.ValueSpecification> specify() = 0;
 			
 			 
 			virtual std::string toString() = 0;
@@ -117,16 +109,16 @@ namespace fUML::Semantics::SimpleClassifiers
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<uml::EnumerationLiteral > getLiteral() const = 0;
+			virtual std::shared_ptr<org.eclipse.uml2.uml.EnumerationLiteral > getLiteral() const = 0;
 			
 			
-			virtual void setLiteral(std::shared_ptr<uml::EnumerationLiteral> _literal) = 0;
+			virtual void setLiteral(std::shared_ptr<org.eclipse.uml2.uml.EnumerationLiteral> _literal) = 0;
 			
 			
-			virtual std::shared_ptr<uml::Enumeration > getType() const = 0;
+			virtual std::shared_ptr<org.eclipse.uml2.uml.Enumeration > getType() const = 0;
 			
 			
-			virtual void setType(std::shared_ptr<uml::Enumeration> _type) = 0;
+			virtual void setType(std::shared_ptr<org.eclipse.uml2.uml.Enumeration> _type) = 0;
 			
 			
 
@@ -140,8 +132,8 @@ namespace fUML::Semantics::SimpleClassifiers
 			// Reference Members
 			//*********************************
 			
-			std::shared_ptr<uml::EnumerationLiteral > m_literal;
-			std::shared_ptr<uml::Enumeration > m_type;
+			std::shared_ptr<org.eclipse.uml2.uml.EnumerationLiteral > m_literal;
+			std::shared_ptr<org.eclipse.uml2.uml.Enumeration > m_type;
 
 		public:
 			//*********************************

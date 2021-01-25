@@ -35,50 +35,23 @@ namespace PSCS
 	class PSCSFactory;
 }
 
-//Forward Declaration for used types
-namespace uml 
-{
-	class Action;
-}
-
-namespace fUML::Semantics::Activities 
-{
-	class ActivityEdgeInstance;
-}
-
-namespace uml 
-{
-	class ActivityNode;
-}
-
-namespace fUML::Semantics::Activities 
-{
-	class ActivityNodeActivationGroup;
-}
-
-namespace fUML::Semantics::Actions 
-{
-	class CreateLinkActionActivation;
-}
-
+//Forward Declaration for used types 
 namespace fUML::Semantics::Actions 
 {
 	class InputPinActivation;
-}
-
-namespace fUML::Semantics::Actions 
-{
 	class OutputPinActivation;
-}
-
-namespace fUML::Semantics::Actions 
-{
 	class PinActivation;
 }
-
 namespace fUML::Semantics::Activities 
 {
+	class ActivityEdgeInstance;
+	class ActivityNodeActivationGroup;
 	class Token;
+}
+namespace uml 
+{
+	class Action;
+	class ActivityNode;
 }
 
 // base class includes
@@ -86,6 +59,22 @@ namespace fUML::Semantics::Activities
 
 // enum includes
 
+
+//Includes from codegen annotation
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
+
+#include "uml/CreateLinkAction.hpp"
+#include "uml/LinkEndCreationData.hpp"
+#include "uml/Association.hpp"
+#include "uml/Property.hpp"
+#include "fUML/Semantics/StructuredClassifiers/Link.hpp"
+#include "fUML/Semantics/StructuredClassifiers/ExtensionalValue.hpp"
+#include "fUML/Semantics/Loci/Locus.hpp"
+#include "fUML/Semantics/SimpleClassifiers/UnlimitedNaturalValue.hpp"
+#include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/CS_Link.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 
 //*********************************
 namespace PSCS::Semantics::Actions 

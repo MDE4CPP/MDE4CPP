@@ -57,7 +57,7 @@ namespace fUML::Semantics::Activities
 			virtual void doStructuredActivity() ;
 			
 			 
-			virtual std::shared_ptr<fUML::Semantics::Activities::ExpansionNodeActivation> getExpansionNodeActivation(std::shared_ptr<uml::ExpansionNode>  node) ;
+			virtual std::shared_ptr<fUML::Semantics::Activities::ExpansionNodeActivation> getExpansionNodeActivation(std::shared_ptr<org.eclipse.uml2.uml.ExpansionNode> node) ;
 			
 			 
 			virtual bool isSuspended() ;
@@ -66,10 +66,10 @@ namespace fUML::Semantics::Activities
 			virtual int numberOfValues() ;
 			
 			 
-			virtual void resume(std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup>  activationGroup) ;
+			virtual void resume(std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup> activationGroup) ;
 			
 			 
-			virtual void runGroup(std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup>  activationGroup) ;
+			virtual void runGroup(std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup> activationGroup) ;
 			
 			 
 			virtual void runIterative() ;
@@ -87,7 +87,7 @@ namespace fUML::Semantics::Activities
 			virtual void terminate() ;
 			
 			 
-			virtual void terminateGroup(std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup>  activationGroup) ;
+			virtual void terminateGroup(std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup> activationGroup) ;
 			
 			
 			
@@ -95,10 +95,10 @@ namespace fUML::Semantics::Activities
 			// Attributes Getter Setter
 			//*********************************
 			 
-			virtual int getNext() const ;
+			virtual int  getNext() const ;
 			
 			 
-			virtual void setNext (int _next); 
+			virtual void setNext (int  _next); 
 			
 			
 			//*********************************

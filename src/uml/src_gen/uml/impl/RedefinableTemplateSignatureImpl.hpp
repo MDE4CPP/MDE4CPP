@@ -68,7 +68,7 @@ namespace uml
 			classifier.allParents()->forAll(c | c.ownedTemplateSignature->notEmpty() implies self->closure(extendedSignature)->includes(c.ownedTemplateSignature))
 			*/
 			 
-			virtual bool redefines_parents(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool redefines_parents(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			

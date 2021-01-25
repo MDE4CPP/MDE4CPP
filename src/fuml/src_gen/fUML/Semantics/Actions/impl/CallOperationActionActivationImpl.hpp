@@ -61,22 +61,22 @@ namespace fUML::Semantics::Actions
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<uml::CallOperationAction > getCallOperationAction() const ;
+			virtual std::shared_ptr<org.eclipse.uml2.uml.CallOperationAction > getCallOperationAction() const ;
 			
 			
-			virtual void setCallOperationAction(std::shared_ptr<uml::CallOperationAction> _callOperationAction) ;
+			virtual void setCallOperationAction(std::shared_ptr<org.eclipse.uml2.uml.CallOperationAction> _callOperationAction) ;
 			
 			/*Additional Setter for 'CallActionActivation::callAction' redefined by reference 'callOperationAction'*/
 			
-			virtual void setCallAction(std::shared_ptr<uml::CallAction> _callAction) ;
+			virtual void setCallAction(std::shared_ptr<org.eclipse.uml2.uml.CallAction> _callAction) ;
 			
 			/*Additional Setter for 'ActionActivation::action' redefined by reference 'callOperationAction'*/
 			
-			virtual void setAction(std::shared_ptr<uml::Action> _action) ;
+			virtual void setAction(std::shared_ptr<org.eclipse.uml2.uml.Action> _action) ;
 			
 			/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'callOperationAction'*/
 			
-			virtual void setNode(std::shared_ptr<uml::ActivityNode> _node) ;
+			virtual void setNode(std::shared_ptr<org.eclipse.uml2.uml.ActivityNode> _node) ;
 			
 							
 			

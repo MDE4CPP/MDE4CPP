@@ -50,10 +50,10 @@
 #include "PSCS/Semantics/CommonBehavior/impl/CommonBehaviorFactoryImpl.hpp"
 #include "PSCS/Semantics/CommonBehavior/impl/CommonBehaviorPackageImpl.hpp"
 
-#include "PSCS/PSCSFactory.hpp"
-#include "PSCS/PSCSPackage.hpp"
 #include "PSCS/Semantics/SemanticsFactory.hpp"
 #include "PSCS/Semantics/SemanticsPackage.hpp"
+#include "PSCS/PSCSFactory.hpp"
+#include "PSCS/PSCSPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -118,12 +118,12 @@ std::shared_ptr<ecore::EClass> CS_EventOccurrenceImpl::eStaticClass() const
 /*
 Getter & Setter for attribute propagationInward
 */
-bool CS_EventOccurrenceImpl::isPropagationInward() const 
+bool  CS_EventOccurrenceImpl::isPropagationInward() const 
 {
 	return m_propagationInward;
 }
 
-void CS_EventOccurrenceImpl::setPropagationInward(bool _propagationInward)
+void CS_EventOccurrenceImpl::setPropagationInward(bool  _propagationInward)
 {
 	m_propagationInward = _propagationInward;
 } 
@@ -167,7 +167,7 @@ return this->getWrappedEventOccurrence()->getParameterValues();
 	//end of body
 }
 
-bool CS_EventOccurrenceImpl::match(std::shared_ptr<uml::Trigger>  trigger)
+bool CS_EventOccurrenceImpl::match(std::shared_ptr<org.eclipse.uml2.uml.Trigger> trigger)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -196,7 +196,7 @@ bool CS_EventOccurrenceImpl::match(std::shared_ptr<uml::Trigger>  trigger)
 	//end of body
 }
 
-void CS_EventOccurrenceImpl::sendInTo(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference>  target,std::shared_ptr<uml::Port>  port)
+void CS_EventOccurrenceImpl::sendInTo(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> target,std::shared_ptr<org.eclipse.uml2.uml.Port> port)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -207,7 +207,7 @@ void CS_EventOccurrenceImpl::sendInTo(std::shared_ptr<PSCS::Semantics::Structure
 	//end of body
 }
 
-void CS_EventOccurrenceImpl::sendOutTo(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference>  target,std::shared_ptr<uml::Port>  port)
+void CS_EventOccurrenceImpl::sendOutTo(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> target,std::shared_ptr<org.eclipse.uml2.uml.Port> port)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -240,13 +240,13 @@ void CS_EventOccurrenceImpl::setInteractionPoint(std::shared_ptr<PSCS::Semantics
 /*
 Getter & Setter for reference onPort
 */
-std::shared_ptr<uml::Port > CS_EventOccurrenceImpl::getOnPort() const
+std::shared_ptr<org.eclipse.uml2.uml.Port > CS_EventOccurrenceImpl::getOnPort() const
 {
 
     return m_onPort;
 }
 
-void CS_EventOccurrenceImpl::setOnPort(std::shared_ptr<uml::Port> _onPort)
+void CS_EventOccurrenceImpl::setOnPort(std::shared_ptr<org.eclipse.uml2.uml.Port> _onPort)
 {
     m_onPort = _onPort;
 }
@@ -297,13 +297,13 @@ Any CS_EventOccurrenceImpl::eGet(int featureID, bool resolve, bool coreType) con
 	switch(featureID)
 	{
 		case PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::CS_EVENTOCCURRENCE_ATTRIBUTE_INTERACTIONPOINT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getInteractionPoint())); //131
+			return eAny(getInteractionPoint()); //131
 		case PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::CS_EVENTOCCURRENCE_ATTRIBUTE_ONPORT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOnPort())); //134
+			return eAny(getOnPort()); //134
 		case PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::CS_EVENTOCCURRENCE_ATTRIBUTE_PROPAGATIONINWARD:
 			return eAny(isPropagationInward()); //133
 		case PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::CS_EVENTOCCURRENCE_ATTRIBUTE_WRAPPEDEVENTOCCURRENCE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getWrappedEventOccurrence())); //132
+			return eAny(getWrappedEventOccurrence()); //132
 	}
 	return fUML::Semantics::CommonBehavior::EventOccurrenceImpl::eGet(featureID, resolve, coreType);
 }
@@ -338,7 +338,7 @@ bool CS_EventOccurrenceImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Port> _onPort = std::dynamic_pointer_cast<uml::Port>(_temp);
+			std::shared_ptr<org.eclipse.uml2.uml.Port> _onPort = std::dynamic_pointer_cast<org.eclipse.uml2.uml.Port>(_temp);
 			setOnPort(_onPort); //134
 			return true;
 		}
@@ -458,7 +458,7 @@ void CS_EventOccurrenceImpl::resolveReferences(const int featureID, std::list<st
 			if (references.size() == 1)
 			{
 				// Cast object to correct type
-				std::shared_ptr<uml::Port> _onPort = std::dynamic_pointer_cast<uml::Port>( references.front() );
+				std::shared_ptr<org.eclipse.uml2.uml.Port> _onPort = std::dynamic_pointer_cast<org.eclipse.uml2.uml.Port>( references.front() );
 				setOnPort(_onPort);
 			}
 			
@@ -495,19 +495,16 @@ void CS_EventOccurrenceImpl::saveContent(std::shared_ptr<persistence::interfaces
 	try
 	{
 		std::shared_ptr<PSCS::Semantics::CommonBehavior::CommonBehaviorPackage> package = PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance();
-
-	
 		// Add attributes
 		if ( this->eIsSet(package->getCS_EventOccurrence_Attribute_propagationInward()) )
 		{
 			saveHandler->addAttribute("propagationInward", this->isPropagationInward());
 		}
 
-		// Add references
-		saveHandler->addReference("interactionPoint", this->getInteractionPoint());
-		saveHandler->addReference("onPort", this->getOnPort());
-		saveHandler->addReference("wrappedEventOccurrence", this->getWrappedEventOccurrence());
-
+	// Add references
+		saveHandler->addReference("interactionPoint", this->getInteractionPoint());		 
+		saveHandler->addReference("onPort", this->getOnPort());		
+		saveHandler->addReference("wrappedEventOccurrence", this->getWrappedEventOccurrence());		 
 	}
 	catch (std::exception& e)
 	{

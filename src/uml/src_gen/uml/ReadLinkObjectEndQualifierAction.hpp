@@ -39,104 +39,24 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
-namespace uml 
-{
-	class Action;
-}
-
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Activity;
-}
-
-namespace uml 
-{
 	class ActivityEdge;
-}
-
-namespace uml 
-{
 	class ActivityGroup;
-}
-
-namespace uml 
-{
-	class ActivityNode;
-}
-
-namespace uml 
-{
 	class ActivityPartition;
-}
-
-namespace uml 
-{
 	class Classifier;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
 	class Constraint;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class ExceptionHandler;
-}
-
-namespace uml 
-{
 	class InputPin;
-}
-
-namespace uml 
-{
 	class InterruptibleActivityRegion;
-}
-
-namespace uml 
-{
 	class Namespace;
-}
-
-namespace uml 
-{
 	class OutputPin;
-}
-
-namespace uml 
-{
 	class Property;
-}
-
-namespace uml 
-{
-	class RedefinableElement;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class StructuredActivityNode;
 }
 
@@ -146,6 +66,8 @@ namespace uml
 // enum includes
 #include "uml/VisibilityKind.hpp"
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -179,56 +101,56 @@ namespace uml
 			qualifier.associationEnd.association.oclIsKindOf(AssociationClass)
 			*/
 			 
-			virtual bool association_of_association(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool association_of_association(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			The ends of the Association must not be static.
 			qualifier.associationEnd.association.memberEnd->forAll(e | not e.isStatic)
 			*/
 			 
-			virtual bool ends_of_association(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool ends_of_association(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			The multiplicity of the object InputPin is 1..1.
 			object.is(1,1)
 			*/
 			 
-			virtual bool multiplicity_of_object(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool multiplicity_of_object(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			The multiplicity of the qualifier Property is 1..1.
 			qualifier.is(1,1)
 			*/
 			 
-			virtual bool multiplicity_of_qualifier(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool multiplicity_of_qualifier(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			The multiplicity of the result OutputPin is 1..1.
 			result.is(1,1)
 			*/
 			 
-			virtual bool multiplicity_of_result(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool multiplicity_of_result(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			The qualifier Property must be a qualifier of an Association end.
 			qualifier.associationEnd <> null
 			*/
 			 
-			virtual bool qualifier_attribute(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool qualifier_attribute(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			The type of the result OutputPin is the same as the type of the qualifier Property.
 			result.type = qualifier.type
 			*/
 			 
-			virtual bool same_type(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool same_type(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			The type of the object InputPin is the AssociationClass that owns the Association end that has the given qualifier Property.
 			object.type = qualifier.associationEnd.association
 			*/
 			 
-			virtual bool type_of_object(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool type_of_object(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			
 			//*********************************

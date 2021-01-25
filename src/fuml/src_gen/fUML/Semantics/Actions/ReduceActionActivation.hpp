@@ -35,55 +35,27 @@ namespace fUML
 	class fUMLFactory;
 }
 
-//Forward Declaration for used types
-namespace uml 
-{
-	class Action;
-}
-
+//Forward Declaration for used types 
 namespace fUML::Semantics::Actions 
 {
-	class ActionActivation;
+	class InputPinActivation;
+	class OutputPinActivation;
+	class PinActivation;
 }
-
 namespace fUML::Semantics::Activities 
 {
 	class ActivityEdgeInstance;
-}
-
-namespace uml 
-{
-	class ActivityNode;
-}
-
-namespace fUML::Semantics::Activities 
-{
 	class ActivityNodeActivationGroup;
+	class Token;
 }
-
 namespace fUML::Semantics::CommonBehavior 
 {
 	class Execution;
 }
-
-namespace fUML::Semantics::Actions 
+namespace uml 
 {
-	class InputPinActivation;
-}
-
-namespace fUML::Semantics::Actions 
-{
-	class OutputPinActivation;
-}
-
-namespace fUML::Semantics::Actions 
-{
-	class PinActivation;
-}
-
-namespace fUML::Semantics::Activities 
-{
-	class Token;
+	class Action;
+	class ActivityNode;
 }
 
 // base class includes
@@ -91,6 +63,8 @@ namespace fUML::Semantics::Activities
 
 // enum includes
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace fUML::Semantics::Actions 

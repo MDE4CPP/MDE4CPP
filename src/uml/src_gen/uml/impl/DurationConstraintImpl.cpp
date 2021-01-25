@@ -198,7 +198,8 @@ std::shared_ptr<ecore::EClass> DurationConstraintImpl::eStaticClass() const
 /*
 Getter & Setter for attribute firstEvent
 */
-std::shared_ptr<Bag<bool> > DurationConstraintImpl::isFirstEvent() const 
+ std::shared_ptr<Bag<bool> >
+ DurationConstraintImpl::isFirstEvent() const 
 {
 	if(m_firstEvent == nullptr)
 	{
@@ -214,13 +215,13 @@ std::shared_ptr<Bag<bool> > DurationConstraintImpl::isFirstEvent() const
 //*********************************
 // Operations
 //*********************************
-bool DurationConstraintImpl::first_event_multiplicity(Any diagnostics,std::map <   Any, Any >  context)
+bool DurationConstraintImpl::first_event_multiplicity(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool DurationConstraintImpl::has_one_or_two_constrainedElements(Any diagnostics,std::map <   Any, Any >  context)
+bool DurationConstraintImpl::has_one_or_two_constrainedElements(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -420,8 +421,6 @@ void DurationConstraintImpl::saveContent(std::shared_ptr<persistence::interfaces
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
 		// Add attributes
 		if ( this->eIsSet(package->getDurationConstraint_Attribute_firstEvent()) )
 		{
@@ -430,7 +429,6 @@ void DurationConstraintImpl::saveContent(std::shared_ptr<persistence::interfaces
 				saveHandler->addAttributeAsNode("firstEvent", std::to_string(*value));
 			}
 		}
-
 	}
 	catch (std::exception& e)
 	{

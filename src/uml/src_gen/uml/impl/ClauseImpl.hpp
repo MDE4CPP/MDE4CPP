@@ -51,7 +51,7 @@ namespace uml
 			_'body'.oclAsType(Action).allActions().output->includesAll(bodyOutput)
 			*/
 			 
-			virtual bool body_output_pins(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool body_output_pins(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			The decider Pin must be on an Action in the test section of the Clause and must be of type Boolean with multiplicity 1..1.
@@ -60,14 +60,14 @@ namespace uml
 			decider.is(1,1)
 			*/
 			 
-			virtual bool decider_output(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool decider_output(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			The test and body parts of a ConditionalNode must be disjoint with each other.
 			test->intersection(_'body')->isEmpty()
 			*/
 			 
-			virtual bool test_and_body(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool test_and_body(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			

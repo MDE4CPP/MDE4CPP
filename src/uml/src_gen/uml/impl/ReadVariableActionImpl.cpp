@@ -270,13 +270,13 @@ std::shared_ptr<ecore::EClass> ReadVariableActionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ReadVariableActionImpl::compatible_multiplicity(Any diagnostics,std::map <   Any, Any >  context)
+bool ReadVariableActionImpl::compatible_multiplicity(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ReadVariableActionImpl::type_and_ordering(Any diagnostics,std::map <   Any, Any >  context)
+bool ReadVariableActionImpl::type_and_ordering(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -418,7 +418,7 @@ Any ReadVariableActionImpl::eGet(int featureID, bool resolve, bool coreType) con
 	switch(featureID)
 	{
 		case uml::umlPackage::READVARIABLEACTION_ATTRIBUTE_RESULT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //20028
+			return eAny(getResult()); //20028
 	}
 	return VariableActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -548,15 +548,12 @@ void ReadVariableActionImpl::saveContent(std::shared_ptr<persistence::interfaces
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'result'
 		std::shared_ptr<uml::OutputPin > result = this->getResult();
 		if (result != nullptr)
 		{
 			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_Class());
 		}
-	
-
 	}
 	catch (std::exception& e)
 	{

@@ -359,12 +359,12 @@ std::shared_ptr<ecore::EClass> PackageImpl::eStaticClass() const
 /*
 Getter & Setter for attribute URI
 */
-std::string PackageImpl::getURI() const 
+std::string  PackageImpl::getURI() const 
 {
 	return m_URI;
 }
 
-void PackageImpl::setURI(std::string _URI)
+void PackageImpl::setURI(std::string  _URI)
 {
 	m_URI = _URI;
 } 
@@ -380,7 +380,7 @@ std::shared_ptr<Bag<uml::Stereotype> > PackageImpl::allApplicableStereotypes()
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<ecore::EObject> > PackageImpl::applyProfile(std::shared_ptr<uml::Profile>  profile)
+std::shared_ptr<Bag<ecore::EObject> > PackageImpl::applyProfile(std::shared_ptr<uml::Profile> profile)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -422,7 +422,7 @@ std::shared_ptr<uml::Stereotype> PackageImpl::createOwnedStereotype(std::string 
 	throw "UnsupportedOperationException";
 }
 
-bool PackageImpl::elements_public_or_private(Any diagnostics,std::map <   Any, Any >  context)
+bool PackageImpl::elements_public_or_private(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -476,13 +476,13 @@ std::shared_ptr<Bag<uml::Type> > PackageImpl::getOwnedTypes()
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::ProfileApplication> PackageImpl::getProfileApplication(std::shared_ptr<uml::Profile>  profile)
+std::shared_ptr<uml::ProfileApplication> PackageImpl::getProfileApplication(std::shared_ptr<uml::Profile> profile)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::ProfileApplication> PackageImpl::getProfileApplication(std::shared_ptr<uml::Profile>  profile,bool recurse)
+std::shared_ptr<uml::ProfileApplication> PackageImpl::getProfileApplication(std::shared_ptr<uml::Profile> profile,bool recurse)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -494,19 +494,19 @@ bool PackageImpl::isModelLibrary()
 	throw "UnsupportedOperationException";
 }
 
-bool PackageImpl::isProfileApplied(std::shared_ptr<uml::Profile>  profile)
+bool PackageImpl::isProfileApplied(std::shared_ptr<uml::Profile> profile)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PackageImpl::makesVisible(std::shared_ptr<uml::NamedElement>  el)
+bool PackageImpl::makesVisible(std::shared_ptr<uml::NamedElement> el)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<ecore::EObject> > PackageImpl::unapplyProfile(std::shared_ptr<uml::Profile>  profile)
+std::shared_ptr<Bag<ecore::EObject> > PackageImpl::unapplyProfile(std::shared_ptr<uml::Profile> profile)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -822,77 +822,29 @@ Any PackageImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(getURI()); //17020
 		case uml::umlPackage::PACKAGE_ATTRIBUTE_NESTEDPACKAGE:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Package>::iterator iter = m_nestedPackage->begin();
-			Bag<uml::Package>::iterator end = m_nestedPackage->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //17021
+			return eAny(getNestedPackage()); //17021			
 		}
 		case uml::umlPackage::PACKAGE_ATTRIBUTE_NESTINGPACKAGE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getNestingPackage().lock())); //17022
+			return eAny(getNestingPackage().lock()); //17022
 		case uml::umlPackage::PACKAGE_ATTRIBUTE_OWNEDSTEREOTYPE:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Stereotype>::iterator iter = m_ownedStereotype->begin();
-			Bag<uml::Stereotype>::iterator end = m_ownedStereotype->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //17023
+			return eAny(getOwnedStereotype()); //17023			
 		}
 		case uml::umlPackage::PACKAGE_ATTRIBUTE_OWNEDTYPE:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Type>::iterator iter = m_ownedType->begin();
-			Bag<uml::Type>::iterator end = m_ownedType->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //17024
+			return eAny(getOwnedType()); //17024			
 		}
 		case uml::umlPackage::PACKAGE_ATTRIBUTE_PACKAGEMERGE:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::PackageMerge>::iterator iter = m_packageMerge->begin();
-			Bag<uml::PackageMerge>::iterator end = m_packageMerge->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //17025
+			return eAny(getPackageMerge()); //17025			
 		}
 		case uml::umlPackage::PACKAGE_ATTRIBUTE_PACKAGEDELEMENT:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::PackageableElement>::iterator iter = m_packagedElement->begin();
-			Bag<uml::PackageableElement>::iterator end = m_packagedElement->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //17026
+			return eAny(getPackagedElement()); //17026			
 		}
 		case uml::umlPackage::PACKAGE_ATTRIBUTE_PROFILEAPPLICATION:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ProfileApplication>::iterator iter = m_profileApplication->begin();
-			Bag<uml::ProfileApplication>::iterator end = m_profileApplication->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //17027
+			return eAny(getProfileApplication()); //17027			
 		}
 	}
 	Any result;
@@ -1380,7 +1332,6 @@ void PackageImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'nestedPackage'
 		for (std::shared_ptr<uml::Package> nestedPackage : *this->getNestedPackage()) 
 		{
@@ -1410,13 +1361,11 @@ void PackageImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 		{
 			saveHandler->addReference(profileApplication, "profileApplication", profileApplication->eClass() != package->getProfileApplication_Class());
 		}
-	
 		// Add attributes
 		if ( this->eIsSet(package->getPackage_Attribute_uRI()) )
 		{
 			saveHandler->addAttribute("URI", this->getURI());
 		}
-
 
 		//
 		// Add new tags (from references)

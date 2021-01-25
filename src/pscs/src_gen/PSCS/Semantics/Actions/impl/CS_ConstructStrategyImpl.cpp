@@ -43,10 +43,10 @@
 #include "PSCS/Semantics/Actions/impl/ActionsFactoryImpl.hpp"
 #include "PSCS/Semantics/Actions/impl/ActionsPackageImpl.hpp"
 
-#include "PSCS/PSCSFactory.hpp"
-#include "PSCS/PSCSPackage.hpp"
 #include "PSCS/Semantics/SemanticsFactory.hpp"
 #include "PSCS/Semantics/SemanticsPackage.hpp"
+#include "PSCS/PSCSFactory.hpp"
+#include "PSCS/PSCSPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -103,7 +103,7 @@ std::shared_ptr<ecore::EClass> CS_ConstructStrategyImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> CS_ConstructStrategyImpl::construct(std::shared_ptr<uml::Operation>  constructor,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object>  context)
+std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> CS_ConstructStrategyImpl::construct(std::shared_ptr<org.eclipse.uml2.uml.Operation> constructor,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -221,9 +221,6 @@ void CS_ConstructStrategyImpl::saveContent(std::shared_ptr<persistence::interfac
 	try
 	{
 		std::shared_ptr<PSCS::Semantics::Actions::ActionsPackage> package = PSCS::Semantics::Actions::ActionsPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

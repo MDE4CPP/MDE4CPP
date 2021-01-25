@@ -40,209 +40,39 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
-namespace uml 
-{
-	class Behavior;
-}
-
+//Forward Declaration for used types 
 namespace uml 
 {
 	class BehavioralFeature;
-}
-
-namespace uml 
-{
-	class BehavioredClassifier;
-}
-
-namespace uml 
-{
-	class Class;
-}
-
-namespace uml 
-{
-	class Classifier;
-}
-
-namespace uml 
-{
 	class CollaborationUse;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
 	class ConnectableElement;
-}
-
-namespace uml 
-{
 	class Connector;
-}
-
-namespace uml 
-{
 	class Constraint;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class ElementImport;
-}
-
-namespace uml 
-{
 	class Extension;
-}
-
-namespace uml 
-{
 	class Feature;
-}
-
-namespace uml 
-{
 	class Generalization;
-}
-
-namespace uml 
-{
 	class GeneralizationSet;
-}
-
-namespace uml 
-{
 	class InterfaceRealization;
-}
-
-namespace uml 
-{
-	class NamedElement;
-}
-
-namespace uml 
-{
-	class Namespace;
-}
-
-namespace uml 
-{
 	class Operation;
-}
-
-namespace uml 
-{
 	class Package;
-}
-
-namespace uml 
-{
 	class PackageImport;
-}
-
-namespace uml 
-{
-	class PackageableElement;
-}
-
-namespace uml 
-{
 	class Parameter;
-}
-
-namespace uml 
-{
 	class ParameterSet;
-}
-
-namespace uml 
-{
 	class Port;
-}
-
-namespace uml 
-{
 	class Property;
-}
-
-namespace uml 
-{
 	class Pseudostate;
-}
-
-namespace uml 
-{
 	class Reception;
-}
-
-namespace uml 
-{
-	class RedefinableElement;
-}
-
-namespace uml 
-{
 	class Region;
-}
-
-namespace uml 
-{
 	class State;
-}
-
-namespace uml 
-{
-	class StateMachine;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class Substitution;
-}
-
-namespace uml 
-{
 	class TemplateBinding;
-}
-
-namespace uml 
-{
 	class TemplateParameter;
-}
-
-namespace uml 
-{
 	class TemplateSignature;
-}
-
-namespace uml 
-{
 	class UseCase;
-}
-
-namespace uml 
-{
 	class Vertex;
 }
 
@@ -252,6 +82,8 @@ namespace uml
 // enum includes
 #include "uml/VisibilityKind.hpp"
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -294,7 +126,7 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			 
-			virtual std::shared_ptr<uml::Region> LCA(std::shared_ptr<uml::Vertex>  s1,std::shared_ptr<uml::Vertex>  s2) = 0;
+			virtual std::shared_ptr<uml::Region> LCA(std::shared_ptr<uml::Vertex> s1,std::shared_ptr<uml::Vertex> s2) = 0;
 			
 			/*!
 			This utility funciton is like the LCA, except that it returns the nearest composite State that contains both input Vertices.
@@ -309,7 +141,7 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			 
-			virtual std::shared_ptr<uml::State> LCAState(std::shared_ptr<uml::Vertex>  v1,std::shared_ptr<uml::Vertex>  v2) = 0;
+			virtual std::shared_ptr<uml::State> LCAState(std::shared_ptr<uml::Vertex> v1,std::shared_ptr<uml::Vertex> v2) = 0;
 			
 			/*!
 			The query ancestor(s1, s2) checks whether Vertex s2 is an ancestor of Vertex s1.
@@ -329,35 +161,35 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			 
-			virtual bool ancestor(std::shared_ptr<uml::Vertex>  s1,std::shared_ptr<uml::Vertex>  s2) = 0;
+			virtual bool ancestor(std::shared_ptr<uml::Vertex> s1,std::shared_ptr<uml::Vertex> s2) = 0;
 			
 			/*!
 			The Classifier context of a StateMachine cannot be an Interface.
 			_'context' <> null implies not _'context'.oclIsKindOf(Interface)
 			*/
 			 
-			virtual bool classifier_context(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool classifier_context(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			The connection points of a StateMachine are Pseudostates of kind entry point or exit point.
 			connectionPoint->forAll (kind = PseudostateKind::entryPoint or kind = PseudostateKind::exitPoint)
 			*/
 			 
-			virtual bool connection_points(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool connection_points(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			The context Classifier of the method StateMachine of a BehavioralFeature must be the Classifier that owns the BehavioralFeature.
 			specification <> null implies ( _'context' <> null and specification.featuringClassifier->exists(c | c = _'context'))
 			*/
 			 
-			virtual bool context_classifier(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool context_classifier(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			A StateMachine as the method for a BehavioralFeature cannot have entry/exit connection points.
 			specification <> null implies connectionPoint->isEmpty()
 			*/
 			 
-			virtual bool method(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool method(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			
 			//*********************************

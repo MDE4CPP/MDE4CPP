@@ -272,7 +272,7 @@ Any ChangeEventImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::CHANGEEVENT_ATTRIBUTE_CHANGEEXPRESSION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getChangeExpression())); //3412
+			return eAny(getChangeExpression()); //3412
 	}
 	return EventImpl::eGet(featureID, resolve, coreType);
 }
@@ -395,15 +395,12 @@ void ChangeEventImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'changeExpression'
 		std::shared_ptr<uml::ValueSpecification > changeExpression = this->getChangeExpression();
 		if (changeExpression != nullptr)
 		{
 			saveHandler->addReference(changeExpression, "changeExpression", changeExpression->eClass() != package->getValueSpecification_Class());
 		}
-	
-
 	}
 	catch (std::exception& e)
 	{

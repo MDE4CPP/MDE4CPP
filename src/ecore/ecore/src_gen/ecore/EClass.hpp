@@ -38,59 +38,16 @@ namespace ecore
 	class ecoreFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace ecore 
 {
 	class EAnnotation;
-}
-
-namespace ecore 
-{
 	class EAttribute;
-}
-
-namespace ecore 
-{
-	class EClass;
-}
-
-namespace ecore 
-{
-	class EClassifier;
-}
-
-namespace ecore 
-{
 	class EGenericType;
-}
-
-namespace ecore 
-{
-	class EObject;
-}
-
-namespace ecore 
-{
 	class EOperation;
-}
-
-namespace ecore 
-{
 	class EPackage;
-}
-
-namespace ecore 
-{
 	class EReference;
-}
-
-namespace ecore 
-{
 	class EStructuralFeature;
-}
-
-namespace ecore 
-{
 	class ETypeParameter;
 }
 
@@ -99,6 +56,8 @@ namespace ecore
 
 // enum includes
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace ecore 
@@ -136,37 +95,37 @@ namespace ecore
 			virtual int getFeatureCount() const = 0;
 			
 			 
-			virtual int getFeatureID(std::shared_ptr<ecore::EStructuralFeature>  feature) const = 0;
+			virtual int getFeatureID(std::shared_ptr<ecore::EStructuralFeature> feature) const = 0;
 			
 			 
-			virtual std::shared_ptr<ecore::EGenericType> getFeatureType(std::shared_ptr<ecore::EStructuralFeature>  feature) const = 0;
+			virtual std::shared_ptr<ecore::EGenericType> getFeatureType(std::shared_ptr<ecore::EStructuralFeature> feature) const = 0;
 			
 			 
 			virtual int getOperationCount() const = 0;
 			
 			 
-			virtual int getOperationID(std::shared_ptr<ecore::EOperation>  operation) const = 0;
+			virtual int getOperationID(std::shared_ptr<ecore::EOperation> operation) const = 0;
 			
 			 
-			virtual std::shared_ptr<ecore::EOperation> getOverride(std::shared_ptr<ecore::EOperation>  operation) const = 0;
+			virtual std::shared_ptr<ecore::EOperation> getOverride(std::shared_ptr<ecore::EOperation> operation) const = 0;
 			
 			 
-			virtual bool isSuperTypeOf(std::shared_ptr<ecore::EClass>  someClass) const = 0;
+			virtual bool isSuperTypeOf(std::shared_ptr<ecore::EClass> someClass) const = 0;
 			
 			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
 			 
-			virtual bool isAbstract() const = 0;
+			virtual bool  isAbstract() const = 0;
 			
 			 
-			virtual void setAbstract (bool _abstract)= 0; 
+			virtual void setAbstract (bool  _abstract)= 0; 
 			 
-			virtual bool isInterface() const = 0;
+			virtual bool  isInterface() const = 0;
 			
 			 
-			virtual void setInterface (bool _interface)= 0; 
+			virtual void setInterface (bool  _interface)= 0; 
 			
 			//*********************************
 			// Reference
@@ -234,9 +193,9 @@ namespace ecore
 			// Attribute Members
 			//*********************************
 			 
-			bool m_abstract = false;
+			bool  m_abstract = false;
 			 
-			bool m_interface = false;
+			bool  m_interface = false;
 			
 			
 			//*********************************

@@ -272,12 +272,12 @@ std::shared_ptr<ecore::EClass> ReclassifyObjectActionImpl::eStaticClass() const
 /*
 Getter & Setter for attribute isReplaceAll
 */
-bool ReclassifyObjectActionImpl::getIsReplaceAll() const 
+bool  ReclassifyObjectActionImpl::getIsReplaceAll() const 
 {
 	return m_isReplaceAll;
 }
 
-void ReclassifyObjectActionImpl::setIsReplaceAll(bool _isReplaceAll)
+void ReclassifyObjectActionImpl::setIsReplaceAll(bool  _isReplaceAll)
 {
 	m_isReplaceAll = _isReplaceAll;
 } 
@@ -287,19 +287,19 @@ void ReclassifyObjectActionImpl::setIsReplaceAll(bool _isReplaceAll)
 //*********************************
 // Operations
 //*********************************
-bool ReclassifyObjectActionImpl::classifier_not_abstract(Any diagnostics,std::map <   Any, Any >  context)
+bool ReclassifyObjectActionImpl::classifier_not_abstract(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ReclassifyObjectActionImpl::input_pin(Any diagnostics,std::map <   Any, Any >  context)
+bool ReclassifyObjectActionImpl::input_pin(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ReclassifyObjectActionImpl::multiplicity(Any diagnostics,std::map <   Any, Any >  context)
+bool ReclassifyObjectActionImpl::multiplicity(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -482,6 +482,8 @@ Any ReclassifyObjectActionImpl::eGet(int featureID, bool resolve, bool coreType)
 			return eAny(getIsReplaceAll()); //20327
 		case uml::umlPackage::RECLASSIFYOBJECTACTION_ATTRIBUTE_NEWCLASSIFIER:
 		{
+			return eAny(getNewClassifier()); //20328			
+			/*
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Classifier>::iterator iter = m_newClassifier->begin();
 			Bag<uml::Classifier>::iterator end = m_newClassifier->end();
@@ -491,11 +493,14 @@ Any ReclassifyObjectActionImpl::eGet(int featureID, bool resolve, bool coreType)
 				iter++;
 			}
 			return eAny(tempList); //20328
+			*/
 		}
 		case uml::umlPackage::RECLASSIFYOBJECTACTION_ATTRIBUTE_OBJECT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getObject())); //20329
+			return eAny(getObject()); //20329
 		case uml::umlPackage::RECLASSIFYOBJECTACTION_ATTRIBUTE_OLDCLASSIFIER:
 		{
+			return eAny(getOldClassifier()); //20330			
+			/*
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Classifier>::iterator iter = m_oldClassifier->begin();
 			Bag<uml::Classifier>::iterator end = m_oldClassifier->end();
@@ -505,6 +510,7 @@ Any ReclassifyObjectActionImpl::eGet(int featureID, bool resolve, bool coreType)
 				iter++;
 			}
 			return eAny(tempList); //20330
+			*/
 		}
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
@@ -782,32 +788,21 @@ void ReclassifyObjectActionImpl::saveContent(std::shared_ptr<persistence::interf
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'object'
 		std::shared_ptr<uml::InputPin > object = this->getObject();
 		if (object != nullptr)
 		{
 			saveHandler->addReference(object, "object", object->eClass() != package->getInputPin_Class());
 		}
-	
 		// Add attributes
 		if ( this->eIsSet(package->getReclassifyObjectAction_Attribute_isReplaceAll()) )
 		{
 			saveHandler->addAttribute("isReplaceAll", this->getIsReplaceAll());
 		}
 
-		// Add references
-		std::shared_ptr<Bag<uml::Classifier>> newClassifier_list = this->getNewClassifier();
-		for (std::shared_ptr<uml::Classifier > object : *newClassifier_list)
-		{ 
-			saveHandler->addReferences("newClassifier", object);
-		}
-		std::shared_ptr<Bag<uml::Classifier>> oldClassifier_list = this->getOldClassifier();
-		for (std::shared_ptr<uml::Classifier > object : *oldClassifier_list)
-		{ 
-			saveHandler->addReferences("oldClassifier", object);
-		}
-
+	// Add references
+		saveHandler->addReferences<uml::Classifier>("newClassifier", this->getNewClassifier());	
+		saveHandler->addReferences<uml::Classifier>("oldClassifier", this->getOldClassifier());	
 	}
 	catch (std::exception& e)
 	{

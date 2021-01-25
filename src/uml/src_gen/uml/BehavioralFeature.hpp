@@ -40,89 +40,20 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Behavior;
-}
-
-namespace uml 
-{
 	class Classifier;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
 	class Constraint;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class ElementImport;
-}
-
-namespace uml 
-{
-	class Feature;
-}
-
-namespace uml 
-{
-	class NamedElement;
-}
-
-namespace uml 
-{
-	class Namespace;
-}
-
-namespace uml 
-{
 	class PackageImport;
-}
-
-namespace uml 
-{
 	class PackageableElement;
-}
-
-namespace uml 
-{
 	class Parameter;
-}
-
-namespace uml 
-{
 	class ParameterSet;
-}
-
-namespace uml 
-{
-	class RedefinableElement;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class Type;
 }
 
@@ -136,6 +67,8 @@ namespace uml
 
 #include "uml/VisibilityKind.hpp"
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -169,13 +102,13 @@ namespace uml
 			isAbstract implies method->isEmpty()
 			*/
 			 
-			virtual bool abstract_no_method(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool abstract_no_method(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			Creates a return result parameter with the specified name and type.
 			*/
 			 
-			virtual std::shared_ptr<uml::Parameter> createReturnResult(std::string name,std::shared_ptr<uml::Type>  type) = 0;
+			virtual std::shared_ptr<uml::Parameter> createReturnResult(std::string name,std::shared_ptr<uml::Type> type) = 0;
 			
 			/*!
 			The ownedParameters with direction in and inout.
@@ -202,27 +135,27 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual uml::CallConcurrencyKind getConcurrency() const = 0;
+			virtual uml::CallConcurrencyKind  getConcurrency() const = 0;
 			
 			/*!
 			Specifies the semantics of concurrent calls to the same passive instance (i.e., an instance originating from a Class with isActive being false). Active instances control access to their own BehavioralFeatures.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual void setConcurrency (uml::CallConcurrencyKind _concurrency)= 0; 
+			virtual void setConcurrency (uml::CallConcurrencyKind  _concurrency)= 0; 
 			/*!
 			If true, then the BehavioralFeature does not have an implementation, and one must be supplied by a more specific Classifier. If false, the BehavioralFeature must have an implementation in the Classifier or one must be inherited.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual bool getIsAbstract() const = 0;
+			virtual bool  getIsAbstract() const = 0;
 			
 			/*!
 			If true, then the BehavioralFeature does not have an implementation, and one must be supplied by a more specific Classifier. If false, the BehavioralFeature must have an implementation in the Classifier or one must be inherited.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual void setIsAbstract (bool _isAbstract)= 0; 
+			virtual void setIsAbstract (bool  _isAbstract)= 0; 
 			
 			//*********************************
 			// Reference
@@ -270,13 +203,13 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			uml::CallConcurrencyKind m_concurrency = CallConcurrencyKind::SEQUENTIAL;
+			uml::CallConcurrencyKind  m_concurrency = CallConcurrencyKind::SEQUENTIAL;
 			/*!
 			If true, then the BehavioralFeature does not have an implementation, and one must be supplied by a more specific Classifier. If false, the BehavioralFeature must have an implementation in the Classifier or one must be inherited.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			bool m_isAbstract = false;
+			bool  m_isAbstract = false;
 			
 			
 			//*********************************

@@ -277,7 +277,7 @@ std::shared_ptr<ecore::EClass> ReadStructuralFeatureActionImpl::eStaticClass() c
 //*********************************
 // Operations
 //*********************************
-bool ReadStructuralFeatureActionImpl::type_and_ordering(Any diagnostics,std::map <   Any, Any >  context)
+bool ReadStructuralFeatureActionImpl::type_and_ordering(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -439,7 +439,7 @@ Any ReadStructuralFeatureActionImpl::eGet(int featureID, bool resolve, bool core
 	switch(featureID)
 	{
 		case uml::umlPackage::READSTRUCTURALFEATUREACTION_ATTRIBUTE_RESULT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //19929
+			return eAny(getResult()); //19929
 	}
 	return StructuralFeatureActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -568,15 +568,12 @@ void ReadStructuralFeatureActionImpl::saveContent(std::shared_ptr<persistence::i
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'result'
 		std::shared_ptr<uml::OutputPin > result = this->getResult();
 		if (result != nullptr)
 		{
 			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_Class());
 		}
-	
-
 	}
 	catch (std::exception& e)
 	{

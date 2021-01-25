@@ -153,19 +153,19 @@ std::shared_ptr<ecore::EClass> GateImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool GateImpl::actual_gate_distinguishable(Any diagnostics,std::map <   Any, Any >  context)
+bool GateImpl::actual_gate_distinguishable(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool GateImpl::actual_gate_matched(Any diagnostics,std::map <   Any, Any >  context)
+bool GateImpl::actual_gate_matched(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool GateImpl::formal_gate_distinguishable(Any diagnostics,std::map <   Any, Any >  context)
+bool GateImpl::formal_gate_distinguishable(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -183,13 +183,13 @@ std::shared_ptr<uml::InteractionOperand> GateImpl::getOperand()
 	throw "UnsupportedOperationException";
 }
 
-bool GateImpl::inside_cf_gate_distinguishable(Any diagnostics,std::map <   Any, Any >  context)
+bool GateImpl::inside_cf_gate_distinguishable(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool GateImpl::inside_cf_matched(Any diagnostics,std::map <   Any, Any >  context)
+bool GateImpl::inside_cf_matched(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -219,19 +219,19 @@ bool GateImpl::isOutsideCF()
 	throw "UnsupportedOperationException";
 }
 
-bool GateImpl::matches(std::shared_ptr<uml::Gate>  gateToMatch)
+bool GateImpl::matches(std::shared_ptr<uml::Gate> gateToMatch)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool GateImpl::outside_cf_gate_distinguishable(Any diagnostics,std::map <   Any, Any >  context)
+bool GateImpl::outside_cf_gate_distinguishable(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool GateImpl::outside_cf_matched(Any diagnostics,std::map <   Any, Any >  context)
+bool GateImpl::outside_cf_matched(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -378,9 +378,6 @@ void GateImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

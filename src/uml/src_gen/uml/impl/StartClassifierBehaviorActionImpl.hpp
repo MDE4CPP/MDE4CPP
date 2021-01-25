@@ -63,7 +63,7 @@ namespace uml
 			object.is(1,1)
 			*/
 			 
-			virtual bool multiplicity(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool multiplicity(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			If the InputPin has a type, then the type or one of its ancestors must have a classifierBehavior.
@@ -71,7 +71,7 @@ namespace uml
 			   (object.type.oclIsKindOf(BehavioredClassifier) and object.type.oclAsType(BehavioredClassifier).classifierBehavior<>null)
 			*/
 			 
-			virtual bool type_has_classifier(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool type_has_classifier(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			

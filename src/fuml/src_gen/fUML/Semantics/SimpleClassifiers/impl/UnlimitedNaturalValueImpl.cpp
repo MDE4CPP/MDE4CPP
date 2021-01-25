@@ -112,12 +112,12 @@ std::shared_ptr<ecore::EClass> UnlimitedNaturalValueImpl::eStaticClass() const
 /*
 Getter & Setter for attribute value
 */
-int UnlimitedNaturalValueImpl::getValue() const 
+int  UnlimitedNaturalValueImpl::getValue() const 
 {
 	return m_value;
 }
 
-void UnlimitedNaturalValueImpl::setValue(int _value)
+void UnlimitedNaturalValueImpl::setValue(int  _value)
 {
 	m_value = _value;
 } 
@@ -140,7 +140,7 @@ return newValue;
 	//end of body
 }
 
-bool UnlimitedNaturalValueImpl::equals(std::shared_ptr<fUML::Semantics::Values::Value>  otherValue)
+bool UnlimitedNaturalValueImpl::equals(std::shared_ptr<fUML::Semantics::Values::Value> otherValue)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -157,7 +157,7 @@ bool UnlimitedNaturalValueImpl::equals(std::shared_ptr<fUML::Semantics::Values::
 	//end of body
 }
 
-std::shared_ptr<uml::ValueSpecification> UnlimitedNaturalValueImpl::specify()
+std::shared_ptr<org.eclipse.uml2.uml.ValueSpecification> UnlimitedNaturalValueImpl::specify()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -326,14 +326,11 @@ void UnlimitedNaturalValueImpl::saveContent(std::shared_ptr<persistence::interfa
 	try
 	{
 		std::shared_ptr<fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage> package = fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance();
-
-	
 		// Add attributes
 		if ( this->eIsSet(package->getUnlimitedNaturalValue_Attribute_value()) )
 		{
 			saveHandler->addAttribute("value", this->getValue());
 		}
-
 	}
 	catch (std::exception& e)
 	{

@@ -35,61 +35,59 @@ namespace PSCS
 	class PSCSFactory;
 }
 
-//Forward Declaration for used types
-namespace uml 
-{
-	class Action;
-}
-
-namespace fUML::Semantics::Activities 
-{
-	class ActivityEdgeInstance;
-}
-
-namespace uml 
-{
-	class ActivityNode;
-}
-
-namespace fUML::Semantics::Activities 
-{
-	class ActivityNodeActivationGroup;
-}
-
-namespace uml 
-{
-	class AddStructuralFeatureValueAction;
-}
-
-namespace fUML::Semantics::Actions 
-{
-	class AddStructuralFeatureValueActionActivation;
-}
-
+//Forward Declaration for used types 
 namespace fUML::Semantics::Actions 
 {
 	class InputPinActivation;
-}
-
-namespace fUML::Semantics::Actions 
-{
 	class OutputPinActivation;
-}
-
-namespace fUML::Semantics::Actions 
-{
 	class PinActivation;
 }
-
 namespace fUML::Semantics::Activities 
 {
+	class ActivityEdgeInstance;
+	class ActivityNodeActivationGroup;
 	class Token;
+}
+namespace uml 
+{
+	class Action;
+	class ActivityNode;
+	class AddStructuralFeatureValueAction;
 }
 
 // base class includes
 #include "fUML/Semantics/Actions/AddStructuralFeatureValueActionActivation.hpp"
 
 // enum includes
+
+
+//Includes from codegen annotation
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
+
+#include "PSCS/Semantics/StructuredClassifiers/CS_InteractionPoint.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/CS_Reference.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/CS_Link.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
+#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
+
+#include "uml/AddStructuralFeatureValueAction.hpp"
+#include "uml/Port.hpp"
+#include "uml/StructuralFeature.hpp"
+#include "uml/Association.hpp"
+#include "uml/umlPackage.hpp"
+#include "uml/InputPin.hpp"
+#include "fUML/Semantics/Values/Value.hpp"
+#include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
+#include "fUML/Semantics/SimpleClassifiers/UnlimitedNaturalValue.hpp"
+#include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
+#include "fUML/Semantics/Loci/ChoiceStrategy.hpp"
+#include "fUML/Semantics/Loci/Locus.hpp"
+#include "fUML/Semantics/Loci/ExecutionFactory.hpp"
+#include "fUML/Semantics/StructuredClassifiers/Link.hpp"
+#include "fUML/Semantics/SimpleClassifiers/StructuredValue.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/CS_Object.hpp"
+#include "fUML/Semantics/Activities/ActivityExecution.hpp"
 
 
 //*********************************

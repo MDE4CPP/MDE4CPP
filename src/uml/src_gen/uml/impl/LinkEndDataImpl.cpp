@@ -143,31 +143,31 @@ std::shared_ptr<Bag<uml::InputPin> > LinkEndDataImpl::allPins()
 	throw "UnsupportedOperationException";
 }
 
-bool LinkEndDataImpl::end_object_input_pin(Any diagnostics,std::map <   Any, Any >  context)
+bool LinkEndDataImpl::end_object_input_pin(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool LinkEndDataImpl::multiplicity(Any diagnostics,std::map <   Any, Any >  context)
+bool LinkEndDataImpl::multiplicity(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool LinkEndDataImpl::property_is_association_end(Any diagnostics,std::map <   Any, Any >  context)
+bool LinkEndDataImpl::property_is_association_end(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool LinkEndDataImpl::qualifiers(Any diagnostics,std::map <   Any, Any >  context)
+bool LinkEndDataImpl::qualifiers(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool LinkEndDataImpl::same_type(Any diagnostics,std::map <   Any, Any >  context)
+bool LinkEndDataImpl::same_type(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -283,9 +283,11 @@ Any LinkEndDataImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::LINKENDDATA_ATTRIBUTE_END:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEnd())); //1353
+			return eAny(getEnd()); //1353
 		case uml::umlPackage::LINKENDDATA_ATTRIBUTE_QUALIFIER:
 		{
+			return eAny(getQualifier()); //1354			
+			/*
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::QualifierValue>::iterator iter = m_qualifier->begin();
 			Bag<uml::QualifierValue>::iterator end = m_qualifier->end();
@@ -295,9 +297,10 @@ Any LinkEndDataImpl::eGet(int featureID, bool resolve, bool coreType) const
 				iter++;
 			}
 			return eAny(tempList); //1354
+			*/
 		}
 		case uml::umlPackage::LINKENDDATA_ATTRIBUTE_VALUE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getValue())); //1355
+			return eAny(getValue()); //1355
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -510,18 +513,15 @@ void LinkEndDataImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'qualifier'
 		for (std::shared_ptr<uml::QualifierValue> qualifier : *this->getQualifier()) 
 		{
 			saveHandler->addReference(qualifier, "qualifier", qualifier->eClass() != package->getQualifierValue_Class());
 		}
-	
 
-		// Add references
-		saveHandler->addReference("end", this->getEnd());
-		saveHandler->addReference("value", this->getValue());
-
+	// Add references
+		saveHandler->addReference("end", this->getEnd());		 
+		saveHandler->addReference("value", this->getValue());		 
 	}
 	catch (std::exception& e)
 	{

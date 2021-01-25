@@ -41,109 +41,23 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Association;
-}
-
-namespace uml 
-{
 	class Class;
-}
-
-namespace uml 
-{
 	class Classifier;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
-	class ConnectableElement;
-}
-
-namespace uml 
-{
 	class ConnectorEnd;
-}
-
-namespace uml 
-{
 	class DataType;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
 	class Deployment;
-}
-
-namespace uml 
-{
-	class DeploymentTarget;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class Interface;
-}
-
-namespace uml 
-{
 	class Namespace;
-}
-
-namespace uml 
-{
 	class PackageableElement;
-}
-
-namespace uml 
-{
-	class Property;
-}
-
-namespace uml 
-{
-	class RedefinableElement;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
-	class StructuralFeature;
-}
-
-namespace uml 
-{
 	class TemplateParameter;
-}
-
-namespace uml 
-{
 	class Type;
-}
-
-namespace uml 
-{
 	class ValueSpecification;
 }
 
@@ -159,6 +73,9 @@ namespace uml
 
 #include "uml/VisibilityKind.hpp"
 
+
+//Includes from codegen annotation
+#include "uml/AggregationKind.hpp"
 
 //*********************************
 namespace uml 
@@ -228,28 +145,28 @@ namespace uml
 			    and ts.formal.oclAsType(Property).isAttribute())))
 			*/
 			 
-			virtual bool binding_to_attribute(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool binding_to_attribute(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			A Property can be a DeploymentTarget if it is a kind of Node and functions as a part in the internal structure of an encompassing Node.
 			deployment->notEmpty() implies owner.oclIsKindOf(Node) and Node.allInstances()->exists(n | n.part->exists(p | p = self))
 			*/
 			 
-			virtual bool deployment_target(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool deployment_target(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			A derived union is derived.
 			isDerivedUnion implies isDerived
 			*/
 			 
-			virtual bool derived_union_is_derived(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool derived_union_is_derived(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			A derived union is read only.
 			isDerivedUnion implies isReadOnly
 			*/
 			 
-			virtual bool derived_union_is_read_only(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool derived_union_is_read_only(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			
 			
@@ -291,14 +208,14 @@ namespace uml
 			isComposite and association <> null implies opposite.upperBound() <= 1
 			*/
 			 
-			virtual bool multiplicity_of_composite(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool multiplicity_of_composite(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			All qualified Properties must be Association ends
 			qualifier->notEmpty() implies association->notEmpty()
 			*/
 			 
-			virtual bool qualified_is_association_end(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool qualified_is_association_end(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			A redefined Property must be inherited from a more general Classifier.
@@ -309,7 +226,7 @@ namespace uml
 			          fc.allParents()))->asSet())->collect(c| c.allFeatures())->asSet()->includes(rp)))
 			*/
 			 
-			virtual bool redefined_property_inherited(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool redefined_property_inherited(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			Sets the default value for this property to the specified Boolean value.
@@ -358,7 +275,7 @@ namespace uml
 			subsettedProperty->forAll(sp | sp.name <> name)
 			*/
 			 
-			virtual bool subsetted_property_names(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool subsetted_property_names(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			The query subsettingContext() gives the context for subsetting a Property. It consists, in the case of an attribute, of the corresponding Classifier, and in the case of an association end, all of the Classifiers at the other ends.
@@ -383,7 +300,7 @@ namespace uml
 			      sp.subsettingContext()->exists(c | sc.conformsTo(c)))))
 			*/
 			 
-			virtual bool subsetting_context_conforms(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool subsetting_context_conforms(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			A subsetting Property may strengthen the type of the subsetted Property, and its upper bound may be less.
@@ -393,14 +310,14 @@ namespace uml
 			      self.upperBound() <= sp.upperBound() ))
 			*/
 			 
-			virtual bool subsetting_rules(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool subsetting_rules(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			If a Property is a classifier-owned end of a binary Association, its owner must be the type of the opposite end.
 			(opposite->notEmpty() and owningAssociation->isEmpty()) implies classifier = opposite.type
 			*/
 			 
-			virtual bool type_of_opposite_end(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool type_of_opposite_end(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			 
 			virtual void unsetDefault() = 0;
@@ -414,71 +331,71 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual uml::AggregationKind getAggregation() const = 0;
+			virtual uml::AggregationKind  getAggregation() const = 0;
 			
 			/*!
 			Specifies the kind of aggregation that applies to the Property.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual void setAggregation (uml::AggregationKind _aggregation)= 0; 
+			virtual void setAggregation (uml::AggregationKind  _aggregation)= 0; 
 			 
-			virtual std::string getDefault() const = 0;
+			virtual std::string  getDefault() const = 0;
 			
 			 
-			virtual void setDefault (std::string _default)= 0; 
+			virtual void setDefault (std::string  _default)= 0; 
 			/*!
 			If isComposite is true, the object containing the attribute is a container for the object or value contained in the attribute. This is a derived value, indicating whether the aggregation of the Property is composite or not.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual bool getIsComposite() const = 0;
+			virtual bool  getIsComposite() const = 0;
 			
 			/*!
 			If isComposite is true, the object containing the attribute is a container for the object or value contained in the attribute. This is a derived value, indicating whether the aggregation of the Property is composite or not.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual void setIsComposite (bool _isComposite)= 0; 
+			virtual void setIsComposite (bool  _isComposite)= 0; 
 			/*!
 			Specifies whether the Property is derived, i.e., whether its value or values can be computed from other information.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual bool getIsDerived() const = 0;
+			virtual bool  getIsDerived() const = 0;
 			
 			/*!
 			Specifies whether the Property is derived, i.e., whether its value or values can be computed from other information.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual void setIsDerived (bool _isDerived)= 0; 
+			virtual void setIsDerived (bool  _isDerived)= 0; 
 			/*!
 			Specifies whether the property is derived as the union of all of the Properties that are constrained to subset it.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual bool getIsDerivedUnion() const = 0;
+			virtual bool  getIsDerivedUnion() const = 0;
 			
 			/*!
 			Specifies whether the property is derived as the union of all of the Properties that are constrained to subset it.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual void setIsDerivedUnion (bool _isDerivedUnion)= 0; 
+			virtual void setIsDerivedUnion (bool  _isDerivedUnion)= 0; 
 			/*!
 			True indicates this property can be used to uniquely identify an instance of the containing Class.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual bool getIsID() const = 0;
+			virtual bool  getIsID() const = 0;
 			
 			/*!
 			True indicates this property can be used to uniquely identify an instance of the containing Class.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual void setIsID (bool _isID)= 0; 
+			virtual void setIsID (bool  _isID)= 0; 
 			
 			//*********************************
 			// Reference
@@ -630,33 +547,33 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			uml::AggregationKind m_aggregation = AggregationKind::NONE;
+			uml::AggregationKind  m_aggregation = AggregationKind::NONE;
 			 
-			std::string m_default = "";
+			std::string  m_default = "";
 			/*!
 			If isComposite is true, the object containing the attribute is a container for the object or value contained in the attribute. This is a derived value, indicating whether the aggregation of the Property is composite or not.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			bool m_isComposite = false;
+			bool  m_isComposite = false;
 			/*!
 			Specifies whether the Property is derived, i.e., whether its value or values can be computed from other information.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			bool m_isDerived = false;
+			bool  m_isDerived = false;
 			/*!
 			Specifies whether the property is derived as the union of all of the Properties that are constrained to subset it.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			bool m_isDerivedUnion = false;
+			bool  m_isDerivedUnion = false;
 			/*!
 			True indicates this property can be used to uniquely identify an instance of the containing Class.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			bool m_isID = false;
+			bool  m_isID = false;
 			
 			
 			//*********************************

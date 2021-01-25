@@ -183,7 +183,8 @@ void ActionsPackageImpl::initializeAcceptEventActionActivationContent()
 	
 	m_acceptEventActionActivation_Attribute_waiting = getAcceptEventActionActivation_Attribute_waiting();
 	m_acceptEventActionActivation_Attribute_waiting->setName("waiting");
-	m_acceptEventActionActivation_Attribute_waiting->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
+	
+		m_acceptEventActionActivation_Attribute_waiting->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_acceptEventActionActivation_Attribute_waiting->setLowerBound(1);
 	m_acceptEventActionActivation_Attribute_waiting->setUpperBound(1);
 	m_acceptEventActionActivation_Attribute_waiting->setTransient(false);
@@ -379,7 +380,8 @@ void ActionsPackageImpl::initializeActionActivationContent()
 	
 	m_actionActivation_Attribute_firing = getActionActivation_Attribute_firing();
 	m_actionActivation_Attribute_firing->setName("firing");
-	m_actionActivation_Attribute_firing->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
+	
+		m_actionActivation_Attribute_firing->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_actionActivation_Attribute_firing->setLowerBound(1);
 	m_actionActivation_Attribute_firing->setUpperBound(1);
 	m_actionActivation_Attribute_firing->setTransient(false);

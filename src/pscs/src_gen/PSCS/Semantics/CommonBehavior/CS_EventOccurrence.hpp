@@ -35,39 +35,23 @@ namespace PSCS
 	class PSCSFactory;
 }
 
-//Forward Declaration for used types
-namespace PSCS::Semantics::StructuredClassifiers 
-{
-	class CS_InteractionPoint;
-}
-
-namespace PSCS::Semantics::StructuredClassifiers 
-{
-	class CS_Reference;
-}
-
-namespace fUML::Semantics::CommonBehavior 
-{
-	class EventOccurrence;
-}
-
+//Forward Declaration for used types 
 namespace fUML::Semantics::CommonBehavior 
 {
 	class ParameterValue;
 }
-
-namespace uml 
-{
-	class Port;
-}
-
 namespace fUML::Semantics::StructuredClassifiers 
 {
 	class Reference;
 }
-
+namespace PSCS::Semantics::StructuredClassifiers 
+{
+	class CS_InteractionPoint;
+	class CS_Reference;
+}
 namespace uml 
 {
+	class Port;
 	class Trigger;
 }
 
@@ -76,6 +60,9 @@ namespace uml
 
 // enum includes
 
+
+//Includes from codegen annotation
+#include "fUML/FUMLFactory.hpp"
 
 //*********************************
 namespace PSCS::Semantics::CommonBehavior 
@@ -107,23 +94,23 @@ namespace PSCS::Semantics::CommonBehavior
 			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > getParameterValues() = 0;
 			
 			 
-			virtual bool match(std::shared_ptr<uml::Trigger>  trigger) = 0;
+			virtual bool match(std::shared_ptr<org.eclipse.uml2.uml.Trigger> trigger) = 0;
 			
 			 
-			virtual void sendInTo(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference>  target,std::shared_ptr<uml::Port>  port) = 0;
+			virtual void sendInTo(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> target,std::shared_ptr<org.eclipse.uml2.uml.Port> port) = 0;
 			
 			 
-			virtual void sendOutTo(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference>  target,std::shared_ptr<uml::Port>  port) = 0;
+			virtual void sendOutTo(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> target,std::shared_ptr<org.eclipse.uml2.uml.Port> port) = 0;
 			
 			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
 			 
-			virtual bool isPropagationInward() const = 0;
+			virtual bool  isPropagationInward() const = 0;
 			
 			 
-			virtual void setPropagationInward (bool _propagationInward)= 0; 
+			virtual void setPropagationInward (bool  _propagationInward)= 0; 
 			
 			//*********************************
 			// Reference
@@ -135,10 +122,10 @@ namespace PSCS::Semantics::CommonBehavior
 			virtual void setInteractionPoint(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> _interactionPoint) = 0;
 			
 			
-			virtual std::shared_ptr<uml::Port > getOnPort() const = 0;
+			virtual std::shared_ptr<org.eclipse.uml2.uml.Port > getOnPort() const = 0;
 			
 			
-			virtual void setOnPort(std::shared_ptr<uml::Port> _onPort) = 0;
+			virtual void setOnPort(std::shared_ptr<org.eclipse.uml2.uml.Port> _onPort) = 0;
 			
 			
 			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence > getWrappedEventOccurrence() const = 0;
@@ -153,7 +140,7 @@ namespace PSCS::Semantics::CommonBehavior
 			// Attribute Members
 			//*********************************
 			 
-			bool m_propagationInward = false;
+			bool  m_propagationInward = false;
 			
 			
 			//*********************************
@@ -161,7 +148,7 @@ namespace PSCS::Semantics::CommonBehavior
 			//*********************************
 			
 			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint > m_interactionPoint;
-			std::shared_ptr<uml::Port > m_onPort;
+			std::shared_ptr<org.eclipse.uml2.uml.Port > m_onPort;
 			std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence > m_wrappedEventOccurrence;
 
 		public:

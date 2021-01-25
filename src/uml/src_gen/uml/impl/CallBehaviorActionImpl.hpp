@@ -63,7 +63,7 @@ namespace uml
 			onPort=null
 			*/
 			 
-			virtual bool no_onport(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool no_onport(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			

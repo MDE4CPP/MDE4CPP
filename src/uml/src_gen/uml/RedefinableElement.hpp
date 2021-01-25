@@ -38,44 +38,13 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Classifier;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
-	class NamedElement;
-}
-
-namespace uml 
-{
 	class Namespace;
-}
-
-namespace uml 
-{
-	class RedefinableElement;
-}
-
-namespace uml 
-{
 	class StringExpression;
 }
 
@@ -85,6 +54,8 @@ namespace uml
 // enum includes
 #include "uml/VisibilityKind.hpp"
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -120,7 +91,7 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual bool isConsistentWith(std::shared_ptr<uml::RedefinableElement>  redefiningElement) = 0;
+			virtual bool isConsistentWith(std::shared_ptr<uml::RedefinableElement> redefiningElement) = 0;
 			
 			/*!
 			The query isRedefinitionContextValid() specifies whether the redefinition contexts of this RedefinableElement are properly related to the redefinition contexts of the specified RedefinableElement to allow this element to redefine the other. By default at least one of the redefinition contexts of this element must be a specialization of at least one of the redefinition contexts of the specified element.
@@ -128,28 +99,28 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual bool isRedefinitionContextValid(std::shared_ptr<uml::RedefinableElement>  redefinedElement) = 0;
+			virtual bool isRedefinitionContextValid(std::shared_ptr<uml::RedefinableElement> redefinedElement) = 0;
 			
 			/*!
 			A RedefinableElement can only redefine non-leaf RedefinableElements.
 			redefinedElement->forAll(re | not re.isLeaf)
 			*/
 			 
-			virtual bool non_leaf_redefinition(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool non_leaf_redefinition(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			A redefining element must be consistent with each redefined element.
 			redefinedElement->forAll(re | re.isConsistentWith(self))
 			*/
 			 
-			virtual bool redefinition_consistent(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool redefinition_consistent(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			At least one of the redefinition contexts of the redefining element must be a specialization of at least one of the redefinition contexts for each redefined element.
 			redefinedElement->forAll(re | self.isRedefinitionContextValid(re))
 			*/
 			 
-			virtual bool redefinition_context_valid(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool redefinition_context_valid(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			
 			//*********************************
@@ -160,14 +131,14 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual bool getIsLeaf() const = 0;
+			virtual bool  getIsLeaf() const = 0;
 			
 			/*!
 			Indicates whether it is possible to further redefine a RedefinableElement. If the value is true, then it is not possible to further redefine the RedefinableElement.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual void setIsLeaf (bool _isLeaf)= 0; 
+			virtual void setIsLeaf (bool  _isLeaf)= 0; 
 			
 			//*********************************
 			// Reference
@@ -187,7 +158,7 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			bool m_isLeaf = false;
+			bool  m_isLeaf = false;
 			
 			
 			//*********************************

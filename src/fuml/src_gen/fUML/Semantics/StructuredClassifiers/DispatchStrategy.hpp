@@ -35,30 +35,19 @@ namespace fUML
 	class fUMLFactory;
 }
 
-//Forward Declaration for used types
-namespace uml 
-{
-	class Behavior;
-}
-
+//Forward Declaration for used types 
 namespace fUML::Semantics::CommonBehavior 
 {
 	class Execution;
 }
-
 namespace fUML::Semantics::StructuredClassifiers 
 {
 	class Object;
 }
-
 namespace uml 
 {
+	class Behavior;
 	class Operation;
-}
-
-namespace fUML::Semantics::Loci 
-{
-	class SemanticStrategy;
 }
 
 // base class includes
@@ -66,6 +55,11 @@ namespace fUML::Semantics::Loci
 
 // enum includes
 
+
+//Includes from codegen annotation
+#include "abstractDataTypes/Bag.hpp"
+#include "fUML/Semantics/Loci/ExecutionFactory.hpp"
+#include "fUML/Semantics/Loci/Locus.hpp"
 
 //*********************************
 namespace fUML::Semantics::StructuredClassifiers 
@@ -91,13 +85,13 @@ namespace fUML::Semantics::StructuredClassifiers
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> dispatch(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object>  object,std::shared_ptr<uml::Operation>  operation) = 0;
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> dispatch(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> object,std::shared_ptr<org.eclipse.uml2.uml.Operation> operation) = 0;
 			
 			 
 			virtual std::string getName() = 0;
 			
 			 
-			virtual std::shared_ptr<uml::Behavior> retrieveMethod(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object>  object,std::shared_ptr<uml::Operation>  operation) = 0;
+			virtual std::shared_ptr<org.eclipse.uml2.uml.Behavior> retrieveMethod(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> object,std::shared_ptr<org.eclipse.uml2.uml.Operation> operation) = 0;
 			
 			
 			//*********************************

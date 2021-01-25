@@ -38,35 +38,24 @@ namespace fUML
 	class fUMLFactory;
 }
 
-//Forward Declaration for used types
-namespace uml 
-{
-	class Class;
-}
-
+//Forward Declaration for used types 
 namespace fUML::Semantics::CommonBehavior 
 {
 	class ClassifierBehaviorExecution;
-}
-
-namespace fUML::Semantics::CommonBehavior 
-{
 	class EventAccepter;
+	class ParameterValue;
 }
-
+namespace fUML::Semantics::SimpleClassifiers 
+{
+	class SignalInstance;
+}
 namespace fUML::Semantics::StructuredClassifiers 
 {
 	class Object;
 }
-
-namespace fUML::Semantics::CommonBehavior 
+namespace uml 
 {
-	class ParameterValue;
-}
-
-namespace fUML::Semantics::SimpleClassifiers 
-{
-	class SignalInstance;
+	class Class;
 }
 
 // base class includes
@@ -74,6 +63,13 @@ namespace fUML::Semantics::SimpleClassifiers
 // enum includes
 
 #include "ecore/EModelElement.hpp"
+
+//Includes from codegen annotation
+#include "fUML/Semantics/CommonBehavior/ClassifierBehaviorExecution.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
+
+#include "uml/Behavior.hpp"
+#include "uml/Class.hpp"
 
 //*********************************
 namespace fUML::Semantics::CommonBehavior 
@@ -100,7 +96,7 @@ namespace fUML::Semantics::CommonBehavior
 			// Operations
 			//*********************************
 			 
-			virtual void _register(std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter>  accepter) = 0;
+			virtual void _register(std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter> accepter) = 0;
 			
 			 
 			virtual void _send(Any signal) = 0;
@@ -115,16 +111,16 @@ namespace fUML::Semantics::CommonBehavior
 			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> retrieveNextEvent() = 0;
 			
 			 
-			virtual void send(std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance>  signalInstance) = 0;
+			virtual void send(std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> signalInstance) = 0;
 			
 			 
-			virtual void startBehavior(std::shared_ptr<uml::Class>  classifier,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> >  inputs) = 0;
+			virtual void startBehavior(std::shared_ptr<org.eclipse.uml2.uml.Class> classifier,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > inputs) = 0;
 			
 			 
 			virtual void stop() = 0;
 			
 			 
-			virtual void unregister(std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter>  accepter) = 0;
+			virtual void unregister(std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter> accepter) = 0;
 			
 			
 			//*********************************

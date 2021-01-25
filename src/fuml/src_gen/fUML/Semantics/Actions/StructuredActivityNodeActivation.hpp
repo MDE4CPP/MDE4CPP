@@ -36,70 +36,29 @@ namespace fUML
 	class fUMLFactory;
 }
 
-//Forward Declaration for used types
-namespace uml 
-{
-	class Action;
-}
-
-namespace fUML::Semantics::Actions 
-{
-	class ActionActivation;
-}
-
-namespace fUML::Semantics::Activities 
-{
-	class ActivityEdgeInstance;
-}
-
-namespace uml 
-{
-	class ActivityNode;
-}
-
-namespace fUML::Semantics::Activities 
-{
-	class ActivityNodeActivation;
-}
-
-namespace fUML::Semantics::Activities 
-{
-	class ActivityNodeActivationGroup;
-}
-
-namespace uml 
-{
-	class ExecutableNode;
-}
-
+//Forward Declaration for used types 
 namespace fUML::Semantics::Actions 
 {
 	class InputPinActivation;
-}
-
-namespace uml 
-{
-	class OutputPin;
-}
-
-namespace fUML::Semantics::Actions 
-{
 	class OutputPinActivation;
-}
-
-namespace fUML::Semantics::Actions 
-{
 	class PinActivation;
 }
-
 namespace fUML::Semantics::Activities 
 {
+	class ActivityEdgeInstance;
+	class ActivityNodeActivationGroup;
 	class Token;
 }
-
 namespace fUML::Semantics::Values 
 {
 	class Value;
+}
+namespace uml 
+{
+	class Action;
+	class ActivityNode;
+	class ExecutableNode;
+	class OutputPin;
 }
 
 // base class includes
@@ -107,6 +66,16 @@ namespace fUML::Semantics::Values
 
 // enum includes
 
+
+//Includes from codegen annotation
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/Semantics/Activities/ObjectToken.hpp"
+#include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
+#include "uml/StructuredActivityNode.hpp"
+#include "uml/Action.hpp"
+#include "uml/ActivityNode.hpp"
+#include "uml/InputPin.hpp"
+#include "uml/OutputPin.hpp"
 
 //*********************************
 namespace fUML::Semantics::Actions 
@@ -147,22 +116,22 @@ namespace fUML::Semantics::Actions
 			virtual void doStructuredActivity() = 0;
 			
 			 
-			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> getNodeActivation(std::shared_ptr<uml::ActivityNode>  node) = 0;
+			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> getNodeActivation(std::shared_ptr<org.eclipse.uml2.uml.ActivityNode> node) = 0;
 			
 			 
-			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value> > getPinValues(std::shared_ptr<uml::OutputPin>  pin) = 0;
+			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value> > getPinValues(std::shared_ptr<org.eclipse.uml2.uml.OutputPin> pin) = 0;
 			
 			 
-			virtual bool isSourceFor(std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance>  edgeInstance) = 0;
+			virtual bool isSourceFor(std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> edgeInstance) = 0;
 			
 			 
 			virtual bool isSuspended() = 0;
 			
 			 
-			virtual std::shared_ptr<Bag<uml::ActivityNode> > makeActivityNodeList(std::shared_ptr<Bag<uml::ExecutableNode> >  nodes) = 0;
+			virtual std::shared_ptr<Bag<org.eclipse.uml2.uml.ActivityNode> > makeActivityNodeList(std::shared_ptr<Bag<org.eclipse.uml2.uml.ExecutableNode> > nodes) = 0;
 			
 			 
-			virtual void putPinValues(std::shared_ptr<uml::OutputPin>  pin,std::shared_ptr<Bag<fUML::Semantics::Values::Value> >  values) = 0;
+			virtual void putPinValues(std::shared_ptr<org.eclipse.uml2.uml.OutputPin> pin,std::shared_ptr<Bag<fUML::Semantics::Values::Value> > values) = 0;
 			
 			 
 			virtual void resume() = 0;

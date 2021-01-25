@@ -38,104 +38,23 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Behavior;
-}
-
-namespace uml 
-{
 	class Classifier;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
 	class ConnectionPointReference;
-}
-
-namespace uml 
-{
 	class Constraint;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class ElementImport;
-}
-
-namespace uml 
-{
-	class NamedElement;
-}
-
-namespace uml 
-{
-	class Namespace;
-}
-
-namespace uml 
-{
 	class PackageImport;
-}
-
-namespace uml 
-{
 	class PackageableElement;
-}
-
-namespace uml 
-{
 	class Pseudostate;
-}
-
-namespace uml 
-{
-	class RedefinableElement;
-}
-
-namespace uml 
-{
 	class Region;
-}
-
-namespace uml 
-{
-	class State;
-}
-
-namespace uml 
-{
 	class StateMachine;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class Transition;
-}
-
-namespace uml 
-{
 	class Trigger;
 }
 
@@ -145,6 +64,8 @@ namespace uml
 // enum includes
 #include "uml/VisibilityKind.hpp"
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -178,42 +99,42 @@ namespace uml
 			submachine->isEmpty()
 			*/
 			 
-			virtual bool cannot_reference_submachine(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool cannot_reference_submachine(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			A FinalState has no entry Behavior.
 			entry->isEmpty()
 			*/
 			 
-			virtual bool no_entry_behavior(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool no_entry_behavior(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			A FinalState has no exit Behavior.
 			exit->isEmpty()
 			*/
 			 
-			virtual bool no_exit_behavior(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool no_exit_behavior(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			A FinalState cannot have any outgoing Transitions.
 			outgoing->size() = 0
 			*/
 			 
-			virtual bool no_outgoing_transitions(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool no_outgoing_transitions(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			A FinalState cannot have Regions.
 			region->size() = 0
 			*/
 			 
-			virtual bool no_regions(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool no_regions(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			A FinalState has no state (doActivity) Behavior.
 			doActivity->isEmpty()
 			*/
 			 
-			virtual bool no_state_behavior(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool no_state_behavior(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			
 			//*********************************

@@ -92,14 +92,14 @@ namespace uml
 			<p>From package UML::Values.</p>
 			*/
 			 
-			virtual std::string getValue() const ;
+			virtual std::string  getValue() const ;
 			
 			/*!
 			The specified String value.
 			<p>From package UML::Values.</p>
 			*/
 			 
-			virtual void setValue (std::string _value); 
+			virtual void setValue (std::string  _value); 
 			
 			
 			//*********************************

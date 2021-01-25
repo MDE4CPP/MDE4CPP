@@ -35,40 +35,14 @@ namespace ecore
 	class ecoreFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace ecore 
 {
 	class EAnnotation;
-}
-
-namespace ecore 
-{
 	class EClass;
-}
-
-namespace ecore 
-{
 	class EClassifier;
-}
-
-namespace ecore 
-{
 	class EDataType;
-}
-
-namespace ecore 
-{
 	class EGenericType;
-}
-
-namespace ecore 
-{
-	class EObject;
-}
-
-namespace ecore 
-{
-	class EStructuralFeature;
 }
 
 // base class includes
@@ -76,6 +50,8 @@ namespace ecore
 
 // enum includes
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace ecore 
@@ -105,10 +81,10 @@ namespace ecore
 			// Attributes Getter Setter
 			//*********************************
 			 
-			virtual bool isID() const = 0;
+			virtual bool  isID() const = 0;
 			
 			 
-			virtual void setID (bool _iD)= 0; 
+			virtual void setID (bool  _iD)= 0; 
 			
 			//*********************************
 			// Reference
@@ -124,7 +100,7 @@ namespace ecore
 			// Attribute Members
 			//*********************************
 			 
-			bool m_iD = false;
+			bool  m_iD = false;
 			
 			
 			//*********************************

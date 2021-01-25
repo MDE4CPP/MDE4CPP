@@ -47,16 +47,16 @@ namespace fUML::Semantics::SimpleClassifiers
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() ;
 			
 			 
-			virtual bool equals(std::shared_ptr<fUML::Semantics::Values::Value>  otherValue) ;
+			virtual bool equals(std::shared_ptr<fUML::Semantics::Values::Value> otherValue) ;
 			
 			 
-			virtual std::shared_ptr<Bag<uml::Classifier> > getTypes() ;
+			virtual std::shared_ptr<Bag<org.eclipse.uml2.uml.Classifier> > getTypes() ;
 			
 			 
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> new_() ;
 			
 			 
-			virtual std::shared_ptr<uml::ValueSpecification> specify() ;
+			virtual std::shared_ptr<org.eclipse.uml2.uml.ValueSpecification> specify() ;
 			
 			 
 			virtual std::string toString() ;
@@ -72,16 +72,16 @@ namespace fUML::Semantics::SimpleClassifiers
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<uml::EnumerationLiteral > getLiteral() const ;
+			virtual std::shared_ptr<org.eclipse.uml2.uml.EnumerationLiteral > getLiteral() const ;
 			
 			
-			virtual void setLiteral(std::shared_ptr<uml::EnumerationLiteral> _literal) ;
+			virtual void setLiteral(std::shared_ptr<org.eclipse.uml2.uml.EnumerationLiteral> _literal) ;
 			
 			
-			virtual std::shared_ptr<uml::Enumeration > getType() const ;
+			virtual std::shared_ptr<org.eclipse.uml2.uml.Enumeration > getType() const ;
 			
 			
-			virtual void setType(std::shared_ptr<uml::Enumeration> _type) ;
+			virtual void setType(std::shared_ptr<org.eclipse.uml2.uml.Enumeration> _type) ;
 			
 							
 			

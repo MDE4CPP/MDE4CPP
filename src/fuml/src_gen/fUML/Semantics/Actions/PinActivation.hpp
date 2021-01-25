@@ -36,40 +36,21 @@ namespace fUML
 	class fUMLFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace fUML::Semantics::Actions 
 {
 	class ActionActivation;
 }
-
 namespace fUML::Semantics::Activities 
 {
 	class ActivityEdgeInstance;
+	class ActivityNodeActivationGroup;
+	class Token;
 }
-
 namespace uml 
 {
 	class ActivityNode;
-}
-
-namespace fUML::Semantics::Activities 
-{
-	class ActivityNodeActivationGroup;
-}
-
-namespace fUML::Semantics::Activities 
-{
-	class ObjectNodeActivation;
-}
-
-namespace uml 
-{
 	class Pin;
-}
-
-namespace fUML::Semantics::Activities 
-{
-	class Token;
 }
 
 // base class includes
@@ -77,6 +58,10 @@ namespace fUML::Semantics::Activities
 
 // enum includes
 
+
+//Includes from codegen annotation
+#include "uml/ActivityNode.hpp"
+#include "uml/Pin.hpp"
 
 //*********************************
 namespace fUML::Semantics::Actions 
@@ -102,7 +87,7 @@ namespace fUML::Semantics::Actions
 			// Operations
 			//*********************************
 			 
-			virtual void fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token> >  incomingTokens) = 0;
+			virtual void fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > incomingTokens) = 0;
 			
 			 
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > takeOfferedTokens() = 0;
@@ -122,14 +107,14 @@ namespace fUML::Semantics::Actions
 			virtual void setActionActivation(std::shared_ptr<fUML::Semantics::Actions::ActionActivation> _actionActivation) = 0;
 			
 			
-			virtual std::shared_ptr<uml::Pin > getPin() const = 0;
+			virtual std::shared_ptr<org.eclipse.uml2.uml.Pin > getPin() const = 0;
 			
 			
-			virtual void setPin(std::shared_ptr<uml::Pin> _pin) = 0;
+			virtual void setPin(std::shared_ptr<org.eclipse.uml2.uml.Pin> _pin) = 0;
 			
 			/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'pin'*/
 			
-			virtual void setNode(std::shared_ptr<uml::ActivityNode> _node) = 0;
+			virtual void setNode(std::shared_ptr<org.eclipse.uml2.uml.ActivityNode> _node) = 0;
 			
 			
 
@@ -144,7 +129,7 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			
 			std::weak_ptr<fUML::Semantics::Actions::ActionActivation > m_actionActivation;
-			std::shared_ptr<uml::Pin > m_pin;
+			std::shared_ptr<org.eclipse.uml2.uml.Pin > m_pin;
 
 		public:
 			//*********************************

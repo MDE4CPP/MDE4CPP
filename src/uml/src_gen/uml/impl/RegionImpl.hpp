@@ -91,7 +91,7 @@ namespace uml
 			   select(kind = PseudostateKind::deepHistory)->size() <= 1
 			*/
 			 
-			virtual bool deep_history_vertex(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool deep_history_vertex(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			A Region can have at most one initial Vertex.
@@ -99,14 +99,14 @@ namespace uml
 			  select(kind = PseudostateKind::initial)->size() <= 1
 			*/
 			 
-			virtual bool initial_vertex(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool initial_vertex(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			If a Region is owned by a StateMachine, then it cannot also be owned by a State and vice versa.
 			(stateMachine <> null implies state = null) and (state <> null implies stateMachine = null)
 			*/
 			 
-			virtual bool owned(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool owned(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			The redefinition context of a Region is the nearest containing StateMachine.
@@ -127,7 +127,7 @@ namespace uml
 			  select(kind = PseudostateKind::shallowHistory)->size() <= 1
 			*/
 			 
-			virtual bool shallow_history_vertex(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool shallow_history_vertex(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			

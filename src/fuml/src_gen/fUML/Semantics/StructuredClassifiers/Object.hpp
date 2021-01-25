@@ -36,70 +36,29 @@ namespace fUML
 	class fUMLFactory;
 }
 
-//Forward Declaration for used types
-namespace uml 
-{
-	class Class;
-}
-
-namespace uml 
-{
-	class Classifier;
-}
-
+//Forward Declaration for used types 
 namespace fUML::Semantics::CommonBehavior 
 {
 	class EventAccepter;
-}
-
-namespace fUML::Semantics::CommonBehavior 
-{
 	class EventOccurrence;
-}
-
-namespace fUML::Semantics::CommonBehavior 
-{
 	class Execution;
+	class ObjectActivation;
+	class ParameterValue;
 }
-
-namespace fUML::Semantics::StructuredClassifiers 
-{
-	class ExtensionalValue;
-}
-
-namespace fUML::Semantics::SimpleClassifiers 
-{
-	class FeatureValue;
-}
-
 namespace fUML::Semantics::Loci 
 {
 	class Locus;
 }
-
-namespace fUML::Semantics::CommonBehavior 
-{
-	class ObjectActivation;
-}
-
-namespace uml 
-{
-	class Operation;
-}
-
-namespace fUML::Semantics::CommonBehavior 
-{
-	class ParameterValue;
-}
-
 namespace fUML::Semantics::SimpleClassifiers 
 {
+	class FeatureValue;
 	class SignalInstance;
 }
-
-namespace fUML::Semantics::Values 
+namespace uml 
 {
-	class Value;
+	class Class;
+	class Classifier;
+	class Operation;
 }
 
 // base class includes
@@ -107,6 +66,15 @@ namespace fUML::Semantics::Values
 
 // enum includes
 
+
+//Includes from codegen annotation
+#include "fUML/Semantics/StructuredClassifiers/DispatchStrategy.hpp"
+#include "fUML/Semantics/Loci/ExecutionFactory.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
+#include "uml/umlFactory.hpp"
+#include "uml/Class.hpp"
+#include "uml/Classifier.hpp"
 
 //*********************************
 namespace fUML::Semantics::StructuredClassifiers 
@@ -135,28 +103,28 @@ namespace fUML::Semantics::StructuredClassifiers
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() = 0;
 			
 			 
-			virtual void _register(std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter>  accepter) = 0;
+			virtual void _register(std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter> accepter) = 0;
 			
 			 
 			virtual void destroy() = 0;
 			
 			 
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> dispatch(std::shared_ptr<uml::Operation>  operation) = 0;
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> dispatch(std::shared_ptr<org.eclipse.uml2.uml.Operation> operation) = 0;
 			
 			 
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> new_() = 0;
 			
 			 
-			virtual void send(std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance>  signalInstance) = 0;
+			virtual void send(std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> signalInstance) = 0;
 			
 			 
-			virtual void send(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>  eventOccurrence) = 0;
+			virtual void send(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurrence) = 0;
 			
 			 
-			virtual void startBehavior(std::shared_ptr<uml::Class>  classifier,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> >  inputs) = 0;
+			virtual void startBehavior(std::shared_ptr<org.eclipse.uml2.uml.Class> classifier,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > inputs) = 0;
 			
 			 
-			virtual void unregister(std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter>  accepter) = 0;
+			virtual void unregister(std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter> accepter) = 0;
 			
 			
 			//*********************************
@@ -173,7 +141,7 @@ namespace fUML::Semantics::StructuredClassifiers
 			virtual void setObjectActivation(std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> _objectActivation) = 0;
 			
 			
-			virtual std::shared_ptr<Bag<uml::Classifier>> getTypes() const = 0;
+			virtual std::shared_ptr<Bag<org.eclipse.uml2.uml.Classifier>> getTypes() const = 0;
 			
 			
 			
@@ -189,7 +157,7 @@ namespace fUML::Semantics::StructuredClassifiers
 			//*********************************
 			
 			std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation > m_objectActivation;
-			mutable std::shared_ptr<Bag<uml::Classifier>> m_types;
+			mutable std::shared_ptr<Bag<org.eclipse.uml2.uml.Classifier>> m_types;
 
 		public:
 			//*********************************

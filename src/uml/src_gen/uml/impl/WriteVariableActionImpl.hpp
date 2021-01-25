@@ -63,14 +63,14 @@ namespace uml
 			value<>null implies value.is(1,1)
 			*/
 			 
-			virtual bool multiplicity(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool multiplicity(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			The type of the value InputPin must conform to the type of the variable.
 			value <> null implies value.type.conformsTo(variable.type)
 			*/
 			 
-			virtual bool value_type(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool value_type(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			

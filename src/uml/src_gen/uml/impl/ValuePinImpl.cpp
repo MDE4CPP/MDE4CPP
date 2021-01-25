@@ -363,13 +363,13 @@ std::shared_ptr<ecore::EClass> ValuePinImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ValuePinImpl::compatible_type(Any diagnostics,std::map <   Any, Any >  context)
+bool ValuePinImpl::compatible_type(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ValuePinImpl::no_incoming_edges(Any diagnostics,std::map <   Any, Any >  context)
+bool ValuePinImpl::no_incoming_edges(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -531,7 +531,7 @@ Any ValuePinImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::VALUEPIN_ATTRIBUTE_VALUE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getValue())); //24941
+			return eAny(getValue()); //24941
 	}
 	return InputPinImpl::eGet(featureID, resolve, coreType);
 }
@@ -664,15 +664,12 @@ void ValuePinImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'value'
 		std::shared_ptr<uml::ValueSpecification > value = this->getValue();
 		if (value != nullptr)
 		{
 			saveHandler->addReference(value, "value", value->eClass() != package->getValueSpecification_Class());
 		}
-	
-
 	}
 	catch (std::exception& e)
 	{

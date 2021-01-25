@@ -291,12 +291,12 @@ std::shared_ptr<ecore::EClass> AddStructuralFeatureValueActionImpl::eStaticClass
 /*
 Getter & Setter for attribute isReplaceAll
 */
-bool AddStructuralFeatureValueActionImpl::getIsReplaceAll() const 
+bool  AddStructuralFeatureValueActionImpl::getIsReplaceAll() const 
 {
 	return m_isReplaceAll;
 }
 
-void AddStructuralFeatureValueActionImpl::setIsReplaceAll(bool _isReplaceAll)
+void AddStructuralFeatureValueActionImpl::setIsReplaceAll(bool  _isReplaceAll)
 {
 	m_isReplaceAll = _isReplaceAll;
 } 
@@ -306,13 +306,13 @@ void AddStructuralFeatureValueActionImpl::setIsReplaceAll(bool _isReplaceAll)
 //*********************************
 // Operations
 //*********************************
-bool AddStructuralFeatureValueActionImpl::insertAt_pin(Any diagnostics,std::map <   Any, Any >  context)
+bool AddStructuralFeatureValueActionImpl::insertAt_pin(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool AddStructuralFeatureValueActionImpl::required_value(Any diagnostics,std::map <   Any, Any >  context)
+bool AddStructuralFeatureValueActionImpl::required_value(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -474,7 +474,7 @@ Any AddStructuralFeatureValueActionImpl::eGet(int featureID, bool resolve, bool 
 	switch(featureID)
 	{
 		case uml::umlPackage::ADDSTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_INSERTAT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getInsertAt())); //1531
+			return eAny(getInsertAt()); //1531
 		case uml::umlPackage::ADDSTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_ISREPLACEALL:
 			return eAny(getIsReplaceAll()); //1532
 	}
@@ -638,20 +638,17 @@ void AddStructuralFeatureValueActionImpl::saveContent(std::shared_ptr<persistenc
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'insertAt'
 		std::shared_ptr<uml::InputPin > insertAt = this->getInsertAt();
 		if (insertAt != nullptr)
 		{
 			saveHandler->addReference(insertAt, "insertAt", insertAt->eClass() != package->getInputPin_Class());
 		}
-	
 		// Add attributes
 		if ( this->eIsSet(package->getAddStructuralFeatureValueAction_Attribute_isReplaceAll()) )
 		{
 			saveHandler->addAttribute("isReplaceAll", this->getIsReplaceAll());
 		}
-
 	}
 	catch (std::exception& e)
 	{

@@ -371,13 +371,13 @@ std::shared_ptr<ecore::EClass> DataTypeImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<uml::Property> DataTypeImpl::createOwnedAttribute(std::string name,std::shared_ptr<uml::Type>  type,int lower,int upper)
+std::shared_ptr<uml::Property> DataTypeImpl::createOwnedAttribute(std::string name,std::shared_ptr<uml::Type> type,int lower,int upper)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Operation> DataTypeImpl::createOwnedOperation(std::string name,std::shared_ptr<Bag<std::string> >  parameterNames,std::shared_ptr<Bag<uml::Type> >  parameterTypes,std::shared_ptr<uml::Type>  returnType)
+std::shared_ptr<uml::Operation> DataTypeImpl::createOwnedOperation(std::string name,std::shared_ptr<Bag<std::string> > parameterNames,std::shared_ptr<Bag<uml::Type> > parameterTypes,std::shared_ptr<uml::Type> returnType)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -610,27 +610,11 @@ Any DataTypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::DATATYPE_ATTRIBUTE_OWNEDATTRIBUTE:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Property>::iterator iter = m_ownedAttribute->begin();
-			Bag<uml::Property>::iterator end = m_ownedAttribute->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //6538
+			return eAny(getOwnedAttribute()); //6538			
 		}
 		case uml::umlPackage::DATATYPE_ATTRIBUTE_OWNEDOPERATION:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Operation>::iterator iter = m_ownedOperation->begin();
-			Bag<uml::Operation>::iterator end = m_ownedOperation->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //6539
+			return eAny(getOwnedOperation()); //6539			
 		}
 	}
 	return ClassifierImpl::eGet(featureID, resolve, coreType);
@@ -839,7 +823,6 @@ void DataTypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'ownedAttribute'
 		for (std::shared_ptr<uml::Property> ownedAttribute : *this->getOwnedAttribute()) 
 		{
@@ -851,8 +834,6 @@ void DataTypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 		{
 			saveHandler->addReference(ownedOperation, "ownedOperation", ownedOperation->eClass() != package->getOperation_Class());
 		}
-	
-
 	}
 	catch (std::exception& e)
 	{

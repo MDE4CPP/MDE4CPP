@@ -213,13 +213,13 @@ else
 /*
 Getter & Setter for reference createObjectAction
 */
-std::shared_ptr<uml::CreateObjectAction > CreateObjectActionActivationImpl::getCreateObjectAction() const
+std::shared_ptr<org.eclipse.uml2.uml.CreateObjectAction > CreateObjectActionActivationImpl::getCreateObjectAction() const
 {
 //assert(m_createObjectAction);
     return m_createObjectAction;
 }
 
-void CreateObjectActionActivationImpl::setCreateObjectAction(std::shared_ptr<uml::CreateObjectAction> _createObjectAction)
+void CreateObjectActionActivationImpl::setCreateObjectAction(std::shared_ptr<org.eclipse.uml2.uml.CreateObjectAction> _createObjectAction)
 {
     m_createObjectAction = _createObjectAction;
 	//additional setter call for redefined reference ActionActivation::action
@@ -227,9 +227,9 @@ void CreateObjectActionActivationImpl::setCreateObjectAction(std::shared_ptr<uml
 }
 
 /*Additional Setter for redefined reference 'ActionActivation::action'*/
-void CreateObjectActionActivationImpl::setAction(std::shared_ptr<uml::Action> _action)
+void CreateObjectActionActivationImpl::setAction(std::shared_ptr<org.eclipse.uml2.uml.Action> _action)
 {
-	std::shared_ptr<uml::CreateObjectAction> _createObjectAction = std::dynamic_pointer_cast<uml::CreateObjectAction>(_action);
+	std::shared_ptr<org.eclipse.uml2.uml.CreateObjectAction> _createObjectAction = std::dynamic_pointer_cast<org.eclipse.uml2.uml.CreateObjectAction>(_action);
 	if(_createObjectAction)
 	{
 		m_createObjectAction = _createObjectAction;
@@ -239,13 +239,13 @@ void CreateObjectActionActivationImpl::setAction(std::shared_ptr<uml::Action> _a
 	}
 	else
 	{
-		std::cerr<<"[CreateObjectActionActivation::setAction] : Could not set action because provided action was not of type 'uml::CreateObjectAction'"<<std::endl;
+		std::cerr<<"[CreateObjectActionActivation::setAction] : Could not set action because provided action was not of type 'org.eclipse.uml2.uml.CreateObjectAction'"<<std::endl;
 	}
 }
 /*Additional Setter for redefined reference 'ActivityNodeActivation::node'*/
-void CreateObjectActionActivationImpl::setNode(std::shared_ptr<uml::ActivityNode> _node)
+void CreateObjectActionActivationImpl::setNode(std::shared_ptr<org.eclipse.uml2.uml.ActivityNode> _node)
 {
-	std::shared_ptr<uml::CreateObjectAction> _createObjectAction = std::dynamic_pointer_cast<uml::CreateObjectAction>(_node);
+	std::shared_ptr<org.eclipse.uml2.uml.CreateObjectAction> _createObjectAction = std::dynamic_pointer_cast<org.eclipse.uml2.uml.CreateObjectAction>(_node);
 	if(_createObjectAction)
 	{
 		m_createObjectAction = _createObjectAction;
@@ -255,7 +255,7 @@ void CreateObjectActionActivationImpl::setNode(std::shared_ptr<uml::ActivityNode
 	}
 	else
 	{
-		std::cerr<<"[CreateObjectActionActivation::setNode] : Could not set node because provided node was not of type 'uml::CreateObjectAction'"<<std::endl;
+		std::cerr<<"[CreateObjectActionActivation::setNode] : Could not set node because provided node was not of type 'org.eclipse.uml2.uml.CreateObjectAction'"<<std::endl;
 	}
 }
 
@@ -307,7 +307,7 @@ Any CreateObjectActionActivationImpl::eGet(int featureID, bool resolve, bool cor
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::CREATEOBJECTACTIONACTIVATION_ATTRIBUTE_CREATEOBJECTACTION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getCreateObjectAction())); //3411
+			return eAny(getCreateObjectAction()); //3411
 	}
 	return ActionActivationImpl::eGet(featureID, resolve, coreType);
 }
@@ -328,7 +328,7 @@ bool CreateObjectActionActivationImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::CreateObjectAction> _createObjectAction = std::dynamic_pointer_cast<uml::CreateObjectAction>(_temp);
+			std::shared_ptr<org.eclipse.uml2.uml.CreateObjectAction> _createObjectAction = std::dynamic_pointer_cast<org.eclipse.uml2.uml.CreateObjectAction>(_temp);
 			setCreateObjectAction(_createObjectAction); //3411
 			return true;
 		}
@@ -398,7 +398,7 @@ void CreateObjectActionActivationImpl::resolveReferences(const int featureID, st
 			if (references.size() == 1)
 			{
 				// Cast object to correct type
-				std::shared_ptr<uml::CreateObjectAction> _createObjectAction = std::dynamic_pointer_cast<uml::CreateObjectAction>( references.front() );
+				std::shared_ptr<org.eclipse.uml2.uml.CreateObjectAction> _createObjectAction = std::dynamic_pointer_cast<org.eclipse.uml2.uml.CreateObjectAction>( references.front() );
 				setCreateObjectAction(_createObjectAction);
 			}
 			
@@ -430,11 +430,8 @@ void CreateObjectActionActivationImpl::saveContent(std::shared_ptr<persistence::
 	{
 		std::shared_ptr<fUML::Semantics::Actions::ActionsPackage> package = fUML::Semantics::Actions::ActionsPackage::eInstance();
 
-	
-
-		// Add references
-		saveHandler->addReference("createObjectAction", this->getCreateObjectAction());
-
+	// Add references
+		saveHandler->addReference("createObjectAction", this->getCreateObjectAction());		
 	}
 	catch (std::exception& e)
 	{

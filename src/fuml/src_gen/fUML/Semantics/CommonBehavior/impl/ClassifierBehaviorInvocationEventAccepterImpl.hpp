@@ -44,12 +44,12 @@ namespace fUML::Semantics::CommonBehavior
 			// Operations
 			//*********************************
 			 
-			virtual void accept(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>  eventOccurrence) ;
+			virtual void accept(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurrence) ;
 			
 			
 			
 			 
-			virtual bool match(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>  eventOccurrence) ;
+			virtual bool match(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurrence) ;
 			
 			 
 			virtual void terminate() ;
@@ -65,10 +65,10 @@ namespace fUML::Semantics::CommonBehavior
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<uml::Class > getClassifier() const ;
+			virtual std::shared_ptr<org.eclipse.uml2.uml.Class > getClassifier() const ;
 			
 			
-			virtual void setClassifier(std::shared_ptr<uml::Class> _classifier) ;
+			virtual void setClassifier(std::shared_ptr<org.eclipse.uml2.uml.Class> _classifier) ;
 			
 			
 			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution > getExecution() const ;

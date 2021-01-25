@@ -92,14 +92,14 @@ namespace uml
 			<p>From package UML::Values.</p>
 			*/
 			 
-			virtual double getValue() const ;
+			virtual double  getValue() const ;
 			
 			/*!
 			The specified Real value.
 			<p>From package UML::Values.</p>
 			*/
 			 
-			virtual void setValue (double _value); 
+			virtual void setValue (double  _value); 
 			
 			
 			//*********************************

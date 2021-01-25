@@ -114,7 +114,7 @@ std::shared_ptr<ecore::EClass> CallEventOccurrenceImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<uml::Operation> CallEventOccurrenceImpl::getOperation()
+std::shared_ptr<org.eclipse.uml2.uml.Operation> CallEventOccurrenceImpl::getOperation()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -130,7 +130,7 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > CallEvent
 	//end of body
 }
 
-bool CallEventOccurrenceImpl::match(std::shared_ptr<uml::Trigger>  trigger)
+bool CallEventOccurrenceImpl::match(std::shared_ptr<org.eclipse.uml2.uml.Trigger> trigger)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -152,7 +152,7 @@ void CallEventOccurrenceImpl::releaseCaller()
 	//end of body
 }
 
-void CallEventOccurrenceImpl::setOutputParameterValues(std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> >  parameterValues)
+void CallEventOccurrenceImpl::setOutputParameterValues(std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > parameterValues)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -207,7 +207,7 @@ Any CallEventOccurrenceImpl::eGet(int featureID, bool resolve, bool coreType) co
 	switch(featureID)
 	{
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CALLEVENTOCCURRENCE_ATTRIBUTE_EXECUTION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getExecution())); //181
+			return eAny(getExecution()); //181
 	}
 	return EventOccurrenceImpl::eGet(featureID, resolve, coreType);
 }
@@ -324,11 +324,8 @@ void CallEventOccurrenceImpl::saveContent(std::shared_ptr<persistence::interface
 	{
 		std::shared_ptr<fUML::Semantics::CommonBehavior::CommonBehaviorPackage> package = fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance();
 
-	
-
-		// Add references
-		saveHandler->addReference("execution", this->getExecution());
-
+	// Add references
+		saveHandler->addReference("execution", this->getExecution());		 
 	}
 	catch (std::exception& e)
 	{

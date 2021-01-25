@@ -64,7 +64,7 @@ namespace uml
 			result.isOrdered = structuralFeature.isOrdered
 			*/
 			 
-			virtual bool type_and_ordering(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool type_and_ordering(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			

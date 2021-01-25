@@ -35,76 +35,47 @@ namespace fUML
 	class fUMLFactory;
 }
 
-//Forward Declaration for used types
-namespace uml 
-{
-	class Action;
-}
-
-namespace fUML::Semantics::Actions 
-{
-	class ActionActivation;
-}
-
-namespace fUML::Semantics::Activities 
-{
-	class ActivityEdgeInstance;
-}
-
-namespace uml 
-{
-	class ActivityNode;
-}
-
-namespace fUML::Semantics::Activities 
-{
-	class ActivityNodeActivationGroup;
-}
-
-namespace uml 
-{
-	class DestroyObjectAction;
-}
-
+//Forward Declaration for used types 
 namespace fUML::Semantics::Actions 
 {
 	class InputPinActivation;
+	class OutputPinActivation;
+	class PinActivation;
 }
-
+namespace fUML::Semantics::Activities 
+{
+	class ActivityEdgeInstance;
+	class ActivityNodeActivationGroup;
+	class Token;
+}
 namespace fUML::Semantics::StructuredClassifiers 
 {
 	class Link;
-}
-
-namespace fUML::Semantics::Actions 
-{
-	class OutputPinActivation;
-}
-
-namespace fUML::Semantics::Actions 
-{
-	class PinActivation;
-}
-
-namespace fUML::Semantics::StructuredClassifiers 
-{
 	class Reference;
 }
-
-namespace fUML::Semantics::Activities 
-{
-	class Token;
-}
-
 namespace fUML::Semantics::Values 
 {
 	class Value;
+}
+namespace uml 
+{
+	class Action;
+	class ActivityNode;
+	class DestroyObjectAction;
 }
 
 // base class includes
 #include "fUML/Semantics/Actions/ActionActivation.hpp"
 
 // enum includes
+
+
+//Includes from codegen annotation
+#include "uml/Property.hpp"
+#include "uml/DestroyObjectAction.hpp"
+#include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
+#include "fUML/Semantics/Loci/Locus.hpp"
+#include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
 
 
 //*********************************
@@ -131,13 +102,13 @@ namespace fUML::Semantics::Actions
 			// Operations
 			//*********************************
 			 
-			virtual void destroyObject(std::shared_ptr<fUML::Semantics::Values::Value>  value,bool isDestroyLinks,bool isDestroyOwnedObjects) = 0;
+			virtual void destroyObject(std::shared_ptr<fUML::Semantics::Values::Value> value,bool isDestroyLinks,bool isDestroyOwnedObjects) = 0;
 			
 			 
 			virtual void doAction() = 0;
 			
 			 
-			virtual bool objectIsComposite(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference>  reference,std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link>  link) = 0;
+			virtual bool objectIsComposite(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> reference,std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> link) = 0;
 			
 			
 			//*********************************
@@ -148,18 +119,18 @@ namespace fUML::Semantics::Actions
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<uml::DestroyObjectAction > getDestroyObjectAction() const = 0;
+			virtual std::shared_ptr<org.eclipse.uml2.uml.DestroyObjectAction > getDestroyObjectAction() const = 0;
 			
 			
-			virtual void setDestroyObjectAction(std::shared_ptr<uml::DestroyObjectAction> _destroyObjectAction) = 0;
+			virtual void setDestroyObjectAction(std::shared_ptr<org.eclipse.uml2.uml.DestroyObjectAction> _destroyObjectAction) = 0;
 			
 			/*Additional Setter for 'ActionActivation::action' redefined by reference 'destroyObjectAction'*/
 			
-			virtual void setAction(std::shared_ptr<uml::Action> _action) = 0;
+			virtual void setAction(std::shared_ptr<org.eclipse.uml2.uml.Action> _action) = 0;
 			
 			/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'destroyObjectAction'*/
 			
-			virtual void setNode(std::shared_ptr<uml::ActivityNode> _node) = 0;
+			virtual void setNode(std::shared_ptr<org.eclipse.uml2.uml.ActivityNode> _node) = 0;
 			
 			
 
@@ -173,7 +144,7 @@ namespace fUML::Semantics::Actions
 			// Reference Members
 			//*********************************
 			
-			std::shared_ptr<uml::DestroyObjectAction > m_destroyObjectAction;
+			std::shared_ptr<org.eclipse.uml2.uml.DestroyObjectAction > m_destroyObjectAction;
 
 		public:
 			//*********************************

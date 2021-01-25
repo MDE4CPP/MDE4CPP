@@ -35,60 +35,29 @@ namespace fUML
 	class fUMLFactory;
 }
 
-//Forward Declaration for used types
-namespace uml 
-{
-	class Activity;
-}
-
+//Forward Declaration for used types 
 namespace fUML::Semantics::Activities 
 {
 	class ActivityNodeActivationGroup;
 }
-
-namespace uml 
-{
-	class Behavior;
-}
-
-namespace uml 
-{
-	class Classifier;
-}
-
 namespace fUML::Semantics::CommonBehavior 
 {
-	class Execution;
+	class ObjectActivation;
+	class ParameterValue;
 }
-
-namespace fUML::Semantics::SimpleClassifiers 
-{
-	class FeatureValue;
-}
-
 namespace fUML::Semantics::Loci 
 {
 	class Locus;
 }
-
-namespace fUML::Semantics::StructuredClassifiers 
+namespace fUML::Semantics::SimpleClassifiers 
 {
-	class Object;
+	class FeatureValue;
 }
-
-namespace fUML::Semantics::CommonBehavior 
+namespace uml 
 {
-	class ObjectActivation;
-}
-
-namespace fUML::Semantics::CommonBehavior 
-{
-	class ParameterValue;
-}
-
-namespace fUML::Semantics::Values 
-{
-	class Value;
+	class Activity;
+	class Behavior;
+	class Classifier;
 }
 
 // base class includes
@@ -96,6 +65,22 @@ namespace fUML::Semantics::Values
 
 // enum includes
 
+
+//Includes from codegen annotation
+#include "abstractDataTypes/SubsetUnion.hpp"
+#include "fUML/Semantics/Activities/ActivityParameterNodeActivation.hpp"
+#include "fUML/Semantics/CommonBehavior/Execution.hpp"
+#include "fUML/Semantics/Activities/ForkedToken.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/Semantics/Loci/Locus.hpp"
+#include "fUML/Semantics/StructuredClassifiers/Object.hpp"
+#include "fUML/Semantics/Activities/ObjectToken.hpp"
+#include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
+#include "uml/umlPackage.hpp"
+#include "uml/Activity.hpp"
+#include "uml/ActivityParameterNode.hpp"
+#include "uml/Parameter.hpp"
+#include "uml/ParameterDirectionKind.hpp"
 
 //*********************************
 namespace fUML::Semantics::Activities 
@@ -147,14 +132,14 @@ namespace fUML::Semantics::Activities
 			virtual void setActivationGroup(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> _activationGroup) = 0;
 			
 			
-			virtual std::shared_ptr<uml::Activity > getActivity() const = 0;
+			virtual std::shared_ptr<org.eclipse.uml2.uml.Activity > getActivity() const = 0;
 			
 			
-			virtual void setActivity(std::shared_ptr<uml::Activity> _activity) = 0;
+			virtual void setActivity(std::shared_ptr<org.eclipse.uml2.uml.Activity> _activity) = 0;
 			
 			/*Additional Setter for 'Execution::behavior' redefined by reference 'activity'*/
 			
-			virtual void setBehavior(std::shared_ptr<uml::Behavior> _behavior) = 0;
+			virtual void setBehavior(std::shared_ptr<org.eclipse.uml2.uml.Behavior> _behavior) = 0;
 			
 			
 
@@ -169,7 +154,7 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			
 			std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > m_activationGroup;
-			mutable std::shared_ptr<uml::Activity > m_activity;
+			mutable std::shared_ptr<org.eclipse.uml2.uml.Activity > m_activity;
 
 		public:
 			//*********************************

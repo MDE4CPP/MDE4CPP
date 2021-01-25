@@ -98,14 +98,14 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual bool getIsLocallyReentrant() const ;
+			virtual bool  getIsLocallyReentrant() const ;
 			
 			/*!
 			If true, the Action can begin a new, concurrent execution, even if there is already another execution of the Action ongoing. If false, the Action cannot begin a new execution until any previous execution has completed.
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual void setIsLocallyReentrant (bool _isLocallyReentrant); 
+			virtual void setIsLocallyReentrant (bool  _isLocallyReentrant); 
 			
 			
 			//*********************************

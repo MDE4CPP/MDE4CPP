@@ -38,34 +38,12 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Comment;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class InputPin;
-}
-
-namespace uml 
-{
-	class LinkEndData;
-}
-
-namespace uml 
-{
 	class Property;
-}
-
-namespace uml 
-{
 	class QualifierValue;
 }
 
@@ -74,6 +52,8 @@ namespace uml
 
 // enum includes
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -112,7 +92,7 @@ namespace uml
 			endif
 			*/
 			 
-			virtual bool destroyAt_pin(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool destroyAt_pin(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			
 			//*********************************
@@ -123,14 +103,14 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual bool getIsDestroyDuplicates() const = 0;
+			virtual bool  getIsDestroyDuplicates() const = 0;
 			
 			/*!
 			Specifies whether to destroy duplicates of the value in nonunique Association ends.
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual void setIsDestroyDuplicates (bool _isDestroyDuplicates)= 0; 
+			virtual void setIsDestroyDuplicates (bool  _isDestroyDuplicates)= 0; 
 			
 			//*********************************
 			// Reference
@@ -160,7 +140,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			bool m_isDestroyDuplicates = false;
+			bool  m_isDestroyDuplicates = false;
 			
 			
 			//*********************************

@@ -198,15 +198,7 @@ Any ETypeParameterImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case ecore::ecorePackage::ETYPEPARAMETER_ATTRIBUTE_EBOUNDS:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ecore::EGenericType>::iterator iter = m_eBounds->begin();
-			Bag<ecore::EGenericType>::iterator end = m_eBounds->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //525
+			return eAny(getEBounds()); //515			
 		}
 	}
 	return ENamedElementImpl::eGet(featureID, resolve, coreType);
@@ -216,7 +208,7 @@ bool ETypeParameterImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ecore::ecorePackage::ETYPEPARAMETER_ATTRIBUTE_EBOUNDS:
-			return getEBounds() != nullptr; //525
+			return getEBounds() != nullptr; //515
 	}
 	return ENamedElementImpl::internalEIsSet(featureID);
 }
@@ -351,9 +343,6 @@ void ETypeParameterImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	try
 	{
 		std::shared_ptr<ecore::ecorePackage> package = ecore::ecorePackage::eInstance();
-
-	
-
 
 		//
 		// Add new tags (from references)

@@ -129,12 +129,12 @@ std::shared_ptr<EClass> EEnumLiteralImpl::eStaticClass() const
 /*
 Getter & Setter for attribute instance
 */
-Any EEnumLiteralImpl::getInstance() const 
+Any  EEnumLiteralImpl::getInstance() const 
 {
 	return m_instance;
 }
 
-void EEnumLiteralImpl::setInstance(Any _instance)
+void EEnumLiteralImpl::setInstance(Any  _instance)
 {
 	m_instance = _instance;
 } 
@@ -144,12 +144,12 @@ void EEnumLiteralImpl::setInstance(Any _instance)
 /*
 Getter & Setter for attribute literal
 */
-std::string EEnumLiteralImpl::getLiteral() const 
+std::string  EEnumLiteralImpl::getLiteral() const 
 {
 	return m_literal;
 }
 
-void EEnumLiteralImpl::setLiteral(std::string _literal)
+void EEnumLiteralImpl::setLiteral(std::string  _literal)
 {
 	m_literal = _literal;
 } 
@@ -159,12 +159,12 @@ void EEnumLiteralImpl::setLiteral(std::string _literal)
 /*
 Getter & Setter for attribute value
 */
-int EEnumLiteralImpl::getValue() const 
+int  EEnumLiteralImpl::getValue() const 
 {
 	return m_value;
 }
 
-void EEnumLiteralImpl::setValue(int _value)
+void EEnumLiteralImpl::setValue(int  _value)
 {
 	m_value = _value;
 } 
@@ -243,13 +243,13 @@ Any EEnumLiteralImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ecore::ecorePackage::EENUMLITERAL_ATTRIBUTE_EENUM:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEEnum().lock())); //218
+			return eAny(getEEnum().lock()); //208
 		case ecore::ecorePackage::EENUMLITERAL_ATTRIBUTE_INSTANCE:
-			return eAny(getInstance()); //216
+			return eAny(getInstance()); //206
 		case ecore::ecorePackage::EENUMLITERAL_ATTRIBUTE_LITERAL:
-			return eAny(getLiteral()); //217
+			return eAny(getLiteral()); //207
 		case ecore::ecorePackage::EENUMLITERAL_ATTRIBUTE_VALUE:
-			return eAny(getValue()); //215
+			return eAny(getValue()); //205
 	}
 	return ENamedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -258,13 +258,13 @@ bool EEnumLiteralImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ecore::ecorePackage::EENUMLITERAL_ATTRIBUTE_EENUM:
-			return getEEnum().lock() != nullptr; //218
+			return getEEnum().lock() != nullptr; //208
 		case ecore::ecorePackage::EENUMLITERAL_ATTRIBUTE_INSTANCE:
-			return getInstance() != nullptr; //216
+			return getInstance() != nullptr; //206
 		case ecore::ecorePackage::EENUMLITERAL_ATTRIBUTE_LITERAL:
-			return getLiteral() != ""; //217
+			return getLiteral() != ""; //207
 		case ecore::ecorePackage::EENUMLITERAL_ATTRIBUTE_VALUE:
-			return getValue() != 0; //215
+			return getValue() != 0; //205
 	}
 	return ENamedElementImpl::internalEIsSet(featureID);
 }
@@ -276,21 +276,21 @@ bool EEnumLiteralImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			Any _instance = newValue->get<Any>();
-			setInstance(_instance); //216
+			setInstance(_instance); //206
 			return true;
 		}
 		case ecore::ecorePackage::EENUMLITERAL_ATTRIBUTE_LITERAL:
 		{
 			// BOOST CAST
 			std::string _literal = newValue->get<std::string>();
-			setLiteral(_literal); //217
+			setLiteral(_literal); //207
 			return true;
 		}
 		case ecore::ecorePackage::EENUMLITERAL_ATTRIBUTE_VALUE:
 		{
 			// BOOST CAST
 			int _value = newValue->get<int>();
-			setValue(_value); //215
+			setValue(_value); //205
 			return true;
 		}
 	}
@@ -387,8 +387,6 @@ void EEnumLiteralImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	try
 	{
 		std::shared_ptr<ecore::ecorePackage> package = ecore::ecorePackage::eInstance();
-
-	
 		// Add attributes
 		if ( this->eIsSet(package->getEEnumLiteral_Attribute_literal()) )
 		{
@@ -399,7 +397,6 @@ void EEnumLiteralImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 		{
 			saveHandler->addAttribute("value", this->getValue());
 		}
-
 	}
 	catch (std::exception& e)
 	{

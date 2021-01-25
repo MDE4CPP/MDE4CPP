@@ -198,12 +198,12 @@ std::shared_ptr<ecore::EClass> LiteralUnlimitedNaturalImpl::eStaticClass() const
 /*
 Getter & Setter for attribute value
 */
-int LiteralUnlimitedNaturalImpl::getValue() const 
+int  LiteralUnlimitedNaturalImpl::getValue() const 
 {
 	return m_value;
 }
 
-void LiteralUnlimitedNaturalImpl::setValue(int _value)
+void LiteralUnlimitedNaturalImpl::setValue(int  _value)
 {
 	m_value = _value;
 } 
@@ -435,14 +435,11 @@ void LiteralUnlimitedNaturalImpl::saveContent(std::shared_ptr<persistence::inter
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
 		// Add attributes
 		if ( this->eIsSet(package->getLiteralUnlimitedNatural_Attribute_value()) )
 		{
 			saveHandler->addAttribute("value", this->getValue());
 		}
-
 	}
 	catch (std::exception& e)
 	{

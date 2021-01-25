@@ -96,14 +96,14 @@ namespace uml
 			)
 			*/
 			 
-			virtual bool interaction_uses_share_lifeline(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool interaction_uses_share_lifeline(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			The classifier containing the referenced ConnectableElement must be the same classifier, or an ancestor, of the classifier that contains the interaction enclosing this lifeline.
 			represents.namespace->closure(namespace)->includes(interaction._'context')
 			*/
 			 
-			virtual bool same_classifier(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool same_classifier(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			The selector value, if present, must be a LiteralString or a LiteralInteger
@@ -112,14 +112,14 @@ namespace uml
 			self.selector.oclIsKindOf(LiteralString)
 			*/
 			 
-			virtual bool selector_int_or_string(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool selector_int_or_string(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			The selector for a Lifeline must only be specified if the referenced Part is multivalued.
 			 self.selector->notEmpty() = (self.represents.oclIsKindOf(MultiplicityElement) and self.represents.oclAsType(MultiplicityElement).isMultivalued())
 			*/
 			 
-			virtual bool selector_specified(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool selector_specified(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			

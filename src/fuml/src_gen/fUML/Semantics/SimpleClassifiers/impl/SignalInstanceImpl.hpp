@@ -57,10 +57,10 @@ namespace fUML::Semantics::SimpleClassifiers
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<uml::Signal > getType() const ;
+			virtual std::shared_ptr<org.eclipse.uml2.uml.Signal > getType() const ;
 			
 			
-			virtual void setType(std::shared_ptr<uml::Signal> _type) ;
+			virtual void setType(std::shared_ptr<org.eclipse.uml2.uml.Signal> _type) ;
 			
 							
 			

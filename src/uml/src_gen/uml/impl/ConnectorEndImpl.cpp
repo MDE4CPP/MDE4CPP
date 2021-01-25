@@ -158,25 +158,25 @@ std::shared_ptr<ecore::EClass> ConnectorEndImpl::eStaticClass() const
 //*********************************
 
 
-bool ConnectorEndImpl::multiplicity(Any diagnostics,std::map <   Any, Any >  context)
+bool ConnectorEndImpl::multiplicity(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ConnectorEndImpl::part_with_port_empty(Any diagnostics,std::map <   Any, Any >  context)
+bool ConnectorEndImpl::part_with_port_empty(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ConnectorEndImpl::role_and_part_with_port(Any diagnostics,std::map <   Any, Any >  context)
+bool ConnectorEndImpl::role_and_part_with_port(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ConnectorEndImpl::self_part_with_port(Any diagnostics,std::map <   Any, Any >  context)
+bool ConnectorEndImpl::self_part_with_port(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -298,13 +298,13 @@ Any ConnectorEndImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::CONNECTOREND_ATTRIBUTE_CONNECTOR:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getConnector().lock())); //5412
+			return eAny(getConnector().lock()); //5412
 		case uml::umlPackage::CONNECTOREND_ATTRIBUTE_DEFININGEND:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDefiningEnd())); //549
+			return eAny(getDefiningEnd()); //549
 		case uml::umlPackage::CONNECTOREND_ATTRIBUTE_PARTWITHPORT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getPartWithPort())); //5410
+			return eAny(getPartWithPort()); //5410
 		case uml::umlPackage::CONNECTOREND_ATTRIBUTE_ROLE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getRole())); //5411
+			return eAny(getRole()); //5411
 	}
 	return MultiplicityElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -480,12 +480,9 @@ void ConnectorEndImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
-	
-
-		// Add references
-		saveHandler->addReference("partWithPort", this->getPartWithPort());
-		saveHandler->addReference("role", this->getRole());
-
+	// Add references
+		saveHandler->addReference("partWithPort", this->getPartWithPort());		 
+		saveHandler->addReference("role", this->getRole());		 
 	}
 	catch (std::exception& e)
 	{

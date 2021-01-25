@@ -40,124 +40,25 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Activity;
-}
-
-namespace uml 
-{
 	class ActivityEdge;
-}
-
-namespace uml 
-{
-	class ActivityGroup;
-}
-
-namespace uml 
-{
-	class ActivityNode;
-}
-
-namespace uml 
-{
 	class ActivityPartition;
-}
-
-namespace uml 
-{
 	class Classifier;
-}
-
-namespace uml 
-{
 	class Clause;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
 	class Constraint;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class ElementImport;
-}
-
-namespace uml 
-{
 	class ExceptionHandler;
-}
-
-namespace uml 
-{
 	class InputPin;
-}
-
-namespace uml 
-{
 	class InterruptibleActivityRegion;
-}
-
-namespace uml 
-{
-	class NamedElement;
-}
-
-namespace uml 
-{
-	class Namespace;
-}
-
-namespace uml 
-{
 	class OutputPin;
-}
-
-namespace uml 
-{
 	class PackageImport;
-}
-
-namespace uml 
-{
 	class PackageableElement;
-}
-
-namespace uml 
-{
-	class RedefinableElement;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
-	class StructuredActivityNode;
-}
-
-namespace uml 
-{
 	class Variable;
 }
 
@@ -167,6 +68,8 @@ namespace uml
 // enum includes
 #include "uml/VisibilityKind.hpp"
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -200,14 +103,14 @@ namespace uml
 			clause->closure(predecessorClause)->intersection(clause)->isEmpty()
 			*/
 			 
-			virtual bool clause_no_predecessor(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool clause_no_predecessor(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			The union of the ExecutableNodes in the test and body parts of all clauses must be the same as the subset of nodes contained in the ConditionalNode (considered as a StructuredActivityNode) that are ExecutableNodes.
 			clause.test->union(clause._'body') = node->select(oclIsKindOf(ExecutableNode)).oclAsType(ExecutableNode)
 			*/
 			 
-			virtual bool executable_nodes(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool executable_nodes(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			Each clause of a ConditionalNode must have the same number of bodyOutput pins as the ConditionalNode has result OutputPins, and each clause bodyOutput Pin must be compatible with the corresponding result OutputPin (by positional order) in type, multiplicity, ordering, and uniqueness.
@@ -220,14 +123,14 @@ namespace uml
 					bodyOutput->at(i).compatibleWith(result->at(i))))
 			*/
 			 
-			virtual bool matching_output_pins(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool matching_output_pins(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			A ConditionalNode has no InputPins.
 			input->isEmpty()
 			*/
 			 
-			virtual bool no_input_pins(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool no_input_pins(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			No ExecutableNode in the ConditionNode may appear in the test or body part of more than one clause of a ConditionalNode.
@@ -235,14 +138,14 @@ namespace uml
 				self.clause->select(test->union(_'body')->includes(n))->size()=1)
 			*/
 			 
-			virtual bool one_clause_with_executable_node(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool one_clause_with_executable_node(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			The result OutputPins have no incoming edges.
 			result.incoming->isEmpty()
 			*/
 			 
-			virtual bool result_no_incoming(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool result_no_incoming(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			
 			//*********************************
@@ -253,27 +156,27 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual bool getIsAssured() const = 0;
+			virtual bool  getIsAssured() const = 0;
 			
 			/*!
 			If true, the modeler asserts that the test for at least one Clause of the ConditionalNode will succeed.
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual void setIsAssured (bool _isAssured)= 0; 
+			virtual void setIsAssured (bool  _isAssured)= 0; 
 			/*!
 			If true, the modeler asserts that the test for at most one Clause of the ConditionalNode will succeed.
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual bool getIsDeterminate() const = 0;
+			virtual bool  getIsDeterminate() const = 0;
 			
 			/*!
 			If true, the modeler asserts that the test for at most one Clause of the ConditionalNode will succeed.
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual void setIsDeterminate (bool _isDeterminate)= 0; 
+			virtual void setIsDeterminate (bool  _isDeterminate)= 0; 
 			
 			//*********************************
 			// Reference
@@ -307,13 +210,13 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			bool m_isAssured = false;
+			bool  m_isAssured = false;
 			/*!
 			If true, the modeler asserts that the test for at most one Clause of the ConditionalNode will succeed.
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			bool m_isDeterminate = false;
+			bool  m_isDeterminate = false;
 			
 			
 			//*********************************

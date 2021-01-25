@@ -40,55 +40,17 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Comment;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class Namespace;
-}
-
-namespace uml 
-{
 	class Pseudostate;
-}
-
-namespace uml 
-{
 	class Region;
-}
-
-namespace uml 
-{
 	class State;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class Transition;
-}
-
-namespace uml 
-{
-	class Vertex;
 }
 
 // base class includes
@@ -97,6 +59,8 @@ namespace uml
 // enum includes
 #include "uml/VisibilityKind.hpp"
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -146,14 +110,14 @@ namespace uml
 			entry->forAll(kind = PseudostateKind::entryPoint)
 			*/
 			 
-			virtual bool entry_pseudostates(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool entry_pseudostates(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			The exit Pseudostates must be Pseudostates with kind exitPoint.
 			exit->forAll(kind = PseudostateKind::exitPoint)
 			*/
 			 
-			virtual bool exit_pseudostates(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool exit_pseudostates(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			
 			//*********************************

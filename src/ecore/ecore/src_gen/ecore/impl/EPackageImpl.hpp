@@ -59,15 +59,15 @@ namespace ecore
 			// Attributes Getter Setter
 			//*********************************
 			 
-			virtual std::string getNsPrefix() const ;
+			virtual std::string  getNsPrefix() const ;
 			
 			 
-			virtual void setNsPrefix (std::string _nsPrefix); 
+			virtual void setNsPrefix (std::string  _nsPrefix); 
 			 
-			virtual std::string getNsURI() const ;
+			virtual std::string  getNsURI() const ;
 			
 			 
-			virtual void setNsURI (std::string _nsURI); 
+			virtual void setNsURI (std::string  _nsURI); 
 			
 			
 			//*********************************

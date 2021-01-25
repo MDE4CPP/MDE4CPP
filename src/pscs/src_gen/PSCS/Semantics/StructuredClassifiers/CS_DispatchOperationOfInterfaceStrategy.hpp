@@ -35,15 +35,10 @@ namespace PSCS
 	class PSCSFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Operation;
-}
-
-namespace fUML::Semantics::StructuredClassifiers 
-{
-	class RedefinitionBasedDispatchStrategy;
 }
 
 // base class includes
@@ -51,6 +46,14 @@ namespace fUML::Semantics::StructuredClassifiers
 
 // enum includes
 
+
+//Includes from codegen annotation
+#include "fUML/FUMLFactory.hpp"
+
+#include "uml/umlPackage.hpp"
+#include "uml/Namespace.hpp"
+#include "uml/Interface.hpp"
+#include "uml/Parameter.hpp"
 
 //*********************************
 namespace PSCS::Semantics::StructuredClassifiers 
@@ -76,7 +79,7 @@ namespace PSCS::Semantics::StructuredClassifiers
 			// Operations
 			//*********************************
 			 
-			virtual bool operationsMatch(std::shared_ptr<uml::Operation>  ownedOperation,std::shared_ptr<uml::Operation>  baseOperation) = 0;
+			virtual bool operationsMatch(std::shared_ptr<org.eclipse.uml2.uml.Operation> ownedOperation,std::shared_ptr<org.eclipse.uml2.uml.Operation> baseOperation) = 0;
 			
 			
 			//*********************************

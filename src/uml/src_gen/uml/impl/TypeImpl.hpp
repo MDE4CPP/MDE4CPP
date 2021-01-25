@@ -67,13 +67,13 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual bool conformsTo(std::shared_ptr<uml::Type>  other) ;
+			virtual bool conformsTo(std::shared_ptr<uml::Type> other) ;
 			
 			/*!
 			Creates a(n) (binary) association between this type and the specified other type, with the specified navigabilities, aggregations, names, lower bounds, and upper bounds, and owned by this type's nearest package.
 			*/
 			 
-			virtual std::shared_ptr<uml::Association> createAssociation(bool end1IsNavigable,uml::AggregationKind end1Aggregation,std::string end1Name,int end1Lower,int end1Upper,std::shared_ptr<uml::Type>  end1Type,bool end2IsNavigable,uml::AggregationKind end2Aggregation,std::string end2Name,int end2Lower,int end2Upper) ;
+			virtual std::shared_ptr<uml::Association> createAssociation(bool end1IsNavigable,uml::AggregationKind end1Aggregation,std::string end1Name,int end1Lower,int end1Upper,std::shared_ptr<uml::Type> end1Type,bool end2IsNavigable,uml::AggregationKind end2Aggregation,std::string end2Name,int end2Lower,int end2Upper) ;
 			
 			/*!
 			Retrieves the associations in which this type is involved.

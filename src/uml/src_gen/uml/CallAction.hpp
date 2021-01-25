@@ -39,109 +39,25 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Activity;
-}
-
-namespace uml 
-{
 	class ActivityEdge;
-}
-
-namespace uml 
-{
 	class ActivityGroup;
-}
-
-namespace uml 
-{
-	class ActivityNode;
-}
-
-namespace uml 
-{
 	class ActivityPartition;
-}
-
-namespace uml 
-{
 	class Classifier;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
 	class Constraint;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class ExceptionHandler;
-}
-
-namespace uml 
-{
 	class InputPin;
-}
-
-namespace uml 
-{
 	class InterruptibleActivityRegion;
-}
-
-namespace uml 
-{
-	class InvocationAction;
-}
-
-namespace uml 
-{
 	class Namespace;
-}
-
-namespace uml 
-{
 	class OutputPin;
-}
-
-namespace uml 
-{
 	class Parameter;
-}
-
-namespace uml 
-{
 	class Port;
-}
-
-namespace uml 
-{
-	class RedefinableElement;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class StructuredActivityNode;
 }
 
@@ -151,6 +67,8 @@ namespace uml
 // enum includes
 #include "uml/VisibilityKind.hpp"
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -189,7 +107,7 @@ namespace uml
 				argument->at(i).compatibleWith(parameter->at(i)))
 			*/
 			 
-			virtual bool argument_pins(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool argument_pins(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			Return the in and inout ownedParameters of the Behavior or Operation being called. (This operation is abstract and should be overridden by subclasses of CallAction.)
@@ -215,14 +133,14 @@ namespace uml
 				parameter->at(i).compatibleWith(result->at(i)))
 			*/
 			 
-			virtual bool result_pins(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool result_pins(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			Only synchronous CallActions can have result OutputPins.
 			result->notEmpty() implies isSynchronous
 			*/
 			 
-			virtual bool synchronous_call(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool synchronous_call(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			
 			//*********************************
@@ -233,14 +151,14 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual bool getIsSynchronous() const = 0;
+			virtual bool  getIsSynchronous() const = 0;
 			
 			/*!
 			If true, the call is synchronous and the caller waits for completion of the invoked Behavior. If false, the call is asynchronous and the caller proceeds immediately and cannot receive return values.
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual void setIsSynchronous (bool _isSynchronous)= 0; 
+			virtual void setIsSynchronous (bool  _isSynchronous)= 0; 
 			
 			//*********************************
 			// Reference
@@ -264,7 +182,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			bool m_isSynchronous = true;
+			bool  m_isSynchronous = true;
 			
 			
 			//*********************************

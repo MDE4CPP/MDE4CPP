@@ -167,19 +167,19 @@ std::shared_ptr<ecore::EClass> LinkActionActivationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool LinkActionActivationImpl::endMatchesEndData(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link>  link,std::shared_ptr<uml::LinkEndData>  endData)
+bool LinkActionActivationImpl::endMatchesEndData(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> link,std::shared_ptr<org.eclipse.uml2.uml.LinkEndData> endData)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Association> LinkActionActivationImpl::getAssociation()
+std::shared_ptr<org.eclipse.uml2.uml.Association> LinkActionActivationImpl::getAssociation()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool LinkActionActivationImpl::linkMatchesEndData(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link>  link,std::shared_ptr<Bag<uml::LinkEndData> >  endDataList)
+bool LinkActionActivationImpl::linkMatchesEndData(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> link,std::shared_ptr<Bag<org.eclipse.uml2.uml.LinkEndData> > endDataList)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -313,9 +313,6 @@ void LinkActionActivationImpl::saveContent(std::shared_ptr<persistence::interfac
 	try
 	{
 		std::shared_ptr<fUML::Semantics::Actions::ActionsPackage> package = fUML::Semantics::Actions::ActionsPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

@@ -36,50 +36,23 @@ namespace fUML
 	class fUMLFactory;
 }
 
-//Forward Declaration for used types
-namespace fUML::Semantics::Activities 
-{
-	class ActivityEdgeInstance;
-}
-
-namespace fUML::Semantics::Activities 
-{
-	class ActivityExecution;
-}
-
-namespace uml 
-{
-	class ActivityNode;
-}
-
-namespace fUML::Semantics::Activities 
-{
-	class ActivityNodeActivation;
-}
-
-namespace fUML::Semantics::Activities 
-{
-	class ActivityNodeActivationGroup;
-}
-
-namespace fUML::Semantics::Activities 
-{
-	class ExpansionNodeActivation;
-}
-
-namespace fUML::Semantics::Activities 
-{
-	class ExpansionRegionActivation;
-}
-
+//Forward Declaration for used types 
 namespace fUML::Semantics::Actions 
 {
 	class OutputPinActivation;
-}
-
-namespace fUML::Semantics::Actions 
-{
 	class StructuredActivityNodeActivation;
+}
+namespace fUML::Semantics::Activities 
+{
+	class ActivityEdgeInstance;
+	class ActivityExecution;
+	class ActivityNodeActivation;
+	class ExpansionNodeActivation;
+	class ExpansionRegionActivation;
+}
+namespace uml 
+{
+	class ActivityNode;
 }
 
 // base class includes
@@ -87,6 +60,9 @@ namespace fUML::Semantics::Actions
 
 // enum includes
 
+
+//Includes from codegen annotation
+#include "uml/ExpansionNode.hpp"
 
 //*********************************
 namespace fUML::Semantics::Activities 
@@ -115,23 +91,23 @@ namespace fUML::Semantics::Activities
 			virtual std::weak_ptr<fUML::Semantics::Activities::ActivityExecution> getActivityExecution() const = 0;
 			
 			 
-			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> getNodeActivation(std::shared_ptr<uml::ActivityNode>  node) = 0;
+			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> getNodeActivation(std::shared_ptr<org.eclipse.uml2.uml.ActivityNode> node) = 0;
 			
 			 
-			virtual void resume(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation>  activation) = 0;
+			virtual void resume(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> activation) = 0;
 			
 			 
-			virtual void suspend(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation>  activation) = 0;
+			virtual void suspend(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> activation) = 0;
 			
 			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
 			 
-			virtual int getIndex() const = 0;
+			virtual int  getIndex() const = 0;
 			
 			 
-			virtual void setIndex (int _index)= 0; 
+			virtual void setIndex (int  _index)= 0; 
 			
 			//*********************************
 			// Reference
@@ -161,7 +137,7 @@ namespace fUML::Semantics::Activities
 			// Attribute Members
 			//*********************************
 			 
-			int m_index = 0;
+			int  m_index = 0;
 			
 			
 			//*********************************

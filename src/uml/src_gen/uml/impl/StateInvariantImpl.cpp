@@ -285,7 +285,7 @@ Any StateInvariantImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::STATEINVARIANT_ATTRIBUTE_INVARIANT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getInvariant())); //22113
+			return eAny(getInvariant()); //22113
 	}
 	return InteractionFragmentImpl::eGet(featureID, resolve, coreType);
 }
@@ -403,15 +403,12 @@ void StateInvariantImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'invariant'
 		std::shared_ptr<uml::Constraint > invariant = this->getInvariant();
 		if (invariant != nullptr)
 		{
 			saveHandler->addReference(invariant, "invariant", invariant->eClass() != package->getConstraint_Class());
 		}
-	
-
 	}
 	catch (std::exception& e)
 	{

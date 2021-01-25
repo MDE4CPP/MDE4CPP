@@ -210,31 +210,31 @@ std::shared_ptr<ecore::EClass> NamespaceImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool NamespaceImpl::cannot_import_ownedMembers(Any diagnostics,std::map <   Any, Any >  context)
+bool NamespaceImpl::cannot_import_ownedMembers(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool NamespaceImpl::cannot_import_self(Any diagnostics,std::map <   Any, Any >  context)
+bool NamespaceImpl::cannot_import_self(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::ElementImport> NamespaceImpl::createElementImport(std::shared_ptr<uml::PackageableElement>  element,uml::VisibilityKind visibility)
+std::shared_ptr<uml::ElementImport> NamespaceImpl::createElementImport(std::shared_ptr<uml::PackageableElement> element,uml::VisibilityKind visibility)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::PackageImport> NamespaceImpl::createPackageImport(std::shared_ptr<uml::Package>  package_,uml::VisibilityKind visibility)
+std::shared_ptr<uml::PackageImport> NamespaceImpl::createPackageImport(std::shared_ptr<uml::Package> package_,uml::VisibilityKind visibility)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::PackageableElement> > NamespaceImpl::excludeCollisions(std::shared_ptr<Bag<uml::PackageableElement> >  imps)
+std::shared_ptr<Bag<uml::PackageableElement> > NamespaceImpl::excludeCollisions(std::shared_ptr<Bag<uml::PackageableElement> > imps)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -258,7 +258,7 @@ std::shared_ptr<Bag<uml::Package> > NamespaceImpl::getImportedPackages()
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<std::string> > NamespaceImpl::getNamesOfMember(std::shared_ptr<uml::NamedElement>  element)
+std::shared_ptr<Bag<std::string> > NamespaceImpl::getNamesOfMember(std::shared_ptr<uml::NamedElement> element)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -270,7 +270,7 @@ std::shared_ptr<Bag<uml::NamedElement> > NamespaceImpl::getOwnedMembers()
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::PackageableElement> > NamespaceImpl::importMembers(std::shared_ptr<Bag<uml::PackageableElement> >  imps)
+std::shared_ptr<Bag<uml::PackageableElement> > NamespaceImpl::importMembers(std::shared_ptr<Bag<uml::PackageableElement> > imps)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -282,7 +282,7 @@ bool NamespaceImpl::membersAreDistinguishable()
 	throw "UnsupportedOperationException";
 }
 
-bool NamespaceImpl::members_distinguishable(Any diagnostics,std::map <   Any, Any >  context)
+bool NamespaceImpl::members_distinguishable(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -514,75 +514,27 @@ Any NamespaceImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::NAMESPACE_ATTRIBUTE_ELEMENTIMPORT:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ElementImport>::iterator iter = m_elementImport->begin();
-			Bag<uml::ElementImport>::iterator end = m_elementImport->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //15610
+			return eAny(getElementImport()); //15610			
 		}
 		case uml::umlPackage::NAMESPACE_ATTRIBUTE_IMPORTEDMEMBER:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::PackageableElement>::iterator iter = m_importedMember->begin();
-			Bag<uml::PackageableElement>::iterator end = m_importedMember->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //15613
+			return eAny(getImportedMember()); //15613			
 		}
 		case uml::umlPackage::NAMESPACE_ATTRIBUTE_MEMBER:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::NamedElement>::iterator iter = m_member->begin();
-			Bag<uml::NamedElement>::iterator end = m_member->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //15614
+			return eAny(getMember()); //15614			
 		}
 		case uml::umlPackage::NAMESPACE_ATTRIBUTE_OWNEDMEMBER:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::NamedElement>::iterator iter = m_ownedMember->begin();
-			Bag<uml::NamedElement>::iterator end = m_ownedMember->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //15612
+			return eAny(getOwnedMember()); //15612			
 		}
 		case uml::umlPackage::NAMESPACE_ATTRIBUTE_OWNEDRULE:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Constraint>::iterator iter = m_ownedRule->begin();
-			Bag<uml::Constraint>::iterator end = m_ownedRule->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //1569
+			return eAny(getOwnedRule()); //1569			
 		}
 		case uml::umlPackage::NAMESPACE_ATTRIBUTE_PACKAGEIMPORT:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::PackageImport>::iterator iter = m_packageImport->begin();
-			Bag<uml::PackageImport>::iterator end = m_packageImport->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //15611
+			return eAny(getPackageImport()); //15611			
 		}
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
@@ -857,9 +809,6 @@ void NamespaceImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
-
 
 		//
 		// Add new tags (from references)

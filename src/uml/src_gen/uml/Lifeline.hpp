@@ -40,59 +40,17 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Comment;
-}
-
-namespace uml 
-{
 	class ConnectableElement;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class Interaction;
-}
-
-namespace uml 
-{
 	class InteractionFragment;
-}
-
-namespace uml 
-{
-	class NamedElement;
-}
-
-namespace uml 
-{
 	class Namespace;
-}
-
-namespace uml 
-{
 	class PartDecomposition;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class ValueSpecification;
 }
 
@@ -102,6 +60,8 @@ namespace uml
 // enum includes
 #include "uml/VisibilityKind.hpp"
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -184,14 +144,14 @@ namespace uml
 			)
 			*/
 			 
-			virtual bool interaction_uses_share_lifeline(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool interaction_uses_share_lifeline(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			The classifier containing the referenced ConnectableElement must be the same classifier, or an ancestor, of the classifier that contains the interaction enclosing this lifeline.
 			represents.namespace->closure(namespace)->includes(interaction._'context')
 			*/
 			 
-			virtual bool same_classifier(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool same_classifier(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			The selector value, if present, must be a LiteralString or a LiteralInteger
@@ -200,14 +160,14 @@ namespace uml
 			self.selector.oclIsKindOf(LiteralString)
 			*/
 			 
-			virtual bool selector_int_or_string(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool selector_int_or_string(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			The selector for a Lifeline must only be specified if the referenced Part is multivalued.
 			 self.selector->notEmpty() = (self.represents.oclIsKindOf(MultiplicityElement) and self.represents.oclAsType(MultiplicityElement).isMultivalued())
 			*/
 			 
-			virtual bool selector_specified(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool selector_specified(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			
 			//*********************************

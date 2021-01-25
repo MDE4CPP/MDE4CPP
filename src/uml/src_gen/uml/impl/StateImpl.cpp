@@ -338,7 +338,7 @@ std::shared_ptr<ecore::EClass> StateImpl::eStaticClass() const
 /*
 Getter & Setter for attribute isComposite
 */
-bool StateImpl::getIsComposite() const 
+bool  StateImpl::getIsComposite() const 
 {
 	return m_isComposite;
 }
@@ -350,7 +350,7 @@ bool StateImpl::getIsComposite() const
 /*
 Getter & Setter for attribute isOrthogonal
 */
-bool StateImpl::getIsOrthogonal() const 
+bool  StateImpl::getIsOrthogonal() const 
 {
 	return m_isOrthogonal;
 }
@@ -362,7 +362,7 @@ bool StateImpl::getIsOrthogonal() const
 /*
 Getter & Setter for attribute isSimple
 */
-bool StateImpl::getIsSimple() const 
+bool  StateImpl::getIsSimple() const 
 {
 	return m_isSimple;
 }
@@ -374,7 +374,7 @@ bool StateImpl::getIsSimple() const
 /*
 Getter & Setter for attribute isSubmachineState
 */
-bool StateImpl::getIsSubmachineState() const 
+bool  StateImpl::getIsSubmachineState() const 
 {
 	return m_isSubmachineState;
 }
@@ -386,19 +386,19 @@ bool StateImpl::getIsSubmachineState() const
 //*********************************
 // Operations
 //*********************************
-bool StateImpl::composite_states(Any diagnostics,std::map <   Any, Any >  context)
+bool StateImpl::composite_states(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool StateImpl::destinations_or_sources_of_transitions(Any diagnostics,std::map <   Any, Any >  context)
+bool StateImpl::destinations_or_sources_of_transitions(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool StateImpl::entry_or_exit(Any diagnostics,std::map <   Any, Any >  context)
+bool StateImpl::entry_or_exit(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -434,13 +434,13 @@ std::shared_ptr<uml::Classifier> StateImpl::redefinitionContext()
 	throw "UnsupportedOperationException";
 }
 
-bool StateImpl::submachine_or_regions(Any diagnostics,std::map <   Any, Any >  context)
+bool StateImpl::submachine_or_regions(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool StateImpl::submachine_states(Any diagnostics,std::map <   Any, Any >  context)
+bool StateImpl::submachine_states(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -777,46 +777,22 @@ Any StateImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::STATE_ATTRIBUTE_CONNECTION:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ConnectionPointReference>::iterator iter = m_connection->begin();
-			Bag<uml::ConnectionPointReference>::iterator end = m_connection->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //22021
+			return eAny(getConnection()); //22021			
 		}
 		case uml::umlPackage::STATE_ATTRIBUTE_CONNECTIONPOINT:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Pseudostate>::iterator iter = m_connectionPoint->begin();
-			Bag<uml::Pseudostate>::iterator end = m_connectionPoint->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //22022
+			return eAny(getConnectionPoint()); //22022			
 		}
 		case uml::umlPackage::STATE_ATTRIBUTE_DEFERRABLETRIGGER:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Trigger>::iterator iter = m_deferrableTrigger->begin();
-			Bag<uml::Trigger>::iterator end = m_deferrableTrigger->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //22023
+			return eAny(getDeferrableTrigger()); //22023			
 		}
 		case uml::umlPackage::STATE_ATTRIBUTE_DOACTIVITY:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDoActivity())); //22024
+			return eAny(getDoActivity()); //22024
 		case uml::umlPackage::STATE_ATTRIBUTE_ENTRY:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEntry())); //22025
+			return eAny(getEntry()); //22025
 		case uml::umlPackage::STATE_ATTRIBUTE_EXIT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getExit())); //22026
+			return eAny(getExit()); //22026
 		case uml::umlPackage::STATE_ATTRIBUTE_ISCOMPOSITE:
 			return eAny(getIsComposite()); //22027
 		case uml::umlPackage::STATE_ATTRIBUTE_ISORTHOGONAL:
@@ -826,23 +802,15 @@ Any StateImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::STATE_ATTRIBUTE_ISSUBMACHINESTATE:
 			return eAny(getIsSubmachineState()); //22030
 		case uml::umlPackage::STATE_ATTRIBUTE_REDEFINEDSTATE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getRedefinedState())); //22031
+			return eAny(getRedefinedState()); //22031
 		case uml::umlPackage::STATE_ATTRIBUTE_REGION:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Region>::iterator iter = m_region->begin();
-			Bag<uml::Region>::iterator end = m_region->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //22034
+			return eAny(getRegion()); //22034			
 		}
 		case uml::umlPackage::STATE_ATTRIBUTE_STATEINVARIANT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getStateInvariant())); //22032
+			return eAny(getStateInvariant()); //22032
 		case uml::umlPackage::STATE_ATTRIBUTE_SUBMACHINE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSubmachine())); //22033
+			return eAny(getSubmachine()); //22033
 	}
 	Any result;
 	result = NamespaceImpl::eGet(featureID, resolve, coreType);
@@ -1382,7 +1350,6 @@ void StateImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'connection'
 		for (std::shared_ptr<uml::ConnectionPointReference> connection : *this->getConnection()) 
 		{
@@ -1427,13 +1394,11 @@ void StateImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 		{
 			saveHandler->addReference(region, "region", region->eClass() != package->getRegion_Class());
 		}
-	
 
-		// Add references
-		saveHandler->addReference("redefinedState", this->getRedefinedState());
-		saveHandler->addReference("stateInvariant", this->getStateInvariant());
-		saveHandler->addReference("submachine", this->getSubmachine());
-
+	// Add references
+		saveHandler->addReference("redefinedState", this->getRedefinedState());		 
+		saveHandler->addReference("stateInvariant", this->getStateInvariant());		 
+		saveHandler->addReference("submachine", this->getSubmachine());		 
 	}
 	catch (std::exception& e)
 	{

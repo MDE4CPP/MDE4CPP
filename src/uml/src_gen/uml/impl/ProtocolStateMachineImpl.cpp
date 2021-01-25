@@ -552,19 +552,19 @@ std::shared_ptr<ecore::EClass> ProtocolStateMachineImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ProtocolStateMachineImpl::deep_or_shallow_history(Any diagnostics,std::map <   Any, Any >  context)
+bool ProtocolStateMachineImpl::deep_or_shallow_history(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ProtocolStateMachineImpl::entry_exit_do(Any diagnostics,std::map <   Any, Any >  context)
+bool ProtocolStateMachineImpl::entry_exit_do(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ProtocolStateMachineImpl::protocol_transitions(Any diagnostics,std::map <   Any, Any >  context)
+bool ProtocolStateMachineImpl::protocol_transitions(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -809,15 +809,7 @@ Any ProtocolStateMachineImpl::eGet(int featureID, bool resolve, bool coreType) c
 	{
 		case uml::umlPackage::PROTOCOLSTATEMACHINE_ATTRIBUTE_CONFORMANCE:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ProtocolConformance>::iterator iter = m_conformance->begin();
-			Bag<uml::ProtocolConformance>::iterator end = m_conformance->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //18765
+			return eAny(getConformance()); //18765			
 		}
 	}
 	return StateMachineImpl::eGet(featureID, resolve, coreType);
@@ -989,14 +981,11 @@ void ProtocolStateMachineImpl::saveContent(std::shared_ptr<persistence::interfac
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'conformance'
 		for (std::shared_ptr<uml::ProtocolConformance> conformance : *this->getConformance()) 
 		{
 			saveHandler->addReference(conformance, "conformance", conformance->eClass() != package->getProtocolConformance_Class());
 		}
-	
-
 	}
 	catch (std::exception& e)
 	{

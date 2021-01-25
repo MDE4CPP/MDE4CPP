@@ -112,7 +112,7 @@ return fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createContro
 	//end of body
 }
 
-bool ControlTokenImpl::equals(std::shared_ptr<fUML::Semantics::Activities::Token>  other)
+bool ControlTokenImpl::equals(std::shared_ptr<fUML::Semantics::Activities::Token> other)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -231,9 +231,6 @@ void ControlTokenImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	try
 	{
 		std::shared_ptr<fUML::Semantics::Activities::ActivitiesPackage> package = fUML::Semantics::Activities::ActivitiesPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

@@ -38,104 +38,24 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Activity;
-}
-
-namespace uml 
-{
 	class ActivityEdge;
-}
-
-namespace uml 
-{
 	class ActivityGroup;
-}
-
-namespace uml 
-{
-	class ActivityNode;
-}
-
-namespace uml 
-{
 	class ActivityPartition;
-}
-
-namespace uml 
-{
 	class Behavior;
-}
-
-namespace uml 
-{
 	class Classifier;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class InterruptibleActivityRegion;
-}
-
-namespace uml 
-{
 	class Namespace;
-}
-
-namespace uml 
-{
-	class ObjectNode;
-}
-
-namespace uml 
-{
 	class Parameter;
-}
-
-namespace uml 
-{
-	class RedefinableElement;
-}
-
-namespace uml 
-{
 	class State;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class StructuredActivityNode;
-}
-
-namespace uml 
-{
 	class Type;
-}
-
-namespace uml 
-{
 	class ValueSpecification;
 }
 
@@ -147,6 +67,8 @@ namespace uml
 
 #include "uml/VisibilityKind.hpp"
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -180,14 +102,14 @@ namespace uml
 			activity.ownedParameter->includes(parameter)
 			*/
 			 
-			virtual bool has_parameters(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool has_parameters(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			An ActivityParameterNode may have all incoming ActivityEdges or all outgoing ActivityEdges, but it must not have both incoming and outgoing ActivityEdges.
 			incoming->isEmpty() or outgoing->isEmpty()
 			*/
 			 
-			virtual bool no_edges(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool no_edges(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			An ActivityParameterNode with no incoming ActivityEdges and one or more outgoing ActivityEdges must have a parameter with direction in or inout.
@@ -196,7 +118,7 @@ namespace uml
 				 parameter.direction = ParameterDirectionKind::inout)
 			*/
 			 
-			virtual bool no_incoming_edges(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool no_incoming_edges(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			An ActivityParameterNode with no outgoing ActivityEdges and one or more incoming ActivityEdges must have a parameter with direction out, inout, or return.
@@ -206,14 +128,14 @@ namespace uml
 				 parameter.direction = ParameterDirectionKind::return)
 			*/
 			 
-			virtual bool no_outgoing_edges(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool no_outgoing_edges(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			The type of an ActivityParameterNode is the same as the type of its parameter.
 			type = parameter.type
 			*/
 			 
-			virtual bool same_type(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool same_type(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			
 			//*********************************

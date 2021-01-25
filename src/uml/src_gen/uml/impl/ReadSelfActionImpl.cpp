@@ -266,25 +266,25 @@ std::shared_ptr<ecore::EClass> ReadSelfActionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ReadSelfActionImpl::contained(Any diagnostics,std::map <   Any, Any >  context)
+bool ReadSelfActionImpl::contained(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ReadSelfActionImpl::multiplicity(Any diagnostics,std::map <   Any, Any >  context)
+bool ReadSelfActionImpl::multiplicity(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ReadSelfActionImpl::not_static(Any diagnostics,std::map <   Any, Any >  context)
+bool ReadSelfActionImpl::not_static(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ReadSelfActionImpl::type(Any diagnostics,std::map <   Any, Any >  context)
+bool ReadSelfActionImpl::type(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -426,7 +426,7 @@ Any ReadSelfActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::READSELFACTION_ATTRIBUTE_RESULT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //19827
+			return eAny(getResult()); //19827
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -552,15 +552,12 @@ void ReadSelfActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'result'
 		std::shared_ptr<uml::OutputPin > result = this->getResult();
 		if (result != nullptr)
 		{
 			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_Class());
 		}
-	
-
 	}
 	catch (std::exception& e)
 	{

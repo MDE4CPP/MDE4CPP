@@ -230,9 +230,6 @@ void LiteralStringEvaluationImpl::saveContent(std::shared_ptr<persistence::inter
 	try
 	{
 		std::shared_ptr<fUML::Semantics::Values::ValuesPackage> package = fUML::Semantics::Values::ValuesPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

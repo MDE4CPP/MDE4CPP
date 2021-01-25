@@ -35,7 +35,7 @@ namespace fUML
 	class fUMLFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Operation;
@@ -46,6 +46,10 @@ namespace uml
 // enum includes
 
 #include "ecore/EModelElement.hpp"
+
+//Includes from codegen annotation
+#include "uml/umlFactory.hpp"
+#include "uml/Parameter.hpp"
 
 //*********************************
 namespace fUML::Semantics::CommonBehavior 
@@ -82,10 +86,10 @@ namespace fUML::Semantics::CommonBehavior
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<uml::Operation > getOperation() const = 0;
+			virtual std::shared_ptr<org.eclipse.uml2.uml.Operation > getOperation() const = 0;
 			
 			
-			virtual void setOperation(std::shared_ptr<uml::Operation> _operation) = 0;
+			virtual void setOperation(std::shared_ptr<org.eclipse.uml2.uml.Operation> _operation) = 0;
 			
 			
 
@@ -99,7 +103,7 @@ namespace fUML::Semantics::CommonBehavior
 			// Reference Members
 			//*********************************
 			
-			std::shared_ptr<uml::Operation > m_operation;
+			std::shared_ptr<org.eclipse.uml2.uml.Operation > m_operation;
 
 		public:
 			//*********************************

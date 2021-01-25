@@ -55,26 +55,26 @@ namespace uml
 			elementImport.importedElement.oclAsType(Element)->excludesAll(ownedMember)
 			*/
 			 
-			virtual bool cannot_import_ownedMembers(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool cannot_import_ownedMembers(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			A Namespace cannot have a PackageImport to itself.
 			packageImport.importedPackage.oclAsType(Namespace)->excludes(self)
 			*/
 			 
-			virtual bool cannot_import_self(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool cannot_import_self(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			Creates an import of the specified element into this namespace with the specified visibility.
 			*/
 			 
-			virtual std::shared_ptr<uml::ElementImport> createElementImport(std::shared_ptr<uml::PackageableElement>  element,uml::VisibilityKind visibility) ;
+			virtual std::shared_ptr<uml::ElementImport> createElementImport(std::shared_ptr<uml::PackageableElement> element,uml::VisibilityKind visibility) ;
 			
 			/*!
 			Creates an import of the specified package into this namespace with the specified visibility.
 			*/
 			 
-			virtual std::shared_ptr<uml::PackageImport> createPackageImport(std::shared_ptr<uml::Package>  package_,uml::VisibilityKind visibility) ;
+			virtual std::shared_ptr<uml::PackageImport> createPackageImport(std::shared_ptr<uml::Package> package_,uml::VisibilityKind visibility) ;
 			
 			/*!
 			The query excludeCollisions() excludes from a set of PackageableElements any that would not be distinguishable from each other in this Namespace.
@@ -82,7 +82,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::PackageableElement> > excludeCollisions(std::shared_ptr<Bag<uml::PackageableElement> >  imps) ;
+			virtual std::shared_ptr<Bag<uml::PackageableElement> > excludeCollisions(std::shared_ptr<Bag<uml::PackageableElement> > imps) ;
 			
 			/*!
 			Retrieves the elements imported by this namespace.
@@ -119,7 +119,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<std::string> > getNamesOfMember(std::shared_ptr<uml::NamedElement>  element) ;
+			virtual std::shared_ptr<Bag<std::string> > getNamesOfMember(std::shared_ptr<uml::NamedElement> element) ;
 			
 			 
 			virtual std::shared_ptr<Bag<uml::NamedElement> > getOwnedMembers() ;
@@ -130,7 +130,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::PackageableElement> > importMembers(std::shared_ptr<Bag<uml::PackageableElement> >  imps) ;
+			virtual std::shared_ptr<Bag<uml::PackageableElement> > importMembers(std::shared_ptr<Bag<uml::PackageableElement> > imps) ;
 			
 			/*!
 			The Boolean query membersAreDistinguishable() determines whether all of the Namespace's members are distinguishable within it.
@@ -147,7 +147,7 @@ namespace uml
 			membersAreDistinguishable()
 			*/
 			 
-			virtual bool members_distinguishable(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool members_distinguishable(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			

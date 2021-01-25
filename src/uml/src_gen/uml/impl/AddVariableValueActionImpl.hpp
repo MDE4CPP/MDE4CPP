@@ -68,14 +68,14 @@ namespace uml
 			endif
 			*/
 			 
-			virtual bool insertAt_pin(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool insertAt_pin(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			A value InputPin is required.
 			value <> null
 			*/
 			 
-			virtual bool required_value(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool required_value(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			
@@ -87,14 +87,14 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual bool getIsReplaceAll() const ;
+			virtual bool  getIsReplaceAll() const ;
 			
 			/*!
 			Specifies whether existing values of the Variable should be removed before adding the new value.
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual void setIsReplaceAll (bool _isReplaceAll); 
+			virtual void setIsReplaceAll (bool  _isReplaceAll); 
 			
 			
 			//*********************************

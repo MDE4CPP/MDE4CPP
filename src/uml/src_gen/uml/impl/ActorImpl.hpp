@@ -75,14 +75,14 @@ namespace uml
 			  )
 			*/
 			 
-			virtual bool associations(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool associations(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			An Actor must have a name.
 			name->notEmpty()
 			*/
 			 
-			virtual bool must_have_name(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool must_have_name(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			

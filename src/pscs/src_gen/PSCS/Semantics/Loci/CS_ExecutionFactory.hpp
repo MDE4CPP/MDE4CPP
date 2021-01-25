@@ -36,60 +36,28 @@ namespace PSCS
 	class PSCSFactory;
 }
 
-//Forward Declaration for used types
-namespace uml 
-{
-	class Class;
-}
-
-namespace uml 
-{
-	class Classifier;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace fUML::Semantics::Loci 
-{
-	class ExecutionFactory;
-}
-
-namespace fUML::Semantics::Loci 
-{
-	class Locus;
-}
-
-namespace fUML::Semantics::StructuredClassifiers 
-{
-	class Object;
-}
-
+//Forward Declaration for used types 
 namespace fUML::Semantics::CommonBehavior 
 {
 	class OpaqueBehaviorExecution;
 }
-
-namespace uml 
-{
-	class Package;
-}
-
-namespace uml 
-{
-	class PrimitiveType;
-}
-
 namespace fUML::Semantics::Loci 
 {
+	class Locus;
 	class SemanticStrategy;
-}
-
-namespace fUML::Semantics::Loci 
-{
 	class SemanticVisitor;
+}
+namespace fUML::Semantics::StructuredClassifiers 
+{
+	class Object;
+}
+namespace uml 
+{
+	class Class;
+	class Classifier;
+	class Element;
+	class Package;
+	class PrimitiveType;
 }
 
 // base class includes
@@ -97,6 +65,48 @@ namespace fUML::Semantics::Loci
 
 // enum includes
 
+
+//Includes from codegen annotation
+#include "fUML/FUMLFactory.hpp"
+#include "uml/umlFactory.hpp"
+#include "uml/umlPackage.hpp"
+#include "fUML/Semantics/StructuredClassifiers/ExtensionalValue.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
+
+#include "uml/ReadExtentAction.hpp"
+#include "uml/AddStructuralFeatureValueAction.hpp"
+#include "uml/ClearStructuralFeatureAction.hpp"
+#include "uml/CreateLinkAction.hpp"
+#include "uml/CreateObjectAction.hpp"
+#include "uml/ReadSelfAction.hpp"
+#include "uml/AcceptCallAction.hpp"
+#include "uml/InstanceValue.hpp"
+#include "uml/AcceptEventAction.hpp"
+#include "uml/CallOperationAction.hpp"
+#include "uml/SendSignalAction.hpp"
+#include "uml/OpaqueExpression.hpp"
+#include "uml/RemoveStructuralFeatureValueAction.hpp"
+#include "uml/Classifier.hpp"
+#include "fUML/Semantics/CommonBehavior/CallEventBehavior.hpp"
+
+#include "PSCS/Semantics/Actions/CS_ReadExtentActionActivation.hpp"
+#include "PSCS/Semantics/Actions/CS_AddStructuralFeatureValueActionActivation.hpp"
+#include "PSCS/Semantics/Actions/CS_ClearStructuralFeatureActionActivation.hpp"
+#include "PSCS/Semantics/Actions/CS_CreateLinkActionActivation.hpp"
+#include "PSCS/Semantics/Actions/CS_CreateObjectActionActivation.hpp"
+#include "PSCS/Semantics/Actions/CS_ReadSelfActionActivation.hpp"
+#include "PSCS/Semantics/Actions/CS_AcceptCallActionActivation.hpp"
+#include "PSCS/Semantics/Classification/CS_InstanceValueEvaluation.hpp"
+#include "PSCS/Semantics/Actions/CS_AcceptEventActionActivation.hpp"
+#include "PSCS/Semantics/Actions/CS_CallOperationActionActivation.hpp"
+#include "PSCS/Semantics/Actions/CS_SendSignalActionActivation.hpp"
+#include "PSCS/Semantics/Actions/CS_RemoveStructuralFeatureValueActionActivation.hpp"
+#include "PSCS/Semantics/Values/CS_OpaqueExpressionEvaluation.hpp"
+#include "PSCS/Semantics/CommonBehavior/CS_CallEventExecution.hpp"
+#include "PSCS/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+#include "PSCS/Semantics/Actions/ActionsFactory.hpp"
+#include "PSCS/Semantics/Classification/ClassificationFactory.hpp"
+#include "PSCS/Semantics/Values/ValuesFactory.hpp"
 
 //*********************************
 namespace PSCS::Semantics::Loci 
@@ -122,13 +132,13 @@ namespace PSCS::Semantics::Loci
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> getStereotypeApplication(std::shared_ptr<uml::Class>  stereotype,std::shared_ptr<uml::Element>  element) = 0;
+			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> getStereotypeApplication(std::shared_ptr<org.eclipse.uml2.uml.Class> stereotype,std::shared_ptr<org.eclipse.uml2.uml.Element> element) = 0;
 			
 			 
-			virtual std::shared_ptr<uml::Classifier> getStereotypeClass(std::string profileName,std::string stereotypeName) = 0;
+			virtual std::shared_ptr<org.eclipse.uml2.uml.Classifier> getStereotypeClass(std::string profileName,std::string stereotypeName) = 0;
 			
 			 
-			virtual std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> instantiateVisitor(std::shared_ptr<uml::Element>  element) = 0;
+			virtual std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> instantiateVisitor(std::shared_ptr<org.eclipse.uml2.uml.Element> element) = 0;
 			
 			
 			//*********************************
@@ -139,7 +149,7 @@ namespace PSCS::Semantics::Loci
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<Bag<uml::Package>> getAppliedProfiles() const = 0;
+			virtual std::shared_ptr<Bag<org.eclipse.uml2.uml.Package>> getAppliedProfiles() const = 0;
 			
 			
 			
@@ -154,7 +164,7 @@ namespace PSCS::Semantics::Loci
 			// Reference Members
 			//*********************************
 			
-			mutable std::shared_ptr<Bag<uml::Package>> m_appliedProfiles;
+			mutable std::shared_ptr<Bag<org.eclipse.uml2.uml.Package>> m_appliedProfiles;
 
 		public:
 			//*********************************

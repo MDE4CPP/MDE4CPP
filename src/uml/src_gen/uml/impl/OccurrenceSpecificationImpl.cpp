@@ -191,7 +191,7 @@ std::shared_ptr<ecore::EClass> OccurrenceSpecificationImpl::eStaticClass() const
 //*********************************
 
 
-void OccurrenceSpecificationImpl::setCovered(std::shared_ptr<uml::Lifeline>  value)
+void OccurrenceSpecificationImpl::setCovered(std::shared_ptr<uml::Lifeline> value)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -311,6 +311,8 @@ Any OccurrenceSpecificationImpl::eGet(int featureID, bool resolve, bool coreType
 	{
 		case uml::umlPackage::OCCURRENCESPECIFICATION_ATTRIBUTE_TOAFTER:
 		{
+			return eAny(getToAfter()); //16313			
+			/*
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::GeneralOrdering>::iterator iter = m_toAfter->begin();
 			Bag<uml::GeneralOrdering>::iterator end = m_toAfter->end();
@@ -320,9 +322,12 @@ Any OccurrenceSpecificationImpl::eGet(int featureID, bool resolve, bool coreType
 				iter++;
 			}
 			return eAny(tempList); //16313
+			*/
 		}
 		case uml::umlPackage::OCCURRENCESPECIFICATION_ATTRIBUTE_TOBEFORE:
 		{
+			return eAny(getToBefore()); //16314			
+			/*
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::GeneralOrdering>::iterator iter = m_toBefore->begin();
 			Bag<uml::GeneralOrdering>::iterator end = m_toBefore->end();
@@ -332,6 +337,7 @@ Any OccurrenceSpecificationImpl::eGet(int featureID, bool resolve, bool coreType
 				iter++;
 			}
 			return eAny(tempList); //16314
+			*/
 		}
 	}
 	return InteractionFragmentImpl::eGet(featureID, resolve, coreType);
@@ -547,20 +553,9 @@ void OccurrenceSpecificationImpl::saveContent(std::shared_ptr<persistence::inter
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
-	
-
-		// Add references
-		std::shared_ptr<Bag<uml::GeneralOrdering>> toAfter_list = this->getToAfter();
-		for (std::shared_ptr<uml::GeneralOrdering > object : *toAfter_list)
-		{ 
-			saveHandler->addReferences("toAfter", object);
-		}
-		std::shared_ptr<Bag<uml::GeneralOrdering>> toBefore_list = this->getToBefore();
-		for (std::shared_ptr<uml::GeneralOrdering > object : *toBefore_list)
-		{ 
-			saveHandler->addReferences("toBefore", object);
-		}
-
+	// Add references
+		saveHandler->addReferences<uml::GeneralOrdering>("toAfter", this->getToAfter());	
+		saveHandler->addReferences<uml::GeneralOrdering>("toBefore", this->getToBefore());	
 	}
 	catch (std::exception& e)
 	{

@@ -285,9 +285,9 @@ Any ProtocolConformanceImpl::eGet(int featureID, bool resolve, bool coreType) co
 	switch(featureID)
 	{
 		case uml::umlPackage::PROTOCOLCONFORMANCE_ATTRIBUTE_GENERALMACHINE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getGeneralMachine())); //1866
+			return eAny(getGeneralMachine()); //1866
 		case uml::umlPackage::PROTOCOLCONFORMANCE_ATTRIBUTE_SPECIFICMACHINE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSpecificMachine().lock())); //1867
+			return eAny(getSpecificMachine().lock()); //1867
 	}
 	return DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
 }
@@ -435,11 +435,8 @@ void ProtocolConformanceImpl::saveContent(std::shared_ptr<persistence::interface
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
-	
-
-		// Add references
-		saveHandler->addReference("generalMachine", this->getGeneralMachine());
-
+	// Add references
+		saveHandler->addReference("generalMachine", this->getGeneralMachine());		 
 	}
 	catch (std::exception& e)
 	{

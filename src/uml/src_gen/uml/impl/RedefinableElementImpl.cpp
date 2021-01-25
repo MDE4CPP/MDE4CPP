@@ -155,12 +155,12 @@ std::shared_ptr<ecore::EClass> RedefinableElementImpl::eStaticClass() const
 /*
 Getter & Setter for attribute isLeaf
 */
-bool RedefinableElementImpl::getIsLeaf() const 
+bool  RedefinableElementImpl::getIsLeaf() const 
 {
 	return m_isLeaf;
 }
 
-void RedefinableElementImpl::setIsLeaf(bool _isLeaf)
+void RedefinableElementImpl::setIsLeaf(bool  _isLeaf)
 {
 	m_isLeaf = _isLeaf;
 } 
@@ -170,31 +170,31 @@ void RedefinableElementImpl::setIsLeaf(bool _isLeaf)
 //*********************************
 // Operations
 //*********************************
-bool RedefinableElementImpl::isConsistentWith(std::shared_ptr<uml::RedefinableElement>  redefiningElement)
+bool RedefinableElementImpl::isConsistentWith(std::shared_ptr<uml::RedefinableElement> redefiningElement)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool RedefinableElementImpl::isRedefinitionContextValid(std::shared_ptr<uml::RedefinableElement>  redefinedElement)
+bool RedefinableElementImpl::isRedefinitionContextValid(std::shared_ptr<uml::RedefinableElement> redefinedElement)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool RedefinableElementImpl::non_leaf_redefinition(Any diagnostics,std::map <   Any, Any >  context)
+bool RedefinableElementImpl::non_leaf_redefinition(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool RedefinableElementImpl::redefinition_consistent(Any diagnostics,std::map <   Any, Any >  context)
+bool RedefinableElementImpl::redefinition_consistent(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool RedefinableElementImpl::redefinition_context_valid(Any diagnostics,std::map <   Any, Any >  context)
+bool RedefinableElementImpl::redefinition_context_valid(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -311,27 +311,11 @@ Any RedefinableElementImpl::eGet(int featureID, bool resolve, bool coreType) con
 			return eAny(getIsLeaf()); //2049
 		case uml::umlPackage::REDEFINABLEELEMENT_ATTRIBUTE_REDEFINEDELEMENT:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::RedefinableElement>::iterator iter = m_redefinedElement->begin();
-			Bag<uml::RedefinableElement>::iterator end = m_redefinedElement->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //20410
+			return eAny(getRedefinedElement()); //20410			
 		}
 		case uml::umlPackage::REDEFINABLEELEMENT_ATTRIBUTE_REDEFINITIONCONTEXT:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Classifier>::iterator iter = m_redefinitionContext->begin();
-			Bag<uml::Classifier>::iterator end = m_redefinitionContext->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //20411
+			return eAny(getRedefinitionContext()); //20411			
 		}
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
@@ -445,14 +429,11 @@ void RedefinableElementImpl::saveContent(std::shared_ptr<persistence::interfaces
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
 		// Add attributes
 		if ( this->eIsSet(package->getRedefinableElement_Attribute_isLeaf()) )
 		{
 			saveHandler->addAttribute("isLeaf", this->getIsLeaf());
 		}
-
 	}
 	catch (std::exception& e)
 	{

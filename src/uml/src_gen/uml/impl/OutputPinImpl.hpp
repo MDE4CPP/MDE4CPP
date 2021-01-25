@@ -98,7 +98,7 @@ namespace uml
 				action.oclAsType(StructuredActivityNode).allOwnedNodes()->includesAll(incoming.source)
 			*/
 			 
-			virtual bool incoming_edges_structured_only(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool incoming_edges_structured_only(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			

@@ -285,7 +285,7 @@ Any ExecutionOccurrenceSpecificationImpl::eGet(int featureID, bool resolve, bool
 	switch(featureID)
 	{
 		case uml::umlPackage::EXECUTIONOCCURRENCESPECIFICATION_ATTRIBUTE_EXECUTION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getExecution())); //9015
+			return eAny(getExecution()); //9015
 	}
 	return OccurrenceSpecificationImpl::eGet(featureID, resolve, coreType);
 }
@@ -414,11 +414,8 @@ void ExecutionOccurrenceSpecificationImpl::saveContent(std::shared_ptr<persisten
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
-	
-
-		// Add references
-		saveHandler->addReference("execution", this->getExecution());
-
+	// Add references
+		saveHandler->addReference("execution", this->getExecution());		 
 	}
 	catch (std::exception& e)
 	{

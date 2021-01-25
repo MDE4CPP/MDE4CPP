@@ -279,43 +279,43 @@ std::shared_ptr<ecore::EClass> ReadLinkObjectEndActionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ReadLinkObjectEndActionImpl::association_of_association(Any diagnostics,std::map <   Any, Any >  context)
+bool ReadLinkObjectEndActionImpl::association_of_association(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ReadLinkObjectEndActionImpl::ends_of_association(Any diagnostics,std::map <   Any, Any >  context)
+bool ReadLinkObjectEndActionImpl::ends_of_association(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ReadLinkObjectEndActionImpl::multiplicity_of_object(Any diagnostics,std::map <   Any, Any >  context)
+bool ReadLinkObjectEndActionImpl::multiplicity_of_object(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ReadLinkObjectEndActionImpl::multiplicity_of_result(Any diagnostics,std::map <   Any, Any >  context)
+bool ReadLinkObjectEndActionImpl::multiplicity_of_result(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ReadLinkObjectEndActionImpl::property(Any diagnostics,std::map <   Any, Any >  context)
+bool ReadLinkObjectEndActionImpl::property(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ReadLinkObjectEndActionImpl::type_of_object(Any diagnostics,std::map <   Any, Any >  context)
+bool ReadLinkObjectEndActionImpl::type_of_object(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ReadLinkObjectEndActionImpl::type_of_result(Any diagnostics,std::map <   Any, Any >  context)
+bool ReadLinkObjectEndActionImpl::type_of_result(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -509,11 +509,11 @@ Any ReadLinkObjectEndActionImpl::eGet(int featureID, bool resolve, bool coreType
 	switch(featureID)
 	{
 		case uml::umlPackage::READLINKOBJECTENDACTION_ATTRIBUTE_END:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEnd())); //19627
+			return eAny(getEnd()); //19627
 		case uml::umlPackage::READLINKOBJECTENDACTION_ATTRIBUTE_OBJECT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getObject())); //19628
+			return eAny(getObject()); //19628
 		case uml::umlPackage::READLINKOBJECTENDACTION_ATTRIBUTE_RESULT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //19629
+			return eAny(getResult()); //19629
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -709,7 +709,6 @@ void ReadLinkObjectEndActionImpl::saveContent(std::shared_ptr<persistence::inter
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'object'
 		std::shared_ptr<uml::InputPin > object = this->getObject();
 		if (object != nullptr)
@@ -723,11 +722,9 @@ void ReadLinkObjectEndActionImpl::saveContent(std::shared_ptr<persistence::inter
 		{
 			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_Class());
 		}
-	
 
-		// Add references
-		saveHandler->addReference("end", this->getEnd());
-
+	// Add references
+		saveHandler->addReference("end", this->getEnd());		 
 	}
 	catch (std::exception& e)
 	{

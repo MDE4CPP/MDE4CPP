@@ -291,12 +291,12 @@ std::shared_ptr<ecore::EClass> RemoveStructuralFeatureValueActionImpl::eStaticCl
 /*
 Getter & Setter for attribute isRemoveDuplicates
 */
-bool RemoveStructuralFeatureValueActionImpl::getIsRemoveDuplicates() const 
+bool  RemoveStructuralFeatureValueActionImpl::getIsRemoveDuplicates() const 
 {
 	return m_isRemoveDuplicates;
 }
 
-void RemoveStructuralFeatureValueActionImpl::setIsRemoveDuplicates(bool _isRemoveDuplicates)
+void RemoveStructuralFeatureValueActionImpl::setIsRemoveDuplicates(bool  _isRemoveDuplicates)
 {
 	m_isRemoveDuplicates = _isRemoveDuplicates;
 } 
@@ -306,7 +306,7 @@ void RemoveStructuralFeatureValueActionImpl::setIsRemoveDuplicates(bool _isRemov
 //*********************************
 // Operations
 //*********************************
-bool RemoveStructuralFeatureValueActionImpl::removeAt_and_value(Any diagnostics,std::map <   Any, Any >  context)
+bool RemoveStructuralFeatureValueActionImpl::removeAt_and_value(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -470,7 +470,7 @@ Any RemoveStructuralFeatureValueActionImpl::eGet(int featureID, bool resolve, bo
 		case uml::umlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_ISREMOVEDUPLICATES:
 			return eAny(getIsRemoveDuplicates()); //20931
 		case uml::umlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_ATTRIBUTE_REMOVEAT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getRemoveAt())); //20932
+			return eAny(getRemoveAt()); //20932
 	}
 	return WriteStructuralFeatureActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -632,20 +632,17 @@ void RemoveStructuralFeatureValueActionImpl::saveContent(std::shared_ptr<persist
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'removeAt'
 		std::shared_ptr<uml::InputPin > removeAt = this->getRemoveAt();
 		if (removeAt != nullptr)
 		{
 			saveHandler->addReference(removeAt, "removeAt", removeAt->eClass() != package->getInputPin_Class());
 		}
-	
 		// Add attributes
 		if ( this->eIsSet(package->getRemoveStructuralFeatureValueAction_Attribute_isRemoveDuplicates()) )
 		{
 			saveHandler->addAttribute("isRemoveDuplicates", this->getIsRemoveDuplicates());
 		}
-
 	}
 	catch (std::exception& e)
 	{

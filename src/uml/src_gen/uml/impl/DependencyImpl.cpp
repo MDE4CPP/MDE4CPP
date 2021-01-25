@@ -382,27 +382,11 @@ Any DependencyImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::DEPENDENCY_ATTRIBUTE_CLIENT:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::NamedElement>::iterator iter = m_client->begin();
-			Bag<uml::NamedElement>::iterator end = m_client->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //6715
+			return eAny(getClient()); //6715			
 		}
 		case uml::umlPackage::DEPENDENCY_ATTRIBUTE_SUPPLIER:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::NamedElement>::iterator iter = m_supplier->begin();
-			Bag<uml::NamedElement>::iterator end = m_supplier->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //6716
+			return eAny(getSupplier()); //6716			
 		}
 	}
 	Any result;
@@ -645,20 +629,9 @@ void DependencyImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
-	
-
-		// Add references
-		std::shared_ptr<Bag<uml::NamedElement>> client_list = this->getClient();
-		for (std::shared_ptr<uml::NamedElement > object : *client_list)
-		{ 
-			saveHandler->addReferences("client", object);
-		}
-		std::shared_ptr<Bag<uml::NamedElement>> supplier_list = this->getSupplier();
-		for (std::shared_ptr<uml::NamedElement > object : *supplier_list)
-		{ 
-			saveHandler->addReferences("supplier", object);
-		}
-
+	// Add references
+		saveHandler->addReferences<uml::NamedElement>("client", this->getClient());	
+		saveHandler->addReferences<uml::NamedElement>("supplier", this->getSupplier());	
 	}
 	catch (std::exception& e)
 	{

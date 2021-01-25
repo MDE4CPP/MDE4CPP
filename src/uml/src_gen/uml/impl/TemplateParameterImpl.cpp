@@ -148,7 +148,7 @@ std::shared_ptr<ecore::EClass> TemplateParameterImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool TemplateParameterImpl::must_be_compatible(Any diagnostics,std::map <   Any, Any >  context)
+bool TemplateParameterImpl::must_be_compatible(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -294,15 +294,15 @@ Any TemplateParameterImpl::eGet(int featureID, bool resolve, bool coreType) cons
 	switch(featureID)
 	{
 		case uml::umlPackage::TEMPLATEPARAMETER_ATTRIBUTE_DEFAULT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDefault())); //2313
+			return eAny(getDefault()); //2313
 		case uml::umlPackage::TEMPLATEPARAMETER_ATTRIBUTE_OWNEDDEFAULT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOwnedDefault())); //2314
+			return eAny(getOwnedDefault()); //2314
 		case uml::umlPackage::TEMPLATEPARAMETER_ATTRIBUTE_OWNEDPARAMETEREDELEMENT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOwnedParameteredElement())); //2317
+			return eAny(getOwnedParameteredElement()); //2317
 		case uml::umlPackage::TEMPLATEPARAMETER_ATTRIBUTE_PARAMETEREDELEMENT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getParameteredElement())); //2315
+			return eAny(getParameteredElement()); //2315
 		case uml::umlPackage::TEMPLATEPARAMETER_ATTRIBUTE_SIGNATURE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSignature().lock())); //2316
+			return eAny(getSignature().lock()); //2316
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -534,7 +534,6 @@ void TemplateParameterImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'ownedDefault'
 		std::shared_ptr<uml::ParameterableElement > ownedDefault = this->getOwnedDefault();
 		if (ownedDefault != nullptr)
@@ -548,12 +547,10 @@ void TemplateParameterImpl::saveContent(std::shared_ptr<persistence::interfaces:
 		{
 			saveHandler->addReference(ownedParameteredElement, "ownedParameteredElement", ownedParameteredElement->eClass() != package->getParameterableElement_Class());
 		}
-	
 
-		// Add references
-		saveHandler->addReference("default", this->getDefault());
-		saveHandler->addReference("parameteredElement", this->getParameteredElement());
-
+	// Add references
+		saveHandler->addReference("default", this->getDefault());		 
+		saveHandler->addReference("parameteredElement", this->getParameteredElement());		 
 	}
 	catch (std::exception& e)
 	{

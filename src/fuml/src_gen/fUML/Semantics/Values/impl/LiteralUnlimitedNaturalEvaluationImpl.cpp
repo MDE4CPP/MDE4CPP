@@ -230,9 +230,6 @@ void LiteralUnlimitedNaturalEvaluationImpl::saveContent(std::shared_ptr<persiste
 	try
 	{
 		std::shared_ptr<fUML::Semantics::Values::ValuesPackage> package = fUML::Semantics::Values::ValuesPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

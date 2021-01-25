@@ -38,69 +38,19 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Behavior;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class Namespace;
-}
-
-namespace uml 
-{
 	class Package;
-}
-
-namespace uml 
-{
 	class Parameter;
-}
-
-namespace uml 
-{
 	class Slot;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class TemplateParameter;
-}
-
-namespace uml 
-{
 	class Type;
-}
-
-namespace uml 
-{
-	class ValueSpecification;
-}
-
-namespace uml 
-{
 	class ValueSpecificationAction;
 }
 
@@ -110,6 +60,8 @@ namespace uml
 // enum includes
 #include "uml/VisibilityKind.hpp"
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -171,7 +123,7 @@ namespace uml
 			language->notEmpty() implies (_'body'->size() = language->size())
 			*/
 			 
-			virtual bool language_body_size(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool language_body_size(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			The behavior must have exactly one return result parameter.
@@ -179,14 +131,14 @@ namespace uml
 			   behavior.ownedParameter->select(direction=ParameterDirectionKind::return)->size() = 1
 			*/
 			 
-			virtual bool one_return_result_parameter(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool one_return_result_parameter(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			The behavior may only have return result parameters.
 			behavior <> null implies behavior.ownedParameter->select(direction<>ParameterDirectionKind::return)->isEmpty()
 			*/
 			 
-			virtual bool only_return_result_parameters(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool only_return_result_parameters(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			The query value() gives an integer value for an expression intended to produce one.
@@ -206,7 +158,8 @@ namespace uml
 			<p>From package UML::Values.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<std::string> > getBody() const = 0;
+			virtual  std::shared_ptr<Bag<std::string> >
+			 getBody() const = 0;
 			
 			
 			/*!
@@ -214,7 +167,8 @@ namespace uml
 			<p>From package UML::Values.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<std::string> > getLanguage() const = 0;
+			virtual  std::shared_ptr<Bag<std::string> >
+			 getLanguage() const = 0;
 			
 			
 			
@@ -254,13 +208,15 @@ namespace uml
 			<p>From package UML::Values.</p>
 			*/
 			 
-			mutable std::shared_ptr<Bag<std::string> > m_body; 
+			mutable  std::shared_ptr<Bag<std::string> >
+			 m_body; 
 			/*!
 			Specifies the languages used to express the textual bodies of the OpaqueExpression.  Languages are matched to body Strings by order. The interpretation of the body depends on the languages. If the languages are unspecified, they may be implicit from the expression body or the context.
 			<p>From package UML::Values.</p>
 			*/
 			 
-			mutable std::shared_ptr<Bag<std::string> > m_language; 
+			mutable  std::shared_ptr<Bag<std::string> >
+			 m_language; 
 			
 			
 			//*********************************

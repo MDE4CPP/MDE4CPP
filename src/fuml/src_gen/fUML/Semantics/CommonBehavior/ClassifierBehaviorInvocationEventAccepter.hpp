@@ -36,35 +36,17 @@ namespace fUML
 	class fUMLFactory;
 }
 
-//Forward Declaration for used types
-namespace uml 
-{
-	class Class;
-}
-
-namespace fUML::Semantics::CommonBehavior 
-{
-	class EventAccepter;
-}
-
+//Forward Declaration for used types 
 namespace fUML::Semantics::CommonBehavior 
 {
 	class EventOccurrence;
-}
-
-namespace fUML::Semantics::CommonBehavior 
-{
 	class Execution;
-}
-
-namespace fUML::Semantics::CommonBehavior 
-{
 	class ObjectActivation;
-}
-
-namespace fUML::Semantics::CommonBehavior 
-{
 	class ParameterValue;
+}
+namespace uml 
+{
+	class Class;
 }
 
 // base class includes
@@ -72,6 +54,12 @@ namespace fUML::Semantics::CommonBehavior
 
 // enum includes
 
+
+//Includes from codegen annotation
+#include "fUML/Semantics/Loci/Locus.hpp"
+#include "fUML/Semantics/Loci/ExecutionFactory.hpp"
+#include "fUML/Semantics/CommonBehavior/ObjectActivation.hpp"
+#include "fUML/Semantics/CommonBehavior/InvocationEventOccurrence.hpp"
 
 //*********************************
 namespace fUML::Semantics::CommonBehavior 
@@ -97,12 +85,12 @@ namespace fUML::Semantics::CommonBehavior
 			// Operations
 			//*********************************
 			 
-			virtual void accept(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>  eventOccurrence) = 0;
+			virtual void accept(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurrence) = 0;
 			
 			
 			
 			 
-			virtual bool match(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>  eventOccurrence) = 0;
+			virtual bool match(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurrence) = 0;
 			
 			 
 			virtual void terminate() = 0;
@@ -116,10 +104,10 @@ namespace fUML::Semantics::CommonBehavior
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<uml::Class > getClassifier() const = 0;
+			virtual std::shared_ptr<org.eclipse.uml2.uml.Class > getClassifier() const = 0;
 			
 			
-			virtual void setClassifier(std::shared_ptr<uml::Class> _classifier) = 0;
+			virtual void setClassifier(std::shared_ptr<org.eclipse.uml2.uml.Class> _classifier) = 0;
 			
 			
 			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution > getExecution() const = 0;
@@ -145,7 +133,7 @@ namespace fUML::Semantics::CommonBehavior
 			// Reference Members
 			//*********************************
 			
-			std::shared_ptr<uml::Class > m_classifier;
+			std::shared_ptr<org.eclipse.uml2.uml.Class > m_classifier;
 			std::shared_ptr<fUML::Semantics::CommonBehavior::Execution > m_execution;
 			std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation > m_objectActivation;
 

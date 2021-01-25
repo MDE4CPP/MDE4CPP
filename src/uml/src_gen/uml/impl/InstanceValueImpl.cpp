@@ -304,7 +304,7 @@ Any InstanceValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::INSTANCEVALUE_ATTRIBUTE_INSTANCE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getInstance())); //11815
+			return eAny(getInstance()); //11815
 	}
 	return ValueSpecificationImpl::eGet(featureID, resolve, coreType);
 }
@@ -435,11 +435,8 @@ void InstanceValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
-	
-
-		// Add references
-		saveHandler->addReference("instance", this->getInstance());
-
+	// Add references
+		saveHandler->addReference("instance", this->getInstance());		 
 	}
 	catch (std::exception& e)
 	{

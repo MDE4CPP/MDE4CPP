@@ -163,7 +163,7 @@ std::shared_ptr<ecore::EClass> WriteStructuralFeatureActionActivationImpl::eStat
 //*********************************
 // Operations
 //*********************************
-int WriteStructuralFeatureActionActivationImpl::position(std::shared_ptr<fUML::Semantics::Values::Value>  value,std::shared_ptr<Bag<fUML::Semantics::Values::Value> >  list,int startAt)
+int WriteStructuralFeatureActionActivationImpl::position(std::shared_ptr<fUML::Semantics::Values::Value> value,std::shared_ptr<Bag<fUML::Semantics::Values::Value> > list,int startAt)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -317,9 +317,6 @@ void WriteStructuralFeatureActionActivationImpl::saveContent(std::shared_ptr<per
 	try
 	{
 		std::shared_ptr<fUML::Semantics::Actions::ActionsPackage> package = fUML::Semantics::Actions::ActionsPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

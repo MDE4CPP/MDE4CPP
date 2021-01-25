@@ -423,12 +423,12 @@ std::shared_ptr<ecore::EClass> LoopNodeImpl::eStaticClass() const
 /*
 Getter & Setter for attribute isTestedFirst
 */
-bool LoopNodeImpl::getIsTestedFirst() const 
+bool  LoopNodeImpl::getIsTestedFirst() const 
 {
 	return m_isTestedFirst;
 }
 
-void LoopNodeImpl::setIsTestedFirst(bool _isTestedFirst)
+void LoopNodeImpl::setIsTestedFirst(bool  _isTestedFirst)
 {
 	m_isTestedFirst = _isTestedFirst;
 } 
@@ -438,55 +438,55 @@ void LoopNodeImpl::setIsTestedFirst(bool _isTestedFirst)
 //*********************************
 // Operations
 //*********************************
-bool LoopNodeImpl::body_output_pins(Any diagnostics,std::map <   Any, Any >  context)
+bool LoopNodeImpl::body_output_pins(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool LoopNodeImpl::executable_nodes(Any diagnostics,std::map <   Any, Any >  context)
+bool LoopNodeImpl::executable_nodes(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool LoopNodeImpl::input_edges(Any diagnostics,std::map <   Any, Any >  context)
+bool LoopNodeImpl::input_edges(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool LoopNodeImpl::loop_variable_outgoing(Any diagnostics,std::map <   Any, Any >  context)
+bool LoopNodeImpl::loop_variable_outgoing(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool LoopNodeImpl::matching_loop_variables(Any diagnostics,std::map <   Any, Any >  context)
+bool LoopNodeImpl::matching_loop_variables(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool LoopNodeImpl::matching_output_pins(Any diagnostics,std::map <   Any, Any >  context)
+bool LoopNodeImpl::matching_output_pins(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool LoopNodeImpl::matching_result_pins(Any diagnostics,std::map <   Any, Any >  context)
+bool LoopNodeImpl::matching_result_pins(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool LoopNodeImpl::result_no_incoming(Any diagnostics,std::map <   Any, Any >  context)
+bool LoopNodeImpl::result_no_incoming(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool LoopNodeImpl::setup_test_and_body(Any diagnostics,std::map <   Any, Any >  context)
+bool LoopNodeImpl::setup_test_and_body(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -870,6 +870,8 @@ Any LoopNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::LOOPNODE_ATTRIBUTE_BODYOUTPUT:
 		{
+			return eAny(getBodyOutput()); //14444			
+			/*
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::OutputPin>::iterator iter = m_bodyOutput->begin();
 			Bag<uml::OutputPin>::iterator end = m_bodyOutput->end();
@@ -879,9 +881,12 @@ Any LoopNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 				iter++;
 			}
 			return eAny(tempList); //14444
+			*/
 		}
 		case uml::umlPackage::LOOPNODE_ATTRIBUTE_BODYPART:
 		{
+			return eAny(getBodyPart()); //14445			
+			/*
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::ExecutableNode>::iterator iter = m_bodyPart->begin();
 			Bag<uml::ExecutableNode>::iterator end = m_bodyPart->end();
@@ -891,13 +896,16 @@ Any LoopNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 				iter++;
 			}
 			return eAny(tempList); //14445
+			*/
 		}
 		case uml::umlPackage::LOOPNODE_ATTRIBUTE_DECIDER:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDecider())); //14446
+			return eAny(getDecider()); //14446
 		case uml::umlPackage::LOOPNODE_ATTRIBUTE_ISTESTEDFIRST:
 			return eAny(getIsTestedFirst()); //14447
 		case uml::umlPackage::LOOPNODE_ATTRIBUTE_LOOPVARIABLE:
 		{
+			return eAny(getLoopVariable()); //14448			
+			/*
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::OutputPin>::iterator iter = m_loopVariable->begin();
 			Bag<uml::OutputPin>::iterator end = m_loopVariable->end();
@@ -907,9 +915,12 @@ Any LoopNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 				iter++;
 			}
 			return eAny(tempList); //14448
+			*/
 		}
 		case uml::umlPackage::LOOPNODE_ATTRIBUTE_LOOPVARIABLEINPUT:
 		{
+			return eAny(getLoopVariableInput()); //14449			
+			/*
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::InputPin>::iterator iter = m_loopVariableInput->begin();
 			Bag<uml::InputPin>::iterator end = m_loopVariableInput->end();
@@ -919,9 +930,12 @@ Any LoopNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 				iter++;
 			}
 			return eAny(tempList); //14449
+			*/
 		}
 		case uml::umlPackage::LOOPNODE_ATTRIBUTE_RESULT:
 		{
+			return eAny(getResult()); //14450			
+			/*
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::OutputPin>::iterator iter = m_result->begin();
 			Bag<uml::OutputPin>::iterator end = m_result->end();
@@ -931,9 +945,12 @@ Any LoopNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 				iter++;
 			}
 			return eAny(tempList); //14450
+			*/
 		}
 		case uml::umlPackage::LOOPNODE_ATTRIBUTE_SETUPPART:
 		{
+			return eAny(getSetupPart()); //14451			
+			/*
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::ExecutableNode>::iterator iter = m_setupPart->begin();
 			Bag<uml::ExecutableNode>::iterator end = m_setupPart->end();
@@ -943,9 +960,12 @@ Any LoopNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 				iter++;
 			}
 			return eAny(tempList); //14451
+			*/
 		}
 		case uml::umlPackage::LOOPNODE_ATTRIBUTE_TEST:
 		{
+			return eAny(getTest()); //14452			
+			/*
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::ExecutableNode>::iterator iter = m_test->begin();
 			Bag<uml::ExecutableNode>::iterator end = m_test->end();
@@ -955,6 +975,7 @@ Any LoopNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 				iter++;
 			}
 			return eAny(tempList); //14452
+			*/
 		}
 	}
 	return StructuredActivityNodeImpl::eGet(featureID, resolve, coreType);
@@ -1523,42 +1544,23 @@ void LoopNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'loopVariable'
 		for (std::shared_ptr<uml::OutputPin> loopVariable : *this->getLoopVariable()) 
 		{
 			saveHandler->addReference(loopVariable, "loopVariable", loopVariable->eClass() != package->getOutputPin_Class());
 		}
-	
 		// Add attributes
 		if ( this->eIsSet(package->getLoopNode_Attribute_isTestedFirst()) )
 		{
 			saveHandler->addAttribute("isTestedFirst", this->getIsTestedFirst());
 		}
 
-		// Add references
-		std::shared_ptr<Bag<uml::OutputPin>> bodyOutput_list = this->getBodyOutput();
-		for (std::shared_ptr<uml::OutputPin > object : *bodyOutput_list)
-		{ 
-			saveHandler->addReferences("bodyOutput", object);
-		}
-		std::shared_ptr<Bag<uml::ExecutableNode>> bodyPart_list = this->getBodyPart();
-		for (std::shared_ptr<uml::ExecutableNode > object : *bodyPart_list)
-		{ 
-			saveHandler->addReferences("bodyPart", object);
-		}
-		saveHandler->addReference("decider", this->getDecider());
-		std::shared_ptr<Bag<uml::ExecutableNode>> setupPart_list = this->getSetupPart();
-		for (std::shared_ptr<uml::ExecutableNode > object : *setupPart_list)
-		{ 
-			saveHandler->addReferences("setupPart", object);
-		}
-		std::shared_ptr<Bag<uml::ExecutableNode>> test_list = this->getTest();
-		for (std::shared_ptr<uml::ExecutableNode > object : *test_list)
-		{ 
-			saveHandler->addReferences("test", object);
-		}
-
+	// Add references
+		saveHandler->addReferences<uml::OutputPin>("bodyOutput", this->getBodyOutput());	
+		saveHandler->addReferences<uml::ExecutableNode>("bodyPart", this->getBodyPart());	
+		saveHandler->addReference("decider", this->getDecider());		 
+		saveHandler->addReferences<uml::ExecutableNode>("setupPart", this->getSetupPart());	
+		saveHandler->addReferences<uml::ExecutableNode>("test", this->getTest());	
 
 		//
 		// Add new tags (from references)

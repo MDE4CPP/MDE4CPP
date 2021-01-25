@@ -36,7 +36,7 @@ namespace fUML
 	class fUMLFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace fUML::Semantics::Activities 
 {
 	class Token;
@@ -47,6 +47,8 @@ namespace fUML::Semantics::Activities
 // enum includes
 
 #include "ecore/EModelElement.hpp"
+
+//Includes from codegen annotation
 
 //*********************************
 namespace fUML::Semantics::Activities 

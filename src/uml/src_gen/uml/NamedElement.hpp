@@ -41,44 +41,14 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Comment;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
-	class NamedElement;
-}
-
-namespace uml 
-{
 	class Namespace;
-}
-
-namespace uml 
-{
 	class Package;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class Usage;
 }
 
@@ -88,6 +58,9 @@ namespace uml
 // enum includes
 #include "uml/VisibilityKind.hpp"
 
+
+//Includes from codegen annotation
+#include <algorithm>
 
 //*********************************
 namespace uml 
@@ -161,13 +134,13 @@ namespace uml
 			Creates a dependency between this named element and the specified supplier, owned by this named element's nearest package.
 			*/
 			 
-			virtual std::shared_ptr<uml::Dependency> createDependency(std::shared_ptr<uml::NamedElement>  supplier) = 0;
+			virtual std::shared_ptr<uml::Dependency> createDependency(std::shared_ptr<uml::NamedElement> supplier) = 0;
 			
 			/*!
 			Creates a usage between this named element and the specified supplier, owned by this named element's nearest package.
 			*/
 			 
-			virtual std::shared_ptr<uml::Usage> createUsage(std::shared_ptr<uml::NamedElement>  supplier) = 0;
+			virtual std::shared_ptr<uml::Usage> createUsage(std::shared_ptr<uml::NamedElement> supplier) = 0;
 			
 			/*!
 			result = (Dependency.allInstances()->select(d | d.client->includes(self)))
@@ -208,7 +181,7 @@ namespace uml
 			name=null or allNamespaces()->select( ns | ns.name=null )->notEmpty() implies qualifiedName = null
 			*/
 			 
-			virtual bool has_no_qualified_name(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool has_no_qualified_name(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			When there is a name, and all of the containing Namespaces have a name, the qualifiedName is constructed from the name of the NamedElement and the names of the containing Namespaces.
@@ -216,7 +189,7 @@ namespace uml
 			  qualifiedName = allNamespaces()->iterate( ns : Namespace; agg: String = name | ns.name.concat(self.separator()).concat(agg))
 			*/
 			 
-			virtual bool has_qualified_name(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool has_qualified_name(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			The query isDistinguishableFrom() determines whether two NamedElements may logically co-exist within a Namespace. By default, two named elements are distinguishable if (a) they have types neither of which is a kind of the other or (b) they have different names.
@@ -226,7 +199,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual bool isDistinguishableFrom(std::shared_ptr<uml::NamedElement>  n,std::shared_ptr<uml::Namespace>  ns) = 0;
+			virtual bool isDistinguishableFrom(std::shared_ptr<uml::NamedElement> n,std::shared_ptr<uml::Namespace> ns) = 0;
 			
 			/*!
 			The query separator() gives the string that is used to separate names when constructing a qualifiedName.
@@ -241,7 +214,7 @@ namespace uml
 			(namespace = null and owner <> null) implies visibility = null
 			*/
 			 
-			virtual bool visibility_needs_ownership(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool visibility_needs_ownership(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			
 			//*********************************
@@ -252,14 +225,14 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual std::string getName() const = 0;
+			virtual std::string  getName() const = 0;
 			
 			/*!
 			The name of the NamedElement.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual void setName (std::string _name)= 0; 
+			virtual void setName (std::string  _name)= 0; 
 			
 			
 			/*!
@@ -267,14 +240,14 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual uml::VisibilityKind getVisibility() const = 0;
+			virtual uml::VisibilityKind  getVisibility() const = 0;
 			
 			/*!
 			Determines whether and how the NamedElement is visible outside its owning Namespace.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual void setVisibility (uml::VisibilityKind _visibility)= 0; 
+			virtual void setVisibility (uml::VisibilityKind  _visibility)= 0; 
 			
 			//*********************************
 			// Reference
@@ -314,19 +287,19 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			std::string m_name = "";
+			std::string  m_name = "";
 			/*!
 			A name that allows the NamedElement to be identified within a hierarchy of nested Namespaces. It is constructed from the names of the containing Namespaces starting at the root of the hierarchy and ending with the name of the NamedElement itself.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			std::string m_qualifiedName = "";
+			std::string  m_qualifiedName = "";
 			/*!
 			Determines whether and how the NamedElement is visible outside its owning Namespace.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			uml::VisibilityKind m_visibility = VisibilityKind::PUBLIC;
+			uml::VisibilityKind  m_visibility = VisibilityKind::PUBLIC;
 			
 			
 			//*********************************

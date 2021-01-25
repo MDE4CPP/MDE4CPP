@@ -145,12 +145,12 @@ std::shared_ptr<ecore::EClass> ProfileApplicationImpl::eStaticClass() const
 /*
 Getter & Setter for attribute isStrict
 */
-bool ProfileApplicationImpl::getIsStrict() const 
+bool  ProfileApplicationImpl::getIsStrict() const 
 {
 	return m_isStrict;
 }
 
-void ProfileApplicationImpl::setIsStrict(bool _isStrict)
+void ProfileApplicationImpl::setIsStrict(bool  _isStrict)
 {
 	m_isStrict = _isStrict;
 } 
@@ -166,7 +166,7 @@ std::shared_ptr<ecore::EPackage> ProfileApplicationImpl::getAppliedDefinition()
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<ecore::ENamedElement> ProfileApplicationImpl::getAppliedDefinition(std::shared_ptr<uml::NamedElement>  namedElement)
+std::shared_ptr<ecore::ENamedElement> ProfileApplicationImpl::getAppliedDefinition(std::shared_ptr<uml::NamedElement> namedElement)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -319,9 +319,9 @@ Any ProfileApplicationImpl::eGet(int featureID, bool resolve, bool coreType) con
 	switch(featureID)
 	{
 		case uml::umlPackage::PROFILEAPPLICATION_ATTRIBUTE_APPLIEDPROFILE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getAppliedProfile())); //1846
+			return eAny(getAppliedProfile()); //1846
 		case uml::umlPackage::PROFILEAPPLICATION_ATTRIBUTE_APPLYINGPACKAGE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getApplyingPackage().lock())); //1848
+			return eAny(getApplyingPackage().lock()); //1848
 		case uml::umlPackage::PROFILEAPPLICATION_ATTRIBUTE_ISSTRICT:
 			return eAny(getIsStrict()); //1847
 	}
@@ -488,17 +488,14 @@ void ProfileApplicationImpl::saveContent(std::shared_ptr<persistence::interfaces
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
 		// Add attributes
 		if ( this->eIsSet(package->getProfileApplication_Attribute_isStrict()) )
 		{
 			saveHandler->addAttribute("isStrict", this->getIsStrict());
 		}
 
-		// Add references
-		saveHandler->addReference("appliedProfile", this->getAppliedProfile());
-
+	// Add references
+		saveHandler->addReference("appliedProfile", this->getAppliedProfile());		 
 	}
 	catch (std::exception& e)
 	{

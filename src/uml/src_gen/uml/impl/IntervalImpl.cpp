@@ -320,9 +320,9 @@ Any IntervalImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::INTERVAL_ATTRIBUTE_MAX:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getMax())); //12815
+			return eAny(getMax()); //12815
 		case uml::umlPackage::INTERVAL_ATTRIBUTE_MIN:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getMin())); //12816
+			return eAny(getMin()); //12816
 	}
 	return ValueSpecificationImpl::eGet(featureID, resolve, coreType);
 }
@@ -482,12 +482,9 @@ void IntervalImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
-	
-
-		// Add references
-		saveHandler->addReference("max", this->getMax());
-		saveHandler->addReference("min", this->getMin());
-
+	// Add references
+		saveHandler->addReference("max", this->getMax());		 
+		saveHandler->addReference("min", this->getMin());		 
 	}
 	catch (std::exception& e)
 	{

@@ -297,19 +297,19 @@ std::shared_ptr<uml::Association> LinkActionImpl::association()
 	throw "UnsupportedOperationException";
 }
 
-bool LinkActionImpl::not_static(Any diagnostics,std::map <   Any, Any >  context)
+bool LinkActionImpl::not_static(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool LinkActionImpl::same_association(Any diagnostics,std::map <   Any, Any >  context)
+bool LinkActionImpl::same_association(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool LinkActionImpl::same_pins(Any diagnostics,std::map <   Any, Any >  context)
+bool LinkActionImpl::same_pins(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -492,6 +492,8 @@ Any LinkActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::LINKACTION_ATTRIBUTE_ENDDATA:
 		{
+			return eAny(getEndData()); //13327			
+			/*
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::LinkEndData>::iterator iter = m_endData->begin();
 			Bag<uml::LinkEndData>::iterator end = m_endData->end();
@@ -501,9 +503,12 @@ Any LinkActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 				iter++;
 			}
 			return eAny(tempList); //13327
+			*/
 		}
 		case uml::umlPackage::LINKACTION_ATTRIBUTE_INPUTVALUE:
 		{
+			return eAny(getInputValue()); //13328			
+			/*
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::InputPin>::iterator iter = m_inputValue->begin();
 			Bag<uml::InputPin>::iterator end = m_inputValue->end();
@@ -513,6 +518,7 @@ Any LinkActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 				iter++;
 			}
 			return eAny(tempList); //13328
+			*/
 		}
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
@@ -724,7 +730,6 @@ void LinkActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'endData'
 		for (std::shared_ptr<uml::LinkEndData> endData : *this->getEndData()) 
 		{
@@ -736,8 +741,6 @@ void LinkActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 		{
 			saveHandler->addReference(inputValue, "inputValue", inputValue->eClass() != package->getInputPin_Class());
 		}
-	
-
 	}
 	catch (std::exception& e)
 	{

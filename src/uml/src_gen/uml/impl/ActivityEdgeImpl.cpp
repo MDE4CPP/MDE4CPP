@@ -232,7 +232,7 @@ std::shared_ptr<ecore::EClass> ActivityEdgeImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ActivityEdgeImpl::source_and_target(Any diagnostics,std::map <   Any, Any >  context)
+bool ActivityEdgeImpl::source_and_target(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -515,55 +515,31 @@ Any ActivityEdgeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_ACTIVITY:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getActivity().lock())); //812
+			return eAny(getActivity().lock()); //812
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_GUARD:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getGuard())); //813
+			return eAny(getGuard()); //813
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_INGROUP:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ActivityGroup>::iterator iter = m_inGroup->begin();
-			Bag<uml::ActivityGroup>::iterator end = m_inGroup->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //821
+			return eAny(getInGroup()); //821			
 		}
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_INPARTITION:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ActivityPartition>::iterator iter = m_inPartition->begin();
-			Bag<uml::ActivityPartition>::iterator end = m_inPartition->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //814
+			return eAny(getInPartition()); //814			
 		}
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_INSTRUCTUREDNODE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getInStructuredNode().lock())); //816
+			return eAny(getInStructuredNode().lock()); //816
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_INTERRUPTS:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getInterrupts())); //815
+			return eAny(getInterrupts()); //815
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_REDEFINEDEDGE:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ActivityEdge>::iterator iter = m_redefinedEdge->begin();
-			Bag<uml::ActivityEdge>::iterator end = m_redefinedEdge->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //819
+			return eAny(getRedefinedEdge()); //819			
 		}
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_SOURCE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSource())); //818
+			return eAny(getSource()); //818
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_TARGET:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getTarget())); //817
+			return eAny(getTarget()); //817
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_WEIGHT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getWeight())); //820
+			return eAny(getWeight()); //820
 	}
 	return RedefinableElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -974,7 +950,6 @@ void ActivityEdgeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'guard'
 		std::shared_ptr<uml::ValueSpecification > guard = this->getGuard();
 		if (guard != nullptr)
@@ -988,23 +963,13 @@ void ActivityEdgeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 		{
 			saveHandler->addReference(weight, "weight", weight->eClass() != package->getValueSpecification_Class());
 		}
-	
 
-		// Add references
-		std::shared_ptr<Bag<uml::ActivityPartition>> inPartition_list = this->getInPartition();
-		for (std::shared_ptr<uml::ActivityPartition > object : *inPartition_list)
-		{ 
-			saveHandler->addReferences("inPartition", object);
-		}
-		saveHandler->addReference("interrupts", this->getInterrupts());
-		std::shared_ptr<Bag<uml::ActivityEdge>> redefinedEdge_list = this->getRedefinedEdge();
-		for (std::shared_ptr<uml::ActivityEdge > object : *redefinedEdge_list)
-		{ 
-			saveHandler->addReferences("redefinedEdge", object);
-		}
-		saveHandler->addReference("source", this->getSource());
-		saveHandler->addReference("target", this->getTarget());
-
+	// Add references
+		saveHandler->addReferences<uml::ActivityPartition>("inPartition", this->getInPartition());	
+		saveHandler->addReference("interrupts", this->getInterrupts());		 
+		saveHandler->addReferences<uml::ActivityEdge>("redefinedEdge", this->getRedefinedEdge());	
+		saveHandler->addReference("source", this->getSource());		 
+		saveHandler->addReference("target", this->getTarget());		 
 	}
 	catch (std::exception& e)
 	{

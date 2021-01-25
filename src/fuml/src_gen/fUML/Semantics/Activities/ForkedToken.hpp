@@ -35,17 +35,11 @@ namespace fUML
 	class fUMLFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace fUML::Semantics::Activities 
 {
 	class ActivityNodeActivation;
 }
-
-namespace fUML::Semantics::Activities 
-{
-	class Token;
-}
-
 namespace fUML::Semantics::Values 
 {
 	class Value;
@@ -56,6 +50,10 @@ namespace fUML::Semantics::Values
 
 // enum includes
 
+
+//Includes from codegen annotation
+//NEWDEBUG
+#include "uml/ActivityNode.hpp"
 
 //*********************************
 namespace fUML::Semantics::Activities 
@@ -84,7 +82,7 @@ namespace fUML::Semantics::Activities
 			virtual std::shared_ptr<fUML::Semantics::Activities::Token> _copy() = 0;
 			
 			 
-			virtual bool equals(std::shared_ptr<fUML::Semantics::Activities::Token>  otherToken) = 0;
+			virtual bool equals(std::shared_ptr<fUML::Semantics::Activities::Token> otherToken) = 0;
 			
 			 
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> getValue() const = 0;
@@ -100,15 +98,15 @@ namespace fUML::Semantics::Activities
 			// Attributes Getter Setter
 			//*********************************
 			 
-			virtual bool isBaseTokenIsWithdrawn() const = 0;
+			virtual bool  isBaseTokenIsWithdrawn() const = 0;
 			
 			 
-			virtual void setBaseTokenIsWithdrawn (bool _baseTokenIsWithdrawn)= 0; 
+			virtual void setBaseTokenIsWithdrawn (bool  _baseTokenIsWithdrawn)= 0; 
 			 
-			virtual int getRemainingOffersCount() const = 0;
+			virtual int  getRemainingOffersCount() const = 0;
 			
 			 
-			virtual void setRemainingOffersCount (int _remainingOffersCount)= 0; 
+			virtual void setRemainingOffersCount (int  _remainingOffersCount)= 0; 
 			
 			//*********************************
 			// Reference
@@ -126,9 +124,9 @@ namespace fUML::Semantics::Activities
 			// Attribute Members
 			//*********************************
 			 
-			bool m_baseTokenIsWithdrawn = false;
+			bool  m_baseTokenIsWithdrawn = false;
 			 
-			int m_remainingOffersCount = 0;
+			int  m_remainingOffersCount = 0;
 			
 			
 			//*********************************

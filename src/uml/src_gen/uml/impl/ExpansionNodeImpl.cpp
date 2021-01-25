@@ -253,7 +253,7 @@ std::shared_ptr<ecore::EClass> ExpansionNodeImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ExpansionNodeImpl::region_as_input_or_output(Any diagnostics,std::map <   Any, Any >  context)
+bool ExpansionNodeImpl::region_as_input_or_output(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -391,9 +391,9 @@ Any ExpansionNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::EXPANSIONNODE_ATTRIBUTE_REGIONASINPUT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getRegionAsInput())); //9326
+			return eAny(getRegionAsInput()); //9326
 		case uml::umlPackage::EXPANSIONNODE_ATTRIBUTE_REGIONASOUTPUT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getRegionAsOutput())); //9327
+			return eAny(getRegionAsOutput()); //9327
 	}
 	return ObjectNodeImpl::eGet(featureID, resolve, coreType);
 }
@@ -555,12 +555,9 @@ void ExpansionNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
-	
-
-		// Add references
-		saveHandler->addReference("regionAsInput", this->getRegionAsInput());
-		saveHandler->addReference("regionAsOutput", this->getRegionAsOutput());
-
+	// Add references
+		saveHandler->addReference("regionAsInput", this->getRegionAsInput());		 
+		saveHandler->addReference("regionAsOutput", this->getRegionAsOutput());		 
 	}
 	catch (std::exception& e)
 	{

@@ -36,60 +36,25 @@ namespace fUML
 	class fUMLFactory;
 }
 
-//Forward Declaration for used types
-namespace uml 
-{
-	class Action;
-}
-
-namespace fUML::Semantics::Activities 
-{
-	class ActivityEdgeInstance;
-}
-
-namespace uml 
-{
-	class ActivityNode;
-}
-
-namespace fUML::Semantics::Activities 
-{
-	class ActivityNodeActivationGroup;
-}
-
-namespace uml 
-{
-	class Clause;
-}
-
+//Forward Declaration for used types 
 namespace fUML::Semantics::Actions 
 {
 	class ClauseActivation;
-}
-
-namespace fUML::Semantics::Actions 
-{
 	class InputPinActivation;
-}
-
-namespace fUML::Semantics::Actions 
-{
 	class OutputPinActivation;
-}
-
-namespace fUML::Semantics::Actions 
-{
 	class PinActivation;
 }
-
-namespace fUML::Semantics::Actions 
-{
-	class StructuredActivityNodeActivation;
-}
-
 namespace fUML::Semantics::Activities 
 {
+	class ActivityEdgeInstance;
+	class ActivityNodeActivationGroup;
 	class Token;
+}
+namespace uml 
+{
+	class Action;
+	class ActivityNode;
+	class Clause;
 }
 
 // base class includes
@@ -97,6 +62,8 @@ namespace fUML::Semantics::Activities
 
 // enum includes
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace fUML::Semantics::Actions 
@@ -122,13 +89,13 @@ namespace fUML::Semantics::Actions
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<fUML::Semantics::Actions::ClauseActivation> getClauseActivation(std::shared_ptr<uml::Clause>  clause) = 0;
+			virtual std::shared_ptr<fUML::Semantics::Actions::ClauseActivation> getClauseActivation(std::shared_ptr<org.eclipse.uml2.uml.Clause> clause) = 0;
 			
 			 
-			virtual void runTest(std::shared_ptr<uml::Clause>  clause) = 0;
+			virtual void runTest(std::shared_ptr<org.eclipse.uml2.uml.Clause> clause) = 0;
 			
 			 
-			virtual void selectBody(std::shared_ptr<uml::Clause>  clause) = 0;
+			virtual void selectBody(std::shared_ptr<org.eclipse.uml2.uml.Clause> clause) = 0;
 			
 			
 			//*********************************
@@ -143,7 +110,7 @@ namespace fUML::Semantics::Actions
 			
 			
 			
-			virtual std::shared_ptr<Bag<uml::Clause>> getSelectedClauses() const = 0;
+			virtual std::shared_ptr<Bag<org.eclipse.uml2.uml.Clause>> getSelectedClauses() const = 0;
 			
 			
 			
@@ -159,7 +126,7 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			
 			mutable std::shared_ptr<Bag<fUML::Semantics::Actions::ClauseActivation>> m_clauseActivations;
-			mutable std::shared_ptr<Bag<uml::Clause>> m_selectedClauses;
+			mutable std::shared_ptr<Bag<org.eclipse.uml2.uml.Clause>> m_selectedClauses;
 
 		public:
 			//*********************************

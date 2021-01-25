@@ -254,13 +254,13 @@ std::shared_ptr<ecore::EClass> InteractionOperandImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool InteractionOperandImpl::guard_contain_references(Any diagnostics,std::map <   Any, Any >  context)
+bool InteractionOperandImpl::guard_contain_references(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool InteractionOperandImpl::guard_directly_prior(Any diagnostics,std::map <   Any, Any >  context)
+bool InteractionOperandImpl::guard_directly_prior(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -422,6 +422,8 @@ Any InteractionOperandImpl::eGet(int featureID, bool resolve, bool coreType) con
 	{
 		case uml::umlPackage::INTERACTIONOPERAND_ATTRIBUTE_FRAGMENT:
 		{
+			return eAny(getFragment()); //12219			
+			/*
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::InteractionFragment>::iterator iter = m_fragment->begin();
 			Bag<uml::InteractionFragment>::iterator end = m_fragment->end();
@@ -431,9 +433,10 @@ Any InteractionOperandImpl::eGet(int featureID, bool resolve, bool coreType) con
 				iter++;
 			}
 			return eAny(tempList); //12219
+			*/
 		}
 		case uml::umlPackage::INTERACTIONOPERAND_ATTRIBUTE_GUARD:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getGuard())); //12220
+			return eAny(getGuard()); //12220
 	}
 	Any result;
 	result = InteractionFragmentImpl::eGet(featureID, resolve, coreType);
@@ -630,7 +633,6 @@ void InteractionOperandImpl::saveContent(std::shared_ptr<persistence::interfaces
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'fragment'
 		for (std::shared_ptr<uml::InteractionFragment> fragment : *this->getFragment()) 
 		{
@@ -643,8 +645,6 @@ void InteractionOperandImpl::saveContent(std::shared_ptr<persistence::interfaces
 		{
 			saveHandler->addReference(guard, "guard", guard->eClass() != package->getInteractionConstraint_Class());
 		}
-	
-
 	}
 	catch (std::exception& e)
 	{

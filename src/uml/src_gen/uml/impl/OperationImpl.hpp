@@ -73,7 +73,7 @@ namespace uml
 			self.ownedParameter->select(direction = ParameterDirectionKind::return)->size() <= 1
 			*/
 			 
-			virtual bool at_most_one_return(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool at_most_one_return(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			If this operation has a return parameter, lower equals the value of lower for that parameter. Otherwise lower has no value.
@@ -116,14 +116,14 @@ namespace uml
 			virtual bool isUnique() ;
 			
 			 
-			virtual bool matches(std::shared_ptr<uml::Operation>  comparedOperation) ;
+			virtual bool matches(std::shared_ptr<uml::Operation> comparedOperation) ;
 			
 			/*!
 			A bodyCondition can only be specified for a query Operation.
 			bodyCondition <> null implies isQuery
 			*/
 			 
-			virtual bool only_body_for_query(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool only_body_for_query(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			The query returnResult() returns the set containing the return parameter of the Operation if one exists, otherwise, it returns an empty set
@@ -143,7 +143,7 @@ namespace uml
 			virtual void setLower(int newLower) ;
 			
 			 
-			virtual void setType(std::shared_ptr<uml::Type>  newType) ;
+			virtual void setType(std::shared_ptr<uml::Type> newType) ;
 			
 			 
 			virtual void setUpper(int newUpper) ;
@@ -158,7 +158,7 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual bool getIsOrdered() const ;
+			virtual bool  getIsOrdered() const ;
 			
 			
 			/*!
@@ -166,20 +166,20 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual bool getIsQuery() const ;
+			virtual bool  getIsQuery() const ;
 			
 			/*!
 			Specifies whether an execution of the BehavioralFeature leaves the state of the system unchanged (isQuery=true) or whether side effects may occur (isQuery=false).
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual void setIsQuery (bool _isQuery); 
+			virtual void setIsQuery (bool  _isQuery); 
 			/*!
 			Specifies whether the return parameter is unique or not, if present. This information is derived from the return result for this Operation.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual bool getIsUnique() const ;
+			virtual bool  getIsUnique() const ;
 			
 			
 			/*!
@@ -187,7 +187,7 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual int getLower() const ;
+			virtual int  getLower() const ;
 			
 			
 			/*!
@@ -195,7 +195,7 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual int getUpper() const ;
+			virtual int  getUpper() const ;
 			
 			
 			

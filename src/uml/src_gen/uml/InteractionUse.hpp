@@ -39,69 +39,19 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Comment;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class Gate;
-}
-
-namespace uml 
-{
 	class GeneralOrdering;
-}
-
-namespace uml 
-{
 	class Interaction;
-}
-
-namespace uml 
-{
-	class InteractionFragment;
-}
-
-namespace uml 
-{
 	class InteractionOperand;
-}
-
-namespace uml 
-{
 	class Lifeline;
-}
-
-namespace uml 
-{
 	class Namespace;
-}
-
-namespace uml 
-{
 	class Property;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class ValueSpecification;
 }
 
@@ -111,6 +61,8 @@ namespace uml
 // enum includes
 #include "uml/VisibilityKind.hpp"
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -158,19 +110,19 @@ namespace uml
 			 implies self.covered->asSet()->includes(intLifeline)))
 			*/
 			 
-			virtual bool all_lifelines(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool all_lifelines(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			The arguments must only be constants, parameters of the enclosing Interaction or attributes of the classifier owning the enclosing Interaction.
 			*/
 			 
-			virtual bool arguments_are_constants(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool arguments_are_constants(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			The arguments of the InteractionUse must correspond to parameters of the referred Interaction.
 			*/
 			 
-			virtual bool arguments_correspond_to_parameters(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool arguments_correspond_to_parameters(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			Actual Gates of the InteractionUse must match Formal Gates of the referred Interaction. Gates match when their names are equal and their messages correspond.
@@ -179,7 +131,7 @@ namespace uml
 			self.actualGate->forAll(ag : Gate | refersTo.formalGate->select(matches(ag))->size()=1)
 			*/
 			 
-			virtual bool gates_match(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool gates_match(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			The returnValueRecipient must be a Property of a ConnectableElement that is represented by a Lifeline covered by this InteractionUse.
@@ -190,14 +142,14 @@ namespace uml
 			allProps->includes(returnValueRecipient)
 			*/
 			 
-			virtual bool returnValueRecipient_coverage(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool returnValueRecipient_coverage(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			The type of the returnValue must correspond to the type of the returnValueRecipient.
 			returnValue.type->asSequence()->notEmpty() implies returnValue.type->asSequence()->first() = returnValueRecipient.type->asSequence()->first()
 			*/
 			 
-			virtual bool returnValue_type_recipient_correspondence(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool returnValue_type_recipient_correspondence(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			
 			//*********************************

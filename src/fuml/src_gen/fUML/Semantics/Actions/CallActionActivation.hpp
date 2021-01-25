@@ -36,60 +36,28 @@ namespace fUML
 	class fUMLFactory;
 }
 
-//Forward Declaration for used types
-namespace uml 
+//Forward Declaration for used types 
+namespace fUML::Semantics::Actions 
 {
-	class Action;
+	class InputPinActivation;
+	class OutputPinActivation;
+	class PinActivation;
 }
-
 namespace fUML::Semantics::Activities 
 {
 	class ActivityEdgeInstance;
-}
-
-namespace uml 
-{
-	class ActivityNode;
-}
-
-namespace fUML::Semantics::Activities 
-{
 	class ActivityNodeActivationGroup;
+	class Token;
 }
-
-namespace uml 
-{
-	class CallAction;
-}
-
 namespace fUML::Semantics::CommonBehavior 
 {
 	class Execution;
 }
-
-namespace fUML::Semantics::Actions 
+namespace uml 
 {
-	class InputPinActivation;
-}
-
-namespace fUML::Semantics::Actions 
-{
-	class InvocationActionActivation;
-}
-
-namespace fUML::Semantics::Actions 
-{
-	class OutputPinActivation;
-}
-
-namespace fUML::Semantics::Actions 
-{
-	class PinActivation;
-}
-
-namespace fUML::Semantics::Activities 
-{
-	class Token;
+	class Action;
+	class ActivityNode;
+	class CallAction;
 }
 
 // base class includes
@@ -97,6 +65,22 @@ namespace fUML::Semantics::Activities
 
 // enum includes
 
+
+//Includes from codegen annotation
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/Semantics/Activities/ObjectToken.hpp"
+#include "fUML/Semantics/CommonBehavior/Execution.hpp"
+#include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
+#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
+#include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
+#include "uml/Behavior.hpp"
+#include "uml/CallAction.hpp"
+#include "uml/InputPin.hpp"
+#include "uml/OutputPin.hpp"
+#include "uml/Parameter.hpp"
+#include "uml/Property.hpp"
 
 //*********************************
 namespace fUML::Semantics::Actions 
@@ -128,7 +112,7 @@ namespace fUML::Semantics::Actions
 			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> getCallExecution() = 0;
 			
 			 
-			virtual void removeCallExecution(std::shared_ptr<fUML::Semantics::CommonBehavior::Execution>  execution) = 0;
+			virtual void removeCallExecution(std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> execution) = 0;
 			
 			 
 			virtual void terminate() = 0;
@@ -142,18 +126,18 @@ namespace fUML::Semantics::Actions
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<uml::CallAction > getCallAction() const = 0;
+			virtual std::shared_ptr<org.eclipse.uml2.uml.CallAction > getCallAction() const = 0;
 			
 			
-			virtual void setCallAction(std::shared_ptr<uml::CallAction> _callAction) = 0;
+			virtual void setCallAction(std::shared_ptr<org.eclipse.uml2.uml.CallAction> _callAction) = 0;
 			
 			/*Additional Setter for 'ActionActivation::action' redefined by reference 'callAction'*/
 			
-			virtual void setAction(std::shared_ptr<uml::Action> _action) = 0;
+			virtual void setAction(std::shared_ptr<org.eclipse.uml2.uml.Action> _action) = 0;
 			
 			/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'callAction'*/
 			
-			virtual void setNode(std::shared_ptr<uml::ActivityNode> _node) = 0;
+			virtual void setNode(std::shared_ptr<org.eclipse.uml2.uml.ActivityNode> _node) = 0;
 			
 			
 			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::Execution>> getCallExecutions() const = 0;
@@ -171,7 +155,7 @@ namespace fUML::Semantics::Actions
 			// Reference Members
 			//*********************************
 			
-			std::shared_ptr<uml::CallAction > m_callAction;
+			std::shared_ptr<org.eclipse.uml2.uml.CallAction > m_callAction;
 			mutable std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::Execution>> m_callExecutions;
 
 		public:

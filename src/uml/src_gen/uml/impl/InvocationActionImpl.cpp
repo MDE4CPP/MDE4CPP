@@ -441,6 +441,8 @@ Any InvocationActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::INVOCATIONACTION_ATTRIBUTE_ARGUMENT:
 		{
+			return eAny(getArgument()); //13027			
+			/*
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::InputPin>::iterator iter = m_argument->begin();
 			Bag<uml::InputPin>::iterator end = m_argument->end();
@@ -450,9 +452,10 @@ Any InvocationActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 				iter++;
 			}
 			return eAny(tempList); //13027
+			*/
 		}
 		case uml::umlPackage::INVOCATIONACTION_ATTRIBUTE_ONPORT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOnPort())); //13028
+			return eAny(getOnPort()); //13028
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -650,11 +653,8 @@ void InvocationActionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
-	
-
-		// Add references
-		saveHandler->addReference("onPort", this->getOnPort());
-
+	// Add references
+		saveHandler->addReference("onPort", this->getOnPort());		 
 
 		//
 		// Add new tags (from references)

@@ -55,13 +55,13 @@ namespace fUML::Semantics::Activities
 			virtual std::weak_ptr<fUML::Semantics::Activities::ActivityExecution> getActivityExecution() const ;
 			
 			 
-			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> getNodeActivation(std::shared_ptr<uml::ActivityNode>  node) ;
+			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> getNodeActivation(std::shared_ptr<org.eclipse.uml2.uml.ActivityNode> node) ;
 			
 			 
-			virtual void resume(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation>  activation) ;
+			virtual void resume(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> activation) ;
 			
 			 
-			virtual void suspend(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation>  activation) ;
+			virtual void suspend(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> activation) ;
 			
 			
 			
@@ -69,10 +69,10 @@ namespace fUML::Semantics::Activities
 			// Attributes Getter Setter
 			//*********************************
 			 
-			virtual int getIndex() const ;
+			virtual int  getIndex() const ;
 			
 			 
-			virtual void setIndex (int _index); 
+			virtual void setIndex (int  _index); 
 			
 			
 			//*********************************

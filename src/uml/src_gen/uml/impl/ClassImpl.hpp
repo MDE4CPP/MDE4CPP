@@ -66,7 +66,7 @@ namespace uml
 			Creates an operation with the specified name, parameter names, parameter types, and return type (or null) as an owned operation of this class.
 			*/
 			 
-			virtual std::shared_ptr<uml::Operation> createOwnedOperation(std::string name,std::shared_ptr<Bag<std::string> >  parameterNames,std::shared_ptr<Bag<uml::Type> >  parameterTypes,std::shared_ptr<uml::Type>  returnType) ;
+			virtual std::shared_ptr<uml::Operation> createOwnedOperation(std::string name,std::shared_ptr<Bag<std::string> > parameterNames,std::shared_ptr<Bag<uml::Type> > parameterTypes,std::shared_ptr<uml::Type> returnType) ;
 			
 			 
 			virtual std::shared_ptr<Bag<uml::Operation> > getAllOperations() ;
@@ -100,7 +100,7 @@ namespace uml
 			not isActive implies (ownedReception->isEmpty() and classifierBehavior = null)
 			*/
 			 
-			virtual bool passive_class(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool passive_class(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			
@@ -112,14 +112,14 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			 
-			virtual bool getIsActive() const ;
+			virtual bool  getIsActive() const ;
 			
 			/*!
 			Determines whether an object specified by this Class is active or not. If true, then the owning Class is referred to as an active Class. If false, then such a Class is referred to as a passive Class.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			 
-			virtual void setIsActive (bool _isActive); 
+			virtual void setIsActive (bool  _isActive); 
 			
 			
 			//*********************************

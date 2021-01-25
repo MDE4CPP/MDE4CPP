@@ -279,49 +279,49 @@ std::shared_ptr<ecore::EClass> ReadLinkObjectEndQualifierActionImpl::eStaticClas
 //*********************************
 // Operations
 //*********************************
-bool ReadLinkObjectEndQualifierActionImpl::association_of_association(Any diagnostics,std::map <   Any, Any >  context)
+bool ReadLinkObjectEndQualifierActionImpl::association_of_association(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ReadLinkObjectEndQualifierActionImpl::ends_of_association(Any diagnostics,std::map <   Any, Any >  context)
+bool ReadLinkObjectEndQualifierActionImpl::ends_of_association(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ReadLinkObjectEndQualifierActionImpl::multiplicity_of_object(Any diagnostics,std::map <   Any, Any >  context)
+bool ReadLinkObjectEndQualifierActionImpl::multiplicity_of_object(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ReadLinkObjectEndQualifierActionImpl::multiplicity_of_qualifier(Any diagnostics,std::map <   Any, Any >  context)
+bool ReadLinkObjectEndQualifierActionImpl::multiplicity_of_qualifier(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ReadLinkObjectEndQualifierActionImpl::multiplicity_of_result(Any diagnostics,std::map <   Any, Any >  context)
+bool ReadLinkObjectEndQualifierActionImpl::multiplicity_of_result(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ReadLinkObjectEndQualifierActionImpl::qualifier_attribute(Any diagnostics,std::map <   Any, Any >  context)
+bool ReadLinkObjectEndQualifierActionImpl::qualifier_attribute(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ReadLinkObjectEndQualifierActionImpl::same_type(Any diagnostics,std::map <   Any, Any >  context)
+bool ReadLinkObjectEndQualifierActionImpl::same_type(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ReadLinkObjectEndQualifierActionImpl::type_of_object(Any diagnostics,std::map <   Any, Any >  context)
+bool ReadLinkObjectEndQualifierActionImpl::type_of_object(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -515,11 +515,11 @@ Any ReadLinkObjectEndQualifierActionImpl::eGet(int featureID, bool resolve, bool
 	switch(featureID)
 	{
 		case uml::umlPackage::READLINKOBJECTENDQUALIFIERACTION_ATTRIBUTE_OBJECT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getObject())); //19727
+			return eAny(getObject()); //19727
 		case uml::umlPackage::READLINKOBJECTENDQUALIFIERACTION_ATTRIBUTE_QUALIFIER:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getQualifier())); //19728
+			return eAny(getQualifier()); //19728
 		case uml::umlPackage::READLINKOBJECTENDQUALIFIERACTION_ATTRIBUTE_RESULT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //19729
+			return eAny(getResult()); //19729
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -715,7 +715,6 @@ void ReadLinkObjectEndQualifierActionImpl::saveContent(std::shared_ptr<persisten
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'object'
 		std::shared_ptr<uml::InputPin > object = this->getObject();
 		if (object != nullptr)
@@ -729,11 +728,9 @@ void ReadLinkObjectEndQualifierActionImpl::saveContent(std::shared_ptr<persisten
 		{
 			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_Class());
 		}
-	
 
-		// Add references
-		saveHandler->addReference("qualifier", this->getQualifier());
-
+	// Add references
+		saveHandler->addReference("qualifier", this->getQualifier());		 
 	}
 	catch (std::exception& e)
 	{

@@ -60,7 +60,7 @@ namespace uml
 			Retrieves the definition (Ecore representation) of the specified named element in the profile associated with this profile application.
 			*/
 			 
-			virtual std::shared_ptr<ecore::ENamedElement> getAppliedDefinition(std::shared_ptr<uml::NamedElement>  namedElement) ;
+			virtual std::shared_ptr<ecore::ENamedElement> getAppliedDefinition(std::shared_ptr<uml::NamedElement> namedElement) ;
 			
 			
 			
@@ -72,14 +72,14 @@ namespace uml
 			<p>From package UML::Packages.</p>
 			*/
 			 
-			virtual bool getIsStrict() const ;
+			virtual bool  getIsStrict() const ;
 			
 			/*!
 			Specifies that the Profile filtering rules for the metaclasses of the referenced metamodel shall be strictly applied.
 			<p>From package UML::Packages.</p>
 			*/
 			 
-			virtual void setIsStrict (bool _isStrict); 
+			virtual void setIsStrict (bool  _isStrict); 
 			
 			
 			//*********************************

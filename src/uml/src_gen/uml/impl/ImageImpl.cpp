@@ -114,12 +114,12 @@ std::shared_ptr<ecore::EClass> ImageImpl::eStaticClass() const
 /*
 Getter & Setter for attribute content
 */
-std::string ImageImpl::getContent() const 
+std::string  ImageImpl::getContent() const 
 {
 	return m_content;
 }
 
-void ImageImpl::setContent(std::string _content)
+void ImageImpl::setContent(std::string  _content)
 {
 	m_content = _content;
 } 
@@ -129,12 +129,12 @@ void ImageImpl::setContent(std::string _content)
 /*
 Getter & Setter for attribute format
 */
-std::string ImageImpl::getFormat() const 
+std::string  ImageImpl::getFormat() const 
 {
 	return m_format;
 }
 
-void ImageImpl::setFormat(std::string _format)
+void ImageImpl::setFormat(std::string  _format)
 {
 	m_format = _format;
 } 
@@ -144,12 +144,12 @@ void ImageImpl::setFormat(std::string _format)
 /*
 Getter & Setter for attribute location
 */
-std::string ImageImpl::getLocation() const 
+std::string  ImageImpl::getLocation() const 
 {
 	return m_location;
 }
 
-void ImageImpl::setLocation(std::string _location)
+void ImageImpl::setLocation(std::string  _location)
 {
 	m_location = _location;
 } 
@@ -357,8 +357,6 @@ void ImageImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
 		// Add attributes
 		if ( this->eIsSet(package->getImage_Attribute_content()) )
 		{
@@ -374,7 +372,6 @@ void ImageImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 		{
 			saveHandler->addAttribute("location", this->getLocation());
 		}
-
 	}
 	catch (std::exception& e)
 	{

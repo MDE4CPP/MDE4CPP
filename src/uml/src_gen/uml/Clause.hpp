@@ -39,29 +39,11 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
-namespace uml 
-{
-	class Clause;
-}
-
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Comment;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class ExecutableNode;
-}
-
-namespace uml 
-{
 	class OutputPin;
 }
 
@@ -70,6 +52,8 @@ namespace uml
 
 // enum includes
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -103,7 +87,7 @@ namespace uml
 			_'body'.oclAsType(Action).allActions().output->includesAll(bodyOutput)
 			*/
 			 
-			virtual bool body_output_pins(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool body_output_pins(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			The decider Pin must be on an Action in the test section of the Clause and must be of type Boolean with multiplicity 1..1.
@@ -112,14 +96,14 @@ namespace uml
 			decider.is(1,1)
 			*/
 			 
-			virtual bool decider_output(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool decider_output(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			The test and body parts of a ConditionalNode must be disjoint with each other.
 			test->intersection(_'body')->isEmpty()
 			*/
 			 
-			virtual bool test_and_body(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool test_and_body(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			
 			//*********************************

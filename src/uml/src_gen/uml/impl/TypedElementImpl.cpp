@@ -225,7 +225,7 @@ Any TypedElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::TYPEDELEMENT_ATTRIBUTE_TYPE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getType())); //2459
+			return eAny(getType()); //2459
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -356,11 +356,8 @@ void TypedElementImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
-	
-
-		// Add references
-		saveHandler->addReference("type", this->getType());
-
+	// Add references
+		saveHandler->addReference("type", this->getType());		 
 	}
 	catch (std::exception& e)
 	{

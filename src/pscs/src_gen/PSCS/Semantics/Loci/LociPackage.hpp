@@ -27,7 +27,7 @@ namespace PSCS::Semantics::Loci
 	class CS_Executor;
 	class CS_Locus;
 }
-
+ 
 namespace PSCS::Semantics::Loci 
 {
 	/*!

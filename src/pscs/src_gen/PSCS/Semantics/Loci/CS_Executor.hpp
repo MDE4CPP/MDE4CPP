@@ -36,30 +36,22 @@ namespace PSCS
 	class PSCSFactory;
 }
 
-//Forward Declaration for used types
-namespace uml 
-{
-	class Class;
-}
-
-namespace fUML::Semantics::Loci 
-{
-	class Executor;
-}
-
-namespace fUML::Semantics::Loci 
-{
-	class Locus;
-}
-
+//Forward Declaration for used types 
 namespace fUML::Semantics::CommonBehavior 
 {
 	class ParameterValue;
 }
-
+namespace fUML::Semantics::Loci 
+{
+	class Locus;
+}
 namespace fUML::Semantics::StructuredClassifiers 
 {
 	class Reference;
+}
+namespace uml 
+{
+	class Class;
 }
 
 // base class includes
@@ -67,6 +59,14 @@ namespace fUML::Semantics::StructuredClassifiers
 
 // enum includes
 
+
+//Includes from codegen annotation
+#include "PSCS/Semantics/StructuredClassifiers/CS_Object.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/CS_Reference.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
+#include "fUML/Semantics/StructuredClassifiers/Object.hpp"
+#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
+#include "fUML/FUMLFactory.hpp"
 
 //*********************************
 namespace PSCS::Semantics::Loci 
@@ -92,7 +92,7 @@ namespace PSCS::Semantics::Loci
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> start(std::shared_ptr<uml::Class>  type,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> >  inputs) = 0;
+			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> start(std::shared_ptr<org.eclipse.uml2.uml.Class> type,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > inputs) = 0;
 			
 			
 			//*********************************

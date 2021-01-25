@@ -63,7 +63,7 @@ namespace uml
 			regionAsInput->notEmpty() xor regionAsOutput->notEmpty()
 			*/
 			 
-			virtual bool region_as_input_or_output(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool region_as_input_or_output(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			

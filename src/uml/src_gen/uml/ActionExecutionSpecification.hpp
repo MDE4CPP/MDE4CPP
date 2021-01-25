@@ -38,64 +38,18 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Action;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
-	class ExecutionSpecification;
-}
-
-namespace uml 
-{
 	class GeneralOrdering;
-}
-
-namespace uml 
-{
 	class Interaction;
-}
-
-namespace uml 
-{
 	class InteractionOperand;
-}
-
-namespace uml 
-{
 	class Lifeline;
-}
-
-namespace uml 
-{
 	class Namespace;
-}
-
-namespace uml 
-{
 	class OccurrenceSpecification;
-}
-
-namespace uml 
-{
 	class StringExpression;
 }
 
@@ -105,6 +59,8 @@ namespace uml
 // enum includes
 #include "uml/VisibilityKind.hpp"
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -142,7 +98,7 @@ namespace uml
 			(parentInteraction->size() = 1) and self.action.interaction->asSet() = parentInteraction
 			*/
 			 
-			virtual bool action_referenced(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool action_referenced(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			
 			//*********************************

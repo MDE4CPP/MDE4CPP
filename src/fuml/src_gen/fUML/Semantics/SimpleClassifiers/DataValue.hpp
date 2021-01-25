@@ -35,30 +35,15 @@ namespace fUML
 	class fUMLFactory;
 }
 
-//Forward Declaration for used types
-namespace uml 
-{
-	class Classifier;
-}
-
-namespace fUML::Semantics::SimpleClassifiers 
-{
-	class CompoundValue;
-}
-
-namespace uml 
-{
-	class DataType;
-}
-
+//Forward Declaration for used types 
 namespace fUML::Semantics::SimpleClassifiers 
 {
 	class FeatureValue;
 }
-
-namespace fUML::Semantics::Values 
+namespace uml 
 {
-	class Value;
+	class Classifier;
+	class DataType;
 }
 
 // base class includes
@@ -66,6 +51,14 @@ namespace fUML::Semantics::Values
 
 // enum includes
 
+
+//Includes from codegen annotation
+#include "fUML/Semantics/SimpleClassifiers/DataValue.hpp"
+#include "uml/umlFactory.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/Semantics/SimpleClassifiers/CompoundValue.hpp"
+#include "uml/DataType.hpp"
+#include "uml/Classifier.hpp"
 
 //*********************************
 namespace fUML::Semantics::SimpleClassifiers 
@@ -94,7 +87,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() = 0;
 			
 			 
-			virtual std::shared_ptr<Bag<uml::Classifier> > getTypes() = 0;
+			virtual std::shared_ptr<Bag<org.eclipse.uml2.uml.Classifier> > getTypes() = 0;
 			
 			 
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> new_() = 0;
@@ -108,10 +101,10 @@ namespace fUML::Semantics::SimpleClassifiers
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<uml::DataType > getType() const = 0;
+			virtual std::shared_ptr<org.eclipse.uml2.uml.DataType > getType() const = 0;
 			
 			
-			virtual void setType(std::shared_ptr<uml::DataType> _type) = 0;
+			virtual void setType(std::shared_ptr<org.eclipse.uml2.uml.DataType> _type) = 0;
 			
 			
 
@@ -125,7 +118,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			// Reference Members
 			//*********************************
 			
-			std::shared_ptr<uml::DataType > m_type;
+			std::shared_ptr<org.eclipse.uml2.uml.DataType > m_type;
 
 		public:
 			//*********************************

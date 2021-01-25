@@ -48,16 +48,16 @@ namespace fUML::Semantics::Actions
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<uml::Association> getAssociation(std::shared_ptr<uml::StructuralFeature>  feature) ;
+			virtual std::shared_ptr<org.eclipse.uml2.uml.Association> getAssociation(std::shared_ptr<org.eclipse.uml2.uml.StructuralFeature> feature) ;
 			
 			 
-			virtual std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Link> > getMatchingLinks(std::shared_ptr<uml::Association>  association,std::shared_ptr<uml::StructuralFeature>  end,std::shared_ptr<fUML::Semantics::Values::Value>  oppositeValue) ;
+			virtual std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Link> > getMatchingLinks(std::shared_ptr<org.eclipse.uml2.uml.Association> association,std::shared_ptr<org.eclipse.uml2.uml.StructuralFeature> end,std::shared_ptr<fUML::Semantics::Values::Value> oppositeValue) ;
 			
 			 
-			virtual std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Link> > getMatchingLinksForEndValue(std::shared_ptr<uml::Association>  association,std::shared_ptr<uml::StructuralFeature>  end,std::shared_ptr<fUML::Semantics::Values::Value>  oppositeValue,std::shared_ptr<fUML::Semantics::Values::Value>  endValue) ;
+			virtual std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Link> > getMatchingLinksForEndValue(std::shared_ptr<org.eclipse.uml2.uml.Association> association,std::shared_ptr<org.eclipse.uml2.uml.StructuralFeature> end,std::shared_ptr<fUML::Semantics::Values::Value> oppositeValue,std::shared_ptr<fUML::Semantics::Values::Value> endValue) ;
 			
 			 
-			virtual std::shared_ptr<uml::Property> getOppositeEnd(std::shared_ptr<uml::Association>  association,std::shared_ptr<uml::StructuralFeature>  end) ;
+			virtual std::shared_ptr<org.eclipse.uml2.uml.Property> getOppositeEnd(std::shared_ptr<org.eclipse.uml2.uml.Association> association,std::shared_ptr<org.eclipse.uml2.uml.StructuralFeature> end) ;
 			
 			
 			

@@ -55,7 +55,7 @@ namespace uml
 			after->closure(toAfter.after)->excludes(before)
 			*/
 			 
-			virtual bool irreflexive_transitive_closure(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool irreflexive_transitive_closure(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			

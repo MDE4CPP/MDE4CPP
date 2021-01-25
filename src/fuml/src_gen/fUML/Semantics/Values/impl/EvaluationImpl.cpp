@@ -134,13 +134,13 @@ void EvaluationImpl::setLocus(std::shared_ptr<fUML::Semantics::Loci::Locus> _loc
 /*
 Getter & Setter for reference specification
 */
-std::shared_ptr<uml::ValueSpecification > EvaluationImpl::getSpecification() const
+std::shared_ptr<org.eclipse.uml2.uml.ValueSpecification > EvaluationImpl::getSpecification() const
 {
 //assert(m_specification);
     return m_specification;
 }
 
-void EvaluationImpl::setSpecification(std::shared_ptr<uml::ValueSpecification> _specification)
+void EvaluationImpl::setSpecification(std::shared_ptr<org.eclipse.uml2.uml.ValueSpecification> _specification)
 {
     m_specification = _specification;
 }
@@ -175,9 +175,9 @@ Any EvaluationImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case fUML::Semantics::Values::ValuesPackage::EVALUATION_ATTRIBUTE_LOCUS:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getLocus())); //421
+			return eAny(getLocus()); //421
 		case fUML::Semantics::Values::ValuesPackage::EVALUATION_ATTRIBUTE_SPECIFICATION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSpecification())); //420
+			return eAny(getSpecification()); //420
 	}
 	return fUML::Semantics::Loci::SemanticVisitorImpl::eGet(featureID, resolve, coreType);
 }
@@ -208,7 +208,7 @@ bool EvaluationImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::ValueSpecification> _specification = std::dynamic_pointer_cast<uml::ValueSpecification>(_temp);
+			std::shared_ptr<org.eclipse.uml2.uml.ValueSpecification> _specification = std::dynamic_pointer_cast<org.eclipse.uml2.uml.ValueSpecification>(_temp);
 			setSpecification(_specification); //420
 			return true;
 		}
@@ -297,7 +297,7 @@ void EvaluationImpl::resolveReferences(const int featureID, std::list<std::share
 			if (references.size() == 1)
 			{
 				// Cast object to correct type
-				std::shared_ptr<uml::ValueSpecification> _specification = std::dynamic_pointer_cast<uml::ValueSpecification>( references.front() );
+				std::shared_ptr<org.eclipse.uml2.uml.ValueSpecification> _specification = std::dynamic_pointer_cast<org.eclipse.uml2.uml.ValueSpecification>( references.front() );
 				setSpecification(_specification);
 			}
 			
@@ -323,12 +323,9 @@ void EvaluationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	{
 		std::shared_ptr<fUML::Semantics::Values::ValuesPackage> package = fUML::Semantics::Values::ValuesPackage::eInstance();
 
-	
-
-		// Add references
-		saveHandler->addReference("locus", this->getLocus());
-		saveHandler->addReference("specification", this->getSpecification());
-
+	// Add references
+		saveHandler->addReference("locus", this->getLocus());		 
+		saveHandler->addReference("specification", this->getSpecification());		
 	}
 	catch (std::exception& e)
 	{

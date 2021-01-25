@@ -167,12 +167,12 @@ std::shared_ptr<ecore::EClass> AcceptEventActionActivationImpl::eStaticClass() c
 /*
 Getter & Setter for attribute waiting
 */
-bool AcceptEventActionActivationImpl::isWaiting() const 
+bool  AcceptEventActionActivationImpl::isWaiting() const 
 {
 	return m_waiting;
 }
 
-void AcceptEventActionActivationImpl::setWaiting(bool _waiting)
+void AcceptEventActionActivationImpl::setWaiting(bool  _waiting)
 {
 	m_waiting = _waiting;
 } 
@@ -182,7 +182,7 @@ void AcceptEventActionActivationImpl::setWaiting(bool _waiting)
 //*********************************
 // Operations
 //*********************************
-void AcceptEventActionActivationImpl::accept(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>  eventOccurrence)
+void AcceptEventActionActivationImpl::accept(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurrence)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -194,13 +194,13 @@ void AcceptEventActionActivationImpl::doAction()
 	throw "UnsupportedOperationException";
 }
 
-void AcceptEventActionActivationImpl::fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token> >  incomingTokens)
+void AcceptEventActionActivationImpl::fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > incomingTokens)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void AcceptEventActionActivationImpl::initialize(std::shared_ptr<uml::ActivityNode>  node,std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup>  group)
+void AcceptEventActionActivationImpl::initialize(std::shared_ptr<org.eclipse.uml2.uml.ActivityNode> node,std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> group)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -212,7 +212,7 @@ bool AcceptEventActionActivationImpl::isReady()
 	throw "UnsupportedOperationException";
 }
 
-bool AcceptEventActionActivationImpl::match(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>  eventOccurrence)
+bool AcceptEventActionActivationImpl::match(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurrence)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -296,7 +296,7 @@ Any AcceptEventActionActivationImpl::eGet(int featureID, bool resolve, bool core
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::ACCEPTEVENTACTIONACTIVATION_ATTRIBUTE_EVENTACCEPTER:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEventAccepter())); //311
+			return eAny(getEventAccepter()); //311
 		case fUML::Semantics::Actions::ActionsPackage::ACCEPTEVENTACTIONACTIVATION_ATTRIBUTE_WAITING:
 			return eAny(isWaiting()); //312
 	}
@@ -438,17 +438,14 @@ void AcceptEventActionActivationImpl::saveContent(std::shared_ptr<persistence::i
 	try
 	{
 		std::shared_ptr<fUML::Semantics::Actions::ActionsPackage> package = fUML::Semantics::Actions::ActionsPackage::eInstance();
-
-	
 		// Add attributes
 		if ( this->eIsSet(package->getAcceptEventActionActivation_Attribute_waiting()) )
 		{
 			saveHandler->addAttribute("waiting", this->isWaiting());
 		}
 
-		// Add references
-		saveHandler->addReference("eventAccepter", this->getEventAccepter());
-
+	// Add references
+		saveHandler->addReference("eventAccepter", this->getEventAccepter());		 
 	}
 	catch (std::exception& e)
 	{

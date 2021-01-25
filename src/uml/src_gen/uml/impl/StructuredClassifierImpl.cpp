@@ -382,7 +382,7 @@ std::shared_ptr<Bag<uml::ConnectableElement> > StructuredClassifierImpl::allRole
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Property> StructuredClassifierImpl::createOwnedAttribute(std::string name,std::shared_ptr<uml::Type>  type,int lower,int upper)
+std::shared_ptr<uml::Property> StructuredClassifierImpl::createOwnedAttribute(std::string name,std::shared_ptr<uml::Type> type,int lower,int upper)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -669,51 +669,19 @@ Any StructuredClassifierImpl::eGet(int featureID, bool resolve, bool coreType) c
 	{
 		case uml::umlPackage::STRUCTUREDCLASSIFIER_ATTRIBUTE_OWNEDATTRIBUTE:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Property>::iterator iter = m_ownedAttribute->begin();
-			Bag<uml::Property>::iterator end = m_ownedAttribute->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //22838
+			return eAny(getOwnedAttribute()); //22838			
 		}
 		case uml::umlPackage::STRUCTUREDCLASSIFIER_ATTRIBUTE_OWNEDCONNECTOR:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Connector>::iterator iter = m_ownedConnector->begin();
-			Bag<uml::Connector>::iterator end = m_ownedConnector->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //22839
+			return eAny(getOwnedConnector()); //22839			
 		}
 		case uml::umlPackage::STRUCTUREDCLASSIFIER_ATTRIBUTE_PART:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Property>::iterator iter = m_part->begin();
-			Bag<uml::Property>::iterator end = m_part->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //22840
+			return eAny(getPart()); //22840			
 		}
 		case uml::umlPackage::STRUCTUREDCLASSIFIER_ATTRIBUTE_ROLE:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ConnectableElement>::iterator iter = m_role->begin();
-			Bag<uml::ConnectableElement>::iterator end = m_role->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //22841
+			return eAny(getRole()); //22841			
 		}
 	}
 	return ClassifierImpl::eGet(featureID, resolve, coreType);
@@ -928,14 +896,11 @@ void StructuredClassifierImpl::saveContent(std::shared_ptr<persistence::interfac
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'ownedConnector'
 		for (std::shared_ptr<uml::Connector> ownedConnector : *this->getOwnedConnector()) 
 		{
 			saveHandler->addReference(ownedConnector, "ownedConnector", ownedConnector->eClass() != package->getConnector_Class());
 		}
-	
-
 
 		//
 		// Add new tags (from references)

@@ -35,60 +35,28 @@ namespace fUML
 	class fUMLFactory;
 }
 
-//Forward Declaration for used types
-namespace fUML::Semantics::Actions 
-{
-	class AcceptEventActionActivation;
-}
-
+//Forward Declaration for used types 
 namespace fUML::Semantics::Actions 
 {
 	class AcceptEventActionEventAccepter;
+	class InputPinActivation;
+	class OutputPinActivation;
+	class PinActivation;
 }
-
-namespace uml 
-{
-	class Action;
-}
-
 namespace fUML::Semantics::Activities 
 {
 	class ActivityEdgeInstance;
-}
-
-namespace uml 
-{
-	class ActivityNode;
-}
-
-namespace fUML::Semantics::Activities 
-{
 	class ActivityNodeActivationGroup;
+	class Token;
 }
-
 namespace fUML::Semantics::CommonBehavior 
 {
 	class EventOccurrence;
 }
-
-namespace fUML::Semantics::Actions 
+namespace uml 
 {
-	class InputPinActivation;
-}
-
-namespace fUML::Semantics::Actions 
-{
-	class OutputPinActivation;
-}
-
-namespace fUML::Semantics::Actions 
-{
-	class PinActivation;
-}
-
-namespace fUML::Semantics::Activities 
-{
-	class Token;
+	class Action;
+	class ActivityNode;
 }
 
 // base class includes
@@ -96,6 +64,8 @@ namespace fUML::Semantics::Activities
 
 // enum includes
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace fUML::Semantics::Actions 
@@ -121,7 +91,7 @@ namespace fUML::Semantics::Actions
 			// Operations
 			//*********************************
 			 
-			virtual void accept(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>  eventOccurrence) = 0;
+			virtual void accept(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurrence) = 0;
 			
 			
 			//*********************************

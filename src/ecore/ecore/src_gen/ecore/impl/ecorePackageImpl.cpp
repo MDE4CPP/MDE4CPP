@@ -62,6 +62,10 @@ std::shared_ptr<ecore::EClass> ecorePackageImpl::getEAnnotation_Class() const
 	return m_eAnnotation_Class;
 }
 
+std::shared_ptr<ecore::EAttribute> ecorePackageImpl::getEAnnotation_Attribute_details() const
+{
+	return m_eAnnotation_Attribute_details;
+}
 std::shared_ptr<ecore::EAttribute> ecorePackageImpl::getEAnnotation_Attribute_source() const
 {
 	return m_eAnnotation_Attribute_source;
@@ -70,10 +74,6 @@ std::shared_ptr<ecore::EAttribute> ecorePackageImpl::getEAnnotation_Attribute_so
 std::shared_ptr<ecore::EReference> ecorePackageImpl::getEAnnotation_Attribute_contents() const
 {
 	return m_eAnnotation_Attribute_contents;
-}
-std::shared_ptr<ecore::EReference> ecorePackageImpl::getEAnnotation_Attribute_details() const
-{
-	return m_eAnnotation_Attribute_details;
 }
 std::shared_ptr<ecore::EReference> ecorePackageImpl::getEAnnotation_Attribute_eModelElement() const
 {
@@ -814,10 +814,6 @@ std::shared_ptr<ecore::EDataType> ecorePackageImpl::getEChar_Class() const
 std::shared_ptr<ecore::EDataType> ecorePackageImpl::getECharacterObject_Class() const
 {
 	return m_eCharacterObject_Class;
-}
-std::shared_ptr<ecore::EDataType> ecorePackageImpl::getEDate_Class() const
-{
-	return m_eDate_Class;
 }
 std::shared_ptr<ecore::EDataType> ecorePackageImpl::getEDiagnosticChain_Class() const
 {

@@ -70,7 +70,7 @@ namespace uml
 			endif
 			*/
 			 
-			virtual bool removeAt_and_value(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool removeAt_and_value(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			
@@ -82,14 +82,14 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual bool getIsRemoveDuplicates() const ;
+			virtual bool  getIsRemoveDuplicates() const ;
 			
 			/*!
 			Specifies whether to remove duplicates of the value in nonunique StructuralFeatures.
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual void setIsRemoveDuplicates (bool _isRemoveDuplicates); 
+			virtual void setIsRemoveDuplicates (bool  _isRemoveDuplicates); 
 			
 			
 			//*********************************

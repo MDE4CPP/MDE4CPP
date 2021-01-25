@@ -39,29 +39,11 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Comment;
-}
-
-namespace uml 
-{
-	class DirectedRelationship;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class Namespace;
-}
-
-namespace uml 
-{
 	class Package;
 }
 
@@ -71,6 +53,8 @@ namespace uml
 // enum includes
 #include "uml/VisibilityKind.hpp"
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -112,7 +96,7 @@ namespace uml
 			visibility = VisibilityKind::public or visibility = VisibilityKind::private
 			*/
 			 
-			virtual bool public_or_private(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool public_or_private(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			
 			//*********************************
@@ -123,14 +107,14 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual uml::VisibilityKind getVisibility() const = 0;
+			virtual uml::VisibilityKind  getVisibility() const = 0;
 			
 			/*!
 			Specifies the visibility of the imported PackageableElements within the importingNamespace, i.e., whether imported Elements will in turn be visible to other Namespaces. If the PackageImport is public, the imported Elements will be visible outside the importingNamespace, while, if the PackageImport is private, they will not.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual void setVisibility (uml::VisibilityKind _visibility)= 0; 
+			virtual void setVisibility (uml::VisibilityKind  _visibility)= 0; 
 			
 			//*********************************
 			// Reference
@@ -174,7 +158,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			uml::VisibilityKind m_visibility = VisibilityKind::PUBLIC;
+			uml::VisibilityKind  m_visibility = VisibilityKind::PUBLIC;
 			
 			
 			//*********************************

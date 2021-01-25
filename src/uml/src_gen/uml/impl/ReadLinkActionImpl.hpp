@@ -63,21 +63,21 @@ namespace uml
 			self.openEnd()->first().compatibleWith(result)
 			*/
 			 
-			virtual bool compatible_multiplicity(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool compatible_multiplicity(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			The open end must be navigable.
 			self.openEnd()->first().isNavigable()
 			*/
 			 
-			virtual bool navigable_open_end(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool navigable_open_end(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			Exactly one linkEndData specification (corresponding to the "open" end) must not have an value InputPin.
 			self.openEnd()->size() = 1
 			*/
 			 
-			virtual bool one_open_end(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool one_open_end(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			Returns the ends corresponding to endData with no value InputPin. (A well-formed ReadLinkAction is constrained to have only one of these.)
@@ -92,7 +92,7 @@ namespace uml
 			self.openEnd()->forAll(type=result.type and isOrdered=result.isOrdered)
 			*/
 			 
-			virtual bool type_and_ordering(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool type_and_ordering(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			Visibility of the open end must allow access from the object performing the action.
@@ -105,7 +105,7 @@ namespace uml
 			        _'context'.conformsTo(oed.end.type.oclAsType(Classifier)))))
 			*/
 			 
-			virtual bool visibility(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool visibility(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			

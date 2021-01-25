@@ -125,7 +125,7 @@ std::shared_ptr<ecore::EClass> ExecutorImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<fUML::Semantics::Values::Value> ExecutorImpl::evaluate(std::shared_ptr<uml::ValueSpecification>  specification)
+std::shared_ptr<fUML::Semantics::Values::Value> ExecutorImpl::evaluate(std::shared_ptr<org.eclipse.uml2.uml.ValueSpecification> specification)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -140,7 +140,7 @@ std::shared_ptr<fUML::Semantics::Values::Value> ExecutorImpl::evaluate(std::shar
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > ExecutorImpl::execute(std::shared_ptr<uml::Behavior>  behavior,std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object>  context,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> >  inputs)
+std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > ExecutorImpl::execute(std::shared_ptr<org.eclipse.uml2.uml.Behavior> behavior,std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> context,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > inputs)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -169,7 +169,7 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > ExecutorI
 	//end of body
 }
 
-std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> ExecutorImpl::start(std::shared_ptr<uml::Class>  type,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> >  inputs)
+std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> ExecutorImpl::start(std::shared_ptr<org.eclipse.uml2.uml.Class> type,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > inputs)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -243,7 +243,7 @@ Any ExecutorImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case fUML::Semantics::Loci::LociPackage::EXECUTOR_ATTRIBUTE_LOCUS:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getLocus().lock())); //480
+			return eAny(getLocus().lock()); //480
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -338,9 +338,6 @@ void ExecutorImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	try
 	{
 		std::shared_ptr<fUML::Semantics::Loci::LociPackage> package = fUML::Semantics::Loci::LociPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

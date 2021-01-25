@@ -276,7 +276,7 @@ std::shared_ptr<ecore::EClass> WriteLinkActionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool WriteLinkActionImpl::allow_access(Any diagnostics,std::map <   Any, Any >  context)
+bool WriteLinkActionImpl::allow_access(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -495,9 +495,6 @@ void WriteLinkActionImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

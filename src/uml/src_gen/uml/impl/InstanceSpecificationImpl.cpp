@@ -220,25 +220,25 @@ std::shared_ptr<ecore::EClass> InstanceSpecificationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool InstanceSpecificationImpl::defining_feature(Any diagnostics,std::map <   Any, Any >  context)
+bool InstanceSpecificationImpl::defining_feature(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool InstanceSpecificationImpl::deployment_artifact(Any diagnostics,std::map <   Any, Any >  context)
+bool InstanceSpecificationImpl::deployment_artifact(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool InstanceSpecificationImpl::deployment_target(Any diagnostics,std::map <   Any, Any >  context)
+bool InstanceSpecificationImpl::deployment_target(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool InstanceSpecificationImpl::structural_feature(Any diagnostics,std::map <   Any, Any >  context)
+bool InstanceSpecificationImpl::structural_feature(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -385,30 +385,14 @@ Any InstanceSpecificationImpl::eGet(int featureID, bool resolve, bool coreType) 
 	{
 		case uml::umlPackage::INSTANCESPECIFICATION_ATTRIBUTE_CLASSIFIER:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Classifier>::iterator iter = m_classifier->begin();
-			Bag<uml::Classifier>::iterator end = m_classifier->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //11714
+			return eAny(getClassifier()); //11714			
 		}
 		case uml::umlPackage::INSTANCESPECIFICATION_ATTRIBUTE_SLOT:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Slot>::iterator iter = m_slot->begin();
-			Bag<uml::Slot>::iterator end = m_slot->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //11715
+			return eAny(getSlot()); //11715			
 		}
 		case uml::umlPackage::INSTANCESPECIFICATION_ATTRIBUTE_SPECIFICATION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSpecification())); //11716
+			return eAny(getSpecification()); //11716
 	}
 	Any result;
 	result = DeployedArtifactImpl::eGet(featureID, resolve, coreType);
@@ -698,7 +682,6 @@ void InstanceSpecificationImpl::saveContent(std::shared_ptr<persistence::interfa
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'slot'
 		for (std::shared_ptr<uml::Slot> slot : *this->getSlot()) 
 		{
@@ -711,15 +694,9 @@ void InstanceSpecificationImpl::saveContent(std::shared_ptr<persistence::interfa
 		{
 			saveHandler->addReference(specification, "specification", specification->eClass() != package->getValueSpecification_Class());
 		}
-	
 
-		// Add references
-		std::shared_ptr<Bag<uml::Classifier>> classifier_list = this->getClassifier();
-		for (std::shared_ptr<uml::Classifier > object : *classifier_list)
-		{ 
-			saveHandler->addReferences("classifier", object);
-		}
-
+	// Add references
+		saveHandler->addReferences<uml::Classifier>("classifier", this->getClassifier());	
 	}
 	catch (std::exception& e)
 	{

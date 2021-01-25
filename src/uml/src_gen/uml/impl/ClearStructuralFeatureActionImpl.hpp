@@ -63,14 +63,14 @@ namespace uml
 			result<>null implies result.is(1,1)
 			*/
 			 
-			virtual bool multiplicity_of_result(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool multiplicity_of_result(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			The type of the result OutputPin is the same as the type of the inherited object InputPin.
 			result<>null implies result.type = object.type
 			*/
 			 
-			virtual bool type_of_result(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool type_of_result(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			

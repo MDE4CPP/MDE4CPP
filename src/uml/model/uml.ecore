@@ -524,9 +524,6 @@
         <eAnnotations source="redefines" references="#//ParameterableElement/templateParameter"/>
       </contents>
     </eAnnotations>
-    <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-      <details key="includes" value="#include &quot;uml/BehavioredClassifier.hpp&quot;&#xA;#include &quot;uml/InterfaceRealization.hpp&quot;&#xA;#include &quot;uml/Interface.hpp&quot;&#xA;#include &quot;uml/Usage.hpp&quot;"/>
-    </eAnnotations>
     <eOperations name="specialize_type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="A Classifier may only specialize Classifiers of a valid type.&#xA;parents()->forAll(c | self.maySpecializeType(c))"/>
@@ -1288,9 +1285,6 @@
   <eClassifiers xsi:type="ecore:EClass" name="Element" abstract="true" eSuperTypes="#//Object">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="An Element is a constituent of a model. As such, it has the capability of owning other Elements.&#xA;&lt;p>From package UML::CommonStructure.&lt;/p>"/>
-    </eAnnotations>
-    <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-      <details key="includes" value="#include &quot;abstractDataTypes/SubsetUnion.hpp&quot;&#xA;#include &quot;util/stereotypestorage.hpp&quot;&#xA;#include &quot;uml/Property.hpp&quot;"/>
     </eAnnotations>
     <eOperations name="has_owner" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">

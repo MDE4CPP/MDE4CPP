@@ -189,13 +189,13 @@ std::shared_ptr<ecore::EClass> TypeImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool TypeImpl::conformsTo(std::shared_ptr<uml::Type>  other)
+bool TypeImpl::conformsTo(std::shared_ptr<uml::Type> other)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Association> TypeImpl::createAssociation(bool end1IsNavigable,uml::AggregationKind end1Aggregation,std::string end1Name,int end1Lower,int end1Upper,std::shared_ptr<uml::Type>  end1Type,bool end2IsNavigable,uml::AggregationKind end2Aggregation,std::string end2Name,int end2Lower,int end2Upper)
+std::shared_ptr<uml::Association> TypeImpl::createAssociation(bool end1IsNavigable,uml::AggregationKind end1Aggregation,std::string end1Name,int end1Lower,int end1Upper,std::shared_ptr<uml::Type> end1Type,bool end2IsNavigable,uml::AggregationKind end2Aggregation,std::string end2Name,int end2Lower,int end2Upper)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -303,7 +303,7 @@ Any TypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::TYPE_ATTRIBUTE_PACKAGE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getPackage().lock())); //24412
+			return eAny(getPackage().lock()); //24412
 	}
 	return PackageableElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -410,9 +410,6 @@ void TypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

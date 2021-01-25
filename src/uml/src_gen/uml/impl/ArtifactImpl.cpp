@@ -407,12 +407,12 @@ std::shared_ptr<ecore::EClass> ArtifactImpl::eStaticClass() const
 /*
 Getter & Setter for attribute fileName
 */
-std::string ArtifactImpl::getFileName() const 
+std::string  ArtifactImpl::getFileName() const 
 {
 	return m_fileName;
 }
 
-void ArtifactImpl::setFileName(std::string _fileName)
+void ArtifactImpl::setFileName(std::string  _fileName)
 {
 	m_fileName = _fileName;
 } 
@@ -422,13 +422,13 @@ void ArtifactImpl::setFileName(std::string _fileName)
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<uml::Property> ArtifactImpl::createOwnedAttribute(std::string name,std::shared_ptr<uml::Type>  type,int lower,int upper)
+std::shared_ptr<uml::Property> ArtifactImpl::createOwnedAttribute(std::string name,std::shared_ptr<uml::Type> type,int lower,int upper)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Operation> ArtifactImpl::createOwnedOperation(std::string name,std::shared_ptr<Bag<std::string> >  parameterNames,std::shared_ptr<Bag<uml::Type> >  parameterTypes,std::shared_ptr<uml::Type>  returnType)
+std::shared_ptr<uml::Operation> ArtifactImpl::createOwnedOperation(std::string name,std::shared_ptr<Bag<std::string> > parameterNames,std::shared_ptr<Bag<uml::Type> > parameterTypes,std::shared_ptr<uml::Type> returnType)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -720,51 +720,19 @@ Any ArtifactImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(getFileName()); //2038
 		case uml::umlPackage::ARTIFACT_ATTRIBUTE_MANIFESTATION:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Manifestation>::iterator iter = m_manifestation->begin();
-			Bag<uml::Manifestation>::iterator end = m_manifestation->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //2039
+			return eAny(getManifestation()); //2039			
 		}
 		case uml::umlPackage::ARTIFACT_ATTRIBUTE_NESTEDARTIFACT:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Artifact>::iterator iter = m_nestedArtifact->begin();
-			Bag<uml::Artifact>::iterator end = m_nestedArtifact->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //2040
+			return eAny(getNestedArtifact()); //2040			
 		}
 		case uml::umlPackage::ARTIFACT_ATTRIBUTE_OWNEDATTRIBUTE:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Property>::iterator iter = m_ownedAttribute->begin();
-			Bag<uml::Property>::iterator end = m_ownedAttribute->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //2041
+			return eAny(getOwnedAttribute()); //2041			
 		}
 		case uml::umlPackage::ARTIFACT_ATTRIBUTE_OWNEDOPERATION:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Operation>::iterator iter = m_ownedOperation->begin();
-			Bag<uml::Operation>::iterator end = m_ownedOperation->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //2042
+			return eAny(getOwnedOperation()); //2042			
 		}
 	}
 	Any result;
@@ -1142,7 +1110,6 @@ void ArtifactImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'manifestation'
 		for (std::shared_ptr<uml::Manifestation> manifestation : *this->getManifestation()) 
 		{
@@ -1166,13 +1133,11 @@ void ArtifactImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 		{
 			saveHandler->addReference(ownedOperation, "ownedOperation", ownedOperation->eClass() != package->getOperation_Class());
 		}
-	
 		// Add attributes
 		if ( this->eIsSet(package->getArtifact_Attribute_fileName()) )
 		{
 			saveHandler->addAttribute("fileName", this->getFileName());
 		}
-
 	}
 	catch (std::exception& e)
 	{

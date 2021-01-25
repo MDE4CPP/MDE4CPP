@@ -68,32 +68,32 @@ namespace uml
 			->forAll(opposite.owner = association)
 			*/
 			 
-			virtual bool associationEndOwnership(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool associationEndOwnership(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			If a Stereotype extends more than one metaclass, the multiplicity of the corresponding base-properties shall be [0..1]. At any point in time, only one of these base-properties can contain a metaclass instance during runtime.
 			*/
 			 
-			virtual bool base_property_multiplicity_multiple_extension(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool base_property_multiplicity_multiple_extension(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			If a Stereotype extends only one metaclass, the multiplicity of the corresponding base-property shall be 1..1.
 			*/
 			 
-			virtual bool base_property_multiplicity_single_extension(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool base_property_multiplicity_single_extension(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			The upper bound of base-properties is exactly 1.
 			*/
 			 
-			virtual bool base_property_upper_bound(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool base_property_upper_bound(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			Stereotypes may only participate in binary associations.
 			ownedAttribute.association->forAll(memberEnd->size()=2)
 			*/
 			 
-			virtual bool binaryAssociationsOnly(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool binaryAssociationsOnly(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			The query containingProfile returns the closest profile directly or indirectly containing this stereotype.
@@ -107,7 +107,7 @@ namespace uml
 			Creates a(n) (required) extension of the specified metaclass with this stereotype.
 			*/
 			 
-			virtual std::shared_ptr<uml::Extension> createExtension(std::shared_ptr<uml::Class>  metaclass,bool isRequired) ;
+			virtual std::shared_ptr<uml::Extension> createExtension(std::shared_ptr<uml::Class> metaclass,bool isRequired) ;
 			
 			/*!
 			Creates an icon with the specified location for this stereotype.
@@ -127,7 +127,7 @@ namespace uml
 			and Classifier.allInstances()->forAll(c | c.allParents()->exists(oclIsKindOf(Stereotype)) implies c.oclIsKindOf(Stereotype))
 			*/
 			 
-			virtual bool generalize(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool generalize(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			Retrieves all the metaclasses extended by this stereotype, including the metaclasses extended by its superstereotypes.
@@ -165,7 +165,7 @@ namespace uml
 			Stereotype names should not clash with keyword names for the extended model element.
 			*/
 			 
-			virtual bool name_not_clash(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool name_not_clash(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			

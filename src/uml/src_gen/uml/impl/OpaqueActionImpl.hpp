@@ -63,7 +63,7 @@ namespace uml
 			language->notEmpty() implies (_'body'->size() = language->size())
 			*/
 			 
-			virtual bool language_body_size(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool language_body_size(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			
@@ -75,7 +75,8 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<std::string> > getBody() const ;
+			virtual  std::shared_ptr<Bag<std::string> >
+			 getBody() const ;
 			
 			
 			/*!
@@ -83,7 +84,8 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<std::string> > getLanguage() const ;
+			virtual  std::shared_ptr<Bag<std::string> >
+			 getLanguage() const ;
 			
 			
 			

@@ -92,14 +92,14 @@ namespace uml
 			<p>From package UML::Values.</p>
 			*/
 			 
-			virtual int getValue() const ;
+			virtual int  getValue() const ;
 			
 			/*!
 			The specified UnlimitedNatural value.
 			<p>From package UML::Values.</p>
 			*/
 			 
-			virtual void setValue (int _value); 
+			virtual void setValue (int  _value); 
 			
 			
 			//*********************************

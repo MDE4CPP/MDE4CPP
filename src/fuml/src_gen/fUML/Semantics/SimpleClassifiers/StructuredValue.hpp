@@ -36,24 +36,14 @@ namespace fUML
 	class fUMLFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace fUML::Semantics::SimpleClassifiers 
 {
 	class FeatureValue;
 }
-
 namespace uml 
 {
 	class StructuralFeature;
-}
-
-namespace fUML::Semantics::Values 
-{
-	class Value;
-}
-
-namespace uml 
-{
 	class ValueSpecification;
 }
 
@@ -61,6 +51,19 @@ namespace uml
 #include "fUML/Semantics/Values/Value.hpp"
 
 // enum includes
+
+
+//Includes from codegen annotation
+#include "abstractDataTypes/Subset.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "uml/Class.hpp"
+#include "uml/Classifier.hpp"
+#include "uml/InstanceSpecification.hpp"
+#include "uml/InstanceValue.hpp"
+#include "uml/NamedElement.hpp"
+#include "uml/Slot.hpp"
+#include "uml/StructuralFeature.hpp"
+#include "uml/umlFactory.hpp"
 
 
 //*********************************
@@ -87,28 +90,28 @@ namespace fUML::Semantics::SimpleClassifiers
 			// Operations
 			//*********************************
 			 
-			virtual void assignFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<Bag<fUML::Semantics::Values::Value> >  values,int position) = 0;
+			virtual void assignFeatureValue(std::shared_ptr<org.eclipse.uml2.uml.StructuralFeature> feature,std::shared_ptr<Bag<fUML::Semantics::Values::Value> > values,int position) = 0;
 			
 			 
 			virtual void createFeatureValues() = 0;
 			
 			 
-			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value> > getValues(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue> >  featureValues) = 0;
+			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value> > getValues(std::shared_ptr<org.eclipse.uml2.uml.StructuralFeature> feature,std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue> > featureValues) = 0;
 			
 			 
-			virtual void removeValue(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<fUML::Semantics::Values::Value>  value) = 0;
+			virtual void removeValue(std::shared_ptr<org.eclipse.uml2.uml.StructuralFeature> feature,std::shared_ptr<fUML::Semantics::Values::Value> value) = 0;
 			
 			 
-			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> retrieveFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature) = 0;
+			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> retrieveFeatureValue(std::shared_ptr<org.eclipse.uml2.uml.StructuralFeature> feature) = 0;
 			
 			 
 			virtual std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue> > retrieveFeatureValues() = 0;
 			
 			 
-			virtual void setFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<Bag<fUML::Semantics::Values::Value> >  values,int position) = 0;
+			virtual void setFeatureValue(std::shared_ptr<org.eclipse.uml2.uml.StructuralFeature> feature,std::shared_ptr<Bag<fUML::Semantics::Values::Value> > values,int position) = 0;
 			
 			 
-			virtual std::shared_ptr<uml::ValueSpecification> specify() = 0;
+			virtual std::shared_ptr<org.eclipse.uml2.uml.ValueSpecification> specify() = 0;
 			
 			
 			//*********************************

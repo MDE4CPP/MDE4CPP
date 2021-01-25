@@ -36,60 +36,26 @@ namespace fUML
 	class fUMLFactory;
 }
 
-//Forward Declaration for used types
-namespace uml 
-{
-	class Behavior;
-}
-
-namespace uml 
-{
-	class Classifier;
-}
-
+//Forward Declaration for used types 
 namespace fUML::Semantics::CommonBehavior 
 {
 	class EventOccurrence;
+	class ObjectActivation;
+	class ParameterValue;
 }
-
-namespace fUML::Semantics::CommonBehavior 
-{
-	class Execution;
-}
-
-namespace fUML::Semantics::SimpleClassifiers 
-{
-	class FeatureValue;
-}
-
 namespace fUML::Semantics::Loci 
 {
 	class Locus;
 }
-
-namespace fUML::Semantics::StructuredClassifiers 
+namespace fUML::Semantics::SimpleClassifiers 
 {
-	class Object;
+	class FeatureValue;
 }
-
-namespace fUML::Semantics::CommonBehavior 
-{
-	class ObjectActivation;
-}
-
 namespace uml 
 {
+	class Behavior;
+	class Classifier;
 	class Operation;
-}
-
-namespace fUML::Semantics::CommonBehavior 
-{
-	class ParameterValue;
-}
-
-namespace fUML::Semantics::Values 
-{
-	class Value;
 }
 
 // base class includes
@@ -97,6 +63,15 @@ namespace fUML::Semantics::Values
 
 // enum includes
 
+
+//Includes from codegen annotation
+#include "fUML/Semantics/CommonBehavior/CallEventOccurrence.hpp"
+#include "fUML/Semantics/CommonBehavior/CallEventBehavior.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
+#include "uml/ParameterDirectionKind.hpp"
+#include "uml/Parameter.hpp"
+#include "uml/Behavior.hpp"
 
 //*********************************
 namespace fUML::Semantics::CommonBehavior 
@@ -134,7 +109,7 @@ namespace fUML::Semantics::CommonBehavior
 			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > getInputParameterValues() = 0;
 			
 			 
-			virtual std::shared_ptr<uml::Operation> getOperation() = 0;
+			virtual std::shared_ptr<org.eclipse.uml2.uml.Operation> getOperation() = 0;
 			
 			 
 			virtual bool isCallerSuspended() = 0;
@@ -149,7 +124,7 @@ namespace fUML::Semantics::CommonBehavior
 			virtual void releaseCaller() = 0;
 			
 			 
-			virtual void setOutputParameterValues(std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> >  parameterValues) = 0;
+			virtual void setOutputParameterValues(std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > parameterValues) = 0;
 			
 			 
 			virtual void suspendCaller() = 0;
@@ -162,10 +137,10 @@ namespace fUML::Semantics::CommonBehavior
 			// Attributes Getter Setter
 			//*********************************
 			 
-			virtual bool getCallerSuspended() const = 0;
+			virtual bool  getCallerSuspended() const = 0;
 			
 			 
-			virtual void setCallerSuspended (bool _callerSuspended)= 0; 
+			virtual void setCallerSuspended (bool  _callerSuspended)= 0; 
 			
 			//*********************************
 			// Reference
@@ -177,7 +152,7 @@ namespace fUML::Semantics::CommonBehavior
 			// Attribute Members
 			//*********************************
 			 
-			bool m_callerSuspended = false;
+			bool  m_callerSuspended = false;
 			
 			
 			//*********************************

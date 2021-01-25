@@ -65,14 +65,14 @@ namespace uml
 			   enclosingOperand.oclAsType(InteractionFragment)->asSet()).covered->asSet() = self.covered->asSet()
 			*/
 			 
-			virtual bool break_(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool break_(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			The interaction operators 'consider' and 'ignore' can only be used for the ConsiderIgnoreFragment subtype of CombinedFragment
 			((interactionOperator = InteractionOperatorKind::consider) or (interactionOperator =  InteractionOperatorKind::ignore)) implies oclIsKindOf(ConsiderIgnoreFragment)
 			*/
 			 
-			virtual bool consider_and_ignore(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool consider_and_ignore(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			If the interactionOperator is opt, loop, break, assert or neg, there must be exactly one operand.
@@ -82,7 +82,7 @@ namespace uml
 			implies operand->size()=1
 			*/
 			 
-			virtual bool opt_loop_break_neg(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool opt_loop_break_neg(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			
@@ -94,14 +94,14 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			 
-			virtual uml::InteractionOperatorKind getInteractionOperator() const ;
+			virtual uml::InteractionOperatorKind  getInteractionOperator() const ;
 			
 			/*!
 			Specifies the operation which defines the semantics of this combination of InteractionFragments.
 			<p>From package UML::Interactions.</p>
 			*/
 			 
-			virtual void setInteractionOperator (uml::InteractionOperatorKind _interactionOperator); 
+			virtual void setInteractionOperator (uml::InteractionOperatorKind  _interactionOperator); 
 			
 			
 			//*********************************

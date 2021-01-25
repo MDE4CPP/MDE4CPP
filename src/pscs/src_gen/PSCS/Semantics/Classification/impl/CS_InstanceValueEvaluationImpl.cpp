@@ -62,10 +62,10 @@
 #include "PSCS/Semantics/Classification/impl/ClassificationFactoryImpl.hpp"
 #include "PSCS/Semantics/Classification/impl/ClassificationPackageImpl.hpp"
 
-#include "PSCS/PSCSFactory.hpp"
-#include "PSCS/PSCSPackage.hpp"
 #include "PSCS/Semantics/SemanticsFactory.hpp"
 #include "PSCS/Semantics/SemanticsPackage.hpp"
+#include "PSCS/PSCSFactory.hpp"
+#include "PSCS/PSCSPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -339,9 +339,6 @@ void CS_InstanceValueEvaluationImpl::saveContent(std::shared_ptr<persistence::in
 	try
 	{
 		std::shared_ptr<PSCS::Semantics::Classification::ClassificationPackage> package = PSCS::Semantics::Classification::ClassificationPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

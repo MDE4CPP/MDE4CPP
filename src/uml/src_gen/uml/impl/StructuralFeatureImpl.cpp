@@ -187,12 +187,12 @@ std::shared_ptr<ecore::EClass> StructuralFeatureImpl::eStaticClass() const
 /*
 Getter & Setter for attribute isReadOnly
 */
-bool StructuralFeatureImpl::getIsReadOnly() const 
+bool  StructuralFeatureImpl::getIsReadOnly() const 
 {
 	return m_isReadOnly;
 }
 
-void StructuralFeatureImpl::setIsReadOnly(bool _isReadOnly)
+void StructuralFeatureImpl::setIsReadOnly(bool  _isReadOnly)
 {
 	m_isReadOnly = _isReadOnly;
 } 
@@ -425,14 +425,11 @@ void StructuralFeatureImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
 		// Add attributes
 		if ( this->eIsSet(package->getStructuralFeature_Attribute_isReadOnly()) )
 		{
 			saveHandler->addAttribute("isReadOnly", this->getIsReadOnly());
 		}
-
 	}
 	catch (std::exception& e)
 	{

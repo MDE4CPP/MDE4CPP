@@ -325,7 +325,7 @@ Any EnumerationLiteralImpl::eGet(int featureID, bool resolve, bool coreType) con
 	switch(featureID)
 	{
 		case uml::umlPackage::ENUMERATIONLITERAL_ATTRIBUTE_ENUMERATION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEnumeration().lock())); //8517
+			return eAny(getEnumeration().lock()); //8517
 	}
 	return InstanceSpecificationImpl::eGet(featureID, resolve, coreType);
 }
@@ -437,9 +437,6 @@ void EnumerationLiteralImpl::saveContent(std::shared_ptr<persistence::interfaces
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

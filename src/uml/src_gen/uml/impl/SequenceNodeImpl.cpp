@@ -621,6 +621,8 @@ Any SequenceNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::SEQUENCENODE_ATTRIBUTE_EXECUTABLENODE:
 		{
+			return eAny(getExecutableNode()); //21444			
+			/*
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::ExecutableNode>::iterator iter = m_executableNode->begin();
 			Bag<uml::ExecutableNode>::iterator end = m_executableNode->end();
@@ -630,6 +632,7 @@ Any SequenceNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 				iter++;
 			}
 			return eAny(tempList); //21444
+			*/
 		}
 	}
 	return StructuredActivityNodeImpl::eGet(featureID, resolve, coreType);
@@ -792,9 +795,6 @@ void SequenceNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
-
 
 		//
 		// Add new tags (from references)

@@ -39,24 +39,10 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Comment;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
-	class MultiplicityElement;
-}
-
-namespace uml 
-{
 	class ValueSpecification;
 }
 
@@ -65,6 +51,8 @@ namespace uml
 
 // enum includes
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -99,7 +87,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual bool compatibleWith(std::shared_ptr<uml::MultiplicityElement>  other) = 0;
+			virtual bool compatibleWith(std::shared_ptr<uml::MultiplicityElement> other) = 0;
 			
 			/*!
 			The query includesMultiplicity() checks whether this multiplicity includes all the cardinalities allowed by the specified multiplicity.
@@ -108,7 +96,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual bool includesMultiplicity(std::shared_ptr<uml::MultiplicityElement>  M) = 0;
+			virtual bool includesMultiplicity(std::shared_ptr<uml::MultiplicityElement> M) = 0;
 			
 			/*!
 			The operation is determines if the upper and lower bound of the ranges are the ones given.
@@ -140,14 +128,14 @@ namespace uml
 			lowerBound() >= 0
 			*/
 			 
-			virtual bool lower_ge_0(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool lower_ge_0(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			If it is not empty, then lowerValue must have an Integer value.
 			lowerValue <> null implies lowerValue.integerValue() <> null
 			*/
 			 
-			virtual bool lower_is_integer(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool lower_is_integer(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			The query upperBound() returns the upper bound of the multiplicity for a bounded multiplicity as an unlimited natural, which is the unlimitedNaturalValue of upperValue, if given, and 1, otherwise.
@@ -162,26 +150,26 @@ namespace uml
 			upperBound() >= lowerBound()
 			*/
 			 
-			virtual bool upper_ge_lower(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool upper_ge_lower(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			If it is not empty, then upperValue must have an UnlimitedNatural value.
 			upperValue <> null implies upperValue.unlimitedValue() <> null
 			*/
 			 
-			virtual bool upper_is_unlimitedNatural(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool upper_is_unlimitedNatural(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			If a non-literal ValueSpecification is used for lowerValue or upperValue, then that specification must be a constant expression.
 			*/
 			 
-			virtual bool value_specification_constant(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool value_specification_constant(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			If a non-literal ValueSpecification is used for lowerValue or upperValue, then evaluating that specification must not have side effects.
 			*/
 			 
-			virtual bool value_specification_no_side_effects(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool value_specification_no_side_effects(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			
 			//*********************************
@@ -192,53 +180,53 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual bool getIsOrdered() const = 0;
+			virtual bool  getIsOrdered() const = 0;
 			
 			/*!
 			For a multivalued multiplicity, this attribute specifies whether the values in an instantiation of this MultiplicityElement are sequentially ordered.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual void setIsOrdered (bool _isOrdered)= 0; 
+			virtual void setIsOrdered (bool  _isOrdered)= 0; 
 			/*!
 			For a multivalued multiplicity, this attributes specifies whether the values in an instantiation of this MultiplicityElement are unique.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual bool getIsUnique() const = 0;
+			virtual bool  getIsUnique() const = 0;
 			
 			/*!
 			For a multivalued multiplicity, this attributes specifies whether the values in an instantiation of this MultiplicityElement are unique.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual void setIsUnique (bool _isUnique)= 0; 
+			virtual void setIsUnique (bool  _isUnique)= 0; 
 			/*!
 			The lower bound of the multiplicity interval.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual int getLower() const = 0;
+			virtual int  getLower() const = 0;
 			
 			/*!
 			The lower bound of the multiplicity interval.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual void setLower (int _lower)= 0; 
+			virtual void setLower (int  _lower)= 0; 
 			/*!
 			The upper bound of the multiplicity interval.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual int getUpper() const = 0;
+			virtual int  getUpper() const = 0;
 			
 			/*!
 			The upper bound of the multiplicity interval.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual void setUpper (int _upper)= 0; 
+			virtual void setUpper (int  _upper)= 0; 
 			
 			//*********************************
 			// Reference
@@ -282,25 +270,25 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			bool m_isOrdered = false;
+			bool  m_isOrdered = false;
 			/*!
 			For a multivalued multiplicity, this attributes specifies whether the values in an instantiation of this MultiplicityElement are unique.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			bool m_isUnique = true;
+			bool  m_isUnique = true;
 			/*!
 			The lower bound of the multiplicity interval.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			int m_lower = 1;
+			int  m_lower = 1;
 			/*!
 			The upper bound of the multiplicity interval.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			int m_upper = 1;
+			int  m_upper = 1;
 			
 			
 			//*********************************

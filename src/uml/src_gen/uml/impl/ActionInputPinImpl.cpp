@@ -363,19 +363,19 @@ std::shared_ptr<ecore::EClass> ActionInputPinImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ActionInputPinImpl::input_pin(Any diagnostics,std::map <   Any, Any >  context)
+bool ActionInputPinImpl::input_pin(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ActionInputPinImpl::no_control_or_object_flow(Any diagnostics,std::map <   Any, Any >  context)
+bool ActionInputPinImpl::no_control_or_object_flow(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ActionInputPinImpl::one_output_pin(Any diagnostics,std::map <   Any, Any >  context)
+bool ActionInputPinImpl::one_output_pin(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -537,7 +537,7 @@ Any ActionInputPinImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::ACTIONINPUTPIN_ATTRIBUTE_FROMACTION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getFromAction())); //641
+			return eAny(getFromAction()); //641
 	}
 	return InputPinImpl::eGet(featureID, resolve, coreType);
 }
@@ -670,15 +670,12 @@ void ActionInputPinImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'fromAction'
 		std::shared_ptr<uml::Action > fromAction = this->getFromAction();
 		if (fromAction != nullptr)
 		{
 			saveHandler->addReference(fromAction, "fromAction", fromAction->eClass() != package->getAction_Class());
 		}
-	
-
 	}
 	catch (std::exception& e)
 	{

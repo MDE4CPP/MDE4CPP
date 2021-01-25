@@ -49,7 +49,7 @@ virtual public ClassifierBehaviorExecution
 			virtual void _startObjectBehavior() ;
 			
 			 
-			virtual void execute(std::shared_ptr<Bag<uml::Class> >  classifier,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> >  inputs) ;
+			virtual void execute(std::shared_ptr<Bag<org.eclipse.uml2.uml.Class> > classifier,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > inputs) ;
 			
 			 
 			virtual void terminate() ;
@@ -65,10 +65,10 @@ virtual public ClassifierBehaviorExecution
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<uml::Class > getClassifier() const ;
+			virtual std::shared_ptr<org.eclipse.uml2.uml.Class > getClassifier() const ;
 			
 			
-			virtual void setClassifier(std::shared_ptr<uml::Class> _classifier) ;
+			virtual void setClassifier(std::shared_ptr<org.eclipse.uml2.uml.Class> _classifier) ;
 			
 			
 			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution > getExecution() const ;

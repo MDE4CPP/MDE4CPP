@@ -36,24 +36,10 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Comment;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
-	class ParameterableElement;
-}
-
-namespace uml 
-{
 	class TemplateParameter;
 }
 
@@ -62,6 +48,8 @@ namespace uml
 
 // enum includes
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -104,7 +92,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual bool isCompatibleWith(std::shared_ptr<uml::ParameterableElement>  p) = 0;
+			virtual bool isCompatibleWith(std::shared_ptr<uml::ParameterableElement> p) = 0;
 			
 			/*!
 			The query isTemplateParameter() determines if this ParameterableElement is exposed as a formal TemplateParameter.

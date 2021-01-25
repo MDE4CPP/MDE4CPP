@@ -115,7 +115,7 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > SignalEve
 	throw "UnsupportedOperationException";
 }
 
-bool SignalEventOccurrenceImpl::match(std::shared_ptr<uml::Trigger>  trigger)
+bool SignalEventOccurrenceImpl::match(std::shared_ptr<org.eclipse.uml2.uml.Trigger> trigger)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -168,7 +168,7 @@ Any SignalEventOccurrenceImpl::eGet(int featureID, bool resolve, bool coreType) 
 	switch(featureID)
 	{
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::SIGNALEVENTOCCURRENCE_ATTRIBUTE_SIGNALINSTANCE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSignalInstance())); //1061
+			return eAny(getSignalInstance()); //1061
 	}
 	return EventOccurrenceImpl::eGet(featureID, resolve, coreType);
 }
@@ -285,11 +285,8 @@ void SignalEventOccurrenceImpl::saveContent(std::shared_ptr<persistence::interfa
 	{
 		std::shared_ptr<fUML::Semantics::CommonBehavior::CommonBehaviorPackage> package = fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance();
 
-	
-
-		// Add references
-		saveHandler->addReference("signalInstance", this->getSignalInstance());
-
+	// Add references
+		saveHandler->addReference("signalInstance", this->getSignalInstance());		 
 	}
 	catch (std::exception& e)
 	{

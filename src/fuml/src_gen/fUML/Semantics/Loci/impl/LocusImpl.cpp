@@ -146,7 +146,7 @@ std::shared_ptr<ecore::EClass> LocusImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-void LocusImpl::add(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue>  value)
+void LocusImpl::add(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> value)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -155,7 +155,7 @@ void LocusImpl::add(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Exte
 	//end of body
 }
 
-void LocusImpl::assignExecutor(std::shared_ptr<fUML::Semantics::Loci::Executor>  executor)
+void LocusImpl::assignExecutor(std::shared_ptr<fUML::Semantics::Loci::Executor> executor)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -164,7 +164,7 @@ void LocusImpl::assignExecutor(std::shared_ptr<fUML::Semantics::Loci::Executor> 
 	//end of body
 }
 
-void LocusImpl::assignFactory(std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory>  factory)
+void LocusImpl::assignFactory(std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory> factory)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -173,7 +173,7 @@ void LocusImpl::assignFactory(std::shared_ptr<fUML::Semantics::Loci::ExecutionFa
 	//end of body
 }
 
-bool LocusImpl::conforms(std::shared_ptr<uml::Classifier>  type,std::shared_ptr<uml::Classifier>  classifier)
+bool LocusImpl::conforms(std::shared_ptr<org.eclipse.uml2.uml.Classifier> type,std::shared_ptr<org.eclipse.uml2.uml.Classifier> classifier)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -195,7 +195,7 @@ bool LocusImpl::conforms(std::shared_ptr<uml::Classifier>  type,std::shared_ptr<
 	//end of body
 }
 
-std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> LocusImpl::instantiate(std::shared_ptr<uml::Class>  type)
+std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> LocusImpl::instantiate(std::shared_ptr<org.eclipse.uml2.uml.Class> type)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -218,7 +218,7 @@ std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> LocusImpl::insta
 	//end of body
 }
 
-void LocusImpl::remove(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue>  value)
+void LocusImpl::remove(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> value)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -228,7 +228,7 @@ void LocusImpl::remove(std::shared_ptr<fUML::Semantics::StructuredClassifiers::E
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue> > LocusImpl::retrieveExtent(std::shared_ptr<uml::Classifier>  classifier)
+std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue> > LocusImpl::retrieveExtent(std::shared_ptr<org.eclipse.uml2.uml.Classifier> classifier)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -338,9 +338,11 @@ Any LocusImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case fUML::Semantics::Loci::LociPackage::LOCUS_ATTRIBUTE_EXECUTOR:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getExecutor())); //770
+			return eAny(getExecutor()); //770
 		case fUML::Semantics::Loci::LociPackage::LOCUS_ATTRIBUTE_EXTENSIONALVALUES:
 		{
+			return eAny(getExtensionalValues()); //772			
+			/*
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>::iterator iter = m_extensionalValues->begin();
 			Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>::iterator end = m_extensionalValues->end();
@@ -350,9 +352,10 @@ Any LocusImpl::eGet(int featureID, bool resolve, bool coreType) const
 				iter++;
 			}
 			return eAny(tempList); //772
+			*/
 		}
 		case fUML::Semantics::Loci::LociPackage::LOCUS_ATTRIBUTE_FACTORY:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getFactory())); //771
+			return eAny(getFactory()); //771
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -539,9 +542,6 @@ void LocusImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 	try
 	{
 		std::shared_ptr<fUML::Semantics::Loci::LociPackage> package = fUML::Semantics::Loci::LociPackage::eInstance();
-
-	
-
 
 		//
 		// Add new tags (from references)

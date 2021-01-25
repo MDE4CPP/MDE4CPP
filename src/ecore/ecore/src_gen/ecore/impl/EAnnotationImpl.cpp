@@ -38,8 +38,6 @@
 
 #include "ecore/EObject.hpp"
 
-#include "ecore/EStringToStringMapEntry.hpp"
-
 //Factories an Package includes
 #include "ecore/impl/ecoreFactoryImpl.hpp"
 #include "ecore/impl/ecorePackageImpl.hpp"
@@ -85,6 +83,7 @@ EAnnotationImpl::EAnnotationImpl(const EAnnotationImpl & obj):EAnnotationImpl()
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy EAnnotation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	m_details = obj.getDetails();
 	m_metaElementID = obj.getMetaElementID();
 	m_source = obj.getSource();
 
@@ -108,14 +107,6 @@ EAnnotationImpl::EAnnotationImpl(const EAnnotationImpl & obj):EAnnotationImpl()
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_contents" << std::endl;
 	#endif
-	std::shared_ptr<Bag<ecore::EStringToStringMapEntry>> _detailsList = obj.getDetails();
-	for(std::shared_ptr<ecore::EStringToStringMapEntry> _details : *_detailsList)
-	{
-		this->getDetails()->add(std::shared_ptr<ecore::EStringToStringMapEntry>(std::dynamic_pointer_cast<ecore::EStringToStringMapEntry>(_details->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_details" << std::endl;
-	#endif
 	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
 	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
 	{
@@ -130,8 +121,6 @@ EAnnotationImpl::EAnnotationImpl(const EAnnotationImpl & obj):EAnnotationImpl()
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_contents - Subset<ecore::EObject, ecore::EObject >(getEContens())" << std::endl;
 	#endif
-	
-
 	
 }
 
@@ -151,14 +140,31 @@ std::shared_ptr<EClass> EAnnotationImpl::eStaticClass() const
 // Attribute Setter Getter
 //*********************************
 /*
+Getter & Setter for attribute details
+*/
+ std::shared_ptr<std::map <  std::string ,  std::string >> 
+ EAnnotationImpl::getDetails() const 
+{
+	return m_details;
+}
+
+void EAnnotationImpl::setDetails( std::shared_ptr<std::map <  std::string ,  std::string >> 
+ _details)
+{
+	m_details = _details;
+} 
+
+
+
+/*
 Getter & Setter for attribute source
 */
-std::string EAnnotationImpl::getSource() const 
+std::string  EAnnotationImpl::getSource() const 
 {
 	return m_source;
 }
 
-void EAnnotationImpl::setSource(std::string _source)
+void EAnnotationImpl::setSource(std::string  _source)
 {
 	m_source = _source;
 } 
@@ -194,25 +200,6 @@ std::shared_ptr<Subset<ecore::EObject, ecore::EObject>> EAnnotationImpl::getCont
 	}
 
     return m_contents;
-}
-
-
-
-
-
-/*
-Getter & Setter for reference details
-*/
-std::shared_ptr<Bag<ecore::EStringToStringMapEntry>> EAnnotationImpl::getDetails() const
-{
-	if(m_details == nullptr)
-	{
-		m_details.reset(new Bag<ecore::EStringToStringMapEntry>());
-		
-		
-	}
-
-    return m_details;
 }
 
 
@@ -307,41 +294,15 @@ Any EAnnotationImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case ecore::ecorePackage::EANNOTATION_ATTRIBUTE_CONTENTS:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ecore::EObject>::iterator iter = m_contents->begin();
-			Bag<ecore::EObject>::iterator end = m_contents->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //17
+			return eAny(getContents()); //16			
 		}
 		case ecore::ecorePackage::EANNOTATION_ATTRIBUTE_DETAILS:
-		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ecore::EStringToStringMapEntry>::iterator iter = m_details->begin();
-			Bag<ecore::EStringToStringMapEntry>::iterator end = m_details->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //15
-		}
+			return eAny(getDetails()); //18
 		case ecore::ecorePackage::EANNOTATION_ATTRIBUTE_EMODELELEMENT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEModelElement().lock())); //16
+			return eAny(getEModelElement().lock()); //15
 		case ecore::ecorePackage::EANNOTATION_ATTRIBUTE_REFERENCES:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ecore::EObject>::iterator iter = m_references->begin();
-			Bag<ecore::EObject>::iterator end = m_references->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //18
+			return eAny(getReferences()); //17			
 		}
 		case ecore::ecorePackage::EANNOTATION_ATTRIBUTE_SOURCE:
 			return eAny(getSource()); //14
@@ -353,13 +314,13 @@ bool EAnnotationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ecore::ecorePackage::EANNOTATION_ATTRIBUTE_CONTENTS:
-			return getContents() != nullptr; //17
+			return getContents() != nullptr; //16
 		case ecore::ecorePackage::EANNOTATION_ATTRIBUTE_DETAILS:
-			return getDetails() != nullptr; //15
+			return getDetails() != nullptr; //18
 		case ecore::ecorePackage::EANNOTATION_ATTRIBUTE_EMODELELEMENT:
-			return getEModelElement().lock() != nullptr; //16
+			return getEModelElement().lock() != nullptr; //15
 		case ecore::ecorePackage::EANNOTATION_ATTRIBUTE_REFERENCES:
-			return getReferences() != nullptr; //18
+			return getReferences() != nullptr; //17
 		case ecore::ecorePackage::EANNOTATION_ATTRIBUTE_SOURCE:
 			return getSource() != ""; //14
 	}
@@ -408,37 +369,9 @@ bool EAnnotationImpl::eSet(int featureID, Any newValue)
 		case ecore::ecorePackage::EANNOTATION_ATTRIBUTE_DETAILS:
 		{
 			// BOOST CAST
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<ecore::EStringToStringMapEntry>> detailsList(new Bag<ecore::EStringToStringMapEntry>());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				detailsList->add(std::dynamic_pointer_cast<ecore::EStringToStringMapEntry>(*iter));
-				iter++;
-			}
-			
-			Bag<ecore::EStringToStringMapEntry>::iterator iterDetails = m_details->begin();
-			Bag<ecore::EStringToStringMapEntry>::iterator endDetails = m_details->end();
-			while (iterDetails != endDetails)
-			{
-				if (detailsList->find(*iterDetails) == -1)
-				{
-					m_details->erase(*iterDetails);
-				}
-				iterDetails++;
-			}
-
-			iterDetails = detailsList->begin();
-			endDetails = detailsList->end();
-			while (iterDetails != endDetails)
-			{
-				if (m_details->find(*iterDetails) == -1)
-				{
-					m_details->add(*iterDetails);
-				}
-				iterDetails++;			
-			}
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<std::map <  std::string ,  std::string >> _details = std::dynamic_pointer_cast<std::map <  std::string ,  std::string >>(_temp);
+			setDetails(_details); //18			
 			return true;
 		}
 		case ecore::ecorePackage::EANNOTATION_ATTRIBUTE_EMODELELEMENT:
@@ -446,7 +379,7 @@ bool EAnnotationImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ecore::EModelElement> _eModelElement = std::dynamic_pointer_cast<ecore::EModelElement>(_temp);
-			setEModelElement(_eModelElement); //16
+			setEModelElement(_eModelElement); //15
 			return true;
 		}
 		case ecore::ecorePackage::EANNOTATION_ATTRIBUTE_REFERENCES:
@@ -572,23 +505,6 @@ void EAnnotationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence
 			}
 			return;
 		}
-
-		if ( nodeName.compare("details") == 0 )
-		{
-  			std::string typeName = loadHandler->getCurrentXSITypeName();
-			if (typeName.empty())
-			{
-				typeName = "EStringToStringMapEntry";
-			}
-			std::shared_ptr<ecore::EStringToStringMapEntry> details = std::dynamic_pointer_cast<ecore::EStringToStringMapEntry>(modelFactory->create(typeName));
-			if (details != nullptr)
-			{
-				std::shared_ptr<Bag<ecore::EStringToStringMapEntry>> list_details = this->getDetails();
-				list_details->push_back(details);
-				loadHandler->handleChild(details);
-			}
-			return;
-		}
 	}
 	catch (std::exception& e)
 	{
@@ -653,37 +569,19 @@ void EAnnotationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	try
 	{
 		std::shared_ptr<ecore::ecorePackage> package = ecore::ecorePackage::eInstance();
-
 		// Save 'contents'
 		for (std::shared_ptr<ecore::EObject> contents : *this->getContents()) 
 		{
 			saveHandler->addReference(contents, "contents", contents->eClass() != package->getEObject_Class());
 		}
-	
 		// Add attributes
 		if ( this->eIsSet(package->getEAnnotation_Attribute_source()) )
 		{
 			saveHandler->addAttribute("source", this->getSource());
 		}
 
-		// Add references
-		std::shared_ptr<Bag<ecore::EObject>> references_list = this->getReferences();
-		for (std::shared_ptr<ecore::EObject > object : *references_list)
-		{ 
-			saveHandler->addReferences("references", object);
-		}
-
-
-		//
-		// Add new tags (from references)
-		//
-		std::shared_ptr<EClass> metaClass = this->eClass();
-		// Save 'details'
-		std::shared_ptr<Bag<ecore::EStringToStringMapEntry>> list_details = this->getDetails();
-		for (std::shared_ptr<ecore::EStringToStringMapEntry> details : *list_details) 
-		{
-			saveHandler->addReference(details, "details", details->eClass() !=ecore::ecorePackage::eInstance()->getEStringToStringMapEntry_Class());
-		}
+	// Add references
+		saveHandler->addReferences<ecore::EObject>("references", this->getReferences());	
 	}
 	catch (std::exception& e)
 	{

@@ -66,13 +66,13 @@ namespace uml
 			Creates a property with the specified name, type, lower bound, and upper bound as an owned attribute of this artifact.
 			*/
 			 
-			virtual std::shared_ptr<uml::Property> createOwnedAttribute(std::string name,std::shared_ptr<uml::Type>  type,int lower,int upper) ;
+			virtual std::shared_ptr<uml::Property> createOwnedAttribute(std::string name,std::shared_ptr<uml::Type> type,int lower,int upper) ;
 			
 			/*!
 			Creates an operation with the specified name, parameter names, parameter types, and return type (or null) as an owned operation of this artifact.
 			*/
 			 
-			virtual std::shared_ptr<uml::Operation> createOwnedOperation(std::string name,std::shared_ptr<Bag<std::string> >  parameterNames,std::shared_ptr<Bag<uml::Type> >  parameterTypes,std::shared_ptr<uml::Type>  returnType) ;
+			virtual std::shared_ptr<uml::Operation> createOwnedOperation(std::string name,std::shared_ptr<Bag<std::string> > parameterNames,std::shared_ptr<Bag<uml::Type> > parameterTypes,std::shared_ptr<uml::Type> returnType) ;
 			
 			
 			
@@ -84,14 +84,14 @@ namespace uml
 			<p>From package UML::Deployments.</p>
 			*/
 			 
-			virtual std::string getFileName() const ;
+			virtual std::string  getFileName() const ;
 			
 			/*!
 			A concrete name that is used to refer to the Artifact in a physical context. Example: file system name, universal resource locator.
 			<p>From package UML::Deployments.</p>
 			*/
 			 
-			virtual void setFileName (std::string _fileName); 
+			virtual void setFileName (std::string  _fileName); 
 			
 			
 			//*********************************

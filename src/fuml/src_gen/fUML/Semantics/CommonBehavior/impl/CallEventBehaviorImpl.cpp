@@ -108,13 +108,13 @@ std::shared_ptr<ecore::EClass> CallEventBehaviorImpl::eStaticClass() const
 /*
 Getter & Setter for reference operation
 */
-std::shared_ptr<uml::Operation > CallEventBehaviorImpl::getOperation() const
+std::shared_ptr<org.eclipse.uml2.uml.Operation > CallEventBehaviorImpl::getOperation() const
 {
 //assert(m_operation);
     return m_operation;
 }
 
-void CallEventBehaviorImpl::setOperation(std::shared_ptr<uml::Operation> _operation)
+void CallEventBehaviorImpl::setOperation(std::shared_ptr<org.eclipse.uml2.uml.Operation> _operation)
 {
     m_operation = _operation;
 }
@@ -148,7 +148,7 @@ Any CallEventBehaviorImpl::eGet(int featureID, bool resolve, bool coreType) cons
 	switch(featureID)
 	{
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CALLEVENTBEHAVIOR_ATTRIBUTE_OPERATION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOperation())); //160
+			return eAny(getOperation()); //160
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -169,7 +169,7 @@ bool CallEventBehaviorImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Operation> _operation = std::dynamic_pointer_cast<uml::Operation>(_temp);
+			std::shared_ptr<org.eclipse.uml2.uml.Operation> _operation = std::dynamic_pointer_cast<org.eclipse.uml2.uml.Operation>(_temp);
 			setOperation(_operation); //160
 			return true;
 		}
@@ -238,7 +238,7 @@ void CallEventBehaviorImpl::resolveReferences(const int featureID, std::list<std
 			if (references.size() == 1)
 			{
 				// Cast object to correct type
-				std::shared_ptr<uml::Operation> _operation = std::dynamic_pointer_cast<uml::Operation>( references.front() );
+				std::shared_ptr<org.eclipse.uml2.uml.Operation> _operation = std::dynamic_pointer_cast<org.eclipse.uml2.uml.Operation>( references.front() );
 				setOperation(_operation);
 			}
 			
@@ -263,11 +263,8 @@ void CallEventBehaviorImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	{
 		std::shared_ptr<fUML::Semantics::CommonBehavior::CommonBehaviorPackage> package = fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance();
 
-	
-
-		// Add references
-		saveHandler->addReference("operation", this->getOperation());
-
+	// Add references
+		saveHandler->addReference("operation", this->getOperation());		
 	}
 	catch (std::exception& e)
 	{

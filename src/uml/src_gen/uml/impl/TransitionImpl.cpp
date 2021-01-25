@@ -262,12 +262,12 @@ std::shared_ptr<ecore::EClass> TransitionImpl::eStaticClass() const
 /*
 Getter & Setter for attribute kind
 */
-uml::TransitionKind TransitionImpl::getKind() const 
+uml::TransitionKind  TransitionImpl::getKind() const 
 {
 	return m_kind;
 }
 
-void TransitionImpl::setKind(uml::TransitionKind _kind)
+void TransitionImpl::setKind(uml::TransitionKind  _kind)
 {
 	m_kind = _kind;
 } 
@@ -283,37 +283,37 @@ std::shared_ptr<uml::StateMachine> TransitionImpl::containingStateMachine()
 	throw "UnsupportedOperationException";
 }
 
-bool TransitionImpl::fork_segment_guards(Any diagnostics,std::map <   Any, Any >  context)
+bool TransitionImpl::fork_segment_guards(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool TransitionImpl::fork_segment_state(Any diagnostics,std::map <   Any, Any >  context)
+bool TransitionImpl::fork_segment_state(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool TransitionImpl::initial_transition(Any diagnostics,std::map <   Any, Any >  context)
+bool TransitionImpl::initial_transition(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool TransitionImpl::join_segment_guards(Any diagnostics,std::map <   Any, Any >  context)
+bool TransitionImpl::join_segment_guards(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool TransitionImpl::join_segment_state(Any diagnostics,std::map <   Any, Any >  context)
+bool TransitionImpl::join_segment_state(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool TransitionImpl::outgoing_pseudostates(Any diagnostics,std::map <   Any, Any >  context)
+bool TransitionImpl::outgoing_pseudostates(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -325,19 +325,19 @@ std::shared_ptr<uml::Classifier> TransitionImpl::redefinitionContext()
 	throw "UnsupportedOperationException";
 }
 
-bool TransitionImpl::state_is_external(Any diagnostics,std::map <   Any, Any >  context)
+bool TransitionImpl::state_is_external(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool TransitionImpl::state_is_internal(Any diagnostics,std::map <   Any, Any >  context)
+bool TransitionImpl::state_is_internal(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool TransitionImpl::state_is_local(Any diagnostics,std::map <   Any, Any >  context)
+bool TransitionImpl::state_is_local(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -588,30 +588,22 @@ Any TransitionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::TRANSITION_ATTRIBUTE_CONTAINER:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getContainer().lock())); //24125
+			return eAny(getContainer().lock()); //24125
 		case uml::umlPackage::TRANSITION_ATTRIBUTE_EFFECT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEffect())); //24118
+			return eAny(getEffect()); //24118
 		case uml::umlPackage::TRANSITION_ATTRIBUTE_GUARD:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getGuard())); //24119
+			return eAny(getGuard()); //24119
 		case uml::umlPackage::TRANSITION_ATTRIBUTE_KIND:
 			return eAny(getKind()); //24120
 		case uml::umlPackage::TRANSITION_ATTRIBUTE_REDEFINEDTRANSITION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getRedefinedTransition())); //24121
+			return eAny(getRedefinedTransition()); //24121
 		case uml::umlPackage::TRANSITION_ATTRIBUTE_SOURCE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSource())); //24122
+			return eAny(getSource()); //24122
 		case uml::umlPackage::TRANSITION_ATTRIBUTE_TARGET:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getTarget())); //24123
+			return eAny(getTarget()); //24123
 		case uml::umlPackage::TRANSITION_ATTRIBUTE_TRIGGER:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Trigger>::iterator iter = m_trigger->begin();
-			Bag<uml::Trigger>::iterator end = m_trigger->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //24124
+			return eAny(getTrigger()); //24124			
 		}
 	}
 	Any result;
@@ -788,7 +780,7 @@ void TransitionImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLo
 		iter = attr_list.find("kind");
 		if ( iter != attr_list.end() )
 		{
-			uml::TransitionKind value = TransitionKind::EXTERNAL;
+			uml::TransitionKind  value = TransitionKind::EXTERNAL;
 			std::string literal = iter->second;
 			if (literal == "internal")
 			{
@@ -992,7 +984,6 @@ void TransitionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'effect'
 		std::shared_ptr<uml::Behavior > effect = this->getEffect();
 		if (effect != nullptr)
@@ -1005,11 +996,10 @@ void TransitionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 		{
 			saveHandler->addReference(trigger, "trigger", trigger->eClass() != package->getTrigger_Class());
 		}
-	
 		// Add attributes
 		if ( this->eIsSet(package->getTransition_Attribute_kind()) )
 		{
-			uml::TransitionKind value = this->getKind();
+			uml::TransitionKind  value = this->getKind();
 			std::string literal = "";
 			if (value == TransitionKind::INTERNAL)
 			{
@@ -1026,12 +1016,11 @@ void TransitionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 			saveHandler->addAttribute("kind", literal);
 		}
 
-		// Add references
-		saveHandler->addReference("guard", this->getGuard());
-		saveHandler->addReference("redefinedTransition", this->getRedefinedTransition());
-		saveHandler->addReference("source", this->getSource());
-		saveHandler->addReference("target", this->getTarget());
-
+	// Add references
+		saveHandler->addReference("guard", this->getGuard());		 
+		saveHandler->addReference("redefinedTransition", this->getRedefinedTransition());		 
+		saveHandler->addReference("source", this->getSource());		 
+		saveHandler->addReference("target", this->getTarget());		 
 	}
 	catch (std::exception& e)
 	{

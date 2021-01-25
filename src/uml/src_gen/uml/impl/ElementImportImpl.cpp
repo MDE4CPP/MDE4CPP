@@ -141,12 +141,12 @@ std::shared_ptr<ecore::EClass> ElementImportImpl::eStaticClass() const
 /*
 Getter & Setter for attribute alias
 */
-std::string ElementImportImpl::getAlias() const 
+std::string  ElementImportImpl::getAlias() const 
 {
 	return m_alias;
 }
 
-void ElementImportImpl::setAlias(std::string _alias)
+void ElementImportImpl::setAlias(std::string  _alias)
 {
 	m_alias = _alias;
 } 
@@ -156,12 +156,12 @@ void ElementImportImpl::setAlias(std::string _alias)
 /*
 Getter & Setter for attribute visibility
 */
-uml::VisibilityKind ElementImportImpl::getVisibility() const 
+uml::VisibilityKind  ElementImportImpl::getVisibility() const 
 {
 	return m_visibility;
 }
 
-void ElementImportImpl::setVisibility(uml::VisibilityKind _visibility)
+void ElementImportImpl::setVisibility(uml::VisibilityKind  _visibility)
 {
 	m_visibility = _visibility;
 } 
@@ -177,13 +177,13 @@ std::string ElementImportImpl::getName()
 	throw "UnsupportedOperationException";
 }
 
-bool ElementImportImpl::imported_element_is_public(Any diagnostics,std::map <   Any, Any >  context)
+bool ElementImportImpl::imported_element_is_public(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ElementImportImpl::visibility_public_or_private(Any diagnostics,std::map <   Any, Any >  context)
+bool ElementImportImpl::visibility_public_or_private(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -338,9 +338,9 @@ Any ElementImportImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::ELEMENTIMPORT_ATTRIBUTE_ALIAS:
 			return eAny(getAlias()); //826
 		case uml::umlPackage::ELEMENTIMPORT_ATTRIBUTE_IMPORTEDELEMENT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getImportedElement())); //827
+			return eAny(getImportedElement()); //827
 		case uml::umlPackage::ELEMENTIMPORT_ATTRIBUTE_IMPORTINGNAMESPACE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getImportingNamespace().lock())); //828
+			return eAny(getImportingNamespace().lock()); //828
 		case uml::umlPackage::ELEMENTIMPORT_ATTRIBUTE_VISIBILITY:
 			return eAny(getVisibility()); //829
 	}
@@ -437,7 +437,7 @@ void ElementImportImpl::loadAttributes(std::shared_ptr<persistence::interfaces::
 		iter = attr_list.find("visibility");
 		if ( iter != attr_list.end() )
 		{
-			uml::VisibilityKind value = VisibilityKind::PUBLIC;
+			uml::VisibilityKind  value = VisibilityKind::PUBLIC;
 			std::string literal = iter->second;
 			if (literal == "public")
 			{
@@ -540,8 +540,6 @@ void ElementImportImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
 		// Add attributes
 		if ( this->eIsSet(package->getElementImport_Attribute_alias()) )
 		{
@@ -550,7 +548,7 @@ void ElementImportImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 
 		if ( this->eIsSet(package->getElementImport_Attribute_visibility()) )
 		{
-			uml::VisibilityKind value = this->getVisibility();
+			uml::VisibilityKind  value = this->getVisibility();
 			std::string literal = "";
 			if (value == VisibilityKind::PUBLIC)
 			{
@@ -571,9 +569,8 @@ void ElementImportImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 			saveHandler->addAttribute("visibility", literal);
 		}
 
-		// Add references
-		saveHandler->addReference("importedElement", this->getImportedElement());
-
+	// Add references
+		saveHandler->addReference("importedElement", this->getImportedElement());		 
 	}
 	catch (std::exception& e)
 	{

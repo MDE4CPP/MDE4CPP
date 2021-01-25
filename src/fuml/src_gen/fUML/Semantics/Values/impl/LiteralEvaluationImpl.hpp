@@ -44,7 +44,7 @@ namespace fUML::Semantics::Values
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<uml::PrimitiveType> getType(std::string builtInTypeName) ;
+			virtual std::shared_ptr<org.eclipse.uml2.uml.PrimitiveType> getType(std::string builtInTypeName) ;
 			
 			
 			

@@ -114,8 +114,8 @@ ActivityExecutionImpl::ActivityExecutionImpl(const ActivityExecutionImpl & obj):
 
 	m_locus  = obj.getLocus();
 
-	std::shared_ptr<Bag<uml::Classifier>> _types = obj.getTypes();
-	m_types.reset(new Bag<uml::Classifier>(*(obj.getTypes().get())));
+	std::shared_ptr<Bag<org.eclipse.uml2.uml.Classifier>> _types = obj.getTypes();
+	m_types.reset(new Bag<org.eclipse.uml2.uml.Classifier>(*(obj.getTypes().get())));
 
 
 	//Clone references with containment (deep copy)
@@ -298,7 +298,7 @@ void ActivityExecutionImpl::setActivationGroup(std::shared_ptr<fUML::Semantics::
 /*
 Getter & Setter for reference activity
 */
-std::shared_ptr<uml::Activity > ActivityExecutionImpl::getActivity() const
+std::shared_ptr<org.eclipse.uml2.uml.Activity > ActivityExecutionImpl::getActivity() const
 {
 	//generated from getterbody annotation
 if(!m_activity)
@@ -310,7 +310,7 @@ return m_activity;
 	//end of body
 }
 
-void ActivityExecutionImpl::setActivity(std::shared_ptr<uml::Activity> _activity)
+void ActivityExecutionImpl::setActivity(std::shared_ptr<org.eclipse.uml2.uml.Activity> _activity)
 {
     m_activity = _activity;
 	//additional setter call for redefined reference Execution::behavior
@@ -318,9 +318,9 @@ void ActivityExecutionImpl::setActivity(std::shared_ptr<uml::Activity> _activity
 }
 
 /*Additional Setter for redefined reference 'Execution::behavior'*/
-void ActivityExecutionImpl::setBehavior(std::shared_ptr<uml::Behavior> _behavior)
+void ActivityExecutionImpl::setBehavior(std::shared_ptr<org.eclipse.uml2.uml.Behavior> _behavior)
 {
-	std::shared_ptr<uml::Activity> _activity = std::dynamic_pointer_cast<uml::Activity>(_behavior);
+	std::shared_ptr<org.eclipse.uml2.uml.Activity> _activity = std::dynamic_pointer_cast<org.eclipse.uml2.uml.Activity>(_behavior);
 	if(_activity)
 	{
 		m_activity = _activity;
@@ -330,7 +330,7 @@ void ActivityExecutionImpl::setBehavior(std::shared_ptr<uml::Behavior> _behavior
 	}
 	else
 	{
-		std::cerr<<"[ActivityExecution::setBehavior] : Could not set behavior because provided behavior was not of type 'uml::Activity'"<<std::endl;
+		std::cerr<<"[ActivityExecution::setBehavior] : Could not set behavior because provided behavior was not of type 'org.eclipse.uml2.uml.Activity'"<<std::endl;
 	}
 }
 
@@ -363,9 +363,9 @@ Any ActivityExecutionImpl::eGet(int featureID, bool resolve, bool coreType) cons
 	switch(featureID)
 	{
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEXECUTION_ATTRIBUTE_ACTIVATIONGROUP:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getActivationGroup())); //77
+			return eAny(getActivationGroup()); //77
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEXECUTION_ATTRIBUTE_ACTIVITY:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getActivity())); //78
+			return eAny(getActivity()); //78
 	}
 	return fUML::Semantics::CommonBehavior::ExecutionImpl::eGet(featureID, resolve, coreType);
 }
@@ -396,7 +396,7 @@ bool ActivityExecutionImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Activity> _activity = std::dynamic_pointer_cast<uml::Activity>(_temp);
+			std::shared_ptr<org.eclipse.uml2.uml.Activity> _activity = std::dynamic_pointer_cast<org.eclipse.uml2.uml.Activity>(_temp);
 			setActivity(_activity); //78
 			return true;
 		}
@@ -491,7 +491,7 @@ void ActivityExecutionImpl::resolveReferences(const int featureID, std::list<std
 			if (references.size() == 1)
 			{
 				// Cast object to correct type
-				std::shared_ptr<uml::Activity> _activity = std::dynamic_pointer_cast<uml::Activity>( references.front() );
+				std::shared_ptr<org.eclipse.uml2.uml.Activity> _activity = std::dynamic_pointer_cast<org.eclipse.uml2.uml.Activity>( references.front() );
 				setActivity(_activity);
 			}
 			
@@ -535,11 +535,8 @@ void ActivityExecutionImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	{
 		std::shared_ptr<fUML::Semantics::Activities::ActivitiesPackage> package = fUML::Semantics::Activities::ActivitiesPackage::eInstance();
 
-	
-
-		// Add references
-		saveHandler->addReference("activity", this->getActivity());
-
+	// Add references
+		saveHandler->addReference("activity", this->getActivity());		
 
 		//
 		// Add new tags (from references)

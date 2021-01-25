@@ -423,7 +423,8 @@ void ActivitiesPackageImpl::initializeActivityNodeActivationContent()
 	
 	m_activityNodeActivation_Attribute_running = getActivityNodeActivation_Attribute_running();
 	m_activityNodeActivation_Attribute_running->setName("running");
-	m_activityNodeActivation_Attribute_running->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
+	
+		m_activityNodeActivation_Attribute_running->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_activityNodeActivation_Attribute_running->setLowerBound(1);
 	m_activityNodeActivation_Attribute_running->setUpperBound(1);
 	m_activityNodeActivation_Attribute_running->setTransient(false);
@@ -1674,7 +1675,8 @@ void ActivitiesPackageImpl::initializeExpansionActivationGroupContent()
 	
 	m_expansionActivationGroup_Attribute_index = getExpansionActivationGroup_Attribute_index();
 	m_expansionActivationGroup_Attribute_index->setName("index");
-	m_expansionActivationGroup_Attribute_index->setEType(types::typesPackage::eInstance()->getInteger_Class());
+	
+		m_expansionActivationGroup_Attribute_index->setEType(types::typesPackage::eInstance()->getInteger_Class());
 	m_expansionActivationGroup_Attribute_index->setLowerBound(1);
 	m_expansionActivationGroup_Attribute_index->setUpperBound(1);
 	m_expansionActivationGroup_Attribute_index->setTransient(false);
@@ -1904,7 +1906,8 @@ void ActivitiesPackageImpl::initializeExpansionRegionActivationContent()
 	
 	m_expansionRegionActivation_Attribute_next = getExpansionRegionActivation_Attribute_next();
 	m_expansionRegionActivation_Attribute_next->setName("next");
-	m_expansionRegionActivation_Attribute_next->setEType(types::typesPackage::eInstance()->getInteger_Class());
+	
+		m_expansionRegionActivation_Attribute_next->setEType(types::typesPackage::eInstance()->getInteger_Class());
 	m_expansionRegionActivation_Attribute_next->setLowerBound(0);
 	m_expansionRegionActivation_Attribute_next->setUpperBound(1);
 	m_expansionRegionActivation_Attribute_next->setTransient(false);
@@ -2196,7 +2199,8 @@ void ActivitiesPackageImpl::initializeForkedTokenContent()
 	
 	m_forkedToken_Attribute_baseTokenIsWithdrawn = getForkedToken_Attribute_baseTokenIsWithdrawn();
 	m_forkedToken_Attribute_baseTokenIsWithdrawn->setName("baseTokenIsWithdrawn");
-	m_forkedToken_Attribute_baseTokenIsWithdrawn->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
+	
+		m_forkedToken_Attribute_baseTokenIsWithdrawn->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_forkedToken_Attribute_baseTokenIsWithdrawn->setLowerBound(1);
 	m_forkedToken_Attribute_baseTokenIsWithdrawn->setUpperBound(1);
 	m_forkedToken_Attribute_baseTokenIsWithdrawn->setTransient(false);
@@ -2216,7 +2220,8 @@ void ActivitiesPackageImpl::initializeForkedTokenContent()
 	}
 	m_forkedToken_Attribute_remainingOffersCount = getForkedToken_Attribute_remainingOffersCount();
 	m_forkedToken_Attribute_remainingOffersCount->setName("remainingOffersCount");
-	m_forkedToken_Attribute_remainingOffersCount->setEType(ecore::ecorePackage::eInstance()->getEInt_Class());
+	
+		m_forkedToken_Attribute_remainingOffersCount->setEType(ecore::ecorePackage::eInstance()->getEInt_Class());
 	m_forkedToken_Attribute_remainingOffersCount->setLowerBound(1);
 	m_forkedToken_Attribute_remainingOffersCount->setUpperBound(1);
 	m_forkedToken_Attribute_remainingOffersCount->setTransient(false);
@@ -2393,7 +2398,8 @@ void ActivitiesPackageImpl::initializeObjectNodeActivationContent()
 	
 	m_objectNodeActivation_Attribute_offeredTokenCount = getObjectNodeActivation_Attribute_offeredTokenCount();
 	m_objectNodeActivation_Attribute_offeredTokenCount->setName("offeredTokenCount");
-	m_objectNodeActivation_Attribute_offeredTokenCount->setEType(ecore::ecorePackage::eInstance()->getEInt_Class());
+	
+		m_objectNodeActivation_Attribute_offeredTokenCount->setEType(ecore::ecorePackage::eInstance()->getEInt_Class());
 	m_objectNodeActivation_Attribute_offeredTokenCount->setLowerBound(1);
 	m_objectNodeActivation_Attribute_offeredTokenCount->setUpperBound(1);
 	m_objectNodeActivation_Attribute_offeredTokenCount->setTransient(false);
@@ -2687,7 +2693,8 @@ void ActivitiesPackageImpl::initializeTokenContent()
 	
 	m_token_Attribute_withdrawn = getToken_Attribute_withdrawn();
 	m_token_Attribute_withdrawn->setName("withdrawn");
-	m_token_Attribute_withdrawn->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
+	
+		m_token_Attribute_withdrawn->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_token_Attribute_withdrawn->setLowerBound(0);
 	m_token_Attribute_withdrawn->setUpperBound(1);
 	m_token_Attribute_withdrawn->setTransient(false);

@@ -40,150 +40,30 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Behavior;
-}
-
-namespace uml 
-{
-	class BehavioredClassifier;
-}
-
-namespace uml 
-{
-	class Classifier;
-}
-
-namespace uml 
-{
 	class CollaborationUse;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
 	class Constraint;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class ElementImport;
-}
-
-namespace uml 
-{
 	class Extend;
-}
-
-namespace uml 
-{
 	class ExtensionPoint;
-}
-
-namespace uml 
-{
 	class Feature;
-}
-
-namespace uml 
-{
 	class Generalization;
-}
-
-namespace uml 
-{
 	class GeneralizationSet;
-}
-
-namespace uml 
-{
 	class Include;
-}
-
-namespace uml 
-{
 	class InterfaceRealization;
-}
-
-namespace uml 
-{
-	class NamedElement;
-}
-
-namespace uml 
-{
-	class Namespace;
-}
-
-namespace uml 
-{
 	class Package;
-}
-
-namespace uml 
-{
 	class PackageImport;
-}
-
-namespace uml 
-{
-	class PackageableElement;
-}
-
-namespace uml 
-{
 	class Property;
-}
-
-namespace uml 
-{
-	class RedefinableElement;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class Substitution;
-}
-
-namespace uml 
-{
 	class TemplateBinding;
-}
-
-namespace uml 
-{
 	class TemplateParameter;
-}
-
-namespace uml 
-{
 	class TemplateSignature;
-}
-
-namespace uml 
-{
-	class UseCase;
 }
 
 // base class includes
@@ -192,6 +72,8 @@ namespace uml
 // enum includes
 #include "uml/VisibilityKind.hpp"
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -233,21 +115,21 @@ namespace uml
 			Association.allInstances()->forAll(a | a.memberEnd.type->includes(self) implies a.memberEnd->size() = 2)
 			*/
 			 
-			virtual bool binary_associations(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool binary_associations(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			A UseCase cannot include UseCases that directly or indirectly include it.
 			not allIncludedUseCases()->includes(self)
 			*/
 			 
-			virtual bool cannot_include_self(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool cannot_include_self(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			A UseCase must have a name.
 			name -> notEmpty ()
 			*/
 			 
-			virtual bool must_have_name(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool must_have_name(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			UseCases cannot have Associations to UseCases specifying the same subject.
@@ -259,7 +141,7 @@ namespace uml
 			)
 			*/
 			 
-			virtual bool no_association_to_use_case(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool no_association_to_use_case(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			
 			//*********************************

@@ -44,19 +44,19 @@ namespace fUML::Semantics::CommonBehavior
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<uml::Operation> getOperation() ;
+			virtual std::shared_ptr<org.eclipse.uml2.uml.Operation> getOperation() ;
 			
 			 
 			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > getParameterValues() ;
 			
 			 
-			virtual bool match(std::shared_ptr<uml::Trigger>  trigger) ;
+			virtual bool match(std::shared_ptr<org.eclipse.uml2.uml.Trigger> trigger) ;
 			
 			 
 			virtual void releaseCaller() ;
 			
 			 
-			virtual void setOutputParameterValues(std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> >  parameterValues) ;
+			virtual void setOutputParameterValues(std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > parameterValues) ;
 			
 			
 			

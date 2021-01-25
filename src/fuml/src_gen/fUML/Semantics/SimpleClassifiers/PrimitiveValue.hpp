@@ -35,20 +35,11 @@ namespace fUML
 	class fUMLFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Classifier;
-}
-
-namespace uml 
-{
 	class PrimitiveType;
-}
-
-namespace fUML::Semantics::Values 
-{
-	class Value;
 }
 
 // base class includes
@@ -56,6 +47,12 @@ namespace fUML::Semantics::Values
 
 // enum includes
 
+
+//Includes from codegen annotation
+#include "fUML/FUMLFactory.hpp"
+#include "uml/umlFactory.hpp"
+#include "uml/PrimitiveType.hpp"
+#include "uml/Classifier.hpp"
 
 //*********************************
 namespace fUML::Semantics::SimpleClassifiers 
@@ -84,7 +81,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() = 0;
 			
 			 
-			virtual std::shared_ptr<Bag<uml::Classifier> > getTypes() = 0;
+			virtual std::shared_ptr<Bag<org.eclipse.uml2.uml.Classifier> > getTypes() = 0;
 			
 			
 			//*********************************
@@ -95,10 +92,10 @@ namespace fUML::Semantics::SimpleClassifiers
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<uml::PrimitiveType > getType() const = 0;
+			virtual std::shared_ptr<org.eclipse.uml2.uml.PrimitiveType > getType() const = 0;
 			
 			
-			virtual void setType(std::shared_ptr<uml::PrimitiveType> _type) = 0;
+			virtual void setType(std::shared_ptr<org.eclipse.uml2.uml.PrimitiveType> _type) = 0;
 			
 			
 
@@ -112,7 +109,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			// Reference Members
 			//*********************************
 			
-			std::shared_ptr<uml::PrimitiveType > m_type;
+			std::shared_ptr<org.eclipse.uml2.uml.PrimitiveType > m_type;
 
 		public:
 			//*********************************

@@ -177,7 +177,7 @@ std::shared_ptr<ecore::EClass> DestroyObjectActionActivationImpl::eStaticClass()
 //*********************************
 // Operations
 //*********************************
-void DestroyObjectActionActivationImpl::destroyObject(std::shared_ptr<fUML::Semantics::Values::Value>  value,bool isDestroyLinks,bool isDestroyOwnedObjects)
+void DestroyObjectActionActivationImpl::destroyObject(std::shared_ptr<fUML::Semantics::Values::Value> value,bool isDestroyLinks,bool isDestroyOwnedObjects)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -260,7 +260,7 @@ void DestroyObjectActionActivationImpl::doAction()
 	//end of body
 }
 
-bool DestroyObjectActionActivationImpl::objectIsComposite(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference>  reference,std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link>  link)
+bool DestroyObjectActionActivationImpl::objectIsComposite(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> reference,std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> link)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -297,13 +297,13 @@ bool DestroyObjectActionActivationImpl::objectIsComposite(std::shared_ptr<fUML::
 /*
 Getter & Setter for reference destroyObjectAction
 */
-std::shared_ptr<uml::DestroyObjectAction > DestroyObjectActionActivationImpl::getDestroyObjectAction() const
+std::shared_ptr<org.eclipse.uml2.uml.DestroyObjectAction > DestroyObjectActionActivationImpl::getDestroyObjectAction() const
 {
 //assert(m_destroyObjectAction);
     return m_destroyObjectAction;
 }
 
-void DestroyObjectActionActivationImpl::setDestroyObjectAction(std::shared_ptr<uml::DestroyObjectAction> _destroyObjectAction)
+void DestroyObjectActionActivationImpl::setDestroyObjectAction(std::shared_ptr<org.eclipse.uml2.uml.DestroyObjectAction> _destroyObjectAction)
 {
     m_destroyObjectAction = _destroyObjectAction;
 	//additional setter call for redefined reference ActionActivation::action
@@ -311,9 +311,9 @@ void DestroyObjectActionActivationImpl::setDestroyObjectAction(std::shared_ptr<u
 }
 
 /*Additional Setter for redefined reference 'ActionActivation::action'*/
-void DestroyObjectActionActivationImpl::setAction(std::shared_ptr<uml::Action> _action)
+void DestroyObjectActionActivationImpl::setAction(std::shared_ptr<org.eclipse.uml2.uml.Action> _action)
 {
-	std::shared_ptr<uml::DestroyObjectAction> _destroyObjectAction = std::dynamic_pointer_cast<uml::DestroyObjectAction>(_action);
+	std::shared_ptr<org.eclipse.uml2.uml.DestroyObjectAction> _destroyObjectAction = std::dynamic_pointer_cast<org.eclipse.uml2.uml.DestroyObjectAction>(_action);
 	if(_destroyObjectAction)
 	{
 		m_destroyObjectAction = _destroyObjectAction;
@@ -323,13 +323,13 @@ void DestroyObjectActionActivationImpl::setAction(std::shared_ptr<uml::Action> _
 	}
 	else
 	{
-		std::cerr<<"[DestroyObjectActionActivation::setAction] : Could not set action because provided action was not of type 'uml::DestroyObjectAction'"<<std::endl;
+		std::cerr<<"[DestroyObjectActionActivation::setAction] : Could not set action because provided action was not of type 'org.eclipse.uml2.uml.DestroyObjectAction'"<<std::endl;
 	}
 }
 /*Additional Setter for redefined reference 'ActivityNodeActivation::node'*/
-void DestroyObjectActionActivationImpl::setNode(std::shared_ptr<uml::ActivityNode> _node)
+void DestroyObjectActionActivationImpl::setNode(std::shared_ptr<org.eclipse.uml2.uml.ActivityNode> _node)
 {
-	std::shared_ptr<uml::DestroyObjectAction> _destroyObjectAction = std::dynamic_pointer_cast<uml::DestroyObjectAction>(_node);
+	std::shared_ptr<org.eclipse.uml2.uml.DestroyObjectAction> _destroyObjectAction = std::dynamic_pointer_cast<org.eclipse.uml2.uml.DestroyObjectAction>(_node);
 	if(_destroyObjectAction)
 	{
 		m_destroyObjectAction = _destroyObjectAction;
@@ -339,7 +339,7 @@ void DestroyObjectActionActivationImpl::setNode(std::shared_ptr<uml::ActivityNod
 	}
 	else
 	{
-		std::cerr<<"[DestroyObjectActionActivation::setNode] : Could not set node because provided node was not of type 'uml::DestroyObjectAction'"<<std::endl;
+		std::cerr<<"[DestroyObjectActionActivation::setNode] : Could not set node because provided node was not of type 'org.eclipse.uml2.uml.DestroyObjectAction'"<<std::endl;
 	}
 }
 
@@ -391,7 +391,7 @@ Any DestroyObjectActionActivationImpl::eGet(int featureID, bool resolve, bool co
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::DESTROYOBJECTACTIONACTIVATION_ATTRIBUTE_DESTROYOBJECTACTION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDestroyObjectAction())); //3911
+			return eAny(getDestroyObjectAction()); //3911
 	}
 	return ActionActivationImpl::eGet(featureID, resolve, coreType);
 }
@@ -412,7 +412,7 @@ bool DestroyObjectActionActivationImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::DestroyObjectAction> _destroyObjectAction = std::dynamic_pointer_cast<uml::DestroyObjectAction>(_temp);
+			std::shared_ptr<org.eclipse.uml2.uml.DestroyObjectAction> _destroyObjectAction = std::dynamic_pointer_cast<org.eclipse.uml2.uml.DestroyObjectAction>(_temp);
 			setDestroyObjectAction(_destroyObjectAction); //3911
 			return true;
 		}
@@ -482,7 +482,7 @@ void DestroyObjectActionActivationImpl::resolveReferences(const int featureID, s
 			if (references.size() == 1)
 			{
 				// Cast object to correct type
-				std::shared_ptr<uml::DestroyObjectAction> _destroyObjectAction = std::dynamic_pointer_cast<uml::DestroyObjectAction>( references.front() );
+				std::shared_ptr<org.eclipse.uml2.uml.DestroyObjectAction> _destroyObjectAction = std::dynamic_pointer_cast<org.eclipse.uml2.uml.DestroyObjectAction>( references.front() );
 				setDestroyObjectAction(_destroyObjectAction);
 			}
 			
@@ -514,11 +514,8 @@ void DestroyObjectActionActivationImpl::saveContent(std::shared_ptr<persistence:
 	{
 		std::shared_ptr<fUML::Semantics::Actions::ActionsPackage> package = fUML::Semantics::Actions::ActionsPackage::eInstance();
 
-	
-
-		// Add references
-		saveHandler->addReference("destroyObjectAction", this->getDestroyObjectAction());
-
+	// Add references
+		saveHandler->addReference("destroyObjectAction", this->getDestroyObjectAction());		
 	}
 	catch (std::exception& e)
 	{

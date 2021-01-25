@@ -39,24 +39,11 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Comment;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class ParameterableElement;
-}
-
-namespace uml 
-{
 	class TemplateSignature;
 }
 
@@ -65,6 +52,8 @@ namespace uml
 
 // enum includes
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -106,7 +95,7 @@ namespace uml
 			default <> null implies default.isCompatibleWith(parameteredElement)
 			*/
 			 
-			virtual bool must_be_compatible(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool must_be_compatible(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			
 			//*********************************

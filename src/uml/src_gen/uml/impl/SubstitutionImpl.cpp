@@ -387,9 +387,9 @@ Any SubstitutionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::SUBSTITUTION_ATTRIBUTE_CONTRACT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getContract())); //22918
+			return eAny(getContract()); //22918
 		case uml::umlPackage::SUBSTITUTION_ATTRIBUTE_SUBSTITUTINGCLASSIFIER:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSubstitutingClassifier().lock())); //22919
+			return eAny(getSubstitutingClassifier().lock()); //22919
 	}
 	return RealizationImpl::eGet(featureID, resolve, coreType);
 }
@@ -549,11 +549,8 @@ void SubstitutionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
-	
-
-		// Add references
-		saveHandler->addReference("contract", this->getContract());
-
+	// Add references
+		saveHandler->addReference("contract", this->getContract());		 
 	}
 	catch (std::exception& e)
 	{

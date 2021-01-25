@@ -56,7 +56,7 @@ namespace uml
 			endif
 			*/
 			 
-			virtual bool destroyAt_pin(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool destroyAt_pin(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			
@@ -68,14 +68,14 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual bool getIsDestroyDuplicates() const ;
+			virtual bool  getIsDestroyDuplicates() const ;
 			
 			/*!
 			Specifies whether to destroy duplicates of the value in nonunique Association ends.
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual void setIsDestroyDuplicates (bool _isDestroyDuplicates); 
+			virtual void setIsDestroyDuplicates (bool  _isDestroyDuplicates); 
 			
 			
 			//*********************************

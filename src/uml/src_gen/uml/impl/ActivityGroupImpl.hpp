@@ -74,7 +74,7 @@ namespace uml
 			containedEdge->forAll(activity = self.containingActivity())
 			*/
 			 
-			virtual bool nodes_and_edges(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool nodes_and_edges(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			No containedNode or containedEdge of an ActivityGroup may be contained by its subgroups or its superGroups, transitively.
@@ -84,7 +84,7 @@ namespace uml
 			superGroup->closure(superGroup).containedEdge->excludesAll(containedEdge)
 			*/
 			 
-			virtual bool not_contained(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool not_contained(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			

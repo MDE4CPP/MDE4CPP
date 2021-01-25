@@ -40,49 +40,15 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Comment;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class Namespace;
-}
-
-namespace uml 
-{
 	class Package;
-}
-
-namespace uml 
-{
-	class PackageableElement;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class TemplateParameter;
-}
-
-namespace uml 
-{
 	class ValueSpecification;
 }
 
@@ -92,6 +58,8 @@ namespace uml
 // enum includes
 #include "uml/VisibilityKind.hpp"
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -143,20 +111,20 @@ namespace uml
 			The ValueSpecification for a Constraint must evaluate to a Boolean value.
 			*/
 			 
-			virtual bool boolean_value(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool boolean_value(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			Evaluating the ValueSpecification for a Constraint must not have side effects.
 			*/
 			 
-			virtual bool no_side_effects(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool no_side_effects(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			A Constraint cannot be applied to itself.
 			not constrainedElement->includes(self)
 			*/
 			 
-			virtual bool not_apply_to_self(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool not_apply_to_self(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			
 			//*********************************

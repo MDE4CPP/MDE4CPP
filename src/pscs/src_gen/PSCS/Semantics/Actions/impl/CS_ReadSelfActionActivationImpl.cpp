@@ -62,10 +62,10 @@
 #include "PSCS/Semantics/Actions/impl/ActionsFactoryImpl.hpp"
 #include "PSCS/Semantics/Actions/impl/ActionsPackageImpl.hpp"
 
-#include "PSCS/PSCSFactory.hpp"
-#include "PSCS/PSCSPackage.hpp"
 #include "PSCS/Semantics/SemanticsFactory.hpp"
 #include "PSCS/Semantics/SemanticsPackage.hpp"
+#include "PSCS/PSCSFactory.hpp"
+#include "PSCS/PSCSPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -328,9 +328,6 @@ void CS_ReadSelfActionActivationImpl::saveContent(std::shared_ptr<persistence::i
 	try
 	{
 		std::shared_ptr<PSCS::Semantics::Actions::ActionsPackage> package = PSCS::Semantics::Actions::ActionsPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

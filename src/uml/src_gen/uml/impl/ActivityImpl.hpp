@@ -72,7 +72,7 @@ namespace uml
 			       oclIsKindOf(ActivityParameterNode) and oclAsType(ActivityParameterNode).parameter = p)->size()= 1)
 			*/
 			 
-			virtual bool maximum_one_parameter_node(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool maximum_one_parameter_node(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			A Parameter with direction inout must have exactly two ActivityParameterNodes in an Activity, at most one with incoming ActivityEdges and at most one with outgoing ActivityEdges.
@@ -86,7 +86,7 @@ namespace uml
 			)
 			*/
 			 
-			virtual bool maximum_two_parameter_nodes(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool maximum_two_parameter_nodes(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			
@@ -98,27 +98,27 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			 
-			virtual bool getIsReadOnly() const ;
+			virtual bool  getIsReadOnly() const ;
 			
 			/*!
 			If true, this Activity must not make any changes to objects. The default is false (an Activity may make nonlocal changes). (This is an assertion, not an executable property. It may be used by an execution engine to optimize model execution. If the assertion is violated by the Activity, then the model is ill-formed.)
 			<p>From package UML::Activities.</p>
 			*/
 			 
-			virtual void setIsReadOnly (bool _isReadOnly); 
+			virtual void setIsReadOnly (bool  _isReadOnly); 
 			/*!
 			If true, all invocations of the Activity are handled by the same execution.
 			<p>From package UML::Activities.</p>
 			*/
 			 
-			virtual bool getIsSingleExecution() const ;
+			virtual bool  getIsSingleExecution() const ;
 			
 			/*!
 			If true, all invocations of the Activity are handled by the same execution.
 			<p>From package UML::Activities.</p>
 			*/
 			 
-			virtual void setIsSingleExecution (bool _isSingleExecution); 
+			virtual void setIsSingleExecution (bool  _isSingleExecution); 
 			
 			
 			//*********************************

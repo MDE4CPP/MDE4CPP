@@ -59,10 +59,10 @@ virtual public ParameterValue
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<uml::Parameter > getParameter() const ;
+			virtual std::shared_ptr<org.eclipse.uml2.uml.Parameter > getParameter() const ;
 			
 			
-			virtual void setParameter(std::shared_ptr<uml::Parameter> _parameter) ;
+			virtual void setParameter(std::shared_ptr<org.eclipse.uml2.uml.Parameter> _parameter) ;
 			
 			
 			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value>> getValues() const ;

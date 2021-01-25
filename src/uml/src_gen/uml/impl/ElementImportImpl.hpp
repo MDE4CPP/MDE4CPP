@@ -67,14 +67,14 @@ namespace uml
 			importedElement.visibility <> null implies importedElement.visibility = VisibilityKind::public
 			*/
 			 
-			virtual bool imported_element_is_public(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool imported_element_is_public(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			The visibility of an ElementImport is either public or private.
 			visibility = VisibilityKind::public or visibility = VisibilityKind::private
 			*/
 			 
-			virtual bool visibility_public_or_private(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool visibility_public_or_private(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			
@@ -86,27 +86,27 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual std::string getAlias() const ;
+			virtual std::string  getAlias() const ;
 			
 			/*!
 			Specifies the name that should be added to the importing Namespace in lieu of the name of the imported PackagableElement. The alias must not clash with any other member in the importing Namespace. By default, no alias is used.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual void setAlias (std::string _alias); 
+			virtual void setAlias (std::string  _alias); 
 			/*!
 			Specifies the visibility of the imported PackageableElement within the importingNamespace, i.e., whether the  importedElement will in turn be visible to other Namespaces. If the ElementImport is public, the importedElement will be visible outside the importingNamespace while, if the ElementImport is private, it will not.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual uml::VisibilityKind getVisibility() const ;
+			virtual uml::VisibilityKind  getVisibility() const ;
 			
 			/*!
 			Specifies the visibility of the imported PackageableElement within the importingNamespace, i.e., whether the  importedElement will in turn be visible to other Namespaces. If the ElementImport is public, the importedElement will be visible outside the importingNamespace while, if the ElementImport is private, it will not.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual void setVisibility (uml::VisibilityKind _visibility); 
+			virtual void setVisibility (uml::VisibilityKind  _visibility); 
 			
 			
 			//*********************************

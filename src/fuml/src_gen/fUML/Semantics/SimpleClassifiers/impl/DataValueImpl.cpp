@@ -133,7 +133,7 @@ return newValue;
 	//end of body
 }
 
-std::shared_ptr<Bag<uml::Classifier> > DataValueImpl::getTypes()
+std::shared_ptr<Bag<org.eclipse.uml2.uml.Classifier> > DataValueImpl::getTypes()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -157,13 +157,13 @@ std::shared_ptr<fUML::Semantics::Values::Value> DataValueImpl::new_()
 /*
 Getter & Setter for reference type
 */
-std::shared_ptr<uml::DataType > DataValueImpl::getType() const
+std::shared_ptr<org.eclipse.uml2.uml.DataType > DataValueImpl::getType() const
 {
 //assert(m_type);
     return m_type;
 }
 
-void DataValueImpl::setType(std::shared_ptr<uml::DataType> _type)
+void DataValueImpl::setType(std::shared_ptr<org.eclipse.uml2.uml.DataType> _type)
 {
     m_type = _type;
 }
@@ -198,7 +198,7 @@ Any DataValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::DATAVALUE_ATTRIBUTE_TYPE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getType())); //361
+			return eAny(getType()); //361
 	}
 	return CompoundValueImpl::eGet(featureID, resolve, coreType);
 }
@@ -219,7 +219,7 @@ bool DataValueImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::DataType> _type = std::dynamic_pointer_cast<uml::DataType>(_temp);
+			std::shared_ptr<org.eclipse.uml2.uml.DataType> _type = std::dynamic_pointer_cast<org.eclipse.uml2.uml.DataType>(_temp);
 			setType(_type); //361
 			return true;
 		}
@@ -289,7 +289,7 @@ void DataValueImpl::resolveReferences(const int featureID, std::list<std::shared
 			if (references.size() == 1)
 			{
 				// Cast object to correct type
-				std::shared_ptr<uml::DataType> _type = std::dynamic_pointer_cast<uml::DataType>( references.front() );
+				std::shared_ptr<org.eclipse.uml2.uml.DataType> _type = std::dynamic_pointer_cast<org.eclipse.uml2.uml.DataType>( references.front() );
 				setType(_type);
 			}
 			
@@ -324,11 +324,8 @@ void DataValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	{
 		std::shared_ptr<fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage> package = fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance();
 
-	
-
-		// Add references
-		saveHandler->addReference("type", this->getType());
-
+	// Add references
+		saveHandler->addReference("type", this->getType());		
 	}
 	catch (std::exception& e)
 	{

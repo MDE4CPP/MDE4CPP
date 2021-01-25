@@ -47,13 +47,13 @@ namespace ecore
 			// Operations
 			//*********************************
 			 
-			virtual std::string convertToString(std::shared_ptr<ecore::EDataType>  eDataType,Any instanceValue) const ;
+			virtual std::string convertToString(std::shared_ptr<ecore::EDataType> eDataType,Any instanceValue) const ;
 			
 			 
-			virtual std::shared_ptr<ecore::EObject> create(std::shared_ptr<ecore::EClass>  eClass) const ;
+			virtual std::shared_ptr<ecore::EObject> create(std::shared_ptr<ecore::EClass> eClass) const ;
 			
 			 
-			virtual Any createFromString(std::shared_ptr<ecore::EDataType>  eDataType,std::string literalValue) const ;
+			virtual Any createFromString(std::shared_ptr<ecore::EDataType> eDataType,std::string literalValue) const ;
 			
 			
 			

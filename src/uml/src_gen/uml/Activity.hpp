@@ -40,214 +40,41 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class ActivityEdge;
-}
-
-namespace uml 
-{
 	class ActivityGroup;
-}
-
-namespace uml 
-{
 	class ActivityNode;
-}
-
-namespace uml 
-{
 	class ActivityPartition;
-}
-
-namespace uml 
-{
-	class Behavior;
-}
-
-namespace uml 
-{
 	class BehavioralFeature;
-}
-
-namespace uml 
-{
-	class BehavioredClassifier;
-}
-
-namespace uml 
-{
-	class Class;
-}
-
-namespace uml 
-{
-	class Classifier;
-}
-
-namespace uml 
-{
 	class CollaborationUse;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
 	class ConnectableElement;
-}
-
-namespace uml 
-{
 	class Connector;
-}
-
-namespace uml 
-{
 	class Constraint;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class ElementImport;
-}
-
-namespace uml 
-{
 	class Extension;
-}
-
-namespace uml 
-{
 	class Feature;
-}
-
-namespace uml 
-{
 	class Generalization;
-}
-
-namespace uml 
-{
 	class GeneralizationSet;
-}
-
-namespace uml 
-{
 	class InterfaceRealization;
-}
-
-namespace uml 
-{
-	class NamedElement;
-}
-
-namespace uml 
-{
-	class Namespace;
-}
-
-namespace uml 
-{
 	class Operation;
-}
-
-namespace uml 
-{
 	class Package;
-}
-
-namespace uml 
-{
 	class PackageImport;
-}
-
-namespace uml 
-{
-	class PackageableElement;
-}
-
-namespace uml 
-{
 	class Parameter;
-}
-
-namespace uml 
-{
 	class ParameterSet;
-}
-
-namespace uml 
-{
 	class Port;
-}
-
-namespace uml 
-{
 	class Property;
-}
-
-namespace uml 
-{
 	class Reception;
-}
-
-namespace uml 
-{
-	class RedefinableElement;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class StructuredActivityNode;
-}
-
-namespace uml 
-{
 	class Substitution;
-}
-
-namespace uml 
-{
 	class TemplateBinding;
-}
-
-namespace uml 
-{
 	class TemplateParameter;
-}
-
-namespace uml 
-{
 	class TemplateSignature;
-}
-
-namespace uml 
-{
 	class UseCase;
-}
-
-namespace uml 
-{
 	class Variable;
 }
 
@@ -257,6 +84,8 @@ namespace uml
 // enum includes
 #include "uml/VisibilityKind.hpp"
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -292,7 +121,7 @@ namespace uml
 			       oclIsKindOf(ActivityParameterNode) and oclAsType(ActivityParameterNode).parameter = p)->size()= 1)
 			*/
 			 
-			virtual bool maximum_one_parameter_node(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool maximum_one_parameter_node(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			A Parameter with direction inout must have exactly two ActivityParameterNodes in an Activity, at most one with incoming ActivityEdges and at most one with outgoing ActivityEdges.
@@ -306,7 +135,7 @@ namespace uml
 			)
 			*/
 			 
-			virtual bool maximum_two_parameter_nodes(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool maximum_two_parameter_nodes(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			
 			//*********************************
@@ -317,27 +146,27 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			 
-			virtual bool getIsReadOnly() const = 0;
+			virtual bool  getIsReadOnly() const = 0;
 			
 			/*!
 			If true, this Activity must not make any changes to objects. The default is false (an Activity may make nonlocal changes). (This is an assertion, not an executable property. It may be used by an execution engine to optimize model execution. If the assertion is violated by the Activity, then the model is ill-formed.)
 			<p>From package UML::Activities.</p>
 			*/
 			 
-			virtual void setIsReadOnly (bool _isReadOnly)= 0; 
+			virtual void setIsReadOnly (bool  _isReadOnly)= 0; 
 			/*!
 			If true, all invocations of the Activity are handled by the same execution.
 			<p>From package UML::Activities.</p>
 			*/
 			 
-			virtual bool getIsSingleExecution() const = 0;
+			virtual bool  getIsSingleExecution() const = 0;
 			
 			/*!
 			If true, all invocations of the Activity are handled by the same execution.
 			<p>From package UML::Activities.</p>
 			*/
 			 
-			virtual void setIsSingleExecution (bool _isSingleExecution)= 0; 
+			virtual void setIsSingleExecution (bool  _isSingleExecution)= 0; 
 			
 			//*********************************
 			// Reference
@@ -403,13 +232,13 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			 
-			bool m_isReadOnly = false;
+			bool  m_isReadOnly = false;
 			/*!
 			If true, all invocations of the Activity are handled by the same execution.
 			<p>From package UML::Activities.</p>
 			*/
 			 
-			bool m_isSingleExecution = false;
+			bool  m_isSingleExecution = false;
 			
 			
 			//*********************************

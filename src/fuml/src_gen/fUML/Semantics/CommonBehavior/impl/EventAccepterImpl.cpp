@@ -96,13 +96,13 @@ std::shared_ptr<ecore::EClass> EventAccepterImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-void EventAccepterImpl::accept(std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance>  signalInstance)
+void EventAccepterImpl::accept(std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> signalInstance)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool EventAccepterImpl::match(std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance>  signalInstance)
+bool EventAccepterImpl::match(std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> signalInstance)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -208,9 +208,6 @@ void EventAccepterImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	try
 	{
 		std::shared_ptr<fUML::Semantics::CommonBehavior::CommonBehaviorPackage> package = fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

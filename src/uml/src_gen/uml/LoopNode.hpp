@@ -40,124 +40,24 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Activity;
-}
-
-namespace uml 
-{
 	class ActivityEdge;
-}
-
-namespace uml 
-{
-	class ActivityGroup;
-}
-
-namespace uml 
-{
-	class ActivityNode;
-}
-
-namespace uml 
-{
 	class ActivityPartition;
-}
-
-namespace uml 
-{
 	class Classifier;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
 	class Constraint;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class ElementImport;
-}
-
-namespace uml 
-{
 	class ExceptionHandler;
-}
-
-namespace uml 
-{
-	class ExecutableNode;
-}
-
-namespace uml 
-{
 	class InputPin;
-}
-
-namespace uml 
-{
 	class InterruptibleActivityRegion;
-}
-
-namespace uml 
-{
-	class NamedElement;
-}
-
-namespace uml 
-{
-	class Namespace;
-}
-
-namespace uml 
-{
 	class OutputPin;
-}
-
-namespace uml 
-{
 	class PackageImport;
-}
-
-namespace uml 
-{
 	class PackageableElement;
-}
-
-namespace uml 
-{
-	class RedefinableElement;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
-	class StructuredActivityNode;
-}
-
-namespace uml 
-{
 	class Variable;
 }
 
@@ -167,6 +67,8 @@ namespace uml
 // enum includes
 #include "uml/VisibilityKind.hpp"
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -200,28 +102,28 @@ namespace uml
 			bodyPart.oclAsType(Action).allActions().output->includesAll(bodyOutput)
 			*/
 			 
-			virtual bool body_output_pins(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool body_output_pins(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			The union of the ExecutableNodes in the setupPart, test and bodyPart of a LoopNode must be the same as the subset of nodes contained in the LoopNode (considered as a StructuredActivityNode) that are ExecutableNodes.
 			setupPart->union(test)->union(bodyPart)=node->select(oclIsKindOf(ExecutableNode)).oclAsType(ExecutableNode)->asSet()
 			*/
 			 
-			virtual bool executable_nodes(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool executable_nodes(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			The loopVariableInputs must not have outgoing edges.
 			loopVariableInput.outgoing->isEmpty()
 			*/
 			 
-			virtual bool input_edges(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool input_edges(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			All ActivityEdges outgoing from loopVariable OutputPins must have targets within the LoopNode.
 			allOwnedNodes()->includesAll(loopVariable.outgoing.target)
 			*/
 			 
-			virtual bool loop_variable_outgoing(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool loop_variable_outgoing(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			A LoopNode must have the same number of loopVariableInputs and loopVariables, and they must match in type, uniqueness and multiplicity.
@@ -232,7 +134,7 @@ namespace uml
 			loopVariableInput.upper=loopVariable.upper
 			*/
 			 
-			virtual bool matching_loop_variables(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool matching_loop_variables(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			A LoopNode must have the same number of bodyOutput Pins as loopVariables, and each bodyOutput Pin must be compatible with the corresponding loopVariable (by positional order) in type, multiplicity, ordering and uniqueness.
@@ -244,7 +146,7 @@ namespace uml
 				loopVariable->at(i).includesMultiplicity(bodyOutput->at(i)))
 			*/
 			 
-			virtual bool matching_output_pins(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool matching_output_pins(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			A LoopNode must have the same number of result OutputPins and loopVariables, and they must match in type, uniqueness and multiplicity.
@@ -255,14 +157,14 @@ namespace uml
 			result.upper=loopVariable.upper
 			*/
 			 
-			virtual bool matching_result_pins(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool matching_result_pins(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			The result OutputPins have no incoming edges.
 			result.incoming->isEmpty()
 			*/
 			 
-			virtual bool result_no_incoming(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool result_no_incoming(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			The test and body parts of a ConditionalNode must be disjoint with each other.
@@ -271,7 +173,7 @@ namespace uml
 			test->intersection(bodyPart)->isEmpty()
 			*/
 			 
-			virtual bool setup_test_and_body(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool setup_test_and_body(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			
 			//*********************************
@@ -282,14 +184,14 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual bool getIsTestedFirst() const = 0;
+			virtual bool  getIsTestedFirst() const = 0;
 			
 			/*!
 			If true, the test is performed before the first execution of the bodyPart. If false, the bodyPart is executed once before the test is performed.
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual void setIsTestedFirst (bool _isTestedFirst)= 0; 
+			virtual void setIsTestedFirst (bool  _isTestedFirst)= 0; 
 			
 			//*********************************
 			// Reference
@@ -379,7 +281,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			bool m_isTestedFirst = false;
+			bool  m_isTestedFirst = false;
 			
 			
 			//*********************************

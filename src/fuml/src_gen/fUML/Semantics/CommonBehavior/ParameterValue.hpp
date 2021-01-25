@@ -36,20 +36,18 @@ namespace fUML
 	class fUMLFactory;
 }
 
-//Forward Declaration for used types
-namespace uml 
-{
-	class Parameter;
-}
-
+//Forward Declaration for used types 
 namespace fUML::Semantics::CommonBehavior 
 {
 	class ParameterValue;
 }
-
 namespace fUML::Semantics::Values 
 {
 	class Value;
+}
+namespace uml 
+{
+	class Parameter;
 }
 
 // base class includes
@@ -57,6 +55,9 @@ namespace fUML::Semantics::Values
 // enum includes
 
 #include "ecore/EModelElement.hpp"
+
+//Includes from codegen annotation
+#include "fUML/Semantics/Values/ValuesPackage.hpp"
 
 //*********************************
 namespace fUML::Semantics::CommonBehavior 
@@ -94,10 +95,10 @@ namespace fUML::Semantics::CommonBehavior
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<uml::Parameter > getParameter() const = 0;
+			virtual std::shared_ptr<org.eclipse.uml2.uml.Parameter > getParameter() const = 0;
 			
 			
-			virtual void setParameter(std::shared_ptr<uml::Parameter> _parameter) = 0;
+			virtual void setParameter(std::shared_ptr<org.eclipse.uml2.uml.Parameter> _parameter) = 0;
 			
 			
 			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value>> getValues() const = 0;
@@ -115,7 +116,7 @@ namespace fUML::Semantics::CommonBehavior
 			// Reference Members
 			//*********************************
 			
-			std::shared_ptr<uml::Parameter > m_parameter;
+			std::shared_ptr<org.eclipse.uml2.uml.Parameter > m_parameter;
 			mutable std::shared_ptr<Bag<fUML::Semantics::Values::Value>> m_values;
 
 		public:

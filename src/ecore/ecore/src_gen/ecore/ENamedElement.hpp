@@ -35,20 +35,10 @@ namespace ecore
 	class ecoreFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace ecore 
 {
 	class EAnnotation;
-}
-
-namespace ecore 
-{
-	class EModelElement;
-}
-
-namespace ecore 
-{
-	class EObject;
 }
 
 // base class includes
@@ -56,6 +46,8 @@ namespace ecore
 
 // enum includes
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace ecore 
@@ -85,10 +77,10 @@ namespace ecore
 			// Attributes Getter Setter
 			//*********************************
 			 
-			virtual std::string getName() const = 0;
+			virtual std::string  getName() const = 0;
 			
 			 
-			virtual void setName (std::string _name)= 0; 
+			virtual void setName (std::string  _name)= 0; 
 			
 			//*********************************
 			// Reference
@@ -100,7 +92,7 @@ namespace ecore
 			// Attribute Members
 			//*********************************
 			 
-			std::string m_name = "";
+			std::string  m_name = "";
 			
 			
 			//*********************************

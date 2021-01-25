@@ -215,7 +215,7 @@ Any EParameterImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ecore::ecorePackage::EPARAMETER_ATTRIBUTE_EOPERATION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEOperation().lock())); //4213
+			return eAny(getEOperation().lock()); //4113
 	}
 	return ETypedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -224,7 +224,7 @@ bool EParameterImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ecore::ecorePackage::EPARAMETER_ATTRIBUTE_EOPERATION:
-			return getEOperation().lock() != nullptr; //4213
+			return getEOperation().lock() != nullptr; //4113
 	}
 	return ETypedElementImpl::internalEIsSet(featureID);
 }
@@ -299,9 +299,6 @@ void EParameterImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	try
 	{
 		std::shared_ptr<ecore::ecorePackage> package = ecore::ecorePackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

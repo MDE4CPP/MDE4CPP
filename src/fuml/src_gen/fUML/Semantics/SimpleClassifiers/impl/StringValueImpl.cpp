@@ -110,12 +110,12 @@ std::shared_ptr<ecore::EClass> StringValueImpl::eStaticClass() const
 /*
 Getter & Setter for attribute value
 */
-std::string StringValueImpl::getValue() const 
+std::string  StringValueImpl::getValue() const 
 {
 	return m_value;
 }
 
-void StringValueImpl::setValue(std::string _value)
+void StringValueImpl::setValue(std::string  _value)
 {
 	m_value = _value;
 } 
@@ -138,7 +138,7 @@ return newValue;
 	//end of body
 }
 
-bool StringValueImpl::equals(std::shared_ptr<fUML::Semantics::Values::Value>  otherValue)
+bool StringValueImpl::equals(std::shared_ptr<fUML::Semantics::Values::Value> otherValue)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -154,7 +154,7 @@ bool StringValueImpl::equals(std::shared_ptr<fUML::Semantics::Values::Value>  ot
 	//end of body
 }
 
-std::shared_ptr<uml::ValueSpecification> StringValueImpl::specify()
+std::shared_ptr<org.eclipse.uml2.uml.ValueSpecification> StringValueImpl::specify()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -314,14 +314,11 @@ void StringValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	try
 	{
 		std::shared_ptr<fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage> package = fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance();
-
-	
 		// Add attributes
 		if ( this->eIsSet(package->getStringValue_Attribute_value()) )
 		{
 			saveHandler->addAttribute("value", this->getValue());
 		}
-
 	}
 	catch (std::exception& e)
 	{

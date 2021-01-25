@@ -223,13 +223,13 @@ std::shared_ptr<ecore::EClass> MergeNodeImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool MergeNodeImpl::edges(Any diagnostics,std::map <   Any, Any >  context)
+bool MergeNodeImpl::edges(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool MergeNodeImpl::one_outgoing_edge(Any diagnostics,std::map <   Any, Any >  context)
+bool MergeNodeImpl::one_outgoing_edge(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -422,9 +422,6 @@ void MergeNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

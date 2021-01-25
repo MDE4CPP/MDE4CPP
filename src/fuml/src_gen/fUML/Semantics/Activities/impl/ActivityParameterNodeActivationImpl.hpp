@@ -51,7 +51,7 @@ namespace fUML::Semantics::Activities
 			virtual void clearTokens() ;
 			
 			 
-			virtual void fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token> >  incomingTokens) ;
+			virtual void fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > incomingTokens) ;
 			
 			
 			

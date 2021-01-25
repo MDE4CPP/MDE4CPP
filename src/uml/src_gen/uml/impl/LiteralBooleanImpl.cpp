@@ -198,12 +198,12 @@ std::shared_ptr<ecore::EClass> LiteralBooleanImpl::eStaticClass() const
 /*
 Getter & Setter for attribute value
 */
-bool LiteralBooleanImpl::getValue() const 
+bool  LiteralBooleanImpl::getValue() const 
 {
 	return m_value;
 }
 
-void LiteralBooleanImpl::setValue(bool _value)
+void LiteralBooleanImpl::setValue(bool  _value)
 {
 	m_value = _value;
 } 
@@ -435,14 +435,11 @@ void LiteralBooleanImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
 		// Add attributes
 		if ( this->eIsSet(package->getLiteralBoolean_Attribute_value()) )
 		{
 			saveHandler->addAttribute("value", this->getValue());
 		}
-
 	}
 	catch (std::exception& e)
 	{

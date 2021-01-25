@@ -131,7 +131,7 @@ std::shared_ptr<ecore::EClass> CentralBufferNodeActivationImpl::eStaticClass() c
 //*********************************
 // Operations
 //*********************************
-void CentralBufferNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token> >  incomingTokens)
+void CentralBufferNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > incomingTokens)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -257,9 +257,6 @@ void CentralBufferNodeActivationImpl::saveContent(std::shared_ptr<persistence::i
 	try
 	{
 		std::shared_ptr<fUML::Semantics::Activities::ActivitiesPackage> package = fUML::Semantics::Activities::ActivitiesPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

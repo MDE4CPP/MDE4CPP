@@ -39,109 +39,25 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
-namespace uml 
-{
-	class Action;
-}
-
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Activity;
-}
-
-namespace uml 
-{
 	class ActivityEdge;
-}
-
-namespace uml 
-{
 	class ActivityGroup;
-}
-
-namespace uml 
-{
-	class ActivityNode;
-}
-
-namespace uml 
-{
 	class ActivityPartition;
-}
-
-namespace uml 
-{
 	class Association;
-}
-
-namespace uml 
-{
 	class Classifier;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
 	class Constraint;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class ExceptionHandler;
-}
-
-namespace uml 
-{
 	class InputPin;
-}
-
-namespace uml 
-{
 	class InterruptibleActivityRegion;
-}
-
-namespace uml 
-{
 	class LinkEndData;
-}
-
-namespace uml 
-{
 	class Namespace;
-}
-
-namespace uml 
-{
 	class OutputPin;
-}
-
-namespace uml 
-{
-	class RedefinableElement;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class StructuredActivityNode;
 }
 
@@ -151,6 +67,8 @@ namespace uml
 // enum includes
 #include "uml/VisibilityKind.hpp"
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -192,21 +110,21 @@ namespace uml
 			endData->forAll(not end.isStatic)
 			*/
 			 
-			virtual bool not_static(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool not_static(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			The ends of the endData must all be from the same Association and include all and only the memberEnds of that association.
 			endData.end = self.association().memberEnd->asBag()
 			*/
 			 
-			virtual bool same_association(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool same_association(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			The inputValue InputPins is the same as the union of all the InputPins referenced by the endData.
 			inputValue->asBag()=endData.allPins()
 			*/
 			 
-			virtual bool same_pins(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool same_pins(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			
 			//*********************************

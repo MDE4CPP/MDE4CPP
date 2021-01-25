@@ -35,22 +35,15 @@ namespace fUML
 	class fUMLFactory;
 }
 
-//Forward Declaration for used types
-namespace fUML::Semantics::Values 
-{
-	class LiteralEvaluation;
-}
-
+//Forward Declaration for used types 
 namespace fUML::Semantics::Loci 
 {
 	class Locus;
 }
-
 namespace fUML::Semantics::Values 
 {
 	class Value;
 }
-
 namespace uml 
 {
 	class ValueSpecification;
@@ -61,6 +54,12 @@ namespace uml
 
 // enum includes
 
+
+//Includes from codegen annotation
+#include "fUML/Semantics/SimpleClassifiers/UnlimitedNaturalValue.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
+#include "uml/LiteralUnlimitedNatural.hpp"
+#include "primitivetypesReflection/PrimitiveTypesPackage.hpp"
 
 //*********************************
 namespace fUML::Semantics::Values 

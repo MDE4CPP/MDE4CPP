@@ -215,7 +215,7 @@ std::shared_ptr<ecore::EClass> VariableImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool VariableImpl::isAccessibleBy(std::shared_ptr<uml::Action>  a)
+bool VariableImpl::isAccessibleBy(std::shared_ptr<uml::Action> a)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -334,9 +334,9 @@ Any VariableImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::VARIABLE_ATTRIBUTE_ACTIVITYSCOPE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getActivityScope().lock())); //25219
+			return eAny(getActivityScope().lock()); //25219
 		case uml::umlPackage::VARIABLE_ATTRIBUTE_SCOPE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getScope().lock())); //25220
+			return eAny(getScope().lock()); //25220
 	}
 	Any result;
 	result = ConnectableElementImpl::eGet(featureID, resolve, coreType);
@@ -493,9 +493,6 @@ void VariableImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

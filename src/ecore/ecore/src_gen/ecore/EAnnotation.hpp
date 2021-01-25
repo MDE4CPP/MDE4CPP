@@ -7,6 +7,7 @@
 #ifndef ECORE_EANNOTATION_HPP
 #define ECORE_EANNOTATION_HPP
 
+#include <map>
 #include <list>
 #include <memory>
 #include <string>
@@ -37,32 +38,15 @@ namespace ecore
 	class ecoreFactory;
 }
 
-//Forward Declaration for used types
-namespace ecore 
-{
-	class EAnnotation;
-}
-
-namespace ecore 
-{
-	class EModelElement;
-}
-
-namespace ecore 
-{
-	class EObject;
-}
-
-namespace ecore 
-{
-	class EStringToStringMapEntry;
-}
+//Forward Declaration for used types 
 
 // base class includes
 #include "ecore/EModelElement.hpp"
 
 // enum includes
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace ecore 
@@ -100,20 +84,23 @@ namespace ecore
 			// Attributes Getter Setter
 			//*********************************
 			 
-			virtual std::string getSource() const = 0;
+			virtual  std::shared_ptr<std::map <  std::string ,  std::string >> 
+			 getDetails() const = 0;
 			
 			 
-			virtual void setSource (std::string _source)= 0; 
+			virtual void setDetails ( std::shared_ptr<std::map <  std::string ,  std::string >> 
+			 _details)= 0; 
+			 
+			virtual std::string  getSource() const = 0;
+			
+			 
+			virtual void setSource (std::string  _source)= 0; 
 			
 			//*********************************
 			// Reference
 			//*********************************
 			
 			virtual std::shared_ptr<Subset<ecore::EObject, ecore::EObject>> getContents() const = 0;
-			
-			
-			
-			virtual std::shared_ptr<Bag<ecore::EStringToStringMapEntry>> getDetails() const = 0;
 			
 			
 			
@@ -133,7 +120,10 @@ namespace ecore
 			// Attribute Members
 			//*********************************
 			 
-			std::string m_source = "";
+			 std::shared_ptr<std::map <  std::string ,  std::string >> 
+			 m_details = nullptr;
+			 
+			std::string  m_source = "";
 			
 			
 			//*********************************
@@ -141,7 +131,6 @@ namespace ecore
 			//*********************************
 			
 			mutable std::shared_ptr<Subset<ecore::EObject, ecore::EObject>> m_contents;
-			mutable std::shared_ptr<Bag<ecore::EStringToStringMapEntry>> m_details;
 			std::weak_ptr<ecore::EModelElement > m_eModelElement;
 			mutable std::shared_ptr<Bag<ecore::EObject>> m_references;
 

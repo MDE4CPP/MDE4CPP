@@ -64,7 +64,7 @@ namespace uml
 			(target.oclIsKindOf(ObjectNode) implies target.oclAsType(ObjectNode).isControlType)
 			*/
 			 
-			virtual bool object_nodes(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool object_nodes(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			

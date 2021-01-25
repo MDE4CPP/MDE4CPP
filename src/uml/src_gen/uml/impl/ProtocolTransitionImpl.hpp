@@ -59,14 +59,14 @@ namespace uml
 			effect = null
 			*/
 			 
-			virtual bool associated_actions(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool associated_actions(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			A ProtocolTransition always belongs to a ProtocolStateMachine.
 			container.belongsToPSM()
 			*/
 			 
-			virtual bool belongs_to_psm(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool belongs_to_psm(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			Derivation for ProtocolTransition::/referred
@@ -83,7 +83,7 @@ namespace uml
 			else true endif
 			*/
 			 
-			virtual bool refers_to_operation(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool refers_to_operation(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			

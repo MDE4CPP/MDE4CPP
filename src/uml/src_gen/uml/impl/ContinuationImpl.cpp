@@ -184,12 +184,12 @@ std::shared_ptr<ecore::EClass> ContinuationImpl::eStaticClass() const
 /*
 Getter & Setter for attribute setting
 */
-bool ContinuationImpl::getSetting() const 
+bool  ContinuationImpl::getSetting() const 
 {
 	return m_setting;
 }
 
-void ContinuationImpl::setSetting(bool _setting)
+void ContinuationImpl::setSetting(bool  _setting)
 {
 	m_setting = _setting;
 } 
@@ -199,19 +199,19 @@ void ContinuationImpl::setSetting(bool _setting)
 //*********************************
 // Operations
 //*********************************
-bool ContinuationImpl::first_or_last_interaction_fragment(Any diagnostics,std::map <   Any, Any >  context)
+bool ContinuationImpl::first_or_last_interaction_fragment(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ContinuationImpl::global(Any diagnostics,std::map <   Any, Any >  context)
+bool ContinuationImpl::global(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ContinuationImpl::same_name(Any diagnostics,std::map <   Any, Any >  context)
+bool ContinuationImpl::same_name(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -405,14 +405,11 @@ void ContinuationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
 		// Add attributes
 		if ( this->eIsSet(package->getContinuation_Attribute_setting()) )
 		{
 			saveHandler->addAttribute("setting", this->getSetting());
 		}
-
 	}
 	catch (std::exception& e)
 	{

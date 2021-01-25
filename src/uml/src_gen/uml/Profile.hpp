@@ -39,129 +39,31 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
-namespace uml 
-{
-	class Class;
-}
-
-namespace uml 
-{
-	class Classifier;
-}
-
-namespace uml 
-{
-	class Comment;
-}
-
-namespace uml 
-{
-	class Constraint;
-}
-
-namespace uml 
-{
-	class Dependency;
-}
-
+//Forward Declaration for used types 
 namespace ecore 
 {
 	class ENamedElement;
-}
-
-namespace ecore 
-{
 	class EObject;
-}
-
-namespace ecore 
-{
 	class EPackage;
 }
-
 namespace uml 
 {
-	class Element;
-}
-
-namespace uml 
-{
+	class Class;
+	class Classifier;
+	class Comment;
+	class Constraint;
+	class Dependency;
 	class ElementImport;
-}
-
-namespace uml 
-{
 	class Extension;
-}
-
-namespace uml 
-{
 	class Model;
-}
-
-namespace uml 
-{
-	class NamedElement;
-}
-
-namespace uml 
-{
-	class Namespace;
-}
-
-namespace uml 
-{
-	class Package;
-}
-
-namespace uml 
-{
 	class PackageImport;
-}
-
-namespace uml 
-{
 	class PackageMerge;
-}
-
-namespace uml 
-{
-	class PackageableElement;
-}
-
-namespace uml 
-{
 	class ProfileApplication;
-}
-
-namespace uml 
-{
 	class Stereotype;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class TemplateBinding;
-}
-
-namespace uml 
-{
 	class TemplateParameter;
-}
-
-namespace uml 
-{
 	class TemplateSignature;
-}
-
-namespace uml 
-{
 	class Type;
 }
 
@@ -171,6 +73,8 @@ namespace uml
 // enum includes
 #include "uml/VisibilityKind.hpp"
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -203,7 +107,7 @@ namespace uml
 			Creates and returns an instance of (the Ecore representation of) the specified classifier defined in this profile.
 			*/
 			 
-			virtual std::shared_ptr<ecore::EObject> create(std::shared_ptr<uml::Classifier>  classifier) = 0;
+			virtual std::shared_ptr<ecore::EObject> create(std::shared_ptr<uml::Classifier> classifier) = 0;
 			
 			/*!
 			Defines this profile by (re)creating Ecore representations of its current contents.
@@ -215,7 +119,7 @@ namespace uml
 			Defines this profile by (re)creating Ecore representations of its current contents, using the specified options, diagnostics, and context.
 			*/
 			 
-			virtual std::shared_ptr<ecore::EPackage> define(std::map <   std::string, std::string >  options,Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual std::shared_ptr<ecore::EPackage> define(std::map <  std::string ,  std::string > options,Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			Retrieves the current definition (Ecore representation) of this profile.
@@ -227,7 +131,7 @@ namespace uml
 			Retrieves the current definition (Ecore representation) of the specified named element in this profile.
 			*/
 			 
-			virtual std::shared_ptr<ecore::ENamedElement> getDefinition(std::shared_ptr<uml::NamedElement>  namedElement) = 0;
+			virtual std::shared_ptr<ecore::ENamedElement> getDefinition(std::shared_ptr<uml::NamedElement> namedElement) = 0;
 			
 			/*!
 			Retrieves the extensions owned by this profile, excluding non-required extensions if indicated.
@@ -264,7 +168,7 @@ namespace uml
 			       intersection(metaclassReference.importedElement->select(oclIsKindOf(Classifier))->collect(oclAsType(Classifier)))->isEmpty()
 			*/
 			 
-			virtual bool metaclass_reference_not_specialized(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool metaclass_reference_not_specialized(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			All elements imported either as metaclassReferences or through metamodelReferences are members of the same base reference metamodel.
@@ -272,7 +176,7 @@ namespace uml
 			  union(metaclassReference.importedElement.allOwningPackages() )->notEmpty()
 			*/
 			 
-			virtual bool references_same_metamodel(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool references_same_metamodel(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			
 			//*********************************

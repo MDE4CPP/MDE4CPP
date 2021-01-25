@@ -144,13 +144,13 @@ std::shared_ptr<ecore::EClass> TemplateSignatureImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool TemplateSignatureImpl::own_elements(Any diagnostics,std::map <   Any, Any >  context)
+bool TemplateSignatureImpl::own_elements(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool TemplateSignatureImpl::unique_parameters(Any diagnostics,std::map <   Any, Any >  context)
+bool TemplateSignatureImpl::unique_parameters(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -285,30 +285,14 @@ Any TemplateSignatureImpl::eGet(int featureID, bool resolve, bool coreType) cons
 	{
 		case uml::umlPackage::TEMPLATESIGNATURE_ATTRIBUTE_OWNEDPARAMETER:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::TemplateParameter>::iterator iter = m_ownedParameter->begin();
-			Bag<uml::TemplateParameter>::iterator end = m_ownedParameter->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //2335
+			return eAny(getOwnedParameter()); //2335			
 		}
 		case uml::umlPackage::TEMPLATESIGNATURE_ATTRIBUTE_PARAMETER:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::TemplateParameter>::iterator iter = m_parameter->begin();
-			Bag<uml::TemplateParameter>::iterator end = m_parameter->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //2333
+			return eAny(getParameter()); //2333			
 		}
 		case uml::umlPackage::TEMPLATESIGNATURE_ATTRIBUTE_TEMPLATE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getTemplate().lock())); //2334
+			return eAny(getTemplate().lock()); //2334
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -542,21 +526,14 @@ void TemplateSignatureImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'ownedParameter'
 		for (std::shared_ptr<uml::TemplateParameter> ownedParameter : *this->getOwnedParameter()) 
 		{
 			saveHandler->addReference(ownedParameter, "ownedParameter", ownedParameter->eClass() != package->getTemplateParameter_Class());
 		}
-	
 
-		// Add references
-		std::shared_ptr<Bag<uml::TemplateParameter>> parameter_list = this->getParameter();
-		for (std::shared_ptr<uml::TemplateParameter > object : *parameter_list)
-		{ 
-			saveHandler->addReferences("parameter", object);
-		}
-
+	// Add references
+		saveHandler->addReferences<uml::TemplateParameter>("parameter", this->getParameter());	
 	}
 	catch (std::exception& e)
 	{

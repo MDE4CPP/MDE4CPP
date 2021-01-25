@@ -68,21 +68,21 @@ namespace uml
 					selection.inputParameters()->forAll(p | self.type.conformsTo(p.type))
 			*/
 			 
-			virtual bool input_output_parameter(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool input_output_parameter(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			If isControlType=false, the ActivityEdges incoming to or outgoing from an ObjectNode must all be ObjectFlows.
 			(not isControlType) implies incoming->union(outgoing)->forAll(oclIsKindOf(ObjectFlow))
 			*/
 			 
-			virtual bool object_flow_edges(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool object_flow_edges(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			If an ObjectNode has a selection Behavior, then the ordering of the object node is ordered, and vice versa.
 			(selection<>null) = (ordering=ObjectNodeOrderingKind::ordered)
 			*/
 			 
-			virtual bool selection_behavior(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool selection_behavior(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			
@@ -94,27 +94,27 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			 
-			virtual bool getIsControlType() const ;
+			virtual bool  getIsControlType() const ;
 			
 			/*!
 			Indicates whether the type of the ObjectNode is to be treated as representing control values that may traverse ControlFlows.
 			<p>From package UML::Activities.</p>
 			*/
 			 
-			virtual void setIsControlType (bool _isControlType); 
+			virtual void setIsControlType (bool  _isControlType); 
 			/*!
 			Indicates how the tokens held by the ObjectNode are ordered for selection to traverse ActivityEdges outgoing from the ObjectNode.
 			<p>From package UML::Activities.</p>
 			*/
 			 
-			virtual uml::ObjectNodeOrderingKind getOrdering() const ;
+			virtual uml::ObjectNodeOrderingKind  getOrdering() const ;
 			
 			/*!
 			Indicates how the tokens held by the ObjectNode are ordered for selection to traverse ActivityEdges outgoing from the ObjectNode.
 			<p>From package UML::Activities.</p>
 			*/
 			 
-			virtual void setOrdering (uml::ObjectNodeOrderingKind _ordering); 
+			virtual void setOrdering (uml::ObjectNodeOrderingKind  _ordering); 
 			
 			
 			//*********************************

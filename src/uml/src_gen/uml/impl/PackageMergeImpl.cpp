@@ -285,9 +285,9 @@ Any PackageMergeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::PACKAGEMERGE_ATTRIBUTE_MERGEDPACKAGE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getMergedPackage())); //1726
+			return eAny(getMergedPackage()); //1726
 		case uml::umlPackage::PACKAGEMERGE_ATTRIBUTE_RECEIVINGPACKAGE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getReceivingPackage().lock())); //1727
+			return eAny(getReceivingPackage().lock()); //1727
 	}
 	return DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
 }
@@ -435,11 +435,8 @@ void PackageMergeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
-	
-
-		// Add references
-		saveHandler->addReference("mergedPackage", this->getMergedPackage());
-
+	// Add references
+		saveHandler->addReference("mergedPackage", this->getMergedPackage());		 
 	}
 	catch (std::exception& e)
 	{

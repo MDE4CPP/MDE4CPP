@@ -63,21 +63,21 @@ namespace uml
 			not newClassifier->exists(isAbstract)
 			*/
 			 
-			virtual bool classifier_not_abstract(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool classifier_not_abstract(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			The object InputPin has no type.
 			object.type = null
 			*/
 			 
-			virtual bool input_pin(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool input_pin(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			The multiplicity of the object InputPin is 1..1.
 			object.is(1,1)
 			*/
 			 
-			virtual bool multiplicity(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool multiplicity(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			
@@ -89,14 +89,14 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual bool getIsReplaceAll() const ;
+			virtual bool  getIsReplaceAll() const ;
 			
 			/*!
 			Specifies whether existing Classifiers should be removed before adding the new Classifiers.
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual void setIsReplaceAll (bool _isReplaceAll); 
+			virtual void setIsReplaceAll (bool  _isReplaceAll); 
 			
 			
 			//*********************************

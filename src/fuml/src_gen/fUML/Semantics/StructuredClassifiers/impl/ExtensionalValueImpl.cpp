@@ -189,7 +189,7 @@ Any ExtensionalValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::EXTENSIONALVALUE_ATTRIBUTE_LOCUS:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getLocus())); //521
+			return eAny(getLocus()); //521
 	}
 	return fUML::Semantics::SimpleClassifiers::CompoundValueImpl::eGet(featureID, resolve, coreType);
 }
@@ -315,11 +315,8 @@ void ExtensionalValueImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	{
 		std::shared_ptr<fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage> package = fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance();
 
-	
-
-		// Add references
-		saveHandler->addReference("locus", this->getLocus());
-
+	// Add references
+		saveHandler->addReference("locus", this->getLocus());		 
 	}
 	catch (std::exception& e)
 	{

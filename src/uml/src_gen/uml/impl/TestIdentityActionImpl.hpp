@@ -63,21 +63,21 @@ namespace uml
 			first.is(1,1) and second.is(1,1)
 			*/
 			 
-			virtual bool multiplicity(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool multiplicity(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			The InputPins have no type.
 			first.type= null and second.type = null
 			*/
 			 
-			virtual bool no_type(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool no_type(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			The type of the result OutputPin is Boolean.
 			result.type=Boolean
 			*/
 			 
-			virtual bool result_is_boolean(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool result_is_boolean(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			

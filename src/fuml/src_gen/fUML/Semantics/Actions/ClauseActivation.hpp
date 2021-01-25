@@ -35,25 +35,19 @@ namespace fUML
 	class fUMLFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
+namespace fUML::Semantics::Actions 
+{
+	class ClauseActivation;
+	class ConditionalNodeActivation;
+}
 namespace fUML::Semantics::SimpleClassifiers 
 {
 	class BooleanValue;
 }
-
 namespace uml 
 {
 	class Clause;
-}
-
-namespace fUML::Semantics::Actions 
-{
-	class ClauseActivation;
-}
-
-namespace fUML::Semantics::Actions 
-{
-	class ConditionalNodeActivation;
 }
 
 // base class includes
@@ -61,6 +55,8 @@ namespace fUML::Semantics::Actions
 // enum includes
 
 #include "ecore/EModelElement.hpp"
+
+//Includes from codegen annotation
 
 //*********************************
 namespace fUML::Semantics::Actions 
@@ -116,10 +112,10 @@ namespace fUML::Semantics::Actions
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<uml::Clause > getClause() const = 0;
+			virtual std::shared_ptr<org.eclipse.uml2.uml.Clause > getClause() const = 0;
 			
 			
-			virtual void setClause(std::shared_ptr<uml::Clause> _clause) = 0;
+			virtual void setClause(std::shared_ptr<org.eclipse.uml2.uml.Clause> _clause) = 0;
 			
 			
 			virtual std::shared_ptr<fUML::Semantics::Actions::ConditionalNodeActivation > getConditionalNodeActivation() const = 0;
@@ -139,7 +135,7 @@ namespace fUML::Semantics::Actions
 			// Reference Members
 			//*********************************
 			
-			std::shared_ptr<uml::Clause > m_clause;
+			std::shared_ptr<org.eclipse.uml2.uml.Clause > m_clause;
 			std::shared_ptr<fUML::Semantics::Actions::ConditionalNodeActivation > m_conditionalNodeActivation;
 
 		public:

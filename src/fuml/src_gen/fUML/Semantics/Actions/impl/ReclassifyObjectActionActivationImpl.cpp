@@ -290,9 +290,6 @@ void ReclassifyObjectActionActivationImpl::saveContent(std::shared_ptr<persisten
 	try
 	{
 		std::shared_ptr<fUML::Semantics::Actions::ActionsPackage> package = fUML::Semantics::Actions::ActionsPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

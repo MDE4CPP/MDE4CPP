@@ -36,25 +36,16 @@ namespace fUML
 	class fUMLFactory;
 }
 
-//Forward Declaration for used types
-namespace uml 
-{
-	class Class;
-}
-
+//Forward Declaration for used types 
 namespace fUML::Semantics::CommonBehavior 
 {
 	class Execution;
-}
-
-namespace fUML::Semantics::CommonBehavior 
-{
 	class ObjectActivation;
-}
-
-namespace fUML::Semantics::CommonBehavior 
-{
 	class ParameterValue;
+}
+namespace uml 
+{
+	class Class;
 }
 
 // base class includes
@@ -62,6 +53,8 @@ namespace fUML::Semantics::CommonBehavior
 // enum includes
 
 #include "ecore/EModelElement.hpp"
+
+//Includes from codegen annotation
 
 //*********************************
 namespace fUML::Semantics::CommonBehavior 
@@ -91,7 +84,7 @@ namespace fUML::Semantics::CommonBehavior
 			virtual void _startObjectBehavior() = 0;
 			
 			 
-			virtual void execute(std::shared_ptr<Bag<uml::Class> >  classifier,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> >  inputs) = 0;
+			virtual void execute(std::shared_ptr<Bag<org.eclipse.uml2.uml.Class> > classifier,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > inputs) = 0;
 			
 			 
 			virtual void terminate() = 0;
@@ -105,10 +98,10 @@ namespace fUML::Semantics::CommonBehavior
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<uml::Class > getClassifier() const = 0;
+			virtual std::shared_ptr<org.eclipse.uml2.uml.Class > getClassifier() const = 0;
 			
 			
-			virtual void setClassifier(std::shared_ptr<uml::Class> _classifier) = 0;
+			virtual void setClassifier(std::shared_ptr<org.eclipse.uml2.uml.Class> _classifier) = 0;
 			
 			
 			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution > getExecution() const = 0;
@@ -134,7 +127,7 @@ namespace fUML::Semantics::CommonBehavior
 			// Reference Members
 			//*********************************
 			
-			std::shared_ptr<uml::Class > m_classifier;
+			std::shared_ptr<org.eclipse.uml2.uml.Class > m_classifier;
 			std::shared_ptr<fUML::Semantics::CommonBehavior::Execution > m_execution;
 			std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation > m_objectActivation;
 

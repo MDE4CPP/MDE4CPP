@@ -31,7 +31,7 @@ namespace fUML::Semantics::StructuredClassifiers
 	class RedefinitionBasedDispatchStrategy;
 	class Reference;
 }
-
+ 
 namespace fUML::Semantics::StructuredClassifiers 
 {
 	/*!

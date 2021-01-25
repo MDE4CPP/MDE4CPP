@@ -263,7 +263,7 @@ void StructuredActivityNodeActivationImpl::doStructuredActivity()
 	//end of body
 }
 
-std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> StructuredActivityNodeActivationImpl::getNodeActivation(std::shared_ptr<uml::ActivityNode>  node)
+std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> StructuredActivityNodeActivationImpl::getNodeActivation(std::shared_ptr<org.eclipse.uml2.uml.ActivityNode> node)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -283,7 +283,7 @@ std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> StructuredA
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Semantics::Values::Value> > StructuredActivityNodeActivationImpl::getPinValues(std::shared_ptr<uml::OutputPin>  pin)
+std::shared_ptr<Bag<fUML::Semantics::Values::Value> > StructuredActivityNodeActivationImpl::getPinValues(std::shared_ptr<org.eclipse.uml2.uml.OutputPin> pin)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -305,7 +305,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value> > StructuredActivityNodeActi
 	//end of body
 }
 
-bool StructuredActivityNodeActivationImpl::isSourceFor(std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance>  edgeInstance)
+bool StructuredActivityNodeActivationImpl::isSourceFor(std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> edgeInstance)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -325,7 +325,7 @@ bool StructuredActivityNodeActivationImpl::isSuspended()
 	//end of body
 }
 
-std::shared_ptr<Bag<uml::ActivityNode> > StructuredActivityNodeActivationImpl::makeActivityNodeList(std::shared_ptr<Bag<uml::ExecutableNode> >  nodes)
+std::shared_ptr<Bag<org.eclipse.uml2.uml.ActivityNode> > StructuredActivityNodeActivationImpl::makeActivityNodeList(std::shared_ptr<Bag<org.eclipse.uml2.uml.ExecutableNode> > nodes)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -358,7 +358,7 @@ std::shared_ptr<Bag<uml::ActivityNode> > StructuredActivityNodeActivationImpl::m
 	//end of body
 }
 
-void StructuredActivityNodeActivationImpl::putPinValues(std::shared_ptr<uml::OutputPin>  pin,std::shared_ptr<Bag<fUML::Semantics::Values::Value> >  values)
+void StructuredActivityNodeActivationImpl::putPinValues(std::shared_ptr<org.eclipse.uml2.uml.OutputPin> pin,std::shared_ptr<Bag<fUML::Semantics::Values::Value> > values)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -473,7 +473,7 @@ Any StructuredActivityNodeActivationImpl::eGet(int featureID, bool resolve, bool
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::STRUCTUREDACTIVITYNODEACTIVATION_ATTRIBUTE_ACTIVATIONGROUP:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getActivationGroup())); //11211
+			return eAny(getActivationGroup()); //11211
 	}
 	return ActionActivationImpl::eGet(featureID, resolve, coreType);
 }
@@ -587,9 +587,6 @@ void StructuredActivityNodeActivationImpl::saveContent(std::shared_ptr<persisten
 	try
 	{
 		std::shared_ptr<fUML::Semantics::Actions::ActionsPackage> package = fUML::Semantics::Actions::ActionsPackage::eInstance();
-
-	
-
 
 		//
 		// Add new tags (from references)

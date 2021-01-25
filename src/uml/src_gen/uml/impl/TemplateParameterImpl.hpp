@@ -55,7 +55,7 @@ namespace uml
 			default <> null implies default.isCompatibleWith(parameteredElement)
 			*/
 			 
-			virtual bool must_be_compatible(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool must_be_compatible(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			

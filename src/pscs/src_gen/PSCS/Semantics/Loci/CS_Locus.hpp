@@ -35,35 +35,20 @@ namespace PSCS
 	class PSCSFactory;
 }
 
-//Forward Declaration for used types
-namespace uml 
-{
-	class Class;
-}
-
+//Forward Declaration for used types 
 namespace fUML::Semantics::Loci 
 {
 	class ExecutionFactory;
-}
-
-namespace fUML::Semantics::Loci 
-{
 	class Executor;
 }
-
 namespace fUML::Semantics::StructuredClassifiers 
 {
 	class ExtensionalValue;
-}
-
-namespace fUML::Semantics::Loci 
-{
-	class Locus;
-}
-
-namespace fUML::Semantics::StructuredClassifiers 
-{
 	class Object;
+}
+namespace uml 
+{
+	class Class;
 }
 
 // base class includes
@@ -71,6 +56,11 @@ namespace fUML::Semantics::StructuredClassifiers
 
 // enum includes
 
+
+//Includes from codegen annotation
+#include "uml/Behavior.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/CS_Object.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 
 //*********************************
 namespace PSCS::Semantics::Loci 
@@ -96,7 +86,7 @@ namespace PSCS::Semantics::Loci
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> instantiate(std::shared_ptr<uml::Class>  type) = 0;
+			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> instantiate(std::shared_ptr<org.eclipse.uml2.uml.Class> type) = 0;
 			
 			
 			//*********************************

@@ -189,12 +189,12 @@ std::shared_ptr<ecore::EClass> PseudostateImpl::eStaticClass() const
 /*
 Getter & Setter for attribute kind
 */
-uml::PseudostateKind PseudostateImpl::getKind() const 
+uml::PseudostateKind  PseudostateImpl::getKind() const 
 {
 	return m_kind;
 }
 
-void PseudostateImpl::setKind(uml::PseudostateKind _kind)
+void PseudostateImpl::setKind(uml::PseudostateKind  _kind)
 {
 	m_kind = _kind;
 } 
@@ -204,55 +204,55 @@ void PseudostateImpl::setKind(uml::PseudostateKind _kind)
 //*********************************
 // Operations
 //*********************************
-bool PseudostateImpl::choice_vertex(Any diagnostics,std::map <   Any, Any >  context)
+bool PseudostateImpl::choice_vertex(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PseudostateImpl::fork_vertex(Any diagnostics,std::map <   Any, Any >  context)
+bool PseudostateImpl::fork_vertex(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PseudostateImpl::history_vertices(Any diagnostics,std::map <   Any, Any >  context)
+bool PseudostateImpl::history_vertices(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PseudostateImpl::initial_vertex(Any diagnostics,std::map <   Any, Any >  context)
+bool PseudostateImpl::initial_vertex(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PseudostateImpl::join_vertex(Any diagnostics,std::map <   Any, Any >  context)
+bool PseudostateImpl::join_vertex(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PseudostateImpl::junction_vertex(Any diagnostics,std::map <   Any, Any >  context)
+bool PseudostateImpl::junction_vertex(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PseudostateImpl::outgoing_from_initial(Any diagnostics,std::map <   Any, Any >  context)
+bool PseudostateImpl::outgoing_from_initial(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PseudostateImpl::transitions_incoming(Any diagnostics,std::map <   Any, Any >  context)
+bool PseudostateImpl::transitions_incoming(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PseudostateImpl::transitions_outgoing(Any diagnostics,std::map <   Any, Any >  context)
+bool PseudostateImpl::transitions_outgoing(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -372,9 +372,9 @@ Any PseudostateImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::PSEUDOSTATE_ATTRIBUTE_KIND:
 			return eAny(getKind()); //18913
 		case uml::umlPackage::PSEUDOSTATE_ATTRIBUTE_STATE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getState().lock())); //18912
+			return eAny(getState().lock()); //18912
 		case uml::umlPackage::PSEUDOSTATE_ATTRIBUTE_STATEMACHINE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getStateMachine().lock())); //18914
+			return eAny(getStateMachine().lock()); //18914
 	}
 	return VertexImpl::eGet(featureID, resolve, coreType);
 }
@@ -451,7 +451,7 @@ void PseudostateImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XL
 		iter = attr_list.find("kind");
 		if ( iter != attr_list.end() )
 		{
-			uml::PseudostateKind value = PseudostateKind::INITIAL;
+			uml::PseudostateKind  value = PseudostateKind::INITIAL;
 			std::string literal = iter->second;
 			if (literal == "initial")
 			{
@@ -571,12 +571,10 @@ void PseudostateImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
 		// Add attributes
 		if ( this->eIsSet(package->getPseudostate_Attribute_kind()) )
 		{
-			uml::PseudostateKind value = this->getKind();
+			uml::PseudostateKind  value = this->getKind();
 			std::string literal = "";
 			if (value == PseudostateKind::INITIAL)
 			{
@@ -620,7 +618,6 @@ void PseudostateImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 			}
 			saveHandler->addAttribute("kind", literal);
 		}
-
 	}
 	catch (std::exception& e)
 	{

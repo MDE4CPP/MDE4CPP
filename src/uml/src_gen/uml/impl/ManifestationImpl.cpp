@@ -356,7 +356,7 @@ Any ManifestationImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::MANIFESTATION_ATTRIBUTE_UTILIZEDELEMENT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getUtilizedElement())); //14518
+			return eAny(getUtilizedElement()); //14518
 	}
 	return AbstractionImpl::eGet(featureID, resolve, coreType);
 }
@@ -491,11 +491,8 @@ void ManifestationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
-	
-
-		// Add references
-		saveHandler->addReference("utilizedElement", this->getUtilizedElement());
-
+	// Add references
+		saveHandler->addReference("utilizedElement", this->getUtilizedElement());		 
 	}
 	catch (std::exception& e)
 	{

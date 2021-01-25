@@ -179,7 +179,7 @@ std::shared_ptr<ecore::EClass> LoopNodeActivationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<uml::ActivityNode> LoopNodeActivationImpl::makeLoopVariableList()
+std::shared_ptr<org.eclipse.uml2.uml.ActivityNode> LoopNodeActivationImpl::makeLoopVariableList()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -273,6 +273,8 @@ Any LoopNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType) con
 	{
 		case fUML::Semantics::Actions::ActionsPackage::LOOPNODEACTIVATION_ATTRIBUTE_BODYOUTPUTLISTS:
 		{
+			return eAny(getBodyOutputLists()); //7812			
+			/*
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<fUML::Semantics::Actions::Values>::iterator iter = m_bodyOutputLists->begin();
 			Bag<fUML::Semantics::Actions::Values>::iterator end = m_bodyOutputLists->end();
@@ -282,6 +284,7 @@ Any LoopNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType) con
 				iter++;
 			}
 			return eAny(tempList); //7812
+			*/
 		}
 	}
 	return StructuredActivityNodeActivationImpl::eGet(featureID, resolve, coreType);
@@ -429,9 +432,6 @@ void LoopNodeActivationImpl::saveContent(std::shared_ptr<persistence::interfaces
 	try
 	{
 		std::shared_ptr<fUML::Semantics::Actions::ActionsPackage> package = fUML::Semantics::Actions::ActionsPackage::eInstance();
-
-	
-
 
 		//
 		// Add new tags (from references)

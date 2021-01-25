@@ -35,13 +35,15 @@ namespace ecore
 	class ecoreFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 
 // base class includes
 
 // enum includes
 
 #include "ecore/EModelElement.hpp"
+
+//Includes from codegen annotation
 
 //*********************************
 namespace ecore 
@@ -72,15 +74,15 @@ namespace ecore
 			// Attributes Getter Setter
 			//*********************************
 			 
-			virtual std::string getKey() const = 0;
+			virtual std::string  getKey() const = 0;
 			
 			 
-			virtual void setKey (std::string _key)= 0; 
+			virtual void setKey (std::string  _key)= 0; 
 			 
-			virtual std::string getValue() const = 0;
+			virtual std::string  getValue() const = 0;
 			
 			 
-			virtual void setValue (std::string _value)= 0; 
+			virtual void setValue (std::string  _value)= 0; 
 			
 			//*********************************
 			// Reference
@@ -92,9 +94,9 @@ namespace ecore
 			// Attribute Members
 			//*********************************
 			 
-			std::string m_key = "";
+			std::string  m_key = "";
 			 
-			std::string m_value = "";
+			std::string  m_value = "";
 			
 			
 			//*********************************

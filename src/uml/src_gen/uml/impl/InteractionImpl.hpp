@@ -79,7 +79,7 @@ namespace uml
 			enclosingInteraction->isEmpty()
 			*/
 			 
-			virtual bool not_contained(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool not_contained(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			

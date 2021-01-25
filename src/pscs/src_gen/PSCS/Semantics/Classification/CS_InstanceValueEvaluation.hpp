@@ -35,22 +35,15 @@ namespace PSCS
 	class PSCSFactory;
 }
 
-//Forward Declaration for used types
-namespace fUML::Semantics::Classification 
-{
-	class InstanceValueEvaluation;
-}
-
+//Forward Declaration for used types 
 namespace fUML::Semantics::Loci 
 {
 	class Locus;
 }
-
 namespace fUML::Semantics::Values 
 {
 	class Value;
 }
-
 namespace uml 
 {
 	class ValueSpecification;
@@ -60,6 +53,28 @@ namespace uml
 #include "fUML/Semantics/Classification/InstanceValueEvaluation.hpp"
 
 // enum includes
+
+
+//Includes from codegen annotation
+#include "PSCS/Semantics/StructuredClassifiers/CS_Object.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/CS_Reference.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/Semantics/SimpleClassifiers/EnumerationValue.hpp"
+#include "fUML/Semantics/SimpleClassifiers/DataValue.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
+#include "fUML/Semantics/Loci/ExecutionFactory.hpp"
+#include "fUML/Semantics/StructuredClassifiers/Object.hpp"
+#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
+#include "fUML/Semantics/CommonBehavior/Execution.hpp"
+#include "fUML/Semantics/Loci/Executor.hpp"
+#include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
+#include "uml/InstanceValue.hpp"
+#include "uml/InstanceSpecification.hpp"
+#include "uml/EnumerationLiteral.hpp"
+#include "uml/Enumeration.hpp"
+#include "uml/Behavior.hpp"
+#include "uml/Slot.hpp"
 
 
 //*********************************

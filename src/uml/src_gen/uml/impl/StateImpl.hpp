@@ -61,7 +61,7 @@ namespace uml
 			connectionPoint->notEmpty() implies isComposite
 			*/
 			 
-			virtual bool composite_states(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool composite_states(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			The connection point references used as destinations/sources of Transitions associated with a submachine State must be defined as entry/exit points in the submachine StateMachine.
@@ -70,14 +70,14 @@ namespace uml
 			  cp.exit->forAll (ps | ps.stateMachine = self.submachine)))
 			*/
 			 
-			virtual bool destinations_or_sources_of_transitions(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool destinations_or_sources_of_transitions(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			Only entry or exit Pseudostates can serve as connection points.
 			connectionPoint->forAll(kind = PseudostateKind::entryPoint or kind = PseudostateKind::exitPoint)
 			*/
 			 
-			virtual bool entry_or_exit(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool entry_or_exit(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			A composite State is a State with at least one Region.
@@ -129,14 +129,14 @@ namespace uml
 			isComposite implies not isSubmachineState
 			*/
 			 
-			virtual bool submachine_or_regions(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool submachine_or_regions(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			Only submachine States can have connection point references.
 			isSubmachineState implies connection->notEmpty( )
 			*/
 			 
-			virtual bool submachine_states(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool submachine_states(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			
@@ -148,7 +148,7 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			 
-			virtual bool getIsComposite() const ;
+			virtual bool  getIsComposite() const ;
 			
 			
 			/*!
@@ -156,7 +156,7 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			 
-			virtual bool getIsOrthogonal() const ;
+			virtual bool  getIsOrthogonal() const ;
 			
 			
 			/*!
@@ -164,7 +164,7 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			 
-			virtual bool getIsSimple() const ;
+			virtual bool  getIsSimple() const ;
 			
 			
 			/*!
@@ -172,7 +172,7 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			 
-			virtual bool getIsSubmachineState() const ;
+			virtual bool  getIsSubmachineState() const ;
 			
 			
 			

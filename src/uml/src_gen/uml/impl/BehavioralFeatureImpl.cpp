@@ -249,12 +249,12 @@ std::shared_ptr<ecore::EClass> BehavioralFeatureImpl::eStaticClass() const
 /*
 Getter & Setter for attribute concurrency
 */
-uml::CallConcurrencyKind BehavioralFeatureImpl::getConcurrency() const 
+uml::CallConcurrencyKind  BehavioralFeatureImpl::getConcurrency() const 
 {
 	return m_concurrency;
 }
 
-void BehavioralFeatureImpl::setConcurrency(uml::CallConcurrencyKind _concurrency)
+void BehavioralFeatureImpl::setConcurrency(uml::CallConcurrencyKind  _concurrency)
 {
 	m_concurrency = _concurrency;
 } 
@@ -264,12 +264,12 @@ void BehavioralFeatureImpl::setConcurrency(uml::CallConcurrencyKind _concurrency
 /*
 Getter & Setter for attribute isAbstract
 */
-bool BehavioralFeatureImpl::getIsAbstract() const 
+bool  BehavioralFeatureImpl::getIsAbstract() const 
 {
 	return m_isAbstract;
 }
 
-void BehavioralFeatureImpl::setIsAbstract(bool _isAbstract)
+void BehavioralFeatureImpl::setIsAbstract(bool  _isAbstract)
 {
 	m_isAbstract = _isAbstract;
 } 
@@ -279,13 +279,13 @@ void BehavioralFeatureImpl::setIsAbstract(bool _isAbstract)
 //*********************************
 // Operations
 //*********************************
-bool BehavioralFeatureImpl::abstract_no_method(Any diagnostics,std::map <   Any, Any >  context)
+bool BehavioralFeatureImpl::abstract_no_method(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Parameter> BehavioralFeatureImpl::createReturnResult(std::string name,std::shared_ptr<uml::Type>  type)
+std::shared_ptr<uml::Parameter> BehavioralFeatureImpl::createReturnResult(std::string name,std::shared_ptr<uml::Type> type)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -498,51 +498,19 @@ Any BehavioralFeatureImpl::eGet(int featureID, bool resolve, bool coreType) cons
 			return eAny(getIsAbstract()); //2521
 		case uml::umlPackage::BEHAVIORALFEATURE_ATTRIBUTE_METHOD:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Behavior>::iterator iter = m_method->begin();
-			Bag<uml::Behavior>::iterator end = m_method->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //2522
+			return eAny(getMethod()); //2522			
 		}
 		case uml::umlPackage::BEHAVIORALFEATURE_ATTRIBUTE_OWNEDPARAMETER:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Parameter>::iterator iter = m_ownedParameter->begin();
-			Bag<uml::Parameter>::iterator end = m_ownedParameter->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //2523
+			return eAny(getOwnedParameter()); //2523			
 		}
 		case uml::umlPackage::BEHAVIORALFEATURE_ATTRIBUTE_OWNEDPARAMETERSET:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ParameterSet>::iterator iter = m_ownedParameterSet->begin();
-			Bag<uml::ParameterSet>::iterator end = m_ownedParameterSet->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //2524
+			return eAny(getOwnedParameterSet()); //2524			
 		}
 		case uml::umlPackage::BEHAVIORALFEATURE_ATTRIBUTE_RAISEDEXCEPTION:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Type>::iterator iter = m_raisedException->begin();
-			Bag<uml::Type>::iterator end = m_raisedException->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //2525
+			return eAny(getRaisedException()); //2525			
 		}
 	}
 	Any result;
@@ -782,7 +750,7 @@ void BehavioralFeatureImpl::loadAttributes(std::shared_ptr<persistence::interfac
 		iter = attr_list.find("concurrency");
 		if ( iter != attr_list.end() )
 		{
-			uml::CallConcurrencyKind value = CallConcurrencyKind::SEQUENTIAL;
+			uml::CallConcurrencyKind  value = CallConcurrencyKind::SEQUENTIAL;
 			std::string literal = iter->second;
 			if (literal == "sequential")
 			{
@@ -952,7 +920,6 @@ void BehavioralFeatureImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'ownedParameter'
 		for (std::shared_ptr<uml::Parameter> ownedParameter : *this->getOwnedParameter()) 
 		{
@@ -964,11 +931,10 @@ void BehavioralFeatureImpl::saveContent(std::shared_ptr<persistence::interfaces:
 		{
 			saveHandler->addReference(ownedParameterSet, "ownedParameterSet", ownedParameterSet->eClass() != package->getParameterSet_Class());
 		}
-	
 		// Add attributes
 		if ( this->eIsSet(package->getBehavioralFeature_Attribute_concurrency()) )
 		{
-			uml::CallConcurrencyKind value = this->getConcurrency();
+			uml::CallConcurrencyKind  value = this->getConcurrency();
 			std::string literal = "";
 			if (value == CallConcurrencyKind::SEQUENTIAL)
 			{
@@ -990,18 +956,9 @@ void BehavioralFeatureImpl::saveContent(std::shared_ptr<persistence::interfaces:
 			saveHandler->addAttribute("isAbstract", this->getIsAbstract());
 		}
 
-		// Add references
-		std::shared_ptr<Bag<uml::Behavior>> method_list = this->getMethod();
-		for (std::shared_ptr<uml::Behavior > object : *method_list)
-		{ 
-			saveHandler->addReferences("method", object);
-		}
-		std::shared_ptr<Bag<uml::Type>> raisedException_list = this->getRaisedException();
-		for (std::shared_ptr<uml::Type > object : *raisedException_list)
-		{ 
-			saveHandler->addReferences("raisedException", object);
-		}
-
+	// Add references
+		saveHandler->addReferences<uml::Behavior>("method", this->getMethod());	
+		saveHandler->addReferences<uml::Type>("raisedException", this->getRaisedException());	
 	}
 	catch (std::exception& e)
 	{

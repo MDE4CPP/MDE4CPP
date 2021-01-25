@@ -44,46 +44,46 @@ namespace PSCS::Semantics::Actions
 			// Operations
 			//*********************************
 			 
-			virtual void addStructuralFeatureValue(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference>  context,std::shared_ptr<uml::Property>  feature,std::shared_ptr<fUML::Semantics::Values::Value>  value) ;
+			virtual void addStructuralFeatureValue(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> context,std::shared_ptr<org.eclipse.uml2.uml.Property> feature,std::shared_ptr<fUML::Semantics::Values::Value> value) ;
 			
 			 
-			virtual bool canInstantiate(std::shared_ptr<uml::Property>  p) ;
+			virtual bool canInstantiate(std::shared_ptr<org.eclipse.uml2.uml.Property> p) ;
 			
 			 
-			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> construct(std::shared_ptr<uml::Operation>  constructor,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object>  context) ;
+			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> construct(std::shared_ptr<org.eclipse.uml2.uml.Operation> constructor,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> context) ;
 			
 			 
-			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> constructObject(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object>  context,std::shared_ptr<uml::Class>  type) ;
+			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> constructObject(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> context,std::shared_ptr<org.eclipse.uml2.uml.Class> type) ;
 			
 			 
-			virtual void generateArrayPattern(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference>  context,std::shared_ptr<uml::Connector>  connector) ;
+			virtual void generateArrayPattern(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> context,std::shared_ptr<org.eclipse.uml2.uml.Connector> connector) ;
 			
 			 
-			virtual std::shared_ptr<uml::Class> generateRealizingClass(std::shared_ptr<uml::Interface>  interface_,std::string className) ;
+			virtual std::shared_ptr<org.eclipse.uml2.uml.Class> generateRealizingClass(std::shared_ptr<org.eclipse.uml2.uml.Interface> interface_,std::string className) ;
 			
 			 
-			virtual void generateStarPattern(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference>  context,std::shared_ptr<uml::Connector>  connector) ;
+			virtual void generateStarPattern(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> context,std::shared_ptr<org.eclipse.uml2.uml.Connector> connector) ;
 			
 			 
-			virtual int getCardinality(std::shared_ptr<uml::ConnectorEnd>  end) ;
+			virtual int getCardinality(std::shared_ptr<org.eclipse.uml2.uml.ConnectorEnd> end) ;
 			
 			 
-			virtual std::shared_ptr<uml::Association> getDefaultAssociation() ;
+			virtual std::shared_ptr<org.eclipse.uml2.uml.Association> getDefaultAssociation() ;
 			
 			 
-			virtual std::shared_ptr<uml::Class> getRealizingClass(std::shared_ptr<uml::Interface>  interface_) ;
+			virtual std::shared_ptr<org.eclipse.uml2.uml.Class> getRealizingClass(std::shared_ptr<org.eclipse.uml2.uml.Interface> interface_) ;
 			
 			 
-			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value> > getValuesFromConnectorEnd(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference>  context,std::shared_ptr<uml::ConnectorEnd>  end) ;
+			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value> > getValuesFromConnectorEnd(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> context,std::shared_ptr<org.eclipse.uml2.uml.ConnectorEnd> end) ;
 			
 			 
-			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> instantiateInterface(std::shared_ptr<uml::Interface>  interface,std::shared_ptr<fUML::Semantics::Loci::Locus>  locus) ;
+			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> instantiateInterface(std::shared_ptr<org.eclipse.uml2.uml.Interface> interface,std::shared_ptr<fUML::Semantics::Loci::Locus> locus) ;
 			
 			 
-			virtual bool isArrayPattern(std::shared_ptr<uml::Connector>  c) ;
+			virtual bool isArrayPattern(std::shared_ptr<org.eclipse.uml2.uml.Connector> c) ;
 			
 			 
-			virtual bool isStarPattern(std::shared_ptr<uml::Connector>  c) ;
+			virtual bool isStarPattern(std::shared_ptr<org.eclipse.uml2.uml.Connector> c) ;
 			
 			
 			
@@ -96,13 +96,13 @@ namespace PSCS::Semantics::Actions
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<uml::Association > getDefaultAssociation() const ;
+			virtual std::shared_ptr<org.eclipse.uml2.uml.Association > getDefaultAssociation() const ;
 			
 			
-			virtual void setDefaultAssociation(std::shared_ptr<uml::Association> _defaultAssociation) ;
+			virtual void setDefaultAssociation(std::shared_ptr<org.eclipse.uml2.uml.Association> _defaultAssociation) ;
 			
 			
-			virtual std::shared_ptr<Bag<uml::Class>> getGeneratedRealizingClasses() const ;
+			virtual std::shared_ptr<Bag<org.eclipse.uml2.uml.Class>> getGeneratedRealizingClasses() const ;
 			
 			
 			

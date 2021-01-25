@@ -37,34 +37,12 @@ namespace ecore
 	class ecoreFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace ecore 
 {
 	class EAnnotation;
-}
-
-namespace ecore 
-{
 	class EClass;
-}
-
-namespace ecore 
-{
 	class EDataType;
-}
-
-namespace ecore 
-{
-	class EModelElement;
-}
-
-namespace ecore 
-{
-	class EObject;
-}
-
-namespace ecore 
-{
 	class EPackage;
 }
 
@@ -73,6 +51,8 @@ namespace ecore
 
 // enum includes
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace ecore 
@@ -98,13 +78,13 @@ namespace ecore
 			// Operations
 			//*********************************
 			 
-			virtual std::string convertToString(std::shared_ptr<ecore::EDataType>  eDataType,Any instanceValue) const = 0;
+			virtual std::string convertToString(std::shared_ptr<ecore::EDataType> eDataType,Any instanceValue) const = 0;
 			
 			 
-			virtual std::shared_ptr<ecore::EObject> create(std::shared_ptr<ecore::EClass>  eClass) const = 0;
+			virtual std::shared_ptr<ecore::EObject> create(std::shared_ptr<ecore::EClass> eClass) const = 0;
 			
 			 
-			virtual Any createFromString(std::shared_ptr<ecore::EDataType>  eDataType,std::string literalValue) const = 0;
+			virtual Any createFromString(std::shared_ptr<ecore::EDataType> eDataType,std::string literalValue) const = 0;
 			
 			
 			//*********************************

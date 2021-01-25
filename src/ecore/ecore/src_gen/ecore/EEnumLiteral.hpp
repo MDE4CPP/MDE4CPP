@@ -36,25 +36,11 @@ namespace ecore
 	class ecoreFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace ecore 
 {
 	class EAnnotation;
-}
-
-namespace ecore 
-{
 	class EEnum;
-}
-
-namespace ecore 
-{
-	class ENamedElement;
-}
-
-namespace ecore 
-{
-	class EObject;
 }
 
 // base class includes
@@ -62,6 +48,8 @@ namespace ecore
 
 // enum includes
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace ecore 
@@ -99,20 +87,20 @@ namespace ecore
 			// Attributes Getter Setter
 			//*********************************
 			 
-			virtual Any getInstance() const = 0;
+			virtual Any  getInstance() const = 0;
 			
 			 
-			virtual void setInstance (Any _instance)= 0; 
+			virtual void setInstance (Any  _instance)= 0; 
 			 
-			virtual std::string getLiteral() const = 0;
+			virtual std::string  getLiteral() const = 0;
 			
 			 
-			virtual void setLiteral (std::string _literal)= 0; 
+			virtual void setLiteral (std::string  _literal)= 0; 
 			 
-			virtual int getValue() const = 0;
+			virtual int  getValue() const = 0;
 			
 			 
-			virtual void setValue (int _value)= 0; 
+			virtual void setValue (int  _value)= 0; 
 			
 			//*********************************
 			// Reference
@@ -128,11 +116,11 @@ namespace ecore
 			// Attribute Members
 			//*********************************
 			 
-			Any m_instance = nullptr;
+			Any  m_instance = nullptr;
 			 
-			std::string m_literal = "";
+			std::string  m_literal = "";
 			 
-			int m_value = 0;
+			int  m_value = 0;
 			
 			
 			//*********************************

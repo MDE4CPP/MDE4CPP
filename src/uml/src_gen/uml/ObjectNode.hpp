@@ -40,99 +40,23 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Activity;
-}
-
-namespace uml 
-{
 	class ActivityEdge;
-}
-
-namespace uml 
-{
 	class ActivityGroup;
-}
-
-namespace uml 
-{
-	class ActivityNode;
-}
-
-namespace uml 
-{
 	class ActivityPartition;
-}
-
-namespace uml 
-{
 	class Behavior;
-}
-
-namespace uml 
-{
 	class Classifier;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class InterruptibleActivityRegion;
-}
-
-namespace uml 
-{
 	class Namespace;
-}
-
-namespace uml 
-{
-	class RedefinableElement;
-}
-
-namespace uml 
-{
 	class State;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class StructuredActivityNode;
-}
-
-namespace uml 
-{
 	class Type;
-}
-
-namespace uml 
-{
-	class TypedElement;
-}
-
-namespace uml 
-{
 	class ValueSpecification;
 }
 
@@ -146,6 +70,8 @@ namespace uml
 
 #include "uml/VisibilityKind.hpp"
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -183,21 +109,21 @@ namespace uml
 					selection.inputParameters()->forAll(p | self.type.conformsTo(p.type))
 			*/
 			 
-			virtual bool input_output_parameter(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool input_output_parameter(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			If isControlType=false, the ActivityEdges incoming to or outgoing from an ObjectNode must all be ObjectFlows.
 			(not isControlType) implies incoming->union(outgoing)->forAll(oclIsKindOf(ObjectFlow))
 			*/
 			 
-			virtual bool object_flow_edges(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool object_flow_edges(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			If an ObjectNode has a selection Behavior, then the ordering of the object node is ordered, and vice versa.
 			(selection<>null) = (ordering=ObjectNodeOrderingKind::ordered)
 			*/
 			 
-			virtual bool selection_behavior(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool selection_behavior(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			
 			//*********************************
@@ -208,27 +134,27 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			 
-			virtual bool getIsControlType() const = 0;
+			virtual bool  getIsControlType() const = 0;
 			
 			/*!
 			Indicates whether the type of the ObjectNode is to be treated as representing control values that may traverse ControlFlows.
 			<p>From package UML::Activities.</p>
 			*/
 			 
-			virtual void setIsControlType (bool _isControlType)= 0; 
+			virtual void setIsControlType (bool  _isControlType)= 0; 
 			/*!
 			Indicates how the tokens held by the ObjectNode are ordered for selection to traverse ActivityEdges outgoing from the ObjectNode.
 			<p>From package UML::Activities.</p>
 			*/
 			 
-			virtual uml::ObjectNodeOrderingKind getOrdering() const = 0;
+			virtual uml::ObjectNodeOrderingKind  getOrdering() const = 0;
 			
 			/*!
 			Indicates how the tokens held by the ObjectNode are ordered for selection to traverse ActivityEdges outgoing from the ObjectNode.
 			<p>From package UML::Activities.</p>
 			*/
 			 
-			virtual void setOrdering (uml::ObjectNodeOrderingKind _ordering)= 0; 
+			virtual void setOrdering (uml::ObjectNodeOrderingKind  _ordering)= 0; 
 			
 			//*********************************
 			// Reference
@@ -280,13 +206,13 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			 
-			bool m_isControlType = false;
+			bool  m_isControlType = false;
 			/*!
 			Indicates how the tokens held by the ObjectNode are ordered for selection to traverse ActivityEdges outgoing from the ObjectNode.
 			<p>From package UML::Activities.</p>
 			*/
 			 
-			uml::ObjectNodeOrderingKind m_ordering = ObjectNodeOrderingKind::FIFO;
+			uml::ObjectNodeOrderingKind  m_ordering = ObjectNodeOrderingKind::FIFO;
 			
 			
 			//*********************************

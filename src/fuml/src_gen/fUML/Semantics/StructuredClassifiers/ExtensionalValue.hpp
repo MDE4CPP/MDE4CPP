@@ -35,25 +35,14 @@ namespace fUML
 	class fUMLFactory;
 }
 
-//Forward Declaration for used types
-namespace fUML::Semantics::SimpleClassifiers 
-{
-	class CompoundValue;
-}
-
-namespace fUML::Semantics::SimpleClassifiers 
-{
-	class FeatureValue;
-}
-
+//Forward Declaration for used types 
 namespace fUML::Semantics::Loci 
 {
 	class Locus;
 }
-
-namespace fUML::Semantics::Values 
+namespace fUML::Semantics::SimpleClassifiers 
 {
-	class Value;
+	class FeatureValue;
 }
 
 // base class includes
@@ -61,6 +50,9 @@ namespace fUML::Semantics::Values
 
 // enum includes
 
+
+//Includes from codegen annotation
+#include "fUML/FUMLFactory.hpp"
 
 //*********************************
 namespace fUML::Semantics::StructuredClassifiers 

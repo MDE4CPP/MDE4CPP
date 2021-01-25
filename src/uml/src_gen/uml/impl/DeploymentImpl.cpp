@@ -436,30 +436,14 @@ Any DeploymentImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::DEPLOYMENT_ATTRIBUTE_CONFIGURATION:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::DeploymentSpecification>::iterator iter = m_configuration->begin();
-			Bag<uml::DeploymentSpecification>::iterator end = m_configuration->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //6917
+			return eAny(getConfiguration()); //6917			
 		}
 		case uml::umlPackage::DEPLOYMENT_ATTRIBUTE_DEPLOYEDARTIFACT:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::DeployedArtifact>::iterator iter = m_deployedArtifact->begin();
-			Bag<uml::DeployedArtifact>::iterator end = m_deployedArtifact->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //6918
+			return eAny(getDeployedArtifact()); //6918			
 		}
 		case uml::umlPackage::DEPLOYMENT_ATTRIBUTE_LOCATION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getLocation().lock())); //6919
+			return eAny(getLocation().lock()); //6919
 	}
 	return DependencyImpl::eGet(featureID, resolve, coreType);
 }
@@ -705,21 +689,14 @@ void DeploymentImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'configuration'
 		for (std::shared_ptr<uml::DeploymentSpecification> configuration : *this->getConfiguration()) 
 		{
 			saveHandler->addReference(configuration, "configuration", configuration->eClass() != package->getDeploymentSpecification_Class());
 		}
-	
 
-		// Add references
-		std::shared_ptr<Bag<uml::DeployedArtifact>> deployedArtifact_list = this->getDeployedArtifact();
-		for (std::shared_ptr<uml::DeployedArtifact > object : *deployedArtifact_list)
-		{ 
-			saveHandler->addReferences("deployedArtifact", object);
-		}
-
+	// Add references
+		saveHandler->addReferences<uml::DeployedArtifact>("deployedArtifact", this->getDeployedArtifact());	
 	}
 	catch (std::exception& e)
 	{

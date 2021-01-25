@@ -39,139 +39,28 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
-namespace uml 
-{
-	class Artifact;
-}
-
-namespace uml 
-{
-	class Classifier;
-}
-
+//Forward Declaration for used types 
 namespace uml 
 {
 	class CollaborationUse;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
 	class Constraint;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
 	class Deployment;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class ElementImport;
-}
-
-namespace uml 
-{
 	class Feature;
-}
-
-namespace uml 
-{
 	class Generalization;
-}
-
-namespace uml 
-{
 	class GeneralizationSet;
-}
-
-namespace uml 
-{
 	class Manifestation;
-}
-
-namespace uml 
-{
-	class NamedElement;
-}
-
-namespace uml 
-{
-	class Namespace;
-}
-
-namespace uml 
-{
 	class Operation;
-}
-
-namespace uml 
-{
 	class Package;
-}
-
-namespace uml 
-{
 	class PackageImport;
-}
-
-namespace uml 
-{
-	class PackageableElement;
-}
-
-namespace uml 
-{
 	class Property;
-}
-
-namespace uml 
-{
-	class RedefinableElement;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class Substitution;
-}
-
-namespace uml 
-{
 	class TemplateBinding;
-}
-
-namespace uml 
-{
 	class TemplateParameter;
-}
-
-namespace uml 
-{
 	class TemplateSignature;
-}
-
-namespace uml 
-{
 	class UseCase;
 }
 
@@ -181,6 +70,8 @@ namespace uml
 // enum includes
 #include "uml/VisibilityKind.hpp"
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -237,14 +128,14 @@ namespace uml
 			deployment->forAll (location.deployedElement->forAll (oclIsKindOf(Component)))
 			*/
 			 
-			virtual bool deployed_elements(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool deployed_elements(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			The DeploymentTarget of a DeploymentSpecification is a kind of ExecutionEnvironment.
 			deployment->forAll (location.oclIsKindOf(ExecutionEnvironment))
 			*/
 			 
-			virtual bool deployment_target(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool deployment_target(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			
 			//*********************************
@@ -255,27 +146,27 @@ namespace uml
 			<p>From package UML::Deployments.</p>
 			*/
 			 
-			virtual std::string getDeploymentLocation() const = 0;
+			virtual std::string  getDeploymentLocation() const = 0;
 			
 			/*!
 			The location where an Artifact is deployed onto a Node. This is typically a 'directory' or 'memory address.'
 			<p>From package UML::Deployments.</p>
 			*/
 			 
-			virtual void setDeploymentLocation (std::string _deploymentLocation)= 0; 
+			virtual void setDeploymentLocation (std::string  _deploymentLocation)= 0; 
 			/*!
 			The location where a component Artifact executes. This may be a local or remote location.
 			<p>From package UML::Deployments.</p>
 			*/
 			 
-			virtual std::string getExecutionLocation() const = 0;
+			virtual std::string  getExecutionLocation() const = 0;
 			
 			/*!
 			The location where a component Artifact executes. This may be a local or remote location.
 			<p>From package UML::Deployments.</p>
 			*/
 			 
-			virtual void setExecutionLocation (std::string _executionLocation)= 0; 
+			virtual void setExecutionLocation (std::string  _executionLocation)= 0; 
 			
 			//*********************************
 			// Reference
@@ -305,13 +196,13 @@ namespace uml
 			<p>From package UML::Deployments.</p>
 			*/
 			 
-			std::string m_deploymentLocation = "";
+			std::string  m_deploymentLocation = "";
 			/*!
 			The location where a component Artifact executes. This may be a local or remote location.
 			<p>From package UML::Deployments.</p>
 			*/
 			 
-			std::string m_executionLocation = "";
+			std::string  m_executionLocation = "";
 			
 			
 			//*********************************

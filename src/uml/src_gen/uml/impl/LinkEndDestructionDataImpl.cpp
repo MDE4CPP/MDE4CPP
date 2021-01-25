@@ -135,12 +135,12 @@ std::shared_ptr<ecore::EClass> LinkEndDestructionDataImpl::eStaticClass() const
 /*
 Getter & Setter for attribute isDestroyDuplicates
 */
-bool LinkEndDestructionDataImpl::getIsDestroyDuplicates() const 
+bool  LinkEndDestructionDataImpl::getIsDestroyDuplicates() const 
 {
 	return m_isDestroyDuplicates;
 }
 
-void LinkEndDestructionDataImpl::setIsDestroyDuplicates(bool _isDestroyDuplicates)
+void LinkEndDestructionDataImpl::setIsDestroyDuplicates(bool  _isDestroyDuplicates)
 {
 	m_isDestroyDuplicates = _isDestroyDuplicates;
 } 
@@ -150,7 +150,7 @@ void LinkEndDestructionDataImpl::setIsDestroyDuplicates(bool _isDestroyDuplicate
 //*********************************
 // Operations
 //*********************************
-bool LinkEndDestructionDataImpl::destroyAt_pin(Any diagnostics,std::map <   Any, Any >  context)
+bool LinkEndDestructionDataImpl::destroyAt_pin(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -222,7 +222,7 @@ Any LinkEndDestructionDataImpl::eGet(int featureID, bool resolve, bool coreType)
 	switch(featureID)
 	{
 		case uml::umlPackage::LINKENDDESTRUCTIONDATA_ATTRIBUTE_DESTROYAT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDestroyAt())); //1366
+			return eAny(getDestroyAt()); //1366
 		case uml::umlPackage::LINKENDDESTRUCTIONDATA_ATTRIBUTE_ISDESTROYDUPLICATES:
 			return eAny(getIsDestroyDuplicates()); //1367
 	}
@@ -364,17 +364,14 @@ void LinkEndDestructionDataImpl::saveContent(std::shared_ptr<persistence::interf
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
 		// Add attributes
 		if ( this->eIsSet(package->getLinkEndDestructionData_Attribute_isDestroyDuplicates()) )
 		{
 			saveHandler->addAttribute("isDestroyDuplicates", this->getIsDestroyDuplicates());
 		}
 
-		// Add references
-		saveHandler->addReference("destroyAt", this->getDestroyAt());
-
+	// Add references
+		saveHandler->addReference("destroyAt", this->getDestroyAt());		 
 	}
 	catch (std::exception& e)
 	{

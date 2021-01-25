@@ -463,12 +463,12 @@ std::shared_ptr<ecore::EClass> ClassImpl::eStaticClass() const
 /*
 Getter & Setter for attribute isActive
 */
-bool ClassImpl::getIsActive() const 
+bool  ClassImpl::getIsActive() const 
 {
 	return m_isActive;
 }
 
-void ClassImpl::setIsActive(bool _isActive)
+void ClassImpl::setIsActive(bool  _isActive)
 {
 	m_isActive = _isActive;
 } 
@@ -478,7 +478,7 @@ void ClassImpl::setIsActive(bool _isActive)
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<uml::Operation> ClassImpl::createOwnedOperation(std::string name,std::shared_ptr<Bag<std::string> >  parameterNames,std::shared_ptr<Bag<uml::Type> >  parameterTypes,std::shared_ptr<uml::Type>  returnType)
+std::shared_ptr<uml::Operation> ClassImpl::createOwnedOperation(std::string name,std::shared_ptr<Bag<std::string> > parameterNames,std::shared_ptr<Bag<uml::Type> > parameterTypes,std::shared_ptr<uml::Type> returnType)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -536,7 +536,7 @@ bool ClassImpl::isMetaclass()
 	throw "UnsupportedOperationException";
 }
 
-bool ClassImpl::passive_class(Any diagnostics,std::map <   Any, Any >  context)
+bool ClassImpl::passive_class(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -858,65 +858,25 @@ Any ClassImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::CLASS_ATTRIBUTE_EXTENSION:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Extension>::iterator iter = m_extension->begin();
-			Bag<uml::Extension>::iterator end = m_extension->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //3547
+			return eAny(getExtension()); //3547			
 		}
 		case uml::umlPackage::CLASS_ATTRIBUTE_ISACTIVE:
 			return eAny(getIsActive()); //3548
 		case uml::umlPackage::CLASS_ATTRIBUTE_NESTEDCLASSIFIER:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Classifier>::iterator iter = m_nestedClassifier->begin();
-			Bag<uml::Classifier>::iterator end = m_nestedClassifier->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //3549
+			return eAny(getNestedClassifier()); //3549			
 		}
 		case uml::umlPackage::CLASS_ATTRIBUTE_OWNEDOPERATION:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Operation>::iterator iter = m_ownedOperation->begin();
-			Bag<uml::Operation>::iterator end = m_ownedOperation->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //3546
+			return eAny(getOwnedOperation()); //3546			
 		}
 		case uml::umlPackage::CLASS_ATTRIBUTE_OWNEDRECEPTION:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Reception>::iterator iter = m_ownedReception->begin();
-			Bag<uml::Reception>::iterator end = m_ownedReception->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //3550
+			return eAny(getOwnedReception()); //3550			
 		}
 		case uml::umlPackage::CLASS_ATTRIBUTE_SUPERCLASS:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Class>::iterator iter = m_superClass->begin();
-			Bag<uml::Class>::iterator end = m_superClass->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //3551
+			return eAny(getSuperClass()); //3551			
 		}
 	}
 	Any result;
@@ -1307,7 +1267,6 @@ void ClassImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'nestedClassifier'
 		for (std::shared_ptr<uml::Classifier> nestedClassifier : *this->getNestedClassifier()) 
 		{
@@ -1325,20 +1284,14 @@ void ClassImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 		{
 			saveHandler->addReference(ownedReception, "ownedReception", ownedReception->eClass() != package->getReception_Class());
 		}
-	
 		// Add attributes
 		if ( this->eIsSet(package->getClass_Attribute_isActive()) )
 		{
 			saveHandler->addAttribute("isActive", this->getIsActive());
 		}
 
-		// Add references
-		std::shared_ptr<Bag<uml::Class>> superClass_list = this->getSuperClass();
-		for (std::shared_ptr<uml::Class > object : *superClass_list)
-		{ 
-			saveHandler->addReferences("superClass", object);
-		}
-
+	// Add references
+		saveHandler->addReferences<uml::Class>("superClass", this->getSuperClass());	
 	}
 	catch (std::exception& e)
 	{

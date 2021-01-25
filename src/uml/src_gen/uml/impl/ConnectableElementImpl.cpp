@@ -261,15 +261,7 @@ Any ConnectableElementImpl::eGet(int featureID, bool resolve, bool coreType) con
 	{
 		case uml::umlPackage::CONNECTABLEELEMENT_ATTRIBUTE_END:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ConnectorEnd>::iterator iter = m_end->begin();
-			Bag<uml::ConnectorEnd>::iterator end = m_end->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //5012
+			return eAny(getEnd()); //5012			
 		}
 	}
 	Any result;
@@ -379,9 +371,6 @@ void ConnectableElementImpl::saveContent(std::shared_ptr<persistence::interfaces
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

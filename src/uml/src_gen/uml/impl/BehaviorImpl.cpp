@@ -518,12 +518,12 @@ std::shared_ptr<ecore::EClass> BehaviorImpl::eStaticClass() const
 /*
 Getter & Setter for attribute isReentrant
 */
-bool BehaviorImpl::getIsReentrant() const 
+bool  BehaviorImpl::getIsReentrant() const 
 {
 	return m_isReentrant;
 }
 
-void BehaviorImpl::setIsReentrant(bool _isReentrant)
+void BehaviorImpl::setIsReentrant(bool  _isReentrant)
 {
 	m_isReentrant = _isReentrant;
 } 
@@ -533,13 +533,13 @@ void BehaviorImpl::setIsReentrant(bool _isReentrant)
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<uml::BehavioredClassifier> BehaviorImpl::behavioredClassifier(std::shared_ptr<uml::Element>  from)
+std::shared_ptr<uml::BehavioredClassifier> BehaviorImpl::behavioredClassifier(std::shared_ptr<uml::Element> from)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool BehaviorImpl::feature_of_context_classifier(Any diagnostics,std::map <   Any, Any >  context)
+bool BehaviorImpl::feature_of_context_classifier(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -553,7 +553,7 @@ std::shared_ptr<Bag<uml::Parameter> > BehaviorImpl::inputParameters()
 	throw "UnsupportedOperationException";
 }
 
-bool BehaviorImpl::most_one_behavior(Any diagnostics,std::map <   Any, Any >  context)
+bool BehaviorImpl::most_one_behavior(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -565,7 +565,7 @@ std::shared_ptr<Bag<uml::Parameter> > BehaviorImpl::outputParameters()
 	throw "UnsupportedOperationException";
 }
 
-bool BehaviorImpl::parameters_match(Any diagnostics,std::map <   Any, Any >  context)
+bool BehaviorImpl::parameters_match(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -969,73 +969,33 @@ Any BehaviorImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::BEHAVIOR_ATTRIBUTE_BEHAVIOREDCLASSIFIER:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getBehavioredClassifier().lock())); //2360
+			return eAny(getBehavioredClassifier().lock()); //2360
 		case uml::umlPackage::BEHAVIOR_ATTRIBUTE_CONTEXT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getContext())); //2353
+			return eAny(getContext()); //2353
 		case uml::umlPackage::BEHAVIOR_ATTRIBUTE_ISREENTRANT:
 			return eAny(getIsReentrant()); //2354
 		case uml::umlPackage::BEHAVIOR_ATTRIBUTE_OWNEDPARAMETER:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Parameter>::iterator iter = m_ownedParameter->begin();
-			Bag<uml::Parameter>::iterator end = m_ownedParameter->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //2355
+			return eAny(getOwnedParameter()); //2355			
 		}
 		case uml::umlPackage::BEHAVIOR_ATTRIBUTE_OWNEDPARAMETERSET:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ParameterSet>::iterator iter = m_ownedParameterSet->begin();
-			Bag<uml::ParameterSet>::iterator end = m_ownedParameterSet->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //2356
+			return eAny(getOwnedParameterSet()); //2356			
 		}
 		case uml::umlPackage::BEHAVIOR_ATTRIBUTE_POSTCONDITION:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Constraint>::iterator iter = m_postcondition->begin();
-			Bag<uml::Constraint>::iterator end = m_postcondition->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //2357
+			return eAny(getPostcondition()); //2357			
 		}
 		case uml::umlPackage::BEHAVIOR_ATTRIBUTE_PRECONDITION:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Constraint>::iterator iter = m_precondition->begin();
-			Bag<uml::Constraint>::iterator end = m_precondition->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //2358
+			return eAny(getPrecondition()); //2358			
 		}
 		case uml::umlPackage::BEHAVIOR_ATTRIBUTE_REDEFINEDBEHAVIOR:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Behavior>::iterator iter = m_redefinedBehavior->begin();
-			Bag<uml::Behavior>::iterator end = m_redefinedBehavior->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //2359
+			return eAny(getRedefinedBehavior()); //2359			
 		}
 		case uml::umlPackage::BEHAVIOR_ATTRIBUTE_SPECIFICATION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSpecification())); //2352
+			return eAny(getSpecification()); //2352
 	}
 	return ClassImpl::eGet(featureID, resolve, coreType);
 }
@@ -1544,7 +1504,6 @@ void BehaviorImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'ownedParameter'
 		for (std::shared_ptr<uml::Parameter> ownedParameter : *this->getOwnedParameter()) 
 		{
@@ -1556,32 +1515,18 @@ void BehaviorImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 		{
 			saveHandler->addReference(ownedParameterSet, "ownedParameterSet", ownedParameterSet->eClass() != package->getParameterSet_Class());
 		}
-	
 		// Add attributes
 		if ( this->eIsSet(package->getBehavior_Attribute_isReentrant()) )
 		{
 			saveHandler->addAttribute("isReentrant", this->getIsReentrant());
 		}
 
-		// Add references
-		saveHandler->addReference("context", this->getContext());
-		std::shared_ptr<Bag<uml::Constraint>> postcondition_list = this->getPostcondition();
-		for (std::shared_ptr<uml::Constraint > object : *postcondition_list)
-		{ 
-			saveHandler->addReferences("postcondition", object);
-		}
-		std::shared_ptr<Bag<uml::Constraint>> precondition_list = this->getPrecondition();
-		for (std::shared_ptr<uml::Constraint > object : *precondition_list)
-		{ 
-			saveHandler->addReferences("precondition", object);
-		}
-		std::shared_ptr<Bag<uml::Behavior>> redefinedBehavior_list = this->getRedefinedBehavior();
-		for (std::shared_ptr<uml::Behavior > object : *redefinedBehavior_list)
-		{ 
-			saveHandler->addReferences("redefinedBehavior", object);
-		}
-		saveHandler->addReference("specification", this->getSpecification());
-
+	// Add references
+		saveHandler->addReference("context", this->getContext());		 
+		saveHandler->addReferences<uml::Constraint>("postcondition", this->getPostcondition());	
+		saveHandler->addReferences<uml::Constraint>("precondition", this->getPrecondition());	
+		saveHandler->addReferences<uml::Behavior>("redefinedBehavior", this->getRedefinedBehavior());	
+		saveHandler->addReference("specification", this->getSpecification());		 
 	}
 	catch (std::exception& e)
 	{

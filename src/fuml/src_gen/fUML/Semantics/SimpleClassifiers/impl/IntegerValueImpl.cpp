@@ -111,12 +111,12 @@ std::shared_ptr<ecore::EClass> IntegerValueImpl::eStaticClass() const
 /*
 Getter & Setter for attribute value
 */
-int IntegerValueImpl::getValue() const 
+int  IntegerValueImpl::getValue() const 
 {
 	return m_value;
 }
 
-void IntegerValueImpl::setValue(int _value)
+void IntegerValueImpl::setValue(int  _value)
 {
 	m_value = _value;
 } 
@@ -139,7 +139,7 @@ return newValue;
 	//end of body
 }
 
-bool IntegerValueImpl::equals(std::shared_ptr<fUML::Semantics::Values::Value>  otherValue)
+bool IntegerValueImpl::equals(std::shared_ptr<fUML::Semantics::Values::Value> otherValue)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -156,7 +156,7 @@ bool IntegerValueImpl::equals(std::shared_ptr<fUML::Semantics::Values::Value>  o
 	//end of body
 }
 
-std::shared_ptr<uml::ValueSpecification> IntegerValueImpl::specify()
+std::shared_ptr<org.eclipse.uml2.uml.ValueSpecification> IntegerValueImpl::specify()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -320,14 +320,11 @@ void IntegerValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	try
 	{
 		std::shared_ptr<fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage> package = fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance();
-
-	
 		// Add attributes
 		if ( this->eIsSet(package->getIntegerValue_Attribute_value()) )
 		{
 			saveHandler->addAttribute("value", this->getValue());
 		}
-
 	}
 	catch (std::exception& e)
 	{

@@ -39,84 +39,20 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Activity;
-}
-
-namespace uml 
-{
 	class ActivityEdge;
-}
-
-namespace uml 
-{
 	class ActivityGroup;
-}
-
-namespace uml 
-{
-	class ActivityNode;
-}
-
-namespace uml 
-{
 	class ActivityPartition;
-}
-
-namespace uml 
-{
 	class Classifier;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
-	class ControlNode;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class InterruptibleActivityRegion;
-}
-
-namespace uml 
-{
 	class Namespace;
-}
-
-namespace uml 
-{
-	class RedefinableElement;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class StructuredActivityNode;
-}
-
-namespace uml 
-{
 	class ValueSpecification;
 }
 
@@ -126,6 +62,8 @@ namespace uml
 // enum includes
 #include "uml/VisibilityKind.hpp"
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -161,14 +99,14 @@ namespace uml
 			endif
 			*/
 			 
-			virtual bool incoming_object_flow(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool incoming_object_flow(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			A JoinNode has one outgoing ActivityEdge.
 			outgoing->size() = 1
 			*/
 			 
-			virtual bool one_outgoing_edge(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool one_outgoing_edge(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			
 			//*********************************
@@ -179,14 +117,14 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			 
-			virtual bool getIsCombineDuplicate() const = 0;
+			virtual bool  getIsCombineDuplicate() const = 0;
 			
 			/*!
 			Indicates whether incoming tokens having objects with the same identity are combined into one by the JoinNode.
 			<p>From package UML::Activities.</p>
 			*/
 			 
-			virtual void setIsCombineDuplicate (bool _isCombineDuplicate)= 0; 
+			virtual void setIsCombineDuplicate (bool  _isCombineDuplicate)= 0; 
 			
 			//*********************************
 			// Reference
@@ -216,7 +154,7 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			 
-			bool m_isCombineDuplicate = true;
+			bool  m_isCombineDuplicate = true;
 			
 			
 			//*********************************

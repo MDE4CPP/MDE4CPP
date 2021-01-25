@@ -40,74 +40,19 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Behavior;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
-	class ConnectableElement;
-}
-
-namespace uml 
-{
 	class ConnectorEnd;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
-	class MultiplicityElement;
-}
-
-namespace uml 
-{
 	class Namespace;
-}
-
-namespace uml 
-{
 	class Operation;
-}
-
-namespace uml 
-{
 	class ParameterSet;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class TemplateParameter;
-}
-
-namespace uml 
-{
 	class Type;
-}
-
-namespace uml 
-{
 	class ValueSpecification;
 }
 
@@ -123,6 +68,8 @@ namespace uml
 
 #include "uml/VisibilityKind.hpp"
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -176,7 +123,7 @@ namespace uml
 			end->notEmpty() implies collaboration->notEmpty()
 			*/
 			 
-			virtual bool connector_end(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool connector_end(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			Only in and inout Parameters may have a delete effect. Only out, inout, and return Parameters may have a create effect.
@@ -185,7 +132,7 @@ namespace uml
 			(effect = ParameterEffectKind::create implies (direction = ParameterDirectionKind::out or direction = ParameterDirectionKind::inout or direction = ParameterDirectionKind::return))
 			*/
 			 
-			virtual bool in_and_out(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool in_and_out(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			 
 			virtual bool isSetDefault() = 0;
@@ -195,21 +142,21 @@ namespace uml
 			isException implies (direction <> ParameterDirectionKind::_'in' and direction <> ParameterDirectionKind::inout)
 			*/
 			 
-			virtual bool not_exception(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool not_exception(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			Parameters typed by DataTypes cannot have an effect.
 			(type.oclIsKindOf(DataType)) implies (effect = null)
 			*/
 			 
-			virtual bool object_effect(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool object_effect(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			Reentrant behaviors cannot have stream Parameters.
 			(isStream and behavior <> null) implies not behavior.isReentrant
 			*/
 			 
-			virtual bool reentrant_behaviors(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool reentrant_behaviors(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			Sets the default value for this parameter to the specified Boolean value.
@@ -252,7 +199,7 @@ namespace uml
 			not (isException and isStream)
 			*/
 			 
-			virtual bool stream_and_exception(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool stream_and_exception(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			 
 			virtual void unsetDefault() = 0;
@@ -266,66 +213,66 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual std::string getDefault() const = 0;
+			virtual std::string  getDefault() const = 0;
 			
 			/*!
 			A String that represents a value to be used when no argument is supplied for the Parameter.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual void setDefault (std::string _default)= 0; 
+			virtual void setDefault (std::string  _default)= 0; 
 			/*!
 			Indicates whether a parameter is being sent into or out of a behavioral element.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual uml::ParameterDirectionKind getDirection() const = 0;
+			virtual uml::ParameterDirectionKind  getDirection() const = 0;
 			
 			/*!
 			Indicates whether a parameter is being sent into or out of a behavioral element.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual void setDirection (uml::ParameterDirectionKind _direction)= 0; 
+			virtual void setDirection (uml::ParameterDirectionKind  _direction)= 0; 
 			/*!
 			Specifies the effect that executions of the owner of the Parameter have on objects passed in or out of the parameter.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual uml::ParameterEffectKind getEffect() const = 0;
+			virtual uml::ParameterEffectKind  getEffect() const = 0;
 			
 			/*!
 			Specifies the effect that executions of the owner of the Parameter have on objects passed in or out of the parameter.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual void setEffect (uml::ParameterEffectKind _effect)= 0; 
+			virtual void setEffect (uml::ParameterEffectKind  _effect)= 0; 
 			/*!
 			Tells whether an output parameter may emit a value to the exclusion of the other outputs.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual bool getIsException() const = 0;
+			virtual bool  getIsException() const = 0;
 			
 			/*!
 			Tells whether an output parameter may emit a value to the exclusion of the other outputs.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual void setIsException (bool _isException)= 0; 
+			virtual void setIsException (bool  _isException)= 0; 
 			/*!
 			Tells whether an input parameter may accept values while its behavior is executing, or whether an output parameter may post values while the behavior is executing.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual bool getIsStream() const = 0;
+			virtual bool  getIsStream() const = 0;
 			
 			/*!
 			Tells whether an input parameter may accept values while its behavior is executing, or whether an output parameter may post values while the behavior is executing.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual void setIsStream (bool _isStream)= 0; 
+			virtual void setIsStream (bool  _isStream)= 0; 
 			
 			//*********************************
 			// Reference
@@ -377,31 +324,31 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			std::string m_default = "";
+			std::string  m_default = "";
 			/*!
 			Indicates whether a parameter is being sent into or out of a behavioral element.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			uml::ParameterDirectionKind m_direction = ParameterDirectionKind::IN;
+			uml::ParameterDirectionKind  m_direction = ParameterDirectionKind::IN;
 			/*!
 			Specifies the effect that executions of the owner of the Parameter have on objects passed in or out of the parameter.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			uml::ParameterEffectKind m_effect = ParameterEffectKind::CREATE;
+			uml::ParameterEffectKind  m_effect = ParameterEffectKind::CREATE;
 			/*!
 			Tells whether an output parameter may emit a value to the exclusion of the other outputs.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			bool m_isException = false;
+			bool  m_isException = false;
 			/*!
 			Tells whether an input parameter may accept values while its behavior is executing, or whether an output parameter may post values while the behavior is executing.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			bool m_isStream = false;
+			bool  m_isStream = false;
 			
 			
 			//*********************************

@@ -158,12 +158,12 @@ std::shared_ptr<EClass> EPackageImpl::eStaticClass() const
 /*
 Getter & Setter for attribute nsPrefix
 */
-std::string EPackageImpl::getNsPrefix() const 
+std::string  EPackageImpl::getNsPrefix() const 
 {
 	return m_nsPrefix;
 }
 
-void EPackageImpl::setNsPrefix(std::string _nsPrefix)
+void EPackageImpl::setNsPrefix(std::string  _nsPrefix)
 {
 	m_nsPrefix = _nsPrefix;
 } 
@@ -173,12 +173,12 @@ void EPackageImpl::setNsPrefix(std::string _nsPrefix)
 /*
 Getter & Setter for attribute nsURI
 */
-std::string EPackageImpl::getNsURI() const 
+std::string  EPackageImpl::getNsURI() const 
 {
 	return m_nsURI;
 }
 
-void EPackageImpl::setNsURI(std::string _nsURI)
+void EPackageImpl::setNsURI(std::string  _nsURI)
 {
 	m_nsURI = _nsURI;
 } 
@@ -336,36 +336,20 @@ Any EPackageImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_ECLASSIFIERS:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ecore::EClassifier>::iterator iter = m_eClassifiers->begin();
-			Bag<ecore::EClassifier>::iterator end = m_eClassifiers->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //418
+			return eAny(getEClassifiers()); //408			
 		}
 		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_EFACTORYINSTANCE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEFactoryInstance())); //417
+			return eAny(getEFactoryInstance()); //407
 		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_ESUBPACKAGES:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ecore::EPackage>::iterator iter = m_eSubpackages->begin();
-			Bag<ecore::EPackage>::iterator end = m_eSubpackages->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //419
+			return eAny(getESubpackages()); //409			
 		}
 		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_ESUPERPACKAGE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getESuperPackage().lock())); //4110
+			return eAny(getESuperPackage().lock()); //4010
 		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_NSPREFIX:
-			return eAny(getNsPrefix()); //416
+			return eAny(getNsPrefix()); //406
 		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_NSURI:
-			return eAny(getNsURI()); //415
+			return eAny(getNsURI()); //405
 	}
 	return ENamedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -374,17 +358,17 @@ bool EPackageImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_ECLASSIFIERS:
-			return getEClassifiers() != nullptr; //418
+			return getEClassifiers() != nullptr; //408
 		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_EFACTORYINSTANCE:
-			return getEFactoryInstance() != nullptr; //417
+			return getEFactoryInstance() != nullptr; //407
 		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_ESUBPACKAGES:
-			return getESubpackages() != nullptr; //419
+			return getESubpackages() != nullptr; //409
 		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_ESUPERPACKAGE:
-			return getESuperPackage().lock() != nullptr; //4110
+			return getESuperPackage().lock() != nullptr; //4010
 		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_NSPREFIX:
-			return getNsPrefix() != ""; //416
+			return getNsPrefix() != ""; //406
 		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_NSURI:
-			return getNsURI() != ""; //415
+			return getNsURI() != ""; //405
 	}
 	return ENamedElementImpl::internalEIsSet(featureID);
 }
@@ -433,7 +417,7 @@ bool EPackageImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ecore::EFactory> _eFactoryInstance = std::dynamic_pointer_cast<ecore::EFactory>(_temp);
-			setEFactoryInstance(_eFactoryInstance); //417
+			setEFactoryInstance(_eFactoryInstance); //407
 			return true;
 		}
 		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_ESUBPACKAGES:
@@ -476,14 +460,14 @@ bool EPackageImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::string _nsPrefix = newValue->get<std::string>();
-			setNsPrefix(_nsPrefix); //416
+			setNsPrefix(_nsPrefix); //406
 			return true;
 		}
 		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_NSURI:
 		{
 			// BOOST CAST
 			std::string _nsURI = newValue->get<std::string>();
-			setNsURI(_nsURI); //415
+			setNsURI(_nsURI); //405
 			return true;
 		}
 	}
@@ -642,13 +626,11 @@ void EPackageImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	try
 	{
 		std::shared_ptr<ecore::ecorePackage> package = ecore::ecorePackage::eInstance();
-
 		// Save 'eClassifiers'
 		for (std::shared_ptr<ecore::EClassifier> eClassifiers : *this->getEClassifiers()) 
 		{
 			saveHandler->addReference(eClassifiers, "eClassifiers", eClassifiers->eClass() != package->getEClassifier_Class());
 		}
-	
 		// Add attributes
 		if ( this->eIsSet(package->getEPackage_Attribute_nsPrefix()) )
 		{
@@ -660,9 +642,8 @@ void EPackageImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 			saveHandler->addAttribute("nsURI", this->getNsURI());
 		}
 
-		// Add references
-		saveHandler->addReference("eFactoryInstance", this->getEFactoryInstance());
-
+	// Add references
+		saveHandler->addReference("eFactoryInstance", this->getEFactoryInstance());		 
 
 		//
 		// Add new tags (from references)

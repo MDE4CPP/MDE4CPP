@@ -89,9 +89,31 @@ void ecorePackageImpl::initializeEAnnotationContent()
 	m_eAnnotation_Class->setAbstract(false);
 	m_eAnnotation_Class->setInterface(false);
 	
+	m_eAnnotation_Attribute_details = getEAnnotation_Attribute_details();
+	m_eAnnotation_Attribute_details->setName("details");
+	
+		m_eAnnotation_Attribute_details->setEType(getEMap_Class());
+	m_eAnnotation_Attribute_details->setLowerBound(0);
+	m_eAnnotation_Attribute_details->setUpperBound(1);
+	m_eAnnotation_Attribute_details->setTransient(true);
+	m_eAnnotation_Attribute_details->setVolatile(false);
+	m_eAnnotation_Attribute_details->setChangeable(true);
+	m_eAnnotation_Attribute_details->setUnsettable(false);
+	m_eAnnotation_Attribute_details->setUnique(true);
+	m_eAnnotation_Attribute_details->setDerived(false);
+	m_eAnnotation_Attribute_details->setOrdered(true);
+	m_eAnnotation_Attribute_details->setID(false);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+		   m_eAnnotation_Attribute_details->setDefaultValueLiteral(defaultValue);
+		}
+	}
 	m_eAnnotation_Attribute_source = getEAnnotation_Attribute_source();
 	m_eAnnotation_Attribute_source->setName("source");
-	m_eAnnotation_Attribute_source->setEType(getEString_Class());
+	
+		m_eAnnotation_Attribute_source->setEType(getEString_Class());
 	m_eAnnotation_Attribute_source->setLowerBound(0);
 	m_eAnnotation_Attribute_source->setUpperBound(1);
 	m_eAnnotation_Attribute_source->setTransient(false);
@@ -128,28 +150,6 @@ void ecorePackageImpl::initializeEAnnotationContent()
 		if (!defaultValue.empty())
 		{
 			m_eAnnotation_Attribute_contents->setDefaultValueLiteral(defaultValue);
-		}				
-			//undefined otherEnd
-			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
-	}
-	m_eAnnotation_Attribute_details->setName("details");
-	m_eAnnotation_Attribute_details->setEType(getEStringToStringMapEntry_Class());
-	m_eAnnotation_Attribute_details->setLowerBound(0);
-	m_eAnnotation_Attribute_details->setUpperBound(-1);
-	m_eAnnotation_Attribute_details->setTransient(false);
-	m_eAnnotation_Attribute_details->setVolatile(false);
-	m_eAnnotation_Attribute_details->setChangeable(true);
-	m_eAnnotation_Attribute_details->setUnsettable(false);
-	m_eAnnotation_Attribute_details->setUnique(true);
-	m_eAnnotation_Attribute_details->setDerived(false);
-	m_eAnnotation_Attribute_details->setOrdered(true);
-	m_eAnnotation_Attribute_details->setContainment(true);
-	m_eAnnotation_Attribute_details->setResolveProxies(false);
-	{
-		std::string defaultValue = "";
-		if (!defaultValue.empty())
-		{
-			m_eAnnotation_Attribute_details->setDefaultValueLiteral(defaultValue);
 		}				
 			//undefined otherEnd
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
@@ -213,7 +213,8 @@ void ecorePackageImpl::initializeEAttributeContent()
 	
 	m_eAttribute_Attribute_iD = getEAttribute_Attribute_iD();
 	m_eAttribute_Attribute_iD->setName("iD");
-	m_eAttribute_Attribute_iD->setEType(getEBoolean_Class());
+	
+		m_eAttribute_Attribute_iD->setEType(getEBoolean_Class());
 	m_eAttribute_Attribute_iD->setLowerBound(0);
 	m_eAttribute_Attribute_iD->setUpperBound(1);
 	m_eAttribute_Attribute_iD->setTransient(false);
@@ -266,7 +267,8 @@ void ecorePackageImpl::initializeEClassContent()
 	
 	m_eClass_Attribute_abstract = getEClass_Attribute_abstract();
 	m_eClass_Attribute_abstract->setName("abstract");
-	m_eClass_Attribute_abstract->setEType(getEBoolean_Class());
+	
+		m_eClass_Attribute_abstract->setEType(getEBoolean_Class());
 	m_eClass_Attribute_abstract->setLowerBound(0);
 	m_eClass_Attribute_abstract->setUpperBound(1);
 	m_eClass_Attribute_abstract->setTransient(false);
@@ -286,7 +288,8 @@ void ecorePackageImpl::initializeEClassContent()
 	}
 	m_eClass_Attribute_interface = getEClass_Attribute_interface();
 	m_eClass_Attribute_interface->setName("interface");
-	m_eClass_Attribute_interface->setEType(getEBoolean_Class());
+	
+		m_eClass_Attribute_interface->setEType(getEBoolean_Class());
 	m_eClass_Attribute_interface->setLowerBound(0);
 	m_eClass_Attribute_interface->setUpperBound(1);
 	m_eClass_Attribute_interface->setTransient(false);
@@ -783,7 +786,8 @@ void ecorePackageImpl::initializeEClassifierContent()
 	
 	m_eClassifier_Attribute_defaultValue = getEClassifier_Attribute_defaultValue();
 	m_eClassifier_Attribute_defaultValue->setName("defaultValue");
-	m_eClassifier_Attribute_defaultValue->setEType(getEJavaObject_Class());
+	
+		m_eClassifier_Attribute_defaultValue->setEType(getEJavaObject_Class());
 	m_eClassifier_Attribute_defaultValue->setLowerBound(0);
 	m_eClassifier_Attribute_defaultValue->setUpperBound(1);
 	m_eClassifier_Attribute_defaultValue->setTransient(true);
@@ -803,7 +807,8 @@ void ecorePackageImpl::initializeEClassifierContent()
 	}
 	m_eClassifier_Attribute_instanceClass = getEClassifier_Attribute_instanceClass();
 	m_eClassifier_Attribute_instanceClass->setName("instanceClass");
-	m_eClassifier_Attribute_instanceClass->setEType(getEJavaClass_Class());
+	
+		m_eClassifier_Attribute_instanceClass->setEType(getEJavaClass_Class());
 	m_eClassifier_Attribute_instanceClass->setLowerBound(0);
 	m_eClassifier_Attribute_instanceClass->setUpperBound(1);
 	m_eClassifier_Attribute_instanceClass->setTransient(true);
@@ -823,7 +828,8 @@ void ecorePackageImpl::initializeEClassifierContent()
 	}
 	m_eClassifier_Attribute_instanceClassName = getEClassifier_Attribute_instanceClassName();
 	m_eClassifier_Attribute_instanceClassName->setName("instanceClassName");
-	m_eClassifier_Attribute_instanceClassName->setEType(getEString_Class());
+	
+		m_eClassifier_Attribute_instanceClassName->setEType(getEString_Class());
 	m_eClassifier_Attribute_instanceClassName->setLowerBound(0);
 	m_eClassifier_Attribute_instanceClassName->setUpperBound(1);
 	m_eClassifier_Attribute_instanceClassName->setTransient(false);
@@ -843,7 +849,8 @@ void ecorePackageImpl::initializeEClassifierContent()
 	}
 	m_eClassifier_Attribute_instanceTypeName = getEClassifier_Attribute_instanceTypeName();
 	m_eClassifier_Attribute_instanceTypeName->setName("instanceTypeName");
-	m_eClassifier_Attribute_instanceTypeName->setEType(getEString_Class());
+	
+		m_eClassifier_Attribute_instanceTypeName->setEType(getEString_Class());
 	m_eClassifier_Attribute_instanceTypeName->setLowerBound(0);
 	m_eClassifier_Attribute_instanceTypeName->setUpperBound(1);
 	m_eClassifier_Attribute_instanceTypeName->setTransient(false);
@@ -946,7 +953,8 @@ void ecorePackageImpl::initializeEDataTypeContent()
 	
 	m_eDataType_Attribute_serializable = getEDataType_Attribute_serializable();
 	m_eDataType_Attribute_serializable->setName("serializable");
-	m_eDataType_Attribute_serializable->setEType(getEBoolean_Class());
+	
+		m_eDataType_Attribute_serializable->setEType(getEBoolean_Class());
 	m_eDataType_Attribute_serializable->setLowerBound(0);
 	m_eDataType_Attribute_serializable->setUpperBound(1);
 	m_eDataType_Attribute_serializable->setTransient(false);
@@ -1064,7 +1072,8 @@ void ecorePackageImpl::initializeEEnumLiteralContent()
 	
 	m_eEnumLiteral_Attribute_instance = getEEnumLiteral_Attribute_instance();
 	m_eEnumLiteral_Attribute_instance->setName("instance");
-	m_eEnumLiteral_Attribute_instance->setEType(getEEnumerator_Class());
+	
+		m_eEnumLiteral_Attribute_instance->setEType(getEEnumerator_Class());
 	m_eEnumLiteral_Attribute_instance->setLowerBound(0);
 	m_eEnumLiteral_Attribute_instance->setUpperBound(1);
 	m_eEnumLiteral_Attribute_instance->setTransient(true);
@@ -1084,7 +1093,8 @@ void ecorePackageImpl::initializeEEnumLiteralContent()
 	}
 	m_eEnumLiteral_Attribute_literal = getEEnumLiteral_Attribute_literal();
 	m_eEnumLiteral_Attribute_literal->setName("literal");
-	m_eEnumLiteral_Attribute_literal->setEType(getEString_Class());
+	
+		m_eEnumLiteral_Attribute_literal->setEType(getEString_Class());
 	m_eEnumLiteral_Attribute_literal->setLowerBound(0);
 	m_eEnumLiteral_Attribute_literal->setUpperBound(1);
 	m_eEnumLiteral_Attribute_literal->setTransient(false);
@@ -1104,7 +1114,8 @@ void ecorePackageImpl::initializeEEnumLiteralContent()
 	}
 	m_eEnumLiteral_Attribute_value = getEEnumLiteral_Attribute_value();
 	m_eEnumLiteral_Attribute_value->setName("value");
-	m_eEnumLiteral_Attribute_value->setEType(getEInt_Class());
+	
+		m_eEnumLiteral_Attribute_value->setEType(getEInt_Class());
 	m_eEnumLiteral_Attribute_value->setLowerBound(0);
 	m_eEnumLiteral_Attribute_value->setUpperBound(1);
 	m_eEnumLiteral_Attribute_value->setTransient(false);
@@ -1480,7 +1491,8 @@ void ecorePackageImpl::initializeENamedElementContent()
 	
 	m_eNamedElement_Attribute_name = getENamedElement_Attribute_name();
 	m_eNamedElement_Attribute_name->setName("name");
-	m_eNamedElement_Attribute_name->setEType(getEString_Class());
+	
+		m_eNamedElement_Attribute_name->setEType(getEString_Class());
 	m_eNamedElement_Attribute_name->setLowerBound(0);
 	m_eNamedElement_Attribute_name->setUpperBound(1);
 	m_eNamedElement_Attribute_name->setTransient(false);
@@ -1511,7 +1523,8 @@ void ecorePackageImpl::initializeEObjectContent()
 	
 	m_eObject_Attribute_metaElementID = getEObject_Attribute_metaElementID();
 	m_eObject_Attribute_metaElementID->setName("metaElementID");
-	m_eObject_Attribute_metaElementID->setEType(getEInt_Class());
+	
+		m_eObject_Attribute_metaElementID->setEType(getEInt_Class());
 	m_eObject_Attribute_metaElementID->setLowerBound(0);
 	m_eObject_Attribute_metaElementID->setUpperBound(1);
 	m_eObject_Attribute_metaElementID->setTransient(false);
@@ -1796,7 +1809,8 @@ void ecorePackageImpl::initializeEOperationContent()
 	
 	m_eOperation_Attribute_operationID = getEOperation_Attribute_operationID();
 	m_eOperation_Attribute_operationID->setName("operationID");
-	m_eOperation_Attribute_operationID->setEType(getEInt_Class());
+	
+		m_eOperation_Attribute_operationID->setEType(getEInt_Class());
 	m_eOperation_Attribute_operationID->setLowerBound(0);
 	m_eOperation_Attribute_operationID->setUpperBound(1);
 	m_eOperation_Attribute_operationID->setTransient(false);
@@ -1968,7 +1982,8 @@ void ecorePackageImpl::initializeEPackageContent()
 	
 	m_ePackage_Attribute_nsPrefix = getEPackage_Attribute_nsPrefix();
 	m_ePackage_Attribute_nsPrefix->setName("nsPrefix");
-	m_ePackage_Attribute_nsPrefix->setEType(getEString_Class());
+	
+		m_ePackage_Attribute_nsPrefix->setEType(getEString_Class());
 	m_ePackage_Attribute_nsPrefix->setLowerBound(0);
 	m_ePackage_Attribute_nsPrefix->setUpperBound(1);
 	m_ePackage_Attribute_nsPrefix->setTransient(false);
@@ -1988,7 +2003,8 @@ void ecorePackageImpl::initializeEPackageContent()
 	}
 	m_ePackage_Attribute_nsURI = getEPackage_Attribute_nsURI();
 	m_ePackage_Attribute_nsURI->setName("nsURI");
-	m_ePackage_Attribute_nsURI->setEType(getEString_Class());
+	
+		m_ePackage_Attribute_nsURI->setEType(getEString_Class());
 	m_ePackage_Attribute_nsURI->setLowerBound(0);
 	m_ePackage_Attribute_nsURI->setUpperBound(1);
 	m_ePackage_Attribute_nsURI->setTransient(false);
@@ -2172,7 +2188,8 @@ void ecorePackageImpl::initializeEReferenceContent()
 	
 	m_eReference_Attribute_container = getEReference_Attribute_container();
 	m_eReference_Attribute_container->setName("container");
-	m_eReference_Attribute_container->setEType(getEBoolean_Class());
+	
+		m_eReference_Attribute_container->setEType(getEBoolean_Class());
 	m_eReference_Attribute_container->setLowerBound(0);
 	m_eReference_Attribute_container->setUpperBound(1);
 	m_eReference_Attribute_container->setTransient(true);
@@ -2192,7 +2209,8 @@ void ecorePackageImpl::initializeEReferenceContent()
 	}
 	m_eReference_Attribute_containment = getEReference_Attribute_containment();
 	m_eReference_Attribute_containment->setName("containment");
-	m_eReference_Attribute_containment->setEType(getEBoolean_Class());
+	
+		m_eReference_Attribute_containment->setEType(getEBoolean_Class());
 	m_eReference_Attribute_containment->setLowerBound(0);
 	m_eReference_Attribute_containment->setUpperBound(1);
 	m_eReference_Attribute_containment->setTransient(false);
@@ -2212,7 +2230,8 @@ void ecorePackageImpl::initializeEReferenceContent()
 	}
 	m_eReference_Attribute_resolveProxies = getEReference_Attribute_resolveProxies();
 	m_eReference_Attribute_resolveProxies->setName("resolveProxies");
-	m_eReference_Attribute_resolveProxies->setEType(getEBoolean_Class());
+	
+		m_eReference_Attribute_resolveProxies->setEType(getEBoolean_Class());
 	m_eReference_Attribute_resolveProxies->setLowerBound(0);
 	m_eReference_Attribute_resolveProxies->setUpperBound(1);
 	m_eReference_Attribute_resolveProxies->setTransient(false);
@@ -2309,7 +2328,8 @@ void ecorePackageImpl::initializeEStringToStringMapEntryContent()
 	
 	m_eStringToStringMapEntry_Attribute_key = getEStringToStringMapEntry_Attribute_key();
 	m_eStringToStringMapEntry_Attribute_key->setName("key");
-	m_eStringToStringMapEntry_Attribute_key->setEType(getEString_Class());
+	
+		m_eStringToStringMapEntry_Attribute_key->setEType(getEString_Class());
 	m_eStringToStringMapEntry_Attribute_key->setLowerBound(0);
 	m_eStringToStringMapEntry_Attribute_key->setUpperBound(1);
 	m_eStringToStringMapEntry_Attribute_key->setTransient(false);
@@ -2329,7 +2349,8 @@ void ecorePackageImpl::initializeEStringToStringMapEntryContent()
 	}
 	m_eStringToStringMapEntry_Attribute_value = getEStringToStringMapEntry_Attribute_value();
 	m_eStringToStringMapEntry_Attribute_value->setName("value");
-	m_eStringToStringMapEntry_Attribute_value->setEType(getEString_Class());
+	
+		m_eStringToStringMapEntry_Attribute_value->setEType(getEString_Class());
 	m_eStringToStringMapEntry_Attribute_value->setLowerBound(0);
 	m_eStringToStringMapEntry_Attribute_value->setUpperBound(1);
 	m_eStringToStringMapEntry_Attribute_value->setTransient(false);
@@ -2360,7 +2381,8 @@ void ecorePackageImpl::initializeEStructuralFeatureContent()
 	
 	m_eStructuralFeature_Attribute_changeable = getEStructuralFeature_Attribute_changeable();
 	m_eStructuralFeature_Attribute_changeable->setName("changeable");
-	m_eStructuralFeature_Attribute_changeable->setEType(getEBoolean_Class());
+	
+		m_eStructuralFeature_Attribute_changeable->setEType(getEBoolean_Class());
 	m_eStructuralFeature_Attribute_changeable->setLowerBound(0);
 	m_eStructuralFeature_Attribute_changeable->setUpperBound(1);
 	m_eStructuralFeature_Attribute_changeable->setTransient(false);
@@ -2380,7 +2402,8 @@ void ecorePackageImpl::initializeEStructuralFeatureContent()
 	}
 	m_eStructuralFeature_Attribute_defaultValue = getEStructuralFeature_Attribute_defaultValue();
 	m_eStructuralFeature_Attribute_defaultValue->setName("defaultValue");
-	m_eStructuralFeature_Attribute_defaultValue->setEType(getEJavaObject_Class());
+	
+		m_eStructuralFeature_Attribute_defaultValue->setEType(getEJavaObject_Class());
 	m_eStructuralFeature_Attribute_defaultValue->setLowerBound(0);
 	m_eStructuralFeature_Attribute_defaultValue->setUpperBound(1);
 	m_eStructuralFeature_Attribute_defaultValue->setTransient(true);
@@ -2400,7 +2423,8 @@ void ecorePackageImpl::initializeEStructuralFeatureContent()
 	}
 	m_eStructuralFeature_Attribute_defaultValueLiteral = getEStructuralFeature_Attribute_defaultValueLiteral();
 	m_eStructuralFeature_Attribute_defaultValueLiteral->setName("defaultValueLiteral");
-	m_eStructuralFeature_Attribute_defaultValueLiteral->setEType(getEString_Class());
+	
+		m_eStructuralFeature_Attribute_defaultValueLiteral->setEType(getEString_Class());
 	m_eStructuralFeature_Attribute_defaultValueLiteral->setLowerBound(0);
 	m_eStructuralFeature_Attribute_defaultValueLiteral->setUpperBound(1);
 	m_eStructuralFeature_Attribute_defaultValueLiteral->setTransient(false);
@@ -2420,7 +2444,8 @@ void ecorePackageImpl::initializeEStructuralFeatureContent()
 	}
 	m_eStructuralFeature_Attribute_derived = getEStructuralFeature_Attribute_derived();
 	m_eStructuralFeature_Attribute_derived->setName("derived");
-	m_eStructuralFeature_Attribute_derived->setEType(getEBoolean_Class());
+	
+		m_eStructuralFeature_Attribute_derived->setEType(getEBoolean_Class());
 	m_eStructuralFeature_Attribute_derived->setLowerBound(0);
 	m_eStructuralFeature_Attribute_derived->setUpperBound(1);
 	m_eStructuralFeature_Attribute_derived->setTransient(false);
@@ -2440,7 +2465,8 @@ void ecorePackageImpl::initializeEStructuralFeatureContent()
 	}
 	m_eStructuralFeature_Attribute_featureID = getEStructuralFeature_Attribute_featureID();
 	m_eStructuralFeature_Attribute_featureID->setName("featureID");
-	m_eStructuralFeature_Attribute_featureID->setEType(getEInt_Class());
+	
+		m_eStructuralFeature_Attribute_featureID->setEType(getEInt_Class());
 	m_eStructuralFeature_Attribute_featureID->setLowerBound(0);
 	m_eStructuralFeature_Attribute_featureID->setUpperBound(1);
 	m_eStructuralFeature_Attribute_featureID->setTransient(false);
@@ -2460,7 +2486,8 @@ void ecorePackageImpl::initializeEStructuralFeatureContent()
 	}
 	m_eStructuralFeature_Attribute_transient = getEStructuralFeature_Attribute_transient();
 	m_eStructuralFeature_Attribute_transient->setName("transient");
-	m_eStructuralFeature_Attribute_transient->setEType(getEBoolean_Class());
+	
+		m_eStructuralFeature_Attribute_transient->setEType(getEBoolean_Class());
 	m_eStructuralFeature_Attribute_transient->setLowerBound(0);
 	m_eStructuralFeature_Attribute_transient->setUpperBound(1);
 	m_eStructuralFeature_Attribute_transient->setTransient(false);
@@ -2480,7 +2507,8 @@ void ecorePackageImpl::initializeEStructuralFeatureContent()
 	}
 	m_eStructuralFeature_Attribute_unsettable = getEStructuralFeature_Attribute_unsettable();
 	m_eStructuralFeature_Attribute_unsettable->setName("unsettable");
-	m_eStructuralFeature_Attribute_unsettable->setEType(getEBoolean_Class());
+	
+		m_eStructuralFeature_Attribute_unsettable->setEType(getEBoolean_Class());
 	m_eStructuralFeature_Attribute_unsettable->setLowerBound(0);
 	m_eStructuralFeature_Attribute_unsettable->setUpperBound(1);
 	m_eStructuralFeature_Attribute_unsettable->setTransient(false);
@@ -2500,7 +2528,8 @@ void ecorePackageImpl::initializeEStructuralFeatureContent()
 	}
 	m_eStructuralFeature_Attribute_volatile = getEStructuralFeature_Attribute_volatile();
 	m_eStructuralFeature_Attribute_volatile->setName("volatile");
-	m_eStructuralFeature_Attribute_volatile->setEType(getEBoolean_Class());
+	
+		m_eStructuralFeature_Attribute_volatile->setEType(getEBoolean_Class());
 	m_eStructuralFeature_Attribute_volatile->setLowerBound(0);
 	m_eStructuralFeature_Attribute_volatile->setUpperBound(1);
 	m_eStructuralFeature_Attribute_volatile->setTransient(false);
@@ -2605,7 +2634,8 @@ void ecorePackageImpl::initializeETypedElementContent()
 	
 	m_eTypedElement_Attribute_lowerBound = getETypedElement_Attribute_lowerBound();
 	m_eTypedElement_Attribute_lowerBound->setName("lowerBound");
-	m_eTypedElement_Attribute_lowerBound->setEType(getEInt_Class());
+	
+		m_eTypedElement_Attribute_lowerBound->setEType(getEInt_Class());
 	m_eTypedElement_Attribute_lowerBound->setLowerBound(0);
 	m_eTypedElement_Attribute_lowerBound->setUpperBound(1);
 	m_eTypedElement_Attribute_lowerBound->setTransient(false);
@@ -2625,7 +2655,8 @@ void ecorePackageImpl::initializeETypedElementContent()
 	}
 	m_eTypedElement_Attribute_many = getETypedElement_Attribute_many();
 	m_eTypedElement_Attribute_many->setName("many");
-	m_eTypedElement_Attribute_many->setEType(getEBoolean_Class());
+	
+		m_eTypedElement_Attribute_many->setEType(getEBoolean_Class());
 	m_eTypedElement_Attribute_many->setLowerBound(0);
 	m_eTypedElement_Attribute_many->setUpperBound(1);
 	m_eTypedElement_Attribute_many->setTransient(true);
@@ -2645,7 +2676,8 @@ void ecorePackageImpl::initializeETypedElementContent()
 	}
 	m_eTypedElement_Attribute_ordered = getETypedElement_Attribute_ordered();
 	m_eTypedElement_Attribute_ordered->setName("ordered");
-	m_eTypedElement_Attribute_ordered->setEType(getEBoolean_Class());
+	
+		m_eTypedElement_Attribute_ordered->setEType(getEBoolean_Class());
 	m_eTypedElement_Attribute_ordered->setLowerBound(0);
 	m_eTypedElement_Attribute_ordered->setUpperBound(1);
 	m_eTypedElement_Attribute_ordered->setTransient(false);
@@ -2665,7 +2697,8 @@ void ecorePackageImpl::initializeETypedElementContent()
 	}
 	m_eTypedElement_Attribute_required = getETypedElement_Attribute_required();
 	m_eTypedElement_Attribute_required->setName("required");
-	m_eTypedElement_Attribute_required->setEType(getEBoolean_Class());
+	
+		m_eTypedElement_Attribute_required->setEType(getEBoolean_Class());
 	m_eTypedElement_Attribute_required->setLowerBound(0);
 	m_eTypedElement_Attribute_required->setUpperBound(1);
 	m_eTypedElement_Attribute_required->setTransient(true);
@@ -2685,7 +2718,8 @@ void ecorePackageImpl::initializeETypedElementContent()
 	}
 	m_eTypedElement_Attribute_unique = getETypedElement_Attribute_unique();
 	m_eTypedElement_Attribute_unique->setName("unique");
-	m_eTypedElement_Attribute_unique->setEType(getEBoolean_Class());
+	
+		m_eTypedElement_Attribute_unique->setEType(getEBoolean_Class());
 	m_eTypedElement_Attribute_unique->setLowerBound(0);
 	m_eTypedElement_Attribute_unique->setUpperBound(1);
 	m_eTypedElement_Attribute_unique->setTransient(false);
@@ -2705,7 +2739,8 @@ void ecorePackageImpl::initializeETypedElementContent()
 	}
 	m_eTypedElement_Attribute_upperBound = getETypedElement_Attribute_upperBound();
 	m_eTypedElement_Attribute_upperBound->setName("upperBound");
-	m_eTypedElement_Attribute_upperBound->setEType(getEInt_Class());
+	
+		m_eTypedElement_Attribute_upperBound->setEType(getEInt_Class());
 	m_eTypedElement_Attribute_upperBound->setLowerBound(0);
 	m_eTypedElement_Attribute_upperBound->setUpperBound(1);
 	m_eTypedElement_Attribute_upperBound->setTransient(false);
@@ -2792,8 +2827,6 @@ void ecorePackageImpl::initializePackageEDataTypes()
 	m_eChar_Class->setSerializable(true);
 	m_eCharacterObject_Class->setName("ECharacterObject");
 	m_eCharacterObject_Class->setSerializable(true);
-	m_eDate_Class->setName("EDate");
-	m_eDate_Class->setSerializable(true);
 	m_eDiagnosticChain_Class->setName("EDiagnosticChain");
 	m_eDiagnosticChain_Class->setSerializable(false);
 	m_eDouble_Class->setName("EDouble");

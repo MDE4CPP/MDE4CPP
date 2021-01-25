@@ -48,13 +48,13 @@ namespace fUML::Semantics::Actions
 			// Operations
 			//*********************************
 			 
-			virtual void destroyObject(std::shared_ptr<fUML::Semantics::Values::Value>  value,bool isDestroyLinks,bool isDestroyOwnedObjects) ;
+			virtual void destroyObject(std::shared_ptr<fUML::Semantics::Values::Value> value,bool isDestroyLinks,bool isDestroyOwnedObjects) ;
 			
 			 
 			virtual void doAction() ;
 			
 			 
-			virtual bool objectIsComposite(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference>  reference,std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link>  link) ;
+			virtual bool objectIsComposite(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> reference,std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> link) ;
 			
 			
 			
@@ -67,18 +67,18 @@ namespace fUML::Semantics::Actions
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<uml::DestroyObjectAction > getDestroyObjectAction() const ;
+			virtual std::shared_ptr<org.eclipse.uml2.uml.DestroyObjectAction > getDestroyObjectAction() const ;
 			
 			
-			virtual void setDestroyObjectAction(std::shared_ptr<uml::DestroyObjectAction> _destroyObjectAction) ;
+			virtual void setDestroyObjectAction(std::shared_ptr<org.eclipse.uml2.uml.DestroyObjectAction> _destroyObjectAction) ;
 			
 			/*Additional Setter for 'ActionActivation::action' redefined by reference 'destroyObjectAction'*/
 			
-			virtual void setAction(std::shared_ptr<uml::Action> _action) ;
+			virtual void setAction(std::shared_ptr<org.eclipse.uml2.uml.Action> _action) ;
 			
 			/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'destroyObjectAction'*/
 			
-			virtual void setNode(std::shared_ptr<uml::ActivityNode> _node) ;
+			virtual void setNode(std::shared_ptr<org.eclipse.uml2.uml.ActivityNode> _node) ;
 			
 							
 			

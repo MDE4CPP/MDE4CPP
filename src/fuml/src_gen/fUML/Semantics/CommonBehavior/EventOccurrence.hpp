@@ -36,17 +36,15 @@ namespace fUML
 	class fUMLFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace fUML::Semantics::CommonBehavior 
 {
 	class ParameterValue;
 }
-
 namespace fUML::Semantics::StructuredClassifiers 
 {
 	class Reference;
 }
-
 namespace uml 
 {
 	class Trigger;
@@ -57,6 +55,8 @@ namespace uml
 // enum includes
 
 #include "ecore/EModelElement.hpp"
+
+//Includes from codegen annotation
 
 //*********************************
 namespace fUML::Semantics::CommonBehavior 
@@ -89,13 +89,13 @@ namespace fUML::Semantics::CommonBehavior
 			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > getParameterValues() = 0;
 			
 			 
-			virtual bool match(std::shared_ptr<uml::Trigger>  trigger) = 0;
+			virtual bool match(std::shared_ptr<org.eclipse.uml2.uml.Trigger> trigger) = 0;
 			
 			 
-			virtual bool matchAny(std::shared_ptr<Bag<uml::Trigger> >  triggers) = 0;
+			virtual bool matchAny(std::shared_ptr<Bag<org.eclipse.uml2.uml.Trigger> > triggers) = 0;
 			
 			 
-			virtual void sendTo(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference>  target) = 0;
+			virtual void sendTo(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> target) = 0;
 			
 			
 			//*********************************

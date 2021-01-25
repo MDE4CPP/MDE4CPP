@@ -148,7 +148,7 @@ Any AcceptEventActionEventAccepterImpl::eGet(int featureID, bool resolve, bool c
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::ACCEPTEVENTACTIONEVENTACCEPTER_ATTRIBUTE_ACTIONACTIVATION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getActionActivation())); //40
+			return eAny(getActionActivation()); //40
 	}
 	return fUML::Semantics::CommonBehavior::EventAccepterImpl::eGet(featureID, resolve, coreType);
 }
@@ -265,11 +265,8 @@ void AcceptEventActionEventAccepterImpl::saveContent(std::shared_ptr<persistence
 	{
 		std::shared_ptr<fUML::Semantics::Actions::ActionsPackage> package = fUML::Semantics::Actions::ActionsPackage::eInstance();
 
-	
-
-		// Add references
-		saveHandler->addReference("actionActivation", this->getActionActivation());
-
+	// Add references
+		saveHandler->addReference("actionActivation", this->getActionActivation());		 
 	}
 	catch (std::exception& e)
 	{

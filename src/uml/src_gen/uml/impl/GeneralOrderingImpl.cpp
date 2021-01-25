@@ -151,7 +151,7 @@ std::shared_ptr<ecore::EClass> GeneralOrderingImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool GeneralOrderingImpl::irreflexive_transitive_closure(Any diagnostics,std::map <   Any, Any >  context)
+bool GeneralOrderingImpl::irreflexive_transitive_closure(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -249,9 +249,9 @@ Any GeneralOrderingImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::GENERALORDERING_ATTRIBUTE_AFTER:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getAfter())); //1089
+			return eAny(getAfter()); //1089
 		case uml::umlPackage::GENERALORDERING_ATTRIBUTE_BEFORE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getBefore())); //10810
+			return eAny(getBefore()); //10810
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -403,12 +403,9 @@ void GeneralOrderingImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
-	
-
-		// Add references
-		saveHandler->addReference("after", this->getAfter());
-		saveHandler->addReference("before", this->getBefore());
-
+	// Add references
+		saveHandler->addReference("after", this->getAfter());		 
+		saveHandler->addReference("before", this->getBefore());		 
 	}
 	catch (std::exception& e)
 	{

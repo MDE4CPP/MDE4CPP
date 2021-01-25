@@ -39,139 +39,31 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Action;
-}
-
-namespace uml 
-{
 	class Activity;
-}
-
-namespace uml 
-{
 	class ActivityEdge;
-}
-
-namespace uml 
-{
 	class ActivityGroup;
-}
-
-namespace uml 
-{
-	class ActivityNode;
-}
-
-namespace uml 
-{
 	class ActivityPartition;
-}
-
-namespace uml 
-{
 	class Behavior;
-}
-
-namespace uml 
-{
 	class CallAction;
-}
-
-namespace uml 
-{
 	class Classifier;
-}
-
-namespace uml 
-{
 	class ClearStructuralFeatureAction;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
 	class CreateObjectAction;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class InterruptibleActivityRegion;
-}
-
-namespace uml 
-{
 	class Namespace;
-}
-
-namespace uml 
-{
-	class Pin;
-}
-
-namespace uml 
-{
 	class ReadSelfAction;
-}
-
-namespace uml 
-{
 	class ReadStructuralFeatureAction;
-}
-
-namespace uml 
-{
-	class RedefinableElement;
-}
-
-namespace uml 
-{
 	class State;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class StructuredActivityNode;
-}
-
-namespace uml 
-{
 	class Type;
-}
-
-namespace uml 
-{
 	class ValueSpecification;
-}
-
-namespace uml 
-{
 	class ValueSpecificationAction;
-}
-
-namespace uml 
-{
 	class WriteStructuralFeatureAction;
 }
 
@@ -183,6 +75,8 @@ namespace uml
 
 #include "uml/VisibilityKind.hpp"
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -267,7 +161,7 @@ namespace uml
 				action.oclAsType(StructuredActivityNode).allOwnedNodes()->includesAll(incoming.source)
 			*/
 			 
-			virtual bool incoming_edges_structured_only(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool incoming_edges_structured_only(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			
 			//*********************************

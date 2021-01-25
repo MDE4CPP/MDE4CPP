@@ -247,12 +247,12 @@ std::shared_ptr<ecore::EClass> ObjectNodeImpl::eStaticClass() const
 /*
 Getter & Setter for attribute isControlType
 */
-bool ObjectNodeImpl::getIsControlType() const 
+bool  ObjectNodeImpl::getIsControlType() const 
 {
 	return m_isControlType;
 }
 
-void ObjectNodeImpl::setIsControlType(bool _isControlType)
+void ObjectNodeImpl::setIsControlType(bool  _isControlType)
 {
 	m_isControlType = _isControlType;
 } 
@@ -262,12 +262,12 @@ void ObjectNodeImpl::setIsControlType(bool _isControlType)
 /*
 Getter & Setter for attribute ordering
 */
-uml::ObjectNodeOrderingKind ObjectNodeImpl::getOrdering() const 
+uml::ObjectNodeOrderingKind  ObjectNodeImpl::getOrdering() const 
 {
 	return m_ordering;
 }
 
-void ObjectNodeImpl::setOrdering(uml::ObjectNodeOrderingKind _ordering)
+void ObjectNodeImpl::setOrdering(uml::ObjectNodeOrderingKind  _ordering)
 {
 	m_ordering = _ordering;
 } 
@@ -277,19 +277,19 @@ void ObjectNodeImpl::setOrdering(uml::ObjectNodeOrderingKind _ordering)
 //*********************************
 // Operations
 //*********************************
-bool ObjectNodeImpl::input_output_parameter(Any diagnostics,std::map <   Any, Any >  context)
+bool ObjectNodeImpl::input_output_parameter(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ObjectNodeImpl::object_flow_edges(Any diagnostics,std::map <   Any, Any >  context)
+bool ObjectNodeImpl::object_flow_edges(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ObjectNodeImpl::selection_behavior(Any diagnostics,std::map <   Any, Any >  context)
+bool ObjectNodeImpl::selection_behavior(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -448,24 +448,16 @@ Any ObjectNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_INSTATE:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::State>::iterator iter = m_inState->begin();
-			Bag<uml::State>::iterator end = m_inState->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //16021
+			return eAny(getInState()); //16021			
 		}
 		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_ISCONTROLTYPE:
 			return eAny(getIsControlType()); //16022
 		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_ORDERING:
 			return eAny(getOrdering()); //16023
 		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_SELECTION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSelection())); //16024
+			return eAny(getSelection()); //16024
 		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_UPPERBOUND:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getUpperBound())); //16025
+			return eAny(getUpperBound()); //16025
 	}
 	Any result;
 	result = ActivityNodeImpl::eGet(featureID, resolve, coreType);
@@ -619,7 +611,7 @@ void ObjectNodeImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLo
 		iter = attr_list.find("ordering");
 		if ( iter != attr_list.end() )
 		{
-			uml::ObjectNodeOrderingKind value = ObjectNodeOrderingKind::FIFO;
+			uml::ObjectNodeOrderingKind  value = ObjectNodeOrderingKind::FIFO;
 			std::string literal = iter->second;
 			if (literal == "unordered")
 			{
@@ -765,14 +757,12 @@ void ObjectNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'upperBound'
 		std::shared_ptr<uml::ValueSpecification > upperBound = this->getUpperBound();
 		if (upperBound != nullptr)
 		{
 			saveHandler->addReference(upperBound, "upperBound", upperBound->eClass() != package->getValueSpecification_Class());
 		}
-	
 		// Add attributes
 		if ( this->eIsSet(package->getObjectNode_Attribute_isControlType()) )
 		{
@@ -781,7 +771,7 @@ void ObjectNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 
 		if ( this->eIsSet(package->getObjectNode_Attribute_ordering()) )
 		{
-			uml::ObjectNodeOrderingKind value = this->getOrdering();
+			uml::ObjectNodeOrderingKind  value = this->getOrdering();
 			std::string literal = "";
 			if (value == ObjectNodeOrderingKind::UNORDERED)
 			{
@@ -802,14 +792,9 @@ void ObjectNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 			saveHandler->addAttribute("ordering", literal);
 		}
 
-		// Add references
-		std::shared_ptr<Bag<uml::State>> inState_list = this->getInState();
-		for (std::shared_ptr<uml::State > object : *inState_list)
-		{ 
-			saveHandler->addReferences("inState", object);
-		}
-		saveHandler->addReference("selection", this->getSelection());
-
+	// Add references
+		saveHandler->addReferences<uml::State>("inState", this->getInState());	
+		saveHandler->addReference("selection", this->getSelection());		 
 	}
 	catch (std::exception& e)
 	{

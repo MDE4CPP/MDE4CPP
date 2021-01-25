@@ -39,59 +39,15 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Classifier;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class Namespace;
-}
-
-namespace uml 
-{
-	class RedefinableElement;
-}
-
-namespace uml 
-{
-	class RedefinableTemplateSignature;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class TemplateParameter;
-}
-
-namespace uml 
-{
-	class TemplateSignature;
-}
-
-namespace uml 
-{
 	class TemplateableElement;
 }
 
@@ -103,6 +59,8 @@ namespace uml
 // enum includes
 #include "uml/VisibilityKind.hpp"
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -144,7 +102,7 @@ namespace uml
 			classifier.allParents()->forAll(c | c.ownedTemplateSignature->notEmpty() implies self->closure(extendedSignature)->includes(c.ownedTemplateSignature))
 			*/
 			 
-			virtual bool redefines_parents(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool redefines_parents(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			
 			//*********************************

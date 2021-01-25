@@ -39,89 +39,20 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Classifier;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
 	class Constraint;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class ElementImport;
-}
-
-namespace uml 
-{
-	class NamedElement;
-}
-
-namespace uml 
-{
-	class Namespace;
-}
-
-namespace uml 
-{
 	class PackageImport;
-}
-
-namespace uml 
-{
 	class PackageableElement;
-}
-
-namespace uml 
-{
-	class RedefinableElement;
-}
-
-namespace uml 
-{
-	class Region;
-}
-
-namespace uml 
-{
 	class State;
-}
-
-namespace uml 
-{
 	class StateMachine;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class Transition;
-}
-
-namespace uml 
-{
 	class Vertex;
 }
 
@@ -133,6 +64,8 @@ namespace uml
 // enum includes
 #include "uml/VisibilityKind.hpp"
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -209,7 +142,7 @@ namespace uml
 			   select(kind = PseudostateKind::deepHistory)->size() <= 1
 			*/
 			 
-			virtual bool deep_history_vertex(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool deep_history_vertex(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			A Region can have at most one initial Vertex.
@@ -217,14 +150,14 @@ namespace uml
 			  select(kind = PseudostateKind::initial)->size() <= 1
 			*/
 			 
-			virtual bool initial_vertex(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool initial_vertex(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			If a Region is owned by a StateMachine, then it cannot also be owned by a State and vice versa.
 			(stateMachine <> null implies state = null) and (state <> null implies stateMachine = null)
 			*/
 			 
-			virtual bool owned(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool owned(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			The redefinition context of a Region is the nearest containing StateMachine.
@@ -245,7 +178,7 @@ namespace uml
 			  select(kind = PseudostateKind::shallowHistory)->size() <= 1
 			*/
 			 
-			virtual bool shallow_history_vertex(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool shallow_history_vertex(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			
 			//*********************************

@@ -70,14 +70,14 @@ namespace uml
 			deployment->forAll (location.deployedElement->forAll (oclIsKindOf(Component)))
 			*/
 			 
-			virtual bool deployed_elements(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool deployed_elements(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			The DeploymentTarget of a DeploymentSpecification is a kind of ExecutionEnvironment.
 			deployment->forAll (location.oclIsKindOf(ExecutionEnvironment))
 			*/
 			 
-			virtual bool deployment_target(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool deployment_target(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			
@@ -89,27 +89,27 @@ namespace uml
 			<p>From package UML::Deployments.</p>
 			*/
 			 
-			virtual std::string getDeploymentLocation() const ;
+			virtual std::string  getDeploymentLocation() const ;
 			
 			/*!
 			The location where an Artifact is deployed onto a Node. This is typically a 'directory' or 'memory address.'
 			<p>From package UML::Deployments.</p>
 			*/
 			 
-			virtual void setDeploymentLocation (std::string _deploymentLocation); 
+			virtual void setDeploymentLocation (std::string  _deploymentLocation); 
 			/*!
 			The location where a component Artifact executes. This may be a local or remote location.
 			<p>From package UML::Deployments.</p>
 			*/
 			 
-			virtual std::string getExecutionLocation() const ;
+			virtual std::string  getExecutionLocation() const ;
 			
 			/*!
 			The location where a component Artifact executes. This may be a local or remote location.
 			<p>From package UML::Deployments.</p>
 			*/
 			 
-			virtual void setExecutionLocation (std::string _executionLocation); 
+			virtual void setExecutionLocation (std::string  _executionLocation); 
 			
 			
 			//*********************************

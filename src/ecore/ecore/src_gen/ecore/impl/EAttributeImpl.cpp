@@ -159,12 +159,12 @@ std::shared_ptr<EClass> EAttributeImpl::eStaticClass() const
 /*
 Getter & Setter for attribute iD
 */
-bool EAttributeImpl::isID() const 
+bool  EAttributeImpl::isID() const 
 {
 	return m_iD;
 }
 
-void EAttributeImpl::setID(bool _iD)
+void EAttributeImpl::setID(bool  _iD)
 {
 	m_iD = _iD;
 } 
@@ -243,7 +243,7 @@ Any EAttributeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ecore::ecorePackage::EATTRIBUTE_ATTRIBUTE_EATTRIBUTETYPE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEAttributeType())); //223
+			return eAny(getEAttributeType()); //223
 		case ecore::ecorePackage::EATTRIBUTE_ATTRIBUTE_ID:
 			return eAny(isID()); //222
 	}
@@ -362,14 +362,11 @@ void EAttributeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	try
 	{
 		std::shared_ptr<ecore::ecorePackage> package = ecore::ecorePackage::eInstance();
-
-	
 		// Add attributes
 		if ( this->eIsSet(package->getEAttribute_Attribute_iD()) )
 		{
 			saveHandler->addAttribute("iD", this->isID());
 		}
-
 	}
 	catch (std::exception& e)
 	{

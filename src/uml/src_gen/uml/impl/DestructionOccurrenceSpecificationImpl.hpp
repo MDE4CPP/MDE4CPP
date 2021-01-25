@@ -65,7 +65,7 @@ namespace uml
 			in peerEvents->last() = self
 			*/
 			 
-			virtual bool no_occurrence_specifications_below(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool no_occurrence_specifications_below(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			

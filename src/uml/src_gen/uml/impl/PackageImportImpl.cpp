@@ -140,12 +140,12 @@ std::shared_ptr<ecore::EClass> PackageImportImpl::eStaticClass() const
 /*
 Getter & Setter for attribute visibility
 */
-uml::VisibilityKind PackageImportImpl::getVisibility() const 
+uml::VisibilityKind  PackageImportImpl::getVisibility() const 
 {
 	return m_visibility;
 }
 
-void PackageImportImpl::setVisibility(uml::VisibilityKind _visibility)
+void PackageImportImpl::setVisibility(uml::VisibilityKind  _visibility)
 {
 	m_visibility = _visibility;
 } 
@@ -155,7 +155,7 @@ void PackageImportImpl::setVisibility(uml::VisibilityKind _visibility)
 //*********************************
 // Operations
 //*********************************
-bool PackageImportImpl::public_or_private(Any diagnostics,std::map <   Any, Any >  context)
+bool PackageImportImpl::public_or_private(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -308,9 +308,9 @@ Any PackageImportImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::PACKAGEIMPORT_ATTRIBUTE_IMPORTEDPACKAGE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getImportedPackage())); //1716
+			return eAny(getImportedPackage()); //1716
 		case uml::umlPackage::PACKAGEIMPORT_ATTRIBUTE_IMPORTINGNAMESPACE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getImportingNamespace().lock())); //1717
+			return eAny(getImportingNamespace().lock()); //1717
 		case uml::umlPackage::PACKAGEIMPORT_ATTRIBUTE_VISIBILITY:
 			return eAny(getVisibility()); //1718
 	}
@@ -389,7 +389,7 @@ void PackageImportImpl::loadAttributes(std::shared_ptr<persistence::interfaces::
 		iter = attr_list.find("visibility");
 		if ( iter != attr_list.end() )
 		{
-			uml::VisibilityKind value = VisibilityKind::PUBLIC;
+			uml::VisibilityKind  value = VisibilityKind::PUBLIC;
 			std::string literal = iter->second;
 			if (literal == "public")
 			{
@@ -492,12 +492,10 @@ void PackageImportImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
 		// Add attributes
 		if ( this->eIsSet(package->getPackageImport_Attribute_visibility()) )
 		{
-			uml::VisibilityKind value = this->getVisibility();
+			uml::VisibilityKind  value = this->getVisibility();
 			std::string literal = "";
 			if (value == VisibilityKind::PUBLIC)
 			{
@@ -518,9 +516,8 @@ void PackageImportImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 			saveHandler->addAttribute("visibility", literal);
 		}
 
-		// Add references
-		saveHandler->addReference("importedPackage", this->getImportedPackage());
-
+	// Add references
+		saveHandler->addReference("importedPackage", this->getImportedPackage());		 
 	}
 	catch (std::exception& e)
 	{

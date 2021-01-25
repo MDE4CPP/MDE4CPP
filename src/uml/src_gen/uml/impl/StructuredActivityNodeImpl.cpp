@@ -408,12 +408,12 @@ std::shared_ptr<ecore::EClass> StructuredActivityNodeImpl::eStaticClass() const
 /*
 Getter & Setter for attribute mustIsolate
 */
-bool StructuredActivityNodeImpl::getMustIsolate() const 
+bool  StructuredActivityNodeImpl::getMustIsolate() const 
 {
 	return m_mustIsolate;
 }
 
-void StructuredActivityNodeImpl::setMustIsolate(bool _mustIsolate)
+void StructuredActivityNodeImpl::setMustIsolate(bool  _mustIsolate)
 {
 	m_mustIsolate = _mustIsolate;
 } 
@@ -423,19 +423,19 @@ void StructuredActivityNodeImpl::setMustIsolate(bool _mustIsolate)
 //*********************************
 // Operations
 //*********************************
-bool StructuredActivityNodeImpl::edges(Any diagnostics,std::map <   Any, Any >  context)
+bool StructuredActivityNodeImpl::edges(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool StructuredActivityNodeImpl::input_pin_edges(Any diagnostics,std::map <   Any, Any >  context)
+bool StructuredActivityNodeImpl::input_pin_edges(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool StructuredActivityNodeImpl::output_pin_edges(Any diagnostics,std::map <   Any, Any >  context)
+bool StructuredActivityNodeImpl::output_pin_edges(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -811,65 +811,25 @@ Any StructuredActivityNodeImpl::eGet(int featureID, bool resolve, bool coreType)
 	{
 		case uml::umlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_EDGE:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ActivityEdge>::iterator iter = m_edge->begin();
-			Bag<uml::ActivityEdge>::iterator end = m_edge->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //22738
+			return eAny(getEdge()); //22738			
 		}
 		case uml::umlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_MUSTISOLATE:
 			return eAny(getMustIsolate()); //22739
 		case uml::umlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_NODE:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ActivityNode>::iterator iter = m_node->begin();
-			Bag<uml::ActivityNode>::iterator end = m_node->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //22743
+			return eAny(getNode()); //22743			
 		}
 		case uml::umlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_STRUCTUREDNODEINPUT:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::InputPin>::iterator iter = m_structuredNodeInput->begin();
-			Bag<uml::InputPin>::iterator end = m_structuredNodeInput->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //22740
+			return eAny(getStructuredNodeInput()); //22740			
 		}
 		case uml::umlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_STRUCTUREDNODEOUTPUT:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::OutputPin>::iterator iter = m_structuredNodeOutput->begin();
-			Bag<uml::OutputPin>::iterator end = m_structuredNodeOutput->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //22741
+			return eAny(getStructuredNodeOutput()); //22741			
 		}
 		case uml::umlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_VARIABLE:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Variable>::iterator iter = m_variable->begin();
-			Bag<uml::Variable>::iterator end = m_variable->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //22742
+			return eAny(getVariable()); //22742			
 		}
 	}
 	Any result;
@@ -1312,7 +1272,6 @@ void StructuredActivityNodeImpl::saveContent(std::shared_ptr<persistence::interf
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'edge'
 		for (std::shared_ptr<uml::ActivityEdge> edge : *this->getEdge()) 
 		{
@@ -1342,13 +1301,11 @@ void StructuredActivityNodeImpl::saveContent(std::shared_ptr<persistence::interf
 		{
 			saveHandler->addReference(variable, "variable", variable->eClass() != package->getVariable_Class());
 		}
-	
 		// Add attributes
 		if ( this->eIsSet(package->getStructuredActivityNode_Attribute_mustIsolate()) )
 		{
 			saveHandler->addAttribute("mustIsolate", this->getMustIsolate());
 		}
-
 	}
 	catch (std::exception& e)
 	{

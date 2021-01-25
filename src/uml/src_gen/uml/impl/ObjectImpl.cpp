@@ -100,25 +100,25 @@ std::shared_ptr<ecore::EClass> ObjectImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-Any ObjectImpl::get(std::shared_ptr<uml::Property>  property) const
+Any ObjectImpl::get(std::shared_ptr<uml::Property> property) const
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Object> > ObjectImpl::invoke(std::shared_ptr<uml::Operation>  op,std::shared_ptr<Bag<uml::Argument> >  arguments)
+std::shared_ptr<Bag<uml::Object> > ObjectImpl::invoke(std::shared_ptr<uml::Operation> op,std::shared_ptr<Bag<uml::Argument> > arguments)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void ObjectImpl::set(std::shared_ptr<uml::Property>  property,Any value)
+void ObjectImpl::set(std::shared_ptr<uml::Property> property,Any value)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void ObjectImpl::unset(std::shared_ptr<uml::Property>  property)
+void ObjectImpl::unset(std::shared_ptr<uml::Property> property)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -224,9 +224,6 @@ void ObjectImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

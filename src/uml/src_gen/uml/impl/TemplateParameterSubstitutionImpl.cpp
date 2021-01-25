@@ -141,7 +141,7 @@ std::shared_ptr<ecore::EClass> TemplateParameterSubstitutionImpl::eStaticClass()
 //*********************************
 // Operations
 //*********************************
-bool TemplateParameterSubstitutionImpl::must_be_compatible(Any diagnostics,std::map <   Any, Any >  context)
+bool TemplateParameterSubstitutionImpl::must_be_compatible(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -271,13 +271,13 @@ Any TemplateParameterSubstitutionImpl::eGet(int featureID, bool resolve, bool co
 	switch(featureID)
 	{
 		case uml::umlPackage::TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_ACTUAL:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getActual())); //2323
+			return eAny(getActual()); //2323
 		case uml::umlPackage::TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_FORMAL:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getFormal())); //2324
+			return eAny(getFormal()); //2324
 		case uml::umlPackage::TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_OWNEDACTUAL:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOwnedActual())); //2325
+			return eAny(getOwnedActual()); //2325
 		case uml::umlPackage::TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_TEMPLATEBINDING:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getTemplateBinding().lock())); //2326
+			return eAny(getTemplateBinding().lock()); //2326
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -484,19 +484,16 @@ void TemplateParameterSubstitutionImpl::saveContent(std::shared_ptr<persistence:
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'ownedActual'
 		std::shared_ptr<uml::ParameterableElement > ownedActual = this->getOwnedActual();
 		if (ownedActual != nullptr)
 		{
 			saveHandler->addReference(ownedActual, "ownedActual", ownedActual->eClass() != package->getParameterableElement_Class());
 		}
-	
 
-		// Add references
-		saveHandler->addReference("actual", this->getActual());
-		saveHandler->addReference("formal", this->getFormal());
-
+	// Add references
+		saveHandler->addReference("actual", this->getActual());		 
+		saveHandler->addReference("formal", this->getFormal());		 
 	}
 	catch (std::exception& e)
 	{

@@ -63,7 +63,7 @@ namespace uml
 			start.covered = finish.covered
 			*/
 			 
-			virtual bool same_lifeline(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool same_lifeline(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			

@@ -98,14 +98,14 @@ namespace uml
 			type.oclIsKindOf(Interface) implies defaultValue->isEmpty()
 			*/
 			 
-			virtual bool default_value(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool default_value(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			All Ports are owned by an EncapsulatedClassifier.
 			owner = encapsulatedClassifier
 			*/
 			 
-			virtual bool encapsulated_owner(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool encapsulated_owner(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			Derivation for Port::/provided
@@ -128,7 +128,7 @@ namespace uml
 			aggregation = AggregationKind::composite
 			*/
 			 
-			virtual bool port_aggregation(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool port_aggregation(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			
@@ -140,40 +140,40 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			 
-			virtual bool getIsBehavior() const ;
+			virtual bool  getIsBehavior() const ;
 			
 			/*!
 			Specifies whether requests arriving at this Port are sent to the classifier behavior of this EncapsulatedClassifier. Such a Port is referred to as a behavior Port. Any invocation of a BehavioralFeature targeted at a behavior Port will be handled by the instance of the owning EncapsulatedClassifier itself, rather than by any instances that it may contain.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			 
-			virtual void setIsBehavior (bool _isBehavior); 
+			virtual void setIsBehavior (bool  _isBehavior); 
 			/*!
 			Specifies the way that the provided and required Interfaces are derived from the Port’s Type.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			 
-			virtual bool getIsConjugated() const ;
+			virtual bool  getIsConjugated() const ;
 			
 			/*!
 			Specifies the way that the provided and required Interfaces are derived from the Port’s Type.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			 
-			virtual void setIsConjugated (bool _isConjugated); 
+			virtual void setIsConjugated (bool  _isConjugated); 
 			/*!
 			If true, indicates that this Port is used to provide the published functionality of an EncapsulatedClassifier.  If false, this Port is used to implement the EncapsulatedClassifier but is not part of the essential externally-visible functionality of the EncapsulatedClassifier and can, therefore, be altered or deleted along with the internal implementation of the EncapsulatedClassifier and other properties that are considered part of its implementation.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			 
-			virtual bool getIsService() const ;
+			virtual bool  getIsService() const ;
 			
 			/*!
 			If true, indicates that this Port is used to provide the published functionality of an EncapsulatedClassifier.  If false, this Port is used to implement the EncapsulatedClassifier but is not part of the essential externally-visible functionality of the EncapsulatedClassifier and can, therefore, be altered or deleted along with the internal implementation of the EncapsulatedClassifier and other properties that are considered part of its implementation.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			 
-			virtual void setIsService (bool _isService); 
+			virtual void setIsService (bool  _isService); 
 			
 			
 			//*********************************

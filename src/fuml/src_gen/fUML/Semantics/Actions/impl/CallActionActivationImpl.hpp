@@ -54,7 +54,7 @@ namespace fUML::Semantics::Actions
 			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> getCallExecution() ;
 			
 			 
-			virtual void removeCallExecution(std::shared_ptr<fUML::Semantics::CommonBehavior::Execution>  execution) ;
+			virtual void removeCallExecution(std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> execution) ;
 			
 			 
 			virtual void terminate() ;
@@ -70,18 +70,18 @@ namespace fUML::Semantics::Actions
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<uml::CallAction > getCallAction() const ;
+			virtual std::shared_ptr<org.eclipse.uml2.uml.CallAction > getCallAction() const ;
 			
 			
-			virtual void setCallAction(std::shared_ptr<uml::CallAction> _callAction) ;
+			virtual void setCallAction(std::shared_ptr<org.eclipse.uml2.uml.CallAction> _callAction) ;
 			
 			/*Additional Setter for 'ActionActivation::action' redefined by reference 'callAction'*/
 			
-			virtual void setAction(std::shared_ptr<uml::Action> _action) ;
+			virtual void setAction(std::shared_ptr<org.eclipse.uml2.uml.Action> _action) ;
 			
 			/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'callAction'*/
 			
-			virtual void setNode(std::shared_ptr<uml::ActivityNode> _node) ;
+			virtual void setNode(std::shared_ptr<org.eclipse.uml2.uml.ActivityNode> _node) ;
 			
 			
 			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::Execution>> getCallExecutions() const ;

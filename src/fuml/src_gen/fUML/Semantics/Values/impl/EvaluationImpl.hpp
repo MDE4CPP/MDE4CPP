@@ -63,10 +63,10 @@ namespace fUML::Semantics::Values
 			virtual void setLocus(std::shared_ptr<fUML::Semantics::Loci::Locus> _locus) ;
 			
 			
-			virtual std::shared_ptr<uml::ValueSpecification > getSpecification() const ;
+			virtual std::shared_ptr<org.eclipse.uml2.uml.ValueSpecification > getSpecification() const ;
 			
 			
-			virtual void setSpecification(std::shared_ptr<uml::ValueSpecification> _specification) ;
+			virtual void setSpecification(std::shared_ptr<org.eclipse.uml2.uml.ValueSpecification> _specification) ;
 			
 							
 			

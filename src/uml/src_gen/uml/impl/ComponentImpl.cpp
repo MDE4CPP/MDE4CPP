@@ -481,12 +481,12 @@ std::shared_ptr<ecore::EClass> ComponentImpl::eStaticClass() const
 /*
 Getter & Setter for attribute isIndirectlyInstantiated
 */
-bool ComponentImpl::getIsIndirectlyInstantiated() const 
+bool  ComponentImpl::getIsIndirectlyInstantiated() const 
 {
 	return m_isIndirectlyInstantiated;
 }
 
-void ComponentImpl::setIsIndirectlyInstantiated(bool _isIndirectlyInstantiated)
+void ComponentImpl::setIsIndirectlyInstantiated(bool  _isIndirectlyInstantiated)
 {
 	m_isIndirectlyInstantiated = _isIndirectlyInstantiated;
 } 
@@ -532,13 +532,13 @@ std::shared_ptr<Bag<uml::Interface> > ComponentImpl::getRequireds()
 	throw "UnsupportedOperationException";
 }
 
-bool ComponentImpl::no_nested_classifiers(Any diagnostics,std::map <   Any, Any >  context)
+bool ComponentImpl::no_nested_classifiers(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ComponentImpl::no_packaged_elements(Any diagnostics,std::map <   Any, Any >  context)
+bool ComponentImpl::no_packaged_elements(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -831,6 +831,8 @@ Any ComponentImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(getIsIndirectlyInstantiated()); //4752
 		case uml::umlPackage::COMPONENT_ATTRIBUTE_PACKAGEDELEMENT:
 		{
+			return eAny(getPackagedElement()); //4753			
+			/*
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::PackageableElement>::iterator iter = m_packagedElement->begin();
 			Bag<uml::PackageableElement>::iterator end = m_packagedElement->end();
@@ -840,9 +842,12 @@ Any ComponentImpl::eGet(int featureID, bool resolve, bool coreType) const
 				iter++;
 			}
 			return eAny(tempList); //4753
+			*/
 		}
 		case uml::umlPackage::COMPONENT_ATTRIBUTE_PROVIDED:
 		{
+			return eAny(getProvided()); //4754			
+			/*
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Interface>::iterator iter = m_provided->begin();
 			Bag<uml::Interface>::iterator end = m_provided->end();
@@ -852,9 +857,12 @@ Any ComponentImpl::eGet(int featureID, bool resolve, bool coreType) const
 				iter++;
 			}
 			return eAny(tempList); //4754
+			*/
 		}
 		case uml::umlPackage::COMPONENT_ATTRIBUTE_REALIZATION:
 		{
+			return eAny(getRealization()); //4755			
+			/*
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::ComponentRealization>::iterator iter = m_realization->begin();
 			Bag<uml::ComponentRealization>::iterator end = m_realization->end();
@@ -864,9 +872,12 @@ Any ComponentImpl::eGet(int featureID, bool resolve, bool coreType) const
 				iter++;
 			}
 			return eAny(tempList); //4755
+			*/
 		}
 		case uml::umlPackage::COMPONENT_ATTRIBUTE_REQUIRED:
 		{
+			return eAny(getRequired()); //4756			
+			/*
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Interface>::iterator iter = m_required->begin();
 			Bag<uml::Interface>::iterator end = m_required->end();
@@ -876,6 +887,7 @@ Any ComponentImpl::eGet(int featureID, bool resolve, bool coreType) const
 				iter++;
 			}
 			return eAny(tempList); //4756
+			*/
 		}
 	}
 	return ClassImpl::eGet(featureID, resolve, coreType);
@@ -1131,7 +1143,6 @@ void ComponentImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'packagedElement'
 		for (std::shared_ptr<uml::PackageableElement> packagedElement : *this->getPackagedElement()) 
 		{
@@ -1143,13 +1154,11 @@ void ComponentImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 		{
 			saveHandler->addReference(realization, "realization", realization->eClass() != package->getComponentRealization_Class());
 		}
-	
 		// Add attributes
 		if ( this->eIsSet(package->getComponent_Attribute_isIndirectlyInstantiated()) )
 		{
 			saveHandler->addAttribute("isIndirectlyInstantiated", this->getIsIndirectlyInstantiated());
 		}
-
 	}
 	catch (std::exception& e)
 	{

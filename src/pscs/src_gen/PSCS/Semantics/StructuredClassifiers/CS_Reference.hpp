@@ -35,50 +35,25 @@ namespace PSCS
 	class PSCSFactory;
 }
 
-//Forward Declaration for used types
-namespace PSCS::Semantics::StructuredClassifiers 
-{
-	class CS_InteractionPoint;
-}
-
-namespace PSCS::Semantics::StructuredClassifiers 
-{
-	class CS_Object;
-}
-
+//Forward Declaration for used types 
 namespace fUML::Semantics::CommonBehavior 
 {
 	class EventOccurrence;
-}
-
-namespace fUML::Semantics::CommonBehavior 
-{
 	class Execution;
 }
-
+namespace PSCS::Semantics::StructuredClassifiers 
+{
+	class CS_InteractionPoint;
+	class CS_Object;
+}
 namespace fUML::Semantics::StructuredClassifiers 
 {
 	class Object;
 }
-
 namespace uml 
 {
 	class Operation;
-}
-
-namespace uml 
-{
 	class Port;
-}
-
-namespace fUML::Semantics::StructuredClassifiers 
-{
-	class Reference;
-}
-
-namespace fUML::Semantics::Values 
-{
-	class Value;
 }
 
 // base class includes
@@ -86,6 +61,9 @@ namespace fUML::Semantics::Values
 
 // enum includes
 
+
+//Includes from codegen annotation
+#include "fUML/FUMLFactory.hpp"
 
 //*********************************
 namespace PSCS::Semantics::StructuredClassifiers 
@@ -116,28 +94,28 @@ namespace PSCS::Semantics::StructuredClassifiers
 			
 			
 			 
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> dispatchIn(std::shared_ptr<uml::Operation>  operation,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>  interactionPoint) = 0;
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> dispatchIn(std::shared_ptr<org.eclipse.uml2.uml.Operation> operation,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> interactionPoint) = 0;
 			
 			 
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> dispatchIn(std::shared_ptr<uml::Operation>  operation,std::shared_ptr<uml::Port>  onPort) = 0;
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> dispatchIn(std::shared_ptr<org.eclipse.uml2.uml.Operation> operation,std::shared_ptr<org.eclipse.uml2.uml.Port> onPort) = 0;
 			
 			 
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> dispatchOut(std::shared_ptr<uml::Operation>  operation,std::shared_ptr<uml::Port>  onPort) = 0;
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> dispatchOut(std::shared_ptr<org.eclipse.uml2.uml.Operation> operation,std::shared_ptr<org.eclipse.uml2.uml.Port> onPort) = 0;
 			
 			 
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> dispatchOut(std::shared_ptr<uml::Operation>  operation,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>  interactionPoint) = 0;
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> dispatchOut(std::shared_ptr<org.eclipse.uml2.uml.Operation> operation,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> interactionPoint) = 0;
 			
 			 
-			virtual void sendIn(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>  eventOccurrence,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>  interactionPoint) = 0;
+			virtual void sendIn(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurrence,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> interactionPoint) = 0;
 			
 			 
-			virtual void sendIn(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>  eventOccurrence,std::shared_ptr<uml::Port>  onPort) = 0;
+			virtual void sendIn(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurrence,std::shared_ptr<org.eclipse.uml2.uml.Port> onPort) = 0;
 			
 			 
-			virtual void sendOut(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>  eventOccurrence,std::shared_ptr<uml::Port>  onPort) = 0;
+			virtual void sendOut(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurrence,std::shared_ptr<org.eclipse.uml2.uml.Port> onPort) = 0;
 			
 			 
-			virtual void sendOut(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>  eventOccurrence,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>  interactionPoint) = 0;
+			virtual void sendOut(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurrence,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> interactionPoint) = 0;
 			
 			
 			//*********************************

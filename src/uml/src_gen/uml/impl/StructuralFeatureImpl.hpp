@@ -62,14 +62,14 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual bool getIsReadOnly() const ;
+			virtual bool  getIsReadOnly() const ;
 			
 			/*!
 			If isReadOnly is true, the StructuralFeature may not be written to after initialization.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual void setIsReadOnly (bool _isReadOnly); 
+			virtual void setIsReadOnly (bool  _isReadOnly); 
 			
 			
 			//*********************************

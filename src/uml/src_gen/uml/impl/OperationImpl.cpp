@@ -349,7 +349,7 @@ std::shared_ptr<ecore::EClass> OperationImpl::eStaticClass() const
 /*
 Getter & Setter for attribute isOrdered
 */
-bool OperationImpl::getIsOrdered() const 
+bool  OperationImpl::getIsOrdered() const 
 {
 	return m_isOrdered;
 }
@@ -361,12 +361,12 @@ bool OperationImpl::getIsOrdered() const
 /*
 Getter & Setter for attribute isQuery
 */
-bool OperationImpl::getIsQuery() const 
+bool  OperationImpl::getIsQuery() const 
 {
 	return m_isQuery;
 }
 
-void OperationImpl::setIsQuery(bool _isQuery)
+void OperationImpl::setIsQuery(bool  _isQuery)
 {
 	m_isQuery = _isQuery;
 } 
@@ -376,7 +376,7 @@ void OperationImpl::setIsQuery(bool _isQuery)
 /*
 Getter & Setter for attribute isUnique
 */
-bool OperationImpl::getIsUnique() const 
+bool  OperationImpl::getIsUnique() const 
 {
 	return m_isUnique;
 }
@@ -388,7 +388,7 @@ bool OperationImpl::getIsUnique() const
 /*
 Getter & Setter for attribute lower
 */
-int OperationImpl::getLower() const 
+int  OperationImpl::getLower() const 
 {
 	return m_lower;
 }
@@ -400,7 +400,7 @@ int OperationImpl::getLower() const
 /*
 Getter & Setter for attribute upper
 */
-int OperationImpl::getUpper() const 
+int  OperationImpl::getUpper() const 
 {
 	return m_upper;
 }
@@ -412,7 +412,7 @@ int OperationImpl::getUpper() const
 //*********************************
 // Operations
 //*********************************
-bool OperationImpl::at_most_one_return(Any diagnostics,std::map <   Any, Any >  context)
+bool OperationImpl::at_most_one_return(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -452,7 +452,7 @@ bool OperationImpl::isUnique()
 	throw "UnsupportedOperationException";
 }
 
-bool OperationImpl::matches(std::shared_ptr<uml::Operation>  comparedOperation)
+bool OperationImpl::matches(std::shared_ptr<uml::Operation> comparedOperation)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -478,7 +478,7 @@ return equals;
 	//end of body
 }
 
-bool OperationImpl::only_body_for_query(Any diagnostics,std::map <   Any, Any >  context)
+bool OperationImpl::only_body_for_query(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -528,7 +528,7 @@ void OperationImpl::setLower(int newLower)
 	//end of body
 }
 
-void OperationImpl::setType(std::shared_ptr<uml::Type>  newType)
+void OperationImpl::setType(std::shared_ptr<uml::Type> newType)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -872,13 +872,13 @@ Any OperationImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::OPERATION_ATTRIBUTE_BODYCONDITION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getBodyCondition())); //16730
+			return eAny(getBodyCondition()); //16730
 		case uml::umlPackage::OPERATION_ATTRIBUTE_CLASS:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getClass().lock())); //16731
+			return eAny(getClass().lock()); //16731
 		case uml::umlPackage::OPERATION_ATTRIBUTE_DATATYPE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDatatype().lock())); //16732
+			return eAny(getDatatype().lock()); //16732
 		case uml::umlPackage::OPERATION_ATTRIBUTE_INTERFACE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getInterface().lock())); //16733
+			return eAny(getInterface().lock()); //16733
 		case uml::umlPackage::OPERATION_ATTRIBUTE_ISORDERED:
 			return eAny(getIsOrdered()); //16734
 		case uml::umlPackage::OPERATION_ATTRIBUTE_ISQUERY:
@@ -889,42 +889,18 @@ Any OperationImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(getLower()); //16737
 		case uml::umlPackage::OPERATION_ATTRIBUTE_POSTCONDITION:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Constraint>::iterator iter = m_postcondition->begin();
-			Bag<uml::Constraint>::iterator end = m_postcondition->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //16738
+			return eAny(getPostcondition()); //16738			
 		}
 		case uml::umlPackage::OPERATION_ATTRIBUTE_PRECONDITION:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Constraint>::iterator iter = m_precondition->begin();
-			Bag<uml::Constraint>::iterator end = m_precondition->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //16739
+			return eAny(getPrecondition()); //16739			
 		}
 		case uml::umlPackage::OPERATION_ATTRIBUTE_REDEFINEDOPERATION:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Operation>::iterator iter = m_redefinedOperation->begin();
-			Bag<uml::Operation>::iterator end = m_redefinedOperation->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //16740
+			return eAny(getRedefinedOperation()); //16740			
 		}
 		case uml::umlPackage::OPERATION_ATTRIBUTE_TYPE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getType())); //16741
+			return eAny(getType()); //16741
 		case uml::umlPackage::OPERATION_ATTRIBUTE_UPPER:
 			return eAny(getUpper()); //16742
 	}
@@ -1373,32 +1349,17 @@ void OperationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
 		// Add attributes
 		if ( this->eIsSet(package->getOperation_Attribute_isQuery()) )
 		{
 			saveHandler->addAttribute("isQuery", this->getIsQuery());
 		}
 
-		// Add references
-		saveHandler->addReference("bodyCondition", this->getBodyCondition());
-		std::shared_ptr<Bag<uml::Constraint>> postcondition_list = this->getPostcondition();
-		for (std::shared_ptr<uml::Constraint > object : *postcondition_list)
-		{ 
-			saveHandler->addReferences("postcondition", object);
-		}
-		std::shared_ptr<Bag<uml::Constraint>> precondition_list = this->getPrecondition();
-		for (std::shared_ptr<uml::Constraint > object : *precondition_list)
-		{ 
-			saveHandler->addReferences("precondition", object);
-		}
-		std::shared_ptr<Bag<uml::Operation>> redefinedOperation_list = this->getRedefinedOperation();
-		for (std::shared_ptr<uml::Operation > object : *redefinedOperation_list)
-		{ 
-			saveHandler->addReferences("redefinedOperation", object);
-		}
-
+	// Add references
+		saveHandler->addReference("bodyCondition", this->getBodyCondition());		 
+		saveHandler->addReferences<uml::Constraint>("postcondition", this->getPostcondition());	
+		saveHandler->addReferences<uml::Constraint>("precondition", this->getPrecondition());	
+		saveHandler->addReferences<uml::Operation>("redefinedOperation", this->getRedefinedOperation());	
 	}
 	catch (std::exception& e)
 	{

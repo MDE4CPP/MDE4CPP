@@ -304,12 +304,12 @@ std::shared_ptr<ecore::EClass> ModelImpl::eStaticClass() const
 /*
 Getter & Setter for attribute viewpoint
 */
-std::string ModelImpl::getViewpoint() const 
+std::string  ModelImpl::getViewpoint() const 
 {
 	return m_viewpoint;
 }
 
-void ModelImpl::setViewpoint(std::string _viewpoint)
+void ModelImpl::setViewpoint(std::string  _viewpoint)
 {
 	m_viewpoint = _viewpoint;
 } 
@@ -559,14 +559,11 @@ void ModelImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
 		// Add attributes
 		if ( this->eIsSet(package->getModel_Attribute_viewpoint()) )
 		{
 			saveHandler->addAttribute("viewpoint", this->getViewpoint());
 		}
-
 	}
 	catch (std::exception& e)
 	{

@@ -277,12 +277,12 @@ std::shared_ptr<ecore::EClass> ReadIsClassifiedObjectActionImpl::eStaticClass() 
 /*
 Getter & Setter for attribute isDirect
 */
-bool ReadIsClassifiedObjectActionImpl::getIsDirect() const 
+bool  ReadIsClassifiedObjectActionImpl::getIsDirect() const 
 {
 	return m_isDirect;
 }
 
-void ReadIsClassifiedObjectActionImpl::setIsDirect(bool _isDirect)
+void ReadIsClassifiedObjectActionImpl::setIsDirect(bool  _isDirect)
 {
 	m_isDirect = _isDirect;
 } 
@@ -292,25 +292,25 @@ void ReadIsClassifiedObjectActionImpl::setIsDirect(bool _isDirect)
 //*********************************
 // Operations
 //*********************************
-bool ReadIsClassifiedObjectActionImpl::boolean_result(Any diagnostics,std::map <   Any, Any >  context)
+bool ReadIsClassifiedObjectActionImpl::boolean_result(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ReadIsClassifiedObjectActionImpl::multiplicity_of_input(Any diagnostics,std::map <   Any, Any >  context)
+bool ReadIsClassifiedObjectActionImpl::multiplicity_of_input(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ReadIsClassifiedObjectActionImpl::multiplicity_of_output(Any diagnostics,std::map <   Any, Any >  context)
+bool ReadIsClassifiedObjectActionImpl::multiplicity_of_output(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ReadIsClassifiedObjectActionImpl::no_type(Any diagnostics,std::map <   Any, Any >  context)
+bool ReadIsClassifiedObjectActionImpl::no_type(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -504,13 +504,13 @@ Any ReadIsClassifiedObjectActionImpl::eGet(int featureID, bool resolve, bool cor
 	switch(featureID)
 	{
 		case uml::umlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_CLASSIFIER:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getClassifier())); //19427
+			return eAny(getClassifier()); //19427
 		case uml::umlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_ISDIRECT:
 			return eAny(getIsDirect()); //19428
 		case uml::umlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_OBJECT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getObject())); //19429
+			return eAny(getObject()); //19429
 		case uml::umlPackage::READISCLASSIFIEDOBJECTACTION_ATTRIBUTE_RESULT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //19430
+			return eAny(getResult()); //19430
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -724,7 +724,6 @@ void ReadIsClassifiedObjectActionImpl::saveContent(std::shared_ptr<persistence::
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'object'
 		std::shared_ptr<uml::InputPin > object = this->getObject();
 		if (object != nullptr)
@@ -738,16 +737,14 @@ void ReadIsClassifiedObjectActionImpl::saveContent(std::shared_ptr<persistence::
 		{
 			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_Class());
 		}
-	
 		// Add attributes
 		if ( this->eIsSet(package->getReadIsClassifiedObjectAction_Attribute_isDirect()) )
 		{
 			saveHandler->addAttribute("isDirect", this->getIsDirect());
 		}
 
-		// Add references
-		saveHandler->addReference("classifier", this->getClassifier());
-
+	// Add references
+		saveHandler->addReference("classifier", this->getClassifier());		 
 	}
 	catch (std::exception& e)
 	{

@@ -63,7 +63,7 @@ namespace uml
 			onPort<>null implies target.type.oclAsType(Classifier).allFeatures()->includes(onPort)
 			*/
 			 
-			virtual bool type_target_pin(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool type_target_pin(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			

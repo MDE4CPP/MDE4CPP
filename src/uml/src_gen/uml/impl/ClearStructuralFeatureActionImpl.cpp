@@ -277,13 +277,13 @@ std::shared_ptr<ecore::EClass> ClearStructuralFeatureActionImpl::eStaticClass() 
 //*********************************
 // Operations
 //*********************************
-bool ClearStructuralFeatureActionImpl::multiplicity_of_result(Any diagnostics,std::map <   Any, Any >  context)
+bool ClearStructuralFeatureActionImpl::multiplicity_of_result(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ClearStructuralFeatureActionImpl::type_of_result(Any diagnostics,std::map <   Any, Any >  context)
+bool ClearStructuralFeatureActionImpl::type_of_result(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -445,7 +445,7 @@ Any ClearStructuralFeatureActionImpl::eGet(int featureID, bool resolve, bool cor
 	switch(featureID)
 	{
 		case uml::umlPackage::CLEARSTRUCTURALFEATUREACTION_ATTRIBUTE_RESULT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //4029
+			return eAny(getResult()); //4029
 	}
 	return StructuralFeatureActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -574,15 +574,12 @@ void ClearStructuralFeatureActionImpl::saveContent(std::shared_ptr<persistence::
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'result'
 		std::shared_ptr<uml::OutputPin > result = this->getResult();
 		if (result != nullptr)
 		{
 			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_Class());
 		}
-	
-
 	}
 	catch (std::exception& e)
 	{

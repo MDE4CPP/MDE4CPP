@@ -94,12 +94,12 @@ std::shared_ptr<ecore::EClass> ArgumentImpl::eStaticClass() const
 /*
 Getter & Setter for attribute name
 */
-std::string ArgumentImpl::getName() const 
+std::string  ArgumentImpl::getName() const 
 {
 	return m_name;
 }
 
-void ArgumentImpl::setName(std::string _name)
+void ArgumentImpl::setName(std::string  _name)
 {
 	m_name = _name;
 } 
@@ -158,7 +158,7 @@ Any ArgumentImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::ARGUMENT_ATTRIBUTE_NAME:
 			return eAny(getName()); //190
 		case uml::umlPackage::ARGUMENT_ATTRIBUTE_VALUE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getValue())); //191
+			return eAny(getValue()); //191
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -290,17 +290,14 @@ void ArgumentImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
 		// Add attributes
 		if ( this->eIsSet(package->getArgument_Attribute_name()) )
 		{
 			saveHandler->addAttribute("name", this->getName());
 		}
 
-		// Add references
-		saveHandler->addReference("value", this->getValue());
-
+	// Add references
+		saveHandler->addReference("value", this->getValue());		 
 	}
 	catch (std::exception& e)
 	{

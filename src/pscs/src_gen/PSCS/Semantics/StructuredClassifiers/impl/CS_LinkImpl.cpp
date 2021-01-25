@@ -48,10 +48,10 @@
 #include "PSCS/Semantics/StructuredClassifiers/impl/StructuredClassifiersFactoryImpl.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/impl/StructuredClassifiersPackageImpl.hpp"
 
-#include "PSCS/PSCSFactory.hpp"
-#include "PSCS/PSCSPackage.hpp"
 #include "PSCS/Semantics/SemanticsFactory.hpp"
 #include "PSCS/Semantics/SemanticsPackage.hpp"
+#include "PSCS/PSCSFactory.hpp"
+#include "PSCS/PSCSPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -120,7 +120,7 @@ std::shared_ptr<ecore::EClass> CS_LinkImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<uml::StructuralFeature> CS_LinkImpl::getFeature(std::shared_ptr<fUML::Semantics::Values::Value>  value)
+std::shared_ptr<org.eclipse.uml2.uml.StructuralFeature> CS_LinkImpl::getFeature(std::shared_ptr<fUML::Semantics::Values::Value> value)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -138,7 +138,7 @@ std::shared_ptr<uml::StructuralFeature> CS_LinkImpl::getFeature(std::shared_ptr<
 	//end of body
 }
 
-bool CS_LinkImpl::hasValueForAFeature(std::shared_ptr<fUML::Semantics::Values::Value>  value)
+bool CS_LinkImpl::hasValueForAFeature(std::shared_ptr<fUML::Semantics::Values::Value> value)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -273,9 +273,6 @@ void CS_LinkImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	try
 	{
 		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage> package = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

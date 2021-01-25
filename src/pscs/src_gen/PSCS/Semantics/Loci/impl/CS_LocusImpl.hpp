@@ -44,7 +44,7 @@ namespace PSCS::Semantics::Loci
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> instantiate(std::shared_ptr<uml::Class>  type) ;
+			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> instantiate(std::shared_ptr<org.eclipse.uml2.uml.Class> type) ;
 			
 			
 			

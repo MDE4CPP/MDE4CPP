@@ -286,12 +286,12 @@ std::shared_ptr<ecore::EClass> CallActionImpl::eStaticClass() const
 /*
 Getter & Setter for attribute isSynchronous
 */
-bool CallActionImpl::getIsSynchronous() const 
+bool  CallActionImpl::getIsSynchronous() const 
 {
 	return m_isSynchronous;
 }
 
-void CallActionImpl::setIsSynchronous(bool _isSynchronous)
+void CallActionImpl::setIsSynchronous(bool  _isSynchronous)
 {
 	m_isSynchronous = _isSynchronous;
 } 
@@ -301,7 +301,7 @@ void CallActionImpl::setIsSynchronous(bool _isSynchronous)
 //*********************************
 // Operations
 //*********************************
-bool CallActionImpl::argument_pins(Any diagnostics,std::map <   Any, Any >  context)
+bool CallActionImpl::argument_pins(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -319,13 +319,13 @@ std::shared_ptr<Bag<uml::Parameter> > CallActionImpl::outputParameters()
 	throw "UnsupportedOperationException";
 }
 
-bool CallActionImpl::result_pins(Any diagnostics,std::map <   Any, Any >  context)
+bool CallActionImpl::result_pins(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool CallActionImpl::synchronous_call(Any diagnostics,std::map <   Any, Any >  context)
+bool CallActionImpl::synchronous_call(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -502,6 +502,8 @@ Any CallActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(getIsSynchronous()); //2829
 		case uml::umlPackage::CALLACTION_ATTRIBUTE_RESULT:
 		{
+			return eAny(getResult()); //2830			
+			/*
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::OutputPin>::iterator iter = m_result->begin();
 			Bag<uml::OutputPin>::iterator end = m_result->end();
@@ -511,6 +513,7 @@ Any CallActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 				iter++;
 			}
 			return eAny(tempList); //2830
+			*/
 		}
 	}
 	return InvocationActionImpl::eGet(featureID, resolve, coreType);
@@ -698,19 +701,16 @@ void CallActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'result'
 		for (std::shared_ptr<uml::OutputPin> result : *this->getResult()) 
 		{
 			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_Class());
 		}
-	
 		// Add attributes
 		if ( this->eIsSet(package->getCallAction_Attribute_isSynchronous()) )
 		{
 			saveHandler->addAttribute("isSynchronous", this->getIsSynchronous());
 		}
-
 	}
 	catch (std::exception& e)
 	{

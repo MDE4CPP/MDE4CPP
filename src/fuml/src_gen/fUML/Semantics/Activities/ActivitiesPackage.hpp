@@ -52,7 +52,7 @@ namespace fUML::Semantics::Activities
 	class Token;
 	class TokenSet;
 }
-
+ 
 namespace fUML::Semantics::Activities 
 {
 	/*!

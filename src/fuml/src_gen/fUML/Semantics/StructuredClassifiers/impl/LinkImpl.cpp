@@ -138,7 +138,7 @@ return newValue;
 	//end of body
 }
 
-void LinkImpl::addTo(std::shared_ptr<fUML::Semantics::Loci::Locus>  locus)
+void LinkImpl::addTo(std::shared_ptr<fUML::Semantics::Loci::Locus> locus)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -183,7 +183,7 @@ void LinkImpl::addTo(std::shared_ptr<fUML::Semantics::Loci::Locus>  locus)
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue> > LinkImpl::getOtherFeatureValues(std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue> >  extent,std::shared_ptr<uml::Property>  end)
+std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue> > LinkImpl::getOtherFeatureValues(std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue> > extent,std::shared_ptr<org.eclipse.uml2.uml.Property> end)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -206,7 +206,7 @@ std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue> > LinkImpl
 	//end of body
 }
 
-std::shared_ptr<Bag<uml::Classifier> > LinkImpl::getTypes() const
+std::shared_ptr<Bag<org.eclipse.uml2.uml.Classifier> > LinkImpl::getTypes() const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -220,7 +220,7 @@ std::shared_ptr<Bag<uml::Classifier> > LinkImpl::getTypes() const
 	//end of body
 }
 
-bool LinkImpl::isMatchingLink(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue>  link,std::shared_ptr<uml::Property>  end)
+bool LinkImpl::isMatchingLink(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> link,std::shared_ptr<org.eclipse.uml2.uml.Property> end)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -250,13 +250,13 @@ bool LinkImpl::isMatchingLink(std::shared_ptr<fUML::Semantics::StructuredClassif
 /*
 Getter & Setter for reference type
 */
-std::shared_ptr<uml::Association > LinkImpl::getType() const
+std::shared_ptr<org.eclipse.uml2.uml.Association > LinkImpl::getType() const
 {
 
     return m_type;
 }
 
-void LinkImpl::setType(std::shared_ptr<uml::Association> _type)
+void LinkImpl::setType(std::shared_ptr<org.eclipse.uml2.uml.Association> _type)
 {
     m_type = _type;
 }
@@ -291,7 +291,7 @@ Any LinkImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::LINK_ATTRIBUTE_TYPE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getType())); //682
+			return eAny(getType()); //682
 	}
 	return ExtensionalValueImpl::eGet(featureID, resolve, coreType);
 }
@@ -312,7 +312,7 @@ bool LinkImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Association> _type = std::dynamic_pointer_cast<uml::Association>(_temp);
+			std::shared_ptr<org.eclipse.uml2.uml.Association> _type = std::dynamic_pointer_cast<org.eclipse.uml2.uml.Association>(_temp);
 			setType(_type); //682
 			return true;
 		}
@@ -382,7 +382,7 @@ void LinkImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<
 			if (references.size() == 1)
 			{
 				// Cast object to correct type
-				std::shared_ptr<uml::Association> _type = std::dynamic_pointer_cast<uml::Association>( references.front() );
+				std::shared_ptr<org.eclipse.uml2.uml.Association> _type = std::dynamic_pointer_cast<org.eclipse.uml2.uml.Association>( references.front() );
 				setType(_type);
 			}
 			
@@ -420,11 +420,8 @@ void LinkImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler
 	{
 		std::shared_ptr<fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage> package = fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance();
 
-	
-
-		// Add references
-		saveHandler->addReference("type", this->getType());
-
+	// Add references
+		saveHandler->addReference("type", this->getType());		
 	}
 	catch (std::exception& e)
 	{

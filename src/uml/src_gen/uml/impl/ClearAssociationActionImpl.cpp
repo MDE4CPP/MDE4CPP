@@ -270,13 +270,13 @@ std::shared_ptr<ecore::EClass> ClearAssociationActionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ClearAssociationActionImpl::multiplicity(Any diagnostics,std::map <   Any, Any >  context)
+bool ClearAssociationActionImpl::multiplicity(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ClearAssociationActionImpl::same_type(Any diagnostics,std::map <   Any, Any >  context)
+bool ClearAssociationActionImpl::same_type(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -434,9 +434,9 @@ Any ClearAssociationActionImpl::eGet(int featureID, bool resolve, bool coreType)
 	switch(featureID)
 	{
 		case uml::umlPackage::CLEARASSOCIATIONACTION_ATTRIBUTE_ASSOCIATION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getAssociation())); //3927
+			return eAny(getAssociation()); //3927
 		case uml::umlPackage::CLEARASSOCIATIONACTION_ATTRIBUTE_OBJECT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getObject())); //3928
+			return eAny(getObject()); //3928
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -606,18 +606,15 @@ void ClearAssociationActionImpl::saveContent(std::shared_ptr<persistence::interf
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'object'
 		std::shared_ptr<uml::InputPin > object = this->getObject();
 		if (object != nullptr)
 		{
 			saveHandler->addReference(object, "object", object->eClass() != package->getInputPin_Class());
 		}
-	
 
-		// Add references
-		saveHandler->addReference("association", this->getAssociation());
-
+	// Add references
+		saveHandler->addReference("association", this->getAssociation());		 
 	}
 	catch (std::exception& e)
 	{

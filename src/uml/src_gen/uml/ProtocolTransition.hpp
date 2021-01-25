@@ -40,94 +40,21 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Behavior;
-}
-
-namespace uml 
-{
 	class Classifier;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
 	class Constraint;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class ElementImport;
-}
-
-namespace uml 
-{
-	class NamedElement;
-}
-
-namespace uml 
-{
-	class Namespace;
-}
-
-namespace uml 
-{
 	class Operation;
-}
-
-namespace uml 
-{
 	class PackageImport;
-}
-
-namespace uml 
-{
 	class PackageableElement;
-}
-
-namespace uml 
-{
-	class RedefinableElement;
-}
-
-namespace uml 
-{
 	class Region;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
-	class Transition;
-}
-
-namespace uml 
-{
 	class Trigger;
-}
-
-namespace uml 
-{
 	class Vertex;
 }
 
@@ -139,6 +66,8 @@ namespace uml
 
 #include "uml/VisibilityKind.hpp"
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -172,14 +101,14 @@ namespace uml
 			effect = null
 			*/
 			 
-			virtual bool associated_actions(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool associated_actions(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			A ProtocolTransition always belongs to a ProtocolStateMachine.
 			container.belongsToPSM()
 			*/
 			 
-			virtual bool belongs_to_psm(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool belongs_to_psm(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			Derivation for ProtocolTransition::/referred
@@ -196,7 +125,7 @@ namespace uml
 			else true endif
 			*/
 			 
-			virtual bool refers_to_operation(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool refers_to_operation(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			
 			//*********************************

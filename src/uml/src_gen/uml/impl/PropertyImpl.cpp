@@ -327,12 +327,12 @@ std::shared_ptr<ecore::EClass> PropertyImpl::eStaticClass() const
 /*
 Getter & Setter for attribute aggregation
 */
-uml::AggregationKind PropertyImpl::getAggregation() const 
+uml::AggregationKind  PropertyImpl::getAggregation() const 
 {
 	return m_aggregation;
 }
 
-void PropertyImpl::setAggregation(uml::AggregationKind _aggregation)
+void PropertyImpl::setAggregation(uml::AggregationKind  _aggregation)
 {
 	m_aggregation = _aggregation;
 } 
@@ -342,12 +342,12 @@ void PropertyImpl::setAggregation(uml::AggregationKind _aggregation)
 /*
 Getter & Setter for attribute default
 */
-std::string PropertyImpl::getDefault() const 
+std::string  PropertyImpl::getDefault() const 
 {
 	return m_default;
 }
 
-void PropertyImpl::setDefault(std::string _default)
+void PropertyImpl::setDefault(std::string  _default)
 {
 	m_default = _default;
 } 
@@ -357,12 +357,12 @@ void PropertyImpl::setDefault(std::string _default)
 /*
 Getter & Setter for attribute isComposite
 */
-bool PropertyImpl::getIsComposite() const 
+bool  PropertyImpl::getIsComposite() const 
 {
 	return m_isComposite;
 }
 
-void PropertyImpl::setIsComposite(bool _isComposite)
+void PropertyImpl::setIsComposite(bool  _isComposite)
 {
 	m_isComposite = _isComposite;
 } 
@@ -372,12 +372,12 @@ void PropertyImpl::setIsComposite(bool _isComposite)
 /*
 Getter & Setter for attribute isDerived
 */
-bool PropertyImpl::getIsDerived() const 
+bool  PropertyImpl::getIsDerived() const 
 {
 	return m_isDerived;
 }
 
-void PropertyImpl::setIsDerived(bool _isDerived)
+void PropertyImpl::setIsDerived(bool  _isDerived)
 {
 	m_isDerived = _isDerived;
 } 
@@ -387,12 +387,12 @@ void PropertyImpl::setIsDerived(bool _isDerived)
 /*
 Getter & Setter for attribute isDerivedUnion
 */
-bool PropertyImpl::getIsDerivedUnion() const 
+bool  PropertyImpl::getIsDerivedUnion() const 
 {
 	return m_isDerivedUnion;
 }
 
-void PropertyImpl::setIsDerivedUnion(bool _isDerivedUnion)
+void PropertyImpl::setIsDerivedUnion(bool  _isDerivedUnion)
 {
 	m_isDerivedUnion = _isDerivedUnion;
 } 
@@ -402,12 +402,12 @@ void PropertyImpl::setIsDerivedUnion(bool _isDerivedUnion)
 /*
 Getter & Setter for attribute isID
 */
-bool PropertyImpl::getIsID() const 
+bool  PropertyImpl::getIsID() const 
 {
 	return m_isID;
 }
 
-void PropertyImpl::setIsID(bool _isID)
+void PropertyImpl::setIsID(bool  _isID)
 {
 	m_isID = _isID;
 } 
@@ -417,25 +417,25 @@ void PropertyImpl::setIsID(bool _isID)
 //*********************************
 // Operations
 //*********************************
-bool PropertyImpl::binding_to_attribute(Any diagnostics,std::map <   Any, Any >  context)
+bool PropertyImpl::binding_to_attribute(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PropertyImpl::deployment_target(Any diagnostics,std::map <   Any, Any >  context)
+bool PropertyImpl::deployment_target(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PropertyImpl::derived_union_is_derived(Any diagnostics,std::map <   Any, Any >  context)
+bool PropertyImpl::derived_union_is_derived(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PropertyImpl::derived_union_is_read_only(Any diagnostics,std::map <   Any, Any >  context)
+bool PropertyImpl::derived_union_is_read_only(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -475,19 +475,19 @@ bool PropertyImpl::isSetDefault()
 	throw "UnsupportedOperationException";
 }
 
-bool PropertyImpl::multiplicity_of_composite(Any diagnostics,std::map <   Any, Any >  context)
+bool PropertyImpl::multiplicity_of_composite(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PropertyImpl::qualified_is_association_end(Any diagnostics,std::map <   Any, Any >  context)
+bool PropertyImpl::qualified_is_association_end(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PropertyImpl::redefined_property_inherited(Any diagnostics,std::map <   Any, Any >  context)
+bool PropertyImpl::redefined_property_inherited(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -535,7 +535,7 @@ void PropertyImpl::setUnlimitedNaturalDefaultValue(int value)
 	throw "UnsupportedOperationException";
 }
 
-bool PropertyImpl::subsetted_property_names(Any diagnostics,std::map <   Any, Any >  context)
+bool PropertyImpl::subsetted_property_names(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -547,19 +547,19 @@ std::shared_ptr<Bag<uml::Type> > PropertyImpl::subsettingContext()
 	throw "UnsupportedOperationException";
 }
 
-bool PropertyImpl::subsetting_context_conforms(Any diagnostics,std::map <   Any, Any >  context)
+bool PropertyImpl::subsetting_context_conforms(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PropertyImpl::subsetting_rules(Any diagnostics,std::map <   Any, Any >  context)
+bool PropertyImpl::subsetting_rules(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PropertyImpl::type_of_opposite_end(Any diagnostics,std::map <   Any, Any >  context)
+bool PropertyImpl::type_of_opposite_end(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -918,19 +918,19 @@ Any PropertyImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_AGGREGATION:
 			return eAny(getAggregation()); //18530
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_ASSOCIATION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getAssociation())); //18543
+			return eAny(getAssociation()); //18543
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_ASSOCIATIONEND:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getAssociationEnd().lock())); //18531
+			return eAny(getAssociationEnd().lock()); //18531
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_CLASS:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getClass().lock())); //18533
+			return eAny(getClass().lock()); //18533
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_DATATYPE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDatatype().lock())); //18527
+			return eAny(getDatatype().lock()); //18527
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_DEFAULT:
 			return eAny(getDefault()); //18529
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_DEFAULTVALUE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDefaultValue())); //18534
+			return eAny(getDefaultValue()); //18534
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_INTERFACE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getInterface().lock())); //18528
+			return eAny(getInterface().lock()); //18528
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_ISCOMPOSITE:
 			return eAny(getIsComposite()); //18535
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_ISDERIVED:
@@ -940,44 +940,20 @@ Any PropertyImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_ISID:
 			return eAny(getIsID()); //18538
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_OPPOSITE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOpposite())); //18539
+			return eAny(getOpposite()); //18539
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_OWNINGASSOCIATION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOwningAssociation().lock())); //18540
+			return eAny(getOwningAssociation().lock()); //18540
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_QUALIFIER:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Property>::iterator iter = m_qualifier->begin();
-			Bag<uml::Property>::iterator end = m_qualifier->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //18532
+			return eAny(getQualifier()); //18532			
 		}
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_REDEFINEDPROPERTY:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Property>::iterator iter = m_redefinedProperty->begin();
-			Bag<uml::Property>::iterator end = m_redefinedProperty->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //18541
+			return eAny(getRedefinedProperty()); //18541			
 		}
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_SUBSETTEDPROPERTY:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Property>::iterator iter = m_subsettedProperty->begin();
-			Bag<uml::Property>::iterator end = m_subsettedProperty->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //18542
+			return eAny(getSubsettedProperty()); //18542			
 		}
 	}
 	Any result;
@@ -1310,7 +1286,7 @@ void PropertyImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoad
 		iter = attr_list.find("aggregation");
 		if ( iter != attr_list.end() )
 		{
-			uml::AggregationKind value = AggregationKind::NONE;
+			uml::AggregationKind  value = AggregationKind::NONE;
 			std::string literal = iter->second;
 			if (literal == "none")
 			{
@@ -1604,7 +1580,6 @@ void PropertyImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'defaultValue'
 		std::shared_ptr<uml::ValueSpecification > defaultValue = this->getDefaultValue();
 		if (defaultValue != nullptr)
@@ -1617,11 +1592,10 @@ void PropertyImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 		{
 			saveHandler->addReference(qualifier, "qualifier", qualifier->eClass() != package->getProperty_Class());
 		}
-	
 		// Add attributes
 		if ( this->eIsSet(package->getProperty_Attribute_aggregation()) )
 		{
-			uml::AggregationKind value = this->getAggregation();
+			uml::AggregationKind  value = this->getAggregation();
 			std::string literal = "";
 			if (value == AggregationKind::NONE)
 			{
@@ -1653,20 +1627,11 @@ void PropertyImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 			saveHandler->addAttribute("isID", this->getIsID());
 		}
 
-		// Add references
-		saveHandler->addReference("association", this->getAssociation());
-		saveHandler->addReference("opposite", this->getOpposite());
-		std::shared_ptr<Bag<uml::Property>> redefinedProperty_list = this->getRedefinedProperty();
-		for (std::shared_ptr<uml::Property > object : *redefinedProperty_list)
-		{ 
-			saveHandler->addReferences("redefinedProperty", object);
-		}
-		std::shared_ptr<Bag<uml::Property>> subsettedProperty_list = this->getSubsettedProperty();
-		for (std::shared_ptr<uml::Property > object : *subsettedProperty_list)
-		{ 
-			saveHandler->addReferences("subsettedProperty", object);
-		}
-
+	// Add references
+		saveHandler->addReference("association", this->getAssociation());		 
+		saveHandler->addReference("opposite", this->getOpposite());		 
+		saveHandler->addReferences<uml::Property>("redefinedProperty", this->getRedefinedProperty());	
+		saveHandler->addReferences<uml::Property>("subsettedProperty", this->getSubsettedProperty());	
 	}
 	catch (std::exception& e)
 	{

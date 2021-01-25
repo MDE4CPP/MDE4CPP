@@ -36,34 +36,16 @@ namespace fUML
 	class fUMLFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace fUML::Semantics::CommonBehavior 
 {
 	class CallEventOccurrence;
+	class ParameterValue;
 }
-
 namespace uml 
 {
 	class Classifier;
-}
-
-namespace uml 
-{
 	class Operation;
-}
-
-namespace fUML::Semantics::CommonBehavior 
-{
-	class ParameterValue;
-}
-
-namespace fUML::Semantics::Values 
-{
-	class Value;
-}
-
-namespace uml 
-{
 	class ValueSpecification;
 }
 
@@ -72,6 +54,9 @@ namespace uml
 
 // enum includes
 
+
+//Includes from codegen annotation
+#include "uml/Classifier.hpp"
 
 //*********************************
 namespace fUML::Semantics::Actions 
@@ -100,22 +85,22 @@ namespace fUML::Semantics::Actions
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() = 0;
 			
 			 
-			virtual bool equals(std::shared_ptr<fUML::Semantics::Values::Value>  otherValue) = 0;
+			virtual bool equals(std::shared_ptr<fUML::Semantics::Values::Value> otherValue) = 0;
 			
 			 
-			virtual std::shared_ptr<uml::Operation> getOperation() = 0;
+			virtual std::shared_ptr<org.eclipse.uml2.uml.Operation> getOperation() = 0;
 			
 			 
-			virtual std::shared_ptr<Bag<uml::Classifier> > getTypes() = 0;
+			virtual std::shared_ptr<Bag<org.eclipse.uml2.uml.Classifier> > getTypes() = 0;
 			
 			 
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> new_() = 0;
 			
 			 
-			virtual void reply(std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> >  outputParameterValues) = 0;
+			virtual void reply(std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > outputParameterValues) = 0;
 			
 			 
-			virtual std::shared_ptr<uml::ValueSpecification> specify() = 0;
+			virtual std::shared_ptr<org.eclipse.uml2.uml.ValueSpecification> specify() = 0;
 			
 			 
 			virtual std::string toString() = 0;

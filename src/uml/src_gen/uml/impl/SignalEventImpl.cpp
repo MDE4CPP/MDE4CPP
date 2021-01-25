@@ -266,7 +266,7 @@ Any SignalEventImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::SIGNALEVENT_ATTRIBUTE_SIGNAL:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSignal())); //21612
+			return eAny(getSignal()); //21612
 	}
 	return MessageEventImpl::eGet(featureID, resolve, coreType);
 }
@@ -399,11 +399,8 @@ void SignalEventImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
-	
-
-		// Add references
-		saveHandler->addReference("signal", this->getSignal());
-
+	// Add references
+		saveHandler->addReference("signal", this->getSignal());		 
 	}
 	catch (std::exception& e)
 	{

@@ -37,54 +37,16 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Comment;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
-	class NamedElement;
-}
-
-namespace uml 
-{
 	class Namespace;
-}
-
-namespace uml 
-{
 	class Region;
-}
-
-namespace uml 
-{
 	class State;
-}
-
-namespace uml 
-{
 	class StateMachine;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class Transition;
 }
 
@@ -94,6 +56,8 @@ namespace uml
 // enum includes
 #include "uml/VisibilityKind.hpp"
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -187,7 +151,7 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			 
-			virtual bool isContainedInRegion(std::shared_ptr<uml::Region>  r) = 0;
+			virtual bool isContainedInRegion(std::shared_ptr<uml::Region> r) = 0;
 			
 			/*!
 			This utility operation returns true if the Vertex is contained in the State s (input argument).
@@ -203,7 +167,7 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			 
-			virtual bool isContainedInState(std::shared_ptr<uml::State>  s) = 0;
+			virtual bool isContainedInState(std::shared_ptr<uml::State> s) = 0;
 			
 			
 			//*********************************

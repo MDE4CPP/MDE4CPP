@@ -35,25 +35,14 @@ namespace fUML
 	class fUMLFactory;
 }
 
-//Forward Declaration for used types
-namespace fUML::Semantics::StructuredClassifiers 
-{
-	class ExtensionalValue;
-}
-
-namespace fUML::Semantics::SimpleClassifiers 
-{
-	class FeatureValue;
-}
-
+//Forward Declaration for used types 
 namespace fUML::Semantics::Loci 
 {
 	class Locus;
 }
-
-namespace fUML::Semantics::Values 
+namespace fUML::Semantics::SimpleClassifiers 
 {
-	class Value;
+	class FeatureValue;
 }
 
 // base class includes
@@ -61,6 +50,8 @@ namespace fUML::Semantics::Values
 
 // enum includes
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace fUML::Semantics::StructuredClassifiers 
@@ -86,10 +77,10 @@ namespace fUML::Semantics::StructuredClassifiers
 			// Operations
 			//*********************************
 			 
-			virtual bool addValue(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue>  value) = 0;
+			virtual bool addValue(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> value) = 0;
 			
 			 
-			virtual void addValue(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue>  value,int i) = 0;
+			virtual void addValue(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> value,int i) = 0;
 			
 			 
 			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> getValue() = 0;
@@ -98,7 +89,7 @@ namespace fUML::Semantics::StructuredClassifiers
 			virtual std::string removeValue(int i) = 0;
 			
 			 
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> setValue(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue>  value,int i) = 0;
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> setValue(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> value,int i) = 0;
 			
 			
 			//*********************************

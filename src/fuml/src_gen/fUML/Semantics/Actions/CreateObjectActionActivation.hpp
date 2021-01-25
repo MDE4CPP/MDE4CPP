@@ -35,55 +35,24 @@ namespace fUML
 	class fUMLFactory;
 }
 
-//Forward Declaration for used types
-namespace uml 
-{
-	class Action;
-}
-
-namespace fUML::Semantics::Actions 
-{
-	class ActionActivation;
-}
-
-namespace fUML::Semantics::Activities 
-{
-	class ActivityEdgeInstance;
-}
-
-namespace uml 
-{
-	class ActivityNode;
-}
-
-namespace fUML::Semantics::Activities 
-{
-	class ActivityNodeActivationGroup;
-}
-
-namespace uml 
-{
-	class CreateObjectAction;
-}
-
+//Forward Declaration for used types 
 namespace fUML::Semantics::Actions 
 {
 	class InputPinActivation;
-}
-
-namespace fUML::Semantics::Actions 
-{
 	class OutputPinActivation;
-}
-
-namespace fUML::Semantics::Actions 
-{
 	class PinActivation;
 }
-
 namespace fUML::Semantics::Activities 
 {
+	class ActivityEdgeInstance;
+	class ActivityNodeActivationGroup;
 	class Token;
+}
+namespace uml 
+{
+	class Action;
+	class ActivityNode;
+	class CreateObjectAction;
 }
 
 // base class includes
@@ -91,6 +60,13 @@ namespace fUML::Semantics::Activities
 
 // enum includes
 
+
+//Includes from codegen annotation
+#include "uml/CreateObjectAction.hpp"
+#include "uml/Class.hpp"
+#include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
+#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
+#include "fUML/Semantics/Loci/Locus.hpp"
 
 //*********************************
 namespace fUML::Semantics::Actions 
@@ -127,18 +103,18 @@ namespace fUML::Semantics::Actions
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<uml::CreateObjectAction > getCreateObjectAction() const = 0;
+			virtual std::shared_ptr<org.eclipse.uml2.uml.CreateObjectAction > getCreateObjectAction() const = 0;
 			
 			
-			virtual void setCreateObjectAction(std::shared_ptr<uml::CreateObjectAction> _createObjectAction) = 0;
+			virtual void setCreateObjectAction(std::shared_ptr<org.eclipse.uml2.uml.CreateObjectAction> _createObjectAction) = 0;
 			
 			/*Additional Setter for 'ActionActivation::action' redefined by reference 'createObjectAction'*/
 			
-			virtual void setAction(std::shared_ptr<uml::Action> _action) = 0;
+			virtual void setAction(std::shared_ptr<org.eclipse.uml2.uml.Action> _action) = 0;
 			
 			/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'createObjectAction'*/
 			
-			virtual void setNode(std::shared_ptr<uml::ActivityNode> _node) = 0;
+			virtual void setNode(std::shared_ptr<org.eclipse.uml2.uml.ActivityNode> _node) = 0;
 			
 			
 
@@ -152,7 +128,7 @@ namespace fUML::Semantics::Actions
 			// Reference Members
 			//*********************************
 			
-			std::shared_ptr<uml::CreateObjectAction > m_createObjectAction;
+			std::shared_ptr<org.eclipse.uml2.uml.CreateObjectAction > m_createObjectAction;
 
 		public:
 			//*********************************

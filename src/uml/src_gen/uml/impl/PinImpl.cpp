@@ -267,12 +267,12 @@ std::shared_ptr<ecore::EClass> PinImpl::eStaticClass() const
 /*
 Getter & Setter for attribute isControl
 */
-bool PinImpl::getIsControl() const 
+bool  PinImpl::getIsControl() const 
 {
 	return m_isControl;
 }
 
-void PinImpl::setIsControl(bool _isControl)
+void PinImpl::setIsControl(bool  _isControl)
 {
 	m_isControl = _isControl;
 } 
@@ -282,13 +282,13 @@ void PinImpl::setIsControl(bool _isControl)
 //*********************************
 // Operations
 //*********************************
-bool PinImpl::control_pins(Any diagnostics,std::map <   Any, Any >  context)
+bool PinImpl::control_pins(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PinImpl::not_unique(Any diagnostics,std::map <   Any, Any >  context)
+bool PinImpl::not_unique(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -540,14 +540,11 @@ void PinImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler>
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
 		// Add attributes
 		if ( this->eIsSet(package->getPin_Attribute_isControl()) )
 		{
 			saveHandler->addAttribute("isControl", this->getIsControl());
 		}
-
 	}
 	catch (std::exception& e)
 	{

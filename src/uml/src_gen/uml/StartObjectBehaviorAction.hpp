@@ -39,109 +39,25 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Activity;
-}
-
-namespace uml 
-{
 	class ActivityEdge;
-}
-
-namespace uml 
-{
 	class ActivityGroup;
-}
-
-namespace uml 
-{
-	class ActivityNode;
-}
-
-namespace uml 
-{
 	class ActivityPartition;
-}
-
-namespace uml 
-{
 	class Behavior;
-}
-
-namespace uml 
-{
-	class CallAction;
-}
-
-namespace uml 
-{
 	class Classifier;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
 	class Constraint;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class ExceptionHandler;
-}
-
-namespace uml 
-{
 	class InputPin;
-}
-
-namespace uml 
-{
 	class InterruptibleActivityRegion;
-}
-
-namespace uml 
-{
 	class Namespace;
-}
-
-namespace uml 
-{
 	class OutputPin;
-}
-
-namespace uml 
-{
 	class Port;
-}
-
-namespace uml 
-{
-	class RedefinableElement;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class StructuredActivityNode;
 }
 
@@ -151,6 +67,8 @@ namespace uml
 // enum includes
 #include "uml/VisibilityKind.hpp"
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -199,21 +117,21 @@ namespace uml
 			object.is(1,1)
 			*/
 			 
-			virtual bool multiplicity_of_object(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool multiplicity_of_object(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			A StartObjectBehaviorAction may not specify onPort.
 			onPort->isEmpty()
 			*/
 			 
-			virtual bool no_onport(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool no_onport(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			The type of the object InputPin must be either a Behavior or a BehavioredClassifier with a classifierBehavior.
 			self.behavior()<>null
 			*/
 			 
-			virtual bool type_of_object(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool type_of_object(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			
 			//*********************************

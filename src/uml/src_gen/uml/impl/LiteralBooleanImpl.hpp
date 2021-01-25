@@ -92,14 +92,14 @@ namespace uml
 			<p>From package UML::Values.</p>
 			*/
 			 
-			virtual bool getValue() const ;
+			virtual bool  getValue() const ;
 			
 			/*!
 			The specified Boolean value.
 			<p>From package UML::Values.</p>
 			*/
 			 
-			virtual void setValue (bool _value); 
+			virtual void setValue (bool  _value); 
 			
 			
 			//*********************************

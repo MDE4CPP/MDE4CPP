@@ -288,7 +288,8 @@ std::shared_ptr<ecore::EClass> OpaqueActionImpl::eStaticClass() const
 /*
 Getter & Setter for attribute body
 */
-std::shared_ptr<Bag<std::string> > OpaqueActionImpl::getBody() const 
+ std::shared_ptr<Bag<std::string> >
+ OpaqueActionImpl::getBody() const 
 {
 	if(m_body == nullptr)
 	{
@@ -304,7 +305,8 @@ std::shared_ptr<Bag<std::string> > OpaqueActionImpl::getBody() const
 /*
 Getter & Setter for attribute language
 */
-std::shared_ptr<Bag<std::string> > OpaqueActionImpl::getLanguage() const 
+ std::shared_ptr<Bag<std::string> >
+ OpaqueActionImpl::getLanguage() const 
 {
 	if(m_language == nullptr)
 	{
@@ -320,7 +322,7 @@ std::shared_ptr<Bag<std::string> > OpaqueActionImpl::getLanguage() const
 //*********************************
 // Operations
 //*********************************
-bool OpaqueActionImpl::language_body_size(Any diagnostics,std::map <   Any, Any >  context)
+bool OpaqueActionImpl::language_body_size(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -525,6 +527,8 @@ Any OpaqueActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(getBody()); //16427
 		case uml::umlPackage::OPAQUEACTION_ATTRIBUTE_INPUTVALUE:
 		{
+			return eAny(getInputValue()); //16428			
+			/*
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::InputPin>::iterator iter = m_inputValue->begin();
 			Bag<uml::InputPin>::iterator end = m_inputValue->end();
@@ -534,11 +538,14 @@ Any OpaqueActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 				iter++;
 			}
 			return eAny(tempList); //16428
+			*/
 		}
 		case uml::umlPackage::OPAQUEACTION_ATTRIBUTE_LANGUAGE:
 			return eAny(getLanguage()); //16429
 		case uml::umlPackage::OPAQUEACTION_ATTRIBUTE_OUTPUTVALUE:
 		{
+			return eAny(getOutputValue()); //16430			
+			/*
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::OutputPin>::iterator iter = m_outputValue->begin();
 			Bag<uml::OutputPin>::iterator end = m_outputValue->end();
@@ -548,6 +555,7 @@ Any OpaqueActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 				iter++;
 			}
 			return eAny(tempList); //16430
+			*/
 		}
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
@@ -693,7 +701,8 @@ void OpaqueActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistenc
 		if (nodeName.compare("body") == 0)
 		{
 			std::shared_ptr<std::string> value = loadHandler->getChildText();
-			std::shared_ptr<Bag<std::string> > list_body = this->getBody();
+			 std::shared_ptr<Bag<std::string> >
+			 list_body = this->getBody();
 			list_body->push_back(value);
 			return;
 		}
@@ -701,7 +710,8 @@ void OpaqueActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistenc
 		if (nodeName.compare("language") == 0)
 		{
 			std::shared_ptr<std::string> value = loadHandler->getChildText();
-			std::shared_ptr<Bag<std::string> > list_language = this->getLanguage();
+			 std::shared_ptr<Bag<std::string> >
+			 list_language = this->getLanguage();
 			list_language->push_back(value);
 			return;
 		}
@@ -801,7 +811,6 @@ void OpaqueActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'inputValue'
 		for (std::shared_ptr<uml::InputPin> inputValue : *this->getInputValue()) 
 		{
@@ -813,7 +822,6 @@ void OpaqueActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 		{
 			saveHandler->addReference(outputValue, "outputValue", outputValue->eClass() != package->getOutputPin_Class());
 		}
-	
 		// Add attributes
 		if ( this->eIsSet(package->getOpaqueAction_Attribute_body()) )
 		{
@@ -830,7 +838,6 @@ void OpaqueActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 				saveHandler->addAttributeAsNode("language", *value);
 			}
 		}
-
 	}
 	catch (std::exception& e)
 	{

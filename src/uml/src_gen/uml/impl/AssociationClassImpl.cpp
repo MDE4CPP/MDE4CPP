@@ -478,13 +478,13 @@ std::shared_ptr<ecore::EClass> AssociationClassImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool AssociationClassImpl::cannot_be_defined(Any diagnostics,std::map <   Any, Any >  context)
+bool AssociationClassImpl::cannot_be_defined(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool AssociationClassImpl::disjoint_attributes_ends(Any diagnostics,std::map <   Any, Any >  context)
+bool AssociationClassImpl::disjoint_attributes_ends(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -823,9 +823,6 @@ void AssociationClassImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

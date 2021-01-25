@@ -198,12 +198,12 @@ std::shared_ptr<ecore::EClass> TimeConstraintImpl::eStaticClass() const
 /*
 Getter & Setter for attribute firstEvent
 */
-bool TimeConstraintImpl::getFirstEvent() const 
+bool  TimeConstraintImpl::getFirstEvent() const 
 {
 	return m_firstEvent;
 }
 
-void TimeConstraintImpl::setFirstEvent(bool _firstEvent)
+void TimeConstraintImpl::setFirstEvent(bool  _firstEvent)
 {
 	m_firstEvent = _firstEvent;
 } 
@@ -213,7 +213,7 @@ void TimeConstraintImpl::setFirstEvent(bool _firstEvent)
 //*********************************
 // Operations
 //*********************************
-bool TimeConstraintImpl::has_one_constrainedElement(Any diagnostics,std::map <   Any, Any >  context)
+bool TimeConstraintImpl::has_one_constrainedElement(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -419,14 +419,11 @@ void TimeConstraintImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
 		// Add attributes
 		if ( this->eIsSet(package->getTimeConstraint_Attribute_firstEvent()) )
 		{
 			saveHandler->addAttribute("firstEvent", this->getFirstEvent());
 		}
-
 	}
 	catch (std::exception& e)
 	{

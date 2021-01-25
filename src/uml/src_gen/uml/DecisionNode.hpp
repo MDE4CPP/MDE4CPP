@@ -38,89 +38,21 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Activity;
-}
-
-namespace uml 
-{
 	class ActivityEdge;
-}
-
-namespace uml 
-{
 	class ActivityGroup;
-}
-
-namespace uml 
-{
-	class ActivityNode;
-}
-
-namespace uml 
-{
 	class ActivityPartition;
-}
-
-namespace uml 
-{
 	class Behavior;
-}
-
-namespace uml 
-{
 	class Classifier;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
-	class ControlNode;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class InterruptibleActivityRegion;
-}
-
-namespace uml 
-{
 	class Namespace;
-}
-
-namespace uml 
-{
 	class ObjectFlow;
-}
-
-namespace uml 
-{
-	class RedefinableElement;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class StructuredActivityNode;
 }
 
@@ -130,6 +62,8 @@ namespace uml
 // enum includes
 #include "uml/VisibilityKind.hpp"
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -163,7 +97,7 @@ namespace uml
 			incoming->includes(decisionInputFlow)
 			*/
 			 
-			virtual bool decision_input_flow_incoming(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool decision_input_flow_incoming(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			The ActivityEdges incoming to and outgoing from a DecisionNode, other than the decisionInputFlow (if any), must be either all ObjectFlows or all ControlFlows.
@@ -173,7 +107,7 @@ namespace uml
 			
 			*/
 			 
-			virtual bool edges(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool edges(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			If the DecisionNode has a decisionInputFlow and an incoming ControlFlow, then any decisionInput Behavior has one in Parameter whose type is the same as or a supertype of the type of object tokens offered on the decisionInputFlow.
@@ -181,7 +115,7 @@ namespace uml
 				decisionInput.inputParameters()->size()=1
 			*/
 			 
-			virtual bool incoming_control_one_input_parameter(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool incoming_control_one_input_parameter(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			If the DecisionNode has no decisionInputFlow and an incoming ObjectFlow, then any decisionInput Behavior has one in Parameter whose type is the same as or a supertype of the type of object tokens offered on the incoming ObjectFlow.
@@ -189,14 +123,14 @@ namespace uml
 				decisionInput.inputParameters()->size()=1
 			*/
 			 
-			virtual bool incoming_object_one_input_parameter(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool incoming_object_one_input_parameter(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			A DecisionNode has one or two incoming ActivityEdges and at least one outgoing ActivityEdge.
 			(incoming->size() = 1 or incoming->size() = 2) and outgoing->size() > 0
 			*/
 			 
-			virtual bool incoming_outgoing_edges(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool incoming_outgoing_edges(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			A decisionInput Behavior has no out parameters, no inout parameters, and one return parameter.
@@ -208,7 +142,7 @@ namespace uml
 			     par.direction <> ParameterDirectionKind::return))
 			*/
 			 
-			virtual bool parameters(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool parameters(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			If the DecisionNode has a decisionInputFlow and an second incoming ObjectFlow, then any decisionInput has two in Parameters, the first of which has a type that is the same as or a supertype of the type of object tokens offered on the non-decisionInputFlow and the second of which has a type that is the same as or a supertype of the type of object tokens offered on the decisionInputFlow.
@@ -216,7 +150,7 @@ namespace uml
 				decisionInput.inputParameters()->size()=2
 			*/
 			 
-			virtual bool two_input_parameters(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool two_input_parameters(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			If the DecisionNode has no decisionInputFlow and an incoming ControlFlow, then any decisionInput Behavior has no in parameters.
@@ -224,7 +158,7 @@ namespace uml
 			   decisionInput.inputParameters()->isEmpty()
 			*/
 			 
-			virtual bool zero_input_parameters(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool zero_input_parameters(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			
 			//*********************************

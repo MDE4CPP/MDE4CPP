@@ -229,7 +229,7 @@ std::shared_ptr<ecore::EClass> ControlFlowImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ControlFlowImpl::object_nodes(Any diagnostics,std::map <   Any, Any >  context)
+bool ControlFlowImpl::object_nodes(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -419,9 +419,6 @@ void ControlFlowImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

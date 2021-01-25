@@ -35,17 +35,12 @@ namespace fUML
 	class fUMLFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace fUML::Semantics::Activities 
 {
 	class ActivityNodeActivation;
-}
-
-namespace fUML::Semantics::Activities 
-{
 	class Token;
 }
-
 namespace fUML::Semantics::Values 
 {
 	class Value;
@@ -56,6 +51,13 @@ namespace fUML::Semantics::Values
 // enum includes
 
 #include "ecore/EModelElement.hpp"
+
+//Includes from codegen annotation
+#include "fUML/Semantics/Activities/ControlToken.hpp"
+#include "fUML/Semantics/Loci/ExecutionFactory.hpp"
+#include "fUML/Semantics/Loci/Locus.hpp"
+
+#include "uml/ActivityNode.hpp"
 
 //*********************************
 namespace fUML::Semantics::Activities 
@@ -85,7 +87,7 @@ namespace fUML::Semantics::Activities
 			virtual std::shared_ptr<fUML::Semantics::Activities::Token> _copy() = 0;
 			
 			 
-			virtual bool equals(std::shared_ptr<fUML::Semantics::Activities::Token>  other) = 0;
+			virtual bool equals(std::shared_ptr<fUML::Semantics::Activities::Token> other) = 0;
 			
 			 
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> getValue() const = 0;
@@ -94,7 +96,7 @@ namespace fUML::Semantics::Activities
 			virtual bool isControl() = 0;
 			
 			 
-			virtual std::shared_ptr<fUML::Semantics::Activities::Token> transfer(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation>  holder) = 0;
+			virtual std::shared_ptr<fUML::Semantics::Activities::Token> transfer(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> holder) = 0;
 			
 			 
 			virtual void withdraw() = 0;
@@ -104,10 +106,10 @@ namespace fUML::Semantics::Activities
 			// Attributes Getter Setter
 			//*********************************
 			 
-			virtual bool isWithdrawn() const = 0;
+			virtual bool  isWithdrawn() const = 0;
 			
 			 
-			virtual void setWithdrawn (bool _withdrawn)= 0; 
+			virtual void setWithdrawn (bool  _withdrawn)= 0; 
 			
 			//*********************************
 			// Reference
@@ -125,7 +127,7 @@ namespace fUML::Semantics::Activities
 			// Attribute Members
 			//*********************************
 			 
-			bool m_withdrawn = true;
+			bool  m_withdrawn = true;
 			
 			
 			//*********************************

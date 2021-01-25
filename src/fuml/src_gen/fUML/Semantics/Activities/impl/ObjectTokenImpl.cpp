@@ -126,7 +126,7 @@ return copy;
 	//end of body
 }
 
-bool ObjectTokenImpl::equals(std::shared_ptr<fUML::Semantics::Activities::Token>  other)
+bool ObjectTokenImpl::equals(std::shared_ptr<fUML::Semantics::Activities::Token> other)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -189,7 +189,7 @@ Any ObjectTokenImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case fUML::Semantics::Activities::ActivitiesPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getValue())); //832
+			return eAny(getValue()); //832
 	}
 	return TokenImpl::eGet(featureID, resolve, coreType);
 }
@@ -299,9 +299,6 @@ void ObjectTokenImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	try
 	{
 		std::shared_ptr<fUML::Semantics::Activities::ActivitiesPackage> package = fUML::Semantics::Activities::ActivitiesPackage::eInstance();
-
-	
-
 
 		//
 		// Add new tags (from references)

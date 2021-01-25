@@ -59,7 +59,7 @@ virtual public ActivityEdgeInstance
 			virtual bool hasOffer() ;
 			
 			 
-			virtual void sendOffer(std::shared_ptr<Bag<fUML::Semantics::Activities::Token> >  tokens) ;
+			virtual void sendOffer(std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > tokens) ;
 			
 			 
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > takeOfferedTokens() ;
@@ -78,10 +78,10 @@ virtual public ActivityEdgeInstance
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<uml::ActivityEdge > getEdge() const ;
+			virtual std::shared_ptr<org.eclipse.uml2.uml.ActivityEdge > getEdge() const ;
 			
 			
-			virtual void setEdge(std::shared_ptr<uml::ActivityEdge> _edge) ;
+			virtual void setEdge(std::shared_ptr<org.eclipse.uml2.uml.ActivityEdge> _edge) ;
 			
 			
 			virtual std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > getGroup() const ;

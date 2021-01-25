@@ -73,7 +73,7 @@ namespace uml
 			<p>From package UML::CommonBehavior.</p>
 			*/
 			 
-			virtual bool hasAllDataTypeAttributes(std::shared_ptr<uml::DataType>  d) ;
+			virtual bool hasAllDataTypeAttributes(std::shared_ptr<uml::DataType> d) ;
 			
 			/*!
 			A FunctionBehavior has at least one output Parameter.
@@ -81,7 +81,7 @@ namespace uml
 			  select(p | p.direction = ParameterDirectionKind::out or p.direction= ParameterDirectionKind::inout or p.direction= ParameterDirectionKind::return)->size() >= 1
 			*/
 			 
-			virtual bool one_output_parameter(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool one_output_parameter(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			The types of the ownedParameters are all DataTypes, which may not nest anything but other DataTypes.
@@ -89,7 +89,7 @@ namespace uml
 			  p.type.oclIsTypeOf(DataType) and hasAllDataTypeAttributes(p.type.oclAsType(DataType)))
 			*/
 			 
-			virtual bool types_of_parameters(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool types_of_parameters(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			

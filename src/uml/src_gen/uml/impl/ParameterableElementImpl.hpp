@@ -56,7 +56,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual bool isCompatibleWith(std::shared_ptr<uml::ParameterableElement>  p) ;
+			virtual bool isCompatibleWith(std::shared_ptr<uml::ParameterableElement> p) ;
 			
 			/*!
 			The query isTemplateParameter() determines if this ParameterableElement is exposed as a formal TemplateParameter.

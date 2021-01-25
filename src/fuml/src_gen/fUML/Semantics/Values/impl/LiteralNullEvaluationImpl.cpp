@@ -223,9 +223,6 @@ void LiteralNullEvaluationImpl::saveContent(std::shared_ptr<persistence::interfa
 	try
 	{
 		std::shared_ptr<fUML::Semantics::Values::ValuesPackage> package = fUML::Semantics::Values::ValuesPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

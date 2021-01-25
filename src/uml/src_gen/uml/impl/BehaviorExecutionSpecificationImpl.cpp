@@ -285,7 +285,7 @@ Any BehaviorExecutionSpecificationImpl::eGet(int featureID, bool resolve, bool c
 	switch(featureID)
 	{
 		case uml::umlPackage::BEHAVIOREXECUTIONSPECIFICATION_ATTRIBUTE_BEHAVIOR:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getBehavior())); //2415
+			return eAny(getBehavior()); //2415
 	}
 	return ExecutionSpecificationImpl::eGet(featureID, resolve, coreType);
 }
@@ -414,11 +414,8 @@ void BehaviorExecutionSpecificationImpl::saveContent(std::shared_ptr<persistence
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
-	
-
-		// Add references
-		saveHandler->addReference("behavior", this->getBehavior());
-
+	// Add references
+		saveHandler->addReference("behavior", this->getBehavior());		 
 	}
 	catch (std::exception& e)
 	{

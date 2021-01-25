@@ -39,139 +39,31 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Action;
-}
-
-namespace uml 
-{
 	class Activity;
-}
-
-namespace uml 
-{
 	class ActivityEdge;
-}
-
-namespace uml 
-{
 	class ActivityGroup;
-}
-
-namespace uml 
-{
-	class ActivityNode;
-}
-
-namespace uml 
-{
 	class ActivityPartition;
-}
-
-namespace uml 
-{
 	class AddStructuralFeatureValueAction;
-}
-
-namespace uml 
-{
 	class Behavior;
-}
-
-namespace uml 
-{
 	class CallOperationAction;
-}
-
-namespace uml 
-{
 	class Classifier;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
 	class DestroyObjectAction;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
-	class InputPin;
-}
-
-namespace uml 
-{
 	class InterruptibleActivityRegion;
-}
-
-namespace uml 
-{
 	class InvocationAction;
-}
-
-namespace uml 
-{
 	class Namespace;
-}
-
-namespace uml 
-{
-	class RedefinableElement;
-}
-
-namespace uml 
-{
 	class RemoveStructuralFeatureValueAction;
-}
-
-namespace uml 
-{
 	class State;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class StructuralFeatureAction;
-}
-
-namespace uml 
-{
 	class StructuredActivityNode;
-}
-
-namespace uml 
-{
 	class Type;
-}
-
-namespace uml 
-{
 	class ValueSpecification;
-}
-
-namespace uml 
-{
 	class WriteStructuralFeatureAction;
 }
 
@@ -183,6 +75,8 @@ namespace uml
 
 #include "uml/VisibilityKind.hpp"
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -216,14 +110,14 @@ namespace uml
 			value.type.conformsTo(type)
 			*/
 			 
-			virtual bool compatible_type(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool compatible_type(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			A ValuePin may have no incoming ActivityEdges.
 			incoming->isEmpty()
 			*/
 			 
-			virtual bool no_incoming_edges(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool no_incoming_edges(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			
 			//*********************************

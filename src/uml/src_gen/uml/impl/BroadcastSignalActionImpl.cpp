@@ -274,19 +274,19 @@ std::shared_ptr<ecore::EClass> BroadcastSignalActionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool BroadcastSignalActionImpl::no_onport(Any diagnostics,std::map <   Any, Any >  context)
+bool BroadcastSignalActionImpl::no_onport(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool BroadcastSignalActionImpl::number_of_arguments(Any diagnostics,std::map <   Any, Any >  context)
+bool BroadcastSignalActionImpl::number_of_arguments(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool BroadcastSignalActionImpl::type_ordering_multiplicity(Any diagnostics,std::map <   Any, Any >  context)
+bool BroadcastSignalActionImpl::type_ordering_multiplicity(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -428,7 +428,7 @@ Any BroadcastSignalActionImpl::eGet(int featureID, bool resolve, bool coreType) 
 	switch(featureID)
 	{
 		case uml::umlPackage::BROADCASTSIGNALACTION_ATTRIBUTE_SIGNAL:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSignal())); //2729
+			return eAny(getSignal()); //2729
 	}
 	return InvocationActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -566,11 +566,8 @@ void BroadcastSignalActionImpl::saveContent(std::shared_ptr<persistence::interfa
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
-	
-
-		// Add references
-		saveHandler->addReference("signal", this->getSignal());
-
+	// Add references
+		saveHandler->addReference("signal", this->getSignal());		 
 	}
 	catch (std::exception& e)
 	{

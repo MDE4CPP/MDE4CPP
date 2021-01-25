@@ -36,30 +36,16 @@ namespace fUML
 	class fUMLFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace fUML::Semantics::Activities 
 {
 	class ActivityEdgeInstance;
+	class ActivityNodeActivationGroup;
+	class Token;
 }
-
 namespace uml 
 {
 	class ActivityNode;
-}
-
-namespace fUML::Semantics::Activities 
-{
-	class ActivityNodeActivation;
-}
-
-namespace fUML::Semantics::Activities 
-{
-	class ActivityNodeActivationGroup;
-}
-
-namespace fUML::Semantics::Activities 
-{
-	class Token;
 }
 
 // base class includes
@@ -67,6 +53,11 @@ namespace fUML::Semantics::Activities
 
 // enum includes
 
+
+//Includes from codegen annotation
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/Semantics/Activities/ObjectToken.hpp"
+#include "fUML/Semantics/Activities/Token.hpp"
 
 //*********************************
 namespace fUML::Semantics::Activities 
@@ -92,7 +83,7 @@ namespace fUML::Semantics::Activities
 			// Operations
 			//*********************************
 			 
-			virtual void addToken(std::shared_ptr<fUML::Semantics::Activities::Token>  token) = 0;
+			virtual void addToken(std::shared_ptr<fUML::Semantics::Activities::Token> token) = 0;
 			
 			 
 			virtual void clearTokens() = 0;
@@ -107,13 +98,13 @@ namespace fUML::Semantics::Activities
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > getUnofferedTokens() = 0;
 			
 			 
-			virtual int removeToken(std::shared_ptr<fUML::Semantics::Activities::Token>  token) = 0;
+			virtual int removeToken(std::shared_ptr<fUML::Semantics::Activities::Token> token) = 0;
 			
 			 
 			virtual void run() = 0;
 			
 			 
-			virtual void sendOffers(std::shared_ptr<Bag<fUML::Semantics::Activities::Token> >  tokens) = 0;
+			virtual void sendOffers(std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > tokens) = 0;
 			
 			 
 			virtual void sendUnofferedTokens() = 0;
@@ -129,10 +120,10 @@ namespace fUML::Semantics::Activities
 			// Attributes Getter Setter
 			//*********************************
 			 
-			virtual int getOfferedTokenCount() const = 0;
+			virtual int  getOfferedTokenCount() const = 0;
 			
 			 
-			virtual void setOfferedTokenCount (int _offeredTokenCount)= 0; 
+			virtual void setOfferedTokenCount (int  _offeredTokenCount)= 0; 
 			
 			//*********************************
 			// Reference
@@ -144,7 +135,7 @@ namespace fUML::Semantics::Activities
 			// Attribute Members
 			//*********************************
 			 
-			int m_offeredTokenCount = 0;
+			int  m_offeredTokenCount = 0;
 			
 			
 			//*********************************

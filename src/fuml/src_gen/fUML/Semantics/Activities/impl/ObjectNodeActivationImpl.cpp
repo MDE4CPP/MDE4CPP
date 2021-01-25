@@ -133,12 +133,12 @@ std::shared_ptr<ecore::EClass> ObjectNodeActivationImpl::eStaticClass() const
 /*
 Getter & Setter for attribute offeredTokenCount
 */
-int ObjectNodeActivationImpl::getOfferedTokenCount() const 
+int  ObjectNodeActivationImpl::getOfferedTokenCount() const 
 {
 	return m_offeredTokenCount;
 }
 
-void ObjectNodeActivationImpl::setOfferedTokenCount(int _offeredTokenCount)
+void ObjectNodeActivationImpl::setOfferedTokenCount(int  _offeredTokenCount)
 {
 	m_offeredTokenCount = _offeredTokenCount;
 } 
@@ -148,7 +148,7 @@ void ObjectNodeActivationImpl::setOfferedTokenCount(int _offeredTokenCount)
 //*********************************
 // Operations
 //*********************************
-void ObjectNodeActivationImpl::addToken(std::shared_ptr<fUML::Semantics::Activities::Token>  token)
+void ObjectNodeActivationImpl::addToken(std::shared_ptr<fUML::Semantics::Activities::Token> token)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -219,7 +219,7 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > ObjectNodeActivationIm
 	//end of body
 }
 
-int ObjectNodeActivationImpl::removeToken(std::shared_ptr<fUML::Semantics::Activities::Token>  token)
+int ObjectNodeActivationImpl::removeToken(std::shared_ptr<fUML::Semantics::Activities::Token> token)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -241,7 +241,7 @@ void ObjectNodeActivationImpl::run()
 	//end of body
 }
 
-void ObjectNodeActivationImpl::sendOffers(std::shared_ptr<Bag<fUML::Semantics::Activities::Token> >  tokens)
+void ObjectNodeActivationImpl::sendOffers(std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > tokens)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -440,14 +440,11 @@ void ObjectNodeActivationImpl::saveContent(std::shared_ptr<persistence::interfac
 	try
 	{
 		std::shared_ptr<fUML::Semantics::Activities::ActivitiesPackage> package = fUML::Semantics::Activities::ActivitiesPackage::eInstance();
-
-	
 		// Add attributes
 		if ( this->eIsSet(package->getObjectNodeActivation_Attribute_offeredTokenCount()) )
 		{
 			saveHandler->addAttribute("offeredTokenCount", this->getOfferedTokenCount());
 		}
-
 	}
 	catch (std::exception& e)
 	{

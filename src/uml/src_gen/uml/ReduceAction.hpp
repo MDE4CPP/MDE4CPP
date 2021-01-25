@@ -39,104 +39,24 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
-namespace uml 
-{
-	class Action;
-}
-
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Activity;
-}
-
-namespace uml 
-{
 	class ActivityEdge;
-}
-
-namespace uml 
-{
 	class ActivityGroup;
-}
-
-namespace uml 
-{
-	class ActivityNode;
-}
-
-namespace uml 
-{
 	class ActivityPartition;
-}
-
-namespace uml 
-{
 	class Behavior;
-}
-
-namespace uml 
-{
 	class Classifier;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
 	class Constraint;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class ExceptionHandler;
-}
-
-namespace uml 
-{
 	class InputPin;
-}
-
-namespace uml 
-{
 	class InterruptibleActivityRegion;
-}
-
-namespace uml 
-{
 	class Namespace;
-}
-
-namespace uml 
-{
 	class OutputPin;
-}
-
-namespace uml 
-{
-	class RedefinableElement;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class StructuredActivityNode;
 }
 
@@ -146,6 +66,8 @@ namespace uml
 // enum includes
 #include "uml/VisibilityKind.hpp"
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -178,14 +100,14 @@ namespace uml
 			The type of the collection InputPin must be a collection.
 			*/
 			 
-			virtual bool input_type_is_collection(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool input_type_is_collection(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			The type of the output of the reducer Behavior must conform to the type of the result OutputPin.
 			reducer.outputParameters().type->forAll(conformsTo(result.type))
 			*/
 			 
-			virtual bool output_types_are_compatible(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool output_types_are_compatible(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			The reducer Behavior must have two input ownedParameters and one output ownedParameter, where the type of the output Parameter and the type of elements of the input collection conform to the types of the input Parameters.
@@ -198,7 +120,7 @@ namespace uml
 				collection.upperBound()>1 implies collection.type.conformsTo(t))
 			*/
 			 
-			virtual bool reducer_inputs_output(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool reducer_inputs_output(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			
 			//*********************************
@@ -209,14 +131,14 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual bool getIsOrdered() const = 0;
+			virtual bool  getIsOrdered() const = 0;
 			
 			/*!
 			Indicates whether the order of the input collection should determine the order in which the reducer Behavior is applied to its elements.
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual void setIsOrdered (bool _isOrdered)= 0; 
+			virtual void setIsOrdered (bool  _isOrdered)= 0; 
 			
 			//*********************************
 			// Reference
@@ -274,7 +196,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			bool m_isOrdered = false;
+			bool  m_isOrdered = false;
 			
 			
 			//*********************************

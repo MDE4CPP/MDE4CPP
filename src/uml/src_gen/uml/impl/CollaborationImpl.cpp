@@ -621,15 +621,7 @@ Any CollaborationImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::COLLABORATION_ATTRIBUTE_COLLABORATIONROLE:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ConnectableElement>::iterator iter = m_collaborationRole->begin();
-			Bag<uml::ConnectableElement>::iterator end = m_collaborationRole->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //4245
+			return eAny(getCollaborationRole()); //4245			
 		}
 	}
 	Any result;
@@ -824,15 +816,8 @@ void CollaborationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
-	
-
-		// Add references
-		std::shared_ptr<Bag<uml::ConnectableElement>> collaborationRole_list = this->getCollaborationRole();
-		for (std::shared_ptr<uml::ConnectableElement > object : *collaborationRole_list)
-		{ 
-			saveHandler->addReferences("collaborationRole", object);
-		}
-
+	// Add references
+		saveHandler->addReferences<uml::ConnectableElement>("collaborationRole", this->getCollaborationRole());	
 	}
 	catch (std::exception& e)
 	{

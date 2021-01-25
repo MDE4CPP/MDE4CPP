@@ -276,7 +276,7 @@ std::shared_ptr<ecore::EClass> CreateLinkActionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool CreateLinkActionImpl::association_not_abstract(Any diagnostics,std::map <   Any, Any >  context)
+bool CreateLinkActionImpl::association_not_abstract(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -498,9 +498,6 @@ void CreateLinkActionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

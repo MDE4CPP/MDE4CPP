@@ -471,7 +471,7 @@ std::shared_ptr<ecore::EClass> NodeImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<uml::CommunicationPath> NodeImpl::createCommunicationPath(bool end1IsNavigable,uml::AggregationKind end1Aggregation,std::string end1Name,int end1Lower,int end1Upper,std::shared_ptr<uml::Node>  end1Node,bool end2IsNavigable,uml::AggregationKind end2Aggregation,std::string end2Name,int end2Lower,int end2Upper)
+std::shared_ptr<uml::CommunicationPath> NodeImpl::createCommunicationPath(bool end1IsNavigable,uml::AggregationKind end1Aggregation,std::string end1Name,int end1Lower,int end1Upper,std::shared_ptr<uml::Node> end1Node,bool end2IsNavigable,uml::AggregationKind end2Aggregation,std::string end2Name,int end2Lower,int end2Upper)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -483,7 +483,7 @@ std::shared_ptr<Bag<uml::CommunicationPath> > NodeImpl::getCommunicationPaths()
 	throw "UnsupportedOperationException";
 }
 
-bool NodeImpl::internal_structure(Any diagnostics,std::map <   Any, Any >  context)
+bool NodeImpl::internal_structure(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -709,6 +709,8 @@ Any NodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::NODE_ATTRIBUTE_NESTEDNODE:
 		{
+			return eAny(getNestedNode()); //15754			
+			/*
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Node>::iterator iter = m_nestedNode->begin();
 			Bag<uml::Node>::iterator end = m_nestedNode->end();
@@ -718,6 +720,7 @@ Any NodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 				iter++;
 			}
 			return eAny(tempList); //15754
+			*/
 		}
 	}
 	Any result;
@@ -910,14 +913,11 @@ void NodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'nestedNode'
 		for (std::shared_ptr<uml::Node> nestedNode : *this->getNestedNode()) 
 		{
 			saveHandler->addReference(nestedNode, "nestedNode", nestedNode->eClass() != package->getNode_Class());
 		}
-	
-
 	}
 	catch (std::exception& e)
 	{

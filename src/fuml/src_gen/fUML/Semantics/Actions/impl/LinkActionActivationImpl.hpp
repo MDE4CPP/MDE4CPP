@@ -48,13 +48,13 @@ namespace fUML::Semantics::Actions
 			// Operations
 			//*********************************
 			 
-			virtual bool endMatchesEndData(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link>  link,std::shared_ptr<uml::LinkEndData>  endData) ;
+			virtual bool endMatchesEndData(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> link,std::shared_ptr<org.eclipse.uml2.uml.LinkEndData> endData) ;
 			
 			 
-			virtual std::shared_ptr<uml::Association> getAssociation() ;
+			virtual std::shared_ptr<org.eclipse.uml2.uml.Association> getAssociation() ;
 			
 			 
-			virtual bool linkMatchesEndData(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link>  link,std::shared_ptr<Bag<uml::LinkEndData> >  endDataList) ;
+			virtual bool linkMatchesEndData(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> link,std::shared_ptr<Bag<org.eclipse.uml2.uml.LinkEndData> > endDataList) ;
 			
 			
 			

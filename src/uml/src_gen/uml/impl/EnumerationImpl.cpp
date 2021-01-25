@@ -375,7 +375,7 @@ std::shared_ptr<ecore::EClass> EnumerationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool EnumerationImpl::immutable(Any diagnostics,std::map <   Any, Any >  context)
+bool EnumerationImpl::immutable(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -580,15 +580,7 @@ Any EnumerationImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::ENUMERATION_ATTRIBUTE_OWNEDLITERAL:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::EnumerationLiteral>::iterator iter = m_ownedLiteral->begin();
-			Bag<uml::EnumerationLiteral>::iterator end = m_ownedLiteral->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //8440
+			return eAny(getOwnedLiteral()); //8440			
 		}
 	}
 	return DataTypeImpl::eGet(featureID, resolve, coreType);
@@ -747,14 +739,11 @@ void EnumerationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'ownedLiteral'
 		for (std::shared_ptr<uml::EnumerationLiteral> ownedLiteral : *this->getOwnedLiteral()) 
 		{
 			saveHandler->addReference(ownedLiteral, "ownedLiteral", ownedLiteral->eClass() != package->getEnumerationLiteral_Class());
 		}
-	
-
 	}
 	catch (std::exception& e)
 	{

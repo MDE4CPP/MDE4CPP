@@ -55,7 +55,7 @@ namespace uml
 			template.ownedElement->includesAll(parameter.parameteredElement->asSet() - parameter.ownedParameteredElement->asSet())
 			*/
 			 
-			virtual bool own_elements(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool own_elements(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			The names of the parameters of a TemplateSignature are unique.
@@ -63,7 +63,7 @@ namespace uml
 			   p1.parameteredElement.oclAsType(NamedElement).name <> p2.parameteredElement.oclAsType(NamedElement).name)
 			*/
 			 
-			virtual bool unique_parameters(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool unique_parameters(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			

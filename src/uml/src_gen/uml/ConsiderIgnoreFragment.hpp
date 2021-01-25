@@ -39,64 +39,17 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
-namespace uml 
-{
-	class CombinedFragment;
-}
-
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Comment;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class Gate;
-}
-
-namespace uml 
-{
 	class GeneralOrdering;
-}
-
-namespace uml 
-{
 	class Interaction;
-}
-
-namespace uml 
-{
 	class InteractionOperand;
-}
-
-namespace uml 
-{
 	class Lifeline;
-}
-
-namespace uml 
-{
-	class NamedElement;
-}
-
-namespace uml 
-{
 	class Namespace;
-}
-
-namespace uml 
-{
 	class StringExpression;
 }
 
@@ -108,6 +61,8 @@ namespace uml
 
 #include "uml/VisibilityKind.hpp"
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -141,14 +96,14 @@ namespace uml
 			(interactionOperator =  InteractionOperatorKind::consider) or (interactionOperator =  InteractionOperatorKind::ignore)
 			*/
 			 
-			virtual bool consider_or_ignore(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool consider_or_ignore(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			The NamedElements must be of a type of element that can be a signature for a message (i.e.., an Operation, or a Signal).
 			message->forAll(m | m.oclIsKindOf(Operation) or m.oclIsKindOf(Signal))
 			*/
 			 
-			virtual bool type(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool type(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			
 			//*********************************

@@ -36,20 +36,14 @@ namespace PSCS
 	class PSCSFactory;
 }
 
-//Forward Declaration for used types
-namespace PSCS::Semantics::StructuredClassifiers 
-{
-	class CS_RequestPropagationStrategy;
-}
-
-namespace fUML::Semantics::StructuredClassifiers 
-{
-	class Reference;
-}
-
+//Forward Declaration for used types 
 namespace fUML::Semantics::Loci 
 {
 	class SemanticVisitor;
+}
+namespace fUML::Semantics::StructuredClassifiers 
+{
+	class Reference;
 }
 
 // base class includes
@@ -57,6 +51,9 @@ namespace fUML::Semantics::Loci
 
 // enum includes
 
+
+//Includes from codegen annotation
+#include "fUML/Semantics/Actions/SendSignalActionActivation.hpp"
 
 //*********************************
 namespace PSCS::Semantics::StructuredClassifiers 
@@ -82,7 +79,7 @@ namespace PSCS::Semantics::StructuredClassifiers
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference> > select(std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference> >  potentialTargets,std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>  context) = 0;
+			virtual std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference> > select(std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference> > potentialTargets,std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> context) = 0;
 			
 			
 			//*********************************

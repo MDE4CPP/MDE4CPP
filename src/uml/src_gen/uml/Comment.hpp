@@ -36,22 +36,15 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
-namespace uml 
-{
-	class Comment;
-}
-
-namespace uml 
-{
-	class Element;
-}
+//Forward Declaration for used types 
 
 // base class includes
 #include "uml/Element.hpp"
 
 // enum includes
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -89,14 +82,14 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual std::string getBody() const = 0;
+			virtual std::string  getBody() const = 0;
 			
 			/*!
 			Specifies a string that is the comment.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual void setBody (std::string _body)= 0; 
+			virtual void setBody (std::string  _body)= 0; 
 			
 			//*********************************
 			// Reference
@@ -120,7 +113,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			std::string m_body = "";
+			std::string  m_body = "";
 			
 			
 			//*********************************

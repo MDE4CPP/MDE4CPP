@@ -283,31 +283,31 @@ std::shared_ptr<ecore::EClass> UnmarshallActionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool UnmarshallActionImpl::multiplicity_of_object(Any diagnostics,std::map <   Any, Any >  context)
+bool UnmarshallActionImpl::multiplicity_of_object(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool UnmarshallActionImpl::number_of_result(Any diagnostics,std::map <   Any, Any >  context)
+bool UnmarshallActionImpl::number_of_result(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool UnmarshallActionImpl::object_type(Any diagnostics,std::map <   Any, Any >  context)
+bool UnmarshallActionImpl::object_type(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool UnmarshallActionImpl::structural_feature(Any diagnostics,std::map <   Any, Any >  context)
+bool UnmarshallActionImpl::structural_feature(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool UnmarshallActionImpl::type_ordering_and_multiplicity(Any diagnostics,std::map <   Any, Any >  context)
+bool UnmarshallActionImpl::type_ordering_and_multiplicity(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -513,9 +513,11 @@ Any UnmarshallActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::UNMARSHALLACTION_ATTRIBUTE_OBJECT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getObject())); //24627
+			return eAny(getObject()); //24627
 		case uml::umlPackage::UNMARSHALLACTION_ATTRIBUTE_RESULT:
 		{
+			return eAny(getResult()); //24628			
+			/*
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::OutputPin>::iterator iter = m_result->begin();
 			Bag<uml::OutputPin>::iterator end = m_result->end();
@@ -525,9 +527,10 @@ Any UnmarshallActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 				iter++;
 			}
 			return eAny(tempList); //24628
+			*/
 		}
 		case uml::umlPackage::UNMARSHALLACTION_ATTRIBUTE_UNMARSHALLTYPE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getUnmarshallType())); //24629
+			return eAny(getUnmarshallType()); //24629
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -752,7 +755,6 @@ void UnmarshallActionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'object'
 		std::shared_ptr<uml::InputPin > object = this->getObject();
 		if (object != nullptr)
@@ -765,11 +767,9 @@ void UnmarshallActionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 		{
 			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_Class());
 		}
-	
 
-		// Add references
-		saveHandler->addReference("unmarshallType", this->getUnmarshallType());
-
+	// Add references
+		saveHandler->addReference("unmarshallType", this->getUnmarshallType());		 
 	}
 	catch (std::exception& e)
 	{

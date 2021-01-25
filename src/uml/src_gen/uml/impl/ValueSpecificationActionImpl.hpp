@@ -63,14 +63,14 @@ namespace uml
 			value.type.conformsTo(result.type)
 			*/
 			 
-			virtual bool compatible_type(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool compatible_type(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			The multiplicity of the result OutputPin is 1..1
 			result.is(1,1)
 			*/
 			 
-			virtual bool multiplicity(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool multiplicity(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			

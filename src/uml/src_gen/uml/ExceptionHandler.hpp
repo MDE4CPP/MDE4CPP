@@ -40,29 +40,12 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Classifier;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class ExecutableNode;
-}
-
-namespace uml 
-{
 	class ObjectNode;
 }
 
@@ -71,6 +54,8 @@ namespace uml
 
 // enum includes
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -114,7 +99,7 @@ namespace uml
 			nodes.incoming->forAll(nodes->includes(source))
 			*/
 			 
-			virtual bool edge_source_target(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool edge_source_target(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			The exceptionInput must either have no type or every exceptionType must conform to the exceptionInput type.
@@ -122,21 +107,21 @@ namespace uml
 			exceptionType->forAll(conformsTo(exceptionInput.type.oclAsType(Classifier)))
 			*/
 			 
-			virtual bool exception_input_type(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool exception_input_type(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			The handlerBody has no incoming or outgoing ActivityEdges and the exceptionInput has no incoming ActivityEdges.
 			handlerBody.incoming->isEmpty() and handlerBody.outgoing->isEmpty() and exceptionInput.incoming->isEmpty()
 			*/
 			 
-			virtual bool handler_body_edges(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool handler_body_edges(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			The handlerBody must have the same owner as the protectedNode.
 			handlerBody.owner=protectedNode.owner
 			*/
 			 
-			virtual bool handler_body_owner(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool handler_body_owner(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			The handlerBody is an Action with one InputPin, and that InputPin is the same as the exceptionInput.
@@ -145,7 +130,7 @@ namespace uml
 			inputs->size()=1 and inputs->first()=exceptionInput
 			*/
 			 
-			virtual bool one_input(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool one_input(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			If the protectedNode is an Action with OutputPins, then the handlerBody must also be an Action with the same number of OutputPins, which are compatible in type, ordering, and multiplicity to those of the protectedNode.
@@ -162,7 +147,7 @@ namespace uml
 			)
 			*/
 			 
-			virtual bool output_pins(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool output_pins(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			
 			//*********************************

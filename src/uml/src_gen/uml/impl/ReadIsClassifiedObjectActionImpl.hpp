@@ -63,28 +63,28 @@ namespace uml
 			result.type = Boolean
 			*/
 			 
-			virtual bool boolean_result(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool boolean_result(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			The multiplicity of the object InputPin is 1..1.
 			object.is(1,1)
 			*/
 			 
-			virtual bool multiplicity_of_input(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool multiplicity_of_input(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			The multiplicity of the result OutputPin is 1..1.
 			result.is(1,1)
 			*/
 			 
-			virtual bool multiplicity_of_output(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool multiplicity_of_output(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			The object InputPin has no type.
 			object.type = null
 			*/
 			 
-			virtual bool no_type(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool no_type(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			
@@ -96,14 +96,14 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual bool getIsDirect() const ;
+			virtual bool  getIsDirect() const ;
 			
 			/*!
 			Indicates whether the input object must be directly classified by the given Classifier or whether it may also be an instance of a specialization of the given Classifier.
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual void setIsDirect (bool _isDirect); 
+			virtual void setIsDirect (bool  _isDirect); 
 			
 			
 			//*********************************

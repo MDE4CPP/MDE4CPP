@@ -63,7 +63,7 @@ namespace uml
 			outgoing->isEmpty()
 			*/
 			 
-			virtual bool no_outgoing_edges(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool no_outgoing_edges(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			

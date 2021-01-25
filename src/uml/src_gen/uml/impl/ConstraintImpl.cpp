@@ -199,19 +199,19 @@ std::shared_ptr<ecore::EClass> ConstraintImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ConstraintImpl::boolean_value(Any diagnostics,std::map <   Any, Any >  context)
+bool ConstraintImpl::boolean_value(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ConstraintImpl::no_side_effects(Any diagnostics,std::map <   Any, Any >  context)
+bool ConstraintImpl::no_side_effects(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ConstraintImpl::not_apply_to_self(Any diagnostics,std::map <   Any, Any >  context)
+bool ConstraintImpl::not_apply_to_self(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -349,20 +349,12 @@ Any ConstraintImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::CONSTRAINT_ATTRIBUTE_CONSTRAINEDELEMENT:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Element>::iterator iter = m_constrainedElement->begin();
-			Bag<uml::Element>::iterator end = m_constrainedElement->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //5712
+			return eAny(getConstrainedElement()); //5712			
 		}
 		case uml::umlPackage::CONSTRAINT_ATTRIBUTE_CONTEXT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getContext().lock())); //5713
+			return eAny(getContext().lock()); //5713
 		case uml::umlPackage::CONSTRAINT_ATTRIBUTE_SPECIFICATION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSpecification())); //5714
+			return eAny(getSpecification()); //5714
 	}
 	return PackageableElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -577,22 +569,15 @@ void ConstraintImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'specification'
 		std::shared_ptr<uml::ValueSpecification > specification = this->getSpecification();
 		if (specification != nullptr)
 		{
 			saveHandler->addReference(specification, "specification", specification->eClass() != package->getValueSpecification_Class());
 		}
-	
 
-		// Add references
-		std::shared_ptr<Bag<uml::Element>> constrainedElement_list = this->getConstrainedElement();
-		for (std::shared_ptr<uml::Element > object : *constrainedElement_list)
-		{ 
-			saveHandler->addReferences("constrainedElement", object);
-		}
-
+	// Add references
+		saveHandler->addReferences<uml::Element>("constrainedElement", this->getConstrainedElement());	
 	}
 	catch (std::exception& e)
 	{

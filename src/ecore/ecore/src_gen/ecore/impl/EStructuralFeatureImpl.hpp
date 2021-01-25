@@ -61,45 +61,45 @@ namespace ecore
 			// Attributes Getter Setter
 			//*********************************
 			 
-			virtual bool isChangeable() const ;
+			virtual bool  isChangeable() const ;
 			
 			 
-			virtual void setChangeable (bool _changeable); 
+			virtual void setChangeable (bool  _changeable); 
 			 
-			virtual Any getDefaultValue() const ;
+			virtual Any  getDefaultValue() const ;
 			
 			 
-			virtual void setDefaultValue (Any _defaultValue); 
+			virtual void setDefaultValue (Any  _defaultValue); 
 			 
-			virtual std::string getDefaultValueLiteral() const ;
+			virtual std::string  getDefaultValueLiteral() const ;
 			
 			 
-			virtual void setDefaultValueLiteral (std::string _defaultValueLiteral); 
+			virtual void setDefaultValueLiteral (std::string  _defaultValueLiteral); 
 			 
-			virtual bool isDerived() const ;
+			virtual bool  isDerived() const ;
 			
 			 
-			virtual void setDerived (bool _derived); 
+			virtual void setDerived (bool  _derived); 
 			 
-			virtual int getFeatureID() const ;
+			virtual int  getFeatureID() const ;
 			
 			 
-			virtual void setFeatureID (int _featureID); 
+			virtual void setFeatureID (int  _featureID); 
 			 
-			virtual bool isTransient() const ;
+			virtual bool  isTransient() const ;
 			
 			 
-			virtual void setTransient (bool _transient); 
+			virtual void setTransient (bool  _transient); 
 			 
-			virtual bool isUnsettable() const ;
+			virtual bool  isUnsettable() const ;
 			
 			 
-			virtual void setUnsettable (bool _unsettable); 
+			virtual void setUnsettable (bool  _unsettable); 
 			 
-			virtual bool isVolatile() const ;
+			virtual bool  isVolatile() const ;
 			
 			 
-			virtual void setVolatile (bool _volatile); 
+			virtual void setVolatile (bool  _volatile); 
 			
 			
 			//*********************************

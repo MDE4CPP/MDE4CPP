@@ -283,7 +283,7 @@ std::shared_ptr<ecore::EClass> CallBehaviorActionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool CallBehaviorActionImpl::no_onport(Any diagnostics,std::map <   Any, Any >  context)
+bool CallBehaviorActionImpl::no_onport(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -445,7 +445,7 @@ Any CallBehaviorActionImpl::eGet(int featureID, bool resolve, bool coreType) con
 	switch(featureID)
 	{
 		case uml::umlPackage::CALLBEHAVIORACTION_ATTRIBUTE_BEHAVIOR:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getBehavior())); //2931
+			return eAny(getBehavior()); //2931
 	}
 	return CallActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -586,11 +586,8 @@ void CallBehaviorActionImpl::saveContent(std::shared_ptr<persistence::interfaces
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
-	
-
-		// Add references
-		saveHandler->addReference("behavior", this->getBehavior());
-
+	// Add references
+		saveHandler->addReference("behavior", this->getBehavior());		 
 	}
 	catch (std::exception& e)
 	{

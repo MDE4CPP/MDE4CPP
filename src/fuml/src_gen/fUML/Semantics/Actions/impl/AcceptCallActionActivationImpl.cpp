@@ -168,7 +168,7 @@ std::shared_ptr<ecore::EClass> AcceptCallActionActivationImpl::eStaticClass() co
 //*********************************
 // Operations
 //*********************************
-void AcceptCallActionActivationImpl::accept(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>  eventOccurrence)
+void AcceptCallActionActivationImpl::accept(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurrence)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -305,9 +305,6 @@ void AcceptCallActionActivationImpl::saveContent(std::shared_ptr<persistence::in
 	try
 	{
 		std::shared_ptr<fUML::Semantics::Actions::ActionsPackage> package = fUML::Semantics::Actions::ActionsPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

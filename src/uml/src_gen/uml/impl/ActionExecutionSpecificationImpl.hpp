@@ -67,7 +67,7 @@ namespace uml
 			(parentInteraction->size() = 1) and self.action.interaction->asSet() = parentInteraction
 			*/
 			 
-			virtual bool action_referenced(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool action_referenced(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			

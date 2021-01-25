@@ -35,7 +35,7 @@ namespace fUML
 	class fUMLFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace fUML::Semantics::SimpleClassifiers 
 {
 	class SignalInstance;
@@ -46,6 +46,8 @@ namespace fUML::Semantics::SimpleClassifiers
 // enum includes
 
 #include "ecore/EModelElement.hpp"
+
+//Includes from codegen annotation
 
 //*********************************
 namespace fUML::Semantics::CommonBehavior 
@@ -72,10 +74,10 @@ namespace fUML::Semantics::CommonBehavior
 			// Operations
 			//*********************************
 			 
-			virtual void accept(std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance>  signalInstance) = 0;
+			virtual void accept(std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> signalInstance) = 0;
 			
 			 
-			virtual bool match(std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance>  signalInstance) = 0;
+			virtual bool match(std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> signalInstance) = 0;
 			
 			
 			//*********************************

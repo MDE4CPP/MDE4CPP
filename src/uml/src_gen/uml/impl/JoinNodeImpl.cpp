@@ -233,12 +233,12 @@ std::shared_ptr<ecore::EClass> JoinNodeImpl::eStaticClass() const
 /*
 Getter & Setter for attribute isCombineDuplicate
 */
-bool JoinNodeImpl::getIsCombineDuplicate() const 
+bool  JoinNodeImpl::getIsCombineDuplicate() const 
 {
 	return m_isCombineDuplicate;
 }
 
-void JoinNodeImpl::setIsCombineDuplicate(bool _isCombineDuplicate)
+void JoinNodeImpl::setIsCombineDuplicate(bool  _isCombineDuplicate)
 {
 	m_isCombineDuplicate = _isCombineDuplicate;
 } 
@@ -248,13 +248,13 @@ void JoinNodeImpl::setIsCombineDuplicate(bool _isCombineDuplicate)
 //*********************************
 // Operations
 //*********************************
-bool JoinNodeImpl::incoming_object_flow(Any diagnostics,std::map <   Any, Any >  context)
+bool JoinNodeImpl::incoming_object_flow(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool JoinNodeImpl::one_outgoing_edge(Any diagnostics,std::map <   Any, Any >  context)
+bool JoinNodeImpl::one_outgoing_edge(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -378,7 +378,7 @@ Any JoinNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::JOINNODE_ATTRIBUTE_ISCOMBINEDUPLICATE:
 			return eAny(getIsCombineDuplicate()); //13120
 		case uml::umlPackage::JOINNODE_ATTRIBUTE_JOINSPEC:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getJoinSpec())); //13121
+			return eAny(getJoinSpec()); //13121
 	}
 	return ControlNodeImpl::eGet(featureID, resolve, coreType);
 }
@@ -533,20 +533,17 @@ void JoinNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'joinSpec'
 		std::shared_ptr<uml::ValueSpecification > joinSpec = this->getJoinSpec();
 		if (joinSpec != nullptr)
 		{
 			saveHandler->addReference(joinSpec, "joinSpec", joinSpec->eClass() != package->getValueSpecification_Class());
 		}
-	
 		// Add attributes
 		if ( this->eIsSet(package->getJoinNode_Attribute_isCombineDuplicate()) )
 		{
 			saveHandler->addAttribute("isCombineDuplicate", this->getIsCombineDuplicate());
 		}
-
 	}
 	catch (std::exception& e)
 	{

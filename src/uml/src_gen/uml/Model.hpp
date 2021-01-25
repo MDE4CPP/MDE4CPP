@@ -35,94 +35,21 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Comment;
-}
-
-namespace uml 
-{
 	class Constraint;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class ElementImport;
-}
-
-namespace uml 
-{
-	class NamedElement;
-}
-
-namespace uml 
-{
-	class Namespace;
-}
-
-namespace uml 
-{
-	class Package;
-}
-
-namespace uml 
-{
 	class PackageImport;
-}
-
-namespace uml 
-{
 	class PackageMerge;
-}
-
-namespace uml 
-{
-	class PackageableElement;
-}
-
-namespace uml 
-{
 	class ProfileApplication;
-}
-
-namespace uml 
-{
 	class Stereotype;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class TemplateBinding;
-}
-
-namespace uml 
-{
 	class TemplateParameter;
-}
-
-namespace uml 
-{
 	class TemplateSignature;
-}
-
-namespace uml 
-{
 	class Type;
 }
 
@@ -132,6 +59,8 @@ namespace uml
 // enum includes
 #include "uml/VisibilityKind.hpp"
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -175,14 +104,14 @@ namespace uml
 			<p>From package UML::Packages.</p>
 			*/
 			 
-			virtual std::string getViewpoint() const = 0;
+			virtual std::string  getViewpoint() const = 0;
 			
 			/*!
 			The name of the viewpoint that is expressed by a model (this name may refer to a profile definition).
 			<p>From package UML::Packages.</p>
 			*/
 			 
-			virtual void setViewpoint (std::string _viewpoint)= 0; 
+			virtual void setViewpoint (std::string  _viewpoint)= 0; 
 			
 			//*********************************
 			// Reference
@@ -198,7 +127,7 @@ namespace uml
 			<p>From package UML::Packages.</p>
 			*/
 			 
-			std::string m_viewpoint = "";
+			std::string  m_viewpoint = "";
 			
 			
 			//*********************************

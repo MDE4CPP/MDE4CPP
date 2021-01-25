@@ -124,19 +124,19 @@ std::shared_ptr<EClass> EFactoryImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::string EFactoryImpl::convertToString(std::shared_ptr<ecore::EDataType>  eDataType,Any instanceValue) const
+std::string EFactoryImpl::convertToString(std::shared_ptr<ecore::EDataType> eDataType,Any instanceValue) const
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<ecore::EObject> EFactoryImpl::create(std::shared_ptr<ecore::EClass>  eClass) const
+std::shared_ptr<ecore::EObject> EFactoryImpl::create(std::shared_ptr<ecore::EClass> eClass) const
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-Any EFactoryImpl::createFromString(std::shared_ptr<ecore::EDataType>  eDataType,std::string literalValue) const
+Any EFactoryImpl::createFromString(std::shared_ptr<ecore::EDataType> eDataType,std::string literalValue) const
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -208,7 +208,7 @@ Any EFactoryImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ecore::ecorePackage::EFACTORY_ATTRIBUTE_EPACKAGE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEPackage())); //234
+			return eAny(getEPackage()); //224
 	}
 	return EModelElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -217,7 +217,7 @@ bool EFactoryImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ecore::ecorePackage::EFACTORY_ATTRIBUTE_EPACKAGE:
-			return getEPackage() != nullptr; //234
+			return getEPackage() != nullptr; //224
 	}
 	return EModelElementImpl::internalEIsSet(featureID);
 }
@@ -230,7 +230,7 @@ bool EFactoryImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ecore::EPackage> _ePackage = std::dynamic_pointer_cast<ecore::EPackage>(_temp);
-			setEPackage(_ePackage); //234
+			setEPackage(_ePackage); //224
 			return true;
 		}
 	}
@@ -328,11 +328,8 @@ void EFactoryImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	{
 		std::shared_ptr<ecore::ecorePackage> package = ecore::ecorePackage::eInstance();
 
-	
-
-		// Add references
-		saveHandler->addReference("ePackage", this->getEPackage());
-
+	// Add references
+		saveHandler->addReference("ePackage", this->getEPackage());		 
 	}
 	catch (std::exception& e)
 	{

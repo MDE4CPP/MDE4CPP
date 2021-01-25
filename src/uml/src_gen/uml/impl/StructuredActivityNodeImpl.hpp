@@ -73,21 +73,21 @@ namespace uml
 				union(self.targetNodes().incoming->intersection(self.allOwnedNodes().outgoing))->asSet()
 			*/
 			 
-			virtual bool edges(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool edges(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			The incoming ActivityEdges of an InputPin of a StructuredActivityNode must have sources that are not within the StructuredActivityNode.
 			input.incoming.source->excludesAll(allOwnedNodes()-output)
 			*/
 			 
-			virtual bool input_pin_edges(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool input_pin_edges(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			The outgoing ActivityEdges of the OutputPins of a StructuredActivityNode must have targets that are not within the StructuredActivityNode.
 			output.outgoing.target->excludesAll(allOwnedNodes()-input)
 			*/
 			 
-			virtual bool output_pin_edges(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool output_pin_edges(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			Return those ActivityNodes contained immediately within the StructuredActivityNode that may act as sources of edges owned by the StructuredActivityNode.
@@ -117,14 +117,14 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual bool getMustIsolate() const ;
+			virtual bool  getMustIsolate() const ;
 			
 			/*!
 			If true, then any object used by an Action within the StructuredActivityNode cannot be accessed by any Action outside the node until the StructuredActivityNode as a whole completes. Any concurrent Actions that would result in accessing such objects are required to have their execution deferred until the completion of the StructuredActivityNode.
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual void setMustIsolate (bool _mustIsolate); 
+			virtual void setMustIsolate (bool  _mustIsolate); 
 			
 			
 			//*********************************

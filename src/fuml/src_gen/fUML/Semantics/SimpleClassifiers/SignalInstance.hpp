@@ -35,25 +35,14 @@ namespace fUML
 	class fUMLFactory;
 }
 
-//Forward Declaration for used types
-namespace fUML::Semantics::SimpleClassifiers 
-{
-	class CompoundValue;
-}
-
+//Forward Declaration for used types 
 namespace fUML::Semantics::SimpleClassifiers 
 {
 	class FeatureValue;
 }
-
 namespace uml 
 {
 	class Signal;
-}
-
-namespace fUML::Semantics::Values 
-{
-	class Value;
 }
 
 // base class includes
@@ -61,6 +50,8 @@ namespace fUML::Semantics::Values
 
 // enum includes
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace fUML::Semantics::SimpleClassifiers 
@@ -97,10 +88,10 @@ namespace fUML::Semantics::SimpleClassifiers
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<uml::Signal > getType() const = 0;
+			virtual std::shared_ptr<org.eclipse.uml2.uml.Signal > getType() const = 0;
 			
 			
-			virtual void setType(std::shared_ptr<uml::Signal> _type) = 0;
+			virtual void setType(std::shared_ptr<org.eclipse.uml2.uml.Signal> _type) = 0;
 			
 			
 
@@ -114,7 +105,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			// Reference Members
 			//*********************************
 			
-			std::shared_ptr<uml::Signal > m_type;
+			std::shared_ptr<org.eclipse.uml2.uml.Signal > m_type;
 
 		public:
 			//*********************************

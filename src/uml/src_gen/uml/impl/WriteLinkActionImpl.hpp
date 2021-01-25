@@ -68,7 +68,7 @@ namespace uml
 			    other<>end and _'context'.conformsTo(other.type.oclAsType(Classifier))))
 			*/
 			 
-			virtual bool allow_access(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool allow_access(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			

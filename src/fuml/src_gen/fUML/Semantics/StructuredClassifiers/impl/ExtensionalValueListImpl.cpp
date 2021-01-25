@@ -113,13 +113,13 @@ std::shared_ptr<ecore::EClass> ExtensionalValueListImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ExtensionalValueListImpl::addValue(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue>  value)
+bool ExtensionalValueListImpl::addValue(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> value)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void ExtensionalValueListImpl::addValue(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue>  value,int i)
+void ExtensionalValueListImpl::addValue(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> value,int i)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -137,7 +137,7 @@ std::string ExtensionalValueListImpl::removeValue(int i)
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<fUML::Semantics::Values::Value> ExtensionalValueListImpl::setValue(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue>  value,int i)
+std::shared_ptr<fUML::Semantics::Values::Value> ExtensionalValueListImpl::setValue(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> value,int i)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -258,9 +258,6 @@ void ExtensionalValueListImpl::saveContent(std::shared_ptr<persistence::interfac
 	try
 	{
 		std::shared_ptr<fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage> package = fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

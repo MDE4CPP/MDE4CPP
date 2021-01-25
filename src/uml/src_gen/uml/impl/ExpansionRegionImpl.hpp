@@ -75,14 +75,14 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual uml::ExpansionKind getMode() const ;
+			virtual uml::ExpansionKind  getMode() const ;
 			
 			/*!
 			The mode in which the ExpansionRegion executes its contents. If parallel, executions are concurrent. If iterative, executions are sequential. If stream, a stream of values flows into a single execution.
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual void setMode (uml::ExpansionKind _mode); 
+			virtual void setMode (uml::ExpansionKind  _mode); 
 			
 			
 			//*********************************

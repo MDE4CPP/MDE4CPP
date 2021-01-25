@@ -40,69 +40,17 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Association;
-}
-
-namespace uml 
-{
 	class Behavior;
-}
-
-namespace uml 
-{
 	class Classifier;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
-	class Connector;
-}
-
-namespace uml 
-{
 	class ConnectorEnd;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
-	class Feature;
-}
-
-namespace uml 
-{
 	class Namespace;
-}
-
-namespace uml 
-{
-	class RedefinableElement;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class StructuredClassifier;
 }
 
@@ -114,6 +62,8 @@ namespace uml
 
 #include "uml/VisibilityKind.hpp"
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -177,7 +127,7 @@ namespace uml
 			  e.role.oclIsKindOf(Port) and structuredClassifier.allRoles()->includes(e.partWithPort))
 			*/
 			 
-			virtual bool roles(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool roles(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			The types of the ConnectableElements that the ends of a Connector are attached to must conform to the types of the ends of the Association that types the Connector, if any.
@@ -186,7 +136,7 @@ namespace uml
 			  (type.memberEnd->size() = noOfEnds) and Sequence{1..noOfEnds}->forAll(i | end->at(i).role.type.conformsTo(type.memberEnd->at(i).type))
 			*/
 			 
-			virtual bool types(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool types(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			
 			//*********************************
@@ -197,7 +147,7 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			 
-			virtual uml::ConnectorKind getKind() const = 0;
+			virtual uml::ConnectorKind  getKind() const = 0;
 			
 			
 			
@@ -259,7 +209,7 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			 
-			uml::ConnectorKind m_kind = ConnectorKind::ASSEMBLY;
+			uml::ConnectorKind  m_kind = ConnectorKind::ASSEMBLY;
 			
 			
 			//*********************************

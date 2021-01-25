@@ -36,45 +36,14 @@ namespace ecore
 	class ecoreFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace ecore 
 {
 	class EAnnotation;
-}
-
-namespace ecore 
-{
 	class EAttribute;
-}
-
-namespace ecore 
-{
 	class EClass;
-}
-
-namespace ecore 
-{
 	class EClassifier;
-}
-
-namespace ecore 
-{
 	class EGenericType;
-}
-
-namespace ecore 
-{
-	class EObject;
-}
-
-namespace ecore 
-{
-	class EReference;
-}
-
-namespace ecore 
-{
-	class EStructuralFeature;
 }
 
 // base class includes
@@ -82,6 +51,8 @@ namespace ecore
 
 // enum includes
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace ecore 
@@ -111,19 +82,19 @@ namespace ecore
 			// Attributes Getter Setter
 			//*********************************
 			 
-			virtual bool isContainer() const = 0;
+			virtual bool  isContainer() const = 0;
 			
 			
 			 
-			virtual bool isContainment() const = 0;
+			virtual bool  isContainment() const = 0;
 			
 			 
-			virtual void setContainment (bool _containment)= 0; 
+			virtual void setContainment (bool  _containment)= 0; 
 			 
-			virtual bool isResolveProxies() const = 0;
+			virtual bool  isResolveProxies() const = 0;
 			
 			 
-			virtual void setResolveProxies (bool _resolveProxies)= 0; 
+			virtual void setResolveProxies (bool  _resolveProxies)= 0; 
 			
 			//*********************************
 			// Reference
@@ -151,11 +122,11 @@ namespace ecore
 			// Attribute Members
 			//*********************************
 			 
-			bool m_container = false;
+			bool  m_container = false;
 			 
-			bool m_containment = false;
+			bool  m_containment = false;
 			 
-			bool m_resolveProxies = true;
+			bool  m_resolveProxies = true;
 			
 			
 			//*********************************

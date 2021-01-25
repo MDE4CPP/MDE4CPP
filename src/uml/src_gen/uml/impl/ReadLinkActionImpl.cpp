@@ -286,19 +286,19 @@ std::shared_ptr<ecore::EClass> ReadLinkActionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ReadLinkActionImpl::compatible_multiplicity(Any diagnostics,std::map <   Any, Any >  context)
+bool ReadLinkActionImpl::compatible_multiplicity(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ReadLinkActionImpl::navigable_open_end(Any diagnostics,std::map <   Any, Any >  context)
+bool ReadLinkActionImpl::navigable_open_end(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ReadLinkActionImpl::one_open_end(Any diagnostics,std::map <   Any, Any >  context)
+bool ReadLinkActionImpl::one_open_end(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -310,13 +310,13 @@ std::shared_ptr<Bag<uml::Property> > ReadLinkActionImpl::openEnd()
 	throw "UnsupportedOperationException";
 }
 
-bool ReadLinkActionImpl::type_and_ordering(Any diagnostics,std::map <   Any, Any >  context)
+bool ReadLinkActionImpl::type_and_ordering(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ReadLinkActionImpl::visibility(Any diagnostics,std::map <   Any, Any >  context)
+bool ReadLinkActionImpl::visibility(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -478,7 +478,7 @@ Any ReadLinkActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::READLINKACTION_ATTRIBUTE_RESULT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //19529
+			return eAny(getResult()); //19529
 	}
 	return LinkActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -608,15 +608,12 @@ void ReadLinkActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'result'
 		std::shared_ptr<uml::OutputPin > result = this->getResult();
 		if (result != nullptr)
 		{
 			saveHandler->addReference(result, "result", result->eClass() != package->getOutputPin_Class());
 		}
-	
-
 	}
 	catch (std::exception& e)
 	{

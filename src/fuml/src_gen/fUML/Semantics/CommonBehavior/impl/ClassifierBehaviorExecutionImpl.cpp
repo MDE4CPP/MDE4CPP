@@ -115,7 +115,7 @@ void ClassifierBehaviorExecutionImpl::_startObjectBehavior()
 	throw "UnsupportedOperationException";
 }
 
-void ClassifierBehaviorExecutionImpl::execute(std::shared_ptr<Bag<uml::Class> >  classifier,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> >  inputs)
+void ClassifierBehaviorExecutionImpl::execute(std::shared_ptr<Bag<org.eclipse.uml2.uml.Class> > classifier,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > inputs)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -133,13 +133,13 @@ void ClassifierBehaviorExecutionImpl::terminate()
 /*
 Getter & Setter for reference classifier
 */
-std::shared_ptr<uml::Class > ClassifierBehaviorExecutionImpl::getClassifier() const
+std::shared_ptr<org.eclipse.uml2.uml.Class > ClassifierBehaviorExecutionImpl::getClassifier() const
 {
 //assert(m_classifier);
     return m_classifier;
 }
 
-void ClassifierBehaviorExecutionImpl::setClassifier(std::shared_ptr<uml::Class> _classifier)
+void ClassifierBehaviorExecutionImpl::setClassifier(std::shared_ptr<org.eclipse.uml2.uml.Class> _classifier)
 {
     m_classifier = _classifier;
 }
@@ -205,11 +205,11 @@ Any ClassifierBehaviorExecutionImpl::eGet(int featureID, bool resolve, bool core
 	switch(featureID)
 	{
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CLASSIFIERBEHAVIOREXECUTION_ATTRIBUTE_CLASSIFIER:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getClassifier())); //221
+			return eAny(getClassifier()); //221
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CLASSIFIERBEHAVIOREXECUTION_ATTRIBUTE_EXECUTION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getExecution())); //220
+			return eAny(getExecution()); //220
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CLASSIFIERBEHAVIOREXECUTION_ATTRIBUTE_OBJECTACTIVATION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getObjectActivation())); //222
+			return eAny(getObjectActivation()); //222
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -234,7 +234,7 @@ bool ClassifierBehaviorExecutionImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::Class> _classifier = std::dynamic_pointer_cast<uml::Class>(_temp);
+			std::shared_ptr<org.eclipse.uml2.uml.Class> _classifier = std::dynamic_pointer_cast<org.eclipse.uml2.uml.Class>(_temp);
 			setClassifier(_classifier); //221
 			return true;
 		}
@@ -333,7 +333,7 @@ void ClassifierBehaviorExecutionImpl::resolveReferences(const int featureID, std
 			if (references.size() == 1)
 			{
 				// Cast object to correct type
-				std::shared_ptr<uml::Class> _classifier = std::dynamic_pointer_cast<uml::Class>( references.front() );
+				std::shared_ptr<org.eclipse.uml2.uml.Class> _classifier = std::dynamic_pointer_cast<org.eclipse.uml2.uml.Class>( references.front() );
 				setClassifier(_classifier);
 			}
 			
@@ -382,13 +382,10 @@ void ClassifierBehaviorExecutionImpl::saveContent(std::shared_ptr<persistence::i
 	{
 		std::shared_ptr<fUML::Semantics::CommonBehavior::CommonBehaviorPackage> package = fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance();
 
-	
-
-		// Add references
-		saveHandler->addReference("classifier", this->getClassifier());
-		saveHandler->addReference("execution", this->getExecution());
-		saveHandler->addReference("objectActivation", this->getObjectActivation());
-
+	// Add references
+		saveHandler->addReference("classifier", this->getClassifier());		
+		saveHandler->addReference("execution", this->getExecution());		 
+		saveHandler->addReference("objectActivation", this->getObjectActivation());		 
 	}
 	catch (std::exception& e)
 	{

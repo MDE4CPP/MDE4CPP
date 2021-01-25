@@ -54,10 +54,10 @@
 #include "PSCS/Semantics/StructuredClassifiers/impl/StructuredClassifiersFactoryImpl.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/impl/StructuredClassifiersPackageImpl.hpp"
 
-#include "PSCS/PSCSFactory.hpp"
-#include "PSCS/PSCSPackage.hpp"
 #include "PSCS/Semantics/SemanticsFactory.hpp"
 #include "PSCS/Semantics/SemanticsPackage.hpp"
+#include "PSCS/PSCSFactory.hpp"
+#include "PSCS/PSCSPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -135,7 +135,7 @@ return newValue;
 
 
 
-std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> CS_ReferenceImpl::dispatchIn(std::shared_ptr<uml::Operation>  operation,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>  interactionPoint)
+std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> CS_ReferenceImpl::dispatchIn(std::shared_ptr<org.eclipse.uml2.uml.Operation> operation,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> interactionPoint)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -144,7 +144,7 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> CS_ReferenceImpl::di
 	//end of body
 }
 
-std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> CS_ReferenceImpl::dispatchIn(std::shared_ptr<uml::Operation>  operation,std::shared_ptr<uml::Port>  onPort)
+std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> CS_ReferenceImpl::dispatchIn(std::shared_ptr<org.eclipse.uml2.uml.Operation> operation,std::shared_ptr<org.eclipse.uml2.uml.Port> onPort)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -153,7 +153,7 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> CS_ReferenceImpl::di
 	//end of body
 }
 
-std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> CS_ReferenceImpl::dispatchOut(std::shared_ptr<uml::Operation>  operation,std::shared_ptr<uml::Port>  onPort)
+std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> CS_ReferenceImpl::dispatchOut(std::shared_ptr<org.eclipse.uml2.uml.Operation> operation,std::shared_ptr<org.eclipse.uml2.uml.Port> onPort)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -162,7 +162,7 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> CS_ReferenceImpl::di
 	//end of body
 }
 
-std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> CS_ReferenceImpl::dispatchOut(std::shared_ptr<uml::Operation>  operation,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>  interactionPoint)
+std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> CS_ReferenceImpl::dispatchOut(std::shared_ptr<org.eclipse.uml2.uml.Operation> operation,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> interactionPoint)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -172,7 +172,7 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> CS_ReferenceImpl::di
 	//end of body
 }
 
-void CS_ReferenceImpl::sendIn(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>  eventOccurrence,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>  interactionPoint)
+void CS_ReferenceImpl::sendIn(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurrence,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> interactionPoint)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -181,7 +181,7 @@ void CS_ReferenceImpl::sendIn(std::shared_ptr<fUML::Semantics::CommonBehavior::E
 	//end of body
 }
 
-void CS_ReferenceImpl::sendIn(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>  eventOccurrence,std::shared_ptr<uml::Port>  onPort)
+void CS_ReferenceImpl::sendIn(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurrence,std::shared_ptr<org.eclipse.uml2.uml.Port> onPort)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -190,7 +190,7 @@ void CS_ReferenceImpl::sendIn(std::shared_ptr<fUML::Semantics::CommonBehavior::E
 	//end of body
 }
 
-void CS_ReferenceImpl::sendOut(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>  eventOccurrence,std::shared_ptr<uml::Port>  onPort)
+void CS_ReferenceImpl::sendOut(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurrence,std::shared_ptr<org.eclipse.uml2.uml.Port> onPort)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -199,7 +199,7 @@ void CS_ReferenceImpl::sendOut(std::shared_ptr<fUML::Semantics::CommonBehavior::
 	//end of body
 }
 
-void CS_ReferenceImpl::sendOut(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>  eventOccurrence,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>  interactionPoint)
+void CS_ReferenceImpl::sendOut(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurrence,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> interactionPoint)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -256,7 +256,7 @@ Any CS_ReferenceImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::CS_REFERENCE_ATTRIBUTE_COMPOSITEREFERENT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getCompositeReferent())); //261
+			return eAny(getCompositeReferent()); //261
 	}
 	return fUML::Semantics::StructuredClassifiers::ReferenceImpl::eGet(featureID, resolve, coreType);
 }
@@ -382,11 +382,8 @@ void CS_ReferenceImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	{
 		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage> package = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance();
 
-	
-
-		// Add references
-		saveHandler->addReference("compositeReferent", this->getCompositeReferent());
-
+	// Add references
+		saveHandler->addReference("compositeReferent", this->getCompositeReferent());		 
 	}
 	catch (std::exception& e)
 	{

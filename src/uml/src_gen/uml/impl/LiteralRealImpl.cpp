@@ -198,12 +198,12 @@ std::shared_ptr<ecore::EClass> LiteralRealImpl::eStaticClass() const
 /*
 Getter & Setter for attribute value
 */
-double LiteralRealImpl::getValue() const 
+double  LiteralRealImpl::getValue() const 
 {
 	return m_value;
 }
 
-void LiteralRealImpl::setValue(double _value)
+void LiteralRealImpl::setValue(double  _value)
 {
 	m_value = _value;
 } 
@@ -435,14 +435,11 @@ void LiteralRealImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
 		// Add attributes
 		if ( this->eIsSet(package->getLiteralReal_Attribute_value()) )
 		{
 			saveHandler->addAttribute("value", this->getValue());
 		}
-
 	}
 	catch (std::exception& e)
 	{

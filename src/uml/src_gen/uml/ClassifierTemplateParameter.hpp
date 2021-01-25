@@ -39,34 +39,12 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Classifier;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class ParameterableElement;
-}
-
-namespace uml 
-{
-	class TemplateParameter;
-}
-
-namespace uml 
-{
 	class TemplateSignature;
 }
 
@@ -75,6 +53,8 @@ namespace uml
 
 // enum includes
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -108,7 +88,7 @@ namespace uml
 			 templateParameterSubstitution.actual->forAll(a | a.oclIsKindOf(Classifier))
 			*/
 			 
-			virtual bool actual_is_classifier(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool actual_is_classifier(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			If there are any constrainingClassifiers, then every argument must be the same as or a specialization of them, or if allowSubstitutable is true, then it can also be substitutable.
@@ -121,7 +101,7 @@ namespace uml
 			)
 			*/
 			 
-			virtual bool constraining_classifiers_constrain_args(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool constraining_classifiers_constrain_args(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			If there are any constrainingClassifiers, then the parameteredElement must be the same as or a specialization of them, or if allowSubstitutable is true, then it can also be substitutable.
@@ -130,28 +110,28 @@ namespace uml
 			)
 			*/
 			 
-			virtual bool constraining_classifiers_constrain_parametered_element(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool constraining_classifiers_constrain_parametered_element(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			If allowSubstitutable is true, then there must be a constrainingClassifier.
 			allowSubstitutable implies constrainingClassifier->notEmpty()
 			*/
 			 
-			virtual bool has_constraining_classifier(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool has_constraining_classifier(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			If the parameteredElement is not abstract, then the Classifier used as an argument shall not be abstract.
 			(not parameteredElement.isAbstract) implies templateParameterSubstitution.actual->forAll(a | not a.oclAsType(Classifier).isAbstract)
 			*/
 			 
-			virtual bool matching_abstract(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool matching_abstract(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			The parameteredElement has no direct features, and if constrainedElement is empty it has no generalizations.
 			parameteredElement.feature->isEmpty() and (constrainingClassifier->isEmpty() implies  parameteredElement.allParents()->isEmpty())
 			*/
 			 
-			virtual bool parametered_element_no_features(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool parametered_element_no_features(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			
 			//*********************************
@@ -162,14 +142,14 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual bool getAllowSubstitutable() const = 0;
+			virtual bool  getAllowSubstitutable() const = 0;
 			
 			/*!
 			Constrains the required relationship between an actual parameter and the parameteredElement for this formal parameter.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual void setAllowSubstitutable (bool _allowSubstitutable)= 0; 
+			virtual void setAllowSubstitutable (bool  _allowSubstitutable)= 0; 
 			
 			//*********************************
 			// Reference
@@ -193,7 +173,7 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			bool m_allowSubstitutable = true;
+			bool  m_allowSubstitutable = true;
 			
 			
 			//*********************************

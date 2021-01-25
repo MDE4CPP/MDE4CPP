@@ -39,24 +39,11 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Comment;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class TemplateParameter;
-}
-
-namespace uml 
-{
 	class TemplateableElement;
 }
 
@@ -65,6 +52,8 @@ namespace uml
 
 // enum includes
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -106,7 +95,7 @@ namespace uml
 			template.ownedElement->includesAll(parameter.parameteredElement->asSet() - parameter.ownedParameteredElement->asSet())
 			*/
 			 
-			virtual bool own_elements(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool own_elements(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			The names of the parameters of a TemplateSignature are unique.
@@ -114,7 +103,7 @@ namespace uml
 			   p1.parameteredElement.oclAsType(NamedElement).name <> p2.parameteredElement.oclAsType(NamedElement).name)
 			*/
 			 
-			virtual bool unique_parameters(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool unique_parameters(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			
 			//*********************************

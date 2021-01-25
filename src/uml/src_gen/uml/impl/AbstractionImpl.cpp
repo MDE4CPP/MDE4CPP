@@ -346,7 +346,7 @@ Any AbstractionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::ABSTRACTION_ATTRIBUTE_MAPPING:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getMapping())); //117
+			return eAny(getMapping()); //117
 	}
 	return DependencyImpl::eGet(featureID, resolve, coreType);
 }
@@ -470,15 +470,12 @@ void AbstractionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'mapping'
 		std::shared_ptr<uml::OpaqueExpression > mapping = this->getMapping();
 		if (mapping != nullptr)
 		{
 			saveHandler->addReference(mapping, "mapping", mapping->eClass() != package->getOpaqueExpression_Class());
 		}
-	
-
 	}
 	catch (std::exception& e)
 	{

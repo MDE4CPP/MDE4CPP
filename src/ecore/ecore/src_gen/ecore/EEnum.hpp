@@ -36,34 +36,12 @@ namespace ecore
 	class ecoreFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace ecore 
 {
 	class EAnnotation;
-}
-
-namespace ecore 
-{
-	class EDataType;
-}
-
-namespace ecore 
-{
 	class EEnumLiteral;
-}
-
-namespace ecore 
-{
-	class EObject;
-}
-
-namespace ecore 
-{
 	class EPackage;
-}
-
-namespace ecore 
-{
 	class ETypeParameter;
 }
 
@@ -72,6 +50,8 @@ namespace ecore
 
 // enum includes
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace ecore 

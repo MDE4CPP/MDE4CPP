@@ -251,31 +251,31 @@ std::shared_ptr<ecore::EClass> ActivityParameterNodeImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ActivityParameterNodeImpl::has_parameters(Any diagnostics,std::map <   Any, Any >  context)
+bool ActivityParameterNodeImpl::has_parameters(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ActivityParameterNodeImpl::no_edges(Any diagnostics,std::map <   Any, Any >  context)
+bool ActivityParameterNodeImpl::no_edges(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ActivityParameterNodeImpl::no_incoming_edges(Any diagnostics,std::map <   Any, Any >  context)
+bool ActivityParameterNodeImpl::no_incoming_edges(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ActivityParameterNodeImpl::no_outgoing_edges(Any diagnostics,std::map <   Any, Any >  context)
+bool ActivityParameterNodeImpl::no_outgoing_edges(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ActivityParameterNodeImpl::same_type(Any diagnostics,std::map <   Any, Any >  context)
+bool ActivityParameterNodeImpl::same_type(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -397,7 +397,7 @@ Any ActivityParameterNodeImpl::eGet(int featureID, bool resolve, bool coreType) 
 	switch(featureID)
 	{
 		case uml::umlPackage::ACTIVITYPARAMETERNODE_ATTRIBUTE_PARAMETER:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getParameter())); //1226
+			return eAny(getParameter()); //1226
 	}
 	return ObjectNodeImpl::eGet(featureID, resolve, coreType);
 }
@@ -530,11 +530,8 @@ void ActivityParameterNodeImpl::saveContent(std::shared_ptr<persistence::interfa
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
-	
-
-		// Add references
-		saveHandler->addReference("parameter", this->getParameter());
-
+	// Add references
+		saveHandler->addReference("parameter", this->getParameter());		 
 	}
 	catch (std::exception& e)
 	{

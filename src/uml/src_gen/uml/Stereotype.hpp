@@ -39,179 +39,39 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
-namespace uml 
-{
-	class Behavior;
-}
-
-namespace uml 
-{
-	class Class;
-}
-
-namespace uml 
-{
-	class Classifier;
-}
-
-namespace uml 
-{
-	class CollaborationUse;
-}
-
-namespace uml 
-{
-	class Comment;
-}
-
-namespace uml 
-{
-	class ConnectableElement;
-}
-
-namespace uml 
-{
-	class Connector;
-}
-
-namespace uml 
-{
-	class Constraint;
-}
-
-namespace uml 
-{
-	class Dependency;
-}
-
+//Forward Declaration for used types 
 namespace ecore 
 {
 	class EClass;
 }
-
 namespace uml 
 {
-	class Element;
-}
-
-namespace uml 
-{
+	class Behavior;
+	class CollaborationUse;
+	class Comment;
+	class ConnectableElement;
+	class Connector;
+	class Constraint;
+	class Dependency;
 	class ElementImport;
-}
-
-namespace uml 
-{
 	class Extension;
-}
-
-namespace uml 
-{
 	class Feature;
-}
-
-namespace uml 
-{
 	class Generalization;
-}
-
-namespace uml 
-{
 	class GeneralizationSet;
-}
-
-namespace uml 
-{
 	class Image;
-}
-
-namespace uml 
-{
 	class InterfaceRealization;
-}
-
-namespace uml 
-{
-	class NamedElement;
-}
-
-namespace uml 
-{
-	class Namespace;
-}
-
-namespace uml 
-{
 	class Operation;
-}
-
-namespace uml 
-{
 	class Package;
-}
-
-namespace uml 
-{
 	class PackageImport;
-}
-
-namespace uml 
-{
-	class PackageableElement;
-}
-
-namespace uml 
-{
 	class Port;
-}
-
-namespace uml 
-{
 	class Profile;
-}
-
-namespace uml 
-{
 	class Property;
-}
-
-namespace uml 
-{
 	class Reception;
-}
-
-namespace uml 
-{
-	class RedefinableElement;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class Substitution;
-}
-
-namespace uml 
-{
 	class TemplateBinding;
-}
-
-namespace uml 
-{
 	class TemplateParameter;
-}
-
-namespace uml 
-{
 	class TemplateSignature;
-}
-
-namespace uml 
-{
 	class UseCase;
 }
 
@@ -221,6 +81,8 @@ namespace uml
 // enum includes
 #include "uml/VisibilityKind.hpp"
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -256,32 +118,32 @@ namespace uml
 			->forAll(opposite.owner = association)
 			*/
 			 
-			virtual bool associationEndOwnership(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool associationEndOwnership(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			If a Stereotype extends more than one metaclass, the multiplicity of the corresponding base-properties shall be [0..1]. At any point in time, only one of these base-properties can contain a metaclass instance during runtime.
 			*/
 			 
-			virtual bool base_property_multiplicity_multiple_extension(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool base_property_multiplicity_multiple_extension(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			If a Stereotype extends only one metaclass, the multiplicity of the corresponding base-property shall be 1..1.
 			*/
 			 
-			virtual bool base_property_multiplicity_single_extension(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool base_property_multiplicity_single_extension(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			The upper bound of base-properties is exactly 1.
 			*/
 			 
-			virtual bool base_property_upper_bound(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool base_property_upper_bound(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			Stereotypes may only participate in binary associations.
 			ownedAttribute.association->forAll(memberEnd->size()=2)
 			*/
 			 
-			virtual bool binaryAssociationsOnly(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool binaryAssociationsOnly(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			The query containingProfile returns the closest profile directly or indirectly containing this stereotype.
@@ -295,7 +157,7 @@ namespace uml
 			Creates a(n) (required) extension of the specified metaclass with this stereotype.
 			*/
 			 
-			virtual std::shared_ptr<uml::Extension> createExtension(std::shared_ptr<uml::Class>  metaclass,bool isRequired) = 0;
+			virtual std::shared_ptr<uml::Extension> createExtension(std::shared_ptr<uml::Class> metaclass,bool isRequired) = 0;
 			
 			/*!
 			Creates an icon with the specified location for this stereotype.
@@ -315,7 +177,7 @@ namespace uml
 			and Classifier.allInstances()->forAll(c | c.allParents()->exists(oclIsKindOf(Stereotype)) implies c.oclIsKindOf(Stereotype))
 			*/
 			 
-			virtual bool generalize(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool generalize(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			Retrieves all the metaclasses extended by this stereotype, including the metaclasses extended by its superstereotypes.
@@ -353,7 +215,7 @@ namespace uml
 			Stereotype names should not clash with keyword names for the extended model element.
 			*/
 			 
-			virtual bool name_not_clash(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool name_not_clash(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			
 			//*********************************

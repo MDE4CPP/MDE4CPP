@@ -40,184 +40,37 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Behavior;
-}
-
-namespace uml 
-{
-	class Class;
-}
-
-namespace uml 
-{
-	class Classifier;
-}
-
-namespace uml 
-{
 	class CollaborationUse;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
 	class ComponentRealization;
-}
-
-namespace uml 
-{
 	class ConnectableElement;
-}
-
-namespace uml 
-{
 	class Connector;
-}
-
-namespace uml 
-{
 	class Constraint;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class ElementImport;
-}
-
-namespace uml 
-{
 	class Enumeration;
-}
-
-namespace uml 
-{
 	class Extension;
-}
-
-namespace uml 
-{
 	class Feature;
-}
-
-namespace uml 
-{
 	class Generalization;
-}
-
-namespace uml 
-{
 	class GeneralizationSet;
-}
-
-namespace uml 
-{
 	class Interface;
-}
-
-namespace uml 
-{
 	class InterfaceRealization;
-}
-
-namespace uml 
-{
-	class NamedElement;
-}
-
-namespace uml 
-{
-	class Namespace;
-}
-
-namespace uml 
-{
 	class Operation;
-}
-
-namespace uml 
-{
 	class Package;
-}
-
-namespace uml 
-{
 	class PackageImport;
-}
-
-namespace uml 
-{
-	class PackageableElement;
-}
-
-namespace uml 
-{
 	class Port;
-}
-
-namespace uml 
-{
 	class PrimitiveType;
-}
-
-namespace uml 
-{
 	class Property;
-}
-
-namespace uml 
-{
 	class Reception;
-}
-
-namespace uml 
-{
-	class RedefinableElement;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class Substitution;
-}
-
-namespace uml 
-{
 	class TemplateBinding;
-}
-
-namespace uml 
-{
 	class TemplateParameter;
-}
-
-namespace uml 
-{
 	class TemplateSignature;
-}
-
-namespace uml 
-{
 	class UseCase;
 }
 
@@ -227,6 +80,8 @@ namespace uml
 // enum includes
 #include "uml/VisibilityKind.hpp"
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -313,14 +168,14 @@ namespace uml
 			nestedClassifier->isEmpty()
 			*/
 			 
-			virtual bool no_nested_classifiers(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool no_nested_classifiers(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			A Component nested in a Class cannot have any packaged elements.
 			nestingClass <> null implies packagedElement->isEmpty()
 			*/
 			 
-			virtual bool no_packaged_elements(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool no_packaged_elements(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			
 			//*********************************
@@ -331,14 +186,14 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			 
-			virtual bool getIsIndirectlyInstantiated() const = 0;
+			virtual bool  getIsIndirectlyInstantiated() const = 0;
 			
 			/*!
 			If true, the Component is defined at design-time, but at run-time (or execution-time) an object specified by the Component does not exist, that is, the Component is instantiated indirectly, through the instantiation of its realizing Classifiers or parts.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			 
-			virtual void setIsIndirectlyInstantiated (bool _isIndirectlyInstantiated)= 0; 
+			virtual void setIsIndirectlyInstantiated (bool  _isIndirectlyInstantiated)= 0; 
 			
 			//*********************************
 			// Reference
@@ -386,7 +241,7 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			 
-			bool m_isIndirectlyInstantiated = true;
+			bool  m_isIndirectlyInstantiated = true;
 			
 			
 			//*********************************

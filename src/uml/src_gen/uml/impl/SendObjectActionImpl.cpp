@@ -287,7 +287,7 @@ std::shared_ptr<ecore::EClass> SendObjectActionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool SendObjectActionImpl::type_target_pin(Any diagnostics,std::map <   Any, Any >  context)
+bool SendObjectActionImpl::type_target_pin(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -445,9 +445,9 @@ Any SendObjectActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::SENDOBJECTACTION_ATTRIBUTE_REQUEST:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getRequest())); //21229
+			return eAny(getRequest()); //21229
 		case uml::umlPackage::SENDOBJECTACTION_ATTRIBUTE_TARGET:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getTarget())); //21230
+			return eAny(getTarget()); //21230
 	}
 	return InvocationActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -603,7 +603,6 @@ void SendObjectActionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'request'
 		std::shared_ptr<uml::InputPin > request = this->getRequest();
 		if (request != nullptr)
@@ -617,8 +616,6 @@ void SendObjectActionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 		{
 			saveHandler->addReference(target, "target", target->eClass() != package->getInputPin_Class());
 		}
-	
-
 	}
 	catch (std::exception& e)
 	{

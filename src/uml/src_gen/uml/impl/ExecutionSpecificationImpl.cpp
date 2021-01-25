@@ -190,7 +190,7 @@ std::shared_ptr<ecore::EClass> ExecutionSpecificationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ExecutionSpecificationImpl::same_lifeline(Any diagnostics,std::map <   Any, Any >  context)
+bool ExecutionSpecificationImpl::same_lifeline(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -303,9 +303,9 @@ Any ExecutionSpecificationImpl::eGet(int featureID, bool resolve, bool coreType)
 	switch(featureID)
 	{
 		case uml::umlPackage::EXECUTIONSPECIFICATION_ATTRIBUTE_FINISH:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getFinish())); //9113
+			return eAny(getFinish()); //9113
 		case uml::umlPackage::EXECUTIONSPECIFICATION_ATTRIBUTE_START:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getStart())); //9114
+			return eAny(getStart()); //9114
 	}
 	return InteractionFragmentImpl::eGet(featureID, resolve, coreType);
 }
@@ -460,12 +460,9 @@ void ExecutionSpecificationImpl::saveContent(std::shared_ptr<persistence::interf
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
-	
-
-		// Add references
-		saveHandler->addReference("finish", this->getFinish());
-		saveHandler->addReference("start", this->getStart());
-
+	// Add references
+		saveHandler->addReference("finish", this->getFinish());		 
+		saveHandler->addReference("start", this->getStart());		 
 	}
 	catch (std::exception& e)
 	{

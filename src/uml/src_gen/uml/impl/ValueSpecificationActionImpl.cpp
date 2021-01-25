@@ -277,13 +277,13 @@ std::shared_ptr<ecore::EClass> ValueSpecificationActionImpl::eStaticClass() cons
 //*********************************
 // Operations
 //*********************************
-bool ValueSpecificationActionImpl::compatible_type(Any diagnostics,std::map <   Any, Any >  context)
+bool ValueSpecificationActionImpl::compatible_type(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ValueSpecificationActionImpl::multiplicity(Any diagnostics,std::map <   Any, Any >  context)
+bool ValueSpecificationActionImpl::multiplicity(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -441,9 +441,9 @@ Any ValueSpecificationActionImpl::eGet(int featureID, bool resolve, bool coreTyp
 	switch(featureID)
 	{
 		case uml::umlPackage::VALUESPECIFICATIONACTION_ATTRIBUTE_RESULT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //25127
+			return eAny(getResult()); //25127
 		case uml::umlPackage::VALUESPECIFICATIONACTION_ATTRIBUTE_VALUE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getValue())); //25128
+			return eAny(getValue()); //25128
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -595,7 +595,6 @@ void ValueSpecificationActionImpl::saveContent(std::shared_ptr<persistence::inte
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'result'
 		std::shared_ptr<uml::OutputPin > result = this->getResult();
 		if (result != nullptr)
@@ -609,8 +608,6 @@ void ValueSpecificationActionImpl::saveContent(std::shared_ptr<persistence::inte
 		{
 			saveHandler->addReference(value, "value", value->eClass() != package->getValueSpecification_Class());
 		}
-	
-
 	}
 	catch (std::exception& e)
 	{

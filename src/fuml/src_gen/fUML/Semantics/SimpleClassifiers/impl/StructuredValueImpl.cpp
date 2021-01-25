@@ -114,7 +114,7 @@ std::shared_ptr<ecore::EClass> StructuredValueImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-void StructuredValueImpl::assignFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<Bag<fUML::Semantics::Values::Value> >  values,int position)
+void StructuredValueImpl::assignFeatureValue(std::shared_ptr<org.eclipse.uml2.uml.StructuralFeature> feature,std::shared_ptr<Bag<fUML::Semantics::Values::Value> > values,int position)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -150,19 +150,19 @@ void StructuredValueImpl::createFeatureValues()
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Semantics::Values::Value> > StructuredValueImpl::getValues(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue> >  featureValues)
+std::shared_ptr<Bag<fUML::Semantics::Values::Value> > StructuredValueImpl::getValues(std::shared_ptr<org.eclipse.uml2.uml.StructuralFeature> feature,std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue> > featureValues)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void StructuredValueImpl::removeValue(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<fUML::Semantics::Values::Value>  value)
+void StructuredValueImpl::removeValue(std::shared_ptr<org.eclipse.uml2.uml.StructuralFeature> feature,std::shared_ptr<fUML::Semantics::Values::Value> value)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> StructuredValueImpl::retrieveFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature)
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> StructuredValueImpl::retrieveFeatureValue(std::shared_ptr<org.eclipse.uml2.uml.StructuralFeature> feature)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -174,7 +174,7 @@ std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue> > Structur
 	throw "UnsupportedOperationException";
 }
 
-void StructuredValueImpl::setFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<Bag<fUML::Semantics::Values::Value> >  values,int position)
+void StructuredValueImpl::setFeatureValue(std::shared_ptr<org.eclipse.uml2.uml.StructuralFeature> feature,std::shared_ptr<Bag<fUML::Semantics::Values::Value> > values,int position)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -182,7 +182,7 @@ void StructuredValueImpl::setFeatureValue(std::shared_ptr<uml::StructuralFeature
 	//end of body
 }
 
-std::shared_ptr<uml::ValueSpecification> StructuredValueImpl::specify()
+std::shared_ptr<org.eclipse.uml2.uml.ValueSpecification> StructuredValueImpl::specify()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -328,9 +328,6 @@ void StructuredValueImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	try
 	{
 		std::shared_ptr<fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage> package = fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

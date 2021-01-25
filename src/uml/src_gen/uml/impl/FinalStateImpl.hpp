@@ -59,42 +59,42 @@ namespace uml
 			submachine->isEmpty()
 			*/
 			 
-			virtual bool cannot_reference_submachine(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool cannot_reference_submachine(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			A FinalState has no entry Behavior.
 			entry->isEmpty()
 			*/
 			 
-			virtual bool no_entry_behavior(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool no_entry_behavior(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			A FinalState has no exit Behavior.
 			exit->isEmpty()
 			*/
 			 
-			virtual bool no_exit_behavior(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool no_exit_behavior(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			A FinalState cannot have any outgoing Transitions.
 			outgoing->size() = 0
 			*/
 			 
-			virtual bool no_outgoing_transitions(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool no_outgoing_transitions(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			A FinalState cannot have Regions.
 			region->size() = 0
 			*/
 			 
-			virtual bool no_regions(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool no_regions(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			A FinalState has no state (doActivity) Behavior.
 			doActivity->isEmpty()
 			*/
 			 
-			virtual bool no_state_behavior(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool no_state_behavior(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			

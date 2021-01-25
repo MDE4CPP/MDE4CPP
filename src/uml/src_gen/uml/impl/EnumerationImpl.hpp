@@ -65,7 +65,7 @@ namespace uml
 			ownedAttribute->forAll(isReadOnly)
 			*/
 			 
-			virtual bool immutable(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool immutable(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			

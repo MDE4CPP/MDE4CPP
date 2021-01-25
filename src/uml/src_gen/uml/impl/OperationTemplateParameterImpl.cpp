@@ -147,7 +147,7 @@ std::shared_ptr<ecore::EClass> OperationTemplateParameterImpl::eStaticClass() co
 //*********************************
 // Operations
 //*********************************
-bool OperationTemplateParameterImpl::match_default_signature(Any diagnostics,std::map <   Any, Any >  context)
+bool OperationTemplateParameterImpl::match_default_signature(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -291,9 +291,6 @@ void OperationTemplateParameterImpl::saveContent(std::shared_ptr<persistence::in
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

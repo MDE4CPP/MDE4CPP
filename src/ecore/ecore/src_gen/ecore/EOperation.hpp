@@ -37,50 +37,15 @@ namespace ecore
 	class ecoreFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace ecore 
 {
 	class EAnnotation;
-}
-
-namespace ecore 
-{
 	class EClass;
-}
-
-namespace ecore 
-{
 	class EClassifier;
-}
-
-namespace ecore 
-{
 	class EGenericType;
-}
-
-namespace ecore 
-{
-	class EObject;
-}
-
-namespace ecore 
-{
-	class EOperation;
-}
-
-namespace ecore 
-{
 	class EParameter;
-}
-
-namespace ecore 
-{
 	class ETypeParameter;
-}
-
-namespace ecore 
-{
-	class ETypedElement;
 }
 
 // base class includes
@@ -88,6 +53,8 @@ namespace ecore
 
 // enum includes
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace ecore 
@@ -123,14 +90,14 @@ namespace ecore
 			
 			
 			 
-			virtual bool isOverrideOf(std::shared_ptr<ecore::EOperation>  someOperation) const = 0;
+			virtual bool isOverrideOf(std::shared_ptr<ecore::EOperation> someOperation) const = 0;
 			
 			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
 			 
-			virtual int getOperationID() const = 0;
+			virtual int  getOperationID() const = 0;
 			
 			
 			
@@ -164,7 +131,7 @@ namespace ecore
 			// Attribute Members
 			//*********************************
 			 
-			int m_operationID = -1;
+			int  m_operationID = -1;
 			
 			
 			//*********************************

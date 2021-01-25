@@ -77,10 +77,10 @@ virtual public ClauseActivation
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<uml::Clause > getClause() const ;
+			virtual std::shared_ptr<org.eclipse.uml2.uml.Clause > getClause() const ;
 			
 			
-			virtual void setClause(std::shared_ptr<uml::Clause> _clause) ;
+			virtual void setClause(std::shared_ptr<org.eclipse.uml2.uml.Clause> _clause) ;
 			
 			
 			virtual std::shared_ptr<fUML::Semantics::Actions::ConditionalNodeActivation > getConditionalNodeActivation() const ;

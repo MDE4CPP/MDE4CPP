@@ -71,7 +71,7 @@ namespace uml
 			((v.oclAsType(Pseudostate).kind <>  PseudostateKind::deepHistory) and (v.oclAsType(Pseudostate).kind <> PseudostateKind::shallowHistory))))
 			*/
 			 
-			virtual bool deep_or_shallow_history(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool deep_or_shallow_history(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			The states of a ProtocolStateMachine cannot have entry, exit, or do activity Behaviors.
@@ -79,14 +79,14 @@ namespace uml
 			(v.oclAsType(State).entry->isEmpty() and v.oclAsType(State).exit->isEmpty() and v.oclAsType(State).doActivity->isEmpty())))
 			*/
 			 
-			virtual bool entry_exit_do(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool entry_exit_do(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			All Transitions of a ProtocolStateMachine must be ProtocolTransitions.
 			region->forAll(r | r.transition->forAll(t | t.oclIsTypeOf(ProtocolTransition)))
 			*/
 			 
-			virtual bool protocol_transitions(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool protocol_transitions(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			

@@ -185,13 +185,13 @@ std::shared_ptr<uml::Activity> ActivityGroupImpl::containingActivity()
 	throw "UnsupportedOperationException";
 }
 
-bool ActivityGroupImpl::nodes_and_edges(Any diagnostics,std::map <   Any, Any >  context)
+bool ActivityGroupImpl::nodes_and_edges(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ActivityGroupImpl::not_contained(Any diagnostics,std::map <   Any, Any >  context)
+bool ActivityGroupImpl::not_contained(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -375,44 +375,20 @@ Any ActivityGroupImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::ACTIVITYGROUP_ATTRIBUTE_CONTAINEDEDGE:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ActivityEdge>::iterator iter = m_containedEdge->begin();
-			Bag<uml::ActivityEdge>::iterator end = m_containedEdge->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //109
+			return eAny(getContainedEdge()); //109			
 		}
 		case uml::umlPackage::ACTIVITYGROUP_ATTRIBUTE_CONTAINEDNODE:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ActivityNode>::iterator iter = m_containedNode->begin();
-			Bag<uml::ActivityNode>::iterator end = m_containedNode->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //1010
+			return eAny(getContainedNode()); //1010			
 		}
 		case uml::umlPackage::ACTIVITYGROUP_ATTRIBUTE_INACTIVITY:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getInActivity().lock())); //1011
+			return eAny(getInActivity().lock()); //1011
 		case uml::umlPackage::ACTIVITYGROUP_ATTRIBUTE_SUBGROUP:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ActivityGroup>::iterator iter = m_subgroup->begin();
-			Bag<uml::ActivityGroup>::iterator end = m_subgroup->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //1012
+			return eAny(getSubgroup()); //1012			
 		}
 		case uml::umlPackage::ACTIVITYGROUP_ATTRIBUTE_SUPERGROUP:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSuperGroup().lock())); //1013
+			return eAny(getSuperGroup().lock()); //1013
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -549,9 +525,6 @@ void ActivityGroupImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
-
 
 		//
 		// Add new tags (from references)

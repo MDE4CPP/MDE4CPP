@@ -389,9 +389,9 @@ Any InterfaceRealizationImpl::eGet(int featureID, bool resolve, bool coreType) c
 	switch(featureID)
 	{
 		case uml::umlPackage::INTERFACEREALIZATION_ATTRIBUTE_CONTRACT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getContract())); //12618
+			return eAny(getContract()); //12618
 		case uml::umlPackage::INTERFACEREALIZATION_ATTRIBUTE_IMPLEMENTINGCLASSIFIER:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getImplementingClassifier().lock())); //12619
+			return eAny(getImplementingClassifier().lock()); //12619
 	}
 	return RealizationImpl::eGet(featureID, resolve, coreType);
 }
@@ -551,11 +551,8 @@ void InterfaceRealizationImpl::saveContent(std::shared_ptr<persistence::interfac
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
-	
-
-		// Add references
-		saveHandler->addReference("contract", this->getContract());
-
+	// Add references
+		saveHandler->addReference("contract", this->getContract());		 
 	}
 	catch (std::exception& e)
 	{

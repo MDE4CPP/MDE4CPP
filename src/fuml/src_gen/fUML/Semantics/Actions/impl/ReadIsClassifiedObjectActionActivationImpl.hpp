@@ -48,7 +48,7 @@ namespace fUML::Semantics::Actions
 			// Operations
 			//*********************************
 			 
-			virtual bool checkAllParents(std::shared_ptr<uml::Classifier>  type,std::shared_ptr<uml::Classifier>  classifier) ;
+			virtual bool checkAllParents(std::shared_ptr<org.eclipse.uml2.uml.Classifier> type,std::shared_ptr<org.eclipse.uml2.uml.Classifier> classifier) ;
 			
 			
 			

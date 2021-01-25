@@ -55,7 +55,7 @@ namespace uml
 			port->notEmpty() implies event.oclIsKindOf(MessageEvent)
 			*/
 			 
-			virtual bool trigger_with_ports(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool trigger_with_ports(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			

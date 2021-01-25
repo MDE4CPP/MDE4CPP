@@ -110,12 +110,12 @@ std::shared_ptr<EClass> EObjectImpl::eStaticClass() const
 /*
 Getter & Setter for attribute metaElementID
 */
-int EObjectImpl::getMetaElementID() const 
+int  EObjectImpl::getMetaElementID() const 
 {
 	return m_metaElementID;
 }
 
-void EObjectImpl::setMetaElementID(int _metaElementID)
+void EObjectImpl::setMetaElementID(int  _metaElementID)
 {
 	m_metaElementID = _metaElementID;
 } 
@@ -125,7 +125,7 @@ void EObjectImpl::setMetaElementID(int _metaElementID)
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<Bag <   ecore::EObject > > EObjectImpl::eAllContents() const
+std::shared_ptr<Bag < std::shared_ptr<ecore::EObject>>> EObjectImpl::eAllContents() const
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -153,19 +153,19 @@ std::shared_ptr<ecore::EReference> EObjectImpl::eContainmentFeature() const
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag <   ecore::EObject > > EObjectImpl::eContents() const
+std::shared_ptr<Bag < std::shared_ptr<ecore::EObject>>> EObjectImpl::eContents() const
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag <   ecore::EObject > > EObjectImpl::eCrossReferences() const
+std::shared_ptr<Bag < std::shared_ptr<ecore::EObject>>> EObjectImpl::eCrossReferences() const
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-Any EObjectImpl::eGet(std::shared_ptr<ecore::EStructuralFeature>  feature) const
+Any EObjectImpl::eGet(std::shared_ptr<ecore::EStructuralFeature> feature) const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -173,7 +173,7 @@ Any EObjectImpl::eGet(std::shared_ptr<ecore::EStructuralFeature>  feature) const
 	//end of body
 }
 
-Any EObjectImpl::eGet(std::shared_ptr<ecore::EStructuralFeature>  feature,bool resolve) const
+Any EObjectImpl::eGet(std::shared_ptr<ecore::EStructuralFeature> feature,bool resolve) const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -181,7 +181,7 @@ Any EObjectImpl::eGet(std::shared_ptr<ecore::EStructuralFeature>  feature,bool r
 	//end of body
 }
 
-Any EObjectImpl::eInvoke(std::shared_ptr<ecore::EOperation>  operation,Bag <   Any >  arguments) const
+Any EObjectImpl::eInvoke(std::shared_ptr<ecore::EOperation> operation,Bag < std::shared_ptr<Any>> arguments) const
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -193,7 +193,7 @@ bool EObjectImpl::eIsProxy() const
 	throw "UnsupportedOperationException";
 }
 
-bool EObjectImpl::eIsSet(std::shared_ptr<ecore::EStructuralFeature>  feature) const
+bool EObjectImpl::eIsSet(std::shared_ptr<ecore::EStructuralFeature> feature) const
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -207,7 +207,7 @@ int EObjectImpl::eResource() const
 	throw "UnsupportedOperationException";
 }
 
-void EObjectImpl::eSet(std::shared_ptr<ecore::EStructuralFeature>  feature,Any newValue)
+void EObjectImpl::eSet(std::shared_ptr<ecore::EStructuralFeature> feature,Any newValue)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -215,7 +215,7 @@ void EObjectImpl::eSet(std::shared_ptr<ecore::EStructuralFeature>  feature,Any n
 	//end of body
 }
 
-void EObjectImpl::eUnset(std::shared_ptr<ecore::EStructuralFeature>  feature) const
+void EObjectImpl::eUnset(std::shared_ptr<ecore::EStructuralFeature> feature) const
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -295,21 +295,13 @@ Any EObjectImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ecore::ecorePackage::EOBJECT_ATTRIBUTE_ECONTAINER:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEContainer().lock())); //391
+			return eAny(getEContainer().lock()); //381
 		case ecore::ecorePackage::EOBJECT_ATTRIBUTE_ECONTENS:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ecore::EObject>::iterator iter = m_eContens->begin();
-			Bag<ecore::EObject>::iterator end = m_eContens->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //390
+			return eAny(getEContens()); //380			
 		}
 		case ecore::ecorePackage::EOBJECT_ATTRIBUTE_METAELEMENTID:
-			return eAny(getMetaElementID()); //392
+			return eAny(getMetaElementID()); //382
 	}
 	Any result;
 	return result;
@@ -319,11 +311,11 @@ bool EObjectImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ecore::ecorePackage::EOBJECT_ATTRIBUTE_ECONTAINER:
-			return getEContainer().lock() != nullptr; //391
+			return getEContainer().lock() != nullptr; //381
 		case ecore::ecorePackage::EOBJECT_ATTRIBUTE_ECONTENS:
-			return getEContens() != nullptr; //390
+			return getEContens() != nullptr; //380
 		case ecore::ecorePackage::EOBJECT_ATTRIBUTE_METAELEMENTID:
-			return getMetaElementID() != 0; //392
+			return getMetaElementID() != 0; //382
 	}
 	bool result = false;
 	return result;
@@ -337,7 +329,7 @@ bool EObjectImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ecore::EObject> _eContainer = std::dynamic_pointer_cast<ecore::EObject>(_temp);
-			setEContainer(_eContainer); //391
+			setEContainer(_eContainer); //381
 			return true;
 		}
 		case ecore::ecorePackage::EOBJECT_ATTRIBUTE_ECONTENS:
@@ -380,7 +372,7 @@ bool EObjectImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			int _metaElementID = newValue->get<int>();
-			setMetaElementID(_metaElementID); //392
+			setMetaElementID(_metaElementID); //382
 			return true;
 		}
 	}
@@ -498,14 +490,11 @@ void EObjectImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	try
 	{
 		std::shared_ptr<ecore::ecorePackage> package = ecore::ecorePackage::eInstance();
-
-	
 		// Add attributes
 		if ( this->eIsSet(package->getEObject_Attribute_metaElementID()) )
 		{
 			saveHandler->addAttribute("metaElementID", this->getMetaElementID());
 		}
-
 
 		//
 		// Add new tags (from references)

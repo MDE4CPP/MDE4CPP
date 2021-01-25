@@ -166,7 +166,7 @@ std::shared_ptr<ecore::EClass> DecisionNodeActivationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<fUML::Semantics::Values::Value> DecisionNodeActivationImpl::executeDecisionInputBehavior(std::shared_ptr<fUML::Semantics::Values::Value>  inputValue,std::shared_ptr<fUML::Semantics::Values::Value>  decisionInputValue)
+std::shared_ptr<fUML::Semantics::Values::Value> DecisionNodeActivationImpl::executeDecisionInputBehavior(std::shared_ptr<fUML::Semantics::Values::Value> inputValue,std::shared_ptr<fUML::Semantics::Values::Value> decisionInputValue)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -233,7 +233,7 @@ std::shared_ptr<fUML::Semantics::Values::Value> DecisionNodeActivationImpl::exec
 	//end of body
 }
 
-void DecisionNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token> >  incomingTokens)
+void DecisionNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > incomingTokens)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -317,7 +317,7 @@ std::shared_ptr<fUML::Semantics::Values::Value> DecisionNodeActivationImpl::getD
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Semantics::Values::Value> > DecisionNodeActivationImpl::getDecisionValues(std::shared_ptr<Bag<fUML::Semantics::Activities::Token> >  incomingTokens)
+std::shared_ptr<Bag<fUML::Semantics::Values::Value> > DecisionNodeActivationImpl::getDecisionValues(std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > incomingTokens)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -386,7 +386,7 @@ bool DecisionNodeActivationImpl::isReady()
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > DecisionNodeActivationImpl::removeJoinedControlTokens(std::shared_ptr<Bag<fUML::Semantics::Activities::Token> >  incomingTokens)
+std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > DecisionNodeActivationImpl::removeJoinedControlTokens(std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > incomingTokens)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -449,7 +449,7 @@ void DecisionNodeActivationImpl::terminate()
 	//end of body
 }
 
-bool DecisionNodeActivationImpl::test(std::shared_ptr<uml::ValueSpecification>  gaurd,std::shared_ptr<fUML::Semantics::Values::Value>  value)
+bool DecisionNodeActivationImpl::test(std::shared_ptr<org.eclipse.uml2.uml.ValueSpecification> gaurd,std::shared_ptr<fUML::Semantics::Values::Value> value)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -485,13 +485,13 @@ void DecisionNodeActivationImpl::setDecisionInputExecution(std::shared_ptr<fUML:
 /*
 Getter & Setter for reference decisionNode
 */
-std::shared_ptr<uml::DecisionNode > DecisionNodeActivationImpl::getDecisionNode() const
+std::shared_ptr<org.eclipse.uml2.uml.DecisionNode > DecisionNodeActivationImpl::getDecisionNode() const
 {
 //assert(m_decisionNode);
     return m_decisionNode;
 }
 
-void DecisionNodeActivationImpl::setDecisionNode(std::shared_ptr<uml::DecisionNode> _decisionNode)
+void DecisionNodeActivationImpl::setDecisionNode(std::shared_ptr<org.eclipse.uml2.uml.DecisionNode> _decisionNode)
 {
     m_decisionNode = _decisionNode;
 	//additional setter call for redefined reference ActivityNodeActivation::node
@@ -499,9 +499,9 @@ void DecisionNodeActivationImpl::setDecisionNode(std::shared_ptr<uml::DecisionNo
 }
 
 /*Additional Setter for redefined reference 'ActivityNodeActivation::node'*/
-void DecisionNodeActivationImpl::setNode(std::shared_ptr<uml::ActivityNode> _node)
+void DecisionNodeActivationImpl::setNode(std::shared_ptr<org.eclipse.uml2.uml.ActivityNode> _node)
 {
-	std::shared_ptr<uml::DecisionNode> _decisionNode = std::dynamic_pointer_cast<uml::DecisionNode>(_node);
+	std::shared_ptr<org.eclipse.uml2.uml.DecisionNode> _decisionNode = std::dynamic_pointer_cast<org.eclipse.uml2.uml.DecisionNode>(_node);
 	if(_decisionNode)
 	{
 		m_decisionNode = _decisionNode;
@@ -511,7 +511,7 @@ void DecisionNodeActivationImpl::setNode(std::shared_ptr<uml::ActivityNode> _nod
 	}
 	else
 	{
-		std::cerr<<"[DecisionNodeActivation::setNode] : Could not set node because provided node was not of type 'uml::DecisionNode'"<<std::endl;
+		std::cerr<<"[DecisionNodeActivation::setNode] : Could not set node because provided node was not of type 'org.eclipse.uml2.uml.DecisionNode'"<<std::endl;
 	}
 }
 
@@ -548,9 +548,9 @@ Any DecisionNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType)
 	switch(featureID)
 	{
 		case fUML::Semantics::Activities::ActivitiesPackage::DECISIONNODEACTIVATION_ATTRIBUTE_DECISIONINPUTEXECUTION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDecisionInputExecution())); //376
+			return eAny(getDecisionInputExecution()); //376
 		case fUML::Semantics::Activities::ActivitiesPackage::DECISIONNODEACTIVATION_ATTRIBUTE_DECISIONNODE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDecisionNode())); //377
+			return eAny(getDecisionNode()); //377
 	}
 	return ControlNodeActivationImpl::eGet(featureID, resolve, coreType);
 }
@@ -581,7 +581,7 @@ bool DecisionNodeActivationImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<uml::DecisionNode> _decisionNode = std::dynamic_pointer_cast<uml::DecisionNode>(_temp);
+			std::shared_ptr<org.eclipse.uml2.uml.DecisionNode> _decisionNode = std::dynamic_pointer_cast<org.eclipse.uml2.uml.DecisionNode>(_temp);
 			setDecisionNode(_decisionNode); //377
 			return true;
 		}
@@ -678,7 +678,7 @@ void DecisionNodeActivationImpl::resolveReferences(const int featureID, std::lis
 			if (references.size() == 1)
 			{
 				// Cast object to correct type
-				std::shared_ptr<uml::DecisionNode> _decisionNode = std::dynamic_pointer_cast<uml::DecisionNode>( references.front() );
+				std::shared_ptr<org.eclipse.uml2.uml.DecisionNode> _decisionNode = std::dynamic_pointer_cast<org.eclipse.uml2.uml.DecisionNode>( references.front() );
 				setDecisionNode(_decisionNode);
 			}
 			
@@ -710,11 +710,8 @@ void DecisionNodeActivationImpl::saveContent(std::shared_ptr<persistence::interf
 	{
 		std::shared_ptr<fUML::Semantics::Activities::ActivitiesPackage> package = fUML::Semantics::Activities::ActivitiesPackage::eInstance();
 
-	
-
-		// Add references
-		saveHandler->addReference("decisionNode", this->getDecisionNode());
-
+	// Add references
+		saveHandler->addReference("decisionNode", this->getDecisionNode());		
 
 		//
 		// Add new tags (from references)

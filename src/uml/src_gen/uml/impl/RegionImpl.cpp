@@ -277,19 +277,19 @@ std::shared_ptr<uml::StateMachine> RegionImpl::containingStateMachine()
 	throw "UnsupportedOperationException";
 }
 
-bool RegionImpl::deep_history_vertex(Any diagnostics,std::map <   Any, Any >  context)
+bool RegionImpl::deep_history_vertex(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool RegionImpl::initial_vertex(Any diagnostics,std::map <   Any, Any >  context)
+bool RegionImpl::initial_vertex(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool RegionImpl::owned(Any diagnostics,std::map <   Any, Any >  context)
+bool RegionImpl::owned(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -301,7 +301,7 @@ std::shared_ptr<uml::Classifier> RegionImpl::redefinitionContext()
 	throw "UnsupportedOperationException";
 }
 
-bool RegionImpl::shallow_history_vertex(Any diagnostics,std::map <   Any, Any >  context)
+bool RegionImpl::shallow_history_vertex(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -537,34 +537,18 @@ Any RegionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::REGION_ATTRIBUTE_EXTENDEDREGION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getExtendedRegion())); //20718
+			return eAny(getExtendedRegion()); //20718
 		case uml::umlPackage::REGION_ATTRIBUTE_STATE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getState().lock())); //20719
+			return eAny(getState().lock()); //20719
 		case uml::umlPackage::REGION_ATTRIBUTE_STATEMACHINE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getStateMachine().lock())); //20720
+			return eAny(getStateMachine().lock()); //20720
 		case uml::umlPackage::REGION_ATTRIBUTE_SUBVERTEX:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Vertex>::iterator iter = m_subvertex->begin();
-			Bag<uml::Vertex>::iterator end = m_subvertex->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //20722
+			return eAny(getSubvertex()); //20722			
 		}
 		case uml::umlPackage::REGION_ATTRIBUTE_TRANSITION:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Transition>::iterator iter = m_transition->begin();
-			Bag<uml::Transition>::iterator end = m_transition->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //20721
+			return eAny(getTransition()); //20721			
 		}
 	}
 	Any result;
@@ -876,7 +860,6 @@ void RegionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'subvertex'
 		for (std::shared_ptr<uml::Vertex> subvertex : *this->getSubvertex()) 
 		{
@@ -888,11 +871,9 @@ void RegionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 		{
 			saveHandler->addReference(transition, "transition", transition->eClass() != package->getTransition_Class());
 		}
-	
 
-		// Add references
-		saveHandler->addReference("extendedRegion", this->getExtendedRegion());
-
+	// Add references
+		saveHandler->addReference("extendedRegion", this->getExtendedRegion());		 
 	}
 	catch (std::exception& e)
 	{

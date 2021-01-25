@@ -223,13 +223,13 @@ std::shared_ptr<ecore::EClass> ForkNodeImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ForkNodeImpl::edges(Any diagnostics,std::map <   Any, Any >  context)
+bool ForkNodeImpl::edges(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ForkNodeImpl::one_incoming_edge(Any diagnostics,std::map <   Any, Any >  context)
+bool ForkNodeImpl::one_incoming_edge(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -422,9 +422,6 @@ void ForkNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

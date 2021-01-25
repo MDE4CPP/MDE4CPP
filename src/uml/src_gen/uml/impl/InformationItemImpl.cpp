@@ -342,19 +342,19 @@ std::shared_ptr<ecore::EClass> InformationItemImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool InformationItemImpl::has_no(Any diagnostics,std::map <   Any, Any >  context)
+bool InformationItemImpl::has_no(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool InformationItemImpl::not_instantiable(Any diagnostics,std::map <   Any, Any >  context)
+bool InformationItemImpl::not_instantiable(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool InformationItemImpl::sources_and_targets(Any diagnostics,std::map <   Any, Any >  context)
+bool InformationItemImpl::sources_and_targets(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -530,6 +530,8 @@ Any InformationItemImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::INFORMATIONITEM_ATTRIBUTE_REPRESENTED:
 		{
+			return eAny(getRepresented()); //11438			
+			/*
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::Classifier>::iterator iter = m_represented->begin();
 			Bag<uml::Classifier>::iterator end = m_represented->end();
@@ -539,6 +541,7 @@ Any InformationItemImpl::eGet(int featureID, bool resolve, bool coreType) const
 				iter++;
 			}
 			return eAny(tempList); //11438
+			*/
 		}
 	}
 	return ClassifierImpl::eGet(featureID, resolve, coreType);
@@ -705,15 +708,8 @@ void InformationItemImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
-	
-
-		// Add references
-		std::shared_ptr<Bag<uml::Classifier>> represented_list = this->getRepresented();
-		for (std::shared_ptr<uml::Classifier > object : *represented_list)
-		{ 
-			saveHandler->addReferences("represented", object);
-		}
-
+	// Add references
+		saveHandler->addReferences<uml::Classifier>("represented", this->getRepresented());	
 	}
 	catch (std::exception& e)
 	{

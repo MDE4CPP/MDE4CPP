@@ -63,7 +63,7 @@ namespace uml
 			      ce1.collaboration = ce2.collaboration)
 			*/
 			 
-			virtual bool client_elements(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool client_elements(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			Connectors in a Collaboration typing a CollaborationUse must have corresponding Connectors between elements bound in the context Classifier, and these corresponding Connectors must have the same or more general type than the Collaboration Connectors.
@@ -78,14 +78,14 @@ namespace uml
 			)
 			*/
 			 
-			virtual bool connectors(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool connectors(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			Every collaborationRole in the Collaboration is bound within the CollaborationUse.
 			type.collaborationRole->forAll(role | roleBinding->exists(rb | rb.supplier->includes(role)))
 			*/
 			 
-			virtual bool every_role(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool every_role(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			

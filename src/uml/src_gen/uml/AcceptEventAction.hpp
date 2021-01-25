@@ -39,104 +39,24 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
-namespace uml 
-{
-	class Action;
-}
-
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Activity;
-}
-
-namespace uml 
-{
 	class ActivityEdge;
-}
-
-namespace uml 
-{
 	class ActivityGroup;
-}
-
-namespace uml 
-{
-	class ActivityNode;
-}
-
-namespace uml 
-{
 	class ActivityPartition;
-}
-
-namespace uml 
-{
 	class Classifier;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
 	class Constraint;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class ExceptionHandler;
-}
-
-namespace uml 
-{
 	class InputPin;
-}
-
-namespace uml 
-{
 	class InterruptibleActivityRegion;
-}
-
-namespace uml 
-{
 	class Namespace;
-}
-
-namespace uml 
-{
 	class OutputPin;
-}
-
-namespace uml 
-{
-	class RedefinableElement;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class StructuredActivityNode;
-}
-
-namespace uml 
-{
 	class Trigger;
 }
 
@@ -146,6 +66,8 @@ namespace uml
 // enum includes
 #include "uml/VisibilityKind.hpp"
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -184,14 +106,14 @@ namespace uml
 					 trigger.event.oclAsType(SignalEvent).signal->forAll(s | s.conformsTo(type)))
 			*/
 			 
-			virtual bool conforming_type(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool conforming_type(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			AcceptEventActions may have no input pins.
 			input->size() = 0
 			*/
 			 
-			virtual bool no_input_pins(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool no_input_pins(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			There are no OutputPins if the trigger events are only ChangeEvents and/or CallEvents when this action is an instance of AcceptEventAction and not an instance of a descendant of AcceptEventAction (such as AcceptCallAction).
@@ -201,7 +123,7 @@ namespace uml
 			implies output->size() = 0
 			*/
 			 
-			virtual bool no_output_pins(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool no_output_pins(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			If isUnmarshall=false and any of the triggers are for SignalEvents or TimeEvents, there must be exactly one result OutputPin with multiplicity 1..1.
@@ -209,7 +131,7 @@ namespace uml
 				output->size() = 1 and output->first().is(1,1)
 			*/
 			 
-			virtual bool one_output_pin(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool one_output_pin(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			If isUnmarshall is true (and this is not an AcceptCallAction), there must be exactly one trigger, which is for a SignalEvent. The number of result output pins must be the same as the number of attributes of the signal. The type and ordering of each result output pin must be the same as the corresponding attribute of the signal. The multiplicity of each result output pin must be compatible with the multiplicity of the corresponding attribute.
@@ -224,7 +146,7 @@ namespace uml
 					result->at(i).includesMultiplicity(attribute->at(i)))
 			*/
 			 
-			virtual bool unmarshall_signal_events(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool unmarshall_signal_events(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			
 			//*********************************
@@ -235,14 +157,14 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual bool getIsUnmarshall() const = 0;
+			virtual bool  getIsUnmarshall() const = 0;
 			
 			/*!
 			Indicates whether there is a single OutputPin for a SignalEvent occurrence, or multiple OutputPins for attribute values of the instance of the Signal associated with a SignalEvent occurrence.
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual void setIsUnmarshall (bool _isUnmarshall)= 0; 
+			virtual void setIsUnmarshall (bool  _isUnmarshall)= 0; 
 			
 			//*********************************
 			// Reference
@@ -274,7 +196,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			bool m_isUnmarshall = false;
+			bool  m_isUnmarshall = false;
 			
 			
 			//*********************************

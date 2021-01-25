@@ -39,110 +39,24 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Behavior;
-}
-
-namespace uml 
-{
 	class Classifier;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
 	class ConnectionPointReference;
-}
-
-namespace uml 
-{
 	class Constraint;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class ElementImport;
-}
-
-namespace uml 
-{
-	class NamedElement;
-}
-
-namespace uml 
-{
-	class Namespace;
-}
-
-namespace uml 
-{
 	class PackageImport;
-}
-
-namespace uml 
-{
 	class PackageableElement;
-}
-
-namespace uml 
-{
 	class Pseudostate;
-}
-
-namespace uml 
-{
-	class RedefinableElement;
-}
-
-namespace uml 
-{
 	class Region;
-}
-
-namespace uml 
-{
-	class State;
-}
-
-namespace uml 
-{
 	class StateMachine;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class Transition;
-}
-
-namespace uml 
-{
 	class Trigger;
-}
-
-namespace uml 
-{
-	class Vertex;
 }
 
 // base class includes
@@ -155,6 +69,8 @@ namespace uml
 // enum includes
 #include "uml/VisibilityKind.hpp"
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -188,7 +104,7 @@ namespace uml
 			connectionPoint->notEmpty() implies isComposite
 			*/
 			 
-			virtual bool composite_states(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool composite_states(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			The connection point references used as destinations/sources of Transitions associated with a submachine State must be defined as entry/exit points in the submachine StateMachine.
@@ -197,14 +113,14 @@ namespace uml
 			  cp.exit->forAll (ps | ps.stateMachine = self.submachine)))
 			*/
 			 
-			virtual bool destinations_or_sources_of_transitions(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool destinations_or_sources_of_transitions(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			Only entry or exit Pseudostates can serve as connection points.
 			connectionPoint->forAll(kind = PseudostateKind::entryPoint or kind = PseudostateKind::exitPoint)
 			*/
 			 
-			virtual bool entry_or_exit(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool entry_or_exit(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			A composite State is a State with at least one Region.
@@ -256,14 +172,14 @@ namespace uml
 			isComposite implies not isSubmachineState
 			*/
 			 
-			virtual bool submachine_or_regions(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool submachine_or_regions(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			Only submachine States can have connection point references.
 			isSubmachineState implies connection->notEmpty( )
 			*/
 			 
-			virtual bool submachine_states(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool submachine_states(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			
 			//*********************************
@@ -274,7 +190,7 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			 
-			virtual bool getIsComposite() const = 0;
+			virtual bool  getIsComposite() const = 0;
 			
 			
 			/*!
@@ -282,7 +198,7 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			 
-			virtual bool getIsOrthogonal() const = 0;
+			virtual bool  getIsOrthogonal() const = 0;
 			
 			
 			/*!
@@ -290,7 +206,7 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			 
-			virtual bool getIsSimple() const = 0;
+			virtual bool  getIsSimple() const = 0;
 			
 			
 			/*!
@@ -298,7 +214,7 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			 
-			virtual bool getIsSubmachineState() const = 0;
+			virtual bool  getIsSubmachineState() const = 0;
 			
 			
 			
@@ -432,25 +348,25 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			 
-			bool m_isComposite = false;
+			bool  m_isComposite = false;
 			/*!
 			A State with isOrthogonal=true is said to be an orthogonal composite State An orthogonal composite State contains two or more Regions.
 			<p>From package UML::StateMachines.</p>
 			*/
 			 
-			bool m_isOrthogonal = false;
+			bool  m_isOrthogonal = false;
 			/*!
 			A State with isSimple=true is said to be a simple State A simple State does not have any Regions and it does not refer to any submachine StateMachine.
 			<p>From package UML::StateMachines.</p>
 			*/
 			 
-			bool m_isSimple = true;
+			bool  m_isSimple = true;
 			/*!
 			A State with isSubmachineState=true is said to be a submachine State Such a State refers to another StateMachine(submachine).
 			<p>From package UML::StateMachines.</p>
 			*/
 			 
-			bool m_isSubmachineState = false;
+			bool  m_isSubmachineState = false;
 			
 			
 			//*********************************

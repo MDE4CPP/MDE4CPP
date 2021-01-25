@@ -48,7 +48,7 @@ namespace fUML::Semantics::Actions
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<uml::ActivityNode> makeLoopVariableList() ;
+			virtual std::shared_ptr<org.eclipse.uml2.uml.ActivityNode> makeLoopVariableList() ;
 			
 			 
 			virtual void runBody() ;

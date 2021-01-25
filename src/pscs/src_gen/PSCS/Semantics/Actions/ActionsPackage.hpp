@@ -37,7 +37,7 @@ namespace PSCS::Semantics::Actions
 	class CS_RemoveStructuralFeatureValueActionActivation;
 	class CS_SendSignalActionActivation;
 }
-
+ 
 namespace PSCS::Semantics::Actions 
 {
 	/*!

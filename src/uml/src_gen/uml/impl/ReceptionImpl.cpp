@@ -241,13 +241,13 @@ std::shared_ptr<ecore::EClass> ReceptionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ReceptionImpl::same_name_as_signal(Any diagnostics,std::map <   Any, Any >  context)
+bool ReceptionImpl::same_name_as_signal(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ReceptionImpl::same_structure_as_signal(Any diagnostics,std::map <   Any, Any >  context)
+bool ReceptionImpl::same_structure_as_signal(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -364,7 +364,7 @@ Any ReceptionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::RECEPTION_ATTRIBUTE_SIGNAL:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSignal())); //20226
+			return eAny(getSignal()); //20226
 	}
 	return BehavioralFeatureImpl::eGet(featureID, resolve, coreType);
 }
@@ -497,11 +497,8 @@ void ReceptionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
-	
-
-		// Add references
-		saveHandler->addReference("signal", this->getSignal());
-
+	// Add references
+		saveHandler->addReference("signal", this->getSignal());		 
 	}
 	catch (std::exception& e)
 	{

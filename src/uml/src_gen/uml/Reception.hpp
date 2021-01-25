@@ -38,94 +38,21 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Behavior;
-}
-
-namespace uml 
-{
-	class BehavioralFeature;
-}
-
-namespace uml 
-{
 	class Classifier;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
 	class Constraint;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class ElementImport;
-}
-
-namespace uml 
-{
-	class NamedElement;
-}
-
-namespace uml 
-{
-	class Namespace;
-}
-
-namespace uml 
-{
 	class PackageImport;
-}
-
-namespace uml 
-{
 	class PackageableElement;
-}
-
-namespace uml 
-{
 	class Parameter;
-}
-
-namespace uml 
-{
 	class ParameterSet;
-}
-
-namespace uml 
-{
-	class RedefinableElement;
-}
-
-namespace uml 
-{
 	class Signal;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class Type;
 }
 
@@ -137,6 +64,8 @@ namespace uml
 
 #include "uml/VisibilityKind.hpp"
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -170,7 +99,7 @@ namespace uml
 			name = signal.name
 			*/
 			 
-			virtual bool same_name_as_signal(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool same_name_as_signal(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			A Reception's parameters match the ownedAttributes of its signal by name, type, and multiplicity
@@ -184,7 +113,7 @@ namespace uml
 			)
 			*/
 			 
-			virtual bool same_structure_as_signal(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool same_structure_as_signal(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			
 			//*********************************

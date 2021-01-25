@@ -36,29 +36,12 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Comment;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class InstanceSpecification;
-}
-
-namespace uml 
-{
 	class StructuralFeature;
-}
-
-namespace uml 
-{
 	class ValueSpecification;
 }
 
@@ -67,6 +50,8 @@ namespace uml
 
 // enum includes
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 

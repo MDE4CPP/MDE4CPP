@@ -141,12 +141,12 @@ std::shared_ptr<EClass> EClassifierImpl::eStaticClass() const
 /*
 Getter & Setter for attribute defaultValue
 */
-Any EClassifierImpl::getDefaultValue() const 
+Any  EClassifierImpl::getDefaultValue() const 
 {
 	return m_defaultValue;
 }
 
-void EClassifierImpl::setDefaultValue(Any _defaultValue)
+void EClassifierImpl::setDefaultValue(Any  _defaultValue)
 {
 	m_defaultValue = _defaultValue;
 } 
@@ -168,12 +168,12 @@ void *  EClassifierImpl::getInstanceClass() const
 /*
 Getter & Setter for attribute instanceClassName
 */
-std::string EClassifierImpl::getInstanceClassName() const 
+std::string  EClassifierImpl::getInstanceClassName() const 
 {
 	return m_instanceClassName;
 }
 
-void EClassifierImpl::setInstanceClassName(std::string _instanceClassName)
+void EClassifierImpl::setInstanceClassName(std::string  _instanceClassName)
 {
 	m_instanceClassName = _instanceClassName;
 } 
@@ -183,12 +183,12 @@ void EClassifierImpl::setInstanceClassName(std::string _instanceClassName)
 /*
 Getter & Setter for attribute instanceTypeName
 */
-std::string EClassifierImpl::getInstanceTypeName() const 
+std::string  EClassifierImpl::getInstanceTypeName() const 
 {
 	return m_instanceTypeName;
 }
 
-void EClassifierImpl::setInstanceTypeName(std::string _instanceTypeName)
+void EClassifierImpl::setInstanceTypeName(std::string  _instanceTypeName)
 {
 	m_instanceTypeName = _instanceTypeName;
 } 
@@ -301,18 +301,10 @@ Any EClassifierImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ecore::ecorePackage::ECLASSIFIER_ATTRIBUTE_DEFAULTVALUE:
 			return eAny(getDefaultValue()); //137
 		case ecore::ecorePackage::ECLASSIFIER_ATTRIBUTE_EPACKAGE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEPackage().lock())); //139
+			return eAny(getEPackage().lock()); //139
 		case ecore::ecorePackage::ECLASSIFIER_ATTRIBUTE_ETYPEPARAMETERS:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ecore::ETypeParameter>::iterator iter = m_eTypeParameters->begin();
-			Bag<ecore::ETypeParameter>::iterator end = m_eTypeParameters->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //1310
+			return eAny(getETypeParameters()); //1310			
 		}
 		case ecore::ecorePackage::ECLASSIFIER_ATTRIBUTE_INSTANCECLASS:
 			return eAny(getInstanceClass()); //136
@@ -524,8 +516,6 @@ void EClassifierImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	try
 	{
 		std::shared_ptr<ecore::ecorePackage> package = ecore::ecorePackage::eInstance();
-
-	
 		// Add attributes
 		if ( this->eIsSet(package->getEClassifier_Attribute_instanceClassName()) )
 		{
@@ -536,7 +526,6 @@ void EClassifierImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 		{
 			saveHandler->addAttribute("instanceTypeName", this->getInstanceTypeName());
 		}
-
 
 		//
 		// Add new tags (from references)

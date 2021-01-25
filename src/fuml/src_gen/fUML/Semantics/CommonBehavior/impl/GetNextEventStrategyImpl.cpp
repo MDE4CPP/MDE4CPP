@@ -109,7 +109,7 @@ return "getNextEvent";
 	//end of body
 }
 
-std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> GetNextEventStrategyImpl::retrieveNextEvent(std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation>  objectActivation)
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> GetNextEventStrategyImpl::retrieveNextEvent(std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> objectActivation)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -218,9 +218,6 @@ void GetNextEventStrategyImpl::saveContent(std::shared_ptr<persistence::interfac
 	try
 	{
 		std::shared_ptr<fUML::Semantics::CommonBehavior::CommonBehaviorPackage> package = fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

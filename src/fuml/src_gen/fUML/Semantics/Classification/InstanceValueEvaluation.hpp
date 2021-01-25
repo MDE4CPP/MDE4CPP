@@ -35,22 +35,15 @@ namespace fUML
 	class fUMLFactory;
 }
 
-//Forward Declaration for used types
-namespace fUML::Semantics::Values 
-{
-	class Evaluation;
-}
-
+//Forward Declaration for used types 
 namespace fUML::Semantics::Loci 
 {
 	class Locus;
 }
-
 namespace fUML::Semantics::Values 
 {
 	class Value;
 }
-
 namespace uml 
 {
 	class ValueSpecification;
@@ -61,6 +54,31 @@ namespace uml
 
 // enum includes
 
+
+//Includes from codegen annotation
+#include "fUML/FUMLFactory.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
+#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
+
+#include "abstractDataTypes/Subset.hpp"
+#include "fUML/Semantics/SimpleClassifiers/DataValue.hpp"
+#include "fUML/Semantics/SimpleClassifiers/EnumerationValue.hpp"
+#include "fUML/Semantics/CommonBehavior/Execution.hpp"
+#include "fUML/Semantics/Loci/ExecutionFactory.hpp"
+#include "fUML/Semantics/Loci/Executor.hpp"
+#include "fUML/Semantics/StructuredClassifiers/Object.hpp"
+#include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
+#include "fUML/Semantics/Values/Value.hpp"
+#include "uml/Behavior.hpp"
+#include "uml/Class.hpp"
+#include "uml/Classifier.hpp"
+#include "uml/DataType.hpp"
+#include "uml/Enumeration.hpp"
+#include "uml/EnumerationLiteral.hpp"
+#include "uml/InstanceSpecification.hpp"
+#include "uml/InstanceValue.hpp"
+#include "uml/Slot.hpp"
+#include "uml/StructuralFeature.hpp"
 
 //*********************************
 namespace fUML::Semantics::Classification 

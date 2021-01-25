@@ -110,12 +110,12 @@ std::shared_ptr<ecore::EClass> BooleanValueImpl::eStaticClass() const
 /*
 Getter & Setter for attribute value
 */
-bool BooleanValueImpl::isValue() const 
+bool  BooleanValueImpl::isValue() const 
 {
 	return m_value;
 }
 
-void BooleanValueImpl::setValue(bool _value)
+void BooleanValueImpl::setValue(bool  _value)
 {
 	m_value = _value;
 } 
@@ -138,7 +138,7 @@ return newValue;
 	//end of body
 }
 
-bool BooleanValueImpl::equals(std::shared_ptr<fUML::Semantics::Values::Value>  otherValue)
+bool BooleanValueImpl::equals(std::shared_ptr<fUML::Semantics::Values::Value> otherValue)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -154,7 +154,7 @@ bool BooleanValueImpl::equals(std::shared_ptr<fUML::Semantics::Values::Value>  o
 	//end of body
 }
 
-std::shared_ptr<uml::ValueSpecification> BooleanValueImpl::specify()
+std::shared_ptr<org.eclipse.uml2.uml.ValueSpecification> BooleanValueImpl::specify()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -321,14 +321,11 @@ void BooleanValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	try
 	{
 		std::shared_ptr<fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage> package = fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance();
-
-	
 		// Add attributes
 		if ( this->eIsSet(package->getBooleanValue_Attribute_value()) )
 		{
 			saveHandler->addAttribute("value", this->isValue());
 		}
-
 	}
 	catch (std::exception& e)
 	{

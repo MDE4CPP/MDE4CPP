@@ -252,7 +252,7 @@ Any MessageEndImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::MESSAGEEND_ATTRIBUTE_MESSAGE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getMessage())); //1489
+			return eAny(getMessage()); //1489
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -375,11 +375,8 @@ void MessageEndImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
-	
-
-		// Add references
-		saveHandler->addReference("message", this->getMessage());
-
+	// Add references
+		saveHandler->addReference("message", this->getMessage());		 
 	}
 	catch (std::exception& e)
 	{

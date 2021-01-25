@@ -77,19 +77,19 @@ namespace uml
 			 implies self.covered->asSet()->includes(intLifeline)))
 			*/
 			 
-			virtual bool all_lifelines(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool all_lifelines(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			The arguments must only be constants, parameters of the enclosing Interaction or attributes of the classifier owning the enclosing Interaction.
 			*/
 			 
-			virtual bool arguments_are_constants(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool arguments_are_constants(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			The arguments of the InteractionUse must correspond to parameters of the referred Interaction.
 			*/
 			 
-			virtual bool arguments_correspond_to_parameters(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool arguments_correspond_to_parameters(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			Actual Gates of the InteractionUse must match Formal Gates of the referred Interaction. Gates match when their names are equal and their messages correspond.
@@ -98,7 +98,7 @@ namespace uml
 			self.actualGate->forAll(ag : Gate | refersTo.formalGate->select(matches(ag))->size()=1)
 			*/
 			 
-			virtual bool gates_match(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool gates_match(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			The returnValueRecipient must be a Property of a ConnectableElement that is represented by a Lifeline covered by this InteractionUse.
@@ -109,14 +109,14 @@ namespace uml
 			allProps->includes(returnValueRecipient)
 			*/
 			 
-			virtual bool returnValueRecipient_coverage(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool returnValueRecipient_coverage(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			The type of the returnValue must correspond to the type of the returnValueRecipient.
 			returnValue.type->asSequence()->notEmpty() implies returnValue.type->asSequence()->first() = returnValueRecipient.type->asSequence()->first()
 			*/
 			 
-			virtual bool returnValue_type_recipient_correspondence(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool returnValue_type_recipient_correspondence(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			

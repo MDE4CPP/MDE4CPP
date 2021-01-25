@@ -151,6 +151,8 @@ Any ValuesImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case fUML::Semantics::Actions::ActionsPackage::VALUES_ATTRIBUTE_VALUES:
 		{
+			return eAny(getValues()); //1200			
+			/*
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<fUML::Semantics::Values::Value>::iterator iter = m_values->begin();
 			Bag<fUML::Semantics::Values::Value>::iterator end = m_values->end();
@@ -160,6 +162,7 @@ Any ValuesImpl::eGet(int featureID, bool resolve, bool coreType) const
 				iter++;
 			}
 			return eAny(tempList); //1200
+			*/
 		}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
@@ -305,15 +308,8 @@ void ValuesImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 	{
 		std::shared_ptr<fUML::Semantics::Actions::ActionsPackage> package = fUML::Semantics::Actions::ActionsPackage::eInstance();
 
-	
-
-		// Add references
-		std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values_list = this->getValues();
-		for (std::shared_ptr<fUML::Semantics::Values::Value > object : *values_list)
-		{ 
-			saveHandler->addReferences("values", object);
-		}
-
+	// Add references
+		saveHandler->addReferences<fUML::Semantics::Values::Value>("values", this->getValues());	
 	}
 	catch (std::exception& e)
 	{

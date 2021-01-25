@@ -41,7 +41,7 @@ namespace fUML::Semantics::CommonBehavior
 	class ParameterValue;
 	class SignalEventOccurrence;
 }
-
+ 
 namespace fUML::Semantics::CommonBehavior 
 {
 	/*!

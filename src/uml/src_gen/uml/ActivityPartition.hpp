@@ -39,54 +39,15 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Activity;
-}
-
-namespace uml 
-{
 	class ActivityEdge;
-}
-
-namespace uml 
-{
-	class ActivityGroup;
-}
-
-namespace uml 
-{
 	class ActivityNode;
-}
-
-namespace uml 
-{
-	class ActivityPartition;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class Namespace;
-}
-
-namespace uml 
-{
 	class StringExpression;
 }
 
@@ -96,6 +57,8 @@ namespace uml
 // enum includes
 #include "uml/VisibilityKind.hpp"
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -149,7 +112,7 @@ namespace uml
 			isDimension implies superPartition->isEmpty()
 			*/
 			 
-			virtual bool dimension_not_contained(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool dimension_not_contained(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			If a non-external ActivityPartition represents a Classifier and has a superPartition, then the superPartition must represent a Classifier, and the Classifier of the subpartition must be nested (nestedClassifier or ownedBehavior) in the Classifier represented by the superPartition, or be at the contained end of a composition Association with the Classifier represented by the superPartition.
@@ -168,7 +131,7 @@ namespace uml
 			)
 			*/
 			 
-			virtual bool represents_classifier(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool represents_classifier(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			If an ActivityPartition represents a Property and has a superPartition representing a Classifier, then all the other non-external subpartitions of the superPartition must represent Properties directly owned by the same Classifier.
@@ -181,7 +144,7 @@ namespace uml
 			)
 			*/
 			 
-			virtual bool represents_property(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool represents_property(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			/*!
 			If an ActivityPartition represents a Property and has a superPartition, then the Property must be of a Classifier represented by the superPartition, or of a Classifier that is the type of a Property represented by the superPartition.
@@ -192,7 +155,7 @@ namespace uml
 			)
 			*/
 			 
-			virtual bool represents_property_and_is_contained(Any diagnostics,std::map <   Any, Any >  context) = 0;
+			virtual bool represents_property_and_is_contained(Any diagnostics,std::map <  Any ,  Any > context) = 0;
 			
 			
 			//*********************************
@@ -203,27 +166,27 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			 
-			virtual bool getIsDimension() const = 0;
+			virtual bool  getIsDimension() const = 0;
 			
 			/*!
 			Indicates whether the ActivityPartition groups other ActivityPartitions along a dimension.
 			<p>From package UML::Activities.</p>
 			*/
 			 
-			virtual void setIsDimension (bool _isDimension)= 0; 
+			virtual void setIsDimension (bool  _isDimension)= 0; 
 			/*!
 			Indicates whether the ActivityPartition represents an entity to which the partitioning structure does not apply.
 			<p>From package UML::Activities.</p>
 			*/
 			 
-			virtual bool getIsExternal() const = 0;
+			virtual bool  getIsExternal() const = 0;
 			
 			/*!
 			Indicates whether the ActivityPartition represents an entity to which the partitioning structure does not apply.
 			<p>From package UML::Activities.</p>
 			*/
 			 
-			virtual void setIsExternal (bool _isExternal)= 0; 
+			virtual void setIsExternal (bool  _isExternal)= 0; 
 			
 			//*********************************
 			// Reference
@@ -291,13 +254,13 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			 
-			bool m_isDimension = false;
+			bool  m_isDimension = false;
 			/*!
 			Indicates whether the ActivityPartition represents an entity to which the partitioning structure does not apply.
 			<p>From package UML::Activities.</p>
 			*/
 			 
-			bool m_isExternal = false;
+			bool  m_isExternal = false;
 			
 			
 			//*********************************

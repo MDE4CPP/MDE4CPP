@@ -35,29 +35,11 @@ namespace ecore
 	class ecoreFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace ecore 
 {
 	class EAnnotation;
-}
-
-namespace ecore 
-{
-	class EClassifier;
-}
-
-namespace ecore 
-{
-	class EObject;
-}
-
-namespace ecore 
-{
 	class EPackage;
-}
-
-namespace ecore 
-{
 	class ETypeParameter;
 }
 
@@ -66,6 +48,8 @@ namespace ecore
 
 // enum includes
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace ecore 
@@ -95,10 +79,10 @@ namespace ecore
 			// Attributes Getter Setter
 			//*********************************
 			 
-			virtual bool isSerializable() const = 0;
+			virtual bool  isSerializable() const = 0;
 			
 			 
-			virtual void setSerializable (bool _serializable)= 0; 
+			virtual void setSerializable (bool  _serializable)= 0; 
 			
 			//*********************************
 			// Reference
@@ -110,7 +94,7 @@ namespace ecore
 			// Attribute Members
 			//*********************************
 			 
-			bool m_serializable = true;
+			bool  m_serializable = true;
 			
 			
 			//*********************************

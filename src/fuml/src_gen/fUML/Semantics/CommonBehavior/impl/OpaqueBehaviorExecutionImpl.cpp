@@ -98,8 +98,8 @@ OpaqueBehaviorExecutionImpl::OpaqueBehaviorExecutionImpl(const OpaqueBehaviorExe
 
 	m_locus  = obj.getLocus();
 
-	std::shared_ptr<Bag<uml::Classifier>> _types = obj.getTypes();
-	m_types.reset(new Bag<uml::Classifier>(*(obj.getTypes().get())));
+	std::shared_ptr<Bag<org.eclipse.uml2.uml.Classifier>> _types = obj.getTypes();
+	m_types.reset(new Bag<org.eclipse.uml2.uml.Classifier>(*(obj.getTypes().get())));
 
 
 	//Clone references with containment (deep copy)
@@ -149,7 +149,7 @@ std::shared_ptr<ecore::EClass> OpaqueBehaviorExecutionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-void OpaqueBehaviorExecutionImpl::doBody(std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> >  inputParameters,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> >  outputParameters)
+void OpaqueBehaviorExecutionImpl::doBody(std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > inputParameters,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > outputParameters)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -203,7 +203,6 @@ void OpaqueBehaviorExecutionImpl::execute()
     		this->setParameterValue(parameterValue);
     	}
     }
-
 	//end of body
 }
 
@@ -328,9 +327,6 @@ void OpaqueBehaviorExecutionImpl::saveContent(std::shared_ptr<persistence::inter
 	try
 	{
 		std::shared_ptr<fUML::Semantics::CommonBehavior::CommonBehaviorPackage> package = fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

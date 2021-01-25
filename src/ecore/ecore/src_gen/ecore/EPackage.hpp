@@ -37,35 +37,12 @@ namespace ecore
 	class ecoreFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace ecore 
 {
 	class EAnnotation;
-}
-
-namespace ecore 
-{
 	class EClassifier;
-}
-
-namespace ecore 
-{
 	class EFactory;
-}
-
-namespace ecore 
-{
-	class ENamedElement;
-}
-
-namespace ecore 
-{
-	class EObject;
-}
-
-namespace ecore 
-{
-	class EPackage;
 }
 
 // base class includes
@@ -73,6 +50,8 @@ namespace ecore
 
 // enum includes
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace ecore 
@@ -113,15 +92,15 @@ namespace ecore
 			// Attributes Getter Setter
 			//*********************************
 			 
-			virtual std::string getNsPrefix() const = 0;
+			virtual std::string  getNsPrefix() const = 0;
 			
 			 
-			virtual void setNsPrefix (std::string _nsPrefix)= 0; 
+			virtual void setNsPrefix (std::string  _nsPrefix)= 0; 
 			 
-			virtual std::string getNsURI() const = 0;
+			virtual std::string  getNsURI() const = 0;
 			
 			 
-			virtual void setNsURI (std::string _nsURI)= 0; 
+			virtual void setNsURI (std::string  _nsURI)= 0; 
 			
 			//*********************************
 			// Reference
@@ -151,9 +130,9 @@ namespace ecore
 			// Attribute Members
 			//*********************************
 			 
-			std::string m_nsPrefix = "";
+			std::string  m_nsPrefix = "";
 			 
-			std::string m_nsURI = "";
+			std::string  m_nsURI = "";
 			
 			
 			//*********************************

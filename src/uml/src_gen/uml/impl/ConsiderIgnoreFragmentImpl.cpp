@@ -208,13 +208,13 @@ std::shared_ptr<ecore::EClass> ConsiderIgnoreFragmentImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ConsiderIgnoreFragmentImpl::consider_or_ignore(Any diagnostics,std::map <   Any, Any >  context)
+bool ConsiderIgnoreFragmentImpl::consider_or_ignore(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ConsiderIgnoreFragmentImpl::type(Any diagnostics,std::map <   Any, Any >  context)
+bool ConsiderIgnoreFragmentImpl::type(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -315,6 +315,8 @@ Any ConsiderIgnoreFragmentImpl::eGet(int featureID, bool resolve, bool coreType)
 	{
 		case uml::umlPackage::CONSIDERIGNOREFRAGMENT_ATTRIBUTE_MESSAGE:
 		{
+			return eAny(getMessage()); //5616			
+			/*
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
 			Bag<uml::NamedElement>::iterator iter = m_message->begin();
 			Bag<uml::NamedElement>::iterator end = m_message->end();
@@ -324,6 +326,7 @@ Any ConsiderIgnoreFragmentImpl::eGet(int featureID, bool resolve, bool coreType)
 				iter++;
 			}
 			return eAny(tempList); //5616
+			*/
 		}
 	}
 	return CombinedFragmentImpl::eGet(featureID, resolve, coreType);
@@ -483,15 +486,8 @@ void ConsiderIgnoreFragmentImpl::saveContent(std::shared_ptr<persistence::interf
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
-	
-
-		// Add references
-		std::shared_ptr<Bag<uml::NamedElement>> message_list = this->getMessage();
-		for (std::shared_ptr<uml::NamedElement > object : *message_list)
-		{ 
-			saveHandler->addReferences("message", object);
-		}
-
+	// Add references
+		saveHandler->addReferences<uml::NamedElement>("message", this->getMessage());	
 	}
 	catch (std::exception& e)
 	{

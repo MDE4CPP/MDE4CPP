@@ -173,7 +173,7 @@ std::shared_ptr<ecore::EClass> PackageableElementImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool PackageableElementImpl::namespace_needs_visibility(Any diagnostics,std::map <   Any, Any >  context)
+bool PackageableElementImpl::namespace_needs_visibility(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -271,7 +271,7 @@ Any PackageableElementImpl::eGet(int featureID, bool resolve, bool coreType) con
 	switch(featureID)
 	{
 		case uml::umlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOwningPackage().lock())); //17311
+			return eAny(getOwningPackage().lock()); //17311
 	}
 	Any result;
 	result = NamedElementImpl::eGet(featureID, resolve, coreType);
@@ -399,9 +399,6 @@ void PackageableElementImpl::saveContent(std::shared_ptr<persistence::interfaces
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

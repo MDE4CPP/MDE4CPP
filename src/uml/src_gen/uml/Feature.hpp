@@ -35,39 +35,13 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Classifier;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class Namespace;
-}
-
-namespace uml 
-{
-	class RedefinableElement;
-}
-
-namespace uml 
-{
 	class StringExpression;
 }
 
@@ -77,6 +51,8 @@ namespace uml
 // enum includes
 #include "uml/VisibilityKind.hpp"
 
+
+//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -114,14 +90,14 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual bool getIsStatic() const = 0;
+			virtual bool  getIsStatic() const = 0;
 			
 			/*!
 			Specifies whether this Feature characterizes individual instances classified by the Classifier (false) or the Classifier itself (true).
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual void setIsStatic (bool _isStatic)= 0; 
+			virtual void setIsStatic (bool  _isStatic)= 0; 
 			
 			//*********************************
 			// Reference
@@ -139,7 +115,7 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			bool m_isStatic = false;
+			bool  m_isStatic = false;
 			
 			
 			//*********************************

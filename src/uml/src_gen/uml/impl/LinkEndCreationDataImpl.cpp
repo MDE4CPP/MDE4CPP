@@ -135,12 +135,12 @@ std::shared_ptr<ecore::EClass> LinkEndCreationDataImpl::eStaticClass() const
 /*
 Getter & Setter for attribute isReplaceAll
 */
-bool LinkEndCreationDataImpl::getIsReplaceAll() const 
+bool  LinkEndCreationDataImpl::getIsReplaceAll() const 
 {
 	return m_isReplaceAll;
 }
 
-void LinkEndCreationDataImpl::setIsReplaceAll(bool _isReplaceAll)
+void LinkEndCreationDataImpl::setIsReplaceAll(bool  _isReplaceAll)
 {
 	m_isReplaceAll = _isReplaceAll;
 } 
@@ -150,7 +150,7 @@ void LinkEndCreationDataImpl::setIsReplaceAll(bool _isReplaceAll)
 //*********************************
 // Operations
 //*********************************
-bool LinkEndCreationDataImpl::insertAt_pin(Any diagnostics,std::map <   Any, Any >  context)
+bool LinkEndCreationDataImpl::insertAt_pin(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -222,7 +222,7 @@ Any LinkEndCreationDataImpl::eGet(int featureID, bool resolve, bool coreType) co
 	switch(featureID)
 	{
 		case uml::umlPackage::LINKENDCREATIONDATA_ATTRIBUTE_INSERTAT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getInsertAt())); //1346
+			return eAny(getInsertAt()); //1346
 		case uml::umlPackage::LINKENDCREATIONDATA_ATTRIBUTE_ISREPLACEALL:
 			return eAny(getIsReplaceAll()); //1347
 	}
@@ -364,17 +364,14 @@ void LinkEndCreationDataImpl::saveContent(std::shared_ptr<persistence::interface
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
 		// Add attributes
 		if ( this->eIsSet(package->getLinkEndCreationData_Attribute_isReplaceAll()) )
 		{
 			saveHandler->addAttribute("isReplaceAll", this->getIsReplaceAll());
 		}
 
-		// Add references
-		saveHandler->addReference("insertAt", this->getInsertAt());
-
+	// Add references
+		saveHandler->addReference("insertAt", this->getInsertAt());		 
 	}
 	catch (std::exception& e)
 	{

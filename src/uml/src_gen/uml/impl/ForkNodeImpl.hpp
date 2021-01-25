@@ -64,14 +64,14 @@ namespace uml
 			allEdges->forAll(oclIsKindOf(ControlFlow)) or allEdges->forAll(oclIsKindOf(ObjectFlow))
 			*/
 			 
-			virtual bool edges(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool edges(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			/*!
 			A ForkNode has one incoming ActivityEdge.
 			incoming->size()=1
 			*/
 			 
-			virtual bool one_incoming_edge(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool one_incoming_edge(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			

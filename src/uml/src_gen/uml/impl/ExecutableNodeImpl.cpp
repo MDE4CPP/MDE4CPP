@@ -366,15 +366,7 @@ Any ExecutableNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::EXECUTABLENODE_ATTRIBUTE_HANDLER:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ExceptionHandler>::iterator iter = m_handler->begin();
-			Bag<uml::ExceptionHandler>::iterator end = m_handler->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //8820
+			return eAny(getHandler()); //8820			
 		}
 	}
 	return ActivityNodeImpl::eGet(featureID, resolve, coreType);
@@ -523,14 +515,11 @@ void ExecutableNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'handler'
 		for (std::shared_ptr<uml::ExceptionHandler> handler : *this->getHandler()) 
 		{
 			saveHandler->addReference(handler, "handler", handler->eClass() != package->getExceptionHandler_Class());
 		}
-	
-
 	}
 	catch (std::exception& e)
 	{

@@ -208,7 +208,8 @@ std::shared_ptr<ecore::EClass> OpaqueExpressionImpl::eStaticClass() const
 /*
 Getter & Setter for attribute body
 */
-std::shared_ptr<Bag<std::string> > OpaqueExpressionImpl::getBody() const 
+ std::shared_ptr<Bag<std::string> >
+ OpaqueExpressionImpl::getBody() const 
 {
 	if(m_body == nullptr)
 	{
@@ -224,7 +225,8 @@ std::shared_ptr<Bag<std::string> > OpaqueExpressionImpl::getBody() const
 /*
 Getter & Setter for attribute language
 */
-std::shared_ptr<Bag<std::string> > OpaqueExpressionImpl::getLanguage() const 
+ std::shared_ptr<Bag<std::string> >
+ OpaqueExpressionImpl::getLanguage() const 
 {
 	if(m_language == nullptr)
 	{
@@ -260,19 +262,19 @@ bool OpaqueExpressionImpl::isPositive()
 	throw "UnsupportedOperationException";
 }
 
-bool OpaqueExpressionImpl::language_body_size(Any diagnostics,std::map <   Any, Any >  context)
+bool OpaqueExpressionImpl::language_body_size(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool OpaqueExpressionImpl::one_return_result_parameter(Any diagnostics,std::map <   Any, Any >  context)
+bool OpaqueExpressionImpl::one_return_result_parameter(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool OpaqueExpressionImpl::only_return_result_parameters(Any diagnostics,std::map <   Any, Any >  context)
+bool OpaqueExpressionImpl::only_return_result_parameters(Any diagnostics,std::map <  Any ,  Any > context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -398,13 +400,13 @@ Any OpaqueExpressionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::OPAQUEEXPRESSION_ATTRIBUTE_BEHAVIOR:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getBehavior())); //16615
+			return eAny(getBehavior()); //16615
 		case uml::umlPackage::OPAQUEEXPRESSION_ATTRIBUTE_BODY:
 			return eAny(getBody()); //16616
 		case uml::umlPackage::OPAQUEEXPRESSION_ATTRIBUTE_LANGUAGE:
 			return eAny(getLanguage()); //16617
 		case uml::umlPackage::OPAQUEEXPRESSION_ATTRIBUTE_RESULT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //16618
+			return eAny(getResult()); //16618
 	}
 	return ValueSpecificationImpl::eGet(featureID, resolve, coreType);
 }
@@ -504,7 +506,8 @@ void OpaqueExpressionImpl::loadNode(std::string nodeName, std::shared_ptr<persis
 		if (nodeName.compare("body") == 0)
 		{
 			std::shared_ptr<std::string> value = loadHandler->getChildText();
-			std::shared_ptr<Bag<std::string> > list_body = this->getBody();
+			 std::shared_ptr<Bag<std::string> >
+			 list_body = this->getBody();
 			list_body->push_back(value);
 			return;
 		}
@@ -512,7 +515,8 @@ void OpaqueExpressionImpl::loadNode(std::string nodeName, std::shared_ptr<persis
 		if (nodeName.compare("language") == 0)
 		{
 			std::shared_ptr<std::string> value = loadHandler->getChildText();
-			std::shared_ptr<Bag<std::string> > list_language = this->getLanguage();
+			 std::shared_ptr<Bag<std::string> >
+			 list_language = this->getLanguage();
 			list_language->push_back(value);
 			return;
 		}
@@ -578,8 +582,6 @@ void OpaqueExpressionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
 		// Add attributes
 		if ( this->eIsSet(package->getOpaqueExpression_Attribute_body()) )
 		{
@@ -597,9 +599,8 @@ void OpaqueExpressionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 			}
 		}
 
-		// Add references
-		saveHandler->addReference("behavior", this->getBehavior());
-
+	// Add references
+		saveHandler->addReference("behavior", this->getBehavior());		 
 	}
 	catch (std::exception& e)
 	{

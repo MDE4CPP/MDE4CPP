@@ -65,7 +65,7 @@ namespace uml
 			endif
 			*/
 			 
-			virtual bool first_event_multiplicity(Any diagnostics,std::map <   Any, Any >  context) ;
+			virtual bool first_event_multiplicity(Any diagnostics,std::map <  Any ,  Any > context) ;
 			
 			
 			
@@ -77,7 +77,8 @@ namespace uml
 			<p>From package UML::Values.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<bool> > isFirstEvent() const ;
+			virtual  std::shared_ptr<Bag<bool> >
+			 isFirstEvent() const ;
 			
 			
 			
