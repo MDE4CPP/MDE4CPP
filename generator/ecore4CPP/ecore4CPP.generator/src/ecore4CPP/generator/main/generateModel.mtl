@@ -22,10 +22,11 @@
 [import ecore4CPP::generator::main::generateUnion /]
 [import ecore4CPP::generator::main::generateType /]
 [import ecore4CPP::generator::main::helper /]
+[import ecore4CPP::generator::main::helpers::keywords /]
 
 [query public includes(aClass : EClass) : Set(EClassifier) =OrderedSet{aClass.eSuperTypes,aClass.eAllStructuralFeatures.eType,aClass.eOperations.eType,aClass.eOperations.eParameters.eType}->flatten() /]
 
-[template public generateModel(aClass : EClass)]
+[template public generateModel(aClass : EClass) ?(not doNotGenerate())]
 [file (aClass.generateNamespacePath().concat('/').concat(aClass.name.toUpperFirst()).concat('.hpp'), false, 'UTF-8')]
 [startGuard(aClass)/]
 
@@ -46,20 +47,30 @@
 [if (aClass.eAttributes.eType->select(requiresAny())->size() = 0 and aClass.eOperations.eParameters.eType->select(requiresAny())->size() > 0)]
 class AnyObject;
 typedef std::shared_ptr<AnyObject> Any;
-[/if]
+[/if] 
 
 //*********************************
 // generated Includes
 
 [generatePersistenceForwardDeclarations()/]
 
-//Forward Declaration for used types
-[for (element : EClassifier| aClass.includes()->selectByKind(EClass)->asOrderedSet()->sortedBy(name)) separator ('\n')]
-namespace [element.generateNamespaceDefinition()/] 
+//Forward Declaration for used types 
+[let includeClasses:Set(EClass) = aClass.includes()->selectByKind(EClass)->select(not doNotGenerate())->select(c:EClass| (not (c = aClass)) and (not (aClass.eAllSuperTypes)->includes(c)))]
+[if (includeClasses->size()>0)]
+[let includeNameSpaces:OrderedSet(EPackage) = includeClasses->select(not oclIsUndefined()).ePackage->asOrderedSet()->sortedBy(name)]
+[if (includeNameSpaces->size()>0)]
+[for (includeNamespace: EPackage | includeNameSpaces)]
+namespace [includeNamespace.generateNamespaceDefinition()/] 
 {
+[for (element : EClassifier| includeClasses->select(includeClass: EClass | includeClass.ePackage = includeNamespace)->asOrderedSet()->sortedBy(name))]
 	class [element.name/];
+[/for]
 }
 [/for]
+[/if]
+[/let]
+[/if]
+[/let]
 
 // base class includes
 [for (elements : EClassifier| aClass.eSuperTypes->asOrderedSet()->sortedBy(name)) separator ('\n')]
@@ -73,6 +84,11 @@ namespace [element.generateNamespaceDefinition()/]
 
 [if (aClass.eSuperTypes->isEmpty() and not (aClass.name ='EObject'))]
 #include "ecore/EModelElement.hpp"
+[/if]
+
+//Includes from codegen annotation
+[if (aClass.hasKey(keyIncludes()))]
+[aClass.valueKey(keyIncludes())/]
 [/if]
 
 //*********************************
