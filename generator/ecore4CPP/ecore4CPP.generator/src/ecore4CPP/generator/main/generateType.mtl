@@ -19,47 +19,38 @@
 
 
 [template public generateParameterList(aOperation:EOperation) post(trim())]
-[for (sParameter : EParameter | aOperation.eParameters->select(p:EParameter | not p.doNotGenerate())) separator (',')]
-[sParameter.generateParameterType()/] [sParameter.name/][/for]
+[for (sParameter : EParameter | aOperation.eParameters->select(p:EParameter | not p.doNotGenerate())) separator (',')][sParameter.generateParameterType()/] [sParameter.name/][/for]
 [/template]
 
 
-[template public generateCppType(anEDataType : EGenericType)]
-[if (anEDataType.oclIsUndefined())]
-void[else]
-[if (anEDataType.eTypeArguments->notEmpty())]
-[anEDataType.generateGenericType()/][else]
-[anEDataType.eClassifier.transformType()/][/if]
+[template public generateCppType(anEDataType : EGenericType) post(trim())]
+[if (anEDataType.oclIsUndefined())] void
+[else][if (anEDataType.eTypeArguments->notEmpty())] [anEDataType.generateGenericType()/] 
+		[else] [anEDataType.eClassifier.transformType()/]
+[/if][/if]
+[/template]
+
+[template public generateGenericType(anEDataType : EGenericType) post(trim())]
+[if (anEDataType.eClassifier.name = 'EJavaClass')] [anEDataType.eClassifier.transformType()/]
+[else][anEDataType.eClassifier.transformType()/] <[for (g : EGenericType | anEDataType.eTypeArguments) separator(',')] [if (not (g.eClassifier.oclIsUndefined()) and (g.eClassifier.oclIsKindOf(ecore::EDataType)))] [g.eClassifier.generateType()/] [else]std::shared_ptr<[g.eClassifier.generateType()/]>[/if][/for]> 
 [/if]
 [/template]
 
-[template public generateGenericType(anEDataType : EGenericType)]
-[if (anEDataType.eClassifier.name = 'EJavaClass')] [anEDataType.eClassifier.transformType()/][else]
-[anEDataType.eClassifier.transformType()/] <  [for (g : EGenericType | anEDataType.eTypeArguments) separator (',')] [g.eClassifier.generateType()/][/for] > [/if]
-[/template]
-
 [template public generateType(anEDataType : EClassifier)]
-[if (anEDataType.oclIsUndefined())]
-Any[else]
-[anEDataType.transformType()/][/if]
+[if (anEDataType.oclIsUndefined())]Any[else][anEDataType.transformType()/][/if]
 [/template]
 
-[template public generateParameterType(eParameter : EParameter)]
-[if (not(eParameter.upperBound = 1))]
-std::shared_ptr<Bag<[eParameter.eGenericType.generateCppType()/]> > [elseif (not eParameter.eType.oclIsKindOf(EDataType))]
-std::shared_ptr<[eParameter.eGenericType.generateCppType()/]> [else]
-[eParameter.eGenericType.generateCppType()/] [/if]
+[template public generateParameterType(eParameter : EParameter) post(trim())]
+[if (not(eParameter.upperBound = 1))] std::shared_ptr<Bag<[eParameter.eGenericType.generateCppType()/]> >[elseif (eParameter.eType.oclIsKindOf(EDataType))][eParameter.eGenericType.generateCppType()/][else] std::shared_ptr<[eParameter.eGenericType.generateCppType()/]> [/if]
 [/template]
 
 [query private getPointerType(anOperation : EOperation) : String = if (anOperation.hasKey(anOperation.keyWeakptr())) then 'std::weak_ptr' else 'std::shared_ptr' endif /]
 
 [template public generateOperationType(eOperation : EOperation) post(trim())]
 [if (not (eOperation.upperBound = 1))]
-[if (not eOperation.eGenericType.oclIsKindOf(EDataType))]
-std::shared_ptr<Bag<[eOperation.eGenericType.generateCppType()/]> >[/if]
-[elseif ((not eOperation.eType.oclIsUndefined()) and ((not eOperation.eType.oclIsKindOf(EDataType)) or (eOperation.eType.name = 'EEList') or (eOperation.eType.name = 'ETreeIterator') ))]
-[eOperation.getPointerType()/]<[eOperation.eGenericType.generateCppType()/]> [else] 
-[eOperation.eGenericType.generateCppType()/] [/if]
+[if (not eOperation.eGenericType.oclIsKindOf(EDataType))] std::shared_ptr<Bag<[eOperation.eGenericType.generateCppType()/]> >[/if]
+[elseif ((not eOperation.eType.oclIsUndefined()) and ((not eOperation.eType.oclIsKindOf(EDataType)) or (eOperation.eType.name = 'EEList') or (eOperation.eType.name = 'ETreeIterator') ))] [eOperation.getPointerType()/]<[eOperation.eGenericType.generateCppType()/]> 
+[else][eOperation.eGenericType.generateCppType()/] [/if]
 
 [/template]
 
@@ -113,103 +104,98 @@ std::shared_ptr
 
 
 [template public generateReferenceTypeBag(eReference : EReference)]
-[if (not(eReference.upperBound = 1))]
-std::shared_ptr<[eReference.eGenericType.generateCppType()/] >[else]
-std::shared_ptr<[eReference.eGenericType.generateCppType()/]>[/if]
+[if (not(eReference.upperBound = 1))] std::shared_ptr<[eReference.eGenericType.generateCppType()/] >
+[else] std::shared_ptr<[eReference.eGenericType.generateCppType()/]>[/if]
 [/template]
 
 [template public generateAttributeType(eAttribute : EAttribute)]
-[if (not(eAttribute.upperBound = 1))]
-std::shared_ptr<Bag<[eAttribute.eGenericType.generateCppType()/]> >[elseif ((not eAttribute.eType.oclIsUndefined()) and (not eAttribute.eType.oclIsKindOf(EDataType)))]
-std::shared_ptr<[eAttribute.eGenericType.generateCppType()/]> [else]
-[eAttribute.eGenericType.generateCppType()/] [/if]
+[if (not(eAttribute.upperBound = 1))] std::shared_ptr<Bag<[eAttribute.eGenericType.generateCppType()/]> >
+[elseif ((not eAttribute.eType.oclIsUndefined()) and (not eAttribute.eType.oclIsKindOf(EDataType)))]std::shared_ptr<[eAttribute.eGenericType.generateCppType()/]> 
+[elseif ((not eAttribute.eType.oclIsUndefined()) and ((eAttribute.eType.name ='EEList') or (eAttribute.eType.name ='EMap') or (eAttribute.eType.name ='ETreeIterator') ))] std::shared_ptr<[eAttribute.eGenericType.generateCppType()/]> 
+[else][eAttribute.eGenericType.generateCppType()/] [/if]
 [/template]
 
 [**
  * Transformation Javatypes to C++
 */]
-[template public transformType(anEClassifier : EClassifier) ? (oclIsUndefined())]
-Any
-[/template]
+[template public transformType(anEClassifier : EClassifier) post(trim())]
+[if (anEClassifier.oclIsUndefined())] Any 
+[elseif (anEClassifier.oclIsKindOf(EDataType))][if (anEClassifier.oclIsKindOf(EEnum))][anEClassifier.generateNamespaceDefinition()/]::[anEClassifier.name/] 
+[else][anEClassifier.name.replace('java.lang.', '').replace('java.util.','').transformTypeName()/][/if][elseif (anEClassifier.instanceTypeName->isEmpty())][anEClassifier.generateNamespaceDefinition()/]::[anEClassifier.name/] 
+[elseif (anEClassifier.ePackage.name = 'ecore')][let transformedTypeName:String = anEClassifier.instanceTypeName.transformTypeName()][if (transformedTypeName.size()>0)][transformedTypeName/] [else][anEClassifier.generateNamespaceDefinition()/]::[anEClassifier.name/][/if][/let] 
+[else][anEClassifier.instanceTypeName/] [/if]
+[/template] 
 
-[template public transformType(anEClassifier : EClassifier) ? ((name = 'EBoolean') or (name = 'EBooleanObject') or (name = 'Boolean'))]
+[template public transformTypeName(name: String) ? ((name = 'EBoolean') or (name = 'EBooleanObject') or (name = 'Boolean'))]
 bool
 [/template]
-
-[template public transformType(anEClassifier : EClassifier) ? ((name = 'UnlimitedNatural' ))]
+ 
+[template public transformTypeName(name: String) ? ((name = 'UnlimitedNatural' ))]
 int
 [/template]
 
-[template public transformType(anEClassifier : EClassifier) ? (name = 'EResource')]
+[template public transformTypeName(name: String) ? (name = 'EResource')]
 int
 [/template]
 
-[template public transformType(anEClassifier : EClassifier) ? ((name = 'EInt') or (name = 'EIntegerObject') or (name = 'EBigInteger') or (name = 'Integer'))]
+[template public transformTypeName(name: String) ? ((name = 'EInt') or (name = 'EIntegerObject') or (name = 'EBigInteger') or (name = 'Integer'))]
 int
 [/template]
 
-[template public transformType(anEClassifier : EClassifier) ? ((name = 'EDouble') or (name = 'EDoubleObject')or (name = 'EBigDecimal') or (name = 'Real'))]
+[template public transformTypeName(name: String) ? ((name = 'EDouble') or (name = 'EDoubleObject')or (name = 'EBigDecimal') or (name = 'Real'))]
 double
 [/template]
 
-[template public transformType(anEClassifier : EClassifier) ? ((name = 'ELong') or (name = 'ELongObject') )]
+[template public transformTypeName(name: String) ? ((name = 'ELong') or (name = 'ELongObject') )]
 long
 [/template]
 
-[template public transformType(anEClassifier : EClassifier) ? ((name = 'EByte') or (name = 'EByteObject') )]
+[template public transformTypeName(name: String) ? ((name = 'EByte') or (name = 'EByteObject') )]
 char
 [/template]
 
-[template public transformType(anEClassifier : EClassifier) ? ((name = 'EByteArray'))]
+[template public transformTypeName(name: String) ? ((name = 'EByteArray'))]
 char
 [/template]
 
-[template public transformType(anEClassifier : EClassifier) ? ((name = 'EChar') or (name = 'ECharacterObject') )]
+[template public transformTypeName(name: String) ? ((name = 'EChar') or (name = 'ECharacterObject') )]
 char
 [/template]
 
-[template public transformType(anEClassifier : EClassifier) ? ((name = 'EFloat') or (name = 'EFloatObject') )]
+[template public transformTypeName(name: String) ? ((name = 'EFloat') or (name = 'EFloatObject') )]
 float
 [/template]
 
-[template public transformType(anEClassifier : EClassifier) ? (name = 'EEList')]
+[template public transformTypeName(name: String) ? (name = 'EEList')]
 Bag
 [/template]
 
-[template public transformType(anEClassifier : EClassifier) ? (name = 'EDate')]
+[template public transformTypeName(name: String) ? (name = 'EDate')]
 int
 [/template]
 
-[template public transformType(anEClassifier : EClassifier) ? (name = 'EMap')]
+[template public transformTypeName(name: String) ? (name = 'EMap')]
 std::map
 [/template]
 
-[template public transformType(anEClassifier : EClassifier) ? (name = 'EJavaObject')]
+[template public transformTypeName(name: String) ? (name = 'EJavaObject')]
 Any
 [/template]
 
-[template public transformType(anEClassifier : EClassifier) ? (name = 'ETreeIterator')]
+[template public transformTypeName(name: String) ? (name = 'ETreeIterator')]
 Bag
 [/template]
 
-[template public transformType(anEClassifier : EClassifier) ? (name = 'EJavaClass')]
+[template public transformTypeName(name: String) ? (name = 'EJavaClass')]
 void * 
 [/template]
 
-[template public transformType(anEClassifier : EClassifier) ? ((name = 'EEnumerator') or (name = 'EDiagnosticChain'))]
+[template public transformTypeName(name: String) ? ((name = 'EEnumerator') or (name = 'EDiagnosticChain'))]
 Any
 [/template]
 
-[template public transformType(anEClassifier : EClassifier) ? ((name = 'EString') or (name = 'String'))]
+[template public transformTypeName(name: String) ? ((name = 'EString') or (name = 'String') )]
 std::string
-[/template]
-
-[template public transformType(anEClassifier : EClassifier) ? (not oclIsKindOf(EDataType))]
-[anEClassifier.generateNamespaceDefinition()/]::[anEClassifier.name/]
-[/template]
-
-[template public transformType(anEClassifier : EClassifier) ? (oclIsKindOf(EEnum))]
-[anEClassifier.generateNamespaceDefinition()/]::[anEClassifier.name/]
 [/template]
 
 [query public getDefaultValue(anEClassifier : EClassifier) : String = 
