@@ -203,7 +203,6 @@ void OpaqueBehaviorExecutionImpl::execute()
     		this->setParameterValue(parameterValue);
     	}
     }
-
 	//end of body
 }
 

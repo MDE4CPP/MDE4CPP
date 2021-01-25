@@ -22,7 +22,7 @@ Further information can be found on [project site](http://sse.tu-ilmenau.de/mde4
 3. Configure environment
   * Copy the prepared environment settings file and remove the extension `default`
 	* for Windows systems: `setenv.bat.default`
-	* for Unix systems: `setenv.default` and provide to the file the permission to be executed with `chmod +h setenv`.
+	* for Unix systems: `setenv.default`
   * Open this file and configure the variables:
     * `MDE4CPP_HOME` ... path to MDE4CPP home folder
     * variables for compiler and Gradle tasks configuration
@@ -39,7 +39,7 @@ Unpack downloaded packages into `${MDE4CPP_HOME}/application`.
   * `gradlew projects` ... package overview is available
   * `gradlew help` ... gradle help
   * `gradlew <task name>` ... run task <task name>
-Note for Unix users; first you have to give execution permission to the script gradlew with: `chmod +h application/tools/gradlew`
+Note for Unix users; first you have to give execution permission to the script gradlew with: `chmod +x application/tools/gradlew`
 
 6. List of top level tasks (group MDE4CPP):
   * `buildAll` ... create executables of all generators and build all base models
