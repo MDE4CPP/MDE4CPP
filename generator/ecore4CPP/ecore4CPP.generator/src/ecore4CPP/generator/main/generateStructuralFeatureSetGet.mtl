@@ -44,18 +44,10 @@ Any [aClass.name.toUpperFirst().concat('Impl')/]::eGet(int featureID, bool resol
 [if (struct.eType.oclIsKindOf(EDataType))]
 			return eAny([struct.GetterName()/]()); //[aClass.getMyClassifierID()/][struct.getFeatureID()/]
 [elseif (struct.upperBound = 1)]
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>([struct.GetterName()/]()[if (struct.oclAsType(EReference).isBackReference())].lock()[/if])); //[aClass.getMyClassifierID()/][struct.getFeatureID()/]
+			return eAny([struct.GetterName()/]()[if (struct.oclAsType(EReference).isBackReference())].lock()[/if]); //[aClass.getMyClassifierID()/][struct.getFeatureID()/]
 [else]
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<[struct.eGenericType.generateCppType()/]>::iterator iter = m_[struct.name/]->begin();
-			Bag<[struct.eGenericType.generateCppType()/]>::iterator end = m_[struct.name/]->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //[aClass.getMyClassifierID()/][struct.getFeatureID()/]
+			return eAny([struct.GetterName()/]()[if (struct.oclAsType(EReference).isBackReference())].lock()[/if]); //[aClass.getMyClassifierID()/][struct.getFeatureID()/]			
 		}
 [/if]
 	[/for]
@@ -123,9 +115,13 @@ bool [aClass.name.toUpperFirst().concat('Impl')/]::eSet(int featureID, Any newVa
 		case [struct.metamodelPackageNameForEstructuralFeture(aClass)/]::[struct.getStaticAttributeIDName()/]:
 		{
 			// BOOST CAST
-[if (struct.eType.oclIsKindOf(EDataType) and struct.upperBound = 1)]
+[if (struct.eType.oclIsKindOf(EDataType) and struct.upperBound = 1 and struct.eGenericType.eTypeArguments->size() = 0 )]
 			[struct.eGenericType.generateCppType()/] _[struct.name/] = newValue->get<[struct.eGenericType.generateCppType()/]>();
 			[struct.SetterName()/](_[struct.name/]); //[aClass.getMyClassifierID()/][struct.getFeatureID()/]
+[elseif (struct.eType.oclIsKindOf(EDataType) and struct.upperBound = 1 and struct.eGenericType.eTypeArguments->size() > 0 )]
+			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
+			std::shared_ptr<[struct.eGenericType.generateCppType()/]> _[struct.name/] = std::dynamic_pointer_cast<[struct.eGenericType.generateCppType()/]>(_temp);
+			[struct.SetterName()/](_[struct.name/]); //[aClass.getMyClassifierID()/][struct.getFeatureID()/]			
 [elseif (struct.eType.oclIsKindOf(EDataType))]
 			// nothing to do
 [elseif (struct.upperBound = 1)]

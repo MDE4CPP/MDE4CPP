@@ -8,7 +8,10 @@
 #ifndef PERSISTENCE_INTERFACES_XSAVEHANDLER_HPP
 #define PERSISTENCE_INTERFACES_XSAVEHANDLER_HPP
 
+#include <list>
 #include <map>
+#include <unordered_map>
+
 #include <memory>
 #include <string>
 
@@ -49,8 +52,7 @@ namespace persistence
 				virtual void addReferences(const std::string &name, std::shared_ptr<ecore::EObject> object) = 0;
 				virtual void addReference(const std::shared_ptr<ecore::EObject> object, const std::string &tagName, const bool typeRequired) = 0;
 
-				template<typename T>
-				void addReferences(const std::string &name, std::shared_ptr<Bag<T> > objects)
+				template<typename T> void addReferences(const std::string &name, std::shared_ptr<Bag<T> > objects)
 				{
 					for (std::shared_ptr<T> _object : *objects)
 					{
@@ -58,6 +60,38 @@ namespace persistence
 					}
 				}
 
+				template<typename T> void addReferences(const std::string &name, std::shared_ptr<std::list<T> > objects)
+				{
+					for (auto _object : *objects)
+					{
+						addReferences(name, _object);
+					}
+				}
+
+				template<typename T> void addReferences(const std::string &name, std::shared_ptr<std::vector<T> > objects)
+				{
+					for (auto _object : *objects)
+					{
+						addReferences(name, _object);
+					}
+				}
+
+				template<typename K, typename V> void addReferences(const std::string &name, std::shared_ptr<std::map<K,V> > objects)
+				{
+					for (auto _object : *objects)
+					{
+						addReferences(name, _object.second);
+					}
+				}
+				
+				template<typename K, typename V> void addReferences(const std::string &name, std::shared_ptr<std::unordered_map<K,V> > objects)
+				{
+					for (auto _object : *objects)
+					{
+						addReferences(name, _object.second);
+					}
+				}
+					
 				virtual void release() = 0;
 		};
 
