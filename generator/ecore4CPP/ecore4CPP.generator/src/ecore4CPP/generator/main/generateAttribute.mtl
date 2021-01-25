@@ -169,10 +169,24 @@ void [anEAttribute.eContainingClass.name.toUpperFirst()/]Impl::[redefinedEAttrib
 
 [/template]
 
+[** Handling of doNotGenerate: if an Attribute has a Type on an external Class, which is not generated, then create a dummy EClass /]
+
 [template public generateAttributeInitialization(anEAttribute : EAttribute)]
 [anEAttribute.getClassMemberName()/] = [anEAttribute.packageGetter()/];
 [anEAttribute.getClassMemberName()/]->setName("[anEAttribute.name/]");
-[anEAttribute.getClassMemberName()/]->setEType([anEAttribute.eType.oclAsType(EDataType).packageGetter(anEAttribute)/]);
+
+[if (anEAttribute.eType.doNotGenerate())]
+{
+	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+	std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+   	unknownClass->setName("[anEAttribute.eType.oclAsType(EDataType).name/]");
+	unknownClass->setAbstract(true);
+	unknownClass->setInterface(true);
+	[anEAttribute.getClassMemberName()/]->setEType(unknownClass);
+}
+[else]
+	[anEAttribute.getClassMemberName()/]->setEType([anEAttribute.eType.oclAsType(EDataType).packageGetter(anEAttribute)/]);
+[/if]
 [anEAttribute.getClassMemberName()/]->setLowerBound([anEAttribute.lowerBound/]);
 [anEAttribute.getClassMemberName()/]->setUpperBound([anEAttribute.upperBound/]);
 [anEAttribute.getClassMemberName()/]->setTransient([anEAttribute.transient.toString()/]);

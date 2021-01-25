@@ -29,7 +29,7 @@
 #include "[aPackage.name/]/[packageName/]Factory.hpp"
 #include "[aPackage.name/]/[packageName/]Package.hpp"
 
-[for (aEClass : EClass | aPackage.eAllContents(EClass))]
+[for (aEClass : EClass | aPackage.eAllContents(EClass)) ? (not doNotGenerate())]
 #include "[aPackage.name/]/[aEClass.name.toUpperFirst()/].hpp"
 [/for]
 [for (anEEnum : EEnum | aPackage.eAllContents(EEnum))]

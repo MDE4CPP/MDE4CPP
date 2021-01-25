@@ -56,7 +56,7 @@
 //Forward declaration includes
 [generatePersistenceInclude()/]
 
-[for (element : EClassifier| aClass.includes()->selectByKind(EClass)->asOrderedSet()->sortedBy(name)) separator ('\n')]
+[for (element : EClassifier| aClass.includes()->selectByKind(EClass)->select(not doNotGenerate())->asOrderedSet()->sortedBy(name)) separator ('\n')]
 #include "[element.generateNamespacePath()/]/[element.name.toUpperFirst()/].hpp"
 [/for]
 

@@ -204,9 +204,21 @@ void [anEReference.eContainingClass.name.toUpperFirst()/]Impl::[redefinedERefere
 
 [/template] 
  
+[** Handling of doNotGenerate: if an Attribute has a Type on an external Class, which is not generated, then create a dummy EClass /]
 [template public generateReferenceInitialization(anEReference : EReference)]
 [anEReference.getClassMemberName()/]->setName("[anEReference.name/]");
+[if (anEReference.eGenericType.eClassifier.doNotGenerate())]
+{
+	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+	std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+   	unknownClass->setName("[anEReference.eType.oclAsType(EDataType).name/]");
+	unknownClass->setAbstract(true);
+	unknownClass->setInterface(true);
+	[anEReference.getClassMemberName()/]->setEType(unknownClass);
+}
+[else]
 [anEReference.getClassMemberName()/]->setEType([anEReference.eGenericType.eClassifier.packageGetter(anEReference)/]);
+[/if]
 [anEReference.getClassMemberName()/]->setLowerBound([anEReference.lowerBound/]);
 [anEReference.getClassMemberName()/]->setUpperBound([anEReference.upperBound/]);
 [anEReference.getClassMemberName()/]->setTransient([anEReference.transient.toString()/]);
