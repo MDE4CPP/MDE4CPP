@@ -6,7 +6,7 @@
       <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_f8AqsRdoEeu6nLgfxtyxzQ" value="1"/>
       <defaultValue xmi:type="uml:InstanceValue" xmi:id="_vOJ_EBdoEeu6nLgfxtyxzQ" type="_HxH0ABdoEeu6nLgfxtyxzQ" instance="_LkkQcBdoEeu6nLgfxtyxzQ"/>
     </ownedAttribute>
-    <ownedBehavior xmi:type="uml:Activity" xmi:id="_5eZ1wBJYEeuI2oJVG-zT2A" name="activity for execute operation" specification="_APyU4BJXEeuI2oJVG-zT2A" node="_J9uu8BJZEeuI2oJVG-zT2A _XdoCkBJZEeuI2oJVG-zT2A _mrbMABJlEeuI2oJVG-zT2A _z5sHoBJmEeuI2oJVG-zT2A _BM_JsBJnEeuI2oJVG-zT2A _kq3-oBJnEeuI2oJVG-zT2A _6qROIBJnEeuI2oJVG-zT2A">
+    <ownedBehavior xmi:type="uml:Activity" xmi:id="_5eZ1wBJYEeuI2oJVG-zT2A" name="activity for execute operation" specification="_APyU4BJXEeuI2oJVG-zT2A" node="_J9uu8BJZEeuI2oJVG-zT2A _XdoCkBJZEeuI2oJVG-zT2A _mrbMABJlEeuI2oJVG-zT2A _z5sHoBJmEeuI2oJVG-zT2A _BM_JsBJnEeuI2oJVG-zT2A _kq3-oBJnEeuI2oJVG-zT2A _6qROIBJnEeuI2oJVG-zT2A _P80SgF-HEeudqtUzPib32A">
       <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_8vM6UBJnEeuI2oJVG-zT2A" name="obPrintModelName">
         <ownedParameter xmi:id="_NFvD4BJoEeuI2oJVG-zT2A" name="model">
           <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Model"/>
@@ -30,14 +30,18 @@
       <edge xmi:type="uml:ObjectFlow" xmi:id="_41fd0BJnEeuI2oJVG-zT2A" target="_BM_JshJnEeuI2oJVG-zT2A" source="_kq3-oRJnEeuI2oJVG-zT2A"/>
       <edge xmi:type="uml:ObjectFlow" xmi:id="_6UVaYBJnEeuI2oJVG-zT2A" target="_BM_JsRJnEeuI2oJVG-zT2A" source="_z5sHoRJmEeuI2oJVG-zT2A"/>
       <edge xmi:type="uml:ObjectFlow" xmi:id="_SOjX0BJoEeuI2oJVG-zT2A" target="_Q5S1EBJoEeuI2oJVG-zT2A" source="_BM_JsxJnEeuI2oJVG-zT2A"/>
-      <edge xmi:type="uml:ControlFlow" xmi:id="_SyH-8BJoEeuI2oJVG-zT2A" target="_XdoCkBJZEeuI2oJVG-zT2A" source="_6qROIBJnEeuI2oJVG-zT2A">
+      <edge xmi:type="uml:ControlFlow" xmi:id="_SyH-8BJoEeuI2oJVG-zT2A" target="_P80SgF-HEeudqtUzPib32A" source="_6qROIBJnEeuI2oJVG-zT2A">
         <guard xmi:type="uml:LiteralBoolean" xmi:id="_SyH-8RJoEeuI2oJVG-zT2A" name="print model name_To_ActivityFinal1_guard" value="true"/>
         <weight xmi:type="uml:LiteralInteger" xmi:id="_SyH-8hJoEeuI2oJVG-zT2A" name="print model name_To_ActivityFinal1_weight"/>
+      </edge>
+      <edge xmi:type="uml:ControlFlow" xmi:id="_bLmfIF-HEeudqtUzPib32A" target="_XdoCkBJZEeuI2oJVG-zT2A" source="_P80SgF-HEeudqtUzPib32A">
+        <guard xmi:type="uml:LiteralBoolean" xmi:id="_bLmfIV-HEeudqtUzPib32A" name="doSomething_To_ActivityFinal1_guard" value="true"/>
+        <weight xmi:type="uml:LiteralInteger" xmi:id="_bLmfIl-HEeudqtUzPib32A" name="doSomething_To_ActivityFinal1_weight"/>
       </edge>
       <node xmi:type="uml:ActivityParameterNode" xmi:id="_J9uu8BJZEeuI2oJVG-zT2A" name="x" outgoing="_aj8x8BJnEeuI2oJVG-zT2A" type="_GDyJQBJWEeuI2oJVG-zT2A" parameter="_J9p2cBJZEeuI2oJVG-zT2A">
         <upperBound xmi:type="uml:LiteralInteger" xmi:id="_J9uu8RJZEeuI2oJVG-zT2A" value="1"/>
       </node>
-      <node xmi:type="uml:ActivityFinalNode" xmi:id="_XdoCkBJZEeuI2oJVG-zT2A" name="ActivityFinal1" incoming="_SyH-8BJoEeuI2oJVG-zT2A"/>
+      <node xmi:type="uml:ActivityFinalNode" xmi:id="_XdoCkBJZEeuI2oJVG-zT2A" name="ActivityFinal1" incoming="_bLmfIF-HEeudqtUzPib32A"/>
       <node xmi:type="uml:CallOperationAction" xmi:id="_mrbMABJlEeuI2oJVG-zT2A" name="publish" outgoing="_YQmXoBJZEeuI2oJVG-zT2A __Hqb8BJmEeuI2oJVG-zT2A" operation="_KD2FYBJWEeuI2oJVG-zT2A">
         <target xmi:id="_mrbMARJlEeuI2oJVG-zT2A" name="x" incoming="_aj8x8BJnEeuI2oJVG-zT2A" type="_GDyJQBJWEeuI2oJVG-zT2A"/>
       </node>
@@ -72,10 +76,19 @@
           <type xmi:type="uml:Class" href="pathmap://UML_METAMODELS/UML.metamodel.uml#Model"/>
         </argument>
       </node>
+      <node xmi:type="uml:CallOperationAction" xmi:id="_P80SgF-HEeudqtUzPib32A" name="doSomething" incoming="_SyH-8BJoEeuI2oJVG-zT2A" outgoing="_bLmfIF-HEeudqtUzPib32A" operation="_swDCwF-GEeudqtUzPib32A">
+        <target xmi:id="_P80SgV-HEeudqtUzPib32A" name="self" type="_D-jiIBJWEeuI2oJVG-zT2A"/>
+      </node>
+    </ownedBehavior>
+    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_yomxkF-GEeudqtUzPib32A" name="obDoSomething" specification="_swDCwF-GEeudqtUzPib32A">
+      <eAnnotations xmi:id="_1IrhoF-GEeudqtUzPib32A" source="noExecution"/>
+      <language>CPP</language>
+      <body>std::cout &lt;&lt; &quot;I do something.&quot; &lt;&lt; std::endl;</body>
     </ownedBehavior>
     <ownedOperation xmi:id="_APyU4BJXEeuI2oJVG-zT2A" name="execute" method="_5eZ1wBJYEeuI2oJVG-zT2A">
       <ownedParameter xmi:id="_LlHq4BJWEeuI2oJVG-zT2A" name="x" type="_GDyJQBJWEeuI2oJVG-zT2A"/>
     </ownedOperation>
+    <ownedOperation xmi:id="_swDCwF-GEeudqtUzPib32A" name="doSomething" method="_yomxkF-GEeudqtUzPib32A"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Interface" xmi:id="_GDyJQBJWEeuI2oJVG-zT2A" name="X">
     <ownedAttribute xmi:id="_Eq3JoFpDEeuDlrhhJ0b14w" name="umlAttribute">
