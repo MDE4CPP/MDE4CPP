@@ -524,6 +524,9 @@
         <eAnnotations source="redefines" references="#//ParameterableElement/templateParameter"/>
       </contents>
     </eAnnotations>
+    <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+      <details key="includes" value="#include &quot;uml/BehavioredClassifier.hpp&quot;&#xA;#include &quot;uml/InterfaceRealization.hpp&quot;&#xA;#include &quot;uml/Interface.hpp&quot;&#xA;#include &quot;uml/Usage.hpp&quot;&#xA;#include &quot;uml/Class.hpp&quot;"/>
+    </eAnnotations>
     <eOperations name="specialize_type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="A Classifier may only specialize Classifiers of a valid type.&#xA;parents()->forAll(c | self.maySpecializeType(c))"/>
@@ -787,6 +790,19 @@
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="All StructuralFeatures related to the Classifier that may have Slots, including direct attributes, inherited attributes, private attributes in generalizations, and memberEnds of Associations, but excluding redefined StructuralFeatures.&#xA;result = (member->select(oclIsKindOf(StructuralFeature))->&#xD;&#xA;  collect(oclAsType(StructuralFeature))->&#xD;&#xA;   union(self.inherit(self.allParents()->collect(p | p.attribute)->asSet())->&#xD;&#xA;     collect(oclAsType(StructuralFeature)))->asSet())&#xA;&lt;p>From package UML::Classification.&lt;/p>"/>
       </eAnnotations>
+    </eOperations>
+    <eOperations name="getPropertyValue" ordered="false" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Retrieves the value of the property with the specified name."/>
+      </eAnnotations>
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="&#x9;std::shared_ptr&lt;Bag&lt;uml::Property> > propertyList = this->getMetaClass()->getAttribute();&#xA;&#x9;for(std::shared_ptr&lt;uml::Property> p: *propertyList)&#xA;&#x9;{&#xA;&#x9;&#x9;if(p->getName()==propertyName)&#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;return this->get(p);&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;&#x9;return Any();"/>
+      </eAnnotations>
+      <eParameters name="propertyName" ordered="false" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/uml2/5.0.0/Types#//String">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The name of the property whose value to retrieve."/>
+        </eAnnotations>
+      </eParameters>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="feature" ordered="false"
         upperBound="-1" eType="#//Feature" changeable="false" volatile="true" transient="true"
@@ -1286,6 +1302,9 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="An Element is a constituent of a model. As such, it has the capability of owning other Elements.&#xA;&lt;p>From package UML::CommonStructure.&lt;/p>"/>
     </eAnnotations>
+    <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+      <details key="includes" value="#include &quot;util/StereotypeStorage.hpp&quot;"/>
+    </eAnnotations>
     <eOperations name="has_owner" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="Elements that must be owned must have an owner.&#xA;mustBeOwned() implies owner->notEmpty()"/>
@@ -1525,7 +1544,7 @@
         <details key="documentation" value="Retrieves the value of the property with the specified name in the specified stereotype for this element."/>
       </eAnnotations>
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="std::shared_ptr&lt;uml::Stereotype> stereoInstance = util::StereotypeStorage::eInstance()->getAppliedStereotype(getThisElementPtr(), stereotype->getQualifiedName());&#xD;&#xA;&#x9;if(stereoInstance == nullptr)&#xD;&#xA;&#x9;{&#xD;&#xA;&#x9;   return Any();&#xD;&#xA;&#x9;}&#xD;&#xA;&#xD;&#xA;&#x9;std::shared_ptr&lt;Bag&lt;uml::Property> > propertyList = stereoInstance->getMetaClass()->getAttribute();&#xD;&#xA;&#x9;for(std::shared_ptr&lt;uml::Property> p: *propertyList)&#xD;&#xA;&#x9;{&#xD;&#xA;&#x9;&#x9;if(p->getName()==propertyName)&#xD;&#xA;&#x9;&#x9;{&#xD;&#xA;&#x9;&#x9;&#x9;return stereoInstance->get(p);&#xD;&#xA;&#x9;&#x9;}&#xD;&#xA;&#x9;}&#xD;&#xA;&#x9;return Any();"/>
+        <details key="body" value="std::shared_ptr&lt;uml::Stereotype> stereoInstance = util::StereotypeStorage::eInstance()->getAppliedStereotype(getThisElementPtr(), stereotype->getQualifiedName());&#xA;&#x9;if(stereoInstance == nullptr)&#xA;&#x9;{&#xA;&#x9;   return Any();&#xA;&#x9;}&#xA;&#xA;&#x9;return stereoInstance->getPropertyValue(propertyName);"/>
       </eAnnotations>
       <eParameters name="stereotype" ordered="false" lowerBound="1" eType="#//Stereotype">
         <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
