@@ -67,17 +67,16 @@ m_[anEAttribute.name/].reset(new Bag<[anEAttribute.eGenericType.generateCppType(
 [/template]
 
 [template public generateAttributeGetterDecleration(anEAttribute : EAttribute, impl : Boolean) ? (hasGetter())]
-[anEAttribute.generateDocumentation()/] 
+[anEAttribute.generateDocumentation()/]
 virtual [if (anEAttribute.eType.oclIsKindOf(EDataType))]
 [anEAttribute.generateAttributeType()/] [else]
 std::shared_ptr<[anEAttribute.generateAttributeType()/]> [/if]
  [anEAttribute.GetterName()/]() const [abstractSufix(impl)/];
-
 [/template]
 
 [template public generateAttributeSetterDecleration(anEAttribute : EAttribute, impl : Boolean) ? ((hasSetter() or(impl and hasImplSetterOnly())) )]
 [anEAttribute.generateDocumentation()/] 
-virtual void [anEAttribute.SetterName()/] ([anEAttribute.generateAttributeType()/] _[anEAttribute.name/])[abstractSufix(impl)/]; 
+virtual void [anEAttribute.SetterName()/] ([anEAttribute.generateAttributeType()/] _[anEAttribute.name/])[abstractSufix(impl)/];
 [/template]
 
 [***

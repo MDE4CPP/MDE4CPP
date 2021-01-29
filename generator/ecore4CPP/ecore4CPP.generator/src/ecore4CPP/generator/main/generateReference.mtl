@@ -38,7 +38,6 @@
 [template public generateReferenceGetterDeclaretaion(anEReference : EReference, impl : EBoolean)? (hasGetter() and (not isUnion()) )]
 [anEReference.generateDocumentation()/]
 virtual [anEReference.generateReferenceType()/] [anEReference.GetterName()/]() const [abstractSufix(impl)/];
-
 [/template]
 
 [template public generateReferenceSetterDeclaretaion(anEReference : EReference, impl : EBoolean) ? ( hasSetter() )]
@@ -47,7 +46,6 @@ virtual void [anEReference.SetterName()/]([if (not anEReference.eGenericType.ocl
 [generateReferenceParameter(anEReference)/][else]
 [anEReference.eGenericType.generateCppType()/] _[anEReference.name/][/if]
 ) [abstractSufix(impl)/];
-
 [/template]
 
 [template public generateProtectedReference(anEReference : EReference) ]
