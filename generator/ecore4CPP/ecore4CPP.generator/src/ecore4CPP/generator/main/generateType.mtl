@@ -22,12 +22,14 @@
 [for (sParameter : EParameter | aOperation.eParameters->select(p:EParameter | not p.doNotGenerate())) separator (',')][sParameter.generateParameterType()/] [sParameter.name/][/for]
 [/template]
 
-
 [template public generateCppType(anEDataType : EGenericType) post(trim())]
-[if (anEDataType.oclIsUndefined())] void
-[else][if (anEDataType.eTypeArguments->notEmpty())] [anEDataType.generateGenericType()/] 
-		[else] [anEDataType.eClassifier.transformType()/]
-[/if][/if]
+[if (anEDataType.oclIsUndefined())] void [else]
+[if (anEDataType.eTypeArguments->notEmpty())] [anEDataType.generateGenericType()/] [else][anEDataType.eClassifier.transformType()/][/if][/if]
+[/template]
+
+[template public generateCppTypeWithPointerCheck(anEDataType : EGenericType) post(trim())]
+[if (anEDataType.eClassifier.oclIsKindOf(EDataType))][anEDataType.generateCppType()/]
+[else]std::shared_ptr<[anEDataType.generateCppType()/]>[/if]
 [/template]
 
 [template public generateGenericType(anEDataType : EGenericType) post(trim())]
@@ -49,7 +51,7 @@
 [template public generateOperationType(eOperation : EOperation) post(trim())]
 [if (not (eOperation.upperBound = 1))]
 [if (not eOperation.eGenericType.oclIsKindOf(EDataType))] std::shared_ptr<Bag<[eOperation.eGenericType.generateCppType()/]> >[/if]
-[elseif ((not eOperation.eType.oclIsUndefined()) and ((not eOperation.eType.oclIsKindOf(EDataType)) or (eOperation.eType.name = 'EEList') or (eOperation.eType.name = 'ETreeIterator') ))] [eOperation.getPointerType()/]<[eOperation.eGenericType.generateCppType()/]> 
+[elseif ((not eOperation.eType.oclIsUndefined()) and ((not eOperation.eType.oclIsKindOf(EDataType)) or (eOperation.eType.name = 'EEList')  or (eOperation.eType.name = 'EMap')or (eOperation.eType.name = 'ETreeIterator') ))] [eOperation.getPointerType()/]<[eOperation.eGenericType.generateCppType()/]> 
 [else][eOperation.eGenericType.generateCppType()/] [/if]
 
 [/template]
@@ -79,15 +81,14 @@
 	[if(pointer)][eReference.pointertype()/]<[/if][eReference.eGenericType.generateCppType()/] [if(pointer)]>[/if]
 [else]
 	[if(eReference.isSubsetUnion())]
-		[if(pointer)]std::shared_ptr<[/if]SubsetUnion<[eReference.eGenericType.generateCppType()/], [generateSubsetType(eReference)/]>[if(pointer)]>[/if]
+        [if(pointer)]std::shared_ptr<[/if]SubsetUnion<[eReference.eGenericType.generateCppType()/], [generateSubsetType(eReference)/]>[if(pointer)]>[/if]
 	[elseif(eReference.hasSubset())]
-		[if(pointer)]std::shared_ptr<[/if]Subset<[eReference.eGenericType.generateCppType()/], [generateSubsetType(eReference)/]>[if(pointer)]>[/if]
+        [if(pointer)]std::shared_ptr<[/if]Subset<[eReference.eGenericType.generateCppType()/], [generateSubsetType(eReference)/]>[if(pointer)]>[/if]
 	[elseif(eReference.isUnion())]
-		[if(pointer)]std::shared_ptr<[/if]Union<[eReference.eGenericType.generateCppType()/]>[if(pointer)]>[/if]
+        [if(pointer)]std::shared_ptr<[/if]Union<[eReference.eGenericType.generateCppType()/]>[if(pointer)]>[/if]
 	[else]
-		[if(pointer)]std::shared_ptr<[/if]Bag<[eReference.eGenericType.generateCppType()/]>[if(pointer)]>[/if]
-	[/if]
-[/if]
+        [if(pointer)]std::shared_ptr<[/if]Bag<[eReference.eGenericType.generateCppType()/]>[if(pointer)]>[/if]
+	[/if][/if]
 [/template]
 
 [query private isShared(aReference : EReference) : Boolean = if (aReference.hasKey(keyAggregationKind())) then aReference.valueKey(keyAggregationKind())='shared' else false endif/]
@@ -103,27 +104,43 @@ std::shared_ptr
 [/template]
 
 
-[template public generateReferenceTypeBag(eReference : EReference)]
+[template public generateReferenceTypeBag(eReference : EReference) post(trim())]
 [if (not(eReference.upperBound = 1))] std::shared_ptr<[eReference.eGenericType.generateCppType()/] >
 [else] std::shared_ptr<[eReference.eGenericType.generateCppType()/]>[/if]
 [/template]
 
-[template public generateAttributeType(eAttribute : EAttribute)]
-[if (not(eAttribute.upperBound = 1))] std::shared_ptr<Bag<[eAttribute.eGenericType.generateCppType()/]> >
-[elseif ((not eAttribute.eType.oclIsUndefined()) and (not eAttribute.eType.oclIsKindOf(EDataType)))]std::shared_ptr<[eAttribute.eGenericType.generateCppType()/]> 
-[elseif ((not eAttribute.eType.oclIsUndefined()) and ((eAttribute.eType.name ='EEList') or (eAttribute.eType.name ='EMap') or (eAttribute.eType.name ='ETreeIterator') ))] std::shared_ptr<[eAttribute.eGenericType.generateCppType()/]> 
-[else][eAttribute.eGenericType.generateCppType()/] [/if]
+[template public generateAttributeType(eAttribute : EAttribute) post(trim())]
+[if (not(eAttribute.upperBound = 1))] std::shared_ptr<Bag<[eAttribute.eGenericType.generateCppType()/]> > [elseif 
+((not eAttribute.eType.oclIsUndefined()) and (not eAttribute.eType.oclIsKindOf(EDataType)))]std::shared_ptr<[eAttribute.eGenericType.generateCppType()/]> [elseif 
+((not eAttribute.eType.oclIsUndefined()) and ((eAttribute.eType.name ='EEList') or (eAttribute.eType.name ='EMap') or (eAttribute.eType.name ='ETreeIterator') ))] std::shared_ptr<[eAttribute.eGenericType.generateCppType()/]> [else][eAttribute.eGenericType.generateCppType()/][/if]
 [/template]
 
 [**
  * Transformation Javatypes to C++
 */]
 [template public transformType(anEClassifier : EClassifier) post(trim())]
-[if (anEClassifier.oclIsUndefined())] Any 
-[elseif (anEClassifier.oclIsKindOf(EDataType))][if (anEClassifier.oclIsKindOf(EEnum))][anEClassifier.generateNamespaceDefinition()/]::[anEClassifier.name/] 
-[else][anEClassifier.name.replace('java.lang.', '').replace('java.util.','').transformTypeName()/][/if][elseif (anEClassifier.instanceTypeName->isEmpty())][anEClassifier.generateNamespaceDefinition()/]::[anEClassifier.name/] 
-[elseif (anEClassifier.ePackage.name = 'ecore')][let transformedTypeName:String = anEClassifier.instanceTypeName.transformTypeName()][if (transformedTypeName.size()>0)][transformedTypeName/] [else][anEClassifier.generateNamespaceDefinition()/]::[anEClassifier.name/][/if][/let] 
-[else][anEClassifier.instanceTypeName/] [/if]
+[if (anEClassifier.oclIsUndefined())] Any
+[elseif (anEClassifier.oclIsKindOf(EDataType))]
+    [if (anEClassifier.oclIsKindOf(EEnum))][anEClassifier.generateNamespaceDefinition()/]::[anEClassifier.name/] 
+    [else][anEClassifier.name.replace('java.lang.', '').replace('java.util.','').transformTypeName()/]
+    [/if]
+[elseif (anEClassifier.ePackage.name = 'ecore')]
+    [let transformedTypeName:String = anEClassifier.instanceTypeName.transformTypeName()]
+        [if (transformedTypeName.size()>0)][transformedTypeName/] 
+         [else] [anEClassifier.generateNamespaceDefinition()/]::[anEClassifier.name/]
+[/if][/let][else]
+	[if ((anEClassifier.oclIsKindOf(ecore::EClass)) and ( anEClassifier.oclAsType(ecore::EClass).eSuperTypes.eTypeParameters->size()>0))]
+		[anEClassifier.oclAsType(ecore::EClass).transformTemplateType()/]
+	[else] [anEClassifier.generateNamespaceDefinition()/]::[anEClassifier.name/]
+    [/if] [/if]
+[/template] 
+
+[** 
+ * Generate template datatypes. Only one (the first one) template binding is supported
+*/]
+[template public transformTemplateType(anEClass : EClass) post(trim())]
+	[anEClass.eSuperTypes->first().generateNamespaceDefinition()/]::[anEClass.eSuperTypes->first().name/][for (bindingType : EGenericType | anEClass.eGenericSuperTypes->first().eTypeArguments) before('<') separator(',') after('>')][if 
+		(bindingType.eClassifier.oclIsKindOf(EDataType))][bindingType.eClassifier.transformType()/][else]std::shared_ptr<[bindingType.eClassifier.transformType()/]>[/if][/for]
 [/template] 
 
 [template public transformTypeName(name: String) ? ((name = 'EBoolean') or (name = 'EBooleanObject') or (name = 'Boolean'))]

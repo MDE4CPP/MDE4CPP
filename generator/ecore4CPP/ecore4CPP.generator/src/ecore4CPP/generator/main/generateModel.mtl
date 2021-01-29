@@ -24,7 +24,9 @@
 [import ecore4CPP::generator::main::helper /]
 [import ecore4CPP::generator::main::helpers::keywords /]
 
-[query public includes(aClass : EClass) : Set(EClassifier) =OrderedSet{aClass.eSuperTypes,aClass.eAllStructuralFeatures.eType,aClass.eOperations.eType,aClass.eOperations.eParameters.eType}->flatten() /]
+[query private structuralFeaturesIncludes(aClass :EClassifier ) : Set(EClassifier) = if ((aClass.oclIsKindOf(EClass)) and(aClass.oclAsType(EClass).eGenericSuperTypes->size()>0) and (aClass.oclAsType(EClass).eGenericSuperTypes.eTypeArguments->size()>0) ) then OrderedSet{ aClass.oclAsType(EClass).eGenericSuperTypes.eTypeArguments.eClassifier.structuralFeaturesIncludes(), aClass.oclAsType(EClass).eGenericSuperTypes.eClassifier} else OrderedSet{aClass} endif /]
+
+[query public includes(aClass : EClass) : Set(EClassifier) =OrderedSet{aClass.eSuperTypes,aClass.eAllStructuralFeatures.eType,aClass.eAllStructuralFeatures.eType.structuralFeaturesIncludes(), aClass.eOperations.eType,aClass.eOperations.eParameters.eType}->flatten() /]
 
 [template public generateModel(aClass : EClass) ?(not doNotGenerate())]
 [file (aClass.generateNamespacePath().concat('/').concat(aClass.name.toUpperFirst()).concat('.hpp'), false, 'UTF-8')]
@@ -73,7 +75,7 @@ namespace [includeNamespace.generateNamespaceDefinition()/]
 [/let]
 
 // base class includes
-[for (elements : EClassifier| aClass.eSuperTypes->asOrderedSet()->sortedBy(name)) separator ('\n')]
+[for (elements : EClassifier| aClass.eSuperTypes->asOrderedSet()->sortedBy(name))]
 #include "[elements.generateNamespacePath()/]/[elements.name.toUpperFirst().concat('.hpp')/]"
 [/for]
 
@@ -86,9 +88,9 @@ namespace [includeNamespace.generateNamespaceDefinition()/]
 #include "ecore/EModelElement.hpp"
 [/if]
 
+[if (aClass.hasKey(keyHeaderIncludes()))]
 //Includes from codegen annotation
-[if (aClass.hasKey(keyIncludes()))]
-[aClass.valueKey(keyIncludes())/]
+[aClass.valueKey(keyHeaderIncludes())/]
 [/if]
 
 //*********************************
@@ -97,23 +99,19 @@ namespace [aClass.generateNamespaceDefinition()/]
 	[aClass.generateDocumentation()/]
 	class [aClass.name.toUpperFirst()/] [if (aClass.eSuperTypes->isEmpty() and not (aClass.name ='EObject'))] : virtual public ecore::EModelElement
 [else]
-[for (sClass : EClass | aClass.eSuperTypes->asOrderedSet()->sortedBy(name)) before (':') separator (',')]
-virtual public [ClassWithNamespace(aClass,sClass)/][/for]
-[/if][if(aClass.hasKey('shared_from_this'))], public std::enable_shared_from_this<[aClass.name.toUpperFirst()/]>[/if]
-	{
+[for (sClass : EClass | aClass.eSuperTypes->asOrderedSet()->sortedBy(name)) before (':') separator (',')] virtual public [ClassWithNamespace(aClass,sClass)/][/for]
+[/if][if(aClass.hasKey('shared_from_this'))], public std::enable_shared_from_this<[aClass.name.toUpperFirst()/]>[/if]	{
 		public:
  			[aClass.name.toUpperFirst()/](const [aClass.name.toUpperFirst()/] &) {}
 			[aClass.name.toUpperFirst()/]& operator=([aClass.name.toUpperFirst()/] const&) = delete;
 
 		protected:
 			[aClass.name.toUpperFirst()/](){}
-
 			[if(aClass.containsContainerAttribute())]
 
 			[let ref:OrderedSet(EReference) = aClass.getAllContainers()]
 			[for(aReference:EReference | ref->sortedBy(name)) separator('\n')]
 			//Additional constructors for the containments back reference
-
 			[if(ref->select(eType.name = aReference.eType.name)->size()>1 )]
 					[if(ref->select(eType.name = aReference.eType.name)->asOrderedSet()->sortedBy(name)->first() = aReference)]
 			[aClass.name.toUpperFirst()/]([aReference.generateReferenceType(true)/] par_[aReference.eType.name/], const int reference_id);

@@ -439,20 +439,23 @@ if (value == [aAttribute.eType.name/]::[aLiteral.name.toUpperCase()/])
 [for (aReference : EReference | refList)]
 	[if (aReference.upperBound = 1)] 
 		[if (not (aReference.eType.oclIsUndefined()))] 
-			[if ((aReference.eType.name ='EEList') or (aReference.eType.name ='ETreeIterator') )]		saveHandler->addReferences<[aReference.eGenericType.eTypeArguments->first().generateCppType()/]>("[aReference.name/]", this->[aReference.GetterName()/]()); 
-			[elseif (aReference.eType.name ='EMap')]		saveHandler->addReferences<[aReference.eGenericType.eTypeArguments->first().generateCppType()/], [aReference.eGenericType.eTypeArguments->last().generateCppType()/]>("[aReference.name/]", this->[aReference.GetterName()/]()); 
-			[elseif ((not (aReference.eType.ePackage.name = 'ecore')) and (aReference.eType.instanceTypeName->size()>0) )]
-				[if ((aReference.eType.instanceTypeName.contains(' map<') ) or (aReference.eType.instanceTypeName.contains('::map<') ) )]		saveHandler->addReferences<[aReference.eType.instanceTypeName.substring(aReference.eType.instanceTypeName.index('map<')+4).replace('>$','')/]>("[aReference.name/]", this->[aReference.GetterName()/]());
-				[elseif ((aReference.eType.instanceTypeName.contains(' unordered_map<') ) or (aReference.eType.instanceTypeName.contains('::unordered_map<') ) )]		saveHandler->addReferences<[aReference.eType.instanceTypeName.substring(aReference.eType.instanceTypeName.index('unordered_map<')+14).replace('>$','')/]>("[aReference.name/]", this->[aReference.GetterName()/]());  
-				[elseif ((aReference.eType.instanceTypeName.contains(' list<') ) or (aReference.eType.instanceTypeName.contains('::list<') ) )]		saveHandler->addReferences<[aReference.eType.instanceTypeName.substring(aReference.eType.instanceTypeName.index('list<')+5).replace('>$','')/]>("[aReference.name/]", this->[aReference.GetterName()/]());
-				[elseif ((aReference.eType.instanceTypeName.contains(' vector<') ) or (aReference.eType.instanceTypeName.contains('::vector<') ) )]		saveHandler->addReferences<[aReference.eType.instanceTypeName.substring(aReference.eType.instanceTypeName.index('vector<')+7).replace('>$','')/]>("[aReference.name/]", this->[aReference.GetterName()/]());
-				[else]		saveHandler->addReference("[aReference.name/]", this->[aReference.GetterName()/]()[if (aReference.isBackReference())].lock()[/if]);		
-				[/if]
-			[else]		saveHandler->addReference("[aReference.name/]", this->[aReference.GetterName()/]()[if (aReference.isBackReference())].lock()[/if]);		 
+			[if ((aReference.eType.name ='EEList') or (aReference.eType.name ='ETreeIterator') )]		saveHandler->addReferences<[aReference.eGenericType.eTypeArguments->first().generateCppType()/]>("[aReference.name/]", this->[aReference.GetterName()/]());
+			[elseif (aReference.eType.name ='EMap')]		saveHandler->addReferences<[aReference.eGenericType.eTypeArguments->first().generateCppType()/], [aReference.eGenericType.eTypeArguments->last().generateCppType()/]>("[aReference.name/]", this->[aReference.GetterName()/]());
+			[elseif (aReference.eType.ePackage.name = 'ecore')]	saveHandler->addReference("[aReference.name/]", this->[aReference.GetterName()/]()[if (aReference.isBackReference())].lock()[/if]);
+			[elseif (aReference.eType.oclIsKindOf(ecore::EClass))]
+				[let referenceTypeClass:EClass =aReference.eType.oclAsType(ecore::EClass)]
+				[if (referenceTypeClass.eSuperTypes.eTypeParameters->size()>0)]
+					[if ((referenceTypeClass.eSuperTypes->first().name = 'map') or (referenceTypeClass.eSuperTypes->first().name = 'unordered_map'))]		saveHandler->addReferences<[referenceTypeClass.eGenericSuperTypes.eTypeArguments->first().generateCppTypeWithPointerCheck()/], [referenceTypeClass.eGenericSuperTypes.eTypeArguments->last().generateCppTypeWithPointerCheck()/]>("[aReference.name/]", this->[aReference.GetterName()/]());
+					[elseif ((referenceTypeClass.eSuperTypes->first().name = 'list') or (referenceTypeClass.eSuperTypes->first().name = 'vector'))]		saveHandler->addReferences<[referenceTypeClass.eGenericSuperTypes.eTypeArguments->first().generateCppTypeWithPointerCheck()/]>("[aReference.name/]", this->[aReference.GetterName()/]());
+					[else] // Unknown Template-Type to save "[referenceTypeClass.eGenericSuperTypes->toString()/]"
+					[/if]
+				[else]		saveHandler->addReference("[aReference.name/]", this->[aReference.GetterName()/]()[if (aReference.isBackReference())].lock()[/if]); 
+				[/if][/let]
+			[else]		// No Type to save "[aReference.name/]"
 			[/if]
-		[else]		// No Type to save "[aReference.name/]"
+		[else]		// Unknown EClass to save "[aReference.name/]"
 		[/if]										
-	[else]		saveHandler->addReferences<[aReference.eGenericType.generateCppType()/]>("[aReference.name/]", this->[aReference.GetterName()/]());	
+	[else]		saveHandler->addReferences<[aReference.eGenericType.generateCppType()/]>("[aReference.name/]", this->[aReference.GetterName()/]());
 	[/if] 
 [/for][/if][/let]
 [let refList : OrderedSet(EReference) = aClass.eReferences->select(eRef: EReference|(eRef.containment = true and not (eRef.hasSubset() and not eRef.isSubsetUnion())))->asOrderedSet()->sortedBy(name)]
