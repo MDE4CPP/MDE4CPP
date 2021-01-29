@@ -649,6 +649,7 @@
       <details key="name" value="EChar:Object"/>
     </eAnnotations>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="EDate" instanceClassName="java.util.Date"/> 
   <eClassifiers xsi:type="ecore:EDataType" name="EDiagnosticChain" instanceClassName="org.eclipse.emf.common.util.DiagnosticChain"
       serializable="false"/>
   <eClassifiers xsi:type="ecore:EDataType" name="EDouble" instanceClassName="double">
