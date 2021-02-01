@@ -74,7 +74,7 @@
 [query public doNotGenerate(aModelElement : EModelElement) : Boolean =  if aModelElement.hasKey(keyDoNotGenerate()) then aModelElement.valueKey(keyDoNotGenerate())='true' else false endif /]
 [query public hasImplSetterOnly(aModelElement : EModelElement) : Boolean = if aModelElement.hasKey(keyImplSetterOnly()) then aModelElement.valueKey(keyImplSetterOnly())='true' else false endif/]
 
-[query public SetterName(feature : EStructuralFeature) : String = if hasKey(keySetterName()) then valueKey(keySetterName()) else 'set'.concat(name.toUpperFirst()) endif/]
+[query public SetterName(feature : EStructuralFeature) : String = if hasKey(keySetterName()) then valueKey(keySetterName()) else 'set'.concat(feature.name.toUpperFirst()) endif/]
 [query public GetterName(feature : EStructuralFeature) : String = if hasKey(keyGetterName()) then valueKey(keyGetterName()) else getterPrefix().concat(name.toUpperFirst()) endif/]
 
 [query public packageGetter(aReference : EReference) : String = if oclIsUndefined() then 'nullptr' else getterPrefix().concat(getMemberNameUpperFirst()).concat('()') endif/]

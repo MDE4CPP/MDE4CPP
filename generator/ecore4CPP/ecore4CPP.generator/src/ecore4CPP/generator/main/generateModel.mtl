@@ -22,30 +22,62 @@
 [import ecore4CPP::generator::main::generateUnion /]
 [import ecore4CPP::generator::main::generateType /]
 [import ecore4CPP::generator::main::helper /]
-[import ecore4CPP::generator::main::helpers::keywords /]
+[import ecore4CPP::generator::main::helpers::keywords /] 
 
-[query private structuralFeaturesIncludes(aClass :EClassifier ) : Set(EClassifier) = if ((aClass.oclIsKindOf(EClass)) and(aClass.oclAsType(EClass).eGenericSuperTypes->size()>0) and (aClass.oclAsType(EClass).eGenericSuperTypes.eTypeArguments->size()>0) ) then OrderedSet{ aClass.oclAsType(EClass).eGenericSuperTypes.eTypeArguments.eClassifier.structuralFeaturesIncludes(), aClass.oclAsType(EClass).eGenericSuperTypes.eClassifier} else OrderedSet{aClass} endif /]
+[query private templateTypeIncludes(aClass :EClassifier ) : Set(EClassifier) = if (aClass.oclIsUndefined()) then Set(EClassifier){} else if((aClass.oclIsKindOf(EClass)) and (aClass.oclAsType(EClass).eGenericSuperTypes->size()>0) and (aClass.oclAsType(EClass).eGenericSuperTypes.eTypeArguments->size()>0) ) 
+		then OrderedSet{ aClass.oclAsType(EClass).eGenericSuperTypes.eTypeArguments.eClassifier.templateTypeIncludes(),aClass.oclAsType(EClass).eGenericSuperTypes.eClassifier} else OrderedSet{aClass} endif endif/]
 
-[query public includes(aClass : EClass) : Set(EClassifier) =OrderedSet{aClass.eSuperTypes,aClass.eAllStructuralFeatures.eType,aClass.eAllStructuralFeatures.eType.structuralFeaturesIncludes(), aClass.eOperations.eType,aClass.eOperations.eParameters.eType}->flatten() /]
+[query public includes(aClass : EClass) : Set(EClassifier) =  OrderedSet{aClass.eSuperTypes
+																		,aClass.eAllStructuralFeatures.eType, aClass.eAllStructuralFeatures.eType.templateTypeIncludes()
+																		,aClass.eOperations.eType, aClass.eOperations.eType.templateTypeIncludes()
+																		,aClass.eOperations.eParameters.eType, aClass.eOperations.eParameters.eType.templateTypeIncludes()
+}->flatten() /]
+
+[query public includesFeatureOrderedFilter(aClass : EClass, isOrdered:Boolean) : Set(EClassifier) = OrderedSet{
+																		 aClass.eAllStructuralFeatures->select(ordered = isOrdered).eType, aClass.eAllStructuralFeatures->select(ordered = isOrdered).eType.templateTypeIncludes()
+																		,aClass.eOperations->select(ordered = isOrdered).eType,aClass.eOperations->select(ordered = isOrdered).eType.templateTypeIncludes()
+																		,aClass.eOperations.eParameters->select(ordered = isOrdered).eType,aClass.eOperations.eParameters->select(ordered = isOrdered).eType.templateTypeIncludes()
+}->flatten() /]
 
 [template public generateModel(aClass : EClass) ?(not doNotGenerate())]
 [file (aClass.generateNamespacePath().concat('/').concat(aClass.name.toUpperFirst()).concat('.hpp'), false, 'UTF-8')]
 [startGuard(aClass)/]
 
-[if (aClass.eOperations.eParameters.eType->select(name = 'EMap')->size() > 0 or aClass.eAttributes.eType->select(name = 'EMap')->size() > 0)]
+[let usedOrderedTypes:Set(EClassifier)= aClass.includesFeatureOrderedFilter(true)->filter(EClassifier)]
+	[if (usedOrderedTypes->size()>0)]
+		[if ((usedOrderedTypes->filter(EClassifier)->select(c:EClassifier| c.name.equalsIgnoreCase('EMap'))->size() > 0) or (usedOrderedTypes->filter(EClassifier)->select(c:EClassifier| c.name.equalsIgnoreCase('map'))->size() > 0) )]
 #include <map>
-[/if]
+		[/if]
+	[/if]	
+[/let]
+[let usedUnOrderedTypes:Set(EClassifier)= aClass.includesFeatureOrderedFilter(false)->filter(EClassifier)]
+	[if (usedUnOrderedTypes->size()>0)]
+		[if ((usedUnOrderedTypes->filter(EClassifier)->select(c:EClassifier| c.name.equalsIgnoreCase('EMap'))->size() > 0) or (usedUnOrderedTypes->filter(EClassifier)->select(c:EClassifier| c.name.equalsIgnoreCase('map'))->size() > 0) )]
+#include <unordered_map>
+		[/if]
+	[/if]	
+[/let]
+[let usedTypes:Set(EClassifier)= aClass.includes()->filter(EClassifier)]
+	[if (usedTypes->size()>0)]
+		[if ( (usedTypes->select(c:EClassifier| c.name.equalsIgnoreCase('EEList'))->size() > 0) or (usedTypes->select(c:EClassifier| c.name.equalsIgnoreCase('list'))->size() > 0))]
 #include <list>
+		[/if]
+		[if ((usedTypes->filter(EClassifier)->select(name.equalsIgnoreCase('vector'))->size() > 0))]
+#include <vector>
+		[/if]
+		[if ((usedTypes->filter(EClassifier)->select(name.equalsIgnoreCase('unordered_map'))->size() > 0))]
+#include <unordered_map>
+		[/if]
+	[/if]
+[/let]
+
 #include <memory>
 #include <string>
-
 [if (aClass.eAttributes.eType->select(requiresAny())->size() > 0)]
 #include "abstractDataTypes/Any.hpp"
 [/if]
-
 // forward declarations
 [generateAbstractDataTypesForwardDeclaration()/]
-
 [if (aClass.eAttributes.eType->select(requiresAny())->size() = 0 and aClass.eOperations.eParameters.eType->select(requiresAny())->size() > 0)]
 class AnyObject;
 typedef std::shared_ptr<AnyObject> Any;
@@ -53,7 +85,6 @@ typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
-
 [generatePersistenceForwardDeclarations()/]
 
 //Forward Declaration for used types 

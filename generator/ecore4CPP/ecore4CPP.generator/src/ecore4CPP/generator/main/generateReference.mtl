@@ -25,12 +25,10 @@
 [template public generateReferenceDecl(anEReference : EReference, impl : EBoolean) ]
 [anEReference.generateReferenceGetterDeclaretaion(impl)/]
 [anEReference.generateReferenceSetterDeclaretaion(impl)/]
-[for (redefinedElement : EObject | anEReference.getAllRedefinedElements())]
-[if (redefinedElement.oclIsKindOf(EReference))]
+[for (redefinedElement : EObject | anEReference.getAllRedefinedElements())][if (redefinedElement.oclIsKindOf(EReference))]
 [let redefinedEReference : EReference = redefinedElement.oclAsType(EReference)]
 /*Additional Setter for '[redefinedEReference.eContainingClass.name/]::[redefinedEReference.name/]' redefined by reference '[anEReference.name/]'*/
-[redefinedEReference.generateReferenceSetterDeclaretaion(impl)/]
-[/let]
+[redefinedEReference.generateReferenceSetterDeclaretaion(impl)/][/let]
 [/if]
 [/for]
 [/template]
@@ -38,6 +36,7 @@
 [template public generateReferenceGetterDeclaretaion(anEReference : EReference, impl : EBoolean)? (hasGetter() and (not isUnion()) )]
 [anEReference.generateDocumentation()/]
 virtual [anEReference.generateReferenceType()/] [anEReference.GetterName()/]() const [abstractSufix(impl)/];
+
 [/template]
 
 [template public generateReferenceSetterDeclaretaion(anEReference : EReference, impl : EBoolean) ? ( hasSetter() )]
@@ -46,6 +45,7 @@ virtual void [anEReference.SetterName()/]([if (not anEReference.eGenericType.ocl
 [generateReferenceParameter(anEReference)/][else]
 [anEReference.eGenericType.generateCppType()/] _[anEReference.name/][/if]
 ) [abstractSufix(impl)/];
+
 [/template]
 
 [template public generateProtectedReference(anEReference : EReference) ]
