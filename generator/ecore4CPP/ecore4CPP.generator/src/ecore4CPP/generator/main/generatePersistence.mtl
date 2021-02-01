@@ -26,8 +26,8 @@
 [/template]
 
 [template public generatePersistenceForwardDeclarations(aClass : EClass)]
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -64,7 +64,7 @@ virtual void loadNode(std::string nodeName, std::shared_ptr<[generatePersistence
 [/if]
 [/template]
 [template public generatePersistenceResolveReferenceDecl(aClass: EClass, impl : EBoolean)]
-virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<[needNamespace(aClass.ePackage, 'EObject')/]> > references) [abstractSufix(impl)/];
+virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<[needNamespace(aClass.ePackage, 'EObject')/]> > references) [abstractSufix(impl)/];
 [/template]
 [template public generatePersistenceSaveDecl(aClass: EClass, impl : EBoolean)]
 virtual void save(std::shared_ptr<[generatePersistenceNSPath(false)/]::XSaveHandler> saveHandler) const [abstractSufix(impl)/];
@@ -313,7 +313,7 @@ void [aClass.name.concat('Impl')/]::loadNode(std::string nodeName, std::shared_p
 [/template]
 
 [template public generatePersistenceResolveReferenceImpl(aClass: EClass)]
-void [aClass.name.concat('Impl')/]::resolveReferences(const int featureID, std::list<std::shared_ptr<[needNamespace(aClass.ePackage, 'EObject')/]> > references)
+void [aClass.name.concat('Impl')/]::resolveReferences(const int featureID, std::vector<std::shared_ptr<[needNamespace(aClass.ePackage, 'EObject')/]> > references)
 {
 [let refList : OrderedSet(EReference) = aClass.eReferences->select(eRef: EReference|(eRef.containment = false) and (eRef.changeable = true))->asOrderedSet()->sortedBy(name)]
 [if (refList->size() > 0)]
@@ -420,7 +420,7 @@ if (value == [aAttribute.eType.name/]::[aLiteral.name.toUpperCase()/])
 [/for]
 			saveHandler->addAttribute("[aAttribute.name/]", literal);
 	[elseif (aAttribute.upperBound <> 1)]
-			for (std::shared_ptr<[aAttribute.eType.transformType()/]> value : *m_[aAttribute.name/])
+			for (std::shared_ptr<[aAttribute.eGenericType.generateCppType()/]> value : *m_[aAttribute.name/])
 			{
 				saveHandler->addAttributeAsNode("[aAttribute.name/]", [if (not (aAttribute.eType.name = 'String' or aAttribute.eType.name = 'EString'))]std::to_string([/if]*value[if (not (aAttribute.eType.name = 'String' or aAttribute.eType.name = 'EString'))])[/if]);
 			}
