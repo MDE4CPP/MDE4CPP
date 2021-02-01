@@ -7,20 +7,16 @@
 #ifndef FUML_SEMANTICS_ACTIVITIES_FORKEDTOKEN_HPP
 #define FUML_SEMANTICS_ACTIVITIES_FORKEDTOKEN_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
-
 
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -51,15 +47,12 @@ namespace fUML::Semantics::Values
 // enum includes
 
 
-//Includes from codegen annotation
-//NEWDEBUG
-#include "uml/ActivityNode.hpp"
 
 //*********************************
 namespace fUML::Semantics::Activities 
 {
 	
-	class ForkedToken:virtual public Token
+	class ForkedToken: virtual public Token
 	{
 		public:
  			ForkedToken(const ForkedToken &) {}
@@ -67,7 +60,6 @@ namespace fUML::Semantics::Activities
 
 		protected:
 			ForkedToken(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -97,17 +89,13 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			 
-			virtual bool  isBaseTokenIsWithdrawn() const = 0;
+			virtual bool isBaseTokenIsWithdrawn() const = 0;
 			
 			 
-			virtual void setBaseTokenIsWithdrawn (bool  _baseTokenIsWithdrawn)= 0; 
-			 
-			virtual int  getRemainingOffersCount() const = 0;
+			virtual void setBaseTokenIsWithdrawn (bool _baseTokenIsWithdrawn)= 0;virtual int getRemainingOffersCount() const = 0;
 			
 			 
-			virtual void setRemainingOffersCount (int  _remainingOffersCount)= 0; 
-			
+			virtual void setRemainingOffersCount (int _remainingOffersCount)= 0;
 			//*********************************
 			// Reference
 			//*********************************
@@ -124,9 +112,9 @@ namespace fUML::Semantics::Activities
 			// Attribute Members
 			//*********************************
 			 
-			bool  m_baseTokenIsWithdrawn = false;
+			bool m_baseTokenIsWithdrawn = false;
 			 
-			int  m_remainingOffersCount = 0;
+			int m_remainingOffersCount = 0;
 			
 			
 			//*********************************
@@ -148,7 +136,7 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

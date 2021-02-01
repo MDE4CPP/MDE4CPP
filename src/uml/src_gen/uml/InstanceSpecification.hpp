@@ -8,24 +8,20 @@
 #define UML_INSTANCESPECIFICATION_HPP
 
 #include <map>
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T> class Bag; 
 template<class T, class ... U> class Subset;
-
 
 class AnyObject;
 typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -57,16 +53,13 @@ namespace uml
 
 // base class includes
 #include "uml/DeployedArtifact.hpp"
-
 #include "uml/DeploymentTarget.hpp"
-
 #include "uml/PackageableElement.hpp"
 
 // enum includes
 #include "uml/VisibilityKind.hpp"
 
 
-//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -76,7 +69,7 @@ namespace uml
 	<p>From package UML::Classification.</p>
 	*/
 	
-	class InstanceSpecification:virtual public DeployedArtifact,virtual public DeploymentTarget,virtual public PackageableElement
+	class InstanceSpecification: virtual public DeployedArtifact, virtual public DeploymentTarget, virtual public PackageableElement
 	{
 		public:
  			InstanceSpecification(const InstanceSpecification &) {}
@@ -84,7 +77,6 @@ namespace uml
 
 		protected:
 			InstanceSpecification(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -217,7 +209,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

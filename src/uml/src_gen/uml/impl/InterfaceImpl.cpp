@@ -35,59 +35,32 @@
 #include <exception> // used in Persistence
 
 #include "uml/Classifier.hpp"
-
 #include "uml/CollaborationUse.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/Constraint.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/ElementImport.hpp"
-
 #include "uml/Feature.hpp"
-
 #include "uml/Generalization.hpp"
-
 #include "uml/GeneralizationSet.hpp"
-
 #include "uml/Interface.hpp"
-
 #include "uml/NamedElement.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/Operation.hpp"
-
 #include "uml/Package.hpp"
-
 #include "uml/PackageImport.hpp"
-
 #include "uml/PackageableElement.hpp"
-
 #include "uml/Property.hpp"
-
 #include "uml/ProtocolStateMachine.hpp"
-
 #include "uml/Reception.hpp"
-
 #include "uml/RedefinableElement.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/Substitution.hpp"
-
 #include "uml/TemplateBinding.hpp"
-
 #include "uml/TemplateParameter.hpp"
-
 #include "uml/TemplateSignature.hpp"
-
 #include "uml/Type.hpp"
-
 #include "uml/UseCase.hpp"
 
 //Factories an Package includes
@@ -431,7 +404,7 @@ std::shared_ptr<uml::Property> InterfaceImpl::createOwnedAttribute(std::string n
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Operation> InterfaceImpl::createOwnedOperation(std::string name,std::shared_ptr<Bag<std::string> > parameterNames,std::shared_ptr<Bag<uml::Type> > parameterTypes,std::shared_ptr<uml::Type> returnType)
+std::shared_ptr<uml::Operation> InterfaceImpl::createOwnedOperation(std::string name,std::shared_ptr<Bag<std::string>> parameterNames,std::shared_ptr<Bag<uml::Type>> parameterTypes,std::shared_ptr<uml::Type> returnType)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -839,7 +812,7 @@ bool InterfaceImpl::eSet(int featureID, Any newValue)
 				}
 				iterNestedClassifier++;
 			}
-
+ 
 			iterNestedClassifier = nestedClassifierList->begin();
 			endNestedClassifier = nestedClassifierList->end();
 			while (iterNestedClassifier != endNestedClassifier)
@@ -875,7 +848,7 @@ bool InterfaceImpl::eSet(int featureID, Any newValue)
 				}
 				iterOwnedAttribute++;
 			}
-
+ 
 			iterOwnedAttribute = ownedAttributeList->begin();
 			endOwnedAttribute = ownedAttributeList->end();
 			while (iterOwnedAttribute != endOwnedAttribute)
@@ -911,7 +884,7 @@ bool InterfaceImpl::eSet(int featureID, Any newValue)
 				}
 				iterOwnedOperation++;
 			}
-
+ 
 			iterOwnedOperation = ownedOperationList->begin();
 			endOwnedOperation = ownedOperationList->end();
 			while (iterOwnedOperation != endOwnedOperation)
@@ -947,7 +920,7 @@ bool InterfaceImpl::eSet(int featureID, Any newValue)
 				}
 				iterOwnedReception++;
 			}
-
+ 
 			iterOwnedReception = ownedReceptionList->begin();
 			endOwnedReception = ownedReceptionList->end();
 			while (iterOwnedReception != endOwnedReception)
@@ -991,7 +964,7 @@ bool InterfaceImpl::eSet(int featureID, Any newValue)
 				}
 				iterRedefinedInterface++;
 			}
-
+ 
 			iterRedefinedInterface = redefinedInterfaceList->begin();
 			endRedefinedInterface = redefinedInterfaceList->end();
 			while (iterRedefinedInterface != endRedefinedInterface)
@@ -1152,7 +1125,7 @@ void InterfaceImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::
 	ClassifierImpl::loadNode(nodeName, loadHandler);
 }
 
-void InterfaceImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void InterfaceImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -1239,7 +1212,7 @@ void InterfaceImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 		}
 
 	// Add references
-		saveHandler->addReferences<uml::Interface>("redefinedInterface", this->getRedefinedInterface());	
+		saveHandler->addReferences<uml::Interface>("redefinedInterface", this->getRedefinedInterface());
 	}
 	catch (std::exception& e)
 	{

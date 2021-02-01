@@ -35,33 +35,19 @@
 #include <exception> // used in Persistence
 
 #include "uml/Activity.hpp"
-
 #include "uml/ActivityEdge.hpp"
-
 #include "uml/ActivityGroup.hpp"
-
 #include "uml/ActivityNode.hpp"
-
 #include "uml/ActivityPartition.hpp"
-
 #include "uml/Classifier.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/InterruptibleActivityRegion.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/RedefinableElement.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/StructuredActivityNode.hpp"
-
 #include "uml/ValueSpecification.hpp"
 
 //Factories an Package includes
@@ -613,7 +599,7 @@ bool ActivityEdgeImpl::eSet(int featureID, Any newValue)
 				}
 				iterInPartition++;
 			}
-
+ 
 			iterInPartition = inPartitionList->begin();
 			endInPartition = inPartitionList->end();
 			while (iterInPartition != endInPartition)
@@ -665,7 +651,7 @@ bool ActivityEdgeImpl::eSet(int featureID, Any newValue)
 				}
 				iterRedefinedEdge++;
 			}
-
+ 
 			iterRedefinedEdge = redefinedEdgeList->begin();
 			endRedefinedEdge = redefinedEdgeList->end();
 			while (iterRedefinedEdge != endRedefinedEdge)
@@ -831,7 +817,7 @@ void ActivityEdgeImpl::loadNode(std::string nodeName, std::shared_ptr<persistenc
 	RedefinableElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void ActivityEdgeImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ActivityEdgeImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -965,11 +951,11 @@ void ActivityEdgeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 		}
 
 	// Add references
-		saveHandler->addReferences<uml::ActivityPartition>("inPartition", this->getInPartition());	
-		saveHandler->addReference("interrupts", this->getInterrupts());		 
-		saveHandler->addReferences<uml::ActivityEdge>("redefinedEdge", this->getRedefinedEdge());	
-		saveHandler->addReference("source", this->getSource());		 
-		saveHandler->addReference("target", this->getTarget());		 
+		saveHandler->addReferences<uml::ActivityPartition>("inPartition", this->getInPartition());
+		saveHandler->addReference("interrupts", this->getInterrupts()); 
+		saveHandler->addReferences<uml::ActivityEdge>("redefinedEdge", this->getRedefinedEdge());
+		saveHandler->addReference("source", this->getSource()); 
+		saveHandler->addReference("target", this->getTarget()); 
 	}
 	catch (std::exception& e)
 	{

@@ -51,21 +51,18 @@
 #include <exception> // used in Persistence
 
 #include "fUML/Semantics/Classification/InstanceValueEvaluation.hpp"
-
 #include "fUML/Semantics/Loci/Locus.hpp"
-
 #include "fUML/Semantics/Values/Value.hpp"
-
 #include "uml/ValueSpecification.hpp"
 
 //Factories an Package includes
 #include "PSCS/Semantics/Classification/impl/ClassificationFactoryImpl.hpp"
 #include "PSCS/Semantics/Classification/impl/ClassificationPackageImpl.hpp"
 
-#include "PSCS/Semantics/SemanticsFactory.hpp"
-#include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "PSCS/PSCSFactory.hpp"
 #include "PSCS/PSCSPackage.hpp"
+#include "PSCS/Semantics/SemanticsFactory.hpp"
+#include "PSCS/Semantics/SemanticsPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -313,7 +310,7 @@ void CS_InstanceValueEvaluationImpl::loadNode(std::string nodeName, std::shared_
 	fUML::Semantics::Classification::InstanceValueEvaluationImpl::loadNode(nodeName, loadHandler);
 }
 
-void CS_InstanceValueEvaluationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void CS_InstanceValueEvaluationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	fUML::Semantics::Classification::InstanceValueEvaluationImpl::resolveReferences(featureID, references);
 }

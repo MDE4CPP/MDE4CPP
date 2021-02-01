@@ -9,7 +9,6 @@
 
 //*********************************
 // generated Includes
-
 //Model includes
 #include "../Property.hpp"
 
@@ -272,72 +271,65 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual uml::AggregationKind  getAggregation() const ;
+			virtual uml::AggregationKind getAggregation() const ;
 			
 			/*!
 			Specifies the kind of aggregation that applies to the Property.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual void setAggregation (uml::AggregationKind  _aggregation); 
-			 
-			virtual std::string  getDefault() const ;
+			virtual void setAggregation (uml::AggregationKind _aggregation);virtual std::string getDefault() const ;
 			
 			 
-			virtual void setDefault (std::string  _default); 
+			virtual void setDefault (std::string _default);/*!
+			If isComposite is true, the object containing the attribute is a container for the object or value contained in the attribute. This is a derived value, indicating whether the aggregation of the Property is composite or not.
+			<p>From package UML::Classification.</p>
+			*/
+			 
+			virtual bool getIsComposite() const ;
+			
 			/*!
 			If isComposite is true, the object containing the attribute is a container for the object or value contained in the attribute. This is a derived value, indicating whether the aggregation of the Property is composite or not.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual bool  getIsComposite() const ;
-			
-			/*!
-			If isComposite is true, the object containing the attribute is a container for the object or value contained in the attribute. This is a derived value, indicating whether the aggregation of the Property is composite or not.
-			<p>From package UML::Classification.</p>
-			*/
-			 
-			virtual void setIsComposite (bool  _isComposite); 
-			/*!
+			virtual void setIsComposite (bool _isComposite);/*!
 			Specifies whether the Property is derived, i.e., whether its value or values can be computed from other information.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual bool  getIsDerived() const ;
+			virtual bool getIsDerived() const ;
 			
 			/*!
 			Specifies whether the Property is derived, i.e., whether its value or values can be computed from other information.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual void setIsDerived (bool  _isDerived); 
-			/*!
+			virtual void setIsDerived (bool _isDerived);/*!
 			Specifies whether the property is derived as the union of all of the Properties that are constrained to subset it.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual bool  getIsDerivedUnion() const ;
+			virtual bool getIsDerivedUnion() const ;
 			
 			/*!
 			Specifies whether the property is derived as the union of all of the Properties that are constrained to subset it.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual void setIsDerivedUnion (bool  _isDerivedUnion); 
-			/*!
+			virtual void setIsDerivedUnion (bool _isDerivedUnion);/*!
 			True indicates this property can be used to uniquely identify an instance of the containing Class.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual bool  getIsID() const ;
+			virtual bool getIsID() const ;
 			
 			/*!
 			True indicates this property can be used to uniquely identify an instance of the containing Class.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual void setIsID (bool  _isID); 
-			
+			virtual void setIsID (bool _isID);
 			
 			//*********************************
 			// Reference
@@ -528,7 +520,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

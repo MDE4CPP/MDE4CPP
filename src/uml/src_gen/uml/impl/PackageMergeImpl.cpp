@@ -34,11 +34,8 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
 #include "uml/DirectedRelationship.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/Package.hpp"
 
 //Factories an Package includes
@@ -379,7 +376,7 @@ void PackageMergeImpl::loadNode(std::string nodeName, std::shared_ptr<persistenc
 	DirectedRelationshipImpl::loadNode(nodeName, loadHandler);
 }
 
-void PackageMergeImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void PackageMergeImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -436,7 +433,7 @@ void PackageMergeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	// Add references
-		saveHandler->addReference("mergedPackage", this->getMergedPackage());		 
+		saveHandler->addReference("mergedPackage", this->getMergedPackage()); 
 	}
 	catch (std::exception& e)
 	{

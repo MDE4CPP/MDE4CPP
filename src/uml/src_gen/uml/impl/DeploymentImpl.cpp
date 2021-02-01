@@ -34,25 +34,15 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/DeployedArtifact.hpp"
-
 #include "uml/DeploymentSpecification.hpp"
-
 #include "uml/DeploymentTarget.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/NamedElement.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/Package.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/TemplateParameter.hpp"
 
 //Factories an Package includes
@@ -487,7 +477,7 @@ bool DeploymentImpl::eSet(int featureID, Any newValue)
 				}
 				iterConfiguration++;
 			}
-
+ 
 			iterConfiguration = configurationList->begin();
 			endConfiguration = configurationList->end();
 			while (iterConfiguration != endConfiguration)
@@ -523,7 +513,7 @@ bool DeploymentImpl::eSet(int featureID, Any newValue)
 				}
 				iterDeployedArtifact++;
 			}
-
+ 
 			iterDeployedArtifact = deployedArtifactList->begin();
 			endDeployedArtifact = deployedArtifactList->end();
 			while (iterDeployedArtifact != endDeployedArtifact)
@@ -626,7 +616,7 @@ void DeploymentImpl::loadNode(std::string nodeName, std::shared_ptr<persistence:
 	DependencyImpl::loadNode(nodeName, loadHandler);
 }
 
-void DeploymentImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void DeploymentImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -696,7 +686,7 @@ void DeploymentImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 		}
 
 	// Add references
-		saveHandler->addReferences<uml::DeployedArtifact>("deployedArtifact", this->getDeployedArtifact());	
+		saveHandler->addReferences<uml::DeployedArtifact>("deployedArtifact", this->getDeployedArtifact());
 	}
 	catch (std::exception& e)
 	{

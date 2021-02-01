@@ -34,39 +34,22 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
 #include "uml/Constraint.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/ElementImport.hpp"
-
 #include "uml/NamedElement.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/Package.hpp"
-
 #include "uml/PackageImport.hpp"
-
 #include "uml/PackageMerge.hpp"
-
 #include "uml/PackageableElement.hpp"
-
 #include "uml/ProfileApplication.hpp"
-
 #include "uml/Stereotype.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/TemplateBinding.hpp"
-
 #include "uml/TemplateParameter.hpp"
-
 #include "uml/TemplateSignature.hpp"
-
 #include "uml/Type.hpp"
 
 //Factories an Package includes
@@ -304,12 +287,12 @@ std::shared_ptr<ecore::EClass> ModelImpl::eStaticClass() const
 /*
 Getter & Setter for attribute viewpoint
 */
-std::string  ModelImpl::getViewpoint() const 
+std::string ModelImpl::getViewpoint() const 
 {
 	return m_viewpoint;
 }
 
-void ModelImpl::setViewpoint(std::string  _viewpoint)
+void ModelImpl::setViewpoint(std::string _viewpoint)
 {
 	m_viewpoint = _viewpoint;
 } 
@@ -524,7 +507,7 @@ void ModelImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inte
 	PackageImpl::loadNode(nodeName, loadHandler);
 }
 
-void ModelImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ModelImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	PackageImpl::resolveReferences(featureID, references);
 }

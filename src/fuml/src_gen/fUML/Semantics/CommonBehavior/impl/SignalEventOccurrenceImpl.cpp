@@ -32,13 +32,9 @@
 #include <exception> // used in Persistence
 
 #include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"
-
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
-
 #include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
-
 #include "fUML/Semantics/SimpleClassifiers/SignalInstance.hpp"
-
 #include "uml/Trigger.hpp"
 
 //Factories an Package includes
@@ -115,7 +111,7 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > SignalEve
 	throw "UnsupportedOperationException";
 }
 
-bool SignalEventOccurrenceImpl::match(std::shared_ptr<org.eclipse.uml2.uml.Trigger> trigger)
+bool SignalEventOccurrenceImpl::match(std::shared_ptr<uml::Trigger> trigger)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -250,7 +246,7 @@ void SignalEventOccurrenceImpl::loadNode(std::string nodeName, std::shared_ptr<p
 	EventOccurrenceImpl::loadNode(nodeName, loadHandler);
 }
 
-void SignalEventOccurrenceImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void SignalEventOccurrenceImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -286,7 +282,7 @@ void SignalEventOccurrenceImpl::saveContent(std::shared_ptr<persistence::interfa
 		std::shared_ptr<fUML::Semantics::CommonBehavior::CommonBehaviorPackage> package = fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance();
 
 	// Add references
-		saveHandler->addReference("signalInstance", this->getSignalInstance());		 
+		saveHandler->addReference("signalInstance", this->getSignalInstance()); 
 	}
 	catch (std::exception& e)
 	{

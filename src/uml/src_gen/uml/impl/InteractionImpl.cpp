@@ -35,91 +35,48 @@
 #include <exception> // used in Persistence
 
 #include "uml/Action.hpp"
-
 #include "uml/Behavior.hpp"
-
 #include "uml/BehavioralFeature.hpp"
-
 #include "uml/BehavioredClassifier.hpp"
-
 #include "uml/Class.hpp"
-
 #include "uml/Classifier.hpp"
-
 #include "uml/CollaborationUse.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/ConnectableElement.hpp"
-
 #include "uml/Connector.hpp"
-
 #include "uml/Constraint.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/ElementImport.hpp"
-
 #include "uml/Extension.hpp"
-
 #include "uml/Feature.hpp"
-
 #include "uml/Gate.hpp"
-
 #include "uml/GeneralOrdering.hpp"
-
 #include "uml/Generalization.hpp"
-
 #include "uml/GeneralizationSet.hpp"
-
 #include "uml/Interaction.hpp"
-
 #include "uml/InteractionFragment.hpp"
-
 #include "uml/InteractionOperand.hpp"
-
 #include "uml/InterfaceRealization.hpp"
-
 #include "uml/Lifeline.hpp"
-
 #include "uml/Message.hpp"
-
 #include "uml/NamedElement.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/Operation.hpp"
-
 #include "uml/Package.hpp"
-
 #include "uml/PackageImport.hpp"
-
 #include "uml/PackageableElement.hpp"
-
 #include "uml/Parameter.hpp"
-
 #include "uml/ParameterSet.hpp"
-
 #include "uml/Port.hpp"
-
 #include "uml/Property.hpp"
-
 #include "uml/Reception.hpp"
-
 #include "uml/RedefinableElement.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/Substitution.hpp"
-
 #include "uml/TemplateBinding.hpp"
-
 #include "uml/TemplateParameter.hpp"
-
 #include "uml/TemplateSignature.hpp"
-
 #include "uml/UseCase.hpp"
 
 //Factories an Package includes
@@ -996,77 +953,22 @@ Any InteractionImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::INTERACTION_ATTRIBUTE_ACTION:
 		{
 			return eAny(getAction()); //11967			
-			/*
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Action>::iterator iter = m_action->begin();
-			Bag<uml::Action>::iterator end = m_action->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //11967
-			*/
 		}
 		case uml::umlPackage::INTERACTION_ATTRIBUTE_FORMALGATE:
 		{
 			return eAny(getFormalGate()); //11968			
-			/*
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Gate>::iterator iter = m_formalGate->begin();
-			Bag<uml::Gate>::iterator end = m_formalGate->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //11968
-			*/
 		}
 		case uml::umlPackage::INTERACTION_ATTRIBUTE_FRAGMENT:
 		{
 			return eAny(getFragment()); //11966			
-			/*
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::InteractionFragment>::iterator iter = m_fragment->begin();
-			Bag<uml::InteractionFragment>::iterator end = m_fragment->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //11966
-			*/
 		}
 		case uml::umlPackage::INTERACTION_ATTRIBUTE_LIFELINE:
 		{
 			return eAny(getLifeline()); //11965			
-			/*
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Lifeline>::iterator iter = m_lifeline->begin();
-			Bag<uml::Lifeline>::iterator end = m_lifeline->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //11965
-			*/
 		}
 		case uml::umlPackage::INTERACTION_ATTRIBUTE_MESSAGE:
 		{
 			return eAny(getMessage()); //11969			
-			/*
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Message>::iterator iter = m_message->begin();
-			Bag<uml::Message>::iterator end = m_message->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //11969
-			*/
 		}
 	}
 	Any result;
@@ -1129,7 +1031,7 @@ bool InteractionImpl::eSet(int featureID, Any newValue)
 				}
 				iterAction++;
 			}
-
+ 
 			iterAction = actionList->begin();
 			endAction = actionList->end();
 			while (iterAction != endAction)
@@ -1165,7 +1067,7 @@ bool InteractionImpl::eSet(int featureID, Any newValue)
 				}
 				iterFormalGate++;
 			}
-
+ 
 			iterFormalGate = formalGateList->begin();
 			endFormalGate = formalGateList->end();
 			while (iterFormalGate != endFormalGate)
@@ -1201,7 +1103,7 @@ bool InteractionImpl::eSet(int featureID, Any newValue)
 				}
 				iterFragment++;
 			}
-
+ 
 			iterFragment = fragmentList->begin();
 			endFragment = fragmentList->end();
 			while (iterFragment != endFragment)
@@ -1237,7 +1139,7 @@ bool InteractionImpl::eSet(int featureID, Any newValue)
 				}
 				iterLifeline++;
 			}
-
+ 
 			iterLifeline = lifelineList->begin();
 			endLifeline = lifelineList->end();
 			while (iterLifeline != endLifeline)
@@ -1273,7 +1175,7 @@ bool InteractionImpl::eSet(int featureID, Any newValue)
 				}
 				iterMessage++;
 			}
-
+ 
 			iterMessage = messageList->begin();
 			endMessage = messageList->end();
 			while (iterMessage != endMessage)
@@ -1424,7 +1326,7 @@ void InteractionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence
 	InteractionFragmentImpl::loadNode(nodeName, loadHandler);
 }
 
-void InteractionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void InteractionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	BehaviorImpl::resolveReferences(featureID, references);
 	InteractionFragmentImpl::resolveReferences(featureID, references);

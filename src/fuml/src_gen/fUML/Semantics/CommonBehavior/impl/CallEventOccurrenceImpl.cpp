@@ -35,15 +35,10 @@
 #include <exception> // used in Persistence
 
 #include "fUML/Semantics/CommonBehavior/CallEventExecution.hpp"
-
 #include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"
-
 #include "uml/Operation.hpp"
-
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
-
 #include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
-
 #include "uml/Trigger.hpp"
 
 //Factories an Package includes
@@ -114,7 +109,7 @@ std::shared_ptr<ecore::EClass> CallEventOccurrenceImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<org.eclipse.uml2.uml.Operation> CallEventOccurrenceImpl::getOperation()
+std::shared_ptr<uml::Operation> CallEventOccurrenceImpl::getOperation()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -130,7 +125,7 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > CallEvent
 	//end of body
 }
 
-bool CallEventOccurrenceImpl::match(std::shared_ptr<org.eclipse.uml2.uml.Trigger> trigger)
+bool CallEventOccurrenceImpl::match(std::shared_ptr<uml::Trigger> trigger)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -152,7 +147,7 @@ void CallEventOccurrenceImpl::releaseCaller()
 	//end of body
 }
 
-void CallEventOccurrenceImpl::setOutputParameterValues(std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > parameterValues)
+void CallEventOccurrenceImpl::setOutputParameterValues(std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> parameterValues)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -289,7 +284,7 @@ void CallEventOccurrenceImpl::loadNode(std::string nodeName, std::shared_ptr<per
 	EventOccurrenceImpl::loadNode(nodeName, loadHandler);
 }
 
-void CallEventOccurrenceImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void CallEventOccurrenceImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -325,7 +320,7 @@ void CallEventOccurrenceImpl::saveContent(std::shared_ptr<persistence::interface
 		std::shared_ptr<fUML::Semantics::CommonBehavior::CommonBehaviorPackage> package = fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance();
 
 	// Add references
-		saveHandler->addReference("execution", this->getExecution());		 
+		saveHandler->addReference("execution", this->getExecution()); 
 	}
 	catch (std::exception& e)
 	{

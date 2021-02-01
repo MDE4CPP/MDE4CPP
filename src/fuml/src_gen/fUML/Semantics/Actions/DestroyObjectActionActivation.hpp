@@ -7,20 +7,16 @@
 #ifndef FUML_SEMANTICS_ACTIONS_DESTROYOBJECTACTIONACTIVATION_HPP
 #define FUML_SEMANTICS_ACTIONS_DESTROYOBJECTACTIONACTIVATION_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
-
 
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -70,19 +66,12 @@ namespace uml
 // enum includes
 
 
-//Includes from codegen annotation
-#include "uml/Property.hpp"
-#include "uml/DestroyObjectAction.hpp"
-#include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
-#include "fUML/Semantics/Loci/Locus.hpp"
-#include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
-
 
 //*********************************
 namespace fUML::Semantics::Actions 
 {
 	
-	class DestroyObjectActionActivation:virtual public ActionActivation
+	class DestroyObjectActionActivation: virtual public ActionActivation
 	{
 		public:
  			DestroyObjectActionActivation(const DestroyObjectActionActivation &) {}
@@ -90,7 +79,6 @@ namespace fUML::Semantics::Actions
 
 		protected:
 			DestroyObjectActionActivation(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -119,19 +107,17 @@ namespace fUML::Semantics::Actions
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<org.eclipse.uml2.uml.DestroyObjectAction > getDestroyObjectAction() const = 0;
+			virtual std::shared_ptr<uml::DestroyObjectAction > getDestroyObjectAction() const = 0;
 			
 			
-			virtual void setDestroyObjectAction(std::shared_ptr<org.eclipse.uml2.uml.DestroyObjectAction> _destroyObjectAction) = 0;
+			virtual void setDestroyObjectAction(std::shared_ptr<uml::DestroyObjectAction> _destroyObjectAction) = 0;
 			
 			/*Additional Setter for 'ActionActivation::action' redefined by reference 'destroyObjectAction'*/
 			
-			virtual void setAction(std::shared_ptr<org.eclipse.uml2.uml.Action> _action) = 0;
-			
+			virtual void setAction(std::shared_ptr<uml::Action> _action) = 0;
 			/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'destroyObjectAction'*/
 			
-			virtual void setNode(std::shared_ptr<org.eclipse.uml2.uml.ActivityNode> _node) = 0;
-			
+			virtual void setNode(std::shared_ptr<uml::ActivityNode> _node) = 0;
 			
 
 		protected:
@@ -144,7 +130,7 @@ namespace fUML::Semantics::Actions
 			// Reference Members
 			//*********************************
 			
-			std::shared_ptr<org.eclipse.uml2.uml.DestroyObjectAction > m_destroyObjectAction;
+			std::shared_ptr<uml::DestroyObjectAction > m_destroyObjectAction;
 
 		public:
 			//*********************************
@@ -160,7 +146,7 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

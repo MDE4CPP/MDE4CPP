@@ -7,20 +7,16 @@
 #ifndef PSCS_SEMANTICS_ACTIONS_CS_ADDSTRUCTURALFEATUREVALUEACTIONACTIVATION_HPP
 #define PSCS_SEMANTICS_ACTIONS_CS_ADDSTRUCTURALFEATUREVALUEACTIONACTIVATION_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
-
 
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -61,40 +57,12 @@ namespace uml
 // enum includes
 
 
-//Includes from codegen annotation
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
-
-#include "PSCS/Semantics/StructuredClassifiers/CS_InteractionPoint.hpp"
-#include "PSCS/Semantics/StructuredClassifiers/CS_Reference.hpp"
-#include "PSCS/Semantics/StructuredClassifiers/CS_Link.hpp"
-#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
-#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
-
-#include "uml/AddStructuralFeatureValueAction.hpp"
-#include "uml/Port.hpp"
-#include "uml/StructuralFeature.hpp"
-#include "uml/Association.hpp"
-#include "uml/umlPackage.hpp"
-#include "uml/InputPin.hpp"
-#include "fUML/Semantics/Values/Value.hpp"
-#include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
-#include "fUML/Semantics/SimpleClassifiers/UnlimitedNaturalValue.hpp"
-#include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
-#include "fUML/Semantics/Loci/ChoiceStrategy.hpp"
-#include "fUML/Semantics/Loci/Locus.hpp"
-#include "fUML/Semantics/Loci/ExecutionFactory.hpp"
-#include "fUML/Semantics/StructuredClassifiers/Link.hpp"
-#include "fUML/Semantics/SimpleClassifiers/StructuredValue.hpp"
-#include "PSCS/Semantics/StructuredClassifiers/CS_Object.hpp"
-#include "fUML/Semantics/Activities/ActivityExecution.hpp"
-
 
 //*********************************
 namespace PSCS::Semantics::Actions 
 {
 	
-	class CS_AddStructuralFeatureValueActionActivation:virtual public fUML::Semantics::Actions::AddStructuralFeatureValueActionActivation
+	class CS_AddStructuralFeatureValueActionActivation: virtual public fUML::Semantics::Actions::AddStructuralFeatureValueActionActivation
 	{
 		public:
  			CS_AddStructuralFeatureValueActionActivation(const CS_AddStructuralFeatureValueActionActivation &) {}
@@ -102,7 +70,6 @@ namespace PSCS::Semantics::Actions
 
 		protected:
 			CS_AddStructuralFeatureValueActionActivation(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -154,7 +121,7 @@ namespace PSCS::Semantics::Actions
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

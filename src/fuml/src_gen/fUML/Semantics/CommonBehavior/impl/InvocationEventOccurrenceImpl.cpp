@@ -32,13 +32,9 @@
 #include <exception> // used in Persistence
 
 #include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"
-
 #include "fUML/Semantics/CommonBehavior/Execution.hpp"
-
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
-
 #include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
-
 #include "uml/Trigger.hpp"
 
 //Factories an Package includes
@@ -121,7 +117,7 @@ return parameterValueList;
 	//end of body
 }
 
-bool InvocationEventOccurrenceImpl::match(std::shared_ptr<org.eclipse.uml2.uml.Trigger> trigger)
+bool InvocationEventOccurrenceImpl::match(std::shared_ptr<uml::Trigger> trigger)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -260,7 +256,7 @@ void InvocationEventOccurrenceImpl::loadNode(std::string nodeName, std::shared_p
 	EventOccurrenceImpl::loadNode(nodeName, loadHandler);
 }
 
-void InvocationEventOccurrenceImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void InvocationEventOccurrenceImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -296,7 +292,7 @@ void InvocationEventOccurrenceImpl::saveContent(std::shared_ptr<persistence::int
 		std::shared_ptr<fUML::Semantics::CommonBehavior::CommonBehaviorPackage> package = fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance();
 
 	// Add references
-		saveHandler->addReference("execution", this->getExecution());		 
+		saveHandler->addReference("execution", this->getExecution()); 
 	}
 	catch (std::exception& e)
 	{

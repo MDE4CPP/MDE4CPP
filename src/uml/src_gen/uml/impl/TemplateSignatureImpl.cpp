@@ -34,11 +34,8 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/TemplateParameter.hpp"
-
 #include "uml/TemplateableElement.hpp"
 
 //Factories an Package includes
@@ -336,7 +333,7 @@ bool TemplateSignatureImpl::eSet(int featureID, Any newValue)
 				}
 				iterOwnedParameter++;
 			}
-
+ 
 			iterOwnedParameter = ownedParameterList->begin();
 			endOwnedParameter = ownedParameterList->end();
 			while (iterOwnedParameter != endOwnedParameter)
@@ -372,7 +369,7 @@ bool TemplateSignatureImpl::eSet(int featureID, Any newValue)
 				}
 				iterParameter++;
 			}
-
+ 
 			iterParameter = parameterList->begin();
 			endParameter = parameterList->end();
 			while (iterParameter != endParameter)
@@ -475,7 +472,7 @@ void TemplateSignatureImpl::loadNode(std::string nodeName, std::shared_ptr<persi
 	ElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void TemplateSignatureImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void TemplateSignatureImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -533,7 +530,7 @@ void TemplateSignatureImpl::saveContent(std::shared_ptr<persistence::interfaces:
 		}
 
 	// Add references
-		saveHandler->addReferences<uml::TemplateParameter>("parameter", this->getParameter());	
+		saveHandler->addReferences<uml::TemplateParameter>("parameter", this->getParameter());
 	}
 	catch (std::exception& e)
 	{

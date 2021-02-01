@@ -33,21 +33,13 @@
 #include <exception> // used in Persistence
 
 #include "uml/Action.hpp"
-
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
-
 #include "uml/ActivityNode.hpp"
-
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
-
 #include "fUML/Semantics/Actions/InputPinActivation.hpp"
-
 #include "fUML/Semantics/Actions/OutputPinActivation.hpp"
-
 #include "fUML/Semantics/Actions/PinActivation.hpp"
-
 #include "fUML/Semantics/Activities/Token.hpp"
-
 #include "fUML/Semantics/Actions/WriteLinkActionActivation.hpp"
 
 //Factories an Package includes
@@ -264,7 +256,7 @@ void DestroyLinkActionActivationImpl::loadNode(std::string nodeName, std::shared
 	WriteLinkActionActivationImpl::loadNode(nodeName, loadHandler);
 }
 
-void DestroyLinkActionActivationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void DestroyLinkActionActivationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	WriteLinkActionActivationImpl::resolveReferences(featureID, references);
 }

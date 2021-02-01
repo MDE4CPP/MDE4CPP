@@ -35,41 +35,23 @@
 #include <exception> // used in Persistence
 
 #include "uml/Activity.hpp"
-
 #include "uml/ActivityEdge.hpp"
-
 #include "uml/ActivityGroup.hpp"
-
 #include "uml/ActivityNode.hpp"
-
 #include "uml/ActivityPartition.hpp"
-
 #include "uml/Behavior.hpp"
-
 #include "uml/Classifier.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/InterruptibleActivityRegion.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/RedefinableElement.hpp"
-
 #include "uml/State.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/StructuredActivityNode.hpp"
-
 #include "uml/Type.hpp"
-
 #include "uml/TypedElement.hpp"
-
 #include "uml/ValueSpecification.hpp"
 
 //Factories an Package includes
@@ -247,12 +229,12 @@ std::shared_ptr<ecore::EClass> ObjectNodeImpl::eStaticClass() const
 /*
 Getter & Setter for attribute isControlType
 */
-bool  ObjectNodeImpl::getIsControlType() const 
+bool ObjectNodeImpl::getIsControlType() const 
 {
 	return m_isControlType;
 }
 
-void ObjectNodeImpl::setIsControlType(bool  _isControlType)
+void ObjectNodeImpl::setIsControlType(bool _isControlType)
 {
 	m_isControlType = _isControlType;
 } 
@@ -262,12 +244,12 @@ void ObjectNodeImpl::setIsControlType(bool  _isControlType)
 /*
 Getter & Setter for attribute ordering
 */
-uml::ObjectNodeOrderingKind  ObjectNodeImpl::getOrdering() const 
+uml::ObjectNodeOrderingKind ObjectNodeImpl::getOrdering() const 
 {
 	return m_ordering;
 }
 
-void ObjectNodeImpl::setOrdering(uml::ObjectNodeOrderingKind  _ordering)
+void ObjectNodeImpl::setOrdering(uml::ObjectNodeOrderingKind _ordering)
 {
 	m_ordering = _ordering;
 } 
@@ -519,7 +501,7 @@ bool ObjectNodeImpl::eSet(int featureID, Any newValue)
 				}
 				iterInState++;
 			}
-
+ 
 			iterInState = inStateList->begin();
 			endInState = inStateList->end();
 			while (iterInState != endInState)
@@ -611,7 +593,7 @@ void ObjectNodeImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLo
 		iter = attr_list.find("ordering");
 		if ( iter != attr_list.end() )
 		{
-			uml::ObjectNodeOrderingKind  value = ObjectNodeOrderingKind::FIFO;
+			uml::ObjectNodeOrderingKind value = ObjectNodeOrderingKind::FIFO;
 			std::string literal = iter->second;
 			if (literal == "unordered")
 			{
@@ -695,7 +677,7 @@ void ObjectNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence:
 	TypedElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void ObjectNodeImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ObjectNodeImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -771,7 +753,7 @@ void ObjectNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 
 		if ( this->eIsSet(package->getObjectNode_Attribute_ordering()) )
 		{
-			uml::ObjectNodeOrderingKind  value = this->getOrdering();
+			uml::ObjectNodeOrderingKind value = this->getOrdering();
 			std::string literal = "";
 			if (value == ObjectNodeOrderingKind::UNORDERED)
 			{
@@ -793,8 +775,8 @@ void ObjectNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 		}
 
 	// Add references
-		saveHandler->addReferences<uml::State>("inState", this->getInState());	
-		saveHandler->addReference("selection", this->getSelection());		 
+		saveHandler->addReferences<uml::State>("inState", this->getInState());
+		saveHandler->addReference("selection", this->getSelection()); 
 	}
 	catch (std::exception& e)
 	{

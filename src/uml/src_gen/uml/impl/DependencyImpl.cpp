@@ -34,23 +34,14 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/DirectedRelationship.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/NamedElement.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/Package.hpp"
-
 #include "uml/PackageableElement.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/TemplateParameter.hpp"
 
 //Factories an Package includes
@@ -443,7 +434,7 @@ bool DependencyImpl::eSet(int featureID, Any newValue)
 				}
 				iterClient++;
 			}
-
+ 
 			iterClient = clientList->begin();
 			endClient = clientList->end();
 			while (iterClient != endClient)
@@ -479,7 +470,7 @@ bool DependencyImpl::eSet(int featureID, Any newValue)
 				}
 				iterSupplier++;
 			}
-
+ 
 			iterSupplier = supplierList->begin();
 			endSupplier = supplierList->end();
 			while (iterSupplier != endSupplier)
@@ -565,7 +556,7 @@ void DependencyImpl::loadNode(std::string nodeName, std::shared_ptr<persistence:
 	PackageableElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void DependencyImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void DependencyImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -630,8 +621,8 @@ void DependencyImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	// Add references
-		saveHandler->addReferences<uml::NamedElement>("client", this->getClient());	
-		saveHandler->addReferences<uml::NamedElement>("supplier", this->getSupplier());	
+		saveHandler->addReferences<uml::NamedElement>("client", this->getClient());
+		saveHandler->addReferences<uml::NamedElement>("supplier", this->getSupplier());
 	}
 	catch (std::exception& e)
 	{

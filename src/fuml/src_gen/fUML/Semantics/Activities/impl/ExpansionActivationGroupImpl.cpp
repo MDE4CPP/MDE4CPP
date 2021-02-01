@@ -33,21 +33,13 @@
 #include <exception> // used in Persistence
 
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
-
 #include "fUML/Semantics/Activities/ActivityExecution.hpp"
-
 #include "uml/ActivityNode.hpp"
-
 #include "fUML/Semantics/Activities/ActivityNodeActivation.hpp"
-
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
-
 #include "fUML/Semantics/Activities/ExpansionNodeActivation.hpp"
-
 #include "fUML/Semantics/Activities/ExpansionRegionActivation.hpp"
-
 #include "fUML/Semantics/Actions/OutputPinActivation.hpp"
-
 #include "fUML/Semantics/Actions/StructuredActivityNodeActivation.hpp"
 
 //Factories an Package includes
@@ -161,12 +153,12 @@ std::shared_ptr<ecore::EClass> ExpansionActivationGroupImpl::eStaticClass() cons
 /*
 Getter & Setter for attribute index
 */
-int  ExpansionActivationGroupImpl::getIndex() const 
+int ExpansionActivationGroupImpl::getIndex() const 
 {
 	return m_index;
 }
 
-void ExpansionActivationGroupImpl::setIndex(int  _index)
+void ExpansionActivationGroupImpl::setIndex(int _index)
 {
 	m_index = _index;
 } 
@@ -184,7 +176,7 @@ std::weak_ptr<fUML::Semantics::Activities::ActivityExecution> ExpansionActivatio
 	//end of body
 }
 
-std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> ExpansionActivationGroupImpl::getNodeActivation(std::shared_ptr<org.eclipse.uml2.uml.ActivityNode> node)
+std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> ExpansionActivationGroupImpl::getNodeActivation(std::shared_ptr<uml::ActivityNode> node)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -364,32 +356,10 @@ Any ExpansionActivationGroupImpl::eGet(int featureID, bool resolve, bool coreTyp
 		case fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONACTIVATIONGROUP_ATTRIBUTE_GROUPINPUTS:
 		{
 			return eAny(getGroupInputs()); //495			
-			/*
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<fUML::Semantics::Activities::ExpansionNodeActivation>::iterator iter = m_groupInputs->begin();
-			Bag<fUML::Semantics::Activities::ExpansionNodeActivation>::iterator end = m_groupInputs->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //495
-			*/
 		}
 		case fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONACTIVATIONGROUP_ATTRIBUTE_GROUPOUTPUTS:
 		{
 			return eAny(getGroupOutputs()); //496			
-			/*
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<fUML::Semantics::Activities::ExpansionNodeActivation>::iterator iter = m_groupOutputs->begin();
-			Bag<fUML::Semantics::Activities::ExpansionNodeActivation>::iterator end = m_groupOutputs->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //496
-			*/
 		}
 		case fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONACTIVATIONGROUP_ATTRIBUTE_INDEX:
 			return eAny(getIndex()); //497
@@ -398,17 +368,6 @@ Any ExpansionActivationGroupImpl::eGet(int featureID, bool resolve, bool coreTyp
 		case fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONACTIVATIONGROUP_ATTRIBUTE_REGIONINPUTS:
 		{
 			return eAny(getRegionInputs()); //499			
-			/*
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<fUML::Semantics::Actions::OutputPinActivation>::iterator iter = m_regionInputs->begin();
-			Bag<fUML::Semantics::Actions::OutputPinActivation>::iterator end = m_regionInputs->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //499
-			*/
 		}
 	}
 	return ActivityNodeActivationGroupImpl::eGet(featureID, resolve, coreType);
@@ -457,7 +416,7 @@ bool ExpansionActivationGroupImpl::eSet(int featureID, Any newValue)
 				}
 				iterGroupInputs++;
 			}
-
+ 
 			iterGroupInputs = groupInputsList->begin();
 			endGroupInputs = groupInputsList->end();
 			while (iterGroupInputs != endGroupInputs)
@@ -493,7 +452,7 @@ bool ExpansionActivationGroupImpl::eSet(int featureID, Any newValue)
 				}
 				iterGroupOutputs++;
 			}
-
+ 
 			iterGroupOutputs = groupOutputsList->begin();
 			endGroupOutputs = groupOutputsList->end();
 			while (iterGroupOutputs != endGroupOutputs)
@@ -544,7 +503,7 @@ bool ExpansionActivationGroupImpl::eSet(int featureID, Any newValue)
 				}
 				iterRegionInputs++;
 			}
-
+ 
 			iterRegionInputs = regionInputsList->begin();
 			endRegionInputs = regionInputsList->end();
 			while (iterRegionInputs != endRegionInputs)
@@ -644,7 +603,7 @@ void ExpansionActivationGroupImpl::loadNode(std::string nodeName, std::shared_pt
 	ActivityNodeActivationGroupImpl::loadNode(nodeName, loadHandler);
 }
 
-void ExpansionActivationGroupImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ExpansionActivationGroupImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -727,10 +686,10 @@ void ExpansionActivationGroupImpl::saveContent(std::shared_ptr<persistence::inte
 		}
 
 	// Add references
-		saveHandler->addReferences<fUML::Semantics::Activities::ExpansionNodeActivation>("groupInputs", this->getGroupInputs());	
-		saveHandler->addReferences<fUML::Semantics::Activities::ExpansionNodeActivation>("groupOutputs", this->getGroupOutputs());	
-		saveHandler->addReference("regionActivation", this->getRegionActivation());		 
-		saveHandler->addReferences<fUML::Semantics::Actions::OutputPinActivation>("regionInputs", this->getRegionInputs());	
+		saveHandler->addReferences<fUML::Semantics::Activities::ExpansionNodeActivation>("groupInputs", this->getGroupInputs());
+		saveHandler->addReferences<fUML::Semantics::Activities::ExpansionNodeActivation>("groupOutputs", this->getGroupOutputs());
+		saveHandler->addReference("regionActivation", this->getRegionActivation()); 
+		saveHandler->addReferences<fUML::Semantics::Actions::OutputPinActivation>("regionInputs", this->getRegionInputs());
 	}
 	catch (std::exception& e)
 	{

@@ -9,7 +9,6 @@
 
 //*********************************
 // generated Includes
-
 //Model includes
 #include "../Activity.hpp"
 
@@ -98,28 +97,26 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			 
-			virtual bool  getIsReadOnly() const ;
+			virtual bool getIsReadOnly() const ;
 			
 			/*!
 			If true, this Activity must not make any changes to objects. The default is false (an Activity may make nonlocal changes). (This is an assertion, not an executable property. It may be used by an execution engine to optimize model execution. If the assertion is violated by the Activity, then the model is ill-formed.)
 			<p>From package UML::Activities.</p>
 			*/
 			 
-			virtual void setIsReadOnly (bool  _isReadOnly); 
-			/*!
+			virtual void setIsReadOnly (bool _isReadOnly);/*!
 			If true, all invocations of the Activity are handled by the same execution.
 			<p>From package UML::Activities.</p>
 			*/
 			 
-			virtual bool  getIsSingleExecution() const ;
+			virtual bool getIsSingleExecution() const ;
 			
 			/*!
 			If true, all invocations of the Activity are handled by the same execution.
 			<p>From package UML::Activities.</p>
 			*/
 			 
-			virtual void setIsSingleExecution (bool  _isSingleExecution); 
-			
+			virtual void setIsSingleExecution (bool _isSingleExecution);
 			
 			//*********************************
 			// Reference
@@ -249,7 +246,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

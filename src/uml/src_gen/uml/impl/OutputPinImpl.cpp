@@ -35,57 +35,31 @@
 #include <exception> // used in Persistence
 
 #include "uml/Action.hpp"
-
 #include "uml/Activity.hpp"
-
 #include "uml/ActivityEdge.hpp"
-
 #include "uml/ActivityGroup.hpp"
-
 #include "uml/ActivityNode.hpp"
-
 #include "uml/ActivityPartition.hpp"
-
 #include "uml/Behavior.hpp"
-
 #include "uml/CallAction.hpp"
-
 #include "uml/Classifier.hpp"
-
 #include "uml/ClearStructuralFeatureAction.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/CreateObjectAction.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/InterruptibleActivityRegion.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/Pin.hpp"
-
 #include "uml/ReadSelfAction.hpp"
-
 #include "uml/ReadStructuralFeatureAction.hpp"
-
 #include "uml/RedefinableElement.hpp"
-
 #include "uml/State.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/StructuredActivityNode.hpp"
-
 #include "uml/Type.hpp"
-
 #include "uml/ValueSpecification.hpp"
-
 #include "uml/ValueSpecificationAction.hpp"
-
 #include "uml/WriteStructuralFeatureAction.hpp"
 
 //Factories an Package includes
@@ -765,7 +739,7 @@ void OutputPinImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::
 	PinImpl::loadNode(nodeName, loadHandler);
 }
 
-void OutputPinImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void OutputPinImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{

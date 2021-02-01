@@ -33,15 +33,10 @@
 #include <exception> // used in Persistence
 
 #include "fUML/Semantics/CommonBehavior/CallEventOccurrence.hpp"
-
 #include "uml/Classifier.hpp"
-
 #include "uml/Operation.hpp"
-
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
-
 #include "fUML/Semantics/Values/Value.hpp"
-
 #include "uml/ValueSpecification.hpp"
 
 //Factories an Package includes
@@ -141,7 +136,7 @@ return isEqual;
 	//end of body
 }
 
-std::shared_ptr<org.eclipse.uml2.uml.Operation> ReturnInformationImpl::getOperation()
+std::shared_ptr<uml::Operation> ReturnInformationImpl::getOperation()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -152,7 +147,7 @@ return this->getCallEventOccurrence()->getOperation();
 	//end of body
 }
 
-std::shared_ptr<Bag<org.eclipse.uml2.uml.Classifier> > ReturnInformationImpl::getTypes()
+std::shared_ptr<Bag<uml::Classifier> > ReturnInformationImpl::getTypes()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -174,7 +169,7 @@ return std::shared_ptr<fUML::Semantics::Actions::ReturnInformation>(fUML::Semant
 	//end of body
 }
 
-void ReturnInformationImpl::reply(std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > outputParameterValues)
+void ReturnInformationImpl::reply(std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> outputParameterValues)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -185,7 +180,7 @@ void ReturnInformationImpl::reply(std::shared_ptr<Bag<fUML::Semantics::CommonBeh
 	//end of body
 }
 
-std::shared_ptr<org.eclipse.uml2.uml.ValueSpecification> ReturnInformationImpl::specify()
+std::shared_ptr<uml::ValueSpecification> ReturnInformationImpl::specify()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -338,7 +333,7 @@ void ReturnInformationImpl::loadNode(std::string nodeName, std::shared_ptr<persi
 	fUML::Semantics::Values::ValueImpl::loadNode(nodeName, loadHandler);
 }
 
-void ReturnInformationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ReturnInformationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -377,7 +372,7 @@ void ReturnInformationImpl::saveContent(std::shared_ptr<persistence::interfaces:
 		std::shared_ptr<fUML::Semantics::Actions::ActionsPackage> package = fUML::Semantics::Actions::ActionsPackage::eInstance();
 
 	// Add references
-		saveHandler->addReference("callEventOccurrence", this->getCallEventOccurrence());		 
+		saveHandler->addReference("callEventOccurrence", this->getCallEventOccurrence()); 
 	}
 	catch (std::exception& e)
 	{

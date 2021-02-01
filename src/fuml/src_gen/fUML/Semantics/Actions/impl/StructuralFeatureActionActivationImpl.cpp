@@ -36,31 +36,18 @@
 #include <exception> // used in Persistence
 
 #include "uml/Action.hpp"
-
 #include "fUML/Semantics/Actions/ActionActivation.hpp"
-
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
-
 #include "uml/ActivityNode.hpp"
-
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
-
 #include "uml/Association.hpp"
-
 #include "fUML/Semantics/Actions/InputPinActivation.hpp"
-
 #include "fUML/Semantics/StructuredClassifiers/Link.hpp"
-
 #include "fUML/Semantics/Actions/OutputPinActivation.hpp"
-
 #include "fUML/Semantics/Actions/PinActivation.hpp"
-
 #include "uml/Property.hpp"
-
 #include "uml/StructuralFeature.hpp"
-
 #include "fUML/Semantics/Activities/Token.hpp"
-
 #include "fUML/Semantics/Values/Value.hpp"
 
 //Factories an Package includes
@@ -174,7 +161,7 @@ std::shared_ptr<ecore::EClass> StructuralFeatureActionActivationImpl::eStaticCla
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<org.eclipse.uml2.uml.Association> StructuralFeatureActionActivationImpl::getAssociation(std::shared_ptr<org.eclipse.uml2.uml.StructuralFeature> feature)
+std::shared_ptr<uml::Association> StructuralFeatureActionActivationImpl::getAssociation(std::shared_ptr<uml::StructuralFeature> feature)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -193,7 +180,7 @@ return association;
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Link> > StructuralFeatureActionActivationImpl::getMatchingLinks(std::shared_ptr<org.eclipse.uml2.uml.Association> association,std::shared_ptr<org.eclipse.uml2.uml.StructuralFeature> end,std::shared_ptr<fUML::Semantics::Values::Value> oppositeValue)
+std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Link> > StructuralFeatureActionActivationImpl::getMatchingLinks(std::shared_ptr<uml::Association> association,std::shared_ptr<uml::StructuralFeature> end,std::shared_ptr<fUML::Semantics::Values::Value> oppositeValue)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -204,7 +191,7 @@ return getMatchingLinksForEndValue(association, end, oppositeValue, nullptr);
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Link> > StructuralFeatureActionActivationImpl::getMatchingLinksForEndValue(std::shared_ptr<org.eclipse.uml2.uml.Association> association,std::shared_ptr<org.eclipse.uml2.uml.StructuralFeature> end,std::shared_ptr<fUML::Semantics::Values::Value> oppositeValue,std::shared_ptr<fUML::Semantics::Values::Value> endValue)
+std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Link> > StructuralFeatureActionActivationImpl::getMatchingLinksForEndValue(std::shared_ptr<uml::Association> association,std::shared_ptr<uml::StructuralFeature> end,std::shared_ptr<fUML::Semantics::Values::Value> oppositeValue,std::shared_ptr<fUML::Semantics::Values::Value> endValue)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -252,7 +239,7 @@ return links;
 	//end of body
 }
 
-std::shared_ptr<org.eclipse.uml2.uml.Property> StructuralFeatureActionActivationImpl::getOppositeEnd(std::shared_ptr<org.eclipse.uml2.uml.Association> association,std::shared_ptr<org.eclipse.uml2.uml.StructuralFeature> end)
+std::shared_ptr<uml::Property> StructuralFeatureActionActivationImpl::getOppositeEnd(std::shared_ptr<uml::Association> association,std::shared_ptr<uml::StructuralFeature> end)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -370,7 +357,7 @@ void StructuralFeatureActionActivationImpl::loadNode(std::string nodeName, std::
 	ActionActivationImpl::loadNode(nodeName, loadHandler);
 }
 
-void StructuralFeatureActionActivationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void StructuralFeatureActionActivationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	ActionActivationImpl::resolveReferences(featureID, references);
 }

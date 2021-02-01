@@ -7,21 +7,17 @@
 #ifndef ECORE_ESTRUCTURALFEATURE_HPP
 #define ECORE_ESTRUCTURALFEATURE_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
 #include "abstractDataTypes/Any.hpp"
-
 // forward declarations
-
 
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -51,13 +47,12 @@ namespace ecore
 // enum includes
 
 
-//Includes from codegen annotation
 
 //*********************************
 namespace ecore 
 {
 	
-	class EStructuralFeature:virtual public ETypedElement
+	class EStructuralFeature: virtual public ETypedElement
 	{
 		public:
  			EStructuralFeature(const EStructuralFeature &) {}
@@ -66,13 +61,10 @@ namespace ecore
 		protected:
 			EStructuralFeature(){}
 
-
 			//Additional constructors for the containments back reference
-
 			EStructuralFeature(std::weak_ptr<ecore::EObject > par_eContainer);
 
 			//Additional constructors for the containments back reference
-
 			EStructuralFeature(std::weak_ptr<ecore::EClass > par_eContainingClass);
 
 		public:
@@ -93,46 +85,28 @@ namespace ecore
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			 
-			virtual bool  isChangeable() const = 0;
+			virtual bool isChangeable() const = 0;
 			
 			 
-			virtual void setChangeable (bool  _changeable)= 0; 
-			 
-			virtual Any  getDefaultValue() const = 0;
+			virtual void setChangeable (bool _changeable)= 0;virtual Any getDefaultValue() const = 0;
 			
 			 
-			virtual void setDefaultValue (Any  _defaultValue)= 0; 
-			 
-			virtual std::string  getDefaultValueLiteral() const = 0;
+			virtual void setDefaultValue (Any _defaultValue)= 0;virtual std::string getDefaultValueLiteral() const = 0;
 			
 			 
-			virtual void setDefaultValueLiteral (std::string  _defaultValueLiteral)= 0; 
-			 
-			virtual bool  isDerived() const = 0;
+			virtual void setDefaultValueLiteral (std::string _defaultValueLiteral)= 0;virtual bool isDerived() const = 0;
 			
 			 
-			virtual void setDerived (bool  _derived)= 0; 
-			 
-			virtual int  getFeatureID() const = 0;
-			
+			virtual void setDerived (bool _derived)= 0;virtual int getFeatureID() const = 0;virtual bool isTransient() const = 0;
 			
 			 
-			virtual bool  isTransient() const = 0;
+			virtual void setTransient (bool _transient)= 0;virtual bool isUnsettable() const = 0;
 			
 			 
-			virtual void setTransient (bool  _transient)= 0; 
-			 
-			virtual bool  isUnsettable() const = 0;
+			virtual void setUnsettable (bool _unsettable)= 0;virtual bool isVolatile() const = 0;
 			
 			 
-			virtual void setUnsettable (bool  _unsettable)= 0; 
-			 
-			virtual bool  isVolatile() const = 0;
-			
-			 
-			virtual void setVolatile (bool  _volatile)= 0; 
-			
+			virtual void setVolatile (bool _volatile)= 0;
 			//*********************************
 			// Reference
 			//*********************************
@@ -147,21 +121,21 @@ namespace ecore
 			// Attribute Members
 			//*********************************
 			 
-			bool  m_changeable = true;
+			bool m_changeable = true;
 			 
-			Any  m_defaultValue = nullptr;
+			Any m_defaultValue = nullptr;
 			 
-			std::string  m_defaultValueLiteral = "";
+			std::string m_defaultValueLiteral = "";
 			 
-			bool  m_derived = false;
+			bool m_derived = false;
 			 
-			int  m_featureID = -1;
+			int m_featureID = -1;
 			 
-			bool  m_transient = false;
+			bool m_transient = false;
 			 
-			bool  m_unsettable = false;
+			bool m_unsettable = false;
 			 
-			bool  m_volatile = false;
+			bool m_volatile = false;
 			
 			
 			//*********************************
@@ -184,7 +158,7 @@ namespace ecore
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

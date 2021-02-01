@@ -33,9 +33,7 @@
 #include <exception> // used in Persistence
 
 #include "ecore/EClassifier.hpp"
-
 #include "ecore/EGenericType.hpp"
-
 #include "ecore/ETypeParameter.hpp"
 
 //Factories an Package includes
@@ -266,19 +264,19 @@ Any EGenericTypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ecore::ecorePackage::EGENERICTYPE_ATTRIBUTE_ECLASSIFIER:
-			return eAny(getEClassifier()); //275
+			return eAny(getEClassifier()); //285
 		case ecore::ecorePackage::EGENERICTYPE_ATTRIBUTE_ELOWERBOUND:
-			return eAny(getELowerBound()); //273
+			return eAny(getELowerBound()); //283
 		case ecore::ecorePackage::EGENERICTYPE_ATTRIBUTE_ERAWTYPE:
-			return eAny(getERawType()); //272
+			return eAny(getERawType()); //282
 		case ecore::ecorePackage::EGENERICTYPE_ATTRIBUTE_ETYPEARGUMENTS:
 		{
-			return eAny(getETypeArguments()); //271			
+			return eAny(getETypeArguments()); //281			
 		}
 		case ecore::ecorePackage::EGENERICTYPE_ATTRIBUTE_ETYPEPARAMETER:
-			return eAny(getETypeParameter()); //274
+			return eAny(getETypeParameter()); //284
 		case ecore::ecorePackage::EGENERICTYPE_ATTRIBUTE_EUPPERBOUND:
-			return eAny(getEUpperBound()); //270
+			return eAny(getEUpperBound()); //280
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -287,17 +285,17 @@ bool EGenericTypeImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ecore::ecorePackage::EGENERICTYPE_ATTRIBUTE_ECLASSIFIER:
-			return getEClassifier() != nullptr; //275
+			return getEClassifier() != nullptr; //285
 		case ecore::ecorePackage::EGENERICTYPE_ATTRIBUTE_ELOWERBOUND:
-			return getELowerBound() != nullptr; //273
+			return getELowerBound() != nullptr; //283
 		case ecore::ecorePackage::EGENERICTYPE_ATTRIBUTE_ERAWTYPE:
-			return getERawType() != nullptr; //272
+			return getERawType() != nullptr; //282
 		case ecore::ecorePackage::EGENERICTYPE_ATTRIBUTE_ETYPEARGUMENTS:
-			return getETypeArguments() != nullptr; //271
+			return getETypeArguments() != nullptr; //281
 		case ecore::ecorePackage::EGENERICTYPE_ATTRIBUTE_ETYPEPARAMETER:
-			return getETypeParameter() != nullptr; //274
+			return getETypeParameter() != nullptr; //284
 		case ecore::ecorePackage::EGENERICTYPE_ATTRIBUTE_EUPPERBOUND:
-			return getEUpperBound() != nullptr; //270
+			return getEUpperBound() != nullptr; //280
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
@@ -310,7 +308,7 @@ bool EGenericTypeImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ecore::EClassifier> _eClassifier = std::dynamic_pointer_cast<ecore::EClassifier>(_temp);
-			setEClassifier(_eClassifier); //275
+			setEClassifier(_eClassifier); //285
 			return true;
 		}
 		case ecore::ecorePackage::EGENERICTYPE_ATTRIBUTE_ELOWERBOUND:
@@ -318,7 +316,7 @@ bool EGenericTypeImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ecore::EGenericType> _eLowerBound = std::dynamic_pointer_cast<ecore::EGenericType>(_temp);
-			setELowerBound(_eLowerBound); //273
+			setELowerBound(_eLowerBound); //283
 			return true;
 		}
 		case ecore::ecorePackage::EGENERICTYPE_ATTRIBUTE_ERAWTYPE:
@@ -326,7 +324,7 @@ bool EGenericTypeImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ecore::EClassifier> _eRawType = std::dynamic_pointer_cast<ecore::EClassifier>(_temp);
-			setERawType(_eRawType); //272
+			setERawType(_eRawType); //282
 			return true;
 		}
 		case ecore::ecorePackage::EGENERICTYPE_ATTRIBUTE_ETYPEARGUMENTS:
@@ -352,7 +350,7 @@ bool EGenericTypeImpl::eSet(int featureID, Any newValue)
 				}
 				iterETypeArguments++;
 			}
-
+ 
 			iterETypeArguments = eTypeArgumentsList->begin();
 			endETypeArguments = eTypeArgumentsList->end();
 			while (iterETypeArguments != endETypeArguments)
@@ -370,7 +368,7 @@ bool EGenericTypeImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ecore::ETypeParameter> _eTypeParameter = std::dynamic_pointer_cast<ecore::ETypeParameter>(_temp);
-			setETypeParameter(_eTypeParameter); //274
+			setETypeParameter(_eTypeParameter); //284
 			return true;
 		}
 		case ecore::ecorePackage::EGENERICTYPE_ATTRIBUTE_EUPPERBOUND:
@@ -378,7 +376,7 @@ bool EGenericTypeImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ecore::EGenericType> _eUpperBound = std::dynamic_pointer_cast<ecore::EGenericType>(_temp);
-			setEUpperBound(_eUpperBound); //270
+			setEUpperBound(_eUpperBound); //280
 			return true;
 		}
 	}
@@ -510,7 +508,7 @@ void EGenericTypeImpl::loadNode(std::string nodeName, std::shared_ptr<persistenc
 	//load BasePackage Nodes
 }
 
-void EGenericTypeImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references)
+void EGenericTypeImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references)
 {
 	switch(featureID)
 	{
@@ -569,9 +567,9 @@ void EGenericTypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 		std::shared_ptr<ecore::ecorePackage> package = ecore::ecorePackage::eInstance();
 
 	// Add references
-		saveHandler->addReference("eClassifier", this->getEClassifier());		 
-		saveHandler->addReference("eRawType", this->getERawType());		 
-		saveHandler->addReference("eTypeParameter", this->getETypeParameter());		 
+	saveHandler->addReference("eClassifier", this->getEClassifier());
+	saveHandler->addReference("eRawType", this->getERawType());
+	saveHandler->addReference("eTypeParameter", this->getETypeParameter());
 
 		//
 		// Add new tags (from references)

@@ -36,45 +36,25 @@
 #include <exception> // used in Persistence
 
 #include "uml/Association.hpp"
-
 #include "uml/Class.hpp"
-
 #include "uml/Classifier.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/ConnectableElement.hpp"
-
 #include "uml/ConnectorEnd.hpp"
-
 #include "uml/DataType.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Deployment.hpp"
-
 #include "uml/DeploymentTarget.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/Interface.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/PackageableElement.hpp"
-
 #include "uml/Property.hpp"
-
 #include "uml/RedefinableElement.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/StructuralFeature.hpp"
-
 #include "uml/TemplateParameter.hpp"
-
 #include "uml/Type.hpp"
-
 #include "uml/ValueSpecification.hpp"
 
 //Factories an Package includes
@@ -327,12 +307,12 @@ std::shared_ptr<ecore::EClass> PropertyImpl::eStaticClass() const
 /*
 Getter & Setter for attribute aggregation
 */
-uml::AggregationKind  PropertyImpl::getAggregation() const 
+uml::AggregationKind PropertyImpl::getAggregation() const 
 {
 	return m_aggregation;
 }
 
-void PropertyImpl::setAggregation(uml::AggregationKind  _aggregation)
+void PropertyImpl::setAggregation(uml::AggregationKind _aggregation)
 {
 	m_aggregation = _aggregation;
 } 
@@ -342,12 +322,12 @@ void PropertyImpl::setAggregation(uml::AggregationKind  _aggregation)
 /*
 Getter & Setter for attribute default
 */
-std::string  PropertyImpl::getDefault() const 
+std::string PropertyImpl::getDefault() const 
 {
 	return m_default;
 }
 
-void PropertyImpl::setDefault(std::string  _default)
+void PropertyImpl::setDefault(std::string _default)
 {
 	m_default = _default;
 } 
@@ -357,12 +337,12 @@ void PropertyImpl::setDefault(std::string  _default)
 /*
 Getter & Setter for attribute isComposite
 */
-bool  PropertyImpl::getIsComposite() const 
+bool PropertyImpl::getIsComposite() const 
 {
 	return m_isComposite;
 }
 
-void PropertyImpl::setIsComposite(bool  _isComposite)
+void PropertyImpl::setIsComposite(bool _isComposite)
 {
 	m_isComposite = _isComposite;
 } 
@@ -372,12 +352,12 @@ void PropertyImpl::setIsComposite(bool  _isComposite)
 /*
 Getter & Setter for attribute isDerived
 */
-bool  PropertyImpl::getIsDerived() const 
+bool PropertyImpl::getIsDerived() const 
 {
 	return m_isDerived;
 }
 
-void PropertyImpl::setIsDerived(bool  _isDerived)
+void PropertyImpl::setIsDerived(bool _isDerived)
 {
 	m_isDerived = _isDerived;
 } 
@@ -387,12 +367,12 @@ void PropertyImpl::setIsDerived(bool  _isDerived)
 /*
 Getter & Setter for attribute isDerivedUnion
 */
-bool  PropertyImpl::getIsDerivedUnion() const 
+bool PropertyImpl::getIsDerivedUnion() const 
 {
 	return m_isDerivedUnion;
 }
 
-void PropertyImpl::setIsDerivedUnion(bool  _isDerivedUnion)
+void PropertyImpl::setIsDerivedUnion(bool _isDerivedUnion)
 {
 	m_isDerivedUnion = _isDerivedUnion;
 } 
@@ -402,12 +382,12 @@ void PropertyImpl::setIsDerivedUnion(bool  _isDerivedUnion)
 /*
 Getter & Setter for attribute isID
 */
-bool  PropertyImpl::getIsID() const 
+bool PropertyImpl::getIsID() const 
 {
 	return m_isID;
 }
 
-void PropertyImpl::setIsID(bool  _isID)
+void PropertyImpl::setIsID(bool _isID)
 {
 	m_isID = _isID;
 } 
@@ -1156,7 +1136,7 @@ bool PropertyImpl::eSet(int featureID, Any newValue)
 				}
 				iterQualifier++;
 			}
-
+ 
 			iterQualifier = qualifierList->begin();
 			endQualifier = qualifierList->end();
 			while (iterQualifier != endQualifier)
@@ -1192,7 +1172,7 @@ bool PropertyImpl::eSet(int featureID, Any newValue)
 				}
 				iterRedefinedProperty++;
 			}
-
+ 
 			iterRedefinedProperty = redefinedPropertyList->begin();
 			endRedefinedProperty = redefinedPropertyList->end();
 			while (iterRedefinedProperty != endRedefinedProperty)
@@ -1228,7 +1208,7 @@ bool PropertyImpl::eSet(int featureID, Any newValue)
 				}
 				iterSubsettedProperty++;
 			}
-
+ 
 			iterSubsettedProperty = subsettedPropertyList->begin();
 			endSubsettedProperty = subsettedPropertyList->end();
 			while (iterSubsettedProperty != endSubsettedProperty)
@@ -1286,7 +1266,7 @@ void PropertyImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoad
 		iter = attr_list.find("aggregation");
 		if ( iter != attr_list.end() )
 		{
-			uml::AggregationKind  value = AggregationKind::NONE;
+			uml::AggregationKind value = AggregationKind::NONE;
 			std::string literal = iter->second;
 			if (literal == "none")
 			{
@@ -1424,7 +1404,7 @@ void PropertyImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::i
 	StructuralFeatureImpl::loadNode(nodeName, loadHandler);
 }
 
-void PropertyImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void PropertyImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -1595,7 +1575,7 @@ void PropertyImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 		// Add attributes
 		if ( this->eIsSet(package->getProperty_Attribute_aggregation()) )
 		{
-			uml::AggregationKind  value = this->getAggregation();
+			uml::AggregationKind value = this->getAggregation();
 			std::string literal = "";
 			if (value == AggregationKind::NONE)
 			{
@@ -1628,10 +1608,10 @@ void PropertyImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 		}
 
 	// Add references
-		saveHandler->addReference("association", this->getAssociation());		 
-		saveHandler->addReference("opposite", this->getOpposite());		 
-		saveHandler->addReferences<uml::Property>("redefinedProperty", this->getRedefinedProperty());	
-		saveHandler->addReferences<uml::Property>("subsettedProperty", this->getSubsettedProperty());	
+		saveHandler->addReference("association", this->getAssociation()); 
+		saveHandler->addReference("opposite", this->getOpposite()); 
+		saveHandler->addReferences<uml::Property>("redefinedProperty", this->getRedefinedProperty());
+		saveHandler->addReferences<uml::Property>("subsettedProperty", this->getSubsettedProperty());
 	}
 	catch (std::exception& e)
 	{

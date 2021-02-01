@@ -8,24 +8,20 @@
 #define UML_PACKAGE_HPP
 
 #include <map>
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T, class ... U> class Subset;
 template<class T, class ... U> class SubsetUnion;
-
 
 class AnyObject;
 typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -69,16 +65,13 @@ namespace uml
 
 // base class includes
 #include "uml/Namespace.hpp"
-
 #include "uml/PackageableElement.hpp"
-
 #include "uml/TemplateableElement.hpp"
 
 // enum includes
 #include "uml/VisibilityKind.hpp"
 
 
-//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -90,7 +83,7 @@ namespace uml
 	<p>From package UML::Packages.</p>
 	*/
 	
-	class Package:virtual public Namespace,virtual public PackageableElement,virtual public TemplateableElement
+	class Package: virtual public Namespace, virtual public PackageableElement, virtual public TemplateableElement
 	{
 		public:
  			Package(const Package &) {}
@@ -99,24 +92,18 @@ namespace uml
 		protected:
 			Package(){}
 
-
 			//Additional constructors for the containments back reference
-
 			Package(std::weak_ptr<uml::Namespace > par_namespace);
 
 			//Additional constructors for the containments back reference
-
 			Package(std::weak_ptr<uml::Package > par_Package, const int reference_id);
 
 			//Additional constructors for the containments back reference
-
 			Package(std::weak_ptr<uml::Element > par_owner);
 
 			//Additional constructors for the containments back reference
 
-
 			//Additional constructors for the containments back reference
-
 			Package(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
 
 		public:
@@ -305,15 +292,14 @@ namespace uml
 			<p>From package UML::Packages.</p>
 			*/
 			 
-			virtual std::string  getURI() const = 0;
+			virtual std::string getURI() const = 0;
 			
 			/*!
 			Provides an identifier for the package that can be used for many purposes. A URI is the universally unique identification of the package following the IETF URI specification, RFC 2396 http://www.ietf.org/rfc/rfc2396.txt and it must comply with those syntax rules.
 			<p>From package UML::Packages.</p>
 			*/
 			 
-			virtual void setURI (std::string  _URI)= 0; 
-			
+			virtual void setURI (std::string _URI)= 0;
 			//*********************************
 			// Reference
 			//*********************************
@@ -390,7 +376,7 @@ namespace uml
 			<p>From package UML::Packages.</p>
 			*/
 			 
-			std::string  m_URI = "";
+			std::string m_URI = "";
 			
 			
 			//*********************************
@@ -471,7 +457,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

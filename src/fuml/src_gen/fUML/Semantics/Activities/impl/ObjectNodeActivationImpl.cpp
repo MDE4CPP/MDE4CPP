@@ -35,13 +35,9 @@
 #include <exception> // used in Persistence
 
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
-
 #include "uml/ActivityNode.hpp"
-
 #include "fUML/Semantics/Activities/ActivityNodeActivation.hpp"
-
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
-
 #include "fUML/Semantics/Activities/Token.hpp"
 
 //Factories an Package includes
@@ -133,12 +129,12 @@ std::shared_ptr<ecore::EClass> ObjectNodeActivationImpl::eStaticClass() const
 /*
 Getter & Setter for attribute offeredTokenCount
 */
-int  ObjectNodeActivationImpl::getOfferedTokenCount() const 
+int ObjectNodeActivationImpl::getOfferedTokenCount() const 
 {
 	return m_offeredTokenCount;
 }
 
-void ObjectNodeActivationImpl::setOfferedTokenCount(int  _offeredTokenCount)
+void ObjectNodeActivationImpl::setOfferedTokenCount(int _offeredTokenCount)
 {
 	m_offeredTokenCount = _offeredTokenCount;
 } 
@@ -241,7 +237,7 @@ void ObjectNodeActivationImpl::run()
 	//end of body
 }
 
-void ObjectNodeActivationImpl::sendOffers(std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > tokens)
+void ObjectNodeActivationImpl::sendOffers(std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> tokens)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -417,7 +413,7 @@ void ObjectNodeActivationImpl::loadNode(std::string nodeName, std::shared_ptr<pe
 	ActivityNodeActivationImpl::loadNode(nodeName, loadHandler);
 }
 
-void ObjectNodeActivationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ObjectNodeActivationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	ActivityNodeActivationImpl::resolveReferences(featureID, references);
 }

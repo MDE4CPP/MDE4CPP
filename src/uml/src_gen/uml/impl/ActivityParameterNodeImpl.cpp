@@ -35,43 +35,24 @@
 #include <exception> // used in Persistence
 
 #include "uml/Activity.hpp"
-
 #include "uml/ActivityEdge.hpp"
-
 #include "uml/ActivityGroup.hpp"
-
 #include "uml/ActivityNode.hpp"
-
 #include "uml/ActivityPartition.hpp"
-
 #include "uml/Behavior.hpp"
-
 #include "uml/Classifier.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/InterruptibleActivityRegion.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/ObjectNode.hpp"
-
 #include "uml/Parameter.hpp"
-
 #include "uml/RedefinableElement.hpp"
-
 #include "uml/State.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/StructuredActivityNode.hpp"
-
 #include "uml/Type.hpp"
-
 #include "uml/ValueSpecification.hpp"
 
 //Factories an Package includes
@@ -479,7 +460,7 @@ void ActivityParameterNodeImpl::loadNode(std::string nodeName, std::shared_ptr<p
 	ObjectNodeImpl::loadNode(nodeName, loadHandler);
 }
 
-void ActivityParameterNodeImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ActivityParameterNodeImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -531,7 +512,7 @@ void ActivityParameterNodeImpl::saveContent(std::shared_ptr<persistence::interfa
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	// Add references
-		saveHandler->addReference("parameter", this->getParameter());		 
+		saveHandler->addReference("parameter", this->getParameter()); 
 	}
 	catch (std::exception& e)
 	{

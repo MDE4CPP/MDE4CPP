@@ -9,7 +9,6 @@
 
 //*********************************
 // generated Includes
-
 //Model includes
 #include "../CS_ExecutionFactory.hpp"
 
@@ -48,13 +47,13 @@ namespace PSCS::Semantics::Loci
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> getStereotypeApplication(std::shared_ptr<org.eclipse.uml2.uml.Class> stereotype,std::shared_ptr<org.eclipse.uml2.uml.Element> element) ;
+			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> getStereotypeApplication(std::shared_ptr<uml::Class> stereotype,std::shared_ptr<uml::Element> element) ;
 			
 			 
-			virtual std::shared_ptr<org.eclipse.uml2.uml.Classifier> getStereotypeClass(std::string profileName,std::string stereotypeName) ;
+			virtual std::shared_ptr<uml::Classifier> getStereotypeClass(std::string profileName,std::string stereotypeName) ;
 			
 			 
-			virtual std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> instantiateVisitor(std::shared_ptr<org.eclipse.uml2.uml.Element> element) ;
+			virtual std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> instantiateVisitor(std::shared_ptr<uml::Element> element) ;
 			
 			
 			
@@ -67,7 +66,7 @@ namespace PSCS::Semantics::Loci
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<Bag<org.eclipse.uml2.uml.Package>> getAppliedProfiles() const ;
+			virtual std::shared_ptr<Bag<uml::Package>> getAppliedProfiles() const ;
 			
 			
 							
@@ -90,7 +89,7 @@ namespace PSCS::Semantics::Loci
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

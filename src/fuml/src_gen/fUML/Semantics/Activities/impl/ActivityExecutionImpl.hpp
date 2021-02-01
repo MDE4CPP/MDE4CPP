@@ -9,7 +9,6 @@
 
 //*********************************
 // generated Includes
-
 //Model includes
 #include "../ActivityExecution.hpp"
 
@@ -72,15 +71,14 @@ namespace fUML::Semantics::Activities
 			virtual void setActivationGroup(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> _activationGroup) ;
 			
 			
-			virtual std::shared_ptr<org.eclipse.uml2.uml.Activity > getActivity() const ;
+			virtual std::shared_ptr<uml::Activity > getActivity() const ;
 			
 			
-			virtual void setActivity(std::shared_ptr<org.eclipse.uml2.uml.Activity> _activity) ;
+			virtual void setActivity(std::shared_ptr<uml::Activity> _activity) ;
 			
 			/*Additional Setter for 'Execution::behavior' redefined by reference 'activity'*/
 			
-			virtual void setBehavior(std::shared_ptr<org.eclipse.uml2.uml.Behavior> _behavior) ;
-			
+			virtual void setBehavior(std::shared_ptr<uml::Behavior> _behavior) ;
 							
 			
 			//*********************************
@@ -101,7 +99,7 @@ namespace fUML::Semantics::Activities
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

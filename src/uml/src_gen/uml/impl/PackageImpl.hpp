@@ -9,7 +9,6 @@
 
 //*********************************
 // generated Includes
-
 //Model includes
 #include "../Package.hpp"
 
@@ -241,15 +240,14 @@ namespace uml
 			<p>From package UML::Packages.</p>
 			*/
 			 
-			virtual std::string  getURI() const ;
+			virtual std::string getURI() const ;
 			
 			/*!
 			Provides an identifier for the package that can be used for many purposes. A URI is the universally unique identification of the package following the IETF URI specification, RFC 2396 http://www.ietf.org/rfc/rfc2396.txt and it must comply with those syntax rules.
 			<p>From package UML::Packages.</p>
 			*/
 			 
-			virtual void setURI (std::string  _URI); 
-			
+			virtual void setURI (std::string _URI);
 			
 			//*********************************
 			// Reference
@@ -361,7 +359,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

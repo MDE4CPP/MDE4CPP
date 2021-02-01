@@ -9,7 +9,6 @@
 
 //*********************************
 // generated Includes
-
 //Model includes
 #include "../EClassifier.hpp"
 
@@ -61,26 +60,16 @@ namespace ecore
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			 
-			virtual Any  getDefaultValue() const ;
+			virtual Any getDefaultValue() const ;
 			
 			 
-			virtual void setDefaultValue (Any  _defaultValue); 
-			 
-			virtual void *  getInstanceClass() const ;
-			
+			virtual void setDefaultValue (Any _defaultValue);virtual void * getInstanceClass() const ;virtual std::string getInstanceClassName() const ;
 			
 			 
-			virtual std::string  getInstanceClassName() const ;
+			virtual void setInstanceClassName (std::string _instanceClassName);virtual std::string getInstanceTypeName() const ;
 			
 			 
-			virtual void setInstanceClassName (std::string  _instanceClassName); 
-			 
-			virtual std::string  getInstanceTypeName() const ;
-			
-			 
-			virtual void setInstanceTypeName (std::string  _instanceTypeName); 
-			
+			virtual void setInstanceTypeName (std::string _instanceTypeName);
 			
 			//*********************************
 			// Reference
@@ -114,7 +103,7 @@ namespace ecore
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

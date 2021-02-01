@@ -57,33 +57,19 @@
 #include <exception> // used in Persistence
 
 #include "uml/Action.hpp"
-
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
-
 #include "uml/ActivityNode.hpp"
-
 #include "fUML/Semantics/Activities/ActivityNodeActivation.hpp"
-
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
-
 #include "fUML/Semantics/SimpleClassifiers/BooleanValue.hpp"
-
 #include "uml/InputPin.hpp"
-
 #include "fUML/Semantics/Actions/InputPinActivation.hpp"
-
 #include "fUML/Semantics/StructuredClassifiers/Link.hpp"
-
 #include "uml/OutputPin.hpp"
-
 #include "fUML/Semantics/Actions/OutputPinActivation.hpp"
-
 #include "uml/Pin.hpp"
-
 #include "fUML/Semantics/Actions/PinActivation.hpp"
-
 #include "fUML/Semantics/Activities/Token.hpp"
-
 #include "fUML/Semantics/Values/Value.hpp"
 
 //Factories an Package includes
@@ -196,12 +182,12 @@ std::shared_ptr<ecore::EClass> ActionActivationImpl::eStaticClass() const
 /*
 Getter & Setter for attribute firing
 */
-bool  ActionActivationImpl::isFiring() const 
+bool ActionActivationImpl::isFiring() const 
 {
 	return m_firing;
 }
 
-void ActionActivationImpl::setFiring(bool  _firing)
+void ActionActivationImpl::setFiring(bool _firing)
 {
 	m_firing = _firing;
 } 
@@ -374,7 +360,7 @@ void ActionActivationImpl::doAction()
 	throw "UnsupportedOperationException";
 }
 
-void ActionActivationImpl::fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > incomingTokens)
+void ActionActivationImpl::fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incomingTokens)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -391,7 +377,7 @@ void ActionActivationImpl::fire(std::shared_ptr<Bag<fUML::Semantics::Activities:
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Semantics::Values::Value> > ActionActivationImpl::getTokens(std::shared_ptr<org.eclipse.uml2.uml.InputPin> pin)
+std::shared_ptr<Bag<fUML::Semantics::Values::Value> > ActionActivationImpl::getTokens(std::shared_ptr<uml::InputPin> pin)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -504,7 +490,7 @@ std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> ActionActivati
 	//end of body
 }
 
-void ActionActivationImpl::putToken(std::shared_ptr<org.eclipse.uml2.uml.OutputPin> pin,std::shared_ptr<fUML::Semantics::Values::Value> value)
+void ActionActivationImpl::putToken(std::shared_ptr<uml::OutputPin> pin,std::shared_ptr<fUML::Semantics::Values::Value> value)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -520,7 +506,7 @@ void ActionActivationImpl::putToken(std::shared_ptr<org.eclipse.uml2.uml.OutputP
 	//end of body
 }
 
-void ActionActivationImpl::putTokens(std::shared_ptr<org.eclipse.uml2.uml.OutputPin> pin,std::shared_ptr<Bag<fUML::Semantics::Values::Value> > values)
+void ActionActivationImpl::putTokens(std::shared_ptr<uml::OutputPin> pin,std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -531,7 +517,7 @@ void ActionActivationImpl::putTokens(std::shared_ptr<org.eclipse.uml2.uml.Output
 	//end of body
 }
 
-std::shared_ptr<fUML::Semantics::Actions::PinActivation> ActionActivationImpl::retrievePinActivation(std::shared_ptr<org.eclipse.uml2.uml.Pin> pin)
+std::shared_ptr<fUML::Semantics::Actions::PinActivation> ActionActivationImpl::retrievePinActivation(std::shared_ptr<uml::Pin> pin)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -651,7 +637,7 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > ActionActivationImpl::
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Semantics::Values::Value> > ActionActivationImpl::takeTokens(std::shared_ptr<org.eclipse.uml2.uml.InputPin> pin)
+std::shared_ptr<Bag<fUML::Semantics::Values::Value> > ActionActivationImpl::takeTokens(std::shared_ptr<uml::InputPin> pin)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -718,13 +704,13 @@ bool ActionActivationImpl::valueParticipatesInLink(std::shared_ptr<fUML::Semanti
 /*
 Getter & Setter for reference action
 */
-std::shared_ptr<org.eclipse.uml2.uml.Action > ActionActivationImpl::getAction() const
+std::shared_ptr<uml::Action > ActionActivationImpl::getAction() const
 {
 //assert(m_action);
     return m_action;
 }
 
-void ActionActivationImpl::setAction(std::shared_ptr<org.eclipse.uml2.uml.Action> _action)
+void ActionActivationImpl::setAction(std::shared_ptr<uml::Action> _action)
 {
     m_action = _action;
 	//additional setter call for redefined reference ActivityNodeActivation::node
@@ -732,9 +718,9 @@ void ActionActivationImpl::setAction(std::shared_ptr<org.eclipse.uml2.uml.Action
 }
 
 /*Additional Setter for redefined reference 'ActivityNodeActivation::node'*/
-void ActionActivationImpl::setNode(std::shared_ptr<org.eclipse.uml2.uml.ActivityNode> _node)
+void ActionActivationImpl::setNode(std::shared_ptr<uml::ActivityNode> _node)
 {
-	std::shared_ptr<org.eclipse.uml2.uml.Action> _action = std::dynamic_pointer_cast<org.eclipse.uml2.uml.Action>(_node);
+	std::shared_ptr<uml::Action> _action = std::dynamic_pointer_cast<uml::Action>(_node);
 	if(_action)
 	{
 		m_action = _action;
@@ -744,7 +730,7 @@ void ActionActivationImpl::setNode(std::shared_ptr<org.eclipse.uml2.uml.Activity
 	}
 	else
 	{
-		std::cerr<<"[ActionActivation::setNode] : Could not set node because provided node was not of type 'org.eclipse.uml2.uml.Action'"<<std::endl;
+		std::cerr<<"[ActionActivation::setNode] : Could not set node because provided node was not of type 'uml::Action'"<<std::endl;
 	}
 }
 
@@ -867,47 +853,14 @@ Any ActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case fUML::Semantics::Actions::ActionsPackage::ACTIONACTIVATION_ATTRIBUTE_INPUTPINACTIVATION:
 		{
 			return eAny(getInputPinActivation()); //58			
-			/*
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<fUML::Semantics::Actions::InputPinActivation>::iterator iter = m_inputPinActivation->begin();
-			Bag<fUML::Semantics::Actions::InputPinActivation>::iterator end = m_inputPinActivation->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //58
-			*/
 		}
 		case fUML::Semantics::Actions::ActionsPackage::ACTIONACTIVATION_ATTRIBUTE_OUTPUTPINACTIVATION:
 		{
 			return eAny(getOutputPinActivation()); //59			
-			/*
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<fUML::Semantics::Actions::OutputPinActivation>::iterator iter = m_outputPinActivation->begin();
-			Bag<fUML::Semantics::Actions::OutputPinActivation>::iterator end = m_outputPinActivation->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //59
-			*/
 		}
 		case fUML::Semantics::Actions::ActionsPackage::ACTIONACTIVATION_ATTRIBUTE_PINACTIVATION:
 		{
 			return eAny(getPinActivation()); //56			
-			/*
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<fUML::Semantics::Actions::PinActivation>::iterator iter = m_pinActivation->begin();
-			Bag<fUML::Semantics::Actions::PinActivation>::iterator end = m_pinActivation->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //56
-			*/
 		}
 	}
 	return fUML::Semantics::Activities::ActivityNodeActivationImpl::eGet(featureID, resolve, coreType);
@@ -937,7 +890,7 @@ bool ActionActivationImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<org.eclipse.uml2.uml.Action> _action = std::dynamic_pointer_cast<org.eclipse.uml2.uml.Action>(_temp);
+			std::shared_ptr<uml::Action> _action = std::dynamic_pointer_cast<uml::Action>(_temp);
 			setAction(_action); //510
 			return true;
 		}
@@ -971,7 +924,7 @@ bool ActionActivationImpl::eSet(int featureID, Any newValue)
 				}
 				iterInputPinActivation++;
 			}
-
+ 
 			iterInputPinActivation = inputPinActivationList->begin();
 			endInputPinActivation = inputPinActivationList->end();
 			while (iterInputPinActivation != endInputPinActivation)
@@ -1007,7 +960,7 @@ bool ActionActivationImpl::eSet(int featureID, Any newValue)
 				}
 				iterOutputPinActivation++;
 			}
-
+ 
 			iterOutputPinActivation = outputPinActivationList->begin();
 			endOutputPinActivation = outputPinActivationList->end();
 			while (iterOutputPinActivation != endOutputPinActivation)
@@ -1043,7 +996,7 @@ bool ActionActivationImpl::eSet(int featureID, Any newValue)
 				}
 				iterPinActivation++;
 			}
-
+ 
 			iterPinActivation = pinActivationList->begin();
 			endPinActivation = pinActivationList->end();
 			while (iterPinActivation != endPinActivation)
@@ -1143,7 +1096,7 @@ void ActionActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persis
 	fUML::Semantics::Activities::ActivityNodeActivationImpl::loadNode(nodeName, loadHandler);
 }
 
-void ActionActivationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ActionActivationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -1152,7 +1105,7 @@ void ActionActivationImpl::resolveReferences(const int featureID, std::list<std:
 			if (references.size() == 1)
 			{
 				// Cast object to correct type
-				std::shared_ptr<org.eclipse.uml2.uml.Action> _action = std::dynamic_pointer_cast<org.eclipse.uml2.uml.Action>( references.front() );
+				std::shared_ptr<uml::Action> _action = std::dynamic_pointer_cast<uml::Action>( references.front() );
 				setAction(_action);
 			}
 			
@@ -1229,10 +1182,10 @@ void ActionActivationImpl::saveContent(std::shared_ptr<persistence::interfaces::
 		}
 
 	// Add references
-		saveHandler->addReference("action", this->getAction());		
-		saveHandler->addReferences<fUML::Semantics::Actions::InputPinActivation>("inputPinActivation", this->getInputPinActivation());	
-		saveHandler->addReferences<fUML::Semantics::Actions::OutputPinActivation>("outputPinActivation", this->getOutputPinActivation());	
-		saveHandler->addReferences<fUML::Semantics::Actions::PinActivation>("pinActivation", this->getPinActivation());	
+		saveHandler->addReference("action", this->getAction()); 
+		saveHandler->addReferences<fUML::Semantics::Actions::InputPinActivation>("inputPinActivation", this->getInputPinActivation());
+		saveHandler->addReferences<fUML::Semantics::Actions::OutputPinActivation>("outputPinActivation", this->getOutputPinActivation());
+		saveHandler->addReferences<fUML::Semantics::Actions::PinActivation>("pinActivation", this->getPinActivation());
 	}
 	catch (std::exception& e)
 	{

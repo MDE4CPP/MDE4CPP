@@ -8,24 +8,20 @@
 #define UML_CONNECTOR_HPP
 
 #include <map>
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T> class Bag; 
 template<class T, class ... U> class Subset;
-
 
 class AnyObject;
 typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -63,7 +59,6 @@ namespace uml
 #include "uml/VisibilityKind.hpp"
 
 
-//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -73,7 +68,7 @@ namespace uml
 	<p>From package UML::StructuredClassifiers.</p>
 	*/
 	
-	class Connector:virtual public Feature
+	class Connector: virtual public Feature
 	{
 		public:
  			Connector(const Connector &) {}
@@ -82,17 +77,13 @@ namespace uml
 		protected:
 			Connector(){}
 
-
 			//Additional constructors for the containments back reference
-
 			Connector(std::weak_ptr<uml::Namespace > par_namespace);
 
 			//Additional constructors for the containments back reference
-
 			Connector(std::weak_ptr<uml::Element > par_owner);
 
 			//Additional constructors for the containments back reference
-
 			Connector(std::weak_ptr<uml::StructuredClassifier > par_structuredClassifier);
 
 		public:
@@ -147,10 +138,7 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			 
-			virtual uml::ConnectorKind  getKind() const = 0;
-			
-			
-			
+			virtual uml::ConnectorKind getKind() const = 0;
 			//*********************************
 			// Reference
 			//*********************************
@@ -209,7 +197,7 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			 
-			uml::ConnectorKind  m_kind = ConnectorKind::ASSEMBLY;
+			uml::ConnectorKind m_kind = ConnectorKind::ASSEMBLY;
 			
 			
 			//*********************************
@@ -281,7 +269,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

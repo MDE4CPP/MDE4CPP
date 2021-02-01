@@ -35,87 +35,46 @@
 #include <exception> // used in Persistence
 
 #include "uml/ActivityEdge.hpp"
-
 #include "uml/ActivityGroup.hpp"
-
 #include "uml/ActivityNode.hpp"
-
 #include "uml/ActivityPartition.hpp"
-
 #include "uml/Behavior.hpp"
-
 #include "uml/BehavioralFeature.hpp"
-
 #include "uml/BehavioredClassifier.hpp"
-
 #include "uml/Class.hpp"
-
 #include "uml/Classifier.hpp"
-
 #include "uml/CollaborationUse.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/ConnectableElement.hpp"
-
 #include "uml/Connector.hpp"
-
 #include "uml/Constraint.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/ElementImport.hpp"
-
 #include "uml/Extension.hpp"
-
 #include "uml/Feature.hpp"
-
 #include "uml/Generalization.hpp"
-
 #include "uml/GeneralizationSet.hpp"
-
 #include "uml/InterfaceRealization.hpp"
-
 #include "uml/NamedElement.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/Operation.hpp"
-
 #include "uml/Package.hpp"
-
 #include "uml/PackageImport.hpp"
-
 #include "uml/PackageableElement.hpp"
-
 #include "uml/Parameter.hpp"
-
 #include "uml/ParameterSet.hpp"
-
 #include "uml/Port.hpp"
-
 #include "uml/Property.hpp"
-
 #include "uml/Reception.hpp"
-
 #include "uml/RedefinableElement.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/StructuredActivityNode.hpp"
-
 #include "uml/Substitution.hpp"
-
 #include "uml/TemplateBinding.hpp"
-
 #include "uml/TemplateParameter.hpp"
-
 #include "uml/TemplateSignature.hpp"
-
 #include "uml/UseCase.hpp"
-
 #include "uml/Variable.hpp"
 
 //Factories an Package includes
@@ -616,12 +575,12 @@ std::shared_ptr<ecore::EClass> ActivityImpl::eStaticClass() const
 /*
 Getter & Setter for attribute isReadOnly
 */
-bool  ActivityImpl::getIsReadOnly() const 
+bool ActivityImpl::getIsReadOnly() const 
 {
 	return m_isReadOnly;
 }
 
-void ActivityImpl::setIsReadOnly(bool  _isReadOnly)
+void ActivityImpl::setIsReadOnly(bool _isReadOnly)
 {
 	m_isReadOnly = _isReadOnly;
 } 
@@ -631,12 +590,12 @@ void ActivityImpl::setIsReadOnly(bool  _isReadOnly)
 /*
 Getter & Setter for attribute isSingleExecution
 */
-bool  ActivityImpl::getIsSingleExecution() const 
+bool ActivityImpl::getIsSingleExecution() const 
 {
 	return m_isSingleExecution;
 }
 
-void ActivityImpl::setIsSingleExecution(bool  _isSingleExecution)
+void ActivityImpl::setIsSingleExecution(bool _isSingleExecution)
 {
 	m_isSingleExecution = _isSingleExecution;
 } 
@@ -1185,7 +1144,7 @@ bool ActivityImpl::eSet(int featureID, Any newValue)
 				}
 				iterEdge++;
 			}
-
+ 
 			iterEdge = edgeList->begin();
 			endEdge = edgeList->end();
 			while (iterEdge != endEdge)
@@ -1221,7 +1180,7 @@ bool ActivityImpl::eSet(int featureID, Any newValue)
 				}
 				iterGroup++;
 			}
-
+ 
 			iterGroup = groupList->begin();
 			endGroup = groupList->end();
 			while (iterGroup != endGroup)
@@ -1271,7 +1230,7 @@ bool ActivityImpl::eSet(int featureID, Any newValue)
 				}
 				iterNode++;
 			}
-
+ 
 			iterNode = nodeList->begin();
 			endNode = nodeList->end();
 			while (iterNode != endNode)
@@ -1307,7 +1266,7 @@ bool ActivityImpl::eSet(int featureID, Any newValue)
 				}
 				iterOwnedGroup++;
 			}
-
+ 
 			iterOwnedGroup = ownedGroupList->begin();
 			endOwnedGroup = ownedGroupList->end();
 			while (iterOwnedGroup != endOwnedGroup)
@@ -1343,7 +1302,7 @@ bool ActivityImpl::eSet(int featureID, Any newValue)
 				}
 				iterOwnedNode++;
 			}
-
+ 
 			iterOwnedNode = ownedNodeList->begin();
 			endOwnedNode = ownedNodeList->end();
 			while (iterOwnedNode != endOwnedNode)
@@ -1379,7 +1338,7 @@ bool ActivityImpl::eSet(int featureID, Any newValue)
 				}
 				iterPartition++;
 			}
-
+ 
 			iterPartition = partitionList->begin();
 			endPartition = partitionList->end();
 			while (iterPartition != endPartition)
@@ -1415,7 +1374,7 @@ bool ActivityImpl::eSet(int featureID, Any newValue)
 				}
 				iterStructuredNode++;
 			}
-
+ 
 			iterStructuredNode = structuredNodeList->begin();
 			endStructuredNode = structuredNodeList->end();
 			while (iterStructuredNode != endStructuredNode)
@@ -1451,7 +1410,7 @@ bool ActivityImpl::eSet(int featureID, Any newValue)
 				}
 				iterVariable++;
 			}
-
+ 
 			iterVariable = variableList->begin();
 			endVariable = variableList->end();
 			while (iterVariable != endVariable)
@@ -1663,7 +1622,7 @@ void ActivityImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::i
 	BehaviorImpl::loadNode(nodeName, loadHandler);
 }
 
-void ActivityImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ActivityImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -1766,9 +1725,9 @@ void ActivityImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 		}
 
 	// Add references
-		saveHandler->addReferences<uml::ActivityGroup>("group", this->getGroup());	
-		saveHandler->addReferences<uml::ActivityNode>("node", this->getNode());	
-		saveHandler->addReferences<uml::ActivityPartition>("partition", this->getPartition());	
+		saveHandler->addReferences<uml::ActivityGroup>("group", this->getGroup());
+		saveHandler->addReferences<uml::ActivityNode>("node", this->getNode());
+		saveHandler->addReferences<uml::ActivityPartition>("partition", this->getPartition());
 
 		//
 		// Add new tags (from references)

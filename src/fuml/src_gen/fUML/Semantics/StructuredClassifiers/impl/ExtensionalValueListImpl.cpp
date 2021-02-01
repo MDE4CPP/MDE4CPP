@@ -32,11 +32,8 @@
 #include <exception> // used in Persistence
 
 #include "fUML/Semantics/StructuredClassifiers/ExtensionalValue.hpp"
-
 #include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
-
 #include "fUML/Semantics/Loci/Locus.hpp"
-
 #include "fUML/Semantics/Values/Value.hpp"
 
 //Factories an Package includes
@@ -226,7 +223,7 @@ void ExtensionalValueListImpl::loadNode(std::string nodeName, std::shared_ptr<pe
 	ExtensionalValueImpl::loadNode(nodeName, loadHandler);
 }
 
-void ExtensionalValueListImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ExtensionalValueListImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	ExtensionalValueImpl::resolveReferences(featureID, references);
 }

@@ -9,7 +9,6 @@
 
 //*********************************
 // generated Includes
-
 //Model includes
 #include "../LoopNode.hpp"
 
@@ -153,15 +152,14 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual bool  getIsTestedFirst() const ;
+			virtual bool getIsTestedFirst() const ;
 			
 			/*!
 			If true, the test is performed before the first execution of the bodyPart. If false, the bodyPart is executed once before the test is performed.
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual void setIsTestedFirst (bool  _isTestedFirst); 
-			
+			virtual void setIsTestedFirst (bool _isTestedFirst);
 			
 			//*********************************
 			// Reference
@@ -213,7 +211,6 @@ namespace uml
 			
 			
 			/*Additional Setter for 'StructuredActivityNode::structuredNodeInput' redefined by reference 'loopVariableInput'*/
-			
 			/*!
 			A list of OutputPins that receive the loopVariable values after the last iteration of the loop and constitute the output of the LoopNode.
 			<p>From package UML::Actions.</p>
@@ -223,7 +220,6 @@ namespace uml
 			
 			
 			/*Additional Setter for 'StructuredActivityNode::structuredNodeOutput' redefined by reference 'result'*/
-			
 			/*!
 			The set of ExecutableNodes executed before the first iteration of the loop, in order to initialize values or perform other setup computations.
 			<p>From package UML::Actions.</p>
@@ -310,7 +306,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

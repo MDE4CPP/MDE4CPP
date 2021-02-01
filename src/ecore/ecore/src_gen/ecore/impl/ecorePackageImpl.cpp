@@ -815,6 +815,10 @@ std::shared_ptr<ecore::EDataType> ecorePackageImpl::getECharacterObject_Class() 
 {
 	return m_eCharacterObject_Class;
 }
+std::shared_ptr<ecore::EDataType> ecorePackageImpl::getEDate_Class() const
+{
+	return m_eDate_Class;
+}
 std::shared_ptr<ecore::EDataType> ecorePackageImpl::getEDiagnosticChain_Class() const
 {
 	return m_eDiagnosticChain_Class;

@@ -8,23 +8,19 @@
 #define UML_PSEUDOSTATE_HPP
 
 #include <map>
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T, class ... U> class Subset;
-
 
 class AnyObject;
 typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -61,7 +57,6 @@ namespace uml
 #include "uml/VisibilityKind.hpp"
 
 
-//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -71,7 +66,7 @@ namespace uml
 	<p>From package UML::StateMachines.</p>
 	*/
 	
-	class Pseudostate:virtual public Vertex
+	class Pseudostate: virtual public Vertex
 	{
 		public:
  			Pseudostate(const Pseudostate &) {}
@@ -80,25 +75,19 @@ namespace uml
 		protected:
 			Pseudostate(){}
 
-
 			//Additional constructors for the containments back reference
-
 			Pseudostate(std::weak_ptr<uml::Region > par_container);
 
 			//Additional constructors for the containments back reference
-
 			Pseudostate(std::weak_ptr<uml::Namespace > par_namespace);
 
 			//Additional constructors for the containments back reference
-
 			Pseudostate(std::weak_ptr<uml::Element > par_owner);
 
 			//Additional constructors for the containments back reference
-
 			Pseudostate(std::weak_ptr<uml::State > par_state);
 
 			//Additional constructors for the containments back reference
-
 			Pseudostate(std::weak_ptr<uml::StateMachine > par_stateMachine);
 
 		public:
@@ -196,15 +185,14 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			 
-			virtual uml::PseudostateKind  getKind() const = 0;
+			virtual uml::PseudostateKind getKind() const = 0;
 			
 			/*!
 			Determines the precise type of the Pseudostate and can be one of: entryPoint, exitPoint, initial, deepHistory, shallowHistory, join, fork, junction, terminate or choice.
 			<p>From package UML::StateMachines.</p>
 			*/
 			 
-			virtual void setKind (uml::PseudostateKind  _kind)= 0; 
-			
+			virtual void setKind (uml::PseudostateKind _kind)= 0;
 			//*********************************
 			// Reference
 			//*********************************
@@ -247,7 +235,7 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			 
-			uml::PseudostateKind  m_kind = PseudostateKind::INITIAL;
+			uml::PseudostateKind m_kind = PseudostateKind::INITIAL;
 			
 			
 			//*********************************
@@ -293,7 +281,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

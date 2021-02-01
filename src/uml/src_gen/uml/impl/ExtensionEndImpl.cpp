@@ -35,39 +35,22 @@
 #include <exception> // used in Persistence
 
 #include "uml/Association.hpp"
-
 #include "uml/Class.hpp"
-
 #include "uml/Classifier.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/ConnectorEnd.hpp"
-
 #include "uml/DataType.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Deployment.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/Interface.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/PackageableElement.hpp"
-
 #include "uml/Property.hpp"
-
 #include "uml/RedefinableElement.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/TemplateParameter.hpp"
-
 #include "uml/Type.hpp"
-
 #include "uml/ValueSpecification.hpp"
 
 //Factories an Package includes
@@ -517,7 +500,7 @@ void ExtensionEndImpl::loadNode(std::string nodeName, std::shared_ptr<persistenc
 	PropertyImpl::loadNode(nodeName, loadHandler);
 }
 
-void ExtensionEndImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ExtensionEndImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	PropertyImpl::resolveReferences(featureID, references);
 }

@@ -7,21 +7,17 @@
 #ifndef FUML_SEMANTICS_COMMONBEHAVIOR_CLASSIFIERBEHAVIORINVOCATIONEVENTACCEPTER_HPP
 #define FUML_SEMANTICS_COMMONBEHAVIOR_CLASSIFIERBEHAVIORINVOCATIONEVENTACCEPTER_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T> class Bag; 
 
 
-
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -55,17 +51,12 @@ namespace uml
 // enum includes
 
 
-//Includes from codegen annotation
-#include "fUML/Semantics/Loci/Locus.hpp"
-#include "fUML/Semantics/Loci/ExecutionFactory.hpp"
-#include "fUML/Semantics/CommonBehavior/ObjectActivation.hpp"
-#include "fUML/Semantics/CommonBehavior/InvocationEventOccurrence.hpp"
 
 //*********************************
 namespace fUML::Semantics::CommonBehavior 
 {
 	
-	class ClassifierBehaviorInvocationEventAccepter:virtual public EventAccepter
+	class ClassifierBehaviorInvocationEventAccepter: virtual public EventAccepter
 	{
 		public:
  			ClassifierBehaviorInvocationEventAccepter(const ClassifierBehaviorInvocationEventAccepter &) {}
@@ -73,7 +64,6 @@ namespace fUML::Semantics::CommonBehavior
 
 		protected:
 			ClassifierBehaviorInvocationEventAccepter(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -104,10 +94,10 @@ namespace fUML::Semantics::CommonBehavior
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<org.eclipse.uml2.uml.Class > getClassifier() const = 0;
+			virtual std::shared_ptr<uml::Class > getClassifier() const = 0;
 			
 			
-			virtual void setClassifier(std::shared_ptr<org.eclipse.uml2.uml.Class> _classifier) = 0;
+			virtual void setClassifier(std::shared_ptr<uml::Class> _classifier) = 0;
 			
 			
 			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution > getExecution() const = 0;
@@ -133,7 +123,7 @@ namespace fUML::Semantics::CommonBehavior
 			// Reference Members
 			//*********************************
 			
-			std::shared_ptr<org.eclipse.uml2.uml.Class > m_classifier;
+			std::shared_ptr<uml::Class > m_classifier;
 			std::shared_ptr<fUML::Semantics::CommonBehavior::Execution > m_execution;
 			std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation > m_objectActivation;
 
@@ -150,7 +140,7 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

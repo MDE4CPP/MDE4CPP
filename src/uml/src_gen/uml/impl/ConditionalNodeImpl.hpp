@@ -9,7 +9,6 @@
 
 //*********************************
 // generated Includes
-
 //Model includes
 #include "../ConditionalNode.hpp"
 
@@ -124,28 +123,26 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual bool  getIsAssured() const ;
+			virtual bool getIsAssured() const ;
 			
 			/*!
 			If true, the modeler asserts that the test for at least one Clause of the ConditionalNode will succeed.
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual void setIsAssured (bool  _isAssured); 
-			/*!
+			virtual void setIsAssured (bool _isAssured);/*!
 			If true, the modeler asserts that the test for at most one Clause of the ConditionalNode will succeed.
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual bool  getIsDeterminate() const ;
+			virtual bool getIsDeterminate() const ;
 			
 			/*!
 			If true, the modeler asserts that the test for at most one Clause of the ConditionalNode will succeed.
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual void setIsDeterminate (bool  _isDeterminate); 
-			
+			virtual void setIsDeterminate (bool _isDeterminate);
 			
 			//*********************************
 			// Reference
@@ -167,7 +164,6 @@ namespace uml
 			
 			
 			/*Additional Setter for 'StructuredActivityNode::structuredNodeOutput' redefined by reference 'result'*/
-			
 							
 			
 			//*********************************
@@ -238,7 +234,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

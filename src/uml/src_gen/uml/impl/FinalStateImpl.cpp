@@ -35,43 +35,24 @@
 #include <exception> // used in Persistence
 
 #include "uml/Behavior.hpp"
-
 #include "uml/Classifier.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/ConnectionPointReference.hpp"
-
 #include "uml/Constraint.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/ElementImport.hpp"
-
 #include "uml/NamedElement.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/PackageImport.hpp"
-
 #include "uml/PackageableElement.hpp"
-
 #include "uml/Pseudostate.hpp"
-
 #include "uml/RedefinableElement.hpp"
-
 #include "uml/Region.hpp"
-
 #include "uml/State.hpp"
-
 #include "uml/StateMachine.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/Transition.hpp"
-
 #include "uml/Trigger.hpp"
 
 //Factories an Package includes
@@ -512,7 +493,7 @@ void FinalStateImpl::loadNode(std::string nodeName, std::shared_ptr<persistence:
 	StateImpl::loadNode(nodeName, loadHandler);
 }
 
-void FinalStateImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void FinalStateImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	StateImpl::resolveReferences(featureID, references);
 }

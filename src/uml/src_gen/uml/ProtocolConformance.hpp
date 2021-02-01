@@ -7,21 +7,17 @@
 #ifndef UML_PROTOCOLCONFORMANCE_HPP
 #define UML_PROTOCOLCONFORMANCE_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T, class ... U> class Subset;
 
 
-
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -49,7 +45,6 @@ namespace uml
 // enum includes
 
 
-//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -59,7 +54,7 @@ namespace uml
 	<p>From package UML::StateMachines.</p>
 	*/
 	
-	class ProtocolConformance:virtual public DirectedRelationship
+	class ProtocolConformance: virtual public DirectedRelationship
 	{
 		public:
  			ProtocolConformance(const ProtocolConformance &) {}
@@ -68,13 +63,10 @@ namespace uml
 		protected:
 			ProtocolConformance(){}
 
-
 			//Additional constructors for the containments back reference
-
 			ProtocolConformance(std::weak_ptr<uml::Element > par_owner);
 
 			//Additional constructors for the containments back reference
-
 			ProtocolConformance(std::weak_ptr<uml::ProtocolStateMachine > par_specificMachine);
 
 		public:
@@ -183,7 +175,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

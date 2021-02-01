@@ -54,11 +54,8 @@
 #include <exception> // used in Persistence
 
 #include "fUML/Semantics/Values/Evaluation.hpp"
-
 #include "fUML/Semantics/Loci/Locus.hpp"
-
 #include "fUML/Semantics/Values/Value.hpp"
-
 #include "uml/ValueSpecification.hpp"
 
 //Factories an Package includes
@@ -293,7 +290,7 @@ void InstanceValueEvaluationImpl::loadNode(std::string nodeName, std::shared_ptr
 	fUML::Semantics::Values::EvaluationImpl::loadNode(nodeName, loadHandler);
 }
 
-void InstanceValueEvaluationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void InstanceValueEvaluationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	fUML::Semantics::Values::EvaluationImpl::resolveReferences(featureID, references);
 }

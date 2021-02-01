@@ -34,19 +34,12 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Deployment.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/NamedElement.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/PackageableElement.hpp"
-
 #include "uml/StringExpression.hpp"
 
 //Factories an Package includes
@@ -326,7 +319,7 @@ bool DeploymentTargetImpl::eSet(int featureID, Any newValue)
 				}
 				iterDeployment++;
 			}
-
+ 
 			iterDeployment = deploymentList->begin();
 			endDeployment = deploymentList->end();
 			while (iterDeployment != endDeployment)
@@ -402,7 +395,7 @@ void DeploymentTargetImpl::loadNode(std::string nodeName, std::shared_ptr<persis
 	NamedElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void DeploymentTargetImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void DeploymentTargetImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	NamedElementImpl::resolveReferences(featureID, references);
 }

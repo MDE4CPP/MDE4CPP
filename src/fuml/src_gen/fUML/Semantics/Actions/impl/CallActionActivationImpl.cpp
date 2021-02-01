@@ -47,25 +47,15 @@
 #include <exception> // used in Persistence
 
 #include "uml/Action.hpp"
-
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
-
 #include "uml/ActivityNode.hpp"
-
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
-
 #include "uml/CallAction.hpp"
-
 #include "fUML/Semantics/CommonBehavior/Execution.hpp"
-
 #include "fUML/Semantics/Actions/InputPinActivation.hpp"
-
 #include "fUML/Semantics/Actions/InvocationActionActivation.hpp"
-
 #include "fUML/Semantics/Actions/OutputPinActivation.hpp"
-
 #include "fUML/Semantics/Actions/PinActivation.hpp"
-
 #include "fUML/Semantics/Activities/Token.hpp"
 
 //Factories an Package includes
@@ -383,13 +373,13 @@ void CallActionActivationImpl::terminate()
 /*
 Getter & Setter for reference callAction
 */
-std::shared_ptr<org.eclipse.uml2.uml.CallAction > CallActionActivationImpl::getCallAction() const
+std::shared_ptr<uml::CallAction > CallActionActivationImpl::getCallAction() const
 {
 //assert(m_callAction);
     return m_callAction;
 }
 
-void CallActionActivationImpl::setCallAction(std::shared_ptr<org.eclipse.uml2.uml.CallAction> _callAction)
+void CallActionActivationImpl::setCallAction(std::shared_ptr<uml::CallAction> _callAction)
 {
     m_callAction = _callAction;
 	//additional setter call for redefined reference ActionActivation::action
@@ -397,9 +387,9 @@ void CallActionActivationImpl::setCallAction(std::shared_ptr<org.eclipse.uml2.um
 }
 
 /*Additional Setter for redefined reference 'ActionActivation::action'*/
-void CallActionActivationImpl::setAction(std::shared_ptr<org.eclipse.uml2.uml.Action> _action)
+void CallActionActivationImpl::setAction(std::shared_ptr<uml::Action> _action)
 {
-	std::shared_ptr<org.eclipse.uml2.uml.CallAction> _callAction = std::dynamic_pointer_cast<org.eclipse.uml2.uml.CallAction>(_action);
+	std::shared_ptr<uml::CallAction> _callAction = std::dynamic_pointer_cast<uml::CallAction>(_action);
 	if(_callAction)
 	{
 		m_callAction = _callAction;
@@ -409,13 +399,13 @@ void CallActionActivationImpl::setAction(std::shared_ptr<org.eclipse.uml2.uml.Ac
 	}
 	else
 	{
-		std::cerr<<"[CallActionActivation::setAction] : Could not set action because provided action was not of type 'org.eclipse.uml2.uml.CallAction'"<<std::endl;
+		std::cerr<<"[CallActionActivation::setAction] : Could not set action because provided action was not of type 'uml::CallAction'"<<std::endl;
 	}
 }
 /*Additional Setter for redefined reference 'ActivityNodeActivation::node'*/
-void CallActionActivationImpl::setNode(std::shared_ptr<org.eclipse.uml2.uml.ActivityNode> _node)
+void CallActionActivationImpl::setNode(std::shared_ptr<uml::ActivityNode> _node)
 {
-	std::shared_ptr<org.eclipse.uml2.uml.CallAction> _callAction = std::dynamic_pointer_cast<org.eclipse.uml2.uml.CallAction>(_node);
+	std::shared_ptr<uml::CallAction> _callAction = std::dynamic_pointer_cast<uml::CallAction>(_node);
 	if(_callAction)
 	{
 		m_callAction = _callAction;
@@ -425,7 +415,7 @@ void CallActionActivationImpl::setNode(std::shared_ptr<org.eclipse.uml2.uml.Acti
 	}
 	else
 	{
-		std::cerr<<"[CallActionActivation::setNode] : Could not set node because provided node was not of type 'org.eclipse.uml2.uml.CallAction'"<<std::endl;
+		std::cerr<<"[CallActionActivation::setNode] : Could not set node because provided node was not of type 'uml::CallAction'"<<std::endl;
 	}
 }
 
@@ -500,17 +490,6 @@ Any CallActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) c
 		case fUML::Semantics::Actions::ActionsPackage::CALLACTIONACTIVATION_ATTRIBUTE_CALLEXECUTIONS:
 		{
 			return eAny(getCallExecutions()); //1411			
-			/*
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<fUML::Semantics::CommonBehavior::Execution>::iterator iter = m_callExecutions->begin();
-			Bag<fUML::Semantics::CommonBehavior::Execution>::iterator end = m_callExecutions->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //1411
-			*/
 		}
 	}
 	return InvocationActionActivationImpl::eGet(featureID, resolve, coreType);
@@ -534,7 +513,7 @@ bool CallActionActivationImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<org.eclipse.uml2.uml.CallAction> _callAction = std::dynamic_pointer_cast<org.eclipse.uml2.uml.CallAction>(_temp);
+			std::shared_ptr<uml::CallAction> _callAction = std::dynamic_pointer_cast<uml::CallAction>(_temp);
 			setCallAction(_callAction); //1412
 			return true;
 		}
@@ -561,7 +540,7 @@ bool CallActionActivationImpl::eSet(int featureID, Any newValue)
 				}
 				iterCallExecutions++;
 			}
-
+ 
 			iterCallExecutions = callExecutionsList->begin();
 			endCallExecutions = callExecutionsList->end();
 			while (iterCallExecutions != endCallExecutions)
@@ -659,7 +638,7 @@ void CallActionActivationImpl::loadNode(std::string nodeName, std::shared_ptr<pe
 	InvocationActionActivationImpl::loadNode(nodeName, loadHandler);
 }
 
-void CallActionActivationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void CallActionActivationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -668,7 +647,7 @@ void CallActionActivationImpl::resolveReferences(const int featureID, std::list<
 			if (references.size() == 1)
 			{
 				// Cast object to correct type
-				std::shared_ptr<org.eclipse.uml2.uml.CallAction> _callAction = std::dynamic_pointer_cast<org.eclipse.uml2.uml.CallAction>( references.front() );
+				std::shared_ptr<uml::CallAction> _callAction = std::dynamic_pointer_cast<uml::CallAction>( references.front() );
 				setCallAction(_callAction);
 			}
 			
@@ -704,7 +683,7 @@ void CallActionActivationImpl::saveContent(std::shared_ptr<persistence::interfac
 		std::shared_ptr<fUML::Semantics::Actions::ActionsPackage> package = fUML::Semantics::Actions::ActionsPackage::eInstance();
 
 	// Add references
-		saveHandler->addReference("callAction", this->getCallAction());		
+		saveHandler->addReference("callAction", this->getCallAction()); 
 
 		//
 		// Add new tags (from references)

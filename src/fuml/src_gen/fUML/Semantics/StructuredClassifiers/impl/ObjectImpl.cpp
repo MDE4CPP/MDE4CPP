@@ -39,29 +39,17 @@
 #include <exception> // used in Persistence
 
 #include "uml/Class.hpp"
-
 #include "uml/Classifier.hpp"
-
 #include "fUML/Semantics/CommonBehavior/EventAccepter.hpp"
-
 #include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"
-
 #include "fUML/Semantics/CommonBehavior/Execution.hpp"
-
 #include "fUML/Semantics/StructuredClassifiers/ExtensionalValue.hpp"
-
 #include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
-
 #include "fUML/Semantics/Loci/Locus.hpp"
-
 #include "fUML/Semantics/CommonBehavior/ObjectActivation.hpp"
-
 #include "uml/Operation.hpp"
-
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
-
 #include "fUML/Semantics/SimpleClassifiers/SignalInstance.hpp"
-
 #include "fUML/Semantics/Values/Value.hpp"
 
 //Factories an Package includes
@@ -105,8 +93,8 @@ ObjectImpl::ObjectImpl(const ObjectImpl & obj):ObjectImpl()
 	
 	m_locus  = obj.getLocus();
 
-	std::shared_ptr<Bag<org.eclipse.uml2.uml.Classifier>> _types = obj.getTypes();
-	m_types.reset(new Bag<org.eclipse.uml2.uml.Classifier>(*(obj.getTypes().get())));
+	std::shared_ptr<Bag<uml::Classifier>> _types = obj.getTypes();
+	m_types.reset(new Bag<uml::Classifier>(*(obj.getTypes().get())));
 
 
 	//Clone references with containment (deep copy)
@@ -197,7 +185,7 @@ void ObjectImpl::destroy()
 	//end of body
 }
 
-std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> ObjectImpl::dispatch(std::shared_ptr<org.eclipse.uml2.uml.Operation> operation)
+std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> ObjectImpl::dispatch(std::shared_ptr<uml::Operation> operation)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -233,7 +221,7 @@ void ObjectImpl::send(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccu
 	//end of body
 }
 
-void ObjectImpl::startBehavior(std::shared_ptr<org.eclipse.uml2.uml.Class> classifier,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > inputs)
+void ObjectImpl::startBehavior(std::shared_ptr<uml::Class> classifier,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> inputs)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -280,11 +268,11 @@ void ObjectImpl::setObjectActivation(std::shared_ptr<fUML::Semantics::CommonBeha
 /*
 Getter & Setter for reference types
 */
-std::shared_ptr<Bag<org.eclipse.uml2.uml.Classifier>> ObjectImpl::getTypes() const
+std::shared_ptr<Bag<uml::Classifier>> ObjectImpl::getTypes() const
 {
 	if(m_types == nullptr)
 	{
-		m_types.reset(new Bag<org.eclipse.uml2.uml.Classifier>());
+		m_types.reset(new Bag<uml::Classifier>());
 		
 		
 	}
@@ -328,17 +316,6 @@ Any ObjectImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::OBJECT_ATTRIBUTE_TYPES:
 		{
 			return eAny(getTypes()); //802			
-			/*
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<org.eclipse.uml2.uml.Classifier>::iterator iter = m_types->begin();
-			Bag<org.eclipse.uml2.uml.Classifier>::iterator end = m_types->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //802
-			*/
 		}
 	}
 	return ExtensionalValueImpl::eGet(featureID, resolve, coreType);
@@ -370,17 +347,17 @@ bool ObjectImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<org.eclipse.uml2.uml.Classifier>> typesList(new Bag<org.eclipse.uml2.uml.Classifier>());
+			std::shared_ptr<Bag<uml::Classifier>> typesList(new Bag<uml::Classifier>());
 			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
 			Bag<ecore::EObject>::iterator end = tempObjectList->end();
 			while (iter != end)
 			{
-				typesList->add(std::dynamic_pointer_cast<org.eclipse.uml2.uml.Classifier>(*iter));
+				typesList->add(std::dynamic_pointer_cast<uml::Classifier>(*iter));
 				iter++;
 			}
 			
-			Bag<org.eclipse.uml2.uml.Classifier>::iterator iterTypes = m_types->begin();
-			Bag<org.eclipse.uml2.uml.Classifier>::iterator endTypes = m_types->end();
+			Bag<uml::Classifier>::iterator iterTypes = m_types->begin();
+			Bag<uml::Classifier>::iterator endTypes = m_types->end();
 			while (iterTypes != endTypes)
 			{
 				if (typesList->find(*iterTypes) == -1)
@@ -389,7 +366,7 @@ bool ObjectImpl::eSet(int featureID, Any newValue)
 				}
 				iterTypes++;
 			}
-
+ 
 			iterTypes = typesList->begin();
 			endTypes = typesList->end();
 			while (iterTypes != endTypes)
@@ -485,16 +462,16 @@ void ObjectImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::int
 	ExtensionalValueImpl::loadNode(nodeName, loadHandler);
 }
 
-void ObjectImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ObjectImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
 		case fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::OBJECT_ATTRIBUTE_TYPES:
 		{
-			std::shared_ptr<Bag<org.eclipse.uml2.uml.Classifier>> _types = getTypes();
+			std::shared_ptr<Bag<uml::Classifier>> _types = getTypes();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
-				std::shared_ptr<org.eclipse.uml2.uml.Classifier> _r = std::dynamic_pointer_cast<org.eclipse.uml2.uml.Classifier>(ref);
+				std::shared_ptr<uml::Classifier> _r = std::dynamic_pointer_cast<uml::Classifier>(ref);
 				if (_r != nullptr)
 				{
 					_types->push_back(_r);
@@ -535,7 +512,7 @@ void ObjectImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 		std::shared_ptr<fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage> package = fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance();
 
 	// Add references
-		saveHandler->addReferences<org.eclipse.uml2.uml.Classifier>("types", this->getTypes());	
+		saveHandler->addReferences<uml::Classifier>("types", this->getTypes());
 
 		//
 		// Add new tags (from references)

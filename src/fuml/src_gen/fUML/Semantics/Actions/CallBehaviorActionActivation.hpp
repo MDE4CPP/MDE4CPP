@@ -7,20 +7,16 @@
 #ifndef FUML_SEMANTICS_ACTIONS_CALLBEHAVIORACTIONACTIVATION_HPP
 #define FUML_SEMANTICS_ACTIONS_CALLBEHAVIORACTIONACTIVATION_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
-
 
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -66,17 +62,12 @@ namespace uml
 // enum includes
 
 
-//Includes from codegen annotation
-#include "fUML/Semantics/Loci/ExecutionFactory.hpp"
-#include "fUML/Semantics/Loci/Locus.hpp"
-#include "uml/Behavior.hpp"
-#include "uml/CallBehaviorAction.hpp"
 
 //*********************************
 namespace fUML::Semantics::Actions 
 {
 	
-	class CallBehaviorActionActivation:virtual public CallActionActivation
+	class CallBehaviorActionActivation: virtual public CallActionActivation
 	{
 		public:
  			CallBehaviorActionActivation(const CallBehaviorActionActivation &) {}
@@ -84,7 +75,6 @@ namespace fUML::Semantics::Actions
 
 		protected:
 			CallBehaviorActionActivation(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -107,23 +97,20 @@ namespace fUML::Semantics::Actions
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<org.eclipse.uml2.uml.CallBehaviorAction > getCallBehaviorAction() const = 0;
+			virtual std::shared_ptr<uml::CallBehaviorAction > getCallBehaviorAction() const = 0;
 			
 			
-			virtual void setCallBehaviorAction(std::shared_ptr<org.eclipse.uml2.uml.CallBehaviorAction> _callBehaviorAction) = 0;
+			virtual void setCallBehaviorAction(std::shared_ptr<uml::CallBehaviorAction> _callBehaviorAction) = 0;
 			
 			/*Additional Setter for 'CallActionActivation::callAction' redefined by reference 'callBehaviorAction'*/
 			
-			virtual void setCallAction(std::shared_ptr<org.eclipse.uml2.uml.CallAction> _callAction) = 0;
-			
+			virtual void setCallAction(std::shared_ptr<uml::CallAction> _callAction) = 0;
 			/*Additional Setter for 'ActionActivation::action' redefined by reference 'callBehaviorAction'*/
 			
-			virtual void setAction(std::shared_ptr<org.eclipse.uml2.uml.Action> _action) = 0;
-			
+			virtual void setAction(std::shared_ptr<uml::Action> _action) = 0;
 			/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'callBehaviorAction'*/
 			
-			virtual void setNode(std::shared_ptr<org.eclipse.uml2.uml.ActivityNode> _node) = 0;
-			
+			virtual void setNode(std::shared_ptr<uml::ActivityNode> _node) = 0;
 			
 
 		protected:
@@ -136,7 +123,7 @@ namespace fUML::Semantics::Actions
 			// Reference Members
 			//*********************************
 			
-			std::shared_ptr<org.eclipse.uml2.uml.CallBehaviorAction > m_callBehaviorAction;
+			std::shared_ptr<uml::CallBehaviorAction > m_callBehaviorAction;
 
 		public:
 			//*********************************
@@ -152,7 +139,7 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

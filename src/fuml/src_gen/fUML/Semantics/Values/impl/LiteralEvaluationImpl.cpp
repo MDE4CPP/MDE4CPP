@@ -35,11 +35,8 @@
 #include <exception> // used in Persistence
 
 #include "fUML/Semantics/Values/Evaluation.hpp"
-
 #include "fUML/Semantics/Loci/Locus.hpp"
-
 #include "uml/PrimitiveType.hpp"
-
 #include "uml/ValueSpecification.hpp"
 
 //Factories an Package includes
@@ -110,7 +107,7 @@ std::shared_ptr<ecore::EClass> LiteralEvaluationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<org.eclipse.uml2.uml.PrimitiveType> LiteralEvaluationImpl::getType(std::string builtInTypeName)
+std::shared_ptr<uml::PrimitiveType> LiteralEvaluationImpl::getType(std::string builtInTypeName)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -208,7 +205,7 @@ void LiteralEvaluationImpl::loadNode(std::string nodeName, std::shared_ptr<persi
 	EvaluationImpl::loadNode(nodeName, loadHandler);
 }
 
-void LiteralEvaluationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void LiteralEvaluationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	EvaluationImpl::resolveReferences(featureID, references);
 }

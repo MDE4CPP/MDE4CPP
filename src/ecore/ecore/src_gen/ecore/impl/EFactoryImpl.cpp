@@ -34,15 +34,10 @@
 #include <exception> // used in Persistence
 
 #include "ecore/EAnnotation.hpp"
-
 #include "ecore/EClass.hpp"
-
 #include "ecore/EDataType.hpp"
-
 #include "ecore/EModelElement.hpp"
-
 #include "ecore/EObject.hpp"
-
 #include "ecore/EPackage.hpp"
 
 //Factories an Package includes
@@ -208,7 +203,7 @@ Any EFactoryImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ecore::ecorePackage::EFACTORY_ATTRIBUTE_EPACKAGE:
-			return eAny(getEPackage()); //224
+			return eAny(getEPackage()); //234
 	}
 	return EModelElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -217,7 +212,7 @@ bool EFactoryImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ecore::ecorePackage::EFACTORY_ATTRIBUTE_EPACKAGE:
-			return getEPackage() != nullptr; //224
+			return getEPackage() != nullptr; //234
 	}
 	return EModelElementImpl::internalEIsSet(featureID);
 }
@@ -230,7 +225,7 @@ bool EFactoryImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ecore::EPackage> _ePackage = std::dynamic_pointer_cast<ecore::EPackage>(_temp);
-			setEPackage(_ePackage); //224
+			setEPackage(_ePackage); //234
 			return true;
 		}
 	}
@@ -290,7 +285,7 @@ void EFactoryImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::i
 	EModelElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void EFactoryImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references)
+void EFactoryImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references)
 {
 	switch(featureID)
 	{
@@ -329,7 +324,7 @@ void EFactoryImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 		std::shared_ptr<ecore::ecorePackage> package = ecore::ecorePackage::eInstance();
 
 	// Add references
-		saveHandler->addReference("ePackage", this->getEPackage());		 
+	saveHandler->addReference("ePackage", this->getEPackage());
 	}
 	catch (std::exception& e)
 	{

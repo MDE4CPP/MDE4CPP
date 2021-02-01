@@ -94,12 +94,12 @@ std::shared_ptr<ecore::EClass> ArgumentImpl::eStaticClass() const
 /*
 Getter & Setter for attribute name
 */
-std::string  ArgumentImpl::getName() const 
+std::string ArgumentImpl::getName() const 
 {
 	return m_name;
 }
 
-void ArgumentImpl::setName(std::string  _name)
+void ArgumentImpl::setName(std::string _name)
 {
 	m_name = _name;
 } 
@@ -257,7 +257,7 @@ void ArgumentImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::i
 	//load BasePackage Nodes
 }
 
-void ArgumentImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ArgumentImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -297,7 +297,7 @@ void ArgumentImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 		}
 
 	// Add references
-		saveHandler->addReference("value", this->getValue());		 
+		saveHandler->addReference("value", this->getValue()); 
 	}
 	catch (std::exception& e)
 	{

@@ -9,7 +9,6 @@
 
 //*********************************
 // generated Includes
-
 //Model includes
 #include "../EObject.hpp"
 
@@ -96,12 +95,10 @@ virtual public EObject
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			 
-			virtual int  getMetaElementID() const ;
+			virtual int getMetaElementID() const ;
 			
 			 
-			virtual void setMetaElementID (int  _metaElementID); 
-			
+			virtual void setMetaElementID (int _metaElementID);
 			
 			//*********************************
 			// Reference
@@ -135,7 +132,7 @@ virtual public EObject
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

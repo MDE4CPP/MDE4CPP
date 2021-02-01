@@ -8,22 +8,18 @@
 #define UML_LINKENDCREATIONDATA_HPP
 
 #include <map>
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
-
 
 class AnyObject;
 typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -53,7 +49,6 @@ namespace uml
 // enum includes
 
 
-//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -63,7 +58,7 @@ namespace uml
 	<p>From package UML::Actions.</p>
 	*/
 	
-	class LinkEndCreationData:virtual public LinkEndData
+	class LinkEndCreationData: virtual public LinkEndData
 	{
 		public:
  			LinkEndCreationData(const LinkEndCreationData &) {}
@@ -71,7 +66,6 @@ namespace uml
 
 		protected:
 			LinkEndCreationData(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -103,15 +97,14 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual bool  getIsReplaceAll() const = 0;
+			virtual bool getIsReplaceAll() const = 0;
 			
 			/*!
 			Specifies whether the existing links emanating from the object on this end should be destroyed before creating a new link.
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual void setIsReplaceAll (bool  _isReplaceAll)= 0; 
-			
+			virtual void setIsReplaceAll (bool _isReplaceAll)= 0;
 			//*********************************
 			// Reference
 			//*********************************
@@ -140,7 +133,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			bool  m_isReplaceAll = false;
+			bool m_isReplaceAll = false;
 			
 			
 			//*********************************
@@ -171,7 +164,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

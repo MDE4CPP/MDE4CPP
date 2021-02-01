@@ -33,7 +33,6 @@
 #include <exception> // used in Persistence
 
 #include "ecore/EAnnotation.hpp"
-
 #include "ecore/EObject.hpp"
 
 //Factories an Package includes
@@ -213,7 +212,7 @@ Any EModelElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case ecore::ecorePackage::EMODELELEMENT_ATTRIBUTE_EANNOTATIONS:
 		{
-			return eAny(getEAnnotations()); //363			
+			return eAny(getEAnnotations()); //373			
 		}
 	}
 	return EObjectImpl::eGet(featureID, resolve, coreType);
@@ -223,7 +222,7 @@ bool EModelElementImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ecore::ecorePackage::EMODELELEMENT_ATTRIBUTE_EANNOTATIONS:
-			return getEAnnotations() != nullptr; //363
+			return getEAnnotations() != nullptr; //373
 	}
 	return EObjectImpl::internalEIsSet(featureID);
 }
@@ -254,7 +253,7 @@ bool EModelElementImpl::eSet(int featureID, Any newValue)
 				}
 				iterEAnnotations++;
 			}
-
+ 
 			iterEAnnotations = eAnnotationsList->begin();
 			endEAnnotations = eAnnotationsList->end();
 			while (iterEAnnotations != endEAnnotations)
@@ -330,7 +329,7 @@ void EModelElementImpl::loadNode(std::string nodeName, std::shared_ptr<persisten
 	EObjectImpl::loadNode(nodeName, loadHandler);
 }
 
-void EModelElementImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references)
+void EModelElementImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references)
 {
 	EObjectImpl::resolveReferences(featureID, references);
 }

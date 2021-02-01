@@ -9,7 +9,6 @@
 
 //*********************************
 // generated Includes
-
 //Model includes
 #include "../ActivityNodeActivationGroup.hpp"
 
@@ -54,7 +53,7 @@ virtual public ActivityNodeActivationGroup
 			// Operations
 			//*********************************
 			 
-			virtual void activate(std::shared_ptr<Bag<org.eclipse.uml2.uml.ActivityNode> > nodes,std::shared_ptr<Bag<org.eclipse.uml2.uml.ActivityEdge> > edges) ;
+			virtual void activate(std::shared_ptr<Bag<uml::ActivityNode>> nodes,std::shared_ptr<Bag<uml::ActivityEdge>> edges) ;
 			
 			 
 			virtual void addEdgeInstance(std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> instance) ;
@@ -63,19 +62,19 @@ virtual public ActivityNodeActivationGroup
 			virtual void addNodeActivation(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> activation) ;
 			
 			 
-			virtual bool checkIncomingEdges(std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance> > incomingEdges,std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation> > activations) ;
+			virtual bool checkIncomingEdges(std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> incomingEdges,std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>> activations) ;
 			
 			 
-			virtual void createEdgeInstance(std::shared_ptr<Bag<org.eclipse.uml2.uml.ActivityEdge> > edges) ;
+			virtual void createEdgeInstance(std::shared_ptr<Bag<uml::ActivityEdge>> edges) ;
 			
 			 
-			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> createNodeActivation(std::shared_ptr<org.eclipse.uml2.uml.ActivityNode> node) ;
+			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> createNodeActivation(std::shared_ptr<uml::ActivityNode> node) ;
 			
 			 
-			virtual void createNodeActivations(std::shared_ptr<Bag<org.eclipse.uml2.uml.ActivityNode> > nodes) ;
+			virtual void createNodeActivations(std::shared_ptr<Bag<uml::ActivityNode>> nodes) ;
 			
 			 
-			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> getNodeActivation(std::shared_ptr<org.eclipse.uml2.uml.ActivityNode> node) ;
+			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> getNodeActivation(std::shared_ptr<uml::ActivityNode> node) ;
 			
 			 
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityParameterNodeActivation> > getOutputParameterNodeActivations() ;
@@ -93,10 +92,10 @@ virtual public ActivityNodeActivationGroup
 			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> retrieveActivityExecution() ;
 			
 			 
-			virtual void run(std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation> > activations) ;
+			virtual void run(std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>> activations) ;
 			
 			 
-			virtual void runNodes(std::shared_ptr<Bag<org.eclipse.uml2.uml.ActivityNode> > nodes) ;
+			virtual void runNodes(std::shared_ptr<Bag<uml::ActivityNode>> nodes) ;
 			
 			 
 			virtual void suspend(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> activation) ;
@@ -158,7 +157,7 @@ virtual public ActivityNodeActivationGroup
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

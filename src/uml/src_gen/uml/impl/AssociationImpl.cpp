@@ -35,53 +35,29 @@
 #include <exception> // used in Persistence
 
 #include "uml/Classifier.hpp"
-
 #include "uml/CollaborationUse.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/Constraint.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/ElementImport.hpp"
-
 #include "uml/Feature.hpp"
-
 #include "uml/Generalization.hpp"
-
 #include "uml/GeneralizationSet.hpp"
-
 #include "uml/NamedElement.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/Package.hpp"
-
 #include "uml/PackageImport.hpp"
-
 #include "uml/PackageableElement.hpp"
-
 #include "uml/Property.hpp"
-
 #include "uml/RedefinableElement.hpp"
-
 #include "uml/Relationship.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/Substitution.hpp"
-
 #include "uml/TemplateBinding.hpp"
-
 #include "uml/TemplateParameter.hpp"
-
 #include "uml/TemplateSignature.hpp"
-
 #include "uml/Type.hpp"
-
 #include "uml/UseCase.hpp"
 
 //Factories an Package includes
@@ -384,12 +360,12 @@ std::shared_ptr<ecore::EClass> AssociationImpl::eStaticClass() const
 /*
 Getter & Setter for attribute isDerived
 */
-bool  AssociationImpl::getIsDerived() const 
+bool AssociationImpl::getIsDerived() const 
 {
 	return m_isDerived;
 }
 
-void AssociationImpl::setIsDerived(bool  _isDerived)
+void AssociationImpl::setIsDerived(bool _isDerived)
 {
 	m_isDerived = _isDerived;
 } 
@@ -804,7 +780,7 @@ bool AssociationImpl::eSet(int featureID, Any newValue)
 				}
 				iterMemberEnd++;
 			}
-
+ 
 			iterMemberEnd = memberEndList->begin();
 			endMemberEnd = memberEndList->end();
 			while (iterMemberEnd != endMemberEnd)
@@ -840,7 +816,7 @@ bool AssociationImpl::eSet(int featureID, Any newValue)
 				}
 				iterNavigableOwnedEnd++;
 			}
-
+ 
 			iterNavigableOwnedEnd = navigableOwnedEndList->begin();
 			endNavigableOwnedEnd = navigableOwnedEndList->end();
 			while (iterNavigableOwnedEnd != endNavigableOwnedEnd)
@@ -876,7 +852,7 @@ bool AssociationImpl::eSet(int featureID, Any newValue)
 				}
 				iterOwnedEnd++;
 			}
-
+ 
 			iterOwnedEnd = ownedEndList->begin();
 			endOwnedEnd = ownedEndList->end();
 			while (iterOwnedEnd != endOwnedEnd)
@@ -996,7 +972,7 @@ void AssociationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence
 	RelationshipImpl::loadNode(nodeName, loadHandler);
 }
 
-void AssociationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void AssociationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -1074,8 +1050,8 @@ void AssociationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 		}
 
 	// Add references
-		saveHandler->addReferences<uml::Property>("memberEnd", this->getMemberEnd());	
-		saveHandler->addReferences<uml::Property>("navigableOwnedEnd", this->getNavigableOwnedEnd());	
+		saveHandler->addReferences<uml::Property>("memberEnd", this->getMemberEnd());
+		saveHandler->addReferences<uml::Property>("navigableOwnedEnd", this->getNavigableOwnedEnd());
 
 		//
 		// Add new tags (from references)

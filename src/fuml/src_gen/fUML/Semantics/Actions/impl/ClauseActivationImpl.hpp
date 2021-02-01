@@ -9,7 +9,6 @@
 
 //*********************************
 // generated Includes
-
 //Model includes
 #include "../ClauseActivation.hpp"
 
@@ -77,10 +76,10 @@ virtual public ClauseActivation
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<org.eclipse.uml2.uml.Clause > getClause() const ;
+			virtual std::shared_ptr<uml::Clause > getClause() const ;
 			
 			
-			virtual void setClause(std::shared_ptr<org.eclipse.uml2.uml.Clause> _clause) ;
+			virtual void setClause(std::shared_ptr<uml::Clause> _clause) ;
 			
 			
 			virtual std::shared_ptr<fUML::Semantics::Actions::ConditionalNodeActivation > getConditionalNodeActivation() const ;
@@ -108,7 +107,7 @@ virtual public ClauseActivation
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

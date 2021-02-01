@@ -33,23 +33,14 @@
 #include <exception> // used in Persistence
 
 #include "uml/Action.hpp"
-
 #include "fUML/Semantics/Actions/ActionActivation.hpp"
-
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
-
 #include "uml/ActivityNode.hpp"
-
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
-
 #include "fUML/Semantics/CommonBehavior/Execution.hpp"
-
 #include "fUML/Semantics/Actions/InputPinActivation.hpp"
-
 #include "fUML/Semantics/Actions/OutputPinActivation.hpp"
-
 #include "fUML/Semantics/Actions/PinActivation.hpp"
-
 #include "fUML/Semantics/Activities/Token.hpp"
 
 //Factories an Package includes
@@ -314,7 +305,7 @@ void ReduceActionActivationImpl::loadNode(std::string nodeName, std::shared_ptr<
 	ActionActivationImpl::loadNode(nodeName, loadHandler);
 }
 
-void ReduceActionActivationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ReduceActionActivationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -356,7 +347,7 @@ void ReduceActionActivationImpl::saveContent(std::shared_ptr<persistence::interf
 		std::shared_ptr<fUML::Semantics::Actions::ActionsPackage> package = fUML::Semantics::Actions::ActionsPackage::eInstance();
 
 	// Add references
-		saveHandler->addReference("currentExecution", this->getCurrentExecution());		 
+		saveHandler->addReference("currentExecution", this->getCurrentExecution()); 
 	}
 	catch (std::exception& e)
 	{

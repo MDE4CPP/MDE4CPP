@@ -7,21 +7,17 @@
 #ifndef FUML_SEMANTICS_STRUCTUREDCLASSIFIERS_LINK_HPP
 #define FUML_SEMANTICS_STRUCTUREDCLASSIFIERS_LINK_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T> class Bag; 
 
 
-
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -58,16 +54,12 @@ namespace uml
 // enum includes
 
 
-//Includes from codegen annotation
-#include "abstractDataTypes/SubsetUnion.hpp"
-#include "uml/Property.hpp"
-#include "uml/Association.hpp"
 
 //*********************************
 namespace fUML::Semantics::StructuredClassifiers 
 {
 	
-	class Link:virtual public ExtensionalValue
+	class Link: virtual public ExtensionalValue
 	{
 		public:
  			Link(const Link &) {}
@@ -75,7 +67,6 @@ namespace fUML::Semantics::StructuredClassifiers
 
 		protected:
 			Link(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -93,13 +84,13 @@ namespace fUML::Semantics::StructuredClassifiers
 			virtual void addTo(std::shared_ptr<fUML::Semantics::Loci::Locus> locus) = 0;
 			
 			 
-			virtual std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue> > getOtherFeatureValues(std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue> > extent,std::shared_ptr<org.eclipse.uml2.uml.Property> end) = 0;
+			virtual std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue> > getOtherFeatureValues(std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>> extent,std::shared_ptr<uml::Property> end) = 0;
 			
 			 
-			virtual std::shared_ptr<Bag<org.eclipse.uml2.uml.Classifier> > getTypes() const = 0;
+			virtual std::shared_ptr<Bag<uml::Classifier> > getTypes() const = 0;
 			
 			 
-			virtual bool isMatchingLink(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> link,std::shared_ptr<org.eclipse.uml2.uml.Property> end) = 0;
+			virtual bool isMatchingLink(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> link,std::shared_ptr<uml::Property> end) = 0;
 			
 			
 			//*********************************
@@ -110,10 +101,10 @@ namespace fUML::Semantics::StructuredClassifiers
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<org.eclipse.uml2.uml.Association > getType() const = 0;
+			virtual std::shared_ptr<uml::Association > getType() const = 0;
 			
 			
-			virtual void setType(std::shared_ptr<org.eclipse.uml2.uml.Association> _type) = 0;
+			virtual void setType(std::shared_ptr<uml::Association> _type) = 0;
 			
 			
 
@@ -127,7 +118,7 @@ namespace fUML::Semantics::StructuredClassifiers
 			// Reference Members
 			//*********************************
 			
-			std::shared_ptr<org.eclipse.uml2.uml.Association > m_type;
+			std::shared_ptr<uml::Association > m_type;
 
 		public:
 			//*********************************
@@ -142,7 +133,7 @@ namespace fUML::Semantics::StructuredClassifiers
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

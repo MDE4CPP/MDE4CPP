@@ -40,27 +40,16 @@
 #include <exception> // used in Persistence
 
 #include "uml/Action.hpp"
-
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
-
 #include "uml/ActivityNode.hpp"
-
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
-
 #include "uml/CallAction.hpp"
-
 #include "fUML/Semantics/Actions/CallActionActivation.hpp"
-
 #include "uml/CallOperationAction.hpp"
-
 #include "fUML/Semantics/CommonBehavior/Execution.hpp"
-
 #include "fUML/Semantics/Actions/InputPinActivation.hpp"
-
 #include "fUML/Semantics/Actions/OutputPinActivation.hpp"
-
 #include "fUML/Semantics/Actions/PinActivation.hpp"
-
 #include "fUML/Semantics/Activities/Token.hpp"
 
 //Factories an Package includes
@@ -319,13 +308,13 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> CallOperationActionA
 /*
 Getter & Setter for reference callOperationAction
 */
-std::shared_ptr<org.eclipse.uml2.uml.CallOperationAction > CallOperationActionActivationImpl::getCallOperationAction() const
+std::shared_ptr<uml::CallOperationAction > CallOperationActionActivationImpl::getCallOperationAction() const
 {
 //assert(m_callOperationAction);
     return m_callOperationAction;
 }
 
-void CallOperationActionActivationImpl::setCallOperationAction(std::shared_ptr<org.eclipse.uml2.uml.CallOperationAction> _callOperationAction)
+void CallOperationActionActivationImpl::setCallOperationAction(std::shared_ptr<uml::CallOperationAction> _callOperationAction)
 {
     m_callOperationAction = _callOperationAction;
 	//additional setter call for redefined reference CallActionActivation::callAction
@@ -333,9 +322,9 @@ void CallOperationActionActivationImpl::setCallOperationAction(std::shared_ptr<o
 }
 
 /*Additional Setter for redefined reference 'CallActionActivation::callAction'*/
-void CallOperationActionActivationImpl::setCallAction(std::shared_ptr<org.eclipse.uml2.uml.CallAction> _callAction)
+void CallOperationActionActivationImpl::setCallAction(std::shared_ptr<uml::CallAction> _callAction)
 {
-	std::shared_ptr<org.eclipse.uml2.uml.CallOperationAction> _callOperationAction = std::dynamic_pointer_cast<org.eclipse.uml2.uml.CallOperationAction>(_callAction);
+	std::shared_ptr<uml::CallOperationAction> _callOperationAction = std::dynamic_pointer_cast<uml::CallOperationAction>(_callAction);
 	if(_callOperationAction)
 	{
 		m_callOperationAction = _callOperationAction;
@@ -345,13 +334,13 @@ void CallOperationActionActivationImpl::setCallAction(std::shared_ptr<org.eclips
 	}
 	else
 	{
-		std::cerr<<"[CallOperationActionActivation::setCallAction] : Could not set callAction because provided callAction was not of type 'org.eclipse.uml2.uml.CallOperationAction'"<<std::endl;
+		std::cerr<<"[CallOperationActionActivation::setCallAction] : Could not set callAction because provided callAction was not of type 'uml::CallOperationAction'"<<std::endl;
 	}
 }
 /*Additional Setter for redefined reference 'ActionActivation::action'*/
-void CallOperationActionActivationImpl::setAction(std::shared_ptr<org.eclipse.uml2.uml.Action> _action)
+void CallOperationActionActivationImpl::setAction(std::shared_ptr<uml::Action> _action)
 {
-	std::shared_ptr<org.eclipse.uml2.uml.CallOperationAction> _callOperationAction = std::dynamic_pointer_cast<org.eclipse.uml2.uml.CallOperationAction>(_action);
+	std::shared_ptr<uml::CallOperationAction> _callOperationAction = std::dynamic_pointer_cast<uml::CallOperationAction>(_action);
 	if(_callOperationAction)
 	{
 		m_callOperationAction = _callOperationAction;
@@ -361,13 +350,13 @@ void CallOperationActionActivationImpl::setAction(std::shared_ptr<org.eclipse.um
 	}
 	else
 	{
-		std::cerr<<"[CallOperationActionActivation::setAction] : Could not set action because provided action was not of type 'org.eclipse.uml2.uml.CallOperationAction'"<<std::endl;
+		std::cerr<<"[CallOperationActionActivation::setAction] : Could not set action because provided action was not of type 'uml::CallOperationAction'"<<std::endl;
 	}
 }
 /*Additional Setter for redefined reference 'ActivityNodeActivation::node'*/
-void CallOperationActionActivationImpl::setNode(std::shared_ptr<org.eclipse.uml2.uml.ActivityNode> _node)
+void CallOperationActionActivationImpl::setNode(std::shared_ptr<uml::ActivityNode> _node)
 {
-	std::shared_ptr<org.eclipse.uml2.uml.CallOperationAction> _callOperationAction = std::dynamic_pointer_cast<org.eclipse.uml2.uml.CallOperationAction>(_node);
+	std::shared_ptr<uml::CallOperationAction> _callOperationAction = std::dynamic_pointer_cast<uml::CallOperationAction>(_node);
 	if(_callOperationAction)
 	{
 		m_callOperationAction = _callOperationAction;
@@ -377,7 +366,7 @@ void CallOperationActionActivationImpl::setNode(std::shared_ptr<org.eclipse.uml2
 	}
 	else
 	{
-		std::cerr<<"[CallOperationActionActivation::setNode] : Could not set node because provided node was not of type 'org.eclipse.uml2.uml.CallOperationAction'"<<std::endl;
+		std::cerr<<"[CallOperationActionActivation::setNode] : Could not set node because provided node was not of type 'uml::CallOperationAction'"<<std::endl;
 	}
 }
 
@@ -450,7 +439,7 @@ bool CallOperationActionActivationImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<org.eclipse.uml2.uml.CallOperationAction> _callOperationAction = std::dynamic_pointer_cast<org.eclipse.uml2.uml.CallOperationAction>(_temp);
+			std::shared_ptr<uml::CallOperationAction> _callOperationAction = std::dynamic_pointer_cast<uml::CallOperationAction>(_temp);
 			setCallOperationAction(_callOperationAction); //1913
 			return true;
 		}
@@ -511,7 +500,7 @@ void CallOperationActionActivationImpl::loadNode(std::string nodeName, std::shar
 	CallActionActivationImpl::loadNode(nodeName, loadHandler);
 }
 
-void CallOperationActionActivationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void CallOperationActionActivationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -520,7 +509,7 @@ void CallOperationActionActivationImpl::resolveReferences(const int featureID, s
 			if (references.size() == 1)
 			{
 				// Cast object to correct type
-				std::shared_ptr<org.eclipse.uml2.uml.CallOperationAction> _callOperationAction = std::dynamic_pointer_cast<org.eclipse.uml2.uml.CallOperationAction>( references.front() );
+				std::shared_ptr<uml::CallOperationAction> _callOperationAction = std::dynamic_pointer_cast<uml::CallOperationAction>( references.front() );
 				setCallOperationAction(_callOperationAction);
 			}
 			
@@ -559,7 +548,7 @@ void CallOperationActionActivationImpl::saveContent(std::shared_ptr<persistence:
 		std::shared_ptr<fUML::Semantics::Actions::ActionsPackage> package = fUML::Semantics::Actions::ActionsPackage::eInstance();
 
 	// Add references
-		saveHandler->addReference("callOperationAction", this->getCallOperationAction());		
+		saveHandler->addReference("callOperationAction", this->getCallOperationAction()); 
 	}
 	catch (std::exception& e)
 	{

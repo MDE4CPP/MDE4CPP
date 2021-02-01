@@ -33,25 +33,15 @@
 #include <exception> // used in Persistence
 
 #include "fUML/Semantics/Actions/AcceptEventActionEventAccepter.hpp"
-
 #include "uml/Action.hpp"
-
 #include "fUML/Semantics/Actions/ActionActivation.hpp"
-
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
-
 #include "uml/ActivityNode.hpp"
-
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
-
 #include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"
-
 #include "fUML/Semantics/Actions/InputPinActivation.hpp"
-
 #include "fUML/Semantics/Actions/OutputPinActivation.hpp"
-
 #include "fUML/Semantics/Actions/PinActivation.hpp"
-
 #include "fUML/Semantics/Activities/Token.hpp"
 
 //Factories an Package includes
@@ -167,12 +157,12 @@ std::shared_ptr<ecore::EClass> AcceptEventActionActivationImpl::eStaticClass() c
 /*
 Getter & Setter for attribute waiting
 */
-bool  AcceptEventActionActivationImpl::isWaiting() const 
+bool AcceptEventActionActivationImpl::isWaiting() const 
 {
 	return m_waiting;
 }
 
-void AcceptEventActionActivationImpl::setWaiting(bool  _waiting)
+void AcceptEventActionActivationImpl::setWaiting(bool _waiting)
 {
 	m_waiting = _waiting;
 } 
@@ -194,13 +184,13 @@ void AcceptEventActionActivationImpl::doAction()
 	throw "UnsupportedOperationException";
 }
 
-void AcceptEventActionActivationImpl::fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > incomingTokens)
+void AcceptEventActionActivationImpl::fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incomingTokens)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void AcceptEventActionActivationImpl::initialize(std::shared_ptr<org.eclipse.uml2.uml.ActivityNode> node,std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> group)
+void AcceptEventActionActivationImpl::initialize(std::shared_ptr<uml::ActivityNode> node,std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> group)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -398,7 +388,7 @@ void AcceptEventActionActivationImpl::loadNode(std::string nodeName, std::shared
 	ActionActivationImpl::loadNode(nodeName, loadHandler);
 }
 
-void AcceptEventActionActivationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void AcceptEventActionActivationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -445,7 +435,7 @@ void AcceptEventActionActivationImpl::saveContent(std::shared_ptr<persistence::i
 		}
 
 	// Add references
-		saveHandler->addReference("eventAccepter", this->getEventAccepter());		 
+		saveHandler->addReference("eventAccepter", this->getEventAccepter()); 
 	}
 	catch (std::exception& e)
 	{

@@ -35,31 +35,18 @@
 #include <exception> // used in Persistence
 
 #include "uml/Behavior.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/ConnectableElement.hpp"
-
 #include "uml/ConnectorEnd.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/MultiplicityElement.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/Operation.hpp"
-
 #include "uml/ParameterSet.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/TemplateParameter.hpp"
-
 #include "uml/Type.hpp"
-
 #include "uml/ValueSpecification.hpp"
 
 //Factories an Package includes
@@ -231,12 +218,12 @@ std::shared_ptr<ecore::EClass> ParameterImpl::eStaticClass() const
 /*
 Getter & Setter for attribute default
 */
-std::string  ParameterImpl::getDefault() const 
+std::string ParameterImpl::getDefault() const 
 {
 	return m_default;
 }
 
-void ParameterImpl::setDefault(std::string  _default)
+void ParameterImpl::setDefault(std::string _default)
 {
 	m_default = _default;
 } 
@@ -246,12 +233,12 @@ void ParameterImpl::setDefault(std::string  _default)
 /*
 Getter & Setter for attribute direction
 */
-uml::ParameterDirectionKind  ParameterImpl::getDirection() const 
+uml::ParameterDirectionKind ParameterImpl::getDirection() const 
 {
 	return m_direction;
 }
 
-void ParameterImpl::setDirection(uml::ParameterDirectionKind  _direction)
+void ParameterImpl::setDirection(uml::ParameterDirectionKind _direction)
 {
 	m_direction = _direction;
 } 
@@ -261,12 +248,12 @@ void ParameterImpl::setDirection(uml::ParameterDirectionKind  _direction)
 /*
 Getter & Setter for attribute effect
 */
-uml::ParameterEffectKind  ParameterImpl::getEffect() const 
+uml::ParameterEffectKind ParameterImpl::getEffect() const 
 {
 	return m_effect;
 }
 
-void ParameterImpl::setEffect(uml::ParameterEffectKind  _effect)
+void ParameterImpl::setEffect(uml::ParameterEffectKind _effect)
 {
 	m_effect = _effect;
 } 
@@ -276,12 +263,12 @@ void ParameterImpl::setEffect(uml::ParameterEffectKind  _effect)
 /*
 Getter & Setter for attribute isException
 */
-bool  ParameterImpl::getIsException() const 
+bool ParameterImpl::getIsException() const 
 {
 	return m_isException;
 }
 
-void ParameterImpl::setIsException(bool  _isException)
+void ParameterImpl::setIsException(bool _isException)
 {
 	m_isException = _isException;
 } 
@@ -291,12 +278,12 @@ void ParameterImpl::setIsException(bool  _isException)
 /*
 Getter & Setter for attribute isStream
 */
-bool  ParameterImpl::getIsStream() const 
+bool ParameterImpl::getIsStream() const 
 {
 	return m_isStream;
 }
 
-void ParameterImpl::setIsStream(bool  _isStream)
+void ParameterImpl::setIsStream(bool _isStream)
 {
 	m_isStream = _isStream;
 } 
@@ -674,7 +661,7 @@ bool ParameterImpl::eSet(int featureID, Any newValue)
 				}
 				iterParameterSet++;
 			}
-
+ 
 			iterParameterSet = parameterSetList->begin();
 			endParameterSet = parameterSetList->end();
 			while (iterParameterSet != endParameterSet)
@@ -727,7 +714,7 @@ void ParameterImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoa
 		iter = attr_list.find("direction");
 		if ( iter != attr_list.end() )
 		{
-			uml::ParameterDirectionKind  value = ParameterDirectionKind::IN;
+			uml::ParameterDirectionKind value = ParameterDirectionKind::IN;
 			std::string literal = iter->second;
 			if (literal == "in")
 			{
@@ -751,7 +738,7 @@ void ParameterImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoa
 		iter = attr_list.find("effect");
 		if ( iter != attr_list.end() )
 		{
-			uml::ParameterEffectKind  value = ParameterEffectKind::CREATE;
+			uml::ParameterEffectKind value = ParameterEffectKind::CREATE;
 			std::string literal = iter->second;
 			if (literal == "create")
 			{
@@ -846,7 +833,7 @@ void ParameterImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::
 	MultiplicityElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void ParameterImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ParameterImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -918,7 +905,7 @@ void ParameterImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 		// Add attributes
 		if ( this->eIsSet(package->getParameter_Attribute_direction()) )
 		{
-			uml::ParameterDirectionKind  value = this->getDirection();
+			uml::ParameterDirectionKind value = this->getDirection();
 			std::string literal = "";
 			if (value == ParameterDirectionKind::IN)
 			{
@@ -941,7 +928,7 @@ void ParameterImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 
 		if ( this->eIsSet(package->getParameter_Attribute_effect()) )
 		{
-			uml::ParameterEffectKind  value = this->getEffect();
+			uml::ParameterEffectKind value = this->getEffect();
 			std::string literal = "";
 			if (value == ParameterEffectKind::CREATE)
 			{
@@ -973,7 +960,7 @@ void ParameterImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 		}
 
 	// Add references
-		saveHandler->addReferences<uml::ParameterSet>("parameterSet", this->getParameterSet());	
+		saveHandler->addReferences<uml::ParameterSet>("parameterSet", this->getParameterSet());
 	}
 	catch (std::exception& e)
 	{

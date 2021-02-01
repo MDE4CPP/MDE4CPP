@@ -72,35 +72,25 @@
 #include <exception> // used in Persistence
 
 #include "uml/Class.hpp"
-
 #include "uml/Classifier.hpp"
-
 #include "uml/Element.hpp"
-
 #include "fUML/Semantics/Loci/ExecutionFactory.hpp"
-
 #include "fUML/Semantics/Loci/Locus.hpp"
-
 #include "fUML/Semantics/StructuredClassifiers/Object.hpp"
-
 #include "fUML/Semantics/CommonBehavior/OpaqueBehaviorExecution.hpp"
-
 #include "uml/Package.hpp"
-
 #include "uml/PrimitiveType.hpp"
-
 #include "fUML/Semantics/Loci/SemanticStrategy.hpp"
-
 #include "fUML/Semantics/Loci/SemanticVisitor.hpp"
 
 //Factories an Package includes
 #include "PSCS/Semantics/Loci/impl/LociFactoryImpl.hpp"
 #include "PSCS/Semantics/Loci/impl/LociPackageImpl.hpp"
 
-#include "PSCS/Semantics/SemanticsFactory.hpp"
-#include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "PSCS/PSCSFactory.hpp"
 #include "PSCS/PSCSPackage.hpp"
+#include "PSCS/Semantics/SemanticsFactory.hpp"
+#include "PSCS/Semantics/SemanticsPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -138,11 +128,11 @@ CS_ExecutionFactoryImpl::CS_ExecutionFactoryImpl(const CS_ExecutionFactoryImpl &
 
 	//copy references with no containment (soft copy)
 	
-	std::shared_ptr<Bag<org.eclipse.uml2.uml.Package>> _appliedProfiles = obj.getAppliedProfiles();
-	m_appliedProfiles.reset(new Bag<org.eclipse.uml2.uml.Package>(*(obj.getAppliedProfiles().get())));
+	std::shared_ptr<Bag<uml::Package>> _appliedProfiles = obj.getAppliedProfiles();
+	m_appliedProfiles.reset(new Bag<uml::Package>(*(obj.getAppliedProfiles().get())));
 
-	std::shared_ptr<Bag<org.eclipse.uml2.uml.PrimitiveType>> _builtInTypes = obj.getBuiltInTypes();
-	m_builtInTypes.reset(new Bag<org.eclipse.uml2.uml.PrimitiveType>(*(obj.getBuiltInTypes().get())));
+	std::shared_ptr<Bag<uml::PrimitiveType>> _builtInTypes = obj.getBuiltInTypes();
+	m_builtInTypes.reset(new Bag<uml::PrimitiveType>(*(obj.getBuiltInTypes().get())));
 
 	m_locus  = obj.getLocus();
 
@@ -177,7 +167,7 @@ std::shared_ptr<ecore::EClass> CS_ExecutionFactoryImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> CS_ExecutionFactoryImpl::getStereotypeApplication(std::shared_ptr<org.eclipse.uml2.uml.Class> stereotype,std::shared_ptr<org.eclipse.uml2.uml.Element> element)
+std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> CS_ExecutionFactoryImpl::getStereotypeApplication(std::shared_ptr<uml::Class> stereotype,std::shared_ptr<uml::Element> element)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -197,7 +187,7 @@ std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> CS_ExecutionFact
 	//end of body
 }
 
-std::shared_ptr<org.eclipse.uml2.uml.Classifier> CS_ExecutionFactoryImpl::getStereotypeClass(std::string profileName,std::string stereotypeName)
+std::shared_ptr<uml::Classifier> CS_ExecutionFactoryImpl::getStereotypeClass(std::string profileName,std::string stereotypeName)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -205,7 +195,7 @@ std::shared_ptr<org.eclipse.uml2.uml.Classifier> CS_ExecutionFactoryImpl::getSte
 	//end of body
 }
 
-std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> CS_ExecutionFactoryImpl::instantiateVisitor(std::shared_ptr<org.eclipse.uml2.uml.Element> element)
+std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> CS_ExecutionFactoryImpl::instantiateVisitor(std::shared_ptr<uml::Element> element)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -301,11 +291,11 @@ std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> CS_ExecutionFactoryImpl:
 /*
 Getter & Setter for reference appliedProfiles
 */
-std::shared_ptr<Bag<org.eclipse.uml2.uml.Package>> CS_ExecutionFactoryImpl::getAppliedProfiles() const
+std::shared_ptr<Bag<uml::Package>> CS_ExecutionFactoryImpl::getAppliedProfiles() const
 {
 	if(m_appliedProfiles == nullptr)
 	{
-		m_appliedProfiles.reset(new Bag<org.eclipse.uml2.uml.Package>());
+		m_appliedProfiles.reset(new Bag<uml::Package>());
 		
 		
 	}
@@ -351,17 +341,6 @@ Any CS_ExecutionFactoryImpl::eGet(int featureID, bool resolve, bool coreType) co
 		case PSCS::Semantics::Loci::LociPackage::CS_EXECUTIONFACTORY_ATTRIBUTE_APPLIEDPROFILES:
 		{
 			return eAny(getAppliedProfiles()); //144			
-			/*
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<org.eclipse.uml2.uml.Package>::iterator iter = m_appliedProfiles->begin();
-			Bag<org.eclipse.uml2.uml.Package>::iterator end = m_appliedProfiles->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //144
-			*/
 		}
 	}
 	return fUML::Semantics::Loci::ExecutionFactoryImpl::eGet(featureID, resolve, coreType);
@@ -383,17 +362,17 @@ bool CS_ExecutionFactoryImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<org.eclipse.uml2.uml.Package>> appliedProfilesList(new Bag<org.eclipse.uml2.uml.Package>());
+			std::shared_ptr<Bag<uml::Package>> appliedProfilesList(new Bag<uml::Package>());
 			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
 			Bag<ecore::EObject>::iterator end = tempObjectList->end();
 			while (iter != end)
 			{
-				appliedProfilesList->add(std::dynamic_pointer_cast<org.eclipse.uml2.uml.Package>(*iter));
+				appliedProfilesList->add(std::dynamic_pointer_cast<uml::Package>(*iter));
 				iter++;
 			}
 			
-			Bag<org.eclipse.uml2.uml.Package>::iterator iterAppliedProfiles = m_appliedProfiles->begin();
-			Bag<org.eclipse.uml2.uml.Package>::iterator endAppliedProfiles = m_appliedProfiles->end();
+			Bag<uml::Package>::iterator iterAppliedProfiles = m_appliedProfiles->begin();
+			Bag<uml::Package>::iterator endAppliedProfiles = m_appliedProfiles->end();
 			while (iterAppliedProfiles != endAppliedProfiles)
 			{
 				if (appliedProfilesList->find(*iterAppliedProfiles) == -1)
@@ -402,7 +381,7 @@ bool CS_ExecutionFactoryImpl::eSet(int featureID, Any newValue)
 				}
 				iterAppliedProfiles++;
 			}
-
+ 
 			iterAppliedProfiles = appliedProfilesList->begin();
 			endAppliedProfiles = appliedProfilesList->end();
 			while (iterAppliedProfiles != endAppliedProfiles)
@@ -472,16 +451,16 @@ void CS_ExecutionFactoryImpl::loadNode(std::string nodeName, std::shared_ptr<per
 	fUML::Semantics::Loci::ExecutionFactoryImpl::loadNode(nodeName, loadHandler);
 }
 
-void CS_ExecutionFactoryImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void CS_ExecutionFactoryImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
 		case PSCS::Semantics::Loci::LociPackage::CS_EXECUTIONFACTORY_ATTRIBUTE_APPLIEDPROFILES:
 		{
-			std::shared_ptr<Bag<org.eclipse.uml2.uml.Package>> _appliedProfiles = getAppliedProfiles();
+			std::shared_ptr<Bag<uml::Package>> _appliedProfiles = getAppliedProfiles();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
-				std::shared_ptr<org.eclipse.uml2.uml.Package> _r = std::dynamic_pointer_cast<org.eclipse.uml2.uml.Package>(ref);
+				std::shared_ptr<uml::Package> _r = std::dynamic_pointer_cast<uml::Package>(ref);
 				if (_r != nullptr)
 				{
 					_appliedProfiles->push_back(_r);
@@ -510,7 +489,7 @@ void CS_ExecutionFactoryImpl::saveContent(std::shared_ptr<persistence::interface
 		std::shared_ptr<PSCS::Semantics::Loci::LociPackage> package = PSCS::Semantics::Loci::LociPackage::eInstance();
 
 	// Add references
-		saveHandler->addReferences<org.eclipse.uml2.uml.Package>("appliedProfiles", this->getAppliedProfiles());	
+		saveHandler->addReferences<uml::Package>("appliedProfiles", this->getAppliedProfiles());
 	}
 	catch (std::exception& e)
 	{

@@ -7,21 +7,17 @@
 #ifndef FUML_SEMANTICS_ACTIONS_STRUCTUREDACTIVITYNODEACTIVATION_HPP
 #define FUML_SEMANTICS_ACTIONS_STRUCTUREDACTIVITYNODEACTIVATION_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T> class Bag; 
 
 
-
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -67,21 +63,12 @@ namespace uml
 // enum includes
 
 
-//Includes from codegen annotation
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/Semantics/Activities/ObjectToken.hpp"
-#include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
-#include "uml/StructuredActivityNode.hpp"
-#include "uml/Action.hpp"
-#include "uml/ActivityNode.hpp"
-#include "uml/InputPin.hpp"
-#include "uml/OutputPin.hpp"
 
 //*********************************
 namespace fUML::Semantics::Actions 
 {
 	
-	class StructuredActivityNodeActivation:virtual public ActionActivation
+	class StructuredActivityNodeActivation: virtual public ActionActivation
 	{
 		public:
  			StructuredActivityNodeActivation(const StructuredActivityNodeActivation &) {}
@@ -89,7 +76,6 @@ namespace fUML::Semantics::Actions
 
 		protected:
 			StructuredActivityNodeActivation(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -116,10 +102,10 @@ namespace fUML::Semantics::Actions
 			virtual void doStructuredActivity() = 0;
 			
 			 
-			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> getNodeActivation(std::shared_ptr<org.eclipse.uml2.uml.ActivityNode> node) = 0;
+			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> getNodeActivation(std::shared_ptr<uml::ActivityNode> node) = 0;
 			
 			 
-			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value> > getPinValues(std::shared_ptr<org.eclipse.uml2.uml.OutputPin> pin) = 0;
+			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value> > getPinValues(std::shared_ptr<uml::OutputPin> pin) = 0;
 			
 			 
 			virtual bool isSourceFor(std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> edgeInstance) = 0;
@@ -128,10 +114,10 @@ namespace fUML::Semantics::Actions
 			virtual bool isSuspended() = 0;
 			
 			 
-			virtual std::shared_ptr<Bag<org.eclipse.uml2.uml.ActivityNode> > makeActivityNodeList(std::shared_ptr<Bag<org.eclipse.uml2.uml.ExecutableNode> > nodes) = 0;
+			virtual std::shared_ptr<Bag<uml::ActivityNode> > makeActivityNodeList(std::shared_ptr<Bag<uml::ExecutableNode>> nodes) = 0;
 			
 			 
-			virtual void putPinValues(std::shared_ptr<org.eclipse.uml2.uml.OutputPin> pin,std::shared_ptr<Bag<fUML::Semantics::Values::Value> > values) = 0;
+			virtual void putPinValues(std::shared_ptr<uml::OutputPin> pin,std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values) = 0;
 			
 			 
 			virtual void resume() = 0;
@@ -184,7 +170,7 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

@@ -33,21 +33,13 @@
 #include <exception> // used in Persistence
 
 #include "ecore/EAnnotation.hpp"
-
 #include "ecore/EClass.hpp"
-
 #include "ecore/EClassifier.hpp"
-
 #include "ecore/EGenericType.hpp"
-
 #include "ecore/EObject.hpp"
-
 #include "ecore/EOperation.hpp"
-
 #include "ecore/EParameter.hpp"
-
 #include "ecore/ETypeParameter.hpp"
-
 #include "ecore/ETypedElement.hpp"
 
 //Factories an Package includes
@@ -189,12 +181,12 @@ std::shared_ptr<EClass> EOperationImpl::eStaticClass() const
 /*
 Getter & Setter for attribute operationID
 */
-int  EOperationImpl::getOperationID() const 
+int EOperationImpl::getOperationID() const 
 {
 	return m_operationID;
 }
 
-void EOperationImpl::setOperationID(int  _operationID)
+void EOperationImpl::setOperationID(int _operationID)
 {
 	m_operationID = _operationID;
 } 
@@ -399,25 +391,25 @@ Any EOperationImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_ECONTAININGCLASS:
-			return eAny(getEContainingClass().lock()); //3914
+			return eAny(getEContainingClass().lock()); //4014
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_EEXCEPTIONS:
 		{
-			return eAny(getEExceptions()); //3917			
+			return eAny(getEExceptions()); //4017			
 		}
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_EGENERICEXCEPTIONS:
 		{
-			return eAny(getEGenericExceptions()); //3918			
+			return eAny(getEGenericExceptions()); //4018			
 		}
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_EPARAMETERS:
 		{
-			return eAny(getEParameters()); //3916			
+			return eAny(getEParameters()); //4016			
 		}
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_ETYPEPARAMETERS:
 		{
-			return eAny(getETypeParameters()); //3915			
+			return eAny(getETypeParameters()); //4015			
 		}
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_OPERATIONID:
-			return eAny(getOperationID()); //3913
+			return eAny(getOperationID()); //4013
 	}
 	return ETypedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -426,17 +418,17 @@ bool EOperationImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_ECONTAININGCLASS:
-			return getEContainingClass().lock() != nullptr; //3914
+			return getEContainingClass().lock() != nullptr; //4014
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_EEXCEPTIONS:
-			return getEExceptions() != nullptr; //3917
+			return getEExceptions() != nullptr; //4017
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_EGENERICEXCEPTIONS:
-			return getEGenericExceptions() != nullptr; //3918
+			return getEGenericExceptions() != nullptr; //4018
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_EPARAMETERS:
-			return getEParameters() != nullptr; //3916
+			return getEParameters() != nullptr; //4016
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_ETYPEPARAMETERS:
-			return getETypeParameters() != nullptr; //3915
+			return getETypeParameters() != nullptr; //4015
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_OPERATIONID:
-			return getOperationID() != -1; //3913
+			return getOperationID() != -1; //4013
 	}
 	return ETypedElementImpl::internalEIsSet(featureID);
 }
@@ -467,7 +459,7 @@ bool EOperationImpl::eSet(int featureID, Any newValue)
 				}
 				iterEExceptions++;
 			}
-
+ 
 			iterEExceptions = eExceptionsList->begin();
 			endEExceptions = eExceptionsList->end();
 			while (iterEExceptions != endEExceptions)
@@ -503,7 +495,7 @@ bool EOperationImpl::eSet(int featureID, Any newValue)
 				}
 				iterEGenericExceptions++;
 			}
-
+ 
 			iterEGenericExceptions = eGenericExceptionsList->begin();
 			endEGenericExceptions = eGenericExceptionsList->end();
 			while (iterEGenericExceptions != endEGenericExceptions)
@@ -539,7 +531,7 @@ bool EOperationImpl::eSet(int featureID, Any newValue)
 				}
 				iterEParameters++;
 			}
-
+ 
 			iterEParameters = eParametersList->begin();
 			endEParameters = eParametersList->end();
 			while (iterEParameters != endEParameters)
@@ -575,7 +567,7 @@ bool EOperationImpl::eSet(int featureID, Any newValue)
 				}
 				iterETypeParameters++;
 			}
-
+ 
 			iterETypeParameters = eTypeParametersList->begin();
 			endETypeParameters = eTypeParametersList->end();
 			while (iterETypeParameters != endETypeParameters)
@@ -713,7 +705,7 @@ void EOperationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence:
 	ETypedElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void EOperationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references)
+void EOperationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references)
 {
 	switch(featureID)
 	{
@@ -770,7 +762,7 @@ void EOperationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 		}
 
 	// Add references
-		saveHandler->addReferences<ecore::EClassifier>("eExceptions", this->getEExceptions());	
+		saveHandler->addReferences<ecore::EClassifier>("eExceptions", this->getEExceptions());
 
 		//
 		// Add new tags (from references)

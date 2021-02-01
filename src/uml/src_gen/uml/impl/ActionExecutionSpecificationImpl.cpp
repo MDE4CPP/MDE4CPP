@@ -35,27 +35,16 @@
 #include <exception> // used in Persistence
 
 #include "uml/Action.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/ExecutionSpecification.hpp"
-
 #include "uml/GeneralOrdering.hpp"
-
 #include "uml/Interaction.hpp"
-
 #include "uml/InteractionOperand.hpp"
-
 #include "uml/Lifeline.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/OccurrenceSpecification.hpp"
-
 #include "uml/StringExpression.hpp"
 
 //Factories an Package includes
@@ -373,7 +362,7 @@ void ActionExecutionSpecificationImpl::loadNode(std::string nodeName, std::share
 	ExecutionSpecificationImpl::loadNode(nodeName, loadHandler);
 }
 
-void ActionExecutionSpecificationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ActionExecutionSpecificationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -421,7 +410,7 @@ void ActionExecutionSpecificationImpl::saveContent(std::shared_ptr<persistence::
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	// Add references
-		saveHandler->addReference("action", this->getAction());		 
+		saveHandler->addReference("action", this->getAction()); 
 	}
 	catch (std::exception& e)
 	{

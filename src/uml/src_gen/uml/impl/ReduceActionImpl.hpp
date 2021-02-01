@@ -9,7 +9,6 @@
 
 //*********************************
 // generated Includes
-
 //Model includes
 #include "../ReduceAction.hpp"
 
@@ -94,15 +93,14 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual bool  getIsOrdered() const ;
+			virtual bool getIsOrdered() const ;
 			
 			/*!
 			Indicates whether the order of the input collection should determine the order in which the reducer Behavior is applied to its elements.
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual void setIsOrdered (bool  _isOrdered); 
-			
+			virtual void setIsOrdered (bool _isOrdered);
 			
 			//*********************************
 			// Reference
@@ -199,7 +197,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

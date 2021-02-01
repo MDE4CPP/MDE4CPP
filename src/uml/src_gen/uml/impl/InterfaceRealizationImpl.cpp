@@ -34,27 +34,16 @@
 #include <exception> // used in Persistence
 
 #include "uml/BehavioredClassifier.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/Interface.hpp"
-
 #include "uml/NamedElement.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/OpaqueExpression.hpp"
-
 #include "uml/Package.hpp"
-
 #include "uml/Realization.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/TemplateParameter.hpp"
 
 //Factories an Package includes
@@ -483,7 +472,7 @@ void InterfaceRealizationImpl::loadNode(std::string nodeName, std::shared_ptr<pe
 	RealizationImpl::loadNode(nodeName, loadHandler);
 }
 
-void InterfaceRealizationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void InterfaceRealizationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -552,7 +541,7 @@ void InterfaceRealizationImpl::saveContent(std::shared_ptr<persistence::interfac
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	// Add references
-		saveHandler->addReference("contract", this->getContract());		 
+		saveHandler->addReference("contract", this->getContract()); 
 	}
 	catch (std::exception& e)
 	{

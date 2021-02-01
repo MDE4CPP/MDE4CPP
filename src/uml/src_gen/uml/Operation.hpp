@@ -8,23 +8,19 @@
 #define UML_OPERATION_HPP
 
 #include <map>
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T, class ... U> class Subset;
-
 
 class AnyObject;
 typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -64,9 +60,7 @@ namespace uml
 
 // base class includes
 #include "uml/BehavioralFeature.hpp"
-
 #include "uml/ParameterableElement.hpp"
-
 #include "uml/TemplateableElement.hpp"
 
 // enum includes
@@ -75,7 +69,6 @@ namespace uml
 #include "uml/VisibilityKind.hpp"
 
 
-//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -85,7 +78,7 @@ namespace uml
 	<p>From package UML::Classification.</p>
 	*/
 	
-	class Operation:virtual public BehavioralFeature,virtual public ParameterableElement,virtual public TemplateableElement
+	class Operation: virtual public BehavioralFeature, virtual public ParameterableElement, virtual public TemplateableElement
 	{
 		public:
  			Operation(const Operation &) {}
@@ -94,29 +87,22 @@ namespace uml
 		protected:
 			Operation(){}
 
-
 			//Additional constructors for the containments back reference
-
 			Operation(std::weak_ptr<uml::Class > par_class);
 
 			//Additional constructors for the containments back reference
-
 			Operation(std::weak_ptr<uml::DataType > par_datatype);
 
 			//Additional constructors for the containments back reference
-
 			Operation(std::weak_ptr<uml::Interface > par_interface);
 
 			//Additional constructors for the containments back reference
-
 			Operation(std::weak_ptr<uml::Namespace > par_namespace);
 
 			//Additional constructors for the containments back reference
-
 			Operation(std::weak_ptr<uml::Element > par_owner);
 
 			//Additional constructors for the containments back reference
-
 			Operation(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
 
 		public:
@@ -217,47 +203,34 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual bool  getIsOrdered() const = 0;
-			
+			virtual bool getIsOrdered() const = 0;/*!
+			Specifies whether an execution of the BehavioralFeature leaves the state of the system unchanged (isQuery=true) or whether side effects may occur (isQuery=false).
+			<p>From package UML::Classification.</p>
+			*/
+			 
+			virtual bool getIsQuery() const = 0;
 			
 			/*!
 			Specifies whether an execution of the BehavioralFeature leaves the state of the system unchanged (isQuery=true) or whether side effects may occur (isQuery=false).
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual bool  getIsQuery() const = 0;
-			
-			/*!
-			Specifies whether an execution of the BehavioralFeature leaves the state of the system unchanged (isQuery=true) or whether side effects may occur (isQuery=false).
-			<p>From package UML::Classification.</p>
-			*/
-			 
-			virtual void setIsQuery (bool  _isQuery)= 0; 
-			/*!
+			virtual void setIsQuery (bool _isQuery)= 0;/*!
 			Specifies whether the return parameter is unique or not, if present. This information is derived from the return result for this Operation.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual bool  getIsUnique() const = 0;
-			
-			
-			/*!
+			virtual bool getIsUnique() const = 0;/*!
 			Specifies the lower multiplicity of the return parameter, if present. This information is derived from the return result for this Operation.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual int  getLower() const = 0;
-			
-			
-			/*!
+			virtual int getLower() const = 0;/*!
 			The upper multiplicity of the return parameter, if present. This information is derived from the return result for this Operation.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual int  getUpper() const = 0;
-			
-			
-			
+			virtual int getUpper() const = 0;
 			//*********************************
 			// Reference
 			//*********************************
@@ -360,31 +333,31 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			bool  m_isOrdered = false;
+			bool m_isOrdered = false;
 			/*!
 			Specifies whether an execution of the BehavioralFeature leaves the state of the system unchanged (isQuery=true) or whether side effects may occur (isQuery=false).
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			bool  m_isQuery = false;
+			bool m_isQuery = false;
 			/*!
 			Specifies whether the return parameter is unique or not, if present. This information is derived from the return result for this Operation.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			bool  m_isUnique = true;
+			bool m_isUnique = true;
 			/*!
 			Specifies the lower multiplicity of the return parameter, if present. This information is derived from the return result for this Operation.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			int  m_lower = 1;
+			int m_lower = 1;
 			/*!
 			The upper multiplicity of the return parameter, if present. This information is derived from the return result for this Operation.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			int  m_upper = 1;
+			int m_upper = 1;
 			
 			
 			//*********************************
@@ -485,7 +458,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

@@ -9,7 +9,6 @@
 
 //*********************************
 // generated Includes
-
 //Model includes
 #include "../ObjectFlow.hpp"
 
@@ -126,28 +125,26 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			 
-			virtual bool  getIsMulticast() const ;
+			virtual bool getIsMulticast() const ;
 			
 			/*!
 			Indicates whether the objects in the ObjectFlow are passed by multicasting.
 			<p>From package UML::Activities.</p>
 			*/
 			 
-			virtual void setIsMulticast (bool  _isMulticast); 
-			/*!
+			virtual void setIsMulticast (bool _isMulticast);/*!
 			Indicates whether the objects in the ObjectFlow are gathered from respondents to multicasting.
 			<p>From package UML::Activities.</p>
 			*/
 			 
-			virtual bool  getIsMultireceive() const ;
+			virtual bool getIsMultireceive() const ;
 			
 			/*!
 			Indicates whether the objects in the ObjectFlow are gathered from respondents to multicasting.
 			<p>From package UML::Activities.</p>
 			*/
 			 
-			virtual void setIsMultireceive (bool  _isMultireceive); 
-			
+			virtual void setIsMultireceive (bool _isMultireceive);
 			
 			//*********************************
 			// Reference
@@ -220,7 +217,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

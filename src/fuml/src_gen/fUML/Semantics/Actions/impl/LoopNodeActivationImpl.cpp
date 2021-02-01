@@ -33,23 +33,14 @@
 #include <exception> // used in Persistence
 
 #include "uml/Action.hpp"
-
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
-
 #include "uml/ActivityNode.hpp"
-
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
-
 #include "fUML/Semantics/Actions/InputPinActivation.hpp"
-
 #include "fUML/Semantics/Actions/OutputPinActivation.hpp"
-
 #include "fUML/Semantics/Actions/PinActivation.hpp"
-
 #include "fUML/Semantics/Actions/StructuredActivityNodeActivation.hpp"
-
 #include "fUML/Semantics/Activities/Token.hpp"
-
 #include "fUML/Semantics/Actions/Values.hpp"
 
 //Factories an Package includes
@@ -179,7 +170,7 @@ std::shared_ptr<ecore::EClass> LoopNodeActivationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<org.eclipse.uml2.uml.ActivityNode> LoopNodeActivationImpl::makeLoopVariableList()
+std::shared_ptr<uml::ActivityNode> LoopNodeActivationImpl::makeLoopVariableList()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -274,17 +265,6 @@ Any LoopNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType) con
 		case fUML::Semantics::Actions::ActionsPackage::LOOPNODEACTIVATION_ATTRIBUTE_BODYOUTPUTLISTS:
 		{
 			return eAny(getBodyOutputLists()); //7812			
-			/*
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<fUML::Semantics::Actions::Values>::iterator iter = m_bodyOutputLists->begin();
-			Bag<fUML::Semantics::Actions::Values>::iterator end = m_bodyOutputLists->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //7812
-			*/
 		}
 	}
 	return StructuredActivityNodeActivationImpl::eGet(featureID, resolve, coreType);
@@ -325,7 +305,7 @@ bool LoopNodeActivationImpl::eSet(int featureID, Any newValue)
 				}
 				iterBodyOutputLists++;
 			}
-
+ 
 			iterBodyOutputLists = bodyOutputListsList->begin();
 			endBodyOutputLists = bodyOutputListsList->end();
 			while (iterBodyOutputLists != endBodyOutputLists)
@@ -403,7 +383,7 @@ void LoopNodeActivationImpl::loadNode(std::string nodeName, std::shared_ptr<pers
 	StructuredActivityNodeActivationImpl::loadNode(nodeName, loadHandler);
 }
 
-void LoopNodeActivationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void LoopNodeActivationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	StructuredActivityNodeActivationImpl::resolveReferences(featureID, references);
 }

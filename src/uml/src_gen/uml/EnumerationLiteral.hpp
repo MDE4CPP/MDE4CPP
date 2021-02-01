@@ -7,21 +7,17 @@
 #ifndef UML_ENUMERATIONLITERAL_HPP
 #define UML_ENUMERATIONLITERAL_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T, class ... U> class Subset;
 
 
-
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -59,7 +55,6 @@ namespace uml
 #include "uml/VisibilityKind.hpp"
 
 
-//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -69,7 +64,7 @@ namespace uml
 	<p>From package UML::SimpleClassifiers.</p>
 	*/
 	
-	class EnumerationLiteral:virtual public InstanceSpecification
+	class EnumerationLiteral: virtual public InstanceSpecification
 	{
 		public:
  			EnumerationLiteral(const EnumerationLiteral &) {}
@@ -78,25 +73,19 @@ namespace uml
 		protected:
 			EnumerationLiteral(){}
 
-
 			//Additional constructors for the containments back reference
-
 			EnumerationLiteral(std::weak_ptr<uml::Enumeration > par_enumeration);
 
 			//Additional constructors for the containments back reference
-
 			EnumerationLiteral(std::weak_ptr<uml::Namespace > par_namespace);
 
 			//Additional constructors for the containments back reference
-
 			EnumerationLiteral(std::weak_ptr<uml::Element > par_owner);
 
 			//Additional constructors for the containments back reference
-
 			EnumerationLiteral(std::weak_ptr<uml::Package > par_owningPackage);
 
 			//Additional constructors for the containments back reference
-
 			EnumerationLiteral(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
 
 		public:
@@ -181,7 +170,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

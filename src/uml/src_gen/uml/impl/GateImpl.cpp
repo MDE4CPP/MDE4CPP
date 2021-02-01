@@ -35,21 +35,13 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/Gate.hpp"
-
 #include "uml/InteractionOperand.hpp"
-
 #include "uml/Message.hpp"
-
 #include "uml/MessageEnd.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/StringExpression.hpp"
 
 //Factories an Package includes
@@ -349,7 +341,7 @@ void GateImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inter
 	MessageEndImpl::loadNode(nodeName, loadHandler);
 }
 
-void GateImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void GateImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	MessageEndImpl::resolveReferences(featureID, references);
 }

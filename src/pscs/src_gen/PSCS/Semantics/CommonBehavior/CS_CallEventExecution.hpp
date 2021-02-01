@@ -7,20 +7,16 @@
 #ifndef PSCS_SEMANTICS_COMMONBEHAVIOR_CS_CALLEVENTEXECUTION_HPP
 #define PSCS_SEMANTICS_COMMONBEHAVIOR_CS_CALLEVENTEXECUTION_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
-
 
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -66,15 +62,12 @@ namespace uml
 // enum includes
 
 
-//Includes from codegen annotation
-#include "PSCS/Semantics/CommonBehavior/CS_EventOccurrence.hpp"
-#include "fUML/FUMLFactory.hpp"
 
 //*********************************
 namespace PSCS::Semantics::CommonBehavior 
 {
 	
-	class CS_CallEventExecution:virtual public fUML::Semantics::CommonBehavior::CallEventExecution
+	class CS_CallEventExecution: virtual public fUML::Semantics::CommonBehavior::CallEventExecution
 	{
 		public:
  			CS_CallEventExecution(const CS_CallEventExecution &) {}
@@ -82,7 +75,6 @@ namespace PSCS::Semantics::CommonBehavior
 
 		protected:
 			CS_CallEventExecution(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -143,7 +135,7 @@ namespace PSCS::Semantics::CommonBehavior
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

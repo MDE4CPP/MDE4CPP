@@ -34,15 +34,10 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/NamedElement.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/StringExpression.hpp"
 
 //Factories an Package includes
@@ -257,7 +252,7 @@ void DeployedArtifactImpl::loadNode(std::string nodeName, std::shared_ptr<persis
 	NamedElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void DeployedArtifactImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void DeployedArtifactImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	NamedElementImpl::resolveReferences(featureID, references);
 }

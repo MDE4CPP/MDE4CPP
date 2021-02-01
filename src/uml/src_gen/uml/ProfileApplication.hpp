@@ -7,21 +7,17 @@
 #ifndef UML_PROFILEAPPLICATION_HPP
 #define UML_PROFILEAPPLICATION_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T, class ... U> class Subset;
 
 
-
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -56,7 +52,6 @@ namespace uml
 // enum includes
 
 
-//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -66,7 +61,7 @@ namespace uml
 	<p>From package UML::Packages.</p>
 	*/
 	
-	class ProfileApplication:virtual public DirectedRelationship
+	class ProfileApplication: virtual public DirectedRelationship
 	{
 		public:
  			ProfileApplication(const ProfileApplication &) {}
@@ -75,13 +70,10 @@ namespace uml
 		protected:
 			ProfileApplication(){}
 
-
 			//Additional constructors for the containments back reference
-
 			ProfileApplication(std::weak_ptr<uml::Package > par_applyingPackage);
 
 			//Additional constructors for the containments back reference
-
 			ProfileApplication(std::weak_ptr<uml::Element > par_owner);
 
 		public:
@@ -114,15 +106,14 @@ namespace uml
 			<p>From package UML::Packages.</p>
 			*/
 			 
-			virtual bool  getIsStrict() const = 0;
+			virtual bool getIsStrict() const = 0;
 			
 			/*!
 			Specifies that the Profile filtering rules for the metaclasses of the referenced metamodel shall be strictly applied.
 			<p>From package UML::Packages.</p>
 			*/
 			 
-			virtual void setIsStrict (bool  _isStrict)= 0; 
-			
+			virtual void setIsStrict (bool _isStrict)= 0;
 			//*********************************
 			// Reference
 			//*********************************
@@ -165,7 +156,7 @@ namespace uml
 			<p>From package UML::Packages.</p>
 			*/
 			 
-			bool  m_isStrict = false;
+			bool m_isStrict = false;
 			
 			
 			//*********************************
@@ -221,7 +212,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

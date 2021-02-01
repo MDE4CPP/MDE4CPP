@@ -35,57 +35,31 @@
 #include <exception> // used in Persistence
 
 #include "uml/Artifact.hpp"
-
 #include "uml/Classifier.hpp"
-
 #include "uml/CollaborationUse.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/Constraint.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Deployment.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/ElementImport.hpp"
-
 #include "uml/Feature.hpp"
-
 #include "uml/Generalization.hpp"
-
 #include "uml/GeneralizationSet.hpp"
-
 #include "uml/Manifestation.hpp"
-
 #include "uml/NamedElement.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/Operation.hpp"
-
 #include "uml/Package.hpp"
-
 #include "uml/PackageImport.hpp"
-
 #include "uml/PackageableElement.hpp"
-
 #include "uml/Property.hpp"
-
 #include "uml/RedefinableElement.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/Substitution.hpp"
-
 #include "uml/TemplateBinding.hpp"
-
 #include "uml/TemplateParameter.hpp"
-
 #include "uml/TemplateSignature.hpp"
-
 #include "uml/UseCase.hpp"
 
 //Factories an Package includes
@@ -391,12 +365,12 @@ std::shared_ptr<ecore::EClass> DeploymentSpecificationImpl::eStaticClass() const
 /*
 Getter & Setter for attribute deploymentLocation
 */
-std::string  DeploymentSpecificationImpl::getDeploymentLocation() const 
+std::string DeploymentSpecificationImpl::getDeploymentLocation() const 
 {
 	return m_deploymentLocation;
 }
 
-void DeploymentSpecificationImpl::setDeploymentLocation(std::string  _deploymentLocation)
+void DeploymentSpecificationImpl::setDeploymentLocation(std::string _deploymentLocation)
 {
 	m_deploymentLocation = _deploymentLocation;
 } 
@@ -406,12 +380,12 @@ void DeploymentSpecificationImpl::setDeploymentLocation(std::string  _deployment
 /*
 Getter & Setter for attribute executionLocation
 */
-std::string  DeploymentSpecificationImpl::getExecutionLocation() const 
+std::string DeploymentSpecificationImpl::getExecutionLocation() const 
 {
 	return m_executionLocation;
 }
 
-void DeploymentSpecificationImpl::setExecutionLocation(std::string  _executionLocation)
+void DeploymentSpecificationImpl::setExecutionLocation(std::string _executionLocation)
 {
 	m_executionLocation = _executionLocation;
 } 
@@ -739,7 +713,7 @@ void DeploymentSpecificationImpl::loadNode(std::string nodeName, std::shared_ptr
 	ArtifactImpl::loadNode(nodeName, loadHandler);
 }
 
-void DeploymentSpecificationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void DeploymentSpecificationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{

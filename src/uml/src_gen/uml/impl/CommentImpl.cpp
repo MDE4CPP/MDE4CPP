@@ -33,7 +33,6 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
 #include "uml/Element.hpp"
 
 //Factories an Package includes
@@ -115,12 +114,12 @@ std::shared_ptr<ecore::EClass> CommentImpl::eStaticClass() const
 /*
 Getter & Setter for attribute body
 */
-std::string  CommentImpl::getBody() const 
+std::string CommentImpl::getBody() const 
 {
 	return m_body;
 }
 
-void CommentImpl::setBody(std::string  _body)
+void CommentImpl::setBody(std::string _body)
 {
 	m_body = _body;
 } 
@@ -246,7 +245,7 @@ bool CommentImpl::eSet(int featureID, Any newValue)
 				}
 				iterAnnotatedElement++;
 			}
-
+ 
 			iterAnnotatedElement = annotatedElementList->begin();
 			endAnnotatedElement = annotatedElementList->end();
 			while (iterAnnotatedElement != endAnnotatedElement)
@@ -332,7 +331,7 @@ void CommentImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::in
 	ElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void CommentImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void CommentImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -378,7 +377,7 @@ void CommentImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 		}
 
 	// Add references
-		saveHandler->addReferences<uml::Element>("annotatedElement", this->getAnnotatedElement());	
+		saveHandler->addReferences<uml::Element>("annotatedElement", this->getAnnotatedElement());
 	}
 	catch (std::exception& e)
 	{

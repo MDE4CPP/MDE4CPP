@@ -38,15 +38,10 @@
 #include <exception> // used in Persistence
 
 #include "uml/Class.hpp"
-
 #include "fUML/Semantics/CommonBehavior/ClassifierBehaviorExecution.hpp"
-
 #include "fUML/Semantics/CommonBehavior/EventAccepter.hpp"
-
 #include "fUML/Semantics/StructuredClassifiers/Object.hpp"
-
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
-
 #include "fUML/Semantics/SimpleClassifiers/SignalInstance.hpp"
 
 //Factories an Package includes
@@ -187,7 +182,7 @@ void ObjectActivationImpl::send(std::shared_ptr<fUML::Semantics::SimpleClassifie
 	//end of body
 }
 
-void ObjectActivationImpl::startBehavior(std::shared_ptr<org.eclipse.uml2.uml.Class> classifier,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > inputs)
+void ObjectActivationImpl::startBehavior(std::shared_ptr<uml::Class> classifier,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> inputs)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -369,49 +364,16 @@ Any ObjectActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::OBJECTACTIVATION_ATTRIBUTE_CLASSIFIERBEHAVIOREXECUTIONS:
 		{
 			return eAny(getClassifierBehaviorExecutions()); //813			
-			/*
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution>::iterator iter = m_classifierBehaviorExecutions->begin();
-			Bag<fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution>::iterator end = m_classifierBehaviorExecutions->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //813
-			*/
 		}
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::OBJECTACTIVATION_ATTRIBUTE_EVENTPOOL:
 		{
 			return eAny(getEventPool()); //811			
-			/*
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<fUML::Semantics::SimpleClassifiers::SignalInstance>::iterator iter = m_eventPool->begin();
-			Bag<fUML::Semantics::SimpleClassifiers::SignalInstance>::iterator end = m_eventPool->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //811
-			*/
 		}
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::OBJECTACTIVATION_ATTRIBUTE_OBJECT:
 			return eAny(getObject()); //812
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::OBJECTACTIVATION_ATTRIBUTE_WAITINGEVENTACCEPTERS:
 		{
 			return eAny(getWaitingEventAccepters()); //810			
-			/*
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<fUML::Semantics::CommonBehavior::EventAccepter>::iterator iter = m_waitingEventAccepters->begin();
-			Bag<fUML::Semantics::CommonBehavior::EventAccepter>::iterator end = m_waitingEventAccepters->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //810
-			*/
 		}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
@@ -458,7 +420,7 @@ bool ObjectActivationImpl::eSet(int featureID, Any newValue)
 				}
 				iterClassifierBehaviorExecutions++;
 			}
-
+ 
 			iterClassifierBehaviorExecutions = classifierBehaviorExecutionsList->begin();
 			endClassifierBehaviorExecutions = classifierBehaviorExecutionsList->end();
 			while (iterClassifierBehaviorExecutions != endClassifierBehaviorExecutions)
@@ -494,7 +456,7 @@ bool ObjectActivationImpl::eSet(int featureID, Any newValue)
 				}
 				iterEventPool++;
 			}
-
+ 
 			iterEventPool = eventPoolList->begin();
 			endEventPool = eventPoolList->end();
 			while (iterEventPool != endEventPool)
@@ -538,7 +500,7 @@ bool ObjectActivationImpl::eSet(int featureID, Any newValue)
 				}
 				iterWaitingEventAccepters++;
 			}
-
+ 
 			iterWaitingEventAccepters = waitingEventAcceptersList->begin();
 			endWaitingEventAccepters = waitingEventAcceptersList->end();
 			while (iterWaitingEventAccepters != endWaitingEventAccepters)
@@ -658,7 +620,7 @@ void ObjectActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persis
 	//load BasePackage Nodes
 }
 
-void ObjectActivationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ObjectActivationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -707,8 +669,8 @@ void ObjectActivationImpl::saveContent(std::shared_ptr<persistence::interfaces::
 		std::shared_ptr<fUML::Semantics::CommonBehavior::CommonBehaviorPackage> package = fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance();
 
 	// Add references
-		saveHandler->addReference("object", this->getObject());		 
-		saveHandler->addReferences<fUML::Semantics::CommonBehavior::EventAccepter>("waitingEventAccepters", this->getWaitingEventAccepters());	
+		saveHandler->addReference("object", this->getObject()); 
+		saveHandler->addReferences<fUML::Semantics::CommonBehavior::EventAccepter>("waitingEventAccepters", this->getWaitingEventAccepters());
 
 		//
 		// Add new tags (from references)

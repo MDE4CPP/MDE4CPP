@@ -35,19 +35,12 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/Event.hpp"
-
 #include "uml/NamedElement.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/Port.hpp"
-
 #include "uml/StringExpression.hpp"
 
 //Factories an Package includes
@@ -309,7 +302,7 @@ bool TriggerImpl::eSet(int featureID, Any newValue)
 				}
 				iterPort++;
 			}
-
+ 
 			iterPort = portList->begin();
 			endPort = portList->end();
 			while (iterPort != endPort)
@@ -386,7 +379,7 @@ void TriggerImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::in
 	NamedElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void TriggerImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void TriggerImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -442,8 +435,8 @@ void TriggerImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	// Add references
-		saveHandler->addReference("event", this->getEvent());		 
-		saveHandler->addReferences<uml::Port>("port", this->getPort());	
+		saveHandler->addReference("event", this->getEvent()); 
+		saveHandler->addReferences<uml::Port>("port", this->getPort());
 	}
 	catch (std::exception& e)
 	{

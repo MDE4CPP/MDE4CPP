@@ -33,9 +33,7 @@
 #include <exception> // used in Persistence
 
 #include "ecore/EAnnotation.hpp"
-
 #include "ecore/EModelElement.hpp"
-
 #include "ecore/EObject.hpp"
 
 //Factories an Package includes
@@ -142,14 +140,12 @@ std::shared_ptr<EClass> EAnnotationImpl::eStaticClass() const
 /*
 Getter & Setter for attribute details
 */
- std::shared_ptr<std::map <  std::string ,  std::string >> 
- EAnnotationImpl::getDetails() const 
+std::shared_ptr<std::map <  std::string ,  std::string >> EAnnotationImpl::getDetails() const 
 {
 	return m_details;
 }
 
-void EAnnotationImpl::setDetails( std::shared_ptr<std::map <  std::string ,  std::string >> 
- _details)
+void EAnnotationImpl::setDetails(std::shared_ptr<std::map <  std::string ,  std::string >> _details)
 {
 	m_details = _details;
 } 
@@ -159,12 +155,12 @@ void EAnnotationImpl::setDetails( std::shared_ptr<std::map <  std::string ,  std
 /*
 Getter & Setter for attribute source
 */
-std::string  EAnnotationImpl::getSource() const 
+std::string EAnnotationImpl::getSource() const 
 {
 	return m_source;
 }
 
-void EAnnotationImpl::setSource(std::string  _source)
+void EAnnotationImpl::setSource(std::string _source)
 {
 	m_source = _source;
 } 
@@ -353,7 +349,7 @@ bool EAnnotationImpl::eSet(int featureID, Any newValue)
 				}
 				iterContents++;
 			}
-
+ 
 			iterContents = contentsList->begin();
 			endContents = contentsList->end();
 			while (iterContents != endContents)
@@ -405,7 +401,7 @@ bool EAnnotationImpl::eSet(int featureID, Any newValue)
 				}
 				iterReferences++;
 			}
-
+ 
 			iterReferences = referencesList->begin();
 			endReferences = referencesList->end();
 			while (iterReferences != endReferences)
@@ -518,7 +514,7 @@ void EAnnotationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence
 	EModelElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void EAnnotationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references)
+void EAnnotationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references)
 {
 	switch(featureID)
 	{
@@ -581,7 +577,7 @@ void EAnnotationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 		}
 
 	// Add references
-		saveHandler->addReferences<ecore::EObject>("references", this->getReferences());	
+		saveHandler->addReferences<ecore::EObject>("references", this->getReferences());
 	}
 	catch (std::exception& e)
 	{

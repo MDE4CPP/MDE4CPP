@@ -33,13 +33,9 @@
 #include <exception> // used in Persistence
 
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
-
 #include "uml/ActivityNode.hpp"
-
 #include "fUML/Semantics/Activities/ActivityNodeActivation.hpp"
-
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
-
 #include "fUML/Semantics/Activities/Token.hpp"
 
 //Factories an Package includes
@@ -131,7 +127,7 @@ std::shared_ptr<ecore::EClass> ControlNodeActivationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-void ControlNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > incomingTokens)
+void ControlNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incomingTokens)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -230,7 +226,7 @@ void ControlNodeActivationImpl::loadNode(std::string nodeName, std::shared_ptr<p
 	ActivityNodeActivationImpl::loadNode(nodeName, loadHandler);
 }
 
-void ControlNodeActivationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ControlNodeActivationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	ActivityNodeActivationImpl::resolveReferences(featureID, references);
 }

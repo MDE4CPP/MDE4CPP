@@ -9,7 +9,6 @@
 
 //*********************************
 // generated Includes
-
 //Model includes
 #include "../Model.hpp"
 
@@ -77,15 +76,14 @@ namespace uml
 			<p>From package UML::Packages.</p>
 			*/
 			 
-			virtual std::string  getViewpoint() const ;
+			virtual std::string getViewpoint() const ;
 			
 			/*!
 			The name of the viewpoint that is expressed by a model (this name may refer to a profile definition).
 			<p>From package UML::Packages.</p>
 			*/
 			 
-			virtual void setViewpoint (std::string  _viewpoint); 
-			
+			virtual void setViewpoint (std::string _viewpoint);
 			
 			//*********************************
 			// Reference
@@ -135,7 +133,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

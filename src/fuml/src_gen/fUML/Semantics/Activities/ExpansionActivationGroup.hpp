@@ -7,21 +7,17 @@
 #ifndef FUML_SEMANTICS_ACTIVITIES_EXPANSIONACTIVATIONGROUP_HPP
 #define FUML_SEMANTICS_ACTIVITIES_EXPANSIONACTIVATIONGROUP_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T> class Bag; 
 
 
-
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -61,14 +57,12 @@ namespace uml
 // enum includes
 
 
-//Includes from codegen annotation
-#include "uml/ExpansionNode.hpp"
 
 //*********************************
 namespace fUML::Semantics::Activities 
 {
 	
-	class ExpansionActivationGroup:virtual public ActivityNodeActivationGroup
+	class ExpansionActivationGroup: virtual public ActivityNodeActivationGroup
 	{
 		public:
  			ExpansionActivationGroup(const ExpansionActivationGroup &) {}
@@ -76,7 +70,6 @@ namespace fUML::Semantics::Activities
 
 		protected:
 			ExpansionActivationGroup(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -91,7 +84,7 @@ namespace fUML::Semantics::Activities
 			virtual std::weak_ptr<fUML::Semantics::Activities::ActivityExecution> getActivityExecution() const = 0;
 			
 			 
-			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> getNodeActivation(std::shared_ptr<org.eclipse.uml2.uml.ActivityNode> node) = 0;
+			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> getNodeActivation(std::shared_ptr<uml::ActivityNode> node) = 0;
 			
 			 
 			virtual void resume(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> activation) = 0;
@@ -103,12 +96,10 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			 
-			virtual int  getIndex() const = 0;
+			virtual int getIndex() const = 0;
 			
 			 
-			virtual void setIndex (int  _index)= 0; 
-			
+			virtual void setIndex (int _index)= 0;
 			//*********************************
 			// Reference
 			//*********************************
@@ -137,7 +128,7 @@ namespace fUML::Semantics::Activities
 			// Attribute Members
 			//*********************************
 			 
-			int  m_index = 0;
+			int m_index = 0;
 			
 			
 			//*********************************
@@ -162,7 +153,7 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

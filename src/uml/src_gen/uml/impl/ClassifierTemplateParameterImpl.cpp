@@ -34,15 +34,10 @@
 #include <exception> // used in Persistence
 
 #include "uml/Classifier.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/ParameterableElement.hpp"
-
 #include "uml/TemplateParameter.hpp"
-
 #include "uml/TemplateSignature.hpp"
 
 //Factories an Package includes
@@ -152,12 +147,12 @@ std::shared_ptr<ecore::EClass> ClassifierTemplateParameterImpl::eStaticClass() c
 /*
 Getter & Setter for attribute allowSubstitutable
 */
-bool  ClassifierTemplateParameterImpl::getAllowSubstitutable() const 
+bool ClassifierTemplateParameterImpl::getAllowSubstitutable() const 
 {
 	return m_allowSubstitutable;
 }
 
-void ClassifierTemplateParameterImpl::setAllowSubstitutable(bool  _allowSubstitutable)
+void ClassifierTemplateParameterImpl::setAllowSubstitutable(bool _allowSubstitutable)
 {
 	m_allowSubstitutable = _allowSubstitutable;
 } 
@@ -335,7 +330,7 @@ bool ClassifierTemplateParameterImpl::eSet(int featureID, Any newValue)
 				}
 				iterConstrainingClassifier++;
 			}
-
+ 
 			iterConstrainingClassifier = constrainingClassifierList->begin();
 			endConstrainingClassifier = constrainingClassifierList->end();
 			while (iterConstrainingClassifier != endConstrainingClassifier)
@@ -414,7 +409,7 @@ void ClassifierTemplateParameterImpl::loadNode(std::string nodeName, std::shared
 	TemplateParameterImpl::loadNode(nodeName, loadHandler);
 }
 
-void ClassifierTemplateParameterImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ClassifierTemplateParameterImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -463,7 +458,7 @@ void ClassifierTemplateParameterImpl::saveContent(std::shared_ptr<persistence::i
 		}
 
 	// Add references
-		saveHandler->addReferences<uml::Classifier>("constrainingClassifier", this->getConstrainingClassifier());	
+		saveHandler->addReferences<uml::Classifier>("constrainingClassifier", this->getConstrainingClassifier());
 	}
 	catch (std::exception& e)
 	{

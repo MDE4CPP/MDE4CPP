@@ -35,55 +35,30 @@
 #include <exception> // used in Persistence
 
 #include "uml/Behavior.hpp"
-
 #include "uml/BehavioralFeature.hpp"
-
 #include "uml/Class.hpp"
-
 #include "uml/Classifier.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/Constraint.hpp"
-
 #include "uml/DataType.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/ElementImport.hpp"
-
 #include "uml/Interface.hpp"
-
 #include "uml/NamedElement.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/Operation.hpp"
-
 #include "uml/PackageImport.hpp"
-
 #include "uml/PackageableElement.hpp"
-
 #include "uml/Parameter.hpp"
-
 #include "uml/ParameterSet.hpp"
-
 #include "uml/ParameterableElement.hpp"
-
 #include "uml/RedefinableElement.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/TemplateBinding.hpp"
-
 #include "uml/TemplateParameter.hpp"
-
 #include "uml/TemplateSignature.hpp"
-
 #include "uml/TemplateableElement.hpp"
-
 #include "uml/Type.hpp"
 
 //Factories an Package includes
@@ -349,7 +324,7 @@ std::shared_ptr<ecore::EClass> OperationImpl::eStaticClass() const
 /*
 Getter & Setter for attribute isOrdered
 */
-bool  OperationImpl::getIsOrdered() const 
+bool OperationImpl::getIsOrdered() const 
 {
 	return m_isOrdered;
 }
@@ -361,12 +336,12 @@ bool  OperationImpl::getIsOrdered() const
 /*
 Getter & Setter for attribute isQuery
 */
-bool  OperationImpl::getIsQuery() const 
+bool OperationImpl::getIsQuery() const 
 {
 	return m_isQuery;
 }
 
-void OperationImpl::setIsQuery(bool  _isQuery)
+void OperationImpl::setIsQuery(bool _isQuery)
 {
 	m_isQuery = _isQuery;
 } 
@@ -376,7 +351,7 @@ void OperationImpl::setIsQuery(bool  _isQuery)
 /*
 Getter & Setter for attribute isUnique
 */
-bool  OperationImpl::getIsUnique() const 
+bool OperationImpl::getIsUnique() const 
 {
 	return m_isUnique;
 }
@@ -388,7 +363,7 @@ bool  OperationImpl::getIsUnique() const
 /*
 Getter & Setter for attribute lower
 */
-int  OperationImpl::getLower() const 
+int OperationImpl::getLower() const 
 {
 	return m_lower;
 }
@@ -400,7 +375,7 @@ int  OperationImpl::getLower() const
 /*
 Getter & Setter for attribute upper
 */
-int  OperationImpl::getUpper() const 
+int OperationImpl::getUpper() const 
 {
 	return m_upper;
 }
@@ -1029,7 +1004,7 @@ bool OperationImpl::eSet(int featureID, Any newValue)
 				}
 				iterPostcondition++;
 			}
-
+ 
 			iterPostcondition = postconditionList->begin();
 			endPostcondition = postconditionList->end();
 			while (iterPostcondition != endPostcondition)
@@ -1065,7 +1040,7 @@ bool OperationImpl::eSet(int featureID, Any newValue)
 				}
 				iterPrecondition++;
 			}
-
+ 
 			iterPrecondition = preconditionList->begin();
 			endPrecondition = preconditionList->end();
 			while (iterPrecondition != endPrecondition)
@@ -1101,7 +1076,7 @@ bool OperationImpl::eSet(int featureID, Any newValue)
 				}
 				iterRedefinedOperation++;
 			}
-
+ 
 			iterRedefinedOperation = redefinedOperationList->begin();
 			endRedefinedOperation = redefinedOperationList->end();
 			while (iterRedefinedOperation != endRedefinedOperation)
@@ -1217,7 +1192,7 @@ void OperationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::
 	TemplateableElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void OperationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void OperationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -1356,10 +1331,10 @@ void OperationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 		}
 
 	// Add references
-		saveHandler->addReference("bodyCondition", this->getBodyCondition());		 
-		saveHandler->addReferences<uml::Constraint>("postcondition", this->getPostcondition());	
-		saveHandler->addReferences<uml::Constraint>("precondition", this->getPrecondition());	
-		saveHandler->addReferences<uml::Operation>("redefinedOperation", this->getRedefinedOperation());	
+		saveHandler->addReference("bodyCondition", this->getBodyCondition()); 
+		saveHandler->addReferences<uml::Constraint>("postcondition", this->getPostcondition());
+		saveHandler->addReferences<uml::Constraint>("precondition", this->getPrecondition());
+		saveHandler->addReferences<uml::Operation>("redefinedOperation", this->getRedefinedOperation());
 	}
 	catch (std::exception& e)
 	{

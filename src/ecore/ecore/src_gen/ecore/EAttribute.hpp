@@ -7,20 +7,16 @@
 #ifndef ECORE_EATTRIBUTE_HPP
 #define ECORE_EATTRIBUTE_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
-
 
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -51,13 +47,12 @@ namespace ecore
 // enum includes
 
 
-//Includes from codegen annotation
 
 //*********************************
 namespace ecore 
 {
 	
-	class EAttribute:virtual public EStructuralFeature
+	class EAttribute: virtual public EStructuralFeature
 	{
 		public:
  			EAttribute(const EAttribute &) {}
@@ -65,7 +60,6 @@ namespace ecore
 
 		protected:
 			EAttribute(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -80,12 +74,10 @@ namespace ecore
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			 
-			virtual bool  isID() const = 0;
+			virtual bool isID() const = 0;
 			
 			 
-			virtual void setID (bool  _iD)= 0; 
-			
+			virtual void setID (bool _iD)= 0;
 			//*********************************
 			// Reference
 			//*********************************
@@ -100,7 +92,7 @@ namespace ecore
 			// Attribute Members
 			//*********************************
 			 
-			bool  m_iD = false;
+			bool m_iD = false;
 			
 			
 			//*********************************
@@ -123,7 +115,7 @@ namespace ecore
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

@@ -33,9 +33,7 @@
 #include <exception> // used in Persistence
 
 #include "fUML/Semantics/Activities/ActivityNodeActivation.hpp"
-
 #include "fUML/Semantics/Activities/Token.hpp"
-
 #include "fUML/Semantics/Values/Value.hpp"
 
 //Factories an Package includes
@@ -108,12 +106,12 @@ std::shared_ptr<ecore::EClass> ForkedTokenImpl::eStaticClass() const
 /*
 Getter & Setter for attribute baseTokenIsWithdrawn
 */
-bool  ForkedTokenImpl::isBaseTokenIsWithdrawn() const 
+bool ForkedTokenImpl::isBaseTokenIsWithdrawn() const 
 {
 	return m_baseTokenIsWithdrawn;
 }
 
-void ForkedTokenImpl::setBaseTokenIsWithdrawn(bool  _baseTokenIsWithdrawn)
+void ForkedTokenImpl::setBaseTokenIsWithdrawn(bool _baseTokenIsWithdrawn)
 {
 	m_baseTokenIsWithdrawn = _baseTokenIsWithdrawn;
 } 
@@ -123,12 +121,12 @@ void ForkedTokenImpl::setBaseTokenIsWithdrawn(bool  _baseTokenIsWithdrawn)
 /*
 Getter & Setter for attribute remainingOffersCount
 */
-int  ForkedTokenImpl::getRemainingOffersCount() const 
+int ForkedTokenImpl::getRemainingOffersCount() const 
 {
 	return m_remainingOffersCount;
 }
 
-void ForkedTokenImpl::setRemainingOffersCount(int  _remainingOffersCount)
+void ForkedTokenImpl::setRemainingOffersCount(int _remainingOffersCount)
 {
 	m_remainingOffersCount = _remainingOffersCount;
 } 
@@ -367,7 +365,7 @@ void ForkedTokenImpl::loadNode(std::string nodeName, std::shared_ptr<persistence
 	TokenImpl::loadNode(nodeName, loadHandler);
 }
 
-void ForkedTokenImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ForkedTokenImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -413,7 +411,7 @@ void ForkedTokenImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 		}
 
 	// Add references
-		saveHandler->addReference("baseToken", this->getBaseToken());		 
+		saveHandler->addReference("baseToken", this->getBaseToken()); 
 	}
 	catch (std::exception& e)
 	{

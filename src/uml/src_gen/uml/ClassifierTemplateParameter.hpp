@@ -8,23 +8,19 @@
 #define UML_CLASSIFIERTEMPLATEPARAMETER_HPP
 
 #include <map>
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T> class Bag; 
-
 
 class AnyObject;
 typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -54,7 +50,6 @@ namespace uml
 // enum includes
 
 
-//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -64,7 +59,7 @@ namespace uml
 	<p>From package UML::Classification.</p>
 	*/
 	
-	class ClassifierTemplateParameter:virtual public TemplateParameter
+	class ClassifierTemplateParameter: virtual public TemplateParameter
 	{
 		public:
  			ClassifierTemplateParameter(const ClassifierTemplateParameter &) {}
@@ -72,7 +67,6 @@ namespace uml
 
 		protected:
 			ClassifierTemplateParameter(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -142,15 +136,14 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual bool  getAllowSubstitutable() const = 0;
+			virtual bool getAllowSubstitutable() const = 0;
 			
 			/*!
 			Constrains the required relationship between an actual parameter and the parameteredElement for this formal parameter.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual void setAllowSubstitutable (bool  _allowSubstitutable)= 0; 
-			
+			virtual void setAllowSubstitutable (bool _allowSubstitutable)= 0;
 			//*********************************
 			// Reference
 			//*********************************
@@ -173,7 +166,7 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			bool  m_allowSubstitutable = true;
+			bool m_allowSubstitutable = true;
 			
 			
 			//*********************************
@@ -209,7 +202,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

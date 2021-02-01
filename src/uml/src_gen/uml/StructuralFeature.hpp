@@ -7,20 +7,16 @@
 #ifndef UML_STRUCTURALFEATURE_HPP
 #define UML_STRUCTURALFEATURE_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
-
 
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -49,16 +45,13 @@ namespace uml
 
 // base class includes
 #include "uml/Feature.hpp"
-
 #include "uml/MultiplicityElement.hpp"
-
 #include "uml/TypedElement.hpp"
 
 // enum includes
 #include "uml/VisibilityKind.hpp"
 
 
-//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -68,7 +61,7 @@ namespace uml
 	<p>From package UML::Classification.</p>
 	*/
 	
-	class StructuralFeature:virtual public Feature,virtual public MultiplicityElement,virtual public TypedElement
+	class StructuralFeature: virtual public Feature, virtual public MultiplicityElement, virtual public TypedElement
 	{
 		public:
  			StructuralFeature(const StructuralFeature &) {}
@@ -76,7 +69,6 @@ namespace uml
 
 		protected:
 			StructuralFeature(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -96,15 +88,14 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual bool  getIsReadOnly() const = 0;
+			virtual bool getIsReadOnly() const = 0;
 			
 			/*!
 			If isReadOnly is true, the StructuralFeature may not be written to after initialization.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual void setIsReadOnly (bool  _isReadOnly)= 0; 
-			
+			virtual void setIsReadOnly (bool _isReadOnly)= 0;
 			//*********************************
 			// Reference
 			//*********************************
@@ -119,7 +110,7 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			bool  m_isReadOnly = false;
+			bool m_isReadOnly = false;
 			
 			
 			//*********************************
@@ -150,7 +141,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

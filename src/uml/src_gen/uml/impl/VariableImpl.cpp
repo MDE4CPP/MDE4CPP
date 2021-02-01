@@ -34,31 +34,18 @@
 #include <exception> // used in Persistence
 
 #include "uml/Action.hpp"
-
 #include "uml/Activity.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/ConnectableElement.hpp"
-
 #include "uml/ConnectorEnd.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/MultiplicityElement.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/StructuredActivityNode.hpp"
-
 #include "uml/TemplateParameter.hpp"
-
 #include "uml/Type.hpp"
-
 #include "uml/ValueSpecification.hpp"
 
 //Factories an Package includes
@@ -432,7 +419,7 @@ void VariableImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::i
 	MultiplicityElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void VariableImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void VariableImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{

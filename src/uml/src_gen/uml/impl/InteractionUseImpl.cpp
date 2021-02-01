@@ -35,29 +35,17 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/Gate.hpp"
-
 #include "uml/GeneralOrdering.hpp"
-
 #include "uml/Interaction.hpp"
-
 #include "uml/InteractionFragment.hpp"
-
 #include "uml/InteractionOperand.hpp"
-
 #include "uml/Lifeline.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/Property.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/ValueSpecification.hpp"
 
 //Factories an Package includes
@@ -449,32 +437,10 @@ Any InteractionUseImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::INTERACTIONUSE_ATTRIBUTE_ACTUALGATE:
 		{
 			return eAny(getActualGate()); //12413			
-			/*
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Gate>::iterator iter = m_actualGate->begin();
-			Bag<uml::Gate>::iterator end = m_actualGate->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //12413
-			*/
 		}
 		case uml::umlPackage::INTERACTIONUSE_ATTRIBUTE_ARGUMENT:
 		{
 			return eAny(getArgument()); //12414			
-			/*
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ValueSpecification>::iterator iter = m_argument->begin();
-			Bag<uml::ValueSpecification>::iterator end = m_argument->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //12414
-			*/
 		}
 		case uml::umlPackage::INTERACTIONUSE_ATTRIBUTE_REFERSTO:
 			return eAny(getRefersTo()); //12415
@@ -529,7 +495,7 @@ bool InteractionUseImpl::eSet(int featureID, Any newValue)
 				}
 				iterActualGate++;
 			}
-
+ 
 			iterActualGate = actualGateList->begin();
 			endActualGate = actualGateList->end();
 			while (iterActualGate != endActualGate)
@@ -565,7 +531,7 @@ bool InteractionUseImpl::eSet(int featureID, Any newValue)
 				}
 				iterArgument++;
 			}
-
+ 
 			iterArgument = argumentList->begin();
 			endArgument = argumentList->end();
 			while (iterArgument != endArgument)
@@ -728,7 +694,7 @@ void InteractionUseImpl::loadNode(std::string nodeName, std::shared_ptr<persiste
 	InteractionFragmentImpl::loadNode(nodeName, loadHandler);
 }
 
-void InteractionUseImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void InteractionUseImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -803,8 +769,8 @@ void InteractionUseImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 		}
 
 	// Add references
-		saveHandler->addReference("refersTo", this->getRefersTo());		 
-		saveHandler->addReference("returnValueRecipient", this->getReturnValueRecipient());		 
+		saveHandler->addReference("refersTo", this->getRefersTo()); 
+		saveHandler->addReference("returnValueRecipient", this->getReturnValueRecipient()); 
 	}
 	catch (std::exception& e)
 	{

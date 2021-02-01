@@ -35,35 +35,20 @@
 #include <exception> // used in Persistence
 
 #include "uml/Activity.hpp"
-
 #include "uml/ActivityEdge.hpp"
-
 #include "uml/ActivityGroup.hpp"
-
 #include "uml/ActivityNode.hpp"
-
 #include "uml/ActivityPartition.hpp"
-
 #include "uml/Behavior.hpp"
-
 #include "uml/Classifier.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/InterruptibleActivityRegion.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/RedefinableElement.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/StructuredActivityNode.hpp"
-
 #include "uml/ValueSpecification.hpp"
 
 //Factories an Package includes
@@ -236,12 +221,12 @@ std::shared_ptr<ecore::EClass> ObjectFlowImpl::eStaticClass() const
 /*
 Getter & Setter for attribute isMulticast
 */
-bool  ObjectFlowImpl::getIsMulticast() const 
+bool ObjectFlowImpl::getIsMulticast() const 
 {
 	return m_isMulticast;
 }
 
-void ObjectFlowImpl::setIsMulticast(bool  _isMulticast)
+void ObjectFlowImpl::setIsMulticast(bool _isMulticast)
 {
 	m_isMulticast = _isMulticast;
 } 
@@ -251,12 +236,12 @@ void ObjectFlowImpl::setIsMulticast(bool  _isMulticast)
 /*
 Getter & Setter for attribute isMultireceive
 */
-bool  ObjectFlowImpl::getIsMultireceive() const 
+bool ObjectFlowImpl::getIsMultireceive() const 
 {
 	return m_isMultireceive;
 }
 
-void ObjectFlowImpl::setIsMultireceive(bool  _isMultireceive)
+void ObjectFlowImpl::setIsMultireceive(bool _isMultireceive)
 {
 	m_isMultireceive = _isMultireceive;
 } 
@@ -587,7 +572,7 @@ void ObjectFlowImpl::loadNode(std::string nodeName, std::shared_ptr<persistence:
 	ActivityEdgeImpl::loadNode(nodeName, loadHandler);
 }
 
-void ObjectFlowImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ObjectFlowImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -657,8 +642,8 @@ void ObjectFlowImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 		}
 
 	// Add references
-		saveHandler->addReference("selection", this->getSelection());		 
-		saveHandler->addReference("transformation", this->getTransformation());		 
+		saveHandler->addReference("selection", this->getSelection()); 
+		saveHandler->addReference("transformation", this->getTransformation()); 
 	}
 	catch (std::exception& e)
 	{

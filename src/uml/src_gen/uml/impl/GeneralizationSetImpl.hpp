@@ -9,7 +9,6 @@
 
 //*********************************
 // generated Includes
-
 //Model includes
 #include "../GeneralizationSet.hpp"
 
@@ -84,28 +83,26 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual bool  getIsCovering() const ;
+			virtual bool getIsCovering() const ;
 			
 			/*!
 			Indicates (via the associated Generalizations) whether or not the set of specific Classifiers are covering for a particular general classifier. When isCovering is true, every instance of a particular general Classifier is also an instance of at least one of its specific Classifiers for the GeneralizationSet. When isCovering is false, there are one or more instances of the particular general Classifier that are not instances of at least one of its specific Classifiers defined for the GeneralizationSet.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual void setIsCovering (bool  _isCovering); 
-			/*!
+			virtual void setIsCovering (bool _isCovering);/*!
 			Indicates whether or not the set of specific Classifiers in a Generalization relationship have instance in common. If isDisjoint is true, the specific Classifiers for a particular GeneralizationSet have no members in common; that is, their intersection is empty. If isDisjoint is false, the specific Classifiers in a particular GeneralizationSet have one or more members in common; that is, their intersection is not empty.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual bool  getIsDisjoint() const ;
+			virtual bool getIsDisjoint() const ;
 			
 			/*!
 			Indicates whether or not the set of specific Classifiers in a Generalization relationship have instance in common. If isDisjoint is true, the specific Classifiers for a particular GeneralizationSet have no members in common; that is, their intersection is empty. If isDisjoint is false, the specific Classifiers in a particular GeneralizationSet have one or more members in common; that is, their intersection is not empty.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual void setIsDisjoint (bool  _isDisjoint); 
-			
+			virtual void setIsDisjoint (bool _isDisjoint);
 			
 			//*********************************
 			// Reference
@@ -167,7 +164,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

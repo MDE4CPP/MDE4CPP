@@ -35,45 +35,25 @@
 #include <exception> // used in Persistence
 
 #include "uml/Activity.hpp"
-
 #include "uml/ActivityEdge.hpp"
-
 #include "uml/ActivityGroup.hpp"
-
 #include "uml/ActivityNode.hpp"
-
 #include "uml/ActivityPartition.hpp"
-
 #include "uml/CallAction.hpp"
-
 #include "uml/Classifier.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/Constraint.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/ExceptionHandler.hpp"
-
 #include "uml/InputPin.hpp"
-
 #include "uml/InterruptibleActivityRegion.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/Operation.hpp"
-
 #include "uml/OutputPin.hpp"
-
 #include "uml/Port.hpp"
-
 #include "uml/RedefinableElement.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/StructuredActivityNode.hpp"
 
 //Factories an Package includes
@@ -588,7 +568,7 @@ void CallOperationActionImpl::loadNode(std::string nodeName, std::shared_ptr<per
 	CallActionImpl::loadNode(nodeName, loadHandler);
 }
 
-void CallOperationActionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void CallOperationActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -654,7 +634,7 @@ void CallOperationActionImpl::saveContent(std::shared_ptr<persistence::interface
 		}
 
 	// Add references
-		saveHandler->addReference("operation", this->getOperation());		 
+		saveHandler->addReference("operation", this->getOperation()); 
 	}
 	catch (std::exception& e)
 	{

@@ -35,41 +35,23 @@
 #include <exception> // used in Persistence
 
 #include "uml/Action.hpp"
-
 #include "uml/Activity.hpp"
-
 #include "uml/ActivityEdge.hpp"
-
 #include "uml/ActivityGroup.hpp"
-
 #include "uml/ActivityNode.hpp"
-
 #include "uml/ActivityPartition.hpp"
-
 #include "uml/Classifier.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/Constraint.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/ExceptionHandler.hpp"
-
 #include "uml/InputPin.hpp"
-
 #include "uml/InterruptibleActivityRegion.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/OutputPin.hpp"
-
 #include "uml/RedefinableElement.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/StructuredActivityNode.hpp"
 
 //Factories an Package includes
@@ -272,12 +254,12 @@ std::shared_ptr<ecore::EClass> ReclassifyObjectActionImpl::eStaticClass() const
 /*
 Getter & Setter for attribute isReplaceAll
 */
-bool  ReclassifyObjectActionImpl::getIsReplaceAll() const 
+bool ReclassifyObjectActionImpl::getIsReplaceAll() const 
 {
 	return m_isReplaceAll;
 }
 
-void ReclassifyObjectActionImpl::setIsReplaceAll(bool  _isReplaceAll)
+void ReclassifyObjectActionImpl::setIsReplaceAll(bool _isReplaceAll)
 {
 	m_isReplaceAll = _isReplaceAll;
 } 
@@ -483,34 +465,12 @@ Any ReclassifyObjectActionImpl::eGet(int featureID, bool resolve, bool coreType)
 		case uml::umlPackage::RECLASSIFYOBJECTACTION_ATTRIBUTE_NEWCLASSIFIER:
 		{
 			return eAny(getNewClassifier()); //20328			
-			/*
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Classifier>::iterator iter = m_newClassifier->begin();
-			Bag<uml::Classifier>::iterator end = m_newClassifier->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //20328
-			*/
 		}
 		case uml::umlPackage::RECLASSIFYOBJECTACTION_ATTRIBUTE_OBJECT:
 			return eAny(getObject()); //20329
 		case uml::umlPackage::RECLASSIFYOBJECTACTION_ATTRIBUTE_OLDCLASSIFIER:
 		{
 			return eAny(getOldClassifier()); //20330			
-			/*
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Classifier>::iterator iter = m_oldClassifier->begin();
-			Bag<uml::Classifier>::iterator end = m_oldClassifier->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //20330
-			*/
 		}
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
@@ -564,7 +524,7 @@ bool ReclassifyObjectActionImpl::eSet(int featureID, Any newValue)
 				}
 				iterNewClassifier++;
 			}
-
+ 
 			iterNewClassifier = newClassifierList->begin();
 			endNewClassifier = newClassifierList->end();
 			while (iterNewClassifier != endNewClassifier)
@@ -608,7 +568,7 @@ bool ReclassifyObjectActionImpl::eSet(int featureID, Any newValue)
 				}
 				iterOldClassifier++;
 			}
-
+ 
 			iterOldClassifier = oldClassifierList->begin();
 			endOldClassifier = oldClassifierList->end();
 			while (iterOldClassifier != endOldClassifier)
@@ -720,7 +680,7 @@ void ReclassifyObjectActionImpl::loadNode(std::string nodeName, std::shared_ptr<
 	ActionImpl::loadNode(nodeName, loadHandler);
 }
 
-void ReclassifyObjectActionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ReclassifyObjectActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -801,8 +761,8 @@ void ReclassifyObjectActionImpl::saveContent(std::shared_ptr<persistence::interf
 		}
 
 	// Add references
-		saveHandler->addReferences<uml::Classifier>("newClassifier", this->getNewClassifier());	
-		saveHandler->addReferences<uml::Classifier>("oldClassifier", this->getOldClassifier());	
+		saveHandler->addReferences<uml::Classifier>("newClassifier", this->getNewClassifier());
+		saveHandler->addReferences<uml::Classifier>("oldClassifier", this->getOldClassifier());
 	}
 	catch (std::exception& e)
 	{

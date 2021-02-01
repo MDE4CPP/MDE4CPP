@@ -35,41 +35,23 @@
 #include <exception> // used in Persistence
 
 #include "uml/Action.hpp"
-
 #include "uml/Activity.hpp"
-
 #include "uml/ActivityEdge.hpp"
-
 #include "uml/ActivityGroup.hpp"
-
 #include "uml/ActivityNode.hpp"
-
 #include "uml/ActivityPartition.hpp"
-
 #include "uml/Classifier.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/Constraint.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/ExceptionHandler.hpp"
-
 #include "uml/InputPin.hpp"
-
 #include "uml/InterruptibleActivityRegion.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/OutputPin.hpp"
-
 #include "uml/RedefinableElement.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/StructuredActivityNode.hpp"
 
 //Factories an Package includes
@@ -288,8 +270,7 @@ std::shared_ptr<ecore::EClass> OpaqueActionImpl::eStaticClass() const
 /*
 Getter & Setter for attribute body
 */
- std::shared_ptr<Bag<std::string> >
- OpaqueActionImpl::getBody() const 
+std::shared_ptr<Bag<std::string>> OpaqueActionImpl::getBody() const 
 {
 	if(m_body == nullptr)
 	{
@@ -305,8 +286,7 @@ Getter & Setter for attribute body
 /*
 Getter & Setter for attribute language
 */
- std::shared_ptr<Bag<std::string> >
- OpaqueActionImpl::getLanguage() const 
+std::shared_ptr<Bag<std::string>> OpaqueActionImpl::getLanguage() const 
 {
 	if(m_language == nullptr)
 	{
@@ -528,34 +508,12 @@ Any OpaqueActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::OPAQUEACTION_ATTRIBUTE_INPUTVALUE:
 		{
 			return eAny(getInputValue()); //16428			
-			/*
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::InputPin>::iterator iter = m_inputValue->begin();
-			Bag<uml::InputPin>::iterator end = m_inputValue->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //16428
-			*/
 		}
 		case uml::umlPackage::OPAQUEACTION_ATTRIBUTE_LANGUAGE:
 			return eAny(getLanguage()); //16429
 		case uml::umlPackage::OPAQUEACTION_ATTRIBUTE_OUTPUTVALUE:
 		{
 			return eAny(getOutputValue()); //16430			
-			/*
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::OutputPin>::iterator iter = m_outputValue->begin();
-			Bag<uml::OutputPin>::iterator end = m_outputValue->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //16430
-			*/
 		}
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
@@ -608,7 +566,7 @@ bool OpaqueActionImpl::eSet(int featureID, Any newValue)
 				}
 				iterInputValue++;
 			}
-
+ 
 			iterInputValue = inputValueList->begin();
 			endInputValue = inputValueList->end();
 			while (iterInputValue != endInputValue)
@@ -650,7 +608,7 @@ bool OpaqueActionImpl::eSet(int featureID, Any newValue)
 				}
 				iterOutputValue++;
 			}
-
+ 
 			iterOutputValue = outputValueList->begin();
 			endOutputValue = outputValueList->end();
 			while (iterOutputValue != endOutputValue)
@@ -701,8 +659,7 @@ void OpaqueActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistenc
 		if (nodeName.compare("body") == 0)
 		{
 			std::shared_ptr<std::string> value = loadHandler->getChildText();
-			 std::shared_ptr<Bag<std::string> >
-			 list_body = this->getBody();
+			std::shared_ptr<Bag<std::string>> list_body = this->getBody();
 			list_body->push_back(value);
 			return;
 		}
@@ -710,8 +667,7 @@ void OpaqueActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistenc
 		if (nodeName.compare("language") == 0)
 		{
 			std::shared_ptr<std::string> value = loadHandler->getChildText();
-			 std::shared_ptr<Bag<std::string> >
-			 list_language = this->getLanguage();
+			std::shared_ptr<Bag<std::string>> list_language = this->getLanguage();
 			list_language->push_back(value);
 			return;
 		}
@@ -773,7 +729,7 @@ void OpaqueActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistenc
 	ActionImpl::loadNode(nodeName, loadHandler);
 }
 
-void OpaqueActionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void OpaqueActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	ActionImpl::resolveReferences(featureID, references);
 }

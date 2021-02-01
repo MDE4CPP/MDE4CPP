@@ -9,7 +9,6 @@
 
 //*********************************
 // generated Includes
-
 //Model includes
 #include "../DestroyObjectAction.hpp"
 
@@ -82,28 +81,26 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual bool  getIsDestroyLinks() const ;
+			virtual bool getIsDestroyLinks() const ;
 			
 			/*!
 			Specifies whether links in which the object participates are destroyed along with the object.
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual void setIsDestroyLinks (bool  _isDestroyLinks); 
-			/*!
+			virtual void setIsDestroyLinks (bool _isDestroyLinks);/*!
 			Specifies whether objects owned by the object (via composition) are destroyed along with the object.
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual bool  getIsDestroyOwnedObjects() const ;
+			virtual bool getIsDestroyOwnedObjects() const ;
 			
 			/*!
 			Specifies whether objects owned by the object (via composition) are destroyed along with the object.
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual void setIsDestroyOwnedObjects (bool  _isDestroyOwnedObjects); 
-			
+			virtual void setIsDestroyOwnedObjects (bool _isDestroyOwnedObjects);
 			
 			//*********************************
 			// Reference
@@ -167,7 +164,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

@@ -7,20 +7,16 @@
 #ifndef PSCS_SEMANTICS_LOCI_CS_LOCUS_HPP
 #define PSCS_SEMANTICS_LOCI_CS_LOCUS_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
-
 
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -57,16 +53,12 @@ namespace uml
 // enum includes
 
 
-//Includes from codegen annotation
-#include "uml/Behavior.hpp"
-#include "PSCS/Semantics/StructuredClassifiers/CS_Object.hpp"
-#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 
 //*********************************
 namespace PSCS::Semantics::Loci 
 {
 	
-	class CS_Locus:virtual public fUML::Semantics::Loci::Locus
+	class CS_Locus: virtual public fUML::Semantics::Loci::Locus
 	{
 		public:
  			CS_Locus(const CS_Locus &) {}
@@ -74,7 +66,6 @@ namespace PSCS::Semantics::Loci
 
 		protected:
 			CS_Locus(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -86,7 +77,7 @@ namespace PSCS::Semantics::Loci
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> instantiate(std::shared_ptr<org.eclipse.uml2.uml.Class> type) = 0;
+			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> instantiate(std::shared_ptr<uml::Class> type) = 0;
 			
 			
 			//*********************************
@@ -122,7 +113,7 @@ namespace PSCS::Semantics::Loci
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

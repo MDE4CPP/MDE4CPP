@@ -35,25 +35,15 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/GeneralOrdering.hpp"
-
 #include "uml/Interaction.hpp"
-
 #include "uml/InteractionOperand.hpp"
-
 #include "uml/Lifeline.hpp"
-
 #include "uml/Message.hpp"
-
 #include "uml/MessageOccurrenceSpecification.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/StringExpression.hpp"
 
 //Factories an Package includes
@@ -327,7 +317,7 @@ void DestructionOccurrenceSpecificationImpl::loadNode(std::string nodeName, std:
 	MessageOccurrenceSpecificationImpl::loadNode(nodeName, loadHandler);
 }
 
-void DestructionOccurrenceSpecificationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void DestructionOccurrenceSpecificationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	MessageOccurrenceSpecificationImpl::resolveReferences(featureID, references);
 }

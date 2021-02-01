@@ -35,41 +35,23 @@
 #include <exception> // used in Persistence
 
 #include "uml/Action.hpp"
-
 #include "uml/Activity.hpp"
-
 #include "uml/ActivityEdge.hpp"
-
 #include "uml/ActivityGroup.hpp"
-
 #include "uml/ActivityNode.hpp"
-
 #include "uml/ActivityPartition.hpp"
-
 #include "uml/Classifier.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/Constraint.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/ExceptionHandler.hpp"
-
 #include "uml/InputPin.hpp"
-
 #include "uml/InterruptibleActivityRegion.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/OutputPin.hpp"
-
 #include "uml/RedefinableElement.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/StructuredActivityNode.hpp"
 
 //Factories an Package includes
@@ -517,17 +499,6 @@ Any UnmarshallActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::UNMARSHALLACTION_ATTRIBUTE_RESULT:
 		{
 			return eAny(getResult()); //24628			
-			/*
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::OutputPin>::iterator iter = m_result->begin();
-			Bag<uml::OutputPin>::iterator end = m_result->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //24628
-			*/
 		}
 		case uml::umlPackage::UNMARSHALLACTION_ATTRIBUTE_UNMARSHALLTYPE:
 			return eAny(getUnmarshallType()); //24629
@@ -582,7 +553,7 @@ bool UnmarshallActionImpl::eSet(int featureID, Any newValue)
 				}
 				iterResult++;
 			}
-
+ 
 			iterResult = resultList->begin();
 			endResult = resultList->end();
 			while (iterResult != endResult)
@@ -703,7 +674,7 @@ void UnmarshallActionImpl::loadNode(std::string nodeName, std::shared_ptr<persis
 	ActionImpl::loadNode(nodeName, loadHandler);
 }
 
-void UnmarshallActionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void UnmarshallActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -769,7 +740,7 @@ void UnmarshallActionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 		}
 
 	// Add references
-		saveHandler->addReference("unmarshallType", this->getUnmarshallType());		 
+		saveHandler->addReference("unmarshallType", this->getUnmarshallType()); 
 	}
 	catch (std::exception& e)
 	{

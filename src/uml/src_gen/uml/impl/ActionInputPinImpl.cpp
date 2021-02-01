@@ -35,57 +35,31 @@
 #include <exception> // used in Persistence
 
 #include "uml/Action.hpp"
-
 #include "uml/Activity.hpp"
-
 #include "uml/ActivityEdge.hpp"
-
 #include "uml/ActivityGroup.hpp"
-
 #include "uml/ActivityNode.hpp"
-
 #include "uml/ActivityPartition.hpp"
-
 #include "uml/AddStructuralFeatureValueAction.hpp"
-
 #include "uml/Behavior.hpp"
-
 #include "uml/CallOperationAction.hpp"
-
 #include "uml/Classifier.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/DestroyObjectAction.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/InputPin.hpp"
-
 #include "uml/InterruptibleActivityRegion.hpp"
-
 #include "uml/InvocationAction.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/RedefinableElement.hpp"
-
 #include "uml/RemoveStructuralFeatureValueAction.hpp"
-
 #include "uml/State.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/StructuralFeatureAction.hpp"
-
 #include "uml/StructuredActivityNode.hpp"
-
 #include "uml/Type.hpp"
-
 #include "uml/ValueSpecification.hpp"
-
 #include "uml/WriteStructuralFeatureAction.hpp"
 
 //Factories an Package includes
@@ -627,7 +601,7 @@ void ActionInputPinImpl::loadNode(std::string nodeName, std::shared_ptr<persiste
 	InputPinImpl::loadNode(nodeName, loadHandler);
 }
 
-void ActionInputPinImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ActionInputPinImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	InputPinImpl::resolveReferences(featureID, references);
 }

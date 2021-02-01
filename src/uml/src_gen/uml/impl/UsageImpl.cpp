@@ -34,19 +34,12 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/NamedElement.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/Package.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/TemplateParameter.hpp"
 
 //Factories an Package includes
@@ -372,7 +365,7 @@ void UsageImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inte
 	DependencyImpl::loadNode(nodeName, loadHandler);
 }
 
-void UsageImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void UsageImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	DependencyImpl::resolveReferences(featureID, references);
 }

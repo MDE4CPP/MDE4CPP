@@ -9,7 +9,6 @@
 
 //*********************************
 // generated Includes
-
 //Model includes
 #include "../MultiplicityElement.hpp"
 
@@ -146,54 +145,50 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual bool  getIsOrdered() const ;
+			virtual bool getIsOrdered() const ;
 			
 			/*!
 			For a multivalued multiplicity, this attribute specifies whether the values in an instantiation of this MultiplicityElement are sequentially ordered.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual void setIsOrdered (bool  _isOrdered); 
+			virtual void setIsOrdered (bool _isOrdered);/*!
+			For a multivalued multiplicity, this attributes specifies whether the values in an instantiation of this MultiplicityElement are unique.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			 
+			virtual bool getIsUnique() const ;
+			
 			/*!
 			For a multivalued multiplicity, this attributes specifies whether the values in an instantiation of this MultiplicityElement are unique.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual bool  getIsUnique() const ;
-			
-			/*!
-			For a multivalued multiplicity, this attributes specifies whether the values in an instantiation of this MultiplicityElement are unique.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			 
-			virtual void setIsUnique (bool  _isUnique); 
-			/*!
+			virtual void setIsUnique (bool _isUnique);/*!
 			The lower bound of the multiplicity interval.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual int  getLower() const ;
+			virtual int getLower() const ;
 			
 			/*!
 			The lower bound of the multiplicity interval.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual void setLower (int  _lower); 
-			/*!
+			virtual void setLower (int _lower);/*!
 			The upper bound of the multiplicity interval.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual int  getUpper() const ;
+			virtual int getUpper() const ;
 			
 			/*!
 			The upper bound of the multiplicity interval.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual void setUpper (int  _upper); 
-			
+			virtual void setUpper (int _upper);
 			
 			//*********************************
 			// Reference
@@ -251,7 +246,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

@@ -7,20 +7,16 @@
 #ifndef FUML_SEMANTICS_VALUES_LITERALEVALUATION_HPP
 #define FUML_SEMANTICS_VALUES_LITERALEVALUATION_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
-
 
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -52,17 +48,12 @@ namespace uml
 // enum includes
 
 
-//Includes from codegen annotation
-#include "fUML/Semantics/Loci/ExecutionFactory.hpp"
-#include "uml/ValueSpecification.hpp"
-#include "uml/PrimitiveType.hpp"
-#include "uml/Type.hpp"
 
 //*********************************
 namespace fUML::Semantics::Values 
 {
 	
-	class LiteralEvaluation:virtual public Evaluation
+	class LiteralEvaluation: virtual public Evaluation
 	{
 		public:
  			LiteralEvaluation(const LiteralEvaluation &) {}
@@ -70,7 +61,6 @@ namespace fUML::Semantics::Values
 
 		protected:
 			LiteralEvaluation(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -82,7 +72,7 @@ namespace fUML::Semantics::Values
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<org.eclipse.uml2.uml.PrimitiveType> getType(std::string builtInTypeName) = 0;
+			virtual std::shared_ptr<uml::PrimitiveType> getType(std::string builtInTypeName) = 0;
 			
 			
 			//*********************************
@@ -118,7 +108,7 @@ namespace fUML::Semantics::Values
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

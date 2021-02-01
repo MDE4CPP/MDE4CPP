@@ -53,41 +53,28 @@
 #include <exception> // used in Persistence
 
 #include "uml/Action.hpp"
-
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
-
 #include "uml/ActivityNode.hpp"
-
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
-
 #include "uml/CallAction.hpp"
-
 #include "uml/CallOperationAction.hpp"
-
 #include "fUML/Semantics/Actions/CallOperationActionActivation.hpp"
-
 #include "fUML/Semantics/CommonBehavior/Execution.hpp"
-
 #include "fUML/Semantics/Actions/InputPinActivation.hpp"
-
 #include "uml/Operation.hpp"
-
 #include "fUML/Semantics/Actions/OutputPinActivation.hpp"
-
 #include "fUML/Semantics/Actions/PinActivation.hpp"
-
 #include "uml/Port.hpp"
-
 #include "fUML/Semantics/Activities/Token.hpp"
 
 //Factories an Package includes
 #include "PSCS/Semantics/Actions/impl/ActionsFactoryImpl.hpp"
 #include "PSCS/Semantics/Actions/impl/ActionsPackageImpl.hpp"
 
-#include "PSCS/Semantics/SemanticsFactory.hpp"
-#include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "PSCS/PSCSFactory.hpp"
 #include "PSCS/PSCSPackage.hpp"
+#include "PSCS/Semantics/SemanticsFactory.hpp"
+#include "PSCS/Semantics/SemanticsPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -203,7 +190,7 @@ std::shared_ptr<ecore::EClass> CS_CallOperationActionActivationImpl::eStaticClas
 //*********************************
 // Operations
 //*********************************
-bool CS_CallOperationActionActivationImpl::_isCreate(std::shared_ptr<org.eclipse.uml2.uml.Operation> operation)
+bool CS_CallOperationActionActivationImpl::_isCreate(std::shared_ptr<uml::Operation> operation)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -343,7 +330,7 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> CS_CallOperationActi
 	//end of body
 }
 
-bool CS_CallOperationActionActivationImpl::isCreate(std::shared_ptr<org.eclipse.uml2.uml.Operation> operation)
+bool CS_CallOperationActionActivationImpl::isCreate(std::shared_ptr<uml::Operation> operation)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -357,7 +344,7 @@ bool CS_CallOperationActionActivationImpl::isCreate(std::shared_ptr<org.eclipse.
 	//end of body
 }
 
-bool CS_CallOperationActionActivationImpl::isOperationProvided(std::shared_ptr<org.eclipse.uml2.uml.Port> port,std::shared_ptr<org.eclipse.uml2.uml.Operation> operation)
+bool CS_CallOperationActionActivationImpl::isOperationProvided(std::shared_ptr<uml::Port> port,std::shared_ptr<uml::Operation> operation)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -387,7 +374,7 @@ bool CS_CallOperationActionActivationImpl::isOperationProvided(std::shared_ptr<o
 	//end of body
 }
 
-bool CS_CallOperationActionActivationImpl::isOperationRequired(std::shared_ptr<org.eclipse.uml2.uml.Port> port,std::shared_ptr<org.eclipse.uml2.uml.Operation> operation)
+bool CS_CallOperationActionActivationImpl::isOperationRequired(std::shared_ptr<uml::Port> port,std::shared_ptr<uml::Operation> operation)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -515,7 +502,7 @@ void CS_CallOperationActionActivationImpl::loadNode(std::string nodeName, std::s
 	fUML::Semantics::Actions::CallOperationActionActivationImpl::loadNode(nodeName, loadHandler);
 }
 
-void CS_CallOperationActionActivationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void CS_CallOperationActionActivationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	fUML::Semantics::Actions::CallOperationActionActivationImpl::resolveReferences(featureID, references);
 }

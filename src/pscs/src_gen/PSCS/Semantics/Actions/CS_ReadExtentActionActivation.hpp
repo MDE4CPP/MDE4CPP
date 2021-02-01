@@ -7,20 +7,16 @@
 #ifndef PSCS_SEMANTICS_ACTIONS_CS_READEXTENTACTIONACTIVATION_HPP
 #define PSCS_SEMANTICS_ACTIONS_CS_READEXTENTACTIONACTIVATION_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
-
 
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -60,24 +56,12 @@ namespace uml
 // enum includes
 
 
-//Includes from codegen annotation
-#include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
-
-#include "uml/ReadExtentAction.hpp"
-#include "fUML/Semantics/Values/Value.hpp"
-#include "fUML/Semantics/StructuredClassifiers/Object.hpp"
-#include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
-#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
-#include "fUML/Semantics/Loci/Locus.hpp"
-#include "PSCS/Semantics/StructuredClassifiers/CS_Object.hpp"
-#include "PSCS/Semantics/StructuredClassifiers/CS_Reference.hpp"
-#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 
 //*********************************
 namespace PSCS::Semantics::Actions 
 {
 	
-	class CS_ReadExtentActionActivation:virtual public fUML::Semantics::Actions::ReadExtentActionActivation
+	class CS_ReadExtentActionActivation: virtual public fUML::Semantics::Actions::ReadExtentActionActivation
 	{
 		public:
  			CS_ReadExtentActionActivation(const CS_ReadExtentActionActivation &) {}
@@ -85,7 +69,6 @@ namespace PSCS::Semantics::Actions
 
 		protected:
 			CS_ReadExtentActionActivation(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -134,7 +117,7 @@ namespace PSCS::Semantics::Actions
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

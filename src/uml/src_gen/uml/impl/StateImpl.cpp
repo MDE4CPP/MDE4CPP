@@ -35,45 +35,25 @@
 #include <exception> // used in Persistence
 
 #include "uml/Behavior.hpp"
-
 #include "uml/Classifier.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/ConnectionPointReference.hpp"
-
 #include "uml/Constraint.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/ElementImport.hpp"
-
 #include "uml/NamedElement.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/PackageImport.hpp"
-
 #include "uml/PackageableElement.hpp"
-
 #include "uml/Pseudostate.hpp"
-
 #include "uml/RedefinableElement.hpp"
-
 #include "uml/Region.hpp"
-
 #include "uml/State.hpp"
-
 #include "uml/StateMachine.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/Transition.hpp"
-
 #include "uml/Trigger.hpp"
-
 #include "uml/Vertex.hpp"
 
 //Factories an Package includes
@@ -338,7 +318,7 @@ std::shared_ptr<ecore::EClass> StateImpl::eStaticClass() const
 /*
 Getter & Setter for attribute isComposite
 */
-bool  StateImpl::getIsComposite() const 
+bool StateImpl::getIsComposite() const 
 {
 	return m_isComposite;
 }
@@ -350,7 +330,7 @@ bool  StateImpl::getIsComposite() const
 /*
 Getter & Setter for attribute isOrthogonal
 */
-bool  StateImpl::getIsOrthogonal() const 
+bool StateImpl::getIsOrthogonal() const 
 {
 	return m_isOrthogonal;
 }
@@ -362,7 +342,7 @@ bool  StateImpl::getIsOrthogonal() const
 /*
 Getter & Setter for attribute isSimple
 */
-bool  StateImpl::getIsSimple() const 
+bool StateImpl::getIsSimple() const 
 {
 	return m_isSimple;
 }
@@ -374,7 +354,7 @@ bool  StateImpl::getIsSimple() const
 /*
 Getter & Setter for attribute isSubmachineState
 */
-bool  StateImpl::getIsSubmachineState() const 
+bool StateImpl::getIsSubmachineState() const 
 {
 	return m_isSubmachineState;
 }
@@ -900,7 +880,7 @@ bool StateImpl::eSet(int featureID, Any newValue)
 				}
 				iterConnection++;
 			}
-
+ 
 			iterConnection = connectionList->begin();
 			endConnection = connectionList->end();
 			while (iterConnection != endConnection)
@@ -936,7 +916,7 @@ bool StateImpl::eSet(int featureID, Any newValue)
 				}
 				iterConnectionPoint++;
 			}
-
+ 
 			iterConnectionPoint = connectionPointList->begin();
 			endConnectionPoint = connectionPointList->end();
 			while (iterConnectionPoint != endConnectionPoint)
@@ -972,7 +952,7 @@ bool StateImpl::eSet(int featureID, Any newValue)
 				}
 				iterDeferrableTrigger++;
 			}
-
+ 
 			iterDeferrableTrigger = deferrableTriggerList->begin();
 			endDeferrableTrigger = deferrableTriggerList->end();
 			while (iterDeferrableTrigger != endDeferrableTrigger)
@@ -1040,7 +1020,7 @@ bool StateImpl::eSet(int featureID, Any newValue)
 				}
 				iterRegion++;
 			}
-
+ 
 			iterRegion = regionList->begin();
 			endRegion = regionList->end();
 			while (iterRegion != endRegion)
@@ -1279,7 +1259,7 @@ void StateImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inte
 	VertexImpl::loadNode(nodeName, loadHandler);
 }
 
-void StateImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void StateImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -1396,9 +1376,9 @@ void StateImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 		}
 
 	// Add references
-		saveHandler->addReference("redefinedState", this->getRedefinedState());		 
-		saveHandler->addReference("stateInvariant", this->getStateInvariant());		 
-		saveHandler->addReference("submachine", this->getSubmachine());		 
+		saveHandler->addReference("redefinedState", this->getRedefinedState()); 
+		saveHandler->addReference("stateInvariant", this->getStateInvariant()); 
+		saveHandler->addReference("submachine", this->getSubmachine()); 
 	}
 	catch (std::exception& e)
 	{

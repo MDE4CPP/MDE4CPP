@@ -35,17 +35,11 @@
 #include <exception> // used in Persistence
 
 #include "uml/Collaboration.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/NamedElement.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/StringExpression.hpp"
 
 //Factories an Package includes
@@ -331,7 +325,7 @@ bool CollaborationUseImpl::eSet(int featureID, Any newValue)
 				}
 				iterRoleBinding++;
 			}
-
+ 
 			iterRoleBinding = roleBindingList->begin();
 			endRoleBinding = roleBindingList->end();
 			while (iterRoleBinding != endRoleBinding)
@@ -436,7 +430,7 @@ void CollaborationUseImpl::loadNode(std::string nodeName, std::shared_ptr<persis
 	NamedElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void CollaborationUseImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void CollaborationUseImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -483,7 +477,7 @@ void CollaborationUseImpl::saveContent(std::shared_ptr<persistence::interfaces::
 		}
 
 	// Add references
-		saveHandler->addReference("type", this->getType());		 
+		saveHandler->addReference("type", this->getType()); 
 	}
 	catch (std::exception& e)
 	{

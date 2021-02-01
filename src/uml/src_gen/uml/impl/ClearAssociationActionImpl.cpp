@@ -35,43 +35,24 @@
 #include <exception> // used in Persistence
 
 #include "uml/Action.hpp"
-
 #include "uml/Activity.hpp"
-
 #include "uml/ActivityEdge.hpp"
-
 #include "uml/ActivityGroup.hpp"
-
 #include "uml/ActivityNode.hpp"
-
 #include "uml/ActivityPartition.hpp"
-
 #include "uml/Association.hpp"
-
 #include "uml/Classifier.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/Constraint.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/ExceptionHandler.hpp"
-
 #include "uml/InputPin.hpp"
-
 #include "uml/InterruptibleActivityRegion.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/OutputPin.hpp"
-
 #include "uml/RedefinableElement.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/StructuredActivityNode.hpp"
 
 //Factories an Package includes
@@ -554,7 +535,7 @@ void ClearAssociationActionImpl::loadNode(std::string nodeName, std::shared_ptr<
 	ActionImpl::loadNode(nodeName, loadHandler);
 }
 
-void ClearAssociationActionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ClearAssociationActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -614,7 +595,7 @@ void ClearAssociationActionImpl::saveContent(std::shared_ptr<persistence::interf
 		}
 
 	// Add references
-		saveHandler->addReference("association", this->getAssociation());		 
+		saveHandler->addReference("association", this->getAssociation()); 
 	}
 	catch (std::exception& e)
 	{

@@ -7,21 +7,17 @@
 #ifndef UML_EXPANSIONREGION_HPP
 #define UML_EXPANSIONREGION_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T> class Bag; 
 
 
-
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -67,7 +63,6 @@ namespace uml
 #include "uml/VisibilityKind.hpp"
 
 
-//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -77,7 +72,7 @@ namespace uml
 	<p>From package UML::Actions.</p>
 	*/
 	
-	class ExpansionRegion:virtual public StructuredActivityNode
+	class ExpansionRegion: virtual public StructuredActivityNode
 	{
 		public:
  			ExpansionRegion(const ExpansionRegion &) {}
@@ -85,7 +80,6 @@ namespace uml
 
 		protected:
 			ExpansionRegion(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -105,15 +99,14 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual uml::ExpansionKind  getMode() const = 0;
+			virtual uml::ExpansionKind getMode() const = 0;
 			
 			/*!
 			The mode in which the ExpansionRegion executes its contents. If parallel, executions are concurrent. If iterative, executions are sequential. If stream, a stream of values flows into a single execution.
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual void setMode (uml::ExpansionKind  _mode)= 0; 
-			
+			virtual void setMode (uml::ExpansionKind _mode)= 0;
 			//*********************************
 			// Reference
 			//*********************************
@@ -144,7 +137,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			uml::ExpansionKind  m_mode = ExpansionKind::ITERATIVE;
+			uml::ExpansionKind m_mode = ExpansionKind::ITERATIVE;
 			
 			
 			//*********************************
@@ -225,7 +218,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

@@ -7,20 +7,16 @@
 #ifndef PSCS_SEMANTICS_CLASSIFICATION_CS_INSTANCEVALUEEVALUATION_HPP
 #define PSCS_SEMANTICS_CLASSIFICATION_CS_INSTANCEVALUEEVALUATION_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
-
 
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -55,33 +51,12 @@ namespace uml
 // enum includes
 
 
-//Includes from codegen annotation
-#include "PSCS/Semantics/StructuredClassifiers/CS_Object.hpp"
-#include "PSCS/Semantics/StructuredClassifiers/CS_Reference.hpp"
-#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/Semantics/SimpleClassifiers/EnumerationValue.hpp"
-#include "fUML/Semantics/SimpleClassifiers/DataValue.hpp"
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
-#include "fUML/Semantics/Loci/ExecutionFactory.hpp"
-#include "fUML/Semantics/StructuredClassifiers/Object.hpp"
-#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
-#include "fUML/Semantics/CommonBehavior/Execution.hpp"
-#include "fUML/Semantics/Loci/Executor.hpp"
-#include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
-#include "uml/InstanceValue.hpp"
-#include "uml/InstanceSpecification.hpp"
-#include "uml/EnumerationLiteral.hpp"
-#include "uml/Enumeration.hpp"
-#include "uml/Behavior.hpp"
-#include "uml/Slot.hpp"
-
 
 //*********************************
 namespace PSCS::Semantics::Classification 
 {
 	
-	class CS_InstanceValueEvaluation:virtual public fUML::Semantics::Classification::InstanceValueEvaluation
+	class CS_InstanceValueEvaluation: virtual public fUML::Semantics::Classification::InstanceValueEvaluation
 	{
 		public:
  			CS_InstanceValueEvaluation(const CS_InstanceValueEvaluation &) {}
@@ -89,7 +64,6 @@ namespace PSCS::Semantics::Classification
 
 		protected:
 			CS_InstanceValueEvaluation(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -137,7 +111,7 @@ namespace PSCS::Semantics::Classification
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

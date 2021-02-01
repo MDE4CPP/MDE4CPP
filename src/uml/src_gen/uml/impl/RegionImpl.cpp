@@ -35,37 +35,21 @@
 #include <exception> // used in Persistence
 
 #include "uml/Classifier.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/Constraint.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/ElementImport.hpp"
-
 #include "uml/NamedElement.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/PackageImport.hpp"
-
 #include "uml/PackageableElement.hpp"
-
 #include "uml/RedefinableElement.hpp"
-
 #include "uml/Region.hpp"
-
 #include "uml/State.hpp"
-
 #include "uml/StateMachine.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/Transition.hpp"
-
 #include "uml/Vertex.hpp"
 
 //Factories an Package includes
@@ -635,7 +619,7 @@ bool RegionImpl::eSet(int featureID, Any newValue)
 				}
 				iterSubvertex++;
 			}
-
+ 
 			iterSubvertex = subvertexList->begin();
 			endSubvertex = subvertexList->end();
 			while (iterSubvertex != endSubvertex)
@@ -671,7 +655,7 @@ bool RegionImpl::eSet(int featureID, Any newValue)
 				}
 				iterTransition++;
 			}
-
+ 
 			iterTransition = transitionList->begin();
 			endTransition = transitionList->end();
 			while (iterTransition != endTransition)
@@ -791,7 +775,7 @@ void RegionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::int
 	RedefinableElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void RegionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void RegionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -873,7 +857,7 @@ void RegionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 		}
 
 	// Add references
-		saveHandler->addReference("extendedRegion", this->getExtendedRegion());		 
+		saveHandler->addReference("extendedRegion", this->getExtendedRegion()); 
 	}
 	catch (std::exception& e)
 	{

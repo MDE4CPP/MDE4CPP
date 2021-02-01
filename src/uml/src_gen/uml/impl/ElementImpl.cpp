@@ -26,6 +26,7 @@
 #include "ecore/EClass.hpp"
 
 //Includes from codegen annotation
+#include "util/StereotypeStorage.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -34,27 +35,16 @@
 #include <exception> // used in Persistence
 
 #include "uml/Class.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/DirectedRelationship.hpp"
-
 #include "ecore/EAnnotation.hpp"
-
 #include "ecore/EClass.hpp"
-
 #include "ecore/EObject.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/Model.hpp"
-
 #include "uml/Object.hpp"
-
 #include "uml/Package.hpp"
-
 #include "uml/Relationship.hpp"
-
 #include "uml/Stereotype.hpp"
 
 //Factories an Package includes
@@ -328,15 +318,7 @@ Any ElementImpl::getValue(std::shared_ptr<uml::Stereotype> stereotype,std::strin
 	   return Any();
 	}
 
-	std::shared_ptr<Bag<uml::Property> > propertyList = stereoInstance->getMetaClass()->getAttribute();
-	for(std::shared_ptr<uml::Property> p: *propertyList)
-	{
-		if(p->getName()==propertyName)
-		{
-			return stereoInstance->get(p);
-		}
-	}
-	return Any();
+	return stereoInstance->getPropertyValue(propertyName);
 	//end of body
 }
 
@@ -569,7 +551,7 @@ bool ElementImpl::eSet(int featureID, Any newValue)
 				}
 				iterOwnedComment++;
 			}
-
+ 
 			iterOwnedComment = ownedCommentList->begin();
 			endOwnedComment = ownedCommentList->end();
 			while (iterOwnedComment != endOwnedComment)
@@ -661,7 +643,7 @@ void ElementImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::in
 	ObjectImpl::loadNode(nodeName, loadHandler);
 }
 
-void ElementImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ElementImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	ObjectImpl::resolveReferences(featureID, references);
 }

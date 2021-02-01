@@ -35,29 +35,17 @@
 #include <exception> // used in Persistence
 
 #include "uml/Behavior.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/Package.hpp"
-
 #include "uml/Parameter.hpp"
-
 #include "uml/Slot.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/TemplateParameter.hpp"
-
 #include "uml/Type.hpp"
-
 #include "uml/ValueSpecification.hpp"
-
 #include "uml/ValueSpecificationAction.hpp"
 
 //Factories an Package includes
@@ -208,8 +196,7 @@ std::shared_ptr<ecore::EClass> OpaqueExpressionImpl::eStaticClass() const
 /*
 Getter & Setter for attribute body
 */
- std::shared_ptr<Bag<std::string> >
- OpaqueExpressionImpl::getBody() const 
+std::shared_ptr<Bag<std::string>> OpaqueExpressionImpl::getBody() const 
 {
 	if(m_body == nullptr)
 	{
@@ -225,8 +212,7 @@ Getter & Setter for attribute body
 /*
 Getter & Setter for attribute language
 */
- std::shared_ptr<Bag<std::string> >
- OpaqueExpressionImpl::getLanguage() const 
+std::shared_ptr<Bag<std::string>> OpaqueExpressionImpl::getLanguage() const 
 {
 	if(m_language == nullptr)
 	{
@@ -506,8 +492,7 @@ void OpaqueExpressionImpl::loadNode(std::string nodeName, std::shared_ptr<persis
 		if (nodeName.compare("body") == 0)
 		{
 			std::shared_ptr<std::string> value = loadHandler->getChildText();
-			 std::shared_ptr<Bag<std::string> >
-			 list_body = this->getBody();
+			std::shared_ptr<Bag<std::string>> list_body = this->getBody();
 			list_body->push_back(value);
 			return;
 		}
@@ -515,8 +500,7 @@ void OpaqueExpressionImpl::loadNode(std::string nodeName, std::shared_ptr<persis
 		if (nodeName.compare("language") == 0)
 		{
 			std::shared_ptr<std::string> value = loadHandler->getChildText();
-			 std::shared_ptr<Bag<std::string> >
-			 list_language = this->getLanguage();
+			std::shared_ptr<Bag<std::string>> list_language = this->getLanguage();
 			list_language->push_back(value);
 			return;
 		}
@@ -534,7 +518,7 @@ void OpaqueExpressionImpl::loadNode(std::string nodeName, std::shared_ptr<persis
 	ValueSpecificationImpl::loadNode(nodeName, loadHandler);
 }
 
-void OpaqueExpressionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void OpaqueExpressionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -600,7 +584,7 @@ void OpaqueExpressionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 		}
 
 	// Add references
-		saveHandler->addReference("behavior", this->getBehavior());		 
+		saveHandler->addReference("behavior", this->getBehavior()); 
 	}
 	catch (std::exception& e)
 	{

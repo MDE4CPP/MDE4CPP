@@ -34,43 +34,24 @@
 #include <exception> // used in Persistence
 
 #include "uml/Action.hpp"
-
 #include "uml/Activity.hpp"
-
 #include "uml/ActivityEdge.hpp"
-
 #include "uml/ActivityGroup.hpp"
-
 #include "uml/ActivityNode.hpp"
-
 #include "uml/ActivityPartition.hpp"
-
 #include "uml/Classifier.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/Constraint.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/ExceptionHandler.hpp"
-
 #include "uml/InputPin.hpp"
-
 #include "uml/InterruptibleActivityRegion.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/OutputPin.hpp"
-
 #include "uml/Port.hpp"
-
 #include "uml/RedefinableElement.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/StructuredActivityNode.hpp"
 
 //Factories an Package includes
@@ -442,17 +423,6 @@ Any InvocationActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::INVOCATIONACTION_ATTRIBUTE_ARGUMENT:
 		{
 			return eAny(getArgument()); //13027			
-			/*
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::InputPin>::iterator iter = m_argument->begin();
-			Bag<uml::InputPin>::iterator end = m_argument->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //13027
-			*/
 		}
 		case uml::umlPackage::INVOCATIONACTION_ATTRIBUTE_ONPORT:
 			return eAny(getOnPort()); //13028
@@ -497,7 +467,7 @@ bool InvocationActionImpl::eSet(int featureID, Any newValue)
 				}
 				iterArgument++;
 			}
-
+ 
 			iterArgument = argumentList->begin();
 			endArgument = argumentList->end();
 			while (iterArgument != endArgument)
@@ -600,7 +570,7 @@ void InvocationActionImpl::loadNode(std::string nodeName, std::shared_ptr<persis
 	ActionImpl::loadNode(nodeName, loadHandler);
 }
 
-void InvocationActionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void InvocationActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -654,7 +624,7 @@ void InvocationActionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	// Add references
-		saveHandler->addReference("onPort", this->getOnPort());		 
+		saveHandler->addReference("onPort", this->getOnPort()); 
 
 		//
 		// Add new tags (from references)

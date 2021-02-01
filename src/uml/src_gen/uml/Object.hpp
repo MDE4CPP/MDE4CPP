@@ -7,23 +7,19 @@
 #ifndef UML_OBJECT_HPP
 #define UML_OBJECT_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T> class Bag; 
-
 
 class AnyObject;
 typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -52,7 +48,6 @@ namespace uml
 
 #include "ecore/EModelElement.hpp"
 
-//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -65,7 +60,6 @@ namespace uml
 	*/
 	
 	class Object : virtual public ecore::EModelElement
-
 	{
 		public:
  			Object(const Object &) {}
@@ -73,7 +67,6 @@ namespace uml
 
 		protected:
 			Object(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -98,7 +91,7 @@ namespace uml
 			If an Argument is not supplied for a Parameter, its default value, if any, will be used.
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Object> > invoke(std::shared_ptr<uml::Operation> op,std::shared_ptr<Bag<uml::Argument> > arguments) = 0;
+			virtual std::shared_ptr<Bag<uml::Object> > invoke(std::shared_ptr<uml::Operation> op,std::shared_ptr<Bag<uml::Argument>> arguments) = 0;
 			
 			/*!
 			If the Property has multiplicity upper bound = 1, set() atomically updates the value of the Property to the object
@@ -144,7 +137,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

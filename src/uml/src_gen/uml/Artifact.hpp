@@ -7,22 +7,18 @@
 #ifndef UML_ARTIFACT_HPP
 #define UML_ARTIFACT_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T> class Bag; 
 template<class T, class ... U> class Subset;
 
 
-
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -63,14 +59,12 @@ namespace uml
 
 // base class includes
 #include "uml/Classifier.hpp"
-
 #include "uml/DeployedArtifact.hpp"
 
 // enum includes
 #include "uml/VisibilityKind.hpp"
 
 
-//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -81,7 +75,7 @@ namespace uml
 	<p>From package UML::Deployments.</p>
 	*/
 	
-	class Artifact:virtual public Classifier,virtual public DeployedArtifact
+	class Artifact: virtual public Classifier, virtual public DeployedArtifact
 	{
 		public:
  			Artifact(const Artifact &) {}
@@ -89,7 +83,6 @@ namespace uml
 
 		protected:
 			Artifact(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -110,7 +103,7 @@ namespace uml
 			Creates an operation with the specified name, parameter names, parameter types, and return type (or null) as an owned operation of this artifact.
 			*/
 			 
-			virtual std::shared_ptr<uml::Operation> createOwnedOperation(std::string name,std::shared_ptr<Bag<std::string> > parameterNames,std::shared_ptr<Bag<uml::Type> > parameterTypes,std::shared_ptr<uml::Type> returnType) = 0;
+			virtual std::shared_ptr<uml::Operation> createOwnedOperation(std::string name,std::shared_ptr<Bag<std::string>> parameterNames,std::shared_ptr<Bag<uml::Type>> parameterTypes,std::shared_ptr<uml::Type> returnType) = 0;
 			
 			
 			//*********************************
@@ -121,15 +114,14 @@ namespace uml
 			<p>From package UML::Deployments.</p>
 			*/
 			 
-			virtual std::string  getFileName() const = 0;
+			virtual std::string getFileName() const = 0;
 			
 			/*!
 			A concrete name that is used to refer to the Artifact in a physical context. Example: file system name, universal resource locator.
 			<p>From package UML::Deployments.</p>
 			*/
 			 
-			virtual void setFileName (std::string  _fileName)= 0; 
-			
+			virtual void setFileName (std::string _fileName)= 0;
 			//*********************************
 			// Reference
 			//*********************************
@@ -176,7 +168,7 @@ namespace uml
 			<p>From package UML::Deployments.</p>
 			*/
 			 
-			std::string  m_fileName = "";
+			std::string m_fileName = "";
 			
 			
 			//*********************************
@@ -257,7 +249,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

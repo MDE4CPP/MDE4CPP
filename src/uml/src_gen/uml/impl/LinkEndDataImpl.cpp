@@ -34,13 +34,9 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/InputPin.hpp"
-
 #include "uml/Property.hpp"
-
 #include "uml/QualifierValue.hpp"
 
 //Factories an Package includes
@@ -287,17 +283,6 @@ Any LinkEndDataImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::LINKENDDATA_ATTRIBUTE_QUALIFIER:
 		{
 			return eAny(getQualifier()); //1354			
-			/*
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::QualifierValue>::iterator iter = m_qualifier->begin();
-			Bag<uml::QualifierValue>::iterator end = m_qualifier->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //1354
-			*/
 		}
 		case uml::umlPackage::LINKENDDATA_ATTRIBUTE_VALUE:
 			return eAny(getValue()); //1355
@@ -352,7 +337,7 @@ bool LinkEndDataImpl::eSet(int featureID, Any newValue)
 				}
 				iterQualifier++;
 			}
-
+ 
 			iterQualifier = qualifierList->begin();
 			endQualifier = qualifierList->end();
 			while (iterQualifier != endQualifier)
@@ -464,7 +449,7 @@ void LinkEndDataImpl::loadNode(std::string nodeName, std::shared_ptr<persistence
 	ElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void LinkEndDataImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void LinkEndDataImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -520,8 +505,8 @@ void LinkEndDataImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 		}
 
 	// Add references
-		saveHandler->addReference("end", this->getEnd());		 
-		saveHandler->addReference("value", this->getValue());		 
+		saveHandler->addReference("end", this->getEnd()); 
+		saveHandler->addReference("value", this->getValue()); 
 	}
 	catch (std::exception& e)
 	{

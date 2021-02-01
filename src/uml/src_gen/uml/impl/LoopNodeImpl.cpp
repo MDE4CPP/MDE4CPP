@@ -35,51 +35,28 @@
 #include <exception> // used in Persistence
 
 #include "uml/Activity.hpp"
-
 #include "uml/ActivityEdge.hpp"
-
 #include "uml/ActivityGroup.hpp"
-
 #include "uml/ActivityNode.hpp"
-
 #include "uml/ActivityPartition.hpp"
-
 #include "uml/Classifier.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/Constraint.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/ElementImport.hpp"
-
 #include "uml/ExceptionHandler.hpp"
-
 #include "uml/ExecutableNode.hpp"
-
 #include "uml/InputPin.hpp"
-
 #include "uml/InterruptibleActivityRegion.hpp"
-
 #include "uml/NamedElement.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/OutputPin.hpp"
-
 #include "uml/PackageImport.hpp"
-
 #include "uml/PackageableElement.hpp"
-
 #include "uml/RedefinableElement.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/StructuredActivityNode.hpp"
-
 #include "uml/Variable.hpp"
 
 //Factories an Package includes
@@ -423,12 +400,12 @@ std::shared_ptr<ecore::EClass> LoopNodeImpl::eStaticClass() const
 /*
 Getter & Setter for attribute isTestedFirst
 */
-bool  LoopNodeImpl::getIsTestedFirst() const 
+bool LoopNodeImpl::getIsTestedFirst() const 
 {
 	return m_isTestedFirst;
 }
 
-void LoopNodeImpl::setIsTestedFirst(bool  _isTestedFirst)
+void LoopNodeImpl::setIsTestedFirst(bool _isTestedFirst)
 {
 	m_isTestedFirst = _isTestedFirst;
 } 
@@ -871,32 +848,10 @@ Any LoopNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::LOOPNODE_ATTRIBUTE_BODYOUTPUT:
 		{
 			return eAny(getBodyOutput()); //14444			
-			/*
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::OutputPin>::iterator iter = m_bodyOutput->begin();
-			Bag<uml::OutputPin>::iterator end = m_bodyOutput->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //14444
-			*/
 		}
 		case uml::umlPackage::LOOPNODE_ATTRIBUTE_BODYPART:
 		{
 			return eAny(getBodyPart()); //14445			
-			/*
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ExecutableNode>::iterator iter = m_bodyPart->begin();
-			Bag<uml::ExecutableNode>::iterator end = m_bodyPart->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //14445
-			*/
 		}
 		case uml::umlPackage::LOOPNODE_ATTRIBUTE_DECIDER:
 			return eAny(getDecider()); //14446
@@ -905,77 +860,22 @@ Any LoopNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::LOOPNODE_ATTRIBUTE_LOOPVARIABLE:
 		{
 			return eAny(getLoopVariable()); //14448			
-			/*
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::OutputPin>::iterator iter = m_loopVariable->begin();
-			Bag<uml::OutputPin>::iterator end = m_loopVariable->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //14448
-			*/
 		}
 		case uml::umlPackage::LOOPNODE_ATTRIBUTE_LOOPVARIABLEINPUT:
 		{
 			return eAny(getLoopVariableInput()); //14449			
-			/*
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::InputPin>::iterator iter = m_loopVariableInput->begin();
-			Bag<uml::InputPin>::iterator end = m_loopVariableInput->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //14449
-			*/
 		}
 		case uml::umlPackage::LOOPNODE_ATTRIBUTE_RESULT:
 		{
 			return eAny(getResult()); //14450			
-			/*
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::OutputPin>::iterator iter = m_result->begin();
-			Bag<uml::OutputPin>::iterator end = m_result->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //14450
-			*/
 		}
 		case uml::umlPackage::LOOPNODE_ATTRIBUTE_SETUPPART:
 		{
 			return eAny(getSetupPart()); //14451			
-			/*
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ExecutableNode>::iterator iter = m_setupPart->begin();
-			Bag<uml::ExecutableNode>::iterator end = m_setupPart->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //14451
-			*/
 		}
 		case uml::umlPackage::LOOPNODE_ATTRIBUTE_TEST:
 		{
 			return eAny(getTest()); //14452			
-			/*
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ExecutableNode>::iterator iter = m_test->begin();
-			Bag<uml::ExecutableNode>::iterator end = m_test->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //14452
-			*/
 		}
 	}
 	return StructuredActivityNodeImpl::eGet(featureID, resolve, coreType);
@@ -1032,7 +932,7 @@ bool LoopNodeImpl::eSet(int featureID, Any newValue)
 				}
 				iterBodyOutput++;
 			}
-
+ 
 			iterBodyOutput = bodyOutputList->begin();
 			endBodyOutput = bodyOutputList->end();
 			while (iterBodyOutput != endBodyOutput)
@@ -1068,7 +968,7 @@ bool LoopNodeImpl::eSet(int featureID, Any newValue)
 				}
 				iterBodyPart++;
 			}
-
+ 
 			iterBodyPart = bodyPartList->begin();
 			endBodyPart = bodyPartList->end();
 			while (iterBodyPart != endBodyPart)
@@ -1119,7 +1019,7 @@ bool LoopNodeImpl::eSet(int featureID, Any newValue)
 				}
 				iterLoopVariable++;
 			}
-
+ 
 			iterLoopVariable = loopVariableList->begin();
 			endLoopVariable = loopVariableList->end();
 			while (iterLoopVariable != endLoopVariable)
@@ -1155,7 +1055,7 @@ bool LoopNodeImpl::eSet(int featureID, Any newValue)
 				}
 				iterLoopVariableInput++;
 			}
-
+ 
 			iterLoopVariableInput = loopVariableInputList->begin();
 			endLoopVariableInput = loopVariableInputList->end();
 			while (iterLoopVariableInput != endLoopVariableInput)
@@ -1191,7 +1091,7 @@ bool LoopNodeImpl::eSet(int featureID, Any newValue)
 				}
 				iterResult++;
 			}
-
+ 
 			iterResult = resultList->begin();
 			endResult = resultList->end();
 			while (iterResult != endResult)
@@ -1227,7 +1127,7 @@ bool LoopNodeImpl::eSet(int featureID, Any newValue)
 				}
 				iterSetupPart++;
 			}
-
+ 
 			iterSetupPart = setupPartList->begin();
 			endSetupPart = setupPartList->end();
 			while (iterSetupPart != endSetupPart)
@@ -1263,7 +1163,7 @@ bool LoopNodeImpl::eSet(int featureID, Any newValue)
 				}
 				iterTest++;
 			}
-
+ 
 			iterTest = testList->begin();
 			endTest = testList->end();
 			while (iterTest != endTest)
@@ -1431,7 +1331,7 @@ void LoopNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::i
 	StructuredActivityNodeImpl::loadNode(nodeName, loadHandler);
 }
 
-void LoopNodeImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void LoopNodeImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -1556,11 +1456,11 @@ void LoopNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 		}
 
 	// Add references
-		saveHandler->addReferences<uml::OutputPin>("bodyOutput", this->getBodyOutput());	
-		saveHandler->addReferences<uml::ExecutableNode>("bodyPart", this->getBodyPart());	
-		saveHandler->addReference("decider", this->getDecider());		 
-		saveHandler->addReferences<uml::ExecutableNode>("setupPart", this->getSetupPart());	
-		saveHandler->addReferences<uml::ExecutableNode>("test", this->getTest());	
+		saveHandler->addReferences<uml::OutputPin>("bodyOutput", this->getBodyOutput());
+		saveHandler->addReferences<uml::ExecutableNode>("bodyPart", this->getBodyPart());
+		saveHandler->addReference("decider", this->getDecider()); 
+		saveHandler->addReferences<uml::ExecutableNode>("setupPart", this->getSetupPart());
+		saveHandler->addReferences<uml::ExecutableNode>("test", this->getTest());
 
 		//
 		// Add new tags (from references)

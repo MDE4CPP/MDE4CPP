@@ -152,17 +152,6 @@ Any TokenSetImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case fUML::Semantics::Activities::ActivitiesPackage::TOKENSET_ATTRIBUTE_TOKENS:
 		{
 			return eAny(getTokens()); //1160			
-			/*
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<fUML::Semantics::Activities::Token>::iterator iter = m_tokens->begin();
-			Bag<fUML::Semantics::Activities::Token>::iterator end = m_tokens->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //1160
-			*/
 		}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
@@ -203,7 +192,7 @@ bool TokenSetImpl::eSet(int featureID, Any newValue)
 				}
 				iterTokens++;
 			}
-
+ 
 			iterTokens = tokensList->begin();
 			endTokens = tokensList->end();
 			while (iterTokens != endTokens)
@@ -272,7 +261,7 @@ void TokenSetImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::i
 	//load BasePackage Nodes
 }
 
-void TokenSetImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void TokenSetImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -309,7 +298,7 @@ void TokenSetImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 		std::shared_ptr<fUML::Semantics::Activities::ActivitiesPackage> package = fUML::Semantics::Activities::ActivitiesPackage::eInstance();
 
 	// Add references
-		saveHandler->addReferences<fUML::Semantics::Activities::Token>("tokens", this->getTokens());	
+		saveHandler->addReferences<fUML::Semantics::Activities::Token>("tokens", this->getTokens());
 	}
 	catch (std::exception& e)
 	{

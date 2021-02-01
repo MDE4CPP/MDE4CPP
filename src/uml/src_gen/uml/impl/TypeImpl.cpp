@@ -34,23 +34,14 @@
 #include <exception> // used in Persistence
 
 #include "uml/Association.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/Package.hpp"
-
 #include "uml/PackageableElement.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/TemplateParameter.hpp"
-
 #include "uml/Type.hpp"
 
 //Factories an Package includes
@@ -366,7 +357,7 @@ void TypeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inter
 	PackageableElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void TypeImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void TypeImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{

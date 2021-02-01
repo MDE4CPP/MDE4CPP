@@ -39,25 +39,15 @@
 #include <exception> // used in Persistence
 
 #include "uml/Behavior.hpp"
-
 #include "uml/Classifier.hpp"
-
 #include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"
-
 #include "fUML/Semantics/CommonBehavior/Execution.hpp"
-
 #include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
-
 #include "fUML/Semantics/Loci/Locus.hpp"
-
 #include "fUML/Semantics/StructuredClassifiers/Object.hpp"
-
 #include "fUML/Semantics/CommonBehavior/ObjectActivation.hpp"
-
 #include "uml/Operation.hpp"
-
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
-
 #include "fUML/Semantics/Values/Value.hpp"
 
 //Factories an Package includes
@@ -106,8 +96,8 @@ CallEventExecutionImpl::CallEventExecutionImpl(const CallEventExecutionImpl & ob
 
 	m_locus  = obj.getLocus();
 
-	std::shared_ptr<Bag<org.eclipse.uml2.uml.Classifier>> _types = obj.getTypes();
-	m_types.reset(new Bag<org.eclipse.uml2.uml.Classifier>(*(obj.getTypes().get())));
+	std::shared_ptr<Bag<uml::Classifier>> _types = obj.getTypes();
+	m_types.reset(new Bag<uml::Classifier>(*(obj.getTypes().get())));
 
 
 	//Clone references with containment (deep copy)
@@ -156,12 +146,12 @@ std::shared_ptr<ecore::EClass> CallEventExecutionImpl::eStaticClass() const
 /*
 Getter & Setter for attribute callerSuspended
 */
-bool  CallEventExecutionImpl::getCallerSuspended() const 
+bool CallEventExecutionImpl::getCallerSuspended() const 
 {
 	return m_callerSuspended;
 }
 
-void CallEventExecutionImpl::setCallerSuspended(bool  _callerSuspended)
+void CallEventExecutionImpl::setCallerSuspended(bool _callerSuspended)
 {
 	m_callerSuspended = _callerSuspended;
 } 
@@ -230,7 +220,7 @@ return parameterValues;
 	//end of body
 }
 
-std::shared_ptr<org.eclipse.uml2.uml.Operation> CallEventExecutionImpl::getOperation()
+std::shared_ptr<uml::Operation> CallEventExecutionImpl::getOperation()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -282,7 +272,7 @@ void CallEventExecutionImpl::releaseCaller()
 	//end of body
 }
 
-void CallEventExecutionImpl::setOutputParameterValues(std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > parameterValues)
+void CallEventExecutionImpl::setOutputParameterValues(std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> parameterValues)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -444,7 +434,7 @@ void CallEventExecutionImpl::loadNode(std::string nodeName, std::shared_ptr<pers
 	ExecutionImpl::loadNode(nodeName, loadHandler);
 }
 
-void CallEventExecutionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void CallEventExecutionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	ExecutionImpl::resolveReferences(featureID, references);
 }

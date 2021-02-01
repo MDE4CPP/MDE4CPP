@@ -7,20 +7,16 @@
 #ifndef FUML_SEMANTICS_ACTIONS_CLEARSTRUCTURALFEATUREACTIONACTIVATION_HPP
 #define FUML_SEMANTICS_ACTIONS_CLEARSTRUCTURALFEATUREACTIONACTIVATION_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
-
 
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -60,22 +56,12 @@ namespace uml
 // enum includes
 
 
-//Includes from codegen annotation
-#include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
-#include "fUML/Semantics/SimpleClassifiers/StructuredValue.hpp"
-#include "fUML/Semantics/Values/Value.hpp"
-#include "fUML/Semantics/Activities/ActivityExecution.hpp"
-#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
-#include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
-#include "uml/InputPin.hpp"
-#include "uml/ClearStructuralFeatureAction.hpp"
-#include "uml/StructuralFeature.hpp"
 
 //*********************************
 namespace fUML::Semantics::Actions 
 {
 	
-	class ClearStructuralFeatureActionActivation:virtual public StructuralFeatureActionActivation
+	class ClearStructuralFeatureActionActivation: virtual public StructuralFeatureActionActivation
 	{
 		public:
  			ClearStructuralFeatureActionActivation(const ClearStructuralFeatureActionActivation &) {}
@@ -83,7 +69,6 @@ namespace fUML::Semantics::Actions
 
 		protected:
 			ClearStructuralFeatureActionActivation(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -132,7 +117,7 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

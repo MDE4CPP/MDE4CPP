@@ -8,22 +8,18 @@
 #define UML_PIN_HPP
 
 #include <map>
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
-
 
 class AnyObject;
 typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -60,7 +56,6 @@ namespace uml
 
 // base class includes
 #include "uml/MultiplicityElement.hpp"
-
 #include "uml/ObjectNode.hpp"
 
 // enum includes
@@ -69,7 +64,6 @@ namespace uml
 #include "uml/VisibilityKind.hpp"
 
 
-//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -79,7 +73,7 @@ namespace uml
 	<p>From package UML::Actions.</p>
 	*/
 	
-	class Pin:virtual public MultiplicityElement,virtual public ObjectNode
+	class Pin: virtual public MultiplicityElement, virtual public ObjectNode
 	{
 		public:
  			Pin(const Pin &) {}
@@ -87,7 +81,6 @@ namespace uml
 
 		protected:
 			Pin(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -121,15 +114,14 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual bool  getIsControl() const = 0;
+			virtual bool getIsControl() const = 0;
 			
 			/*!
 			Indicates whether the Pin provides data to the Action or just controls how the Action executes.
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual void setIsControl (bool  _isControl)= 0; 
-			
+			virtual void setIsControl (bool _isControl)= 0;
 			//*********************************
 			// Reference
 			//*********************************
@@ -144,7 +136,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			bool  m_isControl = false;
+			bool m_isControl = false;
 			
 			
 			//*********************************
@@ -185,7 +177,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

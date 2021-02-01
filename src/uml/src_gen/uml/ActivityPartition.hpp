@@ -8,23 +8,19 @@
 #define UML_ACTIVITYPARTITION_HPP
 
 #include <map>
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T, class ... U> class Subset;
-
 
 class AnyObject;
 typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -58,7 +54,6 @@ namespace uml
 #include "uml/VisibilityKind.hpp"
 
 
-//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -68,7 +63,7 @@ namespace uml
 	<p>From package UML::Activities.</p>
 	*/
 	
-	class ActivityPartition:virtual public ActivityGroup
+	class ActivityPartition: virtual public ActivityGroup
 	{
 		public:
  			ActivityPartition(const ActivityPartition &) {}
@@ -77,25 +72,19 @@ namespace uml
 		protected:
 			ActivityPartition(){}
 
-
 			//Additional constructors for the containments back reference
-
 			ActivityPartition(std::weak_ptr<uml::Activity > par_inActivity);
 
 			//Additional constructors for the containments back reference
-
 			ActivityPartition(std::weak_ptr<uml::Namespace > par_namespace);
 
 			//Additional constructors for the containments back reference
-
 			ActivityPartition(std::weak_ptr<uml::Element > par_owner);
 
 			//Additional constructors for the containments back reference
-
 			ActivityPartition(std::weak_ptr<uml::ActivityGroup > par_superGroup);
 
 			//Additional constructors for the containments back reference
-
 			ActivityPartition(std::weak_ptr<uml::ActivityPartition > par_superPartition);
 
 		public:
@@ -166,28 +155,26 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			 
-			virtual bool  getIsDimension() const = 0;
+			virtual bool getIsDimension() const = 0;
 			
 			/*!
 			Indicates whether the ActivityPartition groups other ActivityPartitions along a dimension.
 			<p>From package UML::Activities.</p>
 			*/
 			 
-			virtual void setIsDimension (bool  _isDimension)= 0; 
-			/*!
+			virtual void setIsDimension (bool _isDimension)= 0;/*!
 			Indicates whether the ActivityPartition represents an entity to which the partitioning structure does not apply.
 			<p>From package UML::Activities.</p>
 			*/
 			 
-			virtual bool  getIsExternal() const = 0;
+			virtual bool getIsExternal() const = 0;
 			
 			/*!
 			Indicates whether the ActivityPartition represents an entity to which the partitioning structure does not apply.
 			<p>From package UML::Activities.</p>
 			*/
 			 
-			virtual void setIsExternal (bool  _isExternal)= 0; 
-			
+			virtual void setIsExternal (bool _isExternal)= 0;
 			//*********************************
 			// Reference
 			//*********************************
@@ -254,13 +241,13 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			 
-			bool  m_isDimension = false;
+			bool m_isDimension = false;
 			/*!
 			Indicates whether the ActivityPartition represents an entity to which the partitioning structure does not apply.
 			<p>From package UML::Activities.</p>
 			*/
 			 
-			bool  m_isExternal = false;
+			bool m_isExternal = false;
 			
 			
 			//*********************************
@@ -336,7 +323,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

@@ -7,22 +7,18 @@
 #ifndef UML_ACTION_HPP
 #define UML_ACTION_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T, class ... U> class Subset;
 template<class T, class ... U> class SubsetUnion;
 
 
-
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -65,7 +61,6 @@ namespace uml
 #include "uml/VisibilityKind.hpp"
 
 
-//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -75,7 +70,7 @@ namespace uml
 	<p>From package UML::Actions.</p>
 	*/
 	
-	class Action:virtual public ExecutableNode
+	class Action: virtual public ExecutableNode
 	{
 		public:
  			Action(const Action &) {}
@@ -83,7 +78,6 @@ namespace uml
 
 		protected:
 			Action(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -133,15 +127,14 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual bool  getIsLocallyReentrant() const = 0;
+			virtual bool getIsLocallyReentrant() const = 0;
 			
 			/*!
 			If true, the Action can begin a new, concurrent execution, even if there is already another execution of the Action ongoing. If false, the Action cannot begin a new execution until any previous execution has completed.
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual void setIsLocallyReentrant (bool  _isLocallyReentrant)= 0; 
-			
+			virtual void setIsLocallyReentrant (bool _isLocallyReentrant)= 0;
 			//*********************************
 			// Reference
 			//*********************************
@@ -184,7 +177,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			bool  m_isLocallyReentrant = false;
+			bool m_isLocallyReentrant = false;
 			
 			
 			//*********************************
@@ -260,7 +253,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

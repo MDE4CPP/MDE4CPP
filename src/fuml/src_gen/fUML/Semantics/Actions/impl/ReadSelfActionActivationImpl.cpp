@@ -36,23 +36,14 @@
 #include <exception> // used in Persistence
 
 #include "uml/Action.hpp"
-
 #include "fUML/Semantics/Actions/ActionActivation.hpp"
-
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
-
 #include "uml/ActivityNode.hpp"
-
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
-
 #include "fUML/Semantics/Actions/InputPinActivation.hpp"
-
 #include "fUML/Semantics/Actions/OutputPinActivation.hpp"
-
 #include "fUML/Semantics/Actions/PinActivation.hpp"
-
 #include "uml/ReadSelfAction.hpp"
-
 #include "fUML/Semantics/Activities/Token.hpp"
 
 //Factories an Package includes
@@ -212,13 +203,13 @@ void ReadSelfActionActivationImpl::doAction()
 /*
 Getter & Setter for reference readSelfAction
 */
-std::shared_ptr<org.eclipse.uml2.uml.ReadSelfAction > ReadSelfActionActivationImpl::getReadSelfAction() const
+std::shared_ptr<uml::ReadSelfAction > ReadSelfActionActivationImpl::getReadSelfAction() const
 {
 //assert(m_readSelfAction);
     return m_readSelfAction;
 }
 
-void ReadSelfActionActivationImpl::setReadSelfAction(std::shared_ptr<org.eclipse.uml2.uml.ReadSelfAction> _readSelfAction)
+void ReadSelfActionActivationImpl::setReadSelfAction(std::shared_ptr<uml::ReadSelfAction> _readSelfAction)
 {
     m_readSelfAction = _readSelfAction;
 	//additional setter call for redefined reference ActionActivation::action
@@ -226,9 +217,9 @@ void ReadSelfActionActivationImpl::setReadSelfAction(std::shared_ptr<org.eclipse
 }
 
 /*Additional Setter for redefined reference 'ActionActivation::action'*/
-void ReadSelfActionActivationImpl::setAction(std::shared_ptr<org.eclipse.uml2.uml.Action> _action)
+void ReadSelfActionActivationImpl::setAction(std::shared_ptr<uml::Action> _action)
 {
-	std::shared_ptr<org.eclipse.uml2.uml.ReadSelfAction> _readSelfAction = std::dynamic_pointer_cast<org.eclipse.uml2.uml.ReadSelfAction>(_action);
+	std::shared_ptr<uml::ReadSelfAction> _readSelfAction = std::dynamic_pointer_cast<uml::ReadSelfAction>(_action);
 	if(_readSelfAction)
 	{
 		m_readSelfAction = _readSelfAction;
@@ -238,13 +229,13 @@ void ReadSelfActionActivationImpl::setAction(std::shared_ptr<org.eclipse.uml2.um
 	}
 	else
 	{
-		std::cerr<<"[ReadSelfActionActivation::setAction] : Could not set action because provided action was not of type 'org.eclipse.uml2.uml.ReadSelfAction'"<<std::endl;
+		std::cerr<<"[ReadSelfActionActivation::setAction] : Could not set action because provided action was not of type 'uml::ReadSelfAction'"<<std::endl;
 	}
 }
 /*Additional Setter for redefined reference 'ActivityNodeActivation::node'*/
-void ReadSelfActionActivationImpl::setNode(std::shared_ptr<org.eclipse.uml2.uml.ActivityNode> _node)
+void ReadSelfActionActivationImpl::setNode(std::shared_ptr<uml::ActivityNode> _node)
 {
-	std::shared_ptr<org.eclipse.uml2.uml.ReadSelfAction> _readSelfAction = std::dynamic_pointer_cast<org.eclipse.uml2.uml.ReadSelfAction>(_node);
+	std::shared_ptr<uml::ReadSelfAction> _readSelfAction = std::dynamic_pointer_cast<uml::ReadSelfAction>(_node);
 	if(_readSelfAction)
 	{
 		m_readSelfAction = _readSelfAction;
@@ -254,7 +245,7 @@ void ReadSelfActionActivationImpl::setNode(std::shared_ptr<org.eclipse.uml2.uml.
 	}
 	else
 	{
-		std::cerr<<"[ReadSelfActionActivation::setNode] : Could not set node because provided node was not of type 'org.eclipse.uml2.uml.ReadSelfAction'"<<std::endl;
+		std::cerr<<"[ReadSelfActionActivation::setNode] : Could not set node because provided node was not of type 'uml::ReadSelfAction'"<<std::endl;
 	}
 }
 
@@ -327,7 +318,7 @@ bool ReadSelfActionActivationImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<org.eclipse.uml2.uml.ReadSelfAction> _readSelfAction = std::dynamic_pointer_cast<org.eclipse.uml2.uml.ReadSelfAction>(_temp);
+			std::shared_ptr<uml::ReadSelfAction> _readSelfAction = std::dynamic_pointer_cast<uml::ReadSelfAction>(_temp);
 			setReadSelfAction(_readSelfAction); //9311
 			return true;
 		}
@@ -388,7 +379,7 @@ void ReadSelfActionActivationImpl::loadNode(std::string nodeName, std::shared_pt
 	ActionActivationImpl::loadNode(nodeName, loadHandler);
 }
 
-void ReadSelfActionActivationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ReadSelfActionActivationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -397,7 +388,7 @@ void ReadSelfActionActivationImpl::resolveReferences(const int featureID, std::l
 			if (references.size() == 1)
 			{
 				// Cast object to correct type
-				std::shared_ptr<org.eclipse.uml2.uml.ReadSelfAction> _readSelfAction = std::dynamic_pointer_cast<org.eclipse.uml2.uml.ReadSelfAction>( references.front() );
+				std::shared_ptr<uml::ReadSelfAction> _readSelfAction = std::dynamic_pointer_cast<uml::ReadSelfAction>( references.front() );
 				setReadSelfAction(_readSelfAction);
 			}
 			
@@ -430,7 +421,7 @@ void ReadSelfActionActivationImpl::saveContent(std::shared_ptr<persistence::inte
 		std::shared_ptr<fUML::Semantics::Actions::ActionsPackage> package = fUML::Semantics::Actions::ActionsPackage::eInstance();
 
 	// Add references
-		saveHandler->addReference("readSelfAction", this->getReadSelfAction());		
+		saveHandler->addReference("readSelfAction", this->getReadSelfAction()); 
 	}
 	catch (std::exception& e)
 	{

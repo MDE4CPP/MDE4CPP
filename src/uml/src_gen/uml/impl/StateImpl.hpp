@@ -9,7 +9,6 @@
 
 //*********************************
 // generated Includes
-
 //Model includes
 #include "../State.hpp"
 
@@ -148,34 +147,22 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			 
-			virtual bool  getIsComposite() const ;
-			
-			
-			/*!
+			virtual bool getIsComposite() const ;/*!
 			A State with isOrthogonal=true is said to be an orthogonal composite State An orthogonal composite State contains two or more Regions.
 			<p>From package UML::StateMachines.</p>
 			*/
 			 
-			virtual bool  getIsOrthogonal() const ;
-			
-			
-			/*!
+			virtual bool getIsOrthogonal() const ;/*!
 			A State with isSimple=true is said to be a simple State A simple State does not have any Regions and it does not refer to any submachine StateMachine.
 			<p>From package UML::StateMachines.</p>
 			*/
 			 
-			virtual bool  getIsSimple() const ;
-			
-			
-			/*!
+			virtual bool getIsSimple() const ;/*!
 			A State with isSubmachineState=true is said to be a submachine State Such a State refers to another StateMachine(submachine).
 			<p>From package UML::StateMachines.</p>
 			*/
 			 
-			virtual bool  getIsSubmachineState() const ;
-			
-			
-			
+			virtual bool getIsSubmachineState() const ;
 			
 			//*********************************
 			// Reference
@@ -346,7 +333,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

@@ -9,7 +9,6 @@
 
 //*********************************
 // generated Includes
-
 //Model includes
 #include "../ETypedElement.hpp"
 
@@ -51,36 +50,22 @@ namespace ecore
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			 
-			virtual int  getLowerBound() const ;
+			virtual int getLowerBound() const ;
 			
 			 
-			virtual void setLowerBound (int  _lowerBound); 
-			 
-			virtual bool  isMany() const ;
-			
+			virtual void setLowerBound (int _lowerBound);virtual bool isMany() const ;virtual bool isOrdered() const ;
 			
 			 
-			virtual bool  isOrdered() const ;
+			virtual void setOrdered (bool _ordered);virtual bool isRequired() const ;
 			
 			 
-			virtual void setOrdered (bool  _ordered); 
-			 
-			virtual bool  isRequired() const ;
+			virtual void setRequired (bool _required);virtual bool isUnique() const ;
 			
 			 
-			virtual void setRequired (bool  _required); 
-			 
-			virtual bool  isUnique() const ;
+			virtual void setUnique (bool _unique);virtual int getUpperBound() const ;
 			
 			 
-			virtual void setUnique (bool  _unique); 
-			 
-			virtual int  getUpperBound() const ;
-			
-			 
-			virtual void setUpperBound (int  _upperBound); 
-			
+			virtual void setUpperBound (int _upperBound);
 			
 			//*********************************
 			// Reference
@@ -118,7 +103,7 @@ namespace ecore
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

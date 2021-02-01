@@ -9,7 +9,6 @@
 
 //*********************************
 // generated Includes
-
 //Model includes
 #include "../RemoveStructuralFeatureValueAction.hpp"
 
@@ -82,15 +81,14 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual bool  getIsRemoveDuplicates() const ;
+			virtual bool getIsRemoveDuplicates() const ;
 			
 			/*!
 			Specifies whether to remove duplicates of the value in nonunique StructuralFeatures.
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual void setIsRemoveDuplicates (bool  _isRemoveDuplicates); 
-			
+			virtual void setIsRemoveDuplicates (bool _isRemoveDuplicates);
 			
 			//*********************************
 			// Reference
@@ -159,7 +157,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

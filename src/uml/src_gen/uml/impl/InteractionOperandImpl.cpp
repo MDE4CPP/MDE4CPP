@@ -35,35 +35,20 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
 #include "uml/Constraint.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/ElementImport.hpp"
-
 #include "uml/GeneralOrdering.hpp"
-
 #include "uml/Interaction.hpp"
-
 #include "uml/InteractionConstraint.hpp"
-
 #include "uml/InteractionFragment.hpp"
-
 #include "uml/InteractionOperand.hpp"
-
 #include "uml/Lifeline.hpp"
-
 #include "uml/NamedElement.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/PackageImport.hpp"
-
 #include "uml/PackageableElement.hpp"
-
 #include "uml/StringExpression.hpp"
 
 //Factories an Package includes
@@ -423,17 +408,6 @@ Any InteractionOperandImpl::eGet(int featureID, bool resolve, bool coreType) con
 		case uml::umlPackage::INTERACTIONOPERAND_ATTRIBUTE_FRAGMENT:
 		{
 			return eAny(getFragment()); //12219			
-			/*
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::InteractionFragment>::iterator iter = m_fragment->begin();
-			Bag<uml::InteractionFragment>::iterator end = m_fragment->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //12219
-			*/
 		}
 		case uml::umlPackage::INTERACTIONOPERAND_ATTRIBUTE_GUARD:
 			return eAny(getGuard()); //12220
@@ -492,7 +466,7 @@ bool InteractionOperandImpl::eSet(int featureID, Any newValue)
 				}
 				iterFragment++;
 			}
-
+ 
 			iterFragment = fragmentList->begin();
 			endFragment = fragmentList->end();
 			while (iterFragment != endFragment)
@@ -602,7 +576,7 @@ void InteractionOperandImpl::loadNode(std::string nodeName, std::shared_ptr<pers
 	NamespaceImpl::loadNode(nodeName, loadHandler);
 }
 
-void InteractionOperandImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void InteractionOperandImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	InteractionFragmentImpl::resolveReferences(featureID, references);
 	NamespaceImpl::resolveReferences(featureID, references);

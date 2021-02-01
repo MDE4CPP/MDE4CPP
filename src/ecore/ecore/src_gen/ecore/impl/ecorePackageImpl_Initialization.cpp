@@ -2827,6 +2827,8 @@ void ecorePackageImpl::initializePackageEDataTypes()
 	m_eChar_Class->setSerializable(true);
 	m_eCharacterObject_Class->setName("ECharacterObject");
 	m_eCharacterObject_Class->setSerializable(true);
+	m_eDate_Class->setName("EDate");
+	m_eDate_Class->setSerializable(true);
 	m_eDiagnosticChain_Class->setName("EDiagnosticChain");
 	m_eDiagnosticChain_Class->setSerializable(false);
 	m_eDouble_Class->setName("EDouble");

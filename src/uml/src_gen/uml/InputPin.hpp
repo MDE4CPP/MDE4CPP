@@ -8,23 +8,19 @@
 #define UML_INPUTPIN_HPP
 
 #include <map>
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T, class ... U> class Subset;
-
 
 class AnyObject;
 typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -76,7 +72,6 @@ namespace uml
 #include "uml/VisibilityKind.hpp"
 
 
-//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -86,7 +81,7 @@ namespace uml
 	<p>From package UML::Actions.</p>
 	*/
 	
-	class InputPin:virtual public Pin
+	class InputPin: virtual public Pin
 	{
 		public:
  			InputPin(const InputPin &) {}
@@ -95,53 +90,40 @@ namespace uml
 		protected:
 			InputPin(){}
 
-
 			//Additional constructors for the containments back reference
-
 			InputPin(std::weak_ptr<uml::Action > par_action);
 
 			//Additional constructors for the containments back reference
-
 			InputPin(std::weak_ptr<uml::Activity > par_activity);
 
 			//Additional constructors for the containments back reference
-
 			InputPin(std::weak_ptr<uml::AddStructuralFeatureValueAction > par_addStructuralFeatureValueAction);
 
 			//Additional constructors for the containments back reference
-
 			InputPin(std::weak_ptr<uml::CallOperationAction > par_callOperationAction);
 
 			//Additional constructors for the containments back reference
-
 			InputPin(std::weak_ptr<uml::DestroyObjectAction > par_destroyObjectAction);
 
 			//Additional constructors for the containments back reference
-
 			InputPin(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode);
 
 			//Additional constructors for the containments back reference
-
 			InputPin(std::weak_ptr<uml::InvocationAction > par_invocationAction);
 
 			//Additional constructors for the containments back reference
-
 			InputPin(std::weak_ptr<uml::Namespace > par_namespace);
 
 			//Additional constructors for the containments back reference
-
 			InputPin(std::weak_ptr<uml::Element > par_owner);
 
 			//Additional constructors for the containments back reference
-
 			InputPin(std::weak_ptr<uml::RemoveStructuralFeatureValueAction > par_removeStructuralFeatureValueAction);
 
 			//Additional constructors for the containments back reference
-
 			InputPin(std::weak_ptr<uml::StructuralFeatureAction > par_structuralFeatureAction);
 
 			//Additional constructors for the containments back reference
-
 			InputPin(std::weak_ptr<uml::WriteStructuralFeatureAction > par_writeStructuralFeatureAction);
 
 		public:
@@ -271,7 +253,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

@@ -33,11 +33,8 @@
 #include <exception> // used in Persistence
 
 #include "ecore/EAnnotation.hpp"
-
 #include "ecore/EGenericType.hpp"
-
 #include "ecore/ENamedElement.hpp"
-
 #include "ecore/EObject.hpp"
 
 //Factories an Package includes
@@ -198,7 +195,7 @@ Any ETypeParameterImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case ecore::ecorePackage::ETYPEPARAMETER_ATTRIBUTE_EBOUNDS:
 		{
-			return eAny(getEBounds()); //515			
+			return eAny(getEBounds()); //525			
 		}
 	}
 	return ENamedElementImpl::eGet(featureID, resolve, coreType);
@@ -208,7 +205,7 @@ bool ETypeParameterImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ecore::ecorePackage::ETYPEPARAMETER_ATTRIBUTE_EBOUNDS:
-			return getEBounds() != nullptr; //515
+			return getEBounds() != nullptr; //525
 	}
 	return ENamedElementImpl::internalEIsSet(featureID);
 }
@@ -239,7 +236,7 @@ bool ETypeParameterImpl::eSet(int featureID, Any newValue)
 				}
 				iterEBounds++;
 			}
-
+ 
 			iterEBounds = eBoundsList->begin();
 			endEBounds = eBoundsList->end();
 			while (iterEBounds != endEBounds)
@@ -317,7 +314,7 @@ void ETypeParameterImpl::loadNode(std::string nodeName, std::shared_ptr<persiste
 	ENamedElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void ETypeParameterImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references)
+void ETypeParameterImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references)
 {
 	ENamedElementImpl::resolveReferences(featureID, references);
 }

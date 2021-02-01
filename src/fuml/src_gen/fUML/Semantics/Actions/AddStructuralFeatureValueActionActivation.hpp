@@ -7,20 +7,16 @@
 #ifndef FUML_SEMANTICS_ACTIONS_ADDSTRUCTURALFEATUREVALUEACTIONACTIVATION_HPP
 #define FUML_SEMANTICS_ACTIONS_ADDSTRUCTURALFEATUREVALUEACTIONACTIVATION_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
-
 
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -61,26 +57,12 @@ namespace uml
 // enum includes
 
 
-//Includes from codegen annotation
-#include "fUML/Semantics/Loci/Locus.hpp"
-#include "fUML/Semantics/Loci/ChoiceStrategy.hpp"
-#include "fUML/Semantics/Loci/ExecutionFactory.hpp"
-#include "fUML/Semantics/SimpleClassifiers/StructuredValue.hpp"
-#include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
-#include "fUML/Semantics/SimpleClassifiers/UnlimitedNaturalValue.hpp"
-#include "fUML/Semantics/Activities/ActivityExecution.hpp"
-#include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
-#include "fUML/Semantics/StructuredClassifiers/Link.hpp"
-#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
-#include "uml/AddStructuralFeatureValueAction.hpp"
-#include "uml/Property.hpp"
-#include "uml/InputPin.hpp"
 
 //*********************************
 namespace fUML::Semantics::Actions 
 {
 	
-	class AddStructuralFeatureValueActionActivation:virtual public WriteStructuralFeatureActionActivation
+	class AddStructuralFeatureValueActionActivation: virtual public WriteStructuralFeatureActionActivation
 	{
 		public:
  			AddStructuralFeatureValueActionActivation(const AddStructuralFeatureValueActionActivation &) {}
@@ -88,7 +70,6 @@ namespace fUML::Semantics::Actions
 
 		protected:
 			AddStructuralFeatureValueActionActivation(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -111,19 +92,17 @@ namespace fUML::Semantics::Actions
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<org.eclipse.uml2.uml.AddStructuralFeatureValueAction > getAddStructuralFeatureValueAction() const = 0;
+			virtual std::shared_ptr<uml::AddStructuralFeatureValueAction > getAddStructuralFeatureValueAction() const = 0;
 			
 			
-			virtual void setAddStructuralFeatureValueAction(std::shared_ptr<org.eclipse.uml2.uml.AddStructuralFeatureValueAction> _addStructuralFeatureValueAction) = 0;
+			virtual void setAddStructuralFeatureValueAction(std::shared_ptr<uml::AddStructuralFeatureValueAction> _addStructuralFeatureValueAction) = 0;
 			
 			/*Additional Setter for 'ActionActivation::action' redefined by reference 'addStructuralFeatureValueAction'*/
 			
-			virtual void setAction(std::shared_ptr<org.eclipse.uml2.uml.Action> _action) = 0;
-			
+			virtual void setAction(std::shared_ptr<uml::Action> _action) = 0;
 			/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'addStructuralFeatureValueAction'*/
 			
-			virtual void setNode(std::shared_ptr<org.eclipse.uml2.uml.ActivityNode> _node) = 0;
-			
+			virtual void setNode(std::shared_ptr<uml::ActivityNode> _node) = 0;
 			
 
 		protected:
@@ -136,7 +115,7 @@ namespace fUML::Semantics::Actions
 			// Reference Members
 			//*********************************
 			
-			std::shared_ptr<org.eclipse.uml2.uml.AddStructuralFeatureValueAction > m_addStructuralFeatureValueAction;
+			std::shared_ptr<uml::AddStructuralFeatureValueAction > m_addStructuralFeatureValueAction;
 
 		public:
 			//*********************************
@@ -152,7 +131,7 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

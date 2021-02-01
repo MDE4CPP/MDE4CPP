@@ -7,20 +7,16 @@
 #ifndef FUML_SEMANTICS_SIMPLECLASSIFIERS_ENUMERATIONVALUE_HPP
 #define FUML_SEMANTICS_SIMPLECLASSIFIERS_ENUMERATIONVALUE_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
-
 
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -50,20 +46,12 @@ namespace uml
 // enum includes
 
 
-//Includes from codegen annotation
-#include "fUML/FUMLFactory.hpp"
-#include "uml/Class.hpp"
-#include "uml/Enumeration.hpp"
-#include "uml/EnumerationLiteral.hpp"
-#include "uml/InstanceSpecification.hpp"
-#include "uml/InstanceValue.hpp"
-#include "uml/umlFactory.hpp"
 
 //*********************************
 namespace fUML::Semantics::SimpleClassifiers 
 {
 	
-	class EnumerationValue:virtual public fUML::Semantics::Values::Value
+	class EnumerationValue: virtual public fUML::Semantics::Values::Value
 	{
 		public:
  			EnumerationValue(const EnumerationValue &) {}
@@ -71,7 +59,6 @@ namespace fUML::Semantics::SimpleClassifiers
 
 		protected:
 			EnumerationValue(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -89,13 +76,13 @@ namespace fUML::Semantics::SimpleClassifiers
 			virtual bool equals(std::shared_ptr<fUML::Semantics::Values::Value> otherValue) = 0;
 			
 			 
-			virtual std::shared_ptr<Bag<org.eclipse.uml2.uml.Classifier> > getTypes() = 0;
+			virtual std::shared_ptr<Bag<uml::Classifier> > getTypes() = 0;
 			
 			 
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> new_() = 0;
 			
 			 
-			virtual std::shared_ptr<org.eclipse.uml2.uml.ValueSpecification> specify() = 0;
+			virtual std::shared_ptr<uml::ValueSpecification> specify() = 0;
 			
 			 
 			virtual std::string toString() = 0;
@@ -109,16 +96,16 @@ namespace fUML::Semantics::SimpleClassifiers
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<org.eclipse.uml2.uml.EnumerationLiteral > getLiteral() const = 0;
+			virtual std::shared_ptr<uml::EnumerationLiteral > getLiteral() const = 0;
 			
 			
-			virtual void setLiteral(std::shared_ptr<org.eclipse.uml2.uml.EnumerationLiteral> _literal) = 0;
+			virtual void setLiteral(std::shared_ptr<uml::EnumerationLiteral> _literal) = 0;
 			
 			
-			virtual std::shared_ptr<org.eclipse.uml2.uml.Enumeration > getType() const = 0;
+			virtual std::shared_ptr<uml::Enumeration > getType() const = 0;
 			
 			
-			virtual void setType(std::shared_ptr<org.eclipse.uml2.uml.Enumeration> _type) = 0;
+			virtual void setType(std::shared_ptr<uml::Enumeration> _type) = 0;
 			
 			
 
@@ -132,8 +119,8 @@ namespace fUML::Semantics::SimpleClassifiers
 			// Reference Members
 			//*********************************
 			
-			std::shared_ptr<org.eclipse.uml2.uml.EnumerationLiteral > m_literal;
-			std::shared_ptr<org.eclipse.uml2.uml.Enumeration > m_type;
+			std::shared_ptr<uml::EnumerationLiteral > m_literal;
+			std::shared_ptr<uml::Enumeration > m_type;
 
 		public:
 			//*********************************
@@ -148,7 +135,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

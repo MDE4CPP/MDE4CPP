@@ -34,25 +34,15 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/LiteralSpecification.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/Package.hpp"
-
 #include "uml/Slot.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/TemplateParameter.hpp"
-
 #include "uml/Type.hpp"
-
 #include "uml/ValueSpecificationAction.hpp"
 
 //Factories an Package includes
@@ -198,12 +188,12 @@ std::shared_ptr<ecore::EClass> LiteralIntegerImpl::eStaticClass() const
 /*
 Getter & Setter for attribute value
 */
-int  LiteralIntegerImpl::getValue() const 
+int LiteralIntegerImpl::getValue() const 
 {
 	return m_value;
 }
 
-void LiteralIntegerImpl::setValue(int  _value)
+void LiteralIntegerImpl::setValue(int _value)
 {
 	m_value = _value;
 } 
@@ -398,7 +388,7 @@ void LiteralIntegerImpl::loadNode(std::string nodeName, std::shared_ptr<persiste
 	LiteralSpecificationImpl::loadNode(nodeName, loadHandler);
 }
 
-void LiteralIntegerImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void LiteralIntegerImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	LiteralSpecificationImpl::resolveReferences(featureID, references);
 }

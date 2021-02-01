@@ -7,21 +7,17 @@
 #ifndef ECORE_EENUMLITERAL_HPP
 #define ECORE_EENUMLITERAL_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
 #include "abstractDataTypes/Any.hpp"
-
 // forward declarations
-
 
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -49,13 +45,12 @@ namespace ecore
 // enum includes
 
 
-//Includes from codegen annotation
 
 //*********************************
 namespace ecore 
 {
 	
-	class EEnumLiteral:virtual public ENamedElement
+	class EEnumLiteral: virtual public ENamedElement
 	{
 		public:
  			EEnumLiteral(const EEnumLiteral &) {}
@@ -64,13 +59,10 @@ namespace ecore
 		protected:
 			EEnumLiteral(){}
 
-
 			//Additional constructors for the containments back reference
-
 			EEnumLiteral(std::weak_ptr<ecore::EObject > par_eContainer);
 
 			//Additional constructors for the containments back reference
-
 			EEnumLiteral(std::weak_ptr<ecore::EEnum > par_eEnum);
 
 		public:
@@ -86,22 +78,16 @@ namespace ecore
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			 
-			virtual Any  getInstance() const = 0;
+			virtual Any getInstance() const = 0;
 			
 			 
-			virtual void setInstance (Any  _instance)= 0; 
-			 
-			virtual std::string  getLiteral() const = 0;
+			virtual void setInstance (Any _instance)= 0;virtual std::string getLiteral() const = 0;
 			
 			 
-			virtual void setLiteral (std::string  _literal)= 0; 
-			 
-			virtual int  getValue() const = 0;
+			virtual void setLiteral (std::string _literal)= 0;virtual int getValue() const = 0;
 			
 			 
-			virtual void setValue (int  _value)= 0; 
-			
+			virtual void setValue (int _value)= 0;
 			//*********************************
 			// Reference
 			//*********************************
@@ -116,11 +102,11 @@ namespace ecore
 			// Attribute Members
 			//*********************************
 			 
-			Any  m_instance = nullptr;
+			Any m_instance = nullptr;
 			 
-			std::string  m_literal = "";
+			std::string m_literal = "";
 			 
-			int  m_value = 0;
+			int m_value = 0;
 			
 			
 			//*********************************
@@ -143,7 +129,7 @@ namespace ecore
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

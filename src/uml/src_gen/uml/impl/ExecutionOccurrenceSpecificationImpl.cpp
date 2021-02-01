@@ -34,25 +34,15 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/ExecutionSpecification.hpp"
-
 #include "uml/GeneralOrdering.hpp"
-
 #include "uml/Interaction.hpp"
-
 #include "uml/InteractionOperand.hpp"
-
 #include "uml/Lifeline.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/OccurrenceSpecification.hpp"
-
 #include "uml/StringExpression.hpp"
 
 //Factories an Package includes
@@ -367,7 +357,7 @@ void ExecutionOccurrenceSpecificationImpl::loadNode(std::string nodeName, std::s
 	OccurrenceSpecificationImpl::loadNode(nodeName, loadHandler);
 }
 
-void ExecutionOccurrenceSpecificationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ExecutionOccurrenceSpecificationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -415,7 +405,7 @@ void ExecutionOccurrenceSpecificationImpl::saveContent(std::shared_ptr<persisten
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	// Add references
-		saveHandler->addReference("execution", this->getExecution());		 
+		saveHandler->addReference("execution", this->getExecution()); 
 	}
 	catch (std::exception& e)
 	{

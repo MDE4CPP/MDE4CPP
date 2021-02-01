@@ -35,41 +35,23 @@
 #include <exception> // used in Persistence
 
 #include "uml/Action.hpp"
-
 #include "uml/Activity.hpp"
-
 #include "uml/ActivityEdge.hpp"
-
 #include "uml/ActivityGroup.hpp"
-
 #include "uml/ActivityNode.hpp"
-
 #include "uml/ActivityPartition.hpp"
-
 #include "uml/Classifier.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/Constraint.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/ExceptionHandler.hpp"
-
 #include "uml/InputPin.hpp"
-
 #include "uml/InterruptibleActivityRegion.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/OutputPin.hpp"
-
 #include "uml/RedefinableElement.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/StructuredActivityNode.hpp"
 
 //Factories an Package includes
@@ -267,12 +249,12 @@ std::shared_ptr<ecore::EClass> DestroyObjectActionImpl::eStaticClass() const
 /*
 Getter & Setter for attribute isDestroyLinks
 */
-bool  DestroyObjectActionImpl::getIsDestroyLinks() const 
+bool DestroyObjectActionImpl::getIsDestroyLinks() const 
 {
 	return m_isDestroyLinks;
 }
 
-void DestroyObjectActionImpl::setIsDestroyLinks(bool  _isDestroyLinks)
+void DestroyObjectActionImpl::setIsDestroyLinks(bool _isDestroyLinks)
 {
 	m_isDestroyLinks = _isDestroyLinks;
 } 
@@ -282,12 +264,12 @@ void DestroyObjectActionImpl::setIsDestroyLinks(bool  _isDestroyLinks)
 /*
 Getter & Setter for attribute isDestroyOwnedObjects
 */
-bool  DestroyObjectActionImpl::getIsDestroyOwnedObjects() const 
+bool DestroyObjectActionImpl::getIsDestroyOwnedObjects() const 
 {
 	return m_isDestroyOwnedObjects;
 }
 
-void DestroyObjectActionImpl::setIsDestroyOwnedObjects(bool  _isDestroyOwnedObjects)
+void DestroyObjectActionImpl::setIsDestroyOwnedObjects(bool _isDestroyOwnedObjects)
 {
 	m_isDestroyOwnedObjects = _isDestroyOwnedObjects;
 } 
@@ -585,7 +567,7 @@ void DestroyObjectActionImpl::loadNode(std::string nodeName, std::shared_ptr<per
 	ActionImpl::loadNode(nodeName, loadHandler);
 }
 
-void DestroyObjectActionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void DestroyObjectActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	ActionImpl::resolveReferences(featureID, references);
 }

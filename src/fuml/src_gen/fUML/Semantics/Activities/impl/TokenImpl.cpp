@@ -36,9 +36,7 @@
 #include <exception> // used in Persistence
 
 #include "fUML/Semantics/Activities/ActivityNodeActivation.hpp"
-
 #include "fUML/Semantics/Activities/Token.hpp"
-
 #include "fUML/Semantics/Values/Value.hpp"
 
 //Factories an Package includes
@@ -107,12 +105,12 @@ std::shared_ptr<ecore::EClass> TokenImpl::eStaticClass() const
 /*
 Getter & Setter for attribute withdrawn
 */
-bool  TokenImpl::isWithdrawn() const 
+bool TokenImpl::isWithdrawn() const 
 {
 	return m_withdrawn;
 }
 
-void TokenImpl::setWithdrawn(bool  _withdrawn)
+void TokenImpl::setWithdrawn(bool _withdrawn)
 {
 	m_withdrawn = _withdrawn;
 } 
@@ -330,7 +328,7 @@ void TokenImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inte
 	//load BasePackage Nodes
 }
 
-void TokenImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void TokenImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{

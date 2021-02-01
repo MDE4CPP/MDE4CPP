@@ -38,13 +38,9 @@
 #include <exception> // used in Persistence
 
 #include "uml/Classifier.hpp"
-
 #include "uml/Enumeration.hpp"
-
 #include "uml/EnumerationLiteral.hpp"
-
 #include "fUML/Semantics/Values/Value.hpp"
-
 #include "uml/ValueSpecification.hpp"
 
 //Factories an Package includes
@@ -142,7 +138,7 @@ bool EnumerationValueImpl::equals(std::shared_ptr<fUML::Semantics::Values::Value
 	//end of body
 }
 
-std::shared_ptr<Bag<org.eclipse.uml2.uml.Classifier> > EnumerationValueImpl::getTypes()
+std::shared_ptr<Bag<uml::Classifier> > EnumerationValueImpl::getTypes()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -160,7 +156,7 @@ std::shared_ptr<fUML::Semantics::Values::Value> EnumerationValueImpl::new_()
 	//end of body
 }
 
-std::shared_ptr<org.eclipse.uml2.uml.ValueSpecification> EnumerationValueImpl::specify()
+std::shared_ptr<uml::ValueSpecification> EnumerationValueImpl::specify()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -189,13 +185,13 @@ std::string EnumerationValueImpl::toString()
 /*
 Getter & Setter for reference literal
 */
-std::shared_ptr<org.eclipse.uml2.uml.EnumerationLiteral > EnumerationValueImpl::getLiteral() const
+std::shared_ptr<uml::EnumerationLiteral > EnumerationValueImpl::getLiteral() const
 {
 //assert(m_literal);
     return m_literal;
 }
 
-void EnumerationValueImpl::setLiteral(std::shared_ptr<org.eclipse.uml2.uml.EnumerationLiteral> _literal)
+void EnumerationValueImpl::setLiteral(std::shared_ptr<uml::EnumerationLiteral> _literal)
 {
     m_literal = _literal;
 }
@@ -205,13 +201,13 @@ void EnumerationValueImpl::setLiteral(std::shared_ptr<org.eclipse.uml2.uml.Enume
 /*
 Getter & Setter for reference type
 */
-std::shared_ptr<org.eclipse.uml2.uml.Enumeration > EnumerationValueImpl::getType() const
+std::shared_ptr<uml::Enumeration > EnumerationValueImpl::getType() const
 {
 //assert(m_type);
     return m_type;
 }
 
-void EnumerationValueImpl::setType(std::shared_ptr<org.eclipse.uml2.uml.Enumeration> _type)
+void EnumerationValueImpl::setType(std::shared_ptr<uml::Enumeration> _type)
 {
     m_type = _type;
 }
@@ -271,7 +267,7 @@ bool EnumerationValueImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<org.eclipse.uml2.uml.EnumerationLiteral> _literal = std::dynamic_pointer_cast<org.eclipse.uml2.uml.EnumerationLiteral>(_temp);
+			std::shared_ptr<uml::EnumerationLiteral> _literal = std::dynamic_pointer_cast<uml::EnumerationLiteral>(_temp);
 			setLiteral(_literal); //410
 			return true;
 		}
@@ -279,7 +275,7 @@ bool EnumerationValueImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<org.eclipse.uml2.uml.Enumeration> _type = std::dynamic_pointer_cast<org.eclipse.uml2.uml.Enumeration>(_temp);
+			std::shared_ptr<uml::Enumeration> _type = std::dynamic_pointer_cast<uml::Enumeration>(_temp);
 			setType(_type); //411
 			return true;
 		}
@@ -347,7 +343,7 @@ void EnumerationValueImpl::loadNode(std::string nodeName, std::shared_ptr<persis
 	fUML::Semantics::Values::ValueImpl::loadNode(nodeName, loadHandler);
 }
 
-void EnumerationValueImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void EnumerationValueImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -356,7 +352,7 @@ void EnumerationValueImpl::resolveReferences(const int featureID, std::list<std:
 			if (references.size() == 1)
 			{
 				// Cast object to correct type
-				std::shared_ptr<org.eclipse.uml2.uml.EnumerationLiteral> _literal = std::dynamic_pointer_cast<org.eclipse.uml2.uml.EnumerationLiteral>( references.front() );
+				std::shared_ptr<uml::EnumerationLiteral> _literal = std::dynamic_pointer_cast<uml::EnumerationLiteral>( references.front() );
 				setLiteral(_literal);
 			}
 			
@@ -368,7 +364,7 @@ void EnumerationValueImpl::resolveReferences(const int featureID, std::list<std:
 			if (references.size() == 1)
 			{
 				// Cast object to correct type
-				std::shared_ptr<org.eclipse.uml2.uml.Enumeration> _type = std::dynamic_pointer_cast<org.eclipse.uml2.uml.Enumeration>( references.front() );
+				std::shared_ptr<uml::Enumeration> _type = std::dynamic_pointer_cast<uml::Enumeration>( references.front() );
 				setType(_type);
 			}
 			
@@ -398,8 +394,8 @@ void EnumerationValueImpl::saveContent(std::shared_ptr<persistence::interfaces::
 		std::shared_ptr<fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage> package = fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance();
 
 	// Add references
-		saveHandler->addReference("literal", this->getLiteral());		
-		saveHandler->addReference("type", this->getType());		
+		saveHandler->addReference("literal", this->getLiteral()); 
+		saveHandler->addReference("type", this->getType()); 
 	}
 	catch (std::exception& e)
 	{

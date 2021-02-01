@@ -1278,6 +1278,10 @@ std::shared_ptr<ecore::EOperation> umlPackageImpl::getClassifier_Operation_getOp
 {
 	return m_classifier_Operation_getOperations;
 }
+std::shared_ptr<ecore::EOperation> umlPackageImpl::getClassifier_Operation_getPropertyValue_String() const
+{
+	return m_classifier_Operation_getPropertyValue_String;
+}
 std::shared_ptr<ecore::EOperation> umlPackageImpl::getClassifier_Operation_getUsedInterfaces() const
 {
 	return m_classifier_Operation_getUsedInterfaces;

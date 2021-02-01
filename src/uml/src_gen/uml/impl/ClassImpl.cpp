@@ -35,73 +35,39 @@
 #include <exception> // used in Persistence
 
 #include "uml/Behavior.hpp"
-
 #include "uml/BehavioredClassifier.hpp"
-
 #include "uml/Class.hpp"
-
 #include "uml/Classifier.hpp"
-
 #include "uml/CollaborationUse.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/ConnectableElement.hpp"
-
 #include "uml/Connector.hpp"
-
 #include "uml/Constraint.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/ElementImport.hpp"
-
 #include "uml/EncapsulatedClassifier.hpp"
-
 #include "uml/Extension.hpp"
-
 #include "uml/Feature.hpp"
-
 #include "uml/Generalization.hpp"
-
 #include "uml/GeneralizationSet.hpp"
-
 #include "uml/InterfaceRealization.hpp"
-
 #include "uml/NamedElement.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/Operation.hpp"
-
 #include "uml/Package.hpp"
-
 #include "uml/PackageImport.hpp"
-
 #include "uml/PackageableElement.hpp"
-
 #include "uml/Port.hpp"
-
 #include "uml/Property.hpp"
-
 #include "uml/Reception.hpp"
-
 #include "uml/RedefinableElement.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/Substitution.hpp"
-
 #include "uml/TemplateBinding.hpp"
-
 #include "uml/TemplateParameter.hpp"
-
 #include "uml/TemplateSignature.hpp"
-
 #include "uml/Type.hpp"
-
 #include "uml/UseCase.hpp"
 
 //Factories an Package includes
@@ -463,12 +429,12 @@ std::shared_ptr<ecore::EClass> ClassImpl::eStaticClass() const
 /*
 Getter & Setter for attribute isActive
 */
-bool  ClassImpl::getIsActive() const 
+bool ClassImpl::getIsActive() const 
 {
 	return m_isActive;
 }
 
-void ClassImpl::setIsActive(bool  _isActive)
+void ClassImpl::setIsActive(bool _isActive)
 {
 	m_isActive = _isActive;
 } 
@@ -478,7 +444,7 @@ void ClassImpl::setIsActive(bool  _isActive)
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<uml::Operation> ClassImpl::createOwnedOperation(std::string name,std::shared_ptr<Bag<std::string> > parameterNames,std::shared_ptr<Bag<uml::Type> > parameterTypes,std::shared_ptr<uml::Type> returnType)
+std::shared_ptr<uml::Operation> ClassImpl::createOwnedOperation(std::string name,std::shared_ptr<Bag<std::string>> parameterNames,std::shared_ptr<Bag<uml::Type>> parameterTypes,std::shared_ptr<uml::Type> returnType)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -948,7 +914,7 @@ bool ClassImpl::eSet(int featureID, Any newValue)
 				}
 				iterNestedClassifier++;
 			}
-
+ 
 			iterNestedClassifier = nestedClassifierList->begin();
 			endNestedClassifier = nestedClassifierList->end();
 			while (iterNestedClassifier != endNestedClassifier)
@@ -984,7 +950,7 @@ bool ClassImpl::eSet(int featureID, Any newValue)
 				}
 				iterOwnedOperation++;
 			}
-
+ 
 			iterOwnedOperation = ownedOperationList->begin();
 			endOwnedOperation = ownedOperationList->end();
 			while (iterOwnedOperation != endOwnedOperation)
@@ -1020,7 +986,7 @@ bool ClassImpl::eSet(int featureID, Any newValue)
 				}
 				iterOwnedReception++;
 			}
-
+ 
 			iterOwnedReception = ownedReceptionList->begin();
 			endOwnedReception = ownedReceptionList->end();
 			while (iterOwnedReception != endOwnedReception)
@@ -1056,7 +1022,7 @@ bool ClassImpl::eSet(int featureID, Any newValue)
 				}
 				iterSuperClass++;
 			}
-
+ 
 			iterSuperClass = superClassList->begin();
 			endSuperClass = superClassList->end();
 			while (iterSuperClass != endSuperClass)
@@ -1204,7 +1170,7 @@ void ClassImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inte
 	EncapsulatedClassifierImpl::loadNode(nodeName, loadHandler);
 }
 
-void ClassImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ClassImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -1291,7 +1257,7 @@ void ClassImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 		}
 
 	// Add references
-		saveHandler->addReferences<uml::Class>("superClass", this->getSuperClass());	
+		saveHandler->addReferences<uml::Class>("superClass", this->getSuperClass());
 	}
 	catch (std::exception& e)
 	{

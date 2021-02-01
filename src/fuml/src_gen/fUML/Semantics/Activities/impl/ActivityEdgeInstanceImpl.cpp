@@ -34,13 +34,9 @@
 #include <exception> // used in Persistence
 
 #include "uml/ActivityEdge.hpp"
-
 #include "fUML/Semantics/Activities/ActivityNodeActivation.hpp"
-
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
-
 #include "fUML/Semantics/Activities/Offer.hpp"
-
 #include "fUML/Semantics/Activities/Token.hpp"
 
 //Factories an Package includes
@@ -175,7 +171,7 @@ bool ActivityEdgeInstanceImpl::hasOffer()
 	//end of body
 }
 
-void ActivityEdgeInstanceImpl::sendOffer(std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > tokens)
+void ActivityEdgeInstanceImpl::sendOffer(std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> tokens)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -264,13 +260,13 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > ActivityEdgeInstanceIm
 /*
 Getter & Setter for reference edge
 */
-std::shared_ptr<org.eclipse.uml2.uml.ActivityEdge > ActivityEdgeInstanceImpl::getEdge() const
+std::shared_ptr<uml::ActivityEdge > ActivityEdgeInstanceImpl::getEdge() const
 {
 
     return m_edge;
 }
 
-void ActivityEdgeInstanceImpl::setEdge(std::shared_ptr<org.eclipse.uml2.uml.ActivityEdge> _edge)
+void ActivityEdgeInstanceImpl::setEdge(std::shared_ptr<uml::ActivityEdge> _edge)
 {
     m_edge = _edge;
 }
@@ -381,17 +377,6 @@ Any ActivityEdgeInstanceImpl::eGet(int featureID, bool resolve, bool coreType) c
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_OFFERS:
 		{
 			return eAny(getOffers()); //63			
-			/*
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<fUML::Semantics::Activities::Offer>::iterator iter = m_offers->begin();
-			Bag<fUML::Semantics::Activities::Offer>::iterator end = m_offers->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //63
-			*/
 		}
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_SOURCE:
 			return eAny(getSource().lock()); //61
@@ -425,7 +410,7 @@ bool ActivityEdgeInstanceImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<org.eclipse.uml2.uml.ActivityEdge> _edge = std::dynamic_pointer_cast<org.eclipse.uml2.uml.ActivityEdge>(_temp);
+			std::shared_ptr<uml::ActivityEdge> _edge = std::dynamic_pointer_cast<uml::ActivityEdge>(_temp);
 			setEdge(_edge); //60
 			return true;
 		}
@@ -460,7 +445,7 @@ bool ActivityEdgeInstanceImpl::eSet(int featureID, Any newValue)
 				}
 				iterOffers++;
 			}
-
+ 
 			iterOffers = offersList->begin();
 			endOffers = offersList->end();
 			while (iterOffers != endOffers)
@@ -552,7 +537,7 @@ void ActivityEdgeInstanceImpl::loadNode(std::string nodeName, std::shared_ptr<pe
 	//load BasePackage Nodes
 }
 
-void ActivityEdgeInstanceImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ActivityEdgeInstanceImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -561,7 +546,7 @@ void ActivityEdgeInstanceImpl::resolveReferences(const int featureID, std::list<
 			if (references.size() == 1)
 			{
 				// Cast object to correct type
-				std::shared_ptr<org.eclipse.uml2.uml.ActivityEdge> _edge = std::dynamic_pointer_cast<org.eclipse.uml2.uml.ActivityEdge>( references.front() );
+				std::shared_ptr<uml::ActivityEdge> _edge = std::dynamic_pointer_cast<uml::ActivityEdge>( references.front() );
 				setEdge(_edge);
 			}
 			
@@ -637,8 +622,8 @@ void ActivityEdgeInstanceImpl::saveContent(std::shared_ptr<persistence::interfac
 		std::shared_ptr<fUML::Semantics::Activities::ActivitiesPackage> package = fUML::Semantics::Activities::ActivitiesPackage::eInstance();
 
 	// Add references
-		saveHandler->addReference("edge", this->getEdge());		
-		saveHandler->addReferences<fUML::Semantics::Activities::Offer>("offers", this->getOffers());	
+		saveHandler->addReference("edge", this->getEdge()); 
+		saveHandler->addReferences<fUML::Semantics::Activities::Offer>("offers", this->getOffers());
 	}
 	catch (std::exception& e)
 	{

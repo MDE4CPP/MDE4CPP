@@ -34,17 +34,11 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
 #include "uml/ConnectableElement.hpp"
-
 #include "uml/Connector.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/MultiplicityElement.hpp"
-
 #include "uml/Property.hpp"
-
 #include "uml/ValueSpecification.hpp"
 
 //Factories an Package includes
@@ -415,7 +409,7 @@ void ConnectorEndImpl::loadNode(std::string nodeName, std::shared_ptr<persistenc
 	MultiplicityElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void ConnectorEndImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ConnectorEndImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -481,8 +475,8 @@ void ConnectorEndImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	// Add references
-		saveHandler->addReference("partWithPort", this->getPartWithPort());		 
-		saveHandler->addReference("role", this->getRole());		 
+		saveHandler->addReference("partWithPort", this->getPartWithPort()); 
+		saveHandler->addReference("role", this->getRole()); 
 	}
 	catch (std::exception& e)
 	{

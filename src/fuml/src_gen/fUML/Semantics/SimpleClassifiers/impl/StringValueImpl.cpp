@@ -37,11 +37,8 @@
 #include <exception> // used in Persistence
 
 #include "uml/PrimitiveType.hpp"
-
 #include "fUML/Semantics/SimpleClassifiers/PrimitiveValue.hpp"
-
 #include "fUML/Semantics/Values/Value.hpp"
-
 #include "uml/ValueSpecification.hpp"
 
 //Factories an Package includes
@@ -110,12 +107,12 @@ std::shared_ptr<ecore::EClass> StringValueImpl::eStaticClass() const
 /*
 Getter & Setter for attribute value
 */
-std::string  StringValueImpl::getValue() const 
+std::string StringValueImpl::getValue() const 
 {
 	return m_value;
 }
 
-void StringValueImpl::setValue(std::string  _value)
+void StringValueImpl::setValue(std::string _value)
 {
 	m_value = _value;
 } 
@@ -154,7 +151,7 @@ bool StringValueImpl::equals(std::shared_ptr<fUML::Semantics::Values::Value> oth
 	//end of body
 }
 
-std::shared_ptr<org.eclipse.uml2.uml.ValueSpecification> StringValueImpl::specify()
+std::shared_ptr<uml::ValueSpecification> StringValueImpl::specify()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -288,7 +285,7 @@ void StringValueImpl::loadNode(std::string nodeName, std::shared_ptr<persistence
 	PrimitiveValueImpl::loadNode(nodeName, loadHandler);
 }
 
-void StringValueImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void StringValueImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	PrimitiveValueImpl::resolveReferences(featureID, references);
 }

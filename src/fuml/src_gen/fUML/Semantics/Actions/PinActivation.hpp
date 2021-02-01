@@ -7,21 +7,17 @@
 #ifndef FUML_SEMANTICS_ACTIONS_PINACTIVATION_HPP
 #define FUML_SEMANTICS_ACTIONS_PINACTIVATION_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T> class Bag; 
 
 
-
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -59,15 +55,12 @@ namespace uml
 // enum includes
 
 
-//Includes from codegen annotation
-#include "uml/ActivityNode.hpp"
-#include "uml/Pin.hpp"
 
 //*********************************
 namespace fUML::Semantics::Actions 
 {
 	
-	class PinActivation:virtual public fUML::Semantics::Activities::ObjectNodeActivation
+	class PinActivation: virtual public fUML::Semantics::Activities::ObjectNodeActivation
 	{
 		public:
  			PinActivation(const PinActivation &) {}
@@ -75,7 +68,6 @@ namespace fUML::Semantics::Actions
 
 		protected:
 			PinActivation(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -87,7 +79,7 @@ namespace fUML::Semantics::Actions
 			// Operations
 			//*********************************
 			 
-			virtual void fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > incomingTokens) = 0;
+			virtual void fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incomingTokens) = 0;
 			
 			 
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > takeOfferedTokens() = 0;
@@ -107,15 +99,14 @@ namespace fUML::Semantics::Actions
 			virtual void setActionActivation(std::shared_ptr<fUML::Semantics::Actions::ActionActivation> _actionActivation) = 0;
 			
 			
-			virtual std::shared_ptr<org.eclipse.uml2.uml.Pin > getPin() const = 0;
+			virtual std::shared_ptr<uml::Pin > getPin() const = 0;
 			
 			
-			virtual void setPin(std::shared_ptr<org.eclipse.uml2.uml.Pin> _pin) = 0;
+			virtual void setPin(std::shared_ptr<uml::Pin> _pin) = 0;
 			
 			/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'pin'*/
 			
-			virtual void setNode(std::shared_ptr<org.eclipse.uml2.uml.ActivityNode> _node) = 0;
-			
+			virtual void setNode(std::shared_ptr<uml::ActivityNode> _node) = 0;
 			
 
 		protected:
@@ -129,7 +120,7 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			
 			std::weak_ptr<fUML::Semantics::Actions::ActionActivation > m_actionActivation;
-			std::shared_ptr<org.eclipse.uml2.uml.Pin > m_pin;
+			std::shared_ptr<uml::Pin > m_pin;
 
 		public:
 			//*********************************
@@ -144,7 +135,7 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

@@ -8,22 +8,18 @@
 #define ECORE_EANNOTATION_HPP
 
 #include <map>
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T> class Bag; 
 template<class T, class ... U> class Subset;
 
 
-
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -46,13 +42,12 @@ namespace ecore
 // enum includes
 
 
-//Includes from codegen annotation
 
 //*********************************
 namespace ecore 
 {
 	
-	class EAnnotation:virtual public EModelElement
+	class EAnnotation: virtual public EModelElement
 	{
 		public:
  			EAnnotation(const EAnnotation &) {}
@@ -61,13 +56,10 @@ namespace ecore
 		protected:
 			EAnnotation(){}
 
-
 			//Additional constructors for the containments back reference
-
 			EAnnotation(std::weak_ptr<ecore::EObject > par_eContainer);
 
 			//Additional constructors for the containments back reference
-
 			EAnnotation(std::weak_ptr<ecore::EModelElement > par_eModelElement);
 
 		public:
@@ -83,19 +75,13 @@ namespace ecore
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			 
-			virtual  std::shared_ptr<std::map <  std::string ,  std::string >> 
-			 getDetails() const = 0;
+			virtual std::shared_ptr<std::map <  std::string ,  std::string >> getDetails() const = 0;
 			
 			 
-			virtual void setDetails ( std::shared_ptr<std::map <  std::string ,  std::string >> 
-			 _details)= 0; 
-			 
-			virtual std::string  getSource() const = 0;
+			virtual void setDetails (std::shared_ptr<std::map <  std::string ,  std::string >> _details)= 0;virtual std::string getSource() const = 0;
 			
 			 
-			virtual void setSource (std::string  _source)= 0; 
-			
+			virtual void setSource (std::string _source)= 0;
 			//*********************************
 			// Reference
 			//*********************************
@@ -120,10 +106,9 @@ namespace ecore
 			// Attribute Members
 			//*********************************
 			 
-			 std::shared_ptr<std::map <  std::string ,  std::string >> 
-			 m_details = nullptr;
+			std::shared_ptr<std::map <  std::string ,  std::string >> m_details = nullptr;
 			 
-			std::string  m_source = "";
+			std::string m_source = "";
 			
 			
 			//*********************************
@@ -148,7 +133,7 @@ namespace ecore
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

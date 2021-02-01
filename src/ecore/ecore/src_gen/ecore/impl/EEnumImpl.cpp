@@ -33,15 +33,10 @@
 #include <exception> // used in Persistence
 
 #include "ecore/EAnnotation.hpp"
-
 #include "ecore/EDataType.hpp"
-
 #include "ecore/EEnumLiteral.hpp"
-
 #include "ecore/EObject.hpp"
-
 #include "ecore/EPackage.hpp"
-
 #include "ecore/ETypeParameter.hpp"
 
 //Factories an Package includes
@@ -288,7 +283,7 @@ Any EEnumImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case ecore::ecorePackage::EENUM_ATTRIBUTE_ELITERALS:
 		{
-			return eAny(getELiterals()); //1912			
+			return eAny(getELiterals()); //2012			
 		}
 	}
 	return EDataTypeImpl::eGet(featureID, resolve, coreType);
@@ -298,7 +293,7 @@ bool EEnumImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ecore::ecorePackage::EENUM_ATTRIBUTE_ELITERALS:
-			return getELiterals() != nullptr; //1912
+			return getELiterals() != nullptr; //2012
 	}
 	return EDataTypeImpl::internalEIsSet(featureID);
 }
@@ -329,7 +324,7 @@ bool EEnumImpl::eSet(int featureID, Any newValue)
 				}
 				iterELiterals++;
 			}
-
+ 
 			iterELiterals = eLiteralsList->begin();
 			endELiterals = eLiteralsList->end();
 			while (iterELiterals != endELiterals)
@@ -405,7 +400,7 @@ void EEnumImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inte
 	EDataTypeImpl::loadNode(nodeName, loadHandler);
 }
 
-void EEnumImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references)
+void EEnumImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references)
 {
 	EDataTypeImpl::resolveReferences(featureID, references);
 }

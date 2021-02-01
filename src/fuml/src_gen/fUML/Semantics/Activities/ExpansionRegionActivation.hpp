@@ -7,21 +7,17 @@
 #ifndef FUML_SEMANTICS_ACTIVITIES_EXPANSIONREGIONACTIVATION_HPP
 #define FUML_SEMANTICS_ACTIVITIES_EXPANSIONREGIONACTIVATION_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T> class Bag; 
 
 
-
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -65,20 +61,12 @@ namespace uml
 // enum includes
 
 
-//Includes from codegen annotation
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/Semantics/Activities/ObjectToken.hpp"
-#include "uml/Action.hpp"
-#include "uml/ActivityNode.hpp"
-#include "uml/ExpansionRegion.hpp"
-#include "uml/InputPin.hpp"
-#include "uml/OutputPin.hpp"
 
 //*********************************
 namespace fUML::Semantics::Activities 
 {
 	
-	class ExpansionRegionActivation:virtual public fUML::Semantics::Actions::ActionActivation
+	class ExpansionRegionActivation: virtual public fUML::Semantics::Actions::ActionActivation
 	{
 		public:
  			ExpansionRegionActivation(const ExpansionRegionActivation &) {}
@@ -86,7 +74,6 @@ namespace fUML::Semantics::Activities
 
 		protected:
 			ExpansionRegionActivation(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -107,7 +94,7 @@ namespace fUML::Semantics::Activities
 			virtual void doStructuredActivity() = 0;
 			
 			 
-			virtual std::shared_ptr<fUML::Semantics::Activities::ExpansionNodeActivation> getExpansionNodeActivation(std::shared_ptr<org.eclipse.uml2.uml.ExpansionNode> node) = 0;
+			virtual std::shared_ptr<fUML::Semantics::Activities::ExpansionNodeActivation> getExpansionNodeActivation(std::shared_ptr<uml::ExpansionNode> node) = 0;
 			
 			 
 			virtual bool isSuspended() = 0;
@@ -143,12 +130,10 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			 
-			virtual int  getNext() const = 0;
+			virtual int getNext() const = 0;
 			
 			 
-			virtual void setNext (int  _next)= 0; 
-			
+			virtual void setNext (int _next)= 0;
 			//*********************************
 			// Reference
 			//*********************************
@@ -171,7 +156,7 @@ namespace fUML::Semantics::Activities
 			// Attribute Members
 			//*********************************
 			 
-			int  m_next = 0;
+			int m_next = 0;
 			
 			
 			//*********************************
@@ -196,7 +181,7 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

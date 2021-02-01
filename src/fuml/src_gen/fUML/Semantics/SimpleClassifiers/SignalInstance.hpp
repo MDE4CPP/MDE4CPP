@@ -7,20 +7,16 @@
 #ifndef FUML_SEMANTICS_SIMPLECLASSIFIERS_SIGNALINSTANCE_HPP
 #define FUML_SEMANTICS_SIMPLECLASSIFIERS_SIGNALINSTANCE_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
-
 
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -51,13 +47,12 @@ namespace uml
 // enum includes
 
 
-//Includes from codegen annotation
 
 //*********************************
 namespace fUML::Semantics::SimpleClassifiers 
 {
 	
-	class SignalInstance:virtual public CompoundValue
+	class SignalInstance: virtual public CompoundValue
 	{
 		public:
  			SignalInstance(const SignalInstance &) {}
@@ -65,7 +60,6 @@ namespace fUML::Semantics::SimpleClassifiers
 
 		protected:
 			SignalInstance(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -88,10 +82,10 @@ namespace fUML::Semantics::SimpleClassifiers
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<org.eclipse.uml2.uml.Signal > getType() const = 0;
+			virtual std::shared_ptr<uml::Signal > getType() const = 0;
 			
 			
-			virtual void setType(std::shared_ptr<org.eclipse.uml2.uml.Signal> _type) = 0;
+			virtual void setType(std::shared_ptr<uml::Signal> _type) = 0;
 			
 			
 
@@ -105,7 +99,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			// Reference Members
 			//*********************************
 			
-			std::shared_ptr<org.eclipse.uml2.uml.Signal > m_type;
+			std::shared_ptr<uml::Signal > m_type;
 
 		public:
 			//*********************************
@@ -120,7 +114,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

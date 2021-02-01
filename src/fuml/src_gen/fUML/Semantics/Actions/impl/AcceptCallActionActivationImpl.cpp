@@ -33,25 +33,15 @@
 #include <exception> // used in Persistence
 
 #include "fUML/Semantics/Actions/AcceptEventActionActivation.hpp"
-
 #include "fUML/Semantics/Actions/AcceptEventActionEventAccepter.hpp"
-
 #include "uml/Action.hpp"
-
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
-
 #include "uml/ActivityNode.hpp"
-
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
-
 #include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"
-
 #include "fUML/Semantics/Actions/InputPinActivation.hpp"
-
 #include "fUML/Semantics/Actions/OutputPinActivation.hpp"
-
 #include "fUML/Semantics/Actions/PinActivation.hpp"
-
 #include "fUML/Semantics/Activities/Token.hpp"
 
 //Factories an Package includes
@@ -276,7 +266,7 @@ void AcceptCallActionActivationImpl::loadNode(std::string nodeName, std::shared_
 	AcceptEventActionActivationImpl::loadNode(nodeName, loadHandler);
 }
 
-void AcceptCallActionActivationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void AcceptCallActionActivationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	AcceptEventActionActivationImpl::resolveReferences(featureID, references);
 }

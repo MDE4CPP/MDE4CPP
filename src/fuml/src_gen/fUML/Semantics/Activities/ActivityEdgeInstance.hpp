@@ -7,21 +7,17 @@
 #ifndef FUML_SEMANTICS_ACTIVITIES_ACTIVITYEDGEINSTANCE_HPP
 #define FUML_SEMANTICS_ACTIVITIES_ACTIVITYEDGEINSTANCE_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T> class Bag; 
 
 
-
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -55,16 +51,12 @@ namespace uml
 
 #include "ecore/EModelElement.hpp"
 
-//Includes from codegen annotation
-#include <algorithm> 
-#include "fUML/FUMLFactory.hpp"
 
 //*********************************
 namespace fUML::Semantics::Activities 
 {
 	
 	class ActivityEdgeInstance : virtual public ecore::EModelElement
-
 	{
 		public:
  			ActivityEdgeInstance(const ActivityEdgeInstance &) {}
@@ -73,9 +65,7 @@ namespace fUML::Semantics::Activities
 		protected:
 			ActivityEdgeInstance(){}
 
-
 			//Additional constructors for the containments back reference
-
 			ActivityEdgeInstance(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group);
 
 		public:
@@ -97,7 +87,7 @@ namespace fUML::Semantics::Activities
 			virtual bool hasOffer() = 0;
 			
 			 
-			virtual void sendOffer(std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > tokens) = 0;
+			virtual void sendOffer(std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> tokens) = 0;
 			
 			 
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > takeOfferedTokens() = 0;
@@ -114,10 +104,10 @@ namespace fUML::Semantics::Activities
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<org.eclipse.uml2.uml.ActivityEdge > getEdge() const = 0;
+			virtual std::shared_ptr<uml::ActivityEdge > getEdge() const = 0;
 			
 			
-			virtual void setEdge(std::shared_ptr<org.eclipse.uml2.uml.ActivityEdge> _edge) = 0;
+			virtual void setEdge(std::shared_ptr<uml::ActivityEdge> _edge) = 0;
 			
 			
 			virtual std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > getGroup() const = 0;
@@ -153,7 +143,7 @@ namespace fUML::Semantics::Activities
 			// Reference Members
 			//*********************************
 			
-			std::shared_ptr<org.eclipse.uml2.uml.ActivityEdge > m_edge;
+			std::shared_ptr<uml::ActivityEdge > m_edge;
 			std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > m_group;
 			mutable std::shared_ptr<Bag<fUML::Semantics::Activities::Offer>> m_offers;
 			std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivation > m_source;
@@ -172,7 +162,7 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

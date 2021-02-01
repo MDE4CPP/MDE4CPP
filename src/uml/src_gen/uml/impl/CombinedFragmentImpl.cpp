@@ -35,25 +35,15 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/Gate.hpp"
-
 #include "uml/GeneralOrdering.hpp"
-
 #include "uml/Interaction.hpp"
-
 #include "uml/InteractionFragment.hpp"
-
 #include "uml/InteractionOperand.hpp"
-
 #include "uml/Lifeline.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/StringExpression.hpp"
 
 //Factories an Package includes
@@ -215,12 +205,12 @@ std::shared_ptr<ecore::EClass> CombinedFragmentImpl::eStaticClass() const
 /*
 Getter & Setter for attribute interactionOperator
 */
-uml::InteractionOperatorKind  CombinedFragmentImpl::getInteractionOperator() const 
+uml::InteractionOperatorKind CombinedFragmentImpl::getInteractionOperator() const 
 {
 	return m_interactionOperator;
 }
 
-void CombinedFragmentImpl::setInteractionOperator(uml::InteractionOperatorKind  _interactionOperator)
+void CombinedFragmentImpl::setInteractionOperator(uml::InteractionOperatorKind _interactionOperator)
 {
 	m_interactionOperator = _interactionOperator;
 } 
@@ -381,34 +371,12 @@ Any CombinedFragmentImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::COMBINEDFRAGMENT_ATTRIBUTE_CFRAGMENTGATE:
 		{
 			return eAny(getCfragmentGate()); //4413			
-			/*
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Gate>::iterator iter = m_cfragmentGate->begin();
-			Bag<uml::Gate>::iterator end = m_cfragmentGate->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //4413
-			*/
 		}
 		case uml::umlPackage::COMBINEDFRAGMENT_ATTRIBUTE_INTERACTIONOPERATOR:
 			return eAny(getInteractionOperator()); //4414
 		case uml::umlPackage::COMBINEDFRAGMENT_ATTRIBUTE_OPERAND:
 		{
 			return eAny(getOperand()); //4415			
-			/*
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::InteractionOperand>::iterator iter = m_operand->begin();
-			Bag<uml::InteractionOperand>::iterator end = m_operand->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //4415
-			*/
 		}
 	}
 	return InteractionFragmentImpl::eGet(featureID, resolve, coreType);
@@ -453,7 +421,7 @@ bool CombinedFragmentImpl::eSet(int featureID, Any newValue)
 				}
 				iterCfragmentGate++;
 			}
-
+ 
 			iterCfragmentGate = cfragmentGateList->begin();
 			endCfragmentGate = cfragmentGateList->end();
 			while (iterCfragmentGate != endCfragmentGate)
@@ -496,7 +464,7 @@ bool CombinedFragmentImpl::eSet(int featureID, Any newValue)
 				}
 				iterOperand++;
 			}
-
+ 
 			iterOperand = operandList->begin();
 			endOperand = operandList->end();
 			while (iterOperand != endOperand)
@@ -542,7 +510,7 @@ void CombinedFragmentImpl::loadAttributes(std::shared_ptr<persistence::interface
 		iter = attr_list.find("interactionOperator");
 		if ( iter != attr_list.end() )
 		{
-			uml::InteractionOperatorKind  value = InteractionOperatorKind::SEQ;
+			uml::InteractionOperatorKind value = InteractionOperatorKind::SEQ;
 			std::string literal = iter->second;
 			if (literal == "seq")
 			{
@@ -659,7 +627,7 @@ void CombinedFragmentImpl::loadNode(std::string nodeName, std::shared_ptr<persis
 	InteractionFragmentImpl::loadNode(nodeName, loadHandler);
 }
 
-void CombinedFragmentImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void CombinedFragmentImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	InteractionFragmentImpl::resolveReferences(featureID, references);
 }
@@ -702,7 +670,7 @@ void CombinedFragmentImpl::saveContent(std::shared_ptr<persistence::interfaces::
 		// Add attributes
 		if ( this->eIsSet(package->getCombinedFragment_Attribute_interactionOperator()) )
 		{
-			uml::InteractionOperatorKind  value = this->getInteractionOperator();
+			uml::InteractionOperatorKind value = this->getInteractionOperator();
 			std::string literal = "";
 			if (value == InteractionOperatorKind::SEQ)
 			{

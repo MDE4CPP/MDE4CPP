@@ -9,7 +9,6 @@
 
 //*********************************
 // generated Includes
-
 //Model includes
 #include "../EStructuralFeature.hpp"
 
@@ -60,47 +59,31 @@ namespace ecore
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			 
-			virtual bool  isChangeable() const ;
+			virtual bool isChangeable() const ;
 			
 			 
-			virtual void setChangeable (bool  _changeable); 
-			 
-			virtual Any  getDefaultValue() const ;
+			virtual void setChangeable (bool _changeable);virtual Any getDefaultValue() const ;
 			
 			 
-			virtual void setDefaultValue (Any  _defaultValue); 
-			 
-			virtual std::string  getDefaultValueLiteral() const ;
+			virtual void setDefaultValue (Any _defaultValue);virtual std::string getDefaultValueLiteral() const ;
 			
 			 
-			virtual void setDefaultValueLiteral (std::string  _defaultValueLiteral); 
-			 
-			virtual bool  isDerived() const ;
+			virtual void setDefaultValueLiteral (std::string _defaultValueLiteral);virtual bool isDerived() const ;
 			
 			 
-			virtual void setDerived (bool  _derived); 
-			 
-			virtual int  getFeatureID() const ;
+			virtual void setDerived (bool _derived);virtual int getFeatureID() const ;
 			
 			 
-			virtual void setFeatureID (int  _featureID); 
-			 
-			virtual bool  isTransient() const ;
+			virtual void setFeatureID (int _featureID);virtual bool isTransient() const ;
 			
 			 
-			virtual void setTransient (bool  _transient); 
-			 
-			virtual bool  isUnsettable() const ;
+			virtual void setTransient (bool _transient);virtual bool isUnsettable() const ;
 			
 			 
-			virtual void setUnsettable (bool  _unsettable); 
-			 
-			virtual bool  isVolatile() const ;
+			virtual void setUnsettable (bool _unsettable);virtual bool isVolatile() const ;
 			
 			 
-			virtual void setVolatile (bool  _volatile); 
-			
+			virtual void setVolatile (bool _volatile);
 			
 			//*********************************
 			// Reference
@@ -130,7 +113,7 @@ namespace ecore
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

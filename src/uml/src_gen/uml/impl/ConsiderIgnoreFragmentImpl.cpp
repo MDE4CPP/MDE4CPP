@@ -35,27 +35,16 @@
 #include <exception> // used in Persistence
 
 #include "uml/CombinedFragment.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/Gate.hpp"
-
 #include "uml/GeneralOrdering.hpp"
-
 #include "uml/Interaction.hpp"
-
 #include "uml/InteractionOperand.hpp"
-
 #include "uml/Lifeline.hpp"
-
 #include "uml/NamedElement.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/StringExpression.hpp"
 
 //Factories an Package includes
@@ -316,17 +305,6 @@ Any ConsiderIgnoreFragmentImpl::eGet(int featureID, bool resolve, bool coreType)
 		case uml::umlPackage::CONSIDERIGNOREFRAGMENT_ATTRIBUTE_MESSAGE:
 		{
 			return eAny(getMessage()); //5616			
-			/*
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::NamedElement>::iterator iter = m_message->begin();
-			Bag<uml::NamedElement>::iterator end = m_message->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //5616
-			*/
 		}
 	}
 	return CombinedFragmentImpl::eGet(featureID, resolve, coreType);
@@ -367,7 +345,7 @@ bool ConsiderIgnoreFragmentImpl::eSet(int featureID, Any newValue)
 				}
 				iterMessage++;
 			}
-
+ 
 			iterMessage = messageList->begin();
 			endMessage = messageList->end();
 			while (iterMessage != endMessage)
@@ -437,7 +415,7 @@ void ConsiderIgnoreFragmentImpl::loadNode(std::string nodeName, std::shared_ptr<
 	CombinedFragmentImpl::loadNode(nodeName, loadHandler);
 }
 
-void ConsiderIgnoreFragmentImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ConsiderIgnoreFragmentImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -487,7 +465,7 @@ void ConsiderIgnoreFragmentImpl::saveContent(std::shared_ptr<persistence::interf
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	// Add references
-		saveHandler->addReferences<uml::NamedElement>("message", this->getMessage());	
+		saveHandler->addReferences<uml::NamedElement>("message", this->getMessage());
 	}
 	catch (std::exception& e)
 	{

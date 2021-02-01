@@ -7,20 +7,16 @@
 #ifndef ECORE_EPARAMETER_HPP
 #define ECORE_EPARAMETER_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
-
 
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -50,13 +46,12 @@ namespace ecore
 // enum includes
 
 
-//Includes from codegen annotation
 
 //*********************************
 namespace ecore 
 {
 	
-	class EParameter:virtual public ETypedElement
+	class EParameter: virtual public ETypedElement
 	{
 		public:
  			EParameter(const EParameter &) {}
@@ -65,13 +60,10 @@ namespace ecore
 		protected:
 			EParameter(){}
 
-
 			//Additional constructors for the containments back reference
-
 			EParameter(std::weak_ptr<ecore::EObject > par_eContainer);
 
 			//Additional constructors for the containments back reference
-
 			EParameter(std::weak_ptr<ecore::EOperation > par_eOperation);
 
 		public:
@@ -123,7 +115,7 @@ namespace ecore
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

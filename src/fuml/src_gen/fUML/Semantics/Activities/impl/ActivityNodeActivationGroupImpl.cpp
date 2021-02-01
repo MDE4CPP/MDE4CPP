@@ -49,17 +49,11 @@
 #include <exception> // used in Persistence
 
 #include "uml/ActivityEdge.hpp"
-
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
-
 #include "fUML/Semantics/Activities/ActivityExecution.hpp"
-
 #include "uml/ActivityNode.hpp"
-
 #include "fUML/Semantics/Activities/ActivityNodeActivation.hpp"
-
 #include "fUML/Semantics/Activities/ActivityParameterNodeActivation.hpp"
-
 #include "fUML/Semantics/Actions/StructuredActivityNodeActivation.hpp"
 
 //Factories an Package includes
@@ -165,7 +159,7 @@ std::shared_ptr<ecore::EClass> ActivityNodeActivationGroupImpl::eStaticClass() c
 //*********************************
 // Operations
 //*********************************
-void ActivityNodeActivationGroupImpl::activate(std::shared_ptr<Bag<org.eclipse.uml2.uml.ActivityNode> > nodes,std::shared_ptr<Bag<org.eclipse.uml2.uml.ActivityEdge> > edges)
+void ActivityNodeActivationGroupImpl::activate(std::shared_ptr<Bag<uml::ActivityNode>> nodes,std::shared_ptr<Bag<uml::ActivityEdge>> edges)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -194,7 +188,7 @@ void ActivityNodeActivationGroupImpl::addNodeActivation(std::shared_ptr<fUML::Se
 	//end of body
 }
 
-bool ActivityNodeActivationGroupImpl::checkIncomingEdges(std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance> > incomingEdges,std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation> > activations)
+bool ActivityNodeActivationGroupImpl::checkIncomingEdges(std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> incomingEdges,std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>> activations)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -217,7 +211,7 @@ bool ActivityNodeActivationGroupImpl::checkIncomingEdges(std::shared_ptr<Bag<fUM
 	//end of body
 }
 
-void ActivityNodeActivationGroupImpl::createEdgeInstance(std::shared_ptr<Bag<org.eclipse.uml2.uml.ActivityEdge> > edges)
+void ActivityNodeActivationGroupImpl::createEdgeInstance(std::shared_ptr<Bag<uml::ActivityEdge>> edges)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -249,7 +243,7 @@ void ActivityNodeActivationGroupImpl::createEdgeInstance(std::shared_ptr<Bag<org
 	//end of body
 }
 
-std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> ActivityNodeActivationGroupImpl::createNodeActivation(std::shared_ptr<org.eclipse.uml2.uml.ActivityNode> node)
+std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> ActivityNodeActivationGroupImpl::createNodeActivation(std::shared_ptr<uml::ActivityNode> node)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -269,7 +263,7 @@ std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> ActivityNod
 	//end of body
 }
 
-void ActivityNodeActivationGroupImpl::createNodeActivations(std::shared_ptr<Bag<org.eclipse.uml2.uml.ActivityNode> > nodes)
+void ActivityNodeActivationGroupImpl::createNodeActivations(std::shared_ptr<Bag<uml::ActivityNode>> nodes)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -290,7 +284,7 @@ void ActivityNodeActivationGroupImpl::createNodeActivations(std::shared_ptr<Bag<
 	//end of body
 }
 
-std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> ActivityNodeActivationGroupImpl::getNodeActivation(std::shared_ptr<org.eclipse.uml2.uml.ActivityNode> node)
+std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> ActivityNodeActivationGroupImpl::getNodeActivation(std::shared_ptr<uml::ActivityNode> node)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -427,7 +421,7 @@ std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> ActivityNodeActi
 	//end of body
 }
 
-void ActivityNodeActivationGroupImpl::run(std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation> > activations)
+void ActivityNodeActivationGroupImpl::run(std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>> activations)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -520,7 +514,7 @@ void ActivityNodeActivationGroupImpl::run(std::shared_ptr<Bag<fUML::Semantics::A
 	//end of body
 }
 
-void ActivityNodeActivationGroupImpl::runNodes(std::shared_ptr<Bag<org.eclipse.uml2.uml.ActivityNode> > nodes)
+void ActivityNodeActivationGroupImpl::runNodes(std::shared_ptr<Bag<uml::ActivityNode>> nodes)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -709,47 +703,14 @@ Any ActivityNodeActivationGroupImpl::eGet(int featureID, bool resolve, bool core
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_EDGEINSTANCES:
 		{
 			return eAny(getEdgeInstances()); //100			
-			/*
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<fUML::Semantics::Activities::ActivityEdgeInstance>::iterator iter = m_edgeInstances->begin();
-			Bag<fUML::Semantics::Activities::ActivityEdgeInstance>::iterator end = m_edgeInstances->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //100
-			*/
 		}
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_NODEACTIVATIONS:
 		{
 			return eAny(getNodeActivations()); //101			
-			/*
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<fUML::Semantics::Activities::ActivityNodeActivation>::iterator iter = m_nodeActivations->begin();
-			Bag<fUML::Semantics::Activities::ActivityNodeActivation>::iterator end = m_nodeActivations->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //101
-			*/
 		}
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_SUSPENDEDACTIVATIONS:
 		{
 			return eAny(getSuspendedActivations()); //104			
-			/*
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<fUML::Semantics::Activities::ActivityNodeActivation>::iterator iter = m_suspendedActivations->begin();
-			Bag<fUML::Semantics::Activities::ActivityNodeActivation>::iterator end = m_suspendedActivations->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //104
-			*/
 		}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
@@ -814,7 +775,7 @@ bool ActivityNodeActivationGroupImpl::eSet(int featureID, Any newValue)
 				}
 				iterEdgeInstances++;
 			}
-
+ 
 			iterEdgeInstances = edgeInstancesList->begin();
 			endEdgeInstances = edgeInstancesList->end();
 			while (iterEdgeInstances != endEdgeInstances)
@@ -850,7 +811,7 @@ bool ActivityNodeActivationGroupImpl::eSet(int featureID, Any newValue)
 				}
 				iterNodeActivations++;
 			}
-
+ 
 			iterNodeActivations = nodeActivationsList->begin();
 			endNodeActivations = nodeActivationsList->end();
 			while (iterNodeActivations != endNodeActivations)
@@ -886,7 +847,7 @@ bool ActivityNodeActivationGroupImpl::eSet(int featureID, Any newValue)
 				}
 				iterSuspendedActivations++;
 			}
-
+ 
 			iterSuspendedActivations = suspendedActivationsList->begin();
 			endSuspendedActivations = suspendedActivationsList->end();
 			while (iterSuspendedActivations != endSuspendedActivations)
@@ -996,7 +957,7 @@ void ActivityNodeActivationGroupImpl::loadNode(std::string nodeName, std::shared
 	//load BasePackage Nodes
 }
 
-void ActivityNodeActivationGroupImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ActivityNodeActivationGroupImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -1057,7 +1018,7 @@ void ActivityNodeActivationGroupImpl::saveContent(std::shared_ptr<persistence::i
 		std::shared_ptr<fUML::Semantics::Activities::ActivitiesPackage> package = fUML::Semantics::Activities::ActivitiesPackage::eInstance();
 
 	// Add references
-		saveHandler->addReferences<fUML::Semantics::Activities::ActivityNodeActivation>("suspendedActivations", this->getSuspendedActivations());	
+		saveHandler->addReferences<fUML::Semantics::Activities::ActivityNodeActivation>("suspendedActivations", this->getSuspendedActivations());
 
 		//
 		// Add new tags (from references)

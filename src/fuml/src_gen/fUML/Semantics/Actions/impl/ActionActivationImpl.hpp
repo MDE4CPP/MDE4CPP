@@ -9,7 +9,6 @@
 
 //*********************************
 // generated Includes
-
 //Model includes
 #include "../ActionActivation.hpp"
 
@@ -63,10 +62,10 @@ namespace fUML::Semantics::Actions
 			virtual void doAction() ;
 			
 			 
-			virtual void fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > incomingTokens) ;
+			virtual void fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incomingTokens) ;
 			
 			 
-			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value> > getTokens(std::shared_ptr<org.eclipse.uml2.uml.InputPin> pin) ;
+			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value> > getTokens(std::shared_ptr<uml::InputPin> pin) ;
 			
 			 
 			virtual bool isFirng() ;
@@ -81,13 +80,13 @@ namespace fUML::Semantics::Actions
 			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> makeBooleanValue(bool value) ;
 			
 			 
-			virtual void putToken(std::shared_ptr<org.eclipse.uml2.uml.OutputPin> pin,std::shared_ptr<fUML::Semantics::Values::Value> value) ;
+			virtual void putToken(std::shared_ptr<uml::OutputPin> pin,std::shared_ptr<fUML::Semantics::Values::Value> value) ;
 			
 			 
-			virtual void putTokens(std::shared_ptr<org.eclipse.uml2.uml.OutputPin> pin,std::shared_ptr<Bag<fUML::Semantics::Values::Value> > values) ;
+			virtual void putTokens(std::shared_ptr<uml::OutputPin> pin,std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values) ;
 			
 			 
-			virtual std::shared_ptr<fUML::Semantics::Actions::PinActivation> retrievePinActivation(std::shared_ptr<org.eclipse.uml2.uml.Pin> pin) ;
+			virtual std::shared_ptr<fUML::Semantics::Actions::PinActivation> retrievePinActivation(std::shared_ptr<uml::Pin> pin) ;
 			
 			 
 			virtual void run() ;
@@ -99,7 +98,7 @@ namespace fUML::Semantics::Actions
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > takeOfferedTokens() ;
 			
 			 
-			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value> > takeTokens(std::shared_ptr<org.eclipse.uml2.uml.InputPin> pin) ;
+			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value> > takeTokens(std::shared_ptr<uml::InputPin> pin) ;
 			
 			 
 			virtual void terminate() ;
@@ -112,26 +111,23 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			 
-			virtual bool  isFiring() const ;
+			virtual bool isFiring() const ;
 			
 			 
-			virtual void setFiring (bool  _firing); 
-			
+			virtual void setFiring (bool _firing);
 			
 			//*********************************
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<org.eclipse.uml2.uml.Action > getAction() const ;
+			virtual std::shared_ptr<uml::Action > getAction() const ;
 			
 			
-			virtual void setAction(std::shared_ptr<org.eclipse.uml2.uml.Action> _action) ;
+			virtual void setAction(std::shared_ptr<uml::Action> _action) ;
 			
 			/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'action'*/
 			
-			virtual void setNode(std::shared_ptr<org.eclipse.uml2.uml.ActivityNode> _node) ;
-			
+			virtual void setNode(std::shared_ptr<uml::ActivityNode> _node) ;
 			
 			virtual std::shared_ptr<Subset<fUML::Semantics::Actions::InputPinActivation, fUML::Semantics::Actions::PinActivation>> getInputPinActivation() const ;
 			
@@ -163,7 +159,7 @@ namespace fUML::Semantics::Actions
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

@@ -7,20 +7,16 @@
 #ifndef PSCS_SEMANTICS_VALUES_CS_OPAQUEEXPRESSIONEVALUATION_HPP
 #define PSCS_SEMANTICS_VALUES_CS_OPAQUEEXPRESSIONEVALUATION_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
-
 
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -55,20 +51,12 @@ namespace uml
 // enum includes
 
 
-//Includes from codegen annotation
-#include "abstractDataTypes/Subset.hpp"
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/Semantics/Loci/Locus.hpp"
-#include "fUML/Semantics/Loci/Executor.hpp"
-#include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
-#include "uml/OpaqueExpression.hpp"
-#include "uml/Behavior.hpp"
 
 //*********************************
 namespace PSCS::Semantics::Values 
 {
 	
-	class CS_OpaqueExpressionEvaluation:virtual public fUML::Semantics::Values::Evaluation
+	class CS_OpaqueExpressionEvaluation: virtual public fUML::Semantics::Values::Evaluation
 	{
 		public:
  			CS_OpaqueExpressionEvaluation(const CS_OpaqueExpressionEvaluation &) {}
@@ -76,7 +64,6 @@ namespace PSCS::Semantics::Values
 
 		protected:
 			CS_OpaqueExpressionEvaluation(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -127,7 +114,7 @@ namespace PSCS::Semantics::Values
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

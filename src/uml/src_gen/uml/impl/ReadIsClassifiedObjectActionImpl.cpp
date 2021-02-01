@@ -35,41 +35,23 @@
 #include <exception> // used in Persistence
 
 #include "uml/Action.hpp"
-
 #include "uml/Activity.hpp"
-
 #include "uml/ActivityEdge.hpp"
-
 #include "uml/ActivityGroup.hpp"
-
 #include "uml/ActivityNode.hpp"
-
 #include "uml/ActivityPartition.hpp"
-
 #include "uml/Classifier.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/Constraint.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/ExceptionHandler.hpp"
-
 #include "uml/InputPin.hpp"
-
 #include "uml/InterruptibleActivityRegion.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/OutputPin.hpp"
-
 #include "uml/RedefinableElement.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/StructuredActivityNode.hpp"
 
 //Factories an Package includes
@@ -277,12 +259,12 @@ std::shared_ptr<ecore::EClass> ReadIsClassifiedObjectActionImpl::eStaticClass() 
 /*
 Getter & Setter for attribute isDirect
 */
-bool  ReadIsClassifiedObjectActionImpl::getIsDirect() const 
+bool ReadIsClassifiedObjectActionImpl::getIsDirect() const 
 {
 	return m_isDirect;
 }
 
-void ReadIsClassifiedObjectActionImpl::setIsDirect(bool  _isDirect)
+void ReadIsClassifiedObjectActionImpl::setIsDirect(bool _isDirect)
 {
 	m_isDirect = _isDirect;
 } 
@@ -672,7 +654,7 @@ void ReadIsClassifiedObjectActionImpl::loadNode(std::string nodeName, std::share
 	ActionImpl::loadNode(nodeName, loadHandler);
 }
 
-void ReadIsClassifiedObjectActionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ReadIsClassifiedObjectActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -744,7 +726,7 @@ void ReadIsClassifiedObjectActionImpl::saveContent(std::shared_ptr<persistence::
 		}
 
 	// Add references
-		saveHandler->addReference("classifier", this->getClassifier());		 
+		saveHandler->addReference("classifier", this->getClassifier()); 
 	}
 	catch (std::exception& e)
 	{

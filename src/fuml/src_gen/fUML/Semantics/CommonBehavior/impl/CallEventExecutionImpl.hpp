@@ -9,7 +9,6 @@
 
 //*********************************
 // generated Includes
-
 //Model includes
 #include "../CallEventExecution.hpp"
 
@@ -56,7 +55,7 @@ namespace fUML::Semantics::CommonBehavior
 			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > getInputParameterValues() ;
 			
 			 
-			virtual std::shared_ptr<org.eclipse.uml2.uml.Operation> getOperation() ;
+			virtual std::shared_ptr<uml::Operation> getOperation() ;
 			
 			 
 			virtual bool isCallerSuspended() ;
@@ -71,7 +70,7 @@ namespace fUML::Semantics::CommonBehavior
 			virtual void releaseCaller() ;
 			
 			 
-			virtual void setOutputParameterValues(std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > parameterValues) ;
+			virtual void setOutputParameterValues(std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> parameterValues) ;
 			
 			 
 			virtual void suspendCaller() ;
@@ -84,12 +83,10 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			 
-			virtual bool  getCallerSuspended() const ;
+			virtual bool getCallerSuspended() const ;
 			
 			 
-			virtual void setCallerSuspended (bool  _callerSuspended); 
-			
+			virtual void setCallerSuspended (bool _callerSuspended);
 			
 			//*********************************
 			// Reference
@@ -114,7 +111,7 @@ namespace fUML::Semantics::CommonBehavior
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

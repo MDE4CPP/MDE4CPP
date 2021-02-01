@@ -34,31 +34,18 @@
 #include <exception> // used in Persistence
 
 #include "uml/Classifier.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Deployment.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/Enumeration.hpp"
-
 #include "uml/InstanceSpecification.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/Package.hpp"
-
 #include "uml/PackageableElement.hpp"
-
 #include "uml/Slot.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/TemplateParameter.hpp"
-
 #include "uml/ValueSpecification.hpp"
 
 //Factories an Package includes
@@ -388,7 +375,7 @@ void EnumerationLiteralImpl::loadNode(std::string nodeName, std::shared_ptr<pers
 	InstanceSpecificationImpl::loadNode(nodeName, loadHandler);
 }
 
-void EnumerationLiteralImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void EnumerationLiteralImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{

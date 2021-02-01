@@ -7,21 +7,17 @@
 #ifndef FUML_SEMANTICS_ACTIONS_ACCEPTEVENTACTIONACTIVATION_HPP
 #define FUML_SEMANTICS_ACTIONS_ACCEPTEVENTACTIONACTIVATION_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T> class Bag; 
 
 
-
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -66,13 +62,12 @@ namespace uml
 // enum includes
 
 
-//Includes from codegen annotation
 
 //*********************************
 namespace fUML::Semantics::Actions 
 {
 	
-	class AcceptEventActionActivation:virtual public ActionActivation
+	class AcceptEventActionActivation: virtual public ActionActivation
 	{
 		public:
  			AcceptEventActionActivation(const AcceptEventActionActivation &) {}
@@ -80,7 +75,6 @@ namespace fUML::Semantics::Actions
 
 		protected:
 			AcceptEventActionActivation(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -98,10 +92,10 @@ namespace fUML::Semantics::Actions
 			virtual void doAction() = 0;
 			
 			 
-			virtual void fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > incomingTokens) = 0;
+			virtual void fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incomingTokens) = 0;
 			
 			 
-			virtual void initialize(std::shared_ptr<org.eclipse.uml2.uml.ActivityNode> node,std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> group) = 0;
+			virtual void initialize(std::shared_ptr<uml::ActivityNode> node,std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> group) = 0;
 			
 			 
 			virtual bool isReady() = 0;
@@ -119,12 +113,10 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			 
-			virtual bool  isWaiting() const = 0;
+			virtual bool isWaiting() const = 0;
 			
 			 
-			virtual void setWaiting (bool  _waiting)= 0; 
-			
+			virtual void setWaiting (bool _waiting)= 0;
 			//*********************************
 			// Reference
 			//*********************************
@@ -141,7 +133,7 @@ namespace fUML::Semantics::Actions
 			// Attribute Members
 			//*********************************
 			 
-			bool  m_waiting = false;
+			bool m_waiting = false;
 			
 			
 			//*********************************
@@ -164,7 +156,7 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

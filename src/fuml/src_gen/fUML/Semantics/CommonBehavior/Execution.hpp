@@ -7,21 +7,17 @@
 #ifndef FUML_SEMANTICS_COMMONBEHAVIOR_EXECUTION_HPP
 #define FUML_SEMANTICS_COMMONBEHAVIOR_EXECUTION_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T> class Bag; 
 
 
-
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -63,23 +59,12 @@ namespace uml
 // enum includes
 
 
-//Includes from codegen annotation
-#include <algorithm>
-#include <uml/Parameter.hpp>
-#include <uml/ParameterDirectionKind.hpp>
-#include <fUML/Semantics/CommonBehavior/ParameterValue.hpp>
-#include "uml/Behavior.hpp"
-#include "uml/Classifier.hpp"
-#include "fUML/FUMLFactory.hpp"
-
-#include "fUML/Semantics/StructuredClassifiers/impl/ObjectImpl.hpp"
-
 
 //*********************************
 namespace fUML::Semantics::CommonBehavior 
 {
 	
-	class Execution:virtual public fUML::Semantics::StructuredClassifiers::Object
+	class Execution: virtual public fUML::Semantics::StructuredClassifiers::Object
 	{
 		public:
  			Execution(const Execution &) {}
@@ -87,7 +72,6 @@ namespace fUML::Semantics::CommonBehavior
 
 		protected:
 			Execution(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -110,7 +94,7 @@ namespace fUML::Semantics::CommonBehavior
 			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > getOutputParameterValues() = 0;
 			
 			 
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> getParameterValue(std::shared_ptr<org.eclipse.uml2.uml.Parameter> parameter) = 0;
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> getParameterValue(std::shared_ptr<uml::Parameter> parameter) = 0;
 			
 			 
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> new_() = 0;
@@ -130,10 +114,10 @@ namespace fUML::Semantics::CommonBehavior
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<org.eclipse.uml2.uml.Behavior > getBehavior() const = 0;
+			virtual std::shared_ptr<uml::Behavior > getBehavior() const = 0;
 			
 			
-			virtual void setBehavior(std::shared_ptr<org.eclipse.uml2.uml.Behavior> _behavior) = 0;
+			virtual void setBehavior(std::shared_ptr<uml::Behavior> _behavior) = 0;
 			
 			
 			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object > getContext() const = 0;
@@ -157,7 +141,7 @@ namespace fUML::Semantics::CommonBehavior
 			// Reference Members
 			//*********************************
 			
-			mutable std::shared_ptr<org.eclipse.uml2.uml.Behavior > m_behavior;
+			mutable std::shared_ptr<uml::Behavior > m_behavior;
 			std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object > m_context;
 			mutable std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> m_parameterValues;
 
@@ -174,7 +158,7 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

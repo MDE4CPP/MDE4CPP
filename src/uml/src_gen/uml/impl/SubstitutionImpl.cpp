@@ -34,25 +34,15 @@
 #include <exception> // used in Persistence
 
 #include "uml/Classifier.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/NamedElement.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/OpaqueExpression.hpp"
-
 #include "uml/Package.hpp"
-
 #include "uml/Realization.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/TemplateParameter.hpp"
 
 //Factories an Package includes
@@ -481,7 +471,7 @@ void SubstitutionImpl::loadNode(std::string nodeName, std::shared_ptr<persistenc
 	RealizationImpl::loadNode(nodeName, loadHandler);
 }
 
-void SubstitutionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void SubstitutionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -550,7 +540,7 @@ void SubstitutionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	// Add references
-		saveHandler->addReference("contract", this->getContract());		 
+		saveHandler->addReference("contract", this->getContract()); 
 	}
 	catch (std::exception& e)
 	{

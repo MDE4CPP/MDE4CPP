@@ -35,75 +35,40 @@
 #include <exception> // used in Persistence
 
 #include "uml/Behavior.hpp"
-
 #include "uml/Class.hpp"
-
 #include "uml/Classifier.hpp"
-
 #include "uml/CollaborationUse.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/CommunicationPath.hpp"
-
 #include "uml/ConnectableElement.hpp"
-
 #include "uml/Connector.hpp"
-
 #include "uml/Constraint.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Deployment.hpp"
-
 #include "uml/DeploymentTarget.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/ElementImport.hpp"
-
 #include "uml/Extension.hpp"
-
 #include "uml/Feature.hpp"
-
 #include "uml/Generalization.hpp"
-
 #include "uml/GeneralizationSet.hpp"
-
 #include "uml/InterfaceRealization.hpp"
-
 #include "uml/NamedElement.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/Node.hpp"
-
 #include "uml/Operation.hpp"
-
 #include "uml/Package.hpp"
-
 #include "uml/PackageImport.hpp"
-
 #include "uml/PackageableElement.hpp"
-
 #include "uml/Port.hpp"
-
 #include "uml/Property.hpp"
-
 #include "uml/Reception.hpp"
-
 #include "uml/RedefinableElement.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/Substitution.hpp"
-
 #include "uml/TemplateBinding.hpp"
-
 #include "uml/TemplateParameter.hpp"
-
 #include "uml/TemplateSignature.hpp"
-
 #include "uml/UseCase.hpp"
 
 //Factories an Package includes
@@ -710,17 +675,6 @@ Any NodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::NODE_ATTRIBUTE_NESTEDNODE:
 		{
 			return eAny(getNestedNode()); //15754			
-			/*
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Node>::iterator iter = m_nestedNode->begin();
-			Bag<uml::Node>::iterator end = m_nestedNode->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //15754
-			*/
 		}
 	}
 	Any result;
@@ -775,7 +729,7 @@ bool NodeImpl::eSet(int featureID, Any newValue)
 				}
 				iterNestedNode++;
 			}
-
+ 
 			iterNestedNode = nestedNodeList->begin();
 			endNestedNode = nestedNodeList->end();
 			while (iterNestedNode != endNestedNode)
@@ -862,7 +816,7 @@ void NodeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inter
 	DeploymentTargetImpl::loadNode(nodeName, loadHandler);
 }
 
-void NodeImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void NodeImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	ClassImpl::resolveReferences(featureID, references);
 	DeploymentTargetImpl::resolveReferences(featureID, references);

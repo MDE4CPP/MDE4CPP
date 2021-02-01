@@ -177,7 +177,7 @@ void ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl::loadNode(st
 	//load BasePackage Nodes
 }
 
-void ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	ecore::EObjectImpl::resolveReferences(featureID, references);
 }

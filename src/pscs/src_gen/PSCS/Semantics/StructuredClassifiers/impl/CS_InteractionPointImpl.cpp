@@ -34,33 +34,24 @@
 #include <exception> // used in Persistence
 
 #include "PSCS/Semantics/StructuredClassifiers/CS_Reference.hpp"
-
 #include "uml/Class.hpp"
-
 #include "uml/Classifier.hpp"
-
 #include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"
-
 #include "fUML/Semantics/CommonBehavior/Execution.hpp"
-
 #include "fUML/Semantics/StructuredClassifiers/Object.hpp"
-
 #include "uml/Operation.hpp"
-
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
-
 #include "uml/Port.hpp"
-
 #include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
 
 //Factories an Package includes
 #include "PSCS/Semantics/StructuredClassifiers/impl/StructuredClassifiersFactoryImpl.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/impl/StructuredClassifiersPackageImpl.hpp"
 
-#include "PSCS/Semantics/SemanticsFactory.hpp"
-#include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "PSCS/PSCSFactory.hpp"
 #include "PSCS/PSCSPackage.hpp"
+#include "PSCS/Semantics/SemanticsFactory.hpp"
+#include "PSCS/Semantics/SemanticsPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -123,7 +114,7 @@ std::shared_ptr<ecore::EClass> CS_InteractionPointImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool CS_InteractionPointImpl::checkAllParents(std::shared_ptr<org.eclipse.uml2.uml.Classifier> type,std::shared_ptr<org.eclipse.uml2.uml.Classifier> classifier)
+bool CS_InteractionPointImpl::checkAllParents(std::shared_ptr<uml::Classifier> type,std::shared_ptr<uml::Classifier> classifier)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -132,7 +123,7 @@ bool CS_InteractionPointImpl::checkAllParents(std::shared_ptr<org.eclipse.uml2.u
 	//end of body
 }
 
-std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> CS_InteractionPointImpl::dispatch(std::shared_ptr<org.eclipse.uml2.uml.Operation> operation)
+std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> CS_InteractionPointImpl::dispatch(std::shared_ptr<uml::Operation> operation)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -162,7 +153,7 @@ void CS_InteractionPointImpl::send(std::shared_ptr<fUML::Semantics::CommonBehavi
 	//end of body
 }
 
-void CS_InteractionPointImpl::startBehavior(std::shared_ptr<org.eclipse.uml2.uml.Class> classifier,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > inputs)
+void CS_InteractionPointImpl::startBehavior(std::shared_ptr<uml::Class> classifier,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> inputs)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -176,13 +167,13 @@ void CS_InteractionPointImpl::startBehavior(std::shared_ptr<org.eclipse.uml2.uml
 /*
 Getter & Setter for reference definingPort
 */
-std::shared_ptr<org.eclipse.uml2.uml.Port > CS_InteractionPointImpl::getDefiningPort() const
+std::shared_ptr<uml::Port > CS_InteractionPointImpl::getDefiningPort() const
 {
 //assert(m_definingPort);
     return m_definingPort;
 }
 
-void CS_InteractionPointImpl::setDefiningPort(std::shared_ptr<org.eclipse.uml2.uml.Port> _definingPort)
+void CS_InteractionPointImpl::setDefiningPort(std::shared_ptr<uml::Port> _definingPort)
 {
     m_definingPort = _definingPort;
 }
@@ -258,7 +249,7 @@ bool CS_InteractionPointImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<org.eclipse.uml2.uml.Port> _definingPort = std::dynamic_pointer_cast<org.eclipse.uml2.uml.Port>(_temp);
+			std::shared_ptr<uml::Port> _definingPort = std::dynamic_pointer_cast<uml::Port>(_temp);
 			setDefiningPort(_definingPort); //172
 			return true;
 		}
@@ -334,7 +325,7 @@ void CS_InteractionPointImpl::loadNode(std::string nodeName, std::shared_ptr<per
 	fUML::Semantics::StructuredClassifiers::ReferenceImpl::loadNode(nodeName, loadHandler);
 }
 
-void CS_InteractionPointImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void CS_InteractionPointImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -343,7 +334,7 @@ void CS_InteractionPointImpl::resolveReferences(const int featureID, std::list<s
 			if (references.size() == 1)
 			{
 				// Cast object to correct type
-				std::shared_ptr<org.eclipse.uml2.uml.Port> _definingPort = std::dynamic_pointer_cast<org.eclipse.uml2.uml.Port>( references.front() );
+				std::shared_ptr<uml::Port> _definingPort = std::dynamic_pointer_cast<uml::Port>( references.front() );
 				setDefiningPort(_definingPort);
 			}
 			
@@ -391,8 +382,8 @@ void CS_InteractionPointImpl::saveContent(std::shared_ptr<persistence::interface
 		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage> package = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance();
 
 	// Add references
-		saveHandler->addReference("definingPort", this->getDefiningPort());		
-		saveHandler->addReference("owner", this->getOwner());		 
+		saveHandler->addReference("definingPort", this->getDefiningPort()); 
+		saveHandler->addReference("owner", this->getOwner()); 
 	}
 	catch (std::exception& e)
 	{

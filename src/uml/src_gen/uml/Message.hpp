@@ -8,23 +8,19 @@
 #define UML_MESSAGE_HPP
 
 #include <map>
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T, class ... U> class Subset;
-
 
 class AnyObject;
 typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -63,7 +59,6 @@ namespace uml
 #include "uml/VisibilityKind.hpp"
 
 
-//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -73,7 +68,7 @@ namespace uml
 	<p>From package UML::Interactions.</p>
 	*/
 	
-	class Message:virtual public NamedElement
+	class Message: virtual public NamedElement
 	{
 		public:
  			Message(const Message &) {}
@@ -82,17 +77,13 @@ namespace uml
 		protected:
 			Message(){}
 
-
 			//Additional constructors for the containments back reference
-
 			Message(std::weak_ptr<uml::Interaction > par_interaction);
 
 			//Additional constructors for the containments back reference
-
 			Message(std::weak_ptr<uml::Namespace > par_namespace);
 
 			//Additional constructors for the containments back reference
-
 			Message(std::weak_ptr<uml::Element > par_owner);
 
 		public:
@@ -215,23 +206,19 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			 
-			virtual uml::MessageKind  getMessageKind() const = 0;
-			
+			virtual uml::MessageKind getMessageKind() const = 0;/*!
+			The sort of communication reflected by the Message.
+			<p>From package UML::Interactions.</p>
+			*/
+			 
+			virtual uml::MessageSort getMessageSort() const = 0;
 			
 			/*!
 			The sort of communication reflected by the Message.
 			<p>From package UML::Interactions.</p>
 			*/
 			 
-			virtual uml::MessageSort  getMessageSort() const = 0;
-			
-			/*!
-			The sort of communication reflected by the Message.
-			<p>From package UML::Interactions.</p>
-			*/
-			 
-			virtual void setMessageSort (uml::MessageSort  _messageSort)= 0; 
-			
+			virtual void setMessageSort (uml::MessageSort _messageSort)= 0;
 			//*********************************
 			// Reference
 			//*********************************
@@ -324,13 +311,13 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			 
-			uml::MessageKind  m_messageKind = MessageKind::UNKNOWN;
+			uml::MessageKind m_messageKind = MessageKind::UNKNOWN;
 			/*!
 			The sort of communication reflected by the Message.
 			<p>From package UML::Interactions.</p>
 			*/
 			 
-			uml::MessageSort  m_messageSort = MessageSort::SYNCHCALL;
+			uml::MessageSort m_messageSort = MessageSort::SYNCHCALL;
 			
 			
 			//*********************************
@@ -396,7 +383,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

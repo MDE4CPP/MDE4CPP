@@ -35,75 +35,40 @@
 #include <exception> // used in Persistence
 
 #include "uml/Behavior.hpp"
-
 #include "uml/BehavioralFeature.hpp"
-
 #include "uml/BehavioredClassifier.hpp"
-
 #include "uml/Class.hpp"
-
 #include "uml/Classifier.hpp"
-
 #include "uml/CollaborationUse.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/ConnectableElement.hpp"
-
 #include "uml/Connector.hpp"
-
 #include "uml/Constraint.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/ElementImport.hpp"
-
 #include "uml/Extension.hpp"
-
 #include "uml/Feature.hpp"
-
 #include "uml/Generalization.hpp"
-
 #include "uml/GeneralizationSet.hpp"
-
 #include "uml/InterfaceRealization.hpp"
-
 #include "uml/NamedElement.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/Operation.hpp"
-
 #include "uml/Package.hpp"
-
 #include "uml/PackageImport.hpp"
-
 #include "uml/PackageableElement.hpp"
-
 #include "uml/Parameter.hpp"
-
 #include "uml/ParameterSet.hpp"
-
 #include "uml/Port.hpp"
-
 #include "uml/Property.hpp"
-
 #include "uml/Reception.hpp"
-
 #include "uml/RedefinableElement.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/Substitution.hpp"
-
 #include "uml/TemplateBinding.hpp"
-
 #include "uml/TemplateParameter.hpp"
-
 #include "uml/TemplateSignature.hpp"
-
 #include "uml/UseCase.hpp"
 
 //Factories an Package includes
@@ -518,12 +483,12 @@ std::shared_ptr<ecore::EClass> BehaviorImpl::eStaticClass() const
 /*
 Getter & Setter for attribute isReentrant
 */
-bool  BehaviorImpl::getIsReentrant() const 
+bool BehaviorImpl::getIsReentrant() const 
 {
 	return m_isReentrant;
 }
 
-void BehaviorImpl::setIsReentrant(bool  _isReentrant)
+void BehaviorImpl::setIsReentrant(bool _isReentrant)
 {
 	m_isReentrant = _isReentrant;
 } 
@@ -1074,7 +1039,7 @@ bool BehaviorImpl::eSet(int featureID, Any newValue)
 				}
 				iterOwnedParameter++;
 			}
-
+ 
 			iterOwnedParameter = ownedParameterList->begin();
 			endOwnedParameter = ownedParameterList->end();
 			while (iterOwnedParameter != endOwnedParameter)
@@ -1110,7 +1075,7 @@ bool BehaviorImpl::eSet(int featureID, Any newValue)
 				}
 				iterOwnedParameterSet++;
 			}
-
+ 
 			iterOwnedParameterSet = ownedParameterSetList->begin();
 			endOwnedParameterSet = ownedParameterSetList->end();
 			while (iterOwnedParameterSet != endOwnedParameterSet)
@@ -1146,7 +1111,7 @@ bool BehaviorImpl::eSet(int featureID, Any newValue)
 				}
 				iterPostcondition++;
 			}
-
+ 
 			iterPostcondition = postconditionList->begin();
 			endPostcondition = postconditionList->end();
 			while (iterPostcondition != endPostcondition)
@@ -1182,7 +1147,7 @@ bool BehaviorImpl::eSet(int featureID, Any newValue)
 				}
 				iterPrecondition++;
 			}
-
+ 
 			iterPrecondition = preconditionList->begin();
 			endPrecondition = preconditionList->end();
 			while (iterPrecondition != endPrecondition)
@@ -1218,7 +1183,7 @@ bool BehaviorImpl::eSet(int featureID, Any newValue)
 				}
 				iterRedefinedBehavior++;
 			}
-
+ 
 			iterRedefinedBehavior = redefinedBehaviorList->begin();
 			endRedefinedBehavior = redefinedBehaviorList->end();
 			while (iterRedefinedBehavior != endRedefinedBehavior)
@@ -1375,7 +1340,7 @@ void BehaviorImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::i
 	ClassImpl::loadNode(nodeName, loadHandler);
 }
 
-void BehaviorImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void BehaviorImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -1522,11 +1487,11 @@ void BehaviorImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 		}
 
 	// Add references
-		saveHandler->addReference("context", this->getContext());		 
-		saveHandler->addReferences<uml::Constraint>("postcondition", this->getPostcondition());	
-		saveHandler->addReferences<uml::Constraint>("precondition", this->getPrecondition());	
-		saveHandler->addReferences<uml::Behavior>("redefinedBehavior", this->getRedefinedBehavior());	
-		saveHandler->addReference("specification", this->getSpecification());		 
+		saveHandler->addReference("context", this->getContext()); 
+		saveHandler->addReferences<uml::Constraint>("postcondition", this->getPostcondition());
+		saveHandler->addReferences<uml::Constraint>("precondition", this->getPrecondition());
+		saveHandler->addReferences<uml::Behavior>("redefinedBehavior", this->getRedefinedBehavior());
+		saveHandler->addReference("specification", this->getSpecification()); 
 	}
 	catch (std::exception& e)
 	{

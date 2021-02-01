@@ -34,17 +34,11 @@
 #include <exception> // used in Persistence
 
 #include "uml/Classifier.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/RedefinableElement.hpp"
-
 #include "uml/StringExpression.hpp"
 
 //Factories an Package includes
@@ -156,12 +150,12 @@ std::shared_ptr<ecore::EClass> FeatureImpl::eStaticClass() const
 /*
 Getter & Setter for attribute isStatic
 */
-bool  FeatureImpl::getIsStatic() const 
+bool FeatureImpl::getIsStatic() const 
 {
 	return m_isStatic;
 }
 
-void FeatureImpl::setIsStatic(bool  _isStatic)
+void FeatureImpl::setIsStatic(bool _isStatic)
 {
 	m_isStatic = _isStatic;
 } 
@@ -345,7 +339,7 @@ void FeatureImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::in
 	RedefinableElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void FeatureImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void FeatureImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	RedefinableElementImpl::resolveReferences(featureID, references);
 }

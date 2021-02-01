@@ -34,23 +34,14 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
 #include "uml/ConnectorEnd.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/ParameterableElement.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/TemplateParameter.hpp"
-
 #include "uml/Type.hpp"
-
 #include "uml/TypedElement.hpp"
 
 //Factories an Package includes
@@ -340,7 +331,7 @@ void ConnectableElementImpl::loadNode(std::string nodeName, std::shared_ptr<pers
 	TypedElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void ConnectableElementImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ConnectableElementImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	ParameterableElementImpl::resolveReferences(featureID, references);
 	TypedElementImpl::resolveReferences(featureID, references);

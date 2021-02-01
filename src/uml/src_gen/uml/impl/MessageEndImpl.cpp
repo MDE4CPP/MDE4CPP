@@ -34,21 +34,13 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/InteractionFragment.hpp"
-
 #include "uml/Message.hpp"
-
 #include "uml/MessageEnd.hpp"
-
 #include "uml/NamedElement.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/StringExpression.hpp"
 
 //Factories an Package includes
@@ -334,7 +326,7 @@ void MessageEndImpl::loadNode(std::string nodeName, std::shared_ptr<persistence:
 	NamedElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void MessageEndImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void MessageEndImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -376,7 +368,7 @@ void MessageEndImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	// Add references
-		saveHandler->addReference("message", this->getMessage());		 
+		saveHandler->addReference("message", this->getMessage()); 
 	}
 	catch (std::exception& e)
 	{

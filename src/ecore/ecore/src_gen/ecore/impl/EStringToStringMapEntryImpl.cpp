@@ -92,12 +92,12 @@ std::shared_ptr<EClass> EStringToStringMapEntryImpl::eStaticClass() const
 /*
 Getter & Setter for attribute key
 */
-std::string  EStringToStringMapEntryImpl::getKey() const 
+std::string EStringToStringMapEntryImpl::getKey() const 
 {
 	return m_key;
 }
 
-void EStringToStringMapEntryImpl::setKey(std::string  _key)
+void EStringToStringMapEntryImpl::setKey(std::string _key)
 {
 	m_key = _key;
 } 
@@ -107,12 +107,12 @@ void EStringToStringMapEntryImpl::setKey(std::string  _key)
 /*
 Getter & Setter for attribute value
 */
-std::string  EStringToStringMapEntryImpl::getValue() const 
+std::string EStringToStringMapEntryImpl::getValue() const 
 {
 	return m_value;
 }
 
-void EStringToStringMapEntryImpl::setValue(std::string  _value)
+void EStringToStringMapEntryImpl::setValue(std::string _value)
 {
 	m_value = _value;
 } 
@@ -154,9 +154,9 @@ Any EStringToStringMapEntryImpl::eGet(int featureID, bool resolve, bool coreType
 	switch(featureID)
 	{
 		case ecore::ecorePackage::ESTRINGTOSTRINGMAPENTRY_ATTRIBUTE_KEY:
-			return eAny(getKey()); //480
+			return eAny(getKey()); //490
 		case ecore::ecorePackage::ESTRINGTOSTRINGMAPENTRY_ATTRIBUTE_VALUE:
-			return eAny(getValue()); //481
+			return eAny(getValue()); //491
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -165,9 +165,9 @@ bool EStringToStringMapEntryImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ecore::ecorePackage::ESTRINGTOSTRINGMAPENTRY_ATTRIBUTE_KEY:
-			return getKey() != ""; //480
+			return getKey() != ""; //490
 		case ecore::ecorePackage::ESTRINGTOSTRINGMAPENTRY_ATTRIBUTE_VALUE:
-			return getValue() != ""; //481
+			return getValue() != ""; //491
 	}
 	return ecore::EObjectImpl::internalEIsSet(featureID);
 }
@@ -179,14 +179,14 @@ bool EStringToStringMapEntryImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::string _key = newValue->get<std::string>();
-			setKey(_key); //480
+			setKey(_key); //490
 			return true;
 		}
 		case ecore::ecorePackage::ESTRINGTOSTRINGMAPENTRY_ATTRIBUTE_VALUE:
 		{
 			// BOOST CAST
 			std::string _value = newValue->get<std::string>();
-			setValue(_value); //481
+			setValue(_value); //491
 			return true;
 		}
 	}
@@ -256,7 +256,7 @@ void EStringToStringMapEntryImpl::loadNode(std::string nodeName, std::shared_ptr
 	//load BasePackage Nodes
 }
 
-void EStringToStringMapEntryImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references)
+void EStringToStringMapEntryImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references)
 {
 	ecore::EObjectImpl::resolveReferences(featureID, references);
 }

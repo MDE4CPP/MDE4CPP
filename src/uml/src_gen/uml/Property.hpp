@@ -8,25 +8,21 @@
 #define UML_PROPERTY_HPP
 
 #include <map>
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T> class Bag; 
 template<class T, class ... U> class Subset;
 template<class T, class ... U> class SubsetUnion;
-
 
 class AnyObject;
 typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -63,9 +59,7 @@ namespace uml
 
 // base class includes
 #include "uml/ConnectableElement.hpp"
-
 #include "uml/DeploymentTarget.hpp"
-
 #include "uml/StructuralFeature.hpp"
 
 // enum includes
@@ -74,8 +68,6 @@ namespace uml
 #include "uml/VisibilityKind.hpp"
 
 
-//Includes from codegen annotation
-#include "uml/AggregationKind.hpp"
 
 //*********************************
 namespace uml 
@@ -85,7 +77,7 @@ namespace uml
 	<p>From package UML::Classification.</p>
 	*/
 	
-	class Property:virtual public ConnectableElement,virtual public DeploymentTarget,virtual public StructuralFeature
+	class Property: virtual public ConnectableElement, virtual public DeploymentTarget, virtual public StructuralFeature
 	{
 		public:
  			Property(const Property &) {}
@@ -94,37 +86,28 @@ namespace uml
 		protected:
 			Property(){}
 
-
 			//Additional constructors for the containments back reference
-
 			Property(std::weak_ptr<uml::Property > par_associationEnd);
 
 			//Additional constructors for the containments back reference
-
 			Property(std::weak_ptr<uml::Class > par_class);
 
 			//Additional constructors for the containments back reference
-
 			Property(std::weak_ptr<uml::DataType > par_datatype);
 
 			//Additional constructors for the containments back reference
-
 			Property(std::weak_ptr<uml::Interface > par_interface);
 
 			//Additional constructors for the containments back reference
-
 			Property(std::weak_ptr<uml::Namespace > par_namespace);
 
 			//Additional constructors for the containments back reference
-
 			Property(std::weak_ptr<uml::Element > par_owner);
 
 			//Additional constructors for the containments back reference
-
 			Property(std::weak_ptr<uml::Association > par_owningAssociation);
 
 			//Additional constructors for the containments back reference
-
 			Property(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
 
 		public:
@@ -331,72 +314,65 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual uml::AggregationKind  getAggregation() const = 0;
+			virtual uml::AggregationKind getAggregation() const = 0;
 			
 			/*!
 			Specifies the kind of aggregation that applies to the Property.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual void setAggregation (uml::AggregationKind  _aggregation)= 0; 
-			 
-			virtual std::string  getDefault() const = 0;
+			virtual void setAggregation (uml::AggregationKind _aggregation)= 0;virtual std::string getDefault() const = 0;
 			
 			 
-			virtual void setDefault (std::string  _default)= 0; 
+			virtual void setDefault (std::string _default)= 0;/*!
+			If isComposite is true, the object containing the attribute is a container for the object or value contained in the attribute. This is a derived value, indicating whether the aggregation of the Property is composite or not.
+			<p>From package UML::Classification.</p>
+			*/
+			 
+			virtual bool getIsComposite() const = 0;
+			
 			/*!
 			If isComposite is true, the object containing the attribute is a container for the object or value contained in the attribute. This is a derived value, indicating whether the aggregation of the Property is composite or not.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual bool  getIsComposite() const = 0;
-			
-			/*!
-			If isComposite is true, the object containing the attribute is a container for the object or value contained in the attribute. This is a derived value, indicating whether the aggregation of the Property is composite or not.
-			<p>From package UML::Classification.</p>
-			*/
-			 
-			virtual void setIsComposite (bool  _isComposite)= 0; 
-			/*!
+			virtual void setIsComposite (bool _isComposite)= 0;/*!
 			Specifies whether the Property is derived, i.e., whether its value or values can be computed from other information.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual bool  getIsDerived() const = 0;
+			virtual bool getIsDerived() const = 0;
 			
 			/*!
 			Specifies whether the Property is derived, i.e., whether its value or values can be computed from other information.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual void setIsDerived (bool  _isDerived)= 0; 
-			/*!
+			virtual void setIsDerived (bool _isDerived)= 0;/*!
 			Specifies whether the property is derived as the union of all of the Properties that are constrained to subset it.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual bool  getIsDerivedUnion() const = 0;
+			virtual bool getIsDerivedUnion() const = 0;
 			
 			/*!
 			Specifies whether the property is derived as the union of all of the Properties that are constrained to subset it.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual void setIsDerivedUnion (bool  _isDerivedUnion)= 0; 
-			/*!
+			virtual void setIsDerivedUnion (bool _isDerivedUnion)= 0;/*!
 			True indicates this property can be used to uniquely identify an instance of the containing Class.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual bool  getIsID() const = 0;
+			virtual bool getIsID() const = 0;
 			
 			/*!
 			True indicates this property can be used to uniquely identify an instance of the containing Class.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual void setIsID (bool  _isID)= 0; 
-			
+			virtual void setIsID (bool _isID)= 0;
 			//*********************************
 			// Reference
 			//*********************************
@@ -547,33 +523,33 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			uml::AggregationKind  m_aggregation = AggregationKind::NONE;
+			uml::AggregationKind m_aggregation = AggregationKind::NONE;
 			 
-			std::string  m_default = "";
+			std::string m_default = "";
 			/*!
 			If isComposite is true, the object containing the attribute is a container for the object or value contained in the attribute. This is a derived value, indicating whether the aggregation of the Property is composite or not.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			bool  m_isComposite = false;
+			bool m_isComposite = false;
 			/*!
 			Specifies whether the Property is derived, i.e., whether its value or values can be computed from other information.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			bool  m_isDerived = false;
+			bool m_isDerived = false;
 			/*!
 			Specifies whether the property is derived as the union of all of the Properties that are constrained to subset it.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			bool  m_isDerivedUnion = false;
+			bool m_isDerivedUnion = false;
 			/*!
 			True indicates this property can be used to uniquely identify an instance of the containing Class.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			bool  m_isID = false;
+			bool m_isID = false;
 			
 			
 			//*********************************
@@ -679,7 +655,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

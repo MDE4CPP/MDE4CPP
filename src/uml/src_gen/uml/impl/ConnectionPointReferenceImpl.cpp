@@ -35,23 +35,14 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/Pseudostate.hpp"
-
 #include "uml/Region.hpp"
-
 #include "uml/State.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/Transition.hpp"
-
 #include "uml/Vertex.hpp"
 
 //Factories an Package includes
@@ -378,7 +369,7 @@ bool ConnectionPointReferenceImpl::eSet(int featureID, Any newValue)
 				}
 				iterEntry++;
 			}
-
+ 
 			iterEntry = entryList->begin();
 			endEntry = entryList->end();
 			while (iterEntry != endEntry)
@@ -414,7 +405,7 @@ bool ConnectionPointReferenceImpl::eSet(int featureID, Any newValue)
 				}
 				iterExit++;
 			}
-
+ 
 			iterExit = exitList->begin();
 			endExit = exitList->end();
 			while (iterExit != endExit)
@@ -499,7 +490,7 @@ void ConnectionPointReferenceImpl::loadNode(std::string nodeName, std::shared_pt
 	VertexImpl::loadNode(nodeName, loadHandler);
 }
 
-void ConnectionPointReferenceImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ConnectionPointReferenceImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -572,8 +563,8 @@ void ConnectionPointReferenceImpl::saveContent(std::shared_ptr<persistence::inte
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	// Add references
-		saveHandler->addReferences<uml::Pseudostate>("entry", this->getEntry());	
-		saveHandler->addReferences<uml::Pseudostate>("exit", this->getExit());	
+		saveHandler->addReferences<uml::Pseudostate>("entry", this->getEntry());
+		saveHandler->addReferences<uml::Pseudostate>("exit", this->getExit());
 	}
 	catch (std::exception& e)
 	{

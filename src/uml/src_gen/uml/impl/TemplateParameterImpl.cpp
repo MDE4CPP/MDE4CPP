@@ -34,11 +34,8 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/ParameterableElement.hpp"
-
 #include "uml/TemplateSignature.hpp"
 
 //Factories an Package includes
@@ -473,7 +470,7 @@ void TemplateParameterImpl::loadNode(std::string nodeName, std::shared_ptr<persi
 	ElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void TemplateParameterImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void TemplateParameterImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -549,8 +546,8 @@ void TemplateParameterImpl::saveContent(std::shared_ptr<persistence::interfaces:
 		}
 
 	// Add references
-		saveHandler->addReference("default", this->getDefault());		 
-		saveHandler->addReference("parameteredElement", this->getParameteredElement());		 
+		saveHandler->addReference("default", this->getDefault()); 
+		saveHandler->addReference("parameteredElement", this->getParameteredElement()); 
 	}
 	catch (std::exception& e)
 	{

@@ -34,17 +34,11 @@
 #include <exception> // used in Persistence
 
 #include "fUML/Semantics/Actions/ActionActivation.hpp"
-
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
-
 #include "uml/ActivityNode.hpp"
-
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
-
 #include "fUML/Semantics/Activities/ObjectNodeActivation.hpp"
-
 #include "uml/Pin.hpp"
-
 #include "fUML/Semantics/Activities/Token.hpp"
 
 //Factories an Package includes
@@ -141,7 +135,7 @@ std::shared_ptr<ecore::EClass> PinActivationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-void PinActivationImpl::fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > incomingTokens)
+void PinActivationImpl::fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incomingTokens)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -225,13 +219,13 @@ void PinActivationImpl::setActionActivation(std::shared_ptr<fUML::Semantics::Act
 /*
 Getter & Setter for reference pin
 */
-std::shared_ptr<org.eclipse.uml2.uml.Pin > PinActivationImpl::getPin() const
+std::shared_ptr<uml::Pin > PinActivationImpl::getPin() const
 {
 //assert(m_pin);
     return m_pin;
 }
 
-void PinActivationImpl::setPin(std::shared_ptr<org.eclipse.uml2.uml.Pin> _pin)
+void PinActivationImpl::setPin(std::shared_ptr<uml::Pin> _pin)
 {
     m_pin = _pin;
 	//additional setter call for redefined reference ActivityNodeActivation::node
@@ -239,9 +233,9 @@ void PinActivationImpl::setPin(std::shared_ptr<org.eclipse.uml2.uml.Pin> _pin)
 }
 
 /*Additional Setter for redefined reference 'ActivityNodeActivation::node'*/
-void PinActivationImpl::setNode(std::shared_ptr<org.eclipse.uml2.uml.ActivityNode> _node)
+void PinActivationImpl::setNode(std::shared_ptr<uml::ActivityNode> _node)
 {
-	std::shared_ptr<org.eclipse.uml2.uml.Pin> _pin = std::dynamic_pointer_cast<org.eclipse.uml2.uml.Pin>(_node);
+	std::shared_ptr<uml::Pin> _pin = std::dynamic_pointer_cast<uml::Pin>(_node);
 	if(_pin)
 	{
 		m_pin = _pin;
@@ -251,7 +245,7 @@ void PinActivationImpl::setNode(std::shared_ptr<org.eclipse.uml2.uml.ActivityNod
 	}
 	else
 	{
-		std::cerr<<"[PinActivation::setNode] : Could not set node because provided node was not of type 'org.eclipse.uml2.uml.Pin'"<<std::endl;
+		std::cerr<<"[PinActivation::setNode] : Could not set node because provided node was not of type 'uml::Pin'"<<std::endl;
 	}
 }
 
@@ -321,7 +315,7 @@ bool PinActivationImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<org.eclipse.uml2.uml.Pin> _pin = std::dynamic_pointer_cast<org.eclipse.uml2.uml.Pin>(_temp);
+			std::shared_ptr<uml::Pin> _pin = std::dynamic_pointer_cast<uml::Pin>(_temp);
 			setPin(_pin); //888
 			return true;
 		}
@@ -382,7 +376,7 @@ void PinActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persisten
 	fUML::Semantics::Activities::ObjectNodeActivationImpl::loadNode(nodeName, loadHandler);
 }
 
-void PinActivationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void PinActivationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -403,7 +397,7 @@ void PinActivationImpl::resolveReferences(const int featureID, std::list<std::sh
 			if (references.size() == 1)
 			{
 				// Cast object to correct type
-				std::shared_ptr<org.eclipse.uml2.uml.Pin> _pin = std::dynamic_pointer_cast<org.eclipse.uml2.uml.Pin>( references.front() );
+				std::shared_ptr<uml::Pin> _pin = std::dynamic_pointer_cast<uml::Pin>( references.front() );
 				setPin(_pin);
 			}
 			
@@ -436,7 +430,7 @@ void PinActivationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 		std::shared_ptr<fUML::Semantics::Actions::ActionsPackage> package = fUML::Semantics::Actions::ActionsPackage::eInstance();
 
 	// Add references
-		saveHandler->addReference("pin", this->getPin());		
+		saveHandler->addReference("pin", this->getPin()); 
 	}
 	catch (std::exception& e)
 	{

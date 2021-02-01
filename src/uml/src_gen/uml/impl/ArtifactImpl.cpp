@@ -34,59 +34,32 @@
 #include <exception> // used in Persistence
 
 #include "uml/Artifact.hpp"
-
 #include "uml/Classifier.hpp"
-
 #include "uml/CollaborationUse.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/Constraint.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/DeployedArtifact.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/ElementImport.hpp"
-
 #include "uml/Feature.hpp"
-
 #include "uml/Generalization.hpp"
-
 #include "uml/GeneralizationSet.hpp"
-
 #include "uml/Manifestation.hpp"
-
 #include "uml/NamedElement.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/Operation.hpp"
-
 #include "uml/Package.hpp"
-
 #include "uml/PackageImport.hpp"
-
 #include "uml/PackageableElement.hpp"
-
 #include "uml/Property.hpp"
-
 #include "uml/RedefinableElement.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/Substitution.hpp"
-
 #include "uml/TemplateBinding.hpp"
-
 #include "uml/TemplateParameter.hpp"
-
 #include "uml/TemplateSignature.hpp"
-
 #include "uml/Type.hpp"
-
 #include "uml/UseCase.hpp"
 
 //Factories an Package includes
@@ -407,12 +380,12 @@ std::shared_ptr<ecore::EClass> ArtifactImpl::eStaticClass() const
 /*
 Getter & Setter for attribute fileName
 */
-std::string  ArtifactImpl::getFileName() const 
+std::string ArtifactImpl::getFileName() const 
 {
 	return m_fileName;
 }
 
-void ArtifactImpl::setFileName(std::string  _fileName)
+void ArtifactImpl::setFileName(std::string _fileName)
 {
 	m_fileName = _fileName;
 } 
@@ -428,7 +401,7 @@ std::shared_ptr<uml::Property> ArtifactImpl::createOwnedAttribute(std::string na
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Operation> ArtifactImpl::createOwnedOperation(std::string name,std::shared_ptr<Bag<std::string> > parameterNames,std::shared_ptr<Bag<uml::Type> > parameterTypes,std::shared_ptr<uml::Type> returnType)
+std::shared_ptr<uml::Operation> ArtifactImpl::createOwnedOperation(std::string name,std::shared_ptr<Bag<std::string>> parameterNames,std::shared_ptr<Bag<uml::Type>> parameterTypes,std::shared_ptr<uml::Type> returnType)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -802,7 +775,7 @@ bool ArtifactImpl::eSet(int featureID, Any newValue)
 				}
 				iterManifestation++;
 			}
-
+ 
 			iterManifestation = manifestationList->begin();
 			endManifestation = manifestationList->end();
 			while (iterManifestation != endManifestation)
@@ -838,7 +811,7 @@ bool ArtifactImpl::eSet(int featureID, Any newValue)
 				}
 				iterNestedArtifact++;
 			}
-
+ 
 			iterNestedArtifact = nestedArtifactList->begin();
 			endNestedArtifact = nestedArtifactList->end();
 			while (iterNestedArtifact != endNestedArtifact)
@@ -874,7 +847,7 @@ bool ArtifactImpl::eSet(int featureID, Any newValue)
 				}
 				iterOwnedAttribute++;
 			}
-
+ 
 			iterOwnedAttribute = ownedAttributeList->begin();
 			endOwnedAttribute = ownedAttributeList->end();
 			while (iterOwnedAttribute != endOwnedAttribute)
@@ -910,7 +883,7 @@ bool ArtifactImpl::eSet(int featureID, Any newValue)
 				}
 				iterOwnedOperation++;
 			}
-
+ 
 			iterOwnedOperation = ownedOperationList->begin();
 			endOwnedOperation = ownedOperationList->end();
 			while (iterOwnedOperation != endOwnedOperation)
@@ -1069,7 +1042,7 @@ void ArtifactImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::i
 	DeployedArtifactImpl::loadNode(nodeName, loadHandler);
 }
 
-void ArtifactImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ArtifactImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	ClassifierImpl::resolveReferences(featureID, references);
 	DeployedArtifactImpl::resolveReferences(featureID, references);

@@ -35,53 +35,29 @@
 #include <exception> // used in Persistence
 
 #include "uml/Class.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/Constraint.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "ecore/EObject.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/ElementImport.hpp"
-
 #include "uml/Enumeration.hpp"
-
 #include "uml/Interface.hpp"
-
 #include "uml/NamedElement.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/Package.hpp"
-
 #include "uml/PackageImport.hpp"
-
 #include "uml/PackageMerge.hpp"
-
 #include "uml/PackageableElement.hpp"
-
 #include "uml/PrimitiveType.hpp"
-
 #include "uml/Profile.hpp"
-
 #include "uml/ProfileApplication.hpp"
-
 #include "uml/Stereotype.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/TemplateBinding.hpp"
-
 #include "uml/TemplateParameter.hpp"
-
 #include "uml/TemplateSignature.hpp"
-
 #include "uml/TemplateableElement.hpp"
-
 #include "uml/Type.hpp"
 
 //Factories an Package includes
@@ -359,12 +335,12 @@ std::shared_ptr<ecore::EClass> PackageImpl::eStaticClass() const
 /*
 Getter & Setter for attribute URI
 */
-std::string  PackageImpl::getURI() const 
+std::string PackageImpl::getURI() const 
 {
 	return m_URI;
 }
 
-void PackageImpl::setURI(std::string  _URI)
+void PackageImpl::setURI(std::string _URI)
 {
 	m_URI = _URI;
 } 
@@ -930,7 +906,7 @@ bool PackageImpl::eSet(int featureID, Any newValue)
 				}
 				iterNestedPackage++;
 			}
-
+ 
 			iterNestedPackage = nestedPackageList->begin();
 			endNestedPackage = nestedPackageList->end();
 			while (iterNestedPackage != endNestedPackage)
@@ -974,7 +950,7 @@ bool PackageImpl::eSet(int featureID, Any newValue)
 				}
 				iterOwnedType++;
 			}
-
+ 
 			iterOwnedType = ownedTypeList->begin();
 			endOwnedType = ownedTypeList->end();
 			while (iterOwnedType != endOwnedType)
@@ -1010,7 +986,7 @@ bool PackageImpl::eSet(int featureID, Any newValue)
 				}
 				iterPackageMerge++;
 			}
-
+ 
 			iterPackageMerge = packageMergeList->begin();
 			endPackageMerge = packageMergeList->end();
 			while (iterPackageMerge != endPackageMerge)
@@ -1046,7 +1022,7 @@ bool PackageImpl::eSet(int featureID, Any newValue)
 				}
 				iterPackagedElement++;
 			}
-
+ 
 			iterPackagedElement = packagedElementList->begin();
 			endPackagedElement = packagedElementList->end();
 			while (iterPackagedElement != endPackagedElement)
@@ -1082,7 +1058,7 @@ bool PackageImpl::eSet(int featureID, Any newValue)
 				}
 				iterProfileApplication++;
 			}
-
+ 
 			iterProfileApplication = profileApplicationList->begin();
 			endProfileApplication = profileApplicationList->end();
 			while (iterProfileApplication != endProfileApplication)
@@ -1284,7 +1260,7 @@ void PackageImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::in
 	TemplateableElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void PackageImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void PackageImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{

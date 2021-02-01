@@ -8,24 +8,20 @@
 #define UML_TRANSITION_HPP
 
 #include <map>
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T, class ... U> class Subset;
 template<class T, class ... U> class SubsetUnion;
-
 
 class AnyObject;
 typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -60,7 +56,6 @@ namespace uml
 
 // base class includes
 #include "uml/Namespace.hpp"
-
 #include "uml/RedefinableElement.hpp"
 
 // enum includes
@@ -69,7 +64,6 @@ namespace uml
 #include "uml/VisibilityKind.hpp"
 
 
-//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -79,7 +73,7 @@ namespace uml
 	<p>From package UML::StateMachines.</p>
 	*/
 	
-	class Transition:virtual public Namespace,virtual public RedefinableElement
+	class Transition: virtual public Namespace, virtual public RedefinableElement
 	{
 		public:
  			Transition(const Transition &) {}
@@ -88,17 +82,13 @@ namespace uml
 		protected:
 			Transition(){}
 
-
 			//Additional constructors for the containments back reference
-
 			Transition(std::weak_ptr<uml::Region > par_container);
 
 			//Additional constructors for the containments back reference
-
 			Transition(std::weak_ptr<uml::Namespace > par_namespace);
 
 			//Additional constructors for the containments back reference
-
 			Transition(std::weak_ptr<uml::Element > par_owner);
 
 		public:
@@ -208,15 +198,14 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			 
-			virtual uml::TransitionKind  getKind() const = 0;
+			virtual uml::TransitionKind getKind() const = 0;
 			
 			/*!
 			Indicates the precise type of the Transition.
 			<p>From package UML::StateMachines.</p>
 			*/
 			 
-			virtual void setKind (uml::TransitionKind  _kind)= 0; 
-			
+			virtual void setKind (uml::TransitionKind _kind)= 0;
 			//*********************************
 			// Reference
 			//*********************************
@@ -323,7 +312,7 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			 
-			uml::TransitionKind  m_kind = TransitionKind::EXTERNAL;
+			uml::TransitionKind m_kind = TransitionKind::EXTERNAL;
 			
 			
 			//*********************************
@@ -409,7 +398,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

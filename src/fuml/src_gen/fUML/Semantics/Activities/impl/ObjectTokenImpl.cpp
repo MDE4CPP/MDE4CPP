@@ -32,9 +32,7 @@
 #include <exception> // used in Persistence
 
 #include "fUML/Semantics/Activities/ActivityNodeActivation.hpp"
-
 #include "fUML/Semantics/Activities/Token.hpp"
-
 #include "fUML/Semantics/Values/Value.hpp"
 
 //Factories an Package includes
@@ -279,7 +277,7 @@ void ObjectTokenImpl::loadNode(std::string nodeName, std::shared_ptr<persistence
 	TokenImpl::loadNode(nodeName, loadHandler);
 }
 
-void ObjectTokenImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ObjectTokenImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	TokenImpl::resolveReferences(featureID, references);
 }

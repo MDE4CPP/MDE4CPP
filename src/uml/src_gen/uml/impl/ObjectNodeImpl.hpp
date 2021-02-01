@@ -9,7 +9,6 @@
 
 //*********************************
 // generated Includes
-
 //Model includes
 #include "../ObjectNode.hpp"
 
@@ -94,28 +93,26 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			 
-			virtual bool  getIsControlType() const ;
+			virtual bool getIsControlType() const ;
 			
 			/*!
 			Indicates whether the type of the ObjectNode is to be treated as representing control values that may traverse ControlFlows.
 			<p>From package UML::Activities.</p>
 			*/
 			 
-			virtual void setIsControlType (bool  _isControlType); 
-			/*!
+			virtual void setIsControlType (bool _isControlType);/*!
 			Indicates how the tokens held by the ObjectNode are ordered for selection to traverse ActivityEdges outgoing from the ObjectNode.
 			<p>From package UML::Activities.</p>
 			*/
 			 
-			virtual uml::ObjectNodeOrderingKind  getOrdering() const ;
+			virtual uml::ObjectNodeOrderingKind getOrdering() const ;
 			
 			/*!
 			Indicates how the tokens held by the ObjectNode are ordered for selection to traverse ActivityEdges outgoing from the ObjectNode.
 			<p>From package UML::Activities.</p>
 			*/
 			 
-			virtual void setOrdering (uml::ObjectNodeOrderingKind  _ordering); 
-			
+			virtual void setOrdering (uml::ObjectNodeOrderingKind _ordering);
 			
 			//*********************************
 			// Reference
@@ -196,7 +193,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

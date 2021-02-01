@@ -34,17 +34,11 @@
 #include <exception> // used in Persistence
 
 #include "fUML/Semantics/Actions/ActionActivation.hpp"
-
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
-
 #include "uml/ActivityNode.hpp"
-
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
-
 #include "uml/Pin.hpp"
-
 #include "fUML/Semantics/Actions/PinActivation.hpp"
-
 #include "fUML/Semantics/Activities/Token.hpp"
 
 //Factories an Package includes
@@ -255,7 +249,7 @@ void InputPinActivationImpl::loadNode(std::string nodeName, std::shared_ptr<pers
 	PinActivationImpl::loadNode(nodeName, loadHandler);
 }
 
-void InputPinActivationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void InputPinActivationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	PinActivationImpl::resolveReferences(featureID, references);
 }

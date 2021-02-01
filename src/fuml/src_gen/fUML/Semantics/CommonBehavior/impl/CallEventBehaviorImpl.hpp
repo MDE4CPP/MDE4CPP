@@ -9,7 +9,6 @@
 
 //*********************************
 // generated Includes
-
 //Model includes
 #include "../CallEventBehavior.hpp"
 
@@ -58,10 +57,10 @@ virtual public CallEventBehavior
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<org.eclipse.uml2.uml.Operation > getOperation() const ;
+			virtual std::shared_ptr<uml::Operation > getOperation() const ;
 			
 			
-			virtual void setOperation(std::shared_ptr<org.eclipse.uml2.uml.Operation> _operation) ;
+			virtual void setOperation(std::shared_ptr<uml::Operation> _operation) ;
 			
 							
 			
@@ -83,7 +82,7 @@ virtual public CallEventBehavior
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

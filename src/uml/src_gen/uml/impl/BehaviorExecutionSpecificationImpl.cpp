@@ -34,27 +34,16 @@
 #include <exception> // used in Persistence
 
 #include "uml/Behavior.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/ExecutionSpecification.hpp"
-
 #include "uml/GeneralOrdering.hpp"
-
 #include "uml/Interaction.hpp"
-
 #include "uml/InteractionOperand.hpp"
-
 #include "uml/Lifeline.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/OccurrenceSpecification.hpp"
-
 #include "uml/StringExpression.hpp"
 
 //Factories an Package includes
@@ -367,7 +356,7 @@ void BehaviorExecutionSpecificationImpl::loadNode(std::string nodeName, std::sha
 	ExecutionSpecificationImpl::loadNode(nodeName, loadHandler);
 }
 
-void BehaviorExecutionSpecificationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void BehaviorExecutionSpecificationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -415,7 +404,7 @@ void BehaviorExecutionSpecificationImpl::saveContent(std::shared_ptr<persistence
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	// Add references
-		saveHandler->addReference("behavior", this->getBehavior());		 
+		saveHandler->addReference("behavior", this->getBehavior()); 
 	}
 	catch (std::exception& e)
 	{

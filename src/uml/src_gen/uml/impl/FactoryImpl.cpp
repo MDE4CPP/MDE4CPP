@@ -33,9 +33,7 @@
 #include <exception> // used in Persistence
 
 #include "uml/Class.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/Element.hpp"
 
 //Factories an Package includes
@@ -222,7 +220,7 @@ void FactoryImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::in
 	ElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void FactoryImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void FactoryImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	ElementImpl::resolveReferences(featureID, references);
 }

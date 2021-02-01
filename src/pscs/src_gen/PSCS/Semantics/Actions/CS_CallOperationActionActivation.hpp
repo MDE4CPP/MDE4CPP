@@ -7,20 +7,16 @@
 #ifndef PSCS_SEMANTICS_ACTIONS_CS_CALLOPERATIONACTIONACTIVATION_HPP
 #define PSCS_SEMANTICS_ACTIONS_CS_CALLOPERATIONACTIONACTIVATION_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
-
 
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -68,33 +64,12 @@ namespace uml
 // enum includes
 
 
-//Includes from codegen annotation
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
-
-#include "uml/CallOperationAction.hpp"
-#include "uml/Parameter.hpp"
-#include "uml/ParameterDirectionKind.hpp"
-#include "uml/InputPin.hpp"
-#include "uml/OutputPin.hpp"
-#include "uml/Class.hpp"
-#include "uml/Interface.hpp"
-#include "fUML/Semantics/Values/Value.hpp"
-#include "fUML/Semantics/StructuredClassifiers/Object.hpp"
-#include "fUML/Semantics/Activities/ActivityExecution.hpp"
-#include "fUML/Semantics/Loci/Locus.hpp"
-#include "fUML/Semantics/Loci/ExecutionFactory.hpp"
-#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
-#include "PSCS/Semantics/StructuredClassifiers/CS_Reference.hpp"
-#include "PSCS/Semantics/StructuredClassifiers/CS_Object.hpp"
-#include "PSCS/Semantics/Actions/CS_ConstructStrategy.hpp"
-#include "PSCS/Semantics/Loci/CS_ExecutionFactory.hpp"
 
 //*********************************
 namespace PSCS::Semantics::Actions 
 {
 	
-	class CS_CallOperationActionActivation:virtual public fUML::Semantics::Actions::CallOperationActionActivation
+	class CS_CallOperationActionActivation: virtual public fUML::Semantics::Actions::CallOperationActionActivation
 	{
 		public:
  			CS_CallOperationActionActivation(const CS_CallOperationActionActivation &) {}
@@ -102,7 +77,6 @@ namespace PSCS::Semantics::Actions
 
 		protected:
 			CS_CallOperationActionActivation(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -114,7 +88,7 @@ namespace PSCS::Semantics::Actions
 			// Operations
 			//*********************************
 			 
-			virtual bool _isCreate(std::shared_ptr<org.eclipse.uml2.uml.Operation> operation) = 0;
+			virtual bool _isCreate(std::shared_ptr<uml::Operation> operation) = 0;
 			
 			 
 			virtual void doAction() = 0;
@@ -123,13 +97,13 @@ namespace PSCS::Semantics::Actions
 			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> getCallExecution() = 0;
 			
 			 
-			virtual bool isCreate(std::shared_ptr<org.eclipse.uml2.uml.Operation> operation) = 0;
+			virtual bool isCreate(std::shared_ptr<uml::Operation> operation) = 0;
 			
 			 
-			virtual bool isOperationProvided(std::shared_ptr<org.eclipse.uml2.uml.Port> port,std::shared_ptr<org.eclipse.uml2.uml.Operation> operation) = 0;
+			virtual bool isOperationProvided(std::shared_ptr<uml::Port> port,std::shared_ptr<uml::Operation> operation) = 0;
 			
 			 
-			virtual bool isOperationRequired(std::shared_ptr<org.eclipse.uml2.uml.Port> port,std::shared_ptr<org.eclipse.uml2.uml.Operation> operation) = 0;
+			virtual bool isOperationRequired(std::shared_ptr<uml::Port> port,std::shared_ptr<uml::Operation> operation) = 0;
 			
 			
 			//*********************************
@@ -166,7 +140,7 @@ namespace PSCS::Semantics::Actions
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

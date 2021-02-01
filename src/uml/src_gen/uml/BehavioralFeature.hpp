@@ -8,24 +8,20 @@
 #define UML_BEHAVIORALFEATURE_HPP
 
 #include <map>
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T> class Bag; 
 template<class T, class ... U> class Subset;
-
 
 class AnyObject;
 typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -59,7 +55,6 @@ namespace uml
 
 // base class includes
 #include "uml/Feature.hpp"
-
 #include "uml/Namespace.hpp"
 
 // enum includes
@@ -68,7 +63,6 @@ namespace uml
 #include "uml/VisibilityKind.hpp"
 
 
-//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -78,7 +72,7 @@ namespace uml
 	<p>From package UML::Classification.</p>
 	*/
 	
-	class BehavioralFeature:virtual public Feature,virtual public Namespace
+	class BehavioralFeature: virtual public Feature, virtual public Namespace
 	{
 		public:
  			BehavioralFeature(const BehavioralFeature &) {}
@@ -86,7 +80,6 @@ namespace uml
 
 		protected:
 			BehavioralFeature(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -135,28 +128,26 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual uml::CallConcurrencyKind  getConcurrency() const = 0;
+			virtual uml::CallConcurrencyKind getConcurrency() const = 0;
 			
 			/*!
 			Specifies the semantics of concurrent calls to the same passive instance (i.e., an instance originating from a Class with isActive being false). Active instances control access to their own BehavioralFeatures.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual void setConcurrency (uml::CallConcurrencyKind  _concurrency)= 0; 
-			/*!
+			virtual void setConcurrency (uml::CallConcurrencyKind _concurrency)= 0;/*!
 			If true, then the BehavioralFeature does not have an implementation, and one must be supplied by a more specific Classifier. If false, the BehavioralFeature must have an implementation in the Classifier or one must be inherited.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual bool  getIsAbstract() const = 0;
+			virtual bool getIsAbstract() const = 0;
 			
 			/*!
 			If true, then the BehavioralFeature does not have an implementation, and one must be supplied by a more specific Classifier. If false, the BehavioralFeature must have an implementation in the Classifier or one must be inherited.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual void setIsAbstract (bool  _isAbstract)= 0; 
-			
+			virtual void setIsAbstract (bool _isAbstract)= 0;
 			//*********************************
 			// Reference
 			//*********************************
@@ -203,13 +194,13 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			uml::CallConcurrencyKind  m_concurrency = CallConcurrencyKind::SEQUENTIAL;
+			uml::CallConcurrencyKind m_concurrency = CallConcurrencyKind::SEQUENTIAL;
 			/*!
 			If true, then the BehavioralFeature does not have an implementation, and one must be supplied by a more specific Classifier. If false, the BehavioralFeature must have an implementation in the Classifier or one must be inherited.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			bool  m_isAbstract = false;
+			bool m_isAbstract = false;
 			
 			
 			//*********************************
@@ -270,7 +261,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

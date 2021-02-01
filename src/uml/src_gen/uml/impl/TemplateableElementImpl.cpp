@@ -33,13 +33,9 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/ParameterableElement.hpp"
-
 #include "uml/TemplateBinding.hpp"
-
 #include "uml/TemplateSignature.hpp"
 
 //Factories an Package includes
@@ -301,7 +297,7 @@ bool TemplateableElementImpl::eSet(int featureID, Any newValue)
 				}
 				iterTemplateBinding++;
 			}
-
+ 
 			iterTemplateBinding = templateBindingList->begin();
 			endTemplateBinding = templateBindingList->end();
 			while (iterTemplateBinding != endTemplateBinding)
@@ -392,7 +388,7 @@ void TemplateableElementImpl::loadNode(std::string nodeName, std::shared_ptr<per
 	ElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void TemplateableElementImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void TemplateableElementImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	ElementImpl::resolveReferences(featureID, references);
 }

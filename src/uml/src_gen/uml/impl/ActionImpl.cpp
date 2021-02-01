@@ -34,45 +34,25 @@
 #include <exception> // used in Persistence
 
 #include "uml/Action.hpp"
-
 #include "uml/Activity.hpp"
-
 #include "uml/ActivityEdge.hpp"
-
 #include "uml/ActivityGroup.hpp"
-
 #include "uml/ActivityNode.hpp"
-
 #include "uml/ActivityPartition.hpp"
-
 #include "uml/Behavior.hpp"
-
 #include "uml/Classifier.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/Constraint.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/ExceptionHandler.hpp"
-
 #include "uml/ExecutableNode.hpp"
-
 #include "uml/InputPin.hpp"
-
 #include "uml/InterruptibleActivityRegion.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/OutputPin.hpp"
-
 #include "uml/RedefinableElement.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/StructuredActivityNode.hpp"
 
 //Factories an Package includes
@@ -273,12 +253,12 @@ std::shared_ptr<ecore::EClass> ActionImpl::eStaticClass() const
 /*
 Getter & Setter for attribute isLocallyReentrant
 */
-bool  ActionImpl::getIsLocallyReentrant() const 
+bool ActionImpl::getIsLocallyReentrant() const 
 {
 	return m_isLocallyReentrant;
 }
 
-void ActionImpl::setIsLocallyReentrant(bool  _isLocallyReentrant)
+void ActionImpl::setIsLocallyReentrant(bool _isLocallyReentrant)
 {
 	m_isLocallyReentrant = _isLocallyReentrant;
 } 
@@ -610,7 +590,7 @@ bool ActionImpl::eSet(int featureID, Any newValue)
 				}
 				iterLocalPostcondition++;
 			}
-
+ 
 			iterLocalPostcondition = localPostconditionList->begin();
 			endLocalPostcondition = localPostconditionList->end();
 			while (iterLocalPostcondition != endLocalPostcondition)
@@ -646,7 +626,7 @@ bool ActionImpl::eSet(int featureID, Any newValue)
 				}
 				iterLocalPrecondition++;
 			}
-
+ 
 			iterLocalPrecondition = localPreconditionList->begin();
 			endLocalPrecondition = localPreconditionList->end();
 			while (iterLocalPrecondition != endLocalPrecondition)
@@ -792,7 +772,7 @@ void ActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::int
 	ExecutableNodeImpl::loadNode(nodeName, loadHandler);
 }
 
-void ActionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	ExecutableNodeImpl::resolveReferences(featureID, references);
 }

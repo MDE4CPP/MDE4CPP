@@ -34,27 +34,16 @@
 #include <exception> // used in Persistence
 
 #include "uml/Classifier.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/Feature.hpp"
-
 #include "uml/MultiplicityElement.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/RedefinableElement.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/Type.hpp"
-
 #include "uml/TypedElement.hpp"
-
 #include "uml/ValueSpecification.hpp"
 
 //Factories an Package includes
@@ -187,12 +176,12 @@ std::shared_ptr<ecore::EClass> StructuralFeatureImpl::eStaticClass() const
 /*
 Getter & Setter for attribute isReadOnly
 */
-bool  StructuralFeatureImpl::getIsReadOnly() const 
+bool StructuralFeatureImpl::getIsReadOnly() const 
 {
 	return m_isReadOnly;
 }
 
-void StructuralFeatureImpl::setIsReadOnly(bool  _isReadOnly)
+void StructuralFeatureImpl::setIsReadOnly(bool _isReadOnly)
 {
 	m_isReadOnly = _isReadOnly;
 } 
@@ -389,7 +378,7 @@ void StructuralFeatureImpl::loadNode(std::string nodeName, std::shared_ptr<persi
 	TypedElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void StructuralFeatureImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void StructuralFeatureImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	FeatureImpl::resolveReferences(featureID, references);
 	MultiplicityElementImpl::resolveReferences(featureID, references);

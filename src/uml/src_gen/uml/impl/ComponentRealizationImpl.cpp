@@ -34,27 +34,16 @@
 #include <exception> // used in Persistence
 
 #include "uml/Classifier.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/Component.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/NamedElement.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/OpaqueExpression.hpp"
-
 #include "uml/Package.hpp"
-
 #include "uml/Realization.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/TemplateParameter.hpp"
 
 //Factories an Package includes
@@ -406,17 +395,6 @@ Any ComponentRealizationImpl::eGet(int featureID, bool resolve, bool coreType) c
 		case uml::umlPackage::COMPONENTREALIZATION_ATTRIBUTE_REALIZINGCLASSIFIER:
 		{
 			return eAny(getRealizingClassifier()); //4818			
-			/*
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Classifier>::iterator iter = m_realizingClassifier->begin();
-			Bag<uml::Classifier>::iterator end = m_realizingClassifier->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //4818
-			*/
 		}
 	}
 	return RealizationImpl::eGet(featureID, resolve, coreType);
@@ -467,7 +445,7 @@ bool ComponentRealizationImpl::eSet(int featureID, Any newValue)
 				}
 				iterRealizingClassifier++;
 			}
-
+ 
 			iterRealizingClassifier = realizingClassifierList->begin();
 			endRealizingClassifier = realizingClassifierList->end();
 			while (iterRealizingClassifier != endRealizingClassifier)
@@ -537,7 +515,7 @@ void ComponentRealizationImpl::loadNode(std::string nodeName, std::shared_ptr<pe
 	RealizationImpl::loadNode(nodeName, loadHandler);
 }
 
-void ComponentRealizationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ComponentRealizationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -608,7 +586,7 @@ void ComponentRealizationImpl::saveContent(std::shared_ptr<persistence::interfac
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	// Add references
-		saveHandler->addReferences<uml::Classifier>("realizingClassifier", this->getRealizingClassifier());	
+		saveHandler->addReferences<uml::Classifier>("realizingClassifier", this->getRealizingClassifier());
 	}
 	catch (std::exception& e)
 	{

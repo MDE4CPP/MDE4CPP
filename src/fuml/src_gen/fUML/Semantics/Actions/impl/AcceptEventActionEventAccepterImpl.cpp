@@ -31,7 +31,6 @@
 #include <exception> // used in Persistence
 
 #include "fUML/Semantics/Actions/AcceptEventActionActivation.hpp"
-
 #include "fUML/Semantics/CommonBehavior/EventAccepter.hpp"
 
 //Factories an Package includes
@@ -230,7 +229,7 @@ void AcceptEventActionEventAccepterImpl::loadNode(std::string nodeName, std::sha
 	fUML::Semantics::CommonBehavior::EventAccepterImpl::loadNode(nodeName, loadHandler);
 }
 
-void AcceptEventActionEventAccepterImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void AcceptEventActionEventAccepterImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -266,7 +265,7 @@ void AcceptEventActionEventAccepterImpl::saveContent(std::shared_ptr<persistence
 		std::shared_ptr<fUML::Semantics::Actions::ActionsPackage> package = fUML::Semantics::Actions::ActionsPackage::eInstance();
 
 	// Add references
-		saveHandler->addReference("actionActivation", this->getActionActivation());		 
+		saveHandler->addReference("actionActivation", this->getActionActivation()); 
 	}
 	catch (std::exception& e)
 	{

@@ -34,23 +34,14 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/NamedElement.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/Region.hpp"
-
 #include "uml/State.hpp"
-
 #include "uml/StateMachine.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/Transition.hpp"
 
 //Factories an Package includes
@@ -397,7 +388,7 @@ void VertexImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::int
 	NamedElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void VertexImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void VertexImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{

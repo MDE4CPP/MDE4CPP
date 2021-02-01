@@ -8,24 +8,20 @@
 #define UML_CLASS_HPP
 
 #include <map>
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T> class Bag; 
 template<class T, class ... U> class Subset;
-
 
 class AnyObject;
 typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -72,14 +68,12 @@ namespace uml
 
 // base class includes
 #include "uml/BehavioredClassifier.hpp"
-
 #include "uml/EncapsulatedClassifier.hpp"
 
 // enum includes
 #include "uml/VisibilityKind.hpp"
 
 
-//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -89,7 +83,7 @@ namespace uml
 	<p>From package UML::StructuredClassifiers.</p>
 	*/
 	
-	class Class:virtual public BehavioredClassifier,virtual public EncapsulatedClassifier
+	class Class: virtual public BehavioredClassifier, virtual public EncapsulatedClassifier
 	{
 		public:
  			Class(const Class &) {}
@@ -97,7 +91,6 @@ namespace uml
 
 		protected:
 			Class(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -112,7 +105,7 @@ namespace uml
 			Creates an operation with the specified name, parameter names, parameter types, and return type (or null) as an owned operation of this class.
 			*/
 			 
-			virtual std::shared_ptr<uml::Operation> createOwnedOperation(std::string name,std::shared_ptr<Bag<std::string> > parameterNames,std::shared_ptr<Bag<uml::Type> > parameterTypes,std::shared_ptr<uml::Type> returnType) = 0;
+			virtual std::shared_ptr<uml::Operation> createOwnedOperation(std::string name,std::shared_ptr<Bag<std::string>> parameterNames,std::shared_ptr<Bag<uml::Type>> parameterTypes,std::shared_ptr<uml::Type> returnType) = 0;
 			
 			 
 			virtual std::shared_ptr<Bag<uml::Operation> > getAllOperations() = 0;
@@ -157,15 +150,14 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			 
-			virtual bool  getIsActive() const = 0;
+			virtual bool getIsActive() const = 0;
 			
 			/*!
 			Determines whether an object specified by this Class is active or not. If true, then the owning Class is referred to as an active Class. If false, then such a Class is referred to as a passive Class.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			 
-			virtual void setIsActive (bool  _isActive)= 0; 
-			
+			virtual void setIsActive (bool _isActive)= 0;
 			//*********************************
 			// Reference
 			//*********************************
@@ -211,7 +203,6 @@ namespace uml
 			
 			/*Additional Setter for 'Classifier::general' redefined by reference 'superClass'*/
 			
-			
 
 		protected:
 			//*********************************
@@ -222,7 +213,7 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			 
-			bool  m_isActive = false;
+			bool m_isActive = false;
 			
 			
 			//*********************************
@@ -313,7 +304,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

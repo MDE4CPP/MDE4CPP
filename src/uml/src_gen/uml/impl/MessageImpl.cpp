@@ -35,23 +35,14 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
 #include "uml/Connector.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/Interaction.hpp"
-
 #include "uml/MessageEnd.hpp"
-
 #include "uml/NamedElement.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/ValueSpecification.hpp"
 
 //Factories an Package includes
@@ -186,7 +177,7 @@ std::shared_ptr<ecore::EClass> MessageImpl::eStaticClass() const
 /*
 Getter & Setter for attribute messageKind
 */
-uml::MessageKind  MessageImpl::getMessageKind() const 
+uml::MessageKind MessageImpl::getMessageKind() const 
 {
 	return m_messageKind;
 }
@@ -198,12 +189,12 @@ uml::MessageKind  MessageImpl::getMessageKind() const
 /*
 Getter & Setter for attribute messageSort
 */
-uml::MessageSort  MessageImpl::getMessageSort() const 
+uml::MessageSort MessageImpl::getMessageSort() const 
 {
 	return m_messageSort;
 }
 
-void MessageImpl::setMessageSort(uml::MessageSort  _messageSort)
+void MessageImpl::setMessageSort(uml::MessageSort _messageSort)
 {
 	m_messageSort = _messageSort;
 } 
@@ -447,17 +438,6 @@ Any MessageImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::MESSAGE_ATTRIBUTE_ARGUMENT:
 		{
 			return eAny(getArgument()); //1479			
-			/*
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ValueSpecification>::iterator iter = m_argument->begin();
-			Bag<uml::ValueSpecification>::iterator end = m_argument->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //1479
-			*/
 		}
 		case uml::umlPackage::MESSAGE_ATTRIBUTE_CONNECTOR:
 			return eAny(getConnector()); //14710
@@ -526,7 +506,7 @@ bool MessageImpl::eSet(int featureID, Any newValue)
 				}
 				iterArgument++;
 			}
-
+ 
 			iterArgument = argumentList->begin();
 			endArgument = argumentList->end();
 			while (iterArgument != endArgument)
@@ -619,7 +599,7 @@ void MessageImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadH
 		iter = attr_list.find("messageSort");
 		if ( iter != attr_list.end() )
 		{
-			uml::MessageSort  value = MessageSort::SYNCHCALL;
+			uml::MessageSort value = MessageSort::SYNCHCALL;
 			std::string literal = iter->second;
 			if (literal == "synchCall")
 			{
@@ -724,7 +704,7 @@ void MessageImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::in
 	NamedElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void MessageImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void MessageImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -820,7 +800,7 @@ void MessageImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 		// Add attributes
 		if ( this->eIsSet(package->getMessage_Attribute_messageSort()) )
 		{
-			uml::MessageSort  value = this->getMessageSort();
+			uml::MessageSort value = this->getMessageSort();
 			std::string literal = "";
 			if (value == MessageSort::SYNCHCALL)
 			{
@@ -850,10 +830,10 @@ void MessageImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 		}
 
 	// Add references
-		saveHandler->addReference("connector", this->getConnector());		 
-		saveHandler->addReference("receiveEvent", this->getReceiveEvent());		 
-		saveHandler->addReference("sendEvent", this->getSendEvent());		 
-		saveHandler->addReference("signature", this->getSignature());		 
+		saveHandler->addReference("connector", this->getConnector()); 
+		saveHandler->addReference("receiveEvent", this->getReceiveEvent()); 
+		saveHandler->addReference("sendEvent", this->getSendEvent()); 
+		saveHandler->addReference("signature", this->getSignature()); 
 	}
 	catch (std::exception& e)
 	{

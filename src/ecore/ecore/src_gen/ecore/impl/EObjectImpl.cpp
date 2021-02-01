@@ -33,13 +33,9 @@
 #include <exception> // used in Persistence
 
 #include "ecore/EClass.hpp"
-
 #include "ecore/EObject.hpp"
-
 #include "ecore/EOperation.hpp"
-
 #include "ecore/EReference.hpp"
-
 #include "ecore/EStructuralFeature.hpp"
 
 //Factories an Package includes
@@ -110,12 +106,12 @@ std::shared_ptr<EClass> EObjectImpl::eStaticClass() const
 /*
 Getter & Setter for attribute metaElementID
 */
-int  EObjectImpl::getMetaElementID() const 
+int EObjectImpl::getMetaElementID() const 
 {
 	return m_metaElementID;
 }
 
-void EObjectImpl::setMetaElementID(int  _metaElementID)
+void EObjectImpl::setMetaElementID(int _metaElementID)
 {
 	m_metaElementID = _metaElementID;
 } 
@@ -295,13 +291,13 @@ Any EObjectImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ecore::ecorePackage::EOBJECT_ATTRIBUTE_ECONTAINER:
-			return eAny(getEContainer().lock()); //381
+			return eAny(getEContainer().lock()); //391
 		case ecore::ecorePackage::EOBJECT_ATTRIBUTE_ECONTENS:
 		{
-			return eAny(getEContens()); //380			
+			return eAny(getEContens()); //390			
 		}
 		case ecore::ecorePackage::EOBJECT_ATTRIBUTE_METAELEMENTID:
-			return eAny(getMetaElementID()); //382
+			return eAny(getMetaElementID()); //392
 	}
 	Any result;
 	return result;
@@ -311,11 +307,11 @@ bool EObjectImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case ecore::ecorePackage::EOBJECT_ATTRIBUTE_ECONTAINER:
-			return getEContainer().lock() != nullptr; //381
+			return getEContainer().lock() != nullptr; //391
 		case ecore::ecorePackage::EOBJECT_ATTRIBUTE_ECONTENS:
-			return getEContens() != nullptr; //380
+			return getEContens() != nullptr; //390
 		case ecore::ecorePackage::EOBJECT_ATTRIBUTE_METAELEMENTID:
-			return getMetaElementID() != 0; //382
+			return getMetaElementID() != 0; //392
 	}
 	bool result = false;
 	return result;
@@ -329,7 +325,7 @@ bool EObjectImpl::eSet(int featureID, Any newValue)
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
 			std::shared_ptr<ecore::EObject> _eContainer = std::dynamic_pointer_cast<ecore::EObject>(_temp);
-			setEContainer(_eContainer); //381
+			setEContainer(_eContainer); //391
 			return true;
 		}
 		case ecore::ecorePackage::EOBJECT_ATTRIBUTE_ECONTENS:
@@ -355,7 +351,7 @@ bool EObjectImpl::eSet(int featureID, Any newValue)
 				}
 				iterEContens++;
 			}
-
+ 
 			iterEContens = eContensList->begin();
 			endEContens = eContensList->end();
 			while (iterEContens != endEContens)
@@ -372,7 +368,7 @@ bool EObjectImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			int _metaElementID = newValue->get<int>();
-			setMetaElementID(_metaElementID); //382
+			setMetaElementID(_metaElementID); //392
 			return true;
 		}
 	}
@@ -458,7 +454,7 @@ void EObjectImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::in
 	//load BasePackage Nodes
 }
 
-void EObjectImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references)
+void EObjectImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references)
 {
 	switch(featureID)
 	{

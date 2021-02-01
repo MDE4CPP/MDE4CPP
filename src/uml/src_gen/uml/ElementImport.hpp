@@ -8,23 +8,19 @@
 #define UML_ELEMENTIMPORT_HPP
 
 #include <map>
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T, class ... U> class Subset;
-
 
 class AnyObject;
 typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -54,7 +50,6 @@ namespace uml
 #include "uml/VisibilityKind.hpp"
 
 
-//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -64,7 +59,7 @@ namespace uml
 	<p>From package UML::CommonStructure.</p>
 	*/
 	
-	class ElementImport:virtual public DirectedRelationship
+	class ElementImport: virtual public DirectedRelationship
 	{
 		public:
  			ElementImport(const ElementImport &) {}
@@ -73,13 +68,10 @@ namespace uml
 		protected:
 			ElementImport(){}
 
-
 			//Additional constructors for the containments back reference
-
 			ElementImport(std::weak_ptr<uml::Namespace > par_importingNamespace);
 
 			//Additional constructors for the containments back reference
-
 			ElementImport(std::weak_ptr<uml::Element > par_owner);
 
 		public:
@@ -126,28 +118,26 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual std::string  getAlias() const = 0;
+			virtual std::string getAlias() const = 0;
 			
 			/*!
 			Specifies the name that should be added to the importing Namespace in lieu of the name of the imported PackagableElement. The alias must not clash with any other member in the importing Namespace. By default, no alias is used.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual void setAlias (std::string  _alias)= 0; 
-			/*!
+			virtual void setAlias (std::string _alias)= 0;/*!
 			Specifies the visibility of the imported PackageableElement within the importingNamespace, i.e., whether the  importedElement will in turn be visible to other Namespaces. If the ElementImport is public, the importedElement will be visible outside the importingNamespace while, if the ElementImport is private, it will not.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual uml::VisibilityKind  getVisibility() const = 0;
+			virtual uml::VisibilityKind getVisibility() const = 0;
 			
 			/*!
 			Specifies the visibility of the imported PackageableElement within the importingNamespace, i.e., whether the  importedElement will in turn be visible to other Namespaces. If the ElementImport is public, the importedElement will be visible outside the importingNamespace while, if the ElementImport is private, it will not.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual void setVisibility (uml::VisibilityKind  _visibility)= 0; 
-			
+			virtual void setVisibility (uml::VisibilityKind _visibility)= 0;
 			//*********************************
 			// Reference
 			//*********************************
@@ -190,13 +180,13 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			std::string  m_alias = "";
+			std::string m_alias = "";
 			/*!
 			Specifies the visibility of the imported PackageableElement within the importingNamespace, i.e., whether the  importedElement will in turn be visible to other Namespaces. If the ElementImport is public, the importedElement will be visible outside the importingNamespace while, if the ElementImport is private, it will not.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			uml::VisibilityKind  m_visibility = VisibilityKind::PUBLIC;
+			uml::VisibilityKind m_visibility = VisibilityKind::PUBLIC;
 			
 			
 			//*********************************
@@ -252,7 +242,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

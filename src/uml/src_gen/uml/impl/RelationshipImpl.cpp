@@ -33,7 +33,6 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
 #include "uml/Element.hpp"
 
 //Factories an Package includes
@@ -247,7 +246,7 @@ void RelationshipImpl::loadNode(std::string nodeName, std::shared_ptr<persistenc
 	ElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void RelationshipImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void RelationshipImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	ElementImpl::resolveReferences(featureID, references);
 }

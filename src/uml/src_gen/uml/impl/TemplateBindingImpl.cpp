@@ -35,15 +35,10 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
 #include "uml/DirectedRelationship.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/TemplateParameterSubstitution.hpp"
-
 #include "uml/TemplateSignature.hpp"
-
 #include "uml/TemplateableElement.hpp"
 
 //Factories an Package includes
@@ -401,7 +396,7 @@ bool TemplateBindingImpl::eSet(int featureID, Any newValue)
 				}
 				iterParameterSubstitution++;
 			}
-
+ 
 			iterParameterSubstitution = parameterSubstitutionList->begin();
 			endParameterSubstitution = parameterSubstitutionList->end();
 			while (iterParameterSubstitution != endParameterSubstitution)
@@ -504,7 +499,7 @@ void TemplateBindingImpl::loadNode(std::string nodeName, std::shared_ptr<persist
 	DirectedRelationshipImpl::loadNode(nodeName, loadHandler);
 }
 
-void TemplateBindingImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void TemplateBindingImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -566,7 +561,7 @@ void TemplateBindingImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 		}
 
 	// Add references
-		saveHandler->addReference("signature", this->getSignature());		 
+		saveHandler->addReference("signature", this->getSignature()); 
 	}
 	catch (std::exception& e)
 	{

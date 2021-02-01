@@ -7,20 +7,16 @@
 #ifndef ECORE_ESTRINGTOSTRINGMAPENTRY_HPP
 #define ECORE_ESTRINGTOSTRINGMAPENTRY_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
-
 
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -43,14 +39,12 @@ namespace ecore
 
 #include "ecore/EModelElement.hpp"
 
-//Includes from codegen annotation
 
 //*********************************
 namespace ecore 
 {
 	
 	class EStringToStringMapEntry : virtual public ecore::EModelElement
-
 	{
 		public:
  			EStringToStringMapEntry(const EStringToStringMapEntry &) {}
@@ -58,7 +52,6 @@ namespace ecore
 
 		protected:
 			EStringToStringMapEntry(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -73,17 +66,13 @@ namespace ecore
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			 
-			virtual std::string  getKey() const = 0;
+			virtual std::string getKey() const = 0;
 			
 			 
-			virtual void setKey (std::string  _key)= 0; 
-			 
-			virtual std::string  getValue() const = 0;
+			virtual void setKey (std::string _key)= 0;virtual std::string getValue() const = 0;
 			
 			 
-			virtual void setValue (std::string  _value)= 0; 
-			
+			virtual void setValue (std::string _value)= 0;
 			//*********************************
 			// Reference
 			//*********************************
@@ -94,9 +83,9 @@ namespace ecore
 			// Attribute Members
 			//*********************************
 			 
-			std::string  m_key = "";
+			std::string m_key = "";
 			 
-			std::string  m_value = "";
+			std::string m_value = "";
 			
 			
 			//*********************************
@@ -117,7 +106,7 @@ namespace ecore
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

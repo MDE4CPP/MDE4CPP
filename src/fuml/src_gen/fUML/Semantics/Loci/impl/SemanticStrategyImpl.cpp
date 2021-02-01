@@ -182,7 +182,7 @@ void SemanticStrategyImpl::loadNode(std::string nodeName, std::shared_ptr<persis
 	//load BasePackage Nodes
 }
 
-void SemanticStrategyImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void SemanticStrategyImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	ecore::EObjectImpl::resolveReferences(featureID, references);
 }

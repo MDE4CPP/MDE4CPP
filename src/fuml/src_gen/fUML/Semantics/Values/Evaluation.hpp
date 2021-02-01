@@ -7,20 +7,16 @@
 #ifndef FUML_SEMANTICS_VALUES_EVALUATION_HPP
 #define FUML_SEMANTICS_VALUES_EVALUATION_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
-
 
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -55,13 +51,12 @@ namespace uml
 // enum includes
 
 
-//Includes from codegen annotation
 
 //*********************************
 namespace fUML::Semantics::Values 
 {
 	
-	class Evaluation:virtual public fUML::Semantics::Loci::SemanticVisitor
+	class Evaluation: virtual public fUML::Semantics::Loci::SemanticVisitor
 	{
 		public:
  			Evaluation(const Evaluation &) {}
@@ -69,7 +64,6 @@ namespace fUML::Semantics::Values
 
 		protected:
 			Evaluation(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -98,10 +92,10 @@ namespace fUML::Semantics::Values
 			virtual void setLocus(std::shared_ptr<fUML::Semantics::Loci::Locus> _locus) = 0;
 			
 			
-			virtual std::shared_ptr<org.eclipse.uml2.uml.ValueSpecification > getSpecification() const = 0;
+			virtual std::shared_ptr<uml::ValueSpecification > getSpecification() const = 0;
 			
 			
-			virtual void setSpecification(std::shared_ptr<org.eclipse.uml2.uml.ValueSpecification> _specification) = 0;
+			virtual void setSpecification(std::shared_ptr<uml::ValueSpecification> _specification) = 0;
 			
 			
 
@@ -116,7 +110,7 @@ namespace fUML::Semantics::Values
 			//*********************************
 			
 			std::shared_ptr<fUML::Semantics::Loci::Locus > m_locus;
-			std::shared_ptr<org.eclipse.uml2.uml.ValueSpecification > m_specification;
+			std::shared_ptr<uml::ValueSpecification > m_specification;
 
 		public:
 			//*********************************
@@ -131,7 +125,7 @@ namespace fUML::Semantics::Values
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

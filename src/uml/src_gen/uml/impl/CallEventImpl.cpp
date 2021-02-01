@@ -34,21 +34,13 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/MessageEvent.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/Operation.hpp"
-
 #include "uml/Package.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/TemplateParameter.hpp"
 
 //Factories an Package includes
@@ -348,7 +340,7 @@ void CallEventImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::
 	MessageEventImpl::loadNode(nodeName, loadHandler);
 }
 
-void CallEventImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void CallEventImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -400,7 +392,7 @@ void CallEventImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	// Add references
-		saveHandler->addReference("operation", this->getOperation());		 
+		saveHandler->addReference("operation", this->getOperation()); 
 	}
 	catch (std::exception& e)
 	{

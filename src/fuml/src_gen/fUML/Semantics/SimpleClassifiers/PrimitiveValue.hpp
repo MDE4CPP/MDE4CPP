@@ -7,20 +7,16 @@
 #ifndef FUML_SEMANTICS_SIMPLECLASSIFIERS_PRIMITIVEVALUE_HPP
 #define FUML_SEMANTICS_SIMPLECLASSIFIERS_PRIMITIVEVALUE_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
-
 
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -48,17 +44,12 @@ namespace uml
 // enum includes
 
 
-//Includes from codegen annotation
-#include "fUML/FUMLFactory.hpp"
-#include "uml/umlFactory.hpp"
-#include "uml/PrimitiveType.hpp"
-#include "uml/Classifier.hpp"
 
 //*********************************
 namespace fUML::Semantics::SimpleClassifiers 
 {
 	
-	class PrimitiveValue:virtual public fUML::Semantics::Values::Value
+	class PrimitiveValue: virtual public fUML::Semantics::Values::Value
 	{
 		public:
  			PrimitiveValue(const PrimitiveValue &) {}
@@ -66,7 +57,6 @@ namespace fUML::Semantics::SimpleClassifiers
 
 		protected:
 			PrimitiveValue(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -81,7 +71,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() = 0;
 			
 			 
-			virtual std::shared_ptr<Bag<org.eclipse.uml2.uml.Classifier> > getTypes() = 0;
+			virtual std::shared_ptr<Bag<uml::Classifier> > getTypes() = 0;
 			
 			
 			//*********************************
@@ -92,10 +82,10 @@ namespace fUML::Semantics::SimpleClassifiers
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<org.eclipse.uml2.uml.PrimitiveType > getType() const = 0;
+			virtual std::shared_ptr<uml::PrimitiveType > getType() const = 0;
 			
 			
-			virtual void setType(std::shared_ptr<org.eclipse.uml2.uml.PrimitiveType> _type) = 0;
+			virtual void setType(std::shared_ptr<uml::PrimitiveType> _type) = 0;
 			
 			
 
@@ -109,7 +99,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			// Reference Members
 			//*********************************
 			
-			std::shared_ptr<org.eclipse.uml2.uml.PrimitiveType > m_type;
+			std::shared_ptr<uml::PrimitiveType > m_type;
 
 		public:
 			//*********************************
@@ -124,7 +114,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

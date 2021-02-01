@@ -34,35 +34,25 @@
 #include <exception> // used in Persistence
 
 #include "uml/Behavior.hpp"
-
 #include "PSCS/Semantics/StructuredClassifiers/CS_InteractionPoint.hpp"
-
 #include "fUML/Semantics/CommonBehavior/CallEventExecution.hpp"
-
 #include "uml/Classifier.hpp"
-
 #include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"
-
 #include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
-
 #include "fUML/Semantics/Loci/Locus.hpp"
-
 #include "fUML/Semantics/StructuredClassifiers/Object.hpp"
-
 #include "fUML/Semantics/CommonBehavior/ObjectActivation.hpp"
-
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
-
 #include "fUML/Semantics/Values/Value.hpp"
 
 //Factories an Package includes
 #include "PSCS/Semantics/CommonBehavior/impl/CommonBehaviorFactoryImpl.hpp"
 #include "PSCS/Semantics/CommonBehavior/impl/CommonBehaviorPackageImpl.hpp"
 
-#include "PSCS/Semantics/SemanticsFactory.hpp"
-#include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "PSCS/PSCSFactory.hpp"
 #include "PSCS/PSCSPackage.hpp"
+#include "PSCS/Semantics/SemanticsFactory.hpp"
+#include "PSCS/Semantics/SemanticsPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -103,8 +93,8 @@ CS_CallEventExecutionImpl::CS_CallEventExecutionImpl(const CS_CallEventExecution
 
 	m_locus  = obj.getLocus();
 
-	std::shared_ptr<Bag<org.eclipse.uml2.uml.Classifier>> _types = obj.getTypes();
-	m_types.reset(new Bag<org.eclipse.uml2.uml.Classifier>(*(obj.getTypes().get())));
+	std::shared_ptr<Bag<uml::Classifier>> _types = obj.getTypes();
+	m_types.reset(new Bag<uml::Classifier>(*(obj.getTypes().get())));
 
 
 	//Clone references with containment (deep copy)
@@ -319,7 +309,7 @@ void CS_CallEventExecutionImpl::loadNode(std::string nodeName, std::shared_ptr<p
 	fUML::Semantics::CommonBehavior::CallEventExecutionImpl::loadNode(nodeName, loadHandler);
 }
 
-void CS_CallEventExecutionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void CS_CallEventExecutionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -376,7 +366,7 @@ void CS_CallEventExecutionImpl::saveContent(std::shared_ptr<persistence::interfa
 		std::shared_ptr<PSCS::Semantics::CommonBehavior::CommonBehaviorPackage> package = PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance();
 
 	// Add references
-		saveHandler->addReference("interactionPoint", this->getInteractionPoint());		 
+		saveHandler->addReference("interactionPoint", this->getInteractionPoint()); 
 	}
 	catch (std::exception& e)
 	{

@@ -34,25 +34,15 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/Package.hpp"
-
 #include "uml/Slot.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/TemplateParameter.hpp"
-
 #include "uml/Type.hpp"
-
 #include "uml/ValueSpecification.hpp"
-
 #include "uml/ValueSpecificationAction.hpp"
 
 //Factories an Package includes
@@ -212,12 +202,12 @@ std::shared_ptr<ecore::EClass> ExpressionImpl::eStaticClass() const
 /*
 Getter & Setter for attribute symbol
 */
-std::string  ExpressionImpl::getSymbol() const 
+std::string ExpressionImpl::getSymbol() const 
 {
 	return m_symbol;
 }
 
-void ExpressionImpl::setSymbol(std::string  _symbol)
+void ExpressionImpl::setSymbol(std::string _symbol)
 {
 	m_symbol = _symbol;
 } 
@@ -387,7 +377,7 @@ bool ExpressionImpl::eSet(int featureID, Any newValue)
 				}
 				iterOperand++;
 			}
-
+ 
 			iterOperand = operandList->begin();
 			endOperand = operandList->end();
 			while (iterOperand != endOperand)
@@ -494,7 +484,7 @@ void ExpressionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence:
 	ValueSpecificationImpl::loadNode(nodeName, loadHandler);
 }
 
-void ExpressionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ExpressionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	ValueSpecificationImpl::resolveReferences(featureID, references);
 }

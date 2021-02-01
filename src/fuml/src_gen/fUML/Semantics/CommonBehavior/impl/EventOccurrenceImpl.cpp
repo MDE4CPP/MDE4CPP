@@ -32,9 +32,7 @@
 #include <exception> // used in Persistence
 
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
-
 #include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
-
 #include "uml/Trigger.hpp"
 
 //Factories an Package includes
@@ -115,13 +113,13 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > EventOccu
 	throw "UnsupportedOperationException";
 }
 
-bool EventOccurrenceImpl::match(std::shared_ptr<org.eclipse.uml2.uml.Trigger> trigger)
+bool EventOccurrenceImpl::match(std::shared_ptr<uml::Trigger> trigger)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool EventOccurrenceImpl::matchAny(std::shared_ptr<Bag<org.eclipse.uml2.uml.Trigger> > triggers)
+bool EventOccurrenceImpl::matchAny(std::shared_ptr<Bag<uml::Trigger>> triggers)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -260,7 +258,7 @@ void EventOccurrenceImpl::loadNode(std::string nodeName, std::shared_ptr<persist
 	//load BasePackage Nodes
 }
 
-void EventOccurrenceImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void EventOccurrenceImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -295,7 +293,7 @@ void EventOccurrenceImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 		std::shared_ptr<fUML::Semantics::CommonBehavior::CommonBehaviorPackage> package = fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance();
 
 	// Add references
-		saveHandler->addReference("target", this->getTarget());		 
+		saveHandler->addReference("target", this->getTarget()); 
 	}
 	catch (std::exception& e)
 	{

@@ -35,31 +35,18 @@
 #include <exception> // used in Persistence
 
 #include "uml/Classifier.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/DeployedArtifact.hpp"
-
 #include "uml/Deployment.hpp"
-
 #include "uml/DeploymentTarget.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/Package.hpp"
-
 #include "uml/PackageableElement.hpp"
-
 #include "uml/Slot.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/TemplateParameter.hpp"
-
 #include "uml/ValueSpecification.hpp"
 
 //Factories an Package includes
@@ -460,7 +447,7 @@ bool InstanceSpecificationImpl::eSet(int featureID, Any newValue)
 				}
 				iterClassifier++;
 			}
-
+ 
 			iterClassifier = classifierList->begin();
 			endClassifier = classifierList->end();
 			while (iterClassifier != endClassifier)
@@ -496,7 +483,7 @@ bool InstanceSpecificationImpl::eSet(int featureID, Any newValue)
 				}
 				iterSlot++;
 			}
-
+ 
 			iterSlot = slotList->begin();
 			endSlot = slotList->end();
 			while (iterSlot != endSlot)
@@ -632,7 +619,7 @@ void InstanceSpecificationImpl::loadNode(std::string nodeName, std::shared_ptr<p
 	PackageableElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void InstanceSpecificationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void InstanceSpecificationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -696,7 +683,7 @@ void InstanceSpecificationImpl::saveContent(std::shared_ptr<persistence::interfa
 		}
 
 	// Add references
-		saveHandler->addReferences<uml::Classifier>("classifier", this->getClassifier());	
+		saveHandler->addReferences<uml::Classifier>("classifier", this->getClassifier());
 	}
 	catch (std::exception& e)
 	{

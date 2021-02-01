@@ -8,24 +8,20 @@
 #define UML_LIFELINE_HPP
 
 #include <map>
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T> class Bag; 
 template<class T, class ... U> class Subset;
-
 
 class AnyObject;
 typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -61,7 +57,6 @@ namespace uml
 #include "uml/VisibilityKind.hpp"
 
 
-//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -71,7 +66,7 @@ namespace uml
 	<p>From package UML::Interactions.</p>
 	*/
 	
-	class Lifeline:virtual public NamedElement
+	class Lifeline: virtual public NamedElement
 	{
 		public:
  			Lifeline(const Lifeline &) {}
@@ -80,17 +75,13 @@ namespace uml
 		protected:
 			Lifeline(){}
 
-
 			//Additional constructors for the containments back reference
-
 			Lifeline(std::weak_ptr<uml::Interaction > par_interaction);
 
 			//Additional constructors for the containments back reference
-
 			Lifeline(std::weak_ptr<uml::Namespace > par_namespace);
 
 			//Additional constructors for the containments back reference
-
 			Lifeline(std::weak_ptr<uml::Element > par_owner);
 
 		public:
@@ -307,7 +298,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

@@ -35,19 +35,12 @@
 #include <exception> // used in Persistence
 
 #include "uml/Classifier.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/NamedElement.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/RedefinableElement.hpp"
-
 #include "uml/StringExpression.hpp"
 
 //Factories an Package includes
@@ -155,12 +148,12 @@ std::shared_ptr<ecore::EClass> RedefinableElementImpl::eStaticClass() const
 /*
 Getter & Setter for attribute isLeaf
 */
-bool  RedefinableElementImpl::getIsLeaf() const 
+bool RedefinableElementImpl::getIsLeaf() const 
 {
 	return m_isLeaf;
 }
 
-void RedefinableElementImpl::setIsLeaf(bool  _isLeaf)
+void RedefinableElementImpl::setIsLeaf(bool _isLeaf)
 {
 	m_isLeaf = _isLeaf;
 } 
@@ -403,7 +396,7 @@ void RedefinableElementImpl::loadNode(std::string nodeName, std::shared_ptr<pers
 	NamedElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void RedefinableElementImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void RedefinableElementImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	NamedElementImpl::resolveReferences(featureID, references);
 }

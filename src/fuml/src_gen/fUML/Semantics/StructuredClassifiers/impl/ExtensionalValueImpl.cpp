@@ -33,11 +33,8 @@
 #include <exception> // used in Persistence
 
 #include "fUML/Semantics/SimpleClassifiers/CompoundValue.hpp"
-
 #include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
-
 #include "fUML/Semantics/Loci/Locus.hpp"
-
 #include "fUML/Semantics/Values/Value.hpp"
 
 //Factories an Package includes
@@ -271,7 +268,7 @@ void ExtensionalValueImpl::loadNode(std::string nodeName, std::shared_ptr<persis
 	fUML::Semantics::SimpleClassifiers::CompoundValueImpl::loadNode(nodeName, loadHandler);
 }
 
-void ExtensionalValueImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ExtensionalValueImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -316,7 +313,7 @@ void ExtensionalValueImpl::saveContent(std::shared_ptr<persistence::interfaces::
 		std::shared_ptr<fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage> package = fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance();
 
 	// Add references
-		saveHandler->addReference("locus", this->getLocus());		 
+		saveHandler->addReference("locus", this->getLocus()); 
 	}
 	catch (std::exception& e)
 	{

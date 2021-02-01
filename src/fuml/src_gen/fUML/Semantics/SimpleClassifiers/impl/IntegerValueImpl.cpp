@@ -38,11 +38,8 @@
 #include <exception> // used in Persistence
 
 #include "uml/PrimitiveType.hpp"
-
 #include "fUML/Semantics/SimpleClassifiers/PrimitiveValue.hpp"
-
 #include "fUML/Semantics/Values/Value.hpp"
-
 #include "uml/ValueSpecification.hpp"
 
 //Factories an Package includes
@@ -111,12 +108,12 @@ std::shared_ptr<ecore::EClass> IntegerValueImpl::eStaticClass() const
 /*
 Getter & Setter for attribute value
 */
-int  IntegerValueImpl::getValue() const 
+int IntegerValueImpl::getValue() const 
 {
 	return m_value;
 }
 
-void IntegerValueImpl::setValue(int  _value)
+void IntegerValueImpl::setValue(int _value)
 {
 	m_value = _value;
 } 
@@ -156,7 +153,7 @@ bool IntegerValueImpl::equals(std::shared_ptr<fUML::Semantics::Values::Value> ot
 	//end of body
 }
 
-std::shared_ptr<org.eclipse.uml2.uml.ValueSpecification> IntegerValueImpl::specify()
+std::shared_ptr<uml::ValueSpecification> IntegerValueImpl::specify()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -294,7 +291,7 @@ void IntegerValueImpl::loadNode(std::string nodeName, std::shared_ptr<persistenc
 	PrimitiveValueImpl::loadNode(nodeName, loadHandler);
 }
 
-void IntegerValueImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void IntegerValueImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	PrimitiveValueImpl::resolveReferences(featureID, references);
 }

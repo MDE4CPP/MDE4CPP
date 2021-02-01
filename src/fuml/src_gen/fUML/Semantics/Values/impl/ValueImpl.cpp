@@ -33,11 +33,8 @@
 #include <exception> // used in Persistence
 
 #include "uml/Classifier.hpp"
-
 #include "fUML/Semantics/Loci/SemanticVisitor.hpp"
-
 #include "fUML/Semantics/Values/Value.hpp"
-
 #include "uml/ValueSpecification.hpp"
 
 //Factories an Package includes
@@ -117,7 +114,7 @@ return newValue;
 	//end of body
 }
 
-bool ValueImpl::checkAllParents(std::shared_ptr<org.eclipse.uml2.uml.Classifier> type,std::shared_ptr<org.eclipse.uml2.uml.Classifier> classifier)
+bool ValueImpl::checkAllParents(std::shared_ptr<uml::Classifier> type,std::shared_ptr<uml::Classifier> classifier)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -159,13 +156,13 @@ bool ValueImpl::equals(std::shared_ptr<fUML::Semantics::Values::Value> otherValu
 	//end of body
 }
 
-std::shared_ptr<Bag<org.eclipse.uml2.uml.Classifier> > ValueImpl::getTypes() const
+std::shared_ptr<Bag<uml::Classifier> > ValueImpl::getTypes() const
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ValueImpl::hasTypes(std::shared_ptr<org.eclipse.uml2.uml.Classifier> type)
+bool ValueImpl::hasTypes(std::shared_ptr<uml::Classifier> type)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -192,7 +189,7 @@ std::string ValueImpl::objectId()
 	//end of body
 }
 
-std::shared_ptr<org.eclipse.uml2.uml.ValueSpecification> ValueImpl::specify()
+std::shared_ptr<uml::ValueSpecification> ValueImpl::specify()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -287,7 +284,7 @@ void ValueImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inte
 	fUML::Semantics::Loci::SemanticVisitorImpl::loadNode(nodeName, loadHandler);
 }
 
-void ValueImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ValueImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	fUML::Semantics::Loci::SemanticVisitorImpl::resolveReferences(featureID, references);
 }

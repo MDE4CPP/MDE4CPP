@@ -35,23 +35,14 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/GeneralOrdering.hpp"
-
 #include "uml/Interaction.hpp"
-
 #include "uml/InteractionFragment.hpp"
-
 #include "uml/InteractionOperand.hpp"
-
 #include "uml/Lifeline.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/StringExpression.hpp"
 
 //Factories an Package includes
@@ -184,12 +175,12 @@ std::shared_ptr<ecore::EClass> ContinuationImpl::eStaticClass() const
 /*
 Getter & Setter for attribute setting
 */
-bool  ContinuationImpl::getSetting() const 
+bool ContinuationImpl::getSetting() const 
 {
 	return m_setting;
 }
 
-void ContinuationImpl::setSetting(bool  _setting)
+void ContinuationImpl::setSetting(bool _setting)
 {
 	m_setting = _setting;
 } 
@@ -376,7 +367,7 @@ void ContinuationImpl::loadNode(std::string nodeName, std::shared_ptr<persistenc
 	InteractionFragmentImpl::loadNode(nodeName, loadHandler);
 }
 
-void ContinuationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ContinuationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	InteractionFragmentImpl::resolveReferences(featureID, references);
 }

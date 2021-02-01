@@ -35,19 +35,12 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
 #include "uml/Constraint.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/NamedElement.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/Parameter.hpp"
-
 #include "uml/StringExpression.hpp"
 
 //Factories an Package includes
@@ -339,7 +332,7 @@ bool ParameterSetImpl::eSet(int featureID, Any newValue)
 				}
 				iterCondition++;
 			}
-
+ 
 			iterCondition = conditionList->begin();
 			endCondition = conditionList->end();
 			while (iterCondition != endCondition)
@@ -375,7 +368,7 @@ bool ParameterSetImpl::eSet(int featureID, Any newValue)
 				}
 				iterParameter++;
 			}
-
+ 
 			iterParameter = parameterList->begin();
 			endParameter = parameterList->end();
 			while (iterParameter != endParameter)
@@ -472,7 +465,7 @@ void ParameterSetImpl::loadNode(std::string nodeName, std::shared_ptr<persistenc
 	NamedElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void ParameterSetImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ParameterSetImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -521,7 +514,7 @@ void ParameterSetImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 		}
 
 	// Add references
-		saveHandler->addReferences<uml::Parameter>("parameter", this->getParameter());	
+		saveHandler->addReferences<uml::Parameter>("parameter", this->getParameter());
 	}
 	catch (std::exception& e)
 	{

@@ -34,23 +34,14 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/GeneralOrdering.hpp"
-
 #include "uml/Interaction.hpp"
-
 #include "uml/InteractionFragment.hpp"
-
 #include "uml/InteractionOperand.hpp"
-
 #include "uml/Lifeline.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/StringExpression.hpp"
 
 //Factories an Package includes
@@ -312,32 +303,10 @@ Any OccurrenceSpecificationImpl::eGet(int featureID, bool resolve, bool coreType
 		case uml::umlPackage::OCCURRENCESPECIFICATION_ATTRIBUTE_TOAFTER:
 		{
 			return eAny(getToAfter()); //16313			
-			/*
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::GeneralOrdering>::iterator iter = m_toAfter->begin();
-			Bag<uml::GeneralOrdering>::iterator end = m_toAfter->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //16313
-			*/
 		}
 		case uml::umlPackage::OCCURRENCESPECIFICATION_ATTRIBUTE_TOBEFORE:
 		{
 			return eAny(getToBefore()); //16314			
-			/*
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::GeneralOrdering>::iterator iter = m_toBefore->begin();
-			Bag<uml::GeneralOrdering>::iterator end = m_toBefore->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //16314
-			*/
 		}
 	}
 	return InteractionFragmentImpl::eGet(featureID, resolve, coreType);
@@ -380,7 +349,7 @@ bool OccurrenceSpecificationImpl::eSet(int featureID, Any newValue)
 				}
 				iterToAfter++;
 			}
-
+ 
 			iterToAfter = toAfterList->begin();
 			endToAfter = toAfterList->end();
 			while (iterToAfter != endToAfter)
@@ -416,7 +385,7 @@ bool OccurrenceSpecificationImpl::eSet(int featureID, Any newValue)
 				}
 				iterToBefore++;
 			}
-
+ 
 			iterToBefore = toBeforeList->begin();
 			endToBefore = toBeforeList->end();
 			while (iterToBefore != endToBefore)
@@ -493,7 +462,7 @@ void OccurrenceSpecificationImpl::loadNode(std::string nodeName, std::shared_ptr
 	InteractionFragmentImpl::loadNode(nodeName, loadHandler);
 }
 
-void OccurrenceSpecificationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void OccurrenceSpecificationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -554,8 +523,8 @@ void OccurrenceSpecificationImpl::saveContent(std::shared_ptr<persistence::inter
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	// Add references
-		saveHandler->addReferences<uml::GeneralOrdering>("toAfter", this->getToAfter());	
-		saveHandler->addReferences<uml::GeneralOrdering>("toBefore", this->getToBefore());	
+		saveHandler->addReferences<uml::GeneralOrdering>("toAfter", this->getToAfter());
+		saveHandler->addReferences<uml::GeneralOrdering>("toBefore", this->getToBefore());
 	}
 	catch (std::exception& e)
 	{

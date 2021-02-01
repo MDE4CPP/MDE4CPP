@@ -9,7 +9,6 @@
 
 //*********************************
 // generated Includes
-
 //Model includes
 #include "../AcceptEventActionActivation.hpp"
 
@@ -54,10 +53,10 @@ namespace fUML::Semantics::Actions
 			virtual void doAction() ;
 			
 			 
-			virtual void fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > incomingTokens) ;
+			virtual void fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incomingTokens) ;
 			
 			 
-			virtual void initialize(std::shared_ptr<org.eclipse.uml2.uml.ActivityNode> node,std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> group) ;
+			virtual void initialize(std::shared_ptr<uml::ActivityNode> node,std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> group) ;
 			
 			 
 			virtual bool isReady() ;
@@ -76,12 +75,10 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			 
-			virtual bool  isWaiting() const ;
+			virtual bool isWaiting() const ;
 			
 			 
-			virtual void setWaiting (bool  _waiting); 
-			
+			virtual void setWaiting (bool _waiting);
 			
 			//*********************************
 			// Reference
@@ -113,7 +110,7 @@ namespace fUML::Semantics::Actions
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

@@ -34,21 +34,13 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/NamedElement.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/Observation.hpp"
-
 #include "uml/Package.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/TemplateParameter.hpp"
 
 //Factories an Package includes
@@ -174,12 +166,12 @@ std::shared_ptr<ecore::EClass> TimeObservationImpl::eStaticClass() const
 /*
 Getter & Setter for attribute firstEvent
 */
-bool  TimeObservationImpl::getFirstEvent() const 
+bool TimeObservationImpl::getFirstEvent() const 
 {
 	return m_firstEvent;
 }
 
-void TimeObservationImpl::setFirstEvent(bool  _firstEvent)
+void TimeObservationImpl::setFirstEvent(bool _firstEvent)
 {
 	m_firstEvent = _firstEvent;
 } 
@@ -383,7 +375,7 @@ void TimeObservationImpl::loadNode(std::string nodeName, std::shared_ptr<persist
 	ObservationImpl::loadNode(nodeName, loadHandler);
 }
 
-void TimeObservationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void TimeObservationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -437,7 +429,7 @@ void TimeObservationImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 		}
 
 	// Add references
-		saveHandler->addReference("event", this->getEvent());		 
+		saveHandler->addReference("event", this->getEvent()); 
 	}
 	catch (std::exception& e)
 	{

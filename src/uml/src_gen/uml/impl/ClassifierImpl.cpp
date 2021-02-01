@@ -27,6 +27,11 @@
 #include "ecore/EClass.hpp"
 
 //Includes from codegen annotation
+#include "uml/BehavioredClassifier.hpp"
+#include "uml/InterfaceRealization.hpp"
+#include "uml/Interface.hpp"
+#include "uml/Usage.hpp"
+#include "uml/Class.hpp"
 
 //Forward declaration includes
 #include "persistence/interfaces/XLoadHandler.hpp" // used for Persistence
@@ -35,59 +40,32 @@
 #include <exception> // used in Persistence
 
 #include "uml/Classifier.hpp"
-
 #include "uml/CollaborationUse.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/Constraint.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/ElementImport.hpp"
-
 #include "uml/Feature.hpp"
-
 #include "uml/Generalization.hpp"
-
 #include "uml/GeneralizationSet.hpp"
-
 #include "uml/Interface.hpp"
-
 #include "uml/NamedElement.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/Operation.hpp"
-
 #include "uml/Package.hpp"
-
 #include "uml/PackageImport.hpp"
-
 #include "uml/PackageableElement.hpp"
-
 #include "uml/Property.hpp"
-
 #include "uml/RedefinableElement.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/StructuralFeature.hpp"
-
 #include "uml/Substitution.hpp"
-
 #include "uml/TemplateBinding.hpp"
-
 #include "uml/TemplateParameter.hpp"
-
 #include "uml/TemplateSignature.hpp"
-
 #include "uml/TemplateableElement.hpp"
-
 #include "uml/Type.hpp"
-
 #include "uml/UseCase.hpp"
 
 //Factories an Package includes
@@ -375,12 +353,12 @@ std::shared_ptr<ecore::EClass> ClassifierImpl::eStaticClass() const
 /*
 Getter & Setter for attribute isAbstract
 */
-bool  ClassifierImpl::getIsAbstract() const 
+bool ClassifierImpl::getIsAbstract() const 
 {
 	return m_isAbstract;
 }
 
-void ClassifierImpl::setIsAbstract(bool  _isAbstract)
+void ClassifierImpl::setIsAbstract(bool _isAbstract)
 {
 	m_isAbstract = _isAbstract;
 } 
@@ -390,12 +368,12 @@ void ClassifierImpl::setIsAbstract(bool  _isAbstract)
 /*
 Getter & Setter for attribute isFinalSpecialization
 */
-bool  ClassifierImpl::getIsFinalSpecialization() const 
+bool ClassifierImpl::getIsFinalSpecialization() const 
 {
 	return m_isFinalSpecialization;
 }
 
-void ClassifierImpl::setIsFinalSpecialization(bool  _isFinalSpecialization)
+void ClassifierImpl::setIsFinalSpecialization(bool _isFinalSpecialization)
 {
 	m_isFinalSpecialization = _isFinalSpecialization;
 } 
@@ -592,13 +570,13 @@ std::shared_ptr<Bag<uml::NamedElement> > ClassifierImpl::getInheritedMembers()
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Operation> ClassifierImpl::getOperation(std::string name,std::shared_ptr<Bag<std::string> > parameterNames,std::shared_ptr<Bag<uml::Type> > parameterTypes)
+std::shared_ptr<uml::Operation> ClassifierImpl::getOperation(std::string name,std::shared_ptr<Bag<std::string>> parameterNames,std::shared_ptr<Bag<uml::Type>> parameterTypes)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Operation> ClassifierImpl::getOperation(std::string name,std::shared_ptr<Bag<std::string> > parameterNames,std::shared_ptr<Bag<uml::Type> > parameterTypes,bool ignoreCase)
+std::shared_ptr<uml::Operation> ClassifierImpl::getOperation(std::string name,std::shared_ptr<Bag<std::string>> parameterNames,std::shared_ptr<Bag<uml::Type>> parameterTypes,bool ignoreCase)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -608,6 +586,22 @@ std::shared_ptr<Bag<uml::Operation> > ClassifierImpl::getOperations()
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
+}
+
+Any ClassifierImpl::getPropertyValue(std::string propertyName)
+{
+	//ADD_COUNT(__PRETTY_FUNCTION__)
+	//generated from body annotation
+		std::shared_ptr<Bag<uml::Property> > propertyList = this->getMetaClass()->getAttribute();
+	for(std::shared_ptr<uml::Property> p: *propertyList)
+	{
+		if(p->getName()==propertyName)
+		{
+			return this->get(p);
+		}
+	}
+	return Any();
+	//end of body
 }
 
 std::shared_ptr<Bag<uml::Interface> > ClassifierImpl::getUsedInterfaces()
@@ -622,7 +616,7 @@ bool ClassifierImpl::hasVisibilityOf(std::shared_ptr<uml::NamedElement> n)
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::NamedElement> > ClassifierImpl::inherit(std::shared_ptr<Bag<uml::NamedElement> > inhs)
+std::shared_ptr<Bag<uml::NamedElement> > ClassifierImpl::inherit(std::shared_ptr<Bag<uml::NamedElement>> inhs)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -1265,7 +1259,7 @@ bool ClassifierImpl::eSet(int featureID, Any newValue)
 				}
 				iterCollaborationUse++;
 			}
-
+ 
 			iterCollaborationUse = collaborationUseList->begin();
 			endCollaborationUse = collaborationUseList->end();
 			while (iterCollaborationUse != endCollaborationUse)
@@ -1301,7 +1295,7 @@ bool ClassifierImpl::eSet(int featureID, Any newValue)
 				}
 				iterGeneral++;
 			}
-
+ 
 			iterGeneral = generalList->begin();
 			endGeneral = generalList->end();
 			while (iterGeneral != endGeneral)
@@ -1337,7 +1331,7 @@ bool ClassifierImpl::eSet(int featureID, Any newValue)
 				}
 				iterGeneralization++;
 			}
-
+ 
 			iterGeneralization = generalizationList->begin();
 			endGeneralization = generalizationList->end();
 			while (iterGeneralization != endGeneralization)
@@ -1387,7 +1381,7 @@ bool ClassifierImpl::eSet(int featureID, Any newValue)
 				}
 				iterOwnedUseCase++;
 			}
-
+ 
 			iterOwnedUseCase = ownedUseCaseList->begin();
 			endOwnedUseCase = ownedUseCaseList->end();
 			while (iterOwnedUseCase != endOwnedUseCase)
@@ -1423,7 +1417,7 @@ bool ClassifierImpl::eSet(int featureID, Any newValue)
 				}
 				iterPowertypeExtent++;
 			}
-
+ 
 			iterPowertypeExtent = powertypeExtentList->begin();
 			endPowertypeExtent = powertypeExtentList->end();
 			while (iterPowertypeExtent != endPowertypeExtent)
@@ -1459,7 +1453,7 @@ bool ClassifierImpl::eSet(int featureID, Any newValue)
 				}
 				iterRedefinedClassifier++;
 			}
-
+ 
 			iterRedefinedClassifier = redefinedClassifierList->begin();
 			endRedefinedClassifier = redefinedClassifierList->end();
 			while (iterRedefinedClassifier != endRedefinedClassifier)
@@ -1503,7 +1497,7 @@ bool ClassifierImpl::eSet(int featureID, Any newValue)
 				}
 				iterSubstitution++;
 			}
-
+ 
 			iterSubstitution = substitutionList->begin();
 			endSubstitution = substitutionList->end();
 			while (iterSubstitution != endSubstitution)
@@ -1539,7 +1533,7 @@ bool ClassifierImpl::eSet(int featureID, Any newValue)
 				}
 				iterUseCase++;
 			}
-
+ 
 			iterUseCase = useCaseList->begin();
 			endUseCase = useCaseList->end();
 			while (iterUseCase != endUseCase)
@@ -1752,7 +1746,7 @@ void ClassifierImpl::loadNode(std::string nodeName, std::shared_ptr<persistence:
 	TypeImpl::loadNode(nodeName, loadHandler);
 }
 
-void ClassifierImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ClassifierImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -1890,11 +1884,11 @@ void ClassifierImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 		}
 
 	// Add references
-		saveHandler->addReferences<uml::Classifier>("general", this->getGeneral());	
-		saveHandler->addReferences<uml::GeneralizationSet>("powertypeExtent", this->getPowertypeExtent());	
-		saveHandler->addReferences<uml::Classifier>("redefinedClassifier", this->getRedefinedClassifier());	
-		saveHandler->addReference("representation", this->getRepresentation());		 
-		saveHandler->addReferences<uml::UseCase>("useCase", this->getUseCase());	
+		saveHandler->addReferences<uml::Classifier>("general", this->getGeneral());
+		saveHandler->addReferences<uml::GeneralizationSet>("powertypeExtent", this->getPowertypeExtent());
+		saveHandler->addReferences<uml::Classifier>("redefinedClassifier", this->getRedefinedClassifier());
+		saveHandler->addReference("representation", this->getRepresentation()); 
+		saveHandler->addReferences<uml::UseCase>("useCase", this->getUseCase());
 
 		//
 		// Add new tags (from references)

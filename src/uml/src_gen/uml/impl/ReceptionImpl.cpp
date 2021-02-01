@@ -35,39 +35,22 @@
 #include <exception> // used in Persistence
 
 #include "uml/Behavior.hpp"
-
 #include "uml/BehavioralFeature.hpp"
-
 #include "uml/Classifier.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/Constraint.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/ElementImport.hpp"
-
 #include "uml/NamedElement.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/PackageImport.hpp"
-
 #include "uml/PackageableElement.hpp"
-
 #include "uml/Parameter.hpp"
-
 #include "uml/ParameterSet.hpp"
-
 #include "uml/RedefinableElement.hpp"
-
 #include "uml/Signal.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/Type.hpp"
 
 //Factories an Package includes
@@ -446,7 +429,7 @@ void ReceptionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::
 	BehavioralFeatureImpl::loadNode(nodeName, loadHandler);
 }
 
-void ReceptionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ReceptionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -498,7 +481,7 @@ void ReceptionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	// Add references
-		saveHandler->addReference("signal", this->getSignal());		 
+		saveHandler->addReference("signal", this->getSignal()); 
 	}
 	catch (std::exception& e)
 	{

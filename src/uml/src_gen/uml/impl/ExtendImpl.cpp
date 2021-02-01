@@ -35,23 +35,14 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
 #include "uml/Constraint.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/DirectedRelationship.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/ExtensionPoint.hpp"
-
 #include "uml/NamedElement.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/UseCase.hpp"
 
 //Factories an Package includes
@@ -475,7 +466,7 @@ bool ExtendImpl::eSet(int featureID, Any newValue)
 				}
 				iterExtensionLocation++;
 			}
-
+ 
 			iterExtensionLocation = extensionLocationList->begin();
 			endExtensionLocation = extensionLocationList->end();
 			while (iterExtensionLocation != endExtensionLocation)
@@ -587,7 +578,7 @@ void ExtendImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::int
 	NamedElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void ExtendImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ExtendImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -666,8 +657,8 @@ void ExtendImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 		}
 
 	// Add references
-		saveHandler->addReference("extendedCase", this->getExtendedCase());		 
-		saveHandler->addReferences<uml::ExtensionPoint>("extensionLocation", this->getExtensionLocation());	
+		saveHandler->addReference("extendedCase", this->getExtendedCase()); 
+		saveHandler->addReferences<uml::ExtensionPoint>("extensionLocation", this->getExtensionLocation());
 	}
 	catch (std::exception& e)
 	{

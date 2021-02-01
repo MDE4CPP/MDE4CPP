@@ -8,25 +8,21 @@
 #define UML_NAMEDELEMENT_HPP
 
 #include <map>
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T> class Bag; 
 template<class T, class ... U> class Subset;
 template<class T, class ... U> class SubsetUnion;
-
 
 class AnyObject;
 typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -59,8 +55,6 @@ namespace uml
 #include "uml/VisibilityKind.hpp"
 
 
-//Includes from codegen annotation
-#include <algorithm>
 
 //*********************************
 namespace uml 
@@ -70,7 +64,7 @@ namespace uml
 	<p>From package UML::CommonStructure.</p>
 	*/
 	
-	class NamedElement:virtual public Element
+	class NamedElement: virtual public Element
 	{
 		public:
  			NamedElement(const NamedElement &) {}
@@ -79,13 +73,10 @@ namespace uml
 		protected:
 			NamedElement(){}
 
-
 			//Additional constructors for the containments back reference
-
 			NamedElement(std::weak_ptr<uml::Namespace > par_namespace);
 
 			//Additional constructors for the containments back reference
-
 			NamedElement(std::weak_ptr<uml::Element > par_owner);
 
 		public:
@@ -225,30 +216,26 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual std::string  getName() const = 0;
+			virtual std::string getName() const = 0;
 			
 			/*!
 			The name of the NamedElement.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual void setName (std::string  _name)= 0; 
-			
+			virtual void setName (std::string _name)= 0;/*!
+			Determines whether and how the NamedElement is visible outside its owning Namespace.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			 
+			virtual uml::VisibilityKind getVisibility() const = 0;
 			
 			/*!
 			Determines whether and how the NamedElement is visible outside its owning Namespace.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual uml::VisibilityKind  getVisibility() const = 0;
-			
-			/*!
-			Determines whether and how the NamedElement is visible outside its owning Namespace.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			 
-			virtual void setVisibility (uml::VisibilityKind  _visibility)= 0; 
-			
+			virtual void setVisibility (uml::VisibilityKind _visibility)= 0;
 			//*********************************
 			// Reference
 			//*********************************
@@ -287,19 +274,19 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			std::string  m_name = "";
+			std::string m_name = "";
 			/*!
 			A name that allows the NamedElement to be identified within a hierarchy of nested Namespaces. It is constructed from the names of the containing Namespaces starting at the root of the hierarchy and ending with the name of the NamedElement itself.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			std::string  m_qualifiedName = "";
+			std::string m_qualifiedName = "";
 			/*!
 			Determines whether and how the NamedElement is visible outside its owning Namespace.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			uml::VisibilityKind  m_visibility = VisibilityKind::PUBLIC;
+			uml::VisibilityKind m_visibility = VisibilityKind::PUBLIC;
 			
 			
 			//*********************************
@@ -350,7 +337,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

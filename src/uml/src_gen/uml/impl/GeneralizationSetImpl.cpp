@@ -35,23 +35,14 @@
 #include <exception> // used in Persistence
 
 #include "uml/Classifier.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/Generalization.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/Package.hpp"
-
 #include "uml/PackageableElement.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/TemplateParameter.hpp"
 
 //Factories an Package includes
@@ -181,12 +172,12 @@ std::shared_ptr<ecore::EClass> GeneralizationSetImpl::eStaticClass() const
 /*
 Getter & Setter for attribute isCovering
 */
-bool  GeneralizationSetImpl::getIsCovering() const 
+bool GeneralizationSetImpl::getIsCovering() const 
 {
 	return m_isCovering;
 }
 
-void GeneralizationSetImpl::setIsCovering(bool  _isCovering)
+void GeneralizationSetImpl::setIsCovering(bool _isCovering)
 {
 	m_isCovering = _isCovering;
 } 
@@ -196,12 +187,12 @@ void GeneralizationSetImpl::setIsCovering(bool  _isCovering)
 /*
 Getter & Setter for attribute isDisjoint
 */
-bool  GeneralizationSetImpl::getIsDisjoint() const 
+bool GeneralizationSetImpl::getIsDisjoint() const 
 {
 	return m_isDisjoint;
 }
 
-void GeneralizationSetImpl::setIsDisjoint(bool  _isDisjoint)
+void GeneralizationSetImpl::setIsDisjoint(bool _isDisjoint)
 {
 	m_isDisjoint = _isDisjoint;
 } 
@@ -387,7 +378,7 @@ bool GeneralizationSetImpl::eSet(int featureID, Any newValue)
 				}
 				iterGeneralization++;
 			}
-
+ 
 			iterGeneralization = generalizationList->begin();
 			endGeneralization = generalizationList->end();
 			while (iterGeneralization != endGeneralization)
@@ -504,7 +495,7 @@ void GeneralizationSetImpl::loadNode(std::string nodeName, std::shared_ptr<persi
 	PackageableElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void GeneralizationSetImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void GeneralizationSetImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -574,8 +565,8 @@ void GeneralizationSetImpl::saveContent(std::shared_ptr<persistence::interfaces:
 		}
 
 	// Add references
-		saveHandler->addReferences<uml::Generalization>("generalization", this->getGeneralization());	
-		saveHandler->addReference("powertype", this->getPowertype());		 
+		saveHandler->addReferences<uml::Generalization>("generalization", this->getGeneralization());
+		saveHandler->addReference("powertype", this->getPowertype()); 
 	}
 	catch (std::exception& e)
 	{

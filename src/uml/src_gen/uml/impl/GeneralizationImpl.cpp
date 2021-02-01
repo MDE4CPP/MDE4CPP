@@ -34,13 +34,9 @@
 #include <exception> // used in Persistence
 
 #include "uml/Classifier.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/DirectedRelationship.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/GeneralizationSet.hpp"
 
 //Factories an Package includes
@@ -142,12 +138,12 @@ std::shared_ptr<ecore::EClass> GeneralizationImpl::eStaticClass() const
 /*
 Getter & Setter for attribute isSubstitutable
 */
-bool  GeneralizationImpl::getIsSubstitutable() const 
+bool GeneralizationImpl::getIsSubstitutable() const 
 {
 	return m_isSubstitutable;
 }
 
-void GeneralizationImpl::setIsSubstitutable(bool  _isSubstitutable)
+void GeneralizationImpl::setIsSubstitutable(bool _isSubstitutable)
 {
 	m_isSubstitutable = _isSubstitutable;
 } 
@@ -386,7 +382,7 @@ bool GeneralizationImpl::eSet(int featureID, Any newValue)
 				}
 				iterGeneralizationSet++;
 			}
-
+ 
 			iterGeneralizationSet = generalizationSetList->begin();
 			endGeneralizationSet = generalizationSetList->end();
 			while (iterGeneralizationSet != endGeneralizationSet)
@@ -487,7 +483,7 @@ void GeneralizationImpl::loadNode(std::string nodeName, std::shared_ptr<persiste
 	DirectedRelationshipImpl::loadNode(nodeName, loadHandler);
 }
 
-void GeneralizationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void GeneralizationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -563,8 +559,8 @@ void GeneralizationImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 		}
 
 	// Add references
-		saveHandler->addReference("general", this->getGeneral());		 
-		saveHandler->addReferences<uml::GeneralizationSet>("generalizationSet", this->getGeneralizationSet());	
+		saveHandler->addReference("general", this->getGeneral()); 
+		saveHandler->addReferences<uml::GeneralizationSet>("generalizationSet", this->getGeneralizationSet());
 	}
 	catch (std::exception& e)
 	{

@@ -9,7 +9,6 @@
 
 //*********************************
 // generated Includes
-
 //Model includes
 #include "../CallBehaviorActionActivation.hpp"
 
@@ -61,23 +60,20 @@ namespace fUML::Semantics::Actions
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<org.eclipse.uml2.uml.CallBehaviorAction > getCallBehaviorAction() const ;
+			virtual std::shared_ptr<uml::CallBehaviorAction > getCallBehaviorAction() const ;
 			
 			
-			virtual void setCallBehaviorAction(std::shared_ptr<org.eclipse.uml2.uml.CallBehaviorAction> _callBehaviorAction) ;
+			virtual void setCallBehaviorAction(std::shared_ptr<uml::CallBehaviorAction> _callBehaviorAction) ;
 			
 			/*Additional Setter for 'CallActionActivation::callAction' redefined by reference 'callBehaviorAction'*/
 			
-			virtual void setCallAction(std::shared_ptr<org.eclipse.uml2.uml.CallAction> _callAction) ;
-			
+			virtual void setCallAction(std::shared_ptr<uml::CallAction> _callAction) ;
 			/*Additional Setter for 'ActionActivation::action' redefined by reference 'callBehaviorAction'*/
 			
-			virtual void setAction(std::shared_ptr<org.eclipse.uml2.uml.Action> _action) ;
-			
+			virtual void setAction(std::shared_ptr<uml::Action> _action) ;
 			/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'callBehaviorAction'*/
 			
-			virtual void setNode(std::shared_ptr<org.eclipse.uml2.uml.ActivityNode> _node) ;
-			
+			virtual void setNode(std::shared_ptr<uml::ActivityNode> _node) ;
 							
 			
 			//*********************************
@@ -99,7 +95,7 @@ namespace fUML::Semantics::Actions
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

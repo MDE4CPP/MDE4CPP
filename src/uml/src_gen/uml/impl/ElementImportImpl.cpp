@@ -35,13 +35,9 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
 #include "uml/DirectedRelationship.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/PackageableElement.hpp"
 
 //Factories an Package includes
@@ -141,12 +137,12 @@ std::shared_ptr<ecore::EClass> ElementImportImpl::eStaticClass() const
 /*
 Getter & Setter for attribute alias
 */
-std::string  ElementImportImpl::getAlias() const 
+std::string ElementImportImpl::getAlias() const 
 {
 	return m_alias;
 }
 
-void ElementImportImpl::setAlias(std::string  _alias)
+void ElementImportImpl::setAlias(std::string _alias)
 {
 	m_alias = _alias;
 } 
@@ -156,12 +152,12 @@ void ElementImportImpl::setAlias(std::string  _alias)
 /*
 Getter & Setter for attribute visibility
 */
-uml::VisibilityKind  ElementImportImpl::getVisibility() const 
+uml::VisibilityKind ElementImportImpl::getVisibility() const 
 {
 	return m_visibility;
 }
 
-void ElementImportImpl::setVisibility(uml::VisibilityKind  _visibility)
+void ElementImportImpl::setVisibility(uml::VisibilityKind _visibility)
 {
 	m_visibility = _visibility;
 } 
@@ -437,7 +433,7 @@ void ElementImportImpl::loadAttributes(std::shared_ptr<persistence::interfaces::
 		iter = attr_list.find("visibility");
 		if ( iter != attr_list.end() )
 		{
-			uml::VisibilityKind  value = VisibilityKind::PUBLIC;
+			uml::VisibilityKind value = VisibilityKind::PUBLIC;
 			std::string literal = iter->second;
 			if (literal == "public")
 			{
@@ -485,7 +481,7 @@ void ElementImportImpl::loadNode(std::string nodeName, std::shared_ptr<persisten
 	DirectedRelationshipImpl::loadNode(nodeName, loadHandler);
 }
 
-void ElementImportImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ElementImportImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -548,7 +544,7 @@ void ElementImportImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 
 		if ( this->eIsSet(package->getElementImport_Attribute_visibility()) )
 		{
-			uml::VisibilityKind  value = this->getVisibility();
+			uml::VisibilityKind value = this->getVisibility();
 			std::string literal = "";
 			if (value == VisibilityKind::PUBLIC)
 			{
@@ -570,7 +566,7 @@ void ElementImportImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 		}
 
 	// Add references
-		saveHandler->addReference("importedElement", this->getImportedElement());		 
+		saveHandler->addReference("importedElement", this->getImportedElement()); 
 	}
 	catch (std::exception& e)
 	{

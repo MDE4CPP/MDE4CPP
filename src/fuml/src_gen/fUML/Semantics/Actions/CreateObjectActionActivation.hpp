@@ -7,20 +7,16 @@
 #ifndef FUML_SEMANTICS_ACTIONS_CREATEOBJECTACTIONACTIVATION_HPP
 #define FUML_SEMANTICS_ACTIONS_CREATEOBJECTACTIONACTIVATION_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
-
 
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -61,18 +57,12 @@ namespace uml
 // enum includes
 
 
-//Includes from codegen annotation
-#include "uml/CreateObjectAction.hpp"
-#include "uml/Class.hpp"
-#include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
-#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
-#include "fUML/Semantics/Loci/Locus.hpp"
 
 //*********************************
 namespace fUML::Semantics::Actions 
 {
 	
-	class CreateObjectActionActivation:virtual public ActionActivation
+	class CreateObjectActionActivation: virtual public ActionActivation
 	{
 		public:
  			CreateObjectActionActivation(const CreateObjectActionActivation &) {}
@@ -80,7 +70,6 @@ namespace fUML::Semantics::Actions
 
 		protected:
 			CreateObjectActionActivation(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -103,19 +92,17 @@ namespace fUML::Semantics::Actions
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<org.eclipse.uml2.uml.CreateObjectAction > getCreateObjectAction() const = 0;
+			virtual std::shared_ptr<uml::CreateObjectAction > getCreateObjectAction() const = 0;
 			
 			
-			virtual void setCreateObjectAction(std::shared_ptr<org.eclipse.uml2.uml.CreateObjectAction> _createObjectAction) = 0;
+			virtual void setCreateObjectAction(std::shared_ptr<uml::CreateObjectAction> _createObjectAction) = 0;
 			
 			/*Additional Setter for 'ActionActivation::action' redefined by reference 'createObjectAction'*/
 			
-			virtual void setAction(std::shared_ptr<org.eclipse.uml2.uml.Action> _action) = 0;
-			
+			virtual void setAction(std::shared_ptr<uml::Action> _action) = 0;
 			/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'createObjectAction'*/
 			
-			virtual void setNode(std::shared_ptr<org.eclipse.uml2.uml.ActivityNode> _node) = 0;
-			
+			virtual void setNode(std::shared_ptr<uml::ActivityNode> _node) = 0;
 			
 
 		protected:
@@ -128,7 +115,7 @@ namespace fUML::Semantics::Actions
 			// Reference Members
 			//*********************************
 			
-			std::shared_ptr<org.eclipse.uml2.uml.CreateObjectAction > m_createObjectAction;
+			std::shared_ptr<uml::CreateObjectAction > m_createObjectAction;
 
 		public:
 			//*********************************
@@ -144,7 +131,7 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

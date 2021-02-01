@@ -35,19 +35,12 @@
 #include <exception> // used in Persistence
 
 #include "uml/Classifier.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/RedefinableElement.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/UseCase.hpp"
 
 //Factories an Package includes
@@ -321,7 +314,7 @@ void ExtensionPointImpl::loadNode(std::string nodeName, std::shared_ptr<persiste
 	RedefinableElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void ExtensionPointImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ExtensionPointImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{

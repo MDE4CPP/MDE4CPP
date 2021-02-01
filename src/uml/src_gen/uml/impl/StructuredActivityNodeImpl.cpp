@@ -35,51 +35,28 @@
 #include <exception> // used in Persistence
 
 #include "uml/Action.hpp"
-
 #include "uml/Activity.hpp"
-
 #include "uml/ActivityEdge.hpp"
-
 #include "uml/ActivityGroup.hpp"
-
 #include "uml/ActivityNode.hpp"
-
 #include "uml/ActivityPartition.hpp"
-
 #include "uml/Classifier.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/Constraint.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/ElementImport.hpp"
-
 #include "uml/ExceptionHandler.hpp"
-
 #include "uml/InputPin.hpp"
-
 #include "uml/InterruptibleActivityRegion.hpp"
-
 #include "uml/NamedElement.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/OutputPin.hpp"
-
 #include "uml/PackageImport.hpp"
-
 #include "uml/PackageableElement.hpp"
-
 #include "uml/RedefinableElement.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/StructuredActivityNode.hpp"
-
 #include "uml/Variable.hpp"
 
 //Factories an Package includes
@@ -408,12 +385,12 @@ std::shared_ptr<ecore::EClass> StructuredActivityNodeImpl::eStaticClass() const
 /*
 Getter & Setter for attribute mustIsolate
 */
-bool  StructuredActivityNodeImpl::getMustIsolate() const 
+bool StructuredActivityNodeImpl::getMustIsolate() const 
 {
 	return m_mustIsolate;
 }
 
-void StructuredActivityNodeImpl::setMustIsolate(bool  _mustIsolate)
+void StructuredActivityNodeImpl::setMustIsolate(bool _mustIsolate)
 {
 	m_mustIsolate = _mustIsolate;
 } 
@@ -904,7 +881,7 @@ bool StructuredActivityNodeImpl::eSet(int featureID, Any newValue)
 				}
 				iterEdge++;
 			}
-
+ 
 			iterEdge = edgeList->begin();
 			endEdge = edgeList->end();
 			while (iterEdge != endEdge)
@@ -947,7 +924,7 @@ bool StructuredActivityNodeImpl::eSet(int featureID, Any newValue)
 				}
 				iterNode++;
 			}
-
+ 
 			iterNode = nodeList->begin();
 			endNode = nodeList->end();
 			while (iterNode != endNode)
@@ -983,7 +960,7 @@ bool StructuredActivityNodeImpl::eSet(int featureID, Any newValue)
 				}
 				iterStructuredNodeInput++;
 			}
-
+ 
 			iterStructuredNodeInput = structuredNodeInputList->begin();
 			endStructuredNodeInput = structuredNodeInputList->end();
 			while (iterStructuredNodeInput != endStructuredNodeInput)
@@ -1019,7 +996,7 @@ bool StructuredActivityNodeImpl::eSet(int featureID, Any newValue)
 				}
 				iterStructuredNodeOutput++;
 			}
-
+ 
 			iterStructuredNodeOutput = structuredNodeOutputList->begin();
 			endStructuredNodeOutput = structuredNodeOutputList->end();
 			while (iterStructuredNodeOutput != endStructuredNodeOutput)
@@ -1055,7 +1032,7 @@ bool StructuredActivityNodeImpl::eSet(int featureID, Any newValue)
 				}
 				iterVariable++;
 			}
-
+ 
 			iterVariable = variableList->begin();
 			endVariable = variableList->end();
 			while (iterVariable != endVariable)
@@ -1230,7 +1207,7 @@ void StructuredActivityNodeImpl::loadNode(std::string nodeName, std::shared_ptr<
 	NamespaceImpl::loadNode(nodeName, loadHandler);
 }
 
-void StructuredActivityNodeImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void StructuredActivityNodeImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	ActionImpl::resolveReferences(featureID, references);
 	ActivityGroupImpl::resolveReferences(featureID, references);

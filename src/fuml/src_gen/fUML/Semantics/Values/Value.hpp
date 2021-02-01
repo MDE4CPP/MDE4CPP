@@ -7,20 +7,16 @@
 #ifndef FUML_SEMANTICS_VALUES_VALUE_HPP
 #define FUML_SEMANTICS_VALUES_VALUE_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
-
 
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -36,10 +32,6 @@ namespace fUML
 }
 
 //Forward Declaration for used types 
-namespace fUML::Semantics::Values 
-{
-	class Value;
-}
 namespace uml 
 {
 	class Classifier;
@@ -52,15 +44,12 @@ namespace uml
 // enum includes
 
 
-//Includes from codegen annotation
-#include "abstractDataTypes/Subset.hpp"
-#include "uml/Classifier.hpp"
 
 //*********************************
 namespace fUML::Semantics::Values 
 {
 	
-	class Value:virtual public fUML::Semantics::Loci::SemanticVisitor
+	class Value: virtual public fUML::Semantics::Loci::SemanticVisitor
 	{
 		public:
  			Value(const Value &) {}
@@ -68,7 +57,6 @@ namespace fUML::Semantics::Values
 
 		protected:
 			Value(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -83,22 +71,22 @@ namespace fUML::Semantics::Values
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() = 0;
 			
 			 
-			virtual bool checkAllParents(std::shared_ptr<org.eclipse.uml2.uml.Classifier> type,std::shared_ptr<org.eclipse.uml2.uml.Classifier> classifier) = 0;
+			virtual bool checkAllParents(std::shared_ptr<uml::Classifier> type,std::shared_ptr<uml::Classifier> classifier) = 0;
 			
 			 
 			virtual bool equals(std::shared_ptr<fUML::Semantics::Values::Value> otherValue) = 0;
 			
 			 
-			virtual std::shared_ptr<Bag<org.eclipse.uml2.uml.Classifier> > getTypes() const = 0;
+			virtual std::shared_ptr<Bag<uml::Classifier> > getTypes() const = 0;
 			
 			 
-			virtual bool hasTypes(std::shared_ptr<org.eclipse.uml2.uml.Classifier> type) = 0;
+			virtual bool hasTypes(std::shared_ptr<uml::Classifier> type) = 0;
 			
 			 
 			virtual std::string objectId() = 0;
 			
 			 
-			virtual std::shared_ptr<org.eclipse.uml2.uml.ValueSpecification> specify() = 0;
+			virtual std::shared_ptr<uml::ValueSpecification> specify() = 0;
 			
 			 
 			virtual std::string toString() = 0;
@@ -137,7 +125,7 @@ namespace fUML::Semantics::Values
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

@@ -38,21 +38,18 @@
 #include <exception> // used in Persistence
 
 #include "fUML/Semantics/Values/Evaluation.hpp"
-
 #include "fUML/Semantics/Loci/Locus.hpp"
-
 #include "fUML/Semantics/Values/Value.hpp"
-
 #include "uml/ValueSpecification.hpp"
 
 //Factories an Package includes
 #include "PSCS/Semantics/Values/impl/ValuesFactoryImpl.hpp"
 #include "PSCS/Semantics/Values/impl/ValuesPackageImpl.hpp"
 
-#include "PSCS/Semantics/SemanticsFactory.hpp"
-#include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "PSCS/PSCSFactory.hpp"
 #include "PSCS/PSCSPackage.hpp"
+#include "PSCS/Semantics/SemanticsFactory.hpp"
+#include "PSCS/Semantics/SemanticsPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -251,7 +248,7 @@ void CS_OpaqueExpressionEvaluationImpl::loadNode(std::string nodeName, std::shar
 	fUML::Semantics::Values::EvaluationImpl::loadNode(nodeName, loadHandler);
 }
 
-void CS_OpaqueExpressionEvaluationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void CS_OpaqueExpressionEvaluationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	fUML::Semantics::Values::EvaluationImpl::resolveReferences(featureID, references);
 }

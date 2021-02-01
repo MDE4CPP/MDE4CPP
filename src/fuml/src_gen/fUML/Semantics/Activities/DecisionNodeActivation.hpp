@@ -7,21 +7,17 @@
 #ifndef FUML_SEMANTICS_ACTIVITIES_DECISIONNODEACTIVATION_HPP
 #define FUML_SEMANTICS_ACTIVITIES_DECISIONNODEACTIVATION_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T> class Bag; 
 
 
-
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -64,31 +60,12 @@ namespace uml
 // enum includes
 
 
-//Includes from codegen annotation
-#include "abstractDataTypes/Subset.hpp"
-#include "fUML/Semantics/Loci/Executor.hpp"
-#include "fUML/Semantics/Loci/ExecutionFactory.hpp"
-#include "fUML/Semantics/Loci/Locus.hpp"
-#include "fUML/Semantics/Activities/ObjectToken.hpp"
-#include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
-#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
-#include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
-#include "fUML/Semantics/Activities/Token.hpp"
-#include "fUML/Semantics/Values/Value.hpp"
-#include "uml/ActivityEdge.hpp"
-#include "uml/Behavior.hpp"
-#include "uml/DecisionNode.hpp"
-#include "uml/ObjectFlow.hpp"
-#include "uml/Parameter.hpp"
-#include "uml/ParameterDirectionKind.hpp"
-#include "uml/umlFactory.hpp"
-#include "uml/ValueSpecification.hpp"
 
 //*********************************
 namespace fUML::Semantics::Activities 
 {
 	
-	class DecisionNodeActivation:virtual public ControlNodeActivation
+	class DecisionNodeActivation: virtual public ControlNodeActivation
 	{
 		public:
  			DecisionNodeActivation(const DecisionNodeActivation &) {}
@@ -96,7 +73,6 @@ namespace fUML::Semantics::Activities
 
 		protected:
 			DecisionNodeActivation(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -111,7 +87,7 @@ namespace fUML::Semantics::Activities
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> executeDecisionInputBehavior(std::shared_ptr<fUML::Semantics::Values::Value> inputValue,std::shared_ptr<fUML::Semantics::Values::Value> decisionInputValue) = 0;
 			
 			 
-			virtual void fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > incomingTokens) = 0;
+			virtual void fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incomingTokens) = 0;
 			
 			 
 			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> getDecisionInputFlowInstance() = 0;
@@ -120,7 +96,7 @@ namespace fUML::Semantics::Activities
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> getDecisionInputFlowValue() = 0;
 			
 			 
-			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value> > getDecisionValues(std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > incomingTokens) = 0;
+			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value> > getDecisionValues(std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incomingTokens) = 0;
 			
 			 
 			virtual bool hasObjectFlowInput() = 0;
@@ -129,7 +105,7 @@ namespace fUML::Semantics::Activities
 			virtual bool isReady() = 0;
 			
 			 
-			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > removeJoinedControlTokens(std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > incomingTokens) = 0;
+			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > removeJoinedControlTokens(std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incomingTokens) = 0;
 			
 			 
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > takeOfferedTokens() = 0;
@@ -138,7 +114,7 @@ namespace fUML::Semantics::Activities
 			virtual void terminate() = 0;
 			
 			 
-			virtual bool test(std::shared_ptr<org.eclipse.uml2.uml.ValueSpecification> gaurd,std::shared_ptr<fUML::Semantics::Values::Value> value) = 0;
+			virtual bool test(std::shared_ptr<uml::ValueSpecification> gaurd,std::shared_ptr<fUML::Semantics::Values::Value> value) = 0;
 			
 			
 			//*********************************
@@ -155,15 +131,14 @@ namespace fUML::Semantics::Activities
 			virtual void setDecisionInputExecution(std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> _decisionInputExecution) = 0;
 			
 			
-			virtual std::shared_ptr<org.eclipse.uml2.uml.DecisionNode > getDecisionNode() const = 0;
+			virtual std::shared_ptr<uml::DecisionNode > getDecisionNode() const = 0;
 			
 			
-			virtual void setDecisionNode(std::shared_ptr<org.eclipse.uml2.uml.DecisionNode> _decisionNode) = 0;
+			virtual void setDecisionNode(std::shared_ptr<uml::DecisionNode> _decisionNode) = 0;
 			
 			/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'decisionNode'*/
 			
-			virtual void setNode(std::shared_ptr<org.eclipse.uml2.uml.ActivityNode> _node) = 0;
-			
+			virtual void setNode(std::shared_ptr<uml::ActivityNode> _node) = 0;
 			
 
 		protected:
@@ -177,7 +152,7 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			
 			std::shared_ptr<fUML::Semantics::CommonBehavior::Execution > m_decisionInputExecution;
-			std::shared_ptr<org.eclipse.uml2.uml.DecisionNode > m_decisionNode;
+			std::shared_ptr<uml::DecisionNode > m_decisionNode;
 
 		public:
 			//*********************************
@@ -192,7 +167,7 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

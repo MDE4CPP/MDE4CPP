@@ -193,7 +193,7 @@ void ChoiceStrategyImpl::loadNode(std::string nodeName, std::shared_ptr<persiste
 	SemanticStrategyImpl::loadNode(nodeName, loadHandler);
 }
 
-void ChoiceStrategyImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ChoiceStrategyImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	SemanticStrategyImpl::resolveReferences(featureID, references);
 }

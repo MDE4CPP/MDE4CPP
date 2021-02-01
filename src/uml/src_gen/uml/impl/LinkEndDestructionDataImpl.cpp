@@ -34,15 +34,10 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/InputPin.hpp"
-
 #include "uml/LinkEndData.hpp"
-
 #include "uml/Property.hpp"
-
 #include "uml/QualifierValue.hpp"
 
 //Factories an Package includes
@@ -135,12 +130,12 @@ std::shared_ptr<ecore::EClass> LinkEndDestructionDataImpl::eStaticClass() const
 /*
 Getter & Setter for attribute isDestroyDuplicates
 */
-bool  LinkEndDestructionDataImpl::getIsDestroyDuplicates() const 
+bool LinkEndDestructionDataImpl::getIsDestroyDuplicates() const 
 {
 	return m_isDestroyDuplicates;
 }
 
-void LinkEndDestructionDataImpl::setIsDestroyDuplicates(bool  _isDestroyDuplicates)
+void LinkEndDestructionDataImpl::setIsDestroyDuplicates(bool _isDestroyDuplicates)
 {
 	m_isDestroyDuplicates = _isDestroyDuplicates;
 } 
@@ -324,7 +319,7 @@ void LinkEndDestructionDataImpl::loadNode(std::string nodeName, std::shared_ptr<
 	LinkEndDataImpl::loadNode(nodeName, loadHandler);
 }
 
-void LinkEndDestructionDataImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void LinkEndDestructionDataImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -371,7 +366,7 @@ void LinkEndDestructionDataImpl::saveContent(std::shared_ptr<persistence::interf
 		}
 
 	// Add references
-		saveHandler->addReference("destroyAt", this->getDestroyAt());		 
+		saveHandler->addReference("destroyAt", this->getDestroyAt()); 
 	}
 	catch (std::exception& e)
 	{

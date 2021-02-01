@@ -34,61 +34,33 @@
 #include <exception> // used in Persistence
 
 #include "uml/Behavior.hpp"
-
 #include "uml/BehavioredClassifier.hpp"
-
 #include "uml/Classifier.hpp"
-
 #include "uml/CollaborationUse.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/ConnectableElement.hpp"
-
 #include "uml/Connector.hpp"
-
 #include "uml/Constraint.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/ElementImport.hpp"
-
 #include "uml/Feature.hpp"
-
 #include "uml/Generalization.hpp"
-
 #include "uml/GeneralizationSet.hpp"
-
 #include "uml/InterfaceRealization.hpp"
-
 #include "uml/NamedElement.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/Package.hpp"
-
 #include "uml/PackageImport.hpp"
-
 #include "uml/PackageableElement.hpp"
-
 #include "uml/Property.hpp"
-
 #include "uml/RedefinableElement.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/StructuredClassifier.hpp"
-
 #include "uml/Substitution.hpp"
-
 #include "uml/TemplateBinding.hpp"
-
 #include "uml/TemplateParameter.hpp"
-
 #include "uml/TemplateSignature.hpp"
-
 #include "uml/UseCase.hpp"
 
 //Factories an Package includes
@@ -676,7 +648,7 @@ bool CollaborationImpl::eSet(int featureID, Any newValue)
 				}
 				iterCollaborationRole++;
 			}
-
+ 
 			iterCollaborationRole = collaborationRoleList->begin();
 			endCollaborationRole = collaborationRoleList->end();
 			while (iterCollaborationRole != endCollaborationRole)
@@ -755,7 +727,7 @@ void CollaborationImpl::loadNode(std::string nodeName, std::shared_ptr<persisten
 	StructuredClassifierImpl::loadNode(nodeName, loadHandler);
 }
 
-void CollaborationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void CollaborationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -817,7 +789,7 @@ void CollaborationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	// Add references
-		saveHandler->addReferences<uml::ConnectableElement>("collaborationRole", this->getCollaborationRole());	
+		saveHandler->addReferences<uml::ConnectableElement>("collaborationRole", this->getCollaborationRole());
 	}
 	catch (std::exception& e)
 	{

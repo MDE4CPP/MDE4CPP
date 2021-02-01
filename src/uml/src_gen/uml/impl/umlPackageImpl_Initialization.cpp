@@ -5630,6 +5630,23 @@ void umlPackageImpl::initializeClassifierContent()
 	m_classifier_Operation_getOperations->setOrdered(false);
 	
 	
+	m_classifier_Operation_getPropertyValue_String->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
+	m_classifier_Operation_getPropertyValue_String->setName("getPropertyValue");
+	m_classifier_Operation_getPropertyValue_String->setLowerBound(0);
+	m_classifier_Operation_getPropertyValue_String->setUpperBound(1);
+	m_classifier_Operation_getPropertyValue_String->setUnique(true);
+	m_classifier_Operation_getPropertyValue_String->setOrdered(false);
+	
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_classifier_Operation_getPropertyValue_String);
+		parameter->setName("propertyName");
+		parameter->setEType(types::typesPackage::eInstance()->getString_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
+	
 	m_classifier_Operation_getUsedInterfaces->setEType(getInterface_Class());
 	m_classifier_Operation_getUsedInterfaces->setName("getUsedInterfaces");
 	m_classifier_Operation_getUsedInterfaces->setLowerBound(0);

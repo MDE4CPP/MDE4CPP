@@ -8,23 +8,19 @@
 #define UML_STATE_HPP
 
 #include <map>
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T, class ... U> class Subset;
-
 
 class AnyObject;
 typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -61,16 +57,13 @@ namespace uml
 
 // base class includes
 #include "uml/Namespace.hpp"
-
 #include "uml/RedefinableElement.hpp"
-
 #include "uml/Vertex.hpp"
 
 // enum includes
 #include "uml/VisibilityKind.hpp"
 
 
-//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -80,7 +73,7 @@ namespace uml
 	<p>From package UML::StateMachines.</p>
 	*/
 	
-	class State:virtual public Namespace,virtual public RedefinableElement,virtual public Vertex
+	class State: virtual public Namespace, virtual public RedefinableElement, virtual public Vertex
 	{
 		public:
  			State(const State &) {}
@@ -88,7 +81,6 @@ namespace uml
 
 		protected:
 			State(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -190,34 +182,22 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			 
-			virtual bool  getIsComposite() const = 0;
-			
-			
-			/*!
+			virtual bool getIsComposite() const = 0;/*!
 			A State with isOrthogonal=true is said to be an orthogonal composite State An orthogonal composite State contains two or more Regions.
 			<p>From package UML::StateMachines.</p>
 			*/
 			 
-			virtual bool  getIsOrthogonal() const = 0;
-			
-			
-			/*!
+			virtual bool getIsOrthogonal() const = 0;/*!
 			A State with isSimple=true is said to be a simple State A simple State does not have any Regions and it does not refer to any submachine StateMachine.
 			<p>From package UML::StateMachines.</p>
 			*/
 			 
-			virtual bool  getIsSimple() const = 0;
-			
-			
-			/*!
+			virtual bool getIsSimple() const = 0;/*!
 			A State with isSubmachineState=true is said to be a submachine State Such a State refers to another StateMachine(submachine).
 			<p>From package UML::StateMachines.</p>
 			*/
 			 
-			virtual bool  getIsSubmachineState() const = 0;
-			
-			
-			
+			virtual bool getIsSubmachineState() const = 0;
 			//*********************************
 			// Reference
 			//*********************************
@@ -348,25 +328,25 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			 
-			bool  m_isComposite = false;
+			bool m_isComposite = false;
 			/*!
 			A State with isOrthogonal=true is said to be an orthogonal composite State An orthogonal composite State contains two or more Regions.
 			<p>From package UML::StateMachines.</p>
 			*/
 			 
-			bool  m_isOrthogonal = false;
+			bool m_isOrthogonal = false;
 			/*!
 			A State with isSimple=true is said to be a simple State A simple State does not have any Regions and it does not refer to any submachine StateMachine.
 			<p>From package UML::StateMachines.</p>
 			*/
 			 
-			bool  m_isSimple = true;
+			bool m_isSimple = true;
 			/*!
 			A State with isSubmachineState=true is said to be a submachine State Such a State refers to another StateMachine(submachine).
 			<p>From package UML::StateMachines.</p>
 			*/
 			 
-			bool  m_isSubmachineState = false;
+			bool m_isSubmachineState = false;
 			
 			
 			//*********************************
@@ -467,7 +447,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

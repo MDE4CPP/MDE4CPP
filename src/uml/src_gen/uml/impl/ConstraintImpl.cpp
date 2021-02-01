@@ -35,21 +35,13 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/Package.hpp"
-
 #include "uml/PackageableElement.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/TemplateParameter.hpp"
-
 #include "uml/ValueSpecification.hpp"
 
 //Factories an Package includes
@@ -398,7 +390,7 @@ bool ConstraintImpl::eSet(int featureID, Any newValue)
 				}
 				iterConstrainedElement++;
 			}
-
+ 
 			iterConstrainedElement = constrainedElementList->begin();
 			endConstrainedElement = constrainedElementList->end();
 			while (iterConstrainedElement != endConstrainedElement)
@@ -511,7 +503,7 @@ void ConstraintImpl::loadNode(std::string nodeName, std::shared_ptr<persistence:
 	PackageableElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void ConstraintImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ConstraintImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -577,7 +569,7 @@ void ConstraintImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 		}
 
 	// Add references
-		saveHandler->addReferences<uml::Element>("constrainedElement", this->getConstrainedElement());	
+		saveHandler->addReferences<uml::Element>("constrainedElement", this->getConstrainedElement());
 	}
 	catch (std::exception& e)
 	{

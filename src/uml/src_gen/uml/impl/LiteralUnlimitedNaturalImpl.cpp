@@ -34,25 +34,15 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/LiteralSpecification.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/Package.hpp"
-
 #include "uml/Slot.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/TemplateParameter.hpp"
-
 #include "uml/Type.hpp"
-
 #include "uml/ValueSpecificationAction.hpp"
 
 //Factories an Package includes
@@ -198,12 +188,12 @@ std::shared_ptr<ecore::EClass> LiteralUnlimitedNaturalImpl::eStaticClass() const
 /*
 Getter & Setter for attribute value
 */
-int  LiteralUnlimitedNaturalImpl::getValue() const 
+int LiteralUnlimitedNaturalImpl::getValue() const 
 {
 	return m_value;
 }
 
-void LiteralUnlimitedNaturalImpl::setValue(int  _value)
+void LiteralUnlimitedNaturalImpl::setValue(int _value)
 {
 	m_value = _value;
 } 
@@ -398,7 +388,7 @@ void LiteralUnlimitedNaturalImpl::loadNode(std::string nodeName, std::shared_ptr
 	LiteralSpecificationImpl::loadNode(nodeName, loadHandler);
 }
 
-void LiteralUnlimitedNaturalImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void LiteralUnlimitedNaturalImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	LiteralSpecificationImpl::resolveReferences(featureID, references);
 }

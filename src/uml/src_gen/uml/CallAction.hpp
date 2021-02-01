@@ -8,23 +8,19 @@
 #define UML_CALLACTION_HPP
 
 #include <map>
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T, class ... U> class Subset;
-
 
 class AnyObject;
 typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -68,7 +64,6 @@ namespace uml
 #include "uml/VisibilityKind.hpp"
 
 
-//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -78,7 +73,7 @@ namespace uml
 	<p>From package UML::Actions.</p>
 	*/
 	
-	class CallAction:virtual public InvocationAction
+	class CallAction: virtual public InvocationAction
 	{
 		public:
  			CallAction(const CallAction &) {}
@@ -86,7 +81,6 @@ namespace uml
 
 		protected:
 			CallAction(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -151,15 +145,14 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual bool  getIsSynchronous() const = 0;
+			virtual bool getIsSynchronous() const = 0;
 			
 			/*!
 			If true, the call is synchronous and the caller waits for completion of the invoked Behavior. If false, the call is asynchronous and the caller proceeds immediately and cannot receive return values.
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual void setIsSynchronous (bool  _isSynchronous)= 0; 
-			
+			virtual void setIsSynchronous (bool _isSynchronous)= 0;
 			//*********************************
 			// Reference
 			//*********************************
@@ -182,7 +175,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			bool  m_isSynchronous = true;
+			bool m_isSynchronous = true;
 			
 			
 			//*********************************
@@ -238,7 +231,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

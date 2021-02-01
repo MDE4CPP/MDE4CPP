@@ -35,25 +35,15 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/GeneralOrdering.hpp"
-
 #include "uml/Interaction.hpp"
-
 #include "uml/InteractionFragment.hpp"
-
 #include "uml/InteractionOperand.hpp"
-
 #include "uml/Lifeline.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/OccurrenceSpecification.hpp"
-
 #include "uml/StringExpression.hpp"
 
 //Factories an Package includes
@@ -404,7 +394,7 @@ void ExecutionSpecificationImpl::loadNode(std::string nodeName, std::shared_ptr<
 	InteractionFragmentImpl::loadNode(nodeName, loadHandler);
 }
 
-void ExecutionSpecificationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ExecutionSpecificationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -461,8 +451,8 @@ void ExecutionSpecificationImpl::saveContent(std::shared_ptr<persistence::interf
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	// Add references
-		saveHandler->addReference("finish", this->getFinish());		 
-		saveHandler->addReference("start", this->getStart());		 
+		saveHandler->addReference("finish", this->getFinish()); 
+		saveHandler->addReference("start", this->getStart()); 
 	}
 	catch (std::exception& e)
 	{

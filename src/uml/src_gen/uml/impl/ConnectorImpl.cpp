@@ -35,29 +35,17 @@
 #include <exception> // used in Persistence
 
 #include "uml/Association.hpp"
-
 #include "uml/Behavior.hpp"
-
 #include "uml/Classifier.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/Connector.hpp"
-
 #include "uml/ConnectorEnd.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/Feature.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/RedefinableElement.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/StructuredClassifier.hpp"
 
 //Factories an Package includes
@@ -207,7 +195,7 @@ std::shared_ptr<ecore::EClass> ConnectorImpl::eStaticClass() const
 /*
 Getter & Setter for attribute kind
 */
-uml::ConnectorKind  ConnectorImpl::getKind() const 
+uml::ConnectorKind ConnectorImpl::getKind() const 
 {
 	return m_kind;
 }
@@ -525,7 +513,7 @@ bool ConnectorImpl::eSet(int featureID, Any newValue)
 				}
 				iterContract++;
 			}
-
+ 
 			iterContract = contractList->begin();
 			endContract = contractList->end();
 			while (iterContract != endContract)
@@ -561,7 +549,7 @@ bool ConnectorImpl::eSet(int featureID, Any newValue)
 				}
 				iterEnd++;
 			}
-
+ 
 			iterEnd = endList->begin();
 			endEnd = endList->end();
 			while (iterEnd != endEnd)
@@ -597,7 +585,7 @@ bool ConnectorImpl::eSet(int featureID, Any newValue)
 				}
 				iterRedefinedConnector++;
 			}
-
+ 
 			iterRedefinedConnector = redefinedConnectorList->begin();
 			endRedefinedConnector = redefinedConnectorList->end();
 			while (iterRedefinedConnector != endRedefinedConnector)
@@ -722,7 +710,7 @@ void ConnectorImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::
 	FeatureImpl::loadNode(nodeName, loadHandler);
 }
 
-void ConnectorImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ConnectorImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -815,9 +803,9 @@ void ConnectorImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 		}
 
 	// Add references
-		saveHandler->addReferences<uml::Behavior>("contract", this->getContract());	
-		saveHandler->addReferences<uml::Connector>("redefinedConnector", this->getRedefinedConnector());	
-		saveHandler->addReference("type", this->getType());		 
+		saveHandler->addReferences<uml::Behavior>("contract", this->getContract());
+		saveHandler->addReferences<uml::Connector>("redefinedConnector", this->getRedefinedConnector());
+		saveHandler->addReference("type", this->getType()); 
 	}
 	catch (std::exception& e)
 	{

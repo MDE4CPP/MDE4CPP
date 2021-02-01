@@ -35,45 +35,25 @@
 #include <exception> // used in Persistence
 
 #include "uml/Activity.hpp"
-
 #include "uml/ActivityEdge.hpp"
-
 #include "uml/ActivityGroup.hpp"
-
 #include "uml/ActivityNode.hpp"
-
 #include "uml/ActivityPartition.hpp"
-
 #include "uml/Classifier.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/Constraint.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/ExceptionHandler.hpp"
-
 #include "uml/InputPin.hpp"
-
 #include "uml/InterruptibleActivityRegion.hpp"
-
 #include "uml/InvocationAction.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/OutputPin.hpp"
-
 #include "uml/Parameter.hpp"
-
 #include "uml/Port.hpp"
-
 #include "uml/RedefinableElement.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/StructuredActivityNode.hpp"
 
 //Factories an Package includes
@@ -286,12 +266,12 @@ std::shared_ptr<ecore::EClass> CallActionImpl::eStaticClass() const
 /*
 Getter & Setter for attribute isSynchronous
 */
-bool  CallActionImpl::getIsSynchronous() const 
+bool CallActionImpl::getIsSynchronous() const 
 {
 	return m_isSynchronous;
 }
 
-void CallActionImpl::setIsSynchronous(bool  _isSynchronous)
+void CallActionImpl::setIsSynchronous(bool _isSynchronous)
 {
 	m_isSynchronous = _isSynchronous;
 } 
@@ -503,17 +483,6 @@ Any CallActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::CALLACTION_ATTRIBUTE_RESULT:
 		{
 			return eAny(getResult()); //2830			
-			/*
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::OutputPin>::iterator iter = m_result->begin();
-			Bag<uml::OutputPin>::iterator end = m_result->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //2830
-			*/
 		}
 	}
 	return InvocationActionImpl::eGet(featureID, resolve, coreType);
@@ -563,7 +532,7 @@ bool CallActionImpl::eSet(int featureID, Any newValue)
 				}
 				iterResult++;
 			}
-
+ 
 			iterResult = resultList->begin();
 			endResult = resultList->end();
 			while (iterResult != endResult)
@@ -660,7 +629,7 @@ void CallActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence:
 	InvocationActionImpl::loadNode(nodeName, loadHandler);
 }
 
-void CallActionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void CallActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	InvocationActionImpl::resolveReferences(featureID, references);
 }

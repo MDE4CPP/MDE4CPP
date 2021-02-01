@@ -34,23 +34,14 @@
 #include <exception> // used in Persistence
 
 #include "uml/Abstraction.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/NamedElement.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/OpaqueExpression.hpp"
-
 #include "uml/Package.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/TemplateParameter.hpp"
 
 //Factories an Package includes
@@ -383,7 +374,7 @@ void RealizationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence
 	AbstractionImpl::loadNode(nodeName, loadHandler);
 }
 
-void RealizationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void RealizationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	AbstractionImpl::resolveReferences(featureID, references);
 }

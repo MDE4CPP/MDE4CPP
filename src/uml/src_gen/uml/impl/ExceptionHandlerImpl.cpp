@@ -34,13 +34,9 @@
 #include <exception> // used in Persistence
 
 #include "uml/Classifier.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/ExecutableNode.hpp"
-
 #include "uml/ObjectNode.hpp"
 
 //Factories an Package includes
@@ -361,7 +357,7 @@ bool ExceptionHandlerImpl::eSet(int featureID, Any newValue)
 				}
 				iterExceptionType++;
 			}
-
+ 
 			iterExceptionType = exceptionTypeList->begin();
 			endExceptionType = exceptionTypeList->end();
 			while (iterExceptionType != endExceptionType)
@@ -461,7 +457,7 @@ void ExceptionHandlerImpl::loadNode(std::string nodeName, std::shared_ptr<persis
 	ElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void ExceptionHandlerImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ExceptionHandlerImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -538,9 +534,9 @@ void ExceptionHandlerImpl::saveContent(std::shared_ptr<persistence::interfaces::
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	// Add references
-		saveHandler->addReference("exceptionInput", this->getExceptionInput());		 
-		saveHandler->addReferences<uml::Classifier>("exceptionType", this->getExceptionType());	
-		saveHandler->addReference("handlerBody", this->getHandlerBody());		 
+		saveHandler->addReference("exceptionInput", this->getExceptionInput()); 
+		saveHandler->addReferences<uml::Classifier>("exceptionType", this->getExceptionType());
+		saveHandler->addReference("handlerBody", this->getHandlerBody()); 
 	}
 	catch (std::exception& e)
 	{

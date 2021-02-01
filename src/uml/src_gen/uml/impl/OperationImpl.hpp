@@ -9,7 +9,6 @@
 
 //*********************************
 // generated Includes
-
 //Model includes
 #include "../Operation.hpp"
 
@@ -158,47 +157,34 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual bool  getIsOrdered() const ;
-			
+			virtual bool getIsOrdered() const ;/*!
+			Specifies whether an execution of the BehavioralFeature leaves the state of the system unchanged (isQuery=true) or whether side effects may occur (isQuery=false).
+			<p>From package UML::Classification.</p>
+			*/
+			 
+			virtual bool getIsQuery() const ;
 			
 			/*!
 			Specifies whether an execution of the BehavioralFeature leaves the state of the system unchanged (isQuery=true) or whether side effects may occur (isQuery=false).
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual bool  getIsQuery() const ;
-			
-			/*!
-			Specifies whether an execution of the BehavioralFeature leaves the state of the system unchanged (isQuery=true) or whether side effects may occur (isQuery=false).
-			<p>From package UML::Classification.</p>
-			*/
-			 
-			virtual void setIsQuery (bool  _isQuery); 
-			/*!
+			virtual void setIsQuery (bool _isQuery);/*!
 			Specifies whether the return parameter is unique or not, if present. This information is derived from the return result for this Operation.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual bool  getIsUnique() const ;
-			
-			
-			/*!
+			virtual bool getIsUnique() const ;/*!
 			Specifies the lower multiplicity of the return parameter, if present. This information is derived from the return result for this Operation.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual int  getLower() const ;
-			
-			
-			/*!
+			virtual int getLower() const ;/*!
 			The upper multiplicity of the return parameter, if present. This information is derived from the return result for this Operation.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual int  getUpper() const ;
-			
-			
-			
+			virtual int getUpper() const ;
 			
 			//*********************************
 			// Reference
@@ -351,7 +337,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

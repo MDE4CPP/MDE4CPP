@@ -35,21 +35,13 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/NamedElement.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/Observation.hpp"
-
 #include "uml/Package.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/TemplateParameter.hpp"
 
 //Factories an Package includes
@@ -176,8 +168,7 @@ std::shared_ptr<ecore::EClass> DurationObservationImpl::eStaticClass() const
 /*
 Getter & Setter for attribute firstEvent
 */
- std::shared_ptr<Bag<bool> >
- DurationObservationImpl::isFirstEvent() const 
+std::shared_ptr<Bag<bool>> DurationObservationImpl::isFirstEvent() const 
 {
 	if(m_firstEvent == nullptr)
 	{
@@ -295,17 +286,6 @@ Any DurationObservationImpl::eGet(int featureID, bool resolve, bool coreType) co
 		case uml::umlPackage::DURATIONOBSERVATION_ATTRIBUTE_EVENT:
 		{
 			return eAny(getEvent()); //8012			
-			/*
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::NamedElement>::iterator iter = m_event->begin();
-			Bag<uml::NamedElement>::iterator end = m_event->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //8012
-			*/
 		}
 		case uml::umlPackage::DURATIONOBSERVATION_ATTRIBUTE_FIRSTEVENT:
 			return eAny(isFirstEvent()); //8013
@@ -350,7 +330,7 @@ bool DurationObservationImpl::eSet(int featureID, Any newValue)
 				}
 				iterEvent++;
 			}
-
+ 
 			iterEvent = eventList->begin();
 			endEvent = eventList->end();
 			while (iterEvent != endEvent)
@@ -442,7 +422,7 @@ void DurationObservationImpl::loadNode(std::string nodeName, std::shared_ptr<per
 	ObservationImpl::loadNode(nodeName, loadHandler);
 }
 
-void DurationObservationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void DurationObservationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -501,7 +481,7 @@ void DurationObservationImpl::saveContent(std::shared_ptr<persistence::interface
 		}
 
 	// Add references
-		saveHandler->addReferences<uml::NamedElement>("event", this->getEvent());	
+		saveHandler->addReferences<uml::NamedElement>("event", this->getEvent());
 	}
 	catch (std::exception& e)
 	{

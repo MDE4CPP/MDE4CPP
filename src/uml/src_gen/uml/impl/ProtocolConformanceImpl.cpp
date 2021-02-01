@@ -34,11 +34,8 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
 #include "uml/DirectedRelationship.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/ProtocolStateMachine.hpp"
 
 //Factories an Package includes
@@ -379,7 +376,7 @@ void ProtocolConformanceImpl::loadNode(std::string nodeName, std::shared_ptr<per
 	DirectedRelationshipImpl::loadNode(nodeName, loadHandler);
 }
 
-void ProtocolConformanceImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ProtocolConformanceImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -436,7 +433,7 @@ void ProtocolConformanceImpl::saveContent(std::shared_ptr<persistence::interface
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	// Add references
-		saveHandler->addReference("generalMachine", this->getGeneralMachine());		 
+		saveHandler->addReference("generalMachine", this->getGeneralMachine()); 
 	}
 	catch (std::exception& e)
 	{

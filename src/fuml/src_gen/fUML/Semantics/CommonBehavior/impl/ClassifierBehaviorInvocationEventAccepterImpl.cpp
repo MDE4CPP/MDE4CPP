@@ -36,15 +36,10 @@
 #include <exception> // used in Persistence
 
 #include "uml/Class.hpp"
-
 #include "fUML/Semantics/CommonBehavior/EventAccepter.hpp"
-
 #include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"
-
 #include "fUML/Semantics/CommonBehavior/Execution.hpp"
-
 #include "fUML/Semantics/CommonBehavior/ObjectActivation.hpp"
-
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 
 //Factories an Package includes
@@ -174,13 +169,13 @@ if(this->getExecution() != this->getObjectActivation()->getObject())
 /*
 Getter & Setter for reference classifier
 */
-std::shared_ptr<org.eclipse.uml2.uml.Class > ClassifierBehaviorInvocationEventAccepterImpl::getClassifier() const
+std::shared_ptr<uml::Class > ClassifierBehaviorInvocationEventAccepterImpl::getClassifier() const
 {
 //assert(m_classifier);
     return m_classifier;
 }
 
-void ClassifierBehaviorInvocationEventAccepterImpl::setClassifier(std::shared_ptr<org.eclipse.uml2.uml.Class> _classifier)
+void ClassifierBehaviorInvocationEventAccepterImpl::setClassifier(std::shared_ptr<uml::Class> _classifier)
 {
     m_classifier = _classifier;
 }
@@ -276,7 +271,7 @@ bool ClassifierBehaviorInvocationEventAccepterImpl::eSet(int featureID, Any newV
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<org.eclipse.uml2.uml.Class> _classifier = std::dynamic_pointer_cast<org.eclipse.uml2.uml.Class>(_temp);
+			std::shared_ptr<uml::Class> _classifier = std::dynamic_pointer_cast<uml::Class>(_temp);
 			setClassifier(_classifier); //250
 			return true;
 		}
@@ -367,7 +362,7 @@ void ClassifierBehaviorInvocationEventAccepterImpl::loadNode(std::string nodeNam
 	EventAccepterImpl::loadNode(nodeName, loadHandler);
 }
 
-void ClassifierBehaviorInvocationEventAccepterImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ClassifierBehaviorInvocationEventAccepterImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -376,7 +371,7 @@ void ClassifierBehaviorInvocationEventAccepterImpl::resolveReferences(const int 
 			if (references.size() == 1)
 			{
 				// Cast object to correct type
-				std::shared_ptr<org.eclipse.uml2.uml.Class> _classifier = std::dynamic_pointer_cast<org.eclipse.uml2.uml.Class>( references.front() );
+				std::shared_ptr<uml::Class> _classifier = std::dynamic_pointer_cast<uml::Class>( references.front() );
 				setClassifier(_classifier);
 			}
 			
@@ -427,9 +422,9 @@ void ClassifierBehaviorInvocationEventAccepterImpl::saveContent(std::shared_ptr<
 		std::shared_ptr<fUML::Semantics::CommonBehavior::CommonBehaviorPackage> package = fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance();
 
 	// Add references
-		saveHandler->addReference("classifier", this->getClassifier());		
-		saveHandler->addReference("execution", this->getExecution());		 
-		saveHandler->addReference("objectActivation", this->getObjectActivation());		 
+		saveHandler->addReference("classifier", this->getClassifier()); 
+		saveHandler->addReference("execution", this->getExecution()); 
+		saveHandler->addReference("objectActivation", this->getObjectActivation()); 
 	}
 	catch (std::exception& e)
 	{

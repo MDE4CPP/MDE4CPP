@@ -35,25 +35,15 @@
 #include <exception> // used in Persistence
 
 #include "uml/Classifier.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/RedefinableElement.hpp"
-
 #include "uml/RedefinableTemplateSignature.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/TemplateParameter.hpp"
-
 #include "uml/TemplateSignature.hpp"
-
 #include "uml/TemplateableElement.hpp"
 
 //Factories an Package includes
@@ -488,7 +478,7 @@ bool RedefinableTemplateSignatureImpl::eSet(int featureID, Any newValue)
 				}
 				iterExtendedSignature++;
 			}
-
+ 
 			iterExtendedSignature = extendedSignatureList->begin();
 			endExtendedSignature = extendedSignatureList->end();
 			while (iterExtendedSignature != endExtendedSignature)
@@ -567,7 +557,7 @@ void RedefinableTemplateSignatureImpl::loadNode(std::string nodeName, std::share
 	TemplateSignatureImpl::loadNode(nodeName, loadHandler);
 }
 
-void RedefinableTemplateSignatureImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void RedefinableTemplateSignatureImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -628,7 +618,7 @@ void RedefinableTemplateSignatureImpl::saveContent(std::shared_ptr<persistence::
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	// Add references
-		saveHandler->addReferences<uml::RedefinableTemplateSignature>("extendedSignature", this->getExtendedSignature());	
+		saveHandler->addReferences<uml::RedefinableTemplateSignature>("extendedSignature", this->getExtendedSignature());
 	}
 	catch (std::exception& e)
 	{

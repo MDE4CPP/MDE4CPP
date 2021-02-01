@@ -35,13 +35,9 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
 #include "uml/DirectedRelationship.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/Package.hpp"
 
 //Factories an Package includes
@@ -140,12 +136,12 @@ std::shared_ptr<ecore::EClass> PackageImportImpl::eStaticClass() const
 /*
 Getter & Setter for attribute visibility
 */
-uml::VisibilityKind  PackageImportImpl::getVisibility() const 
+uml::VisibilityKind PackageImportImpl::getVisibility() const 
 {
 	return m_visibility;
 }
 
-void PackageImportImpl::setVisibility(uml::VisibilityKind  _visibility)
+void PackageImportImpl::setVisibility(uml::VisibilityKind _visibility)
 {
 	m_visibility = _visibility;
 } 
@@ -389,7 +385,7 @@ void PackageImportImpl::loadAttributes(std::shared_ptr<persistence::interfaces::
 		iter = attr_list.find("visibility");
 		if ( iter != attr_list.end() )
 		{
-			uml::VisibilityKind  value = VisibilityKind::PUBLIC;
+			uml::VisibilityKind value = VisibilityKind::PUBLIC;
 			std::string literal = iter->second;
 			if (literal == "public")
 			{
@@ -437,7 +433,7 @@ void PackageImportImpl::loadNode(std::string nodeName, std::shared_ptr<persisten
 	DirectedRelationshipImpl::loadNode(nodeName, loadHandler);
 }
 
-void PackageImportImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void PackageImportImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -495,7 +491,7 @@ void PackageImportImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 		// Add attributes
 		if ( this->eIsSet(package->getPackageImport_Attribute_visibility()) )
 		{
-			uml::VisibilityKind  value = this->getVisibility();
+			uml::VisibilityKind value = this->getVisibility();
 			std::string literal = "";
 			if (value == VisibilityKind::PUBLIC)
 			{
@@ -517,7 +513,7 @@ void PackageImportImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 		}
 
 	// Add references
-		saveHandler->addReference("importedPackage", this->getImportedPackage());		 
+		saveHandler->addReference("importedPackage", this->getImportedPackage()); 
 	}
 	catch (std::exception& e)
 	{

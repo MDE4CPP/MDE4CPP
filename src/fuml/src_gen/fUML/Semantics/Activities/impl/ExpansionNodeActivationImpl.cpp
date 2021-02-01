@@ -34,15 +34,10 @@
 #include <exception> // used in Persistence
 
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
-
 #include "uml/ActivityNode.hpp"
-
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
-
 #include "fUML/Semantics/Activities/ExpansionRegionActivation.hpp"
-
 #include "fUML/Semantics/Activities/ObjectNodeActivation.hpp"
-
 #include "fUML/Semantics/Activities/Token.hpp"
 
 //Factories an Package includes
@@ -135,7 +130,7 @@ std::shared_ptr<ecore::EClass> ExpansionNodeActivationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-void ExpansionNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > incomingTokens)
+void ExpansionNodeActivationImpl::fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incomingTokens)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -268,7 +263,7 @@ void ExpansionNodeActivationImpl::loadNode(std::string nodeName, std::shared_ptr
 	ObjectNodeActivationImpl::loadNode(nodeName, loadHandler);
 }
 
-void ExpansionNodeActivationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ExpansionNodeActivationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	ObjectNodeActivationImpl::resolveReferences(featureID, references);
 }

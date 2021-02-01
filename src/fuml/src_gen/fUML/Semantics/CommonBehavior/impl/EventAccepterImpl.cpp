@@ -189,7 +189,7 @@ void EventAccepterImpl::loadNode(std::string nodeName, std::shared_ptr<persisten
 	//load BasePackage Nodes
 }
 
-void EventAccepterImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void EventAccepterImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	ecore::EObjectImpl::resolveReferences(featureID, references);
 }

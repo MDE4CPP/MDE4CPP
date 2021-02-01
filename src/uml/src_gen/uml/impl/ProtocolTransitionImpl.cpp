@@ -35,39 +35,22 @@
 #include <exception> // used in Persistence
 
 #include "uml/Behavior.hpp"
-
 #include "uml/Classifier.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/Constraint.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/ElementImport.hpp"
-
 #include "uml/NamedElement.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/Operation.hpp"
-
 #include "uml/PackageImport.hpp"
-
 #include "uml/PackageableElement.hpp"
-
 #include "uml/RedefinableElement.hpp"
-
 #include "uml/Region.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/Transition.hpp"
-
 #include "uml/Trigger.hpp"
-
 #include "uml/Vertex.hpp"
 
 //Factories an Package includes
@@ -473,17 +456,6 @@ Any ProtocolTransitionImpl::eGet(int featureID, bool resolve, bool coreType) con
 		case uml::umlPackage::PROTOCOLTRANSITION_ATTRIBUTE_REFERRED:
 		{
 			return eAny(getReferred()); //18828			
-			/*
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Operation>::iterator iter = m_referred->begin();
-			Bag<uml::Operation>::iterator end = m_referred->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //18828
-			*/
 		}
 	}
 	return TransitionImpl::eGet(featureID, resolve, coreType);
@@ -585,7 +557,7 @@ void ProtocolTransitionImpl::loadNode(std::string nodeName, std::shared_ptr<pers
 	TransitionImpl::loadNode(nodeName, loadHandler);
 }
 
-void ProtocolTransitionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ProtocolTransitionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -646,8 +618,8 @@ void ProtocolTransitionImpl::saveContent(std::shared_ptr<persistence::interfaces
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	// Add references
-		saveHandler->addReference("postCondition", this->getPostCondition());		 
-		saveHandler->addReference("preCondition", this->getPreCondition());		 
+		saveHandler->addReference("postCondition", this->getPostCondition()); 
+		saveHandler->addReference("preCondition", this->getPreCondition()); 
 	}
 	catch (std::exception& e)
 	{

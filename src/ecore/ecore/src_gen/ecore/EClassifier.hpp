@@ -7,22 +7,18 @@
 #ifndef ECORE_ECLASSIFIER_HPP
 #define ECORE_ECLASSIFIER_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
 #include "abstractDataTypes/Any.hpp"
-
 // forward declarations
 template<class T> class Bag; 
 
 
-
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -51,13 +47,12 @@ namespace ecore
 // enum includes
 
 
-//Includes from codegen annotation
 
 //*********************************
 namespace ecore 
 {
 	
-	class EClassifier:virtual public ENamedElement
+	class EClassifier: virtual public ENamedElement
 	{
 		public:
  			EClassifier(const EClassifier &) {}
@@ -66,13 +61,10 @@ namespace ecore
 		protected:
 			EClassifier(){}
 
-
 			//Additional constructors for the containments back reference
-
 			EClassifier(std::weak_ptr<ecore::EObject > par_eContainer);
 
 			//Additional constructors for the containments back reference
-
 			EClassifier(std::weak_ptr<ecore::EPackage > par_ePackage);
 
 		public:
@@ -94,26 +86,16 @@ namespace ecore
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			 
-			virtual Any  getDefaultValue() const = 0;
+			virtual Any getDefaultValue() const = 0;
 			
 			 
-			virtual void setDefaultValue (Any  _defaultValue)= 0; 
-			 
-			virtual void *  getInstanceClass() const = 0;
-			
+			virtual void setDefaultValue (Any _defaultValue)= 0;virtual void * getInstanceClass() const = 0;virtual std::string getInstanceClassName() const = 0;
 			
 			 
-			virtual std::string  getInstanceClassName() const = 0;
+			virtual void setInstanceClassName (std::string _instanceClassName)= 0;virtual std::string getInstanceTypeName() const = 0;
 			
 			 
-			virtual void setInstanceClassName (std::string  _instanceClassName)= 0; 
-			 
-			virtual std::string  getInstanceTypeName() const = 0;
-			
-			 
-			virtual void setInstanceTypeName (std::string  _instanceTypeName)= 0; 
-			
+			virtual void setInstanceTypeName (std::string _instanceTypeName)= 0;
 			//*********************************
 			// Reference
 			//*********************************
@@ -132,13 +114,13 @@ namespace ecore
 			// Attribute Members
 			//*********************************
 			 
-			Any  m_defaultValue = nullptr;
+			Any m_defaultValue = nullptr;
 			 
-			void *  m_instanceClass = nullptr;
+			void * m_instanceClass = nullptr;
 			 
-			std::string  m_instanceClassName = "";
+			std::string m_instanceClassName = "";
 			 
-			std::string  m_instanceTypeName = "";
+			std::string m_instanceTypeName = "";
 			
 			
 			//*********************************
@@ -162,7 +144,7 @@ namespace ecore
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

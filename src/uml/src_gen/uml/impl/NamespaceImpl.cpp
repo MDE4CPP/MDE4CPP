@@ -35,25 +35,15 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
 #include "uml/Constraint.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/ElementImport.hpp"
-
 #include "uml/NamedElement.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/Package.hpp"
-
 #include "uml/PackageImport.hpp"
-
 #include "uml/PackageableElement.hpp"
-
 #include "uml/StringExpression.hpp"
 
 //Factories an Package includes
@@ -234,7 +224,7 @@ std::shared_ptr<uml::PackageImport> NamespaceImpl::createPackageImport(std::shar
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::PackageableElement> > NamespaceImpl::excludeCollisions(std::shared_ptr<Bag<uml::PackageableElement> > imps)
+std::shared_ptr<Bag<uml::PackageableElement> > NamespaceImpl::excludeCollisions(std::shared_ptr<Bag<uml::PackageableElement>> imps)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -270,7 +260,7 @@ std::shared_ptr<Bag<uml::NamedElement> > NamespaceImpl::getOwnedMembers()
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::PackageableElement> > NamespaceImpl::importMembers(std::shared_ptr<Bag<uml::PackageableElement> > imps)
+std::shared_ptr<Bag<uml::PackageableElement> > NamespaceImpl::importMembers(std::shared_ptr<Bag<uml::PackageableElement>> imps)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -585,7 +575,7 @@ bool NamespaceImpl::eSet(int featureID, Any newValue)
 				}
 				iterElementImport++;
 			}
-
+ 
 			iterElementImport = elementImportList->begin();
 			endElementImport = elementImportList->end();
 			while (iterElementImport != endElementImport)
@@ -621,7 +611,7 @@ bool NamespaceImpl::eSet(int featureID, Any newValue)
 				}
 				iterOwnedRule++;
 			}
-
+ 
 			iterOwnedRule = ownedRuleList->begin();
 			endOwnedRule = ownedRuleList->end();
 			while (iterOwnedRule != endOwnedRule)
@@ -657,7 +647,7 @@ bool NamespaceImpl::eSet(int featureID, Any newValue)
 				}
 				iterPackageImport++;
 			}
-
+ 
 			iterPackageImport = packageImportList->begin();
 			endPackageImport = packageImportList->end();
 			while (iterPackageImport != endPackageImport)
@@ -783,7 +773,7 @@ void NamespaceImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::
 	NamedElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void NamespaceImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void NamespaceImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	NamedElementImpl::resolveReferences(featureID, references);
 }

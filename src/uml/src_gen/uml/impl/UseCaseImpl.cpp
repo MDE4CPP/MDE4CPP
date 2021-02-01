@@ -35,61 +35,33 @@
 #include <exception> // used in Persistence
 
 #include "uml/Behavior.hpp"
-
 #include "uml/BehavioredClassifier.hpp"
-
 #include "uml/Classifier.hpp"
-
 #include "uml/CollaborationUse.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/Constraint.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/ElementImport.hpp"
-
 #include "uml/Extend.hpp"
-
 #include "uml/ExtensionPoint.hpp"
-
 #include "uml/Feature.hpp"
-
 #include "uml/Generalization.hpp"
-
 #include "uml/GeneralizationSet.hpp"
-
 #include "uml/Include.hpp"
-
 #include "uml/InterfaceRealization.hpp"
-
 #include "uml/NamedElement.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/Package.hpp"
-
 #include "uml/PackageImport.hpp"
-
 #include "uml/PackageableElement.hpp"
-
 #include "uml/Property.hpp"
-
 #include "uml/RedefinableElement.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/Substitution.hpp"
-
 #include "uml/TemplateBinding.hpp"
-
 #include "uml/TemplateParameter.hpp"
-
 #include "uml/TemplateSignature.hpp"
-
 #include "uml/UseCase.hpp"
 
 //Factories an Package includes
@@ -764,7 +736,7 @@ bool UseCaseImpl::eSet(int featureID, Any newValue)
 				}
 				iterExtend++;
 			}
-
+ 
 			iterExtend = extendList->begin();
 			endExtend = extendList->end();
 			while (iterExtend != endExtend)
@@ -800,7 +772,7 @@ bool UseCaseImpl::eSet(int featureID, Any newValue)
 				}
 				iterExtensionPoint++;
 			}
-
+ 
 			iterExtensionPoint = extensionPointList->begin();
 			endExtensionPoint = extensionPointList->end();
 			while (iterExtensionPoint != endExtensionPoint)
@@ -836,7 +808,7 @@ bool UseCaseImpl::eSet(int featureID, Any newValue)
 				}
 				iterInclude++;
 			}
-
+ 
 			iterInclude = includeList->begin();
 			endInclude = includeList->end();
 			while (iterInclude != endInclude)
@@ -872,7 +844,7 @@ bool UseCaseImpl::eSet(int featureID, Any newValue)
 				}
 				iterSubject++;
 			}
-
+ 
 			iterSubject = subjectList->begin();
 			endSubject = subjectList->end();
 			while (iterSubject != endSubject)
@@ -997,7 +969,7 @@ void UseCaseImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::in
 	BehavioredClassifierImpl::loadNode(nodeName, loadHandler);
 }
 
-void UseCaseImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void UseCaseImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -1074,7 +1046,7 @@ void UseCaseImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 		}
 
 	// Add references
-		saveHandler->addReferences<uml::Classifier>("subject", this->getSubject());	
+		saveHandler->addReferences<uml::Classifier>("subject", this->getSubject());
 	}
 	catch (std::exception& e)
 	{

@@ -49,39 +49,27 @@
 #include <exception> // used in Persistence
 
 #include "uml/Association.hpp"
-
 #include "PSCS/Semantics/Actions/CS_ConstructStrategy.hpp"
-
 #include "PSCS/Semantics/StructuredClassifiers/CS_Object.hpp"
-
 #include "PSCS/Semantics/StructuredClassifiers/CS_Reference.hpp"
-
 #include "uml/Class.hpp"
-
 #include "uml/Connector.hpp"
-
 #include "uml/ConnectorEnd.hpp"
-
 #include "uml/Interface.hpp"
-
 #include "fUML/Semantics/Loci/Locus.hpp"
-
 #include "fUML/Semantics/StructuredClassifiers/Object.hpp"
-
 #include "uml/Operation.hpp"
-
 #include "uml/Property.hpp"
-
 #include "fUML/Semantics/Values/Value.hpp"
 
 //Factories an Package includes
 #include "PSCS/Semantics/Actions/impl/ActionsFactoryImpl.hpp"
 #include "PSCS/Semantics/Actions/impl/ActionsPackageImpl.hpp"
 
-#include "PSCS/Semantics/SemanticsFactory.hpp"
-#include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "PSCS/PSCSFactory.hpp"
 #include "PSCS/PSCSPackage.hpp"
+#include "PSCS/Semantics/SemanticsFactory.hpp"
+#include "PSCS/Semantics/SemanticsPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -120,15 +108,15 @@ CS_DefaultConstructStrategyImpl::CS_DefaultConstructStrategyImpl(const CS_Defaul
 
 	if(obj.getDefaultAssociation()!=nullptr)
 	{
-		m_defaultAssociation = std::dynamic_pointer_cast<org.eclipse.uml2.uml.Association>(obj.getDefaultAssociation()->copy());
+		m_defaultAssociation = std::dynamic_pointer_cast<uml::Association>(obj.getDefaultAssociation()->copy());
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_defaultAssociation" << std::endl;
 	#endif
-	std::shared_ptr<Bag<org.eclipse.uml2.uml.Class>> _generatedRealizingClassesList = obj.getGeneratedRealizingClasses();
-	for(std::shared_ptr<org.eclipse.uml2.uml.Class> _generatedRealizingClasses : *_generatedRealizingClassesList)
+	std::shared_ptr<Bag<uml::Class>> _generatedRealizingClassesList = obj.getGeneratedRealizingClasses();
+	for(std::shared_ptr<uml::Class> _generatedRealizingClasses : *_generatedRealizingClassesList)
 	{
-		this->getGeneratedRealizingClasses()->add(std::shared_ptr<org.eclipse.uml2.uml.Class>(std::dynamic_pointer_cast<org.eclipse.uml2.uml.Class>(_generatedRealizingClasses->copy())));
+		this->getGeneratedRealizingClasses()->add(std::shared_ptr<uml::Class>(std::dynamic_pointer_cast<uml::Class>(_generatedRealizingClasses->copy())));
 	}
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Copying the Subset: " << "m_generatedRealizingClasses" << std::endl;
@@ -158,7 +146,7 @@ std::shared_ptr<ecore::EClass> CS_DefaultConstructStrategyImpl::eStaticClass() c
 //*********************************
 // Operations
 //*********************************
-void CS_DefaultConstructStrategyImpl::addStructuralFeatureValue(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> context,std::shared_ptr<org.eclipse.uml2.uml.Property> feature,std::shared_ptr<fUML::Semantics::Values::Value> value)
+void CS_DefaultConstructStrategyImpl::addStructuralFeatureValue(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> context,std::shared_ptr<uml::Property> feature,std::shared_ptr<fUML::Semantics::Values::Value> value)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -203,7 +191,7 @@ void CS_DefaultConstructStrategyImpl::addStructuralFeatureValue(std::shared_ptr<
 	//end of body
 }
 
-bool CS_DefaultConstructStrategyImpl::canInstantiate(std::shared_ptr<org.eclipse.uml2.uml.Property> p)
+bool CS_DefaultConstructStrategyImpl::canInstantiate(std::shared_ptr<uml::Property> p)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -229,7 +217,7 @@ bool CS_DefaultConstructStrategyImpl::canInstantiate(std::shared_ptr<org.eclipse
 	//end of body
 }
 
-std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> CS_DefaultConstructStrategyImpl::construct(std::shared_ptr<org.eclipse.uml2.uml.Operation> constructor,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> context)
+std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> CS_DefaultConstructStrategyImpl::construct(std::shared_ptr<uml::Operation> constructor,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> context)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -238,7 +226,7 @@ std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> CS_DefaultConstr
 	//end of body
 }
 
-std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> CS_DefaultConstructStrategyImpl::constructObject(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> context,std::shared_ptr<org.eclipse.uml2.uml.Class> type)
+std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> CS_DefaultConstructStrategyImpl::constructObject(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> context,std::shared_ptr<uml::Class> type)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -334,7 +322,7 @@ std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> CS_DefaultConstr
 	//end of body
 }
 
-void CS_DefaultConstructStrategyImpl::generateArrayPattern(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> context,std::shared_ptr<org.eclipse.uml2.uml.Connector> connector)
+void CS_DefaultConstructStrategyImpl::generateArrayPattern(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> context,std::shared_ptr<uml::Connector> connector)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -367,7 +355,7 @@ void CS_DefaultConstructStrategyImpl::generateArrayPattern(std::shared_ptr<PSCS:
 	//end of body
 }
 
-std::shared_ptr<org.eclipse.uml2.uml.Class> CS_DefaultConstructStrategyImpl::generateRealizingClass(std::shared_ptr<org.eclipse.uml2.uml.Interface> interface_,std::string className)
+std::shared_ptr<uml::Class> CS_DefaultConstructStrategyImpl::generateRealizingClass(std::shared_ptr<uml::Interface> interface_,std::string className)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -383,7 +371,7 @@ std::shared_ptr<org.eclipse.uml2.uml.Class> CS_DefaultConstructStrategyImpl::gen
 	//end of body
 }
 
-void CS_DefaultConstructStrategyImpl::generateStarPattern(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> context,std::shared_ptr<org.eclipse.uml2.uml.Connector> connector)
+void CS_DefaultConstructStrategyImpl::generateStarPattern(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> context,std::shared_ptr<uml::Connector> connector)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -418,7 +406,7 @@ void CS_DefaultConstructStrategyImpl::generateStarPattern(std::shared_ptr<PSCS::
 	//end of body
 }
 
-int CS_DefaultConstructStrategyImpl::getCardinality(std::shared_ptr<org.eclipse.uml2.uml.ConnectorEnd> end)
+int CS_DefaultConstructStrategyImpl::getCardinality(std::shared_ptr<uml::ConnectorEnd> end)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -446,7 +434,7 @@ int CS_DefaultConstructStrategyImpl::getCardinality(std::shared_ptr<org.eclipse.
 	//end of body
 }
 
-std::shared_ptr<org.eclipse.uml2.uml.Association> CS_DefaultConstructStrategyImpl::getDefaultAssociation()
+std::shared_ptr<uml::Association> CS_DefaultConstructStrategyImpl::getDefaultAssociation()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -476,7 +464,7 @@ std::shared_ptr<org.eclipse.uml2.uml.Association> CS_DefaultConstructStrategyImp
 	//end of body
 }
 
-std::shared_ptr<org.eclipse.uml2.uml.Class> CS_DefaultConstructStrategyImpl::getRealizingClass(std::shared_ptr<org.eclipse.uml2.uml.Interface> interface_)
+std::shared_ptr<uml::Class> CS_DefaultConstructStrategyImpl::getRealizingClass(std::shared_ptr<uml::Interface> interface_)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -499,7 +487,7 @@ std::shared_ptr<org.eclipse.uml2.uml.Class> CS_DefaultConstructStrategyImpl::get
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Semantics::Values::Value> > CS_DefaultConstructStrategyImpl::getValuesFromConnectorEnd(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> context,std::shared_ptr<org.eclipse.uml2.uml.ConnectorEnd> end)
+std::shared_ptr<Bag<fUML::Semantics::Values::Value> > CS_DefaultConstructStrategyImpl::getValuesFromConnectorEnd(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> context,std::shared_ptr<uml::ConnectorEnd> end)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -530,7 +518,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value> > CS_DefaultConstructStrateg
 	//end of body
 }
 
-std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> CS_DefaultConstructStrategyImpl::instantiateInterface(std::shared_ptr<org.eclipse.uml2.uml.Interface> interface,std::shared_ptr<fUML::Semantics::Loci::Locus> locus)
+std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> CS_DefaultConstructStrategyImpl::instantiateInterface(std::shared_ptr<uml::Interface> interface,std::shared_ptr<fUML::Semantics::Loci::Locus> locus)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -540,7 +528,7 @@ std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> CS_DefaultConstr
 	//end of body
 }
 
-bool CS_DefaultConstructStrategyImpl::isArrayPattern(std::shared_ptr<org.eclipse.uml2.uml.Connector> c)
+bool CS_DefaultConstructStrategyImpl::isArrayPattern(std::shared_ptr<uml::Connector> c)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -591,7 +579,7 @@ bool CS_DefaultConstructStrategyImpl::isArrayPattern(std::shared_ptr<org.eclipse
 	//end of body
 }
 
-bool CS_DefaultConstructStrategyImpl::isStarPattern(std::shared_ptr<org.eclipse.uml2.uml.Connector> c)
+bool CS_DefaultConstructStrategyImpl::isStarPattern(std::shared_ptr<uml::Connector> c)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -637,13 +625,13 @@ bool CS_DefaultConstructStrategyImpl::isStarPattern(std::shared_ptr<org.eclipse.
 /*
 Getter & Setter for reference defaultAssociation
 */
-std::shared_ptr<org.eclipse.uml2.uml.Association > CS_DefaultConstructStrategyImpl::getDefaultAssociation() const
+std::shared_ptr<uml::Association > CS_DefaultConstructStrategyImpl::getDefaultAssociation() const
 {
 //assert(m_defaultAssociation);
     return m_defaultAssociation;
 }
 
-void CS_DefaultConstructStrategyImpl::setDefaultAssociation(std::shared_ptr<org.eclipse.uml2.uml.Association> _defaultAssociation)
+void CS_DefaultConstructStrategyImpl::setDefaultAssociation(std::shared_ptr<uml::Association> _defaultAssociation)
 {
     m_defaultAssociation = _defaultAssociation;
 }
@@ -653,11 +641,11 @@ void CS_DefaultConstructStrategyImpl::setDefaultAssociation(std::shared_ptr<org.
 /*
 Getter & Setter for reference generatedRealizingClasses
 */
-std::shared_ptr<Bag<org.eclipse.uml2.uml.Class>> CS_DefaultConstructStrategyImpl::getGeneratedRealizingClasses() const
+std::shared_ptr<Bag<uml::Class>> CS_DefaultConstructStrategyImpl::getGeneratedRealizingClasses() const
 {
 	if(m_generatedRealizingClasses == nullptr)
 	{
-		m_generatedRealizingClasses.reset(new Bag<org.eclipse.uml2.uml.Class>());
+		m_generatedRealizingClasses.reset(new Bag<uml::Class>());
 		
 		
 	}
@@ -717,17 +705,6 @@ Any CS_DefaultConstructStrategyImpl::eGet(int featureID, bool resolve, bool core
 		case PSCS::Semantics::Actions::ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_ATTRIBUTE_GENERATEDREALIZINGCLASSES:
 		{
 			return eAny(getGeneratedRealizingClasses()); //102			
-			/*
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<org.eclipse.uml2.uml.Class>::iterator iter = m_generatedRealizingClasses->begin();
-			Bag<org.eclipse.uml2.uml.Class>::iterator end = m_generatedRealizingClasses->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //102
-			*/
 		}
 		case PSCS::Semantics::Actions::ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_ATTRIBUTE_LOCUS:
 			return eAny(getLocus()); //100
@@ -755,7 +732,7 @@ bool CS_DefaultConstructStrategyImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<org.eclipse.uml2.uml.Association> _defaultAssociation = std::dynamic_pointer_cast<org.eclipse.uml2.uml.Association>(_temp);
+			std::shared_ptr<uml::Association> _defaultAssociation = std::dynamic_pointer_cast<uml::Association>(_temp);
 			setDefaultAssociation(_defaultAssociation); //101
 			return true;
 		}
@@ -763,17 +740,17 @@ bool CS_DefaultConstructStrategyImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<org.eclipse.uml2.uml.Class>> generatedRealizingClassesList(new Bag<org.eclipse.uml2.uml.Class>());
+			std::shared_ptr<Bag<uml::Class>> generatedRealizingClassesList(new Bag<uml::Class>());
 			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
 			Bag<ecore::EObject>::iterator end = tempObjectList->end();
 			while (iter != end)
 			{
-				generatedRealizingClassesList->add(std::dynamic_pointer_cast<org.eclipse.uml2.uml.Class>(*iter));
+				generatedRealizingClassesList->add(std::dynamic_pointer_cast<uml::Class>(*iter));
 				iter++;
 			}
 			
-			Bag<org.eclipse.uml2.uml.Class>::iterator iterGeneratedRealizingClasses = m_generatedRealizingClasses->begin();
-			Bag<org.eclipse.uml2.uml.Class>::iterator endGeneratedRealizingClasses = m_generatedRealizingClasses->end();
+			Bag<uml::Class>::iterator iterGeneratedRealizingClasses = m_generatedRealizingClasses->begin();
+			Bag<uml::Class>::iterator endGeneratedRealizingClasses = m_generatedRealizingClasses->end();
 			while (iterGeneratedRealizingClasses != endGeneratedRealizingClasses)
 			{
 				if (generatedRealizingClassesList->find(*iterGeneratedRealizingClasses) == -1)
@@ -782,7 +759,7 @@ bool CS_DefaultConstructStrategyImpl::eSet(int featureID, Any newValue)
 				}
 				iterGeneratedRealizingClasses++;
 			}
-
+ 
 			iterGeneratedRealizingClasses = generatedRealizingClassesList->begin();
 			endGeneratedRealizingClasses = generatedRealizingClassesList->end();
 			while (iterGeneratedRealizingClasses != endGeneratedRealizingClasses)
@@ -865,7 +842,7 @@ void CS_DefaultConstructStrategyImpl::loadNode(std::string nodeName, std::shared
 			{
 				typeName = "Association";
 			}
-			std::shared_ptr<org.eclipse.uml2.uml.Association> defaultAssociation = std::dynamic_pointer_cast<org.eclipse.uml2.uml.Association>(uml::umlFactory::eInstance()->create(typeName));
+			std::shared_ptr<uml::Association> defaultAssociation = std::dynamic_pointer_cast<uml::Association>(uml::umlFactory::eInstance()->create(typeName));
 			if (defaultAssociation != nullptr)
 			{
 				this->setDefaultAssociation(defaultAssociation);
@@ -881,10 +858,10 @@ void CS_DefaultConstructStrategyImpl::loadNode(std::string nodeName, std::shared
 			{
 				typeName = "Class";
 			}
-			std::shared_ptr<org.eclipse.uml2.uml.Class> generatedRealizingClasses = std::dynamic_pointer_cast<org.eclipse.uml2.uml.Class>(uml::umlFactory::eInstance()->create(typeName));
+			std::shared_ptr<uml::Class> generatedRealizingClasses = std::dynamic_pointer_cast<uml::Class>(uml::umlFactory::eInstance()->create(typeName));
 			if (generatedRealizingClasses != nullptr)
 			{
-				std::shared_ptr<Bag<org.eclipse.uml2.uml.Class>> list_generatedRealizingClasses = this->getGeneratedRealizingClasses();
+				std::shared_ptr<Bag<uml::Class>> list_generatedRealizingClasses = this->getGeneratedRealizingClasses();
 				list_generatedRealizingClasses->push_back(generatedRealizingClasses);
 				loadHandler->handleChild(generatedRealizingClasses);
 			}
@@ -903,7 +880,7 @@ void CS_DefaultConstructStrategyImpl::loadNode(std::string nodeName, std::shared
 	CS_ConstructStrategyImpl::loadNode(nodeName, loadHandler);
 }
 
-void CS_DefaultConstructStrategyImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void CS_DefaultConstructStrategyImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -942,22 +919,22 @@ void CS_DefaultConstructStrategyImpl::saveContent(std::shared_ptr<persistence::i
 		std::shared_ptr<PSCS::Semantics::Actions::ActionsPackage> package = PSCS::Semantics::Actions::ActionsPackage::eInstance();
 
 	// Add references
-		saveHandler->addReference("locus", this->getLocus());		 
+		saveHandler->addReference("locus", this->getLocus()); 
 
 		//
 		// Add new tags (from references)
 		//
 		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
 		// Save 'defaultAssociation'
-		std::shared_ptr<org.eclipse.uml2.uml.Association > defaultAssociation = this->getDefaultAssociation();
+		std::shared_ptr<uml::Association > defaultAssociation = this->getDefaultAssociation();
 		if (defaultAssociation != nullptr)
 		{
 			saveHandler->addReference(defaultAssociation, "defaultAssociation", defaultAssociation->eClass() != uml::umlPackage::eInstance()->getAssociation_Class());
 		}
 
 		// Save 'generatedRealizingClasses'
-		std::shared_ptr<Bag<org.eclipse.uml2.uml.Class>> list_generatedRealizingClasses = this->getGeneratedRealizingClasses();
-		for (std::shared_ptr<org.eclipse.uml2.uml.Class> generatedRealizingClasses : *list_generatedRealizingClasses) 
+		std::shared_ptr<Bag<uml::Class>> list_generatedRealizingClasses = this->getGeneratedRealizingClasses();
+		for (std::shared_ptr<uml::Class> generatedRealizingClasses : *list_generatedRealizingClasses) 
 		{
 			saveHandler->addReference(generatedRealizingClasses, "generatedRealizingClasses", generatedRealizingClasses->eClass() !=uml::umlPackage::eInstance()->getClass_Class());
 		}

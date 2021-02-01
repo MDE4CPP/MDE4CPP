@@ -8,23 +8,19 @@
 #define UML_DEPLOYMENTSPECIFICATION_HPP
 
 #include <map>
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T, class ... U> class Subset;
-
 
 class AnyObject;
 typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -71,7 +67,6 @@ namespace uml
 #include "uml/VisibilityKind.hpp"
 
 
-//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -81,7 +76,7 @@ namespace uml
 	<p>From package UML::Deployments.</p>
 	*/
 	
-	class DeploymentSpecification:virtual public Artifact
+	class DeploymentSpecification: virtual public Artifact
 	{
 		public:
  			DeploymentSpecification(const DeploymentSpecification &) {}
@@ -90,29 +85,22 @@ namespace uml
 		protected:
 			DeploymentSpecification(){}
 
-
 			//Additional constructors for the containments back reference
-
 			DeploymentSpecification(std::weak_ptr<uml::Deployment > par_deployment);
 
 			//Additional constructors for the containments back reference
-
 			DeploymentSpecification(std::weak_ptr<uml::Namespace > par_namespace);
 
 			//Additional constructors for the containments back reference
-
 			DeploymentSpecification(std::weak_ptr<uml::Element > par_owner);
 
 			//Additional constructors for the containments back reference
-
 			DeploymentSpecification(std::weak_ptr<uml::Package > par_Package, const int reference_id);
 
 			//Additional constructors for the containments back reference
-
 			DeploymentSpecification(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
 
 			//Additional constructors for the containments back reference
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -146,28 +134,26 @@ namespace uml
 			<p>From package UML::Deployments.</p>
 			*/
 			 
-			virtual std::string  getDeploymentLocation() const = 0;
+			virtual std::string getDeploymentLocation() const = 0;
 			
 			/*!
 			The location where an Artifact is deployed onto a Node. This is typically a 'directory' or 'memory address.'
 			<p>From package UML::Deployments.</p>
 			*/
 			 
-			virtual void setDeploymentLocation (std::string  _deploymentLocation)= 0; 
-			/*!
+			virtual void setDeploymentLocation (std::string _deploymentLocation)= 0;/*!
 			The location where a component Artifact executes. This may be a local or remote location.
 			<p>From package UML::Deployments.</p>
 			*/
 			 
-			virtual std::string  getExecutionLocation() const = 0;
+			virtual std::string getExecutionLocation() const = 0;
 			
 			/*!
 			The location where a component Artifact executes. This may be a local or remote location.
 			<p>From package UML::Deployments.</p>
 			*/
 			 
-			virtual void setExecutionLocation (std::string  _executionLocation)= 0; 
-			
+			virtual void setExecutionLocation (std::string _executionLocation)= 0;
 			//*********************************
 			// Reference
 			//*********************************
@@ -196,13 +182,13 @@ namespace uml
 			<p>From package UML::Deployments.</p>
 			*/
 			 
-			std::string  m_deploymentLocation = "";
+			std::string m_deploymentLocation = "";
 			/*!
 			The location where a component Artifact executes. This may be a local or remote location.
 			<p>From package UML::Deployments.</p>
 			*/
 			 
-			std::string  m_executionLocation = "";
+			std::string m_executionLocation = "";
 			
 			
 			//*********************************
@@ -268,7 +254,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

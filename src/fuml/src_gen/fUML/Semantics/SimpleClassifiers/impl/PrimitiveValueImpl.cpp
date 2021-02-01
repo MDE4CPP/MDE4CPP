@@ -35,9 +35,7 @@
 #include <exception> // used in Persistence
 
 #include "uml/Classifier.hpp"
-
 #include "uml/PrimitiveType.hpp"
-
 #include "fUML/Semantics/Values/Value.hpp"
 
 //Factories an Package includes
@@ -118,7 +116,7 @@ return newValue;
 	//end of body
 }
 
-std::shared_ptr<Bag<org.eclipse.uml2.uml.Classifier> > PrimitiveValueImpl::getTypes()
+std::shared_ptr<Bag<uml::Classifier> > PrimitiveValueImpl::getTypes()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -138,13 +136,13 @@ std::shared_ptr<Bag<org.eclipse.uml2.uml.Classifier> > PrimitiveValueImpl::getTy
 /*
 Getter & Setter for reference type
 */
-std::shared_ptr<org.eclipse.uml2.uml.PrimitiveType > PrimitiveValueImpl::getType() const
+std::shared_ptr<uml::PrimitiveType > PrimitiveValueImpl::getType() const
 {
 //assert(m_type);
     return m_type;
 }
 
-void PrimitiveValueImpl::setType(std::shared_ptr<org.eclipse.uml2.uml.PrimitiveType> _type)
+void PrimitiveValueImpl::setType(std::shared_ptr<uml::PrimitiveType> _type)
 {
     m_type = _type;
 }
@@ -200,7 +198,7 @@ bool PrimitiveValueImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<org.eclipse.uml2.uml.PrimitiveType> _type = std::dynamic_pointer_cast<org.eclipse.uml2.uml.PrimitiveType>(_temp);
+			std::shared_ptr<uml::PrimitiveType> _type = std::dynamic_pointer_cast<uml::PrimitiveType>(_temp);
 			setType(_type); //890
 			return true;
 		}
@@ -261,7 +259,7 @@ void PrimitiveValueImpl::loadNode(std::string nodeName, std::shared_ptr<persiste
 	fUML::Semantics::Values::ValueImpl::loadNode(nodeName, loadHandler);
 }
 
-void PrimitiveValueImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void PrimitiveValueImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -270,7 +268,7 @@ void PrimitiveValueImpl::resolveReferences(const int featureID, std::list<std::s
 			if (references.size() == 1)
 			{
 				// Cast object to correct type
-				std::shared_ptr<org.eclipse.uml2.uml.PrimitiveType> _type = std::dynamic_pointer_cast<org.eclipse.uml2.uml.PrimitiveType>( references.front() );
+				std::shared_ptr<uml::PrimitiveType> _type = std::dynamic_pointer_cast<uml::PrimitiveType>( references.front() );
 				setType(_type);
 			}
 			
@@ -300,7 +298,7 @@ void PrimitiveValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 		std::shared_ptr<fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage> package = fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance();
 
 	// Add references
-		saveHandler->addReference("type", this->getType());		
+		saveHandler->addReference("type", this->getType()); 
 	}
 	catch (std::exception& e)
 	{

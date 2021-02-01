@@ -34,11 +34,8 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/InputPin.hpp"
-
 #include "uml/Property.hpp"
 
 //Factories an Package includes
@@ -322,7 +319,7 @@ void QualifierValueImpl::loadNode(std::string nodeName, std::shared_ptr<persiste
 	ElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void QualifierValueImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void QualifierValueImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -373,8 +370,8 @@ void QualifierValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	// Add references
-		saveHandler->addReference("qualifier", this->getQualifier());		 
-		saveHandler->addReference("value", this->getValue());		 
+		saveHandler->addReference("qualifier", this->getQualifier()); 
+		saveHandler->addReference("value", this->getValue()); 
 	}
 	catch (std::exception& e)
 	{

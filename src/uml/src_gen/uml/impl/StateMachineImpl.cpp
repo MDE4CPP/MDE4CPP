@@ -35,85 +35,45 @@
 #include <exception> // used in Persistence
 
 #include "uml/Behavior.hpp"
-
 #include "uml/BehavioralFeature.hpp"
-
 #include "uml/BehavioredClassifier.hpp"
-
 #include "uml/Class.hpp"
-
 #include "uml/Classifier.hpp"
-
 #include "uml/CollaborationUse.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/ConnectableElement.hpp"
-
 #include "uml/Connector.hpp"
-
 #include "uml/Constraint.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/ElementImport.hpp"
-
 #include "uml/Extension.hpp"
-
 #include "uml/Feature.hpp"
-
 #include "uml/Generalization.hpp"
-
 #include "uml/GeneralizationSet.hpp"
-
 #include "uml/InterfaceRealization.hpp"
-
 #include "uml/NamedElement.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/Operation.hpp"
-
 #include "uml/Package.hpp"
-
 #include "uml/PackageImport.hpp"
-
 #include "uml/PackageableElement.hpp"
-
 #include "uml/Parameter.hpp"
-
 #include "uml/ParameterSet.hpp"
-
 #include "uml/Port.hpp"
-
 #include "uml/Property.hpp"
-
 #include "uml/Pseudostate.hpp"
-
 #include "uml/Reception.hpp"
-
 #include "uml/RedefinableElement.hpp"
-
 #include "uml/Region.hpp"
-
 #include "uml/State.hpp"
-
 #include "uml/StateMachine.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/Substitution.hpp"
-
 #include "uml/TemplateBinding.hpp"
-
 #include "uml/TemplateParameter.hpp"
-
 #include "uml/TemplateSignature.hpp"
-
 #include "uml/UseCase.hpp"
-
 #include "uml/Vertex.hpp"
 
 //Factories an Package includes
@@ -959,7 +919,7 @@ bool StateMachineImpl::eSet(int featureID, Any newValue)
 				}
 				iterConnectionPoint++;
 			}
-
+ 
 			iterConnectionPoint = connectionPointList->begin();
 			endConnectionPoint = connectionPointList->end();
 			while (iterConnectionPoint != endConnectionPoint)
@@ -995,7 +955,7 @@ bool StateMachineImpl::eSet(int featureID, Any newValue)
 				}
 				iterExtendedStateMachine++;
 			}
-
+ 
 			iterExtendedStateMachine = extendedStateMachineList->begin();
 			endExtendedStateMachine = extendedStateMachineList->end();
 			while (iterExtendedStateMachine != endExtendedStateMachine)
@@ -1031,7 +991,7 @@ bool StateMachineImpl::eSet(int featureID, Any newValue)
 				}
 				iterRegion++;
 			}
-
+ 
 			iterRegion = regionList->begin();
 			endRegion = regionList->end();
 			while (iterRegion != endRegion)
@@ -1067,7 +1027,7 @@ bool StateMachineImpl::eSet(int featureID, Any newValue)
 				}
 				iterSubmachineState++;
 			}
-
+ 
 			iterSubmachineState = submachineStateList->begin();
 			endSubmachineState = submachineStateList->end();
 			while (iterSubmachineState != endSubmachineState)
@@ -1184,7 +1144,7 @@ void StateMachineImpl::loadNode(std::string nodeName, std::shared_ptr<persistenc
 	BehaviorImpl::loadNode(nodeName, loadHandler);
 }
 
-void StateMachineImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void StateMachineImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -1279,8 +1239,8 @@ void StateMachineImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 		}
 
 	// Add references
-		saveHandler->addReferences<uml::StateMachine>("extendedStateMachine", this->getExtendedStateMachine());	
-		saveHandler->addReferences<uml::State>("submachineState", this->getSubmachineState());	
+		saveHandler->addReferences<uml::StateMachine>("extendedStateMachine", this->getExtendedStateMachine());
+		saveHandler->addReferences<uml::State>("submachineState", this->getSubmachineState());
 	}
 	catch (std::exception& e)
 	{

@@ -7,20 +7,16 @@
 #ifndef FUML_SEMANTICS_ACTIVITIES_ACTIVITYEXECUTION_HPP
 #define FUML_SEMANTICS_ACTIVITIES_ACTIVITYEXECUTION_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
-
 
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -66,27 +62,12 @@ namespace uml
 // enum includes
 
 
-//Includes from codegen annotation
-#include "abstractDataTypes/SubsetUnion.hpp"
-#include "fUML/Semantics/Activities/ActivityParameterNodeActivation.hpp"
-#include "fUML/Semantics/CommonBehavior/Execution.hpp"
-#include "fUML/Semantics/Activities/ForkedToken.hpp"
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/Semantics/Loci/Locus.hpp"
-#include "fUML/Semantics/StructuredClassifiers/Object.hpp"
-#include "fUML/Semantics/Activities/ObjectToken.hpp"
-#include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
-#include "uml/umlPackage.hpp"
-#include "uml/Activity.hpp"
-#include "uml/ActivityParameterNode.hpp"
-#include "uml/Parameter.hpp"
-#include "uml/ParameterDirectionKind.hpp"
 
 //*********************************
 namespace fUML::Semantics::Activities 
 {
 	
-	class ActivityExecution:virtual public fUML::Semantics::CommonBehavior::Execution
+	class ActivityExecution: virtual public fUML::Semantics::CommonBehavior::Execution
 	{
 		public:
  			ActivityExecution(const ActivityExecution &) {}
@@ -94,7 +75,6 @@ namespace fUML::Semantics::Activities
 
 		protected:
 			ActivityExecution(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -132,15 +112,14 @@ namespace fUML::Semantics::Activities
 			virtual void setActivationGroup(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> _activationGroup) = 0;
 			
 			
-			virtual std::shared_ptr<org.eclipse.uml2.uml.Activity > getActivity() const = 0;
+			virtual std::shared_ptr<uml::Activity > getActivity() const = 0;
 			
 			
-			virtual void setActivity(std::shared_ptr<org.eclipse.uml2.uml.Activity> _activity) = 0;
+			virtual void setActivity(std::shared_ptr<uml::Activity> _activity) = 0;
 			
 			/*Additional Setter for 'Execution::behavior' redefined by reference 'activity'*/
 			
-			virtual void setBehavior(std::shared_ptr<org.eclipse.uml2.uml.Behavior> _behavior) = 0;
-			
+			virtual void setBehavior(std::shared_ptr<uml::Behavior> _behavior) = 0;
 			
 
 		protected:
@@ -154,7 +133,7 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			
 			std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > m_activationGroup;
-			mutable std::shared_ptr<org.eclipse.uml2.uml.Activity > m_activity;
+			mutable std::shared_ptr<uml::Activity > m_activity;
 
 		public:
 			//*********************************
@@ -169,7 +148,7 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

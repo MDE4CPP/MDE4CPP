@@ -34,17 +34,11 @@
 #include <exception> // used in Persistence
 
 #include "ecore/EAnnotation.hpp"
-
 #include "ecore/EClass.hpp"
-
 #include "ecore/EClassifier.hpp"
-
 #include "ecore/EDataType.hpp"
-
 #include "ecore/EGenericType.hpp"
-
 #include "ecore/EObject.hpp"
-
 #include "ecore/EStructuralFeature.hpp"
 
 //Factories an Package includes
@@ -159,12 +153,12 @@ std::shared_ptr<EClass> EAttributeImpl::eStaticClass() const
 /*
 Getter & Setter for attribute iD
 */
-bool  EAttributeImpl::isID() const 
+bool EAttributeImpl::isID() const 
 {
 	return m_iD;
 }
 
-void EAttributeImpl::setID(bool  _iD)
+void EAttributeImpl::setID(bool _iD)
 {
 	m_iD = _iD;
 } 
@@ -330,7 +324,7 @@ void EAttributeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence:
 	EStructuralFeatureImpl::loadNode(nodeName, loadHandler);
 }
 
-void EAttributeImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references)
+void EAttributeImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references)
 {
 	EStructuralFeatureImpl::resolveReferences(featureID, references);
 }

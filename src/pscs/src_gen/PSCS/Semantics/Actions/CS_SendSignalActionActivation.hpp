@@ -7,20 +7,16 @@
 #ifndef PSCS_SEMANTICS_ACTIONS_CS_SENDSIGNALACTIONACTIVATION_HPP
 #define PSCS_SEMANTICS_ACTIONS_CS_SENDSIGNALACTIONACTIVATION_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
-
 
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -60,30 +56,12 @@ namespace uml
 // enum includes
 
 
-//Includes from codegen annotation
-#include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
-
-#include "uml/SendSignalAction.hpp"
-#include "fUML/Semantics/Values/Value.hpp"
-#include "uml/Port.hpp"
-#include "PSCS/Semantics/StructuredClassifiers/CS_Reference.hpp"
-#include "PSCS/Semantics/CommonBehavior/CS_EventOccurrence.hpp"
-#include "PSCS/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
-#include "uml/Signal.hpp"
-#include "uml/Property.hpp"
-#include "uml/InputPin.hpp"
-#include "fUML/Semantics/SimpleClassifiers/SignalInstance.hpp"
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
-#include "PSCS/Semantics/StructuredClassifiers/CS_Object.hpp"
-#include "fUML/Semantics/CommonBehavior/SignalEventOccurrence.hpp"
-#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
-#include "fUML/Semantics/Activities/ActivityExecution.hpp"
 
 //*********************************
 namespace PSCS::Semantics::Actions 
 {
 	
-	class CS_SendSignalActionActivation:virtual public fUML::Semantics::Actions::SendSignalActionActivation
+	class CS_SendSignalActionActivation: virtual public fUML::Semantics::Actions::SendSignalActionActivation
 	{
 		public:
  			CS_SendSignalActionActivation(const CS_SendSignalActionActivation &) {}
@@ -91,7 +69,6 @@ namespace PSCS::Semantics::Actions
 
 		protected:
 			CS_SendSignalActionActivation(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -140,7 +117,7 @@ namespace PSCS::Semantics::Actions
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

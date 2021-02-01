@@ -180,7 +180,7 @@ void FIFOGetNextEventStrategyImpl::loadNode(std::string nodeName, std::shared_pt
 	GetNextEventStrategyImpl::loadNode(nodeName, loadHandler);
 }
 
-void FIFOGetNextEventStrategyImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void FIFOGetNextEventStrategyImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	GetNextEventStrategyImpl::resolveReferences(featureID, references);
 }

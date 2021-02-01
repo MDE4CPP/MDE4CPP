@@ -9,7 +9,6 @@
 
 //*********************************
 // generated Includes
-
 //Model includes
 #include "../ActivityNodeActivation.hpp"
 
@@ -57,7 +56,7 @@ namespace fUML::Semantics::Activities
 			virtual void addToken(std::shared_ptr<fUML::Semantics::Activities::Token> token) ;
 			
 			 
-			virtual void addTokens(std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > tokens) ;
+			virtual void addTokens(std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> tokens) ;
 			
 			 
 			virtual void clearTokens() ;
@@ -69,7 +68,7 @@ namespace fUML::Semantics::Activities
 			virtual void createNodeActivations() ;
 			
 			 
-			virtual void fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > incomingTokens) ;
+			virtual void fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incomingTokens) ;
 			
 			 
 			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> getActivityExecution() ;
@@ -81,7 +80,7 @@ namespace fUML::Semantics::Activities
 			virtual std::shared_ptr<fUML::Semantics::Loci::Locus> getExecutionLocus() ;
 			
 			 
-			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> getNodeActivation(std::shared_ptr<org.eclipse.uml2.uml.ActivityNode> node) ;
+			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> getNodeActivation(std::shared_ptr<uml::ActivityNode> node) ;
 			
 			 
 			virtual bool getRunning() ;
@@ -108,7 +107,7 @@ namespace fUML::Semantics::Activities
 			virtual void run() ;
 			
 			 
-			virtual void sendOffers(std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > tokens) ;
+			virtual void sendOffers(std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> tokens) ;
 			
 			 
 			virtual void suspend() ;
@@ -127,12 +126,10 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			 
-			virtual bool  isRunning() const ;
+			virtual bool isRunning() const ;
 			
 			 
-			virtual void setRunning (bool  _running); 
-			
+			virtual void setRunning (bool _running);
 			
 			//*********************************
 			// Reference
@@ -152,10 +149,10 @@ namespace fUML::Semantics::Activities
 			
 			
 			
-			virtual std::shared_ptr<org.eclipse.uml2.uml.ActivityNode > getNode() const ;
+			virtual std::shared_ptr<uml::ActivityNode > getNode() const ;
 			
 			
-			virtual void setNode(std::shared_ptr<org.eclipse.uml2.uml.ActivityNode> _node) ;
+			virtual void setNode(std::shared_ptr<uml::ActivityNode> _node) ;
 			
 			
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> getOutgoingEdges() const ;
@@ -181,7 +178,7 @@ namespace fUML::Semantics::Activities
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

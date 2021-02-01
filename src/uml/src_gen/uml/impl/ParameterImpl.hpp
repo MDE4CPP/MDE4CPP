@@ -9,7 +9,6 @@
 
 //*********************************
 // generated Includes
-
 //Model includes
 #include "../Parameter.hpp"
 
@@ -159,67 +158,62 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual std::string  getDefault() const ;
+			virtual std::string getDefault() const ;
 			
 			/*!
 			A String that represents a value to be used when no argument is supplied for the Parameter.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual void setDefault (std::string  _default); 
+			virtual void setDefault (std::string _default);/*!
+			Indicates whether a parameter is being sent into or out of a behavioral element.
+			<p>From package UML::Classification.</p>
+			*/
+			 
+			virtual uml::ParameterDirectionKind getDirection() const ;
+			
 			/*!
 			Indicates whether a parameter is being sent into or out of a behavioral element.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual uml::ParameterDirectionKind  getDirection() const ;
-			
-			/*!
-			Indicates whether a parameter is being sent into or out of a behavioral element.
-			<p>From package UML::Classification.</p>
-			*/
-			 
-			virtual void setDirection (uml::ParameterDirectionKind  _direction); 
-			/*!
+			virtual void setDirection (uml::ParameterDirectionKind _direction);/*!
 			Specifies the effect that executions of the owner of the Parameter have on objects passed in or out of the parameter.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual uml::ParameterEffectKind  getEffect() const ;
+			virtual uml::ParameterEffectKind getEffect() const ;
 			
 			/*!
 			Specifies the effect that executions of the owner of the Parameter have on objects passed in or out of the parameter.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual void setEffect (uml::ParameterEffectKind  _effect); 
+			virtual void setEffect (uml::ParameterEffectKind _effect);/*!
+			Tells whether an output parameter may emit a value to the exclusion of the other outputs.
+			<p>From package UML::Classification.</p>
+			*/
+			 
+			virtual bool getIsException() const ;
+			
 			/*!
 			Tells whether an output parameter may emit a value to the exclusion of the other outputs.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual bool  getIsException() const ;
-			
-			/*!
-			Tells whether an output parameter may emit a value to the exclusion of the other outputs.
-			<p>From package UML::Classification.</p>
-			*/
-			 
-			virtual void setIsException (bool  _isException); 
-			/*!
+			virtual void setIsException (bool _isException);/*!
 			Tells whether an input parameter may accept values while its behavior is executing, or whether an output parameter may post values while the behavior is executing.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual bool  getIsStream() const ;
+			virtual bool getIsStream() const ;
 			
 			/*!
 			Tells whether an input parameter may accept values while its behavior is executing, or whether an output parameter may post values while the behavior is executing.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual void setIsStream (bool  _isStream); 
-			
+			virtual void setIsStream (bool _isStream);
 			
 			//*********************************
 			// Reference
@@ -295,7 +289,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

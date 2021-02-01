@@ -34,51 +34,28 @@
 #include <exception> // used in Persistence
 
 #include "uml/Activity.hpp"
-
 #include "uml/ActivityEdge.hpp"
-
 #include "uml/ActivityGroup.hpp"
-
 #include "uml/ActivityNode.hpp"
-
 #include "uml/ActivityPartition.hpp"
-
 #include "uml/Classifier.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/Constraint.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/ElementImport.hpp"
-
 #include "uml/ExceptionHandler.hpp"
-
 #include "uml/ExpansionNode.hpp"
-
 #include "uml/InputPin.hpp"
-
 #include "uml/InterruptibleActivityRegion.hpp"
-
 #include "uml/NamedElement.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/OutputPin.hpp"
-
 #include "uml/PackageImport.hpp"
-
 #include "uml/PackageableElement.hpp"
-
 #include "uml/RedefinableElement.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/StructuredActivityNode.hpp"
-
 #include "uml/Variable.hpp"
 
 //Factories an Package includes
@@ -380,12 +357,12 @@ std::shared_ptr<ecore::EClass> ExpansionRegionImpl::eStaticClass() const
 /*
 Getter & Setter for attribute mode
 */
-uml::ExpansionKind  ExpansionRegionImpl::getMode() const 
+uml::ExpansionKind ExpansionRegionImpl::getMode() const 
 {
 	return m_mode;
 }
 
-void ExpansionRegionImpl::setMode(uml::ExpansionKind  _mode)
+void ExpansionRegionImpl::setMode(uml::ExpansionKind _mode)
 {
 	m_mode = _mode;
 } 
@@ -651,34 +628,12 @@ Any ExpansionRegionImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::EXPANSIONREGION_ATTRIBUTE_INPUTELEMENT:
 		{
 			return eAny(getInputElement()); //9446			
-			/*
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ExpansionNode>::iterator iter = m_inputElement->begin();
-			Bag<uml::ExpansionNode>::iterator end = m_inputElement->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //9446
-			*/
 		}
 		case uml::umlPackage::EXPANSIONREGION_ATTRIBUTE_MODE:
 			return eAny(getMode()); //9444
 		case uml::umlPackage::EXPANSIONREGION_ATTRIBUTE_OUTPUTELEMENT:
 		{
 			return eAny(getOutputElement()); //9445			
-			/*
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ExpansionNode>::iterator iter = m_outputElement->begin();
-			Bag<uml::ExpansionNode>::iterator end = m_outputElement->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //9445
-			*/
 		}
 	}
 	return StructuredActivityNodeImpl::eGet(featureID, resolve, coreType);
@@ -723,7 +678,7 @@ bool ExpansionRegionImpl::eSet(int featureID, Any newValue)
 				}
 				iterInputElement++;
 			}
-
+ 
 			iterInputElement = inputElementList->begin();
 			endInputElement = inputElementList->end();
 			while (iterInputElement != endInputElement)
@@ -766,7 +721,7 @@ bool ExpansionRegionImpl::eSet(int featureID, Any newValue)
 				}
 				iterOutputElement++;
 			}
-
+ 
 			iterOutputElement = outputElementList->begin();
 			endOutputElement = outputElementList->end();
 			while (iterOutputElement != endOutputElement)
@@ -812,7 +767,7 @@ void ExpansionRegionImpl::loadAttributes(std::shared_ptr<persistence::interfaces
 		iter = attr_list.find("mode");
 		if ( iter != attr_list.end() )
 		{
-			uml::ExpansionKind  value = ExpansionKind::ITERATIVE;
+			uml::ExpansionKind value = ExpansionKind::ITERATIVE;
 			std::string literal = iter->second;
 			if (literal == "parallel")
 			{
@@ -863,7 +818,7 @@ void ExpansionRegionImpl::loadNode(std::string nodeName, std::shared_ptr<persist
 	StructuredActivityNodeImpl::loadNode(nodeName, loadHandler);
 }
 
-void ExpansionRegionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ExpansionRegionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -939,7 +894,7 @@ void ExpansionRegionImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 		// Add attributes
 		if ( this->eIsSet(package->getExpansionRegion_Attribute_mode()) )
 		{
-			uml::ExpansionKind  value = this->getMode();
+			uml::ExpansionKind value = this->getMode();
 			std::string literal = "";
 			if (value == ExpansionKind::PARALLEL)
 			{
@@ -957,8 +912,8 @@ void ExpansionRegionImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 		}
 
 	// Add references
-		saveHandler->addReferences<uml::ExpansionNode>("inputElement", this->getInputElement());	
-		saveHandler->addReferences<uml::ExpansionNode>("outputElement", this->getOutputElement());	
+		saveHandler->addReferences<uml::ExpansionNode>("inputElement", this->getInputElement());
+		saveHandler->addReferences<uml::ExpansionNode>("outputElement", this->getOutputElement());
 	}
 	catch (std::exception& e)
 	{

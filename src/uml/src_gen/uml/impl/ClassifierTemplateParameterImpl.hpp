@@ -9,7 +9,6 @@
 
 //*********************************
 // generated Includes
-
 //Model includes
 #include "../ClassifierTemplateParameter.hpp"
 
@@ -110,15 +109,14 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual bool  getAllowSubstitutable() const ;
+			virtual bool getAllowSubstitutable() const ;
 			
 			/*!
 			Constrains the required relationship between an actual parameter and the parameteredElement for this formal parameter.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual void setAllowSubstitutable (bool  _allowSubstitutable); 
-			
+			virtual void setAllowSubstitutable (bool _allowSubstitutable);
 			
 			//*********************************
 			// Reference
@@ -161,7 +159,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

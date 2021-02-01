@@ -35,43 +35,24 @@
 #include <exception> // used in Persistence
 
 #include "uml/Association.hpp"
-
 #include "uml/Class.hpp"
-
 #include "uml/Classifier.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/ConnectorEnd.hpp"
-
 #include "uml/DataType.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Deployment.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/Interface.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/PackageableElement.hpp"
-
 #include "uml/Port.hpp"
-
 #include "uml/Property.hpp"
-
 #include "uml/ProtocolStateMachine.hpp"
-
 #include "uml/RedefinableElement.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/TemplateParameter.hpp"
-
 #include "uml/Type.hpp"
-
 #include "uml/ValueSpecification.hpp"
 
 //Factories an Package includes
@@ -335,12 +316,12 @@ std::shared_ptr<ecore::EClass> PortImpl::eStaticClass() const
 /*
 Getter & Setter for attribute isBehavior
 */
-bool  PortImpl::getIsBehavior() const 
+bool PortImpl::getIsBehavior() const 
 {
 	return m_isBehavior;
 }
 
-void PortImpl::setIsBehavior(bool  _isBehavior)
+void PortImpl::setIsBehavior(bool _isBehavior)
 {
 	m_isBehavior = _isBehavior;
 } 
@@ -350,12 +331,12 @@ void PortImpl::setIsBehavior(bool  _isBehavior)
 /*
 Getter & Setter for attribute isConjugated
 */
-bool  PortImpl::getIsConjugated() const 
+bool PortImpl::getIsConjugated() const 
 {
 	return m_isConjugated;
 }
 
-void PortImpl::setIsConjugated(bool  _isConjugated)
+void PortImpl::setIsConjugated(bool _isConjugated)
 {
 	m_isConjugated = _isConjugated;
 } 
@@ -365,12 +346,12 @@ void PortImpl::setIsConjugated(bool  _isConjugated)
 /*
 Getter & Setter for attribute isService
 */
-bool  PortImpl::getIsService() const 
+bool PortImpl::getIsService() const 
 {
 	return m_isService;
 }
 
-void PortImpl::setIsService(bool  _isService)
+void PortImpl::setIsService(bool _isService)
 {
 	m_isService = _isService;
 } 
@@ -771,7 +752,7 @@ bool PortImpl::eSet(int featureID, Any newValue)
 				}
 				iterRedefinedPort++;
 			}
-
+ 
 			iterRedefinedPort = redefinedPortList->begin();
 			endRedefinedPort = redefinedPortList->end();
 			while (iterRedefinedPort != endRedefinedPort)
@@ -875,7 +856,7 @@ void PortImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inter
 	PropertyImpl::loadNode(nodeName, loadHandler);
 }
 
-void PortImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void PortImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -963,8 +944,8 @@ void PortImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler
 		}
 
 	// Add references
-		saveHandler->addReference("protocol", this->getProtocol());		 
-		saveHandler->addReferences<uml::Port>("redefinedPort", this->getRedefinedPort());	
+		saveHandler->addReference("protocol", this->getProtocol()); 
+		saveHandler->addReferences<uml::Port>("redefinedPort", this->getRedefinedPort());
 	}
 	catch (std::exception& e)
 	{

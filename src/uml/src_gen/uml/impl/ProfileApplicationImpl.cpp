@@ -34,19 +34,12 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
 #include "uml/DirectedRelationship.hpp"
-
 #include "ecore/ENamedElement.hpp"
-
 #include "ecore/EPackage.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/NamedElement.hpp"
-
 #include "uml/Package.hpp"
-
 #include "uml/Profile.hpp"
 
 //Factories an Package includes
@@ -145,12 +138,12 @@ std::shared_ptr<ecore::EClass> ProfileApplicationImpl::eStaticClass() const
 /*
 Getter & Setter for attribute isStrict
 */
-bool  ProfileApplicationImpl::getIsStrict() const 
+bool ProfileApplicationImpl::getIsStrict() const 
 {
 	return m_isStrict;
 }
 
-void ProfileApplicationImpl::setIsStrict(bool  _isStrict)
+void ProfileApplicationImpl::setIsStrict(bool _isStrict)
 {
 	m_isStrict = _isStrict;
 } 
@@ -433,7 +426,7 @@ void ProfileApplicationImpl::loadNode(std::string nodeName, std::shared_ptr<pers
 	DirectedRelationshipImpl::loadNode(nodeName, loadHandler);
 }
 
-void ProfileApplicationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ProfileApplicationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -495,7 +488,7 @@ void ProfileApplicationImpl::saveContent(std::shared_ptr<persistence::interfaces
 		}
 
 	// Add references
-		saveHandler->addReference("appliedProfile", this->getAppliedProfile());		 
+		saveHandler->addReference("appliedProfile", this->getAppliedProfile()); 
 	}
 	catch (std::exception& e)
 	{

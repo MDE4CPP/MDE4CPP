@@ -34,31 +34,18 @@
 #include <exception> // used in Persistence
 
 #include "uml/Activity.hpp"
-
 #include "uml/ActivityEdge.hpp"
-
 #include "uml/ActivityGroup.hpp"
-
 #include "uml/ActivityNode.hpp"
-
 #include "uml/ActivityPartition.hpp"
-
 #include "uml/Classifier.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/InterruptibleActivityRegion.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/RedefinableElement.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/StructuredActivityNode.hpp"
 
 //Factories an Package includes
@@ -577,7 +564,7 @@ bool ActivityNodeImpl::eSet(int featureID, Any newValue)
 				}
 				iterInInterruptibleRegion++;
 			}
-
+ 
 			iterInInterruptibleRegion = inInterruptibleRegionList->begin();
 			endInInterruptibleRegion = inInterruptibleRegionList->end();
 			while (iterInInterruptibleRegion != endInInterruptibleRegion)
@@ -613,7 +600,7 @@ bool ActivityNodeImpl::eSet(int featureID, Any newValue)
 				}
 				iterInPartition++;
 			}
-
+ 
 			iterInPartition = inPartitionList->begin();
 			endInPartition = inPartitionList->end();
 			while (iterInPartition != endInPartition)
@@ -657,7 +644,7 @@ bool ActivityNodeImpl::eSet(int featureID, Any newValue)
 				}
 				iterIncoming++;
 			}
-
+ 
 			iterIncoming = incomingList->begin();
 			endIncoming = incomingList->end();
 			while (iterIncoming != endIncoming)
@@ -693,7 +680,7 @@ bool ActivityNodeImpl::eSet(int featureID, Any newValue)
 				}
 				iterOutgoing++;
 			}
-
+ 
 			iterOutgoing = outgoingList->begin();
 			endOutgoing = outgoingList->end();
 			while (iterOutgoing != endOutgoing)
@@ -729,7 +716,7 @@ bool ActivityNodeImpl::eSet(int featureID, Any newValue)
 				}
 				iterRedefinedNode++;
 			}
-
+ 
 			iterRedefinedNode = redefinedNodeList->begin();
 			endRedefinedNode = redefinedNodeList->end();
 			while (iterRedefinedNode != endRedefinedNode)
@@ -827,7 +814,7 @@ void ActivityNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persistenc
 	RedefinableElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void ActivityNodeImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ActivityNodeImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -954,11 +941,11 @@ void ActivityNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	// Add references
-		saveHandler->addReferences<uml::InterruptibleActivityRegion>("inInterruptibleRegion", this->getInInterruptibleRegion());	
-		saveHandler->addReferences<uml::ActivityPartition>("inPartition", this->getInPartition());	
-		saveHandler->addReferences<uml::ActivityEdge>("incoming", this->getIncoming());	
-		saveHandler->addReferences<uml::ActivityEdge>("outgoing", this->getOutgoing());	
-		saveHandler->addReferences<uml::ActivityNode>("redefinedNode", this->getRedefinedNode());	
+		saveHandler->addReferences<uml::InterruptibleActivityRegion>("inInterruptibleRegion", this->getInInterruptibleRegion());
+		saveHandler->addReferences<uml::ActivityPartition>("inPartition", this->getInPartition());
+		saveHandler->addReferences<uml::ActivityEdge>("incoming", this->getIncoming());
+		saveHandler->addReferences<uml::ActivityEdge>("outgoing", this->getOutgoing());
+		saveHandler->addReferences<uml::ActivityNode>("redefinedNode", this->getRedefinedNode());
 	}
 	catch (std::exception& e)
 	{

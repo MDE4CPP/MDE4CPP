@@ -35,23 +35,14 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/Region.hpp"
-
 #include "uml/State.hpp"
-
 #include "uml/StateMachine.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/Transition.hpp"
-
 #include "uml/Vertex.hpp"
 
 //Factories an Package includes
@@ -189,12 +180,12 @@ std::shared_ptr<ecore::EClass> PseudostateImpl::eStaticClass() const
 /*
 Getter & Setter for attribute kind
 */
-uml::PseudostateKind  PseudostateImpl::getKind() const 
+uml::PseudostateKind PseudostateImpl::getKind() const 
 {
 	return m_kind;
 }
 
-void PseudostateImpl::setKind(uml::PseudostateKind  _kind)
+void PseudostateImpl::setKind(uml::PseudostateKind _kind)
 {
 	m_kind = _kind;
 } 
@@ -451,7 +442,7 @@ void PseudostateImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XL
 		iter = attr_list.find("kind");
 		if ( iter != attr_list.end() )
 		{
-			uml::PseudostateKind  value = PseudostateKind::INITIAL;
+			uml::PseudostateKind value = PseudostateKind::INITIAL;
 			std::string literal = iter->second;
 			if (literal == "initial")
 			{
@@ -516,7 +507,7 @@ void PseudostateImpl::loadNode(std::string nodeName, std::shared_ptr<persistence
 	VertexImpl::loadNode(nodeName, loadHandler);
 }
 
-void PseudostateImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void PseudostateImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -574,7 +565,7 @@ void PseudostateImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 		// Add attributes
 		if ( this->eIsSet(package->getPseudostate_Attribute_kind()) )
 		{
-			uml::PseudostateKind  value = this->getKind();
+			uml::PseudostateKind value = this->getKind();
 			std::string literal = "";
 			if (value == PseudostateKind::INITIAL)
 			{

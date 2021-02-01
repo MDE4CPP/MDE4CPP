@@ -9,7 +9,6 @@
 
 //*********************************
 // generated Includes
-
 //Model includes
 #include "../ActivityPartition.hpp"
 
@@ -122,28 +121,26 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			 
-			virtual bool  getIsDimension() const ;
+			virtual bool getIsDimension() const ;
 			
 			/*!
 			Indicates whether the ActivityPartition groups other ActivityPartitions along a dimension.
 			<p>From package UML::Activities.</p>
 			*/
 			 
-			virtual void setIsDimension (bool  _isDimension); 
-			/*!
+			virtual void setIsDimension (bool _isDimension);/*!
 			Indicates whether the ActivityPartition represents an entity to which the partitioning structure does not apply.
 			<p>From package UML::Activities.</p>
 			*/
 			 
-			virtual bool  getIsExternal() const ;
+			virtual bool getIsExternal() const ;
 			
 			/*!
 			Indicates whether the ActivityPartition represents an entity to which the partitioning structure does not apply.
 			<p>From package UML::Activities.</p>
 			*/
 			 
-			virtual void setIsExternal (bool  _isExternal); 
-			
+			virtual void setIsExternal (bool _isExternal);
 			
 			//*********************************
 			// Reference
@@ -250,7 +247,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

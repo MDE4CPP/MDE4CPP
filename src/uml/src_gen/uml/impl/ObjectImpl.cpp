@@ -33,11 +33,8 @@
 #include <exception> // used in Persistence
 
 #include "uml/Argument.hpp"
-
 #include "uml/Object.hpp"
-
 #include "uml/Operation.hpp"
-
 #include "uml/Property.hpp"
 
 //Factories an Package includes
@@ -106,7 +103,7 @@ Any ObjectImpl::get(std::shared_ptr<uml::Property> property) const
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Object> > ObjectImpl::invoke(std::shared_ptr<uml::Operation> op,std::shared_ptr<Bag<uml::Argument> > arguments)
+std::shared_ptr<Bag<uml::Object> > ObjectImpl::invoke(std::shared_ptr<uml::Operation> op,std::shared_ptr<Bag<uml::Argument>> arguments)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -205,7 +202,7 @@ void ObjectImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::int
 	//load BasePackage Nodes
 }
 
-void ObjectImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ObjectImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	ecore::EObjectImpl::resolveReferences(featureID, references);
 }

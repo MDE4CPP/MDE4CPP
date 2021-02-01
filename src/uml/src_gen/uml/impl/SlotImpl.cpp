@@ -33,13 +33,9 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/InstanceSpecification.hpp"
-
 #include "uml/StructuralFeature.hpp"
-
 #include "uml/ValueSpecification.hpp"
 
 //Factories an Package includes
@@ -331,7 +327,7 @@ bool SlotImpl::eSet(int featureID, Any newValue)
 				}
 				iterValue++;
 			}
-
+ 
 			iterValue = valueList->begin();
 			endValue = valueList->end();
 			while (iterValue != endValue)
@@ -427,7 +423,7 @@ void SlotImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inter
 	ElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void SlotImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void SlotImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -483,7 +479,7 @@ void SlotImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler
 		}
 
 	// Add references
-		saveHandler->addReference("definingFeature", this->getDefiningFeature());		 
+		saveHandler->addReference("definingFeature", this->getDefiningFeature()); 
 	}
 	catch (std::exception& e)
 	{

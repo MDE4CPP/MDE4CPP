@@ -177,7 +177,7 @@ void EventDispatchLoopImpl::loadNode(std::string nodeName, std::shared_ptr<persi
 	//load BasePackage Nodes
 }
 
-void EventDispatchLoopImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void EventDispatchLoopImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	ecore::EObjectImpl::resolveReferences(featureID, references);
 }

@@ -37,27 +37,16 @@
 #include <exception> // used in Persistence
 
 #include "uml/Action.hpp"
-
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
-
 #include "uml/ActivityNode.hpp"
-
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
-
 #include "uml/CallAction.hpp"
-
 #include "fUML/Semantics/Actions/CallActionActivation.hpp"
-
 #include "uml/CallBehaviorAction.hpp"
-
 #include "fUML/Semantics/CommonBehavior/Execution.hpp"
-
 #include "fUML/Semantics/Actions/InputPinActivation.hpp"
-
 #include "fUML/Semantics/Actions/OutputPinActivation.hpp"
-
 #include "fUML/Semantics/Actions/PinActivation.hpp"
-
 #include "fUML/Semantics/Activities/Token.hpp"
 
 //Factories an Package includes
@@ -213,13 +202,13 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> CallBehaviorActionAc
 /*
 Getter & Setter for reference callBehaviorAction
 */
-std::shared_ptr<org.eclipse.uml2.uml.CallBehaviorAction > CallBehaviorActionActivationImpl::getCallBehaviorAction() const
+std::shared_ptr<uml::CallBehaviorAction > CallBehaviorActionActivationImpl::getCallBehaviorAction() const
 {
 //assert(m_callBehaviorAction);
     return m_callBehaviorAction;
 }
 
-void CallBehaviorActionActivationImpl::setCallBehaviorAction(std::shared_ptr<org.eclipse.uml2.uml.CallBehaviorAction> _callBehaviorAction)
+void CallBehaviorActionActivationImpl::setCallBehaviorAction(std::shared_ptr<uml::CallBehaviorAction> _callBehaviorAction)
 {
     m_callBehaviorAction = _callBehaviorAction;
 	//additional setter call for redefined reference CallActionActivation::callAction
@@ -227,9 +216,9 @@ void CallBehaviorActionActivationImpl::setCallBehaviorAction(std::shared_ptr<org
 }
 
 /*Additional Setter for redefined reference 'CallActionActivation::callAction'*/
-void CallBehaviorActionActivationImpl::setCallAction(std::shared_ptr<org.eclipse.uml2.uml.CallAction> _callAction)
+void CallBehaviorActionActivationImpl::setCallAction(std::shared_ptr<uml::CallAction> _callAction)
 {
-	std::shared_ptr<org.eclipse.uml2.uml.CallBehaviorAction> _callBehaviorAction = std::dynamic_pointer_cast<org.eclipse.uml2.uml.CallBehaviorAction>(_callAction);
+	std::shared_ptr<uml::CallBehaviorAction> _callBehaviorAction = std::dynamic_pointer_cast<uml::CallBehaviorAction>(_callAction);
 	if(_callBehaviorAction)
 	{
 		m_callBehaviorAction = _callBehaviorAction;
@@ -239,13 +228,13 @@ void CallBehaviorActionActivationImpl::setCallAction(std::shared_ptr<org.eclipse
 	}
 	else
 	{
-		std::cerr<<"[CallBehaviorActionActivation::setCallAction] : Could not set callAction because provided callAction was not of type 'org.eclipse.uml2.uml.CallBehaviorAction'"<<std::endl;
+		std::cerr<<"[CallBehaviorActionActivation::setCallAction] : Could not set callAction because provided callAction was not of type 'uml::CallBehaviorAction'"<<std::endl;
 	}
 }
 /*Additional Setter for redefined reference 'ActionActivation::action'*/
-void CallBehaviorActionActivationImpl::setAction(std::shared_ptr<org.eclipse.uml2.uml.Action> _action)
+void CallBehaviorActionActivationImpl::setAction(std::shared_ptr<uml::Action> _action)
 {
-	std::shared_ptr<org.eclipse.uml2.uml.CallBehaviorAction> _callBehaviorAction = std::dynamic_pointer_cast<org.eclipse.uml2.uml.CallBehaviorAction>(_action);
+	std::shared_ptr<uml::CallBehaviorAction> _callBehaviorAction = std::dynamic_pointer_cast<uml::CallBehaviorAction>(_action);
 	if(_callBehaviorAction)
 	{
 		m_callBehaviorAction = _callBehaviorAction;
@@ -255,13 +244,13 @@ void CallBehaviorActionActivationImpl::setAction(std::shared_ptr<org.eclipse.uml
 	}
 	else
 	{
-		std::cerr<<"[CallBehaviorActionActivation::setAction] : Could not set action because provided action was not of type 'org.eclipse.uml2.uml.CallBehaviorAction'"<<std::endl;
+		std::cerr<<"[CallBehaviorActionActivation::setAction] : Could not set action because provided action was not of type 'uml::CallBehaviorAction'"<<std::endl;
 	}
 }
 /*Additional Setter for redefined reference 'ActivityNodeActivation::node'*/
-void CallBehaviorActionActivationImpl::setNode(std::shared_ptr<org.eclipse.uml2.uml.ActivityNode> _node)
+void CallBehaviorActionActivationImpl::setNode(std::shared_ptr<uml::ActivityNode> _node)
 {
-	std::shared_ptr<org.eclipse.uml2.uml.CallBehaviorAction> _callBehaviorAction = std::dynamic_pointer_cast<org.eclipse.uml2.uml.CallBehaviorAction>(_node);
+	std::shared_ptr<uml::CallBehaviorAction> _callBehaviorAction = std::dynamic_pointer_cast<uml::CallBehaviorAction>(_node);
 	if(_callBehaviorAction)
 	{
 		m_callBehaviorAction = _callBehaviorAction;
@@ -271,7 +260,7 @@ void CallBehaviorActionActivationImpl::setNode(std::shared_ptr<org.eclipse.uml2.
 	}
 	else
 	{
-		std::cerr<<"[CallBehaviorActionActivation::setNode] : Could not set node because provided node was not of type 'org.eclipse.uml2.uml.CallBehaviorAction'"<<std::endl;
+		std::cerr<<"[CallBehaviorActionActivation::setNode] : Could not set node because provided node was not of type 'uml::CallBehaviorAction'"<<std::endl;
 	}
 }
 
@@ -344,7 +333,7 @@ bool CallBehaviorActionActivationImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<org.eclipse.uml2.uml.CallBehaviorAction> _callBehaviorAction = std::dynamic_pointer_cast<org.eclipse.uml2.uml.CallBehaviorAction>(_temp);
+			std::shared_ptr<uml::CallBehaviorAction> _callBehaviorAction = std::dynamic_pointer_cast<uml::CallBehaviorAction>(_temp);
 			setCallBehaviorAction(_callBehaviorAction); //1513
 			return true;
 		}
@@ -405,7 +394,7 @@ void CallBehaviorActionActivationImpl::loadNode(std::string nodeName, std::share
 	CallActionActivationImpl::loadNode(nodeName, loadHandler);
 }
 
-void CallBehaviorActionActivationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void CallBehaviorActionActivationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -414,7 +403,7 @@ void CallBehaviorActionActivationImpl::resolveReferences(const int featureID, st
 			if (references.size() == 1)
 			{
 				// Cast object to correct type
-				std::shared_ptr<org.eclipse.uml2.uml.CallBehaviorAction> _callBehaviorAction = std::dynamic_pointer_cast<org.eclipse.uml2.uml.CallBehaviorAction>( references.front() );
+				std::shared_ptr<uml::CallBehaviorAction> _callBehaviorAction = std::dynamic_pointer_cast<uml::CallBehaviorAction>( references.front() );
 				setCallBehaviorAction(_callBehaviorAction);
 			}
 			
@@ -453,7 +442,7 @@ void CallBehaviorActionActivationImpl::saveContent(std::shared_ptr<persistence::
 		std::shared_ptr<fUML::Semantics::Actions::ActionsPackage> package = fUML::Semantics::Actions::ActionsPackage::eInstance();
 
 	// Add references
-		saveHandler->addReference("callBehaviorAction", this->getCallBehaviorAction());		
+		saveHandler->addReference("callBehaviorAction", this->getCallBehaviorAction()); 
 	}
 	catch (std::exception& e)
 	{

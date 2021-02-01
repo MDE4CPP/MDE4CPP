@@ -33,13 +33,9 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/ParameterableElement.hpp"
-
 #include "uml/TemplateParameter.hpp"
-
 #include "uml/TemplateSignature.hpp"
 
 //Factories an Package includes
@@ -259,7 +255,7 @@ void ConnectableElementTemplateParameterImpl::loadNode(std::string nodeName, std
 	TemplateParameterImpl::loadNode(nodeName, loadHandler);
 }
 
-void ConnectableElementTemplateParameterImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ConnectableElementTemplateParameterImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	TemplateParameterImpl::resolveReferences(featureID, references);
 }

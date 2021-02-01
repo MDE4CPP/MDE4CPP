@@ -34,19 +34,12 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/MessageEvent.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/Package.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/TemplateParameter.hpp"
 
 //Factories an Package includes
@@ -298,7 +291,7 @@ void AnyReceiveEventImpl::loadNode(std::string nodeName, std::shared_ptr<persist
 	MessageEventImpl::loadNode(nodeName, loadHandler);
 }
 
-void AnyReceiveEventImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void AnyReceiveEventImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	MessageEventImpl::resolveReferences(featureID, references);
 }

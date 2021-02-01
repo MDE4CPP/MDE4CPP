@@ -7,21 +7,17 @@
 #ifndef UML_VARIABLE_HPP
 #define UML_VARIABLE_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T, class ... U> class Subset;
 
 
-
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -54,14 +50,12 @@ namespace uml
 
 // base class includes
 #include "uml/ConnectableElement.hpp"
-
 #include "uml/MultiplicityElement.hpp"
 
 // enum includes
 #include "uml/VisibilityKind.hpp"
 
 
-//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -71,7 +65,7 @@ namespace uml
 	<p>From package UML::Activities.</p>
 	*/
 	
-	class Variable:virtual public ConnectableElement,virtual public MultiplicityElement
+	class Variable: virtual public ConnectableElement, virtual public MultiplicityElement
 	{
 		public:
  			Variable(const Variable &) {}
@@ -80,25 +74,19 @@ namespace uml
 		protected:
 			Variable(){}
 
-
 			//Additional constructors for the containments back reference
-
 			Variable(std::weak_ptr<uml::Activity > par_activityScope);
 
 			//Additional constructors for the containments back reference
-
 			Variable(std::weak_ptr<uml::Namespace > par_namespace);
 
 			//Additional constructors for the containments back reference
-
 			Variable(std::weak_ptr<uml::Element > par_owner);
 
 			//Additional constructors for the containments back reference
-
 			Variable(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
 
 			//Additional constructors for the containments back reference
-
 			Variable(std::weak_ptr<uml::StructuredActivityNode > par_scope);
 
 		public:
@@ -207,7 +195,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

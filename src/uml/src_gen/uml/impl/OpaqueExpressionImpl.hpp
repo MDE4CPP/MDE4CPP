@@ -9,7 +9,6 @@
 
 //*********************************
 // generated Includes
-
 //Model includes
 #include "../OpaqueExpression.hpp"
 
@@ -135,20 +134,12 @@ namespace uml
 			<p>From package UML::Values.</p>
 			*/
 			 
-			virtual  std::shared_ptr<Bag<std::string> >
-			 getBody() const ;
-			
-			
-			/*!
+			virtual std::shared_ptr<Bag<std::string>> getBody() const ;/*!
 			Specifies the languages used to express the textual bodies of the OpaqueExpression.  Languages are matched to body Strings by order. The interpretation of the body depends on the languages. If the languages are unspecified, they may be implicit from the expression body or the context.
 			<p>From package UML::Values.</p>
 			*/
 			 
-			virtual  std::shared_ptr<Bag<std::string> >
-			 getLanguage() const ;
-			
-			
-			
+			virtual std::shared_ptr<Bag<std::string>> getLanguage() const ;
 			
 			//*********************************
 			// Reference
@@ -210,7 +201,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

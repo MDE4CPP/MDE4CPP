@@ -34,25 +34,15 @@
 #include <exception> // used in Persistence
 
 #include "ecore/EAnnotation.hpp"
-
 #include "ecore/EAttribute.hpp"
-
 #include "ecore/EClass.hpp"
-
 #include "ecore/EClassifier.hpp"
-
 #include "ecore/EGenericType.hpp"
-
 #include "ecore/EObject.hpp"
-
 #include "ecore/EOperation.hpp"
-
 #include "ecore/EPackage.hpp"
-
 #include "ecore/EReference.hpp"
-
 #include "ecore/EStructuralFeature.hpp"
-
 #include "ecore/ETypeParameter.hpp"
 
 //Factories an Package includes
@@ -221,12 +211,12 @@ std::shared_ptr<EClass> EClassImpl::eStaticClass() const
 /*
 Getter & Setter for attribute abstract
 */
-bool  EClassImpl::isAbstract() const 
+bool EClassImpl::isAbstract() const 
 {
 	return m_abstract;
 }
 
-void EClassImpl::setAbstract(bool  _abstract)
+void EClassImpl::setAbstract(bool _abstract)
 {
 	m_abstract = _abstract;
 } 
@@ -236,12 +226,12 @@ void EClassImpl::setAbstract(bool  _abstract)
 /*
 Getter & Setter for attribute interface
 */
-bool  EClassImpl::isInterface() const 
+bool EClassImpl::isInterface() const 
 {
 	return m_interface;
 }
 
-void EClassImpl::setInterface(bool  _interface)
+void EClassImpl::setInterface(bool _interface)
 {
 	m_interface = _interface;
 } 
@@ -895,7 +885,7 @@ bool EClassImpl::eSet(int featureID, Any newValue)
 				}
 				iterEAttributes++;
 			}
-
+ 
 			iterEAttributes = eAttributesList->begin();
 			endEAttributes = eAttributesList->end();
 			while (iterEAttributes != endEAttributes)
@@ -931,7 +921,7 @@ bool EClassImpl::eSet(int featureID, Any newValue)
 				}
 				iterEGenericSuperTypes++;
 			}
-
+ 
 			iterEGenericSuperTypes = eGenericSuperTypesList->begin();
 			endEGenericSuperTypes = eGenericSuperTypesList->end();
 			while (iterEGenericSuperTypes != endEGenericSuperTypes)
@@ -975,7 +965,7 @@ bool EClassImpl::eSet(int featureID, Any newValue)
 				}
 				iterEOperations++;
 			}
-
+ 
 			iterEOperations = eOperationsList->begin();
 			endEOperations = eOperationsList->end();
 			while (iterEOperations != endEOperations)
@@ -1011,7 +1001,7 @@ bool EClassImpl::eSet(int featureID, Any newValue)
 				}
 				iterEReferences++;
 			}
-
+ 
 			iterEReferences = eReferencesList->begin();
 			endEReferences = eReferencesList->end();
 			while (iterEReferences != endEReferences)
@@ -1047,7 +1037,7 @@ bool EClassImpl::eSet(int featureID, Any newValue)
 				}
 				iterEStructuralFeatures++;
 			}
-
+ 
 			iterEStructuralFeatures = eStructuralFeaturesList->begin();
 			endEStructuralFeatures = eStructuralFeaturesList->end();
 			while (iterEStructuralFeatures != endEStructuralFeatures)
@@ -1083,7 +1073,7 @@ bool EClassImpl::eSet(int featureID, Any newValue)
 				}
 				iterESuperTypes++;
 			}
-
+ 
 			iterESuperTypes = eSuperTypesList->begin();
 			endESuperTypes = eSuperTypesList->end();
 			while (iterESuperTypes != endESuperTypes)
@@ -1257,7 +1247,7 @@ void EClassImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::int
 	EClassifierImpl::loadNode(nodeName, loadHandler);
 }
 
-void EClassImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references)
+void EClassImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references)
 {
 	switch(featureID)
 	{
@@ -1359,10 +1349,10 @@ void EClassImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 		}
 
 	// Add references
-		saveHandler->addReferences<ecore::EAttribute>("eAttributes", this->getEAttributes());	
-		saveHandler->addReference("eIDAttribute", this->getEIDAttribute());		 
-		saveHandler->addReferences<ecore::EReference>("eReferences", this->getEReferences());	
-		saveHandler->addReferences<ecore::EClass>("eSuperTypes", this->getESuperTypes());	
+		saveHandler->addReferences<ecore::EAttribute>("eAttributes", this->getEAttributes());
+	saveHandler->addReference("eIDAttribute", this->getEIDAttribute());
+		saveHandler->addReferences<ecore::EReference>("eReferences", this->getEReferences());
+		saveHandler->addReferences<ecore::EClass>("eSuperTypes", this->getESuperTypes());
 
 		//
 		// Add new tags (from references)

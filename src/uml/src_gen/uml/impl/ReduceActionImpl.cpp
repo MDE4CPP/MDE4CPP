@@ -35,43 +35,24 @@
 #include <exception> // used in Persistence
 
 #include "uml/Action.hpp"
-
 #include "uml/Activity.hpp"
-
 #include "uml/ActivityEdge.hpp"
-
 #include "uml/ActivityGroup.hpp"
-
 #include "uml/ActivityNode.hpp"
-
 #include "uml/ActivityPartition.hpp"
-
 #include "uml/Behavior.hpp"
-
 #include "uml/Classifier.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/Constraint.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/ExceptionHandler.hpp"
-
 #include "uml/InputPin.hpp"
-
 #include "uml/InterruptibleActivityRegion.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/OutputPin.hpp"
-
 #include "uml/RedefinableElement.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/StructuredActivityNode.hpp"
 
 //Factories an Package includes
@@ -279,12 +260,12 @@ std::shared_ptr<ecore::EClass> ReduceActionImpl::eStaticClass() const
 /*
 Getter & Setter for attribute isOrdered
 */
-bool  ReduceActionImpl::getIsOrdered() const 
+bool ReduceActionImpl::getIsOrdered() const 
 {
 	return m_isOrdered;
 }
 
-void ReduceActionImpl::setIsOrdered(bool  _isOrdered)
+void ReduceActionImpl::setIsOrdered(bool _isOrdered)
 {
 	m_isOrdered = _isOrdered;
 } 
@@ -668,7 +649,7 @@ void ReduceActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistenc
 	ActionImpl::loadNode(nodeName, loadHandler);
 }
 
-void ReduceActionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ReduceActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -740,7 +721,7 @@ void ReduceActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 		}
 
 	// Add references
-		saveHandler->addReference("reducer", this->getReducer());		 
+		saveHandler->addReference("reducer", this->getReducer()); 
 	}
 	catch (std::exception& e)
 	{

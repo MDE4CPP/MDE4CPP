@@ -9,7 +9,6 @@
 
 //*********************************
 // generated Includes
-
 //Model includes
 #include "../ExecutionFactory.hpp"
 
@@ -50,7 +49,7 @@ virtual public ExecutionFactory
 			// Operations
 			//*********************************
 			 
-			virtual void addBuiltInType(std::shared_ptr<org.eclipse.uml2.uml.PrimitiveType> type) ;
+			virtual void addBuiltInType(std::shared_ptr<uml::PrimitiveType> type) ;
 			
 			 
 			virtual void addPrimitiveBehaviorPrototype(std::shared_ptr<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution> execution) ;
@@ -59,13 +58,13 @@ virtual public ExecutionFactory
 			virtual void assignStrategy(std::shared_ptr<fUML::Semantics::Loci::SemanticStrategy> strategy) ;
 			
 			 
-			virtual std::shared_ptr<fUML::Semantics::Values::Evaluation> createEvaluation(std::shared_ptr<org.eclipse.uml2.uml.ValueSpecification> specification) ;
+			virtual std::shared_ptr<fUML::Semantics::Values::Evaluation> createEvaluation(std::shared_ptr<uml::ValueSpecification> specification) ;
 			
 			 
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> createExecution(std::shared_ptr<org.eclipse.uml2.uml.Behavior> behavior,std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> context) ;
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> createExecution(std::shared_ptr<uml::Behavior> behavior,std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> context) ;
 			
 			 
-			virtual std::shared_ptr<org.eclipse.uml2.uml.PrimitiveType> getBuiltInType(std::string name) ;
+			virtual std::shared_ptr<uml::PrimitiveType> getBuiltInType(std::string name) ;
 			
 			 
 			virtual std::shared_ptr<fUML::Semantics::Loci::SemanticStrategy> getStrategy(std::string name) ;
@@ -76,10 +75,10 @@ virtual public ExecutionFactory
 			
 			
 			 
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution> instantiateOpaqueBehaviorExecution(std::shared_ptr<org.eclipse.uml2.uml.Behavior> behavior) ;
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution> instantiateOpaqueBehaviorExecution(std::shared_ptr<uml::Behavior> behavior) ;
 			
 			 
-			virtual std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> instantiateVisitor(std::shared_ptr<org.eclipse.uml2.uml.Element> element) ;
+			virtual std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> instantiateVisitor(std::shared_ptr<uml::Element> element) ;
 			
 			
 			
@@ -92,7 +91,7 @@ virtual public ExecutionFactory
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<Bag<org.eclipse.uml2.uml.PrimitiveType>> getBuiltInTypes() const ;
+			virtual std::shared_ptr<Bag<uml::PrimitiveType>> getBuiltInTypes() const ;
 			
 			
 			
@@ -129,7 +128,7 @@ virtual public ExecutionFactory
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

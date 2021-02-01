@@ -34,15 +34,10 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/InputPin.hpp"
-
 #include "uml/LinkEndData.hpp"
-
 #include "uml/Property.hpp"
-
 #include "uml/QualifierValue.hpp"
 
 //Factories an Package includes
@@ -135,12 +130,12 @@ std::shared_ptr<ecore::EClass> LinkEndCreationDataImpl::eStaticClass() const
 /*
 Getter & Setter for attribute isReplaceAll
 */
-bool  LinkEndCreationDataImpl::getIsReplaceAll() const 
+bool LinkEndCreationDataImpl::getIsReplaceAll() const 
 {
 	return m_isReplaceAll;
 }
 
-void LinkEndCreationDataImpl::setIsReplaceAll(bool  _isReplaceAll)
+void LinkEndCreationDataImpl::setIsReplaceAll(bool _isReplaceAll)
 {
 	m_isReplaceAll = _isReplaceAll;
 } 
@@ -324,7 +319,7 @@ void LinkEndCreationDataImpl::loadNode(std::string nodeName, std::shared_ptr<per
 	LinkEndDataImpl::loadNode(nodeName, loadHandler);
 }
 
-void LinkEndCreationDataImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void LinkEndCreationDataImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -371,7 +366,7 @@ void LinkEndCreationDataImpl::saveContent(std::shared_ptr<persistence::interface
 		}
 
 	// Add references
-		saveHandler->addReference("insertAt", this->getInsertAt());		 
+		saveHandler->addReference("insertAt", this->getInsertAt()); 
 	}
 	catch (std::exception& e)
 	{

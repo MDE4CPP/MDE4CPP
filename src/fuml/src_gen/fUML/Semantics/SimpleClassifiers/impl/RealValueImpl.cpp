@@ -38,11 +38,8 @@
 #include <exception> // used in Persistence
 
 #include "uml/PrimitiveType.hpp"
-
 #include "fUML/Semantics/SimpleClassifiers/PrimitiveValue.hpp"
-
 #include "fUML/Semantics/Values/Value.hpp"
-
 #include "uml/ValueSpecification.hpp"
 
 //Factories an Package includes
@@ -111,12 +108,12 @@ std::shared_ptr<ecore::EClass> RealValueImpl::eStaticClass() const
 /*
 Getter & Setter for attribute value
 */
-double  RealValueImpl::getValue() const 
+double RealValueImpl::getValue() const 
 {
 	return m_value;
 }
 
-void RealValueImpl::setValue(double  _value)
+void RealValueImpl::setValue(double _value)
 {
 	m_value = _value;
 } 
@@ -155,7 +152,7 @@ bool RealValueImpl::equals(std::shared_ptr<fUML::Semantics::Values::Value> other
 	//end of body
 }
 
-std::shared_ptr<org.eclipse.uml2.uml.ValueSpecification> RealValueImpl::specify()
+std::shared_ptr<uml::ValueSpecification> RealValueImpl::specify()
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -292,7 +289,7 @@ void RealValueImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::
 	PrimitiveValueImpl::loadNode(nodeName, loadHandler);
 }
 
-void RealValueImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void RealValueImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	PrimitiveValueImpl::resolveReferences(featureID, references);
 }

@@ -7,23 +7,19 @@
 #ifndef ECORE_ECLASS_HPP
 #define ECORE_ECLASS_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T> class Bag; 
 template<class T, class ... U> class Subset;
 template<class T, class ... U> class SubsetUnion;
 
 
-
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -57,13 +53,12 @@ namespace ecore
 // enum includes
 
 
-//Includes from codegen annotation
 
 //*********************************
 namespace ecore 
 {
 	
-	class EClass:virtual public EClassifier
+	class EClass: virtual public EClassifier
 	{
 		public:
  			EClass(const EClass &) {}
@@ -71,7 +66,6 @@ namespace ecore
 
 		protected:
 			EClass(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -116,17 +110,13 @@ namespace ecore
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			 
-			virtual bool  isAbstract() const = 0;
+			virtual bool isAbstract() const = 0;
 			
 			 
-			virtual void setAbstract (bool  _abstract)= 0; 
-			 
-			virtual bool  isInterface() const = 0;
+			virtual void setAbstract (bool _abstract)= 0;virtual bool isInterface() const = 0;
 			
 			 
-			virtual void setInterface (bool  _interface)= 0; 
-			
+			virtual void setInterface (bool _interface)= 0;
 			//*********************************
 			// Reference
 			//*********************************
@@ -193,9 +183,9 @@ namespace ecore
 			// Attribute Members
 			//*********************************
 			 
-			bool  m_abstract = false;
+			bool m_abstract = false;
 			 
-			bool  m_interface = false;
+			bool m_interface = false;
 			
 			
 			//*********************************
@@ -232,7 +222,7 @@ namespace ecore
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

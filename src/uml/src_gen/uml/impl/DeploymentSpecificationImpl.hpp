@@ -9,7 +9,6 @@
 
 //*********************************
 // generated Includes
-
 //Model includes
 #include "../DeploymentSpecification.hpp"
 
@@ -89,28 +88,26 @@ namespace uml
 			<p>From package UML::Deployments.</p>
 			*/
 			 
-			virtual std::string  getDeploymentLocation() const ;
+			virtual std::string getDeploymentLocation() const ;
 			
 			/*!
 			The location where an Artifact is deployed onto a Node. This is typically a 'directory' or 'memory address.'
 			<p>From package UML::Deployments.</p>
 			*/
 			 
-			virtual void setDeploymentLocation (std::string  _deploymentLocation); 
-			/*!
+			virtual void setDeploymentLocation (std::string _deploymentLocation);/*!
 			The location where a component Artifact executes. This may be a local or remote location.
 			<p>From package UML::Deployments.</p>
 			*/
 			 
-			virtual std::string  getExecutionLocation() const ;
+			virtual std::string getExecutionLocation() const ;
 			
 			/*!
 			The location where a component Artifact executes. This may be a local or remote location.
 			<p>From package UML::Deployments.</p>
 			*/
 			 
-			virtual void setExecutionLocation (std::string  _executionLocation); 
-			
+			virtual void setExecutionLocation (std::string _executionLocation);
 			
 			//*********************************
 			// Reference
@@ -189,7 +186,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

@@ -35,39 +35,22 @@
 #include <exception> // used in Persistence
 
 #include "uml/Behavior.hpp"
-
 #include "uml/Classifier.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/Constraint.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/ElementImport.hpp"
-
 #include "uml/NamedElement.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/PackageImport.hpp"
-
 #include "uml/PackageableElement.hpp"
-
 #include "uml/RedefinableElement.hpp"
-
 #include "uml/Region.hpp"
-
 #include "uml/StateMachine.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/Transition.hpp"
-
 #include "uml/Trigger.hpp"
-
 #include "uml/Vertex.hpp"
 
 //Factories an Package includes
@@ -262,12 +245,12 @@ std::shared_ptr<ecore::EClass> TransitionImpl::eStaticClass() const
 /*
 Getter & Setter for attribute kind
 */
-uml::TransitionKind  TransitionImpl::getKind() const 
+uml::TransitionKind TransitionImpl::getKind() const 
 {
 	return m_kind;
 }
 
-void TransitionImpl::setKind(uml::TransitionKind  _kind)
+void TransitionImpl::setKind(uml::TransitionKind _kind)
 {
 	m_kind = _kind;
 } 
@@ -727,7 +710,7 @@ bool TransitionImpl::eSet(int featureID, Any newValue)
 				}
 				iterTrigger++;
 			}
-
+ 
 			iterTrigger = triggerList->begin();
 			endTrigger = triggerList->end();
 			while (iterTrigger != endTrigger)
@@ -780,7 +763,7 @@ void TransitionImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLo
 		iter = attr_list.find("kind");
 		if ( iter != attr_list.end() )
 		{
-			uml::TransitionKind  value = TransitionKind::EXTERNAL;
+			uml::TransitionKind value = TransitionKind::EXTERNAL;
 			std::string literal = iter->second;
 			if (literal == "internal")
 			{
@@ -891,7 +874,7 @@ void TransitionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence:
 	RedefinableElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void TransitionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void TransitionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -999,7 +982,7 @@ void TransitionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 		// Add attributes
 		if ( this->eIsSet(package->getTransition_Attribute_kind()) )
 		{
-			uml::TransitionKind  value = this->getKind();
+			uml::TransitionKind value = this->getKind();
 			std::string literal = "";
 			if (value == TransitionKind::INTERNAL)
 			{
@@ -1017,10 +1000,10 @@ void TransitionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 		}
 
 	// Add references
-		saveHandler->addReference("guard", this->getGuard());		 
-		saveHandler->addReference("redefinedTransition", this->getRedefinedTransition());		 
-		saveHandler->addReference("source", this->getSource());		 
-		saveHandler->addReference("target", this->getTarget());		 
+		saveHandler->addReference("guard", this->getGuard()); 
+		saveHandler->addReference("redefinedTransition", this->getRedefinedTransition()); 
+		saveHandler->addReference("source", this->getSource()); 
+		saveHandler->addReference("target", this->getTarget()); 
 	}
 	catch (std::exception& e)
 	{

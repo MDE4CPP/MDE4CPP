@@ -35,53 +35,29 @@
 #include <exception> // used in Persistence
 
 #include "uml/Class.hpp"
-
 #include "uml/Classifier.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/Constraint.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "ecore/ENamedElement.hpp"
-
 #include "ecore/EObject.hpp"
-
 #include "ecore/EPackage.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/ElementImport.hpp"
-
 #include "uml/Extension.hpp"
-
 #include "uml/Model.hpp"
-
 #include "uml/NamedElement.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/Package.hpp"
-
 #include "uml/PackageImport.hpp"
-
 #include "uml/PackageMerge.hpp"
-
 #include "uml/PackageableElement.hpp"
-
 #include "uml/ProfileApplication.hpp"
-
 #include "uml/Stereotype.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/TemplateBinding.hpp"
-
 #include "uml/TemplateParameter.hpp"
-
 #include "uml/TemplateSignature.hpp"
-
 #include "uml/Type.hpp"
 
 //Factories an Package includes
@@ -620,7 +596,7 @@ bool ProfileImpl::eSet(int featureID, Any newValue)
 				}
 				iterMetaclassReference++;
 			}
-
+ 
 			iterMetaclassReference = metaclassReferenceList->begin();
 			endMetaclassReference = metaclassReferenceList->end();
 			while (iterMetaclassReference != endMetaclassReference)
@@ -656,7 +632,7 @@ bool ProfileImpl::eSet(int featureID, Any newValue)
 				}
 				iterMetamodelReference++;
 			}
-
+ 
 			iterMetamodelReference = metamodelReferenceList->begin();
 			endMetamodelReference = metamodelReferenceList->end();
 			while (iterMetamodelReference != endMetamodelReference)
@@ -733,7 +709,7 @@ void ProfileImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::in
 	PackageImpl::loadNode(nodeName, loadHandler);
 }
 
-void ProfileImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ProfileImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -800,8 +776,8 @@ void ProfileImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	// Add references
-		saveHandler->addReferences<uml::ElementImport>("metaclassReference", this->getMetaclassReference());	
-		saveHandler->addReferences<uml::PackageImport>("metamodelReference", this->getMetamodelReference());	
+		saveHandler->addReferences<uml::ElementImport>("metaclassReference", this->getMetaclassReference());
+		saveHandler->addReferences<uml::PackageImport>("metamodelReference", this->getMetamodelReference());
 	}
 	catch (std::exception& e)
 	{

@@ -8,24 +8,20 @@
 #define UML_ACTIVITY_HPP
 
 #include <map>
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T, class ... U> class Subset;
 template<class T, class ... U> class SubsetUnion;
-
 
 class AnyObject;
 typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -85,7 +81,6 @@ namespace uml
 #include "uml/VisibilityKind.hpp"
 
 
-//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -95,7 +90,7 @@ namespace uml
 	<p>From package UML::Activities.</p>
 	*/
 	
-	class Activity:virtual public Behavior
+	class Activity: virtual public Behavior
 	{
 		public:
  			Activity(const Activity &) {}
@@ -103,7 +98,6 @@ namespace uml
 
 		protected:
 			Activity(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -146,28 +140,26 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			 
-			virtual bool  getIsReadOnly() const = 0;
+			virtual bool getIsReadOnly() const = 0;
 			
 			/*!
 			If true, this Activity must not make any changes to objects. The default is false (an Activity may make nonlocal changes). (This is an assertion, not an executable property. It may be used by an execution engine to optimize model execution. If the assertion is violated by the Activity, then the model is ill-formed.)
 			<p>From package UML::Activities.</p>
 			*/
 			 
-			virtual void setIsReadOnly (bool  _isReadOnly)= 0; 
-			/*!
+			virtual void setIsReadOnly (bool _isReadOnly)= 0;/*!
 			If true, all invocations of the Activity are handled by the same execution.
 			<p>From package UML::Activities.</p>
 			*/
 			 
-			virtual bool  getIsSingleExecution() const = 0;
+			virtual bool getIsSingleExecution() const = 0;
 			
 			/*!
 			If true, all invocations of the Activity are handled by the same execution.
 			<p>From package UML::Activities.</p>
 			*/
 			 
-			virtual void setIsSingleExecution (bool  _isSingleExecution)= 0; 
-			
+			virtual void setIsSingleExecution (bool _isSingleExecution)= 0;
 			//*********************************
 			// Reference
 			//*********************************
@@ -232,13 +224,13 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			 
-			bool  m_isReadOnly = false;
+			bool m_isReadOnly = false;
 			/*!
 			If true, all invocations of the Activity are handled by the same execution.
 			<p>From package UML::Activities.</p>
 			*/
 			 
-			bool  m_isSingleExecution = false;
+			bool m_isSingleExecution = false;
 			
 			
 			//*********************************
@@ -346,7 +338,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

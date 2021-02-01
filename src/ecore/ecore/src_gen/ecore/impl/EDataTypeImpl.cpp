@@ -33,13 +33,9 @@
 #include <exception> // used in Persistence
 
 #include "ecore/EAnnotation.hpp"
-
 #include "ecore/EClassifier.hpp"
-
 #include "ecore/EObject.hpp"
-
 #include "ecore/EPackage.hpp"
-
 #include "ecore/ETypeParameter.hpp"
 
 //Factories an Package includes
@@ -141,12 +137,12 @@ std::shared_ptr<EClass> EDataTypeImpl::eStaticClass() const
 /*
 Getter & Setter for attribute serializable
 */
-bool  EDataTypeImpl::isSerializable() const 
+bool EDataTypeImpl::isSerializable() const 
 {
 	return m_serializable;
 }
 
-void EDataTypeImpl::setSerializable(bool  _serializable)
+void EDataTypeImpl::setSerializable(bool _serializable)
 {
 	m_serializable = _serializable;
 } 
@@ -296,7 +292,7 @@ void EDataTypeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::
 	EClassifierImpl::loadNode(nodeName, loadHandler);
 }
 
-void EDataTypeImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references)
+void EDataTypeImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references)
 {
 	EClassifierImpl::resolveReferences(featureID, references);
 }

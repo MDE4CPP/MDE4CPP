@@ -35,11 +35,8 @@
 #include <exception> // used in Persistence
 
 #include "fUML/Semantics/Values/LiteralEvaluation.hpp"
-
 #include "fUML/Semantics/Loci/Locus.hpp"
-
 #include "fUML/Semantics/Values/Value.hpp"
-
 #include "uml/ValueSpecification.hpp"
 
 //Factories an Package includes
@@ -204,7 +201,7 @@ void LiteralStringEvaluationImpl::loadNode(std::string nodeName, std::shared_ptr
 	LiteralEvaluationImpl::loadNode(nodeName, loadHandler);
 }
 
-void LiteralStringEvaluationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void LiteralStringEvaluationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	LiteralEvaluationImpl::resolveReferences(featureID, references);
 }

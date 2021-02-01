@@ -46,25 +46,15 @@
 #include <exception> // used in Persistence
 
 #include "uml/Activity.hpp"
-
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
-
 #include "uml/Behavior.hpp"
-
 #include "uml/Classifier.hpp"
-
 #include "fUML/Semantics/CommonBehavior/Execution.hpp"
-
 #include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
-
 #include "fUML/Semantics/Loci/Locus.hpp"
-
 #include "fUML/Semantics/StructuredClassifiers/Object.hpp"
-
 #include "fUML/Semantics/CommonBehavior/ObjectActivation.hpp"
-
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
-
 #include "fUML/Semantics/Values/Value.hpp"
 
 //Factories an Package includes
@@ -114,8 +104,8 @@ ActivityExecutionImpl::ActivityExecutionImpl(const ActivityExecutionImpl & obj):
 
 	m_locus  = obj.getLocus();
 
-	std::shared_ptr<Bag<org.eclipse.uml2.uml.Classifier>> _types = obj.getTypes();
-	m_types.reset(new Bag<org.eclipse.uml2.uml.Classifier>(*(obj.getTypes().get())));
+	std::shared_ptr<Bag<uml::Classifier>> _types = obj.getTypes();
+	m_types.reset(new Bag<uml::Classifier>(*(obj.getTypes().get())));
 
 
 	//Clone references with containment (deep copy)
@@ -298,7 +288,7 @@ void ActivityExecutionImpl::setActivationGroup(std::shared_ptr<fUML::Semantics::
 /*
 Getter & Setter for reference activity
 */
-std::shared_ptr<org.eclipse.uml2.uml.Activity > ActivityExecutionImpl::getActivity() const
+std::shared_ptr<uml::Activity > ActivityExecutionImpl::getActivity() const
 {
 	//generated from getterbody annotation
 if(!m_activity)
@@ -310,7 +300,7 @@ return m_activity;
 	//end of body
 }
 
-void ActivityExecutionImpl::setActivity(std::shared_ptr<org.eclipse.uml2.uml.Activity> _activity)
+void ActivityExecutionImpl::setActivity(std::shared_ptr<uml::Activity> _activity)
 {
     m_activity = _activity;
 	//additional setter call for redefined reference Execution::behavior
@@ -318,9 +308,9 @@ void ActivityExecutionImpl::setActivity(std::shared_ptr<org.eclipse.uml2.uml.Act
 }
 
 /*Additional Setter for redefined reference 'Execution::behavior'*/
-void ActivityExecutionImpl::setBehavior(std::shared_ptr<org.eclipse.uml2.uml.Behavior> _behavior)
+void ActivityExecutionImpl::setBehavior(std::shared_ptr<uml::Behavior> _behavior)
 {
-	std::shared_ptr<org.eclipse.uml2.uml.Activity> _activity = std::dynamic_pointer_cast<org.eclipse.uml2.uml.Activity>(_behavior);
+	std::shared_ptr<uml::Activity> _activity = std::dynamic_pointer_cast<uml::Activity>(_behavior);
 	if(_activity)
 	{
 		m_activity = _activity;
@@ -330,7 +320,7 @@ void ActivityExecutionImpl::setBehavior(std::shared_ptr<org.eclipse.uml2.uml.Beh
 	}
 	else
 	{
-		std::cerr<<"[ActivityExecution::setBehavior] : Could not set behavior because provided behavior was not of type 'org.eclipse.uml2.uml.Activity'"<<std::endl;
+		std::cerr<<"[ActivityExecution::setBehavior] : Could not set behavior because provided behavior was not of type 'uml::Activity'"<<std::endl;
 	}
 }
 
@@ -396,7 +386,7 @@ bool ActivityExecutionImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<org.eclipse.uml2.uml.Activity> _activity = std::dynamic_pointer_cast<org.eclipse.uml2.uml.Activity>(_temp);
+			std::shared_ptr<uml::Activity> _activity = std::dynamic_pointer_cast<uml::Activity>(_temp);
 			setActivity(_activity); //78
 			return true;
 		}
@@ -482,7 +472,7 @@ void ActivityExecutionImpl::loadNode(std::string nodeName, std::shared_ptr<persi
 	fUML::Semantics::CommonBehavior::ExecutionImpl::loadNode(nodeName, loadHandler);
 }
 
-void ActivityExecutionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ActivityExecutionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -491,7 +481,7 @@ void ActivityExecutionImpl::resolveReferences(const int featureID, std::list<std
 			if (references.size() == 1)
 			{
 				// Cast object to correct type
-				std::shared_ptr<org.eclipse.uml2.uml.Activity> _activity = std::dynamic_pointer_cast<org.eclipse.uml2.uml.Activity>( references.front() );
+				std::shared_ptr<uml::Activity> _activity = std::dynamic_pointer_cast<uml::Activity>( references.front() );
 				setActivity(_activity);
 			}
 			
@@ -536,7 +526,7 @@ void ActivityExecutionImpl::saveContent(std::shared_ptr<persistence::interfaces:
 		std::shared_ptr<fUML::Semantics::Activities::ActivitiesPackage> package = fUML::Semantics::Activities::ActivitiesPackage::eInstance();
 
 	// Add references
-		saveHandler->addReference("activity", this->getActivity());		
+		saveHandler->addReference("activity", this->getActivity()); 
 
 		//
 		// Add new tags (from references)

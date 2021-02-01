@@ -8,25 +8,21 @@
 #define UML_CLASSIFIER_HPP
 
 #include <map>
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T> class Bag; 
 template<class T, class ... U> class Subset;
 template<class T, class ... U> class SubsetUnion;
-
 
 class AnyObject;
 typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -68,18 +64,14 @@ namespace uml
 
 // base class includes
 #include "uml/Namespace.hpp"
-
 #include "uml/RedefinableElement.hpp"
-
 #include "uml/TemplateableElement.hpp"
-
 #include "uml/Type.hpp"
 
 // enum includes
 #include "uml/VisibilityKind.hpp"
 
 
-//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -89,7 +81,7 @@ namespace uml
 	<p>From package UML::Classification.</p>
 	*/
 	
-	class Classifier:virtual public Namespace,virtual public RedefinableElement,virtual public TemplateableElement,virtual public Type
+	class Classifier: virtual public Namespace, virtual public RedefinableElement, virtual public TemplateableElement, virtual public Type
 	{
 		public:
  			Classifier(const Classifier &) {}
@@ -97,7 +89,6 @@ namespace uml
 
 		protected:
 			Classifier(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -217,19 +208,25 @@ namespace uml
 			Retrieves the first operation with the specified name, parameter names, and parameter types from this classifier.
 			*/
 			 
-			virtual std::shared_ptr<uml::Operation> getOperation(std::string name,std::shared_ptr<Bag<std::string> > parameterNames,std::shared_ptr<Bag<uml::Type> > parameterTypes) = 0;
+			virtual std::shared_ptr<uml::Operation> getOperation(std::string name,std::shared_ptr<Bag<std::string>> parameterNames,std::shared_ptr<Bag<uml::Type>> parameterTypes) = 0;
 			
 			/*!
 			Retrieves the first operation with the specified name, parameter names, and parameter types from this classifier, ignoring case if indicated.
 			*/
 			 
-			virtual std::shared_ptr<uml::Operation> getOperation(std::string name,std::shared_ptr<Bag<std::string> > parameterNames,std::shared_ptr<Bag<uml::Type> > parameterTypes,bool ignoreCase) = 0;
+			virtual std::shared_ptr<uml::Operation> getOperation(std::string name,std::shared_ptr<Bag<std::string>> parameterNames,std::shared_ptr<Bag<uml::Type>> parameterTypes,bool ignoreCase) = 0;
 			
 			/*!
 			Retrieves the operations of this classifier.
 			*/
 			 
 			virtual std::shared_ptr<Bag<uml::Operation> > getOperations() = 0;
+			
+			/*!
+			Retrieves the value of the property with the specified name.
+			*/
+			 
+			virtual Any getPropertyValue(std::string propertyName) = 0;
 			
 			/*!
 			Retrieves the interfaces on which this classifier has a usage dependency.
@@ -256,7 +253,7 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::NamedElement> > inherit(std::shared_ptr<Bag<uml::NamedElement> > inhs) = 0;
+			virtual std::shared_ptr<Bag<uml::NamedElement> > inherit(std::shared_ptr<Bag<uml::NamedElement>> inhs) = 0;
 			
 			/*!
 			The query inheritableMembers() gives all of the members of a Classifier that may be inherited in one of its descendants, subject to whatever visibility restrictions apply.
@@ -330,28 +327,26 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual bool  getIsAbstract() const = 0;
+			virtual bool getIsAbstract() const = 0;
 			
 			/*!
 			If true, the Classifier can only be instantiated by instantiating one of its specializations. An abstract Classifier is intended to be used by other Classifiers e.g., as the target of Associations or Generalizations.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual void setIsAbstract (bool  _isAbstract)= 0; 
-			/*!
+			virtual void setIsAbstract (bool _isAbstract)= 0;/*!
 			If true, the Classifier cannot be specialized.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual bool  getIsFinalSpecialization() const = 0;
+			virtual bool getIsFinalSpecialization() const = 0;
 			
 			/*!
 			If true, the Classifier cannot be specialized.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual void setIsFinalSpecialization (bool  _isFinalSpecialization)= 0; 
-			
+			virtual void setIsFinalSpecialization (bool _isFinalSpecialization)= 0;
 			//*********************************
 			// Reference
 			//*********************************
@@ -456,13 +451,13 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			bool  m_isAbstract = false;
+			bool m_isAbstract = false;
 			/*!
 			If true, the Classifier cannot be specialized.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			bool  m_isFinalSpecialization = false;
+			bool m_isFinalSpecialization = false;
 			
 			
 			//*********************************
@@ -583,7 +578,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

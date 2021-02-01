@@ -7,22 +7,18 @@
 #ifndef FUML_SEMANTICS_ACTIONS_ACTIONACTIVATION_HPP
 #define FUML_SEMANTICS_ACTIONS_ACTIONACTIVATION_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T> class Bag; 
 template<class T, class ... U> class Subset;
 template<class T> class Union;
 
-
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -77,37 +73,12 @@ namespace uml
 // enum includes
 
 
-//Includes from codegen annotation
-#include <algorithm>
-#include <iterator>
-#include "abstractDataTypes/SubsetUnion.hpp"
-#include "fUML/Semantics/Activities/ActivityExecution.hpp"
-#include "fUML/Semantics/Activities/ActivityNodeActivation.hpp"
-#include "fUML/Semantics/Activities/ControlToken.hpp"
-#include "fUML/Semantics/Loci/Executor.hpp"
-#include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
-#include "fUML/Semantics/Activities/ForkNodeActivation.hpp"
-#include "fUML/FUMLFactory.hpp"
-#include "fUML/Semantics/StructuredClassifiers/Link.hpp"
-#include "fUML/Semantics/Loci/Locus.hpp"
-#include "fUML/Semantics/Activities/ObjectToken.hpp"
-#include "fUML/Semantics/Actions/PinActivation.hpp"
-#include "uml/Action.hpp"
-#include "uml/ActivityNode.hpp"
-#include "uml/Behavior.hpp"
-#include "uml/DataStoreNode.hpp"
-#include "uml/LiteralBoolean.hpp"
-#include "uml/InputPin.hpp"
-#include "uml/OutputPin.hpp"
-#include "uml/umlFactory.hpp"
-#include "uml/ForkNode.hpp"
-#include "uml/Activity.hpp"
 
 //*********************************
 namespace fUML::Semantics::Actions 
 {
 	
-	class ActionActivation:virtual public fUML::Semantics::Activities::ActivityNodeActivation
+	class ActionActivation: virtual public fUML::Semantics::Activities::ActivityNodeActivation
 	{
 		public:
  			ActionActivation(const ActionActivation &) {}
@@ -115,7 +86,6 @@ namespace fUML::Semantics::Actions
 
 		protected:
 			ActionActivation(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -142,10 +112,10 @@ namespace fUML::Semantics::Actions
 			virtual void doAction() = 0;
 			
 			 
-			virtual void fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > incomingTokens) = 0;
+			virtual void fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incomingTokens) = 0;
 			
 			 
-			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value> > getTokens(std::shared_ptr<org.eclipse.uml2.uml.InputPin> pin) = 0;
+			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value> > getTokens(std::shared_ptr<uml::InputPin> pin) = 0;
 			
 			 
 			virtual bool isFirng() = 0;
@@ -160,13 +130,13 @@ namespace fUML::Semantics::Actions
 			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> makeBooleanValue(bool value) = 0;
 			
 			 
-			virtual void putToken(std::shared_ptr<org.eclipse.uml2.uml.OutputPin> pin,std::shared_ptr<fUML::Semantics::Values::Value> value) = 0;
+			virtual void putToken(std::shared_ptr<uml::OutputPin> pin,std::shared_ptr<fUML::Semantics::Values::Value> value) = 0;
 			
 			 
-			virtual void putTokens(std::shared_ptr<org.eclipse.uml2.uml.OutputPin> pin,std::shared_ptr<Bag<fUML::Semantics::Values::Value> > values) = 0;
+			virtual void putTokens(std::shared_ptr<uml::OutputPin> pin,std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values) = 0;
 			
 			 
-			virtual std::shared_ptr<fUML::Semantics::Actions::PinActivation> retrievePinActivation(std::shared_ptr<org.eclipse.uml2.uml.Pin> pin) = 0;
+			virtual std::shared_ptr<fUML::Semantics::Actions::PinActivation> retrievePinActivation(std::shared_ptr<uml::Pin> pin) = 0;
 			
 			 
 			virtual void run() = 0;
@@ -178,7 +148,7 @@ namespace fUML::Semantics::Actions
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > takeOfferedTokens() = 0;
 			
 			 
-			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value> > takeTokens(std::shared_ptr<org.eclipse.uml2.uml.InputPin> pin) = 0;
+			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value> > takeTokens(std::shared_ptr<uml::InputPin> pin) = 0;
 			
 			 
 			virtual void terminate() = 0;
@@ -190,25 +160,22 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			 
-			virtual bool  isFiring() const = 0;
+			virtual bool isFiring() const = 0;
 			
 			 
-			virtual void setFiring (bool  _firing)= 0; 
-			
+			virtual void setFiring (bool _firing)= 0;
 			//*********************************
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<org.eclipse.uml2.uml.Action > getAction() const = 0;
+			virtual std::shared_ptr<uml::Action > getAction() const = 0;
 			
 			
-			virtual void setAction(std::shared_ptr<org.eclipse.uml2.uml.Action> _action) = 0;
+			virtual void setAction(std::shared_ptr<uml::Action> _action) = 0;
 			
 			/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'action'*/
 			
-			virtual void setNode(std::shared_ptr<org.eclipse.uml2.uml.ActivityNode> _node) = 0;
-			
+			virtual void setNode(std::shared_ptr<uml::ActivityNode> _node) = 0;
 			
 			virtual std::shared_ptr<Subset<fUML::Semantics::Actions::InputPinActivation, fUML::Semantics::Actions::PinActivation>> getInputPinActivation() const = 0;
 			
@@ -226,14 +193,14 @@ namespace fUML::Semantics::Actions
 			// Attribute Members
 			//*********************************
 			 
-			bool  m_firing = false;
+			bool m_firing = false;
 			
 			
 			//*********************************
 			// Reference Members
 			//*********************************
 			
-			std::shared_ptr<org.eclipse.uml2.uml.Action > m_action;
+			std::shared_ptr<uml::Action > m_action;
 			mutable std::shared_ptr<Subset<fUML::Semantics::Actions::InputPinActivation, fUML::Semantics::Actions::PinActivation>> m_inputPinActivation;
 			mutable std::shared_ptr<Subset<fUML::Semantics::Actions::OutputPinActivation, fUML::Semantics::Actions::PinActivation>> m_outputPinActivation;
 			mutable std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> m_pinActivation;
@@ -252,7 +219,7 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

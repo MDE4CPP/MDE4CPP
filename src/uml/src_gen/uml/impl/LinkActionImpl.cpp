@@ -35,45 +35,25 @@
 #include <exception> // used in Persistence
 
 #include "uml/Action.hpp"
-
 #include "uml/Activity.hpp"
-
 #include "uml/ActivityEdge.hpp"
-
 #include "uml/ActivityGroup.hpp"
-
 #include "uml/ActivityNode.hpp"
-
 #include "uml/ActivityPartition.hpp"
-
 #include "uml/Association.hpp"
-
 #include "uml/Classifier.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/Constraint.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/ExceptionHandler.hpp"
-
 #include "uml/InputPin.hpp"
-
 #include "uml/InterruptibleActivityRegion.hpp"
-
 #include "uml/LinkEndData.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/OutputPin.hpp"
-
 #include "uml/RedefinableElement.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/StructuredActivityNode.hpp"
 
 //Factories an Package includes
@@ -493,32 +473,10 @@ Any LinkActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::LINKACTION_ATTRIBUTE_ENDDATA:
 		{
 			return eAny(getEndData()); //13327			
-			/*
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::LinkEndData>::iterator iter = m_endData->begin();
-			Bag<uml::LinkEndData>::iterator end = m_endData->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //13327
-			*/
 		}
 		case uml::umlPackage::LINKACTION_ATTRIBUTE_INPUTVALUE:
 		{
 			return eAny(getInputValue()); //13328			
-			/*
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::InputPin>::iterator iter = m_inputValue->begin();
-			Bag<uml::InputPin>::iterator end = m_inputValue->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //13328
-			*/
 		}
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
@@ -561,7 +519,7 @@ bool LinkActionImpl::eSet(int featureID, Any newValue)
 				}
 				iterEndData++;
 			}
-
+ 
 			iterEndData = endDataList->begin();
 			endEndData = endDataList->end();
 			while (iterEndData != endEndData)
@@ -597,7 +555,7 @@ bool LinkActionImpl::eSet(int featureID, Any newValue)
 				}
 				iterInputValue++;
 			}
-
+ 
 			iterInputValue = inputValueList->begin();
 			endInputValue = inputValueList->end();
 			while (iterInputValue != endInputValue)
@@ -692,7 +650,7 @@ void LinkActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence:
 	ActionImpl::loadNode(nodeName, loadHandler);
 }
 
-void LinkActionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void LinkActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	ActionImpl::resolveReferences(featureID, references);
 }

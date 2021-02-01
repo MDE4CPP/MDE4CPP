@@ -7,20 +7,16 @@
 #ifndef ECORE_ETYPEDELEMENT_HPP
 #define ECORE_ETYPEDELEMENT_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
-
 
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -49,13 +45,12 @@ namespace ecore
 // enum includes
 
 
-//Includes from codegen annotation
 
 //*********************************
 namespace ecore 
 {
 	
-	class ETypedElement:virtual public ENamedElement
+	class ETypedElement: virtual public ENamedElement
 	{
 		public:
  			ETypedElement(const ETypedElement &) {}
@@ -63,7 +58,6 @@ namespace ecore
 
 		protected:
 			ETypedElement(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -78,36 +72,22 @@ namespace ecore
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			 
-			virtual int  getLowerBound() const = 0;
+			virtual int getLowerBound() const = 0;
 			
 			 
-			virtual void setLowerBound (int  _lowerBound)= 0; 
-			 
-			virtual bool  isMany() const = 0;
-			
+			virtual void setLowerBound (int _lowerBound)= 0;virtual bool isMany() const = 0;virtual bool isOrdered() const = 0;
 			
 			 
-			virtual bool  isOrdered() const = 0;
+			virtual void setOrdered (bool _ordered)= 0;virtual bool isRequired() const = 0;
 			
 			 
-			virtual void setOrdered (bool  _ordered)= 0; 
-			 
-			virtual bool  isRequired() const = 0;
+			virtual void setRequired (bool _required)= 0;virtual bool isUnique() const = 0;
 			
 			 
-			virtual void setRequired (bool  _required)= 0; 
-			 
-			virtual bool  isUnique() const = 0;
+			virtual void setUnique (bool _unique)= 0;virtual int getUpperBound() const = 0;
 			
 			 
-			virtual void setUnique (bool  _unique)= 0; 
-			 
-			virtual int  getUpperBound() const = 0;
-			
-			 
-			virtual void setUpperBound (int  _upperBound)= 0; 
-			
+			virtual void setUpperBound (int _upperBound)= 0;
 			//*********************************
 			// Reference
 			//*********************************
@@ -130,17 +110,17 @@ namespace ecore
 			// Attribute Members
 			//*********************************
 			 
-			int  m_lowerBound = 0;
+			int m_lowerBound = 0;
 			 
-			bool  m_many = false;
+			bool m_many = false;
 			 
-			bool  m_ordered = true;
+			bool m_ordered = true;
 			 
-			bool  m_required = false;
+			bool m_required = false;
 			 
-			bool  m_unique = true;
+			bool m_unique = true;
 			 
-			int  m_upperBound = 1;
+			int m_upperBound = 1;
 			
 			
 			//*********************************
@@ -164,7 +144,7 @@ namespace ecore
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

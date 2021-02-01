@@ -35,17 +35,11 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/NamedElement.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/OccurrenceSpecification.hpp"
-
 #include "uml/StringExpression.hpp"
 
 //Factories an Package includes
@@ -350,7 +344,7 @@ void GeneralOrderingImpl::loadNode(std::string nodeName, std::shared_ptr<persist
 	NamedElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void GeneralOrderingImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void GeneralOrderingImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -404,8 +398,8 @@ void GeneralOrderingImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	// Add references
-		saveHandler->addReference("after", this->getAfter());		 
-		saveHandler->addReference("before", this->getBefore());		 
+		saveHandler->addReference("after", this->getAfter()); 
+		saveHandler->addReference("before", this->getBefore()); 
 	}
 	catch (std::exception& e)
 	{

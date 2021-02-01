@@ -35,21 +35,13 @@
 #include <exception> // used in Persistence
 
 #include "uml/Activity.hpp"
-
 #include "uml/ActivityEdge.hpp"
-
 #include "uml/ActivityGroup.hpp"
-
 #include "uml/ActivityNode.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/StringExpression.hpp"
 
 //Factories an Package includes
@@ -374,7 +366,7 @@ bool InterruptibleActivityRegionImpl::eSet(int featureID, Any newValue)
 				}
 				iterInterruptingEdge++;
 			}
-
+ 
 			iterInterruptingEdge = interruptingEdgeList->begin();
 			endInterruptingEdge = interruptingEdgeList->end();
 			while (iterInterruptingEdge != endInterruptingEdge)
@@ -410,7 +402,7 @@ bool InterruptibleActivityRegionImpl::eSet(int featureID, Any newValue)
 				}
 				iterNode++;
 			}
-
+ 
 			iterNode = nodeList->begin();
 			endNode = nodeList->end();
 			while (iterNode != endNode)
@@ -487,7 +479,7 @@ void InterruptibleActivityRegionImpl::loadNode(std::string nodeName, std::shared
 	ActivityGroupImpl::loadNode(nodeName, loadHandler);
 }
 
-void InterruptibleActivityRegionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void InterruptibleActivityRegionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -548,8 +540,8 @@ void InterruptibleActivityRegionImpl::saveContent(std::shared_ptr<persistence::i
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	// Add references
-		saveHandler->addReferences<uml::ActivityEdge>("interruptingEdge", this->getInterruptingEdge());	
-		saveHandler->addReferences<uml::ActivityNode>("node", this->getNode());	
+		saveHandler->addReferences<uml::ActivityEdge>("interruptingEdge", this->getInterruptingEdge());
+		saveHandler->addReferences<uml::ActivityNode>("node", this->getNode());
 	}
 	catch (std::exception& e)
 	{

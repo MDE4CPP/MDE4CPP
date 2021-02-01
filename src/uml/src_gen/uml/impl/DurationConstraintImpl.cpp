@@ -35,21 +35,13 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/IntervalConstraint.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/Package.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/TemplateParameter.hpp"
-
 #include "uml/ValueSpecification.hpp"
 
 //Factories an Package includes
@@ -198,8 +190,7 @@ std::shared_ptr<ecore::EClass> DurationConstraintImpl::eStaticClass() const
 /*
 Getter & Setter for attribute firstEvent
 */
- std::shared_ptr<Bag<bool> >
- DurationConstraintImpl::isFirstEvent() const 
+std::shared_ptr<Bag<bool>> DurationConstraintImpl::isFirstEvent() const 
 {
 	if(m_firstEvent == nullptr)
 	{
@@ -385,7 +376,7 @@ void DurationConstraintImpl::loadNode(std::string nodeName, std::shared_ptr<pers
 	IntervalConstraintImpl::loadNode(nodeName, loadHandler);
 }
 
-void DurationConstraintImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void DurationConstraintImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	IntervalConstraintImpl::resolveReferences(featureID, references);
 }

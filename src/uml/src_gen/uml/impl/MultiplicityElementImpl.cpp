@@ -34,11 +34,8 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/MultiplicityElement.hpp"
-
 #include "uml/ValueSpecification.hpp"
 
 //Factories an Package includes
@@ -137,12 +134,12 @@ std::shared_ptr<ecore::EClass> MultiplicityElementImpl::eStaticClass() const
 /*
 Getter & Setter for attribute isOrdered
 */
-bool  MultiplicityElementImpl::getIsOrdered() const 
+bool MultiplicityElementImpl::getIsOrdered() const 
 {
 	return m_isOrdered;
 }
 
-void MultiplicityElementImpl::setIsOrdered(bool  _isOrdered)
+void MultiplicityElementImpl::setIsOrdered(bool _isOrdered)
 {
 	m_isOrdered = _isOrdered;
 } 
@@ -152,12 +149,12 @@ void MultiplicityElementImpl::setIsOrdered(bool  _isOrdered)
 /*
 Getter & Setter for attribute isUnique
 */
-bool  MultiplicityElementImpl::getIsUnique() const 
+bool MultiplicityElementImpl::getIsUnique() const 
 {
 	return m_isUnique;
 }
 
-void MultiplicityElementImpl::setIsUnique(bool  _isUnique)
+void MultiplicityElementImpl::setIsUnique(bool _isUnique)
 {
 	m_isUnique = _isUnique;
 } 
@@ -167,12 +164,12 @@ void MultiplicityElementImpl::setIsUnique(bool  _isUnique)
 /*
 Getter & Setter for attribute lower
 */
-int  MultiplicityElementImpl::getLower() const 
+int MultiplicityElementImpl::getLower() const 
 {
 	return m_lower;
 }
 
-void MultiplicityElementImpl::setLower(int  _lower)
+void MultiplicityElementImpl::setLower(int _lower)
 {
 	m_lower = _lower;
 } 
@@ -182,12 +179,12 @@ void MultiplicityElementImpl::setLower(int  _lower)
 /*
 Getter & Setter for attribute upper
 */
-int  MultiplicityElementImpl::getUpper() const 
+int MultiplicityElementImpl::getUpper() const 
 {
 	return m_upper;
 }
 
-void MultiplicityElementImpl::setUpper(int  _upper)
+void MultiplicityElementImpl::setUpper(int _upper)
 {
 	m_upper = _upper;
 } 
@@ -544,7 +541,7 @@ void MultiplicityElementImpl::loadNode(std::string nodeName, std::shared_ptr<per
 	ElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void MultiplicityElementImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void MultiplicityElementImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	ElementImpl::resolveReferences(featureID, references);
 }

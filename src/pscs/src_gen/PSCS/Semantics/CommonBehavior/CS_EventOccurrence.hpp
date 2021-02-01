@@ -7,20 +7,16 @@
 #ifndef PSCS_SEMANTICS_COMMONBEHAVIOR_CS_EVENTOCCURRENCE_HPP
 #define PSCS_SEMANTICS_COMMONBEHAVIOR_CS_EVENTOCCURRENCE_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
-
 
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -61,14 +57,12 @@ namespace uml
 // enum includes
 
 
-//Includes from codegen annotation
-#include "fUML/FUMLFactory.hpp"
 
 //*********************************
 namespace PSCS::Semantics::CommonBehavior 
 {
 	
-	class CS_EventOccurrence:virtual public fUML::Semantics::CommonBehavior::EventOccurrence
+	class CS_EventOccurrence: virtual public fUML::Semantics::CommonBehavior::EventOccurrence
 	{
 		public:
  			CS_EventOccurrence(const CS_EventOccurrence &) {}
@@ -76,7 +70,6 @@ namespace PSCS::Semantics::CommonBehavior
 
 		protected:
 			CS_EventOccurrence(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -94,24 +87,22 @@ namespace PSCS::Semantics::CommonBehavior
 			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > getParameterValues() = 0;
 			
 			 
-			virtual bool match(std::shared_ptr<org.eclipse.uml2.uml.Trigger> trigger) = 0;
+			virtual bool match(std::shared_ptr<uml::Trigger> trigger) = 0;
 			
 			 
-			virtual void sendInTo(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> target,std::shared_ptr<org.eclipse.uml2.uml.Port> port) = 0;
+			virtual void sendInTo(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> target,std::shared_ptr<uml::Port> port) = 0;
 			
 			 
-			virtual void sendOutTo(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> target,std::shared_ptr<org.eclipse.uml2.uml.Port> port) = 0;
+			virtual void sendOutTo(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> target,std::shared_ptr<uml::Port> port) = 0;
 			
 			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			 
-			virtual bool  isPropagationInward() const = 0;
+			virtual bool isPropagationInward() const = 0;
 			
 			 
-			virtual void setPropagationInward (bool  _propagationInward)= 0; 
-			
+			virtual void setPropagationInward (bool _propagationInward)= 0;
 			//*********************************
 			// Reference
 			//*********************************
@@ -122,10 +113,10 @@ namespace PSCS::Semantics::CommonBehavior
 			virtual void setInteractionPoint(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> _interactionPoint) = 0;
 			
 			
-			virtual std::shared_ptr<org.eclipse.uml2.uml.Port > getOnPort() const = 0;
+			virtual std::shared_ptr<uml::Port > getOnPort() const = 0;
 			
 			
-			virtual void setOnPort(std::shared_ptr<org.eclipse.uml2.uml.Port> _onPort) = 0;
+			virtual void setOnPort(std::shared_ptr<uml::Port> _onPort) = 0;
 			
 			
 			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence > getWrappedEventOccurrence() const = 0;
@@ -140,7 +131,7 @@ namespace PSCS::Semantics::CommonBehavior
 			// Attribute Members
 			//*********************************
 			 
-			bool  m_propagationInward = false;
+			bool m_propagationInward = false;
 			
 			
 			//*********************************
@@ -148,7 +139,7 @@ namespace PSCS::Semantics::CommonBehavior
 			//*********************************
 			
 			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint > m_interactionPoint;
-			std::shared_ptr<org.eclipse.uml2.uml.Port > m_onPort;
+			std::shared_ptr<uml::Port > m_onPort;
 			std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence > m_wrappedEventOccurrence;
 
 		public:
@@ -164,7 +155,7 @@ namespace PSCS::Semantics::CommonBehavior
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

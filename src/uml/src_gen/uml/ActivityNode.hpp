@@ -7,22 +7,18 @@
 #ifndef UML_ACTIVITYNODE_HPP
 #define UML_ACTIVITYNODE_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T> class Bag; 
 template<class T, class ... U> class Subset;
 template<class T> class Union;
 
-
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -60,7 +56,6 @@ namespace uml
 #include "uml/VisibilityKind.hpp"
 
 
-//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -70,7 +65,7 @@ namespace uml
 	<p>From package UML::Activities.</p>
 	*/
 	
-	class ActivityNode:virtual public RedefinableElement
+	class ActivityNode: virtual public RedefinableElement
 	{
 		public:
  			ActivityNode(const ActivityNode &) {}
@@ -79,21 +74,16 @@ namespace uml
 		protected:
 			ActivityNode(){}
 
-
 			//Additional constructors for the containments back reference
-
 			ActivityNode(std::weak_ptr<uml::Activity > par_activity);
 
 			//Additional constructors for the containments back reference
-
 			ActivityNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode);
 
 			//Additional constructors for the containments back reference
-
 			ActivityNode(std::weak_ptr<uml::Namespace > par_namespace);
 
 			//Additional constructors for the containments back reference
-
 			ActivityNode(std::weak_ptr<uml::Element > par_owner);
 
 		public:
@@ -279,7 +269,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

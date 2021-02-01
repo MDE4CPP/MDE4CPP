@@ -35,21 +35,13 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/Event.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/Package.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/TemplateParameter.hpp"
-
 #include "uml/TimeExpression.hpp"
 
 //Factories an Package includes
@@ -181,12 +173,12 @@ std::shared_ptr<ecore::EClass> TimeEventImpl::eStaticClass() const
 /*
 Getter & Setter for attribute isRelative
 */
-bool  TimeEventImpl::getIsRelative() const 
+bool TimeEventImpl::getIsRelative() const 
 {
 	return m_isRelative;
 }
 
-void TimeEventImpl::setIsRelative(bool  _isRelative)
+void TimeEventImpl::setIsRelative(bool _isRelative)
 {
 	m_isRelative = _isRelative;
 } 
@@ -414,7 +406,7 @@ void TimeEventImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::
 	EventImpl::loadNode(nodeName, loadHandler);
 }
 
-void TimeEventImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void TimeEventImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	EventImpl::resolveReferences(featureID, references);
 }

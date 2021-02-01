@@ -7,20 +7,16 @@
 #ifndef FUML_SEMANTICS_VALUES_LITERALUNLIMITEDNATURALEVALUATION_HPP
 #define FUML_SEMANTICS_VALUES_LITERALUNLIMITEDNATURALEVALUATION_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
-
 
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -55,17 +51,12 @@ namespace uml
 // enum includes
 
 
-//Includes from codegen annotation
-#include "fUML/Semantics/SimpleClassifiers/UnlimitedNaturalValue.hpp"
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
-#include "uml/LiteralUnlimitedNatural.hpp"
-#include "primitivetypesReflection/PrimitiveTypesPackage.hpp"
 
 //*********************************
 namespace fUML::Semantics::Values 
 {
 	
-	class LiteralUnlimitedNaturalEvaluation:virtual public LiteralEvaluation
+	class LiteralUnlimitedNaturalEvaluation: virtual public LiteralEvaluation
 	{
 		public:
  			LiteralUnlimitedNaturalEvaluation(const LiteralUnlimitedNaturalEvaluation &) {}
@@ -73,7 +64,6 @@ namespace fUML::Semantics::Values
 
 		protected:
 			LiteralUnlimitedNaturalEvaluation(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -121,7 +111,7 @@ namespace fUML::Semantics::Values
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

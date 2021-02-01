@@ -7,23 +7,19 @@
 #ifndef FUML_SEMANTICS_COMMONBEHAVIOR_OBJECTACTIVATION_HPP
 #define FUML_SEMANTICS_COMMONBEHAVIOR_OBJECTACTIVATION_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T> class Bag; 
-
 
 class AnyObject;
 typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -64,19 +60,12 @@ namespace uml
 
 #include "ecore/EModelElement.hpp"
 
-//Includes from codegen annotation
-#include "fUML/Semantics/CommonBehavior/ClassifierBehaviorExecution.hpp"
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
-
-#include "uml/Behavior.hpp"
-#include "uml/Class.hpp"
 
 //*********************************
 namespace fUML::Semantics::CommonBehavior 
 {
 	
 	class ObjectActivation : virtual public ecore::EModelElement
-
 	{
 		public:
  			ObjectActivation(const ObjectActivation &) {}
@@ -84,7 +73,6 @@ namespace fUML::Semantics::CommonBehavior
 
 		protected:
 			ObjectActivation(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -114,7 +102,7 @@ namespace fUML::Semantics::CommonBehavior
 			virtual void send(std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> signalInstance) = 0;
 			
 			 
-			virtual void startBehavior(std::shared_ptr<org.eclipse.uml2.uml.Class> classifier,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > inputs) = 0;
+			virtual void startBehavior(std::shared_ptr<uml::Class> classifier,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> inputs) = 0;
 			
 			 
 			virtual void stop() = 0;
@@ -178,7 +166,7 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

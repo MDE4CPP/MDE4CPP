@@ -35,37 +35,21 @@
 #include <exception> // used in Persistence
 
 #include "uml/Behavior.hpp"
-
 #include "uml/Classifier.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/Constraint.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/ElementImport.hpp"
-
 #include "uml/Feature.hpp"
-
 #include "uml/NamedElement.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/PackageImport.hpp"
-
 #include "uml/PackageableElement.hpp"
-
 #include "uml/Parameter.hpp"
-
 #include "uml/ParameterSet.hpp"
-
 #include "uml/RedefinableElement.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/Type.hpp"
 
 //Factories an Package includes
@@ -249,12 +233,12 @@ std::shared_ptr<ecore::EClass> BehavioralFeatureImpl::eStaticClass() const
 /*
 Getter & Setter for attribute concurrency
 */
-uml::CallConcurrencyKind  BehavioralFeatureImpl::getConcurrency() const 
+uml::CallConcurrencyKind BehavioralFeatureImpl::getConcurrency() const 
 {
 	return m_concurrency;
 }
 
-void BehavioralFeatureImpl::setConcurrency(uml::CallConcurrencyKind  _concurrency)
+void BehavioralFeatureImpl::setConcurrency(uml::CallConcurrencyKind _concurrency)
 {
 	m_concurrency = _concurrency;
 } 
@@ -264,12 +248,12 @@ void BehavioralFeatureImpl::setConcurrency(uml::CallConcurrencyKind  _concurrenc
 /*
 Getter & Setter for attribute isAbstract
 */
-bool  BehavioralFeatureImpl::getIsAbstract() const 
+bool BehavioralFeatureImpl::getIsAbstract() const 
 {
 	return m_isAbstract;
 }
 
-void BehavioralFeatureImpl::setIsAbstract(bool  _isAbstract)
+void BehavioralFeatureImpl::setIsAbstract(bool _isAbstract)
 {
 	m_isAbstract = _isAbstract;
 } 
@@ -589,7 +573,7 @@ bool BehavioralFeatureImpl::eSet(int featureID, Any newValue)
 				}
 				iterMethod++;
 			}
-
+ 
 			iterMethod = methodList->begin();
 			endMethod = methodList->end();
 			while (iterMethod != endMethod)
@@ -625,7 +609,7 @@ bool BehavioralFeatureImpl::eSet(int featureID, Any newValue)
 				}
 				iterOwnedParameter++;
 			}
-
+ 
 			iterOwnedParameter = ownedParameterList->begin();
 			endOwnedParameter = ownedParameterList->end();
 			while (iterOwnedParameter != endOwnedParameter)
@@ -661,7 +645,7 @@ bool BehavioralFeatureImpl::eSet(int featureID, Any newValue)
 				}
 				iterOwnedParameterSet++;
 			}
-
+ 
 			iterOwnedParameterSet = ownedParameterSetList->begin();
 			endOwnedParameterSet = ownedParameterSetList->end();
 			while (iterOwnedParameterSet != endOwnedParameterSet)
@@ -697,7 +681,7 @@ bool BehavioralFeatureImpl::eSet(int featureID, Any newValue)
 				}
 				iterRaisedException++;
 			}
-
+ 
 			iterRaisedException = raisedExceptionList->begin();
 			endRaisedException = raisedExceptionList->end();
 			while (iterRaisedException != endRaisedException)
@@ -750,7 +734,7 @@ void BehavioralFeatureImpl::loadAttributes(std::shared_ptr<persistence::interfac
 		iter = attr_list.find("concurrency");
 		if ( iter != attr_list.end() )
 		{
-			uml::CallConcurrencyKind  value = CallConcurrencyKind::SEQUENTIAL;
+			uml::CallConcurrencyKind value = CallConcurrencyKind::SEQUENTIAL;
 			std::string literal = iter->second;
 			if (literal == "sequential")
 			{
@@ -856,7 +840,7 @@ void BehavioralFeatureImpl::loadNode(std::string nodeName, std::shared_ptr<persi
 	NamespaceImpl::loadNode(nodeName, loadHandler);
 }
 
-void BehavioralFeatureImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void BehavioralFeatureImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -934,7 +918,7 @@ void BehavioralFeatureImpl::saveContent(std::shared_ptr<persistence::interfaces:
 		// Add attributes
 		if ( this->eIsSet(package->getBehavioralFeature_Attribute_concurrency()) )
 		{
-			uml::CallConcurrencyKind  value = this->getConcurrency();
+			uml::CallConcurrencyKind value = this->getConcurrency();
 			std::string literal = "";
 			if (value == CallConcurrencyKind::SEQUENTIAL)
 			{
@@ -957,8 +941,8 @@ void BehavioralFeatureImpl::saveContent(std::shared_ptr<persistence::interfaces:
 		}
 
 	// Add references
-		saveHandler->addReferences<uml::Behavior>("method", this->getMethod());	
-		saveHandler->addReferences<uml::Type>("raisedException", this->getRaisedException());	
+		saveHandler->addReferences<uml::Behavior>("method", this->getMethod());
+		saveHandler->addReferences<uml::Type>("raisedException", this->getRaisedException());
 	}
 	catch (std::exception& e)
 	{

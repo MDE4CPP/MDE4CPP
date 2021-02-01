@@ -33,13 +33,9 @@
 #include <exception> // used in Persistence
 
 #include "ecore/EAnnotation.hpp"
-
 #include "ecore/ENamedElement.hpp"
-
 #include "ecore/EObject.hpp"
-
 #include "ecore/EPackage.hpp"
-
 #include "ecore/ETypeParameter.hpp"
 
 //Factories an Package includes
@@ -141,12 +137,12 @@ std::shared_ptr<EClass> EClassifierImpl::eStaticClass() const
 /*
 Getter & Setter for attribute defaultValue
 */
-Any  EClassifierImpl::getDefaultValue() const 
+Any EClassifierImpl::getDefaultValue() const 
 {
 	return m_defaultValue;
 }
 
-void EClassifierImpl::setDefaultValue(Any  _defaultValue)
+void EClassifierImpl::setDefaultValue(Any _defaultValue)
 {
 	m_defaultValue = _defaultValue;
 } 
@@ -156,7 +152,7 @@ void EClassifierImpl::setDefaultValue(Any  _defaultValue)
 /*
 Getter & Setter for attribute instanceClass
 */
-void *  EClassifierImpl::getInstanceClass() const 
+void * EClassifierImpl::getInstanceClass() const 
 {
 	return m_instanceClass;
 }
@@ -168,12 +164,12 @@ void *  EClassifierImpl::getInstanceClass() const
 /*
 Getter & Setter for attribute instanceClassName
 */
-std::string  EClassifierImpl::getInstanceClassName() const 
+std::string EClassifierImpl::getInstanceClassName() const 
 {
 	return m_instanceClassName;
 }
 
-void EClassifierImpl::setInstanceClassName(std::string  _instanceClassName)
+void EClassifierImpl::setInstanceClassName(std::string _instanceClassName)
 {
 	m_instanceClassName = _instanceClassName;
 } 
@@ -183,12 +179,12 @@ void EClassifierImpl::setInstanceClassName(std::string  _instanceClassName)
 /*
 Getter & Setter for attribute instanceTypeName
 */
-std::string  EClassifierImpl::getInstanceTypeName() const 
+std::string EClassifierImpl::getInstanceTypeName() const 
 {
 	return m_instanceTypeName;
 }
 
-void EClassifierImpl::setInstanceTypeName(std::string  _instanceTypeName)
+void EClassifierImpl::setInstanceTypeName(std::string _instanceTypeName)
 {
 	m_instanceTypeName = _instanceTypeName;
 } 
@@ -368,7 +364,7 @@ bool EClassifierImpl::eSet(int featureID, Any newValue)
 				}
 				iterETypeParameters++;
 			}
-
+ 
 			iterETypeParameters = eTypeParametersList->begin();
 			endETypeParameters = eTypeParametersList->end();
 			while (iterETypeParameters != endETypeParameters)
@@ -490,7 +486,7 @@ void EClassifierImpl::loadNode(std::string nodeName, std::shared_ptr<persistence
 	ENamedElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void EClassifierImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references)
+void EClassifierImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references)
 {
 	ENamedElementImpl::resolveReferences(featureID, references);
 }

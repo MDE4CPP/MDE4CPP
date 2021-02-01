@@ -36,19 +36,12 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/NamedElement.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/Package.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/Usage.hpp"
 
 //Factories an Package includes
@@ -150,12 +143,12 @@ std::shared_ptr<ecore::EClass> NamedElementImpl::eStaticClass() const
 /*
 Getter & Setter for attribute name
 */
-std::string  NamedElementImpl::getName() const 
+std::string NamedElementImpl::getName() const 
 {
 	return m_name;
 }
 
-void NamedElementImpl::setName(std::string  _name)
+void NamedElementImpl::setName(std::string _name)
 {
 	m_name = _name;
 } 
@@ -174,12 +167,12 @@ Getter & Setter for attribute qualifiedName
 /*
 Getter & Setter for attribute visibility
 */
-uml::VisibilityKind  NamedElementImpl::getVisibility() const 
+uml::VisibilityKind NamedElementImpl::getVisibility() const 
 {
 	return m_visibility;
 }
 
-void NamedElementImpl::setVisibility(uml::VisibilityKind  _visibility)
+void NamedElementImpl::setVisibility(uml::VisibilityKind _visibility)
 {
 	m_visibility = _visibility;
 } 
@@ -519,7 +512,7 @@ void NamedElementImpl::loadAttributes(std::shared_ptr<persistence::interfaces::X
 		iter = attr_list.find("visibility");
 		if ( iter != attr_list.end() )
 		{
-			uml::VisibilityKind  value = VisibilityKind::PUBLIC;
+			uml::VisibilityKind value = VisibilityKind::PUBLIC;
 			std::string literal = iter->second;
 			if (literal == "public")
 			{
@@ -586,7 +579,7 @@ void NamedElementImpl::loadNode(std::string nodeName, std::shared_ptr<persistenc
 	ElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void NamedElementImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void NamedElementImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	ElementImpl::resolveReferences(featureID, references);
 }
@@ -623,7 +616,7 @@ void NamedElementImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 
 		if ( this->eIsSet(package->getNamedElement_Attribute_visibility()) )
 		{
-			uml::VisibilityKind  value = this->getVisibility();
+			uml::VisibilityKind value = this->getVisibility();
 			std::string literal = "";
 			if (value == VisibilityKind::PUBLIC)
 			{

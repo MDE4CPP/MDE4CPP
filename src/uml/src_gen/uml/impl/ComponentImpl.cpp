@@ -35,75 +35,40 @@
 #include <exception> // used in Persistence
 
 #include "uml/Behavior.hpp"
-
 #include "uml/Class.hpp"
-
 #include "uml/Classifier.hpp"
-
 #include "uml/CollaborationUse.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/ComponentRealization.hpp"
-
 #include "uml/ConnectableElement.hpp"
-
 #include "uml/Connector.hpp"
-
 #include "uml/Constraint.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/ElementImport.hpp"
-
 #include "uml/Enumeration.hpp"
-
 #include "uml/Extension.hpp"
-
 #include "uml/Feature.hpp"
-
 #include "uml/Generalization.hpp"
-
 #include "uml/GeneralizationSet.hpp"
-
 #include "uml/Interface.hpp"
-
 #include "uml/InterfaceRealization.hpp"
-
 #include "uml/NamedElement.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/Operation.hpp"
-
 #include "uml/Package.hpp"
-
 #include "uml/PackageImport.hpp"
-
 #include "uml/PackageableElement.hpp"
-
 #include "uml/Port.hpp"
-
 #include "uml/PrimitiveType.hpp"
-
 #include "uml/Property.hpp"
-
 #include "uml/Reception.hpp"
-
 #include "uml/RedefinableElement.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/Substitution.hpp"
-
 #include "uml/TemplateBinding.hpp"
-
 #include "uml/TemplateParameter.hpp"
-
 #include "uml/TemplateSignature.hpp"
-
 #include "uml/UseCase.hpp"
 
 //Factories an Package includes
@@ -481,12 +446,12 @@ std::shared_ptr<ecore::EClass> ComponentImpl::eStaticClass() const
 /*
 Getter & Setter for attribute isIndirectlyInstantiated
 */
-bool  ComponentImpl::getIsIndirectlyInstantiated() const 
+bool ComponentImpl::getIsIndirectlyInstantiated() const 
 {
 	return m_isIndirectlyInstantiated;
 }
 
-void ComponentImpl::setIsIndirectlyInstantiated(bool  _isIndirectlyInstantiated)
+void ComponentImpl::setIsIndirectlyInstantiated(bool _isIndirectlyInstantiated)
 {
 	m_isIndirectlyInstantiated = _isIndirectlyInstantiated;
 } 
@@ -832,62 +797,18 @@ Any ComponentImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::COMPONENT_ATTRIBUTE_PACKAGEDELEMENT:
 		{
 			return eAny(getPackagedElement()); //4753			
-			/*
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::PackageableElement>::iterator iter = m_packagedElement->begin();
-			Bag<uml::PackageableElement>::iterator end = m_packagedElement->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //4753
-			*/
 		}
 		case uml::umlPackage::COMPONENT_ATTRIBUTE_PROVIDED:
 		{
 			return eAny(getProvided()); //4754			
-			/*
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Interface>::iterator iter = m_provided->begin();
-			Bag<uml::Interface>::iterator end = m_provided->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //4754
-			*/
 		}
 		case uml::umlPackage::COMPONENT_ATTRIBUTE_REALIZATION:
 		{
 			return eAny(getRealization()); //4755			
-			/*
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ComponentRealization>::iterator iter = m_realization->begin();
-			Bag<uml::ComponentRealization>::iterator end = m_realization->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //4755
-			*/
 		}
 		case uml::umlPackage::COMPONENT_ATTRIBUTE_REQUIRED:
 		{
 			return eAny(getRequired()); //4756			
-			/*
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Interface>::iterator iter = m_required->begin();
-			Bag<uml::Interface>::iterator end = m_required->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //4756
-			*/
 		}
 	}
 	return ClassImpl::eGet(featureID, resolve, coreType);
@@ -943,7 +864,7 @@ bool ComponentImpl::eSet(int featureID, Any newValue)
 				}
 				iterPackagedElement++;
 			}
-
+ 
 			iterPackagedElement = packagedElementList->begin();
 			endPackagedElement = packagedElementList->end();
 			while (iterPackagedElement != endPackagedElement)
@@ -979,7 +900,7 @@ bool ComponentImpl::eSet(int featureID, Any newValue)
 				}
 				iterRealization++;
 			}
-
+ 
 			iterRealization = realizationList->begin();
 			endRealization = realizationList->end();
 			while (iterRealization != endRealization)
@@ -1094,7 +1015,7 @@ void ComponentImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::
 	ClassImpl::loadNode(nodeName, loadHandler);
 }
 
-void ComponentImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ComponentImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	ClassImpl::resolveReferences(featureID, references);
 }

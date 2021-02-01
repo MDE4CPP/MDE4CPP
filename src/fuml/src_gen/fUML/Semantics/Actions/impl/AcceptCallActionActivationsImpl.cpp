@@ -177,7 +177,7 @@ void AcceptCallActionActivationsImpl::loadNode(std::string nodeName, std::shared
 	//load BasePackage Nodes
 }
 
-void AcceptCallActionActivationsImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void AcceptCallActionActivationsImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	ecore::EObjectImpl::resolveReferences(featureID, references);
 }

@@ -33,11 +33,8 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/ParameterableElement.hpp"
-
 #include "uml/TemplateParameter.hpp"
 
 //Factories an Package includes
@@ -326,7 +323,7 @@ void ParameterableElementImpl::loadNode(std::string nodeName, std::shared_ptr<pe
 	ElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void ParameterableElementImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ParameterableElementImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -377,7 +374,7 @@ void ParameterableElementImpl::saveContent(std::shared_ptr<persistence::interfac
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 
 	// Add references
-		saveHandler->addReference("templateParameter", this->getTemplateParameter());		 
+		saveHandler->addReference("templateParameter", this->getTemplateParameter()); 
 	}
 	catch (std::exception& e)
 	{

@@ -9,7 +9,6 @@
 
 //*********************************
 // generated Includes
-
 //Model includes
 #include "../ConditionalNodeActivation.hpp"
 
@@ -48,13 +47,13 @@ namespace fUML::Semantics::Actions
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<fUML::Semantics::Actions::ClauseActivation> getClauseActivation(std::shared_ptr<org.eclipse.uml2.uml.Clause> clause) ;
+			virtual std::shared_ptr<fUML::Semantics::Actions::ClauseActivation> getClauseActivation(std::shared_ptr<uml::Clause> clause) ;
 			
 			 
-			virtual void runTest(std::shared_ptr<org.eclipse.uml2.uml.Clause> clause) ;
+			virtual void runTest(std::shared_ptr<uml::Clause> clause) ;
 			
 			 
-			virtual void selectBody(std::shared_ptr<org.eclipse.uml2.uml.Clause> clause) ;
+			virtual void selectBody(std::shared_ptr<uml::Clause> clause) ;
 			
 			
 			
@@ -71,7 +70,7 @@ namespace fUML::Semantics::Actions
 			
 			
 			
-			virtual std::shared_ptr<Bag<org.eclipse.uml2.uml.Clause>> getSelectedClauses() const ;
+			virtual std::shared_ptr<Bag<uml::Clause>> getSelectedClauses() const ;
 			
 			
 							
@@ -95,7 +94,7 @@ namespace fUML::Semantics::Actions
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

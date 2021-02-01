@@ -35,23 +35,14 @@
 #include <exception> // used in Persistence
 
 #include "uml/Activity.hpp"
-
 #include "uml/ActivityEdge.hpp"
-
 #include "uml/ActivityGroup.hpp"
-
 #include "uml/ActivityNode.hpp"
-
 #include "uml/ActivityPartition.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/StringExpression.hpp"
 
 //Factories an Package includes
@@ -222,12 +213,12 @@ std::shared_ptr<ecore::EClass> ActivityPartitionImpl::eStaticClass() const
 /*
 Getter & Setter for attribute isDimension
 */
-bool  ActivityPartitionImpl::getIsDimension() const 
+bool ActivityPartitionImpl::getIsDimension() const 
 {
 	return m_isDimension;
 }
 
-void ActivityPartitionImpl::setIsDimension(bool  _isDimension)
+void ActivityPartitionImpl::setIsDimension(bool _isDimension)
 {
 	m_isDimension = _isDimension;
 } 
@@ -237,12 +228,12 @@ void ActivityPartitionImpl::setIsDimension(bool  _isDimension)
 /*
 Getter & Setter for attribute isExternal
 */
-bool  ActivityPartitionImpl::getIsExternal() const 
+bool ActivityPartitionImpl::getIsExternal() const 
 {
 	return m_isExternal;
 }
 
-void ActivityPartitionImpl::setIsExternal(bool  _isExternal)
+void ActivityPartitionImpl::setIsExternal(bool _isExternal)
 {
 	m_isExternal = _isExternal;
 } 
@@ -592,7 +583,7 @@ bool ActivityPartitionImpl::eSet(int featureID, Any newValue)
 				}
 				iterEdge++;
 			}
-
+ 
 			iterEdge = edgeList->begin();
 			endEdge = edgeList->end();
 			while (iterEdge != endEdge)
@@ -642,7 +633,7 @@ bool ActivityPartitionImpl::eSet(int featureID, Any newValue)
 				}
 				iterNode++;
 			}
-
+ 
 			iterNode = nodeList->begin();
 			endNode = nodeList->end();
 			while (iterNode != endNode)
@@ -686,7 +677,7 @@ bool ActivityPartitionImpl::eSet(int featureID, Any newValue)
 				}
 				iterSubpartition++;
 			}
-
+ 
 			iterSubpartition = subpartitionList->begin();
 			endSubpartition = subpartitionList->end();
 			while (iterSubpartition != endSubpartition)
@@ -821,7 +812,7 @@ void ActivityPartitionImpl::loadNode(std::string nodeName, std::shared_ptr<persi
 	ActivityGroupImpl::loadNode(nodeName, loadHandler);
 }
 
-void ActivityPartitionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ActivityPartitionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -921,9 +912,9 @@ void ActivityPartitionImpl::saveContent(std::shared_ptr<persistence::interfaces:
 		}
 
 	// Add references
-		saveHandler->addReferences<uml::ActivityEdge>("edge", this->getEdge());	
-		saveHandler->addReferences<uml::ActivityNode>("node", this->getNode());	
-		saveHandler->addReference("represents", this->getRepresents());		 
+		saveHandler->addReferences<uml::ActivityEdge>("edge", this->getEdge());
+		saveHandler->addReferences<uml::ActivityNode>("node", this->getNode());
+		saveHandler->addReference("represents", this->getRepresents()); 
 	}
 	catch (std::exception& e)
 	{

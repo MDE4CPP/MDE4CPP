@@ -8,23 +8,19 @@
 #define UML_MULTIPLICITYELEMENT_HPP
 
 #include <map>
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T, class ... U> class Subset;
-
 
 class AnyObject;
 typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -52,7 +48,6 @@ namespace uml
 // enum includes
 
 
-//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -62,7 +57,7 @@ namespace uml
 	<p>From package UML::CommonStructure.</p>
 	*/
 	
-	class MultiplicityElement:virtual public Element
+	class MultiplicityElement: virtual public Element
 	{
 		public:
  			MultiplicityElement(const MultiplicityElement &) {}
@@ -70,7 +65,6 @@ namespace uml
 
 		protected:
 			MultiplicityElement(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -180,54 +174,50 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual bool  getIsOrdered() const = 0;
+			virtual bool getIsOrdered() const = 0;
 			
 			/*!
 			For a multivalued multiplicity, this attribute specifies whether the values in an instantiation of this MultiplicityElement are sequentially ordered.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual void setIsOrdered (bool  _isOrdered)= 0; 
+			virtual void setIsOrdered (bool _isOrdered)= 0;/*!
+			For a multivalued multiplicity, this attributes specifies whether the values in an instantiation of this MultiplicityElement are unique.
+			<p>From package UML::CommonStructure.</p>
+			*/
+			 
+			virtual bool getIsUnique() const = 0;
+			
 			/*!
 			For a multivalued multiplicity, this attributes specifies whether the values in an instantiation of this MultiplicityElement are unique.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual bool  getIsUnique() const = 0;
-			
-			/*!
-			For a multivalued multiplicity, this attributes specifies whether the values in an instantiation of this MultiplicityElement are unique.
-			<p>From package UML::CommonStructure.</p>
-			*/
-			 
-			virtual void setIsUnique (bool  _isUnique)= 0; 
-			/*!
+			virtual void setIsUnique (bool _isUnique)= 0;/*!
 			The lower bound of the multiplicity interval.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual int  getLower() const = 0;
+			virtual int getLower() const = 0;
 			
 			/*!
 			The lower bound of the multiplicity interval.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual void setLower (int  _lower)= 0; 
-			/*!
+			virtual void setLower (int _lower)= 0;/*!
 			The upper bound of the multiplicity interval.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual int  getUpper() const = 0;
+			virtual int getUpper() const = 0;
 			
 			/*!
 			The upper bound of the multiplicity interval.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual void setUpper (int  _upper)= 0; 
-			
+			virtual void setUpper (int _upper)= 0;
 			//*********************************
 			// Reference
 			//*********************************
@@ -270,25 +260,25 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			bool  m_isOrdered = false;
+			bool m_isOrdered = false;
 			/*!
 			For a multivalued multiplicity, this attributes specifies whether the values in an instantiation of this MultiplicityElement are unique.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			bool  m_isUnique = true;
+			bool m_isUnique = true;
 			/*!
 			The lower bound of the multiplicity interval.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			int  m_lower = 1;
+			int m_lower = 1;
 			/*!
 			The upper bound of the multiplicity interval.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			int  m_upper = 1;
+			int m_upper = 1;
 			
 			
 			//*********************************
@@ -324,7 +314,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

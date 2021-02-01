@@ -4,7 +4,6 @@
     <semanticResources>ecore.ecore</semanticResources>
     <semanticResources>platform:/resource/unorderedMap_src_gen/model/std.ecore</semanticResources>
     <semanticResources>http://www.eclipse.org/emf/2002/Ecore</semanticResources>
-    <semanticResources>platform:/resource/unorderedMap_src_gen/model/unorderedMap.ecore</semanticResources>
     <ownedViews xmi:type="viewpoint:DView" uid="_koI5kL2IEeid4uWGgEhEiQ">
       <viewpoint xmi:type="description:Viewpoint" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']"/>
       <ownedRepresentationDescriptors xmi:type="viewpoint:DRepresentationDescriptor" uid="_lKnUgL2IEeid4uWGgEhEiQ" name="ecore class diagram" repPath="#_lKkRML2IEeid4uWGgEhEiQ">

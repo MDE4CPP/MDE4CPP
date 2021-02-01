@@ -9,7 +9,6 @@
 
 //*********************************
 // generated Includes
-
 //Model includes
 #include "../JoinNode.hpp"
 
@@ -84,15 +83,14 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			 
-			virtual bool  getIsCombineDuplicate() const ;
+			virtual bool getIsCombineDuplicate() const ;
 			
 			/*!
 			Indicates whether incoming tokens having objects with the same identity are combined into one by the JoinNode.
 			<p>From package UML::Activities.</p>
 			*/
 			 
-			virtual void setIsCombineDuplicate (bool  _isCombineDuplicate); 
-			
+			virtual void setIsCombineDuplicate (bool _isCombineDuplicate);
 			
 			//*********************************
 			// Reference
@@ -151,7 +149,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

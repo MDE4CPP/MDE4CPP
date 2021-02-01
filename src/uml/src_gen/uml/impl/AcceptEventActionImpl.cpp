@@ -35,43 +35,24 @@
 #include <exception> // used in Persistence
 
 #include "uml/Action.hpp"
-
 #include "uml/Activity.hpp"
-
 #include "uml/ActivityEdge.hpp"
-
 #include "uml/ActivityGroup.hpp"
-
 #include "uml/ActivityNode.hpp"
-
 #include "uml/ActivityPartition.hpp"
-
 #include "uml/Classifier.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/Constraint.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/ExceptionHandler.hpp"
-
 #include "uml/InputPin.hpp"
-
 #include "uml/InterruptibleActivityRegion.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/OutputPin.hpp"
-
 #include "uml/RedefinableElement.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/StructuredActivityNode.hpp"
-
 #include "uml/Trigger.hpp"
 
 //Factories an Package includes
@@ -289,12 +270,12 @@ std::shared_ptr<ecore::EClass> AcceptEventActionImpl::eStaticClass() const
 /*
 Getter & Setter for attribute isUnmarshall
 */
-bool  AcceptEventActionImpl::getIsUnmarshall() const 
+bool AcceptEventActionImpl::getIsUnmarshall() const 
 {
 	return m_isUnmarshall;
 }
 
-void AcceptEventActionImpl::setIsUnmarshall(bool  _isUnmarshall)
+void AcceptEventActionImpl::setIsUnmarshall(bool _isUnmarshall)
 {
 	m_isUnmarshall = _isUnmarshall;
 } 
@@ -514,32 +495,10 @@ Any AcceptEventActionImpl::eGet(int featureID, bool resolve, bool coreType) cons
 		case uml::umlPackage::ACCEPTEVENTACTION_ATTRIBUTE_RESULT:
 		{
 			return eAny(getResult()); //328			
-			/*
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::OutputPin>::iterator iter = m_result->begin();
-			Bag<uml::OutputPin>::iterator end = m_result->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //328
-			*/
 		}
 		case uml::umlPackage::ACCEPTEVENTACTION_ATTRIBUTE_TRIGGER:
 		{
 			return eAny(getTrigger()); //329			
-			/*
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Trigger>::iterator iter = m_trigger->begin();
-			Bag<uml::Trigger>::iterator end = m_trigger->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //329
-			*/
 		}
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
@@ -591,7 +550,7 @@ bool AcceptEventActionImpl::eSet(int featureID, Any newValue)
 				}
 				iterResult++;
 			}
-
+ 
 			iterResult = resultList->begin();
 			endResult = resultList->end();
 			while (iterResult != endResult)
@@ -627,7 +586,7 @@ bool AcceptEventActionImpl::eSet(int featureID, Any newValue)
 				}
 				iterTrigger++;
 			}
-
+ 
 			iterTrigger = triggerList->begin();
 			endTrigger = triggerList->end();
 			while (iterTrigger != endTrigger)
@@ -743,7 +702,7 @@ void AcceptEventActionImpl::loadNode(std::string nodeName, std::shared_ptr<persi
 	ActionImpl::loadNode(nodeName, loadHandler);
 }
 
-void AcceptEventActionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void AcceptEventActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	ActionImpl::resolveReferences(featureID, references);
 }

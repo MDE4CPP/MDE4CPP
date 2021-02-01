@@ -244,17 +244,6 @@ Any OfferImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case fUML::Semantics::Activities::ActivitiesPackage::OFFER_ATTRIBUTE_OFFEREDTOKENS:
 		{
 			return eAny(getOfferedTokens()); //840			
-			/*
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<fUML::Semantics::Activities::Token>::iterator iter = m_offeredTokens->begin();
-			Bag<fUML::Semantics::Activities::Token>::iterator end = m_offeredTokens->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //840
-			*/
 		}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
@@ -295,7 +284,7 @@ bool OfferImpl::eSet(int featureID, Any newValue)
 				}
 				iterOfferedTokens++;
 			}
-
+ 
 			iterOfferedTokens = offeredTokensList->begin();
 			endOfferedTokens = offeredTokensList->end();
 			while (iterOfferedTokens != endOfferedTokens)
@@ -364,7 +353,7 @@ void OfferImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inte
 	//load BasePackage Nodes
 }
 
-void OfferImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void OfferImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -401,7 +390,7 @@ void OfferImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 		std::shared_ptr<fUML::Semantics::Activities::ActivitiesPackage> package = fUML::Semantics::Activities::ActivitiesPackage::eInstance();
 
 	// Add references
-		saveHandler->addReferences<fUML::Semantics::Activities::Token>("offeredTokens", this->getOfferedTokens());	
+		saveHandler->addReferences<fUML::Semantics::Activities::Token>("offeredTokens", this->getOfferedTokens());
 	}
 	catch (std::exception& e)
 	{

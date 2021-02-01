@@ -8,24 +8,20 @@
 #define UML_LOOPNODE_HPP
 
 #include <map>
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T> class Bag; 
 template<class T, class ... U> class Subset;
-
 
 class AnyObject;
 typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -68,7 +64,6 @@ namespace uml
 #include "uml/VisibilityKind.hpp"
 
 
-//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -78,7 +73,7 @@ namespace uml
 	<p>From package UML::Actions.</p>
 	*/
 	
-	class LoopNode:virtual public StructuredActivityNode
+	class LoopNode: virtual public StructuredActivityNode
 	{
 		public:
  			LoopNode(const LoopNode &) {}
@@ -86,7 +81,6 @@ namespace uml
 
 		protected:
 			LoopNode(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -184,15 +178,14 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual bool  getIsTestedFirst() const = 0;
+			virtual bool getIsTestedFirst() const = 0;
 			
 			/*!
 			If true, the test is performed before the first execution of the bodyPart. If false, the bodyPart is executed once before the test is performed.
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual void setIsTestedFirst (bool  _isTestedFirst)= 0; 
-			
+			virtual void setIsTestedFirst (bool _isTestedFirst)= 0;
 			//*********************************
 			// Reference
 			//*********************************
@@ -243,7 +236,6 @@ namespace uml
 			
 			
 			/*Additional Setter for 'StructuredActivityNode::structuredNodeInput' redefined by reference 'loopVariableInput'*/
-			
 			/*!
 			A list of OutputPins that receive the loopVariable values after the last iteration of the loop and constitute the output of the LoopNode.
 			<p>From package UML::Actions.</p>
@@ -253,7 +245,6 @@ namespace uml
 			
 			
 			/*Additional Setter for 'StructuredActivityNode::structuredNodeOutput' redefined by reference 'result'*/
-			
 			/*!
 			The set of ExecutableNodes executed before the first iteration of the loop, in order to initialize values or perform other setup computations.
 			<p>From package UML::Actions.</p>
@@ -281,7 +272,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			bool  m_isTestedFirst = false;
+			bool m_isTestedFirst = false;
 			
 			
 			//*********************************
@@ -392,7 +383,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

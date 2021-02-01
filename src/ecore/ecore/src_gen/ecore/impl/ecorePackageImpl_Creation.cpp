@@ -355,6 +355,7 @@ void ecorePackageImpl::createPackageEDataTypes(std::shared_ptr<ecore::EPackage> 
 	m_eByteObject_Class = factory->createEDataType_in_EPackage(package, EBYTEOBJECT_CLASS);
 	m_eChar_Class = factory->createEDataType_in_EPackage(package, ECHAR_CLASS);
 	m_eCharacterObject_Class = factory->createEDataType_in_EPackage(package, ECHARACTEROBJECT_CLASS);
+	m_eDate_Class = factory->createEDataType_in_EPackage(package, EDATE_CLASS);
 	m_eDiagnosticChain_Class = factory->createEDataType_in_EPackage(package, EDIAGNOSTICCHAIN_CLASS);
 	m_eDouble_Class = factory->createEDataType_in_EPackage(package, EDOUBLE_CLASS);
 	m_eDoubleObject_Class = factory->createEDataType_in_EPackage(package, EDOUBLEOBJECT_CLASS);

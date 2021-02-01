@@ -8,23 +8,19 @@
 #define UML_STRUCTUREDACTIVITYNODE_HPP
 
 #include <map>
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T, class ... U> class Subset;
-
 
 class AnyObject;
 typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -62,16 +58,13 @@ namespace uml
 
 // base class includes
 #include "uml/Action.hpp"
-
 #include "uml/ActivityGroup.hpp"
-
 #include "uml/Namespace.hpp"
 
 // enum includes
 #include "uml/VisibilityKind.hpp"
 
 
-//Includes from codegen annotation
 
 //*********************************
 namespace uml 
@@ -81,7 +74,7 @@ namespace uml
 	<p>From package UML::Actions.</p>
 	*/
 	
-	class StructuredActivityNode:virtual public Action,virtual public ActivityGroup,virtual public Namespace
+	class StructuredActivityNode: virtual public Action, virtual public ActivityGroup, virtual public Namespace
 	{
 		public:
  			StructuredActivityNode(const StructuredActivityNode &) {}
@@ -89,7 +82,6 @@ namespace uml
 
 		protected:
 			StructuredActivityNode(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -149,15 +141,14 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual bool  getMustIsolate() const = 0;
+			virtual bool getMustIsolate() const = 0;
 			
 			/*!
 			If true, then any object used by an Action within the StructuredActivityNode cannot be accessed by any Action outside the node until the StructuredActivityNode as a whole completes. Any concurrent Actions that would result in accessing such objects are required to have their execution deferred until the completion of the StructuredActivityNode.
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual void setMustIsolate (bool  _mustIsolate)= 0; 
-			
+			virtual void setMustIsolate (bool _mustIsolate)= 0;
 			//*********************************
 			// Reference
 			//*********************************
@@ -212,7 +203,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			bool  m_mustIsolate = false;
+			bool m_mustIsolate = false;
 			
 			
 			//*********************************
@@ -308,7 +299,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};
