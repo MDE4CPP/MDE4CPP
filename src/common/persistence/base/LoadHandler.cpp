@@ -98,12 +98,12 @@ void LoadHandler::addToMap(std::shared_ptr<ecore::EObject> object, bool useCurre
 		ref = getCurrentXMIID();
 		if (ref.empty())
 		{
-			ref = persistence::base::HandlerHelper::extractReference(object, m_rootObject, m_rootPrefix, m_currentObjects, uri);
+			ref = HandlerHelper::extractReference(object, m_rootObject, m_rootPrefix, m_currentObjects, uri);
 		}
 	}
 	else
 	{
-		ref = persistence::base::HandlerHelper::extractReference(object, m_rootObject, m_rootPrefix, uri);
+		ref = HandlerHelper::extractReference(object, m_rootObject, m_rootPrefix, uri);
 	}
 	if (!ref.empty())
 	{
@@ -245,7 +245,7 @@ void LoadHandler::resolveReferences()
 		std::shared_ptr<ecore::EObject> object = uref.eObject;
 		std::shared_ptr<ecore::EStructuralFeature> esf = uref.eStructuralFeature;
 
-		std::list<std::shared_ptr<ecore::EObject>> references;
+		std::vector<std::shared_ptr<ecore::EObject>> references;
 
 		try
 		{
@@ -257,8 +257,7 @@ void LoadHandler::resolveReferences()
 			else
 			{
 				// EStructuralFeature is a list of objects
-				std::list<std::string> _strs;
-				std::string _tmpStr;
+				std::vector<std::string> _strs;
 
 				int nameSize=name.size();
 				if(nameSize>0)
@@ -278,14 +277,12 @@ void LoadHandler::resolveReferences()
 					// Add last reference
 					_strs.push_back( name.substr( initPos, nameSize - initPos ) );
 
-					while (_strs.size() > 0)
+					for(std::string _tmpStr:_strs)
 					{
-						_tmpStr = _strs.front();
 						if (std::string::npos != _tmpStr.find("#//") || !m_isXSIMode)
 						{
 							solve(_tmpStr, references, object, esf);
 						}
-						_strs.pop_front();
 					}
 					// Call resolveReferences() of corresponding 'object'
 					object->resolveReferences(esf->getFeatureID(), references);
@@ -304,7 +301,7 @@ void LoadHandler::setThisPtr(std::shared_ptr<LoadHandler> thisPtr)
 	m_thisPtr = thisPtr;
 }
 
-void LoadHandler::solve(const std::string& name, std::list<std::shared_ptr<ecore::EObject>> references, std::shared_ptr<ecore::EObject> object, std::shared_ptr<ecore::EStructuralFeature> esf)
+void LoadHandler::solve(const std::string& name, std::vector<std::shared_ptr<ecore::EObject>> references, std::shared_ptr<ecore::EObject> object, std::shared_ptr<ecore::EStructuralFeature> esf)
 {
 	bool found = false;
 	bool libraryLoaded = false;

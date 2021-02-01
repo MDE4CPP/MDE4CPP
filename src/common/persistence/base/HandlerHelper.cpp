@@ -59,11 +59,11 @@ std::string HandlerHelper::extractType(const std::shared_ptr<ecore::EObject> obj
 std::string HandlerHelper::extractReference(const std::shared_ptr<ecore::EObject> toObject, const std::shared_ptr<ecore::EObject> rootObject,
 	std::string prefix, const std::string& uri)
 {
-	std::list<std::shared_ptr<ecore::EObject>> list;
+	std::vector<std::shared_ptr<ecore::EObject>> list;
 	std::shared_ptr<ecore::EObject> antecessor = toObject; //pre-init antecessor
 	while (antecessor)
 	{
-		list.push_front(antecessor);
+		list.push_back(antecessor);
 		antecessor = list.front()->eContainer();
 	}
 	return extractReference(toObject, rootObject, prefix, list, uri);
@@ -77,7 +77,7 @@ std::string HandlerHelper::extractReference(const std::shared_ptr<ecore::EObject
  *
  */
 std::string HandlerHelper::extractReference(const std::shared_ptr<ecore::EObject> toObject, const std::shared_ptr<ecore::EObject> rootObject,
-	std::string prefix, std::list<std::shared_ptr<ecore::EObject>> currentObjects, const std::string& uri)
+	std::string prefix, std::vector<std::shared_ptr<ecore::EObject>> currentObjects, const std::string& uri)
 {
 	std::stringstream ref;
 
@@ -115,10 +115,10 @@ std::string HandlerHelper::extractReference(const std::shared_ptr<ecore::EObject
 		ref << "#/";
 
 		// Add Package name(s) and Class/Enum/EDataType name to 'value'
-		std::list<std::shared_ptr<ecore::EObject>>::iterator iter = currentObjects.begin();
-		std::list<std::shared_ptr<ecore::EObject>>::iterator endIter = currentObjects.end();
+		std::vector<std::shared_ptr<ecore::EObject>>::iterator iter = currentObjects.begin();
+		std::vector<std::shared_ptr<ecore::EObject>>::iterator endIter = currentObjects.end();
 		iter++; // Remove root Package from 'to_antecessors' because it is not used in reference name
-		while (iter != endIter)
+		while(iter != endIter)
 		{
 			std::shared_ptr<ecore::EObject> obj = *iter;
 			std::shared_ptr<ecore::ENamedElement> to_antecessors_back = std::dynamic_pointer_cast<ecore::ENamedElement>(obj);

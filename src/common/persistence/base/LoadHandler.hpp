@@ -10,7 +10,7 @@
 
 #include "persistence/interfaces/XLoadHandler.hpp"
 
-#include <list>
+#include <vector>
 #include <map>
 #include <memory>
 #include <string>
@@ -79,7 +79,7 @@ namespace persistence
 				void resolveReferences();
 
 				virtual void setThisPtr(std::shared_ptr<LoadHandler> thisPtr);
-				virtual void solve(const std::string& name, std::list<std::shared_ptr<ecore::EObject>> references, std::shared_ptr<ecore::EObject> object, std::shared_ptr<ecore::EStructuralFeature> esf);
+				virtual void solve(const std::string& name, std::vector<std::shared_ptr<ecore::EObject>> references, std::shared_ptr<ecore::EObject> object, std::shared_ptr<ecore::EStructuralFeature> esf);
 				virtual void loadTypes(const std::string& name);
 				virtual void loadTypesFromFile(const std::string& name) = 0;
 				virtual void loadTypes(std::shared_ptr<ecore::EPackage> package, const std::string& uri);
@@ -91,13 +91,13 @@ namespace persistence
 				int m_level;
 
 				std::shared_ptr<ecore::EObject> m_rootObject;
-				std::list<std::shared_ptr<ecore::EObject> > m_currentObjects;
+				std::vector<std::shared_ptr<ecore::EObject> > m_currentObjects;
 
 				std::string m_rootPrefix;
 				std::string m_rootName;
 
 				std::map<std::string, std::shared_ptr<ecore::EObject>> m_refToObject_map;
-				std::list<persistence::base::UnresolvedReference> m_unresolvedReferences;
+				std::vector<persistence::base::UnresolvedReference> m_unresolvedReferences;
 
 				std::shared_ptr<LoadHandler> m_thisPtr;
 				bool m_isXSIMode;
