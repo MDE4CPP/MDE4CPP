@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="templateTest" nsURI="http://sse.tu-ilmenau.de/example/templateTest"
+    nsPrefix="templateTest">
+  <eAnnotations source="prepareApplication">
+    <details key="sourceCodeIncludes" value="//includes"/>
+    <details key="sourceCodeMain" value="//mainapp"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="Property">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NumberProperty" eSuperTypes="#//Property">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StringProperty" eSuperTypes="#//Property">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="string" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TemplateTestClass">
+    <eOperations name="testCppMapOfProperties" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="map" eType="#//CPPMapOfStringAndProperty"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="unorderedTaggedValueList"
+        upperBound="-1" eType="#//Property" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="cppMapOfProperties" eType="#//CPPMapOfStringAndProperty"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="orderedPropertyMap" transient="true">
+      <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+        <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        <eTypeArguments eClassifier="#//Property"/>
+      </eGenericType>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="unorderedPropertyMap" ordered="false"
+        transient="true">
+      <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EMap">
+        <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+        <eTypeArguments eClassifier="#//Property"/>
+      </eGenericType>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="propertyList" ordered="false"
+        transient="true">
+      <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EEList">
+        <eTypeArguments eClassifier="#//Property"/>
+      </eGenericType>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="cppVectorOfProperty" eType="#//CPPVectorOfProperty"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="cppListOfProperty" eType="#//CPPListOfProperty"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MySimpleList">
+    <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+      <details key="doNotGenerate" value="true"/>
+    </eAnnotations>
+    <eTypeParameters name="T"/>
+    <eOperations name="next"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="next">
+      <eGenericType eClassifier="#//MySimpleList">
+        <eTypeArguments/>
+      </eGenericType>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MySimplePropertyList" instanceTypeName="MySimplePropertyList">
+    <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+      <details key="doNotGenerate" value="true"/>
+    </eAnnotations>
+    <eGenericSuperTypes eClassifier="#//MySimpleList">
+      <eTypeArguments eClassifier="#//Property"/>
+    </eGenericSuperTypes>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CPPMapOfStringAndProperty" instanceTypeName="CPPMapOfStringAndProperty">
+    <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+      <details key="doNotGenerate" value="true"/>
+    </eAnnotations>
+    <eGenericSuperTypes eClassifier="ecore:EClass std.ecore#//map">
+      <eTypeArguments eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eTypeArguments eClassifier="#//Property"/>
+    </eGenericSuperTypes>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CPPListOfProperty" instanceTypeName="list&lt;Property>">
+    <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+      <details key="doNotGenerate" value="true"/>
+    </eAnnotations>
+    <eGenericSuperTypes eClassifier="ecore:EClass std.ecore#//list">
+      <eTypeArguments eClassifier="#//Property"/>
+    </eGenericSuperTypes>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CPPVectorOfProperty" instanceTypeName="vector&lt;Property>">
+    <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+      <details key="doNotGenerate" value="true"/>
+    </eAnnotations>
+    <eGenericSuperTypes eClassifier="ecore:EClass std.ecore#//vector">
+      <eTypeArguments eClassifier="#//Property"/>
+    </eGenericSuperTypes>
+  </eClassifiers>
+</ecore:EPackage>

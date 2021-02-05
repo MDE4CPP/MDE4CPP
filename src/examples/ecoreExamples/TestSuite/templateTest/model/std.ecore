@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="std" nsURI="http://sse.tu-ilmenau.de/std" nsPrefix="std">
+  <eAnnotations source="http://sse.tu-ilmenau.de/codegen" references="#//%http:%2F%2Fsse.tu-ilmenau.de%2Fcodegen%">
+    <details key="doNotGenerate" value="true"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="array" instanceTypeName="array">
+    <eAnnotations source="http://sse.tu-ilmenau.de/codegen" references="#//array/%http:%2F%2Fsse.tu-ilmenau.de%2Fcodegen%">
+      <details key="doNotGenerate" value="true"/>
+    </eAnnotations>
+    <eTypeParameters name="T"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="list" instanceTypeName="list">
+    <eAnnotations source="http://sse.tu-ilmenau.de/codegen" references="#//list/%http:%2F%2Fsse.tu-ilmenau.de%2Fcodegen%">
+      <details key="doNotGenerate" value="true"/>
+    </eAnnotations>
+    <eTypeParameters name="T"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="forward_list" instanceTypeName="forward_list">
+    <eAnnotations source="http://sse.tu-ilmenau.de/codegen" references="#//forward_list/%http:%2F%2Fsse.tu-ilmenau.de%2Fcodegen%">
+      <details key="doNotGenerate" value="true"/>
+    </eAnnotations>
+    <eTypeParameters name="T"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="map" instanceTypeName="map">
+    <eAnnotations source="http://sse.tu-ilmenau.de/codegen" references="#//map/%http:%2F%2Fsse.tu-ilmenau.de%2Fcodegen%">
+      <details key="doNotGenerate" value="true"/>
+    </eAnnotations>
+    <eTypeParameters name="K"/>
+    <eTypeParameters name="V"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="unordered_map" instanceTypeName="unordered_map">
+    <eAnnotations source="http://sse.tu-ilmenau.de/codegen" references="#//unordered_map/%http:%2F%2Fsse.tu-ilmenau.de%2Fcodegen%">
+      <details key="doNotGenerate" value="true"/>
+    </eAnnotations>
+    <eTypeParameters name="K"/>
+    <eTypeParameters name="V"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="queue" instanceTypeName="queue">
+    <eAnnotations source="http://sse.tu-ilmenau.de/codegen" references="#//queue/%http:%2F%2Fsse.tu-ilmenau.de%2Fcodegen%">
+      <details key="doNotGenerate" value="true"/>
+    </eAnnotations>
+    <eTypeParameters name="T"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="deque" instanceTypeName="deque">
+    <eAnnotations source="http://sse.tu-ilmenau.de/codegen" references="#//deque/%http:%2F%2Fsse.tu-ilmenau.de%2Fcodegen%">
+      <details key="doNotGenerate" value="true"/>
+    </eAnnotations>
+    <eTypeParameters name="T"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="set" instanceTypeName="set">
+    <eAnnotations source="http://sse.tu-ilmenau.de/codegen" references="#//set/%http:%2F%2Fsse.tu-ilmenau.de%2Fcodegen%">
+      <details key="doNotGenerate" value="true"/>
+    </eAnnotations>
+    <eTypeParameters name="T"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="unordered_set" instanceTypeName="unordered_set">
+    <eAnnotations source="http://sse.tu-ilmenau.de/codegen" references="#//unordered_set/%http:%2F%2Fsse.tu-ilmenau.de%2Fcodegen%">
+      <details key="doNotGenerate" value="true"/>
+    </eAnnotations>
+    <eTypeParameters name="T"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="stack" instanceTypeName="stack">
+    <eAnnotations source="http://sse.tu-ilmenau.de/codegen" references="#//stack/%http:%2F%2Fsse.tu-ilmenau.de%2Fcodegen%">
+      <details key="doNotGenerate" value="true"/>
+    </eAnnotations>
+    <eTypeParameters name="T"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="vector" instanceTypeName="vector">
+    <eAnnotations source="http://sse.tu-ilmenau.de/codegen" references="#//vector/%http:%2F%2Fsse.tu-ilmenau.de%2Fcodegen%">
+      <details key="doNotGenerate" value="true"/>
+    </eAnnotations>
+    <eTypeParameters name="T"/>
+  </eClassifiers>
+</ecore:EPackage>
