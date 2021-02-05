@@ -40,7 +40,7 @@
 [/if]
 [/template]
 
-[template public generateAttributeAccessorsDecl(anEAttribute : EAttribute, impl : Boolean) post(trim())]
+[template public generateAttributeAccessorsDecl(anEAttribute : EAttribute, impl : Boolean)]
 [anEAttribute.generateAttributeGetterDecleration(impl)/]
 [anEAttribute.generateAttributeSetterDecleration(impl)/]
 [for (redefinedElement : EObject | anEAttribute.getAllRedefinedElements())]
@@ -66,17 +66,12 @@ m_[anEAttribute.name/].reset(new [anEAttribute.generateStructuralFeatureType(tru
 
 [template public generateAttributeGetterDecleration(anEAttribute : EAttribute, impl : Boolean) ? (hasGetter())]
 [anEAttribute.generateDocumentation()/] 
-virtual [if (anEAttribute.eType.oclIsKindOf(EDataType))]
-[anEAttribute.generateStructuralFeatureType(true)/] [else]
-std::shared_ptr<[anEAttribute.generateStructuralFeatureType(true)/]> [/if]
- [anEAttribute.GetterName()/]() const [abstractSufix(impl)/];
-
+virtual [anEAttribute.generateStructuralFeatureType(true)/] [anEAttribute.GetterName()/]() const [abstractSufix(impl)/];
 [/template]
 
 [template public generateAttributeSetterDecleration(anEAttribute : EAttribute, impl : Boolean) ? ((hasSetter() or(impl and hasImplSetterOnly())) )]
 [anEAttribute.generateDocumentation()/] 
 virtual void [anEAttribute.SetterName()/] ([anEAttribute.generateStructuralFeatureType(true)/] _[anEAttribute.name/])[abstractSufix(impl)/];
-
 [/template]
 
 [***

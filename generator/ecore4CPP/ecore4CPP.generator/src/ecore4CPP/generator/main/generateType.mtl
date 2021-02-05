@@ -60,7 +60,7 @@
 [if (not(eParameter.upperBound = 1))]std::shared_ptr<Bag<[eParameter.eGenericType.generateCppType(false)/]>>
 [elseif (eParameter.eType.oclIsUndefined())][eParameter.eGenericType.generateCppType(true)/]
 [elseif ((eParameter.eType.name ='EEList') 
-		or (eParameter.eType.name ='ETreeIterator') )] std::shared_ptr<[eParameter.eGenericType.generateCppType(true)/]>
+		or (eParameter.eType.name ='ETreeIterator') )] std::shared_ptr<[eParameter.eGenericType.generateCppTypeDeepPointer(true)/]>
 [elseif ((eParameter.eType.name ='EMap') and (eParameter.ordered = true))] std::shared_ptr<[eParameter.eGenericType.generateCppTypeDeepPointer(true)/]> 
 [elseif ((eParameter.eType.name ='EMap') and (eParameter.ordered = false))] std::shared_ptr<[eParameter.eGenericType.generateCppTypeDeepPointer(true).replace('std::map', 'std::unordered_map')/]>
 [elseif (not eParameter.eType.oclIsKindOf(EDataType))]std::shared_ptr<[eParameter.eGenericType.generateCppType(false)/]>
@@ -90,7 +90,7 @@
 [if (not(eAttribute.upperBound = 1))][if (pointer)]std::shared_ptr<[/if]Bag<[eAttribute.eGenericType.generateCppType(false)/]>[if (pointer)]>[/if]
 [elseif (eAttribute.eType.oclIsUndefined())][eAttribute.eGenericType.generateCppType(pointer)/]
 [elseif ((eAttribute.eType.name ='EEList') 
-		or (eAttribute.eType.name ='ETreeIterator') )][if (pointer)]std::shared_ptr<[/if][eAttribute.eGenericType.generateCppType(true)/][if (pointer)]>[/if]
+		or (eAttribute.eType.name ='ETreeIterator') )][if (pointer)]std::shared_ptr<[/if][eAttribute.eGenericType.generateCppTypeDeepPointer(true)/][if (pointer)]>[/if]
 [elseif ((eAttribute.eType.name ='EMap') and (eAttribute.ordered = true))][if (pointer)]std::shared_ptr<[/if][eAttribute.eGenericType.generateCppTypeDeepPointer(true)/][if (pointer)]>[/if] 
 [elseif ((eAttribute.eType.name ='EMap') and (eAttribute.ordered = false))][if (pointer)]std::shared_ptr<[/if][eAttribute.eGenericType.generateCppTypeDeepPointer(true).replace('std::map', 'std::unordered_map')/][if (pointer)]>[/if]
 [elseif (not eAttribute.eType.oclIsKindOf(EDataType))][if (pointer)]std::shared_ptr<[/if][eAttribute.eGenericType.generateCppType(false)/][if (pointer)]>[/if] 
@@ -220,7 +220,7 @@ float
 [/template]
 
 [template public transformTypeName(name: String) ? (name = 'EEList')]
-Bag
+std::list
 [/template]
 
 [template public transformTypeName(name: String) ? (name = 'EDate')]
