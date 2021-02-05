@@ -57,7 +57,7 @@ virtual public [ClassWithNamespace(aClass, sClass)/]Impl[/for][if (aClass.eSuper
 			[className/](const [className/] & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			[className/]& operator=([className/] const&) = delete;
 
 		protected:
@@ -79,11 +79,8 @@ virtual public [ClassWithNamespace(aClass, sClass)/]Impl[/for][if (aClass.eSuper
 	[else]
 			[className/]([aReference.generateReferenceType(true)/] par_[aReference.name/]);
 	[/if]
-
-
 			[/for]
 			[/let]
-
 
 		public:
 			//destructor
@@ -102,7 +99,7 @@ virtual public [ClassWithNamespace(aClass, sClass)/]Impl[/for][if (aClass.eSuper
 			//*********************************
 			// Reference
 			//*********************************
-			[aClass.eReferences->sortedBy(name).generateReferenceDecl(true)/]				
+			[aClass.eReferences->sortedBy(name).generateReferenceDecl(true)/]
 			
 			//*********************************
 			// Union Getter

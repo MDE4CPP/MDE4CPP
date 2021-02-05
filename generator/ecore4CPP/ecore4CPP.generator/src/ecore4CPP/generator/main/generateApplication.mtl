@@ -54,9 +54,8 @@ using namespace [packageName/];
 
 int main ()
 {
-	//Create Model Factory and Package
+	//Create Model Factory
 	std::shared_ptr<[packageName/]Factory> factory = [packageName/]Factory::eInstance();
-	std::shared_ptr<[packageName/]Package> package = [packageName/]Package::eInstance();
 
 [if (hasMainSourceCode())]
 [getMainSourceCode()/]
