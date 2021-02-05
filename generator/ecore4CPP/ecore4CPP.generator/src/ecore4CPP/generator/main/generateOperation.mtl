@@ -40,9 +40,6 @@
 [if (((impl or (not hasImplOnly())) and (not (doNotGenerate() or ignore()))))]
 [anEOperation.generateDocumentation()/] 
 virtual [anEOperation.generateOperationType()/] [anEOperation.name/]([anEOperation.generateParameterList()/])[if (hasKey('const'))] const[/if] [abstractSufix(impl)/];[/if]
-
-
-
 [/template]
 
 [template public generateOperationImplementation(anEOperation : EOperation) ? (not (ignore() or doNotGenerate()))]
@@ -74,18 +71,39 @@ virtual [anEOperation.generateOperationType()/] [anEOperation.name/]([anEOperati
 [/template]
 
 [template public generateOperationInitialization(anEOperation : EOperation)? ( not hasImplOnly() )]
-[anEOperation.getClassMemberName()/]->setEType([anEOperation.eType.simpleDatatypeGetter(anEOperation)/]);
 [anEOperation.getClassMemberName()/]->setName("[anEOperation.name.toString()/]");
+[if ((anEOperation.eType.oclIsUndefined())or(anEOperation.eType.doNotGenerate()))]
+{ [comment external Classes for instance C++ std::map are not generated and has no metamodel informations/]
+	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+	std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+   	unknownClass->setName("[anEOperation.eType.oclAsType(EDataType).name/]");
+	unknownClass->setAbstract(true);
+	unknownClass->setInterface(true);
+	[anEOperation.getClassMemberName()/]->setEType(unknownClass);
+}
+[else]
+[anEOperation.getClassMemberName()/]->setEType([anEOperation.eType.simpleDatatypeGetter(anEOperation)/]);
+[/if]
 [anEOperation.getClassMemberName()/]->setLowerBound([anEOperation.lowerBound/]);
 [anEOperation.getClassMemberName()/]->setUpperBound([anEOperation.upperBound/]);
 [anEOperation.getClassMemberName()/]->setUnique([anEOperation.unique.toString()/]);
 [anEOperation.getClassMemberName()/]->setOrdered([anEOperation.ordered.toString()/]);
-
 [for (anEParameter : EParameter | anEOperation.eParameters) separator ('\r\n')]
 {
 	std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation([anEOperation.getClassMemberName()/]);
 	parameter->setName("[anEParameter.name/]");
+[if ((anEParameter.eType.oclIsUndefined())or(anEParameter.eType.doNotGenerate()))]
+	{ [comment external Classes for instance C++ std::map are not generated and has no metamodel informations/]
+		std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+   		unknownClass->setName("[anEParameter.eType.oclAsType(EDataType).name/]");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		parameter->setEType(unknownClass);
+	}
+[else]
 	parameter->setEType([anEParameter.eType.simpleDatatypeGetter(anEParameter.eOperation)/]);
+[/if]
 	parameter->setLowerBound(0);
 	parameter->setUpperBound(1);
 	parameter->setUnique(true);

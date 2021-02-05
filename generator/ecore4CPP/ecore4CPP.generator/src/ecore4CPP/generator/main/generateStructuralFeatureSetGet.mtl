@@ -116,31 +116,31 @@ bool [aClass.name.toUpperFirst().concat('Impl')/]::eSet(int featureID, Any newVa
 		{
 			// BOOST CAST
 [if (struct.eType.oclIsKindOf(EDataType) and struct.upperBound = 1 and struct.eGenericType.eTypeArguments->size() = 0 )]
-			[struct.generateStructuralFeatureTypeNoPtr()/] _[struct.name/] = newValue->get<[struct.generateStructuralFeatureTypeNoPtr()/]>();
+			[struct.generateStructuralFeatureType(false)/] _[struct.name/] = newValue->get<[struct.generateStructuralFeatureType(false)/]>();
 			[struct.SetterName()/](_[struct.name/]); //[aClass.getMyClassifierID()/][struct.getFeatureID()/]
 [elseif (struct.eType.oclIsKindOf(EDataType) and struct.upperBound = 1 and struct.eGenericType.eTypeArguments->size() > 0 )]
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<[struct.generateStructuralFeatureTypeNoPtr()/]> _[struct.name/] = std::dynamic_pointer_cast<[struct.generateStructuralFeatureTypeNoPtr()/]>(_temp);
+			std::shared_ptr<[struct.generateStructuralFeatureType(false)/]> _[struct.name/] = std::dynamic_pointer_cast<[struct.generateStructuralFeatureType(false)/]>(_temp);
 			[struct.SetterName()/](_[struct.name/]); //[aClass.getMyClassifierID()/][struct.getFeatureID()/]			
 [elseif (struct.eType.oclIsKindOf(EDataType))]
 			// nothing to do
 [elseif (struct.upperBound = 1)]
 			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<[struct.generateStructuralFeatureTypeNoPtr()/]> _[struct.name/] = std::dynamic_pointer_cast<[struct.generateStructuralFeatureTypeNoPtr()/]>(_temp);
+			std::shared_ptr<[struct.generateStructuralFeatureType(false)/]> _[struct.name/] = std::dynamic_pointer_cast<[struct.generateStructuralFeatureType(false)/]>(_temp);
 			[struct.SetterName()/](_[struct.name/]); //[aClass.getMyClassifierID()/][struct.getFeatureID()/]
 [else]
 			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<Bag<[struct.eGenericType.generateCppType()/]>> [struct.name/]List(new Bag<[struct.eGenericType.generateCppType()/]>());
+			std::shared_ptr<[struct.generateStructuralFeatureType(false)/]> [struct.name/]List(new [struct.generateStructuralFeatureType(false)/]());
 			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
 			Bag<ecore::EObject>::iterator end = tempObjectList->end();
 			while (iter != end)
 			{
-				[struct.name/]List->add(std::dynamic_pointer_cast<[struct.eGenericType.generateCppType()/]>(*iter));
+				[struct.name/]List->add(std::dynamic_pointer_cast<[struct.eGenericType.generateCppType(false)/]>(*iter));
 				iter++;
 			}
 			
-			Bag<[struct.eGenericType.generateCppType()/]>::iterator iter[struct.name.toUpperFirst()/] = m_[struct.name/]->begin();
-			Bag<[struct.eGenericType.generateCppType()/]>::iterator end[struct.name.toUpperFirst()/] = m_[struct.name/]->end();
+			Bag<[struct.eGenericType.generateCppType(false)/]>::iterator iter[struct.name.toUpperFirst()/] = m_[struct.name/]->begin();
+			Bag<[struct.eGenericType.generateCppType(false)/]>::iterator end[struct.name.toUpperFirst()/] = m_[struct.name/]->end();
 			while (iter[struct.name.toUpperFirst()/] != end[struct.name.toUpperFirst()/])
 			{
 				if ([struct.name/]List->find(*iter[struct.name.toUpperFirst()/]) == -1)

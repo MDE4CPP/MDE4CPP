@@ -48,37 +48,35 @@
 [let redefinedEAttribute : EAttribute = redefinedElement.oclAsType(EAttribute)]
 /*Additional Setter for '[redefinedEAttribute.eContainingClass.name/]::[redefinedEAttribute.name/]' redefined by attribute '[anEAttribute.name/]'*/
 [redefinedEAttribute.generateAttributeSetterDecleration(impl)/]
-[/let]
-[/if]
-[/for]
+[/let][/if][/for]
 [/template]
 
 [template public generateAttributeProtectedMember(anEAttribute : EAttribute)]
 [anEAttribute.generateDocumentation()/] 
 [if (not(anEAttribute.upperBound = 1))]
-[if(hasKey(keyQualify()))][valueKey(keyQualify())/] [/if]mutable [anEAttribute.generateAttributeType()/] m_[anEAttribute.name/]; 
+[if(hasKey(keyQualify()))][valueKey(keyQualify())/] [/if]mutable [anEAttribute.generateStructuralFeatureType(true)/] m_[anEAttribute.name/]; 
 [else]
-[if(hasKey(keyQualify()))][valueKey(keyQualify())/] [/if][anEAttribute.generateAttributeType()/] m_[anEAttribute.name/] [generateDefaultValue()/];
+[if(hasKey(keyQualify()))][valueKey(keyQualify())/] [/if][anEAttribute.generateStructuralFeatureType(true)/] m_[anEAttribute.name/] [generateDefaultValue()/];
 [/if]
 [/template]
 
 [template public generateAttributeInit(anEAttribute : EAttribute) ? (not(anEAttribute.upperBound = 1))]
-m_[anEAttribute.name/].reset(new Bag<[anEAttribute.eGenericType.generateCppType()/]>());
+m_[anEAttribute.name/].reset(new [anEAttribute.generateStructuralFeatureType(true)/]>());
 [/template]
 
 [template public generateAttributeGetterDecleration(anEAttribute : EAttribute, impl : Boolean) ? (hasGetter())]
 [anEAttribute.generateDocumentation()/] 
 virtual [if (anEAttribute.eType.oclIsKindOf(EDataType))]
-[anEAttribute.generateAttributeType()/] [else]
-std::shared_ptr<[anEAttribute.generateAttributeType()/]> [/if]
+[anEAttribute.generateStructuralFeatureType(true)/] [else]
+std::shared_ptr<[anEAttribute.generateStructuralFeatureType(true)/]> [/if]
  [anEAttribute.GetterName()/]() const [abstractSufix(impl)/];
 
 [/template]
 
 [template public generateAttributeSetterDecleration(anEAttribute : EAttribute, impl : Boolean) ? ((hasSetter() or(impl and hasImplSetterOnly())) )]
 [anEAttribute.generateDocumentation()/] 
-virtual void [anEAttribute.SetterName()/] ([anEAttribute.generateAttributeType()/] _[anEAttribute.name/])[abstractSufix(impl)/];
- 
+virtual void [anEAttribute.SetterName()/] ([anEAttribute.generateStructuralFeatureType(true)/] _[anEAttribute.name/])[abstractSufix(impl)/];
+
 [/template]
 
 [***
@@ -90,9 +88,7 @@ virtual void [anEAttribute.SetterName()/] ([anEAttribute.generateAttributeType()
 Getter & Setter for attribute [anEAttribute.name/]
 */
 [anEAttribute.generateAttributeGetterImplementationCpp()/]
-
 [anEAttribute.generateAttributeSetterImplementationCpp()/]
-
 [for (redefinedElement : EObject | anEAttribute.getAllRedefinedElements())]
 [if (redefinedElement.oclIsKindOf(EAttribute))]
 [let redefinedEAttribute : EAttribute = redefinedElement.oclAsType(EAttribute)]
@@ -104,7 +100,7 @@ Getter & Setter for attribute [anEAttribute.name/]
 [/template]
 
 [template private generateAttributeGetterImplementationCpp(anEAttribute : EAttribute)? (hasGetter())]
-[anEAttribute.generateAttributeType()/] [anEAttribute.eContainingClass.name.toUpperFirst()/]Impl::[anEAttribute.GetterName()/]() const 
+[anEAttribute.generateStructuralFeatureType(true)/] [anEAttribute.eContainingClass.name.toUpperFirst()/]Impl::[anEAttribute.GetterName()/]() const 
 {
 	[if (not (anEAttribute.upperBound = 1))]
 	if(m_[anEAttribute.name/] == nullptr)
@@ -117,7 +113,7 @@ Getter & Setter for attribute [anEAttribute.name/]
 [/template]
 
 [template private generateAttributeSetterImplementationCpp(anEAttribute : EAttribute) ? (( hasSetter() or(hasImplSetterOnly())) )]
-void [anEAttribute.eContainingClass.name.toUpperFirst()/]Impl::[anEAttribute.SetterName()/]([anEAttribute.generateAttributeType()/] _[anEAttribute.name/])
+void [anEAttribute.eContainingClass.name.toUpperFirst()/]Impl::[anEAttribute.SetterName()/]([anEAttribute.generateStructuralFeatureType(true)/] _[anEAttribute.name/])
 {
 	m_[anEAttribute.name/] = _[anEAttribute.name/];
 	[for (redefinedElement : EObject | anEAttribute.getDirectlyRedefinedElements())]
@@ -132,9 +128,9 @@ void [anEAttribute.eContainingClass.name.toUpperFirst()/]Impl::[anEAttribute.Set
 [/template]
 
 [template private generateRedefinedAttributeSetterImplementationCpp(redefinedEAttribute : EAttribute, anEAttribute : EAttribute) ? (( hasSetter() or(hasImplSetterOnly())) )]
-void [anEAttribute.eContainingClass.name.toUpperFirst()/]Impl::[redefinedEAttribute.SetterName()/]([anEAttribute.generateAttributeType()/] _[anEAttribute.name/])
+void [anEAttribute.eContainingClass.name.toUpperFirst()/]Impl::[redefinedEAttribute.SetterName()/]([anEAttribute.generateStructuralFeatureType(true)/] _[anEAttribute.name/])
 {
-	std::shared_ptr<[anEAttribute.eGenericType.generateCppType()/]> _[anEAttribute.name/] = std::dynamic_pointer_cast<[anEAttribute.eGenericType.generateCppType()/]>(_[redefinedEAttribute.name/]);
+	std::shared_ptr<[anEAttribute.eGenericType.generateCppType(true)/]> _[anEAttribute.name/] = std::dynamic_pointer_cast<[anEAttribute.eGenericType.generateCppType(true)/]>(_[redefinedEAttribute.name/]);
 	if(_[anEAttribute.name/])
 	{
 		m_[anEAttribute.name/] = _[anEAttribute.name/];
@@ -155,7 +151,7 @@ void [anEAttribute.eContainingClass.name.toUpperFirst()/]Impl::[redefinedEAttrib
 	}
 	else
 	{
-		std::cerr<<"['['/][anEAttribute.eContainingClass.name.toUpperFirst()/]::[redefinedEAttribute.SetterName()/][']'/] : Could not set node because provided node was not of type '[anEAttribute.eGenericType.generateCppType()/]'"<<std::endl;
+		std::cerr<<"['['/][anEAttribute.eContainingClass.name.toUpperFirst()/]::[redefinedEAttribute.SetterName()/][']'/] : Could not set node because provided node was not of type '[anEAttribute.eGenericType.generateCppType(true)/]'"<<std::endl;
 	}
 }
 [/template]
@@ -175,9 +171,8 @@ void [anEAttribute.eContainingClass.name.toUpperFirst()/]Impl::[redefinedEAttrib
 [template public generateAttributeInitialization(anEAttribute : EAttribute)]
 [anEAttribute.getClassMemberName()/] = [anEAttribute.packageGetter()/];
 [anEAttribute.getClassMemberName()/]->setName("[anEAttribute.name/]");
-
 [if (anEAttribute.eType.doNotGenerate())]
-{
+{  [comment external Classes for instance C++ std::map are not generated and has no metamodel informations/]
 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
 	std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
    	unknownClass->setName("[anEAttribute.eType.oclAsType(EDataType).name/]");

@@ -43,29 +43,29 @@
 [file (aClass.generateNamespacePath().concat('/').concat(aClass.name.toUpperFirst()).concat('.hpp'), false, 'UTF-8')]
 [startGuard(aClass)/]
 
-[let usedOrderedTypes:Set(EClassifier)= aClass.includesFeatureOrderedFilter(true)->filter(EClassifier)]
+[let usedOrderedTypes:Set(EClassifier)= aClass.includesFeatureOrderedFilter(true)->filter(EClassifier)->select(c:EClassifier | not (c.name ->isEmpty()))]
 	[if (usedOrderedTypes->size()>0)]
-		[if ((usedOrderedTypes->filter(EClassifier)->select(c:EClassifier| c.name.equalsIgnoreCase('EMap'))->size() > 0) or (usedOrderedTypes->filter(EClassifier)->select(c:EClassifier| c.name.equalsIgnoreCase('map'))->size() > 0) )]
+		[if ((usedOrderedTypes->select(c:EClassifier| c.name.equalsIgnoreCase('EMap'))->size() > 0) or (usedOrderedTypes->filter(EClassifier)->select(c:EClassifier| c.name.equalsIgnoreCase('map'))->size() > 0) )]
 #include <map>
 		[/if]
 	[/if]	
 [/let]
-[let usedUnOrderedTypes:Set(EClassifier)= aClass.includesFeatureOrderedFilter(false)->filter(EClassifier)]
+[let usedUnOrderedTypes:Set(EClassifier)= aClass.includesFeatureOrderedFilter(false)->filter(EClassifier)->select(c:EClassifier | not (c.name ->isEmpty()))]
 	[if (usedUnOrderedTypes->size()>0)]
-		[if ((usedUnOrderedTypes->filter(EClassifier)->select(c:EClassifier| c.name.equalsIgnoreCase('EMap'))->size() > 0) or (usedUnOrderedTypes->filter(EClassifier)->select(c:EClassifier| c.name.equalsIgnoreCase('map'))->size() > 0) )]
+		[if ((usedUnOrderedTypes->select(c:EClassifier| c.name.equalsIgnoreCase('EMap'))->size() > 0) or (usedUnOrderedTypes->filter(EClassifier)->select(c:EClassifier| c.name.equalsIgnoreCase('map'))->size() > 0) )]
 #include <unordered_map>
 		[/if]
 	[/if]	
 [/let]
-[let usedTypes:Set(EClassifier)= aClass.includes()->filter(EClassifier)]
+[let usedTypes:Set(EClassifier)= aClass.includes()->filter(EClassifier)->select(c:EClassifier | not (c.name ->isEmpty()))]
 	[if (usedTypes->size()>0)]
 		[if ( (usedTypes->select(c:EClassifier| c.name.equalsIgnoreCase('EEList'))->size() > 0) or (usedTypes->select(c:EClassifier| c.name.equalsIgnoreCase('list'))->size() > 0))]
 #include <list>
 		[/if]
-		[if ((usedTypes->filter(EClassifier)->select(name.equalsIgnoreCase('vector'))->size() > 0))]
+		[if ((usedTypes->select(name.equalsIgnoreCase('vector'))->size() > 0))]
 #include <vector>
 		[/if]
-		[if ((usedTypes->filter(EClassifier)->select(name.equalsIgnoreCase('unordered_map'))->size() > 0))]
+		[if ((usedTypes->select(name.equalsIgnoreCase('unordered_map'))->size() > 0))]
 #include <unordered_map>
 		[/if]
 	[/if]
@@ -88,9 +88,9 @@ typedef std::shared_ptr<AnyObject> Any;
 [generatePersistenceForwardDeclarations()/]
 
 //Forward Declaration for used types 
-[let includeClasses:Set(EClass) = aClass.includes()->selectByKind(EClass)->select(not doNotGenerate())->select(c:EClass| (not (c = aClass)) and (not (aClass.eAllSuperTypes)->includes(c)))]
+[let includeClasses:Set(EClass) = aClass.includes()->selectByKind(EClass)->select(not oclIsUndefined())->select(not doNotGenerate())->select(c:EClass| (not (c = aClass)) and (not (aClass.eAllSuperTypes)->includes(c)))]
 [if (includeClasses->size()>0)]
-[let includeNameSpaces:OrderedSet(EPackage) = includeClasses->select(not oclIsUndefined()).ePackage->asOrderedSet()->sortedBy(name)]
+[let includeNameSpaces:OrderedSet(EPackage) = includeClasses.ePackage->asOrderedSet()->sortedBy(name)]
 [if (includeNameSpaces->size()>0)]
 [for (includeNamespace: EPackage | includeNameSpaces)]
 namespace [includeNamespace.generateNamespaceDefinition()/] 
