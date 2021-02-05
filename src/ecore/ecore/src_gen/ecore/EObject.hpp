@@ -64,7 +64,7 @@ namespace ecore
 			EObject(){}
 
 			//Additional constructors for the containments back reference
-			EObject(std::weak_ptr<ecore::EObject > par_eContainer);
+			EObject(std::weak_ptr<ecore::EObject> par_eContainer);
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -76,50 +76,20 @@ namespace ecore
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<Bag < std::shared_ptr<ecore::EObject>>> eAllContents() const = 0;
-			
-			 
-			virtual std::shared_ptr<ecore::EClass> eClass() const = 0;
-			
-			
-			
-			 
-			virtual std::shared_ptr<ecore::EStructuralFeature> eContainingFeature() const = 0;
-			
-			 
-			virtual std::shared_ptr<ecore::EReference> eContainmentFeature() const = 0;
-			
-			 
-			virtual std::shared_ptr<Bag < std::shared_ptr<ecore::EObject>>> eContents() const = 0;
-			
-			 
-			virtual std::shared_ptr<Bag < std::shared_ptr<ecore::EObject>>> eCrossReferences() const = 0;
-			
-			 
-			virtual Any eGet(std::shared_ptr<ecore::EStructuralFeature> feature) const = 0;
-			
-			 
-			virtual Any eGet(std::shared_ptr<ecore::EStructuralFeature> feature,bool resolve) const = 0;
-			
-			 
-			virtual Any eInvoke(std::shared_ptr<ecore::EOperation> operation,Bag < std::shared_ptr<Any>> arguments) const = 0;
-			
-			 
-			virtual bool eIsProxy() const = 0;
-			
-			 
-			virtual bool eIsSet(std::shared_ptr<ecore::EStructuralFeature> feature) const = 0;
-			
-			 
-			virtual int eResource() const = 0;
-			
-			 
-			virtual void eSet(std::shared_ptr<ecore::EStructuralFeature> feature,Any newValue) = 0;
-			
-			 
+			virtual std::shared_ptr<Bag < ecore::EObject>> eAllContents() const = 0; 
+			virtual std::shared_ptr<ecore::EClass> eClass() const = 0; 
+			virtual std::shared_ptr<ecore::EStructuralFeature> eContainingFeature() const = 0; 
+			virtual std::shared_ptr<ecore::EReference> eContainmentFeature() const = 0; 
+			virtual std::shared_ptr<Bag < ecore::EObject>> eContents() const = 0; 
+			virtual std::shared_ptr<Bag < ecore::EObject>> eCrossReferences() const = 0; 
+			virtual Any eGet(std::shared_ptr<ecore::EStructuralFeature> feature) const = 0; 
+			virtual Any eGet(std::shared_ptr<ecore::EStructuralFeature> feature,bool resolve) const = 0; 
+			virtual Any eInvoke(std::shared_ptr<ecore::EOperation> operation,std::shared_ptr<Bag < Any>> arguments) const = 0; 
+			virtual bool eIsProxy() const = 0; 
+			virtual bool eIsSet(std::shared_ptr<ecore::EStructuralFeature> feature) const = 0; 
+			virtual int eResource() const = 0; 
+			virtual void eSet(std::shared_ptr<ecore::EStructuralFeature> feature,Any newValue) = 0; 
 			virtual void eUnset(std::shared_ptr<ecore::EStructuralFeature> feature) const = 0;
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -131,10 +101,10 @@ namespace ecore
 			// Reference
 			//*********************************
 			
-			virtual std::weak_ptr<ecore::EObject > getEContainer() const = 0;
+			virtual std::weak_ptr<ecore::EObject> getEContainer() const = 0;
 			
 			
-			virtual void setEContainer(std::shared_ptr<ecore::EObject> _eContainer) = 0;
+			virtual void setEContainer(std::weak_ptr<ecore::EObject>) = 0;
 			
 			
 			
@@ -152,7 +122,7 @@ namespace ecore
 			// Reference Members
 			//*********************************
 			
-			std::weak_ptr<ecore::EObject > m_eContainer;
+			std::weak_ptr<ecore::EObject> m_eContainer;
 			mutable std::shared_ptr<Union<ecore::EObject>> m_eContens;
 
 		public:

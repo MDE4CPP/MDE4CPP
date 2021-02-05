@@ -56,22 +56,20 @@ EStringToStringMapEntryImpl::~EStringToStringMapEntryImpl()
 }
 
 
-
-EStringToStringMapEntryImpl::EStringToStringMapEntryImpl(const EStringToStringMapEntryImpl & obj):EStringToStringMapEntryImpl()
+EStringToStringMapEntryImpl::EStringToStringMapEntryImpl(const EStringToStringMapEntryImpl & obj): ecore::EModelElementImpl(obj),
+EStringToStringMapEntry(obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy EStringToStringMapEntry "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 	m_key = obj.getKey();
 	m_value = obj.getValue();
 
 	//copy references with no containment (soft copy)
-	
 
 	//Clone references with containment (deep copy)
-
-
 }
 
 std::shared_ptr<ecore::EObject>  EStringToStringMapEntryImpl::copy() const
@@ -96,12 +94,10 @@ std::string EStringToStringMapEntryImpl::getKey() const
 {
 	return m_key;
 }
-
 void EStringToStringMapEntryImpl::setKey(std::string _key)
 {
 	m_key = _key;
 } 
-
 
 
 /*
@@ -111,12 +107,10 @@ std::string EStringToStringMapEntryImpl::getValue() const
 {
 	return m_value;
 }
-
 void EStringToStringMapEntryImpl::setValue(std::string _value)
 {
 	m_value = _value;
 } 
-
 
 
 //*********************************

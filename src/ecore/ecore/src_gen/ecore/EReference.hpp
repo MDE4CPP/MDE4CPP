@@ -90,16 +90,16 @@ namespace ecore
 			
 			
 			
-			virtual std::shared_ptr<ecore::EReference > getEOpposite() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getEOpposite() const = 0;
 			
 			
-			virtual void setEOpposite(std::shared_ptr<ecore::EReference> _eOpposite) = 0;
+			virtual void setEOpposite(std::shared_ptr<ecore::EReference>) = 0;
 			
 			
-			virtual std::shared_ptr<ecore::EClass > getEReferenceType() const = 0;
+			virtual std::shared_ptr<ecore::EClass> getEReferenceType() const = 0;
 			
 			
-			virtual void setEReferenceType(std::shared_ptr<ecore::EClass> _eReferenceType) = 0;
+			virtual void setEReferenceType(std::shared_ptr<ecore::EClass>) = 0;
 			
 			
 
@@ -120,8 +120,8 @@ namespace ecore
 			//*********************************
 			
 			mutable std::shared_ptr<Bag<ecore::EAttribute>> m_eKeys;
-			std::shared_ptr<ecore::EReference > m_eOpposite;
-			std::shared_ptr<ecore::EClass > m_eReferenceType;
+			std::shared_ptr<ecore::EReference> m_eOpposite;
+			std::shared_ptr<ecore::EClass> m_eReferenceType;
 
 		public:
 			//*********************************

@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../EParameter.hpp"
 
@@ -23,7 +24,7 @@ namespace ecore
 			EParameterImpl(const EParameterImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			EParameterImpl& operator=(EParameterImpl const&) = delete;
 
 		protected:
@@ -33,14 +34,9 @@ namespace ecore
 			virtual void setThisEParameterPtr(std::weak_ptr<EParameter> thisEParameterPtr);
 
 			//Additional constructors for the containments back reference
-			EParameterImpl(std::weak_ptr<ecore::EObject > par_eContainer);
-
-
+			EParameterImpl(std::weak_ptr<ecore::EObject> par_eContainer);
 			//Additional constructors for the containments back reference
-			EParameterImpl(std::weak_ptr<ecore::EOperation > par_eOperation);
-
-
-
+			EParameterImpl(std::weak_ptr<ecore::EOperation> par_eOperation);
 
 		public:
 			//destructor
@@ -60,10 +56,10 @@ namespace ecore
 			// Reference
 			//*********************************
 			
-			virtual std::weak_ptr<ecore::EOperation > getEOperation() const ;
+			virtual std::weak_ptr<ecore::EOperation> getEOperation() const ;
 			
 			
-							
+			
 			
 			//*********************************
 			// Union Getter

@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../EPackage.hpp"
 
@@ -23,7 +24,7 @@ namespace ecore
 			EPackageImpl(const EPackageImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			EPackageImpl& operator=(EPackageImpl const&) = delete;
 
 		protected:
@@ -33,14 +34,9 @@ namespace ecore
 			virtual void setThisEPackagePtr(std::weak_ptr<EPackage> thisEPackagePtr);
 
 			//Additional constructors for the containments back reference
-			EPackageImpl(std::weak_ptr<ecore::EObject > par_eContainer);
-
-
+			EPackageImpl(std::weak_ptr<ecore::EObject> par_eContainer);
 			//Additional constructors for the containments back reference
-			EPackageImpl(std::weak_ptr<ecore::EPackage > par_eSuperPackage);
-
-
-
+			EPackageImpl(std::weak_ptr<ecore::EPackage> par_eSuperPackage);
 
 		public:
 			//destructor
@@ -51,8 +47,6 @@ namespace ecore
 			//*********************************
 			 
 			virtual std::shared_ptr<ecore::EClassifier> getEClassifier(std::string name) const ;
-			
-			
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -73,20 +67,20 @@ namespace ecore
 			
 			
 			
-			virtual std::shared_ptr<ecore::EFactory > getEFactoryInstance() const ;
+			virtual std::shared_ptr<ecore::EFactory> getEFactoryInstance() const ;
 			
 			
-			virtual void setEFactoryInstance(std::shared_ptr<ecore::EFactory> _eFactoryInstance) ;
+			virtual void setEFactoryInstance(std::shared_ptr<ecore::EFactory>) ;
 			
 			
 			virtual std::shared_ptr<Bag<ecore::EPackage>> getESubpackages() const ;
 			
 			
 			
-			virtual std::weak_ptr<ecore::EPackage > getESuperPackage() const ;
+			virtual std::weak_ptr<ecore::EPackage> getESuperPackage() const ;
 			
 			
-							
+			
 			
 			//*********************************
 			// Union Getter

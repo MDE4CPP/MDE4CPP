@@ -61,38 +61,24 @@ ENamedElementImpl::~ENamedElementImpl()
 }
 
 //Additional constructor for the containments back reference
-ENamedElementImpl::ENamedElementImpl(std::weak_ptr<ecore::EObject > par_eContainer)
+ENamedElementImpl::ENamedElementImpl(std::weak_ptr<ecore::EObject> par_eContainer)
 :ENamedElementImpl()
 {
 	m_eContainer = par_eContainer;
 }
 
-
-ENamedElementImpl::ENamedElementImpl(const ENamedElementImpl & obj):ENamedElementImpl()
+ENamedElementImpl::ENamedElementImpl(const ENamedElementImpl & obj): EModelElementImpl(obj), ENamedElement(obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ENamedElement "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
-	m_metaElementID = obj.getMetaElementID();
+	//Clone Attributes with (deep copy)
 	m_name = obj.getName();
 
 	//copy references with no containment (soft copy)
-	
-	m_eContainer  = obj.getEContainer();
-
 
 	//Clone references with containment (deep copy)
-
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
-
 }
 
 std::shared_ptr<ecore::EObject>  ENamedElementImpl::copy() const
@@ -117,12 +103,10 @@ std::string ENamedElementImpl::getName() const
 {
 	return m_name;
 }
-
 void ENamedElementImpl::setName(std::string _name)
 {
 	m_name = _name;
 } 
-
 
 
 //*********************************

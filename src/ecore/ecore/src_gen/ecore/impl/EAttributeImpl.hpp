@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../EAttribute.hpp"
 
@@ -23,7 +24,7 @@ namespace ecore
 			EAttributeImpl(const EAttributeImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			EAttributeImpl& operator=(EAttributeImpl const&) = delete;
 
 		protected:
@@ -33,14 +34,9 @@ namespace ecore
 			virtual void setThisEAttributePtr(std::weak_ptr<EAttribute> thisEAttributePtr);
 
 			//Additional constructors for the containments back reference
-			EAttributeImpl(std::weak_ptr<ecore::EObject > par_eContainer);
-
-
+			EAttributeImpl(std::weak_ptr<ecore::EObject> par_eContainer);
 			//Additional constructors for the containments back reference
-			EAttributeImpl(std::weak_ptr<ecore::EClass > par_eContainingClass);
-
-
-
+			EAttributeImpl(std::weak_ptr<ecore::EClass> par_eContainingClass);
 
 		public:
 			//destructor
@@ -63,10 +59,10 @@ namespace ecore
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<ecore::EDataType > getEAttributeType() const ;
+			virtual std::shared_ptr<ecore::EDataType> getEAttributeType() const ;
 			
 			
-							
+			
 			
 			//*********************************
 			// Union Getter

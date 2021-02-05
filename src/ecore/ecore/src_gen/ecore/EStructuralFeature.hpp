@@ -62,10 +62,10 @@ namespace ecore
 			EStructuralFeature(){}
 
 			//Additional constructors for the containments back reference
-			EStructuralFeature(std::weak_ptr<ecore::EObject > par_eContainer);
+			EStructuralFeature(std::weak_ptr<ecore::EObject> par_eContainer);
 
 			//Additional constructors for the containments back reference
-			EStructuralFeature(std::weak_ptr<ecore::EClass > par_eContainingClass);
+			EStructuralFeature(std::weak_ptr<ecore::EClass> par_eContainingClass);
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -78,10 +78,6 @@ namespace ecore
 			//*********************************
 			 
 			virtual void * getContainerClass() = 0;
-			
-			
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -111,7 +107,7 @@ namespace ecore
 			// Reference
 			//*********************************
 			
-			virtual std::weak_ptr<ecore::EClass > getEContainingClass() const = 0;
+			virtual std::weak_ptr<ecore::EClass> getEContainingClass() const = 0;
 			
 			
 			
@@ -142,7 +138,7 @@ namespace ecore
 			// Reference Members
 			//*********************************
 			
-			std::weak_ptr<ecore::EClass > m_eContainingClass;
+			std::weak_ptr<ecore::EClass> m_eContainingClass;
 
 		public:
 			//*********************************

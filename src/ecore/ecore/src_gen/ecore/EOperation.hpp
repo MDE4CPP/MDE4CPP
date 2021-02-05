@@ -65,10 +65,10 @@ namespace ecore
 			EOperation(){}
 
 			//Additional constructors for the containments back reference
-			EOperation(std::weak_ptr<ecore::EObject > par_eContainer);
+			EOperation(std::weak_ptr<ecore::EObject> par_eContainer);
 
 			//Additional constructors for the containments back reference
-			EOperation(std::weak_ptr<ecore::EClass > par_eContainingClass);
+			EOperation(std::weak_ptr<ecore::EClass> par_eContainingClass);
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -79,12 +79,8 @@ namespace ecore
 			//*********************************
 			// Operations
 			//*********************************
-			
-			
 			 
 			virtual bool isOverrideOf(std::shared_ptr<ecore::EOperation> someOperation) const = 0;
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -93,7 +89,7 @@ namespace ecore
 			// Reference
 			//*********************************
 			
-			virtual std::weak_ptr<ecore::EClass > getEContainingClass() const = 0;
+			virtual std::weak_ptr<ecore::EClass> getEContainingClass() const = 0;
 			
 			
 			
@@ -126,7 +122,7 @@ namespace ecore
 			// Reference Members
 			//*********************************
 			
-			std::weak_ptr<ecore::EClass > m_eContainingClass;
+			std::weak_ptr<ecore::EClass> m_eContainingClass;
 			mutable std::shared_ptr<Bag<ecore::EClassifier>> m_eExceptions;
 			mutable std::shared_ptr<Bag<ecore::EGenericType>> m_eGenericExceptions;
 			mutable std::shared_ptr<Subset<ecore::EParameter, ecore::EObject>> m_eParameters;

@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../EDataType.hpp"
 
@@ -23,7 +24,7 @@ namespace ecore
 			EDataTypeImpl(const EDataTypeImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			EDataTypeImpl& operator=(EDataTypeImpl const&) = delete;
 
 		protected:
@@ -33,14 +34,9 @@ namespace ecore
 			virtual void setThisEDataTypePtr(std::weak_ptr<EDataType> thisEDataTypePtr);
 
 			//Additional constructors for the containments back reference
-			EDataTypeImpl(std::weak_ptr<ecore::EObject > par_eContainer);
-
-
+			EDataTypeImpl(std::weak_ptr<ecore::EObject> par_eContainer);
 			//Additional constructors for the containments back reference
-			EDataTypeImpl(std::weak_ptr<ecore::EPackage > par_ePackage);
-
-
-
+			EDataTypeImpl(std::weak_ptr<ecore::EPackage> par_ePackage);
 
 		public:
 			//destructor
@@ -62,7 +58,7 @@ namespace ecore
 			//*********************************
 			// Reference
 			//*********************************
-							
+			
 			
 			//*********************************
 			// Union Getter

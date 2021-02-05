@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../EGenericType.hpp"
 
@@ -25,7 +26,7 @@ virtual public EGenericType
 			EGenericTypeImpl(const EGenericTypeImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			EGenericTypeImpl& operator=(EGenericTypeImpl const&) = delete;
 
 		protected:
@@ -33,7 +34,6 @@ virtual public EGenericType
 			EGenericTypeImpl();
 			virtual std::shared_ptr<EGenericType> getThisEGenericTypePtr() const;
 			virtual void setThisEGenericTypePtr(std::weak_ptr<EGenericType> thisEGenericTypePtr);
-
 
 
 		public:
@@ -46,8 +46,6 @@ virtual public EGenericType
 			 
 			virtual bool isInstance(Any object) const ;
 			
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -57,40 +55,40 @@ virtual public EGenericType
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<ecore::EClassifier > getEClassifier() const ;
+			virtual std::shared_ptr<ecore::EClassifier> getEClassifier() const ;
 			
 			
-			virtual void setEClassifier(std::shared_ptr<ecore::EClassifier> _eClassifier) ;
+			virtual void setEClassifier(std::shared_ptr<ecore::EClassifier>) ;
 			
 			
-			virtual std::shared_ptr<ecore::EGenericType > getELowerBound() const ;
+			virtual std::shared_ptr<ecore::EGenericType> getELowerBound() const ;
 			
 			
-			virtual void setELowerBound(std::shared_ptr<ecore::EGenericType> _eLowerBound) ;
+			virtual void setELowerBound(std::shared_ptr<ecore::EGenericType>) ;
 			
 			
-			virtual std::shared_ptr<ecore::EClassifier > getERawType() const ;
+			virtual std::shared_ptr<ecore::EClassifier> getERawType() const ;
 			
 			
-			virtual void setERawType(std::shared_ptr<ecore::EClassifier> _eRawType) ;
+			virtual void setERawType(std::shared_ptr<ecore::EClassifier>) ;
 			
 			
 			virtual std::shared_ptr<Bag<ecore::EGenericType>> getETypeArguments() const ;
 			
 			
 			
-			virtual std::shared_ptr<ecore::ETypeParameter > getETypeParameter() const ;
+			virtual std::shared_ptr<ecore::ETypeParameter> getETypeParameter() const ;
 			
 			
-			virtual void setETypeParameter(std::shared_ptr<ecore::ETypeParameter> _eTypeParameter) ;
+			virtual void setETypeParameter(std::shared_ptr<ecore::ETypeParameter>) ;
 			
 			
-			virtual std::shared_ptr<ecore::EGenericType > getEUpperBound() const ;
+			virtual std::shared_ptr<ecore::EGenericType> getEUpperBound() const ;
 			
 			
-			virtual void setEUpperBound(std::shared_ptr<ecore::EGenericType> _eUpperBound) ;
+			virtual void setEUpperBound(std::shared_ptr<ecore::EGenericType>) ;
 			
-							
+			
 			
 			//*********************************
 			// Union Getter

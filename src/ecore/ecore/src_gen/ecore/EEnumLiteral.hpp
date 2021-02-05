@@ -60,10 +60,10 @@ namespace ecore
 			EEnumLiteral(){}
 
 			//Additional constructors for the containments back reference
-			EEnumLiteral(std::weak_ptr<ecore::EObject > par_eContainer);
+			EEnumLiteral(std::weak_ptr<ecore::EObject> par_eContainer);
 
 			//Additional constructors for the containments back reference
-			EEnumLiteral(std::weak_ptr<ecore::EEnum > par_eEnum);
+			EEnumLiteral(std::weak_ptr<ecore::EEnum> par_eEnum);
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -92,7 +92,7 @@ namespace ecore
 			// Reference
 			//*********************************
 			
-			virtual std::weak_ptr<ecore::EEnum > getEEnum() const = 0;
+			virtual std::weak_ptr<ecore::EEnum> getEEnum() const = 0;
 			
 			
 			
@@ -113,7 +113,7 @@ namespace ecore
 			// Reference Members
 			//*********************************
 			
-			std::weak_ptr<ecore::EEnum > m_eEnum;
+			std::weak_ptr<ecore::EEnum> m_eEnum;
 
 		public:
 			//*********************************

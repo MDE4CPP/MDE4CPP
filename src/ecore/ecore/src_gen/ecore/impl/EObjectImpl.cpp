@@ -63,29 +63,26 @@ EObjectImpl::~EObjectImpl()
 }
 
 //Additional constructor for the containments back reference
-EObjectImpl::EObjectImpl(std::weak_ptr<ecore::EObject > par_eContainer)
+EObjectImpl::EObjectImpl(std::weak_ptr<ecore::EObject> par_eContainer)
 :EObjectImpl()
 {
 	m_eContainer = par_eContainer;
 }
 
-
-EObjectImpl::EObjectImpl(const EObjectImpl & obj):EObjectImpl()
+EObjectImpl::EObjectImpl(const EObjectImpl & obj): 
+EObject(obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy EObject "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 	m_metaElementID = obj.getMetaElementID();
 
 	//copy references with no containment (soft copy)
-	
 	m_eContainer  = obj.getEContainer();
 
-
 	//Clone references with containment (deep copy)
-
-
 }
 
 std::shared_ptr<ecore::EObject>  EObjectImpl::copy() const
@@ -110,18 +107,16 @@ int EObjectImpl::getMetaElementID() const
 {
 	return m_metaElementID;
 }
-
 void EObjectImpl::setMetaElementID(int _metaElementID)
 {
 	m_metaElementID = _metaElementID;
 } 
 
 
-
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<Bag < std::shared_ptr<ecore::EObject>>> EObjectImpl::eAllContents() const
+std::shared_ptr<Bag < ecore::EObject>> EObjectImpl::eAllContents() const
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -149,13 +144,13 @@ std::shared_ptr<ecore::EReference> EObjectImpl::eContainmentFeature() const
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag < std::shared_ptr<ecore::EObject>>> EObjectImpl::eContents() const
+std::shared_ptr<Bag < ecore::EObject>> EObjectImpl::eContents() const
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag < std::shared_ptr<ecore::EObject>>> EObjectImpl::eCrossReferences() const
+std::shared_ptr<Bag < ecore::EObject>> EObjectImpl::eCrossReferences() const
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -177,7 +172,7 @@ Any EObjectImpl::eGet(std::shared_ptr<ecore::EStructuralFeature> feature,bool re
 	//end of body
 }
 
-Any EObjectImpl::eInvoke(std::shared_ptr<ecore::EOperation> operation,Bag < std::shared_ptr<Any>> arguments) const
+Any EObjectImpl::eInvoke(std::shared_ptr<ecore::EOperation> operation,std::shared_ptr<Bag < Any>> arguments) const
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -223,24 +218,20 @@ void EObjectImpl::eUnset(std::shared_ptr<ecore::EStructuralFeature> feature) con
 /*
 Getter & Setter for reference eContainer
 */
-std::weak_ptr<ecore::EObject > EObjectImpl::getEContainer() const
+std::weak_ptr<ecore::EObject> EObjectImpl::getEContainer() const
 {
 
     return m_eContainer;
 }
-
-void EObjectImpl::setEContainer(std::shared_ptr<ecore::EObject> _eContainer)
+void EObjectImpl::setEContainer(std::weak_ptr<ecore::EObject> _eContainer)
 {
     m_eContainer = _eContainer;
 }
 
 
-
 /*
 Getter & Setter for reference eContens
 */
-
-
 
 
 
@@ -435,12 +426,9 @@ void EObjectImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::in
 			{
 				typeName = "EObject";
 			}
-			std::shared_ptr<ecore::EObject> eContens = modelFactory->create(typeName, loadHandler->getCurrentObject(), ecore::ecorePackage::EOBJECT_ATTRIBUTE_ECONTAINER);
-			if (eContens != nullptr)
-			{
-				loadHandler->handleChild(eContens);
-			}
-			return;
+		loadHandler->handleChildContainer<ecore::EObject>(this->getEContens());  
+
+			return; 
 		}
 	}
 	catch (std::exception& e)
@@ -491,17 +479,13 @@ void EObjectImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 		{
 			saveHandler->addAttribute("metaElementID", this->getMetaElementID());
 		}
-
 		//
 		// Add new tags (from references)
 		//
 		std::shared_ptr<EClass> metaClass = this->eClass();
 		// Save 'eContens'
-		std::shared_ptr<Union<ecore::EObject>> list_eContens = this->getEContens();
-		for (std::shared_ptr<ecore::EObject> eContens : *list_eContens) 
-		{
-			saveHandler->addReference(eContens, "eContens", eContens->eClass() !=ecore::ecorePackage::eInstance()->getEObject_Class());
-		}
+
+		saveHandler->addReferences<ecore::EObject>("eContens", this->getEContens());
 	}
 	catch (std::exception& e)
 	{

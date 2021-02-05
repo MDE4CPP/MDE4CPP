@@ -61,10 +61,10 @@ namespace ecore
 			EParameter(){}
 
 			//Additional constructors for the containments back reference
-			EParameter(std::weak_ptr<ecore::EObject > par_eContainer);
+			EParameter(std::weak_ptr<ecore::EObject> par_eContainer);
 
 			//Additional constructors for the containments back reference
-			EParameter(std::weak_ptr<ecore::EOperation > par_eOperation);
+			EParameter(std::weak_ptr<ecore::EOperation> par_eOperation);
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -84,7 +84,7 @@ namespace ecore
 			// Reference
 			//*********************************
 			
-			virtual std::weak_ptr<ecore::EOperation > getEOperation() const = 0;
+			virtual std::weak_ptr<ecore::EOperation> getEOperation() const = 0;
 			
 			
 			
@@ -99,7 +99,7 @@ namespace ecore
 			// Reference Members
 			//*********************************
 			
-			std::weak_ptr<ecore::EOperation > m_eOperation;
+			std::weak_ptr<ecore::EOperation> m_eOperation;
 
 		public:
 			//*********************************

@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../EStructuralFeature.hpp"
 
@@ -23,7 +24,7 @@ namespace ecore
 			EStructuralFeatureImpl(const EStructuralFeatureImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			EStructuralFeatureImpl& operator=(EStructuralFeatureImpl const&) = delete;
 
 		protected:
@@ -33,14 +34,9 @@ namespace ecore
 			virtual void setThisEStructuralFeaturePtr(std::weak_ptr<EStructuralFeature> thisEStructuralFeaturePtr);
 
 			//Additional constructors for the containments back reference
-			EStructuralFeatureImpl(std::weak_ptr<ecore::EObject > par_eContainer);
-
-
+			EStructuralFeatureImpl(std::weak_ptr<ecore::EObject> par_eContainer);
 			//Additional constructors for the containments back reference
-			EStructuralFeatureImpl(std::weak_ptr<ecore::EClass > par_eContainingClass);
-
-
-
+			EStructuralFeatureImpl(std::weak_ptr<ecore::EClass> par_eContainingClass);
 
 		public:
 			//destructor
@@ -51,10 +47,6 @@ namespace ecore
 			//*********************************
 			 
 			virtual void * getContainerClass() ;
-			
-			
-			
-			
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -89,10 +81,10 @@ namespace ecore
 			// Reference
 			//*********************************
 			
-			virtual std::weak_ptr<ecore::EClass > getEContainingClass() const ;
+			virtual std::weak_ptr<ecore::EClass> getEContainingClass() const ;
 			
 			
-							
+			
 			
 			//*********************************
 			// Union Getter

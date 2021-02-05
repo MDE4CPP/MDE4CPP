@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../EAnnotation.hpp"
 
@@ -23,7 +24,7 @@ namespace ecore
 			EAnnotationImpl(const EAnnotationImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			EAnnotationImpl& operator=(EAnnotationImpl const&) = delete;
 
 		protected:
@@ -33,14 +34,9 @@ namespace ecore
 			virtual void setThisEAnnotationPtr(std::weak_ptr<EAnnotation> thisEAnnotationPtr);
 
 			//Additional constructors for the containments back reference
-			EAnnotationImpl(std::weak_ptr<ecore::EObject > par_eContainer);
-
-
+			EAnnotationImpl(std::weak_ptr<ecore::EObject> par_eContainer);
 			//Additional constructors for the containments back reference
-			EAnnotationImpl(std::weak_ptr<ecore::EModelElement > par_eModelElement);
-
-
-
+			EAnnotationImpl(std::weak_ptr<ecore::EModelElement> par_eModelElement);
 
 		public:
 			//destructor
@@ -54,10 +50,10 @@ namespace ecore
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			virtual std::shared_ptr<std::map <  std::string ,  std::string >> getDetails() const ;
+			virtual std::shared_ptr<std::map < std::string, std::string>> getDetails() const ;
 			
 			 
-			virtual void setDetails (std::shared_ptr<std::map <  std::string ,  std::string >> _details);virtual std::string getSource() const ;
+			virtual void setDetails (std::shared_ptr<std::map < std::string, std::string>> _details);virtual std::string getSource() const ;
 			
 			 
 			virtual void setSource (std::string _source);
@@ -70,16 +66,16 @@ namespace ecore
 			
 			
 			
-			virtual std::weak_ptr<ecore::EModelElement > getEModelElement() const ;
+			virtual std::weak_ptr<ecore::EModelElement> getEModelElement() const ;
 			
 			
-			virtual void setEModelElement(std::shared_ptr<ecore::EModelElement> _eModelElement) ;
+			virtual void setEModelElement(std::weak_ptr<ecore::EModelElement>) ;
 			
 			
 			virtual std::shared_ptr<Bag<ecore::EObject>> getReferences() const ;
 			
 			
-							
+			
 			
 			//*********************************
 			// Union Getter

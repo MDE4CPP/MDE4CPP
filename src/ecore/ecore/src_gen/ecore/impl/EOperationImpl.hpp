@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../EOperation.hpp"
 
@@ -23,7 +24,7 @@ namespace ecore
 			EOperationImpl(const EOperationImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			EOperationImpl& operator=(EOperationImpl const&) = delete;
 
 		protected:
@@ -33,14 +34,9 @@ namespace ecore
 			virtual void setThisEOperationPtr(std::weak_ptr<EOperation> thisEOperationPtr);
 
 			//Additional constructors for the containments back reference
-			EOperationImpl(std::weak_ptr<ecore::EObject > par_eContainer);
-
-
+			EOperationImpl(std::weak_ptr<ecore::EObject> par_eContainer);
 			//Additional constructors for the containments back reference
-			EOperationImpl(std::weak_ptr<ecore::EClass > par_eContainingClass);
-
-
-
+			EOperationImpl(std::weak_ptr<ecore::EClass> par_eContainingClass);
 
 		public:
 			//destructor
@@ -49,12 +45,8 @@ namespace ecore
 			//*********************************
 			// Operations
 			//*********************************
-			
-			
 			 
 			virtual bool isOverrideOf(std::shared_ptr<ecore::EOperation> someOperation) const ;
-			
-			
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -68,7 +60,7 @@ namespace ecore
 			// Reference
 			//*********************************
 			
-			virtual std::weak_ptr<ecore::EClass > getEContainingClass() const ;
+			virtual std::weak_ptr<ecore::EClass> getEContainingClass() const ;
 			
 			
 			
@@ -87,7 +79,7 @@ namespace ecore
 			virtual std::shared_ptr<Bag<ecore::ETypeParameter>> getETypeParameters() const ;
 			
 			
-							
+			
 			
 			//*********************************
 			// Union Getter

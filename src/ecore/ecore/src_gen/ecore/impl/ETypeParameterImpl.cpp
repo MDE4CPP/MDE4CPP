@@ -62,46 +62,28 @@ ETypeParameterImpl::~ETypeParameterImpl()
 }
 
 //Additional constructor for the containments back reference
-ETypeParameterImpl::ETypeParameterImpl(std::weak_ptr<ecore::EObject > par_eContainer)
+ETypeParameterImpl::ETypeParameterImpl(std::weak_ptr<ecore::EObject> par_eContainer)
 :ETypeParameterImpl()
 {
 	m_eContainer = par_eContainer;
 }
 
-
-ETypeParameterImpl::ETypeParameterImpl(const ETypeParameterImpl & obj):ETypeParameterImpl()
+ETypeParameterImpl::ETypeParameterImpl(const ETypeParameterImpl & obj): ENamedElementImpl(obj), ETypeParameter(obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ETypeParameter "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
-	m_metaElementID = obj.getMetaElementID();
-	m_name = obj.getName();
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
-	m_eContainer  = obj.getEContainer();
-
 
 	//Clone references with containment (deep copy)
-
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
+	std::shared_ptr<Bag<ecore::EGenericType>> eBoundsContainer = getEBounds();
+	for(auto _eBounds : *obj.getEBounds()) 
 	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
+		eBoundsContainer->push_back(std::dynamic_pointer_cast<ecore::EGenericType>(_eBounds->copy()));
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
-	std::shared_ptr<Bag<ecore::EGenericType>> _eBoundsList = obj.getEBounds();
-	for(std::shared_ptr<ecore::EGenericType> _eBounds : *_eBoundsList)
-	{
-		this->getEBounds()->add(std::shared_ptr<ecore::EGenericType>(std::dynamic_pointer_cast<ecore::EGenericType>(_eBounds->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eBounds" << std::endl;
-	#endif
-
 	
 }
 
@@ -142,8 +124,6 @@ std::shared_ptr<Bag<ecore::EGenericType>> ETypeParameterImpl::getEBounds() const
 
     return m_eBounds;
 }
-
-
 
 
 
@@ -292,14 +272,9 @@ void ETypeParameterImpl::loadNode(std::string nodeName, std::shared_ptr<persiste
 			{
 				typeName = "EGenericType";
 			}
-			std::shared_ptr<ecore::EGenericType> eBounds = std::dynamic_pointer_cast<ecore::EGenericType>(modelFactory->create(typeName));
-			if (eBounds != nullptr)
-			{
-				std::shared_ptr<Bag<ecore::EGenericType>> list_eBounds = this->getEBounds();
-				list_eBounds->push_back(eBounds);
-				loadHandler->handleChild(eBounds);
-			}
-			return;
+		loadHandler->handleChildContainer<ecore::EGenericType>(this->getEBounds());  
+
+			return; 
 		}
 	}
 	catch (std::exception& e)
@@ -340,17 +315,13 @@ void ETypeParameterImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	try
 	{
 		std::shared_ptr<ecore::ecorePackage> package = ecore::ecorePackage::eInstance();
-
 		//
 		// Add new tags (from references)
 		//
 		std::shared_ptr<EClass> metaClass = this->eClass();
 		// Save 'eBounds'
-		std::shared_ptr<Bag<ecore::EGenericType>> list_eBounds = this->getEBounds();
-		for (std::shared_ptr<ecore::EGenericType> eBounds : *list_eBounds) 
-		{
-			saveHandler->addReference(eBounds, "eBounds", eBounds->eClass() !=ecore::ecorePackage::eInstance()->getEGenericType_Class());
-		}
+
+		saveHandler->addReferences<ecore::EGenericType>("eBounds", this->getEBounds());
 	}
 	catch (std::exception& e)
 	{

@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../ETypeParameter.hpp"
 
@@ -23,7 +24,7 @@ namespace ecore
 			ETypeParameterImpl(const ETypeParameterImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			ETypeParameterImpl& operator=(ETypeParameterImpl const&) = delete;
 
 		protected:
@@ -33,10 +34,7 @@ namespace ecore
 			virtual void setThisETypeParameterPtr(std::weak_ptr<ETypeParameter> thisETypeParameterPtr);
 
 			//Additional constructors for the containments back reference
-			ETypeParameterImpl(std::weak_ptr<ecore::EObject > par_eContainer);
-
-
-
+			ETypeParameterImpl(std::weak_ptr<ecore::EObject> par_eContainer);
 
 		public:
 			//destructor
@@ -59,7 +57,7 @@ namespace ecore
 			virtual std::shared_ptr<Bag<ecore::EGenericType>> getEBounds() const ;
 			
 			
-							
+			
 			
 			//*********************************
 			// Union Getter

@@ -66,73 +66,32 @@ EAttributeImpl::~EAttributeImpl()
 }
 
 //Additional constructor for the containments back reference
-EAttributeImpl::EAttributeImpl(std::weak_ptr<ecore::EObject > par_eContainer)
+EAttributeImpl::EAttributeImpl(std::weak_ptr<ecore::EObject> par_eContainer)
 :EAttributeImpl()
 {
 	m_eContainer = par_eContainer;
 }
 
 //Additional constructor for the containments back reference
-EAttributeImpl::EAttributeImpl(std::weak_ptr<ecore::EClass > par_eContainingClass)
+EAttributeImpl::EAttributeImpl(std::weak_ptr<ecore::EClass> par_eContainingClass)
 :EAttributeImpl()
 {
 	m_eContainingClass = par_eContainingClass;
 }
 
-
-EAttributeImpl::EAttributeImpl(const EAttributeImpl & obj):EAttributeImpl()
+EAttributeImpl::EAttributeImpl(const EAttributeImpl & obj): EStructuralFeatureImpl(obj), EAttribute(obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy EAttribute "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
-	m_changeable = obj.isChangeable();
-	m_defaultValue = obj.getDefaultValue();
-	m_defaultValueLiteral = obj.getDefaultValueLiteral();
-	m_derived = obj.isDerived();
-	m_featureID = obj.getFeatureID();
+	//Clone Attributes with (deep copy)
 	m_iD = obj.isID();
-	m_lowerBound = obj.getLowerBound();
-	m_many = obj.isMany();
-	m_metaElementID = obj.getMetaElementID();
-	m_name = obj.getName();
-	m_ordered = obj.isOrdered();
-	m_required = obj.isRequired();
-	m_transient = obj.isTransient();
-	m_unique = obj.isUnique();
-	m_unsettable = obj.isUnsettable();
-	m_upperBound = obj.getUpperBound();
-	m_volatile = obj.isVolatile();
 
 	//copy references with no containment (soft copy)
-	
 	m_eAttributeType  = obj.getEAttributeType();
 
-	m_eContainer  = obj.getEContainer();
-
-	m_eContainingClass  = obj.getEContainingClass();
-
-	m_eType  = obj.getEType();
-
-
 	//Clone references with containment (deep copy)
-
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
-	if(obj.getEGenericType()!=nullptr)
-	{
-		m_eGenericType = std::dynamic_pointer_cast<ecore::EGenericType>(obj.getEGenericType()->copy());
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eGenericType" << std::endl;
-	#endif
-
 }
 
 std::shared_ptr<ecore::EObject>  EAttributeImpl::copy() const
@@ -157,12 +116,10 @@ bool EAttributeImpl::isID() const
 {
 	return m_iD;
 }
-
 void EAttributeImpl::setID(bool _iD)
 {
 	m_iD = _iD;
 } 
-
 
 
 //*********************************
@@ -175,13 +132,11 @@ void EAttributeImpl::setID(bool _iD)
 /*
 Getter & Setter for reference eAttributeType
 */
-std::shared_ptr<ecore::EDataType > EAttributeImpl::getEAttributeType() const
+std::shared_ptr<ecore::EDataType> EAttributeImpl::getEAttributeType() const
 {
 //assert(m_eAttributeType);
     return m_eAttributeType;
 }
-
-
 
 
 

@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../EClassifier.hpp"
 
@@ -23,7 +24,7 @@ namespace ecore
 			EClassifierImpl(const EClassifierImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			EClassifierImpl& operator=(EClassifierImpl const&) = delete;
 
 		protected:
@@ -33,14 +34,9 @@ namespace ecore
 			virtual void setThisEClassifierPtr(std::weak_ptr<EClassifier> thisEClassifierPtr);
 
 			//Additional constructors for the containments back reference
-			EClassifierImpl(std::weak_ptr<ecore::EObject > par_eContainer);
-
-
+			EClassifierImpl(std::weak_ptr<ecore::EObject> par_eContainer);
 			//Additional constructors for the containments back reference
-			EClassifierImpl(std::weak_ptr<ecore::EPackage > par_ePackage);
-
-
-
+			EClassifierImpl(std::weak_ptr<ecore::EPackage> par_ePackage);
 
 		public:
 			//destructor
@@ -50,12 +46,8 @@ namespace ecore
 			// Operations
 			//*********************************
 			 
-			virtual int getClassifierID() ;
-			
-			 
+			virtual int getClassifierID() ; 
 			virtual bool isInstance(Any object) const ;
-			
-			
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -75,14 +67,14 @@ namespace ecore
 			// Reference
 			//*********************************
 			
-			virtual std::weak_ptr<ecore::EPackage > getEPackage() const ;
+			virtual std::weak_ptr<ecore::EPackage> getEPackage() const ;
 			
 			
 			
 			virtual std::shared_ptr<Bag<ecore::ETypeParameter>> getETypeParameters() const ;
 			
 			
-							
+			
 			
 			//*********************************
 			// Union Getter

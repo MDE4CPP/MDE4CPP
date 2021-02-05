@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../EStringToStringMapEntry.hpp"
 
@@ -25,7 +26,7 @@ virtual public EStringToStringMapEntry
 			EStringToStringMapEntryImpl(const EStringToStringMapEntryImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			EStringToStringMapEntryImpl& operator=(EStringToStringMapEntryImpl const&) = delete;
 
 		protected:
@@ -33,7 +34,6 @@ virtual public EStringToStringMapEntry
 			EStringToStringMapEntryImpl();
 			virtual std::shared_ptr<EStringToStringMapEntry> getThisEStringToStringMapEntryPtr() const;
 			virtual void setThisEStringToStringMapEntryPtr(std::weak_ptr<EStringToStringMapEntry> thisEStringToStringMapEntryPtr);
-
 
 
 		public:
@@ -59,7 +59,7 @@ virtual public EStringToStringMapEntry
 			//*********************************
 			// Reference
 			//*********************************
-							
+			
 			
 			//*********************************
 			// Union Getter

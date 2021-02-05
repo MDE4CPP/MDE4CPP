@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../EModelElement.hpp"
 
@@ -23,7 +24,7 @@ namespace ecore
 			EModelElementImpl(const EModelElementImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			EModelElementImpl& operator=(EModelElementImpl const&) = delete;
 
 		protected:
@@ -33,10 +34,7 @@ namespace ecore
 			virtual void setThisEModelElementPtr(std::weak_ptr<EModelElement> thisEModelElementPtr);
 
 			//Additional constructors for the containments back reference
-			EModelElementImpl(std::weak_ptr<ecore::EObject > par_eContainer);
-
-
-
+			EModelElementImpl(std::weak_ptr<ecore::EObject> par_eContainer);
 
 		public:
 			//destructor
@@ -47,8 +45,6 @@ namespace ecore
 			//*********************************
 			 
 			virtual std::shared_ptr<ecore::EAnnotation> getEAnnotation(std::string source) ;
-			
-			
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -62,7 +58,7 @@ namespace ecore
 			virtual std::shared_ptr<Subset<ecore::EAnnotation, ecore::EObject>> getEAnnotations() const ;
 			
 			
-							
+			
 			
 			//*********************************
 			// Union Getter

@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../EEnumLiteral.hpp"
 
@@ -23,7 +24,7 @@ namespace ecore
 			EEnumLiteralImpl(const EEnumLiteralImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			EEnumLiteralImpl& operator=(EEnumLiteralImpl const&) = delete;
 
 		protected:
@@ -33,14 +34,9 @@ namespace ecore
 			virtual void setThisEEnumLiteralPtr(std::weak_ptr<EEnumLiteral> thisEEnumLiteralPtr);
 
 			//Additional constructors for the containments back reference
-			EEnumLiteralImpl(std::weak_ptr<ecore::EObject > par_eContainer);
-
-
+			EEnumLiteralImpl(std::weak_ptr<ecore::EObject> par_eContainer);
 			//Additional constructors for the containments back reference
-			EEnumLiteralImpl(std::weak_ptr<ecore::EEnum > par_eEnum);
-
-
-
+			EEnumLiteralImpl(std::weak_ptr<ecore::EEnum> par_eEnum);
 
 		public:
 			//destructor
@@ -69,10 +65,10 @@ namespace ecore
 			// Reference
 			//*********************************
 			
-			virtual std::weak_ptr<ecore::EEnum > getEEnum() const ;
+			virtual std::weak_ptr<ecore::EEnum> getEEnum() const ;
 			
 			
-							
+			
 			
 			//*********************************
 			// Union Getter

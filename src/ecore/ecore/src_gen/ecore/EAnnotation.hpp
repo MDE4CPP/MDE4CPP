@@ -57,10 +57,10 @@ namespace ecore
 			EAnnotation(){}
 
 			//Additional constructors for the containments back reference
-			EAnnotation(std::weak_ptr<ecore::EObject > par_eContainer);
+			EAnnotation(std::weak_ptr<ecore::EObject> par_eContainer);
 
 			//Additional constructors for the containments back reference
-			EAnnotation(std::weak_ptr<ecore::EModelElement > par_eModelElement);
+			EAnnotation(std::weak_ptr<ecore::EModelElement> par_eModelElement);
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -75,10 +75,10 @@ namespace ecore
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			virtual std::shared_ptr<std::map <  std::string ,  std::string >> getDetails() const = 0;
+			virtual std::shared_ptr<std::map < std::string, std::string>> getDetails() const = 0;
 			
 			 
-			virtual void setDetails (std::shared_ptr<std::map <  std::string ,  std::string >> _details)= 0;virtual std::string getSource() const = 0;
+			virtual void setDetails (std::shared_ptr<std::map < std::string, std::string>> _details)= 0;virtual std::string getSource() const = 0;
 			
 			 
 			virtual void setSource (std::string _source)= 0;
@@ -90,10 +90,10 @@ namespace ecore
 			
 			
 			
-			virtual std::weak_ptr<ecore::EModelElement > getEModelElement() const = 0;
+			virtual std::weak_ptr<ecore::EModelElement> getEModelElement() const = 0;
 			
 			
-			virtual void setEModelElement(std::shared_ptr<ecore::EModelElement> _eModelElement) = 0;
+			virtual void setEModelElement(std::weak_ptr<ecore::EModelElement>) = 0;
 			
 			
 			virtual std::shared_ptr<Bag<ecore::EObject>> getReferences() const = 0;
@@ -106,7 +106,7 @@ namespace ecore
 			// Attribute Members
 			//*********************************
 			 
-			std::shared_ptr<std::map <  std::string ,  std::string >> m_details = nullptr;
+			std::shared_ptr<std::map < std::string, std::string>> m_details = nullptr;
 			 
 			std::string m_source = "";
 			
@@ -116,7 +116,7 @@ namespace ecore
 			//*********************************
 			
 			mutable std::shared_ptr<Subset<ecore::EObject, ecore::EObject>> m_contents;
-			std::weak_ptr<ecore::EModelElement > m_eModelElement;
+			std::weak_ptr<ecore::EModelElement> m_eModelElement;
 			mutable std::shared_ptr<Bag<ecore::EObject>> m_references;
 
 		public:

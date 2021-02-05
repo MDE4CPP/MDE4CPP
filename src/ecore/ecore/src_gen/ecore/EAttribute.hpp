@@ -82,7 +82,7 @@ namespace ecore
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<ecore::EDataType > getEAttributeType() const = 0;
+			virtual std::shared_ptr<ecore::EDataType> getEAttributeType() const = 0;
 			
 			
 			
@@ -99,7 +99,7 @@ namespace ecore
 			// Reference Members
 			//*********************************
 			
-			std::shared_ptr<ecore::EDataType > m_eAttributeType;
+			std::shared_ptr<ecore::EDataType> m_eAttributeType;
 
 		public:
 			//*********************************

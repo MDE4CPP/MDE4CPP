@@ -62,10 +62,10 @@ namespace ecore
 			EPackage(){}
 
 			//Additional constructors for the containments back reference
-			EPackage(std::weak_ptr<ecore::EObject > par_eContainer);
+			EPackage(std::weak_ptr<ecore::EObject> par_eContainer);
 
 			//Additional constructors for the containments back reference
-			EPackage(std::weak_ptr<ecore::EPackage > par_eSuperPackage);
+			EPackage(std::weak_ptr<ecore::EPackage> par_eSuperPackage);
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -78,8 +78,6 @@ namespace ecore
 			//*********************************
 			 
 			virtual std::shared_ptr<ecore::EClassifier> getEClassifier(std::string name) const = 0;
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -98,17 +96,17 @@ namespace ecore
 			
 			
 			
-			virtual std::shared_ptr<ecore::EFactory > getEFactoryInstance() const = 0;
+			virtual std::shared_ptr<ecore::EFactory> getEFactoryInstance() const = 0;
 			
 			
-			virtual void setEFactoryInstance(std::shared_ptr<ecore::EFactory> _eFactoryInstance) = 0;
+			virtual void setEFactoryInstance(std::shared_ptr<ecore::EFactory>) = 0;
 			
 			
 			virtual std::shared_ptr<Bag<ecore::EPackage>> getESubpackages() const = 0;
 			
 			
 			
-			virtual std::weak_ptr<ecore::EPackage > getESuperPackage() const = 0;
+			virtual std::weak_ptr<ecore::EPackage> getESuperPackage() const = 0;
 			
 			
 			
@@ -128,9 +126,9 @@ namespace ecore
 			//*********************************
 			
 			mutable std::shared_ptr<Subset<ecore::EClassifier, ecore::EObject>> m_eClassifiers;
-			std::shared_ptr<ecore::EFactory > m_eFactoryInstance;
+			std::shared_ptr<ecore::EFactory> m_eFactoryInstance;
 			mutable std::shared_ptr<Bag<ecore::EPackage>> m_eSubpackages;
-			std::weak_ptr<ecore::EPackage > m_eSuperPackage;
+			std::weak_ptr<ecore::EPackage> m_eSuperPackage;
 
 		public:
 			//*********************************

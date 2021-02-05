@@ -62,50 +62,34 @@ EEnumLiteralImpl::~EEnumLiteralImpl()
 }
 
 //Additional constructor for the containments back reference
-EEnumLiteralImpl::EEnumLiteralImpl(std::weak_ptr<ecore::EObject > par_eContainer)
+EEnumLiteralImpl::EEnumLiteralImpl(std::weak_ptr<ecore::EObject> par_eContainer)
 :EEnumLiteralImpl()
 {
 	m_eContainer = par_eContainer;
 }
 
 //Additional constructor for the containments back reference
-EEnumLiteralImpl::EEnumLiteralImpl(std::weak_ptr<ecore::EEnum > par_eEnum)
+EEnumLiteralImpl::EEnumLiteralImpl(std::weak_ptr<ecore::EEnum> par_eEnum)
 :EEnumLiteralImpl()
 {
 	m_eEnum = par_eEnum;
 }
 
-
-EEnumLiteralImpl::EEnumLiteralImpl(const EEnumLiteralImpl & obj):EEnumLiteralImpl()
+EEnumLiteralImpl::EEnumLiteralImpl(const EEnumLiteralImpl & obj): ENamedElementImpl(obj), EEnumLiteral(obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy EEnumLiteral "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 	m_instance = obj.getInstance();
 	m_literal = obj.getLiteral();
-	m_metaElementID = obj.getMetaElementID();
-	m_name = obj.getName();
 	m_value = obj.getValue();
 
 	//copy references with no containment (soft copy)
-	
-	m_eContainer  = obj.getEContainer();
-
 	m_eEnum  = obj.getEEnum();
 
-
 	//Clone references with containment (deep copy)
-
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
-
 }
 
 std::shared_ptr<ecore::EObject>  EEnumLiteralImpl::copy() const
@@ -130,12 +114,10 @@ Any EEnumLiteralImpl::getInstance() const
 {
 	return m_instance;
 }
-
 void EEnumLiteralImpl::setInstance(Any _instance)
 {
 	m_instance = _instance;
 } 
-
 
 
 /*
@@ -145,12 +127,10 @@ std::string EEnumLiteralImpl::getLiteral() const
 {
 	return m_literal;
 }
-
 void EEnumLiteralImpl::setLiteral(std::string _literal)
 {
 	m_literal = _literal;
 } 
-
 
 
 /*
@@ -160,12 +140,10 @@ int EEnumLiteralImpl::getValue() const
 {
 	return m_value;
 }
-
 void EEnumLiteralImpl::setValue(int _value)
 {
 	m_value = _value;
 } 
-
 
 
 //*********************************
@@ -178,13 +156,11 @@ void EEnumLiteralImpl::setValue(int _value)
 /*
 Getter & Setter for reference eEnum
 */
-std::weak_ptr<ecore::EEnum > EEnumLiteralImpl::getEEnum() const
+std::weak_ptr<ecore::EEnum> EEnumLiteralImpl::getEEnum() const
 {
 
     return m_eEnum;
 }
-
-
 
 
 

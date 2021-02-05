@@ -62,10 +62,10 @@ namespace ecore
 			EClassifier(){}
 
 			//Additional constructors for the containments back reference
-			EClassifier(std::weak_ptr<ecore::EObject > par_eContainer);
+			EClassifier(std::weak_ptr<ecore::EObject> par_eContainer);
 
 			//Additional constructors for the containments back reference
-			EClassifier(std::weak_ptr<ecore::EPackage > par_ePackage);
+			EClassifier(std::weak_ptr<ecore::EPackage> par_ePackage);
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -77,12 +77,8 @@ namespace ecore
 			// Operations
 			//*********************************
 			 
-			virtual int getClassifierID() = 0;
-			
-			 
+			virtual int getClassifierID() = 0; 
 			virtual bool isInstance(Any object) const = 0;
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -100,7 +96,7 @@ namespace ecore
 			// Reference
 			//*********************************
 			
-			virtual std::weak_ptr<ecore::EPackage > getEPackage() const = 0;
+			virtual std::weak_ptr<ecore::EPackage> getEPackage() const = 0;
 			
 			
 			
@@ -127,7 +123,7 @@ namespace ecore
 			// Reference Members
 			//*********************************
 			
-			std::weak_ptr<ecore::EPackage > m_ePackage;
+			std::weak_ptr<ecore::EPackage> m_ePackage;
 			mutable std::shared_ptr<Bag<ecore::ETypeParameter>> m_eTypeParameters;
 
 		public:

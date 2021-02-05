@@ -65,70 +65,39 @@ EStructuralFeatureImpl::~EStructuralFeatureImpl()
 }
 
 //Additional constructor for the containments back reference
-EStructuralFeatureImpl::EStructuralFeatureImpl(std::weak_ptr<ecore::EObject > par_eContainer)
+EStructuralFeatureImpl::EStructuralFeatureImpl(std::weak_ptr<ecore::EObject> par_eContainer)
 :EStructuralFeatureImpl()
 {
 	m_eContainer = par_eContainer;
 }
 
 //Additional constructor for the containments back reference
-EStructuralFeatureImpl::EStructuralFeatureImpl(std::weak_ptr<ecore::EClass > par_eContainingClass)
+EStructuralFeatureImpl::EStructuralFeatureImpl(std::weak_ptr<ecore::EClass> par_eContainingClass)
 :EStructuralFeatureImpl()
 {
 	m_eContainingClass = par_eContainingClass;
 }
 
-
-EStructuralFeatureImpl::EStructuralFeatureImpl(const EStructuralFeatureImpl & obj):EStructuralFeatureImpl()
+EStructuralFeatureImpl::EStructuralFeatureImpl(const EStructuralFeatureImpl & obj): ETypedElementImpl(obj), EStructuralFeature(obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy EStructuralFeature "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 	m_changeable = obj.isChangeable();
 	m_defaultValue = obj.getDefaultValue();
 	m_defaultValueLiteral = obj.getDefaultValueLiteral();
 	m_derived = obj.isDerived();
-	m_featureID = obj.getFeatureID();
-	m_lowerBound = obj.getLowerBound();
-	m_many = obj.isMany();
-	m_metaElementID = obj.getMetaElementID();
-	m_name = obj.getName();
-	m_ordered = obj.isOrdered();
-	m_required = obj.isRequired();
+// unknown attribute type or missing setter for featureID
 	m_transient = obj.isTransient();
-	m_unique = obj.isUnique();
 	m_unsettable = obj.isUnsettable();
-	m_upperBound = obj.getUpperBound();
 	m_volatile = obj.isVolatile();
 
 	//copy references with no containment (soft copy)
-	
-	m_eContainer  = obj.getEContainer();
-
 	m_eContainingClass  = obj.getEContainingClass();
 
-	m_eType  = obj.getEType();
-
-
 	//Clone references with containment (deep copy)
-
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
-	if(obj.getEGenericType()!=nullptr)
-	{
-		m_eGenericType = std::dynamic_pointer_cast<ecore::EGenericType>(obj.getEGenericType()->copy());
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eGenericType" << std::endl;
-	#endif
-
 }
 
 std::shared_ptr<ecore::EObject>  EStructuralFeatureImpl::copy() const
@@ -153,12 +122,10 @@ bool EStructuralFeatureImpl::isChangeable() const
 {
 	return m_changeable;
 }
-
 void EStructuralFeatureImpl::setChangeable(bool _changeable)
 {
 	m_changeable = _changeable;
 } 
-
 
 
 /*
@@ -168,12 +135,10 @@ Any EStructuralFeatureImpl::getDefaultValue() const
 {
 	return m_defaultValue;
 }
-
 void EStructuralFeatureImpl::setDefaultValue(Any _defaultValue)
 {
 	m_defaultValue = _defaultValue;
 } 
-
 
 
 /*
@@ -183,12 +148,10 @@ std::string EStructuralFeatureImpl::getDefaultValueLiteral() const
 {
 	return m_defaultValueLiteral;
 }
-
 void EStructuralFeatureImpl::setDefaultValueLiteral(std::string _defaultValueLiteral)
 {
 	m_defaultValueLiteral = _defaultValueLiteral;
 } 
-
 
 
 /*
@@ -198,12 +161,10 @@ bool EStructuralFeatureImpl::isDerived() const
 {
 	return m_derived;
 }
-
 void EStructuralFeatureImpl::setDerived(bool _derived)
 {
 	m_derived = _derived;
 } 
-
 
 
 /*
@@ -213,12 +174,10 @@ int EStructuralFeatureImpl::getFeatureID() const
 {
 	return m_featureID;
 }
-
 void EStructuralFeatureImpl::setFeatureID(int _featureID)
 {
 	m_featureID = _featureID;
 } 
-
 
 
 /*
@@ -228,12 +187,10 @@ bool EStructuralFeatureImpl::isTransient() const
 {
 	return m_transient;
 }
-
 void EStructuralFeatureImpl::setTransient(bool _transient)
 {
 	m_transient = _transient;
 } 
-
 
 
 /*
@@ -243,12 +200,10 @@ bool EStructuralFeatureImpl::isUnsettable() const
 {
 	return m_unsettable;
 }
-
 void EStructuralFeatureImpl::setUnsettable(bool _unsettable)
 {
 	m_unsettable = _unsettable;
 } 
-
 
 
 /*
@@ -258,12 +213,10 @@ bool EStructuralFeatureImpl::isVolatile() const
 {
 	return m_volatile;
 }
-
 void EStructuralFeatureImpl::setVolatile(bool _volatile)
 {
 	m_volatile = _volatile;
 } 
-
 
 
 //*********************************
@@ -283,13 +236,11 @@ void * EStructuralFeatureImpl::getContainerClass()
 /*
 Getter & Setter for reference eContainingClass
 */
-std::weak_ptr<ecore::EClass > EStructuralFeatureImpl::getEContainingClass() const
+std::weak_ptr<ecore::EClass> EStructuralFeatureImpl::getEContainingClass() const
 {
 
     return m_eContainingClass;
 }
-
-
 
 
 

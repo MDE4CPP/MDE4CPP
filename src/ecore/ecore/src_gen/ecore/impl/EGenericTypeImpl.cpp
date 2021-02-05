@@ -61,52 +61,36 @@ EGenericTypeImpl::~EGenericTypeImpl()
 }
 
 
-
-EGenericTypeImpl::EGenericTypeImpl(const EGenericTypeImpl & obj):EGenericTypeImpl()
+EGenericTypeImpl::EGenericTypeImpl(const EGenericTypeImpl & obj): ecore::EModelElementImpl(obj),
+EGenericType(obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy EGenericType "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
 	m_eClassifier  = obj.getEClassifier();
-
 	m_eRawType  = obj.getERawType();
-
 	m_eTypeParameter  = obj.getETypeParameter();
 
-
 	//Clone references with containment (deep copy)
-
 	if(obj.getELowerBound()!=nullptr)
 	{
 		m_eLowerBound = std::dynamic_pointer_cast<ecore::EGenericType>(obj.getELowerBound()->copy());
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eLowerBound" << std::endl;
-	#endif
-	std::shared_ptr<Bag<ecore::EGenericType>> _eTypeArgumentsList = obj.getETypeArguments();
-	for(std::shared_ptr<ecore::EGenericType> _eTypeArguments : *_eTypeArgumentsList)
+	std::shared_ptr<Bag<ecore::EGenericType>> eTypeArgumentsContainer = getETypeArguments();
+	for(auto _eTypeArguments : *obj.getETypeArguments()) 
 	{
-		this->getETypeArguments()->add(std::shared_ptr<ecore::EGenericType>(std::dynamic_pointer_cast<ecore::EGenericType>(_eTypeArguments->copy())));
+		eTypeArgumentsContainer->push_back(std::dynamic_pointer_cast<ecore::EGenericType>(_eTypeArguments->copy()));
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eTypeArguments" << std::endl;
-	#endif
 	if(obj.getEUpperBound()!=nullptr)
 	{
 		m_eUpperBound = std::dynamic_pointer_cast<ecore::EGenericType>(obj.getEUpperBound()->copy());
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eUpperBound" << std::endl;
-	#endif
-
 	
-
 	
-
 	
 }
 
@@ -141,49 +125,43 @@ bool EGenericTypeImpl::isInstance(Any object) const
 /*
 Getter & Setter for reference eClassifier
 */
-std::shared_ptr<ecore::EClassifier > EGenericTypeImpl::getEClassifier() const
+std::shared_ptr<ecore::EClassifier> EGenericTypeImpl::getEClassifier() const
 {
 
     return m_eClassifier;
 }
-
 void EGenericTypeImpl::setEClassifier(std::shared_ptr<ecore::EClassifier> _eClassifier)
 {
     m_eClassifier = _eClassifier;
 }
 
 
-
 /*
 Getter & Setter for reference eLowerBound
 */
-std::shared_ptr<ecore::EGenericType > EGenericTypeImpl::getELowerBound() const
+std::shared_ptr<ecore::EGenericType> EGenericTypeImpl::getELowerBound() const
 {
 
     return m_eLowerBound;
 }
-
 void EGenericTypeImpl::setELowerBound(std::shared_ptr<ecore::EGenericType> _eLowerBound)
 {
     m_eLowerBound = _eLowerBound;
 }
 
 
-
 /*
 Getter & Setter for reference eRawType
 */
-std::shared_ptr<ecore::EClassifier > EGenericTypeImpl::getERawType() const
+std::shared_ptr<ecore::EClassifier> EGenericTypeImpl::getERawType() const
 {
 //assert(m_eRawType);
     return m_eRawType;
 }
-
 void EGenericTypeImpl::setERawType(std::shared_ptr<ecore::EClassifier> _eRawType)
 {
     m_eRawType = _eRawType;
 }
-
 
 
 /*
@@ -203,38 +181,32 @@ std::shared_ptr<Bag<ecore::EGenericType>> EGenericTypeImpl::getETypeArguments() 
 
 
 
-
-
 /*
 Getter & Setter for reference eTypeParameter
 */
-std::shared_ptr<ecore::ETypeParameter > EGenericTypeImpl::getETypeParameter() const
+std::shared_ptr<ecore::ETypeParameter> EGenericTypeImpl::getETypeParameter() const
 {
 
     return m_eTypeParameter;
 }
-
 void EGenericTypeImpl::setETypeParameter(std::shared_ptr<ecore::ETypeParameter> _eTypeParameter)
 {
     m_eTypeParameter = _eTypeParameter;
 }
 
 
-
 /*
 Getter & Setter for reference eUpperBound
 */
-std::shared_ptr<ecore::EGenericType > EGenericTypeImpl::getEUpperBound() const
+std::shared_ptr<ecore::EGenericType> EGenericTypeImpl::getEUpperBound() const
 {
 
     return m_eUpperBound;
 }
-
 void EGenericTypeImpl::setEUpperBound(std::shared_ptr<ecore::EGenericType> _eUpperBound)
 {
     m_eUpperBound = _eUpperBound;
 }
-
 
 
 //*********************************
@@ -455,13 +427,9 @@ void EGenericTypeImpl::loadNode(std::string nodeName, std::shared_ptr<persistenc
 			{
 				typeName = "EGenericType";
 			}
-			std::shared_ptr<ecore::EGenericType> eLowerBound = std::dynamic_pointer_cast<ecore::EGenericType>(modelFactory->create(typeName));
-			if (eLowerBound != nullptr)
-			{
-				this->setELowerBound(eLowerBound);
-				loadHandler->handleChild(eLowerBound);
-			}
-			return;
+		loadHandler->handleChild(this->getELowerBound());
+
+			return; 
 		}
 
 		if ( nodeName.compare("eTypeArguments") == 0 )
@@ -471,14 +439,9 @@ void EGenericTypeImpl::loadNode(std::string nodeName, std::shared_ptr<persistenc
 			{
 				typeName = "EGenericType";
 			}
-			std::shared_ptr<ecore::EGenericType> eTypeArguments = std::dynamic_pointer_cast<ecore::EGenericType>(modelFactory->create(typeName));
-			if (eTypeArguments != nullptr)
-			{
-				std::shared_ptr<Bag<ecore::EGenericType>> list_eTypeArguments = this->getETypeArguments();
-				list_eTypeArguments->push_back(eTypeArguments);
-				loadHandler->handleChild(eTypeArguments);
-			}
-			return;
+		loadHandler->handleChildContainer<ecore::EGenericType>(this->getETypeArguments());  
+
+			return; 
 		}
 
 		if ( nodeName.compare("eUpperBound") == 0 )
@@ -488,13 +451,9 @@ void EGenericTypeImpl::loadNode(std::string nodeName, std::shared_ptr<persistenc
 			{
 				typeName = "EGenericType";
 			}
-			std::shared_ptr<ecore::EGenericType> eUpperBound = std::dynamic_pointer_cast<ecore::EGenericType>(modelFactory->create(typeName));
-			if (eUpperBound != nullptr)
-			{
-				this->setEUpperBound(eUpperBound);
-				loadHandler->handleChild(eUpperBound);
-			}
-			return;
+		loadHandler->handleChild(this->getEUpperBound());
+
+			return; 
 		}
 	}
 	catch (std::exception& e)
@@ -565,36 +524,25 @@ void EGenericTypeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	try
 	{
 		std::shared_ptr<ecore::ecorePackage> package = ecore::ecorePackage::eInstance();
-
 	// Add references
-	saveHandler->addReference("eClassifier", this->getEClassifier());
-	saveHandler->addReference("eRawType", this->getERawType());
-	saveHandler->addReference("eTypeParameter", this->getETypeParameter());
-
+		saveHandler->addReference(this->getEClassifier(),"eClassifier", getEClassifier()->eClass() != ecore::ecorePackage::eInstance()->getEClassifier_Class());
+		saveHandler->addReference(this->getERawType(),"eRawType", getERawType()->eClass() != ecore::ecorePackage::eInstance()->getEClassifier_Class());
+		saveHandler->addReference(this->getETypeParameter(),"eTypeParameter", getETypeParameter()->eClass() != ecore::ecorePackage::eInstance()->getETypeParameter_Class());
 		//
 		// Add new tags (from references)
 		//
 		std::shared_ptr<EClass> metaClass = this->eClass();
 		// Save 'eLowerBound'
-		std::shared_ptr<ecore::EGenericType > eLowerBound = this->getELowerBound();
-		if (eLowerBound != nullptr)
-		{
-			saveHandler->addReference(eLowerBound, "eLowerBound", eLowerBound->eClass() != ecore::ecorePackage::eInstance()->getEGenericType_Class());
-		}
+
+		saveHandler->addReference(this->getELowerBound(), "eLowerBound", getELowerBound()->eClass() != ecore::ecorePackage::eInstance()->getEGenericType_Class());
 
 		// Save 'eTypeArguments'
-		std::shared_ptr<Bag<ecore::EGenericType>> list_eTypeArguments = this->getETypeArguments();
-		for (std::shared_ptr<ecore::EGenericType> eTypeArguments : *list_eTypeArguments) 
-		{
-			saveHandler->addReference(eTypeArguments, "eTypeArguments", eTypeArguments->eClass() !=ecore::ecorePackage::eInstance()->getEGenericType_Class());
-		}
+
+		saveHandler->addReferences<ecore::EGenericType>("eTypeArguments", this->getETypeArguments());
 
 		// Save 'eUpperBound'
-		std::shared_ptr<ecore::EGenericType > eUpperBound = this->getEUpperBound();
-		if (eUpperBound != nullptr)
-		{
-			saveHandler->addReference(eUpperBound, "eUpperBound", eUpperBound->eClass() != ecore::ecorePackage::eInstance()->getEGenericType_Class());
-		}
+
+		saveHandler->addReference(this->getEUpperBound(), "eUpperBound", getEUpperBound()->eClass() != ecore::ecorePackage::eInstance()->getEGenericType_Class());
 	}
 	catch (std::exception& e)
 	{

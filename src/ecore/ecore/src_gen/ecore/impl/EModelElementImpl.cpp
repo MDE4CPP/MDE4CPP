@@ -60,37 +60,28 @@ EModelElementImpl::~EModelElementImpl()
 }
 
 //Additional constructor for the containments back reference
-EModelElementImpl::EModelElementImpl(std::weak_ptr<ecore::EObject > par_eContainer)
+EModelElementImpl::EModelElementImpl(std::weak_ptr<ecore::EObject> par_eContainer)
 :EModelElementImpl()
 {
 	m_eContainer = par_eContainer;
 }
 
-
-EModelElementImpl::EModelElementImpl(const EModelElementImpl & obj):EModelElementImpl()
+EModelElementImpl::EModelElementImpl(const EModelElementImpl & obj): EObjectImpl(obj), EModelElement(obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy EModelElement "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
-	m_metaElementID = obj.getMetaElementID();
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
-	m_eContainer  = obj.getEContainer();
-
 
 	//Clone references with containment (deep copy)
-
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
+	std::shared_ptr<Subset<ecore::EAnnotation, ecore::EObject>> eAnnotationsContainer = getEAnnotations();
+	for(auto _eAnnotations : *obj.getEAnnotations()) 
 	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
+		eAnnotationsContainer->push_back(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy()));
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
-
 	/*Subset*/
 	m_eAnnotations->initSubset(getEContens());
 	#ifdef SHOW_SUBSET_UNION
@@ -159,8 +150,6 @@ std::shared_ptr<Subset<ecore::EAnnotation, ecore::EObject>> EModelElementImpl::g
 
     return m_eAnnotations;
 }
-
-
 
 
 
@@ -309,12 +298,9 @@ void EModelElementImpl::loadNode(std::string nodeName, std::shared_ptr<persisten
 			{
 				typeName = "EAnnotation";
 			}
-			std::shared_ptr<ecore::EObject> eAnnotations = modelFactory->create(typeName, loadHandler->getCurrentObject(), ecore::ecorePackage::EANNOTATION_ATTRIBUTE_EMODELELEMENT);
-			if (eAnnotations != nullptr)
-			{
-				loadHandler->handleChild(eAnnotations);
-			}
-			return;
+		loadHandler->handleChildContainer<ecore::EAnnotation>(this->getEAnnotations());  
+
+			return; 
 		}
 	}
 	catch (std::exception& e)

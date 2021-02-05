@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../ETypedElement.hpp"
 
@@ -23,7 +24,7 @@ namespace ecore
 			ETypedElementImpl(const ETypedElementImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			ETypedElementImpl& operator=(ETypedElementImpl const&) = delete;
 
 		protected:
@@ -33,10 +34,7 @@ namespace ecore
 			virtual void setThisETypedElementPtr(std::weak_ptr<ETypedElement> thisETypedElementPtr);
 
 			//Additional constructors for the containments back reference
-			ETypedElementImpl(std::weak_ptr<ecore::EObject > par_eContainer);
-
-
-
+			ETypedElementImpl(std::weak_ptr<ecore::EObject> par_eContainer);
 
 		public:
 			//destructor
@@ -71,18 +69,18 @@ namespace ecore
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<ecore::EGenericType > getEGenericType() const ;
+			virtual std::shared_ptr<ecore::EGenericType> getEGenericType() const ;
 			
 			
-			virtual void setEGenericType(std::shared_ptr<ecore::EGenericType> _eGenericType) ;
+			virtual void setEGenericType(std::shared_ptr<ecore::EGenericType>) ;
 			
 			
-			virtual std::shared_ptr<ecore::EClassifier > getEType() const ;
+			virtual std::shared_ptr<ecore::EClassifier> getEType() const ;
 			
 			
-			virtual void setEType(std::shared_ptr<ecore::EClassifier> _eType) ;
+			virtual void setEType(std::shared_ptr<ecore::EClassifier>) ;
 			
-							
+			
 			
 			//*********************************
 			// Union Getter

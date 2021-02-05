@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../EReference.hpp"
 
@@ -23,7 +24,7 @@ namespace ecore
 			EReferenceImpl(const EReferenceImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			EReferenceImpl& operator=(EReferenceImpl const&) = delete;
 
 		protected:
@@ -33,14 +34,9 @@ namespace ecore
 			virtual void setThisEReferencePtr(std::weak_ptr<EReference> thisEReferencePtr);
 
 			//Additional constructors for the containments back reference
-			EReferenceImpl(std::weak_ptr<ecore::EObject > par_eContainer);
-
-
+			EReferenceImpl(std::weak_ptr<ecore::EObject> par_eContainer);
 			//Additional constructors for the containments back reference
-			EReferenceImpl(std::weak_ptr<ecore::EClass > par_eContainingClass);
-
-
-
+			EReferenceImpl(std::weak_ptr<ecore::EClass> par_eContainingClass);
 
 		public:
 			//destructor
@@ -70,18 +66,18 @@ namespace ecore
 			
 			
 			
-			virtual std::shared_ptr<ecore::EReference > getEOpposite() const ;
+			virtual std::shared_ptr<ecore::EReference> getEOpposite() const ;
 			
 			
-			virtual void setEOpposite(std::shared_ptr<ecore::EReference> _eOpposite) ;
+			virtual void setEOpposite(std::shared_ptr<ecore::EReference>) ;
 			
 			
-			virtual std::shared_ptr<ecore::EClass > getEReferenceType() const ;
+			virtual std::shared_ptr<ecore::EClass> getEReferenceType() const ;
 			
 			
-			virtual void setEReferenceType(std::shared_ptr<ecore::EClass> _eReferenceType) ;
+			virtual void setEReferenceType(std::shared_ptr<ecore::EClass>) ;
 			
-							
+			
 			
 			//*********************************
 			// Union Getter

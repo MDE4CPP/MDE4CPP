@@ -63,59 +63,40 @@ EClassifierImpl::~EClassifierImpl()
 }
 
 //Additional constructor for the containments back reference
-EClassifierImpl::EClassifierImpl(std::weak_ptr<ecore::EObject > par_eContainer)
+EClassifierImpl::EClassifierImpl(std::weak_ptr<ecore::EObject> par_eContainer)
 :EClassifierImpl()
 {
 	m_eContainer = par_eContainer;
 }
 
 //Additional constructor for the containments back reference
-EClassifierImpl::EClassifierImpl(std::weak_ptr<ecore::EPackage > par_ePackage)
+EClassifierImpl::EClassifierImpl(std::weak_ptr<ecore::EPackage> par_ePackage)
 :EClassifierImpl()
 {
 	m_ePackage = par_ePackage;
 }
 
-
-EClassifierImpl::EClassifierImpl(const EClassifierImpl & obj):EClassifierImpl()
+EClassifierImpl::EClassifierImpl(const EClassifierImpl & obj): ENamedElementImpl(obj), EClassifier(obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy EClassifier "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 	m_defaultValue = obj.getDefaultValue();
-	m_instanceClass = obj.getInstanceClass();
+// unknown attribute type or missing setter for instanceClass
 	m_instanceClassName = obj.getInstanceClassName();
 	m_instanceTypeName = obj.getInstanceTypeName();
-	m_metaElementID = obj.getMetaElementID();
-	m_name = obj.getName();
 
 	//copy references with no containment (soft copy)
-	
-	m_eContainer  = obj.getEContainer();
-
 	m_ePackage  = obj.getEPackage();
 
-
 	//Clone references with containment (deep copy)
-
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
+	std::shared_ptr<Bag<ecore::ETypeParameter>> eTypeParametersContainer = getETypeParameters();
+	for(auto _eTypeParameters : *obj.getETypeParameters()) 
 	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
+		eTypeParametersContainer->push_back(std::dynamic_pointer_cast<ecore::ETypeParameter>(_eTypeParameters->copy()));
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
-	std::shared_ptr<Bag<ecore::ETypeParameter>> _eTypeParametersList = obj.getETypeParameters();
-	for(std::shared_ptr<ecore::ETypeParameter> _eTypeParameters : *_eTypeParametersList)
-	{
-		this->getETypeParameters()->add(std::shared_ptr<ecore::ETypeParameter>(std::dynamic_pointer_cast<ecore::ETypeParameter>(_eTypeParameters->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eTypeParameters" << std::endl;
-	#endif
-
 	
 }
 
@@ -141,12 +122,10 @@ Any EClassifierImpl::getDefaultValue() const
 {
 	return m_defaultValue;
 }
-
 void EClassifierImpl::setDefaultValue(Any _defaultValue)
 {
 	m_defaultValue = _defaultValue;
 } 
-
 
 
 /*
@@ -159,8 +138,6 @@ void * EClassifierImpl::getInstanceClass() const
 
 
 
-
-
 /*
 Getter & Setter for attribute instanceClassName
 */
@@ -168,12 +145,10 @@ std::string EClassifierImpl::getInstanceClassName() const
 {
 	return m_instanceClassName;
 }
-
 void EClassifierImpl::setInstanceClassName(std::string _instanceClassName)
 {
 	m_instanceClassName = _instanceClassName;
 } 
-
 
 
 /*
@@ -183,12 +158,10 @@ std::string EClassifierImpl::getInstanceTypeName() const
 {
 	return m_instanceTypeName;
 }
-
 void EClassifierImpl::setInstanceTypeName(std::string _instanceTypeName)
 {
 	m_instanceTypeName = _instanceTypeName;
 } 
-
 
 
 //*********************************
@@ -214,13 +187,11 @@ bool EClassifierImpl::isInstance(Any object) const
 /*
 Getter & Setter for reference ePackage
 */
-std::weak_ptr<ecore::EPackage > EClassifierImpl::getEPackage() const
+std::weak_ptr<ecore::EPackage> EClassifierImpl::getEPackage() const
 {
 
     return m_ePackage;
 }
-
-
 
 
 
@@ -238,8 +209,6 @@ std::shared_ptr<Bag<ecore::ETypeParameter>> EClassifierImpl::getETypeParameters(
 
     return m_eTypeParameters;
 }
-
-
 
 
 
@@ -464,14 +433,9 @@ void EClassifierImpl::loadNode(std::string nodeName, std::shared_ptr<persistence
 			{
 				typeName = "ETypeParameter";
 			}
-			std::shared_ptr<ecore::ETypeParameter> eTypeParameters = std::dynamic_pointer_cast<ecore::ETypeParameter>(modelFactory->create(typeName));
-			if (eTypeParameters != nullptr)
-			{
-				std::shared_ptr<Bag<ecore::ETypeParameter>> list_eTypeParameters = this->getETypeParameters();
-				list_eTypeParameters->push_back(eTypeParameters);
-				loadHandler->handleChild(eTypeParameters);
-			}
-			return;
+		loadHandler->handleChildContainer<ecore::ETypeParameter>(this->getETypeParameters());  
+
+			return; 
 		}
 	}
 	catch (std::exception& e)
@@ -522,17 +486,13 @@ void EClassifierImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 		{
 			saveHandler->addAttribute("instanceTypeName", this->getInstanceTypeName());
 		}
-
 		//
 		// Add new tags (from references)
 		//
 		std::shared_ptr<EClass> metaClass = this->eClass();
 		// Save 'eTypeParameters'
-		std::shared_ptr<Bag<ecore::ETypeParameter>> list_eTypeParameters = this->getETypeParameters();
-		for (std::shared_ptr<ecore::ETypeParameter> eTypeParameters : *list_eTypeParameters) 
-		{
-			saveHandler->addReference(eTypeParameters, "eTypeParameters", eTypeParameters->eClass() !=ecore::ecorePackage::eInstance()->getETypeParameter_Class());
-		}
+
+		saveHandler->addReferences<ecore::ETypeParameter>("eTypeParameters", this->getETypeParameters());
 	}
 	catch (std::exception& e)
 	{
