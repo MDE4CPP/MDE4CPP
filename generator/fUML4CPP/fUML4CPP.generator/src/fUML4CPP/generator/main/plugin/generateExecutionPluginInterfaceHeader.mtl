@@ -27,7 +27,7 @@
 
 #include "pluginFramework/UMLExecutionModelPlugin.hpp"
 
-[if(aPackage.allOwnedElements()->filter(Operation)->reject(hasEAnnotation(sourceNoExecution()))->size() > 0)]
+[if(aPackage.allOwnedElements()->filter(Operation)->reject(hasEAnnotation(sourceNoExecution()))->size() > 0 or aPackage.allOwnedElements()->filter(CallOperationAction).operation->reject(hasEAnnotation(sourceNoExecution()))->size() > 0)]
 namespace uml
 {
 	class OpaqueBehavior;
