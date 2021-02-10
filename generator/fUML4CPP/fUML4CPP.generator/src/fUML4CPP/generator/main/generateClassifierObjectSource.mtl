@@ -105,13 +105,12 @@
 
 using namespace [aClassifier.getNearestPackage().generateNamespace(false)/];
 
-[className/]::[className/](std::shared_ptr<[pointerName/]> _element):
-
-	[aClassifier.UMLValueName()/](_element)
+[className/]::[className/](std::shared_ptr<[pointerName/]> _element)
 {		
 	[comment] [if(not aClassifier.oclIsTypeOf(Interface))] [/comment]
 	this->getTypes()->insert(this->getTypes()->begin(), [aClassifier.getModelPackage()/][aClassifier.generatePackageGetterCall(aClassifier)/]);
 	[comment] [/if] [/comment]
+	[aClassifier.UMLValueSetterName()/](_element);
 }
 
 [className/]::[className/]([className/] &obj):
