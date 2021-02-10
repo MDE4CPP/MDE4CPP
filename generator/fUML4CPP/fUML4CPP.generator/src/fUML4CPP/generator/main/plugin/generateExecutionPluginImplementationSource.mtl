@@ -46,7 +46,8 @@ using namespace [aPackage.generateNamespace(false)/];
 // Constructor / Destructor
 //*********************************
 [packageName/]::[packageName/]()
-{	
+{
+	initialize();
 }
 
 [packageName/]::~[packageName/]()
@@ -246,7 +247,7 @@ m_factory->assignStrategy(PSCS::Semantics::StructuredClassifiers::StructuredClas
 	[comment This is currently a hack. When executing an operation of an interface-typed object, the operation must have a method for correct dispatching (even if none is defined in the model) /]
 	[comment BUT PSCS semantics require that an operation for which no method is defined in the model (specifically a constructor method) must not have any method /]
 	[comment By now, the generator checks for operations without a method if its owner is not an interface /]
-	[if ((not anOperation.owner.oclIsKindOf(Interface)) and (anOperation.method->isEmpty()))]//[/if][anOperation.generatePackageGetterCall()/]->getMethod()->insert([anOperation.generatePackageGetterCall()/]->getMethod()->begin(), m_[anOperation.getFBPackageElement()/]);
+	[if (rejectClassOperationWithoutMethod())]//[/if][anOperation.generatePackageGetterCall()/]->getMethod()->insert([anOperation.generatePackageGetterCall()/]->getMethod()->begin(), m_[anOperation.getFBPackageElement()/]);
 	[for (aParameter : Parameter | anOperation.ownedParameter)]
 	{	/*creating parameter [aParameter.name/]*/
 		std::shared_ptr<uml::Parameter> [memberName(aParameter)/](uml::umlFactory::eInstance()->createParameter_in_Behavior(m_[anOperation.getFBPackageElement()/]));
@@ -289,11 +290,9 @@ m_factory->assignStrategy(PSCS::Semantics::StructuredClassifiers::StructuredClas
 [/template]
 
 [template public generateActivityExecution(anActivity : Activity)]
-[comment]
-[for (anOperation : Operation | anActivity.getCallOperationActions().operation->sortedBy(qualifiedName))]
+[for (anOperation : Operation | anActivity.getCallOperationActions().operation->reject(rejectClassOperationWithoutMethod())->sortedBy(qualifiedName))]
 [anOperation.generatePackageGetterCall()/]->getMethod()->insert([anOperation.generatePackageGetterCall()/]->getMethod()->begin(), m_[anOperation.getFBPackageElement()/]);
 [/for]
-[/comment]
 
 std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > pList(new Bag<fUML::Semantics::CommonBehavior::ParameterValue>());
 [for (par : Parameter | anActivity.ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in))->sortedBy(name))]
@@ -324,7 +323,7 @@ object->setLocus(m_locus);
 //executing activity [anActivity.name/]
 std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> resultPList = m_locus->getExecutor()->execute([anActivity.generatePackageGetterCall()/], [if (anActivity.owner.oclIsKindOf(Class))]object[else]nullptr[/if], pList);
 
-[for (anOperation : Operation | anActivity.getCallOperationActions().operation->sortedBy(qualifiedName))]
+[for (anOperation : Operation | anActivity.getCallOperationActions().operation->reject(rejectClassOperationWithoutMethod())->sortedBy(qualifiedName))]
 [anOperation.generatePackageGetterCall()/]->getMethod()->erase(m_[anOperation.getFBPackageElement()/]);
 [/for]
 [/template]
@@ -461,3 +460,5 @@ m_locus->setFactory(nullptr);
 
 [query public getOperationExecutionsCOA(aPackage : Package) : OrderedSet(Operation) = 
 	aPackage.allOwnedElements()->filter(CallOperationAction).operation->asOrderedSet()->sortedBy(qualifiedName) /]
+
+[query private rejectClassOperationWithoutMethod(anOperation : Operation) : Boolean = (not owner.oclIsKindOf(Interface)) and (method->isEmpty()) and (not isAbstract)/]
