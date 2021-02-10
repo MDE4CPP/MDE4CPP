@@ -35,7 +35,8 @@
 [query private collectCompositeStructureIncludes(aClass : Class) : Set(Class) = Set(Class){aClass.collectClassesToIncludeFromPartsWithPortsProperties(), aClass.collectConnectedClassesToInclude(), aClass.getCompositeOwners()}->flatten()->asOrderedSet()->sortedBy(myQualifiedName()) /]
 
 [query private getInterfaceAttributes(aClassifier : Classifier) : OrderedSet(Property) = if (aClassifier.oclIsKindOf(Class)) then aClassifier.oclAsType(Class).interfaceRealization.contract.getAllAttributes()->asOrderedSet()->sortedBy(qualifiedName) else OrderedSet{} endif /]
-[query public getMyAttributes(aClassifier : Classifier) : OrderedSet(Property) = aClassifier.getAllAttributes()->addAll(aClassifier.getInterfaceAttributes())->select(type.isUMLElement())->flatten()->asOrderedSet()->sortedBy(qualifiedName) /]
+[query private getSuperClassAttributes(aClassifier : Classifier) : OrderedSet(Property) = if (aClassifier.oclIsKindOf(Class)) then aClassifier.oclAsType(Class).superClass.getMyAttributes()->asOrderedSet()->sortedBy(qualifiedName) else OrderedSet{} endif /]
+[query public getMyAttributes(aClassifier : Classifier) : OrderedSet(Property) = aClassifier.getAllAttributes()->addAll(aClassifier.getSuperClassAttributes())->addAll(aClassifier.getInterfaceAttributes())->select(type.isUMLElement())->flatten()->asOrderedSet()->sortedBy(qualifiedName) /]
 
 [template public generateClassifierObjectSource(aClassifier : Classifier, aPackage:Package) {
 	className : String = objectClassName();
