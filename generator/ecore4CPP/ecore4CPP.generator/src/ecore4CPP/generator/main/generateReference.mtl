@@ -35,16 +35,14 @@
 [template public generateReferenceGetterDeclaretaion(anEReference : EReference, impl : EBoolean)? (hasGetter() and (not isUnion()) )]
 [anEReference.generateDocumentation()/]
 virtual [anEReference.generateReferenceType()/] [anEReference.GetterName()/]() const [abstractSufix(impl)/];
-
 [/template]
 
 [template public generateReferenceSetterDeclaretaion(anEReference : EReference, impl : EBoolean) ? ( hasSetter() )]
 [anEReference.generateDocumentation()/]
-virtual void [anEReference.SetterName()/]([if (not anEReference.eGenericType.oclIsKindOf(EDataType))]
+virtual void [anEReference.SetterName()/]([if (not anEReference.eGenericType.eClassifier.oclIsKindOf(EDataType))]
 [anEReference.generateReferenceType()/][else]
 [anEReference.eGenericType.generateCppType(true)/] _[anEReference.name/][/if]
 ) [abstractSufix(impl)/];
-
 [/template]
 
 [template public generateProtectedReference(anEReference : EReference) ]
@@ -153,9 +151,13 @@ void [anEReference.eContainingClass.name.toUpperFirst()/]Impl::[anEReference.Set
 [/template]
 
 [template private generateRedefinedReferenceSetterCpp(redefinedEReference : EReference, anEReference : EReference) ? (anEReference.hasSetter() and redefinedEReference.hasSetter())]
-void [anEReference.eContainingClass.name.toUpperFirst()/]Impl::[redefinedEReference.SetterName()/]([redefinedEReference.generateReferenceType()/] _[anEReference.name/])
+void [anEReference.eContainingClass.name.toUpperFirst()/]Impl::[redefinedEReference.SetterName()/]([redefinedEReference.generateReferenceType()/] _[redefinedEReference.name/])
 {
-	std::shared_ptr<[anEReference.eGenericType.generateCppType(true)/]> _[anEReference.name/] = std::dynamic_pointer_cast<[anEReference.eGenericType.generateCppType(true)/]>(_[redefinedEReference.name/]);
+	[if(redefinedEReference.isBackReference())]
+	std::shared_ptr<[anEReference.eGenericType.generateCppType(false)/]> _[anEReference.name/] = std::dynamic_pointer_cast<[anEReference.eGenericType.generateCppType(false)/]>(_[redefinedEReference.name/].lock());
+	[else]
+	std::shared_ptr<[anEReference.eGenericType.generateCppType(false)/]> _[anEReference.name/] = std::dynamic_pointer_cast<[anEReference.eGenericType.generateCppType(false)/]>(_[redefinedEReference.name/]);
+	[/if]
 	if(_[anEReference.name/])
 	{
 		m_[anEReference.name/] = _[anEReference.name/];
@@ -171,7 +173,7 @@ void [anEReference.eContainingClass.name.toUpperFirst()/]Impl::[redefinedERefere
 			[/for]
 		[else]
 		//additional setter call for redefined reference [redefinedEReference.eContainingClass.name/]::[redefinedEReference.name/]
-		[redefinedEReference.eContainingClass.transformType()/]Impl::set[redefinedEReference.name.toUpperFirst()/](_[redefinedEReference.name/]);
+		[redefinedEReference.eContainingClass.transformType()/]Impl::set[redefinedEReference.name.toUpperFirst()/](_[anEReference.name/]);
 		[/if]
 	}
 	else

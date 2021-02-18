@@ -61,7 +61,7 @@
 [/template]
 
 [template public generateAttributeInit(anEAttribute : EAttribute) ? (not(anEAttribute.upperBound = 1))]
-m_[anEAttribute.name/].reset(new [anEAttribute.generateStructuralFeatureType(true)/]>());
+m_[anEAttribute.name/].reset(new [anEAttribute.generateStructuralFeatureType(false)/]());
 [/template]
 
 [template public generateAttributeGetterDecleration(anEAttribute : EAttribute, impl : Boolean) ? (hasGetter())]

@@ -35,11 +35,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-[comment] root factory notwendig? 
-[if (generateObjectMonitoring())]
-#include "[getRootPackage().name/]/[aClass.getRootPackage().name/]Factory.hpp"
-[/if]
-[/comment]
+
 [generateAbstractDataTypesIncludes()/]
 [if (aClass.eAttributes.eType->select(requiresAny())->size() = 0 and aClass.eOperations.eParameters.eType->select(requiresAny())->size() > 0)]
 #include "abstractDataTypes/Any.hpp"
@@ -54,20 +50,34 @@
 [/if]
 
 //Forward declaration includes
-[generatePersistenceInclude()/]
+[aClass.generatePersitsenceInclude()/]
 
 [for (element : EClassifier| aClass.includes()->selectByKind(EClass)->select(not doNotGenerate())->asOrderedSet()->sortedBy(name))]
 #include "[element.generateNamespacePath()/]/[element.name.toUpperFirst()/].hpp"
 [/for]
 
 //Factories an Package includes
+[comment] root factory notwendig? 
+[if (generateObjectMonitoring())]
+#include "[getRootPackage().name/]/[aClass.getRootPackage().name/]Factory.hpp"
+[/if]
+[/comment]
+[comment] root factory Impl's wirklich notwendig? 
 #include "[aClass.ePackage.getRootPackage().name/]/[aClass.ePackage.getNamespacePathWithoutRoot()/]impl/[aClass.ePackage.name/]FactoryImpl.hpp"
 #include "[aClass.ePackage.getRootPackage().name/]/[aClass.ePackage.getNamespacePathWithoutRoot()/]impl/[aClass.ePackage.name/]PackageImpl.hpp"
-
+[/comment]
 [for (anEPackage: EPackage| aClass.ePackage->closure(p|p.eSuperPackage)->asSet() )]
-#include "[anEPackage.getRootPackage().name/]/[anEPackage.getNamespacePathWithoutRoot()/][anEPackage.name/]Factory.hpp"
+[comment] Factories wirklich notwendig?
+//#include "[anEPackage.getRootPackage().name/]/[anEPackage.getNamespacePathWithoutRoot()/][anEPackage.name/]Factory.hpp"
+[/comment]
 #include "[anEPackage.getRootPackage().name/]/[anEPackage.getNamespacePathWithoutRoot()/][anEPackage.name/]Package.hpp"
 [/for]
+[comment] nur für saveContent bei saveHandler->addReference() mit Meta-Datentyp-Vergleich nötig siehe generatePersistence.mtl
+[/comment]
+[for (aPackage : EPackage| aClass.includes()->selectByKind(EClass)->select(not doNotGenerate())->including(aClass).ePackage->asOrderedSet()->sortedBy(name))]
+#include "[aPackage.getRootPackage().name/]/[aPackage.getNamespacePathWithoutRoot()/][aPackage.name/]Package.hpp"
+[/for]
+
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -167,40 +177,49 @@ using namespace [aClass.generateNamespaceDefinition()/];
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy [aClass.name.toUpperFirst()/] "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
 	//Clone Attributes with (deep copy)
-	[for (att : EAttribute | aClass.eAttributes->asOrderedSet()->sortedBy(name))][if (not(att.upperBound = 1))]
-		[if (att.hasSetter())]
-	m_[att.name/] = std::dynamic_pointer_cast<[att.generateStructuralFeatureType(false)/]>>(obj.[att.GetterName()/]()->copy());
-		[else]
+	[for (att : EAttribute | aClass.eAttributes->asOrderedSet()->sortedBy(name))]
+		[if (not(att.upperBound = 1))] [comment it is a Bag of Elements /]
+			[if (not att.eGenericType.eClassifier.oclIsKindOf(EDataType))] [comment it is an Bag/Subset of non standard Elements /]
 	[att.generateStructuralFeatureType(true)/] [att.name/]Container = [att.GetterName()/]();
 	for(auto _[att.name/] : *obj.[att.GetterName()/]())
 	{
 		[att.name/]Container->push_back(std::dynamic_pointer_cast<[att.generateStructuralFeatureType(true)/]>(_[att.name/]->copy()));
-	}
-		[/if]
-	[elseif ((att.eType.oclIsUndefined()) or (not att.hasSetter()) )]// unknown attribute type or missing setter for [att.name/]
+	} 
+			[else]	[comment it is an Bag/Subset of standard Datatype Elements /]
+	[att.generateStructuralFeatureType(true)/] [att.name/]Container = [att.GetterName()/]();
+	for(auto _[att.name/] : *obj.[att.GetterName()/]())
+	{
+		[att.name/]Container->push_back(_[att.name/]);
+	} 
+			[/if]
+		[elseif (att.eType.oclIsUndefined())]// unknown attribute type for [att.name/]
 	[comment]Handling of Templates:
 			If there is an Eore Generic Datatyp it seems to be a Container class. otherwise there exist an copy operation the Ecore Type.
 			only one template parameter are supported (in case of map 2) 
 	[/comment]
-	[elseif (att.eType.eTypeParameters->size()>0) ]
-		[if (att.eType.name.equalsIgnoreCase('EMap'))]
+		[elseif (att.eType.eTypeParameters->size()>0) ] [comment it's an Generic Data-Type (List / Map,...)/]
+			[if (att.eType.name.equalsIgnoreCase('EMap'))]
 	[att.generateStructuralFeatureType(true)/] [att.name/]Container = [att.GetterName()/]();
 	for(const auto pair_[att.name/] : *obj.[att.GetterName()/]())
 	{
-			[if (att.eGenericType.eTypeArguments->last().eClassifier.oclIsKindOf(EDataType))] [comment if second Type is an Ecore type /]
+				[if (att.eGenericType.eTypeArguments->last().eClassifier.oclIsKindOf(EDataType))] [comment if second Type is an Ecore type /]
 		[att.name/]Container->insert(std::make_pair(pair_[att.name/].first, pair_[att.name/].second));
-			[else] [comment otherwise it is an shared_ptr/]
+				[else] [comment otherwise it is an shared_ptr/]
 		[att.name/]Container->insert(std::make_pair(pair_[att.name/].first, std::dynamic_pointer_cast<[att.eGenericType.eTypeArguments->last().eClassifier.transformType()/]>(pair_[att.name/].second->copy())));
-			[/if]
+				[/if]
 	}
-		[else] [comment EEList/]
+			[elseif (att.eType.name.equalsIgnoreCase('EEList'))] 
 	[att.generateStructuralFeatureType(true)/] [att.name/]Container = [att.GetterName()/]();
 	for(auto _[att.name/] : *obj.[att.GetterName()/]())
 	{
 		[att.name/]Container->push_back(std::dynamic_pointer_cast<[att.eGenericType.eTypeArguments->first().eClassifier.transformType()/]>(_[att.name/]->copy()));
 	}
-		[/if]
-	[else] [comment copy simple attribute/]
+			[else] [comment invalid Generic for instance: EJavaClass<T> --> generated as void* /]
+	m_[att.name/] = obj.[att.GetterName()/]();
+			[/if]
+		[elseif ((not(att.lowerBound = 0)) and (not att.eType.oclIsKindOf(EDataType)))] [comment copy simple attribute ptr/]
+	m_[att.name/] = std::dynamic_pointer_cast<[att.generateStructuralFeatureType(false)/]>>(obj.[att.GetterName()/]()->copy());
+		[else] [comment copy simple attribute/]
 	m_[att.name/] = obj.[att.GetterName()/]();
 	[/if]
 	[/for]

@@ -43,7 +43,7 @@ namespace [aClass.getRootPackage().name/]
 }
 [/template]
 
-[template public generatePersistenceInclude(aClass : EClass) ]
+[template public generatePersitsenceInclude(aClass : EClass) ]
 #include "[generatePersistenceNSPath(true)/]/XLoadHandler.hpp" // used for Persistence
 #include "[generatePersistenceNSPath(true)/]/XSaveHandler.hpp" // used for Persistence
 
@@ -210,7 +210,9 @@ if (literal == "[aLiteral.name/]")
 
 void [aClass.name.concat('Impl')/]::loadNode(std::string nodeName, std::shared_ptr<[generatePersistenceNSPath(false)/]::XLoadHandler> loadHandler)
 {
+[comment]
 	std::shared_ptr<[aClass.getRootPackage().name/][getPackageAccess(aClass, true)/]::[aClass.ePackage.name/]Factory> modelFactory=[aClass.getRootPackage().name/][getPackageAccess(aClass, true)/]::[aClass.ePackage.name/]Factory::eInstance();
+[/comment]
 [let attrList : OrderedSet(EAttribute) = aClass.eAttributes->select(eAtt: EAttribute|(eAtt.transient = false) and eAtt.upperBound <> 1)->asOrderedSet()->sortedBy(name)]
 [if (attrList->size() > 0)]
 	try
@@ -291,7 +293,7 @@ void [aClass.name.concat('Impl')/]::loadNode(std::string nodeName, std::shared_p
 								[elseif ((referenceTypeClass.eSuperTypes->first().name = 'list') or (referenceTypeClass.eSuperTypes->first().name = 'vector'))]			loadHandler->handleChildContainer<[referenceTypeClass.eGenericSuperTypes.eTypeArguments->first().generateCppType(true)/]>(this->[aReference.GetterName()/]());
 								[else] // Unknown Template-Type to load "[referenceTypeClass.eGenericSuperTypes->toString()/]"
 								[/if]
-							[else]			loadHandler->handleChild([aReference.name/]); 
+							[else]			loadHandler->handleChild(this->[aReference.GetterName()/]()); 
 							[/if][/let]
 						[else]			// No Type to load "[aReference.name/]"
 						[/if]
@@ -473,12 +475,14 @@ if (value == [aAttribute.eType.name/]::[aLiteral.name.toUpperCase()/])
 					[elseif ((referenceTypeClass.eSuperTypes->first().name = 'list') or (referenceTypeClass.eSuperTypes->first().name = 'vector'))]		saveHandler->addReferences<[referenceTypeClass.eGenericSuperTypes.eTypeArguments->first().generateCppType(true)/]>("[aReference.name/]", this->[aReference.GetterName()/]());
 					[else] // Unknown Template-Type to save "[referenceTypeClass.eGenericSuperTypes->toString()/]"
 					[/if]
+				[comment]wirklich so nötig? aReference.eType.getPackage_eInstance() --> include von entsprechendem Package nötig [/comment]
 				[else]		saveHandler->addReference(this->[aReference.GetterName()/]()[if (aReference.isBackReference())].lock()[/if], "[aReference.name/]", [aReference.GetterName()/]()->eClass() != [aReference.eType.getPackage_eInstance()/]->get[aReference.eType.getMemberNameUpperFirst()/]()); 
+				[comment][else]		saveHandler->addReference("[aReference.name/]", this->[aReference.GetterName()/]()[if (aReference.isBackReference())].lock()[/if]);[/comment] 				
 				[/if][/let]
 			[else]		// No Type to save "[aReference.name/]"
 			[/if]
 		[else]		// Unknown EClass to save "[aReference.name/]"
-		[/if]										
+		[/if]
 	[else]		saveHandler->addReferences<[aReference.eGenericType.generateCppType(false)/]>("[aReference.name/]", this->[aReference.GetterName()/]());
 	[/if] 
 [/for][/if][/let]
@@ -503,7 +507,11 @@ if (value == [aAttribute.eType.name/]::[aLiteral.name.toUpperCase()/])
 					[elseif ((referenceTypeClass.eSuperTypes->first().name = 'list') or (referenceTypeClass.eSuperTypes->first().name = 'vector'))]		saveHandler->addReferences<[referenceTypeClass.eGenericSuperTypes.eTypeArguments->first().generateCppType(true)/]>("[aReference.name/]", this->[aReference.GetterName()/]());
 					[else] // Unknown Template-Type to save "[referenceTypeClass.eGenericSuperTypes->toString()/]"
 					[/if]
-				[else]		saveHandler->addReference(this->[aReference.GetterName()/]()[if (aReference.isBackReference())].lock()[/if], "[aReference.name/]", [aReference.GetterName()/]()>eClass() != [aReference.eType.getPackage_eInstance()/]->get[aReference.eType.getMemberNameUpperFirst()/]()); 
+				[comment]wirklich so nötig? aReference.eType.getPackage_eInstance() --> include von entsprechendem Package nötig 
+				[/comment]
+				[else]		saveHandler->addReference(this->[aReference.GetterName()/]()[if (aReference.isBackReference())].lock()[/if], "[aReference.name/]", [aReference.GetterName()/]()->eClass() != [aReference.eType.getPackage_eInstance()/]->get[aReference.eType.getMemberNameUpperFirst()/]());
+				[comment] 
+				[else]		saveHandler->addReference("[aReference.name/]", this->[aReference.GetterName()/]()[if (aReference.isBackReference())].lock()[/if]);[/comment]
 				[/if][/let]
 			[else]		// No Type to save "[aReference.name/]"
 			[/if]
