@@ -50,10 +50,10 @@
 #include "fUML/Semantics/CommonBehavior/impl/CommonBehaviorFactoryImpl.hpp"
 #include "fUML/Semantics/CommonBehavior/impl/CommonBehaviorPackageImpl.hpp"
 
-#include "fUML/fUMLFactory.hpp"
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsFactory.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLFactory.hpp"
+#include "fUML/fUMLPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"

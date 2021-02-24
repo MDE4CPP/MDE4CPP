@@ -47,6 +47,8 @@
 #include "umlReflectionExec/ParameterableElementObject.hpp"
 #include "uml/ParameterableElement.hpp"
 #include "umlReflectionExec/ParameterableElementObject.hpp"
+#include "uml/ParameterableElement.hpp"
+#include "umlReflectionExec/ParameterableElementObject.hpp"
 #include "uml/TemplateSignature.hpp"
 #include "umlReflectionExec/TemplateSignatureObject.hpp"
 //Property Packages Includes
@@ -246,6 +248,11 @@ void ClassifierTemplateParameterObject::removeValue(std::shared_ptr<uml::Structu
 				m_ClassifierTemplateParameterValue->getOwnedParameteredElement().reset();
 
 	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateParameter_parameteredElement())
+	{
+				m_ClassifierTemplateParameterValue->getParameteredElement().reset();
+
+	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateParameter_signature())
 	{
 				m_ClassifierTemplateParameterValue->getSignature().reset();
@@ -378,6 +385,16 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ClassifierTemplateParameter
 		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
 		reference->setReferent(value);
 		reference->setCompositeReferent(value);
+		values->add(reference);
+	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateParameter_parameteredElement())
+	{
+		std::shared_ptr<UML::ParameterableElementObject> value(new UML::ParameterableElementObject());
+		value->setThisParameterableElementObjectPtr(value);
+		value->setLocus(this->getLocus());
+		value->setParameterableElementValue(m_ClassifierTemplateParameterValue->getParameteredElement());
+		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
+		reference->setReferent(value);
 		values->add(reference);
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateParameter_signature())
@@ -520,6 +537,17 @@ void ClassifierTemplateParameterObject::setFeatureValue(std::shared_ptr<uml::Str
 		}
 		
 	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateParameter_parameteredElement())
+	{
+		std::shared_ptr<fUML::Semantics::Values::Value> inputValue = values->at(0);
+		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(inputValue);
+		std::shared_ptr<UML::ParameterableElementObject> value = std::dynamic_pointer_cast<UML::ParameterableElementObject>(reference->getReferent());
+		if (value != nullptr)
+		{
+			m_ClassifierTemplateParameterValue->setParameteredElement(value->getParameterableElementValue());
+		}
+		
+	}
 }
 
 void ClassifierTemplateParameterObject::assignFeatureValue(std::shared_ptr<uml::StructuralFeature> feature, std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values, int position)
@@ -567,6 +595,10 @@ std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> Classifie
 			featureValues->add(this->retrieveFeatureValue(property));
 		}
 		if (property == UML::UMLPackage::eInstance()->get_UML_TemplateParameter_ownedParameteredElement() && m_ClassifierTemplateParameterValue->getOwnedParameteredElement() != nullptr)
+		{
+			featureValues->add(this->retrieveFeatureValue(property));
+		}
+		if (property == UML::UMLPackage::eInstance()->get_UML_TemplateParameter_parameteredElement() && m_ClassifierTemplateParameterValue->getParameteredElement() != nullptr)
 		{
 			featureValues->add(this->retrieveFeatureValue(property));
 		}

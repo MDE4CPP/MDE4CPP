@@ -38,6 +38,8 @@
 #include "umlReflectionExec/ElementObject.hpp"
 #include "uml/ExecutionSpecification.hpp"
 #include "umlReflectionExec/ExecutionSpecificationObject.hpp"
+#include "uml/Lifeline.hpp"
+#include "umlReflectionExec/LifelineObject.hpp"
 #include "uml/Interaction.hpp"
 #include "umlReflectionExec/InteractionObject.hpp"
 #include "uml/InteractionOperand.hpp"
@@ -219,6 +221,24 @@ void ExecutionOccurrenceSpecificationObject::removeValue(std::shared_ptr<uml::St
 				m_ExecutionOccurrenceSpecificationValue->getExecution().reset();
 
 	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_InteractionFragment_covered())
+	{
+		if (value == nullptr) // clear mode
+		{
+			m_ExecutionOccurrenceSpecificationValue->getCovered()->clear();
+		}
+		else
+		{
+			/* Should use PSCS::CS_Reference but dynamic_pointer_cast fails --> using fUML::Reference instead
+			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(value); */
+			std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> reference = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Reference>(value);
+			std::shared_ptr<UML::LifelineObject> inputValue = std::dynamic_pointer_cast<UML::LifelineObject>(reference->getReferent());
+			if (inputValue != nullptr)
+			{
+				m_ExecutionOccurrenceSpecificationValue->getCovered()->erase(inputValue->getLifelineValue());
+			}
+		}
+	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_InteractionFragment_enclosingInteraction())
 	{
 				m_ExecutionOccurrenceSpecificationValue->getEnclosingInteraction().reset();
@@ -376,6 +396,23 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ExecutionOccurrenceSpecific
 		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
 		reference->setReferent(value);
 		values->add(reference);
+	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_InteractionFragment_covered())
+	{
+		std::shared_ptr<Bag<uml::Lifeline>> coveredList = m_ExecutionOccurrenceSpecificationValue->getCovered();
+		Bag<uml::Lifeline>::iterator iter = coveredList->begin();
+		Bag<uml::Lifeline>::iterator end = coveredList->end();
+		while (iter != end)
+		{
+			std::shared_ptr<UML::LifelineObject> value(new UML::LifelineObject());
+			value->setThisLifelineObjectPtr(value);
+			value->setLocus(this->getLocus());
+			value->setLifelineValue(*iter);
+			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
+			reference->setReferent(value);
+			values->add(reference);
+			iter++;
+		} 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_InteractionFragment_enclosingInteraction())
 	{
@@ -595,6 +632,24 @@ void ExecutionOccurrenceSpecificationObject::setFeatureValue(std::shared_ptr<uml
 		}
 		
 	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_InteractionFragment_covered())
+	{
+		Bag<fUML::Semantics::Values::Value>::iterator iter = values->begin();
+		Bag<fUML::Semantics::Values::Value>::iterator end = values->end();
+		m_ExecutionOccurrenceSpecificationValue->getCovered()->clear();
+		while (iter != end)
+		{
+			std::shared_ptr<fUML::Semantics::Values::Value> inputValue = *iter;
+			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(inputValue);
+			std::shared_ptr<UML::LifelineObject> value = std::dynamic_pointer_cast<UML::LifelineObject>(reference->getReferent());
+			if (value != nullptr)
+			{
+				m_ExecutionOccurrenceSpecificationValue->getCovered()->push_back(value->getLifelineValue());
+			}
+			
+			iter++;
+		}
+	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_InteractionFragment_generalOrdering())
 	{
 		Bag<fUML::Semantics::Values::Value>::iterator iter = values->begin();
@@ -736,6 +791,10 @@ std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> Execution
 			featureValues->add(this->retrieveFeatureValue(property));
 		}
 		if (property == UML::UMLPackage::eInstance()->get_UML_ExecutionOccurrenceSpecification_execution() && m_ExecutionOccurrenceSpecificationValue->getExecution() != nullptr)
+		{
+			featureValues->add(this->retrieveFeatureValue(property));
+		}
+		if (property == UML::UMLPackage::eInstance()->get_UML_InteractionFragment_covered() && m_ExecutionOccurrenceSpecificationValue->getCovered() != nullptr)
 		{
 			featureValues->add(this->retrieveFeatureValue(property));
 		}

@@ -61,6 +61,8 @@
 #include "umlReflectionExec/TemplateParameterObject.hpp"
 #include "uml/TemplateParameter.hpp"
 #include "umlReflectionExec/TemplateParameterObject.hpp"
+#include "uml/TemplateableElement.hpp"
+#include "umlReflectionExec/TemplateableElementObject.hpp"
 //Property Packages Includes
 #include "primitivetypesReflection/PrimitiveTypesPackage.hpp"
 
@@ -294,6 +296,11 @@ void RedefinableTemplateSignatureObject::removeValue(std::shared_ptr<uml::Struct
 				m_RedefinableTemplateSignatureValue->getParameter()->erase(inputValue->getTemplateParameterValue());
 			}
 		}
+	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateSignature_template())
+	{
+				m_RedefinableTemplateSignatureValue->getTemplate().reset();
+
 	}
 }
 
@@ -550,6 +557,16 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> RedefinableTemplateSignatur
 			iter++;
 		} 
 	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateSignature_template())
+	{
+		std::shared_ptr<UML::TemplateableElementObject> value(new UML::TemplateableElementObject());
+		value->setThisTemplateableElementObjectPtr(value);
+		value->setLocus(this->getLocus());
+		value->setTemplateableElementValue(m_RedefinableTemplateSignatureValue->getTemplate().lock());
+		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
+		reference->setReferent(value);
+		values->add(reference);
+	}
 	return values;
 }
 
@@ -783,6 +800,10 @@ std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> Redefinab
 			featureValues->add(this->retrieveFeatureValue(property));
 		}
 		if (property == UML::UMLPackage::eInstance()->get_UML_TemplateSignature_parameter() && m_RedefinableTemplateSignatureValue->getParameter() != nullptr)
+		{
+			featureValues->add(this->retrieveFeatureValue(property));
+		}
+		if (property == UML::UMLPackage::eInstance()->get_UML_TemplateSignature_template() && m_RedefinableTemplateSignatureValue->getTemplate().lock() != nullptr)
 		{
 			featureValues->add(this->retrieveFeatureValue(property));
 		}

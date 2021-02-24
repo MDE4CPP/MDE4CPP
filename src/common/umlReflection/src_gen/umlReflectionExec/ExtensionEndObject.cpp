@@ -70,6 +70,8 @@
 #include "uml/VisibilityKind.hpp"
 #include "uml/TemplateParameter.hpp"
 #include "umlReflectionExec/TemplateParameterObject.hpp"
+#include "uml/TemplateParameter.hpp"
+#include "umlReflectionExec/TemplateParameterObject.hpp"
 #include "fUML/Semantics/SimpleClassifiers/EnumerationValue.hpp"
 #include "uml/AggregationKind.hpp"
 #include "uml/Association.hpp"
@@ -105,6 +107,8 @@
 #include "uml/Classifier.hpp"
 #include "umlReflectionExec/ClassifierObject.hpp"
 #include "fUML/Semantics/SimpleClassifiers/BooleanValue.hpp"
+#include "uml/Type.hpp"
+#include "umlReflectionExec/TypeObject.hpp"
 //Property Packages Includes
 #include "primitivetypesReflection/PrimitiveTypesPackage.hpp"
 
@@ -347,6 +351,11 @@ void ExtensionEndObject::removeValue(std::shared_ptr<uml::StructuralFeature> fea
 				m_ExtensionEndValue->getOwningTemplateParameter().reset();
 
 	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_templateParameter())
+	{
+				m_ExtensionEndValue->getTemplateParameter().reset();
+
+	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Property_aggregation())
 	{
 				m_ExtensionEndValue->setAggregation(uml::AggregationKind::NONE /*defined default value*/);
@@ -479,6 +488,11 @@ void ExtensionEndObject::removeValue(std::shared_ptr<uml::StructuralFeature> fea
 	if (feature == UML::UMLPackage::eInstance()->get_UML_StructuralFeature_isReadOnly())
 	{
 				m_ExtensionEndValue->setIsReadOnly(false /*defined default value*/);
+
+	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_TypedElement_type())
+	{
+				m_ExtensionEndValue->getType().reset();
 
 	}
 }
@@ -774,6 +788,16 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ExtensionEndObject::getValu
 		reference->setReferent(value);
 		values->add(reference);
 	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_templateParameter())
+	{
+		std::shared_ptr<UML::TemplateParameterObject> value(new UML::TemplateParameterObject());
+		value->setThisTemplateParameterObjectPtr(value);
+		value->setLocus(this->getLocus());
+		value->setTemplateParameterValue(m_ExtensionEndValue->getTemplateParameter());
+		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
+		reference->setReferent(value);
+		values->add(reference);
+	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Property_aggregation())
 	{
 		uml::AggregationKind aggregation = m_ExtensionEndValue->getAggregation();
@@ -1001,6 +1025,16 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ExtensionEndObject::getValu
 		value->setValue(m_ExtensionEndValue->getIsReadOnly());
 		values->add(value);
 	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_TypedElement_type())
+	{
+		std::shared_ptr<UML::TypeObject> value(new UML::TypeObject());
+		value->setThisTypeObjectPtr(value);
+		value->setLocus(this->getLocus());
+		value->setTypeValue(m_ExtensionEndValue->getType());
+		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
+		reference->setReferent(value);
+		values->add(reference);
+	}
 	return values;
 }
 
@@ -1225,6 +1259,17 @@ void ExtensionEndObject::setFeatureValue(std::shared_ptr<uml::StructuralFeature>
 		}
 		
 	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_templateParameter())
+	{
+		std::shared_ptr<fUML::Semantics::Values::Value> inputValue = values->at(0);
+		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(inputValue);
+		std::shared_ptr<UML::TemplateParameterObject> value = std::dynamic_pointer_cast<UML::TemplateParameterObject>(reference->getReferent());
+		if (value != nullptr)
+		{
+			m_ExtensionEndValue->setTemplateParameter(value->getTemplateParameterValue());
+		}
+		
+	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Property_aggregation())
 	{
 		std::shared_ptr<fUML::Semantics::Values::Value> inputValue = values->at(0);
@@ -1401,6 +1446,17 @@ void ExtensionEndObject::setFeatureValue(std::shared_ptr<uml::StructuralFeature>
 		}
 		
 	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_TypedElement_type())
+	{
+		std::shared_ptr<fUML::Semantics::Values::Value> inputValue = values->at(0);
+		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(inputValue);
+		std::shared_ptr<UML::TypeObject> value = std::dynamic_pointer_cast<UML::TypeObject>(reference->getReferent());
+		if (value != nullptr)
+		{
+			m_ExtensionEndValue->setType(value->getTypeValue());
+		}
+		
+	}
 }
 
 void ExtensionEndObject::assignFeatureValue(std::shared_ptr<uml::StructuralFeature> feature, std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values, int position)
@@ -1479,6 +1535,10 @@ std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> Extension
 		{
 			featureValues->add(this->retrieveFeatureValue(property));
 		}
+		if (property == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_templateParameter() && m_ExtensionEndValue->getTemplateParameter() != nullptr)
+		{
+			featureValues->add(this->retrieveFeatureValue(property));
+		}
 		if (property == UML::UMLPackage::eInstance()->get_UML_Property_association() && m_ExtensionEndValue->getAssociation() != nullptr)
 		{
 			featureValues->add(this->retrieveFeatureValue(property));
@@ -1528,6 +1588,10 @@ std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> Extension
 			featureValues->add(this->retrieveFeatureValue(property));
 		}
 		if (property == UML::UMLPackage::eInstance()->get_UML_RedefinableElement_redefinitionContext() && m_ExtensionEndValue->getRedefinitionContext() != nullptr)
+		{
+			featureValues->add(this->retrieveFeatureValue(property));
+		}
+		if (property == UML::UMLPackage::eInstance()->get_UML_TypedElement_type() && m_ExtensionEndValue->getType() != nullptr)
 		{
 			featureValues->add(this->retrieveFeatureValue(property));
 		}

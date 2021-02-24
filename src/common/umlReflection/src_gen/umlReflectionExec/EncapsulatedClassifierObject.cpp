@@ -94,6 +94,8 @@
 #include "uml/VisibilityKind.hpp"
 #include "uml/TemplateParameter.hpp"
 #include "umlReflectionExec/TemplateParameterObject.hpp"
+#include "uml/TemplateParameter.hpp"
+#include "umlReflectionExec/TemplateParameterObject.hpp"
 #include "fUML/Semantics/SimpleClassifiers/BooleanValue.hpp"
 #include "uml/RedefinableElement.hpp"
 #include "umlReflectionExec/RedefinableElementObject.hpp"
@@ -107,6 +109,8 @@
 #include "umlReflectionExec/PropertyObject.hpp"
 #include "uml/ConnectableElement.hpp"
 #include "umlReflectionExec/ConnectableElementObject.hpp"
+#include "uml/TemplateSignature.hpp"
+#include "umlReflectionExec/TemplateSignatureObject.hpp"
 #include "uml/TemplateBinding.hpp"
 #include "umlReflectionExec/TemplateBindingObject.hpp"
 #include "uml/Package.hpp"
@@ -513,6 +517,11 @@ void EncapsulatedClassifierObject::removeValue(std::shared_ptr<uml::StructuralFe
 				m_EncapsulatedClassifierValue->getOwningTemplateParameter().reset();
 
 	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_templateParameter())
+	{
+				m_EncapsulatedClassifierValue->getTemplateParameter().reset();
+
+	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_RedefinableElement_isLeaf())
 	{
 				m_EncapsulatedClassifierValue->setIsLeaf(false /*defined default value*/);
@@ -553,6 +562,11 @@ void EncapsulatedClassifierObject::removeValue(std::shared_ptr<uml::StructuralFe
 				m_EncapsulatedClassifierValue->getOwnedConnector()->erase(inputValue->getConnectorValue());
 			}
 		}
+	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateableElement_ownedTemplateSignature())
+	{
+				m_EncapsulatedClassifierValue->getOwnedTemplateSignature().reset();
+
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateableElement_templateBinding())
 	{
@@ -1103,6 +1117,16 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> EncapsulatedClassifierObjec
 		reference->setReferent(value);
 		values->add(reference);
 	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_templateParameter())
+	{
+		std::shared_ptr<UML::TemplateParameterObject> value(new UML::TemplateParameterObject());
+		value->setThisTemplateParameterObjectPtr(value);
+		value->setLocus(this->getLocus());
+		value->setTemplateParameterValue(m_EncapsulatedClassifierValue->getTemplateParameter());
+		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
+		reference->setReferent(value);
+		values->add(reference);
+	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_RedefinableElement_isLeaf())
 	{
 		std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> value = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createBooleanValue();
@@ -1212,6 +1236,17 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> EncapsulatedClassifierObjec
 			values->add(reference);
 			iter++;
 		} 
+	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateableElement_ownedTemplateSignature())
+	{
+		std::shared_ptr<UML::TemplateSignatureObject> value(new UML::TemplateSignatureObject());
+		value->setThisTemplateSignatureObjectPtr(value);
+		value->setLocus(this->getLocus());
+		value->setTemplateSignatureValue(m_EncapsulatedClassifierValue->getOwnedTemplateSignature());
+		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
+		reference->setReferent(value);
+		reference->setCompositeReferent(value);
+		values->add(reference);
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateableElement_templateBinding())
 	{
@@ -1617,6 +1652,17 @@ void EncapsulatedClassifierObject::setFeatureValue(std::shared_ptr<uml::Structur
 		}
 		
 	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_templateParameter())
+	{
+		std::shared_ptr<fUML::Semantics::Values::Value> inputValue = values->at(0);
+		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(inputValue);
+		std::shared_ptr<UML::TemplateParameterObject> value = std::dynamic_pointer_cast<UML::TemplateParameterObject>(reference->getReferent());
+		if (value != nullptr)
+		{
+			m_EncapsulatedClassifierValue->setTemplateParameter(value->getTemplateParameterValue());
+		}
+		
+	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_RedefinableElement_isLeaf())
 	{
 		std::shared_ptr<fUML::Semantics::Values::Value> inputValue = values->at(0);
@@ -1662,6 +1708,17 @@ void EncapsulatedClassifierObject::setFeatureValue(std::shared_ptr<uml::Structur
 			
 			iter++;
 		}
+	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateableElement_ownedTemplateSignature())
+	{
+		std::shared_ptr<fUML::Semantics::Values::Value> inputValue = values->at(0);
+		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(inputValue);
+		std::shared_ptr<UML::TemplateSignatureObject> value = std::dynamic_pointer_cast<UML::TemplateSignatureObject>(reference->getReferent());
+		if (value != nullptr)
+		{
+			m_EncapsulatedClassifierValue->setOwnedTemplateSignature(value->getTemplateSignatureValue());
+		}
+		
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateableElement_templateBinding())
 	{
@@ -1811,6 +1868,10 @@ std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> Encapsula
 		{
 			featureValues->add(this->retrieveFeatureValue(property));
 		}
+		if (property == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_templateParameter() && m_EncapsulatedClassifierValue->getTemplateParameter() != nullptr)
+		{
+			featureValues->add(this->retrieveFeatureValue(property));
+		}
 		if (property == UML::UMLPackage::eInstance()->get_UML_RedefinableElement_redefinedElement() && m_EncapsulatedClassifierValue->getRedefinedElement() != nullptr)
 		{
 			featureValues->add(this->retrieveFeatureValue(property));
@@ -1832,6 +1893,10 @@ std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> Encapsula
 			featureValues->add(this->retrieveFeatureValue(property));
 		}
 		if (property == UML::UMLPackage::eInstance()->get_UML_StructuredClassifier_role() && m_EncapsulatedClassifierValue->getRole() != nullptr)
+		{
+			featureValues->add(this->retrieveFeatureValue(property));
+		}
+		if (property == UML::UMLPackage::eInstance()->get_UML_TemplateableElement_ownedTemplateSignature() && m_EncapsulatedClassifierValue->getOwnedTemplateSignature() != nullptr)
 		{
 			featureValues->add(this->retrieveFeatureValue(property));
 		}

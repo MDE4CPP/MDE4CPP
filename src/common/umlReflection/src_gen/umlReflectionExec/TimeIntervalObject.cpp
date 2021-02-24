@@ -36,6 +36,10 @@
 #include "umlReflectionExec/ElementObject.hpp"
 #include "uml/Element.hpp"
 #include "umlReflectionExec/ElementObject.hpp"
+#include "uml/ValueSpecification.hpp"
+#include "umlReflectionExec/ValueSpecificationObject.hpp"
+#include "uml/ValueSpecification.hpp"
+#include "umlReflectionExec/ValueSpecificationObject.hpp"
 #include "uml/Dependency.hpp"
 #include "umlReflectionExec/DependencyObject.hpp"
 #include "fUML/Semantics/SimpleClassifiers/StringValue.hpp"
@@ -212,6 +216,16 @@ void TimeIntervalObject::removeValue(std::shared_ptr<uml::StructuralFeature> fea
 			}
 		}
 	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_Interval_max())
+	{
+				m_TimeIntervalValue->getMax().reset();
+
+	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_Interval_min())
+	{
+				m_TimeIntervalValue->getMin().reset();
+
+	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_name())
 	{
 				// no default value defined, clear not realized
@@ -317,6 +331,26 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> TimeIntervalObject::getValu
 		value->setThisElementObjectPtr(value);
 		value->setLocus(this->getLocus());
 		value->setElementValue(m_TimeIntervalValue->getOwner().lock());
+		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
+		reference->setReferent(value);
+		values->add(reference);
+	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_Interval_max())
+	{
+		std::shared_ptr<UML::ValueSpecificationObject> value(new UML::ValueSpecificationObject());
+		value->setThisValueSpecificationObjectPtr(value);
+		value->setLocus(this->getLocus());
+		value->setValueSpecificationValue(m_TimeIntervalValue->getMax());
+		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
+		reference->setReferent(value);
+		values->add(reference);
+	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_Interval_min())
+	{
+		std::shared_ptr<UML::ValueSpecificationObject> value(new UML::ValueSpecificationObject());
+		value->setThisValueSpecificationObjectPtr(value);
+		value->setLocus(this->getLocus());
+		value->setValueSpecificationValue(m_TimeIntervalValue->getMin());
 		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
 		reference->setReferent(value);
 		values->add(reference);
@@ -523,6 +557,28 @@ void TimeIntervalObject::setFeatureValue(std::shared_ptr<uml::StructuralFeature>
 			iter++;
 		}
 	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_Interval_max())
+	{
+		std::shared_ptr<fUML::Semantics::Values::Value> inputValue = values->at(0);
+		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(inputValue);
+		std::shared_ptr<UML::ValueSpecificationObject> value = std::dynamic_pointer_cast<UML::ValueSpecificationObject>(reference->getReferent());
+		if (value != nullptr)
+		{
+			m_TimeIntervalValue->setMax(value->getValueSpecificationValue());
+		}
+		
+	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_Interval_min())
+	{
+		std::shared_ptr<fUML::Semantics::Values::Value> inputValue = values->at(0);
+		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(inputValue);
+		std::shared_ptr<UML::ValueSpecificationObject> value = std::dynamic_pointer_cast<UML::ValueSpecificationObject>(reference->getReferent());
+		if (value != nullptr)
+		{
+			m_TimeIntervalValue->setMin(value->getValueSpecificationValue());
+		}
+		
+	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_name())
 	{
 		std::shared_ptr<fUML::Semantics::Values::Value> inputValue = values->at(0);
@@ -661,6 +717,14 @@ std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> TimeInter
 			featureValues->add(this->retrieveFeatureValue(property));
 		}
 		if (property == UML::UMLPackage::eInstance()->get_UML_Element_owner() && m_TimeIntervalValue->getOwner().lock() != nullptr)
+		{
+			featureValues->add(this->retrieveFeatureValue(property));
+		}
+		if (property == UML::UMLPackage::eInstance()->get_UML_Interval_max() && m_TimeIntervalValue->getMax() != nullptr)
+		{
+			featureValues->add(this->retrieveFeatureValue(property));
+		}
+		if (property == UML::UMLPackage::eInstance()->get_UML_Interval_min() && m_TimeIntervalValue->getMin() != nullptr)
 		{
 			featureValues->add(this->retrieveFeatureValue(property));
 		}

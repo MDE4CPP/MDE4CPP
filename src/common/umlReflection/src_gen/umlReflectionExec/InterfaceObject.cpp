@@ -104,11 +104,15 @@
 #include "uml/VisibilityKind.hpp"
 #include "uml/TemplateParameter.hpp"
 #include "umlReflectionExec/TemplateParameterObject.hpp"
+#include "uml/TemplateParameter.hpp"
+#include "umlReflectionExec/TemplateParameterObject.hpp"
 #include "fUML/Semantics/SimpleClassifiers/BooleanValue.hpp"
 #include "uml/RedefinableElement.hpp"
 #include "umlReflectionExec/RedefinableElementObject.hpp"
 #include "uml/Classifier.hpp"
 #include "umlReflectionExec/ClassifierObject.hpp"
+#include "uml/TemplateSignature.hpp"
+#include "umlReflectionExec/TemplateSignatureObject.hpp"
 #include "uml/TemplateBinding.hpp"
 #include "umlReflectionExec/TemplateBindingObject.hpp"
 #include "uml/Package.hpp"
@@ -610,9 +614,19 @@ void InterfaceObject::removeValue(std::shared_ptr<uml::StructuralFeature> featur
 				m_InterfaceValue->getOwningTemplateParameter().reset();
 
 	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_templateParameter())
+	{
+				m_InterfaceValue->getTemplateParameter().reset();
+
+	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_RedefinableElement_isLeaf())
 	{
 				m_InterfaceValue->setIsLeaf(false /*defined default value*/);
+
+	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateableElement_ownedTemplateSignature())
+	{
+				m_InterfaceValue->getOwnedTemplateSignature().reset();
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateableElement_templateBinding())
@@ -1246,6 +1260,16 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> InterfaceObject::getValues(
 		reference->setReferent(value);
 		values->add(reference);
 	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_templateParameter())
+	{
+		std::shared_ptr<UML::TemplateParameterObject> value(new UML::TemplateParameterObject());
+		value->setThisTemplateParameterObjectPtr(value);
+		value->setLocus(this->getLocus());
+		value->setTemplateParameterValue(m_InterfaceValue->getTemplateParameter());
+		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
+		reference->setReferent(value);
+		values->add(reference);
+	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_RedefinableElement_isLeaf())
 	{
 		std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> value = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createBooleanValue();
@@ -1285,6 +1309,17 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> InterfaceObject::getValues(
 			values->add(reference);
 			iter++;
 		} 
+	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateableElement_ownedTemplateSignature())
+	{
+		std::shared_ptr<UML::TemplateSignatureObject> value(new UML::TemplateSignatureObject());
+		value->setThisTemplateSignatureObjectPtr(value);
+		value->setLocus(this->getLocus());
+		value->setTemplateSignatureValue(m_InterfaceValue->getOwnedTemplateSignature());
+		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
+		reference->setReferent(value);
+		reference->setCompositeReferent(value);
+		values->add(reference);
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateableElement_templateBinding())
 	{
@@ -1791,6 +1826,17 @@ void InterfaceObject::setFeatureValue(std::shared_ptr<uml::StructuralFeature> fe
 		}
 		
 	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_templateParameter())
+	{
+		std::shared_ptr<fUML::Semantics::Values::Value> inputValue = values->at(0);
+		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(inputValue);
+		std::shared_ptr<UML::TemplateParameterObject> value = std::dynamic_pointer_cast<UML::TemplateParameterObject>(reference->getReferent());
+		if (value != nullptr)
+		{
+			m_InterfaceValue->setTemplateParameter(value->getTemplateParameterValue());
+		}
+		
+	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_RedefinableElement_isLeaf())
 	{
 		std::shared_ptr<fUML::Semantics::Values::Value> inputValue = values->at(0);
@@ -1798,6 +1844,17 @@ void InterfaceObject::setFeatureValue(std::shared_ptr<uml::StructuralFeature> fe
 		if (valueObject != nullptr)
 		{
 			m_InterfaceValue->setIsLeaf(valueObject->isValue());
+		}
+		
+	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateableElement_ownedTemplateSignature())
+	{
+		std::shared_ptr<fUML::Semantics::Values::Value> inputValue = values->at(0);
+		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(inputValue);
+		std::shared_ptr<UML::TemplateSignatureObject> value = std::dynamic_pointer_cast<UML::TemplateSignatureObject>(reference->getReferent());
+		if (value != nullptr)
+		{
+			m_InterfaceValue->setOwnedTemplateSignature(value->getTemplateSignatureValue());
 		}
 		
 	}
@@ -1969,11 +2026,19 @@ std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> Interface
 		{
 			featureValues->add(this->retrieveFeatureValue(property));
 		}
+		if (property == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_templateParameter() && m_InterfaceValue->getTemplateParameter() != nullptr)
+		{
+			featureValues->add(this->retrieveFeatureValue(property));
+		}
 		if (property == UML::UMLPackage::eInstance()->get_UML_RedefinableElement_redefinedElement() && m_InterfaceValue->getRedefinedElement() != nullptr)
 		{
 			featureValues->add(this->retrieveFeatureValue(property));
 		}
 		if (property == UML::UMLPackage::eInstance()->get_UML_RedefinableElement_redefinitionContext() && m_InterfaceValue->getRedefinitionContext() != nullptr)
+		{
+			featureValues->add(this->retrieveFeatureValue(property));
+		}
+		if (property == UML::UMLPackage::eInstance()->get_UML_TemplateableElement_ownedTemplateSignature() && m_InterfaceValue->getOwnedTemplateSignature() != nullptr)
 		{
 			featureValues->add(this->retrieveFeatureValue(property));
 		}

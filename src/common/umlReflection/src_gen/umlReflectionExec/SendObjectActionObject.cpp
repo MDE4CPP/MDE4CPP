@@ -65,6 +65,8 @@
 #include "umlReflectionExec/ElementObject.hpp"
 #include "uml/ExceptionHandler.hpp"
 #include "umlReflectionExec/ExceptionHandlerObject.hpp"
+#include "uml/InputPin.hpp"
+#include "umlReflectionExec/InputPinObject.hpp"
 #include "uml/Port.hpp"
 #include "umlReflectionExec/PortObject.hpp"
 #include "uml/Dependency.hpp"
@@ -399,6 +401,24 @@ void SendObjectActionObject::removeValue(std::shared_ptr<uml::StructuralFeature>
 			}
 		}
 	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_InvocationAction_argument())
+	{
+		if (value == nullptr) // clear mode
+		{
+			m_SendObjectActionValue->getArgument()->clear();
+		}
+		else
+		{
+			/* Should use PSCS::CS_Reference but dynamic_pointer_cast fails --> using fUML::Reference instead
+			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(value); */
+			std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> reference = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Reference>(value);
+			std::shared_ptr<UML::InputPinObject> inputValue = std::dynamic_pointer_cast<UML::InputPinObject>(reference->getReferent());
+			if (inputValue != nullptr)
+			{
+				m_SendObjectActionValue->getArgument()->erase(inputValue->getInputPinValue());
+			}
+		}
+	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_InvocationAction_onPort())
 	{
 				m_SendObjectActionValue->getOnPort().reset();
@@ -719,6 +739,24 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> SendObjectActionObject::get
 			value->setThisExceptionHandlerObjectPtr(value);
 			value->setLocus(this->getLocus());
 			value->setExceptionHandlerValue(*iter);
+			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
+			reference->setReferent(value);
+			reference->setCompositeReferent(value);
+			values->add(reference);
+			iter++;
+		} 
+	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_InvocationAction_argument())
+	{
+		std::shared_ptr<Bag<uml::InputPin>> argumentList = m_SendObjectActionValue->getArgument();
+		Bag<uml::InputPin>::iterator iter = argumentList->begin();
+		Bag<uml::InputPin>::iterator end = argumentList->end();
+		while (iter != end)
+		{
+			std::shared_ptr<UML::InputPinObject> value(new UML::InputPinObject());
+			value->setThisInputPinObjectPtr(value);
+			value->setLocus(this->getLocus());
+			value->setInputPinValue(*iter);
 			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
 			reference->setReferent(value);
 			reference->setCompositeReferent(value);
@@ -1076,6 +1114,24 @@ void SendObjectActionObject::setFeatureValue(std::shared_ptr<uml::StructuralFeat
 			iter++;
 		}
 	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_InvocationAction_argument())
+	{
+		Bag<fUML::Semantics::Values::Value>::iterator iter = values->begin();
+		Bag<fUML::Semantics::Values::Value>::iterator end = values->end();
+		m_SendObjectActionValue->getArgument()->clear();
+		while (iter != end)
+		{
+			std::shared_ptr<fUML::Semantics::Values::Value> inputValue = *iter;
+			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(inputValue);
+			std::shared_ptr<UML::InputPinObject> value = std::dynamic_pointer_cast<UML::InputPinObject>(reference->getReferent());
+			if (value != nullptr)
+			{
+				m_SendObjectActionValue->getArgument()->push_back(value->getInputPinValue());
+			}
+			
+			iter++;
+		}
+	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_InvocationAction_onPort())
 	{
 		std::shared_ptr<fUML::Semantics::Values::Value> inputValue = values->at(0);
@@ -1247,6 +1303,10 @@ std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> SendObjec
 			featureValues->add(this->retrieveFeatureValue(property));
 		}
 		if (property == UML::UMLPackage::eInstance()->get_UML_ExecutableNode_handler() && m_SendObjectActionValue->getHandler() != nullptr)
+		{
+			featureValues->add(this->retrieveFeatureValue(property));
+		}
+		if (property == UML::UMLPackage::eInstance()->get_UML_InvocationAction_argument() && m_SendObjectActionValue->getArgument() != nullptr)
 		{
 			featureValues->add(this->retrieveFeatureValue(property));
 		}

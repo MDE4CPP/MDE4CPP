@@ -45,10 +45,14 @@
 #include "umlReflectionExec/ActivityEdgeObject.hpp"
 #include "uml/ActivityNode.hpp"
 #include "umlReflectionExec/ActivityNodeObject.hpp"
+#include "uml/Activity.hpp"
+#include "umlReflectionExec/ActivityObject.hpp"
 #include "uml/ActivityGroup.hpp"
 #include "umlReflectionExec/ActivityGroupObject.hpp"
 #include "uml/ActivityGroup.hpp"
 #include "umlReflectionExec/ActivityGroupObject.hpp"
+#include "uml/Activity.hpp"
+#include "umlReflectionExec/ActivityObject.hpp"
 #include "uml/ActivityGroup.hpp"
 #include "umlReflectionExec/ActivityGroupObject.hpp"
 #include "uml/InterruptibleActivityRegion.hpp"
@@ -289,6 +293,16 @@ void StructuredActivityNodeObject::removeValue(std::shared_ptr<uml::StructuralFe
 				m_StructuredActivityNodeValue->getLocalPrecondition()->erase(inputValue->getConstraintValue());
 			}
 		}
+	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityGroup_inActivity())
+	{
+				m_StructuredActivityNodeValue->getInActivity().reset();
+
+	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_activity())
+	{
+				m_StructuredActivityNodeValue->getActivity().reset();
+
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inInterruptibleRegion())
 	{
@@ -735,6 +749,16 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> StructuredActivityNodeObjec
 			iter++;
 		} 
 	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityGroup_inActivity())
+	{
+		std::shared_ptr<UML::ActivityObject> value(new UML::ActivityObject());
+		value->setThisActivityObjectPtr(value);
+		value->setLocus(this->getLocus());
+		value->setActivityValue(m_StructuredActivityNodeValue->getInActivity().lock());
+		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
+		reference->setReferent(value);
+		values->add(reference);
+	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityGroup_subgroup())
 	{
 		std::shared_ptr<Bag<uml::ActivityGroup>> subgroupList = m_StructuredActivityNodeValue->getSubgroup();
@@ -759,6 +783,16 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> StructuredActivityNodeObjec
 		value->setThisActivityGroupObjectPtr(value);
 		value->setLocus(this->getLocus());
 		value->setActivityGroupValue(m_StructuredActivityNodeValue->getSuperGroup().lock());
+		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
+		reference->setReferent(value);
+		values->add(reference);
+	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_activity())
+	{
+		std::shared_ptr<UML::ActivityObject> value(new UML::ActivityObject());
+		value->setThisActivityObjectPtr(value);
+		value->setLocus(this->getLocus());
+		value->setActivityValue(m_StructuredActivityNodeValue->getActivity().lock());
 		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
 		reference->setReferent(value);
 		values->add(reference);
@@ -1729,11 +1763,19 @@ std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> Structure
 		{
 			featureValues->add(this->retrieveFeatureValue(property));
 		}
+		if (property == UML::UMLPackage::eInstance()->get_UML_ActivityGroup_inActivity() && m_StructuredActivityNodeValue->getInActivity().lock() != nullptr)
+		{
+			featureValues->add(this->retrieveFeatureValue(property));
+		}
 		if (property == UML::UMLPackage::eInstance()->get_UML_ActivityGroup_subgroup() && m_StructuredActivityNodeValue->getSubgroup() != nullptr)
 		{
 			featureValues->add(this->retrieveFeatureValue(property));
 		}
 		if (property == UML::UMLPackage::eInstance()->get_UML_ActivityGroup_superGroup() && m_StructuredActivityNodeValue->getSuperGroup().lock() != nullptr)
+		{
+			featureValues->add(this->retrieveFeatureValue(property));
+		}
+		if (property == UML::UMLPackage::eInstance()->get_UML_ActivityNode_activity() && m_StructuredActivityNodeValue->getActivity().lock() != nullptr)
 		{
 			featureValues->add(this->retrieveFeatureValue(property));
 		}

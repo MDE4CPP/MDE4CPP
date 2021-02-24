@@ -45,10 +45,14 @@
 #include "umlReflectionExec/ActivityEdgeObject.hpp"
 #include "uml/ActivityNode.hpp"
 #include "umlReflectionExec/ActivityNodeObject.hpp"
+#include "uml/Activity.hpp"
+#include "umlReflectionExec/ActivityObject.hpp"
 #include "uml/ActivityGroup.hpp"
 #include "umlReflectionExec/ActivityGroupObject.hpp"
 #include "uml/ActivityGroup.hpp"
 #include "umlReflectionExec/ActivityGroupObject.hpp"
+#include "uml/Activity.hpp"
+#include "umlReflectionExec/ActivityObject.hpp"
 #include "uml/ActivityGroup.hpp"
 #include "umlReflectionExec/ActivityGroupObject.hpp"
 #include "uml/InterruptibleActivityRegion.hpp"
@@ -293,6 +297,16 @@ void ExpansionRegionObject::removeValue(std::shared_ptr<uml::StructuralFeature> 
 				m_ExpansionRegionValue->getLocalPrecondition()->erase(inputValue->getConstraintValue());
 			}
 		}
+	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityGroup_inActivity())
+	{
+				m_ExpansionRegionValue->getInActivity().reset();
+
+	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_activity())
+	{
+				m_ExpansionRegionValue->getActivity().reset();
+
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inInterruptibleRegion())
 	{
@@ -780,6 +794,16 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ExpansionRegionObject::getV
 			iter++;
 		} 
 	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityGroup_inActivity())
+	{
+		std::shared_ptr<UML::ActivityObject> value(new UML::ActivityObject());
+		value->setThisActivityObjectPtr(value);
+		value->setLocus(this->getLocus());
+		value->setActivityValue(m_ExpansionRegionValue->getInActivity().lock());
+		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
+		reference->setReferent(value);
+		values->add(reference);
+	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityGroup_subgroup())
 	{
 		std::shared_ptr<Bag<uml::ActivityGroup>> subgroupList = m_ExpansionRegionValue->getSubgroup();
@@ -804,6 +828,16 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ExpansionRegionObject::getV
 		value->setThisActivityGroupObjectPtr(value);
 		value->setLocus(this->getLocus());
 		value->setActivityGroupValue(m_ExpansionRegionValue->getSuperGroup().lock());
+		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
+		reference->setReferent(value);
+		values->add(reference);
+	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_activity())
+	{
+		std::shared_ptr<UML::ActivityObject> value(new UML::ActivityObject());
+		value->setThisActivityObjectPtr(value);
+		value->setLocus(this->getLocus());
+		value->setActivityValue(m_ExpansionRegionValue->getActivity().lock());
 		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
 		reference->setReferent(value);
 		values->add(reference);
@@ -1881,11 +1915,19 @@ std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> Expansion
 		{
 			featureValues->add(this->retrieveFeatureValue(property));
 		}
+		if (property == UML::UMLPackage::eInstance()->get_UML_ActivityGroup_inActivity() && m_ExpansionRegionValue->getInActivity().lock() != nullptr)
+		{
+			featureValues->add(this->retrieveFeatureValue(property));
+		}
 		if (property == UML::UMLPackage::eInstance()->get_UML_ActivityGroup_subgroup() && m_ExpansionRegionValue->getSubgroup() != nullptr)
 		{
 			featureValues->add(this->retrieveFeatureValue(property));
 		}
 		if (property == UML::UMLPackage::eInstance()->get_UML_ActivityGroup_superGroup() && m_ExpansionRegionValue->getSuperGroup().lock() != nullptr)
+		{
+			featureValues->add(this->retrieveFeatureValue(property));
+		}
+		if (property == UML::UMLPackage::eInstance()->get_UML_ActivityNode_activity() && m_ExpansionRegionValue->getActivity().lock() != nullptr)
 		{
 			featureValues->add(this->retrieveFeatureValue(property));
 		}

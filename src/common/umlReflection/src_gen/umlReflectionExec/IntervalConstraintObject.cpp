@@ -34,6 +34,8 @@
 #include "umlReflectionExec/ElementObject.hpp"
 #include "uml/Namespace.hpp"
 #include "umlReflectionExec/NamespaceObject.hpp"
+#include "uml/ValueSpecification.hpp"
+#include "umlReflectionExec/ValueSpecificationObject.hpp"
 #include "uml/Comment.hpp"
 #include "umlReflectionExec/CommentObject.hpp"
 #include "uml/Element.hpp"
@@ -50,6 +52,8 @@
 #include "uml/Namespace.hpp"
 #include "umlReflectionExec/NamespaceObject.hpp"
 #include "fUML/Semantics/SimpleClassifiers/StringValue.hpp"
+#include "fUML/Semantics/SimpleClassifiers/EnumerationValue.hpp"
+#include "uml/VisibilityKind.hpp"
 #include "fUML/Semantics/SimpleClassifiers/EnumerationValue.hpp"
 #include "uml/VisibilityKind.hpp"
 #include "uml/TemplateParameter.hpp"
@@ -215,6 +219,11 @@ void IntervalConstraintObject::removeValue(std::shared_ptr<uml::StructuralFeatur
 				m_IntervalConstraintValue->getContext().reset();
 
 	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_Constraint_specification())
+	{
+				m_IntervalConstraintValue->getSpecification().reset();
+
+	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedComment())
 	{
 		if (value == nullptr) // clear mode
@@ -246,6 +255,11 @@ void IntervalConstraintObject::removeValue(std::shared_ptr<uml::StructuralFeatur
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
 				m_IntervalConstraintValue->getNameExpression().reset();
+
+	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
+	{
+				// no default value defined, clear not realized
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_PackageableElement_visibility())
@@ -306,6 +320,17 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> IntervalConstraintObject::g
 		value->setNamespaceValue(m_IntervalConstraintValue->getContext().lock());
 		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
 		reference->setReferent(value);
+		values->add(reference);
+	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_Constraint_specification())
+	{
+		std::shared_ptr<UML::ValueSpecificationObject> value(new UML::ValueSpecificationObject());
+		value->setThisValueSpecificationObjectPtr(value);
+		value->setLocus(this->getLocus());
+		value->setValueSpecificationValue(m_IntervalConstraintValue->getSpecification());
+		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
+		reference->setReferent(value);
+		reference->setCompositeReferent(value);
 		values->add(reference);
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedComment())
@@ -415,6 +440,28 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> IntervalConstraintObject::g
 		value->setValue(m_IntervalConstraintValue->getQualifiedName());
 		values->add(value);
 	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
+	{
+		uml::VisibilityKind visibility = m_IntervalConstraintValue->getVisibility();
+		std::shared_ptr<fUML::Semantics::SimpleClassifiers::EnumerationValue> value = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createEnumerationValue();
+		if (visibility == uml::VisibilityKind::PUBLIC)
+		{
+			value->setLiteral(UML::UMLPackage::eInstance()->get_UML_VisibilityKind_public());
+		}
+		if (visibility == uml::VisibilityKind::PRIVATE)
+		{
+			value->setLiteral(UML::UMLPackage::eInstance()->get_UML_VisibilityKind_private());
+		}
+		if (visibility == uml::VisibilityKind::PROTECTED)
+		{
+			value->setLiteral(UML::UMLPackage::eInstance()->get_UML_VisibilityKind_protected());
+		}
+		if (visibility == uml::VisibilityKind::PACKAGE)
+		{
+			value->setLiteral(UML::UMLPackage::eInstance()->get_UML_VisibilityKind_package());
+		}
+		values->add(value);
+	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_PackageableElement_visibility())
 	{
 		uml::VisibilityKind visibility = m_IntervalConstraintValue->getVisibility();
@@ -515,6 +562,17 @@ void IntervalConstraintObject::setFeatureValue(std::shared_ptr<uml::StructuralFe
 			iter++;
 		}
 	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_Constraint_specification())
+	{
+		std::shared_ptr<fUML::Semantics::Values::Value> inputValue = values->at(0);
+		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(inputValue);
+		std::shared_ptr<UML::ValueSpecificationObject> value = std::dynamic_pointer_cast<UML::ValueSpecificationObject>(reference->getReferent());
+		if (value != nullptr)
+		{
+			m_IntervalConstraintValue->setSpecification(value->getValueSpecificationValue());
+		}
+		
+	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedComment())
 	{
 		Bag<fUML::Semantics::Values::Value>::iterator iter = values->begin();
@@ -562,6 +620,29 @@ void IntervalConstraintObject::setFeatureValue(std::shared_ptr<uml::StructuralFe
 		if (value != nullptr)
 		{
 			m_IntervalConstraintValue->setNameExpression(value->getStringExpressionValue());
+		}
+		
+	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
+	{
+		std::shared_ptr<fUML::Semantics::Values::Value> inputValue = values->at(0);
+		std::shared_ptr<fUML::Semantics::SimpleClassifiers::EnumerationValue> enumValue = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::EnumerationValue>(inputValue);
+		std::shared_ptr<uml::EnumerationLiteral> literal = enumValue->getLiteral();
+		if (literal == UML::UMLPackage::eInstance()->get_UML_VisibilityKind_public())
+		{
+			m_IntervalConstraintValue->setVisibility(uml::VisibilityKind::PUBLIC);
+		}
+		if (literal == UML::UMLPackage::eInstance()->get_UML_VisibilityKind_private())
+		{
+			m_IntervalConstraintValue->setVisibility(uml::VisibilityKind::PRIVATE);
+		}
+		if (literal == UML::UMLPackage::eInstance()->get_UML_VisibilityKind_protected())
+		{
+			m_IntervalConstraintValue->setVisibility(uml::VisibilityKind::PROTECTED);
+		}
+		if (literal == UML::UMLPackage::eInstance()->get_UML_VisibilityKind_package())
+		{
+			m_IntervalConstraintValue->setVisibility(uml::VisibilityKind::PACKAGE);
 		}
 		
 	}
@@ -622,6 +703,10 @@ std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> IntervalC
 			featureValues->add(this->retrieveFeatureValue(property));
 		}
 		if (property == UML::UMLPackage::eInstance()->get_UML_Constraint_context() && m_IntervalConstraintValue->getContext().lock() != nullptr)
+		{
+			featureValues->add(this->retrieveFeatureValue(property));
+		}
+		if (property == UML::UMLPackage::eInstance()->get_UML_Constraint_specification() && m_IntervalConstraintValue->getSpecification() != nullptr)
 		{
 			featureValues->add(this->retrieveFeatureValue(property));
 		}

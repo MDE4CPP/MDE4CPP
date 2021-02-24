@@ -92,6 +92,8 @@
 #include "uml/VisibilityKind.hpp"
 #include "uml/TemplateParameter.hpp"
 #include "umlReflectionExec/TemplateParameterObject.hpp"
+#include "uml/TemplateParameter.hpp"
+#include "umlReflectionExec/TemplateParameterObject.hpp"
 #include "fUML/Semantics/SimpleClassifiers/BooleanValue.hpp"
 #include "uml/RedefinableElement.hpp"
 #include "umlReflectionExec/RedefinableElementObject.hpp"
@@ -99,6 +101,8 @@
 #include "umlReflectionExec/ClassifierObject.hpp"
 #include "uml/Property.hpp"
 #include "umlReflectionExec/PropertyObject.hpp"
+#include "uml/TemplateSignature.hpp"
+#include "umlReflectionExec/TemplateSignatureObject.hpp"
 #include "uml/TemplateBinding.hpp"
 #include "umlReflectionExec/TemplateBindingObject.hpp"
 #include "uml/Package.hpp"
@@ -505,6 +509,11 @@ void SignalObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature, 
 				m_SignalValue->getOwningTemplateParameter().reset();
 
 	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_templateParameter())
+	{
+				m_SignalValue->getTemplateParameter().reset();
+
+	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_RedefinableElement_isLeaf())
 	{
 				m_SignalValue->setIsLeaf(false /*defined default value*/);
@@ -527,6 +536,11 @@ void SignalObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature, 
 				m_SignalValue->getOwnedAttribute()->erase(inputValue->getPropertyValue());
 			}
 		}
+	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateableElement_ownedTemplateSignature())
+	{
+				m_SignalValue->getOwnedTemplateSignature().reset();
+
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateableElement_templateBinding())
 	{
@@ -1059,6 +1073,16 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> SignalObject::getValues(std
 		reference->setReferent(value);
 		values->add(reference);
 	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_templateParameter())
+	{
+		std::shared_ptr<UML::TemplateParameterObject> value(new UML::TemplateParameterObject());
+		value->setThisTemplateParameterObjectPtr(value);
+		value->setLocus(this->getLocus());
+		value->setTemplateParameterValue(m_SignalValue->getTemplateParameter());
+		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
+		reference->setReferent(value);
+		values->add(reference);
+	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_RedefinableElement_isLeaf())
 	{
 		std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> value = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createBooleanValue();
@@ -1116,6 +1140,17 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> SignalObject::getValues(std
 			values->add(reference);
 			iter++;
 		} 
+	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateableElement_ownedTemplateSignature())
+	{
+		std::shared_ptr<UML::TemplateSignatureObject> value(new UML::TemplateSignatureObject());
+		value->setThisTemplateSignatureObjectPtr(value);
+		value->setLocus(this->getLocus());
+		value->setTemplateSignatureValue(m_SignalValue->getOwnedTemplateSignature());
+		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
+		reference->setReferent(value);
+		reference->setCompositeReferent(value);
+		values->add(reference);
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateableElement_templateBinding())
 	{
@@ -1521,6 +1556,17 @@ void SignalObject::setFeatureValue(std::shared_ptr<uml::StructuralFeature> featu
 		}
 		
 	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_templateParameter())
+	{
+		std::shared_ptr<fUML::Semantics::Values::Value> inputValue = values->at(0);
+		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(inputValue);
+		std::shared_ptr<UML::TemplateParameterObject> value = std::dynamic_pointer_cast<UML::TemplateParameterObject>(reference->getReferent());
+		if (value != nullptr)
+		{
+			m_SignalValue->setTemplateParameter(value->getTemplateParameterValue());
+		}
+		
+	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_RedefinableElement_isLeaf())
 	{
 		std::shared_ptr<fUML::Semantics::Values::Value> inputValue = values->at(0);
@@ -1548,6 +1594,17 @@ void SignalObject::setFeatureValue(std::shared_ptr<uml::StructuralFeature> featu
 			
 			iter++;
 		}
+	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateableElement_ownedTemplateSignature())
+	{
+		std::shared_ptr<fUML::Semantics::Values::Value> inputValue = values->at(0);
+		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(inputValue);
+		std::shared_ptr<UML::TemplateSignatureObject> value = std::dynamic_pointer_cast<UML::TemplateSignatureObject>(reference->getReferent());
+		if (value != nullptr)
+		{
+			m_SignalValue->setOwnedTemplateSignature(value->getTemplateSignatureValue());
+		}
+		
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateableElement_templateBinding())
 	{
@@ -1693,6 +1750,10 @@ std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> SignalObj
 		{
 			featureValues->add(this->retrieveFeatureValue(property));
 		}
+		if (property == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_templateParameter() && m_SignalValue->getTemplateParameter() != nullptr)
+		{
+			featureValues->add(this->retrieveFeatureValue(property));
+		}
 		if (property == UML::UMLPackage::eInstance()->get_UML_RedefinableElement_redefinedElement() && m_SignalValue->getRedefinedElement() != nullptr)
 		{
 			featureValues->add(this->retrieveFeatureValue(property));
@@ -1702,6 +1763,10 @@ std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> SignalObj
 			featureValues->add(this->retrieveFeatureValue(property));
 		}
 		if (property == UML::UMLPackage::eInstance()->get_UML_Signal_ownedAttribute() && m_SignalValue->getOwnedAttribute() != nullptr)
+		{
+			featureValues->add(this->retrieveFeatureValue(property));
+		}
+		if (property == UML::UMLPackage::eInstance()->get_UML_TemplateableElement_ownedTemplateSignature() && m_SignalValue->getOwnedTemplateSignature() != nullptr)
 		{
 			featureValues->add(this->retrieveFeatureValue(property));
 		}

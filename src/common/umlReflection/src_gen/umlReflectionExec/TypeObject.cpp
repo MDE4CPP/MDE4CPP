@@ -46,6 +46,8 @@
 #include "fUML/Semantics/SimpleClassifiers/StringValue.hpp"
 #include "fUML/Semantics/SimpleClassifiers/EnumerationValue.hpp"
 #include "uml/VisibilityKind.hpp"
+#include "fUML/Semantics/SimpleClassifiers/EnumerationValue.hpp"
+#include "uml/VisibilityKind.hpp"
 #include "uml/TemplateParameter.hpp"
 #include "umlReflectionExec/TemplateParameterObject.hpp"
 #include "uml/TemplateParameter.hpp"
@@ -216,6 +218,11 @@ void TypeObject::removeValue(std::shared_ptr<uml::StructuralFeature> feature, st
 				m_TypeValue->getNameExpression().reset();
 
 	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
+	{
+				// no default value defined, clear not realized
+
+	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_PackageableElement_visibility())
 	{
 				m_TypeValue->setVisibility(uml::VisibilityKind::PUBLIC /*defined default value*/);
@@ -350,6 +357,28 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> TypeObject::getValues(std::
 		value->setValue(m_TypeValue->getQualifiedName());
 		values->add(value);
 	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
+	{
+		uml::VisibilityKind visibility = m_TypeValue->getVisibility();
+		std::shared_ptr<fUML::Semantics::SimpleClassifiers::EnumerationValue> value = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createEnumerationValue();
+		if (visibility == uml::VisibilityKind::PUBLIC)
+		{
+			value->setLiteral(UML::UMLPackage::eInstance()->get_UML_VisibilityKind_public());
+		}
+		if (visibility == uml::VisibilityKind::PRIVATE)
+		{
+			value->setLiteral(UML::UMLPackage::eInstance()->get_UML_VisibilityKind_private());
+		}
+		if (visibility == uml::VisibilityKind::PROTECTED)
+		{
+			value->setLiteral(UML::UMLPackage::eInstance()->get_UML_VisibilityKind_protected());
+		}
+		if (visibility == uml::VisibilityKind::PACKAGE)
+		{
+			value->setLiteral(UML::UMLPackage::eInstance()->get_UML_VisibilityKind_package());
+		}
+		values->add(value);
+	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_PackageableElement_visibility())
 	{
 		uml::VisibilityKind visibility = m_TypeValue->getVisibility();
@@ -478,6 +507,29 @@ void TypeObject::setFeatureValue(std::shared_ptr<uml::StructuralFeature> feature
 		if (value != nullptr)
 		{
 			m_TypeValue->setNameExpression(value->getStringExpressionValue());
+		}
+		
+	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
+	{
+		std::shared_ptr<fUML::Semantics::Values::Value> inputValue = values->at(0);
+		std::shared_ptr<fUML::Semantics::SimpleClassifiers::EnumerationValue> enumValue = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::EnumerationValue>(inputValue);
+		std::shared_ptr<uml::EnumerationLiteral> literal = enumValue->getLiteral();
+		if (literal == UML::UMLPackage::eInstance()->get_UML_VisibilityKind_public())
+		{
+			m_TypeValue->setVisibility(uml::VisibilityKind::PUBLIC);
+		}
+		if (literal == UML::UMLPackage::eInstance()->get_UML_VisibilityKind_private())
+		{
+			m_TypeValue->setVisibility(uml::VisibilityKind::PRIVATE);
+		}
+		if (literal == UML::UMLPackage::eInstance()->get_UML_VisibilityKind_protected())
+		{
+			m_TypeValue->setVisibility(uml::VisibilityKind::PROTECTED);
+		}
+		if (literal == UML::UMLPackage::eInstance()->get_UML_VisibilityKind_package())
+		{
+			m_TypeValue->setVisibility(uml::VisibilityKind::PACKAGE);
 		}
 		
 	}

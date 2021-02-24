@@ -67,6 +67,8 @@
 #include "fUML/Semantics/SimpleClassifiers/BooleanValue.hpp"
 #include "uml/RedefinableElement.hpp"
 #include "umlReflectionExec/RedefinableElementObject.hpp"
+#include "uml/Classifier.hpp"
+#include "umlReflectionExec/ClassifierObject.hpp"
 #include "uml/Region.hpp"
 #include "umlReflectionExec/RegionObject.hpp"
 #include "uml/Behavior.hpp"
@@ -680,6 +682,23 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ProtocolTransitionObject::g
 			iter++;
 		} 
 	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_RedefinableElement_redefinitionContext())
+	{
+		std::shared_ptr<Bag<uml::Classifier>> redefinitionContextList = m_ProtocolTransitionValue->getRedefinitionContext();
+		Bag<uml::Classifier>::iterator iter = redefinitionContextList->begin();
+		Bag<uml::Classifier>::iterator end = redefinitionContextList->end();
+		while (iter != end)
+		{
+			std::shared_ptr<UML::ClassifierObject> value(new UML::ClassifierObject());
+			value->setThisClassifierObjectPtr(value);
+			value->setLocus(this->getLocus());
+			value->setClassifierValue(*iter);
+			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
+			reference->setReferent(value);
+			values->add(reference);
+			iter++;
+		} 
+	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Transition_container())
 	{
 		std::shared_ptr<UML::RegionObject> value(new UML::RegionObject());
@@ -1142,6 +1161,10 @@ std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> ProtocolT
 			featureValues->add(this->retrieveFeatureValue(property));
 		}
 		if (property == UML::UMLPackage::eInstance()->get_UML_RedefinableElement_redefinedElement() && m_ProtocolTransitionValue->getRedefinedElement() != nullptr)
+		{
+			featureValues->add(this->retrieveFeatureValue(property));
+		}
+		if (property == UML::UMLPackage::eInstance()->get_UML_RedefinableElement_redefinitionContext() && m_ProtocolTransitionValue->getRedefinitionContext() != nullptr)
 		{
 			featureValues->add(this->retrieveFeatureValue(property));
 		}

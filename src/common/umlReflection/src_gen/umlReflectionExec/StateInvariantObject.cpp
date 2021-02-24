@@ -36,6 +36,8 @@
 #include "umlReflectionExec/ElementObject.hpp"
 #include "uml/Element.hpp"
 #include "umlReflectionExec/ElementObject.hpp"
+#include "uml/Lifeline.hpp"
+#include "umlReflectionExec/LifelineObject.hpp"
 #include "uml/Interaction.hpp"
 #include "umlReflectionExec/InteractionObject.hpp"
 #include "uml/InteractionOperand.hpp"
@@ -210,6 +212,24 @@ void StateInvariantObject::removeValue(std::shared_ptr<uml::StructuralFeature> f
 			}
 		}
 	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_InteractionFragment_covered())
+	{
+		if (value == nullptr) // clear mode
+		{
+			m_StateInvariantValue->getCovered()->clear();
+		}
+		else
+		{
+			/* Should use PSCS::CS_Reference but dynamic_pointer_cast fails --> using fUML::Reference instead
+			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(value); */
+			std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> reference = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Reference>(value);
+			std::shared_ptr<UML::LifelineObject> inputValue = std::dynamic_pointer_cast<UML::LifelineObject>(reference->getReferent());
+			if (inputValue != nullptr)
+			{
+				m_StateInvariantValue->getCovered()->erase(inputValue->getLifelineValue());
+			}
+		}
+	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_InteractionFragment_enclosingInteraction())
 	{
 				m_StateInvariantValue->getEnclosingInteraction().reset();
@@ -326,6 +346,23 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> StateInvariantObject::getVa
 		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
 		reference->setReferent(value);
 		values->add(reference);
+	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_InteractionFragment_covered())
+	{
+		std::shared_ptr<Bag<uml::Lifeline>> coveredList = m_StateInvariantValue->getCovered();
+		Bag<uml::Lifeline>::iterator iter = coveredList->begin();
+		Bag<uml::Lifeline>::iterator end = coveredList->end();
+		while (iter != end)
+		{
+			std::shared_ptr<UML::LifelineObject> value(new UML::LifelineObject());
+			value->setThisLifelineObjectPtr(value);
+			value->setLocus(this->getLocus());
+			value->setLifelineValue(*iter);
+			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
+			reference->setReferent(value);
+			values->add(reference);
+			iter++;
+		} 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_InteractionFragment_enclosingInteraction())
 	{
@@ -511,6 +548,24 @@ void StateInvariantObject::setFeatureValue(std::shared_ptr<uml::StructuralFeatur
 			iter++;
 		}
 	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_InteractionFragment_covered())
+	{
+		Bag<fUML::Semantics::Values::Value>::iterator iter = values->begin();
+		Bag<fUML::Semantics::Values::Value>::iterator end = values->end();
+		m_StateInvariantValue->getCovered()->clear();
+		while (iter != end)
+		{
+			std::shared_ptr<fUML::Semantics::Values::Value> inputValue = *iter;
+			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(inputValue);
+			std::shared_ptr<UML::LifelineObject> value = std::dynamic_pointer_cast<UML::LifelineObject>(reference->getReferent());
+			if (value != nullptr)
+			{
+				m_StateInvariantValue->getCovered()->push_back(value->getLifelineValue());
+			}
+			
+			iter++;
+		}
+	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_InteractionFragment_generalOrdering())
 	{
 		Bag<fUML::Semantics::Values::Value>::iterator iter = values->begin();
@@ -623,6 +678,10 @@ std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> StateInva
 			featureValues->add(this->retrieveFeatureValue(property));
 		}
 		if (property == UML::UMLPackage::eInstance()->get_UML_Element_owner() && m_StateInvariantValue->getOwner().lock() != nullptr)
+		{
+			featureValues->add(this->retrieveFeatureValue(property));
+		}
+		if (property == UML::UMLPackage::eInstance()->get_UML_InteractionFragment_covered() && m_StateInvariantValue->getCovered() != nullptr)
 		{
 			featureValues->add(this->retrieveFeatureValue(property));
 		}

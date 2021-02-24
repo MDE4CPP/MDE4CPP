@@ -41,10 +41,10 @@
 #include "fUML/Semantics/Activities/impl/ActivitiesFactoryImpl.hpp"
 #include "fUML/Semantics/Activities/impl/ActivitiesPackageImpl.hpp"
 
-#include "fUML/fUMLFactory.hpp"
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsFactory.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLFactory.hpp"
+#include "fUML/fUMLPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"

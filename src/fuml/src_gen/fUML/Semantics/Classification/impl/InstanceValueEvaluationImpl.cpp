@@ -65,10 +65,10 @@
 #include "fUML/Semantics/Classification/impl/ClassificationFactoryImpl.hpp"
 #include "fUML/Semantics/Classification/impl/ClassificationPackageImpl.hpp"
 
-#include "fUML/fUMLFactory.hpp"
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsFactory.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLFactory.hpp"
+#include "fUML/fUMLPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"

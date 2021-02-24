@@ -41,6 +41,8 @@
 #include "umlReflectionExec/ConstraintObject.hpp"
 #include "uml/Constraint.hpp"
 #include "umlReflectionExec/ConstraintObject.hpp"
+#include "uml/Behavior.hpp"
+#include "umlReflectionExec/BehaviorObject.hpp"
 #include "uml/BehavioralFeature.hpp"
 #include "umlReflectionExec/BehavioralFeatureObject.hpp"
 #include "uml/Behavior.hpp"
@@ -69,10 +71,13 @@
 #include "umlReflectionExec/CollaborationUseObject.hpp"
 #include "uml/Feature.hpp"
 #include "umlReflectionExec/FeatureObject.hpp"
+#include "uml/Classifier.hpp"
+#include "umlReflectionExec/ClassifierObject.hpp"
 #include "uml/Generalization.hpp"
 #include "umlReflectionExec/GeneralizationObject.hpp"
 #include "uml/NamedElement.hpp"
 #include "umlReflectionExec/NamedElementObject.hpp"
+#include "fUML/Semantics/SimpleClassifiers/BooleanValue.hpp"
 #include "fUML/Semantics/SimpleClassifiers/BooleanValue.hpp"
 #include "uml/RedefinableTemplateSignature.hpp"
 #include "umlReflectionExec/RedefinableTemplateSignatureObject.hpp"
@@ -124,6 +129,8 @@
 #include "uml/VisibilityKind.hpp"
 #include "uml/TemplateParameter.hpp"
 #include "umlReflectionExec/TemplateParameterObject.hpp"
+#include "uml/TemplateParameter.hpp"
+#include "umlReflectionExec/TemplateParameterObject.hpp"
 #include "fUML/Semantics/SimpleClassifiers/BooleanValue.hpp"
 #include "uml/RedefinableElement.hpp"
 #include "umlReflectionExec/RedefinableElementObject.hpp"
@@ -137,12 +144,16 @@
 #include "umlReflectionExec/RegionObject.hpp"
 #include "uml/State.hpp"
 #include "umlReflectionExec/StateObject.hpp"
+#include "uml/Property.hpp"
+#include "umlReflectionExec/PropertyObject.hpp"
 #include "uml/Connector.hpp"
 #include "umlReflectionExec/ConnectorObject.hpp"
 #include "uml/Property.hpp"
 #include "umlReflectionExec/PropertyObject.hpp"
 #include "uml/ConnectableElement.hpp"
 #include "umlReflectionExec/ConnectableElementObject.hpp"
+#include "uml/TemplateSignature.hpp"
+#include "umlReflectionExec/TemplateSignatureObject.hpp"
 #include "uml/TemplateBinding.hpp"
 #include "umlReflectionExec/TemplateBindingObject.hpp"
 #include "uml/Package.hpp"
@@ -360,6 +371,24 @@ void StateMachineObject::removeValue(std::shared_ptr<uml::StructuralFeature> fea
 			}
 		}
 	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_Behavior_redefinedBehavior())
+	{
+		if (value == nullptr) // clear mode
+		{
+			m_StateMachineValue->getRedefinedBehavior()->clear();
+		}
+		else
+		{
+			/* Should use PSCS::CS_Reference but dynamic_pointer_cast fails --> using fUML::Reference instead
+			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(value); */
+			std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> reference = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Reference>(value);
+			std::shared_ptr<UML::BehaviorObject> inputValue = std::dynamic_pointer_cast<UML::BehaviorObject>(reference->getReferent());
+			if (inputValue != nullptr)
+			{
+				m_StateMachineValue->getRedefinedBehavior()->erase(inputValue->getBehaviorValue());
+			}
+		}
+	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Behavior_specification())
 	{
 				m_StateMachineValue->getSpecification().reset();
@@ -524,6 +553,24 @@ void StateMachineObject::removeValue(std::shared_ptr<uml::StructuralFeature> fea
 			}
 		}
 	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_general())
+	{
+		if (value == nullptr) // clear mode
+		{
+			m_StateMachineValue->getGeneral()->clear();
+		}
+		else
+		{
+			/* Should use PSCS::CS_Reference but dynamic_pointer_cast fails --> using fUML::Reference instead
+			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(value); */
+			std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> reference = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Reference>(value);
+			std::shared_ptr<UML::ClassifierObject> inputValue = std::dynamic_pointer_cast<UML::ClassifierObject>(reference->getReferent());
+			if (inputValue != nullptr)
+			{
+				m_StateMachineValue->getGeneral()->erase(inputValue->getClassifierValue());
+			}
+		}
+	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_generalization())
 	{
 		if (value == nullptr) // clear mode
@@ -541,6 +588,11 @@ void StateMachineObject::removeValue(std::shared_ptr<uml::StructuralFeature> fea
 				m_StateMachineValue->getGeneralization()->erase(inputValue->getGeneralizationValue());
 			}
 		}
+	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_isAbstract())
+	{
+				m_StateMachineValue->setIsAbstract(false /*defined default value*/);
+
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_isFinalSpecialization())
 	{
@@ -749,6 +801,11 @@ void StateMachineObject::removeValue(std::shared_ptr<uml::StructuralFeature> fea
 				m_StateMachineValue->getOwningTemplateParameter().reset();
 
 	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_templateParameter())
+	{
+				m_StateMachineValue->getTemplateParameter().reset();
+
+	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_RedefinableElement_isLeaf())
 	{
 				m_StateMachineValue->setIsLeaf(false /*defined default value*/);
@@ -826,6 +883,24 @@ void StateMachineObject::removeValue(std::shared_ptr<uml::StructuralFeature> fea
 			}
 		}
 	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_StructuredClassifier_ownedAttribute())
+	{
+		if (value == nullptr) // clear mode
+		{
+			m_StateMachineValue->getOwnedAttribute()->clear();
+		}
+		else
+		{
+			/* Should use PSCS::CS_Reference but dynamic_pointer_cast fails --> using fUML::Reference instead
+			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(value); */
+			std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> reference = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Reference>(value);
+			std::shared_ptr<UML::PropertyObject> inputValue = std::dynamic_pointer_cast<UML::PropertyObject>(reference->getReferent());
+			if (inputValue != nullptr)
+			{
+				m_StateMachineValue->getOwnedAttribute()->erase(inputValue->getPropertyValue());
+			}
+		}
+	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_StructuredClassifier_ownedConnector())
 	{
 		if (value == nullptr) // clear mode
@@ -843,6 +918,11 @@ void StateMachineObject::removeValue(std::shared_ptr<uml::StructuralFeature> fea
 				m_StateMachineValue->getOwnedConnector()->erase(inputValue->getConnectorValue());
 			}
 		}
+	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateableElement_ownedTemplateSignature())
+	{
+				m_StateMachineValue->getOwnedTemplateSignature().reset();
+
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateableElement_templateBinding())
 	{
@@ -969,6 +1049,23 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> StateMachineObject::getValu
 			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
 			reference->setReferent(value);
 			reference->setCompositeReferent(value);
+			values->add(reference);
+			iter++;
+		} 
+	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_Behavior_redefinedBehavior())
+	{
+		std::shared_ptr<Bag<uml::Behavior>> redefinedBehaviorList = m_StateMachineValue->getRedefinedBehavior();
+		Bag<uml::Behavior>::iterator iter = redefinedBehaviorList->begin();
+		Bag<uml::Behavior>::iterator end = redefinedBehaviorList->end();
+		while (iter != end)
+		{
+			std::shared_ptr<UML::BehaviorObject> value(new UML::BehaviorObject());
+			value->setThisBehaviorObjectPtr(value);
+			value->setLocus(this->getLocus());
+			value->setBehaviorValue(*iter);
+			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
+			reference->setReferent(value);
 			values->add(reference);
 			iter++;
 		} 
@@ -1199,6 +1296,23 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> StateMachineObject::getValu
 			iter++;
 		} 
 	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_general())
+	{
+		std::shared_ptr<Bag<uml::Classifier>> generalList = m_StateMachineValue->getGeneral();
+		Bag<uml::Classifier>::iterator iter = generalList->begin();
+		Bag<uml::Classifier>::iterator end = generalList->end();
+		while (iter != end)
+		{
+			std::shared_ptr<UML::ClassifierObject> value(new UML::ClassifierObject());
+			value->setThisClassifierObjectPtr(value);
+			value->setLocus(this->getLocus());
+			value->setClassifierValue(*iter);
+			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
+			reference->setReferent(value);
+			values->add(reference);
+			iter++;
+		} 
+	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_generalization())
 	{
 		std::shared_ptr<Bag<uml::Generalization>> generalizationList = m_StateMachineValue->getGeneralization();
@@ -1233,6 +1347,12 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> StateMachineObject::getValu
 			values->add(reference);
 			iter++;
 		} 
+	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_isAbstract())
+	{
+		std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> value = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createBooleanValue();
+		value->setValue(m_StateMachineValue->getIsAbstract());
+		values->add(value);
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_isFinalSpecialization())
 	{
@@ -1632,6 +1752,16 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> StateMachineObject::getValu
 		reference->setReferent(value);
 		values->add(reference);
 	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_templateParameter())
+	{
+		std::shared_ptr<UML::TemplateParameterObject> value(new UML::TemplateParameterObject());
+		value->setThisTemplateParameterObjectPtr(value);
+		value->setLocus(this->getLocus());
+		value->setTemplateParameterValue(m_StateMachineValue->getTemplateParameter());
+		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
+		reference->setReferent(value);
+		values->add(reference);
+	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_RedefinableElement_isLeaf())
 	{
 		std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> value = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createBooleanValue();
@@ -1742,6 +1872,24 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> StateMachineObject::getValu
 			iter++;
 		} 
 	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_StructuredClassifier_ownedAttribute())
+	{
+		std::shared_ptr<Bag<uml::Property>> ownedAttributeList = m_StateMachineValue->getOwnedAttribute();
+		Bag<uml::Property>::iterator iter = ownedAttributeList->begin();
+		Bag<uml::Property>::iterator end = ownedAttributeList->end();
+		while (iter != end)
+		{
+			std::shared_ptr<UML::PropertyObject> value(new UML::PropertyObject());
+			value->setThisPropertyObjectPtr(value);
+			value->setLocus(this->getLocus());
+			value->setPropertyValue(*iter);
+			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
+			reference->setReferent(value);
+			reference->setCompositeReferent(value);
+			values->add(reference);
+			iter++;
+		} 
+	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_StructuredClassifier_ownedConnector())
 	{
 		std::shared_ptr<Bag<uml::Connector>> ownedConnectorList = m_StateMachineValue->getOwnedConnector();
@@ -1793,6 +1941,17 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> StateMachineObject::getValu
 			values->add(reference);
 			iter++;
 		} 
+	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateableElement_ownedTemplateSignature())
+	{
+		std::shared_ptr<UML::TemplateSignatureObject> value(new UML::TemplateSignatureObject());
+		value->setThisTemplateSignatureObjectPtr(value);
+		value->setLocus(this->getLocus());
+		value->setTemplateSignatureValue(m_StateMachineValue->getOwnedTemplateSignature());
+		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
+		reference->setReferent(value);
+		reference->setCompositeReferent(value);
+		values->add(reference);
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateableElement_templateBinding())
 	{
@@ -1939,6 +2098,24 @@ void StateMachineObject::setFeatureValue(std::shared_ptr<uml::StructuralFeature>
 			if (value != nullptr)
 			{
 				m_StateMachineValue->getPrecondition()->push_back(value->getConstraintValue());
+			}
+			
+			iter++;
+		}
+	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_Behavior_redefinedBehavior())
+	{
+		Bag<fUML::Semantics::Values::Value>::iterator iter = values->begin();
+		Bag<fUML::Semantics::Values::Value>::iterator end = values->end();
+		m_StateMachineValue->getRedefinedBehavior()->clear();
+		while (iter != end)
+		{
+			std::shared_ptr<fUML::Semantics::Values::Value> inputValue = *iter;
+			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(inputValue);
+			std::shared_ptr<UML::BehaviorObject> value = std::dynamic_pointer_cast<UML::BehaviorObject>(reference->getReferent());
+			if (value != nullptr)
+			{
+				m_StateMachineValue->getRedefinedBehavior()->push_back(value->getBehaviorValue());
 			}
 			
 			iter++;
@@ -2130,6 +2307,24 @@ void StateMachineObject::setFeatureValue(std::shared_ptr<uml::StructuralFeature>
 			iter++;
 		}
 	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_general())
+	{
+		Bag<fUML::Semantics::Values::Value>::iterator iter = values->begin();
+		Bag<fUML::Semantics::Values::Value>::iterator end = values->end();
+		m_StateMachineValue->getGeneral()->clear();
+		while (iter != end)
+		{
+			std::shared_ptr<fUML::Semantics::Values::Value> inputValue = *iter;
+			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(inputValue);
+			std::shared_ptr<UML::ClassifierObject> value = std::dynamic_pointer_cast<UML::ClassifierObject>(reference->getReferent());
+			if (value != nullptr)
+			{
+				m_StateMachineValue->getGeneral()->push_back(value->getClassifierValue());
+			}
+			
+			iter++;
+		}
+	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_generalization())
 	{
 		Bag<fUML::Semantics::Values::Value>::iterator iter = values->begin();
@@ -2147,6 +2342,16 @@ void StateMachineObject::setFeatureValue(std::shared_ptr<uml::StructuralFeature>
 			
 			iter++;
 		}
+	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_isAbstract())
+	{
+		std::shared_ptr<fUML::Semantics::Values::Value> inputValue = values->at(0);
+		std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> valueObject = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::BooleanValue>(inputValue);
+		if (valueObject != nullptr)
+		{
+			m_StateMachineValue->setIsAbstract(valueObject->isValue());
+		}
+		
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_isFinalSpecialization())
 	{
@@ -2420,6 +2625,17 @@ void StateMachineObject::setFeatureValue(std::shared_ptr<uml::StructuralFeature>
 		}
 		
 	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_templateParameter())
+	{
+		std::shared_ptr<fUML::Semantics::Values::Value> inputValue = values->at(0);
+		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(inputValue);
+		std::shared_ptr<UML::TemplateParameterObject> value = std::dynamic_pointer_cast<UML::TemplateParameterObject>(reference->getReferent());
+		if (value != nullptr)
+		{
+			m_StateMachineValue->setTemplateParameter(value->getTemplateParameterValue());
+		}
+		
+	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_RedefinableElement_isLeaf())
 	{
 		std::shared_ptr<fUML::Semantics::Values::Value> inputValue = values->at(0);
@@ -2502,6 +2718,24 @@ void StateMachineObject::setFeatureValue(std::shared_ptr<uml::StructuralFeature>
 			iter++;
 		}
 	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_StructuredClassifier_ownedAttribute())
+	{
+		Bag<fUML::Semantics::Values::Value>::iterator iter = values->begin();
+		Bag<fUML::Semantics::Values::Value>::iterator end = values->end();
+		m_StateMachineValue->getOwnedAttribute()->clear();
+		while (iter != end)
+		{
+			std::shared_ptr<fUML::Semantics::Values::Value> inputValue = *iter;
+			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(inputValue);
+			std::shared_ptr<UML::PropertyObject> value = std::dynamic_pointer_cast<UML::PropertyObject>(reference->getReferent());
+			if (value != nullptr)
+			{
+				m_StateMachineValue->getOwnedAttribute()->push_back(value->getPropertyValue());
+			}
+			
+			iter++;
+		}
+	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_StructuredClassifier_ownedConnector())
 	{
 		Bag<fUML::Semantics::Values::Value>::iterator iter = values->begin();
@@ -2519,6 +2753,17 @@ void StateMachineObject::setFeatureValue(std::shared_ptr<uml::StructuralFeature>
 			
 			iter++;
 		}
+	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateableElement_ownedTemplateSignature())
+	{
+		std::shared_ptr<fUML::Semantics::Values::Value> inputValue = values->at(0);
+		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(inputValue);
+		std::shared_ptr<UML::TemplateSignatureObject> value = std::dynamic_pointer_cast<UML::TemplateSignatureObject>(reference->getReferent());
+		if (value != nullptr)
+		{
+			m_StateMachineValue->setOwnedTemplateSignature(value->getTemplateSignatureValue());
+		}
+		
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateableElement_templateBinding())
 	{
@@ -2576,6 +2821,10 @@ std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> StateMach
 		{
 			featureValues->add(this->retrieveFeatureValue(property));
 		}
+		if (property == UML::UMLPackage::eInstance()->get_UML_Behavior_redefinedBehavior() && m_StateMachineValue->getRedefinedBehavior() != nullptr)
+		{
+			featureValues->add(this->retrieveFeatureValue(property));
+		}
 		if (property == UML::UMLPackage::eInstance()->get_UML_Behavior_specification() && m_StateMachineValue->getSpecification() != nullptr)
 		{
 			featureValues->add(this->retrieveFeatureValue(property));
@@ -2625,6 +2874,10 @@ std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> StateMach
 			featureValues->add(this->retrieveFeatureValue(property));
 		}
 		if (property == UML::UMLPackage::eInstance()->get_UML_Classifier_feature() && m_StateMachineValue->getFeature() != nullptr)
+		{
+			featureValues->add(this->retrieveFeatureValue(property));
+		}
+		if (property == UML::UMLPackage::eInstance()->get_UML_Classifier_general() && m_StateMachineValue->getGeneral() != nullptr)
 		{
 			featureValues->add(this->retrieveFeatureValue(property));
 		}
@@ -2724,6 +2977,10 @@ std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> StateMach
 		{
 			featureValues->add(this->retrieveFeatureValue(property));
 		}
+		if (property == UML::UMLPackage::eInstance()->get_UML_ParameterableElement_templateParameter() && m_StateMachineValue->getTemplateParameter() != nullptr)
+		{
+			featureValues->add(this->retrieveFeatureValue(property));
+		}
 		if (property == UML::UMLPackage::eInstance()->get_UML_RedefinableElement_redefinedElement() && m_StateMachineValue->getRedefinedElement() != nullptr)
 		{
 			featureValues->add(this->retrieveFeatureValue(property));
@@ -2748,6 +3005,10 @@ std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> StateMach
 		{
 			featureValues->add(this->retrieveFeatureValue(property));
 		}
+		if (property == UML::UMLPackage::eInstance()->get_UML_StructuredClassifier_ownedAttribute() && m_StateMachineValue->getOwnedAttribute() != nullptr)
+		{
+			featureValues->add(this->retrieveFeatureValue(property));
+		}
 		if (property == UML::UMLPackage::eInstance()->get_UML_StructuredClassifier_ownedConnector() && m_StateMachineValue->getOwnedConnector() != nullptr)
 		{
 			featureValues->add(this->retrieveFeatureValue(property));
@@ -2757,6 +3018,10 @@ std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> StateMach
 			featureValues->add(this->retrieveFeatureValue(property));
 		}
 		if (property == UML::UMLPackage::eInstance()->get_UML_StructuredClassifier_role() && m_StateMachineValue->getRole() != nullptr)
+		{
+			featureValues->add(this->retrieveFeatureValue(property));
+		}
+		if (property == UML::UMLPackage::eInstance()->get_UML_TemplateableElement_ownedTemplateSignature() && m_StateMachineValue->getOwnedTemplateSignature() != nullptr)
 		{
 			featureValues->add(this->retrieveFeatureValue(property));
 		}

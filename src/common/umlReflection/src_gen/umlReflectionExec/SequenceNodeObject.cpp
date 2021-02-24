@@ -45,10 +45,14 @@
 #include "umlReflectionExec/ActivityEdgeObject.hpp"
 #include "uml/ActivityNode.hpp"
 #include "umlReflectionExec/ActivityNodeObject.hpp"
+#include "uml/Activity.hpp"
+#include "umlReflectionExec/ActivityObject.hpp"
 #include "uml/ActivityGroup.hpp"
 #include "umlReflectionExec/ActivityGroupObject.hpp"
 #include "uml/ActivityGroup.hpp"
 #include "umlReflectionExec/ActivityGroupObject.hpp"
+#include "uml/Activity.hpp"
+#include "umlReflectionExec/ActivityObject.hpp"
 #include "uml/ActivityGroup.hpp"
 #include "umlReflectionExec/ActivityGroupObject.hpp"
 #include "uml/InterruptibleActivityRegion.hpp"
@@ -105,6 +109,8 @@
 #include "uml/ActivityEdge.hpp"
 #include "umlReflectionExec/ActivityEdgeObject.hpp"
 #include "fUML/Semantics/SimpleClassifiers/BooleanValue.hpp"
+#include "uml/ActivityNode.hpp"
+#include "umlReflectionExec/ActivityNodeObject.hpp"
 #include "uml/InputPin.hpp"
 #include "umlReflectionExec/InputPinObject.hpp"
 #include "uml/OutputPin.hpp"
@@ -287,6 +293,16 @@ void SequenceNodeObject::removeValue(std::shared_ptr<uml::StructuralFeature> fea
 				m_SequenceNodeValue->getLocalPrecondition()->erase(inputValue->getConstraintValue());
 			}
 		}
+	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityGroup_inActivity())
+	{
+				m_SequenceNodeValue->getInActivity().reset();
+
+	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_activity())
+	{
+				m_SequenceNodeValue->getActivity().reset();
+
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inInterruptibleRegion())
 	{
@@ -539,6 +555,24 @@ void SequenceNodeObject::removeValue(std::shared_ptr<uml::StructuralFeature> fea
 				m_SequenceNodeValue->setMustIsolate(false /*defined default value*/);
 
 	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_StructuredActivityNode_node())
+	{
+		if (value == nullptr) // clear mode
+		{
+			m_SequenceNodeValue->getNode()->clear();
+		}
+		else
+		{
+			/* Should use PSCS::CS_Reference but dynamic_pointer_cast fails --> using fUML::Reference instead
+			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(value); */
+			std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> reference = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Reference>(value);
+			std::shared_ptr<UML::ActivityNodeObject> inputValue = std::dynamic_pointer_cast<UML::ActivityNodeObject>(reference->getReferent());
+			if (inputValue != nullptr)
+			{
+				m_SequenceNodeValue->getNode()->erase(inputValue->getActivityNodeValue());
+			}
+		}
+	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_StructuredActivityNode_structuredNodeInput())
 	{
 		if (value == nullptr) // clear mode
@@ -733,6 +767,16 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> SequenceNodeObject::getValu
 			iter++;
 		} 
 	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityGroup_inActivity())
+	{
+		std::shared_ptr<UML::ActivityObject> value(new UML::ActivityObject());
+		value->setThisActivityObjectPtr(value);
+		value->setLocus(this->getLocus());
+		value->setActivityValue(m_SequenceNodeValue->getInActivity().lock());
+		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
+		reference->setReferent(value);
+		values->add(reference);
+	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityGroup_subgroup())
 	{
 		std::shared_ptr<Bag<uml::ActivityGroup>> subgroupList = m_SequenceNodeValue->getSubgroup();
@@ -757,6 +801,16 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> SequenceNodeObject::getValu
 		value->setThisActivityGroupObjectPtr(value);
 		value->setLocus(this->getLocus());
 		value->setActivityGroupValue(m_SequenceNodeValue->getSuperGroup().lock());
+		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
+		reference->setReferent(value);
+		values->add(reference);
+	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_activity())
+	{
+		std::shared_ptr<UML::ActivityObject> value(new UML::ActivityObject());
+		value->setThisActivityObjectPtr(value);
+		value->setLocus(this->getLocus());
+		value->setActivityValue(m_SequenceNodeValue->getActivity().lock());
 		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
 		reference->setReferent(value);
 		values->add(reference);
@@ -1207,6 +1261,24 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> SequenceNodeObject::getValu
 		value->setValue(m_SequenceNodeValue->getMustIsolate());
 		values->add(value);
 	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_StructuredActivityNode_node())
+	{
+		std::shared_ptr<Bag<uml::ActivityNode>> nodeList = m_SequenceNodeValue->getNode();
+		Bag<uml::ActivityNode>::iterator iter = nodeList->begin();
+		Bag<uml::ActivityNode>::iterator end = nodeList->end();
+		while (iter != end)
+		{
+			std::shared_ptr<UML::ActivityNodeObject> value(new UML::ActivityNodeObject());
+			value->setThisActivityNodeObjectPtr(value);
+			value->setLocus(this->getLocus());
+			value->setActivityNodeValue(*iter);
+			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
+			reference->setReferent(value);
+			reference->setCompositeReferent(value);
+			values->add(reference);
+			iter++;
+		} 
+	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_StructuredActivityNode_structuredNodeInput())
 	{
 		std::shared_ptr<Bag<uml::InputPin>> structuredNodeInputList = m_SequenceNodeValue->getStructuredNodeInput();
@@ -1627,6 +1699,24 @@ void SequenceNodeObject::setFeatureValue(std::shared_ptr<uml::StructuralFeature>
 		}
 		
 	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_StructuredActivityNode_node())
+	{
+		Bag<fUML::Semantics::Values::Value>::iterator iter = values->begin();
+		Bag<fUML::Semantics::Values::Value>::iterator end = values->end();
+		m_SequenceNodeValue->getNode()->clear();
+		while (iter != end)
+		{
+			std::shared_ptr<fUML::Semantics::Values::Value> inputValue = *iter;
+			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(inputValue);
+			std::shared_ptr<UML::ActivityNodeObject> value = std::dynamic_pointer_cast<UML::ActivityNodeObject>(reference->getReferent());
+			if (value != nullptr)
+			{
+				m_SequenceNodeValue->getNode()->push_back(value->getActivityNodeValue());
+			}
+			
+			iter++;
+		}
+	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_StructuredActivityNode_structuredNodeInput())
 	{
 		Bag<fUML::Semantics::Values::Value>::iterator iter = values->begin();
@@ -1727,11 +1817,19 @@ std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> SequenceN
 		{
 			featureValues->add(this->retrieveFeatureValue(property));
 		}
+		if (property == UML::UMLPackage::eInstance()->get_UML_ActivityGroup_inActivity() && m_SequenceNodeValue->getInActivity().lock() != nullptr)
+		{
+			featureValues->add(this->retrieveFeatureValue(property));
+		}
 		if (property == UML::UMLPackage::eInstance()->get_UML_ActivityGroup_subgroup() && m_SequenceNodeValue->getSubgroup() != nullptr)
 		{
 			featureValues->add(this->retrieveFeatureValue(property));
 		}
 		if (property == UML::UMLPackage::eInstance()->get_UML_ActivityGroup_superGroup() && m_SequenceNodeValue->getSuperGroup().lock() != nullptr)
+		{
+			featureValues->add(this->retrieveFeatureValue(property));
+		}
+		if (property == UML::UMLPackage::eInstance()->get_UML_ActivityNode_activity() && m_SequenceNodeValue->getActivity().lock() != nullptr)
 		{
 			featureValues->add(this->retrieveFeatureValue(property));
 		}
@@ -1832,6 +1930,10 @@ std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> SequenceN
 			featureValues->add(this->retrieveFeatureValue(property));
 		}
 		if (property == UML::UMLPackage::eInstance()->get_UML_StructuredActivityNode_edge() && m_SequenceNodeValue->getEdge() != nullptr)
+		{
+			featureValues->add(this->retrieveFeatureValue(property));
+		}
+		if (property == UML::UMLPackage::eInstance()->get_UML_StructuredActivityNode_node() && m_SequenceNodeValue->getNode() != nullptr)
 		{
 			featureValues->add(this->retrieveFeatureValue(property));
 		}

@@ -44,6 +44,8 @@
 #include "umlReflectionExec/EnumerationObject.hpp"
 #include "uml/Enumeration.hpp"
 #include "umlReflectionExec/EnumerationObject.hpp"
+#include "uml/Classifier.hpp"
+#include "umlReflectionExec/ClassifierObject.hpp"
 #include "uml/Slot.hpp"
 #include "umlReflectionExec/SlotObject.hpp"
 #include "uml/ValueSpecification.hpp"
@@ -241,6 +243,24 @@ void EnumerationLiteralObject::removeValue(std::shared_ptr<uml::StructuralFeatur
 				m_EnumerationLiteralValue->getEnumeration().reset();
 
 	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_InstanceSpecification_classifier())
+	{
+		if (value == nullptr) // clear mode
+		{
+			m_EnumerationLiteralValue->getClassifier()->clear();
+		}
+		else
+		{
+			/* Should use PSCS::CS_Reference but dynamic_pointer_cast fails --> using fUML::Reference instead
+			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(value); */
+			std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> reference = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Reference>(value);
+			std::shared_ptr<UML::ClassifierObject> inputValue = std::dynamic_pointer_cast<UML::ClassifierObject>(reference->getReferent());
+			if (inputValue != nullptr)
+			{
+				m_EnumerationLiteralValue->getClassifier()->erase(inputValue->getClassifierValue());
+			}
+		}
+	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_InstanceSpecification_slot())
 	{
 		if (value == nullptr) // clear mode
@@ -407,6 +427,23 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> EnumerationLiteralObject::g
 		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
 		reference->setReferent(value);
 		values->add(reference);
+	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_InstanceSpecification_classifier())
+	{
+		std::shared_ptr<Bag<uml::Classifier>> classifierList = m_EnumerationLiteralValue->getClassifier();
+		Bag<uml::Classifier>::iterator iter = classifierList->begin();
+		Bag<uml::Classifier>::iterator end = classifierList->end();
+		while (iter != end)
+		{
+			std::shared_ptr<UML::ClassifierObject> value(new UML::ClassifierObject());
+			value->setThisClassifierObjectPtr(value);
+			value->setLocus(this->getLocus());
+			value->setClassifierValue(*iter);
+			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
+			reference->setReferent(value);
+			values->add(reference);
+			iter++;
+		} 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_InstanceSpecification_slot())
 	{
@@ -627,6 +664,24 @@ void EnumerationLiteralObject::setFeatureValue(std::shared_ptr<uml::StructuralFe
 			iter++;
 		}
 	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_InstanceSpecification_classifier())
+	{
+		Bag<fUML::Semantics::Values::Value>::iterator iter = values->begin();
+		Bag<fUML::Semantics::Values::Value>::iterator end = values->end();
+		m_EnumerationLiteralValue->getClassifier()->clear();
+		while (iter != end)
+		{
+			std::shared_ptr<fUML::Semantics::Values::Value> inputValue = *iter;
+			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(inputValue);
+			std::shared_ptr<UML::ClassifierObject> value = std::dynamic_pointer_cast<UML::ClassifierObject>(reference->getReferent());
+			if (value != nullptr)
+			{
+				m_EnumerationLiteralValue->getClassifier()->push_back(value->getClassifierValue());
+			}
+			
+			iter++;
+		}
+	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_InstanceSpecification_slot())
 	{
 		Bag<fUML::Semantics::Values::Value>::iterator iter = values->begin();
@@ -777,6 +832,10 @@ std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> Enumerati
 			featureValues->add(this->retrieveFeatureValue(property));
 		}
 		if (property == UML::UMLPackage::eInstance()->get_UML_EnumerationLiteral_enumeration() && m_EnumerationLiteralValue->getEnumeration().lock() != nullptr)
+		{
+			featureValues->add(this->retrieveFeatureValue(property));
+		}
+		if (property == UML::UMLPackage::eInstance()->get_UML_InstanceSpecification_classifier() && m_EnumerationLiteralValue->getClassifier() != nullptr)
 		{
 			featureValues->add(this->retrieveFeatureValue(property));
 		}

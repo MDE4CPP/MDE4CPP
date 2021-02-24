@@ -63,10 +63,10 @@
 #include "fUML/Semantics/CommonBehavior/impl/CommonBehaviorFactoryImpl.hpp"
 #include "fUML/Semantics/CommonBehavior/impl/CommonBehaviorPackageImpl.hpp"
 
-#include "fUML/fUMLFactory.hpp"
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsFactory.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLFactory.hpp"
+#include "fUML/fUMLPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -268,14 +268,8 @@ Getter & Setter for reference behavior
 */
 std::shared_ptr<uml::Behavior > ExecutionImpl::getBehavior() const
 {
-	//generated from getterbody annotation
-if(!m_behavior)
-{
-	m_behavior = std::dynamic_pointer_cast<uml::Behavior>(this->getTypes()->front());
-}
-
-return m_behavior;
-	//end of body
+//assert(m_behavior);
+    return m_behavior;
 }
 
 void ExecutionImpl::setBehavior(std::shared_ptr<uml::Behavior> _behavior)

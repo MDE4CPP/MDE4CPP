@@ -34,12 +34,16 @@
 #include "umlReflectionExec/ElementObject.hpp"
 #include "uml/Namespace.hpp"
 #include "umlReflectionExec/NamespaceObject.hpp"
+#include "uml/ValueSpecification.hpp"
+#include "umlReflectionExec/ValueSpecificationObject.hpp"
 #include "uml/Comment.hpp"
 #include "umlReflectionExec/CommentObject.hpp"
 #include "uml/Element.hpp"
 #include "umlReflectionExec/ElementObject.hpp"
 #include "uml/Element.hpp"
 #include "umlReflectionExec/ElementObject.hpp"
+#include "uml/Interval.hpp"
+#include "umlReflectionExec/IntervalObject.hpp"
 #include "uml/Dependency.hpp"
 #include "umlReflectionExec/DependencyObject.hpp"
 #include "fUML/Semantics/SimpleClassifiers/StringValue.hpp"
@@ -48,6 +52,8 @@
 #include "uml/Namespace.hpp"
 #include "umlReflectionExec/NamespaceObject.hpp"
 #include "fUML/Semantics/SimpleClassifiers/StringValue.hpp"
+#include "fUML/Semantics/SimpleClassifiers/EnumerationValue.hpp"
+#include "uml/VisibilityKind.hpp"
 #include "fUML/Semantics/SimpleClassifiers/EnumerationValue.hpp"
 #include "uml/VisibilityKind.hpp"
 #include "uml/TemplateParameter.hpp"
@@ -216,6 +222,11 @@ void TimeConstraintObject::removeValue(std::shared_ptr<uml::StructuralFeature> f
 				m_TimeConstraintValue->getContext().reset();
 
 	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_Constraint_specification())
+	{
+				m_TimeConstraintValue->getSpecification().reset();
+
+	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedComment())
 	{
 		if (value == nullptr) // clear mode
@@ -234,6 +245,11 @@ void TimeConstraintObject::removeValue(std::shared_ptr<uml::StructuralFeature> f
 			}
 		}
 	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_IntervalConstraint_specification())
+	{
+				m_TimeConstraintValue->getSpecification().reset();
+
+	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_name())
 	{
 				// no default value defined, clear not realized
@@ -242,6 +258,11 @@ void TimeConstraintObject::removeValue(std::shared_ptr<uml::StructuralFeature> f
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_nameExpression())
 	{
 				m_TimeConstraintValue->getNameExpression().reset();
+
+	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
+	{
+				// no default value defined, clear not realized
 
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_PackageableElement_visibility())
@@ -314,6 +335,17 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> TimeConstraintObject::getVa
 		reference->setReferent(value);
 		values->add(reference);
 	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_Constraint_specification())
+	{
+		std::shared_ptr<UML::ValueSpecificationObject> value(new UML::ValueSpecificationObject());
+		value->setThisValueSpecificationObjectPtr(value);
+		value->setLocus(this->getLocus());
+		value->setValueSpecificationValue(m_TimeConstraintValue->getSpecification());
+		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
+		reference->setReferent(value);
+		reference->setCompositeReferent(value);
+		values->add(reference);
+	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedComment())
 	{
 		std::shared_ptr<Bag<uml::Comment>> ownedCommentList = m_TimeConstraintValue->getOwnedComment();
@@ -358,6 +390,17 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> TimeConstraintObject::getVa
 		value->setElementValue(m_TimeConstraintValue->getOwner().lock());
 		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
 		reference->setReferent(value);
+		values->add(reference);
+	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_IntervalConstraint_specification())
+	{
+		std::shared_ptr<UML::IntervalObject> value(new UML::IntervalObject());
+		value->setThisIntervalObjectPtr(value);
+		value->setLocus(this->getLocus());
+		value->setIntervalValue(std::dynamic_pointer_cast<uml::Interval>(m_TimeConstraintValue->getSpecification()));
+		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
+		reference->setReferent(value);
+		reference->setCompositeReferent(value);
 		values->add(reference);
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_clientDependency())
@@ -408,6 +451,28 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> TimeConstraintObject::getVa
 	{
 		std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> value = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createStringValue();
 		value->setValue(m_TimeConstraintValue->getQualifiedName());
+		values->add(value);
+	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
+	{
+		uml::VisibilityKind visibility = m_TimeConstraintValue->getVisibility();
+		std::shared_ptr<fUML::Semantics::SimpleClassifiers::EnumerationValue> value = fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance()->createEnumerationValue();
+		if (visibility == uml::VisibilityKind::PUBLIC)
+		{
+			value->setLiteral(UML::UMLPackage::eInstance()->get_UML_VisibilityKind_public());
+		}
+		if (visibility == uml::VisibilityKind::PRIVATE)
+		{
+			value->setLiteral(UML::UMLPackage::eInstance()->get_UML_VisibilityKind_private());
+		}
+		if (visibility == uml::VisibilityKind::PROTECTED)
+		{
+			value->setLiteral(UML::UMLPackage::eInstance()->get_UML_VisibilityKind_protected());
+		}
+		if (visibility == uml::VisibilityKind::PACKAGE)
+		{
+			value->setLiteral(UML::UMLPackage::eInstance()->get_UML_VisibilityKind_package());
+		}
 		values->add(value);
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_PackageableElement_visibility())
@@ -527,6 +592,17 @@ void TimeConstraintObject::setFeatureValue(std::shared_ptr<uml::StructuralFeatur
 			iter++;
 		}
 	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_Constraint_specification())
+	{
+		std::shared_ptr<fUML::Semantics::Values::Value> inputValue = values->at(0);
+		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(inputValue);
+		std::shared_ptr<UML::ValueSpecificationObject> value = std::dynamic_pointer_cast<UML::ValueSpecificationObject>(reference->getReferent());
+		if (value != nullptr)
+		{
+			m_TimeConstraintValue->setSpecification(value->getValueSpecificationValue());
+		}
+		
+	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedComment())
 	{
 		Bag<fUML::Semantics::Values::Value>::iterator iter = values->begin();
@@ -544,6 +620,17 @@ void TimeConstraintObject::setFeatureValue(std::shared_ptr<uml::StructuralFeatur
 			
 			iter++;
 		}
+	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_IntervalConstraint_specification())
+	{
+		std::shared_ptr<fUML::Semantics::Values::Value> inputValue = values->at(0);
+		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(inputValue);
+		std::shared_ptr<UML::IntervalObject> value = std::dynamic_pointer_cast<UML::IntervalObject>(reference->getReferent());
+		if (value != nullptr)
+		{
+			m_TimeConstraintValue->setSpecification(value->getIntervalValue());
+		}
+		
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_name())
 	{
@@ -563,6 +650,29 @@ void TimeConstraintObject::setFeatureValue(std::shared_ptr<uml::StructuralFeatur
 		if (value != nullptr)
 		{
 			m_TimeConstraintValue->setNameExpression(value->getStringExpressionValue());
+		}
+		
+	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_NamedElement_visibility())
+	{
+		std::shared_ptr<fUML::Semantics::Values::Value> inputValue = values->at(0);
+		std::shared_ptr<fUML::Semantics::SimpleClassifiers::EnumerationValue> enumValue = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::EnumerationValue>(inputValue);
+		std::shared_ptr<uml::EnumerationLiteral> literal = enumValue->getLiteral();
+		if (literal == UML::UMLPackage::eInstance()->get_UML_VisibilityKind_public())
+		{
+			m_TimeConstraintValue->setVisibility(uml::VisibilityKind::PUBLIC);
+		}
+		if (literal == UML::UMLPackage::eInstance()->get_UML_VisibilityKind_private())
+		{
+			m_TimeConstraintValue->setVisibility(uml::VisibilityKind::PRIVATE);
+		}
+		if (literal == UML::UMLPackage::eInstance()->get_UML_VisibilityKind_protected())
+		{
+			m_TimeConstraintValue->setVisibility(uml::VisibilityKind::PROTECTED);
+		}
+		if (literal == UML::UMLPackage::eInstance()->get_UML_VisibilityKind_package())
+		{
+			m_TimeConstraintValue->setVisibility(uml::VisibilityKind::PACKAGE);
 		}
 		
 	}
@@ -647,6 +757,10 @@ std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> TimeConst
 		{
 			featureValues->add(this->retrieveFeatureValue(property));
 		}
+		if (property == UML::UMLPackage::eInstance()->get_UML_Constraint_specification() && m_TimeConstraintValue->getSpecification() != nullptr)
+		{
+			featureValues->add(this->retrieveFeatureValue(property));
+		}
 		if (property == UML::UMLPackage::eInstance()->get_UML_Element_ownedComment() && m_TimeConstraintValue->getOwnedComment() != nullptr)
 		{
 			featureValues->add(this->retrieveFeatureValue(property));
@@ -656,6 +770,10 @@ std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> TimeConst
 			featureValues->add(this->retrieveFeatureValue(property));
 		}
 		if (property == UML::UMLPackage::eInstance()->get_UML_Element_owner() && m_TimeConstraintValue->getOwner().lock() != nullptr)
+		{
+			featureValues->add(this->retrieveFeatureValue(property));
+		}
+		if (property == UML::UMLPackage::eInstance()->get_UML_IntervalConstraint_specification() && m_TimeConstraintValue->getSpecification() != nullptr)
 		{
 			featureValues->add(this->retrieveFeatureValue(property));
 		}

@@ -20,7 +20,8 @@ using namespace UML;
 // Constructor / Destructor
 //*********************************
 UMLExecPluginImpl::UMLExecPluginImpl()
-{	
+{
+	initialize();
 }
 
 UMLExecPluginImpl::~UMLExecPluginImpl()

@@ -61,6 +61,8 @@
 #include "fUML/Semantics/SimpleClassifiers/BooleanValue.hpp"
 #include "uml/RedefinableElement.hpp"
 #include "umlReflectionExec/RedefinableElementObject.hpp"
+#include "uml/Classifier.hpp"
+#include "umlReflectionExec/ClassifierObject.hpp"
 #include "uml/ConnectionPointReference.hpp"
 #include "umlReflectionExec/ConnectionPointReferenceObject.hpp"
 #include "uml/Pseudostate.hpp"
@@ -695,6 +697,23 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> StateObject::getValues(std:
 			iter++;
 		} 
 	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_RedefinableElement_redefinitionContext())
+	{
+		std::shared_ptr<Bag<uml::Classifier>> redefinitionContextList = m_StateValue->getRedefinitionContext();
+		Bag<uml::Classifier>::iterator iter = redefinitionContextList->begin();
+		Bag<uml::Classifier>::iterator end = redefinitionContextList->end();
+		while (iter != end)
+		{
+			std::shared_ptr<UML::ClassifierObject> value(new UML::ClassifierObject());
+			value->setThisClassifierObjectPtr(value);
+			value->setLocus(this->getLocus());
+			value->setClassifierValue(*iter);
+			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
+			reference->setReferent(value);
+			values->add(reference);
+			iter++;
+		} 
+	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_State_connection())
 	{
 		std::shared_ptr<Bag<uml::ConnectionPointReference>> connectionList = m_StateValue->getConnection();
@@ -1275,6 +1294,10 @@ std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> StateObje
 			featureValues->add(this->retrieveFeatureValue(property));
 		}
 		if (property == UML::UMLPackage::eInstance()->get_UML_RedefinableElement_redefinedElement() && m_StateValue->getRedefinedElement() != nullptr)
+		{
+			featureValues->add(this->retrieveFeatureValue(property));
+		}
+		if (property == UML::UMLPackage::eInstance()->get_UML_RedefinableElement_redefinitionContext() && m_StateValue->getRedefinitionContext() != nullptr)
 		{
 			featureValues->add(this->retrieveFeatureValue(property));
 		}

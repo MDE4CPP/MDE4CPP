@@ -71,10 +71,10 @@
 #include "fUML/Semantics/Activities/impl/ActivitiesFactoryImpl.hpp"
 #include "fUML/Semantics/Activities/impl/ActivitiesPackageImpl.hpp"
 
-#include "fUML/fUMLFactory.hpp"
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsFactory.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLFactory.hpp"
+#include "fUML/fUMLPackage.hpp"
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -300,14 +300,8 @@ Getter & Setter for reference activity
 */
 std::shared_ptr<uml::Activity > ActivityExecutionImpl::getActivity() const
 {
-	//generated from getterbody annotation
-if(!m_activity)
-{
-	m_activity = std::dynamic_pointer_cast<uml::Activity>(this->getBehavior());
-}
-
-return m_activity;
-	//end of body
+//assert(m_activity);
+    return m_activity;
 }
 
 void ActivityExecutionImpl::setActivity(std::shared_ptr<uml::Activity> _activity)

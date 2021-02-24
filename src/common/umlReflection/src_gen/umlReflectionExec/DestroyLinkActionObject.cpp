@@ -67,6 +67,8 @@
 #include "umlReflectionExec/ElementObject.hpp"
 #include "uml/ExceptionHandler.hpp"
 #include "umlReflectionExec/ExceptionHandlerObject.hpp"
+#include "uml/LinkEndData.hpp"
+#include "umlReflectionExec/LinkEndDataObject.hpp"
 #include "uml/InputPin.hpp"
 #include "umlReflectionExec/InputPinObject.hpp"
 #include "uml/Dependency.hpp"
@@ -415,6 +417,24 @@ void DestroyLinkActionObject::removeValue(std::shared_ptr<uml::StructuralFeature
 			}
 		}
 	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_LinkAction_endData())
+	{
+		if (value == nullptr) // clear mode
+		{
+			m_DestroyLinkActionValue->getEndData()->clear();
+		}
+		else
+		{
+			/* Should use PSCS::CS_Reference but dynamic_pointer_cast fails --> using fUML::Reference instead
+			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(value); */
+			std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> reference = std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::Reference>(value);
+			std::shared_ptr<UML::LinkEndDataObject> inputValue = std::dynamic_pointer_cast<UML::LinkEndDataObject>(reference->getReferent());
+			if (inputValue != nullptr)
+			{
+				m_DestroyLinkActionValue->getEndData()->erase(inputValue->getLinkEndDataValue());
+			}
+		}
+	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_LinkAction_inputValue())
 	{
 		if (value == nullptr) // clear mode
@@ -756,6 +776,24 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> DestroyLinkActionObject::ge
 			value->setThisExceptionHandlerObjectPtr(value);
 			value->setLocus(this->getLocus());
 			value->setExceptionHandlerValue(*iter);
+			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
+			reference->setReferent(value);
+			reference->setCompositeReferent(value);
+			values->add(reference);
+			iter++;
+		} 
+	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_LinkAction_endData())
+	{
+		std::shared_ptr<Bag<uml::LinkEndData>> endDataList = m_DestroyLinkActionValue->getEndData();
+		Bag<uml::LinkEndData>::iterator iter = endDataList->begin();
+		Bag<uml::LinkEndData>::iterator end = endDataList->end();
+		while (iter != end)
+		{
+			std::shared_ptr<UML::LinkEndDataObject> value(new UML::LinkEndDataObject());
+			value->setThisLinkEndDataObjectPtr(value);
+			value->setLocus(this->getLocus());
+			value->setLinkEndDataValue(*iter);
 			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance()->createCS_Reference();
 			reference->setReferent(value);
 			reference->setCompositeReferent(value);
@@ -1123,6 +1161,24 @@ void DestroyLinkActionObject::setFeatureValue(std::shared_ptr<uml::StructuralFea
 			iter++;
 		}
 	}
+	if (feature == UML::UMLPackage::eInstance()->get_UML_LinkAction_endData())
+	{
+		Bag<fUML::Semantics::Values::Value>::iterator iter = values->begin();
+		Bag<fUML::Semantics::Values::Value>::iterator end = values->end();
+		m_DestroyLinkActionValue->getEndData()->clear();
+		while (iter != end)
+		{
+			std::shared_ptr<fUML::Semantics::Values::Value> inputValue = *iter;
+			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> reference = std::dynamic_pointer_cast<PSCS::Semantics::StructuredClassifiers::CS_Reference>(inputValue);
+			std::shared_ptr<UML::LinkEndDataObject> value = std::dynamic_pointer_cast<UML::LinkEndDataObject>(reference->getReferent());
+			if (value != nullptr)
+			{
+				m_DestroyLinkActionValue->getEndData()->push_back(value->getLinkEndDataValue());
+			}
+			
+			iter++;
+		}
+	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_LinkAction_inputValue())
 	{
 		Bag<fUML::Semantics::Values::Value>::iterator iter = values->begin();
@@ -1282,6 +1338,10 @@ std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> DestroyLi
 			featureValues->add(this->retrieveFeatureValue(property));
 		}
 		if (property == UML::UMLPackage::eInstance()->get_UML_ExecutableNode_handler() && m_DestroyLinkActionValue->getHandler() != nullptr)
+		{
+			featureValues->add(this->retrieveFeatureValue(property));
+		}
+		if (property == UML::UMLPackage::eInstance()->get_UML_LinkAction_endData() && m_DestroyLinkActionValue->getEndData() != nullptr)
 		{
 			featureValues->add(this->retrieveFeatureValue(property));
 		}
