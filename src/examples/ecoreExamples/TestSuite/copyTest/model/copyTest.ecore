@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="copyTest" nsURI="http://sse.tu-ilmenau.de/copyTest" nsPrefix="copyTest">
+  <eAnnotations source="prepareApplication">
+    <details key="sourceCodeMain" value="&#x9;std::cout &lt;&lt; &quot;init _____&quot; &lt;&lt; std::endl;&#xA;&#x9;std::shared_ptr&lt;Merge> m1 = factory->createMerge();&#xA;&#x9;std::shared_ptr&lt;Merge> m2 = factory->createMerge();&#xA;&#x9;std::shared_ptr&lt;Merge> m3;&#xA;&#x9;std::shared_ptr&lt;Merge> m4;&#xA;&#x9;m1->init(1);&#xA;&#x9;m2->init(2);&#xA;&#x9;std::cout &lt;&lt; &quot;m1:&quot; &lt;&lt;m1->toString() &lt;&lt; std::endl;&#xA;&#x9;std::cout &lt;&lt; &quot;copy _____&quot; &lt;&lt; std::endl;&#xA;&#x9;m4.reset(new MergeImpl(*(std::dynamic_pointer_cast&lt;MergeImpl>(m1))));&#xA;&#x9;*m3 = (*m2);&#xA;&#x9;std::cout &lt;&lt; &quot;m4:&quot; &lt;&lt; m4->toString() &lt;&lt; std::endl;&#xA;&#x9;std::cout &lt;&lt; &quot;m3:&quot; &lt;&lt; m3->toString() &lt;&lt; std::endl;&#xA;&#xA;&#x9;std::cout &lt;&lt; &quot;Test: &quot; &lt;&lt; std::endl;&#xA;#ifdef _WIN32&#xA;&#x9;HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);&#xA;&#x9;if (hOut == INVALID_HANDLE_VALUE) { return GetLastError(); }&#xA;&#x9;DWORD dwMode = 0;&#xA;&#x9;if (!GetConsoleMode(hOut, &amp;dwMode)) { return GetLastError(); }&#xA;&#x9;dwMode |=  0x0004; //ENABLE_VIRTUAL_TERMINAL_PROCESSING&#xA;&#x9;if (!SetConsoleMode(hOut, dwMode)) { return GetLastError(); }&#xA;#endif&#xA;&#x9;std::string testResult1=&quot;b:1,s1:1,b:1,s2:1,m:1\n&quot;;&#xA;&#x9;std::string testResult2=&quot;b:2,s1:2,b:2,s2:2,m:2\n&quot;;&#xA;&#x9;if(&#xA;&#x9;&#x9;  (m4->toString() == testResult1)&#xA;&#x9;&#x9;&amp;&amp;(m3->toString() == testResult2)&#xA;&#x9;)&#xA;&#x9;{&#xA;&#x9;&#x9;std::cout &lt;&lt; &quot;\033[92m&quot; &lt;&lt; &quot;success&quot; &lt;&lt; &quot;\033[0m&quot; &lt;&lt; std::endl;&#xA;&#x9;}&#xA;&#x9;else&#xA;&#x9;{&#xA;&#x9;&#x9;std::cout &lt;&lt; &quot;\033[91m&quot; &lt;&lt; &quot;failure!&quot; &lt;&lt; &quot;\033[0m&quot; &lt;&lt; std::endl;&#xA;&#x9;&#x9;std::cout &lt;&lt; &quot;Result should be:&quot;&lt;&lt; std::endl;&#xA;&#x9;&#x9;std::cout &lt;&lt; &quot;m4:&quot; &lt;&lt; testResult1;&#xA;&#x9;&#x9;std::cout &lt;&lt; &quot;m3:&quot; &lt;&lt; testResult2;&#xA;&#x9;&#x9;return -1;&#xA;&#x9;}"/>
+    <details key="sourceCodeMainIncludes" value="#include &quot;copyTest/impl/MergeImpl.hpp&quot;&#xA;#ifdef _WIN32&#xA;&#x9;#include &quot;windows.h&quot;&#xA;#endif"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="Base">
+    <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+      <details key="includes" value="#include &lt;sstream>"/>
+    </eAnnotations>
+    <eOperations name="toString" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="std::stringstream stream;&#xA;stream &lt;&lt; &quot;b:&quot; &lt;&lt; m_b &lt;&lt; &quot;,&quot;;&#xA;return stream.str();"/>
+        <details key="const"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="init">
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="m_b = i;"/>
+      </eAnnotations>
+      <eParameters name="i" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="b" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="0"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Sub1" eSuperTypes="#//Base">
+    <eOperations name="toString" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="std::stringstream stream;&#xA;stream &lt;&lt; BaseImpl::toString() &lt;&lt; &quot;s1:&quot; &lt;&lt; m_s1 &lt;&lt; &quot;,&quot;;&#xA;return stream.str();"/>
+        <details key="const"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="init">
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="BaseImpl::init(i);&#xA;m_s1 = i;"/>
+      </eAnnotations>
+      <eParameters name="i" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="s1" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="0"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Sub2" eSuperTypes="#//Base">
+    <eOperations name="toString" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="std::stringstream stream;&#xA;stream &lt;&lt; BaseImpl::toString() &lt;&lt; &quot;s2:&quot; &lt;&lt; m_s2 &lt;&lt; &quot;,&quot;;&#xA;return stream.str();"/>
+        <details key="const"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="init">
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="BaseImpl::init(i);&#xA;m_s2 = i;"/>
+      </eAnnotations>
+      <eParameters name="i" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="s2" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="0"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Merge" eSuperTypes="#//Sub2 #//Sub1">
+    <eOperations name="toString" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="std::stringstream stream;&#xA;&#x9;stream &lt;&lt; Sub1Impl::toString() &lt;&lt; Sub2Impl::toString() &lt;&lt; &quot;m:&quot; &lt;&lt; m_m &lt;&lt; std::endl;&#xA;&#x9;return stream.str();"/>
+        <details key="const"/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="init">
+      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <details key="body" value="Sub1Impl::init(i);&#xA;Sub2Impl::init(i);&#xA;m_m = i;"/>
+      </eAnnotations>
+      <eParameters name="i" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="m" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="0"/>
+  </eClassifiers>
+</ecore:EPackage>
