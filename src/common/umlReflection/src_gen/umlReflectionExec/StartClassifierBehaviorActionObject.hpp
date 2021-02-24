@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~StartClassifierBehaviorActionObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			StartClassifierBehaviorActionObject& operator=(StartClassifierBehaviorActionObject const&);
 
 			virtual void destroy();
 			

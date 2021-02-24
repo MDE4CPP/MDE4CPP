@@ -91,6 +91,9 @@ using namespace uml;
 //*********************************
 StartObjectBehaviorActionImpl::StartObjectBehaviorActionImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 StartObjectBehaviorActionImpl::~StartObjectBehaviorActionImpl()
@@ -133,6 +136,18 @@ StartObjectBehaviorActionImpl::StartObjectBehaviorActionImpl(std::weak_ptr<uml::
 
 
 StartObjectBehaviorActionImpl::StartObjectBehaviorActionImpl(const StartObjectBehaviorActionImpl & obj):StartObjectBehaviorActionImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  StartObjectBehaviorActionImpl::copy() const
+{
+	std::shared_ptr<StartObjectBehaviorActionImpl> element(new StartObjectBehaviorActionImpl(*this));
+	element->setThisStartObjectBehaviorActionPtr(element);
+	return element;
+}
+
+StartObjectBehaviorActionImpl& StartObjectBehaviorActionImpl::operator=(const StartObjectBehaviorActionImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -268,13 +283,8 @@ StartObjectBehaviorActionImpl::StartObjectBehaviorActionImpl(const StartObjectBe
 	#endif
 
 	
-}
 
-std::shared_ptr<ecore::EObject>  StartObjectBehaviorActionImpl::copy() const
-{
-	std::shared_ptr<StartObjectBehaviorActionImpl> element(new StartObjectBehaviorActionImpl(*this));
-	element->setThisStartObjectBehaviorActionPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> StartObjectBehaviorActionImpl::eStaticClass() const

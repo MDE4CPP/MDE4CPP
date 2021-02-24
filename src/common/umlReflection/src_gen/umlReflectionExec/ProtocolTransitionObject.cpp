@@ -103,6 +103,7 @@ ProtocolTransitionObject::ProtocolTransitionObject(std::shared_ptr<uml::Protocol
 ProtocolTransitionObject::ProtocolTransitionObject(ProtocolTransitionObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ProtocolTransitionObject::ProtocolTransitionObject()
@@ -120,6 +121,12 @@ std::shared_ptr<ecore::EObject> ProtocolTransitionObject::copy()
 	element->setThisProtocolTransitionObjectPtr(element);
 	return element;
 }
+
+ProtocolTransitionObject& ProtocolTransitionObject::operator=(const ProtocolTransitionObject & obj)
+{
+	return *this;
+}
+
 
 void ProtocolTransitionObject::destroy()
 {	

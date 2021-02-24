@@ -24,10 +24,8 @@ namespace uml
 	{
 		public: 
 			InstanceSpecificationImpl(const InstanceSpecificationImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			InstanceSpecificationImpl& operator=(InstanceSpecificationImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			InstanceSpecificationImpl& operator=(InstanceSpecificationImpl const&);
 
 		protected:
 			friend class umlFactoryImpl;

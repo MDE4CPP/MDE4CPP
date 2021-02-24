@@ -154,7 +154,6 @@ namespace uml
 	{
 		public:
  			StartClassifierBehaviorAction(const StartClassifierBehaviorAction &) {}
-			StartClassifierBehaviorAction& operator=(StartClassifierBehaviorAction const&) = delete;
 
 		protected:
 			StartClassifierBehaviorAction(){}

@@ -41,9 +41,9 @@ using namespace StandardProfile;
 //*********************************
 FrameworkImpl::FrameworkImpl()
 {
-	#ifdef ADD_COUNT
-		ADD_COUNT("FrameworkImpl()");
-	#endif
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 
 	DEBUG_MESSAGE(std::cout<<"Framework is created..."<<std::endl;)
 
@@ -61,20 +61,12 @@ FrameworkImpl::FrameworkImpl()
 
 FrameworkImpl::~FrameworkImpl()
 {
-	#ifdef SUB_COUNT
-		SUB_COUNT("FrameworkImpl()");
-	#endif
-
 	DEBUG_MESSAGE(std::cout<<"Framework is destroyed..."<<std::endl;)
 }
 
 FrameworkImpl::FrameworkImpl(const FrameworkImpl & obj):FrameworkImpl()
 {
-	//create copy of all Attributes
-	#ifdef SHOW_COPIES
-	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Framework "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
-	#endif
-	instantiate();
+	*this = obj;
 }
 
 std::shared_ptr<ecore::EObject>  FrameworkImpl::copy() const
@@ -82,6 +74,16 @@ std::shared_ptr<ecore::EObject>  FrameworkImpl::copy() const
 	std::shared_ptr<FrameworkImpl> element(new FrameworkImpl(*this));
 	element->setThisFrameworkPtr(element);
 	return element;
+}
+
+FrameworkImpl& FrameworkImpl::operator=(const FrameworkImpl & obj)
+{
+		//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Framework "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
+	instantiate();
+	return *this;
 }
 
 

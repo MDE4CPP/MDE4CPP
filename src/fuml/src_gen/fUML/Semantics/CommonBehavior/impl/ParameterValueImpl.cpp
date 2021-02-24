@@ -57,6 +57,9 @@ using namespace fUML::Semantics::CommonBehavior;
 //*********************************
 ParameterValueImpl::ParameterValueImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ParameterValueImpl::~ParameterValueImpl()
@@ -69,6 +72,18 @@ ParameterValueImpl::~ParameterValueImpl()
 
 
 ParameterValueImpl::ParameterValueImpl(const ParameterValueImpl & obj):ParameterValueImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ParameterValueImpl::copy() const
+{
+	std::shared_ptr<ParameterValueImpl> element(new ParameterValueImpl(*this));
+	element->setThisParameterValuePtr(element);
+	return element;
+}
+
+ParameterValueImpl& ParameterValueImpl::operator=(const ParameterValueImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -92,13 +107,8 @@ ParameterValueImpl::ParameterValueImpl(const ParameterValueImpl & obj):Parameter
 	#endif
 
 	
-}
 
-std::shared_ptr<ecore::EObject>  ParameterValueImpl::copy() const
-{
-	std::shared_ptr<ParameterValueImpl> element(new ParameterValueImpl(*this));
-	element->setThisParameterValuePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ParameterValueImpl::eStaticClass() const

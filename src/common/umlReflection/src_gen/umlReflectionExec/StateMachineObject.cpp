@@ -174,6 +174,7 @@ StateMachineObject::StateMachineObject(std::shared_ptr<uml::StateMachine> _eleme
 StateMachineObject::StateMachineObject(StateMachineObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 StateMachineObject::StateMachineObject()
@@ -191,6 +192,12 @@ std::shared_ptr<ecore::EObject> StateMachineObject::copy()
 	element->setThisStateMachineObjectPtr(element);
 	return element;
 }
+
+StateMachineObject& StateMachineObject::operator=(const StateMachineObject & obj)
+{
+	return *this;
+}
+
 
 void StateMachineObject::destroy()
 {	

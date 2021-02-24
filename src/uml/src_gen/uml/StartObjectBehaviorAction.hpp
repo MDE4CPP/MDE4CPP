@@ -164,7 +164,6 @@ namespace uml
 	{
 		public:
  			StartObjectBehaviorAction(const StartObjectBehaviorAction &) {}
-			StartObjectBehaviorAction& operator=(StartObjectBehaviorAction const&) = delete;
 
 		protected:
 			StartObjectBehaviorAction(){}

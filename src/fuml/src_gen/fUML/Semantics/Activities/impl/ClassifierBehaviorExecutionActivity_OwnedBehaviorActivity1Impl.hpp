@@ -25,10 +25,8 @@ virtual public ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1
 	{
 		public: 
 			ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl(const ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl& operator=(ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl& operator=(ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl const&);
 
 		protected:
 			friend class fUML::Semantics::Activities::ActivitiesFactoryImpl;

@@ -23,10 +23,8 @@ namespace PSCS::Semantics::Actions
 	{
 		public: 
 			CS_AcceptEventActionActivationImpl(const CS_AcceptEventActionActivationImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			CS_AcceptEventActionActivationImpl& operator=(CS_AcceptEventActionActivationImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			CS_AcceptEventActionActivationImpl& operator=(CS_AcceptEventActionActivationImpl const&);
 
 		protected:
 			friend class PSCS::Semantics::Actions::ActionsFactoryImpl;

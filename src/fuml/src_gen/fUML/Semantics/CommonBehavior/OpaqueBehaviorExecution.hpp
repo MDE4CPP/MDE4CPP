@@ -91,7 +91,6 @@ namespace fUML::Semantics::CommonBehavior
 	{
 		public:
  			OpaqueBehaviorExecution(const OpaqueBehaviorExecution &) {}
-			OpaqueBehaviorExecution& operator=(OpaqueBehaviorExecution const&) = delete;
 
 		protected:
 			OpaqueBehaviorExecution(){}

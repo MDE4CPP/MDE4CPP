@@ -22,10 +22,8 @@ namespace uml
 	{
 		public: 
 			LifelineImpl(const LifelineImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			LifelineImpl& operator=(LifelineImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			LifelineImpl& operator=(LifelineImpl const&);
 
 		protected:
 			friend class umlFactoryImpl;

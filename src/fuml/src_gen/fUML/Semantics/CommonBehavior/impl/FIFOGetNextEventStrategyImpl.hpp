@@ -23,10 +23,8 @@ namespace fUML::Semantics::CommonBehavior
 	{
 		public: 
 			FIFOGetNextEventStrategyImpl(const FIFOGetNextEventStrategyImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			FIFOGetNextEventStrategyImpl& operator=(FIFOGetNextEventStrategyImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			FIFOGetNextEventStrategyImpl& operator=(FIFOGetNextEventStrategyImpl const&);
 
 		protected:
 			friend class fUML::Semantics::CommonBehavior::CommonBehaviorFactoryImpl;

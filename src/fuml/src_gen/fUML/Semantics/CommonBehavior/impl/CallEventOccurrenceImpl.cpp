@@ -65,6 +65,9 @@ using namespace fUML::Semantics::CommonBehavior;
 //*********************************
 CallEventOccurrenceImpl::CallEventOccurrenceImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 CallEventOccurrenceImpl::~CallEventOccurrenceImpl()
@@ -77,6 +80,18 @@ CallEventOccurrenceImpl::~CallEventOccurrenceImpl()
 
 
 CallEventOccurrenceImpl::CallEventOccurrenceImpl(const CallEventOccurrenceImpl & obj):CallEventOccurrenceImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  CallEventOccurrenceImpl::copy() const
+{
+	std::shared_ptr<CallEventOccurrenceImpl> element(new CallEventOccurrenceImpl(*this));
+	element->setThisCallEventOccurrencePtr(element);
+	return element;
+}
+
+CallEventOccurrenceImpl& CallEventOccurrenceImpl::operator=(const CallEventOccurrenceImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -93,13 +108,8 @@ CallEventOccurrenceImpl::CallEventOccurrenceImpl(const CallEventOccurrenceImpl &
 	//Clone references with containment (deep copy)
 
 
-}
 
-std::shared_ptr<ecore::EObject>  CallEventOccurrenceImpl::copy() const
-{
-	std::shared_ptr<CallEventOccurrenceImpl> element(new CallEventOccurrenceImpl(*this));
-	element->setThisCallEventOccurrencePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> CallEventOccurrenceImpl::eStaticClass() const

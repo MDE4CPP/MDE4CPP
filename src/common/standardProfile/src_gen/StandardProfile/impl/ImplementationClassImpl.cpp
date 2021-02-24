@@ -41,9 +41,9 @@ using namespace StandardProfile;
 //*********************************
 ImplementationClassImpl::ImplementationClassImpl()
 {
-	#ifdef ADD_COUNT
-		ADD_COUNT("ImplementationClassImpl()");
-	#endif
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 
 	DEBUG_MESSAGE(std::cout<<"ImplementationClass is created..."<<std::endl;)
 
@@ -61,20 +61,12 @@ ImplementationClassImpl::ImplementationClassImpl()
 
 ImplementationClassImpl::~ImplementationClassImpl()
 {
-	#ifdef SUB_COUNT
-		SUB_COUNT("ImplementationClassImpl()");
-	#endif
-
 	DEBUG_MESSAGE(std::cout<<"ImplementationClass is destroyed..."<<std::endl;)
 }
 
 ImplementationClassImpl::ImplementationClassImpl(const ImplementationClassImpl & obj):ImplementationClassImpl()
 {
-	//create copy of all Attributes
-	#ifdef SHOW_COPIES
-	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ImplementationClass "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
-	#endif
-	instantiate();
+	*this = obj;
 }
 
 std::shared_ptr<ecore::EObject>  ImplementationClassImpl::copy() const
@@ -82,6 +74,16 @@ std::shared_ptr<ecore::EObject>  ImplementationClassImpl::copy() const
 	std::shared_ptr<ImplementationClassImpl> element(new ImplementationClassImpl(*this));
 	element->setThisImplementationClassPtr(element);
 	return element;
+}
+
+ImplementationClassImpl& ImplementationClassImpl::operator=(const ImplementationClassImpl & obj)
+{
+		//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ImplementationClass "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
+	instantiate();
+	return *this;
 }
 
 

@@ -67,6 +67,9 @@ using namespace uml;
 //*********************************
 DurationConstraintImpl::DurationConstraintImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 DurationConstraintImpl::~DurationConstraintImpl()
@@ -123,6 +126,18 @@ DurationConstraintImpl::DurationConstraintImpl(std::weak_ptr<uml::TemplateParame
 
 DurationConstraintImpl::DurationConstraintImpl(const DurationConstraintImpl & obj):DurationConstraintImpl()
 {
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  DurationConstraintImpl::copy() const
+{
+	std::shared_ptr<DurationConstraintImpl> element(new DurationConstraintImpl(*this));
+	element->setThisDurationConstraintPtr(element);
+	return element;
+}
+
+DurationConstraintImpl& DurationConstraintImpl::operator=(const DurationConstraintImpl & obj)
+{
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy DurationConstraint "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -178,13 +193,8 @@ DurationConstraintImpl::DurationConstraintImpl(const DurationConstraintImpl & ob
 		std::cout << "Copying the Subset: " << "m_specification" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  DurationConstraintImpl::copy() const
-{
-	std::shared_ptr<DurationConstraintImpl> element(new DurationConstraintImpl(*this));
-	element->setThisDurationConstraintPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> DurationConstraintImpl::eStaticClass() const

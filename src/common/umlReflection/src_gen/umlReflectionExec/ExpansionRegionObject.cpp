@@ -137,6 +137,7 @@ ExpansionRegionObject::ExpansionRegionObject(std::shared_ptr<uml::ExpansionRegio
 ExpansionRegionObject::ExpansionRegionObject(ExpansionRegionObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ExpansionRegionObject::ExpansionRegionObject()
@@ -154,6 +155,12 @@ std::shared_ptr<ecore::EObject> ExpansionRegionObject::copy()
 	element->setThisExpansionRegionObjectPtr(element);
 	return element;
 }
+
+ExpansionRegionObject& ExpansionRegionObject::operator=(const ExpansionRegionObject & obj)
+{
+	return *this;
+}
+
 
 void ExpansionRegionObject::destroy()
 {	

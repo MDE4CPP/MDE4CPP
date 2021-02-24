@@ -23,10 +23,8 @@ namespace uml
 	{
 		public: 
 			ValueSpecificationImpl(const ValueSpecificationImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			ValueSpecificationImpl& operator=(ValueSpecificationImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			ValueSpecificationImpl& operator=(ValueSpecificationImpl const&);
 
 		protected:
 			friend class umlFactoryImpl;

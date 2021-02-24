@@ -110,7 +110,6 @@ namespace uml
 	{
 		public:
  			LiteralInteger(const LiteralInteger &) {}
-			LiteralInteger& operator=(LiteralInteger const&) = delete;
 
 		protected:
 			LiteralInteger(){}

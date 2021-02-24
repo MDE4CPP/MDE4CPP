@@ -103,6 +103,9 @@ using namespace uml;
 //*********************************
 ExtensionImpl::ExtensionImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ExtensionImpl::~ExtensionImpl()
@@ -158,6 +161,18 @@ ExtensionImpl::ExtensionImpl(std::weak_ptr<uml::TemplateParameter > par_owningTe
 
 
 ExtensionImpl::ExtensionImpl(const ExtensionImpl & obj):ExtensionImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ExtensionImpl::copy() const
+{
+	std::shared_ptr<ExtensionImpl> element(new ExtensionImpl(*this));
+	element->setThisExtensionPtr(element);
+	return element;
+}
+
+ExtensionImpl& ExtensionImpl::operator=(const ExtensionImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -365,13 +380,8 @@ ExtensionImpl::ExtensionImpl(const ExtensionImpl & obj):ExtensionImpl()
 		std::cout << "Copying the Subset: " << "m_templateBinding" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  ExtensionImpl::copy() const
-{
-	std::shared_ptr<ExtensionImpl> element(new ExtensionImpl(*this));
-	element->setThisExtensionPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ExtensionImpl::eStaticClass() const

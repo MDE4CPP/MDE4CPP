@@ -162,6 +162,7 @@ AssociationClassObject::AssociationClassObject(std::shared_ptr<uml::AssociationC
 AssociationClassObject::AssociationClassObject(AssociationClassObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 AssociationClassObject::AssociationClassObject()
@@ -179,6 +180,12 @@ std::shared_ptr<ecore::EObject> AssociationClassObject::copy()
 	element->setThisAssociationClassObjectPtr(element);
 	return element;
 }
+
+AssociationClassObject& AssociationClassObject::operator=(const AssociationClassObject & obj)
+{
+	return *this;
+}
+
 
 void AssociationClassObject::destroy()
 {	

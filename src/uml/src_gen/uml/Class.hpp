@@ -237,7 +237,6 @@ namespace uml
 	{
 		public:
  			Class(const Class &) {}
-			Class& operator=(Class const&) = delete;
 
 		protected:
 			Class(){}

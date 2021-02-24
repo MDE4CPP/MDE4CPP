@@ -123,7 +123,6 @@ namespace uml
 	{
 		public:
  			PartDecomposition(const PartDecomposition &) {}
-			PartDecomposition& operator=(PartDecomposition const&) = delete;
 
 		protected:
 			PartDecomposition(){}

@@ -59,6 +59,9 @@ using namespace ecore;
 //*********************************
 EPackageImpl::EPackageImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 EPackageImpl::~EPackageImpl()
@@ -84,6 +87,18 @@ EPackageImpl::EPackageImpl(std::weak_ptr<ecore::EPackage > par_eSuperPackage)
 
 
 EPackageImpl::EPackageImpl(const EPackageImpl & obj):EPackageImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  EPackageImpl::copy() const
+{
+	std::shared_ptr<EPackageImpl> element(new EPackageImpl(*this));
+	element->setThisEPackagePtr(element);
+	return element;
+}
+
+EPackageImpl& EPackageImpl::operator=(const EPackageImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -138,13 +153,8 @@ EPackageImpl::EPackageImpl(const EPackageImpl & obj):EPackageImpl()
 	
 
 	
-}
 
-std::shared_ptr<ecore::EObject>  EPackageImpl::copy() const
-{
-	std::shared_ptr<EPackageImpl> element(new EPackageImpl(*this));
-	element->setThisEPackagePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<EClass> EPackageImpl::eStaticClass() const

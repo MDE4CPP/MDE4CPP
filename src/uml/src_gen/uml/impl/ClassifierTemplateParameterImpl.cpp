@@ -60,6 +60,9 @@ using namespace uml;
 //*********************************
 ClassifierTemplateParameterImpl::ClassifierTemplateParameterImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ClassifierTemplateParameterImpl::~ClassifierTemplateParameterImpl()
@@ -86,6 +89,18 @@ ClassifierTemplateParameterImpl::ClassifierTemplateParameterImpl(std::weak_ptr<u
 
 
 ClassifierTemplateParameterImpl::ClassifierTemplateParameterImpl(const ClassifierTemplateParameterImpl & obj):ClassifierTemplateParameterImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ClassifierTemplateParameterImpl::copy() const
+{
+	std::shared_ptr<ClassifierTemplateParameterImpl> element(new ClassifierTemplateParameterImpl(*this));
+	element->setThisClassifierTemplateParameterPtr(element);
+	return element;
+}
+
+ClassifierTemplateParameterImpl& ClassifierTemplateParameterImpl::operator=(const ClassifierTemplateParameterImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -132,13 +147,8 @@ ClassifierTemplateParameterImpl::ClassifierTemplateParameterImpl(const Classifie
 		std::cout << "Copying the Subset: " << "m_ownedParameteredElement" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  ClassifierTemplateParameterImpl::copy() const
-{
-	std::shared_ptr<ClassifierTemplateParameterImpl> element(new ClassifierTemplateParameterImpl(*this));
-	element->setThisClassifierTemplateParameterPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ClassifierTemplateParameterImpl::eStaticClass() const

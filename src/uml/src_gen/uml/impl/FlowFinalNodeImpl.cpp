@@ -78,6 +78,9 @@ using namespace uml;
 //*********************************
 FlowFinalNodeImpl::FlowFinalNodeImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 FlowFinalNodeImpl::~FlowFinalNodeImpl()
@@ -120,6 +123,18 @@ FlowFinalNodeImpl::FlowFinalNodeImpl(std::weak_ptr<uml::Element > par_owner)
 
 
 FlowFinalNodeImpl::FlowFinalNodeImpl(const FlowFinalNodeImpl & obj):FlowFinalNodeImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  FlowFinalNodeImpl::copy() const
+{
+	std::shared_ptr<FlowFinalNodeImpl> element(new FlowFinalNodeImpl(*this));
+	element->setThisFlowFinalNodePtr(element);
+	return element;
+}
+
+FlowFinalNodeImpl& FlowFinalNodeImpl::operator=(const FlowFinalNodeImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -201,13 +216,8 @@ FlowFinalNodeImpl::FlowFinalNodeImpl(const FlowFinalNodeImpl & obj):FlowFinalNod
 		std::cout << "Copying the Subset: " << "m_redefinedNode" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  FlowFinalNodeImpl::copy() const
-{
-	std::shared_ptr<FlowFinalNodeImpl> element(new FlowFinalNodeImpl(*this));
-	element->setThisFlowFinalNodePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> FlowFinalNodeImpl::eStaticClass() const

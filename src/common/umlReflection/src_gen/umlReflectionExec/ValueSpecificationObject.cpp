@@ -70,6 +70,7 @@ ValueSpecificationObject::ValueSpecificationObject(std::shared_ptr<uml::ValueSpe
 ValueSpecificationObject::ValueSpecificationObject(ValueSpecificationObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ValueSpecificationObject::ValueSpecificationObject()
@@ -87,6 +88,12 @@ std::shared_ptr<ecore::EObject> ValueSpecificationObject::copy()
 	element->setThisValueSpecificationObjectPtr(element);
 	return element;
 }
+
+ValueSpecificationObject& ValueSpecificationObject::operator=(const ValueSpecificationObject & obj)
+{
+	return *this;
+}
+
 
 void ValueSpecificationObject::destroy()
 {	

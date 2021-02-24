@@ -100,6 +100,7 @@ ValueSpecificationActionObject::ValueSpecificationActionObject(std::shared_ptr<u
 ValueSpecificationActionObject::ValueSpecificationActionObject(ValueSpecificationActionObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ValueSpecificationActionObject::ValueSpecificationActionObject()
@@ -117,6 +118,12 @@ std::shared_ptr<ecore::EObject> ValueSpecificationActionObject::copy()
 	element->setThisValueSpecificationActionObjectPtr(element);
 	return element;
 }
+
+ValueSpecificationActionObject& ValueSpecificationActionObject::operator=(const ValueSpecificationActionObject & obj)
+{
+	return *this;
+}
+
 
 void ValueSpecificationActionObject::destroy()
 {	

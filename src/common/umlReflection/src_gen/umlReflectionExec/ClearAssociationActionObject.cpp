@@ -100,6 +100,7 @@ ClearAssociationActionObject::ClearAssociationActionObject(std::shared_ptr<uml::
 ClearAssociationActionObject::ClearAssociationActionObject(ClearAssociationActionObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ClearAssociationActionObject::ClearAssociationActionObject()
@@ -117,6 +118,12 @@ std::shared_ptr<ecore::EObject> ClearAssociationActionObject::copy()
 	element->setThisClearAssociationActionObjectPtr(element);
 	return element;
 }
+
+ClearAssociationActionObject& ClearAssociationActionObject::operator=(const ClearAssociationActionObject & obj)
+{
+	return *this;
+}
+
 
 void ClearAssociationActionObject::destroy()
 {	

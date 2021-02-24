@@ -62,6 +62,9 @@ using namespace uml;
 //*********************************
 FeatureImpl::FeatureImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 FeatureImpl::~FeatureImpl()
@@ -88,6 +91,18 @@ FeatureImpl::FeatureImpl(std::weak_ptr<uml::Element > par_owner)
 
 
 FeatureImpl::FeatureImpl(const FeatureImpl & obj):FeatureImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  FeatureImpl::copy() const
+{
+	std::shared_ptr<FeatureImpl> element(new FeatureImpl(*this));
+	element->setThisFeaturePtr(element);
+	return element;
+}
+
+FeatureImpl& FeatureImpl::operator=(const FeatureImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -136,13 +151,8 @@ FeatureImpl::FeatureImpl(const FeatureImpl & obj):FeatureImpl()
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  FeatureImpl::copy() const
-{
-	std::shared_ptr<FeatureImpl> element(new FeatureImpl(*this));
-	element->setThisFeaturePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> FeatureImpl::eStaticClass() const

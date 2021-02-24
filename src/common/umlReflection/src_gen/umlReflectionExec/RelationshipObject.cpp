@@ -53,6 +53,7 @@ RelationshipObject::RelationshipObject(std::shared_ptr<uml::Relationship> _eleme
 RelationshipObject::RelationshipObject(RelationshipObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 RelationshipObject::RelationshipObject()
@@ -70,6 +71,12 @@ std::shared_ptr<ecore::EObject> RelationshipObject::copy()
 	element->setThisRelationshipObjectPtr(element);
 	return element;
 }
+
+RelationshipObject& RelationshipObject::operator=(const RelationshipObject & obj)
+{
+	return *this;
+}
+
 
 void RelationshipObject::destroy()
 {	

@@ -70,7 +70,6 @@ namespace fUML::Semantics::Values
 	{
 		public:
  			Evaluation(const Evaluation &) {}
-			Evaluation& operator=(Evaluation const&) = delete;
 
 		protected:
 			Evaluation(){}

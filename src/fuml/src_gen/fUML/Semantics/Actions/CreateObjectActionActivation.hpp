@@ -100,7 +100,6 @@ namespace fUML::Semantics::Actions
 	{
 		public:
  			CreateObjectActionActivation(const CreateObjectActionActivation &) {}
-			CreateObjectActionActivation& operator=(CreateObjectActionActivation const&) = delete;
 
 		protected:
 			CreateObjectActionActivation(){}

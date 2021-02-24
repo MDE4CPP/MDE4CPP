@@ -38,6 +38,7 @@ namespace UML
 		    virtual ~RegionObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			RegionObject& operator=(RegionObject const&);
 
 			virtual void destroy();
 			

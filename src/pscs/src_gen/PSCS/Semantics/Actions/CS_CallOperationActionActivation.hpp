@@ -120,7 +120,6 @@ namespace PSCS::Semantics::Actions
 	{
 		public:
  			CS_CallOperationActionActivation(const CS_CallOperationActionActivation &) {}
-			CS_CallOperationActionActivation& operator=(CS_CallOperationActionActivation const&) = delete;
 
 		protected:
 			CS_CallOperationActionActivation(){}

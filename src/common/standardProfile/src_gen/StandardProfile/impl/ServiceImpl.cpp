@@ -41,9 +41,9 @@ using namespace StandardProfile;
 //*********************************
 ServiceImpl::ServiceImpl()
 {
-	#ifdef ADD_COUNT
-		ADD_COUNT("ServiceImpl()");
-	#endif
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 
 	DEBUG_MESSAGE(std::cout<<"Service is created..."<<std::endl;)
 
@@ -61,20 +61,12 @@ ServiceImpl::ServiceImpl()
 
 ServiceImpl::~ServiceImpl()
 {
-	#ifdef SUB_COUNT
-		SUB_COUNT("ServiceImpl()");
-	#endif
-
 	DEBUG_MESSAGE(std::cout<<"Service is destroyed..."<<std::endl;)
 }
 
 ServiceImpl::ServiceImpl(const ServiceImpl & obj):ServiceImpl()
 {
-	//create copy of all Attributes
-	#ifdef SHOW_COPIES
-	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Service "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
-	#endif
-	instantiate();
+	*this = obj;
 }
 
 std::shared_ptr<ecore::EObject>  ServiceImpl::copy() const
@@ -82,6 +74,16 @@ std::shared_ptr<ecore::EObject>  ServiceImpl::copy() const
 	std::shared_ptr<ServiceImpl> element(new ServiceImpl(*this));
 	element->setThisServicePtr(element);
 	return element;
+}
+
+ServiceImpl& ServiceImpl::operator=(const ServiceImpl & obj)
+{
+		//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Service "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
+	instantiate();
+	return *this;
 }
 
 

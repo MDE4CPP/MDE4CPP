@@ -51,6 +51,9 @@ using namespace fUML::Semantics::CommonBehavior;
 //*********************************
 FIFOGetNextEventStrategyImpl::FIFOGetNextEventStrategyImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 FIFOGetNextEventStrategyImpl::~FIFOGetNextEventStrategyImpl()
@@ -64,6 +67,18 @@ FIFOGetNextEventStrategyImpl::~FIFOGetNextEventStrategyImpl()
 
 FIFOGetNextEventStrategyImpl::FIFOGetNextEventStrategyImpl(const FIFOGetNextEventStrategyImpl & obj):FIFOGetNextEventStrategyImpl()
 {
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  FIFOGetNextEventStrategyImpl::copy() const
+{
+	std::shared_ptr<FIFOGetNextEventStrategyImpl> element(new FIFOGetNextEventStrategyImpl(*this));
+	element->setThisFIFOGetNextEventStrategyPtr(element);
+	return element;
+}
+
+FIFOGetNextEventStrategyImpl& FIFOGetNextEventStrategyImpl::operator=(const FIFOGetNextEventStrategyImpl & obj)
+{
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy FIFOGetNextEventStrategy "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -75,13 +90,8 @@ FIFOGetNextEventStrategyImpl::FIFOGetNextEventStrategyImpl(const FIFOGetNextEven
 	//Clone references with containment (deep copy)
 
 
-}
 
-std::shared_ptr<ecore::EObject>  FIFOGetNextEventStrategyImpl::copy() const
-{
-	std::shared_ptr<FIFOGetNextEventStrategyImpl> element(new FIFOGetNextEventStrategyImpl(*this));
-	element->setThisFIFOGetNextEventStrategyPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> FIFOGetNextEventStrategyImpl::eStaticClass() const

@@ -78,6 +78,7 @@ ExecutionOccurrenceSpecificationObject::ExecutionOccurrenceSpecificationObject(s
 ExecutionOccurrenceSpecificationObject::ExecutionOccurrenceSpecificationObject(ExecutionOccurrenceSpecificationObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ExecutionOccurrenceSpecificationObject::ExecutionOccurrenceSpecificationObject()
@@ -95,6 +96,12 @@ std::shared_ptr<ecore::EObject> ExecutionOccurrenceSpecificationObject::copy()
 	element->setThisExecutionOccurrenceSpecificationObjectPtr(element);
 	return element;
 }
+
+ExecutionOccurrenceSpecificationObject& ExecutionOccurrenceSpecificationObject::operator=(const ExecutionOccurrenceSpecificationObject & obj)
+{
+	return *this;
+}
+
 
 void ExecutionOccurrenceSpecificationObject::destroy()
 {	

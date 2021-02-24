@@ -64,6 +64,9 @@ using namespace uml;
 //*********************************
 ProfileApplicationImpl::ProfileApplicationImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ProfileApplicationImpl::~ProfileApplicationImpl()
@@ -90,6 +93,18 @@ ProfileApplicationImpl::ProfileApplicationImpl(std::weak_ptr<uml::Element > par_
 
 
 ProfileApplicationImpl::ProfileApplicationImpl(const ProfileApplicationImpl & obj):ProfileApplicationImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ProfileApplicationImpl::copy() const
+{
+	std::shared_ptr<ProfileApplicationImpl> element(new ProfileApplicationImpl(*this));
+	element->setThisProfileApplicationPtr(element);
+	return element;
+}
+
+ProfileApplicationImpl& ProfileApplicationImpl::operator=(const ProfileApplicationImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -125,13 +140,8 @@ ProfileApplicationImpl::ProfileApplicationImpl(const ProfileApplicationImpl & ob
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  ProfileApplicationImpl::copy() const
-{
-	std::shared_ptr<ProfileApplicationImpl> element(new ProfileApplicationImpl(*this));
-	element->setThisProfileApplicationPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ProfileApplicationImpl::eStaticClass() const

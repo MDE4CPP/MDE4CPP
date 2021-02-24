@@ -59,6 +59,9 @@ using namespace uml;
 //*********************************
 PackageImportImpl::PackageImportImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 PackageImportImpl::~PackageImportImpl()
@@ -85,6 +88,18 @@ PackageImportImpl::PackageImportImpl(std::weak_ptr<uml::Element > par_owner)
 
 
 PackageImportImpl::PackageImportImpl(const PackageImportImpl & obj):PackageImportImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  PackageImportImpl::copy() const
+{
+	std::shared_ptr<PackageImportImpl> element(new PackageImportImpl(*this));
+	element->setThisPackageImportPtr(element);
+	return element;
+}
+
+PackageImportImpl& PackageImportImpl::operator=(const PackageImportImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -120,13 +135,8 @@ PackageImportImpl::PackageImportImpl(const PackageImportImpl & obj):PackageImpor
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  PackageImportImpl::copy() const
-{
-	std::shared_ptr<PackageImportImpl> element(new PackageImportImpl(*this));
-	element->setThisPackageImportPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> PackageImportImpl::eStaticClass() const

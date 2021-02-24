@@ -72,6 +72,9 @@ using namespace uml;
 //*********************************
 DurationIntervalImpl::DurationIntervalImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 DurationIntervalImpl::~DurationIntervalImpl()
@@ -131,6 +134,18 @@ DurationIntervalImpl::DurationIntervalImpl(std::weak_ptr<uml::ValueSpecification
 
 DurationIntervalImpl::DurationIntervalImpl(const DurationIntervalImpl & obj):DurationIntervalImpl()
 {
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  DurationIntervalImpl::copy() const
+{
+	std::shared_ptr<DurationIntervalImpl> element(new DurationIntervalImpl(*this));
+	element->setThisDurationIntervalPtr(element);
+	return element;
+}
+
+DurationIntervalImpl& DurationIntervalImpl::operator=(const DurationIntervalImpl & obj)
+{
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy DurationInterval "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -183,13 +198,8 @@ DurationIntervalImpl::DurationIntervalImpl(const DurationIntervalImpl & obj):Dur
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  DurationIntervalImpl::copy() const
-{
-	std::shared_ptr<DurationIntervalImpl> element(new DurationIntervalImpl(*this));
-	element->setThisDurationIntervalPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> DurationIntervalImpl::eStaticClass() const

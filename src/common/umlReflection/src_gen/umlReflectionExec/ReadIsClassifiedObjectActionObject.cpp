@@ -103,6 +103,7 @@ ReadIsClassifiedObjectActionObject::ReadIsClassifiedObjectActionObject(std::shar
 ReadIsClassifiedObjectActionObject::ReadIsClassifiedObjectActionObject(ReadIsClassifiedObjectActionObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ReadIsClassifiedObjectActionObject::ReadIsClassifiedObjectActionObject()
@@ -120,6 +121,12 @@ std::shared_ptr<ecore::EObject> ReadIsClassifiedObjectActionObject::copy()
 	element->setThisReadIsClassifiedObjectActionObjectPtr(element);
 	return element;
 }
+
+ReadIsClassifiedObjectActionObject& ReadIsClassifiedObjectActionObject::operator=(const ReadIsClassifiedObjectActionObject & obj)
+{
+	return *this;
+}
+
 
 void ReadIsClassifiedObjectActionObject::destroy()
 {	

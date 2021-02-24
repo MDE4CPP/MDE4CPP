@@ -100,7 +100,6 @@ namespace uml
 	{
 		public:
  			MessageEnd(const MessageEnd &) {}
-			MessageEnd& operator=(MessageEnd const&) = delete;
 
 		protected:
 			MessageEnd(){}

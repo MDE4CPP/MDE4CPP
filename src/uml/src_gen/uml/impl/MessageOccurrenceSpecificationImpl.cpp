@@ -72,6 +72,9 @@ using namespace uml;
 //*********************************
 MessageOccurrenceSpecificationImpl::MessageOccurrenceSpecificationImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 MessageOccurrenceSpecificationImpl::~MessageOccurrenceSpecificationImpl()
@@ -114,6 +117,18 @@ MessageOccurrenceSpecificationImpl::MessageOccurrenceSpecificationImpl(std::weak
 
 
 MessageOccurrenceSpecificationImpl::MessageOccurrenceSpecificationImpl(const MessageOccurrenceSpecificationImpl & obj):MessageOccurrenceSpecificationImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  MessageOccurrenceSpecificationImpl::copy() const
+{
+	std::shared_ptr<MessageOccurrenceSpecificationImpl> element(new MessageOccurrenceSpecificationImpl(*this));
+	element->setThisMessageOccurrenceSpecificationPtr(element);
+	return element;
+}
+
+MessageOccurrenceSpecificationImpl& MessageOccurrenceSpecificationImpl::operator=(const MessageOccurrenceSpecificationImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -174,13 +189,8 @@ MessageOccurrenceSpecificationImpl::MessageOccurrenceSpecificationImpl(const Mes
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  MessageOccurrenceSpecificationImpl::copy() const
-{
-	std::shared_ptr<MessageOccurrenceSpecificationImpl> element(new MessageOccurrenceSpecificationImpl(*this));
-	element->setThisMessageOccurrenceSpecificationPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> MessageOccurrenceSpecificationImpl::eStaticClass() const

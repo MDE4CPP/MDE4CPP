@@ -41,9 +41,9 @@ using namespace StandardProfile;
 //*********************************
 FocusImpl::FocusImpl()
 {
-	#ifdef ADD_COUNT
-		ADD_COUNT("FocusImpl()");
-	#endif
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 
 	DEBUG_MESSAGE(std::cout<<"Focus is created..."<<std::endl;)
 
@@ -61,20 +61,12 @@ FocusImpl::FocusImpl()
 
 FocusImpl::~FocusImpl()
 {
-	#ifdef SUB_COUNT
-		SUB_COUNT("FocusImpl()");
-	#endif
-
 	DEBUG_MESSAGE(std::cout<<"Focus is destroyed..."<<std::endl;)
 }
 
 FocusImpl::FocusImpl(const FocusImpl & obj):FocusImpl()
 {
-	//create copy of all Attributes
-	#ifdef SHOW_COPIES
-	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Focus "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
-	#endif
-	instantiate();
+	*this = obj;
 }
 
 std::shared_ptr<ecore::EObject>  FocusImpl::copy() const
@@ -82,6 +74,16 @@ std::shared_ptr<ecore::EObject>  FocusImpl::copy() const
 	std::shared_ptr<FocusImpl> element(new FocusImpl(*this));
 	element->setThisFocusPtr(element);
 	return element;
+}
+
+FocusImpl& FocusImpl::operator=(const FocusImpl & obj)
+{
+		//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Focus "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
+	instantiate();
+	return *this;
 }
 
 

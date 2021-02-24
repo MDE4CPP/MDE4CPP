@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~BehavioredClassifierObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			BehavioredClassifierObject& operator=(BehavioredClassifierObject const&);
 
 			virtual void destroy();
 			

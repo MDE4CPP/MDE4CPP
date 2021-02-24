@@ -116,7 +116,6 @@ namespace uml
 	{
 		public:
  			Namespace(const Namespace &) {}
-			Namespace& operator=(Namespace const&) = delete;
 
 		protected:
 			Namespace(){}

@@ -154,7 +154,6 @@ namespace uml
 	{
 		public:
  			DestroyObjectAction(const DestroyObjectAction &) {}
-			DestroyObjectAction& operator=(DestroyObjectAction const&) = delete;
 
 		protected:
 			DestroyObjectAction(){}

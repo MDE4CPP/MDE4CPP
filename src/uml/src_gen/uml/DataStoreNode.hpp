@@ -152,7 +152,6 @@ namespace uml
 	{
 		public:
  			DataStoreNode(const DataStoreNode &) {}
-			DataStoreNode& operator=(DataStoreNode const&) = delete;
 
 		protected:
 			DataStoreNode(){}

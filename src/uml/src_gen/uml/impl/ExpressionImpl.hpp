@@ -22,10 +22,8 @@ namespace uml
 	{
 		public: 
 			ExpressionImpl(const ExpressionImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			ExpressionImpl& operator=(ExpressionImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			ExpressionImpl& operator=(ExpressionImpl const&);
 
 		protected:
 			friend class umlFactoryImpl;

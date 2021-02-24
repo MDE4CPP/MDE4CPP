@@ -89,6 +89,9 @@ using namespace uml;
 //*********************************
 AcceptCallActionImpl::AcceptCallActionImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 AcceptCallActionImpl::~AcceptCallActionImpl()
@@ -131,6 +134,18 @@ AcceptCallActionImpl::AcceptCallActionImpl(std::weak_ptr<uml::Element > par_owne
 
 
 AcceptCallActionImpl::AcceptCallActionImpl(const AcceptCallActionImpl & obj):AcceptCallActionImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  AcceptCallActionImpl::copy() const
+{
+	std::shared_ptr<AcceptCallActionImpl> element(new AcceptCallActionImpl(*this));
+	element->setThisAcceptCallActionPtr(element);
+	return element;
+}
+
+AcceptCallActionImpl& AcceptCallActionImpl::operator=(const AcceptCallActionImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -264,13 +279,8 @@ AcceptCallActionImpl::AcceptCallActionImpl(const AcceptCallActionImpl & obj):Acc
 	#endif
 
 	
-}
 
-std::shared_ptr<ecore::EObject>  AcceptCallActionImpl::copy() const
-{
-	std::shared_ptr<AcceptCallActionImpl> element(new AcceptCallActionImpl(*this));
-	element->setThisAcceptCallActionPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> AcceptCallActionImpl::eStaticClass() const

@@ -41,9 +41,9 @@ using namespace StandardProfile;
 //*********************************
 MetamodelImpl::MetamodelImpl()
 {
-	#ifdef ADD_COUNT
-		ADD_COUNT("MetamodelImpl()");
-	#endif
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 
 	DEBUG_MESSAGE(std::cout<<"Metamodel is created..."<<std::endl;)
 
@@ -61,20 +61,12 @@ MetamodelImpl::MetamodelImpl()
 
 MetamodelImpl::~MetamodelImpl()
 {
-	#ifdef SUB_COUNT
-		SUB_COUNT("MetamodelImpl()");
-	#endif
-
 	DEBUG_MESSAGE(std::cout<<"Metamodel is destroyed..."<<std::endl;)
 }
 
 MetamodelImpl::MetamodelImpl(const MetamodelImpl & obj):MetamodelImpl()
 {
-	//create copy of all Attributes
-	#ifdef SHOW_COPIES
-	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Metamodel "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
-	#endif
-	instantiate();
+	*this = obj;
 }
 
 std::shared_ptr<ecore::EObject>  MetamodelImpl::copy() const
@@ -82,6 +74,16 @@ std::shared_ptr<ecore::EObject>  MetamodelImpl::copy() const
 	std::shared_ptr<MetamodelImpl> element(new MetamodelImpl(*this));
 	element->setThisMetamodelPtr(element);
 	return element;
+}
+
+MetamodelImpl& MetamodelImpl::operator=(const MetamodelImpl & obj)
+{
+		//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Metamodel "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
+	instantiate();
+	return *this;
 }
 
 

@@ -70,6 +70,9 @@ using namespace uml;
 //*********************************
 LiteralStringImpl::LiteralStringImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 LiteralStringImpl::~LiteralStringImpl()
@@ -129,6 +132,18 @@ LiteralStringImpl::LiteralStringImpl(std::weak_ptr<uml::ValueSpecificationAction
 
 LiteralStringImpl::LiteralStringImpl(const LiteralStringImpl & obj):LiteralStringImpl()
 {
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  LiteralStringImpl::copy() const
+{
+	std::shared_ptr<LiteralStringImpl> element(new LiteralStringImpl(*this));
+	element->setThisLiteralStringPtr(element);
+	return element;
+}
+
+LiteralStringImpl& LiteralStringImpl::operator=(const LiteralStringImpl & obj)
+{
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy LiteralString "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -178,13 +193,8 @@ LiteralStringImpl::LiteralStringImpl(const LiteralStringImpl & obj):LiteralStrin
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  LiteralStringImpl::copy() const
-{
-	std::shared_ptr<LiteralStringImpl> element(new LiteralStringImpl(*this));
-	element->setThisLiteralStringPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> LiteralStringImpl::eStaticClass() const

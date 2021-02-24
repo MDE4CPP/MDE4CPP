@@ -111,7 +111,6 @@ namespace uml
 	{
 		public:
  			Substitution(const Substitution &) {}
-			Substitution& operator=(Substitution const&) = delete;
 
 		protected:
 			Substitution(){}

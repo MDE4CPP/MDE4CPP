@@ -66,6 +66,7 @@ ConnectorEndObject::ConnectorEndObject(std::shared_ptr<uml::ConnectorEnd> _eleme
 ConnectorEndObject::ConnectorEndObject(ConnectorEndObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ConnectorEndObject::ConnectorEndObject()
@@ -83,6 +84,12 @@ std::shared_ptr<ecore::EObject> ConnectorEndObject::copy()
 	element->setThisConnectorEndObjectPtr(element);
 	return element;
 }
+
+ConnectorEndObject& ConnectorEndObject::operator=(const ConnectorEndObject & obj)
+{
+	return *this;
+}
+
 
 void ConnectorEndObject::destroy()
 {	

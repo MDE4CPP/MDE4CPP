@@ -145,7 +145,6 @@ namespace uml
 	{
 		public:
  			Model(const Model &) {}
-			Model& operator=(Model const&) = delete;
 
 		protected:
 			Model(){}

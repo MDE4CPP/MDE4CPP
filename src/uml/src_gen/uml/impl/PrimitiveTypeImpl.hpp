@@ -22,10 +22,8 @@ namespace uml
 	{
 		public: 
 			PrimitiveTypeImpl(const PrimitiveTypeImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			PrimitiveTypeImpl& operator=(PrimitiveTypeImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			PrimitiveTypeImpl& operator=(PrimitiveTypeImpl const&);
 
 		protected:
 			friend class umlFactoryImpl;

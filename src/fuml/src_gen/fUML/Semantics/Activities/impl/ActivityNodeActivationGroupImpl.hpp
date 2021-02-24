@@ -25,10 +25,8 @@ virtual public ActivityNodeActivationGroup
 	{
 		public: 
 			ActivityNodeActivationGroupImpl(const ActivityNodeActivationGroupImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			ActivityNodeActivationGroupImpl& operator=(ActivityNodeActivationGroupImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			ActivityNodeActivationGroupImpl& operator=(ActivityNodeActivationGroupImpl const&);
 
 		protected:
 			friend class fUML::Semantics::Activities::ActivitiesFactoryImpl;

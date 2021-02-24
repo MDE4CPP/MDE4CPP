@@ -58,6 +58,9 @@ using namespace fUML::Semantics::SimpleClassifiers;
 //*********************************
 SignalInstanceImpl::SignalInstanceImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 SignalInstanceImpl::~SignalInstanceImpl()
@@ -70,6 +73,18 @@ SignalInstanceImpl::~SignalInstanceImpl()
 
 
 SignalInstanceImpl::SignalInstanceImpl(const SignalInstanceImpl & obj):SignalInstanceImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  SignalInstanceImpl::copy() const
+{
+	std::shared_ptr<SignalInstanceImpl> element(new SignalInstanceImpl(*this));
+	element->setThisSignalInstancePtr(element);
+	return element;
+}
+
+SignalInstanceImpl& SignalInstanceImpl::operator=(const SignalInstanceImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -92,13 +107,8 @@ SignalInstanceImpl::SignalInstanceImpl(const SignalInstanceImpl & obj):SignalIns
 		std::cout << "Copying the Subset: " << "m_featureValues" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  SignalInstanceImpl::copy() const
-{
-	std::shared_ptr<SignalInstanceImpl> element(new SignalInstanceImpl(*this));
-	element->setThisSignalInstancePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> SignalInstanceImpl::eStaticClass() const

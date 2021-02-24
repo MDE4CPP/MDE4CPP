@@ -121,6 +121,9 @@ using namespace uml;
 //*********************************
 NodeImpl::NodeImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 NodeImpl::~NodeImpl()
@@ -176,6 +179,18 @@ NodeImpl::NodeImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplatePara
 
 
 NodeImpl::NodeImpl(const NodeImpl & obj):NodeImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  NodeImpl::copy() const
+{
+	std::shared_ptr<NodeImpl> element(new NodeImpl(*this));
+	element->setThisNodePtr(element);
+	return element;
+}
+
+NodeImpl& NodeImpl::operator=(const NodeImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -450,13 +465,8 @@ NodeImpl::NodeImpl(const NodeImpl & obj):NodeImpl()
 		std::cout << "Initialising value Subset: " << "m_nestedNode - Subset<uml::Node, uml::NamedElement >(getOwnedMember())" << std::endl;
 	#endif
 	
-}
 
-std::shared_ptr<ecore::EObject>  NodeImpl::copy() const
-{
-	std::shared_ptr<NodeImpl> element(new NodeImpl(*this));
-	element->setThisNodePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> NodeImpl::eStaticClass() const

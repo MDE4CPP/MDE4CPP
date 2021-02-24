@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~ExpansionRegionObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			ExpansionRegionObject& operator=(ExpansionRegionObject const&);
 
 			virtual void destroy();
 			

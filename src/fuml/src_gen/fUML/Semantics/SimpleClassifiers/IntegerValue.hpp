@@ -70,7 +70,6 @@ namespace fUML::Semantics::SimpleClassifiers
 	{
 		public:
  			IntegerValue(const IntegerValue &) {}
-			IntegerValue& operator=(IntegerValue const&) = delete;
 
 		protected:
 			IntegerValue(){}

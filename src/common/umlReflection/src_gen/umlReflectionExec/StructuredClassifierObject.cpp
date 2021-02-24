@@ -129,6 +129,7 @@ StructuredClassifierObject::StructuredClassifierObject(std::shared_ptr<uml::Stru
 StructuredClassifierObject::StructuredClassifierObject(StructuredClassifierObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 StructuredClassifierObject::StructuredClassifierObject()
@@ -146,6 +147,12 @@ std::shared_ptr<ecore::EObject> StructuredClassifierObject::copy()
 	element->setThisStructuredClassifierObjectPtr(element);
 	return element;
 }
+
+StructuredClassifierObject& StructuredClassifierObject::operator=(const StructuredClassifierObject & obj)
+{
+	return *this;
+}
+
 
 void StructuredClassifierObject::destroy()
 {	

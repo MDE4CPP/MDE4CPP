@@ -22,10 +22,8 @@ namespace uml
 	{
 		public: 
 			ReduceActionImpl(const ReduceActionImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			ReduceActionImpl& operator=(ReduceActionImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			ReduceActionImpl& operator=(ReduceActionImpl const&);
 
 		protected:
 			friend class umlFactoryImpl;

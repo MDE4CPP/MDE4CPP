@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~GeneralOrderingObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			GeneralOrderingObject& operator=(GeneralOrderingObject const&);
 
 			virtual void destroy();
 			

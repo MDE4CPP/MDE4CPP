@@ -159,7 +159,6 @@ namespace uml
 	{
 		public:
  			ReduceAction(const ReduceAction &) {}
-			ReduceAction& operator=(ReduceAction const&) = delete;
 
 		protected:
 			ReduceAction(){}

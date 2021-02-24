@@ -24,10 +24,8 @@ virtual public EGenericType
 	{
 		public: 
 			EGenericTypeImpl(const EGenericTypeImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			EGenericTypeImpl& operator=(EGenericTypeImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			EGenericTypeImpl& operator=(EGenericTypeImpl const&);
 
 		protected:
 			friend class ecoreFactoryImpl;

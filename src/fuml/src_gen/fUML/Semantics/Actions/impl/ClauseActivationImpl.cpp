@@ -57,6 +57,9 @@ using namespace fUML::Semantics::Actions;
 //*********************************
 ClauseActivationImpl::ClauseActivationImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ClauseActivationImpl::~ClauseActivationImpl()
@@ -69,6 +72,18 @@ ClauseActivationImpl::~ClauseActivationImpl()
 
 
 ClauseActivationImpl::ClauseActivationImpl(const ClauseActivationImpl & obj):ClauseActivationImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ClauseActivationImpl::copy() const
+{
+	std::shared_ptr<ClauseActivationImpl> element(new ClauseActivationImpl(*this));
+	element->setThisClauseActivationPtr(element);
+	return element;
+}
+
+ClauseActivationImpl& ClauseActivationImpl::operator=(const ClauseActivationImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -85,13 +100,8 @@ ClauseActivationImpl::ClauseActivationImpl(const ClauseActivationImpl & obj):Cla
 	//Clone references with containment (deep copy)
 
 
-}
 
-std::shared_ptr<ecore::EObject>  ClauseActivationImpl::copy() const
-{
-	std::shared_ptr<ClauseActivationImpl> element(new ClauseActivationImpl(*this));
-	element->setThisClauseActivationPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ClauseActivationImpl::eStaticClass() const

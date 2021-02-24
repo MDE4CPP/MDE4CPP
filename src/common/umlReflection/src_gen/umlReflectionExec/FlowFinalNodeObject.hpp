@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~FlowFinalNodeObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			FlowFinalNodeObject& operator=(FlowFinalNodeObject const&);
 
 			virtual void destroy();
 			

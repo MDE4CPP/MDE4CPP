@@ -84,6 +84,7 @@ VariableObject::VariableObject(std::shared_ptr<uml::Variable> _element):
 VariableObject::VariableObject(VariableObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 VariableObject::VariableObject()
@@ -101,6 +102,12 @@ std::shared_ptr<ecore::EObject> VariableObject::copy()
 	element->setThisVariableObjectPtr(element);
 	return element;
 }
+
+VariableObject& VariableObject::operator=(const VariableObject & obj)
+{
+	return *this;
+}
+
 
 void VariableObject::destroy()
 {	

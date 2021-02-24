@@ -86,6 +86,9 @@ using namespace fUML::Semantics::Activities;
 //*********************************
 DecisionNodeActivationImpl::DecisionNodeActivationImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 DecisionNodeActivationImpl::~DecisionNodeActivationImpl()
@@ -104,6 +107,18 @@ DecisionNodeActivationImpl::DecisionNodeActivationImpl(std::weak_ptr<fUML::Seman
 
 
 DecisionNodeActivationImpl::DecisionNodeActivationImpl(const DecisionNodeActivationImpl & obj):DecisionNodeActivationImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  DecisionNodeActivationImpl::copy() const
+{
+	std::shared_ptr<DecisionNodeActivationImpl> element(new DecisionNodeActivationImpl(*this));
+	element->setThisDecisionNodeActivationPtr(element);
+	return element;
+}
+
+DecisionNodeActivationImpl& DecisionNodeActivationImpl::operator=(const DecisionNodeActivationImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -145,13 +160,8 @@ DecisionNodeActivationImpl::DecisionNodeActivationImpl(const DecisionNodeActivat
 	#endif
 
 	
-}
 
-std::shared_ptr<ecore::EObject>  DecisionNodeActivationImpl::copy() const
-{
-	std::shared_ptr<DecisionNodeActivationImpl> element(new DecisionNodeActivationImpl(*this));
-	element->setThisDecisionNodeActivationPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> DecisionNodeActivationImpl::eStaticClass() const

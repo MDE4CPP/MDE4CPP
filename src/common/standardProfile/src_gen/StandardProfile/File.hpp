@@ -25,9 +25,6 @@ namespace StandardProfile
 {
 	class File : virtual public uml::Stereotype 
 	{
-		private:    
-			File(const File& that) = delete;
-
 		protected:
 			File(){}
 

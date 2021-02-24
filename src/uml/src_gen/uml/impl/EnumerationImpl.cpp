@@ -101,6 +101,9 @@ using namespace uml;
 //*********************************
 EnumerationImpl::EnumerationImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 EnumerationImpl::~EnumerationImpl()
@@ -156,6 +159,18 @@ EnumerationImpl::EnumerationImpl(std::weak_ptr<uml::TemplateParameter > par_owni
 
 
 EnumerationImpl::EnumerationImpl(const EnumerationImpl & obj):EnumerationImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  EnumerationImpl::copy() const
+{
+	std::shared_ptr<EnumerationImpl> element(new EnumerationImpl(*this));
+	element->setThisEnumerationPtr(element);
+	return element;
+}
+
+EnumerationImpl& EnumerationImpl::operator=(const EnumerationImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -354,13 +369,8 @@ EnumerationImpl::EnumerationImpl(const EnumerationImpl & obj):EnumerationImpl()
 		std::cout << "Initialising value Subset: " << "m_ownedLiteral - Subset<uml::EnumerationLiteral, uml::NamedElement >(getOwnedMember())" << std::endl;
 	#endif
 	
-}
 
-std::shared_ptr<ecore::EObject>  EnumerationImpl::copy() const
-{
-	std::shared_ptr<EnumerationImpl> element(new EnumerationImpl(*this));
-	element->setThisEnumerationPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> EnumerationImpl::eStaticClass() const

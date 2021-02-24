@@ -25,9 +25,6 @@ namespace StandardProfile
 {
 	class Framework : virtual public uml::Stereotype 
 	{
-		private:    
-			Framework(const Framework& that) = delete;
-
 		protected:
 			Framework(){}
 

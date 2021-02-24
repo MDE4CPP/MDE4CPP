@@ -84,6 +84,7 @@ InterfaceRealizationObject::InterfaceRealizationObject(std::shared_ptr<uml::Inte
 InterfaceRealizationObject::InterfaceRealizationObject(InterfaceRealizationObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 InterfaceRealizationObject::InterfaceRealizationObject()
@@ -101,6 +102,12 @@ std::shared_ptr<ecore::EObject> InterfaceRealizationObject::copy()
 	element->setThisInterfaceRealizationObjectPtr(element);
 	return element;
 }
+
+InterfaceRealizationObject& InterfaceRealizationObject::operator=(const InterfaceRealizationObject & obj)
+{
+	return *this;
+}
+
 
 void InterfaceRealizationObject::destroy()
 {	

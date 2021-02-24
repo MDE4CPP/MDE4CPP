@@ -234,7 +234,6 @@ namespace uml
 	{
 		public:
  			Stereotype(const Stereotype &) {}
-			Stereotype& operator=(Stereotype const&) = delete;
 
 		protected:
 			Stereotype(){}

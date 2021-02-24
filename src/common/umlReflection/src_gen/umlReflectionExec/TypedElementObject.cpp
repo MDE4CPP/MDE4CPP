@@ -64,6 +64,7 @@ TypedElementObject::TypedElementObject(std::shared_ptr<uml::TypedElement> _eleme
 TypedElementObject::TypedElementObject(TypedElementObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 TypedElementObject::TypedElementObject()
@@ -81,6 +82,12 @@ std::shared_ptr<ecore::EObject> TypedElementObject::copy()
 	element->setThisTypedElementObjectPtr(element);
 	return element;
 }
+
+TypedElementObject& TypedElementObject::operator=(const TypedElementObject & obj)
+{
+	return *this;
+}
+
 
 void TypedElementObject::destroy()
 {	

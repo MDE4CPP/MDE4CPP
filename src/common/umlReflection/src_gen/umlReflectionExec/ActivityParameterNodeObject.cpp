@@ -96,6 +96,7 @@ ActivityParameterNodeObject::ActivityParameterNodeObject(std::shared_ptr<uml::Ac
 ActivityParameterNodeObject::ActivityParameterNodeObject(ActivityParameterNodeObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ActivityParameterNodeObject::ActivityParameterNodeObject()
@@ -113,6 +114,12 @@ std::shared_ptr<ecore::EObject> ActivityParameterNodeObject::copy()
 	element->setThisActivityParameterNodeObjectPtr(element);
 	return element;
 }
+
+ActivityParameterNodeObject& ActivityParameterNodeObject::operator=(const ActivityParameterNodeObject & obj)
+{
+	return *this;
+}
+
 
 void ActivityParameterNodeObject::destroy()
 {	

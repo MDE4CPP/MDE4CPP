@@ -57,6 +57,7 @@ TemplateSignatureObject::TemplateSignatureObject(std::shared_ptr<uml::TemplateSi
 TemplateSignatureObject::TemplateSignatureObject(TemplateSignatureObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 TemplateSignatureObject::TemplateSignatureObject()
@@ -74,6 +75,12 @@ std::shared_ptr<ecore::EObject> TemplateSignatureObject::copy()
 	element->setThisTemplateSignatureObjectPtr(element);
 	return element;
 }
+
+TemplateSignatureObject& TemplateSignatureObject::operator=(const TemplateSignatureObject & obj)
+{
+	return *this;
+}
+
 
 void TemplateSignatureObject::destroy()
 {	

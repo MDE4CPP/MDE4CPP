@@ -22,10 +22,8 @@ namespace uml
 	{
 		public: 
 			SignalImpl(const SignalImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			SignalImpl& operator=(SignalImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			SignalImpl& operator=(SignalImpl const&);
 
 		protected:
 			friend class umlFactoryImpl;

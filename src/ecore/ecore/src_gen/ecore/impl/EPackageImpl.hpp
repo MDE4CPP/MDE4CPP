@@ -22,10 +22,8 @@ namespace ecore
 	{
 		public: 
 			EPackageImpl(const EPackageImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			EPackageImpl& operator=(EPackageImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			EPackageImpl& operator=(EPackageImpl const&);
 
 		protected:
 			friend class ecoreFactoryImpl;

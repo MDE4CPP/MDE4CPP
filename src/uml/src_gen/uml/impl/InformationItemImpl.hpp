@@ -22,10 +22,8 @@ namespace uml
 	{
 		public: 
 			InformationItemImpl(const InformationItemImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			InformationItemImpl& operator=(InformationItemImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			InformationItemImpl& operator=(InformationItemImpl const&);
 
 		protected:
 			friend class umlFactoryImpl;

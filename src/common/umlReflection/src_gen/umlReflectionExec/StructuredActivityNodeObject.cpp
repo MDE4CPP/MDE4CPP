@@ -131,6 +131,7 @@ StructuredActivityNodeObject::StructuredActivityNodeObject(std::shared_ptr<uml::
 StructuredActivityNodeObject::StructuredActivityNodeObject(StructuredActivityNodeObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 StructuredActivityNodeObject::StructuredActivityNodeObject()
@@ -148,6 +149,12 @@ std::shared_ptr<ecore::EObject> StructuredActivityNodeObject::copy()
 	element->setThisStructuredActivityNodeObjectPtr(element);
 	return element;
 }
+
+StructuredActivityNodeObject& StructuredActivityNodeObject::operator=(const StructuredActivityNodeObject & obj)
+{
+	return *this;
+}
+
 
 void StructuredActivityNodeObject::destroy()
 {	

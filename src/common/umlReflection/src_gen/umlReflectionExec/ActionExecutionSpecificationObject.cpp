@@ -76,6 +76,7 @@ ActionExecutionSpecificationObject::ActionExecutionSpecificationObject(std::shar
 ActionExecutionSpecificationObject::ActionExecutionSpecificationObject(ActionExecutionSpecificationObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ActionExecutionSpecificationObject::ActionExecutionSpecificationObject()
@@ -93,6 +94,12 @@ std::shared_ptr<ecore::EObject> ActionExecutionSpecificationObject::copy()
 	element->setThisActionExecutionSpecificationObjectPtr(element);
 	return element;
 }
+
+ActionExecutionSpecificationObject& ActionExecutionSpecificationObject::operator=(const ActionExecutionSpecificationObject & obj)
+{
+	return *this;
+}
+
 
 void ActionExecutionSpecificationObject::destroy()
 {	

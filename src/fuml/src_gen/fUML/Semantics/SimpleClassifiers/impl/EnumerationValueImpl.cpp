@@ -66,6 +66,9 @@ using namespace fUML::Semantics::SimpleClassifiers;
 //*********************************
 EnumerationValueImpl::EnumerationValueImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 EnumerationValueImpl::~EnumerationValueImpl()
@@ -78,6 +81,18 @@ EnumerationValueImpl::~EnumerationValueImpl()
 
 
 EnumerationValueImpl::EnumerationValueImpl(const EnumerationValueImpl & obj):EnumerationValueImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  EnumerationValueImpl::copy() const
+{
+	std::shared_ptr<EnumerationValueImpl> element(new EnumerationValueImpl(*this));
+	element->setThisEnumerationValuePtr(element);
+	return element;
+}
+
+EnumerationValueImpl& EnumerationValueImpl::operator=(const EnumerationValueImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -94,13 +109,8 @@ EnumerationValueImpl::EnumerationValueImpl(const EnumerationValueImpl & obj):Enu
 	//Clone references with containment (deep copy)
 
 
-}
 
-std::shared_ptr<ecore::EObject>  EnumerationValueImpl::copy() const
-{
-	std::shared_ptr<EnumerationValueImpl> element(new EnumerationValueImpl(*this));
-	element->setThisEnumerationValuePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> EnumerationValueImpl::eStaticClass() const

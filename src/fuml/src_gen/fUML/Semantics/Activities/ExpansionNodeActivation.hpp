@@ -81,7 +81,6 @@ namespace fUML::Semantics::Activities
 	{
 		public:
  			ExpansionNodeActivation(const ExpansionNodeActivation &) {}
-			ExpansionNodeActivation& operator=(ExpansionNodeActivation const&) = delete;
 
 		protected:
 			ExpansionNodeActivation(){}

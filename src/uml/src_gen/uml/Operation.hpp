@@ -195,7 +195,6 @@ namespace uml
 	{
 		public:
  			Operation(const Operation &) {}
-			Operation& operator=(Operation const&) = delete;
 
 		protected:
 			Operation(){}

@@ -85,6 +85,7 @@ ExecutableNodeObject::ExecutableNodeObject(std::shared_ptr<uml::ExecutableNode> 
 ExecutableNodeObject::ExecutableNodeObject(ExecutableNodeObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ExecutableNodeObject::ExecutableNodeObject()
@@ -102,6 +103,12 @@ std::shared_ptr<ecore::EObject> ExecutableNodeObject::copy()
 	element->setThisExecutableNodeObjectPtr(element);
 	return element;
 }
+
+ExecutableNodeObject& ExecutableNodeObject::operator=(const ExecutableNodeObject & obj)
+{
+	return *this;
+}
+
 
 void ExecutableNodeObject::destroy()
 {	

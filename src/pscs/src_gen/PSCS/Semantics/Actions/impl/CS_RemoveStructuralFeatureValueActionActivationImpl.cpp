@@ -99,6 +99,9 @@ using namespace PSCS::Semantics::Actions;
 //*********************************
 CS_RemoveStructuralFeatureValueActionActivationImpl::CS_RemoveStructuralFeatureValueActionActivationImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 CS_RemoveStructuralFeatureValueActionActivationImpl::~CS_RemoveStructuralFeatureValueActionActivationImpl()
@@ -117,6 +120,18 @@ CS_RemoveStructuralFeatureValueActionActivationImpl::CS_RemoveStructuralFeatureV
 
 
 CS_RemoveStructuralFeatureValueActionActivationImpl::CS_RemoveStructuralFeatureValueActionActivationImpl(const CS_RemoveStructuralFeatureValueActionActivationImpl & obj):CS_RemoveStructuralFeatureValueActionActivationImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  CS_RemoveStructuralFeatureValueActionActivationImpl::copy() const
+{
+	std::shared_ptr<CS_RemoveStructuralFeatureValueActionActivationImpl> element(new CS_RemoveStructuralFeatureValueActionActivationImpl(*this));
+	element->setThisCS_RemoveStructuralFeatureValueActionActivationPtr(element);
+	return element;
+}
+
+CS_RemoveStructuralFeatureValueActionActivationImpl& CS_RemoveStructuralFeatureValueActionActivationImpl::operator=(const CS_RemoveStructuralFeatureValueActionActivationImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -172,13 +187,8 @@ CS_RemoveStructuralFeatureValueActionActivationImpl::CS_RemoveStructuralFeatureV
 		std::cout << "Copying the Subset: " << "m_outputPinActivation" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  CS_RemoveStructuralFeatureValueActionActivationImpl::copy() const
-{
-	std::shared_ptr<CS_RemoveStructuralFeatureValueActionActivationImpl> element(new CS_RemoveStructuralFeatureValueActionActivationImpl(*this));
-	element->setThisCS_RemoveStructuralFeatureValueActionActivationPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> CS_RemoveStructuralFeatureValueActionActivationImpl::eStaticClass() const

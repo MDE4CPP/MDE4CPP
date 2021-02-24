@@ -61,6 +61,9 @@ using namespace fUML::Semantics::Activities;
 //*********************************
 DataStoreNodeActivationImpl::DataStoreNodeActivationImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 DataStoreNodeActivationImpl::~DataStoreNodeActivationImpl()
@@ -79,6 +82,18 @@ DataStoreNodeActivationImpl::DataStoreNodeActivationImpl(std::weak_ptr<fUML::Sem
 
 
 DataStoreNodeActivationImpl::DataStoreNodeActivationImpl(const DataStoreNodeActivationImpl & obj):DataStoreNodeActivationImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  DataStoreNodeActivationImpl::copy() const
+{
+	std::shared_ptr<DataStoreNodeActivationImpl> element(new DataStoreNodeActivationImpl(*this));
+	element->setThisDataStoreNodeActivationPtr(element);
+	return element;
+}
+
+DataStoreNodeActivationImpl& DataStoreNodeActivationImpl::operator=(const DataStoreNodeActivationImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -111,13 +126,8 @@ DataStoreNodeActivationImpl::DataStoreNodeActivationImpl(const DataStoreNodeActi
 		std::cout << "Copying the Subset: " << "m_heldTokens" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  DataStoreNodeActivationImpl::copy() const
-{
-	std::shared_ptr<DataStoreNodeActivationImpl> element(new DataStoreNodeActivationImpl(*this));
-	element->setThisDataStoreNodeActivationPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> DataStoreNodeActivationImpl::eStaticClass() const

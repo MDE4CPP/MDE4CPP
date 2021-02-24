@@ -23,10 +23,8 @@ namespace uml
 	{
 		public: 
 			IncludeImpl(const IncludeImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			IncludeImpl& operator=(IncludeImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			IncludeImpl& operator=(IncludeImpl const&);
 
 		protected:
 			friend class umlFactoryImpl;

@@ -78,6 +78,7 @@ TimeIntervalObject::TimeIntervalObject(std::shared_ptr<uml::TimeInterval> _eleme
 TimeIntervalObject::TimeIntervalObject(TimeIntervalObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 TimeIntervalObject::TimeIntervalObject()
@@ -95,6 +96,12 @@ std::shared_ptr<ecore::EObject> TimeIntervalObject::copy()
 	element->setThisTimeIntervalObjectPtr(element);
 	return element;
 }
+
+TimeIntervalObject& TimeIntervalObject::operator=(const TimeIntervalObject & obj)
+{
+	return *this;
+}
+
 
 void TimeIntervalObject::destroy()
 {	

@@ -22,10 +22,8 @@ namespace uml
 	{
 		public: 
 			LiteralBooleanImpl(const LiteralBooleanImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			LiteralBooleanImpl& operator=(LiteralBooleanImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			LiteralBooleanImpl& operator=(LiteralBooleanImpl const&);
 
 		protected:
 			friend class umlFactoryImpl;

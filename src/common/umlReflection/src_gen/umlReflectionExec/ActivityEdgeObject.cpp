@@ -87,6 +87,7 @@ ActivityEdgeObject::ActivityEdgeObject(std::shared_ptr<uml::ActivityEdge> _eleme
 ActivityEdgeObject::ActivityEdgeObject(ActivityEdgeObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ActivityEdgeObject::ActivityEdgeObject()
@@ -104,6 +105,12 @@ std::shared_ptr<ecore::EObject> ActivityEdgeObject::copy()
 	element->setThisActivityEdgeObjectPtr(element);
 	return element;
 }
+
+ActivityEdgeObject& ActivityEdgeObject::operator=(const ActivityEdgeObject & obj)
+{
+	return *this;
+}
+
 
 void ActivityEdgeObject::destroy()
 {	

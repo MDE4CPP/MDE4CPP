@@ -157,6 +157,7 @@ DeviceObject::DeviceObject(std::shared_ptr<uml::Device> _element):
 DeviceObject::DeviceObject(DeviceObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 DeviceObject::DeviceObject()
@@ -174,6 +175,12 @@ std::shared_ptr<ecore::EObject> DeviceObject::copy()
 	element->setThisDeviceObjectPtr(element);
 	return element;
 }
+
+DeviceObject& DeviceObject::operator=(const DeviceObject & obj)
+{
+	return *this;
+}
+
 
 void DeviceObject::destroy()
 {	

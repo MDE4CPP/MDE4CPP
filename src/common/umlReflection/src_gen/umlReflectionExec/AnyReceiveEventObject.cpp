@@ -68,6 +68,7 @@ AnyReceiveEventObject::AnyReceiveEventObject(std::shared_ptr<uml::AnyReceiveEven
 AnyReceiveEventObject::AnyReceiveEventObject(AnyReceiveEventObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 AnyReceiveEventObject::AnyReceiveEventObject()
@@ -85,6 +86,12 @@ std::shared_ptr<ecore::EObject> AnyReceiveEventObject::copy()
 	element->setThisAnyReceiveEventObjectPtr(element);
 	return element;
 }
+
+AnyReceiveEventObject& AnyReceiveEventObject::operator=(const AnyReceiveEventObject & obj)
+{
+	return *this;
+}
+
 
 void AnyReceiveEventObject::destroy()
 {	

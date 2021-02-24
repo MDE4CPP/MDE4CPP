@@ -83,6 +83,7 @@ InitialNodeObject::InitialNodeObject(std::shared_ptr<uml::InitialNode> _element)
 InitialNodeObject::InitialNodeObject(InitialNodeObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 InitialNodeObject::InitialNodeObject()
@@ -100,6 +101,12 @@ std::shared_ptr<ecore::EObject> InitialNodeObject::copy()
 	element->setThisInitialNodeObjectPtr(element);
 	return element;
 }
+
+InitialNodeObject& InitialNodeObject::operator=(const InitialNodeObject & obj)
+{
+	return *this;
+}
+
 
 void InitialNodeObject::destroy()
 {	

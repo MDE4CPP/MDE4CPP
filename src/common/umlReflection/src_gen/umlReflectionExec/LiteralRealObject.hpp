@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~LiteralRealObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			LiteralRealObject& operator=(LiteralRealObject const&);
 
 			virtual void destroy();
 			

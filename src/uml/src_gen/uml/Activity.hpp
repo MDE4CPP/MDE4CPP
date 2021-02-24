@@ -270,7 +270,6 @@ namespace uml
 	{
 		public:
  			Activity(const Activity &) {}
-			Activity& operator=(Activity const&) = delete;
 
 		protected:
 			Activity(){}

@@ -89,6 +89,9 @@ using namespace uml;
 //*********************************
 RemoveVariableValueActionImpl::RemoveVariableValueActionImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 RemoveVariableValueActionImpl::~RemoveVariableValueActionImpl()
@@ -131,6 +134,18 @@ RemoveVariableValueActionImpl::RemoveVariableValueActionImpl(std::weak_ptr<uml::
 
 
 RemoveVariableValueActionImpl::RemoveVariableValueActionImpl(const RemoveVariableValueActionImpl & obj):RemoveVariableValueActionImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  RemoveVariableValueActionImpl::copy() const
+{
+	std::shared_ptr<RemoveVariableValueActionImpl> element(new RemoveVariableValueActionImpl(*this));
+	element->setThisRemoveVariableValueActionPtr(element);
+	return element;
+}
+
+RemoveVariableValueActionImpl& RemoveVariableValueActionImpl::operator=(const RemoveVariableValueActionImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -257,13 +272,8 @@ RemoveVariableValueActionImpl::RemoveVariableValueActionImpl(const RemoveVariabl
 	#endif
 
 	
-}
 
-std::shared_ptr<ecore::EObject>  RemoveVariableValueActionImpl::copy() const
-{
-	std::shared_ptr<RemoveVariableValueActionImpl> element(new RemoveVariableValueActionImpl(*this));
-	element->setThisRemoveVariableValueActionPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> RemoveVariableValueActionImpl::eStaticClass() const

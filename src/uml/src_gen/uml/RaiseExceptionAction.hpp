@@ -151,7 +151,6 @@ namespace uml
 	{
 		public:
  			RaiseExceptionAction(const RaiseExceptionAction &) {}
-			RaiseExceptionAction& operator=(RaiseExceptionAction const&) = delete;
 
 		protected:
 			RaiseExceptionAction(){}

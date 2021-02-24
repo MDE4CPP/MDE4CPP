@@ -22,10 +22,8 @@ namespace uml
 	{
 		public: 
 			DeviceImpl(const DeviceImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			DeviceImpl& operator=(DeviceImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			DeviceImpl& operator=(DeviceImpl const&);
 
 		protected:
 			friend class umlFactoryImpl;

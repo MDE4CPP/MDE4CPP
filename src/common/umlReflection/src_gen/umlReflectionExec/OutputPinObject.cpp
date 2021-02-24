@@ -103,6 +103,7 @@ OutputPinObject::OutputPinObject(std::shared_ptr<uml::OutputPin> _element):
 OutputPinObject::OutputPinObject(OutputPinObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 OutputPinObject::OutputPinObject()
@@ -120,6 +121,12 @@ std::shared_ptr<ecore::EObject> OutputPinObject::copy()
 	element->setThisOutputPinObjectPtr(element);
 	return element;
 }
+
+OutputPinObject& OutputPinObject::operator=(const OutputPinObject & obj)
+{
+	return *this;
+}
+
 
 void OutputPinObject::destroy()
 {	

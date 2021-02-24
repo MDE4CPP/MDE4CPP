@@ -162,7 +162,6 @@ namespace uml
 	{
 		public:
  			Action(const Action &) {}
-			Action& operator=(Action const&) = delete;
 
 		protected:
 			Action(){}

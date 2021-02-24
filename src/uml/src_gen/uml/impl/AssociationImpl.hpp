@@ -23,10 +23,8 @@ namespace uml
 	{
 		public: 
 			AssociationImpl(const AssociationImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			AssociationImpl& operator=(AssociationImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			AssociationImpl& operator=(AssociationImpl const&);
 
 		protected:
 			friend class umlFactoryImpl;

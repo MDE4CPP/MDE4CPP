@@ -23,10 +23,8 @@ namespace fUML::Semantics::SimpleClassifiers
 	{
 		public: 
 			CompoundValueImpl(const CompoundValueImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			CompoundValueImpl& operator=(CompoundValueImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			CompoundValueImpl& operator=(CompoundValueImpl const&);
 
 		protected:
 			friend class fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactoryImpl;

@@ -63,6 +63,7 @@ PackageImportObject::PackageImportObject(std::shared_ptr<uml::PackageImport> _el
 PackageImportObject::PackageImportObject(PackageImportObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 PackageImportObject::PackageImportObject()
@@ -80,6 +81,12 @@ std::shared_ptr<ecore::EObject> PackageImportObject::copy()
 	element->setThisPackageImportObjectPtr(element);
 	return element;
 }
+
+PackageImportObject& PackageImportObject::operator=(const PackageImportObject & obj)
+{
+	return *this;
+}
+
 
 void PackageImportObject::destroy()
 {	

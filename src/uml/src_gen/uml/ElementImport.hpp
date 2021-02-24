@@ -84,7 +84,6 @@ namespace uml
 	{
 		public:
  			ElementImport(const ElementImport &) {}
-			ElementImport& operator=(ElementImport const&) = delete;
 
 		protected:
 			ElementImport(){}

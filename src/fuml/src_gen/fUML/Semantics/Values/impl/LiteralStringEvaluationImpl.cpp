@@ -61,6 +61,9 @@ using namespace fUML::Semantics::Values;
 //*********************************
 LiteralStringEvaluationImpl::LiteralStringEvaluationImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 LiteralStringEvaluationImpl::~LiteralStringEvaluationImpl()
@@ -73,6 +76,18 @@ LiteralStringEvaluationImpl::~LiteralStringEvaluationImpl()
 
 
 LiteralStringEvaluationImpl::LiteralStringEvaluationImpl(const LiteralStringEvaluationImpl & obj):LiteralStringEvaluationImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  LiteralStringEvaluationImpl::copy() const
+{
+	std::shared_ptr<LiteralStringEvaluationImpl> element(new LiteralStringEvaluationImpl(*this));
+	element->setThisLiteralStringEvaluationPtr(element);
+	return element;
+}
+
+LiteralStringEvaluationImpl& LiteralStringEvaluationImpl::operator=(const LiteralStringEvaluationImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -89,13 +104,8 @@ LiteralStringEvaluationImpl::LiteralStringEvaluationImpl(const LiteralStringEval
 	//Clone references with containment (deep copy)
 
 
-}
 
-std::shared_ptr<ecore::EObject>  LiteralStringEvaluationImpl::copy() const
-{
-	std::shared_ptr<LiteralStringEvaluationImpl> element(new LiteralStringEvaluationImpl(*this));
-	element->setThisLiteralStringEvaluationPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> LiteralStringEvaluationImpl::eStaticClass() const

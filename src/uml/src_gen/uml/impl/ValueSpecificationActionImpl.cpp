@@ -89,6 +89,9 @@ using namespace uml;
 //*********************************
 ValueSpecificationActionImpl::ValueSpecificationActionImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ValueSpecificationActionImpl::~ValueSpecificationActionImpl()
@@ -131,6 +134,18 @@ ValueSpecificationActionImpl::ValueSpecificationActionImpl(std::weak_ptr<uml::El
 
 
 ValueSpecificationActionImpl::ValueSpecificationActionImpl(const ValueSpecificationActionImpl & obj):ValueSpecificationActionImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ValueSpecificationActionImpl::copy() const
+{
+	std::shared_ptr<ValueSpecificationActionImpl> element(new ValueSpecificationActionImpl(*this));
+	element->setThisValueSpecificationActionPtr(element);
+	return element;
+}
+
+ValueSpecificationActionImpl& ValueSpecificationActionImpl::operator=(const ValueSpecificationActionImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -256,13 +271,8 @@ ValueSpecificationActionImpl::ValueSpecificationActionImpl(const ValueSpecificat
 	
 
 	
-}
 
-std::shared_ptr<ecore::EObject>  ValueSpecificationActionImpl::copy() const
-{
-	std::shared_ptr<ValueSpecificationActionImpl> element(new ValueSpecificationActionImpl(*this));
-	element->setThisValueSpecificationActionPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ValueSpecificationActionImpl::eStaticClass() const

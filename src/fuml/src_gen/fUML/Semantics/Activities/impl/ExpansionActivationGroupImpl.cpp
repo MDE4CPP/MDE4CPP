@@ -69,6 +69,9 @@ using namespace fUML::Semantics::Activities;
 //*********************************
 ExpansionActivationGroupImpl::ExpansionActivationGroupImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ExpansionActivationGroupImpl::~ExpansionActivationGroupImpl()
@@ -94,6 +97,18 @@ ExpansionActivationGroupImpl::ExpansionActivationGroupImpl(std::weak_ptr<fUML::S
 
 
 ExpansionActivationGroupImpl::ExpansionActivationGroupImpl(const ExpansionActivationGroupImpl & obj):ExpansionActivationGroupImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ExpansionActivationGroupImpl::copy() const
+{
+	std::shared_ptr<ExpansionActivationGroupImpl> element(new ExpansionActivationGroupImpl(*this));
+	element->setThisExpansionActivationGroupPtr(element);
+	return element;
+}
+
+ExpansionActivationGroupImpl& ExpansionActivationGroupImpl::operator=(const ExpansionActivationGroupImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -141,13 +156,8 @@ ExpansionActivationGroupImpl::ExpansionActivationGroupImpl(const ExpansionActiva
 		std::cout << "Copying the Subset: " << "m_nodeActivations" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  ExpansionActivationGroupImpl::copy() const
-{
-	std::shared_ptr<ExpansionActivationGroupImpl> element(new ExpansionActivationGroupImpl(*this));
-	element->setThisExpansionActivationGroupPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ExpansionActivationGroupImpl::eStaticClass() const

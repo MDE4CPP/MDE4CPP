@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~CombinedFragmentObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			CombinedFragmentObject& operator=(CombinedFragmentObject const&);
 
 			virtual void destroy();
 			

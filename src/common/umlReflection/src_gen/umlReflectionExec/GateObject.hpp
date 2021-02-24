@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~GateObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			GateObject& operator=(GateObject const&);
 
 			virtual void destroy();
 			

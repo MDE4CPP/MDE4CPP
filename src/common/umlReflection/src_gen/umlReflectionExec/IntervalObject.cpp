@@ -74,6 +74,7 @@ IntervalObject::IntervalObject(std::shared_ptr<uml::Interval> _element):
 IntervalObject::IntervalObject(IntervalObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 IntervalObject::IntervalObject()
@@ -91,6 +92,12 @@ std::shared_ptr<ecore::EObject> IntervalObject::copy()
 	element->setThisIntervalObjectPtr(element);
 	return element;
 }
+
+IntervalObject& IntervalObject::operator=(const IntervalObject & obj)
+{
+	return *this;
+}
+
 
 void IntervalObject::destroy()
 {	

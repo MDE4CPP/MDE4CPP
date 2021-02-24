@@ -58,6 +58,9 @@ using namespace uml;
 //*********************************
 ClauseImpl::ClauseImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ClauseImpl::~ClauseImpl()
@@ -76,6 +79,18 @@ ClauseImpl::ClauseImpl(std::weak_ptr<uml::Element > par_owner)
 
 
 ClauseImpl::ClauseImpl(const ClauseImpl & obj):ClauseImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ClauseImpl::copy() const
+{
+	std::shared_ptr<ClauseImpl> element(new ClauseImpl(*this));
+	element->setThisClausePtr(element);
+	return element;
+}
+
+ClauseImpl& ClauseImpl::operator=(const ClauseImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -115,13 +130,8 @@ ClauseImpl::ClauseImpl(const ClauseImpl & obj):ClauseImpl()
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  ClauseImpl::copy() const
-{
-	std::shared_ptr<ClauseImpl> element(new ClauseImpl(*this));
-	element->setThisClausePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ClauseImpl::eStaticClass() const

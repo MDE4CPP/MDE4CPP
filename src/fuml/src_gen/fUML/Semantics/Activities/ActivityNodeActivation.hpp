@@ -96,7 +96,6 @@ namespace fUML::Semantics::Activities
 	{
 		public:
  			ActivityNodeActivation(const ActivityNodeActivation &) {}
-			ActivityNodeActivation& operator=(ActivityNodeActivation const&) = delete;
 
 		protected:
 			ActivityNodeActivation(){}

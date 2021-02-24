@@ -103,6 +103,7 @@ AcceptCallActionObject::AcceptCallActionObject(std::shared_ptr<uml::AcceptCallAc
 AcceptCallActionObject::AcceptCallActionObject(AcceptCallActionObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 AcceptCallActionObject::AcceptCallActionObject()
@@ -120,6 +121,12 @@ std::shared_ptr<ecore::EObject> AcceptCallActionObject::copy()
 	element->setThisAcceptCallActionObjectPtr(element);
 	return element;
 }
+
+AcceptCallActionObject& AcceptCallActionObject::operator=(const AcceptCallActionObject & obj)
+{
+	return *this;
+}
+
 
 void AcceptCallActionObject::destroy()
 {	

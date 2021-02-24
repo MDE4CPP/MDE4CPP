@@ -194,7 +194,6 @@ namespace uml
 	{
 		public:
  			DeploymentSpecification(const DeploymentSpecification &) {}
-			DeploymentSpecification& operator=(DeploymentSpecification const&) = delete;
 
 		protected:
 			DeploymentSpecification(){}

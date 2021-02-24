@@ -150,7 +150,6 @@ namespace uml
 	{
 		public:
  			Reception(const Reception &) {}
-			Reception& operator=(Reception const&) = delete;
 
 		protected:
 			Reception(){}

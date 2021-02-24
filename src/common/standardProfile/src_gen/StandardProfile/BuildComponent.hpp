@@ -25,9 +25,6 @@ namespace StandardProfile
 {
 	class BuildComponent : virtual public uml::Stereotype 
 	{
-		private:    
-			BuildComponent(const BuildComponent& that) = delete;
-
 		protected:
 			BuildComponent(){}
 

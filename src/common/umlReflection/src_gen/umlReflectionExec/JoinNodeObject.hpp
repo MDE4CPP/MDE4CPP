@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~JoinNodeObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			JoinNodeObject& operator=(JoinNodeObject const&);
 
 			virtual void destroy();
 			

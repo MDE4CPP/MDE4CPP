@@ -25,10 +25,8 @@ virtual public SemanticStrategy
 	{
 		public: 
 			SemanticStrategyImpl(const SemanticStrategyImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			SemanticStrategyImpl& operator=(SemanticStrategyImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			SemanticStrategyImpl& operator=(SemanticStrategyImpl const&);
 
 		protected:
 			friend class fUML::Semantics::Loci::LociFactoryImpl;

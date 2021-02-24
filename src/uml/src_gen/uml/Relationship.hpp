@@ -64,7 +64,6 @@ namespace uml
 	{
 		public:
  			Relationship(const Relationship &) {}
-			Relationship& operator=(Relationship const&) = delete;
 
 		protected:
 			Relationship(){}

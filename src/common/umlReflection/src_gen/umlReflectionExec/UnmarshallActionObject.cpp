@@ -102,6 +102,7 @@ UnmarshallActionObject::UnmarshallActionObject(std::shared_ptr<uml::UnmarshallAc
 UnmarshallActionObject::UnmarshallActionObject(UnmarshallActionObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 UnmarshallActionObject::UnmarshallActionObject()
@@ -119,6 +120,12 @@ std::shared_ptr<ecore::EObject> UnmarshallActionObject::copy()
 	element->setThisUnmarshallActionObjectPtr(element);
 	return element;
 }
+
+UnmarshallActionObject& UnmarshallActionObject::operator=(const UnmarshallActionObject & obj)
+{
+	return *this;
+}
+
 
 void UnmarshallActionObject::destroy()
 {	

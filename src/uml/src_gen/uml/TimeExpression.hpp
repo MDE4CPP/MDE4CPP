@@ -120,7 +120,6 @@ namespace uml
 	{
 		public:
  			TimeExpression(const TimeExpression &) {}
-			TimeExpression& operator=(TimeExpression const&) = delete;
 
 		protected:
 			TimeExpression(){}

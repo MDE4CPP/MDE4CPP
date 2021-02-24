@@ -23,10 +23,8 @@ namespace PSCS::Semantics::Actions
 	{
 		public: 
 			CS_RemoveStructuralFeatureValueActionActivationImpl(const CS_RemoveStructuralFeatureValueActionActivationImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			CS_RemoveStructuralFeatureValueActionActivationImpl& operator=(CS_RemoveStructuralFeatureValueActionActivationImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			CS_RemoveStructuralFeatureValueActionActivationImpl& operator=(CS_RemoveStructuralFeatureValueActionActivationImpl const&);
 
 		protected:
 			friend class PSCS::Semantics::Actions::ActionsFactoryImpl;

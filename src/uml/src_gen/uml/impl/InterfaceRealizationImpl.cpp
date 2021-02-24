@@ -72,6 +72,9 @@ using namespace uml;
 //*********************************
 InterfaceRealizationImpl::InterfaceRealizationImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 InterfaceRealizationImpl::~InterfaceRealizationImpl()
@@ -122,6 +125,18 @@ InterfaceRealizationImpl::InterfaceRealizationImpl(std::weak_ptr<uml::TemplatePa
 
 
 InterfaceRealizationImpl::InterfaceRealizationImpl(const InterfaceRealizationImpl & obj):InterfaceRealizationImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  InterfaceRealizationImpl::copy() const
+{
+	std::shared_ptr<InterfaceRealizationImpl> element(new InterfaceRealizationImpl(*this));
+	element->setThisInterfaceRealizationPtr(element);
+	return element;
+}
+
+InterfaceRealizationImpl& InterfaceRealizationImpl::operator=(const InterfaceRealizationImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -200,13 +215,8 @@ InterfaceRealizationImpl::InterfaceRealizationImpl(const InterfaceRealizationImp
 		std::cout << "Copying the Subset: " << "m_supplier" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  InterfaceRealizationImpl::copy() const
-{
-	std::shared_ptr<InterfaceRealizationImpl> element(new InterfaceRealizationImpl(*this));
-	element->setThisInterfaceRealizationPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> InterfaceRealizationImpl::eStaticClass() const

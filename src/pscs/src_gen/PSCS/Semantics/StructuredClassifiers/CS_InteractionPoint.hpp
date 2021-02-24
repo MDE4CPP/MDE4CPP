@@ -101,7 +101,6 @@ namespace PSCS::Semantics::StructuredClassifiers
 	{
 		public:
  			CS_InteractionPoint(const CS_InteractionPoint &) {}
-			CS_InteractionPoint& operator=(CS_InteractionPoint const&) = delete;
 
 		protected:
 			CS_InteractionPoint(){}

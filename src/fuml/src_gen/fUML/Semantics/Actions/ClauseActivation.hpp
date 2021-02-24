@@ -71,7 +71,6 @@ namespace fUML::Semantics::Actions
 	{
 		public:
  			ClauseActivation(const ClauseActivation &) {}
-			ClauseActivation& operator=(ClauseActivation const&) = delete;
 
 		protected:
 			ClauseActivation(){}

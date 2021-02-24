@@ -71,6 +71,9 @@ using namespace uml;
 //*********************************
 CombinedFragmentImpl::CombinedFragmentImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 CombinedFragmentImpl::~CombinedFragmentImpl()
@@ -113,6 +116,18 @@ CombinedFragmentImpl::CombinedFragmentImpl(std::weak_ptr<uml::Element > par_owne
 
 
 CombinedFragmentImpl::CombinedFragmentImpl(const CombinedFragmentImpl & obj):CombinedFragmentImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  CombinedFragmentImpl::copy() const
+{
+	std::shared_ptr<CombinedFragmentImpl> element(new CombinedFragmentImpl(*this));
+	element->setThisCombinedFragmentPtr(element);
+	return element;
+}
+
+CombinedFragmentImpl& CombinedFragmentImpl::operator=(const CombinedFragmentImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -195,13 +210,8 @@ CombinedFragmentImpl::CombinedFragmentImpl(const CombinedFragmentImpl & obj):Com
 		std::cout << "Initialising value Subset: " << "m_operand - Subset<uml::InteractionOperand, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
 	
-}
 
-std::shared_ptr<ecore::EObject>  CombinedFragmentImpl::copy() const
-{
-	std::shared_ptr<CombinedFragmentImpl> element(new CombinedFragmentImpl(*this));
-	element->setThisCombinedFragmentPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> CombinedFragmentImpl::eStaticClass() const

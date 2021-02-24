@@ -70,7 +70,6 @@ namespace fUML::Semantics::Values
 	{
 		public:
  			LiteralIntegerEvaluation(const LiteralIntegerEvaluation &) {}
-			LiteralIntegerEvaluation& operator=(LiteralIntegerEvaluation const&) = delete;
 
 		protected:
 			LiteralIntegerEvaluation(){}

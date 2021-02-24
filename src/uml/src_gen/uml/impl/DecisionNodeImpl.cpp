@@ -83,6 +83,9 @@ using namespace uml;
 //*********************************
 DecisionNodeImpl::DecisionNodeImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 DecisionNodeImpl::~DecisionNodeImpl()
@@ -125,6 +128,18 @@ DecisionNodeImpl::DecisionNodeImpl(std::weak_ptr<uml::Element > par_owner)
 
 
 DecisionNodeImpl::DecisionNodeImpl(const DecisionNodeImpl & obj):DecisionNodeImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  DecisionNodeImpl::copy() const
+{
+	std::shared_ptr<DecisionNodeImpl> element(new DecisionNodeImpl(*this));
+	element->setThisDecisionNodePtr(element);
+	return element;
+}
+
+DecisionNodeImpl& DecisionNodeImpl::operator=(const DecisionNodeImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -210,13 +225,8 @@ DecisionNodeImpl::DecisionNodeImpl(const DecisionNodeImpl & obj):DecisionNodeImp
 		std::cout << "Copying the Subset: " << "m_redefinedNode" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  DecisionNodeImpl::copy() const
-{
-	std::shared_ptr<DecisionNodeImpl> element(new DecisionNodeImpl(*this));
-	element->setThisDecisionNodePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> DecisionNodeImpl::eStaticClass() const

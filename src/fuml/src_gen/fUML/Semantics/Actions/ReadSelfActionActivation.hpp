@@ -100,7 +100,6 @@ namespace fUML::Semantics::Actions
 	{
 		public:
  			ReadSelfActionActivation(const ReadSelfActionActivation &) {}
-			ReadSelfActionActivation& operator=(ReadSelfActionActivation const&) = delete;
 
 		protected:
 			ReadSelfActionActivation(){}

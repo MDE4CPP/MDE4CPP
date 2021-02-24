@@ -63,6 +63,9 @@ using namespace fUML::Semantics::SimpleClassifiers;
 //*********************************
 BooleanValueImpl::BooleanValueImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 BooleanValueImpl::~BooleanValueImpl()
@@ -75,6 +78,18 @@ BooleanValueImpl::~BooleanValueImpl()
 
 
 BooleanValueImpl::BooleanValueImpl(const BooleanValueImpl & obj):BooleanValueImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  BooleanValueImpl::copy() const
+{
+	std::shared_ptr<BooleanValueImpl> element(new BooleanValueImpl(*this));
+	element->setThisBooleanValuePtr(element);
+	return element;
+}
+
+BooleanValueImpl& BooleanValueImpl::operator=(const BooleanValueImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -90,13 +105,8 @@ BooleanValueImpl::BooleanValueImpl(const BooleanValueImpl & obj):BooleanValueImp
 	//Clone references with containment (deep copy)
 
 
-}
 
-std::shared_ptr<ecore::EObject>  BooleanValueImpl::copy() const
-{
-	std::shared_ptr<BooleanValueImpl> element(new BooleanValueImpl(*this));
-	element->setThisBooleanValuePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> BooleanValueImpl::eStaticClass() const

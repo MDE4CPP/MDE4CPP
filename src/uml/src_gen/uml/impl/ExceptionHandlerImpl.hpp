@@ -22,10 +22,8 @@ namespace uml
 	{
 		public: 
 			ExceptionHandlerImpl(const ExceptionHandlerImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			ExceptionHandlerImpl& operator=(ExceptionHandlerImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			ExceptionHandlerImpl& operator=(ExceptionHandlerImpl const&);
 
 		protected:
 			friend class umlFactoryImpl;

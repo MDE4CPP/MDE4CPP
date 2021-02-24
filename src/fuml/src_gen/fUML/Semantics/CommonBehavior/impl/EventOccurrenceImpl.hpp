@@ -25,10 +25,8 @@ virtual public EventOccurrence
 	{
 		public: 
 			EventOccurrenceImpl(const EventOccurrenceImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			EventOccurrenceImpl& operator=(EventOccurrenceImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			EventOccurrenceImpl& operator=(EventOccurrenceImpl const&);
 
 		protected:
 			friend class fUML::Semantics::CommonBehavior::CommonBehaviorFactoryImpl;

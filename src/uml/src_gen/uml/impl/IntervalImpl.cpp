@@ -70,6 +70,9 @@ using namespace uml;
 //*********************************
 IntervalImpl::IntervalImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 IntervalImpl::~IntervalImpl()
@@ -129,6 +132,18 @@ IntervalImpl::IntervalImpl(std::weak_ptr<uml::ValueSpecificationAction > par_val
 
 IntervalImpl::IntervalImpl(const IntervalImpl & obj):IntervalImpl()
 {
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  IntervalImpl::copy() const
+{
+	std::shared_ptr<IntervalImpl> element(new IntervalImpl(*this));
+	element->setThisIntervalPtr(element);
+	return element;
+}
+
+IntervalImpl& IntervalImpl::operator=(const IntervalImpl & obj)
+{
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Interval "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -181,13 +196,8 @@ IntervalImpl::IntervalImpl(const IntervalImpl & obj):IntervalImpl()
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  IntervalImpl::copy() const
-{
-	std::shared_ptr<IntervalImpl> element(new IntervalImpl(*this));
-	element->setThisIntervalPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> IntervalImpl::eStaticClass() const

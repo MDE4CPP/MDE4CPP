@@ -23,10 +23,8 @@ namespace uml
 	{
 		public: 
 			MessageOccurrenceSpecificationImpl(const MessageOccurrenceSpecificationImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			MessageOccurrenceSpecificationImpl& operator=(MessageOccurrenceSpecificationImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			MessageOccurrenceSpecificationImpl& operator=(MessageOccurrenceSpecificationImpl const&);
 
 		protected:
 			friend class umlFactoryImpl;

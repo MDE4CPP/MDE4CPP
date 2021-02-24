@@ -70,6 +70,9 @@ using namespace uml;
 //*********************************
 ManifestationImpl::ManifestationImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ManifestationImpl::~ManifestationImpl()
@@ -112,6 +115,18 @@ ManifestationImpl::ManifestationImpl(std::weak_ptr<uml::TemplateParameter > par_
 
 
 ManifestationImpl::ManifestationImpl(const ManifestationImpl & obj):ManifestationImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ManifestationImpl::copy() const
+{
+	std::shared_ptr<ManifestationImpl> element(new ManifestationImpl(*this));
+	element->setThisManifestationPtr(element);
+	return element;
+}
+
+ManifestationImpl& ManifestationImpl::operator=(const ManifestationImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -188,13 +203,8 @@ ManifestationImpl::ManifestationImpl(const ManifestationImpl & obj):Manifestatio
 		std::cout << "Copying the Subset: " << "m_utilizedElement" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  ManifestationImpl::copy() const
-{
-	std::shared_ptr<ManifestationImpl> element(new ManifestationImpl(*this));
-	element->setThisManifestationPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ManifestationImpl::eStaticClass() const

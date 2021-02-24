@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~EnumerationObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			EnumerationObject& operator=(EnumerationObject const&);
 
 			virtual void destroy();
 			

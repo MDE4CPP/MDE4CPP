@@ -84,7 +84,6 @@ namespace uml
 	{
 		public:
  			ExceptionHandler(const ExceptionHandler &) {}
-			ExceptionHandler& operator=(ExceptionHandler const&) = delete;
 
 		protected:
 			ExceptionHandler(){}

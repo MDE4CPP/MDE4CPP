@@ -22,10 +22,8 @@ namespace uml
 	{
 		public: 
 			LinkEndDestructionDataImpl(const LinkEndDestructionDataImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			LinkEndDestructionDataImpl& operator=(LinkEndDestructionDataImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			LinkEndDestructionDataImpl& operator=(LinkEndDestructionDataImpl const&);
 
 		protected:
 			friend class umlFactoryImpl;

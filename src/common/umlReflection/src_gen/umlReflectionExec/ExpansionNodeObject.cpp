@@ -98,6 +98,7 @@ ExpansionNodeObject::ExpansionNodeObject(std::shared_ptr<uml::ExpansionNode> _el
 ExpansionNodeObject::ExpansionNodeObject(ExpansionNodeObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ExpansionNodeObject::ExpansionNodeObject()
@@ -115,6 +116,12 @@ std::shared_ptr<ecore::EObject> ExpansionNodeObject::copy()
 	element->setThisExpansionNodeObjectPtr(element);
 	return element;
 }
+
+ExpansionNodeObject& ExpansionNodeObject::operator=(const ExpansionNodeObject & obj)
+{
+	return *this;
+}
+
 
 void ExpansionNodeObject::destroy()
 {	

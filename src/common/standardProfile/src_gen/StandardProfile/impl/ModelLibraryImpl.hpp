@@ -29,10 +29,8 @@ namespace StandardProfile
 	{
 		public: 
 			ModelLibraryImpl(const ModelLibraryImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			ModelLibraryImpl& operator=(ModelLibraryImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;  
+			ModelLibraryImpl& operator=(ModelLibraryImpl const&);
 
 		protected:
 			friend class StandardProfileFactoryImpl;

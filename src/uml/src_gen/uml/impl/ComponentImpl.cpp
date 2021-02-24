@@ -121,6 +121,9 @@ using namespace uml;
 //*********************************
 ComponentImpl::ComponentImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ComponentImpl::~ComponentImpl()
@@ -176,6 +179,18 @@ ComponentImpl::ComponentImpl(std::weak_ptr<uml::TemplateParameter > par_owningTe
 
 
 ComponentImpl::ComponentImpl(const ComponentImpl & obj):ComponentImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ComponentImpl::copy() const
+{
+	std::shared_ptr<ComponentImpl> element(new ComponentImpl(*this));
+	element->setThisComponentPtr(element);
+	return element;
+}
+
+ComponentImpl& ComponentImpl::operator=(const ComponentImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -461,13 +476,8 @@ ComponentImpl::ComponentImpl(const ComponentImpl & obj):ComponentImpl()
 		std::cout << "Initialising value Subset: " << "m_realization - Subset<uml::ComponentRealization, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
 	
-}
 
-std::shared_ptr<ecore::EObject>  ComponentImpl::copy() const
-{
-	std::shared_ptr<ComponentImpl> element(new ComponentImpl(*this));
-	element->setThisComponentPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ComponentImpl::eStaticClass() const

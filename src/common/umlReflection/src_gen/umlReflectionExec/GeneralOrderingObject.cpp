@@ -66,6 +66,7 @@ GeneralOrderingObject::GeneralOrderingObject(std::shared_ptr<uml::GeneralOrderin
 GeneralOrderingObject::GeneralOrderingObject(GeneralOrderingObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 GeneralOrderingObject::GeneralOrderingObject()
@@ -83,6 +84,12 @@ std::shared_ptr<ecore::EObject> GeneralOrderingObject::copy()
 	element->setThisGeneralOrderingObjectPtr(element);
 	return element;
 }
+
+GeneralOrderingObject& GeneralOrderingObject::operator=(const GeneralOrderingObject & obj)
+{
+	return *this;
+}
+
 
 void GeneralOrderingObject::destroy()
 {	

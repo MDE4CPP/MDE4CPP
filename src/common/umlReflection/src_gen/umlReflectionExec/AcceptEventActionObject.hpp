@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~AcceptEventActionObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			AcceptEventActionObject& operator=(AcceptEventActionObject const&);
 
 			virtual void destroy();
 			

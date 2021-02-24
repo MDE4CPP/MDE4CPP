@@ -75,6 +75,9 @@ using namespace fUML::Semantics::Actions;
 //*********************************
 ReplyActionActivationImpl::ReplyActionActivationImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ReplyActionActivationImpl::~ReplyActionActivationImpl()
@@ -93,6 +96,18 @@ ReplyActionActivationImpl::ReplyActionActivationImpl(std::weak_ptr<fUML::Semanti
 
 
 ReplyActionActivationImpl::ReplyActionActivationImpl(const ReplyActionActivationImpl & obj):ReplyActionActivationImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ReplyActionActivationImpl::copy() const
+{
+	std::shared_ptr<ReplyActionActivationImpl> element(new ReplyActionActivationImpl(*this));
+	element->setThisReplyActionActivationPtr(element);
+	return element;
+}
+
+ReplyActionActivationImpl& ReplyActionActivationImpl::operator=(const ReplyActionActivationImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -146,13 +161,8 @@ ReplyActionActivationImpl::ReplyActionActivationImpl(const ReplyActionActivation
 		std::cout << "Copying the Subset: " << "m_outputPinActivation" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  ReplyActionActivationImpl::copy() const
-{
-	std::shared_ptr<ReplyActionActivationImpl> element(new ReplyActionActivationImpl(*this));
-	element->setThisReplyActionActivationPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ReplyActionActivationImpl::eStaticClass() const

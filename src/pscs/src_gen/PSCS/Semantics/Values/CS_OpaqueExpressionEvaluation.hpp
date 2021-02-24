@@ -70,7 +70,6 @@ namespace PSCS::Semantics::Values
 	{
 		public:
  			CS_OpaqueExpressionEvaluation(const CS_OpaqueExpressionEvaluation &) {}
-			CS_OpaqueExpressionEvaluation& operator=(CS_OpaqueExpressionEvaluation const&) = delete;
 
 		protected:
 			CS_OpaqueExpressionEvaluation(){}

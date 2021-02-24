@@ -69,6 +69,9 @@ using namespace uml;
 //*********************************
 MessageImpl::MessageImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 MessageImpl::~MessageImpl()
@@ -103,6 +106,18 @@ MessageImpl::MessageImpl(std::weak_ptr<uml::Element > par_owner)
 
 
 MessageImpl::MessageImpl(const MessageImpl & obj):MessageImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  MessageImpl::copy() const
+{
+	std::shared_ptr<MessageImpl> element(new MessageImpl(*this));
+	element->setThisMessagePtr(element);
+	return element;
+}
+
+MessageImpl& MessageImpl::operator=(const MessageImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -166,13 +181,8 @@ MessageImpl::MessageImpl(const MessageImpl & obj):MessageImpl()
 		std::cout << "Initialising value Subset: " << "m_argument - Subset<uml::ValueSpecification, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
 	
-}
 
-std::shared_ptr<ecore::EObject>  MessageImpl::copy() const
-{
-	std::shared_ptr<MessageImpl> element(new MessageImpl(*this));
-	element->setThisMessagePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> MessageImpl::eStaticClass() const

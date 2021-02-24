@@ -24,10 +24,8 @@ namespace uml
 	{
 		public: 
 			StructuredActivityNodeImpl(const StructuredActivityNodeImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			StructuredActivityNodeImpl& operator=(StructuredActivityNodeImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			StructuredActivityNodeImpl& operator=(StructuredActivityNodeImpl const&);
 
 		protected:
 			friend class umlFactoryImpl;

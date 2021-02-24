@@ -64,6 +64,9 @@ using namespace uml;
 //*********************************
 ObservationImpl::ObservationImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ObservationImpl::~ObservationImpl()
@@ -107,6 +110,18 @@ ObservationImpl::ObservationImpl(std::weak_ptr<uml::TemplateParameter > par_owni
 
 ObservationImpl::ObservationImpl(const ObservationImpl & obj):ObservationImpl()
 {
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ObservationImpl::copy() const
+{
+	std::shared_ptr<ObservationImpl> element(new ObservationImpl(*this));
+	element->setThisObservationPtr(element);
+	return element;
+}
+
+ObservationImpl& ObservationImpl::operator=(const ObservationImpl & obj)
+{
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Observation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -149,13 +164,8 @@ ObservationImpl::ObservationImpl(const ObservationImpl & obj):ObservationImpl()
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  ObservationImpl::copy() const
-{
-	std::shared_ptr<ObservationImpl> element(new ObservationImpl(*this));
-	element->setThisObservationPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ObservationImpl::eStaticClass() const

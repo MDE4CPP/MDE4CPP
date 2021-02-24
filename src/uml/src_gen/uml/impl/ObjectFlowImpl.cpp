@@ -81,6 +81,9 @@ using namespace uml;
 //*********************************
 ObjectFlowImpl::ObjectFlowImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ObjectFlowImpl::~ObjectFlowImpl()
@@ -123,6 +126,18 @@ ObjectFlowImpl::ObjectFlowImpl(std::weak_ptr<uml::Element > par_owner)
 
 
 ObjectFlowImpl::ObjectFlowImpl(const ObjectFlowImpl & obj):ObjectFlowImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ObjectFlowImpl::copy() const
+{
+	std::shared_ptr<ObjectFlowImpl> element(new ObjectFlowImpl(*this));
+	element->setThisObjectFlowPtr(element);
+	return element;
+}
+
+ObjectFlowImpl& ObjectFlowImpl::operator=(const ObjectFlowImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -216,13 +231,8 @@ ObjectFlowImpl::ObjectFlowImpl(const ObjectFlowImpl & obj):ObjectFlowImpl()
 		std::cout << "Copying the Subset: " << "m_weight" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  ObjectFlowImpl::copy() const
-{
-	std::shared_ptr<ObjectFlowImpl> element(new ObjectFlowImpl(*this));
-	element->setThisObjectFlowPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ObjectFlowImpl::eStaticClass() const

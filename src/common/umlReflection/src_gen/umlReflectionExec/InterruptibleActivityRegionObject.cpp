@@ -76,6 +76,7 @@ InterruptibleActivityRegionObject::InterruptibleActivityRegionObject(std::shared
 InterruptibleActivityRegionObject::InterruptibleActivityRegionObject(InterruptibleActivityRegionObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 InterruptibleActivityRegionObject::InterruptibleActivityRegionObject()
@@ -93,6 +94,12 @@ std::shared_ptr<ecore::EObject> InterruptibleActivityRegionObject::copy()
 	element->setThisInterruptibleActivityRegionObjectPtr(element);
 	return element;
 }
+
+InterruptibleActivityRegionObject& InterruptibleActivityRegionObject::operator=(const InterruptibleActivityRegionObject & obj)
+{
+	return *this;
+}
+
 
 void InterruptibleActivityRegionObject::destroy()
 {	

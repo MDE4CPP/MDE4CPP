@@ -86,6 +86,9 @@ using namespace fUML::Semantics::Activities;
 //*********************************
 ActivityExecutionImpl::ActivityExecutionImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ActivityExecutionImpl::~ActivityExecutionImpl()
@@ -98,6 +101,18 @@ ActivityExecutionImpl::~ActivityExecutionImpl()
 
 
 ActivityExecutionImpl::ActivityExecutionImpl(const ActivityExecutionImpl & obj):ActivityExecutionImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ActivityExecutionImpl::copy() const
+{
+	std::shared_ptr<ActivityExecutionImpl> element(new ActivityExecutionImpl(*this));
+	element->setThisActivityExecutionPtr(element);
+	return element;
+}
+
+ActivityExecutionImpl& ActivityExecutionImpl::operator=(const ActivityExecutionImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -152,13 +167,8 @@ ActivityExecutionImpl::ActivityExecutionImpl(const ActivityExecutionImpl & obj):
 	#endif
 
 	
-}
 
-std::shared_ptr<ecore::EObject>  ActivityExecutionImpl::copy() const
-{
-	std::shared_ptr<ActivityExecutionImpl> element(new ActivityExecutionImpl(*this));
-	element->setThisActivityExecutionPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ActivityExecutionImpl::eStaticClass() const

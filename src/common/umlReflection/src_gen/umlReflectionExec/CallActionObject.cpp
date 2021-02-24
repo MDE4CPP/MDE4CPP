@@ -103,6 +103,7 @@ CallActionObject::CallActionObject(std::shared_ptr<uml::CallAction> _element):
 CallActionObject::CallActionObject(CallActionObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 CallActionObject::CallActionObject()
@@ -120,6 +121,12 @@ std::shared_ptr<ecore::EObject> CallActionObject::copy()
 	element->setThisCallActionObjectPtr(element);
 	return element;
 }
+
+CallActionObject& CallActionObject::operator=(const CallActionObject & obj)
+{
+	return *this;
+}
+
 
 void CallActionObject::destroy()
 {	

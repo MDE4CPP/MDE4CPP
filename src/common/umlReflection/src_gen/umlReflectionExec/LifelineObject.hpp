@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~LifelineObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			LifelineObject& operator=(LifelineObject const&);
 
 			virtual void destroy();
 			

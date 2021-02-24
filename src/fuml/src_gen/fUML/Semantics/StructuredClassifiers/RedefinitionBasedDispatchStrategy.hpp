@@ -70,7 +70,6 @@ namespace fUML::Semantics::StructuredClassifiers
 	{
 		public:
  			RedefinitionBasedDispatchStrategy(const RedefinitionBasedDispatchStrategy &) {}
-			RedefinitionBasedDispatchStrategy& operator=(RedefinitionBasedDispatchStrategy const&) = delete;
 
 		protected:
 			RedefinitionBasedDispatchStrategy(){}

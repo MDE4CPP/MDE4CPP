@@ -88,6 +88,9 @@ using namespace uml;
 //*********************************
 DestroyLinkActionImpl::DestroyLinkActionImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 DestroyLinkActionImpl::~DestroyLinkActionImpl()
@@ -130,6 +133,18 @@ DestroyLinkActionImpl::DestroyLinkActionImpl(std::weak_ptr<uml::Element > par_ow
 
 
 DestroyLinkActionImpl::DestroyLinkActionImpl(const DestroyLinkActionImpl & obj):DestroyLinkActionImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  DestroyLinkActionImpl::copy() const
+{
+	std::shared_ptr<DestroyLinkActionImpl> element(new DestroyLinkActionImpl(*this));
+	element->setThisDestroyLinkActionPtr(element);
+	return element;
+}
+
+DestroyLinkActionImpl& DestroyLinkActionImpl::operator=(const DestroyLinkActionImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -254,13 +269,8 @@ DestroyLinkActionImpl::DestroyLinkActionImpl(const DestroyLinkActionImpl & obj):
 		std::cout << "Copying the Subset: " << "m_redefinedNode" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  DestroyLinkActionImpl::copy() const
-{
-	std::shared_ptr<DestroyLinkActionImpl> element(new DestroyLinkActionImpl(*this));
-	element->setThisDestroyLinkActionPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> DestroyLinkActionImpl::eStaticClass() const

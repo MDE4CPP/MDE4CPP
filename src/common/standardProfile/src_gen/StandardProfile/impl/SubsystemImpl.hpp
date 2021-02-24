@@ -29,10 +29,8 @@ namespace StandardProfile
 	{
 		public: 
 			SubsystemImpl(const SubsystemImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			SubsystemImpl& operator=(SubsystemImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;  
+			SubsystemImpl& operator=(SubsystemImpl const&);
 
 		protected:
 			friend class StandardProfileFactoryImpl;

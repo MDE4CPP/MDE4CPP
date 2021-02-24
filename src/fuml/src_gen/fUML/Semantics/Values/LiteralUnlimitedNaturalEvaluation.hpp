@@ -70,7 +70,6 @@ namespace fUML::Semantics::Values
 	{
 		public:
  			LiteralUnlimitedNaturalEvaluation(const LiteralUnlimitedNaturalEvaluation &) {}
-			LiteralUnlimitedNaturalEvaluation& operator=(LiteralUnlimitedNaturalEvaluation const&) = delete;
 
 		protected:
 			LiteralUnlimitedNaturalEvaluation(){}

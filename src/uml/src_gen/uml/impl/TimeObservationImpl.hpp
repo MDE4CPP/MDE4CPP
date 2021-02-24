@@ -22,10 +22,8 @@ namespace uml
 	{
 		public: 
 			TimeObservationImpl(const TimeObservationImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			TimeObservationImpl& operator=(TimeObservationImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			TimeObservationImpl& operator=(TimeObservationImpl const&);
 
 		protected:
 			friend class umlFactoryImpl;

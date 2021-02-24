@@ -101,6 +101,9 @@ using namespace uml;
 //*********************************
 OperationImpl::OperationImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 OperationImpl::~OperationImpl()
@@ -159,6 +162,18 @@ OperationImpl::OperationImpl(std::weak_ptr<uml::TemplateParameter > par_owningTe
 
 
 OperationImpl::OperationImpl(const OperationImpl & obj):OperationImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  OperationImpl::copy() const
+{
+	std::shared_ptr<OperationImpl> element(new OperationImpl(*this));
+	element->setThisOperationPtr(element);
+	return element;
+}
+
+OperationImpl& OperationImpl::operator=(const OperationImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -329,13 +344,8 @@ OperationImpl::OperationImpl(const OperationImpl & obj):OperationImpl()
 		std::cout << "Copying the Subset: " << "m_templateBinding" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  OperationImpl::copy() const
-{
-	std::shared_ptr<OperationImpl> element(new OperationImpl(*this));
-	element->setThisOperationPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> OperationImpl::eStaticClass() const

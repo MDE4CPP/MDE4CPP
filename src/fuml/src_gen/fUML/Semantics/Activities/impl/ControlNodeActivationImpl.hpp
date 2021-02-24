@@ -23,10 +23,8 @@ namespace fUML::Semantics::Activities
 	{
 		public: 
 			ControlNodeActivationImpl(const ControlNodeActivationImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			ControlNodeActivationImpl& operator=(ControlNodeActivationImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			ControlNodeActivationImpl& operator=(ControlNodeActivationImpl const&);
 
 		protected:
 			friend class fUML::Semantics::Activities::ActivitiesFactoryImpl;

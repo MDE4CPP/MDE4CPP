@@ -64,7 +64,6 @@ namespace uml
 	{
 		public:
  			Image(const Image &) {}
-			Image& operator=(Image const&) = delete;
 
 		protected:
 			Image(){}

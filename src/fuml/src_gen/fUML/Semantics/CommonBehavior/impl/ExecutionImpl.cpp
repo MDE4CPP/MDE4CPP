@@ -78,6 +78,9 @@ using namespace fUML::Semantics::CommonBehavior;
 //*********************************
 ExecutionImpl::ExecutionImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ExecutionImpl::~ExecutionImpl()
@@ -90,6 +93,18 @@ ExecutionImpl::~ExecutionImpl()
 
 
 ExecutionImpl::ExecutionImpl(const ExecutionImpl & obj):ExecutionImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ExecutionImpl::copy() const
+{
+	std::shared_ptr<ExecutionImpl> element(new ExecutionImpl(*this));
+	element->setThisExecutionPtr(element);
+	return element;
+}
+
+ExecutionImpl& ExecutionImpl::operator=(const ExecutionImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -135,13 +150,8 @@ ExecutionImpl::ExecutionImpl(const ExecutionImpl & obj):ExecutionImpl()
 	#endif
 
 	
-}
 
-std::shared_ptr<ecore::EObject>  ExecutionImpl::copy() const
-{
-	std::shared_ptr<ExecutionImpl> element(new ExecutionImpl(*this));
-	element->setThisExecutionPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ExecutionImpl::eStaticClass() const

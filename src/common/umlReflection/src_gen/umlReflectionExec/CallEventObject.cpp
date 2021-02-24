@@ -70,6 +70,7 @@ CallEventObject::CallEventObject(std::shared_ptr<uml::CallEvent> _element):
 CallEventObject::CallEventObject(CallEventObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 CallEventObject::CallEventObject()
@@ -87,6 +88,12 @@ std::shared_ptr<ecore::EObject> CallEventObject::copy()
 	element->setThisCallEventObjectPtr(element);
 	return element;
 }
+
+CallEventObject& CallEventObject::operator=(const CallEventObject & obj)
+{
+	return *this;
+}
+
 
 void CallEventObject::destroy()
 {	

@@ -23,10 +23,8 @@ namespace fUML::Semantics::Activities
 	{
 		public: 
 			ControlTokenImpl(const ControlTokenImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			ControlTokenImpl& operator=(ControlTokenImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			ControlTokenImpl& operator=(ControlTokenImpl const&);
 
 		protected:
 			friend class fUML::Semantics::Activities::ActivitiesFactoryImpl;

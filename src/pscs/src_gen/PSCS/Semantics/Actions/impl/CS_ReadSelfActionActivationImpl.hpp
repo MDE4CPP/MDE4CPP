@@ -23,10 +23,8 @@ namespace PSCS::Semantics::Actions
 	{
 		public: 
 			CS_ReadSelfActionActivationImpl(const CS_ReadSelfActionActivationImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			CS_ReadSelfActionActivationImpl& operator=(CS_ReadSelfActionActivationImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			CS_ReadSelfActionActivationImpl& operator=(CS_ReadSelfActionActivationImpl const&);
 
 		protected:
 			friend class PSCS::Semantics::Actions::ActionsFactoryImpl;

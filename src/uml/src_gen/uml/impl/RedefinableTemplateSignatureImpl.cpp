@@ -71,6 +71,9 @@ using namespace uml;
 //*********************************
 RedefinableTemplateSignatureImpl::RedefinableTemplateSignatureImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 RedefinableTemplateSignatureImpl::~RedefinableTemplateSignatureImpl()
@@ -105,6 +108,18 @@ RedefinableTemplateSignatureImpl::RedefinableTemplateSignatureImpl(std::weak_ptr
 
 
 RedefinableTemplateSignatureImpl::RedefinableTemplateSignatureImpl(const RedefinableTemplateSignatureImpl & obj):RedefinableTemplateSignatureImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  RedefinableTemplateSignatureImpl::copy() const
+{
+	std::shared_ptr<RedefinableTemplateSignatureImpl> element(new RedefinableTemplateSignatureImpl(*this));
+	element->setThisRedefinableTemplateSignaturePtr(element);
+	return element;
+}
+
+RedefinableTemplateSignatureImpl& RedefinableTemplateSignatureImpl::operator=(const RedefinableTemplateSignatureImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -180,13 +195,8 @@ RedefinableTemplateSignatureImpl::RedefinableTemplateSignatureImpl(const Redefin
 		std::cout << "Copying the Subset: " << "m_ownedParameter" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  RedefinableTemplateSignatureImpl::copy() const
-{
-	std::shared_ptr<RedefinableTemplateSignatureImpl> element(new RedefinableTemplateSignatureImpl(*this));
-	element->setThisRedefinableTemplateSignaturePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> RedefinableTemplateSignatureImpl::eStaticClass() const

@@ -89,6 +89,9 @@ using namespace uml;
 //*********************************
 AddVariableValueActionImpl::AddVariableValueActionImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 AddVariableValueActionImpl::~AddVariableValueActionImpl()
@@ -131,6 +134,18 @@ AddVariableValueActionImpl::AddVariableValueActionImpl(std::weak_ptr<uml::Elemen
 
 
 AddVariableValueActionImpl::AddVariableValueActionImpl(const AddVariableValueActionImpl & obj):AddVariableValueActionImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  AddVariableValueActionImpl::copy() const
+{
+	std::shared_ptr<AddVariableValueActionImpl> element(new AddVariableValueActionImpl(*this));
+	element->setThisAddVariableValueActionPtr(element);
+	return element;
+}
+
+AddVariableValueActionImpl& AddVariableValueActionImpl::operator=(const AddVariableValueActionImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -257,13 +272,8 @@ AddVariableValueActionImpl::AddVariableValueActionImpl(const AddVariableValueAct
 	#endif
 
 	
-}
 
-std::shared_ptr<ecore::EObject>  AddVariableValueActionImpl::copy() const
-{
-	std::shared_ptr<AddVariableValueActionImpl> element(new AddVariableValueActionImpl(*this));
-	element->setThisAddVariableValueActionPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> AddVariableValueActionImpl::eStaticClass() const

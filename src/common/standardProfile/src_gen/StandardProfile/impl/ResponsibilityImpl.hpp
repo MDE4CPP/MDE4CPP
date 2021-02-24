@@ -29,10 +29,8 @@ namespace StandardProfile
 	{
 		public: 
 			ResponsibilityImpl(const ResponsibilityImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			ResponsibilityImpl& operator=(ResponsibilityImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;  
+			ResponsibilityImpl& operator=(ResponsibilityImpl const&);
 
 		protected:
 			friend class StandardProfileFactoryImpl;

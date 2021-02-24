@@ -74,6 +74,7 @@ NamespaceObject::NamespaceObject(std::shared_ptr<uml::Namespace> _element):
 NamespaceObject::NamespaceObject(NamespaceObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 NamespaceObject::NamespaceObject()
@@ -91,6 +92,12 @@ std::shared_ptr<ecore::EObject> NamespaceObject::copy()
 	element->setThisNamespaceObjectPtr(element);
 	return element;
 }
+
+NamespaceObject& NamespaceObject::operator=(const NamespaceObject & obj)
+{
+	return *this;
+}
+
 
 void NamespaceObject::destroy()
 {	

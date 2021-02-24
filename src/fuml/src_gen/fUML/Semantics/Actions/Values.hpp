@@ -57,7 +57,6 @@ namespace fUML::Semantics::Actions
 	{
 		public:
  			Values(const Values &) {}
-			Values& operator=(Values const&) = delete;
 
 		protected:
 			Values(){}

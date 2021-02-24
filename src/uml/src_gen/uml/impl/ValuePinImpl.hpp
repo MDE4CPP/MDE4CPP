@@ -22,10 +22,8 @@ namespace uml
 	{
 		public: 
 			ValuePinImpl(const ValuePinImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			ValuePinImpl& operator=(ValuePinImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			ValuePinImpl& operator=(ValuePinImpl const&);
 
 		protected:
 			friend class umlFactoryImpl;

@@ -103,7 +103,6 @@ namespace uml
 	{
 		public:
  			TimeConstraint(const TimeConstraint &) {}
-			TimeConstraint& operator=(TimeConstraint const&) = delete;
 
 		protected:
 			TimeConstraint(){}

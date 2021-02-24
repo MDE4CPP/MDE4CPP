@@ -71,6 +71,9 @@ using namespace uml;
 //*********************************
 DestructionOccurrenceSpecificationImpl::DestructionOccurrenceSpecificationImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 DestructionOccurrenceSpecificationImpl::~DestructionOccurrenceSpecificationImpl()
@@ -113,6 +116,18 @@ DestructionOccurrenceSpecificationImpl::DestructionOccurrenceSpecificationImpl(s
 
 
 DestructionOccurrenceSpecificationImpl::DestructionOccurrenceSpecificationImpl(const DestructionOccurrenceSpecificationImpl & obj):DestructionOccurrenceSpecificationImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  DestructionOccurrenceSpecificationImpl::copy() const
+{
+	std::shared_ptr<DestructionOccurrenceSpecificationImpl> element(new DestructionOccurrenceSpecificationImpl(*this));
+	element->setThisDestructionOccurrenceSpecificationPtr(element);
+	return element;
+}
+
+DestructionOccurrenceSpecificationImpl& DestructionOccurrenceSpecificationImpl::operator=(const DestructionOccurrenceSpecificationImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -173,13 +188,8 @@ DestructionOccurrenceSpecificationImpl::DestructionOccurrenceSpecificationImpl(c
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  DestructionOccurrenceSpecificationImpl::copy() const
-{
-	std::shared_ptr<DestructionOccurrenceSpecificationImpl> element(new DestructionOccurrenceSpecificationImpl(*this));
-	element->setThisDestructionOccurrenceSpecificationPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> DestructionOccurrenceSpecificationImpl::eStaticClass() const

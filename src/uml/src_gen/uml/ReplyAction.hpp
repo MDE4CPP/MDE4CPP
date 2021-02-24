@@ -159,7 +159,6 @@ namespace uml
 	{
 		public:
  			ReplyAction(const ReplyAction &) {}
-			ReplyAction& operator=(ReplyAction const&) = delete;
 
 		protected:
 			ReplyAction(){}

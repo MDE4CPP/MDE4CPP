@@ -74,6 +74,7 @@ ConstraintObject::ConstraintObject(std::shared_ptr<uml::Constraint> _element):
 ConstraintObject::ConstraintObject(ConstraintObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ConstraintObject::ConstraintObject()
@@ -91,6 +92,12 @@ std::shared_ptr<ecore::EObject> ConstraintObject::copy()
 	element->setThisConstraintObjectPtr(element);
 	return element;
 }
+
+ConstraintObject& ConstraintObject::operator=(const ConstraintObject & obj)
+{
+	return *this;
+}
+
 
 void ConstraintObject::destroy()
 {	

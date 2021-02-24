@@ -59,6 +59,9 @@ using namespace ecore;
 //*********************************
 EParameterImpl::EParameterImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 EParameterImpl::~EParameterImpl()
@@ -84,6 +87,18 @@ EParameterImpl::EParameterImpl(std::weak_ptr<ecore::EOperation > par_eOperation)
 
 
 EParameterImpl::EParameterImpl(const EParameterImpl & obj):EParameterImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  EParameterImpl::copy() const
+{
+	std::shared_ptr<EParameterImpl> element(new EParameterImpl(*this));
+	element->setThisEParameterPtr(element);
+	return element;
+}
+
+EParameterImpl& EParameterImpl::operator=(const EParameterImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -125,13 +140,8 @@ EParameterImpl::EParameterImpl(const EParameterImpl & obj):EParameterImpl()
 		std::cout << "Copying the Subset: " << "m_eGenericType" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  EParameterImpl::copy() const
-{
-	std::shared_ptr<EParameterImpl> element(new EParameterImpl(*this));
-	element->setThisEParameterPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<EClass> EParameterImpl::eStaticClass() const

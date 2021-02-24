@@ -38,6 +38,7 @@ namespace UML
 		    virtual ~RedefinableTemplateSignatureObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			RedefinableTemplateSignatureObject& operator=(RedefinableTemplateSignatureObject const&);
 
 			virtual void destroy();
 			

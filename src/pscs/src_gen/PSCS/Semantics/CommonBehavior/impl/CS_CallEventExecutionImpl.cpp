@@ -74,6 +74,9 @@ using namespace PSCS::Semantics::CommonBehavior;
 //*********************************
 CS_CallEventExecutionImpl::CS_CallEventExecutionImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 CS_CallEventExecutionImpl::~CS_CallEventExecutionImpl()
@@ -86,6 +89,18 @@ CS_CallEventExecutionImpl::~CS_CallEventExecutionImpl()
 
 
 CS_CallEventExecutionImpl::CS_CallEventExecutionImpl(const CS_CallEventExecutionImpl & obj):CS_CallEventExecutionImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  CS_CallEventExecutionImpl::copy() const
+{
+	std::shared_ptr<CS_CallEventExecutionImpl> element(new CS_CallEventExecutionImpl(*this));
+	element->setThisCS_CallEventExecutionPtr(element);
+	return element;
+}
+
+CS_CallEventExecutionImpl& CS_CallEventExecutionImpl::operator=(const CS_CallEventExecutionImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -133,13 +148,8 @@ CS_CallEventExecutionImpl::CS_CallEventExecutionImpl(const CS_CallEventExecution
 		std::cout << "Copying the Subset: " << "m_parameterValues" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  CS_CallEventExecutionImpl::copy() const
-{
-	std::shared_ptr<CS_CallEventExecutionImpl> element(new CS_CallEventExecutionImpl(*this));
-	element->setThisCS_CallEventExecutionPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> CS_CallEventExecutionImpl::eStaticClass() const

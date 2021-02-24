@@ -166,6 +166,7 @@ BehaviorObject::BehaviorObject(std::shared_ptr<uml::Behavior> _element):
 BehaviorObject::BehaviorObject(BehaviorObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 BehaviorObject::BehaviorObject()
@@ -183,6 +184,12 @@ std::shared_ptr<ecore::EObject> BehaviorObject::copy()
 	element->setThisBehaviorObjectPtr(element);
 	return element;
 }
+
+BehaviorObject& BehaviorObject::operator=(const BehaviorObject & obj)
+{
+	return *this;
+}
+
 
 void BehaviorObject::destroy()
 {	

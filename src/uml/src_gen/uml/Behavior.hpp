@@ -239,7 +239,6 @@ namespace uml
 	{
 		public:
  			Behavior(const Behavior &) {}
-			Behavior& operator=(Behavior const&) = delete;
 
 		protected:
 			Behavior(){}

@@ -23,10 +23,8 @@ namespace PSCS::Semantics::Actions
 	{
 		public: 
 			CS_CreateLinkActionActivationImpl(const CS_CreateLinkActionActivationImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			CS_CreateLinkActionActivationImpl& operator=(CS_CreateLinkActionActivationImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			CS_CreateLinkActionActivationImpl& operator=(CS_CreateLinkActionActivationImpl const&);
 
 		protected:
 			friend class PSCS::Semantics::Actions::ActionsFactoryImpl;

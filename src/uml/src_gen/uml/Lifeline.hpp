@@ -115,7 +115,6 @@ namespace uml
 	{
 		public:
  			Lifeline(const Lifeline &) {}
-			Lifeline& operator=(Lifeline const&) = delete;
 
 		protected:
 			Lifeline(){}

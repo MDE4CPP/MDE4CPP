@@ -104,7 +104,6 @@ namespace uml
 	{
 		public:
  			TimeEvent(const TimeEvent &) {}
-			TimeEvent& operator=(TimeEvent const&) = delete;
 
 		protected:
 			TimeEvent(){}

@@ -25,9 +25,6 @@ namespace StandardProfile
 {
 	class Instantiate : virtual public uml::Stereotype 
 	{
-		private:    
-			Instantiate(const Instantiate& that) = delete;
-
 		protected:
 			Instantiate(){}
 

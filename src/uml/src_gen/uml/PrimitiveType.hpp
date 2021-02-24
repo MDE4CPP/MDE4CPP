@@ -180,7 +180,6 @@ namespace uml
 	{
 		public:
  			PrimitiveType(const PrimitiveType &) {}
-			PrimitiveType& operator=(PrimitiveType const&) = delete;
 
 		protected:
 			PrimitiveType(){}

@@ -102,6 +102,7 @@ ReadStructuralFeatureActionObject::ReadStructuralFeatureActionObject(std::shared
 ReadStructuralFeatureActionObject::ReadStructuralFeatureActionObject(ReadStructuralFeatureActionObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ReadStructuralFeatureActionObject::ReadStructuralFeatureActionObject()
@@ -119,6 +120,12 @@ std::shared_ptr<ecore::EObject> ReadStructuralFeatureActionObject::copy()
 	element->setThisReadStructuralFeatureActionObjectPtr(element);
 	return element;
 }
+
+ReadStructuralFeatureActionObject& ReadStructuralFeatureActionObject::operator=(const ReadStructuralFeatureActionObject & obj)
+{
+	return *this;
+}
+
 
 void ReadStructuralFeatureActionObject::destroy()
 {	

@@ -58,6 +58,9 @@ using namespace uml;
 //*********************************
 GeneralizationImpl::GeneralizationImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 GeneralizationImpl::~GeneralizationImpl()
@@ -84,6 +87,18 @@ GeneralizationImpl::GeneralizationImpl(std::weak_ptr<uml::Classifier > par_speci
 
 
 GeneralizationImpl::GeneralizationImpl(const GeneralizationImpl & obj):GeneralizationImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  GeneralizationImpl::copy() const
+{
+	std::shared_ptr<GeneralizationImpl> element(new GeneralizationImpl(*this));
+	element->setThisGeneralizationPtr(element);
+	return element;
+}
+
+GeneralizationImpl& GeneralizationImpl::operator=(const GeneralizationImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -122,13 +137,8 @@ GeneralizationImpl::GeneralizationImpl(const GeneralizationImpl & obj):Generaliz
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  GeneralizationImpl::copy() const
-{
-	std::shared_ptr<GeneralizationImpl> element(new GeneralizationImpl(*this));
-	element->setThisGeneralizationPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> GeneralizationImpl::eStaticClass() const

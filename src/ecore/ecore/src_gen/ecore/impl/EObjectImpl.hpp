@@ -23,10 +23,8 @@ virtual public EObject
 	{
 		public: 
 			EObjectImpl(const EObjectImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			EObjectImpl& operator=(EObjectImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			EObjectImpl& operator=(EObjectImpl const&);
 
 		protected:
 			friend class ecoreFactoryImpl;

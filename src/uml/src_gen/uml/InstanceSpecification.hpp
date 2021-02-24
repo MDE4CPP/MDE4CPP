@@ -134,7 +134,6 @@ namespace uml
 	{
 		public:
  			InstanceSpecification(const InstanceSpecification &) {}
-			InstanceSpecification& operator=(InstanceSpecification const&) = delete;
 
 		protected:
 			InstanceSpecification(){}

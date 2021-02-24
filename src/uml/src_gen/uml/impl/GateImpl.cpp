@@ -67,6 +67,9 @@ using namespace uml;
 //*********************************
 GateImpl::GateImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 GateImpl::~GateImpl()
@@ -93,6 +96,18 @@ GateImpl::GateImpl(std::weak_ptr<uml::Element > par_owner)
 
 
 GateImpl::GateImpl(const GateImpl & obj):GateImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  GateImpl::copy() const
+{
+	std::shared_ptr<GateImpl> element(new GateImpl(*this));
+	element->setThisGatePtr(element);
+	return element;
+}
+
+GateImpl& GateImpl::operator=(const GateImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -132,13 +147,8 @@ GateImpl::GateImpl(const GateImpl & obj):GateImpl()
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  GateImpl::copy() const
-{
-	std::shared_ptr<GateImpl> element(new GateImpl(*this));
-	element->setThisGatePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> GateImpl::eStaticClass() const

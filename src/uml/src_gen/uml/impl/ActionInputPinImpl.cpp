@@ -103,6 +103,9 @@ using namespace uml;
 //*********************************
 ActionInputPinImpl::ActionInputPinImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ActionInputPinImpl::~ActionInputPinImpl()
@@ -202,6 +205,18 @@ ActionInputPinImpl::ActionInputPinImpl(std::weak_ptr<uml::WriteStructuralFeature
 
 
 ActionInputPinImpl::ActionInputPinImpl(const ActionInputPinImpl & obj):ActionInputPinImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ActionInputPinImpl::copy() const
+{
+	std::shared_ptr<ActionInputPinImpl> element(new ActionInputPinImpl(*this));
+	element->setThisActionInputPinPtr(element);
+	return element;
+}
+
+ActionInputPinImpl& ActionInputPinImpl::operator=(const ActionInputPinImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -342,13 +357,8 @@ ActionInputPinImpl::ActionInputPinImpl(const ActionInputPinImpl & obj):ActionInp
 	#endif
 
 	
-}
 
-std::shared_ptr<ecore::EObject>  ActionInputPinImpl::copy() const
-{
-	std::shared_ptr<ActionInputPinImpl> element(new ActionInputPinImpl(*this));
-	element->setThisActionInputPinPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ActionInputPinImpl::eStaticClass() const

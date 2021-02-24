@@ -61,6 +61,9 @@ using namespace PSCS::Semantics::StructuredClassifiers;
 //*********************************
 CS_StructuralFeatureOfInterfaceAccessStrategyImpl::CS_StructuralFeatureOfInterfaceAccessStrategyImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 CS_StructuralFeatureOfInterfaceAccessStrategyImpl::~CS_StructuralFeatureOfInterfaceAccessStrategyImpl()
@@ -74,6 +77,18 @@ CS_StructuralFeatureOfInterfaceAccessStrategyImpl::~CS_StructuralFeatureOfInterf
 
 CS_StructuralFeatureOfInterfaceAccessStrategyImpl::CS_StructuralFeatureOfInterfaceAccessStrategyImpl(const CS_StructuralFeatureOfInterfaceAccessStrategyImpl & obj):CS_StructuralFeatureOfInterfaceAccessStrategyImpl()
 {
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  CS_StructuralFeatureOfInterfaceAccessStrategyImpl::copy() const
+{
+	std::shared_ptr<CS_StructuralFeatureOfInterfaceAccessStrategyImpl> element(new CS_StructuralFeatureOfInterfaceAccessStrategyImpl(*this));
+	element->setThisCS_StructuralFeatureOfInterfaceAccessStrategyPtr(element);
+	return element;
+}
+
+CS_StructuralFeatureOfInterfaceAccessStrategyImpl& CS_StructuralFeatureOfInterfaceAccessStrategyImpl::operator=(const CS_StructuralFeatureOfInterfaceAccessStrategyImpl & obj)
+{
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy CS_StructuralFeatureOfInterfaceAccessStrategy "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -85,13 +100,8 @@ CS_StructuralFeatureOfInterfaceAccessStrategyImpl::CS_StructuralFeatureOfInterfa
 	//Clone references with containment (deep copy)
 
 
-}
 
-std::shared_ptr<ecore::EObject>  CS_StructuralFeatureOfInterfaceAccessStrategyImpl::copy() const
-{
-	std::shared_ptr<CS_StructuralFeatureOfInterfaceAccessStrategyImpl> element(new CS_StructuralFeatureOfInterfaceAccessStrategyImpl(*this));
-	element->setThisCS_StructuralFeatureOfInterfaceAccessStrategyPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> CS_StructuralFeatureOfInterfaceAccessStrategyImpl::eStaticClass() const

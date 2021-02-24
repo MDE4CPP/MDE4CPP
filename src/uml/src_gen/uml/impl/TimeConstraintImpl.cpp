@@ -67,6 +67,9 @@ using namespace uml;
 //*********************************
 TimeConstraintImpl::TimeConstraintImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 TimeConstraintImpl::~TimeConstraintImpl()
@@ -123,6 +126,18 @@ TimeConstraintImpl::TimeConstraintImpl(std::weak_ptr<uml::TemplateParameter > pa
 
 TimeConstraintImpl::TimeConstraintImpl(const TimeConstraintImpl & obj):TimeConstraintImpl()
 {
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  TimeConstraintImpl::copy() const
+{
+	std::shared_ptr<TimeConstraintImpl> element(new TimeConstraintImpl(*this));
+	element->setThisTimeConstraintPtr(element);
+	return element;
+}
+
+TimeConstraintImpl& TimeConstraintImpl::operator=(const TimeConstraintImpl & obj)
+{
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy TimeConstraint "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -178,13 +193,8 @@ TimeConstraintImpl::TimeConstraintImpl(const TimeConstraintImpl & obj):TimeConst
 		std::cout << "Copying the Subset: " << "m_specification" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  TimeConstraintImpl::copy() const
-{
-	std::shared_ptr<TimeConstraintImpl> element(new TimeConstraintImpl(*this));
-	element->setThisTimeConstraintPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> TimeConstraintImpl::eStaticClass() const

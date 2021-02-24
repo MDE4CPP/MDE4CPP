@@ -23,10 +23,8 @@ namespace uml
 	{
 		public: 
 			DependencyImpl(const DependencyImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			DependencyImpl& operator=(DependencyImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			DependencyImpl& operator=(DependencyImpl const&);
 
 		protected:
 			friend class umlFactoryImpl;

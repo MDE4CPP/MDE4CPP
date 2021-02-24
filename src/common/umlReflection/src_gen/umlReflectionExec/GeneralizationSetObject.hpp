@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~GeneralizationSetObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			GeneralizationSetObject& operator=(GeneralizationSetObject const&);
 
 			virtual void destroy();
 			

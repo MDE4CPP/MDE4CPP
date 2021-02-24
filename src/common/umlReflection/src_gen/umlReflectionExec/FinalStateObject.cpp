@@ -111,6 +111,7 @@ FinalStateObject::FinalStateObject(std::shared_ptr<uml::FinalState> _element):
 FinalStateObject::FinalStateObject(FinalStateObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 FinalStateObject::FinalStateObject()
@@ -128,6 +129,12 @@ std::shared_ptr<ecore::EObject> FinalStateObject::copy()
 	element->setThisFinalStateObjectPtr(element);
 	return element;
 }
+
+FinalStateObject& FinalStateObject::operator=(const FinalStateObject & obj)
+{
+	return *this;
+}
+
 
 void FinalStateObject::destroy()
 {	

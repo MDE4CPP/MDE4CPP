@@ -93,6 +93,9 @@ using namespace PSCS::Semantics::Actions;
 //*********************************
 CS_DefaultConstructStrategyImpl::CS_DefaultConstructStrategyImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 CS_DefaultConstructStrategyImpl::~CS_DefaultConstructStrategyImpl()
@@ -105,6 +108,18 @@ CS_DefaultConstructStrategyImpl::~CS_DefaultConstructStrategyImpl()
 
 
 CS_DefaultConstructStrategyImpl::CS_DefaultConstructStrategyImpl(const CS_DefaultConstructStrategyImpl & obj):CS_DefaultConstructStrategyImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  CS_DefaultConstructStrategyImpl::copy() const
+{
+	std::shared_ptr<CS_DefaultConstructStrategyImpl> element(new CS_DefaultConstructStrategyImpl(*this));
+	element->setThisCS_DefaultConstructStrategyPtr(element);
+	return element;
+}
+
+CS_DefaultConstructStrategyImpl& CS_DefaultConstructStrategyImpl::operator=(const CS_DefaultConstructStrategyImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -137,13 +152,8 @@ CS_DefaultConstructStrategyImpl::CS_DefaultConstructStrategyImpl(const CS_Defaul
 	
 
 	
-}
 
-std::shared_ptr<ecore::EObject>  CS_DefaultConstructStrategyImpl::copy() const
-{
-	std::shared_ptr<CS_DefaultConstructStrategyImpl> element(new CS_DefaultConstructStrategyImpl(*this));
-	element->setThisCS_DefaultConstructStrategyPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> CS_DefaultConstructStrategyImpl::eStaticClass() const

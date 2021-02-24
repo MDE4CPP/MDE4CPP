@@ -57,6 +57,9 @@ using namespace uml;
 //*********************************
 SlotImpl::SlotImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 SlotImpl::~SlotImpl()
@@ -83,6 +86,18 @@ SlotImpl::SlotImpl(std::weak_ptr<uml::InstanceSpecification > par_owningInstance
 
 
 SlotImpl::SlotImpl(const SlotImpl & obj):SlotImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  SlotImpl::copy() const
+{
+	std::shared_ptr<SlotImpl> element(new SlotImpl(*this));
+	element->setThisSlotPtr(element);
+	return element;
+}
+
+SlotImpl& SlotImpl::operator=(const SlotImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -123,13 +138,8 @@ SlotImpl::SlotImpl(const SlotImpl & obj):SlotImpl()
 		std::cout << "Initialising value Subset: " << "m_value - Subset<uml::ValueSpecification, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
 	
-}
 
-std::shared_ptr<ecore::EObject>  SlotImpl::copy() const
-{
-	std::shared_ptr<SlotImpl> element(new SlotImpl(*this));
-	element->setThisSlotPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> SlotImpl::eStaticClass() const

@@ -193,7 +193,6 @@ namespace uml
 	{
 		public:
  			Extension(const Extension &) {}
-			Extension& operator=(Extension const&) = delete;
 
 		protected:
 			Extension(){}

@@ -92,7 +92,6 @@ namespace uml
 	{
 		public:
  			ConnectorEnd(const ConnectorEnd &) {}
-			ConnectorEnd& operator=(ConnectorEnd const&) = delete;
 
 		protected:
 			ConnectorEnd(){}

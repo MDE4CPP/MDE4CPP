@@ -123,6 +123,7 @@ InformationItemObject::InformationItemObject(std::shared_ptr<uml::InformationIte
 InformationItemObject::InformationItemObject(InformationItemObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 InformationItemObject::InformationItemObject()
@@ -140,6 +141,12 @@ std::shared_ptr<ecore::EObject> InformationItemObject::copy()
 	element->setThisInformationItemObjectPtr(element);
 	return element;
 }
+
+InformationItemObject& InformationItemObject::operator=(const InformationItemObject & obj)
+{
+	return *this;
+}
+
 
 void InformationItemObject::destroy()
 {	

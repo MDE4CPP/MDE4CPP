@@ -56,6 +56,9 @@ using namespace uml;
 //*********************************
 PackageMergeImpl::PackageMergeImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 PackageMergeImpl::~PackageMergeImpl()
@@ -82,6 +85,18 @@ PackageMergeImpl::PackageMergeImpl(std::weak_ptr<uml::Package > par_receivingPac
 
 
 PackageMergeImpl::PackageMergeImpl(const PackageMergeImpl & obj):PackageMergeImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  PackageMergeImpl::copy() const
+{
+	std::shared_ptr<PackageMergeImpl> element(new PackageMergeImpl(*this));
+	element->setThisPackageMergePtr(element);
+	return element;
+}
+
+PackageMergeImpl& PackageMergeImpl::operator=(const PackageMergeImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -116,13 +131,8 @@ PackageMergeImpl::PackageMergeImpl(const PackageMergeImpl & obj):PackageMergeImp
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  PackageMergeImpl::copy() const
-{
-	std::shared_ptr<PackageMergeImpl> element(new PackageMergeImpl(*this));
-	element->setThisPackageMergePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> PackageMergeImpl::eStaticClass() const

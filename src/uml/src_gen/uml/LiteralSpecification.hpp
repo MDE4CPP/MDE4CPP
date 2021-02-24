@@ -110,7 +110,6 @@ namespace uml
 	{
 		public:
  			LiteralSpecification(const LiteralSpecification &) {}
-			LiteralSpecification& operator=(LiteralSpecification const&) = delete;
 
 		protected:
 			LiteralSpecification(){}

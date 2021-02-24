@@ -95,7 +95,6 @@ namespace fUML::Semantics::Actions
 	{
 		public:
  			WriteLinkActionActivation(const WriteLinkActionActivation &) {}
-			WriteLinkActionActivation& operator=(WriteLinkActionActivation const&) = delete;
 
 		protected:
 			WriteLinkActionActivation(){}

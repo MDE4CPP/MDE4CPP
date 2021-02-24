@@ -91,6 +91,9 @@ using namespace uml;
 //*********************************
 LinkActionImpl::LinkActionImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 LinkActionImpl::~LinkActionImpl()
@@ -133,6 +136,18 @@ LinkActionImpl::LinkActionImpl(std::weak_ptr<uml::Element > par_owner)
 
 
 LinkActionImpl::LinkActionImpl(const LinkActionImpl & obj):LinkActionImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  LinkActionImpl::copy() const
+{
+	std::shared_ptr<LinkActionImpl> element(new LinkActionImpl(*this));
+	element->setThisLinkActionPtr(element);
+	return element;
+}
+
+LinkActionImpl& LinkActionImpl::operator=(const LinkActionImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -270,13 +285,8 @@ LinkActionImpl::LinkActionImpl(const LinkActionImpl & obj):LinkActionImpl()
 		std::cout << "Initialising value Subset: " << "m_inputValue - Subset<uml::InputPin, uml::InputPin >(getInput())" << std::endl;
 	#endif
 	
-}
 
-std::shared_ptr<ecore::EObject>  LinkActionImpl::copy() const
-{
-	std::shared_ptr<LinkActionImpl> element(new LinkActionImpl(*this));
-	element->setThisLinkActionPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> LinkActionImpl::eStaticClass() const

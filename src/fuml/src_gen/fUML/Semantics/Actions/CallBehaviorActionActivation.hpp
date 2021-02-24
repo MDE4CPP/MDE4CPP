@@ -110,7 +110,6 @@ namespace fUML::Semantics::Actions
 	{
 		public:
  			CallBehaviorActionActivation(const CallBehaviorActionActivation &) {}
-			CallBehaviorActionActivation& operator=(CallBehaviorActionActivation const&) = delete;
 
 		protected:
 			CallBehaviorActionActivation(){}

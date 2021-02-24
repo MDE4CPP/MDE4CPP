@@ -65,6 +65,9 @@ using namespace uml;
 //*********************************
 ExtensionPointImpl::ExtensionPointImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ExtensionPointImpl::~ExtensionPointImpl()
@@ -99,6 +102,18 @@ ExtensionPointImpl::ExtensionPointImpl(std::weak_ptr<uml::UseCase > par_useCase)
 
 
 ExtensionPointImpl::ExtensionPointImpl(const ExtensionPointImpl & obj):ExtensionPointImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ExtensionPointImpl::copy() const
+{
+	std::shared_ptr<ExtensionPointImpl> element(new ExtensionPointImpl(*this));
+	element->setThisExtensionPointPtr(element);
+	return element;
+}
+
+ExtensionPointImpl& ExtensionPointImpl::operator=(const ExtensionPointImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -145,13 +160,8 @@ ExtensionPointImpl::ExtensionPointImpl(const ExtensionPointImpl & obj):Extension
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  ExtensionPointImpl::copy() const
-{
-	std::shared_ptr<ExtensionPointImpl> element(new ExtensionPointImpl(*this));
-	element->setThisExtensionPointPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ExtensionPointImpl::eStaticClass() const

@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~TimeObservationObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			TimeObservationObject& operator=(TimeObservationObject const&);
 
 			virtual void destroy();
 			

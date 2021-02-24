@@ -100,6 +100,9 @@ using namespace uml;
 //*********************************
 StructuredClassifierImpl::StructuredClassifierImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 StructuredClassifierImpl::~StructuredClassifierImpl()
@@ -155,6 +158,18 @@ StructuredClassifierImpl::StructuredClassifierImpl(std::weak_ptr<uml::TemplatePa
 
 
 StructuredClassifierImpl::StructuredClassifierImpl(const StructuredClassifierImpl & obj):StructuredClassifierImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  StructuredClassifierImpl::copy() const
+{
+	std::shared_ptr<StructuredClassifierImpl> element(new StructuredClassifierImpl(*this));
+	element->setThisStructuredClassifierPtr(element);
+	return element;
+}
+
+StructuredClassifierImpl& StructuredClassifierImpl::operator=(const StructuredClassifierImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -355,13 +370,8 @@ StructuredClassifierImpl::StructuredClassifierImpl(const StructuredClassifierImp
 		std::cout << "Initialising value Subset: " << "m_ownedConnector - Subset<uml::Connector, uml::Feature,uml::NamedElement >(getFeature(),getOwnedMember())" << std::endl;
 	#endif
 	
-}
 
-std::shared_ptr<ecore::EObject>  StructuredClassifierImpl::copy() const
-{
-	std::shared_ptr<StructuredClassifierImpl> element(new StructuredClassifierImpl(*this));
-	element->setThisStructuredClassifierPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> StructuredClassifierImpl::eStaticClass() const

@@ -41,9 +41,9 @@ using namespace StandardProfile;
 //*********************************
 RefineImpl::RefineImpl()
 {
-	#ifdef ADD_COUNT
-		ADD_COUNT("RefineImpl()");
-	#endif
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 
 	DEBUG_MESSAGE(std::cout<<"Refine is created..."<<std::endl;)
 
@@ -61,20 +61,12 @@ RefineImpl::RefineImpl()
 
 RefineImpl::~RefineImpl()
 {
-	#ifdef SUB_COUNT
-		SUB_COUNT("RefineImpl()");
-	#endif
-
 	DEBUG_MESSAGE(std::cout<<"Refine is destroyed..."<<std::endl;)
 }
 
 RefineImpl::RefineImpl(const RefineImpl & obj):RefineImpl()
 {
-	//create copy of all Attributes
-	#ifdef SHOW_COPIES
-	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Refine "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
-	#endif
-	instantiate();
+	*this = obj;
 }
 
 std::shared_ptr<ecore::EObject>  RefineImpl::copy() const
@@ -82,6 +74,16 @@ std::shared_ptr<ecore::EObject>  RefineImpl::copy() const
 	std::shared_ptr<RefineImpl> element(new RefineImpl(*this));
 	element->setThisRefinePtr(element);
 	return element;
+}
+
+RefineImpl& RefineImpl::operator=(const RefineImpl & obj)
+{
+		//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Refine "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
+	instantiate();
+	return *this;
 }
 
 

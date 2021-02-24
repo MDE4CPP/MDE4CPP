@@ -76,6 +76,7 @@ OccurrenceSpecificationObject::OccurrenceSpecificationObject(std::shared_ptr<uml
 OccurrenceSpecificationObject::OccurrenceSpecificationObject(OccurrenceSpecificationObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 OccurrenceSpecificationObject::OccurrenceSpecificationObject()
@@ -93,6 +94,12 @@ std::shared_ptr<ecore::EObject> OccurrenceSpecificationObject::copy()
 	element->setThisOccurrenceSpecificationObjectPtr(element);
 	return element;
 }
+
+OccurrenceSpecificationObject& OccurrenceSpecificationObject::operator=(const OccurrenceSpecificationObject & obj)
+{
+	return *this;
+}
+
 
 void OccurrenceSpecificationObject::destroy()
 {	

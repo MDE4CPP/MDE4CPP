@@ -81,7 +81,6 @@ namespace ecore
 	{
 		public:
  			EStructuralFeature(const EStructuralFeature &) {}
-			EStructuralFeature& operator=(EStructuralFeature const&) = delete;
 
 		protected:
 			EStructuralFeature(){}

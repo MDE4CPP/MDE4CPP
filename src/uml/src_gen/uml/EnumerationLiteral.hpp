@@ -126,7 +126,6 @@ namespace uml
 	{
 		public:
  			EnumerationLiteral(const EnumerationLiteral &) {}
-			EnumerationLiteral& operator=(EnumerationLiteral const&) = delete;
 
 		protected:
 			EnumerationLiteral(){}

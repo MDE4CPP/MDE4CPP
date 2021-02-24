@@ -139,7 +139,6 @@ namespace PSCS::Semantics::StructuredClassifiers
 	{
 		public:
  			CS_Object(const CS_Object &) {}
-			CS_Object& operator=(CS_Object const&) = delete;
 
 		protected:
 			CS_Object(){}

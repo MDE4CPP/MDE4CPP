@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~DestructionOccurrenceSpecificationObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			DestructionOccurrenceSpecificationObject& operator=(DestructionOccurrenceSpecificationObject const&);
 
 			virtual void destroy();
 			

@@ -22,10 +22,8 @@ namespace uml
 	{
 		public: 
 			DeploymentImpl(const DeploymentImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			DeploymentImpl& operator=(DeploymentImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			DeploymentImpl& operator=(DeploymentImpl const&);
 
 		protected:
 			friend class umlFactoryImpl;

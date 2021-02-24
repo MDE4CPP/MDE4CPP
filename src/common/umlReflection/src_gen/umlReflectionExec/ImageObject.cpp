@@ -55,6 +55,7 @@ ImageObject::ImageObject(std::shared_ptr<uml::Image> _element):
 ImageObject::ImageObject(ImageObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ImageObject::ImageObject()
@@ -72,6 +73,12 @@ std::shared_ptr<ecore::EObject> ImageObject::copy()
 	element->setThisImageObjectPtr(element);
 	return element;
 }
+
+ImageObject& ImageObject::operator=(const ImageObject & obj)
+{
+	return *this;
+}
+
 
 void ImageObject::destroy()
 {	

@@ -75,6 +75,9 @@ using namespace uml;
 //*********************************
 PartDecompositionImpl::PartDecompositionImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 PartDecompositionImpl::~PartDecompositionImpl()
@@ -117,6 +120,18 @@ PartDecompositionImpl::PartDecompositionImpl(std::weak_ptr<uml::Element > par_ow
 
 
 PartDecompositionImpl::PartDecompositionImpl(const PartDecompositionImpl & obj):PartDecompositionImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  PartDecompositionImpl::copy() const
+{
+	std::shared_ptr<PartDecompositionImpl> element(new PartDecompositionImpl(*this));
+	element->setThisPartDecompositionPtr(element);
+	return element;
+}
+
+PartDecompositionImpl& PartDecompositionImpl::operator=(const PartDecompositionImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -196,13 +211,8 @@ PartDecompositionImpl::PartDecompositionImpl(const PartDecompositionImpl & obj):
 		std::cout << "Copying the Subset: " << "m_returnValue" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  PartDecompositionImpl::copy() const
-{
-	std::shared_ptr<PartDecompositionImpl> element(new PartDecompositionImpl(*this));
-	element->setThisPartDecompositionPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> PartDecompositionImpl::eStaticClass() const

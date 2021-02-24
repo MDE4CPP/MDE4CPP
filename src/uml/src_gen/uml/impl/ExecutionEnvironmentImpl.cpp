@@ -116,6 +116,9 @@ using namespace uml;
 //*********************************
 ExecutionEnvironmentImpl::ExecutionEnvironmentImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ExecutionEnvironmentImpl::~ExecutionEnvironmentImpl()
@@ -171,6 +174,18 @@ ExecutionEnvironmentImpl::ExecutionEnvironmentImpl(std::weak_ptr<uml::TemplatePa
 
 
 ExecutionEnvironmentImpl::ExecutionEnvironmentImpl(const ExecutionEnvironmentImpl & obj):ExecutionEnvironmentImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ExecutionEnvironmentImpl::copy() const
+{
+	std::shared_ptr<ExecutionEnvironmentImpl> element(new ExecutionEnvironmentImpl(*this));
+	element->setThisExecutionEnvironmentPtr(element);
+	return element;
+}
+
+ExecutionEnvironmentImpl& ExecutionEnvironmentImpl::operator=(const ExecutionEnvironmentImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -439,13 +454,8 @@ ExecutionEnvironmentImpl::ExecutionEnvironmentImpl(const ExecutionEnvironmentImp
 		std::cout << "Copying the Subset: " << "m_templateBinding" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  ExecutionEnvironmentImpl::copy() const
-{
-	std::shared_ptr<ExecutionEnvironmentImpl> element(new ExecutionEnvironmentImpl(*this));
-	element->setThisExecutionEnvironmentPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ExecutionEnvironmentImpl::eStaticClass() const

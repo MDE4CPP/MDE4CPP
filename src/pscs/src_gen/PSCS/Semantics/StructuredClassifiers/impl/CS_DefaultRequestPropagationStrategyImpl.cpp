@@ -57,6 +57,9 @@ using namespace PSCS::Semantics::StructuredClassifiers;
 //*********************************
 CS_DefaultRequestPropagationStrategyImpl::CS_DefaultRequestPropagationStrategyImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 CS_DefaultRequestPropagationStrategyImpl::~CS_DefaultRequestPropagationStrategyImpl()
@@ -70,6 +73,18 @@ CS_DefaultRequestPropagationStrategyImpl::~CS_DefaultRequestPropagationStrategyI
 
 CS_DefaultRequestPropagationStrategyImpl::CS_DefaultRequestPropagationStrategyImpl(const CS_DefaultRequestPropagationStrategyImpl & obj):CS_DefaultRequestPropagationStrategyImpl()
 {
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  CS_DefaultRequestPropagationStrategyImpl::copy() const
+{
+	std::shared_ptr<CS_DefaultRequestPropagationStrategyImpl> element(new CS_DefaultRequestPropagationStrategyImpl(*this));
+	element->setThisCS_DefaultRequestPropagationStrategyPtr(element);
+	return element;
+}
+
+CS_DefaultRequestPropagationStrategyImpl& CS_DefaultRequestPropagationStrategyImpl::operator=(const CS_DefaultRequestPropagationStrategyImpl & obj)
+{
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy CS_DefaultRequestPropagationStrategy "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -81,13 +96,8 @@ CS_DefaultRequestPropagationStrategyImpl::CS_DefaultRequestPropagationStrategyIm
 	//Clone references with containment (deep copy)
 
 
-}
 
-std::shared_ptr<ecore::EObject>  CS_DefaultRequestPropagationStrategyImpl::copy() const
-{
-	std::shared_ptr<CS_DefaultRequestPropagationStrategyImpl> element(new CS_DefaultRequestPropagationStrategyImpl(*this));
-	element->setThisCS_DefaultRequestPropagationStrategyPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> CS_DefaultRequestPropagationStrategyImpl::eStaticClass() const

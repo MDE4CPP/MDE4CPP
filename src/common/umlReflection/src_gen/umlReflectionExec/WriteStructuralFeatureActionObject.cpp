@@ -104,6 +104,7 @@ WriteStructuralFeatureActionObject::WriteStructuralFeatureActionObject(std::shar
 WriteStructuralFeatureActionObject::WriteStructuralFeatureActionObject(WriteStructuralFeatureActionObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 WriteStructuralFeatureActionObject::WriteStructuralFeatureActionObject()
@@ -121,6 +122,12 @@ std::shared_ptr<ecore::EObject> WriteStructuralFeatureActionObject::copy()
 	element->setThisWriteStructuralFeatureActionObjectPtr(element);
 	return element;
 }
+
+WriteStructuralFeatureActionObject& WriteStructuralFeatureActionObject::operator=(const WriteStructuralFeatureActionObject & obj)
+{
+	return *this;
+}
+
 
 void WriteStructuralFeatureActionObject::destroy()
 {	

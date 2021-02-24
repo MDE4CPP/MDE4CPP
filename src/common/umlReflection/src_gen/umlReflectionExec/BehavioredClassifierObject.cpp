@@ -127,6 +127,7 @@ BehavioredClassifierObject::BehavioredClassifierObject(std::shared_ptr<uml::Beha
 BehavioredClassifierObject::BehavioredClassifierObject(BehavioredClassifierObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 BehavioredClassifierObject::BehavioredClassifierObject()
@@ -144,6 +145,12 @@ std::shared_ptr<ecore::EObject> BehavioredClassifierObject::copy()
 	element->setThisBehavioredClassifierObjectPtr(element);
 	return element;
 }
+
+BehavioredClassifierObject& BehavioredClassifierObject::operator=(const BehavioredClassifierObject & obj)
+{
+	return *this;
+}
+
 
 void BehavioredClassifierObject::destroy()
 {	

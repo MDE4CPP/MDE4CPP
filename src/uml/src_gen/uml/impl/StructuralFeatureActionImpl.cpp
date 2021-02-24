@@ -89,6 +89,9 @@ using namespace uml;
 //*********************************
 StructuralFeatureActionImpl::StructuralFeatureActionImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 StructuralFeatureActionImpl::~StructuralFeatureActionImpl()
@@ -131,6 +134,18 @@ StructuralFeatureActionImpl::StructuralFeatureActionImpl(std::weak_ptr<uml::Elem
 
 
 StructuralFeatureActionImpl::StructuralFeatureActionImpl(const StructuralFeatureActionImpl & obj):StructuralFeatureActionImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  StructuralFeatureActionImpl::copy() const
+{
+	std::shared_ptr<StructuralFeatureActionImpl> element(new StructuralFeatureActionImpl(*this));
+	element->setThisStructuralFeatureActionPtr(element);
+	return element;
+}
+
+StructuralFeatureActionImpl& StructuralFeatureActionImpl::operator=(const StructuralFeatureActionImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -249,13 +264,8 @@ StructuralFeatureActionImpl::StructuralFeatureActionImpl(const StructuralFeature
 	#endif
 
 	
-}
 
-std::shared_ptr<ecore::EObject>  StructuralFeatureActionImpl::copy() const
-{
-	std::shared_ptr<StructuralFeatureActionImpl> element(new StructuralFeatureActionImpl(*this));
-	element->setThisStructuralFeatureActionPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> StructuralFeatureActionImpl::eStaticClass() const

@@ -29,10 +29,8 @@ namespace StandardProfile
 	{
 		public: 
 			DeriveImpl(const DeriveImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			DeriveImpl& operator=(DeriveImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;  
+			DeriveImpl& operator=(DeriveImpl const&);
 
 		protected:
 			friend class StandardProfileFactoryImpl;

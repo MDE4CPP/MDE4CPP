@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~TimeConstraintObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			TimeConstraintObject& operator=(TimeConstraintObject const&);
 
 			virtual void destroy();
 			

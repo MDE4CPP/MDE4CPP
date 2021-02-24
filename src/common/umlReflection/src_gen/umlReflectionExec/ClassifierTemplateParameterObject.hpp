@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~ClassifierTemplateParameterObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			ClassifierTemplateParameterObject& operator=(ClassifierTemplateParameterObject const&);
 
 			virtual void destroy();
 			

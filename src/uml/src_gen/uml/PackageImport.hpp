@@ -84,7 +84,6 @@ namespace uml
 	{
 		public:
  			PackageImport(const PackageImport &) {}
-			PackageImport& operator=(PackageImport const&) = delete;
 
 		protected:
 			PackageImport(){}

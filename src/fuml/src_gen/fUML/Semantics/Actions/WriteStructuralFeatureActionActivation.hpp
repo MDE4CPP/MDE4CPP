@@ -101,7 +101,6 @@ namespace fUML::Semantics::Actions
 	{
 		public:
  			WriteStructuralFeatureActionActivation(const WriteStructuralFeatureActionActivation &) {}
-			WriteStructuralFeatureActionActivation& operator=(WriteStructuralFeatureActionActivation const&) = delete;
 
 		protected:
 			WriteStructuralFeatureActionActivation(){}

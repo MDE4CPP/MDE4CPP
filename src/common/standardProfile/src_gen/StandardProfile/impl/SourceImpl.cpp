@@ -41,9 +41,9 @@ using namespace StandardProfile;
 //*********************************
 SourceImpl::SourceImpl()
 {
-	#ifdef ADD_COUNT
-		ADD_COUNT("SourceImpl()");
-	#endif
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 
 	DEBUG_MESSAGE(std::cout<<"Source is created..."<<std::endl;)
 
@@ -61,20 +61,12 @@ SourceImpl::SourceImpl()
 
 SourceImpl::~SourceImpl()
 {
-	#ifdef SUB_COUNT
-		SUB_COUNT("SourceImpl()");
-	#endif
-
 	DEBUG_MESSAGE(std::cout<<"Source is destroyed..."<<std::endl;)
 }
 
 SourceImpl::SourceImpl(const SourceImpl & obj):SourceImpl()
 {
-	//create copy of all Attributes
-	#ifdef SHOW_COPIES
-	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Source "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
-	#endif
-	instantiate();
+	*this = obj;
 }
 
 std::shared_ptr<ecore::EObject>  SourceImpl::copy() const
@@ -82,6 +74,16 @@ std::shared_ptr<ecore::EObject>  SourceImpl::copy() const
 	std::shared_ptr<SourceImpl> element(new SourceImpl(*this));
 	element->setThisSourcePtr(element);
 	return element;
+}
+
+SourceImpl& SourceImpl::operator=(const SourceImpl & obj)
+{
+		//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Source "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
+	instantiate();
+	return *this;
 }
 
 

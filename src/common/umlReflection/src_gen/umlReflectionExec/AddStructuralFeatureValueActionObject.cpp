@@ -107,6 +107,7 @@ AddStructuralFeatureValueActionObject::AddStructuralFeatureValueActionObject(std
 AddStructuralFeatureValueActionObject::AddStructuralFeatureValueActionObject(AddStructuralFeatureValueActionObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 AddStructuralFeatureValueActionObject::AddStructuralFeatureValueActionObject()
@@ -124,6 +125,12 @@ std::shared_ptr<ecore::EObject> AddStructuralFeatureValueActionObject::copy()
 	element->setThisAddStructuralFeatureValueActionObjectPtr(element);
 	return element;
 }
+
+AddStructuralFeatureValueActionObject& AddStructuralFeatureValueActionObject::operator=(const AddStructuralFeatureValueActionObject & obj)
+{
+	return *this;
+}
+
 
 void AddStructuralFeatureValueActionObject::destroy()
 {	

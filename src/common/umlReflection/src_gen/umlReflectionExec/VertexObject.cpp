@@ -68,6 +68,7 @@ VertexObject::VertexObject(std::shared_ptr<uml::Vertex> _element):
 VertexObject::VertexObject(VertexObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 VertexObject::VertexObject()
@@ -85,6 +86,12 @@ std::shared_ptr<ecore::EObject> VertexObject::copy()
 	element->setThisVertexObjectPtr(element);
 	return element;
 }
+
+VertexObject& VertexObject::operator=(const VertexObject & obj)
+{
+	return *this;
+}
+
 
 void VertexObject::destroy()
 {	

@@ -187,7 +187,6 @@ namespace uml
 	{
 		public:
  			Association(const Association &) {}
-			Association& operator=(Association const&) = delete;
 
 		protected:
 			Association(){}

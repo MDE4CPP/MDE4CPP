@@ -137,6 +137,7 @@ ConditionalNodeObject::ConditionalNodeObject(std::shared_ptr<uml::ConditionalNod
 ConditionalNodeObject::ConditionalNodeObject(ConditionalNodeObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ConditionalNodeObject::ConditionalNodeObject()
@@ -154,6 +155,12 @@ std::shared_ptr<ecore::EObject> ConditionalNodeObject::copy()
 	element->setThisConditionalNodeObjectPtr(element);
 	return element;
 }
+
+ConditionalNodeObject& ConditionalNodeObject::operator=(const ConditionalNodeObject & obj)
+{
+	return *this;
+}
+
 
 void ConditionalNodeObject::destroy()
 {	

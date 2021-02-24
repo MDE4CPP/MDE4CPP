@@ -22,10 +22,8 @@ namespace uml
 	{
 		public: 
 			InteractionFragmentImpl(const InteractionFragmentImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			InteractionFragmentImpl& operator=(InteractionFragmentImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			InteractionFragmentImpl& operator=(InteractionFragmentImpl const&);
 
 		protected:
 			friend class umlFactoryImpl;

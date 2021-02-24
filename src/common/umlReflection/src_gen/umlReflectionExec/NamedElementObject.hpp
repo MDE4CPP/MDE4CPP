@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~NamedElementObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			NamedElementObject& operator=(NamedElementObject const&);
 
 			virtual void destroy();
 			

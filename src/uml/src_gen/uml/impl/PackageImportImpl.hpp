@@ -22,10 +22,8 @@ namespace uml
 	{
 		public: 
 			PackageImportImpl(const PackageImportImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			PackageImportImpl& operator=(PackageImportImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			PackageImportImpl& operator=(PackageImportImpl const&);
 
 		protected:
 			friend class umlFactoryImpl;

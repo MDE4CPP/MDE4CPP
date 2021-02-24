@@ -76,6 +76,7 @@ OpaqueExpressionObject::OpaqueExpressionObject(std::shared_ptr<uml::OpaqueExpres
 OpaqueExpressionObject::OpaqueExpressionObject(OpaqueExpressionObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 OpaqueExpressionObject::OpaqueExpressionObject()
@@ -93,6 +94,12 @@ std::shared_ptr<ecore::EObject> OpaqueExpressionObject::copy()
 	element->setThisOpaqueExpressionObjectPtr(element);
 	return element;
 }
+
+OpaqueExpressionObject& OpaqueExpressionObject::operator=(const OpaqueExpressionObject & obj)
+{
+	return *this;
+}
+
 
 void OpaqueExpressionObject::destroy()
 {	

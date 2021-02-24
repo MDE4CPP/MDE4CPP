@@ -23,10 +23,8 @@ namespace fUML::Semantics::Actions
 	{
 		public: 
 			LoopNodeActivationImpl(const LoopNodeActivationImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			LoopNodeActivationImpl& operator=(LoopNodeActivationImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			LoopNodeActivationImpl& operator=(LoopNodeActivationImpl const&);
 
 		protected:
 			friend class fUML::Semantics::Actions::ActionsFactoryImpl;

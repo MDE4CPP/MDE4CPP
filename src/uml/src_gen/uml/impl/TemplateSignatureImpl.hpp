@@ -22,10 +22,8 @@ namespace uml
 	{
 		public: 
 			TemplateSignatureImpl(const TemplateSignatureImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			TemplateSignatureImpl& operator=(TemplateSignatureImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			TemplateSignatureImpl& operator=(TemplateSignatureImpl const&);
 
 		protected:
 			friend class umlFactoryImpl;

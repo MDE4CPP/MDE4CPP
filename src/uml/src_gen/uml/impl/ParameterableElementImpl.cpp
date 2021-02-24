@@ -55,6 +55,9 @@ using namespace uml;
 //*********************************
 ParameterableElementImpl::ParameterableElementImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ParameterableElementImpl::~ParameterableElementImpl()
@@ -82,6 +85,18 @@ ParameterableElementImpl::ParameterableElementImpl(std::weak_ptr<uml::TemplatePa
 
 ParameterableElementImpl::ParameterableElementImpl(const ParameterableElementImpl & obj):ParameterableElementImpl()
 {
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ParameterableElementImpl::copy() const
+{
+	std::shared_ptr<ParameterableElementImpl> element(new ParameterableElementImpl(*this));
+	element->setThisParameterableElementPtr(element);
+	return element;
+}
+
+ParameterableElementImpl& ParameterableElementImpl::operator=(const ParameterableElementImpl & obj)
+{
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ParameterableElement "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -107,13 +122,8 @@ ParameterableElementImpl::ParameterableElementImpl(const ParameterableElementImp
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  ParameterableElementImpl::copy() const
-{
-	std::shared_ptr<ParameterableElementImpl> element(new ParameterableElementImpl(*this));
-	element->setThisParameterableElementPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ParameterableElementImpl::eStaticClass() const

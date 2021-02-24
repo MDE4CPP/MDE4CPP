@@ -67,6 +67,9 @@ using namespace fUML::Semantics::Activities;
 //*********************************
 ActivityParameterNodeActivationImpl::ActivityParameterNodeActivationImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ActivityParameterNodeActivationImpl::~ActivityParameterNodeActivationImpl()
@@ -85,6 +88,18 @@ ActivityParameterNodeActivationImpl::ActivityParameterNodeActivationImpl(std::we
 
 
 ActivityParameterNodeActivationImpl::ActivityParameterNodeActivationImpl(const ActivityParameterNodeActivationImpl & obj):ActivityParameterNodeActivationImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ActivityParameterNodeActivationImpl::copy() const
+{
+	std::shared_ptr<ActivityParameterNodeActivationImpl> element(new ActivityParameterNodeActivationImpl(*this));
+	element->setThisActivityParameterNodeActivationPtr(element);
+	return element;
+}
+
+ActivityParameterNodeActivationImpl& ActivityParameterNodeActivationImpl::operator=(const ActivityParameterNodeActivationImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -117,13 +132,8 @@ ActivityParameterNodeActivationImpl::ActivityParameterNodeActivationImpl(const A
 		std::cout << "Copying the Subset: " << "m_heldTokens" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  ActivityParameterNodeActivationImpl::copy() const
-{
-	std::shared_ptr<ActivityParameterNodeActivationImpl> element(new ActivityParameterNodeActivationImpl(*this));
-	element->setThisActivityParameterNodeActivationPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ActivityParameterNodeActivationImpl::eStaticClass() const

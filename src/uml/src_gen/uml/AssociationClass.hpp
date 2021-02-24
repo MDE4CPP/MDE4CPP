@@ -230,7 +230,6 @@ namespace uml
 	{
 		public:
  			AssociationClass(const AssociationClass &) {}
-			AssociationClass& operator=(AssociationClass const&) = delete;
 
 		protected:
 			AssociationClass(){}

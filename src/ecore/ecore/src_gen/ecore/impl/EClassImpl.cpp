@@ -70,6 +70,9 @@ using namespace ecore;
 //*********************************
 EClassImpl::EClassImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 EClassImpl::~EClassImpl()
@@ -95,6 +98,18 @@ EClassImpl::EClassImpl(std::weak_ptr<ecore::EPackage > par_ePackage)
 
 
 EClassImpl::EClassImpl(const EClassImpl & obj):EClassImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  EClassImpl::copy() const
+{
+	std::shared_ptr<EClassImpl> element(new EClassImpl(*this));
+	element->setThisEClassPtr(element);
+	return element;
+}
+
+EClassImpl& EClassImpl::operator=(const EClassImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -201,13 +216,8 @@ EClassImpl::EClassImpl(const EClassImpl & obj):EClassImpl()
 		std::cout << "Initialising value Subset: " << "m_eOperations - Subset<ecore::EOperation, ecore::EObject >(getEContens())" << std::endl;
 	#endif
 	
-}
 
-std::shared_ptr<ecore::EObject>  EClassImpl::copy() const
-{
-	std::shared_ptr<EClassImpl> element(new EClassImpl(*this));
-	element->setThisEClassPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<EClass> EClassImpl::eStaticClass() const

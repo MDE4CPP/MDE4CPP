@@ -100,7 +100,6 @@ namespace uml
 	{
 		public:
  			CallEvent(const CallEvent &) {}
-			CallEvent& operator=(CallEvent const&) = delete;
 
 		protected:
 			CallEvent(){}

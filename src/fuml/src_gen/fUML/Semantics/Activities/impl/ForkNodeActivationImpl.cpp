@@ -63,6 +63,9 @@ using namespace fUML::Semantics::Activities;
 //*********************************
 ForkNodeActivationImpl::ForkNodeActivationImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ForkNodeActivationImpl::~ForkNodeActivationImpl()
@@ -81,6 +84,18 @@ ForkNodeActivationImpl::ForkNodeActivationImpl(std::weak_ptr<fUML::Semantics::Ac
 
 
 ForkNodeActivationImpl::ForkNodeActivationImpl(const ForkNodeActivationImpl & obj):ForkNodeActivationImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ForkNodeActivationImpl::copy() const
+{
+	std::shared_ptr<ForkNodeActivationImpl> element(new ForkNodeActivationImpl(*this));
+	element->setThisForkNodeActivationPtr(element);
+	return element;
+}
+
+ForkNodeActivationImpl& ForkNodeActivationImpl::operator=(const ForkNodeActivationImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -112,13 +127,8 @@ ForkNodeActivationImpl::ForkNodeActivationImpl(const ForkNodeActivationImpl & ob
 		std::cout << "Copying the Subset: " << "m_heldTokens" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  ForkNodeActivationImpl::copy() const
-{
-	std::shared_ptr<ForkNodeActivationImpl> element(new ForkNodeActivationImpl(*this));
-	element->setThisForkNodeActivationPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ForkNodeActivationImpl::eStaticClass() const

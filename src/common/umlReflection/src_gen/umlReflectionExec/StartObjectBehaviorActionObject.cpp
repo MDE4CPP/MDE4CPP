@@ -105,6 +105,7 @@ StartObjectBehaviorActionObject::StartObjectBehaviorActionObject(std::shared_ptr
 StartObjectBehaviorActionObject::StartObjectBehaviorActionObject(StartObjectBehaviorActionObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 StartObjectBehaviorActionObject::StartObjectBehaviorActionObject()
@@ -122,6 +123,12 @@ std::shared_ptr<ecore::EObject> StartObjectBehaviorActionObject::copy()
 	element->setThisStartObjectBehaviorActionObjectPtr(element);
 	return element;
 }
+
+StartObjectBehaviorActionObject& StartObjectBehaviorActionObject::operator=(const StartObjectBehaviorActionObject & obj)
+{
+	return *this;
+}
+
 
 void StartObjectBehaviorActionObject::destroy()
 {	

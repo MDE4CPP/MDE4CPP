@@ -100,7 +100,6 @@ namespace fUML::Semantics::Actions
 	{
 		public:
  			ReadIsClassifiedObjectActionActivation(const ReadIsClassifiedObjectActionActivation &) {}
-			ReadIsClassifiedObjectActionActivation& operator=(ReadIsClassifiedObjectActionActivation const&) = delete;
 
 		protected:
 			ReadIsClassifiedObjectActionActivation(){}

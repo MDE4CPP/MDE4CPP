@@ -116,7 +116,6 @@ namespace PSCS::Semantics::Actions
 	{
 		public:
  			CS_DefaultConstructStrategy(const CS_DefaultConstructStrategy &) {}
-			CS_DefaultConstructStrategy& operator=(CS_DefaultConstructStrategy const&) = delete;
 
 		protected:
 			CS_DefaultConstructStrategy(){}

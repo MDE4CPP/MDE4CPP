@@ -23,10 +23,8 @@ namespace fUML::Semantics::Actions
 	{
 		public: 
 			CreateObjectActionActivationImpl(const CreateObjectActionActivationImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			CreateObjectActionActivationImpl& operator=(CreateObjectActionActivationImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			CreateObjectActionActivationImpl& operator=(CreateObjectActionActivationImpl const&);
 
 		protected:
 			friend class fUML::Semantics::Actions::ActionsFactoryImpl;

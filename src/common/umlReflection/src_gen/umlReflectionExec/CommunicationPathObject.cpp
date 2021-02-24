@@ -132,6 +132,7 @@ CommunicationPathObject::CommunicationPathObject(std::shared_ptr<uml::Communicat
 CommunicationPathObject::CommunicationPathObject(CommunicationPathObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 CommunicationPathObject::CommunicationPathObject()
@@ -149,6 +150,12 @@ std::shared_ptr<ecore::EObject> CommunicationPathObject::copy()
 	element->setThisCommunicationPathObjectPtr(element);
 	return element;
 }
+
+CommunicationPathObject& CommunicationPathObject::operator=(const CommunicationPathObject & obj)
+{
+	return *this;
+}
+
 
 void CommunicationPathObject::destroy()
 {	

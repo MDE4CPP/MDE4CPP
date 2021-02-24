@@ -98,6 +98,9 @@ using namespace uml;
 //*********************************
 DataTypeImpl::DataTypeImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 DataTypeImpl::~DataTypeImpl()
@@ -153,6 +156,18 @@ DataTypeImpl::DataTypeImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemp
 
 
 DataTypeImpl::DataTypeImpl(const DataTypeImpl & obj):DataTypeImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  DataTypeImpl::copy() const
+{
+	std::shared_ptr<DataTypeImpl> element(new DataTypeImpl(*this));
+	element->setThisDataTypePtr(element);
+	return element;
+}
+
+DataTypeImpl& DataTypeImpl::operator=(const DataTypeImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -350,13 +365,8 @@ DataTypeImpl::DataTypeImpl(const DataTypeImpl & obj):DataTypeImpl()
 		std::cout << "Initialising value Subset: " << "m_ownedOperation - Subset<uml::Operation, uml::Feature,uml::NamedElement >(getFeature(),getOwnedMember())" << std::endl;
 	#endif
 	
-}
 
-std::shared_ptr<ecore::EObject>  DataTypeImpl::copy() const
-{
-	std::shared_ptr<DataTypeImpl> element(new DataTypeImpl(*this));
-	element->setThisDataTypePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> DataTypeImpl::eStaticClass() const

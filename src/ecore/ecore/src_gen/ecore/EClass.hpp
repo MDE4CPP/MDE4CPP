@@ -108,7 +108,6 @@ namespace ecore
 	{
 		public:
  			EClass(const EClass &) {}
-			EClass& operator=(EClass const&) = delete;
 
 		protected:
 			EClass(){}

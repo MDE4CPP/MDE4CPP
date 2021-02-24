@@ -105,7 +105,6 @@ namespace fUML::Semantics::Activities
 	{
 		public:
  			ActivityExecution(const ActivityExecution &) {}
-			ActivityExecution& operator=(ActivityExecution const&) = delete;
 
 		protected:
 			ActivityExecution(){}

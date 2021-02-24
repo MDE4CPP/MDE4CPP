@@ -22,10 +22,8 @@ namespace uml
 	{
 		public: 
 			InterfaceImpl(const InterfaceImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			InterfaceImpl& operator=(InterfaceImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			InterfaceImpl& operator=(InterfaceImpl const&);
 
 		protected:
 			friend class umlFactoryImpl;

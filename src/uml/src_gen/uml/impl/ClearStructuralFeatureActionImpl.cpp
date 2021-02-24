@@ -89,6 +89,9 @@ using namespace uml;
 //*********************************
 ClearStructuralFeatureActionImpl::ClearStructuralFeatureActionImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ClearStructuralFeatureActionImpl::~ClearStructuralFeatureActionImpl()
@@ -131,6 +134,18 @@ ClearStructuralFeatureActionImpl::ClearStructuralFeatureActionImpl(std::weak_ptr
 
 
 ClearStructuralFeatureActionImpl::ClearStructuralFeatureActionImpl(const ClearStructuralFeatureActionImpl & obj):ClearStructuralFeatureActionImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ClearStructuralFeatureActionImpl::copy() const
+{
+	std::shared_ptr<ClearStructuralFeatureActionImpl> element(new ClearStructuralFeatureActionImpl(*this));
+	element->setThisClearStructuralFeatureActionPtr(element);
+	return element;
+}
+
+ClearStructuralFeatureActionImpl& ClearStructuralFeatureActionImpl::operator=(const ClearStructuralFeatureActionImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -256,13 +271,8 @@ ClearStructuralFeatureActionImpl::ClearStructuralFeatureActionImpl(const ClearSt
 	#endif
 
 	
-}
 
-std::shared_ptr<ecore::EObject>  ClearStructuralFeatureActionImpl::copy() const
-{
-	std::shared_ptr<ClearStructuralFeatureActionImpl> element(new ClearStructuralFeatureActionImpl(*this));
-	element->setThisClearStructuralFeatureActionPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ClearStructuralFeatureActionImpl::eStaticClass() const

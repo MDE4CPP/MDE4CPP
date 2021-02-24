@@ -25,9 +25,6 @@ namespace StandardProfile
 {
 	class Refine : virtual public uml::Stereotype 
 	{
-		private:    
-			Refine(const Refine& that) = delete;
-
 		protected:
 			Refine(){}
 

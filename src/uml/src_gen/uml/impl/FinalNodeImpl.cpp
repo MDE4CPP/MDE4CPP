@@ -79,6 +79,9 @@ using namespace uml;
 //*********************************
 FinalNodeImpl::FinalNodeImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 FinalNodeImpl::~FinalNodeImpl()
@@ -121,6 +124,18 @@ FinalNodeImpl::FinalNodeImpl(std::weak_ptr<uml::Element > par_owner)
 
 
 FinalNodeImpl::FinalNodeImpl(const FinalNodeImpl & obj):FinalNodeImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  FinalNodeImpl::copy() const
+{
+	std::shared_ptr<FinalNodeImpl> element(new FinalNodeImpl(*this));
+	element->setThisFinalNodePtr(element);
+	return element;
+}
+
+FinalNodeImpl& FinalNodeImpl::operator=(const FinalNodeImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -202,13 +217,8 @@ FinalNodeImpl::FinalNodeImpl(const FinalNodeImpl & obj):FinalNodeImpl()
 		std::cout << "Copying the Subset: " << "m_redefinedNode" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  FinalNodeImpl::copy() const
-{
-	std::shared_ptr<FinalNodeImpl> element(new FinalNodeImpl(*this));
-	element->setThisFinalNodePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> FinalNodeImpl::eStaticClass() const

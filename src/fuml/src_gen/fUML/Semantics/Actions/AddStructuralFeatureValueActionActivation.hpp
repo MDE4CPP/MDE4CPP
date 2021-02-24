@@ -100,7 +100,6 @@ namespace fUML::Semantics::Actions
 	{
 		public:
  			AddStructuralFeatureValueActionActivation(const AddStructuralFeatureValueActionActivation &) {}
-			AddStructuralFeatureValueActionActivation& operator=(AddStructuralFeatureValueActionActivation const&) = delete;
 
 		protected:
 			AddStructuralFeatureValueActionActivation(){}

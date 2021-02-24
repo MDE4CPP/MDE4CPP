@@ -71,6 +71,9 @@ using namespace fUML::Semantics::Actions;
 //*********************************
 ReadIsClassifiedObjectActionActivationImpl::ReadIsClassifiedObjectActionActivationImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ReadIsClassifiedObjectActionActivationImpl::~ReadIsClassifiedObjectActionActivationImpl()
@@ -89,6 +92,18 @@ ReadIsClassifiedObjectActionActivationImpl::ReadIsClassifiedObjectActionActivati
 
 
 ReadIsClassifiedObjectActionActivationImpl::ReadIsClassifiedObjectActionActivationImpl(const ReadIsClassifiedObjectActionActivationImpl & obj):ReadIsClassifiedObjectActionActivationImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ReadIsClassifiedObjectActionActivationImpl::copy() const
+{
+	std::shared_ptr<ReadIsClassifiedObjectActionActivationImpl> element(new ReadIsClassifiedObjectActionActivationImpl(*this));
+	element->setThisReadIsClassifiedObjectActionActivationPtr(element);
+	return element;
+}
+
+ReadIsClassifiedObjectActionActivationImpl& ReadIsClassifiedObjectActionActivationImpl::operator=(const ReadIsClassifiedObjectActionActivationImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -142,13 +157,8 @@ ReadIsClassifiedObjectActionActivationImpl::ReadIsClassifiedObjectActionActivati
 		std::cout << "Copying the Subset: " << "m_outputPinActivation" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  ReadIsClassifiedObjectActionActivationImpl::copy() const
-{
-	std::shared_ptr<ReadIsClassifiedObjectActionActivationImpl> element(new ReadIsClassifiedObjectActionActivationImpl(*this));
-	element->setThisReadIsClassifiedObjectActionActivationPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ReadIsClassifiedObjectActionActivationImpl::eStaticClass() const

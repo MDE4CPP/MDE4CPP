@@ -69,6 +69,9 @@ using namespace fUML::Semantics::Actions;
 //*********************************
 WriteLinkActionActivationImpl::WriteLinkActionActivationImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 WriteLinkActionActivationImpl::~WriteLinkActionActivationImpl()
@@ -87,6 +90,18 @@ WriteLinkActionActivationImpl::WriteLinkActionActivationImpl(std::weak_ptr<fUML:
 
 
 WriteLinkActionActivationImpl::WriteLinkActionActivationImpl(const WriteLinkActionActivationImpl & obj):WriteLinkActionActivationImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  WriteLinkActionActivationImpl::copy() const
+{
+	std::shared_ptr<WriteLinkActionActivationImpl> element(new WriteLinkActionActivationImpl(*this));
+	element->setThisWriteLinkActionActivationPtr(element);
+	return element;
+}
+
+WriteLinkActionActivationImpl& WriteLinkActionActivationImpl::operator=(const WriteLinkActionActivationImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -140,13 +155,8 @@ WriteLinkActionActivationImpl::WriteLinkActionActivationImpl(const WriteLinkActi
 		std::cout << "Copying the Subset: " << "m_outputPinActivation" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  WriteLinkActionActivationImpl::copy() const
-{
-	std::shared_ptr<WriteLinkActionActivationImpl> element(new WriteLinkActionActivationImpl(*this));
-	element->setThisWriteLinkActionActivationPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> WriteLinkActionActivationImpl::eStaticClass() const

@@ -66,6 +66,7 @@ TriggerObject::TriggerObject(std::shared_ptr<uml::Trigger> _element):
 TriggerObject::TriggerObject(TriggerObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 TriggerObject::TriggerObject()
@@ -83,6 +84,12 @@ std::shared_ptr<ecore::EObject> TriggerObject::copy()
 	element->setThisTriggerObjectPtr(element);
 	return element;
 }
+
+TriggerObject& TriggerObject::operator=(const TriggerObject & obj)
+{
+	return *this;
+}
+
 
 void TriggerObject::destroy()
 {	

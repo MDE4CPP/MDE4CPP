@@ -84,6 +84,7 @@ SubstitutionObject::SubstitutionObject(std::shared_ptr<uml::Substitution> _eleme
 SubstitutionObject::SubstitutionObject(SubstitutionObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 SubstitutionObject::SubstitutionObject()
@@ -101,6 +102,12 @@ std::shared_ptr<ecore::EObject> SubstitutionObject::copy()
 	element->setThisSubstitutionObjectPtr(element);
 	return element;
 }
+
+SubstitutionObject& SubstitutionObject::operator=(const SubstitutionObject & obj)
+{
+	return *this;
+}
+
 
 void SubstitutionObject::destroy()
 {	

@@ -96,6 +96,9 @@ using namespace uml;
 //*********************************
 SignalImpl::SignalImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 SignalImpl::~SignalImpl()
@@ -151,6 +154,18 @@ SignalImpl::SignalImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplate
 
 
 SignalImpl::SignalImpl(const SignalImpl & obj):SignalImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  SignalImpl::copy() const
+{
+	std::shared_ptr<SignalImpl> element(new SignalImpl(*this));
+	element->setThisSignalPtr(element);
+	return element;
+}
+
+SignalImpl& SignalImpl::operator=(const SignalImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -333,13 +348,8 @@ SignalImpl::SignalImpl(const SignalImpl & obj):SignalImpl()
 		std::cout << "Initialising value Subset: " << "m_ownedAttribute - Subset<uml::Property, uml::Property,uml::NamedElement >(getAttribute(),getOwnedMember())" << std::endl;
 	#endif
 	
-}
 
-std::shared_ptr<ecore::EObject>  SignalImpl::copy() const
-{
-	std::shared_ptr<SignalImpl> element(new SignalImpl(*this));
-	element->setThisSignalPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> SignalImpl::eStaticClass() const

@@ -22,10 +22,8 @@ namespace uml
 	{
 		public: 
 			ExecutionOccurrenceSpecificationImpl(const ExecutionOccurrenceSpecificationImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			ExecutionOccurrenceSpecificationImpl& operator=(ExecutionOccurrenceSpecificationImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			ExecutionOccurrenceSpecificationImpl& operator=(ExecutionOccurrenceSpecificationImpl const&);
 
 		protected:
 			friend class umlFactoryImpl;

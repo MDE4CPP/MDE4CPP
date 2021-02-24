@@ -116,7 +116,6 @@ namespace uml
 	{
 		public:
  			CombinedFragment(const CombinedFragment &) {}
-			CombinedFragment& operator=(CombinedFragment const&) = delete;
 
 		protected:
 			CombinedFragment(){}

@@ -110,7 +110,6 @@ namespace uml
 	{
 		public:
  			ConnectionPointReference(const ConnectionPointReference &) {}
-			ConnectionPointReference& operator=(ConnectionPointReference const&) = delete;
 
 		protected:
 			ConnectionPointReference(){}

@@ -105,6 +105,9 @@ using namespace fUML::Semantics::Actions;
 //*********************************
 ActionActivationImpl::ActionActivationImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ActionActivationImpl::~ActionActivationImpl()
@@ -123,6 +126,18 @@ ActionActivationImpl::ActionActivationImpl(std::weak_ptr<fUML::Semantics::Activi
 
 
 ActionActivationImpl::ActionActivationImpl(const ActionActivationImpl & obj):ActionActivationImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ActionActivationImpl::copy() const
+{
+	std::shared_ptr<ActionActivationImpl> element(new ActionActivationImpl(*this));
+	element->setThisActionActivationPtr(element);
+	return element;
+}
+
+ActionActivationImpl& ActionActivationImpl::operator=(const ActionActivationImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -176,13 +191,8 @@ ActionActivationImpl::ActionActivationImpl(const ActionActivationImpl & obj):Act
 		std::cout << "Copying the Subset: " << "m_outputPinActivation" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  ActionActivationImpl::copy() const
-{
-	std::shared_ptr<ActionActivationImpl> element(new ActionActivationImpl(*this));
-	element->setThisActionActivationPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ActionActivationImpl::eStaticClass() const

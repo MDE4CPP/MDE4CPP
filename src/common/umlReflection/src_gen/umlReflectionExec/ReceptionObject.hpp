@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~ReceptionObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			ReceptionObject& operator=(ReceptionObject const&);
 
 			virtual void destroy();
 			

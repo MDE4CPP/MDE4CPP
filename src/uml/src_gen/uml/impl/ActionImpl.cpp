@@ -90,6 +90,9 @@ using namespace uml;
 //*********************************
 ActionImpl::ActionImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ActionImpl::~ActionImpl()
@@ -132,6 +135,18 @@ ActionImpl::ActionImpl(std::weak_ptr<uml::Element > par_owner)
 
 
 ActionImpl::ActionImpl(const ActionImpl & obj):ActionImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ActionImpl::copy() const
+{
+	std::shared_ptr<ActionImpl> element(new ActionImpl(*this));
+	element->setThisActionPtr(element);
+	return element;
+}
+
+ActionImpl& ActionImpl::operator=(const ActionImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -253,13 +268,8 @@ ActionImpl::ActionImpl(const ActionImpl & obj):ActionImpl()
 		std::cout << "Initialising value Subset: " << "m_localPrecondition - Subset<uml::Constraint, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
 	
-}
 
-std::shared_ptr<ecore::EObject>  ActionImpl::copy() const
-{
-	std::shared_ptr<ActionImpl> element(new ActionImpl(*this));
-	element->setThisActionPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ActionImpl::eStaticClass() const

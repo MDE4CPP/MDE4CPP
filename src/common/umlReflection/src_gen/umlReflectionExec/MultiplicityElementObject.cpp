@@ -60,6 +60,7 @@ MultiplicityElementObject::MultiplicityElementObject(std::shared_ptr<uml::Multip
 MultiplicityElementObject::MultiplicityElementObject(MultiplicityElementObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 MultiplicityElementObject::MultiplicityElementObject()
@@ -77,6 +78,12 @@ std::shared_ptr<ecore::EObject> MultiplicityElementObject::copy()
 	element->setThisMultiplicityElementObjectPtr(element);
 	return element;
 }
+
+MultiplicityElementObject& MultiplicityElementObject::operator=(const MultiplicityElementObject & obj)
+{
+	return *this;
+}
+
 
 void MultiplicityElementObject::destroy()
 {	

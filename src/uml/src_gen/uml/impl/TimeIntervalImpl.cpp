@@ -72,6 +72,9 @@ using namespace uml;
 //*********************************
 TimeIntervalImpl::TimeIntervalImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 TimeIntervalImpl::~TimeIntervalImpl()
@@ -131,6 +134,18 @@ TimeIntervalImpl::TimeIntervalImpl(std::weak_ptr<uml::ValueSpecificationAction >
 
 TimeIntervalImpl::TimeIntervalImpl(const TimeIntervalImpl & obj):TimeIntervalImpl()
 {
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  TimeIntervalImpl::copy() const
+{
+	std::shared_ptr<TimeIntervalImpl> element(new TimeIntervalImpl(*this));
+	element->setThisTimeIntervalPtr(element);
+	return element;
+}
+
+TimeIntervalImpl& TimeIntervalImpl::operator=(const TimeIntervalImpl & obj)
+{
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy TimeInterval "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -183,13 +198,8 @@ TimeIntervalImpl::TimeIntervalImpl(const TimeIntervalImpl & obj):TimeIntervalImp
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  TimeIntervalImpl::copy() const
-{
-	std::shared_ptr<TimeIntervalImpl> element(new TimeIntervalImpl(*this));
-	element->setThisTimeIntervalPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> TimeIntervalImpl::eStaticClass() const

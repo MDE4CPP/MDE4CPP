@@ -89,6 +89,9 @@ using namespace uml;
 //*********************************
 ActivityParameterNodeImpl::ActivityParameterNodeImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ActivityParameterNodeImpl::~ActivityParameterNodeImpl()
@@ -131,6 +134,18 @@ ActivityParameterNodeImpl::ActivityParameterNodeImpl(std::weak_ptr<uml::Element 
 
 
 ActivityParameterNodeImpl::ActivityParameterNodeImpl(const ActivityParameterNodeImpl & obj):ActivityParameterNodeImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ActivityParameterNodeImpl::copy() const
+{
+	std::shared_ptr<ActivityParameterNodeImpl> element(new ActivityParameterNodeImpl(*this));
+	element->setThisActivityParameterNodePtr(element);
+	return element;
+}
+
+ActivityParameterNodeImpl& ActivityParameterNodeImpl::operator=(const ActivityParameterNodeImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -230,13 +245,8 @@ ActivityParameterNodeImpl::ActivityParameterNodeImpl(const ActivityParameterNode
 		std::cout << "Copying the Subset: " << "m_upperBound" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  ActivityParameterNodeImpl::copy() const
-{
-	std::shared_ptr<ActivityParameterNodeImpl> element(new ActivityParameterNodeImpl(*this));
-	element->setThisActivityParameterNodePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ActivityParameterNodeImpl::eStaticClass() const

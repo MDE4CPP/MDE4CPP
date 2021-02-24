@@ -80,6 +80,9 @@ using namespace fUML::Semantics::Classification;
 //*********************************
 InstanceValueEvaluationImpl::InstanceValueEvaluationImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 InstanceValueEvaluationImpl::~InstanceValueEvaluationImpl()
@@ -92,6 +95,18 @@ InstanceValueEvaluationImpl::~InstanceValueEvaluationImpl()
 
 
 InstanceValueEvaluationImpl::InstanceValueEvaluationImpl(const InstanceValueEvaluationImpl & obj):InstanceValueEvaluationImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  InstanceValueEvaluationImpl::copy() const
+{
+	std::shared_ptr<InstanceValueEvaluationImpl> element(new InstanceValueEvaluationImpl(*this));
+	element->setThisInstanceValueEvaluationPtr(element);
+	return element;
+}
+
+InstanceValueEvaluationImpl& InstanceValueEvaluationImpl::operator=(const InstanceValueEvaluationImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -108,13 +123,8 @@ InstanceValueEvaluationImpl::InstanceValueEvaluationImpl(const InstanceValueEval
 	//Clone references with containment (deep copy)
 
 
-}
 
-std::shared_ptr<ecore::EObject>  InstanceValueEvaluationImpl::copy() const
-{
-	std::shared_ptr<InstanceValueEvaluationImpl> element(new InstanceValueEvaluationImpl(*this));
-	element->setThisInstanceValueEvaluationPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> InstanceValueEvaluationImpl::eStaticClass() const

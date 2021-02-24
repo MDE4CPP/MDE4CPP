@@ -63,6 +63,7 @@ ClauseObject::ClauseObject(std::shared_ptr<uml::Clause> _element):
 ClauseObject::ClauseObject(ClauseObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ClauseObject::ClauseObject()
@@ -80,6 +81,12 @@ std::shared_ptr<ecore::EObject> ClauseObject::copy()
 	element->setThisClauseObjectPtr(element);
 	return element;
 }
+
+ClauseObject& ClauseObject::operator=(const ClauseObject & obj)
+{
+	return *this;
+}
+
 
 void ClauseObject::destroy()
 {	

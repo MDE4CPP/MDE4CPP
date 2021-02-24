@@ -25,9 +25,6 @@ namespace StandardProfile
 {
 	class Focus : virtual public uml::Stereotype 
 	{
-		private:    
-			Focus(const Focus& that) = delete;
-
 		protected:
 			Focus(){}
 

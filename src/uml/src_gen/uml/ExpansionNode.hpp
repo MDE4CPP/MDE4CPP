@@ -160,7 +160,6 @@ namespace uml
 	{
 		public:
  			ExpansionNode(const ExpansionNode &) {}
-			ExpansionNode& operator=(ExpansionNode const&) = delete;
 
 		protected:
 			ExpansionNode(){}

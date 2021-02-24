@@ -25,9 +25,6 @@ namespace StandardProfile
 {
 	class Service : virtual public uml::Stereotype 
 	{
-		private:    
-			Service(const Service& that) = delete;
-
 		protected:
 			Service(){}
 

@@ -23,10 +23,8 @@ namespace fUML::Semantics::Activities
 	{
 		public: 
 			FlowFinalNodeActivationImpl(const FlowFinalNodeActivationImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			FlowFinalNodeActivationImpl& operator=(FlowFinalNodeActivationImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			FlowFinalNodeActivationImpl& operator=(FlowFinalNodeActivationImpl const&);
 
 		protected:
 			friend class fUML::Semantics::Activities::ActivitiesFactoryImpl;

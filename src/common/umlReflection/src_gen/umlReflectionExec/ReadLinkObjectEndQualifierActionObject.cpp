@@ -102,6 +102,7 @@ ReadLinkObjectEndQualifierActionObject::ReadLinkObjectEndQualifierActionObject(s
 ReadLinkObjectEndQualifierActionObject::ReadLinkObjectEndQualifierActionObject(ReadLinkObjectEndQualifierActionObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ReadLinkObjectEndQualifierActionObject::ReadLinkObjectEndQualifierActionObject()
@@ -119,6 +120,12 @@ std::shared_ptr<ecore::EObject> ReadLinkObjectEndQualifierActionObject::copy()
 	element->setThisReadLinkObjectEndQualifierActionObjectPtr(element);
 	return element;
 }
+
+ReadLinkObjectEndQualifierActionObject& ReadLinkObjectEndQualifierActionObject::operator=(const ReadLinkObjectEndQualifierActionObject & obj)
+{
+	return *this;
+}
+
 
 void ReadLinkObjectEndQualifierActionObject::destroy()
 {	

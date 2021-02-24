@@ -103,6 +103,7 @@ PinObject::PinObject(std::shared_ptr<uml::Pin> _element):
 PinObject::PinObject(PinObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 PinObject::PinObject()
@@ -120,6 +121,12 @@ std::shared_ptr<ecore::EObject> PinObject::copy()
 	element->setThisPinObjectPtr(element);
 	return element;
 }
+
+PinObject& PinObject::operator=(const PinObject & obj)
+{
+	return *this;
+}
+
 
 void PinObject::destroy()
 {	

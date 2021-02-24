@@ -79,6 +79,9 @@ using namespace uml;
 //*********************************
 ActivityEdgeImpl::ActivityEdgeImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ActivityEdgeImpl::~ActivityEdgeImpl()
@@ -121,6 +124,18 @@ ActivityEdgeImpl::ActivityEdgeImpl(std::weak_ptr<uml::Element > par_owner)
 
 
 ActivityEdgeImpl::ActivityEdgeImpl(const ActivityEdgeImpl & obj):ActivityEdgeImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ActivityEdgeImpl::copy() const
+{
+	std::shared_ptr<ActivityEdgeImpl> element(new ActivityEdgeImpl(*this));
+	element->setThisActivityEdgePtr(element);
+	return element;
+}
+
+ActivityEdgeImpl& ActivityEdgeImpl::operator=(const ActivityEdgeImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -211,13 +226,8 @@ ActivityEdgeImpl::ActivityEdgeImpl(const ActivityEdgeImpl & obj):ActivityEdgeImp
 	
 
 	
-}
 
-std::shared_ptr<ecore::EObject>  ActivityEdgeImpl::copy() const
-{
-	std::shared_ptr<ActivityEdgeImpl> element(new ActivityEdgeImpl(*this));
-	element->setThisActivityEdgePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ActivityEdgeImpl::eStaticClass() const

@@ -80,6 +80,9 @@ using namespace PSCS::Semantics::Actions;
 //*********************************
 CS_ReadExtentActionActivationImpl::CS_ReadExtentActionActivationImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 CS_ReadExtentActionActivationImpl::~CS_ReadExtentActionActivationImpl()
@@ -98,6 +101,18 @@ CS_ReadExtentActionActivationImpl::CS_ReadExtentActionActivationImpl(std::weak_p
 
 
 CS_ReadExtentActionActivationImpl::CS_ReadExtentActionActivationImpl(const CS_ReadExtentActionActivationImpl & obj):CS_ReadExtentActionActivationImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  CS_ReadExtentActionActivationImpl::copy() const
+{
+	std::shared_ptr<CS_ReadExtentActionActivationImpl> element(new CS_ReadExtentActionActivationImpl(*this));
+	element->setThisCS_ReadExtentActionActivationPtr(element);
+	return element;
+}
+
+CS_ReadExtentActionActivationImpl& CS_ReadExtentActionActivationImpl::operator=(const CS_ReadExtentActionActivationImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -151,13 +166,8 @@ CS_ReadExtentActionActivationImpl::CS_ReadExtentActionActivationImpl(const CS_Re
 		std::cout << "Copying the Subset: " << "m_outputPinActivation" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  CS_ReadExtentActionActivationImpl::copy() const
-{
-	std::shared_ptr<CS_ReadExtentActionActivationImpl> element(new CS_ReadExtentActionActivationImpl(*this));
-	element->setThisCS_ReadExtentActionActivationPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> CS_ReadExtentActionActivationImpl::eStaticClass() const

@@ -57,6 +57,9 @@ using namespace ecore;
 //*********************************
 ETypedElementImpl::ETypedElementImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ETypedElementImpl::~ETypedElementImpl()
@@ -75,6 +78,18 @@ ETypedElementImpl::ETypedElementImpl(std::weak_ptr<ecore::EObject > par_eContain
 
 
 ETypedElementImpl::ETypedElementImpl(const ETypedElementImpl & obj):ETypedElementImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ETypedElementImpl::copy() const
+{
+	std::shared_ptr<ETypedElementImpl> element(new ETypedElementImpl(*this));
+	element->setThisETypedElementPtr(element);
+	return element;
+}
+
+ETypedElementImpl& ETypedElementImpl::operator=(const ETypedElementImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -115,13 +130,8 @@ ETypedElementImpl::ETypedElementImpl(const ETypedElementImpl & obj):ETypedElemen
 	#endif
 
 	
-}
 
-std::shared_ptr<ecore::EObject>  ETypedElementImpl::copy() const
-{
-	std::shared_ptr<ETypedElementImpl> element(new ETypedElementImpl(*this));
-	element->setThisETypedElementPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<EClass> ETypedElementImpl::eStaticClass() const

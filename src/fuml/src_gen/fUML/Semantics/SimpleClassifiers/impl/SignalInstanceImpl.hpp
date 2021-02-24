@@ -23,10 +23,8 @@ namespace fUML::Semantics::SimpleClassifiers
 	{
 		public: 
 			SignalInstanceImpl(const SignalInstanceImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			SignalInstanceImpl& operator=(SignalInstanceImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			SignalInstanceImpl& operator=(SignalInstanceImpl const&);
 
 		protected:
 			friend class fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactoryImpl;

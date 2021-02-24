@@ -105,7 +105,6 @@ namespace PSCS::Semantics::Actions
 	{
 		public:
  			CS_AcceptEventActionActivation(const CS_AcceptEventActionActivation &) {}
-			CS_AcceptEventActionActivation& operator=(CS_AcceptEventActionActivation const&) = delete;
 
 		protected:
 			CS_AcceptEventActionActivation(){}

@@ -23,10 +23,8 @@ namespace fUML::Semantics::Actions
 	{
 		public: 
 			DestroyLinkActionActivationImpl(const DestroyLinkActionActivationImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			DestroyLinkActionActivationImpl& operator=(DestroyLinkActionActivationImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			DestroyLinkActionActivationImpl& operator=(DestroyLinkActionActivationImpl const&);
 
 		protected:
 			friend class fUML::Semantics::Actions::ActionsFactoryImpl;

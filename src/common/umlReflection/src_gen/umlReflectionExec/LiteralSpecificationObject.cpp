@@ -70,6 +70,7 @@ LiteralSpecificationObject::LiteralSpecificationObject(std::shared_ptr<uml::Lite
 LiteralSpecificationObject::LiteralSpecificationObject(LiteralSpecificationObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 LiteralSpecificationObject::LiteralSpecificationObject()
@@ -87,6 +88,12 @@ std::shared_ptr<ecore::EObject> LiteralSpecificationObject::copy()
 	element->setThisLiteralSpecificationObjectPtr(element);
 	return element;
 }
+
+LiteralSpecificationObject& LiteralSpecificationObject::operator=(const LiteralSpecificationObject & obj)
+{
+	return *this;
+}
+
 
 void LiteralSpecificationObject::destroy()
 {	

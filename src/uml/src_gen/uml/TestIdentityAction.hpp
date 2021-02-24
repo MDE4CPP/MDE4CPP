@@ -154,7 +154,6 @@ namespace uml
 	{
 		public:
  			TestIdentityAction(const TestIdentityAction &) {}
-			TestIdentityAction& operator=(TestIdentityAction const&) = delete;
 
 		protected:
 			TestIdentityAction(){}

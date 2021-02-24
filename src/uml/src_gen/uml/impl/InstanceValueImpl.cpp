@@ -72,6 +72,9 @@ using namespace uml;
 //*********************************
 InstanceValueImpl::InstanceValueImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 InstanceValueImpl::~InstanceValueImpl()
@@ -131,6 +134,18 @@ InstanceValueImpl::InstanceValueImpl(std::weak_ptr<uml::ValueSpecificationAction
 
 InstanceValueImpl::InstanceValueImpl(const InstanceValueImpl & obj):InstanceValueImpl()
 {
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  InstanceValueImpl::copy() const
+{
+	std::shared_ptr<InstanceValueImpl> element(new InstanceValueImpl(*this));
+	element->setThisInstanceValuePtr(element);
+	return element;
+}
+
+InstanceValueImpl& InstanceValueImpl::operator=(const InstanceValueImpl & obj)
+{
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy InstanceValue "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -181,13 +196,8 @@ InstanceValueImpl::InstanceValueImpl(const InstanceValueImpl & obj):InstanceValu
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  InstanceValueImpl::copy() const
-{
-	std::shared_ptr<InstanceValueImpl> element(new InstanceValueImpl(*this));
-	element->setThisInstanceValuePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> InstanceValueImpl::eStaticClass() const

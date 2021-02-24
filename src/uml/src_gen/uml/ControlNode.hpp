@@ -125,7 +125,6 @@ namespace uml
 	{
 		public:
  			ControlNode(const ControlNode &) {}
-			ControlNode& operator=(ControlNode const&) = delete;
 
 		protected:
 			ControlNode(){}

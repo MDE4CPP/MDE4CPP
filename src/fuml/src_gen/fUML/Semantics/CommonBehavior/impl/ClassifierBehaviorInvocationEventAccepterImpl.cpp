@@ -66,6 +66,9 @@ using namespace fUML::Semantics::CommonBehavior;
 //*********************************
 ClassifierBehaviorInvocationEventAccepterImpl::ClassifierBehaviorInvocationEventAccepterImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ClassifierBehaviorInvocationEventAccepterImpl::~ClassifierBehaviorInvocationEventAccepterImpl()
@@ -78,6 +81,18 @@ ClassifierBehaviorInvocationEventAccepterImpl::~ClassifierBehaviorInvocationEven
 
 
 ClassifierBehaviorInvocationEventAccepterImpl::ClassifierBehaviorInvocationEventAccepterImpl(const ClassifierBehaviorInvocationEventAccepterImpl & obj):ClassifierBehaviorInvocationEventAccepterImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ClassifierBehaviorInvocationEventAccepterImpl::copy() const
+{
+	std::shared_ptr<ClassifierBehaviorInvocationEventAccepterImpl> element(new ClassifierBehaviorInvocationEventAccepterImpl(*this));
+	element->setThisClassifierBehaviorInvocationEventAccepterPtr(element);
+	return element;
+}
+
+ClassifierBehaviorInvocationEventAccepterImpl& ClassifierBehaviorInvocationEventAccepterImpl::operator=(const ClassifierBehaviorInvocationEventAccepterImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -96,13 +111,8 @@ ClassifierBehaviorInvocationEventAccepterImpl::ClassifierBehaviorInvocationEvent
 	//Clone references with containment (deep copy)
 
 
-}
 
-std::shared_ptr<ecore::EObject>  ClassifierBehaviorInvocationEventAccepterImpl::copy() const
-{
-	std::shared_ptr<ClassifierBehaviorInvocationEventAccepterImpl> element(new ClassifierBehaviorInvocationEventAccepterImpl(*this));
-	element->setThisClassifierBehaviorInvocationEventAccepterPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ClassifierBehaviorInvocationEventAccepterImpl::eStaticClass() const

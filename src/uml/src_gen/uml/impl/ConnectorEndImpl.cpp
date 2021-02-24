@@ -62,6 +62,9 @@ using namespace uml;
 //*********************************
 ConnectorEndImpl::ConnectorEndImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ConnectorEndImpl::~ConnectorEndImpl()
@@ -87,6 +90,18 @@ ConnectorEndImpl::ConnectorEndImpl(std::weak_ptr<uml::Element > par_owner)
 
 
 ConnectorEndImpl::ConnectorEndImpl(const ConnectorEndImpl & obj):ConnectorEndImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ConnectorEndImpl::copy() const
+{
+	std::shared_ptr<ConnectorEndImpl> element(new ConnectorEndImpl(*this));
+	element->setThisConnectorEndPtr(element);
+	return element;
+}
+
+ConnectorEndImpl& ConnectorEndImpl::operator=(const ConnectorEndImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -135,13 +150,8 @@ ConnectorEndImpl::ConnectorEndImpl(const ConnectorEndImpl & obj):ConnectorEndImp
 		std::cout << "Copying the Subset: " << "m_upperValue" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  ConnectorEndImpl::copy() const
-{
-	std::shared_ptr<ConnectorEndImpl> element(new ConnectorEndImpl(*this));
-	element->setThisConnectorEndPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ConnectorEndImpl::eStaticClass() const

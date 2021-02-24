@@ -42,9 +42,9 @@ using namespace StandardProfile;
 //*********************************
 CreateImpl::CreateImpl()
 {
-	#ifdef ADD_COUNT
-		ADD_COUNT("CreateImpl()");
-	#endif
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 
 	DEBUG_MESSAGE(std::cout<<"Create is created..."<<std::endl;)
 
@@ -65,20 +65,12 @@ CreateImpl::CreateImpl()
 
 CreateImpl::~CreateImpl()
 {
-	#ifdef SUB_COUNT
-		SUB_COUNT("CreateImpl()");
-	#endif
-
 	DEBUG_MESSAGE(std::cout<<"Create is destroyed..."<<std::endl;)
 }
 
 CreateImpl::CreateImpl(const CreateImpl & obj):CreateImpl()
 {
-	//create copy of all Attributes
-	#ifdef SHOW_COPIES
-	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Create "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
-	#endif
-	instantiate();
+	*this = obj;
 }
 
 std::shared_ptr<ecore::EObject>  CreateImpl::copy() const
@@ -86,6 +78,16 @@ std::shared_ptr<ecore::EObject>  CreateImpl::copy() const
 	std::shared_ptr<CreateImpl> element(new CreateImpl(*this));
 	element->setThisCreatePtr(element);
 	return element;
+}
+
+CreateImpl& CreateImpl::operator=(const CreateImpl & obj)
+{
+		//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Create "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
+	instantiate();
+	return *this;
 }
 
 

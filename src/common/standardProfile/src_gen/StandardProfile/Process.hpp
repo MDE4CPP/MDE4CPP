@@ -25,9 +25,6 @@ namespace StandardProfile
 {
 	class Process : virtual public uml::Stereotype 
 	{
-		private:    
-			Process(const Process& that) = delete;
-
 		protected:
 			Process(){}
 

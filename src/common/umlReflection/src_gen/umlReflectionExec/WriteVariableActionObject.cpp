@@ -100,6 +100,7 @@ WriteVariableActionObject::WriteVariableActionObject(std::shared_ptr<uml::WriteV
 WriteVariableActionObject::WriteVariableActionObject(WriteVariableActionObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 WriteVariableActionObject::WriteVariableActionObject()
@@ -117,6 +118,12 @@ std::shared_ptr<ecore::EObject> WriteVariableActionObject::copy()
 	element->setThisWriteVariableActionObjectPtr(element);
 	return element;
 }
+
+WriteVariableActionObject& WriteVariableActionObject::operator=(const WriteVariableActionObject & obj)
+{
+	return *this;
+}
+
 
 void WriteVariableActionObject::destroy()
 {	

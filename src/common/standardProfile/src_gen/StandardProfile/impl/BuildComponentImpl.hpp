@@ -29,10 +29,8 @@ namespace StandardProfile
 	{
 		public: 
 			BuildComponentImpl(const BuildComponentImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			BuildComponentImpl& operator=(BuildComponentImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;  
+			BuildComponentImpl& operator=(BuildComponentImpl const&);
 
 		protected:
 			friend class StandardProfileFactoryImpl;

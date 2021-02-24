@@ -22,10 +22,8 @@ namespace uml
 	{
 		public: 
 			BehaviorExecutionSpecificationImpl(const BehaviorExecutionSpecificationImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			BehaviorExecutionSpecificationImpl& operator=(BehaviorExecutionSpecificationImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			BehaviorExecutionSpecificationImpl& operator=(BehaviorExecutionSpecificationImpl const&);
 
 		protected:
 			friend class umlFactoryImpl;

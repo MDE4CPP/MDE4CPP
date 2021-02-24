@@ -77,7 +77,6 @@ namespace fUML::Semantics::Activities
 	{
 		public:
  			ActivityEdgeInstance(const ActivityEdgeInstance &) {}
-			ActivityEdgeInstance& operator=(ActivityEdgeInstance const&) = delete;
 
 		protected:
 			ActivityEdgeInstance(){}

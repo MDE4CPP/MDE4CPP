@@ -205,7 +205,6 @@ namespace uml
 	{
 		public:
  			UseCase(const UseCase &) {}
-			UseCase& operator=(UseCase const&) = delete;
 
 		protected:
 			UseCase(){}

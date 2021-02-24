@@ -29,10 +29,8 @@ namespace StandardProfile
 	{
 		public: 
 			SystemModelImpl(const SystemModelImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			SystemModelImpl& operator=(SystemModelImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;  
+			SystemModelImpl& operator=(SystemModelImpl const&);
 
 		protected:
 			friend class StandardProfileFactoryImpl;

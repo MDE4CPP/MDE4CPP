@@ -65,6 +65,9 @@ using namespace PSCS::Semantics::CommonBehavior;
 //*********************************
 CS_EventOccurrenceImpl::CS_EventOccurrenceImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 CS_EventOccurrenceImpl::~CS_EventOccurrenceImpl()
@@ -77,6 +80,18 @@ CS_EventOccurrenceImpl::~CS_EventOccurrenceImpl()
 
 
 CS_EventOccurrenceImpl::CS_EventOccurrenceImpl(const CS_EventOccurrenceImpl & obj):CS_EventOccurrenceImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  CS_EventOccurrenceImpl::copy() const
+{
+	std::shared_ptr<CS_EventOccurrenceImpl> element(new CS_EventOccurrenceImpl(*this));
+	element->setThisCS_EventOccurrencePtr(element);
+	return element;
+}
+
+CS_EventOccurrenceImpl& CS_EventOccurrenceImpl::operator=(const CS_EventOccurrenceImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -98,13 +113,8 @@ CS_EventOccurrenceImpl::CS_EventOccurrenceImpl(const CS_EventOccurrenceImpl & ob
 	//Clone references with containment (deep copy)
 
 
-}
 
-std::shared_ptr<ecore::EObject>  CS_EventOccurrenceImpl::copy() const
-{
-	std::shared_ptr<CS_EventOccurrenceImpl> element(new CS_EventOccurrenceImpl(*this));
-	element->setThisCS_EventOccurrencePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> CS_EventOccurrenceImpl::eStaticClass() const

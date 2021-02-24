@@ -95,6 +95,7 @@ ReceptionObject::ReceptionObject(std::shared_ptr<uml::Reception> _element):
 ReceptionObject::ReceptionObject(ReceptionObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ReceptionObject::ReceptionObject()
@@ -112,6 +113,12 @@ std::shared_ptr<ecore::EObject> ReceptionObject::copy()
 	element->setThisReceptionObjectPtr(element);
 	return element;
 }
+
+ReceptionObject& ReceptionObject::operator=(const ReceptionObject & obj)
+{
+	return *this;
+}
+
 
 void ReceptionObject::destroy()
 {	

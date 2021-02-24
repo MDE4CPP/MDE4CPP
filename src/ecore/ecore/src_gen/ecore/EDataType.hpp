@@ -75,7 +75,6 @@ namespace ecore
 	{
 		public:
  			EDataType(const EDataType &) {}
-			EDataType& operator=(EDataType const&) = delete;
 
 		protected:
 			EDataType(){}

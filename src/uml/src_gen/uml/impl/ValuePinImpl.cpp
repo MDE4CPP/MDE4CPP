@@ -103,6 +103,9 @@ using namespace uml;
 //*********************************
 ValuePinImpl::ValuePinImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ValuePinImpl::~ValuePinImpl()
@@ -202,6 +205,18 @@ ValuePinImpl::ValuePinImpl(std::weak_ptr<uml::WriteStructuralFeatureAction > par
 
 
 ValuePinImpl::ValuePinImpl(const ValuePinImpl & obj):ValuePinImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ValuePinImpl::copy() const
+{
+	std::shared_ptr<ValuePinImpl> element(new ValuePinImpl(*this));
+	element->setThisValuePinPtr(element);
+	return element;
+}
+
+ValuePinImpl& ValuePinImpl::operator=(const ValuePinImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -342,13 +357,8 @@ ValuePinImpl::ValuePinImpl(const ValuePinImpl & obj):ValuePinImpl()
 	#endif
 
 	
-}
 
-std::shared_ptr<ecore::EObject>  ValuePinImpl::copy() const
-{
-	std::shared_ptr<ValuePinImpl> element(new ValuePinImpl(*this));
-	element->setThisValuePinPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ValuePinImpl::eStaticClass() const

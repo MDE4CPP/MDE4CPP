@@ -64,6 +64,9 @@ using namespace uml;
 //*********************************
 IncludeImpl::IncludeImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 IncludeImpl::~IncludeImpl()
@@ -98,6 +101,18 @@ IncludeImpl::IncludeImpl(std::weak_ptr<uml::Element > par_owner)
 
 
 IncludeImpl::IncludeImpl(const IncludeImpl & obj):IncludeImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  IncludeImpl::copy() const
+{
+	std::shared_ptr<IncludeImpl> element(new IncludeImpl(*this));
+	element->setThisIncludePtr(element);
+	return element;
+}
+
+IncludeImpl& IncludeImpl::operator=(const IncludeImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -147,13 +162,8 @@ IncludeImpl::IncludeImpl(const IncludeImpl & obj):IncludeImpl()
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  IncludeImpl::copy() const
-{
-	std::shared_ptr<IncludeImpl> element(new IncludeImpl(*this));
-	element->setThisIncludePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> IncludeImpl::eStaticClass() const

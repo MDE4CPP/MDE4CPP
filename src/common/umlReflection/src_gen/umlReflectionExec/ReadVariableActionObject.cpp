@@ -100,6 +100,7 @@ ReadVariableActionObject::ReadVariableActionObject(std::shared_ptr<uml::ReadVari
 ReadVariableActionObject::ReadVariableActionObject(ReadVariableActionObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ReadVariableActionObject::ReadVariableActionObject()
@@ -117,6 +118,12 @@ std::shared_ptr<ecore::EObject> ReadVariableActionObject::copy()
 	element->setThisReadVariableActionObjectPtr(element);
 	return element;
 }
+
+ReadVariableActionObject& ReadVariableActionObject::operator=(const ReadVariableActionObject & obj)
+{
+	return *this;
+}
+
 
 void ReadVariableActionObject::destroy()
 {	

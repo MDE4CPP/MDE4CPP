@@ -180,7 +180,6 @@ namespace uml
 	{
 		public:
  			ConditionalNode(const ConditionalNode &) {}
-			ConditionalNode& operator=(ConditionalNode const&) = delete;
 
 		protected:
 			ConditionalNode(){}

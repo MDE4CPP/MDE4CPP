@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~TestIdentityActionObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			TestIdentityActionObject& operator=(TestIdentityActionObject const&);
 
 			virtual void destroy();
 			

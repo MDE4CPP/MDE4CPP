@@ -71,6 +71,7 @@ TimeObservationObject::TimeObservationObject(std::shared_ptr<uml::TimeObservatio
 TimeObservationObject::TimeObservationObject(TimeObservationObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 TimeObservationObject::TimeObservationObject()
@@ -88,6 +89,12 @@ std::shared_ptr<ecore::EObject> TimeObservationObject::copy()
 	element->setThisTimeObservationObjectPtr(element);
 	return element;
 }
+
+TimeObservationObject& TimeObservationObject::operator=(const TimeObservationObject & obj)
+{
+	return *this;
+}
+
 
 void TimeObservationObject::destroy()
 {	

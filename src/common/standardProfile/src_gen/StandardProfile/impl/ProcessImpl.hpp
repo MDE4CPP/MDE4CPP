@@ -29,10 +29,8 @@ namespace StandardProfile
 	{
 		public: 
 			ProcessImpl(const ProcessImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			ProcessImpl& operator=(ProcessImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;  
+			ProcessImpl& operator=(ProcessImpl const&);
 
 		protected:
 			friend class StandardProfileFactoryImpl;

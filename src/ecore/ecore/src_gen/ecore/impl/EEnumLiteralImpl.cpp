@@ -55,6 +55,9 @@ using namespace ecore;
 //*********************************
 EEnumLiteralImpl::EEnumLiteralImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 EEnumLiteralImpl::~EEnumLiteralImpl()
@@ -80,6 +83,18 @@ EEnumLiteralImpl::EEnumLiteralImpl(std::weak_ptr<ecore::EEnum > par_eEnum)
 
 
 EEnumLiteralImpl::EEnumLiteralImpl(const EEnumLiteralImpl & obj):EEnumLiteralImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  EEnumLiteralImpl::copy() const
+{
+	std::shared_ptr<EEnumLiteralImpl> element(new EEnumLiteralImpl(*this));
+	element->setThisEEnumLiteralPtr(element);
+	return element;
+}
+
+EEnumLiteralImpl& EEnumLiteralImpl::operator=(const EEnumLiteralImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -109,13 +124,8 @@ EEnumLiteralImpl::EEnumLiteralImpl(const EEnumLiteralImpl & obj):EEnumLiteralImp
 		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  EEnumLiteralImpl::copy() const
-{
-	std::shared_ptr<EEnumLiteralImpl> element(new EEnumLiteralImpl(*this));
-	element->setThisEEnumLiteralPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<EClass> EEnumLiteralImpl::eStaticClass() const

@@ -83,6 +83,9 @@ using namespace fUML::Semantics::StructuredClassifiers;
 //*********************************
 ObjectImpl::ObjectImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ObjectImpl::~ObjectImpl()
@@ -95,6 +98,18 @@ ObjectImpl::~ObjectImpl()
 
 
 ObjectImpl::ObjectImpl(const ObjectImpl & obj):ObjectImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ObjectImpl::copy() const
+{
+	std::shared_ptr<ObjectImpl> element(new ObjectImpl(*this));
+	element->setThisObjectPtr(element);
+	return element;
+}
+
+ObjectImpl& ObjectImpl::operator=(const ObjectImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -128,13 +143,8 @@ ObjectImpl::ObjectImpl(const ObjectImpl & obj):ObjectImpl()
 	#endif
 
 	
-}
 
-std::shared_ptr<ecore::EObject>  ObjectImpl::copy() const
-{
-	std::shared_ptr<ObjectImpl> element(new ObjectImpl(*this));
-	element->setThisObjectPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ObjectImpl::eStaticClass() const

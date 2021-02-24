@@ -25,9 +25,6 @@ namespace StandardProfile
 {
 	class Destroy : virtual public uml::Stereotype 
 	{
-		private:    
-			Destroy(const Destroy& that) = delete;
-
 		protected:
 			Destroy(){}
 

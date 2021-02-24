@@ -128,7 +128,6 @@ namespace uml
 	{
 		public:
  			Variable(const Variable &) {}
-			Variable& operator=(Variable const&) = delete;
 
 		protected:
 			Variable(){}

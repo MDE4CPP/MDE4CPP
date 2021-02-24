@@ -101,6 +101,9 @@ using namespace uml;
 //*********************************
 ActorImpl::ActorImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ActorImpl::~ActorImpl()
@@ -156,6 +159,18 @@ ActorImpl::ActorImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplatePa
 
 
 ActorImpl::ActorImpl(const ActorImpl & obj):ActorImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ActorImpl::copy() const
+{
+	std::shared_ptr<ActorImpl> element(new ActorImpl(*this));
+	element->setThisActorPtr(element);
+	return element;
+}
+
+ActorImpl& ActorImpl::operator=(const ActorImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -347,13 +362,8 @@ ActorImpl::ActorImpl(const ActorImpl & obj):ActorImpl()
 		std::cout << "Copying the Subset: " << "m_templateBinding" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  ActorImpl::copy() const
-{
-	std::shared_ptr<ActorImpl> element(new ActorImpl(*this));
-	element->setThisActorPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ActorImpl::eStaticClass() const

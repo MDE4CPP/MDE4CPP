@@ -89,6 +89,9 @@ using namespace uml;
 //*********************************
 RemoveStructuralFeatureValueActionImpl::RemoveStructuralFeatureValueActionImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 RemoveStructuralFeatureValueActionImpl::~RemoveStructuralFeatureValueActionImpl()
@@ -131,6 +134,18 @@ RemoveStructuralFeatureValueActionImpl::RemoveStructuralFeatureValueActionImpl(s
 
 
 RemoveStructuralFeatureValueActionImpl::RemoveStructuralFeatureValueActionImpl(const RemoveStructuralFeatureValueActionImpl & obj):RemoveStructuralFeatureValueActionImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  RemoveStructuralFeatureValueActionImpl::copy() const
+{
+	std::shared_ptr<RemoveStructuralFeatureValueActionImpl> element(new RemoveStructuralFeatureValueActionImpl(*this));
+	element->setThisRemoveStructuralFeatureValueActionPtr(element);
+	return element;
+}
+
+RemoveStructuralFeatureValueActionImpl& RemoveStructuralFeatureValueActionImpl::operator=(const RemoveStructuralFeatureValueActionImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -271,13 +286,8 @@ RemoveStructuralFeatureValueActionImpl::RemoveStructuralFeatureValueActionImpl(c
 	#endif
 
 	
-}
 
-std::shared_ptr<ecore::EObject>  RemoveStructuralFeatureValueActionImpl::copy() const
-{
-	std::shared_ptr<RemoveStructuralFeatureValueActionImpl> element(new RemoveStructuralFeatureValueActionImpl(*this));
-	element->setThisRemoveStructuralFeatureValueActionPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> RemoveStructuralFeatureValueActionImpl::eStaticClass() const

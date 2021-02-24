@@ -100,7 +100,6 @@ namespace fUML::Semantics::Actions
 	{
 		public:
  			ReduceActionActivation(const ReduceActionActivation &) {}
-			ReduceActionActivation& operator=(ReduceActionActivation const&) = delete;
 
 		protected:
 			ReduceActionActivation(){}

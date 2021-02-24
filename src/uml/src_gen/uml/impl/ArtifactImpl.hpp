@@ -23,10 +23,8 @@ namespace uml
 	{
 		public: 
 			ArtifactImpl(const ArtifactImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			ArtifactImpl& operator=(ArtifactImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			ArtifactImpl& operator=(ArtifactImpl const&);
 
 		protected:
 			friend class umlFactoryImpl;

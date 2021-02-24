@@ -78,6 +78,9 @@ using namespace uml;
 //*********************************
 ExecutableNodeImpl::ExecutableNodeImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ExecutableNodeImpl::~ExecutableNodeImpl()
@@ -120,6 +123,18 @@ ExecutableNodeImpl::ExecutableNodeImpl(std::weak_ptr<uml::Element > par_owner)
 
 
 ExecutableNodeImpl::ExecutableNodeImpl(const ExecutableNodeImpl & obj):ExecutableNodeImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ExecutableNodeImpl::copy() const
+{
+	std::shared_ptr<ExecutableNodeImpl> element(new ExecutableNodeImpl(*this));
+	element->setThisExecutableNodePtr(element);
+	return element;
+}
+
+ExecutableNodeImpl& ExecutableNodeImpl::operator=(const ExecutableNodeImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -215,13 +230,8 @@ ExecutableNodeImpl::ExecutableNodeImpl(const ExecutableNodeImpl & obj):Executabl
 		std::cout << "Initialising value Subset: " << "m_handler - Subset<uml::ExceptionHandler, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
 	
-}
 
-std::shared_ptr<ecore::EObject>  ExecutableNodeImpl::copy() const
-{
-	std::shared_ptr<ExecutableNodeImpl> element(new ExecutableNodeImpl(*this));
-	element->setThisExecutableNodePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ExecutableNodeImpl::eStaticClass() const

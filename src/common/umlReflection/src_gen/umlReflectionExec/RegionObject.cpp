@@ -91,6 +91,7 @@ RegionObject::RegionObject(std::shared_ptr<uml::Region> _element):
 RegionObject::RegionObject(RegionObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 RegionObject::RegionObject()
@@ -108,6 +109,12 @@ std::shared_ptr<ecore::EObject> RegionObject::copy()
 	element->setThisRegionObjectPtr(element);
 	return element;
 }
+
+RegionObject& RegionObject::operator=(const RegionObject & obj)
+{
+	return *this;
+}
+
 
 void RegionObject::destroy()
 {	

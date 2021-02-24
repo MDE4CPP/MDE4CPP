@@ -41,9 +41,9 @@ using namespace StandardProfile;
 //*********************************
 ExecutableImpl::ExecutableImpl()
 {
-	#ifdef ADD_COUNT
-		ADD_COUNT("ExecutableImpl()");
-	#endif
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 
 	DEBUG_MESSAGE(std::cout<<"Executable is created..."<<std::endl;)
 
@@ -61,20 +61,12 @@ ExecutableImpl::ExecutableImpl()
 
 ExecutableImpl::~ExecutableImpl()
 {
-	#ifdef SUB_COUNT
-		SUB_COUNT("ExecutableImpl()");
-	#endif
-
 	DEBUG_MESSAGE(std::cout<<"Executable is destroyed..."<<std::endl;)
 }
 
 ExecutableImpl::ExecutableImpl(const ExecutableImpl & obj):ExecutableImpl()
 {
-	//create copy of all Attributes
-	#ifdef SHOW_COPIES
-	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Executable "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
-	#endif
-	instantiate();
+	*this = obj;
 }
 
 std::shared_ptr<ecore::EObject>  ExecutableImpl::copy() const
@@ -82,6 +74,16 @@ std::shared_ptr<ecore::EObject>  ExecutableImpl::copy() const
 	std::shared_ptr<ExecutableImpl> element(new ExecutableImpl(*this));
 	element->setThisExecutablePtr(element);
 	return element;
+}
+
+ExecutableImpl& ExecutableImpl::operator=(const ExecutableImpl & obj)
+{
+		//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Executable "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
+	instantiate();
+	return *this;
 }
 
 

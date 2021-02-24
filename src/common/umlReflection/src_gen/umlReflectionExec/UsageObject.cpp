@@ -78,6 +78,7 @@ UsageObject::UsageObject(std::shared_ptr<uml::Usage> _element):
 UsageObject::UsageObject(UsageObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 UsageObject::UsageObject()
@@ -95,6 +96,12 @@ std::shared_ptr<ecore::EObject> UsageObject::copy()
 	element->setThisUsageObjectPtr(element);
 	return element;
 }
+
+UsageObject& UsageObject::operator=(const UsageObject & obj)
+{
+	return *this;
+}
+
 
 void UsageObject::destroy()
 {	

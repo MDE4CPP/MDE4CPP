@@ -67,6 +67,9 @@ using namespace uml;
 //*********************************
 ConstraintImpl::ConstraintImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ConstraintImpl::~ConstraintImpl()
@@ -123,6 +126,18 @@ ConstraintImpl::ConstraintImpl(std::weak_ptr<uml::TemplateParameter > par_owning
 
 ConstraintImpl::ConstraintImpl(const ConstraintImpl & obj):ConstraintImpl()
 {
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ConstraintImpl::copy() const
+{
+	std::shared_ptr<ConstraintImpl> element(new ConstraintImpl(*this));
+	element->setThisConstraintPtr(element);
+	return element;
+}
+
+ConstraintImpl& ConstraintImpl::operator=(const ConstraintImpl & obj)
+{
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Constraint "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -178,13 +193,8 @@ ConstraintImpl::ConstraintImpl(const ConstraintImpl & obj):ConstraintImpl()
 	#endif
 
 	
-}
 
-std::shared_ptr<ecore::EObject>  ConstraintImpl::copy() const
-{
-	std::shared_ptr<ConstraintImpl> element(new ConstraintImpl(*this));
-	element->setThisConstraintPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ConstraintImpl::eStaticClass() const

@@ -113,7 +113,6 @@ namespace uml
 	{
 		public:
  			Message(const Message &) {}
-			Message& operator=(Message const&) = delete;
 
 		protected:
 			Message(){}

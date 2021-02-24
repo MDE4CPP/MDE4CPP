@@ -57,6 +57,9 @@ using namespace fUML::Semantics::Values;
 //*********************************
 EvaluationImpl::EvaluationImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 EvaluationImpl::~EvaluationImpl()
@@ -69,6 +72,18 @@ EvaluationImpl::~EvaluationImpl()
 
 
 EvaluationImpl::EvaluationImpl(const EvaluationImpl & obj):EvaluationImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  EvaluationImpl::copy() const
+{
+	std::shared_ptr<EvaluationImpl> element(new EvaluationImpl(*this));
+	element->setThisEvaluationPtr(element);
+	return element;
+}
+
+EvaluationImpl& EvaluationImpl::operator=(const EvaluationImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -85,13 +100,8 @@ EvaluationImpl::EvaluationImpl(const EvaluationImpl & obj):EvaluationImpl()
 	//Clone references with containment (deep copy)
 
 
-}
 
-std::shared_ptr<ecore::EObject>  EvaluationImpl::copy() const
-{
-	std::shared_ptr<EvaluationImpl> element(new EvaluationImpl(*this));
-	element->setThisEvaluationPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> EvaluationImpl::eStaticClass() const

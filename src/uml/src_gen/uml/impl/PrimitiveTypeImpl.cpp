@@ -98,6 +98,9 @@ using namespace uml;
 //*********************************
 PrimitiveTypeImpl::PrimitiveTypeImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 PrimitiveTypeImpl::~PrimitiveTypeImpl()
@@ -153,6 +156,18 @@ PrimitiveTypeImpl::PrimitiveTypeImpl(std::weak_ptr<uml::TemplateParameter > par_
 
 
 PrimitiveTypeImpl::PrimitiveTypeImpl(const PrimitiveTypeImpl & obj):PrimitiveTypeImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  PrimitiveTypeImpl::copy() const
+{
+	std::shared_ptr<PrimitiveTypeImpl> element(new PrimitiveTypeImpl(*this));
+	element->setThisPrimitiveTypePtr(element);
+	return element;
+}
+
+PrimitiveTypeImpl& PrimitiveTypeImpl::operator=(const PrimitiveTypeImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -337,13 +352,8 @@ PrimitiveTypeImpl::PrimitiveTypeImpl(const PrimitiveTypeImpl & obj):PrimitiveTyp
 		std::cout << "Copying the Subset: " << "m_templateBinding" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  PrimitiveTypeImpl::copy() const
-{
-	std::shared_ptr<PrimitiveTypeImpl> element(new PrimitiveTypeImpl(*this));
-	element->setThisPrimitiveTypePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> PrimitiveTypeImpl::eStaticClass() const

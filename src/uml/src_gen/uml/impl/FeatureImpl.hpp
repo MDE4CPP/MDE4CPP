@@ -22,10 +22,8 @@ namespace uml
 	{
 		public: 
 			FeatureImpl(const FeatureImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			FeatureImpl& operator=(FeatureImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			FeatureImpl& operator=(FeatureImpl const&);
 
 		protected:
 			friend class umlFactoryImpl;

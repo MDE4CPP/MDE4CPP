@@ -71,7 +71,6 @@ namespace ecore
 	{
 		public:
  			ETypeParameter(const ETypeParameter &) {}
-			ETypeParameter& operator=(ETypeParameter const&) = delete;
 
 		protected:
 			ETypeParameter(){}

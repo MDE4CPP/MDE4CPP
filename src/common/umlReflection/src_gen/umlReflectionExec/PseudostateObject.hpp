@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~PseudostateObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			PseudostateObject& operator=(PseudostateObject const&);
 
 			virtual void destroy();
 			

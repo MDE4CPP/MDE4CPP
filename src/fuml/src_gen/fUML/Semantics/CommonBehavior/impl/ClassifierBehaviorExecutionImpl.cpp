@@ -58,6 +58,9 @@ using namespace fUML::Semantics::CommonBehavior;
 //*********************************
 ClassifierBehaviorExecutionImpl::ClassifierBehaviorExecutionImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ClassifierBehaviorExecutionImpl::~ClassifierBehaviorExecutionImpl()
@@ -70,6 +73,18 @@ ClassifierBehaviorExecutionImpl::~ClassifierBehaviorExecutionImpl()
 
 
 ClassifierBehaviorExecutionImpl::ClassifierBehaviorExecutionImpl(const ClassifierBehaviorExecutionImpl & obj):ClassifierBehaviorExecutionImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ClassifierBehaviorExecutionImpl::copy() const
+{
+	std::shared_ptr<ClassifierBehaviorExecutionImpl> element(new ClassifierBehaviorExecutionImpl(*this));
+	element->setThisClassifierBehaviorExecutionPtr(element);
+	return element;
+}
+
+ClassifierBehaviorExecutionImpl& ClassifierBehaviorExecutionImpl::operator=(const ClassifierBehaviorExecutionImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -88,13 +103,8 @@ ClassifierBehaviorExecutionImpl::ClassifierBehaviorExecutionImpl(const Classifie
 	//Clone references with containment (deep copy)
 
 
-}
 
-std::shared_ptr<ecore::EObject>  ClassifierBehaviorExecutionImpl::copy() const
-{
-	std::shared_ptr<ClassifierBehaviorExecutionImpl> element(new ClassifierBehaviorExecutionImpl(*this));
-	element->setThisClassifierBehaviorExecutionPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ClassifierBehaviorExecutionImpl::eStaticClass() const

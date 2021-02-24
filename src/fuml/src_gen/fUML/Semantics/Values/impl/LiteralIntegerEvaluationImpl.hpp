@@ -23,10 +23,8 @@ namespace fUML::Semantics::Values
 	{
 		public: 
 			LiteralIntegerEvaluationImpl(const LiteralIntegerEvaluationImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			LiteralIntegerEvaluationImpl& operator=(LiteralIntegerEvaluationImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			LiteralIntegerEvaluationImpl& operator=(LiteralIntegerEvaluationImpl const&);
 
 		protected:
 			friend class fUML::Semantics::Values::ValuesFactoryImpl;

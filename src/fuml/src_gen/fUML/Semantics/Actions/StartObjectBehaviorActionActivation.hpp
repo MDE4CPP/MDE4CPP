@@ -95,7 +95,6 @@ namespace fUML::Semantics::Actions
 	{
 		public:
  			StartObjectBehaviorActionActivation(const StartObjectBehaviorActionActivation &) {}
-			StartObjectBehaviorActionActivation& operator=(StartObjectBehaviorActionActivation const&) = delete;
 
 		protected:
 			StartObjectBehaviorActionActivation(){}

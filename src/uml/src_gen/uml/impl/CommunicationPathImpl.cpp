@@ -98,6 +98,9 @@ using namespace uml;
 //*********************************
 CommunicationPathImpl::CommunicationPathImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 CommunicationPathImpl::~CommunicationPathImpl()
@@ -153,6 +156,18 @@ CommunicationPathImpl::CommunicationPathImpl(std::weak_ptr<uml::TemplateParamete
 
 
 CommunicationPathImpl::CommunicationPathImpl(const CommunicationPathImpl & obj):CommunicationPathImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  CommunicationPathImpl::copy() const
+{
+	std::shared_ptr<CommunicationPathImpl> element(new CommunicationPathImpl(*this));
+	element->setThisCommunicationPathPtr(element);
+	return element;
+}
+
+CommunicationPathImpl& CommunicationPathImpl::operator=(const CommunicationPathImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -357,13 +372,8 @@ CommunicationPathImpl::CommunicationPathImpl(const CommunicationPathImpl & obj):
 		std::cout << "Copying the Subset: " << "m_templateBinding" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  CommunicationPathImpl::copy() const
-{
-	std::shared_ptr<CommunicationPathImpl> element(new CommunicationPathImpl(*this));
-	element->setThisCommunicationPathPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> CommunicationPathImpl::eStaticClass() const

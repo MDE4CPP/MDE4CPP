@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~ReclassifyObjectActionObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			ReclassifyObjectActionObject& operator=(ReclassifyObjectActionObject const&);
 
 			virtual void destroy();
 			

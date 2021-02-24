@@ -106,7 +106,6 @@ namespace fUML::Semantics::Actions
 	{
 		public:
  			ConditionalNodeActivation(const ConditionalNodeActivation &) {}
-			ConditionalNodeActivation& operator=(ConditionalNodeActivation const&) = delete;
 
 		protected:
 			ConditionalNodeActivation(){}

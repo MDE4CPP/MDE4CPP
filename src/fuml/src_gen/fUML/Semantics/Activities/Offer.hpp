@@ -57,7 +57,6 @@ namespace fUML::Semantics::Activities
 	{
 		public:
  			Offer(const Offer &) {}
-			Offer& operator=(Offer const&) = delete;
 
 		protected:
 			Offer(){}

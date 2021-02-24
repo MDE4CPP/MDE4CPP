@@ -54,6 +54,9 @@ using namespace fUML::Semantics::Activities;
 //*********************************
 ControlTokenImpl::ControlTokenImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ControlTokenImpl::~ControlTokenImpl()
@@ -66,6 +69,18 @@ ControlTokenImpl::~ControlTokenImpl()
 
 
 ControlTokenImpl::ControlTokenImpl(const ControlTokenImpl & obj):ControlTokenImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ControlTokenImpl::copy() const
+{
+	std::shared_ptr<ControlTokenImpl> element(new ControlTokenImpl(*this));
+	element->setThisControlTokenPtr(element);
+	return element;
+}
+
+ControlTokenImpl& ControlTokenImpl::operator=(const ControlTokenImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -81,13 +96,8 @@ ControlTokenImpl::ControlTokenImpl(const ControlTokenImpl & obj):ControlTokenImp
 	//Clone references with containment (deep copy)
 
 
-}
 
-std::shared_ptr<ecore::EObject>  ControlTokenImpl::copy() const
-{
-	std::shared_ptr<ControlTokenImpl> element(new ControlTokenImpl(*this));
-	element->setThisControlTokenPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ControlTokenImpl::eStaticClass() const

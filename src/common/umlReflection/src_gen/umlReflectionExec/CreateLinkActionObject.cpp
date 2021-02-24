@@ -102,6 +102,7 @@ CreateLinkActionObject::CreateLinkActionObject(std::shared_ptr<uml::CreateLinkAc
 CreateLinkActionObject::CreateLinkActionObject(CreateLinkActionObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 CreateLinkActionObject::CreateLinkActionObject()
@@ -119,6 +120,12 @@ std::shared_ptr<ecore::EObject> CreateLinkActionObject::copy()
 	element->setThisCreateLinkActionObjectPtr(element);
 	return element;
 }
+
+CreateLinkActionObject& CreateLinkActionObject::operator=(const CreateLinkActionObject & obj)
+{
+	return *this;
+}
+
 
 void CreateLinkActionObject::destroy()
 {	

@@ -25,9 +25,6 @@ namespace StandardProfile
 {
 	class Type : virtual public uml::Stereotype 
 	{
-		private:    
-			Type(const Type& that) = delete;
-
 		protected:
 			Type(){}
 

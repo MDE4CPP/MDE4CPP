@@ -23,10 +23,8 @@ namespace fUML::Semantics::Values
 	{
 		public: 
 			LiteralUnlimitedNaturalEvaluationImpl(const LiteralUnlimitedNaturalEvaluationImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			LiteralUnlimitedNaturalEvaluationImpl& operator=(LiteralUnlimitedNaturalEvaluationImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			LiteralUnlimitedNaturalEvaluationImpl& operator=(LiteralUnlimitedNaturalEvaluationImpl const&);
 
 		protected:
 			friend class fUML::Semantics::Values::ValuesFactoryImpl;

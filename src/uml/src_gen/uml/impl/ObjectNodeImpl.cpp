@@ -87,6 +87,9 @@ using namespace uml;
 //*********************************
 ObjectNodeImpl::ObjectNodeImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ObjectNodeImpl::~ObjectNodeImpl()
@@ -129,6 +132,18 @@ ObjectNodeImpl::ObjectNodeImpl(std::weak_ptr<uml::Element > par_owner)
 
 
 ObjectNodeImpl::ObjectNodeImpl(const ObjectNodeImpl & obj):ObjectNodeImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ObjectNodeImpl::copy() const
+{
+	std::shared_ptr<ObjectNodeImpl> element(new ObjectNodeImpl(*this));
+	element->setThisObjectNodePtr(element);
+	return element;
+}
+
+ObjectNodeImpl& ObjectNodeImpl::operator=(const ObjectNodeImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -227,13 +242,8 @@ ObjectNodeImpl::ObjectNodeImpl(const ObjectNodeImpl & obj):ObjectNodeImpl()
 	#endif
 
 	
-}
 
-std::shared_ptr<ecore::EObject>  ObjectNodeImpl::copy() const
-{
-	std::shared_ptr<ObjectNodeImpl> element(new ObjectNodeImpl(*this));
-	element->setThisObjectNodePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ObjectNodeImpl::eStaticClass() const

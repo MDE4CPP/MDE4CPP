@@ -74,6 +74,7 @@ ConnectionPointReferenceObject::ConnectionPointReferenceObject(std::shared_ptr<u
 ConnectionPointReferenceObject::ConnectionPointReferenceObject(ConnectionPointReferenceObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ConnectionPointReferenceObject::ConnectionPointReferenceObject()
@@ -91,6 +92,12 @@ std::shared_ptr<ecore::EObject> ConnectionPointReferenceObject::copy()
 	element->setThisConnectionPointReferenceObjectPtr(element);
 	return element;
 }
+
+ConnectionPointReferenceObject& ConnectionPointReferenceObject::operator=(const ConnectionPointReferenceObject & obj)
+{
+	return *this;
+}
+
 
 void ConnectionPointReferenceObject::destroy()
 {	

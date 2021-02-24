@@ -72,6 +72,7 @@ IncludeObject::IncludeObject(std::shared_ptr<uml::Include> _element):
 IncludeObject::IncludeObject(IncludeObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 IncludeObject::IncludeObject()
@@ -89,6 +90,12 @@ std::shared_ptr<ecore::EObject> IncludeObject::copy()
 	element->setThisIncludeObjectPtr(element);
 	return element;
 }
+
+IncludeObject& IncludeObject::operator=(const IncludeObject & obj)
+{
+	return *this;
+}
+
 
 void IncludeObject::destroy()
 {	

@@ -125,6 +125,7 @@ PrimitiveTypeObject::PrimitiveTypeObject(std::shared_ptr<uml::PrimitiveType> _el
 PrimitiveTypeObject::PrimitiveTypeObject(PrimitiveTypeObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 PrimitiveTypeObject::PrimitiveTypeObject()
@@ -142,6 +143,12 @@ std::shared_ptr<ecore::EObject> PrimitiveTypeObject::copy()
 	element->setThisPrimitiveTypeObjectPtr(element);
 	return element;
 }
+
+PrimitiveTypeObject& PrimitiveTypeObject::operator=(const PrimitiveTypeObject & obj)
+{
+	return *this;
+}
+
 
 void PrimitiveTypeObject::destroy()
 {	

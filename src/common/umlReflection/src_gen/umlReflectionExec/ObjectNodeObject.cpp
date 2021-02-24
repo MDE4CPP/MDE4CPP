@@ -94,6 +94,7 @@ ObjectNodeObject::ObjectNodeObject(std::shared_ptr<uml::ObjectNode> _element):
 ObjectNodeObject::ObjectNodeObject(ObjectNodeObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ObjectNodeObject::ObjectNodeObject()
@@ -111,6 +112,12 @@ std::shared_ptr<ecore::EObject> ObjectNodeObject::copy()
 	element->setThisObjectNodeObjectPtr(element);
 	return element;
 }
+
+ObjectNodeObject& ObjectNodeObject::operator=(const ObjectNodeObject & obj)
+{
+	return *this;
+}
+
 
 void ObjectNodeObject::destroy()
 {	

@@ -67,6 +67,7 @@ RedefinableElementObject::RedefinableElementObject(std::shared_ptr<uml::Redefina
 RedefinableElementObject::RedefinableElementObject(RedefinableElementObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 RedefinableElementObject::RedefinableElementObject()
@@ -84,6 +85,12 @@ std::shared_ptr<ecore::EObject> RedefinableElementObject::copy()
 	element->setThisRedefinableElementObjectPtr(element);
 	return element;
 }
+
+RedefinableElementObject& RedefinableElementObject::operator=(const RedefinableElementObject & obj)
+{
+	return *this;
+}
+
 
 void RedefinableElementObject::destroy()
 {	

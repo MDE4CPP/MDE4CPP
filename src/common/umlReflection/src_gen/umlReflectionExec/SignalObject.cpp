@@ -123,6 +123,7 @@ SignalObject::SignalObject(std::shared_ptr<uml::Signal> _element):
 SignalObject::SignalObject(SignalObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 SignalObject::SignalObject()
@@ -140,6 +141,12 @@ std::shared_ptr<ecore::EObject> SignalObject::copy()
 	element->setThisSignalObjectPtr(element);
 	return element;
 }
+
+SignalObject& SignalObject::operator=(const SignalObject & obj)
+{
+	return *this;
+}
+
 
 void SignalObject::destroy()
 {	

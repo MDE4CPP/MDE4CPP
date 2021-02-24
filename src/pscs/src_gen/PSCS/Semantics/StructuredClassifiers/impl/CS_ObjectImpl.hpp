@@ -23,10 +23,8 @@ namespace PSCS::Semantics::StructuredClassifiers
 	{
 		public: 
 			CS_ObjectImpl(const CS_ObjectImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			CS_ObjectImpl& operator=(CS_ObjectImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			CS_ObjectImpl& operator=(CS_ObjectImpl const&);
 
 		protected:
 			friend class PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactoryImpl;

@@ -127,7 +127,6 @@ namespace uml
 	{
 		public:
  			ActivityNode(const ActivityNode &) {}
-			ActivityNode& operator=(ActivityNode const&) = delete;
 
 		protected:
 			ActivityNode(){}

@@ -148,6 +148,7 @@ LoopNodeObject::LoopNodeObject(std::shared_ptr<uml::LoopNode> _element):
 LoopNodeObject::LoopNodeObject(LoopNodeObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 LoopNodeObject::LoopNodeObject()
@@ -165,6 +166,12 @@ std::shared_ptr<ecore::EObject> LoopNodeObject::copy()
 	element->setThisLoopNodeObjectPtr(element);
 	return element;
 }
+
+LoopNodeObject& LoopNodeObject::operator=(const LoopNodeObject & obj)
+{
+	return *this;
+}
+
 
 void LoopNodeObject::destroy()
 {	

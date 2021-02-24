@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~ProfileObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			ProfileObject& operator=(ProfileObject const&);
 
 			virtual void destroy();
 			

@@ -71,6 +71,9 @@ using namespace fUML::Semantics::Actions;
 //*********************************
 LoopNodeActivationImpl::LoopNodeActivationImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 LoopNodeActivationImpl::~LoopNodeActivationImpl()
@@ -89,6 +92,18 @@ LoopNodeActivationImpl::LoopNodeActivationImpl(std::weak_ptr<fUML::Semantics::Ac
 
 
 LoopNodeActivationImpl::LoopNodeActivationImpl(const LoopNodeActivationImpl & obj):LoopNodeActivationImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  LoopNodeActivationImpl::copy() const
+{
+	std::shared_ptr<LoopNodeActivationImpl> element(new LoopNodeActivationImpl(*this));
+	element->setThisLoopNodeActivationPtr(element);
+	return element;
+}
+
+LoopNodeActivationImpl& LoopNodeActivationImpl::operator=(const LoopNodeActivationImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -158,13 +173,8 @@ LoopNodeActivationImpl::LoopNodeActivationImpl(const LoopNodeActivationImpl & ob
 	#endif
 
 	
-}
 
-std::shared_ptr<ecore::EObject>  LoopNodeActivationImpl::copy() const
-{
-	std::shared_ptr<LoopNodeActivationImpl> element(new LoopNodeActivationImpl(*this));
-	element->setThisLoopNodeActivationPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> LoopNodeActivationImpl::eStaticClass() const

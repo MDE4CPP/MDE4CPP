@@ -68,6 +68,9 @@ using namespace uml;
 //*********************************
 InteractionFragmentImpl::InteractionFragmentImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 InteractionFragmentImpl::~InteractionFragmentImpl()
@@ -110,6 +113,18 @@ InteractionFragmentImpl::InteractionFragmentImpl(std::weak_ptr<uml::Element > pa
 
 
 InteractionFragmentImpl::InteractionFragmentImpl(const InteractionFragmentImpl & obj):InteractionFragmentImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  InteractionFragmentImpl::copy() const
+{
+	std::shared_ptr<InteractionFragmentImpl> element(new InteractionFragmentImpl(*this));
+	element->setThisInteractionFragmentPtr(element);
+	return element;
+}
+
+InteractionFragmentImpl& InteractionFragmentImpl::operator=(const InteractionFragmentImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -168,13 +183,8 @@ InteractionFragmentImpl::InteractionFragmentImpl(const InteractionFragmentImpl &
 		std::cout << "Initialising value Subset: " << "m_generalOrdering - Subset<uml::GeneralOrdering, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
 	
-}
 
-std::shared_ptr<ecore::EObject>  InteractionFragmentImpl::copy() const
-{
-	std::shared_ptr<InteractionFragmentImpl> element(new InteractionFragmentImpl(*this));
-	element->setThisInteractionFragmentPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> InteractionFragmentImpl::eStaticClass() const

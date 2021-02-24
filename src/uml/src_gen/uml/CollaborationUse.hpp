@@ -94,7 +94,6 @@ namespace uml
 	{
 		public:
  			CollaborationUse(const CollaborationUse &) {}
-			CollaborationUse& operator=(CollaborationUse const&) = delete;
 
 		protected:
 			CollaborationUse(){}

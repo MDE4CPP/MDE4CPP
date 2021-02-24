@@ -87,6 +87,9 @@ using namespace uml;
 //*********************************
 ReclassifyObjectActionImpl::ReclassifyObjectActionImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ReclassifyObjectActionImpl::~ReclassifyObjectActionImpl()
@@ -129,6 +132,18 @@ ReclassifyObjectActionImpl::ReclassifyObjectActionImpl(std::weak_ptr<uml::Elemen
 
 
 ReclassifyObjectActionImpl::ReclassifyObjectActionImpl(const ReclassifyObjectActionImpl & obj):ReclassifyObjectActionImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ReclassifyObjectActionImpl::copy() const
+{
+	std::shared_ptr<ReclassifyObjectActionImpl> element(new ReclassifyObjectActionImpl(*this));
+	element->setThisReclassifyObjectActionPtr(element);
+	return element;
+}
+
+ReclassifyObjectActionImpl& ReclassifyObjectActionImpl::operator=(const ReclassifyObjectActionImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -252,13 +267,8 @@ ReclassifyObjectActionImpl::ReclassifyObjectActionImpl(const ReclassifyObjectAct
 	#endif
 
 	
-}
 
-std::shared_ptr<ecore::EObject>  ReclassifyObjectActionImpl::copy() const
-{
-	std::shared_ptr<ReclassifyObjectActionImpl> element(new ReclassifyObjectActionImpl(*this));
-	element->setThisReclassifyObjectActionPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ReclassifyObjectActionImpl::eStaticClass() const

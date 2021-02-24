@@ -64,6 +64,7 @@ MessageEndObject::MessageEndObject(std::shared_ptr<uml::MessageEnd> _element):
 MessageEndObject::MessageEndObject(MessageEndObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 MessageEndObject::MessageEndObject()
@@ -81,6 +82,12 @@ std::shared_ptr<ecore::EObject> MessageEndObject::copy()
 	element->setThisMessageEndObjectPtr(element);
 	return element;
 }
+
+MessageEndObject& MessageEndObject::operator=(const MessageEndObject & obj)
+{
+	return *this;
+}
+
 
 void MessageEndObject::destroy()
 {	

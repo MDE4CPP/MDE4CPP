@@ -66,7 +66,6 @@ namespace PSCS::Semantics::StructuredClassifiers
 	{
 		public:
  			CS_RequestPropagationStrategy(const CS_RequestPropagationStrategy &) {}
-			CS_RequestPropagationStrategy& operator=(CS_RequestPropagationStrategy const&) = delete;
 
 		protected:
 			CS_RequestPropagationStrategy(){}

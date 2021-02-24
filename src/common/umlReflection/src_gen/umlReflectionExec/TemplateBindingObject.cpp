@@ -63,6 +63,7 @@ TemplateBindingObject::TemplateBindingObject(std::shared_ptr<uml::TemplateBindin
 TemplateBindingObject::TemplateBindingObject(TemplateBindingObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 TemplateBindingObject::TemplateBindingObject()
@@ -80,6 +81,12 @@ std::shared_ptr<ecore::EObject> TemplateBindingObject::copy()
 	element->setThisTemplateBindingObjectPtr(element);
 	return element;
 }
+
+TemplateBindingObject& TemplateBindingObject::operator=(const TemplateBindingObject & obj)
+{
+	return *this;
+}
+
 
 void TemplateBindingObject::destroy()
 {	

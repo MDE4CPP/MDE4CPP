@@ -25,9 +25,6 @@ namespace StandardProfile
 {
 	class Realization : virtual public uml::Stereotype 
 	{
-		private:    
-			Realization(const Realization& that) = delete;
-
 		protected:
 			Realization(){}
 

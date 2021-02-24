@@ -62,6 +62,9 @@ using namespace fUML::Semantics::Activities;
 //*********************************
 ActivityEdgeInstanceImpl::ActivityEdgeInstanceImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ActivityEdgeInstanceImpl::~ActivityEdgeInstanceImpl()
@@ -80,6 +83,18 @@ ActivityEdgeInstanceImpl::ActivityEdgeInstanceImpl(std::weak_ptr<fUML::Semantics
 
 
 ActivityEdgeInstanceImpl::ActivityEdgeInstanceImpl(const ActivityEdgeInstanceImpl & obj):ActivityEdgeInstanceImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ActivityEdgeInstanceImpl::copy() const
+{
+	std::shared_ptr<ActivityEdgeInstanceImpl> element(new ActivityEdgeInstanceImpl(*this));
+	element->setThisActivityEdgeInstancePtr(element);
+	return element;
+}
+
+ActivityEdgeInstanceImpl& ActivityEdgeInstanceImpl::operator=(const ActivityEdgeInstanceImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -103,13 +118,8 @@ ActivityEdgeInstanceImpl::ActivityEdgeInstanceImpl(const ActivityEdgeInstanceImp
 	//Clone references with containment (deep copy)
 
 
-}
 
-std::shared_ptr<ecore::EObject>  ActivityEdgeInstanceImpl::copy() const
-{
-	std::shared_ptr<ActivityEdgeInstanceImpl> element(new ActivityEdgeInstanceImpl(*this));
-	element->setThisActivityEdgeInstancePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ActivityEdgeInstanceImpl::eStaticClass() const

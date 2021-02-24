@@ -58,6 +58,9 @@ using namespace uml;
 //*********************************
 TemplateParameterSubstitutionImpl::TemplateParameterSubstitutionImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 TemplateParameterSubstitutionImpl::~TemplateParameterSubstitutionImpl()
@@ -84,6 +87,18 @@ TemplateParameterSubstitutionImpl::TemplateParameterSubstitutionImpl(std::weak_p
 
 
 TemplateParameterSubstitutionImpl::TemplateParameterSubstitutionImpl(const TemplateParameterSubstitutionImpl & obj):TemplateParameterSubstitutionImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  TemplateParameterSubstitutionImpl::copy() const
+{
+	std::shared_ptr<TemplateParameterSubstitutionImpl> element(new TemplateParameterSubstitutionImpl(*this));
+	element->setThisTemplateParameterSubstitutionPtr(element);
+	return element;
+}
+
+TemplateParameterSubstitutionImpl& TemplateParameterSubstitutionImpl::operator=(const TemplateParameterSubstitutionImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -120,13 +135,8 @@ TemplateParameterSubstitutionImpl::TemplateParameterSubstitutionImpl(const Templ
 	#endif
 
 	
-}
 
-std::shared_ptr<ecore::EObject>  TemplateParameterSubstitutionImpl::copy() const
-{
-	std::shared_ptr<TemplateParameterSubstitutionImpl> element(new TemplateParameterSubstitutionImpl(*this));
-	element->setThisTemplateParameterSubstitutionPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> TemplateParameterSubstitutionImpl::eStaticClass() const

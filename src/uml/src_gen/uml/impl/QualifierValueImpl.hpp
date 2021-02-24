@@ -22,10 +22,8 @@ namespace uml
 	{
 		public: 
 			QualifierValueImpl(const QualifierValueImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			QualifierValueImpl& operator=(QualifierValueImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			QualifierValueImpl& operator=(QualifierValueImpl const&);
 
 		protected:
 			friend class umlFactoryImpl;

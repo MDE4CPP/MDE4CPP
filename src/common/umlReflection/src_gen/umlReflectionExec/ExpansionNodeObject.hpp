@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~ExpansionNodeObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			ExpansionNodeObject& operator=(ExpansionNodeObject const&);
 
 			virtual void destroy();
 			

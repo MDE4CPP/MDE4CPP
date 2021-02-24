@@ -76,6 +76,9 @@ using namespace uml;
 //*********************************
 VariableImpl::VariableImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 VariableImpl::~VariableImpl()
@@ -126,6 +129,18 @@ VariableImpl::VariableImpl(std::weak_ptr<uml::StructuredActivityNode > par_scope
 
 
 VariableImpl::VariableImpl(const VariableImpl & obj):VariableImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  VariableImpl::copy() const
+{
+	std::shared_ptr<VariableImpl> element(new VariableImpl(*this));
+	element->setThisVariablePtr(element);
+	return element;
+}
+
+VariableImpl& VariableImpl::operator=(const VariableImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -194,13 +209,8 @@ VariableImpl::VariableImpl(const VariableImpl & obj):VariableImpl()
 		std::cout << "Copying the Subset: " << "m_upperValue" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  VariableImpl::copy() const
-{
-	std::shared_ptr<VariableImpl> element(new VariableImpl(*this));
-	element->setThisVariablePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> VariableImpl::eStaticClass() const

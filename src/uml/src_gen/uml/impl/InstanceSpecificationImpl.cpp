@@ -77,6 +77,9 @@ using namespace uml;
 //*********************************
 InstanceSpecificationImpl::InstanceSpecificationImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 InstanceSpecificationImpl::~InstanceSpecificationImpl()
@@ -119,6 +122,18 @@ InstanceSpecificationImpl::InstanceSpecificationImpl(std::weak_ptr<uml::Template
 
 
 InstanceSpecificationImpl::InstanceSpecificationImpl(const InstanceSpecificationImpl & obj):InstanceSpecificationImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  InstanceSpecificationImpl::copy() const
+{
+	std::shared_ptr<InstanceSpecificationImpl> element(new InstanceSpecificationImpl(*this));
+	element->setThisInstanceSpecificationPtr(element);
+	return element;
+}
+
+InstanceSpecificationImpl& InstanceSpecificationImpl::operator=(const InstanceSpecificationImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -199,13 +214,8 @@ InstanceSpecificationImpl::InstanceSpecificationImpl(const InstanceSpecification
 	
 
 	
-}
 
-std::shared_ptr<ecore::EObject>  InstanceSpecificationImpl::copy() const
-{
-	std::shared_ptr<InstanceSpecificationImpl> element(new InstanceSpecificationImpl(*this));
-	element->setThisInstanceSpecificationPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> InstanceSpecificationImpl::eStaticClass() const

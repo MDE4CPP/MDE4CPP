@@ -22,10 +22,8 @@ namespace uml
 	{
 		public: 
 			ReadLinkObjectEndQualifierActionImpl(const ReadLinkObjectEndQualifierActionImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			ReadLinkObjectEndQualifierActionImpl& operator=(ReadLinkObjectEndQualifierActionImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			ReadLinkObjectEndQualifierActionImpl& operator=(ReadLinkObjectEndQualifierActionImpl const&);
 
 		protected:
 			friend class umlFactoryImpl;

@@ -87,6 +87,9 @@ using namespace uml;
 //*********************************
 ReadIsClassifiedObjectActionImpl::ReadIsClassifiedObjectActionImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ReadIsClassifiedObjectActionImpl::~ReadIsClassifiedObjectActionImpl()
@@ -129,6 +132,18 @@ ReadIsClassifiedObjectActionImpl::ReadIsClassifiedObjectActionImpl(std::weak_ptr
 
 
 ReadIsClassifiedObjectActionImpl::ReadIsClassifiedObjectActionImpl(const ReadIsClassifiedObjectActionImpl & obj):ReadIsClassifiedObjectActionImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ReadIsClassifiedObjectActionImpl::copy() const
+{
+	std::shared_ptr<ReadIsClassifiedObjectActionImpl> element(new ReadIsClassifiedObjectActionImpl(*this));
+	element->setThisReadIsClassifiedObjectActionPtr(element);
+	return element;
+}
+
+ReadIsClassifiedObjectActionImpl& ReadIsClassifiedObjectActionImpl::operator=(const ReadIsClassifiedObjectActionImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -257,13 +272,8 @@ ReadIsClassifiedObjectActionImpl::ReadIsClassifiedObjectActionImpl(const ReadIsC
 	
 
 	
-}
 
-std::shared_ptr<ecore::EObject>  ReadIsClassifiedObjectActionImpl::copy() const
-{
-	std::shared_ptr<ReadIsClassifiedObjectActionImpl> element(new ReadIsClassifiedObjectActionImpl(*this));
-	element->setThisReadIsClassifiedObjectActionPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ReadIsClassifiedObjectActionImpl::eStaticClass() const

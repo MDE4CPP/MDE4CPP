@@ -63,6 +63,9 @@ using namespace fUML::Semantics::Actions;
 //*********************************
 ReturnInformationImpl::ReturnInformationImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ReturnInformationImpl::~ReturnInformationImpl()
@@ -75,6 +78,18 @@ ReturnInformationImpl::~ReturnInformationImpl()
 
 
 ReturnInformationImpl::ReturnInformationImpl(const ReturnInformationImpl & obj):ReturnInformationImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ReturnInformationImpl::copy() const
+{
+	std::shared_ptr<ReturnInformationImpl> element(new ReturnInformationImpl(*this));
+	element->setThisReturnInformationPtr(element);
+	return element;
+}
+
+ReturnInformationImpl& ReturnInformationImpl::operator=(const ReturnInformationImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -89,13 +104,8 @@ ReturnInformationImpl::ReturnInformationImpl(const ReturnInformationImpl & obj):
 	//Clone references with containment (deep copy)
 
 
-}
 
-std::shared_ptr<ecore::EObject>  ReturnInformationImpl::copy() const
-{
-	std::shared_ptr<ReturnInformationImpl> element(new ReturnInformationImpl(*this));
-	element->setThisReturnInformationPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ReturnInformationImpl::eStaticClass() const

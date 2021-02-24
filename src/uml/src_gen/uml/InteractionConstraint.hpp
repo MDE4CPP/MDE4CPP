@@ -104,7 +104,6 @@ namespace uml
 	{
 		public:
  			InteractionConstraint(const InteractionConstraint &) {}
-			InteractionConstraint& operator=(InteractionConstraint const&) = delete;
 
 		protected:
 			InteractionConstraint(){}

@@ -66,6 +66,9 @@ using namespace uml;
 //*********************************
 IntervalConstraintImpl::IntervalConstraintImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 IntervalConstraintImpl::~IntervalConstraintImpl()
@@ -122,6 +125,18 @@ IntervalConstraintImpl::IntervalConstraintImpl(std::weak_ptr<uml::TemplateParame
 
 IntervalConstraintImpl::IntervalConstraintImpl(const IntervalConstraintImpl & obj):IntervalConstraintImpl()
 {
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  IntervalConstraintImpl::copy() const
+{
+	std::shared_ptr<IntervalConstraintImpl> element(new IntervalConstraintImpl(*this));
+	element->setThisIntervalConstraintPtr(element);
+	return element;
+}
+
+IntervalConstraintImpl& IntervalConstraintImpl::operator=(const IntervalConstraintImpl & obj)
+{
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy IntervalConstraint "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -176,13 +191,8 @@ IntervalConstraintImpl::IntervalConstraintImpl(const IntervalConstraintImpl & ob
 		std::cout << "Copying the Subset: " << "m_specification" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  IntervalConstraintImpl::copy() const
-{
-	std::shared_ptr<IntervalConstraintImpl> element(new IntervalConstraintImpl(*this));
-	element->setThisIntervalConstraintPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> IntervalConstraintImpl::eStaticClass() const

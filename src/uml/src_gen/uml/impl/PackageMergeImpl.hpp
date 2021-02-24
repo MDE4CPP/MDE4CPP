@@ -22,10 +22,8 @@ namespace uml
 	{
 		public: 
 			PackageMergeImpl(const PackageMergeImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			PackageMergeImpl& operator=(PackageMergeImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			PackageMergeImpl& operator=(PackageMergeImpl const&);
 
 		protected:
 			friend class umlFactoryImpl;

@@ -84,6 +84,9 @@ using namespace fUML::Semantics::Activities;
 //*********************************
 ExpansionRegionActivationImpl::ExpansionRegionActivationImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ExpansionRegionActivationImpl::~ExpansionRegionActivationImpl()
@@ -102,6 +105,18 @@ ExpansionRegionActivationImpl::ExpansionRegionActivationImpl(std::weak_ptr<fUML:
 
 
 ExpansionRegionActivationImpl::ExpansionRegionActivationImpl(const ExpansionRegionActivationImpl & obj):ExpansionRegionActivationImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ExpansionRegionActivationImpl::copy() const
+{
+	std::shared_ptr<ExpansionRegionActivationImpl> element(new ExpansionRegionActivationImpl(*this));
+	element->setThisExpansionRegionActivationPtr(element);
+	return element;
+}
+
+ExpansionRegionActivationImpl& ExpansionRegionActivationImpl::operator=(const ExpansionRegionActivationImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -165,13 +180,8 @@ ExpansionRegionActivationImpl::ExpansionRegionActivationImpl(const ExpansionRegi
 		std::cout << "Copying the Subset: " << "m_outputPinActivation" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  ExpansionRegionActivationImpl::copy() const
-{
-	std::shared_ptr<ExpansionRegionActivationImpl> element(new ExpansionRegionActivationImpl(*this));
-	element->setThisExpansionRegionActivationPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ExpansionRegionActivationImpl::eStaticClass() const

@@ -41,9 +41,9 @@ using namespace StandardProfile;
 //*********************************
 SpecificationImpl::SpecificationImpl()
 {
-	#ifdef ADD_COUNT
-		ADD_COUNT("SpecificationImpl()");
-	#endif
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 
 	DEBUG_MESSAGE(std::cout<<"Specification is created..."<<std::endl;)
 
@@ -61,20 +61,12 @@ SpecificationImpl::SpecificationImpl()
 
 SpecificationImpl::~SpecificationImpl()
 {
-	#ifdef SUB_COUNT
-		SUB_COUNT("SpecificationImpl()");
-	#endif
-
 	DEBUG_MESSAGE(std::cout<<"Specification is destroyed..."<<std::endl;)
 }
 
 SpecificationImpl::SpecificationImpl(const SpecificationImpl & obj):SpecificationImpl()
 {
-	//create copy of all Attributes
-	#ifdef SHOW_COPIES
-	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Specification "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
-	#endif
-	instantiate();
+	*this = obj;
 }
 
 std::shared_ptr<ecore::EObject>  SpecificationImpl::copy() const
@@ -82,6 +74,16 @@ std::shared_ptr<ecore::EObject>  SpecificationImpl::copy() const
 	std::shared_ptr<SpecificationImpl> element(new SpecificationImpl(*this));
 	element->setThisSpecificationPtr(element);
 	return element;
+}
+
+SpecificationImpl& SpecificationImpl::operator=(const SpecificationImpl & obj)
+{
+		//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Specification "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
+	instantiate();
+	return *this;
 }
 
 

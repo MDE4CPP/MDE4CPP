@@ -23,10 +23,8 @@ namespace PSCS::Semantics::Actions
 	{
 		public: 
 			CS_ReadExtentActionActivationImpl(const CS_ReadExtentActionActivationImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			CS_ReadExtentActionActivationImpl& operator=(CS_ReadExtentActionActivationImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			CS_ReadExtentActionActivationImpl& operator=(CS_ReadExtentActionActivationImpl const&);
 
 		protected:
 			friend class PSCS::Semantics::Actions::ActionsFactoryImpl;

@@ -24,10 +24,8 @@ virtual public Object
 	{
 		public: 
 			ObjectImpl(const ObjectImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			ObjectImpl& operator=(ObjectImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			ObjectImpl& operator=(ObjectImpl const&);
 
 		protected:
 			friend class umlFactoryImpl;

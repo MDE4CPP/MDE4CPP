@@ -38,6 +38,7 @@ namespace UML
 		    virtual ~VariableObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			VariableObject& operator=(VariableObject const&);
 
 			virtual void destroy();
 			

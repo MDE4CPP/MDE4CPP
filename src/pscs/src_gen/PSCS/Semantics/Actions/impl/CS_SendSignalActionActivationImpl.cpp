@@ -86,6 +86,9 @@ using namespace PSCS::Semantics::Actions;
 //*********************************
 CS_SendSignalActionActivationImpl::CS_SendSignalActionActivationImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 CS_SendSignalActionActivationImpl::~CS_SendSignalActionActivationImpl()
@@ -104,6 +107,18 @@ CS_SendSignalActionActivationImpl::CS_SendSignalActionActivationImpl(std::weak_p
 
 
 CS_SendSignalActionActivationImpl::CS_SendSignalActionActivationImpl(const CS_SendSignalActionActivationImpl & obj):CS_SendSignalActionActivationImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  CS_SendSignalActionActivationImpl::copy() const
+{
+	std::shared_ptr<CS_SendSignalActionActivationImpl> element(new CS_SendSignalActionActivationImpl(*this));
+	element->setThisCS_SendSignalActionActivationPtr(element);
+	return element;
+}
+
+CS_SendSignalActionActivationImpl& CS_SendSignalActionActivationImpl::operator=(const CS_SendSignalActionActivationImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -157,13 +172,8 @@ CS_SendSignalActionActivationImpl::CS_SendSignalActionActivationImpl(const CS_Se
 		std::cout << "Copying the Subset: " << "m_outputPinActivation" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  CS_SendSignalActionActivationImpl::copy() const
-{
-	std::shared_ptr<CS_SendSignalActionActivationImpl> element(new CS_SendSignalActionActivationImpl(*this));
-	element->setThisCS_SendSignalActionActivationPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> CS_SendSignalActionActivationImpl::eStaticClass() const

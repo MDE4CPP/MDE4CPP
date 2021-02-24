@@ -24,9 +24,6 @@ namespace uml
 namespace StandardProfile
 {
 	class Script:virtual public File	{
-		private:    
-			Script(const Script& that) = delete;
-
 		protected:
 			Script(){}
 

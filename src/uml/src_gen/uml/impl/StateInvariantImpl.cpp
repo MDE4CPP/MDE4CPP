@@ -70,6 +70,9 @@ using namespace uml;
 //*********************************
 StateInvariantImpl::StateInvariantImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 StateInvariantImpl::~StateInvariantImpl()
@@ -112,6 +115,18 @@ StateInvariantImpl::StateInvariantImpl(std::weak_ptr<uml::Element > par_owner)
 
 
 StateInvariantImpl::StateInvariantImpl(const StateInvariantImpl & obj):StateInvariantImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  StateInvariantImpl::copy() const
+{
+	std::shared_ptr<StateInvariantImpl> element(new StateInvariantImpl(*this));
+	element->setThisStateInvariantPtr(element);
+	return element;
+}
+
+StateInvariantImpl& StateInvariantImpl::operator=(const StateInvariantImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -172,13 +187,8 @@ StateInvariantImpl::StateInvariantImpl(const StateInvariantImpl & obj):StateInva
 	#endif
 
 	
-}
 
-std::shared_ptr<ecore::EObject>  StateInvariantImpl::copy() const
-{
-	std::shared_ptr<StateInvariantImpl> element(new StateInvariantImpl(*this));
-	element->setThisStateInvariantPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> StateInvariantImpl::eStaticClass() const

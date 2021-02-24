@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~LinkEndDataObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			LinkEndDataObject& operator=(LinkEndDataObject const&);
 
 			virtual void destroy();
 			

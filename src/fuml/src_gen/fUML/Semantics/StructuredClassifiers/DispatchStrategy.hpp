@@ -75,7 +75,6 @@ namespace fUML::Semantics::StructuredClassifiers
 	{
 		public:
  			DispatchStrategy(const DispatchStrategy &) {}
-			DispatchStrategy& operator=(DispatchStrategy const&) = delete;
 
 		protected:
 			DispatchStrategy(){}

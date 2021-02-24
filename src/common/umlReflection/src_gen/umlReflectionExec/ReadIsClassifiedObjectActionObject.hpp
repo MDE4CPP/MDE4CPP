@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~ReadIsClassifiedObjectActionObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			ReadIsClassifiedObjectActionObject& operator=(ReadIsClassifiedObjectActionObject const&);
 
 			virtual void destroy();
 			

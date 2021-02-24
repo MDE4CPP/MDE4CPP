@@ -71,6 +71,9 @@ using namespace uml;
 //*********************************
 LifelineImpl::LifelineImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 LifelineImpl::~LifelineImpl()
@@ -105,6 +108,18 @@ LifelineImpl::LifelineImpl(std::weak_ptr<uml::Element > par_owner)
 
 
 LifelineImpl::LifelineImpl(const LifelineImpl & obj):LifelineImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  LifelineImpl::copy() const
+{
+	std::shared_ptr<LifelineImpl> element(new LifelineImpl(*this));
+	element->setThisLifelinePtr(element);
+	return element;
+}
+
+LifelineImpl& LifelineImpl::operator=(const LifelineImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -159,13 +174,8 @@ LifelineImpl::LifelineImpl(const LifelineImpl & obj):LifelineImpl()
 	#endif
 
 	
-}
 
-std::shared_ptr<ecore::EObject>  LifelineImpl::copy() const
-{
-	std::shared_ptr<LifelineImpl> element(new LifelineImpl(*this));
-	element->setThisLifelinePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> LifelineImpl::eStaticClass() const

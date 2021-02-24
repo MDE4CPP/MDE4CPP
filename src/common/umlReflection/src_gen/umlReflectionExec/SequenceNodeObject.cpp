@@ -133,6 +133,7 @@ SequenceNodeObject::SequenceNodeObject(std::shared_ptr<uml::SequenceNode> _eleme
 SequenceNodeObject::SequenceNodeObject(SequenceNodeObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 SequenceNodeObject::SequenceNodeObject()
@@ -150,6 +151,12 @@ std::shared_ptr<ecore::EObject> SequenceNodeObject::copy()
 	element->setThisSequenceNodeObjectPtr(element);
 	return element;
 }
+
+SequenceNodeObject& SequenceNodeObject::operator=(const SequenceNodeObject & obj)
+{
+	return *this;
+}
+
 
 void SequenceNodeObject::destroy()
 {	

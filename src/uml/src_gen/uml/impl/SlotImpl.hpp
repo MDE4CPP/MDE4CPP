@@ -22,10 +22,8 @@ namespace uml
 	{
 		public: 
 			SlotImpl(const SlotImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			SlotImpl& operator=(SlotImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			SlotImpl& operator=(SlotImpl const&);
 
 		protected:
 			friend class umlFactoryImpl;

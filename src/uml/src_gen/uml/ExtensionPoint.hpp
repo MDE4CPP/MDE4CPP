@@ -99,7 +99,6 @@ namespace uml
 	{
 		public:
  			ExtensionPoint(const ExtensionPoint &) {}
-			ExtensionPoint& operator=(ExtensionPoint const&) = delete;
 
 		protected:
 			ExtensionPoint(){}

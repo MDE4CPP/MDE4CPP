@@ -22,10 +22,8 @@ namespace uml
 	{
 		public: 
 			EventImpl(const EventImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			EventImpl& operator=(EventImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			EventImpl& operator=(EventImpl const&);
 
 		protected:
 			friend class umlFactoryImpl;

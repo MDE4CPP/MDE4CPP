@@ -89,6 +89,9 @@ using namespace uml;
 //*********************************
 ExpansionNodeImpl::ExpansionNodeImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ExpansionNodeImpl::~ExpansionNodeImpl()
@@ -131,6 +134,18 @@ ExpansionNodeImpl::ExpansionNodeImpl(std::weak_ptr<uml::Element > par_owner)
 
 
 ExpansionNodeImpl::ExpansionNodeImpl(const ExpansionNodeImpl & obj):ExpansionNodeImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ExpansionNodeImpl::copy() const
+{
+	std::shared_ptr<ExpansionNodeImpl> element(new ExpansionNodeImpl(*this));
+	element->setThisExpansionNodePtr(element);
+	return element;
+}
+
+ExpansionNodeImpl& ExpansionNodeImpl::operator=(const ExpansionNodeImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -232,13 +247,8 @@ ExpansionNodeImpl::ExpansionNodeImpl(const ExpansionNodeImpl & obj):ExpansionNod
 		std::cout << "Copying the Subset: " << "m_upperBound" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  ExpansionNodeImpl::copy() const
-{
-	std::shared_ptr<ExpansionNodeImpl> element(new ExpansionNodeImpl(*this));
-	element->setThisExpansionNodePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ExpansionNodeImpl::eStaticClass() const

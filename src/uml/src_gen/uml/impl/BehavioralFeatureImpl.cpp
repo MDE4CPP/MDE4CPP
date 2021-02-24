@@ -83,6 +83,9 @@ using namespace uml;
 //*********************************
 BehavioralFeatureImpl::BehavioralFeatureImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 BehavioralFeatureImpl::~BehavioralFeatureImpl()
@@ -109,6 +112,18 @@ BehavioralFeatureImpl::BehavioralFeatureImpl(std::weak_ptr<uml::Element > par_ow
 
 
 BehavioralFeatureImpl::BehavioralFeatureImpl(const BehavioralFeatureImpl & obj):BehavioralFeatureImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  BehavioralFeatureImpl::copy() const
+{
+	std::shared_ptr<BehavioralFeatureImpl> element(new BehavioralFeatureImpl(*this));
+	element->setThisBehavioralFeaturePtr(element);
+	return element;
+}
+
+BehavioralFeatureImpl& BehavioralFeatureImpl::operator=(const BehavioralFeatureImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -229,13 +244,8 @@ BehavioralFeatureImpl::BehavioralFeatureImpl(const BehavioralFeatureImpl & obj):
 		std::cout << "Initialising value Subset: " << "m_ownedParameterSet - Subset<uml::ParameterSet, uml::NamedElement >(getOwnedMember())" << std::endl;
 	#endif
 	
-}
 
-std::shared_ptr<ecore::EObject>  BehavioralFeatureImpl::copy() const
-{
-	std::shared_ptr<BehavioralFeatureImpl> element(new BehavioralFeatureImpl(*this));
-	element->setThisBehavioralFeaturePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> BehavioralFeatureImpl::eStaticClass() const

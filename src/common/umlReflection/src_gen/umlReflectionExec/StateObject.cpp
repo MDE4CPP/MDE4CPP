@@ -111,6 +111,7 @@ StateObject::StateObject(std::shared_ptr<uml::State> _element):
 StateObject::StateObject(StateObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 StateObject::StateObject()
@@ -128,6 +129,12 @@ std::shared_ptr<ecore::EObject> StateObject::copy()
 	element->setThisStateObjectPtr(element);
 	return element;
 }
+
+StateObject& StateObject::operator=(const StateObject & obj)
+{
+	return *this;
+}
+
 
 void StateObject::destroy()
 {	

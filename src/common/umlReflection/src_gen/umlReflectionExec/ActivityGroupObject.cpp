@@ -72,6 +72,7 @@ ActivityGroupObject::ActivityGroupObject(std::shared_ptr<uml::ActivityGroup> _el
 ActivityGroupObject::ActivityGroupObject(ActivityGroupObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ActivityGroupObject::ActivityGroupObject()
@@ -89,6 +90,12 @@ std::shared_ptr<ecore::EObject> ActivityGroupObject::copy()
 	element->setThisActivityGroupObjectPtr(element);
 	return element;
 }
+
+ActivityGroupObject& ActivityGroupObject::operator=(const ActivityGroupObject & obj)
+{
+	return *this;
+}
+
 
 void ActivityGroupObject::destroy()
 {	

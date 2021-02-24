@@ -110,7 +110,6 @@ namespace uml
 	{
 		public:
  			ActivityGroup(const ActivityGroup &) {}
-			ActivityGroup& operator=(ActivityGroup const&) = delete;
 
 		protected:
 			ActivityGroup(){}

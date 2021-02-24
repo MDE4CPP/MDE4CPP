@@ -100,6 +100,7 @@ InvocationActionObject::InvocationActionObject(std::shared_ptr<uml::InvocationAc
 InvocationActionObject::InvocationActionObject(InvocationActionObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 InvocationActionObject::InvocationActionObject()
@@ -117,6 +118,12 @@ std::shared_ptr<ecore::EObject> InvocationActionObject::copy()
 	element->setThisInvocationActionObjectPtr(element);
 	return element;
 }
+
+InvocationActionObject& InvocationActionObject::operator=(const InvocationActionObject & obj)
+{
+	return *this;
+}
+
 
 void InvocationActionObject::destroy()
 {	

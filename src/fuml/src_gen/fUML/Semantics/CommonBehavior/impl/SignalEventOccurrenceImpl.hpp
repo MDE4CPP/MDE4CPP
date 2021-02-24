@@ -23,10 +23,8 @@ namespace fUML::Semantics::CommonBehavior
 	{
 		public: 
 			SignalEventOccurrenceImpl(const SignalEventOccurrenceImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			SignalEventOccurrenceImpl& operator=(SignalEventOccurrenceImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			SignalEventOccurrenceImpl& operator=(SignalEventOccurrenceImpl const&);
 
 		protected:
 			friend class fUML::Semantics::CommonBehavior::CommonBehaviorFactoryImpl;

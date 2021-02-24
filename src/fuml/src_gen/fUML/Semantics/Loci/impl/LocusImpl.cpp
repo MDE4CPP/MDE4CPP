@@ -74,6 +74,9 @@ using namespace fUML::Semantics::Loci;
 //*********************************
 LocusImpl::LocusImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 LocusImpl::~LocusImpl()
@@ -86,6 +89,18 @@ LocusImpl::~LocusImpl()
 
 
 LocusImpl::LocusImpl(const LocusImpl & obj):LocusImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  LocusImpl::copy() const
+{
+	std::shared_ptr<LocusImpl> element(new LocusImpl(*this));
+	element->setThisLocusPtr(element);
+	return element;
+}
+
+LocusImpl& LocusImpl::operator=(const LocusImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -125,13 +140,8 @@ LocusImpl::LocusImpl(const LocusImpl & obj):LocusImpl()
 	
 
 	
-}
 
-std::shared_ptr<ecore::EObject>  LocusImpl::copy() const
-{
-	std::shared_ptr<LocusImpl> element(new LocusImpl(*this));
-	element->setThisLocusPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> LocusImpl::eStaticClass() const

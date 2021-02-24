@@ -22,10 +22,8 @@ namespace uml
 	{
 		public: 
 			TriggerImpl(const TriggerImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			TriggerImpl& operator=(TriggerImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			TriggerImpl& operator=(TriggerImpl const&);
 
 		protected:
 			friend class umlFactoryImpl;

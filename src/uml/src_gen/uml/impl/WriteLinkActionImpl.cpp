@@ -89,6 +89,9 @@ using namespace uml;
 //*********************************
 WriteLinkActionImpl::WriteLinkActionImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 WriteLinkActionImpl::~WriteLinkActionImpl()
@@ -131,6 +134,18 @@ WriteLinkActionImpl::WriteLinkActionImpl(std::weak_ptr<uml::Element > par_owner)
 
 
 WriteLinkActionImpl::WriteLinkActionImpl(const WriteLinkActionImpl & obj):WriteLinkActionImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  WriteLinkActionImpl::copy() const
+{
+	std::shared_ptr<WriteLinkActionImpl> element(new WriteLinkActionImpl(*this));
+	element->setThisWriteLinkActionPtr(element);
+	return element;
+}
+
+WriteLinkActionImpl& WriteLinkActionImpl::operator=(const WriteLinkActionImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -255,13 +270,8 @@ WriteLinkActionImpl::WriteLinkActionImpl(const WriteLinkActionImpl & obj):WriteL
 		std::cout << "Copying the Subset: " << "m_redefinedNode" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  WriteLinkActionImpl::copy() const
-{
-	std::shared_ptr<WriteLinkActionImpl> element(new WriteLinkActionImpl(*this));
-	element->setThisWriteLinkActionPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> WriteLinkActionImpl::eStaticClass() const

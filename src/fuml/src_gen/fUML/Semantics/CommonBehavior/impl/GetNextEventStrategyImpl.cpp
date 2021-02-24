@@ -55,6 +55,9 @@ using namespace fUML::Semantics::CommonBehavior;
 //*********************************
 GetNextEventStrategyImpl::GetNextEventStrategyImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 GetNextEventStrategyImpl::~GetNextEventStrategyImpl()
@@ -68,6 +71,18 @@ GetNextEventStrategyImpl::~GetNextEventStrategyImpl()
 
 GetNextEventStrategyImpl::GetNextEventStrategyImpl(const GetNextEventStrategyImpl & obj):GetNextEventStrategyImpl()
 {
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  GetNextEventStrategyImpl::copy() const
+{
+	std::shared_ptr<GetNextEventStrategyImpl> element(new GetNextEventStrategyImpl(*this));
+	element->setThisGetNextEventStrategyPtr(element);
+	return element;
+}
+
+GetNextEventStrategyImpl& GetNextEventStrategyImpl::operator=(const GetNextEventStrategyImpl & obj)
+{
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy GetNextEventStrategy "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -79,13 +94,8 @@ GetNextEventStrategyImpl::GetNextEventStrategyImpl(const GetNextEventStrategyImp
 	//Clone references with containment (deep copy)
 
 
-}
 
-std::shared_ptr<ecore::EObject>  GetNextEventStrategyImpl::copy() const
-{
-	std::shared_ptr<GetNextEventStrategyImpl> element(new GetNextEventStrategyImpl(*this));
-	element->setThisGetNextEventStrategyPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> GetNextEventStrategyImpl::eStaticClass() const

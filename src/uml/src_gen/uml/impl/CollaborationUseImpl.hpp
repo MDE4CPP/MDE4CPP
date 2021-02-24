@@ -22,10 +22,8 @@ namespace uml
 	{
 		public: 
 			CollaborationUseImpl(const CollaborationUseImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			CollaborationUseImpl& operator=(CollaborationUseImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			CollaborationUseImpl& operator=(CollaborationUseImpl const&);
 
 		protected:
 			friend class umlFactoryImpl;

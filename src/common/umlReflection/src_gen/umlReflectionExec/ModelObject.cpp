@@ -100,6 +100,7 @@ ModelObject::ModelObject(std::shared_ptr<uml::Model> _element):
 ModelObject::ModelObject(ModelObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ModelObject::ModelObject()
@@ -117,6 +118,12 @@ std::shared_ptr<ecore::EObject> ModelObject::copy()
 	element->setThisModelObjectPtr(element);
 	return element;
 }
+
+ModelObject& ModelObject::operator=(const ModelObject & obj)
+{
+	return *this;
+}
+
 
 void ModelObject::destroy()
 {	

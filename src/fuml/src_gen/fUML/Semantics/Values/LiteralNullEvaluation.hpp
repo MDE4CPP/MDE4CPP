@@ -70,7 +70,6 @@ namespace fUML::Semantics::Values
 	{
 		public:
  			LiteralNullEvaluation(const LiteralNullEvaluation &) {}
-			LiteralNullEvaluation& operator=(LiteralNullEvaluation const&) = delete;
 
 		protected:
 			LiteralNullEvaluation(){}

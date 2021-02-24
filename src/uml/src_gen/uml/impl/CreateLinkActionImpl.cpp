@@ -89,6 +89,9 @@ using namespace uml;
 //*********************************
 CreateLinkActionImpl::CreateLinkActionImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 CreateLinkActionImpl::~CreateLinkActionImpl()
@@ -131,6 +134,18 @@ CreateLinkActionImpl::CreateLinkActionImpl(std::weak_ptr<uml::Element > par_owne
 
 
 CreateLinkActionImpl::CreateLinkActionImpl(const CreateLinkActionImpl & obj):CreateLinkActionImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  CreateLinkActionImpl::copy() const
+{
+	std::shared_ptr<CreateLinkActionImpl> element(new CreateLinkActionImpl(*this));
+	element->setThisCreateLinkActionPtr(element);
+	return element;
+}
+
+CreateLinkActionImpl& CreateLinkActionImpl::operator=(const CreateLinkActionImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -255,13 +270,8 @@ CreateLinkActionImpl::CreateLinkActionImpl(const CreateLinkActionImpl & obj):Cre
 		std::cout << "Copying the Subset: " << "m_redefinedNode" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  CreateLinkActionImpl::copy() const
-{
-	std::shared_ptr<CreateLinkActionImpl> element(new CreateLinkActionImpl(*this));
-	element->setThisCreateLinkActionPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> CreateLinkActionImpl::eStaticClass() const

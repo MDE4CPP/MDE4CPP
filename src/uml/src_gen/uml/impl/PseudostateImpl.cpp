@@ -69,6 +69,9 @@ using namespace uml;
 //*********************************
 PseudostateImpl::PseudostateImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 PseudostateImpl::~PseudostateImpl()
@@ -120,6 +123,18 @@ PseudostateImpl::PseudostateImpl(std::weak_ptr<uml::StateMachine > par_stateMach
 
 PseudostateImpl::PseudostateImpl(const PseudostateImpl & obj):PseudostateImpl()
 {
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  PseudostateImpl::copy() const
+{
+	std::shared_ptr<PseudostateImpl> element(new PseudostateImpl(*this));
+	element->setThisPseudostatePtr(element);
+	return element;
+}
+
+PseudostateImpl& PseudostateImpl::operator=(const PseudostateImpl & obj)
+{
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Pseudostate "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -169,13 +184,8 @@ PseudostateImpl::PseudostateImpl(const PseudostateImpl & obj):PseudostateImpl()
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  PseudostateImpl::copy() const
-{
-	std::shared_ptr<PseudostateImpl> element(new PseudostateImpl(*this));
-	element->setThisPseudostatePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> PseudostateImpl::eStaticClass() const

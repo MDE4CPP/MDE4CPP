@@ -133,6 +133,7 @@ PortObject::PortObject(std::shared_ptr<uml::Port> _element):
 PortObject::PortObject(PortObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 PortObject::PortObject()
@@ -150,6 +151,12 @@ std::shared_ptr<ecore::EObject> PortObject::copy()
 	element->setThisPortObjectPtr(element);
 	return element;
 }
+
+PortObject& PortObject::operator=(const PortObject & obj)
+{
+	return *this;
+}
+
 
 void PortObject::destroy()
 {	

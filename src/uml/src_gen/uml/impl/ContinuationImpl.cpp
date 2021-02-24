@@ -69,6 +69,9 @@ using namespace uml;
 //*********************************
 ContinuationImpl::ContinuationImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ContinuationImpl::~ContinuationImpl()
@@ -111,6 +114,18 @@ ContinuationImpl::ContinuationImpl(std::weak_ptr<uml::Element > par_owner)
 
 
 ContinuationImpl::ContinuationImpl(const ContinuationImpl & obj):ContinuationImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ContinuationImpl::copy() const
+{
+	std::shared_ptr<ContinuationImpl> element(new ContinuationImpl(*this));
+	element->setThisContinuationPtr(element);
+	return element;
+}
+
+ContinuationImpl& ContinuationImpl::operator=(const ContinuationImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -164,13 +179,8 @@ ContinuationImpl::ContinuationImpl(const ContinuationImpl & obj):ContinuationImp
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  ContinuationImpl::copy() const
-{
-	std::shared_ptr<ContinuationImpl> element(new ContinuationImpl(*this));
-	element->setThisContinuationPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ContinuationImpl::eStaticClass() const

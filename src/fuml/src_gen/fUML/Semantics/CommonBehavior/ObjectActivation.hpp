@@ -84,7 +84,6 @@ namespace fUML::Semantics::CommonBehavior
 	{
 		public:
  			ObjectActivation(const ObjectActivation &) {}
-			ObjectActivation& operator=(ObjectActivation const&) = delete;
 
 		protected:
 			ObjectActivation(){}

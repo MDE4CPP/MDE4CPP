@@ -56,6 +56,9 @@ using namespace uml;
 //*********************************
 TemplateSignatureImpl::TemplateSignatureImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 TemplateSignatureImpl::~TemplateSignatureImpl()
@@ -82,6 +85,18 @@ TemplateSignatureImpl::TemplateSignatureImpl(std::weak_ptr<uml::TemplateableElem
 
 
 TemplateSignatureImpl::TemplateSignatureImpl(const TemplateSignatureImpl & obj):TemplateSignatureImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  TemplateSignatureImpl::copy() const
+{
+	std::shared_ptr<TemplateSignatureImpl> element(new TemplateSignatureImpl(*this));
+	element->setThisTemplateSignaturePtr(element);
+	return element;
+}
+
+TemplateSignatureImpl& TemplateSignatureImpl::operator=(const TemplateSignatureImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -123,13 +138,8 @@ TemplateSignatureImpl::TemplateSignatureImpl(const TemplateSignatureImpl & obj):
 		std::cout << "Initialising value Subset: " << "m_ownedParameter - Subset<uml::TemplateParameter, uml::Element,uml::TemplateParameter >(getOwnedElement(),getParameter())" << std::endl;
 	#endif
 	
-}
 
-std::shared_ptr<ecore::EObject>  TemplateSignatureImpl::copy() const
-{
-	std::shared_ptr<TemplateSignatureImpl> element(new TemplateSignatureImpl(*this));
-	element->setThisTemplateSignaturePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> TemplateSignatureImpl::eStaticClass() const

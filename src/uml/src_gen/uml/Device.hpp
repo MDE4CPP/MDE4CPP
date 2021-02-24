@@ -225,7 +225,6 @@ namespace uml
 	{
 		public:
  			Device(const Device &) {}
-			Device& operator=(Device const&) = delete;
 
 		protected:
 			Device(){}

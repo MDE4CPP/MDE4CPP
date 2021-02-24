@@ -41,9 +41,9 @@ using namespace StandardProfile;
 //*********************************
 FileImpl::FileImpl()
 {
-	#ifdef ADD_COUNT
-		ADD_COUNT("FileImpl()");
-	#endif
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 
 	DEBUG_MESSAGE(std::cout<<"File is created..."<<std::endl;)
 
@@ -61,20 +61,12 @@ FileImpl::FileImpl()
 
 FileImpl::~FileImpl()
 {
-	#ifdef SUB_COUNT
-		SUB_COUNT("FileImpl()");
-	#endif
-
 	DEBUG_MESSAGE(std::cout<<"File is destroyed..."<<std::endl;)
 }
 
 FileImpl::FileImpl(const FileImpl & obj):FileImpl()
 {
-	//create copy of all Attributes
-	#ifdef SHOW_COPIES
-	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy File "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
-	#endif
-	instantiate();
+	*this = obj;
 }
 
 std::shared_ptr<ecore::EObject>  FileImpl::copy() const
@@ -82,6 +74,16 @@ std::shared_ptr<ecore::EObject>  FileImpl::copy() const
 	std::shared_ptr<FileImpl> element(new FileImpl(*this));
 	element->setThisFilePtr(element);
 	return element;
+}
+
+FileImpl& FileImpl::operator=(const FileImpl & obj)
+{
+		//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy File "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
+	instantiate();
+	return *this;
 }
 
 

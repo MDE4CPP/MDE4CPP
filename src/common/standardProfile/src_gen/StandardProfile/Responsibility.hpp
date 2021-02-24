@@ -25,9 +25,6 @@ namespace StandardProfile
 {
 	class Responsibility : virtual public uml::Stereotype 
 	{
-		private:    
-			Responsibility(const Responsibility& that) = delete;
-
 		protected:
 			Responsibility(){}
 

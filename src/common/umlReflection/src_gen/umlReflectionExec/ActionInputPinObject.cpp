@@ -105,6 +105,7 @@ ActionInputPinObject::ActionInputPinObject(std::shared_ptr<uml::ActionInputPin> 
 ActionInputPinObject::ActionInputPinObject(ActionInputPinObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ActionInputPinObject::ActionInputPinObject()
@@ -122,6 +123,12 @@ std::shared_ptr<ecore::EObject> ActionInputPinObject::copy()
 	element->setThisActionInputPinObjectPtr(element);
 	return element;
 }
+
+ActionInputPinObject& ActionInputPinObject::operator=(const ActionInputPinObject & obj)
+{
+	return *this;
+}
+
 
 void ActionInputPinObject::destroy()
 {	

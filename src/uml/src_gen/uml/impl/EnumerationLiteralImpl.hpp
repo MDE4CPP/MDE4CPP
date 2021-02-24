@@ -22,10 +22,8 @@ namespace uml
 	{
 		public: 
 			EnumerationLiteralImpl(const EnumerationLiteralImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			EnumerationLiteralImpl& operator=(EnumerationLiteralImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			EnumerationLiteralImpl& operator=(EnumerationLiteralImpl const&);
 
 		protected:
 			friend class umlFactoryImpl;

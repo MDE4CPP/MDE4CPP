@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~StateInvariantObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			StateInvariantObject& operator=(StateInvariantObject const&);
 
 			virtual void destroy();
 			

@@ -64,6 +64,7 @@ GateObject::GateObject(std::shared_ptr<uml::Gate> _element):
 GateObject::GateObject(GateObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 GateObject::GateObject()
@@ -81,6 +82,12 @@ std::shared_ptr<ecore::EObject> GateObject::copy()
 	element->setThisGateObjectPtr(element);
 	return element;
 }
+
+GateObject& GateObject::operator=(const GateObject & obj)
+{
+	return *this;
+}
+
 
 void GateObject::destroy()
 {	

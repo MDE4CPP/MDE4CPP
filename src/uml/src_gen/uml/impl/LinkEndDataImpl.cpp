@@ -58,6 +58,9 @@ using namespace uml;
 //*********************************
 LinkEndDataImpl::LinkEndDataImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 LinkEndDataImpl::~LinkEndDataImpl()
@@ -76,6 +79,18 @@ LinkEndDataImpl::LinkEndDataImpl(std::weak_ptr<uml::Element > par_owner)
 
 
 LinkEndDataImpl::LinkEndDataImpl(const LinkEndDataImpl & obj):LinkEndDataImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  LinkEndDataImpl::copy() const
+{
+	std::shared_ptr<LinkEndDataImpl> element(new LinkEndDataImpl(*this));
+	element->setThisLinkEndDataPtr(element);
+	return element;
+}
+
+LinkEndDataImpl& LinkEndDataImpl::operator=(const LinkEndDataImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -116,13 +131,8 @@ LinkEndDataImpl::LinkEndDataImpl(const LinkEndDataImpl & obj):LinkEndDataImpl()
 		std::cout << "Initialising value Subset: " << "m_qualifier - Subset<uml::QualifierValue, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
 	
-}
 
-std::shared_ptr<ecore::EObject>  LinkEndDataImpl::copy() const
-{
-	std::shared_ptr<LinkEndDataImpl> element(new LinkEndDataImpl(*this));
-	element->setThisLinkEndDataPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> LinkEndDataImpl::eStaticClass() const

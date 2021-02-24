@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~LoopNodeObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			LoopNodeObject& operator=(LoopNodeObject const&);
 
 			virtual void destroy();
 			

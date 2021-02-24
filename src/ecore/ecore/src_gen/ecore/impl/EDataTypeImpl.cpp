@@ -57,6 +57,9 @@ using namespace ecore;
 //*********************************
 EDataTypeImpl::EDataTypeImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 EDataTypeImpl::~EDataTypeImpl()
@@ -82,6 +85,18 @@ EDataTypeImpl::EDataTypeImpl(std::weak_ptr<ecore::EPackage > par_ePackage)
 
 
 EDataTypeImpl::EDataTypeImpl(const EDataTypeImpl & obj):EDataTypeImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  EDataTypeImpl::copy() const
+{
+	std::shared_ptr<EDataTypeImpl> element(new EDataTypeImpl(*this));
+	element->setThisEDataTypePtr(element);
+	return element;
+}
+
+EDataTypeImpl& EDataTypeImpl::operator=(const EDataTypeImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -121,13 +136,8 @@ EDataTypeImpl::EDataTypeImpl(const EDataTypeImpl & obj):EDataTypeImpl()
 		std::cout << "Copying the Subset: " << "m_eTypeParameters" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  EDataTypeImpl::copy() const
-{
-	std::shared_ptr<EDataTypeImpl> element(new EDataTypeImpl(*this));
-	element->setThisEDataTypePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<EClass> EDataTypeImpl::eStaticClass() const

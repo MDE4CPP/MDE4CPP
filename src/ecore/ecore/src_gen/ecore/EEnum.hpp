@@ -81,7 +81,6 @@ namespace ecore
 	{
 		public:
  			EEnum(const EEnum &) {}
-			EEnum& operator=(EEnum const&) = delete;
 
 		protected:
 			EEnum(){}

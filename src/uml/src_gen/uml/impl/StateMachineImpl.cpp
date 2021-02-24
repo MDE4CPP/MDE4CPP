@@ -131,6 +131,9 @@ using namespace uml;
 //*********************************
 StateMachineImpl::StateMachineImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 StateMachineImpl::~StateMachineImpl()
@@ -194,6 +197,18 @@ StateMachineImpl::StateMachineImpl(std::weak_ptr<uml::TemplateParameter > par_ow
 
 
 StateMachineImpl::StateMachineImpl(const StateMachineImpl & obj):StateMachineImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  StateMachineImpl::copy() const
+{
+	std::shared_ptr<StateMachineImpl> element(new StateMachineImpl(*this));
+	element->setThisStateMachinePtr(element);
+	return element;
+}
+
+StateMachineImpl& StateMachineImpl::operator=(const StateMachineImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -530,13 +545,8 @@ StateMachineImpl::StateMachineImpl(const StateMachineImpl & obj):StateMachineImp
 		std::cout << "Initialising value Subset: " << "m_region - Subset<uml::Region, uml::NamedElement >(getOwnedMember())" << std::endl;
 	#endif
 	
-}
 
-std::shared_ptr<ecore::EObject>  StateMachineImpl::copy() const
-{
-	std::shared_ptr<StateMachineImpl> element(new StateMachineImpl(*this));
-	element->setThisStateMachinePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> StateMachineImpl::eStaticClass() const

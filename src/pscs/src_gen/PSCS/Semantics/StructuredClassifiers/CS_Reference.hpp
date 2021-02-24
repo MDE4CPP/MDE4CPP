@@ -95,7 +95,6 @@ namespace PSCS::Semantics::StructuredClassifiers
 	{
 		public:
  			CS_Reference(const CS_Reference &) {}
-			CS_Reference& operator=(CS_Reference const&) = delete;
 
 		protected:
 			CS_Reference(){}

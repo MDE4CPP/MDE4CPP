@@ -172,7 +172,6 @@ namespace uml
 	{
 		public:
  			Property(const Property &) {}
-			Property& operator=(Property const&) = delete;
 
 		protected:
 			Property(){}

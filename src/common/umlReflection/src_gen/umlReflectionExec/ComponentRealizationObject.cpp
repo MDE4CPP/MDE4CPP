@@ -84,6 +84,7 @@ ComponentRealizationObject::ComponentRealizationObject(std::shared_ptr<uml::Comp
 ComponentRealizationObject::ComponentRealizationObject(ComponentRealizationObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ComponentRealizationObject::ComponentRealizationObject()
@@ -101,6 +102,12 @@ std::shared_ptr<ecore::EObject> ComponentRealizationObject::copy()
 	element->setThisComponentRealizationObjectPtr(element);
 	return element;
 }
+
+ComponentRealizationObject& ComponentRealizationObject::operator=(const ComponentRealizationObject & obj)
+{
+	return *this;
+}
+
 
 void ComponentRealizationObject::destroy()
 {	

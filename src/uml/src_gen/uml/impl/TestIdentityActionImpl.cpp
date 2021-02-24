@@ -87,6 +87,9 @@ using namespace uml;
 //*********************************
 TestIdentityActionImpl::TestIdentityActionImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 TestIdentityActionImpl::~TestIdentityActionImpl()
@@ -129,6 +132,18 @@ TestIdentityActionImpl::TestIdentityActionImpl(std::weak_ptr<uml::Element > par_
 
 
 TestIdentityActionImpl::TestIdentityActionImpl(const TestIdentityActionImpl & obj):TestIdentityActionImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  TestIdentityActionImpl::copy() const
+{
+	std::shared_ptr<TestIdentityActionImpl> element(new TestIdentityActionImpl(*this));
+	element->setThisTestIdentityActionPtr(element);
+	return element;
+}
+
+TestIdentityActionImpl& TestIdentityActionImpl::operator=(const TestIdentityActionImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -263,13 +278,8 @@ TestIdentityActionImpl::TestIdentityActionImpl(const TestIdentityActionImpl & ob
 	
 
 	
-}
 
-std::shared_ptr<ecore::EObject>  TestIdentityActionImpl::copy() const
-{
-	std::shared_ptr<TestIdentityActionImpl> element(new TestIdentityActionImpl(*this));
-	element->setThisTestIdentityActionPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> TestIdentityActionImpl::eStaticClass() const

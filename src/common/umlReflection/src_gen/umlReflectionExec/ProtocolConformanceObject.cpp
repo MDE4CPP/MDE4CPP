@@ -61,6 +61,7 @@ ProtocolConformanceObject::ProtocolConformanceObject(std::shared_ptr<uml::Protoc
 ProtocolConformanceObject::ProtocolConformanceObject(ProtocolConformanceObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ProtocolConformanceObject::ProtocolConformanceObject()
@@ -78,6 +79,12 @@ std::shared_ptr<ecore::EObject> ProtocolConformanceObject::copy()
 	element->setThisProtocolConformanceObjectPtr(element);
 	return element;
 }
+
+ProtocolConformanceObject& ProtocolConformanceObject::operator=(const ProtocolConformanceObject & obj)
+{
+	return *this;
+}
+
 
 void ProtocolConformanceObject::destroy()
 {	

@@ -184,6 +184,7 @@ ActivityObject::ActivityObject(std::shared_ptr<uml::Activity> _element):
 ActivityObject::ActivityObject(ActivityObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ActivityObject::ActivityObject()
@@ -201,6 +202,12 @@ std::shared_ptr<ecore::EObject> ActivityObject::copy()
 	element->setThisActivityObjectPtr(element);
 	return element;
 }
+
+ActivityObject& ActivityObject::operator=(const ActivityObject & obj)
+{
+	return *this;
+}
+
 
 void ActivityObject::destroy()
 {	

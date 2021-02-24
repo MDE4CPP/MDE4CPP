@@ -25,9 +25,6 @@ namespace StandardProfile
 {
 	class Call : virtual public uml::Stereotype 
 	{
-		private:    
-			Call(const Call& that) = delete;
-
 		protected:
 			Call(){}
 

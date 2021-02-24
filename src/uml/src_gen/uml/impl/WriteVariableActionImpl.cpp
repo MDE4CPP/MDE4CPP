@@ -89,6 +89,9 @@ using namespace uml;
 //*********************************
 WriteVariableActionImpl::WriteVariableActionImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 WriteVariableActionImpl::~WriteVariableActionImpl()
@@ -131,6 +134,18 @@ WriteVariableActionImpl::WriteVariableActionImpl(std::weak_ptr<uml::Element > pa
 
 
 WriteVariableActionImpl::WriteVariableActionImpl(const WriteVariableActionImpl & obj):WriteVariableActionImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  WriteVariableActionImpl::copy() const
+{
+	std::shared_ptr<WriteVariableActionImpl> element(new WriteVariableActionImpl(*this));
+	element->setThisWriteVariableActionPtr(element);
+	return element;
+}
+
+WriteVariableActionImpl& WriteVariableActionImpl::operator=(const WriteVariableActionImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -249,13 +264,8 @@ WriteVariableActionImpl::WriteVariableActionImpl(const WriteVariableActionImpl &
 	#endif
 
 	
-}
 
-std::shared_ptr<ecore::EObject>  WriteVariableActionImpl::copy() const
-{
-	std::shared_ptr<WriteVariableActionImpl> element(new WriteVariableActionImpl(*this));
-	element->setThisWriteVariableActionPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> WriteVariableActionImpl::eStaticClass() const

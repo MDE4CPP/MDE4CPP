@@ -22,10 +22,8 @@ namespace uml
 	{
 		public: 
 			ParameterSetImpl(const ParameterSetImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			ParameterSetImpl& operator=(ParameterSetImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			ParameterSetImpl& operator=(ParameterSetImpl const&);
 
 		protected:
 			friend class umlFactoryImpl;

@@ -125,6 +125,7 @@ DataTypeObject::DataTypeObject(std::shared_ptr<uml::DataType> _element):
 DataTypeObject::DataTypeObject(DataTypeObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 DataTypeObject::DataTypeObject()
@@ -142,6 +143,12 @@ std::shared_ptr<ecore::EObject> DataTypeObject::copy()
 	element->setThisDataTypeObjectPtr(element);
 	return element;
 }
+
+DataTypeObject& DataTypeObject::operator=(const DataTypeObject & obj)
+{
+	return *this;
+}
+
 
 void DataTypeObject::destroy()
 {	

@@ -57,7 +57,6 @@ namespace fUML::Semantics::Activities
 	{
 		public:
  			TokenSet(const TokenSet &) {}
-			TokenSet& operator=(TokenSet const&) = delete;
 
 		protected:
 			TokenSet(){}

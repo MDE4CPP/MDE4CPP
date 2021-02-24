@@ -72,6 +72,9 @@ using namespace fUML::Semantics::CommonBehavior;
 //*********************************
 OpaqueBehaviorExecutionImpl::OpaqueBehaviorExecutionImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 OpaqueBehaviorExecutionImpl::~OpaqueBehaviorExecutionImpl()
@@ -84,6 +87,18 @@ OpaqueBehaviorExecutionImpl::~OpaqueBehaviorExecutionImpl()
 
 
 OpaqueBehaviorExecutionImpl::OpaqueBehaviorExecutionImpl(const OpaqueBehaviorExecutionImpl & obj):OpaqueBehaviorExecutionImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  OpaqueBehaviorExecutionImpl::copy() const
+{
+	std::shared_ptr<OpaqueBehaviorExecutionImpl> element(new OpaqueBehaviorExecutionImpl(*this));
+	element->setThisOpaqueBehaviorExecutionPtr(element);
+	return element;
+}
+
+OpaqueBehaviorExecutionImpl& OpaqueBehaviorExecutionImpl::operator=(const OpaqueBehaviorExecutionImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -128,13 +143,8 @@ OpaqueBehaviorExecutionImpl::OpaqueBehaviorExecutionImpl(const OpaqueBehaviorExe
 		std::cout << "Copying the Subset: " << "m_parameterValues" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  OpaqueBehaviorExecutionImpl::copy() const
-{
-	std::shared_ptr<OpaqueBehaviorExecutionImpl> element(new OpaqueBehaviorExecutionImpl(*this));
-	element->setThisOpaqueBehaviorExecutionPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> OpaqueBehaviorExecutionImpl::eStaticClass() const

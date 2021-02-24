@@ -63,6 +63,7 @@ ProfileApplicationObject::ProfileApplicationObject(std::shared_ptr<uml::ProfileA
 ProfileApplicationObject::ProfileApplicationObject(ProfileApplicationObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ProfileApplicationObject::ProfileApplicationObject()
@@ -80,6 +81,12 @@ std::shared_ptr<ecore::EObject> ProfileApplicationObject::copy()
 	element->setThisProfileApplicationObjectPtr(element);
 	return element;
 }
+
+ProfileApplicationObject& ProfileApplicationObject::operator=(const ProfileApplicationObject & obj)
+{
+	return *this;
+}
+
 
 void ProfileApplicationObject::destroy()
 {	

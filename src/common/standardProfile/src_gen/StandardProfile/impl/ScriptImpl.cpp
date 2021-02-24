@@ -41,9 +41,9 @@ using namespace StandardProfile;
 //*********************************
 ScriptImpl::ScriptImpl()
 {
-	#ifdef ADD_COUNT
-		ADD_COUNT("ScriptImpl()");
-	#endif
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 
 	DEBUG_MESSAGE(std::cout<<"Script is created..."<<std::endl;)
 
@@ -61,20 +61,12 @@ ScriptImpl::ScriptImpl()
 
 ScriptImpl::~ScriptImpl()
 {
-	#ifdef SUB_COUNT
-		SUB_COUNT("ScriptImpl()");
-	#endif
-
 	DEBUG_MESSAGE(std::cout<<"Script is destroyed..."<<std::endl;)
 }
 
 ScriptImpl::ScriptImpl(const ScriptImpl & obj):ScriptImpl()
 {
-	//create copy of all Attributes
-	#ifdef SHOW_COPIES
-	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Script "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
-	#endif
-	instantiate();
+	*this = obj;
 }
 
 std::shared_ptr<ecore::EObject>  ScriptImpl::copy() const
@@ -82,6 +74,16 @@ std::shared_ptr<ecore::EObject>  ScriptImpl::copy() const
 	std::shared_ptr<ScriptImpl> element(new ScriptImpl(*this));
 	element->setThisScriptPtr(element);
 	return element;
+}
+
+ScriptImpl& ScriptImpl::operator=(const ScriptImpl & obj)
+{
+		//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Script "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
+	instantiate();
+	return *this;
 }
 
 

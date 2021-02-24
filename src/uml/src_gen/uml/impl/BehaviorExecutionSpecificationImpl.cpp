@@ -72,6 +72,9 @@ using namespace uml;
 //*********************************
 BehaviorExecutionSpecificationImpl::BehaviorExecutionSpecificationImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 BehaviorExecutionSpecificationImpl::~BehaviorExecutionSpecificationImpl()
@@ -114,6 +117,18 @@ BehaviorExecutionSpecificationImpl::BehaviorExecutionSpecificationImpl(std::weak
 
 
 BehaviorExecutionSpecificationImpl::BehaviorExecutionSpecificationImpl(const BehaviorExecutionSpecificationImpl & obj):BehaviorExecutionSpecificationImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  BehaviorExecutionSpecificationImpl::copy() const
+{
+	std::shared_ptr<BehaviorExecutionSpecificationImpl> element(new BehaviorExecutionSpecificationImpl(*this));
+	element->setThisBehaviorExecutionSpecificationPtr(element);
+	return element;
+}
+
+BehaviorExecutionSpecificationImpl& BehaviorExecutionSpecificationImpl::operator=(const BehaviorExecutionSpecificationImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -172,13 +187,8 @@ BehaviorExecutionSpecificationImpl::BehaviorExecutionSpecificationImpl(const Beh
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  BehaviorExecutionSpecificationImpl::copy() const
-{
-	std::shared_ptr<BehaviorExecutionSpecificationImpl> element(new BehaviorExecutionSpecificationImpl(*this));
-	element->setThisBehaviorExecutionSpecificationPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> BehaviorExecutionSpecificationImpl::eStaticClass() const

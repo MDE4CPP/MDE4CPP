@@ -71,7 +71,6 @@ namespace ecore
 	{
 		public:
  			EEnumLiteral(const EEnumLiteral &) {}
-			EEnumLiteral& operator=(EEnumLiteral const&) = delete;
 
 		protected:
 			EEnumLiteral(){}

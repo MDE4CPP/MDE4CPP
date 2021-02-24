@@ -73,6 +73,9 @@ using namespace fUML::Semantics::Actions;
 //*********************************
 AcceptEventActionActivationImpl::AcceptEventActionActivationImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 AcceptEventActionActivationImpl::~AcceptEventActionActivationImpl()
@@ -91,6 +94,18 @@ AcceptEventActionActivationImpl::AcceptEventActionActivationImpl(std::weak_ptr<f
 
 
 AcceptEventActionActivationImpl::AcceptEventActionActivationImpl(const AcceptEventActionActivationImpl & obj):AcceptEventActionActivationImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  AcceptEventActionActivationImpl::copy() const
+{
+	std::shared_ptr<AcceptEventActionActivationImpl> element(new AcceptEventActionActivationImpl(*this));
+	element->setThisAcceptEventActionActivationPtr(element);
+	return element;
+}
+
+AcceptEventActionActivationImpl& AcceptEventActionActivationImpl::operator=(const AcceptEventActionActivationImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -147,13 +162,8 @@ AcceptEventActionActivationImpl::AcceptEventActionActivationImpl(const AcceptEve
 		std::cout << "Copying the Subset: " << "m_outputPinActivation" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  AcceptEventActionActivationImpl::copy() const
-{
-	std::shared_ptr<AcceptEventActionActivationImpl> element(new AcceptEventActionActivationImpl(*this));
-	element->setThisAcceptEventActionActivationPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> AcceptEventActionActivationImpl::eStaticClass() const

@@ -69,6 +69,9 @@ using namespace uml;
 //*********************************
 ActivityGroupImpl::ActivityGroupImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ActivityGroupImpl::~ActivityGroupImpl()
@@ -111,6 +114,18 @@ ActivityGroupImpl::ActivityGroupImpl(std::weak_ptr<uml::ActivityGroup > par_supe
 
 
 ActivityGroupImpl::ActivityGroupImpl(const ActivityGroupImpl & obj):ActivityGroupImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ActivityGroupImpl::copy() const
+{
+	std::shared_ptr<ActivityGroupImpl> element(new ActivityGroupImpl(*this));
+	element->setThisActivityGroupPtr(element);
+	return element;
+}
+
+ActivityGroupImpl& ActivityGroupImpl::operator=(const ActivityGroupImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -158,13 +173,8 @@ ActivityGroupImpl::ActivityGroupImpl(const ActivityGroupImpl & obj):ActivityGrou
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  ActivityGroupImpl::copy() const
-{
-	std::shared_ptr<ActivityGroupImpl> element(new ActivityGroupImpl(*this));
-	element->setThisActivityGroupPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ActivityGroupImpl::eStaticClass() const

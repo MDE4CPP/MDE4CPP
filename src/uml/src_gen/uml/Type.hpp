@@ -108,7 +108,6 @@ namespace uml
 	{
 		public:
  			Type(const Type &) {}
-			Type& operator=(Type const&) = delete;
 
 		protected:
 			Type(){}

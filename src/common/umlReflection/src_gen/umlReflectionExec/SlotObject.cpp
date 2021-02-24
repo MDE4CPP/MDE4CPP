@@ -57,6 +57,7 @@ SlotObject::SlotObject(std::shared_ptr<uml::Slot> _element):
 SlotObject::SlotObject(SlotObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 SlotObject::SlotObject()
@@ -74,6 +75,12 @@ std::shared_ptr<ecore::EObject> SlotObject::copy()
 	element->setThisSlotObjectPtr(element);
 	return element;
 }
+
+SlotObject& SlotObject::operator=(const SlotObject & obj)
+{
+	return *this;
+}
+
 
 void SlotObject::destroy()
 {	

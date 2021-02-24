@@ -22,10 +22,8 @@ namespace uml
 	{
 		public: 
 			ActivityEdgeImpl(const ActivityEdgeImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			ActivityEdgeImpl& operator=(ActivityEdgeImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			ActivityEdgeImpl& operator=(ActivityEdgeImpl const&);
 
 		protected:
 			friend class umlFactoryImpl;

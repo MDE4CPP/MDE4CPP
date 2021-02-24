@@ -78,6 +78,9 @@ using namespace fUML::Semantics::Actions;
 //*********************************
 StartObjectBehaviorActionActivationImpl::StartObjectBehaviorActionActivationImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 StartObjectBehaviorActionActivationImpl::~StartObjectBehaviorActionActivationImpl()
@@ -96,6 +99,18 @@ StartObjectBehaviorActionActivationImpl::StartObjectBehaviorActionActivationImpl
 
 
 StartObjectBehaviorActionActivationImpl::StartObjectBehaviorActionActivationImpl(const StartObjectBehaviorActionActivationImpl & obj):StartObjectBehaviorActionActivationImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  StartObjectBehaviorActionActivationImpl::copy() const
+{
+	std::shared_ptr<StartObjectBehaviorActionActivationImpl> element(new StartObjectBehaviorActionActivationImpl(*this));
+	element->setThisStartObjectBehaviorActionActivationPtr(element);
+	return element;
+}
+
+StartObjectBehaviorActionActivationImpl& StartObjectBehaviorActionActivationImpl::operator=(const StartObjectBehaviorActionActivationImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -149,13 +164,8 @@ StartObjectBehaviorActionActivationImpl::StartObjectBehaviorActionActivationImpl
 		std::cout << "Copying the Subset: " << "m_outputPinActivation" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  StartObjectBehaviorActionActivationImpl::copy() const
-{
-	std::shared_ptr<StartObjectBehaviorActionActivationImpl> element(new StartObjectBehaviorActionActivationImpl(*this));
-	element->setThisStartObjectBehaviorActionActivationPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> StartObjectBehaviorActionActivationImpl::eStaticClass() const

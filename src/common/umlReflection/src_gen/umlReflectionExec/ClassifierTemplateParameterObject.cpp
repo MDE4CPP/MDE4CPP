@@ -67,6 +67,7 @@ ClassifierTemplateParameterObject::ClassifierTemplateParameterObject(std::shared
 ClassifierTemplateParameterObject::ClassifierTemplateParameterObject(ClassifierTemplateParameterObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ClassifierTemplateParameterObject::ClassifierTemplateParameterObject()
@@ -84,6 +85,12 @@ std::shared_ptr<ecore::EObject> ClassifierTemplateParameterObject::copy()
 	element->setThisClassifierTemplateParameterObjectPtr(element);
 	return element;
 }
+
+ClassifierTemplateParameterObject& ClassifierTemplateParameterObject::operator=(const ClassifierTemplateParameterObject & obj)
+{
+	return *this;
+}
+
 
 void ClassifierTemplateParameterObject::destroy()
 {	

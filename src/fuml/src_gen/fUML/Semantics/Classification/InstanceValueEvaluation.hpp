@@ -70,7 +70,6 @@ namespace fUML::Semantics::Classification
 	{
 		public:
  			InstanceValueEvaluation(const InstanceValueEvaluation &) {}
-			InstanceValueEvaluation& operator=(InstanceValueEvaluation const&) = delete;
 
 		protected:
 			InstanceValueEvaluation(){}

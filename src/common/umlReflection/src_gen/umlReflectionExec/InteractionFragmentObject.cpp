@@ -70,6 +70,7 @@ InteractionFragmentObject::InteractionFragmentObject(std::shared_ptr<uml::Intera
 InteractionFragmentObject::InteractionFragmentObject(InteractionFragmentObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 InteractionFragmentObject::InteractionFragmentObject()
@@ -87,6 +88,12 @@ std::shared_ptr<ecore::EObject> InteractionFragmentObject::copy()
 	element->setThisInteractionFragmentObjectPtr(element);
 	return element;
 }
+
+InteractionFragmentObject& InteractionFragmentObject::operator=(const InteractionFragmentObject & obj)
+{
+	return *this;
+}
+
 
 void InteractionFragmentObject::destroy()
 {	

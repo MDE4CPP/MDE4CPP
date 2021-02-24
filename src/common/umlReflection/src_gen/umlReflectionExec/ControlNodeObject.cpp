@@ -83,6 +83,7 @@ ControlNodeObject::ControlNodeObject(std::shared_ptr<uml::ControlNode> _element)
 ControlNodeObject::ControlNodeObject(ControlNodeObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ControlNodeObject::ControlNodeObject()
@@ -100,6 +101,12 @@ std::shared_ptr<ecore::EObject> ControlNodeObject::copy()
 	element->setThisControlNodeObjectPtr(element);
 	return element;
 }
+
+ControlNodeObject& ControlNodeObject::operator=(const ControlNodeObject & obj)
+{
+	return *this;
+}
+
 
 void ControlNodeObject::destroy()
 {	

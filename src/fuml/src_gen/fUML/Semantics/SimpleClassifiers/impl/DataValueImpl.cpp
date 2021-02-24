@@ -66,6 +66,9 @@ using namespace fUML::Semantics::SimpleClassifiers;
 //*********************************
 DataValueImpl::DataValueImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 DataValueImpl::~DataValueImpl()
@@ -78,6 +81,18 @@ DataValueImpl::~DataValueImpl()
 
 
 DataValueImpl::DataValueImpl(const DataValueImpl & obj):DataValueImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  DataValueImpl::copy() const
+{
+	std::shared_ptr<DataValueImpl> element(new DataValueImpl(*this));
+	element->setThisDataValuePtr(element);
+	return element;
+}
+
+DataValueImpl& DataValueImpl::operator=(const DataValueImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -100,13 +115,8 @@ DataValueImpl::DataValueImpl(const DataValueImpl & obj):DataValueImpl()
 		std::cout << "Copying the Subset: " << "m_featureValues" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  DataValueImpl::copy() const
-{
-	std::shared_ptr<DataValueImpl> element(new DataValueImpl(*this));
-	element->setThisDataValuePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> DataValueImpl::eStaticClass() const

@@ -56,6 +56,9 @@ using namespace uml;
 //*********************************
 ProtocolConformanceImpl::ProtocolConformanceImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ProtocolConformanceImpl::~ProtocolConformanceImpl()
@@ -82,6 +85,18 @@ ProtocolConformanceImpl::ProtocolConformanceImpl(std::weak_ptr<uml::ProtocolStat
 
 
 ProtocolConformanceImpl::ProtocolConformanceImpl(const ProtocolConformanceImpl & obj):ProtocolConformanceImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ProtocolConformanceImpl::copy() const
+{
+	std::shared_ptr<ProtocolConformanceImpl> element(new ProtocolConformanceImpl(*this));
+	element->setThisProtocolConformancePtr(element);
+	return element;
+}
+
+ProtocolConformanceImpl& ProtocolConformanceImpl::operator=(const ProtocolConformanceImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -116,13 +131,8 @@ ProtocolConformanceImpl::ProtocolConformanceImpl(const ProtocolConformanceImpl &
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  ProtocolConformanceImpl::copy() const
-{
-	std::shared_ptr<ProtocolConformanceImpl> element(new ProtocolConformanceImpl(*this));
-	element->setThisProtocolConformancePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ProtocolConformanceImpl::eStaticClass() const

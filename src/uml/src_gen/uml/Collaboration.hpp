@@ -203,7 +203,6 @@ namespace uml
 	{
 		public:
  			Collaboration(const Collaboration &) {}
-			Collaboration& operator=(Collaboration const&) = delete;
 
 		protected:
 			Collaboration(){}

@@ -71,6 +71,9 @@ using namespace fUML::Semantics::Actions;
 //*********************************
 ReduceActionActivationImpl::ReduceActionActivationImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ReduceActionActivationImpl::~ReduceActionActivationImpl()
@@ -89,6 +92,18 @@ ReduceActionActivationImpl::ReduceActionActivationImpl(std::weak_ptr<fUML::Seman
 
 
 ReduceActionActivationImpl::ReduceActionActivationImpl(const ReduceActionActivationImpl & obj):ReduceActionActivationImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ReduceActionActivationImpl::copy() const
+{
+	std::shared_ptr<ReduceActionActivationImpl> element(new ReduceActionActivationImpl(*this));
+	element->setThisReduceActionActivationPtr(element);
+	return element;
+}
+
+ReduceActionActivationImpl& ReduceActionActivationImpl::operator=(const ReduceActionActivationImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -144,13 +159,8 @@ ReduceActionActivationImpl::ReduceActionActivationImpl(const ReduceActionActivat
 		std::cout << "Copying the Subset: " << "m_outputPinActivation" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  ReduceActionActivationImpl::copy() const
-{
-	std::shared_ptr<ReduceActionActivationImpl> element(new ReduceActionActivationImpl(*this));
-	element->setThisReduceActionActivationPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ReduceActionActivationImpl::eStaticClass() const

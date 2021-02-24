@@ -73,6 +73,9 @@ using namespace uml;
 //*********************************
 ActionExecutionSpecificationImpl::ActionExecutionSpecificationImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ActionExecutionSpecificationImpl::~ActionExecutionSpecificationImpl()
@@ -115,6 +118,18 @@ ActionExecutionSpecificationImpl::ActionExecutionSpecificationImpl(std::weak_ptr
 
 
 ActionExecutionSpecificationImpl::ActionExecutionSpecificationImpl(const ActionExecutionSpecificationImpl & obj):ActionExecutionSpecificationImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ActionExecutionSpecificationImpl::copy() const
+{
+	std::shared_ptr<ActionExecutionSpecificationImpl> element(new ActionExecutionSpecificationImpl(*this));
+	element->setThisActionExecutionSpecificationPtr(element);
+	return element;
+}
+
+ActionExecutionSpecificationImpl& ActionExecutionSpecificationImpl::operator=(const ActionExecutionSpecificationImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -173,13 +188,8 @@ ActionExecutionSpecificationImpl::ActionExecutionSpecificationImpl(const ActionE
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  ActionExecutionSpecificationImpl::copy() const
-{
-	std::shared_ptr<ActionExecutionSpecificationImpl> element(new ActionExecutionSpecificationImpl(*this));
-	element->setThisActionExecutionSpecificationPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ActionExecutionSpecificationImpl::eStaticClass() const

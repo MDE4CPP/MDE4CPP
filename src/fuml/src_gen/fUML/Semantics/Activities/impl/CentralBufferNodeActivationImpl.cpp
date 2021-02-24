@@ -60,6 +60,9 @@ using namespace fUML::Semantics::Activities;
 //*********************************
 CentralBufferNodeActivationImpl::CentralBufferNodeActivationImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 CentralBufferNodeActivationImpl::~CentralBufferNodeActivationImpl()
@@ -78,6 +81,18 @@ CentralBufferNodeActivationImpl::CentralBufferNodeActivationImpl(std::weak_ptr<f
 
 
 CentralBufferNodeActivationImpl::CentralBufferNodeActivationImpl(const CentralBufferNodeActivationImpl & obj):CentralBufferNodeActivationImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  CentralBufferNodeActivationImpl::copy() const
+{
+	std::shared_ptr<CentralBufferNodeActivationImpl> element(new CentralBufferNodeActivationImpl(*this));
+	element->setThisCentralBufferNodeActivationPtr(element);
+	return element;
+}
+
+CentralBufferNodeActivationImpl& CentralBufferNodeActivationImpl::operator=(const CentralBufferNodeActivationImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -110,13 +125,8 @@ CentralBufferNodeActivationImpl::CentralBufferNodeActivationImpl(const CentralBu
 		std::cout << "Copying the Subset: " << "m_heldTokens" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  CentralBufferNodeActivationImpl::copy() const
-{
-	std::shared_ptr<CentralBufferNodeActivationImpl> element(new CentralBufferNodeActivationImpl(*this));
-	element->setThisCentralBufferNodeActivationPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> CentralBufferNodeActivationImpl::eStaticClass() const

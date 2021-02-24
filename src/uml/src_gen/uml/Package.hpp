@@ -191,7 +191,6 @@ namespace uml
 	{
 		public:
  			Package(const Package &) {}
-			Package& operator=(Package const&) = delete;
 
 		protected:
 			Package(){}

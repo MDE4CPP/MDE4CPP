@@ -107,6 +107,9 @@ using namespace uml;
 //*********************************
 UseCaseImpl::UseCaseImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 UseCaseImpl::~UseCaseImpl()
@@ -162,6 +165,18 @@ UseCaseImpl::UseCaseImpl(std::weak_ptr<uml::TemplateParameter > par_owningTempla
 
 
 UseCaseImpl::UseCaseImpl(const UseCaseImpl & obj):UseCaseImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  UseCaseImpl::copy() const
+{
+	std::shared_ptr<UseCaseImpl> element(new UseCaseImpl(*this));
+	element->setThisUseCasePtr(element);
+	return element;
+}
+
+UseCaseImpl& UseCaseImpl::operator=(const UseCaseImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -400,13 +415,8 @@ UseCaseImpl::UseCaseImpl(const UseCaseImpl & obj):UseCaseImpl()
 		std::cout << "Initialising value Subset: " << "m_include - Subset<uml::Include, uml::NamedElement >(getOwnedMember())" << std::endl;
 	#endif
 	
-}
 
-std::shared_ptr<ecore::EObject>  UseCaseImpl::copy() const
-{
-	std::shared_ptr<UseCaseImpl> element(new UseCaseImpl(*this));
-	element->setThisUseCasePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> UseCaseImpl::eStaticClass() const

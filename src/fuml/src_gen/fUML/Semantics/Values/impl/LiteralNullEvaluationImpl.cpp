@@ -57,6 +57,9 @@ using namespace fUML::Semantics::Values;
 //*********************************
 LiteralNullEvaluationImpl::LiteralNullEvaluationImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 LiteralNullEvaluationImpl::~LiteralNullEvaluationImpl()
@@ -69,6 +72,18 @@ LiteralNullEvaluationImpl::~LiteralNullEvaluationImpl()
 
 
 LiteralNullEvaluationImpl::LiteralNullEvaluationImpl(const LiteralNullEvaluationImpl & obj):LiteralNullEvaluationImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  LiteralNullEvaluationImpl::copy() const
+{
+	std::shared_ptr<LiteralNullEvaluationImpl> element(new LiteralNullEvaluationImpl(*this));
+	element->setThisLiteralNullEvaluationPtr(element);
+	return element;
+}
+
+LiteralNullEvaluationImpl& LiteralNullEvaluationImpl::operator=(const LiteralNullEvaluationImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -85,13 +100,8 @@ LiteralNullEvaluationImpl::LiteralNullEvaluationImpl(const LiteralNullEvaluation
 	//Clone references with containment (deep copy)
 
 
-}
 
-std::shared_ptr<ecore::EObject>  LiteralNullEvaluationImpl::copy() const
-{
-	std::shared_ptr<LiteralNullEvaluationImpl> element(new LiteralNullEvaluationImpl(*this));
-	element->setThisLiteralNullEvaluationPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> LiteralNullEvaluationImpl::eStaticClass() const

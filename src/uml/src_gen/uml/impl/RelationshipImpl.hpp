@@ -22,10 +22,8 @@ namespace uml
 	{
 		public: 
 			RelationshipImpl(const RelationshipImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			RelationshipImpl& operator=(RelationshipImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			RelationshipImpl& operator=(RelationshipImpl const&);
 
 		protected:
 			friend class umlFactoryImpl;

@@ -70,6 +70,9 @@ using namespace uml;
 //*********************************
 LiteralNullImpl::LiteralNullImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 LiteralNullImpl::~LiteralNullImpl()
@@ -129,6 +132,18 @@ LiteralNullImpl::LiteralNullImpl(std::weak_ptr<uml::ValueSpecificationAction > p
 
 LiteralNullImpl::LiteralNullImpl(const LiteralNullImpl & obj):LiteralNullImpl()
 {
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  LiteralNullImpl::copy() const
+{
+	std::shared_ptr<LiteralNullImpl> element(new LiteralNullImpl(*this));
+	element->setThisLiteralNullPtr(element);
+	return element;
+}
+
+LiteralNullImpl& LiteralNullImpl::operator=(const LiteralNullImpl & obj)
+{
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy LiteralNull "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -177,13 +192,8 @@ LiteralNullImpl::LiteralNullImpl(const LiteralNullImpl & obj):LiteralNullImpl()
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  LiteralNullImpl::copy() const
-{
-	std::shared_ptr<LiteralNullImpl> element(new LiteralNullImpl(*this));
-	element->setThisLiteralNullPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> LiteralNullImpl::eStaticClass() const

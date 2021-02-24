@@ -70,6 +70,7 @@ FeatureObject::FeatureObject(std::shared_ptr<uml::Feature> _element):
 FeatureObject::FeatureObject(FeatureObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 FeatureObject::FeatureObject()
@@ -87,6 +88,12 @@ std::shared_ptr<ecore::EObject> FeatureObject::copy()
 	element->setThisFeatureObjectPtr(element);
 	return element;
 }
+
+FeatureObject& FeatureObject::operator=(const FeatureObject & obj)
+{
+	return *this;
+}
+
 
 void FeatureObject::destroy()
 {	

@@ -78,7 +78,6 @@ namespace uml
 	{
 		public:
  			TemplateParameter(const TemplateParameter &) {}
-			TemplateParameter& operator=(TemplateParameter const&) = delete;
 
 		protected:
 			TemplateParameter(){}

@@ -86,6 +86,9 @@ using namespace uml;
 //*********************************
 DataStoreNodeImpl::DataStoreNodeImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 DataStoreNodeImpl::~DataStoreNodeImpl()
@@ -128,6 +131,18 @@ DataStoreNodeImpl::DataStoreNodeImpl(std::weak_ptr<uml::Element > par_owner)
 
 
 DataStoreNodeImpl::DataStoreNodeImpl(const DataStoreNodeImpl & obj):DataStoreNodeImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  DataStoreNodeImpl::copy() const
+{
+	std::shared_ptr<DataStoreNodeImpl> element(new DataStoreNodeImpl(*this));
+	element->setThisDataStoreNodePtr(element);
+	return element;
+}
+
+DataStoreNodeImpl& DataStoreNodeImpl::operator=(const DataStoreNodeImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -225,13 +240,8 @@ DataStoreNodeImpl::DataStoreNodeImpl(const DataStoreNodeImpl & obj):DataStoreNod
 		std::cout << "Copying the Subset: " << "m_upperBound" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  DataStoreNodeImpl::copy() const
-{
-	std::shared_ptr<DataStoreNodeImpl> element(new DataStoreNodeImpl(*this));
-	element->setThisDataStoreNodePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> DataStoreNodeImpl::eStaticClass() const

@@ -22,10 +22,8 @@ namespace uml
 	{
 		public: 
 			CommentImpl(const CommentImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			CommentImpl& operator=(CommentImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			CommentImpl& operator=(CommentImpl const&);
 
 		protected:
 			friend class umlFactoryImpl;

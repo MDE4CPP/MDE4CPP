@@ -138,7 +138,6 @@ namespace uml
 	{
 		public:
  			ObjectFlow(const ObjectFlow &) {}
-			ObjectFlow& operator=(ObjectFlow const&) = delete;
 
 		protected:
 			ObjectFlow(){}

@@ -72,7 +72,6 @@ namespace ecore
 	{
 		public:
  			EAnnotation(const EAnnotation &) {}
-			EAnnotation& operator=(EAnnotation const&) = delete;
 
 		protected:
 			EAnnotation(){}

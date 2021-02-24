@@ -89,6 +89,9 @@ using namespace uml;
 //*********************************
 WriteStructuralFeatureActionImpl::WriteStructuralFeatureActionImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 WriteStructuralFeatureActionImpl::~WriteStructuralFeatureActionImpl()
@@ -131,6 +134,18 @@ WriteStructuralFeatureActionImpl::WriteStructuralFeatureActionImpl(std::weak_ptr
 
 
 WriteStructuralFeatureActionImpl::WriteStructuralFeatureActionImpl(const WriteStructuralFeatureActionImpl & obj):WriteStructuralFeatureActionImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  WriteStructuralFeatureActionImpl::copy() const
+{
+	std::shared_ptr<WriteStructuralFeatureActionImpl> element(new WriteStructuralFeatureActionImpl(*this));
+	element->setThisWriteStructuralFeatureActionPtr(element);
+	return element;
+}
+
+WriteStructuralFeatureActionImpl& WriteStructuralFeatureActionImpl::operator=(const WriteStructuralFeatureActionImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -265,13 +280,8 @@ WriteStructuralFeatureActionImpl::WriteStructuralFeatureActionImpl(const WriteSt
 	
 
 	
-}
 
-std::shared_ptr<ecore::EObject>  WriteStructuralFeatureActionImpl::copy() const
-{
-	std::shared_ptr<WriteStructuralFeatureActionImpl> element(new WriteStructuralFeatureActionImpl(*this));
-	element->setThisWriteStructuralFeatureActionPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> WriteStructuralFeatureActionImpl::eStaticClass() const

@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~ActivityGroupObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			ActivityGroupObject& operator=(ActivityGroupObject const&);
 
 			virtual void destroy();
 			

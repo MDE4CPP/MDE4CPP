@@ -22,10 +22,8 @@ namespace uml
 	{
 		public: 
 			StartClassifierBehaviorActionImpl(const StartClassifierBehaviorActionImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			StartClassifierBehaviorActionImpl& operator=(StartClassifierBehaviorActionImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			StartClassifierBehaviorActionImpl& operator=(StartClassifierBehaviorActionImpl const&);
 
 		protected:
 			friend class umlFactoryImpl;

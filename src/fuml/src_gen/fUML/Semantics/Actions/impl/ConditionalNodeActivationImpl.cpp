@@ -73,6 +73,9 @@ using namespace fUML::Semantics::Actions;
 //*********************************
 ConditionalNodeActivationImpl::ConditionalNodeActivationImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ConditionalNodeActivationImpl::~ConditionalNodeActivationImpl()
@@ -91,6 +94,18 @@ ConditionalNodeActivationImpl::ConditionalNodeActivationImpl(std::weak_ptr<fUML:
 
 
 ConditionalNodeActivationImpl::ConditionalNodeActivationImpl(const ConditionalNodeActivationImpl & obj):ConditionalNodeActivationImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ConditionalNodeActivationImpl::copy() const
+{
+	std::shared_ptr<ConditionalNodeActivationImpl> element(new ConditionalNodeActivationImpl(*this));
+	element->setThisConditionalNodeActivationPtr(element);
+	return element;
+}
+
+ConditionalNodeActivationImpl& ConditionalNodeActivationImpl::operator=(const ConditionalNodeActivationImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -163,13 +178,8 @@ ConditionalNodeActivationImpl::ConditionalNodeActivationImpl(const ConditionalNo
 	#endif
 
 	
-}
 
-std::shared_ptr<ecore::EObject>  ConditionalNodeActivationImpl::copy() const
-{
-	std::shared_ptr<ConditionalNodeActivationImpl> element(new ConditionalNodeActivationImpl(*this));
-	element->setThisConditionalNodeActivationPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ConditionalNodeActivationImpl::eStaticClass() const

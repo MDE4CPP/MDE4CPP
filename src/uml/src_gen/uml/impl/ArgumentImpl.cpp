@@ -47,6 +47,9 @@ using namespace uml;
 //*********************************
 ArgumentImpl::ArgumentImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ArgumentImpl::~ArgumentImpl()
@@ -59,6 +62,18 @@ ArgumentImpl::~ArgumentImpl()
 
 
 ArgumentImpl::ArgumentImpl(const ArgumentImpl & obj):ArgumentImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ArgumentImpl::copy() const
+{
+	std::shared_ptr<ArgumentImpl> element(new ArgumentImpl(*this));
+	element->setThisArgumentPtr(element);
+	return element;
+}
+
+ArgumentImpl& ArgumentImpl::operator=(const ArgumentImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -74,13 +89,8 @@ ArgumentImpl::ArgumentImpl(const ArgumentImpl & obj):ArgumentImpl()
 	//Clone references with containment (deep copy)
 
 
-}
 
-std::shared_ptr<ecore::EObject>  ArgumentImpl::copy() const
-{
-	std::shared_ptr<ArgumentImpl> element(new ArgumentImpl(*this));
-	element->setThisArgumentPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ArgumentImpl::eStaticClass() const

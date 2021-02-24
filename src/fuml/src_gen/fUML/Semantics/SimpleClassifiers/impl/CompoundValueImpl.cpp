@@ -66,6 +66,9 @@ using namespace fUML::Semantics::SimpleClassifiers;
 //*********************************
 CompoundValueImpl::CompoundValueImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 CompoundValueImpl::~CompoundValueImpl()
@@ -78,6 +81,18 @@ CompoundValueImpl::~CompoundValueImpl()
 
 
 CompoundValueImpl::CompoundValueImpl(const CompoundValueImpl & obj):CompoundValueImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  CompoundValueImpl::copy() const
+{
+	std::shared_ptr<CompoundValueImpl> element(new CompoundValueImpl(*this));
+	element->setThisCompoundValuePtr(element);
+	return element;
+}
+
+CompoundValueImpl& CompoundValueImpl::operator=(const CompoundValueImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -99,13 +114,8 @@ CompoundValueImpl::CompoundValueImpl(const CompoundValueImpl & obj):CompoundValu
 	#endif
 
 	
-}
 
-std::shared_ptr<ecore::EObject>  CompoundValueImpl::copy() const
-{
-	std::shared_ptr<CompoundValueImpl> element(new CompoundValueImpl(*this));
-	element->setThisCompoundValuePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> CompoundValueImpl::eStaticClass() const

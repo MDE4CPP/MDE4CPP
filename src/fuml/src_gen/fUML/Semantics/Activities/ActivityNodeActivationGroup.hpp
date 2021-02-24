@@ -87,7 +87,6 @@ namespace fUML::Semantics::Activities
 	{
 		public:
  			ActivityNodeActivationGroup(const ActivityNodeActivationGroup &) {}
-			ActivityNodeActivationGroup& operator=(ActivityNodeActivationGroup const&) = delete;
 
 		protected:
 			ActivityNodeActivationGroup(){}

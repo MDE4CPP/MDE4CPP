@@ -98,7 +98,6 @@ namespace uml
 	{
 		public:
  			Include(const Include &) {}
-			Include& operator=(Include const&) = delete;
 
 		protected:
 			Include(){}

@@ -78,6 +78,7 @@ InstanceSpecificationObject::InstanceSpecificationObject(std::shared_ptr<uml::In
 InstanceSpecificationObject::InstanceSpecificationObject(InstanceSpecificationObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 InstanceSpecificationObject::InstanceSpecificationObject()
@@ -95,6 +96,12 @@ std::shared_ptr<ecore::EObject> InstanceSpecificationObject::copy()
 	element->setThisInstanceSpecificationObjectPtr(element);
 	return element;
 }
+
+InstanceSpecificationObject& InstanceSpecificationObject::operator=(const InstanceSpecificationObject & obj)
+{
+	return *this;
+}
+
 
 void InstanceSpecificationObject::destroy()
 {	

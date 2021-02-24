@@ -96,6 +96,7 @@ ActionObject::ActionObject(std::shared_ptr<uml::Action> _element):
 ActionObject::ActionObject(ActionObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ActionObject::ActionObject()
@@ -113,6 +114,12 @@ std::shared_ptr<ecore::EObject> ActionObject::copy()
 	element->setThisActionObjectPtr(element);
 	return element;
 }
+
+ActionObject& ActionObject::operator=(const ActionObject & obj)
+{
+	return *this;
+}
+
 
 void ActionObject::destroy()
 {	

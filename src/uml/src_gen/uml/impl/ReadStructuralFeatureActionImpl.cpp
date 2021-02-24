@@ -89,6 +89,9 @@ using namespace uml;
 //*********************************
 ReadStructuralFeatureActionImpl::ReadStructuralFeatureActionImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ReadStructuralFeatureActionImpl::~ReadStructuralFeatureActionImpl()
@@ -131,6 +134,18 @@ ReadStructuralFeatureActionImpl::ReadStructuralFeatureActionImpl(std::weak_ptr<u
 
 
 ReadStructuralFeatureActionImpl::ReadStructuralFeatureActionImpl(const ReadStructuralFeatureActionImpl & obj):ReadStructuralFeatureActionImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ReadStructuralFeatureActionImpl::copy() const
+{
+	std::shared_ptr<ReadStructuralFeatureActionImpl> element(new ReadStructuralFeatureActionImpl(*this));
+	element->setThisReadStructuralFeatureActionPtr(element);
+	return element;
+}
+
+ReadStructuralFeatureActionImpl& ReadStructuralFeatureActionImpl::operator=(const ReadStructuralFeatureActionImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -256,13 +271,8 @@ ReadStructuralFeatureActionImpl::ReadStructuralFeatureActionImpl(const ReadStruc
 	#endif
 
 	
-}
 
-std::shared_ptr<ecore::EObject>  ReadStructuralFeatureActionImpl::copy() const
-{
-	std::shared_ptr<ReadStructuralFeatureActionImpl> element(new ReadStructuralFeatureActionImpl(*this));
-	element->setThisReadStructuralFeatureActionPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ReadStructuralFeatureActionImpl::eStaticClass() const

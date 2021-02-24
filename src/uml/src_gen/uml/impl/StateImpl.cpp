@@ -91,6 +91,9 @@ using namespace uml;
 //*********************************
 StateImpl::StateImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 StateImpl::~StateImpl()
@@ -125,6 +128,18 @@ StateImpl::StateImpl(std::weak_ptr<uml::Element > par_owner)
 
 
 StateImpl::StateImpl(const StateImpl & obj):StateImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  StateImpl::copy() const
+{
+	std::shared_ptr<StateImpl> element(new StateImpl(*this));
+	element->setThisStatePtr(element);
+	return element;
+}
+
+StateImpl& StateImpl::operator=(const StateImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -318,13 +333,8 @@ StateImpl::StateImpl(const StateImpl & obj):StateImpl()
 		std::cout << "Initialising value Subset: " << "m_region - Subset<uml::Region, uml::NamedElement >(getOwnedMember())" << std::endl;
 	#endif
 	
-}
 
-std::shared_ptr<ecore::EObject>  StateImpl::copy() const
-{
-	std::shared_ptr<StateImpl> element(new StateImpl(*this));
-	element->setThisStatePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> StateImpl::eStaticClass() const

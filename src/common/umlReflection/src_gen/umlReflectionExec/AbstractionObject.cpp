@@ -80,6 +80,7 @@ AbstractionObject::AbstractionObject(std::shared_ptr<uml::Abstraction> _element)
 AbstractionObject::AbstractionObject(AbstractionObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 AbstractionObject::AbstractionObject()
@@ -97,6 +98,12 @@ std::shared_ptr<ecore::EObject> AbstractionObject::copy()
 	element->setThisAbstractionObjectPtr(element);
 	return element;
 }
+
+AbstractionObject& AbstractionObject::operator=(const AbstractionObject & obj)
+{
+	return *this;
+}
+
 
 void AbstractionObject::destroy()
 {	

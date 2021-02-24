@@ -70,7 +70,6 @@ namespace fUML::Semantics::Values
 	{
 		public:
  			Value(const Value &) {}
-			Value& operator=(Value const&) = delete;
 
 		protected:
 			Value(){}

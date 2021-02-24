@@ -23,10 +23,8 @@ namespace fUML::Semantics::Activities
 	{
 		public: 
 			ForkedTokenImpl(const ForkedTokenImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			ForkedTokenImpl& operator=(ForkedTokenImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			ForkedTokenImpl& operator=(ForkedTokenImpl const&);
 
 		protected:
 			friend class fUML::Semantics::Activities::ActivitiesFactoryImpl;

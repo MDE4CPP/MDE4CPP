@@ -78,7 +78,6 @@ namespace uml
 	{
 		public:
  			MultiplicityElement(const MultiplicityElement &) {}
-			MultiplicityElement& operator=(MultiplicityElement const&) = delete;
 
 		protected:
 			MultiplicityElement(){}

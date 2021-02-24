@@ -135,6 +135,7 @@ UseCaseObject::UseCaseObject(std::shared_ptr<uml::UseCase> _element):
 UseCaseObject::UseCaseObject(UseCaseObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 UseCaseObject::UseCaseObject()
@@ -152,6 +153,12 @@ std::shared_ptr<ecore::EObject> UseCaseObject::copy()
 	element->setThisUseCaseObjectPtr(element);
 	return element;
 }
+
+UseCaseObject& UseCaseObject::operator=(const UseCaseObject & obj)
+{
+	return *this;
+}
+
 
 void UseCaseObject::destroy()
 {	

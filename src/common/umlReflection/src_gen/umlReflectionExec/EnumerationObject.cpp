@@ -127,6 +127,7 @@ EnumerationObject::EnumerationObject(std::shared_ptr<uml::Enumeration> _element)
 EnumerationObject::EnumerationObject(EnumerationObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 EnumerationObject::EnumerationObject()
@@ -144,6 +145,12 @@ std::shared_ptr<ecore::EObject> EnumerationObject::copy()
 	element->setThisEnumerationObjectPtr(element);
 	return element;
 }
+
+EnumerationObject& EnumerationObject::operator=(const EnumerationObject & obj)
+{
+	return *this;
+}
+
 
 void EnumerationObject::destroy()
 {	

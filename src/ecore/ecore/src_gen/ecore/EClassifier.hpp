@@ -77,7 +77,6 @@ namespace ecore
 	{
 		public:
  			EClassifier(const EClassifier &) {}
-			EClassifier& operator=(EClassifier const&) = delete;
 
 		protected:
 			EClassifier(){}

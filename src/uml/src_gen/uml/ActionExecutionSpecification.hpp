@@ -118,7 +118,6 @@ namespace uml
 	{
 		public:
  			ActionExecutionSpecification(const ActionExecutionSpecification &) {}
-			ActionExecutionSpecification& operator=(ActionExecutionSpecification const&) = delete;
 
 		protected:
 			ActionExecutionSpecification(){}

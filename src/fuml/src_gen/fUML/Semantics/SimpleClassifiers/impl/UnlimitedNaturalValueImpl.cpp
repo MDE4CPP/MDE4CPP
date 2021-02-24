@@ -65,6 +65,9 @@ using namespace fUML::Semantics::SimpleClassifiers;
 //*********************************
 UnlimitedNaturalValueImpl::UnlimitedNaturalValueImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 UnlimitedNaturalValueImpl::~UnlimitedNaturalValueImpl()
@@ -77,6 +80,18 @@ UnlimitedNaturalValueImpl::~UnlimitedNaturalValueImpl()
 
 
 UnlimitedNaturalValueImpl::UnlimitedNaturalValueImpl(const UnlimitedNaturalValueImpl & obj):UnlimitedNaturalValueImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  UnlimitedNaturalValueImpl::copy() const
+{
+	std::shared_ptr<UnlimitedNaturalValueImpl> element(new UnlimitedNaturalValueImpl(*this));
+	element->setThisUnlimitedNaturalValuePtr(element);
+	return element;
+}
+
+UnlimitedNaturalValueImpl& UnlimitedNaturalValueImpl::operator=(const UnlimitedNaturalValueImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -92,13 +107,8 @@ UnlimitedNaturalValueImpl::UnlimitedNaturalValueImpl(const UnlimitedNaturalValue
 	//Clone references with containment (deep copy)
 
 
-}
 
-std::shared_ptr<ecore::EObject>  UnlimitedNaturalValueImpl::copy() const
-{
-	std::shared_ptr<UnlimitedNaturalValueImpl> element(new UnlimitedNaturalValueImpl(*this));
-	element->setThisUnlimitedNaturalValuePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> UnlimitedNaturalValueImpl::eStaticClass() const

@@ -176,7 +176,6 @@ namespace uml
 	{
 		public:
  			SequenceNode(const SequenceNode &) {}
-			SequenceNode& operator=(SequenceNode const&) = delete;
 
 		protected:
 			SequenceNode(){}

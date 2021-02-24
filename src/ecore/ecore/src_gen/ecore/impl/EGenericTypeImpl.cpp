@@ -53,6 +53,9 @@ using namespace ecore;
 //*********************************
 EGenericTypeImpl::EGenericTypeImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 EGenericTypeImpl::~EGenericTypeImpl()
@@ -65,6 +68,18 @@ EGenericTypeImpl::~EGenericTypeImpl()
 
 
 EGenericTypeImpl::EGenericTypeImpl(const EGenericTypeImpl & obj):EGenericTypeImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  EGenericTypeImpl::copy() const
+{
+	std::shared_ptr<EGenericTypeImpl> element(new EGenericTypeImpl(*this));
+	element->setThisEGenericTypePtr(element);
+	return element;
+}
+
+EGenericTypeImpl& EGenericTypeImpl::operator=(const EGenericTypeImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -110,13 +125,8 @@ EGenericTypeImpl::EGenericTypeImpl(const EGenericTypeImpl & obj):EGenericTypeImp
 	
 
 	
-}
 
-std::shared_ptr<ecore::EObject>  EGenericTypeImpl::copy() const
-{
-	std::shared_ptr<EGenericTypeImpl> element(new EGenericTypeImpl(*this));
-	element->setThisEGenericTypePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<EClass> EGenericTypeImpl::eStaticClass() const

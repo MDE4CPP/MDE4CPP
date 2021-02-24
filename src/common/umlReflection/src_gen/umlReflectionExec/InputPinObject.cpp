@@ -103,6 +103,7 @@ InputPinObject::InputPinObject(std::shared_ptr<uml::InputPin> _element):
 InputPinObject::InputPinObject(InputPinObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 InputPinObject::InputPinObject()
@@ -120,6 +121,12 @@ std::shared_ptr<ecore::EObject> InputPinObject::copy()
 	element->setThisInputPinObjectPtr(element);
 	return element;
 }
+
+InputPinObject& InputPinObject::operator=(const InputPinObject & obj)
+{
+	return *this;
+}
+
 
 void InputPinObject::destroy()
 {	

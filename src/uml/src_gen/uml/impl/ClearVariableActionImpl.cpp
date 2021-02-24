@@ -88,6 +88,9 @@ using namespace uml;
 //*********************************
 ClearVariableActionImpl::ClearVariableActionImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ClearVariableActionImpl::~ClearVariableActionImpl()
@@ -130,6 +133,18 @@ ClearVariableActionImpl::ClearVariableActionImpl(std::weak_ptr<uml::Element > pa
 
 
 ClearVariableActionImpl::ClearVariableActionImpl(const ClearVariableActionImpl & obj):ClearVariableActionImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ClearVariableActionImpl::copy() const
+{
+	std::shared_ptr<ClearVariableActionImpl> element(new ClearVariableActionImpl(*this));
+	element->setThisClearVariableActionPtr(element);
+	return element;
+}
+
+ClearVariableActionImpl& ClearVariableActionImpl::operator=(const ClearVariableActionImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -240,13 +255,8 @@ ClearVariableActionImpl::ClearVariableActionImpl(const ClearVariableActionImpl &
 		std::cout << "Copying the Subset: " << "m_redefinedNode" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  ClearVariableActionImpl::copy() const
-{
-	std::shared_ptr<ClearVariableActionImpl> element(new ClearVariableActionImpl(*this));
-	element->setThisClearVariableActionPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ClearVariableActionImpl::eStaticClass() const

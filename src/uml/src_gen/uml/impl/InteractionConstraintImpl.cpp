@@ -67,6 +67,9 @@ using namespace uml;
 //*********************************
 InteractionConstraintImpl::InteractionConstraintImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 InteractionConstraintImpl::~InteractionConstraintImpl()
@@ -122,6 +125,18 @@ InteractionConstraintImpl::InteractionConstraintImpl(std::weak_ptr<uml::Template
 
 
 InteractionConstraintImpl::InteractionConstraintImpl(const InteractionConstraintImpl & obj):InteractionConstraintImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  InteractionConstraintImpl::copy() const
+{
+	std::shared_ptr<InteractionConstraintImpl> element(new InteractionConstraintImpl(*this));
+	element->setThisInteractionConstraintPtr(element);
+	return element;
+}
+
+InteractionConstraintImpl& InteractionConstraintImpl::operator=(const InteractionConstraintImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -194,13 +209,8 @@ InteractionConstraintImpl::InteractionConstraintImpl(const InteractionConstraint
 	
 
 	
-}
 
-std::shared_ptr<ecore::EObject>  InteractionConstraintImpl::copy() const
-{
-	std::shared_ptr<InteractionConstraintImpl> element(new InteractionConstraintImpl(*this));
-	element->setThisInteractionConstraintPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> InteractionConstraintImpl::eStaticClass() const

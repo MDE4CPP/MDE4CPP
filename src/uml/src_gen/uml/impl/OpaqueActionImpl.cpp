@@ -87,6 +87,9 @@ using namespace uml;
 //*********************************
 OpaqueActionImpl::OpaqueActionImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 OpaqueActionImpl::~OpaqueActionImpl()
@@ -129,6 +132,18 @@ OpaqueActionImpl::OpaqueActionImpl(std::weak_ptr<uml::Element > par_owner)
 
 
 OpaqueActionImpl::OpaqueActionImpl(const OpaqueActionImpl & obj):OpaqueActionImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  OpaqueActionImpl::copy() const
+{
+	std::shared_ptr<OpaqueActionImpl> element(new OpaqueActionImpl(*this));
+	element->setThisOpaqueActionPtr(element);
+	return element;
+}
+
+OpaqueActionImpl& OpaqueActionImpl::operator=(const OpaqueActionImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -268,13 +283,8 @@ OpaqueActionImpl::OpaqueActionImpl(const OpaqueActionImpl & obj):OpaqueActionImp
 		std::cout << "Initialising value Subset: " << "m_outputValue - Subset<uml::OutputPin, uml::OutputPin >(getOutput())" << std::endl;
 	#endif
 	
-}
 
-std::shared_ptr<ecore::EObject>  OpaqueActionImpl::copy() const
-{
-	std::shared_ptr<OpaqueActionImpl> element(new OpaqueActionImpl(*this));
-	element->setThisOpaqueActionPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> OpaqueActionImpl::eStaticClass() const

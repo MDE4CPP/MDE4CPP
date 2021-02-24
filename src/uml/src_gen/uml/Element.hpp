@@ -118,7 +118,6 @@ namespace uml
 	{
 		public:
  			Element(const Element &) {}
-			Element& operator=(Element const&) = delete;
 
 		protected:
 			Element(){}

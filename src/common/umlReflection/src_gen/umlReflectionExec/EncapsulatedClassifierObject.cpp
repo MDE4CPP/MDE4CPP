@@ -131,6 +131,7 @@ EncapsulatedClassifierObject::EncapsulatedClassifierObject(std::shared_ptr<uml::
 EncapsulatedClassifierObject::EncapsulatedClassifierObject(EncapsulatedClassifierObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 EncapsulatedClassifierObject::EncapsulatedClassifierObject()
@@ -148,6 +149,12 @@ std::shared_ptr<ecore::EObject> EncapsulatedClassifierObject::copy()
 	element->setThisEncapsulatedClassifierObjectPtr(element);
 	return element;
 }
+
+EncapsulatedClassifierObject& EncapsulatedClassifierObject::operator=(const EncapsulatedClassifierObject & obj)
+{
+	return *this;
+}
+
 
 void EncapsulatedClassifierObject::destroy()
 {	

@@ -55,6 +55,7 @@ TemplateableElementObject::TemplateableElementObject(std::shared_ptr<uml::Templa
 TemplateableElementObject::TemplateableElementObject(TemplateableElementObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 TemplateableElementObject::TemplateableElementObject()
@@ -72,6 +73,12 @@ std::shared_ptr<ecore::EObject> TemplateableElementObject::copy()
 	element->setThisTemplateableElementObjectPtr(element);
 	return element;
 }
+
+TemplateableElementObject& TemplateableElementObject::operator=(const TemplateableElementObject & obj)
+{
+	return *this;
+}
+
 
 void TemplateableElementObject::destroy()
 {	

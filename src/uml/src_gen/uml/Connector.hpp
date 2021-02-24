@@ -127,7 +127,6 @@ namespace uml
 	{
 		public:
  			Connector(const Connector &) {}
-			Connector& operator=(Connector const&) = delete;
 
 		protected:
 			Connector(){}

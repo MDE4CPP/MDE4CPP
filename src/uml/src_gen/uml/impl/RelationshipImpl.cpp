@@ -51,6 +51,9 @@ using namespace uml;
 //*********************************
 RelationshipImpl::RelationshipImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 RelationshipImpl::~RelationshipImpl()
@@ -69,6 +72,18 @@ RelationshipImpl::RelationshipImpl(std::weak_ptr<uml::Element > par_owner)
 
 
 RelationshipImpl::RelationshipImpl(const RelationshipImpl & obj):RelationshipImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  RelationshipImpl::copy() const
+{
+	std::shared_ptr<RelationshipImpl> element(new RelationshipImpl(*this));
+	element->setThisRelationshipPtr(element);
+	return element;
+}
+
+RelationshipImpl& RelationshipImpl::operator=(const RelationshipImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -94,13 +109,8 @@ RelationshipImpl::RelationshipImpl(const RelationshipImpl & obj):RelationshipImp
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  RelationshipImpl::copy() const
-{
-	std::shared_ptr<RelationshipImpl> element(new RelationshipImpl(*this));
-	element->setThisRelationshipPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> RelationshipImpl::eStaticClass() const

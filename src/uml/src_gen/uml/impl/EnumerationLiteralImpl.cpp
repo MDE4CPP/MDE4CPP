@@ -76,6 +76,9 @@ using namespace uml;
 //*********************************
 EnumerationLiteralImpl::EnumerationLiteralImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 EnumerationLiteralImpl::~EnumerationLiteralImpl()
@@ -126,6 +129,18 @@ EnumerationLiteralImpl::EnumerationLiteralImpl(std::weak_ptr<uml::TemplateParame
 
 
 EnumerationLiteralImpl::EnumerationLiteralImpl(const EnumerationLiteralImpl & obj):EnumerationLiteralImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  EnumerationLiteralImpl::copy() const
+{
+	std::shared_ptr<EnumerationLiteralImpl> element(new EnumerationLiteralImpl(*this));
+	element->setThisEnumerationLiteralPtr(element);
+	return element;
+}
+
+EnumerationLiteralImpl& EnumerationLiteralImpl::operator=(const EnumerationLiteralImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -200,13 +215,8 @@ EnumerationLiteralImpl::EnumerationLiteralImpl(const EnumerationLiteralImpl & ob
 		std::cout << "Copying the Subset: " << "m_specification" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  EnumerationLiteralImpl::copy() const
-{
-	std::shared_ptr<EnumerationLiteralImpl> element(new EnumerationLiteralImpl(*this));
-	element->setThisEnumerationLiteralPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> EnumerationLiteralImpl::eStaticClass() const

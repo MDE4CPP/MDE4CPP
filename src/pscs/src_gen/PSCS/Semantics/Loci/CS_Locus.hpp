@@ -80,7 +80,6 @@ namespace PSCS::Semantics::Loci
 	{
 		public:
  			CS_Locus(const CS_Locus &) {}
-			CS_Locus& operator=(CS_Locus const&) = delete;
 
 		protected:
 			CS_Locus(){}

@@ -25,10 +25,8 @@ virtual public ActivityEdgeInstance
 	{
 		public: 
 			ActivityEdgeInstanceImpl(const ActivityEdgeInstanceImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			ActivityEdgeInstanceImpl& operator=(ActivityEdgeInstanceImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			ActivityEdgeInstanceImpl& operator=(ActivityEdgeInstanceImpl const&);
 
 		protected:
 			friend class fUML::Semantics::Activities::ActivitiesFactoryImpl;

@@ -79,6 +79,7 @@ RedefinableTemplateSignatureObject::RedefinableTemplateSignatureObject(std::shar
 RedefinableTemplateSignatureObject::RedefinableTemplateSignatureObject(RedefinableTemplateSignatureObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 RedefinableTemplateSignatureObject::RedefinableTemplateSignatureObject()
@@ -96,6 +97,12 @@ std::shared_ptr<ecore::EObject> RedefinableTemplateSignatureObject::copy()
 	element->setThisRedefinableTemplateSignatureObjectPtr(element);
 	return element;
 }
+
+RedefinableTemplateSignatureObject& RedefinableTemplateSignatureObject::operator=(const RedefinableTemplateSignatureObject & obj)
+{
+	return *this;
+}
+
 
 void RedefinableTemplateSignatureObject::destroy()
 {	

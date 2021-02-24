@@ -100,7 +100,6 @@ namespace PSCS::Semantics::Actions
 	{
 		public:
  			CS_ReadSelfActionActivation(const CS_ReadSelfActionActivation &) {}
-			CS_ReadSelfActionActivation& operator=(CS_ReadSelfActionActivation const&) = delete;
 
 		protected:
 			CS_ReadSelfActionActivation(){}

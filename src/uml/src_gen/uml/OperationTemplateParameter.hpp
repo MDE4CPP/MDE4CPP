@@ -82,7 +82,6 @@ namespace uml
 	{
 		public:
  			OperationTemplateParameter(const OperationTemplateParameter &) {}
-			OperationTemplateParameter& operator=(OperationTemplateParameter const&) = delete;
 
 		protected:
 			OperationTemplateParameter(){}

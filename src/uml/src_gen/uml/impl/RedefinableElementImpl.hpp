@@ -22,10 +22,8 @@ namespace uml
 	{
 		public: 
 			RedefinableElementImpl(const RedefinableElementImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			RedefinableElementImpl& operator=(RedefinableElementImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			RedefinableElementImpl& operator=(RedefinableElementImpl const&);
 
 		protected:
 			friend class umlFactoryImpl;

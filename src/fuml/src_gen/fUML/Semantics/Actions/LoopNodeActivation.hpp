@@ -101,7 +101,6 @@ namespace fUML::Semantics::Actions
 	{
 		public:
  			LoopNodeActivation(const LoopNodeActivation &) {}
-			LoopNodeActivation& operator=(LoopNodeActivation const&) = delete;
 
 		protected:
 			LoopNodeActivation(){}

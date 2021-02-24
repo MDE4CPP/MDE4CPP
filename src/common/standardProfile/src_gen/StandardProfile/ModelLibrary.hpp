@@ -25,9 +25,6 @@ namespace StandardProfile
 {
 	class ModelLibrary : virtual public uml::Stereotype 
 	{
-		private:    
-			ModelLibrary(const ModelLibrary& that) = delete;
-
 		protected:
 			ModelLibrary(){}
 

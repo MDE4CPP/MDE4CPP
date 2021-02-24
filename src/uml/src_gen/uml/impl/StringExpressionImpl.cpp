@@ -79,6 +79,9 @@ using namespace uml;
 //*********************************
 StringExpressionImpl::StringExpressionImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 StringExpressionImpl::~StringExpressionImpl()
@@ -145,6 +148,18 @@ StringExpressionImpl::StringExpressionImpl(std::weak_ptr<uml::ValueSpecification
 
 
 StringExpressionImpl::StringExpressionImpl(const StringExpressionImpl & obj):StringExpressionImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  StringExpressionImpl::copy() const
+{
+	std::shared_ptr<StringExpressionImpl> element(new StringExpressionImpl(*this));
+	element->setThisStringExpressionPtr(element);
+	return element;
+}
+
+StringExpressionImpl& StringExpressionImpl::operator=(const StringExpressionImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -234,13 +249,8 @@ StringExpressionImpl::StringExpressionImpl(const StringExpressionImpl & obj):Str
 		std::cout << "Initialising value Subset: " << "m_subExpression - Subset<uml::StringExpression, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
 	
-}
 
-std::shared_ptr<ecore::EObject>  StringExpressionImpl::copy() const
-{
-	std::shared_ptr<StringExpressionImpl> element(new StringExpressionImpl(*this));
-	element->setThisStringExpressionPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> StringExpressionImpl::eStaticClass() const

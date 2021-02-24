@@ -50,6 +50,9 @@ using namespace fUML::Semantics::Loci;
 //*********************************
 SemanticStrategyImpl::SemanticStrategyImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 SemanticStrategyImpl::~SemanticStrategyImpl()
@@ -63,6 +66,18 @@ SemanticStrategyImpl::~SemanticStrategyImpl()
 
 SemanticStrategyImpl::SemanticStrategyImpl(const SemanticStrategyImpl & obj):SemanticStrategyImpl()
 {
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  SemanticStrategyImpl::copy() const
+{
+	std::shared_ptr<SemanticStrategyImpl> element(new SemanticStrategyImpl(*this));
+	element->setThisSemanticStrategyPtr(element);
+	return element;
+}
+
+SemanticStrategyImpl& SemanticStrategyImpl::operator=(const SemanticStrategyImpl & obj)
+{
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy SemanticStrategy "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -74,13 +89,8 @@ SemanticStrategyImpl::SemanticStrategyImpl(const SemanticStrategyImpl & obj):Sem
 	//Clone references with containment (deep copy)
 
 
-}
 
-std::shared_ptr<ecore::EObject>  SemanticStrategyImpl::copy() const
-{
-	std::shared_ptr<SemanticStrategyImpl> element(new SemanticStrategyImpl(*this));
-	element->setThisSemanticStrategyPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> SemanticStrategyImpl::eStaticClass() const

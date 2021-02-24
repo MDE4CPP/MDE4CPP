@@ -52,6 +52,9 @@ using namespace fUML::Semantics::Actions;
 //*********************************
 ValuesImpl::ValuesImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ValuesImpl::~ValuesImpl()
@@ -64,6 +67,18 @@ ValuesImpl::~ValuesImpl()
 
 
 ValuesImpl::ValuesImpl(const ValuesImpl & obj):ValuesImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ValuesImpl::copy() const
+{
+	std::shared_ptr<ValuesImpl> element(new ValuesImpl(*this));
+	element->setThisValuesPtr(element);
+	return element;
+}
+
+ValuesImpl& ValuesImpl::operator=(const ValuesImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -79,13 +94,8 @@ ValuesImpl::ValuesImpl(const ValuesImpl & obj):ValuesImpl()
 	//Clone references with containment (deep copy)
 
 
-}
 
-std::shared_ptr<ecore::EObject>  ValuesImpl::copy() const
-{
-	std::shared_ptr<ValuesImpl> element(new ValuesImpl(*this));
-	element->setThisValuesPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ValuesImpl::eStaticClass() const

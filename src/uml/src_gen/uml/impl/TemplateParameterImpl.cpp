@@ -56,6 +56,9 @@ using namespace uml;
 //*********************************
 TemplateParameterImpl::TemplateParameterImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 TemplateParameterImpl::~TemplateParameterImpl()
@@ -82,6 +85,18 @@ TemplateParameterImpl::TemplateParameterImpl(std::weak_ptr<uml::TemplateSignatur
 
 
 TemplateParameterImpl::TemplateParameterImpl(const TemplateParameterImpl & obj):TemplateParameterImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  TemplateParameterImpl::copy() const
+{
+	std::shared_ptr<TemplateParameterImpl> element(new TemplateParameterImpl(*this));
+	element->setThisTemplateParameterPtr(element);
+	return element;
+}
+
+TemplateParameterImpl& TemplateParameterImpl::operator=(const TemplateParameterImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -127,13 +142,8 @@ TemplateParameterImpl::TemplateParameterImpl(const TemplateParameterImpl & obj):
 	
 
 	
-}
 
-std::shared_ptr<ecore::EObject>  TemplateParameterImpl::copy() const
-{
-	std::shared_ptr<TemplateParameterImpl> element(new TemplateParameterImpl(*this));
-	element->setThisTemplateParameterPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> TemplateParameterImpl::eStaticClass() const

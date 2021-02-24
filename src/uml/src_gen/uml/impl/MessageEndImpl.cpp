@@ -66,6 +66,9 @@ using namespace uml;
 //*********************************
 MessageEndImpl::MessageEndImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 MessageEndImpl::~MessageEndImpl()
@@ -92,6 +95,18 @@ MessageEndImpl::MessageEndImpl(std::weak_ptr<uml::Element > par_owner)
 
 
 MessageEndImpl::MessageEndImpl(const MessageEndImpl & obj):MessageEndImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  MessageEndImpl::copy() const
+{
+	std::shared_ptr<MessageEndImpl> element(new MessageEndImpl(*this));
+	element->setThisMessageEndPtr(element);
+	return element;
+}
+
+MessageEndImpl& MessageEndImpl::operator=(const MessageEndImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -131,13 +146,8 @@ MessageEndImpl::MessageEndImpl(const MessageEndImpl & obj):MessageEndImpl()
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  MessageEndImpl::copy() const
-{
-	std::shared_ptr<MessageEndImpl> element(new MessageEndImpl(*this));
-	element->setThisMessageEndPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> MessageEndImpl::eStaticClass() const

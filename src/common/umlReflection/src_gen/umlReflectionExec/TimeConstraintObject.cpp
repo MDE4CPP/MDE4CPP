@@ -79,6 +79,7 @@ TimeConstraintObject::TimeConstraintObject(std::shared_ptr<uml::TimeConstraint> 
 TimeConstraintObject::TimeConstraintObject(TimeConstraintObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 TimeConstraintObject::TimeConstraintObject()
@@ -96,6 +97,12 @@ std::shared_ptr<ecore::EObject> TimeConstraintObject::copy()
 	element->setThisTimeConstraintObjectPtr(element);
 	return element;
 }
+
+TimeConstraintObject& TimeConstraintObject::operator=(const TimeConstraintObject & obj)
+{
+	return *this;
+}
+
 
 void TimeConstraintObject::destroy()
 {	

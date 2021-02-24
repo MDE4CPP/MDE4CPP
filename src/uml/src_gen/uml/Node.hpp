@@ -243,7 +243,6 @@ namespace uml
 	{
 		public:
  			Node(const Node &) {}
-			Node& operator=(Node const&) = delete;
 
 		protected:
 			Node(){}

@@ -41,9 +41,9 @@ using namespace StandardProfile;
 //*********************************
 ResponsibilityImpl::ResponsibilityImpl()
 {
-	#ifdef ADD_COUNT
-		ADD_COUNT("ResponsibilityImpl()");
-	#endif
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 
 	DEBUG_MESSAGE(std::cout<<"Responsibility is created..."<<std::endl;)
 
@@ -61,20 +61,12 @@ ResponsibilityImpl::ResponsibilityImpl()
 
 ResponsibilityImpl::~ResponsibilityImpl()
 {
-	#ifdef SUB_COUNT
-		SUB_COUNT("ResponsibilityImpl()");
-	#endif
-
 	DEBUG_MESSAGE(std::cout<<"Responsibility is destroyed..."<<std::endl;)
 }
 
 ResponsibilityImpl::ResponsibilityImpl(const ResponsibilityImpl & obj):ResponsibilityImpl()
 {
-	//create copy of all Attributes
-	#ifdef SHOW_COPIES
-	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Responsibility "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
-	#endif
-	instantiate();
+	*this = obj;
 }
 
 std::shared_ptr<ecore::EObject>  ResponsibilityImpl::copy() const
@@ -82,6 +74,16 @@ std::shared_ptr<ecore::EObject>  ResponsibilityImpl::copy() const
 	std::shared_ptr<ResponsibilityImpl> element(new ResponsibilityImpl(*this));
 	element->setThisResponsibilityPtr(element);
 	return element;
+}
+
+ResponsibilityImpl& ResponsibilityImpl::operator=(const ResponsibilityImpl & obj)
+{
+		//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Responsibility "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
+	instantiate();
+	return *this;
 }
 
 

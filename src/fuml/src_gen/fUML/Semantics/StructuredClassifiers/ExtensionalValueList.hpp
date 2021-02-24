@@ -70,7 +70,6 @@ namespace fUML::Semantics::StructuredClassifiers
 	{
 		public:
  			ExtensionalValueList(const ExtensionalValueList &) {}
-			ExtensionalValueList& operator=(ExtensionalValueList const&) = delete;
 
 		protected:
 			ExtensionalValueList(){}

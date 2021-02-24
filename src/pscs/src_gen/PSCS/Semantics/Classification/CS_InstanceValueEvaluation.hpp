@@ -70,7 +70,6 @@ namespace PSCS::Semantics::Classification
 	{
 		public:
  			CS_InstanceValueEvaluation(const CS_InstanceValueEvaluation &) {}
-			CS_InstanceValueEvaluation& operator=(CS_InstanceValueEvaluation const&) = delete;
 
 		protected:
 			CS_InstanceValueEvaluation(){}

@@ -66,6 +66,9 @@ using namespace uml;
 //*********************************
 TimeObservationImpl::TimeObservationImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 TimeObservationImpl::~TimeObservationImpl()
@@ -108,6 +111,18 @@ TimeObservationImpl::TimeObservationImpl(std::weak_ptr<uml::TemplateParameter > 
 
 
 TimeObservationImpl::TimeObservationImpl(const TimeObservationImpl & obj):TimeObservationImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  TimeObservationImpl::copy() const
+{
+	std::shared_ptr<TimeObservationImpl> element(new TimeObservationImpl(*this));
+	element->setThisTimeObservationPtr(element);
+	return element;
+}
+
+TimeObservationImpl& TimeObservationImpl::operator=(const TimeObservationImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -154,13 +169,8 @@ TimeObservationImpl::TimeObservationImpl(const TimeObservationImpl & obj):TimeOb
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  TimeObservationImpl::copy() const
-{
-	std::shared_ptr<TimeObservationImpl> element(new TimeObservationImpl(*this));
-	element->setThisTimeObservationPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> TimeObservationImpl::eStaticClass() const

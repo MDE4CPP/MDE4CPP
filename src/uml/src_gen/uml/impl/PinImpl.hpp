@@ -23,10 +23,8 @@ namespace uml
 	{
 		public: 
 			PinImpl(const PinImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			PinImpl& operator=(PinImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			PinImpl& operator=(PinImpl const&);
 
 		protected:
 			friend class umlFactoryImpl;

@@ -69,6 +69,9 @@ using namespace uml;
 //*********************************
 ConnectionPointReferenceImpl::ConnectionPointReferenceImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ConnectionPointReferenceImpl::~ConnectionPointReferenceImpl()
@@ -111,6 +114,18 @@ ConnectionPointReferenceImpl::ConnectionPointReferenceImpl(std::weak_ptr<uml::St
 
 
 ConnectionPointReferenceImpl::ConnectionPointReferenceImpl(const ConnectionPointReferenceImpl & obj):ConnectionPointReferenceImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ConnectionPointReferenceImpl::copy() const
+{
+	std::shared_ptr<ConnectionPointReferenceImpl> element(new ConnectionPointReferenceImpl(*this));
+	element->setThisConnectionPointReferencePtr(element);
+	return element;
+}
+
+ConnectionPointReferenceImpl& ConnectionPointReferenceImpl::operator=(const ConnectionPointReferenceImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -164,13 +179,8 @@ ConnectionPointReferenceImpl::ConnectionPointReferenceImpl(const ConnectionPoint
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  ConnectionPointReferenceImpl::copy() const
-{
-	std::shared_ptr<ConnectionPointReferenceImpl> element(new ConnectionPointReferenceImpl(*this));
-	element->setThisConnectionPointReferencePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ConnectionPointReferenceImpl::eStaticClass() const

@@ -29,10 +29,8 @@ namespace StandardProfile
 	{
 		public: 
 			ImplementationClassImpl(const ImplementationClassImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			ImplementationClassImpl& operator=(ImplementationClassImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;  
+			ImplementationClassImpl& operator=(ImplementationClassImpl const&);
 
 		protected:
 			friend class StandardProfileFactoryImpl;

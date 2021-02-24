@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~ClearAssociationActionObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			ClearAssociationActionObject& operator=(ClearAssociationActionObject const&);
 
 			virtual void destroy();
 			

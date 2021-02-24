@@ -61,6 +61,7 @@ TemplateParameterObject::TemplateParameterObject(std::shared_ptr<uml::TemplatePa
 TemplateParameterObject::TemplateParameterObject(TemplateParameterObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 TemplateParameterObject::TemplateParameterObject()
@@ -78,6 +79,12 @@ std::shared_ptr<ecore::EObject> TemplateParameterObject::copy()
 	element->setThisTemplateParameterObjectPtr(element);
 	return element;
 }
+
+TemplateParameterObject& TemplateParameterObject::operator=(const TemplateParameterObject & obj)
+{
+	return *this;
+}
+
 
 void TemplateParameterObject::destroy()
 {	

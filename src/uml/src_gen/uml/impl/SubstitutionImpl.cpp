@@ -70,6 +70,9 @@ using namespace uml;
 //*********************************
 SubstitutionImpl::SubstitutionImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 SubstitutionImpl::~SubstitutionImpl()
@@ -120,6 +123,18 @@ SubstitutionImpl::SubstitutionImpl(std::weak_ptr<uml::Classifier > par_substitut
 
 
 SubstitutionImpl::SubstitutionImpl(const SubstitutionImpl & obj):SubstitutionImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  SubstitutionImpl::copy() const
+{
+	std::shared_ptr<SubstitutionImpl> element(new SubstitutionImpl(*this));
+	element->setThisSubstitutionPtr(element);
+	return element;
+}
+
+SubstitutionImpl& SubstitutionImpl::operator=(const SubstitutionImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -198,13 +213,8 @@ SubstitutionImpl::SubstitutionImpl(const SubstitutionImpl & obj):SubstitutionImp
 		std::cout << "Copying the Subset: " << "m_supplier" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  SubstitutionImpl::copy() const
-{
-	std::shared_ptr<SubstitutionImpl> element(new SubstitutionImpl(*this));
-	element->setThisSubstitutionPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> SubstitutionImpl::eStaticClass() const

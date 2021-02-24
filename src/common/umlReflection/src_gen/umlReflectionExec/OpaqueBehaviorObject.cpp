@@ -168,6 +168,7 @@ OpaqueBehaviorObject::OpaqueBehaviorObject(std::shared_ptr<uml::OpaqueBehavior> 
 OpaqueBehaviorObject::OpaqueBehaviorObject(OpaqueBehaviorObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 OpaqueBehaviorObject::OpaqueBehaviorObject()
@@ -185,6 +186,12 @@ std::shared_ptr<ecore::EObject> OpaqueBehaviorObject::copy()
 	element->setThisOpaqueBehaviorObjectPtr(element);
 	return element;
 }
+
+OpaqueBehaviorObject& OpaqueBehaviorObject::operator=(const OpaqueBehaviorObject & obj)
+{
+	return *this;
+}
+
 
 void OpaqueBehaviorObject::destroy()
 {	

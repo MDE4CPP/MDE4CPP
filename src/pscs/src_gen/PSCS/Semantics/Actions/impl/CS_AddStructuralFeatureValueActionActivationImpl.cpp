@@ -98,6 +98,9 @@ using namespace PSCS::Semantics::Actions;
 //*********************************
 CS_AddStructuralFeatureValueActionActivationImpl::CS_AddStructuralFeatureValueActionActivationImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 CS_AddStructuralFeatureValueActionActivationImpl::~CS_AddStructuralFeatureValueActionActivationImpl()
@@ -116,6 +119,18 @@ CS_AddStructuralFeatureValueActionActivationImpl::CS_AddStructuralFeatureValueAc
 
 
 CS_AddStructuralFeatureValueActionActivationImpl::CS_AddStructuralFeatureValueActionActivationImpl(const CS_AddStructuralFeatureValueActionActivationImpl & obj):CS_AddStructuralFeatureValueActionActivationImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  CS_AddStructuralFeatureValueActionActivationImpl::copy() const
+{
+	std::shared_ptr<CS_AddStructuralFeatureValueActionActivationImpl> element(new CS_AddStructuralFeatureValueActionActivationImpl(*this));
+	element->setThisCS_AddStructuralFeatureValueActionActivationPtr(element);
+	return element;
+}
+
+CS_AddStructuralFeatureValueActionActivationImpl& CS_AddStructuralFeatureValueActionActivationImpl::operator=(const CS_AddStructuralFeatureValueActionActivationImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -171,13 +186,8 @@ CS_AddStructuralFeatureValueActionActivationImpl::CS_AddStructuralFeatureValueAc
 		std::cout << "Copying the Subset: " << "m_outputPinActivation" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  CS_AddStructuralFeatureValueActionActivationImpl::copy() const
-{
-	std::shared_ptr<CS_AddStructuralFeatureValueActionActivationImpl> element(new CS_AddStructuralFeatureValueActionActivationImpl(*this));
-	element->setThisCS_AddStructuralFeatureValueActionActivationPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> CS_AddStructuralFeatureValueActionActivationImpl::eStaticClass() const

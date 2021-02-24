@@ -104,6 +104,7 @@ SendSignalActionObject::SendSignalActionObject(std::shared_ptr<uml::SendSignalAc
 SendSignalActionObject::SendSignalActionObject(SendSignalActionObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 SendSignalActionObject::SendSignalActionObject()
@@ -121,6 +122,12 @@ std::shared_ptr<ecore::EObject> SendSignalActionObject::copy()
 	element->setThisSendSignalActionObjectPtr(element);
 	return element;
 }
+
+SendSignalActionObject& SendSignalActionObject::operator=(const SendSignalActionObject & obj)
+{
+	return *this;
+}
+
 
 void SendSignalActionObject::destroy()
 {	

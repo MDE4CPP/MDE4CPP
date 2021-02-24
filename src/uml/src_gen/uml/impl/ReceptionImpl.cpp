@@ -85,6 +85,9 @@ using namespace uml;
 //*********************************
 ReceptionImpl::ReceptionImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ReceptionImpl::~ReceptionImpl()
@@ -111,6 +114,18 @@ ReceptionImpl::ReceptionImpl(std::weak_ptr<uml::Element > par_owner)
 
 
 ReceptionImpl::ReceptionImpl(const ReceptionImpl & obj):ReceptionImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ReceptionImpl::copy() const
+{
+	std::shared_ptr<ReceptionImpl> element(new ReceptionImpl(*this));
+	element->setThisReceptionPtr(element);
+	return element;
+}
+
+ReceptionImpl& ReceptionImpl::operator=(const ReceptionImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -220,13 +235,8 @@ ReceptionImpl::ReceptionImpl(const ReceptionImpl & obj):ReceptionImpl()
 		std::cout << "Copying the Subset: " << "m_packageImport" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  ReceptionImpl::copy() const
-{
-	std::shared_ptr<ReceptionImpl> element(new ReceptionImpl(*this));
-	element->setThisReceptionPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ReceptionImpl::eStaticClass() const

@@ -77,7 +77,6 @@ namespace ecore
 	{
 		public:
  			EObject(const EObject &) {}
-			EObject& operator=(EObject const&) = delete;
 
 		protected:
 			EObject(){}

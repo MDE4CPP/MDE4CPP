@@ -115,7 +115,6 @@ namespace uml
 	{
 		public:
  			BehaviorExecutionSpecification(const BehaviorExecutionSpecification &) {}
-			BehaviorExecutionSpecification& operator=(BehaviorExecutionSpecification const&) = delete;
 
 		protected:
 			BehaviorExecutionSpecification(){}

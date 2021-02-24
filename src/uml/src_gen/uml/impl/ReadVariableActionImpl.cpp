@@ -89,6 +89,9 @@ using namespace uml;
 //*********************************
 ReadVariableActionImpl::ReadVariableActionImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ReadVariableActionImpl::~ReadVariableActionImpl()
@@ -131,6 +134,18 @@ ReadVariableActionImpl::ReadVariableActionImpl(std::weak_ptr<uml::Element > par_
 
 
 ReadVariableActionImpl::ReadVariableActionImpl(const ReadVariableActionImpl & obj):ReadVariableActionImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ReadVariableActionImpl::copy() const
+{
+	std::shared_ptr<ReadVariableActionImpl> element(new ReadVariableActionImpl(*this));
+	element->setThisReadVariableActionPtr(element);
+	return element;
+}
+
+ReadVariableActionImpl& ReadVariableActionImpl::operator=(const ReadVariableActionImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -249,13 +264,8 @@ ReadVariableActionImpl::ReadVariableActionImpl(const ReadVariableActionImpl & ob
 	#endif
 
 	
-}
 
-std::shared_ptr<ecore::EObject>  ReadVariableActionImpl::copy() const
-{
-	std::shared_ptr<ReadVariableActionImpl> element(new ReadVariableActionImpl(*this));
-	element->setThisReadVariableActionPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ReadVariableActionImpl::eStaticClass() const

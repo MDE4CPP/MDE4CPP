@@ -240,7 +240,6 @@ namespace uml
 	{
 		public:
  			Component(const Component &) {}
-			Component& operator=(Component const&) = delete;
 
 		protected:
 			Component(){}

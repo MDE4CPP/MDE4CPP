@@ -41,9 +41,9 @@ using namespace StandardProfile;
 //*********************************
 DestroyImpl::DestroyImpl()
 {
-	#ifdef ADD_COUNT
-		ADD_COUNT("DestroyImpl()");
-	#endif
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 
 	DEBUG_MESSAGE(std::cout<<"Destroy is created..."<<std::endl;)
 
@@ -61,20 +61,12 @@ DestroyImpl::DestroyImpl()
 
 DestroyImpl::~DestroyImpl()
 {
-	#ifdef SUB_COUNT
-		SUB_COUNT("DestroyImpl()");
-	#endif
-
 	DEBUG_MESSAGE(std::cout<<"Destroy is destroyed..."<<std::endl;)
 }
 
 DestroyImpl::DestroyImpl(const DestroyImpl & obj):DestroyImpl()
 {
-	//create copy of all Attributes
-	#ifdef SHOW_COPIES
-	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Destroy "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
-	#endif
-	instantiate();
+	*this = obj;
 }
 
 std::shared_ptr<ecore::EObject>  DestroyImpl::copy() const
@@ -82,6 +74,16 @@ std::shared_ptr<ecore::EObject>  DestroyImpl::copy() const
 	std::shared_ptr<DestroyImpl> element(new DestroyImpl(*this));
 	element->setThisDestroyPtr(element);
 	return element;
+}
+
+DestroyImpl& DestroyImpl::operator=(const DestroyImpl & obj)
+{
+		//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Destroy "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
+	instantiate();
+	return *this;
 }
 
 

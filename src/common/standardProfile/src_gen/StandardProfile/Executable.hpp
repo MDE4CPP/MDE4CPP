@@ -24,9 +24,6 @@ namespace uml
 namespace StandardProfile
 {
 	class Executable:virtual public File	{
-		private:    
-			Executable(const Executable& that) = delete;
-
 		protected:
 			Executable(){}
 

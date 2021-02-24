@@ -137,6 +137,7 @@ CollaborationObject::CollaborationObject(std::shared_ptr<uml::Collaboration> _el
 CollaborationObject::CollaborationObject(CollaborationObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 CollaborationObject::CollaborationObject()
@@ -154,6 +155,12 @@ std::shared_ptr<ecore::EObject> CollaborationObject::copy()
 	element->setThisCollaborationObjectPtr(element);
 	return element;
 }
+
+CollaborationObject& CollaborationObject::operator=(const CollaborationObject & obj)
+{
+	return *this;
+}
+
 
 void CollaborationObject::destroy()
 {	

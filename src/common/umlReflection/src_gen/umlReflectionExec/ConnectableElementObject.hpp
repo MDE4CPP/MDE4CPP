@@ -38,6 +38,7 @@ namespace UML
 		    virtual ~ConnectableElementObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			ConnectableElementObject& operator=(ConnectableElementObject const&);
 
 			virtual void destroy();
 			

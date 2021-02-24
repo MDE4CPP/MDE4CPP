@@ -95,7 +95,6 @@ namespace uml
 	{
 		public:
  			Observation(const Observation &) {}
-			Observation& operator=(Observation const&) = delete;
 
 		protected:
 			Observation(){}

@@ -83,6 +83,7 @@ MergeNodeObject::MergeNodeObject(std::shared_ptr<uml::MergeNode> _element):
 MergeNodeObject::MergeNodeObject(MergeNodeObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 MergeNodeObject::MergeNodeObject()
@@ -100,6 +101,12 @@ std::shared_ptr<ecore::EObject> MergeNodeObject::copy()
 	element->setThisMergeNodeObjectPtr(element);
 	return element;
 }
+
+MergeNodeObject& MergeNodeObject::operator=(const MergeNodeObject & obj)
+{
+	return *this;
+}
+
 
 void MergeNodeObject::destroy()
 {	

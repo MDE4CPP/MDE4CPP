@@ -155,7 +155,6 @@ namespace uml
 	{
 		public:
  			ClearVariableAction(const ClearVariableAction &) {}
-			ClearVariableAction& operator=(ClearVariableAction const&) = delete;
 
 		protected:
 			ClearVariableAction(){}

@@ -23,10 +23,8 @@ namespace fUML::Semantics::Actions
 	{
 		public: 
 			InputPinActivationImpl(const InputPinActivationImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			InputPinActivationImpl& operator=(InputPinActivationImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			InputPinActivationImpl& operator=(InputPinActivationImpl const&);
 
 		protected:
 			friend class fUML::Semantics::Actions::ActionsFactoryImpl;

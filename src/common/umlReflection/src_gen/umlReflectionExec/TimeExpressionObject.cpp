@@ -74,6 +74,7 @@ TimeExpressionObject::TimeExpressionObject(std::shared_ptr<uml::TimeExpression> 
 TimeExpressionObject::TimeExpressionObject(TimeExpressionObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 TimeExpressionObject::TimeExpressionObject()
@@ -91,6 +92,12 @@ std::shared_ptr<ecore::EObject> TimeExpressionObject::copy()
 	element->setThisTimeExpressionObjectPtr(element);
 	return element;
 }
+
+TimeExpressionObject& TimeExpressionObject::operator=(const TimeExpressionObject & obj)
+{
+	return *this;
+}
+
 
 void TimeExpressionObject::destroy()
 {	

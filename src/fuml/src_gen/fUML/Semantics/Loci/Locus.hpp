@@ -82,7 +82,6 @@ namespace fUML::Semantics::Loci
 	{
 		public:
  			Locus(const Locus &) {}
-			Locus& operator=(Locus const&) = delete;
 
 		protected:
 			Locus(){}

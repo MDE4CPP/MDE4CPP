@@ -66,6 +66,9 @@ using namespace uml;
 //*********************************
 AbstractionImpl::AbstractionImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 AbstractionImpl::~AbstractionImpl()
@@ -108,6 +111,18 @@ AbstractionImpl::AbstractionImpl(std::weak_ptr<uml::TemplateParameter > par_owni
 
 
 AbstractionImpl::AbstractionImpl(const AbstractionImpl & obj):AbstractionImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  AbstractionImpl::copy() const
+{
+	std::shared_ptr<AbstractionImpl> element(new AbstractionImpl(*this));
+	element->setThisAbstractionPtr(element);
+	return element;
+}
+
+AbstractionImpl& AbstractionImpl::operator=(const AbstractionImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -178,13 +193,8 @@ AbstractionImpl::AbstractionImpl(const AbstractionImpl & obj):AbstractionImpl()
 	#endif
 
 	
-}
 
-std::shared_ptr<ecore::EObject>  AbstractionImpl::copy() const
-{
-	std::shared_ptr<AbstractionImpl> element(new AbstractionImpl(*this));
-	element->setThisAbstractionPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> AbstractionImpl::eStaticClass() const

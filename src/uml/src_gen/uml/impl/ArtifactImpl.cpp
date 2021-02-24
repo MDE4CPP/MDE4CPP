@@ -104,6 +104,9 @@ using namespace uml;
 //*********************************
 ArtifactImpl::ArtifactImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ArtifactImpl::~ArtifactImpl()
@@ -159,6 +162,18 @@ ArtifactImpl::ArtifactImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemp
 
 
 ArtifactImpl::ArtifactImpl(const ArtifactImpl & obj):ArtifactImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ArtifactImpl::copy() const
+{
+	std::shared_ptr<ArtifactImpl> element(new ArtifactImpl(*this));
+	element->setThisArtifactPtr(element);
+	return element;
+}
+
+ArtifactImpl& ArtifactImpl::operator=(const ArtifactImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -387,13 +402,8 @@ ArtifactImpl::ArtifactImpl(const ArtifactImpl & obj):ArtifactImpl()
 		std::cout << "Initialising value Subset: " << "m_ownedOperation - Subset<uml::Operation, uml::Feature,uml::NamedElement >(getFeature(),getOwnedMember())" << std::endl;
 	#endif
 	
-}
 
-std::shared_ptr<ecore::EObject>  ArtifactImpl::copy() const
-{
-	std::shared_ptr<ArtifactImpl> element(new ArtifactImpl(*this));
-	element->setThisArtifactPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ArtifactImpl::eStaticClass() const

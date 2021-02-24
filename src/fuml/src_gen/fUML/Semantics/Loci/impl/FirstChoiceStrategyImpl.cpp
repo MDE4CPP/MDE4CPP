@@ -51,6 +51,9 @@ using namespace fUML::Semantics::Loci;
 //*********************************
 FirstChoiceStrategyImpl::FirstChoiceStrategyImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 FirstChoiceStrategyImpl::~FirstChoiceStrategyImpl()
@@ -64,6 +67,18 @@ FirstChoiceStrategyImpl::~FirstChoiceStrategyImpl()
 
 FirstChoiceStrategyImpl::FirstChoiceStrategyImpl(const FirstChoiceStrategyImpl & obj):FirstChoiceStrategyImpl()
 {
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  FirstChoiceStrategyImpl::copy() const
+{
+	std::shared_ptr<FirstChoiceStrategyImpl> element(new FirstChoiceStrategyImpl(*this));
+	element->setThisFirstChoiceStrategyPtr(element);
+	return element;
+}
+
+FirstChoiceStrategyImpl& FirstChoiceStrategyImpl::operator=(const FirstChoiceStrategyImpl & obj)
+{
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy FirstChoiceStrategy "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -75,13 +90,8 @@ FirstChoiceStrategyImpl::FirstChoiceStrategyImpl(const FirstChoiceStrategyImpl &
 	//Clone references with containment (deep copy)
 
 
-}
 
-std::shared_ptr<ecore::EObject>  FirstChoiceStrategyImpl::copy() const
-{
-	std::shared_ptr<FirstChoiceStrategyImpl> element(new FirstChoiceStrategyImpl(*this));
-	element->setThisFirstChoiceStrategyPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> FirstChoiceStrategyImpl::eStaticClass() const

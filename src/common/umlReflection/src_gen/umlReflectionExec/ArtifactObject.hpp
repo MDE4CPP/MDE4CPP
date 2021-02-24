@@ -38,6 +38,7 @@ namespace UML
 		    virtual ~ArtifactObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			ArtifactObject& operator=(ArtifactObject const&);
 
 			virtual void destroy();
 			

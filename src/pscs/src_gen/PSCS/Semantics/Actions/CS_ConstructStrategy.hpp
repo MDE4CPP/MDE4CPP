@@ -70,7 +70,6 @@ namespace PSCS::Semantics::Actions
 	{
 		public:
  			CS_ConstructStrategy(const CS_ConstructStrategy &) {}
-			CS_ConstructStrategy& operator=(CS_ConstructStrategy const&) = delete;
 
 		protected:
 			CS_ConstructStrategy(){}

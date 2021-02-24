@@ -71,6 +71,7 @@ ContinuationObject::ContinuationObject(std::shared_ptr<uml::Continuation> _eleme
 ContinuationObject::ContinuationObject(ContinuationObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ContinuationObject::ContinuationObject()
@@ -88,6 +89,12 @@ std::shared_ptr<ecore::EObject> ContinuationObject::copy()
 	element->setThisContinuationObjectPtr(element);
 	return element;
 }
+
+ContinuationObject& ContinuationObject::operator=(const ContinuationObject & obj)
+{
+	return *this;
+}
+
 
 void ContinuationObject::destroy()
 {	

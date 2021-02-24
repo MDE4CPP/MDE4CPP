@@ -110,7 +110,6 @@ namespace uml
 	{
 		public:
  			LiteralUnlimitedNatural(const LiteralUnlimitedNatural &) {}
-			LiteralUnlimitedNatural& operator=(LiteralUnlimitedNatural const&) = delete;
 
 		protected:
 			LiteralUnlimitedNatural(){}

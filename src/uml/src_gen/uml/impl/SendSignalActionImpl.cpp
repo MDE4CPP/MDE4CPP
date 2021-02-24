@@ -91,6 +91,9 @@ using namespace uml;
 //*********************************
 SendSignalActionImpl::SendSignalActionImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 SendSignalActionImpl::~SendSignalActionImpl()
@@ -133,6 +136,18 @@ SendSignalActionImpl::SendSignalActionImpl(std::weak_ptr<uml::Element > par_owne
 
 
 SendSignalActionImpl::SendSignalActionImpl(const SendSignalActionImpl & obj):SendSignalActionImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  SendSignalActionImpl::copy() const
+{
+	std::shared_ptr<SendSignalActionImpl> element(new SendSignalActionImpl(*this));
+	element->setThisSendSignalActionPtr(element);
+	return element;
+}
+
+SendSignalActionImpl& SendSignalActionImpl::operator=(const SendSignalActionImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -261,13 +276,8 @@ SendSignalActionImpl::SendSignalActionImpl(const SendSignalActionImpl & obj):Sen
 	#endif
 
 	
-}
 
-std::shared_ptr<ecore::EObject>  SendSignalActionImpl::copy() const
-{
-	std::shared_ptr<SendSignalActionImpl> element(new SendSignalActionImpl(*this));
-	element->setThisSendSignalActionPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> SendSignalActionImpl::eStaticClass() const

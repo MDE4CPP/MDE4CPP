@@ -76,7 +76,6 @@ namespace fUML::Semantics::Activities
 	{
 		public:
  			ObjectNodeActivation(const ObjectNodeActivation &) {}
-			ObjectNodeActivation& operator=(ObjectNodeActivation const&) = delete;
 
 		protected:
 			ObjectNodeActivation(){}

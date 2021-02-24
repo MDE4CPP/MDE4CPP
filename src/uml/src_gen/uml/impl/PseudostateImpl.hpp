@@ -22,10 +22,8 @@ namespace uml
 	{
 		public: 
 			PseudostateImpl(const PseudostateImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			PseudostateImpl& operator=(PseudostateImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			PseudostateImpl& operator=(PseudostateImpl const&);
 
 		protected:
 			friend class umlFactoryImpl;

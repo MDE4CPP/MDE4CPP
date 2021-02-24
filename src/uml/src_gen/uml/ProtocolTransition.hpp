@@ -152,7 +152,6 @@ namespace uml
 	{
 		public:
  			ProtocolTransition(const ProtocolTransition &) {}
-			ProtocolTransition& operator=(ProtocolTransition const&) = delete;
 
 		protected:
 			ProtocolTransition(){}

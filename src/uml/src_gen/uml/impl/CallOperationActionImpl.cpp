@@ -91,6 +91,9 @@ using namespace uml;
 //*********************************
 CallOperationActionImpl::CallOperationActionImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 CallOperationActionImpl::~CallOperationActionImpl()
@@ -133,6 +136,18 @@ CallOperationActionImpl::CallOperationActionImpl(std::weak_ptr<uml::Element > pa
 
 
 CallOperationActionImpl::CallOperationActionImpl(const CallOperationActionImpl & obj):CallOperationActionImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  CallOperationActionImpl::copy() const
+{
+	std::shared_ptr<CallOperationActionImpl> element(new CallOperationActionImpl(*this));
+	element->setThisCallOperationActionPtr(element);
+	return element;
+}
+
+CallOperationActionImpl& CallOperationActionImpl::operator=(const CallOperationActionImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -270,13 +285,8 @@ CallOperationActionImpl::CallOperationActionImpl(const CallOperationActionImpl &
 	#endif
 
 	
-}
 
-std::shared_ptr<ecore::EObject>  CallOperationActionImpl::copy() const
-{
-	std::shared_ptr<CallOperationActionImpl> element(new CallOperationActionImpl(*this));
-	element->setThisCallOperationActionPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> CallOperationActionImpl::eStaticClass() const

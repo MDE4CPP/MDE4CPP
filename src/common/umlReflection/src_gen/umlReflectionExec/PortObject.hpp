@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~PortObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			PortObject& operator=(PortObject const&);
 
 			virtual void destroy();
 			

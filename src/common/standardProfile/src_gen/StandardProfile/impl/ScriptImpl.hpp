@@ -29,10 +29,8 @@ namespace StandardProfile
 	{
 		public: 
 			ScriptImpl(const ScriptImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			ScriptImpl& operator=(ScriptImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;  
+			ScriptImpl& operator=(ScriptImpl const&);
 
 		protected:
 			friend class StandardProfileFactoryImpl;

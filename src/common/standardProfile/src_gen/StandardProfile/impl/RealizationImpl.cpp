@@ -41,9 +41,9 @@ using namespace StandardProfile;
 //*********************************
 RealizationImpl::RealizationImpl()
 {
-	#ifdef ADD_COUNT
-		ADD_COUNT("RealizationImpl()");
-	#endif
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 
 	DEBUG_MESSAGE(std::cout<<"Realization is created..."<<std::endl;)
 
@@ -61,20 +61,12 @@ RealizationImpl::RealizationImpl()
 
 RealizationImpl::~RealizationImpl()
 {
-	#ifdef SUB_COUNT
-		SUB_COUNT("RealizationImpl()");
-	#endif
-
 	DEBUG_MESSAGE(std::cout<<"Realization is destroyed..."<<std::endl;)
 }
 
 RealizationImpl::RealizationImpl(const RealizationImpl & obj):RealizationImpl()
 {
-	//create copy of all Attributes
-	#ifdef SHOW_COPIES
-	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Realization "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
-	#endif
-	instantiate();
+	*this = obj;
 }
 
 std::shared_ptr<ecore::EObject>  RealizationImpl::copy() const
@@ -82,6 +74,16 @@ std::shared_ptr<ecore::EObject>  RealizationImpl::copy() const
 	std::shared_ptr<RealizationImpl> element(new RealizationImpl(*this));
 	element->setThisRealizationPtr(element);
 	return element;
+}
+
+RealizationImpl& RealizationImpl::operator=(const RealizationImpl & obj)
+{
+		//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Realization "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
+	instantiate();
+	return *this;
 }
 
 

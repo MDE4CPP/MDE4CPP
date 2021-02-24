@@ -87,6 +87,9 @@ using namespace fUML::Semantics::Actions;
 //*********************************
 CallActionActivationImpl::CallActionActivationImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 CallActionActivationImpl::~CallActionActivationImpl()
@@ -105,6 +108,18 @@ CallActionActivationImpl::CallActionActivationImpl(std::weak_ptr<fUML::Semantics
 
 
 CallActionActivationImpl::CallActionActivationImpl(const CallActionActivationImpl & obj):CallActionActivationImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  CallActionActivationImpl::copy() const
+{
+	std::shared_ptr<CallActionActivationImpl> element(new CallActionActivationImpl(*this));
+	element->setThisCallActionActivationPtr(element);
+	return element;
+}
+
+CallActionActivationImpl& CallActionActivationImpl::operator=(const CallActionActivationImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -169,13 +184,8 @@ CallActionActivationImpl::CallActionActivationImpl(const CallActionActivationImp
 	#endif
 
 	
-}
 
-std::shared_ptr<ecore::EObject>  CallActionActivationImpl::copy() const
-{
-	std::shared_ptr<CallActionActivationImpl> element(new CallActionActivationImpl(*this));
-	element->setThisCallActionActivationPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> CallActionActivationImpl::eStaticClass() const

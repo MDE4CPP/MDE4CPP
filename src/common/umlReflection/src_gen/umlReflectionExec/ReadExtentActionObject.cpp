@@ -100,6 +100,7 @@ ReadExtentActionObject::ReadExtentActionObject(std::shared_ptr<uml::ReadExtentAc
 ReadExtentActionObject::ReadExtentActionObject(ReadExtentActionObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ReadExtentActionObject::ReadExtentActionObject()
@@ -117,6 +118,12 @@ std::shared_ptr<ecore::EObject> ReadExtentActionObject::copy()
 	element->setThisReadExtentActionObjectPtr(element);
 	return element;
 }
+
+ReadExtentActionObject& ReadExtentActionObject::operator=(const ReadExtentActionObject & obj)
+{
+	return *this;
+}
+
 
 void ReadExtentActionObject::destroy()
 {	

@@ -178,7 +178,6 @@ namespace uml
 	{
 		public:
  			ExpansionRegion(const ExpansionRegion &) {}
-			ExpansionRegion& operator=(ExpansionRegion const&) = delete;
 
 		protected:
 			ExpansionRegion(){}

@@ -72,6 +72,9 @@ using namespace uml;
 //*********************************
 ComponentRealizationImpl::ComponentRealizationImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ComponentRealizationImpl::~ComponentRealizationImpl()
@@ -122,6 +125,18 @@ ComponentRealizationImpl::ComponentRealizationImpl(std::weak_ptr<uml::TemplatePa
 
 
 ComponentRealizationImpl::ComponentRealizationImpl(const ComponentRealizationImpl & obj):ComponentRealizationImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ComponentRealizationImpl::copy() const
+{
+	std::shared_ptr<ComponentRealizationImpl> element(new ComponentRealizationImpl(*this));
+	element->setThisComponentRealizationPtr(element);
+	return element;
+}
+
+ComponentRealizationImpl& ComponentRealizationImpl::operator=(const ComponentRealizationImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -201,13 +216,8 @@ ComponentRealizationImpl::ComponentRealizationImpl(const ComponentRealizationImp
 		std::cout << "Copying the Subset: " << "m_supplier" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  ComponentRealizationImpl::copy() const
-{
-	std::shared_ptr<ComponentRealizationImpl> element(new ComponentRealizationImpl(*this));
-	element->setThisComponentRealizationPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ComponentRealizationImpl::eStaticClass() const

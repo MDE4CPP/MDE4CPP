@@ -84,6 +84,9 @@ using namespace uml;
 //*********************************
 ModelImpl::ModelImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ModelImpl::~ModelImpl()
@@ -139,6 +142,18 @@ ModelImpl::ModelImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplatePa
 
 
 ModelImpl::ModelImpl(const ModelImpl & obj):ModelImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ModelImpl::copy() const
+{
+	std::shared_ptr<ModelImpl> element(new ModelImpl(*this));
+	element->setThisModelPtr(element);
+	return element;
+}
+
+ModelImpl& ModelImpl::operator=(const ModelImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -284,13 +299,8 @@ ModelImpl::ModelImpl(const ModelImpl & obj):ModelImpl()
 		std::cout << "Copying the Subset: " << "m_templateBinding" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  ModelImpl::copy() const
-{
-	std::shared_ptr<ModelImpl> element(new ModelImpl(*this));
-	element->setThisModelPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ModelImpl::eStaticClass() const

@@ -41,9 +41,9 @@ using namespace StandardProfile;
 //*********************************
 SubsystemImpl::SubsystemImpl()
 {
-	#ifdef ADD_COUNT
-		ADD_COUNT("SubsystemImpl()");
-	#endif
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 
 	DEBUG_MESSAGE(std::cout<<"Subsystem is created..."<<std::endl;)
 
@@ -61,20 +61,12 @@ SubsystemImpl::SubsystemImpl()
 
 SubsystemImpl::~SubsystemImpl()
 {
-	#ifdef SUB_COUNT
-		SUB_COUNT("SubsystemImpl()");
-	#endif
-
 	DEBUG_MESSAGE(std::cout<<"Subsystem is destroyed..."<<std::endl;)
 }
 
 SubsystemImpl::SubsystemImpl(const SubsystemImpl & obj):SubsystemImpl()
 {
-	//create copy of all Attributes
-	#ifdef SHOW_COPIES
-	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Subsystem "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
-	#endif
-	instantiate();
+	*this = obj;
 }
 
 std::shared_ptr<ecore::EObject>  SubsystemImpl::copy() const
@@ -82,6 +74,16 @@ std::shared_ptr<ecore::EObject>  SubsystemImpl::copy() const
 	std::shared_ptr<SubsystemImpl> element(new SubsystemImpl(*this));
 	element->setThisSubsystemPtr(element);
 	return element;
+}
+
+SubsystemImpl& SubsystemImpl::operator=(const SubsystemImpl & obj)
+{
+		//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Subsystem "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
+	instantiate();
+	return *this;
 }
 
 

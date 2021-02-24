@@ -25,10 +25,8 @@ virtual public FeatureValue
 	{
 		public: 
 			FeatureValueImpl(const FeatureValueImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			FeatureValueImpl& operator=(FeatureValueImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			FeatureValueImpl& operator=(FeatureValueImpl const&);
 
 		protected:
 			friend class fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactoryImpl;

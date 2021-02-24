@@ -102,6 +102,7 @@ OpaqueActionObject::OpaqueActionObject(std::shared_ptr<uml::OpaqueAction> _eleme
 OpaqueActionObject::OpaqueActionObject(OpaqueActionObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 OpaqueActionObject::OpaqueActionObject()
@@ -119,6 +120,12 @@ std::shared_ptr<ecore::EObject> OpaqueActionObject::copy()
 	element->setThisOpaqueActionObjectPtr(element);
 	return element;
 }
+
+OpaqueActionObject& OpaqueActionObject::operator=(const OpaqueActionObject & obj)
+{
+	return *this;
+}
+
 
 void OpaqueActionObject::destroy()
 {	

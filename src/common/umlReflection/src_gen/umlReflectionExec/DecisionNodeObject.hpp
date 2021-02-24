@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~DecisionNodeObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			DecisionNodeObject& operator=(DecisionNodeObject const&);
 
 			virtual void destroy();
 			

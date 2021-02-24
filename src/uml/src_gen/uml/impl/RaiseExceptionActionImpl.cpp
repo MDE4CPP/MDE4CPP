@@ -86,6 +86,9 @@ using namespace uml;
 //*********************************
 RaiseExceptionActionImpl::RaiseExceptionActionImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 RaiseExceptionActionImpl::~RaiseExceptionActionImpl()
@@ -128,6 +131,18 @@ RaiseExceptionActionImpl::RaiseExceptionActionImpl(std::weak_ptr<uml::Element > 
 
 
 RaiseExceptionActionImpl::RaiseExceptionActionImpl(const RaiseExceptionActionImpl & obj):RaiseExceptionActionImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  RaiseExceptionActionImpl::copy() const
+{
+	std::shared_ptr<RaiseExceptionActionImpl> element(new RaiseExceptionActionImpl(*this));
+	element->setThisRaiseExceptionActionPtr(element);
+	return element;
+}
+
+RaiseExceptionActionImpl& RaiseExceptionActionImpl::operator=(const RaiseExceptionActionImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -244,13 +259,8 @@ RaiseExceptionActionImpl::RaiseExceptionActionImpl(const RaiseExceptionActionImp
 	#endif
 
 	
-}
 
-std::shared_ptr<ecore::EObject>  RaiseExceptionActionImpl::copy() const
-{
-	std::shared_ptr<RaiseExceptionActionImpl> element(new RaiseExceptionActionImpl(*this));
-	element->setThisRaiseExceptionActionPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> RaiseExceptionActionImpl::eStaticClass() const

@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~SubstitutionObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			SubstitutionObject& operator=(SubstitutionObject const&);
 
 			virtual void destroy();
 			

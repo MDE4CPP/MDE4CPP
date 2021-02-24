@@ -136,7 +136,6 @@ namespace uml
 	{
 		public:
  			Parameter(const Parameter &) {}
-			Parameter& operator=(Parameter const&) = delete;
 
 		protected:
 			Parameter(){}

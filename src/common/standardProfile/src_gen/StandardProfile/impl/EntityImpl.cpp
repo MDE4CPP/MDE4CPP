@@ -41,9 +41,9 @@ using namespace StandardProfile;
 //*********************************
 EntityImpl::EntityImpl()
 {
-	#ifdef ADD_COUNT
-		ADD_COUNT("EntityImpl()");
-	#endif
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 
 	DEBUG_MESSAGE(std::cout<<"Entity is created..."<<std::endl;)
 
@@ -61,20 +61,12 @@ EntityImpl::EntityImpl()
 
 EntityImpl::~EntityImpl()
 {
-	#ifdef SUB_COUNT
-		SUB_COUNT("EntityImpl()");
-	#endif
-
 	DEBUG_MESSAGE(std::cout<<"Entity is destroyed..."<<std::endl;)
 }
 
 EntityImpl::EntityImpl(const EntityImpl & obj):EntityImpl()
 {
-	//create copy of all Attributes
-	#ifdef SHOW_COPIES
-	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Entity "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
-	#endif
-	instantiate();
+	*this = obj;
 }
 
 std::shared_ptr<ecore::EObject>  EntityImpl::copy() const
@@ -82,6 +74,16 @@ std::shared_ptr<ecore::EObject>  EntityImpl::copy() const
 	std::shared_ptr<EntityImpl> element(new EntityImpl(*this));
 	element->setThisEntityPtr(element);
 	return element;
+}
+
+EntityImpl& EntityImpl::operator=(const EntityImpl & obj)
+{
+		//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Entity "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
+	instantiate();
+	return *this;
 }
 
 

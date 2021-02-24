@@ -69,6 +69,9 @@ using namespace fUML::Semantics::Actions;
 //*********************************
 TestIdentityActionActivationImpl::TestIdentityActionActivationImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 TestIdentityActionActivationImpl::~TestIdentityActionActivationImpl()
@@ -87,6 +90,18 @@ TestIdentityActionActivationImpl::TestIdentityActionActivationImpl(std::weak_ptr
 
 
 TestIdentityActionActivationImpl::TestIdentityActionActivationImpl(const TestIdentityActionActivationImpl & obj):TestIdentityActionActivationImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  TestIdentityActionActivationImpl::copy() const
+{
+	std::shared_ptr<TestIdentityActionActivationImpl> element(new TestIdentityActionActivationImpl(*this));
+	element->setThisTestIdentityActionActivationPtr(element);
+	return element;
+}
+
+TestIdentityActionActivationImpl& TestIdentityActionActivationImpl::operator=(const TestIdentityActionActivationImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -140,13 +155,8 @@ TestIdentityActionActivationImpl::TestIdentityActionActivationImpl(const TestIde
 		std::cout << "Copying the Subset: " << "m_outputPinActivation" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  TestIdentityActionActivationImpl::copy() const
-{
-	std::shared_ptr<TestIdentityActionActivationImpl> element(new TestIdentityActionActivationImpl(*this));
-	element->setThisTestIdentityActionActivationPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> TestIdentityActionActivationImpl::eStaticClass() const

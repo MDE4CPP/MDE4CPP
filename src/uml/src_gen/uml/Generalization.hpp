@@ -81,7 +81,6 @@ namespace uml
 	{
 		public:
  			Generalization(const Generalization &) {}
-			Generalization& operator=(Generalization const&) = delete;
 
 		protected:
 			Generalization(){}

@@ -91,7 +91,6 @@ namespace ecore
 	{
 		public:
  			EReference(const EReference &) {}
-			EReference& operator=(EReference const&) = delete;
 
 		protected:
 			EReference(){}

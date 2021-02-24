@@ -29,10 +29,8 @@ namespace StandardProfile
 	{
 		public: 
 			RefineImpl(const RefineImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			RefineImpl& operator=(RefineImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;  
+			RefineImpl& operator=(RefineImpl const&);
 
 		protected:
 			friend class StandardProfileFactoryImpl;

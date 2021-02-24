@@ -25,10 +25,8 @@ virtual public ClassifierBehaviorExecution
 	{
 		public: 
 			ClassifierBehaviorExecutionImpl(const ClassifierBehaviorExecutionImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			ClassifierBehaviorExecutionImpl& operator=(ClassifierBehaviorExecutionImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			ClassifierBehaviorExecutionImpl& operator=(ClassifierBehaviorExecutionImpl const&);
 
 		protected:
 			friend class fUML::Semantics::CommonBehavior::CommonBehaviorFactoryImpl;

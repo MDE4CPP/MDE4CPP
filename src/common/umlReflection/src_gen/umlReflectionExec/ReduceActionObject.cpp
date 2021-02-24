@@ -103,6 +103,7 @@ ReduceActionObject::ReduceActionObject(std::shared_ptr<uml::ReduceAction> _eleme
 ReduceActionObject::ReduceActionObject(ReduceActionObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ReduceActionObject::ReduceActionObject()
@@ -120,6 +121,12 @@ std::shared_ptr<ecore::EObject> ReduceActionObject::copy()
 	element->setThisReduceActionObjectPtr(element);
 	return element;
 }
+
+ReduceActionObject& ReduceActionObject::operator=(const ReduceActionObject & obj)
+{
+	return *this;
+}
+
 
 void ReduceActionObject::destroy()
 {	

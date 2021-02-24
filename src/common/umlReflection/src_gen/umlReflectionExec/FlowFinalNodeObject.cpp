@@ -83,6 +83,7 @@ FlowFinalNodeObject::FlowFinalNodeObject(std::shared_ptr<uml::FlowFinalNode> _el
 FlowFinalNodeObject::FlowFinalNodeObject(FlowFinalNodeObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 FlowFinalNodeObject::FlowFinalNodeObject()
@@ -100,6 +101,12 @@ std::shared_ptr<ecore::EObject> FlowFinalNodeObject::copy()
 	element->setThisFlowFinalNodeObjectPtr(element);
 	return element;
 }
+
+FlowFinalNodeObject& FlowFinalNodeObject::operator=(const FlowFinalNodeObject & obj)
+{
+	return *this;
+}
+
 
 void FlowFinalNodeObject::destroy()
 {	

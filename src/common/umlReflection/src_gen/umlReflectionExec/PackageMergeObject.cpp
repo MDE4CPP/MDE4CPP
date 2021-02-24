@@ -61,6 +61,7 @@ PackageMergeObject::PackageMergeObject(std::shared_ptr<uml::PackageMerge> _eleme
 PackageMergeObject::PackageMergeObject(PackageMergeObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 PackageMergeObject::PackageMergeObject()
@@ -78,6 +79,12 @@ std::shared_ptr<ecore::EObject> PackageMergeObject::copy()
 	element->setThisPackageMergeObjectPtr(element);
 	return element;
 }
+
+PackageMergeObject& PackageMergeObject::operator=(const PackageMergeObject & obj)
+{
+	return *this;
+}
+
 
 void PackageMergeObject::destroy()
 {	

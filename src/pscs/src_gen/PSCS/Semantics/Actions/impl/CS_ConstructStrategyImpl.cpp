@@ -58,6 +58,9 @@ using namespace PSCS::Semantics::Actions;
 //*********************************
 CS_ConstructStrategyImpl::CS_ConstructStrategyImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 CS_ConstructStrategyImpl::~CS_ConstructStrategyImpl()
@@ -71,6 +74,18 @@ CS_ConstructStrategyImpl::~CS_ConstructStrategyImpl()
 
 CS_ConstructStrategyImpl::CS_ConstructStrategyImpl(const CS_ConstructStrategyImpl & obj):CS_ConstructStrategyImpl()
 {
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  CS_ConstructStrategyImpl::copy() const
+{
+	std::shared_ptr<CS_ConstructStrategyImpl> element(new CS_ConstructStrategyImpl(*this));
+	element->setThisCS_ConstructStrategyPtr(element);
+	return element;
+}
+
+CS_ConstructStrategyImpl& CS_ConstructStrategyImpl::operator=(const CS_ConstructStrategyImpl & obj)
+{
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy CS_ConstructStrategy "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -82,13 +97,8 @@ CS_ConstructStrategyImpl::CS_ConstructStrategyImpl(const CS_ConstructStrategyImp
 	//Clone references with containment (deep copy)
 
 
-}
 
-std::shared_ptr<ecore::EObject>  CS_ConstructStrategyImpl::copy() const
-{
-	std::shared_ptr<CS_ConstructStrategyImpl> element(new CS_ConstructStrategyImpl(*this));
-	element->setThisCS_ConstructStrategyPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> CS_ConstructStrategyImpl::eStaticClass() const

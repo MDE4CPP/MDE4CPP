@@ -55,7 +55,6 @@ namespace fUML::Semantics::Loci
 	{
 		public:
  			FirstChoiceStrategy(const FirstChoiceStrategy &) {}
-			FirstChoiceStrategy& operator=(FirstChoiceStrategy const&) = delete;
 
 		protected:
 			FirstChoiceStrategy(){}

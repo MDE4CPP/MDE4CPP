@@ -105,7 +105,6 @@ namespace uml
 	{
 		public:
  			Constraint(const Constraint &) {}
-			Constraint& operator=(Constraint const&) = delete;
 
 		protected:
 			Constraint(){}

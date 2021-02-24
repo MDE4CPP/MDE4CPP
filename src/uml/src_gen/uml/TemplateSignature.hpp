@@ -78,7 +78,6 @@ namespace uml
 	{
 		public:
  			TemplateSignature(const TemplateSignature &) {}
-			TemplateSignature& operator=(TemplateSignature const&) = delete;
 
 		protected:
 			TemplateSignature(){}

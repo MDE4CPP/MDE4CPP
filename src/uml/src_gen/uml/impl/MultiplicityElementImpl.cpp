@@ -56,6 +56,9 @@ using namespace uml;
 //*********************************
 MultiplicityElementImpl::MultiplicityElementImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 MultiplicityElementImpl::~MultiplicityElementImpl()
@@ -74,6 +77,18 @@ MultiplicityElementImpl::MultiplicityElementImpl(std::weak_ptr<uml::Element > pa
 
 
 MultiplicityElementImpl::MultiplicityElementImpl(const MultiplicityElementImpl & obj):MultiplicityElementImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  MultiplicityElementImpl::copy() const
+{
+	std::shared_ptr<MultiplicityElementImpl> element(new MultiplicityElementImpl(*this));
+	element->setThisMultiplicityElementPtr(element);
+	return element;
+}
+
+MultiplicityElementImpl& MultiplicityElementImpl::operator=(const MultiplicityElementImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -117,13 +132,8 @@ MultiplicityElementImpl::MultiplicityElementImpl(const MultiplicityElementImpl &
 	
 
 	
-}
 
-std::shared_ptr<ecore::EObject>  MultiplicityElementImpl::copy() const
-{
-	std::shared_ptr<MultiplicityElementImpl> element(new MultiplicityElementImpl(*this));
-	element->setThisMultiplicityElementPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> MultiplicityElementImpl::eStaticClass() const

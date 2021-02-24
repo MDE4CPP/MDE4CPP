@@ -70,6 +70,9 @@ using namespace uml;
 //*********************************
 ExpressionImpl::ExpressionImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ExpressionImpl::~ExpressionImpl()
@@ -128,6 +131,18 @@ ExpressionImpl::ExpressionImpl(std::weak_ptr<uml::ValueSpecificationAction > par
 
 
 ExpressionImpl::ExpressionImpl(const ExpressionImpl & obj):ExpressionImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ExpressionImpl::copy() const
+{
+	std::shared_ptr<ExpressionImpl> element(new ExpressionImpl(*this));
+	element->setThisExpressionPtr(element);
+	return element;
+}
+
+ExpressionImpl& ExpressionImpl::operator=(const ExpressionImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -192,13 +207,8 @@ ExpressionImpl::ExpressionImpl(const ExpressionImpl & obj):ExpressionImpl()
 		std::cout << "Initialising value Subset: " << "m_operand - Subset<uml::ValueSpecification, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
 	
-}
 
-std::shared_ptr<ecore::EObject>  ExpressionImpl::copy() const
-{
-	std::shared_ptr<ExpressionImpl> element(new ExpressionImpl(*this));
-	element->setThisExpressionPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ExpressionImpl::eStaticClass() const

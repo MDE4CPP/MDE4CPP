@@ -97,6 +97,9 @@ using namespace uml;
 //*********************************
 StructuredActivityNodeImpl::StructuredActivityNodeImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 StructuredActivityNodeImpl::~StructuredActivityNodeImpl()
@@ -160,6 +163,18 @@ StructuredActivityNodeImpl::StructuredActivityNodeImpl(std::weak_ptr<uml::Activi
 
 
 StructuredActivityNodeImpl::StructuredActivityNodeImpl(const StructuredActivityNodeImpl & obj):StructuredActivityNodeImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  StructuredActivityNodeImpl::copy() const
+{
+	std::shared_ptr<StructuredActivityNodeImpl> element(new StructuredActivityNodeImpl(*this));
+	element->setThisStructuredActivityNodePtr(element);
+	return element;
+}
+
+StructuredActivityNodeImpl& StructuredActivityNodeImpl::operator=(const StructuredActivityNodeImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -388,13 +403,8 @@ StructuredActivityNodeImpl::StructuredActivityNodeImpl(const StructuredActivityN
 		std::cout << "Initialising value Subset: " << "m_variable - Subset<uml::Variable, uml::NamedElement >(getOwnedMember())" << std::endl;
 	#endif
 	
-}
 
-std::shared_ptr<ecore::EObject>  StructuredActivityNodeImpl::copy() const
-{
-	std::shared_ptr<StructuredActivityNodeImpl> element(new StructuredActivityNodeImpl(*this));
-	element->setThisStructuredActivityNodePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> StructuredActivityNodeImpl::eStaticClass() const

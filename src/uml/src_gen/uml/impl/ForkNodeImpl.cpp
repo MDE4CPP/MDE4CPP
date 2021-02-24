@@ -79,6 +79,9 @@ using namespace uml;
 //*********************************
 ForkNodeImpl::ForkNodeImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ForkNodeImpl::~ForkNodeImpl()
@@ -121,6 +124,18 @@ ForkNodeImpl::ForkNodeImpl(std::weak_ptr<uml::Element > par_owner)
 
 
 ForkNodeImpl::ForkNodeImpl(const ForkNodeImpl & obj):ForkNodeImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ForkNodeImpl::copy() const
+{
+	std::shared_ptr<ForkNodeImpl> element(new ForkNodeImpl(*this));
+	element->setThisForkNodePtr(element);
+	return element;
+}
+
+ForkNodeImpl& ForkNodeImpl::operator=(const ForkNodeImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -202,13 +217,8 @@ ForkNodeImpl::ForkNodeImpl(const ForkNodeImpl & obj):ForkNodeImpl()
 		std::cout << "Copying the Subset: " << "m_redefinedNode" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  ForkNodeImpl::copy() const
-{
-	std::shared_ptr<ForkNodeImpl> element(new ForkNodeImpl(*this));
-	element->setThisForkNodePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ForkNodeImpl::eStaticClass() const

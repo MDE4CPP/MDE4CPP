@@ -22,10 +22,8 @@ namespace uml
 	{
 		public: 
 			ReclassifyObjectActionImpl(const ReclassifyObjectActionImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			ReclassifyObjectActionImpl& operator=(ReclassifyObjectActionImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			ReclassifyObjectActionImpl& operator=(ReclassifyObjectActionImpl const&);
 
 		protected:
 			friend class umlFactoryImpl;

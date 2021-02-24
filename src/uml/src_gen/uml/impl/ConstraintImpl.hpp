@@ -22,10 +22,8 @@ namespace uml
 	{
 		public: 
 			ConstraintImpl(const ConstraintImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			ConstraintImpl& operator=(ConstraintImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			ConstraintImpl& operator=(ConstraintImpl const&);
 
 		protected:
 			friend class umlFactoryImpl;

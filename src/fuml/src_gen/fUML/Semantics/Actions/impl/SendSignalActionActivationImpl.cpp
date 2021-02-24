@@ -69,6 +69,9 @@ using namespace fUML::Semantics::Actions;
 //*********************************
 SendSignalActionActivationImpl::SendSignalActionActivationImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 SendSignalActionActivationImpl::~SendSignalActionActivationImpl()
@@ -87,6 +90,18 @@ SendSignalActionActivationImpl::SendSignalActionActivationImpl(std::weak_ptr<fUM
 
 
 SendSignalActionActivationImpl::SendSignalActionActivationImpl(const SendSignalActionActivationImpl & obj):SendSignalActionActivationImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  SendSignalActionActivationImpl::copy() const
+{
+	std::shared_ptr<SendSignalActionActivationImpl> element(new SendSignalActionActivationImpl(*this));
+	element->setThisSendSignalActionActivationPtr(element);
+	return element;
+}
+
+SendSignalActionActivationImpl& SendSignalActionActivationImpl::operator=(const SendSignalActionActivationImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -140,13 +155,8 @@ SendSignalActionActivationImpl::SendSignalActionActivationImpl(const SendSignalA
 		std::cout << "Copying the Subset: " << "m_outputPinActivation" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  SendSignalActionActivationImpl::copy() const
-{
-	std::shared_ptr<SendSignalActionActivationImpl> element(new SendSignalActionActivationImpl(*this));
-	element->setThisSendSignalActionActivationPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> SendSignalActionActivationImpl::eStaticClass() const

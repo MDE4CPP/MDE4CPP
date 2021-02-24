@@ -59,6 +59,7 @@ ExceptionHandlerObject::ExceptionHandlerObject(std::shared_ptr<uml::ExceptionHan
 ExceptionHandlerObject::ExceptionHandlerObject(ExceptionHandlerObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ExceptionHandlerObject::ExceptionHandlerObject()
@@ -76,6 +77,12 @@ std::shared_ptr<ecore::EObject> ExceptionHandlerObject::copy()
 	element->setThisExceptionHandlerObjectPtr(element);
 	return element;
 }
+
+ExceptionHandlerObject& ExceptionHandlerObject::operator=(const ExceptionHandlerObject & obj)
+{
+	return *this;
+}
+
 
 void ExceptionHandlerObject::destroy()
 {	

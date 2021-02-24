@@ -68,6 +68,9 @@ using namespace uml;
 //*********************************
 VertexImpl::VertexImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 VertexImpl::~VertexImpl()
@@ -102,6 +105,18 @@ VertexImpl::VertexImpl(std::weak_ptr<uml::Element > par_owner)
 
 
 VertexImpl::VertexImpl(const VertexImpl & obj):VertexImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  VertexImpl::copy() const
+{
+	std::shared_ptr<VertexImpl> element(new VertexImpl(*this));
+	element->setThisVertexPtr(element);
+	return element;
+}
+
+VertexImpl& VertexImpl::operator=(const VertexImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -147,13 +162,8 @@ VertexImpl::VertexImpl(const VertexImpl & obj):VertexImpl()
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  VertexImpl::copy() const
-{
-	std::shared_ptr<VertexImpl> element(new VertexImpl(*this));
-	element->setThisVertexPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> VertexImpl::eStaticClass() const

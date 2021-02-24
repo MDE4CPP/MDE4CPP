@@ -23,10 +23,8 @@ namespace fUML::Semantics::Actions
 	{
 		public: 
 			ReclassifyObjectActionActivationImpl(const ReclassifyObjectActionActivationImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			ReclassifyObjectActionActivationImpl& operator=(ReclassifyObjectActionActivationImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			ReclassifyObjectActionActivationImpl& operator=(ReclassifyObjectActionActivationImpl const&);
 
 		protected:
 			friend class fUML::Semantics::Actions::ActionsFactoryImpl;

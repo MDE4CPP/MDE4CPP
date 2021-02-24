@@ -87,6 +87,9 @@ using namespace uml;
 //*********************************
 DestroyObjectActionImpl::DestroyObjectActionImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 DestroyObjectActionImpl::~DestroyObjectActionImpl()
@@ -129,6 +132,18 @@ DestroyObjectActionImpl::DestroyObjectActionImpl(std::weak_ptr<uml::Element > pa
 
 
 DestroyObjectActionImpl::DestroyObjectActionImpl(const DestroyObjectActionImpl & obj):DestroyObjectActionImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  DestroyObjectActionImpl::copy() const
+{
+	std::shared_ptr<DestroyObjectActionImpl> element(new DestroyObjectActionImpl(*this));
+	element->setThisDestroyObjectActionPtr(element);
+	return element;
+}
+
+DestroyObjectActionImpl& DestroyObjectActionImpl::operator=(const DestroyObjectActionImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -247,13 +262,8 @@ DestroyObjectActionImpl::DestroyObjectActionImpl(const DestroyObjectActionImpl &
 	#endif
 
 	
-}
 
-std::shared_ptr<ecore::EObject>  DestroyObjectActionImpl::copy() const
-{
-	std::shared_ptr<DestroyObjectActionImpl> element(new DestroyObjectActionImpl(*this));
-	element->setThisDestroyObjectActionPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> DestroyObjectActionImpl::eStaticClass() const

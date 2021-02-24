@@ -67,6 +67,9 @@ using namespace uml;
 //*********************************
 TimeEventImpl::TimeEventImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 TimeEventImpl::~TimeEventImpl()
@@ -109,6 +112,18 @@ TimeEventImpl::TimeEventImpl(std::weak_ptr<uml::TemplateParameter > par_owningTe
 
 
 TimeEventImpl::TimeEventImpl(const TimeEventImpl & obj):TimeEventImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  TimeEventImpl::copy() const
+{
+	std::shared_ptr<TimeEventImpl> element(new TimeEventImpl(*this));
+	element->setThisTimeEventPtr(element);
+	return element;
+}
+
+TimeEventImpl& TimeEventImpl::operator=(const TimeEventImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -161,13 +176,8 @@ TimeEventImpl::TimeEventImpl(const TimeEventImpl & obj):TimeEventImpl()
 	#endif
 
 	
-}
 
-std::shared_ptr<ecore::EObject>  TimeEventImpl::copy() const
-{
-	std::shared_ptr<TimeEventImpl> element(new TimeEventImpl(*this));
-	element->setThisTimeEventPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> TimeEventImpl::eStaticClass() const

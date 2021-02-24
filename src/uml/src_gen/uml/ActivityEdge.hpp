@@ -134,7 +134,6 @@ namespace uml
 	{
 		public:
  			ActivityEdge(const ActivityEdge &) {}
-			ActivityEdge& operator=(ActivityEdge const&) = delete;
 
 		protected:
 			ActivityEdge(){}

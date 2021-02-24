@@ -67,6 +67,9 @@ using namespace uml;
 //*********************************
 PackageableElementImpl::PackageableElementImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 PackageableElementImpl::~PackageableElementImpl()
@@ -110,6 +113,18 @@ PackageableElementImpl::PackageableElementImpl(std::weak_ptr<uml::TemplateParame
 
 PackageableElementImpl::PackageableElementImpl(const PackageableElementImpl & obj):PackageableElementImpl()
 {
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  PackageableElementImpl::copy() const
+{
+	std::shared_ptr<PackageableElementImpl> element(new PackageableElementImpl(*this));
+	element->setThisPackageableElementPtr(element);
+	return element;
+}
+
+PackageableElementImpl& PackageableElementImpl::operator=(const PackageableElementImpl & obj)
+{
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy PackageableElement "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -152,13 +167,8 @@ PackageableElementImpl::PackageableElementImpl(const PackageableElementImpl & ob
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  PackageableElementImpl::copy() const
-{
-	std::shared_ptr<PackageableElementImpl> element(new PackageableElementImpl(*this));
-	element->setThisPackageableElementPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> PackageableElementImpl::eStaticClass() const

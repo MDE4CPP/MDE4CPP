@@ -123,7 +123,6 @@ namespace uml
 	{
 		public:
  			OpaqueExpression(const OpaqueExpression &) {}
-			OpaqueExpression& operator=(OpaqueExpression const&) = delete;
 
 		protected:
 			OpaqueExpression(){}

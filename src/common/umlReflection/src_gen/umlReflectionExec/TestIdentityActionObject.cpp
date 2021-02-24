@@ -102,6 +102,7 @@ TestIdentityActionObject::TestIdentityActionObject(std::shared_ptr<uml::TestIden
 TestIdentityActionObject::TestIdentityActionObject(TestIdentityActionObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 TestIdentityActionObject::TestIdentityActionObject()
@@ -119,6 +120,12 @@ std::shared_ptr<ecore::EObject> TestIdentityActionObject::copy()
 	element->setThisTestIdentityActionObjectPtr(element);
 	return element;
 }
+
+TestIdentityActionObject& TestIdentityActionObject::operator=(const TestIdentityActionObject & obj)
+{
+	return *this;
+}
+
 
 void TestIdentityActionObject::destroy()
 {	

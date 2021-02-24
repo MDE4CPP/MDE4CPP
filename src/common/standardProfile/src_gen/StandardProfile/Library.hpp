@@ -24,9 +24,6 @@ namespace uml
 namespace StandardProfile
 {
 	class Library:virtual public File	{
-		private:    
-			Library(const Library& that) = delete;
-
 		protected:
 			Library(){}
 

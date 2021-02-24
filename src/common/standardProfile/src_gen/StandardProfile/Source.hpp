@@ -24,9 +24,6 @@ namespace uml
 namespace StandardProfile
 {
 	class Source:virtual public File	{
-		private:    
-			Source(const Source& that) = delete;
-
 		protected:
 			Source(){}
 

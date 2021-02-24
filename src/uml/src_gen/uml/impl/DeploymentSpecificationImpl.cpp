@@ -103,6 +103,9 @@ using namespace uml;
 //*********************************
 DeploymentSpecificationImpl::DeploymentSpecificationImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 DeploymentSpecificationImpl::~DeploymentSpecificationImpl()
@@ -166,6 +169,18 @@ DeploymentSpecificationImpl::DeploymentSpecificationImpl(std::weak_ptr<uml::Temp
 
 
 DeploymentSpecificationImpl::DeploymentSpecificationImpl(const DeploymentSpecificationImpl & obj):DeploymentSpecificationImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  DeploymentSpecificationImpl::copy() const
+{
+	std::shared_ptr<DeploymentSpecificationImpl> element(new DeploymentSpecificationImpl(*this));
+	element->setThisDeploymentSpecificationPtr(element);
+	return element;
+}
+
+DeploymentSpecificationImpl& DeploymentSpecificationImpl::operator=(const DeploymentSpecificationImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -371,13 +386,8 @@ DeploymentSpecificationImpl::DeploymentSpecificationImpl(const DeploymentSpecifi
 		std::cout << "Copying the Subset: " << "m_templateBinding" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  DeploymentSpecificationImpl::copy() const
-{
-	std::shared_ptr<DeploymentSpecificationImpl> element(new DeploymentSpecificationImpl(*this));
-	element->setThisDeploymentSpecificationPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> DeploymentSpecificationImpl::eStaticClass() const

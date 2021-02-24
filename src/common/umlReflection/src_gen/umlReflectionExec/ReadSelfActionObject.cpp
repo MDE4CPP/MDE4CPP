@@ -98,6 +98,7 @@ ReadSelfActionObject::ReadSelfActionObject(std::shared_ptr<uml::ReadSelfAction> 
 ReadSelfActionObject::ReadSelfActionObject(ReadSelfActionObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ReadSelfActionObject::ReadSelfActionObject()
@@ -115,6 +116,12 @@ std::shared_ptr<ecore::EObject> ReadSelfActionObject::copy()
 	element->setThisReadSelfActionObjectPtr(element);
 	return element;
 }
+
+ReadSelfActionObject& ReadSelfActionObject::operator=(const ReadSelfActionObject & obj)
+{
+	return *this;
+}
+
 
 void ReadSelfActionObject::destroy()
 {	

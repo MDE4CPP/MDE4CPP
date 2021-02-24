@@ -154,7 +154,6 @@ namespace uml
 	{
 		public:
  			ReadSelfAction(const ReadSelfAction &) {}
-			ReadSelfAction& operator=(ReadSelfAction const&) = delete;
 
 		protected:
 			ReadSelfAction(){}

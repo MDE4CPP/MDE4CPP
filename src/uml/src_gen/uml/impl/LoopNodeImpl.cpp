@@ -97,6 +97,9 @@ using namespace uml;
 //*********************************
 LoopNodeImpl::LoopNodeImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 LoopNodeImpl::~LoopNodeImpl()
@@ -160,6 +163,18 @@ LoopNodeImpl::LoopNodeImpl(std::weak_ptr<uml::ActivityGroup > par_superGroup)
 
 
 LoopNodeImpl::LoopNodeImpl(const LoopNodeImpl & obj):LoopNodeImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  LoopNodeImpl::copy() const
+{
+	std::shared_ptr<LoopNodeImpl> element(new LoopNodeImpl(*this));
+	element->setThisLoopNodePtr(element);
+	return element;
+}
+
+LoopNodeImpl& LoopNodeImpl::operator=(const LoopNodeImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -403,13 +418,8 @@ LoopNodeImpl::LoopNodeImpl(const LoopNodeImpl & obj):LoopNodeImpl()
 	
 
 	
-}
 
-std::shared_ptr<ecore::EObject>  LoopNodeImpl::copy() const
-{
-	std::shared_ptr<LoopNodeImpl> element(new LoopNodeImpl(*this));
-	element->setThisLoopNodePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> LoopNodeImpl::eStaticClass() const

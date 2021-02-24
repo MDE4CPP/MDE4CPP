@@ -23,10 +23,8 @@ namespace PSCS::Semantics::Loci
 	{
 		public: 
 			CS_LocusImpl(const CS_LocusImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			CS_LocusImpl& operator=(CS_LocusImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			CS_LocusImpl& operator=(CS_LocusImpl const&);
 
 		protected:
 			friend class PSCS::Semantics::Loci::LociFactoryImpl;

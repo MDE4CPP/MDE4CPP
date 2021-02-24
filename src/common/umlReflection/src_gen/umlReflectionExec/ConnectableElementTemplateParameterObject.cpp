@@ -63,6 +63,7 @@ ConnectableElementTemplateParameterObject::ConnectableElementTemplateParameterOb
 ConnectableElementTemplateParameterObject::ConnectableElementTemplateParameterObject(ConnectableElementTemplateParameterObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ConnectableElementTemplateParameterObject::ConnectableElementTemplateParameterObject()
@@ -80,6 +81,12 @@ std::shared_ptr<ecore::EObject> ConnectableElementTemplateParameterObject::copy(
 	element->setThisConnectableElementTemplateParameterObjectPtr(element);
 	return element;
 }
+
+ConnectableElementTemplateParameterObject& ConnectableElementTemplateParameterObject::operator=(const ConnectableElementTemplateParameterObject & obj)
+{
+	return *this;
+}
+
 
 void ConnectableElementTemplateParameterObject::destroy()
 {	

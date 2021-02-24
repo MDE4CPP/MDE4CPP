@@ -77,6 +77,9 @@ using namespace fUML::Semantics::StructuredClassifiers;
 //*********************************
 ReferenceImpl::ReferenceImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ReferenceImpl::~ReferenceImpl()
@@ -89,6 +92,18 @@ ReferenceImpl::~ReferenceImpl()
 
 
 ReferenceImpl::ReferenceImpl(const ReferenceImpl & obj):ReferenceImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ReferenceImpl::copy() const
+{
+	std::shared_ptr<ReferenceImpl> element(new ReferenceImpl(*this));
+	element->setThisReferencePtr(element);
+	return element;
+}
+
+ReferenceImpl& ReferenceImpl::operator=(const ReferenceImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -103,13 +118,8 @@ ReferenceImpl::ReferenceImpl(const ReferenceImpl & obj):ReferenceImpl()
 	//Clone references with containment (deep copy)
 
 
-}
 
-std::shared_ptr<ecore::EObject>  ReferenceImpl::copy() const
-{
-	std::shared_ptr<ReferenceImpl> element(new ReferenceImpl(*this));
-	element->setThisReferencePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ReferenceImpl::eStaticClass() const

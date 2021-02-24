@@ -95,7 +95,6 @@ namespace fUML::Semantics::Actions
 	{
 		public:
  			DestroyLinkActionActivation(const DestroyLinkActionActivation &) {}
-			DestroyLinkActionActivation& operator=(DestroyLinkActionActivation const&) = delete;
 
 		protected:
 			DestroyLinkActionActivation(){}

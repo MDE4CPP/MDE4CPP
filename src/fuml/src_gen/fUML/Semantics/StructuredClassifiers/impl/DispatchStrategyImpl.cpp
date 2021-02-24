@@ -62,6 +62,9 @@ using namespace fUML::Semantics::StructuredClassifiers;
 //*********************************
 DispatchStrategyImpl::DispatchStrategyImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 DispatchStrategyImpl::~DispatchStrategyImpl()
@@ -75,6 +78,18 @@ DispatchStrategyImpl::~DispatchStrategyImpl()
 
 DispatchStrategyImpl::DispatchStrategyImpl(const DispatchStrategyImpl & obj):DispatchStrategyImpl()
 {
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  DispatchStrategyImpl::copy() const
+{
+	std::shared_ptr<DispatchStrategyImpl> element(new DispatchStrategyImpl(*this));
+	element->setThisDispatchStrategyPtr(element);
+	return element;
+}
+
+DispatchStrategyImpl& DispatchStrategyImpl::operator=(const DispatchStrategyImpl & obj)
+{
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy DispatchStrategy "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -86,13 +101,8 @@ DispatchStrategyImpl::DispatchStrategyImpl(const DispatchStrategyImpl & obj):Dis
 	//Clone references with containment (deep copy)
 
 
-}
 
-std::shared_ptr<ecore::EObject>  DispatchStrategyImpl::copy() const
-{
-	std::shared_ptr<DispatchStrategyImpl> element(new DispatchStrategyImpl(*this));
-	element->setThisDispatchStrategyPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> DispatchStrategyImpl::eStaticClass() const

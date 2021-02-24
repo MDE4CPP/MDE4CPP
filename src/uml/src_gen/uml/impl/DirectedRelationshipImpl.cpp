@@ -54,6 +54,9 @@ using namespace uml;
 //*********************************
 DirectedRelationshipImpl::DirectedRelationshipImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 DirectedRelationshipImpl::~DirectedRelationshipImpl()
@@ -72,6 +75,18 @@ DirectedRelationshipImpl::DirectedRelationshipImpl(std::weak_ptr<uml::Element > 
 
 
 DirectedRelationshipImpl::DirectedRelationshipImpl(const DirectedRelationshipImpl & obj):DirectedRelationshipImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  DirectedRelationshipImpl::copy() const
+{
+	std::shared_ptr<DirectedRelationshipImpl> element(new DirectedRelationshipImpl(*this));
+	element->setThisDirectedRelationshipPtr(element);
+	return element;
+}
+
+DirectedRelationshipImpl& DirectedRelationshipImpl::operator=(const DirectedRelationshipImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -97,13 +112,8 @@ DirectedRelationshipImpl::DirectedRelationshipImpl(const DirectedRelationshipImp
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  DirectedRelationshipImpl::copy() const
-{
-	std::shared_ptr<DirectedRelationshipImpl> element(new DirectedRelationshipImpl(*this));
-	element->setThisDirectedRelationshipPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> DirectedRelationshipImpl::eStaticClass() const

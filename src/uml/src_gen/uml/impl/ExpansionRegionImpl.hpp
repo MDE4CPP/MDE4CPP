@@ -22,10 +22,8 @@ namespace uml
 	{
 		public: 
 			ExpansionRegionImpl(const ExpansionRegionImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			ExpansionRegionImpl& operator=(ExpansionRegionImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			ExpansionRegionImpl& operator=(ExpansionRegionImpl const&);
 
 		protected:
 			friend class umlFactoryImpl;

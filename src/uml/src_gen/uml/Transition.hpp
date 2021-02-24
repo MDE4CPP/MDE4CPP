@@ -154,7 +154,6 @@ namespace uml
 	{
 		public:
  			Transition(const Transition &) {}
-			Transition& operator=(Transition const&) = delete;
 
 		protected:
 			Transition(){}

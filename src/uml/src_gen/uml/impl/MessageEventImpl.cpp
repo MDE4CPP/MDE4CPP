@@ -64,6 +64,9 @@ using namespace uml;
 //*********************************
 MessageEventImpl::MessageEventImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 MessageEventImpl::~MessageEventImpl()
@@ -107,6 +110,18 @@ MessageEventImpl::MessageEventImpl(std::weak_ptr<uml::TemplateParameter > par_ow
 
 MessageEventImpl::MessageEventImpl(const MessageEventImpl & obj):MessageEventImpl()
 {
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  MessageEventImpl::copy() const
+{
+	std::shared_ptr<MessageEventImpl> element(new MessageEventImpl(*this));
+	element->setThisMessageEventPtr(element);
+	return element;
+}
+
+MessageEventImpl& MessageEventImpl::operator=(const MessageEventImpl & obj)
+{
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy MessageEvent "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -149,13 +164,8 @@ MessageEventImpl::MessageEventImpl(const MessageEventImpl & obj):MessageEventImp
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  MessageEventImpl::copy() const
-{
-	std::shared_ptr<MessageEventImpl> element(new MessageEventImpl(*this));
-	element->setThisMessageEventPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> MessageEventImpl::eStaticClass() const

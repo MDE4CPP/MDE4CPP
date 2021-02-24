@@ -115,7 +115,6 @@ namespace uml
 	{
 		public:
  			InstanceValue(const InstanceValue &) {}
-			InstanceValue& operator=(InstanceValue const&) = delete;
 
 		protected:
 			InstanceValue(){}

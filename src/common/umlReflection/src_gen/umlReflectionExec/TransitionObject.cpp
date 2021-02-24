@@ -97,6 +97,7 @@ TransitionObject::TransitionObject(std::shared_ptr<uml::Transition> _element):
 TransitionObject::TransitionObject(TransitionObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 TransitionObject::TransitionObject()
@@ -114,6 +115,12 @@ std::shared_ptr<ecore::EObject> TransitionObject::copy()
 	element->setThisTransitionObjectPtr(element);
 	return element;
 }
+
+TransitionObject& TransitionObject::operator=(const TransitionObject & obj)
+{
+	return *this;
+}
+
 
 void TransitionObject::destroy()
 {	

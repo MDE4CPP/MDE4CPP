@@ -22,10 +22,8 @@ namespace uml
 	{
 		public: 
 			DecisionNodeImpl(const DecisionNodeImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			DecisionNodeImpl& operator=(DecisionNodeImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			DecisionNodeImpl& operator=(DecisionNodeImpl const&);
 
 		protected:
 			friend class umlFactoryImpl;

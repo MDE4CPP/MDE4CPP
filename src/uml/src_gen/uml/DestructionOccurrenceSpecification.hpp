@@ -113,7 +113,6 @@ namespace uml
 	{
 		public:
  			DestructionOccurrenceSpecification(const DestructionOccurrenceSpecification &) {}
-			DestructionOccurrenceSpecification& operator=(DestructionOccurrenceSpecification const&) = delete;
 
 		protected:
 			DestructionOccurrenceSpecification(){}

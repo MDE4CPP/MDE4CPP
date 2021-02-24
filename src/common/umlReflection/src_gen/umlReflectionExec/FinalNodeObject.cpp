@@ -83,6 +83,7 @@ FinalNodeObject::FinalNodeObject(std::shared_ptr<uml::FinalNode> _element):
 FinalNodeObject::FinalNodeObject(FinalNodeObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 FinalNodeObject::FinalNodeObject()
@@ -100,6 +101,12 @@ std::shared_ptr<ecore::EObject> FinalNodeObject::copy()
 	element->setThisFinalNodeObjectPtr(element);
 	return element;
 }
+
+FinalNodeObject& FinalNodeObject::operator=(const FinalNodeObject & obj)
+{
+	return *this;
+}
+
 
 void FinalNodeObject::destroy()
 {	

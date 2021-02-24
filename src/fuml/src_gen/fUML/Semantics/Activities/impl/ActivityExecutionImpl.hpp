@@ -23,10 +23,8 @@ namespace fUML::Semantics::Activities
 	{
 		public: 
 			ActivityExecutionImpl(const ActivityExecutionImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			ActivityExecutionImpl& operator=(ActivityExecutionImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			ActivityExecutionImpl& operator=(ActivityExecutionImpl const&);
 
 		protected:
 			friend class fUML::Semantics::Activities::ActivitiesFactoryImpl;

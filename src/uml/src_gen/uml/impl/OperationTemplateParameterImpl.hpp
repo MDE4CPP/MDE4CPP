@@ -22,10 +22,8 @@ namespace uml
 	{
 		public: 
 			OperationTemplateParameterImpl(const OperationTemplateParameterImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			OperationTemplateParameterImpl& operator=(OperationTemplateParameterImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			OperationTemplateParameterImpl& operator=(OperationTemplateParameterImpl const&);
 
 		protected:
 			friend class umlFactoryImpl;

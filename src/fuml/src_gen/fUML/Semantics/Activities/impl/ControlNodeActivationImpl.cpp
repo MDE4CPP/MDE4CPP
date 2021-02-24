@@ -61,6 +61,9 @@ using namespace fUML::Semantics::Activities;
 //*********************************
 ControlNodeActivationImpl::ControlNodeActivationImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ControlNodeActivationImpl::~ControlNodeActivationImpl()
@@ -79,6 +82,18 @@ ControlNodeActivationImpl::ControlNodeActivationImpl(std::weak_ptr<fUML::Semanti
 
 
 ControlNodeActivationImpl::ControlNodeActivationImpl(const ControlNodeActivationImpl & obj):ControlNodeActivationImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ControlNodeActivationImpl::copy() const
+{
+	std::shared_ptr<ControlNodeActivationImpl> element(new ControlNodeActivationImpl(*this));
+	element->setThisControlNodeActivationPtr(element);
+	return element;
+}
+
+ControlNodeActivationImpl& ControlNodeActivationImpl::operator=(const ControlNodeActivationImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -110,13 +125,8 @@ ControlNodeActivationImpl::ControlNodeActivationImpl(const ControlNodeActivation
 		std::cout << "Copying the Subset: " << "m_heldTokens" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  ControlNodeActivationImpl::copy() const
-{
-	std::shared_ptr<ControlNodeActivationImpl> element(new ControlNodeActivationImpl(*this));
-	element->setThisControlNodeActivationPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ControlNodeActivationImpl::eStaticClass() const

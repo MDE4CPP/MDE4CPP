@@ -22,10 +22,8 @@ namespace uml
 	{
 		public: 
 			ProfileImpl(const ProfileImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			ProfileImpl& operator=(ProfileImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			ProfileImpl& operator=(ProfileImpl const&);
 
 		protected:
 			friend class umlFactoryImpl;

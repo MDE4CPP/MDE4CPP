@@ -85,7 +85,6 @@ namespace PSCS::Semantics::CommonBehavior
 	{
 		public:
  			CS_EventOccurrence(const CS_EventOccurrence &) {}
-			CS_EventOccurrence& operator=(CS_EventOccurrence const&) = delete;
 
 		protected:
 			CS_EventOccurrence(){}

@@ -61,6 +61,9 @@ using namespace fUML::Semantics::Values;
 //*********************************
 LiteralBooleanEvaluationImpl::LiteralBooleanEvaluationImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 LiteralBooleanEvaluationImpl::~LiteralBooleanEvaluationImpl()
@@ -73,6 +76,18 @@ LiteralBooleanEvaluationImpl::~LiteralBooleanEvaluationImpl()
 
 
 LiteralBooleanEvaluationImpl::LiteralBooleanEvaluationImpl(const LiteralBooleanEvaluationImpl & obj):LiteralBooleanEvaluationImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  LiteralBooleanEvaluationImpl::copy() const
+{
+	std::shared_ptr<LiteralBooleanEvaluationImpl> element(new LiteralBooleanEvaluationImpl(*this));
+	element->setThisLiteralBooleanEvaluationPtr(element);
+	return element;
+}
+
+LiteralBooleanEvaluationImpl& LiteralBooleanEvaluationImpl::operator=(const LiteralBooleanEvaluationImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -89,13 +104,8 @@ LiteralBooleanEvaluationImpl::LiteralBooleanEvaluationImpl(const LiteralBooleanE
 	//Clone references with containment (deep copy)
 
 
-}
 
-std::shared_ptr<ecore::EObject>  LiteralBooleanEvaluationImpl::copy() const
-{
-	std::shared_ptr<LiteralBooleanEvaluationImpl> element(new LiteralBooleanEvaluationImpl(*this));
-	element->setThisLiteralBooleanEvaluationPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> LiteralBooleanEvaluationImpl::eStaticClass() const

@@ -23,10 +23,8 @@ namespace uml
 	{
 		public: 
 			VariableImpl(const VariableImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			VariableImpl& operator=(VariableImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			VariableImpl& operator=(VariableImpl const&);
 
 		protected:
 			friend class umlFactoryImpl;

@@ -112,7 +112,6 @@ namespace uml
 	{
 		public:
  			Deployment(const Deployment &) {}
-			Deployment& operator=(Deployment const&) = delete;
 
 		protected:
 			Deployment(){}

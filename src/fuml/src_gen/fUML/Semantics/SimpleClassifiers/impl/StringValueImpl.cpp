@@ -63,6 +63,9 @@ using namespace fUML::Semantics::SimpleClassifiers;
 //*********************************
 StringValueImpl::StringValueImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 StringValueImpl::~StringValueImpl()
@@ -75,6 +78,18 @@ StringValueImpl::~StringValueImpl()
 
 
 StringValueImpl::StringValueImpl(const StringValueImpl & obj):StringValueImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  StringValueImpl::copy() const
+{
+	std::shared_ptr<StringValueImpl> element(new StringValueImpl(*this));
+	element->setThisStringValuePtr(element);
+	return element;
+}
+
+StringValueImpl& StringValueImpl::operator=(const StringValueImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -90,13 +105,8 @@ StringValueImpl::StringValueImpl(const StringValueImpl & obj):StringValueImpl()
 	//Clone references with containment (deep copy)
 
 
-}
 
-std::shared_ptr<ecore::EObject>  StringValueImpl::copy() const
-{
-	std::shared_ptr<StringValueImpl> element(new StringValueImpl(*this));
-	element->setThisStringValuePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> StringValueImpl::eStaticClass() const

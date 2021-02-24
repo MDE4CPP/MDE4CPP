@@ -97,6 +97,9 @@ using namespace uml;
 //*********************************
 ConditionalNodeImpl::ConditionalNodeImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ConditionalNodeImpl::~ConditionalNodeImpl()
@@ -160,6 +163,18 @@ ConditionalNodeImpl::ConditionalNodeImpl(std::weak_ptr<uml::ActivityGroup > par_
 
 
 ConditionalNodeImpl::ConditionalNodeImpl(const ConditionalNodeImpl & obj):ConditionalNodeImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ConditionalNodeImpl::copy() const
+{
+	std::shared_ptr<ConditionalNodeImpl> element(new ConditionalNodeImpl(*this));
+	element->setThisConditionalNodePtr(element);
+	return element;
+}
+
+ConditionalNodeImpl& ConditionalNodeImpl::operator=(const ConditionalNodeImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -380,13 +395,8 @@ ConditionalNodeImpl::ConditionalNodeImpl(const ConditionalNodeImpl & obj):Condit
 	
 
 	
-}
 
-std::shared_ptr<ecore::EObject>  ConditionalNodeImpl::copy() const
-{
-	std::shared_ptr<ConditionalNodeImpl> element(new ConditionalNodeImpl(*this));
-	element->setThisConditionalNodePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ConditionalNodeImpl::eStaticClass() const

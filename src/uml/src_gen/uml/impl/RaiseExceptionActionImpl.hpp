@@ -22,10 +22,8 @@ namespace uml
 	{
 		public: 
 			RaiseExceptionActionImpl(const RaiseExceptionActionImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			RaiseExceptionActionImpl& operator=(RaiseExceptionActionImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			RaiseExceptionActionImpl& operator=(RaiseExceptionActionImpl const&);
 
 		protected:
 			friend class umlFactoryImpl;

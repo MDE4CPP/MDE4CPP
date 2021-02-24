@@ -89,6 +89,9 @@ using namespace uml;
 //*********************************
 ReadLinkObjectEndActionImpl::ReadLinkObjectEndActionImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ReadLinkObjectEndActionImpl::~ReadLinkObjectEndActionImpl()
@@ -131,6 +134,18 @@ ReadLinkObjectEndActionImpl::ReadLinkObjectEndActionImpl(std::weak_ptr<uml::Elem
 
 
 ReadLinkObjectEndActionImpl::ReadLinkObjectEndActionImpl(const ReadLinkObjectEndActionImpl & obj):ReadLinkObjectEndActionImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ReadLinkObjectEndActionImpl::copy() const
+{
+	std::shared_ptr<ReadLinkObjectEndActionImpl> element(new ReadLinkObjectEndActionImpl(*this));
+	element->setThisReadLinkObjectEndActionPtr(element);
+	return element;
+}
+
+ReadLinkObjectEndActionImpl& ReadLinkObjectEndActionImpl::operator=(const ReadLinkObjectEndActionImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -258,13 +273,8 @@ ReadLinkObjectEndActionImpl::ReadLinkObjectEndActionImpl(const ReadLinkObjectEnd
 	
 
 	
-}
 
-std::shared_ptr<ecore::EObject>  ReadLinkObjectEndActionImpl::copy() const
-{
-	std::shared_ptr<ReadLinkObjectEndActionImpl> element(new ReadLinkObjectEndActionImpl(*this));
-	element->setThisReadLinkObjectEndActionPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ReadLinkObjectEndActionImpl::eStaticClass() const

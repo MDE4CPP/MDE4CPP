@@ -130,6 +130,7 @@ ArtifactObject::ArtifactObject(std::shared_ptr<uml::Artifact> _element):
 ArtifactObject::ArtifactObject(ArtifactObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ArtifactObject::ArtifactObject()
@@ -147,6 +148,12 @@ std::shared_ptr<ecore::EObject> ArtifactObject::copy()
 	element->setThisArtifactObjectPtr(element);
 	return element;
 }
+
+ArtifactObject& ArtifactObject::operator=(const ArtifactObject & obj)
+{
+	return *this;
+}
+
 
 void ArtifactObject::destroy()
 {	

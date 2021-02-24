@@ -69,6 +69,9 @@ using namespace fUML::Semantics::Actions;
 //*********************************
 ReadLinkActionActivationImpl::ReadLinkActionActivationImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ReadLinkActionActivationImpl::~ReadLinkActionActivationImpl()
@@ -87,6 +90,18 @@ ReadLinkActionActivationImpl::ReadLinkActionActivationImpl(std::weak_ptr<fUML::S
 
 
 ReadLinkActionActivationImpl::ReadLinkActionActivationImpl(const ReadLinkActionActivationImpl & obj):ReadLinkActionActivationImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ReadLinkActionActivationImpl::copy() const
+{
+	std::shared_ptr<ReadLinkActionActivationImpl> element(new ReadLinkActionActivationImpl(*this));
+	element->setThisReadLinkActionActivationPtr(element);
+	return element;
+}
+
+ReadLinkActionActivationImpl& ReadLinkActionActivationImpl::operator=(const ReadLinkActionActivationImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -140,13 +155,8 @@ ReadLinkActionActivationImpl::ReadLinkActionActivationImpl(const ReadLinkActionA
 		std::cout << "Copying the Subset: " << "m_outputPinActivation" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  ReadLinkActionActivationImpl::copy() const
-{
-	std::shared_ptr<ReadLinkActionActivationImpl> element(new ReadLinkActionActivationImpl(*this));
-	element->setThisReadLinkActionActivationPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ReadLinkActionActivationImpl::eStaticClass() const

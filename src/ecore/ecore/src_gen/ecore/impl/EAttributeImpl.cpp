@@ -62,6 +62,9 @@ using namespace ecore;
 //*********************************
 EAttributeImpl::EAttributeImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 EAttributeImpl::~EAttributeImpl()
@@ -87,6 +90,18 @@ EAttributeImpl::EAttributeImpl(std::weak_ptr<ecore::EClass > par_eContainingClas
 
 
 EAttributeImpl::EAttributeImpl(const EAttributeImpl & obj):EAttributeImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  EAttributeImpl::copy() const
+{
+	std::shared_ptr<EAttributeImpl> element(new EAttributeImpl(*this));
+	element->setThisEAttributePtr(element);
+	return element;
+}
+
+EAttributeImpl& EAttributeImpl::operator=(const EAttributeImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -139,13 +154,8 @@ EAttributeImpl::EAttributeImpl(const EAttributeImpl & obj):EAttributeImpl()
 		std::cout << "Copying the Subset: " << "m_eGenericType" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  EAttributeImpl::copy() const
-{
-	std::shared_ptr<EAttributeImpl> element(new EAttributeImpl(*this));
-	element->setThisEAttributePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<EClass> EAttributeImpl::eStaticClass() const

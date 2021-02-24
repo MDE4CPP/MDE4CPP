@@ -88,6 +88,7 @@ InformationFlowObject::InformationFlowObject(std::shared_ptr<uml::InformationFlo
 InformationFlowObject::InformationFlowObject(InformationFlowObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 InformationFlowObject::InformationFlowObject()
@@ -105,6 +106,12 @@ std::shared_ptr<ecore::EObject> InformationFlowObject::copy()
 	element->setThisInformationFlowObjectPtr(element);
 	return element;
 }
+
+InformationFlowObject& InformationFlowObject::operator=(const InformationFlowObject & obj)
+{
+	return *this;
+}
+
 
 void InformationFlowObject::destroy()
 {	

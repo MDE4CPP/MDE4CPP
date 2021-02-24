@@ -79,6 +79,7 @@ DurationConstraintObject::DurationConstraintObject(std::shared_ptr<uml::Duration
 DurationConstraintObject::DurationConstraintObject(DurationConstraintObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 DurationConstraintObject::DurationConstraintObject()
@@ -96,6 +97,12 @@ std::shared_ptr<ecore::EObject> DurationConstraintObject::copy()
 	element->setThisDurationConstraintObjectPtr(element);
 	return element;
 }
+
+DurationConstraintObject& DurationConstraintObject::operator=(const DurationConstraintObject & obj)
+{
+	return *this;
+}
+
 
 void DurationConstraintObject::destroy()
 {	

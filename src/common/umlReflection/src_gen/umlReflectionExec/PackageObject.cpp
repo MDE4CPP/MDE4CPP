@@ -99,6 +99,7 @@ PackageObject::PackageObject(std::shared_ptr<uml::Package> _element):
 PackageObject::PackageObject(PackageObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 PackageObject::PackageObject()
@@ -116,6 +117,12 @@ std::shared_ptr<ecore::EObject> PackageObject::copy()
 	element->setThisPackageObjectPtr(element);
 	return element;
 }
+
+PackageObject& PackageObject::operator=(const PackageObject & obj)
+{
+	return *this;
+}
+
 
 void PackageObject::destroy()
 {	

@@ -78,6 +78,7 @@ ConsiderIgnoreFragmentObject::ConsiderIgnoreFragmentObject(std::shared_ptr<uml::
 ConsiderIgnoreFragmentObject::ConsiderIgnoreFragmentObject(ConsiderIgnoreFragmentObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ConsiderIgnoreFragmentObject::ConsiderIgnoreFragmentObject()
@@ -95,6 +96,12 @@ std::shared_ptr<ecore::EObject> ConsiderIgnoreFragmentObject::copy()
 	element->setThisConsiderIgnoreFragmentObjectPtr(element);
 	return element;
 }
+
+ConsiderIgnoreFragmentObject& ConsiderIgnoreFragmentObject::operator=(const ConsiderIgnoreFragmentObject & obj)
+{
+	return *this;
+}
+
 
 void ConsiderIgnoreFragmentObject::destroy()
 {	

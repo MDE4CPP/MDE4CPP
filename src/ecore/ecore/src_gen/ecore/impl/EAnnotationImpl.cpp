@@ -55,6 +55,9 @@ using namespace ecore;
 //*********************************
 EAnnotationImpl::EAnnotationImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 EAnnotationImpl::~EAnnotationImpl()
@@ -80,6 +83,18 @@ EAnnotationImpl::EAnnotationImpl(std::weak_ptr<ecore::EModelElement > par_eModel
 
 
 EAnnotationImpl::EAnnotationImpl(const EAnnotationImpl & obj):EAnnotationImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  EAnnotationImpl::copy() const
+{
+	std::shared_ptr<EAnnotationImpl> element(new EAnnotationImpl(*this));
+	element->setThisEAnnotationPtr(element);
+	return element;
+}
+
+EAnnotationImpl& EAnnotationImpl::operator=(const EAnnotationImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -133,13 +148,8 @@ EAnnotationImpl::EAnnotationImpl(const EAnnotationImpl & obj):EAnnotationImpl()
 	
 
 	
-}
 
-std::shared_ptr<ecore::EObject>  EAnnotationImpl::copy() const
-{
-	std::shared_ptr<EAnnotationImpl> element(new EAnnotationImpl(*this));
-	element->setThisEAnnotationPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<EClass> EAnnotationImpl::eStaticClass() const

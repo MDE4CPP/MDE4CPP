@@ -23,10 +23,8 @@ namespace fUML::Semantics::Actions
 	{
 		public: 
 			ClearStructuralFeatureActionActivationImpl(const ClearStructuralFeatureActionActivationImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			ClearStructuralFeatureActionActivationImpl& operator=(ClearStructuralFeatureActionActivationImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			ClearStructuralFeatureActionActivationImpl& operator=(ClearStructuralFeatureActionActivationImpl const&);
 
 		protected:
 			friend class fUML::Semantics::Actions::ActionsFactoryImpl;

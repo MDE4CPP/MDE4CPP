@@ -80,6 +80,7 @@ PartDecompositionObject::PartDecompositionObject(std::shared_ptr<uml::PartDecomp
 PartDecompositionObject::PartDecompositionObject(PartDecompositionObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 PartDecompositionObject::PartDecompositionObject()
@@ -97,6 +98,12 @@ std::shared_ptr<ecore::EObject> PartDecompositionObject::copy()
 	element->setThisPartDecompositionObjectPtr(element);
 	return element;
 }
+
+PartDecompositionObject& PartDecompositionObject::operator=(const PartDecompositionObject & obj)
+{
+	return *this;
+}
+
 
 void PartDecompositionObject::destroy()
 {	

@@ -83,6 +83,7 @@ ActivityFinalNodeObject::ActivityFinalNodeObject(std::shared_ptr<uml::ActivityFi
 ActivityFinalNodeObject::ActivityFinalNodeObject(ActivityFinalNodeObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ActivityFinalNodeObject::ActivityFinalNodeObject()
@@ -100,6 +101,12 @@ std::shared_ptr<ecore::EObject> ActivityFinalNodeObject::copy()
 	element->setThisActivityFinalNodeObjectPtr(element);
 	return element;
 }
+
+ActivityFinalNodeObject& ActivityFinalNodeObject::operator=(const ActivityFinalNodeObject & obj)
+{
+	return *this;
+}
+
 
 void ActivityFinalNodeObject::destroy()
 {	

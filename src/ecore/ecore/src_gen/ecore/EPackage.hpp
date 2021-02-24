@@ -82,7 +82,6 @@ namespace ecore
 	{
 		public:
  			EPackage(const EPackage &) {}
-			EPackage& operator=(EPackage const&) = delete;
 
 		protected:
 			EPackage(){}

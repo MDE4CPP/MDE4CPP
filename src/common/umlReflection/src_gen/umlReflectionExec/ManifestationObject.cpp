@@ -82,6 +82,7 @@ ManifestationObject::ManifestationObject(std::shared_ptr<uml::Manifestation> _el
 ManifestationObject::ManifestationObject(ManifestationObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ManifestationObject::ManifestationObject()
@@ -99,6 +100,12 @@ std::shared_ptr<ecore::EObject> ManifestationObject::copy()
 	element->setThisManifestationObjectPtr(element);
 	return element;
 }
+
+ManifestationObject& ManifestationObject::operator=(const ManifestationObject & obj)
+{
+	return *this;
+}
+
 
 void ManifestationObject::destroy()
 {	

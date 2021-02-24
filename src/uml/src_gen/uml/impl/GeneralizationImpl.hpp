@@ -22,10 +22,8 @@ namespace uml
 	{
 		public: 
 			GeneralizationImpl(const GeneralizationImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			GeneralizationImpl& operator=(GeneralizationImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			GeneralizationImpl& operator=(GeneralizationImpl const&);
 
 		protected:
 			friend class umlFactoryImpl;

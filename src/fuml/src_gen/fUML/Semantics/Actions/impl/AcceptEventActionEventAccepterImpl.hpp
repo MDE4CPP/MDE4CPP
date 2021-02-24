@@ -23,10 +23,8 @@ namespace fUML::Semantics::Actions
 	{
 		public: 
 			AcceptEventActionEventAccepterImpl(const AcceptEventActionEventAccepterImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			AcceptEventActionEventAccepterImpl& operator=(AcceptEventActionEventAccepterImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			AcceptEventActionEventAccepterImpl& operator=(AcceptEventActionEventAccepterImpl const&);
 
 		protected:
 			friend class fUML::Semantics::Actions::ActionsFactoryImpl;

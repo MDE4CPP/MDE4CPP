@@ -103,7 +103,6 @@ namespace uml
 	{
 		public:
  			Gate(const Gate &) {}
-			Gate& operator=(Gate const&) = delete;
 
 		protected:
 			Gate(){}

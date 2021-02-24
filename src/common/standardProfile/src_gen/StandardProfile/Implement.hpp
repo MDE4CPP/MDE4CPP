@@ -25,9 +25,6 @@ namespace StandardProfile
 {
 	class Implement : virtual public uml::Stereotype 
 	{
-		private:    
-			Implement(const Implement& that) = delete;
-
 		protected:
 			Implement(){}
 

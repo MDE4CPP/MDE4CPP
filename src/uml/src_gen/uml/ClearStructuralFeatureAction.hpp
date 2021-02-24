@@ -159,7 +159,6 @@ namespace uml
 	{
 		public:
  			ClearStructuralFeatureAction(const ClearStructuralFeatureAction &) {}
-			ClearStructuralFeatureAction& operator=(ClearStructuralFeatureAction const&) = delete;
 
 		protected:
 			ClearStructuralFeatureAction(){}

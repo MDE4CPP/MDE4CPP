@@ -25,9 +25,6 @@ namespace StandardProfile
 {
 	class Utility : virtual public uml::Stereotype 
 	{
-		private:    
-			Utility(const Utility& that) = delete;
-
 		protected:
 			Utility(){}
 

@@ -89,6 +89,9 @@ using namespace uml;
 //*********************************
 VariableActionImpl::VariableActionImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 VariableActionImpl::~VariableActionImpl()
@@ -131,6 +134,18 @@ VariableActionImpl::VariableActionImpl(std::weak_ptr<uml::Element > par_owner)
 
 
 VariableActionImpl::VariableActionImpl(const VariableActionImpl & obj):VariableActionImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  VariableActionImpl::copy() const
+{
+	std::shared_ptr<VariableActionImpl> element(new VariableActionImpl(*this));
+	element->setThisVariableActionPtr(element);
+	return element;
+}
+
+VariableActionImpl& VariableActionImpl::operator=(const VariableActionImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -241,13 +256,8 @@ VariableActionImpl::VariableActionImpl(const VariableActionImpl & obj):VariableA
 		std::cout << "Copying the Subset: " << "m_redefinedNode" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  VariableActionImpl::copy() const
-{
-	std::shared_ptr<VariableActionImpl> element(new VariableActionImpl(*this));
-	element->setThisVariableActionPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> VariableActionImpl::eStaticClass() const

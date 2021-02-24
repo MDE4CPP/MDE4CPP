@@ -23,10 +23,8 @@ namespace uml
 	{
 		public: 
 			PackageableElementImpl(const PackageableElementImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			PackageableElementImpl& operator=(PackageableElementImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			PackageableElementImpl& operator=(PackageableElementImpl const&);
 
 		protected:
 			friend class umlFactoryImpl;

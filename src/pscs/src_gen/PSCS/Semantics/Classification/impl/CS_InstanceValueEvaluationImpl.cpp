@@ -77,6 +77,9 @@ using namespace PSCS::Semantics::Classification;
 //*********************************
 CS_InstanceValueEvaluationImpl::CS_InstanceValueEvaluationImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 CS_InstanceValueEvaluationImpl::~CS_InstanceValueEvaluationImpl()
@@ -89,6 +92,18 @@ CS_InstanceValueEvaluationImpl::~CS_InstanceValueEvaluationImpl()
 
 
 CS_InstanceValueEvaluationImpl::CS_InstanceValueEvaluationImpl(const CS_InstanceValueEvaluationImpl & obj):CS_InstanceValueEvaluationImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  CS_InstanceValueEvaluationImpl::copy() const
+{
+	std::shared_ptr<CS_InstanceValueEvaluationImpl> element(new CS_InstanceValueEvaluationImpl(*this));
+	element->setThisCS_InstanceValueEvaluationPtr(element);
+	return element;
+}
+
+CS_InstanceValueEvaluationImpl& CS_InstanceValueEvaluationImpl::operator=(const CS_InstanceValueEvaluationImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -105,13 +120,8 @@ CS_InstanceValueEvaluationImpl::CS_InstanceValueEvaluationImpl(const CS_Instance
 	//Clone references with containment (deep copy)
 
 
-}
 
-std::shared_ptr<ecore::EObject>  CS_InstanceValueEvaluationImpl::copy() const
-{
-	std::shared_ptr<CS_InstanceValueEvaluationImpl> element(new CS_InstanceValueEvaluationImpl(*this));
-	element->setThisCS_InstanceValueEvaluationPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> CS_InstanceValueEvaluationImpl::eStaticClass() const

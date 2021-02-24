@@ -60,6 +60,9 @@ using namespace fUML::Semantics::Activities;
 //*********************************
 MergeNodeActivationImpl::MergeNodeActivationImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 MergeNodeActivationImpl::~MergeNodeActivationImpl()
@@ -78,6 +81,18 @@ MergeNodeActivationImpl::MergeNodeActivationImpl(std::weak_ptr<fUML::Semantics::
 
 
 MergeNodeActivationImpl::MergeNodeActivationImpl(const MergeNodeActivationImpl & obj):MergeNodeActivationImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  MergeNodeActivationImpl::copy() const
+{
+	std::shared_ptr<MergeNodeActivationImpl> element(new MergeNodeActivationImpl(*this));
+	element->setThisMergeNodeActivationPtr(element);
+	return element;
+}
+
+MergeNodeActivationImpl& MergeNodeActivationImpl::operator=(const MergeNodeActivationImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -109,13 +124,8 @@ MergeNodeActivationImpl::MergeNodeActivationImpl(const MergeNodeActivationImpl &
 		std::cout << "Copying the Subset: " << "m_heldTokens" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  MergeNodeActivationImpl::copy() const
-{
-	std::shared_ptr<MergeNodeActivationImpl> element(new MergeNodeActivationImpl(*this));
-	element->setThisMergeNodeActivationPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> MergeNodeActivationImpl::eStaticClass() const

@@ -30,9 +30,6 @@ namespace StandardProfile
 {
 	class Create : virtual public uml::Stereotype 
 	{
-		private:    
-			Create(const Create& that) = delete;
-
 		protected:
 			Create(){}
 

@@ -196,7 +196,6 @@ namespace uml
 	{
 		public:
  			ValuePin(const ValuePin &) {}
-			ValuePin& operator=(ValuePin const&) = delete;
 
 		protected:
 			ValuePin(){}

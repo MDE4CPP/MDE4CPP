@@ -22,10 +22,8 @@ namespace uml
 	{
 		public: 
 			ClassifierTemplateParameterImpl(const ClassifierTemplateParameterImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			ClassifierTemplateParameterImpl& operator=(ClassifierTemplateParameterImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			ClassifierTemplateParameterImpl& operator=(ClassifierTemplateParameterImpl const&);
 
 		protected:
 			friend class umlFactoryImpl;

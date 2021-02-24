@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~BehaviorExecutionSpecificationObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			BehaviorExecutionSpecificationObject& operator=(BehaviorExecutionSpecificationObject const&);
 
 			virtual void destroy();
 			

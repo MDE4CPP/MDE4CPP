@@ -50,6 +50,9 @@ using namespace fUML::Semantics::Actions;
 //*********************************
 AcceptCallActionActivationsImpl::AcceptCallActionActivationsImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 AcceptCallActionActivationsImpl::~AcceptCallActionActivationsImpl()
@@ -63,6 +66,18 @@ AcceptCallActionActivationsImpl::~AcceptCallActionActivationsImpl()
 
 AcceptCallActionActivationsImpl::AcceptCallActionActivationsImpl(const AcceptCallActionActivationsImpl & obj):AcceptCallActionActivationsImpl()
 {
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  AcceptCallActionActivationsImpl::copy() const
+{
+	std::shared_ptr<AcceptCallActionActivationsImpl> element(new AcceptCallActionActivationsImpl(*this));
+	element->setThisAcceptCallActionActivationsPtr(element);
+	return element;
+}
+
+AcceptCallActionActivationsImpl& AcceptCallActionActivationsImpl::operator=(const AcceptCallActionActivationsImpl & obj)
+{
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy AcceptCallActionActivations "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -74,13 +89,8 @@ AcceptCallActionActivationsImpl::AcceptCallActionActivationsImpl(const AcceptCal
 	//Clone references with containment (deep copy)
 
 
-}
 
-std::shared_ptr<ecore::EObject>  AcceptCallActionActivationsImpl::copy() const
-{
-	std::shared_ptr<AcceptCallActionActivationsImpl> element(new AcceptCallActionActivationsImpl(*this));
-	element->setThisAcceptCallActionActivationsPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> AcceptCallActionActivationsImpl::eStaticClass() const

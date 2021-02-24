@@ -25,9 +25,6 @@ namespace StandardProfile
 {
 	class Send : virtual public uml::Stereotype 
 	{
-		private:    
-			Send(const Send& that) = delete;
-
 		protected:
 			Send(){}
 

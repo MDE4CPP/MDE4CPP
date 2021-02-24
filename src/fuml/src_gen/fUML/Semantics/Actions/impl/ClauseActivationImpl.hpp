@@ -25,10 +25,8 @@ virtual public ClauseActivation
 	{
 		public: 
 			ClauseActivationImpl(const ClauseActivationImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			ClauseActivationImpl& operator=(ClauseActivationImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			ClauseActivationImpl& operator=(ClauseActivationImpl const&);
 
 		protected:
 			friend class fUML::Semantics::Actions::ActionsFactoryImpl;

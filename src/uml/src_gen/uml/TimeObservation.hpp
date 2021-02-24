@@ -100,7 +100,6 @@ namespace uml
 	{
 		public:
  			TimeObservation(const TimeObservation &) {}
-			TimeObservation& operator=(TimeObservation const&) = delete;
 
 		protected:
 			TimeObservation(){}

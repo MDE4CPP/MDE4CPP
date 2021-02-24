@@ -131,6 +131,9 @@ using namespace uml;
 //*********************************
 ProtocolStateMachineImpl::ProtocolStateMachineImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ProtocolStateMachineImpl::~ProtocolStateMachineImpl()
@@ -194,6 +197,18 @@ ProtocolStateMachineImpl::ProtocolStateMachineImpl(std::weak_ptr<uml::TemplatePa
 
 
 ProtocolStateMachineImpl::ProtocolStateMachineImpl(const ProtocolStateMachineImpl & obj):ProtocolStateMachineImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ProtocolStateMachineImpl::copy() const
+{
+	std::shared_ptr<ProtocolStateMachineImpl> element(new ProtocolStateMachineImpl(*this));
+	element->setThisProtocolStateMachinePtr(element);
+	return element;
+}
+
+ProtocolStateMachineImpl& ProtocolStateMachineImpl::operator=(const ProtocolStateMachineImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -531,13 +546,8 @@ ProtocolStateMachineImpl::ProtocolStateMachineImpl(const ProtocolStateMachineImp
 		std::cout << "Initialising value Subset: " << "m_conformance - Subset<uml::ProtocolConformance, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
 	
-}
 
-std::shared_ptr<ecore::EObject>  ProtocolStateMachineImpl::copy() const
-{
-	std::shared_ptr<ProtocolStateMachineImpl> element(new ProtocolStateMachineImpl(*this));
-	element->setThisProtocolStateMachinePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ProtocolStateMachineImpl::eStaticClass() const

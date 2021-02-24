@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~CallEventObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			CallEventObject& operator=(CallEventObject const&);
 
 			virtual void destroy();
 			

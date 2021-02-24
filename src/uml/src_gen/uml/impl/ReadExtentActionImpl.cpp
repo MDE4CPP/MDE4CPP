@@ -87,6 +87,9 @@ using namespace uml;
 //*********************************
 ReadExtentActionImpl::ReadExtentActionImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ReadExtentActionImpl::~ReadExtentActionImpl()
@@ -129,6 +132,18 @@ ReadExtentActionImpl::ReadExtentActionImpl(std::weak_ptr<uml::Element > par_owne
 
 
 ReadExtentActionImpl::ReadExtentActionImpl(const ReadExtentActionImpl & obj):ReadExtentActionImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ReadExtentActionImpl::copy() const
+{
+	std::shared_ptr<ReadExtentActionImpl> element(new ReadExtentActionImpl(*this));
+	element->setThisReadExtentActionPtr(element);
+	return element;
+}
+
+ReadExtentActionImpl& ReadExtentActionImpl::operator=(const ReadExtentActionImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -247,13 +262,8 @@ ReadExtentActionImpl::ReadExtentActionImpl(const ReadExtentActionImpl & obj):Rea
 	#endif
 
 	
-}
 
-std::shared_ptr<ecore::EObject>  ReadExtentActionImpl::copy() const
-{
-	std::shared_ptr<ReadExtentActionImpl> element(new ReadExtentActionImpl(*this));
-	element->setThisReadExtentActionPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ReadExtentActionImpl::eStaticClass() const

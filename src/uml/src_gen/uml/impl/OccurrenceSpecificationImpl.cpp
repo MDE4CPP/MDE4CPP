@@ -68,6 +68,9 @@ using namespace uml;
 //*********************************
 OccurrenceSpecificationImpl::OccurrenceSpecificationImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 OccurrenceSpecificationImpl::~OccurrenceSpecificationImpl()
@@ -110,6 +113,18 @@ OccurrenceSpecificationImpl::OccurrenceSpecificationImpl(std::weak_ptr<uml::Elem
 
 
 OccurrenceSpecificationImpl::OccurrenceSpecificationImpl(const OccurrenceSpecificationImpl & obj):OccurrenceSpecificationImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  OccurrenceSpecificationImpl::copy() const
+{
+	std::shared_ptr<OccurrenceSpecificationImpl> element(new OccurrenceSpecificationImpl(*this));
+	element->setThisOccurrenceSpecificationPtr(element);
+	return element;
+}
+
+OccurrenceSpecificationImpl& OccurrenceSpecificationImpl::operator=(const OccurrenceSpecificationImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -168,13 +183,8 @@ OccurrenceSpecificationImpl::OccurrenceSpecificationImpl(const OccurrenceSpecifi
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  OccurrenceSpecificationImpl::copy() const
-{
-	std::shared_ptr<OccurrenceSpecificationImpl> element(new OccurrenceSpecificationImpl(*this));
-	element->setThisOccurrenceSpecificationPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> OccurrenceSpecificationImpl::eStaticClass() const

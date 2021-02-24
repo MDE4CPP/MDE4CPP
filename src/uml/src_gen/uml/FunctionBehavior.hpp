@@ -248,7 +248,6 @@ namespace uml
 	{
 		public:
  			FunctionBehavior(const FunctionBehavior &) {}
-			FunctionBehavior& operator=(FunctionBehavior const&) = delete;
 
 		protected:
 			FunctionBehavior(){}

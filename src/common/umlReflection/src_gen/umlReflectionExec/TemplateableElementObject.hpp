@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~TemplateableElementObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			TemplateableElementObject& operator=(TemplateableElementObject const&);
 
 			virtual void destroy();
 			

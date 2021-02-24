@@ -59,6 +59,9 @@ using namespace PSCS::Semantics::StructuredClassifiers;
 //*********************************
 CS_DispatchOperationOfInterfaceStrategyImpl::CS_DispatchOperationOfInterfaceStrategyImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 CS_DispatchOperationOfInterfaceStrategyImpl::~CS_DispatchOperationOfInterfaceStrategyImpl()
@@ -72,6 +75,18 @@ CS_DispatchOperationOfInterfaceStrategyImpl::~CS_DispatchOperationOfInterfaceStr
 
 CS_DispatchOperationOfInterfaceStrategyImpl::CS_DispatchOperationOfInterfaceStrategyImpl(const CS_DispatchOperationOfInterfaceStrategyImpl & obj):CS_DispatchOperationOfInterfaceStrategyImpl()
 {
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  CS_DispatchOperationOfInterfaceStrategyImpl::copy() const
+{
+	std::shared_ptr<CS_DispatchOperationOfInterfaceStrategyImpl> element(new CS_DispatchOperationOfInterfaceStrategyImpl(*this));
+	element->setThisCS_DispatchOperationOfInterfaceStrategyPtr(element);
+	return element;
+}
+
+CS_DispatchOperationOfInterfaceStrategyImpl& CS_DispatchOperationOfInterfaceStrategyImpl::operator=(const CS_DispatchOperationOfInterfaceStrategyImpl & obj)
+{
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy CS_DispatchOperationOfInterfaceStrategy "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -83,13 +98,8 @@ CS_DispatchOperationOfInterfaceStrategyImpl::CS_DispatchOperationOfInterfaceStra
 	//Clone references with containment (deep copy)
 
 
-}
 
-std::shared_ptr<ecore::EObject>  CS_DispatchOperationOfInterfaceStrategyImpl::copy() const
-{
-	std::shared_ptr<CS_DispatchOperationOfInterfaceStrategyImpl> element(new CS_DispatchOperationOfInterfaceStrategyImpl(*this));
-	element->setThisCS_DispatchOperationOfInterfaceStrategyPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> CS_DispatchOperationOfInterfaceStrategyImpl::eStaticClass() const

@@ -71,6 +71,7 @@ LiteralBooleanObject::LiteralBooleanObject(std::shared_ptr<uml::LiteralBoolean> 
 LiteralBooleanObject::LiteralBooleanObject(LiteralBooleanObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 LiteralBooleanObject::LiteralBooleanObject()
@@ -88,6 +89,12 @@ std::shared_ptr<ecore::EObject> LiteralBooleanObject::copy()
 	element->setThisLiteralBooleanObjectPtr(element);
 	return element;
 }
+
+LiteralBooleanObject& LiteralBooleanObject::operator=(const LiteralBooleanObject & obj)
+{
+	return *this;
+}
+
 
 void LiteralBooleanObject::destroy()
 {	

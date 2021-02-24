@@ -60,6 +60,9 @@ using namespace fUML::Semantics::Activities;
 //*********************************
 FlowFinalNodeActivationImpl::FlowFinalNodeActivationImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 FlowFinalNodeActivationImpl::~FlowFinalNodeActivationImpl()
@@ -78,6 +81,18 @@ FlowFinalNodeActivationImpl::FlowFinalNodeActivationImpl(std::weak_ptr<fUML::Sem
 
 
 FlowFinalNodeActivationImpl::FlowFinalNodeActivationImpl(const FlowFinalNodeActivationImpl & obj):FlowFinalNodeActivationImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  FlowFinalNodeActivationImpl::copy() const
+{
+	std::shared_ptr<FlowFinalNodeActivationImpl> element(new FlowFinalNodeActivationImpl(*this));
+	element->setThisFlowFinalNodeActivationPtr(element);
+	return element;
+}
+
+FlowFinalNodeActivationImpl& FlowFinalNodeActivationImpl::operator=(const FlowFinalNodeActivationImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -109,13 +124,8 @@ FlowFinalNodeActivationImpl::FlowFinalNodeActivationImpl(const FlowFinalNodeActi
 		std::cout << "Copying the Subset: " << "m_heldTokens" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  FlowFinalNodeActivationImpl::copy() const
-{
-	std::shared_ptr<FlowFinalNodeActivationImpl> element(new FlowFinalNodeActivationImpl(*this));
-	element->setThisFlowFinalNodeActivationPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> FlowFinalNodeActivationImpl::eStaticClass() const

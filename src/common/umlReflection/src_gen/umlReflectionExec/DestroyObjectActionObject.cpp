@@ -100,6 +100,7 @@ DestroyObjectActionObject::DestroyObjectActionObject(std::shared_ptr<uml::Destro
 DestroyObjectActionObject::DestroyObjectActionObject(DestroyObjectActionObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 DestroyObjectActionObject::DestroyObjectActionObject()
@@ -117,6 +118,12 @@ std::shared_ptr<ecore::EObject> DestroyObjectActionObject::copy()
 	element->setThisDestroyObjectActionObjectPtr(element);
 	return element;
 }
+
+DestroyObjectActionObject& DestroyObjectActionObject::operator=(const DestroyObjectActionObject & obj)
+{
+	return *this;
+}
+
 
 void DestroyObjectActionObject::destroy()
 {	

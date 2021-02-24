@@ -41,9 +41,9 @@ using namespace StandardProfile;
 //*********************************
 InstantiateImpl::InstantiateImpl()
 {
-	#ifdef ADD_COUNT
-		ADD_COUNT("InstantiateImpl()");
-	#endif
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 
 	DEBUG_MESSAGE(std::cout<<"Instantiate is created..."<<std::endl;)
 
@@ -61,20 +61,12 @@ InstantiateImpl::InstantiateImpl()
 
 InstantiateImpl::~InstantiateImpl()
 {
-	#ifdef SUB_COUNT
-		SUB_COUNT("InstantiateImpl()");
-	#endif
-
 	DEBUG_MESSAGE(std::cout<<"Instantiate is destroyed..."<<std::endl;)
 }
 
 InstantiateImpl::InstantiateImpl(const InstantiateImpl & obj):InstantiateImpl()
 {
-	//create copy of all Attributes
-	#ifdef SHOW_COPIES
-	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Instantiate "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
-	#endif
-	instantiate();
+	*this = obj;
 }
 
 std::shared_ptr<ecore::EObject>  InstantiateImpl::copy() const
@@ -82,6 +74,16 @@ std::shared_ptr<ecore::EObject>  InstantiateImpl::copy() const
 	std::shared_ptr<InstantiateImpl> element(new InstantiateImpl(*this));
 	element->setThisInstantiatePtr(element);
 	return element;
+}
+
+InstantiateImpl& InstantiateImpl::operator=(const InstantiateImpl & obj)
+{
+		//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Instantiate "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
+	instantiate();
+	return *this;
 }
 
 

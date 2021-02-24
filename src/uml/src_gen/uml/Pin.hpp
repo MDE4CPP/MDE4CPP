@@ -162,7 +162,6 @@ namespace uml
 	{
 		public:
  			Pin(const Pin &) {}
-			Pin& operator=(Pin const&) = delete;
 
 		protected:
 			Pin(){}

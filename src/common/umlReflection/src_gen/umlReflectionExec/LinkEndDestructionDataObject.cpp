@@ -61,6 +61,7 @@ LinkEndDestructionDataObject::LinkEndDestructionDataObject(std::shared_ptr<uml::
 LinkEndDestructionDataObject::LinkEndDestructionDataObject(LinkEndDestructionDataObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 LinkEndDestructionDataObject::LinkEndDestructionDataObject()
@@ -78,6 +79,12 @@ std::shared_ptr<ecore::EObject> LinkEndDestructionDataObject::copy()
 	element->setThisLinkEndDestructionDataObjectPtr(element);
 	return element;
 }
+
+LinkEndDestructionDataObject& LinkEndDestructionDataObject::operator=(const LinkEndDestructionDataObject & obj)
+{
+	return *this;
+}
+
 
 void LinkEndDestructionDataObject::destroy()
 {	

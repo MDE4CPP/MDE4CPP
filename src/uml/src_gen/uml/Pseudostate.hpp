@@ -111,7 +111,6 @@ namespace uml
 	{
 		public:
  			Pseudostate(const Pseudostate &) {}
-			Pseudostate& operator=(Pseudostate const&) = delete;
 
 		protected:
 			Pseudostate(){}

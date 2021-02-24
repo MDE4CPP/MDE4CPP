@@ -23,10 +23,8 @@ namespace fUML::Semantics::SimpleClassifiers
 	{
 		public: 
 			BooleanValueImpl(const BooleanValueImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			BooleanValueImpl& operator=(BooleanValueImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			BooleanValueImpl& operator=(BooleanValueImpl const&);
 
 		protected:
 			friend class fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactoryImpl;

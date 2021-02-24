@@ -60,7 +60,6 @@ namespace PSCS::Semantics::StructuredClassifiers
 	{
 		public:
  			CS_DispatchOperationOfInterfaceStrategy(const CS_DispatchOperationOfInterfaceStrategy &) {}
-			CS_DispatchOperationOfInterfaceStrategy& operator=(CS_DispatchOperationOfInterfaceStrategy const&) = delete;
 
 		protected:
 			CS_DispatchOperationOfInterfaceStrategy(){}

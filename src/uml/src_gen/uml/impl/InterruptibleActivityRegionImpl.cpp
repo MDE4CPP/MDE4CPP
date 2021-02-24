@@ -67,6 +67,9 @@ using namespace uml;
 //*********************************
 InterruptibleActivityRegionImpl::InterruptibleActivityRegionImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 InterruptibleActivityRegionImpl::~InterruptibleActivityRegionImpl()
@@ -109,6 +112,18 @@ InterruptibleActivityRegionImpl::InterruptibleActivityRegionImpl(std::weak_ptr<u
 
 
 InterruptibleActivityRegionImpl::InterruptibleActivityRegionImpl(const InterruptibleActivityRegionImpl & obj):InterruptibleActivityRegionImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  InterruptibleActivityRegionImpl::copy() const
+{
+	std::shared_ptr<InterruptibleActivityRegionImpl> element(new InterruptibleActivityRegionImpl(*this));
+	element->setThisInterruptibleActivityRegionPtr(element);
+	return element;
+}
+
+InterruptibleActivityRegionImpl& InterruptibleActivityRegionImpl::operator=(const InterruptibleActivityRegionImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -167,13 +182,8 @@ InterruptibleActivityRegionImpl::InterruptibleActivityRegionImpl(const Interrupt
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  InterruptibleActivityRegionImpl::copy() const
-{
-	std::shared_ptr<InterruptibleActivityRegionImpl> element(new InterruptibleActivityRegionImpl(*this));
-	element->setThisInterruptibleActivityRegionPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> InterruptibleActivityRegionImpl::eStaticClass() const

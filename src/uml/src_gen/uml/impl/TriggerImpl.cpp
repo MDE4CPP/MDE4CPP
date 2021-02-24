@@ -65,6 +65,9 @@ using namespace uml;
 //*********************************
 TriggerImpl::TriggerImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 TriggerImpl::~TriggerImpl()
@@ -91,6 +94,18 @@ TriggerImpl::TriggerImpl(std::weak_ptr<uml::Element > par_owner)
 
 
 TriggerImpl::TriggerImpl(const TriggerImpl & obj):TriggerImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  TriggerImpl::copy() const
+{
+	std::shared_ptr<TriggerImpl> element(new TriggerImpl(*this));
+	element->setThisTriggerPtr(element);
+	return element;
+}
+
+TriggerImpl& TriggerImpl::operator=(const TriggerImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -133,13 +148,8 @@ TriggerImpl::TriggerImpl(const TriggerImpl & obj):TriggerImpl()
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  TriggerImpl::copy() const
-{
-	std::shared_ptr<TriggerImpl> element(new TriggerImpl(*this));
-	element->setThisTriggerPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> TriggerImpl::eStaticClass() const

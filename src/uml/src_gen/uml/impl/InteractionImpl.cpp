@@ -137,6 +137,9 @@ using namespace uml;
 //*********************************
 InteractionImpl::InteractionImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 InteractionImpl::~InteractionImpl()
@@ -216,6 +219,18 @@ InteractionImpl::InteractionImpl(std::weak_ptr<uml::TemplateParameter > par_owni
 
 
 InteractionImpl::InteractionImpl(const InteractionImpl & obj):InteractionImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  InteractionImpl::copy() const
+{
+	std::shared_ptr<InteractionImpl> element(new InteractionImpl(*this));
+	element->setThisInteractionPtr(element);
+	return element;
+}
+
+InteractionImpl& InteractionImpl::operator=(const InteractionImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -606,13 +621,8 @@ InteractionImpl::InteractionImpl(const InteractionImpl & obj):InteractionImpl()
 		std::cout << "Initialising value Subset: " << "m_message - Subset<uml::Message, uml::NamedElement >(getOwnedMember())" << std::endl;
 	#endif
 	
-}
 
-std::shared_ptr<ecore::EObject>  InteractionImpl::copy() const
-{
-	std::shared_ptr<InteractionImpl> element(new InteractionImpl(*this));
-	element->setThisInteractionPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> InteractionImpl::eStaticClass() const

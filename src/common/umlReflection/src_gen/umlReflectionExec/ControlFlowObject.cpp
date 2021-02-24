@@ -87,6 +87,7 @@ ControlFlowObject::ControlFlowObject(std::shared_ptr<uml::ControlFlow> _element)
 ControlFlowObject::ControlFlowObject(ControlFlowObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ControlFlowObject::ControlFlowObject()
@@ -104,6 +105,12 @@ std::shared_ptr<ecore::EObject> ControlFlowObject::copy()
 	element->setThisControlFlowObjectPtr(element);
 	return element;
 }
+
+ControlFlowObject& ControlFlowObject::operator=(const ControlFlowObject & obj)
+{
+	return *this;
+}
+
 
 void ControlFlowObject::destroy()
 {	

@@ -159,7 +159,6 @@ namespace uml
 	{
 		public:
  			WriteVariableAction(const WriteVariableAction &) {}
-			WriteVariableAction& operator=(WriteVariableAction const&) = delete;
 
 		protected:
 			WriteVariableAction(){}

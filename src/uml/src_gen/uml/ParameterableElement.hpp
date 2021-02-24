@@ -75,7 +75,6 @@ namespace uml
 	{
 		public:
  			ParameterableElement(const ParameterableElement &) {}
-			ParameterableElement& operator=(ParameterableElement const&) = delete;
 
 		protected:
 			ParameterableElement(){}

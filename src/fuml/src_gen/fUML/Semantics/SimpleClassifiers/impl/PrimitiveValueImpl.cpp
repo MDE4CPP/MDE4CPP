@@ -59,6 +59,9 @@ using namespace fUML::Semantics::SimpleClassifiers;
 //*********************************
 PrimitiveValueImpl::PrimitiveValueImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 PrimitiveValueImpl::~PrimitiveValueImpl()
@@ -71,6 +74,18 @@ PrimitiveValueImpl::~PrimitiveValueImpl()
 
 
 PrimitiveValueImpl::PrimitiveValueImpl(const PrimitiveValueImpl & obj):PrimitiveValueImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  PrimitiveValueImpl::copy() const
+{
+	std::shared_ptr<PrimitiveValueImpl> element(new PrimitiveValueImpl(*this));
+	element->setThisPrimitiveValuePtr(element);
+	return element;
+}
+
+PrimitiveValueImpl& PrimitiveValueImpl::operator=(const PrimitiveValueImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -85,13 +100,8 @@ PrimitiveValueImpl::PrimitiveValueImpl(const PrimitiveValueImpl & obj):Primitive
 	//Clone references with containment (deep copy)
 
 
-}
 
-std::shared_ptr<ecore::EObject>  PrimitiveValueImpl::copy() const
-{
-	std::shared_ptr<PrimitiveValueImpl> element(new PrimitiveValueImpl(*this));
-	element->setThisPrimitiveValuePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> PrimitiveValueImpl::eStaticClass() const

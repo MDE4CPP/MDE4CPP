@@ -95,7 +95,6 @@ namespace PSCS::Semantics::Actions
 	{
 		public:
  			CS_CreateLinkActionActivation(const CS_CreateLinkActionActivation &) {}
-			CS_CreateLinkActionActivation& operator=(CS_CreateLinkActionActivation const&) = delete;
 
 		protected:
 			CS_CreateLinkActionActivation(){}

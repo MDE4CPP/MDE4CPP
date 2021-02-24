@@ -81,6 +81,7 @@ StructuralFeatureObject::StructuralFeatureObject(std::shared_ptr<uml::Structural
 StructuralFeatureObject::StructuralFeatureObject(StructuralFeatureObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 StructuralFeatureObject::StructuralFeatureObject()
@@ -98,6 +99,12 @@ std::shared_ptr<ecore::EObject> StructuralFeatureObject::copy()
 	element->setThisStructuralFeatureObjectPtr(element);
 	return element;
 }
+
+StructuralFeatureObject& StructuralFeatureObject::operator=(const StructuralFeatureObject & obj)
+{
+	return *this;
+}
+
 
 void StructuralFeatureObject::destroy()
 {	

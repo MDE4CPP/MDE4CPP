@@ -121,6 +121,7 @@ ClassifierObject::ClassifierObject(std::shared_ptr<uml::Classifier> _element):
 ClassifierObject::ClassifierObject(ClassifierObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ClassifierObject::ClassifierObject()
@@ -138,6 +139,12 @@ std::shared_ptr<ecore::EObject> ClassifierObject::copy()
 	element->setThisClassifierObjectPtr(element);
 	return element;
 }
+
+ClassifierObject& ClassifierObject::operator=(const ClassifierObject & obj)
+{
+	return *this;
+}
+
 
 void ClassifierObject::destroy()
 {	

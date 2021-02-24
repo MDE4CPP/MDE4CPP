@@ -29,10 +29,8 @@ namespace StandardProfile
 	{
 		public: 
 			TraceImpl(const TraceImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			TraceImpl& operator=(TraceImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;  
+			TraceImpl& operator=(TraceImpl const&);
 
 		protected:
 			friend class StandardProfileFactoryImpl;

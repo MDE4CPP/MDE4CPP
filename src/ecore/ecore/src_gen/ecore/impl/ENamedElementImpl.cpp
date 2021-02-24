@@ -53,6 +53,9 @@ using namespace ecore;
 //*********************************
 ENamedElementImpl::ENamedElementImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ENamedElementImpl::~ENamedElementImpl()
@@ -71,6 +74,18 @@ ENamedElementImpl::ENamedElementImpl(std::weak_ptr<ecore::EObject > par_eContain
 
 
 ENamedElementImpl::ENamedElementImpl(const ENamedElementImpl & obj):ENamedElementImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ENamedElementImpl::copy() const
+{
+	std::shared_ptr<ENamedElementImpl> element(new ENamedElementImpl(*this));
+	element->setThisENamedElementPtr(element);
+	return element;
+}
+
+ENamedElementImpl& ENamedElementImpl::operator=(const ENamedElementImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -95,13 +110,8 @@ ENamedElementImpl::ENamedElementImpl(const ENamedElementImpl & obj):ENamedElemen
 		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  ENamedElementImpl::copy() const
-{
-	std::shared_ptr<ENamedElementImpl> element(new ENamedElementImpl(*this));
-	element->setThisENamedElementPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<EClass> ENamedElementImpl::eStaticClass() const

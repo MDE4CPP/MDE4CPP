@@ -101,7 +101,6 @@ namespace uml
 	{
 		public:
  			NamedElement(const NamedElement &) {}
-			NamedElement& operator=(NamedElement const&) = delete;
 
 		protected:
 			NamedElement(){}

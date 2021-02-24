@@ -78,6 +78,7 @@ DurationIntervalObject::DurationIntervalObject(std::shared_ptr<uml::DurationInte
 DurationIntervalObject::DurationIntervalObject(DurationIntervalObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 DurationIntervalObject::DurationIntervalObject()
@@ -95,6 +96,12 @@ std::shared_ptr<ecore::EObject> DurationIntervalObject::copy()
 	element->setThisDurationIntervalObjectPtr(element);
 	return element;
 }
+
+DurationIntervalObject& DurationIntervalObject::operator=(const DurationIntervalObject & obj)
+{
+	return *this;
+}
+
 
 void DurationIntervalObject::destroy()
 {	

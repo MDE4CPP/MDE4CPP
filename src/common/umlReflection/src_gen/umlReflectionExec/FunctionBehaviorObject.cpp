@@ -168,6 +168,7 @@ FunctionBehaviorObject::FunctionBehaviorObject(std::shared_ptr<uml::FunctionBeha
 FunctionBehaviorObject::FunctionBehaviorObject(FunctionBehaviorObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 FunctionBehaviorObject::FunctionBehaviorObject()
@@ -185,6 +186,12 @@ std::shared_ptr<ecore::EObject> FunctionBehaviorObject::copy()
 	element->setThisFunctionBehaviorObjectPtr(element);
 	return element;
 }
+
+FunctionBehaviorObject& FunctionBehaviorObject::operator=(const FunctionBehaviorObject & obj)
+{
+	return *this;
+}
+
 
 void FunctionBehaviorObject::destroy()
 {	

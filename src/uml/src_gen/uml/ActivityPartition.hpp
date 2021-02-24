@@ -109,7 +109,6 @@ namespace uml
 	{
 		public:
  			ActivityPartition(const ActivityPartition &) {}
-			ActivityPartition& operator=(ActivityPartition const&) = delete;
 
 		protected:
 			ActivityPartition(){}

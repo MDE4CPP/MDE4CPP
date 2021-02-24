@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~ForkNodeObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			ForkNodeObject& operator=(ForkNodeObject const&);
 
 			virtual void destroy();
 			

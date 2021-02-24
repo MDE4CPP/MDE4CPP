@@ -102,6 +102,7 @@ ReadLinkObjectEndActionObject::ReadLinkObjectEndActionObject(std::shared_ptr<uml
 ReadLinkObjectEndActionObject::ReadLinkObjectEndActionObject(ReadLinkObjectEndActionObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ReadLinkObjectEndActionObject::ReadLinkObjectEndActionObject()
@@ -119,6 +120,12 @@ std::shared_ptr<ecore::EObject> ReadLinkObjectEndActionObject::copy()
 	element->setThisReadLinkObjectEndActionObjectPtr(element);
 	return element;
 }
+
+ReadLinkObjectEndActionObject& ReadLinkObjectEndActionObject::operator=(const ReadLinkObjectEndActionObject & obj)
+{
+	return *this;
+}
+
 
 void ReadLinkObjectEndActionObject::destroy()
 {	

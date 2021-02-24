@@ -86,6 +86,9 @@ using namespace uml;
 //*********************************
 CentralBufferNodeImpl::CentralBufferNodeImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 CentralBufferNodeImpl::~CentralBufferNodeImpl()
@@ -128,6 +131,18 @@ CentralBufferNodeImpl::CentralBufferNodeImpl(std::weak_ptr<uml::Element > par_ow
 
 
 CentralBufferNodeImpl::CentralBufferNodeImpl(const CentralBufferNodeImpl & obj):CentralBufferNodeImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  CentralBufferNodeImpl::copy() const
+{
+	std::shared_ptr<CentralBufferNodeImpl> element(new CentralBufferNodeImpl(*this));
+	element->setThisCentralBufferNodePtr(element);
+	return element;
+}
+
+CentralBufferNodeImpl& CentralBufferNodeImpl::operator=(const CentralBufferNodeImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -225,13 +240,8 @@ CentralBufferNodeImpl::CentralBufferNodeImpl(const CentralBufferNodeImpl & obj):
 		std::cout << "Copying the Subset: " << "m_upperBound" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  CentralBufferNodeImpl::copy() const
-{
-	std::shared_ptr<CentralBufferNodeImpl> element(new CentralBufferNodeImpl(*this));
-	element->setThisCentralBufferNodePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> CentralBufferNodeImpl::eStaticClass() const

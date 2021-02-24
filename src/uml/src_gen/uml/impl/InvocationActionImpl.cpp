@@ -88,6 +88,9 @@ using namespace uml;
 //*********************************
 InvocationActionImpl::InvocationActionImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 InvocationActionImpl::~InvocationActionImpl()
@@ -130,6 +133,18 @@ InvocationActionImpl::InvocationActionImpl(std::weak_ptr<uml::Element > par_owne
 
 
 InvocationActionImpl::InvocationActionImpl(const InvocationActionImpl & obj):InvocationActionImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  InvocationActionImpl::copy() const
+{
+	std::shared_ptr<InvocationActionImpl> element(new InvocationActionImpl(*this));
+	element->setThisInvocationActionPtr(element);
+	return element;
+}
+
+InvocationActionImpl& InvocationActionImpl::operator=(const InvocationActionImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -254,13 +269,8 @@ InvocationActionImpl::InvocationActionImpl(const InvocationActionImpl & obj):Inv
 		std::cout << "Initialising value SubsetUnion: " << "m_argument - SubsetUnion<uml::InputPin, uml::InputPin >(getInput())" << std::endl;
 	#endif
 	
-}
 
-std::shared_ptr<ecore::EObject>  InvocationActionImpl::copy() const
-{
-	std::shared_ptr<InvocationActionImpl> element(new InvocationActionImpl(*this));
-	element->setThisInvocationActionPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> InvocationActionImpl::eStaticClass() const

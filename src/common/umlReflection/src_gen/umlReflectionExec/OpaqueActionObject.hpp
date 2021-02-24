@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~OpaqueActionObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			OpaqueActionObject& operator=(OpaqueActionObject const&);
 
 			virtual void destroy();
 			

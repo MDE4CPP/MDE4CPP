@@ -134,6 +134,7 @@ DeploymentSpecificationObject::DeploymentSpecificationObject(std::shared_ptr<uml
 DeploymentSpecificationObject::DeploymentSpecificationObject(DeploymentSpecificationObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 DeploymentSpecificationObject::DeploymentSpecificationObject()
@@ -151,6 +152,12 @@ std::shared_ptr<ecore::EObject> DeploymentSpecificationObject::copy()
 	element->setThisDeploymentSpecificationObjectPtr(element);
 	return element;
 }
+
+DeploymentSpecificationObject& DeploymentSpecificationObject::operator=(const DeploymentSpecificationObject & obj)
+{
+	return *this;
+}
+
 
 void DeploymentSpecificationObject::destroy()
 {	

@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~ActivityPartitionObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			ActivityPartitionObject& operator=(ActivityPartitionObject const&);
 
 			virtual void destroy();
 			

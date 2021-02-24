@@ -52,6 +52,9 @@ using namespace fUML::Semantics::Activities;
 //*********************************
 OfferImpl::OfferImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 OfferImpl::~OfferImpl()
@@ -64,6 +67,18 @@ OfferImpl::~OfferImpl()
 
 
 OfferImpl::OfferImpl(const OfferImpl & obj):OfferImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  OfferImpl::copy() const
+{
+	std::shared_ptr<OfferImpl> element(new OfferImpl(*this));
+	element->setThisOfferPtr(element);
+	return element;
+}
+
+OfferImpl& OfferImpl::operator=(const OfferImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -79,13 +94,8 @@ OfferImpl::OfferImpl(const OfferImpl & obj):OfferImpl()
 	//Clone references with containment (deep copy)
 
 
-}
 
-std::shared_ptr<ecore::EObject>  OfferImpl::copy() const
-{
-	std::shared_ptr<OfferImpl> element(new OfferImpl(*this));
-	element->setThisOfferPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> OfferImpl::eStaticClass() const

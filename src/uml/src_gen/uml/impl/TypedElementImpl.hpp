@@ -22,10 +22,8 @@ namespace uml
 	{
 		public: 
 			TypedElementImpl(const TypedElementImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			TypedElementImpl& operator=(TypedElementImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			TypedElementImpl& operator=(TypedElementImpl const&);
 
 		protected:
 			friend class umlFactoryImpl;

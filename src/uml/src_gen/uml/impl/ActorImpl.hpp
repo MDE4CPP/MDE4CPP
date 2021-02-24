@@ -22,10 +22,8 @@ namespace uml
 	{
 		public: 
 			ActorImpl(const ActorImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			ActorImpl& operator=(ActorImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			ActorImpl& operator=(ActorImpl const&);
 
 		protected:
 			friend class umlFactoryImpl;

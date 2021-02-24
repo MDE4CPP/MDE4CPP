@@ -84,6 +84,7 @@ ActivityPartitionObject::ActivityPartitionObject(std::shared_ptr<uml::ActivityPa
 ActivityPartitionObject::ActivityPartitionObject(ActivityPartitionObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ActivityPartitionObject::ActivityPartitionObject()
@@ -101,6 +102,12 @@ std::shared_ptr<ecore::EObject> ActivityPartitionObject::copy()
 	element->setThisActivityPartitionObjectPtr(element);
 	return element;
 }
+
+ActivityPartitionObject& ActivityPartitionObject::operator=(const ActivityPartitionObject & obj)
+{
+	return *this;
+}
+
 
 void ActivityPartitionObject::destroy()
 {	

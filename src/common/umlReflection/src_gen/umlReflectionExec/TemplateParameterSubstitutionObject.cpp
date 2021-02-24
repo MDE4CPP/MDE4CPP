@@ -59,6 +59,7 @@ TemplateParameterSubstitutionObject::TemplateParameterSubstitutionObject(std::sh
 TemplateParameterSubstitutionObject::TemplateParameterSubstitutionObject(TemplateParameterSubstitutionObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 TemplateParameterSubstitutionObject::TemplateParameterSubstitutionObject()
@@ -76,6 +77,12 @@ std::shared_ptr<ecore::EObject> TemplateParameterSubstitutionObject::copy()
 	element->setThisTemplateParameterSubstitutionObjectPtr(element);
 	return element;
 }
+
+TemplateParameterSubstitutionObject& TemplateParameterSubstitutionObject::operator=(const TemplateParameterSubstitutionObject & obj)
+{
+	return *this;
+}
+
 
 void TemplateParameterSubstitutionObject::destroy()
 {	

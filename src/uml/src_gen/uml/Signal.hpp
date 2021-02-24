@@ -176,7 +176,6 @@ namespace uml
 	{
 		public:
  			Signal(const Signal &) {}
-			Signal& operator=(Signal const&) = delete;
 
 		protected:
 			Signal(){}

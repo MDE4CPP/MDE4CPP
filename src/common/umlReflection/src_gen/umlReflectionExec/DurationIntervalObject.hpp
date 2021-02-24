@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~DurationIntervalObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			DurationIntervalObject& operator=(DurationIntervalObject const&);
 
 			virtual void destroy();
 			

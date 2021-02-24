@@ -55,6 +55,7 @@ CommentObject::CommentObject(std::shared_ptr<uml::Comment> _element):
 CommentObject::CommentObject(CommentObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 CommentObject::CommentObject()
@@ -72,6 +73,12 @@ std::shared_ptr<ecore::EObject> CommentObject::copy()
 	element->setThisCommentObjectPtr(element);
 	return element;
 }
+
+CommentObject& CommentObject::operator=(const CommentObject & obj)
+{
+	return *this;
+}
+
 
 void CommentObject::destroy()
 {	

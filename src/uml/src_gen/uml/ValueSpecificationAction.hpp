@@ -159,7 +159,6 @@ namespace uml
 	{
 		public:
  			ValueSpecificationAction(const ValueSpecificationAction &) {}
-			ValueSpecificationAction& operator=(ValueSpecificationAction const&) = delete;
 
 		protected:
 			ValueSpecificationAction(){}

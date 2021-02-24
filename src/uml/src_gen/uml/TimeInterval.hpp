@@ -115,7 +115,6 @@ namespace uml
 	{
 		public:
  			TimeInterval(const TimeInterval &) {}
-			TimeInterval& operator=(TimeInterval const&) = delete;
 
 		protected:
 			TimeInterval(){}

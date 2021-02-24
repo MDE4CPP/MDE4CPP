@@ -76,7 +76,6 @@ namespace fUML::Semantics::Activities
 	{
 		public:
  			InitialNodeActivation(const InitialNodeActivation &) {}
-			InitialNodeActivation& operator=(InitialNodeActivation const&) = delete;
 
 		protected:
 			InitialNodeActivation(){}

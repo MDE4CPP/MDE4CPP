@@ -70,6 +70,9 @@ using namespace uml;
 //*********************************
 ExecutionOccurrenceSpecificationImpl::ExecutionOccurrenceSpecificationImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ExecutionOccurrenceSpecificationImpl::~ExecutionOccurrenceSpecificationImpl()
@@ -112,6 +115,18 @@ ExecutionOccurrenceSpecificationImpl::ExecutionOccurrenceSpecificationImpl(std::
 
 
 ExecutionOccurrenceSpecificationImpl::ExecutionOccurrenceSpecificationImpl(const ExecutionOccurrenceSpecificationImpl & obj):ExecutionOccurrenceSpecificationImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ExecutionOccurrenceSpecificationImpl::copy() const
+{
+	std::shared_ptr<ExecutionOccurrenceSpecificationImpl> element(new ExecutionOccurrenceSpecificationImpl(*this));
+	element->setThisExecutionOccurrenceSpecificationPtr(element);
+	return element;
+}
+
+ExecutionOccurrenceSpecificationImpl& ExecutionOccurrenceSpecificationImpl::operator=(const ExecutionOccurrenceSpecificationImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -172,13 +187,8 @@ ExecutionOccurrenceSpecificationImpl::ExecutionOccurrenceSpecificationImpl(const
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  ExecutionOccurrenceSpecificationImpl::copy() const
-{
-	std::shared_ptr<ExecutionOccurrenceSpecificationImpl> element(new ExecutionOccurrenceSpecificationImpl(*this));
-	element->setThisExecutionOccurrenceSpecificationPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ExecutionOccurrenceSpecificationImpl::eStaticClass() const

@@ -75,6 +75,9 @@ using namespace uml;
 //*********************************
 OpaqueExpressionImpl::OpaqueExpressionImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 OpaqueExpressionImpl::~OpaqueExpressionImpl()
@@ -134,6 +137,18 @@ OpaqueExpressionImpl::OpaqueExpressionImpl(std::weak_ptr<uml::ValueSpecification
 
 OpaqueExpressionImpl::OpaqueExpressionImpl(const OpaqueExpressionImpl & obj):OpaqueExpressionImpl()
 {
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  OpaqueExpressionImpl::copy() const
+{
+	std::shared_ptr<OpaqueExpressionImpl> element(new OpaqueExpressionImpl(*this));
+	element->setThisOpaqueExpressionPtr(element);
+	return element;
+}
+
+OpaqueExpressionImpl& OpaqueExpressionImpl::operator=(const OpaqueExpressionImpl & obj)
+{
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy OpaqueExpression "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -188,13 +203,8 @@ OpaqueExpressionImpl::OpaqueExpressionImpl(const OpaqueExpressionImpl & obj):Opa
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  OpaqueExpressionImpl::copy() const
-{
-	std::shared_ptr<OpaqueExpressionImpl> element(new OpaqueExpressionImpl(*this));
-	element->setThisOpaqueExpressionPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> OpaqueExpressionImpl::eStaticClass() const

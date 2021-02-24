@@ -74,6 +74,7 @@ StateInvariantObject::StateInvariantObject(std::shared_ptr<uml::StateInvariant> 
 StateInvariantObject::StateInvariantObject(StateInvariantObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 StateInvariantObject::StateInvariantObject()
@@ -91,6 +92,12 @@ std::shared_ptr<ecore::EObject> StateInvariantObject::copy()
 	element->setThisStateInvariantObjectPtr(element);
 	return element;
 }
+
+StateInvariantObject& StateInvariantObject::operator=(const StateInvariantObject & obj)
+{
+	return *this;
+}
+
 
 void StateInvariantObject::destroy()
 {	

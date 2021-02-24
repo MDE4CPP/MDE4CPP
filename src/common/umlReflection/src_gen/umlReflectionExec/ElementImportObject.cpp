@@ -65,6 +65,7 @@ ElementImportObject::ElementImportObject(std::shared_ptr<uml::ElementImport> _el
 ElementImportObject::ElementImportObject(ElementImportObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ElementImportObject::ElementImportObject()
@@ -82,6 +83,12 @@ std::shared_ptr<ecore::EObject> ElementImportObject::copy()
 	element->setThisElementImportObjectPtr(element);
 	return element;
 }
+
+ElementImportObject& ElementImportObject::operator=(const ElementImportObject & obj)
+{
+	return *this;
+}
+
 
 void ElementImportObject::destroy()
 {	

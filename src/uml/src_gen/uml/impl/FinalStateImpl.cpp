@@ -89,6 +89,9 @@ using namespace uml;
 //*********************************
 FinalStateImpl::FinalStateImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 FinalStateImpl::~FinalStateImpl()
@@ -123,6 +126,18 @@ FinalStateImpl::FinalStateImpl(std::weak_ptr<uml::Element > par_owner)
 
 
 FinalStateImpl::FinalStateImpl(const FinalStateImpl & obj):FinalStateImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  FinalStateImpl::copy() const
+{
+	std::shared_ptr<FinalStateImpl> element(new FinalStateImpl(*this));
+	element->setThisFinalStatePtr(element);
+	return element;
+}
+
+FinalStateImpl& FinalStateImpl::operator=(const FinalStateImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -283,13 +298,8 @@ FinalStateImpl::FinalStateImpl(const FinalStateImpl & obj):FinalStateImpl()
 		std::cout << "Copying the Subset: " << "m_stateInvariant" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  FinalStateImpl::copy() const
-{
-	std::shared_ptr<FinalStateImpl> element(new FinalStateImpl(*this));
-	element->setThisFinalStatePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> FinalStateImpl::eStaticClass() const

@@ -64,6 +64,9 @@ using namespace ecore;
 //*********************************
 EReferenceImpl::EReferenceImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 EReferenceImpl::~EReferenceImpl()
@@ -89,6 +92,18 @@ EReferenceImpl::EReferenceImpl(std::weak_ptr<ecore::EClass > par_eContainingClas
 
 
 EReferenceImpl::EReferenceImpl(const EReferenceImpl & obj):EReferenceImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  EReferenceImpl::copy() const
+{
+	std::shared_ptr<EReferenceImpl> element(new EReferenceImpl(*this));
+	element->setThisEReferencePtr(element);
+	return element;
+}
+
+EReferenceImpl& EReferenceImpl::operator=(const EReferenceImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -148,13 +163,8 @@ EReferenceImpl::EReferenceImpl(const EReferenceImpl & obj):EReferenceImpl()
 		std::cout << "Copying the Subset: " << "m_eGenericType" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  EReferenceImpl::copy() const
-{
-	std::shared_ptr<EReferenceImpl> element(new EReferenceImpl(*this));
-	element->setThisEReferencePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<EClass> EReferenceImpl::eStaticClass() const

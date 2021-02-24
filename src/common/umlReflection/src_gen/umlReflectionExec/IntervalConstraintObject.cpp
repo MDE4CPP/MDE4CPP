@@ -76,6 +76,7 @@ IntervalConstraintObject::IntervalConstraintObject(std::shared_ptr<uml::Interval
 IntervalConstraintObject::IntervalConstraintObject(IntervalConstraintObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 IntervalConstraintObject::IntervalConstraintObject()
@@ -93,6 +94,12 @@ std::shared_ptr<ecore::EObject> IntervalConstraintObject::copy()
 	element->setThisIntervalConstraintObjectPtr(element);
 	return element;
 }
+
+IntervalConstraintObject& IntervalConstraintObject::operator=(const IntervalConstraintObject & obj)
+{
+	return *this;
+}
+
 
 void IntervalConstraintObject::destroy()
 {	

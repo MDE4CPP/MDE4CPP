@@ -176,6 +176,7 @@ ProtocolStateMachineObject::ProtocolStateMachineObject(std::shared_ptr<uml::Prot
 ProtocolStateMachineObject::ProtocolStateMachineObject(ProtocolStateMachineObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ProtocolStateMachineObject::ProtocolStateMachineObject()
@@ -193,6 +194,12 @@ std::shared_ptr<ecore::EObject> ProtocolStateMachineObject::copy()
 	element->setThisProtocolStateMachineObjectPtr(element);
 	return element;
 }
+
+ProtocolStateMachineObject& ProtocolStateMachineObject::operator=(const ProtocolStateMachineObject & obj)
+{
+	return *this;
+}
+
 
 void ProtocolStateMachineObject::destroy()
 {	

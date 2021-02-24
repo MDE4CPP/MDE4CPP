@@ -103,6 +103,9 @@ using namespace uml;
 //*********************************
 InputPinImpl::InputPinImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 InputPinImpl::~InputPinImpl()
@@ -202,6 +205,18 @@ InputPinImpl::InputPinImpl(std::weak_ptr<uml::WriteStructuralFeatureAction > par
 
 
 InputPinImpl::InputPinImpl(const InputPinImpl & obj):InputPinImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  InputPinImpl::copy() const
+{
+	std::shared_ptr<InputPinImpl> element(new InputPinImpl(*this));
+	element->setThisInputPinPtr(element);
+	return element;
+}
+
+InputPinImpl& InputPinImpl::operator=(const InputPinImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -334,13 +349,8 @@ InputPinImpl::InputPinImpl(const InputPinImpl & obj):InputPinImpl()
 		std::cout << "Copying the Subset: " << "m_upperValue" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  InputPinImpl::copy() const
-{
-	std::shared_ptr<InputPinImpl> element(new InputPinImpl(*this));
-	element->setThisInputPinPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> InputPinImpl::eStaticClass() const

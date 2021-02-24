@@ -101,6 +101,9 @@ using namespace uml;
 //*********************************
 BehavioredClassifierImpl::BehavioredClassifierImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 BehavioredClassifierImpl::~BehavioredClassifierImpl()
@@ -156,6 +159,18 @@ BehavioredClassifierImpl::BehavioredClassifierImpl(std::weak_ptr<uml::TemplatePa
 
 
 BehavioredClassifierImpl::BehavioredClassifierImpl(const BehavioredClassifierImpl & obj):BehavioredClassifierImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  BehavioredClassifierImpl::copy() const
+{
+	std::shared_ptr<BehavioredClassifierImpl> element(new BehavioredClassifierImpl(*this));
+	element->setThisBehavioredClassifierPtr(element);
+	return element;
+}
+
+BehavioredClassifierImpl& BehavioredClassifierImpl::operator=(const BehavioredClassifierImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -360,13 +375,8 @@ BehavioredClassifierImpl::BehavioredClassifierImpl(const BehavioredClassifierImp
 		std::cout << "Initialising value SubsetUnion: " << "m_ownedBehavior - SubsetUnion<uml::Behavior, uml::NamedElement >(getOwnedMember())" << std::endl;
 	#endif
 	
-}
 
-std::shared_ptr<ecore::EObject>  BehavioredClassifierImpl::copy() const
-{
-	std::shared_ptr<BehavioredClassifierImpl> element(new BehavioredClassifierImpl(*this));
-	element->setThisBehavioredClassifierPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> BehavioredClassifierImpl::eStaticClass() const

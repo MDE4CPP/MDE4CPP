@@ -61,6 +61,7 @@ LinkEndCreationDataObject::LinkEndCreationDataObject(std::shared_ptr<uml::LinkEn
 LinkEndCreationDataObject::LinkEndCreationDataObject(LinkEndCreationDataObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 LinkEndCreationDataObject::LinkEndCreationDataObject()
@@ -78,6 +79,12 @@ std::shared_ptr<ecore::EObject> LinkEndCreationDataObject::copy()
 	element->setThisLinkEndCreationDataObjectPtr(element);
 	return element;
 }
+
+LinkEndCreationDataObject& LinkEndCreationDataObject::operator=(const LinkEndCreationDataObject & obj)
+{
+	return *this;
+}
+
 
 void LinkEndCreationDataObject::destroy()
 {	

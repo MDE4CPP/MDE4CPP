@@ -64,6 +64,9 @@ using namespace fUML::Semantics::SimpleClassifiers;
 //*********************************
 IntegerValueImpl::IntegerValueImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 IntegerValueImpl::~IntegerValueImpl()
@@ -76,6 +79,18 @@ IntegerValueImpl::~IntegerValueImpl()
 
 
 IntegerValueImpl::IntegerValueImpl(const IntegerValueImpl & obj):IntegerValueImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  IntegerValueImpl::copy() const
+{
+	std::shared_ptr<IntegerValueImpl> element(new IntegerValueImpl(*this));
+	element->setThisIntegerValuePtr(element);
+	return element;
+}
+
+IntegerValueImpl& IntegerValueImpl::operator=(const IntegerValueImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -91,13 +106,8 @@ IntegerValueImpl::IntegerValueImpl(const IntegerValueImpl & obj):IntegerValueImp
 	//Clone references with containment (deep copy)
 
 
-}
 
-std::shared_ptr<ecore::EObject>  IntegerValueImpl::copy() const
-{
-	std::shared_ptr<IntegerValueImpl> element(new IntegerValueImpl(*this));
-	element->setThisIntegerValuePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> IntegerValueImpl::eStaticClass() const

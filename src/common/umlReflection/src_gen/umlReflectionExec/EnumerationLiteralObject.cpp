@@ -82,6 +82,7 @@ EnumerationLiteralObject::EnumerationLiteralObject(std::shared_ptr<uml::Enumerat
 EnumerationLiteralObject::EnumerationLiteralObject(EnumerationLiteralObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 EnumerationLiteralObject::EnumerationLiteralObject()
@@ -99,6 +100,12 @@ std::shared_ptr<ecore::EObject> EnumerationLiteralObject::copy()
 	element->setThisEnumerationLiteralObjectPtr(element);
 	return element;
 }
+
+EnumerationLiteralObject& EnumerationLiteralObject::operator=(const EnumerationLiteralObject & obj)
+{
+	return *this;
+}
+
 
 void EnumerationLiteralObject::destroy()
 {	

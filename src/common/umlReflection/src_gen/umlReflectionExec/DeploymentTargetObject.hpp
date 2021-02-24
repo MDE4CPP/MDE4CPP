@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~DeploymentTargetObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			DeploymentTargetObject& operator=(DeploymentTargetObject const&);
 
 			virtual void destroy();
 			

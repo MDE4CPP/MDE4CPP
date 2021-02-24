@@ -75,7 +75,6 @@ namespace uml
 	{
 		public:
  			PackageMerge(const PackageMerge &) {}
-			PackageMerge& operator=(PackageMerge const&) = delete;
 
 		protected:
 			PackageMerge(){}

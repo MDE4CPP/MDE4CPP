@@ -41,9 +41,9 @@ using namespace StandardProfile;
 //*********************************
 MetaclassImpl::MetaclassImpl()
 {
-	#ifdef ADD_COUNT
-		ADD_COUNT("MetaclassImpl()");
-	#endif
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 
 	DEBUG_MESSAGE(std::cout<<"Metaclass is created..."<<std::endl;)
 
@@ -61,20 +61,12 @@ MetaclassImpl::MetaclassImpl()
 
 MetaclassImpl::~MetaclassImpl()
 {
-	#ifdef SUB_COUNT
-		SUB_COUNT("MetaclassImpl()");
-	#endif
-
 	DEBUG_MESSAGE(std::cout<<"Metaclass is destroyed..."<<std::endl;)
 }
 
 MetaclassImpl::MetaclassImpl(const MetaclassImpl & obj):MetaclassImpl()
 {
-	//create copy of all Attributes
-	#ifdef SHOW_COPIES
-	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Metaclass "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
-	#endif
-	instantiate();
+	*this = obj;
 }
 
 std::shared_ptr<ecore::EObject>  MetaclassImpl::copy() const
@@ -82,6 +74,16 @@ std::shared_ptr<ecore::EObject>  MetaclassImpl::copy() const
 	std::shared_ptr<MetaclassImpl> element(new MetaclassImpl(*this));
 	element->setThisMetaclassPtr(element);
 	return element;
+}
+
+MetaclassImpl& MetaclassImpl::operator=(const MetaclassImpl & obj)
+{
+		//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Metaclass "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
+	instantiate();
+	return *this;
 }
 
 

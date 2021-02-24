@@ -95,7 +95,6 @@ namespace fUML::Semantics::Actions
 	{
 		public:
  			ValueSpecificationActionActivation(const ValueSpecificationActionActivation &) {}
-			ValueSpecificationActionActivation& operator=(ValueSpecificationActionActivation const&) = delete;
 
 		protected:
 			ValueSpecificationActionActivation(){}

@@ -76,6 +76,7 @@ CombinedFragmentObject::CombinedFragmentObject(std::shared_ptr<uml::CombinedFrag
 CombinedFragmentObject::CombinedFragmentObject(CombinedFragmentObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 CombinedFragmentObject::CombinedFragmentObject()
@@ -93,6 +94,12 @@ std::shared_ptr<ecore::EObject> CombinedFragmentObject::copy()
 	element->setThisCombinedFragmentObjectPtr(element);
 	return element;
 }
+
+CombinedFragmentObject& CombinedFragmentObject::operator=(const CombinedFragmentObject & obj)
+{
+	return *this;
+}
+
 
 void CombinedFragmentObject::destroy()
 {	

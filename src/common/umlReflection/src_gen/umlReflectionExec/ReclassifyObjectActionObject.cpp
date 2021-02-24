@@ -103,6 +103,7 @@ ReclassifyObjectActionObject::ReclassifyObjectActionObject(std::shared_ptr<uml::
 ReclassifyObjectActionObject::ReclassifyObjectActionObject(ReclassifyObjectActionObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ReclassifyObjectActionObject::ReclassifyObjectActionObject()
@@ -120,6 +121,12 @@ std::shared_ptr<ecore::EObject> ReclassifyObjectActionObject::copy()
 	element->setThisReclassifyObjectActionObjectPtr(element);
 	return element;
 }
+
+ReclassifyObjectActionObject& ReclassifyObjectActionObject::operator=(const ReclassifyObjectActionObject & obj)
+{
+	return *this;
+}
+
 
 void ReclassifyObjectActionObject::destroy()
 {	

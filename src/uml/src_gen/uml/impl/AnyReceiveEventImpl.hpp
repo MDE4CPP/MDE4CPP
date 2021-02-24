@@ -22,10 +22,8 @@ namespace uml
 	{
 		public: 
 			AnyReceiveEventImpl(const AnyReceiveEventImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			AnyReceiveEventImpl& operator=(AnyReceiveEventImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			AnyReceiveEventImpl& operator=(AnyReceiveEventImpl const&);
 
 		protected:
 			friend class umlFactoryImpl;

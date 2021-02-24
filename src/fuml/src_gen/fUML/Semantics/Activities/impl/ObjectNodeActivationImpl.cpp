@@ -63,6 +63,9 @@ using namespace fUML::Semantics::Activities;
 //*********************************
 ObjectNodeActivationImpl::ObjectNodeActivationImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ObjectNodeActivationImpl::~ObjectNodeActivationImpl()
@@ -81,6 +84,18 @@ ObjectNodeActivationImpl::ObjectNodeActivationImpl(std::weak_ptr<fUML::Semantics
 
 
 ObjectNodeActivationImpl::ObjectNodeActivationImpl(const ObjectNodeActivationImpl & obj):ObjectNodeActivationImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ObjectNodeActivationImpl::copy() const
+{
+	std::shared_ptr<ObjectNodeActivationImpl> element(new ObjectNodeActivationImpl(*this));
+	element->setThisObjectNodeActivationPtr(element);
+	return element;
+}
+
+ObjectNodeActivationImpl& ObjectNodeActivationImpl::operator=(const ObjectNodeActivationImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -113,13 +128,8 @@ ObjectNodeActivationImpl::ObjectNodeActivationImpl(const ObjectNodeActivationImp
 		std::cout << "Copying the Subset: " << "m_heldTokens" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  ObjectNodeActivationImpl::copy() const
-{
-	std::shared_ptr<ObjectNodeActivationImpl> element(new ObjectNodeActivationImpl(*this));
-	element->setThisObjectNodeActivationPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ObjectNodeActivationImpl::eStaticClass() const

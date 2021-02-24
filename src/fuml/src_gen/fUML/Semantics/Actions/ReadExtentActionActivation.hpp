@@ -95,7 +95,6 @@ namespace fUML::Semantics::Actions
 	{
 		public:
  			ReadExtentActionActivation(const ReadExtentActionActivation &) {}
-			ReadExtentActionActivation& operator=(ReadExtentActionActivation const&) = delete;
 
 		protected:
 			ReadExtentActionActivation(){}

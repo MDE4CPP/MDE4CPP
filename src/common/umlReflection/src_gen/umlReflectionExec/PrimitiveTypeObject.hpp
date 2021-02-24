@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~PrimitiveTypeObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			PrimitiveTypeObject& operator=(PrimitiveTypeObject const&);
 
 			virtual void destroy();
 			

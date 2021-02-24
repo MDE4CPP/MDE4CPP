@@ -100,6 +100,7 @@ WriteLinkActionObject::WriteLinkActionObject(std::shared_ptr<uml::WriteLinkActio
 WriteLinkActionObject::WriteLinkActionObject(WriteLinkActionObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 WriteLinkActionObject::WriteLinkActionObject()
@@ -117,6 +118,12 @@ std::shared_ptr<ecore::EObject> WriteLinkActionObject::copy()
 	element->setThisWriteLinkActionObjectPtr(element);
 	return element;
 }
+
+WriteLinkActionObject& WriteLinkActionObject::operator=(const WriteLinkActionObject & obj)
+{
+	return *this;
+}
+
 
 void WriteLinkActionObject::destroy()
 {	

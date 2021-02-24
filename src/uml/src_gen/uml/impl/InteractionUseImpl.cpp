@@ -75,6 +75,9 @@ using namespace uml;
 //*********************************
 InteractionUseImpl::InteractionUseImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 InteractionUseImpl::~InteractionUseImpl()
@@ -117,6 +120,18 @@ InteractionUseImpl::InteractionUseImpl(std::weak_ptr<uml::Element > par_owner)
 
 
 InteractionUseImpl::InteractionUseImpl(const InteractionUseImpl & obj):InteractionUseImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  InteractionUseImpl::copy() const
+{
+	std::shared_ptr<InteractionUseImpl> element(new InteractionUseImpl(*this));
+	element->setThisInteractionUsePtr(element);
+	return element;
+}
+
+InteractionUseImpl& InteractionUseImpl::operator=(const InteractionUseImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -211,13 +226,8 @@ InteractionUseImpl::InteractionUseImpl(const InteractionUseImpl & obj):Interacti
 	
 
 	
-}
 
-std::shared_ptr<ecore::EObject>  InteractionUseImpl::copy() const
-{
-	std::shared_ptr<InteractionUseImpl> element(new InteractionUseImpl(*this));
-	element->setThisInteractionUsePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> InteractionUseImpl::eStaticClass() const

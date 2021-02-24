@@ -162,7 +162,6 @@ namespace uml
 	{
 		public:
  			Port(const Port &) {}
-			Port& operator=(Port const&) = delete;
 
 		protected:
 			Port(){}

@@ -78,6 +78,7 @@ DependencyObject::DependencyObject(std::shared_ptr<uml::Dependency> _element):
 DependencyObject::DependencyObject(DependencyObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 DependencyObject::DependencyObject()
@@ -95,6 +96,12 @@ std::shared_ptr<ecore::EObject> DependencyObject::copy()
 	element->setThisDependencyObjectPtr(element);
 	return element;
 }
+
+DependencyObject& DependencyObject::operator=(const DependencyObject & obj)
+{
+	return *this;
+}
+
 
 void DependencyObject::destroy()
 {	

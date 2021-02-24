@@ -63,6 +63,9 @@ using namespace uml;
 //*********************************
 GeneralOrderingImpl::GeneralOrderingImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 GeneralOrderingImpl::~GeneralOrderingImpl()
@@ -89,6 +92,18 @@ GeneralOrderingImpl::GeneralOrderingImpl(std::weak_ptr<uml::Element > par_owner)
 
 
 GeneralOrderingImpl::GeneralOrderingImpl(const GeneralOrderingImpl & obj):GeneralOrderingImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  GeneralOrderingImpl::copy() const
+{
+	std::shared_ptr<GeneralOrderingImpl> element(new GeneralOrderingImpl(*this));
+	element->setThisGeneralOrderingPtr(element);
+	return element;
+}
+
+GeneralOrderingImpl& GeneralOrderingImpl::operator=(const GeneralOrderingImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -130,13 +145,8 @@ GeneralOrderingImpl::GeneralOrderingImpl(const GeneralOrderingImpl & obj):Genera
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  GeneralOrderingImpl::copy() const
-{
-	std::shared_ptr<GeneralOrderingImpl> element(new GeneralOrderingImpl(*this));
-	element->setThisGeneralOrderingPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> GeneralOrderingImpl::eStaticClass() const

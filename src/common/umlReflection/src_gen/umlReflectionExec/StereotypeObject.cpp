@@ -155,6 +155,7 @@ StereotypeObject::StereotypeObject(std::shared_ptr<uml::Stereotype> _element):
 StereotypeObject::StereotypeObject(StereotypeObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 StereotypeObject::StereotypeObject()
@@ -172,6 +173,12 @@ std::shared_ptr<ecore::EObject> StereotypeObject::copy()
 	element->setThisStereotypeObjectPtr(element);
 	return element;
 }
+
+StereotypeObject& StereotypeObject::operator=(const StereotypeObject & obj)
+{
+	return *this;
+}
+
 
 void StereotypeObject::destroy()
 {	

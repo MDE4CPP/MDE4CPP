@@ -55,6 +55,7 @@ ParameterableElementObject::ParameterableElementObject(std::shared_ptr<uml::Para
 ParameterableElementObject::ParameterableElementObject(ParameterableElementObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ParameterableElementObject::ParameterableElementObject()
@@ -72,6 +73,12 @@ std::shared_ptr<ecore::EObject> ParameterableElementObject::copy()
 	element->setThisParameterableElementObjectPtr(element);
 	return element;
 }
+
+ParameterableElementObject& ParameterableElementObject::operator=(const ParameterableElementObject & obj)
+{
+	return *this;
+}
+
 
 void ParameterableElementObject::destroy()
 {	

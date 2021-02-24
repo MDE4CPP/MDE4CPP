@@ -71,6 +71,7 @@ LiteralRealObject::LiteralRealObject(std::shared_ptr<uml::LiteralReal> _element)
 LiteralRealObject::LiteralRealObject(LiteralRealObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 LiteralRealObject::LiteralRealObject()
@@ -88,6 +89,12 @@ std::shared_ptr<ecore::EObject> LiteralRealObject::copy()
 	element->setThisLiteralRealObjectPtr(element);
 	return element;
 }
+
+LiteralRealObject& LiteralRealObject::operator=(const LiteralRealObject & obj)
+{
+	return *this;
+}
+
 
 void LiteralRealObject::destroy()
 {	

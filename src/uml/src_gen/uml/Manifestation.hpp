@@ -111,7 +111,6 @@ namespace uml
 	{
 		public:
  			Manifestation(const Manifestation &) {}
-			Manifestation& operator=(Manifestation const&) = delete;
 
 		protected:
 			Manifestation(){}

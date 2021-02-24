@@ -156,7 +156,6 @@ namespace uml
 	{
 		public:
  			InvocationAction(const InvocationAction &) {}
-			InvocationAction& operator=(InvocationAction const&) = delete;
 
 		protected:
 			InvocationAction(){}

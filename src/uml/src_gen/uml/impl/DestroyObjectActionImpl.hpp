@@ -22,10 +22,8 @@ namespace uml
 	{
 		public: 
 			DestroyObjectActionImpl(const DestroyObjectActionImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			DestroyObjectActionImpl& operator=(DestroyObjectActionImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			DestroyObjectActionImpl& operator=(DestroyObjectActionImpl const&);
 
 		protected:
 			friend class umlFactoryImpl;

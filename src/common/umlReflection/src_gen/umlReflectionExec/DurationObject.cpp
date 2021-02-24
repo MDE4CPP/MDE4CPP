@@ -74,6 +74,7 @@ DurationObject::DurationObject(std::shared_ptr<uml::Duration> _element):
 DurationObject::DurationObject(DurationObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 DurationObject::DurationObject()
@@ -91,6 +92,12 @@ std::shared_ptr<ecore::EObject> DurationObject::copy()
 	element->setThisDurationObjectPtr(element);
 	return element;
 }
+
+DurationObject& DurationObject::operator=(const DurationObject & obj)
+{
+	return *this;
+}
+
 
 void DurationObject::destroy()
 {	

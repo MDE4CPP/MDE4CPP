@@ -127,6 +127,7 @@ ActorObject::ActorObject(std::shared_ptr<uml::Actor> _element):
 ActorObject::ActorObject(ActorObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ActorObject::ActorObject()
@@ -144,6 +145,12 @@ std::shared_ptr<ecore::EObject> ActorObject::copy()
 	element->setThisActorObjectPtr(element);
 	return element;
 }
+
+ActorObject& ActorObject::operator=(const ActorObject & obj)
+{
+	return *this;
+}
+
 
 void ActorObject::destroy()
 {	

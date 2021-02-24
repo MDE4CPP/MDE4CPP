@@ -70,6 +70,9 @@ using namespace uml;
 //*********************************
 LiteralUnlimitedNaturalImpl::LiteralUnlimitedNaturalImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 LiteralUnlimitedNaturalImpl::~LiteralUnlimitedNaturalImpl()
@@ -129,6 +132,18 @@ LiteralUnlimitedNaturalImpl::LiteralUnlimitedNaturalImpl(std::weak_ptr<uml::Valu
 
 LiteralUnlimitedNaturalImpl::LiteralUnlimitedNaturalImpl(const LiteralUnlimitedNaturalImpl & obj):LiteralUnlimitedNaturalImpl()
 {
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  LiteralUnlimitedNaturalImpl::copy() const
+{
+	std::shared_ptr<LiteralUnlimitedNaturalImpl> element(new LiteralUnlimitedNaturalImpl(*this));
+	element->setThisLiteralUnlimitedNaturalPtr(element);
+	return element;
+}
+
+LiteralUnlimitedNaturalImpl& LiteralUnlimitedNaturalImpl::operator=(const LiteralUnlimitedNaturalImpl & obj)
+{
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy LiteralUnlimitedNatural "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -178,13 +193,8 @@ LiteralUnlimitedNaturalImpl::LiteralUnlimitedNaturalImpl(const LiteralUnlimitedN
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  LiteralUnlimitedNaturalImpl::copy() const
-{
-	std::shared_ptr<LiteralUnlimitedNaturalImpl> element(new LiteralUnlimitedNaturalImpl(*this));
-	element->setThisLiteralUnlimitedNaturalPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> LiteralUnlimitedNaturalImpl::eStaticClass() const

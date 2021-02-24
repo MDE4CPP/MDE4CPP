@@ -71,6 +71,7 @@ TimeEventObject::TimeEventObject(std::shared_ptr<uml::TimeEvent> _element):
 TimeEventObject::TimeEventObject(TimeEventObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 TimeEventObject::TimeEventObject()
@@ -88,6 +89,12 @@ std::shared_ptr<ecore::EObject> TimeEventObject::copy()
 	element->setThisTimeEventObjectPtr(element);
 	return element;
 }
+
+TimeEventObject& TimeEventObject::operator=(const TimeEventObject & obj)
+{
+	return *this;
+}
+
 
 void TimeEventObject::destroy()
 {	

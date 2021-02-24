@@ -81,7 +81,6 @@ namespace fUML::Semantics::CommonBehavior
 	{
 		public:
  			ClassifierBehaviorInvocationEventAccepter(const ClassifierBehaviorInvocationEventAccepter &) {}
-			ClassifierBehaviorInvocationEventAccepter& operator=(ClassifierBehaviorInvocationEventAccepter const&) = delete;
 
 		protected:
 			ClassifierBehaviorInvocationEventAccepter(){}

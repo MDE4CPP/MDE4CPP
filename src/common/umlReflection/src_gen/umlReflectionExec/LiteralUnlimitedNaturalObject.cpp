@@ -71,6 +71,7 @@ LiteralUnlimitedNaturalObject::LiteralUnlimitedNaturalObject(std::shared_ptr<uml
 LiteralUnlimitedNaturalObject::LiteralUnlimitedNaturalObject(LiteralUnlimitedNaturalObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 LiteralUnlimitedNaturalObject::LiteralUnlimitedNaturalObject()
@@ -88,6 +89,12 @@ std::shared_ptr<ecore::EObject> LiteralUnlimitedNaturalObject::copy()
 	element->setThisLiteralUnlimitedNaturalObjectPtr(element);
 	return element;
 }
+
+LiteralUnlimitedNaturalObject& LiteralUnlimitedNaturalObject::operator=(const LiteralUnlimitedNaturalObject & obj)
+{
+	return *this;
+}
+
 
 void LiteralUnlimitedNaturalObject::destroy()
 {	

@@ -88,7 +88,6 @@ namespace uml
 	{
 		public:
  			TemplateBinding(const TemplateBinding &) {}
-			TemplateBinding& operator=(TemplateBinding const&) = delete;
 
 		protected:
 			TemplateBinding(){}

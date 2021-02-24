@@ -23,10 +23,8 @@ namespace PSCS::Semantics::Values
 	{
 		public: 
 			CS_OpaqueExpressionEvaluationImpl(const CS_OpaqueExpressionEvaluationImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			CS_OpaqueExpressionEvaluationImpl& operator=(CS_OpaqueExpressionEvaluationImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			CS_OpaqueExpressionEvaluationImpl& operator=(CS_OpaqueExpressionEvaluationImpl const&);
 
 		protected:
 			friend class PSCS::Semantics::Values::ValuesFactoryImpl;

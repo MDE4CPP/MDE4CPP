@@ -87,6 +87,7 @@ DecisionNodeObject::DecisionNodeObject(std::shared_ptr<uml::DecisionNode> _eleme
 DecisionNodeObject::DecisionNodeObject(DecisionNodeObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 DecisionNodeObject::DecisionNodeObject()
@@ -104,6 +105,12 @@ std::shared_ptr<ecore::EObject> DecisionNodeObject::copy()
 	element->setThisDecisionNodeObjectPtr(element);
 	return element;
 }
+
+DecisionNodeObject& DecisionNodeObject::operator=(const DecisionNodeObject & obj)
+{
+	return *this;
+}
+
 
 void DecisionNodeObject::destroy()
 {	

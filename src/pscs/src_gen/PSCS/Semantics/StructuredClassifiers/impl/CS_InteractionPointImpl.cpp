@@ -72,6 +72,9 @@ using namespace PSCS::Semantics::StructuredClassifiers;
 //*********************************
 CS_InteractionPointImpl::CS_InteractionPointImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 CS_InteractionPointImpl::~CS_InteractionPointImpl()
@@ -84,6 +87,18 @@ CS_InteractionPointImpl::~CS_InteractionPointImpl()
 
 
 CS_InteractionPointImpl::CS_InteractionPointImpl(const CS_InteractionPointImpl & obj):CS_InteractionPointImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  CS_InteractionPointImpl::copy() const
+{
+	std::shared_ptr<CS_InteractionPointImpl> element(new CS_InteractionPointImpl(*this));
+	element->setThisCS_InteractionPointPtr(element);
+	return element;
+}
+
+CS_InteractionPointImpl& CS_InteractionPointImpl::operator=(const CS_InteractionPointImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -102,13 +117,8 @@ CS_InteractionPointImpl::CS_InteractionPointImpl(const CS_InteractionPointImpl &
 	//Clone references with containment (deep copy)
 
 
-}
 
-std::shared_ptr<ecore::EObject>  CS_InteractionPointImpl::copy() const
-{
-	std::shared_ptr<CS_InteractionPointImpl> element(new CS_InteractionPointImpl(*this));
-	element->setThisCS_InteractionPointPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> CS_InteractionPointImpl::eStaticClass() const

@@ -79,6 +79,9 @@ using namespace uml;
 //*********************************
 InitialNodeImpl::InitialNodeImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 InitialNodeImpl::~InitialNodeImpl()
@@ -121,6 +124,18 @@ InitialNodeImpl::InitialNodeImpl(std::weak_ptr<uml::Element > par_owner)
 
 
 InitialNodeImpl::InitialNodeImpl(const InitialNodeImpl & obj):InitialNodeImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  InitialNodeImpl::copy() const
+{
+	std::shared_ptr<InitialNodeImpl> element(new InitialNodeImpl(*this));
+	element->setThisInitialNodePtr(element);
+	return element;
+}
+
+InitialNodeImpl& InitialNodeImpl::operator=(const InitialNodeImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -202,13 +217,8 @@ InitialNodeImpl::InitialNodeImpl(const InitialNodeImpl & obj):InitialNodeImpl()
 		std::cout << "Copying the Subset: " << "m_redefinedNode" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  InitialNodeImpl::copy() const
-{
-	std::shared_ptr<InitialNodeImpl> element(new InitialNodeImpl(*this));
-	element->setThisInitialNodePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> InitialNodeImpl::eStaticClass() const

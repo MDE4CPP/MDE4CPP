@@ -60,6 +60,9 @@ using namespace uml;
 //*********************************
 LinkEndDestructionDataImpl::LinkEndDestructionDataImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 LinkEndDestructionDataImpl::~LinkEndDestructionDataImpl()
@@ -78,6 +81,18 @@ LinkEndDestructionDataImpl::LinkEndDestructionDataImpl(std::weak_ptr<uml::Elemen
 
 
 LinkEndDestructionDataImpl::LinkEndDestructionDataImpl(const LinkEndDestructionDataImpl & obj):LinkEndDestructionDataImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  LinkEndDestructionDataImpl::copy() const
+{
+	std::shared_ptr<LinkEndDestructionDataImpl> element(new LinkEndDestructionDataImpl(*this));
+	element->setThisLinkEndDestructionDataPtr(element);
+	return element;
+}
+
+LinkEndDestructionDataImpl& LinkEndDestructionDataImpl::operator=(const LinkEndDestructionDataImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -115,13 +130,8 @@ LinkEndDestructionDataImpl::LinkEndDestructionDataImpl(const LinkEndDestructionD
 		std::cout << "Copying the Subset: " << "m_qualifier" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  LinkEndDestructionDataImpl::copy() const
-{
-	std::shared_ptr<LinkEndDestructionDataImpl> element(new LinkEndDestructionDataImpl(*this));
-	element->setThisLinkEndDestructionDataPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> LinkEndDestructionDataImpl::eStaticClass() const

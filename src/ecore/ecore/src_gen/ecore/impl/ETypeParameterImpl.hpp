@@ -22,10 +22,8 @@ namespace ecore
 	{
 		public: 
 			ETypeParameterImpl(const ETypeParameterImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			ETypeParameterImpl& operator=(ETypeParameterImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			ETypeParameterImpl& operator=(ETypeParameterImpl const&);
 
 		protected:
 			friend class ecoreFactoryImpl;

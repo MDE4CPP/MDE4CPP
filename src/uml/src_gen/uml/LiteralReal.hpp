@@ -110,7 +110,6 @@ namespace uml
 	{
 		public:
  			LiteralReal(const LiteralReal &) {}
-			LiteralReal& operator=(LiteralReal const&) = delete;
 
 		protected:
 			LiteralReal(){}

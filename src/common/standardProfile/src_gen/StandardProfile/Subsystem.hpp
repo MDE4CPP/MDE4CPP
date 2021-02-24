@@ -25,9 +25,6 @@ namespace StandardProfile
 {
 	class Subsystem : virtual public uml::Stereotype 
 	{
-		private:    
-			Subsystem(const Subsystem& that) = delete;
-
 		protected:
 			Subsystem(){}
 

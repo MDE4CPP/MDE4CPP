@@ -69,7 +69,6 @@ namespace ecore
 	{
 		public:
  			EGenericType(const EGenericType &) {}
-			EGenericType& operator=(EGenericType const&) = delete;
 
 		protected:
 			EGenericType(){}

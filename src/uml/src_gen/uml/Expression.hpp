@@ -111,7 +111,6 @@ namespace uml
 	{
 		public:
  			Expression(const Expression &) {}
-			Expression& operator=(Expression const&) = delete;
 
 		protected:
 			Expression(){}

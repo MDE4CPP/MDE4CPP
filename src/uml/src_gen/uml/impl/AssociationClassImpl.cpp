@@ -117,6 +117,9 @@ using namespace uml;
 //*********************************
 AssociationClassImpl::AssociationClassImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 AssociationClassImpl::~AssociationClassImpl()
@@ -172,6 +175,18 @@ AssociationClassImpl::AssociationClassImpl(std::weak_ptr<uml::TemplateParameter 
 
 
 AssociationClassImpl::AssociationClassImpl(const AssociationClassImpl & obj):AssociationClassImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  AssociationClassImpl::copy() const
+{
+	std::shared_ptr<AssociationClassImpl> element(new AssociationClassImpl(*this));
+	element->setThisAssociationClassPtr(element);
+	return element;
+}
+
+AssociationClassImpl& AssociationClassImpl::operator=(const AssociationClassImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -457,13 +472,8 @@ AssociationClassImpl::AssociationClassImpl(const AssociationClassImpl & obj):Ass
 		std::cout << "Copying the Subset: " << "m_templateBinding" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  AssociationClassImpl::copy() const
-{
-	std::shared_ptr<AssociationClassImpl> element(new AssociationClassImpl(*this));
-	element->setThisAssociationClassPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> AssociationClassImpl::eStaticClass() const

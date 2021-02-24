@@ -70,6 +70,7 @@ TypeObject::TypeObject(std::shared_ptr<uml::Type> _element):
 TypeObject::TypeObject(TypeObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 TypeObject::TypeObject()
@@ -87,6 +88,12 @@ std::shared_ptr<ecore::EObject> TypeObject::copy()
 	element->setThisTypeObjectPtr(element);
 	return element;
 }
+
+TypeObject& TypeObject::operator=(const TypeObject & obj)
+{
+	return *this;
+}
+
 
 void TypeObject::destroy()
 {	

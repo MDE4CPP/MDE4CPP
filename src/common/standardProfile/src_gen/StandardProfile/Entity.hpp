@@ -25,9 +25,6 @@ namespace StandardProfile
 {
 	class Entity : virtual public uml::Stereotype 
 	{
-		private:    
-			Entity(const Entity& that) = delete;
-
 		protected:
 			Entity(){}
 

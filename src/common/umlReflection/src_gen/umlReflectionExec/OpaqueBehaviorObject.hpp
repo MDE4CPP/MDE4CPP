@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~OpaqueBehaviorObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			OpaqueBehaviorObject& operator=(OpaqueBehaviorObject const&);
 
 			virtual void destroy();
 			

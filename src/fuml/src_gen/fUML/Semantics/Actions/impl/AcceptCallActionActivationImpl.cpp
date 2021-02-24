@@ -73,6 +73,9 @@ using namespace fUML::Semantics::Actions;
 //*********************************
 AcceptCallActionActivationImpl::AcceptCallActionActivationImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 AcceptCallActionActivationImpl::~AcceptCallActionActivationImpl()
@@ -91,6 +94,18 @@ AcceptCallActionActivationImpl::AcceptCallActionActivationImpl(std::weak_ptr<fUM
 
 
 AcceptCallActionActivationImpl::AcceptCallActionActivationImpl(const AcceptCallActionActivationImpl & obj):AcceptCallActionActivationImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  AcceptCallActionActivationImpl::copy() const
+{
+	std::shared_ptr<AcceptCallActionActivationImpl> element(new AcceptCallActionActivationImpl(*this));
+	element->setThisAcceptCallActionActivationPtr(element);
+	return element;
+}
+
+AcceptCallActionActivationImpl& AcceptCallActionActivationImpl::operator=(const AcceptCallActionActivationImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -147,13 +162,8 @@ AcceptCallActionActivationImpl::AcceptCallActionActivationImpl(const AcceptCallA
 		std::cout << "Copying the Subset: " << "m_outputPinActivation" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  AcceptCallActionActivationImpl::copy() const
-{
-	std::shared_ptr<AcceptCallActionActivationImpl> element(new AcceptCallActionActivationImpl(*this));
-	element->setThisAcceptCallActionActivationPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> AcceptCallActionActivationImpl::eStaticClass() const

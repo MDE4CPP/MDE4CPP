@@ -22,10 +22,8 @@ namespace ecore
 	{
 		public: 
 			EOperationImpl(const EOperationImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			EOperationImpl& operator=(EOperationImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			EOperationImpl& operator=(EOperationImpl const&);
 
 		protected:
 			friend class ecoreFactoryImpl;

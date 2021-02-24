@@ -64,6 +64,9 @@ using namespace PSCS::Semantics::Values;
 //*********************************
 CS_OpaqueExpressionEvaluationImpl::CS_OpaqueExpressionEvaluationImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 CS_OpaqueExpressionEvaluationImpl::~CS_OpaqueExpressionEvaluationImpl()
@@ -76,6 +79,18 @@ CS_OpaqueExpressionEvaluationImpl::~CS_OpaqueExpressionEvaluationImpl()
 
 
 CS_OpaqueExpressionEvaluationImpl::CS_OpaqueExpressionEvaluationImpl(const CS_OpaqueExpressionEvaluationImpl & obj):CS_OpaqueExpressionEvaluationImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  CS_OpaqueExpressionEvaluationImpl::copy() const
+{
+	std::shared_ptr<CS_OpaqueExpressionEvaluationImpl> element(new CS_OpaqueExpressionEvaluationImpl(*this));
+	element->setThisCS_OpaqueExpressionEvaluationPtr(element);
+	return element;
+}
+
+CS_OpaqueExpressionEvaluationImpl& CS_OpaqueExpressionEvaluationImpl::operator=(const CS_OpaqueExpressionEvaluationImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -92,13 +107,8 @@ CS_OpaqueExpressionEvaluationImpl::CS_OpaqueExpressionEvaluationImpl(const CS_Op
 	//Clone references with containment (deep copy)
 
 
-}
 
-std::shared_ptr<ecore::EObject>  CS_OpaqueExpressionEvaluationImpl::copy() const
-{
-	std::shared_ptr<CS_OpaqueExpressionEvaluationImpl> element(new CS_OpaqueExpressionEvaluationImpl(*this));
-	element->setThisCS_OpaqueExpressionEvaluationPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> CS_OpaqueExpressionEvaluationImpl::eStaticClass() const

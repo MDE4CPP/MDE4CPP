@@ -76,7 +76,6 @@ namespace fUML::Semantics::Activities
 	{
 		public:
  			ControlNodeActivation(const ControlNodeActivation &) {}
-			ControlNodeActivation& operator=(ControlNodeActivation const&) = delete;
 
 		protected:
 			ControlNodeActivation(){}

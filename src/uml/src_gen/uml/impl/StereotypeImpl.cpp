@@ -119,6 +119,9 @@ using namespace uml;
 //*********************************
 StereotypeImpl::StereotypeImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 StereotypeImpl::~StereotypeImpl()
@@ -174,6 +177,18 @@ StereotypeImpl::StereotypeImpl(std::weak_ptr<uml::TemplateParameter > par_owning
 
 
 StereotypeImpl::StereotypeImpl(const StereotypeImpl & obj):StereotypeImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  StereotypeImpl::copy() const
+{
+	std::shared_ptr<StereotypeImpl> element(new StereotypeImpl(*this));
+	element->setThisStereotypePtr(element);
+	return element;
+}
+
+StereotypeImpl& StereotypeImpl::operator=(const StereotypeImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -439,13 +454,8 @@ StereotypeImpl::StereotypeImpl(const StereotypeImpl & obj):StereotypeImpl()
 		std::cout << "Initialising value Subset: " << "m_icon - Subset<uml::Image, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
 	
-}
 
-std::shared_ptr<ecore::EObject>  StereotypeImpl::copy() const
-{
-	std::shared_ptr<StereotypeImpl> element(new StereotypeImpl(*this));
-	element->setThisStereotypePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> StereotypeImpl::eStaticClass() const

@@ -52,7 +52,6 @@ namespace fUML::Semantics::Loci
 	{
 		public:
  			SemanticStrategy(const SemanticStrategy &) {}
-			SemanticStrategy& operator=(SemanticStrategy const&) = delete;
 
 		protected:
 			SemanticStrategy(){}

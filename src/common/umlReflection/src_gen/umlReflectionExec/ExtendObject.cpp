@@ -76,6 +76,7 @@ ExtendObject::ExtendObject(std::shared_ptr<uml::Extend> _element):
 ExtendObject::ExtendObject(ExtendObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ExtendObject::ExtendObject()
@@ -93,6 +94,12 @@ std::shared_ptr<ecore::EObject> ExtendObject::copy()
 	element->setThisExtendObjectPtr(element);
 	return element;
 }
+
+ExtendObject& ExtendObject::operator=(const ExtendObject & obj)
+{
+	return *this;
+}
+
 
 void ExtendObject::destroy()
 {	

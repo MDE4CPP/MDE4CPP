@@ -69,6 +69,9 @@ using namespace uml;
 //*********************************
 ExtendImpl::ExtendImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ExtendImpl::~ExtendImpl()
@@ -103,6 +106,18 @@ ExtendImpl::ExtendImpl(std::weak_ptr<uml::Element > par_owner)
 
 
 ExtendImpl::ExtendImpl(const ExtendImpl & obj):ExtendImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ExtendImpl::copy() const
+{
+	std::shared_ptr<ExtendImpl> element(new ExtendImpl(*this));
+	element->setThisExtendPtr(element);
+	return element;
+}
+
+ExtendImpl& ExtendImpl::operator=(const ExtendImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -163,13 +178,8 @@ ExtendImpl::ExtendImpl(const ExtendImpl & obj):ExtendImpl()
 	#endif
 
 	
-}
 
-std::shared_ptr<ecore::EObject>  ExtendImpl::copy() const
-{
-	std::shared_ptr<ExtendImpl> element(new ExtendImpl(*this));
-	element->setThisExtendPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ExtendImpl::eStaticClass() const

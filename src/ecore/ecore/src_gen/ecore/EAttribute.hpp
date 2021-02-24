@@ -85,7 +85,6 @@ namespace ecore
 	{
 		public:
  			EAttribute(const EAttribute &) {}
-			EAttribute& operator=(EAttribute const&) = delete;
 
 		protected:
 			EAttribute(){}

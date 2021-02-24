@@ -22,10 +22,8 @@ namespace uml
 	{
 		public: 
 			BehavioredClassifierImpl(const BehavioredClassifierImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			BehavioredClassifierImpl& operator=(BehavioredClassifierImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			BehavioredClassifierImpl& operator=(BehavioredClassifierImpl const&);
 
 		protected:
 			friend class umlFactoryImpl;

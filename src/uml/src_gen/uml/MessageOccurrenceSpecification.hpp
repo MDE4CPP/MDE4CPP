@@ -117,7 +117,6 @@ namespace uml
 	{
 		public:
  			MessageOccurrenceSpecification(const MessageOccurrenceSpecification &) {}
-			MessageOccurrenceSpecification& operator=(MessageOccurrenceSpecification const&) = delete;
 
 		protected:
 			MessageOccurrenceSpecification(){}

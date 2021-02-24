@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~TimeEventObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			TimeEventObject& operator=(TimeEventObject const&);
 
 			virtual void destroy();
 			

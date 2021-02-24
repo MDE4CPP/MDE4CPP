@@ -109,7 +109,6 @@ namespace uml
 	{
 		public:
  			GeneralizationSet(const GeneralizationSet &) {}
-			GeneralizationSet& operator=(GeneralizationSet const&) = delete;
 
 		protected:
 			GeneralizationSet(){}

@@ -22,10 +22,8 @@ namespace uml
 	{
 		public: 
 			ContinuationImpl(const ContinuationImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			ContinuationImpl& operator=(ContinuationImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			ContinuationImpl& operator=(ContinuationImpl const&);
 
 		protected:
 			friend class umlFactoryImpl;

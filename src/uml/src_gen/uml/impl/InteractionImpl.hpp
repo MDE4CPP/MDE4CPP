@@ -23,10 +23,8 @@ namespace uml
 	{
 		public: 
 			InteractionImpl(const InteractionImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			InteractionImpl& operator=(InteractionImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			InteractionImpl& operator=(InteractionImpl const&);
 
 		protected:
 			friend class umlFactoryImpl;

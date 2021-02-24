@@ -51,6 +51,9 @@ using namespace uml;
 //*********************************
 CommentImpl::CommentImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 CommentImpl::~CommentImpl()
@@ -69,6 +72,18 @@ CommentImpl::CommentImpl(std::weak_ptr<uml::Element > par_owner)
 
 
 CommentImpl::CommentImpl(const CommentImpl & obj):CommentImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  CommentImpl::copy() const
+{
+	std::shared_ptr<CommentImpl> element(new CommentImpl(*this));
+	element->setThisCommentPtr(element);
+	return element;
+}
+
+CommentImpl& CommentImpl::operator=(const CommentImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -95,13 +110,8 @@ CommentImpl::CommentImpl(const CommentImpl & obj):CommentImpl()
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  CommentImpl::copy() const
-{
-	std::shared_ptr<CommentImpl> element(new CommentImpl(*this));
-	element->setThisCommentPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> CommentImpl::eStaticClass() const

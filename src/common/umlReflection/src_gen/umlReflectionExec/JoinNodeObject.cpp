@@ -86,6 +86,7 @@ JoinNodeObject::JoinNodeObject(std::shared_ptr<uml::JoinNode> _element):
 JoinNodeObject::JoinNodeObject(JoinNodeObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 JoinNodeObject::JoinNodeObject()
@@ -103,6 +104,12 @@ std::shared_ptr<ecore::EObject> JoinNodeObject::copy()
 	element->setThisJoinNodeObjectPtr(element);
 	return element;
 }
+
+JoinNodeObject& JoinNodeObject::operator=(const JoinNodeObject & obj)
+{
+	return *this;
+}
+
 
 void JoinNodeObject::destroy()
 {	

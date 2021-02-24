@@ -89,6 +89,9 @@ using namespace uml;
 //*********************************
 ReduceActionImpl::ReduceActionImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ReduceActionImpl::~ReduceActionImpl()
@@ -131,6 +134,18 @@ ReduceActionImpl::ReduceActionImpl(std::weak_ptr<uml::Element > par_owner)
 
 
 ReduceActionImpl::ReduceActionImpl(const ReduceActionImpl & obj):ReduceActionImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ReduceActionImpl::copy() const
+{
+	std::shared_ptr<ReduceActionImpl> element(new ReduceActionImpl(*this));
+	element->setThisReduceActionPtr(element);
+	return element;
+}
+
+ReduceActionImpl& ReduceActionImpl::operator=(const ReduceActionImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -259,13 +274,8 @@ ReduceActionImpl::ReduceActionImpl(const ReduceActionImpl & obj):ReduceActionImp
 	
 
 	
-}
 
-std::shared_ptr<ecore::EObject>  ReduceActionImpl::copy() const
-{
-	std::shared_ptr<ReduceActionImpl> element(new ReduceActionImpl(*this));
-	element->setThisReduceActionPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ReduceActionImpl::eStaticClass() const

@@ -22,10 +22,8 @@ namespace uml
 	{
 		public: 
 			PortImpl(const PortImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			PortImpl& operator=(PortImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			PortImpl& operator=(PortImpl const&);
 
 		protected:
 			friend class umlFactoryImpl;

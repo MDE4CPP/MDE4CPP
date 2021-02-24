@@ -50,6 +50,9 @@ using namespace fUML::Semantics::CommonBehavior;
 //*********************************
 EventDispatchLoopImpl::EventDispatchLoopImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 EventDispatchLoopImpl::~EventDispatchLoopImpl()
@@ -63,6 +66,18 @@ EventDispatchLoopImpl::~EventDispatchLoopImpl()
 
 EventDispatchLoopImpl::EventDispatchLoopImpl(const EventDispatchLoopImpl & obj):EventDispatchLoopImpl()
 {
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  EventDispatchLoopImpl::copy() const
+{
+	std::shared_ptr<EventDispatchLoopImpl> element(new EventDispatchLoopImpl(*this));
+	element->setThisEventDispatchLoopPtr(element);
+	return element;
+}
+
+EventDispatchLoopImpl& EventDispatchLoopImpl::operator=(const EventDispatchLoopImpl & obj)
+{
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy EventDispatchLoop "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -74,13 +89,8 @@ EventDispatchLoopImpl::EventDispatchLoopImpl(const EventDispatchLoopImpl & obj):
 	//Clone references with containment (deep copy)
 
 
-}
 
-std::shared_ptr<ecore::EObject>  EventDispatchLoopImpl::copy() const
-{
-	std::shared_ptr<EventDispatchLoopImpl> element(new EventDispatchLoopImpl(*this));
-	element->setThisEventDispatchLoopPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> EventDispatchLoopImpl::eStaticClass() const

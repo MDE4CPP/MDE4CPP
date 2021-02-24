@@ -58,6 +58,9 @@ using namespace uml;
 //*********************************
 ExceptionHandlerImpl::ExceptionHandlerImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ExceptionHandlerImpl::~ExceptionHandlerImpl()
@@ -84,6 +87,18 @@ ExceptionHandlerImpl::ExceptionHandlerImpl(std::weak_ptr<uml::ExecutableNode > p
 
 
 ExceptionHandlerImpl::ExceptionHandlerImpl(const ExceptionHandlerImpl & obj):ExceptionHandlerImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ExceptionHandlerImpl::copy() const
+{
+	std::shared_ptr<ExceptionHandlerImpl> element(new ExceptionHandlerImpl(*this));
+	element->setThisExceptionHandlerPtr(element);
+	return element;
+}
+
+ExceptionHandlerImpl& ExceptionHandlerImpl::operator=(const ExceptionHandlerImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -115,13 +130,8 @@ ExceptionHandlerImpl::ExceptionHandlerImpl(const ExceptionHandlerImpl & obj):Exc
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  ExceptionHandlerImpl::copy() const
-{
-	std::shared_ptr<ExceptionHandlerImpl> element(new ExceptionHandlerImpl(*this));
-	element->setThisExceptionHandlerPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ExceptionHandlerImpl::eStaticClass() const

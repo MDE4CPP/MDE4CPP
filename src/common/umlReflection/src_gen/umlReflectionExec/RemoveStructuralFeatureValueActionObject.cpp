@@ -107,6 +107,7 @@ RemoveStructuralFeatureValueActionObject::RemoveStructuralFeatureValueActionObje
 RemoveStructuralFeatureValueActionObject::RemoveStructuralFeatureValueActionObject(RemoveStructuralFeatureValueActionObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 RemoveStructuralFeatureValueActionObject::RemoveStructuralFeatureValueActionObject()
@@ -124,6 +125,12 @@ std::shared_ptr<ecore::EObject> RemoveStructuralFeatureValueActionObject::copy()
 	element->setThisRemoveStructuralFeatureValueActionObjectPtr(element);
 	return element;
 }
+
+RemoveStructuralFeatureValueActionObject& RemoveStructuralFeatureValueActionObject::operator=(const RemoveStructuralFeatureValueActionObject & obj)
+{
+	return *this;
+}
+
 
 void RemoveStructuralFeatureValueActionObject::destroy()
 {	

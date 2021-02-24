@@ -66,6 +66,9 @@ using namespace fUML::Semantics::Actions;
 //*********************************
 PinActivationImpl::PinActivationImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 PinActivationImpl::~PinActivationImpl()
@@ -84,6 +87,18 @@ PinActivationImpl::PinActivationImpl(std::weak_ptr<fUML::Semantics::Activities::
 
 
 PinActivationImpl::PinActivationImpl(const PinActivationImpl & obj):PinActivationImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  PinActivationImpl::copy() const
+{
+	std::shared_ptr<PinActivationImpl> element(new PinActivationImpl(*this));
+	element->setThisPinActivationPtr(element);
+	return element;
+}
+
+PinActivationImpl& PinActivationImpl::operator=(const PinActivationImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -120,13 +135,8 @@ PinActivationImpl::PinActivationImpl(const PinActivationImpl & obj):PinActivatio
 		std::cout << "Copying the Subset: " << "m_heldTokens" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  PinActivationImpl::copy() const
-{
-	std::shared_ptr<PinActivationImpl> element(new PinActivationImpl(*this));
-	element->setThisPinActivationPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> PinActivationImpl::eStaticClass() const

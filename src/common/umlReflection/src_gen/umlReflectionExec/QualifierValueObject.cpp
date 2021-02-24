@@ -55,6 +55,7 @@ QualifierValueObject::QualifierValueObject(std::shared_ptr<uml::QualifierValue> 
 QualifierValueObject::QualifierValueObject(QualifierValueObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 QualifierValueObject::QualifierValueObject()
@@ -72,6 +73,12 @@ std::shared_ptr<ecore::EObject> QualifierValueObject::copy()
 	element->setThisQualifierValueObjectPtr(element);
 	return element;
 }
+
+QualifierValueObject& QualifierValueObject::operator=(const QualifierValueObject & obj)
+{
+	return *this;
+}
+
 
 void QualifierValueObject::destroy()
 {	

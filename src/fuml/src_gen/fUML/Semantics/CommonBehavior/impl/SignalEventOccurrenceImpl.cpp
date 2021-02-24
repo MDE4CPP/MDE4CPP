@@ -60,6 +60,9 @@ using namespace fUML::Semantics::CommonBehavior;
 //*********************************
 SignalEventOccurrenceImpl::SignalEventOccurrenceImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 SignalEventOccurrenceImpl::~SignalEventOccurrenceImpl()
@@ -72,6 +75,18 @@ SignalEventOccurrenceImpl::~SignalEventOccurrenceImpl()
 
 
 SignalEventOccurrenceImpl::SignalEventOccurrenceImpl(const SignalEventOccurrenceImpl & obj):SignalEventOccurrenceImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  SignalEventOccurrenceImpl::copy() const
+{
+	std::shared_ptr<SignalEventOccurrenceImpl> element(new SignalEventOccurrenceImpl(*this));
+	element->setThisSignalEventOccurrencePtr(element);
+	return element;
+}
+
+SignalEventOccurrenceImpl& SignalEventOccurrenceImpl::operator=(const SignalEventOccurrenceImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -88,13 +103,8 @@ SignalEventOccurrenceImpl::SignalEventOccurrenceImpl(const SignalEventOccurrence
 	//Clone references with containment (deep copy)
 
 
-}
 
-std::shared_ptr<ecore::EObject>  SignalEventOccurrenceImpl::copy() const
-{
-	std::shared_ptr<SignalEventOccurrenceImpl> element(new SignalEventOccurrenceImpl(*this));
-	element->setThisSignalEventOccurrencePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> SignalEventOccurrenceImpl::eStaticClass() const

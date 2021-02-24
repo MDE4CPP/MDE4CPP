@@ -23,10 +23,8 @@ namespace fUML::Semantics::Loci
 	{
 		public: 
 			FirstChoiceStrategyImpl(const FirstChoiceStrategyImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			FirstChoiceStrategyImpl& operator=(FirstChoiceStrategyImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			FirstChoiceStrategyImpl& operator=(FirstChoiceStrategyImpl const&);
 
 		protected:
 			friend class fUML::Semantics::Loci::LociFactoryImpl;

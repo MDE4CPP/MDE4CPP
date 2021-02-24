@@ -75,7 +75,6 @@ namespace uml
 	{
 		public:
  			ProtocolConformance(const ProtocolConformance &) {}
-			ProtocolConformance& operator=(ProtocolConformance const&) = delete;
 
 		protected:
 			ProtocolConformance(){}

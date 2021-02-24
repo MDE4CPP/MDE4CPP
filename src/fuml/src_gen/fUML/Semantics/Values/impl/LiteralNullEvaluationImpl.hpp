@@ -23,10 +23,8 @@ namespace fUML::Semantics::Values
 	{
 		public: 
 			LiteralNullEvaluationImpl(const LiteralNullEvaluationImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			LiteralNullEvaluationImpl& operator=(LiteralNullEvaluationImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			LiteralNullEvaluationImpl& operator=(LiteralNullEvaluationImpl const&);
 
 		protected:
 			friend class fUML::Semantics::Values::ValuesFactoryImpl;

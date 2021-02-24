@@ -94,6 +94,7 @@ DataStoreNodeObject::DataStoreNodeObject(std::shared_ptr<uml::DataStoreNode> _el
 DataStoreNodeObject::DataStoreNodeObject(DataStoreNodeObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 DataStoreNodeObject::DataStoreNodeObject()
@@ -111,6 +112,12 @@ std::shared_ptr<ecore::EObject> DataStoreNodeObject::copy()
 	element->setThisDataStoreNodeObjectPtr(element);
 	return element;
 }
+
+DataStoreNodeObject& DataStoreNodeObject::operator=(const DataStoreNodeObject & obj)
+{
+	return *this;
+}
+
 
 void DataStoreNodeObject::destroy()
 {	

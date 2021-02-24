@@ -78,6 +78,9 @@ using namespace fUML::Semantics::Actions;
 //*********************************
 ClearStructuralFeatureActionActivationImpl::ClearStructuralFeatureActionActivationImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ClearStructuralFeatureActionActivationImpl::~ClearStructuralFeatureActionActivationImpl()
@@ -96,6 +99,18 @@ ClearStructuralFeatureActionActivationImpl::ClearStructuralFeatureActionActivati
 
 
 ClearStructuralFeatureActionActivationImpl::ClearStructuralFeatureActionActivationImpl(const ClearStructuralFeatureActionActivationImpl & obj):ClearStructuralFeatureActionActivationImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ClearStructuralFeatureActionActivationImpl::copy() const
+{
+	std::shared_ptr<ClearStructuralFeatureActionActivationImpl> element(new ClearStructuralFeatureActionActivationImpl(*this));
+	element->setThisClearStructuralFeatureActionActivationPtr(element);
+	return element;
+}
+
+ClearStructuralFeatureActionActivationImpl& ClearStructuralFeatureActionActivationImpl::operator=(const ClearStructuralFeatureActionActivationImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -149,13 +164,8 @@ ClearStructuralFeatureActionActivationImpl::ClearStructuralFeatureActionActivati
 		std::cout << "Copying the Subset: " << "m_outputPinActivation" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  ClearStructuralFeatureActionActivationImpl::copy() const
-{
-	std::shared_ptr<ClearStructuralFeatureActionActivationImpl> element(new ClearStructuralFeatureActionActivationImpl(*this));
-	element->setThisClearStructuralFeatureActionActivationPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ClearStructuralFeatureActionActivationImpl::eStaticClass() const

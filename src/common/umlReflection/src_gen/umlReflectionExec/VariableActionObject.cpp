@@ -98,6 +98,7 @@ VariableActionObject::VariableActionObject(std::shared_ptr<uml::VariableAction> 
 VariableActionObject::VariableActionObject(VariableActionObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 VariableActionObject::VariableActionObject()
@@ -115,6 +116,12 @@ std::shared_ptr<ecore::EObject> VariableActionObject::copy()
 	element->setThisVariableActionObjectPtr(element);
 	return element;
 }
+
+VariableActionObject& VariableActionObject::operator=(const VariableActionObject & obj)
+{
+	return *this;
+}
+
 
 void VariableActionObject::destroy()
 {	

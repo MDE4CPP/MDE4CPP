@@ -159,7 +159,6 @@ namespace uml
 	{
 		public:
  			ReadVariableAction(const ReadVariableAction &) {}
-			ReadVariableAction& operator=(ReadVariableAction const&) = delete;
 
 		protected:
 			ReadVariableAction(){}

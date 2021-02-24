@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~ActorObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			ActorObject& operator=(ActorObject const&);
 
 			virtual void destroy();
 			

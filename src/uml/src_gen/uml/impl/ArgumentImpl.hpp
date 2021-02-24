@@ -24,10 +24,8 @@ virtual public Argument
 	{
 		public: 
 			ArgumentImpl(const ArgumentImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			ArgumentImpl& operator=(ArgumentImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			ArgumentImpl& operator=(ArgumentImpl const&);
 
 		protected:
 			friend class umlFactoryImpl;

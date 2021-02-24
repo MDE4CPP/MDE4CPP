@@ -196,7 +196,6 @@ namespace uml
 	{
 		public:
  			OutputPin(const OutputPin &) {}
-			OutputPin& operator=(OutputPin const&) = delete;
 
 		protected:
 			OutputPin(){}

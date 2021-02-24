@@ -51,6 +51,7 @@ ElementObject::ElementObject(std::shared_ptr<uml::Element> _element):
 ElementObject::ElementObject(ElementObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ElementObject::ElementObject()
@@ -68,6 +69,12 @@ std::shared_ptr<ecore::EObject> ElementObject::copy()
 	element->setThisElementObjectPtr(element);
 	return element;
 }
+
+ElementObject& ElementObject::operator=(const ElementObject & obj)
+{
+	return *this;
+}
+
 
 void ElementObject::destroy()
 {	

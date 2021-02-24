@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~ProtocolTransitionObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			ProtocolTransitionObject& operator=(ProtocolTransitionObject const&);
 
 			virtual void destroy();
 			

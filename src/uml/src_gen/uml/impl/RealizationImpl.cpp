@@ -68,6 +68,9 @@ using namespace uml;
 //*********************************
 RealizationImpl::RealizationImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 RealizationImpl::~RealizationImpl()
@@ -110,6 +113,18 @@ RealizationImpl::RealizationImpl(std::weak_ptr<uml::TemplateParameter > par_owni
 
 
 RealizationImpl::RealizationImpl(const RealizationImpl & obj):RealizationImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  RealizationImpl::copy() const
+{
+	std::shared_ptr<RealizationImpl> element(new RealizationImpl(*this));
+	element->setThisRealizationPtr(element);
+	return element;
+}
+
+RealizationImpl& RealizationImpl::operator=(const RealizationImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -179,13 +194,8 @@ RealizationImpl::RealizationImpl(const RealizationImpl & obj):RealizationImpl()
 		std::cout << "Copying the Subset: " << "m_supplier" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  RealizationImpl::copy() const
-{
-	std::shared_ptr<RealizationImpl> element(new RealizationImpl(*this));
-	element->setThisRealizationPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> RealizationImpl::eStaticClass() const

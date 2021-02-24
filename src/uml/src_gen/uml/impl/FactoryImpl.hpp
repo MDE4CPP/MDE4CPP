@@ -22,10 +22,8 @@ namespace uml
 	{
 		public: 
 			FactoryImpl(const FactoryImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			FactoryImpl& operator=(FactoryImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			FactoryImpl& operator=(FactoryImpl const&);
 
 		protected:
 			friend class umlFactoryImpl;

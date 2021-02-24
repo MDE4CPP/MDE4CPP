@@ -62,6 +62,9 @@ using namespace fUML::Semantics::StructuredClassifiers;
 //*********************************
 RedefinitionBasedDispatchStrategyImpl::RedefinitionBasedDispatchStrategyImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 RedefinitionBasedDispatchStrategyImpl::~RedefinitionBasedDispatchStrategyImpl()
@@ -75,6 +78,18 @@ RedefinitionBasedDispatchStrategyImpl::~RedefinitionBasedDispatchStrategyImpl()
 
 RedefinitionBasedDispatchStrategyImpl::RedefinitionBasedDispatchStrategyImpl(const RedefinitionBasedDispatchStrategyImpl & obj):RedefinitionBasedDispatchStrategyImpl()
 {
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  RedefinitionBasedDispatchStrategyImpl::copy() const
+{
+	std::shared_ptr<RedefinitionBasedDispatchStrategyImpl> element(new RedefinitionBasedDispatchStrategyImpl(*this));
+	element->setThisRedefinitionBasedDispatchStrategyPtr(element);
+	return element;
+}
+
+RedefinitionBasedDispatchStrategyImpl& RedefinitionBasedDispatchStrategyImpl::operator=(const RedefinitionBasedDispatchStrategyImpl & obj)
+{
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy RedefinitionBasedDispatchStrategy "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -86,13 +101,8 @@ RedefinitionBasedDispatchStrategyImpl::RedefinitionBasedDispatchStrategyImpl(con
 	//Clone references with containment (deep copy)
 
 
-}
 
-std::shared_ptr<ecore::EObject>  RedefinitionBasedDispatchStrategyImpl::copy() const
-{
-	std::shared_ptr<RedefinitionBasedDispatchStrategyImpl> element(new RedefinitionBasedDispatchStrategyImpl(*this));
-	element->setThisRedefinitionBasedDispatchStrategyPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> RedefinitionBasedDispatchStrategyImpl::eStaticClass() const

@@ -46,6 +46,9 @@ using namespace ecore;
 //*********************************
 EStringToStringMapEntryImpl::EStringToStringMapEntryImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 EStringToStringMapEntryImpl::~EStringToStringMapEntryImpl()
@@ -58,6 +61,18 @@ EStringToStringMapEntryImpl::~EStringToStringMapEntryImpl()
 
 
 EStringToStringMapEntryImpl::EStringToStringMapEntryImpl(const EStringToStringMapEntryImpl & obj):EStringToStringMapEntryImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  EStringToStringMapEntryImpl::copy() const
+{
+	std::shared_ptr<EStringToStringMapEntryImpl> element(new EStringToStringMapEntryImpl(*this));
+	element->setThisEStringToStringMapEntryPtr(element);
+	return element;
+}
+
+EStringToStringMapEntryImpl& EStringToStringMapEntryImpl::operator=(const EStringToStringMapEntryImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -72,13 +87,8 @@ EStringToStringMapEntryImpl::EStringToStringMapEntryImpl(const EStringToStringMa
 	//Clone references with containment (deep copy)
 
 
-}
 
-std::shared_ptr<ecore::EObject>  EStringToStringMapEntryImpl::copy() const
-{
-	std::shared_ptr<EStringToStringMapEntryImpl> element(new EStringToStringMapEntryImpl(*this));
-	element->setThisEStringToStringMapEntryPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<EClass> EStringToStringMapEntryImpl::eStaticClass() const

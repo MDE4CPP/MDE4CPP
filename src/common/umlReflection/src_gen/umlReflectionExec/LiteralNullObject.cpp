@@ -70,6 +70,7 @@ LiteralNullObject::LiteralNullObject(std::shared_ptr<uml::LiteralNull> _element)
 LiteralNullObject::LiteralNullObject(LiteralNullObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 LiteralNullObject::LiteralNullObject()
@@ -87,6 +88,12 @@ std::shared_ptr<ecore::EObject> LiteralNullObject::copy()
 	element->setThisLiteralNullObjectPtr(element);
 	return element;
 }
+
+LiteralNullObject& LiteralNullObject::operator=(const LiteralNullObject & obj)
+{
+	return *this;
+}
+
 
 void LiteralNullObject::destroy()
 {	

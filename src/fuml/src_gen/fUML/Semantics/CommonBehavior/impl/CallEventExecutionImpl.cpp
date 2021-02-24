@@ -79,6 +79,9 @@ using namespace fUML::Semantics::CommonBehavior;
 //*********************************
 CallEventExecutionImpl::CallEventExecutionImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 CallEventExecutionImpl::~CallEventExecutionImpl()
@@ -91,6 +94,18 @@ CallEventExecutionImpl::~CallEventExecutionImpl()
 
 
 CallEventExecutionImpl::CallEventExecutionImpl(const CallEventExecutionImpl & obj):CallEventExecutionImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  CallEventExecutionImpl::copy() const
+{
+	std::shared_ptr<CallEventExecutionImpl> element(new CallEventExecutionImpl(*this));
+	element->setThisCallEventExecutionPtr(element);
+	return element;
+}
+
+CallEventExecutionImpl& CallEventExecutionImpl::operator=(const CallEventExecutionImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -136,13 +151,8 @@ CallEventExecutionImpl::CallEventExecutionImpl(const CallEventExecutionImpl & ob
 		std::cout << "Copying the Subset: " << "m_parameterValues" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  CallEventExecutionImpl::copy() const
-{
-	std::shared_ptr<CallEventExecutionImpl> element(new CallEventExecutionImpl(*this));
-	element->setThisCallEventExecutionPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> CallEventExecutionImpl::eStaticClass() const

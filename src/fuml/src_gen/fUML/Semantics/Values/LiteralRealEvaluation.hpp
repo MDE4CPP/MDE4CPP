@@ -70,7 +70,6 @@ namespace fUML::Semantics::Values
 	{
 		public:
  			LiteralRealEvaluation(const LiteralRealEvaluation &) {}
-			LiteralRealEvaluation& operator=(LiteralRealEvaluation const&) = delete;
 
 		protected:
 			LiteralRealEvaluation(){}

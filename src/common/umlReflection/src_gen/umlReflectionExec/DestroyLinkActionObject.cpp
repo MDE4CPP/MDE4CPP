@@ -102,6 +102,7 @@ DestroyLinkActionObject::DestroyLinkActionObject(std::shared_ptr<uml::DestroyLin
 DestroyLinkActionObject::DestroyLinkActionObject(DestroyLinkActionObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 DestroyLinkActionObject::DestroyLinkActionObject()
@@ -119,6 +120,12 @@ std::shared_ptr<ecore::EObject> DestroyLinkActionObject::copy()
 	element->setThisDestroyLinkActionObjectPtr(element);
 	return element;
 }
+
+DestroyLinkActionObject& DestroyLinkActionObject::operator=(const DestroyLinkActionObject & obj)
+{
+	return *this;
+}
+
 
 void DestroyLinkActionObject::destroy()
 {	

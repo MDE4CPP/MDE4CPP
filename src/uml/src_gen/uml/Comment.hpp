@@ -65,7 +65,6 @@ namespace uml
 	{
 		public:
  			Comment(const Comment &) {}
-			Comment& operator=(Comment const&) = delete;
 
 		protected:
 			Comment(){}

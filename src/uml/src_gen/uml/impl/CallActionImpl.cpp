@@ -91,6 +91,9 @@ using namespace uml;
 //*********************************
 CallActionImpl::CallActionImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 CallActionImpl::~CallActionImpl()
@@ -133,6 +136,18 @@ CallActionImpl::CallActionImpl(std::weak_ptr<uml::Element > par_owner)
 
 
 CallActionImpl::CallActionImpl(const CallActionImpl & obj):CallActionImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  CallActionImpl::copy() const
+{
+	std::shared_ptr<CallActionImpl> element(new CallActionImpl(*this));
+	element->setThisCallActionPtr(element);
+	return element;
+}
+
+CallActionImpl& CallActionImpl::operator=(const CallActionImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -266,13 +281,8 @@ CallActionImpl::CallActionImpl(const CallActionImpl & obj):CallActionImpl()
 		std::cout << "Initialising value Subset: " << "m_result - Subset<uml::OutputPin, uml::OutputPin >(getOutput())" << std::endl;
 	#endif
 	
-}
 
-std::shared_ptr<ecore::EObject>  CallActionImpl::copy() const
-{
-	std::shared_ptr<CallActionImpl> element(new CallActionImpl(*this));
-	element->setThisCallActionPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> CallActionImpl::eStaticClass() const

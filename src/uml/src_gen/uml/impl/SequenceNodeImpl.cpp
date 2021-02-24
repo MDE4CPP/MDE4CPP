@@ -96,6 +96,9 @@ using namespace uml;
 //*********************************
 SequenceNodeImpl::SequenceNodeImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 SequenceNodeImpl::~SequenceNodeImpl()
@@ -159,6 +162,18 @@ SequenceNodeImpl::SequenceNodeImpl(std::weak_ptr<uml::ActivityGroup > par_superG
 
 
 SequenceNodeImpl::SequenceNodeImpl(const SequenceNodeImpl & obj):SequenceNodeImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  SequenceNodeImpl::copy() const
+{
+	std::shared_ptr<SequenceNodeImpl> element(new SequenceNodeImpl(*this));
+	element->setThisSequenceNodePtr(element);
+	return element;
+}
+
+SequenceNodeImpl& SequenceNodeImpl::operator=(const SequenceNodeImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -362,13 +377,8 @@ SequenceNodeImpl::SequenceNodeImpl(const SequenceNodeImpl & obj):SequenceNodeImp
 	#endif
 
 	
-}
 
-std::shared_ptr<ecore::EObject>  SequenceNodeImpl::copy() const
-{
-	std::shared_ptr<SequenceNodeImpl> element(new SequenceNodeImpl(*this));
-	element->setThisSequenceNodePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> SequenceNodeImpl::eStaticClass() const

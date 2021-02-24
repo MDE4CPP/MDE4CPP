@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~ImageObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			ImageObject& operator=(ImageObject const&);
 
 			virtual void destroy();
 			

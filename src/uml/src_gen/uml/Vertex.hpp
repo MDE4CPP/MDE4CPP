@@ -107,7 +107,6 @@ namespace uml
 	{
 		public:
  			Vertex(const Vertex &) {}
-			Vertex& operator=(Vertex const&) = delete;
 
 		protected:
 			Vertex(){}

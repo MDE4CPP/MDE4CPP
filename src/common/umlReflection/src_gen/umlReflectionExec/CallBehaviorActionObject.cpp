@@ -105,6 +105,7 @@ CallBehaviorActionObject::CallBehaviorActionObject(std::shared_ptr<uml::CallBeha
 CallBehaviorActionObject::CallBehaviorActionObject(CallBehaviorActionObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 CallBehaviorActionObject::CallBehaviorActionObject()
@@ -122,6 +123,12 @@ std::shared_ptr<ecore::EObject> CallBehaviorActionObject::copy()
 	element->setThisCallBehaviorActionObjectPtr(element);
 	return element;
 }
+
+CallBehaviorActionObject& CallBehaviorActionObject::operator=(const CallBehaviorActionObject & obj)
+{
+	return *this;
+}
+
 
 void CallBehaviorActionObject::destroy()
 {	

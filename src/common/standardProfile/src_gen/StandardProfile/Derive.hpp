@@ -25,9 +25,6 @@ namespace StandardProfile
 {
 	class Derive : virtual public uml::Stereotype 
 	{
-		private:    
-			Derive(const Derive& that) = delete;
-
 		protected:
 			Derive(){}
 

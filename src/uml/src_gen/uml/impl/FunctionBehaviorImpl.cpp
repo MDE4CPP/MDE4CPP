@@ -125,6 +125,9 @@ using namespace uml;
 //*********************************
 FunctionBehaviorImpl::FunctionBehaviorImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 FunctionBehaviorImpl::~FunctionBehaviorImpl()
@@ -188,6 +191,18 @@ FunctionBehaviorImpl::FunctionBehaviorImpl(std::weak_ptr<uml::TemplateParameter 
 
 
 FunctionBehaviorImpl::FunctionBehaviorImpl(const FunctionBehaviorImpl & obj):FunctionBehaviorImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  FunctionBehaviorImpl::copy() const
+{
+	std::shared_ptr<FunctionBehaviorImpl> element(new FunctionBehaviorImpl(*this));
+	element->setThisFunctionBehaviorPtr(element);
+	return element;
+}
+
+FunctionBehaviorImpl& FunctionBehaviorImpl::operator=(const FunctionBehaviorImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -491,13 +506,8 @@ FunctionBehaviorImpl::FunctionBehaviorImpl(const FunctionBehaviorImpl & obj):Fun
 		std::cout << "Copying the Subset: " << "m_templateBinding" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  FunctionBehaviorImpl::copy() const
-{
-	std::shared_ptr<FunctionBehaviorImpl> element(new FunctionBehaviorImpl(*this));
-	element->setThisFunctionBehaviorPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> FunctionBehaviorImpl::eStaticClass() const

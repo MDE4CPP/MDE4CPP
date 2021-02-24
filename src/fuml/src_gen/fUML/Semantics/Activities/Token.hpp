@@ -66,7 +66,6 @@ namespace fUML::Semantics::Activities
 	{
 		public:
  			Token(const Token &) {}
-			Token& operator=(Token const&) = delete;
 
 		protected:
 			Token(){}

@@ -65,6 +65,9 @@ using namespace uml;
 //*********************************
 ParameterSetImpl::ParameterSetImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ParameterSetImpl::~ParameterSetImpl()
@@ -91,6 +94,18 @@ ParameterSetImpl::ParameterSetImpl(std::weak_ptr<uml::Element > par_owner)
 
 
 ParameterSetImpl::ParameterSetImpl(const ParameterSetImpl & obj):ParameterSetImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ParameterSetImpl::copy() const
+{
+	std::shared_ptr<ParameterSetImpl> element(new ParameterSetImpl(*this));
+	element->setThisParameterSetPtr(element);
+	return element;
+}
+
+ParameterSetImpl& ParameterSetImpl::operator=(const ParameterSetImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -145,13 +160,8 @@ ParameterSetImpl::ParameterSetImpl(const ParameterSetImpl & obj):ParameterSetImp
 		std::cout << "Initialising value Subset: " << "m_condition - Subset<uml::Constraint, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
 	
-}
 
-std::shared_ptr<ecore::EObject>  ParameterSetImpl::copy() const
-{
-	std::shared_ptr<ParameterSetImpl> element(new ParameterSetImpl(*this));
-	element->setThisParameterSetPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ParameterSetImpl::eStaticClass() const

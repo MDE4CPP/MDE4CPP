@@ -22,10 +22,8 @@ namespace uml
 	{
 		public: 
 			ConnectorEndImpl(const ConnectorEndImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			ConnectorEndImpl& operator=(ConnectorEndImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			ConnectorEndImpl& operator=(ConnectorEndImpl const&);
 
 		protected:
 			friend class umlFactoryImpl;

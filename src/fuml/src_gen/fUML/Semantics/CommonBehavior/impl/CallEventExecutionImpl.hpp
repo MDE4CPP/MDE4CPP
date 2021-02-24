@@ -23,10 +23,8 @@ namespace fUML::Semantics::CommonBehavior
 	{
 		public: 
 			CallEventExecutionImpl(const CallEventExecutionImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			CallEventExecutionImpl& operator=(CallEventExecutionImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			CallEventExecutionImpl& operator=(CallEventExecutionImpl const&);
 
 		protected:
 			friend class fUML::Semantics::CommonBehavior::CommonBehaviorFactoryImpl;

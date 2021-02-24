@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~DurationConstraintObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			DurationConstraintObject& operator=(DurationConstraintObject const&);
 
 			virtual void destroy();
 			

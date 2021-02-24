@@ -100,7 +100,6 @@ namespace PSCS::Semantics::Actions
 	{
 		public:
  			CS_CreateObjectActionActivation(const CS_CreateObjectActionActivation &) {}
-			CS_CreateObjectActionActivation& operator=(CS_CreateObjectActionActivation const&) = delete;
 
 		protected:
 			CS_CreateObjectActionActivation(){}

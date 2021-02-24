@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~SequenceNodeObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			SequenceNodeObject& operator=(SequenceNodeObject const&);
 
 			virtual void destroy();
 			

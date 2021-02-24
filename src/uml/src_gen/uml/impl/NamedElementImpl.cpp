@@ -66,6 +66,9 @@ using namespace uml;
 //*********************************
 NamedElementImpl::NamedElementImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 NamedElementImpl::~NamedElementImpl()
@@ -92,6 +95,18 @@ NamedElementImpl::NamedElementImpl(std::weak_ptr<uml::Element > par_owner)
 
 
 NamedElementImpl::NamedElementImpl(const NamedElementImpl & obj):NamedElementImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  NamedElementImpl::copy() const
+{
+	std::shared_ptr<NamedElementImpl> element(new NamedElementImpl(*this));
+	element->setThisNamedElementPtr(element);
+	return element;
+}
+
+NamedElementImpl& NamedElementImpl::operator=(const NamedElementImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -130,13 +145,8 @@ NamedElementImpl::NamedElementImpl(const NamedElementImpl & obj):NamedElementImp
 	#endif
 
 	
-}
 
-std::shared_ptr<ecore::EObject>  NamedElementImpl::copy() const
-{
-	std::shared_ptr<NamedElementImpl> element(new NamedElementImpl(*this));
-	element->setThisNamedElementPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> NamedElementImpl::eStaticClass() const

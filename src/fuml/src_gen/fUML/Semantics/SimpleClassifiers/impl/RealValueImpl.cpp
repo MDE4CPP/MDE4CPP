@@ -64,6 +64,9 @@ using namespace fUML::Semantics::SimpleClassifiers;
 //*********************************
 RealValueImpl::RealValueImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 RealValueImpl::~RealValueImpl()
@@ -76,6 +79,18 @@ RealValueImpl::~RealValueImpl()
 
 
 RealValueImpl::RealValueImpl(const RealValueImpl & obj):RealValueImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  RealValueImpl::copy() const
+{
+	std::shared_ptr<RealValueImpl> element(new RealValueImpl(*this));
+	element->setThisRealValuePtr(element);
+	return element;
+}
+
+RealValueImpl& RealValueImpl::operator=(const RealValueImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -91,13 +106,8 @@ RealValueImpl::RealValueImpl(const RealValueImpl & obj):RealValueImpl()
 	//Clone references with containment (deep copy)
 
 
-}
 
-std::shared_ptr<ecore::EObject>  RealValueImpl::copy() const
-{
-	std::shared_ptr<RealValueImpl> element(new RealValueImpl(*this));
-	element->setThisRealValuePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> RealValueImpl::eStaticClass() const

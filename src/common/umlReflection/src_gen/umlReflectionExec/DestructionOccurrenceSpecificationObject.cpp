@@ -78,6 +78,7 @@ DestructionOccurrenceSpecificationObject::DestructionOccurrenceSpecificationObje
 DestructionOccurrenceSpecificationObject::DestructionOccurrenceSpecificationObject(DestructionOccurrenceSpecificationObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 DestructionOccurrenceSpecificationObject::DestructionOccurrenceSpecificationObject()
@@ -95,6 +96,12 @@ std::shared_ptr<ecore::EObject> DestructionOccurrenceSpecificationObject::copy()
 	element->setThisDestructionOccurrenceSpecificationObjectPtr(element);
 	return element;
 }
+
+DestructionOccurrenceSpecificationObject& DestructionOccurrenceSpecificationObject::operator=(const DestructionOccurrenceSpecificationObject & obj)
+{
+	return *this;
+}
+
 
 void DestructionOccurrenceSpecificationObject::destroy()
 {	

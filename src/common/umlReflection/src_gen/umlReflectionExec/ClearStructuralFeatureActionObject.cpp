@@ -102,6 +102,7 @@ ClearStructuralFeatureActionObject::ClearStructuralFeatureActionObject(std::shar
 ClearStructuralFeatureActionObject::ClearStructuralFeatureActionObject(ClearStructuralFeatureActionObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ClearStructuralFeatureActionObject::ClearStructuralFeatureActionObject()
@@ -119,6 +120,12 @@ std::shared_ptr<ecore::EObject> ClearStructuralFeatureActionObject::copy()
 	element->setThisClearStructuralFeatureActionObjectPtr(element);
 	return element;
 }
+
+ClearStructuralFeatureActionObject& ClearStructuralFeatureActionObject::operator=(const ClearStructuralFeatureActionObject & obj)
+{
+	return *this;
+}
+
 
 void ClearStructuralFeatureActionObject::destroy()
 {	

@@ -83,7 +83,6 @@ namespace uml
 	{
 		public:
  			TemplateParameterSubstitution(const TemplateParameterSubstitution &) {}
-			TemplateParameterSubstitution& operator=(TemplateParameterSubstitution const&) = delete;
 
 		protected:
 			TemplateParameterSubstitution(){}

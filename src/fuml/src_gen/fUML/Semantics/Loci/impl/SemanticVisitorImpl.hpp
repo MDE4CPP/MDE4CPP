@@ -25,10 +25,8 @@ virtual public SemanticVisitor
 	{
 		public: 
 			SemanticVisitorImpl(const SemanticVisitorImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			SemanticVisitorImpl& operator=(SemanticVisitorImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			SemanticVisitorImpl& operator=(SemanticVisitorImpl const&);
 
 		protected:
 			friend class fUML::Semantics::Loci::LociFactoryImpl;

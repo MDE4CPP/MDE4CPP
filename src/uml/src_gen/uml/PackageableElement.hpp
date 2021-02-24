@@ -106,7 +106,6 @@ namespace uml
 	{
 		public:
  			PackageableElement(const PackageableElement &) {}
-			PackageableElement& operator=(PackageableElement const&) = delete;
 
 		protected:
 			PackageableElement(){}

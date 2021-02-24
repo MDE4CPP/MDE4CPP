@@ -22,10 +22,8 @@ namespace uml
 	{
 		public: 
 			WriteVariableActionImpl(const WriteVariableActionImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			WriteVariableActionImpl& operator=(WriteVariableActionImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			WriteVariableActionImpl& operator=(WriteVariableActionImpl const&);
 
 		protected:
 			friend class umlFactoryImpl;

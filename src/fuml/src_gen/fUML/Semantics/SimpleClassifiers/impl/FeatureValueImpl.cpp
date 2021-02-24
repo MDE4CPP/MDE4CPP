@@ -58,6 +58,9 @@ using namespace fUML::Semantics::SimpleClassifiers;
 //*********************************
 FeatureValueImpl::FeatureValueImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 FeatureValueImpl::~FeatureValueImpl()
@@ -70,6 +73,18 @@ FeatureValueImpl::~FeatureValueImpl()
 
 
 FeatureValueImpl::FeatureValueImpl(const FeatureValueImpl & obj):FeatureValueImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  FeatureValueImpl::copy() const
+{
+	std::shared_ptr<FeatureValueImpl> element(new FeatureValueImpl(*this));
+	element->setThisFeatureValuePtr(element);
+	return element;
+}
+
+FeatureValueImpl& FeatureValueImpl::operator=(const FeatureValueImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -94,13 +109,8 @@ FeatureValueImpl::FeatureValueImpl(const FeatureValueImpl & obj):FeatureValueImp
 	#endif
 
 	
-}
 
-std::shared_ptr<ecore::EObject>  FeatureValueImpl::copy() const
-{
-	std::shared_ptr<FeatureValueImpl> element(new FeatureValueImpl(*this));
-	element->setThisFeatureValuePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> FeatureValueImpl::eStaticClass() const

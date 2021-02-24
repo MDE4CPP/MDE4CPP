@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~OperationTemplateParameterObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			OperationTemplateParameterObject& operator=(OperationTemplateParameterObject const&);
 
 			virtual void destroy();
 			

@@ -136,7 +136,6 @@ namespace uml
 	{
 		public:
  			StringExpression(const StringExpression &) {}
-			StringExpression& operator=(StringExpression const&) = delete;
 
 		protected:
 			StringExpression(){}

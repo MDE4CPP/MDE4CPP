@@ -69,6 +69,9 @@ using namespace fUML::Semantics::Actions;
 //*********************************
 DestroyLinkActionActivationImpl::DestroyLinkActionActivationImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 DestroyLinkActionActivationImpl::~DestroyLinkActionActivationImpl()
@@ -87,6 +90,18 @@ DestroyLinkActionActivationImpl::DestroyLinkActionActivationImpl(std::weak_ptr<f
 
 
 DestroyLinkActionActivationImpl::DestroyLinkActionActivationImpl(const DestroyLinkActionActivationImpl & obj):DestroyLinkActionActivationImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  DestroyLinkActionActivationImpl::copy() const
+{
+	std::shared_ptr<DestroyLinkActionActivationImpl> element(new DestroyLinkActionActivationImpl(*this));
+	element->setThisDestroyLinkActionActivationPtr(element);
+	return element;
+}
+
+DestroyLinkActionActivationImpl& DestroyLinkActionActivationImpl::operator=(const DestroyLinkActionActivationImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -140,13 +155,8 @@ DestroyLinkActionActivationImpl::DestroyLinkActionActivationImpl(const DestroyLi
 		std::cout << "Copying the Subset: " << "m_outputPinActivation" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  DestroyLinkActionActivationImpl::copy() const
-{
-	std::shared_ptr<DestroyLinkActionActivationImpl> element(new DestroyLinkActionActivationImpl(*this));
-	element->setThisDestroyLinkActionActivationPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> DestroyLinkActionActivationImpl::eStaticClass() const

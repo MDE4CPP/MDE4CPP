@@ -89,6 +89,9 @@ using namespace uml;
 //*********************************
 AcceptEventActionImpl::AcceptEventActionImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 AcceptEventActionImpl::~AcceptEventActionImpl()
@@ -131,6 +134,18 @@ AcceptEventActionImpl::AcceptEventActionImpl(std::weak_ptr<uml::Element > par_ow
 
 
 AcceptEventActionImpl::AcceptEventActionImpl(const AcceptEventActionImpl & obj):AcceptEventActionImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  AcceptEventActionImpl::copy() const
+{
+	std::shared_ptr<AcceptEventActionImpl> element(new AcceptEventActionImpl(*this));
+	element->setThisAcceptEventActionPtr(element);
+	return element;
+}
+
+AcceptEventActionImpl& AcceptEventActionImpl::operator=(const AcceptEventActionImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -269,13 +284,8 @@ AcceptEventActionImpl::AcceptEventActionImpl(const AcceptEventActionImpl & obj):
 		std::cout << "Initialising value Subset: " << "m_trigger - Subset<uml::Trigger, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
 	
-}
 
-std::shared_ptr<ecore::EObject>  AcceptEventActionImpl::copy() const
-{
-	std::shared_ptr<AcceptEventActionImpl> element(new AcceptEventActionImpl(*this));
-	element->setThisAcceptEventActionPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> AcceptEventActionImpl::eStaticClass() const

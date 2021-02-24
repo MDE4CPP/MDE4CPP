@@ -22,10 +22,8 @@ namespace uml
 	{
 		public: 
 			LiteralStringImpl(const LiteralStringImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			LiteralStringImpl& operator=(LiteralStringImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			LiteralStringImpl& operator=(LiteralStringImpl const&);
 
 		protected:
 			friend class umlFactoryImpl;

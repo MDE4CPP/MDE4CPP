@@ -157,6 +157,7 @@ ExecutionEnvironmentObject::ExecutionEnvironmentObject(std::shared_ptr<uml::Exec
 ExecutionEnvironmentObject::ExecutionEnvironmentObject(ExecutionEnvironmentObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ExecutionEnvironmentObject::ExecutionEnvironmentObject()
@@ -174,6 +175,12 @@ std::shared_ptr<ecore::EObject> ExecutionEnvironmentObject::copy()
 	element->setThisExecutionEnvironmentObjectPtr(element);
 	return element;
 }
+
+ExecutionEnvironmentObject& ExecutionEnvironmentObject::operator=(const ExecutionEnvironmentObject & obj)
+{
+	return *this;
+}
+
 
 void ExecutionEnvironmentObject::destroy()
 {	

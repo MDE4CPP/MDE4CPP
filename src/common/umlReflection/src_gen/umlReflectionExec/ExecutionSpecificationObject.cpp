@@ -74,6 +74,7 @@ ExecutionSpecificationObject::ExecutionSpecificationObject(std::shared_ptr<uml::
 ExecutionSpecificationObject::ExecutionSpecificationObject(ExecutionSpecificationObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ExecutionSpecificationObject::ExecutionSpecificationObject()
@@ -91,6 +92,12 @@ std::shared_ptr<ecore::EObject> ExecutionSpecificationObject::copy()
 	element->setThisExecutionSpecificationObjectPtr(element);
 	return element;
 }
+
+ExecutionSpecificationObject& ExecutionSpecificationObject::operator=(const ExecutionSpecificationObject & obj)
+{
+	return *this;
+}
+
 
 void ExecutionSpecificationObject::destroy()
 {	

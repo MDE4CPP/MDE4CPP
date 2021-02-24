@@ -95,7 +95,6 @@ namespace PSCS::Semantics::Actions
 	{
 		public:
  			CS_SendSignalActionActivation(const CS_SendSignalActionActivation &) {}
-			CS_SendSignalActionActivation& operator=(CS_SendSignalActionActivation const&) = delete;
 
 		protected:
 			CS_SendSignalActionActivation(){}

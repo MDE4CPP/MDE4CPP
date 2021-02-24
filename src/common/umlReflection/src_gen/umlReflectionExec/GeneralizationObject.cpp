@@ -65,6 +65,7 @@ GeneralizationObject::GeneralizationObject(std::shared_ptr<uml::Generalization> 
 GeneralizationObject::GeneralizationObject(GeneralizationObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 GeneralizationObject::GeneralizationObject()
@@ -82,6 +83,12 @@ std::shared_ptr<ecore::EObject> GeneralizationObject::copy()
 	element->setThisGeneralizationObjectPtr(element);
 	return element;
 }
+
+GeneralizationObject& GeneralizationObject::operator=(const GeneralizationObject & obj)
+{
+	return *this;
+}
+
 
 void GeneralizationObject::destroy()
 {	

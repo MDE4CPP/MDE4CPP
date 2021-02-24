@@ -79,6 +79,9 @@ using namespace uml;
 //*********************************
 InformationFlowImpl::InformationFlowImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 InformationFlowImpl::~InformationFlowImpl()
@@ -121,6 +124,18 @@ InformationFlowImpl::InformationFlowImpl(std::weak_ptr<uml::TemplateParameter > 
 
 
 InformationFlowImpl::InformationFlowImpl(const InformationFlowImpl & obj):InformationFlowImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  InformationFlowImpl::copy() const
+{
+	std::shared_ptr<InformationFlowImpl> element(new InformationFlowImpl(*this));
+	element->setThisInformationFlowPtr(element);
+	return element;
+}
+
+InformationFlowImpl& InformationFlowImpl::operator=(const InformationFlowImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -198,13 +213,8 @@ InformationFlowImpl::InformationFlowImpl(const InformationFlowImpl & obj):Inform
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  InformationFlowImpl::copy() const
-{
-	std::shared_ptr<InformationFlowImpl> element(new InformationFlowImpl(*this));
-	element->setThisInformationFlowPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> InformationFlowImpl::eStaticClass() const

@@ -89,6 +89,9 @@ using namespace uml;
 //*********************************
 PinImpl::PinImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 PinImpl::~PinImpl()
@@ -131,6 +134,18 @@ PinImpl::PinImpl(std::weak_ptr<uml::Element > par_owner)
 
 
 PinImpl::PinImpl(const PinImpl & obj):PinImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  PinImpl::copy() const
+{
+	std::shared_ptr<PinImpl> element(new PinImpl(*this));
+	element->setThisPinPtr(element);
+	return element;
+}
+
+PinImpl& PinImpl::operator=(const PinImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -247,13 +262,8 @@ PinImpl::PinImpl(const PinImpl & obj):PinImpl()
 		std::cout << "Copying the Subset: " << "m_upperValue" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  PinImpl::copy() const
-{
-	std::shared_ptr<PinImpl> element(new PinImpl(*this));
-	element->setThisPinPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> PinImpl::eStaticClass() const

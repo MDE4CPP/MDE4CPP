@@ -61,6 +61,9 @@ using namespace uml;
 //*********************************
 TemplateBindingImpl::TemplateBindingImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 TemplateBindingImpl::~TemplateBindingImpl()
@@ -87,6 +90,18 @@ TemplateBindingImpl::TemplateBindingImpl(std::weak_ptr<uml::Element > par_owner)
 
 
 TemplateBindingImpl::TemplateBindingImpl(const TemplateBindingImpl & obj):TemplateBindingImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  TemplateBindingImpl::copy() const
+{
+	std::shared_ptr<TemplateBindingImpl> element(new TemplateBindingImpl(*this));
+	element->setThisTemplateBindingPtr(element);
+	return element;
+}
+
+TemplateBindingImpl& TemplateBindingImpl::operator=(const TemplateBindingImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -135,13 +150,8 @@ TemplateBindingImpl::TemplateBindingImpl(const TemplateBindingImpl & obj):Templa
 		std::cout << "Initialising value Subset: " << "m_parameterSubstitution - Subset<uml::TemplateParameterSubstitution, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
 	
-}
 
-std::shared_ptr<ecore::EObject>  TemplateBindingImpl::copy() const
-{
-	std::shared_ptr<TemplateBindingImpl> element(new TemplateBindingImpl(*this));
-	element->setThisTemplateBindingPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> TemplateBindingImpl::eStaticClass() const

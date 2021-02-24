@@ -58,6 +58,9 @@ using namespace fUML::Semantics::StructuredClassifiers;
 //*********************************
 ExtensionalValueListImpl::ExtensionalValueListImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ExtensionalValueListImpl::~ExtensionalValueListImpl()
@@ -70,6 +73,18 @@ ExtensionalValueListImpl::~ExtensionalValueListImpl()
 
 
 ExtensionalValueListImpl::ExtensionalValueListImpl(const ExtensionalValueListImpl & obj):ExtensionalValueListImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ExtensionalValueListImpl::copy() const
+{
+	std::shared_ptr<ExtensionalValueListImpl> element(new ExtensionalValueListImpl(*this));
+	element->setThisExtensionalValueListPtr(element);
+	return element;
+}
+
+ExtensionalValueListImpl& ExtensionalValueListImpl::operator=(const ExtensionalValueListImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -92,13 +107,8 @@ ExtensionalValueListImpl::ExtensionalValueListImpl(const ExtensionalValueListImp
 		std::cout << "Copying the Subset: " << "m_featureValues" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  ExtensionalValueListImpl::copy() const
-{
-	std::shared_ptr<ExtensionalValueListImpl> element(new ExtensionalValueListImpl(*this));
-	element->setThisExtensionalValueListPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ExtensionalValueListImpl::eStaticClass() const

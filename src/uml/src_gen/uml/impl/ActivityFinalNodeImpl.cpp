@@ -78,6 +78,9 @@ using namespace uml;
 //*********************************
 ActivityFinalNodeImpl::ActivityFinalNodeImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ActivityFinalNodeImpl::~ActivityFinalNodeImpl()
@@ -120,6 +123,18 @@ ActivityFinalNodeImpl::ActivityFinalNodeImpl(std::weak_ptr<uml::Element > par_ow
 
 
 ActivityFinalNodeImpl::ActivityFinalNodeImpl(const ActivityFinalNodeImpl & obj):ActivityFinalNodeImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ActivityFinalNodeImpl::copy() const
+{
+	std::shared_ptr<ActivityFinalNodeImpl> element(new ActivityFinalNodeImpl(*this));
+	element->setThisActivityFinalNodePtr(element);
+	return element;
+}
+
+ActivityFinalNodeImpl& ActivityFinalNodeImpl::operator=(const ActivityFinalNodeImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -201,13 +216,8 @@ ActivityFinalNodeImpl::ActivityFinalNodeImpl(const ActivityFinalNodeImpl & obj):
 		std::cout << "Copying the Subset: " << "m_redefinedNode" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  ActivityFinalNodeImpl::copy() const
-{
-	std::shared_ptr<ActivityFinalNodeImpl> element(new ActivityFinalNodeImpl(*this));
-	element->setThisActivityFinalNodePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ActivityFinalNodeImpl::eStaticClass() const

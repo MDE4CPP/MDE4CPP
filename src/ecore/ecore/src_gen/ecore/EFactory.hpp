@@ -82,7 +82,6 @@ namespace ecore
 	{
 		public:
  			EFactory(const EFactory &) {}
-			EFactory& operator=(EFactory const&) = delete;
 
 		protected:
 			EFactory(){}

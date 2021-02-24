@@ -92,7 +92,6 @@ namespace fUML::Semantics::Loci
 	{
 		public:
  			Executor(const Executor &) {}
-			Executor& operator=(Executor const&) = delete;
 
 		protected:
 			Executor(){}

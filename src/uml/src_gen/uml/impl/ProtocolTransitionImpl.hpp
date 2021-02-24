@@ -22,10 +22,8 @@ namespace uml
 	{
 		public: 
 			ProtocolTransitionImpl(const ProtocolTransitionImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			ProtocolTransitionImpl& operator=(ProtocolTransitionImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			ProtocolTransitionImpl& operator=(ProtocolTransitionImpl const&);
 
 		protected:
 			friend class umlFactoryImpl;

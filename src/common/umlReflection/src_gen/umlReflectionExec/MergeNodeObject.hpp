@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~MergeNodeObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			MergeNodeObject& operator=(MergeNodeObject const&);
 
 			virtual void destroy();
 			

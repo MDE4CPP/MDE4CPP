@@ -139,7 +139,6 @@ namespace uml
 	{
 		public:
  			JoinNode(const JoinNode &) {}
-			JoinNode& operator=(JoinNode const&) = delete;
 
 		protected:
 			JoinNode(){}

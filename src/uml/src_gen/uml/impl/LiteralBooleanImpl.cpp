@@ -70,6 +70,9 @@ using namespace uml;
 //*********************************
 LiteralBooleanImpl::LiteralBooleanImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 LiteralBooleanImpl::~LiteralBooleanImpl()
@@ -129,6 +132,18 @@ LiteralBooleanImpl::LiteralBooleanImpl(std::weak_ptr<uml::ValueSpecificationActi
 
 LiteralBooleanImpl::LiteralBooleanImpl(const LiteralBooleanImpl & obj):LiteralBooleanImpl()
 {
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  LiteralBooleanImpl::copy() const
+{
+	std::shared_ptr<LiteralBooleanImpl> element(new LiteralBooleanImpl(*this));
+	element->setThisLiteralBooleanPtr(element);
+	return element;
+}
+
+LiteralBooleanImpl& LiteralBooleanImpl::operator=(const LiteralBooleanImpl & obj)
+{
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy LiteralBoolean "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -178,13 +193,8 @@ LiteralBooleanImpl::LiteralBooleanImpl(const LiteralBooleanImpl & obj):LiteralBo
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  LiteralBooleanImpl::copy() const
-{
-	std::shared_ptr<LiteralBooleanImpl> element(new LiteralBooleanImpl(*this));
-	element->setThisLiteralBooleanPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> LiteralBooleanImpl::eStaticClass() const

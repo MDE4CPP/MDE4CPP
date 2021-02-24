@@ -164,7 +164,6 @@ namespace uml
 	{
 		public:
  			LinkAction(const LinkAction &) {}
-			LinkAction& operator=(LinkAction const&) = delete;
 
 		protected:
 			LinkAction(){}

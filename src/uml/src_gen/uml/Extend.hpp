@@ -112,7 +112,6 @@ namespace uml
 	{
 		public:
  			Extend(const Extend &) {}
-			Extend& operator=(Extend const&) = delete;
 
 		protected:
 			Extend(){}

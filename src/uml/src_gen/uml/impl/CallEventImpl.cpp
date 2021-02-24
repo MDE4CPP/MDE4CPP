@@ -66,6 +66,9 @@ using namespace uml;
 //*********************************
 CallEventImpl::CallEventImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 CallEventImpl::~CallEventImpl()
@@ -108,6 +111,18 @@ CallEventImpl::CallEventImpl(std::weak_ptr<uml::TemplateParameter > par_owningTe
 
 
 CallEventImpl::CallEventImpl(const CallEventImpl & obj):CallEventImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  CallEventImpl::copy() const
+{
+	std::shared_ptr<CallEventImpl> element(new CallEventImpl(*this));
+	element->setThisCallEventPtr(element);
+	return element;
+}
+
+CallEventImpl& CallEventImpl::operator=(const CallEventImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -153,13 +168,8 @@ CallEventImpl::CallEventImpl(const CallEventImpl & obj):CallEventImpl()
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  CallEventImpl::copy() const
-{
-	std::shared_ptr<CallEventImpl> element(new CallEventImpl(*this));
-	element->setThisCallEventPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> CallEventImpl::eStaticClass() const

@@ -23,10 +23,8 @@ namespace fUML::Semantics::CommonBehavior
 	{
 		public: 
 			ClassifierBehaviorInvocationEventAccepterImpl(const ClassifierBehaviorInvocationEventAccepterImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			ClassifierBehaviorInvocationEventAccepterImpl& operator=(ClassifierBehaviorInvocationEventAccepterImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			ClassifierBehaviorInvocationEventAccepterImpl& operator=(ClassifierBehaviorInvocationEventAccepterImpl const&);
 
 		protected:
 			friend class fUML::Semantics::CommonBehavior::CommonBehaviorFactoryImpl;

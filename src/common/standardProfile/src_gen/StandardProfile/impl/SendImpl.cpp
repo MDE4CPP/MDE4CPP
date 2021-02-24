@@ -41,9 +41,9 @@ using namespace StandardProfile;
 //*********************************
 SendImpl::SendImpl()
 {
-	#ifdef ADD_COUNT
-		ADD_COUNT("SendImpl()");
-	#endif
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 
 	DEBUG_MESSAGE(std::cout<<"Send is created..."<<std::endl;)
 
@@ -61,20 +61,12 @@ SendImpl::SendImpl()
 
 SendImpl::~SendImpl()
 {
-	#ifdef SUB_COUNT
-		SUB_COUNT("SendImpl()");
-	#endif
-
 	DEBUG_MESSAGE(std::cout<<"Send is destroyed..."<<std::endl;)
 }
 
 SendImpl::SendImpl(const SendImpl & obj):SendImpl()
 {
-	//create copy of all Attributes
-	#ifdef SHOW_COPIES
-	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Send "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
-	#endif
-	instantiate();
+	*this = obj;
 }
 
 std::shared_ptr<ecore::EObject>  SendImpl::copy() const
@@ -82,6 +74,16 @@ std::shared_ptr<ecore::EObject>  SendImpl::copy() const
 	std::shared_ptr<SendImpl> element(new SendImpl(*this));
 	element->setThisSendPtr(element);
 	return element;
+}
+
+SendImpl& SendImpl::operator=(const SendImpl & obj)
+{
+		//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Send "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
+	instantiate();
+	return *this;
 }
 
 

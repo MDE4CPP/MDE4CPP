@@ -66,6 +66,7 @@ ParameterSetObject::ParameterSetObject(std::shared_ptr<uml::ParameterSet> _eleme
 ParameterSetObject::ParameterSetObject(ParameterSetObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ParameterSetObject::ParameterSetObject()
@@ -83,6 +84,12 @@ std::shared_ptr<ecore::EObject> ParameterSetObject::copy()
 	element->setThisParameterSetObjectPtr(element);
 	return element;
 }
+
+ParameterSetObject& ParameterSetObject::operator=(const ParameterSetObject & obj)
+{
+	return *this;
+}
+
 
 void ParameterSetObject::destroy()
 {	

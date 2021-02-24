@@ -68,6 +68,7 @@ ObservationObject::ObservationObject(std::shared_ptr<uml::Observation> _element)
 ObservationObject::ObservationObject(ObservationObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ObservationObject::ObservationObject()
@@ -85,6 +86,12 @@ std::shared_ptr<ecore::EObject> ObservationObject::copy()
 	element->setThisObservationObjectPtr(element);
 	return element;
 }
+
+ObservationObject& ObservationObject::operator=(const ObservationObject & obj)
+{
+	return *this;
+}
+
 
 void ObservationObject::destroy()
 {	

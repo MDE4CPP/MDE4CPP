@@ -80,7 +80,6 @@ namespace uml
 	{
 		public:
  			Slot(const Slot &) {}
-			Slot& operator=(Slot const&) = delete;
 
 		protected:
 			Slot(){}

@@ -25,9 +25,6 @@ namespace StandardProfile
 {
 	class SystemModel : virtual public uml::Stereotype 
 	{
-		private:    
-			SystemModel(const SystemModel& that) = delete;
-
 		protected:
 			SystemModel(){}
 

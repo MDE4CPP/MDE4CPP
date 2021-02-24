@@ -85,6 +85,9 @@ using namespace uml;
 //*********************************
 ProtocolTransitionImpl::ProtocolTransitionImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ProtocolTransitionImpl::~ProtocolTransitionImpl()
@@ -119,6 +122,18 @@ ProtocolTransitionImpl::ProtocolTransitionImpl(std::weak_ptr<uml::Element > par_
 
 
 ProtocolTransitionImpl::ProtocolTransitionImpl(const ProtocolTransitionImpl & obj):ProtocolTransitionImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ProtocolTransitionImpl::copy() const
+{
+	std::shared_ptr<ProtocolTransitionImpl> element(new ProtocolTransitionImpl(*this));
+	element->setThisProtocolTransitionPtr(element);
+	return element;
+}
+
+ProtocolTransitionImpl& ProtocolTransitionImpl::operator=(const ProtocolTransitionImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -251,13 +266,8 @@ ProtocolTransitionImpl::ProtocolTransitionImpl(const ProtocolTransitionImpl & ob
 		std::cout << "Copying the Subset: " << "m_trigger" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  ProtocolTransitionImpl::copy() const
-{
-	std::shared_ptr<ProtocolTransitionImpl> element(new ProtocolTransitionImpl(*this));
-	element->setThisProtocolTransitionPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ProtocolTransitionImpl::eStaticClass() const

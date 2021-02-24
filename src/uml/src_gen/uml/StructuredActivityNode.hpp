@@ -183,7 +183,6 @@ namespace uml
 	{
 		public:
  			StructuredActivityNode(const StructuredActivityNode &) {}
-			StructuredActivityNode& operator=(StructuredActivityNode const&) = delete;
 
 		protected:
 			StructuredActivityNode(){}

@@ -159,7 +159,6 @@ namespace uml
 	{
 		public:
  			RemoveVariableValueAction(const RemoveVariableValueAction &) {}
-			RemoveVariableValueAction& operator=(RemoveVariableValueAction const&) = delete;
 
 		protected:
 			RemoveVariableValueAction(){}

@@ -87,6 +87,9 @@ using namespace uml;
 //*********************************
 StartClassifierBehaviorActionImpl::StartClassifierBehaviorActionImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 StartClassifierBehaviorActionImpl::~StartClassifierBehaviorActionImpl()
@@ -129,6 +132,18 @@ StartClassifierBehaviorActionImpl::StartClassifierBehaviorActionImpl(std::weak_p
 
 
 StartClassifierBehaviorActionImpl::StartClassifierBehaviorActionImpl(const StartClassifierBehaviorActionImpl & obj):StartClassifierBehaviorActionImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  StartClassifierBehaviorActionImpl::copy() const
+{
+	std::shared_ptr<StartClassifierBehaviorActionImpl> element(new StartClassifierBehaviorActionImpl(*this));
+	element->setThisStartClassifierBehaviorActionPtr(element);
+	return element;
+}
+
+StartClassifierBehaviorActionImpl& StartClassifierBehaviorActionImpl::operator=(const StartClassifierBehaviorActionImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -245,13 +260,8 @@ StartClassifierBehaviorActionImpl::StartClassifierBehaviorActionImpl(const Start
 	#endif
 
 	
-}
 
-std::shared_ptr<ecore::EObject>  StartClassifierBehaviorActionImpl::copy() const
-{
-	std::shared_ptr<StartClassifierBehaviorActionImpl> element(new StartClassifierBehaviorActionImpl(*this));
-	element->setThisStartClassifierBehaviorActionPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> StartClassifierBehaviorActionImpl::eStaticClass() const

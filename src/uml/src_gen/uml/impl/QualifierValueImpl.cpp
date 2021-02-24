@@ -56,6 +56,9 @@ using namespace uml;
 //*********************************
 QualifierValueImpl::QualifierValueImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 QualifierValueImpl::~QualifierValueImpl()
@@ -74,6 +77,18 @@ QualifierValueImpl::QualifierValueImpl(std::weak_ptr<uml::Element > par_owner)
 
 
 QualifierValueImpl::QualifierValueImpl(const QualifierValueImpl & obj):QualifierValueImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  QualifierValueImpl::copy() const
+{
+	std::shared_ptr<QualifierValueImpl> element(new QualifierValueImpl(*this));
+	element->setThisQualifierValuePtr(element);
+	return element;
+}
+
+QualifierValueImpl& QualifierValueImpl::operator=(const QualifierValueImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -100,13 +115,8 @@ QualifierValueImpl::QualifierValueImpl(const QualifierValueImpl & obj):Qualifier
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  QualifierValueImpl::copy() const
-{
-	std::shared_ptr<QualifierValueImpl> element(new QualifierValueImpl(*this));
-	element->setThisQualifierValuePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> QualifierValueImpl::eStaticClass() const

@@ -68,6 +68,7 @@ EventObject::EventObject(std::shared_ptr<uml::Event> _element):
 EventObject::EventObject(EventObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 EventObject::EventObject()
@@ -85,6 +86,12 @@ std::shared_ptr<ecore::EObject> EventObject::copy()
 	element->setThisEventObjectPtr(element);
 	return element;
 }
+
+EventObject& EventObject::operator=(const EventObject & obj)
+{
+	return *this;
+}
+
 
 void EventObject::destroy()
 {	

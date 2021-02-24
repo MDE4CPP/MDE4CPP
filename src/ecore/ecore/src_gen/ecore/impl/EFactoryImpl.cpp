@@ -60,6 +60,9 @@ using namespace ecore;
 //*********************************
 EFactoryImpl::EFactoryImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 EFactoryImpl::~EFactoryImpl()
@@ -78,6 +81,18 @@ EFactoryImpl::EFactoryImpl(std::weak_ptr<ecore::EObject > par_eContainer)
 
 
 EFactoryImpl::EFactoryImpl(const EFactoryImpl & obj):EFactoryImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  EFactoryImpl::copy() const
+{
+	std::shared_ptr<EFactoryImpl> element(new EFactoryImpl(*this));
+	element->setThisEFactoryPtr(element);
+	return element;
+}
+
+EFactoryImpl& EFactoryImpl::operator=(const EFactoryImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -103,13 +118,8 @@ EFactoryImpl::EFactoryImpl(const EFactoryImpl & obj):EFactoryImpl()
 		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  EFactoryImpl::copy() const
-{
-	std::shared_ptr<EFactoryImpl> element(new EFactoryImpl(*this));
-	element->setThisEFactoryPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<EClass> EFactoryImpl::eStaticClass() const

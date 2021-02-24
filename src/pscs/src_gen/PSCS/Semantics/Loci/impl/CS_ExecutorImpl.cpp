@@ -66,6 +66,9 @@ using namespace PSCS::Semantics::Loci;
 //*********************************
 CS_ExecutorImpl::CS_ExecutorImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 CS_ExecutorImpl::~CS_ExecutorImpl()
@@ -85,6 +88,18 @@ CS_ExecutorImpl::CS_ExecutorImpl(std::weak_ptr<fUML::Semantics::Loci::Locus > pa
 
 CS_ExecutorImpl::CS_ExecutorImpl(const CS_ExecutorImpl & obj):CS_ExecutorImpl()
 {
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  CS_ExecutorImpl::copy() const
+{
+	std::shared_ptr<CS_ExecutorImpl> element(new CS_ExecutorImpl(*this));
+	element->setThisCS_ExecutorPtr(element);
+	return element;
+}
+
+CS_ExecutorImpl& CS_ExecutorImpl::operator=(const CS_ExecutorImpl & obj)
+{
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy CS_Executor "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -98,13 +113,8 @@ CS_ExecutorImpl::CS_ExecutorImpl(const CS_ExecutorImpl & obj):CS_ExecutorImpl()
 	//Clone references with containment (deep copy)
 
 
-}
 
-std::shared_ptr<ecore::EObject>  CS_ExecutorImpl::copy() const
-{
-	std::shared_ptr<CS_ExecutorImpl> element(new CS_ExecutorImpl(*this));
-	element->setThisCS_ExecutorPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> CS_ExecutorImpl::eStaticClass() const

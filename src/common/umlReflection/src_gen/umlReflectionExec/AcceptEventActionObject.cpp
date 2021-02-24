@@ -101,6 +101,7 @@ AcceptEventActionObject::AcceptEventActionObject(std::shared_ptr<uml::AcceptEven
 AcceptEventActionObject::AcceptEventActionObject(AcceptEventActionObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 AcceptEventActionObject::AcceptEventActionObject()
@@ -118,6 +119,12 @@ std::shared_ptr<ecore::EObject> AcceptEventActionObject::copy()
 	element->setThisAcceptEventActionObjectPtr(element);
 	return element;
 }
+
+AcceptEventActionObject& AcceptEventActionObject::operator=(const AcceptEventActionObject & obj)
+{
+	return *this;
+}
+
 
 void AcceptEventActionObject::destroy()
 {	

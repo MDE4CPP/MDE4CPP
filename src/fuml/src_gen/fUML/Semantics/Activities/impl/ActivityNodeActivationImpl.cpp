@@ -73,6 +73,9 @@ using namespace fUML::Semantics::Activities;
 //*********************************
 ActivityNodeActivationImpl::ActivityNodeActivationImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ActivityNodeActivationImpl::~ActivityNodeActivationImpl()
@@ -91,6 +94,18 @@ ActivityNodeActivationImpl::ActivityNodeActivationImpl(std::weak_ptr<fUML::Seman
 
 
 ActivityNodeActivationImpl::ActivityNodeActivationImpl(const ActivityNodeActivationImpl & obj):ActivityNodeActivationImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ActivityNodeActivationImpl::copy() const
+{
+	std::shared_ptr<ActivityNodeActivationImpl> element(new ActivityNodeActivationImpl(*this));
+	element->setThisActivityNodeActivationPtr(element);
+	return element;
+}
+
+ActivityNodeActivationImpl& ActivityNodeActivationImpl::operator=(const ActivityNodeActivationImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -123,13 +138,8 @@ ActivityNodeActivationImpl::ActivityNodeActivationImpl(const ActivityNodeActivat
 	#endif
 
 	
-}
 
-std::shared_ptr<ecore::EObject>  ActivityNodeActivationImpl::copy() const
-{
-	std::shared_ptr<ActivityNodeActivationImpl> element(new ActivityNodeActivationImpl(*this));
-	element->setThisActivityNodeActivationPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ActivityNodeActivationImpl::eStaticClass() const

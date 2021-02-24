@@ -116,7 +116,6 @@ namespace uml
 	{
 		public:
  			InterfaceRealization(const InterfaceRealization &) {}
-			InterfaceRealization& operator=(InterfaceRealization const&) = delete;
 
 		protected:
 			InterfaceRealization(){}

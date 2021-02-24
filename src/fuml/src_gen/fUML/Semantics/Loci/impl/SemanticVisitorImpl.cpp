@@ -50,6 +50,9 @@ using namespace fUML::Semantics::Loci;
 //*********************************
 SemanticVisitorImpl::SemanticVisitorImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 SemanticVisitorImpl::~SemanticVisitorImpl()
@@ -63,6 +66,18 @@ SemanticVisitorImpl::~SemanticVisitorImpl()
 
 SemanticVisitorImpl::SemanticVisitorImpl(const SemanticVisitorImpl & obj):SemanticVisitorImpl()
 {
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  SemanticVisitorImpl::copy() const
+{
+	std::shared_ptr<SemanticVisitorImpl> element(new SemanticVisitorImpl(*this));
+	element->setThisSemanticVisitorPtr(element);
+	return element;
+}
+
+SemanticVisitorImpl& SemanticVisitorImpl::operator=(const SemanticVisitorImpl & obj)
+{
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy SemanticVisitor "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -74,13 +89,8 @@ SemanticVisitorImpl::SemanticVisitorImpl(const SemanticVisitorImpl & obj):Semant
 	//Clone references with containment (deep copy)
 
 
-}
 
-std::shared_ptr<ecore::EObject>  SemanticVisitorImpl::copy() const
-{
-	std::shared_ptr<SemanticVisitorImpl> element(new SemanticVisitorImpl(*this));
-	element->setThisSemanticVisitorPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> SemanticVisitorImpl::eStaticClass() const

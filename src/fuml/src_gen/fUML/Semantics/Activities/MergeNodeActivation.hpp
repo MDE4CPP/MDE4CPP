@@ -75,7 +75,6 @@ namespace fUML::Semantics::Activities
 	{
 		public:
  			MergeNodeActivation(const MergeNodeActivation &) {}
-			MergeNodeActivation& operator=(MergeNodeActivation const&) = delete;
 
 		protected:
 			MergeNodeActivation(){}

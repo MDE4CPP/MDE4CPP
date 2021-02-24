@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~UnmarshallActionObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			UnmarshallActionObject& operator=(UnmarshallActionObject const&);
 
 			virtual void destroy();
 			

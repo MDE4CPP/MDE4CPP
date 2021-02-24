@@ -69,6 +69,7 @@ ExtensionPointObject::ExtensionPointObject(std::shared_ptr<uml::ExtensionPoint> 
 ExtensionPointObject::ExtensionPointObject(ExtensionPointObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ExtensionPointObject::ExtensionPointObject()
@@ -86,6 +87,12 @@ std::shared_ptr<ecore::EObject> ExtensionPointObject::copy()
 	element->setThisExtensionPointObjectPtr(element);
 	return element;
 }
+
+ExtensionPointObject& ExtensionPointObject::operator=(const ExtensionPointObject & obj)
+{
+	return *this;
+}
+
 
 void ExtensionPointObject::destroy()
 {	

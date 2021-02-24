@@ -158,7 +158,6 @@ namespace uml
 	{
 		public:
  			FinalState(const FinalState &) {}
-			FinalState& operator=(FinalState const&) = delete;
 
 		protected:
 			FinalState(){}

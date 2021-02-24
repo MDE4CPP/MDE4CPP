@@ -89,6 +89,9 @@ using namespace uml;
 //*********************************
 ClearAssociationActionImpl::ClearAssociationActionImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ClearAssociationActionImpl::~ClearAssociationActionImpl()
@@ -131,6 +134,18 @@ ClearAssociationActionImpl::ClearAssociationActionImpl(std::weak_ptr<uml::Elemen
 
 
 ClearAssociationActionImpl::ClearAssociationActionImpl(const ClearAssociationActionImpl & obj):ClearAssociationActionImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ClearAssociationActionImpl::copy() const
+{
+	std::shared_ptr<ClearAssociationActionImpl> element(new ClearAssociationActionImpl(*this));
+	element->setThisClearAssociationActionPtr(element);
+	return element;
+}
+
+ClearAssociationActionImpl& ClearAssociationActionImpl::operator=(const ClearAssociationActionImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -249,13 +264,8 @@ ClearAssociationActionImpl::ClearAssociationActionImpl(const ClearAssociationAct
 	#endif
 
 	
-}
 
-std::shared_ptr<ecore::EObject>  ClearAssociationActionImpl::copy() const
-{
-	std::shared_ptr<ClearAssociationActionImpl> element(new ClearAssociationActionImpl(*this));
-	element->setThisClearAssociationActionPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ClearAssociationActionImpl::eStaticClass() const

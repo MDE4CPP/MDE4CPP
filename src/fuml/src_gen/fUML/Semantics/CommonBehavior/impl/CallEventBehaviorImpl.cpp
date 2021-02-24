@@ -53,6 +53,9 @@ using namespace fUML::Semantics::CommonBehavior;
 //*********************************
 CallEventBehaviorImpl::CallEventBehaviorImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 CallEventBehaviorImpl::~CallEventBehaviorImpl()
@@ -65,6 +68,18 @@ CallEventBehaviorImpl::~CallEventBehaviorImpl()
 
 
 CallEventBehaviorImpl::CallEventBehaviorImpl(const CallEventBehaviorImpl & obj):CallEventBehaviorImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  CallEventBehaviorImpl::copy() const
+{
+	std::shared_ptr<CallEventBehaviorImpl> element(new CallEventBehaviorImpl(*this));
+	element->setThisCallEventBehaviorPtr(element);
+	return element;
+}
+
+CallEventBehaviorImpl& CallEventBehaviorImpl::operator=(const CallEventBehaviorImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -79,13 +94,8 @@ CallEventBehaviorImpl::CallEventBehaviorImpl(const CallEventBehaviorImpl & obj):
 	//Clone references with containment (deep copy)
 
 
-}
 
-std::shared_ptr<ecore::EObject>  CallEventBehaviorImpl::copy() const
-{
-	std::shared_ptr<CallEventBehaviorImpl> element(new CallEventBehaviorImpl(*this));
-	element->setThisCallEventBehaviorPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> CallEventBehaviorImpl::eStaticClass() const

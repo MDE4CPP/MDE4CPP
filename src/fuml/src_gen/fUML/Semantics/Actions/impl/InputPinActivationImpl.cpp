@@ -66,6 +66,9 @@ using namespace fUML::Semantics::Actions;
 //*********************************
 InputPinActivationImpl::InputPinActivationImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 InputPinActivationImpl::~InputPinActivationImpl()
@@ -84,6 +87,18 @@ InputPinActivationImpl::InputPinActivationImpl(std::weak_ptr<fUML::Semantics::Ac
 
 
 InputPinActivationImpl::InputPinActivationImpl(const InputPinActivationImpl & obj):InputPinActivationImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  InputPinActivationImpl::copy() const
+{
+	std::shared_ptr<InputPinActivationImpl> element(new InputPinActivationImpl(*this));
+	element->setThisInputPinActivationPtr(element);
+	return element;
+}
+
+InputPinActivationImpl& InputPinActivationImpl::operator=(const InputPinActivationImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -120,13 +135,8 @@ InputPinActivationImpl::InputPinActivationImpl(const InputPinActivationImpl & ob
 		std::cout << "Copying the Subset: " << "m_heldTokens" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  InputPinActivationImpl::copy() const
-{
-	std::shared_ptr<InputPinActivationImpl> element(new InputPinActivationImpl(*this));
-	element->setThisInputPinActivationPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> InputPinActivationImpl::eStaticClass() const

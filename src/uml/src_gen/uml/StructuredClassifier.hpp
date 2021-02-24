@@ -188,7 +188,6 @@ namespace uml
 	{
 		public:
  			StructuredClassifier(const StructuredClassifier &) {}
-			StructuredClassifier& operator=(StructuredClassifier const&) = delete;
 
 		protected:
 			StructuredClassifier(){}

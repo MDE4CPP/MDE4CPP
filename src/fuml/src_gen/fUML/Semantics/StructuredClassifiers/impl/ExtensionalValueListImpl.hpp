@@ -23,10 +23,8 @@ namespace fUML::Semantics::StructuredClassifiers
 	{
 		public: 
 			ExtensionalValueListImpl(const ExtensionalValueListImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			ExtensionalValueListImpl& operator=(ExtensionalValueListImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			ExtensionalValueListImpl& operator=(ExtensionalValueListImpl const&);
 
 		protected:
 			friend class fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactoryImpl;

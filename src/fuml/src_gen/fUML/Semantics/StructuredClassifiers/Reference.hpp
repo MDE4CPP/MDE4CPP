@@ -111,7 +111,6 @@ namespace fUML::Semantics::StructuredClassifiers
 	{
 		public:
  			Reference(const Reference &) {}
-			Reference& operator=(Reference const&) = delete;
 
 		protected:
 			Reference(){}

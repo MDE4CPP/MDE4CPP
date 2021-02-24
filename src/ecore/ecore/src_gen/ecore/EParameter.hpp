@@ -80,7 +80,6 @@ namespace ecore
 	{
 		public:
  			EParameter(const EParameter &) {}
-			EParameter& operator=(EParameter const&) = delete;
 
 		protected:
 			EParameter(){}

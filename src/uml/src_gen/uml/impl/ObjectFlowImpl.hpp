@@ -22,10 +22,8 @@ namespace uml
 	{
 		public: 
 			ObjectFlowImpl(const ObjectFlowImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			ObjectFlowImpl& operator=(ObjectFlowImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			ObjectFlowImpl& operator=(ObjectFlowImpl const&);
 
 		protected:
 			friend class umlFactoryImpl;

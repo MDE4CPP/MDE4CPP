@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~TimeExpressionObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			TimeExpressionObject& operator=(TimeExpressionObject const&);
 
 			virtual void destroy();
 			

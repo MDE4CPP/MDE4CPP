@@ -69,6 +69,9 @@ using namespace fUML::Semantics::Actions;
 //*********************************
 ClearAssociationActionActivationImpl::ClearAssociationActionActivationImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ClearAssociationActionActivationImpl::~ClearAssociationActionActivationImpl()
@@ -87,6 +90,18 @@ ClearAssociationActionActivationImpl::ClearAssociationActionActivationImpl(std::
 
 
 ClearAssociationActionActivationImpl::ClearAssociationActionActivationImpl(const ClearAssociationActionActivationImpl & obj):ClearAssociationActionActivationImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ClearAssociationActionActivationImpl::copy() const
+{
+	std::shared_ptr<ClearAssociationActionActivationImpl> element(new ClearAssociationActionActivationImpl(*this));
+	element->setThisClearAssociationActionActivationPtr(element);
+	return element;
+}
+
+ClearAssociationActionActivationImpl& ClearAssociationActionActivationImpl::operator=(const ClearAssociationActionActivationImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -140,13 +155,8 @@ ClearAssociationActionActivationImpl::ClearAssociationActionActivationImpl(const
 		std::cout << "Copying the Subset: " << "m_outputPinActivation" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  ClearAssociationActionActivationImpl::copy() const
-{
-	std::shared_ptr<ClearAssociationActionActivationImpl> element(new ClearAssociationActionActivationImpl(*this));
-	element->setThisClearAssociationActionActivationPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ClearAssociationActionActivationImpl::eStaticClass() const

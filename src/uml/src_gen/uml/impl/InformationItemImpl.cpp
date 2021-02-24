@@ -95,6 +95,9 @@ using namespace uml;
 //*********************************
 InformationItemImpl::InformationItemImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 InformationItemImpl::~InformationItemImpl()
@@ -150,6 +153,18 @@ InformationItemImpl::InformationItemImpl(std::weak_ptr<uml::TemplateParameter > 
 
 
 InformationItemImpl::InformationItemImpl(const InformationItemImpl & obj):InformationItemImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  InformationItemImpl::copy() const
+{
+	std::shared_ptr<InformationItemImpl> element(new InformationItemImpl(*this));
+	element->setThisInformationItemPtr(element);
+	return element;
+}
+
+InformationItemImpl& InformationItemImpl::operator=(const InformationItemImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -321,13 +336,8 @@ InformationItemImpl::InformationItemImpl(const InformationItemImpl & obj):Inform
 		std::cout << "Copying the Subset: " << "m_templateBinding" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  InformationItemImpl::copy() const
-{
-	std::shared_ptr<InformationItemImpl> element(new InformationItemImpl(*this));
-	element->setThisInformationItemPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> InformationItemImpl::eStaticClass() const

@@ -57,6 +57,9 @@ using namespace uml;
 //*********************************
 ConnectableElementTemplateParameterImpl::ConnectableElementTemplateParameterImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ConnectableElementTemplateParameterImpl::~ConnectableElementTemplateParameterImpl()
@@ -83,6 +86,18 @@ ConnectableElementTemplateParameterImpl::ConnectableElementTemplateParameterImpl
 
 
 ConnectableElementTemplateParameterImpl::ConnectableElementTemplateParameterImpl(const ConnectableElementTemplateParameterImpl & obj):ConnectableElementTemplateParameterImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ConnectableElementTemplateParameterImpl::copy() const
+{
+	std::shared_ptr<ConnectableElementTemplateParameterImpl> element(new ConnectableElementTemplateParameterImpl(*this));
+	element->setThisConnectableElementTemplateParameterPtr(element);
+	return element;
+}
+
+ConnectableElementTemplateParameterImpl& ConnectableElementTemplateParameterImpl::operator=(const ConnectableElementTemplateParameterImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -125,13 +140,8 @@ ConnectableElementTemplateParameterImpl::ConnectableElementTemplateParameterImpl
 		std::cout << "Copying the Subset: " << "m_ownedParameteredElement" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  ConnectableElementTemplateParameterImpl::copy() const
-{
-	std::shared_ptr<ConnectableElementTemplateParameterImpl> element(new ConnectableElementTemplateParameterImpl(*this));
-	element->setThisConnectableElementTemplateParameterPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ConnectableElementTemplateParameterImpl::eStaticClass() const

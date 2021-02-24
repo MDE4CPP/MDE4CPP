@@ -23,10 +23,8 @@ namespace PSCS::Semantics::StructuredClassifiers
 	{
 		public: 
 			CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl(const CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl& operator=(CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl& operator=(CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl const&);
 
 		protected:
 			friend class PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactoryImpl;

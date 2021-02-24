@@ -22,10 +22,8 @@ namespace uml
 	{
 		public: 
 			ExecutionEnvironmentImpl(const ExecutionEnvironmentImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			ExecutionEnvironmentImpl& operator=(ExecutionEnvironmentImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			ExecutionEnvironmentImpl& operator=(ExecutionEnvironmentImpl const&);
 
 		protected:
 			friend class umlFactoryImpl;

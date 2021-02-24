@@ -69,6 +69,9 @@ using namespace PSCS::Semantics::StructuredClassifiers;
 //*********************************
 CS_ReferenceImpl::CS_ReferenceImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 CS_ReferenceImpl::~CS_ReferenceImpl()
@@ -81,6 +84,18 @@ CS_ReferenceImpl::~CS_ReferenceImpl()
 
 
 CS_ReferenceImpl::CS_ReferenceImpl(const CS_ReferenceImpl & obj):CS_ReferenceImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  CS_ReferenceImpl::copy() const
+{
+	std::shared_ptr<CS_ReferenceImpl> element(new CS_ReferenceImpl(*this));
+	element->setThisCS_ReferencePtr(element);
+	return element;
+}
+
+CS_ReferenceImpl& CS_ReferenceImpl::operator=(const CS_ReferenceImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -97,13 +112,8 @@ CS_ReferenceImpl::CS_ReferenceImpl(const CS_ReferenceImpl & obj):CS_ReferenceImp
 	//Clone references with containment (deep copy)
 
 
-}
 
-std::shared_ptr<ecore::EObject>  CS_ReferenceImpl::copy() const
-{
-	std::shared_ptr<CS_ReferenceImpl> element(new CS_ReferenceImpl(*this));
-	element->setThisCS_ReferencePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> CS_ReferenceImpl::eStaticClass() const

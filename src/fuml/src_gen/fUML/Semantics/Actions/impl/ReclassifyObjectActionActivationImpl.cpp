@@ -69,6 +69,9 @@ using namespace fUML::Semantics::Actions;
 //*********************************
 ReclassifyObjectActionActivationImpl::ReclassifyObjectActionActivationImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ReclassifyObjectActionActivationImpl::~ReclassifyObjectActionActivationImpl()
@@ -87,6 +90,18 @@ ReclassifyObjectActionActivationImpl::ReclassifyObjectActionActivationImpl(std::
 
 
 ReclassifyObjectActionActivationImpl::ReclassifyObjectActionActivationImpl(const ReclassifyObjectActionActivationImpl & obj):ReclassifyObjectActionActivationImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ReclassifyObjectActionActivationImpl::copy() const
+{
+	std::shared_ptr<ReclassifyObjectActionActivationImpl> element(new ReclassifyObjectActionActivationImpl(*this));
+	element->setThisReclassifyObjectActionActivationPtr(element);
+	return element;
+}
+
+ReclassifyObjectActionActivationImpl& ReclassifyObjectActionActivationImpl::operator=(const ReclassifyObjectActionActivationImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -140,13 +155,8 @@ ReclassifyObjectActionActivationImpl::ReclassifyObjectActionActivationImpl(const
 		std::cout << "Copying the Subset: " << "m_outputPinActivation" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  ReclassifyObjectActionActivationImpl::copy() const
-{
-	std::shared_ptr<ReclassifyObjectActionActivationImpl> element(new ReclassifyObjectActionActivationImpl(*this));
-	element->setThisReclassifyObjectActionActivationPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ReclassifyObjectActionActivationImpl::eStaticClass() const

@@ -22,10 +22,8 @@ namespace uml
 	{
 		public: 
 			FunctionBehaviorImpl(const FunctionBehaviorImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			FunctionBehaviorImpl& operator=(FunctionBehaviorImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			FunctionBehaviorImpl& operator=(FunctionBehaviorImpl const&);
 
 		protected:
 			friend class umlFactoryImpl;

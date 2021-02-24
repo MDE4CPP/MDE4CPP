@@ -85,6 +85,9 @@ using namespace uml;
 //*********************************
 TransitionImpl::TransitionImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 TransitionImpl::~TransitionImpl()
@@ -119,6 +122,18 @@ TransitionImpl::TransitionImpl(std::weak_ptr<uml::Element > par_owner)
 
 
 TransitionImpl::TransitionImpl(const TransitionImpl & obj):TransitionImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  TransitionImpl::copy() const
+{
+	std::shared_ptr<TransitionImpl> element(new TransitionImpl(*this));
+	element->setThisTransitionPtr(element);
+	return element;
+}
+
+TransitionImpl& TransitionImpl::operator=(const TransitionImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -242,13 +257,8 @@ TransitionImpl::TransitionImpl(const TransitionImpl & obj):TransitionImpl()
 		std::cout << "Initialising value Subset: " << "m_trigger - Subset<uml::Trigger, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
 	
-}
 
-std::shared_ptr<ecore::EObject>  TransitionImpl::copy() const
-{
-	std::shared_ptr<TransitionImpl> element(new TransitionImpl(*this));
-	element->setThisTransitionPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> TransitionImpl::eStaticClass() const

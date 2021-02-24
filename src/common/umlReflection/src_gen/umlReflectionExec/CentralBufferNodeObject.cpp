@@ -94,6 +94,7 @@ CentralBufferNodeObject::CentralBufferNodeObject(std::shared_ptr<uml::CentralBuf
 CentralBufferNodeObject::CentralBufferNodeObject(CentralBufferNodeObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 CentralBufferNodeObject::CentralBufferNodeObject()
@@ -111,6 +112,12 @@ std::shared_ptr<ecore::EObject> CentralBufferNodeObject::copy()
 	element->setThisCentralBufferNodeObjectPtr(element);
 	return element;
 }
+
+CentralBufferNodeObject& CentralBufferNodeObject::operator=(const CentralBufferNodeObject & obj)
+{
+	return *this;
+}
+
 
 void CentralBufferNodeObject::destroy()
 {	

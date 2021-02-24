@@ -25,9 +25,6 @@ namespace StandardProfile
 {
 	class Metamodel : virtual public uml::Stereotype 
 	{
-		private:    
-			Metamodel(const Metamodel& that) = delete;
-
 		protected:
 			Metamodel(){}
 

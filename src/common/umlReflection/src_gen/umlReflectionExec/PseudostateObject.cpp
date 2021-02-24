@@ -74,6 +74,7 @@ PseudostateObject::PseudostateObject(std::shared_ptr<uml::Pseudostate> _element)
 PseudostateObject::PseudostateObject(PseudostateObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 PseudostateObject::PseudostateObject()
@@ -91,6 +92,12 @@ std::shared_ptr<ecore::EObject> PseudostateObject::copy()
 	element->setThisPseudostateObjectPtr(element);
 	return element;
 }
+
+PseudostateObject& PseudostateObject::operator=(const PseudostateObject & obj)
+{
+	return *this;
+}
+
 
 void PseudostateObject::destroy()
 {	

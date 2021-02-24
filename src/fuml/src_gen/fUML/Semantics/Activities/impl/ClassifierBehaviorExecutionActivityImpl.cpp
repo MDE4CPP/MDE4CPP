@@ -50,6 +50,9 @@ using namespace fUML::Semantics::Activities;
 //*********************************
 ClassifierBehaviorExecutionActivityImpl::ClassifierBehaviorExecutionActivityImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ClassifierBehaviorExecutionActivityImpl::~ClassifierBehaviorExecutionActivityImpl()
@@ -63,6 +66,18 @@ ClassifierBehaviorExecutionActivityImpl::~ClassifierBehaviorExecutionActivityImp
 
 ClassifierBehaviorExecutionActivityImpl::ClassifierBehaviorExecutionActivityImpl(const ClassifierBehaviorExecutionActivityImpl & obj):ClassifierBehaviorExecutionActivityImpl()
 {
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ClassifierBehaviorExecutionActivityImpl::copy() const
+{
+	std::shared_ptr<ClassifierBehaviorExecutionActivityImpl> element(new ClassifierBehaviorExecutionActivityImpl(*this));
+	element->setThisClassifierBehaviorExecutionActivityPtr(element);
+	return element;
+}
+
+ClassifierBehaviorExecutionActivityImpl& ClassifierBehaviorExecutionActivityImpl::operator=(const ClassifierBehaviorExecutionActivityImpl & obj)
+{
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ClassifierBehaviorExecutionActivity "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -74,13 +89,8 @@ ClassifierBehaviorExecutionActivityImpl::ClassifierBehaviorExecutionActivityImpl
 	//Clone references with containment (deep copy)
 
 
-}
 
-std::shared_ptr<ecore::EObject>  ClassifierBehaviorExecutionActivityImpl::copy() const
-{
-	std::shared_ptr<ClassifierBehaviorExecutionActivityImpl> element(new ClassifierBehaviorExecutionActivityImpl(*this));
-	element->setThisClassifierBehaviorExecutionActivityPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ClassifierBehaviorExecutionActivityImpl::eStaticClass() const

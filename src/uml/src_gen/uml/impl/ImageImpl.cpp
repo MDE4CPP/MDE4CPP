@@ -51,6 +51,9 @@ using namespace uml;
 //*********************************
 ImageImpl::ImageImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ImageImpl::~ImageImpl()
@@ -69,6 +72,18 @@ ImageImpl::ImageImpl(std::weak_ptr<uml::Element > par_owner)
 
 
 ImageImpl::ImageImpl(const ImageImpl & obj):ImageImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ImageImpl::copy() const
+{
+	std::shared_ptr<ImageImpl> element(new ImageImpl(*this));
+	element->setThisImagePtr(element);
+	return element;
+}
+
+ImageImpl& ImageImpl::operator=(const ImageImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -94,13 +109,8 @@ ImageImpl::ImageImpl(const ImageImpl & obj):ImageImpl()
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  ImageImpl::copy() const
-{
-	std::shared_ptr<ImageImpl> element(new ImageImpl(*this));
-	element->setThisImagePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ImageImpl::eStaticClass() const

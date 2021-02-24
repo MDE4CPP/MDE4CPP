@@ -265,7 +265,6 @@ namespace uml
 	{
 		public:
  			StateMachine(const StateMachine &) {}
-			StateMachine& operator=(StateMachine const&) = delete;
 
 		protected:
 			StateMachine(){}

@@ -66,6 +66,7 @@ DeploymentTargetObject::DeploymentTargetObject(std::shared_ptr<uml::DeploymentTa
 DeploymentTargetObject::DeploymentTargetObject(DeploymentTargetObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 DeploymentTargetObject::DeploymentTargetObject()
@@ -83,6 +84,12 @@ std::shared_ptr<ecore::EObject> DeploymentTargetObject::copy()
 	element->setThisDeploymentTargetObjectPtr(element);
 	return element;
 }
+
+DeploymentTargetObject& DeploymentTargetObject::operator=(const DeploymentTargetObject & obj)
+{
+	return *this;
+}
+
 
 void DeploymentTargetObject::destroy()
 {	

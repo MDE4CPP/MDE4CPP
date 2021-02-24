@@ -24,10 +24,8 @@ namespace uml
 	{
 		public: 
 			StateImpl(const StateImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			StateImpl& operator=(StateImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			StateImpl& operator=(StateImpl const&);
 
 		protected:
 			friend class umlFactoryImpl;

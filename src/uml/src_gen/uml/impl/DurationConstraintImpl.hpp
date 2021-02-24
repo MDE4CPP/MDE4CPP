@@ -22,10 +22,8 @@ namespace uml
 	{
 		public: 
 			DurationConstraintImpl(const DurationConstraintImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			DurationConstraintImpl& operator=(DurationConstraintImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			DurationConstraintImpl& operator=(DurationConstraintImpl const&);
 
 		protected:
 			friend class umlFactoryImpl;

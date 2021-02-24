@@ -118,7 +118,6 @@ namespace uml
 	{
 		public:
  			ValueSpecification(const ValueSpecification &) {}
-			ValueSpecification& operator=(ValueSpecification const&) = delete;
 
 		protected:
 			ValueSpecification(){}

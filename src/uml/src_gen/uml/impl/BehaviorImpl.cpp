@@ -121,6 +121,9 @@ using namespace uml;
 //*********************************
 BehaviorImpl::BehaviorImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 BehaviorImpl::~BehaviorImpl()
@@ -184,6 +187,18 @@ BehaviorImpl::BehaviorImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemp
 
 
 BehaviorImpl::BehaviorImpl(const BehaviorImpl & obj):BehaviorImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  BehaviorImpl::copy() const
+{
+	std::shared_ptr<BehaviorImpl> element(new BehaviorImpl(*this));
+	element->setThisBehaviorPtr(element);
+	return element;
+}
+
+BehaviorImpl& BehaviorImpl::operator=(const BehaviorImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -498,13 +513,8 @@ BehaviorImpl::BehaviorImpl(const BehaviorImpl & obj):BehaviorImpl()
 		std::cout << "Initialising value Subset: " << "m_ownedParameterSet - Subset<uml::ParameterSet, uml::NamedElement >(getOwnedMember())" << std::endl;
 	#endif
 	
-}
 
-std::shared_ptr<ecore::EObject>  BehaviorImpl::copy() const
-{
-	std::shared_ptr<BehaviorImpl> element(new BehaviorImpl(*this));
-	element->setThisBehaviorPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> BehaviorImpl::eStaticClass() const

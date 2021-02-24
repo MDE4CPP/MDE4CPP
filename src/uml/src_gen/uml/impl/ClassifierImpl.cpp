@@ -109,6 +109,9 @@ using namespace uml;
 //*********************************
 ClassifierImpl::ClassifierImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ClassifierImpl::~ClassifierImpl()
@@ -164,6 +167,18 @@ ClassifierImpl::ClassifierImpl(std::weak_ptr<uml::TemplateParameter > par_owning
 
 
 ClassifierImpl::ClassifierImpl(const ClassifierImpl & obj):ClassifierImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ClassifierImpl::copy() const
+{
+	std::shared_ptr<ClassifierImpl> element(new ClassifierImpl(*this));
+	element->setThisClassifierPtr(element);
+	return element;
+}
+
+ClassifierImpl& ClassifierImpl::operator=(const ClassifierImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -359,13 +374,8 @@ ClassifierImpl::ClassifierImpl(const ClassifierImpl & obj):ClassifierImpl()
 		std::cout << "Initialising value Subset: " << "m_substitution - Subset<uml::Substitution, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
 	
-}
 
-std::shared_ptr<ecore::EObject>  ClassifierImpl::copy() const
-{
-	std::shared_ptr<ClassifierImpl> element(new ClassifierImpl(*this));
-	element->setThisClassifierPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ClassifierImpl::eStaticClass() const

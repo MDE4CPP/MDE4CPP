@@ -25,10 +25,8 @@ virtual public ObjectActivation
 	{
 		public: 
 			ObjectActivationImpl(const ObjectActivationImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			ObjectActivationImpl& operator=(ObjectActivationImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			ObjectActivationImpl& operator=(ObjectActivationImpl const&);
 
 		protected:
 			friend class fUML::Semantics::CommonBehavior::CommonBehaviorFactoryImpl;

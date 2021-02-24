@@ -91,6 +91,9 @@ using namespace uml;
 //*********************************
 ReadLinkActionImpl::ReadLinkActionImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ReadLinkActionImpl::~ReadLinkActionImpl()
@@ -133,6 +136,18 @@ ReadLinkActionImpl::ReadLinkActionImpl(std::weak_ptr<uml::Element > par_owner)
 
 
 ReadLinkActionImpl::ReadLinkActionImpl(const ReadLinkActionImpl & obj):ReadLinkActionImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ReadLinkActionImpl::copy() const
+{
+	std::shared_ptr<ReadLinkActionImpl> element(new ReadLinkActionImpl(*this));
+	element->setThisReadLinkActionPtr(element);
+	return element;
+}
+
+ReadLinkActionImpl& ReadLinkActionImpl::operator=(const ReadLinkActionImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -265,13 +280,8 @@ ReadLinkActionImpl::ReadLinkActionImpl(const ReadLinkActionImpl & obj):ReadLinkA
 	#endif
 
 	
-}
 
-std::shared_ptr<ecore::EObject>  ReadLinkActionImpl::copy() const
-{
-	std::shared_ptr<ReadLinkActionImpl> element(new ReadLinkActionImpl(*this));
-	element->setThisReadLinkActionPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ReadLinkActionImpl::eStaticClass() const

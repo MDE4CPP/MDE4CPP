@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~StructuralFeatureActionObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			StructuralFeatureActionObject& operator=(StructuralFeatureActionObject const&);
 
 			virtual void destroy();
 			

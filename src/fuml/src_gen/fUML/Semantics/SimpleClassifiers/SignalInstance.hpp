@@ -70,7 +70,6 @@ namespace fUML::Semantics::SimpleClassifiers
 	{
 		public:
  			SignalInstance(const SignalInstance &) {}
-			SignalInstance& operator=(SignalInstance const&) = delete;
 
 		protected:
 			SignalInstance(){}

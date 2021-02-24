@@ -64,6 +64,9 @@ using namespace uml;
 //*********************************
 UsageImpl::UsageImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 UsageImpl::~UsageImpl()
@@ -106,6 +109,18 @@ UsageImpl::UsageImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplatePa
 
 
 UsageImpl::UsageImpl(const UsageImpl & obj):UsageImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  UsageImpl::copy() const
+{
+	std::shared_ptr<UsageImpl> element(new UsageImpl(*this));
+	element->setThisUsagePtr(element);
+	return element;
+}
+
+UsageImpl& UsageImpl::operator=(const UsageImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -168,13 +183,8 @@ UsageImpl::UsageImpl(const UsageImpl & obj):UsageImpl()
 		std::cout << "Copying the Subset: " << "m_supplier" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  UsageImpl::copy() const
-{
-	std::shared_ptr<UsageImpl> element(new UsageImpl(*this));
-	element->setThisUsagePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> UsageImpl::eStaticClass() const

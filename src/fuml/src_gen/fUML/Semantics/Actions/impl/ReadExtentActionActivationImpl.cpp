@@ -69,6 +69,9 @@ using namespace fUML::Semantics::Actions;
 //*********************************
 ReadExtentActionActivationImpl::ReadExtentActionActivationImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ReadExtentActionActivationImpl::~ReadExtentActionActivationImpl()
@@ -87,6 +90,18 @@ ReadExtentActionActivationImpl::ReadExtentActionActivationImpl(std::weak_ptr<fUM
 
 
 ReadExtentActionActivationImpl::ReadExtentActionActivationImpl(const ReadExtentActionActivationImpl & obj):ReadExtentActionActivationImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ReadExtentActionActivationImpl::copy() const
+{
+	std::shared_ptr<ReadExtentActionActivationImpl> element(new ReadExtentActionActivationImpl(*this));
+	element->setThisReadExtentActionActivationPtr(element);
+	return element;
+}
+
+ReadExtentActionActivationImpl& ReadExtentActionActivationImpl::operator=(const ReadExtentActionActivationImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -140,13 +155,8 @@ ReadExtentActionActivationImpl::ReadExtentActionActivationImpl(const ReadExtentA
 		std::cout << "Copying the Subset: " << "m_outputPinActivation" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  ReadExtentActionActivationImpl::copy() const
-{
-	std::shared_ptr<ReadExtentActionActivationImpl> element(new ReadExtentActionActivationImpl(*this));
-	element->setThisReadExtentActionActivationPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ReadExtentActionActivationImpl::eStaticClass() const

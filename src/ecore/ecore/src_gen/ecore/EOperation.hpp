@@ -97,7 +97,6 @@ namespace ecore
 	{
 		public:
  			EOperation(const EOperation &) {}
-			EOperation& operator=(EOperation const&) = delete;
 
 		protected:
 			EOperation(){}

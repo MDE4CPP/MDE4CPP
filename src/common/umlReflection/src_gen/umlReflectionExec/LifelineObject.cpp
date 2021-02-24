@@ -72,6 +72,7 @@ LifelineObject::LifelineObject(std::shared_ptr<uml::Lifeline> _element):
 LifelineObject::LifelineObject(LifelineObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 LifelineObject::LifelineObject()
@@ -89,6 +90,12 @@ std::shared_ptr<ecore::EObject> LifelineObject::copy()
 	element->setThisLifelineObjectPtr(element);
 	return element;
 }
+
+LifelineObject& LifelineObject::operator=(const LifelineObject & obj)
+{
+	return *this;
+}
+
 
 void LifelineObject::destroy()
 {	

@@ -60,6 +60,9 @@ using namespace ecore;
 //*********************************
 EStructuralFeatureImpl::EStructuralFeatureImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 EStructuralFeatureImpl::~EStructuralFeatureImpl()
@@ -85,6 +88,18 @@ EStructuralFeatureImpl::EStructuralFeatureImpl(std::weak_ptr<ecore::EClass > par
 
 
 EStructuralFeatureImpl::EStructuralFeatureImpl(const EStructuralFeatureImpl & obj):EStructuralFeatureImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  EStructuralFeatureImpl::copy() const
+{
+	std::shared_ptr<EStructuralFeatureImpl> element(new EStructuralFeatureImpl(*this));
+	element->setThisEStructuralFeaturePtr(element);
+	return element;
+}
+
+EStructuralFeatureImpl& EStructuralFeatureImpl::operator=(const EStructuralFeatureImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -134,13 +149,8 @@ EStructuralFeatureImpl::EStructuralFeatureImpl(const EStructuralFeatureImpl & ob
 		std::cout << "Copying the Subset: " << "m_eGenericType" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  EStructuralFeatureImpl::copy() const
-{
-	std::shared_ptr<EStructuralFeatureImpl> element(new EStructuralFeatureImpl(*this));
-	element->setThisEStructuralFeaturePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<EClass> EStructuralFeatureImpl::eStaticClass() const

@@ -159,7 +159,6 @@ namespace uml
 	{
 		public:
  			SendObjectAction(const SendObjectAction &) {}
-			SendObjectAction& operator=(SendObjectAction const&) = delete;
 
 		protected:
 			SendObjectAction(){}

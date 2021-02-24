@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~RedefinableElementObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			RedefinableElementObject& operator=(RedefinableElementObject const&);
 
 			virtual void destroy();
 			

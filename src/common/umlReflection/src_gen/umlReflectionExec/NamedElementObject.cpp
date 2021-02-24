@@ -62,6 +62,7 @@ NamedElementObject::NamedElementObject(std::shared_ptr<uml::NamedElement> _eleme
 NamedElementObject::NamedElementObject(NamedElementObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 NamedElementObject::NamedElementObject()
@@ -79,6 +80,12 @@ std::shared_ptr<ecore::EObject> NamedElementObject::copy()
 	element->setThisNamedElementObjectPtr(element);
 	return element;
 }
+
+NamedElementObject& NamedElementObject::operator=(const NamedElementObject & obj)
+{
+	return *this;
+}
+
 
 void NamedElementObject::destroy()
 {	

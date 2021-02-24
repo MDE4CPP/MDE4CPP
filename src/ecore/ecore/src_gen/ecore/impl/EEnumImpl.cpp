@@ -59,6 +59,9 @@ using namespace ecore;
 //*********************************
 EEnumImpl::EEnumImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 EEnumImpl::~EEnumImpl()
@@ -84,6 +87,18 @@ EEnumImpl::EEnumImpl(std::weak_ptr<ecore::EPackage > par_ePackage)
 
 
 EEnumImpl::EEnumImpl(const EEnumImpl & obj):EEnumImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  EEnumImpl::copy() const
+{
+	std::shared_ptr<EEnumImpl> element(new EEnumImpl(*this));
+	element->setThisEEnumPtr(element);
+	return element;
+}
+
+EEnumImpl& EEnumImpl::operator=(const EEnumImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -137,13 +152,8 @@ EEnumImpl::EEnumImpl(const EEnumImpl & obj):EEnumImpl()
 		std::cout << "Initialising value Subset: " << "m_eLiterals - Subset<ecore::EEnumLiteral, ecore::EObject >(getEContens())" << std::endl;
 	#endif
 	
-}
 
-std::shared_ptr<ecore::EObject>  EEnumImpl::copy() const
-{
-	std::shared_ptr<EEnumImpl> element(new EEnumImpl(*this));
-	element->setThisEEnumPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<EClass> EEnumImpl::eStaticClass() const

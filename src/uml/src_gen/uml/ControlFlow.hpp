@@ -133,7 +133,6 @@ namespace uml
 	{
 		public:
  			ControlFlow(const ControlFlow &) {}
-			ControlFlow& operator=(ControlFlow const&) = delete;
 
 		protected:
 			ControlFlow(){}

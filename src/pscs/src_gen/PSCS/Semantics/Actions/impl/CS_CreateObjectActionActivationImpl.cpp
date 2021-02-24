@@ -83,6 +83,9 @@ using namespace PSCS::Semantics::Actions;
 //*********************************
 CS_CreateObjectActionActivationImpl::CS_CreateObjectActionActivationImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 CS_CreateObjectActionActivationImpl::~CS_CreateObjectActionActivationImpl()
@@ -101,6 +104,18 @@ CS_CreateObjectActionActivationImpl::CS_CreateObjectActionActivationImpl(std::we
 
 
 CS_CreateObjectActionActivationImpl::CS_CreateObjectActionActivationImpl(const CS_CreateObjectActionActivationImpl & obj):CS_CreateObjectActionActivationImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  CS_CreateObjectActionActivationImpl::copy() const
+{
+	std::shared_ptr<CS_CreateObjectActionActivationImpl> element(new CS_CreateObjectActionActivationImpl(*this));
+	element->setThisCS_CreateObjectActionActivationPtr(element);
+	return element;
+}
+
+CS_CreateObjectActionActivationImpl& CS_CreateObjectActionActivationImpl::operator=(const CS_CreateObjectActionActivationImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -156,13 +171,8 @@ CS_CreateObjectActionActivationImpl::CS_CreateObjectActionActivationImpl(const C
 		std::cout << "Copying the Subset: " << "m_outputPinActivation" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  CS_CreateObjectActionActivationImpl::copy() const
-{
-	std::shared_ptr<CS_CreateObjectActionActivationImpl> element(new CS_CreateObjectActionActivationImpl(*this));
-	element->setThisCS_CreateObjectActionActivationPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> CS_CreateObjectActionActivationImpl::eStaticClass() const

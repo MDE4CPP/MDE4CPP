@@ -98,6 +98,7 @@ StartClassifierBehaviorActionObject::StartClassifierBehaviorActionObject(std::sh
 StartClassifierBehaviorActionObject::StartClassifierBehaviorActionObject(StartClassifierBehaviorActionObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 StartClassifierBehaviorActionObject::StartClassifierBehaviorActionObject()
@@ -115,6 +116,12 @@ std::shared_ptr<ecore::EObject> StartClassifierBehaviorActionObject::copy()
 	element->setThisStartClassifierBehaviorActionObjectPtr(element);
 	return element;
 }
+
+StartClassifierBehaviorActionObject& StartClassifierBehaviorActionObject::operator=(const StartClassifierBehaviorActionObject & obj)
+{
+	return *this;
+}
+
 
 void StartClassifierBehaviorActionObject::destroy()
 {	

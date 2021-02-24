@@ -60,7 +60,6 @@ namespace fUML::Semantics::Activities
 	{
 		public:
  			ControlToken(const ControlToken &) {}
-			ControlToken& operator=(ControlToken const&) = delete;
 
 		protected:
 			ControlToken(){}

@@ -103,6 +103,7 @@ AddVariableValueActionObject::AddVariableValueActionObject(std::shared_ptr<uml::
 AddVariableValueActionObject::AddVariableValueActionObject(AddVariableValueActionObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 AddVariableValueActionObject::AddVariableValueActionObject()
@@ -120,6 +121,12 @@ std::shared_ptr<ecore::EObject> AddVariableValueActionObject::copy()
 	element->setThisAddVariableValueActionObjectPtr(element);
 	return element;
 }
+
+AddVariableValueActionObject& AddVariableValueActionObject::operator=(const AddVariableValueActionObject & obj)
+{
+	return *this;
+}
+
 
 void AddVariableValueActionObject::destroy()
 {	

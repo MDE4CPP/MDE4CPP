@@ -62,6 +62,7 @@ DeployedArtifactObject::DeployedArtifactObject(std::shared_ptr<uml::DeployedArti
 DeployedArtifactObject::DeployedArtifactObject(DeployedArtifactObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 DeployedArtifactObject::DeployedArtifactObject()
@@ -79,6 +80,12 @@ std::shared_ptr<ecore::EObject> DeployedArtifactObject::copy()
 	element->setThisDeployedArtifactObjectPtr(element);
 	return element;
 }
+
+DeployedArtifactObject& DeployedArtifactObject::operator=(const DeployedArtifactObject & obj)
+{
+	return *this;
+}
+
 
 void DeployedArtifactObject::destroy()
 {	

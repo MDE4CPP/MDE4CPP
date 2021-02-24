@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~CommunicationPathObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			CommunicationPathObject& operator=(CommunicationPathObject const&);
 
 			virtual void destroy();
 			

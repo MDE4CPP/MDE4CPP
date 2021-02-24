@@ -71,6 +71,7 @@ LiteralIntegerObject::LiteralIntegerObject(std::shared_ptr<uml::LiteralInteger> 
 LiteralIntegerObject::LiteralIntegerObject(LiteralIntegerObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 LiteralIntegerObject::LiteralIntegerObject()
@@ -88,6 +89,12 @@ std::shared_ptr<ecore::EObject> LiteralIntegerObject::copy()
 	element->setThisLiteralIntegerObjectPtr(element);
 	return element;
 }
+
+LiteralIntegerObject& LiteralIntegerObject::operator=(const LiteralIntegerObject & obj)
+{
+	return *this;
+}
+
 
 void LiteralIntegerObject::destroy()
 {	

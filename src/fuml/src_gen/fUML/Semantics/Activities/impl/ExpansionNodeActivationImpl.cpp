@@ -64,6 +64,9 @@ using namespace fUML::Semantics::Activities;
 //*********************************
 ExpansionNodeActivationImpl::ExpansionNodeActivationImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ExpansionNodeActivationImpl::~ExpansionNodeActivationImpl()
@@ -82,6 +85,18 @@ ExpansionNodeActivationImpl::ExpansionNodeActivationImpl(std::weak_ptr<fUML::Sem
 
 
 ExpansionNodeActivationImpl::ExpansionNodeActivationImpl(const ExpansionNodeActivationImpl & obj):ExpansionNodeActivationImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ExpansionNodeActivationImpl::copy() const
+{
+	std::shared_ptr<ExpansionNodeActivationImpl> element(new ExpansionNodeActivationImpl(*this));
+	element->setThisExpansionNodeActivationPtr(element);
+	return element;
+}
+
+ExpansionNodeActivationImpl& ExpansionNodeActivationImpl::operator=(const ExpansionNodeActivationImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -114,13 +129,8 @@ ExpansionNodeActivationImpl::ExpansionNodeActivationImpl(const ExpansionNodeActi
 		std::cout << "Copying the Subset: " << "m_heldTokens" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  ExpansionNodeActivationImpl::copy() const
-{
-	std::shared_ptr<ExpansionNodeActivationImpl> element(new ExpansionNodeActivationImpl(*this));
-	element->setThisExpansionNodeActivationPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ExpansionNodeActivationImpl::eStaticClass() const

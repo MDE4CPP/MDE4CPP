@@ -78,6 +78,7 @@ InteractionConstraintObject::InteractionConstraintObject(std::shared_ptr<uml::In
 InteractionConstraintObject::InteractionConstraintObject(InteractionConstraintObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 InteractionConstraintObject::InteractionConstraintObject()
@@ -95,6 +96,12 @@ std::shared_ptr<ecore::EObject> InteractionConstraintObject::copy()
 	element->setThisInteractionConstraintObjectPtr(element);
 	return element;
 }
+
+InteractionConstraintObject& InteractionConstraintObject::operator=(const InteractionConstraintObject & obj)
+{
+	return *this;
+}
+
 
 void InteractionConstraintObject::destroy()
 {	

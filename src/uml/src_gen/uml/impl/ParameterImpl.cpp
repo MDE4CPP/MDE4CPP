@@ -77,6 +77,9 @@ using namespace uml;
 //*********************************
 ParameterImpl::ParameterImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ParameterImpl::~ParameterImpl()
@@ -127,6 +130,18 @@ ParameterImpl::ParameterImpl(std::weak_ptr<uml::TemplateParameter > par_owningTe
 
 
 ParameterImpl::ParameterImpl(const ParameterImpl & obj):ParameterImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ParameterImpl::copy() const
+{
+	std::shared_ptr<ParameterImpl> element(new ParameterImpl(*this));
+	element->setThisParameterPtr(element);
+	return element;
+}
+
+ParameterImpl& ParameterImpl::operator=(const ParameterImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -211,13 +226,8 @@ ParameterImpl::ParameterImpl(const ParameterImpl & obj):ParameterImpl()
 	#endif
 
 	
-}
 
-std::shared_ptr<ecore::EObject>  ParameterImpl::copy() const
-{
-	std::shared_ptr<ParameterImpl> element(new ParameterImpl(*this));
-	element->setThisParameterPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ParameterImpl::eStaticClass() const

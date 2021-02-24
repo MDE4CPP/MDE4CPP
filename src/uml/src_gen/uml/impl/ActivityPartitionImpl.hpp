@@ -22,10 +22,8 @@ namespace uml
 	{
 		public: 
 			ActivityPartitionImpl(const ActivityPartitionImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			ActivityPartitionImpl& operator=(ActivityPartitionImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			ActivityPartitionImpl& operator=(ActivityPartitionImpl const&);
 
 		protected:
 			friend class umlFactoryImpl;

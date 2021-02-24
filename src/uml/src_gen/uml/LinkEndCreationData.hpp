@@ -87,7 +87,6 @@ namespace uml
 	{
 		public:
  			LinkEndCreationData(const LinkEndCreationData &) {}
-			LinkEndCreationData& operator=(LinkEndCreationData const&) = delete;
 
 		protected:
 			LinkEndCreationData(){}

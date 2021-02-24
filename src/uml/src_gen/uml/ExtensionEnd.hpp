@@ -151,7 +151,6 @@ namespace uml
 	{
 		public:
  			ExtensionEnd(const ExtensionEnd &) {}
-			ExtensionEnd& operator=(ExtensionEnd const&) = delete;
 
 		protected:
 			ExtensionEnd(){}

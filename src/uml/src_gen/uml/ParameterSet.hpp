@@ -100,7 +100,6 @@ namespace uml
 	{
 		public:
  			ParameterSet(const ParameterSet &) {}
-			ParameterSet& operator=(ParameterSet const&) = delete;
 
 		protected:
 			ParameterSet(){}

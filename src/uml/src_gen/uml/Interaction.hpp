@@ -281,7 +281,6 @@ namespace uml
 	{
 		public:
  			Interaction(const Interaction &) {}
-			Interaction& operator=(Interaction const&) = delete;
 
 		protected:
 			Interaction(){}

@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~SignalObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			SignalObject& operator=(SignalObject const&);
 
 			virtual void destroy();
 			

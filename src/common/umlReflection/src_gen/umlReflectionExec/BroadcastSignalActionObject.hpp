@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~BroadcastSignalActionObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			BroadcastSignalActionObject& operator=(BroadcastSignalActionObject const&);
 
 			virtual void destroy();
 			

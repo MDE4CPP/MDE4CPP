@@ -22,10 +22,8 @@ namespace uml
 	{
 		public: 
 			ReadExtentActionImpl(const ReadExtentActionImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			ReadExtentActionImpl& operator=(ReadExtentActionImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			ReadExtentActionImpl& operator=(ReadExtentActionImpl const&);
 
 		protected:
 			friend class umlFactoryImpl;

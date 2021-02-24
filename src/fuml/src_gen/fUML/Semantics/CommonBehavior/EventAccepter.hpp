@@ -56,7 +56,6 @@ namespace fUML::Semantics::CommonBehavior
 	{
 		public:
  			EventAccepter(const EventAccepter &) {}
-			EventAccepter& operator=(EventAccepter const&) = delete;
 
 		protected:
 			EventAccepter(){}

@@ -96,6 +96,9 @@ using namespace uml;
 //*********************************
 ExpansionRegionImpl::ExpansionRegionImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ExpansionRegionImpl::~ExpansionRegionImpl()
@@ -159,6 +162,18 @@ ExpansionRegionImpl::ExpansionRegionImpl(std::weak_ptr<uml::ActivityGroup > par_
 
 
 ExpansionRegionImpl::ExpansionRegionImpl(const ExpansionRegionImpl & obj):ExpansionRegionImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ExpansionRegionImpl::copy() const
+{
+	std::shared_ptr<ExpansionRegionImpl> element(new ExpansionRegionImpl(*this));
+	element->setThisExpansionRegionPtr(element);
+	return element;
+}
+
+ExpansionRegionImpl& ExpansionRegionImpl::operator=(const ExpansionRegionImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -360,13 +375,8 @@ ExpansionRegionImpl::ExpansionRegionImpl(const ExpansionRegionImpl & obj):Expans
 		std::cout << "Copying the Subset: " << "m_variable" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  ExpansionRegionImpl::copy() const
-{
-	std::shared_ptr<ExpansionRegionImpl> element(new ExpansionRegionImpl(*this));
-	element->setThisExpansionRegionPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ExpansionRegionImpl::eStaticClass() const

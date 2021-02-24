@@ -102,6 +102,7 @@ ReplyActionObject::ReplyActionObject(std::shared_ptr<uml::ReplyAction> _element)
 ReplyActionObject::ReplyActionObject(ReplyActionObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ReplyActionObject::ReplyActionObject()
@@ -119,6 +120,12 @@ std::shared_ptr<ecore::EObject> ReplyActionObject::copy()
 	element->setThisReplyActionObjectPtr(element);
 	return element;
 }
+
+ReplyActionObject& ReplyActionObject::operator=(const ReplyActionObject & obj)
+{
+	return *this;
+}
+
 
 void ReplyActionObject::destroy()
 {	

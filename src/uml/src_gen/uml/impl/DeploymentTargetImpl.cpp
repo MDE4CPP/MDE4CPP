@@ -64,6 +64,9 @@ using namespace uml;
 //*********************************
 DeploymentTargetImpl::DeploymentTargetImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 DeploymentTargetImpl::~DeploymentTargetImpl()
@@ -90,6 +93,18 @@ DeploymentTargetImpl::DeploymentTargetImpl(std::weak_ptr<uml::Element > par_owne
 
 
 DeploymentTargetImpl::DeploymentTargetImpl(const DeploymentTargetImpl & obj):DeploymentTargetImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  DeploymentTargetImpl::copy() const
+{
+	std::shared_ptr<DeploymentTargetImpl> element(new DeploymentTargetImpl(*this));
+	element->setThisDeploymentTargetPtr(element);
+	return element;
+}
+
+DeploymentTargetImpl& DeploymentTargetImpl::operator=(const DeploymentTargetImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -144,13 +159,8 @@ DeploymentTargetImpl::DeploymentTargetImpl(const DeploymentTargetImpl & obj):Dep
 		std::cout << "Initialising value Subset: " << "m_deployment - Subset<uml::Deployment, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
 	
-}
 
-std::shared_ptr<ecore::EObject>  DeploymentTargetImpl::copy() const
-{
-	std::shared_ptr<DeploymentTargetImpl> element(new DeploymentTargetImpl(*this));
-	element->setThisDeploymentTargetPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> DeploymentTargetImpl::eStaticClass() const

@@ -68,6 +68,9 @@ using namespace uml;
 //*********************************
 ConnectableElementImpl::ConnectableElementImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ConnectableElementImpl::~ConnectableElementImpl()
@@ -102,6 +105,18 @@ ConnectableElementImpl::ConnectableElementImpl(std::weak_ptr<uml::TemplateParame
 
 
 ConnectableElementImpl::ConnectableElementImpl(const ConnectableElementImpl & obj):ConnectableElementImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ConnectableElementImpl::copy() const
+{
+	std::shared_ptr<ConnectableElementImpl> element(new ConnectableElementImpl(*this));
+	element->setThisConnectableElementPtr(element);
+	return element;
+}
+
+ConnectableElementImpl& ConnectableElementImpl::operator=(const ConnectableElementImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -148,13 +163,8 @@ ConnectableElementImpl::ConnectableElementImpl(const ConnectableElementImpl & ob
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  ConnectableElementImpl::copy() const
-{
-	std::shared_ptr<ConnectableElementImpl> element(new ConnectableElementImpl(*this));
-	element->setThisConnectableElementPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ConnectableElementImpl::eStaticClass() const

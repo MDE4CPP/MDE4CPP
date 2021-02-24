@@ -76,6 +76,9 @@ using namespace uml;
 //*********************************
 ActivityNodeImpl::ActivityNodeImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ActivityNodeImpl::~ActivityNodeImpl()
@@ -118,6 +121,18 @@ ActivityNodeImpl::ActivityNodeImpl(std::weak_ptr<uml::Element > par_owner)
 
 
 ActivityNodeImpl::ActivityNodeImpl(const ActivityNodeImpl & obj):ActivityNodeImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ActivityNodeImpl::copy() const
+{
+	std::shared_ptr<ActivityNodeImpl> element(new ActivityNodeImpl(*this));
+	element->setThisActivityNodePtr(element);
+	return element;
+}
+
+ActivityNodeImpl& ActivityNodeImpl::operator=(const ActivityNodeImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -199,13 +214,8 @@ ActivityNodeImpl::ActivityNodeImpl(const ActivityNodeImpl & obj):ActivityNodeImp
 		std::cout << "Copying the Subset: " << "m_redefinedNode" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  ActivityNodeImpl::copy() const
-{
-	std::shared_ptr<ActivityNodeImpl> element(new ActivityNodeImpl(*this));
-	element->setThisActivityNodePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ActivityNodeImpl::eStaticClass() const

@@ -66,6 +66,7 @@ CollaborationUseObject::CollaborationUseObject(std::shared_ptr<uml::Collaboratio
 CollaborationUseObject::CollaborationUseObject(CollaborationUseObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 CollaborationUseObject::CollaborationUseObject()
@@ -83,6 +84,12 @@ std::shared_ptr<ecore::EObject> CollaborationUseObject::copy()
 	element->setThisCollaborationUseObjectPtr(element);
 	return element;
 }
+
+CollaborationUseObject& CollaborationUseObject::operator=(const CollaborationUseObject & obj)
+{
+	return *this;
+}
+
 
 void CollaborationUseObject::destroy()
 {	

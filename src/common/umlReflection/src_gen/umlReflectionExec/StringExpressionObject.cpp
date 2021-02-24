@@ -81,6 +81,7 @@ StringExpressionObject::StringExpressionObject(std::shared_ptr<uml::StringExpres
 StringExpressionObject::StringExpressionObject(StringExpressionObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 StringExpressionObject::StringExpressionObject()
@@ -98,6 +99,12 @@ std::shared_ptr<ecore::EObject> StringExpressionObject::copy()
 	element->setThisStringExpressionObjectPtr(element);
 	return element;
 }
+
+StringExpressionObject& StringExpressionObject::operator=(const StringExpressionObject & obj)
+{
+	return *this;
+}
+
 
 void StringExpressionObject::destroy()
 {	

@@ -159,7 +159,6 @@ namespace uml
 	{
 		public:
  			ReadLinkObjectEndAction(const ReadLinkObjectEndAction &) {}
-			ReadLinkObjectEndAction& operator=(ReadLinkObjectEndAction const&) = delete;
 
 		protected:
 			ReadLinkObjectEndAction(){}

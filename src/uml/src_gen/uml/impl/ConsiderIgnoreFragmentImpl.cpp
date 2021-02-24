@@ -73,6 +73,9 @@ using namespace uml;
 //*********************************
 ConsiderIgnoreFragmentImpl::ConsiderIgnoreFragmentImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ConsiderIgnoreFragmentImpl::~ConsiderIgnoreFragmentImpl()
@@ -115,6 +118,18 @@ ConsiderIgnoreFragmentImpl::ConsiderIgnoreFragmentImpl(std::weak_ptr<uml::Elemen
 
 
 ConsiderIgnoreFragmentImpl::ConsiderIgnoreFragmentImpl(const ConsiderIgnoreFragmentImpl & obj):ConsiderIgnoreFragmentImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ConsiderIgnoreFragmentImpl::copy() const
+{
+	std::shared_ptr<ConsiderIgnoreFragmentImpl> element(new ConsiderIgnoreFragmentImpl(*this));
+	element->setThisConsiderIgnoreFragmentPtr(element);
+	return element;
+}
+
+ConsiderIgnoreFragmentImpl& ConsiderIgnoreFragmentImpl::operator=(const ConsiderIgnoreFragmentImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -187,13 +202,8 @@ ConsiderIgnoreFragmentImpl::ConsiderIgnoreFragmentImpl(const ConsiderIgnoreFragm
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  ConsiderIgnoreFragmentImpl::copy() const
-{
-	std::shared_ptr<ConsiderIgnoreFragmentImpl> element(new ConsiderIgnoreFragmentImpl(*this));
-	element->setThisConsiderIgnoreFragmentPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ConsiderIgnoreFragmentImpl::eStaticClass() const

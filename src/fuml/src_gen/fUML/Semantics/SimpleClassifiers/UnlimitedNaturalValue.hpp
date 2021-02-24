@@ -70,7 +70,6 @@ namespace fUML::Semantics::SimpleClassifiers
 	{
 		public:
  			UnlimitedNaturalValue(const UnlimitedNaturalValue &) {}
-			UnlimitedNaturalValue& operator=(UnlimitedNaturalValue const&) = delete;
 
 		protected:
 			UnlimitedNaturalValue(){}

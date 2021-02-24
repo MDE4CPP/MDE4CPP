@@ -81,6 +81,9 @@ using namespace uml;
 //*********************************
 JoinNodeImpl::JoinNodeImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 JoinNodeImpl::~JoinNodeImpl()
@@ -123,6 +126,18 @@ JoinNodeImpl::JoinNodeImpl(std::weak_ptr<uml::Element > par_owner)
 
 
 JoinNodeImpl::JoinNodeImpl(const JoinNodeImpl & obj):JoinNodeImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  JoinNodeImpl::copy() const
+{
+	std::shared_ptr<JoinNodeImpl> element(new JoinNodeImpl(*this));
+	element->setThisJoinNodePtr(element);
+	return element;
+}
+
+JoinNodeImpl& JoinNodeImpl::operator=(const JoinNodeImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -213,13 +228,8 @@ JoinNodeImpl::JoinNodeImpl(const JoinNodeImpl & obj):JoinNodeImpl()
 	#endif
 
 	
-}
 
-std::shared_ptr<ecore::EObject>  JoinNodeImpl::copy() const
-{
-	std::shared_ptr<JoinNodeImpl> element(new JoinNodeImpl(*this));
-	element->setThisJoinNodePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> JoinNodeImpl::eStaticClass() const

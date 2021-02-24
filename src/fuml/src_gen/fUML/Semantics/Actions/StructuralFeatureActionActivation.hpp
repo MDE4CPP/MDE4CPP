@@ -120,7 +120,6 @@ namespace fUML::Semantics::Actions
 	{
 		public:
  			StructuralFeatureActionActivation(const StructuralFeatureActionActivation &) {}
-			StructuralFeatureActionActivation& operator=(StructuralFeatureActionActivation const&) = delete;
 
 		protected:
 			StructuralFeatureActionActivation(){}

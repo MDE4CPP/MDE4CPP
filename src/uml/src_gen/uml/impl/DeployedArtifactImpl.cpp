@@ -60,6 +60,9 @@ using namespace uml;
 //*********************************
 DeployedArtifactImpl::DeployedArtifactImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 DeployedArtifactImpl::~DeployedArtifactImpl()
@@ -86,6 +89,18 @@ DeployedArtifactImpl::DeployedArtifactImpl(std::weak_ptr<uml::Element > par_owne
 
 
 DeployedArtifactImpl::DeployedArtifactImpl(const DeployedArtifactImpl & obj):DeployedArtifactImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  DeployedArtifactImpl::copy() const
+{
+	std::shared_ptr<DeployedArtifactImpl> element(new DeployedArtifactImpl(*this));
+	element->setThisDeployedArtifactPtr(element);
+	return element;
+}
+
+DeployedArtifactImpl& DeployedArtifactImpl::operator=(const DeployedArtifactImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -123,13 +138,8 @@ DeployedArtifactImpl::DeployedArtifactImpl(const DeployedArtifactImpl & obj):Dep
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  DeployedArtifactImpl::copy() const
-{
-	std::shared_ptr<DeployedArtifactImpl> element(new DeployedArtifactImpl(*this));
-	element->setThisDeployedArtifactPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> DeployedArtifactImpl::eStaticClass() const

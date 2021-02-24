@@ -60,6 +60,9 @@ using namespace fUML::Semantics::Activities;
 //*********************************
 TokenImpl::TokenImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 TokenImpl::~TokenImpl()
@@ -72,6 +75,18 @@ TokenImpl::~TokenImpl()
 
 
 TokenImpl::TokenImpl(const TokenImpl & obj):TokenImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  TokenImpl::copy() const
+{
+	std::shared_ptr<TokenImpl> element(new TokenImpl(*this));
+	element->setThisTokenPtr(element);
+	return element;
+}
+
+TokenImpl& TokenImpl::operator=(const TokenImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -87,13 +102,8 @@ TokenImpl::TokenImpl(const TokenImpl & obj):TokenImpl()
 	//Clone references with containment (deep copy)
 
 
-}
 
-std::shared_ptr<ecore::EObject>  TokenImpl::copy() const
-{
-	std::shared_ptr<TokenImpl> element(new TokenImpl(*this));
-	element->setThisTokenPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> TokenImpl::eStaticClass() const

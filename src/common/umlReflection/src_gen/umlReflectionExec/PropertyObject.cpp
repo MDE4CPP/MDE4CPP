@@ -122,6 +122,7 @@ PropertyObject::PropertyObject(std::shared_ptr<uml::Property> _element):
 PropertyObject::PropertyObject(PropertyObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 PropertyObject::PropertyObject()
@@ -139,6 +140,12 @@ std::shared_ptr<ecore::EObject> PropertyObject::copy()
 	element->setThisPropertyObjectPtr(element);
 	return element;
 }
+
+PropertyObject& PropertyObject::operator=(const PropertyObject & obj)
+{
+	return *this;
+}
+
 
 void PropertyObject::destroy()
 {	

@@ -41,9 +41,9 @@ using namespace StandardProfile;
 //*********************************
 CallImpl::CallImpl()
 {
-	#ifdef ADD_COUNT
-		ADD_COUNT("CallImpl()");
-	#endif
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 
 	DEBUG_MESSAGE(std::cout<<"Call is created..."<<std::endl;)
 
@@ -61,20 +61,12 @@ CallImpl::CallImpl()
 
 CallImpl::~CallImpl()
 {
-	#ifdef SUB_COUNT
-		SUB_COUNT("CallImpl()");
-	#endif
-
 	DEBUG_MESSAGE(std::cout<<"Call is destroyed..."<<std::endl;)
 }
 
 CallImpl::CallImpl(const CallImpl & obj):CallImpl()
 {
-	//create copy of all Attributes
-	#ifdef SHOW_COPIES
-	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Call "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
-	#endif
-	instantiate();
+	*this = obj;
 }
 
 std::shared_ptr<ecore::EObject>  CallImpl::copy() const
@@ -82,6 +74,16 @@ std::shared_ptr<ecore::EObject>  CallImpl::copy() const
 	std::shared_ptr<CallImpl> element(new CallImpl(*this));
 	element->setThisCallPtr(element);
 	return element;
+}
+
+CallImpl& CallImpl::operator=(const CallImpl & obj)
+{
+		//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Call "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
+	instantiate();
+	return *this;
 }
 
 

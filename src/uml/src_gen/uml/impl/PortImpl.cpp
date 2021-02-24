@@ -89,6 +89,9 @@ using namespace uml;
 //*********************************
 PortImpl::PortImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 PortImpl::~PortImpl()
@@ -163,6 +166,18 @@ PortImpl::PortImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplatePara
 
 
 PortImpl::PortImpl(const PortImpl & obj):PortImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  PortImpl::copy() const
+{
+	std::shared_ptr<PortImpl> element(new PortImpl(*this));
+	element->setThisPortPtr(element);
+	return element;
+}
+
+PortImpl& PortImpl::operator=(const PortImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -315,13 +330,8 @@ PortImpl::PortImpl(const PortImpl & obj):PortImpl()
 		std::cout << "Copying the Subset: " << "m_upperValue" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  PortImpl::copy() const
-{
-	std::shared_ptr<PortImpl> element(new PortImpl(*this));
-	element->setThisPortPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> PortImpl::eStaticClass() const

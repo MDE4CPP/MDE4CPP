@@ -107,7 +107,6 @@ namespace uml
 	{
 		public:
  			InteractionFragment(const InteractionFragment &) {}
-			InteractionFragment& operator=(InteractionFragment const&) = delete;
 
 		protected:
 			InteractionFragment(){}

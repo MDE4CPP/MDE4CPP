@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~DataTypeObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			DataTypeObject& operator=(DataTypeObject const&);
 
 			virtual void destroy();
 			

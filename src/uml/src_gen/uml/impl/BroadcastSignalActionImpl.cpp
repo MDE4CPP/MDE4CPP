@@ -91,6 +91,9 @@ using namespace uml;
 //*********************************
 BroadcastSignalActionImpl::BroadcastSignalActionImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 BroadcastSignalActionImpl::~BroadcastSignalActionImpl()
@@ -133,6 +136,18 @@ BroadcastSignalActionImpl::BroadcastSignalActionImpl(std::weak_ptr<uml::Element 
 
 
 BroadcastSignalActionImpl::BroadcastSignalActionImpl(const BroadcastSignalActionImpl & obj):BroadcastSignalActionImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  BroadcastSignalActionImpl::copy() const
+{
+	std::shared_ptr<BroadcastSignalActionImpl> element(new BroadcastSignalActionImpl(*this));
+	element->setThisBroadcastSignalActionPtr(element);
+	return element;
+}
+
+BroadcastSignalActionImpl& BroadcastSignalActionImpl::operator=(const BroadcastSignalActionImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -253,13 +268,8 @@ BroadcastSignalActionImpl::BroadcastSignalActionImpl(const BroadcastSignalAction
 		std::cout << "Copying the Subset: " << "m_redefinedNode" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  BroadcastSignalActionImpl::copy() const
-{
-	std::shared_ptr<BroadcastSignalActionImpl> element(new BroadcastSignalActionImpl(*this));
-	element->setThisBroadcastSignalActionPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> BroadcastSignalActionImpl::eStaticClass() const

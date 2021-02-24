@@ -63,6 +63,7 @@ OperationTemplateParameterObject::OperationTemplateParameterObject(std::shared_p
 OperationTemplateParameterObject::OperationTemplateParameterObject(OperationTemplateParameterObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 OperationTemplateParameterObject::OperationTemplateParameterObject()
@@ -80,6 +81,12 @@ std::shared_ptr<ecore::EObject> OperationTemplateParameterObject::copy()
 	element->setThisOperationTemplateParameterObjectPtr(element);
 	return element;
 }
+
+OperationTemplateParameterObject& OperationTemplateParameterObject::operator=(const OperationTemplateParameterObject & obj)
+{
+	return *this;
+}
+
 
 void OperationTemplateParameterObject::destroy()
 {	

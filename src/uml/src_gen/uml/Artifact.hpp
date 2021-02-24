@@ -200,7 +200,6 @@ namespace uml
 	{
 		public:
  			Artifact(const Artifact &) {}
-			Artifact& operator=(Artifact const&) = delete;
 
 		protected:
 			Artifact(){}

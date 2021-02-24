@@ -105,6 +105,9 @@ using namespace uml;
 //*********************************
 InterfaceImpl::InterfaceImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 InterfaceImpl::~InterfaceImpl()
@@ -160,6 +163,18 @@ InterfaceImpl::InterfaceImpl(std::weak_ptr<uml::TemplateParameter > par_owningTe
 
 
 InterfaceImpl::InterfaceImpl(const InterfaceImpl & obj):InterfaceImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  InterfaceImpl::copy() const
+{
+	std::shared_ptr<InterfaceImpl> element(new InterfaceImpl(*this));
+	element->setThisInterfacePtr(element);
+	return element;
+}
+
+InterfaceImpl& InterfaceImpl::operator=(const InterfaceImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -404,13 +419,8 @@ InterfaceImpl::InterfaceImpl(const InterfaceImpl & obj):InterfaceImpl()
 	
 
 	
-}
 
-std::shared_ptr<ecore::EObject>  InterfaceImpl::copy() const
-{
-	std::shared_ptr<InterfaceImpl> element(new InterfaceImpl(*this));
-	element->setThisInterfacePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> InterfaceImpl::eStaticClass() const

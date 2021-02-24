@@ -22,10 +22,8 @@ namespace uml
 	{
 		public: 
 			ComponentImpl(const ComponentImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			ComponentImpl& operator=(ComponentImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			ComponentImpl& operator=(ComponentImpl const&);
 
 		protected:
 			friend class umlFactoryImpl;

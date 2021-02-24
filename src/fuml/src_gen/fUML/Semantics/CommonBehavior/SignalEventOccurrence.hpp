@@ -75,7 +75,6 @@ namespace fUML::Semantics::CommonBehavior
 	{
 		public:
  			SignalEventOccurrence(const SignalEventOccurrence &) {}
-			SignalEventOccurrence& operator=(SignalEventOccurrence const&) = delete;
 
 		protected:
 			SignalEventOccurrence(){}

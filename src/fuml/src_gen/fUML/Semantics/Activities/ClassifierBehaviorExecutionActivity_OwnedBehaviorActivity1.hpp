@@ -52,7 +52,6 @@ namespace fUML::Semantics::Activities
 	{
 		public:
  			ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1(const ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1 &) {}
-			ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1& operator=(ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1 const&) = delete;
 
 		protected:
 			ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1(){}

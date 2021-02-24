@@ -25,9 +25,6 @@ namespace StandardProfile
 {
 	class Trace : virtual public uml::Stereotype 
 	{
-		private:    
-			Trace(const Trace& that) = delete;
-
 		protected:
 			Trace(){}
 

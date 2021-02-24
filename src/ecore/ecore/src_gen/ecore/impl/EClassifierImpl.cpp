@@ -57,6 +57,9 @@ using namespace ecore;
 //*********************************
 EClassifierImpl::EClassifierImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 EClassifierImpl::~EClassifierImpl()
@@ -82,6 +85,18 @@ EClassifierImpl::EClassifierImpl(std::weak_ptr<ecore::EPackage > par_ePackage)
 
 
 EClassifierImpl::EClassifierImpl(const EClassifierImpl & obj):EClassifierImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  EClassifierImpl::copy() const
+{
+	std::shared_ptr<EClassifierImpl> element(new EClassifierImpl(*this));
+	element->setThisEClassifierPtr(element);
+	return element;
+}
+
+EClassifierImpl& EClassifierImpl::operator=(const EClassifierImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -121,13 +136,8 @@ EClassifierImpl::EClassifierImpl(const EClassifierImpl & obj):EClassifierImpl()
 	#endif
 
 	
-}
 
-std::shared_ptr<ecore::EObject>  EClassifierImpl::copy() const
-{
-	std::shared_ptr<EClassifierImpl> element(new EClassifierImpl(*this));
-	element->setThisEClassifierPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<EClass> EClassifierImpl::eStaticClass() const

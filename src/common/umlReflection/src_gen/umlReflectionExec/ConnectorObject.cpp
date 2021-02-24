@@ -80,6 +80,7 @@ ConnectorObject::ConnectorObject(std::shared_ptr<uml::Connector> _element):
 ConnectorObject::ConnectorObject(ConnectorObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ConnectorObject::ConnectorObject()
@@ -97,6 +98,12 @@ std::shared_ptr<ecore::EObject> ConnectorObject::copy()
 	element->setThisConnectorObjectPtr(element);
 	return element;
 }
+
+ConnectorObject& ConnectorObject::operator=(const ConnectorObject & obj)
+{
+	return *this;
+}
+
 
 void ConnectorObject::destroy()
 {	

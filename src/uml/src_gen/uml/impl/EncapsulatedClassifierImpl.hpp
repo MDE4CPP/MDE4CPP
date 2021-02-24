@@ -22,10 +22,8 @@ namespace uml
 	{
 		public: 
 			EncapsulatedClassifierImpl(const EncapsulatedClassifierImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			EncapsulatedClassifierImpl& operator=(EncapsulatedClassifierImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			EncapsulatedClassifierImpl& operator=(EncapsulatedClassifierImpl const&);
 
 		protected:
 			friend class umlFactoryImpl;

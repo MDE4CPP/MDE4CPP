@@ -75,6 +75,9 @@ using namespace uml;
 //*********************************
 ConnectorImpl::ConnectorImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ConnectorImpl::~ConnectorImpl()
@@ -109,6 +112,18 @@ ConnectorImpl::ConnectorImpl(std::weak_ptr<uml::StructuredClassifier > par_struc
 
 
 ConnectorImpl::ConnectorImpl(const ConnectorImpl & obj):ConnectorImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ConnectorImpl::copy() const
+{
+	std::shared_ptr<ConnectorImpl> element(new ConnectorImpl(*this));
+	element->setThisConnectorPtr(element);
+	return element;
+}
+
+ConnectorImpl& ConnectorImpl::operator=(const ConnectorImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -187,13 +202,8 @@ ConnectorImpl::ConnectorImpl(const ConnectorImpl & obj):ConnectorImpl()
 		std::cout << "Initialising value Subset: " << "m_end - Subset<uml::ConnectorEnd, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
 	
-}
 
-std::shared_ptr<ecore::EObject>  ConnectorImpl::copy() const
-{
-	std::shared_ptr<ConnectorImpl> element(new ConnectorImpl(*this));
-	element->setThisConnectorPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ConnectorImpl::eStaticClass() const

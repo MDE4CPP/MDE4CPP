@@ -89,6 +89,9 @@ using namespace uml;
 //*********************************
 ReplyActionImpl::ReplyActionImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ReplyActionImpl::~ReplyActionImpl()
@@ -131,6 +134,18 @@ ReplyActionImpl::ReplyActionImpl(std::weak_ptr<uml::Element > par_owner)
 
 
 ReplyActionImpl::ReplyActionImpl(const ReplyActionImpl & obj):ReplyActionImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ReplyActionImpl::copy() const
+{
+	std::shared_ptr<ReplyActionImpl> element(new ReplyActionImpl(*this));
+	element->setThisReplyActionPtr(element);
+	return element;
+}
+
+ReplyActionImpl& ReplyActionImpl::operator=(const ReplyActionImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -264,13 +279,8 @@ ReplyActionImpl::ReplyActionImpl(const ReplyActionImpl & obj):ReplyActionImpl()
 	
 
 	
-}
 
-std::shared_ptr<ecore::EObject>  ReplyActionImpl::copy() const
-{
-	std::shared_ptr<ReplyActionImpl> element(new ReplyActionImpl(*this));
-	element->setThisReplyActionPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ReplyActionImpl::eStaticClass() const

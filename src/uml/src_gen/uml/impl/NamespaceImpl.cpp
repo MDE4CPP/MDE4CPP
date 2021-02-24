@@ -71,6 +71,9 @@ using namespace uml;
 //*********************************
 NamespaceImpl::NamespaceImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 NamespaceImpl::~NamespaceImpl()
@@ -97,6 +100,18 @@ NamespaceImpl::NamespaceImpl(std::weak_ptr<uml::Element > par_owner)
 
 
 NamespaceImpl::NamespaceImpl(const NamespaceImpl & obj):NamespaceImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  NamespaceImpl::copy() const
+{
+	std::shared_ptr<NamespaceImpl> element(new NamespaceImpl(*this));
+	element->setThisNamespacePtr(element);
+	return element;
+}
+
+NamespaceImpl& NamespaceImpl::operator=(const NamespaceImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -189,13 +204,8 @@ NamespaceImpl::NamespaceImpl(const NamespaceImpl & obj):NamespaceImpl()
 		std::cout << "Initialising value SubsetUnion: " << "m_packageImport - SubsetUnion<uml::PackageImport, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
 	
-}
 
-std::shared_ptr<ecore::EObject>  NamespaceImpl::copy() const
-{
-	std::shared_ptr<NamespaceImpl> element(new NamespaceImpl(*this));
-	element->setThisNamespacePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> NamespaceImpl::eStaticClass() const

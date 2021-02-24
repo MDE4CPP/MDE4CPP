@@ -23,10 +23,8 @@ namespace fUML::Semantics::Classification
 	{
 		public: 
 			InstanceValueEvaluationImpl(const InstanceValueEvaluationImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			InstanceValueEvaluationImpl& operator=(InstanceValueEvaluationImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			InstanceValueEvaluationImpl& operator=(InstanceValueEvaluationImpl const&);
 
 		protected:
 			friend class fUML::Semantics::Classification::ClassificationFactoryImpl;

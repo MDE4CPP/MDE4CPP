@@ -103,6 +103,7 @@ RemoveVariableValueActionObject::RemoveVariableValueActionObject(std::shared_ptr
 RemoveVariableValueActionObject::RemoveVariableValueActionObject(RemoveVariableValueActionObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 RemoveVariableValueActionObject::RemoveVariableValueActionObject()
@@ -120,6 +121,12 @@ std::shared_ptr<ecore::EObject> RemoveVariableValueActionObject::copy()
 	element->setThisRemoveVariableValueActionObjectPtr(element);
 	return element;
 }
+
+RemoveVariableValueActionObject& RemoveVariableValueActionObject::operator=(const RemoveVariableValueActionObject & obj)
+{
+	return *this;
+}
+
 
 void RemoveVariableValueActionObject::destroy()
 {	

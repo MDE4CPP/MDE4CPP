@@ -116,7 +116,6 @@ namespace uml
 	{
 		public:
  			ComponentRealization(const ComponentRealization &) {}
-			ComponentRealization& operator=(ComponentRealization const&) = delete;
 
 		protected:
 			ComponentRealization(){}

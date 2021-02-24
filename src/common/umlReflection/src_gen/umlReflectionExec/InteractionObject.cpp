@@ -184,6 +184,7 @@ InteractionObject::InteractionObject(std::shared_ptr<uml::Interaction> _element)
 InteractionObject::InteractionObject(InteractionObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 InteractionObject::InteractionObject()
@@ -201,6 +202,12 @@ std::shared_ptr<ecore::EObject> InteractionObject::copy()
 	element->setThisInteractionObjectPtr(element);
 	return element;
 }
+
+InteractionObject& InteractionObject::operator=(const InteractionObject & obj)
+{
+	return *this;
+}
+
 
 void InteractionObject::destroy()
 {	

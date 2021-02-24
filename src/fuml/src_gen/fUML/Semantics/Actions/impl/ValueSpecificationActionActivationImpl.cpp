@@ -73,6 +73,9 @@ using namespace fUML::Semantics::Actions;
 //*********************************
 ValueSpecificationActionActivationImpl::ValueSpecificationActionActivationImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ValueSpecificationActionActivationImpl::~ValueSpecificationActionActivationImpl()
@@ -91,6 +94,18 @@ ValueSpecificationActionActivationImpl::ValueSpecificationActionActivationImpl(s
 
 
 ValueSpecificationActionActivationImpl::ValueSpecificationActionActivationImpl(const ValueSpecificationActionActivationImpl & obj):ValueSpecificationActionActivationImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ValueSpecificationActionActivationImpl::copy() const
+{
+	std::shared_ptr<ValueSpecificationActionActivationImpl> element(new ValueSpecificationActionActivationImpl(*this));
+	element->setThisValueSpecificationActionActivationPtr(element);
+	return element;
+}
+
+ValueSpecificationActionActivationImpl& ValueSpecificationActionActivationImpl::operator=(const ValueSpecificationActionActivationImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -144,13 +159,8 @@ ValueSpecificationActionActivationImpl::ValueSpecificationActionActivationImpl(c
 		std::cout << "Copying the Subset: " << "m_outputPinActivation" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  ValueSpecificationActionActivationImpl::copy() const
-{
-	std::shared_ptr<ValueSpecificationActionActivationImpl> element(new ValueSpecificationActionActivationImpl(*this));
-	element->setThisValueSpecificationActionActivationPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ValueSpecificationActionActivationImpl::eStaticClass() const

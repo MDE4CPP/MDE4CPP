@@ -56,6 +56,9 @@ using namespace fUML::Semantics::CommonBehavior;
 //*********************************
 EventOccurrenceImpl::EventOccurrenceImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 EventOccurrenceImpl::~EventOccurrenceImpl()
@@ -68,6 +71,18 @@ EventOccurrenceImpl::~EventOccurrenceImpl()
 
 
 EventOccurrenceImpl::EventOccurrenceImpl(const EventOccurrenceImpl & obj):EventOccurrenceImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  EventOccurrenceImpl::copy() const
+{
+	std::shared_ptr<EventOccurrenceImpl> element(new EventOccurrenceImpl(*this));
+	element->setThisEventOccurrencePtr(element);
+	return element;
+}
+
+EventOccurrenceImpl& EventOccurrenceImpl::operator=(const EventOccurrenceImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -82,13 +97,8 @@ EventOccurrenceImpl::EventOccurrenceImpl(const EventOccurrenceImpl & obj):EventO
 	//Clone references with containment (deep copy)
 
 
-}
 
-std::shared_ptr<ecore::EObject>  EventOccurrenceImpl::copy() const
-{
-	std::shared_ptr<EventOccurrenceImpl> element(new EventOccurrenceImpl(*this));
-	element->setThisEventOccurrencePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> EventOccurrenceImpl::eStaticClass() const

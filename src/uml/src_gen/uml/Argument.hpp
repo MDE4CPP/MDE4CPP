@@ -61,7 +61,6 @@ namespace uml
 	{
 		public:
  			Argument(const Argument &) {}
-			Argument& operator=(Argument const&) = delete;
 
 		protected:
 			Argument(){}

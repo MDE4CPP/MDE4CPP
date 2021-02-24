@@ -151,6 +151,7 @@ ClassObject::ClassObject(std::shared_ptr<uml::Class> _element):
 ClassObject::ClassObject(ClassObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ClassObject::ClassObject()
@@ -168,6 +169,12 @@ std::shared_ptr<ecore::EObject> ClassObject::copy()
 	element->setThisClassObjectPtr(element);
 	return element;
 }
+
+ClassObject& ClassObject::operator=(const ClassObject & obj)
+{
+	return *this;
+}
+
 
 void ClassObject::destroy()
 {	

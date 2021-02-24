@@ -98,6 +98,7 @@ ClearVariableActionObject::ClearVariableActionObject(std::shared_ptr<uml::ClearV
 ClearVariableActionObject::ClearVariableActionObject(ClearVariableActionObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ClearVariableActionObject::ClearVariableActionObject()
@@ -115,6 +116,12 @@ std::shared_ptr<ecore::EObject> ClearVariableActionObject::copy()
 	element->setThisClearVariableActionObjectPtr(element);
 	return element;
 }
+
+ClearVariableActionObject& ClearVariableActionObject::operator=(const ClearVariableActionObject & obj)
+{
+	return *this;
+}
+
 
 void ClearVariableActionObject::destroy()
 {	

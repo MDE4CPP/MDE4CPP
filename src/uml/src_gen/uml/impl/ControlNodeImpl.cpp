@@ -76,6 +76,9 @@ using namespace uml;
 //*********************************
 ControlNodeImpl::ControlNodeImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ControlNodeImpl::~ControlNodeImpl()
@@ -118,6 +121,18 @@ ControlNodeImpl::ControlNodeImpl(std::weak_ptr<uml::Element > par_owner)
 
 
 ControlNodeImpl::ControlNodeImpl(const ControlNodeImpl & obj):ControlNodeImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ControlNodeImpl::copy() const
+{
+	std::shared_ptr<ControlNodeImpl> element(new ControlNodeImpl(*this));
+	element->setThisControlNodePtr(element);
+	return element;
+}
+
+ControlNodeImpl& ControlNodeImpl::operator=(const ControlNodeImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -199,13 +214,8 @@ ControlNodeImpl::ControlNodeImpl(const ControlNodeImpl & obj):ControlNodeImpl()
 		std::cout << "Copying the Subset: " << "m_redefinedNode" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  ControlNodeImpl::copy() const
-{
-	std::shared_ptr<ControlNodeImpl> element(new ControlNodeImpl(*this));
-	element->setThisControlNodePtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ControlNodeImpl::eStaticClass() const

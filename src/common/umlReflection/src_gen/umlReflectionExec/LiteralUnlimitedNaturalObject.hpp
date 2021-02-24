@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~LiteralUnlimitedNaturalObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			LiteralUnlimitedNaturalObject& operator=(LiteralUnlimitedNaturalObject const&);
 
 			virtual void destroy();
 			

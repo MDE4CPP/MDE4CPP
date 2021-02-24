@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~StereotypeObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			StereotypeObject& operator=(StereotypeObject const&);
 
 			virtual void destroy();
 			

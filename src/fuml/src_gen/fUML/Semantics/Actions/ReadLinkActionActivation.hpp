@@ -95,7 +95,6 @@ namespace fUML::Semantics::Actions
 	{
 		public:
  			ReadLinkActionActivation(const ReadLinkActionActivation &) {}
-			ReadLinkActionActivation& operator=(ReadLinkActionActivation const&) = delete;
 
 		protected:
 			ReadLinkActionActivation(){}

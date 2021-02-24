@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~ConnectableElementTemplateParameterObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			ConnectableElementTemplateParameterObject& operator=(ConnectableElementTemplateParameterObject const&);
 
 			virtual void destroy();
 			

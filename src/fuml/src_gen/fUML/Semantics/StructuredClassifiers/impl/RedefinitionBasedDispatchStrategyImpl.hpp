@@ -23,10 +23,8 @@ namespace fUML::Semantics::StructuredClassifiers
 	{
 		public: 
 			RedefinitionBasedDispatchStrategyImpl(const RedefinitionBasedDispatchStrategyImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			RedefinitionBasedDispatchStrategyImpl& operator=(RedefinitionBasedDispatchStrategyImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			RedefinitionBasedDispatchStrategyImpl& operator=(RedefinitionBasedDispatchStrategyImpl const&);
 
 		protected:
 			friend class fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactoryImpl;

@@ -41,9 +41,9 @@ using namespace StandardProfile;
 //*********************************
 ModelLibraryImpl::ModelLibraryImpl()
 {
-	#ifdef ADD_COUNT
-		ADD_COUNT("ModelLibraryImpl()");
-	#endif
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 
 	DEBUG_MESSAGE(std::cout<<"ModelLibrary is created..."<<std::endl;)
 
@@ -61,20 +61,12 @@ ModelLibraryImpl::ModelLibraryImpl()
 
 ModelLibraryImpl::~ModelLibraryImpl()
 {
-	#ifdef SUB_COUNT
-		SUB_COUNT("ModelLibraryImpl()");
-	#endif
-
 	DEBUG_MESSAGE(std::cout<<"ModelLibrary is destroyed..."<<std::endl;)
 }
 
 ModelLibraryImpl::ModelLibraryImpl(const ModelLibraryImpl & obj):ModelLibraryImpl()
 {
-	//create copy of all Attributes
-	#ifdef SHOW_COPIES
-	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ModelLibrary "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
-	#endif
-	instantiate();
+	*this = obj;
 }
 
 std::shared_ptr<ecore::EObject>  ModelLibraryImpl::copy() const
@@ -82,6 +74,16 @@ std::shared_ptr<ecore::EObject>  ModelLibraryImpl::copy() const
 	std::shared_ptr<ModelLibraryImpl> element(new ModelLibraryImpl(*this));
 	element->setThisModelLibraryPtr(element);
 	return element;
+}
+
+ModelLibraryImpl& ModelLibraryImpl::operator=(const ModelLibraryImpl & obj)
+{
+		//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ModelLibrary "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
+	instantiate();
+	return *this;
 }
 
 

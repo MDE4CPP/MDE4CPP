@@ -25,9 +25,6 @@ namespace StandardProfile
 {
 	class Specification : virtual public uml::Stereotype 
 	{
-		private:    
-			Specification(const Specification& that) = delete;
-
 		protected:
 			Specification(){}
 

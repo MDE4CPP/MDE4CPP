@@ -80,6 +80,7 @@ RealizationObject::RealizationObject(std::shared_ptr<uml::Realization> _element)
 RealizationObject::RealizationObject(RealizationObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 RealizationObject::RealizationObject()
@@ -97,6 +98,12 @@ std::shared_ptr<ecore::EObject> RealizationObject::copy()
 	element->setThisRealizationObjectPtr(element);
 	return element;
 }
+
+RealizationObject& RealizationObject::operator=(const RealizationObject & obj)
+{
+	return *this;
+}
+
 
 void RealizationObject::destroy()
 {	

@@ -78,6 +78,7 @@ MessageOccurrenceSpecificationObject::MessageOccurrenceSpecificationObject(std::
 MessageOccurrenceSpecificationObject::MessageOccurrenceSpecificationObject(MessageOccurrenceSpecificationObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 MessageOccurrenceSpecificationObject::MessageOccurrenceSpecificationObject()
@@ -95,6 +96,12 @@ std::shared_ptr<ecore::EObject> MessageOccurrenceSpecificationObject::copy()
 	element->setThisMessageOccurrenceSpecificationObjectPtr(element);
 	return element;
 }
+
+MessageOccurrenceSpecificationObject& MessageOccurrenceSpecificationObject::operator=(const MessageOccurrenceSpecificationObject & obj)
+{
+	return *this;
+}
+
 
 void MessageOccurrenceSpecificationObject::destroy()
 {	

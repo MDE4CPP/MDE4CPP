@@ -68,6 +68,9 @@ using namespace uml;
 //*********************************
 DependencyImpl::DependencyImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 DependencyImpl::~DependencyImpl()
@@ -110,6 +113,18 @@ DependencyImpl::DependencyImpl(std::weak_ptr<uml::TemplateParameter > par_owning
 
 
 DependencyImpl::DependencyImpl(const DependencyImpl & obj):DependencyImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  DependencyImpl::copy() const
+{
+	std::shared_ptr<DependencyImpl> element(new DependencyImpl(*this));
+	element->setThisDependencyPtr(element);
+	return element;
+}
+
+DependencyImpl& DependencyImpl::operator=(const DependencyImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -172,13 +187,8 @@ DependencyImpl::DependencyImpl(const DependencyImpl & obj):DependencyImpl()
 		std::cout << "Copying the Subset: " << "m_supplier" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  DependencyImpl::copy() const
-{
-	std::shared_ptr<DependencyImpl> element(new DependencyImpl(*this));
-	element->setThisDependencyPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> DependencyImpl::eStaticClass() const

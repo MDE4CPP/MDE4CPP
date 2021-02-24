@@ -76,6 +76,7 @@ BehaviorExecutionSpecificationObject::BehaviorExecutionSpecificationObject(std::
 BehaviorExecutionSpecificationObject::BehaviorExecutionSpecificationObject(BehaviorExecutionSpecificationObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 BehaviorExecutionSpecificationObject::BehaviorExecutionSpecificationObject()
@@ -93,6 +94,12 @@ std::shared_ptr<ecore::EObject> BehaviorExecutionSpecificationObject::copy()
 	element->setThisBehaviorExecutionSpecificationObjectPtr(element);
 	return element;
 }
+
+BehaviorExecutionSpecificationObject& BehaviorExecutionSpecificationObject::operator=(const BehaviorExecutionSpecificationObject & obj)
+{
+	return *this;
+}
+
 
 void BehaviorExecutionSpecificationObject::destroy()
 {	

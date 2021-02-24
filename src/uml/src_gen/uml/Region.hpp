@@ -146,7 +146,6 @@ namespace uml
 	{
 		public:
  			Region(const Region &) {}
-			Region& operator=(Region const&) = delete;
 
 		protected:
 			Region(){}

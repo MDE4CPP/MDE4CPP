@@ -116,7 +116,6 @@ namespace fUML::Semantics::Actions
 	{
 		public:
  			StructuredActivityNodeActivation(const StructuredActivityNodeActivation &) {}
-			StructuredActivityNodeActivation& operator=(StructuredActivityNodeActivation const&) = delete;
 
 		protected:
 			StructuredActivityNodeActivation(){}

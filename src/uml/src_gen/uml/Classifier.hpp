@@ -207,7 +207,6 @@ namespace uml
 	{
 		public:
  			Classifier(const Classifier &) {}
-			Classifier& operator=(Classifier const&) = delete;
 
 		protected:
 			Classifier(){}

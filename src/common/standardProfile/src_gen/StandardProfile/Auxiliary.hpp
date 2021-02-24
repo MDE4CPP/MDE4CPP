@@ -25,9 +25,6 @@ namespace StandardProfile
 {
 	class Auxiliary : virtual public uml::Stereotype 
 	{
-		private:    
-			Auxiliary(const Auxiliary& that) = delete;
-
 		protected:
 			Auxiliary(){}
 

@@ -102,6 +102,7 @@ BroadcastSignalActionObject::BroadcastSignalActionObject(std::shared_ptr<uml::Br
 BroadcastSignalActionObject::BroadcastSignalActionObject(BroadcastSignalActionObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 BroadcastSignalActionObject::BroadcastSignalActionObject()
@@ -119,6 +120,12 @@ std::shared_ptr<ecore::EObject> BroadcastSignalActionObject::copy()
 	element->setThisBroadcastSignalActionObjectPtr(element);
 	return element;
 }
+
+BroadcastSignalActionObject& BroadcastSignalActionObject::operator=(const BroadcastSignalActionObject & obj)
+{
+	return *this;
+}
+
 
 void BroadcastSignalActionObject::destroy()
 {	

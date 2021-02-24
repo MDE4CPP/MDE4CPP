@@ -105,6 +105,7 @@ ValuePinObject::ValuePinObject(std::shared_ptr<uml::ValuePin> _element):
 ValuePinObject::ValuePinObject(ValuePinObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ValuePinObject::ValuePinObject()
@@ -122,6 +123,12 @@ std::shared_ptr<ecore::EObject> ValuePinObject::copy()
 	element->setThisValuePinObjectPtr(element);
 	return element;
 }
+
+ValuePinObject& ValuePinObject::operator=(const ValuePinObject & obj)
+{
+	return *this;
+}
+
 
 void ValuePinObject::destroy()
 {	

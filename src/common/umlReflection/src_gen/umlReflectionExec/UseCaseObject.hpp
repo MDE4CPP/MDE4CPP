@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~UseCaseObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			UseCaseObject& operator=(UseCaseObject const&);
 
 			virtual void destroy();
 			

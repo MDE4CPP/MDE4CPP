@@ -22,10 +22,8 @@ namespace uml
 	{
 		public: 
 			LoopNodeImpl(const LoopNodeImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			LoopNodeImpl& operator=(LoopNodeImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			LoopNodeImpl& operator=(LoopNodeImpl const&);
 
 		protected:
 			friend class umlFactoryImpl;

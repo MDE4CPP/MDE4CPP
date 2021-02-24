@@ -29,10 +29,8 @@ namespace StandardProfile
 	{
 		public: 
 			FocusImpl(const FocusImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			FocusImpl& operator=(FocusImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;  
+			FocusImpl& operator=(FocusImpl const&);
 
 		protected:
 			friend class StandardProfileFactoryImpl;

@@ -41,9 +41,9 @@ using namespace StandardProfile;
 //*********************************
 BuildComponentImpl::BuildComponentImpl()
 {
-	#ifdef ADD_COUNT
-		ADD_COUNT("BuildComponentImpl()");
-	#endif
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 
 	DEBUG_MESSAGE(std::cout<<"BuildComponent is created..."<<std::endl;)
 
@@ -61,20 +61,12 @@ BuildComponentImpl::BuildComponentImpl()
 
 BuildComponentImpl::~BuildComponentImpl()
 {
-	#ifdef SUB_COUNT
-		SUB_COUNT("BuildComponentImpl()");
-	#endif
-
 	DEBUG_MESSAGE(std::cout<<"BuildComponent is destroyed..."<<std::endl;)
 }
 
 BuildComponentImpl::BuildComponentImpl(const BuildComponentImpl & obj):BuildComponentImpl()
 {
-	//create copy of all Attributes
-	#ifdef SHOW_COPIES
-	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy BuildComponent "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
-	#endif
-	instantiate();
+	*this = obj;
 }
 
 std::shared_ptr<ecore::EObject>  BuildComponentImpl::copy() const
@@ -82,6 +74,16 @@ std::shared_ptr<ecore::EObject>  BuildComponentImpl::copy() const
 	std::shared_ptr<BuildComponentImpl> element(new BuildComponentImpl(*this));
 	element->setThisBuildComponentPtr(element);
 	return element;
+}
+
+BuildComponentImpl& BuildComponentImpl::operator=(const BuildComponentImpl & obj)
+{
+		//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy BuildComponent "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
+	instantiate();
+	return *this;
 }
 
 

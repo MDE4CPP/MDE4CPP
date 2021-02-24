@@ -62,6 +62,9 @@ using namespace uml;
 //*********************************
 TypedElementImpl::TypedElementImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 TypedElementImpl::~TypedElementImpl()
@@ -88,6 +91,18 @@ TypedElementImpl::TypedElementImpl(std::weak_ptr<uml::Element > par_owner)
 
 
 TypedElementImpl::TypedElementImpl(const TypedElementImpl & obj):TypedElementImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  TypedElementImpl::copy() const
+{
+	std::shared_ptr<TypedElementImpl> element(new TypedElementImpl(*this));
+	element->setThisTypedElementPtr(element);
+	return element;
+}
+
+TypedElementImpl& TypedElementImpl::operator=(const TypedElementImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -127,13 +142,8 @@ TypedElementImpl::TypedElementImpl(const TypedElementImpl & obj):TypedElementImp
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  TypedElementImpl::copy() const
-{
-	std::shared_ptr<TypedElementImpl> element(new TypedElementImpl(*this));
-	element->setThisTypedElementPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> TypedElementImpl::eStaticClass() const

@@ -63,6 +63,9 @@ using namespace PSCS::Semantics::StructuredClassifiers;
 //*********************************
 CS_LinkImpl::CS_LinkImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 CS_LinkImpl::~CS_LinkImpl()
@@ -75,6 +78,18 @@ CS_LinkImpl::~CS_LinkImpl()
 
 
 CS_LinkImpl::CS_LinkImpl(const CS_LinkImpl & obj):CS_LinkImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  CS_LinkImpl::copy() const
+{
+	std::shared_ptr<CS_LinkImpl> element(new CS_LinkImpl(*this));
+	element->setThisCS_LinkPtr(element);
+	return element;
+}
+
+CS_LinkImpl& CS_LinkImpl::operator=(const CS_LinkImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -99,13 +114,8 @@ CS_LinkImpl::CS_LinkImpl(const CS_LinkImpl & obj):CS_LinkImpl()
 		std::cout << "Copying the Subset: " << "m_featureValues" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  CS_LinkImpl::copy() const
-{
-	std::shared_ptr<CS_LinkImpl> element(new CS_LinkImpl(*this));
-	element->setThisCS_LinkPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> CS_LinkImpl::eStaticClass() const

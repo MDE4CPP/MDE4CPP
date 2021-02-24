@@ -84,6 +84,9 @@ using namespace fUML::Semantics::Actions;
 //*********************************
 AddStructuralFeatureValueActionActivationImpl::AddStructuralFeatureValueActionActivationImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 AddStructuralFeatureValueActionActivationImpl::~AddStructuralFeatureValueActionActivationImpl()
@@ -102,6 +105,18 @@ AddStructuralFeatureValueActionActivationImpl::AddStructuralFeatureValueActionAc
 
 
 AddStructuralFeatureValueActionActivationImpl::AddStructuralFeatureValueActionActivationImpl(const AddStructuralFeatureValueActionActivationImpl & obj):AddStructuralFeatureValueActionActivationImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  AddStructuralFeatureValueActionActivationImpl::copy() const
+{
+	std::shared_ptr<AddStructuralFeatureValueActionActivationImpl> element(new AddStructuralFeatureValueActionActivationImpl(*this));
+	element->setThisAddStructuralFeatureValueActionActivationPtr(element);
+	return element;
+}
+
+AddStructuralFeatureValueActionActivationImpl& AddStructuralFeatureValueActionActivationImpl::operator=(const AddStructuralFeatureValueActionActivationImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -157,13 +172,8 @@ AddStructuralFeatureValueActionActivationImpl::AddStructuralFeatureValueActionAc
 		std::cout << "Copying the Subset: " << "m_outputPinActivation" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  AddStructuralFeatureValueActionActivationImpl::copy() const
-{
-	std::shared_ptr<AddStructuralFeatureValueActionActivationImpl> element(new AddStructuralFeatureValueActionActivationImpl(*this));
-	element->setThisAddStructuralFeatureValueActionActivationPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> AddStructuralFeatureValueActionActivationImpl::eStaticClass() const

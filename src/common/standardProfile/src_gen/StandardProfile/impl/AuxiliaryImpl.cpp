@@ -41,9 +41,9 @@ using namespace StandardProfile;
 //*********************************
 AuxiliaryImpl::AuxiliaryImpl()
 {
-	#ifdef ADD_COUNT
-		ADD_COUNT("AuxiliaryImpl()");
-	#endif
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 
 	DEBUG_MESSAGE(std::cout<<"Auxiliary is created..."<<std::endl;)
 
@@ -61,20 +61,12 @@ AuxiliaryImpl::AuxiliaryImpl()
 
 AuxiliaryImpl::~AuxiliaryImpl()
 {
-	#ifdef SUB_COUNT
-		SUB_COUNT("AuxiliaryImpl()");
-	#endif
-
 	DEBUG_MESSAGE(std::cout<<"Auxiliary is destroyed..."<<std::endl;)
 }
 
 AuxiliaryImpl::AuxiliaryImpl(const AuxiliaryImpl & obj):AuxiliaryImpl()
 {
-	//create copy of all Attributes
-	#ifdef SHOW_COPIES
-	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Auxiliary "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
-	#endif
-	instantiate();
+	*this = obj;
 }
 
 std::shared_ptr<ecore::EObject>  AuxiliaryImpl::copy() const
@@ -82,6 +74,16 @@ std::shared_ptr<ecore::EObject>  AuxiliaryImpl::copy() const
 	std::shared_ptr<AuxiliaryImpl> element(new AuxiliaryImpl(*this));
 	element->setThisAuxiliaryPtr(element);
 	return element;
+}
+
+AuxiliaryImpl& AuxiliaryImpl::operator=(const AuxiliaryImpl & obj)
+{
+		//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Auxiliary "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
+	instantiate();
+	return *this;
 }
 
 

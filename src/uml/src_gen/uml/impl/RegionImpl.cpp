@@ -83,6 +83,9 @@ using namespace uml;
 //*********************************
 RegionImpl::RegionImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 RegionImpl::~RegionImpl()
@@ -125,6 +128,18 @@ RegionImpl::RegionImpl(std::weak_ptr<uml::StateMachine > par_stateMachine)
 
 
 RegionImpl::RegionImpl(const RegionImpl & obj):RegionImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  RegionImpl::copy() const
+{
+	std::shared_ptr<RegionImpl> element(new RegionImpl(*this));
+	element->setThisRegionPtr(element);
+	return element;
+}
+
+RegionImpl& RegionImpl::operator=(const RegionImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -244,13 +259,8 @@ RegionImpl::RegionImpl(const RegionImpl & obj):RegionImpl()
 		std::cout << "Initialising value Subset: " << "m_transition - Subset<uml::Transition, uml::NamedElement >(getOwnedMember())" << std::endl;
 	#endif
 	
-}
 
-std::shared_ptr<ecore::EObject>  RegionImpl::copy() const
-{
-	std::shared_ptr<RegionImpl> element(new RegionImpl(*this));
-	element->setThisRegionPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> RegionImpl::eStaticClass() const

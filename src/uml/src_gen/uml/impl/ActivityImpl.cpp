@@ -133,6 +133,9 @@ using namespace uml;
 //*********************************
 ActivityImpl::ActivityImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ActivityImpl::~ActivityImpl()
@@ -196,6 +199,18 @@ ActivityImpl::ActivityImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemp
 
 
 ActivityImpl::ActivityImpl(const ActivityImpl & obj):ActivityImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ActivityImpl::copy() const
+{
+	std::shared_ptr<ActivityImpl> element(new ActivityImpl(*this));
+	element->setThisActivityPtr(element);
+	return element;
+}
+
+ActivityImpl& ActivityImpl::operator=(const ActivityImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -596,13 +611,8 @@ ActivityImpl::ActivityImpl(const ActivityImpl & obj):ActivityImpl()
 		std::cout << "Initialising value Subset: " << "m_variable - Subset<uml::Variable, uml::NamedElement >(getOwnedMember())" << std::endl;
 	#endif
 	
-}
 
-std::shared_ptr<ecore::EObject>  ActivityImpl::copy() const
-{
-	std::shared_ptr<ActivityImpl> element(new ActivityImpl(*this));
-	element->setThisActivityPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ActivityImpl::eStaticClass() const

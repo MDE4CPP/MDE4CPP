@@ -158,7 +158,6 @@ namespace uml
 	{
 		public:
  			VariableAction(const VariableAction &) {}
-			VariableAction& operator=(VariableAction const&) = delete;
 
 		protected:
 			VariableAction(){}

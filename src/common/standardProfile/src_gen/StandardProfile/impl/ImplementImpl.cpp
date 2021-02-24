@@ -41,9 +41,9 @@ using namespace StandardProfile;
 //*********************************
 ImplementImpl::ImplementImpl()
 {
-	#ifdef ADD_COUNT
-		ADD_COUNT("ImplementImpl()");
-	#endif
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 
 	DEBUG_MESSAGE(std::cout<<"Implement is created..."<<std::endl;)
 
@@ -61,20 +61,12 @@ ImplementImpl::ImplementImpl()
 
 ImplementImpl::~ImplementImpl()
 {
-	#ifdef SUB_COUNT
-		SUB_COUNT("ImplementImpl()");
-	#endif
-
 	DEBUG_MESSAGE(std::cout<<"Implement is destroyed..."<<std::endl;)
 }
 
 ImplementImpl::ImplementImpl(const ImplementImpl & obj):ImplementImpl()
 {
-	//create copy of all Attributes
-	#ifdef SHOW_COPIES
-	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Implement "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
-	#endif
-	instantiate();
+	*this = obj;
 }
 
 std::shared_ptr<ecore::EObject>  ImplementImpl::copy() const
@@ -82,6 +74,16 @@ std::shared_ptr<ecore::EObject>  ImplementImpl::copy() const
 	std::shared_ptr<ImplementImpl> element(new ImplementImpl(*this));
 	element->setThisImplementPtr(element);
 	return element;
+}
+
+ImplementImpl& ImplementImpl::operator=(const ImplementImpl & obj)
+{
+		//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Implement "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
+	instantiate();
+	return *this;
 }
 
 

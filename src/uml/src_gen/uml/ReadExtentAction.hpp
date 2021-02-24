@@ -154,7 +154,6 @@ namespace uml
 	{
 		public:
  			ReadExtentAction(const ReadExtentAction &) {}
-			ReadExtentAction& operator=(ReadExtentAction const&) = delete;
 
 		protected:
 			ReadExtentAction(){}

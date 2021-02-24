@@ -133,6 +133,7 @@ InterfaceObject::InterfaceObject(std::shared_ptr<uml::Interface> _element):
 InterfaceObject::InterfaceObject(InterfaceObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 InterfaceObject::InterfaceObject()
@@ -150,6 +151,12 @@ std::shared_ptr<ecore::EObject> InterfaceObject::copy()
 	element->setThisInterfaceObjectPtr(element);
 	return element;
 }
+
+InterfaceObject& InterfaceObject::operator=(const InterfaceObject & obj)
+{
+	return *this;
+}
+
 
 void InterfaceObject::destroy()
 {	

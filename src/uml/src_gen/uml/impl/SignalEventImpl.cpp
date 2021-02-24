@@ -66,6 +66,9 @@ using namespace uml;
 //*********************************
 SignalEventImpl::SignalEventImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 SignalEventImpl::~SignalEventImpl()
@@ -108,6 +111,18 @@ SignalEventImpl::SignalEventImpl(std::weak_ptr<uml::TemplateParameter > par_owni
 
 
 SignalEventImpl::SignalEventImpl(const SignalEventImpl & obj):SignalEventImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  SignalEventImpl::copy() const
+{
+	std::shared_ptr<SignalEventImpl> element(new SignalEventImpl(*this));
+	element->setThisSignalEventPtr(element);
+	return element;
+}
+
+SignalEventImpl& SignalEventImpl::operator=(const SignalEventImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -153,13 +168,8 @@ SignalEventImpl::SignalEventImpl(const SignalEventImpl & obj):SignalEventImpl()
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  SignalEventImpl::copy() const
-{
-	std::shared_ptr<SignalEventImpl> element(new SignalEventImpl(*this));
-	element->setThisSignalEventPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> SignalEventImpl::eStaticClass() const

@@ -53,6 +53,9 @@ using namespace uml;
 //*********************************
 FactoryImpl::FactoryImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 FactoryImpl::~FactoryImpl()
@@ -71,6 +74,18 @@ FactoryImpl::FactoryImpl(std::weak_ptr<uml::Element > par_owner)
 
 
 FactoryImpl::FactoryImpl(const FactoryImpl & obj):FactoryImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  FactoryImpl::copy() const
+{
+	std::shared_ptr<FactoryImpl> element(new FactoryImpl(*this));
+	element->setThisFactoryPtr(element);
+	return element;
+}
+
+FactoryImpl& FactoryImpl::operator=(const FactoryImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -93,13 +108,8 @@ FactoryImpl::FactoryImpl(const FactoryImpl & obj):FactoryImpl()
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  FactoryImpl::copy() const
-{
-	std::shared_ptr<FactoryImpl> element(new FactoryImpl(*this));
-	element->setThisFactoryPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> FactoryImpl::eStaticClass() const

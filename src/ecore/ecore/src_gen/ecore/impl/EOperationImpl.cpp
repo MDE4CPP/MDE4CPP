@@ -65,6 +65,9 @@ using namespace ecore;
 //*********************************
 EOperationImpl::EOperationImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 EOperationImpl::~EOperationImpl()
@@ -90,6 +93,18 @@ EOperationImpl::EOperationImpl(std::weak_ptr<ecore::EClass > par_eContainingClas
 
 
 EOperationImpl::EOperationImpl(const EOperationImpl & obj):EOperationImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  EOperationImpl::copy() const
+{
+	std::shared_ptr<EOperationImpl> element(new EOperationImpl(*this));
+	element->setThisEOperationPtr(element);
+	return element;
+}
+
+EOperationImpl& EOperationImpl::operator=(const EOperationImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -169,13 +184,8 @@ EOperationImpl::EOperationImpl(const EOperationImpl & obj):EOperationImpl()
 	
 
 	
-}
 
-std::shared_ptr<ecore::EObject>  EOperationImpl::copy() const
-{
-	std::shared_ptr<EOperationImpl> element(new EOperationImpl(*this));
-	element->setThisEOperationPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<EClass> EOperationImpl::eStaticClass() const

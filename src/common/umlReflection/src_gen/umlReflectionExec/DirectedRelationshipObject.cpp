@@ -57,6 +57,7 @@ DirectedRelationshipObject::DirectedRelationshipObject(std::shared_ptr<uml::Dire
 DirectedRelationshipObject::DirectedRelationshipObject(DirectedRelationshipObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 DirectedRelationshipObject::DirectedRelationshipObject()
@@ -74,6 +75,12 @@ std::shared_ptr<ecore::EObject> DirectedRelationshipObject::copy()
 	element->setThisDirectedRelationshipObjectPtr(element);
 	return element;
 }
+
+DirectedRelationshipObject& DirectedRelationshipObject::operator=(const DirectedRelationshipObject & obj)
+{
+	return *this;
+}
+
 
 void DirectedRelationshipObject::destroy()
 {	

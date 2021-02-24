@@ -73,6 +73,9 @@ using namespace uml;
 //*********************************
 TimeExpressionImpl::TimeExpressionImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 TimeExpressionImpl::~TimeExpressionImpl()
@@ -131,6 +134,18 @@ TimeExpressionImpl::TimeExpressionImpl(std::weak_ptr<uml::ValueSpecificationActi
 
 
 TimeExpressionImpl::TimeExpressionImpl(const TimeExpressionImpl & obj):TimeExpressionImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  TimeExpressionImpl::copy() const
+{
+	std::shared_ptr<TimeExpressionImpl> element(new TimeExpressionImpl(*this));
+	element->setThisTimeExpressionPtr(element);
+	return element;
+}
+
+TimeExpressionImpl& TimeExpressionImpl::operator=(const TimeExpressionImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -191,13 +206,8 @@ TimeExpressionImpl::TimeExpressionImpl(const TimeExpressionImpl & obj):TimeExpre
 	#endif
 
 	
-}
 
-std::shared_ptr<ecore::EObject>  TimeExpressionImpl::copy() const
-{
-	std::shared_ptr<TimeExpressionImpl> element(new TimeExpressionImpl(*this));
-	element->setThisTimeExpressionPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> TimeExpressionImpl::eStaticClass() const

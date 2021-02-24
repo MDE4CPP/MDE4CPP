@@ -22,10 +22,8 @@ namespace uml
 	{
 		public: 
 			ProtocolConformanceImpl(const ProtocolConformanceImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			ProtocolConformanceImpl& operator=(ProtocolConformanceImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			ProtocolConformanceImpl& operator=(ProtocolConformanceImpl const&);
 
 		protected:
 			friend class umlFactoryImpl;

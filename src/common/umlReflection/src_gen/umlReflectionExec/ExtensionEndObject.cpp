@@ -125,6 +125,7 @@ ExtensionEndObject::ExtensionEndObject(std::shared_ptr<uml::ExtensionEnd> _eleme
 ExtensionEndObject::ExtensionEndObject(ExtensionEndObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ExtensionEndObject::ExtensionEndObject()
@@ -142,6 +143,12 @@ std::shared_ptr<ecore::EObject> ExtensionEndObject::copy()
 	element->setThisExtensionEndObjectPtr(element);
 	return element;
 }
+
+ExtensionEndObject& ExtensionEndObject::operator=(const ExtensionEndObject & obj)
+{
+	return *this;
+}
+
 
 void ExtensionEndObject::destroy()
 {	

@@ -73,6 +73,9 @@ using namespace uml;
 //*********************************
 DurationImpl::DurationImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 DurationImpl::~DurationImpl()
@@ -131,6 +134,18 @@ DurationImpl::DurationImpl(std::weak_ptr<uml::ValueSpecificationAction > par_val
 
 
 DurationImpl::DurationImpl(const DurationImpl & obj):DurationImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  DurationImpl::copy() const
+{
+	std::shared_ptr<DurationImpl> element(new DurationImpl(*this));
+	element->setThisDurationPtr(element);
+	return element;
+}
+
+DurationImpl& DurationImpl::operator=(const DurationImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -191,13 +206,8 @@ DurationImpl::DurationImpl(const DurationImpl & obj):DurationImpl()
 	#endif
 
 	
-}
 
-std::shared_ptr<ecore::EObject>  DurationImpl::copy() const
-{
-	std::shared_ptr<DurationImpl> element(new DurationImpl(*this));
-	element->setThisDurationPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> DurationImpl::eStaticClass() const

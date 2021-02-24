@@ -133,7 +133,6 @@ namespace uml
 	{
 		public:
  			InitialNode(const InitialNode &) {}
-			InitialNode& operator=(InitialNode const&) = delete;
 
 		protected:
 			InitialNode(){}

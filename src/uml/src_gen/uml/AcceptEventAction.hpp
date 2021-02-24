@@ -159,7 +159,6 @@ namespace uml
 	{
 		public:
  			AcceptEventAction(const AcceptEventAction &) {}
-			AcceptEventAction& operator=(AcceptEventAction const&) = delete;
 
 		protected:
 			AcceptEventAction(){}

@@ -74,6 +74,9 @@ using namespace fUML::Semantics::Actions;
 //*********************************
 ReadSelfActionActivationImpl::ReadSelfActionActivationImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ReadSelfActionActivationImpl::~ReadSelfActionActivationImpl()
@@ -92,6 +95,18 @@ ReadSelfActionActivationImpl::ReadSelfActionActivationImpl(std::weak_ptr<fUML::S
 
 
 ReadSelfActionActivationImpl::ReadSelfActionActivationImpl(const ReadSelfActionActivationImpl & obj):ReadSelfActionActivationImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ReadSelfActionActivationImpl::copy() const
+{
+	std::shared_ptr<ReadSelfActionActivationImpl> element(new ReadSelfActionActivationImpl(*this));
+	element->setThisReadSelfActionActivationPtr(element);
+	return element;
+}
+
+ReadSelfActionActivationImpl& ReadSelfActionActivationImpl::operator=(const ReadSelfActionActivationImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -147,13 +162,8 @@ ReadSelfActionActivationImpl::ReadSelfActionActivationImpl(const ReadSelfActionA
 		std::cout << "Copying the Subset: " << "m_outputPinActivation" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  ReadSelfActionActivationImpl::copy() const
-{
-	std::shared_ptr<ReadSelfActionActivationImpl> element(new ReadSelfActionActivationImpl(*this));
-	element->setThisReadSelfActionActivationPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ReadSelfActionActivationImpl::eStaticClass() const

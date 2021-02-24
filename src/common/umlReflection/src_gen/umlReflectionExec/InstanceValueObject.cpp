@@ -72,6 +72,7 @@ InstanceValueObject::InstanceValueObject(std::shared_ptr<uml::InstanceValue> _el
 InstanceValueObject::InstanceValueObject(InstanceValueObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 InstanceValueObject::InstanceValueObject()
@@ -89,6 +90,12 @@ std::shared_ptr<ecore::EObject> InstanceValueObject::copy()
 	element->setThisInstanceValueObjectPtr(element);
 	return element;
 }
+
+InstanceValueObject& InstanceValueObject::operator=(const InstanceValueObject & obj)
+{
+	return *this;
+}
+
 
 void InstanceValueObject::destroy()
 {	

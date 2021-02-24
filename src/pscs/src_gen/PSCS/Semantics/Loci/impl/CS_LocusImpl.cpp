@@ -65,6 +65,9 @@ using namespace PSCS::Semantics::Loci;
 //*********************************
 CS_LocusImpl::CS_LocusImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 CS_LocusImpl::~CS_LocusImpl()
@@ -77,6 +80,18 @@ CS_LocusImpl::~CS_LocusImpl()
 
 
 CS_LocusImpl::CS_LocusImpl(const CS_LocusImpl & obj):CS_LocusImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  CS_LocusImpl::copy() const
+{
+	std::shared_ptr<CS_LocusImpl> element(new CS_LocusImpl(*this));
+	element->setThisCS_LocusPtr(element);
+	return element;
+}
+
+CS_LocusImpl& CS_LocusImpl::operator=(const CS_LocusImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -111,13 +126,8 @@ CS_LocusImpl::CS_LocusImpl(const CS_LocusImpl & obj):CS_LocusImpl()
 		std::cout << "Copying the Subset: " << "m_factory" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  CS_LocusImpl::copy() const
-{
-	std::shared_ptr<CS_LocusImpl> element(new CS_LocusImpl(*this));
-	element->setThisCS_LocusPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> CS_LocusImpl::eStaticClass() const

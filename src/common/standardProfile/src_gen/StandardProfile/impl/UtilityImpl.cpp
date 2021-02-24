@@ -41,9 +41,9 @@ using namespace StandardProfile;
 //*********************************
 UtilityImpl::UtilityImpl()
 {
-	#ifdef ADD_COUNT
-		ADD_COUNT("UtilityImpl()");
-	#endif
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 
 	DEBUG_MESSAGE(std::cout<<"Utility is created..."<<std::endl;)
 
@@ -61,20 +61,12 @@ UtilityImpl::UtilityImpl()
 
 UtilityImpl::~UtilityImpl()
 {
-	#ifdef SUB_COUNT
-		SUB_COUNT("UtilityImpl()");
-	#endif
-
 	DEBUG_MESSAGE(std::cout<<"Utility is destroyed..."<<std::endl;)
 }
 
 UtilityImpl::UtilityImpl(const UtilityImpl & obj):UtilityImpl()
 {
-	//create copy of all Attributes
-	#ifdef SHOW_COPIES
-	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Utility "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
-	#endif
-	instantiate();
+	*this = obj;
 }
 
 std::shared_ptr<ecore::EObject>  UtilityImpl::copy() const
@@ -82,6 +74,16 @@ std::shared_ptr<ecore::EObject>  UtilityImpl::copy() const
 	std::shared_ptr<UtilityImpl> element(new UtilityImpl(*this));
 	element->setThisUtilityPtr(element);
 	return element;
+}
+
+UtilityImpl& UtilityImpl::operator=(const UtilityImpl & obj)
+{
+		//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Utility "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
+	instantiate();
+	return *this;
 }
 
 

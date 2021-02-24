@@ -22,10 +22,8 @@ namespace uml
 	{
 		public: 
 			DataStoreNodeImpl(const DataStoreNodeImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			DataStoreNodeImpl& operator=(DataStoreNodeImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			DataStoreNodeImpl& operator=(DataStoreNodeImpl const&);
 
 		protected:
 			friend class umlFactoryImpl;

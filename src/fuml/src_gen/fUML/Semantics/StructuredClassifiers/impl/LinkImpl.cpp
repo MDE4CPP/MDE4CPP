@@ -67,6 +67,9 @@ using namespace fUML::Semantics::StructuredClassifiers;
 //*********************************
 LinkImpl::LinkImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 LinkImpl::~LinkImpl()
@@ -79,6 +82,18 @@ LinkImpl::~LinkImpl()
 
 
 LinkImpl::LinkImpl(const LinkImpl & obj):LinkImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  LinkImpl::copy() const
+{
+	std::shared_ptr<LinkImpl> element(new LinkImpl(*this));
+	element->setThisLinkPtr(element);
+	return element;
+}
+
+LinkImpl& LinkImpl::operator=(const LinkImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -103,13 +118,8 @@ LinkImpl::LinkImpl(const LinkImpl & obj):LinkImpl()
 		std::cout << "Copying the Subset: " << "m_featureValues" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  LinkImpl::copy() const
-{
-	std::shared_ptr<LinkImpl> element(new LinkImpl(*this));
-	element->setThisLinkPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> LinkImpl::eStaticClass() const

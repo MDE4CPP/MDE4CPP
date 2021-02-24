@@ -68,6 +68,9 @@ using namespace fUML::Semantics::CommonBehavior;
 //*********************************
 ObjectActivationImpl::ObjectActivationImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ObjectActivationImpl::~ObjectActivationImpl()
@@ -80,6 +83,18 @@ ObjectActivationImpl::~ObjectActivationImpl()
 
 
 ObjectActivationImpl::ObjectActivationImpl(const ObjectActivationImpl & obj):ObjectActivationImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ObjectActivationImpl::copy() const
+{
+	std::shared_ptr<ObjectActivationImpl> element(new ObjectActivationImpl(*this));
+	element->setThisObjectActivationPtr(element);
+	return element;
+}
+
+ObjectActivationImpl& ObjectActivationImpl::operator=(const ObjectActivationImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -116,13 +131,8 @@ ObjectActivationImpl::ObjectActivationImpl(const ObjectActivationImpl & obj):Obj
 	
 
 	
-}
 
-std::shared_ptr<ecore::EObject>  ObjectActivationImpl::copy() const
-{
-	std::shared_ptr<ObjectActivationImpl> element(new ObjectActivationImpl(*this));
-	element->setThisObjectActivationPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ObjectActivationImpl::eStaticClass() const

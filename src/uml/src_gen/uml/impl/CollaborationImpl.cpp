@@ -106,6 +106,9 @@ using namespace uml;
 //*********************************
 CollaborationImpl::CollaborationImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 CollaborationImpl::~CollaborationImpl()
@@ -161,6 +164,18 @@ CollaborationImpl::CollaborationImpl(std::weak_ptr<uml::TemplateParameter > par_
 
 
 CollaborationImpl::CollaborationImpl(const CollaborationImpl & obj):CollaborationImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  CollaborationImpl::copy() const
+{
+	std::shared_ptr<CollaborationImpl> element(new CollaborationImpl(*this));
+	element->setThisCollaborationPtr(element);
+	return element;
+}
+
+CollaborationImpl& CollaborationImpl::operator=(const CollaborationImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -379,13 +394,8 @@ CollaborationImpl::CollaborationImpl(const CollaborationImpl & obj):Collaboratio
 		std::cout << "Copying the Subset: " << "m_templateBinding" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  CollaborationImpl::copy() const
-{
-	std::shared_ptr<CollaborationImpl> element(new CollaborationImpl(*this));
-	element->setThisCollaborationPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> CollaborationImpl::eStaticClass() const

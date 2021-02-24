@@ -24,9 +24,6 @@ namespace uml
 namespace StandardProfile
 {
 	class Document:virtual public File	{
-		private:    
-			Document(const Document& that) = delete;
-
 		protected:
 			Document(){}
 

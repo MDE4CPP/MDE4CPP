@@ -68,6 +68,7 @@ MessageEventObject::MessageEventObject(std::shared_ptr<uml::MessageEvent> _eleme
 MessageEventObject::MessageEventObject(MessageEventObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 MessageEventObject::MessageEventObject()
@@ -85,6 +86,12 @@ std::shared_ptr<ecore::EObject> MessageEventObject::copy()
 	element->setThisMessageEventObjectPtr(element);
 	return element;
 }
+
+MessageEventObject& MessageEventObject::operator=(const MessageEventObject & obj)
+{
+	return *this;
+}
+
 
 void MessageEventObject::destroy()
 {	

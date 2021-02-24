@@ -66,6 +66,9 @@ using namespace uml;
 //*********************************
 ChangeEventImpl::ChangeEventImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ChangeEventImpl::~ChangeEventImpl()
@@ -108,6 +111,18 @@ ChangeEventImpl::ChangeEventImpl(std::weak_ptr<uml::TemplateParameter > par_owni
 
 
 ChangeEventImpl::ChangeEventImpl(const ChangeEventImpl & obj):ChangeEventImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ChangeEventImpl::copy() const
+{
+	std::shared_ptr<ChangeEventImpl> element(new ChangeEventImpl(*this));
+	element->setThisChangeEventPtr(element);
+	return element;
+}
+
+ChangeEventImpl& ChangeEventImpl::operator=(const ChangeEventImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -159,13 +174,8 @@ ChangeEventImpl::ChangeEventImpl(const ChangeEventImpl & obj):ChangeEventImpl()
 	#endif
 
 	
-}
 
-std::shared_ptr<ecore::EObject>  ChangeEventImpl::copy() const
-{
-	std::shared_ptr<ChangeEventImpl> element(new ChangeEventImpl(*this));
-	element->setThisChangeEventPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ChangeEventImpl::eStaticClass() const

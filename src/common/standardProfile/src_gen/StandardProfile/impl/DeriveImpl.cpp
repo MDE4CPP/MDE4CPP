@@ -41,9 +41,9 @@ using namespace StandardProfile;
 //*********************************
 DeriveImpl::DeriveImpl()
 {
-	#ifdef ADD_COUNT
-		ADD_COUNT("DeriveImpl()");
-	#endif
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 
 	DEBUG_MESSAGE(std::cout<<"Derive is created..."<<std::endl;)
 
@@ -61,20 +61,12 @@ DeriveImpl::DeriveImpl()
 
 DeriveImpl::~DeriveImpl()
 {
-	#ifdef SUB_COUNT
-		SUB_COUNT("DeriveImpl()");
-	#endif
-
 	DEBUG_MESSAGE(std::cout<<"Derive is destroyed..."<<std::endl;)
 }
 
 DeriveImpl::DeriveImpl(const DeriveImpl & obj):DeriveImpl()
 {
-	//create copy of all Attributes
-	#ifdef SHOW_COPIES
-	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Derive "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
-	#endif
-	instantiate();
+	*this = obj;
 }
 
 std::shared_ptr<ecore::EObject>  DeriveImpl::copy() const
@@ -82,6 +74,16 @@ std::shared_ptr<ecore::EObject>  DeriveImpl::copy() const
 	std::shared_ptr<DeriveImpl> element(new DeriveImpl(*this));
 	element->setThisDerivePtr(element);
 	return element;
+}
+
+DeriveImpl& DeriveImpl::operator=(const DeriveImpl & obj)
+{
+		//create copy of all Attributes
+	#ifdef SHOW_COPIES
+	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Derive "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
+	#endif
+	instantiate();
+	return *this;
 }
 
 

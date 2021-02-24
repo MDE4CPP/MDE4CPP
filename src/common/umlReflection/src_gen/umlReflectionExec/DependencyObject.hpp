@@ -38,6 +38,7 @@ namespace UML
 		    virtual ~DependencyObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			DependencyObject& operator=(DependencyObject const&);
 
 			virtual void destroy();
 			

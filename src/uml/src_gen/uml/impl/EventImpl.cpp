@@ -64,6 +64,9 @@ using namespace uml;
 //*********************************
 EventImpl::EventImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 EventImpl::~EventImpl()
@@ -107,6 +110,18 @@ EventImpl::EventImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplatePa
 
 EventImpl::EventImpl(const EventImpl & obj):EventImpl()
 {
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  EventImpl::copy() const
+{
+	std::shared_ptr<EventImpl> element(new EventImpl(*this));
+	element->setThisEventPtr(element);
+	return element;
+}
+
+EventImpl& EventImpl::operator=(const EventImpl & obj)
+{
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Event "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -149,13 +164,8 @@ EventImpl::EventImpl(const EventImpl & obj):EventImpl()
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  EventImpl::copy() const
-{
-	std::shared_ptr<EventImpl> element(new EventImpl(*this));
-	element->setThisEventPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> EventImpl::eStaticClass() const

@@ -128,6 +128,7 @@ OperationObject::OperationObject(std::shared_ptr<uml::Operation> _element):
 OperationObject::OperationObject(OperationObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 OperationObject::OperationObject()
@@ -145,6 +146,12 @@ std::shared_ptr<ecore::EObject> OperationObject::copy()
 	element->setThisOperationObjectPtr(element);
 	return element;
 }
+
+OperationObject& OperationObject::operator=(const OperationObject & obj)
+{
+	return *this;
+}
+
 
 void OperationObject::destroy()
 {	

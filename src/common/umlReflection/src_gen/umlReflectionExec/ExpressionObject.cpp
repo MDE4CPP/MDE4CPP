@@ -73,6 +73,7 @@ ExpressionObject::ExpressionObject(std::shared_ptr<uml::Expression> _element):
 ExpressionObject::ExpressionObject(ExpressionObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ExpressionObject::ExpressionObject()
@@ -90,6 +91,12 @@ std::shared_ptr<ecore::EObject> ExpressionObject::copy()
 	element->setThisExpressionObjectPtr(element);
 	return element;
 }
+
+ExpressionObject& ExpressionObject::operator=(const ExpressionObject & obj)
+{
+	return *this;
+}
+
 
 void ExpressionObject::destroy()
 {	

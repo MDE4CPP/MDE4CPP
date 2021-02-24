@@ -98,6 +98,7 @@ RaiseExceptionActionObject::RaiseExceptionActionObject(std::shared_ptr<uml::Rais
 RaiseExceptionActionObject::RaiseExceptionActionObject(RaiseExceptionActionObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 RaiseExceptionActionObject::RaiseExceptionActionObject()
@@ -115,6 +116,12 @@ std::shared_ptr<ecore::EObject> RaiseExceptionActionObject::copy()
 	element->setThisRaiseExceptionActionObjectPtr(element);
 	return element;
 }
+
+RaiseExceptionActionObject& RaiseExceptionActionObject::operator=(const RaiseExceptionActionObject & obj)
+{
+	return *this;
+}
+
 
 void RaiseExceptionActionObject::destroy()
 {	

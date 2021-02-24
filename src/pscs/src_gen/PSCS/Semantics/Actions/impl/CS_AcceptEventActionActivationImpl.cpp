@@ -76,6 +76,9 @@ using namespace PSCS::Semantics::Actions;
 //*********************************
 CS_AcceptEventActionActivationImpl::CS_AcceptEventActionActivationImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 CS_AcceptEventActionActivationImpl::~CS_AcceptEventActionActivationImpl()
@@ -94,6 +97,18 @@ CS_AcceptEventActionActivationImpl::CS_AcceptEventActionActivationImpl(std::weak
 
 
 CS_AcceptEventActionActivationImpl::CS_AcceptEventActionActivationImpl(const CS_AcceptEventActionActivationImpl & obj):CS_AcceptEventActionActivationImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  CS_AcceptEventActionActivationImpl::copy() const
+{
+	std::shared_ptr<CS_AcceptEventActionActivationImpl> element(new CS_AcceptEventActionActivationImpl(*this));
+	element->setThisCS_AcceptEventActionActivationPtr(element);
+	return element;
+}
+
+CS_AcceptEventActionActivationImpl& CS_AcceptEventActionActivationImpl::operator=(const CS_AcceptEventActionActivationImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -150,13 +165,8 @@ CS_AcceptEventActionActivationImpl::CS_AcceptEventActionActivationImpl(const CS_
 		std::cout << "Copying the Subset: " << "m_outputPinActivation" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  CS_AcceptEventActionActivationImpl::copy() const
-{
-	std::shared_ptr<CS_AcceptEventActionActivationImpl> element(new CS_AcceptEventActionActivationImpl(*this));
-	element->setThisCS_AcceptEventActionActivationPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> CS_AcceptEventActionActivationImpl::eStaticClass() const

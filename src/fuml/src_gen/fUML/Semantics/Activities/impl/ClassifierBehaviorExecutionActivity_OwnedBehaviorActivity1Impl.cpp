@@ -50,6 +50,9 @@ using namespace fUML::Semantics::Activities;
 //*********************************
 ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl::ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl::~ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl()
@@ -63,6 +66,18 @@ ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl::~ClassifierBehav
 
 ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl::ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl(const ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl & obj):ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl()
 {
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl::copy() const
+{
+	std::shared_ptr<ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl> element(new ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl(*this));
+	element->setThisClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Ptr(element);
+	return element;
+}
+
+ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl& ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl::operator=(const ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl & obj)
+{
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1 "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -74,13 +89,8 @@ ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl::ClassifierBehavi
 	//Clone references with containment (deep copy)
 
 
-}
 
-std::shared_ptr<ecore::EObject>  ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl::copy() const
-{
-	std::shared_ptr<ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl> element(new ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl(*this));
-	element->setThisClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Ptr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl::eStaticClass() const

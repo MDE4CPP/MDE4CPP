@@ -112,7 +112,6 @@ namespace fUML::Semantics::Loci
 	{
 		public:
  			ExecutionFactory(const ExecutionFactory &) {}
-			ExecutionFactory& operator=(ExecutionFactory const&) = delete;
 
 		protected:
 			ExecutionFactory(){}

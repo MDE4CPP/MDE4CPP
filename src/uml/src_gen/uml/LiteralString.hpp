@@ -110,7 +110,6 @@ namespace uml
 	{
 		public:
  			LiteralString(const LiteralString &) {}
-			LiteralString& operator=(LiteralString const&) = delete;
 
 		protected:
 			LiteralString(){}

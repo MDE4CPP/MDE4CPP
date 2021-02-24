@@ -93,6 +93,7 @@ ObjectFlowObject::ObjectFlowObject(std::shared_ptr<uml::ObjectFlow> _element):
 ObjectFlowObject::ObjectFlowObject(ObjectFlowObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ObjectFlowObject::ObjectFlowObject()
@@ -110,6 +111,12 @@ std::shared_ptr<ecore::EObject> ObjectFlowObject::copy()
 	element->setThisObjectFlowObjectPtr(element);
 	return element;
 }
+
+ObjectFlowObject& ObjectFlowObject::operator=(const ObjectFlowObject & obj)
+{
+	return *this;
+}
+
 
 void ObjectFlowObject::destroy()
 {	

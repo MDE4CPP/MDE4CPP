@@ -65,6 +65,9 @@ using namespace uml;
 //*********************************
 RedefinableElementImpl::RedefinableElementImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 RedefinableElementImpl::~RedefinableElementImpl()
@@ -91,6 +94,18 @@ RedefinableElementImpl::RedefinableElementImpl(std::weak_ptr<uml::Element > par_
 
 
 RedefinableElementImpl::RedefinableElementImpl(const RedefinableElementImpl & obj):RedefinableElementImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  RedefinableElementImpl::copy() const
+{
+	std::shared_ptr<RedefinableElementImpl> element(new RedefinableElementImpl(*this));
+	element->setThisRedefinableElementPtr(element);
+	return element;
+}
+
+RedefinableElementImpl& RedefinableElementImpl::operator=(const RedefinableElementImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -135,13 +150,8 @@ RedefinableElementImpl::RedefinableElementImpl(const RedefinableElementImpl & ob
 		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  RedefinableElementImpl::copy() const
-{
-	std::shared_ptr<RedefinableElementImpl> element(new RedefinableElementImpl(*this));
-	element->setThisRedefinableElementPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> RedefinableElementImpl::eStaticClass() const

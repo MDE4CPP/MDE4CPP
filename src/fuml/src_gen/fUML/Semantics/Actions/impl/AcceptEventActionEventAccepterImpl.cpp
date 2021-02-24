@@ -53,6 +53,9 @@ using namespace fUML::Semantics::Actions;
 //*********************************
 AcceptEventActionEventAccepterImpl::AcceptEventActionEventAccepterImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 AcceptEventActionEventAccepterImpl::~AcceptEventActionEventAccepterImpl()
@@ -65,6 +68,18 @@ AcceptEventActionEventAccepterImpl::~AcceptEventActionEventAccepterImpl()
 
 
 AcceptEventActionEventAccepterImpl::AcceptEventActionEventAccepterImpl(const AcceptEventActionEventAccepterImpl & obj):AcceptEventActionEventAccepterImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  AcceptEventActionEventAccepterImpl::copy() const
+{
+	std::shared_ptr<AcceptEventActionEventAccepterImpl> element(new AcceptEventActionEventAccepterImpl(*this));
+	element->setThisAcceptEventActionEventAccepterPtr(element);
+	return element;
+}
+
+AcceptEventActionEventAccepterImpl& AcceptEventActionEventAccepterImpl::operator=(const AcceptEventActionEventAccepterImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -79,13 +94,8 @@ AcceptEventActionEventAccepterImpl::AcceptEventActionEventAccepterImpl(const Acc
 	//Clone references with containment (deep copy)
 
 
-}
 
-std::shared_ptr<ecore::EObject>  AcceptEventActionEventAccepterImpl::copy() const
-{
-	std::shared_ptr<AcceptEventActionEventAccepterImpl> element(new AcceptEventActionEventAccepterImpl(*this));
-	element->setThisAcceptEventActionEventAccepterPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> AcceptEventActionEventAccepterImpl::eStaticClass() const

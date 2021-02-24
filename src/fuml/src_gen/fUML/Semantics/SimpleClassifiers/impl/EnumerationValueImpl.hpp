@@ -23,10 +23,8 @@ namespace fUML::Semantics::SimpleClassifiers
 	{
 		public: 
 			EnumerationValueImpl(const EnumerationValueImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:    
-			EnumerationValueImpl& operator=(EnumerationValueImpl const&) = delete;
+			virtual std::shared_ptr<ecore::EObject> copy() const;    
+			EnumerationValueImpl& operator=(EnumerationValueImpl const&);
 
 		protected:
 			friend class fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactoryImpl;

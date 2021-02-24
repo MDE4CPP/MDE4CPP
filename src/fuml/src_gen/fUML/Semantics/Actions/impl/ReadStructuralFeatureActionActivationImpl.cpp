@@ -80,6 +80,9 @@ using namespace fUML::Semantics::Actions;
 //*********************************
 ReadStructuralFeatureActionActivationImpl::ReadStructuralFeatureActionActivationImpl()
 {	
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 ReadStructuralFeatureActionActivationImpl::~ReadStructuralFeatureActionActivationImpl()
@@ -98,6 +101,18 @@ ReadStructuralFeatureActionActivationImpl::ReadStructuralFeatureActionActivation
 
 
 ReadStructuralFeatureActionActivationImpl::ReadStructuralFeatureActionActivationImpl(const ReadStructuralFeatureActionActivationImpl & obj):ReadStructuralFeatureActionActivationImpl()
+{
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  ReadStructuralFeatureActionActivationImpl::copy() const
+{
+	std::shared_ptr<ReadStructuralFeatureActionActivationImpl> element(new ReadStructuralFeatureActionActivationImpl(*this));
+	element->setThisReadStructuralFeatureActionActivationPtr(element);
+	return element;
+}
+
+ReadStructuralFeatureActionActivationImpl& ReadStructuralFeatureActionActivationImpl::operator=(const ReadStructuralFeatureActionActivationImpl & obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
@@ -153,13 +168,8 @@ ReadStructuralFeatureActionActivationImpl::ReadStructuralFeatureActionActivation
 		std::cout << "Copying the Subset: " << "m_outputPinActivation" << std::endl;
 	#endif
 
-}
 
-std::shared_ptr<ecore::EObject>  ReadStructuralFeatureActionActivationImpl::copy() const
-{
-	std::shared_ptr<ReadStructuralFeatureActionActivationImpl> element(new ReadStructuralFeatureActionActivationImpl(*this));
-	element->setThisReadStructuralFeatureActionActivationPtr(element);
-	return element;
+	return *this;
 }
 
 std::shared_ptr<ecore::EClass> ReadStructuralFeatureActionActivationImpl::eStaticClass() const

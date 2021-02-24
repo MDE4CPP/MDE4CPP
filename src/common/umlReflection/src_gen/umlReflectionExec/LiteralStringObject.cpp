@@ -71,6 +71,7 @@ LiteralStringObject::LiteralStringObject(std::shared_ptr<uml::LiteralString> _el
 LiteralStringObject::LiteralStringObject(LiteralStringObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 LiteralStringObject::LiteralStringObject()
@@ -88,6 +89,12 @@ std::shared_ptr<ecore::EObject> LiteralStringObject::copy()
 	element->setThisLiteralStringObjectPtr(element);
 	return element;
 }
+
+LiteralStringObject& LiteralStringObject::operator=(const LiteralStringObject & obj)
+{
+	return *this;
+}
+
 
 void LiteralStringObject::destroy()
 {	
