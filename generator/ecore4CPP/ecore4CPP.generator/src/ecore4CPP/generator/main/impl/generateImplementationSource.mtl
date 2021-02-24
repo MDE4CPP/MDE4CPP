@@ -80,33 +80,9 @@ using namespace [aClass.generateNamespaceDefinition()/];
 //*********************************
 [className/]::[className/]()
 {	
-	[comment]
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	[for (aAttribute : EAttribute | aClass.eAttributes->asOrderedSet()->sortedBy(name)) separator ('\n')]
-	[aAttribute.generateAttributeInit()/][/for]
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	[comment]References must be initialized in this order:
-	1st Unions
-	2nd Subset Unions
-	3rd Subsets that should be unions
-	4th all the rest.
-	[/comment]
-	//References
-	[for (aReference : EReference | aClass.eReferences->asOrderedSet()->sortedBy(name)) separator ('\n')]
-	[aReference.generateReferenceInit()/]
-	[/for]
-
-	//Init references
-	[for (aReference : EReference | aClass.eReferences->asOrderedSet()->sortedBy(name)) separator ('\n')]
-	[aReference.InitReferences()/]
-	[/for]
-	[/comment]
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 [className/]::~[className/]()
@@ -160,6 +136,21 @@ using namespace [aClass.generateNamespaceDefinition()/];
 [comment]Don't forget to call the class contructor before initializing the unions and subsets![/comment]
 [className/]::[className/](const [className/] & obj):[className/]()
 {
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  [className/]::copy() const
+{
+	std::shared_ptr<[className/]> element(new [className/](*this));
+	element->[generateGetThisPtrPropertySetterName()/](element);
+[if (generateObjectMonitoring())]
+	[aClass.getRootPackage().name/]Factory::eInstance()->add(element);
+[/if]
+	return element;
+}
+
+[className/]& [className/]::operator=(const [className/] & obj)
+{
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy [aClass.name.toUpperFirst()/] "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -212,16 +203,8 @@ using namespace [aClass.generateNamespaceDefinition()/];
 	[for (aReference : EReference | aClass.eReferences->select(eRef: EReference|eRef.containment = true and not eRef.isUnion())->asOrderedSet()->sortedBy(name)) separator ('\n')]
 	[aReference.InitReferences()/]
 	[/for]
-}
 
-std::shared_ptr<ecore::EObject>  [className/]::copy() const
-{
-	std::shared_ptr<[className/]> element(new [className/](*this));
-	element->[generateGetThisPtrPropertySetterName()/](element);
-[if (generateObjectMonitoring())]
-	[aClass.getRootPackage().name/]Factory::eInstance()->add(element);
-[/if]
-	return element;
+	return *this;
 }
 
 std::shared_ptr<[needNamespace(aClass.ePackage, 'EClass')/]> [className/]::eStaticClass() const

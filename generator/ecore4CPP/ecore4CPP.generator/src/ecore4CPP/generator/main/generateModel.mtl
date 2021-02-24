@@ -87,7 +87,6 @@ virtual public [ClassWithNamespace(aClass,sClass)/][/for]
 	{
 		public:
  			[aClass.name.toUpperFirst()/](const [aClass.name.toUpperFirst()/] &) {}
-			[aClass.name.toUpperFirst()/]& operator=([aClass.name.toUpperFirst()/] const&) = delete;
 
 		protected:
 			[aClass.name.toUpperFirst()/](){}
