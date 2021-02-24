@@ -116,6 +116,7 @@ using namespace [aClassifier.getNearestPackage().generateNamespace(false)/];
 [className/]::[className/]([className/] &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 [className/]::[className/]()
@@ -135,6 +136,12 @@ std::shared_ptr<ecore::EObject> [className/]::copy()
 	element->setThis[className/]Ptr(element);
 	return element;
 }
+
+[className/]& [className/]::operator=(const [className/] & obj)
+{
+	return *this;
+}
+
 
 void [className/]::destroy()
 {	

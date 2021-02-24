@@ -60,6 +60,7 @@ namespace [aClassifier.getNearestPackage().generateNamespace(false)/]
 		    virtual ~[className/]();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			[className/]& operator=([className/] const&);
 
 			virtual void destroy();
 			

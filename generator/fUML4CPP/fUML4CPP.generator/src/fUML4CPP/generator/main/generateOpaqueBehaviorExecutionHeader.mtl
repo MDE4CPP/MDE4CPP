@@ -40,6 +40,7 @@ namespace [aPackage.generateNamespace(false)/]
 		
 		    virtual void doBody(std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > inputParameters, std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > outputParameters);
 		    virtual std::shared_ptr<ecore::EObject> copy() const;
+			[behaviorName/]& operator=([behaviorName/] const&);
 			virtual void setThisExecutionPtr(std::weak_ptr<[behaviorName/]> thisExecutionPtr);
 	};
 }

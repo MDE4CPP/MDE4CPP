@@ -54,8 +54,8 @@ using namespace [aPackage.generateNamespace(false)/];
 }
 
 [behaviorName/]::[behaviorName/](const [behaviorName/] &obj)
-:OpaqueBehaviorExecutionImpl(obj)
 {
+	OpaqueBehaviorExecutionImpl::operator=(obj);
 }
 
 std::shared_ptr<ecore::EObject> [behaviorName/]::copy() const
@@ -63,6 +63,11 @@ std::shared_ptr<ecore::EObject> [behaviorName/]::copy() const
 	std::shared_ptr<[behaviorName/]> element(new [behaviorName/](*this));
 	element->setThisExecutionPtr(element);
 	return element;
+}
+
+[behaviorName/]& [behaviorName/]::operator=(const [behaviorName/] & obj)
+{
+	return *this;
 }
 
 void [behaviorName/]::doBody(std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > inputParameters, std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > outputParameters)
