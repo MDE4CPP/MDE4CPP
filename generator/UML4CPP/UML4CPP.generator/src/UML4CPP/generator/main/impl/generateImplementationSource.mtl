@@ -129,9 +129,9 @@
 //*********************************
 [className/]::[className/]()
 {
-	#ifdef ADD_COUNT
-		ADD_COUNT("[className/]()");
-	#endif
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 
 	DEBUG_MESSAGE(std::cout<<"[aClass.name.toUpperFirst()/] is created..."<<std::endl;)
 
@@ -160,16 +160,24 @@
 
 [className/]::~[className/]()
 {
-	#ifdef SUB_COUNT
-		SUB_COUNT("[className/]()");
-	#endif
-
 	DEBUG_MESSAGE(std::cout<<"[aClass.name.toUpperFirst()/] is destroyed..."<<std::endl;)
 }
 
 [className/]::[className/](const [className/] & obj):[className/]()
 {
-	//create copy of all Attributes
+	*this = obj;
+}
+
+std::shared_ptr<ecore::EObject>  [className/]::copy() const
+{
+	std::shared_ptr<[className/]> element(new [className/](*this));
+	element->[generateGetThisPtrPropertySetterName()/](element);
+	return element;
+}
+
+[className/]& [className/]::operator=(const [className/] & obj)
+{
+		//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy [aClass.name.toUpperFirst()/] "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
@@ -199,13 +207,7 @@
 	}
 [/if]
 [/for]
-}
-
-std::shared_ptr<ecore::EObject>  [className/]::copy() const
-{
-	std::shared_ptr<[className/]> element(new [className/](*this));
-	element->[generateGetThisPtrPropertySetterName()/](element);
-	return element;
+	return *this;
 }
 
 [if (isSingleton())]

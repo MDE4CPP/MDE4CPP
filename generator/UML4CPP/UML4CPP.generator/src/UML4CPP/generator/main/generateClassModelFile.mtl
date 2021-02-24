@@ -102,9 +102,6 @@ namespace [aPackage.generateNamespace(false)/]
 virtual public [sClass.getClassifierName(aClass, false, ignoreNamespace(sClass))/][/for]
 [/if]
 	{
-		private:    
-			[aClass.name.toUpperFirst()/](const [aClass.name.toUpperFirst()/]& that) = delete;
-
 		protected:
 			[aClass.name.toUpperFirst()/](){}
 
