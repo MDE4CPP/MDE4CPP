@@ -29,5 +29,6 @@ Export-Package: ecore4CPP.generator;uses:="org.osgi.framework,org.eclipse.core.r
    org.eclipse.acceleo.engine.service,
    org.eclipse.emf.ecore.resource,
    org.eclipse.acceleo.engine.generation.strategy",
- ecore4CPP.generator.main.helpers
+   ecore4CPP.generator.main.helpers
+   ecore4CPP.generator.main.validation
 Automatic-Module-Name: ecore4CPP.generator

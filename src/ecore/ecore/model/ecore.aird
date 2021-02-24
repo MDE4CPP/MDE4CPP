@@ -3316,15 +3316,13 @@
         <actualMapping xmi:type="description_1:NodeMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EDataType']/@subNodeMappings[name='EC_DataType_InstanceClassName']"/>
       </ownedElements>
     </ownedDiagramElements>
-    <ownedDiagramElements xmi:type="diagram:DNodeList" uid="_oZH34L2IEeid4uWGgEhEiQ" name="EStringToStringMapEntry" tooltipText="" width="12" height="10">
+    <ownedDiagramElements xmi:type="diagram:DNodeList" uid="_oZH34L2IEeid4uWGgEhEiQ" name="EStringToStringMapEntry" tooltipText="&#xA;ERROR : The feature 'references' of 'EAnnotation{platform:/resource/basic_models/ecore/ecore/model/ecore.ecore#//EStringToStringMapEntry/%http:%2F%2Fsse.tu-ilmenau.de%2Fcodegen%}' contains an unresolved proxy 'EObject{platform:/resource/unorderedMap_src_gen/model/std.ecore#//%http:%2F%2Fsse.tu-ilmenau.de%2Fcodegen%}'" width="12" height="10">
       <target xmi:type="ecore:EClass" href="ecore.ecore#//EStringToStringMapEntry"/>
       <semanticElements xmi:type="ecore:EClass" href="ecore.ecore#//EStringToStringMapEntry"/>
       <arrangeConstraints>KEEP_LOCATION</arrangeConstraints>
       <arrangeConstraints>KEEP_SIZE</arrangeConstraints>
       <arrangeConstraints>KEEP_RATIO</arrangeConstraints>
-      <ownedStyle xmi:type="diagram:FlatContainerStyle" uid="_oZIe8L2IEeid4uWGgEhEiQ" borderSize="1" borderSizeComputationExpression="1" backgroundStyle="Liquid" foregroundColor="255,252,216">
-        <description xmi:type="style:FlatContainerStyleDescription" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']/@style"/>
-      </ownedStyle>
+      <ownedStyle xmi:type="diagram:FlatContainerStyle" uid="_2QGmkXaZEeuHKM93Id1DkQ" labelColor="239,41,41" description="_oY9f0L2IEeid4uWGgEhEiQ" borderSize="1" borderSizeComputationExpression="1" borderColor="239,41,41" backgroundStyle="Liquid" foregroundColor="255,252,216"/>
       <actualMapping xmi:type="description_1:ContainerMapping" href="platform:/plugin/org.eclipse.emf.ecoretools.design/description/ecore.odesign#//@ownedViewpoints[name='Design']/@ownedRepresentations[name='Entities']/@defaultLayer/@containerMappings[name='EC%20EClass']"/>
       <ownedElements xmi:type="diagram:DNodeListElement" uid="_oaRucL2IEeid4uWGgEhEiQ" name="key : EString" tooltipText="">
         <target xmi:type="ecore:EAttribute" href="ecore.ecore#//EStringToStringMapEntry/key"/>

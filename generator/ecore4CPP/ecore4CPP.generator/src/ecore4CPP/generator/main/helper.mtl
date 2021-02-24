@@ -15,6 +15,7 @@
 [module helper('http://www.eclipse.org/emf/2002/Ecore')]
 
 [import ecore4CPP::generator::main::helpers::keywords /]
+[import ecore4CPP::generator::main::validation::validateModel /]
 
 [**
  * Helper for c++ abstract function sufix
@@ -50,7 +51,7 @@
 [**
  * Helper for sourcegen annotations
 */]
-[query public hasSourceGen(aModelElement : EModelElement) : Boolean = eAnnotations->select(source = sourceNameCodeGen())->notEmpty()  /]
+[query public hasSourceGen(aModelElement : EModelElement) : Boolean = if (aModelElement.oclIsUndefined() or aModelElement.eAnnotations->oclIsUndefined()) then false else eAnnotations->select(source = sourceNameCodeGen())->notEmpty() endif/]
 [query public SourceGen(aModelElement : EModelElement) : EAnnotation = eAnnotations->select(source = sourceNameCodeGen())->first() /]
 
 [**
@@ -86,8 +87,8 @@
  * Get a string of the getterfunction for the element in the corresponding metamodel package 
 */] 
 [query public packageGetter(aEClassifier : EClassifier, aStruct : EStructuralFeature) : String = packageGetter(aEClassifier,aStruct.eContainingClass) /]
-[query public packageGetter(aEClass : EClass, supertype : EClass) : String = packageGetter(supertype.oclAsType(EClassifier),aEClass.oclAsType(EClassifier)) /]
-[query public packageGetter(aEClassifier1 : EClassifier, aEClassifier2 : EClassifier) : String = needMetaModelPackageGetter(aEClassifier1, aEClassifier2).concat('get').concat(aEClassifier1.getMemberNameUpperFirst()).concat('()') /]
+[query public packageGetter(aEClass : EClass, supertype : EClass) : String = if (aEClass.oclIsUndefined() or supertype.oclIsUndefined()) then '' else packageGetter(supertype.oclAsType(EClassifier),aEClass.oclAsType(EClassifier)) endif /]
+[query public packageGetter(aEClassifier1 : EClassifier, aEClassifier2 : EClassifier) : String = if (aEClassifier1.oclIsUndefined() or aEClassifier2.oclIsUndefined()) then '' else needMetaModelPackageGetter(aEClassifier1, aEClassifier2).concat('get').concat(aEClassifier1.getMemberNameUpperFirst()).concat('()') endif/]
 [query public needMetaModelPackageGetter(aClassifier1 : EClassifier ,aClassifier2 : EClassifier ) : String = if(aClassifier1.generateNamespaceDefinition() = aClassifier2.generateNamespaceDefinition()) then '' else  aClassifier1.getPackage_eInstance().concat('->')  endif /]
 
 [**
@@ -248,7 +249,7 @@
 [query public getMyClassifierID(anEClassifier : EClassifier) : EInt = anEClassifier.getRootPackage().eAllContents()->selectByKind(EClassifier)->sortedBy(name)->indexOf(anEClassifier) /]
 
 [query public getPackageAccess(aSubPackage : EPackage, usePackage : Boolean) : String = if usePackage = true then if not aSubPackage.eSuperPackage->isEmpty() then getPackageAccess(aSubPackage.eSuperPackage, usePackage).concat('::').concat(aSubPackage.name) else '' endif else  if not aSubPackage.eSuperPackage->isEmpty() then getPackageAccess(aSubPackage.eSuperPackage, usePackage).concat('->get').concat(aSubPackage.name).concat('_Package()') else ''  endif endif/]
-[query public getPackageAccess(aClass : EClassifier, usePackage : Boolean ) : String = if usePackage = true then getPackageAccess(aClass.ePackage, usePackage ) else getPackageAccess(aClass.ePackage, usePackage ) endif /]
+[query public getPackageAccess(aClass : EClassifier, usePackage : Boolean ) : String = if oclIsUndefined() then '' else if usePackage = true then getPackageAccess(aClass.ePackage, usePackage ) else getPackageAccess(aClass.ePackage, usePackage ) endif endif/]
 [query public getPackage_eInstance(aClass : EClassifier) : String = aClass.getRootPackage().name.concat(getPackageAccess(aClass, true)).concat('::').concat(aClass.ePackage.name).concat('Package::eInstance()')/]
 
 [template public generateAbstractDataTypesForwardDeclaration(anEClass : EClass)]
@@ -289,3 +290,7 @@ template<class T> class Union;[/if]
 [query public requiresBag(anEClassifier : EClassifier) : Boolean = if (oclIsUndefined()) then false else (name = 'ETreeIterator' or name = 'EEList') endif/]
 
 [query public generateObjectMonitoring(anEObject : EObject) : Boolean = false/]
+
+[template public handleUndefinedElement(anElement : EModelElement)]
+['ecore4CPP_Generation Error: undefined element found '.concat(anElement.toString()).registerError()/]
+[/template]

@@ -24,6 +24,7 @@
 [import ecore4CPP::generator::main::impl::generateImplementation/]
 [import ecore4CPP::generator::main::package::generateMetamodelPackage/]
 [import ecore4CPP::generator::main::plugin::generateEcorePlugin/]
+[import ecore4CPP::generator::main::validation::validateModel /]
 
 [template public generateModel(aPackage : ecore::EPackage)]
 [comment @main/]
